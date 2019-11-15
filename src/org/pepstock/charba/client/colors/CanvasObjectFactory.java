@@ -18,6 +18,7 @@ package org.pepstock.charba.client.colors;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -152,7 +153,7 @@ public abstract class CanvasObjectFactory {
 			GRADIENTS.put(chart.getId(), gradientsMap);
 		}
 		// checks if chart is initialized
-		if (chart.isInitialized()) {
+		if (chart.isInitialized() || Charts.hasNative(chart.getId())) {
 			// creates the result instance
 			CanvasGradient result = null;
 			// checks if the gradient must be linear oe radial

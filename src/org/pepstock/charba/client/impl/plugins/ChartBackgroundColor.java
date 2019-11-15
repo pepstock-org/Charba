@@ -213,6 +213,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
 			// set fill canvas color
 			ctx.setFillStyle(canvasGradient);
+			// sets back ground to chart HTML element
+			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
 		}
 		// fills back ground
 		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());

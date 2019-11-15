@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Area;
 import org.pepstock.charba.client.colors.CanvasObjectFactory;
@@ -62,20 +63,30 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 */
 	@Override
 	protected Area getArea(IsChart chart, Gradient gradient) {
-		// gets canvas
-		Canvas canvas = chart.getCanvas();
 		// IGNORE THE SCOPE of gradient
 		// ALWAYS CANVAS
 		// these are the coordinates instances of canvas
 		// left - the x coordinate of the starting point of the canvas
 		// top - the y coordinate of the starting point of the canvas
-		// right - the x coordinate of the ending point of the canvas
-		// bottom - the y coordinate of the ending point of the canvas
 		final Area area = new Area();
 		area.setTop(0D);
 		area.setLeft(0D);
-		area.setRight(canvas.getOffsetWidth());
-		area.setBottom(canvas.getOffsetHeight());
+		// checks if chart is abstract one
+		if (chart instanceof AbstractChart<?>) {
+			// gets simple panel
+			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			// right - the x coordinate of the ending point of the widget
+			// bottom - the y coordinate of the ending point of the widget
+			area.setRight(abstractChart.getOffsetWidth());
+			area.setBottom(abstractChart.getOffsetHeight());
+		} else {
+			// gets canvas
+			Canvas canvas = chart.getCanvas();
+			// right - the x coordinate of the ending point of the canvas
+			// bottom - the y coordinate of the ending point of the canvas
+			area.setRight(canvas.getOffsetWidth());
+			area.setBottom(canvas.getOffsetHeight());
+		}
 		return area;
 	}
 
@@ -87,17 +98,26 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 */
 	@Override
 	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
-		// gets canvas
-		Canvas canvas = chart.getCanvas();
 		// IGNORE THE SCOPE of gradient
 		// ALWAYS CANVAS
 		// the center of canvas has the following coordinates:
 		// X - the width divided by 2
 		// Y - the height divided by 2
-		// these are the coordinates of center of canvas
 		final Center center = new Center();
-		center.setX(canvas.getOffsetWidth() / 2D);
-		center.setY(canvas.getOffsetHeight() / 2D);
+		// checks if chart is abstract one
+		if (chart instanceof AbstractChart<?>) {
+			// gets simple panel
+			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			// these are the coordinates of center of widget
+			center.setX(abstractChart.getOffsetWidth() / 2D);
+			center.setY(abstractChart.getOffsetHeight() / 2D);
+		} else {
+			// gets canvas
+			Canvas canvas = chart.getCanvas();
+			// these are the coordinates of center of canvas
+			center.setX(canvas.getOffsetWidth() / 2D);
+			center.setY(canvas.getOffsetHeight() / 2D);
+		}
 		return center;
 	}
 
@@ -109,13 +129,21 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 */
 	@Override
 	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
-		// gets canvas
-		Canvas canvas = chart.getCanvas();
 		// by default is the center of chart area
-		// radius - if max value between width and height, divided by 2
 		final Radius radius = new Radius();
 		radius.setInner(0);
-		radius.setOuter(Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2D);
+		// checks if chart is abstract one
+		if (chart instanceof AbstractChart<?>) {
+			// gets simple panel
+			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			// radius - if max value between width and height, divided by 2
+			radius.setOuter(Math.max(abstractChart.getOffsetWidth(), abstractChart.getOffsetHeight()) / 2D);
+		} else {
+			// gets canvas
+			Canvas canvas = chart.getCanvas();
+			// radius - if max value between width and height, divided by 2
+			radius.setOuter(Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2D);
+		}
 		return radius;
 	}
 
