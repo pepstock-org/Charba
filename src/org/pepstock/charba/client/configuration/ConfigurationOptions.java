@@ -53,10 +53,11 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtml;
 
 import jsinterop.annotations.JsFunction;
 
@@ -260,14 +261,19 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// fires the resize event on chart
 		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), nativeChart, new SizeItem(size))));
 		legendCallbackProxy.setCallback(context -> {
-			// creates the safe html to be sure about the right HTML to send back
-			SafeHtmlBuilder builder = new SafeHtmlBuilder();
 			// checks if callback is consistent
 			if (legendCallback != null) {
 				// calls callback
-				legendCallback.generateLegend(getChart(), builder);
+				SafeHtml html = legendCallback.generateLegend(getChart());
+				// checks if html result is consistent
+				if (html != null) {
+					// returns HTML as string
+					return html.asString();
+				}
 			}
-			return builder.toSafeHtml().asString();
+			// if here, no callback
+			// returns an empty string
+			return Utilities.EMPTY_STRING;
 		});
 	}
 

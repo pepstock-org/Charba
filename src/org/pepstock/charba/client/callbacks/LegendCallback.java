@@ -17,11 +17,13 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
- * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
- * {@link org.pepstock.charba.client.IsChart#generateLegend()} method that returns an HTML string for the legend.
+ * Sometimes you need a very complex legend.<br>
+ * In these cases, it makes sense to generate an HTML legend.<br>
+ * Charts provide a {@link org.pepstock.charba.client.IsChart#generateLegend()} method that returns an HTML string for the
+ * legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -31,8 +33,8 @@ public interface LegendCallback {
 	 * Creates HTML representation of legend.
 	 * 
 	 * @param chart chart instance
-	 * @param builder uses SafeHTML builder to create HTML
+	 * @return HTML legend representation as SafeHTML
 	 */
-	void generateLegend(IsChart chart, final SafeHtmlBuilder builder);
+	SafeHtml generateLegend(IsChart chart);
 
 }
