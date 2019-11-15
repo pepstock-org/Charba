@@ -121,7 +121,7 @@ public final class Utilities {
 	 * Constant for EMPTY string
 	 */
 	public static final String EMPTY_STRING = "";
-	
+
 	/**
 	 * Constant for EMPTY ARRAY string.
 	 */
@@ -131,21 +131,37 @@ public final class Utilities {
 	 * Constant for CSS property for font.
 	 */
 	public static final String CSS_FONT_PROPERTY = "font";
-	
+
 	/**
 	 * Constant for CSS property for {@link Pattern}.
 	 */
 	public static final String CSS_BACKGROUND_PROPERTY = "background";
-	
+
+	/**
+	 * Constant for CSS property for {@link Pattern} for border.
+	 */
+	public static final String CSS_BORDER_PROPERTY = "border";
+
 	/**
 	 * Constant for CSS property for {@link Gradient}.
 	 */
 	public static final String CSS_BACKGROUND_IMAGE_PROPERTY = "backgroundImage";
-	
+
+	/**
+	 * Constant for CSS property for {@link Gradient}, for border.
+	 */
+	public static final String CSS_BORDER_IMAGE_PROPERTY = "borderImage";
+
 	/**
 	 * Constant for CSS property for {@link IsColor}.
 	 */
 	public static final String CSS_BACKGROUND_COLOR_PROPERTY = "backgroundColor";
+
+	/**
+	 * Constant for CSS property for {@link IsColor}, for border.
+	 */
+	public static final String CSS_BORDER_COLOR_PROPERTY = "borderColor";
+
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
@@ -317,38 +333,44 @@ public final class Utilities {
 	 * @return the CSS syntax to represent the gradient
 	 */
 	public static String toCSSBackgroundProperty(Gradient gradient) {
-		// gets gradient type and orientation instance
-		GradientType type = gradient.getType();
-		GradientOrientation orientation = gradient.getOrientation();
-		// got new list of colors to sort
-		// without touching the current one
-		List<GradientColor> sortableColors = new LinkedList<>();
-		// copies all colors into new list to sort
-		sortableColors.addAll(gradient.getColors());
-		// the radial gradient with orientation out in needs
-		// to have the list of color
-		if (GradientType.RADIAL.equals(gradient.getType()) && GradientOrientation.OUT_IN.equals(orientation)) {
-			// sorts the color in order to have the list from greater to less
-			Collections.sort(sortableColors, REVERSE_COMPARATOR);
-		} else {
-			// sorts the color in order to have the list from less to greater
-			Collections.sort(sortableColors, COMPARATOR);
-		}
-		// builder to store all colors, comma separated
-		StringBuilder builder = new StringBuilder();
-		// scans all colors
-		for (GradientColor color : sortableColors) {
-			// if builder is not empty means that at least 1 color is
-			// already put into buildr
-			// then add the comma
-			if (builder.length() > 0) {
-				builder.append(COLOR_SEPARATOR);
+		// checks if argument is consistent
+		if (gradient != null) {
+			// gets gradient type and orientation instance
+			GradientType type = gradient.getType();
+			GradientOrientation orientation = gradient.getOrientation();
+			// got new list of colors to sort
+			// without touching the current one
+			List<GradientColor> sortableColors = new LinkedList<>();
+			// copies all colors into new list to sort
+			sortableColors.addAll(gradient.getColors());
+			// the radial gradient with orientation out in needs
+			// to have the list of color
+			if (GradientType.RADIAL.equals(gradient.getType()) && GradientOrientation.OUT_IN.equals(orientation)) {
+				// sorts the color in order to have the list from greater to less
+				Collections.sort(sortableColors, REVERSE_COMPARATOR);
+			} else {
+				// sorts the color in order to have the list from less to greater
+				Collections.sort(sortableColors, COMPARATOR);
 			}
-			// adds color RGBA into strign builder
-			builder.append(color.getColor().toRGBA());
+			// builder to store all colors, comma separated
+			StringBuilder builder = new StringBuilder();
+			// scans all colors
+			for (GradientColor color : sortableColors) {
+				// if builder is not empty means that at least 1 color is
+				// already put into buildr
+				// then add the comma
+				if (builder.length() > 0) {
+					builder.append(COLOR_SEPARATOR);
+				}
+				// adds color RGBA into strign builder
+				builder.append(color.getColor().toRGBA());
+			}
+			// using the template, returns the CSS value of gradient
+			return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
 		}
-		// using the template, returns the CSS value of gradient
-		return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
+		// if here gradient is not consistent
+		// returns empty string
+		return EMPTY_STRING;
 	}
 
 	/**
