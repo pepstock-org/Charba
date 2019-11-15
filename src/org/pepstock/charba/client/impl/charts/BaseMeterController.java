@@ -27,7 +27,6 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.utils.Utilities;
-import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.Context2d.TextAlign;
@@ -112,7 +111,6 @@ final class BaseMeterController extends AbstractController {
 	 */
 	@Override
 	public void draw(ControllerContext context, IsChart chart, double ease) {
-		Window.getConsole().log("Eccome");
 		// draw the doughnut chart
 		super.draw(context, chart, ease);
 		// gets the list of datasets

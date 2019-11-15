@@ -19,7 +19,6 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * This is an abstract meter chart, inherited by a meter and gauge charts.
@@ -65,10 +64,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 		ControllerType type = getControllerType();
 		// checks if already registered
 		if (!Defaults.get().getControllers().isRegistered(type.value())) {
-			Window.getConsole().log("Eccome register " + type);
 			// if not, adds a controller
-			boolean added = Defaults.get().getControllers().extend(new BaseMeterController(type));
-			Window.getConsole().log("Eccome register " + type.value() + " " + added);
+			Defaults.get().getControllers().extend(new BaseMeterController(type));
 		}
 		// calls super chart options creations
 		return super.createChartOptions();
