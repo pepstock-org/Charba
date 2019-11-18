@@ -116,6 +116,8 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change `LegendCallback` interface in order to return a `SafeHtml` object instead of use `SafeHtmlBuilder`.
  * create `HtmlLegendBuilder` plugin in order to create HTML legend instead of using the CHART.JS one
     * add some methods to `LegendLabelItem` class in order to manage text as HTML.
+    * add new Html legend builder options (globally and per chart instance)
+    * add `LegendTextCallback` interface to manage text of legend as HTML
 
 ### Fixed Bugs
 
@@ -142,7 +144,8 @@ Here you can find the list of enhancement and updates available on `master` bran
   * create a `ChartEventProperty` enumeration with all property names to set chart event callbacks.
   * add `getElement` method to `IsChart` interface in order to get the element of widget.
   * add `isValid`, `checkIfValid` and `isAbstractChart` static methods to `IsChart` interface.
-  * improve JS helpers changing its names and reusing injection of javascript items.
+  * change JS helpers static names.
+  * add `AbstractCursorPointerOptions` class as options for plugins in order to have a unique options to extend when plugins need to interact with cursor of an element.
 
 License
 -------
