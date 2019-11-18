@@ -37,36 +37,36 @@ public final class NativeName {
 	/**
 	 * Constant to bind java script object as JsHelper with name <b>{@value JSHELPER}</b>, (internal of Charba).
 	 */
-	public static final String JSHELPER = "CharbaJsHelper";
+	public static final String JS_HELPER = "CharbaJsHelper";
 
 	/**
 	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JSCONTROLLERHELPER}</b>, (internal of
 	 * Charba).
 	 */
-	public static final String JSCONTROLLERHELPER = "CharbaJsControllerHelper";
+	public static final String JS_CONTROLLER_HELPER = "CharbaJsControllerHelper";
 
 	/**
 	 * Constant to bind java script object as JsWindowHelper with name <b>{@value JSWINDOWHELPER}</b>, (internal of Charba).
 	 */
-	public static final String JSWINDOWHELPER = "CharbaJsWindowHelper";
+	public static final String JS_WINDOW_HELPER = "CharbaJsWindowHelper";
 
 	/**
 	 * Constant to bind java script object as JsPositionerHelper with name <b>{@value JSPOSITIONERHELPER}</b>, (internal of
 	 * Charba).
 	 */
-	public static final String JSPOSITIONERHELPER = "CharbaJsPositionerHelper";
+	public static final String JS_POSITIONER_HELPER = "CharbaJsPositionerHelper";
 
 	/**
 	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JSCALLBACKSHELPER}</b>, (internal of
 	 * Charba).
 	 */
-	public static final String JSCALLBACKSHELPER = "CharbaJsCallbacksHelper";
+	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
 
 	/**
 	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JSHTMLLEGENDBUILDERHELPER}</b>, (internal of
 	 * Charba), when {@link HtmlLegendBuilder} is activated.
 	 */
-	public static final String JSHTMLLEGENDBUILDERHELPER = "CharbaJsHtmlLegendBuilderHelper";
+	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 
 	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).

@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.JSWINDOWHELPER, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.JS_WINDOW_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsWindowHelper {
 
 	/**

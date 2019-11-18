@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.utils;
 
-import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.commons.AbstractJsHelper;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JsWindowHelper {
+public final class JsWindowHelper extends AbstractJsHelper{
 	// static instance for singleton
 	private static final JsWindowHelper INSTANCE = new JsWindowHelper();
 
@@ -35,12 +34,7 @@ public final class JsWindowHelper {
 	 * To avoid any instantiation
 	 */
 	private JsWindowHelper() {
-		// to be sure that CHART.JS java script object is injected
-		// some methods are calling CHART.JS for this reason is mandatory
-		// to include also chart.js
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		super();
 	}
 
 	/**

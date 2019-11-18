@@ -15,11 +15,10 @@
 */
 package org.pepstock.charba.client.positioner;
 
-import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.AbstractJsHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Internal utility of positioner to invoke java script methods to activate and manage custom positioner.
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsPositionerHelper {
+final class JsPositionerHelper extends AbstractJsHelper{
 
 	// static instance for singleton
 	private static final JsPositionerHelper INSTANCE = new JsPositionerHelper();
@@ -36,12 +35,7 @@ final class JsPositionerHelper {
 	 * To avoid any instantiation
 	 */
 	private JsPositionerHelper() {
-		// to be sure that CHART.JS java script object is injected
-		// some methods are calling CHART.JS for this reason is mandatory
-		// to include also chart.js
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		super();
 	}
 
 	/**

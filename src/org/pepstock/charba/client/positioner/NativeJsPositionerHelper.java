@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.JSPOSITIONERHELPER, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.JS_POSITIONER_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsPositionerHelper {
 
 	/**

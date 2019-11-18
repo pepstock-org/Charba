@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.JSCALLBACKSHELPER, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.JS_CALLBACKS_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsCallbacksHelper {
 
 	/**

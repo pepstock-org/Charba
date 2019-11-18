@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.JSHTMLLEGENDBUILDERHELPER, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.JS_HTML_LEGEND_BUILDER_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsHtmlLegendBuilderHelper {
 
 	/**
