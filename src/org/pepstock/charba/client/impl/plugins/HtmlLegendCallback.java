@@ -235,65 +235,14 @@ final class HtmlLegendCallback implements LegendCallback {
 		color.getStyle().setDisplay(Display.INLINE_BLOCK);
 		color.getStyle().setWidth(width, Unit.PX);
 		color.getStyle().setHeight(height, Unit.PX);
-		// checks if fill color has been set
-		if (item.isFillStyleAsColor()) {
-			// if here, apply the fill color as background color
-			color.getStyle().setBackgroundColor(item.getFillStyle().toRGBA());
-		} else if (item.isFillStyleAsCanvasPattern()) {
-			// transforms pattern into CSS property and
-			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsPattern(), width, height);
-			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
-		} else if (item.isFillStyleAsCanvasGradient()) {
-			// reference to CCS gradient
-			String gradientAsCss = null;
-			if (item.getFillStyleAsGradient() != null) {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsGradient());
-			} else {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasGradient(), width, height);
-			}
-			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, gradientAsCss);
-		}
-		// checks if a border must be applied
-		// having a border width more then 0
-		if (item.getLineWidth() > 0) {
-			// applies the border
-			color.getStyle().setBorderWidth(item.getLineWidth(), Unit.PX);
-			// checking the line has been configured as dashed
-			if (item.getLineDash().isEmpty()) {
-				// if here, solid border, no dashed line
-				color.getStyle().setBorderStyle(BorderStyle.SOLID);
-			} else {
-				// if here, dashed line
-				color.getStyle().setBorderStyle(BorderStyle.DASHED);
-			}
-		} else {
-			// if here, line width is 0 then
-			// configured do not be visible and then
-			// no border
-			color.getStyle().setBorderStyle(BorderStyle.NONE);
-		}
-		// checks if there is stroke color
-		// to apply to the border
-		if (item.isStrokeStyleAsColor()) {
-			color.getStyle().setBorderColor(item.getStrokeStyle().toRGBA());
-		} else if (item.isStrokeStyleAsCanvasPattern()) {
-			// transforms pattern into CSS property and
-			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasPattern(), width, height) + " 1";
-			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, patternAsCss);
-		} else if (item.isStrokeStyleAsCanvasGradient()) {
-			// reference to CCS gradient
-			String gradientAsCss = null;
-			if  (item.getStrokeStyleAsGradient() != null) {
-				// transforms gradient into CSS property and
-				// adds 1 to the string to show gradient on border by border image property
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsGradient()) + " 1";
-			} else {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsCanvasGradient(), width, height) + " 1";
-			}
-			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, gradientAsCss);
+		// applies the background color
+		applyBackgroundColor(item, color, width, height);
+		// applies the border width
+		boolean applyBorderColor = applyBorderWidth(item, color);
+		// checks if must be applied the color
+		if (applyBorderColor) {
+			// applies the border color
+			applyBorderColor(item, color, width, height);
 		}
 		return colorCell;
 	}
@@ -349,36 +298,147 @@ final class HtmlLegendCallback implements LegendCallback {
 		if (text != null && text.length() > 0) {
 			// checks if the text has stored as HTML
 			if (item.isHtmlText()) {
-				// gets html
+				// gets HTML
 				SafeHtml html = item.getTextAsHtml();
-				// sets html into label cell
+				// sets HTML into label cell
 				element.setInnerHTML(html.asString());
 			} else {
-				// FIXME adds callback
-				// checks if the text contains a carriage return
-				if (text.contains(BREAK)) {
-					// splits the text
-					String[] splittedText = text.split(BREAK);
-					// scans all splitted text
-					for (String singleText : splittedText) {
-						// if elements has got more than 0 children
-						// means that a text node has been already added
-						// then BR elemnt will be added
-						if (element.getChildCount() > 0) {
-							element.appendChild(Document.get().createBRElement());
-						}
-						// adds the splitted text as text element
-						element.appendChild(Document.get().createTextNode(singleText));
-					}
-				} else {
-					// if here, the text has not any HTML element
-					// and is not breakable
-					// then the text is set as text of HTML element
-					element.setInnerText(text);
-				}
+				// invokes the method to manage the text
+				// passed as plain text
+				managePlainText(item, element, text);
 			}
 		}
 		return element;
+	}
+	
+	/**
+	 * Manages the plain text of legend item, checking if to invoke a callback or split by a break point.
+	 * 
+	 * @param item legend item instance to represent the label
+	 * @param element HTML element where the legend text must be stored
+	 * @param text normalized text to apply
+	 */
+	private void managePlainText(LegendLabelItem item, DivElement element, String text) {
+		// FIXME adds callback
+		// checks if the text contains a carriage return
+		if (text.contains(BREAK)) {
+			// splits the text
+			String[] splittedText = text.split(BREAK);
+			// scans all splitted text
+			for (String singleText : splittedText) {
+				// if elements has got more than 0 children
+				// means that a text node has been already added
+				// then BR element will be added
+				if (element.getChildCount() > 0) {
+					element.appendChild(Document.get().createBRElement());
+				}
+				// adds the splitted text as text element
+				element.appendChild(Document.get().createTextNode(singleText));
+			}
+		} else {
+			// if here, the text has not any HTML element
+			// and is not breakable
+			// then the text is set as text of HTML element
+			element.setInnerText(text);
+		}
+	}
+
+	/**
+	 * Applies the background color to the color element.
+	 * 
+	 * @param item legend item to map into background color
+	 * @param color DIV element where to apply the background color
+	 * @param width width to use to apply background color
+	 * @param height height to use to apply background color
+	 */
+	private void applyBackgroundColor(LegendLabelItem item, DivElement color, int width, int height) {
+		// checks if fill color has been set
+		if (item.isFillStyleAsColor()) {
+			// if here, apply the fill color as background color
+			color.getStyle().setBackgroundColor(item.getFillStyle().toRGBA());
+		} else if (item.isFillStyleAsCanvasPattern()) {
+			// transforms pattern into CSS property and
+			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsPattern(), width, height);
+			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
+		} else if (item.isFillStyleAsCanvasGradient()) {
+			// reference to CCS gradient
+			String gradientAsCss = null;
+			if (item.getFillStyleAsGradient() != null) {
+				// transforms gradient into CSS property and
+				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsGradient());
+			} else {
+				// transforms gradient into CSS property and
+				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasGradient(), width, height);
+			}
+			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, gradientAsCss);
+		}
+	}
+
+	/**
+	 * Applies the border style to the color element and returns <code>true</code> if the border color must be applied.
+	 * 
+	 * @param item legend item to map into border style
+	 * @param color DIV element where to apply the border style
+	 * @return <code>true</code> if the border has been applied and than color is missing
+	 */
+	private boolean applyBorderWidth(LegendLabelItem item, DivElement color) {
+		// checks if a border must be applied
+		// having a border width more then 0
+		if (item.getLineWidth() > 0) {
+			// applies the border
+			color.getStyle().setBorderWidth(item.getLineWidth(), Unit.PX);
+			// checking the line has been configured as dashed
+			if (item.getLineDash().isEmpty()) {
+				// if here, solid border, no dashed line
+				color.getStyle().setBorderStyle(BorderStyle.SOLID);
+			} else {
+				// if here, dashed line
+				color.getStyle().setBorderStyle(BorderStyle.DASHED);
+			}
+			// returns true
+			// to apply color
+			return true;
+		} else {
+			// if here, line width is 0 then
+			// configured do not be visible and then
+			// no border
+			color.getStyle().setBorderStyle(BorderStyle.NONE);
+		}
+		// returns false
+		// to apply color
+		return false;
+	}
+
+	/**
+	 * Applies the border color to the color element.
+	 * 
+	 * @param item legend item to map into border color
+	 * @param color DIV element where to apply the border color
+	 * @param width width to use to apply border color
+	 * @param height height to use to apply border color
+	 */
+	private void applyBorderColor(LegendLabelItem item, DivElement color, int width, int height) {
+		// checks if there is stroke color
+		// to apply to the border
+		if (item.isStrokeStyleAsColor()) {
+			color.getStyle().setBorderColor(item.getStrokeStyle().toRGBA());
+		} else if (item.isStrokeStyleAsCanvasPattern()) {
+			// transforms pattern into CSS property and
+			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasPattern(), width, height) + " 1";
+			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, patternAsCss);
+		} else if (item.isStrokeStyleAsCanvasGradient()) {
+			// reference to CCS gradient
+			String gradientAsCss = null;
+			if (item.getStrokeStyleAsGradient() != null) {
+				// transforms gradient into CSS property and
+				// adds 1 to the string to show gradient on border by border image property
+				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsGradient()) + " 1";
+			} else {
+				// transforms gradient into CSS property and
+				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsCanvasGradient(), width, height) + " 1";
+			}
+			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, gradientAsCss);
+		}
 	}
 
 }

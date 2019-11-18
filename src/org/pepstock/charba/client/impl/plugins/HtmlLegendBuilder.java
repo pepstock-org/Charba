@@ -502,48 +502,88 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 		// checks if legend item is consistent
 		// and there is native chart stored into cache (must be)
 		if (selectedItem != null && Charts.hasNative(chart)) {
-			// retrieves native chart, needed to create the event
-			Chart nativeChart = Charts.getNative(chart);
 			// checks if is a click event
 			if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
-				// removes the chart id because
-				// usually the click set hidden which needs an update of chart
-				// and removing here the legend will be created to next update
-				ADDED_LEGEND.remove(chart.getId());
-				// creates the event
-				LegendClickEvent eventToFire = new LegendClickEvent(event, nativeChart, selectedItem);
-				// checks if there is any event handler
-				if (chart.getOptions().getLegend().hasClickHandlers()) {
-					// if yes, fires the event by chart
-					chart.fireEvent(eventToFire);
-				} else {
-					// if here, no handler then invokes the default 
-					Defaults.get().invokeLegendOnClick(eventToFire);
-				}
+				// invokes on click event
+				onClick(chart, selectedItem, event);
 			} else if (Event.MOUSEMOVE.value().equalsIgnoreCase(event.getType())) {
-				// FIXME change cursor by options
-				// creates the event
-				LegendHoverEvent eventToFire = new LegendHoverEvent(event, nativeChart, selectedItem);
-				// checks if there is any event handler
-				if (chart.getOptions().getLegend().hasHoverHandlers()) {
-					// if yes, fires the event by chart
-					chart.fireEvent(eventToFire);
-				} else {
-					// if here, no handler then invokes the default 
-					Defaults.get().invokeLegendOnHover(eventToFire);
-				}
+				// invokes on hover event
+				onHover(chart, selectedItem, event);
 			} else if (Event.MOUSEOUT.value().equalsIgnoreCase(event.getType())) {
-				// creates the event
-				LegendLeaveEvent eventToFire = new LegendLeaveEvent(event, nativeChart, selectedItem);
-				// checks if there is any event handler
-				if (chart.getOptions().getLegend().hasLeaveHandlers()) {
-					// if yes, fires the event by chart
-					chart.fireEvent(eventToFire);
-				} else {
-					// if here, no handler then invokes the default 
-					Defaults.get().invokeLegendOnLeave(eventToFire);
-				}
+				// invokes on leave event
+				onLeave(chart, selectedItem, event);
 			}
+		}
+	}
+	
+	/**
+	 * Fires the CLICK event on specific legend item.
+	 * 
+	 * @param chart chart instance
+	 * @param selectedItem legend item instance, selected by native event
+	 * @param event DOM native event, got from legend element
+	 */
+	private void onClick(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
+		// retrieves native chart, needed to create the event
+		Chart nativeChart = Charts.getNative(chart);
+		// removes the chart id because
+		// usually the click set hidden which needs an update of chart
+		// and removing here the legend will be created to next update
+		ADDED_LEGEND.remove(chart.getId());
+		// creates the event
+		LegendClickEvent eventToFire = new LegendClickEvent(event, nativeChart, selectedItem);
+		// checks if there is any event handler
+		if (chart.getOptions().getLegend().hasClickHandlers()) {
+			// if yes, fires the event by chart
+			chart.fireEvent(eventToFire);
+		} else {
+			// if here, no handler then invokes the default 
+			Defaults.get().invokeLegendOnClick(eventToFire);
+		}
+	}
+
+	/**
+	 * Fires the HOVER event on specific legend item.
+	 * 
+	 * @param chart chart instance
+	 * @param selectedItem legend item instance, selected by native event
+	 * @param event DOM native event, got from legend element
+	 */
+	private void onHover(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
+		// retrieves native chart, needed to create the event
+		Chart nativeChart = Charts.getNative(chart);
+		// FIXME change cursor by options
+		// creates the event
+		LegendHoverEvent eventToFire = new LegendHoverEvent(event, nativeChart, selectedItem);
+		// checks if there is any event handler
+		if (chart.getOptions().getLegend().hasHoverHandlers()) {
+			// if yes, fires the event by chart
+			chart.fireEvent(eventToFire);
+		} else {
+			// if here, no handler then invokes the default 
+			Defaults.get().invokeLegendOnHover(eventToFire);
+		}
+	}
+
+	/**
+	 * Fires the LEAVE event on specific legend item.
+	 * 
+	 * @param chart chart instance
+	 * @param selectedItem legend item instance, selected by native event
+	 * @param event DOM native event, got from legend element
+	 */
+	private void onLeave(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
+		// retrieves native chart, needed to create the event
+		Chart nativeChart = Charts.getNative(chart);
+		// creates the event
+		LegendLeaveEvent eventToFire = new LegendLeaveEvent(event, nativeChart, selectedItem);
+		// checks if there is any event handler
+		if (chart.getOptions().getLegend().hasLeaveHandlers()) {
+			// if yes, fires the event by chart
+			chart.fireEvent(eventToFire);
+		} else {
+			// if here, no handler then invokes the default 
+			Defaults.get().invokeLegendOnLeave(eventToFire);
 		}
 	}
 
