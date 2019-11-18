@@ -34,6 +34,9 @@ abstract class ChartContainer {
 	 * @param chart chart instance
 	 */
 	ChartContainer(IsChart chart) {
+		// checks if chart is consistent
+		IsChart.checkIfValid(chart);
+		// stores chart
 		this.chart = chart;
 	}
 

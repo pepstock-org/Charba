@@ -46,6 +46,11 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 */
 	public ConfigurationContainer(IsChart chart, T configuration) {
 		super(chart);
+		// checks if configuration is consistent
+		if (configuration == null) {
+			// if not exception
+			throw new IllegalArgumentException("Configuration is null");
+		}
 		this.configuration = configuration;
 	}
 
