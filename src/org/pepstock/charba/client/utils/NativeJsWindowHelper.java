@@ -32,7 +32,7 @@ final class NativeJsWindowHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeJsWindowHelper() {
+	private NativeJsWindowHelper() {
 		// do nothing
 	}
 

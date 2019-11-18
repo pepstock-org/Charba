@@ -35,7 +35,7 @@ final class NativeJsPositionerHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeJsPositionerHelper() {
+	private NativeJsPositionerHelper() {
 		// do nothing
 	}
 

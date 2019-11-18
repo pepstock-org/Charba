@@ -25,7 +25,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
+ * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
  * utilities to invoke CHART.JS callbacks, provided out of the box, the default one.
  * 
  * @author Andrea "Stock" Stocchero
@@ -37,7 +37,7 @@ final class NativeJsCallbacksHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeJsCallbacksHelper() {
+	private NativeJsCallbacksHelper() {
 		// do nothing
 	}
 

@@ -24,8 +24,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to invoke CHART.JS callbacks, provided out of the box, the default one.
+ * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
+ * utilities to add and remove listeners to HTML elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -36,12 +36,26 @@ final class NativeJsHtmlLegendBuilderHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeJsHtmlLegendBuilderHelper() {
+	private NativeJsHtmlLegendBuilderHelper() {
 		// do nothing
 	}
 
+	/**
+	 * Adds a function as listener to the HTML element.
+	 * 
+	 * @param event event type to register
+	 * @param element HTML element to update adding a listener
+	 * @param proxy function to add as listener
+	 */
 	static native void addEventListener(String event, Element element, Proxy proxy);
 	
+	/**
+	 * Removes a function as listener from the HTML element.
+	 * 
+	 * @param event event type to unregister
+	 * @param element HTML element to update removing a listener
+	 * @param proxy function to remove as listener
+	 */
 	static native void removeEventListener(String event, Element element, Proxy proxy);
 
 }

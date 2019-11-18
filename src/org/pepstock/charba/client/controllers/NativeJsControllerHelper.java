@@ -34,7 +34,7 @@ final class NativeJsControllerHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeJsControllerHelper() {
+	private NativeJsControllerHelper() {
 		// do nothing
 	}
 

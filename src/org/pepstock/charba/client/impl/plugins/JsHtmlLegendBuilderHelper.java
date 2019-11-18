@@ -25,7 +25,7 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to invoke CHART.JS callbacks, provided out of the box, the default one.<br>
+ * utilities to add and remove listeners to HTML elements.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -56,13 +56,29 @@ final class JsHtmlLegendBuilderHelper {
 		return INSTANCE;
 	}
 
+	/**
+	 * Adds a function as listener to the HTML element.
+	 * 
+	 * @param event event type to register
+	 * @param element HTML element to update adding a listener
+	 * @param proxy function to add as listener
+	 */
 	void addEventListener(Event event, Element element, Proxy proxy) {
+		// checks if arguments are consistent
 		if (Key.isValid(event) && element != null && proxy != null) {
 			NativeJsHtmlLegendBuilderHelper.addEventListener(event.value(), element, proxy);
 		}
 	}
 	
+	/**
+	 * Removes a function as listener from the HTML element.
+	 * 
+	 * @param event event type to unregister
+	 * @param element HTML element to update removing a listener
+	 * @param proxy function to remove as listener
+	 */
 	void removeEventListener(Event event, Element element, Proxy proxy) {
+		// checks if arguments are consistent
 		if (Key.isValid(event) && element != null && proxy != null) {
 			NativeJsHtmlLegendBuilderHelper.removeEventListener(event.value(), element, proxy);
 		}
