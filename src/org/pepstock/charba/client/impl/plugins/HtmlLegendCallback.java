@@ -23,6 +23,7 @@ import java.util.List;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
+import org.pepstock.charba.client.callbacks.LegendTextCallback;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.enums.Position;
@@ -74,8 +75,6 @@ final class HtmlLegendCallback implements LegendCallback {
 	private static final String STYLE_ALIGN = "align";
 	// carriage return to check into text of legend item
 	private static final String BREAK = "\n";
-	// Maximum amount of column to show
-	private static final int MAX_COLUMNS = Integer.MAX_VALUE;
 
 	/*
 	 * (non-Javadoc)
@@ -84,6 +83,8 @@ final class HtmlLegendCallback implements LegendCallback {
 	 */
 	@Override
 	public SafeHtml generateLegend(IsChart chart) {
+		// checks if chart is consistent
+		IsChart.checkIfValid(chart);
 		// create safe html builder
 		SafeHtmlBuilder builder = new SafeHtmlBuilder();
 		// creates a HTML element
@@ -106,6 +107,9 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @return the table element instance with the complete legend
 	 */
 	private TableElement buildLegend(IsChart chart) {
+		HtmlLegendBuilderOptions options = HtmlLegendBuilder.OPTIONS.get(chart.getId());
+		// gets max columns for legend
+		int maxColumns = options.getMaximumLegendColumns();
 		// gets legend
 		Legend legend = chart.getOptions().getLegend();
 		// creates table as result
@@ -134,7 +138,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			for (LegendLabelItem item : legendItems) {
 				// checks if new row must be created
 				// checking max legend items per row
-				if (index % MAX_COLUMNS == 0) {
+				if (index % maxColumns == 0) {
 					// new row
 					TableRowElement newRow = Document.get().createTRElement();
 					// appends to table
@@ -149,7 +153,7 @@ final class HtmlLegendCallback implements LegendCallback {
 				current.appendChild(buildColorCell(chart, legendId, item));
 				// creates and adds the cell part
 				// related to label with legend item text
-				current.appendChild(buildLabelCell(chart, legendId, item));
+				current.appendChild(buildLabelCell(chart, legendId, item, options.getLegendTextCallback()));
 				// increments the amount of legend item index
 				index++;
 			}
@@ -253,9 +257,10 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @param chart chart instance related to legend to build
 	 * @param legendId element id for {@link TableCellElement}
 	 * @param item legend item to show into color cell element
+	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 * @return a {@link TableCellElement} which should contains and represents the label of dataset
 	 */
-	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item) {
+	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, LegendTextCallback callback) {
 		// result label cell
 		final TableCellElement labelCell = Document.get().createTDElement();
 		// gets legend and legend labels instances
@@ -268,7 +273,7 @@ final class HtmlLegendCallback implements LegendCallback {
 		labelCell.getStyle().setPaddingBottom(legendLabels.getPadding(), Unit.PX);
 		// creates inner HTML element
 		// where to apply the label
-		DivElement label = createLabelText(item);
+		DivElement label = createLabelText(chart, item, callback);
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
 		label.getStyle().setProperty(Utilities.CSS_FONT_PROPERTY, Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
@@ -285,11 +290,13 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * Builds a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
 	 * label to apply.
 	 * 
+	 * @param chart chart instance related to legend to build
 	 * @param item legend item to show into color cell element
+	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 * @return a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
 	 *         label to apply
 	 */
-	private DivElement createLabelText(LegendLabelItem item) {
+	private DivElement createLabelText(IsChart chart, LegendLabelItem item, LegendTextCallback callback) {
 		// result text label cell
 		final DivElement element = Document.get().createDivElement();
 		// gets text of legend item
@@ -305,7 +312,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			} else {
 				// invokes the method to manage the text
 				// passed as plain text
-				managePlainText(item, element, text);
+				managePlainText(chart, item, element, text, callback);
 			}
 		}
 		return element;
@@ -314,12 +321,13 @@ final class HtmlLegendCallback implements LegendCallback {
 	/**
 	 * Manages the plain text of legend item, checking if to invoke a callback or split by a break point.
 	 * 
+	 * @param chart chart instance related to legend to build
 	 * @param item legend item instance to represent the label
 	 * @param element HTML element where the legend text must be stored
 	 * @param text normalized text to apply
+	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	private void managePlainText(LegendLabelItem item, DivElement element, String text) {
-		// FIXME adds callback
+	private void managePlainText(IsChart chart, LegendLabelItem item, DivElement element, String text, LegendTextCallback callback) {
 		// checks if the text contains a carriage return
 		if (text.contains(BREAK)) {
 			// splits the text
@@ -334,6 +342,20 @@ final class HtmlLegendCallback implements LegendCallback {
 				}
 				// adds the splitted text as text element
 				element.appendChild(Document.get().createTextNode(singleText));
+			}
+		} else if (callback != null){
+			// if here there is a callback to invoke
+			SafeHtml textFromCallback = callback.generateLegendText(chart, item, text);
+			// checks result
+			if (textFromCallback != null) {
+				// if here, it sets the result of callback 
+				// as HTML
+				element.setInnerHTML(textFromCallback.asString());
+			} else {
+				// if here, the text from callback is not consistent
+				// and is not breakable
+				// then the text is set as text of HTML element
+				element.setInnerText(text);
 			}
 		} else {
 			// if here, the text has not any HTML element

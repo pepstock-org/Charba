@@ -96,8 +96,14 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "htmllegendbuilder";
+	/**
+	 * The factory to create options for plugin.
+	 */
+	public static final HtmlLegendBuilderOptionsFactory FACTORY = new HtmlLegendBuilderOptionsFactory(ID);
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_lenged";
+	// cache to store options in order do not load every time the options
+	static final Map<String, HtmlLegendBuilderOptions> OPTIONS = new HashMap<>();
 	// cache to store DIV element which contains legend for each chart
 	private static final Map<String, DivElement> DIV_ELEMENTS = new HashMap<>();
 	// cache to store easing during drawing for each chart
@@ -154,6 +160,18 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 				chart.getOptions().setLegendCallback(CALLBACK);
 				// sets easing to zero
 				EASINGS.put(chart.getId(), 0D);
+				// creates options instance
+				HtmlLegendBuilderOptions pOptions = null;
+				// if not, loads and cache
+				// creates the plugin options using the java script object
+				// passing also the default color set at constructor.
+				if (chart.getOptions().getPlugins().hasOptions(ID)) {
+					pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+				} else {
+					pOptions = new HtmlLegendBuilderOptions();
+				}
+				OPTIONS.put(chart.getId(), pOptions);
+				pOptions.setCurrentCursor(chart.getInitialCursor());
 			} else {
 				// disables the plugin
 				chart.getOptions().getPlugins().setEnabled(ID, false);
@@ -264,7 +282,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart)) {
-			// chcks if there is div element for legend
+			// checks if there is div element for legend
 			if (DIV_ELEMENTS.containsKey(chart.getId())) {
 				// removes from map
 				DivElement legendElement = DIV_ELEMENTS.remove(chart.getId());
@@ -279,6 +297,18 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			ADDED_LEGEND.remove(chart.getId());
 			// removes the chart from easing status
 			EASINGS.remove(chart.getId());
+			// removes the chart from options
+			HtmlLegendBuilderOptions oldOptions = OPTIONS.remove(chart.getId());
+			// scans all options to see if the options is used in another chart
+			for (HtmlLegendBuilderOptions options : OPTIONS.values()) {
+				// checks if the option si s equals to old one
+				if (options.getCharbaId() == oldOptions.getCharbaId()) {
+					return;
+				}
+			}
+			// if here, the old options is no longer used
+			// then it removes the legend callback from cache
+			FACTORY.store(oldOptions.getCharbaId(), null);
 		}
 	}
 
@@ -515,7 +545,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fires the CLICK event on specific legend item.
 	 * 
@@ -537,7 +567,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// if yes, fires the event by chart
 			chart.fireEvent(eventToFire);
 		} else {
-			// if here, no handler then invokes the default 
+			// if here, no handler then invokes the default
 			Defaults.get().invokeLegendOnClick(eventToFire);
 		}
 	}
@@ -552,7 +582,8 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	private void onHover(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
 		// retrieves native chart, needed to create the event
 		Chart nativeChart = Charts.getNative(chart);
-		// FIXME change cursor by options
+		// set cursor
+		setCursorOnLegend(chart, true);
 		// creates the event
 		LegendHoverEvent eventToFire = new LegendHoverEvent(event, nativeChart, selectedItem);
 		// checks if there is any event handler
@@ -560,7 +591,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// if yes, fires the event by chart
 			chart.fireEvent(eventToFire);
 		} else {
-			// if here, no handler then invokes the default 
+			// if here, no handler then invokes the default
 			Defaults.get().invokeLegendOnHover(eventToFire);
 		}
 	}
@@ -575,6 +606,8 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	private void onLeave(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
 		// retrieves native chart, needed to create the event
 		Chart nativeChart = Charts.getNative(chart);
+		// set cursor
+		setCursorOnLegend(chart, false);
 		// creates the event
 		LegendLeaveEvent eventToFire = new LegendLeaveEvent(event, nativeChart, selectedItem);
 		// checks if there is any event handler
@@ -582,8 +615,26 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// if yes, fires the event by chart
 			chart.fireEvent(eventToFire);
 		} else {
-			// if here, no handler then invokes the default 
+			// if here, no handler then invokes the default
 			Defaults.get().invokeLegendOnLeave(eventToFire);
+		}
+	}
+
+	/**
+	 * Sets the cursor point when the cursor is mouse over the legend and the default one when is mouse out.
+	 * 
+	 * @param chart chart instance
+	 * @param setPointer if <code>true</code>, sets the cursor pointer, otherwise the default one
+	 */
+	private void setCursorOnLegend(IsChart chart, boolean setPointer) {
+		// checks if there is legend element
+		if (DIV_ELEMENTS.containsKey(chart.getId())) {
+			// gets legend element
+			DivElement legendElement = DIV_ELEMENTS.get(chart.getId());
+			// get options
+			HtmlLegendBuilderOptions options = OPTIONS.get(chart.getId());
+			// sets cursor
+			legendElement.getStyle().setCursor(setPointer ? options.getCursorPointer() : options.getCurrentCursor());
 		}
 	}
 
