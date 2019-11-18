@@ -112,6 +112,10 @@ Here you can find the list of enhancement and updates available on `master` bran
       * this is a **breaking change** because now the `HorizontalChart` class needs that dataset class instead of `BarDataset`.
     * remove `setType` method from `Dataset` class.
  * add `toCSSBackgroundProperty` methods for `Gradient` and `Pattern` into `Utilities` class in order to get the CSS property value of the canvas object.
+ * change the `Plugin` interface into to have `afterInit` the native chart instance.
+ * change `LegendCallback` interface in order to return a `SafeHtml` object instead of use `SafeHtmlBuilder`.
+ * create `HtmlLegendBuilder` plugin in order to create HTML legend instead of using the CHART.JS one
+    * add some methods to `LegendLabelItem` class in order to manage text as HTML.
 
 ### Fixed Bugs
 
@@ -131,6 +135,13 @@ Here you can find the list of enhancement and updates available on `master` bran
   * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array.
   * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS.
   * add to `Default` class the `generateLabels` methods which enable the invocation of the callback provided out of the box by CHART.JS.
+  * add to `Charts` object a map to manage `Chart` native objects and methods to retrive it by chart or its id.
+  * add by default to all charts, an internal plugin to track `Chart` native object instances into `Charts`.
+  * change event for chart and legend adding `Chart` native object instance as context.
+  * create a `LegendEventProperty` enumeration with all property names to set legend event callbacks.
+  * create a `ChartEventProperty` enumeration with all property names to set chart event callbacks.
+  * add `getElement` method to `IsChart` interface in order to get the element of widget.
+  * add `isValid`, `checkIfValid` and `isAbstractChart` static methods to `IsChart` interface. 
 
 License
 -------
