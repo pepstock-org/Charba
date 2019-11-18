@@ -106,6 +106,7 @@ Here you can find the list of enhancement and updates available on `master` bran
 
 ### Features
 
+  * **import last CHART.JS version,** [2.9.3](https://github.com/chartjs/Chart.js/releases/tag/v2.9.3) 
   * Every dataset sets automatically own type ([chart type](http://www.pepstock.org/Charba/2.6/org/pepstock/charba/client/ChartType.html)). This is the first step going to new [Chart.JS](http://www.chartjs.org/) feature about `dataset default options`, available from [version 2.9.2](https://github.com/chartjs/Chart.js/releases/tag/v2.9.2).
     * add new constructors in order to extend the dataset for new controllers.
     * add new `HorizontalBarDataset` class.
