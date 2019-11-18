@@ -203,7 +203,8 @@ public final class GlobalPlugins {
 		// scans all plugins
 		for (Entry<String, WrapperPlugin> entry : pluginIds.entrySet()) {
 			// checks if plugin is enabled
-			if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
+			//if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
+			if (!chart.getOptions().getPlugins().isForcedlyDisabled(entry.getKey())) {
 				// calls on configure method
 				entry.getValue().onConfigure(chart);
 			}

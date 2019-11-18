@@ -62,6 +62,16 @@ public class Plugins {
 	public boolean isEnabled(String pluginId) {
 		return options.getPlugins().isEnabled(pluginId);
 	}
+	
+	/**
+	 * Returns if a global plugin is enabled or not, forced directly by global plugin manager
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if a global plugin is not enabled otherwise <code>false</code>.
+	 */
+	public boolean isForcedlyDisabled(String pluginId) {
+		return options.getPlugins().isForcedlyDisabled(pluginId);
+	}
 
 	/**
 	 * Returns if a global plugin has been set or not.

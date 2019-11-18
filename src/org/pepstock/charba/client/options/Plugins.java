@@ -85,6 +85,27 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 		// and then it enables the plugin
 		return has(pluginIdKey);
 	}
+	
+	/**
+	 * Returns if a global plugin is enabled or not, forced directly by global plugin manager
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if a global plugin is not enabled otherwise <code>false</code>.
+	 */
+	public boolean isForcedlyDisabled(String pluginId) {
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// if boolean, checks if enable
+		if (ObjectType.BOOLEAN.equals(type)) {
+			// if the property is not found, checks if the plugin was enable to all charts.
+			return !getValue(pluginIdKey, true);
+		}
+		// if here, the property can exist or not.
+		// therefore is not disabled
+		return false;
+	}
 
 	/**
 	 * Returns if a global plugin has been set or not.
