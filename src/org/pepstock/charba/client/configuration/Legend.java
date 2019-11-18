@@ -30,7 +30,7 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
-import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -75,6 +75,8 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	private final CallbackProxy<ProxyLegendEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	// legend item factory
+	static final LegendItemFactory FACTORY = new LegendItemFactory(); 
 	// sub element of legend
 	private final LegendLabels labels;
 	// amount of click handlers
@@ -100,11 +102,20 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, new LegendItem(item))));
+		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, FACTORY.create(item))));
 		// fires the event
-		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, new LegendItem(item))));
+		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, FACTORY.create(item))));
 		// fires the event
-		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, new LegendItem(item))));
+		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, FACTORY.create(item))));
+	}
+	
+	/**
+	 * Creates a legend object wrapping an existing one.
+	 * 
+	 * @param wrappedLegend legend instance to wrap
+	 */
+	protected Legend(Legend wrappedLegend) {
+		this(wrappedLegend.getChart(), wrappedLegend.getConfiguration());
 	}
 
 	/**

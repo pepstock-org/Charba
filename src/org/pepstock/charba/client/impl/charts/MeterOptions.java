@@ -68,6 +68,8 @@ public class MeterOptions extends AbstractPieOptions {
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
+	
+	private final LegendWrapper legend;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -78,10 +80,12 @@ public class MeterOptions extends AbstractPieOptions {
 	public MeterOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 		// disables legend, title and tooltips.
-		super.getLegend().setDisplay(false);
 		super.getTitle().setDisplay(false);
 		super.getTooltips().setEnabled(false);
 		super.getHover().setAnimationDuration(0);
+		// creates a wrapper for legend
+		legend = new LegendWrapper(super.getLegend());
+		legend.setDisplay(false);
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
@@ -142,13 +146,13 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns nothing but throws an exception because not available.
+	 * Returns a legend wrapper where is not possible to display it.
 	 * 
-	 * @return nothing because will throw an exception
+	 * @return a legend wrapper where is not possible to display it
 	 */
 	@Override
 	public final Legend getLegend() {
-		throw new UnsupportedOperationException(INVALID_CALL);
+		return legend;
 	}
 
 	/**
@@ -278,6 +282,38 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
 		this.animatedDisplay = animatedDisplay;
+	}
+
+	/**
+	 * Internal implementation of legend which wraps the original one.<br>
+	 * With this legend implementation you can not set true to display it.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class LegendWrapper extends Legend {
+
+		/**
+		 * Creates a legend object wrapping an existing one.
+		 * 
+		 * @param wrappedLegend legend instance to wrap
+		 */
+		LegendWrapper(Legend delegated) {
+			super(delegated);
+		}		
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.configuration.Legend#setDisplay(boolean)
+		 */
+		@Override
+		public void setDisplay(boolean display) {
+			// ignore the passed value because
+			// the legend must not display
+			super.setDisplay(false);
+		}
+
 	}
 
 }
