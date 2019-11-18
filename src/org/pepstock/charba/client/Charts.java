@@ -146,7 +146,22 @@ public final class Charts {
 		// if here chart id is not consistent
 		return null;
 	}
-	
+
+	/**
+	 * Returns <code>true</code> if there is a CHART.JS chart instance by chart instance.
+	 * 
+	 * @param chart chart instance
+	 * @return <code>true</code> if there is a CHART.JS chart instance by chart instance
+	 */
+	public static boolean hasNative(IsChart chart) {
+		// checks if argument is consistent
+		if (IsChart.isValid(chart)) {
+			return hasNative(chart.getId());
+		}
+		// if here chart id is not consistent
+		return false;
+	}
+
 	/**
 	 * Returns <code>true</code> if there is a CHART.JS chart instance by id.
 	 * 
@@ -160,6 +175,21 @@ public final class Charts {
 		}
 		// if here chart id is not consistent
 		return false;
+	}
+
+	/**
+	 * Returns the CHART.JS chart instance by chart instance.
+	 * 
+	 * @param chart chart instance
+	 * @return CHART.JS chart instance or <code>null</code> if not exist.
+	 */
+	public static Chart getNative(IsChart chart) {
+		// checks if argument is consistent
+		if (IsChart.isValid(chart)) {
+			return getNative(chart.getId());
+		}
+		// if here chart id is not consistent
+		return null;
 	}
 
 	/**
