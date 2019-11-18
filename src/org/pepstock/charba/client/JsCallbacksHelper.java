@@ -17,7 +17,6 @@ package org.pepstock.charba.client;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.AbstractJsHelper;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
@@ -25,6 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -36,7 +36,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsCallbacksHelper extends AbstractJsHelper{
+final class JsCallbacksHelper {
 	// static instance for singleton
 	private static final JsCallbacksHelper INSTANCE = new JsCallbacksHelper();
 	// factory to create legend item
@@ -46,7 +46,12 @@ final class JsCallbacksHelper extends AbstractJsHelper{
 	 * To avoid any instantiation
 	 */
 	private JsCallbacksHelper() {
-		super();
+		// to be sure that CHART.JS java script object is injected
+		// some methods are calling CHART.JS for this reason is mandatory
+		// to include also chart.js
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that CHARBA java script object is injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
 	}
 
 	/**

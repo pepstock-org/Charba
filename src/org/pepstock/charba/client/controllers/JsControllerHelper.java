@@ -16,8 +16,9 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.commons.AbstractJsHelper;
+import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsControllerHelper extends AbstractJsHelper{
+final class JsControllerHelper {
 	// static instance for singleton
 	private static final JsControllerHelper INSTANCE = new JsControllerHelper();
 
@@ -35,7 +36,12 @@ final class JsControllerHelper extends AbstractJsHelper{
 	 * To avoid any instantiation
 	 */
 	private JsControllerHelper() {
-		super();
+		// to be sure that CHART.JS java script object is injected
+		// some methods are calling CHART.JS for this reason is mandatory
+		// to include also chart.js
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that CHARBA java script object is injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
 	}
 
 	/**

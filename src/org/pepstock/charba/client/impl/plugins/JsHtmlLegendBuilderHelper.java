@@ -15,10 +15,11 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.commons.AbstractJsHelper;
+import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.Element;
 
@@ -30,7 +31,7 @@ import com.google.gwt.dom.client.Element;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsHtmlLegendBuilderHelper extends AbstractJsHelper{
+final class JsHtmlLegendBuilderHelper {
 	// static instance for singleton
 	private static final JsHtmlLegendBuilderHelper INSTANCE = new JsHtmlLegendBuilderHelper();
 
@@ -38,7 +39,12 @@ final class JsHtmlLegendBuilderHelper extends AbstractJsHelper{
 	 * To avoid any instantiation
 	 */
 	private JsHtmlLegendBuilderHelper() {
-		super();
+		// to be sure that CHART.JS java script object is injected
+		// some methods are calling CHART.JS for this reason is mandatory
+		// to include also chart.js
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that CHARBA java script object is injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
 	}
 
 	/**
