@@ -48,6 +48,6 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 * @return cursor type as string
 	 */
 	String getCursorPointerAsString() {
-		return getValue(ChartPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
+		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
 	}
 }

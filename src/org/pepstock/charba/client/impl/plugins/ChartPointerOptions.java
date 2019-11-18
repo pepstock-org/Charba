@@ -23,7 +23,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import com.google.gwt.dom.client.Style.Cursor;
 
@@ -33,13 +32,12 @@ import com.google.gwt.dom.client.Style.Cursor;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartPointerOptions extends AbstractPluginOptions {
+public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 
 	/**
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
 	 */
 	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-
 	// defaults global options instance
 	private ChartPointerDefaultsOptions defaultsOptions;
 	// defaults global options factory
@@ -48,11 +46,9 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		ELEMENTS("elements"),
-		CURSOR_POINTER("cursorPointer"),
-		CURSOR_DEFAULT("cursorDefault");
+		ELEMENTS("elements");
 
 		// name value of property
 		private final String value;
@@ -106,6 +102,16 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.AbstractCursorPointerOptions#getCursorPointerAsString()
+	 */
+	@Override
+	final String getCursorPointerAsString() {
+		return defaultsOptions.getCursorPointerAsString();
+	}
+
 	/**
 	 * Sets the chart elements in scope to "cursorpointer" plugin.
 	 * 
@@ -125,51 +131,6 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		// reads the property
 		ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
 		return ArrayListHelper.list(PointerElement.class, array);
-	}
-
-	/**
-	 * Sets the cursor type when the cursor is over the dataset item.
-	 * 
-	 * @param cursor cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
-	 */
-	public void setCursorPointer(Cursor cursor) {
-		// checks if cursor is consistent
-		if (cursor != null) {
-			setValue(Property.CURSOR_POINTER, cursor.name());
-		}
-	}
-
-	/**
-	 * Returns the cursor type when the cursor is over the dataset item.
-	 * 
-	 * @return cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
-	 */
-	public Cursor getCursorPointer() {
-		String name = getValue(Property.CURSOR_POINTER, defaultsOptions.getCursorPointerAsString());
-		return Cursor.valueOf(name);
-	}
-
-	/**
-	 * Sets the cursor type before changing it. Needed to set it back.
-	 * 
-	 * @param cursor cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
-	 */
-	void setCurrentCursor(Cursor cursor) {
-		setValue(Property.CURSOR_DEFAULT, cursor.name());
-	}
-
-	/**
-	 * Returns the cursor type before changing it. Needed to set it back.
-	 * 
-	 * @return cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
-	 */
-	Cursor getCurrentCursor() {
-		String name = getValue(Property.CURSOR_DEFAULT, Cursor.DEFAULT.name());
-		return Cursor.valueOf(name);
 	}
 
 }
