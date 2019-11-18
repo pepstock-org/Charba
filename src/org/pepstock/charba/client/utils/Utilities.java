@@ -34,6 +34,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.FillStrokeStyle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
@@ -282,7 +283,7 @@ public final class Utilities {
 				// sets a consistent height
 				int heightToUse = Math.max(height, pattern.getHeight());
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), Context2d.Repetition.REPEAT.getValue()).asString();
+				return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(canvasPattern, widthToUse, heightToUse), Context2d.Repetition.REPEAT.getValue()).asString();
 			}
 		}
 		// if here pattern is not consistent
@@ -291,18 +292,30 @@ public final class Utilities {
 	}
 
 	/**
-	 * Returns a data URL for the current content of the canvas pattern.
+	 * Returns a URL CSS property for the current content of a fill or stroke canvas style instance.
 	 * 
-	 * @param canvasPattern canvas pattern instance
+	 * @param style fill or stroke canvas style instance
+	 * @param width width of image applied to canvasPattern
+	 * @param height height of image applied to canvasPattern
+	 * @return a URL CSS property for the current content of the canvas pattern
+	 */
+	public static String toCSSBackgroundProperty(FillStrokeStyle style, int width, int height) {
+		return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(style, width, height), EMPTY_STRING).asString();
+	}
+
+	/**
+	 * Returns a data URL for the current content of a fill or stroke canvas style instance.
+	 * 
+	 * @param style fill or stroke canvas style instance
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 * @return a data URL for the current content of the canvas pattern
 	 */
-	public static String getImageURLFromCanvasPattern(CanvasPattern canvasPattern, int width, int height) {
-		// FIXME checks contolls
+	private static String getImageURLFromFillStrokeStyle(FillStrokeStyle style, int width, int height) {
+		// checks if argument is consistent
 		// checks if canvas is created
 		// if not returns an empty string
-		if (WORKING_CANVAS == null) {
+		if (style == null || WORKING_CANVAS == null) {
 			// returns empty string
 			return EMPTY_STRING;
 		}
@@ -314,7 +327,7 @@ public final class Utilities {
 		// clears the canvas for new design
 		context.clearRect(0D, 0D, WORKING_CANVAS.getWidth(), WORKING_CANVAS.getHeight());
 		// sets the background color
-		context.setFillStyle(canvasPattern);
+		context.setFillStyle(style);
 		// begins a new path.
 		context.beginPath();
 		// strokes
