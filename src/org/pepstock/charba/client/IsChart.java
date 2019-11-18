@@ -26,6 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -41,6 +42,52 @@ import com.google.gwt.event.shared.HasHandlers;
 public interface IsChart extends HasHandlers {
 
 	/**
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
+	 * well.
+	 * 
+	 * @param chart chart to be checked
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
+	 *         well
+	 */
+	static boolean isValid(IsChart chart) {
+		return chart != null && chart.getId() != null;
+	}
+
+	/**
+	 * Checks if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well. If not, throw a
+	 * {@link IllegalArgumentException}.
+	 * 
+	 * @param chart chart to be checked
+	 */
+	static void checkIfValid(IsChart chart) {
+		if (!isValid(chart)) {
+			throw new IllegalArgumentException("Chart implementation instance is null or not consistent");
+		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if chart passed as argument is an abstract chart instance.
+	 * 
+	 * @param chart chart to be checked
+	 * @return <code>true</code> if chart passed as argument is an abstract chart instance
+	 */
+	static boolean isAbstractChart(IsChart chart) {
+		return (chart instanceof AbstractChart<?>);
+	}
+	
+	/**
+	 * Checks if chart passed as argument is an abstract chart instance. If not, throw a
+	 * {@link IllegalArgumentException}.
+	 * 
+	 * @param chart chart to be checked
+	 */
+	static void checkIfAbstractChart(IsChart chart) {
+		if (!isAbstractChart(chart)) {
+			throw new IllegalArgumentException("Chart implementation instance is not an AbstractChart");
+		}
+	}
+
+	/**
 	 * Adds this handler to the widget.
 	 *
 	 * @param <H> the type of handler to add
@@ -50,6 +97,14 @@ public interface IsChart extends HasHandlers {
 	 */
 	<H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type);
 
+	/**
+	 * Gets a handle to the object's underlying DOM element.
+	 * 
+	 * 
+	 * @return the object's browser element
+	 */
+	Element getElement();
+	
 	/**
 	 * Returns the options of chart.
 	 * 
