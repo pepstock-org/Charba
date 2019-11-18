@@ -70,7 +70,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates new plugin options with plugin ID.<br>
+	 * Creates new plugin options with plugin ID, creating new native options.
 	 * 
 	 * @param pluginId plugin ID
 	 */
@@ -82,6 +82,12 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		setValue(Property.CHARBA_OPTIONS_ID, COUNTER.incrementAndGet());
 	}
 
+	/**
+	 * Creates new plugin options with plugin ID, using a native object instance.
+	 * 
+	 * @param pluginId plugin ID
+	 * @param nativeObject native object which represents the plugin options as native object
+	 */
 	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks plugin id
