@@ -141,7 +141,8 @@ Here you can find the list of enhancement and updates available on `master` bran
   * create a `LegendEventProperty` enumeration with all property names to set legend event callbacks.
   * create a `ChartEventProperty` enumeration with all property names to set chart event callbacks.
   * add `getElement` method to `IsChart` interface in order to get the element of widget.
-  * add `isValid`, `checkIfValid` and `isAbstractChart` static methods to `IsChart` interface. 
+  * add `isValid`, `checkIfValid` and `isAbstractChart` static methods to `IsChart` interface.
+  * improve JS helpers changing its names and reusing injection of javascript items.
 
 License
 -------
