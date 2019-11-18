@@ -18,19 +18,26 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.impl.plugins.HtmlLegendBuilder;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -41,11 +48,22 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class LegendLabelItem extends LegendItem {
 
+	// this field is managed only by HTML legend builder plugin
+	private boolean htmlText = false;
+
+	private Pattern fillStylePattern = null;
+
+	private Gradient fillStyleGradient = null;
+
+	private Pattern strokeStylePattern = null;
+
+	private Gradient strokeStyleGradient = null;
+
 	/**
 	 * Standard constructor which wraps a new native java script object.
 	 */
 	public LegendLabelItem() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -55,8 +73,18 @@ public final class LegendLabelItem extends LegendItem {
 	 */
 	LegendLabelItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if fill style is canvas pattern
+		if (isFillStyleAsCanvasPattern()) {
+			// then initialized the pattern
+			fillStylePattern = new Pattern(getFillStyleAsCanvasPattern());
+		}
+		// checks if stroke style is canvas pattern
+		if (isStrokeStyleAsCanvasPattern()) {
+			// then initialized the pattern
+			strokeStylePattern = new Pattern(getStrokeStyleAsCanvasPattern());
+		}
 	}
-	
+
 	/**
 	 * Sets the dataset index of the chart.
 	 * 
@@ -85,6 +113,72 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
+	 * Sets the label that will be displayed, as HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * 
+	 * @param text the label that will be displayed, as HTML
+	 */
+	public void setText(SafeHtml text) {
+		// checks if argument is consistent
+		if (text != null) {
+			// not null then stores the HTML
+			setText(text.asString());
+			// and set the flag
+			htmlText = true;
+		} else {
+			// null then resets the property
+			remove(LegendItem.Property.TEXT);
+			// and set the flag
+			htmlText = false;
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the text of legend item is HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * 
+	 * @return <code>true</code> if the text of legend item is HTML
+	 */
+	public boolean isHtmlText() {
+		return htmlText;
+	}
+
+	/**
+	 * Returns the label that will be displayed, as HTML.<br>
+	 * If is not HTML, returns {@link UndefinedValues#STRING}.
+	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * 
+	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
+	 */
+	public SafeHtml getTextAsHtml() {
+		// checks if the text as HTML
+		if (htmlText) {
+			// gets text
+			String html = super.getText();
+			// if html text is consistent
+			if (html != null) {
+				// creates safe html builder
+				SafeHtmlBuilder builder = new SafeHtmlBuilder();
+				// creates and returns a safe html
+				return builder.appendHtmlConstant(html).toSafeHtml();
+			}
+		}
+		// if here the text has not been stored as HTML
+		// or text is missing
+		return null;
+	}
+
+	/**
+	 * Sets <code>true</code> if the text of legend item is HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * 
+	 * @param htmlText <code>true</code> if the text of legend item is HTML
+	 */
+	public void setHtmlText(boolean htmlText) {
+		this.htmlText = htmlText;
+	}
+
+	/**
 	 * Sets the fill style of the legend box as color.
 	 * 
 	 * @param color the fill style of the legend box as color
@@ -103,21 +197,92 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the fill style of the legend box as pattern.
+	 * Sets the fill style of the legend box as canvas pattern.
 	 * 
-	 * @param pattern the fill style of the legend box as pattern
+	 * @param pattern the fill style of the legend box as canvas pattern
 	 */
 	public void setFillStyle(CanvasPattern pattern) {
 		setValue(LegendItem.Property.FILL_STYLE, pattern);
 	}
 
 	/**
-	 * Sets the fill style of the legend box as gradient.
+	 * Sets the fill style of the legend box as pattern.
 	 * 
-	 * @param gradient the fill style of the legend box as gradient
+	 * @param chart chart instance related to this legend
+	 * @param pattern the fill style of the legend box as pattern
+	 */
+	public void setFillStyle(IsChart chart, Pattern pattern) {
+		// stores the reference
+		this.fillStylePattern = pattern;
+		// resets gradient
+		this.fillStyleGradient = null;
+		// checks if pattern is consistent
+		if (pattern != null) {
+			// checks if pattern has been built by canvas pattern
+			if (pattern.getCanvasPattern() != null) {
+				// stores as canvas pattern
+				setFillStyle(pattern.getCanvasPattern());
+			} else {
+				// be aware that if chart is null, an exception will be throw
+				setFillStyle(DatasetCanvasObjectFactory.get().createPattern(chart, pattern));
+			}
+		} else {
+			// resets the property
+			remove(LegendItem.Property.FILL_STYLE);
+		}
+	}
+	
+	/**
+	 * Returns the fill style of the legend box as pattern.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a pattern
+	 */
+	public Pattern getFillStyleAsPattern() {
+		return fillStylePattern;
+	}
+
+
+	/**
+	 * Sets the fill style of the legend box as canvas gradient.
+	 * 
+	 * @param gradient the fill style of the legend box as canvas gradient
 	 */
 	public void setFillStyle(CanvasGradient gradient) {
 		setValue(LegendItem.Property.FILL_STYLE, gradient);
+	}
+
+	/**
+	 * Sets the fill style of the legend box as gradient.
+	 * 
+	 * @param chart chart instance related to this legend
+	 * @param gradient the fill style of the legend box as gradient
+	 */
+	public void setFillStyle(IsChart chart, Gradient gradient) {
+		// stores the reference
+		this.fillStyleGradient = gradient;
+		// resets the pattern
+		this.fillStylePattern = null;
+		// checks if pattern is consistent
+		if (gradient != null) {
+			// calculated the maximum values 
+			// to oavoid undefined values
+			int datasetIndex = Math.max(0, getDatasetIndex());
+			int index = Math.max(0, getIndex());
+			// be aware that if chart is null, an exception will be throw
+			setFillStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
+		} else {
+			// resets the property
+			remove(LegendItem.Property.FILL_STYLE);
+		}
+	}
+	
+	/**
+	 * Returns the fill style of the legend box as gradient.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a gradient
+	 */
+	public Gradient getFillStyleAsGradient() {
+		return fillStyleGradient;
 	}
 
 	/**
@@ -208,21 +373,91 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the stroke style of the legend box as pattern.
+	 * Sets the stroke style of the legend box as canvas pattern.
 	 * 
-	 * @param pattern the stroke style of the legend box as pattern
+	 * @param pattern the stroke style of the legend box as canvas pattern
 	 */
 	public void setStrokeStyle(CanvasPattern pattern) {
 		setValue(LegendItem.Property.STROKE_STYLE, pattern);
+	}
+	
+	/**
+	 * Sets the stroke style of the legend box as pattern.
+	 * 
+	 * @param chart chart instance related to this legend
+	 * @param pattern the stroke style of the legend box as pattern
+	 */
+	public void setStrokeStyle(IsChart chart, Pattern pattern) {
+		// stores the reference
+		this.strokeStylePattern = pattern;
+		// resets gradient
+		this.strokeStyleGradient = null;
+		// checks if pattern is consistent
+		if (pattern != null) {
+			// checks if pattern has been built by canvas pattern
+			if (pattern.getCanvasPattern() != null) {
+				// stores as canvas pattern
+				setStrokeStyle(pattern.getCanvasPattern());
+			} else {
+				// be aware that if chart is null, an exception will be throw
+				setStrokeStyle(DatasetCanvasObjectFactory.get().createPattern(chart, pattern));
+			}
+		} else {
+			// resets the property
+			remove(LegendItem.Property.STROKE_STYLE);
+		}
+	}
+	
+	/**
+	 * Returns the stroke style of the legend box as pattern.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
+	 */
+	public Pattern getStrokeStyleAsPattern() {
+		return strokeStylePattern;
+	}
+
+	/**
+	 * Sets the stroke style of the legend box as canvas gradient.
+	 * 
+	 * @param gradient the stroke style of the legend box as canvas gradient
+	 */
+	public void setStrokeStyle(CanvasGradient gradient) {
+		setValue(LegendItem.Property.STROKE_STYLE, gradient);
 	}
 
 	/**
 	 * Sets the stroke style of the legend box as gradient.
 	 * 
+	 * @param chart chart instance related to this legend
 	 * @param gradient the stroke style of the legend box as gradient
 	 */
-	public void setStrokeStyle(CanvasGradient gradient) {
-		setValue(LegendItem.Property.STROKE_STYLE, gradient);
+	public void setStrokeStyle(IsChart chart, Gradient gradient) {
+		// stores the reference
+		this.strokeStyleGradient = gradient;
+		// resets the pattern
+		this.strokeStylePattern = null;
+		// checks if pattern is consistent
+		if (gradient != null) {
+			// calculated the maximum values 
+			// to oavoid undefined values
+			int datasetIndex = Math.max(0, getDatasetIndex());
+			int index = Math.max(0, getIndex());
+			// be aware that if chart is null, an exception will be throw
+			setStrokeStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
+		} else {
+			// resets the property
+			remove(LegendItem.Property.STROKE_STYLE);
+		}
+	}
+	
+	/**
+	 * Returns the stroke style of the legend box as gradient.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
+	 */
+	public Gradient getStrokeStyleAsGradient() {
+		return strokeStyleGradient;
 	}
 
 	/**
@@ -271,7 +506,7 @@ public final class LegendLabelItem extends LegendItem {
 	public void setRotation(double rotation) {
 		setValue(LegendItem.Property.ROTATION, rotation);
 	}
-	
+
 	/**
 	 * Inner class to create legend label item by a native object.
 	 * 

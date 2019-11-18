@@ -30,7 +30,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -153,7 +152,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
-				return filterCallback.onFilter(getChart(), new LegendItem(item));
+				return filterCallback.onFilter(getChart(), Legend.FACTORY.create(item));
 			}
 			return true;
 		});
