@@ -161,7 +161,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (labelsCallback != null) {
 				// calls callback
-				// getting default labels 
+				// getting default labels
 				List<LegendLabelItem> result = labelsCallback.generateLegendLabels(getChart(), Defaults.get().generateLabels(nativeChart));
 				// transforms into a native array
 				return ArrayObject.fromOrEmpty(result);

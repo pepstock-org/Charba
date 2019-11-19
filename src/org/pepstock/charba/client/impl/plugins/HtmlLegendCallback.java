@@ -70,7 +70,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  *
  */
 final class HtmlLegendCallback implements LegendCallback {
-	
+
 	/**
 	 * Template interface to create CSS value of gradient, to use for <code>background-size</code> CSS property.<br>
 	 * The template is: <br>
@@ -93,6 +93,7 @@ final class HtmlLegendCallback implements LegendCallback {
 		@Template("{0}px {1}px")
 		SafeHtml css(int width, int height);
 	}
+
 	// instance of template
 	private static final BackgroundSizeCssTemplate BACKGROUND_SIZE_TEMPLATE = GWT.create(BackgroundSizeCssTemplate.class);
 	// internal comparator to sort legend item by own index
@@ -215,7 +216,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			// no callback then it will use the default ones
 			legendItems = defaultLegendItems;
 		}
-		// stores the legend items 
+		// stores the legend items
 		HtmlLegend.LEGEND_LABELS.put(chart.getId(), legendItems);
 		// checks if there is a filter legend callback
 		if (legendLabels.getFilterCallback() != null) {
@@ -347,7 +348,7 @@ final class HtmlLegendCallback implements LegendCallback {
 		}
 		return element;
 	}
-	
+
 	/**
 	 * Manages the plain text of legend item, checking if to invoke a callback or split by a break point.
 	 * 
@@ -373,12 +374,12 @@ final class HtmlLegendCallback implements LegendCallback {
 				// adds the splitted text as text element
 				element.appendChild(Document.get().createTextNode(singleText));
 			}
-		} else if (callback != null){
+		} else if (callback != null) {
 			// if here there is a callback to invoke
 			SafeHtml textFromCallback = callback.generateLegendText(chart, item, text);
 			// checks result
 			if (textFromCallback != null) {
-				// if here, it sets the result of callback 
+				// if here, it sets the result of callback
 				// as HTML
 				element.setInnerHTML(textFromCallback.asString());
 			} else {
@@ -428,7 +429,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			}
 		} else if (item.isFillStyleAsCanvasGradient()) {
 			// gets the gradient by legend item
-			Gradient gradient  = item.getFillStyleAsGradient();
+			Gradient gradient = item.getFillStyleAsGradient();
 			// checks if not consistent
 			if (gradient == null) {
 				// retrieve loaded gradient by dataset
@@ -450,7 +451,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			}
 		}
 	}
-	
+
 	/**
 	 * Applies the border style to the color element and returns <code>true</code> if the border color must be applied.
 	 * 
@@ -516,7 +517,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			}
 		} else if (item.isStrokeStyleAsCanvasGradient()) {
 			// gets the gradient by legend item
-			Gradient gradient  = item.getStrokeStyleAsGradient();
+			Gradient gradient = item.getStrokeStyleAsGradient();
 			// checks if not consistent
 			if (gradient == null) {
 				// retrieve loaded gradient by dataset
@@ -534,5 +535,5 @@ final class HtmlLegendCallback implements LegendCallback {
 			}
 		}
 	}
-	
+
 }

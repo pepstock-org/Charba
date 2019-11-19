@@ -35,9 +35,9 @@ public class DefaultElements implements IsDefaultElements {
 	private final IsDefaultPoint point;
 
 	private final IsDefaultRectangle rectangle;
-	
+
 	/**
-	 * Creates the object using inner default elements. 
+	 * Creates the object using inner default elements.
 	 */
 	public DefaultElements() {
 		this(new DefaultArc(), new DefaultLine(), new DefaultPoint(), new DefaultRectangle());

@@ -218,12 +218,12 @@ public final class Defaults {
 		// we don't know which method has got to get default hTML legend
 		return UndefinedValues.STRING;
 	}
-	
+
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
 	 * 
 	 * @param chart chart instance to use to get legend labels
-	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 * @return an unmodifiable list of legend labels or an empty list if chart is not initialized.
 	 */
 	public List<LegendLabelItem> generateLabels(Chart chart) {
 		// checks if argument is consistent
@@ -235,12 +235,12 @@ public final class Defaults {
 		// we don't know which method has got to get default hTML legend
 		return Collections.unmodifiableList(new ArrayList<>());
 	}
-	
+
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
 	 * 
 	 * @param chart chart instance to use to get legend labels
-	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 * @return an unmodifiable list of legend labels or an empty list if chart is not initialized.
 	 */
 	public List<LegendLabelItem> generateLabels(IsChart chart) {
 		// checks if argument is consistent
@@ -317,7 +317,7 @@ public final class Defaults {
 	public void invokeLegendOnLeave(LegendLeaveEvent event) {
 		invokeLegendEvent(event);
 	}
-	
+
 	/**
 	 * Invokes the event legend function provided out of the box by CHART.JS.
 	 * 
@@ -327,7 +327,7 @@ public final class Defaults {
 		// checks if event is consistent
 		if (event != null) {
 			// gets chart
-			IsChart chart = IsChart.isValid(event.getChart()) ? event.getChart() : event.getContext().getChart() ;
+			IsChart chart = IsChart.isValid(event.getChart()) ? event.getChart() : event.getContext().getChart();
 			// checks if argument is consistent
 			if (IsChart.isValid(chart) && chart.isInitialized()) {
 				// creates a wrapper
@@ -344,7 +344,7 @@ public final class Defaults {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class WrapperLegendItem extends LegendItem{
+	private static class WrapperLegendItem extends LegendItem {
 
 		/**
 		 * Creates a legend item wrapping an existing legend item.
@@ -354,7 +354,7 @@ public final class Defaults {
 		WrapperLegendItem(LegendItem item) {
 			super(item);
 		}
-		
+
 		/**
 		 * Returns the native object instance.
 		 * 
@@ -363,7 +363,7 @@ public final class Defaults {
 		final NativeObject getObject() {
 			return super.getNativeObject();
 		}
-		
+
 	}
 
 	/**
@@ -452,7 +452,7 @@ public final class Defaults {
 		}
 
 	}
-	
+
 	/**
 	 * Internal plugin to track native chart instances on all charts.
 	 * 

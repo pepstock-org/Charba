@@ -69,7 +69,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-	
+
 	private static final boolean DEFAULT_RTL = false;
 
 	/*
@@ -412,7 +412,9 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		return DEFAULT_BORDER_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isRtl()
 	 */
 	@Override
@@ -420,7 +422,9 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		return DEFAULT_RTL;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTextDirection()
 	 */
 	@Override

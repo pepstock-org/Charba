@@ -50,7 +50,7 @@ public final class Plugins implements ConfigurationElement {
 		if (plugin != null) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
-			//checks if the plugin is already loaded
+			// checks if the plugin is already loaded
 			if (has(plugin.getId())) {
 				// if here is already loaded
 				// then it removes the previous one
@@ -149,7 +149,7 @@ public final class Plugins implements ConfigurationElement {
 			while (iter.hasNext()) {
 				// gets wrapper
 				WrapperPlugin plugin = iter.next();
-				//checks if the plugin is already loaded into global ones
+				// checks if the plugin is already loaded into global ones
 				if (!globalPluginIds.contains(plugin.getId())) {
 					// if not, adds plugin
 					array.push(plugin.getNativeObject());

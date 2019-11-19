@@ -76,7 +76,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// legend item factory
-	static final LegendItemFactory FACTORY = new LegendItemFactory(); 
+	static final LegendItemFactory FACTORY = new LegendItemFactory();
 	// sub element of legend
 	private final LegendLabels labels;
 	// amount of click handlers
@@ -108,7 +108,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// fires the event
 		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, FACTORY.create(item))));
 	}
-	
+
 	/**
 	 * Creates a legend object wrapping an existing one.
 	 * 
@@ -197,7 +197,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if there is any legend click handler, otherwise <code>false</code>.
 	 * 

@@ -108,12 +108,14 @@ public final class DefaultLegend implements IsDefaultLegend {
 		return DEFAULT_RTL;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getTextDirection()
 	 */
 	@Override
 	public TextDirection getTextDirection() {
 		return TextDirection.LEFT_TO_RIGHT;
-	}	
+	}
 
 }

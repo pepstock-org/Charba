@@ -253,7 +253,7 @@ final class HtmlLegendId {
 	 * @return the legend item which matches with this HTMLlegend id or <code>null</code> if not found
 	 */
 	LegendItem lookForLegendItem(List<LegendLabelItem> legendItems) {
-		// checks if argument is consistent and 
+		// checks if argument is consistent and
 		// then can be scanned
 		if (legendItems != null && !legendItems.isEmpty()) {
 			// scans all legend items

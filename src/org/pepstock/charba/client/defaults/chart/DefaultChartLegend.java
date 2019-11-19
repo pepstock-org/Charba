@@ -114,7 +114,9 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return legend.isRtl();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getTextDirection()
 	 */
 	@Override

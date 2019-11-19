@@ -18,7 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the name of options property to set the callbacks to chart events. 
+ * Enumerates the name of options property to set the callbacks to chart events.
  * 
  * @author Andrea "Stock" Stocchero
  *

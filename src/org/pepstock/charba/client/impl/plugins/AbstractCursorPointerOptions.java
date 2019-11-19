@@ -106,7 +106,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	public final Cursor getCursorPointer() {
-		String name =  getValue(Property.CURSOR_POINTER, getCursorPointerAsString());
+		String name = getValue(Property.CURSOR_POINTER, getCursorPointerAsString());
 		return Cursor.valueOf(name);
 	}
 

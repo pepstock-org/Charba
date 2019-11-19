@@ -26,7 +26,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventHandler> implements IsLegendEvent{
+public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventHandler> implements IsLegendEvent {
 
 	/**
 	 * Event type

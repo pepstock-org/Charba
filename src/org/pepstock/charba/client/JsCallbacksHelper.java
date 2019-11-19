@@ -64,7 +64,8 @@ final class JsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking
+	 * <code>legendCallback</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -73,19 +74,20 @@ final class JsCallbacksHelper {
 	String generateDefaultLegend(Chart chart, ChartOptions options) {
 		return NativeJsCallbacksHelper.generateDefaultLegend(chart, options.getObject());
 	}
-	
+
 	/**
-	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box,
+	 * invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
-	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 * @return an unmodifiable list of legend labels or an empty list if chart is not initialized.
 	 */
 	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
 		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.getObject());
 		return ArrayListHelper.unmodifiableList(array, factory);
 	}
-	
+
 	/**
 	 * Invokes the legend event callbacks, provided out of the box by CHART.JS.
 	 * 
@@ -93,7 +95,7 @@ final class JsCallbacksHelper {
 	 * @param key the key of options which should have the event callback
 	 * @param chart chart instance, used as function context
 	 * @param event native event from user interface
-	 * @param item legend item native  
+	 * @param item legend item native
 	 */
 	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, NativeEvent event, NativeObject item) {
 		// checks if key is consistent
@@ -110,7 +112,7 @@ final class JsCallbacksHelper {
 	 * @param key the key of options which should have the event callback
 	 * @param chart chart instance, used as function context
 	 * @param event native event from user interface
-	 * @param items array of datasets native objects  
+	 * @param items array of datasets native objects
 	 */
 	void invokeDefaultChartEvent(ChartOptions options, Key key, Chart context, NativeEvent event, ArrayObject items) {
 		// checks if key is consistent

@@ -65,7 +65,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 		}
 		return options;
 	}
-	
+
 	/**
 	 * Internal methods to store the legend text callback
 	 * 

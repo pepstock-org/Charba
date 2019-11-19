@@ -24,8 +24,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to add and remove listeners to HTML elements.
+ * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to
+ * add and remove listeners to HTML elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -48,7 +48,7 @@ final class NativeJsHtmlLegendBuilderHelper {
 	 * @param proxy function to add as listener
 	 */
 	static native void addEventListener(String event, Element element, Proxy proxy);
-	
+
 	/**
 	 * Removes a function as listener from the HTML element.
 	 * 

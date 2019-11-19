@@ -43,13 +43,8 @@ public final class DefaultChartOptions extends AbstractDefaultOptions implements
 	 * @param chartOptions chart options instance.
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
-		super(new DefaultChartAnimation(chartOptions.getAnimation()),
-				new DefaultChartHover(chartOptions.getHover()),
-				new DefaultChartElements(chartOptions.getElements()),
-				new DefaultChartLayout(chartOptions.getLayout()),
-				new DefaultChartTitle(chartOptions.getTitle()),
-				new DefaultChartLegend(chartOptions.getLegend()),
-				new DefaultChartTooltips(chartOptions.getTooltips()));
+		super(new DefaultChartAnimation(chartOptions.getAnimation()), new DefaultChartHover(chartOptions.getHover()), new DefaultChartElements(chartOptions.getElements()), new DefaultChartLayout(chartOptions.getLayout()),
+				new DefaultChartTitle(chartOptions.getTitle()), new DefaultChartLegend(chartOptions.getLegend()), new DefaultChartTooltips(chartOptions.getTooltips()));
 		this.chartOptions = chartOptions;
 		// checks if the chart options is related to axes
 		// checks if single scale

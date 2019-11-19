@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class LegendNode extends BaseBoxNodeItem {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */

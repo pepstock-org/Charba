@@ -85,7 +85,7 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 		// and then it enables the plugin
 		return has(pluginIdKey);
 	}
-	
+
 	/**
 	 * Returns if a global plugin is enabled or not, forced directly by global plugin manager
 	 * 

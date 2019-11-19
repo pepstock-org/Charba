@@ -68,7 +68,7 @@ public class MeterOptions extends AbstractPieOptions {
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
-	
+
 	private final LegendWrapper legend;
 
 	/**
@@ -300,7 +300,7 @@ public class MeterOptions extends AbstractPieOptions {
 		 */
 		LegendWrapper(Legend delegated) {
 			super(delegated);
-		}		
+		}
 
 		/*
 		 * (non-Javadoc)

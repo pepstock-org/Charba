@@ -28,28 +28,28 @@ import com.google.gwt.dom.client.NativeEvent;
  *
  */
 public interface IsCommonChartEvent {
-	
+
 	/**
 	 * Returns the java script function context of CHART.JS events.
 	 * 
 	 * @return the java script function context of CHART.JS events.
 	 */
 	Chart getContext();
-	
+
 	/**
 	 * Returns the options key where default function is stored.
 	 * 
 	 * @return the options key where default function is stored
 	 */
 	Key getKey();
-	
+
 	/**
 	 * Returns the chart instance, stored in the event as source.
 	 * 
 	 * @return the chart instance
 	 */
 	IsChart getChart();
-	
+
 	/**
 	 * Returns the native event instance.
 	 * 

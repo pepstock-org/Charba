@@ -25,8 +25,8 @@ import org.pepstock.charba.client.items.DatasetItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsChartEvent extends IsCommonChartEvent{
-	
+public interface IsChartEvent extends IsCommonChartEvent {
+
 	/**
 	 * Returns a list of items with dataset metadata related to the event.
 	 * 

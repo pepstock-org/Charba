@@ -63,8 +63,8 @@ public final class NativeName {
 	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
 
 	/**
-	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of
-	 * Charba), when {@link HtmlLegend} is activated.
+	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>,
+	 * (internal of Charba), when {@link HtmlLegend} is activated.
 	 */
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 

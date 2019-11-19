@@ -43,7 +43,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
 
 	private static final boolean DEFAULT_STEPPED = false;
-	
+
 	/**
 	 * Creates a defualt arc
 	 */

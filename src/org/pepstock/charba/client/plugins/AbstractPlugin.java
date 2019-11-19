@@ -50,8 +50,10 @@ public abstract class AbstractPlugin implements Plugin {
 	@Override
 	public void onBeforeInit(IsChart chart) {
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
 	 */
 	@Override

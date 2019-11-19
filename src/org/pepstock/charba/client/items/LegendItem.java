@@ -187,21 +187,21 @@ public class LegendItem extends NativeObjectContainer {
 	public final CanvasGradient getFillStyleAsCanvasGradient() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasGradient()) {
-			return getValue(Property.FILL_STYLE, (CanvasGradient)null);
+			return getValue(Property.FILL_STYLE, (CanvasGradient) null);
 		}
 		// if here, is not a color then returns null
 		return null;
 	}
 
 	/**
-	 * Returns the fill style of the legend box  as canvas pattern.
+	 * Returns the fill style of the legend box as canvas pattern.
 	 * 
 	 * @return the fill style of the legend box or <code>null</code> if is not a canvas pattern
 	 */
 	public final CanvasPattern getFillStyleAsCanvasPattern() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasPattern()) {
-			return getValue(Property.FILL_STYLE, (CanvasPattern)null);
+			return getValue(Property.FILL_STYLE, (CanvasPattern) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -256,26 +256,26 @@ public class LegendItem extends NativeObjectContainer {
 	public final CanvasGradient getStrokeStyleAsCanvasGradient() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasGradient()) {
-			return getValue(Property.STROKE_STYLE, (CanvasGradient)null);
+			return getValue(Property.STROKE_STYLE, (CanvasGradient) null);
 		}
 		// if here, is not a color then returns null
 		return null;
 	}
 
 	/**
-	 * Returns the stroke style of the legend box  as pattern.
+	 * Returns the stroke style of the legend box as pattern.
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
 	 */
 	public final CanvasPattern getStrokeStyleAsCanvasPattern() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasPattern()) {
-			return getValue(Property.STROKE_STYLE, (CanvasPattern)null);
+			return getValue(Property.STROKE_STYLE, (CanvasPattern) null);
 		}
 		// if here, is not a color then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
@@ -379,7 +379,7 @@ public class LegendItem extends NativeObjectContainer {
 			return UndefinedValues.IMAGE_ELEMENT;
 		}
 	}
-	
+
 	/**
 	 * Inner class to create legend item by a native object.
 	 * 

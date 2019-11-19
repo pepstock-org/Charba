@@ -512,19 +512,19 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 		}
 	}
-	
+
 	/**
 	 * Scans recursively the element to get a parent DOM element which has got TD as tag name.
 	 * 
 	 * @param child child element to check
-	 * @return the parent element with TD tag name or <code>null</code> if not found. 
+	 * @return the parent element with TD tag name or <code>null</code> if not found.
 	 */
 	private Element checkParent(Element child) {
 		if (child.hasParentElement()) {
 			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
 				return child.getParentElement();
 			} else {
-				return checkParent(child.getParentElement());		
+				return checkParent(child.getParentElement());
 			}
 		}
 		return null;

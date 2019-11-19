@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
-	
+
 	// legend text callback instance
 	private LegendTextCallback legendTextCallback = null;
 
@@ -46,7 +46,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	HtmlLegendDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the chart id in order to retrieve the legend text callback for the options.
 	 * 
@@ -55,7 +55,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	int getCharbaId() {
 		return getValue(HtmlLegendOptions.Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the maximum amount of columns of legend.
 	 * 
@@ -73,7 +73,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	String getCursorPointerAsString() {
 		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, HtmlLegendOptions.DEFAULT_CURSOR_POINTER.name());
 	}
-	
+
 	/**
 	 * Sets the callback which can be implemented to change the text of legend for a specific item, as HTML.
 	 * 
@@ -82,7 +82,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	void setLegendTextCallback(LegendTextCallback legendTextCallback) {
 		this.legendTextCallback = legendTextCallback;
 	}
-	
+
 	/**
 	 * Returns the callback which can be implemented to change the text of legend for a specific item, as HTML.
 	 * 

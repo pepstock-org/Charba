@@ -74,12 +74,12 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
 			// right - the x coordinate of the ending point of the widget
 			// bottom - the y coordinate of the ending point of the widget
 			area.setRight(abstractChart.getOffsetWidth());
 			area.setBottom(abstractChart.getOffsetHeight());
-		} else if (IsChart.isValid(chart)){
+		} else if (IsChart.isValid(chart)) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// right - the x coordinate of the ending point of the canvas
@@ -107,11 +107,11 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
 			// these are the coordinates of center of widget
 			center.setX(abstractChart.getOffsetWidth() / 2D);
 			center.setY(abstractChart.getOffsetHeight() / 2D);
-		} else if (IsChart.isValid(chart)){
+		} else if (IsChart.isValid(chart)) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// these are the coordinates of center of canvas
@@ -135,10 +135,10 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>)chart;
+			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
 			// radius - if max value between width and height, divided by 2
 			radius.setOuter(Math.max(abstractChart.getOffsetWidth(), abstractChart.getOffsetHeight()) / 2D);
-		} else if (IsChart.isValid(chart)){
+		} else if (IsChart.isValid(chart)) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// radius - if max value between width and height, divided by 2

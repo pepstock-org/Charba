@@ -75,7 +75,7 @@ abstract class AbstractDefaultPadding implements IsDefaultPadding {
 	public int getBottom() {
 		return getDefaultPadding();
 	}
-	
+
 	/**
 	 * Returns the default padding for all other methods
 	 * 

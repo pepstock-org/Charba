@@ -93,7 +93,7 @@ public final class ChartOptions extends ScaledOptions {
 		// if here, the chart is not single scale therefore exception
 		throw new UnsupportedOperationException("The options is not referring to a single scaled chart!");
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

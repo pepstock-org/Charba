@@ -69,7 +69,7 @@ final class JsHtmlLegendBuilderHelper {
 			NativeJsHtmlLegendBuilderHelper.addEventListener(event.value(), element, proxy);
 		}
 	}
-	
+
 	/**
 	 * Removes a function as listener from the HTML element.
 	 * 

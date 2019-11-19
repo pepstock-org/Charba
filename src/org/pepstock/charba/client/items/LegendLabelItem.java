@@ -135,8 +135,8 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}.
-	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by
+	 * CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
 	 */
@@ -221,7 +221,7 @@ public final class LegendLabelItem extends LegendItem {
 			remove(LegendItem.Property.FILL_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns the fill style of the legend box as pattern.
 	 * 
@@ -230,7 +230,6 @@ public final class LegendLabelItem extends LegendItem {
 	public Pattern getFillStyleAsPattern() {
 		return fillStylePattern;
 	}
-
 
 	/**
 	 * Sets the fill style of the legend box as canvas gradient.
@@ -254,7 +253,7 @@ public final class LegendLabelItem extends LegendItem {
 		this.fillStylePattern = null;
 		// checks if pattern is consistent
 		if (gradient != null) {
-			// calculated the maximum values 
+			// calculated the maximum values
 			// to oavoid undefined values
 			int datasetIndex = Math.max(0, getDatasetIndex());
 			int index = Math.max(0, getIndex());
@@ -265,7 +264,7 @@ public final class LegendLabelItem extends LegendItem {
 			remove(LegendItem.Property.FILL_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns the fill style of the legend box as gradient.
 	 * 
@@ -370,7 +369,7 @@ public final class LegendLabelItem extends LegendItem {
 	public void setStrokeStyle(CanvasPattern pattern) {
 		setValue(LegendItem.Property.STROKE_STYLE, pattern);
 	}
-	
+
 	/**
 	 * Sets the stroke style of the legend box as pattern.
 	 * 
@@ -397,7 +396,7 @@ public final class LegendLabelItem extends LegendItem {
 			remove(LegendItem.Property.STROKE_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns the stroke style of the legend box as pattern.
 	 * 
@@ -429,7 +428,7 @@ public final class LegendLabelItem extends LegendItem {
 		this.strokeStylePattern = null;
 		// checks if pattern is consistent
 		if (gradient != null) {
-			// calculated the maximum values 
+			// calculated the maximum values
 			// to oavoid undefined values
 			int datasetIndex = Math.max(0, getDatasetIndex());
 			int index = Math.max(0, getIndex());
@@ -440,7 +439,7 @@ public final class LegendLabelItem extends LegendItem {
 			remove(LegendItem.Property.STROKE_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns the stroke style of the legend box as gradient.
 	 * 
