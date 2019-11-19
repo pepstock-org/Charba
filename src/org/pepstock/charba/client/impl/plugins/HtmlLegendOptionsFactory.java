@@ -24,11 +24,11 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to {@link HtmlLegendBuilder#ID} plugin.
+ * Factory to get the options (form chart or from default global ones) related to {@link HtmlLegend#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HtmlLegendBuilderOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendBuilderOptions> {
+public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendOptions> {
 
 	// maps with all legend text callback for chart
 	private static final Map<Integer, LegendTextCallback> LEGEND_TEXT_CALLBACKS = new HashMap<>();
@@ -36,11 +36,11 @@ public final class HtmlLegendBuilderOptionsFactory extends AbstractPluginOptions
 	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link HtmlLegendBuilder#FACTORY}.
+	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
 	 * 
 	 * @param plugin id
 	 */
-	HtmlLegendBuilderOptionsFactory(String pluginId) {
+	HtmlLegendOptionsFactory(String pluginId) {
 		super(pluginId);
 	}
 
@@ -51,11 +51,11 @@ public final class HtmlLegendBuilderOptionsFactory extends AbstractPluginOptions
 	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 	 */
 	@Override
-	public HtmlLegendBuilderOptions create(NativeObject nativeObject) {
+	public HtmlLegendOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		HtmlLegendBuilderDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// creates the options by the native object and the defaults
-		HtmlLegendBuilderOptions options = new HtmlLegendBuilderOptions(nativeObject, defaultsOptions);
+		HtmlLegendOptions options = new HtmlLegendOptions(nativeObject, defaultsOptions);
 		// gets charba id
 		int charbaId = options.getCharbaId();
 		// checks if there is any callback
@@ -87,7 +87,7 @@ public final class HtmlLegendBuilderOptionsFactory extends AbstractPluginOptions
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class HtmlLegendBuilderDefaultsOptionsFactory implements NativeObjectContainerFactory<HtmlLegendBuilderDefaultsOptions> {
+	static class HtmlLegendBuilderDefaultsOptionsFactory implements NativeObjectContainerFactory<HtmlLegendDefaultsOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -96,9 +96,9 @@ public final class HtmlLegendBuilderOptionsFactory extends AbstractPluginOptions
 		 * NativeObject)
 		 */
 		@Override
-		public HtmlLegendBuilderDefaultsOptions create(NativeObject nativeObject) {
+		public HtmlLegendDefaultsOptions create(NativeObject nativeObject) {
 			// creates the default global option by native object
-			HtmlLegendBuilderDefaultsOptions options = new HtmlLegendBuilderDefaultsOptions(nativeObject);
+			HtmlLegendDefaultsOptions options = new HtmlLegendDefaultsOptions(nativeObject);
 			// gets charba id
 			int charbaId = options.getCharbaId();
 			// checks if there is any callback

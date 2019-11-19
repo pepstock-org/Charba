@@ -21,12 +21,12 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Configuration options of {@link HtmlLegendBuilder#ID} plugin. This is mapping the configuration set into default global, used as
+ * Configuration options of {@link HtmlLegend#ID} plugin. This is mapping the configuration set into default global, used as
  * default of the chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class HtmlLegendBuilderDefaultsOptions extends NativeObjectContainer {
+final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	
 	private static final int DEFAULT_MAXIMUM_LEGEND_COLUMNS = Integer.MAX_VALUE;
 	
@@ -36,7 +36,7 @@ final class HtmlLegendBuilderDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Builds the object with an empty java script object and uses the constants as default.
 	 */
-	HtmlLegendBuilderDefaultsOptions() {
+	HtmlLegendDefaultsOptions() {
 		super();
 	}
 
@@ -45,7 +45,7 @@ final class HtmlLegendBuilderDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object into options
 	 */
-	HtmlLegendBuilderDefaultsOptions(NativeObject nativeObject) {
+	HtmlLegendDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 	
@@ -55,7 +55,7 @@ final class HtmlLegendBuilderDefaultsOptions extends NativeObjectContainer {
 	 * @return identifier of the options or {@link UndefinedValues#INTEGER} if does not exist
 	 */
 	int getCharbaId() {
-		return getValue(HtmlLegendBuilderOptions.Property.CHARBA_ID, UndefinedValues.INTEGER);
+		return getValue(HtmlLegendOptions.Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ final class HtmlLegendBuilderDefaultsOptions extends NativeObjectContainer {
 	 * @return he maximum amount of columns of legend
 	 */
 	int getMaximumLegendColumns() {
-		return getValue(HtmlLegendBuilderOptions.Property.MAXIMUM_LEGEND_COLUMNS, DEFAULT_MAXIMUM_LEGEND_COLUMNS);
+		return getValue(HtmlLegendOptions.Property.MAXIMUM_LEGEND_COLUMNS, DEFAULT_MAXIMUM_LEGEND_COLUMNS);
 	}
 
 	/**

@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.callbacks.LegendTextCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.HtmlLegendBuilderOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
+import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.dom.client.Style.Cursor;
@@ -31,7 +31,7 @@ import com.google.gwt.dom.client.Style.Cursor;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HtmlLegendBuilderOptions extends AbstractCursorPointerOptions {
+public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 
 	/**
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
@@ -40,7 +40,7 @@ public final class HtmlLegendBuilderOptions extends AbstractCursorPointerOptions
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
-	private HtmlLegendBuilderDefaultsOptions defaultsOptions;
+	private HtmlLegendDefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
 	// legend text callback instance
@@ -82,9 +82,9 @@ public final class HtmlLegendBuilderOptions extends AbstractCursorPointerOptions
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.
 	 */
-	public HtmlLegendBuilderOptions() {
+	public HtmlLegendOptions() {
 		// creates an empty object
-		super(HtmlLegendBuilder.ID);
+		super(HtmlLegend.ID);
 		// reads the default default global options
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// stores the id based on a counter
@@ -97,8 +97,8 @@ public final class HtmlLegendBuilderOptions extends AbstractCursorPointerOptions
 	 * @param nativeObject native object into options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	HtmlLegendBuilderOptions(NativeObject nativeObject, HtmlLegendBuilderDefaultsOptions defaultsOptions) {
-		super(HtmlLegendBuilder.ID, nativeObject);
+	HtmlLegendOptions(NativeObject nativeObject, HtmlLegendDefaultsOptions defaultsOptions) {
+		super(HtmlLegend.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}
 
@@ -138,7 +138,7 @@ public final class HtmlLegendBuilderOptions extends AbstractCursorPointerOptions
 	public void setLegendTextCallback(LegendTextCallback legendTextCallback) {
 		internalSetLegendTextCallback(legendTextCallback);
 		// stores legend callback into fatory as cache
-		HtmlLegendBuilder.FACTORY.store(getCharbaId(), legendTextCallback);
+		HtmlLegend.FACTORY.store(getCharbaId(), legendTextCallback);
 	}
 
 	/**

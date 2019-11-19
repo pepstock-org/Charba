@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.impl.plugins.HtmlLegendBuilder;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 
 /**
  * Constants with java script object name to use into {@link jsinterop.annotations.JsType} native objects.
@@ -64,7 +64,7 @@ public final class NativeName {
 
 	/**
 	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of
-	 * Charba), when {@link HtmlLegendBuilder} is activated.
+	 * Charba), when {@link HtmlLegend} is activated.
 	 */
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 

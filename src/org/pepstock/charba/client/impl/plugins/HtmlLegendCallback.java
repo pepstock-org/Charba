@@ -49,7 +49,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
  * Legend callback implementation to override the standard HTML format of CHART.JS legend.<br>
- * This HTML is usable only by {@link HtmlLegendBuilder} plugin.<br< This is HTML structure of the legend:<br>
+ * This HTML is usable only by {@link HtmlLegend} plugin.<br< This is HTML structure of the legend:<br>
  * <br>
  * <code>
  * <TABLE>
@@ -135,7 +135,7 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @return the table element instance with the complete legend
 	 */
 	private TableElement buildLegend(IsChart chart) {
-		HtmlLegendBuilderOptions options = HtmlLegendBuilder.OPTIONS.get(chart.getId());
+		HtmlLegendOptions options = HtmlLegend.OPTIONS.get(chart.getId());
 		// gets max columns for legend
 		int maxColumns = options.getMaximumLegendColumns();
 		// gets legend
@@ -216,7 +216,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			legendItems = defaultLegendItems;
 		}
 		// stores the legend items 
-		HtmlLegendBuilder.LEGEND_LABELS.put(chart.getId(), legendItems);
+		HtmlLegend.LEGEND_LABELS.put(chart.getId(), legendItems);
 		// checks if there is a filter legend callback
 		if (legendLabels.getFilterCallback() != null) {
 			// if here, the filter callback is invoked

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.impl.plugins.HtmlLegendBuilder;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -104,7 +104,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Sets the label that will be displayed, as HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @param text the label that will be displayed, as HTML
 	 */
@@ -125,7 +125,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Returns <code>true</code> if the text of legend item is HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return <code>true</code> if the text of legend item is HTML
 	 */
@@ -136,7 +136,7 @@ public final class LegendLabelItem extends LegendItem {
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
 	 * If is not HTML, returns {@link UndefinedValues#STRING}.
-	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
 	 */
@@ -160,7 +160,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Sets <code>true</code> if the text of legend item is HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegendBuilder} plugin and not by CHART.js.
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @param htmlText <code>true</code> if the text of legend item is HTML
 	 */

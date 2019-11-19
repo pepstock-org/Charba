@@ -58,7 +58,7 @@ import jsinterop.annotations.JsFunction;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HtmlLegendBuilder extends AbstractPlugin {
+public final class HtmlLegend extends AbstractPlugin {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -95,15 +95,15 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
-	public static final String ID = "charbahtmllegendbuilder";
+	public static final String ID = "charbahtmllegend";
 	/**
 	 * The factory to create options for plugin.
 	 */
-	public static final HtmlLegendBuilderOptionsFactory FACTORY = new HtmlLegendBuilderOptionsFactory(ID);
+	public static final HtmlLegendOptionsFactory FACTORY = new HtmlLegendOptionsFactory(ID);
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
 	// cache to store options in order do not load every time the options
-	static final Map<String, HtmlLegendBuilderOptions> OPTIONS = new HashMap<>();
+	static final Map<String, HtmlLegendOptions> OPTIONS = new HashMap<>();
 	// cache to store options in order do not load every time the options
 	static final Map<String, List<LegendLabelItem>> LEGEND_LABELS = new HashMap<>();
 	// cache to store DIV element which contains legend for each chart
@@ -120,7 +120,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	/**
 	 * Creates a plugin instance.
 	 */
-	public HtmlLegendBuilder() {
+	public HtmlLegend() {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -164,14 +164,14 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 				// sets easing to zero
 				EASINGS.put(chart.getId(), 0D);
 				// creates options instance
-				HtmlLegendBuilderOptions pOptions = null;
+				HtmlLegendOptions pOptions = null;
 				// if not, loads and cache
 				// creates the plugin options using the java script object
 				// passing also the default color set at constructor.
 				if (chart.getOptions().getPlugins().hasOptions(ID)) {
 					pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 				} else {
-					pOptions = new HtmlLegendBuilderOptions();
+					pOptions = new HtmlLegendOptions();
 				}
 				OPTIONS.put(chart.getId(), pOptions);
 				pOptions.setCurrentCursor(chart.getInitialCursor());
@@ -303,9 +303,9 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// removes the chart from easing status
 			EASINGS.remove(chart.getId());
 			// removes the chart from options
-			HtmlLegendBuilderOptions oldOptions = OPTIONS.remove(chart.getId());
+			HtmlLegendOptions oldOptions = OPTIONS.remove(chart.getId());
 			// scans all options to see if the options is used in another chart
-			for (HtmlLegendBuilderOptions options : OPTIONS.values()) {
+			for (HtmlLegendOptions options : OPTIONS.values()) {
 				// checks if the option si s equals to old one
 				if (options.getCharbaId() == oldOptions.getCharbaId()) {
 					return;
@@ -628,7 +628,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// gets legend element
 			DivElement legendElement = DIV_ELEMENTS.get(chart.getId());
 			// get options
-			HtmlLegendBuilderOptions options = OPTIONS.get(chart.getId());
+			HtmlLegendOptions options = OPTIONS.get(chart.getId());
 			// sets cursor
 			legendElement.getStyle().setCursor(setPointer ? options.getCursorPointer() : options.getCurrentCursor());
 		}
