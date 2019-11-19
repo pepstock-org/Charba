@@ -181,11 +181,8 @@ public final class ScriptableUtils {
 			} else if (result instanceof Gradient) {
 				// is gradient instance
 				// checks if chart is initialized
-				if (chart != null && chart.isInitialized()) {
-					Gradient gradient = (Gradient) result;
-					return DatasetCanvasObjectFactory.get().createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-				}
-				// otherwise returns default
+				Gradient gradient = (Gradient) result;
+				return DatasetCanvasObjectFactory.get().createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
 			} else if (result instanceof CanvasGradient) {
 				// is canvas gradient instance
 				return result;
