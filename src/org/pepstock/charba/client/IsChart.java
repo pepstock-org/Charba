@@ -44,6 +44,41 @@ public interface IsChart extends HasHandlers {
 
 	/**
 	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
+	 * well, and if mandatory methods of interface will return consistent instances.
+	 * 
+	 * @param chart chart to be checked
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
+	 *         well, and if mandatory methods of interface will return consistent instances.
+	 */
+	static boolean isConsistent(IsChart chart) {
+		// checks if chart is consistent
+		if (isValid(chart)) {
+			// here checks all mandatory methods of interface to check
+			// if results are consistent
+			return chart.getElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
+					&& chart.getDefaultChartOptions() != null;
+		}
+		return false;
+	}
+
+	/**
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory
+	 * methods of interface will return consistent instances.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param chart chart to be checked
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
+	 *         well, and if mandatory methods of interface will return consistent instances.
+	 */
+	static void checkIfConsistent(IsChart chart) {
+		// checks if chart is consistent
+		if (!isConsistent(chart)) {
+			throw new IllegalArgumentException("Chart implementation instance is not consistent");
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
 	 * well.
 	 * 
 	 * @param chart chart to be checked
@@ -55,8 +90,8 @@ public interface IsChart extends HasHandlers {
 	}
 
 	/**
-	 * Checks if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well. If not, throw a
-	 * {@link IllegalArgumentException}.
+	 * Checks if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
 	 */
@@ -77,7 +112,8 @@ public interface IsChart extends HasHandlers {
 	}
 
 	/**
-	 * Checks if chart passed as argument is an abstract chart instance. If not, throw a {@link IllegalArgumentException}.
+	 * Checks if chart passed as argument is an abstract chart instance.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
 	 */
