@@ -29,6 +29,7 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.Legend;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -151,9 +152,10 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart)) {
 			// if the legend is set do not display
+			// or the ootb legend plugin has been disable
 			// it respects it then ignore it and the plugin in
 			// will be disable
-			if (chart.getOptions().getLegend().isDisplay()) {
+			if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
 				// disable legend
 				chart.getOptions().getLegend().setDisplay(false);
 				// sets legend callback
