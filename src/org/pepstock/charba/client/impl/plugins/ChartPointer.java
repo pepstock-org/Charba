@@ -91,29 +91,27 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
 		// checks if chart is consistent
-		if (IsChart.isAbstractChart(chart)) {
-			// checks if chart has got any dataset selection handler
-			if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
-				// gets options instance
-				ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
-				// gets the scope
-				List<PointerElement> scope = pOptions.getElements();
-				// DATASET SELECTION
-				if (hasDatasetSelection(chart, event, scope)) {
-					chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (hasTitleSelection(chart, event, scope)) {
-					// TITLE SELECTION
-					chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (hasScaleSelection(chart, event, scope)) {
-					// AXIS SELECTION
-					chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (hasLegendSelection(chart, event, scope)) {
-					// LEGEND SELECTION
-					chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else {
-					// if null, sets the default cursor
-					chart.getElement().getStyle().setCursor(chart.getInitialCursor());
-				}
+		// checks if chart has got any dataset selection handler
+		if (IsChart.isAbstractChart(chart) && (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers())) {
+			// gets options instance
+			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
+			// gets the scope
+			List<PointerElement> scope = pOptions.getElements();
+			// DATASET SELECTION
+			if (hasDatasetSelection(chart, event, scope)) {
+				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else if (hasTitleSelection(chart, event, scope)) {
+				// TITLE SELECTION
+				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else if (hasScaleSelection(chart, event, scope)) {
+				// AXIS SELECTION
+				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else if (hasLegendSelection(chart, event, scope)) {
+				// LEGEND SELECTION
+				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else {
+				// if null, sets the default cursor
+				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
 			}
 		}
 	}
@@ -149,7 +147,7 @@ public final class ChartPointer extends AbstractPlugin {
 		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.TITLE.value());
 		// checks if there is any title click handler and title is in scope
 		// and the cursor is over the title element
-		return isTitleEnabled && chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) &&  chart.getNode().getTitle().isInside(event);
+		return isTitleEnabled && chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event);
 	}
 
 	/**

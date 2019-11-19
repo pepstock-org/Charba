@@ -84,7 +84,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (IsChart.isValid(chart)) {
+		if (IsChart.isValid(chart) && callback != null) {
 			// calls callback
 			T result = callback.invoke(chart, context);
 			// checks result
@@ -122,7 +122,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (IsChart.isValid(chart)) {
+		if (IsChart.isValid(chart) && callback != null) {
 			// calls callback
 			T result = callback.invoke(chart, context);
 			// checks if consistent
@@ -163,7 +163,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (IsChart.isValid(chart)) {
+		if (IsChart.isValid(chart) && callback != null) {
 			// calls callback
 			Object result = callback.invoke(chart, context);
 			// checks result
@@ -181,7 +181,7 @@ public final class ScriptableUtils {
 			} else if (result instanceof Gradient) {
 				// is gradient instance
 				// checks if chart is initialized
-				if (chart.isInitialized()) {
+				if (chart != null && chart.isInitialized()) {
 					Gradient gradient = (Gradient) result;
 					return DatasetCanvasObjectFactory.get().createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
 				}
