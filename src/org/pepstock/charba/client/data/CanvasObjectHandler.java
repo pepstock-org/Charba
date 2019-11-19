@@ -33,7 +33,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 final class CanvasObjectHandler extends AbstractPlugin {
 
 	// plugin ID
-	static final String ID = "canvasobjecthandler";
+	static final String ID = "charbacanvasobjecthandler";
 	// maintains the data object of chart status
 	private String dataToJson = null;
 

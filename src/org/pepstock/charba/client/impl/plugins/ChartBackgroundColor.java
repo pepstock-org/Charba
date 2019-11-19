@@ -45,7 +45,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
-	public static final String ID = "backgroundcolor";
+	public static final String ID = "charbabackgroundcolor";
 	/**
 	 * The factory to create options
 	 */

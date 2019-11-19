@@ -94,13 +94,13 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
-	public static final String ID = "htmllegendbuilder";
+	public static final String ID = "charbahtmllegendbuilder";
 	/**
 	 * The factory to create options for plugin.
 	 */
 	public static final HtmlLegendBuilderOptionsFactory FACTORY = new HtmlLegendBuilderOptionsFactory(ID);
 	// suffix label for main HTML legend element id
-	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_lenged";
+	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
 	// cache to store options in order do not load every time the options
 	static final Map<String, HtmlLegendBuilderOptions> OPTIONS = new HashMap<>();
 	// cache to store options in order do not load every time the options

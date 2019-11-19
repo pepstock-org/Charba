@@ -18,9 +18,11 @@ package org.pepstock.charba.client.plugins;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 
@@ -38,6 +40,7 @@ public final class Plugins implements ConfigurationElement {
 
 	/**
 	 * Adds a new plugin to the chart.<br>
+	 * If another plugin instance with the same id has been already loaded, it will remove, storing the new one.<br>
 	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param plugin plugin instance
@@ -47,6 +50,12 @@ public final class Plugins implements ConfigurationElement {
 		if (plugin != null) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
+			//checks if the plugin is already loaded
+			if (has(plugin.getId())) {
+				// if here is already loaded
+				// then it removes the previous one
+				remove(plugin.getId());
+			}
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 			// stores the wrapper into a list
@@ -67,7 +76,7 @@ public final class Plugins implements ConfigurationElement {
 			// gets wrapper
 			WrapperPlugin plugin = iter.next();
 			// if has got the same id
-			if (plugin.getId().equals(id)) {
+			if (plugin.getId().equalsIgnoreCase(id)) {
 				// removes it
 				return true;
 			}
@@ -88,7 +97,7 @@ public final class Plugins implements ConfigurationElement {
 			// gets wrapper
 			WrapperPlugin plugin = iter.next();
 			// if has got the same id
-			if (plugin.getId().equals(id)) {
+			if (plugin.getId().equalsIgnoreCase(id)) {
 				// removes it
 				iter.remove();
 			}
@@ -129,14 +138,31 @@ public final class Plugins implements ConfigurationElement {
 		}
 		// checks if there is any plugin to configured to chart.js
 		if (!pluginsInstances.isEmpty()) {
+			// gets the globals plugin IDs
+			// checks if ID is already registered
+			Set<String> globalPluginIds = Defaults.get().getPlugins().getIds();
 			// new array
 			ArrayPlugin array = new ArrayPlugin();
 			// adds all java script object of the plugin wrapper
-			for (WrapperPlugin plugin : pluginsInstances) {
-				array.push(plugin.getNativeObject());
+			// scans all plugins
+			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
+			while (iter.hasNext()) {
+				// gets wrapper
+				WrapperPlugin plugin = iter.next();
+				//checks if the plugin is already loaded into global ones
+				if (!globalPluginIds.contains(plugin.getId())) {
+					// if not, adds plugin
+					array.push(plugin.getNativeObject());
+				} else {
+					// removes it if already set into global
+					iter.remove();
+				}
 			}
-			// sets it to configuration object
-			configuration.setPlugins(array);
+			// checks if array is empyt
+			if (!array.isEmpty()) {
+				// sets it to configuration object
+				configuration.setPlugins(array);
+			}
 		}
 	}
 

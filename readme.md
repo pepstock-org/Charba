@@ -149,6 +149,10 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add `AbstractCursorPointerOptions` class as options for plugins in order to have a unique options to extend when plugins need to interact with cursor of an element.
   * add `getBaseType` to `IsChart` interface in order to get the base chart type which if is a `ControllerType` is the chart type extension or chart type itself.
   * add checking into `ControllerType` do not override existing chart types by its name.
+  * add checking when a plugin has been added:
+     * if plugin id is already loaded in the chart, it overrides the current one
+     * if plugin id is already loaded in the default global plugins, it will be removed from chart instance 
+  * add `charba` prefix to all plugins provided out of the box by **Charba**   
 
 License
 -------

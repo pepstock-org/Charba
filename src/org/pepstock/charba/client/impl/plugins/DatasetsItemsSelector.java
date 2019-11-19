@@ -49,7 +49,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
-	public static final String ID = "datasetsitemsselector";
+	public static final String ID = "charbadatasetsitemsselector";
 	/**
 	 * The factory to read options for plugin
 	 */

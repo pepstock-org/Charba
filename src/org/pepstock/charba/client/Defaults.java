@@ -55,7 +55,7 @@ public final class Defaults {
 	/**
 	 * Plugin ID <b>{@value ID}</b>, for an internal plugin to track native chart instances.
 	 */
-	public static final String ID = "nativecharthandler";
+	public static final String ID = "charbanativecharthandler";
 	// native defaults java script object
 	private final WrapperDefaults wrapperDefaults;
 	// global options

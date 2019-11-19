@@ -38,7 +38,7 @@ public final class ChartPointer extends AbstractPlugin {
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
-	public static final String ID = "cursorpointer";
+	public static final String ID = "charbacursorpointer";
 	/**
 	 * The factory to create options for plugin.
 	 */
