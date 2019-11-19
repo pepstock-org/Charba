@@ -205,16 +205,14 @@ public final class Defaults {
 	/**
 	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
 	 * 
-	 * @param isChart chart instance to use to get default HTML legend
+	 * @param chart chart instance to use to get default HTML legend
 	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
 	 */
-	public String generateLegend(IsChart isChart) {
+	public String generateLegend(IsChart chart) {
 		// checks if argument is consistent
-		if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
-			// cast to abstract chart to get element of GWT object
-			AbstractChart<?> chart = (AbstractChart<?>) isChart;
+		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLegend(chart.getNativeObject(), chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLegend(Charts.getNative(chart), chart.getDefaultChartOptions());
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -224,16 +222,14 @@ public final class Defaults {
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
 	 * 
-	 * @param isChart chart instance to use to get legend labels
+	 * @param chart chart instance to use to get legend labels
 	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
 	 */
-	public List<LegendLabelItem> generateLabels(Chart isChart) {
+	public List<LegendLabelItem> generateLabels(Chart chart) {
 		// checks if argument is consistent
-		if (isChart != null && isChart.getChart() instanceof AbstractChart<?>) {
-			// cast to abstract chart to get element of GWT object
-			AbstractChart<?> chart = (AbstractChart<?>) isChart.getChart();
+		if (chart != null && IsChart.isValid(chart.getChart())) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(isChart, chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLabels(chart, chart.getChart().getDefaultChartOptions());
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -243,16 +239,14 @@ public final class Defaults {
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
 	 * 
-	 * @param isChart chart instance to use to get legend labels
+	 * @param chart chart instance to use to get legend labels
 	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
 	 */
-	public List<LegendLabelItem> generateLabels(IsChart isChart) {
+	public List<LegendLabelItem> generateLabels(IsChart chart) {
 		// checks if argument is consistent
-		if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
-			// cast to abstract chart to get element of GWT object
-			AbstractChart<?> chart = (AbstractChart<?>) isChart;
+		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(chart.getNativeObject(), chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLabels(Charts.getNative(chart), chart.getDefaultChartOptions());
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -286,11 +280,9 @@ public final class Defaults {
 		// checks if event is consistent
 		if (event != null) {
 			// gets chart
-			IsChart isChart = event.getChart();
+			IsChart chart = event.getChart();
 			// checks if argument is consistent
-			if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
-				// cast to abstract chart to get element of GWT object
-				AbstractChart<?> chart = (AbstractChart<?>) isChart;
+			if (IsChart.isValid(chart) && chart.isInitialized()) {
 				// gets array object
 				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
 				// invokes the onclick legend out of the box
@@ -335,11 +327,9 @@ public final class Defaults {
 		// checks if event is consistent
 		if (event != null) {
 			// gets chart
-			IsChart isChart = event.getChart() instanceof AbstractChart<?> ? event.getChart() : event.getContext().getChart() ;
+			IsChart chart = IsChart.isValid(event.getChart()) ? event.getChart() : event.getContext().getChart() ;
 			// checks if argument is consistent
-			if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
-				// cast to abstract chart to get element of GWT object
-				AbstractChart<?> chart = (AbstractChart<?>) isChart;
+			if (IsChart.isValid(chart) && chart.isInitialized()) {
 				// creates a wrapper
 				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
 				// invokes the onclick legend out of the box

@@ -188,7 +188,7 @@ public final class GlobalPlugins {
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
 		// checks if config and chart are consistent
-		if (config == null || chart == null) {
+		if (config == null || !IsChart.isValid(chart)) {
 			// otherwise do nothing
 			return;
 		}

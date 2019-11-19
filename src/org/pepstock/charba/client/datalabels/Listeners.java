@@ -160,7 +160,7 @@ public final class Listeners extends NativeObjectContainer {
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
 		// checks if the handler is set
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls handler
 			return clickEventHandler.onClick(chart, context);
 		}
@@ -178,7 +178,7 @@ public final class Listeners extends NativeObjectContainer {
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
 		// checks if the handler is set
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls handler
 			return enterEventHandler.onEnter(chart, context);
 		}
@@ -196,7 +196,7 @@ public final class Listeners extends NativeObjectContainer {
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
 		// checks if the handler is set
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls handler
 			return leaveEventHandler.onLeave(chart, context);
 		}

@@ -62,7 +62,7 @@ final class ChartHandlerManager extends HandlerManager {
 			fireEvent(new AddHandlerEvent(type));
 		}
 		// checks if is chart is a abstract chart instance
-		if (chart instanceof AbstractChart<?>) {
+		if (IsChart.isAbstractChart(chart)) {
 			// cast to abstract chart to get the method
 			AbstractChart<?> chartInstance = (AbstractChart<?>) chart;
 			// stores the registration into chart

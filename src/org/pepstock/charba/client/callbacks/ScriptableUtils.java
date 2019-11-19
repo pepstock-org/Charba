@@ -84,7 +84,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
 			T result = callback.invoke(chart, context);
 			// checks result
@@ -122,7 +122,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
 			T result = callback.invoke(chart, context);
 			// checks if consistent
@@ -163,7 +163,7 @@ public final class ScriptableUtils {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
 			Object result = callback.invoke(chart, context);
 			// checks result

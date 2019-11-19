@@ -184,7 +184,7 @@ final class HtmlLegendId {
 	 * @return an HTML legend id instance
 	 */
 	static HtmlLegendId get(IsChart chart, LegendItem item) {
-		return get(chart == null ? null : chart.getId(), item.getDatasetIndex(), item.getIndex());
+		return get(IsChart.isValid(chart) ? chart.getId() : null, item.getDatasetIndex(), item.getIndex());
 	}
 
 	/**

@@ -1508,7 +1508,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 		// checks if the handler is set
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
 			String result = formatterCallback.invoke(chart, value, context);
 			// checks result

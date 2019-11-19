@@ -762,7 +762,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// gets chart instance
 		IsChart chart = item.getNativeChart().getChart();
 		// checks if the callback is set
-		if (chart != null && renderCallback != null) {
+		if (IsChart.isValid(chart) && renderCallback != null) {
 			// calls callback
 			Object value = renderCallback.invoke(chart, item);
 			// checks result
@@ -788,7 +788,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// gets chart instance
 		IsChart chart = item.getNativeChart().getChart();
 		// checks if the callback is set
-		if (chart != null && fontColorCallback != null) {
+		if (IsChart.isValid(chart) && fontColorCallback != null) {
 			// calls callback
 			Object value = fontColorCallback.invoke(chart, item);
 			// checks result

@@ -156,7 +156,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 */
 	public final void store(IsChart chart) {
 		// checks if chart is consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// stores itself into defaults
 			chart.getOptions().getPlugins().setOptions(pluginId, this);
 		}

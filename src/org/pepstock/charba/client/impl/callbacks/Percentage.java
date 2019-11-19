@@ -67,7 +67,7 @@ public final class Percentage {
 	 */
 	public static double compute(IsChart chart, double value, ScriptableContext context, boolean stacked) {
 		// checks if arguments are consistent
-		if (chart == null || context == null) {
+		if (!IsChart.isValid(chart) || context == null) {
 			// if not consistent
 			return Double.NaN;
 		}

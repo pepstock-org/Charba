@@ -24,12 +24,15 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.callbacks.LegendTextCallback;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.utils.Utilities;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
@@ -40,6 +43,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.dom.client.TableRowElement;
+import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
@@ -66,7 +70,31 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  *
  */
 final class HtmlLegendCallback implements LegendCallback {
+	
+	/**
+	 * Template interface to create CSS value of gradient, to use for <code>background-size</code> CSS property.<br>
+	 * The template is: <br>
+	 * <code>
+	 * [width]px [height]px
+	 * </code> <br>
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public interface BackgroundSizeCssTemplate extends SafeHtmlTemplates {
 
+		/**
+		 * Uses the declared template to create a CSS value for <code>background-size</code> CSS property.
+		 * 
+		 * @param width width of background size
+		 * @param height height of background size
+		 * @return the CSS value of background sizef
+		 */
+		@Template("{0}px {1}px")
+		SafeHtml css(int width, int height);
+	}
+	// instance of template
+	private static final BackgroundSizeCssTemplate BACKGROUND_SIZE_TEMPLATE = GWT.create(BackgroundSizeCssTemplate.class);
 	// internal comparator to sort legend item by own index
 	private static final Comparator<LegendLabelItem> COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o1.getDatasetIndex(), o2.getDatasetIndex()) + Double.compare(o1.getIndex(), o2.getIndex());
 	// internal comparator to sort legend item by reverse own index
@@ -187,6 +215,8 @@ final class HtmlLegendCallback implements LegendCallback {
 			// no callback then it will use the default ones
 			legendItems = defaultLegendItems;
 		}
+		// stores the legend items 
+		HtmlLegendBuilder.LEGEND_LABELS.put(chart.getId(), legendItems);
 		// checks if there is a filter legend callback
 		if (legendLabels.getFilterCallback() != null) {
 			// if here, the filter callback is invoked
@@ -240,13 +270,13 @@ final class HtmlLegendCallback implements LegendCallback {
 		color.getStyle().setWidth(width, Unit.PX);
 		color.getStyle().setHeight(height, Unit.PX);
 		// applies the background color
-		applyBackgroundColor(item, color, width, height);
+		applyBackgroundColor(chart, item, color, width, height);
 		// applies the border width
 		boolean applyBorderColor = applyBorderWidth(item, color);
 		// checks if must be applied the color
 		if (applyBorderColor) {
 			// applies the border color
-			applyBorderColor(item, color, width, height);
+			applyBorderColor(chart, item, color, width, height);
 		}
 		return colorCell;
 	}
@@ -368,34 +398,59 @@ final class HtmlLegendCallback implements LegendCallback {
 	/**
 	 * Applies the background color to the color element.
 	 * 
+	 * @param chart chart instance related to legend to build
 	 * @param item legend item to map into background color
 	 * @param color DIV element where to apply the background color
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
 	 */
-	private void applyBackgroundColor(LegendLabelItem item, DivElement color, int width, int height) {
+	private void applyBackgroundColor(IsChart chart, LegendLabelItem item, DivElement color, int width, int height) {
 		// checks if fill color has been set
 		if (item.isFillStyleAsColor()) {
 			// if here, apply the fill color as background color
 			color.getStyle().setBackgroundColor(item.getFillStyle().toRGBA());
 		} else if (item.isFillStyleAsCanvasPattern()) {
-			// transforms pattern into CSS property and
-			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsPattern(), width, height);
-			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
-		} else if (item.isFillStyleAsCanvasGradient()) {
-			// reference to CCS gradient
-			String gradientAsCss = null;
-			if (item.getFillStyleAsGradient() != null) {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsGradient());
-			} else {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasGradient(), width, height);
+			// gets the pattern by legend item
+			Pattern pattern = item.getFillStyleAsPattern();
+			// checks if not consistent
+			if (pattern == null) {
+				// retrieve loaded pattern by dataset
+				pattern = chart.getData().retrieveBackgroundColorAsPattern(item);
 			}
-			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, gradientAsCss);
+			// checks if pattern consistent
+			if (pattern != null) {
+				// transforms pattern into CSS property and
+				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height);
+				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
+			} else {
+				// if here, apply the fill color as background color
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getDefaultColorAsString());
+			}
+		} else if (item.isFillStyleAsCanvasGradient()) {
+			// gets the gradient by legend item
+			Gradient gradient  = item.getFillStyleAsGradient();
+			// checks if not consistent
+			if (gradient == null) {
+				// retrieve loaded gradient by dataset
+				gradient = chart.getData().retrieveBackgroundColorAsGradient(item);
+			}
+			// checks if gradient consistent
+			if (gradient != null) {
+				// reference to CCS gradient
+				String gradientAsCss = Utilities.toCSSBackgroundProperty(gradient);
+				// sets gradient as image
+				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, gradientAsCss);
+				// gets background size
+				String size = BACKGROUND_SIZE_TEMPLATE.css(width, height).asString();
+				// sets background size property
+				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_SIZE_PROPERTY, size);
+			} else {
+				// if here, apply the fill color as background color
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getDefaultColorAsString());
+			}
 		}
 	}
-
+	
 	/**
 	 * Applies the border style to the color element and returns <code>true</code> if the border color must be applied.
 	 * 
@@ -434,33 +489,53 @@ final class HtmlLegendCallback implements LegendCallback {
 	/**
 	 * Applies the border color to the color element.
 	 * 
+	 * @param chart chart instance related to legend to build
 	 * @param item legend item to map into border color
 	 * @param color DIV element where to apply the border color
 	 * @param width width to use to apply border color
 	 * @param height height to use to apply border color
 	 */
-	private void applyBorderColor(LegendLabelItem item, DivElement color, int width, int height) {
+	private void applyBorderColor(IsChart chart, LegendLabelItem item, DivElement color, int width, int height) {
 		// checks if there is stroke color
 		// to apply to the border
 		if (item.isStrokeStyleAsColor()) {
 			color.getStyle().setBorderColor(item.getStrokeStyle().toRGBA());
 		} else if (item.isStrokeStyleAsCanvasPattern()) {
-			// transforms pattern into CSS property and
-			String patternAsCss = Utilities.toCSSBackgroundProperty(item.getFillStyleAsCanvasPattern(), width, height) + " 1";
-			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, patternAsCss);
-		} else if (item.isStrokeStyleAsCanvasGradient()) {
-			// reference to CCS gradient
-			String gradientAsCss = null;
-			if (item.getStrokeStyleAsGradient() != null) {
-				// transforms gradient into CSS property and
-				// adds 1 to the string to show gradient on border by border image property
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsGradient()) + " 1";
-			} else {
-				// transforms gradient into CSS property and
-				gradientAsCss = Utilities.toCSSBackgroundProperty(item.getStrokeStyleAsCanvasGradient(), width, height) + " 1";
+			// gets the pattern by legend item
+			Pattern pattern = item.getStrokeStyleAsPattern();
+			// checks if not consistent
+			if (pattern == null) {
+				// retrieve loaded pattern by dataset
+				pattern = chart.getData().retrieveBorderColorAsPattern(item);
 			}
-			color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, gradientAsCss);
+			// checks if pattern consistent
+			if (pattern != null) {
+				// transforms pattern into CSS property and
+				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height) + " 1";
+				color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, patternAsCss);
+			} else {
+				// if here, remove border
+				color.getStyle().setBorderWidth(0D, Unit.PX);
+			}
+		} else if (item.isStrokeStyleAsCanvasGradient()) {
+			// gets the gradient by legend item
+			Gradient gradient  = item.getStrokeStyleAsGradient();
+			// checks if not consistent
+			if (gradient == null) {
+				// retrieve loaded gradient by dataset
+				gradient = chart.getData().retrieveBorderColorAsGradient(item);
+			}
+			// checks if gradient consistent
+			if (gradient != null) {
+				// reference to CCS gradient
+				String gradientAsCss = Utilities.toCSSBackgroundProperty(gradient) + " 1";
+				// sets border imaged property
+				color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, gradientAsCss);
+			} else {
+				// if here, remove border
+				color.getStyle().setBorderWidth(0D, Unit.PX);
+			}
 		}
 	}
-
+	
 }

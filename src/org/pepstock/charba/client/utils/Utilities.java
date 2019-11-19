@@ -20,7 +20,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
@@ -147,6 +146,11 @@ public final class Utilities {
 	 * Constant for CSS property for {@link Gradient}.
 	 */
 	public static final String CSS_BACKGROUND_IMAGE_PROPERTY = "backgroundImage";
+
+	/**
+	 * Constant for CSS property for {@link Gradient}.
+	 */
+	public static final String CSS_BACKGROUND_SIZE_PROPERTY = "backgroundSize";
 
 	/**
 	 * Constant for CSS property for {@link Gradient}, for border.
@@ -468,14 +472,12 @@ public final class Utilities {
 	/**
 	 * Returns the cursor currently set into chart.
 	 * 
-	 * @param isChart chart instance
+	 * @param chart chart instance
 	 * @return the cursor currently set into chart. Default is {@link Cursor#DEFAULT}.
 	 */
-	public static Cursor getCursorOfChart(IsChart isChart) {
+	public static Cursor getCursorOfChart(IsChart chart) {
 		// checks if argument is consistent
-		if (isChart instanceof AbstractChart<?>) {
-			// cast to abstract chart to get element of GWT object
-			AbstractChart<?> chart = (AbstractChart<?>) isChart;
+		if (IsChart.isValid(chart)) {
 			// scans all cursors to check if any cursor is already set
 			// needs to scan them because with valueOf there is an exception
 			// if the value does not match any element of enumeration

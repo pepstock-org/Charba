@@ -20,11 +20,16 @@ import java.util.List;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.CanvasObject;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
@@ -308,6 +313,136 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
+	 * Returns a gradient object set as background color for a dataset related to legend item.
+	 * 
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @return a gradient object or <code>null</code> if not found by legend item
+	 */
+	public final Gradient retrieveBackgroundColorAsGradient(LegendItem legendItem) {
+		// retrieves dataset by legend item
+		Dataset dataset = retrieveDataset(legendItem);
+		// checks if dataset is consistent
+		if (dataset != null) {
+			// retrieves the object
+			return retrieveObject(dataset, dataset.getGradientsContainer(), legendItem, Dataset.Property.BACKGROUND_COLOR);
+		}
+		// if here, dataset non consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns a gradient object set as border color for a dataset related to legend item.
+	 * 
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @return a gradient object or <code>null</code> if not found by legend item
+	 */
+	public final Gradient retrieveBorderColorAsGradient(LegendItem legendItem) {
+		// retrieves dataset by legend item
+		Dataset dataset = retrieveDataset(legendItem);
+		// checks if dataset is consistent
+		if (dataset != null) {
+			// retrieves the object
+			return retrieveObject(dataset, dataset.getGradientsContainer(), legendItem, Dataset.Property.BORDER_COLOR);
+		}
+		// if here, dataset non consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns a pattern object set as background color for a dataset related to legend item.
+	 * 
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @return a pattern object or <code>null</code> if not found by legend item
+	 */
+	public final Pattern retrieveBackgroundColorAsPattern(LegendItem legendItem) {
+		// retrieves dataset by legend item
+		Dataset dataset = retrieveDataset(legendItem);
+		// checks if dataset is consistent
+		if (dataset != null) {
+			// retrieves the object
+			return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, Dataset.Property.BACKGROUND_COLOR);
+		}
+		// if here, dataset non consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns a pattern object set as border color for a dataset related to legend item.
+	 * 
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @return a pattern object or <code>null</code> if not found by legend item
+	 */
+	public final Pattern retrieveBorderColorAsPattern(LegendItem legendItem) {
+		// retrieves dataset by legend item
+		Dataset dataset = retrieveDataset(legendItem);
+		// checks if dataset is consistent
+		if (dataset != null) {
+			// retrieves the object
+			return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, Dataset.Property.BORDER_COLOR);
+		}
+		// if here, dataset non consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns a dataset instance by legend item locator, dataset index and index.
+	 * 
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @return a dataset instance or <code>null</code> if not found by legend item
+	 */
+	private final Dataset retrieveDataset(LegendItem legendItem) {
+		// checks if legend item is consistent
+		if (legendItem != null) {
+			// checks if dataset index is the locator
+			// and the index is less than size of datasets
+			if (legendItem.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > legendItem.getDatasetIndex()) {
+				return getDatasets().get(legendItem.getDatasetIndex());
+			} else if (legendItem.getIndex() != UndefinedValues.INTEGER && !currentDatasets.isEmpty()) {
+				// if here is looking for data index then it uses
+				// the first dataset
+				return getDatasets().get(0);
+			}
+		}
+		// if here, legend item is not consistent
+		// or the locator of legend item is not able to locate any dataset
+		return null;
+	}
+
+	/**
+	 * Returns a canvas object stored into dataset as color to apply into chart.
+	 * 
+	 * @param dataset dataset instance
+	 * @param container container of canvas object where searching the object
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @param property type of color to search
+	 * @param <T> type of canvas object to retrieve
+	 * @return a canvas object instance or <code>null</code> if not found by legend item
+	 */
+	private final <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property) {
+		// checks if arguments are consistent
+		// and if the container is not empty for the property to search
+		if (Key.isValid(property) && legendItem != null && dataset != null && container != null && container.hasObjects(property)) {
+			// gets all list of canvas object
+			List<T> objects = container.getObjects(property);
+			// the legend item is set by dataset index
+			if (legendItem.getDatasetIndex() != UndefinedValues.INTEGER && !objects.isEmpty()) {
+				// returns the first item
+				return objects.get(0);
+			} else if (legendItem.getIndex() != UndefinedValues.INTEGER && objects.size() > legendItem.getIndex()) {
+				// if here is looking for data index
+				return objects.get(legendItem.getIndex());
+			}
+		}
+		// if here, arguments are not consistent
+		// or the locator of legend item is not able to locate any dataset
+		return null;
+	}
+
+	/**
 	 * Returns a string representation for all datasets, in JSON format.
 	 * 
 	 * @return a string representation for all datasets, in JSON format.
@@ -334,7 +469,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	public void load(IsChart chart, Configuration configuration) {
 		// checks if chart is consistent
 		// configuration will be check into load data method
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// loads data
 			ConfigurationLoader.loadData(configuration, this);
 			// checks if there is any pattern

@@ -106,7 +106,7 @@ public abstract class CanvasObjectFactory {
 	 */
 	public final void resetGradients(IsChart chart) {
 		// checks if chart is consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			GRADIENTS.remove(chart.getId());
 		}
 	}
@@ -118,7 +118,7 @@ public abstract class CanvasObjectFactory {
 	 */
 	public final void clear(IsChart chart) {
 		// checks if chart is consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			PATTERNS.remove(chart.getId());
 			GRADIENTS.remove(chart.getId());
 		}
@@ -363,12 +363,7 @@ public abstract class CanvasObjectFactory {
 	 */
 	private void checkArgumentsConsistency(IsChart chart, Object canvasObject) {
 		// checks if chart is consistent
-		if (chart == null) {
-			// if here,
-			// chart is null
-			// then throws an exception
-			throw new IllegalArgumentException("Chart is null");
-		}
+		IsChart.checkIfValid(chart);
 		// checks if canvas object is consistent
 		if (canvasObject == null) {
 			// if here,

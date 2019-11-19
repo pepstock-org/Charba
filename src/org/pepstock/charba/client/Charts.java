@@ -81,7 +81,7 @@ public final class Charts {
 	 */
 	static void add(IsChart chart) {
 		// checks if chart is consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// putting getting the chart
 			IsChart prevChart = CHARTS_INSTANCES.put(chart.getId(), chart);
 			// if previous chart instance is not consistent
@@ -213,17 +213,20 @@ public final class Charts {
 	 * @param chartId chart id
 	 */
 	static void remove(String chartId) {
-		// removes getting the chart
-		IsChart chart = CHARTS_INSTANCES.remove(chartId);
-		// if chart instance is consistent
-		if (chart != null) {
-			// scans all listener to send notification
-			for (ChartsLifecycleListener listener : LISTENERS) {
-				listener.onAfterDestroy(chart);
+		// checks if chart id is consistent
+		if (chartId != null) {
+			// removes getting the chart
+			IsChart chart = CHARTS_INSTANCES.remove(chartId);
+			// if chart instance is consistent
+			if (IsChart.isValid(chart)) {
+				// scans all listener to send notification
+				for (ChartsLifecycleListener listener : LISTENERS) {
+					listener.onAfterDestroy(chart);
+				}
 			}
+			// removes also the native chart
+			NATIVE_CHARTS_INSTANCES.remove(chartId);
 		}
-		// removes also the native chart
-		NATIVE_CHARTS_INSTANCES.remove(chartId);
 	}
 
 }

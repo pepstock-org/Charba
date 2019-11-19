@@ -29,7 +29,6 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.Legend;
-import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -104,6 +103,8 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_lenged";
 	// cache to store options in order do not load every time the options
 	static final Map<String, HtmlLegendBuilderOptions> OPTIONS = new HashMap<>();
+	// cache to store options in order do not load every time the options
+	static final Map<String, List<LegendLabelItem>> LEGEND_LABELS = new HashMap<>();
 	// cache to store DIV element which contains legend for each chart
 	private static final Map<String, DivElement> DIV_ELEMENTS = new HashMap<>();
 	// cache to store easing during drawing for each chart
@@ -295,6 +296,8 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			}
 			// removes the chart status
 			ADDED_LEGEND.remove(chart.getId());
+			// removes the chart legend labels items
+			LEGEND_LABELS.remove(chart.getId());
 			// removes the chart from easing status
 			EASINGS.remove(chart.getId());
 			// removes the chart from options
@@ -486,6 +489,7 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 			// if TD, the element itself contains the correct ID.
 			legendColumnElement = element;
 		} else if (element.hasParentElement() && element.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
+			// FIXME recursive call to get real TD parent
 			// if not TD but the parent has got TD, the parent element itself contains the correct ID.
 			legendColumnElement = element.getParentElement();
 		}
@@ -500,18 +504,8 @@ public final class HtmlLegendBuilder extends AbstractPlugin {
 				String chartId = legendId.getChartId();
 				// retrieves the chart instance
 				IsChart chart = Charts.get(chartId);
-				// gets the legend labels configuration item
-				LegendLabels legendLabels = chart.getOptions().getLegend().getLabels();
 				// creates a reference with a list of legend labels
-				List<LegendLabelItem> legendItems;
-				// checks if there is a custom legend labels callback to invoke
-				if (legendLabels.getLabelsCallback() != null) {
-					// if yes, invokes the custom callback
-					legendItems = legendLabels.getLabelsCallback().generateLegendLabels(chart, Defaults.get().generateLabels(chart));
-				} else {
-					// if here, no callback then it uses the default ones
-					legendItems = Defaults.get().generateLabels(chart);
-				}
+				List<LegendLabelItem> legendItems = LEGEND_LABELS.get(chartId);
 				// by HTML legend ID object, extract the legend item
 				// to pass to event
 				LegendItem selectedItem = legendId.lookForLegendItem(legendItems);

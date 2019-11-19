@@ -288,7 +288,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onInitialize(ControllerContext context, IsChart chart, int datasetIndex) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.initialize(context, chart, datasetIndex);
 		}
 	}
@@ -301,7 +301,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onAddElements(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.addElements(context, chart);
 		}
 	}
@@ -315,7 +315,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onAddElementAndReset(ControllerContext context, IsChart chart, int index) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.addElementAndReset(context, chart, index);
 		}
 	}
@@ -329,7 +329,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onDraw(ControllerContext context, IsChart chart, double ease) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.draw(context, chart, ease);
 		}
 	}
@@ -343,7 +343,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.removeHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
@@ -357,7 +357,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.setHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
@@ -371,7 +371,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onUpdate(ControllerContext context, IsChart chart, boolean reset) {
 		// if consistent, calls controller
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.update(context, chart, reset);
 		}
 	}

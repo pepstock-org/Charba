@@ -73,16 +73,6 @@ public final class LegendLabelItem extends LegendItem {
 	 */
 	LegendLabelItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// checks if fill style is canvas pattern
-		if (isFillStyleAsCanvasPattern()) {
-			// then initialized the pattern
-			fillStylePattern = new Pattern(getFillStyleAsCanvasPattern());
-		}
-		// checks if stroke style is canvas pattern
-		if (isStrokeStyleAsCanvasPattern()) {
-			// then initialized the pattern
-			strokeStylePattern = new Pattern(getStrokeStyleAsCanvasPattern());
-		}
 	}
 
 	/**

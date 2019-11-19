@@ -74,7 +74,7 @@ final class WrapperPlugin {
 	 */
 	void onConfigure(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onConfigure(chart);
 		}
 	}
@@ -86,7 +86,7 @@ final class WrapperPlugin {
 	 */
 	void onBeforeInit(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onBeforeInit(chart);
 		}
 	}
@@ -99,7 +99,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterInit(IsChart chart, Chart nativeChart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterInit(chart, nativeChart);
 		}
 	}
@@ -113,7 +113,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeUpdate(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeUpdate(chart);
 		}
 		return true;
@@ -127,7 +127,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterUpdate(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterUpdate(chart);
 		}
 	}
@@ -141,7 +141,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeLayout(IsChart chart) {
 		// if consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// calls plugin
 			return delegation.onBeforeLayout(chart);
 		}
@@ -156,7 +156,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterLayout(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterLayout(chart);
 		}
 	}
@@ -170,7 +170,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeDatasetsUpdate(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeDatasetsUpdate(chart);
 		}
 		return true;
@@ -184,7 +184,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterDatasetsUpdate(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetsUpdate(chart);
 		}
 	}
@@ -199,7 +199,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeDatasetUpdate(chart, item);
 		}
 		return true;
@@ -214,7 +214,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterDatasetUpdate(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetUpdate(chart, item);
 		}
 	}
@@ -228,7 +228,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeRender(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeRender(chart);
 		}
 		return true;
@@ -242,7 +242,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterRender(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterRender(chart);
 		}
 	}
@@ -257,7 +257,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeDraw(chart, easing);
 		}
 		return true;
@@ -272,7 +272,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterDraw(chart, easing);
 		}
 	}
@@ -287,7 +287,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeDatasetsDraw(chart, easing);
 		}
 		return true;
@@ -302,7 +302,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterDatasetsDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetsDraw(chart, easing);
 		}
 	}
@@ -318,7 +318,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeDatasetDraw(chart, item);
 		}
 		return true;
@@ -334,7 +334,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterDatasetDraw(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetDraw(chart, item);
 		}
 	}
@@ -350,7 +350,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeTooltipDraw(IsChart chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeTooltipDraw(chart, item);
 		}
 		return true;
@@ -366,7 +366,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterTooltipDraw(IsChart chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onAfterTooltipDraw(chart, item);
 		}
 	}
@@ -380,7 +380,7 @@ final class WrapperPlugin {
 	 */
 	boolean onBeforeEvent(IsChart chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
-		if (chart != null && event.getEvent() != null) {
+		if (IsChart.isValid(chart) && event.getEvent() != null) {
 			return delegation.onBeforeEvent(chart, event.getEvent());
 		}
 		return true;
@@ -395,7 +395,7 @@ final class WrapperPlugin {
 	 */
 	void onAfterEvent(IsChart chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
-		if (chart != null && event.getEvent() != null) {
+		if (IsChart.isValid(chart) && event.getEvent() != null) {
 			delegation.onAfterEvent(chart, event.getEvent());
 		}
 	}
@@ -408,7 +408,7 @@ final class WrapperPlugin {
 	 */
 	void onResize(IsChart chart, SizeItem item) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onResize(chart, item);
 		}
 	}
@@ -420,7 +420,7 @@ final class WrapperPlugin {
 	 */
 	void onDestroy(IsChart chart) {
 		// if consistent, calls plugin
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			delegation.onDestroy(chart);
 		}
 	}

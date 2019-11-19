@@ -18,7 +18,6 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -321,11 +320,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	private void applyBackgroundToChartElement(IsChart chart, String name, String value) {
 		// checks if chart, name and value of CSS property are consistent
-		if (chart instanceof AbstractChart<?> && name != null && value != null) {
-			// cats the chart
-			AbstractChart<?> chartInstance = (AbstractChart<?>) chart;
+		if (IsChart.isValid(chart) && name != null && value != null) {
 			// sets style property
-			chartInstance.getElement().getStyle().setProperty(name, value);
+			chart.getElement().getStyle().setProperty(name, value);
 		}
 	}
 }

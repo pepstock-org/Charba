@@ -176,7 +176,7 @@ public final class Positioner {
 		// gets chart instance
 		IsChart chart = context.getChart();
 		// checks if the chart is consistent
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			// gets the tooltip position requested
 			// because this callback will be set for all custom positioners
 			IsTooltipPosition position = chart.getOptions().getTooltips().getPosition();

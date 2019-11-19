@@ -103,7 +103,7 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
 		// checks if config and chart are consistent
-		if (config == null || chart == null) {
+		if (config == null || !IsChart.isValid(chart)) {
 			// otherwise do nothing
 			return;
 		}
@@ -123,7 +123,7 @@ public final class Plugins implements ConfigurationElement {
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
 		// checks if config and chart are consistent
-		if (configuration == null || chart == null) {
+		if (configuration == null || !IsChart.isValid(chart)) {
 			// otherwise do nothing
 			return;
 		}
