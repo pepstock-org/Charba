@@ -74,7 +74,7 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	public interface GradientCssTemplate extends SafeHtmlTemplates {
+	interface GradientCssTemplate extends SafeHtmlTemplates {
 
 		/**
 		 * Uses the declared template to create a CSS value for gradient.
@@ -103,7 +103,7 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	public interface PatternCssTemplate extends SafeHtmlTemplates {
+	interface PatternCssTemplate extends SafeHtmlTemplates {
 
 		/**
 		 * Uses the declared template to create a CSS value for pattern.

@@ -81,7 +81,7 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	public interface BackgroundSizeCssTemplate extends SafeHtmlTemplates {
+	interface BackgroundSizeCssTemplate extends SafeHtmlTemplates {
 
 		/**
 		 * Uses the declared template to create a CSS value for <code>background-size</code> CSS property.
