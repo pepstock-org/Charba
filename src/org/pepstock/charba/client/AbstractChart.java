@@ -131,6 +131,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// creates plugins container
 		plugins = new Plugins();
 		// creates defaults options for this chart type
+		// chart type is NOT checked here but when new chart options
+		// object is created
 		options = createChartOptions();
 		// stores initial cursor
 		initialCursor = Utilities.getCursorOfChart(this);
@@ -422,8 +424,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
-	 * <code>.render()</code> to re-animate.
+	 * Use this to stop any current animation loop.<br<This will pause the chart during any current animation frame.<br>
+	 * Call <code>.render()</code> to re-animate.
 	 */
 	@Override
 	public final void stop() {
@@ -435,7 +437,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Will clear the chart canvas. Used extensively internally between animation frames.<br>
+	 * Will clear the chart canvas.<br>
+	 * Used extensively internally between animation frames.<br>
 	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT
 	 * <code>Panel</code> one.
 	 */
@@ -483,10 +486,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final String generateLegend() {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks if chart is created
-		if (chart != null) {
+		if (instance != null) {
 			// returns custom HTML legend
-			return chart.generateLegend();
+			return instance.generateLegend();
 		}
 		// default
 		return UndefinedValues.STRING;
@@ -613,10 +618,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final DatasetMetaItem getDatasetMeta(int index) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
+		if (instance != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// returns the array
-			return new DatasetMetaItem(chart.getDatasetMeta(index));
+			return new DatasetMetaItem(instance.getDatasetMeta(index));
 		}
 		// returns null
 		return null;
@@ -630,11 +637,13 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (chart != null && event != null) {
+		if (instance != null && event != null) {
 			// gets dataset and
 			// returns the array
-			return new DatasetMetaItem(chart.getDatasetAtEvent(event));
+			return new DatasetMetaItem(instance.getDatasetAtEvent(event));
 		}
 		// if here, chart or event not valid than returns null
 		return null;
@@ -648,10 +657,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public boolean isDatasetVisible(int index) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
+		if (instance != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// gets if dataset is visible or not
-			return chart.isDatasetVisible(index);
+			return instance.isDatasetVisible(index);
 		}
 		// returns false
 		return false;
@@ -664,10 +675,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public int getVisibleDatasetCount() {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
-		if (chart != null) {
+		if (instance != null) {
 			// gets if dataset is visible or not
-			return chart.getVisibleDatasetCount();
+			return instance.getVisibleDatasetCount();
 		}
 		// returns undefined
 		return UndefinedValues.INTEGER;
@@ -682,10 +695,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (chart != null && event != null) {
+		if (instance != null && event != null) {
 			// gets element
-			ArrayObject result = chart.getElementAtEvent(event);
+			ArrayObject result = instance.getElementAtEvent(event);
 			if (result != null && !result.isEmpty()) {
 				return new DatasetItem(result.get(0));
 			}
@@ -704,10 +719,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (chart != null && event != null) {
+		if (instance != null && event != null) {
 			// gets elements
-			ArrayObject array = chart.getElementsAtEvent(event);
+			ArrayObject array = instance.getElementsAtEvent(event);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 		}

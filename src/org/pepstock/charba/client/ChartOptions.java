@@ -48,6 +48,8 @@ public final class ChartOptions extends ScaledOptions {
 	ChartOptions(Type type, NativeObject nativeObject) {
 		// the default of chart default ones are the CHART.JS one
 		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
+		// checks consistency of type
+		Type.checkIfValid(type);
 		this.type = type;
 	}
 
