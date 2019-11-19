@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
@@ -144,10 +145,11 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @return <code>true</code> if the cursor is over to the title, otherwise <code>false</code>
 	 */
 	private boolean hasTitleSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if title display is activated or title plugin is activated
+		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.TITLE.value());
 		// checks if there is any title click handler and title is in scope
-		// and title display is activated
 		// and the cursor is over the title element
-		return chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getOptions().getTitle().isDisplay() && chart.getNode().getTitle().isInside(event);
+		return isTitleEnabled && chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) &&  chart.getNode().getTitle().isInside(event);
 	}
 
 	/**
@@ -173,10 +175,11 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @return <code>true</code> if the cursor is over to the legend, otherwise <code>false</code>
 	 */
 	private boolean hasLegendSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if legend display is activated or legend plugin is activated
+		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value());
 		// checks if legend is in scope
-		// and legend display is activated
 		// and the cursor is over the legend element
-		if (isElementInScope(scope, PointerElement.LEGEND) && chart.getOptions().getLegend().isDisplay() && chart.getNode().getLegend().isInside(event)) {
+		if (isLegendEnabled && isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {
 			// LEGEND SELECTION
 			// checks if cursor is over the hit box
 			List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();

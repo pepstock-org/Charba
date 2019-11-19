@@ -115,7 +115,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `toCSSBackgroundProperty` methods for `Gradient` and `Pattern` into `Utilities` class in order to get the CSS property value of the canvas object.
  * change the `Plugin` interface into to have `afterInit` the native chart instance.
  * change `LegendCallback` interface in order to return a `SafeHtml` object instead of use `SafeHtmlBuilder`.
- * create `HtmlLegendBuilder` plugin in order to create HTML legend instead of using the CHART.JS one
+ * create `HtmlLegend` plugin in order to create HTML legend instead of using the CHART.JS one
     * add some methods to `LegendLabelItem` class in order to manage text as HTML.
     * add new Html legend builder options (globally and per chart instance)
     * add `LegendTextCallback` interface to manage text of legend as HTML
