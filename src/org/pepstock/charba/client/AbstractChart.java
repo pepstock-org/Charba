@@ -424,7 +424,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Use this to stop any current animation loop.<br<This will pause the chart during any current animation frame.<br>
+	 * Use this to stop any current animation loop.<br>
+	 * This will pause the chart during any current animation frame.<br>
 	 * Call <code>.render()</code> to re-animate.
 	 */
 	@Override

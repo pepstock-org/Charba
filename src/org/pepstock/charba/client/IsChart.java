@@ -67,8 +67,6 @@ public interface IsChart extends HasHandlers {
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
-	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 *         well, and if mandatory methods of interface will return consistent instances.
 	 */
 	static void checkIfConsistent(IsChart chart) {
 		// checks if chart is consistent
