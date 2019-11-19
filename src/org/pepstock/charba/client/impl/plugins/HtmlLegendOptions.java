@@ -34,9 +34,13 @@ import com.google.gwt.dom.client.Style.Cursor;
 public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 
 	/**
-	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
+	 * Default cursor type when the cursor is over the legend, {@link Cursor#POINTER}.
 	 */
 	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
+	/**
+	 * Default maximum legends columns to show.
+	 */
+	public static final int DEFAULT_MAXIMUM_LEGEND_COLUMNS = Integer.MAX_VALUE;
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
@@ -156,7 +160,8 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @param maxColumns the maximum amount of columns of legend
 	 */
 	public void setMaximumLegendColumns(int maxColumns) {
-		setValue(Property.MAXIMUM_LEGEND_COLUMNS, maxColumns);
+		// checks if max columns is consistent
+		setValue(Property.MAXIMUM_LEGEND_COLUMNS, maxColumns < 1 ? DEFAULT_MAXIMUM_LEGEND_COLUMNS : maxColumns);
 	}
 
 	/**

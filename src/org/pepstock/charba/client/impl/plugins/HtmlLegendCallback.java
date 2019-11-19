@@ -137,7 +137,7 @@ final class HtmlLegendCallback implements LegendCallback {
 	private TableElement buildLegend(IsChart chart) {
 		HtmlLegendOptions options = HtmlLegend.OPTIONS.get(chart.getId());
 		// gets max columns for legend
-		int maxColumns = options.getMaximumLegendColumns();
+		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend
 		Legend legend = chart.getOptions().getLegend();
 		// creates table as result
@@ -262,9 +262,9 @@ final class HtmlLegendCallback implements LegendCallback {
 		// calculates the border width to remove to size of color
 		// because the size of border will be added to element
 		// applying the border afterwards
-		int borderWidthToremove = Math.max(0, item.getLineWidth());
-		int width = legendLabels.getBoxWidth() - borderWidthToremove;
-		int height = legendLabels.getFontSize() - borderWidthToremove;
+		int borderWidthToRemove = Math.max(0, item.getLineWidth());
+		int width = legendLabels.getBoxWidth() - borderWidthToRemove;
+		int height = legendLabels.getFontSize() - borderWidthToRemove;
 		// styling the cell with mandatory values
 		color.getStyle().setDisplay(Display.INLINE_BLOCK);
 		color.getStyle().setWidth(width, Unit.PX);
@@ -459,11 +459,13 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @return <code>true</code> if the border has been applied and than color is missing
 	 */
 	private boolean applyBorderWidth(LegendLabelItem item, DivElement color) {
+		// gets a correct border width
+		int borderWidth = Math.max(0, item.getLineWidth());
+		// applies the border
+		color.getStyle().setBorderWidth(borderWidth, Unit.PX);
 		// checks if a border must be applied
 		// having a border width more then 0
-		if (item.getLineWidth() > 0) {
-			// applies the border
-			color.getStyle().setBorderWidth(item.getLineWidth(), Unit.PX);
+		if (borderWidth > 0) {
 			// checking the line has been configured as dashed
 			if (item.getLineDash().isEmpty()) {
 				// if here, solid border, no dashed line
@@ -475,11 +477,6 @@ final class HtmlLegendCallback implements LegendCallback {
 			// returns true
 			// to apply color
 			return true;
-		} else {
-			// if here, line width is 0 then
-			// configured do not be visible and then
-			// no border
-			color.getStyle().setBorderStyle(BorderStyle.NONE);
 		}
 		// returns false
 		// to apply color

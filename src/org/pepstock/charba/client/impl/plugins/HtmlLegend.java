@@ -396,7 +396,6 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param padding padding set by legend configuration object
 	 */
 	private void addLegendElement(Element chartElement, DivElement legendElement, Position position, int padding) {
-		// if the position is bottom
 		if (Position.BOTTOM.equals(position)) {
 			// appends the legend element
 			chartElement.appendChild(legendElement);
@@ -423,8 +422,6 @@ public final class HtmlLegend extends AbstractPlugin {
 	private void manageLegendElement(Element chartElement, DivElement legendElement, Position position) {
 		// gets if the legend element has been defined after the canvas
 		boolean isAfterCanvas = isAfterCanvas(chartElement, legendElement);
-		// if the position is bottom
-		// but the legend element is not after the canvas
 		if (Position.BOTTOM.equals(position) && !isAfterCanvas) {
 			// removes the legend element from parent
 			legendElement.removeFromParent();
@@ -490,10 +487,9 @@ public final class HtmlLegend extends AbstractPlugin {
 		if (element.getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
 			// if TD, the element itself contains the correct ID.
 			legendColumnElement = element;
-		} else if (element.hasParentElement() && element.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
-			// FIXME recursive call to get real TD parent
+		} else {
 			// if not TD but the parent has got TD, the parent element itself contains the correct ID.
-			legendColumnElement = element.getParentElement();
+			legendColumnElement = checkParent(element);
 		}
 		// checks if legend column is consistent
 		if (legendColumnElement != null) {
@@ -515,6 +511,23 @@ public final class HtmlLegend extends AbstractPlugin {
 				fireEvent(chart, selectedItem, event);
 			}
 		}
+	}
+	
+	/**
+	 * Scans recursively the element to get a parent DOM element which has got TD as tag name.
+	 * 
+	 * @param child child element to check
+	 * @return the parent element with TD tag name or <code>null</code> if not found. 
+	 */
+	private Element checkParent(Element child) {
+		if (child.hasParentElement()) {
+			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
+				return child.getParentElement();
+			} else {
+				return checkParent(child.getParentElement());		
+			}
+		}
+		return null;
 	}
 
 	/**

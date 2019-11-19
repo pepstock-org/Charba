@@ -28,8 +28,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	
-	private static final int DEFAULT_MAXIMUM_LEGEND_COLUMNS = Integer.MAX_VALUE;
-	
 	// legend text callback instance
 	private LegendTextCallback legendTextCallback = null;
 
@@ -64,7 +62,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	 * @return he maximum amount of columns of legend
 	 */
 	int getMaximumLegendColumns() {
-		return getValue(HtmlLegendOptions.Property.MAXIMUM_LEGEND_COLUMNS, DEFAULT_MAXIMUM_LEGEND_COLUMNS);
+		return getValue(HtmlLegendOptions.Property.MAXIMUM_LEGEND_COLUMNS, HtmlLegendOptions.DEFAULT_MAXIMUM_LEGEND_COLUMNS);
 	}
 
 	/**
@@ -73,7 +71,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	 * @return cursor type as string
 	 */
 	String getCursorPointerAsString() {
-		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
+		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, HtmlLegendOptions.DEFAULT_CURSOR_POINTER.name());
 	}
 	
 	/**
