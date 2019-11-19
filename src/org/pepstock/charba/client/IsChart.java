@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import java.util.List;
 
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
@@ -64,7 +65,7 @@ public interface IsChart extends HasHandlers {
 			throw new IllegalArgumentException("Chart implementation instance is null or not consistent");
 		}
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if chart passed as argument is an abstract chart instance.
 	 * 
@@ -74,10 +75,9 @@ public interface IsChart extends HasHandlers {
 	static boolean isAbstractChart(IsChart chart) {
 		return (chart instanceof AbstractChart<?>);
 	}
-	
+
 	/**
-	 * Checks if chart passed as argument is an abstract chart instance. If not, throw a
-	 * {@link IllegalArgumentException}.
+	 * Checks if chart passed as argument is an abstract chart instance. If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
 	 */
@@ -104,7 +104,7 @@ public interface IsChart extends HasHandlers {
 	 * @return the object's browser element
 	 */
 	Element getElement();
-	
+
 	/**
 	 * Returns the options of chart.
 	 * 
@@ -118,6 +118,14 @@ public interface IsChart extends HasHandlers {
 	 * @return the type of chart.
 	 */
 	Type getType();
+
+	/**
+	 * Returns the base type of chart that in case of {@link ChartType} is the same of {@link IsChart#getType()} otherwise, in
+	 * case the type of the chart is a {@link ControllerType} is the chart type extension if there is or <code>null</code>.
+	 * 
+	 * @return the base type of chart.
+	 */
+	Type getBaseType();
 
 	/**
 	 * Returns the ID of chart.<br>

@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -170,6 +171,28 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	@Override
 	public final String getId() {
 		return id;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getBaseType()
+	 */
+	@Override
+	public final Type getBaseType() {
+		// gets the type
+		Type currentType = getType();
+		// checks if a controller type
+		if (currentType instanceof ControllerType) {
+			// casts to a controller type
+			ControllerType controllerType = (ControllerType) currentType;
+			// returns the chart type of the contrller is exist
+			// or null
+			return controllerType.getChartType();
+		}
+		// if here is a chart type
+		// then returns the current type
+		return currentType;
 	}
 
 	/**
