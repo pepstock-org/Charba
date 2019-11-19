@@ -71,7 +71,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	public double getPadding(IsChart chart) {
 		// checks if chart is consistent and there is a handler
-		if (chart != null && HANDLERS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// option instance
@@ -99,7 +99,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// flag with default to false
 		boolean fireEvent = false;
 		// checks chart is consistent and for handler
-		if (chart != null && HANDLERS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// checks into options if fire event has been set
@@ -117,7 +117,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	public void clearSelection(IsChart chart, boolean fireEvent) {
 		// checks if chart is consistent
-		if (chart == null) {
+		if (!IsChart.isValid(chart)) {
 			// if not exit
 			return;
 		}
@@ -157,7 +157,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks is chart is consistent
 		// checks if the plugin has been invoked for LINE or BAR charts
 		// checks if we have already an handler
-		if (chart != null && (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && HANDLERS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// sets the flag to skip next event after refresh
@@ -183,7 +183,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public void onConfigure(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
+		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
 			// overrides the tooltip configuration disabling it
 			chart.getOptions().getTooltips().setEnabled(false);
 			// overrides the events configuration setting only the following
@@ -235,7 +235,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		// add checks if there is any dataset selection handler into option
 		// if yes exception
-		if ((chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && chart.getOptions().hasDatasetSelectionHandlers()) {
+		if ((ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) && chart.getOptions().hasDatasetSelectionHandlers()) {
 			// throw exception
 			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
 		}
@@ -250,7 +250,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public void onAfterDraw(IsChart chart, double easing) {
 		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
+		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
 			// sets cursor wait because the chart is drawing and not selectable
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
@@ -274,7 +274,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public void onDestroy(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
+		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
 			// checks if we have already an handler
 			if (HANDLERS.containsKey(chart.getId())) {
 				// gets selection handler
@@ -431,13 +431,13 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			for (DatasetItem item : items.getDatasets()) {
 				// if the chart is line
 				// and X coordinate is less the width of canvas (item is inside of canvas)
-				if (chart.getType().equals(ChartType.LINE) && item.getView().getX() <= limitRight) {
+				if (ChartType.LINE.equals(chart.getBaseType()) && item.getView().getX() <= limitRight) {
 					itemsCount++;
 				}
 				// if the chart is line
 				// and X coordinate is less the width of canvas
 				// and the width of bar is less of width of canvas (item is inside of canvas)
-				if (chart.getType().equals(ChartType.BAR) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
+				if (ChartType.BAR.equals(chart.getBaseType()) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
 					itemsCount++;
 				}
 			}

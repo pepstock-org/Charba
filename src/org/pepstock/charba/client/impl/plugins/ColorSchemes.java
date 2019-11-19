@@ -141,7 +141,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 */
 	private void manageHovingDataset(IsChart chart, ColorSchemesOptions options, HovingDataset hovingDataset, IsColor color, List<IsColor> colors) {
 		// checks if bubble chart because the color will be selected by scheme, as for bar charts
-		if (ChartType.BUBBLE.equals(chart.getType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
+		if (ChartType.BUBBLE.equals(chart.getBaseType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
 			// if here is at dataset level
 			// every dataset has got own color
 			// sets background color (passed as list but it's only 1), applying the transparency

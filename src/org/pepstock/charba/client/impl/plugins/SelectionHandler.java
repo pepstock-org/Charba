@@ -374,7 +374,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// if chart is line or axis time is equals to 2
 		// else if bar chart is equals to 1
 		int minimDatasetsItemsCount;
-		if (chart.getType().equals(ChartType.LINE)) {
+		if (ChartType.LINE.equals(chart.getBaseType())) {
 			minimDatasetsItemsCount = 2;
 		} else {
 			minimDatasetsItemsCount = AxisType.TIME.equals(scaleItem.getType()) ? 2 : 1;
@@ -571,10 +571,10 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 			// checks the type of chart and scale
 			// LINE and axis TIME must be added by 1 end of datasets
-			if (chart.getType().equals(ChartType.LINE) || AxisType.TIME.equals(scaleItem.getType())) {
+			if (ChartType.LINE.equals(chart.getBaseType()) || AxisType.TIME.equals(scaleItem.getType())) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
-			} else if (chart.getType().equals(ChartType.BAR)) {
+			} else if (ChartType.BAR.equals(chart.getBaseType())) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
 			}
@@ -1114,7 +1114,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// amount of dataset items
 		// in case of time axis, it must be reduce by1 because the dataset items
 		// are always located in line with tick
-		if (chart.getType().equals(ChartType.LINE)) {
+		if (ChartType.LINE.equals(chart.getBaseType())) {
 			selectionTricks.setCount(getDatasetsItemsCount() - 1);
 		} else {
 			selectionTricks.setCount(AxisType.TIME.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());

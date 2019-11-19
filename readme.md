@@ -147,6 +147,8 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add `isValid`, `checkIfValid` and `isAbstractChart` static methods to `IsChart` interface.
   * change JS helpers static names.
   * add `AbstractCursorPointerOptions` class as options for plugins in order to have a unique options to extend when plugins need to interact with cursor of an element.
+  * add `getBaseType` to `IsChart` interface in order to get the base chart type which if is a `ControllerType` is the chart type extension or chart type itself.
+  * add checking into `ControllerType` do not override existing chart types by its name.
 
 License
 -------

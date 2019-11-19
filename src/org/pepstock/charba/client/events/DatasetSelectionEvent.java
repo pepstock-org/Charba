@@ -81,7 +81,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	public IsChart getChart() {
 		// override the method
 		// if chart has passed as argument of constructor
-		if (chart != null) {
+		if (IsChart.isValid(chart)) {
 			return chart;
 		}
 		// if here, chart is not set
