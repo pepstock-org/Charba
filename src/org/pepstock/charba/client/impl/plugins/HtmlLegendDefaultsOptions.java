@@ -55,6 +55,15 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	int getCharbaId() {
 		return getValue(HtmlLegendOptions.Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
+	
+	/**
+	 * Returns if the legend is shown.
+	 * 
+	 * @return <code>true</code> if the legend is shown.
+	 */
+	boolean isDisplay() {
+		return getValue(HtmlLegendOptions.Property.DISPLAY, HtmlLegendOptions.DEFAULT_DISPLAY);
+	}
 
 	/**
 	 * Returns the maximum amount of columns of legend.

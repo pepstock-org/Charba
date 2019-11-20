@@ -151,11 +151,23 @@ public final class HtmlLegend extends AbstractPlugin {
 	public void onConfigure(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart)) {
+			HtmlLegendOptions pOptions = null;
+			// if not, loads and cache
+			// creates the plugin options using the java script object
+			// passing also the default color set at constructor.
+			if (chart.getOptions().getPlugins().hasOptions(ID)) {
+				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+			} else {
+				pOptions = new HtmlLegendOptions();
+			}
+			OPTIONS.put(chart.getId(), pOptions);
+			pOptions.setCurrentCursor(chart.getInitialCursor());
 			// if the legend is set do not display
 			// or the ootb legend plugin has been disable
 			// it respects it then ignore it and the plugin in
 			// will be disable
-			if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
+			boolean mustBeActivated = chart.getOptions().getLegend().isDisplay() || pOptions.isDisplay();
+			if (mustBeActivated && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
 				// disable legend
 				chart.getOptions().getLegend().setDisplay(false);
 				// sets legend callback
@@ -164,20 +176,12 @@ public final class HtmlLegend extends AbstractPlugin {
 				// sets easing to zero
 				EASINGS.put(chart.getId(), 0D);
 				// creates options instance
-				HtmlLegendOptions pOptions = null;
-				// if not, loads and cache
-				// creates the plugin options using the java script object
-				// passing also the default color set at constructor.
-				if (chart.getOptions().getPlugins().hasOptions(ID)) {
-					pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
-				} else {
-					pOptions = new HtmlLegendOptions();
-				}
-				OPTIONS.put(chart.getId(), pOptions);
-				pOptions.setCurrentCursor(chart.getInitialCursor());
 			} else {
-				// disables the plugin
-				chart.getOptions().getPlugins().setEnabled(ID, false);
+				// resets all status items if there are
+				// this is inca se of update options
+				resetStatus(chart);
+				// disables display of plugin 
+				pOptions.setDisplay(false);
 			}
 		}
 	}
@@ -190,7 +194,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	@Override
 	public boolean onBeforeDraw(IsChart chart, double easing) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart)) {
+		if (mustBeDisplay(chart)) {
 			// gets the legend
 			Legend legend = chart.getOptions().getLegend();
 			// creates legend DIV element reference
@@ -243,7 +247,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	@Override
 	public void onAfterDraw(IsChart chart, double easing) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart)) {
+		if (mustBeDisplay(chart)) {
 			// checks if the legend must be created
 			// the legend will be created if there is the legend element
 			// and the chart is is NOT in the set
@@ -285,23 +289,8 @@ public final class HtmlLegend extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart)) {
-			// checks if there is div element for legend
-			if (DIV_ELEMENTS.containsKey(chart.getId())) {
-				// removes from map
-				DivElement legendElement = DIV_ELEMENTS.remove(chart.getId());
-				// removes all listeners
-				removeListeners(chart, legendElement);
-				// removes all children
-				legendElement.removeAllChildren();
-				// removes from parent
-				legendElement.removeFromParent();
-			}
-			// removes the chart status
-			ADDED_LEGEND.remove(chart.getId());
-			// removes the chart legend labels items
-			LEGEND_LABELS.remove(chart.getId());
-			// removes the chart from easing status
-			EASINGS.remove(chart.getId());
+			// resets all status items
+			resetStatus(chart);
 			// removes the chart from options
 			HtmlLegendOptions oldOptions = OPTIONS.remove(chart.getId());
 			// scans all options to see if the options is used in another chart
@@ -315,6 +304,50 @@ public final class HtmlLegend extends AbstractPlugin {
 			// then it removes the legend callback from cache
 			FACTORY.store(oldOptions.getCharbaId(), null);
 		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if the plugin must be manage the legend, creating it.
+	 * 
+	 * @param chart chart instance.
+	 * @return <code>true</code> if the plugin must be manage the legend, creating it.
+	 */
+	private boolean mustBeDisplay(IsChart chart) {
+		// checks if argument is consistent
+		if (IsChart.isValid(chart) && OPTIONS.containsKey(chart.getId())) {
+			// gets stored option
+			HtmlLegendOptions options = OPTIONS.get(chart.getId());
+			// returns if must be display
+			return options.isDisplay();
+		}
+		// if here, chart is not consistent or no option
+		// tehn returns false
+		return false;
+	}
+	
+	/**
+	 * Removes all status items from all maps.
+	 * 
+	 * @param chart chart instance
+	 */
+	private void resetStatus(IsChart chart) {
+		// checks if there is div element for legend
+		if (DIV_ELEMENTS.containsKey(chart.getId())) {
+			// removes from map
+			DivElement legendElement = DIV_ELEMENTS.remove(chart.getId());
+			// removes all listeners
+			removeListeners(chart, legendElement);
+			// removes all children
+			legendElement.removeAllChildren();
+			// removes from parent
+			legendElement.removeFromParent();
+		}
+		// removes the chart status
+		ADDED_LEGEND.remove(chart.getId());
+		// removes the chart legend labels items
+		LEGEND_LABELS.remove(chart.getId());
+		// removes the chart from easing status
+		EASINGS.remove(chart.getId());
 	}
 
 	/**

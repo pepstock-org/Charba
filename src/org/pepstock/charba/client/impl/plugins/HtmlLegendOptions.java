@@ -41,6 +41,10 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * Default maximum legends columns to show.
 	 */
 	public static final int DEFAULT_MAXIMUM_LEGEND_COLUMNS = Integer.MAX_VALUE;
+	/**
+	 * Default display if legend must be showed.
+	 */
+	public static final boolean DEFAULT_DISPLAY = true;
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
@@ -56,6 +60,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	enum Property implements Key
 	{
 		MAXIMUM_LEGEND_COLUMNS("maxLegendColumns"),
+		DISPLAY("display"),
 		// internal key to store a unique id
 		CHARBA_ID("_charbaId");
 
@@ -123,6 +128,24 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	@Override
 	final String getCursorPointerAsString() {
 		return defaultsOptions.getCursorPointerAsString();
+	}
+	
+	/**
+	 * Sets if the legend is shown.
+	 * 
+	 * @param display if the legend is shown.
+	 */
+	public void setDisplay(boolean display) {
+		setValue(Property.DISPLAY, display);
+	}
+
+	/**
+	 * Returns if the legend is shown.
+	 * 
+	 * @return <code>true</code> if the legend is shown.
+	 */
+	public boolean isDisplay() {
+		return getValue(Property.DISPLAY, defaultsOptions.isDisplay());
 	}
 
 	/**
