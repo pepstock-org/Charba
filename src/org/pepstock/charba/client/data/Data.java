@@ -394,7 +394,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a dataset instance or <code>null</code> if not found by legend item
 	 */
-	private final Dataset retrieveDataset(LegendItem legendItem) {
+	private Dataset retrieveDataset(LegendItem legendItem) {
 		// checks if legend item is consistent
 		if (legendItem != null) {
 			// checks if dataset index is the locator
@@ -422,7 +422,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param <T> type of canvas object to retrieve
 	 * @return a canvas object instance or <code>null</code> if not found by legend item
 	 */
-	private final <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property) {
+	private <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property) {
 		// checks if arguments are consistent
 		// and if the container is not empty for the property to search
 		if (Key.isValid(property) && legendItem != null && dataset != null && container != null && container.hasObjects(property)) {
