@@ -320,7 +320,7 @@ public interface IsChart extends HasHandlers {
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
 	 * mutating the options property in place.
 	 */
-	void updateOptions();
+	void reconfigure();
 
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
@@ -330,7 +330,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
-	void updateOptions(UpdateConfiguration configuration);
+	void reconfigure(UpdateConfiguration configuration);
 
 	/**
 	 * Triggers a redraw of all chart elements.<br>

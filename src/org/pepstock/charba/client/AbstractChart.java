@@ -548,8 +548,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * mutating the options property in place.
 	 */
 	@Override
-	public final void updateOptions() {
-		updateOptions(null);
+	public final void reconfigure() {
+		reconfigure(null);
 	}
 
 	/**
@@ -561,7 +561,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
 	@Override
-	public final void updateOptions(UpdateConfiguration configuration) {
+	public final void reconfigure(UpdateConfiguration configuration) {
 		// checks if chart is created
 		if (chart != null) {
 			// updates option passed by configuration element
