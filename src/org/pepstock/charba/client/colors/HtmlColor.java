@@ -765,7 +765,12 @@ public enum HtmlColor implements IsEnumeratedColor
 	 * HTML color name "YELLOW_GREEN" - <span style="background-color:#9ACD32; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	YELLOW_GREEN("#9ACD32");
+	YELLOW_GREEN("#9ACD32"),
+	/**
+	 * HTML color name "TRANSPARENT" - <span style="background-color:rgba(255, 255, 255, 0); border-style: solid; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 */
+	TRANSPARENT("#FFFFFF", 0);
 
 	// color instance
 	private final IsColor color;
@@ -777,6 +782,17 @@ public enum HtmlColor implements IsEnumeratedColor
 	 */
 	private HtmlColor(String hexValue) {
 		color = ColorBuilder.buildByHexValue(hexValue, false);
+	}
+
+	/**
+	 * Creates a color with HEX value.
+	 * 
+	 * @param hexValue color string representation in hex mode
+	 * @param alpha the alpha to set
+	 */
+	private HtmlColor(String hexValue, double alpha) {
+		IsColor internalColor = ColorBuilder.buildByHexValue(hexValue, false);
+		color = internalColor.alpha(alpha);
 	}
 
 	/*
