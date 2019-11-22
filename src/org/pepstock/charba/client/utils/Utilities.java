@@ -198,6 +198,10 @@ public final class Utilities {
 	private static final Comparator<GradientColor> REVERSE_COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o2.getOffset(), o1.getOffset());
 	// constants to build CSS statement
 	private static final char COLOR_SEPARATOR = ',';
+	// constants to build CSS statement
+	private static final char COLOR_OFFSET_SEPARATOR = ' ';
+	// constants to build CSS statement
+	private static final char PATTERN_PERCENT = '%';
 
 	/**
 	 * To avoid any instantiation
@@ -434,6 +438,9 @@ public final class Utilities {
 				}
 				// adds color RGBA into strign builder
 				builder.append(color.getColor().toRGBA());
+				// gets offset to set as percentage
+				int percentage = (int)Math.round(color.getOffset() * 100);
+				builder.append(COLOR_OFFSET_SEPARATOR).append(percentage).append(PATTERN_PERCENT);
 			}
 			// using the template, returns the CSS value of gradient
 			return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
