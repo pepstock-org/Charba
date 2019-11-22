@@ -60,6 +60,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// PCT standard for width
 	private static final double DEFAULT_PCT_WIDTH = 90D;
+	// suffix label for canvas element id
+	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 
@@ -110,6 +112,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		if (isCanvasSupported) {
 			// creates a canvas
 			canvas = Canvas.createIfSupported();
+			// set id to canvas
+			canvas.getCanvasElement().setId(id + SUFFIX_CANVAS_ELEMENT_ID);
 			// adds to panel
 			add(canvas);
 			// adds the listener to disable canvas selection

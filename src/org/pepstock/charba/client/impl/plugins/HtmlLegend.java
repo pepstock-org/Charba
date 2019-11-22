@@ -251,7 +251,7 @@ public final class HtmlLegend extends AbstractPlugin {
 				// if here, the div has got the parent
 				// then it checks if the position is the same when it has been created
 				// otherwise it will move to the right position
-				manageLegendElement(chart.getElement(), legendElement, legend.getPosition());
+				manageLegendElement(chart, legendElement, legend.getPosition());
 			}
 			// checks if is full width has been set
 			if (legend.isFullWidth()) {
@@ -485,13 +485,15 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * This method is called when a legend element is already added and the position could be changed comparing when the element
 	 * has been created.
 	 * 
-	 * @param chartElement chart HTML element
+	 * @param chart chart instance
 	 * @param legendElement legend HTML element
 	 * @param position position set by legend configuration object
 	 */
-	private void manageLegendElement(Element chartElement, DivElement legendElement, Position position) {
+	private void manageLegendElement(IsChart chart, DivElement legendElement, Position position) {
+		// gets chart element
+		Element chartElement = chart.getElement();
 		// gets if the legend element has been defined after the canvas
-		boolean isAfterCanvas = isAfterCanvas(chartElement, legendElement);
+		boolean isAfterCanvas = isAfterCanvas(chart, legendElement);
 		// gets if the legend must be added to bottom
 		boolean mustBeAddedToBottom = mustAddToBottom(position);
 		if (mustBeAddedToBottom && !isAfterCanvas) {
@@ -524,11 +526,15 @@ public final class HtmlLegend extends AbstractPlugin {
 	/**
 	 * Returns <code>true</code> if the legend element has been added to chart element after the canvas one.
 	 * 
-	 * @param chartElement chart HTML element
+	 * @param chart chart instance
 	 * @param legendElement legend HTML element
 	 * @return <code>true</code> if the legend element has been added to chart element after the canvas one
 	 */
-	private boolean isAfterCanvas(Element chartElement, DivElement legendElement) {
+	private boolean isAfterCanvas(IsChart chart, DivElement legendElement) {
+		// gets chart element
+		Element chartElement = chart.getElement();
+		// retrieves canvas id of chart
+		String canvasId = chart.getCanvas().getCanvasElement().getId();
 		// scans all children of chart element
 		for (int i = 0; i < chartElement.getChildCount(); i++) {
 			// gets the node
@@ -539,12 +545,11 @@ public final class HtmlLegend extends AbstractPlugin {
 				Element childElement = (Element) child;
 				// checks if the legend element is queals to the scanned node
 				// by its id
-				if (legendElement.getId().equalsIgnoreCase(childElement.getId())) {
+				if (childElement.getNodeName().equalsIgnoreCase(DivElement.TAG) && legendElement.getId().equalsIgnoreCase(childElement.getId())) {
 					// if here, means that the legend element has been found before the canvas element
 					// then returns false
 					return false;
-					// FIXME checks ID of canvas
-				} else if (childElement.getNodeName().equalsIgnoreCase(CanvasElement.TAG)) {
+				} else if (childElement.getNodeName().equalsIgnoreCase(CanvasElement.TAG) && childElement.getId().equalsIgnoreCase(canvasId)) {
 					// if here, means that the canvas element has been found before the legend element
 					// then returns true
 					return true;
