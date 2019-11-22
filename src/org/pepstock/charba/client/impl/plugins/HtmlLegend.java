@@ -40,7 +40,6 @@ import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.DivElement;
@@ -168,7 +167,6 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			OPTIONS.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
-			Window.getConsole().log("configure "+pOptions.isDisplay());
 			// checks if the plugin is configured to show legend
 			if (pOptions.isDisplay()) {
 				// if the legend is set do not display
