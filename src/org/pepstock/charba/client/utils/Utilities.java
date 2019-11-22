@@ -296,6 +296,22 @@ public final class Utilities {
 	}
 
 	/**
+	 * Returns a URL CSS property for the data URL for the current content of the canvas element.
+	 * 
+	 * @param dataUrl the data URL for the current content of the canvas element
+	 * @return a URL CSS property for the current content of the canvas element
+	 */
+	public static String toCSSBackgroundProperty(String dataUrl) {
+		// checks if data url is consistent
+		if (dataUrl != null && dataUrl.trim().length() > 0) {
+			return PATTERN_TEMPLATE.css(dataUrl, EMPTY_STRING).asString();
+		}
+		// if here data url is not consistent
+		// returns empty string
+		return EMPTY_STRING;
+	}
+
+	/**
 	 * Returns a URL CSS property for the current content of a fill or stroke canvas style instance.
 	 * 
 	 * @param style fill or stroke canvas style instance
@@ -308,10 +324,47 @@ public final class Utilities {
 	}
 
 	/**
+	 * Returns a URL CSS property for the current content of an image resource instance.
+	 * 
+	 * @param image image resource instance to get as CSS property
+	 * @return a URL CSS property for the current content of the image
+	 */
+	public static String toCSSBackgroundProperty(ImageResource image) {
+		return toCSSBackgroundProperty(toImageElement(image));
+	}
+
+	/**
+	 * Returns a URL CSS property for the current content of an image instance.
+	 * 
+	 * @param image image instance to get as CSS property
+	 * @return a URL CSS property for the current content of the image
+	 */
+	public static String toCSSBackgroundProperty(Image image) {
+		return toCSSBackgroundProperty(toImageElement(image));
+	}
+
+	/**
+	 * Returns a URL CSS property for the current content of an image element instance.
+	 * 
+	 * @param image image element instance to fet as CSS property
+	 * @return a URL CSS property for the current content of the image
+	 */
+	public static String toCSSBackgroundProperty(ImageElement image) {
+		// checks if consistent
+		if (image != null) {
+			// transform into CSS property
+			return PATTERN_TEMPLATE.css(image.getSrc(), EMPTY_STRING).asString();
+		}
+		// if here, image not consistent
+		// then returns an empty string
+		return EMPTY_STRING;
+	}
+
+	/**
 	 * Returns a data URL for the current content of a fill or stroke canvas style instance.
 	 * 
 	 * @param style fill or stroke canvas style instance
-	 * @param width width of image applied to canvasPattern
+	 * @param width width of canvas styapplied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 * @return a data URL for the current content of the canvas pattern
 	 */
