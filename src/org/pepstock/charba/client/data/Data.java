@@ -394,7 +394,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a dataset instance or <code>null</code> if not found by legend item
 	 */
-	private Dataset retrieveDataset(LegendItem legendItem) {
+	public final Dataset retrieveDataset(LegendItem legendItem) {
 		// checks if legend item is consistent
 		if (legendItem != null) {
 			// checks if dataset index is the locator
