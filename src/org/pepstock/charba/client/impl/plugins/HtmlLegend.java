@@ -164,27 +164,32 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			OPTIONS.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
-			// if the legend is set do not display
-			// or the ootb legend plugin has been disable
-			// it respects it then ignore it and the plugin in
-			// will be disable
-			//FIXME bug
-			boolean mustBeActivated = chart.getOptions().getLegend().isDisplay() || pOptions.isDisplay();
-			if (mustBeActivated && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
-				// disable legend
-				chart.getOptions().getLegend().setDisplay(false);
-				// sets legend callback
-				// overriding whatever other callback has been set
-				chart.getOptions().setLegendCallback(CALLBACK);
-				// sets easing to zero
-				EASINGS.put(chart.getId(), 0D);
-				// creates options instance
+			// checks if the plugin is configured to show legend
+			if (pOptions.isDisplay()) {
+				// if the legend is set do not display
+				// or the ootb legend plugin has been disable
+				// it respects it then ignore it and the plugin in
+				// will be disable
+				//FIXME bug
+				if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
+					// disable legend
+					chart.getOptions().getLegend().setDisplay(false);
+					// sets legend callback
+					// overriding whatever other callback has been set
+					chart.getOptions().setLegendCallback(CALLBACK);
+					// sets easing to zero
+					EASINGS.put(chart.getId(), 0D);
+					// creates options instance
+				} else {
+					// resets all status items if there are
+					// this is in case of update options
+					resetStatus(chart);
+					// disables display of plugin 
+					pOptions.setDisplay(false);
+				}
 			} else {
 				// resets all status items if there are
-				// this is inca se of update options
 				resetStatus(chart);
-				// disables display of plugin 
-				pOptions.setDisplay(false);
 			}
 		}
 	}
