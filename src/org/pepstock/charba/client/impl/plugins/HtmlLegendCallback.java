@@ -29,6 +29,7 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.DatasetViewItem;
@@ -111,6 +112,8 @@ final class HtmlLegendCallback implements LegendCallback {
 	private static final double DEFAULT_RADIUS = Defaults.get().getGlobal().getElements().getPoint().getRadius();
 	// CSS style property for horizontal alignment
 	private static final String STYLE_ALIGN = "align";
+	// CSS style property for horizontal alignment
+	private static final String STYLE_DIRECTION = "direction";
 	// carriage return to check into text of legend item
 	private static final String BREAK = "\n";
 
@@ -331,6 +334,12 @@ final class HtmlLegendCallback implements LegendCallback {
 		// styling the cell with mandatory values
 		label.getStyle().setProperty(Utilities.CSS_FONT_PROPERTY, Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
 		label.getStyle().setColor(legendLabels.getFontColor().toRGBA());
+		// checks text direction
+		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
+			label.getStyle().setProperty(STYLE_DIRECTION, TextDirection.RIGHT_TO_LEFT.value());
+		} else {
+			label.getStyle().setProperty(STYLE_DIRECTION, TextDirection.LEFT_TO_RIGHT.value());
+		}
 		// checks if item is hidden
 		if (item.isHidden()) {
 			// if hidden, apply a specific text decoration

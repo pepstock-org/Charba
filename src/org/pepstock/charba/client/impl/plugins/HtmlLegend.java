@@ -207,9 +207,9 @@ public final class HtmlLegend extends AbstractPlugin {
 					// disables display of plugin 
 					pOptions.setDisplay(false);
 				}
-				// checks if the original value is already passed
 			} else {
-				// resets all status items if there are
+				// resets status of plugin
+				// because display is false
 				resetStatus(chart);
 			}
 		}
@@ -320,6 +320,8 @@ public final class HtmlLegend extends AbstractPlugin {
 		if (IsChart.isValid(chart)) {
 			// resets all status items
 			resetStatus(chart);
+			// removes status of legend display
+			LEGEND_DISPLAY.remove(chart.getId());
 			// removes the chart from options
 			HtmlLegendOptions oldOptions = OPTIONS.remove(chart.getId());
 			// scans all options to see if the options is used in another chart
@@ -377,8 +379,6 @@ public final class HtmlLegend extends AbstractPlugin {
 		LEGEND_LABELS.remove(chart.getId());
 		// removes the chart from easing status
 		EASINGS.remove(chart.getId());
-		// removes status of legend display
-		LEGEND_DISPLAY.remove(chart.getId());
 		// removes cached point style from tile factory
 		// if there are
 		HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
