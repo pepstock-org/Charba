@@ -19,7 +19,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
@@ -55,6 +57,30 @@ public final class Injector {
 	 * @param resource script resource
 	 */
 	public static void ensureInjected(ResourcePrototype resource) {
+		// creates a script element
+		ScriptElement scriptElement = Document.get().createScriptElement();
+		// injects it into SCRIPT element
+		ensureInjected(resource, scriptElement);
+	}
+
+	/**
+	 * Injects a CSS style resource if not injected yet.
+	 * 
+	 * @param resource CSS style resource
+	 */
+	public static void ensureCssInjected(ResourcePrototype resource) {
+		// creates a style element
+		StyleElement styleElement = Document.get().createStyleElement();
+		// injects it into STYLE element
+		ensureInjected(resource, styleElement);
+	}
+
+	/**
+	 * Injects a script resource if not injected yet.
+	 * 
+	 * @param resource script resource
+	 */
+	private static void ensureInjected(ResourcePrototype resource, Element container) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a unique key for the resource
@@ -64,14 +90,12 @@ public final class Injector {
 			if (!ELEMENTS_INJECTED.contains(resourceKey)) {
 				if (resource instanceof TextResource) {
 					TextResource textResource = (TextResource) resource;
-					// creates a script element
-					ScriptElement scriptElement = Document.get().createScriptElement();
 					// sets ID
-					scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resource.getName());
+					container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
 					// sets the script content source
-					scriptElement.setInnerText(textResource.getText());
+					container.setInnerText(textResource.getText());
 					// appends to the body
-					Document.get().getBody().appendChild(scriptElement);
+					Document.get().getBody().appendChild(container);
 				}
 				ELEMENTS_INJECTED.add(resourceKey);
 			}
