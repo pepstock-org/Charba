@@ -88,7 +88,9 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		double radius = htmlLegendItem.getRadius();
 		int size = htmlLegendItem.getSize();
 		double rotation = htmlLegendItem.getLegendItem().getRotation();
-		rotation = Double.isNaN(rotation) ? DEFAULT_ROTATION : Math.max(rotation, 0D) == 0D ? DEFAULT_ROTATION : rotation;
+		if (Double.isNaN(rotation) || Math.max(rotation, 0D) == 0D) {
+			rotation = DEFAULT_ROTATION;
+		}
 		double rad = rotation * RAD_PER_DEG;
 		double x = size / 2D;
 		double y = size / 2D;

@@ -167,10 +167,9 @@ public final class HtmlLegend extends AbstractPlugin {
 			// checks if the plugin is configured to show legend
 			if (pOptions.isDisplay()) {
 				// if the legend is set do not display
-				// or the ootb legend plugin has been disable
+				// or the OOTB legend plugin has been disable
 				// it respects it then ignore it and the plugin in
 				// will be disable
-				//FIXME bug
 				if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
 					// disable legend
 					chart.getOptions().getLegend().setDisplay(false);

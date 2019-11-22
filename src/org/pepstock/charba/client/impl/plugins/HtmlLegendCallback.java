@@ -457,10 +457,12 @@ final class HtmlLegendCallback implements LegendCallback {
 			}
 			// checks with default radius
 			// if consistent
-			double radiusParam = radius < 0 || Double.isNaN(radius) ? DEFAULT_RADIUS : Math.max(radius, 0D) == 0D ? DEFAULT_RADIUS : radius;
+			if (radius < 0 || Double.isNaN(radius) || Math.max(radius, 0D) == 0D) {
+				radius = DEFAULT_RADIUS;
+			}
 			// update the html legend item settig the size and calulated radius
 			htmlLegendItem.setSize(size);
-			htmlLegendItem.setRadius(radiusParam);
+			htmlLegendItem.setRadius(radius);
 			// invokes tiles factory to get a pattern as string
 			// of point style
 			String pattern = TilesFactory.createHtmlLegendItem(htmlLegendItem);

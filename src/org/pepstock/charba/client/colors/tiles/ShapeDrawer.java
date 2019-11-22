@@ -64,19 +64,19 @@ public abstract class ShapeDrawer {
 	 */
 	final CanvasPattern createTile(CanvasElement outerCanvas, String backgroundColor, String shapeColor, int size) {
 		// gets the initialized canvas element
-		CanvasElement canvas = initCanvas(outerCanvas, size);
-		Context2d context = canvas.getContext2d();
+		CanvasElement innerCanvas = initCanvas(outerCanvas, size);
+		Context2d context = innerCanvas.getContext2d();
 		// sets the background color
 		context.setFillStyle(backgroundColor);
-		context.fillRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
+		context.fillRect(0D, 0D, innerCanvas.getWidth(), innerCanvas.getHeight());
 		// begins a new path.
 		context.beginPath();
 		// invoke the drawer to design the shape
-		drawTile(canvas.getContext2d(), backgroundColor, shapeColor, size);
+		drawTile(innerCanvas.getContext2d(), backgroundColor, shapeColor, size);
 		// closes the path
 		context.closePath();
 		// transforms the canvas into a pattern
-		return outerCanvas.getContext2d().createPattern(canvas, Context2d.Repetition.REPEAT);
+		return outerCanvas.getContext2d().createPattern(innerCanvas, Context2d.Repetition.REPEAT);
 	}
 
 	/**
