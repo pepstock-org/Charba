@@ -158,6 +158,7 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add `charba` prefix to all plugins provided out of the box by **Charba**
   * change `updateOptions` method name of `IsChart` interface into `reconfigure`. 
   * add `isConsistent` and `checkIfConsistent` methods to `IsChart` interface which checks if not only chart and its id are not `null` but also other elements (i.e. options, type) 
+  * add `ensureCssInjected` to `Injector` class in order to enable injection of CSS styles as text resource and not by CSS resource, provided by GWT.
 
 License
 -------
