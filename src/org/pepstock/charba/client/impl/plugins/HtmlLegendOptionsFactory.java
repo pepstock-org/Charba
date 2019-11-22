@@ -38,7 +38,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
 	 * 
-	 * @param plugin id
+	 * @param plugin id html legend plugin
 	 */
 	HtmlLegendOptionsFactory(String pluginId) {
 		super(pluginId);
@@ -58,7 +58,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 		HtmlLegendOptions options = new HtmlLegendOptions(nativeObject, defaultsOptions);
 		// gets charba id
 		int charbaId = options.getCharbaId();
-		// checks if there is any callback
+		// checks if there is any callback stored into cahce
 		if (LEGEND_TEXT_CALLBACKS.containsKey(charbaId)) {
 			// sets callback
 			options.internalSetLegendTextCallback(LEGEND_TEXT_CALLBACKS.get(charbaId));
@@ -108,7 +108,5 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 			}
 			return options;
 		}
-
 	}
-
 }

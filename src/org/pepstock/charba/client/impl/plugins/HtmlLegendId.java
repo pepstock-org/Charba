@@ -198,7 +198,7 @@ final class HtmlLegendId {
 		if (element != null) {
 			return get(element.getId());
 		}
-		// if here, the elemnt is not consistent
+		// if here, the element is not consistent
 		return null;
 	}
 

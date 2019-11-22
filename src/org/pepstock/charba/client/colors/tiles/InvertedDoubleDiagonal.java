@@ -42,7 +42,7 @@ final class InvertedDoubleDiagonal extends DoubleDiagonal {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.Diagonal#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override

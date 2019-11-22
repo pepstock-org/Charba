@@ -21,6 +21,10 @@ import java.util.Map;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
+import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -42,13 +46,14 @@ public final class TilesFactory {
 	private static final TilesFactory INSTANCE = new TilesFactory();
 	// cache of canvas patterns to avoid to create the same canvas pattern if already used
 	private static final Map<String, CanvasPattern> CANVAS_PATTERNS = new HashMap<>();
+	// cache of canvas patterns to avoid to create the same canvas pattern if already used
+	private static final Map<String, String> HTML_LEGEND_ITEMS = new HashMap<>();
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// string format to trim blanks
 	private static final String REGEXP_TRIM_SPACES_PATTERN = "\\s+";
 	// regexp instance to trim blanks
 	private static final RegExp REGEXP_TRIM_SPACES = RegExp.compile(REGEXP_TRIM_SPACES_PATTERN);
-
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// canvas where draws the pattern
@@ -81,6 +86,10 @@ public final class TilesFactory {
 	public static TilesFactoryDefaults getDefaults() {
 		return INSTANCE.defaults;
 	}
+
+	// -----------------------------------------
+	// --- TILE - CanvasPattern
+	// -----------------------------------------
 
 	/**
 	 * Returns a canvas pattern, using default values, shape is <code>square</code>, background color, shape color and size.
@@ -173,30 +182,12 @@ public final class TilesFactory {
 	 * @return a tile as canvas pattern
 	 */
 	public static CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
-		// checks consistency of all parameters
-		// if not consistent, it applies the default value
-		IsShape shapeParam = shape != null ? shape : INSTANCE.defaults.getShape();
-		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesFactoryDefaults.DEFAULT_BACKGROUND_COLOR_AS_STRING;
-		String shapeColorParam = shapeColor != null ? shapeColor : TilesFactoryDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
-		// checks the minimum size of canvas pattern
-		int sizeParam = Math.max(size, TilesFactoryDefaults.MINIMUM_SIZE);
-		// creates a unique key based on arguments
-		// in order to store the canvas pattern when created and
-		// if all further requests for the same canvas pattern, returns the cached one
-		StringBuilder keyBuilder = new StringBuilder(shapeParam.getKeyPrefix());
-		keyBuilder.append(backgroundColorParam).append(shapeColorParam).append(sizeParam);
-		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
-		// checks if the canvas pattern is already created with those parameters
-		if (CANVAS_PATTERNS.containsKey(key)) {
-			// if yes returns the cached one
-			return CANVAS_PATTERNS.get(key);
-		}
-		// creates a canvas
-		CanvasPattern pattern = shapeParam.getDrawer().createTile(INSTANCE.canvas, backgroundColorParam, shapeColorParam, sizeParam);
-		// stores it into cache
-		CANVAS_PATTERNS.put(key, pattern);
-		return pattern;
+		return buildTile(shape, backgroundColor, shapeColor, size);
 	}
+
+	// -----------------------------------------
+	// --- TILE - Charba Pattern
+	// -----------------------------------------
 
 	/**
 	 * Returns a CHARBA pattern, using default values, shape is <code>square</code>, background color, shape color and size.
@@ -290,6 +281,200 @@ public final class TilesFactory {
 	 */
 	public static Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
 		return new Pattern(createTile(shape, backgroundColor, shapeColor, size), size);
+	}
+
+	// -----------------------------------------
+	// --- TILE - Charba Point Style
+	// -----------------------------------------
+
+	/**
+	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color
+	 * and size.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style) {
+		return new Pattern(createTile(PointStyleShape.get(style)));
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
+	 * color and size.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, IsColor backgroundColor) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor));
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
+	 * color and size.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, String backgroundColor) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor));
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
+	 * value.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @param shapeColor shape color
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, String backgroundColor, String shapeColor) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor));
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
+	 * value.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @param shapeColor shape color
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, IsColor backgroundColor, IsColor shapeColor) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor));
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style, back ground color, shape color and size as arguments.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @param shapeColor shape color
+	 * @param size size of canvas pattern
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, String backgroundColor, String shapeColor, int size) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size);
+	}
+
+	/**
+	 * Returns a CHARBA pattern, using the point style, back ground color, shape color and size as arguments.
+	 * 
+	 * @param pointStyle point style to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @param shapeColor shape color
+	 * @param size size of canvas pattern
+	 * @return a CHARBA pattern
+	 */
+	public static Pattern createPattern(PointStyle style, IsColor backgroundColor, IsColor shapeColor, int size) {
+		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size);
+	}
+
+	// -----------------------------------------
+	// --- TILE - creation
+	// -----------------------------------------
+
+	/**
+	 * Returns a canvas pattern, using the shape, back ground color, shape color and size as arguments.
+	 * 
+	 * @param shape shape to apply to canvas pattern
+	 * @param backgroundColor background color of canvas pattern
+	 * @param shapeColor shape color
+	 * @param size size of canvas pattern
+	 * @param radius the radius of the tile, use only for {@link PointStyle} drawing
+	 * @param legendItem the legend item instance to create the tile, only for {@link PointStyle} drawing
+	 * @return a tile as canvas pattern
+	 */
+	private static CanvasPattern buildTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
+		// checks consistency of all parameters
+		// if not consistent, it applies the default value
+		IsShape shapeParam = IsShape.isValid(shape) ? shape : INSTANCE.defaults.getShape();
+		// checks consistency of shape
+		// this control is done after previous
+		// assignment to check the methods of the interface
+		// and not only the null instance
+		IsShape.checkIfValid(shapeParam);
+		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesFactoryDefaults.DEFAULT_BACKGROUND_COLOR_AS_STRING;
+		String shapeColorParam = shapeColor != null ? shapeColor : TilesFactoryDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
+		// checks the minimum size of canvas pattern
+		int sizeParam = Math.max(size, TilesFactoryDefaults.MINIMUM_SIZE);
+		// checks the minimum size of radius and rotaion
+		// creates a unique key based on arguments
+		// in order to store the canvas pattern when created and
+		// if all further requests for the same canvas pattern, returns the cached one
+		StringBuilder keyBuilder = new StringBuilder(shape.getKeyPrefix());
+		keyBuilder.append(backgroundColor).append(shapeColor).append(size);
+		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
+		// checks if the canvas pattern is already created with those parameters
+		if (CANVAS_PATTERNS.containsKey(key)) {
+			// if yes returns the cached one
+			return CANVAS_PATTERNS.get(key);
+		}
+		// creates a canvas pattern
+		CanvasPattern pattern = shapeParam.getDrawer().createTile(INSTANCE.canvas, backgroundColorParam, shapeColorParam, sizeParam);
+		// stores it into cache
+		CANVAS_PATTERNS.put(key, pattern);
+		return pattern;
+	}
+
+	// -----------------------------------------
+	// --- TILE - Legend Item for POINT STYLE
+	// -----------------------------------------
+
+	/**
+	 * Returns a point style picture in base64 PNG format using the legend item as source.<br>
+	 * This is invoked ONLY from {@link HtmlLegend} plugin.
+	 * 
+	 * @param htmlLegendItem the legend item instance to create the tile
+	 * @return a point style picture in base64 PNG format
+	 * @see Canvas#toDataUrl()
+	 */
+	public static String createHtmlLegendItem(HtmlLegendItem htmlLegendItem) {
+		// checks if html legend item is consistent
+		// and the point style is not an image
+		if (htmlLegendItem != null && htmlLegendItem.getLegendItem() != null && !htmlLegendItem.getLegendItem().isPointStyleAsImage()) {
+			// gets unique key
+			String key = htmlLegendItem.toUniqueKey();
+			// checks if item is cached
+			if (key != null && HTML_LEGEND_ITEMS.containsKey(key)) {
+				return HTML_LEGEND_ITEMS.get(key);
+			}
+			// gets point style
+			PointStyle pointStyle = htmlLegendItem.getLegendItem().getPointStyle();
+			// gets the shape related to point style
+			PointStyleShape shape = PointStyleShape.get(pointStyle);
+			// checks if it is an instance of point style drawer
+			if (shape.getDrawer() instanceof AbstractPointStyleShapeDrawer) {
+				// casts to point style drawer
+				AbstractPointStyleShapeDrawer pointStyleShape = (AbstractPointStyleShapeDrawer) shape.getDrawer();
+				// invokes the drawing of the point style
+				String result = pointStyleShape.drawTile(INSTANCE.canvas, htmlLegendItem);
+				// stores it into cache
+				HTML_LEGEND_ITEMS.put(key, result);
+				return result;
+			}
+		}
+		// if here, arguments are not consistent
+		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from
+	 * {@link HtmlLegend} plugin.
+	 * 
+	 * @param htmlLegendItem the legend item instance to create the tile
+	 */
+	public static void clearHtmlLegendItems(HtmlLegendItem htmlLegendItem) {
+		// checks if html legend item is consistent
+		if (htmlLegendItem != null) {
+			// scans items by key
+			// remove by key
+			HTML_LEGEND_ITEMS.keySet().removeIf(key -> key.startsWith(htmlLegendItem.getChart().getId()));
+		}
 	}
 
 }

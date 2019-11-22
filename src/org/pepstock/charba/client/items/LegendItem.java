@@ -42,7 +42,7 @@ import com.google.gwt.dom.client.ImageElement;
  * @author Andrea "Stock" Stocchero
  */
 public class LegendItem extends NativeObjectContainer {
-
+	
 	/**
 	 * Name of properties of native object.
 	 */
@@ -331,6 +331,16 @@ public class LegendItem extends NativeObjectContainer {
 	public final JoinStyle getLineJoin() {
 		return getValue(Property.LINE_JOIN, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
+
+	/**
+	 * Returns the width of line in pixels.
+	 * 
+	 * @return the width of line in pixels.
+	 */
+	public final int getLineWidth() {
+		return getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
+	}
+
 
 	/**
 	 * Returns the rotation of the point in degrees (only used if usePointStyle is true).

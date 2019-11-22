@@ -42,7 +42,7 @@ final class InvertedTriangle extends Triangle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.Triangle#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override

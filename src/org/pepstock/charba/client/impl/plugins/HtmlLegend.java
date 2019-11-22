@@ -26,6 +26,7 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.Legend;
@@ -54,7 +55,8 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import jsinterop.annotations.JsFunction;
 
 /**
- * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.
+ * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.<br>
+ * It uses the {@link HtmlLegendCallback} to generated HTML legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -104,7 +106,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
 	// cache to store options in order do not load every time the options
 	static final Map<String, HtmlLegendOptions> OPTIONS = new HashMap<>();
-	// cache to store options in order do not load every time the options
+	// cache to store legend items managed by chart
 	static final Map<String, List<LegendLabelItem>> LEGEND_LABELS = new HashMap<>();
 	// cache to store DIV element which contains legend for each chart
 	private static final Map<String, DivElement> DIV_ELEMENTS = new HashMap<>();
@@ -112,7 +114,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	// this cache is needed in order to recreate the legend when a chart update
 	// is invoked during a previous update
 	private static final Map<String, Double> EASINGS = new HashMap<>();
-	// cache to store options in order do not load every time the options
+	// cache to store the chart id in order to know when new legend must be created
 	private static final Set<String> ADDED_LEGEND = new HashSet<>();
 	// static callback to generate legend into HTML
 	private static final HtmlLegendCallback CALLBACK = new HtmlLegendCallback();
@@ -166,6 +168,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// or the ootb legend plugin has been disable
 			// it respects it then ignore it and the plugin in
 			// will be disable
+			//FIXME bug
 			boolean mustBeActivated = chart.getOptions().getLegend().isDisplay() || pOptions.isDisplay();
 			if (mustBeActivated && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
 				// disable legend
@@ -348,6 +351,10 @@ public final class HtmlLegend extends AbstractPlugin {
 		LEGEND_LABELS.remove(chart.getId());
 		// removes the chart from easing status
 		EASINGS.remove(chart.getId());
+		// removes cached point style from tile factory
+		// if there are
+		HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
+		TilesFactory.clearHtmlLegendItems(htmlLegendItem);
 	}
 
 	/**
@@ -553,13 +560,20 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @return the parent element with TD tag name or <code>null</code> if not found.
 	 */
 	private Element checkParent(Element child) {
+		// checks if has got a parent
 		if (child.hasParentElement()) {
+			// checks if parent has got the TD element
 			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
+				// returns parent element
 				return child.getParentElement();
 			} else {
+				// calls this method recursively
+				// scanning the parent
 				return checkParent(child.getParentElement());
 			}
 		}
+		// if here if scanning the elements tree
+		// the TD element is not found
 		return null;
 	}
 

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.enums.PointStyle;
 
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
@@ -66,6 +67,17 @@ public final class TilesBuilder {
 	 */
 	public TilesBuilder setShape(IsShape shape) {
 		this.shape = shape == null ? TilesFactory.getDefaults().getShape() : shape;
+		return this;
+	}
+
+	/**
+	 * Sets the point style as shape of the tile.
+	 * 
+	 * @param pointStyle the point style as shape of the tile
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setPointStyle(PointStyle pointStyle) {
+		this.shape = PointStyleShape.get(pointStyle);
 		return this;
 	}
 

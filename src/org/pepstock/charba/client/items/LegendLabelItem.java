@@ -17,7 +17,6 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -328,19 +327,10 @@ public final class LegendLabelItem extends LegendItem {
 	/**
 	 * Sets the width of box border in pixels.
 	 * 
-	 * @param lineWidths the width of box border in pixels.
+	 * @param lineWidth the width of box border in pixels.
 	 */
-	public void setLineWidth(int lineWidths) {
-		setValue(LegendItem.Property.LINE_WIDTH, lineWidths);
-	}
-
-	/**
-	 * Returns the width of line in pixels.
-	 * 
-	 * @return the width of line in pixels.
-	 */
-	public int getLineWidth() {
-		return getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
+	public void setLineWidth(int lineWidth) {
+		setValue(LegendItem.Property.LINE_WIDTH, lineWidth);
 	}
 
 	/**

@@ -26,15 +26,21 @@ import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.callbacks.LegendTextCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.DatasetViewItem;
+import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Display;
@@ -46,6 +52,7 @@ import com.google.gwt.dom.client.TableRowElement;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 /**
  * Legend callback implementation to override the standard HTML format of CHART.JS legend.<br>
@@ -100,6 +107,8 @@ final class HtmlLegendCallback implements LegendCallback {
 	private static final Comparator<LegendLabelItem> COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o1.getDatasetIndex(), o2.getDatasetIndex()) + Double.compare(o1.getIndex(), o2.getIndex());
 	// internal comparator to sort legend item by reverse own index
 	private static final Comparator<LegendLabelItem> REVERSE_COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o2.getDatasetIndex(), o1.getDatasetIndex()) + Double.compare(o2.getIndex(), o1.getIndex());
+	// default radius value
+	private static final double DEFAULT_RADIUS = Defaults.get().getGlobal().getElements().getPoint().getRadius();
 	// CSS style property for horizontal alignment
 	private static final String STYLE_ALIGN = "align";
 	// carriage return to check into text of legend item
@@ -163,6 +172,8 @@ final class HtmlLegendCallback implements LegendCallback {
 			// instance of current row
 			// where adds new columns for each legend
 			TableRowElement current = null;
+			// gets html legend item wrapper
+			final HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
 			// scans all legend items
 			for (LegendLabelItem item : legendItems) {
 				// checks if new row must be created
@@ -177,9 +188,11 @@ final class HtmlLegendCallback implements LegendCallback {
 				}
 				// creates the element id for legend item
 				HtmlLegendId legendId = HtmlLegendId.get(chart, item);
+				// set legend item to html legend id
+				htmlLegendItem.setLegendItem(item);
 				// creates and adds the cell part
 				// related to color/box to design into legend
-				current.appendChild(buildColorCell(chart, legendId, item));
+				current.appendChild(buildColorCell(chart, legendId, htmlLegendItem));
 				// creates and adds the cell part
 				// related to label with legend item text
 				current.appendChild(buildLabelCell(chart, legendId, item, options.getLegendTextCallback()));
@@ -245,7 +258,9 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @param item legend item to show into color cell element
 	 * @return a {@link TableCellElement} which should contains and represents the color of dataset
 	 */
-	private TableCellElement buildColorCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item) {
+	private TableCellElement buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
+		// gets legend label item
+		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// result color cell
 		final TableCellElement colorCell = Document.get().createTDElement();
 		// gets legend and legend labels instances
@@ -253,9 +268,10 @@ final class HtmlLegendCallback implements LegendCallback {
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		colorCell.setId(legendId.getIdForColor());
-		colorCell.setVAlign(Position.TOP.value());
-		colorCell.getStyle().setPaddingRight(legendLabels.getPadding() / 2D, Unit.PX);
-		colorCell.getStyle().setPaddingBottom(legendLabels.getPadding(), Unit.PX);
+		colorCell.setVAlign(HasVerticalAlignment.ALIGN_TOP.getVerticalAlignString());
+		colorCell.getStyle().setMarginRight(legendLabels.getPadding() / 2D, Unit.PX);
+		colorCell.getStyle().setMarginBottom(legendLabels.getPadding(), Unit.PX);
+		colorCell.getStyle().setDisplay(Display.BLOCK);
 		// creates inner HTML element
 		// where to apply the color
 		DivElement color = Document.get().createDivElement();
@@ -267,17 +283,23 @@ final class HtmlLegendCallback implements LegendCallback {
 		int width = legendLabels.getBoxWidth() - borderWidthToRemove;
 		int height = legendLabels.getFontSize() - borderWidthToRemove;
 		// styling the cell with mandatory values
-		color.getStyle().setDisplay(Display.INLINE_BLOCK);
+		color.getStyle().setDisplay(Display.BLOCK);
 		color.getStyle().setWidth(width, Unit.PX);
 		color.getStyle().setHeight(height, Unit.PX);
-		// applies the background color
-		applyBackgroundColor(chart, item, color, width, height);
-		// applies the border width
-		boolean applyBorderColor = applyBorderWidth(item, color);
-		// checks if must be applied the color
-		if (applyBorderColor) {
-			// applies the border color
-			applyBorderColor(chart, item, color, width, height);
+		// checks if must apply point style
+		if (!legendLabels.isUsePointStyle()) {
+			// applies the background color
+			applyBackgroundColor(chart, item, color, width, height);
+			// applies the border width
+			boolean applyBorderColor = applyBorderWidth(item, colorCell);
+			// checks if must be applied the color
+			if (applyBorderColor) {
+				// applies the border color
+				applyBorderColor(chart, item, colorCell, width, height);
+			}
+		} else {
+			// if here, it must show the legend point styles
+			applyPointStyle(chart, htmlLegendItem, color, width, height);
 		}
 		return colorCell;
 	}
@@ -299,7 +321,7 @@ final class HtmlLegendCallback implements LegendCallback {
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		labelCell.setId(legendId.getIdForLabel());
-		labelCell.setVAlign(Position.TOP.value());
+		labelCell.setVAlign(HasVerticalAlignment.ALIGN_TOP.getVerticalAlignString());
 		labelCell.getStyle().setPaddingRight(legendLabels.getPadding(), Unit.PX);
 		labelCell.getStyle().setPaddingBottom(legendLabels.getPadding(), Unit.PX);
 		// creates inner HTML element
@@ -362,16 +384,16 @@ final class HtmlLegendCallback implements LegendCallback {
 		// checks if the text contains a carriage return
 		if (text.contains(BREAK)) {
 			// splits the text
-			String[] splittedText = text.split(BREAK);
-			// scans all splitted text
-			for (String singleText : splittedText) {
+			String[] splitText = text.split(BREAK);
+			// scans all split text
+			for (String singleText : splitText) {
 				// if elements has got more than 0 children
 				// means that a text node has been already added
 				// then BR element will be added
 				if (element.getChildCount() > 0) {
 					element.appendChild(Document.get().createBRElement());
 				}
-				// adds the splitted text as text element
+				// adds the split text as text element
 				element.appendChild(Document.get().createTextNode(singleText));
 			}
 		} else if (callback != null) {
@@ -394,6 +416,110 @@ final class HtmlLegendCallback implements LegendCallback {
 			// then the text is set as text of HTML element
 			element.setInnerText(text);
 		}
+	}
+
+	/**
+	 * Applies the background color to the color element.
+	 * 
+	 * @param chart chart instance related to legend to build
+	 * @param item legend item to map into background color
+	 * @param color DIV element where to apply the background color
+	 * @param width width to use to apply background color
+	 * @param height height to use to apply background color
+	 */
+	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, DivElement color, int width, int height) {
+		// gets legend label item
+		LegendLabelItem item = htmlLegendItem.getLegendItem();
+		// checks if point style is an image
+		if (item.isPointStyleAsImage()) {
+			// gets point style image
+			ImageElement image = item.getPointStyleAsImage();
+			// if here, apply the point style as image
+			String imageAsCss = Utilities.toCSSBackgroundProperty(image);
+			// applies the point style as background to color element
+			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, imageAsCss);
+			// sets the image size to color element
+			color.getStyle().setWidth(image.getWidth(), Unit.PX);
+			color.getStyle().setHeight(image.getHeight(), Unit.PX);
+		} else {
+			// calculated size which is ALWAYS a square for point styles
+			int size = Math.min(width, height);
+			// calculated a radius, predefined by size
+			double radius = (size - 2) / 2D;
+			// here is searching for radius set to dataset level
+			DatasetViewItem datasetViewItem = lookForDatasetMetaItem(chart, item);
+			// checks if dataset item is consistent
+			if (datasetViewItem != null) {
+				// if dataset item is found
+				// gets the radius, taking the MAX value
+				// otherwise it could be small
+				radius = Math.max(datasetViewItem.getRadius(), radius);
+			}
+			// checks with default radius
+			// if consistent
+			double radiusParam = radius < 0 || Double.isNaN(radius) ? DEFAULT_RADIUS : Math.max(radius, 0D) == 0D ? DEFAULT_RADIUS : radius;
+			// update the html legend item settig the size and calulated radius
+			htmlLegendItem.setSize(size);
+			htmlLegendItem.setRadius(radiusParam);
+			// invokes tiles factory to get a pattern as string
+			// of point style
+			String pattern = TilesFactory.createHtmlLegendItem(htmlLegendItem);
+			// checks if the result of tile factory is consistent
+			if (pattern != null && pattern.trim().length() > 0) {
+				// transforms pattern into CSS property and
+				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern);
+				// applies the point style as background to color element
+				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
+				// sets the size to color element
+				color.getStyle().setWidth(size, Unit.PX);
+				color.getStyle().setHeight(size, Unit.PX);
+			} else {
+				// if here, inconsistent point style representation
+				// applies the background color
+				applyBackgroundColor(chart, item, color, width, height);
+			}
+		}
+	}
+
+	/**
+	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
+	 * found.
+	 * 
+	 * @param chart chart instance
+	 * @param item legend item to use as dataset locator
+	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
+	 *         found.
+	 */
+	private DatasetViewItem lookForDatasetMetaItem(IsChart chart, LegendItem item) {
+		// prepares the meta item instance
+		DatasetMetaItem datasetMetaItem = null;
+		// item index set to 0 for dataset index locator
+		int itemIndex = 0;
+		// based on the legend item location
+		if (item.getDatasetIndex() != UndefinedValues.INTEGER) {
+			// retrieves the dataset set item by dataset index
+			datasetMetaItem = chart.getDatasetMeta(item.getDatasetIndex());
+		} else if (item.getIndex() != UndefinedValues.INTEGER) {
+			// if here is looking for data index then it uses
+			// the first dataset
+			datasetMetaItem = chart.getDatasetMeta(0);
+			// and gets the dataset index to use
+			itemIndex = item.getIndex();
+		}
+		// checks if the searching of dataset item is consistent
+		// with the locator
+		if (datasetMetaItem != null && datasetMetaItem.getDatasets().size() > itemIndex) {
+			// gets dataset item by calculated index
+			DatasetItem datasetItem = datasetMetaItem.getDatasets().get(itemIndex);
+			// checks if consistent
+			if (datasetItem != null) {
+				// returns the meta data view
+				return datasetItem.getView();
+			}
+		}
+		// if here, the locator is not able to get the right dataset item
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -456,10 +582,10 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * Applies the border style to the color element and returns <code>true</code> if the border color must be applied.
 	 * 
 	 * @param item legend item to map into border style
-	 * @param color DIV element where to apply the border style
+	 * @param color TD element where to apply the border style
 	 * @return <code>true</code> if the border has been applied and than color is missing
 	 */
-	private boolean applyBorderWidth(LegendLabelItem item, DivElement color) {
+	private boolean applyBorderWidth(LegendLabelItem item, TableCellElement color) {
 		// gets a correct border width
 		int borderWidth = Math.max(0, item.getLineWidth());
 		// applies the border
@@ -489,11 +615,11 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param item legend item to map into border color
-	 * @param color DIV element where to apply the border color
+	 * @param color TD element where to apply the border color
 	 * @param width width to use to apply border color
 	 * @param height height to use to apply border color
 	 */
-	private void applyBorderColor(IsChart chart, LegendLabelItem item, DivElement color, int width, int height) {
+	private void applyBorderColor(IsChart chart, LegendLabelItem item, TableCellElement color, int width, int height) {
 		// checks if there is stroke color
 		// to apply to the border
 		if (item.isStrokeStyleAsColor()) {

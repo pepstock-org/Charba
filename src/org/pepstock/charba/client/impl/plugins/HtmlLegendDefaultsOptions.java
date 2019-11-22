@@ -21,8 +21,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Configuration options of {@link HtmlLegend#ID} plugin. This is mapping the configuration set into default global, used as
- * default of the chart one, if exist.
+ * Configuration options of {@link HtmlLegend#ID} plugin.<br>
+ * This is mapping the configuration set into default global, used as default of the chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -55,7 +55,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	int getCharbaId() {
 		return getValue(HtmlLegendOptions.Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns if the legend is shown.
 	 * 

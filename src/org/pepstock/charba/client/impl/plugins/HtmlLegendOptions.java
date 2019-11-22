@@ -26,8 +26,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * Configuration options of {@link ChartPointer#ID} plugin.<br>
- * It manages the cursor to adopt when the cursor is over the dataset item and when not.
+ * Configuration options of {@link HtmlLegend#ID} plugin.<br>
+ * This is mapping the configuration both default global and per chart instance.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -45,7 +45,8 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * Default display if legend must be showed.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
-	// internal count
+	// internal count needed to remove callbacks instance from cache
+	// from html legened item factory
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
 	private HtmlLegendDefaultsOptions defaultsOptions;
@@ -129,7 +130,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	final String getCursorPointerAsString() {
 		return defaultsOptions.getCursorPointerAsString();
 	}
-	
+
 	/**
 	 * Sets if the legend is shown.
 	 * 

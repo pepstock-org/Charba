@@ -63,6 +63,30 @@ public abstract class ShapeDrawer {
 	 * @return a canvas pattern which represents a tile.
 	 */
 	final CanvasPattern createTile(CanvasElement outerCanvas, String backgroundColor, String shapeColor, int size) {
+		// gets the initialized canvas element
+		CanvasElement canvas = initCanvas(outerCanvas, size);
+		Context2d context = canvas.getContext2d();
+		// sets the background color
+		context.setFillStyle(backgroundColor);
+		context.fillRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
+		// begins a new path.
+		context.beginPath();
+		// invoke the drawer to design the shape
+		drawTile(canvas.getContext2d(), backgroundColor, shapeColor, size);
+		// closes the path
+		context.closePath();
+		// transforms the canvas into a pattern
+		return outerCanvas.getContext2d().createPattern(canvas, Context2d.Repetition.REPEAT);
+	}
+
+	/**
+	 * Initialized the internal canvas to use for drawing.
+	 * 
+	 * @param outerCanvas canvas instance of tile factory
+	 * @param size dimension of internal canvas
+	 * @return a created and configured canvas element element to use for drawing.
+	 */
+	protected final CanvasElement initCanvas(CanvasElement outerCanvas, int size) {
 		// changes dimensions of outer canvas
 		outerCanvas.setWidth(size);
 		outerCanvas.setHeight(size);
@@ -79,17 +103,8 @@ public abstract class ShapeDrawer {
 		Context2d context = canvas.getContext2d();
 		// clears the canvas for new design
 		context.clearRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
-		// sets the background color
-		context.setFillStyle(backgroundColor);
-		context.fillRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
-		// begins a new path.
-		context.beginPath();
-		// invoke the drawer to design the shape
-		drawTile(canvas.getContext2d(), backgroundColor, shapeColor, size);
-		// closes the path
-		context.closePath();
-		// transforms the canvas into a pattern
-		return outerCanvas.getContext2d().createPattern(canvas, Context2d.Repetition.REPEAT);
+		// returns the context
+		return canvas;
 	}
 
 	/**
@@ -139,7 +154,7 @@ public abstract class ShapeDrawer {
 	 * @param shapeColor color of shape
 	 */
 	protected final void applyFillProperties(Context2d context, String shapeColor) {
-		// applies the stroke color
+		// applies the fill color
 		context.setFillStyle(shapeColor);
 	}
 
