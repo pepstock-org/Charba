@@ -144,7 +144,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	private boolean hasTitleSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
 		// checks if title display is activated or title plugin is activated
-		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.TITLE.value());
+		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.TITLE);
 		// checks if there is any title click handler and title is in scope
 		// and the cursor is over the title element
 		return isTitleEnabled && chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event);
@@ -174,7 +174,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	private boolean hasLegendSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
 		// checks if legend display is activated or legend plugin is activated
-		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value());
+		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND);
 		// checks if legend is in scope
 		// and the cursor is over the legend element
 		if (isLegendEnabled && isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {

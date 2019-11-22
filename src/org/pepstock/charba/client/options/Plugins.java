@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.NoDefaults;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 
 /**
@@ -62,6 +63,16 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 		setValue(PluginIdChecker.key(pluginId), enabled);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets if a default CHART.JS plugin must be enabled or not.
+	 * 
+	 * @param plugin default CHART.JS plugin instance.
+	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
+	 */
+	public void setEnabled(DefaultPlugin plugin, boolean enabled) {
+		setEnabled(plugin.value(), enabled);
 	}
 
 	/**
@@ -105,6 +116,16 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 		// if here, the property can exist or not.
 		// therefore is not disabled
 		return false;
+	}
+
+	/**
+	 * Returns if a default CHART.JS plugin is enabled or not, forced directly by global plugin manager
+	 * 
+	 * @param plugin a default CHART.JS plugin.
+	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
+	 */
+	public boolean isForcedlyDisabled(DefaultPlugin plugin) {
+		return isForcedlyDisabled(plugin.value());
 	}
 
 	/**

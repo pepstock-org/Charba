@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -54,6 +55,16 @@ public class Plugins {
 	}
 
 	/**
+	 * Sets if a default CHART.JS plugin must be enabled or not.
+	 * 
+	 * @param plugin default CHART.JS plugin instance.
+	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
+	 */
+	public void setEnabled(DefaultPlugin plugin, boolean enabled) {
+		options.getPlugins().setEnabled(plugin, enabled);
+	}
+
+	/**
 	 * Returns if a global plugin is enabled or not.
 	 * 
 	 * @param pluginId plugin id.
@@ -71,6 +82,16 @@ public class Plugins {
 	 */
 	public boolean isForcedlyDisabled(String pluginId) {
 		return options.getPlugins().isForcedlyDisabled(pluginId);
+	}
+
+	/**
+	 * Returns if a default CHART.JS plugin is enabled or not, forced directly by global plugin manager
+	 * 
+	 * @param plugin a default CHART.JS plugin.
+	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
+	 */
+	public boolean isForcedlyDisabled(DefaultPlugin plugin) {
+		return options.getPlugins().isForcedlyDisabled(plugin);
 	}
 
 	/**

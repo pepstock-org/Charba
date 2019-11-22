@@ -171,7 +171,7 @@ public final class HtmlLegend extends AbstractPlugin {
 				// it respects it then ignore it and the plugin in
 				// will be disable
 				//FIXME bug
-				if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND.value())) {
+				if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
 					// disable legend
 					chart.getOptions().getLegend().setDisplay(false);
 					// sets legend callback
