@@ -40,6 +40,7 @@ import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.DivElement;
@@ -114,6 +115,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	// this cache is needed in order to recreate the legend when a chart update
 	// is invoked during a previous update
 	private static final Map<String, Double> EASINGS = new HashMap<>();
+	// cache to store the original value of legend in order to 
+	// manage the change of the legend display after chart creation
+	private static final Map<String, Boolean> LEGEND_DISPLAY = new HashMap<>();
 	// cache to store the chart id in order to know when new legend must be created
 	private static final Set<String> ADDED_LEGEND = new HashSet<>();
 	// static callback to generate legend into HTML
@@ -164,13 +168,32 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			OPTIONS.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
+			Window.getConsole().log("configure "+pOptions.isDisplay());
 			// checks if the plugin is configured to show legend
 			if (pOptions.isDisplay()) {
 				// if the legend is set do not display
 				// or the OOTB legend plugin has been disable
 				// it respects it then ignore it and the plugin in
 				// will be disable
-				if (chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
+				boolean cachedValue = false;
+				// check if the display must be stored because was changed by user
+				if (LEGEND_DISPLAY.containsKey(chart.getId())) {
+					// if here the plugin was already initialized
+					// and then it stored the display value
+					cachedValue = LEGEND_DISPLAY.get(chart.getId()); 
+					// because is not the first round
+					// the legend value should be false because set by plugin
+					// if is true, means the user changed it programmatically
+					if (chart.getOptions().getLegend().isDisplay() && !cachedValue) {
+						// stored the legend display value because is changed
+						LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+					}
+				} else {
+					// stored the legend display value because is missing
+					LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+				}
+				boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
+				if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
 					// disable legend
 					chart.getOptions().getLegend().setDisplay(false);
 					// sets legend callback
@@ -186,6 +209,7 @@ public final class HtmlLegend extends AbstractPlugin {
 					// disables display of plugin 
 					pOptions.setDisplay(false);
 				}
+				// checks if the original value is already passed
 			} else {
 				// resets all status items if there are
 				resetStatus(chart);
@@ -355,6 +379,8 @@ public final class HtmlLegend extends AbstractPlugin {
 		LEGEND_LABELS.remove(chart.getId());
 		// removes the chart from easing status
 		EASINGS.remove(chart.getId());
+		// removes status of legend display
+		LEGEND_DISPLAY.remove(chart.getId());
 		// removes cached point style from tile factory
 		// if there are
 		HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
@@ -440,7 +466,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param padding padding set by legend configuration object
 	 */
 	private void addLegendElement(Element chartElement, DivElement legendElement, Position position, int padding) {
-		if (Position.BOTTOM.equals(position)) {
+		if (mustAddToBottom(position)) {
 			// appends the legend element
 			chartElement.appendChild(legendElement);
 			// and sets the bottom padding
@@ -466,12 +492,14 @@ public final class HtmlLegend extends AbstractPlugin {
 	private void manageLegendElement(Element chartElement, DivElement legendElement, Position position) {
 		// gets if the legend element has been defined after the canvas
 		boolean isAfterCanvas = isAfterCanvas(chartElement, legendElement);
-		if (Position.BOTTOM.equals(position) && !isAfterCanvas) {
+		// gets if the legend must be added to bottom
+		boolean mustBeAddedToBottom = mustAddToBottom(position);
+		if (mustBeAddedToBottom && !isAfterCanvas) {
 			// removes the legend element from parent
 			legendElement.removeFromParent();
 			// and appends at the end
 			chartElement.appendChild(legendElement);
-		} else if (!Position.BOTTOM.equals(position) && isAfterCanvas) {
+		} else if (!mustBeAddedToBottom && isAfterCanvas) {
 			// if here the position is not bottom but
 			// legend element is after the canvas
 			// then it removes from parent
@@ -479,6 +507,18 @@ public final class HtmlLegend extends AbstractPlugin {
 			// and inserts it at the beginning
 			chartElement.insertFirst(legendElement);
 		}
+	}
+	
+	/**
+	 * Checks if the legend must be added into chart element on top or bottom.
+	 * 
+	 * @param position position set by legend configuration object
+	 * @return <code>true</code> if the legend must be added to bottom 
+	 */
+	private boolean mustAddToBottom(Position position) {
+		// if position is bottom or right
+		// legend is to bottom
+		return Position.RIGHT.equals(position) || Position.BOTTOM.equals(position);
 	}
 
 	/**
@@ -503,6 +543,7 @@ public final class HtmlLegend extends AbstractPlugin {
 					// if here, means that the legend element has been found before the canvas element
 					// then returns false
 					return false;
+					// FIXME checks ID of canvas
 				} else if (childElement.getNodeName().equalsIgnoreCase(CanvasElement.TAG)) {
 					// if here, means that the canvas element has been found before the legend element
 					// then returns true
