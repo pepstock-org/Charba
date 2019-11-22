@@ -42,8 +42,8 @@ final class Ring extends Dot {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.Dot#drawTile(com.google.gwt.canvas.dom.client.Context2d, java.lang.String,
-	 * java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
 	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {

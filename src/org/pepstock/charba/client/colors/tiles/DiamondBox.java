@@ -47,6 +47,7 @@ final class DiamondBox extends ShapeDrawer {
 	 */
 	@Override
 	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// apply the stroke properties

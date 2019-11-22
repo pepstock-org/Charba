@@ -26,6 +26,31 @@ import org.pepstock.charba.client.commons.Key;
 public interface IsShape extends Key {
 
 	/**
+	 * Returns <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
+	 * <code>null</code> as well.
+	 * 
+	 * @param shape shape to be checked
+	 * @return <<code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
+	 *         <code>null</code> as well.
+	 */
+	static boolean isValid(IsShape shape) {
+		return Key.isValid(shape) && shape.getKeyPrefix() != null && shape.getDrawer() != null;
+	}
+
+	/**
+	 * Checks if shape passed as argument is not <code>null</code> and its methods are not returning <code>null</code> as
+	 * well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param type type to be checked
+	 */
+	static void checkIfValid(IsShape shape) {
+		if (!isValid(shape)) {
+			throw new IllegalArgumentException("Shape implementation instance is null or not consistent");
+		}
+	}
+
+	/**
 	 * Returns the instance of shape drawer.
 	 * 
 	 * @return the instance of shape drawer.

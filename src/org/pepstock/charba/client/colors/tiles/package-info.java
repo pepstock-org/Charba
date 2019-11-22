@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to build tiles to use into a canvas patterns or a Charba pattern
+ * Contains all classes to build tiles to use into a canvas patterns or a Charba pattern.
  * 
  * @author Andrea "Stock" Stocchero
  *
