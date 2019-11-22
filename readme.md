@@ -119,6 +119,9 @@ Here you can find the list of enhancement and updates available on `master` bran
     * add some methods to `LegendLabelItem` class in order to manage text as HTML.
     * add new Html legend builder options (globally and per chart instance)
     * add `LegendTextCallback` interface to manage text of legend as HTML
+ * create `DefaultPlugin` enumeration with CHART.JS default plugin ids.
+     * add `isForcedlyDisabled` and `setEnabled` methods into `Plugins` configuration and options object in order to manage `DefaultPlugin` instances.
+ * add capability to `TilesFactory` to use `PointStyle` instances as shapes for new tiles.   
 
 ### Fixed Bugs
 
@@ -153,7 +156,8 @@ Here you can find the list of enhancement and updates available on `master` bran
      * if plugin id is already loaded in the chart, it overrides the current one.
      * if plugin id is already loaded in the default global plugins, it will be removed from chart instance .
   * add `charba` prefix to all plugins provided out of the box by **Charba**
-  * change `updateOptions` method name of `IsChart` interface into `reconfigure`.   
+  * change `updateOptions` method name of `IsChart` interface into `reconfigure`. 
+  * add `isConsistent` and `checkIfConsistent` methods to `IsChart` interface which checks if not only chart and its id are not `null` but also other elements (i.e. options, type) 
 
 License
 -------
