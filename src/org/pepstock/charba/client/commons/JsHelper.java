@@ -212,15 +212,26 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines.<br>
+	 * It uses a list of values that specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @param context context of canvas
+	 * @param items list of values that specify alternating lengths of lines and gaps which describe the pattern
+	 */
+	public void setLineDash(Context2d context, List<Integer> items) {
+		setLineDash(context, ArrayInteger.fromOrEmpty(items));
+	}
+
+	/**
+	 * Sets the line dash pattern used when stroking lines.<br>
+	 * It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param context context of canvas
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	public void setLineDash(Context2d context, ArrayInteger object) {
 		// checks consistency of arguments
-		if (context != null && object != null) {
+		if (context != null && object != null && !object.isEmpty()) {
 			NativeJsHelper.setLineDash(context, object);
 		}
 	}
