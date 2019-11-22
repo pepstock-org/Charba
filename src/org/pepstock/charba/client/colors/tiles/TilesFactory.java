@@ -291,7 +291,7 @@ public final class TilesFactory {
 	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color
 	 * and size.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style) {
@@ -302,7 +302,7 @@ public final class TilesFactory {
 	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
 	 * color and size.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a CHARBA pattern
 	 */
@@ -314,7 +314,7 @@ public final class TilesFactory {
 	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
 	 * color and size.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a CHARBA pattern
 	 */
@@ -326,7 +326,7 @@ public final class TilesFactory {
 	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
 	 * value.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @param shapeColor shape color
 	 * @return a CHARBA pattern
@@ -339,7 +339,7 @@ public final class TilesFactory {
 	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
 	 * value.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @param shapeColor shape color
 	 * @return a CHARBA pattern
@@ -351,7 +351,7 @@ public final class TilesFactory {
 	/**
 	 * Returns a CHARBA pattern, using the point style, back ground color, shape color and size as arguments.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @param shapeColor shape color
 	 * @param size size of canvas pattern
@@ -364,7 +364,7 @@ public final class TilesFactory {
 	/**
 	 * Returns a CHARBA pattern, using the point style, back ground color, shape color and size as arguments.
 	 * 
-	 * @param pointStyle point style to apply to canvas pattern
+	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @param shapeColor shape color
 	 * @param size size of canvas pattern

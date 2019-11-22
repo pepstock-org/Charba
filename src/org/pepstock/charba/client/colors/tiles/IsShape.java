@@ -30,7 +30,7 @@ public interface IsShape extends Key {
 	 * <code>null</code> as well.
 	 * 
 	 * @param shape shape to be checked
-	 * @return <<code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
+	 * @return <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
 	 *         <code>null</code> as well.
 	 */
 	static boolean isValid(IsShape shape) {
@@ -42,7 +42,7 @@ public interface IsShape extends Key {
 	 * well.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
-	 * @param type type to be checked
+	 * @param shape shape to be checked
 	 */
 	static void checkIfValid(IsShape shape) {
 		if (!isValid(shape)) {
