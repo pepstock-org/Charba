@@ -263,7 +263,7 @@ public final class Defaults {
 	}
 
 	/**
-	 * Invokes the <code>onLeave</code> chart function provided out of the box by CHART.JS.
+	 * Invokes the <code>onHover</code> chart function provided out of the box by CHART.JS.
 	 * 
 	 * @param event original event generated to invoke a chart hover handler.
 	 */
@@ -301,7 +301,7 @@ public final class Defaults {
 	}
 
 	/**
-	 * Invokes the <code>onLeave</code> legend function provided out of the box by CHART.JS.
+	 * Invokes the <code>onHover</code> legend function provided out of the box by CHART.JS.
 	 * 
 	 * @param event original event generated to invoke a legend hover handler.
 	 */
@@ -310,9 +310,9 @@ public final class Defaults {
 	}
 
 	/**
-	 * Invokes the <code>onHover</code> legend function provided out of the box by CHART.JS.
+	 * Invokes the <code>onLeave</code> legend function provided out of the box by CHART.JS.
 	 * 
-	 * @param event original event generated to invoke a legend hover handler.
+	 * @param event original event generated to invoke a legend leave handler.
 	 */
 	public void invokeLegendOnLeave(LegendLeaveEvent event) {
 		invokeLegendEvent(event);
