@@ -70,5 +70,5 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 		// calls super chart options creations
 		return super.createChartOptions();
 	}
-
+	
 }

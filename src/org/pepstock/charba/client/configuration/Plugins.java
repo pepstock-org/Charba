@@ -24,7 +24,8 @@ import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
+ * Definitions about plugins options.<br>
+ * This is used to configure plugins (mainly the global ones).<br>
  * Every plugin could have own configuration structure.<br>
  * The java script object key is the plugin id.
  * 

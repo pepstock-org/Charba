@@ -315,5 +315,4 @@ public class MeterOptions extends AbstractPieOptions {
 		}
 
 	}
-
 }

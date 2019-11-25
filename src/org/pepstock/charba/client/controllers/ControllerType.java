@@ -152,8 +152,11 @@ public final class ControllerType implements Type {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		// checks if the object is a type
 		if (obj instanceof Type) {
+			// casts
 			Type objType = (Type) obj;
+			// checks if there are consistent
 			if (objType.value() != null && type != null) {
 				return type.equals(objType.value());
 			}

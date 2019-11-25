@@ -114,7 +114,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	// this cache is needed in order to recreate the legend when a chart update
 	// is invoked during a previous update
 	private static final Map<String, Double> EASINGS = new HashMap<>();
-	// cache to store the original value of legend in order to 
+	// cache to store the original value of legend in order to
 	// manage the change of the legend display after chart creation
 	private static final Map<String, Boolean> LEGEND_DISPLAY = new HashMap<>();
 	// cache to store the chart id in order to know when new legend must be created
@@ -173,40 +173,7 @@ public final class HtmlLegend extends AbstractPlugin {
 				// or the OOTB legend plugin has been disable
 				// it respects it then ignore it and the plugin in
 				// will be disable
-				boolean cachedValue = false;
-				// check if the display must be stored because was changed by user
-				if (LEGEND_DISPLAY.containsKey(chart.getId())) {
-					// if here the plugin was already initialized
-					// and then it stored the display value
-					cachedValue = LEGEND_DISPLAY.get(chart.getId()); 
-					// because is not the first round
-					// the legend value should be false because set by plugin
-					// if is true, means the user changed it programmatically
-					if (chart.getOptions().getLegend().isDisplay() && !cachedValue) {
-						// stored the legend display value because is changed
-						LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
-					}
-				} else {
-					// stored the legend display value because is missing
-					LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
-				}
-				boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
-				if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
-					// disable legend
-					chart.getOptions().getLegend().setDisplay(false);
-					// sets legend callback
-					// overriding whatever other callback has been set
-					chart.getOptions().setLegendCallback(CALLBACK);
-					// sets easing to zero
-					EASINGS.put(chart.getId(), 0D);
-					// creates options instance
-				} else {
-					// resets all status items if there are
-					// this is in case of update options
-					resetStatus(chart);
-					// disables display of plugin 
-					pOptions.setDisplay(false);
-				}
+				manageLegendDisplay(chart, pOptions);
 			} else {
 				// resets status of plugin
 				// because display is false
@@ -336,7 +303,55 @@ public final class HtmlLegend extends AbstractPlugin {
 			FACTORY.store(oldOptions.getCharbaId(), null);
 		}
 	}
-	
+
+	/**
+	 * Manages if the legend must be displayed or not based on choice of user and what can be changed into chart configuration
+	 * after the chart initialization bu a <code>chart.reconfigure</code>.
+	 * 
+	 * @param chart chart instance to manage
+	 * @param pOptions plugin option for the chart
+	 */
+	private void manageLegendDisplay(IsChart chart, HtmlLegendOptions pOptions) {
+		// if the legend is set do not display
+		// or the OOTB legend plugin has been disable
+		// it respects it then ignore it and the plugin in
+		// will be disable
+		boolean cachedValue = false;
+		// check if the display must be stored because was changed by user
+		if (LEGEND_DISPLAY.containsKey(chart.getId())) {
+			// if here the plugin was already initialized
+			// and then it stored the display value
+			cachedValue = LEGEND_DISPLAY.get(chart.getId());
+			// because is not the first round
+			// the legend value should be false because set by plugin
+			// if is true, means the user changed it programmatically
+			if (chart.getOptions().getLegend().isDisplay() && !cachedValue) {
+				// stored the legend display value because is changed
+				LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+			}
+		} else {
+			// stored the legend display value because is missing
+			LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+		}
+		boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
+		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
+			// disable legend
+			chart.getOptions().getLegend().setDisplay(false);
+			// sets legend callback
+			// overriding whatever other callback has been set
+			chart.getOptions().setLegendCallback(CALLBACK);
+			// sets easing to zero
+			EASINGS.put(chart.getId(), 0D);
+			// creates options instance
+		} else {
+			// resets all status items if there are
+			// this is in case of update options
+			resetStatus(chart);
+			// disables display of plugin
+			pOptions.setDisplay(false);
+		}
+	}
+
 	/**
 	 * Returns <code>true</code> if the plugin must be manage the legend, creating it.
 	 * 
@@ -355,7 +370,7 @@ public final class HtmlLegend extends AbstractPlugin {
 		// tehn returns false
 		return false;
 	}
-	
+
 	/**
 	 * Removes all status items from all maps.
 	 * 
@@ -508,12 +523,12 @@ public final class HtmlLegend extends AbstractPlugin {
 			chartElement.insertFirst(legendElement);
 		}
 	}
-	
+
 	/**
 	 * Checks if the legend must be added into chart element on top or bottom.
 	 * 
 	 * @param position position set by legend configuration object
-	 * @return <code>true</code> if the legend must be added to bottom 
+	 * @return <code>true</code> if the legend must be added to bottom
 	 */
 	private boolean mustAddToBottom(Position position) {
 		// if position is bottom or right
