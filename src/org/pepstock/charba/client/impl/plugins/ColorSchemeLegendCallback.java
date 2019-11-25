@@ -93,7 +93,7 @@ final class ColorSchemeLegendCallback implements LegendLabelsCallback {
 					// gets hoving flex dataset
 					HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
 					// manages hoving flex dataset
-					manageHovingFlexDataset(chart, hovingDataset, item);
+					manageHovingFlexDataset(hovingDataset, item);
 				} else if (dataset instanceof LiningDataset) {
 					// if lining dataset, like LINE, RADAR, SCATTER
 					LiningDataset liningDataset = (LiningDataset) dataset;
@@ -115,11 +115,10 @@ final class ColorSchemeLegendCallback implements LegendLabelsCallback {
 	/**
 	 * Manages the colors for HOVING FLEX datasets.
 	 * 
-	 * @param chart chart instance
 	 * @param hovingFlexDataset hoving flex dataset instance
 	 * @param iteme legend item to change applying new colors
 	 */
-	private void manageHovingFlexDataset(IsChart chart, HovingFlexDataset hovingFlexDataset, LegendLabelItem item) {
+	private void manageHovingFlexDataset(HovingFlexDataset hovingFlexDataset, LegendLabelItem item) {
 		// gets background colors, border colors
 		List<IsColor> backgroundColors = hovingFlexDataset.getBackgroundColor();
 		List<IsColor> borderColors = hovingFlexDataset.getBackgroundColor();
