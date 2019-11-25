@@ -20,16 +20,19 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.data.BarBorderWidth;
-import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.data.HovingDataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.impl.charts.GaugeChart;
+import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -51,6 +54,9 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * Data labels options factory
 	 */
 	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory(ID);
+	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
+	// initialized and legend is not changed
+	private static final ColorSchemeLegendCallback CALLBACK = new ColorSchemeLegendCallback();
 
 	/*
 	 * (non-Javadoc)
@@ -65,24 +71,89 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onConfigure(IsChart chart) {
+		// checks if chart is consistent and if the plugin should be applicable to 
+		// this chart
+		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+			// gets the legend labels callback
+			// this is done because changing colors by plugin
+			// the legend does not change accordingly
+			LegendLabelsCallback legendLabelsCallback = chart.getOptions().getLegend().getLabels().getLabelsCallback();
+			// checks if the legend callbacks is not a color scheme ones and is consistent
+			if (!(legendLabelsCallback instanceof ColorSchemeLegendCallback) && legendLabelsCallback != null) {
+				// uses the color scheme callback to wrap the existing callback
+				CALLBACK.setDelegatedCallback(chart, legendLabelsCallback);
+			}
+			// applies the color scheme callback to chart
+			chart.getOptions().getLegend().getLabels().setLabelsCallback(CALLBACK);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
-		// gets options from chart options
-		ColorSchemesOptions options = getOptions(chart);
-		// gets scheme
-		ColorScheme scheme = options.getScheme();
-		// if null, skips all logic
-		if (scheme != null) {
-			// gets the list of colors
-			List<IsColor> colors = scheme.getColors();
-			// checks if the list colors is consistent, if not skips the logic
-			if (colors != null && !colors.isEmpty()) {
-				scanDatasets(chart, options, colors);
+		// checks if chart is consistent and if the plugin should be applicable to 
+		// this chart
+		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+			// gets options from chart options
+			ColorSchemesOptions options = getOptions(chart);
+			// gets scheme
+			ColorScheme scheme = options.getScheme();
+			// if null, skips all logic
+			if (scheme != null) {
+				// gets the list of colors
+				List<IsColor> colors = scheme.getColors();
+				// checks if the list colors is consistent, if not skips the logic
+				if (colors != null && !colors.isEmpty()) {
+					scanDatasets(chart, options, colors);
+				}
 			}
 		}
 		// always true
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onDestroy(IsChart chart) {
+		// checks if chart is consistent and if the plugin should be applicable to 
+		// this chart
+		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+			// clear the color scheme callback cache
+			// for this chart
+			CALLBACK.removeDelegatedCallback(chart);
+		}
+	}
+
+	/**
+	 * Checks the type of the chart and if this plugin could be applicable.<br>
+	 * The {@link GaugeChart} and {@link MeterChart} are not supported.
+	 * 
+	 * @param chart chart instance to check
+	 * @return <code>true</code> if if this plugin could be applicable
+	 */
+	private boolean mustBeActivated(IsChart chart) {
+		// gets the chart type
+		Type type = chart.getType();
+		// checks if the type is consistent and is a controller type
+		if (type instanceof ControllerType && type.value() != null) {
+			// casts to controller type
+			ControllerType controllerType = (ControllerType) type;
+			// compare to gauge and meter type
+			// if equals the plugin is not activated
+			return !controllerType.value().equals(GaugeChart.TYPE) && !controllerType.value().equals(MeterChart.TYPE);
+		}
 		return true;
 	}
 
@@ -108,7 +179,7 @@ public final class ColorSchemes extends AbstractPlugin {
 				int colorIndex = datasetIndex % amountOfColors;
 				// checks if reverse is requested to get the color
 				IsColor color = colors.get(options.isReverse() ? amountOfColors - colorIndex - 1 : colorIndex);
-				// if hoving dataset, like PIE, POLAR, DOIUGHNUT
+				// if hoving dataset, like PIE, POLAR, DOUGHNUT
 				if (dataset instanceof HovingDataset) {
 					// casts the dataset
 					HovingDataset hovingDataset = (HovingDataset) dataset;
@@ -177,7 +248,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// every data has got own color
 			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
 			// checks if border has been requested
-			if (getMaxBorderWidth(hovingDataset) > 0) {
+			if (ColorSchemesUtil.getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
 				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
 			}
@@ -187,7 +258,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// sets background colors, applying the transparency
 			hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
 			// checks if border has been requested
-			if (getMaxBorderWidth(hovingDataset) > 0) {
+			if (ColorSchemesUtil.getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
 				hovingDataset.setBorderColor(color);
 			}
@@ -250,40 +321,6 @@ public final class ColorSchemes extends AbstractPlugin {
 		}
 		// returns array
 		return colorsToSet;
-	}
-
-	/**
-	 * Calculates the maximum border width for hoving flex dataset (BAR).
-	 * 
-	 * @param hovingDataset dataset to use to calculate
-	 * @return the maximum border width defined into dataset
-	 */
-	private int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
-		// gets the list border widths
-		List<Integer> borderWidths = hovingDataset.getBorderWidth();
-		// sets max
-		int maxBorderWidth = 0;
-		// if list is not empty
-		if (!borderWidths.isEmpty()) {
-			// means border widths are defined
-			// then scans all to calculate the max
-			for (Integer borderWidth : borderWidths) {
-				// max
-				maxBorderWidth = Math.max(maxBorderWidth, borderWidth);
-			}
-		} else if (hovingDataset instanceof BarDataset) {
-			// if here, the list of border widths is empty
-			// but BAR dataset can have BarBorderWidth object to set the border width
-			BarDataset barDataset = (BarDataset) hovingDataset;
-			// gets border width object
-			BarBorderWidth borderWidth = barDataset.getBorderWidthAsItem();
-			// calculates the max comparing all dimensions
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getTop());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getBottom());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getLeft());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getRight());
-		}
-		return maxBorderWidth;
 	}
 
 	/**

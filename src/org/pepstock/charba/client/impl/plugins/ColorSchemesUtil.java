@@ -16,7 +16,12 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.pepstock.charba.client.data.BarBorderWidth;
+import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.HovingFlexDataset;
 
 /**
  * Color scheme utility to cache the usage of color schemes in order to avoid to search them when requested.<br>
@@ -105,4 +110,37 @@ final class ColorSchemesUtil {
 		return sb.toString();
 	}
 
+	/**
+	 * Calculates the maximum border width for hoving flex dataset (BAR).
+	 * 
+	 * @param hovingDataset dataset to use to calculate
+	 * @return the maximum border width defined into dataset
+	 */
+	static int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
+		// gets the list border widths
+		List<Integer> borderWidths = hovingDataset.getBorderWidth();
+		// sets max
+		int maxBorderWidth = 0;
+		// if list is not empty
+		if (!borderWidths.isEmpty()) {
+			// means border widths are defined
+			// then scans all to calculate the max
+			for (Integer borderWidth : borderWidths) {
+				// max
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth);
+			}
+		} else if (hovingDataset instanceof BarDataset) {
+			// if here, the list of border widths is empty
+			// but BAR dataset can have BarBorderWidth object to set the border width
+			BarDataset barDataset = (BarDataset) hovingDataset;
+			// gets border width object
+			BarBorderWidth borderWidth = barDataset.getBorderWidthAsItem();
+			// calculates the max comparing all dimensions
+			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getTop());
+			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getBottom());
+			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getLeft());
+			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getRight());
+		}
+		return maxBorderWidth;
+	}
 }
