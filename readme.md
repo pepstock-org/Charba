@@ -126,7 +126,8 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Fixed Bugs
 
  * [#43](https://github.com/pepstock-org/Charba/issues/43) change the implementation in order to manage whatever chart types, based on dataset or data index.
- * [#44](https://github.com/pepstock-org/Charba/issues/44) check if the plugin is forcedly disable (by boolean) instead of checking if there is at least an option instance. New `isForcedlyDisabled` method has been added to `Plugins` classes into options and configuration and the check has been changed into `GlobalPlugins` class.   
+ * [#44](https://github.com/pepstock-org/Charba/issues/44) check if the plugin is forcedly disable (by boolean) instead of checking if there is at least an option instance. New `isForcedlyDisabled` method has been added to `Plugins` classes into options and configuration and the check has been changed into `GlobalPlugins` class.
+ * [#45](https://github.com/pepstock-org/Charba/issues/45) add specific `LegendLabelsCallback` implementation for `ColorSchemes` plugin in order to change the legend when a color scheme is changed during the chart lifecycle.
     
 ### Development
 
