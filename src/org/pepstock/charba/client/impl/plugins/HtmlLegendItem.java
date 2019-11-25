@@ -129,6 +129,6 @@ public final class HtmlLegendItem {
 			return builder.toString();
 		}
 		// if here, legend item non consistent
-		return UndefinedValues.STRING; 
+		return UndefinedValues.STRING;
 	}
 }

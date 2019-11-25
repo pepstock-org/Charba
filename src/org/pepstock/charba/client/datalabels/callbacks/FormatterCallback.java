@@ -20,8 +20,8 @@ import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>formatter</code> property at runtime, using the chart instance and the
- * plugin context.<br>
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>formatter</code> property at runtime, using the chart
+ * instance and the plugin context.<br>
  * Labels can be displayed on multiple lines by using the newline character <code>\n</code> between each line or by providing an
  * array of strings where each item represents a new line.
  * 

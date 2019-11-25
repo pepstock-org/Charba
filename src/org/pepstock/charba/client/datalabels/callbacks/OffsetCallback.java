@@ -19,8 +19,8 @@ import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>offset</code> property at runtime, using the chart instance and the
- * plugin context.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>offset</code> property at runtime, using the chart
+ * instance and the plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *

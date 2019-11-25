@@ -439,7 +439,7 @@ public final class Utilities {
 				// adds color RGBA into strign builder
 				builder.append(color.getColor().toRGBA());
 				// gets offset to set as percentage
-				int percentage = (int)Math.round(color.getOffset() * 100);
+				int percentage = (int) Math.round(color.getOffset() * 100);
 				builder.append(COLOR_OFFSET_SEPARATOR).append(percentage).append(PATTERN_PERCENT);
 			}
 			// using the template, returns the CSS value of gradient

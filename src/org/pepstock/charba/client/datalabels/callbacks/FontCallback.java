@@ -20,7 +20,8 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.Font;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set a font element at runtime, using the chart instance and the plugin context.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set a font element at runtime, using the chart instance and the
+ * plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *

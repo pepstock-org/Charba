@@ -84,7 +84,7 @@ final class ColorSchemeLegendCallback implements LegendLabelsCallback {
 		// checks if the chart is consistent
 		// and the labels are consistent
 		if (IsChart.isValid(chart) && defaultLabels != null && !defaultLabels.isEmpty()) {
-			//s cans all legend labels items
+			// s cans all legend labels items
 			for (LegendLabelItem item : defaultLabels) {
 				// gets the dataset related to legend items
 				Dataset dataset = chart.getData().retrieveDataset(item);
