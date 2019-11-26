@@ -15,7 +15,12 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.commons.Array;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
@@ -74,6 +79,25 @@ public final class Labels {
 	public void load(String... values) {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
+			// scans values
+			for (String value : values) {
+				// checks is not null
+				if (value != null) {
+					// pushes to JS array
+					add(value);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Loads single line labels.
+	 * 
+	 * @param values array of labels
+	 */
+	public void load(List<String> values) {
+		// checks if is a valid array
+		if (values != null && !values.isEmpty()) {
 			// scans values
 			for (String value : values) {
 				// checks is not null
@@ -179,29 +203,25 @@ public final class Labels {
 	}
 
 	/**
-	 * Returns a multi line label at a specific index. An array of strings is returned. If the index is out of bounds, throws an
+	 * Returns a multi line label at a specific index. An unmodifiable list of strings is returned. If the index is out of bounds, throws an
 	 * exception.
 	 * 
 	 * @param index index of label
-	 * @return an array of strings
+	 * @return a unmodifiable list of strings
 	 */
-	public String[] getStrings(int index) {
+	public List<String> getStrings(int index) {
+		// checks index and type of index
 		ObjectType type = getType(index);
+		// checks if at index there is an array
 		if (ObjectType.ARRAY.equals(type)) {
+			// gets array
 			ArrayString internalArray = (ArrayString) array.get(index);
-			// creates an string array
-			String[] result = new String[internalArray.length()];
-			// scans all values
-			for (int i = 0; i < internalArray.length(); i++) {
-				// adds to java array
-				result[i] = internalArray.get(i);
-			}
-			// returns array
-			return result;
+			// creates an unmodifiable string lsit
+			return ArrayListHelper.unmodifiableList(internalArray);
 		}
-		// returns the array with single item
+		// returns a list with single item
 		// string can not be null, because checked during loading
-		return new String[] { (String) array.get(index) };
+		return Collections.unmodifiableList(Arrays.asList((String)array.get(index)));
 	}
 
 	/**

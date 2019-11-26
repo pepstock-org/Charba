@@ -102,7 +102,7 @@ In the project, it's also provided the [FindBugs](https://github.com/pepstock-or
 Going to new version
 -------
 
-Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
 ### Features
 
@@ -125,6 +125,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change `TooltipTitleCallback`, `TooltipBodyCallback` and `TooltipFooterCallback` interfaces in order to return a list of strings instead of an array (**breaking change**). 
  * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array (**breaking change**).
  * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS (**breaking change**).
+ * change `Labels` object in order to load a list of strings and return a list of string instead of an array (**breaking change**).
 
 ### Fixed Bugs
 
