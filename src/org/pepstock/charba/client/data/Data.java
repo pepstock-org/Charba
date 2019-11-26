@@ -30,6 +30,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -410,6 +411,24 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		}
 		// if here, legend item is not consistent
 		// or the locator of legend item is not able to locate any dataset
+		return null;
+	}
+
+	/**
+	 * Returns a dataset instance by tooltip item locator, dataset index and index.
+	 * 
+	 * @param tooltipItem legend item instance to get the dataset related to.
+	 * @return a dataset instance or <code>null</code> if not found by tooltip item
+	 */
+	public final Dataset retrieveDataset(TooltipItem tooltipItem) {
+		// checks if tooltip item is consistent
+		// and if dataset index is the locator
+		// and the dataset index is less than size of datasets
+		if (tooltipItem != null && tooltipItem.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
+			return getDatasets().get(tooltipItem.getDatasetIndex());
+		}
+		// if here, tooltip item is not consistent
+		// or the locator of tooltip item is not able to locate any dataset
 		return null;
 	}
 

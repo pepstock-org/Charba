@@ -163,6 +163,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `isConsistent` and `checkIfConsistent` methods to `IsChart` interface which checks if not only chart and its id are not `null` but also other elements (i.e. options, type) 
   * add `ensureCssInjected` to `Injector` class in order to enable injection of CSS styles as text resource and not by CSS resource, provided by GWT.
   * add `Constants` class with common constants among packages in order to reduce dependencies and improve GWT built module.
+  * add `retrieveDataset` method to `Data` class in order to get dataset instance by a `LegendItem` or by `TooltipItem`.
 
 License
 -------
