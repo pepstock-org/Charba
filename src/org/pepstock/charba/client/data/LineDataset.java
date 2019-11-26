@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
@@ -35,6 +36,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.SteppedLine;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -65,6 +67,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		Y_AXIS_ID("yAxisID"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		SHOW_LINE("showLine"),
+		CLIP("clip"),
 		STEPPED_LINE("steppedLine");
 
 		// name value of property
@@ -229,10 +232,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets If the line is shown as a stepped line.<br>
+	 * Sets if the line is shown as a stepped line.<br>
 	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.
 	 * 
-	 * @param line If the line is shown as a stepped line. <code>false</code> is no step interpolation
+	 * @param line if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
 	public void setSteppedLine(boolean line) {
 		// checks if no stepped line
@@ -246,10 +249,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets If the line is shown as a stepped line.<br>
+	 * Sets if the line is shown as a stepped line.<br>
 	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.
 	 * 
-	 * @param line If the line is shown as a stepped line.
+	 * @param line if the line is shown as a stepped line.
 	 */
 	public void setSteppedLine(SteppedLine line) {
 		// checks if no stepped line
@@ -263,7 +266,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns If the line is shown as a stepped line.
+	 * Returns if the line is shown as a stepped line.
 	 * 
 	 * @return If the line is shown as a stepped line.
 	 */
@@ -275,6 +278,74 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			// otherwise returns the steppedline
 			return getValue(Property.STEPPED_LINE, SteppedLine.class, SteppedLine.FALSE);
 		}
+	}
+
+	/**
+	 * Sets how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * 
+	 * @param clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea
+	 */
+	public void setClip(double clip) {
+		// sets value
+		setValue(Property.CLIP, clip);
+	}
+
+	/**
+	 * Sets how to clip relative to chartArea, by an object which configures clipping per side.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * 
+	 * @param clip object which configures clipping per side
+	 */
+	public void setClip(Clip clip) {
+		// sets value
+		setValue(Property.CLIP, clip);
+	}
+
+	/**
+	 * Returns how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
+	 * 
+	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
+	 *            chartArea.<br>
+	 *            If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
+	 */
+	public double getClip() {
+		// gets the type stored
+		ObjectType type = type(Property.CLIP);
+		// checks if previously was set to a clip object
+		// therefore NaN
+		if (ObjectType.OBJECT.equals(type)) {
+			// if object returns NaN
+			return UndefinedValues.DOUBLE;
+		}
+		// gets value as number
+		return getValue(Property.CLIP, Defaults.get().getGlobal().getElements().getLine().getBorderWidth() / 2D);
+	}
+
+	/**
+	 * Returns how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
+	 * 
+	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
+	 *            chartArea.<br>
+	 *            If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
+	 */
+	public Clip getClipAsObject() {
+		// gets the type stored
+		ObjectType type = type(Property.CLIP);
+		// checks if previously was set to a number
+		// therefore new object with the same values
+		if (ObjectType.NUMBER.equals(type)) {
+			// new object
+			// with the same value
+			return new Clip(getClip());
+		}
+		// creates new value with previous item
+		// if there is otherwise an empyt object
+		return new Clip(getValue(Property.CLIP));
 	}
 
 	/**
