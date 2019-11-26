@@ -18,8 +18,8 @@ package org.pepstock.charba.client.callbacks;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Abstract implementation of tooltip title callback in order to help who will implement it to override ONLY needed methods and
@@ -38,7 +38,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 */
 	@Override
 	public String[] onBeforeTitle(IsChart chart, List<TooltipItem> items) {
-		return Utilities.EMPTY_ARRAY_STRING;
+		return Constants.EMPTY_ARRAY_STRING;
 	}
 
 	/*
@@ -49,7 +49,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 */
 	@Override
 	public String[] onTitle(IsChart chart, List<TooltipItem> items) {
-		return Utilities.EMPTY_ARRAY_STRING;
+		return Constants.EMPTY_ARRAY_STRING;
 	}
 
 	/*
@@ -60,7 +60,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 */
 	@Override
 	public String[] onAfterTitle(IsChart chart, List<TooltipItem> items) {
-		return Utilities.EMPTY_ARRAY_STRING;
+		return Constants.EMPTY_ARRAY_STRING;
 	}
 
 }

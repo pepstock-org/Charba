@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Constants;
+
 /**
  * This class contains information about a color.<br>
  * You can requests a specific alpha (starting form source color and cloning it).
@@ -28,6 +30,10 @@ public final class Color implements IsColor {
 	 * Default transparency is <b>{@value DEFAULT_ALPHA}</b>, (no transparency).
 	 */
 	public static final double DEFAULT_ALPHA = 1D;
+	// zero for padding
+	private static final String PADDING_ZERO = "0";
+	// double zero for padding
+	private static final String PADDING_DOUBLE_ZERO = "00";
 
 	// colors
 	private final int red;
@@ -130,7 +136,7 @@ public final class Color implements IsColor {
 	 */
 	@Override
 	public String toRGBA() {
-		return ColorBuilder.RGBA_STARTING_CHARS + "(" + red + "," + green + "," + blue + "," + alpha + ")";
+		return ColorBuilder.RGBA_STARTING_CHARS + Constants.OPEN_ROUND_BRACKET + red + Constants.COMMA + green + Constants.COMMA + blue + Constants.COMMA + alpha + Constants.CLOSE_ROUND_BRACKET;
 	}
 
 	/*
@@ -140,7 +146,7 @@ public final class Color implements IsColor {
 	 */
 	@Override
 	public String toRGB() {
-		return ColorBuilder.RGB_STARTING_CHARS + "(" + red + "," + green + "," + blue + ")";
+		return ColorBuilder.RGB_STARTING_CHARS + Constants.OPEN_ROUND_BRACKET + red + Constants.COMMA + green + Constants.COMMA + blue + Constants.CLOSE_ROUND_BRACKET;
 	}
 
 	/*
@@ -160,7 +166,7 @@ public final class Color implements IsColor {
 	 */
 	@Override
 	public String toHSLA() {
-		return ColorBuilder.HSLA_STARTING_CHARS + "(" + createHSLAsString(red, green, blue) + "," + alpha + ")";
+		return ColorBuilder.HSLA_STARTING_CHARS + Constants.OPEN_ROUND_BRACKET + createHSLAsString(red, green, blue) + Constants.COMMA + alpha + Constants.CLOSE_ROUND_BRACKET;
 	}
 
 	/*
@@ -170,7 +176,7 @@ public final class Color implements IsColor {
 	 */
 	@Override
 	public String toHSL() {
-		return ColorBuilder.HSL_STARTING_CHARS + "(" + createHSLAsString(red, green, blue) + ")";
+		return ColorBuilder.HSL_STARTING_CHARS + Constants.OPEN_ROUND_BRACKET + createHSLAsString(red, green, blue) + Constants.CLOSE_ROUND_BRACKET;
 	}
 
 	/*
@@ -192,11 +198,11 @@ public final class Color implements IsColor {
 	private static String pad(String in) {
 		// string is 0 (should never happen)
 		if (in.length() == 0) {
-			return "00";
+			return PADDING_DOUBLE_ZERO;
 		}
 		// if len is 1, adds a ZERO
 		if (in.length() == 1) {
-			return "0" + in;
+			return PADDING_ZERO + in;
 		}
 		// returns
 		return in;
@@ -240,7 +246,7 @@ public final class Color implements IsColor {
 			hue = (60 * (r - g) / (max - min)) + 240;
 		}
 		int hueInt = (int) Math.round(hue);
-		sb.append(hueInt).append(",");
+		sb.append(hueInt).append(Constants.COMMA);
 		// ------------------
 		// LIGHTNESS calculation
 		// ------------------
@@ -268,7 +274,7 @@ public final class Color implements IsColor {
 		// stores as integer
 		int saturationInt = (int) Math.round(saturation * 100);
 		// returns the string HSL
-		return sb.append(saturationInt).append("%,").append(lightnessInt).append("%").toString();
+		return sb.append(saturationInt).append(Constants.PERCENT).append(Constants.COMMA).append(lightnessInt).append(Constants.PERCENT).toString();
 	}
 
 	/**

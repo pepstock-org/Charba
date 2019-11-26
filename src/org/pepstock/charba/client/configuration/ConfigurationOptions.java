@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -53,7 +54,6 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -273,7 +273,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			}
 			// if here, no callback
 			// returns an empty string
-			return Utilities.EMPTY_STRING;
+			return Constants.EMPTY_STRING;
 		});
 	}
 

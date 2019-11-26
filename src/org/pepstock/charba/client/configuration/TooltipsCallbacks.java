@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -33,7 +34,6 @@ import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.utils.Utilities;
 
 import jsinterop.annotations.JsFunction;
 
@@ -368,7 +368,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		}
 		// default result
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		}
 		// default result
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -430,7 +430,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -450,7 +450,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -465,10 +465,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result : Utilities.EMPTY_STRING;
+			return result != null ? result : Constants.EMPTY_STRING;
 		}
 		// default result
-		return Utilities.EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -483,10 +483,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result : Utilities.EMPTY_STRING;
+			return result != null ? result : Constants.EMPTY_STRING;
 		}
 		// default result
-		return Utilities.EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -537,10 +537,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result : Utilities.EMPTY_STRING;
+			return result != null ? result : Constants.EMPTY_STRING;
 		}
 		// default result
-		return Utilities.EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -560,7 +560,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -580,7 +580,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -600,6 +600,6 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
 	}
 }

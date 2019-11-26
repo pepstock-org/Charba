@@ -27,7 +27,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface LegendTextCallback {
+public interface HtmlLegendTextCallback {
 
 	/**
 	 * Returns a text of legend for a specific item, as HTML

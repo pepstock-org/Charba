@@ -21,11 +21,11 @@ import java.util.Map;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -46,10 +46,10 @@ public final class TilesFactory {
 	private static final TilesFactory INSTANCE = new TilesFactory();
 	// cache of canvas patterns to avoid to create the same canvas pattern if already used
 	private static final Map<String, CanvasPattern> CANVAS_PATTERNS = new HashMap<>();
-	// cache of canvas patterns to avoid to create the same canvas pattern if already used
-	private static final Map<String, String> HTML_LEGEND_ITEMS = new HashMap<>();
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
+	// cache of canvas patterns to avoid to create the same canvas pattern if already used
+	private static final Map<String, String> HTML_LEGEND_ITEMS = new HashMap<>();
 	// string format to trim blanks
 	private static final String REGEXP_TRIM_SPACES_PATTERN = "\\s+";
 	// regexp instance to trim blanks
@@ -408,7 +408,7 @@ public final class TilesFactory {
 		// if all further requests for the same canvas pattern, returns the cached one
 		StringBuilder keyBuilder = new StringBuilder(shape.getKeyPrefix());
 		keyBuilder.append(backgroundColor).append(shapeColor).append(size);
-		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
+		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Constants.EMPTY_STRING).toLowerCase(Locale.getDefault());
 		// checks if the canvas pattern is already created with those parameters
 		if (CANVAS_PATTERNS.containsKey(key)) {
 			// if yes returns the cached one

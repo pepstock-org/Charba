@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.callbacks.LegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
@@ -53,7 +53,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	// defaults global options factory
 	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
 	// legend text callback instance
-	private LegendTextCallback legendTextCallback = null;
+	private HtmlLegendTextCallback legendTextCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -154,7 +154,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	public LegendTextCallback getLegendTextCallback() {
+	public HtmlLegendTextCallback getLegendTextCallback() {
 		return legendTextCallback != null ? legendTextCallback : defaultsOptions.getLegendTextCallback();
 	}
 
@@ -163,7 +163,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	public void setLegendTextCallback(LegendTextCallback legendTextCallback) {
+	public void setLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
 		internalSetLegendTextCallback(legendTextCallback);
 		// stores legend callback into fatory as cache
 		HtmlLegend.FACTORY.store(getCharbaId(), legendTextCallback);
@@ -174,7 +174,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	void internalSetLegendTextCallback(LegendTextCallback legendTextCallback) {
+	void internalSetLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
 		this.legendTextCallback = legendTextCallback;
 	}
 

@@ -18,6 +18,8 @@ package org.pepstock.charba.client;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.pepstock.charba.client.commons.Constants;
+
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
@@ -37,8 +39,6 @@ import com.google.gwt.resources.client.TextResource;
  */
 public final class Injector {
 
-	// key separator
-	private static final String KEY_CLASS_AND_METHOD_SEPARATOR = "_";
 	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
@@ -110,6 +110,6 @@ public final class Injector {
 	 * @return a unique key for every single resource type
 	 */
 	private static final String createKey(ResourcePrototype resource) {
-		return resource.getClass().getName() + KEY_CLASS_AND_METHOD_SEPARATOR + resource.getName();
+		return resource.getClass().getName() + Constants.UNDERSCORE + resource.getName();
 	}
 }

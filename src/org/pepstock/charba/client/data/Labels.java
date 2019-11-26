@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.ObjectType;
 
 /**
@@ -27,8 +28,6 @@ import org.pepstock.charba.client.commons.ObjectType;
  * @author Andrea "Stock" Stocchero
  */
 public final class Labels {
-
-	private static final String SEPARATOR = "\n";
 
 	private final ArrayMixedObject array;
 
@@ -95,10 +94,10 @@ public final class Labels {
 		// if consistent
 		if (value != null) {
 			// checks if contains separator
-			if (value.contains(SEPARATOR)) {
+			if (value.contains(Constants.LINE_SEPARATOR)) {
 				// splits the string by separator
 				// and adds to object as array
-				array.push(ArrayString.fromOrEmpty(value.split(SEPARATOR)));
+				array.push(ArrayString.fromOrEmpty(value.split(Constants.LINE_SEPARATOR)));
 			} else {
 				// pushes to JS array
 				array.push(value);
@@ -166,7 +165,7 @@ public final class Labels {
 			for (int i = 0; i < internalArray.length(); i++) {
 				// adds separator after 1 element
 				if (i > 0) {
-					result.append(SEPARATOR);
+					result.append(Constants.LINE_SEPARATOR);
 				}
 				// adds to builder
 				result.append(internalArray.get(i));

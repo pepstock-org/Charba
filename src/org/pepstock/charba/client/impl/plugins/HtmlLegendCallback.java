@@ -23,10 +23,11 @@ import java.util.List;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
-import org.pepstock.charba.client.callbacks.LegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -114,8 +115,6 @@ final class HtmlLegendCallback implements LegendCallback {
 	private static final String STYLE_ALIGN = "align";
 	// CSS style property for horizontal alignment
 	private static final String STYLE_DIRECTION = "direction";
-	// carriage return to check into text of legend item
-	private static final String BREAK = "\n";
 
 	/*
 	 * (non-Javadoc)
@@ -316,7 +315,7 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 * @return a {@link TableCellElement} which should contains and represents the label of dataset
 	 */
-	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, LegendTextCallback callback) {
+	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result label cell
 		final TableCellElement labelCell = Document.get().createTDElement();
 		// gets legend and legend labels instances
@@ -358,7 +357,7 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @return a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
 	 *         label to apply
 	 */
-	private DivElement createLabelText(IsChart chart, LegendLabelItem item, LegendTextCallback callback) {
+	private DivElement createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result text label cell
 		final DivElement element = Document.get().createDivElement();
 		// gets text of legend item
@@ -389,11 +388,11 @@ final class HtmlLegendCallback implements LegendCallback {
 	 * @param text normalized text to apply
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	private void managePlainText(IsChart chart, LegendLabelItem item, DivElement element, String text, LegendTextCallback callback) {
+	private void managePlainText(IsChart chart, LegendLabelItem item, DivElement element, String text, HtmlLegendTextCallback callback) {
 		// checks if the text contains a carriage return
-		if (text.contains(BREAK)) {
+		if (text.contains(Constants.LINE_SEPARATOR)) {
 			// splits the text
-			String[] splitText = text.split(BREAK);
+			String[] splitText = text.split(Constants.LINE_SEPARATOR);
 			// scans all split text
 			for (String singleText : splitText) {
 				// if elements has got more than 0 children

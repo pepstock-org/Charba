@@ -28,6 +28,7 @@ import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -118,16 +119,6 @@ public final class Utilities {
 	}
 
 	/**
-	 * Constant for EMPTY string
-	 */
-	public static final String EMPTY_STRING = "";
-
-	/**
-	 * Constant for EMPTY ARRAY string.
-	 */
-	public static final String[] EMPTY_ARRAY_STRING = new String[0];
-
-	/**
 	 * Constant for CSS property for font.
 	 */
 	public static final String CSS_FONT_PROPERTY = "font";
@@ -196,12 +187,6 @@ public final class Utilities {
 	// internal comparator to sort colors by own offset, descendant
 	// needed for CSS value for radial and out-in
 	private static final Comparator<GradientColor> REVERSE_COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o2.getOffset(), o1.getOffset());
-	// constants to build CSS statement
-	private static final char COLOR_SEPARATOR = ',';
-	// constants to build CSS statement
-	private static final char COLOR_OFFSET_SEPARATOR = ' ';
-	// constants to build CSS statement
-	private static final char PATTERN_PERCENT = '%';
 
 	/**
 	 * To avoid any instantiation
@@ -296,7 +281,7 @@ public final class Utilities {
 		}
 		// if here pattern is not consistent
 		// returns empty string
-		return EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -308,11 +293,11 @@ public final class Utilities {
 	public static String toCSSBackgroundProperty(String dataUrl) {
 		// checks if data url is consistent
 		if (dataUrl != null && dataUrl.trim().length() > 0) {
-			return PATTERN_TEMPLATE.css(dataUrl, EMPTY_STRING).asString();
+			return PATTERN_TEMPLATE.css(dataUrl, Constants.EMPTY_STRING).asString();
 		}
 		// if here data url is not consistent
 		// returns empty string
-		return EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -324,7 +309,7 @@ public final class Utilities {
 	 * @return a URL CSS property for the current content of the canvas pattern
 	 */
 	public static String toCSSBackgroundProperty(FillStrokeStyle style, int width, int height) {
-		return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(style, width, height), EMPTY_STRING).asString();
+		return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(style, width, height), Constants.EMPTY_STRING).asString();
 	}
 
 	/**
@@ -357,11 +342,11 @@ public final class Utilities {
 		// checks if consistent
 		if (image != null) {
 			// transform into CSS property
-			return PATTERN_TEMPLATE.css(image.getSrc(), EMPTY_STRING).asString();
+			return PATTERN_TEMPLATE.css(image.getSrc(), Constants.EMPTY_STRING).asString();
 		}
 		// if here, image not consistent
 		// then returns an empty string
-		return EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -378,7 +363,7 @@ public final class Utilities {
 		// if not returns an empty string
 		if (style == null || WORKING_CANVAS == null) {
 			// returns empty string
-			return EMPTY_STRING;
+			return Constants.EMPTY_STRING;
 		}
 		// sets dimensions of canvas, always a square
 		WORKING_CANVAS.setWidth(width);
@@ -434,20 +419,20 @@ public final class Utilities {
 				// already put into buildr
 				// then add the comma
 				if (builder.length() > 0) {
-					builder.append(COLOR_SEPARATOR);
+					builder.append(Constants.COMMA);
 				}
 				// adds color RGBA into strign builder
 				builder.append(color.getColor().toRGBA());
 				// gets offset to set as percentage
 				int percentage = (int) Math.round(color.getOffset() * 100);
-				builder.append(COLOR_OFFSET_SEPARATOR).append(percentage).append(PATTERN_PERCENT);
+				builder.append(Constants.BLANK).append(percentage).append(Constants.PERCENT);
 			}
 			// using the template, returns the CSS value of gradient
 			return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
 		}
 		// if here gradient is not consistent
 		// returns empty string
-		return EMPTY_STRING;
+		return Constants.EMPTY_STRING;
 	}
 
 	/**

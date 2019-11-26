@@ -22,13 +22,13 @@ import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.options.Scales;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -40,7 +40,7 @@ import org.pepstock.charba.client.utils.Utilities;
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder {
 	// default label
-	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
+	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
 	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that

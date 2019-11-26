@@ -26,6 +26,7 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.LegendItem;
@@ -453,7 +454,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// scans all datasets
 		for (Dataset ds : currentDatasets) {
 			// adds to builder the data in JSON string format
-			sb.append(ds.toFilteredJSON()).append("\n");
+			sb.append(ds.toFilteredJSON()).append(Constants.LINE_SEPARATOR);
 		}
 		// returns string of builder
 		return sb.toString();

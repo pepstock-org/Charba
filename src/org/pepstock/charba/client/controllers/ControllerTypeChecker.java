@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Constants;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 
@@ -30,10 +31,6 @@ final class ControllerTypeChecker {
 	private static final String INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR = "Controller type can not start with a dot or an underscore ";
 	// exception text when controller type is not URL safe
 	private static final String INVALID_CONTROLLER_TYPE_NOT_URL_SAFE = "Controller type can not contain any non-URL-safe characters ";
-	// DOT constant
-	private static final char DOT = '.';
-	// underscore constant
-	private static final char UNDERSCORE = '_';
 
 	/**
 	 * To avoid any instantiation
@@ -56,7 +53,7 @@ final class ControllerTypeChecker {
 		// checks if is consistent
 		Type.checkIfValid(type);
 		// checks if has got invalid chars
-		if (type.value().charAt(0) == DOT || type.value().charAt(0) == UNDERSCORE) {
+		if (type.value().startsWith(Constants.DOT) || type.value().startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(type.value())) {
@@ -74,7 +71,7 @@ final class ControllerTypeChecker {
 	 */
 	private static String buildMessage(String type, String message) {
 		StringBuilder sb = new StringBuilder(message);
-		sb.append("[").append(type).append("]");
+		sb.append(Constants.OPEN_SQUARE_BRACKET).append(type).append(Constants.CLOSE_SQUARE_BRACKET);
 		return sb.toString();
 	}
 

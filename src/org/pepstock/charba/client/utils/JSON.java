@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -172,7 +173,7 @@ public final class JSON {
 		// if function
 		if (ObjectType.FUNCTION.equals(type)) {
 			// returns the value of function
-			return value + Utilities.EMPTY_STRING;
+			return value + Constants.EMPTY_STRING;
 		}
 		// if object
 		if (ObjectType.OBJECT.equals(type)) {
@@ -255,13 +256,13 @@ public final class JSON {
 			// means that is first object
 			if (key != null && key.trim().length() > 0) {
 				// checks is not a HCART.JS internal property
-				if (!key.startsWith(JSONReplacerConstants.INTERNAL_PROPERTY_KEY_PREFIX)) {
+				if (!key.startsWith(Constants.UNDERSCORE)) {
 					// gets the type of object
 					ObjectType type = JsHelper.get().typeOf(value);
 					// if function
 					if (ObjectType.FUNCTION.equals(type)) {
 						// returns the value of function
-						return value + Utilities.EMPTY_STRING;
+						return value + Constants.EMPTY_STRING;
 					}
 					// if object
 					// checks if is an element

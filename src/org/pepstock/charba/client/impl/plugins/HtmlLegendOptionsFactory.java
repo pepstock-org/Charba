@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.callbacks.LegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -31,7 +31,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendOptions> {
 
 	// maps with all legend text callback for chart
-	private static final Map<Integer, LegendTextCallback> LEGEND_TEXT_CALLBACKS = new HashMap<>();
+	private static final Map<Integer, HtmlLegendTextCallback> LEGEND_TEXT_CALLBACKS = new HashMap<>();
 	// factory instance to read the options from default global
 	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
 
@@ -72,7 +72,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 	 * @param optionsId identifier for legend callback
 	 * @param callback legend callback instance
 	 */
-	void store(int optionsId, LegendTextCallback callback) {
+	void store(int optionsId, HtmlLegendTextCallback callback) {
 		// checks if legend callback is consistent
 		if (callback != null) {
 			LEGEND_TEXT_CALLBACKS.put(optionsId, callback);

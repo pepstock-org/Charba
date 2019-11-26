@@ -48,6 +48,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -76,7 +77,7 @@ import com.google.gwt.user.client.ui.Image;
  */
 public abstract class LiningDataset extends Dataset implements HasFill, HasOrder {
 	// default label
-	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
+	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

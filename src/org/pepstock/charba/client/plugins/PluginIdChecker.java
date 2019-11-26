@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 
 import com.google.gwt.regexp.shared.RegExp;
@@ -35,10 +36,6 @@ public final class PluginIdChecker {
 	private static final String INVALID_PLUGIN_ID_NOT_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
 	// exception text when plugin id is not lower case
 	private static final String INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE = "Plugin id can not contain uppercase letters ";
-	// DOT constant
-	private static final char DOT = '.';
-	// underscore constant
-	private static final char UNDERSCORE = '_';
 	// regexp to check if there is an uppercase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
 	// regex instance for font style
@@ -67,7 +64,7 @@ public final class PluginIdChecker {
 		// checks if is null
 		if (id == null) {
 			throw new IllegalArgumentException(INVALID_PLUGIN_ID_NULL);
-		} else if (id.charAt(0) == DOT || id.charAt(0) == UNDERSCORE) {
+		} else if (id.startsWith(Constants.DOT) || id.startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(id)) {
@@ -100,7 +97,7 @@ public final class PluginIdChecker {
 	 */
 	private static String buildMessage(String pluginId, String message) {
 		StringBuilder sb = new StringBuilder(message);
-		sb.append("[").append(pluginId).append("]");
+		sb.append(Constants.OPEN_SQUARE_BRACKET).append(pluginId).append(Constants.CLOSE_SQUARE_BRACKET);
 		return sb.toString();
 	}
 

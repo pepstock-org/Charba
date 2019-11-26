@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
@@ -105,7 +106,7 @@ final class ColorSchemesUtil {
 		// creates a builder with category
 		StringBuilder sb = new StringBuilder(category);
 		// adds dot and name of color scheme
-		sb.append(".").append(name);
+		sb.append(Constants.DOT).append(name);
 		// returns string
 		return sb.toString();
 	}

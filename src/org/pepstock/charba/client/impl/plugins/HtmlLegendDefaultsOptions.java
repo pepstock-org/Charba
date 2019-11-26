@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.callbacks.LegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 
 	// legend text callback instance
-	private LegendTextCallback legendTextCallback = null;
+	private HtmlLegendTextCallback legendTextCallback = null;
 
 	/**
 	 * Builds the object with an empty java script object and uses the constants as default.
@@ -88,7 +88,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	void setLegendTextCallback(LegendTextCallback legendTextCallback) {
+	void setLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
 		this.legendTextCallback = legendTextCallback;
 	}
 
@@ -97,7 +97,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	LegendTextCallback getLegendTextCallback() {
+	HtmlLegendTextCallback getLegendTextCallback() {
 		return legendTextCallback;
 	}
 }
