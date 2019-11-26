@@ -57,10 +57,13 @@ public final class Injector {
 	 * @param resource script resource
 	 */
 	public static void ensureInjected(ResourcePrototype resource) {
-		// creates a script element
-		ScriptElement scriptElement = Document.get().createScriptElement();
-		// injects it into SCRIPT element
-		ensureInjected(resource, scriptElement);
+		// checks if resource is consistent
+		if (resource != null) {
+			// creates a script element
+			ScriptElement scriptElement = Document.get().createScriptElement();
+			// injects it into SCRIPT element
+			ensureInjected(resource, scriptElement);
+		}
 	}
 
 	/**
@@ -69,10 +72,13 @@ public final class Injector {
 	 * @param resource CSS style resource
 	 */
 	public static void ensureCssInjected(ResourcePrototype resource) {
-		// creates a style element
-		StyleElement styleElement = Document.get().createStyleElement();
-		// injects it into STYLE element
-		ensureInjected(resource, styleElement);
+		// checks if resource is consistent
+		if (resource != null) {
+			// creates a style element
+			StyleElement styleElement = Document.get().createStyleElement();
+			// injects it into STYLE element
+			ensureInjected(resource, styleElement);
+		}
 	}
 
 	/**
@@ -81,24 +87,21 @@ public final class Injector {
 	 * @param resource script resource
 	 */
 	private static void ensureInjected(ResourcePrototype resource, Element container) {
-		// checks if resource is consistent
-		if (resource != null) {
-			// creates a unique key for the resource
-			// to use to understand if is already injected
-			String resourceKey = createKey(resource);
-			// checks if already injected
-			if (!ELEMENTS_INJECTED.contains(resourceKey)) {
-				if (resource instanceof TextResource) {
-					TextResource textResource = (TextResource) resource;
-					// sets ID
-					container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
-					// sets the script content source
-					container.setInnerText(textResource.getText());
-					// appends to the body
-					Document.get().getBody().appendChild(container);
-				}
-				ELEMENTS_INJECTED.add(resourceKey);
+		// creates a unique key for the resource
+		// to use to understand if is already injected
+		String resourceKey = createKey(resource);
+		// checks if already injected
+		if (!ELEMENTS_INJECTED.contains(resourceKey)) {
+			if (resource instanceof TextResource) {
+				TextResource textResource = (TextResource) resource;
+				// sets ID
+				container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
+				// sets the script content source
+				container.setInnerText(textResource.getText());
+				// appends to the body
+				Document.get().getBody().appendChild(container);
 			}
+			ELEMENTS_INJECTED.add(resourceKey);
 		}
 	}
 

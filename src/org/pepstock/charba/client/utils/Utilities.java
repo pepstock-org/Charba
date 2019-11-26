@@ -522,7 +522,7 @@ public final class Utilities {
 	 */
 	public static Cursor getCursorOfChart(IsChart chart) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart)) {
+		if (IsChart.isConsistent(chart)) {
 			// scans all cursors to check if any cursor is already set
 			// needs to scan them because with valueOf there is an exception
 			// if the value does not match any element of enumeration

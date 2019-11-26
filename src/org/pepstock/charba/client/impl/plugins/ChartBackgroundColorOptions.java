@@ -195,7 +195,14 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 * @param color the background color.
 	 */
 	public void setBackgroundColor(String color) {
-		setValue(Property.BACKGROUND_COLOR, color);
+		// checks if color is consistent
+		if (color != null) {
+			setValue(Property.BACKGROUND_COLOR, color);
+		} else {
+			// if here, the color is not consistent
+			// then set default
+			setValue(Property.BACKGROUND_COLOR, ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		}
 		// sets the color type
 		setValue(Property.COLOR_TYPE, ColorType.COLOR);
 	}
@@ -216,8 +223,15 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public void setBackgroundColor(Gradient gradient) {
 		setValue(Property.BACKGROUND_COLOR, gradient);
-		// sets the color type
-		setValue(Property.COLOR_TYPE, ColorType.GRADIENT);
+		// checks if argument is consistent
+		if (gradient != null) {
+			// sets the color type
+			setValue(Property.COLOR_TYPE, ColorType.GRADIENT);
+		} else {
+			// if here, the gradient is not consistent
+			// then set color 
+			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		}
 	}
 
 	/**
@@ -227,7 +241,14 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public void setBackgroundColor(Pattern pattern) {
 		setValue(Property.BACKGROUND_COLOR, pattern);
-		// sets the color type
-		setValue(Property.COLOR_TYPE, ColorType.PATTERN);
+		// checks if argument is consistent
+		if (pattern != null) {
+			// sets the color type
+			setValue(Property.COLOR_TYPE, ColorType.PATTERN);
+		} else {
+			// if here, the gradient is not consistent
+			// then set color 
+			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		}
 	}
 }

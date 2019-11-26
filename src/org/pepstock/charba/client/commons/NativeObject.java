@@ -95,7 +95,12 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	boolean hasProperty(String key) {
-		return hasOwnProperty(key);
+		// checks if argument is consistent
+		if (key != null) {
+			return hasOwnProperty(key);
+		}
+		// if here, argument is not consistent
+		return false; 
 	}
 
 	/**

@@ -155,7 +155,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	@Override
 	public void onConfigure(IsChart chart) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart)) {
+		if (IsChart.isConsistent(chart)) {
 			HtmlLegendOptions pOptions = null;
 			// if not, loads and cache
 			// creates the plugin options using the java script object

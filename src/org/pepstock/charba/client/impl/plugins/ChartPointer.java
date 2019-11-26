@@ -65,7 +65,7 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if chart has got any dataset selection and title click handler
-		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
+		if (IsChart.isConsistent(chart) && chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
 			// if not, loads and cache
@@ -92,7 +92,7 @@ public final class ChartPointer extends AbstractPlugin {
 	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
 		// checks if chart is consistent
 		// checks if chart has got any dataset selection handler
-		if (IsChart.isAbstractChart(chart) && (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers())) {
+		if (IsChart.isConsistent(chart) && (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers())) {
 			// gets options instance
 			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
 			// gets the scope

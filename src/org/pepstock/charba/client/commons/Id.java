@@ -59,7 +59,13 @@ public enum Id implements Key
 	 * @return the property value or {@link UndefinedValues#STRING} if not exist
 	 */
 	public static String get(NativeObjectContainer nativeObjectContainer) {
-		return get(nativeObjectContainer.getNativeObject());
+		// checks if argument is consistent
+		if (nativeObjectContainer != null) {
+			return get(nativeObjectContainer.getNativeObject());
+		}
+		// if here the argument is not consistent
+		// then returns null
+		return UndefinedValues.STRING;
 	}
 
 	/**
@@ -88,8 +94,8 @@ public enum Id implements Key
 	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
 	 */
 	public static int get(Key key, NativeObject nativeObject) {
-		// checks if argument is consistent and property exists
-		if (nativeObject != null && nativeObject.hasProperty(key.value())) {
+		// checks if arguments are consistent and property exists
+		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
 			// gets descriptor
 			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
 			// if descriptor is consistent, return value

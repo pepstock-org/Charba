@@ -189,36 +189,39 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDraw(IsChart chart, double easing) {
-		// gets options
-		ChartBackgroundColorOptions bgOptions = getOptions(chart);
-		// gets the canvas
-		Context2d ctx = chart.getCanvas().getContext2d();
-		// save context
-		ctx.save();
-		if (ChartBackgroundColorOptions.ColorType.COLOR.equals(bgOptions.getColorType())) {
-			// set fill canvas color
-			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
-			// sets back ground to chart HTML element
-			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_COLOR_PROPERTY, bgOptions.getBackgroundColorAsString());
-		} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
-			// creates the pattern
-			CanvasPattern canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
-			// set fill canvas pattern
-			ctx.setFillStyle(canvasPattern);
-			// sets back ground to chart HTML element
-			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
-		} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-			// creates the gradient
-			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
-			// set fill canvas color
-			ctx.setFillStyle(canvasGradient);
-			// sets back ground to chart HTML element
-			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// gets options
+			ChartBackgroundColorOptions bgOptions = getOptions(chart);
+			// gets the canvas
+			Context2d ctx = chart.getCanvas().getContext2d();
+			// save context
+			ctx.save();
+			if (ChartBackgroundColorOptions.ColorType.COLOR.equals(bgOptions.getColorType())) {
+				// set fill canvas color
+				ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
+				// sets back ground to chart HTML element
+				applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_COLOR_PROPERTY, bgOptions.getBackgroundColorAsString());
+			} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
+				// creates the pattern
+				CanvasPattern canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+				// set fill canvas pattern
+				ctx.setFillStyle(canvasPattern);
+				// sets back ground to chart HTML element
+				applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
+			} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+				// creates the gradient
+				CanvasGradient canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
+				// set fill canvas color
+				ctx.setFillStyle(canvasGradient);
+				// sets back ground to chart HTML element
+				applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
+			}
+			// fills back ground
+			ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			// restore context
+			ctx.restore();
 		}
-		// fills back ground
-		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-		// restore context
-		ctx.restore();
 		// always TRUE
 		return true;
 	}
@@ -230,12 +233,13 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public void onAfterDraw(IsChart chart, double easing) {
-		// when the draw is completed
-		// remove the options from cache in order to reload it
-		// when chart is re drawing for whatever reason.
-		// in this way if options are updating during chart's life cycle
-		// the updates can be applied.
-		if (easing == 1D) {
+		// checks if chart is consistent
+		if (IsChart.isValid(chart) && easing == 1D) {
+			// when the draw is completed
+			// remove the options from cache in order to reload it
+			// when chart is re drawing for whatever reason.
+			// in this way if options are updating during chart's life cycle
+			// the updates can be applied.
 			OPTIONS.remove(chart.getId());
 		}
 	}
@@ -268,9 +272,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {
-		// because chart is destroy
-		// clears the cache of patterns and gradients of the chart
-		ChartBackgroundGradientFactory.get().clear(chart);
+		// checks if chart is consistent
+		if (IsChart.isValid(chart)) {
+			// because chart is destroy
+			// clears the cache of patterns and gradients of the chart
+			ChartBackgroundGradientFactory.get().clear(chart);
+		}
 	}
 
 	/**

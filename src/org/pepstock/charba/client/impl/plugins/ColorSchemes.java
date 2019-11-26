@@ -77,7 +77,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	public void onConfigure(IsChart chart) {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
-		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
 			// gets the legend labels callback
 			// this is done because changing colors by plugin
 			// the legend does not change accordingly
@@ -101,7 +101,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
-		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
 			// gets options from chart options
 			ColorSchemesOptions options = getOptions(chart);
 			// gets scheme

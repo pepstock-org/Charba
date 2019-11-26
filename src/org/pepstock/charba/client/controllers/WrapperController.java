@@ -232,11 +232,17 @@ final class WrapperController extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		initializeCallbackProxy.setCallback((context, chart, datasetIndex) -> {
-			// adds the chart instance to the context
-			// PAY ATTENTION: this is mandatory
-			context.setNativeChart(chart);
-			// invoke user method implementation
-			onInitialize(context, chart.getChart(), datasetIndex);
+			// checks if context and native chart are consistent
+			if (context != null && chart != null) {
+				// adds the chart instance to the context
+				// PAY ATTENTION: this is mandatory
+				context.setNativeChart(chart);
+				// checks if chart is consistent
+				if (IsChart.isValid(chart.getChart())) {
+					// invoke user method implementation
+					onInitialize(context, chart.getChart(), datasetIndex);
+				}
+			}
 		});
 		// invoke user method implementation
 		addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
@@ -288,7 +294,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onInitialize(ControllerContext context, IsChart chart, int datasetIndex) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.initialize(context, chart, datasetIndex);
 		}
 	}
@@ -301,7 +307,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onAddElements(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.addElements(context, chart);
 		}
 	}
@@ -315,7 +321,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onAddElementAndReset(ControllerContext context, IsChart chart, int index) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.addElementAndReset(context, chart, index);
 		}
 	}
@@ -329,7 +335,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onDraw(ControllerContext context, IsChart chart, double ease) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.draw(context, chart, ease);
 		}
 	}
@@ -343,7 +349,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.removeHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
@@ -357,7 +363,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.setHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
@@ -371,7 +377,7 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	void onUpdate(ControllerContext context, IsChart chart, boolean reset) {
 		// if consistent, calls controller
-		if (IsChart.isValid(chart)) {
+		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.update(context, chart, reset);
 		}
 	}

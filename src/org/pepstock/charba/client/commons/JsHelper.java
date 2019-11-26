@@ -128,7 +128,10 @@ public final class JsHelper {
 	 * @param key the string name of the property to remove.
 	 */
 	void remove(NativeObject object, String key) {
-		NativeJsHelper.remove(object, key);
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			NativeJsHelper.remove(object, key);
+		}
 	}
 
 	/**

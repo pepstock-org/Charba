@@ -157,7 +157,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks is chart is consistent
 		// checks if the plugin has been invoked for LINE or BAR charts
 		// checks if we have already an handler
-		if (IsChart.isValid(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) && HANDLERS.containsKey(chart.getId())) {
+		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// sets the flag to skip next event after refresh
@@ -182,8 +182,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
-		// checks if the plugin has been invoked for LINE or BAR charts
-		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
+		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		if (mustBeActivated(chart)) {
 			// overrides the tooltip configuration disabling it
 			chart.getOptions().getTooltips().setEnabled(false);
 			// overrides the events configuration setting only the following
@@ -232,10 +232,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
-		// checks if the plugin has been invoked for LINE or BAR charts
+		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		// add checks if there is any dataset selection handler into option
 		// if yes exception
-		if ((ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) && chart.getOptions().hasDatasetSelectionHandlers()) {
+		if (mustBeActivated(chart) && chart.getOptions().hasDatasetSelectionHandlers()) {
 			// throw exception
 			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
 		}
@@ -249,8 +249,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onAfterDraw(IsChart chart, double easing) {
-		// checks if the plugin has been invoked for LINE or BAR charts
-		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
+		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
 			// sets cursor wait because the chart is drawing and not selectable
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
@@ -273,8 +273,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {
-		// checks if the plugin has been invoked for LINE or BAR charts
-		if (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType())) {
+		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		if (mustBeActivated(chart)) {
 			// checks if we have already an handler
 			if (HANDLERS.containsKey(chart.getId())) {
 				// gets selection handler
@@ -313,41 +313,54 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeEvent(IsChart chart, ChartNativeEvent event) {
-		// gets selection handler
-		SelectionHandler handler = HANDLERS.get(chart.getId());
-		// checks if it is a click event
-		// ONLY click are caught
-		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
-			// option instance
-			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
-			// get clear selection element
-			ClearSelection clearSelection = pOptions.getClearSelection();
-			// checks if is enabled
-			if (clearSelection.isDisplay()) {
-				// calculates if the events coordinates are hover of clear selection element
-				boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
-				boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
-				// checks if hover
-				if (isX && isY) {
-					// invokes the clear selection
-					clearSelection(chart);
-					// and forces the event will be discarded.
-					return false;
+		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// checks if it is a click event
+			// ONLY click are caught
+			if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
+				// option instance
+				DatasetsItemsSelectorOptions pOptions = handler.getOptions();
+				// get clear selection element
+				ClearSelection clearSelection = pOptions.getClearSelection();
+				// checks if is enabled
+				if (clearSelection.isDisplay()) {
+					// calculates if the events coordinates are hover of clear selection element
+					boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
+					boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
+					// checks if hover
+					if (isX && isY) {
+						// invokes the clear selection
+						clearSelection(chart);
+						// and forces the event will be discarded.
+						return false;
+					}
 				}
 			}
-		}
-		// This control has been added because a click event is always fired
-		// by canvas when mouse up (of selection handler) is performed
-		// but to avoid to refresh the chart every time
-		// selection handler sets a flag to check this condition
-		if (handler.isPreventClickEvent()) {
-			// resets flag
-			handler.resetPreventClickEvent();
-			// and forces the event will be discarded.
-			return false;
+			// This control has been added because a click event is always fired
+			// by canvas when mouse up (of selection handler) is performed
+			// but to avoid to refresh the chart every time
+			// selection handler sets a flag to check this condition
+			if (handler.isPreventClickEvent()) {
+				// resets flag
+				handler.resetPreventClickEvent();
+				// and forces the event will be discarded.
+				return false;
+			}
 		}
 		// if here, propagates the event to other listeners
 		return true;
+	}
+
+	/**
+	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.
+	 * 
+	 * @param chart chart instance to check
+	 * @return <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported
+	 */
+	private boolean mustBeActivated(IsChart chart) {
+		return IsChart.isConsistent(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType()));
 	}
 
 	/**

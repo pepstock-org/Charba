@@ -129,7 +129,7 @@ public final class ControllerType implements Type {
 	 * @return <code>true</code> if this controller is extending an existing chart, otherwise <code>false</code>.
 	 */
 	public boolean isExtended() {
-		return chartType != null;
+		return Type.isValid(chartType);
 	}
 
 	/*

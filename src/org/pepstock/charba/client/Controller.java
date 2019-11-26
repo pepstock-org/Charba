@@ -28,6 +28,41 @@ import org.pepstock.charba.client.controllers.StyleElement;
 public interface Controller {
 
 	/**
+	 * Returns <code>true</code> if all arguments are consistent.
+	 * 
+	 * @param controller controller instance to check
+	 * @param context controller context instance, should be provided by CHART.JS.
+	 * @param chart chart instance
+	 * @return <code>true</code> if all arguments are consistent
+	 */
+	static boolean isConsistent(Controller controller, ControllerContext context, IsChart chart) {
+		return isValid(controller) && IsChart.isValid(chart) && context != null;
+	}
+	
+	/**
+	 * Checks if key passed as argument is not <code>null</code> and its type is valid as well. If not, throw a
+	 * {@link IllegalArgumentException}.
+	 * 
+	 * @param controller controller instance to check
+	 */
+	static void checkIfValid(Controller controller) {
+		if (!isValid(controller)) {
+			throw new IllegalArgumentException("Controller implementation instance is null or not consistent");
+		}
+	}
+
+
+	/**
+	 * Returns <code>true</code> if the controller is consistent.
+	 * 
+	 * @param controller controller instance to check
+	 * @return <code>true</code> if the controller is consistent
+	 */
+	static boolean isValid(Controller controller) {
+		return controller != null && Type.isValid(controller.getType());
+	}
+
+	/**
 	 * Controller must define a unique id in order to be configurable.<br>
 	 * Returns the controller id.
 	 * 

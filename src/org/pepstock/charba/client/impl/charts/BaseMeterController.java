@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.controllers.AbstractController;
@@ -81,25 +82,32 @@ final class BaseMeterController extends AbstractController {
 	 */
 	@Override
 	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
-		// gets the dataset at index
-		Dataset dataset = chart.getData().getDatasets().get(datasetIndex);
-		// checks if is a meter dataset (or gauge)
-		if (dataset instanceof MeterDataset) {
-			// casts to meter dataset
-			MeterDataset meterDataset = (MeterDataset) dataset;
-			// meter or gauge charts must have only 1 dataset
-			// checks if there is more than 1
-			if (datasetIndex > 0) {
-				// if more than 1
-				// forces hidden dataset
-				meterDataset.hide();
+		// checks if arguments are consistent
+		if (Controller.isConsistent(this, context, chart)) {
+			// gets the dataset at index
+			Dataset dataset = chart.getData().getDatasets().get(datasetIndex);
+			// checks if is a meter dataset (or gauge)
+			if (dataset instanceof MeterDataset) {
+				// casts to meter dataset
+				MeterDataset meterDataset = (MeterDataset) dataset;
+				// meter or gauge charts must have only 1 dataset
+				// checks if there is more than 1
+				if (datasetIndex > 0) {
+					// if more than 1
+					// forces hidden dataset
+					meterDataset.hide();
+				}
+				// invokes the initialization
+				super.initialize(context, chart, datasetIndex);
+			} else {
+				// if not meter dataset
+				// exception
+				throw new IllegalArgumentException("Dataset at index " + datasetIndex + " is not a MeterDataset");
 			}
-			// invokes the initialization
-			super.initialize(context, chart, datasetIndex);
 		} else {
-			// if not meter dataset
+			// if here, arguments are not consistent
 			// exception
-			throw new IllegalArgumentException("Dataset at index " + datasetIndex + " is not a MeterDataset");
+			throw new IllegalArgumentException("Initialize method arguments are not consistent");
 		}
 	}
 
@@ -111,29 +119,36 @@ final class BaseMeterController extends AbstractController {
 	 */
 	@Override
 	public void draw(ControllerContext context, IsChart chart, double ease) {
-		// draw the doughnut chart
-		super.draw(context, chart, ease);
-		// gets the list of datasets
-		List<Dataset> datasets = chart.getData().getDatasets();
-		// checks if not empty
-		if (!datasets.isEmpty()) {
-			// gets chart item
-			ChartNode item = chart.getNode();
-			// gets dataset index 0
-			MeterDataset dataset = (MeterDataset) datasets.get(0);
-			// checks if meter chart
-			if (chart instanceof MeterChart) {
-				MeterChart meterChart = (MeterChart) chart;
-				MeterOptions options = meterChart.getOptions();
-				// let's draw the value inside the doughnut
-				execute(chart, item, dataset, options, ease);
-			} else if (chart instanceof GaugeChart) {
+		// checks if arguments are consistent
+		if (Controller.isConsistent(this, context, chart)) {
+			// draw the doughnut chart
+			super.draw(context, chart, ease);
+			// gets the list of datasets
+			List<Dataset> datasets = chart.getData().getDatasets();
+			// checks if not empty
+			if (!datasets.isEmpty()) {
+				// gets chart item
+				ChartNode item = chart.getNode();
+				// gets dataset index 0
+				MeterDataset dataset = (MeterDataset) datasets.get(0);
 				// checks if meter chart
-				GaugeChart gaugeChart = (GaugeChart) chart;
-				GaugeOptions options = gaugeChart.getOptions();
-				// let's draw the value inside the doughnut
-				execute(chart, item, dataset, options, ease);
+				if (chart instanceof MeterChart) {
+					MeterChart meterChart = (MeterChart) chart;
+					MeterOptions options = meterChart.getOptions();
+					// let's draw the value inside the doughnut
+					execute(chart, item, dataset, options, ease);
+				} else if (chart instanceof GaugeChart) {
+					// checks if meter chart
+					GaugeChart gaugeChart = (GaugeChart) chart;
+					GaugeOptions options = gaugeChart.getOptions();
+					// let's draw the value inside the doughnut
+					execute(chart, item, dataset, options, ease);
+				}
 			}
+		} else {
+			// if here, arguments are not consistent
+			// exception
+			throw new IllegalArgumentException("Draw method arguments are not consistent");
 		}
 	}
 

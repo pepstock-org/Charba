@@ -117,7 +117,10 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	final void setCurrentCursor(Cursor cursor) {
-		setValue(Property.CURSOR_DEFAULT, cursor.name());
+		// checks if cursor argument is consistent
+		if (cursor != null) {
+			setValue(Property.CURSOR_DEFAULT, cursor.name());
+		}
 	}
 
 	/**

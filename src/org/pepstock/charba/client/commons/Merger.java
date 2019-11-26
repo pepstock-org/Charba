@@ -105,6 +105,8 @@ public final class Merger {
 	 * @return a native object to be mapped with all defaults for that chart type.
 	 */
 	public NativeObject get(Type type) {
+		// checks if argument is consistent
+		Type.checkIfValid(type);
 		// gets chart.defaults[type]
 		ChartOptions base = Defaults.get().getOptions(type);
 		// gets chart.defaults.scale
