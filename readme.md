@@ -164,6 +164,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `ensureCssInjected` to `Injector` class in order to enable injection of CSS styles as text resource and not by CSS resource, provided by GWT.
   * add `Constants` class with common constants among packages in order to reduce dependencies and improve GWT built module.
   * add `retrieveDataset` method to `Data` class in order to get dataset instance by a `LegendItem` or by `TooltipItem`.
+  * add checks on public methods in order to avoid any NullPointerException.
 
 License
 -------
