@@ -317,26 +317,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
-			// checks if it is a click event
-			// ONLY click are caught
-			if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
-				// option instance
-				DatasetsItemsSelectorOptions pOptions = handler.getOptions();
-				// get clear selection element
-				ClearSelection clearSelection = pOptions.getClearSelection();
-				// checks if is enabled
-				if (clearSelection.isDisplay()) {
-					// calculates if the events coordinates are hover of clear selection element
-					boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
-					boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
-					// checks if hover
-					if (isX && isY) {
-						// invokes the clear selection
-						clearSelection(chart);
-						// and forces the event will be discarded.
-						return false;
-					}
-				}
+			// manages event
+			// if returns false
+			// does not continue
+			// avoiding to propagate the event
+			if (!manageClickEvent(chart, event, handler)) {
+				return false;
 			}
 			// This control has been added because a click event is always fired
 			// by canvas when mouse up (of selection handler) is performed
@@ -361,6 +347,40 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	private boolean mustBeActivated(IsChart chart) {
 		return IsChart.isConsistent(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType()));
+	}
+
+	/**
+	 * Manages the CLICK event on selection area.<br>
+	 * Returns <code>true</code> if must continue the event management.
+	 * 
+	 * @param chart chart instance to manage
+	 * @param event native event to manage
+	 * @param handler selection handler related to chart instance
+	 * @return <code>true</code> if must continue the event management
+	 */
+	private boolean manageClickEvent(IsChart chart, ChartNativeEvent event, SelectionHandler handler) {
+		// checks if it is a click event
+		// ONLY click are caught
+		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
+			// option instance
+			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
+			// get clear selection element
+			ClearSelection clearSelection = pOptions.getClearSelection();
+			// checks if is enabled
+			if (clearSelection.isDisplay()) {
+				// calculates if the events coordinates are hover of clear selection element
+				boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
+				boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
+				// checks if hover
+				if (isX && isY) {
+					// invokes the clear selection
+					clearSelection(chart);
+					// and forces the event will be discarded.
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
