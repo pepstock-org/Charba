@@ -114,14 +114,17 @@ Here you can find the list of enhancement and updates available on `master` bran
     * remove `setType` method from `Dataset` class.
  * add `toCSSBackgroundProperty` methods for `Gradient` and `Pattern` into `Utilities` class in order to get the CSS property value of the canvas object.
  * change the `Plugin` interface into to have `afterInit` the native chart instance.
- * change `LegendCallback` interface in order to return a `SafeHtml` object instead of use `SafeHtmlBuilder`.
+ * change `LegendCallback` interface in order to return a `SafeHtml` object instead of use `SafeHtmlBuilder` (**breaking change**)
  * create `HtmlLegend` plugin in order to create HTML legend instead of using the CHART.JS one
     * add some methods to `LegendLabelItem` class in order to manage text as HTML.
     * add new Html legend builder options (globally and per chart instance)
     * add `HtmlLegendTextCallback` interface to manage text of legend as HTML
  * create `DefaultPlugin` enumeration with CHART.JS default plugin ids.
      * add `isForcedlyDisabled` and `setEnabled` methods into `Plugins` configuration and options object in order to manage `DefaultPlugin` instances.
- * add capability to `TilesFactory` to use `PointStyle` instances as shapes for new tiles.   
+ * add capability to `TilesFactory` to use `PointStyle` instances as shapes for new tiles.
+ * change `TooltipTitleCallback`, `TooltipBodyCallback` and `TooltipFooterCallback` interfaces in order to return a list of strings instead of an array (**breaking change**). 
+ * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array (**breaking change**).
+ * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS (**breaking change**).
 
 ### Fixed Bugs
 
@@ -139,8 +142,6 @@ Here you can find the list of enhancement and updates available on `master` bran
   * create `CallbackFunctionContext` native object to map this of javascript in order to invoke CHART.JS functions.
   * add to `Default` class the `invokeLegendOnClick`, `invokeLegendOnHover` and `invokeLegendOnLeave` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on legend to delegate CHART.JS to manage the event.
   * add to `Default` class the `invokeChartOnClick` and `invokeChartOnHover` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on chart to delegate CHART.JS to manage the event.
-  * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array.
-  * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS.
   * add to `Default` class the `generateLabels` methods which enable the invocation of the callback provided out of the box by CHART.JS.
   * add to `Charts` object a map to manage `Chart` native objects and methods to retrive it by chart or its id.
   * add by default to all charts, an internal plugin to track `Chart` native object instances into `Charts`.

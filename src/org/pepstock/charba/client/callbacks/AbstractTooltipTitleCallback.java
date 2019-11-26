@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -37,8 +37,8 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 * java.util.List)
 	 */
 	@Override
-	public String[] onBeforeTitle(IsChart chart, List<TooltipItem> items) {
-		return Constants.EMPTY_ARRAY_STRING;
+	public List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
 	}
 
 	/*
@@ -48,8 +48,8 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 * java.util.List)
 	 */
 	@Override
-	public String[] onTitle(IsChart chart, List<TooltipItem> items) {
-		return Constants.EMPTY_ARRAY_STRING;
+	public List<String> onTitle(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
 	}
 
 	/*
@@ -59,8 +59,8 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	 * java.util.List)
 	 */
 	@Override
-	public String[] onAfterTitle(IsChart chart, List<TooltipItem> items) {
-		return Constants.EMPTY_ARRAY_STRING;
+	public List<String> onAfterTitle(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
 	}
 
 }

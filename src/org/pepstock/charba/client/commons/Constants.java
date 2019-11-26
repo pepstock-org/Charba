@@ -29,11 +29,6 @@ public final class Constants {
 	public static final String EMPTY_STRING = "";
 
 	/**
-	 * Constant for EMPTY ARRAY string.
-	 */
-	public static final String[] EMPTY_ARRAY_STRING = new String[0];
-
-	/**
 	 * Constant for LINE SEPARATOR
 	 */
 	public static final String LINE_SEPARATOR = "\n";

@@ -36,17 +36,17 @@ public interface TooltipBodyCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the body. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onBeforeBody(IsChart chart, List<TooltipItem> items);
+	List<String> onBeforeBody(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render after the body section.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltips items
-	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the body. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onAfterBody(IsChart chart, List<TooltipItem> items);
+	List<String> onAfterBody(IsChart chart, List<TooltipItem> items);
 
 }

@@ -36,26 +36,26 @@ public interface TooltipFooterCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onBeforeFooter(IsChart chart, List<TooltipItem> items);
+	List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the footer of the tooltip.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onFooter(IsChart chart, List<TooltipItem> items);
+	List<String> onFooter(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Text to render after the footer section.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onAfterFooter(IsChart chart, List<TooltipItem> items);
+	List<String> onAfterFooter(IsChart chart, List<TooltipItem> items);
 
 }

@@ -36,26 +36,26 @@ public interface TooltipTitleCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onBeforeTitle(IsChart chart, List<TooltipItem> items);
+	List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the title of the tooltip.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onTitle(IsChart chart, List<TooltipItem> items);
+	List<String> onTitle(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render after the title.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
+	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
 	 */
-	String[] onAfterTitle(IsChart chart, List<TooltipItem> items);
+	List<String> onAfterTitle(IsChart chart, List<TooltipItem> items);
 
 }

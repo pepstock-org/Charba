@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.Collections;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
@@ -361,14 +363,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -381,15 +379,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -402,15 +395,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -423,14 +411,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -443,14 +427,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -553,14 +533,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -573,14 +549,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 
 	/**
@@ -593,13 +565,9 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-			// checks if result is consistent
-			if (result != null && result.length > 0) {
-				return ArrayString.fromOrEmpty(result);
-			}
+			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Constants.EMPTY_ARRAY_STRING);
+		return ArrayString.fromOrEmpty(Collections.emptyList());
 	}
 }

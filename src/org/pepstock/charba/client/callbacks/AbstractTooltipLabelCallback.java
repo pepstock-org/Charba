@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Constants;
@@ -71,7 +72,13 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	 */
 	@Override
 	public IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
-		return chart.getOptions().getTooltips().getBodyFontColor();
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			return chart.getOptions().getTooltips().getBodyFontColor();
+		}
+		// if here, chart is not consistent
+		// then return the default font color
+		return Defaults.get().getGlobal().getDefaultFontColor();
 	}
 
 	/*
