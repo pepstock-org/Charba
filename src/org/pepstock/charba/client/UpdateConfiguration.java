@@ -102,18 +102,18 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	}
 
 	/**
-	 * If true, the animation can be interrupted by other animations.
+	 * If <code>true</code>, the animation can be interrupted by other animations.
 	 * 
-	 * @param intersect if true, the animation can be interrupted by other animations.
+	 * @param intersect if <code>true</code>, the animation can be interrupted by other animations.
 	 */
 	public void setLazy(boolean intersect) {
 		setValue(Property.LAZY, intersect);
 	}
 
 	/**
-	 * If true, the animation can be interrupted by other animations.
+	 * If <code>true</code>, the animation can be interrupted by other animations.
 	 * 
-	 * @return if true, the animation can be interrupted by other animations.
+	 * @return if <code>true</code>, the animation can be interrupted by other animations.
 	 */
 	public boolean isLazy() {
 		return getValue(Property.LAZY, DEFAULT_LAZY);

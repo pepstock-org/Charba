@@ -126,6 +126,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array (**breaking change**).
  * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS (**breaking change**).
  * change `Labels` object in order to load a list of strings and return a list of string instead of an array (**breaking change**).
+ * add `UpdateConfigurationBuilder` class in order to create `UpdateConfiguration` for chart update. 
 
 ### Fixed Bugs
 
