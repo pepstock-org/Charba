@@ -121,6 +121,8 @@ public final class PercentageCallback implements FormatterCallback {
 	 */
 	@Override
 	public String invoke(IsChart chart, double value, ScriptableContext context) {
+		// the arguments are checked because
+		// they will be checked inside percentage compute method
 		// computes the percentage
 		double percentage = Percentage.compute(chart, value, context, stacked);
 		// checks if consistent

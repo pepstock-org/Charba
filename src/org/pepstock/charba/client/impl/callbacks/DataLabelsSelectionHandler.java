@@ -93,9 +93,10 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	 */
 	@Override
 	public boolean onClick(IsChart chart, ScriptableContext context) {
+		// consistency of argument
 		// checks if there is any selection handler and
 		// chart is initialized
-		if (!dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
+		if (IsChart.isValid(chart) && context != null && !dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
 			// gets meta item
 			DatasetMetaItem metaItem = chart.getDatasetMeta(context.getDatasetIndex());
 			// checks if consistent with next operations

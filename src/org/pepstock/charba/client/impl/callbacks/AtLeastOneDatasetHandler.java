@@ -42,31 +42,34 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	 */
 	@Override
 	public void onClick(LegendClickEvent event) {
-		// get the chart instance form event
-		IsChart chart = event.getChart();
-		// checks if legend is related to a dataset or index
-		if (event.getItem().getDatasetIndex() != UndefinedValues.INTEGER) {
-			// gets the dataset by the legend item and its relation with dataset
-			DatasetMetaItem metadata = chart.getDatasetMeta(event.getItem().getDatasetIndex());
-			// if the dataset is already hidden
-			// checks if there is ONLY 1 visible dataset
-			if (!metadata.isHidden() && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
-				return;
+		// checks consistency of argument
+		if (event != null && IsChart.isValid(event.getChart())) {
+			// get the chart instance form event
+			IsChart chart = event.getChart();
+			// checks if legend is related to a dataset or index
+			if (event.getItem().getDatasetIndex() != UndefinedValues.INTEGER) {
+				// gets the dataset by the legend item and its relation with dataset
+				DatasetMetaItem metadata = chart.getDatasetMeta(event.getItem().getDatasetIndex());
+				// if the dataset is already hidden
+				// checks if there is ONLY 1 visible dataset
+				if (!metadata.isHidden() && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
+					return;
+				}
+				// invokes default click callbacks
+				Defaults.get().invokeLegendOnClick(event);
+			} else if (event.getItem().getIndex() != UndefinedValues.INTEGER) {
+				// gets metadata to know if is hidden
+				DatasetMetaItem metadataItem = chart.getDatasetMeta(0);
+				// gets all items
+				List<DatasetItem> items = metadataItem.getDatasets();
+				// gets dataset item
+				DatasetItem item = items.get(event.getItem().getIndex());
+				if (!item.isHidden() && !checkByIndex(chart, event.getItem().getIndex())) {
+					return;
+				}
+				// invokes default click callbacks
+				Defaults.get().invokeLegendOnClick(event);
 			}
-			// invokes default click callbacks
-			Defaults.get().invokeLegendOnClick(event);
-		} else if (event.getItem().getIndex() != UndefinedValues.INTEGER) {
-			// gets metadata to know if is hidden
-			DatasetMetaItem metadataItem = chart.getDatasetMeta(0);
-			// gets all items
-			List<DatasetItem> items = metadataItem.getDatasets();
-			// gets dataset item
-			DatasetItem item = items.get(event.getItem().getIndex());
-			if (!item.isHidden() && !checkByIndex(chart, event.getItem().getIndex())) {
-				return;
-			}
-			// invokes default click callbacks
-			Defaults.get().invokeLegendOnClick(event);
 		}
 	}
 
@@ -91,7 +94,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 				return true;
 			}
 		}
-		// if here, no dataset visisble
+		// if here, no dataset visible
 		return false;
 	}
 
@@ -123,7 +126,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 				}
 			}
 		}
-		// if here, no dataset visisble
+		// if here, no dataset visible
 		return false;
 	}
 }

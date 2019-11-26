@@ -80,30 +80,33 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 	 */
 	@Override
 	public String onCallback(Axis axis, double value, int index, List<Double> values) {
-		// gets chart instance
-		IsChart chart = axis.getChart();
-		// flags to know if all datasets are hidden
-		boolean allHidden = false;
-		// gets datasets
-		List<Dataset> dss = chart.getData().getDatasets();
-		// scans them by for cycle to have the index for retrieving
-		// the dataset metadata
-		for (int i = 0; i < dss.size(); i++) {
-			// gets metadata to know if is hidden
-			DatasetMetaItem metadata = chart.getDatasetMeta(i);
-			// checks if metadata is null.
-			// it happens when the chart is drawing for the first time
-			// but at the first time 1 dataset is always visible
-			if (metadata != null) {
-				// OR on dataset visibility
-				allHidden = allHidden || metadata.isHidden();
+		// checks consistent of axis and chart instances
+		if (axis != null && IsChart.isConsistent(axis.getChart())) {
+			// gets chart instance
+			IsChart chart = axis.getChart();
+			// flags to know if all datasets are hidden
+			boolean allHidden = false;
+			// gets datasets
+			List<Dataset> dss = chart.getData().getDatasets();
+			// scans them by for cycle to have the index for retrieving
+			// the dataset metadata
+			for (int i = 0; i < dss.size(); i++) {
+				// gets metadata to know if is hidden
+				DatasetMetaItem metadata = chart.getDatasetMeta(i);
+				// checks if metadata is null.
+				// it happens when the chart is drawing for the first time
+				// but at the first time 1 dataset is always visible
+				if (metadata != null) {
+					// OR on dataset visibility
+					allHidden = allHidden || metadata.isHidden();
+				}
 			}
-		}
-		// if all datasets are hidden
-		if (allHidden) {
-			// uses the tick value (double) provided by CHART.js
-			// applying the number format
-			return numberFormat.format(value);
+			// if all datasets are hidden
+			if (allHidden) {
+				// uses the tick value (double) provided by CHART.js
+				// applying the number format
+				return numberFormat.format(value);
+			}
 		}
 		// otherwise will return the tick value as string
 		return String.valueOf(value);

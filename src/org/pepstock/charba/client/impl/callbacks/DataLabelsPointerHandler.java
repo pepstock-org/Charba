@@ -72,7 +72,8 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 */
 	@Override
 	public boolean onLeave(IsChart chart, ScriptableContext context) {
-		if (chart.isInitialized()) {
+		// checks consistency of arguments
+		if (IsChart.isConsistent(chart) && chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(chart.getInitialCursor());
 		}
 		return true;
@@ -86,7 +87,8 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 */
 	@Override
 	public boolean onEnter(IsChart chart, ScriptableContext context) {
-		if (chart.isInitialized()) {
+		// checks consistency of arguments
+		if (IsChart.isConsistent(chart) && chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(cursor);
 		}
 		return true;
