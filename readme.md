@@ -118,7 +118,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * create `HtmlLegend` plugin in order to create HTML legend instead of using the CHART.JS one
     * add some methods to `LegendLabelItem` class in order to manage text as HTML.
     * add new Html legend builder options (globally and per chart instance)
-    * add `LegendTextCallback` interface to manage text of legend as HTML
+    * add `HtmlLegendTextCallback` interface to manage text of legend as HTML
  * create `DefaultPlugin` enumeration with CHART.JS default plugin ids.
      * add `isForcedlyDisabled` and `setEnabled` methods into `Plugins` configuration and options object in order to manage `DefaultPlugin` instances.
  * add capability to `TilesFactory` to use `PointStyle` instances as shapes for new tiles.   
