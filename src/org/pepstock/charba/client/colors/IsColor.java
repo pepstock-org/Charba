@@ -111,4 +111,50 @@ public interface IsColor {
 	 */
 	int toRGBs();
 
+	/**
+	 * Creates a new color that is a brighter version of this color. <br>
+	 * This method applies an arbitrary scale factor to each of the three RGB components of this color to create a brighter
+	 * version of this color.<br>
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of
+	 * these two methods might be inconsistent because of rounding errors.
+	 * 
+	 * @return a new color object that is a brighter version of this color with the same alpha value.
+	 */
+	IsColor brighter();
+
+	/**
+	 * Creates a new color that is a brighter version of this color. <br>
+	 * This method applies an arbitrary scale factor to each of the three RGB components of this color to create a brighter
+	 * version of this color.<br>
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of
+	 * these two methods might be inconsistent because of rounding errors.
+	 * 
+	 * @param alpha the alpha to set
+	 * @return a new color object that is a brighter version of this color with the passed alpha value.
+	 */
+	IsColor brighter(double alpha);
+
+	/**
+	 * Creates a new <code>Color</code> that is a darker version of this <code>Color</code>.<br>
+	 * This method applies an arbitrary scale factor to each of the three RGB components of this <code>Color</code> to create a
+	 * darker version of this <code>Color</code>.<br>
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of
+	 * these two methods might be inconsistent because of rounding errors.
+	 * 
+	 * @return a new color object that is a darker version of this color with the same alpha value.
+	 */
+	IsColor darker();
+
+	/**
+	 * Creates a new <code>Color</code> that is a darker version of this <code>Color</code>.<br>
+	 * This method applies an arbitrary scale factor to each of the three RGB components of this <code>Color</code> to create a
+	 * darker version of this <code>Color</code>.<br>
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of
+	 * these two methods might be inconsistent because of rounding errors.
+	 * 
+	 * @param alpha the alpha to set
+	 * @return a new color object that is a darker version of this color with the passed alpha value.
+	 */
+	IsColor darker(double alpha);
+
 }

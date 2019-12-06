@@ -30,6 +30,8 @@ public final class Color implements IsColor {
 	 * Default transparency is <b>{@value DEFAULT_ALPHA}</b>, (no transparency).
 	 */
 	public static final double DEFAULT_ALPHA = 1D;
+	// darker factor
+	private static final double FACTOR = 0.7D;
 	// zero for padding
 	private static final String PADDING_ZERO = "0";
 	// double zero for padding
@@ -187,6 +189,93 @@ public final class Color implements IsColor {
 	@Override
 	public int toRGBs() {
 		return srgb;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#brighter()
+	 */
+	@Override
+	public IsColor brighter() {
+		return brighter(Double.NaN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#brighter(double)
+	 */
+	@Override
+	public IsColor brighter(double alpha) {
+		// checks which alpha must be applied
+		// if NaN uses the alpha of current color
+		double alphaToUse = Double.isNaN(alpha) ? getAlpha() : alpha;
+		checkAlphaWithinBounds(alphaToUse);
+		// gets colors
+		int r = getRed();
+		int g = getGreen();
+		int b = getBlue();
+		// notes
+		// black.brighter() should return grey
+		// applying brighter to blue will always return blue, brighter
+		// non pure color (non zero rgb) will eventually return white
+		// calculates the default RGB value factor
+		// to compare
+		int defaultRGBItem = (int) (1.0 / (1.0 - FACTOR));
+		// if RGB is 000
+		if (r == 0 && g == 0 && b == 0) {
+			// applies the calculated default RGB value factor 
+			return new Color(defaultRGBItem, defaultRGBItem, defaultRGBItem, alphaToUse);
+		}
+		// if red item is between 0 and calculated factor
+		if (r > 0 && r < defaultRGBItem) {
+			// uses calculated factor
+			r = defaultRGBItem;
+		}
+		// if green item is between 0 and calculated factor
+		if (g > 0 && g < defaultRGBItem) {
+			// uses calculated factor
+			g = defaultRGBItem;
+		}
+		// if blue item is between 0 and calculated factor
+		if (b > 0 && b < defaultRGBItem) {
+			// uses calculated factor
+			b = defaultRGBItem;
+		}
+		// calculates the new RGB using the factor
+		int newRed = Math.min((int) (r / FACTOR), 255);
+		int newGreen = Math.min((int) (g / FACTOR), 255);
+		int newBlue = Math.min((int) (b / FACTOR), 255);
+		return new Color(newRed, newGreen, newBlue, alphaToUse);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#darker()
+	 */
+	@Override
+	public IsColor darker() {
+		return darker(Double.NaN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#darker(double)
+	 */
+	@Override
+	public IsColor darker(double alpha) {
+		// checks which alpha must be applied
+		// if NaN uses the alpha of current color
+		double alphaToUse = Double.isNaN(alpha) ? getAlpha() : alpha;
+		checkAlphaWithinBounds(alphaToUse);
+		// calculates the new RGB using the factor
+		int newRed = Math.max((int) (getRed() * FACTOR), 0);
+		int newGreen = Math.max((int) (getGreen() * FACTOR), 0);
+		int newBlue = Math.max((int) (getBlue() * FACTOR), 0);
+		return new Color(newRed, newGreen, newBlue, alphaToUse);
 	}
 
 	/**

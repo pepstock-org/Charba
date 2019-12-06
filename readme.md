@@ -127,7 +127,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array (**breaking change**).
  * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS (**breaking change**).
  * change `Labels` object in order to load a list of strings and return a list of string instead of an array (**breaking change**).
- * add `UpdateConfigurationBuilder` class in order to create `UpdateConfiguration` for chart update. 
+ * add `UpdateConfigurationBuilder` class in order to create `UpdateConfiguration` for chart update.
+ * add `UiGradient` enumeration in order to have a set of gradients out of the box, see [UiGrandients.com](https://uigradients.com).
 
 ### Fixed Bugs
 
@@ -166,7 +167,9 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `ensureCssInjected` to `Injector` class in order to enable injection of CSS styles as text resource and not by CSS resource, provided by GWT.
   * add `Constants` class with common constants among packages in order to reduce dependencies and improve GWT built module.
   * add `retrieveDataset` method to `Data` class in order to get dataset instance by a `LegendItem` or by `TooltipItem`.
-  * add checks on public methods in order to avoid any NullPointerException.
+  * add checks on public methods in order to avoid any `NullPointerException`.
+  * add `brighter` and `darker` methods on IsColor interface.
+  * update internal plugin to apply patterns and gradients into datasets in order to apply patterns by `onBeforeUpdate` method (instead of `onBeforeDatasetsDraw`) to avoid that the legend will not be updated.
 
 License
 -------

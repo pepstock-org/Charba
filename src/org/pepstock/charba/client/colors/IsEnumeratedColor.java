@@ -140,4 +140,44 @@ interface IsEnumeratedColor extends IsColor {
 		return getColor().toRGBs();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#brighter()
+	 */
+	@Override
+	default IsColor brighter() {
+		return getColor().brighter();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#brighter(double)
+	 */
+	@Override
+	default IsColor brighter(double alpha) {
+		return getColor().brighter(alpha);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#darker()
+	 */
+	@Override
+	default IsColor darker() {
+		return getColor().darker();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#darker(double)
+	 */
+	@Override
+	default IsColor darker(double alpha) {
+		return getColor().darker(alpha);
+	}
+
 }
