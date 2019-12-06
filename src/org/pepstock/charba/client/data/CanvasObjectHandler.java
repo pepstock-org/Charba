@@ -214,17 +214,14 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// scans all datasets
 		for (Dataset dataset : datasets) {
 			// checks if the dataset is visible
-			if (chart.isDatasetVisible(datasetIndex)) {
-				// checks if the patterns container has been changed
-				// checks if the patterns container has been changed
-				// if true, means that new patterns are set or old patterns
-				// are removed
-				if (dataset.getPatternsContainer().isChanged()) {
-					// asks to dataset to creates patterns
-					dataset.applyPatterns(chart);
-					// reset the changed status of pattern container
-					dataset.getPatternsContainer().setChanged(false);
-				}
+			// checks if the patterns container has been changed
+			// if true, means that new patterns are set or old patterns
+			// are removed
+			if (chart.isDatasetVisible(datasetIndex) && dataset.getPatternsContainer().isChanged()) {
+				// asks to dataset to creates patterns
+				dataset.applyPatterns(chart);
+				// reset the changed status of pattern container
+				dataset.getPatternsContainer().setChanged(false);
 			}
 			// increments of index
 			datasetIndex++;
