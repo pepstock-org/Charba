@@ -2825,7 +2825,7 @@ public enum UiGradient
 		if (colors.length > 2) {
 			// calculates the increment of offset
 			// for gradient color
-			double increment = 1 / maxLength;
+			double increment = 1D / maxLength;
 			// initial value of offset
 			double offset = 0D;
 			// scans all colors between the 2nd and
