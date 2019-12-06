@@ -186,7 +186,7 @@ public final class AnnotationBuilder {
 	}
 
 	/**
-	 * Creates a key to store the image in the cache. The key is created using teh html passed as argument, appending width and
+	 * Creates a key to store the image in the cache. The key is created using the html passed as argument, appending width and
 	 * height of image.
 	 * 
 	 * @param htmlXmlContent HTML content to apply on canvas

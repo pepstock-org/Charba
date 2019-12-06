@@ -367,7 +367,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			return options.isDisplay();
 		}
 		// if here, chart is not consistent or no option
-		// tehn returns false
+		// then returns false
 		return false;
 	}
 

@@ -275,7 +275,7 @@ public class MeterDataset extends Dataset {
 	}
 
 	/**
-	 * Forces hiding the dataset because tehre are more than 1 datasets into chart
+	 * Forces hiding the dataset because there are more than 1 datasets into chart
 	 */
 	void hide() {
 		// the dataset is hidden
