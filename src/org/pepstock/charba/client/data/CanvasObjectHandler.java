@@ -57,11 +57,31 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public boolean onBeforeUpdate(IsChart chart) {
+		// gets data
+		Data data = chart.getData();
+		// gets list of datasets
+		List<Dataset> datasets = data.getDatasets();
+		// checks if chart must be updated
+		// when you creates new patterns and
+		// set them to dataset configuration in this point of
+		// time
+		applyPatternsChanged(chart, datasets);
+		// informs CHART.JS to draw the chart
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
-		// gets data
+		// // gets data
 		Data data = chart.getData();
 		// gets data json
 		String currentDataToJson = data.getDatasetsAsString();
@@ -75,11 +95,11 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// stores the data chart JSON representation
 		dataToJson = currentDataToJson;
 		// checks if chart must be updated
-		// when you creates new patterns or gradient and
+		// when you creates new gradients and
 		// set them to dataset configuration in this point of
 		// time is MANDATORY to update chart because CHART.JS
-		// must applied new patterns and gradients
-		if (arePatternOrGradientsChanged(chart, datasets)) {
+		// must applied new gradients
+		if (areGradientsChanged(chart, datasets)) {
 			// updates the chart
 			chart.update();
 			// informs CHART.JS to stop the current drawing
@@ -155,13 +175,13 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if gradients or patterns has been created or changed, otherwise <code>false</code>.
+	 * Returns <code>true</code> if gradients have been created or changed, otherwise <code>false</code>.
 	 * 
 	 * @param chart chart instance
 	 * @param datasets list of datasets of chart
-	 * @return <code>true</code> if gradients or patterns has been created or changed, otherwise <code>false</code>
+	 * @return <code>true</code> if gradients have been created or changed, otherwise <code>false</code>
 	 */
-	private boolean arePatternOrGradientsChanged(IsChart chart, List<Dataset> datasets) {
+	private boolean areGradientsChanged(IsChart chart, List<Dataset> datasets) {
 		// flags to know if the chart must be updated because some patterns or
 		// gradients are recreated.
 		boolean updated = false;
@@ -171,10 +191,6 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		for (Dataset dataset : datasets) {
 			// checks if the dataset is visible
 			if (chart.isDatasetVisible(datasetIndex)) {
-				// checks if the patterns container has been changed
-				// if true, means that new patterns are set or old patterns
-				// are removed
-				updated = updated || checkPatterns(chart, dataset);
 				// checks if the gradients container has been changed
 				// if true, means that new gradients are set or old gradients
 				// are removed
@@ -187,25 +203,32 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if patterns has been created or changed, otherwise <code>false</code>.
+	 * Applies the patterns which have been created or changed.
 	 * 
 	 * @param chart chart instance
-	 * @param dataset dataset instance
-	 * @return <code>true</code> if patterns has been created or changed, otherwise <code>false</code>
+	 * @param datasets list of datasets of chart
 	 */
-	private boolean checkPatterns(IsChart chart, Dataset dataset) {
-		// checks if the patterns container has been changed
-		// if true, means that new patterns are set or old patterns
-		// are removed
-		if (dataset.getPatternsContainer().isChanged()) {
-			// asks to dataset to creates patterns
-			dataset.applyPatterns(chart);
-			// reset the changed status of pattern container
-			dataset.getPatternsContainer().setChanged(false);
-			// sets the flag to update chart
-			return true;
+	private void applyPatternsChanged(IsChart chart, List<Dataset> datasets) {
+		// dataset index
+		int datasetIndex = 0;
+		// scans all datasets
+		for (Dataset dataset : datasets) {
+			// checks if the dataset is visible
+			if (chart.isDatasetVisible(datasetIndex)) {
+				// checks if the patterns container has been changed
+				// checks if the patterns container has been changed
+				// if true, means that new patterns are set or old patterns
+				// are removed
+				if (dataset.getPatternsContainer().isChanged()) {
+					// asks to dataset to creates patterns
+					dataset.applyPatterns(chart);
+					// reset the changed status of pattern container
+					dataset.getPatternsContainer().setChanged(false);
+				}
+			}
+			// increments of index
+			datasetIndex++;
 		}
-		return false;
 	}
 
 	/**
