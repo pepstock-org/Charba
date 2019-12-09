@@ -208,6 +208,19 @@ public final class Charts {
 	}
 
 	/**
+	 * Removes the native chart instance by its id.
+	 * 
+	 * @param chartId chart id
+	 */
+	static void removeNative(String chartId) {
+		// checks if chart id is consistent
+		if (chartId != null) {
+			// removes also the native chart
+			NATIVE_CHARTS_INSTANCES.remove(chartId);
+		}
+	}
+
+	/**
 	 * Removes the chart instance by its id.
 	 * 
 	 * @param chartId chart id
@@ -225,7 +238,7 @@ public final class Charts {
 				}
 			}
 			// removes also the native chart
-			NATIVE_CHARTS_INSTANCES.remove(chartId);
+			removeNative(chartId);
 		}
 	}
 
