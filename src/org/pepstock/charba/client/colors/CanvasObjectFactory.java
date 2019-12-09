@@ -171,9 +171,9 @@ public abstract class CanvasObjectFactory {
 					// adds colors using offset and color
 					result.addColorStop(color.getOffset(), color.getColorAsString());
 				}
+				// stores canvas gradient into cache
+				gradientsMap.put(gradient.getId(), result);
 			}
-			// stores canvas gradient into cache
-			gradientsMap.put(gradient.getId(), result);
 			// returns result
 			return result;
 		} else {
@@ -403,5 +403,5 @@ public abstract class CanvasObjectFactory {
 	 * @return the inner and outer radius of arc
 	 */
 	protected abstract Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index);
-
+	
 }

@@ -72,8 +72,11 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	protected Area getArea(IsChart chart, Gradient gradient) {
 		// creates instance to return
 		final Area area = new Area();
+		// sets the coordinates of scope
+		// CHART AREA
+		ChartAreaNode chartArea = chart.getNode().getChartArea();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope())) {
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// sets the coordinates of scope
@@ -83,9 +86,6 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			area.setRight(canvas.getOffsetWidth());
 			area.setBottom(canvas.getOffsetHeight());
 		} else {
-			// sets the coordinates of scope
-			// CHART AREA
-			ChartAreaNode chartArea = chart.getNode().getChartArea();
 			area.setTop(chartArea.getTop());
 			area.setLeft(chartArea.getLeft());
 			area.setRight(chartArea.getRight());
@@ -104,8 +104,12 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// creates center instance to return
 		final Center center = new Center();
+		// gets chart node
+		ChartNode node = chart.getNode();
+		// gets chart area
+		ChartAreaNode chartArea = node.getChartArea();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope())) {
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// CANVAS
@@ -115,10 +119,6 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			center.setX(canvas.getOffsetWidth() / 2D);
 			center.setY(canvas.getOffsetHeight() / 2D);
 		} else {
-			// gets chart node
-			ChartNode node = chart.getNode();
-			// gets chart area
-			ChartAreaNode chartArea = node.getChartArea();
 			// CHART
 			// the center of canvas has the following coordinates:
 			// X - the difference between right and left, divided by 2 plus left
@@ -139,10 +139,12 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// creates radius instance to return
 		final Radius radius = new Radius();
+		// gets chart node
+		ChartNode node = chart.getNode();
+		// gets chart area
+		ChartAreaNode chartArea = node.getChartArea();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope())) {
-			// gets chart node
-			ChartNode node = chart.getNode();
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// CANVAS
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
@@ -158,8 +160,6 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 				radius.setOuter((Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2D));
 			}
 		} else {
-			// gets chart node
-			ChartNode node = chart.getNode();
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
@@ -167,8 +167,6 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 				// manages radius by chart node
 				manageRadiusByChartNode(chart, node, datasetIndex, index, radius);
 			} else {
-				// gets chart area
-				ChartAreaNode chartArea = node.getChartArea();
 				// by default is the center of chart area
 				radius.setInner(0);
 				// radius - if max value between the difference between right and left and the difference between bottom and
@@ -198,9 +196,9 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// checks if chart is circular or not
 			if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
 				// uses the inner radius
-				radius.setInner(item.getView().getInnerRadius());
+				radius.setInner(Math.max(item.getView().getInnerRadius(), node.getInnerRadius()));
 				// uses the outer radius
-				radius.setOuter(item.getView().getOuterRadius());
+				radius.setOuter(Math.max(item.getView().getOuterRadius(), node.getOuterRadius()));
 			} else {
 				// uses the inner radius
 				radius.setInner(node.getInnerRadius());
