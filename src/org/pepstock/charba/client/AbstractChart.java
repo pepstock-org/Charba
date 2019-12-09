@@ -270,7 +270,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final ChartNode getNode() {
-		return new ChartNode(lookForConsistentInstance());
+		return new ChartNode(Charts.getNative(id));
 	}
 
 	/**
