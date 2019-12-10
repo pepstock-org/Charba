@@ -170,7 +170,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add checks on public methods in order to avoid any `NullPointerException`.
   * add `brighter` and `darker` methods on IsColor interface.
   * update internal plugin to apply patterns and gradients into datasets in order to apply patterns by `onBeforeUpdate` method (instead of `onBeforeDatasetsDraw`) to avoid that the legend will not be updated.
-  * add `isConsistent` method into `ChartAreaNode` object in order to be aware if the objetc is already initialized.
+  * add `isConsistent` method into `ChartAreaNode` object in order to be aware if the object is already initialized.
+  * update default values for font properties, retrieving those from `Default.get().getGlobal()` instance instead of the constant values.
 
 License
 -------

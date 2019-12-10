@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 
 /**
@@ -47,7 +48,7 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DefaultsBuilder.get().getOptions().getDefaultColorAsString();
+		return Defaults.get().getGlobal().getDefaultColorAsString();
 	}
 
 	/*

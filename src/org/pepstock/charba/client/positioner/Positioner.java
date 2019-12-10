@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.items.DatasetItem;
 
@@ -197,7 +197,7 @@ public final class Positioner {
 		// if here, is not able to get the chart or the positioner is not defined
 		// or the result of custom positioner is not consistent
 		// then gets the default tooltip position
-		IsTooltipPosition defaultValue = DefaultsBuilder.get().getOptions().getTooltips().getPosition();
+		IsTooltipPosition defaultValue = Defaults.get().getGlobal().getTooltips().getPosition();
 		// invokes the positioner of the default one getting the point
 		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
 		// if the result is ok, return it otherwise returns the point of event

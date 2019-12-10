@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -32,7 +33,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public String getFontColorAsString() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontColorAsString();
+		return Defaults.get().getGlobal().getDefaultFontColorAsString();
 	}
 
 	/*
@@ -42,7 +43,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public int getFontSize() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
+		return Defaults.get().getGlobal().getDefaultFontSize();
 	}
 
 	/*
@@ -52,7 +53,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontStyle();
+		return Defaults.get().getGlobal().getDefaultFontStyle();
 	}
 
 	/*
@@ -62,6 +63,6 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public String getFontFamily() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getDefaultFontFamily();
 	}
 }

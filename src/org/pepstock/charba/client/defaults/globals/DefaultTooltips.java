@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -129,7 +130,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getTitleFontFamily() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getDefaultFontFamily();
 	}
 
 	/*
@@ -139,7 +140,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getTitleFontSize() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
+		return Defaults.get().getGlobal().getDefaultFontSize();
 	}
 
 	/*
@@ -199,7 +200,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getBodyFontFamily() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getDefaultFontFamily();
 	}
 
 	/*
@@ -209,7 +210,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getBodyFontSize() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
+		return Defaults.get().getGlobal().getDefaultFontSize();
 	}
 
 	/*
@@ -259,7 +260,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getFooterFontFamily() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getDefaultFontFamily();
 	}
 
 	/*
@@ -269,7 +270,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getFooterFontSize() {
-		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
+		return Defaults.get().getGlobal().getDefaultFontSize();
 	}
 
 	/*
