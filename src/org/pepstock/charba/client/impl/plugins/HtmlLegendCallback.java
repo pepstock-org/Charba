@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
+import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
@@ -323,7 +323,7 @@ final class HtmlLegendCallback implements LegendCallback {
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		labelCell.setId(legendId.getIdForLabel());
-		labelCell.setVAlign(HasVerticalAlignment.ALIGN_TOP.getVerticalAlignString());
+		labelCell.setVAlign(HasVerticalAlignment.ALIGN_MIDDLE.getVerticalAlignString());
 		labelCell.getStyle().setPaddingRight(legendLabels.getPadding(), Unit.PX);
 		labelCell.getStyle().setPaddingBottom(legendLabels.getPadding(), Unit.PX);
 		// creates inner HTML element
@@ -468,6 +468,8 @@ final class HtmlLegendCallback implements LegendCallback {
 			if (radius < 0 || Double.isNaN(radius) || Math.max(radius, 0D) == 0D) {
 				radius = DEFAULT_RADIUS;
 			}
+			// ricalculate size
+			size = (int)(radius * 2) + 2;
 			// update the html legend item settig the size and calulated radius
 			htmlLegendItem.setSize(size);
 			htmlLegendItem.setRadius(radius);

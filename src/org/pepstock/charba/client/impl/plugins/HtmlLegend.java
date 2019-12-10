@@ -213,6 +213,9 @@ public final class HtmlLegend extends AbstractPlugin {
 				// if no parent, means new object to add to chart element
 				addLegendElement(chart.getElement(), legendElement, legend.getPosition(), legend.getLabels().getPadding());
 			} else {
+				// removes the item
+				// in order to after draw to create the legend
+				ADDED_LEGEND.remove(chart.getId());
 				// if here, the div has got the parent
 				// then it checks if the position is the same when it has been created
 				// otherwise it will move to the right position
