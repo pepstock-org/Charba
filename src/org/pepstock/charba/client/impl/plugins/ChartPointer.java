@@ -27,12 +27,14 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
+import com.google.gwt.dom.client.Style.Cursor;
+
 /**
  * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have
  * been defined.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see Cursor
  */
 public final class ChartPointer extends AbstractPlugin {
 
@@ -64,19 +66,20 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
-		// checks if chart has got any dataset selection and title click handler
-		if (IsChart.isConsistent(chart) && chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
 			// if not, loads and cache
 			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
 			if (chart.getOptions().getPlugins().hasOptions(ID)) {
 				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 			} else {
 				pOptions = new ChartPointerOptions();
 			}
+			// stores option on the cache
 			OPTIONS.put(chart.getId(), pOptions);
+			// sets the initial cursor of chart
 			pOptions.setCurrentCursor(chart.getInitialCursor());
 		}
 		return true;
@@ -91,8 +94,7 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
 		// checks if chart is consistent
-		// checks if chart has got any dataset selection handler
-		if (IsChart.isConsistent(chart) && (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers())) {
+		if (IsChart.isConsistent(chart)) {
 			// gets options instance
 			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
 			// gets the scope
