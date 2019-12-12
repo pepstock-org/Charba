@@ -918,8 +918,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * Returns a unique key to store canvas objects, created by callbacks, into a cache.<br>
 	 * The format is <code>[property],[datasetIndex],[dataIndex]</code>.
 	 * 
-	 * @param property property of dataset 
-	 * @param datasetIndex dataset index 
+	 * @param property property of dataset
+	 * @param datasetIndex dataset index
 	 * @param index data index
 	 * @return the key to use to store canvas object into cache
 	 */

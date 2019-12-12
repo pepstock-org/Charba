@@ -229,7 +229,7 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 			setValue(Property.COLOR_TYPE, ColorType.GRADIENT);
 		} else {
 			// if here, the gradient is not consistent
-			// then set color 
+			// then set color
 			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
 		}
 	}
@@ -247,7 +247,7 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 			setValue(Property.COLOR_TYPE, ColorType.PATTERN);
 		} else {
 			// if here, the gradient is not consistent
-			// then set color 
+			// then set color
 			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
 		}
 	}

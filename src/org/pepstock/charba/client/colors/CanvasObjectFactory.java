@@ -403,5 +403,5 @@ public abstract class CanvasObjectFactory {
 	 * @return the inner and outer radius of arc
 	 */
 	protected abstract Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index);
-	
+
 }

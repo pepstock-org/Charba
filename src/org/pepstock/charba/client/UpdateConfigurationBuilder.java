@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  */
 public final class UpdateConfigurationBuilder {
-	
+
 	// configuration instance
 	private final UpdateConfiguration configuration = new UpdateConfiguration();
 

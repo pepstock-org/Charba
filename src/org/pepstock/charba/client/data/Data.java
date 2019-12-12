@@ -313,7 +313,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// returns datasets
 		return this.currentDatasets;
 	}
-	
+
 	/**
 	 * Returns a gradient object set as background color for a dataset related to legend item.
 	 * 
@@ -503,7 +503,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// or the locator of tooltip item is not able to locate any dataset
 		return null;
 	}
-	
+
 	/**
 	 * Returns a gradient stored into dataset as color to apply into chart.
 	 * 

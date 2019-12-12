@@ -128,7 +128,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	public IsChart getChart() {
 		return getNativeChart().getChart();
 	}
-	
+
 	/**
 	 * Returns whether the associated element is hovered.
 	 * 

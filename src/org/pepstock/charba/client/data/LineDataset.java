@@ -308,8 +308,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
 	 * 
 	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
-	 *            chartArea.<br>
-	 *            If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
+	 *         chartArea.<br>
+	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
 	 */
 	public double getClip() {
 		// gets the type stored
@@ -330,8 +330,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 * 
 	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
-	 *            chartArea.<br>
-	 *            If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
+	 *         chartArea.<br>
+	 *         If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 */
 	public Clip getClipAsObject() {
 		// gets the type stored

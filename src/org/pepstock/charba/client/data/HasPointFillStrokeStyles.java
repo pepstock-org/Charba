@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * This is an interface to set a dataset has container of fill and stroke style based on point background and border color.<br>
- * Out of the box ONLY {@link LiningDataset} has implemented this interface 
- *  
+ * Out of the box ONLY {@link LiningDataset} has implemented this interface
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

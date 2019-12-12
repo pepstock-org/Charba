@@ -38,7 +38,7 @@ public interface Controller {
 	static boolean isConsistent(Controller controller, ControllerContext context, IsChart chart) {
 		return isValid(controller) && IsChart.isValid(chart) && context != null;
 	}
-	
+
 	/**
 	 * Checks if key passed as argument is not <code>null</code> and its type is valid as well. If not, throw a
 	 * {@link IllegalArgumentException}.
@@ -50,7 +50,6 @@ public interface Controller {
 			throw new IllegalArgumentException("Controller implementation instance is null or not consistent");
 		}
 	}
-
 
 	/**
 	 * Returns <code>true</code> if the controller is consistent.

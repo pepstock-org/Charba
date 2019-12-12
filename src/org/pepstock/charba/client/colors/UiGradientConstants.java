@@ -16,13 +16,14 @@
 package org.pepstock.charba.client.colors;
 
 /**
- * Contains all colors used into {@link UiGradient}, to avoid to have more instances of the same color into {@link UiGradient} definition.
+ * Contains all colors used into {@link UiGradient}, to avoid to have more instances of the same color into {@link UiGradient}
+ * definition.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class UiGradientConstants {
-	
+
 	/**
 	 * Constant color "#00CDAC" <span style="background-color:#00CDAC; border-style: solid;
 	 * border-width:1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

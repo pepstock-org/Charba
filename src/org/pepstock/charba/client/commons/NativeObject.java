@@ -100,7 +100,7 @@ public final class NativeObject {
 			return hasOwnProperty(key);
 		}
 		// if here, argument is not consistent
-		return false; 
+		return false;
 	}
 
 	/**

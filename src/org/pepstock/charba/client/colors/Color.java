@@ -225,7 +225,7 @@ public final class Color implements IsColor {
 		int defaultRGBItem = (int) (1.0 / (1.0 - FACTOR));
 		// if RGB is 000
 		if (r == 0 && g == 0 && b == 0) {
-			// applies the calculated default RGB value factor 
+			// applies the calculated default RGB value factor
 			return new Color(defaultRGBItem, defaultRGBItem, defaultRGBItem, alphaToUse);
 		}
 		// if red item is between 0 and calculated factor

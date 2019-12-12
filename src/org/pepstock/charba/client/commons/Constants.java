@@ -77,7 +77,7 @@ public final class Constants {
 	 * Constants for UNDERSCORE
 	 */
 	public static final String UNDERSCORE = "_";
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

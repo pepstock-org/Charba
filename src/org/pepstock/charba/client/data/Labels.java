@@ -203,8 +203,8 @@ public final class Labels {
 	}
 
 	/**
-	 * Returns a multi line label at a specific index. An unmodifiable list of strings is returned. If the index is out of bounds, throws an
-	 * exception.
+	 * Returns a multi line label at a specific index. An unmodifiable list of strings is returned. If the index is out of
+	 * bounds, throws an exception.
 	 * 
 	 * @param index index of label
 	 * @return a unmodifiable list of strings
@@ -221,7 +221,7 @@ public final class Labels {
 		}
 		// returns a list with single item
 		// string can not be null, because checked during loading
-		return Collections.unmodifiableList(Arrays.asList((String)array.get(index)));
+		return Collections.unmodifiableList(Arrays.asList((String) array.get(index)));
 	}
 
 	/**

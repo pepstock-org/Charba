@@ -469,7 +469,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				radius = DEFAULT_RADIUS;
 			}
 			// ricalculate size
-			size = (int)(radius * 2) + 2;
+			size = (int) (radius * 2) + 2;
 			// update the html legend item settig the size and calulated radius
 			htmlLegendItem.setSize(size);
 			htmlLegendItem.setRadius(radius);
