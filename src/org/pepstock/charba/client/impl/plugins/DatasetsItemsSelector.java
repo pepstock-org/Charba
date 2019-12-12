@@ -54,13 +54,32 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * The factory to read options for plugin
 	 */
 	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory(ID);
+	// singleton instance
+	private static final DatasetsItemsSelector INSTANCE = new DatasetsItemsSelector();
 	// map to maintain the selectors handler for every chart
-	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
+	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
-	private static final Map<String, HandlerRegistration> LEGEND_HANDLERS_STATUS = new HashMap<>();
+	private final Map<String, HandlerRegistration> pluginEventsRegistrationHandlers = new HashMap<>();
 	// click lgend handler to avoid to remove all datasets
-	private final AtLeastOneDatasetHandler legendClickHandler = new AtLeastOneDatasetHandler();
+	private final AtLeastOneDatasetHandler pluginLegendClickHandler = new AtLeastOneDatasetHandler();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	private DatasetsItemsSelector() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of plugin.
+	 * 
+	 * @return the singleton instance of plugin
+	 */
+	public static DatasetsItemsSelector get() {
+		return INSTANCE;
+	}
+
+	
 	/**
 	 * Returns the padding height used by clear selection element if enabled.<br>
 	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the
@@ -71,9 +90,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	public double getPadding(IsChart chart) {
 		// checks if chart is consistent and there is a handler
-		if (IsChart.isValid(chart) && HANDLERS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
 			// gets clear selection configuration
@@ -99,9 +118,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// flag with default to false
 		boolean fireEvent = false;
 		// checks chart is consistent and for handler
-		if (IsChart.isValid(chart) && HANDLERS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// checks into options if fire event has been set
 			fireEvent = handler.getOptions().isFireEventOnClearSelection();
 		}
@@ -124,9 +143,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// flag to know if the chart must be updated
 		boolean mustBeUpdated = false;
 		// checks if we have already an handler
-		if (HANDLERS.containsKey(chart.getId())) {
+		if (pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// clear the selection
 			handler.removeClearSelection();
 			// checks if the selection was done
@@ -157,9 +176,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks is chart is consistent
 		// checks if the plugin has been invoked for LINE or BAR charts
 		// checks if we have already an handler
-		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
+		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// sets the flag to skip next event after refresh
 			handler.setSkipNextFireEvent(true);
 		}
@@ -191,11 +210,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// checks if handler on legend to avoid to remove all datasets has been already added
 			// and if legend is display
 			// checks if is chart is a abstract chart instance
-			if (!LEGEND_HANDLERS_STATUS.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
+			if (!pluginEventsRegistrationHandlers.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
 				// if not, adds handler
-				HandlerRegistration registratrion = chart.addHandler(legendClickHandler, LegendClickEvent.TYPE);
+				HandlerRegistration registratrion = chart.addHandler(pluginLegendClickHandler, LegendClickEvent.TYPE);
 				// stores flag into map
-				LEGEND_HANDLERS_STATUS.put(chart.getId(), registratrion);
+				pluginEventsRegistrationHandlers.put(chart.getId(), registratrion);
 			}
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = null;
@@ -207,9 +226,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				pOptions = new DatasetsItemsSelectorOptions();
 			}
 			// checks if chart has got already an handler
-			if (HANDLERS.containsKey(chart.getId())) {
+			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// removes previous handler
-				HANDLERS.remove(chart.getId());
+				pluginSelectionHandlers.remove(chart.getId());
 			}
 			// creates the handler of selection
 			// by chart instance and the options stored into options (if exists).
@@ -221,7 +240,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			handler.setMouseUp(chart.getCanvas().addMouseUpHandler(handler));
 			handler.setMouseMove(chart.getCanvas().addMouseMoveHandler(handler));
 			// stores selection handler
-			HANDLERS.put(chart.getId(), handler);
+			pluginSelectionHandlers.put(chart.getId(), handler);
 		}
 	}
 
@@ -250,11 +269,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public void onAfterDraw(IsChart chart, double easing) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
+		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// sets cursor wait because the chart is drawing and not selectable
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// calculates the coordinates of clear selection element
 			handler.calculateClearSelectionPositions();
 			// checks if the draw if at the end of animation
@@ -276,9 +295,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart)) {
 			// checks if we have already an handler
-			if (HANDLERS.containsKey(chart.getId())) {
+			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// gets selection handler
-				SelectionHandler handler = HANDLERS.get(chart.getId());
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 				// at chart destroy phase, all handler will be removed form canvas
 				// removes mouse handler if consistent
 				if (handler.getMouseDown() != null) {
@@ -293,12 +312,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					handler.getMouseMove().removeHandler();
 				}
 				// removes handler from map
-				HANDLERS.remove(chart.getId());
+				pluginSelectionHandlers.remove(chart.getId());
 			}
 			// checks if we have already an legend handler
-			if (LEGEND_HANDLERS_STATUS.containsKey(chart.getId())) {
+			if (pluginEventsRegistrationHandlers.containsKey(chart.getId())) {
 				// cleans the legend click handler status
-				HandlerRegistration registration = LEGEND_HANDLERS_STATUS.remove(chart.getId());
+				HandlerRegistration registration = pluginEventsRegistrationHandlers.remove(chart.getId());
 				// removes registration
 				registration.removeHandler();
 			}
@@ -314,9 +333,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public boolean onBeforeEvent(IsChart chart, ChartNativeEvent event) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart) && HANDLERS.containsKey(chart.getId())) {
+		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// manages event
 			// if returns false
 			// does not continue

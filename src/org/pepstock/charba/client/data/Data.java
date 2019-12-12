@@ -609,7 +609,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 					// checks if the plugin to apply pattern is already loaded
 					if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
 						// adds plugin
-						chart.getPlugins().add(new CanvasObjectHandler());
+						chart.getPlugins().add(CanvasObjectHandler.get());
 					}
 					// if here,
 					// plugin is already added to chart

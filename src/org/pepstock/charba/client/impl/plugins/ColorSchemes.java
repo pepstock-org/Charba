@@ -54,9 +54,27 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * Data labels options factory
 	 */
 	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory(ID);
+	// singleton instance
+	private static final ColorSchemes INSTANCE = new ColorSchemes();
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
 	// initialized and legend is not changed
-	private static final ColorSchemeLegendLabelsCallback CALLBACK = new ColorSchemeLegendLabelsCallback();
+	private final ColorSchemeLegendLabelsCallback pluginLegendLabelsCallback = new ColorSchemeLegendLabelsCallback();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private ColorSchemes() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of plugin.
+	 * 
+	 * @return the singleton instance of plugin
+	 */
+	public static ColorSchemes get() {
+		return INSTANCE;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -85,10 +103,10 @@ public final class ColorSchemes extends AbstractPlugin {
 			// checks if the legend callbacks is not a color scheme ones and is consistent
 			if (!(legendLabelsCallback instanceof ColorSchemeLegendLabelsCallback) && legendLabelsCallback != null) {
 				// uses the color scheme callback to wrap the existing callback
-				CALLBACK.setDelegatedCallback(chart, legendLabelsCallback);
+				pluginLegendLabelsCallback.setDelegatedCallback(chart, legendLabelsCallback);
 			}
 			// applies the color scheme callback to chart
-			chart.getOptions().getLegend().getLabels().setLabelsCallback(CALLBACK);
+			chart.getOptions().getLegend().getLabels().setLabelsCallback(pluginLegendLabelsCallback);
 		}
 	}
 
@@ -132,7 +150,7 @@ public final class ColorSchemes extends AbstractPlugin {
 		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
 			// clear the color scheme callback cache
 			// for this chart
-			CALLBACK.removeDelegatedCallback(chart);
+			pluginLegendLabelsCallback.removeDelegatedCallback(chart);
 		}
 	}
 

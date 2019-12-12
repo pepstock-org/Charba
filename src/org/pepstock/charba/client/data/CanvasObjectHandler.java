@@ -37,20 +37,31 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  */
 final class CanvasObjectHandler extends AbstractPlugin {
 
+	// singleton instance
+	private static final CanvasObjectHandler INSTANCE = new CanvasObjectHandler();
 	// plugin ID
 	static final String ID = "charbacanvasobjecthandler";
 	// status of update
-	private static final Set<String> STATUS = new HashSet<>();
+	private final Set<String> pluginStatus = new HashSet<>();
 	// map for all legend labels callbacks
-	private static final Map<String, CanvasObjectLegendLabelsCallback> CALLBACKS = new HashMap<>();
+	private final Map<String, CanvasObjectLegendLabelsCallback> pluginLegendLabelsCallbacks = new HashMap<>();
 	// maintains the data object of chart status
-	private String dataToJson = null;
+	private final Map<String, String> pluginDataToJsonMap = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	CanvasObjectHandler() {
+	private CanvasObjectHandler() {
 		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of plugin.
+	 * 
+	 * @return the singleton instance of plugin
+	 */
+	static CanvasObjectHandler get() {
+		return INSTANCE;
 	}
 
 	/*
@@ -82,7 +93,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				// creates new object to wrap the existing callback
 				CanvasObjectLegendLabelsCallback canvasObjectCallback = new CanvasObjectLegendLabelsCallback(legendLabelsCallback);
 				// stores into cache
-				CALLBACKS.put(chart.getId(), canvasObjectCallback);
+				pluginLegendLabelsCallbacks.put(chart.getId(), canvasObjectCallback);
 				// applies the canvas object callback to chart
 				chart.getOptions().getLegend().getLabels().setLabelsCallback(canvasObjectCallback);
 			}
@@ -101,9 +112,9 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			// checks if is the first execution
 			// and not an execution invoked by update
 			// for gradients
-			if (!STATUS.contains(chart.getId())) {
+			if (!pluginStatus.contains(chart.getId())) {
 				// stores that the first execution is done
-				STATUS.add(chart.getId());
+				pluginStatus.add(chart.getId());
 				// gets data
 				Data data = chart.getData();
 				// gets list of datasets
@@ -121,7 +132,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			} else {
 				// if here, means that the method has been invoked
 				// due to the update for gradients
-				STATUS.remove(chart.getId());
+				pluginStatus.remove(chart.getId());
 			}
 		}
 		return true;
@@ -137,20 +148,22 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// checks if chart is consistent
 		// the before update is already passed for pattern that
 		// means first execution
-		if (IsChart.isConsistent(chart) && STATUS.contains(chart.getId())) {
+		if (IsChart.isConsistent(chart) && pluginStatus.contains(chart.getId())) {
 			// // gets data
 			Data data = chart.getData();
 			// gets data json
 			String currentDataToJson = data.getDatasetsAsString();
 			// gets list of datasets
 			List<Dataset> datasets = data.getDatasets();
+			// gets data json stored for the chart
+			String dataToJson = pluginDataToJsonMap.get(chart.getId());
 			// checks if the amount of datasets is changed
 			if (dataToJson == null || !dataToJson.equalsIgnoreCase(currentDataToJson)) {
 				// data have been changed
 				dataChanged(chart, datasets);
 			}
 			// stores the data chart JSON representation
-			dataToJson = currentDataToJson;
+			pluginDataToJsonMap.put(chart.getId(), currentDataToJson);
 			// checks if chart must be updated
 			// when you creates new gradients and
 			// set them to dataset configuration in this point of
@@ -158,7 +171,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			// must applied new gradients
 			if (areGradientsChanged(chart, datasets)) {
 				// gets callback to enable changes
-				CanvasObjectLegendLabelsCallback canvasObjectCallback = CALLBACKS.get(chart.getId());
+				CanvasObjectLegendLabelsCallback canvasObjectCallback = pluginLegendLabelsCallbacks.get(chart.getId());
 				// checks if consistent
 				if (canvasObjectCallback != null) {
 					// enables the changes
@@ -223,7 +236,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				dataset.clearCallbackPatternsAndGradients();
 			}
 			// removes cached callback
-			CALLBACKS.remove(chart.getId());
+			pluginLegendLabelsCallbacks.remove(chart.getId());
 		}
 	}
 

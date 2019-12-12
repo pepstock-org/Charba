@@ -129,6 +129,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `Labels` object in order to load a list of strings and return a list of string instead of an array (**breaking change**).
  * add `UpdateConfigurationBuilder` class in order to create `UpdateConfiguration` for chart update.
  * add `UiGradient` enumeration in order to have a set of gradients out of the box, see [UiGrandients.com](https://uigradients.com).
+ * change `ChartPointer`, `ColorSchemes` and `DatasetItemsSelector` plugins into singleton to avoid useless instances because already implemented in order to be added to whatever chart or to the global options (**breaking change**).
 
 ### Fixed Bugs
 

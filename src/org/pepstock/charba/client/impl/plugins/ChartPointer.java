@@ -46,9 +46,27 @@ public final class ChartPointer extends AbstractPlugin {
 	 * The factory to create options for plugin.
 	 */
 	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory(ID);
+	// singleton instance
+	private static final ChartPointer INSTANCE = new ChartPointer();
 	// cache to store options in order do not load every time the options
-	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
+	private final Map<String, ChartPointerOptions> pluginOptions = new HashMap<>();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	private ChartPointer() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of plugin.
+	 * 
+	 * @return the singleton instance of plugin
+	 */
+	public static ChartPointer get() {
+		return INSTANCE;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -78,7 +96,7 @@ public final class ChartPointer extends AbstractPlugin {
 				pOptions = new ChartPointerOptions();
 			}
 			// stores option on the cache
-			OPTIONS.put(chart.getId(), pOptions);
+			pluginOptions.put(chart.getId(), pOptions);
 			// sets the initial cursor of chart
 			pOptions.setCurrentCursor(chart.getInitialCursor());
 		}
@@ -96,7 +114,7 @@ public final class ChartPointer extends AbstractPlugin {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// gets options instance
-			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
+			ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
 			// gets the scope
 			List<PointerElement> scope = pOptions.getElements();
 			// DATASET SELECTION
