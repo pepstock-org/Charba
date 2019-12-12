@@ -744,6 +744,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
+			// calls plugins for onConfigure method
+			Defaults.get().getPlugins().onChartConfigure(configuration, this);
+			plugins.onChartConfigure(configuration, this);
 			// gets options
 			ConfigurationOptions internalOptions = getOptions();
 			// gets data
@@ -751,12 +754,13 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			// sets all items to configuration item
 			configuration.setType(getType());
 			configuration.setOptions(this, internalOptions);
+			// PAY ATTENTION that the data configuration
+			// must be executed after PLUGINS on configure
+			// in order to be able to disable the canvas object handler plugin
+			// if required
 			configuration.setData(this, internalData);
 			// sets plugins
 			configuration.setPlugins(this, plugins);
-			// calls plugins for onConfigure method
-			Defaults.get().getPlugins().onChartConfigure(configuration, this);
-			plugins.onChartConfigure(configuration, this);
 			// destroy chart if chart is already instantiated
 			// checks if chart is created
 			if (chart != null) {

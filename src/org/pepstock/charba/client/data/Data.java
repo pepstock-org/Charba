@@ -41,9 +41,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public final class Data extends NativeObjectContainer implements ConfigurationElement {
 
-	// maintains the list of datasets because needs to preserve the dataset type
-	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -77,6 +74,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		}
 
 	}
+
+	// maintains the list of datasets because needs to preserve the dataset type
+	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
+	// flag to disable canvas object handler
+	private boolean canvasObjectHandling = true;
 
 	/**
 	 * Creates the object with an empty native object.
@@ -312,6 +314,29 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		}
 		// returns datasets
 		return this.currentDatasets;
+	}
+
+	/**
+	 * Returns <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable.<br>
+	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with
+	 * default color.
+	 * 
+	 * @return <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable
+	 */
+	public boolean isCanvasObjectHandling() {
+		return canvasObjectHandling;
+	}
+
+	/**
+	 * Sets <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be forcedly disable.<br>
+	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with
+	 * default color.
+	 * 
+	 * @param canvasObjectHandling <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be
+	 *            forcedly disable
+	 */
+	public void setCanvasObjectHandling(boolean canvasObjectHandling) {
+		this.canvasObjectHandling = canvasObjectHandling;
 	}
 
 	/**
@@ -599,22 +624,31 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		if (IsChart.isValid(chart)) {
 			// loads data
 			ConfigurationLoader.loadData(configuration, this);
-			// checks if there is any pattern
-			// scans all datasets
-			for (Dataset ds : currentDatasets) {
-				// checks if dataset has got some patterns
-				if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
-					// if here
-					// there are some patterns to load
-					// checks if the plugin to apply pattern is already loaded
-					if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
-						// adds plugin
-						chart.getPlugins().add(CanvasObjectHandler.get());
+			// checks if the canvas object handler has been disable
+			if (isCanvasObjectHandling()) {
+				// checks if there is any pattern
+				// scans all datasets
+				for (Dataset ds : currentDatasets) {
+					// checks if dataset has got some patterns
+					if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
+						// if here
+						// there are some patterns to load
+						// checks if the plugin to apply pattern is already loaded
+						if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
+							// adds plugin
+							chart.getPlugins().add(CanvasObjectHandler.get());
+							// the plugin must be configure
+							// here outside of the plugin container one
+							// because it must be added and configure after
+							// all the others due to the possibility to disable
+							// canvas object handling
+							CanvasObjectHandler.get().onConfigure(chart);
+						}
+						// if here,
+						// plugin is already added to chart
+						// it shouldn't happen
+						return;
 					}
-					// if here,
-					// plugin is already added to chart
-					// it shouldn't happen
-					return;
 				}
 			}
 		}

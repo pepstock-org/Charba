@@ -96,6 +96,9 @@ public final class ColorSchemes extends AbstractPlugin {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
 		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
+			// disable the canvas object hanlder because with color scheme
+			// you can use ONLY colors
+			chart.getData().setCanvasObjectHandling(false);
 			// gets the legend labels callback
 			// this is done because changing colors by plugin
 			// the legend does not change accordingly
