@@ -125,7 +125,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * @return the CHARBA chart instance
 	 */
 	@JsOverlay
-	IsChart getChart() {
+	public IsChart getChart() {
 		return getNativeChart().getChart();
 	}
 	

@@ -79,9 +79,9 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, hoverBackgroundColorCallback, getDefaultBackgroundColorAsString()));
+		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, hoverBorderColorCallback, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}

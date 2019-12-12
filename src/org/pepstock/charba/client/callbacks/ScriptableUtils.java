@@ -156,16 +156,40 @@ public final class ScriptableUtils {
 	 * @param callback callback to invoke
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
 	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPattern}, otherwise it
-	 *            skkips them.
+	 *            skips them.
 	 * @return a value of property as color
 	 */
 	public static Object getOptionValueAsColor(ScriptableContext context, Scriptable<?> callback, String defaultValue, boolean hasPattern) {
 		// gets chart instance
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
+		// checks if the chart is correct
 		if (IsChart.isValid(chart) && callback != null && context != null) {
 			// calls callback
 			Object result = callback.invoke(chart, context);
+			// invokes the callback result handler
+			return handleCallbackResultAsColor(context, result, defaultValue, hasPattern);
+		}
+		// if here, chart, callback or result of callback are not consistent
+		return defaultValue;
+	}
+
+	/**
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
+	 * property in color ones.
+	 * 
+	 * @param context scriptable context
+	 * @param result result of callback invocation
+	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPattern}, otherwise it
+	 *            skips them.
+	 * @return a value of property as color
+	 */
+	public static Object handleCallbackResultAsColor(ScriptableContext context, Object result, String defaultValue, boolean hasPattern) {
+		// checks if the context and chart are correct
+		if (context != null && IsChart.isValid(context.getChart()) && result != null) {
+			// gets chart instance
+			IsChart chart = context.getChart();
 			// checks result
 			if (result instanceof IsColor) {
 				// is color instance
@@ -189,7 +213,7 @@ public final class ScriptableUtils {
 			} else if (result instanceof CanvasPattern && hasPattern) {
 				// is canvas pattern instance
 				return result;
-			} else if (result != null && hasPattern) {
+			} else if (hasPattern) {
 				// another instance not null
 				// returns to string
 				return result.toString();
@@ -198,4 +222,5 @@ public final class ScriptableUtils {
 		// if here, chart, callback or result of callback are not consistent
 		return defaultValue;
 	}
+
 }

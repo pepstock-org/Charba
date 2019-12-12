@@ -75,7 +75,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset implements HasFill, HasOrder {
+public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles {
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
@@ -213,15 +213,15 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
 		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
 		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
@@ -262,6 +262,26 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	public Orderer getOrderer() {
 		return orderer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasPointFillStrokeStyles#getPointFillStyleProperty()
+	 */
+	@Override
+	public Key getPointFillStyleProperty() {
+		return Property.POINT_BACKGROUND_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasPointFillStrokeStyles#getPointStrokeStyleProperty()
+	 */
+	@Override
+	public Key getPointStrokeStyleProperty() {
+		return Property.POINT_BORDER_COLOR;
 	}
 
 	/**
