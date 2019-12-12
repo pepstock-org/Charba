@@ -324,7 +324,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null && legendItem != null) {
+		if (dataset != null) {
 			// checks if dataset is a point fill stroke style
 			if (dataset instanceof HasPointFillStrokeStyles) {
 				// casts to point fill stroke styles instance
@@ -361,7 +361,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null && legendItem != null) {
+		if (dataset != null) {
 			// checks if dataset is a point fill stroke style
 			if (dataset instanceof HasPointFillStrokeStyles) {
 				// casts to point fill stroke styles instance
