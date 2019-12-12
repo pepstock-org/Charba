@@ -169,10 +169,10 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			} else {
 				// by default is the center of chart area
 				radius.setInner(0);
-				// radius - if max value between the difference between right and left and the difference between bottom and
+				// radius - if min value between the difference between right and left and the difference between bottom and
 				// top,
 				// divided by 2
-				radius.setOuter((Math.max((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2D));
+				radius.setOuter((Math.min((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2D));
 			}
 		}
 		return radius;
