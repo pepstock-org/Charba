@@ -18,8 +18,10 @@ package org.pepstock.charba.client.data;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.Defaults;
@@ -28,6 +30,8 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.Scriptable;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Gradient;
@@ -38,6 +42,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -95,6 +100,12 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container
 	private final GradientsContainer gradientsContainer = new GradientsContainer();
+	// cache for gradients created by callbacks
+	// K = key + dataset locator, V = gradient
+	private final Map<String, Gradient> callbackGradientsContainer = new HashMap<>();
+	// cache for patterns created by callbacks
+	// K = key + dataset locator, V = pattern
+	private final Map<String, Pattern> callbackPatternsContainer = new HashMap<>();
 	// default options values
 	private final IsDefaultOptions defaultValues;
 	// chart type related to dataset
@@ -175,9 +186,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultBackgroundColorAsString()));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultBorderColorAsString(), false));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
@@ -812,6 +823,120 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		}
 		// if here, factory is not consistent
 		return null;
+	}
+
+	/**
+	 * Clears the cache of patterns and gradients created by callbacks.
+	 */
+	final void clearCallbackPatternsAndGradients() {
+		callbackGradientsContainer.clear();
+		callbackPatternsContainer.clear();
+	}
+
+	/**
+	 * Clears the cache ONLY of gradients created by callbacks.
+	 */
+	final void resetCallbackGradients() {
+		callbackGradientsContainer.clear();
+	}
+
+	/**
+	 * Returns the gradient configured by callback for a specific dataset and data index, for a specific property.
+	 * 
+	 * @param property property of dataset which have stored the gradient
+	 * @param datasetIndex dataset index to get gradient
+	 * @param index data index to get the gradient
+	 * @return the gradient instance or <code>null</code> if not defined
+	 */
+	final Gradient getCallbackGradient(Key property, int datasetIndex, int index) {
+		// checks consistency of key and if there is any gradient stored in cache
+		if (Key.isValid(property) && !callbackGradientsContainer.isEmpty()) {
+			// creates the key used to store the gradient
+			String key = createCallbackGradienttKey(property, datasetIndex, index);
+			// access to cache to get the gradient by key
+			return callbackGradientsContainer.get(key);
+		}
+		// if here the arguments are not consistent
+		return null;
+	}
+
+	/**
+	 * Returns the pattern configured by callback for a specific dataset and data index, for a specific property.
+	 * 
+	 * @param property property of dataset which have stored the pattern
+	 * @param datasetIndex dataset index to get pattern
+	 * @param index data index to get the pattern
+	 * @return the pattern instance or <code>null</code> if not defined
+	 */
+	final Pattern getCallbackPattern(Key property, int datasetIndex, int index) {
+		// checks consistency of key and if there is any pattern stored in cache
+		if (Key.isValid(property) && !callbackPatternsContainer.isEmpty()) {
+			// creates the key used to store the pattern
+			String key = createCallbackGradienttKey(property, datasetIndex, index);
+			// access to cache to get the pattern by key
+			return callbackPatternsContainer.get(key);
+		}
+		// if here the arguments are not consistent
+		return null;
+	}
+
+	/**
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
+	 * property in color ones.
+	 * 
+	 * @param context scriptable context
+	 * @param callback callback to invoke
+	 * @param property property of dataset used to store the color
+	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPattern}, otherwise it
+	 *            skips them.
+	 * @return a value of property as color
+	 */
+	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, Key property, String defaultValue, boolean hasPattern) {
+		// checks if the context and chart are correct
+		if (context != null && IsChart.isValid(context.getChart())) {
+			// gets chart instance
+			IsChart chart = context.getChart();
+			// calls callback
+			Object result = callback.invoke(chart, context);
+			if (result instanceof Gradient) {
+				String key = createCallbackGradienttKey(property, context.getDatasetIndex(), context.getIndex());
+				Gradient gradient = (Gradient) result;
+				callbackGradientsContainer.put(key, gradient);
+			} else if (result instanceof Pattern) {
+				String key = createCallbackGradienttKey(property, context.getDatasetIndex(), context.getIndex());
+				Pattern pattern = (Pattern) result;
+				callbackPatternsContainer.put(key, pattern);
+			}
+			return ScriptableUtils.handleCallbackResultAsColor(context, result, defaultValue, hasPattern);
+		}
+		// if here, chart, callback or result of callback are not consistent
+		return defaultValue;
+	}
+
+	/**
+	 * Returns a unique key to store canvas objects, created by callbacks, into a cache.<br>
+	 * The format is <code>[property],[datasetIndex],[dataIndex]</code>.
+	 * 
+	 * @param property property of dataset 
+	 * @param datasetIndex dataset index 
+	 * @param index data index
+	 * @return the key to use to store canvas object into cache
+	 */
+	private String createCallbackGradienttKey(Key property, int datasetIndex, int index) {
+		// checks if property is consistent
+		Key.checkIfValid(property);
+		// creates a builder
+		StringBuilder sb = new StringBuilder();
+		// adds property value
+		sb.append(property.value()).append(Constants.COMMA);
+		// adds dataset index getting the max with 0
+		// because where the dataset is not defined, the value is integer min value
+		sb.append(Math.max(datasetIndex, 0)).append(Constants.COMMA);
+		// adds data index getting the max with 0
+		// because where the dataset is not defined, the value is integer min value
+		sb.append(Math.max(index, 0));
+		return sb.toString();
 	}
 
 	/**

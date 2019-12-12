@@ -313,20 +313,38 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// returns datasets
 		return this.currentDatasets;
 	}
-
+	
 	/**
 	 * Returns a gradient object set as background color for a dataset related to legend item.
 	 * 
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a gradient object or <code>null</code> if not found by legend item
 	 */
-	public final Gradient retrieveBackgroundColorAsGradient(LegendItem legendItem) {
+	public final Gradient retrieveFillStyleAsGradient(LegendItem legendItem) {
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null) {
+		if (dataset != null && legendItem != null) {
+			// checks if dataset is a point fill stroke style
+			if (dataset instanceof HasPointFillStrokeStyles) {
+				// casts to point fill stroke styles instance
+				HasPointFillStrokeStyles fillStrokeStyles = (HasPointFillStrokeStyles) dataset;
+				// gets key instance
+				Key fillStyleProperty = fillStrokeStyles.getPointFillStyleProperty();
+				// checks if key is consistent
+				if (Key.isValid(fillStyleProperty)) {
+					// search on cache
+					Gradient gradient = retrieveGradient(dataset, legendItem, fillStyleProperty);
+					// if the value is found
+					// means that the dataset has been configured with point fill style
+					if (gradient != null) {
+						// returns the point file style
+						return gradient;
+					}
+				}
+			}
 			// retrieves the object
-			return retrieveObject(dataset, dataset.getGradientsContainer(), legendItem, Dataset.Property.BACKGROUND_COLOR);
+			return retrieveGradient(dataset, legendItem, Dataset.Property.BACKGROUND_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -339,13 +357,31 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a gradient object or <code>null</code> if not found by legend item
 	 */
-	public final Gradient retrieveBorderColorAsGradient(LegendItem legendItem) {
+	public final Gradient retrieveStrokeStyleAsGradient(LegendItem legendItem) {
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null) {
+		if (dataset != null && legendItem != null) {
+			// checks if dataset is a point fill stroke style
+			if (dataset instanceof HasPointFillStrokeStyles) {
+				// casts to point fill stroke styles instance
+				HasPointFillStrokeStyles fillStrokeStyles = (HasPointFillStrokeStyles) dataset;
+				// gets key instance
+				Key strokeStyleProperty = fillStrokeStyles.getPointFillStyleProperty();
+				// checks if key is consistent
+				if (Key.isValid(strokeStyleProperty)) {
+					// search on cache
+					Gradient gradient = retrieveGradient(dataset, legendItem, strokeStyleProperty);
+					// if the value is found
+					// means that the dataset has been configured with point stroke style
+					if (gradient != null) {
+						// returns the point stroke style
+						return gradient;
+					}
+				}
+			}
 			// retrieves the object
-			return retrieveObject(dataset, dataset.getGradientsContainer(), legendItem, Dataset.Property.BORDER_COLOR);
+			return retrieveGradient(dataset, legendItem, Dataset.Property.BORDER_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -358,13 +394,31 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a pattern object or <code>null</code> if not found by legend item
 	 */
-	public final Pattern retrieveBackgroundColorAsPattern(LegendItem legendItem) {
+	public final Pattern retrieveFillStyleAsPattern(LegendItem legendItem) {
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null) {
+		if (dataset != null && legendItem != null) {
+			// checks if dataset is a point fill stroke style
+			if (dataset instanceof HasPointFillStrokeStyles) {
+				// casts to point fill stroke styles instance
+				HasPointFillStrokeStyles fillStrokeStyles = (HasPointFillStrokeStyles) dataset;
+				// gets key instance
+				Key fillStyleProperty = fillStrokeStyles.getPointFillStyleProperty();
+				// checks if key is consistent
+				if (Key.isValid(fillStyleProperty)) {
+					// search on cache
+					Pattern pattern = retrievePattern(dataset, legendItem, fillStyleProperty);
+					// if the value is found
+					// means that the dataset has been configured with point fill style
+					if (pattern != null) {
+						// returns the point file style
+						return pattern;
+					}
+				}
+			}
 			// retrieves the object
-			return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, Dataset.Property.BACKGROUND_COLOR);
+			return retrievePattern(dataset, legendItem, Dataset.Property.BACKGROUND_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -377,13 +431,31 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @return a pattern object or <code>null</code> if not found by legend item
 	 */
-	public final Pattern retrieveBorderColorAsPattern(LegendItem legendItem) {
+	public final Pattern retrieveStrokeStyleAsPattern(LegendItem legendItem) {
 		// retrieves dataset by legend item
 		Dataset dataset = retrieveDataset(legendItem);
 		// checks if dataset is consistent
-		if (dataset != null) {
+		if (dataset != null && legendItem != null) {
+			// checks if dataset is a point fill stroke style
+			if (dataset instanceof HasPointFillStrokeStyles) {
+				// casts to point fill stroke styles instance
+				HasPointFillStrokeStyles fillStrokeStyles = (HasPointFillStrokeStyles) dataset;
+				// gets key instance
+				Key strokeStyleProperty = fillStrokeStyles.getPointFillStyleProperty();
+				// checks if key is consistent
+				if (Key.isValid(strokeStyleProperty)) {
+					// search on cache
+					Pattern pattern = retrievePattern(dataset, legendItem, strokeStyleProperty);
+					// if the value is found
+					// means that the dataset has been configured with point stroke style
+					if (pattern != null) {
+						// returns the point stroke style
+						return pattern;
+					}
+				}
+			}
 			// retrieves the object
-			return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, Dataset.Property.BORDER_COLOR);
+			return retrievePattern(dataset, legendItem, Dataset.Property.BORDER_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -431,6 +503,36 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// or the locator of tooltip item is not able to locate any dataset
 		return null;
 	}
+	
+	/**
+	 * Returns a gradient stored into dataset as color to apply into chart.
+	 * 
+	 * @param dataset dataset instance
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @param property type of color to search
+	 * @return a gradient instance or <code>null</code> if not found by legend item
+	 */
+	private Gradient retrieveGradient(Dataset dataset, LegendItem legendItem, Key property) {
+		// search on callbacks cache
+		Gradient gradient = dataset.getCallbackGradient(property, legendItem.getDatasetIndex(), legendItem.getIndex());
+		// retrieves the object
+		return retrieveObject(dataset, dataset.getGradientsContainer(), legendItem, property, gradient);
+	}
+
+	/**
+	 * Returns a pattern stored into dataset as color to apply into chart.
+	 * 
+	 * @param dataset dataset instance
+	 * @param legendItem legend item instance to get the dataset related to.
+	 * @param property type of color to search
+	 * @return a pattern instance or <code>null</code> if not found by legend item
+	 */
+	private Pattern retrievePattern(Dataset dataset, LegendItem legendItem, Key property) {
+		// search on callbacks cache
+		Pattern pattern = dataset.getCallbackPattern(property, legendItem.getDatasetIndex(), legendItem.getIndex());
+		// retrieves the object
+		return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, property, pattern);
+	}
 
 	/**
 	 * Returns a canvas object stored into dataset as color to apply into chart.
@@ -439,10 +541,15 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param container container of canvas object where searching the object
 	 * @param legendItem legend item instance to get the dataset related to.
 	 * @param property type of color to search
+	 * @param searchedOnCallback the gradient value got form container of gradients created by a callback
 	 * @param <T> type of canvas object to retrieve
 	 * @return a canvas object instance or <code>null</code> if not found by legend item
 	 */
-	private <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property) {
+	private <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property, T searchedOnCallback) {
+		// checks if the canvas object has been found into callbacks cache
+		if (searchedOnCallback != null) {
+			return searchedOnCallback;
+		}
 		// checks if arguments are consistent
 		// and if the container is not empty for the property to search
 		if (Key.isValid(property) && legendItem != null && dataset != null && container != null && container.hasObjects(property)) {
@@ -450,7 +557,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			List<T> objects = container.getObjects(property);
 			// the legend item is set by dataset index
 			if (legendItem.getDatasetIndex() != UndefinedValues.INTEGER && !objects.isEmpty()) {
-				// returns the first item
+				// return the first item
 				return objects.get(0);
 			} else if (legendItem.getIndex() != UndefinedValues.INTEGER && objects.size() > legendItem.getIndex()) {
 				// if here is looking for data index
