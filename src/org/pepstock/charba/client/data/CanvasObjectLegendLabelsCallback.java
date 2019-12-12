@@ -78,30 +78,28 @@ final class CanvasObjectLegendLabelsCallback implements LegendLabelsCallback {
 	@Override
 	public List<LegendLabelItem> generateLegendLabels(IsChart chart, List<LegendLabelItem> defaultLabels) {
 		// checks if the chart is consistent
-		if (IsChart.isConsistent(chart)) {
-			// checks if must handle gradients
-			if (isGradientsHandling()) {
-				// scans all legend items
-				for (LegendLabelItem item : defaultLabels) {
-					// retrieves the gradient from datasets
-					Gradient fillStyle = chart.getData().retrieveFillStyleAsGradient(item);
-					// checks if gradient is consistent
-					if (fillStyle != null) {
-						// then it sets to legend item
-						item.setFillStyle(chart, fillStyle);
-					}
-					// retrieves the gradient from datasets
-					Gradient strokeStyle = chart.getData().retrieveStrokeStyleAsGradient(item);
-					// checks if gradient is consistent
-					if (strokeStyle != null) {
-						// then it sets to legend item
-						item.setStrokeStyle(chart, strokeStyle);
-					}
+		// checks if must handle gradients
+		if (IsChart.isConsistent(chart) && isGradientsHandling()) {
+			// scans all legend items
+			for (LegendLabelItem item : defaultLabels) {
+				// retrieves the gradient from datasets
+				Gradient fillStyle = chart.getData().retrieveFillStyleAsGradient(item);
+				// checks if gradient is consistent
+				if (fillStyle != null) {
+					// then it sets to legend item
+					item.setFillStyle(chart, fillStyle);
 				}
-				// resets the flag
-				// the plugin will change it later if needed
-				setGradientsHandling(false);
+				// retrieves the gradient from datasets
+				Gradient strokeStyle = chart.getData().retrieveStrokeStyleAsGradient(item);
+				// checks if gradient is consistent
+				if (strokeStyle != null) {
+					// then it sets to legend item
+					item.setStrokeStyle(chart, strokeStyle);
+				}
 			}
+			// resets the flag
+			// the plugin will change it later if needed
+			setGradientsHandling(false);
 		}
 		// checks if delegated callback is consistent
 		if (delegated != null) {
