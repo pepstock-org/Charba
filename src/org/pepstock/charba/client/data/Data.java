@@ -628,22 +628,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			if (isCanvasObjectHandling()) {
 				// checks if there is any pattern
 				// scans all datasets
-				for (Dataset ds : currentDatasets) {
+				for (Dataset dataset : currentDatasets) {
 					// checks if dataset has got some patterns
-					if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
-						// if here
-						// there are some patterns to load
-						// checks if the plugin to apply pattern is already loaded
-						if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
-							// adds plugin
-							chart.getPlugins().add(CanvasObjectHandler.get());
-							// the plugin must be configure
-							// here outside of the plugin container one
-							// because it must be added and configure after
-							// all the others due to the possibility to disable
-							// canvas object handling
-							CanvasObjectHandler.get().onConfigure(chart);
-						}
+					// and then activating the plugin
+					if (activateCanvasObjectHandlerPlugin(chart, dataset)) {
 						// if here,
 						// plugin is already added to chart
 						// it shouldn't happen
@@ -652,6 +640,38 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				}
 			}
 		}
+	}
+
+	/**
+	 * Checks if dataset has got patterns or gradient and then add {@link CanvasObjectHandler} plugin to the chart;
+	 * 
+	 * @param chart chart instance
+	 * @param dataset dataset to check
+	 * @return <code>true</code> if plugin has been added, other wise <code>false</code>
+	 */
+	private boolean activateCanvasObjectHandlerPlugin(IsChart chart, Dataset dataset) {
+		// checks if dataset has got some patterns
+		if (!dataset.getPatternsContainer().isEmpty() || !dataset.getGradientsContainer().isEmpty()) {
+			// if here
+			// there are some patterns to load
+			// checks if the plugin to apply pattern is already loaded
+			if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
+				// adds plugin
+				chart.getPlugins().add(CanvasObjectHandler.get());
+				// the plugin must be configure
+				// here outside of the plugin container one
+				// because it must be added and configure after
+				// all the others due to the possibility to disable
+				// canvas object handling
+				CanvasObjectHandler.get().onConfigure(chart);
+			}
+			// if here,
+			// plugin is already added to chart
+			// it shouldn't happen
+			return true;
+		}
+		// if here, plugin has not been activated
+		return false;
 	}
 
 }
