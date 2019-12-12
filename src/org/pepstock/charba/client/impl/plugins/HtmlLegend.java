@@ -56,7 +56,7 @@ import jsinterop.annotations.JsFunction;
 
 /**
  * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.<br>
- * It uses the {@link HtmlLegendCallback} to generated HTML legend.
+ * It uses the {@link HtmlLegendLabelsCallback} to generated HTML legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -120,7 +120,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	// cache to store the chart id in order to know when new legend must be created
 	private static final Set<String> ADDED_LEGEND = new HashSet<>();
 	// static callback to generate legend into HTML
-	private static final HtmlLegendCallback CALLBACK = new HtmlLegendCallback();
+	private static final HtmlLegendLabelsCallback CALLBACK = new HtmlLegendLabelsCallback();
 
 	/**
 	 * Creates a plugin instance.

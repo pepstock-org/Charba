@@ -78,7 +78,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class HtmlLegendCallback implements LegendCallback {
+final class HtmlLegendLabelsCallback implements LegendCallback {
 
 	/**
 	 * Template interface to create CSS value of gradient, to use for <code>background-size</code> CSS property.<br>
@@ -571,7 +571,7 @@ final class HtmlLegendCallback implements LegendCallback {
 			// checks if not consistent
 			if (gradient == null) {
 				// retrieve loaded gradient by dataset
-				gradient = chart.getData().retrieveBackgroundColorAsGradient(item);
+				gradient = chart.getData().retrieveBackgroundColorAsGradient(chart, item);
 			}
 			// checks if gradient consistent
 			if (gradient != null) {

@@ -56,7 +56,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory(ID);
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
 	// initialized and legend is not changed
-	private static final ColorSchemeLegendCallback CALLBACK = new ColorSchemeLegendCallback();
+	private static final ColorSchemeLegendLabelsCallback CALLBACK = new ColorSchemeLegendLabelsCallback();
 
 	/*
 	 * (non-Javadoc)
@@ -83,7 +83,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// the legend does not change accordingly
 			LegendLabelsCallback legendLabelsCallback = chart.getOptions().getLegend().getLabels().getLabelsCallback();
 			// checks if the legend callbacks is not a color scheme ones and is consistent
-			if (!(legendLabelsCallback instanceof ColorSchemeLegendCallback) && legendLabelsCallback != null) {
+			if (!(legendLabelsCallback instanceof ColorSchemeLegendLabelsCallback) && legendLabelsCallback != null) {
 				// uses the color scheme callback to wrap the existing callback
 				CALLBACK.setDelegatedCallback(chart, legendLabelsCallback);
 			}

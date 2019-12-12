@@ -38,7 +38,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ColorSchemeLegendCallback implements LegendLabelsCallback {
+final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 
 	// static map to get all legend labels callbacks defined for the chart
 	// which will be wrapped by this callback
