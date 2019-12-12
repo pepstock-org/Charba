@@ -135,6 +135,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * [#43](https://github.com/pepstock-org/Charba/issues/43) change the implementation in order to manage whatever chart types, based on dataset or data index.
  * [#44](https://github.com/pepstock-org/Charba/issues/44) check if the plugin is forcedly disable (by boolean) instead of checking if there is at least an option instance. New `isForcedlyDisabled` method has been added to `Plugins` classes into options and configuration and the check has been changed into `GlobalPlugins` class.
  * [#45](https://github.com/pepstock-org/Charba/issues/45) add specific `LegendLabelsCallback` implementation for `ColorSchemes` plugin in order to change the legend when a color scheme is changed during the chart lifecycle.
+ * [#47](https://github.com/pepstock-org/Charba/issues/47) remove useless checks to activate ChartPointer plugin in order to have a cursor also on legend.
     
 ### Development
 
@@ -172,6 +173,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * update internal plugin to apply patterns and gradients into datasets in order to apply patterns by `onBeforeUpdate` method (instead of `onBeforeDatasetsDraw`) to avoid that the legend will not be updated.
   * add `isConsistent` method into `ChartAreaNode` object in order to be aware if the object is already initialized.
   * update default values for font properties, retrieving those from `Default.get().getGlobal()` instance instead of the constant values.
+  * add an internal legend labels callback, wrapping if a user implementation has been set, in order to manage the legend when a dataset uses gradients.
 
 License
 -------

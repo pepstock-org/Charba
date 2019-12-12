@@ -554,7 +554,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if not consistent
 			if (pattern == null) {
 				// retrieve loaded pattern by dataset
-				pattern = chart.getData().retrieveBackgroundColorAsPattern(item);
+				pattern = chart.getData().retrieveFillStyleAsPattern(item);
 			}
 			// checks if pattern consistent
 			if (pattern != null) {
@@ -571,7 +571,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if not consistent
 			if (gradient == null) {
 				// retrieve loaded gradient by dataset
-				gradient = chart.getData().retrieveBackgroundColorAsGradient(chart, item);
+				gradient = chart.getData().retrieveFillStyleAsGradient(item);
 			}
 			// checks if gradient consistent
 			if (gradient != null) {
@@ -642,7 +642,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if not consistent
 			if (pattern == null) {
 				// retrieve loaded pattern by dataset
-				pattern = chart.getData().retrieveBorderColorAsPattern(item);
+				pattern = chart.getData().retrieveStrokeStyleAsPattern(item);
 			}
 			// checks if pattern consistent
 			if (pattern != null) {
@@ -659,7 +659,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if not consistent
 			if (gradient == null) {
 				// retrieve loaded gradient by dataset
-				gradient = chart.getData().retrieveBorderColorAsGradient(item);
+				gradient = chart.getData().retrieveStrokeStyleAsGradient(item);
 			}
 			// checks if gradient consistent
 			if (gradient != null) {

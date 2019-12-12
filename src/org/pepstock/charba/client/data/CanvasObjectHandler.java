@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -34,6 +39,10 @@ final class CanvasObjectHandler extends AbstractPlugin {
 
 	// plugin ID
 	static final String ID = "charbacanvasobjecthandler";
+	// status of update
+	private static final Set<String> STATUS = new HashSet<>();
+	// map for all legend labels callbacks
+	private static final Map<String, CanvasObjectLegendLabelsCallback> CALLBACKS = new HashMap<>();
 	// maintains the data object of chart status
 	private String dataToJson = null;
 
@@ -57,20 +66,64 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onConfigure(IsChart chart) {
+		// checks if chart is consistent and if the plugin should be applicable to
+		// this chart
+		if (IsChart.isConsistent(chart)) {
+			// gets the legend labels callback
+			// this is done because changing gradients by plugin
+			// the legend does not change accordingly
+			LegendLabelsCallback legendLabelsCallback = chart.getOptions().getLegend().getLabels().getLabelsCallback();
+			// checks if the legend callbacks is not a canvas object callback ones and is consistent
+			if (!(legendLabelsCallback instanceof CanvasObjectLegendLabelsCallback)) {
+				// creates new object to wrap the existing callback
+				CanvasObjectLegendLabelsCallback canvasObjectCallback = new CanvasObjectLegendLabelsCallback(legendLabelsCallback);
+				// stores into cache
+				CALLBACKS.put(chart.getId(), canvasObjectCallback);
+				// applies the canvas object callback to chart
+				chart.getOptions().getLegend().getLabels().setLabelsCallback(canvasObjectCallback);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
-		// gets data
-		Data data = chart.getData();
-		// gets list of datasets
-		List<Dataset> datasets = data.getDatasets();
-		// checks if chart must be updated
-		// when you creates new patterns and
-		// set them to dataset configuration in this point of
-		// time
-		applyPatternsChanged(chart, datasets);
-		// informs CHART.JS to draw the chart
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// checks if is the first execution
+			// and not an execution invoked by update
+			// for gradients
+			if (!STATUS.contains(chart.getId())) {
+				// stores that the first execution is done
+				STATUS.add(chart.getId());
+				// gets data
+				Data data = chart.getData();
+				// gets list of datasets
+				List<Dataset> datasets = data.getDatasets();
+				// clears all patterns and gradients created by callbacks
+				for (Dataset dataset : datasets) {
+					dataset.clearCallbackPatternsAndGradients();
+				}
+				// checks if chart must be updated
+				// when you creates new patterns and
+				// set them to dataset configuration in this point of
+				// time
+				applyPatternsChanged(chart, datasets);
+				// informs CHART.JS to draw the chart
+			} else {
+				// if here, means that the method has been invoked
+				// due to the update for gradients
+				STATUS.remove(chart.getId());
+			}
+		}
 		return true;
 	}
 
@@ -81,30 +134,42 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
-		// // gets data
-		Data data = chart.getData();
-		// gets data json
-		String currentDataToJson = data.getDatasetsAsString();
-		// gets list of datasets
-		List<Dataset> datasets = data.getDatasets();
-		// checks if the amount of datasets is changed
-		if (dataToJson == null || !dataToJson.equalsIgnoreCase(currentDataToJson)) {
-			// data have been changed
-			dataChanged(chart, datasets);
-		}
-		// stores the data chart JSON representation
-		dataToJson = currentDataToJson;
-		// checks if chart must be updated
-		// when you creates new gradients and
-		// set them to dataset configuration in this point of
-		// time is MANDATORY to update chart because CHART.JS
-		// must applied new gradients
-		if (areGradientsChanged(chart, datasets)) {
-			// updates the chart
-			chart.update();
-			// informs CHART.JS to stop the current drawing
-			// because is not needed due to chart update is called
-			return false;
+		// checks if chart is consistent
+		// the before update is already passed for pattern that
+		// means first execution
+		if (IsChart.isConsistent(chart) && STATUS.contains(chart.getId())) {
+			// // gets data
+			Data data = chart.getData();
+			// gets data json
+			String currentDataToJson = data.getDatasetsAsString();
+			// gets list of datasets
+			List<Dataset> datasets = data.getDatasets();
+			// checks if the amount of datasets is changed
+			if (dataToJson == null || !dataToJson.equalsIgnoreCase(currentDataToJson)) {
+				// data have been changed
+				dataChanged(chart, datasets);
+			}
+			// stores the data chart JSON representation
+			dataToJson = currentDataToJson;
+			// checks if chart must be updated
+			// when you creates new gradients and
+			// set them to dataset configuration in this point of
+			// time is MANDATORY to update chart because CHART.JS
+			// must applied new gradients
+			if (areGradientsChanged(chart, datasets)) {
+				// gets callback to enable changes
+				CanvasObjectLegendLabelsCallback canvasObjectCallback = CALLBACKS.get(chart.getId());
+				// checks if consistent
+				if (canvasObjectCallback != null) {
+					// enables the changes
+					canvasObjectCallback.setGradientsHandling(true);
+				}
+				// updates the chart
+				chart.update();
+				// informs CHART.JS to stop the current drawing
+				// because is not needed due to chart update is called
+				return false;
+			}
 		}
 		// informs CHART.JS to draw the chart
 		return true;
@@ -118,18 +183,23 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 */
 	@Override
 	public void onResize(IsChart chart, SizeItem size) {
-		// Due to gradients are created based on dimension of
-		// canvas or chart area, every time a resize is occurring
-		// gradients must be recreated
-		// sets true to changed status in order that
-		// during the drawing after resize
-		// all gradients will be applied and recreated
-		for (Dataset dataset : chart.getData().getDatasets()) {
-			dataset.getGradientsContainer().setChanged(true);
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// Due to gradients are created based on dimension of
+			// canvas or chart area, every time a resize is occurring
+			// gradients must be recreated
+			// sets true to changed status in order that
+			// during the drawing after resize
+			// all gradients will be applied and recreated
+			for (Dataset dataset : chart.getData().getDatasets()) {
+				dataset.getGradientsContainer().setChanged(true);
+				// resets all gradients created by callbacks
+				dataset.resetCallbackGradients();
+			}
+			// because gradients must be recreated
+			// the cache of gradients must be clear
+			DatasetCanvasObjectFactory.get().resetGradients(chart);
 		}
-		// because gradients must be recreated
-		// the cache of gradients must be clear
-		DatasetCanvasObjectFactory.get().resetGradients(chart);
 	}
 
 	/*
@@ -139,9 +209,22 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {
-		// because chart is destroy
-		// clears the cache of patterns and gradients of the chart
-		DatasetCanvasObjectFactory.get().clear(chart);
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart)) {
+			// because chart is destroy
+			// clears the cache of patterns and gradients of the chart
+			DatasetCanvasObjectFactory.get().clear(chart);
+			// gets data
+			Data data = chart.getData();
+			// gets list of datasets
+			List<Dataset> datasets = data.getDatasets();
+			// clears all patterns and gradients created by callbacks
+			for (Dataset dataset : datasets) {
+				dataset.clearCallbackPatternsAndGradients();
+			}
+			// removes cached callback
+			CALLBACKS.remove(chart.getId());
+		}
 	}
 
 	/**
