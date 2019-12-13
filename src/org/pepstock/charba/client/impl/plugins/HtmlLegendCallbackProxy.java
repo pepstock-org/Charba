@@ -42,12 +42,12 @@ import jsinterop.annotations.JsFunction;
 /**
  * Manages events from {@link HtmlLegend}, enabling and disabling event listeners on HTML elements created by plugin.<br>
  * This object is able to manage all events on CHART.JS legend also into HTML legend one.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class HtmlLegendCallbackProxy {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -94,7 +94,7 @@ final class HtmlLegendCallbackProxy {
 		// fires the event
 		leaveCallbackProxy.setCallback((context, event) -> handleEvent(event));
 	}
-	
+
 	/**
 	 * Adds {@link Event#CLICK}, {@link Event#MOUSEMOVE} and {@link Event#MOUSEOUT} events to HTML legend element.
 	 * 
@@ -283,7 +283,7 @@ final class HtmlLegendCallbackProxy {
 			Defaults.get().invokeLegendOnLeave(eventToFire);
 		}
 	}
-	
+
 	/**
 	 * Sets the cursor point when the cursor is mouse over the legend and the default one when is mouse out.
 	 * 

@@ -79,7 +79,6 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		return INSTANCE;
 	}
 
-	
 	/**
 	 * Returns the padding height used by clear selection element if enabled.<br>
 	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the

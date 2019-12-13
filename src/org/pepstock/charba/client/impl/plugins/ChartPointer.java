@@ -66,7 +66,7 @@ public final class ChartPointer extends AbstractPlugin {
 	public static ChartPointer get() {
 		return INSTANCE;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
