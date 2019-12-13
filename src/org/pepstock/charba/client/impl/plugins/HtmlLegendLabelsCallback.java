@@ -147,7 +147,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @return the table element instance with the complete legend
 	 */
 	private TableElement buildLegend(IsChart chart) {
-		HtmlLegendOptions options = HtmlLegend.OPTIONS.get(chart.getId());
+		HtmlLegendOptions options = HtmlLegend.get().getPluginOptions().get(chart.getId());
 		// gets max columns for legend
 		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend
@@ -232,7 +232,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			legendItems = defaultLegendItems;
 		}
 		// stores the legend items
-		HtmlLegend.LEGEND_LABELS.put(chart.getId(), legendItems);
+		HtmlLegend.get().getPluginLegendLabelsItems().put(chart.getId(), legendItems);
 		// checks if there is a filter legend callback
 		if (legendLabels.getFilterCallback() != null) {
 			// if here, the filter callback is invoked

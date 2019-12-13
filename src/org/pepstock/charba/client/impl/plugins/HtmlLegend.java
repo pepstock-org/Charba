@@ -21,23 +21,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.enums.DefaultPlugin;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.events.ChartNativeEvent;
-import org.pepstock.charba.client.events.LegendClickEvent;
-import org.pepstock.charba.client.events.LegendHoverEvent;
-import org.pepstock.charba.client.events.LegendLeaveEvent;
-import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -45,14 +33,11 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.safehtml.shared.SafeHtml;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.<br>
@@ -62,38 +47,6 @@ import jsinterop.annotations.JsFunction;
  */
 public final class HtmlLegend extends AbstractPlugin {
 
-	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called when a event on the legend is raised.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLegendEventCallback {
-
-		/**
-		 * Method of function to be called when a event on the legend is raised.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param event native event
-		 */
-		void call(CallbackFunctionContext context, ChartNativeEvent event);
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the click function
-	private final CallbackProxy<ProxyLegendEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover function
-	private final CallbackProxy<ProxyLegendEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the leave function
-	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
-
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
@@ -102,39 +55,44 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * The factory to create options for plugin.
 	 */
 	public static final HtmlLegendOptionsFactory FACTORY = new HtmlLegendOptionsFactory(ID);
+	// singleton instance
+	private static final HtmlLegend INSTANCE = new HtmlLegend();
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
+	// static callback to generate legend into HTML
+	private static final HtmlLegendLabelsCallback CALLBACK = new HtmlLegendLabelsCallback();
 	// cache to store options in order do not load every time the options
-	static final Map<String, HtmlLegendOptions> OPTIONS = new HashMap<>();
+	private final Map<String, HtmlLegendOptions> pluginOptions = new HashMap<>();
 	// cache to store legend items managed by chart
-	static final Map<String, List<LegendLabelItem>> LEGEND_LABELS = new HashMap<>();
+	private final Map<String, List<LegendLabelItem>> pluginLegendLabelsItems = new HashMap<>();
+	// cache to store the chart id in order to know when new legend must be created
+	private final Set<String> pluginAddedLegendStatus = new HashSet<>();
 	// cache to store DIV element which contains legend for each chart
-	private static final Map<String, DivElement> DIV_ELEMENTS = new HashMap<>();
+	private final Map<String, DivElement> pluginDivElements = new HashMap<>();
 	// cache to store easing during drawing for each chart
 	// this cache is needed in order to recreate the legend when a chart update
 	// is invoked during a previous update
-	private static final Map<String, Double> EASINGS = new HashMap<>();
+	private final Map<String, Double> pluginEasingStatus = new HashMap<>();
 	// cache to store the original value of legend in order to
 	// manage the change of the legend display after chart creation
-	private static final Map<String, Boolean> LEGEND_DISPLAY = new HashMap<>();
-	// cache to store the chart id in order to know when new legend must be created
-	private static final Set<String> ADDED_LEGEND = new HashSet<>();
-	// static callback to generate legend into HTML
-	private static final HtmlLegendLabelsCallback CALLBACK = new HtmlLegendLabelsCallback();
+	private final Map<String, Boolean> pluginLegendDisplayStatus = new HashMap<>();
+	// cache to store the callback proxies of legend
+	private final Map<String, HtmlLegendCallbackProxy> pluginCallbackProxies = new HashMap<>();
 
 	/**
-	 * Creates a plugin instance.
+	 * To avoid any instantiation
 	 */
-	public HtmlLegend() {
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// fires the event
-		clickCallbackProxy.setCallback((context, event) -> handleEvent(event));
-		// fires the event
-		hoverCallbackProxy.setCallback((context, event) -> handleEvent(event));
-		// fires the event
-		leaveCallbackProxy.setCallback((context, event) -> handleEvent(event));
+	private HtmlLegend() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of plugin.
+	 * 
+	 * @return the singleton instance of plugin
+	 */
+	public static HtmlLegend get() {
+		return INSTANCE;
 	}
 
 	/*
@@ -156,6 +114,11 @@ public final class HtmlLegend extends AbstractPlugin {
 	public void onConfigure(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isConsistent(chart)) {
+			// adds into a map the callback proxy instance
+			// to catch events form legend
+			if (!pluginCallbackProxies.containsKey(chart.getId())) {
+				pluginCallbackProxies.put(chart.getId(), new HtmlLegendCallbackProxy());
+			}
 			HtmlLegendOptions pOptions = null;
 			// if not, loads and cache
 			// creates the plugin options using the java script object
@@ -165,7 +128,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			} else {
 				pOptions = new HtmlLegendOptions();
 			}
-			OPTIONS.put(chart.getId(), pOptions);
+			pluginOptions.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
 			// checks if the plugin is configured to show legend
 			if (pOptions.isDisplay()) {
@@ -185,10 +148,10 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeDraw(IsChart chart, double easing) {
+	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if argument is consistent
 		if (mustBeDisplay(chart)) {
 			// gets the legend
@@ -196,17 +159,17 @@ public final class HtmlLegend extends AbstractPlugin {
 			// creates legend DIV element reference
 			DivElement legendElement = null;
 			// checks if element is alreayd created
-			if (!DIV_ELEMENTS.containsKey(chart.getId())) {
+			if (!pluginDivElements.containsKey(chart.getId())) {
 				// if new
 				// creates a DIV element
 				legendElement = Document.get().createDivElement();
 				// sets the id by chart instance
 				legendElement.setId(formatLegendElementId(chart));
 				// stores into map
-				DIV_ELEMENTS.put(chart.getId(), legendElement);
+				pluginDivElements.put(chart.getId(), legendElement);
 			} else {
 				// if here, DIV element already exists then it retrieves it
-				legendElement = DIV_ELEMENTS.get(chart.getId());
+				legendElement = pluginDivElements.get(chart.getId());
 			}
 			// checks if there is a parent
 			if (!legendElement.hasParentElement()) {
@@ -215,7 +178,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			} else {
 				// removes the item
 				// in order to after draw to create the legend
-				ADDED_LEGEND.remove(chart.getId());
+				pluginAddedLegendStatus.remove(chart.getId());
 				// if here, the div has got the parent
 				// then it checks if the position is the same when it has been created
 				// otherwise it will move to the right position
@@ -225,15 +188,26 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (legend.isFullWidth()) {
 				legendElement.getStyle().setWidth(100, Unit.PCT);
 			}
-			// checks if reloading during previous drawing
-			// if the previous stored easing is greater than the current one her
-			// means that the is chart is updating without waiting for ending
-			// the previous update
-			if (EASINGS.put(chart.getId(), easing) > easing) {
-				// removes the item
-				// in order to after draw to create the legend
-				ADDED_LEGEND.remove(chart.getId());
-			}
+		}
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
+	 */
+	@Override
+	public boolean onBeforeDraw(IsChart chart, double easing) {
+		// checks if argument is consistent
+		// checks if reloading during previous drawing
+		// if the previous stored easing is greater than the current one her
+		// means that the is chart is updating without waiting for ending
+		// the previous update
+		if (mustBeDisplay(chart) && pluginEasingStatus.put(chart.getId(), easing) > easing) {
+			// removes the item
+			// in order to after draw to create the legend
+			pluginAddedLegendStatus.remove(chart.getId());
 		}
 		return true;
 	}
@@ -250,31 +224,31 @@ public final class HtmlLegend extends AbstractPlugin {
 			// checks if the legend must be created
 			// the legend will be created if there is the legend element
 			// and the chart is is NOT in the set
-			if (DIV_ELEMENTS.containsKey(chart.getId()) && !ADDED_LEGEND.contains(chart.getId())) {
+			if (pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
 				// gets div element
-				DivElement legendElement = DIV_ELEMENTS.get(chart.getId());
-				// removes all listeners
-				removeListeners(chart, legendElement);
-				// removes all children of div element
-				legendElement.removeAllChildren();
+				DivElement legendElement = pluginDivElements.get(chart.getId());
 				// invokes the legend callback to have the HTML of legend
 				SafeHtml html = CALLBACK.generateLegend(chart);
+				// removes all children of div element
+				legendElement.removeAllChildren();
 				// sets as inner HTML
 				legendElement.setInnerHTML(html.asString());
+				// removes all listeners
+				removeListeners(chart, legendElement);
 				// adds the event listeners to element
 				addListeners(chart, legendElement);
 				// adds into set
 				// in order do not add the inner html every easing
-				ADDED_LEGEND.add(chart.getId());
+				pluginAddedLegendStatus.add(chart.getId());
 			}
 			// if end of drawing,
 			// removes charts from set
 			if (easing == 1D) {
 				// removes chart for items
 				// in order to add next cycle
-				ADDED_LEGEND.remove(chart.getId());
+				pluginAddedLegendStatus.remove(chart.getId());
 				// sets easing to zero
-				EASINGS.put(chart.getId(), 0D);
+				pluginEasingStatus.put(chart.getId(), 0D);
 			}
 		}
 	}
@@ -291,11 +265,13 @@ public final class HtmlLegend extends AbstractPlugin {
 			// resets all status items
 			resetStatus(chart);
 			// removes status of legend display
-			LEGEND_DISPLAY.remove(chart.getId());
+			pluginLegendDisplayStatus.remove(chart.getId());
+			// removes callback proxies
+			pluginCallbackProxies.remove(chart.getId());
 			// removes the chart from options
-			HtmlLegendOptions oldOptions = OPTIONS.remove(chart.getId());
+			HtmlLegendOptions oldOptions = pluginOptions.remove(chart.getId());
 			// scans all options to see if the options is used in another chart
-			for (HtmlLegendOptions options : OPTIONS.values()) {
+			for (HtmlLegendOptions options : pluginOptions.values()) {
 				// checks if the option si s equals to old one
 				if (options.getCharbaId() == oldOptions.getCharbaId()) {
 					return;
@@ -321,20 +297,20 @@ public final class HtmlLegend extends AbstractPlugin {
 		// will be disable
 		boolean cachedValue = false;
 		// check if the display must be stored because was changed by user
-		if (LEGEND_DISPLAY.containsKey(chart.getId())) {
+		if (pluginLegendDisplayStatus.containsKey(chart.getId())) {
 			// if here the plugin was already initialized
 			// and then it stored the display value
-			cachedValue = LEGEND_DISPLAY.get(chart.getId());
+			cachedValue = pluginLegendDisplayStatus.get(chart.getId());
 			// because is not the first round
 			// the legend value should be false because set by plugin
 			// if is true, means the user changed it programmatically
 			if (chart.getOptions().getLegend().isDisplay() && !cachedValue) {
 				// stored the legend display value because is changed
-				LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+				pluginLegendDisplayStatus.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
 			}
 		} else {
 			// stored the legend display value because is missing
-			LEGEND_DISPLAY.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
+			pluginLegendDisplayStatus.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
 		}
 		boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
 		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
@@ -344,7 +320,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// overriding whatever other callback has been set
 			chart.getOptions().setLegendCallback(CALLBACK);
 			// sets easing to zero
-			EASINGS.put(chart.getId(), 0D);
+			pluginEasingStatus.put(chart.getId(), 0D);
 			// creates options instance
 		} else {
 			// resets all status items if there are
@@ -363,9 +339,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private boolean mustBeDisplay(IsChart chart) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart) && OPTIONS.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && pluginOptions.containsKey(chart.getId())) {
 			// gets stored option
-			HtmlLegendOptions options = OPTIONS.get(chart.getId());
+			HtmlLegendOptions options = pluginOptions.get(chart.getId());
 			// returns if must be display
 			return options.isDisplay();
 		}
@@ -381,9 +357,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private void resetStatus(IsChart chart) {
 		// checks if there is div element for legend
-		if (DIV_ELEMENTS.containsKey(chart.getId())) {
+		if (pluginDivElements.containsKey(chart.getId())) {
 			// removes from map
-			DivElement legendElement = DIV_ELEMENTS.remove(chart.getId());
+			DivElement legendElement = pluginDivElements.remove(chart.getId());
 			// removes all listeners
 			removeListeners(chart, legendElement);
 			// removes all children
@@ -392,11 +368,11 @@ public final class HtmlLegend extends AbstractPlugin {
 			legendElement.removeFromParent();
 		}
 		// removes the chart status
-		ADDED_LEGEND.remove(chart.getId());
+		pluginAddedLegendStatus.remove(chart.getId());
 		// removes the chart legend labels items
-		LEGEND_LABELS.remove(chart.getId());
+		pluginLegendLabelsItems.remove(chart.getId());
 		// removes the chart from easing status
-		EASINGS.remove(chart.getId());
+		pluginEasingStatus.remove(chart.getId());
 		// removes cached point style from tile factory
 		// if there are
 		HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
@@ -434,11 +410,10 @@ public final class HtmlLegend extends AbstractPlugin {
 				Element td = (Element) node;
 				// checks if the element has got a correct ID
 				// starting with chart id
-				if (td.getId().startsWith(chart.getId())) {
+				if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
+					HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
 					// adds to the element all event listeners
-					JsHtmlLegendBuilderHelper.get().addEventListener(Event.CLICK, td, clickCallbackProxy.getProxy());
-					JsHtmlLegendBuilderHelper.get().addEventListener(Event.MOUSEMOVE, td, hoverCallbackProxy.getProxy());
-					JsHtmlLegendBuilderHelper.get().addEventListener(Event.MOUSEOUT, td, leaveCallbackProxy.getProxy());
+					callbackProxy.addListeners(td);
 				}
 			}
 		}
@@ -463,11 +438,10 @@ public final class HtmlLegend extends AbstractPlugin {
 				Element td = (Element) node;
 				// checks if the element has got a correct ID
 				// starting with chart id
-				if (td.getId().startsWith(chart.getId())) {
+				if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
+					HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
 					// removes to the element all event listeners
-					JsHtmlLegendBuilderHelper.get().removeEventListener(Event.CLICK, td, clickCallbackProxy.getProxy());
-					JsHtmlLegendBuilderHelper.get().removeEventListener(Event.MOUSEMOVE, td, hoverCallbackProxy.getProxy());
-					JsHtmlLegendBuilderHelper.get().removeEventListener(Event.MOUSEOUT, td, leaveCallbackProxy.getProxy());
+					callbackProxy.removeListeners(td);
 				}
 			}
 		}
@@ -578,186 +552,39 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * This method has been invoked by legend elements when an event fires by them.
+	 * Returns the map of cached plugin options.
 	 * 
-	 * @param event DOM native event generated by legend elements
+	 * @return the map of cached plugin options
 	 */
-	private void handleEvent(ChartNativeEvent event) {
-		// gets event target
-		EventTarget eventTarget = event.getEventTarget();
-		// gets by element
-		Element element = Element.as(eventTarget);
-		// gets reference of table column
-		Element legendColumnElement = null;
-		// checks if the element is TD
-		if (element.getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
-			// if TD, the element itself contains the correct ID.
-			legendColumnElement = element;
-		} else {
-			// if not TD but the parent has got TD, the parent element itself contains the correct ID.
-			legendColumnElement = checkParent(element);
-		}
-		// checks if legend column is consistent
-		if (legendColumnElement != null) {
-			// creates a legend id by element
-			HtmlLegendId legendId = HtmlLegendId.get(legendColumnElement);
-			// checks if id is consistent
-			// and if there is a chart with that id
-			if (legendId != null && Charts.hasNative(legendId.getChartId())) {
-				// gets the chart id
-				String chartId = legendId.getChartId();
-				// retrieves the chart instance
-				IsChart chart = Charts.get(chartId);
-				// creates a reference with a list of legend labels
-				List<LegendLabelItem> legendItems = LEGEND_LABELS.get(chartId);
-				// by HTML legend ID object, extract the legend item
-				// to pass to event
-				LegendItem selectedItem = legendId.lookForLegendItem(legendItems);
-				// fires the event
-				fireEvent(chart, selectedItem, event);
-			}
-		}
+	Map<String, HtmlLegendOptions> getPluginOptions() {
+		return pluginOptions;
 	}
 
 	/**
-	 * Scans recursively the element to get a parent DOM element which has got TD as tag name.
+	 * Returns the map of cached legend labels items.
 	 * 
-	 * @param child child element to check
-	 * @return the parent element with TD tag name or <code>null</code> if not found.
+	 * @return the map of cached legend labels items
 	 */
-	private Element checkParent(Element child) {
-		// checks if has got a parent
-		if (child.hasParentElement()) {
-			// checks if parent has got the TD element
-			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG_TD)) {
-				// returns parent element
-				return child.getParentElement();
-			} else {
-				// calls this method recursively
-				// scanning the parent
-				return checkParent(child.getParentElement());
-			}
-		}
-		// if here if scanning the elements tree
-		// the TD element is not found
-		return null;
+	Map<String, List<LegendLabelItem>> getPluginLegendLabelsItems() {
+		return pluginLegendLabelsItems;
 	}
 
 	/**
-	 * Fires the event on specific legend item, selected by native event.
+	 * Returns the map of cached added legend labels status.
 	 * 
-	 * @param chart chart instance
-	 * @param selectedItem legend item instance, selected by native event
-	 * @param event DOM native event, got from legend element
+	 * @return the map of cached added legend labels status
 	 */
-	private void fireEvent(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
-		// checks if legend item is consistent
-		// and there is native chart stored into cache (must be)
-		if (selectedItem != null && Charts.hasNative(chart)) {
-			// checks if is a click event
-			if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
-				// invokes on click event
-				onClick(chart, selectedItem, event);
-			} else if (Event.MOUSEMOVE.value().equalsIgnoreCase(event.getType())) {
-				// invokes on hover event
-				onHover(chart, selectedItem, event);
-			} else if (Event.MOUSEOUT.value().equalsIgnoreCase(event.getType())) {
-				// invokes on leave event
-				onLeave(chart, selectedItem, event);
-			}
-		}
+	Set<String> getPluginAddedLegendStatus() {
+		return pluginAddedLegendStatus;
 	}
 
 	/**
-	 * Fires the CLICK event on specific legend item.
+	 * Returns the map of cached DIV elements of HTML legend.
 	 * 
-	 * @param chart chart instance
-	 * @param selectedItem legend item instance, selected by native event
-	 * @param event DOM native event, got from legend element
+	 * @return the map of cached DIV elements of HTML legend
 	 */
-	private void onClick(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
-		// retrieves native chart, needed to create the event
-		Chart nativeChart = Charts.getNative(chart);
-		// removes the chart id because
-		// usually the click set hidden which needs an update of chart
-		// and removing here the legend will be created to next update
-		ADDED_LEGEND.remove(chart.getId());
-		// creates the event
-		LegendClickEvent eventToFire = new LegendClickEvent(event, nativeChart, selectedItem);
-		// checks if there is any event handler
-		if (chart.getOptions().getLegend().hasClickHandlers()) {
-			// if yes, fires the event by chart
-			chart.fireEvent(eventToFire);
-		} else {
-			// if here, no handler then invokes the default
-			Defaults.get().invokeLegendOnClick(eventToFire);
-		}
-	}
-
-	/**
-	 * Fires the HOVER event on specific legend item.
-	 * 
-	 * @param chart chart instance
-	 * @param selectedItem legend item instance, selected by native event
-	 * @param event DOM native event, got from legend element
-	 */
-	private void onHover(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
-		// retrieves native chart, needed to create the event
-		Chart nativeChart = Charts.getNative(chart);
-		// set cursor
-		setCursorOnLegend(chart, true);
-		// creates the event
-		LegendHoverEvent eventToFire = new LegendHoverEvent(event, nativeChart, selectedItem);
-		// checks if there is any event handler
-		if (chart.getOptions().getLegend().hasHoverHandlers()) {
-			// if yes, fires the event by chart
-			chart.fireEvent(eventToFire);
-		} else {
-			// if here, no handler then invokes the default
-			Defaults.get().invokeLegendOnHover(eventToFire);
-		}
-	}
-
-	/**
-	 * Fires the LEAVE event on specific legend item.
-	 * 
-	 * @param chart chart instance
-	 * @param selectedItem legend item instance, selected by native event
-	 * @param event DOM native event, got from legend element
-	 */
-	private void onLeave(IsChart chart, LegendItem selectedItem, ChartNativeEvent event) {
-		// retrieves native chart, needed to create the event
-		Chart nativeChart = Charts.getNative(chart);
-		// set cursor
-		setCursorOnLegend(chart, false);
-		// creates the event
-		LegendLeaveEvent eventToFire = new LegendLeaveEvent(event, nativeChart, selectedItem);
-		// checks if there is any event handler
-		if (chart.getOptions().getLegend().hasLeaveHandlers()) {
-			// if yes, fires the event by chart
-			chart.fireEvent(eventToFire);
-		} else {
-			// if here, no handler then invokes the default
-			Defaults.get().invokeLegendOnLeave(eventToFire);
-		}
-	}
-
-	/**
-	 * Sets the cursor point when the cursor is mouse over the legend and the default one when is mouse out.
-	 * 
-	 * @param chart chart instance
-	 * @param setPointer if <code>true</code>, sets the cursor pointer, otherwise the default one
-	 */
-	private void setCursorOnLegend(IsChart chart, boolean setPointer) {
-		// checks if there is legend element
-		if (DIV_ELEMENTS.containsKey(chart.getId())) {
-			// gets legend element
-			DivElement legendElement = DIV_ELEMENTS.get(chart.getId());
-			// get options
-			HtmlLegendOptions options = OPTIONS.get(chart.getId());
-			// sets cursor
-			legendElement.getStyle().setCursor(setPointer ? options.getCursorPointer() : options.getCurrentCursor());
-		}
+	Map<String, DivElement> getPluginDivElements() {
+		return pluginDivElements;
 	}
 
 }
