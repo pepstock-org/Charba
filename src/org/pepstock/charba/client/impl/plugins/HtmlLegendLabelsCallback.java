@@ -39,6 +39,7 @@ import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
 
+import com.google.gwt.canvas.dom.client.Context2d.Repetition;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -479,7 +480,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if the result of tile factory is consistent
 			if (pattern != null && pattern.trim().length() > 0) {
 				// transforms pattern into CSS property and
-				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern);
+				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, Repetition.NO_REPEAT);
 				// applies the point style as background to color element
 				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
 				// sets the size to color element

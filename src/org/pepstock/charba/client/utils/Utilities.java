@@ -34,6 +34,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.Context2d.Repetition;
 import com.google.gwt.canvas.dom.client.FillStrokeStyle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.CanvasElement;
@@ -291,9 +292,23 @@ public final class Utilities {
 	 * @return a URL CSS property for the current content of the canvas element
 	 */
 	public static String toCSSBackgroundProperty(String dataUrl) {
+		return toCSSBackgroundProperty(dataUrl, Repetition.REPEAT);
+	}
+
+	/**
+	 * Returns a URL CSS property for the data URL for the current content of the canvas element.
+	 * 
+	 * @param dataUrl the data URL for the current content of the canvas element
+	 * @param repetition repetition of image
+	 * @return a URL CSS property for the current content of the canvas element
+	 */
+	public static String toCSSBackgroundProperty(String dataUrl, Repetition repetition) {
 		// checks if data url is consistent
 		if (dataUrl != null && dataUrl.trim().length() > 0) {
-			return PATTERN_TEMPLATE.css(dataUrl, Constants.EMPTY_STRING).asString();
+			// checks the value of repetition
+			// if not consistent is ignored using the default
+			String repetitionToApply = repetition != null ? repetition.getValue() : Constants.EMPTY_STRING;
+			return PATTERN_TEMPLATE.css(dataUrl, repetitionToApply).asString();
 		}
 		// if here data url is not consistent
 		// returns empty string
