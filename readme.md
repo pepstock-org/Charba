@@ -16,7 +16,7 @@ There are some open source charting libraries for GWT available to be used but w
 
 For all these reasons, **Charba** has been developed, leveraging on [Chart.JS](http://www.chartjs.org/) capabilities which are now available to GWT developers.
 
-![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)
+[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/2.7/src/org/pepstock/charba/showcase/client/views/HomeView.java)
     
 Building
 --------
