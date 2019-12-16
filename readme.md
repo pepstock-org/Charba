@@ -137,6 +137,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * [#44](https://github.com/pepstock-org/Charba/issues/44) check if the plugin is forcedly disable (by boolean) instead of checking if there is at least an option instance. New `isForcedlyDisabled` method has been added to `Plugins` classes into options and configuration and the check has been changed into `GlobalPlugins` class.
  * [#45](https://github.com/pepstock-org/Charba/issues/45) add specific `LegendLabelsCallback` implementation for `ColorSchemes` plugin in order to change the legend when a color scheme is changed during the chart lifecycle.
  * [#47](https://github.com/pepstock-org/Charba/issues/47) remove useless checks to activate ChartPointer plugin in order to have a cursor also on legend.
+ * [#48](https://github.com/pepstock-org/Charba/issues/48) change selection items taking care if a bar chart has got cartesian axes with offset to `true`.
     
 ### Development
 

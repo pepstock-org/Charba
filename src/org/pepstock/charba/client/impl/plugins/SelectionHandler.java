@@ -21,12 +21,14 @@ import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -571,12 +573,19 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 			// checks the type of chart and scale
 			// LINE and axis TIME must be added by 1 end of datasets
-			if (ChartType.LINE.equals(chart.getBaseType()) || AxisType.TIME.equals(scaleItem.getType())) {
+			if (ChartType.LINE.equals(chart.getBaseType())) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
 			} else if (ChartType.BAR.equals(chart.getBaseType())) {
-				// fires the event that dataset items selection
-				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
+				// checks if there is an offset
+				boolean barOffset = getOffset(scaleItem);
+				if (AxisType.TIME.equals(scaleItem.getType()) && !barOffset) {
+					// fires the event that dataset items selection
+					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
+				} else {
+					// fires the event that dataset items selection
+					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
+				}
 			}
 		}
 	}
@@ -1097,16 +1106,16 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
-	 * Calculates the selection tricks with amount of ticks, the starting point and width between ticks.
+	 * Calculates the selection ticks with amount of ticks, the starting point and width between ticks.
 	 * 
 	 * @param node chart node instance
-	 * @return a selection tricks with amount of ticks, the starting point and width between ticks
+	 * @return a selection ticks with amount of ticks, the starting point and width between ticks
 	 */
 	private SelectionTicks calculateAreaItemCount(ChartNode node) {
 		// gets chart area
 		ChartAreaNode chartArea = node.getChartArea();
 		// creates result
-		final SelectionTicks selectionTricks = new SelectionTicks();
+		final SelectionTicks selectionTicks = new SelectionTicks();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
@@ -1115,17 +1124,52 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// in case of time axis, it must be reduce by1 because the dataset items
 		// are always located in line with tick
 		if (ChartType.LINE.equals(chart.getBaseType())) {
-			selectionTricks.setCount(getDatasetsItemsCount() - 1);
+			selectionTicks.setCount(getDatasetsItemsCount() - 1);
 		} else {
-			selectionTricks.setCount(AxisType.TIME.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
+			// calculates the offset parameter
+			boolean barOffset = getOffset(scaleItem);
+			// then calculated the amount of ticks
+			selectionTicks.setCount(AxisType.TIME.equals(scaleItem.getType()) && !barOffset ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
 		}
 		// gets the left of chart area as starting point
-		selectionTricks.setX(chartArea.getLeft());
+		selectionTicks.setX(chartArea.getLeft());
 		// calculates the section size for every dataset item
 		// PAY attention to use DOUBLE because there is a problem
 		// if rounds the values (does not select exactly the right section)
-		selectionTricks.setWidth((double) scaleItem.getWidth() / (double) selectionTricks.getCount());
-		return selectionTricks;
+		selectionTicks.setWidth((double) scaleItem.getWidth() / (double) selectionTicks.getCount());
+		return selectionTicks;
+	}
+
+	/**
+	 * Checks and returns the offset for BAR chart.<br>
+	 * Based on offset parameter of axis, the bars are drawn in different way and the the total amount of ticks could be
+	 * different.
+	 * 
+	 * @param scaleItem scale item to check
+	 * @return <code>true</code> if an offset has been set otherwise <code>false</code>.
+	 */
+	private boolean getOffset(ScaleItem scaleItem) {
+		// default offset
+		boolean offset = false;
+		// checks if is a BAR chart
+		if (ChartType.BAR.equals(chart.getBaseType()) && chart.getOptions() instanceof BarOptions) {
+			// gets the scales for X
+			List<Scale> scales = chart.getNode().getOptions().getScales().getXAxes();
+			// checks if any scale has been configured
+			if (!scales.isEmpty()) {
+				// scans configured scales
+				for (Scale scale : scales) {
+					// checks if is the right scale
+					// used for selection by ID
+					if (options.getXAxisID().equalsIgnoreCase(scale.getId())) {
+						// gets the offset
+						offset = scale.isOffset();
+					}
+				}
+			}
+		}
+		// returns offset
+		return offset;
 	}
 
 }
