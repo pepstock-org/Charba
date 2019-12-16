@@ -578,7 +578,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
 			} else if (ChartType.BAR.equals(chart.getBaseType())) {
 				// checks if there is an offset
-				boolean barOffset = getOffset(scaleItem);
+				boolean barOffset = getOffset();
 				if (AxisType.TIME.equals(scaleItem.getType()) && !barOffset) {
 					// fires the event that dataset items selection
 					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
@@ -1127,7 +1127,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			selectionTicks.setCount(getDatasetsItemsCount() - 1);
 		} else {
 			// calculates the offset parameter
-			boolean barOffset = getOffset(scaleItem);
+			boolean barOffset = getOffset();
 			// then calculated the amount of ticks
 			selectionTicks.setCount(AxisType.TIME.equals(scaleItem.getType()) && !barOffset ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
 		}
@@ -1145,10 +1145,9 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * Based on offset parameter of axis, the bars are drawn in different way and the the total amount of ticks could be
 	 * different.
 	 * 
-	 * @param scaleItem scale item to check
 	 * @return <code>true</code> if an offset has been set otherwise <code>false</code>.
 	 */
-	private boolean getOffset(ScaleItem scaleItem) {
+	private boolean getOffset() {
 		// default offset
 		boolean offset = false;
 		// checks if is a BAR chart
