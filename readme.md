@@ -101,6 +101,20 @@ At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/d
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.7/charba.fbp) project to looking offline for bugs.
 
+Going to new version
+-------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+ * move `drawOnAttach` and `destroyOnDetach` chart property into options in order they can be set globally.
+
+### Fixed Bugs
+
+### Development
+
+
 License
 -------
 

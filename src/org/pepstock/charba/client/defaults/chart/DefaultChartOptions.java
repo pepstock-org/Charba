@@ -245,4 +245,24 @@ public final class DefaultChartOptions extends AbstractDefaultOptions implements
 		return chartOptions.getStartAngle();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDrawOnAttach()
+	 */
+	@Override
+	public boolean isDrawOnAttach() {
+		return chartOptions.isDrawOnAttach();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDestroyOnDetach()
+	 */
+	@Override
+	public boolean isDestroyOnDetach() {
+		return chartOptions.isDestroyOnDetach();
+	}
+
 }

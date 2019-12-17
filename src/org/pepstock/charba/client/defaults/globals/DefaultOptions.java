@@ -53,6 +53,10 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
+	private static final boolean DEFAULT_DRAW_ON_ATTACH = true;
+
+	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
+
 	/**
 	 * Creates the object. Protected to avoid any instantiation
 	 */
@@ -219,4 +223,25 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	public double getStartAngle() {
 		return DEFAULT_START_ANGLE;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDrawOnAttach()
+	 */
+	@Override
+	public boolean isDrawOnAttach() {
+		return DEFAULT_DRAW_ON_ATTACH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDestroyOnDetach()
+	 */
+	@Override
+	public boolean isDestroyOnDetach() {
+		return DEFAULT_DESTROY_ON_DETACH;
+	}
+
 }

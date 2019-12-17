@@ -82,7 +82,10 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		CUTOUT_PERCENTAGE("cutoutPercentage"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
-		START_ANGLE("startAngle");
+		START_ANGLE("startAngle"),
+		// internal key to store draw and destroy chart options
+		CHARBA_DRAW_ON_ATTACH("_charbaDrawOnAttach"),
+		CHARBA_DESTROY_ON_DETACH("_charbaDestroyOnDetach");
 
 		// name value of property
 		private final String value;
@@ -331,6 +334,47 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public double getDevicePixelRatio() {
 		return getValue(Property.DEVICE_PIXEL_RATIO, getDefaultValues().getDevicePixelRatio());
+	}
+	
+	/**
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 *         <code>false</code>. Default is <code>true</code>.
+	 */
+	public boolean isDrawOnAttach() {
+		return getValue(Property.CHARBA_DRAW_ON_ATTACH, getDefaultValues().isDrawOnAttach());
+	}
+
+	/**
+	 * Sets <code>true</code> if the chart is configured to be draw on the attach of DIV element, otherwise <code>false</code>.
+	 * 
+	 * @param drawOnAttach the drawOnAttach to set
+	 */
+	public void setDrawOnAttach(boolean drawOnAttach) {
+		setValue(Property.CHARBA_DRAW_ON_ATTACH, drawOnAttach);
+	}
+
+	/**
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
+	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 */
+	public boolean isDestroyOnDetach() {
+		return getValue(Property.CHARBA_DESTROY_ON_DETACH, getDefaultValues().isDestroyOnDetach());
+	}
+
+	/**
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @param destroyOnDetach the destroyOnDetach to set
+	 */
+	public void setDestroyOnDetach(boolean destroyOnDetach) {
+		setValue(Property.CHARBA_DESTROY_ON_DETACH, destroyOnDetach);
 	}
 
 	/**

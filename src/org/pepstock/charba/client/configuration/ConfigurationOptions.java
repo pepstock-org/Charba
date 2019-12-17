@@ -471,6 +471,47 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 *         <code>false</code>. Default is <code>true</code>.
+	 */
+	public boolean isDrawOnAttach() {
+		return getConfiguration().isDrawOnAttach();
+	}
+
+	/**
+	 * Sets <code>true</code> if the chart is configured to be draw on the attach of DIV element, otherwise <code>false</code>.
+	 * 
+	 * @param drawOnAttach the drawOnAttach to set
+	 */
+	public void setDrawOnAttach(boolean drawOnAttach) {
+		getConfiguration().setDrawOnAttach(drawOnAttach);
+	}
+
+	/**
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
+	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 */
+	public boolean isDestroyOnDetach() {
+		return getConfiguration().isDestroyOnDetach();
+	}
+
+	/**
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @param destroyOnDetach the destroyOnDetach to set
+	 */
+	public void setDestroyOnDetach(boolean destroyOnDetach) {
+		getConfiguration().setDestroyOnDetach(destroyOnDetach);
+	}
+
+	/**
 	 * Returns <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.
 	 * 
 	 * @return <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.

@@ -83,10 +83,6 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	private final Data data = new Data();
 	// plugins of this chart
 	private final Plugins plugins;
-	// flag if must be draw on attach
-	private boolean drawOnAttach = true;
-	// flag if must be destroy on detach
-	private boolean destroyOnDetach = true;
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// merged options of defaults
@@ -200,7 +196,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// then returns the current type
 		return currentType;
 	}
-
+	
 	/**
 	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into
 	 * {@link Charts}.
@@ -322,7 +318,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final boolean isDrawOnAttach() {
-		return drawOnAttach;
+		// checks if options are consistent
+		IsChart.checkIfConsistent(this);
+		return getOptions().isDrawOnAttach();
 	}
 
 	/**
@@ -332,7 +330,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void setDrawOnAttach(boolean drawOnAttach) {
-		this.drawOnAttach = drawOnAttach;
+		// checks if options are consistent
+		IsChart.checkIfConsistent(this);
+		getOptions().setDrawOnAttach(drawOnAttach);
 	}
 
 	/**
@@ -344,7 +344,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final boolean isDestroyOnDetach() {
-		return destroyOnDetach;
+		// checks if options are consistent
+		IsChart.checkIfConsistent(this);
+		return getOptions().isDestroyOnDetach();
 	}
 
 	/**
@@ -355,7 +357,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void setDestroyOnDetach(boolean destroyOnDetach) {
-		this.destroyOnDetach = destroyOnDetach;
+		// checks if options are consistent
+		IsChart.checkIfConsistent(this);
+		getOptions().setDestroyOnDetach(destroyOnDetach);
 	}
 
 	/*
@@ -566,8 +570,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void reconfigure(UpdateConfiguration configuration) {
-		// checks if chart is created
-		if (chart != null) {
+		// checks if chart is created and consistent
+		if (chart != null && IsChart.isConsistent(this)) {
 			// updates option passed by configuration element
 			Configuration tempConfiguration = new Configuration();
 			// gets options
@@ -742,8 +746,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void draw() {
-		// checks if canvas is supported
-		if (isCanvasSupported) {
+		// checks if canvas is supported and the chart is consistent
+		if (isCanvasSupported && IsChart.isConsistent(this)) {
 			// calls plugins for onConfigure method
 			Defaults.get().getPlugins().onChartConfigure(configuration, this);
 			plugins.onChartConfigure(configuration, this);

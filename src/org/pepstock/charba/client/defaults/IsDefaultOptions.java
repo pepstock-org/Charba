@@ -189,5 +189,23 @@ public interface IsDefaultOptions {
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
+	
+	/**
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 *         <code>false</code>. Default is <code>true</code>.
+	 */
+	boolean isDrawOnAttach();
+
+	/**
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
+	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 */
+	boolean isDestroyOnDetach();
 
 }
