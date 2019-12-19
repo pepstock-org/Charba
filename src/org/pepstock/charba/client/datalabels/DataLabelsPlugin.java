@@ -62,7 +62,7 @@ public final class DataLabelsPlugin {
 	public static void enable(boolean enableToAllCharts) {
 		// Inject Chart.js if not already loaded
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// injects LABELS plugin
+		// injects DATALABELS plugin
 		Injector.ensureInjected(Extensions.INSTANCE.datalabelsPlugin());
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
