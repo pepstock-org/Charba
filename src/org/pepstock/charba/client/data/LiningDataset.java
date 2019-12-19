@@ -90,6 +90,14 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border joinstyle function
 	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border capstyle function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> hoverBorderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border dash function
+	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> hoverBorderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border dash offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border joinstyle function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point background color function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border color function
@@ -143,6 +151,14 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private BorderDashOffsetCallback borderDashOffsetCallback = null;
 	// border join style callback instance
 	private BorderJoinStyleCallback borderJoinStyleCallback = null;
+	// hover border cap style callback instance
+	private BorderCapStyleCallback hoverBorderCapStyleCallback = null;
+	// hover border dash callback instance
+	private BorderDashCallback hoverBorderDashCallback = null;
+	// hover border dash offset callback instance
+	private BorderDashOffsetCallback hoverBorderDashOffsetCallback = null;
+	// hover border join style callback instance
+	private BorderJoinStyleCallback hoverBorderJoinStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -153,6 +169,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_CAP_STYLE("borderCapStyle"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
+		HOVER_BORDER_DASH("hoverBorderDash"),
+		HOVER_BORDER_DASH_OFFSET("hoverBorderDashOffset"),
+		HOVER_BORDER_CAP_STYLE("hoverBorderCapStyle"),
+		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
 		LINE_TENSION("lineTension"),
 		POINT_BACKGROUND_COLOR("pointBackgroundColor"),
 		POINT_BORDER_COLOR("pointBorderColor"),
@@ -238,13 +258,21 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// gets value calling callback
 		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
 		// gets value calling callback
-		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context));
+		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, borderCapStyleCallback));
 		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context));
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, borderDashCallback));
 		// gets value calling callback
 		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
-		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context));
+		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, borderJoinStyleCallback));
+		// gets value calling callback
+		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, hoverBorderCapStyleCallback));
+		// gets value calling callback
+		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, hoverBorderDashCallback));
+		// gets value calling callback
+		hoverBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		// gets value calling callback
+		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, hoverBorderJoinStyleCallback));
 	}
 
 	/*
@@ -688,6 +716,357 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public double getLineTension() {
 		return getValue(Property.LINE_TENSION, getDefaultValues().getElements().getLine().getTension());
+	}
+
+	/**
+	 * Sets the fill color of the elements when hovered
+	 * 
+	 * @param color the fill color of the elements when hovered
+	 */
+	public void setHoverBackgroundColor(IsColor color) {
+		setHoverBackgroundColor(checkValue(color));
+	}
+
+	/**
+	 * Sets the fill color of the elements when hovered
+	 * 
+	 * @param color the fill color of the elements when hovered
+	 */
+	public void setHoverBackgroundColor(String color) {
+		// resets callback
+		setHoverBackgroundColor((BackgroundColorCallback) null);
+		// stores value
+		setValue(Dataset.Property.HOVER_BACKGROUND_COLOR, color);
+		// removes the flag because default is string color
+		resetBeingColors(Dataset.Property.HOVER_BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Sets the fill pattern of the elements when hovered.
+	 * 
+	 * @param pattern the fill pattern of element when hovered.
+	 */
+	public void setHoverBackgroundColor(Pattern pattern) {
+		// resets callback
+		setHoverBackgroundColor((BackgroundColorCallback) null);
+		// sets value to patterns
+		getPatternsContainer().setObjects(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern));
+		// removes the property
+		resetBeingPatterns(Dataset.Property.HOVER_BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Sets the fill gradient of the elements when hovered.
+	 * 
+	 * @param gradient the fill gradient of the elements when hovered.
+	 */
+	public void setHoverBackgroundColor(Gradient gradient) {
+		// resets callback
+		setHoverBackgroundColor((BackgroundColorCallback) null);
+		// sets value to gradients
+		getGradientsContainer().setObjects(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient));
+		// removes previous configuration to other containers
+		resetBeingGradients(Dataset.Property.HOVER_BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns the fill color of the elements when hovered.
+	 * 
+	 * @return the fill color of the elements when hovered
+	 */
+	public String getHoverBackgroundColorAsString() {
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+			// returns color as string
+			return getValue(Dataset.Property.HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return getDefaultValues().getElements().getLine().getBackgroundColorAsString();
+		}
+	}
+
+	/**
+	 * Returns the fill color of the elements when hovered.
+	 * 
+	 * @return the fill color of the elements when hovered
+	 */
+	public IsColor getHoverBackgroundColor() {
+		return ColorBuilder.parse(getHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill patters of elements when hovered. If property is missing or not a pattern, returns <code>null</code>.
+	 * 
+	 * @return the fill patterns of elements when hovered. If property is missing or not a pattern, returns <code>null</code>
+	 */
+	public Pattern getHoverBackgroundColorAsPatterns() {
+		// checks if the property is not a pattern (therefore a color or gradient)
+		if (hasPatterns(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.Property.HOVER_BACKGROUND_COLOR);
+			// returns color as pattern
+			return patterns.get(0);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or a color
+			// returns null
+			return null;
+		}
+	}
+
+	/**
+	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns <code>null</code>.
+	 * 
+	 * @return the fill gradients of elements when hovered. If property is missing or not a gradient, returns <code>null</code>
+	 */
+	public Gradient getHoverBackgroundColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.HOVER_BACKGROUND_COLOR);
+			// returns color as gradient
+			return gradients.get(0);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or a color
+			// returns null
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the stroke color of the elements when hovered
+	 * 
+	 * @param color the stroke color of the elements when hovered
+	 */
+	public void setHoverBorderColor(IsColor color) {
+		// resets callback
+		setHoverBorderColor(checkValue(color));
+	}
+
+	/**
+	 * Sets the stroke color of the elements when hovered
+	 * 
+	 * @param color the stroke color of the elements when hovered
+	 */
+	public void setHoverBorderColor(String color) {
+		// resets callback
+		setHoverBorderColor((BorderColorCallback) null);
+		// stores value
+		setValue(Dataset.Property.HOVER_BORDER_COLOR, color);
+		// removes previous configuration to other containers
+		resetBeingColors(Dataset.Property.HOVER_BORDER_COLOR);
+	}
+
+	/**
+	 * Sets the stroke gradient of elements when hovered as gradient.
+	 * 
+	 * @param gradient the stroke gradient of elements when hovered as gradient.
+	 */
+	public void setHoverBorderColor(Gradient gradient) {
+		// resets callback
+		setHoverBorderColor((BorderColorCallback) null);
+		// sets value to gradients
+		getGradientsContainer().setObjects(Dataset.Property.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient));
+		// removes previous configuration to other containers
+		resetBeingGradients(Dataset.Property.HOVER_BORDER_COLOR);
+	}
+
+	/**
+	 * Returns the stroke color of the elements when hovered.
+	 * 
+	 * @return the stroke color of the elements when hovered.
+	 */
+	public String getHoverBorderColorAsString() {
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Dataset.Property.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
+			// returns color as string
+			return getValue(Dataset.Property.HOVER_BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return getDefaultValues().getElements().getLine().getBorderColorAsString();
+		}
+	}
+
+	/**
+	 * Returns the stroke color of the elements when hovered
+	 * 
+	 * @return the stroke color of the elements when hovered
+	 */
+	public IsColor getHoverBorderColor() {
+		return ColorBuilder.parse(getHoverBorderColorAsString());
+	}
+
+	/**
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
+	 * <code>null</code>.
+	 * 
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
+	 *         <code>null</code>
+	 */
+	public Gradient getHoverBorderColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color)
+		if (hasGradients(Dataset.Property.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.HOVER_BORDER_COLOR);
+			// returns color as gradient
+			return gradients.get(0);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or a color
+			// returns null
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the stroke width of the elements when hovered.
+	 * 
+	 * @param width the stroke width of the elements when hovered.
+	 */
+	public void setHoverBorderWidth(int width) {
+		// resets callback
+		setHoverBorderWidth((BorderWidthCallback) null);
+		// stores value
+		setValue(Dataset.Property.HOVER_BORDER_WIDTH, width);
+	}
+
+	/**
+	 * Returns the stroke width of the elements when hovered.
+	 * 
+	 * @return list of the stroke width of the elements when hovered.
+	 */
+	public int getHoverBorderWidth() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderWidthCallback() == null) {
+			return getValue(Dataset.Property.HOVER_BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderWidth();
+	}
+
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern, when element is hovered.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern, when element is hovered
+	 */
+	public void setHoverBorderDash(int... borderDash) {
+		// resets callback
+		setHoverBorderDash((BorderDashCallback) null);
+		// stores value
+		setArrayValue(Property.HOVER_BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern, when element is hovered.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 *         lines and gaps which describe the pattern, when element is hovered
+	 */
+	public List<Integer> getHoverBorderDash() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderDashCallback() == null) {
+			ArrayInteger array = getArrayValue(Property.HOVER_BORDER_DASH);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return new ArrayIntegerList();
+	}
+
+	/**
+	 * Sets the line dash pattern offset or "phase", when element is hovered.
+	 * 
+	 * @param borderDashOffset the line dash pattern offset or "phase", when element is hovered
+	 */
+	public void setHoverBorderDashOffset(int borderDashOffset) {
+		// resets callback
+		setHoverBorderDashOffset((BorderDashOffsetCallback) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_DASH_OFFSET, borderDashOffset);
+	}
+
+	/**
+	 * Returns the line dash pattern offset or "phase", when element is hovered.
+	 * 
+	 * @return the line dash pattern offset or "phase", when element is hovered
+	 */
+	public int getHoverBorderDashOffset() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderDashOffsetCallback() == null) {
+			return getValue(Property.HOVER_BORDER_DASH_OFFSET, getDefaultValues().getElements().getLine().getBorderDashOffset());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderDashOffset();
+	}
+
+	/**
+	 * Sets how the end points of every line are drawn, when element is hovered.<br>
+	 * There are three possible values for this property and those are: butt, round and square.
+	 * 
+	 * @param borderCapStyle how the end points of every line are drawn, when element is hovered
+	 */
+	public void setHoverBorderCapStyle(CapStyle borderCapStyle) {
+		// resets callback
+		setHoverBorderCapStyle((BorderCapStyleCallback) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_CAP_STYLE, borderCapStyle);
+	}
+
+	/**
+	 * Returns how the end points of every line are drawn, when element is hovered.<br>
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
+	 * to butt.
+	 * 
+	 * @return how the end points of every line are drawn, when element is hovered
+	 */
+	public CapStyle getHoverBorderCapStyle() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderCapStyleCallback() == null) {
+			return getValue(Property.HOVER_BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderCapStyle();
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
+	 * are skipped), when element is hovered.<br>
+	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
+	 */
+	public void setHoverBorderJoinStyle(JoinStyle borderJoinStyle) {
+		// resets callback
+		setHoverBorderJoinStyle((BorderJoinStyleCallback) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
+	 * are skipped), when element is hovered.<br>
+	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
+	 * @return There are three possible values for this property: round, bevel and miter.
+	 */
+	public JoinStyle getHoverBorderJoinStyle() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderJoinStyleCallback() == null) {
+			return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderJoinStyle();
 	}
 
 	/**
@@ -1768,6 +2147,114 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.BORDER_DASH_OFFSET);
 		}
 	}
+	
+	/**
+	 * Returns the border cap style callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border cap style callback when element is hovered, if set, otherwise <code>null</code>
+	 */
+	public BorderCapStyleCallback getHoverBorderCapStyleCallback() {
+		return hoverBorderCapStyleCallback;
+	}
+
+	/**
+	 * Sets the border cap style callback when element is hovered.
+	 * 
+	 * @param borderCapStyleCallback the border cap style callback when element is hovered
+	 */
+	public void setHoverBorderCapStyle(BorderCapStyleCallback borderCapStyleCallback) {
+		// sets the callback
+		this.hoverBorderCapStyleCallback = borderCapStyleCallback;
+		// checks if callback is consistent
+		if (borderCapStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_BORDER_CAP_STYLE, hoverBorderCapStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_BORDER_CAP_STYLE);
+		}
+	}
+
+	/**
+	 * Returns the border join style callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback when element is hovered, if set, otherwise <code>null</code>.
+	 */
+	public BorderJoinStyleCallback getHoverBorderJoinStyleCallback() {
+		return hoverBorderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback when element is hovered.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
+	 */
+	public void setHoverBorderJoinStyle(BorderJoinStyleCallback borderJoinStyleCallback) {
+		// sets the callback
+		this.hoverBorderJoinStyleCallback = borderJoinStyleCallback;
+		// checks if callback is consistent
+		if (borderJoinStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_BORDER_JOIN_STYLE, hoverBorderJoinStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_BORDER_JOIN_STYLE);
+		}
+	}
+
+	/**
+	 * Returns the border dash callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border dash callback when element is hovered, if set, otherwise <code>null</code>.
+	 */
+	public BorderDashCallback getHoverBorderDashCallback() {
+		return hoverBorderDashCallback;
+	}
+
+	/**
+	 * Sets the border dash callback when element is hovered.
+	 * 
+	 * @param borderDashCallback the border dash callback when element is hovered.
+	 */
+	public void setHoverBorderDash(BorderDashCallback borderDashCallback) {
+		// sets the callback
+		this.hoverBorderDashCallback = borderDashCallback;
+		// checks if callback is consistent
+		if (borderDashCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_BORDER_DASH, hoverBorderDashCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_BORDER_DASH);
+		}
+	}
+
+	/**
+	 * Returns the border dash offset callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border dash offset callback when element is hovered, if set, otherwise <code>null</code>.
+	 */
+	public BorderDashOffsetCallback getHoverBorderDashOffsetCallback() {
+		return hoverBorderDashOffsetCallback;
+	}
+
+	/**
+	 * Sets the border dash offset callback when element is hovered.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback when element is hovered.
+	 */
+	public void setHoverBorderDashOffset(BorderDashOffsetCallback borderDashOffsetCallback) {
+		// sets the callback
+		this.hoverBorderDashOffsetCallback = borderDashOffsetCallback;
+		// checks if callback is consistent
+		if (borderDashOffsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_BORDER_DASH_OFFSET, hoverBorderDashOffsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_BORDER_DASH_OFFSET);
+		}
+	}
 
 	/**
 	 * Returns the fill callback, if set, otherwise <code>null</code>.
@@ -1884,9 +2371,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * Returns a {@link CapStyle} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
+	 * @param borderCapStyleCallback border cap style callback instance
 	 * @return a object property value, as {@link CapStyle}
 	 */
-	private String onBorderCapStyle(ScriptableContext context) {
+	private String onBorderCapStyle(ScriptableContext context, BorderCapStyleCallback borderCapStyleCallback) {
 		// gets value
 		CapStyle result = ScriptableUtils.getOptionValue(context, borderCapStyleCallback);
 		// checks result
@@ -1901,9 +2389,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * Returns a {@link JoinStyle} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
+	 * @param borderJoinStyleCallback border join style callback instance
 	 * @return a object property value, as {@link JoinStyle}
 	 */
-	private String onBorderJoinStyle(ScriptableContext context) {
+	private String onBorderJoinStyle(ScriptableContext context, BorderJoinStyleCallback borderJoinStyleCallback) {
 		// gets value
 		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
 		// checks result
@@ -1918,9 +2407,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * Returns an array of integer when the callback has been activated.
 	 * 
 	 * @param context native object as context.
+	 * @param borderDashCallback border dash callback instance 
 	 * @return an array of integer
 	 */
-	private Array onBorderDash(ScriptableContext context) {
+	private Array onBorderDash(ScriptableContext context, BorderDashCallback borderDashCallback) {
 		// gets value
 		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
 		// default result

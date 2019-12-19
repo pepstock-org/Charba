@@ -109,11 +109,14 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * move `drawOnAttach` and `destroyOnDetach` chart property into options in order they can be set globally.
-
-### Fixed Bugs
-
-### Development
-
+ * add the following hover styles (set by callback as well) on lining datasets, from CHART.JS version 2.9.3 (see [PR here](https://github.com/chartjs/Chart.js/pull/6527) and its limitations):
+   * `hoverBackgroundColor`
+   * `hoverBorderCapStyle`
+   * `hoverBorderColor`
+   * `hoverBorderDash`
+   * `hoverBorderDashOffset`
+   * `hoverBorderJoinStyle`
+   * `hoverBorderWidth` 
 
 License
 -------
