@@ -47,7 +47,7 @@ final class JsControllerHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsControllerHelper instance.
+	 * @return helper instance.
 	 */
 	static JsControllerHelper get() {
 		return INSTANCE;

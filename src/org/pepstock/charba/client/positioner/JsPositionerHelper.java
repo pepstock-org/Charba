@@ -47,7 +47,7 @@ final class JsPositionerHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsControllerHelper instance.
+	 * @return helper instance.
 	 */
 	static JsPositionerHelper get() {
 		return INSTANCE;

@@ -50,7 +50,7 @@ final class JsHtmlLegendBuilderHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsCallbaclhelper instance.
+	 * @return helper instance.
 	 */
 	static JsHtmlLegendBuilderHelper get() {
 		return INSTANCE;

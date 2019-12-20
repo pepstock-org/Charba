@@ -57,7 +57,7 @@ final class JsCallbacksHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsCallbaclhelper instance.
+	 * @return helper instance.
 	 */
 	static JsCallbacksHelper get() {
 		return INSTANCE;

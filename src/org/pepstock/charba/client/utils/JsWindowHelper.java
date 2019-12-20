@@ -46,7 +46,7 @@ public final class JsWindowHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsHelper instance.
+	 * @return helper instance.
 	 */
 	public static JsWindowHelper get() {
 		return INSTANCE;

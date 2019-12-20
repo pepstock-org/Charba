@@ -49,7 +49,7 @@ public final class JsHelper {
 	/**
 	 * Singleton object to get the helper instance
 	 * 
-	 * @return jsHelper instance.
+	 * @return helper instance.
 	 */
 	public static JsHelper get() {
 		return INSTANCE;
