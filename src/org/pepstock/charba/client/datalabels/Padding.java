@@ -35,13 +35,13 @@ public final class Padding extends AbstractElement {
 	public static final int DEFAULT_PADDING = 4;
 
 	// defaults global options instance
-	private DataLabelsDefaultsPadding defaultsOptions;
+	private DefaultsPadding defaultsOptions;
 
 	/**
 	 * Creates new padding element.
 	 */
 	public Padding() {
-		this(new DataLabelsDefaultsPadding());
+		this(new DefaultsPadding());
 	}
 
 	/**
@@ -49,7 +49,7 @@ public final class Padding extends AbstractElement {
 	 * 
 	 * @param defaultsOptions default PADDING options to returns the default when required.
 	 */
-	Padding(DataLabelsDefaultsPadding defaultsOptions) {
+	Padding(DefaultsPadding defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
@@ -59,7 +59,7 @@ public final class Padding extends AbstractElement {
 	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default PADDING options to returns the default when required.
 	 */
-	Padding(NativeObject nativeObject, DataLabelsDefaultsPadding defaultsOptions) {
+	Padding(NativeObject nativeObject, DefaultsPadding defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}

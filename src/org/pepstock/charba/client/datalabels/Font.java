@@ -42,7 +42,7 @@ public final class Font extends AbstractElement {
 	public static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	// defaults global options instance
-	private DataLabelsDefaultsFont defaultsOptions;
+	private DefaultsFont defaultsOptions;
 
 	/**
 	 * Name of properties of native object.
@@ -84,7 +84,7 @@ public final class Font extends AbstractElement {
 	 */
 	public Font() {
 		// uses the default values for font
-		this(new DataLabelsDefaultsFont());
+		this(new DefaultsFont());
 	}
 
 	/**
@@ -92,7 +92,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @param defaultsOptions default FONT options to returns the default when required.
 	 */
-	Font(DataLabelsDefaultsFont defaultsOptions) {
+	Font(DefaultsFont defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
@@ -102,7 +102,7 @@ public final class Font extends AbstractElement {
 	 * @param nativeObject stored font values into native object to read.
 	 * @param defaultsOptions default FONT options to returns the default when required.
 	 */
-	Font(NativeObject nativeObject, DataLabelsDefaultsFont defaultsOptions) {
+	Font(NativeObject nativeObject, DefaultsFont defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}

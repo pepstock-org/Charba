@@ -64,7 +64,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class DataLabelsDefaultsOptionsFactory implements NativeObjectContainerFactory<DataLabelsDefaultsOptions> {
+	static class DataLabelsDefaultsOptionsFactory implements NativeObjectContainerFactory<DefaultsOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -73,9 +73,9 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 		 * NativeObject)
 		 */
 		@Override
-		public DataLabelsDefaultsOptions create(NativeObject nativeObject) {
+		public DefaultsOptions create(NativeObject nativeObject) {
 			// creates the default global option by native object
-			return new DataLabelsDefaultsOptions(nativeObject);
+			return new DefaultsOptions(nativeObject);
 		}
 
 	}

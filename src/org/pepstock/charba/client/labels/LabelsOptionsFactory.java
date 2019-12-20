@@ -63,7 +63,7 @@ public final class LabelsOptionsFactory extends AbstractPluginCachedOptionsFacto
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class LabelsDefaultsOptionsFactory implements NativeObjectContainerFactory<LabelsDefaultsOptions> {
+	static class LabelsDefaultsOptionsFactory implements NativeObjectContainerFactory<DefaultsOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -72,9 +72,9 @@ public final class LabelsOptionsFactory extends AbstractPluginCachedOptionsFacto
 		 * NativeObject)
 		 */
 		@Override
-		public LabelsDefaultsOptions create(NativeObject nativeObject) {
+		public DefaultsOptions create(NativeObject nativeObject) {
 			// creates the default global option by native object
-			return new LabelsDefaultsOptions(nativeObject);
+			return new DefaultsOptions(nativeObject);
 		}
 
 	}

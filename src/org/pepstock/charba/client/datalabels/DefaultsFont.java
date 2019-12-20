@@ -28,12 +28,12 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DataLabelsDefaultsFont extends NativeObjectContainer {
+final class DefaultsFont extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	DataLabelsDefaultsFont() {
+	DefaultsFont() {
 		super();
 	}
 
@@ -42,7 +42,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	DataLabelsDefaultsFont(NativeObject nativeObject) {
+	DefaultsFont(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

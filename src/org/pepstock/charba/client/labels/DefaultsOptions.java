@@ -27,12 +27,12 @@ import org.pepstock.charba.client.labels.enums.Render;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class LabelsDefaultsOptions extends NativeObjectContainer {
+final class DefaultsOptions extends NativeObjectContainer {
 
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
-	LabelsDefaultsOptions() {
+	DefaultsOptions() {
 		super();
 	}
 
@@ -41,7 +41,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */
-	LabelsDefaultsOptions(NativeObject nativeObject) {
+	DefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

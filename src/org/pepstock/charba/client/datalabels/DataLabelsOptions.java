@@ -267,7 +267,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	private PaddingCallback paddingCallback = null;
 
 	// defaults global options instance
-	private DataLabelsDefaultsOptions defaultsOptions;
+	private DefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final DataLabelsDefaultsOptionsFactory defaultsFactory = new DataLabelsDefaultsOptionsFactory();
 	// listener inner element

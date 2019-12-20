@@ -31,22 +31,22 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DataLabelsDefaultsOptions extends NativeObjectContainer {
+final class DefaultsOptions extends NativeObjectContainer {
 
 	// default padding options
-	private final DataLabelsDefaultsPadding padding;
+	private final DefaultsPadding padding;
 	// default font options
-	private final DataLabelsDefaultsFont font;
+	private final DefaultsFont font;
 
 	/**
 	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
-	DataLabelsDefaultsOptions() {
+	DefaultsOptions() {
 		super();
 		// creates default padding options
-		padding = new DataLabelsDefaultsPadding();
+		padding = new DefaultsPadding();
 		// creates default font options
-		font = new DataLabelsDefaultsFont();
+		font = new DefaultsFont();
 		// sets the native object inside this object
 		setValue(DataLabelsOptions.Property.PADDING, padding);
 		setValue(DataLabelsOptions.Property.FONT, font);
@@ -58,12 +58,12 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */
-	DataLabelsDefaultsOptions(NativeObject nativeObject) {
+	DefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 		// reads default padding options from main object
-		padding = new DataLabelsDefaultsPadding(getValue(DataLabelsOptions.Property.PADDING));
+		padding = new DefaultsPadding(getValue(DataLabelsOptions.Property.PADDING));
 		// reads default font options from main object
-		font = new DataLabelsDefaultsFont(getValue(DataLabelsOptions.Property.FONT));
+		font = new DefaultsFont(getValue(DataLabelsOptions.Property.FONT));
 	}
 
 	/**
@@ -71,7 +71,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font element.
 	 */
-	DataLabelsDefaultsFont getFont() {
+	DefaultsFont getFont() {
 		return font;
 	}
 
@@ -80,7 +80,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the padding element.
 	 */
-	DataLabelsDefaultsPadding getPadding() {
+	DefaultsPadding getPadding() {
 		return padding;
 	}
 

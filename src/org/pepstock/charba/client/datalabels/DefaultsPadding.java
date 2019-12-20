@@ -26,12 +26,12 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DataLabelsDefaultsPadding extends NativeObjectContainer {
+final class DefaultsPadding extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	DataLabelsDefaultsPadding() {
+	DefaultsPadding() {
 		super();
 	}
 
@@ -40,7 +40,7 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	DataLabelsDefaultsPadding(NativeObject nativeObject) {
+	DefaultsPadding(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

@@ -176,7 +176,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	private FontColorCallback fontColorCallback = null;
 
 	// defaults global options instance
-	private LabelsDefaultsOptions defaultsOptions;
+	private DefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final LabelsDefaultsOptionsFactory defaultsFactory = new LabelsDefaultsOptionsFactory();
 
