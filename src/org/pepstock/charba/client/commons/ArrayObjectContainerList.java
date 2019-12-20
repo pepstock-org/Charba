@@ -26,10 +26,10 @@ import java.util.ListIterator;
  * element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as back-end to store objects (native object containers).<br>
- * Elements are instances of {@link org.pepstock.charba.client.commons.NativeObjectContainer}.
+ * Elements are instances of {@link NativeObjectContainer}.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <E> extension of {@link org.pepstock.charba.client.commons.NativeObjectContainer}
+ * @param <E> extension of {@link NativeObjectContainer}
  * 
  */
 public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayContainerList<E, ArrayObject> {

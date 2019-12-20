@@ -54,7 +54,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * 
 	 * @return the native object for callback.
 	 */
-	NativeObject getObject() {
+	final NativeObject getObject() {
 		return getNativeObject();
 	}
 

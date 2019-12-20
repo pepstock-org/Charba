@@ -89,7 +89,7 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a array list of strings by an array of colors (instance of {@link org.pepstock.charba.client.colors.IsColor}).
+	 * Creates a array list of strings by an array of colors (instance of {@link IsColor}).
 	 * 
 	 * @param values array of elements to load when the list is creating.
 	 * @return a array list of strings instance
@@ -102,7 +102,7 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * Creates a array list of enumeration values (instance of {@link Key}).
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
@@ -205,7 +205,7 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates an unmodifiable array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * Creates an unmodifiable array list of enumeration values (instance of {@link Key}).
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
