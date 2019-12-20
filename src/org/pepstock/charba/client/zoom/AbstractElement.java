@@ -186,7 +186,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @param enabled <code>true</code> to enable element (panning or zooming)
 	 */
 	public final void setEnabled(boolean enabled) {
-		setValue(AbstractElement.Property.ENABLED, enabled);
+		setValue(Property.ENABLED, enabled);
 	}
 
 	/**
@@ -195,7 +195,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @return <code>true</code> to enable element (panning or zooming)
 	 */
 	public final boolean isEnabled() {
-		return getValue(AbstractElement.Property.ENABLED, defaultsOptions.isEnabled());
+		return getValue(Property.ENABLED, defaultsOptions.isEnabled());
 	}
 
 	/**
