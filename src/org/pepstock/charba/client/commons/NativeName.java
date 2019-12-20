@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
+import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
  * Constants with java script object name to use into {@link jsinterop.annotations.JsType} native objects.
@@ -67,6 +68,12 @@ public final class NativeName {
 	 * (internal of Charba), when {@link HtmlLegend} is activated.
 	 */
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
+
+	/**
+	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of
+	 * Charba), when {@link ZoomPlugin} is activated.
+	 */
+	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
 
 	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).

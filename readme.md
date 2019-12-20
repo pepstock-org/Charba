@@ -108,6 +108,11 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * import last ZOOM CHART.JS plugin version, [0.7.5](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v0.7.5)
+   * import last HAMMER JS version, [2.0.8](https://github.com/hammerjs/hammer.js/releases/tag/v2.0.8) as dependency of ZOOM CHART.JS plugin
+   * full implementation of configuration for ZOOM plugin
+      * options to configure the plugin (callbacks and handlers included)
+      * options factory to get options at runtime
  * move `drawOnAttach` and `destroyOnDetach` chart property into options in order they can be set globally.
  * add the following hover styles (set by callback as well) on lining datasets, from CHART.JS version 2.9.3 (see [PR here](https://github.com/chartjs/Chart.js/pull/6527) and its limitations):
    * `hoverBackgroundColor`

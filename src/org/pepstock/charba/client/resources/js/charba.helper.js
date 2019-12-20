@@ -419,5 +419,19 @@
     */
     CharbaJsHtmlLegendBuilderHelper.removeEventListener = function(event, element, proxy) {
     	element.removeEventListener(event, proxy);
-    } 
-    
+    }
+    /*
+		JsZoomHelpers an object with a set of static methods used as utility
+		and needed when ZOOM plugin has been activated.   
+	*/
+    function CharbaJsZoomHelper() {} 
+    /*
+	 Invokes the chart reset zoom function if exists.
+	  
+	 @param chart chart instance
+    */
+    CharbaJsZoomHelper.resetZoom = function(chart) {
+    	if (chart != null && typeof chart.resetZoom === 'function'){
+    		chart.resetZoom.call(chart);
+    	}
+    }

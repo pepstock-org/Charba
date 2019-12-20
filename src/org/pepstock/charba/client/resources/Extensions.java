@@ -42,11 +42,29 @@ public interface Extensions extends ClientBundle {
 	TextResource labelsPlugin();
 
 	/**
-	 * Contains text representation of native chart<a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels
+	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-datalabels">datalabels
 	 * plugin</a> code.
 	 * 
-	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels plugin</a> code
+	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-datalabels">datalabels plugin</a> code
 	 */
 	@Source("js/chartjs-plugin-datalabels.min.js")
 	TextResource datalabelsPlugin();
+
+	/**
+	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a>
+	 * code.
+	 * 
+	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a> code
+	 */
+	@Source("js/chartjs-plugin-zoom.min.js")
+	TextResource zoomPlugin();
+
+	/**
+	 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code.
+	 * 
+	 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
+	 */
+	@Source("js/hammer.min.js")
+	TextResource hammerLibrary();
+
 }
