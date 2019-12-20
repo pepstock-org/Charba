@@ -124,7 +124,7 @@ public final class Zoom extends AbstractElement {
 	 * 
 	 * @param drag <code>true</code> to enable drag-to-zoom behavior
 	 */
-	public void setDrag(double drag) {
+	public void setDrag(boolean drag) {
 		setValue(Property.DRAG, drag);
 	}
 
