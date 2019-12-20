@@ -25,7 +25,7 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
  *
  */
 public interface CompleteHandler {
-	
+
 	/**
 	 * Method called once zooming or panning is completed.
 	 * 

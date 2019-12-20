@@ -88,7 +88,6 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	// hover borderWidth callback instance
 	private BorderWidthCallback hoverBorderWidthCallback = null;
 
-
 	// background color callback instance
 	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
@@ -454,7 +453,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			remove(Property.BORDER_WIDTH);
 		}
 	}
-	
+
 	/**
 	 * Returns the hover background color callback, if set, otherwise <code>null</code>.
 	 * 

@@ -335,7 +335,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public double getDevicePixelRatio() {
 		return getValue(Property.DEVICE_PIXEL_RATIO, getDefaultValues().getDevicePixelRatio());
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
 	 * <code>false</code>.

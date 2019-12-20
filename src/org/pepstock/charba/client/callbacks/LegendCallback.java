@@ -22,8 +22,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 /**
  * Sometimes you need a very complex legend.<br>
  * In these cases, it makes sense to generate an HTML legend.<br>
- * Charts provide a {@link IsChart#generateLegend()} method that returns an HTML string for the
- * legend.
+ * Charts provide a {@link IsChart#generateLegend()} method that returns an HTML string for the legend.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -70,8 +70,8 @@ public final class NativeName {
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 
 	/**
-	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of
-	 * Charba), when {@link ZoomPlugin} is activated.
+	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when
+	 * {@link ZoomPlugin} is activated.
 	 */
 	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
 

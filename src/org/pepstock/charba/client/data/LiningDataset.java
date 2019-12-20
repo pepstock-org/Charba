@@ -2147,7 +2147,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.BORDER_DASH_OFFSET);
 		}
 	}
-	
+
 	/**
 	 * Returns the border cap style callback when element is hovered, if set, otherwise <code>null</code>.
 	 * 
@@ -2407,7 +2407,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * Returns an array of integer when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @param borderDashCallback border dash callback instance 
+	 * @param borderDashCallback border dash callback instance
 	 * @return an array of integer
 	 */
 	private Array onBorderDash(ScriptableContext context, BorderDashCallback borderDashCallback) {

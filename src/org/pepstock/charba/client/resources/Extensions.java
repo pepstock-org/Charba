@@ -60,7 +60,8 @@ public interface Extensions extends ClientBundle {
 	TextResource zoomPlugin();
 
 	/**
-	 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code.
+	 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>
+	 * code.
 	 * 
 	 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
 	 */

@@ -26,11 +26,11 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
  *
  */
 public interface ModeCallback {
-	
+
 	/**
 	 * Called to set the mode (pan and zoom) directions at runtime.
 	 * 
-	 * @param chart chart instance 
+	 * @param chart chart instance
 	 * @return the mode (pan and zoom) directions
 	 */
 	InteractionAxis mode(IsChart chart);

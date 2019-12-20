@@ -196,7 +196,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// then returns the current type
 		return currentType;
 	}
-	
+
 	/**
 	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into
 	 * {@link Charts}.
