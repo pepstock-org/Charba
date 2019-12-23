@@ -128,7 +128,6 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				// set them to dataset configuration in this point of
 				// time
 				applyPatternsChanged(chart, datasets);
-				// informs CHART.JS to draw the chart
 			} else {
 				// if here, means that the method has been invoked
 				// due to the update for gradients
@@ -183,10 +182,14 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				// because is not needed due to chart update is called
 				return false;
 			}
+			// if here, means that the method has been invoked
+			// due to the update for gradients
+			pluginStatus.remove(chart.getId());
 		}
 		// informs CHART.JS to draw the chart
 		return true;
 	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -237,6 +240,9 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			}
 			// removes cached callback
 			pluginLegendLabelsCallbacks.remove(chart.getId());
+			// clean status and data
+			pluginStatus.remove(chart.getId());
+			pluginDataToJsonMap.remove(chart.getId());
 		}
 	}
 

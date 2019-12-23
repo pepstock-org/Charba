@@ -123,6 +123,10 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `hoverBorderJoinStyle`
    * `hoverBorderWidth` 
 
+### Fixed Bugs
+
+ * [#49](https://github.com/pepstock-org/Charba/issues/49) change the implementation in order to maintain correctly the status of chart drawing.
+
 License
 -------
 
