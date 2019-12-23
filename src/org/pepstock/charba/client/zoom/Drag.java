@@ -85,7 +85,7 @@ public final class Drag extends NativeObjectContainer {
 
 	// defaults global drag options instance
 	private DefaultsDrag defaultsOptions;
-
+	
 	/**
 	 * Creates new range element, using the default values options.
 	 * 

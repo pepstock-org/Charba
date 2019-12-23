@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
@@ -43,6 +44,8 @@ public final class ZoomPlugin {
 	 * Zoom options factory
 	 */
 	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory(ID);
+	// internal defaults options factory
+	private static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -87,6 +90,23 @@ public final class ZoomPlugin {
 			// resets zoom
 			JsZoomHelper.get().resetZoom(nativeChart);
 		}
+	}
+	
+	/**
+	 * Creates new customized drag-to-zoom effect.
+	 * 
+	 * @return new customized drag-to-zoom effect
+	 */
+	public static Drag createDrag() {
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
+			// reads the default default global options
+			DefaultsOptions defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
+			// creates a drag object by the default if there is
+			return new Drag(defaultsOptions.getZoom().getDrag());
+		}
+		// creates a drag object with standard defaults
+		return new Drag(new DefaultsDrag());
 	}
 
 }

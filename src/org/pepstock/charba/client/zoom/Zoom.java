@@ -170,15 +170,6 @@ public final class Zoom extends AbstractElement {
 	}
 
 	/**
-	 * Creates new customized drag-to-zoom effect.
-	 * 
-	 * @return new customized drag-to-zoom effect
-	 */
-	public Drag createDrag() {
-		return new Drag(defaultsOptions.getDrag());
-	}
-
-	/**
 	 * Sets the sensitivity of element.
 	 * 
 	 * @param sensitivity the sensitivity of element
