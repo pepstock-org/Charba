@@ -28,6 +28,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Cursor;
@@ -35,7 +36,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
- * It works only for line and bar chart instances.<br>
+ * It works only for line and bar chart instances and if {@link ZoomPlugin} is disable.<br>
  * It will add mouser listeners to canvas.<br>
  * Tooltips will be disable to avoid events conflicts.<br>
  * Overrides also the events which can be caught (only click and touchstart).<br>
@@ -358,13 +359,21 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.
+	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.<br>
+	 * If {@link ZoomPlugin} is activated, this plugin will be disabled.
 	 * 
 	 * @param chart chart instance to check
 	 * @return <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported
 	 */
 	private boolean mustBeActivated(IsChart chart) {
-		return IsChart.isConsistent(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType()));
+		// checks consistent
+		boolean mustBeActivated = IsChart.isConsistent(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType()));
+		// if the first check is true...
+		if (mustBeActivated) {
+			// .. is adding an additional check on ZOOM plugin, if enabled
+			mustBeActivated = !chart.getOptions().getPlugins().isEnabled(ZoomPlugin.ID);
+		}
+		return mustBeActivated;
 	}
 
 	/**
