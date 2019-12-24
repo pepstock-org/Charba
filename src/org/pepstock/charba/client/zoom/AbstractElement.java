@@ -42,7 +42,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	public interface ProxyModeCallback {
+	interface ProxyModeCallback {
 
 		/**
 		 * Method of function to be called to provide a string mode (direction) property.
@@ -60,7 +60,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	public interface ProxyHandlerCallback {
+	interface ProxyHandlerCallback {
 
 		/**
 		 * Method of function to be called to provide onPan, onPanComplete, onZoom and onZoomComplete handlers.
