@@ -45,9 +45,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  */
 abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectContainer {
 
-	// counter to know how many objects are stores. Needs to provide
-	// the is empty method result.
-	private int count = 0;
 	// flag to know if some objects are changed
 	// needed to recalculate the canvas object at runtime
 	private boolean changed = false;
@@ -95,8 +92,6 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		if (objects != null) {
 			// stores the array
 			setArrayValue(key, objects);
-			// increments the counter
-			count++;
 			// changes the flag
 			changed = true;
 		} else {
@@ -137,8 +132,6 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		if (has(key)) {
 			// and then remove
 			remove(key);
-			// decrement amount of elements
-			count--;
 			// changes flag
 			changed = true;
 		}
@@ -150,7 +143,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	 * @return <code>true</code> if there is at least a stored canvas object, otherwise <code>false</code>.
 	 */
 	public final boolean isEmpty() {
-		return count == 0;
+		return super.empty();
 	}
 
 	/**

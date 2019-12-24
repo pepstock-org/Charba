@@ -73,6 +73,24 @@ public abstract class NativeObjectContainer {
 	public final String toJSON() {
 		return JSON.stringifyWithReplacer(nativeObject, 3);
 	}
+	
+	/**
+	 * Returns <code>true</code> if there is at least a property, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is at least a property, otherwise <code>false</code>.
+	 */
+	protected final boolean empty() {
+		// gets the keys of properties of th native object
+		ArrayString keys = NativeObject.keys(nativeObject);
+		// if the array of keys is consistent
+		if (keys != null) {
+			// returns if is empty
+			return keys.isEmpty();
+		}
+		// if here, array of keys if not consistent
+		// then returns always true
+		return true;
+	}
 
 	/**
 	 * Returns true if the embedded JavaScript object contains an element at specific property.
