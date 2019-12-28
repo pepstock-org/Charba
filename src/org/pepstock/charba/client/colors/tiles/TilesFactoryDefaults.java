@@ -160,7 +160,7 @@ public final class TilesFactoryDefaults {
 	 * @param backgroundColor the background color of tile
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR_AS_STRING : backgroundColor.toRGBA();
+		this.backgroundColor = IsColor.isConsistent(backgroundColor) ? backgroundColor.toRGBA() : DEFAULT_BACKGROUND_COLOR_AS_STRING;
 	}
 
 	/**
@@ -196,7 +196,7 @@ public final class TilesFactoryDefaults {
 	 * @param shapeColor the shape color of tile
 	 */
 	public void setShapeColor(IsColor shapeColor) {
-		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR_AS_STRING : shapeColor.toRGBA();
+		this.shapeColor = IsColor.isConsistent(shapeColor) ? shapeColor.toRGBA() : DEFAULT_SHAPE_COLOR_AS_STRING;
 	}
 
 	/**

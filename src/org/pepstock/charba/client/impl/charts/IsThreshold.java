@@ -33,7 +33,7 @@ interface IsThreshold {
 	 *         <code>null</code>
 	 */
 	static boolean isValid(IsThreshold threshold) {
-		return threshold != null && threshold.getName() != null && threshold.getColor() != null;
+		return threshold != null && threshold.getName() != null && IsColor.isConsistent(threshold.getColor());
 	}
 
 	/**

@@ -194,7 +194,11 @@ public final class ScriptableUtils {
 			if (result instanceof IsColor) {
 				// is color instance
 				IsColor color = (IsColor) result;
-				return color.toRGBA();
+				// checks if the color is consistent
+				if (IsColor.isConsistent(color)) {
+					// then returns RGBA representation
+					return color.toRGBA();
+				}
 			} else if (result instanceof String) {
 				// is string instance
 				return result;

@@ -78,7 +78,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param color background default color for all charts.
 	 */
 	public ChartBackgroundColor(IsColor color) {
-		this((color != null) ? color.toRGBA() : DEFAULT_BACKGROUND_COLOR);
+		this(IsColor.isConsistent(color) ? color.toRGBA() : DEFAULT_BACKGROUND_COLOR);
 	}
 
 	/**

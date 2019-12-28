@@ -110,7 +110,7 @@ public final class TilesBuilder {
 	 * @return tiles builder instance
 	 */
 	public TilesBuilder setBackgroundColor(IsColor backgroundColor) {
-		this.backgroundColor = backgroundColor == null ? TilesFactory.getDefaults().getBackgroundColorAsString() : backgroundColor.toRGBA();
+		this.backgroundColor = IsColor.isConsistent(backgroundColor) ? backgroundColor.toRGBA() : TilesFactory.getDefaults().getBackgroundColorAsString();
 		return this;
 	}
 
@@ -132,7 +132,7 @@ public final class TilesBuilder {
 	 * @return tiles builder instance
 	 */
 	public TilesBuilder setShapeColor(IsColor shapeColor) {
-		this.shapeColor = shapeColor == null ? TilesFactory.getDefaults().getShapeColorAsString() : shapeColor.toRGBA();
+		this.shapeColor = IsColor.isConsistent(shapeColor) ? shapeColor.toRGBA() : TilesFactory.getDefaults().getShapeColorAsString();
 		return this;
 	}
 

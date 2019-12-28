@@ -1084,6 +1084,8 @@ public abstract class NativeObjectContainer {
 		if (values != null) {
 			// checks if there is only 1 element
 			if (values.length == 1) {
+				// checks color consistent
+				IsColor.checkIfValid(values[0]);
 				// if 1 element, sets the object
 				setValue(key, values[0].toRGBA());
 			} else {
@@ -1103,8 +1105,8 @@ public abstract class NativeObjectContainer {
 	 * @return the string RGBA color representation or <code>null</code> if color is null
 	 */
 	protected final String checkValue(IsColor value) {
-		// check value is null
-		// and sets value accordingly
-		return value != null ? value.toRGBA() : null;
+		// check color value is consistent
+		// and returns the RGBA value accordingly
+		return IsColor.isConsistent(value) ? value.toRGBA() : null;
 	}
 }

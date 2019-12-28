@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.ColorUtil;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
@@ -180,7 +180,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	public void setBackgroundColorAlpha(double backgroundColorAlpha) {
 		// checks if consistent value between 0 and 1
-		Color.checkAlphaWithinBounds(backgroundColorAlpha);
+		ColorUtil.checkAlphaWithinBounds(backgroundColorAlpha);
 		setValue(Property.BACKGROUND_COLOR_ALPHA, backgroundColorAlpha);
 	}
 

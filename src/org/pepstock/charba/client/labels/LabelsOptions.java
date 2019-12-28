@@ -795,7 +795,10 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 			if (value instanceof IsColor) {
 				// is color instance
 				IsColor color = (IsColor) value;
-				return color.toRGBA();
+				// checks if color is consistent
+				if (IsColor.isConsistent(color)) {
+					return color.toRGBA();
+				}
 			} else if (value instanceof String) {
 				// is string instance
 				return (String) value;

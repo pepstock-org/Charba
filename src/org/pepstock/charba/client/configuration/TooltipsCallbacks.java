@@ -499,7 +499,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result.toRGBA() : getConfiguration().getTooltips().getBodyFontColorAsString();
+			return IsColor.isConsistent(result) ? result.toRGBA() : getConfiguration().getTooltips().getBodyFontColorAsString();
 		}
 		// default result
 		return getConfiguration().getTooltips().getBodyFontColorAsString();

@@ -263,7 +263,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param displayFontColor the displayFontColor to set
 	 */
 	public final void setDisplayFontColor(IsColor displayFontColor) {
-		this.displayFontColor = displayFontColor == null ? DEFAULT_DISPLAY_COLOR : displayFontColor;
+		this.displayFontColor = IsColor.isValid(displayFontColor) ? displayFontColor : DEFAULT_DISPLAY_COLOR;
 	}
 
 	/**

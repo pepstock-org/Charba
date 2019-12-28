@@ -78,7 +78,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @param color color instance
 	 */
 	public GradientColor(double offset, IsColor color) {
-		this(offset, color != null ? color.toRGBA() : null);
+		this(offset, IsColor.isConsistent(color) ? color.toRGBA() : null);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 */
 	static void checkOffsetWithinBounds(double offset) {
 		if (offset < DEFAULT_OFFSET_START || offset > DEFAULT_OFFSET_STOP) {
-			throw new IllegalArgumentException("Offset argument is not within bounds (0D-1D)");
+			throw new IllegalArgumentException("Offset value ("+offset+") is not within bounds (0D-1D)");
 		}
 	}
 

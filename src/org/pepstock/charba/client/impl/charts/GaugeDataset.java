@@ -85,7 +85,7 @@ public final class GaugeDataset extends MeterDataset {
 		// value color must be override because
 		// depends on threshold
 		// checking if consistent
-		super.setColor(current.getColor() != null ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
+		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
 	}
 
 	/*
@@ -98,7 +98,7 @@ public final class GaugeDataset extends MeterDataset {
 		// value color must be override because
 		// depends on threshold
 		// checking if consistent
-		super.setColor(current.getColor() != null ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
+		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
 	}
 
 	/**

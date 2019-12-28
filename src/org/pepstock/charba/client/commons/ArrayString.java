@@ -154,6 +154,8 @@ public final class ArrayString extends Array {
 		ArrayString result = new ArrayString();
 		// scans items
 		for (IsColor color : items) {
+			// checks color consistency
+			IsColor.checkIfValid(color);
 			// adds element
 			result.push(color.toRGBA());
 		}
@@ -177,6 +179,8 @@ public final class ArrayString extends Array {
 		}
 		// scans items
 		for (IsColor color : items) {
+			// checks color consistency
+			IsColor.checkIfValid(color);
 			// adds element
 			result.push(color.toRGBA());
 		}

@@ -169,7 +169,7 @@ public final class TilesFactory {
 	 * @return a tile as canvas pattern
 	 */
 	public static CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return createTile(shape, backgroundColor != null ? backgroundColor.toRGBA() : INSTANCE.defaults.getBackgroundColorAsString(), shapeColor != null ? shapeColor.toRGBA() : INSTANCE.defaults.getShapeColorAsString(), size);
+		return createTile(shape, IsColor.isConsistent(backgroundColor) ? backgroundColor.toRGBA() : INSTANCE.defaults.getBackgroundColorAsString(), IsColor.isConsistent(shapeColor) ? shapeColor.toRGBA() : INSTANCE.defaults.getShapeColorAsString(), size);
 	}
 
 	/**

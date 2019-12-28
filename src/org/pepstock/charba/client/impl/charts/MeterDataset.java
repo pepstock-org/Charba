@@ -160,7 +160,7 @@ public class MeterDataset extends Dataset {
 	 * @param valueColor the fill color for value.
 	 */
 	public void setColor(IsColor valueColor) {
-		setColor(valueColor != null ? valueColor.toRGBA() : DEFAULT_VALUE_COLOR_AS_STRING);
+		setColor(IsColor.isConsistent(valueColor) ? valueColor.toRGBA() : DEFAULT_VALUE_COLOR_AS_STRING);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class MeterDataset extends Dataset {
 	 * @param emptyValueColor the fill color for empty sector.
 	 */
 	public void setEmptyColor(IsColor emptyValueColor) {
-		setEmptyColor(emptyValueColor != null ? emptyValueColor.toRGBA() : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING);
+		setEmptyColor(IsColor.isConsistent(emptyValueColor) ? emptyValueColor.toRGBA() : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING);
 	}
 
 	/**

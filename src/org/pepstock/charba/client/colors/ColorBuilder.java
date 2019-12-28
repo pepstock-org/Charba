@@ -49,17 +49,6 @@ public final class ColorBuilder {
 	// REGEXP for HSLA
 	private static final RegExp REGEXP_HSLA = RegExp.compile(REGEXP_HSLA_PATTERN);
 
-	// char to identify if is a HEX color
-	static final String HEX_STARTING_CHAR = "#";
-	// chars to identify if is a RGB color
-	static final String RGB_STARTING_CHARS = "rgb";
-	// char to identify if is a RGBA color
-	static final String RGBA_STARTING_CHARS = "rgba";
-	// chars to identify if is a HSL color
-	static final String HSL_STARTING_CHARS = "hsl";
-	// chars to identify if is a HSLA color
-	static final String HSLA_STARTING_CHARS = "hsla";
-
 	/**
 	 * To avoid any instantiation
 	 */
@@ -129,19 +118,19 @@ public final class ColorBuilder {
 			// if starting with a specific label
 			String newValue = value.trim();
 			// checks which type of color is passed
-			if (newValue.startsWith(HEX_STARTING_CHAR)) {
+			if (newValue.startsWith(ColorUtil.HEX_STARTING_CHAR)) {
 				// is a HEX
 				return buildByHexValue(newValue);
-			} else if (value.startsWith(RGBA_STARTING_CHARS)) {
+			} else if (value.startsWith(ColorUtil.RGBA_STARTING_CHARS)) {
 				// is a RGBA. It must be checked before RGB
 				return buildByRGBAValue(newValue);
-			} else if (value.startsWith(RGB_STARTING_CHARS)) {
+			} else if (value.startsWith(ColorUtil.RGB_STARTING_CHARS)) {
 				// is a RGB
 				return buildByRGBValue(newValue);
-			} else if (value.startsWith(HSLA_STARTING_CHARS)) {
+			} else if (value.startsWith(ColorUtil.HSLA_STARTING_CHARS)) {
 				// is a HSLA. It must be checked before HSL
 				return buildByHSLAValue(newValue);
-			} else if (value.startsWith(HSL_STARTING_CHARS)) {
+			} else if (value.startsWith(ColorUtil.HSL_STARTING_CHARS)) {
 				// is a HSL
 				return buildByHSLValue(newValue);
 			} else {
@@ -498,4 +487,5 @@ public final class ColorBuilder {
 		}
 		return temporary2;
 	}
+
 }

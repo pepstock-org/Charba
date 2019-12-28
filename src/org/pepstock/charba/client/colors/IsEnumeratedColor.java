@@ -37,6 +37,8 @@ interface IsEnumeratedColor extends IsColor {
 	 */
 	@Override
 	default int getRed() {
+		// check if color instance is consistent
+		IsColor.checkIfValid(getColor());
 		return getColor().getRed();
 	}
 
@@ -47,6 +49,8 @@ interface IsEnumeratedColor extends IsColor {
 	 */
 	@Override
 	default int getGreen() {
+		// check if color instance is consistent
+		IsColor.checkIfValid(getColor());
 		return getColor().getGreen();
 	}
 
@@ -57,6 +61,8 @@ interface IsEnumeratedColor extends IsColor {
 	 */
 	@Override
 	default int getBlue() {
+		// check if color instance is consistent
+		IsColor.checkIfValid(getColor());
 		return getColor().getBlue();
 	}
 
@@ -67,117 +73,8 @@ interface IsEnumeratedColor extends IsColor {
 	 */
 	@Override
 	default double getAlpha() {
+		// check if color instance is consistent
+		IsColor.checkIfValid(getColor());
 		return getColor().getAlpha();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#alpha(double)
-	 */
-	@Override
-	default IsColor alpha(double alpha) {
-		return getColor().alpha(alpha);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toHex()
-	 */
-	@Override
-	default String toHex() {
-		return getColor().toHex();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toRGBA()
-	 */
-	@Override
-	default String toRGBA() {
-		return getColor().toRGBA();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toRGB()
-	 */
-	@Override
-	default String toRGB() {
-		return getColor().toRGB();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toHSLA()
-	 */
-	@Override
-	default String toHSLA() {
-		return getColor().toHSLA();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toHSL()
-	 */
-	@Override
-	default String toHSL() {
-		return getColor().toHSL();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toRGBs()
-	 */
-	@Override
-	default int toRGBs() {
-		return getColor().toRGBs();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#brighter()
-	 */
-	@Override
-	default IsColor brighter() {
-		return getColor().brighter();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#brighter(double)
-	 */
-	@Override
-	default IsColor brighter(double alpha) {
-		return getColor().brighter(alpha);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#darker()
-	 */
-	@Override
-	default IsColor darker() {
-		return getColor().darker();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#darker(double)
-	 */
-	@Override
-	default IsColor darker(double alpha) {
-		return getColor().darker(alpha);
-	}
-
 }
