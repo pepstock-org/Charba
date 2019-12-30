@@ -22,7 +22,6 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -153,7 +152,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the fill style is defined as gradient
 	 */
 	public final boolean isFillStyleAsCanvasGradient() {
-		return JsHelper.get().isCanvasGradient(this, Property.FILL_STYLE.value());
+		return JsItemsHelper.get().isCanvasGradient(this, Property.FILL_STYLE.value());
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the fill style is defined as canvas pattern
 	 */
 	public final boolean isFillStyleAsCanvasPattern() {
-		return JsHelper.get().isCanvasPattern(this, Property.FILL_STYLE.value());
+		return JsItemsHelper.get().isCanvasPattern(this, Property.FILL_STYLE.value());
 	}
 
 	/**
@@ -222,7 +221,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the stroke style is defined as gradient
 	 */
 	public final boolean isStrokeStyleAsCanvasGradient() {
-		return JsHelper.get().isCanvasGradient(this, Property.STROKE_STYLE.value());
+		return JsItemsHelper.get().isCanvasGradient(this, Property.STROKE_STYLE.value());
 	}
 
 	/**
@@ -231,7 +230,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the stroke style is defined as gradient
 	 */
 	public final boolean isStrokeStyleAsCanvasPattern() {
-		return JsHelper.get().isCanvasPattern(this, Property.STROKE_STYLE.value());
+		return JsItemsHelper.get().isCanvasPattern(this, Property.STROKE_STYLE.value());
 	}
 
 	/**
@@ -387,6 +386,15 @@ public class LegendItem extends NativeObjectContainer {
 			// returns null because is a string
 			return UndefinedValues.IMAGE_ELEMENT;
 		}
+	}
+	
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject getObject() {
+		return super.getNativeObject();
 	}
 
 	/**

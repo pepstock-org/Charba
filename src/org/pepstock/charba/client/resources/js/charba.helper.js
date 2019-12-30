@@ -95,53 +95,6 @@
     	return obj[key];
     }  
     /*
-	 Returns true if the property into native object is a CanvasPattern.
-	  
-	 @param object the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return true if the property into native object is a CanvasPattern
-    */
-    CharbaJsHelper.isCanvasPattern = function(obj, key) {
-    	return obj[key] instanceof CanvasPattern;
-    } 
-    /*
-	 Returns true if the property into native object is a CanvasGradient.
-	  
-	 @param object the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return true if the property into native object is a CanvasGradient
-    */
-    CharbaJsHelper.isCanvasGradient = function(obj, key) {
-    	return obj[key] instanceof CanvasGradient;
-    } 
-    /*
-	 Returns a chart native event from CHART.JS event.
-	  
-	 @param event CHART.JS event
-	 @param key key of java script object
-	 @return a chart native event
-    */
-    CharbaJsHelper.nativeEvent = function(obj, key) {
-    	return obj[key];
-    }      
-    /*
-	 Returns an array of strings with element attributes.
-	  
-	 @param element DOM element to scan
-	 @return an array of strings with element attributes
-    */
-    CharbaJsHelper.elementAttributes = function(element) {
-    	var result = new Array();
-    	// First, let's verify that the paragraph has some attributes    
-     	if (element.hasAttributes()) {
-           var attrs = element.attributes;
-	       for(var i = 0; i < attrs.length; i++) {
-	          result[i] = attrs[i].name + "='" + attrs[i].value +"'";
-	       }
-	    }
-    	return result;
-    }  
-    /*
 	 Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
 	 and gaps which describe the pattern.
 	 
@@ -301,6 +254,23 @@
 		}
     }
     /*
+	 Returns an array of strings with element attributes.
+	  
+	 @param element DOM element to scan
+	 @return an array of strings with element attributes
+    */
+    CharbaJsWindowHelper.elementAttributes = function(element) {
+    	var result = new Array();
+    	// First, let's verify that the paragraph has some attributes    
+     	if (element.hasAttributes()) {
+           var attrs = element.attributes;
+	       for(var i = 0; i < attrs.length; i++) {
+	          result[i] = attrs[i].name + "='" + attrs[i].value +"'";
+	       }
+	    }
+    	return result;
+    }  
+    /*
 		JSPositionerHelper is an object with a set of static methods used as utility
 		and needed to add custom positioner on tooltips.   
 	*/
@@ -398,7 +368,7 @@
     	}
     }
     /*
-		JsHtmlLegendBuilderHelpers an object with a set of static methods used as utility
+		JsHtmlLegendBuilderHelpers is an object with a set of static methods used as utility
 		and needed when HtmlLegendBuilder plugin has been activated.   
 	*/
     function CharbaJsHtmlLegendBuilderHelper() {}
@@ -421,7 +391,7 @@
     	element.removeEventListener(event, proxy);
     }
     /*
-		JsZoomHelpers an object with a set of static methods used as utility
+		JsZoomHelpers is an object with a set of static methods used as utility
 		and needed when ZOOM plugin has been activated.   
 	*/
     function CharbaJsZoomHelper() {} 
@@ -435,3 +405,39 @@
     		chart.resetZoom.call(chart);
     	}
     }
+    /*
+		JsItemsHelpers is an object with a set of static methods used as utility
+		and needed to act with CHARBA items.   
+	*/
+    function CharbaJsItemsHelper() {} 
+    /*
+	 Returns true if the property into native object is a CanvasPattern.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return true if the property into native object is a CanvasPattern
+    */
+    CharbaJsItemsHelper.isCanvasPattern = function(obj, key) {
+    	return obj[key] instanceof CanvasPattern;
+    } 
+    /*
+	 Returns true if the property into native object is a CanvasGradient.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return true if the property into native object is a CanvasGradient
+    */
+    CharbaJsItemsHelper.isCanvasGradient = function(obj, key) {
+    	return obj[key] instanceof CanvasGradient;
+    } 
+    /*
+	 Returns a chart native event from CHART.JS event.
+	  
+	 @param event CHART.JS event
+	 @param key key of java script object
+	 @return a chart native event
+    */
+    CharbaJsItemsHelper.nativeEvent = function(obj, key) {
+    	return obj[key];
+    }      
+    

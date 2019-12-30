@@ -15,8 +15,14 @@
 */
 package org.pepstock.charba.client.utils;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.resources.ResourcesType;
+
+import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -67,4 +73,18 @@ public final class JsWindowHelper {
 			enableResizeOnBeforePrint = true;
 		}
 	}
+	
+	/**
+	 * Returns a list of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return a list of strings with element attributes
+	 */
+	List<String> elementAttributes(Element element) {
+		// checks if arguments is consistent
+		// if not, uses a null element for array string
+		ArrayString array = element != null ? NativeJsWindowHelper.elementAttributes(element) : null;
+		return ArrayListHelper.unmodifiableList(array);
+	}
+
 }

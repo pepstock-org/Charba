@@ -18,14 +18,10 @@ package org.pepstock.charba.client.commons;
 import java.util.List;
 
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -62,19 +58,6 @@ public final class JsHelper {
 	 */
 	public Object undefined() {
 		return NativeJsHelper.undefined();
-	}
-
-	/**
-	 * Returns a list of strings with element attributes.
-	 * 
-	 * @param element DOM element to scan
-	 * @return a list of strings with element attributes
-	 */
-	public List<String> elementAttributes(Element element) {
-		// checks if arguments is consistent
-		// if not, uses a null element for array string
-		ArrayString array = element != null ? NativeJsHelper.elementAttributes(element) : null;
-		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -183,38 +166,6 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
-	 */
-	public boolean isCanvasPattern(NativeObjectContainer object, String key) {
-		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsHelper.isCanvasPattern(object.getNativeObject(), key);
-		}
-		// if here, arguments not consistent
-		return false;
-	}
-
-	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
-	 */
-	public boolean isCanvasGradient(NativeObjectContainer object, String key) {
-		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsHelper.isCanvasGradient(object.getNativeObject(), key);
-		}
-		// if here, arguments not consistent
-		return false;
-	}
-
-	/**
 	 * Sets the line dash pattern used when stroking lines.<br>
 	 * It uses a list of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
@@ -238,21 +189,4 @@ public final class JsHelper {
 			NativeJsHelper.setLineDash(context, object);
 		}
 	}
-
-	/**
-	 * Returns a chart native event from CHART.JS event.
-	 * 
-	 * @param event CHART.JS event
-	 * @param key key of java script object
-	 * @return a chart native event
-	 */
-	public ChartNativeEvent nativeEvent(NativeObject event, String key) {
-		// checks consistency of arguments
-		if (event != null && key != null) {
-			return NativeJsHelper.nativeEvent(event, key);
-		}
-		// if here, arguments not consistent
-		return null;
-	}
-
 }

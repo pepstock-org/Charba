@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
+
+import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -43,4 +46,11 @@ final class NativeJsWindowHelper {
 	 */
 	static native void enableResizeOnBeforePrint();
 
+	/**
+	 * Returns an array of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return an array of strings with element attributes
+	 */
+	static native ArrayString elementAttributes(Element element);
 }

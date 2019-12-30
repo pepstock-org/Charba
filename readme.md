@@ -136,6 +136,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `empty` protected method to `NativeObjectContainer` in order to know if there is any property into native object and improving performances.
  * add `isValid`, `isConsistent` and `checkIfValid` static methods to `IsColor` interface in order to check the consistency of interface when passed as argument, reducing null pointer exception
  * move `alpha`, `toRGBA`, `toRGB`, `toHex`, `toHSLA`, `toHSL`, `toRGBs`, `brighter`, `brighter`, `darker` and `darker` methods as default methods into `IsColor` interface in order that whoever will implement the interface could provide only red, green, blue and alpha values.
+ * move some methods of common `JsHelper` into a dedicated and protected helper in order to hide those methods.
  
 License
 -------

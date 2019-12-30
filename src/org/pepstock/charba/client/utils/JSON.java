@@ -212,7 +212,7 @@ public final class JSON {
 			if (element.getNodeType() == Node.ELEMENT_NODE) {
 				StringBuilder sb = new StringBuilder();
 				sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-				List<String> attributes = JsHelper.get().elementAttributes(element);
+				List<String> attributes = JsWindowHelper.get().elementAttributes(element);
 				if (!attributes.isEmpty()) {
 					for (String attribute : attributes) {
 						sb.append(" ").append(attribute);

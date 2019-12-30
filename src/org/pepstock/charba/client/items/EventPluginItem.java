@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -81,7 +80,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * @return the native event into the CHART.JS event or <code>null</code> if doen't not exist.
 	 */
 	public ChartNativeEvent getEvent() {
-		return JsHelper.get().nativeEvent(getNativeObject(), NATIVE_KEY);
+		return JsItemsHelper.get().nativeEvent(getNativeObject(), NATIVE_KEY);
 	}
 
 	/**

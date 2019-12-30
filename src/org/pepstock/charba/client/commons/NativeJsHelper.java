@@ -15,12 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.events.ChartNativeEvent;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -118,24 +113,6 @@ final class NativeJsHelper {
 	static native String propertyAsString(Object object, String key);
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
-	 */
-	static native boolean isCanvasPattern(NativeObject object, String key);
-
-	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
-	 */
-	static native boolean isCanvasGradient(NativeObject object, String key);
-
-	/**
 	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
 	 * and gaps which describe the pattern.
 	 * 
@@ -143,22 +120,5 @@ final class NativeJsHelper {
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	static native void setLineDash(Context2d context, ArrayInteger object);
-
-	/**
-	 * Returns an array of strings with element attributes.
-	 * 
-	 * @param element DOM element to scan
-	 * @return an array of strings with element attributes
-	 */
-	static native ArrayString elementAttributes(Element element);
-
-	/**
-	 * Returns a chart native event from CHART.JS event.
-	 * 
-	 * @param event CHART.JS event
-	 * @param key key of java script object
-	 * @return a chart native event
-	 */
-	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
 
 }
