@@ -13,9 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.impl.plugins;
+package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.events.AbstractEvent;
+import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 
 import com.google.gwt.dom.client.NativeEvent;
 
