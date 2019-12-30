@@ -223,17 +223,6 @@ public enum GoogleChartColor implements IsEnumeratedColor
 		color = ColorBuilder.buildByHexValue(hexValue, false);
 	}
 
-	/**
-	 * Creates a color with HEX value.
-	 * 
-	 * @param hexValue color string representation in hex mode
-	 * @param alpha the alpha to set
-	 */
-	private GoogleChartColor(String hexValue, double alpha) {
-		IsColor internalColor = ColorBuilder.buildByHexValue(hexValue, false);
-		color = internalColor.alpha(alpha);
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
