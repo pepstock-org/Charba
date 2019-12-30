@@ -86,6 +86,15 @@ final class SelectionTrack {
 		}
 	}
 
+	/**
+	 * Returns <code>true</code> if start and end positions are consistent and that means an area has been selected.
+	 * 
+	 * @return <code>true</code> if start and end positions are consistent and that means an area has been selected
+	 */
+	boolean isValid() {
+		return start != Integer.MIN_VALUE && end != Integer.MIN_VALUE;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

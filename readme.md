@@ -129,6 +129,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Fixed Bugs
 
  * [#49](https://github.com/pepstock-org/Charba/issues/49) change the implementation in order to maintain correctly the status of chart drawing.
+ * [#50](https://github.com/pepstock-org/Charba/issues/50) add checking on selection track in order to be sure that an area has been selected.
 
 ### Development
 

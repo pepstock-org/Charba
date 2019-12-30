@@ -566,7 +566,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// sets status
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
-		if (!skipNextFireEvent) {
+		// and if an area has been selected
+		if (!skipNextFireEvent && track != null && track.isValid()) {
 			// gets chart node
 			ChartNode node = chart.getNode();
 			// gets the scale element of chart
