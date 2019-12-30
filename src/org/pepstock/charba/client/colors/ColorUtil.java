@@ -18,8 +18,9 @@ package org.pepstock.charba.client.colors;
 import org.pepstock.charba.client.commons.Constants;
 
 /**
- * Utility to check colors by red, green, blue and alpha values.<br>
- * Creates string representation of a color, to HEX, RGB, RGBA, HSl or HSLA strings.
+ * Utility to check alpha value.<br>
+ * Internally is checking red, green, blue and alpha values and creates string representation of a color, to HEX, RGB, RGBA, HSL
+ * or HSLA strings.
  * 
  * @author Andrea "Stock" Stocchero
  *

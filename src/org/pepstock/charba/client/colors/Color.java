@@ -29,7 +29,7 @@ public final class Color implements IsColor {
 	 */
 	public static final double DEFAULT_ALPHA = 1D;
 	/**
-	 * Main color to related CHARBA, <b>#f27173</b>.
+	 * Main color linked to CHARBA, <b>#f27173</b>.
 	 */
 	public static final Color CHARBA = new Color(242, 113, 115);
 	// colors
