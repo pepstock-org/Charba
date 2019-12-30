@@ -154,10 +154,26 @@ abstract class AbstractElement extends NativeObjectContainer {
 		}
 		// stores defaults options
 		this.defaultsOptions = defaultsOptions;
-		// gets range min
-		this.rangeMin = new Range(getValue(Property.RANGE_MIN), defaultsOptions.getRangeMin());
-		// gets range max
-		this.rangeMax = new Range(getValue(Property.RANGE_MAX), defaultsOptions.getRangeMax());
+		// checks if range min are already present
+		if (has(Property.RANGE_MIN)) {
+			// gets range min
+			this.rangeMin = new Range(getValue(Property.RANGE_MIN), defaultsOptions.getRangeMin());
+		} else {
+			// gets range min
+			this.rangeMin = new Range(defaultsOptions.getRangeMin());
+			// stores new range
+			setValue(Property.RANGE_MIN, rangeMin);
+		}
+		// checks if range max are already present
+		if (has(Property.RANGE_MAX)) {
+			// gets range max
+			this.rangeMax = new Range(getValue(Property.RANGE_MAX), defaultsOptions.getRangeMax());
+		} else {
+			// gets range max
+			this.rangeMax = new Range(defaultsOptions.getRangeMax());
+			// stores new range
+			setValue(Property.RANGE_MAX, rangeMax);
+		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
