@@ -124,7 +124,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `hoverBorderWidth` 
  * add `GoogleChartColor` enumeration with Google Chart colors.
  * add `GoogleChartScheme` enumeration with Google Chart colors scheme to use into `ColorSchemes` plugin.
- * move `DatasetRangeSelectionEvent` and `DatasetRangeSelectionEventHandler` classes into events package (*breaking change*).
+ * move `DatasetRangeSelectionEvent` and `DatasetRangeSelectionEventHandler` classes into events package (**breaking change**).
 
 ### Fixed Bugs
 
