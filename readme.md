@@ -122,6 +122,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `hoverBorderDashOffset`
    * `hoverBorderJoinStyle`
    * `hoverBorderWidth` 
+ * add `GoogleChartColor` enumeration with Google Chart colors.
+ * add `GoogleChartScheme` enumeration with Google Chart colors scheme to use into `ColorSchemes` plugin.
 
 ### Fixed Bugs
 
