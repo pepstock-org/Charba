@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
  * @author Andrea "Stock" Stocchero
  * 
  */
-abstract class AbstractDefaultElement extends NativeObjectContainer {
+abstract class AbstractDefaultsElement extends NativeObjectContainer {
 
 	// range min instance
 	private final DefaultsRange rangeMin;
@@ -35,7 +35,7 @@ abstract class AbstractDefaultElement extends NativeObjectContainer {
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	AbstractDefaultElement() {
+	AbstractDefaultsElement() {
 		super();
 		// creates default range min options
 		rangeMin = new DefaultsRange();
@@ -51,7 +51,7 @@ abstract class AbstractDefaultElement extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractDefaultElement(NativeObject nativeObject) {
+	AbstractDefaultsElement(NativeObject nativeObject) {
 		super(nativeObject);
 		// reads default range min options from main object
 		rangeMin = new DefaultsRange(getValue(AbstractElement.Property.RANGE_MIN));

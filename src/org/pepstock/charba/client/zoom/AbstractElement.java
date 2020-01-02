@@ -22,9 +22,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
-import org.pepstock.charba.client.zoom.events.CompleteHandler;
-import org.pepstock.charba.client.zoom.events.ProgressHandler;
+import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 
 import jsinterop.annotations.JsFunction;
 
@@ -127,17 +127,17 @@ abstract class AbstractElement extends NativeObjectContainer {
 	}
 
 	// default options
-	private final AbstractDefaultElement defaultsOptions;
+	private final AbstractDefaultsElement defaultsOptions;
 	// minimum range
 	private final Range rangeMin;
 	// maximum range
 	private final Range rangeMax;
-	// mode callbacl
+	// mode callback
 	private ModeCallback modeCallback;
-	// progress handler
-	private ProgressHandler progressHandler;
-	// progress handler
-	private CompleteHandler completeHandler;
+	// progress callback
+	private ProgressCallback progressCallback;
+	// complete callback
+	private CompleteCallback completeCallback;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -145,7 +145,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @param nativeObject native object instance to be wrapped.
 	 * @param defaultsOptions default options of element
 	 */
-	AbstractElement(NativeObject nativeObject, AbstractDefaultElement defaultsOptions) {
+	AbstractElement(NativeObject nativeObject, AbstractDefaultsElement defaultsOptions) {
 		super(nativeObject);
 		// checks if defaults options is consistent
 		if (defaultsOptions == null) {
@@ -306,28 +306,28 @@ abstract class AbstractElement extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the handler called while the user is zooming or panning.
+	 * Returns the callback called while the user is zooming or panning.
 	 * 
-	 * @return the handler called while the user is zooming or panning
+	 * @return the callback called while the user is zooming or panning
 	 */
-	public final ProgressHandler getProgressHandler() {
-		return progressHandler;
+	public final ProgressCallback getProgressCallback() {
+		return progressCallback;
 	}
 
 	/**
-	 * Sets the handler called while the user is zooming or panning.
+	 * Sets the callback called while the user is zooming or panning.
 	 * 
-	 * @param progressHandler the handler called while the user is zooming or panning
+	 * @param progressCallback the callback called while the user is zooming or panning
 	 */
-	public final void setProgressHandler(ProgressHandler progressHandler) {
-		// gets the key to use for progress handler
+	public final void setProgressCallback(ProgressCallback progressCallback) {
+		// gets the key to use for progress callback
 		Key key = getProgressKey();
 		// checks if key is consistent
 		Key.checkIfValid(key);
-		// sets the handler
-		this.progressHandler = progressHandler;
-		// checks if handler is consistent
-		if (progressHandler != null) {
+		// sets the callback
+		this.progressCallback = progressCallback;
+		// checks if callback is consistent
+		if (progressCallback != null) {
 			// adds the callback proxy function to java script object
 			setValue(key, progressCallbackProxy.getProxy());
 		} else {
@@ -337,28 +337,28 @@ abstract class AbstractElement extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the handler called once zooming or panning is completed.
+	 * Returns the callback called once zooming or panning is completed.
 	 * 
-	 * @return the handler called once zooming or panning is completed
+	 * @return the callback called once zooming or panning is completed
 	 */
-	public final CompleteHandler getCompleteHandler() {
-		return completeHandler;
+	public final CompleteCallback getCompleteCallback() {
+		return completeCallback;
 	}
 
 	/**
-	 * Sets the handler called once zooming or panning is completed.
+	 * Sets the callback called once zooming or panning is completed.
 	 * 
-	 * @param completeHandler the handler called once zooming or panning is completed
+	 * @param completeCallback the callback called once zooming or panning is completed
 	 */
-	public final void setCompleteHandler(CompleteHandler completeHandler) {
-		// gets the key to use for complete handler
+	public final void setCompleteCallback(CompleteCallback completeCallback) {
+		// gets the key to use for complete callback
 		Key key = getCompleteKey();
 		// checks if key is consistent
 		Key.checkIfValid(key);
-		// sets the handler
-		this.completeHandler = completeHandler;
-		// checks if handler is consistent
-		if (completeHandler != null) {
+		// sets the callback
+		this.completeCallback = completeCallback;
+		// checks if callback is consistent
+		if (completeCallback != null) {
 			// adds the callback proxy function to java script object
 			setValue(key, completeCallbackProxy.getProxy());
 		} else {
@@ -390,37 +390,37 @@ abstract class AbstractElement extends NativeObjectContainer {
 	}
 
 	/**
-	 * Method of function to be called to manage onPan or onZoom handlers.
+	 * Method of function to be called to manage onPan or onZoom callbacks.
 	 * 
 	 * @param context wrapper of native chart instance.
 	 */
 	private void onProgress(Context context) {
-		// checks if the handler must be invoked
-		if (isFunctionInvocationConsistent(progressHandler, context)) {
-			// invokes handler
-			progressHandler.onProgress(context.getChart());
+		// checks if the callback must be invoked
+		if (isFunctionInvocationConsistent(progressCallback, context)) {
+			// invokes callback
+			progressCallback.onProgress(context.getChart());
 		}
 	}
 
 	/**
-	 * Method of function to be called to manage onPanComplete or onZoomComplete handlers.
+	 * Method of function to be called to manage onPanComplete or onZoomComplete callbacks.
 	 * 
 	 * @param context wrapper of native chart instance.
 	 */
 	private void onComplete(Context context) {
-		// checks if the handler must be invoked
-		if (isFunctionInvocationConsistent(completeHandler, context)) {
-			// invokes handler
-			completeHandler.onComplete(context.getChart());
+		// checks if the callback must be invoked
+		if (isFunctionInvocationConsistent(completeCallback, context)) {
+			// invokes callback
+			completeCallback.onComplete(context.getChart());
 		}
 	}
 
 	/**
-	 * Returns <code>true</code> if the callback or handler must be invoked, checking callabck or handler and chart consistency.
+	 * Returns <code>true</code> if the callback must be invoked, checking callaback and chart consistency.
 	 * 
-	 * @param function callback or handler to check
-	 * @param context context of callback or handler passed by plugin
-	 * @return <code>true</code> if the callback or handler must be invoked, checking callabck or handler and chart consistency
+	 * @param function callback to check
+	 * @param context context of callback passed by plugin
+	 * @return <code>true</code> if the callback must be invoked, checking callback and chart consistency
 	 */
 	private boolean isFunctionInvocationConsistent(Object function, Context context) {
 		return function != null && context.getNativeChart() != null && IsChart.isValid(context.getChart());

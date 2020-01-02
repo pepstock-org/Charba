@@ -14,7 +14,8 @@
     limitations under the License.
 */
 /**
- * Contains the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin callback interfaces to configure the plugin itself.
+ * Contains the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin callback interfaces to configure the plugin itself
+ * and to catch events.
  * 
  * @author Andrea "Stock" Stocchero
  *

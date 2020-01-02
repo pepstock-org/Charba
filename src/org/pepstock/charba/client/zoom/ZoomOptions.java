@@ -72,20 +72,8 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 */
 	public ZoomOptions() {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(false);
-	}
-
-	/**
-	 * Creates new {@link ZoomPlugin#ID} plugin options.
-	 * 
-	 * @param deferredRegistration if <code>true</code> the options is not registered
-	 */
-	ZoomOptions(boolean deferredRegistration) {
 		// creates an empty native object
-		super(ZoomPlugin.ID, ZoomPlugin.FACTORY, deferredRegistration);
+		super(ZoomPlugin.ID, ZoomPlugin.FACTORY, false);
 		// reads the default default global options
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// sets inner elements
@@ -95,13 +83,6 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 		// stores inner elements
 		setValue(Property.PAN, pan);
 		setValue(Property.ZOOM, zoom);
-	}
-
-	/**
-	 * Registers the options to the factory to manage the cache of options.
-	 */
-	void registerOptions() {
-		super.register();
 	}
 
 	/**

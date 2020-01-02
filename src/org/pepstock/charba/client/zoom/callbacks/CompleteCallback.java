@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom.events;
+package org.pepstock.charba.client.zoom.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
@@ -24,7 +24,7 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface CompleteHandler {
+public interface CompleteCallback {
 
 	/**
 	 * Method called once zooming or panning is completed.

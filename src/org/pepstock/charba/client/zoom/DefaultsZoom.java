@@ -26,7 +26,7 @@ import org.pepstock.charba.client.zoom.Zoom.Property;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsZoom extends AbstractDefaultElement {
+final class DefaultsZoom extends AbstractDefaultsElement {
 
 	/**
 	 * Creates the object with an empty native object instance.
