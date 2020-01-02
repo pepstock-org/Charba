@@ -189,7 +189,7 @@ public interface IsDefaultOptions {
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
-	
+
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
 	 * <code>false</code>.

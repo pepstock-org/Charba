@@ -50,7 +50,7 @@ final class JsItemsHelper {
 	static JsItemsHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
 	 * 

@@ -189,7 +189,6 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// informs CHART.JS to draw the chart
 		return true;
 	}
-	
 
 	/*
 	 * (non-Javadoc)

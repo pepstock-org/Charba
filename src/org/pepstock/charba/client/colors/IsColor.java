@@ -23,7 +23,7 @@ package org.pepstock.charba.client.colors;
  *
  */
 public interface IsColor {
-	
+
 	/**
 	 * Returns <code>true</code> if the passed color instance is consistent, that means with a right red, green, blue and alpha
 	 * values and if the RGBA string representation is consistent as well.

@@ -387,7 +387,7 @@ public class LegendItem extends NativeObjectContainer {
 			return UndefinedValues.IMAGE_ELEMENT;
 		}
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 
