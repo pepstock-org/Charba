@@ -68,4 +68,13 @@ public interface Extensions extends ClientBundle {
 	@Source("js/hammer.min.js")
 	TextResource hammerLibrary();
 
+	/**
+	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation
+	 * plugin</a> code.
+	 * 
+	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation plugin</a> code
+	 */
+	@Source("js/chartjs-plugin-annotation.min.js")
+	TextResource annotationPlugin();
+
 }
