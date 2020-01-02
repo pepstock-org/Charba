@@ -26,7 +26,7 @@ import com.google.gwt.event.shared.EventHandler;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractChartEvent<H extends EventHandler> extends AbstractEvent<H> {
+abstract class AbstractChartEvent<H extends EventHandler> extends AbstractEvent<H> {
 
 	// instance of function context
 	private final Chart functionContext;
@@ -40,7 +40,7 @@ public abstract class AbstractChartEvent<H extends EventHandler> extends Abstrac
 	 * @param functionContext function context provided by CHART.JS
 	 * @param key options key where default function is stored
 	 */
-	public AbstractChartEvent(NativeEvent nativeEvent, Chart functionContext, Key key) {
+	protected AbstractChartEvent(NativeEvent nativeEvent, Chart functionContext, Key key) {
 		super(nativeEvent);
 		// checks if arguments are consistent
 		if (functionContext == null) {
