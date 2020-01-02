@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.JSON;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -73,7 +74,7 @@ public abstract class NativeObjectContainer {
 	public final String toJSON() {
 		return JSON.stringifyWithReplacer(nativeObject, 3);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if there is at least a property, otherwise <code>false</code>.
 	 * 
@@ -1109,4 +1110,64 @@ public abstract class NativeObjectContainer {
 		// and returns the RGBA value accordingly
 		return IsColor.isConsistent(value) ? value.toRGBA() : null;
 	}
+
+	// ------------------------------------------
+	// --- UTILITIES for properties which can have
+	// --- different types
+	// ------------------------------------------
+
+	/**
+	 * Returns the value of a property checking if the type of current value is a STRING.
+	 * 
+	 * @param key key of the property of JavaScript object
+	 * @param defaultsValue default value if the value was stored as single key value
+	 * @return  value of the property or {@link UndefinedValues#STRING} if not exist or not a string
+	 */
+	protected final String getValueForMultipleKeyTypes(Key key, String defaultsValue) {
+		// checks if key is consistent
+		// and if is a string
+		if (Key.isValid(key) && ObjectType.STRING.equals(type(key))) {
+			return getValue(key, defaultsValue);
+		}
+		// the property is not a string
+		// then returns undefined value
+		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Returns the value of a property checking if the type of current value is a NUMBER.
+	 * 
+	 * @param key key of the property of JavaScript object
+	 * @param defaultsValue default value if the value was stored as single key value
+	 * @return  value of the property or {@link UndefinedValues#DOUBLE} if not exist or not a number
+	 */
+	protected final double getValueForMultipleKeyTypes(Key key, double defaultsValue) {
+		// checks if key is consistent
+		// and if is a number
+		if (Key.isValid(key) && ObjectType.NUMBER.equals(type(key))) {
+			return getValue(key, defaultsValue);
+		}
+		// the property is not a number
+		// then returns undefined value
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns the value of a property checking if the type of current value is a OBJECT (as a date).
+	 * 
+	 * @param key key of the property of JavaScript object
+	 * @param defaultsValue default value if the value was stored as single key value
+	 * @return  value of the property or <code>null</code> if not exist or not a date
+	 */
+	protected final Date getValueForMultipleKeyTypes(Key key, Date defaultsValue) {
+		// checks if key is consistent
+		// and if is a object
+		if (Key.isValid(key) && ObjectType.OBJECT.equals(type(key))) {
+			return getValue(key, defaultsValue);
+		}
+		// the property is not a string
+		// then returns undefined value
+		return null;
+	}
+
 }
