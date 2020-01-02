@@ -42,6 +42,8 @@ import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -146,6 +148,23 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	@Override
 	protected final HandlerManager createHandlerManager() {
 		return new ChartHandlerManager(this);
+	}
+
+	/**
+	 * Gets the number of handlers listening to the event type.
+	 *
+	 * @param type the event type
+	 * @return the number of registered handlers
+	 */
+	public final <H extends EventHandler> int getEventHandlerCount(GwtEvent.Type<H> type) {
+		// checks if the event type is consistent
+		if (type != null) {
+			// if consistent, returns the number of handlers
+			return getHandlerCount(type);
+		}
+		// if here, the type is not consistent
+		// then returns 0
+		return 0;
 	}
 
 	/**

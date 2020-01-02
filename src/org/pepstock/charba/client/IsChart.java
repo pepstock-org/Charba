@@ -132,6 +132,14 @@ public interface IsChart extends HasHandlers {
 	<H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type);
 
 	/**
+	 * Gets the number of handlers listening to the event type.
+	 *
+	 * @param type the event type
+	 * @return the number of registered handlers
+	 */
+	<H extends EventHandler> int getEventHandlerCount(GwtEvent.Type<H> type);
+
+	/**
 	 * Gets a handle to the object's underlying DOM element.
 	 * 
 	 * 
