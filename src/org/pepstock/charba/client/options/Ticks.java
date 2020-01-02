@@ -376,7 +376,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public double getMin() {
-		return getValue(Property.MIN, getDefaultValues().getMin());
+		return getValueForMultipleKeyTypes(Property.MIN, getDefaultValues().getMin());
 	}
 
 	/**
@@ -405,9 +405,12 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		// checks if there is the property
 		if (has(Property.MIN)) {
 			// gets the value, getting the max with 0
-			double value = Math.max(getMin(), 0);
-			// transforms as date
-			return new Date((long) JsDate.create(value).getTime());
+			double value = Math.max(getMin(), 0D);
+			// checks if value is consistent
+			if (!Double.isNaN(value)) {
+				// transforms as date
+				return new Date((long) JsDate.create(value).getTime());
+			}
 		}
 		// if here, property is missing
 		// then returns default (null)
@@ -431,7 +434,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public double getMax() {
-		return getValue(Property.MAX, getDefaultValues().getMax());
+		return getValueForMultipleKeyTypes(Property.MAX, getDefaultValues().getMax());
 	}
 
 	/**
@@ -457,11 +460,14 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	public Date getMaxAsDate() {
 		// checks if there is the property
-		if (has(Property.MIN)) {
+		if (has(Property.MAX)) {
 			// gets the value, getting the max with 0
-			double value = Math.max(getMax(), 0);
-			// transforms as date
-			return new Date((long) JsDate.create(value).getTime());
+			double value = Math.max(getMax(), 0D);
+			// checks if value is consistent
+			if (!Double.isNaN(value)) {
+				// transforms as date
+				return new Date((long) JsDate.create(value).getTime());
+			}
 		}
 		// if here, property is missing
 		// then returns default (null)
@@ -485,7 +491,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public String getMinAsString() {
-		return getValue(Property.MIN, String.valueOf(getDefaultValues().getMin()));
+		return getValueForMultipleKeyTypes(Property.MIN, String.valueOf(getDefaultValues().getMin()));
 	}
 
 	/**
@@ -505,7 +511,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public String getMaxAsString() {
-		return getValue(Property.MAX, String.valueOf(getDefaultValues().getMax()));
+		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
 	}
 
 	/**

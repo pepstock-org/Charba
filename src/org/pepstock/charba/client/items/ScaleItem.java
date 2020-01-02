@@ -202,14 +202,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMax() {
-		// checks if value is a number
-		if (ObjectType.NUMBER.equals(type(Property.MAX))) {
-			// then returns as double
-			return getValue(Property.MAX, UndefinedValues.DOUBLE);
-		}
-		// if here is not a number
-		// then returns undefined double
-		return UndefinedValues.DOUBLE;
+		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -218,14 +211,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMin() {
-		// checks if value is a number
-		if (ObjectType.NUMBER.equals(type(Property.MIN))) {
-			// then returns as double
-			return getValue(Property.MIN, UndefinedValues.DOUBLE);
-		}
-		// if here is not a number
-		// then returns undefined double
-		return UndefinedValues.DOUBLE;
+		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -243,14 +229,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMaxAsString() {
-		// checks if value is a string
-		if (ObjectType.STRING.equals(type(Property.MAX))) {
-			// then returns as string
-			return getValue(Property.MAX, UndefinedValues.STRING);
-		}
-		// if here is not a string
-		// then returns undefined string
-		return UndefinedValues.STRING;
+		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.STRING);
 	}
 
 	/**
@@ -259,14 +238,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMinAsString() {
-		// checks if value is a string
-		if (ObjectType.STRING.equals(type(Property.MIN))) {
-			// then returns as string
-			return getValue(Property.MIN, UndefinedValues.STRING);
-		}
-		// if here is not a string
-		// then returns undefined string
-		return UndefinedValues.STRING;
+		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.STRING);
 	}
 
 	/**
@@ -278,7 +250,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// checks if value is a number and the axis is a time
 		if (ObjectType.NUMBER.equals(type(Property.MAX)) && AxisType.TIME.equals(getType())) {
 			// then returns as double
-			double value = getValue(Property.MAX, UndefinedValues.DOUBLE);
+			double value = Math.max(getValue(Property.MAX, UndefinedValues.DOUBLE), 0D);
 			// checks if is a NaN
 			if (!Double.isNaN(value)) {
 				// if not, returns a date
@@ -299,7 +271,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// checks if value is a number and the axis is a time
 		if (ObjectType.NUMBER.equals(type(Property.MIN)) && AxisType.TIME.equals(getType())) {
 			// then returns as double
-			double value = getValue(Property.MIN, UndefinedValues.DOUBLE);
+			double value = Math.max(getValue(Property.MIN, UndefinedValues.DOUBLE), 0D);
 			// checks if is a NaN
 			if (!Double.isNaN(value)) {
 				// if not, returns a date
