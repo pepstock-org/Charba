@@ -161,6 +161,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return <code>true</code> whether the label is enabled and should be displayed
 	 */
+	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, IsDefaultsLineLabel.super.isEnabled());
 	}
@@ -188,6 +189,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the background color of label
 	 */
+	@Override
 	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, IsDefaultsLineLabel.super.getBackgroundColorAsString());
 	}
@@ -215,6 +217,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the font size of text
 	 */
+	@Override
 	public int getFontSize() {
 		return getValue(Property.FONT_SIZE, IsDefaultsLineLabel.super.getFontSize());
 	}
@@ -233,6 +236,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the font style of text
 	 */
+	@Override
 	public FontStyle getFontStyle() {
 		return getValue(Property.FONT_STYLE, FontStyle.class, IsDefaultsLineLabel.super.getFontStyle());
 	}
@@ -260,6 +264,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the font color of text
 	 */
+	@Override
 	public String getFontColorAsString() {
 		return getValue(Property.FONT_COLOR, IsDefaultsLineLabel.super.getFontColorAsString());
 	}
@@ -287,6 +292,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the font family of text
 	 */
+	@Override
 	public String getFontFamily() {
 		return getValue(Property.FONT_FAMILY, IsDefaultsLineLabel.super.getFontFamily());
 	}
@@ -305,6 +311,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the padding of label to add left and right
 	 */
+	@Override
 	public int getXPadding() {
 		return getValue(Property.X_PADDING, IsDefaultsLineLabel.super.getXPadding());
 	}
@@ -323,6 +330,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the padding of label to add top and bottom
 	 */
+	@Override
 	public int getYPadding() {
 		return getValue(Property.Y_PADDING, IsDefaultsLineLabel.super.getYPadding());
 	}
@@ -341,6 +349,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the radius of label rectangle
 	 */
+	@Override
 	public double getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, IsDefaultsLineLabel.super.getCornerRadius());
 	}
@@ -359,6 +368,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the anchor position of label on line
 	 */
+	@Override
 	public LineLabelPosition getPosition() {
 		return getValue(Property.POSITION, LineLabelPosition.class, IsDefaultsLineLabel.super.getPosition());
 	}
@@ -381,6 +391,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the adjustment along x-axis (left-right) of label
 	 */
+	@Override
 	public int getXAdjust() {
 		return getValue(Property.X_ADJUST, IsDefaultsLineLabel.super.getXAdjust());
 	}
@@ -403,6 +414,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @return the adjustment along y-axis (top-bottom) of label
 	 */
+	@Override
 	public int getYAdjust() {
 		return getValue(Property.Y_ADJUST, IsDefaultsLineLabel.super.getYAdjust());
 	}

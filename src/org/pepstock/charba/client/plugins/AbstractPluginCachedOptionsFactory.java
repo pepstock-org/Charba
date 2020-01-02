@@ -112,23 +112,8 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 		if (IsChart.isConsistent(chart)) {
 			// gets the plugin options from chart options, if there
 			if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
-				// gets the object type of options to know if there is an array of options
-				ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
-				// if is single object
-				if (ObjectType.OBJECT.equals(type)) {
-					// gets object
-					T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
-					// unregisters it from the chart
-					unregister(options, chart.getId());
-				} else if (ObjectType.ARRAY.equals(type)) {
-					// if here the options are an array of objects
-					List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
-					// scans the objects
-					for (T options : optionsList) {
-						// unregisters it from the chart
-						unregister(options, chart.getId());
-					}
-				}
+				// unregisters options
+				unregisterOptionsForDestroy(chart);
 			}
 			// gets the plugin options from chart datasets, if there
 			for (Dataset dataset : chart.getData().getDatasets()) {
@@ -137,6 +122,31 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 					// unregisters it from the chart
 					unregister(options, chart.getId());
 				}
+			}
+		}
+	}
+	
+	/**
+	 * Unregisters the options of a chart because the chart is destroyed.
+	 * 
+	 * @param chart destroyed chart
+	 */
+	private void unregisterOptionsForDestroy(IsChart chart) {
+		// gets the object type of options to know if there is an array of options
+		ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
+		// if is single object
+		if (ObjectType.OBJECT.equals(type)) {
+			// gets object
+			T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
+			// unregisters it from the chart
+			unregister(options, chart.getId());
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// if here the options are an array of objects
+			List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
+			// scans the objects
+			for (T options : optionsList) {
+				// unregisters it from the chart
+				unregister(options, chart.getId());
 			}
 		}
 	}

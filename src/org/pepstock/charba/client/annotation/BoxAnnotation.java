@@ -112,6 +112,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the color of the border of annotation
 	 */
+	@Override
 	public String getBorderColorAsString() {
 		return getValue(AbstractAnnotation.Property.BORDER_COLOR, IsDefaultsBoxAnnotation.super.getBorderColorAsString());
 	}
@@ -121,6 +122,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the width of the border in pixels.
 	 */
+	@Override
 	public int getBorderWidth() {
 		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, IsDefaultsBoxAnnotation.super.getBorderWidth());
 	}
@@ -149,6 +151,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the color of the background of annotation
 	 */
+	@Override
 	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, IsDefaultsBoxAnnotation.super.getBackgroundColorAsString());
 	}
@@ -176,6 +179,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the ID of the X scale to bind onto
 	 */
+	@Override
 	public String getXScaleID() {
 		return getValue(Property.X_SCALE_ID, IsDefaultsBoxAnnotation.super.getXScaleID());
 	}
@@ -212,6 +216,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the right edge of the box
 	 */
+	@Override
 	public String getXMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsString());
 	}
@@ -221,6 +226,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the right edge of the box
 	 */
+	@Override
 	public double getXMaxAsDouble() {
 		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsDouble());
 	}
@@ -230,6 +236,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the right edge of the box
 	 */
+	@Override
 	public Date getXMaxAsDate() {
 		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsDate());
 	}
@@ -266,6 +273,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the left edge of the box
 	 */
+	@Override
 	public String getXMinAsString() {
 		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsString());
 	}
@@ -275,6 +283,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the left edge of the box
 	 */
+	@Override
 	public double getXMinAsDouble() {
 		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsDouble());
 	}
@@ -284,6 +293,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the left edge of the box
 	 */
+	@Override
 	public Date getXMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsDate());
 	}
@@ -302,6 +312,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the ID of the Y scale to bind onto
 	 */
+	@Override
 	public String getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, IsDefaultsBoxAnnotation.super.getYScaleID());
 	}
@@ -338,6 +349,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the top edge of the box in units along the y axis
 	 */
+	@Override
 	public String getYMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsString());
 	}
@@ -347,6 +359,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the top edge of the box in units along the y axis
 	 */
+	@Override
 	public double getYMaxAsDouble() {
 		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsDouble());
 	}
@@ -356,6 +369,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the top edge of the box in units along the y axis
 	 */
+	@Override
 	public Date getYMaxAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsDate());
 	}
@@ -392,6 +406,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the bottom edge of the box
 	 */
+	@Override
 	public String getYMinAsString() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsString());
 	}
@@ -401,6 +416,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the bottom edge of the box
 	 */
+	@Override
 	public double getYMinAsDouble() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsDouble());
 	}
@@ -410,6 +426,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * 
 	 * @return the bottom edge of the box
 	 */
+	@Override
 	public Date getYMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsDate());
 	}

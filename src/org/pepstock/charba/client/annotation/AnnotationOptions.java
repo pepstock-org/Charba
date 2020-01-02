@@ -102,6 +102,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
+	@Override
 	public DrawTime getDrawTime() {
 		return getValue(Property.DRAW_TIME, DrawTime.class, IsDefaultOptions.super.getDrawTime());
 	}
@@ -124,6 +125,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the double-click speed in milliseconds
 	 */
+	@Override
 	public int getDoubleClickSpeed() {
 		return getValue(Property.DOUBLE_CLICK_SPEED, IsDefaultOptions.super.getDoubleClickSpeed());
 	}
@@ -143,6 +145,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the browser events to enable on each annotation
 	 */
+	@Override
 	public List<Event> getEvents() {
 		// gets array for events
 		ArrayString array = getArrayValue(Property.EVENTS);

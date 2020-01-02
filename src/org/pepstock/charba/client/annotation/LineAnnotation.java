@@ -125,6 +125,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the color of the border of annotation
 	 */
+	@Override
 	public String getBorderColorAsString() {
 		// returns color as string
 		return getValue(AbstractAnnotation.Property.BORDER_COLOR, IsDefaultsLineAnnotation.super.getBorderColorAsString());
@@ -135,6 +136,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the width of the border in pixels.
 	 */
+	@Override
 	public int getBorderWidth() {
 		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, IsDefaultsLineAnnotation.super.getBorderWidth());
 	}
@@ -158,6 +160,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
 	 *         lines and gaps which describe the pattern.
 	 */
+	@Override
 	public List<Integer> getBorderDash() {
 		// checks if there is the property
 		if (has(Property.BORDER_DASH)) {
@@ -183,6 +186,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the line dash pattern offset or "phase".
 	 */
+	@Override
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, IsDefaultsLineAnnotation.super.getBorderDashOffset());
 	}
@@ -201,6 +205,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the orientation (horizontal or vertical) of the line
 	 */
+	@Override
 	public LineMode getMode() {
 		return getValue(Property.MODE, LineMode.class, IsDefaultsLineAnnotation.super.getMode());
 	}
@@ -219,6 +224,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the ID of the scale to bind onto
 	 */
+	@Override
 	public String getScaleID() {
 		return getValue(Property.SCALE_ID, IsDefaultsLineAnnotation.super.getScaleID());
 	}
@@ -255,6 +261,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value to draw the line at
 	 */
+	@Override
 	public String getValueAsString() {
 		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsString());
 	}
@@ -264,6 +271,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value to draw the line at
 	 */
+	@Override
 	public double getValueAsDouble() {
 		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDouble());
 	}
@@ -273,6 +281,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value to draw the line at
 	 */
+	@Override
 	public Date getValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDate());
 	}
@@ -309,6 +318,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value at which the line draw should end
 	 */
+	@Override
 	public String getEndValueAsString() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsString());
 	}
@@ -318,6 +328,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value at which the line draw should end
 	 */
+	@Override
 	public double getEndValueAsDouble() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDouble());
 	}
@@ -327,6 +338,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the data value at which the line draw should end
 	 */
+	@Override
 	public Date getEndValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDate());
 	}

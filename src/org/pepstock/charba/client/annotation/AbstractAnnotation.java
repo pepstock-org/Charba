@@ -179,27 +179,27 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets proxy handler to callback proxy to invoke the MOUSEENTER function
-		mouseenterCallbackProxy.setCallback((context, event) -> onMouseenter(context, event));
+		mouseenterCallbackProxy.setCallback(this::onMouseenter);
 		// sets proxy handler to callback proxy to invoke the MOUSEOVER function
-		mouseoverCallbackProxy.setCallback((context, event) -> onMouseover(context, event));
+		mouseoverCallbackProxy.setCallback(this::onMouseover);
 		// sets proxy handler to callback proxy to invoke the MOUSELEAVE function
-		mouseleaveCallbackProxy.setCallback((context, event) -> onMouseleave(context, event));
+		mouseleaveCallbackProxy.setCallback(this::onMouseleave);
 		// sets proxy handler to callback proxy to invoke the MOUSEOUT function
-		mouseoutCallbackProxy.setCallback((context, event) -> onMouseout(context, event));
+		mouseoutCallbackProxy.setCallback(this::onMouseout);
 		// sets proxy handler to callback proxy to invoke the MOUSEMOVE function
-		mousemoveCallbackProxy.setCallback((context, event) -> onMousemove(context, event));
+		mousemoveCallbackProxy.setCallback(this::onMousemove);
 		// sets proxy handler to callback proxy to invoke the MOUSEDOWN function
-		mousedownCallbackProxy.setCallback((context, event) -> onMousedown(context, event));
+		mousedownCallbackProxy.setCallback(this::onMousedown);
 		// sets proxy handler to callback proxy to invoke the MOUSEUP function
-		mouseupCallbackProxy.setCallback((context, event) -> onMouseup(context, event));
+		mouseupCallbackProxy.setCallback(this::onMouseup);
 		// sets proxy handler to callback proxy to invoke the CLICK function
-		clickCallbackProxy.setCallback((context, event) -> onClick(context, event));
+		clickCallbackProxy.setCallback(this::onClick);
 		// sets proxy handler to callback proxy to invoke the DBLCLICK function
-		dblclickCallbackProxy.setCallback((context, event) -> onDblclick(context, event));
+		dblclickCallbackProxy.setCallback(this::onDblclick);
 		// sets proxy handler to callback proxy to invoke the CONTEXTMENU function
-		contextmenuCallbackProxy.setCallback((context, event) -> onContextmenu(context, event));
+		contextmenuCallbackProxy.setCallback(this::onContextmenu);
 		// sets proxy handler to callback proxy to invoke the WHEEL function
-		wheelCallbackProxy.setCallback((context, event) -> onWheel(context, event));
+		wheelCallbackProxy.setCallback(this::onWheel);
 		// stores all callbacks into object
 	}
 
@@ -244,6 +244,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
+	@Override
 	public final DrawTime getDrawTime() {
 		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.class, IsDefaultsAnnotation.super.getDrawTime());
 	}
