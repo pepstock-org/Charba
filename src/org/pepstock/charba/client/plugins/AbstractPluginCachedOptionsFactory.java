@@ -88,14 +88,17 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onAfterInit(IsChart chart) {
-		// checks if there is a plugin options as GLOBAL
-		manageGlobalOptions();
-		// checks if there is a plugin options as CHART GLOBAL
-		manageGlobalChartOptions(chart);
-		// gets the plugin options from chart options, if there
-		manageChartOptions(chart);
-		// gets the plugin options from chart datasets, if there
-		manageDatasetsOptions(chart);
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// checks if there is a plugin options as GLOBAL
+			manageGlobalOptions();
+			// checks if there is a plugin options as CHART GLOBAL
+			manageGlobalChartOptions(chart);
+			// gets the plugin options from chart options, if there
+			manageChartOptions(chart);
+			// gets the plugin options from chart datasets, if there
+			manageDatasetsOptions(chart);
+		}
 	}
 
 	/*
@@ -105,32 +108,35 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onBeforeDestroy(IsChart chart) {
-		// gets the plugin options from chart options, if there
-		if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
-			// gets the object type of options to know if there is an array of options
-			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
-			// if is single object
-			if (ObjectType.OBJECT.equals(type)) {
-				// gets object
-				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
-				// unregisters it from the chart
-				unregister(options, chart.getId());
-			} else if (ObjectType.ARRAY.equals(type)) {
-				// if here the options are an array of objects
-				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
-				// scans the objects
-				for (T options : optionsList) {
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// gets the plugin options from chart options, if there
+			if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
+				// gets the object type of options to know if there is an array of options
+				ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
+				// if is single object
+				if (ObjectType.OBJECT.equals(type)) {
+					// gets object
+					T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
+					// unregisters it from the chart
+					unregister(options, chart.getId());
+				} else if (ObjectType.ARRAY.equals(type)) {
+					// if here the options are an array of objects
+					List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
+					// scans the objects
+					for (T options : optionsList) {
+						// unregisters it from the chart
+						unregister(options, chart.getId());
+					}
+				}
+			}
+			// gets the plugin options from chart datasets, if there
+			for (Dataset dataset : chart.getData().getDatasets()) {
+				if (dataset.hasOptions(pluginId)) {
+					T options = dataset.getOptions(pluginId, this);
 					// unregisters it from the chart
 					unregister(options, chart.getId());
 				}
-			}
-		}
-		// gets the plugin options from chart datasets, if there
-		for (Dataset dataset : chart.getData().getDatasets()) {
-			if (dataset.hasOptions(pluginId)) {
-				T options = dataset.getOptions(pluginId, this);
-				// unregisters it from the chart
-				unregister(options, chart.getId());
 			}
 		}
 	}
