@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
@@ -30,6 +31,7 @@ public interface ProgressCallback {
 	 * Method called while the user is zooming or panning.
 	 * 
 	 * @param chart chart instance
+	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
 	 */
-	void onProgress(IsChart chart);
+	void onProgress(IsChart chart, AbstractConfigurationItem configurationItem);
 }

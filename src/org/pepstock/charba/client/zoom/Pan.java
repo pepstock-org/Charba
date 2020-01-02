@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Pan extends AbstractElement {
+public final class Pan extends AbstractConfigurationItem {
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.

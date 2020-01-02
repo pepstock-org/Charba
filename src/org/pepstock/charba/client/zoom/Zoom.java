@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Zoom extends AbstractElement {
+public final class Zoom extends AbstractConfigurationItem {
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsPan extends AbstractDefaultsElement {
+final class DefaultsPan extends AbstractDefaultsConfigurationItem {
 
 	/**
 	 * Creates the object with an empty native object instance.

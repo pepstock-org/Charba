@@ -34,7 +34,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  * 
  */
-abstract class AbstractElement extends NativeObjectContainer {
+public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 
 	/**
 	 * Java script FUNCTION callback called to provide the mode (direction) of element.
@@ -127,7 +127,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	}
 
 	// default options
-	private final AbstractDefaultsElement defaultsOptions;
+	private final AbstractDefaultsConfigurationItem defaultsOptions;
 	// minimum range
 	private final Range rangeMin;
 	// maximum range
@@ -145,7 +145,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 	 * @param nativeObject native object instance to be wrapped.
 	 * @param defaultsOptions default options of element
 	 */
-	AbstractElement(NativeObject nativeObject, AbstractDefaultsElement defaultsOptions) {
+	AbstractConfigurationItem(NativeObject nativeObject, AbstractDefaultsConfigurationItem defaultsOptions) {
 		super(nativeObject);
 		// checks if defaults options is consistent
 		if (defaultsOptions == null) {
@@ -398,7 +398,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(progressCallback, context)) {
 			// invokes callback
-			progressCallback.onProgress(context.getChart());
+			progressCallback.onProgress(context.getChart(), this);
 		}
 	}
 
@@ -411,7 +411,7 @@ abstract class AbstractElement extends NativeObjectContainer {
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(completeCallback, context)) {
 			// invokes callback
-			completeCallback.onComplete(context.getChart());
+			completeCallback.onComplete(context.getChart(), this);
 		}
 	}
 

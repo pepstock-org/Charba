@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
  * @author Andrea "Stock" Stocchero
  * 
  */
-abstract class AbstractDefaultsElement extends NativeObjectContainer {
+abstract class AbstractDefaultsConfigurationItem extends NativeObjectContainer {
 
 	// range min instance
 	private final DefaultsRange rangeMin;
@@ -35,15 +35,15 @@ abstract class AbstractDefaultsElement extends NativeObjectContainer {
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	AbstractDefaultsElement() {
+	AbstractDefaultsConfigurationItem() {
 		super();
 		// creates default range min options
 		rangeMin = new DefaultsRange();
 		// creates default range max options
 		rangeMax = new DefaultsRange();
 		// sets the native object inside this object
-		setValue(AbstractElement.Property.RANGE_MIN, rangeMin);
-		setValue(AbstractElement.Property.RANGE_MAX, rangeMax);
+		setValue(AbstractConfigurationItem.Property.RANGE_MIN, rangeMin);
+		setValue(AbstractConfigurationItem.Property.RANGE_MAX, rangeMax);
 	}
 
 	/**
@@ -51,12 +51,12 @@ abstract class AbstractDefaultsElement extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractDefaultsElement(NativeObject nativeObject) {
+	AbstractDefaultsConfigurationItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// reads default range min options from main object
-		rangeMin = new DefaultsRange(getValue(AbstractElement.Property.RANGE_MIN));
+		rangeMin = new DefaultsRange(getValue(AbstractConfigurationItem.Property.RANGE_MIN));
 		// reads default range max options from main object
-		rangeMax = new DefaultsRange(getValue(AbstractElement.Property.RANGE_MAX));
+		rangeMax = new DefaultsRange(getValue(AbstractConfigurationItem.Property.RANGE_MAX));
 	}
 
 	/**
@@ -65,7 +65,7 @@ abstract class AbstractDefaultsElement extends NativeObjectContainer {
 	 * @return <code>true</code> to enable element (panning or zooming)
 	 */
 	final boolean isEnabled() {
-		return getValue(AbstractElement.Property.ENABLED, AbstractElement.DEFAULT_ENABLED);
+		return getValue(AbstractConfigurationItem.Property.ENABLED, AbstractConfigurationItem.DEFAULT_ENABLED);
 	}
 
 	/**
@@ -74,7 +74,7 @@ abstract class AbstractDefaultsElement extends NativeObjectContainer {
 	 * @return the element (panning or zooming) directions
 	 */
 	final InteractionAxis getMode() {
-		return getValue(AbstractElement.Property.MODE, InteractionAxis.class, AbstractElement.DEFAULT_MODE);
+		return getValue(AbstractConfigurationItem.Property.MODE, InteractionAxis.class, AbstractConfigurationItem.DEFAULT_MODE);
 	}
 
 	/**
@@ -101,7 +101,7 @@ abstract class AbstractDefaultsElement extends NativeObjectContainer {
 	 * @return the speed of element via mouse wheel
 	 */
 	final double getSpeed() {
-		return getValue(AbstractElement.Property.SPEED, getSpeedAsDefault());
+		return getValue(AbstractConfigurationItem.Property.SPEED, getSpeedAsDefault());
 	}
 
 	/**

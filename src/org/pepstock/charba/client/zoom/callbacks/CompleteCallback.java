@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
@@ -30,7 +31,8 @@ public interface CompleteCallback {
 	 * Method called once zooming or panning is completed.
 	 * 
 	 * @param chart chart instance
+	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
 	 */
-	void onComplete(IsChart chart);
+	void onComplete(IsChart chart, AbstractConfigurationItem configurationItem);
 
 }
