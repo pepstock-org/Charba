@@ -138,7 +138,6 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move `alpha`, `toRGBA`, `toRGB`, `toHex`, `toHSLA`, `toHSL`, `toRGBs`, `brighter`, `brighter`, `darker` and `darker` methods as default methods into `IsColor` interface in order that whoever will implement the interface could provide only red, green, blue and alpha values.
  * move some methods of common `JsHelper` into a dedicated and protected helper in order to hide those methods.
  * add compile dependency with last version [2.0.0](https://github.com/google/jsinterop-annotations/releases/tag/2.0.0) of [JSINTEROP](https://github.com/google/jsinterop-annotations) annotations.
- * add `getEventHandlerCount` method to `IsChart` interface in order to get the number of handlers listening to the event type.
  
 License
 -------
