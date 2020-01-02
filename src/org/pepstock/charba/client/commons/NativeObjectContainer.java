@@ -1121,7 +1121,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return  value of the property or {@link UndefinedValues#STRING} if not exist or not a string
+	 * @return value of the property or {@link UndefinedValues#STRING} if not exist or not a string
 	 */
 	protected final String getValueForMultipleKeyTypes(Key key, String defaultsValue) {
 		// checks if key is consistent
@@ -1139,7 +1139,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return  value of the property or {@link UndefinedValues#DOUBLE} if not exist or not a number
+	 * @return value of the property or {@link UndefinedValues#DOUBLE} if not exist or not a number
 	 */
 	protected final double getValueForMultipleKeyTypes(Key key, double defaultsValue) {
 		// checks if key is consistent
@@ -1157,7 +1157,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return  value of the property or <code>null</code> if not exist or not a date
+	 * @return value of the property or <code>null</code> if not exist or not a date
 	 */
 	protected final Date getValueForMultipleKeyTypes(Key key, Date defaultsValue) {
 		// checks if key is consistent

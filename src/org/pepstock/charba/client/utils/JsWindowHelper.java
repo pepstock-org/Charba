@@ -73,7 +73,7 @@ public final class JsWindowHelper {
 			enableResizeOnBeforePrint = true;
 		}
 	}
-	
+
 	/**
 	 * Returns a list of strings with element attributes.
 	 * 
