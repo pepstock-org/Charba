@@ -91,7 +91,7 @@ public final class ZoomPlugin {
 			JsZoomHelper.get().resetZoom(nativeChart);
 		}
 	}
-	
+
 	/**
 	 * Creates new customized drag-to-zoom effect.
 	 * 
