@@ -62,7 +62,7 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 		if (!deferredRegistration) {
 			// registers into cache
 			factory.registerOptions(this);
-			// sets falg
+			// sets flag
 			isRegistered = true;
 		}
 	}
