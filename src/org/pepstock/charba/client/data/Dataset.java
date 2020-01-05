@@ -188,8 +188,6 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		setValue(Property.TYPE, type);
 		// stores the id based on a counter
 		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
-		// stores the id based on a counter
-		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
 		setValue(Property.CHARBA_PATTERNS, patternsContainer);
 		setValue(Property.CHARBA_GRADIENTS, gradientsContainer);
