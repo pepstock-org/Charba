@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public abstract class CanvasObject extends NativeObjectContainer {
 
 	// internal counter
-	private static final AtomicInteger counter = new AtomicInteger(0);
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -72,7 +72,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// increments the id
 		// unique for every canvas object
 		// stores the ID
-		setValue(Property.CHARBA_OBJECT_ID, counter.getAndIncrement());
+		setValue(Property.CHARBA_OBJECT_ID, COUNTER.getAndIncrement());
 	}
 
 	/**
