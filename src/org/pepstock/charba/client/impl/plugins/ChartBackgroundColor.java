@@ -50,14 +50,13 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * The factory to create options
 	 */
 	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
-
-	// cache to store options in order do not load every time the options
-	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
-
 	/**
 	 * Default background color, {@link HtmlColor#WHITE}.
 	 */
 	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.WHITE.toRGBA();
+
+	// cache to store options in order do not load every time the options
+	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 	// color instance
 	private final String color;
 	// gradient instance
