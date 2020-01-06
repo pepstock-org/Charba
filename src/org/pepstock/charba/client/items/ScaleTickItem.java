@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
  * The tick item maps the objects passed a {@link ScaleItem}.<br>
- * This is a wrapper of the CHART.JS item with all needed info.<br>
+ * This is a wrapper of the CHART.JS item with all needed info.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,7 +32,9 @@ public class ScaleTickItem extends AbstractTickItem {
 	 */
 	private enum Property implements Key
 	{
-		LABEL("label");
+		INDEX("_index"),
+		LABEL("label"),
+		VALUE("value");
 
 		// name value of property
 		private final String value;
@@ -68,12 +70,39 @@ public class ScaleTickItem extends AbstractTickItem {
 	}
 
 	/**
+	 * Returns the index of the tick.
+	 * 
+	 * @return the index of the tick or {@link UndefinedValues#INTEGER} if missing.
+	 */
+	public final int getIndex(){
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	}
+
+	/**
 	 * Returns the label of the tick.
 	 * 
 	 * @return the label of the tick or {@link UndefinedValues#STRING} if missing.
 	 */
 	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
+	}
+	
+	/**
+	 * Returns the value of the tick as string.
+	 * 
+	 * @return the value of the tick or {@link UndefinedValues#STRING} if missing or not a string.
+	 */
+	public final String getValueAsString() {
+		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.STRING);
+	}
+
+	/**
+	 * Returns the value of the tick as double.
+	 * 
+	 * @return the value of the tick or {@link UndefinedValues#DOUBLE} if missing or not a double.
+	 */
+	public final double getValueAsDouble() {
+		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.DOUBLE);
 	}
 
 	/**
