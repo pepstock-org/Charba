@@ -52,7 +52,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/**
 	 * The factory to create options
 	 */
-	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
+	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory(ID);
 	/**
 	 * Default background color, {@link HtmlColor#WHITE}.
 	 */
