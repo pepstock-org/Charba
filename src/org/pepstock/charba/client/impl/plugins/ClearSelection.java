@@ -159,15 +159,6 @@ public final class ClearSelection extends NativeObjectContainer {
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsClearSelection defaultsOptions;
 
-//	/**
-//	 * Creates new font element, using the default values options.
-//	 * 
-//	 * @param defaultsOptions default clear selection element options to returns the default when required.
-//	 */
-//	ClearSelection(DatasetsItemsSelectorDefaultsClearSelection defaultsOptions) {
-//		this(null, defaultsOptions);
-//	}
-
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.
 	 * 
