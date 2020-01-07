@@ -185,7 +185,8 @@ public final class Defaults {
 	}
 
 	/**
-	 * Returns the default options by a chart type, by defaults of CHART.JS. If the type is not consistent, throws an exception.
+	 * Returns the default options by a chart type, by defaults of CHART.JS.<br>
+	 * If the type is not consistent, throws an exception.
 	 * 
 	 * @param type chart type.
 	 * @return the default options or throws an exception if type is not consistent.
@@ -200,6 +201,24 @@ public final class Defaults {
 		}
 		// returns the existing options
 		return chartOptions.get(type.value());
+	}
+
+	/**
+	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
+	 * If the chart is not consistent, throws an exception.
+	 * 
+	 * @param chart chart instance.
+	 * @return the default options by a chart instance, merging global, chart type global and chart options
+	 */
+	public ChartOptions getOptions(IsChart chart) {
+		// checks if type is consistent
+		IsChart.checkIfConsistent(chart);
+		// creates a mergable options
+		MergableOptions options = new MergableOptions();
+		// load the mergable options
+		chart.getOptions().loadOptions(options);
+		// returns a default option with all configuration
+		return new ChartOptions(chart.getType(), options.getNativeOptions());
 	}
 
 	/**

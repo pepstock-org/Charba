@@ -24,6 +24,7 @@ import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.MergableOptions;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -34,6 +35,7 @@ import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.enums.ChartEventProperty;
@@ -275,6 +277,23 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// returns an empty string
 			return Constants.EMPTY_STRING;
 		});
+	}
+	
+	/**
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
+	 * options (by chart.defaults.global) and chart options.<br>
+	 * The chain of priority is:<br>
+	 * <ul>
+	 * <li>chart options
+	 * <li>chart default options (by chart.defaults[type])
+	 * <li>default scale options (by chart.defaults.scale)
+	 * <li>global options (by chart.defaults.global)
+	 * </ul>
+	 * 
+	 * @param containerOptions the options container of native options
+	 */
+	public final void loadOptions(MergableOptions optionsContainer) {
+		Merger.get().load(getChart(), getConfiguration(), optionsContainer);
 	}
 
 	/**

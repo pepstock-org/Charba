@@ -23,6 +23,8 @@ import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.MergableOptions;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.enums.AxisType;
@@ -89,6 +91,37 @@ public final class Merger {
 	 */
 	public static Merger get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
+	 * options (by chart.defaults.global) and chart options.<br>
+	 * The chain of priority is:<br>
+	 * <ul>
+	 * <li>chart options
+	 * <li>chart default options (by chart.defaults[type])
+	 * <li>default scale options (by chart.defaults.scale)
+	 * <li>global options (by chart.defaults.global)
+	 * </ul>
+	 * 
+	 * @param chart chart instance which contains the chart options to be merged
+	 * @param options the options as native object container to be merged
+	 * @param containerOptions the options container of native options
+	 */
+	public void load(IsChart chart, NativeObjectContainer options, MergableOptions containerOptions) {
+		// checks if argument is consistent
+		IsChart.checkIfConsistent(chart);
+		// checks if container is consistent
+		if (containerOptions != null) {
+			// gets global and chart type options merged
+			NativeObject defaults = get(chart.getType());
+			// clones native object to avoid to changes the sources
+			NativeObject chartOptions = Helpers.get().clone(options.getNativeObject());
+			// merges the current chart options with the global and chart type ones
+			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
+			// loads whole options into native options container
+			containerOptions.setNativeOptions(wholeOptions);
+		}
 	}
 
 	/**
