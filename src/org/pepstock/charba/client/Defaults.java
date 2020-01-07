@@ -181,7 +181,12 @@ public final class Defaults {
 	 * @return the default options
 	 */
 	public ChartOptions getChartOptions(Type type) {
-		return new ChartOptions(type, Merger.get().get(type));
+		// creates a mergable options
+		MergableOptions options = new MergableOptions();
+		// load the mergable options
+		Merger.get().load(type, options);
+		// returns a default option with all configuration
+		return new ChartOptions(type, options.getNativeOptions());
 	}
 
 	/**

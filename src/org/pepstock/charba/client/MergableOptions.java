@@ -15,11 +15,13 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.ConfigurationOptions;
 
 /**
  * This object is a container of chart options, stored as native object container.<br>
- * It can be instantiated ONLY by the merger.
+ * It can not  be instantiated in order that public methods of {@link Merger} or {@link ConfigurationOptions} can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -135,9 +135,32 @@ public final class Merger {
 	 * </ul>
 	 * 
 	 * @param type chart type
+	 * @param containerOptions the options as native object container to be merged
+	 */
+	public void load(Type type, MergableOptions containerOptions) {
+		// checks if container is consistent
+		if (containerOptions != null) {
+			// gets global and chart type options merged
+			NativeObject defaults = get(type);
+			// loads whole options into native options container
+			containerOptions.setNativeOptions(defaults);
+		}
+	}
+
+	/**
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
+	 * options (by chart.defaults.global).<br>
+	 * The chain of priority is:<br>
+	 * <ul>
+	 * <li>chart default options (by chart.defaults[type])
+	 * <li>default scale options (by chart.defaults.scale)
+	 * <li>global options (by chart.defaults.global)
+	 * </ul>
+	 * 
+	 * @param type chart type
 	 * @return a native object to be mapped with all defaults for that chart type.
 	 */
-	public NativeObject get(Type type) {
+	private NativeObject get(Type type) {
 		// checks if argument is consistent
 		Type.checkIfValid(type);
 		// gets chart.defaults[type]
