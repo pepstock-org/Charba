@@ -123,13 +123,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	public DatasetsItemsSelectorOptions() {
 		this(null, null);
-//		super(DatasetsItemsSelector.ID);
-//		// this constructor is used by user to set options for plugin
-//		// both default global or chart one.
-//		// reads the default default global options
-//		defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
-//		// sets inner elements
-//		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
 	}
 
 	/**
@@ -150,9 +143,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
 		this(null, defaultsOptions);
-//		this.defaultsOptions = defaultsOptions;
-//		// sets inner elements
-//		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), defaultsOptions.getClearSelection());
 	}
 
 	/**
@@ -359,14 +349,4 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	public boolean isFireEventOnClearSelection() {
 		return getValue(Property.FIRE_EVENT_ON_CLEAR_SELECTION, defaultsOptions.isFireEventOnClearSelection());
 	}
-
-	/**
-	 * Returns the java script object of this options.
-	 * 
-	 * @return the java script object of this options.
-	 */
-	public NativeObject getObject() {
-		return super.getNativeObject();
-	}
-
 }
