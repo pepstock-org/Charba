@@ -180,7 +180,7 @@ public final class Defaults {
 	 * @param type chart type.
 	 * @return the default options
 	 */
-	ChartOptions getChartOptions(Type type) {
+	public ChartOptions getChartOptions(Type type) {
 		return new ChartOptions(type, Merger.get().get(type));
 	}
 

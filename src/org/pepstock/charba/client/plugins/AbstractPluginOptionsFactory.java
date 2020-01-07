@@ -76,5 +76,5 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 		// then returns null
 		return null;
 	}
-
+	
 }
