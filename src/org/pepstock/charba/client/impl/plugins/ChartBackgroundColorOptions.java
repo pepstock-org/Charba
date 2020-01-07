@@ -108,7 +108,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 
 	/**
 	 * Builds the object with a chart instance in order to get the right defaults.<br>
-	 * If the plugin options have not been set by chart type, it will use the global
+	 * If the plugin options have not been set by chart type, it will use the global.
 	 * 
 	 * @param type chart type to use to get the default values by chart
 	 */
@@ -134,6 +134,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 		super(ChartBackgroundColor.ID, nativeObject);
 		// checks if there is any default options
 		if (defaultsOptions == null) {
+			// loads global options
 			this.defaultsOptions = loadGlobalsPluginOptions(ChartBackgroundColor.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
