@@ -99,7 +99,7 @@ public final class ChartPointer extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new ChartPointerOptions();
+				pOptions = new ChartPointerOptions(options.getPlugins().getOptions(ID, DEFAULTS_FACTORY));
 			}
 			// stores option on the cache
 			pluginOptions.put(chart.getId(), pOptions);

@@ -109,6 +109,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 */
 	ChartPointerOptions(NativeObject nativeObject, ChartPointerDefaultsOptions defaultsOptions) {
 		super(ChartPointer.ID, nativeObject);
+		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
 			this.defaultsOptions = loadGlobalsPluginOptions(ChartPointer.DEFAULTS_FACTORY);

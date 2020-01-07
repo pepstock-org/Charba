@@ -26,9 +26,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  */
 public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFactory<ChartPointerOptions> {
 
-	// factory instance to read the options from default global
-	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
-
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link ChartPointer#FACTORY}.
 	 * 
@@ -47,7 +44,7 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		ChartPointerDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		ChartPointerDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(ChartPointer.DEFAULTS_FACTORY);
 		// creates the options by the native object and the defaults
 		return new ChartPointerOptions(nativeObject, defaultsOptions);
 	}
