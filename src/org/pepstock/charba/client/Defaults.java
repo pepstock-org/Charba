@@ -182,11 +182,11 @@ public final class Defaults {
 	 */
 	public ChartOptions getChartOptions(Type type) {
 		// creates a mergable options
-		MergableOptions options = new MergableOptions();
+		MergableOptions mergeOptions = new MergableOptions();
 		// load the mergable options
-		Merger.get().load(type, options);
+		Merger.get().load(type, mergeOptions);
 		// returns a default option with all configuration
-		return new ChartOptions(type, options.getNativeOptions());
+		return new ChartOptions(type, mergeOptions.getNativeOptions());
 	}
 
 	/**
@@ -219,11 +219,11 @@ public final class Defaults {
 		// checks if type is consistent
 		IsChart.checkIfConsistent(chart);
 		// creates a mergable options
-		MergableOptions options = new MergableOptions();
+		MergableOptions mergeOptions = new MergableOptions();
 		// load the mergable options
-		chart.getOptions().loadOptions(options);
+		chart.getOptions().loadOptions(mergeOptions);
 		// returns a default option with all configuration
-		return new ChartOptions(chart.getType(), options.getNativeOptions());
+		return new ChartOptions(chart.getType(), mergeOptions.getNativeOptions());
 	}
 
 	/**
