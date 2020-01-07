@@ -43,8 +43,10 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 	 */
 	@Override
 	public ColorSchemesOptions create(NativeObject nativeObject) {
+		// defaults global options instance
+		ColorSchemesDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(ColorSchemes.DEFAULTS_FACTORY);
 		// creates the options by the native object
-		return new ColorSchemesOptions(nativeObject);
+		return new ColorSchemesOptions(nativeObject, defaultsOptions);
 	}
 
 	/**

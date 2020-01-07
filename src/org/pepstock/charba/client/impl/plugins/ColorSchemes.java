@@ -18,7 +18,9 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Arrays;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
@@ -33,6 +35,7 @@ import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
+import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -54,6 +57,8 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * Data labels options factory
 	 */
 	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory(ID);
+	// defaults global options factory
+	static final ColorSchemesDefaultsOptionsFactory DEFAULTS_FACTORY = new ColorSchemesDefaultsOptionsFactory();
 	// singleton instance
 	private static final ColorSchemes INSTANCE = new ColorSchemes();
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
@@ -352,15 +357,17 @@ public final class ColorSchemes extends AbstractPlugin {
 	 */
 	private ColorSchemesOptions getOptions(IsChart chart) {
 		// options instance
-		ColorSchemesOptions options = null;
+		ColorSchemesOptions pOptions = null;
+		// loads chart options for the chart
+		ChartOptions options = Defaults.get().getOptions(chart);
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
-		if (chart.getOptions().getPlugins().hasOptions(ID)) {
-			options = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+		if (options.getPlugins().hasOptions(ID)) {
+			pOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			options = new ColorSchemesOptions();
+			pOptions = new ColorSchemesOptions(options.getPlugins().getOptions(ID, DEFAULTS_FACTORY));
 		}
-		return options;
+		return pOptions;
 	}
 }

@@ -15,10 +15,11 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.ColorUtil;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.BrewerScheme;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -57,11 +58,6 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	public static final String DEFAULT_SCHEME_CATEGORY = "custom";
 
-	// defaults global options instance
-	private ColorSchemesDefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final ColorSchemesDefaultsOptionsFactory defaultsFactory = new ColorSchemesDefaultsOptionsFactory();
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -96,23 +92,52 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 		}
 	}
 
+	// defaults global options instance
+	private ColorSchemesDefaultsOptions defaultsOptions;
+	
 	/**
-	 * Creates an empty object with plugin options.
+	 * Builds the object with new java script object setting the default value of plugin.<br>
+	 * The global plugin options is used, if exists, as defaults values. 
 	 */
 	public ColorSchemesOptions() {
 		// creates an empty object
-		this(null);
+		this(null, null);
 	}
 
+	/**
+	 * Builds the object with a chart instance in order to get the right defaults.<br>
+	 * If the plugin options have not been set by chart type, it will use the global.
+	 * 
+	 * @param type chart type to use to get the default values by chart
+	 */
+	public ColorSchemesOptions(Type type) {
+		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Builds the object with the default global ones
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions) {
+		this(null, defaultsOptions);
+	}
+	
 	/**
 	 * Builds the object using a native object.
 	 * 
 	 * @param native object which contains the properties
 	 */
-	ColorSchemesOptions(NativeObject nativeObject) {
+	ColorSchemesOptions(NativeObject nativeObject, ColorSchemesDefaultsOptions defaultsOptions) {
 		super(ColorSchemes.ID, nativeObject);
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(ColorSchemes.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
 	}
 
 	/**
