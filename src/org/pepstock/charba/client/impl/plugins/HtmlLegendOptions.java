@@ -17,10 +17,11 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.dom.client.Style.Cursor;
@@ -45,15 +46,6 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * Default display if legend must be showed.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
-	// internal count needed to remove callbacks instance from cache
-	// from html legened item factory
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	// defaults global options instance
-	private HtmlLegendDefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
-	// legend text callback instance
-	private HtmlLegendTextCallback legendTextCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -88,17 +80,40 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 		}
 
 	}
+	// internal count needed to remove callbacks instance from cache
+	// from html legened item factory
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	// defaults global options instance
+	private HtmlLegendDefaultsOptions defaultsOptions;
+	// legend text callback instance
+	private HtmlLegendTextCallback legendTextCallback = null;
 
 	/**
-	 * Builds the object with new java script object setting the default value of plugin.
+	 * Builds the object with new java script object setting the default value of plugin.<br>
+	 * The global plugin options is used, if exists, as defaults values. 
 	 */
 	public HtmlLegendOptions() {
-		// creates an empty object
-		super(HtmlLegend.ID);
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
-		// stores the id based on a counter
-		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
+		this(null, null);
+	}
+	
+	/**
+	 * Builds the object with a chart instance in order to get the right defaults.<br>
+	 * If the plugin options have not been set by chart type, it will use the global.
+	 * 
+	 * @param type chart type to use to get the default values by chart
+	 */
+	public HtmlLegendOptions(Type type) {
+		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);
+	}
+
+
+	/**
+	 * Builds the object with the default global ones
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultsOptions) {
+		this(null, defaultsOptions);
 	}
 
 	/**
@@ -109,7 +124,19 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 */
 	HtmlLegendOptions(NativeObject nativeObject, HtmlLegendDefaultsOptions defaultsOptions) {
 		super(HtmlLegend.ID, nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(HtmlLegend.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
+		// checks if CHARBA ID is not already stored
+		if (!has(Property.CHARBA_ID)) {
+			// stores the id based on a counter
+			setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
+		}
 	}
 
 	/**
@@ -165,7 +192,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 */
 	public void setLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
 		internalSetLegendTextCallback(legendTextCallback);
-		// stores legend callback into fatory as cache
+		// stores legend callback into factory as cache
 		HtmlLegend.FACTORY.store(getCharbaId(), legendTextCallback);
 	}
 

@@ -32,8 +32,6 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 
 	// maps with all legend text callback for chart
 	private static final Map<Integer, HtmlLegendTextCallback> LEGEND_TEXT_CALLBACKS = new HashMap<>();
-	// factory instance to read the options from default global
-	private final HtmlLegendBuilderDefaultsOptionsFactory defaultsFactory = new HtmlLegendBuilderDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
@@ -53,7 +51,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 	@Override
 	public HtmlLegendOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(HtmlLegend.DEFAULTS_FACTORY);
 		// creates the options by the native object and the defaults
 		HtmlLegendOptions options = new HtmlLegendOptions(nativeObject, defaultsOptions);
 		// gets charba id
