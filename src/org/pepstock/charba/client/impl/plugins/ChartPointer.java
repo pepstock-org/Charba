@@ -19,10 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -48,6 +51,8 @@ public final class ChartPointer extends AbstractPlugin {
 	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory(ID);
 	// singleton instance
 	private static final ChartPointer INSTANCE = new ChartPointer();
+	// defaults global options factory
+	static final ChartPointerDefaultsOptionsFactory DEFAULTS_FACTORY = new ChartPointerDefaultsOptionsFactory();
 	// cache to store options in order do not load every time the options
 	private final Map<String, ChartPointerOptions> pluginOptions = new HashMap<>();
 
@@ -88,10 +93,11 @@ public final class ChartPointer extends AbstractPlugin {
 		if (IsChart.isConsistent(chart)) {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
-			// if not, loads and cache
-			// creates the plugin options using the java script object
-			if (chart.getOptions().getPlugins().hasOptions(ID)) {
-				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+			// loads chart options for the chart
+			ChartOptions options = Defaults.get().getOptions(chart);
+			// creates the plugin options checking if exists ot not
+			if (options.getPlugins().hasOptions(ID)) {
+				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
 				pOptions = new ChartPointerOptions();
 			}
@@ -111,8 +117,8 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	@Override
 	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
-		// checks if chart is consistent
-		if (IsChart.isConsistent(chart)) {
+		// checks if chart is consistent and options of plugin has been stored
+		if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
 			// gets options instance
 			ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
 			// gets the scope
@@ -133,6 +139,20 @@ public final class ChartPointer extends AbstractPlugin {
 				// if null, sets the default cursor
 				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
 			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onDestroy(IsChart chart) {
+		// checks if chart is valid
+		if (IsChart.isValid(chart)) {
+			// removes the stored options for chart
+			pluginOptions.remove(chart.getId());
 		}
 	}
 

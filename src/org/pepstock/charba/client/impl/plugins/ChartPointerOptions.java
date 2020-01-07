@@ -17,11 +17,12 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
 import com.google.gwt.dom.client.Style.Cursor;
@@ -38,15 +39,11 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
 	 */
 	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	// defaults global options instance
-	private ChartPointerDefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
-
+	
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		ELEMENTS("elements");
 
@@ -74,16 +71,34 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 
 	}
 
+	// defaults global options instance
+	private ChartPointerDefaultsOptions defaultsOptions;
+
 	/**
-	 * Builds the object with new java script object setting the default value of plugin.
+	 * Builds the object with new java script object setting the default value of plugin.<br>
+	 * The global plugin options is used, if exists, as defaults values. 
 	 */
 	public ChartPointerOptions() {
-		// creates an empty object
-		super(ChartPointer.ID);
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
-		// sets all pointer elements as default
-		setElements(PointerElement.values());
+		this(null, null);
+	}
+
+	/**
+	 * Builds the object with a chart instance in order to get the right defaults.<br>
+	 * If the plugin options have not been set by chart type, it will use the global.
+	 * 
+	 * @param type chart type to use to get the default values by chart
+	 */
+	public ChartPointerOptions(Type type) {
+		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(ChartPointer.ID, ChartPointer.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Builds the object with the default global ones
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	ChartPointerOptions(ChartPointerDefaultsOptions defaultsOptions) {
+		this(null, defaultsOptions);
 	}
 
 	/**
@@ -94,11 +109,12 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 */
 	ChartPointerOptions(NativeObject nativeObject, ChartPointerDefaultsOptions defaultsOptions) {
 		super(ChartPointer.ID, nativeObject);
-		this.defaultsOptions = defaultsOptions;
-		// checks if there is the property
-		if (!has(Property.ELEMENTS)) {
-			// sets all pointer elements as default
-			setElements(PointerElement.values());
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(ChartPointer.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
 		}
 	}
 
@@ -113,9 +129,9 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	}
 
 	/**
-	 * Sets the chart elements in scope to "cursorpointer" plugin.
+	 * Sets the chart elements in scope to {@link ChartPointer#ID} plugin.
 	 * 
-	 * @param elements the chart elements in scope to "cursorpointer" plugin
+	 * @param elements the chart elements in scope to {@link ChartPointer#ID} plugin
 	 */
 	public void setElements(PointerElement... elements) {
 		// sets the array of events
@@ -123,14 +139,20 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	}
 
 	/**
-	 * Returns the chart elements in scope to "cursorpointer" plugin.
+	 * Returns the chart elements in scope to {@link ChartPointer#ID} plugin.
 	 * 
-	 * @return the chart elements in scope to "cursorpointer" plugin
+	 * @return the chart elements in scope to {@link ChartPointer#ID} plugin
 	 */
 	public List<PointerElement> getElements() {
-		// reads the property
-		ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-		return ArrayListHelper.list(PointerElement.class, array);
+		// checks if there is the property
+		if (has(Property.ELEMENTS)) {
+			// reads the property
+			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
+			return ArrayListHelper.list(PointerElement.class, array);
+		}
+		// if here, there is not any property
+		// returns defaults elements
+		return defaultsOptions.getElements();
 	}
 
 }

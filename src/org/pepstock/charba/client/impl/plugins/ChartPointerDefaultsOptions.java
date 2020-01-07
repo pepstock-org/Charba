@@ -15,8 +15,14 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
 /**
  * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as
@@ -25,13 +31,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  */
 final class ChartPointerDefaultsOptions extends NativeObjectContainer {
-
-	/**
-	 * Builds the object with an empty java script object and uses the constants as default.
-	 */
-	ChartPointerDefaultsOptions() {
-		super();
-	}
+	
+	// default list for elements
+	private static final List<PointerElement> DEFAULTS_ELEMENTS = Arrays.asList(PointerElement.values());
 
 	/**
 	 * Builds the object with a java script object stored into options.
@@ -50,4 +52,22 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	String getCursorPointerAsString() {
 		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
 	}
+	
+	/**
+	 * Returns the chart elements in scope to "cursorpointer" plugin.
+	 * 
+	 * @return the chart elements in scope to "cursorpointer" plugin
+	 */
+	List<PointerElement> getElements() {
+		// checks if there is the property
+		if (has(ChartPointerOptions.Property.ELEMENTS)) {
+			// reads the property
+			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
+			return ArrayListHelper.list(PointerElement.class, array);
+		}
+		// if here, there is not any property
+		// defaults is all elements
+		return DEFAULTS_ELEMENTS;
+	}
+
 }
