@@ -48,6 +48,24 @@ public abstract class AbstractChartsLifecycleListener implements ChartsLifecycle
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onBeforeConfigure(IsChart chart) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onAfterConfigure(IsChart chart) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override

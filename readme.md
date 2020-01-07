@@ -125,6 +125,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `GoogleChartColor` enumeration with Google Chart colors.
  * add `GoogleChartScheme` enumeration with Google Chart colors scheme to use into `ColorSchemes` plugin.
  * move `DatasetRangeSelectionEvent` and `DatasetRangeSelectionEventHandler` classes into events package (**breaking change**).
+ * add `onBeforeConfigure` and `onAfterConfigure` methods to `ChartsLifecycleListener` in order to be able to be notified before and after chart configuration setup. Also invoked when the chart is `reconfigure`. 
 
 ### Fixed Bugs
 

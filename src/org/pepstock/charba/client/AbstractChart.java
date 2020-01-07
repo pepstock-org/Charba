@@ -572,6 +572,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final void reconfigure(UpdateConfiguration configuration) {
 		// checks if chart is created and consistent
 		if (chart != null && IsChart.isConsistent(this)) {
+			// fires that chart is configuring
+			Charts.fireBeforeConfigure(this);
 			// updates option passed by configuration element
 			Configuration tempConfiguration = new Configuration();
 			// gets options
@@ -583,6 +585,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			// calls plugins for onConfigure method
 			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
 			plugins.onChartConfigure(tempConfiguration, this);
+			// fires that chart has been configured
+			Charts.fireAfterConfigure(this);
 			// update chart
 			update(configuration);
 		}
@@ -748,6 +752,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final void draw() {
 		// checks if canvas is supported and the chart is consistent
 		if (isCanvasSupported && IsChart.isConsistent(this)) {
+			// fires that chart is configuring
+			Charts.fireBeforeConfigure(this);
 			// calls plugins for onConfigure method
 			Defaults.get().getPlugins().onChartConfigure(configuration, this);
 			plugins.onChartConfigure(configuration, this);
@@ -765,6 +771,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			configuration.setData(this, internalData);
 			// sets plugins
 			configuration.setPlugins(this, plugins);
+			// fires that chart has been configured
+			Charts.fireAfterConfigure(this);
 			// destroy chart if chart is already instantiated
 			// checks if chart is created
 			if (chart != null) {

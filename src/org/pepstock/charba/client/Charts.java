@@ -121,6 +121,30 @@ public final class Charts {
 	}
 
 	/**
+	 * Fires the notification to all listeners before chart configuration.
+	 * 
+	 * @param chart chart instance
+	 */
+	static void fireBeforeConfigure(IsChart chart) {
+		// ...scans all listener to send notification
+		for (ChartsLifecycleListener listener : LISTENERS) {
+			listener.onBeforeConfigure(chart);
+		}
+	}
+
+	/**
+	 * Fires the notification to all listeners after chart configuration.
+	 * 
+	 * @param chart chart instance
+	 */
+	static void fireAfterConfigure(IsChart chart) {
+		// ...scans all listener to send notification
+		for (ChartsLifecycleListener listener : LISTENERS) {
+			listener.onAfterConfigure(chart);
+		}
+	}
+
+	/**
 	 * Fires the notification to all listeners before chart destroy.
 	 * 
 	 * @param chart chart instance
