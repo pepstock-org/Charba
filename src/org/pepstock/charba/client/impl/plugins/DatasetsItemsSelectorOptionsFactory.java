@@ -26,9 +26,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  */
 public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorOptions> {
 
-	// factory instance to read the options from default global
-	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
-
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link DatasetsItemsSelector#FACTORY}.
 	 * 
@@ -47,7 +44,7 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 	@Override
 	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
 		// creates the options by the native object and the defaults
 		return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
 	}

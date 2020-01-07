@@ -366,7 +366,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			pOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			pOptions = new ColorSchemesOptions(options.getPlugins().getOptions(ID, DEFAULTS_FACTORY));
+			pOptions = new ColorSchemesOptions(DEFAULTS_FACTORY.create());
 		}
 		return pOptions;
 	}

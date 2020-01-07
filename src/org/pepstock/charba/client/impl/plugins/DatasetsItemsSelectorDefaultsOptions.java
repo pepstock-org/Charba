@@ -40,17 +40,6 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	private final DatasetsItemsSelectorDefaultsClearSelection clearSelection;
 
 	/**
-	 * Builds the object using an empty java script object and uses the constants as defaults.
-	 */
-	DatasetsItemsSelectorDefaultsOptions() {
-		super();
-		// creates default clear selection options
-		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection();
-		// sets the native object inside this object
-		setValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION, clearSelection);
-	}
-
-	/**
 	 * Builds the object using the java script object of options, set by user.<br>
 	 * 
 	 * @param nativeObject configuration of plugin.

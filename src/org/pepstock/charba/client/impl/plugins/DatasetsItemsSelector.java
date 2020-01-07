@@ -18,13 +18,16 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
+import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -56,6 +59,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * The factory to read options for plugin
 	 */
 	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory(ID);
+	// factory instance to read the options from default global
+	static final DatasetsItemsSelectorDefaultsOptionsFactory DEFAULTS_FACTORY = new DatasetsItemsSelectorDefaultsOptionsFactory();
 	// singleton instance
 	private static final DatasetsItemsSelector INSTANCE = new DatasetsItemsSelector();
 	// map to maintain the selectors handler for every chart
@@ -219,12 +224,14 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			}
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = null;
+			// loads chart options for the chart
+			ChartOptions options = Defaults.get().getOptions(chart);
 			// creates the plugin options using the java script object
 			// passing also the default color set at constructor.
-			if (chart.getOptions().getPlugins().hasOptions(ID)) {
-				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+			if (options.getPlugins().hasOptions(ID)) {
+				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new DatasetsItemsSelectorOptions();
+				pOptions = new DatasetsItemsSelectorOptions(DEFAULTS_FACTORY.create());
 			}
 			// checks if chart has got already an handler
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {

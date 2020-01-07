@@ -17,6 +17,8 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
@@ -24,7 +26,6 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -76,8 +77,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
 	// clear selection item
 	private final ClearSelection clearSelection;
 
@@ -119,18 +118,41 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Builds the object with a new java script object setting the default value of plugin.
+	 * Builds the object with new java script object setting the default value of plugin.<br>
+	 * The global plugin options is used, if exists, as defaults values. 
 	 */
 	public DatasetsItemsSelectorOptions() {
-		super(DatasetsItemsSelector.ID);
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
-		// sets inner elements
-		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
-		// stores inner elements
-		setValue(Property.CLEAR_SELECTION, clearSelection);
+		this(null, null);
+//		super(DatasetsItemsSelector.ID);
+//		// this constructor is used by user to set options for plugin
+//		// both default global or chart one.
+//		// reads the default default global options
+//		defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
+//		// sets inner elements
+//		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
+	}
+
+	/**
+	 * Builds the object with a chart instance in order to get the right defaults.<br>
+	 * If the plugin options have not been set by chart type, it will use the global.
+	 * 
+	 * @param type chart type to use to get the default values by chart
+	 */
+	public DatasetsItemsSelectorOptions(Type type) {
+		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(DatasetsItemsSelector.ID, DatasetsItemsSelector.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Builds the object using the java script object of options and the defaults, set by user.<br>
+	 * Used internally to call the plugin.
+	 * 
+	 * @param defaultsOptions default options, which must be stored into default global.
+	 */
+	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
+		this(null, defaultsOptions);
+//		this.defaultsOptions = defaultsOptions;
+//		// sets inner elements
+//		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), defaultsOptions.getClearSelection());
 	}
 
 	/**
@@ -142,9 +164,22 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	DatasetsItemsSelectorOptions(NativeObject nativeObject, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
 		super(DatasetsItemsSelector.ID, nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
 		// sets inner elements
-		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), defaultsOptions.getClearSelection());
+		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), this.defaultsOptions.getClearSelection());
+		// checks if clear selection is not already stored
+		if (!has(Property.CLEAR_SELECTION)) {
+			// if here clear selection is not stored
+			// then adds it
+			setValue(Property.CLEAR_SELECTION, clearSelection);
+		}
 	}
 
 	/**

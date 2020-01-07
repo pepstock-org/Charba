@@ -97,8 +97,6 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * Used only when use selection style is set to <code>true</code>.
 	 */
 	static final int BORDER_WIDTH = 1;
-	// defaults global options instance
-	private DatasetsItemsSelectorDefaultsClearSelection defaultsOptions;
 
 	/**
 	 * Name of properties of native object.
@@ -158,14 +156,17 @@ public final class ClearSelection extends NativeObjectContainer {
 
 	}
 
-	/**
-	 * Creates new font element, using the default values options.
-	 * 
-	 * @param defaultsOptions default clear selection element options to returns the default when required.
-	 */
-	ClearSelection(DatasetsItemsSelectorDefaultsClearSelection defaultsOptions) {
-		this(null, defaultsOptions);
-	}
+	// defaults global options instance
+	private DatasetsItemsSelectorDefaultsClearSelection defaultsOptions;
+
+//	/**
+//	 * Creates new font element, using the default values options.
+//	 * 
+//	 * @param defaultsOptions default clear selection element options to returns the default when required.
+//	 */
+//	ClearSelection(DatasetsItemsSelectorDefaultsClearSelection defaultsOptions) {
+//		this(null, defaultsOptions);
+//	}
 
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.

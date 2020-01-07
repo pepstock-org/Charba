@@ -15,6 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.impl.plugins;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
@@ -33,13 +34,15 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class DatasetsItemsSelectorOptionsBuilder {
 	// creates the options
-	private final DatasetsItemsSelectorOptions options = new DatasetsItemsSelectorOptions();
+	private final DatasetsItemsSelectorOptions options;
 
 	/**
 	 * To avoid any instantiation
+	 * 
+	 * @param type chart type to use to get the default values by chart
 	 */
-	private DatasetsItemsSelectorOptionsBuilder() {
-		// do nothing
+	private DatasetsItemsSelectorOptionsBuilder(Type type) {
+		options = new DatasetsItemsSelectorOptions(type);
 	}
 
 	/**
@@ -48,9 +51,19 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return new builder instance
 	 */
 	public static DatasetsItemsSelectorOptionsBuilder create() {
-		return new DatasetsItemsSelectorOptionsBuilder();
+		return create(null);
 	}
 
+	/**
+	 * Returns new builder instance using the chart global options.
+	 * 
+	 * @param type chart type to use to get the default values by chart
+	 * @return new builder instance
+	 */
+	public static DatasetsItemsSelectorOptionsBuilder create(Type type) {
+		return new DatasetsItemsSelectorOptionsBuilder(type);
+	}
+	
 	/**
 	 * Returns a configured plugin options.
 	 * 

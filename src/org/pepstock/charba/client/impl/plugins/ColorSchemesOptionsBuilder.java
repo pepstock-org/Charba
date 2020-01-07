@@ -26,52 +26,43 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
  */
 public final class ColorSchemesOptionsBuilder {
 	
-	// scheme scope
-	private SchemeScope schemeScope = ColorSchemesOptions.DEFAULT_SCHEME_SCOPE;
-	// color scheme
-	private ColorScheme scheme = ColorSchemesOptions.DEFAULT_SCHEME;
-	// background color transparency
-	private double backgroundColorAlpha = ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA;
-	// reverse 
-	private boolean reverse = ColorSchemesOptions.DEFAULT_REVERSE;
-	
+	// creates the options
+	private final ColorSchemesOptions options;
+
 	/**
 	 * To avoid any instantiation
+	 * 
+	 * @param type chart type to use to get the default values by chart
 	 */
-	private ColorSchemesOptionsBuilder() {
-		// do nothing
+	private ColorSchemesOptionsBuilder(Type type) {
+		options = new ColorSchemesOptions(type);
 	}
 
 	/**
-	 * Returns new builder instance.
+	 * Returns new builder instance, using the global options as default.
 	 * 
 	 * @return new builder instance
 	 */
 	public static ColorSchemesOptionsBuilder create() {
-		return new ColorSchemesOptionsBuilder();
+		return create(null);
 	}
 
 	/**
-	 * Returns a configured plugin options with global defaults.
+	 * Returns new builder instance using chart global options as default.
 	 * 
-	 * @return a configured plugin options.
+	 * @param type chart type to use to get the default values by chart
+	 * @return new builder instance
 	 */
-	public ColorSchemesOptions build() {
-		// returns options
-		return build(null);
+	public static ColorSchemesOptionsBuilder create(Type type) {
+		return new ColorSchemesOptionsBuilder(type);
 	}
 
 	/**
 	 * Returns a configured plugin options.
 	 * 
-	 * @param type chart type to use to get the default values by chart
 	 * @return a configured plugin options.
 	 */
-	public ColorSchemesOptions build(Type type) {
-		// creates the options
-		ColorSchemesOptions options = new ColorSchemesOptions(type);
-		// loads options
-		loadOptions(options);
+	public ColorSchemesOptions build() {
 		// returns options
 		return options;
 	}
@@ -83,7 +74,7 @@ public final class ColorSchemesOptionsBuilder {
 	 * @return builder instance
 	 */
 	public ColorSchemesOptionsBuilder setSchemeScope(SchemeScope schemeScope) {
-		this.schemeScope = schemeScope;
+		options.setSchemeScope(schemeScope);
 		return this;
 	}
 
@@ -94,7 +85,7 @@ public final class ColorSchemesOptionsBuilder {
 	 * @return builder instance
 	 */
 	public ColorSchemesOptionsBuilder setScheme(ColorScheme scheme) {
-		this.scheme = scheme;
+		options.setScheme(scheme);
 		return this;
 	}
 
@@ -106,7 +97,7 @@ public final class ColorSchemesOptionsBuilder {
 	 * @return builder instance
 	 */
 	public ColorSchemesOptionsBuilder setBackgroundColorAlpha(double backgroundColorAlpha) {
-		this.backgroundColorAlpha = backgroundColorAlpha;
+		options.setBackgroundColorAlpha(backgroundColorAlpha);
 		return this;
 	}
 
@@ -117,22 +108,7 @@ public final class ColorSchemesOptionsBuilder {
 	 * @return builder instance
 	 */
 	public ColorSchemesOptionsBuilder setReverse(boolean reverse) {
-		this.reverse = reverse;
+		options.setReverse(reverse);
 		return this;
-	}
-	
-	/**
-	 * Loads the options with all properties previously defined.
-	 * 
-	 * @param options plugin options to load
-	 */
-	private void loadOptions(ColorSchemesOptions options) {
-		//checks if options is consistent
-		if (options != null) {
-			options.setSchemeScope(schemeScope);
-			options.setScheme(scheme);
-			options.setBackgroundColorAlpha(backgroundColorAlpha);
-			options.setReverse(reverse);
-		}
 	}
 }
