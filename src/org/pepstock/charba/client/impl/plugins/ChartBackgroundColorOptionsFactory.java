@@ -40,7 +40,29 @@ public final class ChartBackgroundColorOptionsFactory implements NativeObjectCon
 	 */
 	@Override
 	public ChartBackgroundColorOptions create(NativeObject nativeObject) {
-		return new ChartBackgroundColorOptions(nativeObject);
+		// FIXME
+		return new ChartBackgroundColorOptions(nativeObject, null);
+	}
+	
+	/**
+	 * Internal factory to create options from default global option for the plugin
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	static class ChartBackgroundColorDefaultsOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorDefaultsOptions> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
+		 */
+		@Override
+		public ChartBackgroundColorDefaultsOptions create(NativeObject nativeObject) {
+			// creates the default global option by native object
+			return new ChartBackgroundColorDefaultsOptions(nativeObject);
+		}
+
 	}
 
 }

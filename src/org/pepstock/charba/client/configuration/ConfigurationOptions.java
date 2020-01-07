@@ -290,7 +290,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * <li>global options (by chart.defaults.global)
 	 * </ul>
 	 * 
-	 * @param containerOptions the options container of native options
+	 * @param optionsContainer the options container of native options
 	 */
 	public final void loadOptions(MergableOptions optionsContainer) {
 		Merger.get().load(getChart(), getConfiguration(), optionsContainer);

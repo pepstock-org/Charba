@@ -18,12 +18,15 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -54,7 +57,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * Default background color, {@link HtmlColor#WHITE}.
 	 */
 	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.WHITE.toRGBA();
-
+	// defaults options factory instance
+	static final ChartBackgroundColorDefaultsOptionsFactory DEFAULTS_FACTORY = new ChartBackgroundColorDefaultsOptionsFactory();
+	// pattern factory
+	static final Pattern.PatternFactory PATTERN_FACTORY = new Pattern.PatternFactory();
+	// gradient factory
+	static final Gradient.GradientFactory GRADIENT_FACTORY = new Gradient.GradientFactory();
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 	// color instance
@@ -251,16 +259,19 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public void onResize(IsChart chart, SizeItem size) {
-		// gets options
-		ChartBackgroundColorOptions bgOptions = getOptions(chart);
-		// if gradient has been set
-		if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-			// Due to gradients are created based on dimension of
-			// canvas or chart area, every time a resize is occurring
-			// gradients must be recreated
-			// because gradients must be recreated
-			// the cache of gradients must be clear
-			ChartBackgroundGradientFactory.get().resetGradients(chart);
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// gets options
+			ChartBackgroundColorOptions bgOptions = getOptions(chart);
+			// if gradient has been set
+			if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+				// Due to gradients are created based on dimension of
+				// canvas or chart area, every time a resize is occurring
+				// gradients must be recreated
+				// because gradients must be recreated
+				// the cache of gradients must be clear
+				ChartBackgroundGradientFactory.get().resetGradients(chart);
+			}
 		}
 	}
 
@@ -273,6 +284,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
+			// removes the options from the cache
+			// even if it could not be needed
+			// because the options should be remove after draw
+			OPTIONS.remove(chart.getId());
 			// because chart is destroy
 			// clears the cache of patterns and gradients of the chart
 			ChartBackgroundGradientFactory.get().clear(chart);
@@ -293,13 +308,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		}
 		// options instance
 		ChartBackgroundColorOptions bgOptions = null;
+		// loads chart options for the chart
+		ChartOptions options = Defaults.get().getOptions(chart);
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
-		if (chart.getOptions().getPlugins().hasOptions(ID)) {
-			bgOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+		if (options.getPlugins().hasOptions(ID)) {
+			bgOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			bgOptions = new ChartBackgroundColorOptions();
+			bgOptions = new ChartBackgroundColorOptions(options.getPlugins().getOptions(ID, DEFAULTS_FACTORY));
 			// if configured with a color
 			if (color != null) {
 				bgOptions.setBackgroundColor(color);
