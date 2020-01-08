@@ -17,11 +17,14 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -76,9 +79,6 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	protected AbstractPluginOptions(String pluginId) {
 		// creates an empty native object
 		this(pluginId, null);
-		// sets unique id
-		// needed for caching the instances
-		setValue(Property.CHARBA_OPTIONS_ID, COUNTER.incrementAndGet());
 	}
 
 	/**
@@ -93,6 +93,12 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		PluginIdChecker.check(pluginId);
 		// stores plugin id
 		this.pluginId = pluginId;
+		// checks if the ID is already set
+		if (!has(Property.CHARBA_OPTIONS_ID)) {
+			// sets unique id
+			// needed for caching the instances
+			setValue(Property.CHARBA_OPTIONS_ID, COUNTER.incrementAndGet());
+		}
 	}
 
 	/**
@@ -156,12 +162,37 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	public final void store(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
-			// stores itself into defaults
+			// stores itself into chart configuration
 			chart.getOptions().getPlugins().setOptions(pluginId, this);
 		}
 	}
 
-	// FIMXE
-	// missing store to chart type and dataset
+	/**
+	 * Stores this options into global chart plugins options.
+	 * 
+	 * @param type chart type to store options into global chart options
+	 */
+	public final void store(Type type) {
+		// checks if type is consistent
+		if (Type.isValid(type)) {
+			// gets chart options by type
+			ChartOptions chartOptions = Defaults.get().getOptions(type);
+			// stores itself into global chart options
+			chartOptions.getPlugins().setOptions(pluginId, this);
+		}
+	}
+
+	/**
+	 * Stores this options into dataset options.
+	 * 
+	 * @param dataset dataset instance to store options
+	 */
+	public final void store(Dataset dataset) {
+		// checks if type is consistent
+		if (dataset != null) {
+			// stores itself into dataset
+			dataset.setOptions(pluginId, this);
+		}
+	}
 
 }

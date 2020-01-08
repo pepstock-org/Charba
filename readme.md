@@ -127,11 +127,12 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move `DatasetRangeSelectionEvent` and `DatasetRangeSelectionEventHandler` classes into events package (**breaking change**).
  * add `onBeforeConfigure` and `onAfterConfigure` methods to `ChartsLifecycleListener` in order to be able to be notified before and after chart configuration setup. Also invoked when the chart is `reconfigure`.
  * add `IsDefaultsPlugin` interface to map plugins options defaults.
- * change `getOptions` and `setOptions` methods to store and load plugin options into configuration, global chart, global and dataset options in order to use `AbstractPluginOptions` and `AbstractPluginOptionsFactory` instances instead of a simple `NativeObjectContainer` and `NativeObjectContainerFactory` (**breaking change**).
+ * change `getOptions` and `setOptions` methods to store and load plugin options into configuration, global chart, global and dataset options in order to use `AbstractPluginOptions` and `AbstractPluginOptionsFactory` classes instead of a simple `NativeObjectContainer` and `NativeObjectContainerFactory` ones (**breaking change**).
    * new `create` method signature to create a plugin options by a `NativeObject` and `IsDefaultsPlugin` object (for default).
  * change `getDefaultChartOptions` method signature into `IsChart` interface in order to get a `IsDefaultScaledOptions` instead of a `ChartOptions` instance (**breaking change**).
  * add `getWholeOptions` method to `IsChart` interface in order to get the whole options configuration of a chart (merged global, global chart and chart options).
- * add constructors to plugin options in order to create the object relating it to a chart instance to get the default values, if needed. 
+ * add constructors to plugin options in order to create the object relating it to a chart instance to get the default values, if needed.
+ * add 2 `store` methods to `AbstractPluginOptions` class in order to store the plugin options into a global chart and dataset options.
 
 ### Fixed Bugs
 
@@ -149,6 +150,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add compile dependency with last version [2.0.0](https://github.com/google/jsinterop-annotations/releases/tag/2.0.0) of [JSINTEROP](https://github.com/google/jsinterop-annotations) annotations.
  * add 2 `load` methods to `Merger` in order to load default and whole options chart instance, removing the previous `get`.
  	* reduce the accessibility to methods by an `OptionsEnvelop` object
+ * add `getAllIds`	method to plugin options and configuration classes in order to get the list of configiured plugin ids. 
  
 License
 -------

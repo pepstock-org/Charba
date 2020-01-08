@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -45,6 +46,15 @@ public class Plugins {
 		this.options = options;
 	}
 
+	/**
+	 * Returns the unmodifiable list of registered plugin ids.
+	 *  
+	 * @return the unmodifiable list of registered plugin ids
+	 */
+	public final List<Key> getAllIds(){
+		return options.getPlugins().getAllIds();
+	}
+	
 	/**
 	 * Sets if a global plugin must be enabled or not.
 	 * 

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,6 +52,15 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
 		// no default values for this element
 		super(options, childKey, defaultValues, nativeObject);
+	}
+
+	/**
+	 * Returns the unmodifiable list of registered plugin ids.
+	 * 
+	 * @return the unmodifiable list of registered plugin ids
+	 */
+	public List<Key> getAllIds() {
+		return Collections.unmodifiableList(keys());
 	}
 
 	/**
@@ -139,45 +149,121 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	}
 
 	/**
-	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * Removes the plugin options.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
-	 * @param <T> type of native object container to store
 	 */
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
-		// if null, removes the configuration
-		if (options == null) {
+	public void removeOptions(String pluginId) {
+		// checks if there is a stored plugin options
+		if (hasOptions(pluginId)) {
+			// checks plugin ids
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// removes configuration if exists
-			remove(PluginIdChecker.key(pluginId));
-		} else {
-			// stores configuration
-			setValue(PluginIdChecker.key(pluginId), options);
+			remove(pluginIdKey);
 		}
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
-	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
+	 * Sets the plugin options.
 	 * 
-	 * @param pluginId plugin id.
-	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the
-	 *            configuration if exist.
+	 * @param options plugin options used to configure the plugin
 	 * @param <T> type of native object container to store
 	 */
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
-		// if null, removes the configuration
-		if (options == null) {
-			// removes configuration if exists
-			remove(PluginIdChecker.key(pluginId));
-		} else {
+	public <T extends AbstractPluginOptions> void setOptions(T options) {
+		// checks if options is consistent
+		if (options != null) {
+			// checks plugin ids
+			Key pluginIdKey = PluginIdChecker.key(options.getPluginId());
 			// stores configuration
-			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.fromOrNull(options));
+			setValue(pluginIdKey, options);
+			// checks if the node is already added to parent
+			checkAndAddToParent();
 		}
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets the plugin options as list.<br>
+	 * If the list is empty, it does nothing
+	 * 
+	 * @param options list of plugin options used to configure the plugin.
+	 * @param <T> type of plugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
+		// checks if options are consistent and not empty
+		if (options != null && !options.isEmpty()) {
+			// creates a reference of plugin id
+			String pluginId = null;
+			// scans all options to check if the options have got the same plugin id
+			for (AbstractPluginOptions option : options) {
+				// checks plugin id
+				if (pluginId != null && !pluginId.equals(option.getPluginId())) {
+					// if here, the plugin ID is not equals into all options
+					// then exception
+					throw new IllegalArgumentException("Plugin id '" + pluginId + "' is not equals into all options '" + option.getPluginId() + "'!");
+
+				}
+				// stores the pluginId
+				pluginId = option.getPluginId();
+			}
+			// creates plugin ids
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// stores configuration
+			setArrayValue(pluginIdKey, ArrayObject.fromOrNull(options));
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
+	}
+
+	/**
+	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options plugin options used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
+	 * @param <T> type of native object container to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
+		// checks plugin ids
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// if null and there is an options, removes the configuration
+		if (options == null && hasOptions(pluginId)) {
+			// removes configuration if exists
+			remove(pluginIdKey);
+		} else {
+			// checks plugin
+			checkPluginIdConsistency(pluginIdKey, options);
+			// stores configuration
+			setValue(pluginIdKey, options);
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
+	}
+
+	/**
+	 * Sets the plugin options as list. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options list of plugin options used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of plugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
+		// checks plugin ids
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// if null and there is an options, removes the configuration
+		if (options == null && hasOptions(pluginId)) {
+			// removes configuration if exists
+			remove(pluginIdKey);
+		} else {
+			// scans all options to check if the options have got the same plugin id
+			for (AbstractPluginOptions option : options) {
+				// checks plugin
+				checkPluginIdConsistency(pluginIdKey, option);
+			}
+			// stores configuration
+			setArrayValue(pluginIdKey, ArrayObject.fromOrNull(options));
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
 	}
 
 	/**
@@ -208,26 +294,26 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	}
 
 	/**
-	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.<br>
+	 * Returns the plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.<br>
 	 * If factory argument is not consistent, <code>null</code> is returned.
 	 * 
-	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or an empty object if not exist. If factory argument is not
-	 *         consistent, <code>null</code> is returned.
+	 * @param factory factory instance to create a plugin options
+	 * @param <T> type of plugin options to return
+	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
+	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
-	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the key to avoid many calls to plugin checker
-			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
 			// gets the type of property
 			ObjectType type = type(pluginIdKey);
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
-				return factory.create(getValue(PluginIdChecker.key(pluginId)), getDefaultValues());
+				return factory.create(getValue(pluginIdKey), getDefaultValues());
 			} else {
 				// if here returns an empty object
 				return factory.create(null, getDefaultValues());
@@ -238,25 +324,58 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	}
 
 	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object
-	 * container.
+	 * Returns the plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return the plugin options as list of object containers or empty list if not exist.
+	 * @param factory factory instance to create a plugin options
+	 * @param <T> type of plugin options to return
+	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
+	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// checks plugin
+			checkPluginIdConsistency(pluginIdKey, factory);
+			// gets the type of property
+			ObjectType type = type(pluginIdKey);
+			// checks if object
+			if (ObjectType.OBJECT.equals(type)) {
+				// creates the object using the defaults options
+				return factory.create(getValue(pluginIdKey), getDefaultValues());
+			} else {
+				// if here returns an empty object
+				return factory.create(null, getDefaultValues());
+			}
+		}
+		// if here factory is not consistent
+		return null;
+	}
+	
+	/**
+	 * Returns the plugin options as list of plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a plugin options.
+	 * @param <T> type of plugin options to return
+	 * @return the plugin options as list of options or empty list if not exist.
+	 */
+	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the key to avoid many calls to plugin checker
+			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
 			// gets the type of property
 			ObjectType type = type(pluginIdKey);
 			// checks if array
 			if (ObjectType.ARRAY.equals(type)) {
 				// gets the array from native object
-				ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+				ArrayObject array = getArrayValue(pluginIdKey);
 				// creates the result
 				List<T> result = new LinkedList<>();
 				// scans all native object from array
@@ -270,6 +389,77 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		}
 		// if here returns an empty list
 		return new LinkedList<>();
+	}
+
+
+	/**
+	 * Returns the plugin options as list of plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a plugin options.
+	 * @param <T> type of plugin options to return
+	 * @return the plugin options as list of options or empty list if not exist.
+	 */
+	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the key to avoid many calls to plugin checker
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// checks plugin
+			checkPluginIdConsistency(pluginIdKey, factory);
+			// gets the type of property
+			ObjectType type = type(pluginIdKey);
+			// checks if array
+			if (ObjectType.ARRAY.equals(type)) {
+				// gets the array from native object
+				ArrayObject array = getArrayValue(pluginIdKey);
+				// creates the result
+				List<T> result = new LinkedList<>();
+				// scans all native object from array
+				for (int i = 0; i < array.length(); i++) {
+					// creates the object using the defaults options
+					// and adds to result list
+					result.add(factory.create(array.get(i), getDefaultValues()));
+				}
+				return result;
+			}
+		}
+		// if here returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Checks if the plugin id, passed as key, is equals to plugin options.<br>
+	 * If not, an {@link IllegalArgumentException} will be thrown.
+	 * 
+	 * @param pluginIdKey plugin id as key
+	 * @param options plugin options instance
+	 */
+	private void checkPluginIdConsistency(Key pluginIdKey, AbstractPluginOptions options) {
+		// checks if arguments are consistent and the plugin ids are not equals
+		if (Key.isValid(pluginIdKey) && options != null && !pluginIdKey.value().equals(options.getPluginId())) {
+			// if here, the plugin ID is not equals to the option
+			// then exception
+			throw new IllegalArgumentException("Plugin id '" + pluginIdKey.value() + "' is not equals to plugin id '" + options.getPluginId() + "'of options!");
+		}
+	}
+
+	/**
+	 * Checks if the plugin id, passed as key, is equals to plugin options factory.<br>
+	 * If not, an {@link IllegalArgumentException} will be thrown.
+	 * 
+	 * @param pluginIdKey plugin id as key
+	 * @param factory plugin options factory instance
+	 */
+	private void checkPluginIdConsistency(Key pluginIdKey, AbstractPluginOptionsFactory<?> factory) {
+		// checks if arguments are consistent and the plugin ids are not equals
+
+		if (Key.isValid(pluginIdKey) && factory != null && !pluginIdKey.value().equals(factory.getPluginId())) {
+			// if here, the plugin ID is not equals to the option
+			// then exception
+			throw new IllegalArgumentException("Plugin id '" + pluginIdKey.value() + "' is not equals to plugin id '" + factory.getPluginId() + "'of factory!");
+		}
 	}
 
 }
