@@ -27,13 +27,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 final class DefaultsPan extends AbstractDefaultsConfigurationItem {
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	DefaultsPan() {
-		super();
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped

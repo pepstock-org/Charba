@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * {@link ZoomPlugin#ID} plugin default options.<br>
@@ -25,8 +25,10 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsOptions extends NativeObjectContainer {
+final class DefaultsOptions extends AbstractPluginOptions {
 
+	// defaults options instance
+	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
 	// default pan options
 	private final DefaultsPan pan;
 	// default Zoom options
@@ -35,15 +37,8 @@ final class DefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
-	DefaultsOptions() {
-		super();
-		// creates default pan options
-		pan = new DefaultsPan();
-		// creates default zoom options
-		zoom = new DefaultsZoom();
-		// sets the native object inside this object
-		setValue(ZoomOptions.Property.PAN, pan);
-		setValue(ZoomOptions.Property.ZOOM, zoom);
+	private DefaultsOptions() {
+		this(null);
 	}
 
 	/**
@@ -53,11 +48,21 @@ final class DefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object which maps default global options.
 	 */
 	DefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(ZoomPlugin.ID, nativeObject);
 		// reads default pan options from main object
 		pan = new DefaultsPan(getValue(ZoomOptions.Property.PAN));
 		// reads default zoom options from main object
 		zoom = new DefaultsZoom(getValue(ZoomOptions.Property.ZOOM));
+		// checks if padding is stored
+		if (!has(ZoomOptions.Property.PAN)) {
+			// sets the native object inside this object
+			setValue(ZoomOptions.Property.PAN, pan);
+		}
+		// checks if padding is stored
+		if (!has(ZoomOptions.Property.ZOOM)) {
+			// sets the native object inside this object
+			setValue(ZoomOptions.Property.ZOOM, zoom);
+		}
 	}
 
 	/**

@@ -29,13 +29,6 @@ import org.pepstock.charba.client.zoom.Zoom.Property;
 final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	DefaultsZoom() {
-		super();
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped
@@ -82,7 +75,7 @@ final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 		}
 		// if here,the drag is not set or boolean
 		// then returns the default drag object
-		return new DefaultsDrag();
+		return DefaultsDrag.DEFAULTS_INSTANCE;
 	}
 
 	/*

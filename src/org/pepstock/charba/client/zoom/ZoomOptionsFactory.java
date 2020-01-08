@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (form chart, form dataset or from default global ones) related to {@link ZoomPlugin#ID} plugin.
@@ -31,21 +32,16 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 	 * To avoid any instantiation. Use the static reference into {@link ZoomPlugin#FACTORY}.<br>
 	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
 	 * when the charts will be destroy.
-	 * 
-	 * @param pluginId plugin ID
 	 */
-	ZoomOptionsFactory(String pluginId) {
-		super(pluginId);
+	ZoomOptionsFactory() {
+		super(ZoomPlugin.ID);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public ZoomOptions create(NativeObject nativeObject) {
+	public ZoomOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// gets the options checking if cached
 		AbstractPluginOptions options = getOptions(nativeObject);
 		// checks if consistent and the right class
@@ -55,7 +51,15 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 		}
 		// creates the options by the native object and the defaults
 		// and ignores the native object passed into method
-		return new ZoomOptions();
+		// checks if defaults options are consistent
+		if (defaultValues != null) {
+			// defaults global options instance
+			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, ZoomPlugin.DEFAULTS_FACTORY);
+			// creates the options by the native object and the defaults
+			return new ZoomOptions(defaultsOptions);
+		}
+		// creates the options by the native object and the defaults
+		return new ZoomOptions(DefaultsOptions.DEFAULTS_INSTANCE);
 	}
 
 	/**
@@ -63,18 +67,29 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class ZoomDefaultsOptionsFactory implements NativeObjectContainerFactory<DefaultsOptions> {
+	static class ZoomDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DefaultsOptions> {
+
+		/**
+		 * To avoid any instantiation.
+		 */
+		ZoomDefaultsOptionsFactory() {
+			super(ZoomPlugin.ID);
+		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DefaultsOptions create(NativeObject nativeObject) {
-			// creates the default global option by native object
-			return new DefaultsOptions(nativeObject);
+		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// check if native object is consistent
+			if (nativeObject != null) {
+				// creates the default global option by native object
+				return new DefaultsOptions(nativeObject);
+			}
+			return DefaultsOptions.DEFAULTS_INSTANCE;
 		}
 
 	}

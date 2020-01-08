@@ -43,9 +43,9 @@ public final class ZoomPlugin {
 	/**
 	 * Zoom options factory
 	 */
-	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory(ID);
+	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory();
 	// internal defaults options factory
-	private static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
+	static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -95,6 +95,24 @@ public final class ZoomPlugin {
 	/**
 	 * Creates new customized drag-to-zoom effect.
 	 * 
+	 * @param chart chart instance to relate to new drag object, for defaults
+	 * @return new customized drag-to-zoom effect
+	 */
+	public static Drag createDrag(IsChart chart) {
+		// checks if chart is consistent and if has got any options
+		if (IsChart.isConsistent(chart) && chart.getDefaultChartOptions().getPlugins().hasOptions(ZoomPlugin.ID)) {
+			// loads the plugin options from default options of chart
+			DefaultsOptions defaultsValues = chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY);
+			// creates a drag object by the default
+			return createDrag(defaultsValues);
+		}
+		// creates a drag object with standard defaults
+		return createDrag(DefaultsOptions.DEFAULTS_INSTANCE);
+	}
+
+	/**
+	 * Creates new customized drag-to-zoom effect.
+	 * 
 	 * @return new customized drag-to-zoom effect
 	 */
 	public static Drag createDrag() {
@@ -102,11 +120,21 @@ public final class ZoomPlugin {
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
 			// reads the default default global options
 			DefaultsOptions defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
-			// creates a drag object by the default if there is
-			return new Drag(defaultsOptions.getZoom().getDrag());
+			// creates a drag object by the default
+			return createDrag(defaultsOptions);
 		}
 		// creates a drag object with standard defaults
-		return new Drag(new DefaultsDrag());
+		return createDrag(DefaultsOptions.DEFAULTS_INSTANCE);
+	}
+
+	/**
+	 * Creates new customized drag-to-zoom effect.
+	 * 
+	 * @return new customized drag-to-zoom effect
+	 */
+	private static Drag createDrag(DefaultsOptions defaultValues) {
+		// creates a drag object by the default if there is
+		return new Drag(defaultValues.getZoom().getDrag());
 	}
 
 }

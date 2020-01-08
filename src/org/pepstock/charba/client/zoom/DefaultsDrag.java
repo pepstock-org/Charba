@@ -27,12 +27,14 @@ import org.pepstock.charba.client.zoom.Drag.Property;
  *
  */
 final class DefaultsDrag extends NativeObjectContainer {
+	
+	static final DefaultsDrag DEFAULTS_INSTANCE = new DefaultsDrag();
 
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	DefaultsDrag() {
-		super();
+	private DefaultsDrag() {
+		this(null);
 	}
 
 	/**
