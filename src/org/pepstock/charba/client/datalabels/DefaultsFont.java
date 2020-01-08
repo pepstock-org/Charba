@@ -31,13 +31,6 @@ import org.pepstock.charba.client.enums.FontStyle;
 final class DefaultsFont extends NativeObjectContainer {
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	DefaultsFont() {
-		super();
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.

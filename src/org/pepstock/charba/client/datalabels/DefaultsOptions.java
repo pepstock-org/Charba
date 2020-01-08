@@ -17,12 +17,12 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * {@link DataLabelsPlugin#ID} plugin default options.<br>
@@ -31,8 +31,10 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsOptions extends NativeObjectContainer {
+final class DefaultsOptions extends AbstractPluginOptions {
 
+	// defaults options instance
+	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
 	// default padding options
 	private final DefaultsPadding padding;
 	// default font options
@@ -41,15 +43,8 @@ final class DefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
-	DefaultsOptions() {
-		super();
-		// creates default padding options
-		padding = new DefaultsPadding();
-		// creates default font options
-		font = new DefaultsFont();
-		// sets the native object inside this object
-		setValue(DataLabelsOptions.Property.PADDING, padding);
-		setValue(DataLabelsOptions.Property.FONT, font);
+	private DefaultsOptions() {
+		this(null);
 	}
 
 	/**
@@ -59,11 +54,21 @@ final class DefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object which maps default global options.
 	 */
 	DefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(DataLabelsPlugin.ID, nativeObject);
 		// reads default padding options from main object
 		padding = new DefaultsPadding(getValue(DataLabelsOptions.Property.PADDING));
 		// reads default font options from main object
 		font = new DefaultsFont(getValue(DataLabelsOptions.Property.FONT));
+		// checks if padding is stored
+		if (!has(DataLabelsOptions.Property.PADDING)) {
+			// sets the native object inside this object
+			setValue(DataLabelsOptions.Property.PADDING, padding);
+		}
+		// checks if padding is stored
+		if (!has(DataLabelsOptions.Property.FONT)) {
+			// sets the native object inside this object
+			setValue(DataLabelsOptions.Property.FONT, font);
+		}
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -38,7 +39,9 @@ public final class DataLabelsPlugin {
 	/**
 	 * Data labels options factory
 	 */
-	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory(ID);
+	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
+	// default options factory for plugin
+	static final DataLabelsDefaultsOptionsFactory DEFAULTS_FACTORY = new DataLabelsDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation

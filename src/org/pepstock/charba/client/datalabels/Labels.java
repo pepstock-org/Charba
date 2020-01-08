@@ -42,7 +42,7 @@ public final class Labels extends AbstractElement {
 	 * To avoid any instantiation
 	 */
 	Labels() {
-		super();
+		super(null);
 	}
 
 	/**

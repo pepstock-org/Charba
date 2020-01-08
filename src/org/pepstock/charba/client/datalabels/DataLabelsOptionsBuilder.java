@@ -15,6 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
@@ -55,16 +56,20 @@ import org.pepstock.charba.client.enums.FontStyle;
  *
  */
 public final class DataLabelsOptionsBuilder {
-	// creates the options with deferred registration
-	// because it will be register only when the build method
-	// will be invoked
-	private final DataLabelsOptions options = new DataLabelsOptions(true);
+
+	// plugin options instance
+	private final DataLabelsOptions options;
 
 	/**
 	 * To avoid any instantiation
+	 * 
+	 * @param chart chart instance related to the plugin options
 	 */
-	private DataLabelsOptionsBuilder() {
-		// do nothing
+	private DataLabelsOptionsBuilder(IsChart chart) {
+		// creates the options with deferred registration
+		// because it will be register only when the build method
+		// will be invoked
+		options = new DataLabelsOptions(true, chart);
 	}
 
 	/**
@@ -73,7 +78,17 @@ public final class DataLabelsOptionsBuilder {
 	 * @return new builder instance
 	 */
 	public static DataLabelsOptionsBuilder create() {
-		return new DataLabelsOptionsBuilder();
+		return create(null);
+	}
+
+	/**
+	 * Returns new builder instance using the chart global options.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 * @return new builder instance
+	 */
+	public static DataLabelsOptionsBuilder create(IsChart chart) {
+		return new DataLabelsOptionsBuilder(chart);
 	}
 
 	/**

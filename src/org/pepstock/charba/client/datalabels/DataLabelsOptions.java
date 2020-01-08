@@ -35,7 +35,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
@@ -268,8 +267,6 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 
 	// defaults global options instance
 	private DefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final DataLabelsDefaultsOptionsFactory defaultsFactory = new DataLabelsDefaultsOptionsFactory();
 	// listener inner element
 	private final Listeners listeners;
 	// padding inner element
@@ -339,22 +336,63 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// creates the object registering it
 		// this constructor is used by user to set options for plugin
 		// both default global or chart one.
-		this(false);
+		this(false, (DefaultsOptions) null);
+	}
+
+	/**
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options, relating to chart instance for default.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 */
+	public DataLabelsOptions(IsChart chart) {
+		// creates the object registering it
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
+		this(false, chart);
+	}
+
+	/**
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options, relating to chart instance for default.
+	 * 
+	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 * @param chart chart instance related to the plugin options
+	 */
+	DataLabelsOptions(boolean deferredRegistration, IsChart chart) {
+		// creates the object registering it
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
+		this(deferredRegistration, IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DataLabelsPlugin.ID, DataLabelsPlugin.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	DataLabelsOptions(DefaultsOptions defaultsOptions) {
+		this(false, defaultsOptions);
 	}
 
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
 	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 * @param defaultsOptions default options stored into defaults global
 	 */
-	DataLabelsOptions(boolean deferredRegistration) {
+	DataLabelsOptions(boolean deferredRegistration, DefaultsOptions defaultsOptions) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, DataLabelsPlugin.FACTORY, deferredRegistration);
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(DataLabelsPlugin.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
 		// sets inner elements
-		padding = new Padding(defaultsOptions.getPadding());
-		font = new Font(defaultsOptions.getFont());
+		padding = new Padding(this.defaultsOptions.getPadding());
+		font = new Font(this.defaultsOptions.getFont());
 		listeners = new Listeners();
 		labels = new Labels();
 		// stores inner elements

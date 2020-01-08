@@ -34,13 +34,6 @@ import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 abstract class AbstractElement extends NativeObjectContainer {
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	AbstractElement() {
-		super();
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.

@@ -80,14 +80,6 @@ public final class Font extends AbstractElement {
 	}
 
 	/**
-	 * Creates new font element.
-	 */
-	public Font() {
-		// uses the default values for font
-		this(new DefaultsFont());
-	}
-
-	/**
 	 * Creates new font element, using the default values options.
 	 * 
 	 * @param defaultsOptions default FONT options to returns the default when required.

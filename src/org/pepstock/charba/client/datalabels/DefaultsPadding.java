@@ -29,13 +29,6 @@ import org.pepstock.charba.client.enums.Position;
 final class DefaultsPadding extends NativeObjectContainer {
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	DefaultsPadding() {
-		super();
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
