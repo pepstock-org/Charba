@@ -37,8 +37,12 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 		super(ZoomPlugin.ID);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
 	public ZoomOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

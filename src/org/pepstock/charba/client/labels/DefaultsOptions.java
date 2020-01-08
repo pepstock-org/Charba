@@ -28,7 +28,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 final class DefaultsOptions extends AbstractPluginOptions {
-	
+
 	// defaults options instance
 	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
 

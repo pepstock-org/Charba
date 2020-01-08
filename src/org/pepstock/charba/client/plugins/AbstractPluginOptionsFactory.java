@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPlugins;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions>{
+public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions> {
 
 	// plugin id
 	private final String pluginId;
@@ -48,28 +48,21 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	public final String getPluginId() {
 		return pluginId;
 	}
-	
-//	/**
-//	 * FIXME
-//	 * @return
-//	 */
-//	public final T create() {
-//		return create(null, null);
-//	}
-
 
 	/**
-	 * FIXME
-	 * @param nativeObject
-	 * @param defaultValues
-	 * @return
+	 * Creates a plugin options by a native object which is containing the options values and its defaults.
+	 * 
+	 * @param nativeObject native object which is containing the options
+	 * @param defaultValues the defaults values for the plugin options
+	 * @return a plugin options instance
 	 */
 	public abstract T create(NativeObject nativeObject, IsDefaultPlugins defaultValues);
-	
+
 	/**
-	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns
-	 * <code>null</code>.
+	 * Loads the default plugin options from defaults.<br>
+	 * If factory, passed as argument, is <code>null</code>, returns <code>null</code>.
 	 * 
+	 * @param defaultsPlugins default values to use to load the plugin options
 	 * @param factory factory to load options
 	 * @param <G> type of native object container
 	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns
@@ -92,5 +85,5 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 		// then returns null
 		return null;
 	}
-	
+
 }

@@ -23,11 +23,10 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.options.Scale;
-import org.pepstock.charba.client.options.Scales;
+import org.pepstock.charba.client.options.ScaledOptions;
 
 /**
- * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
+ * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS, for chart defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -38,31 +37,30 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 	private final IsDefaultScales scales;
 
 	/**
-	 * FIXME check chartOptions
-	 * Creates the object by options element instance.
+	 * Creates the default by an extended options instance, which represents the whole options of a chart.
 	 * 
-	 * @param chartOptions chart options instance.
+	 * @param chartOptions whole chart options instance.
 	 */
 	public DefaultChartOptions(ExtendedOptions chartOptions) {
-		this(chartOptions, chartOptions.getChart().getType(), chartOptions.getScale(), chartOptions.getScales());
+		this(chartOptions, chartOptions.getChart().getType());
 	}
 
 	/**
-	 * Creates the object by options element instance.
+	 * Creates the default by a chart options instance, which represents the global options of a chart.
 	 * 
-	 * @param chartOptions chart options instance.
+	 * @param chartOptions global chart options instance.
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
-		this(chartOptions, chartOptions.getType(), chartOptions.getScale(), chartOptions.getScales());
+		this(chartOptions, chartOptions.getType());
 	}
 
 	/**
-	 * FIXME
-	 * Creates the object by options element instance.
+	 * Creates the default by a scaled options element instance.
 	 * 
-	 * @param chartOptions chart options instance.
+	 * @param chartOptions chart options instance based on scaled one
+	 * @param type chart type of this default
 	 */
-	private DefaultChartOptions(IsDefaultScaledOptions chartOptions, Type type, Scale defaultScale, Scales defaultScales) {
+	private DefaultChartOptions(ScaledOptions chartOptions, Type type) {
 		super(chartOptions);
 		// checks type
 		Type.checkIfValid(type);
@@ -70,7 +68,7 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 		// checks if single scale
 		if (ScaleType.SINGLE.equals(type.scaleType())) {
 			// gets scale
-			this.scale = new DefaultChartScale(defaultScale);
+			this.scale = new DefaultChartScale(chartOptions.getScale());
 		} else {
 			// uses the default scale
 			scale = DefaultsBuilder.get().getScaledOptions().getScale();
@@ -78,7 +76,7 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 		// checks if multi scale
 		if (ScaleType.MULTI.equals(type.scaleType())) {
 			// gets scale
-			scales = new DefaultChartScales(defaultScales);
+			scales = new DefaultChartScales(chartOptions.getScales());
 		} else {
 			// uses the default scales
 			scales = DefaultsBuilder.get().getScaledOptions().getScales();

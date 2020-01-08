@@ -25,7 +25,7 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
  *
  */
 public final class ColorSchemesOptionsBuilder {
-	
+
 	// creates the options
 	private final ColorSchemesOptions options;
 

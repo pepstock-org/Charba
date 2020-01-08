@@ -118,7 +118,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
-	 * The global plugin options is used, if exists, as defaults values. 
+	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public DatasetsItemsSelectorOptions() {
 		this(null, null);

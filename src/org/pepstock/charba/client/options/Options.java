@@ -139,7 +139,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
 		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 	}
-	
+
 	/**
 	 * Returns the animation element.
 	 * 

@@ -277,7 +277,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			return Constants.EMPTY_STRING;
 		});
 	}
-	
+
 	/**
 	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
 	 * options (by chart.defaults.global) and chart options.<br>

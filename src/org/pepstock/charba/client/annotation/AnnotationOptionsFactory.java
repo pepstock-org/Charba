@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (from chart) related to {@link AnnotationPlugin#ID} plugin.
@@ -30,21 +32,20 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	 * To avoid any instantiation. Use the static reference into {@link AnnotationPlugin#FACTORY}.<br>
 	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
 	 * when the charts will be destroy.
-	 * 
-	 * @param pluginId plugin ID
 	 */
-	AnnotationOptionsFactory(String pluginId) {
-		super(pluginId);
+	AnnotationOptionsFactory() {
+		super(AnnotationPlugin.ID);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public AnnotationOptions create(NativeObject nativeObject) {
+	public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// gets the options checking if cached
 		AbstractPluginOptions options = getOptions(nativeObject);
 		// checks if consistent and the right class
@@ -54,6 +55,48 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		}
 		// creates the options by the native object and the defaults
 		// and ignores the native object passed into method
-		return new AnnotationOptions();
+		// checks if defaults options are consistent
+		if (defaultValues != null) {
+			// defaults global options instance
+			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, AnnotationPlugin.DEFAULTS_FACTORY);
+			// creates the options by the native object and the defaults
+			return new AnnotationOptions(defaultsOptions);
+		}
+		// creates the options by the native object and the defaults
+		return new AnnotationOptions(DefaultsOptions.DEFAULTS_INSTANCE);
+
 	}
+
+	/**
+	 * Internal factory to create options from default global option for the plugin
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	static class AnnotationDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DefaultsOptions> {
+
+		/**
+		 * To avoid any instantiation.
+		 */
+		AnnotationDefaultsOptionsFactory() {
+			super(AnnotationPlugin.ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		 */
+		@Override
+		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// check if native object is consistent
+			if (nativeObject != null) {
+				// creates the default global option by native object
+				return new DefaultsOptions(nativeObject);
+			}
+			return DefaultsOptions.DEFAULTS_INSTANCE;
+		}
+
+	}
+
 }

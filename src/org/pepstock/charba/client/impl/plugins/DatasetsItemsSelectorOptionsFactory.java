@@ -33,8 +33,12 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		super(DatasetsItemsSelector.ID);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
 	public DatasetsItemsSelectorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
@@ -62,9 +66,12 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		DatasetsItemsSelectorDefaultsOptionsFactory() {
 			super(DatasetsItemsSelector.ID);
 		}
-		
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

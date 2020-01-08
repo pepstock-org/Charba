@@ -32,10 +32,11 @@ import org.pepstock.charba.client.data.HovingFlexDataset;
  *
  */
 final class ColorSchemesUtil {
+
 	// sigleton instance
 	private static final ColorSchemesUtil INSTANCE = new ColorSchemesUtil();
 	// cache of used and requested color schemes
-	private static final Map<String, ColorScheme> COLOR_SCHEMES = new HashMap<>();
+	private final Map<String, ColorScheme> colorSchemes = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -60,7 +61,7 @@ final class ColorSchemesUtil {
 	 * @param scheme a color scheme
 	 */
 	void putColorScheme(ColorScheme scheme) {
-		COLOR_SCHEMES.put(createKey(scheme), scheme);
+		colorSchemes.put(createKey(scheme), scheme);
 	}
 
 	/**
@@ -71,7 +72,7 @@ final class ColorSchemesUtil {
 	 * @return a color scheme instance
 	 */
 	ColorScheme getColorScheme(String category, String name) {
-		return COLOR_SCHEMES.get(createKey(category, name));
+		return colorSchemes.get(createKey(category, name));
 	}
 
 	/**
@@ -82,7 +83,7 @@ final class ColorSchemesUtil {
 	 * @return <code>true</code> if into cache otherwise <code>false</code>
 	 */
 	boolean hasColorScheme(String category, String name) {
-		return COLOR_SCHEMES.containsKey(createKey(category, name));
+		return colorSchemes.containsKey(createKey(category, name));
 	}
 
 	/**

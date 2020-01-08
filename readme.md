@@ -111,7 +111,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import last ZOOM CHART.JS plugin version, [0.7.5](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v0.7.5).
    * import last HAMMER JS version, [2.0.8](https://github.com/hammerjs/hammer.js/releases/tag/v2.0.8) as dependency of ZOOM CHART.JS plugin.
    * full implementation of configuration for ZOOM plugin.
- * import last ANNOTATION CHART.JS plugin, at `master` commit id [7037eea71314613a8af83d2298241841cbc34c4f](https://github.com/chartjs/chartjs-plugin-annotation).
+ * import ANNOTATION CHART.JS plugin, at `master` commit id [7037eea71314613a8af83d2298241841cbc34c4f](https://github.com/chartjs/chartjs-plugin-annotation).
    * full implementation of configuration for ANNOTATION plugin.
  * move `drawOnAttach` and `destroyOnDetach` chart property into options in order they can be set globally.
  * add the following hover styles (set by callback as well) on lining datasets, from CHART.JS version 2.9.3 (see [PR here](https://github.com/chartjs/Chart.js/pull/6527) and its limitations):
@@ -125,12 +125,20 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `GoogleChartColor` enumeration with Google Chart colors.
  * add `GoogleChartScheme` enumeration with Google Chart colors scheme to use into `ColorSchemes` plugin.
  * move `DatasetRangeSelectionEvent` and `DatasetRangeSelectionEventHandler` classes into events package (**breaking change**).
- * add `onBeforeConfigure` and `onAfterConfigure` methods to `ChartsLifecycleListener` in order to be able to be notified before and after chart configuration setup. Also invoked when the chart is `reconfigure`. 
+ * add `onBeforeConfigure` and `onAfterConfigure` methods to `ChartsLifecycleListener` in order to be able to be notified before and after chart configuration setup. Also invoked when the chart is `reconfigure`.
+ * add `IsDefaultsPlugin` interface to map plugins options defaults.
+ * change `getOptions` and `setOptions` methods to store and load plugin options into configuration, global chart, global and dataset options in order to use `AbstractPluginOptions` and `AbstractPluginOptionsFactory` instances instead of a simple `NativeObjectContainer` and `NativeObjectContainerFactory` (**breaking change**).
+   * new `create` method signature to create a plugin options by a `NativeObject` and `IsDefaultsPlugin` object (for default).
+ * change `getDefaultChartOptions` method signature into `IsChart` interface in order to get a `IsDefaultScaledOptions` instead of a `ChartOptions` instance (**breaking change**).
+ * add `getWholeOptions` method to `IsChart` interface in order to get the whole options configuration of a chart (merged global, global chart and chart options).
+ * add constructors to plugin options in order to create the object relating it to a chart instance to get the default values, if needed. 
 
 ### Fixed Bugs
 
+ * [#29](https://github.com/pepstock-org/Charba/issues/29) add a [section](https://github.com/pepstock-org/Charba/wiki/GettingStarted#polyfilling-your-gwt-project) into [Getting Started](https://github.com/pepstock-org/Charba/wiki/GettingStarted) wiki page how to use polyfill, for IE11 or other aged browsers, without internet connection. Thanks @ssamikk
  * [#49](https://github.com/pepstock-org/Charba/issues/49) change the implementation in order to maintain correctly the status of chart drawing.
  * [#50](https://github.com/pepstock-org/Charba/issues/50) add checking on selection track in order to be sure that an area has been selected.
+ * [#51](https://github.com/pepstock-org/Charba/issues/51) change the implementation about plugin options and how to manage defaults values.
 
 ### Development
 
@@ -139,6 +147,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move `alpha`, `toRGBA`, `toRGB`, `toHex`, `toHSLA`, `toHSL`, `toRGBs`, `brighter`, `brighter`, `darker` and `darker` methods as default methods into `IsColor` interface in order that whoever will implement the interface could provide only red, green, blue and alpha values.
  * move some methods of common `JsHelper` into a dedicated and protected helper in order to hide those methods.
  * add compile dependency with last version [2.0.0](https://github.com/google/jsinterop-annotations/releases/tag/2.0.0) of [JSINTEROP](https://github.com/google/jsinterop-annotations) annotations.
+ * add 2 `load` methods to `Merger` in order to load default and whole options chart instance, removing the previous `get`.
+ 	* reduce the accessibility to methods by an `OptionsEnvelop` object
  
 License
 -------

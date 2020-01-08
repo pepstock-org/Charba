@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.AnnotationType;
 import org.pepstock.charba.client.annotation.enums.LineMode;
 import org.pepstock.charba.client.colors.Color;
@@ -104,7 +105,25 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.
 	 */
 	public LineAnnotation() {
-		super(AnnotationType.LINE);
+		this((DefaultsOptions) null);
+	}
+
+	/**
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, relating to chart instance for default.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 */
+	public LineAnnotation(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	private LineAnnotation(DefaultsOptions defaultsOptions) {
+		super(AnnotationType.LINE, defaultsOptions);
 		// creates a line label
 		label = new LineLabel();
 		// stores into annotation

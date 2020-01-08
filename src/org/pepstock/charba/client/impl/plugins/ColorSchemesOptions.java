@@ -93,10 +93,10 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 
 	// defaults global options instance
 	private ColorSchemesDefaultsOptions defaultsOptions;
-	
+
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
-	 * The global plugin options is used, if exists, as defaults values. 
+	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public ColorSchemesOptions() {
 		// creates an empty object
@@ -121,7 +121,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions) {
 		this(null, defaultsOptions);
 	}
-	
+
 	/**
 	 * Builds the object using a native object.
 	 * 

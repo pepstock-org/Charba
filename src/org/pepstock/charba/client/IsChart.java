@@ -224,16 +224,14 @@ public interface IsChart extends HasHandlers {
 	 * @return the default options of the chart
 	 */
 	IsDefaultScaledOptions getDefaultChartOptions();
-	
+
 	/**
-	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
-	 * If the chart is not consistent, throws an exception.
+	 * Returns the default options by a chart instance, merging global, chart type global and chart options.
 	 * 
-	 * @param chart chart instance.
 	 * @return the default options by a chart instance, merging global, chart type global and chart options
 	 */
 	IsDefaultScaledOptions getWholeOptions();
-	
+
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
 	 * <code>false</code>.

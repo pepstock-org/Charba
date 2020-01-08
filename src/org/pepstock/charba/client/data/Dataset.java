@@ -882,13 +882,13 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Sets the plugin dataset configuration. If dataset configuration options is null, the configuration of plugin will be
-	 * removed.
+	 * Sets the plugin dataset configuration.<br>
+	 * If dataset configuration options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
-	 * @param <T> type of native object container to store
+	 * @param options options used to configure the plugin.<br>
+	 *            Pass <code>null</code> to remove the configuration if exist.
+	 * @param <T> type of plugin options to store
 	 */
 	public final <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
 		// if null, removes the configuration
@@ -912,18 +912,19 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns the plugin dataset configuration, if exist. It uses a factory instance to create a native object container.
+	 * Returns the plugin dataset configuration, if exist.<br>
+	 * It uses a factory instance to create a native object container.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or <code>null</code> if factory is <code>null</code>.
+	 * @param factory factory instance to create a plugin options.
+	 * @param <T> type of plugin options to return
+	 * @return options instance used to configure the plugin or <code>null</code> if factory is <code>null</code>.
 	 */
 	public final <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory argument is consistent
 		if (factory != null) {
-			// FIXME must be loaded the options by chart instance
-			return factory.create(getValue(PluginIdChecker.key(pluginId)), null);
+			// creates the options by the factory
+			return factory.create(getValue(PluginIdChecker.key(pluginId)), defaultValues.getPlugins());
 		}
 		// if here, factory is not consistent
 		return null;

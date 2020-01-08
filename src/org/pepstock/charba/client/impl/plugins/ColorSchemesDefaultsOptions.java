@@ -28,7 +28,7 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 
 	// defaults options instance
 	static final ColorSchemesDefaultsOptions DEFAULTS_INSTANCE = new ColorSchemesDefaultsOptions();
-	
+
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */

@@ -310,7 +310,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Returns the default chart options
-	 *  
+	 * 
 	 * @return the default chart options
 	 */
 	final ChartOptions getChartOptions() {
@@ -326,24 +326,28 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final IsDefaultScaledOptions getDefaultChartOptions() {
 		return defaultChartOptions;
 	}
-	
+
 	/**
 	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
-	 * If the chart is not consistent, throws an exception.
+	 * If the options is not consistent, it will returns the {@link AbstractChart#getDefaultChartOptions()}.
 	 * 
-	 * @param chart chart instance.
 	 * @return the default options by a chart instance, merging global, chart type global and chart options
 	 */
 	@Override
 	public final IsDefaultScaledOptions getWholeOptions() {
-		// creates an envelop for options
-		OptionsEnvelop envelop = new OptionsEnvelop();
-		// load the envelop
-		getOptions().loadOptions(envelop);
-		// creates a chart options with complete configuration of chart
-		ExtendedOptions chartOptions = new ExtendedOptions(this, defaultChartOptions, envelop);
-		// returns a default option with all configuration
-		return new DefaultChartOptions(chartOptions); 
+		// checks if options are consistent
+		if (getOptions() != null) {
+			// creates an envelop for options
+			OptionsEnvelop envelop = new OptionsEnvelop();
+			// load the envelop
+			getOptions().loadOptions(envelop);
+			// creates a chart options with complete configuration of chart
+			ExtendedOptions chartOptions = new ExtendedOptions(this, defaultChartOptions, envelop);
+			// returns a default option with all configuration
+			return new DefaultChartOptions(chartOptions);
+		}
+		// if here, the options are not consistent then it will returns the default chartoptions
+		return getDefaultChartOptions();
 	}
 
 	/**

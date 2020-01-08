@@ -31,7 +31,8 @@ public final class ChartOptions extends ScaledOptions {
 	private final Type type;
 
 	/**
-	 * Creates the item using a native java script object which contains all properties and the default values to apply when the properties are not set.
+	 * Creates the item using a native java script object which contains all properties and the default values to apply when the
+	 * properties are not set.
 	 * 
 	 * @param type chart type
 	 * @param nativeObject native java script object which contains all properties.

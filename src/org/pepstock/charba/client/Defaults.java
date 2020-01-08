@@ -176,7 +176,6 @@ public final class Defaults {
 		return controllers;
 	}
 
-
 	/**
 	 * Returns the default options by a chart type, for a existing chart instance.<br>
 	 * It contains:<br>

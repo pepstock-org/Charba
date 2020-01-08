@@ -69,7 +69,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	protected final T getConfiguration() {
 		return configuration;
 	}
-	
+
 	/**
 	 * Merge a native object into this one with a specific property name.<br>
 	 * This is used by plugins implementation (native java script ones) when they are not using the standard way to add plugin
@@ -81,7 +81,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	public final void merge(NativeObjectContainer source, String property) {
 		Merger.get().merge(getConfiguration(), source, property);
 	}
-	
+
 	/**
 	 * Returns the JSON representation of the object.
 	 * 

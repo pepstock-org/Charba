@@ -48,7 +48,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	private DatasetsItemsSelectorDefaultsOptions() {
 		this(null);
 	}
-	
+
 	/**
 	 * Builds the object using the java script object of options, set by user.
 	 * 

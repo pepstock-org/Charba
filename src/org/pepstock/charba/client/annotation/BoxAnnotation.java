@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.AnnotationType;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -104,7 +105,25 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.
 	 */
 	public BoxAnnotation() {
-		super(AnnotationType.BOX);
+		this((DefaultsOptions) null);
+	}
+
+	/**
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, relating to chart instance for default.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 */
+	public BoxAnnotation(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	BoxAnnotation(DefaultsOptions defaultsOptions) {
+		super(AnnotationType.BOX, defaultsOptions);
 	}
 
 	/**

@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.annotation.enums.DrawTime;
-
 /**
  * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options.
  * 
@@ -24,22 +22,6 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
  *
  */
 interface IsDefaultsAnnotation {
-
-	/**
-	 * Returns the id of annotation.
-	 * 
-	 * @return the id of annotation
-	 */
-	String getId();
-
-	/**
-	 * Returns the draw time which defines when the annotations are drawn.
-	 * 
-	 * @return the draw time which defines when the annotations are drawn
-	 */
-	default DrawTime getDrawTime() {
-		return AnnotationOptions.DEFAULT_DRAW_TIME;
-	}
 
 	/**
 	 * Returns the color of the border of annotation.

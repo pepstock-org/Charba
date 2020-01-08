@@ -96,10 +96,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 
 	// defaults options instance
 	private final ChartBackgroundColorDefaultsOptions defaultsOptions;
-	
+
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
-	 * The global plugin options is used, if exists, as defaults values. 
+	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public ChartBackgroundColorOptions() {
 		this(null, null);
@@ -237,7 +237,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			setValue(Property.COLOR_TYPE, ColorType.COLOR);
 		} else {
 			// if here, the color is not consistent
-			//removes type
+			// removes type
 			remove(Property.COLOR_TYPE);
 		}
 	}
@@ -264,7 +264,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			setValue(Property.COLOR_TYPE, ColorType.GRADIENT);
 		} else {
 			// if here, the gradient is not consistent
-			//removes type
+			// removes type
 			remove(Property.COLOR_TYPE);
 		}
 	}
@@ -282,7 +282,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			setValue(Property.COLOR_TYPE, ColorType.PATTERN);
 		} else {
 			// if here, the pattern is not consistent
-			//removes type
+			// removes type
 			remove(Property.COLOR_TYPE);
 		}
 	}

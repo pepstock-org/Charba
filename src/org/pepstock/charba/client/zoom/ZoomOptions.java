@@ -27,13 +27,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
  */
 public final class ZoomOptions extends AbstractPluginCachedOptions {
 
-	// defaults global options instance
-	private DefaultsOptions defaultsOptions;
-	// pan inner element
-	private final Pan pan;
-	// zoom inner element
-	private final Zoom zoom;
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -65,12 +58,19 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 		}
 
 	}
-	
+
+	// defaults global options instance
+	private DefaultsOptions defaultsOptions;
+	// pan inner element
+	private final Pan pan;
+	// zoom inner element
+	private final Zoom zoom;
+
 	/**
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 */
 	public ZoomOptions() {
-		this((DefaultsOptions)null);
+		this((DefaultsOptions) null);
 	}
 
 	/**

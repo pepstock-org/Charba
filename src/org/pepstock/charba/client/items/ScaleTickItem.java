@@ -74,7 +74,7 @@ public class ScaleTickItem extends AbstractTickItem {
 	 * 
 	 * @return the index of the tick or {@link UndefinedValues#INTEGER} if missing.
 	 */
-	public final int getIndex(){
+	public final int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
@@ -86,7 +86,7 @@ public class ScaleTickItem extends AbstractTickItem {
 	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Returns the value of the tick as string.
 	 * 

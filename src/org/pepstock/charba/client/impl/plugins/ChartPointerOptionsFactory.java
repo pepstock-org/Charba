@@ -32,9 +32,13 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 	ChartPointerOptionsFactory() {
 		super(ChartPointer.ID);
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
@@ -63,8 +67,11 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 			super(ChartPointer.ID);
 		}
 
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public ChartPointerDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

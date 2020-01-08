@@ -37,7 +37,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins{
+public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>

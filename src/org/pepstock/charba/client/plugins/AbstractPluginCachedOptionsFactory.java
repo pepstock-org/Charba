@@ -103,10 +103,9 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets the plugin options from chart datasets, if there
 			for (Dataset dataset : chart.getData().getDatasets()) {
 				if (dataset.hasOptions(getPluginId())) {
-					// FIXME
-//					T options = dataset.getOptions(getPluginId(), this);
-//					// unregisters it from the chart
-//					unregister(options, chart.getId());
+					T options = dataset.getOptions(getPluginId(), this);
+					// unregisters it from the chart
+					unregister(options, chart.getId());
 				}
 			}
 		}
@@ -119,6 +118,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onBeforeInit(IsChart chart) {
+		// do nothing
 	}
 
 	/*
@@ -128,6 +128,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onBeforeConfigure(IsChart chart) {
+		// do nothing
 	}
 
 	/*
@@ -137,6 +138,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onAfterConfigure(IsChart chart) {
+		// do nothing
 	}
 
 	/*
@@ -146,6 +148,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	@Override
 	public final void onAfterDestroy(IsChart chart) {
+		// do nothing
 	}
 
 	/**
@@ -363,10 +366,9 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 		// gets the plugin options from chart datasets, if there
 		for (Dataset dataset : chart.getData().getDatasets()) {
 			if (dataset.hasOptions(getPluginId())) {
-				// FIXME
-				//				T options = dataset.getOptions(getPluginId(), this);
-//				// registers it to the chart
-//				register(options, chart.getId());
+				T options = dataset.getOptions(getPluginId(), this);
+				// registers it to the chart
+				register(options, chart.getId());
 			}
 		}
 	}

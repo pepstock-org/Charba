@@ -35,16 +35,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getId()
-	 */
-	@Override
-	default String getId() {
-		return LineAnnotation.DEFAULT_ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderColorAsString()
 	 */
 	@Override

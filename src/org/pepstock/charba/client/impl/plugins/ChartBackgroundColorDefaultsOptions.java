@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 final class ChartBackgroundColorDefaultsOptions extends AbstractPluginOptions {
-	
+
 	// defaults options instance
 	static final ChartBackgroundColorDefaultsOptions DEFAULTS_INSTANCE = new ChartBackgroundColorDefaultsOptions();
 

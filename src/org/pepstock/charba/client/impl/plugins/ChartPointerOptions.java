@@ -38,7 +38,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
 	 */
 	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -75,7 +75,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
-	 * The global plugin options is used, if exists, as defaults values. 
+	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public ChartPointerOptions() {
 		this(null, null);

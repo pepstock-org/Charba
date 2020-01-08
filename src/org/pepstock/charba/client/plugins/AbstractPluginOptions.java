@@ -160,7 +160,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			chart.getOptions().getPlugins().setOptions(pluginId, this);
 		}
 	}
-	
+
 	// FIMXE
 	// missing store to chart type and dataset
 

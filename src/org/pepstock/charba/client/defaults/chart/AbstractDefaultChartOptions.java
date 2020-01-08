@@ -16,16 +16,15 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Abstract defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
+ * Abstract defaults for options element, based on chart type. THIS IS MUST BE EXTENDED AS ROOT OF ALL ELEMENTS CHART DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions implements IsDefaultScaledOptions {
+abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 
 	private final IsDefaultOptions options;
 
@@ -35,6 +34,8 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions implem
 	 * @param defaultOptions default options instance used as default.
 	 */
 	AbstractDefaultChartOptions(IsDefaultOptions defaultOptions) {
+		super(defaultOptions);
+		// stores defaults
 		this.options = defaultOptions;
 	}
 

@@ -20,6 +20,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.Event;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS options.
@@ -27,15 +31,34 @@ import org.pepstock.charba.client.annotation.enums.Event;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultOptions {
+final class DefaultsOptions extends AbstractPluginOptions {
+
+	// defaults options instance
+	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
+
+	/**
+	 * Creates an empty options without any global options. It will use the constants as of plugin properties.
+	 */
+	private DefaultsOptions() {
+		this(null);
+	}
+
+	/**
+	 * Creates the object wrapping the global options if there are. It will use the constants as of plugin properties.
+	 * 
+	 * @param nativeObject native object which maps global options.
+	 */
+	DefaultsOptions(NativeObject nativeObject) {
+		super(AnnotationPlugin.ID, nativeObject);
+	}
 
 	/**
 	 * Returns the draw time which defines when the annotations are drawn.
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
-	default DrawTime getDrawTime() {
-		return AnnotationOptions.DEFAULT_DRAW_TIME;
+	DrawTime getDrawTime() {
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.class, AnnotationOptions.DEFAULT_DRAW_TIME);
 	}
 
 	/**
@@ -45,8 +68,8 @@ interface IsDefaultOptions {
 	 * 
 	 * @return the double-click speed in milliseconds
 	 */
-	default int getDoubleClickSpeed() {
-		return AnnotationOptions.DEFAULT_DOUBLE_CLICK_SPEED;
+	int getDoubleClickSpeed() {
+		return getValue(AnnotationOptions.Property.DOUBLE_CLICK_SPEED, AnnotationOptions.DEFAULT_DOUBLE_CLICK_SPEED);
 	}
 
 	/**
@@ -54,7 +77,15 @@ interface IsDefaultOptions {
 	 * 
 	 * @return the browser events to enable on each annotation
 	 */
-	default List<Event> getEvents() {
+	List<Event> getEvents() {
+		// gets array for events
+		ArrayString array = getArrayValue(AnnotationOptions.Property.EVENTS);
+		// if the arrays is consistent...
+		if (array != null && !array.isEmpty()) {
+			// ...then returns as list of events
+			return ArrayListHelper.list(Event.class, array);
+		}
+		// ... otherwise returns the default
 		return Collections.emptyList();
 	}
 

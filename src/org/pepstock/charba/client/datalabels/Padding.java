@@ -39,6 +39,13 @@ public final class Padding extends AbstractElement {
 
 	/**
 	 * Creates new padding element, using the default values options.
+	 */
+	public Padding() {
+		this(DefaultsOptions.DEFAULTS_INSTANCE.getPadding());
+	}
+
+	/**
+	 * Creates new padding element, using the default values options.
 	 * 
 	 * @param defaultsOptions default PADDING options to returns the default when required.
 	 */

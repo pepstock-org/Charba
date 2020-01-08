@@ -79,6 +79,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 		}
 
 	}
+
 	// internal count needed to remove callbacks instance from cache
 	// from html legened item factory
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -89,17 +90,17 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
-	 * The global plugin options is used, if exists, as defaults values. 
+	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public HtmlLegendOptions() {
 		this(null, null);
 	}
-	
+
 	/**
 	 * Builds the object with a chart instance in order to get the right defaults.<br>
 	 * If the plugin options have not been set by chart type, it will use the global.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart type to use to get the default values by chart
 	 */
 	public HtmlLegendOptions(IsChart chart) {
 		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);

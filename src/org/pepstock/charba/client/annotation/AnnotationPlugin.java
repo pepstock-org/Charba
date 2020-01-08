@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
 import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -41,7 +42,9 @@ public final class AnnotationPlugin {
 	/**
 	 * Annotation options factory
 	 */
-	public static final AnnotationOptionsFactory FACTORY = new AnnotationOptionsFactory(ID);
+	public static final AnnotationOptionsFactory FACTORY = new AnnotationOptionsFactory();
+	// default plugin options factory
+	static final AnnotationDefaultsOptionsFactory DEFAULTS_FACTORY = new AnnotationDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation

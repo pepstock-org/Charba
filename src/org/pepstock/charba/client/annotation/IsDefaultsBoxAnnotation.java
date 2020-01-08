@@ -31,16 +31,6 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getId()
-	 */
-	@Override
-	default String getId() {
-		return BoxAnnotation.DEFAULT_ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderColorAsString()
 	 */
 	@Override

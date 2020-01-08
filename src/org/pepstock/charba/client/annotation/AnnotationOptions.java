@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.List;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.Event;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -31,7 +32,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationOptions extends AbstractPluginCachedOptions implements IsDefaultOptions {
+public final class AnnotationOptions extends AbstractPluginCachedOptions {
 
 	/**
 	 * Default double click speed in milliseconds, <b>{@value DEFAULT_DOUBLE_CLICK_SPEED}</b>.
@@ -80,12 +81,41 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 
 	}
 
+	// defaults global options instance
+	private DefaultsOptions defaultsOptions;
+
 	/**
 	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 */
 	public AnnotationOptions() {
+		this((DefaultsOptions) null);
+	}
+
+	/**
+	 * Creates new {@link AnnotationPlugin#ID} plugin options, relating to chart instance for default.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 */
+	public AnnotationOptions(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Creates new {@link AnnotationPlugin#ID} plugin options.
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	AnnotationOptions(DefaultsOptions defaultsOptions) {
 		// creates an empty native object
 		super(AnnotationPlugin.ID, AnnotationPlugin.FACTORY, false);
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(AnnotationPlugin.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
 	}
 
 	/**
@@ -102,9 +132,8 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
-	@Override
 	public DrawTime getDrawTime() {
-		return getValue(Property.DRAW_TIME, DrawTime.class, IsDefaultOptions.super.getDrawTime());
+		return getValue(Property.DRAW_TIME, DrawTime.class, defaultsOptions.getDrawTime());
 	}
 
 	/**
@@ -125,9 +154,8 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the double-click speed in milliseconds
 	 */
-	@Override
 	public int getDoubleClickSpeed() {
-		return getValue(Property.DOUBLE_CLICK_SPEED, IsDefaultOptions.super.getDoubleClickSpeed());
+		return getValue(Property.DOUBLE_CLICK_SPEED, defaultsOptions.getDoubleClickSpeed());
 	}
 
 	/**
@@ -145,7 +173,6 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 	 * 
 	 * @return the browser events to enable on each annotation
 	 */
-	@Override
 	public List<Event> getEvents() {
 		// gets array for events
 		ArrayString array = getArrayValue(Property.EVENTS);
@@ -155,7 +182,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions impleme
 			return ArrayListHelper.list(Event.class, array);
 		}
 		// ... otherwise returns the default
-		return IsDefaultOptions.super.getEvents();
+		return defaultsOptions.getEvents();
 	}
 
 	/**

@@ -63,7 +63,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	public static DatasetsItemsSelectorOptionsBuilder create(IsChart chart) {
 		return new DatasetsItemsSelectorOptionsBuilder(chart);
 	}
-	
+
 	/**
 	 * Returns a configured plugin options.
 	 * 

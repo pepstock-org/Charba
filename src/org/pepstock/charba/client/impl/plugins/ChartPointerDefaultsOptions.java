@@ -31,7 +31,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 final class ChartPointerDefaultsOptions extends AbstractPluginOptions {
-	
+
 	// defaults options instance
 	static final ChartPointerDefaultsOptions DEFAULTS_INSTANCE = new ChartPointerDefaultsOptions();
 	// default list for elements
@@ -61,7 +61,7 @@ final class ChartPointerDefaultsOptions extends AbstractPluginOptions {
 	String getCursorPointerAsString() {
 		return getValue(AbstractCursorPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
 	}
-	
+
 	/**
 	 * Returns the chart elements in scope to "cursorpointer" plugin.
 	 * 
