@@ -46,10 +46,11 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
 
@@ -889,7 +890,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 *            exist.
 	 * @param <T> type of native object container to store
 	 */
-	public final <T extends NativeObjectContainer> void setOptions(String pluginId, T options) {
+	public final <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -918,10 +919,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if factory is <code>null</code>.
 	 */
-	public final <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
+	public final <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory argument is consistent
 		if (factory != null) {
-			return factory.create(getValue(PluginIdChecker.key(pluginId)));
+			// FIXME must be loaded the options by chart instance
+			return factory.create(getValue(PluginIdChecker.key(pluginId)), null);
 		}
 		// if here, factory is not consistent
 		return null;

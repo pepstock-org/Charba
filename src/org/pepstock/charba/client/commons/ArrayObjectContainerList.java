@@ -59,8 +59,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 			this.array = array;
 			// scans the array
 			for (int i = 0; i < array.length(); i++) {
-				// uses the factory to creates all elements
-				delegate.add(factory.create(array.get(i)));
+					// uses the factory to creates all elements
+					delegate.add(factory.create(array.get(i)));
 			}
 		}
 	}

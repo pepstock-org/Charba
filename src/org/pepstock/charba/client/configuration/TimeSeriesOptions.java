@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Abstract configuration of time series chart.<br>
@@ -35,7 +35,7 @@ abstract class TimeSeriesOptions extends MultiScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of stacked chart
 	 */
-	public TimeSeriesOptions(IsChart chart, ChartOptions defaultValues) {
+	public TimeSeriesOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for time series

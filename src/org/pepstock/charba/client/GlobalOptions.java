@@ -35,4 +35,5 @@ public final class GlobalOptions extends Options {
 		// uses the CHART.JS default options as default one
 		super(DefaultsBuilder.get().getOptions(), nativeObject);
 	}
+
 }

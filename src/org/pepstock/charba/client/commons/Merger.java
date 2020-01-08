@@ -24,7 +24,7 @@ import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.MergableOptions;
+import org.pepstock.charba.client.OptionsEnvelop;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.enums.AxisType;
@@ -106,21 +106,21 @@ public final class Merger {
 	 * 
 	 * @param chart chart instance which contains the chart options to be merged
 	 * @param options the options as native object container to be merged
-	 * @param containerOptions the options container of native options
+	 * @param envelop the envelop for options as native options
 	 */
-	public void load(IsChart chart, NativeObjectContainer options, MergableOptions containerOptions) {
+	public void load(IsChart chart, NativeObjectContainer options, OptionsEnvelop envelop) {
 		// checks if argument is consistent
 		IsChart.checkIfConsistent(chart);
-		// checks if container is consistent
-		if (containerOptions != null) {
+		// checks if envelop is consistent
+		if (envelop != null) {
 			// gets global and chart type options merged
 			NativeObject defaults = get(chart.getType());
 			// clones native object to avoid to changes the sources
 			NativeObject chartOptions = Helpers.get().clone(options.getNativeObject());
 			// merges the current chart options with the global and chart type ones
 			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
-			// loads whole options into native options container
-			containerOptions.setNativeOptions(wholeOptions);
+			// loads whole options into envelop
+			envelop.setNativeOptions(wholeOptions);
 		}
 	}
 
@@ -135,15 +135,15 @@ public final class Merger {
 	 * </ul>
 	 * 
 	 * @param type chart type
-	 * @param containerOptions the options as native object container to be merged
+	 * @param envelop the envelop for options as native options
 	 */
-	public void load(Type type, MergableOptions containerOptions) {
-		// checks if container is consistent
-		if (containerOptions != null) {
+	public void load(Type type, OptionsEnvelop envelop) {
+		// checks if envelop is consistent
+		if (envelop != null) {
 			// gets global and chart type options merged
 			NativeObject defaults = get(type);
-			// loads whole options into native options container
-			containerOptions.setNativeOptions(defaults);
+			// loads whole options into envelop
+			envelop.setNativeOptions(defaults);
 		}
 	}
 

@@ -17,25 +17,35 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.Scales;
 
 /**
  * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartOptions extends AbstractDefaultOptions implements IsDefaultScaledOptions {
-
-	private final ChartOptions chartOptions;
+public final class DefaultChartOptions extends AbstractDefaultChartOptions implements IsDefaultScaledOptions {
 
 	private final IsDefaultScale scale;
 
 	private final IsDefaultScales scales;
+
+	/**
+	 * FIXME check chartOptions
+	 * Creates the object by options element instance.
+	 * 
+	 * @param chartOptions chart options instance.
+	 */
+	public DefaultChartOptions(ExtendedOptions chartOptions) {
+		this(chartOptions, chartOptions.getChart().getType(), chartOptions.getScale(), chartOptions.getScales());
+	}
 
 	/**
 	 * Creates the object by options element instance.
@@ -43,22 +53,32 @@ public final class DefaultChartOptions extends AbstractDefaultOptions implements
 	 * @param chartOptions chart options instance.
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
-		super(new DefaultChartAnimation(chartOptions.getAnimation()), new DefaultChartHover(chartOptions.getHover()), new DefaultChartElements(chartOptions.getElements()), new DefaultChartLayout(chartOptions.getLayout()),
-				new DefaultChartTitle(chartOptions.getTitle()), new DefaultChartLegend(chartOptions.getLegend()), new DefaultChartTooltips(chartOptions.getTooltips()));
-		this.chartOptions = chartOptions;
+		this(chartOptions, chartOptions.getType(), chartOptions.getScale(), chartOptions.getScales());
+	}
+
+	/**
+	 * FIXME
+	 * Creates the object by options element instance.
+	 * 
+	 * @param chartOptions chart options instance.
+	 */
+	private DefaultChartOptions(IsDefaultScaledOptions chartOptions, Type type, Scale defaultScale, Scales defaultScales) {
+		super(chartOptions);
+		// checks type
+		Type.checkIfValid(type);
 		// checks if the chart options is related to axes
 		// checks if single scale
-		if (ScaleType.SINGLE.equals(chartOptions.getType().scaleType())) {
+		if (ScaleType.SINGLE.equals(type.scaleType())) {
 			// gets scale
-			scale = new DefaultChartScale(chartOptions.getScale());
+			this.scale = new DefaultChartScale(defaultScale);
 		} else {
 			// uses the default scale
 			scale = DefaultsBuilder.get().getScaledOptions().getScale();
 		}
 		// checks if multi scale
-		if (ScaleType.MULTI.equals(chartOptions.getType().scaleType())) {
+		if (ScaleType.MULTI.equals(type.scaleType())) {
 			// gets scale
-			scales = new DefaultChartScales(chartOptions.getScales());
+			scales = new DefaultChartScales(defaultScales);
 		} else {
 			// uses the default scales
 			scales = DefaultsBuilder.get().getScaledOptions().getScales();
@@ -83,186 +103,6 @@ public final class DefaultChartOptions extends AbstractDefaultOptions implements
 	@Override
 	public IsDefaultScales getScales() {
 		return scales;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isResponsive()
-	 */
-	@Override
-	public boolean isResponsive() {
-		return chartOptions.isResponsive();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getResponsiveAnimationDuration()
-	 */
-	@Override
-	public int getResponsiveAnimationDuration() {
-		return chartOptions.getResponsiveAnimationDuration();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isMaintainAspectRatio()
-	 */
-	@Override
-	public boolean isMaintainAspectRatio() {
-		return chartOptions.isMaintainAspectRatio();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getAspectRatio()
-	 */
-	@Override
-	public double getAspectRatio() {
-		return chartOptions.getAspectRatio();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDevicePixelRatio()
-	 */
-	@Override
-	public double getDevicePixelRatio() {
-		return chartOptions.getDevicePixelRatio();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultColorAsString()
-	 */
-	@Override
-	public String getDefaultColorAsString() {
-		return chartOptions.getDefaultColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontColorAsString()
-	 */
-	@Override
-	public String getDefaultFontColorAsString() {
-		return chartOptions.getDefaultFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontSize()
-	 */
-	@Override
-	public int getDefaultFontSize() {
-		return chartOptions.getDefaultFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontStyle()
-	 */
-	@Override
-	public FontStyle getDefaultFontStyle() {
-		return chartOptions.getDefaultFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontFamily()
-	 */
-	@Override
-	public String getDefaultFontFamily() {
-		return chartOptions.getDefaultFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLines()
-	 */
-	@Override
-	public boolean isShowLines() {
-		return chartOptions.isShowLines();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isSpanGaps()
-	 */
-	@Override
-	public boolean isSpanGaps() {
-		return chartOptions.isSpanGaps();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCutoutPercentage()
-	 */
-	@Override
-	public double getCutoutPercentage() {
-		return chartOptions.getCutoutPercentage();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRotation()
-	 */
-	@Override
-	public double getRotation() {
-		return chartOptions.getRotation();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCircumference()
-	 */
-	@Override
-	public double getCircumference() {
-		return chartOptions.getCircumference();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getStartAngle()
-	 */
-	@Override
-	public double getStartAngle() {
-		return chartOptions.getStartAngle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDrawOnAttach()
-	 */
-	@Override
-	public boolean isDrawOnAttach() {
-		return chartOptions.isDrawOnAttach();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDestroyOnDetach()
-	 */
-	@Override
-	public boolean isDestroyOnDetach() {
-		return chartOptions.isDestroyOnDetach();
 	}
 
 }

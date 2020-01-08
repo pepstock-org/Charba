@@ -26,7 +26,7 @@ import org.pepstock.charba.client.configuration.ConfigurationOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MergableOptions {
+public final class OptionsEnvelop {
 
 	// native instance of chart options
 	private NativeObject nativeOptions = null;
@@ -34,7 +34,7 @@ public final class MergableOptions {
 	/**
 	 * To avoid any instantiation
 	 */
-	MergableOptions() {
+	OptionsEnvelop() {
 		// do nothing
 	}
 
@@ -43,7 +43,7 @@ public final class MergableOptions {
 	 * 
 	 * @return the native options of chart
 	 */
-	NativeObject getNativeOptions() {
+	public NativeObject getNativeOptions() {
 		return nativeOptions;
 	}
 

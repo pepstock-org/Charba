@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Specific options for POLAR AREA chart. It contains all properties for this kind of chart.
@@ -32,7 +32,7 @@ public class PolarAreaOptions extends SingleScaleOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of polar area chart
 	 */
-	public PolarAreaOptions(IsChart chart, ChartOptions defaultValues) {
+	public PolarAreaOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

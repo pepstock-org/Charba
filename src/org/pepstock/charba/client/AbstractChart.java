@@ -25,11 +25,14 @@ import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.JSON;
@@ -87,6 +90,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// merged options of defaults
 	private final ChartOptions options;
+	// merged options as default options
+	private final IsDefaultScaledOptions defaultChartOptions;
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	// cursor defined when chart is created
@@ -134,6 +139,10 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// chart type is NOT checked here but when new chart options
 		// object is created
 		options = createChartOptions();
+		// returns a default option with all configuration
+		// it uses the default builder and the default scaled options
+		// because chart options is already a merge between global and chart global
+		defaultChartOptions = new DefaultChartOptions(options);
 		// stores initial cursor
 		initialCursor = Utilities.getCursorOfChart(this);
 	}
@@ -300,13 +309,41 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
+	 * Returns the default chart options
+	 *  
+	 * @return the default chart options
+	 */
+	final ChartOptions getChartOptions() {
+		return options;
+	}
+
+	/**
 	 * Returns the default options created based on chart type.
 	 * 
 	 * @return the default options of the chart
 	 */
 	@Override
-	public final ChartOptions getDefaultChartOptions() {
-		return options;
+	public final IsDefaultScaledOptions getDefaultChartOptions() {
+		return defaultChartOptions;
+	}
+	
+	/**
+	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
+	 * If the chart is not consistent, throws an exception.
+	 * 
+	 * @param chart chart instance.
+	 * @return the default options by a chart instance, merging global, chart type global and chart options
+	 */
+	@Override
+	public final IsDefaultScaledOptions getWholeOptions() {
+		// creates an envelop for options
+		OptionsEnvelop envelop = new OptionsEnvelop();
+		// load the envelop
+		getOptions().loadOptions(envelop);
+		// creates a chart options with complete configuration of chart
+		ExtendedOptions chartOptions = new ExtendedOptions(this, defaultChartOptions, envelop);
+		// returns a default option with all configuration
+		return new DefaultChartOptions(chartOptions); 
 	}
 
 	/**

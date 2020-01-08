@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Specific options for DOUGHNUT chart.
@@ -32,7 +32,7 @@ public class DoughnutOptions extends AbstractPieOptions {
 	 * @param chart chart instance
 	 * @param defaultValues default options
 	 */
-	public DoughnutOptions(IsChart chart, ChartOptions defaultValues) {
+	public DoughnutOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

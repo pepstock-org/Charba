@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Configuration of chart with only 1 scale.
@@ -34,7 +34,7 @@ public abstract class SingleScaleOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	public SingleScaleOptions(IsChart chart, ChartOptions defaultValues) {
+	public SingleScaleOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

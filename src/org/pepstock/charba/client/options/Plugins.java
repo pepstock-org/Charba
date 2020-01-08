@@ -19,15 +19,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.defaults.NoDefaults;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 
 /**
@@ -38,7 +37,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends AbstractModel<Options, NoDefaults> {
+public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins{
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
@@ -46,11 +45,12 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Plugins(Options options, Key childKey, NativeObject nativeObject) {
+	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
 		// no default values for this element
-		super(options, childKey, NoDefaults.INSTANCE, nativeObject);
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 	 *            exist.
 	 * @param <T> type of native object container to store
 	 */
-	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) {
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -167,7 +167,7 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 	 *            configuration if exist.
 	 * @param <T> type of native object container to store
 	 */
-	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> options) {
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -217,7 +217,7 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 	 * @return java script object used to configure the plugin or an empty object if not exist. If factory argument is not
 	 *         consistent, <code>null</code> is returned.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
+	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the key to avoid many calls to plugin checker
@@ -226,10 +226,12 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 			ObjectType type = type(pluginIdKey);
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
-				return factory.create(getValue(PluginIdChecker.key(pluginId)));
+				// creates the object using the defaults options
+				return factory.create(getValue(PluginIdChecker.key(pluginId)), getDefaultValues());
+				// return factory.create(getValue(PluginIdChecker.key(pluginId)));
 			} else {
 				// if here returns an empty object
-				return factory.create(null);
+				return factory.create(null, getDefaultValues());
 			}
 		}
 		// if here factory is not consistent
@@ -245,7 +247,7 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 	 * @param <T> type of native object container to return
 	 * @return the plugin options as list of object containers or empty list if not exist.
 	 */
-	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
+	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the key to avoid many calls to plugin checker
@@ -254,8 +256,17 @@ public final class Plugins extends AbstractModel<Options, NoDefaults> {
 			ObjectType type = type(pluginIdKey);
 			// checks if array
 			if (ObjectType.ARRAY.equals(type)) {
+				// gets the array from native object
 				ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
-				return ArrayListHelper.list(array, factory);
+				// creates the result
+				List<T> result = new LinkedList<>();
+				// scans all native object from array
+				for (int i = 0; i < array.length(); i++) {
+					// creates the object using the defaults options
+					// and adds to result list
+					result.add(factory.create(array.get(i), getDefaultValues()));
+				}
+				return result;
 			}
 		}
 		// if here returns an empty list

@@ -28,6 +28,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
+import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartHoverEvent;
@@ -174,19 +176,28 @@ public final class Defaults {
 		return controllers;
 	}
 
+
 	/**
-	 * Returns the default options by a chart type, for a existing chart instance
+	 * Returns the default options by a chart type, for a existing chart instance.<br>
+	 * It contains:<br>
+	 * <ul>
+	 * <li>global options
+	 * <li>scale global options
+	 * <li>chart global options
+	 * </ul>
 	 * 
 	 * @param type chart type.
-	 * @return the default options
+	 * @return the chart options instance
 	 */
-	public ChartOptions getChartOptions(Type type) {
-		// creates a mergable options
-		MergableOptions mergeOptions = new MergableOptions();
-		// load the mergable options
-		Merger.get().load(type, mergeOptions);
+	ChartOptions getChartOptions(Type type) {
+		// creates an envelop for options
+		OptionsEnvelop envelop = new OptionsEnvelop();
+		// load the envelop
+		Merger.get().load(type, envelop);
 		// returns a default option with all configuration
-		return new ChartOptions(type, mergeOptions.getNativeOptions());
+		// it uses the default builder and the default scaled options
+		// because chart options is already a merge between global and chart global
+		return new ChartOptions(type, envelop.getNativeOptions(), DefaultsBuilder.get().getScaledOptions());
 	}
 
 	/**
@@ -209,24 +220,6 @@ public final class Defaults {
 	}
 
 	/**
-	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
-	 * If the chart is not consistent, throws an exception.
-	 * 
-	 * @param chart chart instance.
-	 * @return the default options by a chart instance, merging global, chart type global and chart options
-	 */
-	public ChartOptions getOptions(IsChart chart) {
-		// checks if type is consistent
-		IsChart.checkIfConsistent(chart);
-		// creates a mergable options
-		MergableOptions mergeOptions = new MergableOptions();
-		// load the mergable options
-		chart.getOptions().loadOptions(mergeOptions);
-		// returns a default option with all configuration
-		return new ChartOptions(chart.getType(), mergeOptions.getNativeOptions());
-	}
-
-	/**
 	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
 	 * 
 	 * @param chart chart instance to use to get default HTML legend
@@ -236,7 +229,7 @@ public final class Defaults {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLegend(Charts.getNative(chart), chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLegend(Charts.getNative(chart), getChartOptions(chart.getType()));
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -253,7 +246,7 @@ public final class Defaults {
 		// checks if argument is consistent
 		if (chart != null && IsChart.isValid(chart.getChart())) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(chart, chart.getChart().getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLabels(chart, getChartOptions(chart.getChart().getType()));
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -270,7 +263,7 @@ public final class Defaults {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(Charts.getNative(chart), chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLabels(Charts.getNative(chart), getChartOptions(chart.getType()));
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -310,7 +303,7 @@ public final class Defaults {
 				// gets array object
 				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultChartEvent(chart.getDefaultChartOptions(), event.getKey(), event.getContext(), event.getNativeEvent(), array);
+				JsCallbacksHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), array);
 			}
 		}
 	}
@@ -357,7 +350,7 @@ public final class Defaults {
 				// creates a wrapper
 				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(chart.getDefaultChartOptions(), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.getInternalObject());
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.getInternalObject());
 			}
 		}
 	}
@@ -465,13 +458,16 @@ public final class Defaults {
 		 * @return default options.
 		 */
 		ChartOptions chart(Type type) {
+			// gets global options
+			GlobalOptions global = Defaults.get().getGlobal();
 			// checks if the property is present
 			if (ObjectType.OBJECT.equals(type(type))) {
-				return new ChartOptions(type, getValue(type));
+				// creatws a chart options using global a default scaled as default
+				return new ChartOptions(type, getValue(type), new DefaultGlobalOptions(global));
 			} else {
 				// if here, the chart type is not defined (could be a controller)
 				// therefore returns an empty options
-				return new ChartOptions(type);
+				return new ChartOptions(type, null, new DefaultGlobalOptions(global));
 			}
 		}
 

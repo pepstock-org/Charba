@@ -22,7 +22,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -123,7 +122,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns
 	 *         <code>null</code>.
 	 */
-	protected final <T extends NativeObjectContainer> T loadGlobalsPluginOptions(NativeObjectContainerFactory<T> factory) {
+	protected final <T extends AbstractPluginOptions> T loadGlobalsPluginOptions(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// checks if the default global options has been added for the plugin
@@ -133,7 +132,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				return factory.create();
+				return factory.create(null, null);
 			}
 		}
 		// if here the factory is not consistent
@@ -161,5 +160,8 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			chart.getOptions().getPlugins().setOptions(pluginId, this);
 		}
 	}
+	
+	// FIMXE
+	// missing store to chart type and dataset
 
 }

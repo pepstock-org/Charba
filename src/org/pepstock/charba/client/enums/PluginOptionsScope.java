@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Enumeration with all possible plugin options scope, where they are set to the chart or dataset.
+ * Enumeration with all possible options scope.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -28,13 +28,13 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public enum PluginOptionsScope implements Key
 {
 	/**
-	 * Represents a plugin options set globally.
+	 * Represents a options set globally.
 	 */
 	GLOBAL("global"),
 	/**
-	 * Represents a plugin options set to all charts of the same type.
+	 * Represents a options set to all charts of the same type.
 	 */
-	CHART_TYPE("chartType");
+	GLOBAL_CHART("globalChart");
 
 	// name value of property
 	private final String value;

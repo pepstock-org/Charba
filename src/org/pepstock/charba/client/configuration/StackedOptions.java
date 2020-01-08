@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Configuration of chart which could be stacked.<br>
@@ -36,7 +36,7 @@ public class StackedOptions extends MultiScalesOptions {
 	 * @param defaultValues defaults options of stacked chart
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
-	public StackedOptions(IsChart chart, ChartOptions defaultValues, boolean onlyYScaled) {
+	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean onlyYScaled) {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for stacked chart
@@ -56,7 +56,7 @@ public class StackedOptions extends MultiScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
 	 */
-	public StackedOptions(IsChart chart, ChartOptions defaultValues) {
+	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		this(chart, defaultValues, false);
 	}
 

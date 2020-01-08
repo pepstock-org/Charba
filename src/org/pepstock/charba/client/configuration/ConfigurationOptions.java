@@ -20,11 +20,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.MergableOptions;
+import org.pepstock.charba.client.OptionsEnvelop;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -37,7 +36,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -231,9 +230,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	ConfigurationOptions(IsChart chart, ChartOptions defaultValues) {
+	ConfigurationOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// uses the extended option internally (no override)
-		super(chart, new ExtendedOptions(new DefaultChartOptions(defaultValues)));
+		super(chart, new ExtendedOptions(chart, defaultValues));
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
@@ -290,10 +289,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * <li>global options (by chart.defaults.global)
 	 * </ul>
 	 * 
-	 * @param optionsContainer the options container of native options
+	 * @param envelop the envelop for options as native options
 	 */
-	public final void loadOptions(MergableOptions optionsContainer) {
-		Merger.get().load(getChart(), getConfiguration(), optionsContainer);
+	public final void loadOptions(OptionsEnvelop envelop) {
+		Merger.get().load(getChart(), getConfiguration(), envelop);
 	}
 
 	/**

@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Specific options for RADAR chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public class RadarOptions extends SingleScaleOptions implements HasLineOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of radar chart
 	 */
-	public RadarOptions(IsChart chart, ChartOptions defaultValues) {
+	public RadarOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

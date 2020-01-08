@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
@@ -222,8 +223,17 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the default options of the chart
 	 */
-	ChartOptions getDefaultChartOptions();
-
+	IsDefaultScaledOptions getDefaultChartOptions();
+	
+	/**
+	 * Returns the default options by a chart instance, merging global, chart type global and chart options.<br>
+	 * If the chart is not consistent, throws an exception.
+	 * 
+	 * @param chart chart instance.
+	 * @return the default options by a chart instance, merging global, chart type global and chart options
+	 */
+	IsDefaultScaledOptions getWholeOptions();
+	
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
 	 * <code>false</code>.

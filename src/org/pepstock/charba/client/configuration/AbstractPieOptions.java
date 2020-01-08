@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
  * Abstract options for PIE chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param defaultvalues defaults of chart
 	 */
-	protected AbstractPieOptions(IsChart chart, ChartOptions defaultvalues) {
+	protected AbstractPieOptions(IsChart chart, IsDefaultScaledOptions defaultvalues) {
 		super(chart, defaultvalues);
 	}
 

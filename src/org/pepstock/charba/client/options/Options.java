@@ -137,9 +137,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		layout = new Layout(this, Property.LAYOUT, defaultValues.getLayout(), getValue(Property.LAYOUT));
 		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
-		plugins = new Plugins(this, Property.PLUGINS, getValue(Property.PLUGINS));
+		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 	}
-
+	
 	/**
 	 * Returns the animation element.
 	 * 

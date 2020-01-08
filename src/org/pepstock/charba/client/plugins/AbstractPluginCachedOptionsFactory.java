@@ -22,13 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.pepstock.charba.client.AbstractChartsLifecycleListener;
 import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.ChartsLifecycleListener;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.PluginOptionsScope;
@@ -38,13 +37,11 @@ import org.pepstock.charba.client.enums.PluginOptionsScope;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPluginCachedOptions> extends AbstractChartsLifecycleListener implements NativeObjectContainerFactory<T> {
+public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPluginCachedOptions> extends AbstractPluginOptionsFactory<T> implements ChartsLifecycleListener {
 
 	// cache of options in order to return the already existing options
 	// K = options id, V = plugin options
 	private static final Map<Integer, AbstractPluginCachedOptions> OPTIONS = new HashMap<>();
-	// plugin id
-	private final String pluginId;
 
 	/**
 	 * Adds itself as charts life cycle listener to manage the cache of plugin options, in order to clean the instances when the
@@ -53,21 +50,9 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @param pluginId plugin id
 	 */
 	protected AbstractPluginCachedOptionsFactory(String pluginId) {
-		// checks plugin id
-		PluginIdChecker.check(pluginId);
-		// stores plugin id
-		this.pluginId = pluginId;
+		super(pluginId);
 		// adds itself as charts life cycle listener
 		Charts.addLifecycleListener(this);
-	}
-
-	/**
-	 * Returns the plugin id related to this options.
-	 * 
-	 * @return the plugin id related to this options
-	 */
-	public final String getPluginId() {
-		return pluginId;
 	}
 
 	/**
@@ -111,21 +96,58 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// gets the plugin options from chart options, if there
-			if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
+			if (chart.getOptions().getPlugins().hasOptions(getPluginId())) {
 				// unregisters options
 				unregisterOptionsForDestroy(chart);
 			}
 			// gets the plugin options from chart datasets, if there
 			for (Dataset dataset : chart.getData().getDatasets()) {
-				if (dataset.hasOptions(pluginId)) {
-					T options = dataset.getOptions(pluginId, this);
-					// unregisters it from the chart
-					unregister(options, chart.getId());
+				if (dataset.hasOptions(getPluginId())) {
+					// FIXME
+//					T options = dataset.getOptions(getPluginId(), this);
+//					// unregisters it from the chart
+//					unregister(options, chart.getId());
 				}
 			}
 		}
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeInit(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public final void onBeforeInit(IsChart chart) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public final void onBeforeConfigure(IsChart chart) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public final void onAfterConfigure(IsChart chart) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterDestroy(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public final void onAfterDestroy(IsChart chart) {
+	}
+
 	/**
 	 * Unregisters the options of a chart because the chart is destroyed.
 	 * 
@@ -133,16 +155,16 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	private void unregisterOptionsForDestroy(IsChart chart) {
 		// gets the object type of options to know if there is an array of options
-		ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
+		ObjectType type = chart.getOptions().getPlugins().getOptionsType(getPluginId());
 		// if is single object
 		if (ObjectType.OBJECT.equals(type)) {
 			// gets object
-			T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
+			T options = chart.getOptions().getPlugins().getOptions(getPluginId(), this);
 			// unregisters it from the chart
 			unregister(options, chart.getId());
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here the options are an array of objects
-			List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
+			List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(getPluginId(), this);
 			// scans the objects
 			for (T options : optionsList) {
 				// unregisters it from the chart
@@ -212,7 +234,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets options
 			AbstractPluginCachedOptions options = entry.getValue();
 			// checks if the options is related to the plugin of this factory
-			if (pluginId.equalsIgnoreCase(options.getPluginId())) {
+			if (getPluginId().equalsIgnoreCase(options.getPluginId())) {
 				// gets references
 				List<String> references = options.getReferences();
 				// removes the reference to chart and checks if empty
@@ -247,22 +269,22 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	private void manageGlobalOptions() {
 		// checks if there is a plugin options as GLOBAL
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(getPluginId())) {
 			// gets the object type of options to know if there is an array of options
-			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(pluginId);
+			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(getPluginId());
 			// if is single object
 			if (ObjectType.OBJECT.equals(type)) {
 				// unregister previous global options
 				unregisterGlobal(PluginOptionsScope.GLOBAL);
 				// gets object
-				T options = Defaults.get().getGlobal().getPlugins().getOptions(pluginId, this);
+				T options = Defaults.get().getGlobal().getPlugins().getOptions(getPluginId(), this);
 				// registers it to global
 				register(options, PluginOptionsScope.GLOBAL.value());
 			} else if (ObjectType.ARRAY.equals(type)) {
 				// unregister previous global options
 				unregisterGlobal(PluginOptionsScope.GLOBAL);
 				// if here the options are an array of objects
-				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(pluginId, this);
+				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(getPluginId(), this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
@@ -279,26 +301,26 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	private void manageGlobalChartOptions(IsChart chart) {
 		// checks if there is a plugin options as CHART GLOBAL
-		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(pluginId)) {
+		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(getPluginId())) {
 			// gets the object type of options to know if there is an array of options
-			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(pluginId);
+			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(getPluginId());
 			// if is single object
 			if (ObjectType.OBJECT.equals(type)) {
 				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
+				unregisterGlobal(PluginOptionsScope.GLOBAL_CHART);
 				// gets object
-				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
+				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(getPluginId(), this);
 				// registers it to global
-				register(options, PluginOptionsScope.CHART_TYPE.value());
+				register(options, PluginOptionsScope.GLOBAL_CHART.value());
 			} else if (ObjectType.ARRAY.equals(type)) {
 				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
+				unregisterGlobal(PluginOptionsScope.GLOBAL_CHART);
 				// if here the options are an array of objects
-				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(pluginId, this);
+				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(getPluginId(), this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					register(options, PluginOptionsScope.CHART_TYPE.value());
+					register(options, PluginOptionsScope.GLOBAL_CHART.value());
 				}
 			}
 		}
@@ -311,18 +333,18 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	private void manageChartOptions(IsChart chart) {
 		// gets the plugin options from chart options, if there
-		if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
+		if (chart.getOptions().getPlugins().hasOptions(getPluginId())) {
 			// gets the object type of options to know if there is an array of options
-			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
+			ObjectType type = chart.getOptions().getPlugins().getOptionsType(getPluginId());
 			// if is single object
 			if (ObjectType.OBJECT.equals(type)) {
 				// gets object
-				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
+				T options = chart.getOptions().getPlugins().getOptions(getPluginId(), this);
 				// registers it to the chart
 				register(options, chart.getId());
 			} else if (ObjectType.ARRAY.equals(type)) {
 				// if here the options are an array of objects
-				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
+				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(getPluginId(), this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to the chart
@@ -340,10 +362,11 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	private void manageDatasetsOptions(IsChart chart) {
 		// gets the plugin options from chart datasets, if there
 		for (Dataset dataset : chart.getData().getDatasets()) {
-			if (dataset.hasOptions(pluginId)) {
-				T options = dataset.getOptions(pluginId, this);
-				// registers it to the chart
-				register(options, chart.getId());
+			if (dataset.hasOptions(getPluginId())) {
+				// FIXME
+				//				T options = dataset.getOptions(getPluginId(), this);
+//				// registers it to the chart
+//				register(options, chart.getId());
 			}
 		}
 	}

@@ -15,16 +15,15 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 
 /**
  * Factory to get the plugin options (form chart, from datasets or from default global ones) related to the plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions> implements NativeObjectContainerFactory<T> {
+public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions>{
 
 	// plugin id
 	private final String pluginId;
@@ -49,7 +48,24 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	public final String getPluginId() {
 		return pluginId;
 	}
+	
+//	/**
+//	 * FIXME
+//	 * @return
+//	 */
+//	public final T create() {
+//		return create(null, null);
+//	}
 
+
+	/**
+	 * FIXME
+	 * @param nativeObject
+	 * @param defaultValues
+	 * @return
+	 */
+	public abstract T create(NativeObject nativeObject, IsDefaultPlugins defaultValues);
+	
 	/**
 	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns
 	 * <code>null</code>.
@@ -59,17 +75,17 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns
 	 *         <code>null</code>.
 	 */
-	protected final <G extends NativeObjectContainer> G loadGlobalsPluginOptions(NativeObjectContainerFactory<G> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
+	protected final <G extends AbstractPluginOptions> G loadGlobalsPluginOptions(IsDefaultPlugins defaultsPlugins, AbstractPluginOptionsFactory<G> factory) {
+		// checks if factory and defaults options are consistent
+		if (factory != null && defaultsPlugins != null) {
 			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+			if (defaultsPlugins.hasOptions(pluginId)) {
 				// reads the default default global options
-				return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
+				return defaultsPlugins.getOptions(pluginId, factory);
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				return factory.create();
+				return factory.create(null, defaultsPlugins);
 			}
 		}
 		// if here the factory is not consistent

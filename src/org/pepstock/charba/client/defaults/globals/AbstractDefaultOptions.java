@@ -21,6 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultHover;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 
@@ -45,32 +46,43 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultTooltips tooltips;
 
+	private final IsDefaultPlugins plugins;
+
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
 	 */
 	protected AbstractDefaultOptions() {
-		this(new DefaultAnimation(), new DefaultHover(), new DefaultElements(), new DefaultLayout(), new DefaultTitle(), new DefaultLegend(), new DefaultTooltips());
+		// stores all inner elements
+		// using defaults
+		this.animation = new DefaultAnimation();
+		this.hover = new DefaultHover();
+		this.elements = new DefaultElements();
+		this.layout = new DefaultLayout();
+		this.title = new DefaultTitle();
+		this.legend = new DefaultLegend();
+		this.tooltips = new DefaultTooltips();
+		this.plugins = new DefaultPlugins();
 	}
 
 	/**
-	 * Creates the object using the arguments as default inner elements of chart options.
+	 * Creates the object using the argument options instance as default of chart options.
 	 * 
-	 * @param animation animation element instance
-	 * @param hover hover element instance
-	 * @param elements elements element instance
-	 * @param layout layout element instance
-	 * @param title title element instance
-	 * @param legend legend element instance
-	 * @param tooltips tooltips element instance
+	 * @param options default options instance
 	 */
-	protected AbstractDefaultOptions(IsDefaultAnimation animation, IsDefaultHover hover, IsDefaultElements elements, IsDefaultLayout layout, IsDefaultTitle title, IsDefaultLegend legend, IsDefaultTooltips tooltips) {
-		this.animation = animation;
-		this.hover = hover;
-		this.elements = elements;
-		this.layout = layout;
-		this.title = title;
-		this.legend = legend;
-		this.tooltips = tooltips;
+	protected AbstractDefaultOptions(IsDefaultOptions options) {
+		// checks if options is consistent
+		if (options == null) {
+			throw new IllegalArgumentException("Options instance for default is null");
+		}
+		// stores all inner elements
+		this.animation = options.getAnimation();
+		this.hover = options.getHover();
+		this.elements = options.getElements();
+		this.layout = options.getLayout();
+		this.title = options.getTitle();
+		this.legend = options.getLegend();
+		this.tooltips = options.getTooltips();
+		this.plugins = options.getPlugins();
 	}
 
 	/*
@@ -141,6 +153,16 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	@Override
 	public final IsDefaultTooltips getTooltips() {
 		return tooltips;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getPlugins()
+	 */
+	@Override
+	public IsDefaultPlugins getPlugins() {
+		return plugins;
 	}
 
 }

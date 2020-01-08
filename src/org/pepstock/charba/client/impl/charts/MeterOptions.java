@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.impl.charts;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -26,6 +25,7 @@ import org.pepstock.charba.client.configuration.Hover;
 import org.pepstock.charba.client.configuration.Layout;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.Tooltips;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
@@ -77,7 +77,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	public MeterOptions(IsChart chart, ChartOptions defaultValues) {
+	public MeterOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 		// disables legend, title and tooltips.
 		super.getTitle().setDisplay(false);
