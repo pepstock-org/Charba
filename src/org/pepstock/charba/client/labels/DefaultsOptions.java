@@ -17,23 +17,26 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * It wraps default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DefaultsOptions extends NativeObjectContainer {
+final class DefaultsOptions extends AbstractPluginOptions {
+	
+	// defaults options instance
+	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
 
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
-	DefaultsOptions() {
-		super();
+	private DefaultsOptions() {
+		this(null);
 	}
 
 	/**
@@ -42,7 +45,7 @@ final class DefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object which maps default global options.
 	 */
 	DefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(LabelsPlugin.ID, nativeObject);
 	}
 
 	/**

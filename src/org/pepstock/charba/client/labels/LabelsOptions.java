@@ -26,8 +26,8 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -177,8 +177,6 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 
 	// defaults global options instance
 	private DefaultsOptions defaultsOptions;
-	// defaults global options factory
-	private final LabelsDefaultsOptionsFactory defaultsFactory = new LabelsDefaultsOptionsFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -229,25 +227,66 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Creates an empty object with plugin options.
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 */
 	public LabelsOptions() {
 		// creates the object registering it
-		this(false);
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
+		this(false, (DefaultsOptions) null);
 	}
 
 	/**
-	 * Creates an empty object with plugin options.
+	 * Creates new {@link LabelsPlugin#ID} plugin options, relating to chart instance for default.
 	 * 
-	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 * @param chart chart instance related to the plugin options
 	 */
-	LabelsOptions(boolean deferredRegistration) {
-		// creates an empty object
-		super(LabelsPlugin.ID, LabelsPlugin.FACTORY, deferredRegistration);
+	public LabelsOptions(IsChart chart) {
+		// creates the object registering it
 		// this constructor is used by user to set options for plugin
 		// both default global or chart one.
-		// reads the default default global options
-		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		this(false, chart);
+	}
+
+	/**
+	 * Creates new {@link LabelsPlugin#ID} plugin options, relating to chart instance for default.
+	 * 
+	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 * @param chart chart instance related to the plugin options
+	 */
+	LabelsOptions(boolean deferredRegistration, IsChart chart) {
+		// creates the object registering it
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
+		this(deferredRegistration, IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(LabelsPlugin.ID, LabelsPlugin.DEFAULTS_FACTORY) : null);
+	}
+
+	/**
+	 * Creates new {@link LabelsPlugin#ID} plugin options.
+	 * 
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	LabelsOptions(DefaultsOptions defaultsOptions) {
+		this(false, defaultsOptions);
+	}
+
+	/**
+	 * Creates new {@link LabelsPlugin#ID} plugin options.
+	 * 
+	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	LabelsOptions(boolean deferredRegistration, DefaultsOptions defaultsOptions) {
+		// creates an empty object
+		super(LabelsPlugin.ID, LabelsPlugin.FACTORY, deferredRegistration);
+		// checks if defaults options are consistent
+		if (defaultsOptions == null) {
+			// reads the default default global options
+			this.defaultsOptions = loadGlobalsPluginOptions(LabelsPlugin.DEFAULTS_FACTORY);
+		} else {
+			// stores default options
+			this.defaultsOptions = defaultsOptions;
+		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

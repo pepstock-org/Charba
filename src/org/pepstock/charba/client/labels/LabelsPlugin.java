@@ -17,6 +17,7 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -37,7 +38,9 @@ public final class LabelsPlugin {
 	/**
 	 * Data labels options factory
 	 */
-	public static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory(ID);
+	public static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
+	// defaults global options factory
+	static final LabelsDefaultsOptionsFactory DEFAULTS_FACTORY = new LabelsDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation

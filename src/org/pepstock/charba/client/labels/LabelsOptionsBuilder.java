@@ -15,6 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.labels;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
@@ -33,16 +34,18 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public final class LabelsOptionsBuilder {
-	// creates the options with deferred registration
-	// because it will be register only when the build method
-	// will be invoked
-	private final LabelsOptions options = new LabelsOptions(true);
+
+	// plugin options instance
+	private final LabelsOptions options;
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private LabelsOptionsBuilder() {
-		// do nothing
+	private LabelsOptionsBuilder(IsChart chart) {
+		// creates the options with deferred registration
+		// because it will be register only when the build method
+		// will be invoked
+		options = new LabelsOptions(true, chart);
 	}
 
 	/**
@@ -51,7 +54,17 @@ public final class LabelsOptionsBuilder {
 	 * @return new builder instance
 	 */
 	public static LabelsOptionsBuilder create() {
-		return new LabelsOptionsBuilder();
+		return create(null);
+	}
+
+	/**
+	 * Returns new builder instance using the chart global options.
+	 * 
+	 * @param chart chart instance related to the plugin options
+	 * @return new builder instance
+	 */
+	public static LabelsOptionsBuilder create(IsChart chart) {
+		return new LabelsOptionsBuilder(chart);
 	}
 
 	/**
