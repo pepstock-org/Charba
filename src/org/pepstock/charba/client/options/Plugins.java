@@ -228,7 +228,6 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
 				return factory.create(getValue(PluginIdChecker.key(pluginId)), getDefaultValues());
-				// return factory.create(getValue(PluginIdChecker.key(pluginId)));
 			} else {
 				// if here returns an empty object
 				return factory.create(null, getDefaultValues());
