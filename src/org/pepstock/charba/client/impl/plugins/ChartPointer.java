@@ -19,10 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.ChartOptions;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
@@ -48,7 +47,7 @@ public final class ChartPointer extends AbstractPlugin {
 	/**
 	 * The factory to create options for plugin.
 	 */
-	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory(ID);
+	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory();
 	// singleton instance
 	private static final ChartPointer INSTANCE = new ChartPointer();
 	// defaults global options factory
@@ -94,12 +93,12 @@ public final class ChartPointer extends AbstractPlugin {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
 			// loads chart options for the chart
-			ChartOptions options = Defaults.get().getOptions(chart);
+			IsDefaultScaledOptions options = chart.getWholeOptions();
 			// creates the plugin options checking if exists ot not
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new ChartPointerOptions(DEFAULTS_FACTORY.create());
+				pOptions = new ChartPointerOptions(ChartPointerDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores option on the cache
 			pluginOptions.put(chart.getId(), pOptions);

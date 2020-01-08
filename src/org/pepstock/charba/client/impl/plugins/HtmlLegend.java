@@ -21,11 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.pepstock.charba.client.ChartOptions;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
@@ -57,7 +56,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/**
 	 * The factory to create options for plugin.
 	 */
-	public static final HtmlLegendOptionsFactory FACTORY = new HtmlLegendOptionsFactory(ID);
+	public static final HtmlLegendOptionsFactory FACTORY = new HtmlLegendOptionsFactory();
 	// factory instance to read the options from default global
 	static final HtmlLegendBuilderDefaultsOptionsFactory DEFAULTS_FACTORY = new HtmlLegendBuilderDefaultsOptionsFactory();
 	// singleton instance
@@ -126,14 +125,14 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			HtmlLegendOptions pOptions = null;
 			// loads chart options for the chart
-			ChartOptions options = Defaults.get().getOptions(chart);
+			IsDefaultScaledOptions options = chart.getWholeOptions();
 			// if not, loads and cache
 			// creates the plugin options using the java script object
 			// passing also the default color set at constructor.
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new HtmlLegendOptions(DEFAULTS_FACTORY.create());
+				pOptions = new HtmlLegendOptions(HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			pluginOptions.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());

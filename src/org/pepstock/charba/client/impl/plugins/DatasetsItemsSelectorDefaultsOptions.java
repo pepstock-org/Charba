@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of DEFAULT GLOBAL options of {@link DatasetsItemsSelector#ID} plugin.<br>
@@ -30,22 +30,32 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * <li>the border width
  * <li>the border dash
  * <li>if firing event on clear selection
+ * <li>clear defaults
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
+final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 
+	// defaults options instance
+	static final DatasetsItemsSelectorDefaultsOptions DEFAULTS_INSTANCE = new DatasetsItemsSelectorDefaultsOptions();
 	// default clear selection options
 	private final DatasetsItemsSelectorDefaultsClearSelection clearSelection;
 
 	/**
-	 * Builds the object using the java script object of options, set by user.<br>
+	 * Builds the object using an empty java script object of options.
+	 */
+	private DatasetsItemsSelectorDefaultsOptions() {
+		this(null);
+	}
+	
+	/**
+	 * Builds the object using the java script object of options, set by user.
 	 * 
 	 * @param nativeObject configuration of plugin.
 	 */
 	DatasetsItemsSelectorDefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(DatasetsItemsSelector.ID, nativeObject);
 		// reads default clear selection options from main object
 		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION));
 	}

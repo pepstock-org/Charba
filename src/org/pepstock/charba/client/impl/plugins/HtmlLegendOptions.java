@@ -17,8 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -102,10 +101,9 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param type chart type to use to get the default values by chart
 	 */
-	public HtmlLegendOptions(Type type) {
-		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);
+	public HtmlLegendOptions(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);
 	}
-
 
 	/**
 	 * Builds the object with the default global ones

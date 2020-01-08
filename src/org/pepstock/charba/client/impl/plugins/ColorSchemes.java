@@ -18,9 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Arrays;
 import java.util.List;
 
-import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
@@ -32,6 +30,7 @@ import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.data.HovingDataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
@@ -56,7 +55,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	/**
 	 * Data labels options factory
 	 */
-	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory(ID);
+	public static final ColorSchemesOptionsFactory FACTORY = new ColorSchemesOptionsFactory();
 	// defaults global options factory
 	static final ColorSchemesDefaultsOptionsFactory DEFAULTS_FACTORY = new ColorSchemesDefaultsOptionsFactory();
 	// singleton instance
@@ -274,7 +273,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// every data has got own color
 			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
 			// checks if border has been requested
-			if (ColorSchemesUtil.getMaxBorderWidth(hovingDataset) > 0) {
+			if (ColorSchemesUtil.get().getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
 				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
 			}
@@ -284,7 +283,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// sets background colors, applying the transparency
 			hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
 			// checks if border has been requested
-			if (ColorSchemesUtil.getMaxBorderWidth(hovingDataset) > 0) {
+			if (ColorSchemesUtil.get().getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
 				hovingDataset.setBorderColor(color);
 			}
@@ -359,14 +358,14 @@ public final class ColorSchemes extends AbstractPlugin {
 		// options instance
 		ColorSchemesOptions pOptions = null;
 		// loads chart options for the chart
-		ChartOptions options = Defaults.get().getOptions(chart);
+		IsDefaultScaledOptions options = chart.getWholeOptions();
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
 		if (options.getPlugins().hasOptions(ID)) {
 			pOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			pOptions = new ColorSchemesOptions(DEFAULTS_FACTORY.create());
+			pOptions = new ColorSchemesOptions(ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE);
 		}
 		return pOptions;
 	}

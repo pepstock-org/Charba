@@ -17,8 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
@@ -86,10 +85,10 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * Builds the object with a chart instance in order to get the right defaults.<br>
 	 * If the plugin options have not been set by chart type, it will use the global.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 */
-	public ChartPointerOptions(Type type) {
-		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(ChartPointer.ID, ChartPointer.DEFAULTS_FACTORY) : null);
+	public ChartPointerOptions(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartPointer.ID, ChartPointer.DEFAULTS_FACTORY) : null);
 	}
 
 	/**

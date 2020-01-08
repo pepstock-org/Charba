@@ -18,15 +18,25 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptions.ColorType;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Default configuration options of {@link ChartBackgroundColor#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class ChartBackgroundColorDefaultsOptions extends NativeObjectContainer {
+final class ChartBackgroundColorDefaultsOptions extends AbstractPluginOptions {
+	
+	// defaults options instance
+	static final ChartBackgroundColorDefaultsOptions DEFAULTS_INSTANCE = new ChartBackgroundColorDefaultsOptions();
+
+	/**
+	 * Builds the object with an empty java script object.
+	 */
+	private ChartBackgroundColorDefaultsOptions() {
+		this(null);
+	}
 
 	/**
 	 * Builds the object with a java script object stored into options.
@@ -34,7 +44,7 @@ final class ChartBackgroundColorDefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object into options
 	 */
 	ChartBackgroundColorDefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(ChartBackgroundColor.ID, nativeObject);
 	}
 
 	/**

@@ -21,8 +21,8 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as
@@ -30,10 +30,19 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class ChartPointerDefaultsOptions extends NativeObjectContainer {
+final class ChartPointerDefaultsOptions extends AbstractPluginOptions {
 	
+	// defaults options instance
+	static final ChartPointerDefaultsOptions DEFAULTS_INSTANCE = new ChartPointerDefaultsOptions();
 	// default list for elements
 	private static final List<PointerElement> DEFAULTS_ELEMENTS = Arrays.asList(PointerElement.values());
+
+	/**
+	 * Builds the object with an empty java script object stored into options.
+	 */
+	private ChartPointerDefaultsOptions() {
+		this(null);
+	}
 
 	/**
 	 * Builds the object with a java script object stored into options.
@@ -41,7 +50,7 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object into options
 	 */
 	ChartPointerDefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(ChartPointer.ID, nativeObject);
 	}
 
 	/**

@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -35,25 +35,27 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
-	 * 
-	 * @param plugin id html legend plugin
 	 */
-	HtmlLegendOptionsFactory(String pluginId) {
-		super(pluginId);
+	HtmlLegendOptionsFactory() {
+		super(HtmlLegend.ID);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public HtmlLegendOptions create(NativeObject nativeObject) {
-		// defaults global options instance
-		HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(HtmlLegend.DEFAULTS_FACTORY);
-		// creates the options by the native object and the defaults
-		HtmlLegendOptions options = new HtmlLegendOptions(nativeObject, defaultsOptions);
+	public HtmlLegendOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		HtmlLegendOptions options = null;
+		// checks if defaults options are consistent
+		if (defaultValues != null) {
+			// defaults global options instance
+			HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, HtmlLegend.DEFAULTS_FACTORY);
+			// creates the options by the native object and the defaults
+			options = new HtmlLegendOptions(nativeObject, defaultsOptions);
+		} else {
+			// creates the options by the native object and the defaults
+			options = new HtmlLegendOptions(nativeObject, HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
+		}
 		// gets charba id
 		int charbaId = options.getCharbaId();
 		// checks if there is any callback stored into cahce
@@ -85,26 +87,34 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class HtmlLegendBuilderDefaultsOptionsFactory implements NativeObjectContainerFactory<HtmlLegendDefaultsOptions> {
+	static class HtmlLegendBuilderDefaultsOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendDefaultsOptions> {
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		/**
+		 * To avoid any instantiation.
+		 */
+		HtmlLegendBuilderDefaultsOptionsFactory() {
+			super(HtmlLegend.ID);
+		}
+
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public HtmlLegendDefaultsOptions create(NativeObject nativeObject) {
-			// creates the default global option by native object
-			HtmlLegendDefaultsOptions options = new HtmlLegendDefaultsOptions(nativeObject);
-			// gets charba id
-			int charbaId = options.getCharbaId();
-			// checks if there is any callback
-			if (LEGEND_TEXT_CALLBACKS.containsKey(charbaId)) {
-				// sets callback
-				options.setLegendTextCallback(LEGEND_TEXT_CALLBACKS.get(charbaId));
+		public HtmlLegendDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// check if native object is consistent
+			if (nativeObject != null) {
+				// creates the default global option by native object
+				HtmlLegendDefaultsOptions options = new HtmlLegendDefaultsOptions(nativeObject);
+				// gets charba id
+				int charbaId = options.getCharbaId();
+				// checks if there is any callback
+				if (LEGEND_TEXT_CALLBACKS.containsKey(charbaId)) {
+					// sets callback
+					options.setLegendTextCallback(LEGEND_TEXT_CALLBACKS.get(charbaId));
+				}
+				return options;
 			}
-			return options;
+			return HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE;
 		}
 	}
 }

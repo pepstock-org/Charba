@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -110,10 +109,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * Builds the object with a chart instance in order to get the right defaults.<br>
 	 * If the plugin options have not been set by chart type, it will use the global.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 */
-	public ChartBackgroundColorOptions(Type type) {
-		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(ChartBackgroundColor.ID, ChartBackgroundColor.DEFAULTS_FACTORY) : null);
+	public ChartBackgroundColorOptions(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartBackgroundColor.ID, ChartBackgroundColor.DEFAULTS_FACTORY) : null);
 	}
 
 	/**

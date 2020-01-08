@@ -18,14 +18,13 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.ChartOptions;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -52,7 +51,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/**
 	 * The factory to create options
 	 */
-	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory(ID);
+	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
 	/**
 	 * Default background color, {@link HtmlColor#WHITE}.
 	 */
@@ -309,14 +308,14 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// options instance
 		ChartBackgroundColorOptions bgOptions = null;
 		// loads chart options for the chart
-		ChartOptions options = Defaults.get().getOptions(chart);
+		IsDefaultScaledOptions options = chart.getWholeOptions();
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
 		if (options.getPlugins().hasOptions(ID)) {
 			bgOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			bgOptions = new ChartBackgroundColorOptions(DEFAULTS_FACTORY.create());
+			bgOptions = new ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE);
 			// if configured with a color
 			if (color != null) {
 				bgOptions.setBackgroundColor(color);

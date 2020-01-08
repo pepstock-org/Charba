@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -28,46 +28,59 @@ public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOpti
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link ChartBackgroundColor#FACTORY}.
-	 * 
-	 * @param plugin id
 	 */
-	ChartBackgroundColorOptionsFactory(String pluginId) {
-		super(pluginId);
+	ChartBackgroundColorOptionsFactory() {
+		super(ChartBackgroundColor.ID);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public ChartBackgroundColorOptions create(NativeObject nativeObject) {
-		// defaults global options instance
-		ChartBackgroundColorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(ChartBackgroundColor.DEFAULTS_FACTORY);
+	public ChartBackgroundColorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		// checks if defaults options are consistent
+		if (defaultValues != null) {
+			// defaults global options instance
+			ChartBackgroundColorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, ChartBackgroundColor.DEFAULTS_FACTORY);
+			// creates the options by the native object and the defaults
+			return new ChartBackgroundColorOptions(nativeObject, defaultsOptions);
+		}
 		// creates the options by the native object and the defaults
-		return new ChartBackgroundColorOptions(nativeObject, defaultsOptions);
+		return new ChartBackgroundColorOptions(nativeObject, ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE);
 	}
-	
+
 	/**
 	 * Internal factory to create options from default global option for the plugin
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class ChartBackgroundColorDefaultsOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorDefaultsOptions> {
+	static final class ChartBackgroundColorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ChartBackgroundColorDefaultsOptions> {
+
+		/**
+		 * To avoid any instantiation.
+		 */
+		ChartBackgroundColorDefaultsOptionsFactory() {
+			super(ChartBackgroundColor.ID);
+		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ChartBackgroundColorDefaultsOptions create(NativeObject nativeObject) {
-			// creates the default global option by native object
-			return new ChartBackgroundColorDefaultsOptions(nativeObject);
+		public ChartBackgroundColorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// check if native object is consistent
+			if (nativeObject != null) {
+				return new ChartBackgroundColorDefaultsOptions(nativeObject);
+			}
+			return ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE;
 		}
-
 	}
 
 }

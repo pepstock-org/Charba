@@ -15,7 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
@@ -39,10 +39,10 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * To avoid any instantiation
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 */
-	private DatasetsItemsSelectorOptionsBuilder(Type type) {
-		options = new DatasetsItemsSelectorOptions(type);
+	private DatasetsItemsSelectorOptionsBuilder(IsChart chart) {
+		options = new DatasetsItemsSelectorOptions(chart);
 	}
 
 	/**
@@ -57,11 +57,11 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * Returns new builder instance using the chart global options.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 * @return new builder instance
 	 */
-	public static DatasetsItemsSelectorOptionsBuilder create(Type type) {
-		return new DatasetsItemsSelectorOptionsBuilder(type);
+	public static DatasetsItemsSelectorOptionsBuilder create(IsChart chart) {
+		return new DatasetsItemsSelectorOptionsBuilder(chart);
 	}
 	
 	/**

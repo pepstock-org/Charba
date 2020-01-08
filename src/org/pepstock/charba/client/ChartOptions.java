@@ -16,7 +16,7 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaledOptions;
 import org.pepstock.charba.client.options.Scales;
@@ -31,23 +31,15 @@ public final class ChartOptions extends ScaledOptions {
 	private final Type type;
 
 	/**
-	 * Creates the object with a empty native object.
-	 * 
-	 * @param type chart type
-	 */
-	ChartOptions(Type type) {
-		this(type, null);
-	}
-
-	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using a native java script object which contains all properties and the default values to apply when the properties are not set.
 	 * 
 	 * @param type chart type
 	 * @param nativeObject native java script object which contains all properties.
+	 * @param defaultsOptions default options to apply to chart options
 	 */
-	ChartOptions(Type type, NativeObject nativeObject) {
+	ChartOptions(Type type, NativeObject nativeObject, IsDefaultScaledOptions defaultsOptions) {
 		// the default of chart default ones are the CHART.JS one
-		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
+		super(defaultsOptions, nativeObject);
 		// checks consistency of type
 		Type.checkIfValid(type);
 		this.type = type;

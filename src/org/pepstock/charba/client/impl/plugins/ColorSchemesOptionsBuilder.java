@@ -15,7 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
@@ -32,10 +32,10 @@ public final class ColorSchemesOptionsBuilder {
 	/**
 	 * To avoid any instantiation
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 */
-	private ColorSchemesOptionsBuilder(Type type) {
-		options = new ColorSchemesOptions(type);
+	private ColorSchemesOptionsBuilder(IsChart chart) {
+		options = new ColorSchemesOptions(chart);
 	}
 
 	/**
@@ -50,11 +50,11 @@ public final class ColorSchemesOptionsBuilder {
 	/**
 	 * Returns new builder instance using chart global options as default.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 * @return new builder instance
 	 */
-	public static ColorSchemesOptionsBuilder create(Type type) {
-		return new ColorSchemesOptionsBuilder(type);
+	public static ColorSchemesOptionsBuilder create(IsChart chart) {
+		return new ColorSchemesOptionsBuilder(chart);
 	}
 
 	/**

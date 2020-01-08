@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -28,25 +28,25 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link DatasetsItemsSelector#FACTORY}.
-	 * 
-	 * @param plugin id
 	 */
-	DatasetsItemsSelectorOptionsFactory(String pluginId) {
-		super(pluginId);
+	DatasetsItemsSelectorOptionsFactory() {
+		super(DatasetsItemsSelector.ID);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
-		// defaults global options instance
-		DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
+	public DatasetsItemsSelectorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		// checks if defaults options are consistent
+		if (defaultValues != null) {
+			// defaults global options instance
+			DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
+			// creates the options by the native object and the defaults
+			return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
+		}
 		// creates the options by the native object and the defaults
-		return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
+		return new DatasetsItemsSelectorOptions(nativeObject, DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE);
 	}
 
 	/**
@@ -54,18 +54,26 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class DatasetsItemsSelectorDefaultsOptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorDefaultsOptions> {
+	static class DatasetsItemsSelectorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorDefaultsOptions> {
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		/**
+		 * To avoid any instantiation.
+		 */
+		DatasetsItemsSelectorDefaultsOptionsFactory() {
+			super(DatasetsItemsSelector.ID);
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject) {
-			// creates the default global option by native object
-			return new DatasetsItemsSelectorDefaultsOptions(nativeObject);
+		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// check if native object is consistent
+			if (nativeObject != null) {
+				// creates the default global option by native object
+				return new DatasetsItemsSelectorDefaultsOptions(nativeObject);
+			}
+			return DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE;
 		}
 
 	}

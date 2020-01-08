@@ -17,8 +17,8 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of {@link HtmlLegend#ID} plugin.<br>
@@ -26,16 +26,18 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
+final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 
+	// defaults options instance
+	static final HtmlLegendDefaultsOptions DEFAULTS_INSTANCE = new HtmlLegendDefaultsOptions();
 	// legend text callback instance
 	private HtmlLegendTextCallback legendTextCallback = null;
 
 	/**
 	 * Builds the object with an empty java script object and uses the constants as default.
 	 */
-	HtmlLegendDefaultsOptions() {
-		super();
+	private HtmlLegendDefaultsOptions() {
+		this(null);
 	}
 
 	/**
@@ -44,7 +46,7 @@ final class HtmlLegendDefaultsOptions extends NativeObjectContainer {
 	 * @param nativeObject native object into options
 	 */
 	HtmlLegendDefaultsOptions(NativeObject nativeObject) {
-		super(nativeObject);
+		super(HtmlLegend.ID, nativeObject);
 	}
 
 	/**

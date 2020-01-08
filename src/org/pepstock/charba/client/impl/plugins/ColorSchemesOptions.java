@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorUtil;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -108,10 +107,10 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * Builds the object with a chart instance in order to get the right defaults.<br>
 	 * If the plugin options have not been set by chart type, it will use the global.
 	 * 
-	 * @param type chart type to use to get the default values by chart
+	 * @param chart chart instance related to the plugin options
 	 */
-	public ColorSchemesOptions(Type type) {
-		this(Type.isValid(type) ? Defaults.get().getChartOptions(type).getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.DEFAULTS_FACTORY) : null);
+	public ColorSchemesOptions(IsChart chart) {
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
@@ -168,9 +167,9 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 		if (ColorScheme.isValid(scheme)) {
 			// checks if the scheme is already cached (used)
 			// checks also if scheme is consistent
-			if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.value())) {
+			if (!ColorSchemesUtil.get().hasColorScheme(scheme.category(), scheme.value())) {
 				// puts the scheme
-				ColorSchemesUtil.putColorScheme(scheme);
+				ColorSchemesUtil.get().putColorScheme(scheme);
 			}
 			// stores the values of scheme
 			setValue(Property.SCHEME_NAME, scheme);
@@ -194,7 +193,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 		String name = getValue(Property.SCHEME_NAME, defaultsOptions.getSchemeName());
 		// all color scheme are stored into cache when the "set" is called
 		// therefore here the scheme MUST be in cache
-		return ColorSchemesUtil.getColorScheme(category, name);
+		return ColorSchemesUtil.get().getColorScheme(category, name);
 	}
 
 	/**

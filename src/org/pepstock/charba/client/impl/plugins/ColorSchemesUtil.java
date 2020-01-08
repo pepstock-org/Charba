@@ -32,6 +32,8 @@ import org.pepstock.charba.client.data.HovingFlexDataset;
  *
  */
 final class ColorSchemesUtil {
+	// sigleton instance
+	private static final ColorSchemesUtil INSTANCE = new ColorSchemesUtil();
 	// cache of used and requested color schemes
 	private static final Map<String, ColorScheme> COLOR_SCHEMES = new HashMap<>();
 
@@ -39,7 +41,17 @@ final class ColorSchemesUtil {
 	 * To avoid any instantiation
 	 */
 	private ColorSchemesUtil() {
-		// do nothing
+		// loads anyway the default because it must be loaded
+		putColorScheme(ColorSchemesOptions.DEFAULT_SCHEME);
+	}
+
+	/**
+	 * Singleton method to get the instance.
+	 * 
+	 * @return instance of signleton
+	 */
+	static ColorSchemesUtil get() {
+		return INSTANCE;
 	}
 
 	/**
@@ -47,7 +59,7 @@ final class ColorSchemesUtil {
 	 * 
 	 * @param scheme a color scheme
 	 */
-	static void putColorScheme(ColorScheme scheme) {
+	void putColorScheme(ColorScheme scheme) {
 		COLOR_SCHEMES.put(createKey(scheme), scheme);
 	}
 
@@ -58,7 +70,7 @@ final class ColorSchemesUtil {
 	 * @param name color scheme name
 	 * @return a color scheme instance
 	 */
-	static ColorScheme getColorScheme(String category, String name) {
+	ColorScheme getColorScheme(String category, String name) {
 		return COLOR_SCHEMES.get(createKey(category, name));
 	}
 
@@ -69,7 +81,7 @@ final class ColorSchemesUtil {
 	 * @param name color scheme name
 	 * @return <code>true</code> if into cache otherwise <code>false</code>
 	 */
-	static boolean hasColorScheme(String category, String name) {
+	boolean hasColorScheme(String category, String name) {
 		return COLOR_SCHEMES.containsKey(createKey(category, name));
 	}
 
@@ -80,7 +92,7 @@ final class ColorSchemesUtil {
 	 * @param scheme color scheme instance
 	 * @return a key as string
 	 */
-	static String createKey(ColorScheme scheme) {
+	String createKey(ColorScheme scheme) {
 		return createKey(scheme.category(), scheme.value());
 	}
 
@@ -92,7 +104,7 @@ final class ColorSchemesUtil {
 	 * @param name color scheme name
 	 * @return a key as string
 	 */
-	static String createKey(String category, String name) {
+	String createKey(String category, String name) {
 		// if name is null
 		if (name == null) {
 			// exception
@@ -117,7 +129,7 @@ final class ColorSchemesUtil {
 	 * @param hovingDataset dataset to use to calculate
 	 * @return the maximum border width defined into dataset
 	 */
-	static int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
+	int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
 		// gets the list border widths
 		List<Integer> borderWidths = hovingDataset.getBorderWidth();
 		// sets max
