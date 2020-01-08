@@ -135,7 +135,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Fixed Bugs
 
- * [#29](https://github.com/pepstock-org/Charba/issues/29) add a [section](https://github.com/pepstock-org/Charba/wiki/GettingStarted#polyfilling-your-gwt-project) into [Getting Started](https://github.com/pepstock-org/Charba/wiki/GettingStarted) wiki page how to use polyfill, for IE11 or other aged browsers, without internet connection. Thanks @ssamikk
+ * [#29](https://github.com/pepstock-org/Charba/issues/29) add a [section](https://github.com/pepstock-org/Charba/wiki/GettingStarted#polyfilling-your-gwt-project) into [Getting Started](https://github.com/pepstock-org/Charba/wiki/GettingStarted) wiki page how to use polyfill, for IE11 or other aged browsers, without internet connection. Thanks @ssamikk 
  * [#49](https://github.com/pepstock-org/Charba/issues/49) change the implementation in order to maintain correctly the status of chart drawing.
  * [#50](https://github.com/pepstock-org/Charba/issues/50) add checking on selection track in order to be sure that an area has been selected.
  * [#51](https://github.com/pepstock-org/Charba/issues/51) change the implementation about plugin options and how to manage defaults values.
