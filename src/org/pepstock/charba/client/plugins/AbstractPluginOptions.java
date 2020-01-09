@@ -151,7 +151,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 */
 	public void store() {
 		// stores itself into defaults
-		Defaults.get().getGlobal().getPlugins().setOptions(pluginId, this);
+		Defaults.get().getGlobal().getPlugins().setOptions(this);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
 			// stores itself into chart configuration
-			chart.getOptions().getPlugins().setOptions(pluginId, this);
+			chart.getOptions().getPlugins().setOptions(this);
 		}
 	}
 
@@ -178,7 +178,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			// gets chart options by type
 			ChartOptions chartOptions = Defaults.get().getOptions(type);
 			// stores itself into global chart options
-			chartOptions.getPlugins().setOptions(pluginId, this);
+			chartOptions.getPlugins().setOptions(this);
 		}
 	}
 
@@ -191,7 +191,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		// checks if type is consistent
 		if (dataset != null) {
 			// stores itself into dataset
-			dataset.setOptions(pluginId, this);
+			dataset.setOptions(this);
 		}
 	}
 
