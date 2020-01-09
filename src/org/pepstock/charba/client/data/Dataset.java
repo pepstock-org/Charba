@@ -880,10 +880,41 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	public final Type getType() {
 		return type;
 	}
+	
+	/**
+	 * Removes the plugin options.
+	 * 
+	 * @param pluginId plugin id.
+	 */
+	public void removeOptions(String pluginId) {
+		// checks if there is a stored plugin options
+		if (hasOptions(pluginId)) {
+			// checks plugin ids
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// removes configuration if exists
+			remove(pluginIdKey);
+		}
+	}
+	
+	/**
+	 * Sets the plugin options.
+	 * 
+	 * @param options plugin options used to configure the plugin
+	 * @param <T> type of plugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(T options) {
+		// checks if options is consistent
+		if (options != null) {
+			// checks plugin ids
+			Key pluginIdKey = PluginIdChecker.key(options.getPluginId());
+			// stores configuration
+			setValue(pluginIdKey, options);
+		}
+	}
 
 	/**
 	 * Sets the plugin dataset configuration.<br>
-	 * If dataset configuration options is null, the configuration of plugin will be removed.
+	 * If dataset configuration options is <code>null</code>, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param options options used to configure the plugin.<br>
@@ -913,7 +944,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 
 	/**
 	 * Returns the plugin dataset configuration, if exist.<br>
-	 * It uses a factory instance to create a native object container.
+	 * It uses a factory instance to create a plugin options.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a plugin options.
@@ -927,6 +958,26 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			return factory.create(getValue(PluginIdChecker.key(pluginId)), defaultValues.getPlugins());
 		}
 		// if here, factory is not consistent
+		return null;
+	}
+	
+	/**
+	 * Returns the plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
+	 * 
+	 * @param factory factory instance to create a plugin options
+	 * @param <T> type of plugin options to return
+	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
+	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 */
+	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the object using the defaults options
+			return factory.create(getValue(PluginIdChecker.key(factory.getPluginId())), defaultValues.getPlugins());
+		}
+		// if here factory is not consistent
 		return null;
 	}
 

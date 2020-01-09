@@ -133,6 +133,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `getWholeOptions` method to `IsChart` interface in order to get the whole options configuration of a chart (merged global, global chart and chart options).
  * add constructors to plugin options in order to create the object relating it to a chart instance to get the default values, if needed.
  * add 2 `store` methods to `AbstractPluginOptions` class in order to store the plugin options into a global chart and dataset options.
+ * add `setOptions`, `getOptions` and `getOptionsAsList` methods to options, configuration and datasets removing plugin ID as parameter because already set inside the plugin options and factory.
+ * add `removeOptions` methods to options, configuration and datasetss in order to remove the plugin options by plugin id.
 
 ### Fixed Bugs
 
@@ -150,7 +152,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add compile dependency with last version [2.0.0](https://github.com/google/jsinterop-annotations/releases/tag/2.0.0) of [JSINTEROP](https://github.com/google/jsinterop-annotations) annotations.
  * add 2 `load` methods to `Merger` in order to load default and whole options chart instance, removing the previous `get`.
  	* reduce the accessibility to methods by an `OptionsEnvelop` object
- * add `getAllIds`	method to plugin options and configuration classes in order to get the list of configiured plugin ids. 
+ * add `getAllIds`	method to plugin options and configuration classes in order to get the list of configiured plugin ids.
+ * add checking to `setOptions`, `getOptions` and `getOptionsAsList` methods to options, configuration and datasets in order to assure that the plugin id passed as argument is the same of plugin options.
  
 License
 -------

@@ -29,6 +29,7 @@ import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
@@ -39,6 +40,16 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  *
  */
 public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
+	// ----
+	// templates for the exception message to throw
+	//  ---
+	// exception message when the plugin id is not the same in all options passed as list
+	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_ALL_OPTIONS = "Plugin id '{0}' is not equals into all options '{1}'!";
+	// exception message when the plugin id is not the same of options passed as argument
+	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options!";
+	// exception message when the plugin id is not the same of factory passed as argument
+	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_FACTORY ="Plugin id '{0}' is not equals to plugin id '{1}'of factory!";
+	 
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
@@ -167,7 +178,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * Sets the plugin options.
 	 * 
 	 * @param options plugin options used to configure the plugin
-	 * @param <T> type of native object container to store
+	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(T options) {
 		// checks if options is consistent
@@ -199,8 +210,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				if (pluginId != null && !pluginId.equals(option.getPluginId())) {
 					// if here, the plugin ID is not equals into all options
 					// then exception
-					throw new IllegalArgumentException("Plugin id '" + pluginId + "' is not equals into all options '" + option.getPluginId() + "'!");
-
+					throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_ALL_OPTIONS, pluginId, option.getPluginId()));
 				}
 				// stores the pluginId
 				pluginId = option.getPluginId();
@@ -215,11 +225,13 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	}
 
 	/**
-	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * Sets the plugin options.<br>
+	 * If passed options is <code>null</code>, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options plugin options used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
-	 * @param <T> type of native object container to store
+	 * @param options plugin options used to configure the plugin.<br>
+	 *            Pass <code>null</code> to remove the configuration if exist.
+	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
 		// checks plugin ids
@@ -239,11 +251,12 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	}
 
 	/**
-	 * Sets the plugin options as list. If passed options is null, the configuration of plugin will be removed.
+	 * Sets the plugin options as list.<br>
+	 * If passed options is <code>null</code>, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options list of plugin options used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
+	 * @param options list of plugin options used to configure the plugin.<br>
+	 *            Pass <code>null</code> to remove the configuration if exist.
 	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
@@ -355,15 +368,14 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		// if here factory is not consistent
 		return null;
 	}
-	
+
 	/**
-	 * Returns the plugin options as list of plugin options, if exist.<br>
+	 * Returns the plugin options as list, if exist.<br>
 	 * It uses a factory instance to create a plugin options.
 	 * 
-	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a plugin options.
 	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list of options or empty list if not exist.
+	 * @return the plugin options as list or empty list if not exist.
 	 */
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
@@ -391,15 +403,14 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		return new LinkedList<>();
 	}
 
-
 	/**
-	 * Returns the plugin options as list of plugin options, if exist.<br>
+	 * Returns the plugin options as list, if exist.<br>
 	 * It uses a factory instance to create a plugin options.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a plugin options.
 	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list of options or empty list if not exist.
+	 * @return the plugin options as list or empty list if not exist.
 	 */
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
@@ -441,7 +452,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (Key.isValid(pluginIdKey) && options != null && !pluginIdKey.value().equals(options.getPluginId())) {
 			// if here, the plugin ID is not equals to the option
 			// then exception
-			throw new IllegalArgumentException("Plugin id '" + pluginIdKey.value() + "' is not equals to plugin id '" + options.getPluginId() + "'of options!");
+			throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_OPTIONS, pluginIdKey.value(), options.getPluginId()));
 		}
 	}
 
@@ -458,8 +469,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (Key.isValid(pluginIdKey) && factory != null && !pluginIdKey.value().equals(factory.getPluginId())) {
 			// if here, the plugin ID is not equals to the option
 			// then exception
-			throw new IllegalArgumentException("Plugin id '" + pluginIdKey.value() + "' is not equals to plugin id '" + factory.getPluginId() + "'of factory!");
+			throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_FACTORY, pluginIdKey.value(), factory.getPluginId()));
 		}
 	}
-
+	
 }

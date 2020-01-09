@@ -35,7 +35,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  */
 public class Plugins {
 
-	private final ExtendedOptions options;
+	private final ExtendedOptions extendedOptions;
 
 	/**
 	 * Builds the object storing the root options element.
@@ -43,18 +43,18 @@ public class Plugins {
 	 * @param options root options element.
 	 */
 	Plugins(ExtendedOptions options) {
-		this.options = options;
+		this.extendedOptions = options;
 	}
 
 	/**
 	 * Returns the unmodifiable list of registered plugin ids.
-	 *  
+	 * 
 	 * @return the unmodifiable list of registered plugin ids
 	 */
-	public final List<Key> getAllIds(){
-		return options.getPlugins().getAllIds();
+	public final List<Key> getAllIds() {
+		return extendedOptions.getPlugins().getAllIds();
 	}
-	
+
 	/**
 	 * Sets if a global plugin must be enabled or not.
 	 * 
@@ -62,7 +62,7 @@ public class Plugins {
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
-		options.getPlugins().setEnabled(pluginId, enabled);
+		extendedOptions.getPlugins().setEnabled(pluginId, enabled);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Plugins {
 	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
 	 */
 	public void setEnabled(DefaultPlugin plugin, boolean enabled) {
-		options.getPlugins().setEnabled(plugin, enabled);
+		extendedOptions.getPlugins().setEnabled(plugin, enabled);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Plugins {
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 */
 	public boolean isEnabled(String pluginId) {
-		return options.getPlugins().isEnabled(pluginId);
+		return extendedOptions.getPlugins().isEnabled(pluginId);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Plugins {
 	 * @return <code>true</code> if a global plugin is not enabled otherwise <code>false</code>.
 	 */
 	public boolean isForcedlyDisabled(String pluginId) {
-		return options.getPlugins().isForcedlyDisabled(pluginId);
+		return extendedOptions.getPlugins().isForcedlyDisabled(pluginId);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class Plugins {
 	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
 	 */
 	public boolean isForcedlyDisabled(DefaultPlugin plugin) {
-		return options.getPlugins().isForcedlyDisabled(plugin);
+		return extendedOptions.getPlugins().isForcedlyDisabled(plugin);
 	}
 
 	/**
@@ -112,31 +112,63 @@ public class Plugins {
 	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
 	 */
 	public boolean hasEnabled(String pluginId) {
-		return options.getPlugins().hasEnabled(pluginId);
+		return extendedOptions.getPlugins().hasEnabled(pluginId);
 	}
 
 	/**
-	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * Removes the plugin options.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param object java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
-	 * @param <T> type of native object container to store
 	 */
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T object) {
-		options.getPlugins().setOptions(pluginId, object);
+	public void removeOptions(String pluginId) {
+		extendedOptions.getPlugins().removeOptions(pluginId);
+	}
+	
+	/**
+	 * Sets the plugin options.
+	 * 
+	 * @param options plugin options used to configure the plugin
+	 * @param <T> type of plugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(T options) {
+		extendedOptions.getPlugins().setOptions(options);
+	}
+	
+	/**
+	 * Sets the plugin options as list.<br>
+	 * If the list is empty, it does nothing
+	 * 
+	 * @param options list of plugin options used to configure the plugin.
+	 * @param <T> type of plugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
+		extendedOptions.getPlugins().setOptions(options);
 	}
 
 	/**
-	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
+	 * Sets the plugin options.<br>
+	 * If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param objects list of native object container used to configure the plugin. Pass <code>null</code> to remove the
-	 *            configuration if exist.
-	 * @param <T> type of native object container to store
+	 * @param options plugin options used to configure the plugin.<br>
+	 *            Pass <code>null</code> to remove the configuration if exist.
+	 * @param <T> type of plugin options to store
 	 */
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> objects) {
-		options.getPlugins().setOptions(pluginId, objects);
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
+		extendedOptions.getPlugins().setOptions(pluginId, options);
+	}
+
+	/**
+	 * Sets the plugin options as list.<br>
+	 * If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options list of plugin options used to configure the plugin.<br>
+	 *            Pass <code>null</code> to remove the configuration if exist.
+	 * @param <T> type of pugin options to store
+	 */
+	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
+		extendedOptions.getPlugins().setOptions(pluginId, options);
 	}
 
 	/**
@@ -146,7 +178,7 @@ public class Plugins {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	public boolean hasOptions(String pluginId) {
-		return options.getPlugins().hasOptions(pluginId);
+		return extendedOptions.getPlugins().hasOptions(pluginId);
 	}
 
 	/**
@@ -156,33 +188,59 @@ public class Plugins {
 	 * @return the options type
 	 */
 	public ObjectType getOptionsType(String pluginId) {
-		return options.getPlugins().getOptionsType(pluginId);
+		return extendedOptions.getPlugins().getOptionsType(pluginId);
 	}
-
 	/**
-	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
+	 * Returns the plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
+	 * 
+	 * @param factory factory instance to create a plugin options
+	 * @param <T> type of plugin options to return
+	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
+	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 */
+	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
+		return extendedOptions.getPlugins().getOptions(factory);
+	}
+	
+	/**
+	 * Returns the plugin options, if exist.<br>
+	 * It uses a factory instance to create a plugin options.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or an empty object if not exist.
+	 * @param factory factory instance to create a plugin options
+	 * @param <T> type of plugin options to return
+	 * @return plugin options used to configure the plugin or an empty object if not exist.
 	 */
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// returns the configuration by plugin id.
-		return options.getPlugins().getOptions(pluginId, factory);
+		return extendedOptions.getPlugins().getOptions(pluginId, factory);
+	}
+	
+	/**
+	 * Returns the plugin options as list, if exist.<br>
+	 * It uses a factory instance to create a plugin options.
+	 * 
+	 * @param factory factory instance to create a plugin options.
+	 * @param <T> type of plugin options to return
+	 * @return the plugin options as list or empty list if not exist.
+	 */
+	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
+		return extendedOptions.getPlugins().getOptionsAsList(factory);
 	}
 
 	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object
-	 * container.
+	 * Returns the plugin options as list, if exist.<br>
+	 * It uses a factory instance to create a plugin options.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return the plugin options as list of object containers or empty list if not exist.
+	 * @param factory factory instance to create a plugin options.
+	 * @param <T> type of plugin options to return
+	 * @return the plugin options as list or empty list if not exist.
 	 */
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		return options.getPlugins().getOptionsAsList(pluginId, factory);
+		return extendedOptions.getPlugins().getOptionsAsList(pluginId, factory);
 	}
 
 }
