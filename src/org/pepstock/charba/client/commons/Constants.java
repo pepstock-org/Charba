@@ -24,57 +24,62 @@ package org.pepstock.charba.client.commons;
 public final class Constants {
 
 	/**
-	 * Constant for EMPTY string
+	 * Constant for EMPTY string, <b>{@value}</b>.
 	 */
 	public static final String EMPTY_STRING = "";
 
 	/**
-	 * Constant for LINE SEPARATOR
+	 * Constant for NULL string, <b>"&lt;null&gt;"</b>.
+	 */
+	public static final String NULL_STRING = "<null>";
+
+	/**
+	 * Constant for LINE SEPARATOR, <b>{@value}</b>.
 	 */
 	public static final String LINE_SEPARATOR = "\n";
 
 	/**
-	 * Constant for BLANK
+	 * Constant for BLANK, <b>{@value}</b>.
 	 */
 	public static final String BLANK = " ";
 
 	/**
-	 * Constant for COMMA
+	 * Constant for COMMA, <b>{@value}</b>.
 	 */
 	public static final String COMMA = ",";
 
 	/**
-	 * Constant for PERCENT
+	 * Constant for PERCENT, <b>{@value}</b>.
 	 */
 	public static final String PERCENT = "%";
 
 	/**
-	 * Constant for OPEN round bracket
+	 * Constant for OPEN round bracket, <b>{@value}</b>.
 	 */
 	public static final String OPEN_ROUND_BRACKET = "(";
 
 	/**
-	 * Constant for CLOSE round bracket
+	 * Constant for CLOSE round bracket, <b>{@value}</b>.
 	 */
 	public static final String CLOSE_ROUND_BRACKET = ")";
 
 	/**
-	 * Constant for OPEN square bracket
+	 * Constant for OPEN square bracket, <b>{@value}</b>.
 	 */
 	public static final String OPEN_SQUARE_BRACKET = "[";
 
 	/**
-	 * Constant for CLOSE square bracket
+	 * Constant for CLOSE square bracket, <b>{@value}</b>.
 	 */
 	public static final String CLOSE_SQUARE_BRACKET = "]";
 
 	/**
-	 * Constants for DOT
+	 * Constants for DOT, <b>{@value}</b>.
 	 */
 	public static final String DOT = ".";
 
 	/**
-	 * Constants for UNDERSCORE
+	 * Constants for UNDERSCORE, <b>{@value}</b>.
 	 */
 	public static final String UNDERSCORE = "_";
 

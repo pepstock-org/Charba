@@ -551,5 +551,39 @@ public final class Utilities {
 		// if here, not found
 		return Cursor.DEFAULT;
 	}
+	
+	/**
+	 * Creates a string in order to change a template filling with the replacements.<br>
+	 * The replacement must be set as following:<br>
+	 * <pre>
+	 * {0} ... {1} ... {n}
+	 * </pre>
+	 * where the value into the brackets represents the index of the obecjt into the array, passed as argument. 
+	 * 
+	 * @param template template of message
+	 * @param values values to apply into template
+	 * @return a string with the template filled by values
+	 */
+	public static String applyTemplate(String template, Object... values) {
+		// creates result instance, at the beginning as the template
+		String result = template;
+		// checks if template and array of values are consistent
+		if (template != null && template.length() > 0 && values != null && values.length > 0) {
+			// scans all values to apply to template
+			for (int i = 0; i<values.length; i++) {
+				// creates a instance to apply into template
+				String replacement = Constants.NULL_STRING;
+				// checks if values is consistent
+				if (values[i] != null) {
+					// gets the to string value
+					replacement = values[i].toString();
+				}
+				// applies the value into template
+				result = result.replaceAll("\\{"+i+"\\}", replacement);
+			}
+		}
+		// returns the result
+		return result;
+	}
 
 }
