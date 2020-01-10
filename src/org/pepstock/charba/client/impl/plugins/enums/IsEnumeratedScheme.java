@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins.enums;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
@@ -80,7 +80,7 @@ interface IsEnumeratedScheme extends ColorScheme {
 		}
 		// if here scheme is not consistent
 		// then returns an empty list
-		return new ArrayList<>();
+		return Collections.emptyList();
 	}
 
 }

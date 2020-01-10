@@ -15,7 +15,6 @@ limitations under the License.
 */
 package org.pepstock.charba.client.impl.plugins.enums;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.impl.plugins.ColorScheme;
 import org.pepstock.charba.client.impl.plugins.ColorSchemes;
 
@@ -1498,12 +1497,7 @@ public enum TableauScheme implements IsEnumeratedScheme
 	 * @param hexColors list of colors in HEX format
 	 */
 	private TableauScheme(String value, String... hexColors) {
-		scheme = new EnumeratedScheme(CATEGORY, value);
-		// scans all hex colors and creates ISCOLOR
-		for (String color : hexColors) {
-			// and adds them into the list
-			scheme.add(ColorBuilder.parse(color));
-		}
+		scheme = new EnumeratedScheme(CATEGORY, value, hexColors);
 	}
 
 	/*
