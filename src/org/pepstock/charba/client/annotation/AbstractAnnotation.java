@@ -300,7 +300,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mouseenter" event is occurring
 	 */
-	public final MouseEnterCallback getMouseenterCallback() {
+	public final MouseEnterCallback getMouseEnterCallback() {
 		return mouseenterCallback;
 	}
 
@@ -309,7 +309,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mouseenterCallback the callback called when a "mouseenter" event is occurring
 	 */
-	public final void setMouseenterCallback(MouseEnterCallback mouseenterCallback) {
+	public final void setMouseEnterCallback(MouseEnterCallback mouseenterCallback) {
 		// sets mouseenter callback
 		this.mouseenterCallback = mouseenterCallback;
 		// checks if callback is consistent
@@ -327,7 +327,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mouseover" event is occurring
 	 */
-	public final MouseOverCallback getMouseoverCallback() {
+	public final MouseOverCallback getMouseOverCallback() {
 		return mouseoverCallback;
 	}
 
@@ -336,7 +336,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mouseoverCallback the callback called when a "mouseover" event is occurring
 	 */
-	public final void setMouseoverCallback(MouseOverCallback mouseoverCallback) {
+	public final void setMouseOverCallback(MouseOverCallback mouseoverCallback) {
 		// sets mouseover callback
 		this.mouseoverCallback = mouseoverCallback;
 		// checks if callback is consistent
@@ -354,7 +354,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mouseleave" event is occurring
 	 */
-	public final MouseLeaveCallback getMouseleaveCallback() {
+	public final MouseLeaveCallback getMouseLeaveCallback() {
 		return mouseleaveCallback;
 	}
 
@@ -363,7 +363,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mouseleaveCallback the callback called when a "mouseleave" event is occurring
 	 */
-	public final void setMouseleaveCallback(MouseLeaveCallback mouseleaveCallback) {
+	public final void setMouseLeaveCallback(MouseLeaveCallback mouseleaveCallback) {
 		// sets mouseleave callback
 		this.mouseleaveCallback = mouseleaveCallback;
 		// checks if callback is consistent
@@ -381,7 +381,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mouseout" event is occurring
 	 */
-	public final MouseOutCallback getMouseoutCallback() {
+	public final MouseOutCallback getMouseOutCallback() {
 		return mouseoutCallback;
 	}
 
@@ -390,7 +390,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mouseoutCallback the callback called when a "mouseout" event is occurring
 	 */
-	public final void setMouseoutCallback(MouseOutCallback mouseoutCallback) {
+	public final void setMouseOutCallback(MouseOutCallback mouseoutCallback) {
 		// sets mouseout callback
 		this.mouseoutCallback = mouseoutCallback;
 		// checks if callback is consistent
@@ -408,7 +408,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mousemove" event is occurring
 	 */
-	public final MouseMoveCallback getMousemoveCallback() {
+	public final MouseMoveCallback getMouseMoveCallback() {
 		return mousemoveCallback;
 	}
 
@@ -417,7 +417,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mousemoveCallback the callback called when a "mousemove" event is occurring
 	 */
-	public final void setMousemoveCallback(MouseMoveCallback mousemoveCallback) {
+	public final void setMouseMoveCallback(MouseMoveCallback mousemoveCallback) {
 		// sets mousemove callback
 		this.mousemoveCallback = mousemoveCallback;
 		// checks if callback is consistent
@@ -435,7 +435,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mousedown" event is occurring
 	 */
-	public final MouseDownCallback getMousedownCallback() {
+	public final MouseDownCallback getMouseDownCallback() {
 		return mousedownCallback;
 	}
 
@@ -444,7 +444,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mousedownCallback the callback called when a "mousedown" event is occurring
 	 */
-	public final void setMousedownCallback(MouseDownCallback mousedownCallback) {
+	public final void setMouseDownCallback(MouseDownCallback mousedownCallback) {
 		// sets mousedown callback
 		this.mousedownCallback = mousedownCallback;
 		// checks if callback is consistent
@@ -462,7 +462,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "mouseup" event is occurring
 	 */
-	public final MouseUpCallback getMouseupCallback() {
+	public final MouseUpCallback getMouseUpCallback() {
 		return mouseupCallback;
 	}
 
@@ -471,7 +471,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param mouseupCallback the callback called when a "mouseup" event is occurring
 	 */
-	public final void setMouseupCallback(MouseUpCallback mouseupCallback) {
+	public final void setMouseUpCallback(MouseUpCallback mouseupCallback) {
 		// sets mouseup callback
 		this.mouseupCallback = mouseupCallback;
 		// checks if callback is consistent
@@ -516,7 +516,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "dblclick" event is occurring
 	 */
-	public final DoubleClickCallback getDblclickCallback() {
+	public final DoubleClickCallback getDoubleClickCallback() {
 		return dblclickCallback;
 	}
 
@@ -525,7 +525,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
 	 */
-	public final void setDblclickCallback(DoubleClickCallback dblclickCallback) {
+	public final void setDoubleclickCallback(DoubleClickCallback dblclickCallback) {
 		// sets dblclick callback
 		this.dblclickCallback = dblclickCallback;
 		// checks if callback is consistent
@@ -543,7 +543,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a "contextmenu" event is occurring
 	 */
-	public final ContextMenuCallback getContextmenuCallback() {
+	public final ContextMenuCallback getContextMenuCallback() {
 		return contextmenuCallback;
 	}
 
@@ -552,7 +552,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param contextmenuCallback the callback called when a "contextmenu" event is occurring
 	 */
-	public final void setContextmenuCallback(ContextMenuCallback contextmenuCallback) {
+	public final void setContextMenuCallback(ContextMenuCallback contextmenuCallback) {
 		// sets contextmenu callback
 		this.contextmenuCallback = contextmenuCallback;
 		// checks if callback is consistent
