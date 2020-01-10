@@ -47,7 +47,7 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 		super(nativeEvent);
 		// checks if argument is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("Scale item is null");
+			throw new IllegalArgumentException("Scale item argument is null");
 		}
 		this.item = item;
 		this.axis = axis;

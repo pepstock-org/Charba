@@ -46,7 +46,7 @@ public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventH
 		super(nativeEvent, functionContext, LegendEventProperty.ON_LEAVE);
 		// checks if argument is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("Legend item is null");
+			throw new IllegalArgumentException("Legend item argument is null");
 		}
 		this.item = item;
 	}

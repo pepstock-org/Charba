@@ -44,7 +44,7 @@ public final class AnimationCompleteEvent extends AbstractEvent<AnimationComplet
 		super(nativeEvent);
 		// checks if argument is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("Animation item is null");
+			throw new IllegalArgumentException("Animation item argument is null");
 		}
 		this.item = item;
 	}

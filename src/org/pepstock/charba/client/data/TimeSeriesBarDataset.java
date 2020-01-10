@@ -31,7 +31,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStacker {
 
 	// exception string message for setting ore getting data
-	static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart.";
+	static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart";
 
 	// bar stacker instance
 	private final BarStacker barStacker;

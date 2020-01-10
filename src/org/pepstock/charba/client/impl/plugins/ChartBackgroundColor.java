@@ -109,7 +109,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// checks if gradient is consistent
 		if (gradient == null) {
 			// if null, exception!
-			throw new IllegalArgumentException("Gradient is null");
+			throw new IllegalArgumentException("Gradient argument is null");
 		}
 		// sets gradient
 		this.gradient = gradient;
@@ -127,7 +127,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// checks if pattern is consistent
 		if (pattern == null) {
 			// if null, exception!
-			throw new IllegalArgumentException("Pattern is null");
+			throw new IllegalArgumentException("Pattern argument is null");
 		}
 		// sets gradient
 		this.pattern = pattern;

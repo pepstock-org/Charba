@@ -150,7 +150,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		// checks if defaults options is consistent
 		if (defaultsOptions == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Defaults options instance is null");
+			throw new IllegalArgumentException("Defaults options argument is null");
 		}
 		// stores defaults options
 		this.defaultsOptions = defaultsOptions;

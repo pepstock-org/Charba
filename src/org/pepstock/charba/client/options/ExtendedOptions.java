@@ -79,7 +79,7 @@ public final class ExtendedOptions extends ScaledOptions {
 		if (id == null) {
 			// if inconsistent
 			// exception
-			throw new IllegalArgumentException("CHARBA id is null");
+			throw new IllegalArgumentException("CHARBA id argument is null");
 		}
 		setValue(Id.CHARBA_ID, id);
 	}

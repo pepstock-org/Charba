@@ -126,17 +126,17 @@ public final class Gradient extends CanvasObject {
 		// checks if type is consistent
 		if (type == null) {
 			// then throws an exception
-			throw new IllegalArgumentException("Type is null");
+			throw new IllegalArgumentException("Gradient type argument is null");
 		}
 		// checks if orientation is consistent
 		if (orientation == null) {
 			// then throws an exception
-			throw new IllegalArgumentException("Orientation is null");
+			throw new IllegalArgumentException("Gradient orientation argument is null");
 		}
 		// checks if scope is consistent
 		if (scope == null) {
 			// then throws an exception
-			throw new IllegalArgumentException("Scope is null");
+			throw new IllegalArgumentException("Gradient scope argument is null");
 		}
 		// creates color list
 		colors = new ArrayObjectContainerList<>();
@@ -304,7 +304,7 @@ public final class Gradient extends CanvasObject {
 		}
 		// checks starting colors are found otherwise exception
 		if (startColor == null) {
-			throw new IllegalArgumentException("Unable to get the start and stop color ased on passed offset " + offset);
+			throw new IllegalArgumentException("Unable to get the start and stop color based on passed offset " + offset);
 		} else if (endColor == null) {
 			// if end colors is not found, use the starting color
 			return startColor;

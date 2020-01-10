@@ -28,14 +28,6 @@ import com.google.gwt.safehtml.shared.UriUtils;
  */
 public final class PluginIdChecker {
 
-	// exception text when plugin id is null
-	private static final String INVALID_PLUGIN_ID_NULL = "Plugin id can not be null ";
-	// exception text when plugin starts with dot or underscore
-	private static final String INVALID_PLUGIN_ID_INVALID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
-	// exception text when plugin id is not URL safe
-	private static final String INVALID_PLUGIN_ID_NOT_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
-	// exception text when plugin id is not lower case
-	private static final String INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE = "Plugin id can not contain uppercase letters ";
 	// regexp to check if there is an uppercase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
 	// regex instance for font style
@@ -63,16 +55,16 @@ public final class PluginIdChecker {
 	public static void check(String id) {
 		// checks if is null
 		if (id == null) {
-			throw new IllegalArgumentException(INVALID_PLUGIN_ID_NULL);
+			throw new IllegalArgumentException("Plugin id can not be null");
 		} else if (id.startsWith(Constants.DOT) || id.startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_INVALID_FIRST_CHAR));
+			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not start with a dot or an underscore "));
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_URL_SAFE));
+			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain any non-URL-safe characters "));
 		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
 			// checks if contains uppercase letters
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE));
+			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain uppercase letters "));
 		}
 	}
 

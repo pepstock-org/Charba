@@ -23,7 +23,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Node;
-import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.xml.client.XMLParser;
 
 /**
@@ -60,18 +59,6 @@ public final class AnnotationBuilder {
 	// template of data image URL to create the image from HTML content
 	private static final String TEMPLATE_IMAGE_URL = "data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{1}\" height=\"{2}\">"
 			+ "<foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\">{0}</div></foreignObject></svg>";
-	// token inside the template to use to replace the HTML XML content
-	private static final String CONTENT_ARGUMENT_TOKEN = "\\{0\\}";
-	// token inside the template to use to replace the width of resulted image
-	private static final String WIDTH_ARGUMENT_TOKEN = "\\{1\\}";
-	// token inside the template to use to replace the height of resulted image
-	private static final String HEIGHT_ARGUMENT_TOKEN = "\\{2\\}";
-	// regex instance for content
-	private static final RegExp REGEX_CONTENT = RegExp.compile(CONTENT_ARGUMENT_TOKEN);
-	// regex instance for width
-	private static final RegExp REGEX_WIDTH = RegExp.compile(WIDTH_ARGUMENT_TOKEN);
-	// regex instance for height
-	private static final RegExp REGEX_HEIGHT = RegExp.compile(HEIGHT_ARGUMENT_TOKEN);
 
 	/**
 	 * To avoid any instantiation
@@ -94,7 +81,7 @@ public final class AnnotationBuilder {
 		// checks if argument element is consistent
 		if (htmlXmlContent == null) {
 			// if not exception
-			throw new IllegalArgumentException("Element is null");
+			throw new IllegalArgumentException("Element argument is null");
 		}
 		// inner html reference
 		final String innerHtml;
@@ -121,7 +108,7 @@ public final class AnnotationBuilder {
 					wrapper.appendChild(clonedElement);
 				} else {
 					// if here, the clone node is not a element
-					throw new IllegalArgumentException("Element as argument is not cloneale. Class: " + clonedNode.getClass().getName());
+					throw new IllegalArgumentException("Element passed as argument is not cloneale. Class: " + clonedNode.getClass().getName());
 				}
 			} else {
 				// wraps the XML content
@@ -162,7 +149,7 @@ public final class AnnotationBuilder {
 		// checks if argument element is consistent
 		if (htmlXmlContent == null) {
 			// if not exception
-			throw new IllegalArgumentException("Element is null");
+			throw new IllegalArgumentException("Element argument is null");
 		}
 		// creates key
 		String key = getKey(htmlXmlContent, width, height);
@@ -209,13 +196,7 @@ public final class AnnotationBuilder {
 	 */
 	private static ImageElement buildWithValidatedContent(String key, String validatedhtmlXmlContent, double width, double height) {
 		// copies the template string
-		String result = TEMPLATE_IMAGE_URL;
-		// replaces the html content into the template
-		result = REGEX_CONTENT.replace(result, validatedhtmlXmlContent);
-		// replaces the width into the template
-		result = REGEX_WIDTH.replace(result, String.valueOf(width));
-		// replaces the height into the template
-		result = REGEX_HEIGHT.replace(result, String.valueOf(height));
+		String result = Utilities.applyTemplate(TEMPLATE_IMAGE_URL, validatedhtmlXmlContent, width, height);
 		// transforms it into an element
 		ImageElement element = Utilities.toImageElement(result);
 		// stores into cache

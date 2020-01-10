@@ -49,7 +49,7 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 		// checks if time is consistent
 		if (time == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Time is null");
+			throw new IllegalArgumentException("Time argument is null");
 		}
 		// sets time
 		setTime(time);

@@ -27,8 +27,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  */
 public final class TimeSeriesScales extends Scales {
 
-	// exception string message for setting a X axis because the TIME created must be used
-	private static final String INVALID_SET_AXIS_CALL = "Do not set any X axes because TIME axis is already created. Use getTimeAxis to configure it.";
 	// X axis (time)
 	private final CartesianTimeAxis timeAxis;
 	// Y axis (linear)
@@ -75,7 +73,7 @@ public final class TimeSeriesScales extends Scales {
 	 */
 	@Override
 	public void setXAxes(Axis... axes) {
-		throw new UnsupportedOperationException(INVALID_SET_AXIS_CALL);
+		throw new UnsupportedOperationException("Do not set any X axes because TIME axis is already created. Use getTimeAxis to configure it");
 	}
 
 }

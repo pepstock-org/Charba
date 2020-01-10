@@ -83,12 +83,12 @@ public final class Fonter extends NativeObjectContainer {
 		// checks if model is consistent
 		if (model == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Model is null");
+			throw new IllegalArgumentException("Options model argument is null");
 		}
 		// checks if default value is consistent
 		if (defaultValues == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Default values is null");
+			throw new IllegalArgumentException("Default values argument is null");
 		}
 		this.model = model;
 		this.defaultValues = defaultValues;

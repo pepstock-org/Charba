@@ -109,12 +109,12 @@ final class ColorSchemesUtil {
 		// if name is null
 		if (name == null) {
 			// exception
-			throw new IllegalArgumentException("Color scheme name is null!");
+			throw new IllegalArgumentException("Color scheme name is null");
 		}
 		// if category is null
 		if (category == null) {
 			// exception
-			throw new IllegalArgumentException("Color scheme category is null!");
+			throw new IllegalArgumentException("Color scheme category is null");
 		}
 		// creates a builder with category
 		StringBuilder sb = new StringBuilder(category);

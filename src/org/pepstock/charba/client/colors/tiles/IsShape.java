@@ -46,7 +46,7 @@ public interface IsShape extends Key {
 	 */
 	static void checkIfValid(IsShape shape) {
 		if (!isValid(shape)) {
-			throw new IllegalArgumentException("Shape implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Shape is null or not consistent");
 		}
 	}
 

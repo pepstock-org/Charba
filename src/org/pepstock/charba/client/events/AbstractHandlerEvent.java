@@ -39,7 +39,7 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	public AbstractHandlerEvent(Type<? extends EventHandler> handlerType) {
 		// checks if argument is consistent
 		if (handlerType == null) {
-			throw new IllegalArgumentException("Handler type is null");
+			throw new IllegalArgumentException("Handler type argument is null");
 		}
 		this.handlerType = handlerType;
 	}

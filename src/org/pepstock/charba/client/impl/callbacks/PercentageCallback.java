@@ -86,7 +86,7 @@ public final class PercentageCallback implements FormatterCallback {
 		// checks if consistent
 		if (format == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Format is null!");
+			throw new IllegalArgumentException("Percentage format argument is null");
 		}
 		// stores the arguments
 		this.format = format;

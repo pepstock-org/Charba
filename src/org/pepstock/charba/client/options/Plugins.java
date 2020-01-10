@@ -40,15 +40,13 @@ import org.pepstock.charba.client.utils.Utilities;
  *
  */
 public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
-	// ----
-	// templates for the exception message to throw
-	//  ---
+
 	// exception message when the plugin id is not the same in all options passed as list
-	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_ALL_OPTIONS = "Plugin id '{0}' is not equals into all options '{1}'!";
+	private static final String INVALID_ID_NOT_EQUALS_IN_ALL_OPTIONS = "Plugin id '{0}' is not equals into all options '{1}'";
 	// exception message when the plugin id is not the same of options passed as argument
-	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options!";
+	private static final String INVALID_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options";
 	// exception message when the plugin id is not the same of factory passed as argument
-	private static final String EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_FACTORY ="Plugin id '{0}' is not equals to plugin id '{1}'of factory!";
+	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY ="Plugin id '{0}' is not equals to plugin id '{1}'of factory";
 	 
 
 	/**
@@ -210,7 +208,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				if (pluginId != null && !pluginId.equals(option.getPluginId())) {
 					// if here, the plugin ID is not equals into all options
 					// then exception
-					throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_ALL_OPTIONS, pluginId, option.getPluginId()));
+					throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_ID_NOT_EQUALS_IN_ALL_OPTIONS, pluginId, option.getPluginId()));
 				}
 				// stores the pluginId
 				pluginId = option.getPluginId();
@@ -266,7 +264,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (options == null && hasOptions(pluginId)) {
 			// removes configuration if exists
 			remove(pluginIdKey);
-		} else {
+		} else if (options != null){
 			// scans all options to check if the options have got the same plugin id
 			for (AbstractPluginOptions option : options) {
 				// checks plugin
@@ -452,7 +450,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (Key.isValid(pluginIdKey) && options != null && !pluginIdKey.value().equals(options.getPluginId())) {
 			// if here, the plugin ID is not equals to the option
 			// then exception
-			throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_OPTIONS, pluginIdKey.value(), options.getPluginId()));
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_ID_NOT_EQUALS_IN_OPTIONS, pluginIdKey.value(), options.getPluginId()));
 		}
 	}
 
@@ -469,7 +467,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (Key.isValid(pluginIdKey) && factory != null && !pluginIdKey.value().equals(factory.getPluginId())) {
 			// if here, the plugin ID is not equals to the option
 			// then exception
-			throw new IllegalArgumentException(Utilities.applyTemplate(EXCEPTION_MESSAGE_ID_NOT_EQUALS_IN_FACTORY, pluginIdKey.value(), factory.getPluginId()));
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_ID_NOT_EQUALS_IN_FACTORY, pluginIdKey.value(), factory.getPluginId()));
 		}
 	}
 	

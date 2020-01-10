@@ -46,7 +46,7 @@ public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
 		// checks if the index is greater than 0
 		if (index <= 0) {
 			// if not, exception
-			throw new IllegalArgumentException("Value must represent a integer greater than 0");
+			throw new IllegalArgumentException("Index argument must be greater than 0");
 		}
 		// creates the name to return
 		this.name = FillingMode.ABSOLUTE_DATASET_INDEX.value() + ":" + index;

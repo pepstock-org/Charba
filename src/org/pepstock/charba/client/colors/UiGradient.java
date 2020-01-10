@@ -2813,7 +2813,7 @@ public enum UiGradient
 		// checks if array of colors preloaded is consistent
 		if (colors == null || colors.length < 2) {
 			// if not, exception
-			throw new IllegalArgumentException("Colors list is not consistent");
+			throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
 		}
 		// creates a gradient
 		Gradient gradient = new Gradient(type, orientation, scope);

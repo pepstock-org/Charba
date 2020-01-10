@@ -47,7 +47,7 @@ public interface Controller {
 	 */
 	static void checkIfValid(Controller controller) {
 		if (!isValid(controller)) {
-			throw new IllegalArgumentException("Controller implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Controller is null or not consistent");
 		}
 	}
 

@@ -46,7 +46,7 @@ public final class LegendClickEvent extends AbstractChartEvent<LegendClickEventH
 		super(nativeEvent, functionContext, LegendEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("Legend item is null");
+			throw new IllegalArgumentException("Legend item argument is null");
 		}
 		this.item = item;
 	}

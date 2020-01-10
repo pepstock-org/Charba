@@ -49,7 +49,7 @@ public final class ChartHoverEvent extends AbstractChartEvent<ChartHoverEventHan
 		super(nativeEvent, functionContext, ChartEventProperty.ON_HOVER);
 		// checks if argument is consistent
 		if (items == null) {
-			throw new IllegalArgumentException("Dataset items list is null");
+			throw new IllegalArgumentException("Dataset items list argument is null");
 		}
 		this.items = items;
 	}

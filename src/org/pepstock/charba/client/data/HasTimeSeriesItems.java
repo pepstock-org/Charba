@@ -55,7 +55,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 			// checks if data point are time series item
 			if (!isTimeSeriesItem(dp)) {
 				// if not, exception
-				throw new IllegalArgumentException(Dataset.TIME_SERIES_ITEM_AND_DATAPOINT_MESSAGE);
+				throw new IllegalArgumentException("Datapoint is not a time series item");
 			}
 		}
 	}

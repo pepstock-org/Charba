@@ -49,7 +49,7 @@ public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHan
 		super(nativeEvent, functionContext, ChartEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (items == null) {
-			throw new IllegalArgumentException("Dataset items list is null");
+			throw new IllegalArgumentException("Dataset items list argument is null");
 		}
 		this.items = items;
 	}

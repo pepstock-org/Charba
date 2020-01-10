@@ -44,7 +44,7 @@ interface IsThreshold {
 	 */
 	static void checkIfValid(IsThreshold threshold) {
 		if (!isValid(threshold)) {
-			throw new IllegalArgumentException("Threshold implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Threshold is null or not consistent");
 		}
 	}
 

@@ -551,7 +551,7 @@ public final class Utilities {
 		// if here, not found
 		return Cursor.DEFAULT;
 	}
-	
+
 	/**
 	 * Creates a string in order to change a template filling with the replacements.<br>
 	 * The replacement must be set as following:<br>
@@ -581,6 +581,10 @@ public final class Utilities {
 				// applies the value into template
 				result = result.replaceAll("\\{"+i+"\\}", replacement);
 			}
+		}
+		// checks if result is null
+		if (result == null) {
+			return Constants.NULL_STRING;
 		}
 		// returns the result
 		return result;

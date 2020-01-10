@@ -72,7 +72,7 @@ public interface IsChart extends HasHandlers {
 	static void checkIfConsistent(IsChart chart) {
 		// checks if chart is consistent
 		if (!isConsistent(chart)) {
-			throw new IllegalArgumentException("Chart implementation instance is not consistent");
+			throw new IllegalArgumentException("Chart is not consistent");
 		}
 	}
 
@@ -96,7 +96,7 @@ public interface IsChart extends HasHandlers {
 	 */
 	static void checkIfValid(IsChart chart) {
 		if (!isValid(chart)) {
-			throw new IllegalArgumentException("Chart implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Chart is null or not consistent");
 		}
 	}
 
@@ -108,18 +108,6 @@ public interface IsChart extends HasHandlers {
 	 */
 	static boolean isAbstractChart(IsChart chart) {
 		return (chart instanceof AbstractChart<?>);
-	}
-
-	/**
-	 * Checks if chart passed as argument is an abstract chart instance.<br>
-	 * If not, throw a {@link IllegalArgumentException}.
-	 * 
-	 * @param chart chart to be checked
-	 */
-	static void checkIfAbstractChart(IsChart chart) {
-		if (!isAbstractChart(chart)) {
-			throw new IllegalArgumentException("Chart implementation instance is not an AbstractChart");
-		}
 	}
 
 	/**

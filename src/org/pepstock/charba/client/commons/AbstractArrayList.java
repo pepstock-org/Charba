@@ -182,7 +182,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 */
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// if index is out of range, EXCEPTION
+		// if index is out of range, exception
 		if (!checkRange(index)) {
 			throw new IndexOutOfBoundsException("Index: " + index);
 		}

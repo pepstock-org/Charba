@@ -69,7 +69,7 @@ public final class EntryPointStarter {
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Entry point runnable is null");
+			throw new IllegalArgumentException("Runnable argument is null");
 		}
 		// sets deferred resources
 		ResourcesType.setClientBundle(DeferredResources.INSTANCE);

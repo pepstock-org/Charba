@@ -32,7 +32,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesItems {
 
 	// exception string message for setting or getting data string
-	private static final String INVALID_DATA_STRING_CALL = "setDataString and getDataString methods are not invokable by a time series chart.";
+	private static final String INVALID_DATA_STRING_CALL = "setDataString and getDataString methods are not invokable by a time series chart";
 
 	/**
 	 * Creates a dataset.<br>

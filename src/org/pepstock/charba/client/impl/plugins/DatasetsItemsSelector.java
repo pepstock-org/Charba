@@ -259,11 +259,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		// add checks if there is any dataset selection handler into option
+		// adds checks if there is any dataset selection handler into option
 		// if yes exception
 		if (mustBeActivated(chart) && chart.getOptions().hasDatasetSelectionHandlers()) {
 			// throw exception
-			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
+			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined");
 		}
 		return true;
 	}

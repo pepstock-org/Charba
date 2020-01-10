@@ -44,7 +44,7 @@ public interface Type extends Key {
 	 */
 	static void checkIfValid(Type type) {
 		if (!isValid(type)) {
-			throw new IllegalArgumentException("Type implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Type is null or not consistent");
 		}
 	}
 

@@ -55,7 +55,7 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 		// if does not match
 		if (matcher == null) {
 			// exception because is not in right format
-			throw new IllegalArgumentException("Value is not a valid relative index");
+			throw new IllegalArgumentException("Index argument is not a valid relative index");
 		}
 		// creates the name to return
 		this.name = FillingMode.RELATIVE_DATASET_INDEX.value() + ":" + getValue();

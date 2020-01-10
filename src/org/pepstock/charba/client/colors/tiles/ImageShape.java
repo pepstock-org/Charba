@@ -86,7 +86,7 @@ public final class ImageShape extends AbstractShape {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new IllegalArgumentException("Image instance is not consitent or null!");
+			throw new IllegalArgumentException("Image argument is not consitent or null");
 		}
 	}
 

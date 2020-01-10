@@ -45,7 +45,7 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 public class MeterDataset extends Dataset {
 
 	// exception string message for setting data
-	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
+	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a meter chart. Use 'setValue' method";
 
 	/**
 	 * Default value color, <b>rgb(140, 214, 16)</b>.

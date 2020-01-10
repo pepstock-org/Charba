@@ -53,7 +53,7 @@ public interface Key {
 	 */
 	static void checkIfValid(Key key) {
 		if (!isValid(key)) {
-			throw new IllegalArgumentException("Key implementation instance is null or not consistent");
+			throw new IllegalArgumentException("Key is null or not consistent");
 		}
 	}
 

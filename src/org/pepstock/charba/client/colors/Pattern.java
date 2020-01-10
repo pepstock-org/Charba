@@ -36,8 +36,6 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class Pattern extends CanvasObject {
 
-	// exception message
-	private static final String IMG_OR_CANVAS_PATTERN_NULL_MESSAGE = "Image or canvas pattern instance is not consitent or null!";
 	// default instance of image.
 	private static final ImageElement DEFAULT_IMAGE = null;
 	// default instance of canvas pattern.
@@ -144,7 +142,7 @@ public final class Pattern extends CanvasObject {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new IllegalArgumentException(IMG_OR_CANVAS_PATTERN_NULL_MESSAGE);
+			throw new IllegalArgumentException("Image argument is null");
 		}
 	}
 
@@ -192,7 +190,7 @@ public final class Pattern extends CanvasObject {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new IllegalArgumentException(IMG_OR_CANVAS_PATTERN_NULL_MESSAGE);
+			throw new IllegalArgumentException("Canvas pattern argument is null");
 		}
 	}
 

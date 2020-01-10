@@ -81,12 +81,12 @@ public final class ControllerType implements Type {
 			// checks if the type is equals of any chart type
 			if (defaultChartType.value().equalsIgnoreCase(type)) {
 				// if equals exception
-				throw new IllegalArgumentException("Chart '" + type + "' is a default chart type");
+				throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
 			}
 		}
 		// checks chart and scale type if are consistent
 		if (chartType == null && scaleType == null) {
-			throw new IllegalArgumentException("Chart and scale types are null");
+			throw new IllegalArgumentException("Chart type and scale types are null");
 		}
 		this.type = type;
 		this.chartType = chartType;

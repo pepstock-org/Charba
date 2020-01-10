@@ -44,7 +44,7 @@ abstract class AbstractChartEvent<H extends EventHandler> extends AbstractEvent<
 		super(nativeEvent);
 		// checks if arguments are consistent
 		if (functionContext == null) {
-			throw new IllegalArgumentException("Context is null");
+			throw new IllegalArgumentException("Context argument is null");
 		}
 		Key.checkIfValid(key);
 		this.functionContext = functionContext;

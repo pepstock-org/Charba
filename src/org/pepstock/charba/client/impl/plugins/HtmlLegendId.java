@@ -126,7 +126,7 @@ final class HtmlLegendId {
 		// checks if chart id is consistent
 		if (chartId == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Chart id is null");
+			throw new IllegalArgumentException("Chart id argument is null");
 		}
 		// creates the object
 		return new HtmlLegendId(chartId, datasetIndex, index);

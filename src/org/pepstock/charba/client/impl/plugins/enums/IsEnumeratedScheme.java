@@ -48,7 +48,7 @@ interface IsEnumeratedScheme extends ColorScheme {
 			return getScheme().value();
 		} else {
 			// if not, exception
-			throw new IllegalArgumentException("Color scheme instance is null");
+			throw new IllegalArgumentException("Color scheme is null");
 		}
 	}
 

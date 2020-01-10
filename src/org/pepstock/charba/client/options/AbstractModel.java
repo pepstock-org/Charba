@@ -85,7 +85,7 @@ abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObj
 		// checks if default value is consistent
 		if (defaultValues == null) {
 			// if not consistent, exception
-			throw new IllegalArgumentException("Default values instance is null");
+			throw new IllegalArgumentException("Default values argument is null");
 		}
 		this.childKey = childKey;
 		this.parent = parent;
@@ -152,7 +152,7 @@ abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObj
 		// checks if model is consistent
 		if (model == null) {
 			// if not exception
-			throw new IllegalArgumentException("Model si null");
+			throw new IllegalArgumentException("Options model arguments is null");
 		}
 		model.setValue(key, proxy);
 		// checks if the node is already added to parent

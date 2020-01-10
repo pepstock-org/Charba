@@ -27,10 +27,6 @@ import com.google.gwt.safehtml.shared.UriUtils;
  *
  */
 final class ControllerTypeChecker {
-	// exception text when controller type starts with dot or underscore
-	private static final String INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR = "Controller type can not start with a dot or an underscore ";
-	// exception text when controller type is not URL safe
-	private static final String INVALID_CONTROLLER_TYPE_NOT_URL_SAFE = "Controller type can not contain any non-URL-safe characters ";
 
 	/**
 	 * To avoid any instantiation
@@ -55,10 +51,10 @@ final class ControllerTypeChecker {
 		// checks if has got invalid chars
 		if (type.value().startsWith(Constants.DOT) || type.value().startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
+			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not start with a dot or an underscore "));
 		} else if (!UriUtils.isSafeUri(type.value())) {
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_NOT_URL_SAFE));
+			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not contain any non-URL-safe characters "));
 		}
 	}
 

@@ -72,7 +72,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	protected AbstractDefaultOptions(IsDefaultOptions options) {
 		// checks if options is consistent
 		if (options == null) {
-			throw new IllegalArgumentException("Options instance for default is null");
+			throw new IllegalArgumentException("Default options argument is null");
 		}
 		// stores all inner elements
 		this.animation = options.getAnimation();

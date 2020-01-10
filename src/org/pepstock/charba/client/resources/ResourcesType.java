@@ -47,12 +47,12 @@ public final class ResourcesType {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
-			throw new IllegalArgumentException("Resources type is invalid (null)");
+			throw new IllegalArgumentException("Resources type argument is null");
 		}
 		// checks if the resources type is already set and is different from the argument
 		if (ResourcesType.resources != null && !resources.getClass().equals(ResourcesType.resources.getClass())) {
 			// exception
-			throw new IllegalArgumentException("Resources type is already set and you can not change it");
+			throw new IllegalArgumentException("Resources type is already set and can not be changed");
 		}
 		// stores the instance
 		ResourcesType.resources = (Resources<ResourcePrototype>) resources;
@@ -68,7 +68,7 @@ public final class ResourcesType {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Resources type is invalid (not set)");
+			throw new IllegalArgumentException("Resources type is invalid (not set). Must be set before using CHARBA");
 		}
 		// returns the instance
 		return ResourcesType.resources;

@@ -46,7 +46,7 @@ public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventH
 		super(nativeEvent, functionContext, LegendEventProperty.ON_HOVER);
 		// checks if argument is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("Legend item is null");
+			throw new IllegalArgumentException("Legend item argument is null");
 		}
 		this.item = item;
 	}

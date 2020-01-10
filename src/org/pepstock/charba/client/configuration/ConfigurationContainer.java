@@ -49,7 +49,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 		// checks if configuration is consistent
 		if (configuration == null) {
 			// if not exception
-			throw new IllegalArgumentException("Configuration is null");
+			throw new IllegalArgumentException("Configuration argument is null");
 		}
 		this.configuration = configuration;
 	}

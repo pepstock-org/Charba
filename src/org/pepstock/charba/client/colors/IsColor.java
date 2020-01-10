@@ -55,7 +55,7 @@ public interface IsColor {
 	static void checkIfValid(IsColor color) {
 		// check if color is consistent
 		if (color == null) {
-			throw new IllegalArgumentException("Color instance is null");
+			throw new IllegalArgumentException("Color is null");
 		}
 		// checks if values are consistent
 		ColorUtil.checkChannelWithinBounds(color.getRed());

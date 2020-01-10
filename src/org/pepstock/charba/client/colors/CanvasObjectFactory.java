@@ -215,7 +215,7 @@ public abstract class CanvasObjectFactory {
 		if (area == null) {
 			// if here, the area is invalid
 			// then exception
-			throw new IllegalArgumentException("Area for linear gradient is null!");
+			throw new IllegalArgumentException("Area for linear gradient is null");
 		}
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
@@ -314,7 +314,7 @@ public abstract class CanvasObjectFactory {
 		if (center == null) {
 			// if here, the center is invalid
 			// then exception
-			throw new IllegalArgumentException("Center for radial gradient is null!");
+			throw new IllegalArgumentException("Center for radial gradient is null");
 		}
 		final double centerX = center.getX();
 		final double centerY = center.getY();
@@ -323,7 +323,7 @@ public abstract class CanvasObjectFactory {
 		if (radius == null) {
 			// if here, the radius is invalid
 			// then exception
-			throw new IllegalArgumentException("Radius for radial gradient is null!");
+			throw new IllegalArgumentException("Radius for radial gradient is null");
 		}
 		final double radius0 = radius.getInner();
 		final double radius1 = radius.getOuter();
@@ -369,7 +369,7 @@ public abstract class CanvasObjectFactory {
 			// if here,
 			// canvas oObject is null
 			// then throws an exception
-			throw new IllegalArgumentException("CanvasObject is null");
+			throw new IllegalArgumentException("CanvasObject argument is null");
 		}
 	}
 

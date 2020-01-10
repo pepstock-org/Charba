@@ -47,7 +47,7 @@ public class MeterOptions extends AbstractPieOptions {
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 
 	// exception message
-	private static final String INVALID_CALL = "The invoked component is not available for Meter or Gauge charts.";
+	private static final String INVALID_CALL = "The invoked component is not available for meter or gauge charts.";
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 

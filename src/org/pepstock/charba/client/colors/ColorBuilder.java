@@ -143,7 +143,7 @@ public final class ColorBuilder {
 			}
 		}
 		// if here, the string argument is not valid
-		throw new IllegalArgumentException("Value is invalid");
+		throw new IllegalArgumentException("Color argument is invalid");
 	}
 
 	/**
@@ -217,7 +217,7 @@ public final class ColorBuilder {
 			return searchOnEnum ? build(red, green, blue) : new Color(red, green, blue, Color.DEFAULT_ALPHA);
 		} else {
 			// if here the hex value is not valid
-			throw new IllegalArgumentException("Hex value is invalid. Must be length 3 or 6");
+			throw new IllegalArgumentException("Color argument length in HEX format is not valid. Must have a length 3 or 6");
 		}
 	}
 
@@ -258,7 +258,7 @@ public final class ColorBuilder {
 			return build(red, green, blue);
 		} else {
 			// if here the rgb value is not valid
-			throw new IllegalArgumentException("RGB value is invalid");
+			throw new IllegalArgumentException("Color argument in RGB format is not valid");
 		}
 	}
 
@@ -303,7 +303,7 @@ public final class ColorBuilder {
 			return build(red, green, blue, alpha);
 		} else {
 			// if here the rgba value is not valid
-			throw new IllegalArgumentException("RGBA value is invalid");
+			throw new IllegalArgumentException("Color argument in RGBA format is not valid");
 		}
 	}
 
@@ -344,7 +344,7 @@ public final class ColorBuilder {
 			return convertHSL2RGB(hue, saturation, lightness, Double.NaN);
 		} else {
 			// if here the rgb value is not valid
-			throw new IllegalArgumentException("HSL value is invalid");
+			throw new IllegalArgumentException("Color argument in HSL format is not valid");
 		}
 	}
 
@@ -389,7 +389,7 @@ public final class ColorBuilder {
 			return convertHSL2RGB(hue, saturation, lightness, alpha);
 		} else {
 			// if here the rgb value is not valid
-			throw new IllegalArgumentException("HSL value is invalid");
+			throw new IllegalArgumentException("Color argument in HSLA format is not valid");
 		}
 	}
 

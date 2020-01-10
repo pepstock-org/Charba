@@ -57,7 +57,7 @@ public final class Charts {
 		} else {
 			// if here, listener is not consistent
 			// then exception
-			throw new IllegalArgumentException("Listener is null");
+			throw new IllegalArgumentException("Chart lifecycle listener is null");
 		}
 	}
 

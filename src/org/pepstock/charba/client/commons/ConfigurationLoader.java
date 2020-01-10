@@ -46,7 +46,7 @@ public final class ConfigurationLoader {
 		} else {
 			// if here, arguments not consistent
 			// and then exception
-			throw new IllegalArgumentException("Configuration and/or options are null");
+			throw new IllegalArgumentException("Configuration or options argument is null");
 		}
 	}
 
@@ -64,7 +64,7 @@ public final class ConfigurationLoader {
 		} else {
 			// if here, arguments not consistent
 			// and then exception
-			throw new IllegalArgumentException("Configuration and/or options are null");
+			throw new IllegalArgumentException("Chart or dataset configuration argument is null");
 		}
 	}
 

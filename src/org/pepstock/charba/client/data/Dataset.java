@@ -105,11 +105,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	// factory to create time series items
 	static final TimeSeriesItemFactory TIMESERIES_ITEMS_FACTORY = new TimeSeriesItemFactory();
 	// exception message when it's not using data points
-	static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for this chart";
+	static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for this dataset";
 	// exception string message for setting ore getting data
 	static final String TIME_SERIES_DATA_USAGE_MESSAGE = "setData and getData methods are not invokable by a time series chart";
-	// exception string message for setting ore getting data
-	static final String TIME_SERIES_ITEM_AND_DATAPOINT_MESSAGE = "Datapoint is not a time series item";
 	// patterns container
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container

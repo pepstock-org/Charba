@@ -20,6 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaledOptions;
 import org.pepstock.charba.client.options.Scales;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * This object is mapping the default options related to the chart type.
@@ -28,6 +29,9 @@ import org.pepstock.charba.client.options.Scales;
  */
 public final class ChartOptions extends ScaledOptions {
 
+	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
+	private static final String INVALID_SCALE_TYPE = "The options is referring to {0} chart with {1} scale type and not to {2} scale type as requested";
+	
 	private final Type type;
 
 	/**
@@ -68,7 +72,7 @@ public final class ChartOptions extends ScaledOptions {
 			return super.getScales();
 		}
 		// if here, the chart is not multi scales therefore exception
-		throw new UnsupportedOperationException("The options is not referring to a multi scaled chart!");
+		throw new UnsupportedOperationException(Utilities.applyTemplate(INVALID_SCALE_TYPE, type.value(), type.scaleType().name(), ScaleType.MULTI.name()));
 	}
 
 	/*
@@ -84,7 +88,7 @@ public final class ChartOptions extends ScaledOptions {
 			return super.getScale();
 		}
 		// if here, the chart is not single scale therefore exception
-		throw new UnsupportedOperationException("The options is not referring to a single scaled chart!");
+		throw new UnsupportedOperationException(Utilities.applyTemplate(INVALID_SCALE_TYPE, type.value(), type.scaleType().name(), ScaleType.SINGLE.name()));
 	}
 
 	/**
