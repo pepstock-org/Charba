@@ -37,6 +37,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * <li>the border color
  * <li>the border width
  * <li>the border dash
+ * <li>the border dash offset
  * <li>if firing event on clear selection
  * </ul>
  * 
@@ -269,7 +270,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
