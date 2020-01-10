@@ -494,6 +494,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			if (!borderDash.isEmpty()) {
 				JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
 			}
+			JsHelper.get().setLineDashOffset(ctx, options.getBorderDashOffset());
 			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
 	}
@@ -1030,6 +1031,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				if (!borderDash.isEmpty()) {
 					JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
 				}
+				JsHelper.get().setLineDashOffset(ctx, options.getBorderDashOffset());
 				// gets increment
 				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
 				// draw border fixing the dimansions of rect

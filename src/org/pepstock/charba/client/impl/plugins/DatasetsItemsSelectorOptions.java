@@ -65,6 +65,11 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
+	 * Default border dash offset of selection area, <b>{@value DEFAULT_BORDER_DASH_OFFSET}</b>.
+	 */
+	public static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+
+	/**
 	 * Default border color for area, {@link GwtMaterialColor#GREY_DARKEN_2}.
 	 */
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
@@ -88,6 +93,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 		X_AXIS_ID("xAxisID"),
 		BORDER_COLOR("borderColor"),
 		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_WIDTH("borderWidth"),
 		FIRE_EVENT_ON_CLEAR_SELECTION("fireEventOnClearSelection"),
 		CLEAR_SELECTION("clearSelection");
@@ -255,6 +261,25 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	public List<Integer> getBorderDash() {
 		return ArrayListHelper.list(getBorderDashAsJavaScriptObject());
+	}
+
+	/**
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset the line dash pattern offset or "phase".
+	 */
+	public void setBorderDashOffset(int borderDashOffset) {
+		// stores value
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
+	}
+
+	/**
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return the line dash pattern offset or "phase".
+	 */
+	public int getBorderDashOffset() {
+		return getValue(Property.BORDER_DASH_OFFSET, defaultsOptions.getBorderDashOffset());
 	}
 
 	/**

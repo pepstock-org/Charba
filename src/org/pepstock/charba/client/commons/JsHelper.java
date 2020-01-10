@@ -166,6 +166,19 @@ public final class JsHelper {
 	}
 
 	/**
+	 * Sets the line dash offset, or "phase."<br>
+	 * 
+	 * @param context context of canvas
+	 * @param offset the line dash offset, or "phase."
+	 */
+	public void setLineDashOffset(Context2d context, int offset) {
+		// checks consistency of context
+		if (context != null) {
+			NativeJsHelper.setLineDashOffset(context, offset);
+		}
+	}
+
+	/**
 	 * Sets the line dash pattern used when stroking lines.<br>
 	 * It uses a list of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 

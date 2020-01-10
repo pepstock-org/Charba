@@ -160,6 +160,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		context.setLineCap(legendItem.getLineCap().getLineCap());
 		// sets line dash
 		JsHelper.get().setLineDash(context, legendItem.getLineDash());
+		JsHelper.get().setLineDashOffset(context, legendItem.getLineDashOffset());
 	}
 
 	/**

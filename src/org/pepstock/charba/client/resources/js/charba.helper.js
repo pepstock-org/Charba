@@ -22,7 +22,7 @@
     /*
 	 Returns the java script object type of the object.
 	  
-	 @param object the object to get type.
+	 @param obj the object to get type.
 	 @return the object type
     */
     CharbaJsHelper.typeOf = function(obj) {
@@ -32,13 +32,13 @@
 	 Returns an undefined.
 	 @return undefined
     */
-    CharbaJsHelper.undefined = function(obj) {
+    CharbaJsHelper.undefined = function() {
     	return undefined;
     }
    /*
 	 Removes a property from a java script object.
 	 
-	 @param object the object on which to remove the property.
+	 @param obj the object on which to remove the property.
 	 @param key the string name of the property to remove.
     */
     CharbaJsHelper.remove = function(obj, key) {
@@ -47,7 +47,7 @@
     /*
 	 Returns the java script object type of a property.
 	  
-	 @param object the object on which to search the property.
+	 @param obj the object on which to search the property.
 	 @param key the string name of the property to test.
 	 @return the object type
     */
@@ -57,7 +57,7 @@
     /*
 	 This method determines whether the passed property of passed object is an Array.
 	  
-	 @param object the object on which to test the property.
+	 @param obj the object on which to test the property.
 	 @param key the string name of the property to test.
 	 @return true if the value is an Array; otherwise, false.
     */
@@ -67,7 +67,7 @@
     /*
 	 Returns a property of java script object as string.
 	  
-	 @param object the object on which to define the property.
+	 @param obj the object on which to define the property.
 	 @param key the string name of the property to be defined or modified..
 	 @return string value
     */
@@ -77,7 +77,7 @@
     /*
 	 Returns a property of java script object as double.
 	  
-	 @param object the object on which to define the property.
+	 @param obj the object on which to define the property.
 	 @param key the string name of the property to be defined or modified..
 	 @return double value
     */
@@ -87,7 +87,7 @@
     /*
 	 Returns a property of java script object as integer.
 	  
-	 @param object the object on which to define the property.
+	 @param obj the object on which to define the property.
 	 @param key the string name of the property to be defined or modified..
 	 @return integer value
     */
@@ -99,10 +99,19 @@
 	 and gaps which describe the pattern.
 	 
 	 @param context context of canvas
-	 @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
+	 @param values array of values that specify alternating lengths of lines and gaps which describe the pattern
     */
     CharbaJsHelper.setLineDash = function(context, values) {
     	context.setLineDash(values);
+    }
+    /*
+	 Sets the line dash offset, or "phase."
+	 
+	 @param context context of canvas
+	 @param offset the line dash offset, or "phase."
+    */
+    CharbaJsHelper.setLineDashOffset = function(context, offset) {
+    	context.lineDashOffset = offset;
     }
     /*
 	 Creates new proxy for callback which will pass "this" environment of java script as first argument of callback
@@ -170,7 +179,7 @@
     /*
 	 Invokes the default "initialize" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param datasetIndex dataset index
     */
@@ -180,7 +189,7 @@
     /*
 	 Invokes the default "AddElements" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
     */
     CharbaJsControllerHelper.addElements = function(controllerType, context) {
@@ -189,7 +198,7 @@
     /*
 	 Invokes the default "addElementAndReset" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param index dataset index
     */
@@ -199,7 +208,7 @@
     /*
 	 Invokes the default "draw" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param ease if specified, this number represents how far to transition elements.
     */
@@ -209,7 +218,7 @@
     /*
 	 Invokes the default "removeHoverStyle" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param element element to be remove.
     */
@@ -219,7 +228,7 @@
     /*
 	 Invokes the default "setHoverStyle" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param element element to be set.
     */
@@ -229,7 +238,7 @@
     /*
 	 Invokes the default "update" method.
 	  
-	 @param chartType extended chart type
+	 @param controllerType controller type
 	 @param context context of controller
 	 @param reset if true, put the elements into a reset state so they can animate to their final values
     */
@@ -300,6 +309,9 @@
 	 Invokes an existing positioner to get the point.
 	  
 	 @param name name of position to be invoked
+	 @param context function context of javascript call
+	 @param elements datasets items
+	 @param eventPoint the point on the canvas where the event occurred
 	 @return the point calculated by positioner or <code>null</code> if positioner does not exist
     */
     CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
@@ -373,19 +385,21 @@
 	*/
     function CharbaJsHtmlLegendBuilderHelper() {}
     /*
-	 Returns an array of strings with element attributes.
+	 Adds event listener to a DOM element.
 	  
+	 @param event event name to add
 	 @param element DOM element to scan
-	 @return an array of strings with element attributes
+	 @param proxy charba callback proxy
     */
     CharbaJsHtmlLegendBuilderHelper.addEventListener = function(event, element, proxy) {
     	element.addEventListener(event, proxy, false);
     } 
-        /*
-	 Returns an array of strings with element attributes.
+    /*
+	 Removes event listener to a DOM element.
 	  
+	 @param event event name to remove
 	 @param element DOM element to scan
-	 @return an array of strings with element attributes
+	 @param proxy charba callback proxy
     */
     CharbaJsHtmlLegendBuilderHelper.removeEventListener = function(event, element, proxy) {
     	element.removeEventListener(event, proxy);
@@ -413,7 +427,7 @@
     /*
 	 Returns true if the property into native object is a CanvasPattern.
 	  
-	 @param object the object on which to define the property.
+	 @param obj the object on which to define the property.
 	 @param key the string name of the property to be defined or modified..
 	 @return true if the property into native object is a CanvasPattern
     */
@@ -423,7 +437,7 @@
     /*
 	 Returns true if the property into native object is a CanvasGradient.
 	  
-	 @param object the object on which to define the property.
+	 @param obj the object on which to define the property.
 	 @param key the string name of the property to be defined or modified..
 	 @return true if the property into native object is a CanvasGradient
     */
@@ -433,7 +447,7 @@
     /*
 	 Returns a chart native event from CHART.JS event.
 	  
-	 @param event CHART.JS event
+	 @param obj native event instance
 	 @param key key of java script object
 	 @return a chart native event
     */

@@ -135,6 +135,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add 2 `store` methods to `AbstractPluginOptions` class in order to store the plugin options into a global chart and dataset options.
  * add `setOptions`, `getOptions` and `getOptionsAsList` methods to options, configuration and datasets removing plugin ID as parameter because already set inside the plugin options and factory.
  * add `removeOptions` methods to options, configuration and datasetss in order to remove the plugin options by plugin id.
+ * add `borderDashOffset` property to `DatasetsItemsSelector` plugin options.
 
 ### Fixed Bugs
 
