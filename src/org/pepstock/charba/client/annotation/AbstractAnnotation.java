@@ -525,7 +525,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
 	 */
-	public final void setDoubleclickCallback(DoubleClickCallback dblclickCallback) {
+	public final void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
 		// sets dblclick callback
 		this.dblclickCallback = dblclickCallback;
 		// checks if callback is consistent
