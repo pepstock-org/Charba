@@ -35,7 +35,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	/**
 	 * Default drag, <b>{@value DEFAULT_DRAG}</b>.
 	 */
-	public static final boolean DEFAULT_DRAG = true;
+	public static final boolean DEFAULT_DRAG = false;
 
 	/**
 	 * Default sensitivity, <b>{@value DEFAULT_SENSITIVITY}</b>.

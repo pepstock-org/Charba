@@ -509,10 +509,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
 	 * <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element,
 	 *         otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	public boolean isDestroyOnDetach() {
@@ -520,7 +520,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
 	 * <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set

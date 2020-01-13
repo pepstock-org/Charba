@@ -42,7 +42,7 @@ public final class Drag extends NativeObjectContainer {
 	/**
 	 * Default border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_BORDER_WIDTH = 5;
+	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
 	 * Default animation duration, <b>{@value DEFAULT_ANIMATION_DURATION}</b>.

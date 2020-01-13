@@ -357,7 +357,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
 	 * <code>false</code>.
 	 * 
 	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
@@ -368,7 +368,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
 	 * <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
