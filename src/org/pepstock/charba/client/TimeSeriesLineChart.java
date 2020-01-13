@@ -33,17 +33,19 @@ public class TimeSeriesLineChart extends AbstractChart<TimeSeriesLineDataset> {
 	 * Builds the object.
 	 */
 	public TimeSeriesLineChart() {
-		options = new TimeSeriesLineOptions(this, getDefaultChartOptions());
+		this(ChartType.LINE);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.LINE;
+	protected TimeSeriesLineChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new TimeSeriesLineOptions(this, getDefaultChartOptions());
 	}
 
 	/*

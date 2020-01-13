@@ -34,17 +34,19 @@ public class ScatterChart extends AbstractChart<ScatterDataset> {
 	 * Builds the object.
 	 */
 	public ScatterChart() {
-		options = new ScatterOptions(this, getDefaultChartOptions());
+		this(ChartType.SCATTER);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.SCATTER;
+	protected ScatterChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new ScatterOptions(this, getDefaultChartOptions());
 	}
 
 	/*

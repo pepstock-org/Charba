@@ -32,17 +32,19 @@ public class DoughnutChart extends AbstractChart<DoughnutDataset> {
 	 * Builds the object.
 	 */
 	public DoughnutChart() {
-		options = new DoughnutOptions(this, getDefaultChartOptions());
+		this(ChartType.DOUGHNUT);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.DOUGHNUT;
+	protected DoughnutChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new DoughnutOptions(this, getDefaultChartOptions());
 	}
 
 	/*

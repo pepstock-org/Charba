@@ -33,18 +33,19 @@ public class BarChart extends AbstractChart<BarDataset> {
 	 * Builds the object.
 	 */
 	public BarChart() {
+		this(ChartType.BAR);
+	}
+	
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
+	 */
+	protected BarChart(Type extendedType) {
+		super(extendedType);
 		// creates the options
 		options = new BarOptions(this, getDefaultChartOptions());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
-	 */
-	@Override
-	public Type getType() {
-		return ChartType.BAR;
 	}
 
 	/*

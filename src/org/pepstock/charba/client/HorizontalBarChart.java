@@ -27,16 +27,23 @@ import org.pepstock.charba.client.data.HorizontalBarDataset;
  */
 public class HorizontalBarChart extends BarChart {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.BarChart#getType()
+	/**
+	 * Builds the object.
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.HORIZONTAL_BAR;
+	public HorizontalBarChart() {
+		this(ChartType.HORIZONTAL_BAR);
 	}
 
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
+	 */
+	protected HorizontalBarChart(Type extendedType) {
+		super(extendedType);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

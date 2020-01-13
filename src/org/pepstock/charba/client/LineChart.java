@@ -34,17 +34,19 @@ public class LineChart extends AbstractChart<LineDataset> {
 	 * Builds the object.
 	 */
 	public LineChart() {
-		options = new LineOptions(this, getDefaultChartOptions());
+		this(ChartType.LINE);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.LINE;
+	protected LineChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new LineOptions(this, getDefaultChartOptions());
 	}
 
 	/*

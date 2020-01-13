@@ -34,17 +34,19 @@ public class PieChart extends AbstractChart<PieDataset> {
 	 * Builds the object.
 	 */
 	public PieChart() {
-		options = new PieOptions(this, getDefaultChartOptions());
+		this(ChartType.PIE);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.PIE;
+	protected PieChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new PieOptions(this, getDefaultChartOptions());
 	}
 
 	/*

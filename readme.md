@@ -136,6 +136,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `setOptions`, `getOptions` and `getOptionsAsList` methods to options, configuration and datasets removing plugin ID as parameter because already set inside the plugin options and factory.
  * add `removeOptions` methods to options, configuration and datasetss in order to remove the plugin options by plugin id.
  * add `borderDashOffset` property to `DatasetsItemsSelector` plugin options.
+ * change `AbstractChart` class adding the chart `Type` as argument of constructor(**breaking change**).
+   * the `getType` method has been set as `final`.
+   * add to all charts implementation new protected constructor in order to extend the existing charts passing the controller type. 
 
 ### Fixed Bugs
 

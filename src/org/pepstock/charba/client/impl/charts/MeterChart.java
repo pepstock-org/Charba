@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
 
 /**
@@ -39,18 +38,9 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	 * Builds the object.
 	 */
 	public MeterChart() {
+		super(CONTROLLER_TYPE);
 		// creates options
 		options = new MeterOptions(this, getDefaultChartOptions());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
-	 */
-	@Override
-	public Type getType() {
-		return CONTROLLER_TYPE;
 	}
 
 	/*

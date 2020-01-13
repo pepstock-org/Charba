@@ -70,7 +70,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
-
+	// stores the type of chart
+	private final Type type;
 	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
 	// list of all handle registration when
@@ -100,8 +101,14 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
 	 * It sets also some default behaviors (width in percentage) for resizing
+	 * 
+	 * @param type the type of chart
 	 */
-	public AbstractChart() {
+	public AbstractChart(Type type) {
+		// checks if type is consistent
+		Type.checkIfValid(type);
+		// stores type
+		this.type = type;
 		// creates DIV
 		getElement().setId(id);
 		// sets relative position
@@ -163,6 +170,14 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return a new dataset related to chart type.
 	 */
 	public abstract D newDataset();
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.IsChart#getType()
+	 */
+	@Override
+	public final Type getType() {
+		return type;
+	}
 
 	/**
 	 * Returns the native object related to CHART.JS implementation.

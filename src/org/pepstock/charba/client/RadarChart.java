@@ -33,17 +33,19 @@ public class RadarChart extends AbstractChart<RadarDataset> {
 	 * Builds the object.
 	 */
 	public RadarChart() {
-		options = new RadarOptions(this, getDefaultChartOptions());
+		this(ChartType.RADAR);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.RADAR;
+	protected RadarChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new RadarOptions(this, getDefaultChartOptions());
 	}
 
 	/*

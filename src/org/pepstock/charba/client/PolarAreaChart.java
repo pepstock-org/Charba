@@ -35,17 +35,19 @@ public class PolarAreaChart extends AbstractChart<PolarAreaDataset> {
 	 * Builds the object.
 	 */
 	public PolarAreaChart() {
-		options = new PolarAreaOptions(this, getDefaultChartOptions());
+		this(ChartType.POLAR_AREA);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#getType()
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 *  
+	 * @param extendedType type of chart
 	 */
-	@Override
-	public Type getType() {
-		return ChartType.POLAR_AREA;
+	protected PolarAreaChart(Type extendedType) {
+		super(extendedType);
+		// creates the options
+		options = new PolarAreaOptions(this, getDefaultChartOptions());
 	}
 
 	/*
