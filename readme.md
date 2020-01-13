@@ -154,6 +154,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move `alpha`, `toRGBA`, `toRGB`, `toHex`, `toHSLA`, `toHSL`, `toRGBs`, `brighter`, `brighter`, `darker` and `darker` methods as default methods into `IsColor` interface in order that whoever will implement the interface could provide only red, green, blue and alpha values.
  * move some methods of common `JsHelper` into a dedicated and protected helper in order to hide those methods.
  * add compile dependency with last version [2.0.0](https://github.com/google/jsinterop-annotations/releases/tag/2.0.0) of [JSINTEROP](https://github.com/google/jsinterop-annotations) annotations.
+ * add compile dependency with last version v20200101 of [Google Closure Compiler](https://developers.google.com/closure/compiler/). 
  * add 2 `load` methods to `Merger` in order to load default and whole options chart instance, removing the previous `get`.
  	* reduce the accessibility to methods by an `OptionsEnvelop` object
  * add `getAllIds`	method to plugin options and configuration classes in order to get the list of configiured plugin ids.
