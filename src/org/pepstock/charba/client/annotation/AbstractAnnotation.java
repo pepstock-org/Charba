@@ -211,7 +211,6 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 		contextmenuCallbackProxy.setCallback(this::onContextmenu);
 		// sets proxy handler to callback proxy to invoke the WHEEL function
 		wheelCallbackProxy.setCallback(this::onWheel);
-		// stores all callbacks into object
 	}
 
 	/**
