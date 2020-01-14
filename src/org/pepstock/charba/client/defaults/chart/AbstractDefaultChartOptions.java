@@ -142,6 +142,16 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultLineHeight()
+	 */
+	@Override
+	public final double getDefaultLineHeight() {
+		return options.getDefaultLineHeight();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLines()
 	 */
 	@Override

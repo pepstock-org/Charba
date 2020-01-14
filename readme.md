@@ -113,6 +113,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * full implementation of configuration for ZOOM plugin.
  * import ANNOTATION CHART.JS plugin, at `master` commit id [7037eea71314613a8af83d2298241841cbc34c4f](https://github.com/chartjs/chartjs-plugin-annotation).
    * full implementation of configuration for ANNOTATION plugin.
+ * add `defaultLineHeight` property to options.  
  * move `drawOnAttach` and `destroyOnDetach` chart property into options in order they can be set globally.
  * add the following hover styles (set by callback as well) on lining datasets, from CHART.JS version 2.9.3 (see [PR here](https://github.com/chartjs/Chart.js/pull/6527) and its limitations):
    * `hoverBackgroundColor`

@@ -76,6 +76,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		DEFAULT_FONT_FAMILY("defaultFontFamily"),
 		DEFAULT_FONT_SIZE("defaultFontSize"),
 		DEFAULT_FONT_STYLE("defaultFontStyle"),
+		DEFAULT_LINE_HEIGHT("defaultLineHeight"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
 		SHOW_LINES("showLines"),
 		SPAN_GAPS("spanGaps"),
@@ -509,6 +510,24 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public String getDefaultFontFamily() {
 		return getValue(Property.DEFAULT_FONT_FAMILY, getDefaultValues().getDefaultFontFamily());
+	}
+	
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setDefaultLineHeight(double lineHeight) {
+		setValue(Property.DEFAULT_LINE_HEIGHT, lineHeight);
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getDefaultLineHeight() {
+		return getValue(Property.DEFAULT_LINE_HEIGHT, getDefaultValues().getDefaultLineHeight());
 	}
 
 	/**

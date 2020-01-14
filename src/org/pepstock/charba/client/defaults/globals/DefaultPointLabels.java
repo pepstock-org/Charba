@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 
 /**
@@ -25,8 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 public final class DefaultPointLabels extends AbstractDefaultFontItem implements IsDefaultPointLabels {
 
 	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	/*
 	 * (non-Javadoc)
@@ -45,7 +44,7 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 	 */
 	@Override
 	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
+		return Defaults.get().getGlobal().getDefaultLineHeight();
 	}
 
 }

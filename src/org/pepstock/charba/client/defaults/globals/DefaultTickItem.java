@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultBaseTick;
 
 /**
@@ -24,8 +25,6 @@ import org.pepstock.charba.client.defaults.IsDefaultBaseTick;
  */
 public class DefaultTickItem extends AbstractDefaultFontItem implements IsDefaultBaseTick {
 
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -33,7 +32,7 @@ public class DefaultTickItem extends AbstractDefaultFontItem implements IsDefaul
 	 */
 	@Override
 	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
+		return Defaults.get().getGlobal().getDefaultLineHeight();
 	}
 
 }

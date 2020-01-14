@@ -117,6 +117,13 @@ public interface IsDefaultOptions {
 	 * @return the pixel ratio.
 	 */
 	double getDevicePixelRatio();
+	
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	double getDefaultLineHeight();
 
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
@@ -214,5 +221,5 @@ public interface IsDefaultOptions {
 	 *         otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	boolean isDestroyOnDetach();
-
+	
 }

@@ -40,6 +40,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final String DEFAULT_FONT_COLOR = "#666";
 
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+	
+	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	private static final boolean DEFAULT_SHOW_LINES = true;
 
@@ -162,6 +164,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public String getDefaultFontFamily() {
 		return DEFAULT_FONT_FAMILY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultLineHeight()
+	 */
+	@Override
+	public double getDefaultLineHeight() {
+		return DEFAULT_LINE_HEIGHT;
 	}
 
 	/*

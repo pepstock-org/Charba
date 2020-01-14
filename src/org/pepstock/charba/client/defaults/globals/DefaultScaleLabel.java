@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
@@ -29,8 +30,6 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	private static final boolean DEFAULT_DISPLAY = false;
 
 	private static final String DEFAULT_LABEL_STRING = Constants.EMPTY_STRING;
-
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	private final DefaultScaleLabelPadding padding = new DefaultScaleLabelPadding();
 
@@ -71,7 +70,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	 */
 	@Override
 	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
+		return Defaults.get().getGlobal().getDefaultLineHeight();
 	}
 
 }

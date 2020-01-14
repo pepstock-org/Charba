@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
@@ -29,8 +30,6 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	private static final int DEFAULT_PADDING = 10;
 
 	private static final boolean DEFAULT_FULL_WIDTH = true;
-
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
@@ -81,7 +80,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	 */
 	@Override
 	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
+		return Defaults.get().getGlobal().getDefaultLineHeight();
 	}
 
 	/*
