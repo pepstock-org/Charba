@@ -42,6 +42,7 @@ public final class Pan extends AbstractConfigurationItem {
 	enum Property implements Key
 	{
 		THRESHOLD("threshold"),
+		SPEED("speed"),
 		ON_PAN("onPan"),
 		ON_PAN_COMPLETE("onPanComplete");
 
@@ -113,21 +114,39 @@ public final class Pan extends AbstractConfigurationItem {
 	}
 
 	/**
-	 * Sets the threshold of element.
+	 * Sets the minimal pan distance required before actually applying pan.
 	 * 
-	 * @param threshold the threshold of element
+	 * @param threshold the minimal pan distance required before actually applying pan
 	 */
 	public void setThreshold(double threshold) {
 		setValue(Pan.Property.THRESHOLD, threshold);
 	}
 
 	/**
-	 * Returns the threshold of element.
+	 * Returns the minimal pan distance required before actually applying pan.
 	 * 
-	 * @return the threshold of element
+	 * @return the minimal pan distance required before actually applying pan
 	 */
 	public double getThreshold() {
 		return getValue(Pan.Property.THRESHOLD, defaultsOptions.getThreshold());
+	}
+
+	/**
+	 * Sets the threshold factor before applying pan, on category scale.
+	 * 
+	 * @param speed the threshold factor before applying pan, on category scale
+	 */
+	public final void setSpeed(double speed) {
+		setValue(Property.SPEED, speed);
+	}
+
+	/**
+	 * Returns the threshold factor before applying pan, on category scale.
+	 * 
+	 * @return the threshold factor before applying pan, on category scale
+	 */
+	public final double getSpeed() {
+		return getValue(Property.SPEED, defaultsOptions.getSpeed());
 	}
 
 }

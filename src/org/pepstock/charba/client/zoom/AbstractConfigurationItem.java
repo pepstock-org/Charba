@@ -99,8 +99,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		ENABLED("enabled"),
 		MODE("mode"),
 		RANGE_MIN("rangeMin"),
-		RANGE_MAX("rangeMax"),
-		SPEED("speed");
+		RANGE_MAX("rangeMax");
 
 		// name value of property
 		private final String value;
@@ -285,24 +284,6 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 */
 	public final Range getRangeMax() {
 		return rangeMax;
-	}
-
-	/**
-	 * Sets the speed of element via mouse wheel (percentage of element on a wheel event).
-	 * 
-	 * @param speed the speed of element via mouse wheel
-	 */
-	public final void setSpeed(double speed) {
-		setValue(Property.SPEED, speed);
-	}
-
-	/**
-	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).
-	 * 
-	 * @return the speed of element via mouse wheel
-	 */
-	public final double getSpeed() {
-		return getValue(Property.SPEED, defaultsOptions.getSpeed());
 	}
 
 	/**

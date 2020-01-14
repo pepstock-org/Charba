@@ -38,9 +38,9 @@ final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 	}
 
 	/**
-	 * Returns the sensitivity of element.
+	 * Returns the minimal zoom level before actually applying zoom, on category scale.
 	 * 
-	 * @return the sensitivity of element
+	 * @return the minimal zoom level before actually applying zoom, on category scale
 	 */
 	double getSensitivity() {
 		return getValue(Zoom.Property.SENSITIVITY, Zoom.DEFAULT_SENSITIVITY);
@@ -78,14 +78,13 @@ final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 		return DefaultsDrag.DEFAULTS_INSTANCE;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).
 	 * 
-	 * @see org.pepstock.charba.client.zoom.AbstractDefaultElement#getSpeedAsDefault()
+	 * @return the speed of element via mouse wheel
 	 */
-	@Override
-	double getSpeedAsDefault() {
-		return Zoom.DEFAULT_SPEED;
+	double getSpeed() {
+		return getValue(Property.SPEED, Zoom.DEFAULT_SPEED);
 	}
 
 }

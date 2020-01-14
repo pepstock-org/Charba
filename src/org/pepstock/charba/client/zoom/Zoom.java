@@ -48,6 +48,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	enum Property implements Key
 	{
 		SENSITIVITY("sensitivity"),
+		SPEED("speed"),
 		DRAG("drag"),
 		ON_ZOOM("onZoom"),
 		ON_ZOOM_COMPLETE("onZoomComplete");
@@ -168,20 +169,44 @@ public final class Zoom extends AbstractConfigurationItem {
 		// then returns the default drag object
 		return null;
 	}
+	
+	/**
+	 * Sets the speed of element via mouse wheel (percentage of element on a wheel event).<br>
+	 * Must be a value from 0 and 1.
+	 * 
+	 * @param speed the speed of element via mouse wheel
+	 */
+	public void setSpeed(double speed) {
+		// the speed must be a value between 0 and 1
+		if (speed < 0D || speed > 1D) {
+			throw new IllegalArgumentException("Speed value (" + speed + ") is not within bounds (0D-1D)");
+		}
+		// stores value
+		setValue(Property.SPEED, speed);
+	}
 
 	/**
-	 * Sets the sensitivity of element.
+	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).
 	 * 
-	 * @param sensitivity the sensitivity of element
+	 * @return the speed of element via mouse wheel
+	 */
+	public double getSpeed() {
+		return getValue(Property.SPEED, defaultsOptions.getSpeed());
+	}
+
+	/**
+	 * Sets the minimal zoom level before actually applying zoom, on category scale. 
+	 * 
+	 * @param sensitivity the minimal zoom level before actually applying zoom, on category scale
 	 */
 	public void setSensitivity(double sensitivity) {
 		setValue(Property.SENSITIVITY, sensitivity);
 	}
 
 	/**
-	 * Returns the sensitivity of element.
+	 * Returns the minimal zoom level before actually applying zoom, on category scale.
 	 * 
-	 * @return the sensitivity of element
+	 * @return the minimal zoom level before actually applying zoom, on category scale
 	 */
 	public double getSensitivity() {
 		return getValue(Property.SENSITIVITY, defaultsOptions.getSensitivity());

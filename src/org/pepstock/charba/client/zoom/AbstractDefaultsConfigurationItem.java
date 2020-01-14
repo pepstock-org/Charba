@@ -95,20 +95,4 @@ abstract class AbstractDefaultsConfigurationItem extends NativeObjectContainer {
 		return rangeMax;
 	}
 
-	/**
-	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).
-	 * 
-	 * @return the speed of element via mouse wheel
-	 */
-	final double getSpeed() {
-		return getValue(AbstractConfigurationItem.Property.SPEED, getSpeedAsDefault());
-	}
-
-	/**
-	 * Returns the default speed of element via mouse wheel (percentage of element on a wheel event).
-	 * 
-	 * @return the default speed of element via mouse wheel
-	 */
-	abstract double getSpeedAsDefault();
-
 }

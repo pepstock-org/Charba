@@ -36,22 +36,21 @@ final class DefaultsPan extends AbstractDefaultsConfigurationItem {
 	}
 
 	/**
-	 * Returns the threshold of element.
+	 * Returns the minimal pan distance required before actually applying pan.
 	 * 
-	 * @return the threshold of element
+	 * @return the minimal pan distance required before actually applying pan
 	 */
 	double getThreshold() {
 		return getValue(Pan.Property.THRESHOLD, Pan.DEFAULT_THRESHOLD);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the threshold factor before applying pan, on category scale.
 	 * 
-	 * @see org.pepstock.charba.client.zoom.AbstractDefaultElement#getSpeedAsDefault()
+	 * @return the threshold factor before applying pan, on category scale
 	 */
-	@Override
-	double getSpeedAsDefault() {
-		return Pan.DEFAULT_SPEED;
+	double getSpeed() {
+		return getValue(Pan.Property.SPEED, Pan.DEFAULT_SPEED);
 	}
 
 }
