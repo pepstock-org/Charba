@@ -127,7 +127,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public final void onBeforeConfigure(IsChart chart) {
+	public void onBeforeConfigure(IsChart chart) {
 		// do nothing
 	}
 
@@ -137,7 +137,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public final void onAfterConfigure(IsChart chart) {
+	public void onAfterConfigure(IsChart chart) {
 		// do nothing
 	}
 

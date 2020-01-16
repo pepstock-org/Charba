@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
@@ -65,6 +66,22 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		// creates the options by the native object and the defaults
 		return new AnnotationOptions(DefaultsOptions.DEFAULTS_INSTANCE);
 
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onBeforeConfigure(IsChart chart) {
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart) && chart.getOptions().getPlugins().hasOptions(getPluginId())) {
+			// gets the plugin options from chart options, if there
+			AnnotationOptions options = chart.getOptions().getPlugins().getOptions(getPluginId(), this);
+			// reset id for all annotations
+			options.getAnnotations().forEach(AbstractAnnotation::resetAnnotationId);
+		}
+		// invokes super implementation
+		super.onBeforeConfigure(chart);
 	}
 
 	/**
