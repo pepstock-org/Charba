@@ -86,7 +86,12 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 		ON_CLICK("onClick"),
 		ON_DOUBLE_CLICK("onDblclick"),
 		ON_CONTEXT_MENU("onContextmenu"),
-		ON_WHEEL("onWheel");
+		ON_WHEEL("onWheel"),
+		// internal property to set name instead of id
+		// because the plugin does not reload the options if they have got an id
+		// therefore another property must be set to identify better the annotation and
+		// the id must be reset every reconfiguration
+		CHARBA_NAME("_charbaName");
 
 		// name value of property
 		private final String value;
@@ -214,6 +219,14 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	}
 
 	/**
+	 * Removes the ID property form annotation in order that the options can be reloaded
+	 * by plugin when the chart will be reconfigured, by {@link IsChart#reconfigure()}. 
+	 */
+	void resetAnnotationId() {
+		removeIfExists(Property.ID);
+	}
+	
+	/**
 	 * Returns the type of annotation.
 	 * 
 	 * @return the type of annotation
@@ -223,21 +236,21 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	}
 
 	/**
-	 * Sets the id of annotation.
+	 * Sets the name of annotation.
 	 * 
-	 * @param id the id of annotation
+	 * @param name the name of annotation
 	 */
-	public final void setAnnotationId(String id) {
-		setValue(Property.ID, id);
+	public final void setName(String name) {
+		setValue(Property.CHARBA_NAME, name);
 	}
 
 	/**
-	 * Returns the id of annotation.
+	 * Returns the name of annotation.
 	 * 
-	 * @return the id of annotation
+	 * @return the name of annotation
 	 */
-	public final String getAnnotationId() {
-		return getValue(Property.ID, UndefinedValues.STRING);
+	public final String getName() {
+		return getValue(Property.CHARBA_NAME, UndefinedValues.STRING);
 	}
 
 	/**
