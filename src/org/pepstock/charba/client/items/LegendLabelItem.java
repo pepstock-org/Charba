@@ -40,7 +40,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
+ * This object is created by callbacks and returned to CHART.JS as native object to configure the legend.
  * 
  * @author Andrea "Stock" Stocchero
  *
