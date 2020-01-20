@@ -128,7 +128,7 @@ final class BaseMeterController extends AbstractController {
 			// checks if not empty
 			if (!datasets.isEmpty()) {
 				// gets chart item
-				ChartNode item = chart.getNode();
+				ChartNode item = context.getNode();
 				// gets dataset index 0
 				MeterDataset dataset = (MeterDataset) datasets.get(0);
 				// checks if meter chart
