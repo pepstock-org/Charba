@@ -100,6 +100,16 @@ Continuous integration and quality gate
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.8/charba.fbp) project to looking offline for bugs.
+
+Going to next release
+-------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Development
+
+ * copy the `ZoomPugin.ID` into a private constant into `DatasetsItemsSelector` plugin in order to avoid to add the `Zoom` java script plugin if not used.
+ * remove `Extensions` client bundle moving the text resources of extensions javascripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.  
  
 License
 -------
