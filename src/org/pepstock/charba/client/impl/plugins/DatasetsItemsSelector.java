@@ -31,7 +31,6 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.utils.Utilities;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Cursor;
@@ -39,7 +38,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
- * It works only for line and bar chart instances and if {@link ZoomPlugin} is disable.<br>
+ * It works only for line and bar chart instances and if ZoomPlugin is disable.<br>
  * It will add mouser listeners to canvas.<br>
  * Tooltips will be disable to avoid events conflicts.<br>
  * Overrides also the events which can be caught (only click and touchstart).<br>
@@ -62,6 +61,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	static final DatasetsItemsSelectorDefaultsOptionsFactory DEFAULTS_FACTORY = new DatasetsItemsSelectorDefaultsOptionsFactory();
 	// singleton instance
 	private static final DatasetsItemsSelector INSTANCE = new DatasetsItemsSelector();
+	// It can not use zoom plugin id
+	// to avoid to load zoom and hammer JS if not needed
+	// it must always aligned with value into zoom plugin moduel
+	private static final String ZOOM_PLUIGIN_ID = "zoom";
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
@@ -367,7 +370,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 
 	/**
 	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.<br>
-	 * If {@link ZoomPlugin} is activated, this plugin will be disabled.
+	 * If ZoomPlugin is activated, this plugin will be disabled.
 	 * 
 	 * @param chart chart instance to check
 	 * @return <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported
@@ -378,7 +381,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// if the first check is true...
 		if (mustBeActivated) {
 			// .. is adding an additional check on ZOOM plugin, if enabled
-			mustBeActivated = !chart.getOptions().getPlugins().isEnabled(ZoomPlugin.ID);
+			mustBeActivated = !chart.getOptions().getPlugins().isEnabled(ZOOM_PLUIGIN_ID);
 		}
 		return mustBeActivated;
 	}
