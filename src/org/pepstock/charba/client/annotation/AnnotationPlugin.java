@@ -18,8 +18,11 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
-import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-annotation">ANNOTATION plugin</a> to enable the plugin.<br>
@@ -33,6 +36,28 @@ import org.pepstock.charba.client.resources.ResourcesType;
  *
  */
 public final class AnnotationPlugin {
+	
+	/**
+	 * Client bundle to reference ANNOTATION CHART.JS plugin, wrapped by Charba.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	interface AnnotationClientBundle extends ClientBundle {
+
+		/**
+		 * Static reference to extensions java script source code
+		 */
+		static final AnnotationClientBundle INSTANCE = GWT.create(AnnotationClientBundle.class);
+
+		/**
+		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation
+		 * plugin</a> code.
+		 * 
+		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation plugin</a> code
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-annotation.min.js")
+		TextResource annotationPlugin();
+	}
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -69,7 +94,7 @@ public final class AnnotationPlugin {
 		// Inject Chart.js if not already loaded
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// injects ANNOTATION plugin
-		Injector.ensureInjected(Extensions.INSTANCE.annotationPlugin());
+		Injector.ensureInjected(AnnotationClientBundle.INSTANCE.annotationPlugin());
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}

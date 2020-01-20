@@ -20,9 +20,12 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
@@ -34,6 +37,37 @@ import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFac
  *
  */
 public final class ZoomPlugin {
+	
+	/**
+	 * Client bundle to reference ZOOM CHART.JS plugin, wrapped by Charba.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	interface ZoomClientBundle extends ClientBundle {
+
+		/**
+		 * Static reference to extensions java script source code
+		 */
+		static final ZoomClientBundle INSTANCE = GWT.create(ZoomClientBundle.class);
+
+		/**
+		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a>
+		 * code.
+		 * 
+		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a> code
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH +"chartjs-plugin-zoom.min.js")
+		TextResource zoomPlugin();
+
+		/**
+		 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>
+		 * code.
+		 * 
+		 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH +"hammer.min.js")
+		TextResource hammerLibrary();
+	}
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -70,9 +104,9 @@ public final class ZoomPlugin {
 		// Inject Chart.js if not already loaded
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// injects HAMMER plugin
-		Injector.ensureInjected(Extensions.INSTANCE.hammerLibrary());
+		Injector.ensureInjected(ZoomClientBundle.INSTANCE.hammerLibrary());
 		// injects ZOOM plugin
-		Injector.ensureInjected(Extensions.INSTANCE.zoomPlugin());
+		Injector.ensureInjected(ZoomClientBundle.INSTANCE.zoomPlugin());
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
