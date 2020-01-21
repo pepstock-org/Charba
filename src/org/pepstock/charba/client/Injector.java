@@ -99,7 +99,7 @@ public final class Injector {
 				// sets the script content source
 				container.setInnerText(textResource.getText());
 				// appends to the body
-				Document.get().getBody().appendChild(container);
+				Document.get().getHead().appendChild(container);
 			}
 			ELEMENTS_INJECTED.add(resourceKey);
 		}
