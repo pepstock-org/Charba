@@ -22,8 +22,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.CartesianTimeTick;
 
-import com.google.gwt.core.client.JsDate;
-
 /**
  * The time tick item passed when a tick callback has been set for cartesian time axis, {@link CartesianTimeTick}.<br>
  * This is a wrapper of the CHART.JS item with all needed info.<br>
@@ -78,15 +76,7 @@ public final class TimeTickItem extends ScaleTickItem {
 	 * @return the date of the tick or <code>null</code> if missing.
 	 */
 	public Date getValue() {
-		// gets the value
-		double timeValue = getValue(Property.VALUE, UndefinedValues.DOUBLE);
-		// checks if value is consistent
-		if (Double.isNaN(timeValue)) {
-			// if not, returns null
-			return null;
-		}
-		// gets the value, creating a js date and returning a date
-		return new Date((long) JsDate.create(timeValue).getTime());
+		return getValue(Property.VALUE, (Date) null);
 	}
 
 	/**

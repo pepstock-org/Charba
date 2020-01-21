@@ -109,7 +109,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * copy the `ZoomPugin.ID` into a private constant into `DatasetsItemsSelector` plugin in order to avoid to add the `Zoom` java script plugin if not used.
- * remove `Extensions` client bundle moving the text resources of extensions javascripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.  
+ * remove `Extensions` client bundle moving the text resources of extensions javascripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.
+ * change `Date` storing into native object from `JsDate` to `double`. 
  
 License
 -------

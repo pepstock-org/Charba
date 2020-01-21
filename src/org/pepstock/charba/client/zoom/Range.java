@@ -167,7 +167,7 @@ public final class Range extends NativeObjectContainer {
 	 */
 	public Date getXAsDate() {
 		// checks if the value has been set as date
-		if (ObjectType.OBJECT.equals(getTypeForX())) {
+		if (ObjectType.NUMBER.equals(getTypeForX())) {
 			return getValue(Range.Property.X, defaultsOptions.getXAsDate());
 		}
 		// if here, the value is not a date then returns null
@@ -236,7 +236,7 @@ public final class Range extends NativeObjectContainer {
 	 */
 	public Date getYAsDate() {
 		// checks if the value has been set as date
-		if (ObjectType.OBJECT.equals(getTypeForY())) {
+		if (ObjectType.NUMBER.equals(getTypeForY())) {
 			return getValue(Range.Property.Y, defaultsOptions.getYAsDate());
 		}
 		// if here, the value is not a date then returns null

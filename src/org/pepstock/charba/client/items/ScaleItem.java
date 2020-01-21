@@ -247,15 +247,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. If missing returns is <code>null</code>.
 	 */
 	public final Date getMaxAsDate() {
-		// checks if value is a number and the axis is a time
-		if (ObjectType.NUMBER.equals(type(Property.MAX)) && AxisType.TIME.equals(getType())) {
-			// then returns as double
-			double value = Math.max(getValue(Property.MAX, UndefinedValues.DOUBLE), 0D);
-			// checks if is a NaN
-			if (!Double.isNaN(value)) {
-				// if not, returns a date
-				return new Date((long) value);
-			}
+		// checks if the axis is a time one
+		if (AxisType.TIME.equals(getType())) {
+			// returns a date
+			return getValue(Property.MAX, (Date)null);
 		}
 		// if here is not a number
 		// then returns undefined double
@@ -268,15 +263,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. If missing returns is <code>null</code>.
 	 */
 	public final Date getMinAsDate() {
-		// checks if value is a number and the axis is a time
-		if (ObjectType.NUMBER.equals(type(Property.MIN)) && AxisType.TIME.equals(getType())) {
-			// then returns as double
-			double value = Math.max(getValue(Property.MIN, UndefinedValues.DOUBLE), 0D);
-			// checks if is a NaN
-			if (!Double.isNaN(value)) {
-				// if not, returns a date
-				return new Date((long) value);
-			}
+		// checks if the axis is a time one
+		if (AxisType.TIME.equals(getType())) {
+			// returns a date
+			return getValue(Property.MIN, (Date)null);
 		}
 		// if here is not a number
 		// then returns undefined double

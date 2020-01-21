@@ -20,12 +20,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.JSON;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.ImageElement;
 
 /**
@@ -510,15 +508,21 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property
 	 */
 	protected final Date getValue(Key key, Date defaultValue) {
-		// checks if the property exists
-		if (!has(key)) {
-			// if no, returns the default value
-			return defaultValue;
+		// gets object type of key
+		ObjectType type = type(key);
+		// checks if property type
+		if (ObjectType.NUMBER.equals(type)) {
+			// gets descriptor
+			NativeDoubleDescriptor descriptor = nativeObject.getDoubleProperty(key.value());
+			// checks if value is consistent
+			if (descriptor != null && !Double.isNaN(descriptor.getValue()) && descriptor.getValue() > 0D) {
+				// creates and returns a date
+				return new Date((long) descriptor.getValue());
+			}
 		}
-		// gets descriptor
-		NativeDateDescriptor descriptor = nativeObject.getDateProperty(key.value());
-		// returns value
-		return descriptor == null ? defaultValue : new Date((long) descriptor.getValue().getTime());
+		// if here the value is not consistent for a date
+		// returns default value
+		return defaultValue;
 	}
 
 	/**
@@ -534,12 +538,8 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
-			// checks if the key is consistent
-			// if not, exception
-			Key.checkIfValid(key);
-			// if here, key is consistent
-			// sets value
-			nativeObject.defineDateProperty(key.value(), JsDate.create((double) value.getTime()));
+			// stores date as double
+			setValue(key, value.getTime());
 		}
 	}
 
@@ -1121,7 +1121,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return value of the property or {@link UndefinedValues#STRING} if not exist or not a string
+	 * @return value of the property
 	 */
 	protected final String getValueForMultipleKeyTypes(Key key, String defaultsValue) {
 		// checks if key is consistent
@@ -1131,7 +1131,7 @@ public abstract class NativeObjectContainer {
 		}
 		// the property is not a string
 		// then returns undefined value
-		return UndefinedValues.STRING;
+		return defaultsValue;
 	}
 
 	/**
@@ -1139,7 +1139,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return value of the property or {@link UndefinedValues#DOUBLE} if not exist or not a number
+	 * @return value of the property
 	 */
 	protected final double getValueForMultipleKeyTypes(Key key, double defaultsValue) {
 		// checks if key is consistent
@@ -1149,7 +1149,7 @@ public abstract class NativeObjectContainer {
 		}
 		// the property is not a number
 		// then returns undefined value
-		return UndefinedValues.DOUBLE;
+		return defaultsValue;
 	}
 
 	/**
@@ -1157,17 +1157,19 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object
 	 * @param defaultsValue default value if the value was stored as single key value
-	 * @return value of the property or <code>null</code> if not exist or not a date
+	 * @return value of the property
 	 */
 	protected final Date getValueForMultipleKeyTypes(Key key, Date defaultsValue) {
-		// checks if key is consistent
-		// and if is a object
-		if (Key.isValid(key) && ObjectType.OBJECT.equals(type(key))) {
-			return getValue(key, defaultsValue);
+		// gets date value as number
+		double value = getValueForMultipleKeyTypes(key, Double.NaN);
+		// checks if number value is consistent with a date
+		if (!Double.isNaN(value) &&  value > 0D) {
+			// creates and returns a date
+			return new Date((long)value);
 		}
 		// the property is not a string
 		// then returns undefined value
-		return null;
+		return defaultsValue;
 	}
 
 }

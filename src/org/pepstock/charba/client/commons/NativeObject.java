@@ -19,7 +19,6 @@ import java.util.List;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.ImageElement;
 
 import jsinterop.annotations.JsOverlay;
@@ -177,24 +176,6 @@ public final class NativeObject {
 	void defineStringProperty(String key, String value) {
 		// creates a descriptor
 		NativeStringDescriptor descriptor = new NativeStringDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		defineProperty(this, key, descriptor);
-	}
-
-	/**
-	 * Defines a new property directly on this object, or modifies an existing property.
-	 * 
-	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
-	 */
-	@JsOverlay
-	void defineDateProperty(String key, JsDate value) {
-		// creates a descriptor
-		NativeDateDescriptor descriptor = new NativeDateDescriptor();
 		// sets value
 		descriptor.setValue(value);
 		// sets attributes of descriptor to true
@@ -387,18 +368,6 @@ public final class NativeObject {
 		}
 		// if here, property does not exist
 		return null;
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeDateDescriptor getDateProperty(String key) {
-		return getInternalObjectProperty(key);
 	}
 
 	/**
