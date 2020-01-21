@@ -29,7 +29,7 @@ import com.google.gwt.resources.client.TextResource;
 
 /**
  * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
- * of GWT.<br>
+ * of GWT, into the HEAD.<br>
  * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.<br>
  * It tracks the resources which have been injected using as key their name and class name to avoid that however will inject own
  * resources will use the same name of already injected resources.
@@ -98,7 +98,7 @@ public final class Injector {
 				container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
 				// sets the script content source
 				container.setInnerText(textResource.getText());
-				// appends to the body
+				// appends to the head
 				Document.get().getHead().appendChild(container);
 			}
 			ELEMENTS_INJECTED.add(resourceKey);

@@ -70,6 +70,14 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native ScaleService getScaleService();
+	
+	/**
+	 * Returns the <code>_adapters</code> property by native object.
+	 * 
+	 * @return the <code>_adapters</code> property by native object.
+	 */
+	@JsProperty(name = "_adapters")
+	static native NativeAdapters getAdapters();
 
 	/**
 	 * Builds CHART object at CHART.JS level.<br>

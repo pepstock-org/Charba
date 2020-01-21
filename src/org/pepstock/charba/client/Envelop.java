@@ -15,46 +15,42 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.commons.Merger;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.ConfigurationOptions;
-
 /**
- * This object is a container of chart options, stored as native object container.<br>
- * It can not be instantiated in order that public methods of {@link Merger} or {@link ConfigurationOptions} can be invoked in
- * safe mode.
+ * This object is a container of hidden object.<br>
+ * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
+ * @param <T> type of envelop content.
  */
-public final class OptionsEnvelop {
+public final class Envelop<T> {
 
-	// native instance of chart options
-	private NativeObject nativeOptions = null;
+	// instance of envelop content
+	private T content = null;
 
 	/**
 	 * To avoid any instantiation
 	 */
-	OptionsEnvelop() {
+	Envelop() {
 		// do nothing
 	}
 
 	/**
-	 * Returns the native options of chart.
+	 * Returns the content of envelop.
 	 * 
-	 * @return the native options of chart
+	 * @return the content of envelop
 	 */
-	public NativeObject getNativeOptions() {
-		return nativeOptions;
+	public T getContent() {
+		return content;
 	}
 
 	/**
-	 * Stores the native options into this container.
+	 * Stores the content of envelop.
 	 * 
-	 * @param nativeOptions the native options instance to store
+	 * @param content the content of envelop to store
 	 */
-	public void setNativeOptions(NativeObject nativeOptions) {
-		this.nativeOptions = nativeOptions;
+	public void setContent(T content) {
+		this.content = content;
 	}
 
 }

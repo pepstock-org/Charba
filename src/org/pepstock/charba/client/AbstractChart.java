@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
@@ -138,8 +139,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			canvas = null;
 			preventDisplayHandler = null;
 		}
-		// Inject Chart.js if not already loaded
+		// inject Chart.js if not already loaded
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that date time library has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
+		// to be sure that date time chart.js adapter has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
 		// creates plugins container
 		plugins = new Plugins();
 		// creates defaults options for this chart type
@@ -353,7 +358,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// checks if options are consistent
 		if (getOptions() != null) {
 			// creates an envelop for options
-			OptionsEnvelop envelop = new OptionsEnvelop();
+			Envelop<NativeObject> envelop = new Envelop<>();
 			// load the envelop
 			getOptions().loadOptions(envelop);
 			// creates a chart options with complete configuration of chart

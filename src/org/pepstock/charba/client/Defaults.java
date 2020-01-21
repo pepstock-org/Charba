@@ -80,6 +80,10 @@ public final class Defaults {
 	private Defaults() {
 		// to be sure that chart.js has been injected
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that date time library has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
+		// to be sure that date time chart.js adapter has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
 		// creates global options wrapping the global property of CHART
@@ -190,13 +194,13 @@ public final class Defaults {
 	 */
 	ChartOptions getChartOptions(Type type) {
 		// creates an envelop for options
-		OptionsEnvelop envelop = new OptionsEnvelop();
+		Envelop<NativeObject> envelop = new Envelop<>();
 		// load the envelop
 		Merger.get().load(type, envelop);
 		// returns a default option with all configuration
 		// it uses the default builder and the default scaled options
 		// because chart options is already a merge between global and chart global
-		return new ChartOptions(type, envelop.getNativeOptions(), DefaultsBuilder.get().getScaledOptions());
+		return new ChartOptions(type, envelop.getContent(), DefaultsBuilder.get().getScaledOptions());
 	}
 
 	/**
