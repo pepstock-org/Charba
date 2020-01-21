@@ -19,18 +19,18 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA, with MOMENT as date time library.<br>
- * This resources type will load the CHART.JS module in sync mode, as part of GWT module to be downloaded.<br>
- * It also defines the MOMENT date time library and its CHART.JS adapter.
+ * Client bundle to reference CHART.JS, always needed to CHARBA, with DATE-FNS as date time library.<br>
+ * This resources type will load the CHART.JS module in sync mode, as part of GWT module to be down loaded.<br>
+ * It also defines the DATE-FNS date time library and its CHART.JS adapter.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface EmbeddedResources extends IsEmbeddedResources {
+public interface DatefnsEmbeddedResources extends IsEmbeddedResources {
 
 	/**
 	 * Static reference to resources java script source code.
 	 */
-	public static final EmbeddedResources INSTANCE = GWT.create(EmbeddedResources.class);
+	public static final DatefnsEmbeddedResources INSTANCE = GWT.create(DatefnsEmbeddedResources.class);
 
 	/**
 	 * Contains text representation of native chart.js code.
@@ -41,19 +41,19 @@ public interface EmbeddedResources extends IsEmbeddedResources {
 	TextResource chartJs();
 
 	/**
-	 * Contains text representation of CHART.JS adapter code form MOMENT
+	 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
 	 * 
-	 * @return chart.js date adapter code for MOMENT in sync mode
+	 * @return an empty java script code
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
+	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
 	TextResource datetimeAdapter();
 
 	/**
-	 * Contains text representation of date-time MOMENT java script library code.
+	 * Contains text representation of CHART.JS adapter code form DATE-FNS.
 	 * 
-	 * @return date-time MOMENT java script library code in sync mode
+	 * @return chart.js date adapter code for DATE-FNS
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
+	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
 	TextResource datetimeLibrary();
 
 }

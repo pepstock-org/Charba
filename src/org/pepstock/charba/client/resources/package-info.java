@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains java script resources to inject in order to use Charba.
+ * Contains the fundamental java script resources to inject in order to use Charba.
  * 
  * @author Andrea "Stock" Stocchero
  *

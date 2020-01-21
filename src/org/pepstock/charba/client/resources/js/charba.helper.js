@@ -453,5 +453,4 @@
     */
     CharbaJsItemsHelper.nativeEvent = function(obj, key) {
     	return obj[key];
-    }      
-    
+    }

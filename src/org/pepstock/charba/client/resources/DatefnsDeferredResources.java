@@ -20,19 +20,19 @@ import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA, with MOMENT as date time library.<br>
+ * Client bundle to reference CHART.JS, always needed to CHARBA, with DATE-FNS as date time library.<br>
  * This resources type will load the CHART.JS module in async mode in order to optimize the performance when GWT code splitting
  * is implemented.<br>
- * It also defines the MOMENT date time library and its CHART.JS adapter (always loaded in sync mode).
+ * It also defines the DATE-FNS date time library and its CHART.JS adapter (always loaded in sync mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DeferredResources extends IsDeferredResources {
+public interface DatefnsDeferredResources extends IsDeferredResources {
 
 	/**
 	 * Static reference to resources java script source code.
 	 */
-	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
+	public static final DatefnsDeferredResources INSTANCE = GWT.create(DatefnsDeferredResources.class);
 
 	/**
 	 * Contains text representation of native chart.js code.
@@ -43,19 +43,19 @@ public interface DeferredResources extends IsDeferredResources {
 	ExternalTextResource chartJs();
 
 	/**
-	 * Contains text representation of date-time MOMENT java script library code.
+	 * Contains text representation of CHART.JS adapter code form DATE-FNS
 	 * 
-	 * @return date-time MOMENT java script library code in async mode
+	 * @return chart.js date adapter code for DATE-FNS in async mode
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
+	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
 	ExternalTextResource datetimeLibrary();
 
 	/**
-	 * Contains text representation of CHART.JS adapter code form MOMENT.
+	 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
 	 * 
-	 * @return chart.js date adapter code for MOMENT in sync mode
+	 * @return an empty java script code in sync mode
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
+	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
 	TextResource datetimeAdapter();
 
 }
