@@ -24,11 +24,12 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-import org.pepstock.charba.client.resources.Resources;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
@@ -39,6 +40,45 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
+	
+	/**
+	 * Resource client bundle to inject images for clear selection.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	interface ClearSelectionImages extends ClientBundle {
+		
+		/**
+		 * Static reference to resources java script source code
+		 */
+		static final ClearSelectionImages INSTANCE = GWT.create(ClearSelectionImages.class);
+
+		/**
+		 * Returns a image to use into datasets items selector plugin as clear icon.
+		 * 
+		 * @return a image to use into datasets items selector plugin as clear icon
+		 */
+		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_18dp.png")
+		ImageResource clearSelection18();
+
+		/**
+		 * Returns a image to use into datasets items selector plugin as clear icon.
+		 * 
+		 * @return a image to use into datasets items selector plugin as clear icon
+		 */
+		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_24dp.png")
+		ImageResource clearSelection24();
+
+		/**
+		 * Returns a image to use into datasets items selector plugin as clear icon.
+		 * 
+		 * @return a image to use into datasets items selector plugin as clear icon
+		 */
+		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_36dp.png")
+		ImageResource clearSelection36();
+
+	}
 
 	/**
 	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
@@ -68,7 +108,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default image for clear selection element, , value is {@link Resources#clearSelection18()}}.
 	 */
-	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ResourcesType.getClientBundle().clearSelection18());
+	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
 
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
