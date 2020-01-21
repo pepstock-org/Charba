@@ -40,6 +40,10 @@ final class JsControllerHelper {
 		// some methods are calling CHART.JS for this reason is mandatory
 		// to include also chart.js
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that date time library has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
+		// to be sure that date time chart.js adapter has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
 		// to be sure that CHARBA java script object is injected
 		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
 	}

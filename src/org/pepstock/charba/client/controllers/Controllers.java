@@ -43,6 +43,10 @@ public final class Controllers {
 	private Controllers() {
 		// to be sure that chart.js has been injected
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// to be sure that date time library has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
+		// to be sure that date time chart.js adapter has been injected
+		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
 	}
 
 	/**
