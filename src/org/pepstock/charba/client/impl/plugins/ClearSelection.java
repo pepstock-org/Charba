@@ -106,7 +106,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	public static final int DEFAULT_SPACING = 3;
 
 	/**
-	 * Default image for clear selection element, , value is {@link Resources#clearSelection18()}}.
+	 * Default image for clear selection element, , value is {@link ClearSelectionImages#clearSelection18()}}.
 	 */
 	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
 
