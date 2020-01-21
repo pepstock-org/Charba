@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.OptionsEnvelop;
+import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -291,7 +291,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param envelop the envelop for options as native options
 	 */
-	public final void loadOptions(OptionsEnvelop envelop) {
+	public final void loadOptions(Envelop<NativeObject> envelop) {
 		Merger.get().load(getChart(), getConfiguration(), envelop);
 	}
 

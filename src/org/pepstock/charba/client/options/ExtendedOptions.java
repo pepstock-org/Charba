@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.OptionsEnvelop;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
@@ -52,8 +53,8 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param defaultValues default provider
 	 * @param envelop the envelop for options as native options
 	 */
-	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, OptionsEnvelop envelop) {
-		super(defaultValues, envelop != null ? envelop.getNativeOptions() : null);
+	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, Envelop<NativeObject> envelop) {
+		super(defaultValues, envelop != null ? envelop.getContent() : null);
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
 		// stores chart instance

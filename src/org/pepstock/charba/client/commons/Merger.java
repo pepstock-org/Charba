@@ -24,7 +24,7 @@ import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.OptionsEnvelop;
+import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.enums.AxisType;
@@ -108,7 +108,7 @@ public final class Merger {
 	 * @param options the options as native object container to be merged
 	 * @param envelop the envelop for options as native options
 	 */
-	public void load(IsChart chart, NativeObjectContainer options, OptionsEnvelop envelop) {
+	public void load(IsChart chart, NativeObjectContainer options, Envelop<NativeObject> envelop) {
 		// checks if argument is consistent
 		IsChart.checkIfConsistent(chart);
 		// checks if envelop is consistent
@@ -120,7 +120,7 @@ public final class Merger {
 			// merges the current chart options with the global and chart type ones
 			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
 			// loads whole options into envelop
-			envelop.setNativeOptions(wholeOptions);
+			envelop.setContent(wholeOptions);
 		}
 	}
 
@@ -137,13 +137,13 @@ public final class Merger {
 	 * @param type chart type
 	 * @param envelop the envelop for options as native options
 	 */
-	public void load(Type type, OptionsEnvelop envelop) {
+	public void load(Type type, Envelop<NativeObject> envelop) {
 		// checks if envelop is consistent
 		if (envelop != null) {
 			// gets global and chart type options merged
 			NativeObject defaults = get(type);
 			// loads whole options into envelop
-			envelop.setNativeOptions(defaults);
+			envelop.setContent(defaults);
 		}
 	}
 
