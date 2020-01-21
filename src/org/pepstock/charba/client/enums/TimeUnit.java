@@ -15,72 +15,62 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Controls the data distribution along the scale.<br>
- * About available formats, see <a href="http://momentjs.com/docs/#/displaying/format/">moment.js</a>.
+ * Controls the data distribution along the scale.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public enum TimeUnit implements Key
 {
-
 	/**
 	 * Millisecond time unit
 	 */
-	MILLISECOND("millisecond", "h:mm:ss.SSS a"),
+	MILLISECOND("millisecond"),
 	/**
 	 * Second time unit
 	 */
-	SECOND("second", "h:mm:ss a"),
+	SECOND("second"),
 	/**
 	 * Minute time unit
 	 */
-	MINUTE("minute", "h:mm a"),
+	MINUTE("minute"),
 	/**
 	 * Hour time unit
 	 */
-	HOUR("hour", "hA"),
+	HOUR("hour"),
 	/**
 	 * Day time unit
 	 */
-	DAY("day", "MMM D"),
+	DAY("day"),
 	/**
 	 * Week time unit
 	 */
-	WEEK("week", "ll"),
+	WEEK("week"),
 	/**
 	 * Month time unit
 	 */
-	MONTH("month", "MMM YYYY"),
+	MONTH("month"),
 	/**
 	 * Quarter time unit
 	 */
-	QUARTER("quarter", "[Q]Q - YYYY"),
+	QUARTER("quarter"),
 	/**
 	 * Year time unit
 	 */
-	YEAR("year", "YYYY"),
-	/**
-	 * Unknown
-	 */
-	UNKNOWN("unknown", Constants.EMPTY_STRING);
+	YEAR("year");
 
 	// name value of property
 	private final String value;
-	// default format based on time unit
-	private final String defaultFormat;
 
 	/**
-	 * Creates a time unit with its default format.
+	 * Creates a time unit with its property name to use into options.
 	 * 
-	 * @param format default format based on time unit
+	 * @param value time unit as string
 	 */
-	private TimeUnit(String value, String format) {
+	private TimeUnit(String value) {
 		this.value = value;
-		this.defaultFormat = format;
 	}
 
 	/*
@@ -91,15 +81,6 @@ public enum TimeUnit implements Key
 	@Override
 	public String value() {
 		return value;
-	}
-
-	/**
-	 * returns the default format for the time unit.
-	 * 
-	 * @return the format
-	 */
-	public String getDefaultFormat() {
-		return defaultFormat;
 	}
 
 }

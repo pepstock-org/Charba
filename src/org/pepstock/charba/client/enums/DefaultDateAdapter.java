@@ -18,35 +18,35 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Contains the GLOBAL plugin IDs of the default CHART.JS plugins, provided out of the box.
+ * Contains the default date adapter IDs that can be set in CHART.JS, provided out of the box.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum DefaultPlugin implements Key
+public enum DefaultDateAdapter implements Key
 {
 	/**
-	 * CHART.JS plugin to manage the legend.
+	 * Date adapter ID for <a href="https://momentjs.com/">MOMENT.js</a>.
 	 */
-	LEGEND("legend"),
+	MOMENT("moment"),
 	/**
-	 * CHART.JS plugin to manage color filling on the chart.
+	 * Date adapter ID for <a href="https://moment.github.io/luxon/">Luxon</a>.
 	 */
-	FILLER("filler"),
+	LUXON("luxon"),
 	/**
-	 * CHART.JS plugin to manage the title.
+	 * Date adapter ID for <a href="https://date-fns.org/">Date-fns</a>.
 	 */
-	TITLE("title");
+	DATE_FNS("date-fns");
 
 	// name value of property
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the id value of date adapter.
 	 * 
-	 * @param value value of property name
+	 * @param value the id value of date adapter
 	 */
-	private DefaultPlugin(String value) {
+	private DefaultDateAdapter(String value) {
 		this.value = value;
 	}
 
