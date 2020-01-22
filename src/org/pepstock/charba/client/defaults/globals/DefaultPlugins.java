@@ -72,6 +72,12 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates a empty options
+			return factory.create(null, null);
+		}
+		// if here factory is not consistent
 		return null;
 	}
 
