@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -31,7 +30,7 @@ import com.google.gwt.resources.client.TextResource;
 /**
  * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
  * of GWT, into the HEAD.<br>
- * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.<br>
+ * It enables also to inject other script into web page, necessary when you want to use some Chart.JS extensions.<br>
  * It tracks the resources which have been injected using as key their name and class name to avoid that however will inject own
  * resources will use the same name of already injected resources.
  * 
@@ -40,16 +39,27 @@ import com.google.gwt.resources.client.TextResource;
  */
 public final class Injector {
 
+	// singleton instance created even if is not a singleton
+	// in order to manage a field with the package name of this class
+	// needed to improve the key calculation
+	private static final Injector INSTANCE = new Injector(); 
 	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
+	// package name to use to calculate the key of injected resources
+	private final String charbaPrefixPackageName;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Injector() {
-		// do nothing
+		// gets full class name
+		String fullClassName = getClass().getName();
+		// gets short class name
+		String shortClassname = getClass().getSimpleName();
+		// stores the prefix package name
+		charbaPrefixPackageName = fullClassName.substring(0, fullClassName.indexOf(shortClassname));
 	}
 
 	/**
@@ -108,12 +118,24 @@ public final class Injector {
 
 	/**
 	 * Creates a unique key for every single resource type to be injected.<br>
-	 * The key is: [{@value ResourcesType#JAVASCRIPT_RESOURCES_PATH}]_[resource name].
+	 * The key is [CHARBA_prefix_package_name].[resource name] if the resource is a CHARBA one.<br>
+	 * The key is [resource_class_name]_[resource name] if the resource is not provided by CHARBA.<br>
 	 * 
 	 * @param resource resource instance to to create the key
 	 * @return a unique key for every single resource type
 	 */
 	private static final String createKey(ResourcePrototype resource) {
-		return ResourcesType.JAVASCRIPT_RESOURCES_PATH + Constants.UNDERSCORE + resource.getName();
+		// gets the full class name of resource
+		String fullResourceClassName = resource.getClass().getName();
+		// checks if the resource name is a CHARBA one
+		// using the prefix package name
+		if (fullResourceClassName.startsWith(INSTANCE.charbaPrefixPackageName)) {
+			// CHARBA resource
+			return INSTANCE.charbaPrefixPackageName + resource.getName();	
+		} else {
+			// not CHARBA resource
+			return fullResourceClassName + Constants.UNDERSCORE + resource.getName();	
+		}
+		
 	}
 }
