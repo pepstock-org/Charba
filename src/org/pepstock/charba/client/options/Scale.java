@@ -57,6 +57,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	private final PointLabels pointLabels;
 
 	private final Time time;
+	
+	private final Adapters adapters;
 
 	/**
 	 * Name of properties of native object.
@@ -69,6 +71,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		ANGLE_LINES("angleLines"),
 		POINT_LABELS("pointLabels"),
 		TIME("time"),
+		ADAPTERS("adapters"),
 		ID("id"),
 		TYPE("type"),
 		DISPLAY("display"),
@@ -142,6 +145,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		scaleLabel = new ScaleLabel(this, Property.SCALE_LABEL, getDefaultValues().getScaleLabel(), getValue(Property.SCALE_LABEL));
 		ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
 		time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
+		adapters = new Adapters(this, Property.ADAPTERS, getValue(Property.ADAPTERS));
 	}
 
 	/**
@@ -198,6 +202,15 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		return time;
 	}
 
+	/**
+	 * Returns the adapters element.
+	 * 
+	 * @return the adapters
+	 */
+	public final Adapters getAdapters() {
+		return adapters;
+	}
+	
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.

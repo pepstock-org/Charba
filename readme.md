@@ -106,11 +106,17 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Features
+
+ * add `adapters.date` property into scale options and configuration in order to configure date time adapters.
+  
 ### Development
 
  * copy the `ZoomPugin.ID` into a private constant into `DatasetsItemsSelector` plugin in order to avoid to add the `Zoom` java script plugin if not used.
- * remove `Extensions` client bundle moving the text resources of extensions javascripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.
- * change `Date` storing into native object from `JsDate` to `double`. 
+ * remove `Extensions` client bundle moving the text resources of extensions java scripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.
+ * change `Date` storing into native object from `JsDate` to `double`.
+ * change name to `OptionsEnvelop` class into `Envelop` because it can contain a generic object.
+ * change from BODY to HEAD element where the resources will be injected.
  
 License
 -------

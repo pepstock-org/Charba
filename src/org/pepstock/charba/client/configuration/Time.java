@@ -28,9 +28,9 @@ public class Time extends AxisContainer {
 	private final DisplayFormats displayFormats;
 
 	/**
-	 * Builds the object storing the axis which this grid lines belongs to.
+	 * Builds the object storing the axis which this time belongs to.
 	 * 
-	 * @param axis axis which this grid lines belongs to.
+	 * @param axis axis which this this belongs to.
 	 */
 	Time(Axis axis) {
 		super(axis);
