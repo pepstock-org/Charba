@@ -30,7 +30,7 @@ abstract class AbstractDefaultPadding implements IsDefaultPadding {
 	/**
 	 * Creates the object with default padding.
 	 * 
-	 * @param the default padding
+	 * @param padding the default padding
 	 */
 	AbstractDefaultPadding(int padding) {
 		this.padding = padding;

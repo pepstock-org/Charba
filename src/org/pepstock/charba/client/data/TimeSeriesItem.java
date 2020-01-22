@@ -60,7 +60,7 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 	/**
 	 * Internal constructor which is used when time series items are requested.
 	 * 
-	 * @param dataPoint data point which is wrapped
+	 * @param nativeObject native object that this class is wrapping
 	 */
 	TimeSeriesItem(NativeObject nativeObject) {
 		super(nativeObject);

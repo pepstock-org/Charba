@@ -36,8 +36,8 @@ public final class ScaleLabelPadding extends AbstractPadding<ScaleLabel> {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabelPadding(ScaleLabel scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject delegated) {
-		super(scaleLabel, childKey, defaultValues, delegated);
+	ScaleLabelPadding(ScaleLabel scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
+		super(scaleLabel, childKey, defaultValues, nativeObject);
 	}
 
 }

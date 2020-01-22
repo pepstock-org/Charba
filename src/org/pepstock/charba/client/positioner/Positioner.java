@@ -60,7 +60,7 @@ public final class Positioner {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param datasetItems dataset elements of tooltips.
-		 * @param eventPosition point on the canvas where the event occurred.
+		 * @param eventPoint point on the canvas where the event occurred.
 		 * @return point to show the tooltip
 		 */
 		Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint);
@@ -169,7 +169,7 @@ public final class Positioner {
 	 * 
 	 * @param context context value of <code>this</code> to the execution context of function.
 	 * @param datasetItems dataset elements of tooltips.
-	 * @param eventPosition point on the canvas where the event occurred.
+	 * @param eventPoint point on the canvas where the event occurred.
 	 * @return point to show the tooltip
 	 */
 	private Point onToolipPosition(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {

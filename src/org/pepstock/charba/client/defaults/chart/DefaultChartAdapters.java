@@ -32,7 +32,7 @@ public final class DefaultChartAdapters implements IsDefaultAdapters {
 	/**
 	 * Creates the object by time option element instance.
 	 * 
-	 * @param time time option element instance.
+	 * @param adapters adapters option element instance.
 	 */
 	DefaultChartAdapters(Adapters adapters) {
 		this.adapters = adapters;

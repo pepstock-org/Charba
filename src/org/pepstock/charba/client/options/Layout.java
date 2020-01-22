@@ -69,10 +69,10 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Layout(Options options, Key childKey, IsDefaultLayout defaultvalues, NativeObject nativeObject) {
-		super(options, childKey, defaultvalues, nativeObject);
+	Layout(Options options, Key childKey, IsDefaultLayout defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
-		padding = new Padding(this, Property.PADDING, defaultvalues.getPadding(), getValue(Property.PADDING));
+		padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING));
 	}
 
 	/**

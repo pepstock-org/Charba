@@ -289,7 +289,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Initializes the controller.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param datasetIndex dataset index
 	 */
 	void onInitialize(ControllerContext context, IsChart chart, int datasetIndex) {
@@ -303,7 +303,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 */
 	void onAddElements(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
@@ -316,7 +316,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Create a single element for the data at the given index and reset its state.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param index dataset index
 	 */
 	void onAddElementAndReset(ControllerContext context, IsChart chart, int index) {
@@ -330,7 +330,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Draw the representation of the dataset.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
 	void onDraw(ControllerContext context, IsChart chart, double ease) {
@@ -344,7 +344,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Remove hover styling from the given element.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param object element to be removed.
 	 */
 	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
@@ -358,7 +358,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Add hover styling to the given element.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param object element to be set.
 	 */
 	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
@@ -372,7 +372,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Update the elements in response to new data.
 	 * 
 	 * @param context context of controller
-	 * @param chartId chartId chart id.
+	 * @param chart chart chart instance
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
 	void onUpdate(ControllerContext context, IsChart chart, boolean reset) {

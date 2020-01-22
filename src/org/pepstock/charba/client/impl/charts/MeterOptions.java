@@ -296,7 +296,7 @@ public class MeterOptions extends AbstractPieOptions {
 		/**
 		 * Creates a legend object wrapping an existing one.
 		 * 
-		 * @param wrappedLegend legend instance to wrap
+		 * @param delegated legend instance to wrap
 		 */
 		LegendWrapper(Legend delegated) {
 			super(delegated);

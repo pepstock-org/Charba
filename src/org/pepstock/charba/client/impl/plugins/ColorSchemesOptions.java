@@ -125,7 +125,8 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	/**
 	 * Builds the object using a native object.
 	 * 
-	 * @param native object which contains the properties
+	 * @param nativeObject native object which contains the properties
+	 * @param defaultsOptions plugin default options
 	 */
 	ColorSchemesOptions(NativeObject nativeObject, ColorSchemesDefaultsOptions defaultsOptions) {
 		super(ColorSchemes.ID, nativeObject);

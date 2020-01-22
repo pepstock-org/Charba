@@ -116,7 +116,7 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 	 * Manages the colors for HOVING FLEX datasets.
 	 * 
 	 * @param hovingFlexDataset hoving flex dataset instance
-	 * @param iteme legend item to change applying new colors
+	 * @param item legend item to change applying new colors
 	 */
 	private void manageHovingFlexDataset(HovingFlexDataset hovingFlexDataset, LegendLabelItem item) {
 		// gets background colors, border colors
@@ -144,7 +144,7 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 	 * Manages the colors for LINING datasets.
 	 * 
 	 * @param liningDataset lining dataset instance
-	 * @param iteme legend item to change applying new colors
+	 * @param item legend item to change applying new colors
 	 */
 	private void manageLiningDataset(LiningDataset liningDataset, LegendLabelItem item) {
 		// sets background colors

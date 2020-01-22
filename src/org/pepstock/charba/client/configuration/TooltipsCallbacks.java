@@ -202,7 +202,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
 	 * @param chart chart instance
-	 * @param options root options element.
+	 * @param configuration root options element.
 	 */
 	TooltipsCallbacks(IsChart chart, ExtendedOptions configuration) {
 		super(chart, configuration);

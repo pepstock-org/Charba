@@ -37,7 +37,7 @@ final class NativeHelpers {
 	 * 
 	 * @param target the target object in which all sources are merged into.
 	 * @param source object to merge into target.
-	 * @returns the target object.
+	 * @return the target object
 	 */
 	@JsMethod
 	native NativeObject mergeIf(NativeObject target, NativeObject source);
@@ -46,9 +46,9 @@ final class NativeHelpers {
 	 * Returns a deep copy of source without keeping references on objects and arrays.
 	 * 
 	 * @param source the value to clone.
-	 * @returns a clone of source object
+	 * @return a clone of source object
 	 */
 	@JsMethod
-	native NativeObject clone(NativeObject target);
+	native NativeObject clone(NativeObject source);
 
 }

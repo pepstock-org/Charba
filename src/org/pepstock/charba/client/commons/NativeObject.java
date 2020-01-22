@@ -46,6 +46,7 @@ public final class NativeObject {
 	 * @param source the object on which to define the property.
 	 * @param key the name of the property to be defined or modified.
 	 * @param descriptor the descriptor for the property being defined or modified.
+	 * @param <T> type of descriptor set value
 	 */
 	static native <T extends NativeAbstractDescriptor> void defineProperty(NativeObject source, String key, T descriptor);
 
@@ -55,6 +56,7 @@ public final class NativeObject {
 	 * 
 	 * @param source the object in which to look for the property.
 	 * @param key the name of the property whose description is to be retrieved.
+	 * @param <T> type of descriptor result value
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static native <T extends NativeAbstractDescriptor> T getOwnPropertyDescriptor(NativeObject source, String key);
@@ -78,7 +80,6 @@ public final class NativeObject {
 	/**
 	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.
 	 * 
-	 * @param source the object of which the enumerable's own properties are to be returned.
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay
@@ -116,7 +117,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineBooleanProperty(String key, boolean value) {
@@ -134,7 +135,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineIntProperty(String key, int value) {
@@ -152,7 +153,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineDoubleProperty(String key, double value) {
@@ -170,7 +171,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineStringProperty(String key, String value) {
@@ -188,7 +189,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineImageProperty(String key, ImageElement value) {
@@ -206,7 +207,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void definePatternProperty(String key, CanvasPattern value) {
@@ -224,7 +225,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineGradientProperty(String key, CanvasGradient value) {
@@ -242,7 +243,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineCallbackProperty(String key, CallbackProxy.Proxy value) {
@@ -260,7 +261,7 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	void defineObjectProperty(String key, NativeObject value) {
@@ -278,7 +279,8 @@ public final class NativeObject {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
+	 * @param <T> type of array to define
 	 */
 	@JsOverlay
 	<T extends Array> void defineArrayProperty(String key, T value) {
@@ -339,6 +341,7 @@ public final class NativeObject {
 	 * prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param <T> type of descriptor to use
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
@@ -422,7 +425,8 @@ public final class NativeObject {
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.
 	 * 
-	 * @param key the name of the property to test.
+	 * @param key the name of the property to test
+	 * @param <T> type of descriptor to use
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
@@ -441,6 +445,7 @@ public final class NativeObject {
 	 * prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param <T> type of array to use
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay

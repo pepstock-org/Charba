@@ -360,7 +360,7 @@ public final class Chart {
 	/**
 	 * Sets new options node, as native object, for updating a existing chart.
 	 * 
-	 * @param new options node.
+	 * @param newOptions options node.
 	 */
 	@JsProperty
 	native void setOptions(NativeObject newOptions);

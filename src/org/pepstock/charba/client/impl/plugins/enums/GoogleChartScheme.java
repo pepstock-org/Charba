@@ -227,10 +227,10 @@ public enum GoogleChartScheme implements IsEnumeratedScheme
 	 * 
 	 * @param hexColors list of colors in HEX format
 	 */
-	private GoogleChartScheme(IsColor... gwtColors) {
+	private GoogleChartScheme(IsColor... hexColors) {
 		scheme = new EnumeratedScheme(CATEGORY, name());
 		// adds them into the list
-		scheme.addAll(Arrays.asList(gwtColors));
+		scheme.addAll(Arrays.asList(hexColors));
 	}
 
 	/*

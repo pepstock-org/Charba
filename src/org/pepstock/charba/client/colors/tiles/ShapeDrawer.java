@@ -56,7 +56,7 @@ public abstract class ShapeDrawer {
 	/**
 	 * Creates a tile based on arguments passed. This is the entry point of every drawer.
 	 * 
-	 * @param canvas canvas where the drawer must design the shape
+	 * @param outerCanvas canvas where the drawer must design the shape
 	 * @param backgroundColor background of tile
 	 * @param shapeColor color of shape
 	 * @param size the size of tile, which is a square

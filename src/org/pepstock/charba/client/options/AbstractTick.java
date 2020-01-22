@@ -39,8 +39,8 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractTick(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
-		super(ticks, childKey, defaultValues, nativeObject);
+	AbstractTick(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
+		super(parent, childKey, defaultValues, nativeObject);
 	}
 
 	/*

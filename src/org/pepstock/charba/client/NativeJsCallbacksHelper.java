@@ -81,6 +81,6 @@ final class NativeJsCallbacksHelper {
 	 * @param event native event from user interface
 	 * @param items array of datasets native objects
 	 */
-	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeEvent event, ArrayObject item);
+	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeEvent event, ArrayObject items);
 
 }

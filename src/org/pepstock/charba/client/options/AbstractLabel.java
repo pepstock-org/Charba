@@ -73,8 +73,8 @@ abstract class AbstractLabel<P extends AbstractModel<?, ?>, D extends IsDefaultF
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractLabel(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
-		super(ticks, childKey, defaultValues, nativeObject);
+	AbstractLabel(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
+		super(parent, childKey, defaultValues, nativeObject);
 		this.fonter = new Fonter(getNativeObject(), this, getDefaultValues());
 	}
 

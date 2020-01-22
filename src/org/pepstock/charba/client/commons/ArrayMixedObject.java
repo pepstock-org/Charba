@@ -141,7 +141,7 @@ public final class ArrayMixedObject extends Array {
 	 * any) and any subsequent elements to the right (adds one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
-	 * @param value element to be inserted
+	 * @param item element to be inserted
 	 */
 	@JsOverlay
 	void insertAt(int index, Object item) {
@@ -193,7 +193,7 @@ public final class ArrayMixedObject extends Array {
 	 * implied by the added value.
 	 * 
 	 * @param index the index to be set
-	 * @param value the value to be stored
+	 * @param item the value to be stored
 	 */
 	@JsOverlay
 	void set(int index, Object item) {

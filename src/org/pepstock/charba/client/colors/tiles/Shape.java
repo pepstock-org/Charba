@@ -141,7 +141,7 @@ public enum Shape implements IsShape
 	/**
 	 * Creates a shaper with own drawer.
 	 * 
-	 * @param the shape drawer instance
+	 * @param drawer the shape drawer instance
 	 */
 	private Shape(ShapeDrawer drawer) {
 		this.drawer = drawer;

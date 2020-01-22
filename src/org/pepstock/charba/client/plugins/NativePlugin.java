@@ -176,11 +176,11 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the
-	 * datasets update is cancelled until another 'update' is triggered.
+	 * Called before updating the 'chart' dataset at the given 'args.index'.<br>
+	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
@@ -194,7 +194,7 @@ final class NativePlugin {
 	 * the datasets update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 */
 	@JsMethod
@@ -286,8 +286,7 @@ final class NativePlugin {
 	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
@@ -301,8 +300,7 @@ final class NativePlugin {
 	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 */
 	@JsMethod
@@ -315,8 +313,7 @@ final class NativePlugin {
 	 * another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param tooltip The tooltip instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
@@ -330,8 +327,7 @@ final class NativePlugin {
 	 * cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param tooltip The tooltip instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 */
 	@JsMethod
@@ -343,7 +339,7 @@ final class NativePlugin {
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
 	 * @param chart The chart instance.
-	 * @param event The event object.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to discard the event.
 	 */
@@ -357,7 +353,7 @@ final class NativePlugin {
 	 * discarded.
 	 * 
 	 * @param chart The chart instance.
-	 * @param event The event object.
+	 * @param item native item instance.
 	 * @param options plugin options set by user into chart options.
 	 */
 	@JsMethod

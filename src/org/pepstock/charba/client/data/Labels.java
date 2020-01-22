@@ -38,6 +38,9 @@ public final class Labels {
 
 	/**
 	 * To avoid any instantiations
+	 * 
+	 * @param array original array of objects.<br>
+	 *            If <code>null</code>, an empty array is created
 	 */
 	private Labels(ArrayMixedObject array) {
 		this.array = array != null ? array : new ArrayMixedObject();

@@ -72,8 +72,8 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject delegated) {
-		super(scale, childKey, defaultValues, delegated);
+	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
 	}

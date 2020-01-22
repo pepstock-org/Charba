@@ -63,7 +63,7 @@ public final class NativePlugins {
 	/**
 	 * Returns the number of registered plugins
 	 * 
-	 * @returns amount of registered plugins
+	 * @return amount of registered plugins
 	 */
 	@JsMethod
 	native int count();
@@ -71,7 +71,7 @@ public final class NativePlugins {
 	/**
 	 * Returns all registered plugin instances.
 	 * 
-	 * @returns array of plugin objects.
+	 * @return array of plugin objects.
 	 */
 	@JsMethod
 	native ArrayObject getAll();

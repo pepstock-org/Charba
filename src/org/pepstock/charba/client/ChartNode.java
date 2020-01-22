@@ -53,7 +53,6 @@ public final class ChartNode {
 	/**
 	 * Creates the object wrapping a CHART instance.
 	 *
-	 * @param type chart or controller type
 	 * @param chart CHART.JS CHART instance
 	 */
 	public ChartNode(Chart chart) {

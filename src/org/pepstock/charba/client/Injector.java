@@ -96,6 +96,7 @@ public final class Injector {
 	 * Injects a script resource if not injected yet.
 	 * 
 	 * @param resource script resource
+	 * @param container HTML element which will contains the text resource
 	 */
 	private static void ensureInjected(ResourcePrototype resource, Element container) {
 		// creates a unique key for the resource

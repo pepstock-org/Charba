@@ -48,9 +48,10 @@ public enum Fill implements IsFill
 	private final String value;
 
 	/**
-	 * Creates the predefined fillings by own mode, always {@link FillingMode#predefined}.
+	 * Creates the predefined fillings by own mode, always {@link FillingMode#PREDEFINED}.
 	 * 
-	 * @param the predefined fillings by own mode, always {@link FillingMode#predefined}.
+	 * @param value value to use inside the native object as name of property
+	 * @param mode the predefined fillings by own mode, always {@link FillingMode#PREDEFINED}.
 	 */
 	private Fill(String value, FillingMode mode) {
 		this.value = value;

@@ -286,10 +286,10 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 	 * 
 	 * @param hexColors list of colors in HEX format
 	 */
-	private GwtMaterialScheme(IsColor... gwtColors) {
+	private GwtMaterialScheme(IsColor... hexColors) {
 		scheme = new EnumeratedScheme(CATEGORY, name());
 		// adds them into the list
-		scheme.addAll(Arrays.asList(gwtColors));
+		scheme.addAll(Arrays.asList(hexColors));
 	}
 
 	/*

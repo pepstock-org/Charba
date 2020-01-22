@@ -87,6 +87,7 @@ public final class ColorUtil {
 	/**
 	 * Returns HEX string value which represents the color.
 	 * 
+	 * @param color color instance to use
 	 * @return HEX string value which represents the color.
 	 */
 	static String toHex(IsColor color) {
@@ -172,11 +173,14 @@ public final class ColorUtil {
 	}
 
 	/**
-	 * Convert a RGB Color to it corresponding HSL values.
-	 *
+	 * Convert a RGB Color to it corresponding HSL values.<br>
+	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace
+	 * conversions, RGB-HSL</a>.
+	 * 
+	 * @param red red value
+	 * @param green green value
+	 * @param blue blue value
 	 * @return a string representation of HSL color, only <code>h,s%,l%</code>
-	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind
-	 *      colorspace conversions, RGB-HSL</a>
 	 */
 	static String createHSLAsString(int red, int green, int blue) {
 		// creates string builder

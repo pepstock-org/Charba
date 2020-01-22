@@ -73,6 +73,7 @@ final class NativeJsHelper {
 	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
 	 * method.
 	 * 
+	 * @param <T> callback proxy type
 	 * @return new proxy for callback.
 	 */
 	static native <T> CallbackProxy<T> newCallbackProxy();

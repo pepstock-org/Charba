@@ -164,6 +164,7 @@ public final class ZoomPlugin {
 	/**
 	 * Creates new customized drag-to-zoom effect.
 	 * 
+	 * @param defaultValues default options to use for drag initialization
 	 * @return new customized drag-to-zoom effect
 	 */
 	private static Drag createDrag(DefaultsOptions defaultValues) {

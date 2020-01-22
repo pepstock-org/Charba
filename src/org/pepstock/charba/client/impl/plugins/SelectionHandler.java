@@ -240,8 +240,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 
 	/**
 	 * Reset a flag to prevent click event after drawing of selection area.
-	 * 
-	 * @param preventClickEvent the preventClickEvent to set
 	 */
 	void resetPreventClickEvent() {
 		preventClickEvent = false;
@@ -365,7 +363,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	/**
 	 * Returns the minimum amount of datasets, selectable based on chart type.
 	 * 
-	 * @param chart chart instance
 	 * @return the minimum amount of datasets
 	 */
 	boolean hasMinimumDatasetsItems() {

@@ -120,6 +120,8 @@ public final class DateAdapter {
 	 * Returns the options used to configure the date adapter, using a factory to have the same object.<br>
 	 * If the factory instance is <code>null</code>, returns <code>null</code>.
 	 * 
+	 * @param factory factory instance to create date adapter options
+	 * @param <T> type of date adapter options
 	 * @return the options used to configure the date adapter, using a factory
 	 */
 	public <T extends DateAdapterOptions> T getOptions(DateAdaptersOptionsFactory<T> factory) {

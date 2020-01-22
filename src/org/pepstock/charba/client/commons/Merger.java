@@ -190,6 +190,7 @@ public final class Merger {
 	/**
 	 * Manages the merge of options for chart with multiple scales.
 	 * 
+	 * @param base base chart options
 	 * @param chartOptions default chart options
 	 * @param scaleOptions default scale options
 	 */
@@ -251,6 +252,7 @@ public final class Merger {
 	/**
 	 * Manages the merge of options for chart with single scale.
 	 * 
+	 * @param base base chart options
 	 * @param chartOptions default chart options
 	 * @param scaleOptions default scale options
 	 */
@@ -370,7 +372,8 @@ public final class Merger {
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source Object to merge into <code>target</code>.
-	 */
+	 * @return the merged java script object
+ 	 */
 	private NativeObject mergeNativeObjects(NativeObject target, NativeObject source) {
 		NativeObject newObject = Helpers.get().mergeIf(target, source);
 		return newObject == null ? new NativeObject() : newObject;

@@ -353,7 +353,7 @@ public final class ArrayString extends Array {
 	 * any) and any subsequent elements to the right (adds one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
-	 * @param value element to be inserted
+	 * @param item element to be inserted
 	 */
 	@JsOverlay
 	void insertAt(int index, String item) {
@@ -388,7 +388,6 @@ public final class ArrayString extends Array {
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
-	 * @return The new length of the array upon which the method was called.
 	 */
 	native void push(String item);
 
@@ -406,7 +405,7 @@ public final class ArrayString extends Array {
 	 * implied by the added value.
 	 * 
 	 * @param index the index to be set
-	 * @param value the value to be stored
+	 * @param item the value to be stored
 	 */
 	@JsOverlay
 	void set(int index, String item) {

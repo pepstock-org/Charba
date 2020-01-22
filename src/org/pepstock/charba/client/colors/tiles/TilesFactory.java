@@ -385,8 +385,6 @@ public final class TilesFactory {
 	 * @param backgroundColor background color of canvas pattern
 	 * @param shapeColor shape color
 	 * @param size size of canvas pattern
-	 * @param radius the radius of the tile, use only for {@link PointStyle} drawing
-	 * @param legendItem the legend item instance to create the tile, only for {@link PointStyle} drawing
 	 * @return a tile as canvas pattern
 	 */
 	private static CanvasPattern buildTile(IsShape shape, String backgroundColor, String shapeColor, int size) {

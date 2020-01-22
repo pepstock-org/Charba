@@ -128,6 +128,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * Builds the object with a java script object stored into options.
 	 * 
 	 * @param nativeObject native object into options
+	 * @param defaultsOptions plugin default options
 	 */
 	ChartBackgroundColorOptions(NativeObject nativeObject, ChartBackgroundColorDefaultsOptions defaultsOptions) {
 		super(ChartBackgroundColor.ID, nativeObject);

@@ -135,7 +135,6 @@ public final class GradientColor extends NativeObjectContainer {
 	 * Any double between 0.0d and 1.0d (inclusive) is valid.
 	 * 
 	 * @param offset value between 0 and 1 for where the color stop is located.
-	 * @exception if the channel is nor within bounds
 	 */
 	static void checkOffsetWithinBounds(double offset) {
 		if (offset < DEFAULT_OFFSET_START || offset > DEFAULT_OFFSET_STOP) {

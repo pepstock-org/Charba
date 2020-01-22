@@ -49,6 +49,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * Builds the object storing the chart instance and cartesian axis type.
 	 * 
 	 * @param chart chart instance
+	 * @param type axis type
 	 * @param cartesianType cartesian type
 	 */
 	CartesianAxis(IsChart chart, AxisType type, CartesianAxisType cartesianType) {

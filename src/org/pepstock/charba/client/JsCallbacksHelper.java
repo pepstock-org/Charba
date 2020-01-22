@@ -95,7 +95,7 @@ final class JsCallbacksHelper {
 	 * 
 	 * @param options chart options, generated merging all defaults.
 	 * @param key the key of options which should have the event callback
-	 * @param chart chart instance, used as function context
+	 * @param context chart instance, used as function context
 	 * @param event native event from user interface
 	 * @param item legend item native
 	 */
@@ -112,7 +112,7 @@ final class JsCallbacksHelper {
 	 * 
 	 * @param options chart options, generated merging all defaults.
 	 * @param key the key of options which should have the event callback
-	 * @param chart chart instance, used as function context
+	 * @param context chart instance, used as function context
 	 * @param event native event from user interface
 	 * @param items array of datasets native objects
 	 */

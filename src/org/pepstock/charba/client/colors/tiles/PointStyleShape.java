@@ -80,7 +80,7 @@ enum PointStyleShape implements IsShape
 	 * Creates a shaper with own drawer and the related point style instance to draw.
 	 * 
 	 * @param pointStyle point style instance
-	 * @param the shape drawer instance
+	 * @param drawer the shape drawer instance
 	 */
 	private PointStyleShape(PointStyle pointStyle, ShapeDrawer drawer) {
 		this.pointStyle = pointStyle;

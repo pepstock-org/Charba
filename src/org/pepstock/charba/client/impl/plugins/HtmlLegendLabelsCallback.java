@@ -59,21 +59,22 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 /**
  * Legend callback implementation to override the standard HTML format of CHART.JS legend.<br>
- * This HTML is usable only by {@link HtmlLegend} plugin.<br< This is HTML structure of the legend:<br>
+ * This HTML is usable only by {@link HtmlLegend} plugin.<br>
+ * This is HTML structure of the legend:<br>
  * <br>
  * <code>
- * <TABLE>
- *   <TR>
- *     <TD>
- *       <DIV color for legend item>
- *       <DIV label for legend item>
- *     </TD>
- *     <TD>
- *       <DIV color for legend item>
- *       <DIV label for legend item>
- *     </TD>
- *   </TR>
- * </TABLE>
+ * &lt;TABLE&gt;
+ *   &lt;TR&gt;
+ *     &lt;TD&gt;
+ *       &lt;DIV color for legend item&gt;
+ *       &lt;DIV label for legend item&gt;
+ *     &lt;/TD&gt;
+ *     &lt;TD&gt;
+ *       &lt;DIV color for legend item&gt;
+ *       &lt;DIV label for legend item&gt;
+ *     &lt;/TD&gt;
+ *   &lt;/TR&gt;
+ * &lt;/TABLE&gt;
  * </code> <br>
  * 
  * @author Andrea "Stock" Stocchero
@@ -258,7 +259,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param legendId element id for {@link TableCellElement}
-	 * @param item legend item to show into color cell element
+	 * @param htmlLegendItem legend item to show into color cell element
 	 * @return a {@link TableCellElement} which should contains and represents the color of dataset
 	 */
 	private TableCellElement buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
@@ -431,7 +432,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * Applies the background color to the color element.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param item legend item to map into background color
+	 * @param htmlLegendItem legend item to map into background color
 	 * @param color DIV element where to apply the background color
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color

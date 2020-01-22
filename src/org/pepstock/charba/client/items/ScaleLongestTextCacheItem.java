@@ -138,7 +138,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		/**
 		 * Creates the object for data.
 		 * 
-		 * @param native object which must be mapped
+		 * @param nativeObject native object which must be mapped
 		 */
 		Data(NativeObject nativeObject) {
 			super(nativeObject);

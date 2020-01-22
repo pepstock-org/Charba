@@ -99,6 +99,7 @@ public final class Configuration {
 	 * 
 	 * @param chart chart instance
 	 * @param options the options of the chart.
+	 * @param <T> type of options
 	 */
 	@JsOverlay
 	<T extends ConfigurationOptions> void setOptions(IsChart chart, T options) {

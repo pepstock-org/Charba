@@ -53,7 +53,7 @@ final class CategoryAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicks
 		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
-		 * @param ticks list of created ticks
+		 * @param tickItems array of created ticks
 		 */
 		void call(CallbackFunctionContext context, NativeObject item, ArrayString tickItems);
 	}
@@ -91,6 +91,7 @@ final class CategoryAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicks
 	 * Invokes BUILD TICKS axis callback.
 	 * 
 	 * @param item axis item instance
+	 * @param tickItems array of created ticks
 	 */
 	private void onAfterBuildTicksCallback(NativeObject item, ArrayString tickItems) {
 		// if user callback is consistent

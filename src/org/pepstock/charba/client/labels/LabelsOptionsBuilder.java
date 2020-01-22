@@ -40,6 +40,8 @@ public final class LabelsOptionsBuilder {
 
 	/**
 	 * To avoid any instantiation
+	 * 
+	 * @param chart chart instance for this options. It could be <code>null</code>.
 	 */
 	private LabelsOptionsBuilder(IsChart chart) {
 		// creates the options with deferred registration
