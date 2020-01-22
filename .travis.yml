@@ -40,6 +40,8 @@ branches:
 #
 # download Ivy, if needed
 before_install: ant buildInit
+# added this statement to avoid to download
+# maven dependencies
 install: /bin/true
 # run the ant main target
 script: 
