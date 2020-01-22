@@ -55,6 +55,7 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- COMMONS
 	// ------------------------------------------
+
 	/**
 	 * Returns the native object instance.
 	 * 
