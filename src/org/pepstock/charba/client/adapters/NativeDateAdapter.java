@@ -64,14 +64,6 @@ final class NativeDateAdapter {
 	native String internalId();
 
 	/**
-	 * Returns the options of adapter.
-	 * 
-	 * @return the options of adapter
-	 */
-	@JsProperty
-	native NativeObject getOptions();
-
-	/**
 	 * Returns a map of time formats for the supported formatting units defined in unit.
 	 * 
 	 * @return a map of time formats for the supported formatting units defined in unit

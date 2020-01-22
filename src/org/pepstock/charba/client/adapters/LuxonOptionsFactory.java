@@ -29,7 +29,7 @@ import org.pepstock.charba.client.configuration.Adapters;
 public final class LuxonOptionsFactory implements DateAdaptersOptionsFactory<LuxonOptions> {
 
 	// singleton instance of factory
-	private static LuxonOptionsFactory INSTANCE = new LuxonOptionsFactory();
+	private static final LuxonOptionsFactory INSTANCE = new LuxonOptionsFactory();
 
 	/**
 	 * To avoid any instantiation
