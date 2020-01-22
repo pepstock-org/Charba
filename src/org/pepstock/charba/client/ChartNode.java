@@ -33,9 +33,6 @@ import org.pepstock.charba.client.utils.JSON;
  */
 public final class ChartNode {
 
-	// instance of chart or controller type
-	private final Type type;
-
 	// all sub elements
 	private final Chart chart;
 
@@ -59,31 +56,18 @@ public final class ChartNode {
 	 * @param type chart or controller type
 	 * @param chart CHART.JS CHART instance
 	 */
-	public ChartNode(Type type, Chart chart) {
-		// checks if type is consistent
-		Type.checkIfValid(type);
-		// stores chart or controller type
-		this.type = type;
+	public ChartNode(Chart chart) {
 		// stores native chart instance
 		this.chart = chart;
 		// sets if is initialized checking the CHART instance
 		initialized = chart != null;
 		// creates all sub elements
-		options = new OptionsNode(type, initialized ? chart.getOptions() : null);
+		options = new OptionsNode(initialized ? chart.getOptions() : null);
 		legend = new LegendNode(initialized ? chart.getLegend() : null);
 		scales = new ScalesNode(initialized ? chart.getScales() : null);
 		chartArea = new ChartAreaNode(initialized ? chart.getChartArea() : null);
 		title = new TitleNode(initialized ? chart.getTitleBlock() : null);
 		tooltip = new TooltipNode(initialized ? chart.getTooltip() : null);
-	}
-
-	/**
-	 * Returns the type of chart or controller.
-	 * 
-	 * @return the type of chart or controller
-	 */
-	public Type getType() {
-		return type;
 	}
 
 	/**

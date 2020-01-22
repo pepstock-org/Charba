@@ -110,10 +110,7 @@ public final class ControllerContext {
 	 */
 	@JsOverlay
 	public final ChartNode getNode() {
-		// gets chart reference
-		IsChart chart = getChart();
-		// creates and returns the chart node
-		return new ChartNode(chart.getType(), getNativeChart());
+		return new ChartNode(getNativeChart());
 	}
 
 	/**

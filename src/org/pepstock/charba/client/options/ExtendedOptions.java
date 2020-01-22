@@ -17,7 +17,6 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
@@ -60,16 +59,6 @@ public final class ExtendedOptions extends ScaledOptions {
 		IsChart.checkIfValid(chart);
 		// stores chart instance
 		this.chart = chart;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
-	 */
-	@Override
-	public ScaleType getScaleType() {
-		return chart.getType().scaleType();
 	}
 
 	/**

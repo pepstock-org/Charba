@@ -36,7 +36,11 @@ public enum DefaultDateAdapter implements Key
 	/**
 	 * Date adapter ID for <a href="https://date-fns.org/">Date-fns</a>.
 	 */
-	DATE_FNS("date-fns");
+	DATE_FNS("date-fns"),
+	/**
+	 * Date adapter ID for the implementation where the ID is not set.
+	 */
+	UNKNOWN("unknown");
 
 	// name value of property
 	private final String value;

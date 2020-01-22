@@ -59,14 +59,6 @@ public final class ChartOptions extends ScaledOptions {
 		return type;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
-	 */
-	@Override
-	public ScaleType getScaleType() {
-		return type.scaleType();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
