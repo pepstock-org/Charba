@@ -69,6 +69,13 @@ public interface IsDefaultScale {
 	 * @return the time defaults.
 	 */
 	IsDefaultTime getTime();
+	
+	/**
+	 * Returns the adapter defaults.
+	 * 
+	 * @return the adapter defaults.
+	 */
+	IsDefaultAdapters getAdapters();
 
 	/**
 	 * Returns if the axis are stacked or not.

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGridLines;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -50,6 +51,8 @@ public final class DefaultChartScale implements IsDefaultScale {
 
 	private final DefaultChartTime time;
 
+	private final DefaultChartAdapters adapters;
+
 	/**
 	 * Creates the object by scale option element instance.
 	 * 
@@ -64,6 +67,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 		this.angleLines = new DefaultChartAngleLines(scale.getAngleLines());
 		this.pointLabels = new DefaultChartPointLabels(scale.getPointLabels());
 		this.time = new DefaultChartTime(scale.getTime());
+		this.adapters = new DefaultChartAdapters(scale.getAdapters());
 	}
 
 	/*
@@ -124,6 +128,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 	@Override
 	public IsDefaultTime getTime() {
 		return time;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getAdapters()
+	 */
+	@Override
+	public IsDefaultAdapters getAdapters() {
+		return adapters;
 	}
 
 	/*

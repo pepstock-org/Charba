@@ -145,7 +145,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		scaleLabel = new ScaleLabel(this, Property.SCALE_LABEL, getDefaultValues().getScaleLabel(), getValue(Property.SCALE_LABEL));
 		ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
 		time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
-		adapters = new Adapters(this, Property.ADAPTERS, getValue(Property.ADAPTERS));
+		adapters = new Adapters(this, Property.ADAPTERS, getDefaultValues().getAdapters(), getValue(Property.ADAPTERS));
 	}
 
 	/**

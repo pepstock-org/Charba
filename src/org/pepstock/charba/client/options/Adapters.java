@@ -19,14 +19,14 @@ import org.pepstock.charba.client.adapters.DateAdapterOptions;
 import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.NoDefaults;
+import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 
 /**
  * The following adapters element is  used to configure a date adapter, injecting to support time series into CAHRT.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Adapters extends AbstractModel<Scale, NoDefaults> {
+public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> implements IsDefaultAdapters {
 	
 	/**
 	 * Name of properties of native object.
@@ -65,11 +65,12 @@ public final class Adapters extends AbstractModel<Scale, NoDefaults> {
 	 * 
 	 * @param time scale element as parent of this node.
 	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Adapters(Scale time, Key childKey, NativeObject nativeObject) {
+	Adapters(Scale time, Key childKey, IsDefaultAdapters defaultValues, NativeObject nativeObject) {
 		// no default values
-		super(time, childKey, NoDefaults.INSTANCE, nativeObject);
+		super(time, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -98,8 +99,14 @@ public final class Adapters extends AbstractModel<Scale, NoDefaults> {
 	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
-			// creates and returns the object 
-			return factory.create(getValue(Property.DATE));
+			// checks if there is any date adapter options
+			if (has(Property.DATE)) {
+				// creates and returns the object 
+				return factory.create(getValue(Property.DATE));
+			} else {
+				// goes to default value to get the value
+				return getDefaultValues().getDate(factory);
+			}
 		}
 		// if here factory is not consistent
 		return null;

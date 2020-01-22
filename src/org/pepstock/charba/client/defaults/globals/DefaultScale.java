@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGridLines;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -52,6 +53,8 @@ public final class DefaultScale implements IsDefaultScale {
 	private final DefaultTicks ticks = new DefaultTicks();
 
 	private final DefaultTime time = new DefaultTime();
+
+	private final DefaultAdapters adapters = new DefaultAdapters();
 
 	/*
 	 * (non-Javadoc)
@@ -111,6 +114,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public IsDefaultTime getTime() {
 		return time;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getAdapters()
+	 */
+	@Override
+	public IsDefaultAdapters getAdapters() {
+		return adapters;
 	}
 
 	/*
