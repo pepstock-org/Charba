@@ -18,11 +18,21 @@ package org.pepstock.charba.client.resources;
 import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
- * Empty interface to implement deferred injection of text resources.<br>
+ * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
+ * This resources type will load the CHART.JS module in async mode in order to optimize the performance when GWT code splitting
+ * is implemented.<br>
  * This is the main interface to implement for deferred client bundles.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDeferredResources extends Resources<ExternalTextResource> {
+	
+	/**
+	 * Contains text representation of native chart.js code.
+	 * 
+	 * @return chart.js code in async mode
+	 */
+	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
+	ExternalTextResource chartJs();
 
 }

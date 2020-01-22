@@ -20,10 +20,8 @@ import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA, with MOMENT as date time library.<br>
- * This resources type will load the CHART.JS module in async mode in order to optimize the performance when GWT code splitting
- * is implemented.<br>
- * It also defines the MOMENT date time library and its CHART.JS adapter (always loaded in sync mode).
+ * Client bundle to reference MOMENT as date time library.<br>
+ * It defines the MOMENT date time library and its CHART.JS adapter (always loaded in sync mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,14 +31,6 @@ public interface DeferredResources extends IsDeferredResources {
 	 * Static reference to resources java script source code.
 	 */
 	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
-
-	/**
-	 * Contains text representation of native chart.js code.
-	 * 
-	 * @return chart.js code in async mode
-	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-	ExternalTextResource chartJs();
 
 	/**
 	 * Contains text representation of date-time MOMENT java script library code.

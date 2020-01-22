@@ -33,14 +33,6 @@ public interface DatefnsEmbeddedResources extends IsEmbeddedResources {
 	public static final DatefnsEmbeddedResources INSTANCE = GWT.create(DatefnsEmbeddedResources.class);
 
 	/**
-	 * Contains text representation of native chart.js code.
-	 * 
-	 * @return chart.js code in sync mode
-	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-	TextResource chartJs();
-
-	/**
 	 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
 	 * 
 	 * @return an empty java script code

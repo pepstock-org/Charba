@@ -15,10 +15,9 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.events.ChartNativeEvent;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -39,7 +38,8 @@ final class JsItemsHelper {
 	 */
 	private JsItemsHelper() {
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**

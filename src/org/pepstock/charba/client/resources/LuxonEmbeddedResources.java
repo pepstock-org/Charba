@@ -19,9 +19,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA, with LUXON as date time library.<br>
- * This resources type will load the CHART.JS module in sync mode, as part of GWT module to be downloaded.<br>
- * It also defines the LUXON date time library and its CHART.JS adapter.
+ * Client bundle to reference LUXON as date time library.<br>
+ * It defines the LUXON date time library and its CHART.JS adapter.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -31,14 +30,6 @@ public interface LuxonEmbeddedResources extends IsEmbeddedResources {
 	 * Static reference to resources java script source code.
 	 */
 	public static final LuxonEmbeddedResources INSTANCE = GWT.create(LuxonEmbeddedResources.class);
-
-	/**
-	 * Contains text representation of native chart.js code.
-	 * 
-	 * @return chart.js code in sync mode
-	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-	TextResource chartJs();
 
 	/**
 	 * Contains text representation of CHART.JS adapter code form LUXON.

@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.LegendLabelItem;
@@ -51,7 +52,8 @@ final class JsCallbacksHelper {
 		// to include also chart.js
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**

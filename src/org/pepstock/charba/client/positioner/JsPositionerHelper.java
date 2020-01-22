@@ -18,6 +18,7 @@ package org.pepstock.charba.client.positioner;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -41,7 +42,8 @@ final class JsPositionerHelper {
 		// to include also chart.js
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**

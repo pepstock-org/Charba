@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -44,7 +45,8 @@ final class JsHtmlLegendBuilderHelper {
 		// to include also chart.js
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -45,7 +46,8 @@ final class JsControllerHelper {
 		// to be sure that date time chart.js adapter has been injected
 		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**

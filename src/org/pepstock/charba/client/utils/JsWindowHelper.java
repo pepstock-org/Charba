@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.Element;
@@ -46,7 +47,8 @@ public final class JsWindowHelper {
 		// to include also chart.js
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
+		// invoking the JsHelper
+		JsHelper.get();
 	}
 
 	/**
