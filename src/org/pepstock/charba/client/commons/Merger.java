@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.enums.AxisType;
