@@ -36,6 +36,8 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 
 	private final IsDefaultScales scales;
 
+	private final Type type;
+
 	/**
 	 * Creates the default by an extended options instance, which represents the whole options of a chart.
 	 * 
@@ -64,6 +66,8 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 		super(chartOptions);
 		// checks type
 		Type.checkIfValid(type);
+		// stores type
+		this.type = type;
 		// checks if the chart options is related to axes
 		// checks if single scale
 		if (ScaleType.SINGLE.equals(type.scaleType())) {
@@ -81,6 +85,16 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 			// uses the default scales
 			scales = DefaultsBuilder.get().getScaledOptions().getScales();
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
+	 */
+	@Override
+	public ScaleType getScaleType() {
+		return type.scaleType();
 	}
 
 	/*

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
@@ -35,6 +36,16 @@ public final class DefaultScaledOptions extends DefaultOptions implements IsDefa
 	 */
 	protected DefaultScaledOptions() {
 		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
+	 */
+	@Override
+	public ScaleType getScaleType() {
+		return ScaleType.NONE;
 	}
 
 	/*

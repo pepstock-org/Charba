@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.options.ScaledOptions;
@@ -26,13 +28,40 @@ import org.pepstock.charba.client.options.ScaledOptions;
  */
 public final class OptionsNode extends ScaledOptions {
 
+	// stores chart or controller type
+	private final Type type;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
+	 * @param type chart or controller type
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public OptionsNode(NativeObject nativeObject) {
+	public OptionsNode(Type type, NativeObject nativeObject) {
 		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
+		// checks if type is consistent
+		Type.checkIfValid(type);
+		// stores
+		this.type = type;
+	}
+
+	/**
+	 * Returns the chart type.
+	 * 
+	 * @return the chart type
+	 */
+	public final Type getType() {
+		return type;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
+	 */
+	@Override
+	public ScaleType getScaleType() {
+		return type.scaleType();
 	}
 
 }

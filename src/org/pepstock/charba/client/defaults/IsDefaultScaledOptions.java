@@ -15,12 +15,21 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.ScaleType;
+
 /**
  * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultScaledOptions extends IsDefaultOptions {
+	
+	/**
+	 * Returns the type of scale.
+	 * 
+	 * @return the type of scale
+	 */
+	ScaleType getScaleType();
 
 	/**
 	 * Returns the scale/axis defaults.

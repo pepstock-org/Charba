@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.GlobalOptions;
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
@@ -28,9 +29,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  */
 public final class DefaultGlobalOptions extends AbstractDefaultChartOptions implements IsDefaultScaledOptions {
 
-	private final IsDefaultScale scale;
-
-	private final IsDefaultScales scales;
+	private final IsDefaultScaledOptions scalesOptions;
 
 	/**
 	 * Creates the object by global options and defaults scaled options
@@ -39,10 +38,18 @@ public final class DefaultGlobalOptions extends AbstractDefaultChartOptions impl
 	 */
 	public DefaultGlobalOptions(GlobalOptions globalOptions) {
 		super(globalOptions);
-		// uses the default scale
-		this.scale = DefaultsBuilder.get().getScaledOptions().getScale();
-		// uses the default scales
-		this.scales = DefaultsBuilder.get().getScaledOptions().getScales();
+		// uses the default scaled options
+		this.scalesOptions = DefaultsBuilder.get().getScaledOptions();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScaleType()
+	 */
+	@Override
+	public ScaleType getScaleType() {
+		return scalesOptions.getScaleType();
 	}
 
 	/*
@@ -52,7 +59,7 @@ public final class DefaultGlobalOptions extends AbstractDefaultChartOptions impl
 	 */
 	@Override
 	public IsDefaultScale getScale() {
-		return scale;
+		return scalesOptions.getScale();
 	}
 
 	/*
@@ -62,7 +69,7 @@ public final class DefaultGlobalOptions extends AbstractDefaultChartOptions impl
 	 */
 	@Override
 	public IsDefaultScales getScales() {
-		return scales;
+		return scalesOptions.getScales();
 	}
 
 }
