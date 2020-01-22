@@ -109,7 +109,7 @@ public final class StyleElement extends DatasetItem {
 	 * 
 	 * @return the native object.
 	 */
-	NativeObject getObject() {
+	NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 

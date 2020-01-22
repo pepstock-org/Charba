@@ -61,7 +61,7 @@ final class JsItemsHelper {
 	boolean isCanvasPattern(LegendItem object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {
-			return NativeJsItemsHelper.isCanvasPattern(object.getObject(), key);
+			return NativeJsItemsHelper.isCanvasPattern(object.nativeObject(), key);
 		}
 		// if here, arguments not consistent
 		return false;
@@ -77,7 +77,7 @@ final class JsItemsHelper {
 	boolean isCanvasGradient(LegendItem object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {
-			return NativeJsItemsHelper.isCanvasGradient(object.getObject(), key);
+			return NativeJsItemsHelper.isCanvasGradient(object.nativeObject(), key);
 		}
 		// if here, arguments not consistent
 		return false;

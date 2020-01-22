@@ -74,7 +74,7 @@ final class JsCallbacksHelper {
 	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart or options are not consistent.
 	 */
 	String generateDefaultLegend(Chart chart, ChartOptions options) {
-		return NativeJsCallbacksHelper.generateDefaultLegend(chart, options.getObject());
+		return NativeJsCallbacksHelper.generateDefaultLegend(chart, options.nativeObject());
 	}
 
 	/**
@@ -86,7 +86,7 @@ final class JsCallbacksHelper {
 	 * @return an unmodifiable list of legend labels or an empty list if chart is not initialized.
 	 */
 	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
-		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.getObject());
+		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.nativeObject());
 		return ArrayListHelper.unmodifiableList(array, factory);
 	}
 
@@ -103,7 +103,7 @@ final class JsCallbacksHelper {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes legend event callback
-			NativeJsCallbacksHelper.invokeDefaultLegendEvent(options.getObject(), key.value(), context, event, item);
+			NativeJsCallbacksHelper.invokeDefaultLegendEvent(options.nativeObject(), key.value(), context, event, item);
 		}
 	}
 
@@ -120,7 +120,7 @@ final class JsCallbacksHelper {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes chart event callback
-			NativeJsCallbacksHelper.invokeDefaultChartEvent(options.getObject(), key.value(), context, event, items);
+			NativeJsCallbacksHelper.invokeDefaultChartEvent(options.nativeObject(), key.value(), context, event, items);
 		}
 	}
 

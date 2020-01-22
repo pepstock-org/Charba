@@ -96,7 +96,7 @@ public final class ChartOptions extends ScaledOptions {
 	 * 
 	 * @return the native object instance.
 	 */
-	NativeObject getObject() {
+	NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 

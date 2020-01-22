@@ -1593,10 +1593,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
-			return result.getObject();
+			return result.nativeObject();
 		}
 		// default result
-		return getFont().getObject();
+		return getFont().nativeObject();
 	}
 
 }

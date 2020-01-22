@@ -13,28 +13,33 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
+package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Default global scale (maps the java script object <code>Chart.defaults.scale</code> and the result of
- * <code>Chart.scaleService</code>).
+ * Abstract object to manage native object inside the date adapter implementation.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public final class GlobalScale extends Scale {
+abstract class AbstractDateAdapterContainer extends NativeObjectContainer {
 
 	/**
-	 * Creates the object with the native object which maps the java script object chart.defaults.scale.
-	 * 
-	 * @param nativeObject native object which maps the java script object chart.defaults.scale
+	 * Creates the object with an empty native object instance.
 	 */
-	GlobalScale(NativeObject nativeObject) {
-		// uses the CHART.JS scale of default options as default one
-		super(DefaultsBuilder.get().getScaledOptions().getScale(), nativeObject);
+	protected AbstractDateAdapterContainer() {
+		super();
+	}
+
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
+	protected AbstractDateAdapterContainer(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -42,7 +47,7 @@ public final class GlobalScale extends Scale {
 	 * 
 	 * @return the native object instance.
 	 */
-	NativeObject nativeObject() {
+	final NativeObject nativeObject(){
 		return super.getNativeObject();
 	}
 

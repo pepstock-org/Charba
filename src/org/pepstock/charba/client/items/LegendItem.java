@@ -393,7 +393,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the native object instance.
 	 */
-	final NativeObject getObject() {
+	final NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 

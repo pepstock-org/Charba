@@ -124,7 +124,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return the java script object in order to consume it to configure the chart update or render.
 	 */
-	NativeObject getObject() {
+	NativeObject nativeObject() {
 		return getNativeObject();
 	}
 

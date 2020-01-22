@@ -76,11 +76,11 @@ public final class Controllers {
 			// if not null, the controller extends an existing chart
 			if (type.isExtended()) {
 				// extends an existing chart
-				JsControllerHelper.get().extend(type, type.getChartType(), wController.getObject());
+				JsControllerHelper.get().extend(type, type.getChartType(), wController.nativeObject());
 				return true;
 			} else {
 				// if here, the controller is new TYPE (no extend)
-				JsControllerHelper.get().register(type, wController.getObject());
+				JsControllerHelper.get().register(type, wController.nativeObject());
 				return true;
 			}
 		}

@@ -412,7 +412,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * 
 	 * @return the native object.
 	 */
-	final NativeObject getObject() {
+	final NativeObject nativeObject() {
 		return getNativeObject();
 	}
 

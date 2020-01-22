@@ -607,7 +607,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 				chart.update();
 			} else {
 				// .. otherwise calls the update with config
-				chart.update(configuration.getObject());
+				chart.update(configuration.nativeObject());
 			}
 		}
 	}
@@ -679,7 +679,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 				chart.render();
 			} else {
 				// .. otherwise calls the render with config
-				chart.render(configuration.getObject());
+				chart.render(configuration.nativeObject());
 			}
 		}
 	}

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Adapters;
+import org.pepstock.charba.client.GlobalAdapters;
 import org.pepstock.charba.client.adapters.DateAdapterFormats;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
 public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	
 	// defaults format instance, retrieved by the date adapter
-	private final DateAdapterFormats defaultFormats;
+	private DateAdapterFormats defaultFormats = null;
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
@@ -43,9 +43,6 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	DisplayFormats(Time time, Key childKey, NativeObject nativeObject) {
 		// no default values
 		super(time, childKey, NoDefaults.INSTANCE, nativeObject);
-		// stores the default format
-		// FIXME options must be read
-		this.defaultFormats = Adapters.get().getDate().getFormats();
 	}
 
 	/**
@@ -70,6 +67,12 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	public String getDisplayFormat(TimeUnit unit) {
 		// checks if unit is consistent
 		if (Key.isValid(unit)) {
+			// checks if format is already loaded
+			if (defaultFormats == null) {
+				// stores the default format
+				// getting the parent (TIME) and its parent again (SCALE)
+				defaultFormats = GlobalAdapters.get().getDate(getParent().getParent()).getFormats();
+			}
 			// returns the configuration creating a key.
 			return getValue(unit, defaultFormats.getFormat(unit));
 		}

@@ -98,7 +98,7 @@ public abstract class AbstractController implements Controller {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
 			// invokes default
-			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.getObject());
+			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.nativeObject());
 		}
 	}
 
@@ -113,7 +113,7 @@ public abstract class AbstractController implements Controller {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
 			// invokes default
-			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.getObject());
+			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.nativeObject());
 		}
 	}
 

@@ -387,7 +387,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @return the java script object.
 	 */
-	NativeObject getObject() {
+	NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 

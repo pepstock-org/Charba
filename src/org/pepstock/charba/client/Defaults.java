@@ -158,7 +158,7 @@ public final class Defaults {
 			// if not, gets options by axis type
 			GlobalScale storedScale = scaleOptions.get(axisType.value());
 			// stores the defaults options by scale service
-			Chart.getScaleService().updateScaleDefaults(axisType.value(), storedScale.getObject());
+			Chart.getScaleService().updateScaleDefaults(axisType.value(), storedScale.nativeObject());
 		}
 	}
 
@@ -353,7 +353,7 @@ public final class Defaults {
 				// creates a wrapper
 				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.getInternalObject());
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.nativeObject());
 			}
 		}
 	}
@@ -380,7 +380,7 @@ public final class Defaults {
 		 * 
 		 * @return the native object instance.
 		 */
-		final NativeObject getInternalObject() {
+		final NativeObject nativeObject() {
 			return super.getNativeObject();
 		}
 
