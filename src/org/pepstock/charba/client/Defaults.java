@@ -353,7 +353,7 @@ public final class Defaults {
 				// creates a wrapper
 				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.nativeObject());
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.internalNativeObject());
 			}
 		}
 	}
@@ -380,7 +380,7 @@ public final class Defaults {
 		 * 
 		 * @return the native object instance.
 		 */
-		final NativeObject nativeObject() {
+		final NativeObject internalNativeObject() {
 			return super.getNativeObject();
 		}
 
