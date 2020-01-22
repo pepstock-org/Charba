@@ -109,7 +109,18 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * add `adapters.date` property into scale options and configuration in order to configure date time adapters.
-  
+ * change the injection of CHART.JS, using the `Chart.min.js`
+   * the `Chart.bundle.min.js`, used till version 2.8, won't be provided anymore from **CHART.JS 3.x**.
+   * due to the previous item, the java script date time library `Moment` won't be provided by CHART.JS
+ * enable the options to decide which java script date time library (available for CHART.JS out of the box) to use:
+   * the injection of java script date time library (and its CHART.JS adapter) will be provided out of the box by **Charba**. The different library can be chosen using a different resource client bundle, available both embedded and deferred mode. The current resource client bundle injects [MOMENT.js](https://momentjs.com/). 
+   * CHART.JS has got the adapters for:
+     * [MOMENT.js](https://momentjs.com/) which remains the default for **Charba**, enabled by `EmbeddedResources` or `DeferredResources` classes.
+     * [Luxon](https://moment.github.io/luxon/) which can be enabled by `LuxonEmbeddedResources` or `LuxonDeferredResources` classes. 
+     * [Date-fns](https://date-fns.org/) which can be enabled by `DatefnsEmbeddedResources` or `DatefnsDeferredResources` classes. 
+   * change the `EntryPointStarter` (for deferred injection) in order to accept ONLY deferred resource client bundle.  
+   * provide some classes in order to use the date time adapter in GWT project as well, to manage, parse and format dates using the same object of CHART.JS. 
+   
 ### Development
 
  * copy the `ZoomPugin.ID` into a private constant into `DatasetsItemsSelector` plugin in order to avoid to add the `Zoom` java script plugin if not used.
@@ -118,6 +129,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change name to `OptionsEnvelop` class into `Envelop` because it can contain a generic object.
  * change from BODY to HEAD element where the resources will be injected.
  * change unique ID of injected resources using the package name instead of the resource class name to avoid to inject the same resource twice, invoking the `Injector` programmatically.
+ * normalize the override method name of a `NativeObjectConatiner` implementation.
+ * improve the `DefaultPlugin` implementation in order to use the factory and returns an empty options instead of `null`.
+ * change `TimeUnit` and `DefaultFormats` to be aligned with new date time library adoption.
+ * move resources (not related to CHART.JS and date time library injection) into the objects which needs (`Charba-Helper` and images for `DatasetsItemsSelector`), improving the the initial loading and GWT project build if not used.
  
 License
 -------
