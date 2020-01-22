@@ -133,6 +133,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the `DefaultPlugin` implementation in order to use the factory and returns an empty options instead of `null`.
  * change `TimeUnit` and `DefaultFormats` to be aligned with new date time library adoption.
  * move resources (not related to CHART.JS and date time library injection) into the objects which needs (`Charba-Helper` and images for `DatasetsItemsSelector`), improving the the initial loading and GWT project build if not used.
+ * change format from `JsDate` to `double` to store `Date` into configuration and options element.
  
 License
 -------
