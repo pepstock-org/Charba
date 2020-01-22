@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -107,12 +108,12 @@ public final class Injector {
 
 	/**
 	 * Creates a unique key for every single resource type to be injected.<br>
-	 * The key is: [resource class name]_[resource name].
+	 * The key is: [{@value ResourcesType#JAVASCRIPT_RESOURCES_PATH}]_[resource name].
 	 * 
 	 * @param resource resource instance to to create the key
 	 * @return a unique key for every single resource type
 	 */
 	private static final String createKey(ResourcePrototype resource) {
-		return resource.getClass().getName() + Constants.UNDERSCORE + resource.getName();
+		return ResourcesType.JAVASCRIPT_RESOURCES_PATH + Constants.UNDERSCORE + resource.getName();
 	}
 }

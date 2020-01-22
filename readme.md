@@ -117,6 +117,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `Date` storing into native object from `JsDate` to `double`.
  * change name to `OptionsEnvelop` class into `Envelop` because it can contain a generic object.
  * change from BODY to HEAD element where the resources will be injected.
+ * change unique ID of injected resources using the package name instead of the resource class name to avoid to inject the same resource twice, invoking the `Injector` programmatically.
  
 License
 -------
