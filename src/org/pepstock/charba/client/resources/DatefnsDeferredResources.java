@@ -20,32 +20,83 @@ import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference DATE-FNS as date time library.<br>
- * It defines the DATE-FNS date time library and its CHART.JS adapter (always loaded in sync mode).
+ * Client bundle to reference DATE-FNS as date time library (asynchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DatefnsDeferredResources extends IsDeferredResources {
+public final class DatefnsDeferredResources implements IsDeferredResources {
 
 	/**
-	 * Static reference to resources java script source code.
+	 * Client bundle to reference DATE-FNS as date time library.<br>
+	 * It defines the DATE-FNS date time library and its CHART.JS adapter (always loaded in synchronous mode).
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	interface DatefnsDeferredResourcesClientBundle extends IsDeferredResources {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final DatefnsDeferredResourcesClientBundle INSTANCE = GWT.create(DatefnsDeferredResourcesClientBundle.class);
+
+		/**
+		 * Contains text representation of CHART.JS adapter code form DATE-FNS
+		 * 
+		 * @return chart.js date adapter code for DATE-FNS in asynchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
+		ExternalTextResource datetimeLibrary();
+
+		/**
+		 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
+		 * 
+		 * @return an empty java script code in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
+		TextResource datetimeAdapter();
+
+	}
+
+	/**
+	 * Static reference to DATE-FNS resources.
 	 */
 	public static final DatefnsDeferredResources INSTANCE = GWT.create(DatefnsDeferredResources.class);
 
 	/**
-	 * Contains text representation of CHART.JS adapter code form DATE-FNS
-	 * 
-	 * @return chart.js date adapter code for DATE-FNS in async mode
+	 * To avoid any instantiation
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
-	ExternalTextResource datetimeLibrary();
+	private DatefnsDeferredResources() {
+		// do nothing
+	}
 
-	/**
-	 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return an empty java script code in sync mode
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
-	TextResource datetimeAdapter();
+	@Override
+	public ExternalTextResource datetimeLibrary() {
+		return DatefnsDeferredResourcesClientBundle.INSTANCE.datetimeLibrary();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 */
+	@Override
+	public TextResource datetimeAdapter() {
+		return DatefnsDeferredResourcesClientBundle.INSTANCE.datetimeAdapter();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.IsDeferredResources#chartJs()
+	 */
+	@Override
+	public ExternalTextResource chartJs() {
+		return DatefnsDeferredResourcesClientBundle.INSTANCE.chartJs();
+	}
 
 }

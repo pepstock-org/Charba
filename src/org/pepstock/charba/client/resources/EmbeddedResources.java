@@ -19,32 +19,83 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference MOMENT as date time library.<br>
- * It defines the MOMENT date time library and its CHART.JS adapter.
+ * Client bundle to reference MOMENT as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface EmbeddedResources extends IsEmbeddedResources {
+public final class EmbeddedResources implements IsEmbeddedResources {
 
 	/**
-	 * Static reference to resources java script source code.
-	 */
-	public static final EmbeddedResources INSTANCE = GWT.create(EmbeddedResources.class);
-
-	/**
-	 * Contains text representation of CHART.JS adapter code form MOMENT
+	 * Client bundle to reference MOMENT as date time library.<br>
+	 * It defines the MOMENT date time library and its CHART.JS adapter.
 	 * 
-	 * @return chart.js date adapter code for MOMENT in sync mode
+	 * @author Andrea "Stock" Stocchero
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
-	TextResource datetimeAdapter();
+	interface EmbeddedResourcesClientBundle extends IsEmbeddedResources {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final EmbeddedResourcesClientBundle INSTANCE = GWT.create(EmbeddedResourcesClientBundle.class);
+
+		/**
+		 * Contains text representation of CHART.JS adapter code form MOMENT.
+		 * 
+		 * @return chart.js date adapter code for MOMENT in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
+		TextResource datetimeAdapter();
+
+		/**
+		 * Contains text representation of date-time MOMENT java script library code.
+		 * 
+		 * @return date-time MOMENT java script library code in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
+		TextResource datetimeLibrary();
+
+	}
 
 	/**
-	 * Contains text representation of date-time MOMENT java script library code.
-	 * 
-	 * @return date-time MOMENT java script library code in sync mode
+	 * Static reference to MOMENT resources.
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
-	TextResource datetimeLibrary();
+	public static final EmbeddedResources INSTANCE = new EmbeddedResources();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private EmbeddedResources() {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 */
+	@Override
+	public TextResource datetimeLibrary() {
+		return EmbeddedResourcesClientBundle.INSTANCE.datetimeLibrary();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 */
+	@Override
+	public TextResource datetimeAdapter() {
+		return EmbeddedResourcesClientBundle.INSTANCE.datetimeAdapter();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.IsEmbeddedResources#chartJs()
+	 */
+	@Override
+	public TextResource chartJs() {
+		return EmbeddedResourcesClientBundle.INSTANCE.chartJs();
+	}
 
 }

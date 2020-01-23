@@ -20,32 +20,83 @@ import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference MOMENT as date time library.<br>
- * It defines the MOMENT date time library and its CHART.JS adapter (always loaded in sync mode).
+ * Client bundle to reference MOMENT as date time library (asynchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DeferredResources extends IsDeferredResources {
+public final class DeferredResources implements IsDeferredResources {
 
 	/**
-	 * Static reference to resources java script source code.
-	 */
-	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
-
-	/**
-	 * Contains text representation of date-time MOMENT java script library code.
+	 * Client bundle to reference MOMENT as date time library.<br>
+	 * It defines the MOMENT date time library and its CHART.JS adapter (always loaded in synchronous mode).
 	 * 
-	 * @return date-time MOMENT java script library code in async mode
+	 * @author Andrea "Stock" Stocchero
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
-	ExternalTextResource datetimeLibrary();
+	interface DeferredResourcesClientBundle extends IsDeferredResources {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final DeferredResourcesClientBundle INSTANCE = GWT.create(DeferredResourcesClientBundle.class);
+
+		/**
+		 * Contains text representation of date-time MOMENT java script library code.
+		 * 
+		 * @return date-time MOMENT java script library code in asynchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
+		ExternalTextResource datetimeLibrary();
+
+		/**
+		 * Contains text representation of CHART.JS adapter code form MOMENT.
+		 * 
+		 * @return chart.js date adapter code for MOMENT in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
+		TextResource datetimeAdapter();
+
+	}
 
 	/**
-	 * Contains text representation of CHART.JS adapter code form MOMENT.
-	 * 
-	 * @return chart.js date adapter code for MOMENT in sync mode
+	 * Static reference to MOMENT resources.
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
-	TextResource datetimeAdapter();
+	public static final DeferredResources INSTANCE = new DeferredResources();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private DeferredResources() {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 */
+	@Override
+	public ExternalTextResource datetimeLibrary() {
+		return DeferredResourcesClientBundle.INSTANCE.datetimeLibrary();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 */
+	@Override
+	public TextResource datetimeAdapter() {
+		return DeferredResourcesClientBundle.INSTANCE.datetimeAdapter();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.IsDeferredResources#chartJs()
+	 */
+	@Override
+	public ExternalTextResource chartJs() {
+		return DeferredResourcesClientBundle.INSTANCE.chartJs();
+	}
 
 }

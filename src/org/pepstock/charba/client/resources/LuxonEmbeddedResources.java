@@ -19,32 +19,83 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference LUXON as date time library.<br>
- * It defines the LUXON date time library and its CHART.JS adapter.
+ * Client bundle to reference LUXON as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface LuxonEmbeddedResources extends IsEmbeddedResources {
+public final class LuxonEmbeddedResources implements IsEmbeddedResources {
 
 	/**
-	 * Static reference to resources java script source code.
-	 */
-	public static final LuxonEmbeddedResources INSTANCE = GWT.create(LuxonEmbeddedResources.class);
-
-	/**
-	 * Contains text representation of CHART.JS adapter code form LUXON.
+	 * Client bundle to reference LUXON as date time library.<br>
+	 * It defines the LUXON date time library and its CHART.JS adapter.
 	 * 
-	 * @return chart.js date adapter code for LUXON in sync mode
+	 * @author Andrea "Stock" Stocchero
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
-	TextResource datetimeAdapter();
+	interface LuxonEmbeddedResourcesClientBundle extends IsEmbeddedResources {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final LuxonEmbeddedResourcesClientBundle INSTANCE = GWT.create(LuxonEmbeddedResourcesClientBundle.class);
+
+		/**
+		 * Contains text representation of CHART.JS adapter code form LUXON.
+		 * 
+		 * @return chart.js date adapter code for LUXON in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
+		TextResource datetimeAdapter();
+
+		/**
+		 * Contains text representation of date-time LUXON java script library code.
+		 * 
+		 * @return date-time LUXON java script library code in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
+		TextResource datetimeLibrary();
+
+	}
 
 	/**
-	 * Contains text representation of date-time LUXON java script library code.
-	 * 
-	 * @return date-time LUXON java script library code in sync mode
+	 * Static reference to LUXON resources.
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
-	TextResource datetimeLibrary();
+	public static final LuxonEmbeddedResources INSTANCE = new LuxonEmbeddedResources();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private LuxonEmbeddedResources() {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.IsEmbeddedResources#chartJs()
+	 */
+	@Override
+	public TextResource chartJs() {
+		return LuxonEmbeddedResourcesClientBundle.INSTANCE.chartJs();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 */
+	@Override
+	public TextResource datetimeLibrary() {
+		return LuxonEmbeddedResourcesClientBundle.INSTANCE.datetimeLibrary();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 */
+	@Override
+	public TextResource datetimeAdapter() {
+		return LuxonEmbeddedResourcesClientBundle.INSTANCE.datetimeAdapter();
+	}
 
 }

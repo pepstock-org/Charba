@@ -20,32 +20,84 @@ import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CLUXON as date time library.<br>
- * It defines the LUXON date time library and its CHART.JS adapter (always loaded in sync mode).
+ * Client bundle to reference CLUXON as date time library (asynchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface LuxonDeferredResources extends IsDeferredResources {
+public final class LuxonDeferredResources implements IsDeferredResources {
 
 	/**
-	 * Static reference to resources java script source code.
-	 */
-	public static final LuxonDeferredResources INSTANCE = GWT.create(LuxonDeferredResources.class);
-
-	/**
-	 * Contains text representation of date-time LUXON java script library code.
+	 * Client bundle to reference CLUXON as date time library.<br>
+	 * It defines the LUXON date time library and its CHART.JS adapter (always loaded in synchronous mode).
 	 * 
-	 * @return date-time LUXON java script library code in async mode
+	 * @author Andrea "Stock" Stocchero
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
-	ExternalTextResource datetimeLibrary();
+	interface LuxonDeferredResourcesClientBundle extends IsDeferredResources {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final LuxonDeferredResourcesClientBundle INSTANCE = GWT.create(LuxonDeferredResourcesClientBundle.class);
+
+		/**
+		 * Contains text representation of date-time LUXON java script library code.
+		 * 
+		 * @return date-time LUXON java script library code in asynchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
+		ExternalTextResource datetimeLibrary();
+
+		/**
+		 * Contains text representation of CHART.JS adapter code form LUXON.
+		 * 
+		 * @return chart.js date adapter code for LUXON in synchronous mode
+		 */
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
+		TextResource datetimeAdapter();
+
+	}
+
+	/**
+	 * Static reference to LUXON resources.
+	 */
+	public static final LuxonDeferredResources INSTANCE = new LuxonDeferredResources();
 	
 	/**
-	 * Contains text representation of CHART.JS adapter code form LUXON.
-	 * 
-	 * @return chart.js date adapter code for LUXON in sync mode
+	 * To avoid any instantiation
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
-	TextResource datetimeAdapter();
+	private LuxonDeferredResources() {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 */
+	@Override
+	public ExternalTextResource datetimeLibrary() {
+		return LuxonDeferredResourcesClientBundle.INSTANCE.datetimeLibrary();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 */
+	@Override
+	public TextResource datetimeAdapter() {
+		return LuxonDeferredResourcesClientBundle.INSTANCE.datetimeAdapter();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.IsDeferredResources#chartJs()
+	 */
+	@Override
+	public ExternalTextResource chartJs() {
+		return LuxonDeferredResourcesClientBundle.INSTANCE.chartJs();
+
+	}
 
 }

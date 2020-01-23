@@ -24,7 +24,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsEmbeddedResources extends Resources<TextResource> {
+interface IsEmbeddedResources extends Resources<TextResource> {
 
 	/**
 	 * Contains text representation of native chart.js code.
