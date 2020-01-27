@@ -34,8 +34,7 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
- * <li><b>active</b>(boolean): if the data and dataset item is hovered. It also maps the <b>hover</b> property of CHART.js
- * context.
+ * <li><b>hover</b>(boolean): if the data and dataset item is hovered.
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -72,14 +71,6 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 */
 	@JsProperty(name = "datasetIndex")
 	native int getNativeDatasetIndex();
-
-	/**
-	 * Returns the <code>active</code> property by native object.
-	 * 
-	 * @return the <code>active</code> property by native object.
-	 */
-	@JsProperty(name = "active")
-	native boolean isNativeActive();
 
 	/**
 	 * Returns the <code>hover</code> property by native object.
@@ -135,13 +126,9 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * @return whether the associated element is hovered. Default is false.
 	 */
 	@JsOverlay
-	public boolean isActive() {
+	public boolean isHover() {
 		// checks if active property is defined
-		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, "active"))) {
-			// if here, there is active property
-			// used by Datalabels plugin
-			return isNativeActive();
-		} else if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, "hover"))) {
+		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, "hover"))) {
 			// if here, there is hover property
 			// used by Chart.js scriptable options
 			return isNativeHover();
