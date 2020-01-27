@@ -31,6 +31,8 @@ final class JSONReplacerConstants {
 	static final String HASHCODE_PROPERTY_KEY = "$H";
 	// used into JSON stringfy replacer when the key of object is Chara internal
 	static final String CHARBA_PROPERTY_KEY_PREFIX = "_charba";
+	// empty json object when a null instance is passed
+	static final String EMPTY_JSON_OBJECT = "{}";
 
 	/**
 	 * To avoid any instantiation.

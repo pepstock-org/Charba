@@ -94,7 +94,14 @@ public final class JSON {
 	 */
 	@JsOverlay
 	public static String stringify(Object obj) {
-		return stringify(obj, null, -1);
+		// checks if object id consistent
+		if (obj != null) {
+			// format in JSON
+			return stringify(obj, null, -1);
+		}
+		// if here, the argument is null
+		// then returns an empty JSON
+		return JSONReplacerConstants.EMPTY_JSON_OBJECT;
 	}
 
 	/**
@@ -107,7 +114,14 @@ public final class JSON {
 	 */
 	@JsOverlay
 	public static String stringify(Object obj, int spaces) {
-		return stringify(obj, null, spaces);
+		// checks if object id consistent
+		if (obj != null) {
+			// format in JSON
+			return stringify(obj, null, spaces);
+		}
+		// if here, the argument is null
+		// then returns an empty JSON
+		return JSONReplacerConstants.EMPTY_JSON_OBJECT;
 	}
 
 	/**
@@ -133,30 +147,36 @@ public final class JSON {
 	 */
 	@JsOverlay
 	public static String stringifyWithReplacer(Object obj, int spaces) {
-		// creates a cached to checks if an object was already parsed
-		final Set<Object> objects = new HashSet<>();
-		// invokes JSON stringfy setting replacer to avoid cycle type error
-		return stringifyWithReplacer(obj, (key, value) -> {
-			// if key is null of empty
-			// means that is first object then skip
-			if (key != null && key.trim().length() > 0) {
-				// checks if hashcode
-				if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
-					// skips it
-					return JsHelper.get().undefined();
+		// checks if object id consistent
+		if (obj != null) {
+			// creates a cached to checks if an object was already parsed
+			final Set<Object> objects = new HashSet<>();
+			// invokes JSON stringfy setting replacer to avoid cycle type error
+			return stringifyWithReplacer(obj, (key, value) -> {
+				// if key is null of empty
+				// means that is first object then skip
+				if (key != null && key.trim().length() > 0) {
+					// checks if hashcode
+					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
+						// skips it
+						return JsHelper.get().undefined();
+					}
+					// gets the object
+					Object result = manageObject(objects, value);
+					// if result is not consistent, returns the value
+					return result != null ? result : value;
+				} else {
+					// here is the first object
+					// adds to set to further controls
+					objects.add(value);
 				}
-				// gets the object
-				Object result = manageObject(objects, value);
-				// if result is not consistent, returns the value
-				return result != null ? result : value;
-			} else {
-				// here is the first object
-				// adds to set to further controls
-				objects.add(value);
-			}
-			// returns object
-			return value;
-		}, spaces);
+				// returns object
+				return value;
+			}, spaces);
+		}
+		// if here, the argument is null
+		// then returns an empty JSON
+		return JSONReplacerConstants.EMPTY_JSON_OBJECT;
 	}
 
 	/**
@@ -236,7 +256,21 @@ public final class JSON {
 	 */
 	@JsOverlay
 	public static String stringifyWithReplacer(Object obj, Replacer replacer, int spaces) {
-		return stringify(obj, replacer, spaces);
+		// checks if object id consistent
+		if (obj != null) {
+			// checks if replacer is consistent
+			if (replacer != null) {
+				// invokes stringify with replacer
+				return stringify(obj, replacer, spaces);
+			} else {
+				// if here, no replacer
+				// then normal stringify
+				stringify(obj, spaces);
+			}
+		}
+		// if here, the argument is null
+		// then returns an empty JSON
+		return JSONReplacerConstants.EMPTY_JSON_OBJECT;
 	}
 
 	/**
@@ -250,7 +284,7 @@ public final class JSON {
 	 */
 	@JsOverlay
 	public static String stringifyNativeObject(NativeObject obj, int spaces) {
-		// invokes JSON stringfy setting replacer to get only keys passed
+		// invokes JSON stringify setting replacer to get only keys passed
 		return stringifyWithReplacer(obj, (key, value) -> {
 			// if key is null of empty
 			// means that is first object
