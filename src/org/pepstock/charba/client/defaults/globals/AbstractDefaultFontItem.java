@@ -33,7 +33,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public String getFontColorAsString() {
-		return Defaults.get().getGlobal().getDefaultFontColorAsString();
+		return Defaults.get().getGlobal().getFontColorAsString();
 	}
 
 	/*
@@ -43,7 +43,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public int getFontSize() {
-		return Defaults.get().getGlobal().getDefaultFontSize();
+		return Defaults.get().getGlobal().getFontSize();
 	}
 
 	/*
@@ -53,7 +53,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return Defaults.get().getGlobal().getDefaultFontStyle();
+		return Defaults.get().getGlobal().getFontStyle();
 	}
 
 	/*
@@ -63,6 +63,6 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	 */
 	@Override
 	public String getFontFamily() {
-		return Defaults.get().getGlobal().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getFontFamily();
 	}
 }

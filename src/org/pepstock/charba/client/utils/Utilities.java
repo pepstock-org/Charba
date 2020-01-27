@@ -224,7 +224,7 @@ public final class Utilities {
 			fontWeight = FontStyle.NORMAL;
 		}
 		// checks if font family is consistent
-		final String fontFamily = family == null ? Defaults.get().getGlobal().getDefaultFontFamily() : family;
+		final String fontFamily = family == null ? Defaults.get().getGlobal().getFontFamily() : family;
 		// by regex changes the value of format
 		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_WEIGHT.replace(REGEXP_FONT_STYLE.replace(result, fontStyle.value()), fontWeight.value()), String.valueOf(size)), fontFamily);
 	}

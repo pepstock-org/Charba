@@ -32,7 +32,7 @@ public class DefaultTickItem extends AbstractDefaultFontItem implements IsDefaul
 	 */
 	@Override
 	public double getLineHeight() {
-		return Defaults.get().getGlobal().getDefaultLineHeight();
+		return Defaults.get().getGlobal().getLineHeight();
 	}
 
 }

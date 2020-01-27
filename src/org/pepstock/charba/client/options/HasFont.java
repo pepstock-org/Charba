@@ -59,7 +59,7 @@ public interface HasFont extends IsDefaultFontItem {
 			return getFonter().getFontSize();
 		}
 		// if here, fonter is not consistent
-		return Defaults.get().getGlobal().getDefaultFontSize();
+		return Defaults.get().getGlobal().getFontSize();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public interface HasFont extends IsDefaultFontItem {
 			return getFonter().getFontStyle();
 		}
 		// if here, fonter is not consistent
-		return Defaults.get().getGlobal().getDefaultFontStyle();
+		return Defaults.get().getGlobal().getFontStyle();
 	}
 
 	/**
@@ -123,7 +123,7 @@ public interface HasFont extends IsDefaultFontItem {
 			return getFonter().getFontColorAsString();
 		}
 		// if here, fonter is not consistent
-		return Defaults.get().getGlobal().getDefaultFontColorAsString();
+		return Defaults.get().getGlobal().getFontColorAsString();
 	}
 
 	/**
@@ -158,7 +158,7 @@ public interface HasFont extends IsDefaultFontItem {
 			return getFonter().getFontFamily();
 		}
 		// if here, fonter is not consistent
-		return Defaults.get().getGlobal().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getFontFamily();
 	}
 
 }

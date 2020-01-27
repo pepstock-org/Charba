@@ -80,7 +80,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	 */
 	@Override
 	public double getLineHeight() {
-		return Defaults.get().getGlobal().getDefaultLineHeight();
+		return Defaults.get().getGlobal().getLineHeight();
 	}
 
 	/*

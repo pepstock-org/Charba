@@ -44,7 +44,7 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 	 */
 	@Override
 	public double getLineHeight() {
-		return Defaults.get().getGlobal().getDefaultLineHeight();
+		return Defaults.get().getGlobal().getLineHeight();
 	}
 
 }

@@ -45,7 +45,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font size.
 	 */
 	int getFontSize() {
-		return getValue(Font.Property.SIZE, Defaults.get().getGlobal().getDefaultFontSize());
+		return getValue(Font.Property.SIZE, Defaults.get().getGlobal().getFontSize());
 	}
 
 	/**
@@ -54,7 +54,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	FontStyle getFontStyle() {
-		return getValue(Font.Property.STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(Font.Property.STYLE, FontStyle.class, Defaults.get().getGlobal().getFontStyle());
 	}
 
 	/**
@@ -63,7 +63,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	String getFontFamily() {
-		return getValue(Font.Property.FAMILY, Defaults.get().getGlobal().getDefaultFontFamily());
+		return getValue(Font.Property.FAMILY, Defaults.get().getGlobal().getFontFamily());
 	}
 
 	/**

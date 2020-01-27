@@ -92,61 +92,61 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getColorAsString()
 	 */
 	@Override
-	public final String getDefaultColorAsString() {
-		return options.getDefaultColorAsString();
+	public final String getColorAsString() {
+		return options.getColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontColorAsString()
 	 */
 	@Override
-	public final String getDefaultFontColorAsString() {
-		return options.getDefaultFontColorAsString();
+	public final String getFontColorAsString() {
+		return options.getFontColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontSize()
 	 */
 	@Override
-	public final int getDefaultFontSize() {
-		return options.getDefaultFontSize();
+	public final int getFontSize() {
+		return options.getFontSize();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontStyle()
 	 */
 	@Override
-	public final FontStyle getDefaultFontStyle() {
-		return options.getDefaultFontStyle();
+	public final FontStyle getFontStyle() {
+		return options.getFontStyle();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontFamily()
 	 */
 	@Override
-	public final String getDefaultFontFamily() {
-		return options.getDefaultFontFamily();
+	public final String getFontFamily() {
+		return options.getFontFamily();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultLineHeight()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLineHeight()
 	 */
 	@Override
-	public final double getDefaultLineHeight() {
-		return options.getDefaultLineHeight();
+	public final double getLineHeight() {
+		return options.getLineHeight();
 	}
 
 	/*

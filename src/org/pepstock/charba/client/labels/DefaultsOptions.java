@@ -81,7 +81,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font size..
 	 */
 	int getFontSize() {
-		return getValue(LabelsOptions.Property.FONT_SIZE, Defaults.get().getGlobal().getDefaultFontSize());
+		return getValue(LabelsOptions.Property.FONT_SIZE, Defaults.get().getGlobal().getFontSize());
 	}
 
 	/**
@@ -90,7 +90,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font color.
 	 */
 	String getFontColorAsString() {
-		return getValue(LabelsOptions.Property.FONT_COLOR, Defaults.get().getGlobal().getDefaultFontColorAsString());
+		return getValue(LabelsOptions.Property.FONT_COLOR, Defaults.get().getGlobal().getFontColorAsString());
 	}
 
 	/**
@@ -99,7 +99,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font style.
 	 */
 	FontStyle getFontStyle() {
-		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getFontStyle());
 	}
 
 	/**
@@ -108,7 +108,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font family.
 	 */
 	String getFontFamily() {
-		return getValue(LabelsOptions.Property.FONT_FAMILY, Defaults.get().getGlobal().getDefaultFontFamily());
+		return getValue(LabelsOptions.Property.FONT_FAMILY, Defaults.get().getGlobal().getFontFamily());
 	}
 
 	/**

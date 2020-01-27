@@ -51,7 +51,7 @@ interface IsDefaultsLineLabel {
 	 * @return the font size of text
 	 */
 	default int getFontSize() {
-		return Defaults.get().getGlobal().getDefaultFontSize();
+		return Defaults.get().getGlobal().getFontSize();
 	}
 
 	/**
@@ -78,7 +78,7 @@ interface IsDefaultsLineLabel {
 	 * @return the font family of text
 	 */
 	default String getFontFamily() {
-		return Defaults.get().getGlobal().getDefaultFontFamily();
+		return Defaults.get().getGlobal().getFontFamily();
 	}
 
 	/**

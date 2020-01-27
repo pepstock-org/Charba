@@ -146,7 +146,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return list of the fill color of the dataset item.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getColorAsString());
 	}
 
 	/**
@@ -164,7 +164,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return list of the color of the dataset item border.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getColorAsString());
 	}
 
 	/**

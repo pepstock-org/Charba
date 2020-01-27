@@ -71,12 +71,12 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
 		ASPECT_RATIO("aspectRatio"),
 		EVENTS("events"),
-		DEFAULT_COLOR("defaultColor"),
-		DEFAULT_FONT_COLOR("defaultFontColor"),
-		DEFAULT_FONT_FAMILY("defaultFontFamily"),
-		DEFAULT_FONT_SIZE("defaultFontSize"),
-		DEFAULT_FONT_STYLE("defaultFontStyle"),
-		DEFAULT_LINE_HEIGHT("defaultLineHeight"),
+		COLOR("color"),
+		FONT_COLOR("fontColor"),
+		FONT_FAMILY("fontFamily"),
+		FONT_SIZE("fontSize"),
+		FONT_STYLE("fontStyle"),
+		LINE_HEIGHT("lineHeight"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
 		SHOW_LINES("showLines"),
 		SPAN_GAPS("spanGaps"),
@@ -383,8 +383,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param defaultColor color to use into chart.
 	 */
-	public void setDefaultColor(IsColor defaultColor) {
-		setDefaultColor(checkValue(defaultColor));
+	public void setColor(IsColor defaultColor) {
+		setColor(checkValue(defaultColor));
 	}
 
 	/**
@@ -392,8 +392,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param defaultColor color to use into chart.
 	 */
-	public void setDefaultColor(String defaultColor) {
-		setValue(Property.DEFAULT_COLOR, defaultColor);
+	public void setColor(String defaultColor) {
+		setValue(Property.COLOR, defaultColor);
 	}
 
 	/**
@@ -401,8 +401,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return color to use into chart.
 	 */
-	public String getDefaultColorAsString() {
-		return getValue(Property.DEFAULT_COLOR, getDefaultValues().getDefaultColorAsString());
+	public String getColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 	}
 
 	/**
@@ -410,8 +410,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return color to use into chart.
 	 */
-	public IsColor getDefaultColor() {
-		return ColorBuilder.parse(getDefaultColorAsString());
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -419,8 +419,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param defaultFontColor font color to use into chart.
 	 */
-	public void setDefaultFontColor(IsColor defaultFontColor) {
-		setDefaultFontColor(checkValue(defaultFontColor));
+	public void setFontColor(IsColor defaultFontColor) {
+		setFontColor(checkValue(defaultFontColor));
 	}
 
 	/**
@@ -428,8 +428,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param defaultFontColor font color to use into chart.
 	 */
-	public void setDefaultFontColor(String defaultFontColor) {
-		setValue(Property.DEFAULT_FONT_COLOR, defaultFontColor);
+	public void setFontColor(String defaultFontColor) {
+		setValue(Property.FONT_COLOR, defaultFontColor);
 	}
 
 	/**
@@ -437,8 +437,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return font color to use into chart.
 	 */
-	public String getDefaultFontColorAsString() {
-		return getValue(Property.DEFAULT_FONT_COLOR, getDefaultValues().getDefaultFontColorAsString());
+	public String getFontColorAsString() {
+		return getValue(Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
 	}
 
 	/**
@@ -446,8 +446,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return font color to use into chart.
 	 */
-	public IsColor getDefaultFontColor() {
-		return ColorBuilder.parse(getDefaultFontColorAsString());
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**
@@ -455,8 +455,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param fontSize Font size into chart.
 	 */
-	public void setDefaultFontSize(int fontSize) {
-		setValue(Property.DEFAULT_FONT_SIZE, fontSize);
+	public void setFontSize(int fontSize) {
+		setValue(Property.FONT_SIZE, fontSize);
 	}
 
 	/**
@@ -464,8 +464,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return font size into chart.
 	 */
-	public int getDefaultFontSize() {
-		return getValue(Property.DEFAULT_FONT_SIZE, getDefaultValues().getDefaultFontSize());
+	public int getFontSize() {
+		return getValue(Property.FONT_SIZE, getDefaultValues().getFontSize());
 	}
 
 	/**
@@ -475,8 +475,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param fontStyle font style to use in the chart, on all objects, if not override by the specific configuration, follows
 	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
-	public void setDefaultFontStyle(FontStyle fontStyle) {
-		setValue(Property.DEFAULT_FONT_STYLE, fontStyle.value());
+	public void setFontStyle(FontStyle fontStyle) {
+		setValue(Property.FONT_STYLE, fontStyle.value());
 	}
 
 	/**
@@ -486,8 +486,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
 	 *         font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
-	public FontStyle getDefaultFontStyle() {
-		return getValue(Property.DEFAULT_FONT_STYLE, FontStyle.class, getDefaultValues().getDefaultFontStyle());
+	public FontStyle getFontStyle() {
+		return getValue(Property.FONT_STYLE, FontStyle.class, getDefaultValues().getFontStyle());
 	}
 
 	/**
@@ -497,8 +497,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows
 	 *            CSS font-family options.
 	 */
-	public void setDefaultFontFamily(String fontFamily) {
-		setValue(Property.DEFAULT_FONT_FAMILY, fontFamily);
+	public void setFontFamily(String fontFamily) {
+		setValue(Property.FONT_FAMILY, fontFamily);
 	}
 
 	/**
@@ -508,8 +508,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
 	 *         font-family options.
 	 */
-	public String getDefaultFontFamily() {
-		return getValue(Property.DEFAULT_FONT_FAMILY, getDefaultValues().getDefaultFontFamily());
+	public String getFontFamily() {
+		return getValue(Property.FONT_FAMILY, getDefaultValues().getFontFamily());
 	}
 
 	/**
@@ -517,8 +517,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param lineHeight height of an individual line of text.
 	 */
-	public void setDefaultLineHeight(double lineHeight) {
-		setValue(Property.DEFAULT_LINE_HEIGHT, lineHeight);
+	public void setLineHeight(double lineHeight) {
+		setValue(Property.LINE_HEIGHT, lineHeight);
 	}
 
 	/**
@@ -526,8 +526,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the height of an individual line of text.
 	 */
-	public double getDefaultLineHeight() {
-		return getValue(Property.DEFAULT_LINE_HEIGHT, getDefaultValues().getDefaultLineHeight());
+	public double getLineHeight() {
+		return getValue(Property.LINE_HEIGHT, getDefaultValues().getLineHeight());
 	}
 
 	/**

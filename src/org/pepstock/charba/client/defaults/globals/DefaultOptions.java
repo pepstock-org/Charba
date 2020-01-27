@@ -119,50 +119,50 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getDefaultColorAsString()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#getColorAsString()
 	 */
 	@Override
-	public String getDefaultColorAsString() {
+	public String getColorAsString() {
 		return DEFAULT_COLOR;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getDefaultFontColorAsString()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontColorAsString()
 	 */
 	@Override
-	public String getDefaultFontColorAsString() {
+	public String getFontColorAsString() {
 		return DEFAULT_FONT_COLOR;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getDefaultFontSize()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontSize()
 	 */
 	@Override
-	public int getDefaultFontSize() {
+	public int getFontSize() {
 		return DEFAULT_FONT_SIZE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getDefaultFontStyle()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontStyle()
 	 */
 	@Override
-	public FontStyle getDefaultFontStyle() {
+	public FontStyle getFontStyle() {
 		return FontStyle.NORMAL;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getDefaultFontFamily()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontFamily()
 	 */
 	@Override
-	public String getDefaultFontFamily() {
+	public String getFontFamily() {
 		return DEFAULT_FONT_FAMILY;
 	}
 
@@ -172,7 +172,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultLineHeight()
 	 */
 	@Override
-	public double getDefaultLineHeight() {
+	public double getLineHeight() {
 		return DEFAULT_LINE_HEIGHT;
 	}
 

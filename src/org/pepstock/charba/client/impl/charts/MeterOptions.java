@@ -61,7 +61,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private String format = DEFAULT_FORMAT;
 
-	private String fontFamily = Defaults.get().getGlobal().getDefaultFontFamily();
+	private String fontFamily = Defaults.get().getGlobal().getFontFamily();
 
 	private FontStyle fontStyle = FontStyle.NORMAL;
 
@@ -227,7 +227,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param fontFamily the fontFamily to set
 	 */
 	public final void setFontFamily(String fontFamily) {
-		this.fontFamily = fontFamily == null ? Defaults.get().getGlobal().getDefaultFontFamily() : fontFamily;
+		this.fontFamily = fontFamily == null ? Defaults.get().getGlobal().getFontFamily() : fontFamily;
 	}
 
 	/**

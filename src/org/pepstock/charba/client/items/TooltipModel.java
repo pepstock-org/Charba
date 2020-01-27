@@ -586,7 +586,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the legend color of tooltips.
 	 */
 	public String getLegendColorBackgroundAsString() {
-		return getValue(Property.LEGEND_COLOR_BACKGROUND, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.LEGEND_COLOR_BACKGROUND, Defaults.get().getGlobal().getColorAsString());
 	}
 
 	/**

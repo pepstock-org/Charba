@@ -565,7 +565,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
 			} else {
 				// if here, apply the fill color as background color
-				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getDefaultColorAsString());
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
 			}
 		} else if (item.isFillStyleAsCanvasGradient()) {
 			// gets the gradient by legend item
@@ -587,7 +587,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_SIZE_PROPERTY, size);
 			} else {
 				// if here, apply the fill color as background color
-				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getDefaultColorAsString());
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
 			}
 		}
 	}
