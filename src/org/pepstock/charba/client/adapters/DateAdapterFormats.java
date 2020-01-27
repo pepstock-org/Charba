@@ -27,12 +27,12 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DateAdapterFormats extends NativeObjectContainer {
+public class DateAdapterFormats extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	protected enum Property implements Key
 	{
 		DATETIME("datetime");
 
@@ -54,10 +54,17 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 		 * @see org.pepstock.charba.client.commons.Key#value()
 		 */
 		@Override
-		public String value() {
+		public final String value() {
 			return value;
 		}
 
+	}
+	
+	/**
+	 * Creates the object with an empty native object instance.
+	 */
+	protected DateAdapterFormats() {
+		this(null);
 	}
 
 	/**
@@ -65,7 +72,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object to map java script properties
 	 */
-	DateAdapterFormats(NativeObject nativeObject) {
+	protected DateAdapterFormats(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
@@ -75,7 +82,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the date time format provided by adapter.
 	 */
-	public String getDateTime() {
+	public final String getDateTime() {
 		return getValue(Property.DATETIME, Constants.EMPTY_STRING);
 	}
 
@@ -85,7 +92,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the millisecond format provided by adapter.
 	 */
-	public String getMillisecond() {
+	public final String getMillisecond() {
 		return getFormat(TimeUnit.MILLISECOND);
 	}
 
@@ -95,7 +102,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the second format provided by adapter.
 	 */
-	public String getSecond() {
+	public final String getSecond() {
 		return getFormat(TimeUnit.SECOND);
 	}
 
@@ -105,7 +112,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the minute format provided by adapter.
 	 */
-	public String getMinute() {
+	public final String getMinute() {
 		return getFormat(TimeUnit.MINUTE);
 	}
 
@@ -115,7 +122,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the hour format provided by adapter.
 	 */
-	public String getHour() {
+	public final String getHour() {
 		return getFormat(TimeUnit.HOUR);
 	}
 
@@ -125,7 +132,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the day format provided by adapter.
 	 */
-	public String getDay() {
+	public final String getDay() {
 		return getFormat(TimeUnit.DAY);
 	}
 
@@ -135,7 +142,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the week format provided by adapter.
 	 */
-	public String getWeek() {
+	public final String getWeek() {
 		return getFormat(TimeUnit.WEEK);
 	}
 
@@ -145,7 +152,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the month format provided by adapter.
 	 */
-	public String getMonth() {
+	public final String getMonth() {
 		return getFormat(TimeUnit.MONTH);
 	}
 
@@ -155,7 +162,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the quarter format provided by adapter.
 	 */
-	public String getQuarter() {
+	public final String getQuarter() {
 		return getFormat(TimeUnit.QUARTER);
 	}
 
@@ -165,7 +172,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the year format provided by adapter.
 	 */
-	public String getYear() {
+	public final String getYear() {
 		return getFormat(TimeUnit.YEAR);
 	}
 
@@ -176,7 +183,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * @param unit time unit to use to get the default.
 	 * @return the year format provided by adapter.
 	 */
-	public String getFormat(TimeUnit unit) {
+	public final String getFormat(TimeUnit unit) {
 		// check if time unit is consistent and there is into the object
 		if (Key.isValid(unit) && has(unit)) {
 			return getValue(unit, Constants.EMPTY_STRING);

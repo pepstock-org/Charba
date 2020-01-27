@@ -64,10 +64,10 @@ public final class EntryPointStarter {
 	 * This runnable instance must contains all calls to chart.<br>
 	 * This helps when the GWT application is leveraging on code splitting.
 	 * 
-	 * @param resources deferred resource client bundle to set
+	 * @param resources deferred resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	public static void run(IsDeferredResources resources, final Runnable runnable) {
+	public static void run(AbstractDeferredResources resources, final Runnable runnable) {
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception
@@ -75,22 +75,36 @@ public final class EntryPointStarter {
 		}
 		// sets deferred resources
 		ResourcesType.setClientBundle(resources);
-		// starts loading the CHART.JS
-		loadChartJS(resources, runnable);
+		// checks the the date adapter bundle is consistent
+		if (resources.getClientBundle() == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Client bundle is null");
+		}
+		// checks if is already injected
+		if (!ResourcesType.getClientBundle().getModule().isInjected()) {
+			// starts loading the CHART.JS
+			loadChartJS(resources.getClientBundle(), runnable);
+			// notify for injection
+			resources.injected();
+		} else {
+			// if here the resources have been already injected
+			// then invokes the runnable
+			runnable.run();
+		}
 	}
 
 	/**
-	 * Loads CHART.JS source code in async way.<br>
+	 * Loads CHART.JS source code in asynchronously way.<br>
 	 * After CHART.JS loading, it will load the date time library.
 	 * 
-	 * @param resources deferred resource client bundle to set
+	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadChartJS(IsDeferredResources resources, final Runnable runnable) {
+	private static void loadChartJS(DeferredDateAdapterResources resources, final Runnable runnable) {
 		try {
-			// loads CHART.JS in async
+			// loads CHART.JS in asynchronous
 			// using the deferred client instance
-			resources.chartJs().getText(new ResourceCallback<TextResource>() {
+			DeferredChartResources.INSTANCE.chartJs().getText(new ResourceCallback<TextResource>() {
 
 				/*
 				 * (non-Javadoc)
@@ -124,15 +138,15 @@ public final class EntryPointStarter {
 	}
 
 	/**
-	 * Loads date time library source code in async way.<br>
+	 * Loads date time library source code in asynchronously way.<br>
 	 * After date time library loading, it will execute the runnable.
 	 * 
-	 * @param resources deferred resource client bundle to set
+	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadDatetimeLibrary(IsDeferredResources resources, final Runnable runnable) {
+	private static void loadDatetimeLibrary(DeferredDateAdapterResources resources, final Runnable runnable) {
 		try {
-			// loads date time library in async
+			// loads date time library in asynchronous
 			// using the deferred client instance
 			resources.datetimeLibrary().getText(new ResourceCallback<TextResource>() {
 

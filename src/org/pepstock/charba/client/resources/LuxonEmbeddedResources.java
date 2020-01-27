@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.adapters.LuxonModule;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
@@ -23,7 +25,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LuxonEmbeddedResources implements IsEmbeddedResources {
+public final class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
 	 * Client bundle to reference LUXON as date time library.<br>
@@ -31,7 +33,7 @@ public final class LuxonEmbeddedResources implements IsEmbeddedResources {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	interface LuxonEmbeddedResourcesClientBundle extends IsEmbeddedResources {
+	interface LuxonEmbeddedResourcesClientBundle extends EmbeddedDateAdapterResources {
 
 		/**
 		 * Static reference to resources java script source code.
@@ -65,37 +67,17 @@ public final class LuxonEmbeddedResources implements IsEmbeddedResources {
 	 * To avoid any instantiation
 	 */
 	private LuxonEmbeddedResources() {
-		// do nothing
+		super(LuxonModule.get());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.IsEmbeddedResources#chartJs()
+	 * @see org.pepstock.charba.client.resources.AbstractEmbeddedResources#getClientBundle()
 	 */
 	@Override
-	public TextResource chartJs() {
-		return LuxonEmbeddedResourcesClientBundle.INSTANCE.chartJs();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
-	 */
-	@Override
-	public TextResource datetimeLibrary() {
-		return LuxonEmbeddedResourcesClientBundle.INSTANCE.datetimeLibrary();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
-	 */
-	@Override
-	public TextResource datetimeAdapter() {
-		return LuxonEmbeddedResourcesClientBundle.INSTANCE.datetimeAdapter();
+	protected EmbeddedDateAdapterResources getClientBundle() {
+		return LuxonEmbeddedResourcesClientBundle.INSTANCE;
 	}
 
 }

@@ -35,8 +35,8 @@ public final class Helpers {
 	 * To avoid any instantiation
 	 */
 	private Helpers() {
-		// to be sure that chart.js has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// gets native object from CHART.JS
 		this.nativeObject = Chart.getHelpers();
 	}

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.adapters.DatefnsModule;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
 
@@ -23,7 +25,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatefnsEmbeddedResources implements IsEmbeddedResources {
+public final class DatefnsEmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
 	 * Client bundle to reference DATE-FNS as date time library.<br>
@@ -31,7 +33,7 @@ public final class DatefnsEmbeddedResources implements IsEmbeddedResources {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	interface DatefnsEmbeddedResourcesClientBundle extends IsEmbeddedResources {
+	interface DatefnsEmbeddedResourcesClientBundle extends EmbeddedDateAdapterResources {
 
 		/**
 		 * Static reference to resources java script source code.
@@ -65,37 +67,17 @@ public final class DatefnsEmbeddedResources implements IsEmbeddedResources {
 	 * To avoid any instantiation
 	 */
 	private DatefnsEmbeddedResources() {
-		// do nothing
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
-	 */
-	@Override
-	public TextResource datetimeLibrary() {
-		return DatefnsEmbeddedResourcesClientBundle.INSTANCE.datetimeLibrary();
+		super(DatefnsModule.get());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
+	 * @see org.pepstock.charba.client.resources.AbstractEmbeddedResources#getClientBundle()
 	 */
 	@Override
-	public TextResource datetimeAdapter() {
-		return DatefnsEmbeddedResourcesClientBundle.INSTANCE.datetimeAdapter();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.IsEmbeddedResources#chartJs()
-	 */
-	@Override
-	public TextResource chartJs() {
-		return DatefnsEmbeddedResourcesClientBundle.INSTANCE.chartJs();
+	protected EmbeddedDateAdapterResources getClientBundle() {
+		return DatefnsEmbeddedResourcesClientBundle.INSTANCE;
 	}
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Default class to use to map the date adapter options, if needed.<br>
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  * @see DateAdaptersOptionsFactory
  */
-public class DateAdapterOptions extends AbstractDateAdapterContainer {
+public class DateAdapterOptions extends NativeObjectContainer{
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -40,6 +41,15 @@ public class DateAdapterOptions extends AbstractDateAdapterContainer {
 	 */
 	protected DateAdapterOptions(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject nativeObject(){
+		return super.getNativeObject();
 	}
 
 }

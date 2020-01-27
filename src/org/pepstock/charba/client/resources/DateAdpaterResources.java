@@ -20,21 +20,14 @@ import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS, CHART.JS date adapter library and CHARBA java script codes, always needed to CHARBA.<br>
- * CHART.JS and date time adapters text resources are just defined because the mode how to inject them depends on the
+ * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
+ * CHART.JS date time adapter library text resource is just defined because the mode how to inject them depends on the
  * implementation of this interface.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> resources prototype type of CHART.JS resource
+ * @param <T> resources prototype type of CHART.JS date adapter library resource
  */
-public interface Resources<T extends ResourcePrototype> extends ClientBundle {
-
-	/**
-	 * Contains text representation of native chart.js code.
-	 * 
-	 * @return chart.js code
-	 */
-	T chartJs();
+interface DateAdpaterResources<T extends ResourcePrototype> extends ClientBundle {
 
 	/**
 	 * Contains text representation of date-time java script library code.

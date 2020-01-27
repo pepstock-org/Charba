@@ -16,18 +16,14 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.Adapters;
 
 /**
  * Date adapter options factory for LUXON option.<br>
  * It should be use to get stored LUXON options from global, chart options and configurations.
  * 
  * @author Andrea "Stock" Stocchero
- * @see Adapters
- * @see org.pepstock.charba.client.options.Adapters
  */
 public final class LuxonOptionsFactory implements DateAdaptersOptionsFactory<LuxonOptions> {
-
 	// singleton instance of factory
 	private static final LuxonOptionsFactory INSTANCE = new LuxonOptionsFactory();
 

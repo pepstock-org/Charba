@@ -23,7 +23,6 @@ import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
@@ -80,8 +79,8 @@ public final class Merger {
 	 * To avoid any instantiation
 	 */
 	private Merger() {
-		// Inject Chart.js if not already loaded
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 	}
 
 	/**

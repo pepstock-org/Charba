@@ -15,13 +15,11 @@
 */
 package org.pepstock.charba.client.adapters;
 
-import org.pepstock.charba.client.GlobalAdapters;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.enums.DefaultDateAdapter;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -60,7 +58,7 @@ final class NativeDateAdapter {
 	 * 
 	 * @return the id of adapter
 	 */
-	@JsProperty(name = "_id")
+	@JsProperty(name = DateAdapter.ID)
 	native String internalId();
 
 	/**
@@ -141,14 +139,16 @@ final class NativeDateAdapter {
 	 * @return the id of date adapter
 	 */
 	@JsOverlay
-	DefaultDateAdapter getId() {
+	String getId() {
 		// checks if undefined
-		if (isUndefined(GlobalAdapters.ID.value())) {
-			// if yes, returns the ID got from adapters
-			return GlobalAdapters.get().getDateId();
+		if (isUndefined(DateAdapter.ID)) {
+			// if yes, returns the ID got form injected resources
+			return ResourcesType.getModuleId();
 		}
-		// returns the value of object
-		return Key.getKeyByValue(DefaultDateAdapter.class, internalId(), GlobalAdapters.get().getDateId());
+		// gets the id from native object
+		String id = internalId();
+		// returns the value of object check if consistent
+		return id != null ? id : ResourcesType.getModuleId();
 	}
 
 	/**

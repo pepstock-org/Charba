@@ -78,12 +78,8 @@ public final class Defaults {
 	 * This gets from other objects (by static references) the defaults of CHART.JS.
 	 */
 	private Defaults() {
-		// to be sure that chart.js has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// to be sure that date time library has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
-		// to be sure that date time chart.js adapter has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
 		// creates global options wrapping the global property of CHART

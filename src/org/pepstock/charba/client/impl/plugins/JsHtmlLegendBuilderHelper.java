@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -43,7 +42,8 @@ final class JsHtmlLegendBuilderHelper {
 		// to be sure that CHART.JS java script object is injected
 		// some methods are calling CHART.JS for this reason is mandatory
 		// to include also chart.js
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// to be sure that CHARBA java script object is injected
 		// invoking the JsHelper
 		JsHelper.get();

@@ -18,18 +18,17 @@ package org.pepstock.charba.client.adapters;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
- * Luxon chart.js adapter has implemented the formats by <b>Intl.DateTimeFormat</b> instead of strings.<br>
+ * LUXON chart.js adapter has implemented the formats by <b>Intl.DateTimeFormat</b> instead of strings.<br>
  * To implement <b>Intl.DateTimeFormat</b> is quite complex and maybe useless.<br>
- * Therefore for Luxon, we use a predefined formats as string but equals to defaults of the adapter.
+ * Therefore for LUXON, we use a predefined formats as string but equals to defaults of the adapter.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class LuxonFormats extends AbstractDateAdapterContainer {
-
-	// creaets a singleton instance in order to create other instancea
+public final class LuxonFormats extends DateAdapterFormats {
+	// singleton instance
 	private static final LuxonFormats INSTANCE = new LuxonFormats();
-	
+
 	/**
 	 * Creates the object with an empty native object because it will fill by the constructor
 	 */
@@ -49,9 +48,9 @@ final class LuxonFormats extends AbstractDateAdapterContainer {
 	}
 	
 	/**
-	 * Singleton method to get static instance.
+	 * Returns the singleton instance of module.
 	 * 
-	 * @return object instance
+	 * @return the singleton instance of module
 	 */
 	static LuxonFormats get() {
 		return INSTANCE;

@@ -42,7 +42,7 @@ public final class Injector {
 	// singleton instance created even if is not a singleton
 	// in order to manage a field with the package name of this class
 	// needed to improve the key calculation
-	private static final Injector INSTANCE = new Injector(); 
+	private static final Injector INSTANCE = new Injector();
 	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
@@ -93,6 +93,26 @@ public final class Injector {
 	}
 
 	/**
+	 * Returns <code>true</code> if the script or style resource has been already injected.
+	 * 
+	 * @param resource script or CSS style resource
+	 * @return <code>true</code> if the script or style resource has been already injected
+	 */
+	public static boolean isInjected(ResourcePrototype resource) {
+		// checks if resource is consistent
+		if (resource != null) {
+			// creates a unique key for the resource
+			// to use to understand if is already injected
+			String resourceKey = createKey(resource);
+			// returns if already injected
+			return ELEMENTS_INJECTED.contains(resourceKey);
+		}
+		// if here the resource is not consistent
+		// then returns false
+		return false;
+	}
+
+	/**
 	 * Injects a script resource if not injected yet.
 	 * 
 	 * @param resource script resource
@@ -132,11 +152,11 @@ public final class Injector {
 		// using the prefix package name
 		if (fullResourceClassName.startsWith(INSTANCE.charbaPrefixPackageName)) {
 			// CHARBA resource
-			return INSTANCE.charbaPrefixPackageName + resource.getName();	
+			return INSTANCE.charbaPrefixPackageName + resource.getName();
 		} else {
 			// not CHARBA resource
-			return fullResourceClassName + Constants.UNDERSCORE + resource.getName();	
+			return fullResourceClassName + Constants.UNDERSCORE + resource.getName();
 		}
-		
+
 	}
 }

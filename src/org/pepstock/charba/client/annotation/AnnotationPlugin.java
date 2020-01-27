@@ -91,8 +91,8 @@ public final class AnnotationPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
-		// Inject Chart.js if not already loaded
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// injects ANNOTATION plugin
 		Injector.ensureInjected(AnnotationClientBundle.INSTANCE.annotationPlugin());
 		// set the enabling to all charts at global level

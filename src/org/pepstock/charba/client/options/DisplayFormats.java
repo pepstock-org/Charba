@@ -15,12 +15,13 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.GlobalAdapters;
+import org.pepstock.charba.client.adapters.DateAdapter;
 import org.pepstock.charba.client.adapters.DateAdapterFormats;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.NoDefaults;
 import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -69,9 +70,10 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 		if (Key.isValid(unit)) {
 			// checks if format is already loaded
 			if (defaultFormats == null) {
-				// stores the default format
-				// getting the parent (TIME) and its parent again (SCALE)
-				defaultFormats = GlobalAdapters.get().getDate(getParent().getParent()).getFormats();
+				// gets a date adapter
+				DateAdapter adapter = ResourcesType.getClientBundle().getModule().createDateAdapter();
+				// stores the default formats
+				defaultFormats = adapter.getFormats();
 			}
 			// returns the configuration creating a key.
 			return getValue(unit, defaultFormats.getFormat(unit));

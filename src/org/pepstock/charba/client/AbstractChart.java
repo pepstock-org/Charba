@@ -139,12 +139,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			canvas = null;
 			preventDisplayHandler = null;
 		}
-		// inject Chart.js if not already loaded
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// to be sure that date time library has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
-		// to be sure that date time chart.js adapter has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// creates plugins container
 		plugins = new Plugins();
 		// creates defaults options for this chart type

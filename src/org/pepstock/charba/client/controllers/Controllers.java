@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.Controller;
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -41,12 +40,8 @@ public final class Controllers {
 	 * To avoid any instantiation
 	 */
 	private Controllers() {
-		// to be sure that chart.js has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
-		// to be sure that date time library has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeLibrary());
-		// to be sure that date time chart.js adapter has been injected
-		Injector.ensureInjected(ResourcesType.getClientBundle().datetimeAdapter());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 	}
 
 	/**

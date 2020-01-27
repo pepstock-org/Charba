@@ -88,8 +88,8 @@ public final class LabelsPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
-		// Inject Chart.js if not already loaded
-		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
+		// inject Chart.js and date library if not already loaded
+		ResourcesType.getClientBundle().inject();
 		// injects LABELS plugin
 		Injector.ensureInjected(LabelsClientBundle.INSTANCE.labelsPlugin());
 		// set the enabling to all charts at global level

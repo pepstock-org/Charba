@@ -119,7 +119,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * [Luxon](https://moment.github.io/luxon/) which can be enabled by `LuxonEmbeddedResources` or `LuxonDeferredResources` classes. 
      * [Date-fns](https://date-fns.org/) which can be enabled by `DatefnsEmbeddedResources` or `DatefnsDeferredResources` classes. 
    * change the `EntryPointStarter` (for deferred injection) in order to accept ONLY deferred resource client bundle.  
-   * provide some classes in order to use the date time adapter in GWT project as well, to manage, parse and format dates using the same object of CHART.JS. 
+   * provide some classes in order to use the date time adapter in GWT project as well, to manage, parse and format dates using the same object of CHART.JS.
    
 ### Development
 
@@ -134,6 +134,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `TimeUnit` and `DefaultFormats` to be aligned with new date time library adoption.
  * move resources (not related to CHART.JS and date time library injection) into the objects which needs (`Charba-Helper` and images for `DatasetsItemsSelector`), improving the the initial loading and GWT project build if not used.
  * change format from `JsDate` to `double` to store `Date` into configuration and options element.
+ * change and reduce visibility of `ClientBundle` interfaces in order to avoid any extension on predefined ones.
  
 License
 -------

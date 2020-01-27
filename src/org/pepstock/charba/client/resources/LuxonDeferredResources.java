@@ -15,24 +15,26 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.adapters.LuxonModule;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CLUXON as date time library (asynchronous mode).
+ * Client bundle to reference LUXON as date time library (asynchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LuxonDeferredResources implements IsDeferredResources {
+public final class LuxonDeferredResources extends AbstractDeferredResources {
 
 	/**
-	 * Client bundle to reference CLUXON as date time library.<br>
+	 * Client bundle to reference LUXON as date time library.<br>
 	 * It defines the LUXON date time library and its CHART.JS adapter (always loaded in synchronous mode).
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	interface LuxonDeferredResourcesClientBundle extends IsDeferredResources {
+	interface LuxonDeferredResourcesClientBundle extends DeferredDateAdapterResources {
 
 		/**
 		 * Static reference to resources java script source code.
@@ -61,43 +63,22 @@ public final class LuxonDeferredResources implements IsDeferredResources {
 	 * Static reference to LUXON resources.
 	 */
 	public static final LuxonDeferredResources INSTANCE = new LuxonDeferredResources();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
 	private LuxonDeferredResources() {
-		// do nothing
+		super(LuxonModule.get());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 * @see org.pepstock.charba.client.resources.AbstractDeferredResources#getClientBundle()
 	 */
 	@Override
-	public ExternalTextResource datetimeLibrary() {
-		return LuxonDeferredResourcesClientBundle.INSTANCE.datetimeLibrary();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
-	 */
-	@Override
-	public TextResource datetimeAdapter() {
-		return LuxonDeferredResourcesClientBundle.INSTANCE.datetimeAdapter();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.IsDeferredResources#chartJs()
-	 */
-	@Override
-	public ExternalTextResource chartJs() {
-		return LuxonDeferredResourcesClientBundle.INSTANCE.chartJs();
-
+	protected DeferredDateAdapterResources getClientBundle() {
+		return LuxonDeferredResourcesClientBundle.INSTANCE;
 	}
 
 }

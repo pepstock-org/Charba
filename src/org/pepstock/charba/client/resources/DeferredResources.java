@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.adapters.MomentModule;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ExternalTextResource;
 import com.google.gwt.resources.client.TextResource;
@@ -24,7 +26,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DeferredResources implements IsDeferredResources {
+public final class DeferredResources extends AbstractDeferredResources {
 
 	/**
 	 * Client bundle to reference MOMENT as date time library.<br>
@@ -32,7 +34,7 @@ public final class DeferredResources implements IsDeferredResources {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	interface DeferredResourcesClientBundle extends IsDeferredResources {
+	interface DeferredResourcesClientBundle extends DeferredDateAdapterResources {
 
 		/**
 		 * Static reference to resources java script source code.
@@ -66,37 +68,17 @@ public final class DeferredResources implements IsDeferredResources {
 	 * To avoid any instantiation
 	 */
 	private DeferredResources() {
-		// do nothing
+		super(MomentModule.get());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeLibrary()
+	 * @see org.pepstock.charba.client.resources.AbstractDeferredResources#getClientBundle()
 	 */
 	@Override
-	public ExternalTextResource datetimeLibrary() {
-		return DeferredResourcesClientBundle.INSTANCE.datetimeLibrary();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.Resources#datetimeAdapter()
-	 */
-	@Override
-	public TextResource datetimeAdapter() {
-		return DeferredResourcesClientBundle.INSTANCE.datetimeAdapter();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.resources.IsDeferredResources#chartJs()
-	 */
-	@Override
-	public ExternalTextResource chartJs() {
-		return DeferredResourcesClientBundle.INSTANCE.chartJs();
+	protected DeferredDateAdapterResources getClientBundle() {
+		return DeferredResourcesClientBundle.INSTANCE;
 	}
 
 }

@@ -15,23 +15,24 @@
 */
 package org.pepstock.charba.client.resources;
 
-import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ResourcePrototype;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
- * This resources type will load the CHART.JS module in sync mode, as part of GWT module to be downloaded.<br>
- * This is the main interface to implement for embedded client bundles.
+ * Client bundle to reference CHART.JS java script code, always needed to CHARBA.<br>
+ * CHART.JS text resource is just defined because the mode how to inject them depends on the
+ * implementation of this interface.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> resources prototype type of CHART.JS resource
  */
-interface IsEmbeddedResources extends Resources<TextResource> {
+interface ChartResources<T extends ResourcePrototype> extends ClientBundle {
 
 	/**
 	 * Contains text representation of native chart.js code.
 	 * 
-	 * @return chart.js code in sync mode
+	 * @return chart.js code
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-	TextResource chartJs();
-	
+	T chartJs();
+
 }

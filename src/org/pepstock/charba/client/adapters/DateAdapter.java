@@ -17,11 +17,9 @@ package org.pepstock.charba.client.adapters;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.GlobalAdapters;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.DefaultDateAdapter;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -31,22 +29,25 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DateAdapter {
+public class DateAdapter {
+
+	// Property name to get the adapter ID.
+	static final String ID = "_id";
 	// constant for ISO week
 	private static final String ISO_WEEK_UNIT = "isoWeek";
-
+	// instance of native adapter inside of CHART.jS
 	private final NativeDateAdapter nativeAdapter;
-
-	private final DateAdapterFormats formats;
-
+	// the options used to creates the adapter
 	private final DateAdapterOptions options;
-
-	private final DefaultDateAdapter id;
+	// the date adapter ID
+	private final String id;
+	// the date adapter default formats instance
+	private DateAdapterFormats formats;
 
 	/**
 	 * Creates a date adapter without any options.
 	 */
-	public DateAdapter() {
+	protected DateAdapter() {
 		this(null);
 	}
 
@@ -56,37 +57,13 @@ public final class DateAdapter {
 	 * 
 	 * @param options date adapter options
 	 */
-	public DateAdapter(DateAdapterOptions options) {
-		// checks if date adapter in CHART.JS is consistent
-		GlobalAdapters.get().checkIfHasDate();
+	protected DateAdapter(DateAdapterOptions options) {
 		// checks if argument is consistent
 		this.options = options != null ? options : new DateAdapterOptions();
 		// creates a native date adapter
 		this.nativeAdapter = new NativeDateAdapter(this.options.nativeObject());
-		// PAY ATTENTION:
-		// Luxon chart.js adapter has implemented the formats by Intl.DateTimeFormat
-		// instead of strings. To implement Intl.DateTimeFormat is quite complex and maybe useless
-		// Therefore for Luxon, we use a predefined formats as string but equals to defaults of the adapter
-		// native object instance
-		NativeObject nativeObject = null;
 		// stores the ID
 		this.id = nativeAdapter.getId();
-		// checks if the adapter is luxon one
-		if (DefaultDateAdapter.LUXON.equals(id)) {
-			// uses the native object of special Luxon defaults
-			nativeObject = LuxonFormats.get().nativeObject();
-		} else {
-			// gets formats
-			// in order to store them once
-			nativeObject = nativeAdapter.formats();
-			// checks if formats are consistent
-			if (nativeObject == null) {
-				// if no, exception
-				throw new IllegalArgumentException("Default formats is null");
-			}
-		}
-		// creates and stores the formats
-		this.formats = new DateAdapterFormats(nativeObject);
 	}
 
 	/**
@@ -94,8 +71,8 @@ public final class DateAdapter {
 	 * 
 	 * @return the date adapter id
 	 */
-	public DefaultDateAdapter getId() {
-		return nativeAdapter.getId();
+	public final String getId() {
+		return id;
 	}
 
 	/**
@@ -104,6 +81,20 @@ public final class DateAdapter {
 	 * @return the provided default formats
 	 */
 	public DateAdapterFormats getFormats() {
+		// checks if formats have been already loaded
+		if (formats != null) {
+			// gets formats
+			// in order to store them once
+			NativeObject nativeObject = nativeAdapter.formats();
+			// checks if formats are consistent
+			if (nativeObject == null) {
+				// if no, exception
+				throw new IllegalArgumentException("Default formats is null");
+			}
+			// creates and stores the formats
+			this.formats = new DateAdapterFormats(nativeObject);
+		}
+		// returns the formats
 		return formats;
 	}
 
@@ -128,7 +119,7 @@ public final class DateAdapter {
 		// checks if factory is consistent
 		if (factory != null) {
 			// invokes the factory to wrap the native object
-			// which are represnting the option
+			// which are representing the option
 			return factory.create(options.nativeObject());
 		}
 		// if here, the factory is not consistent
@@ -143,7 +134,7 @@ public final class DateAdapter {
 	 * @param format the expected data format
 	 * @return number date representation or <code>null</code>
 	 */
-	public Date parse(String time, String format) {
+	public final Date parse(String time, String format) {
 		// checks if arguments are consistent
 		if (time != null && format != null) {
 			// invokes the date adapter to parse the time
@@ -163,7 +154,7 @@ public final class DateAdapter {
 	 * @param format the date/time token
 	 * @return a date time string representation
 	 */
-	public String format(long time, String format) {
+	public final String format(long time, String format) {
 		// checks if arguments are consistent
 		if (time >= 0 && format != null) {
 			// invokes the date adapter to format the time
@@ -181,7 +172,7 @@ public final class DateAdapter {
 	 * @param unit the time unit to use
 	 * @return a date time string representation
 	 */
-	public String format(long time, TimeUnit unit) {
+	public final String format(long time, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (time >= 0 && Key.isValid(unit)) {
 			// invokes the date adapter to format the time
@@ -199,7 +190,7 @@ public final class DateAdapter {
 	 * @param format the date/time token
 	 * @return a date time string representation
 	 */
-	public String format(Date time, String format) {
+	public final String format(Date time, String format) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to format the time
@@ -217,7 +208,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return a date time string representation
 	 */
-	public String format(Date time, TimeUnit unit) {
+	public final String format(Date time, TimeUnit unit) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to format the time
@@ -236,7 +227,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return new date with added units
 	 */
-	public Date add(long time, long amount, TimeUnit unit) {
+	public final Date add(long time, long amount, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (time >= 0 && Key.isValid(unit)) {
 			// invoke the date adapter to add an amount of time units
@@ -257,7 +248,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return new date with added units
 	 */
-	public Date add(Date time, long amount, TimeUnit unit) {
+	public final Date add(Date time, long amount, TimeUnit unit) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to add an amount of time units
@@ -276,7 +267,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the number of unit between the given timestamps
 	 */
-	public double diff(long maxTime, long minTime, TimeUnit unit) {
+	public final double diff(long maxTime, long minTime, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (maxTime >= 0 && minTime >= 0 && maxTime >= minTime && Key.isValid(unit)) {
 			// invoke the date adapter to get the difference in time units
@@ -295,7 +286,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the number of unit between the given dates
 	 */
-	public double diff(Date maxTime, Date minTime, TimeUnit unit) {
+	public final double diff(Date maxTime, Date minTime, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (maxTime != null && minTime != null) {
 			// invoke the date adapter to get the difference in time units
@@ -313,7 +304,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the start of unit for the given timestamp
 	 */
-	public Date startOf(long time, TimeUnit unit) {
+	public final Date startOf(long time, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (time >= 0 && Key.isValid(unit)) {
 			// invoke the date adapter to get the date start of by time unit
@@ -333,7 +324,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the start of unit for the given date
 	 */
-	public Date startOf(Date time, TimeUnit unit) {
+	public final Date startOf(Date time, TimeUnit unit) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to get the date start of by time unit
@@ -352,7 +343,7 @@ public final class DateAdapter {
 	 *            isoWeek).
 	 * @return the start by weekday for the given date
 	 */
-	public Date startOf(long time, int weekday) {
+	public final Date startOf(long time, int weekday) {
 		// checks if arguments are consistent
 		if (time >= 0 && weekday >= 0 && weekday <= 7) {
 			// invoke the date adapter to get the date start of by time unit
@@ -373,7 +364,7 @@ public final class DateAdapter {
 	 *            isoWeek).
 	 * @return the start by weekday for the given date
 	 */
-	public Date startOf(Date time, int weekday) {
+	public final Date startOf(Date time, int weekday) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to get the date start of by time unit
@@ -391,7 +382,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the end of unit for the given timestamp
 	 */
-	public Date endOf(long time, TimeUnit unit) {
+	public final Date endOf(long time, TimeUnit unit) {
 		// checks if arguments are consistent
 		if (time >= 0 && Key.isValid(unit)) {
 			// invoke the date adapter to get the date end of by time unit
@@ -411,7 +402,7 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the end of unit for the given date
 	 */
-	public Date endOf(Date time, TimeUnit unit) {
+	public final Date endOf(Date time, TimeUnit unit) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to get the date end of by time unit
