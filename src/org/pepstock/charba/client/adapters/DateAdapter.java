@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
 public class DateAdapter {
 
 	// Property name to get the adapter ID.
-	static final String ID = "_id";
+	static final String ID_PROPERTY = "_id";
 	// constant for ISO week
 	private static final String ISO_WEEK_UNIT = "isoWeek";
 	// instance of native adapter inside of CHART.jS

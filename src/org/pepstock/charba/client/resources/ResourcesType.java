@@ -37,7 +37,6 @@ public final class ResourcesType {
 	 */
 	public static final String IMAGES_RESOURCES_PATH = "org/pepstock/charba/client/resources/images/";
 	// static instance of resources to be loaded
-	// private static Resources<ResourcePrototype> resources = null;
 	private static AbstractResources<ResourcePrototype> resources = null;
 
 	/**
@@ -55,7 +54,6 @@ public final class ResourcesType {
 	 * @param <T> type of resources to be loaded.
 	 */
 	@SuppressWarnings("unchecked")
-	// public static <T extends ResourcePrototype> void setClientBundle(Resources<T> resources) {
 	public static <T extends ResourcePrototype> void setClientBundle(AbstractResources<T> resources) {
 		// checks if argument is null
 		if (resources == null) {
@@ -75,7 +73,6 @@ public final class ResourcesType {
 				throw new IllegalArgumentException("Resources type is already set the module '"+ResourcesType.resources.getModule().getId()+"' and can not be changed");
 			}
 			// stores the instance
-			// ResourcesType.resources = (Resources<ResourcePrototype>) resources;
 			ResourcesType.resources = (AbstractResources<ResourcePrototype>) resources;
 		} else {
 			// exception

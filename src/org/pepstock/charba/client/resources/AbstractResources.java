@@ -45,6 +45,13 @@ public abstract class AbstractResources<T extends ResourcePrototype> {
 		// stores module
 		this.module = module;
 	}
+	
+	/**
+	 * Returns the client bundle with date library and adapter java script definition.
+	 * 
+	 * @return the client bundle with date library and adapter java script definition
+	 */
+	protected abstract DateAdpaterResources<T> getClientBundle();
 
 	/**
 	 * Returns the date adapter module.

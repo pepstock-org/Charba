@@ -43,11 +43,13 @@ public abstract class AbstractDeferredResources extends AbstractResources<Extern
 	 * 
 	 * @return the client bundle with date library and adapter java script definition
 	 */
+	@Override
 	protected abstract DeferredDateAdapterResources getClientBundle();
 
 	/**
 	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a {@link UnsupportedOperationException}.
 	 */
+	@Override
 	public final void inject() {
 		// checks if module is already injected
 		if (!getModule().isInjected()) {

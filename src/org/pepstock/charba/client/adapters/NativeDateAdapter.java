@@ -58,7 +58,7 @@ final class NativeDateAdapter {
 	 * 
 	 * @return the id of adapter
 	 */
-	@JsProperty(name = DateAdapter.ID)
+	@JsProperty(name = DateAdapter.ID_PROPERTY)
 	native String internalId();
 
 	/**
@@ -141,7 +141,7 @@ final class NativeDateAdapter {
 	@JsOverlay
 	String getId() {
 		// checks if undefined
-		if (isUndefined(DateAdapter.ID)) {
+		if (isUndefined(DateAdapter.ID_PROPERTY)) {
 			// if yes, returns the ID got form injected resources
 			return ResourcesType.getModuleId();
 		}

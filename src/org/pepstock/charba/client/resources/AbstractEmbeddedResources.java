@@ -45,6 +45,7 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 	 * 
 	 * @return the client bundle with date library and adapter java script definition
 	 */
+	@Override
 	protected abstract EmbeddedDateAdapterResources getClientBundle();
 
 	/**

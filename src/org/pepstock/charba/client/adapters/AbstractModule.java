@@ -155,11 +155,6 @@ public abstract class AbstractModule {
 		// casts to module
 		AbstractModule other = (AbstractModule) obj;
 		// checks if id is the same
-		if (!id.equals(other.id)) {
-			return false;
-		}
-		// if here they are equals
-		// with same id
-		return true;
+		return id.equals(other.id);
 	}
 }
