@@ -135,6 +135,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move resources (not related to CHART.JS and date time library injection) into the objects which needs (`Charba-Helper` and images for `DatasetsItemsSelector`), improving the the initial loading and GWT project build if not used.
  * change format from `JsDate` to `double` to store `Date` into configuration and options element.
  * change and reduce visibility of `ClientBundle` interfaces in order to avoid any extension on predefined ones.
+ * add checking on arguments in `JSON` class in order to avoid any `NullPointerExcpetion`.
  
 License
 -------
