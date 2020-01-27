@@ -63,14 +63,16 @@ public final class ResourcesType {
 		// checks if is extending a correct abstract resource
 		if (resources instanceof AbstractEmbeddedResources || resources instanceof AbstractDeferredResources) {
 			// checks if the resources type is already set and is different from the argument
-			if (ResourcesType.resources != null && !resources.getClass().equals(ResourcesType.resources.getClass())) {
-				// exception
-				throw new IllegalArgumentException("Resources type is already set and can not be changed");
-			}
-			// checks if the resources type is already set and is different from the argument
-			if (ResourcesType.resources != null && !ResourcesType.resources.getModule().equals(resources.getModule())) {
-				// exception
-				throw new IllegalArgumentException("Resources type is already set the module '"+ResourcesType.resources.getModule().getId()+"' and can not be changed");
+			if (ResourcesType.resources != null) {
+				if (!resources.getClass().equals(ResourcesType.resources.getClass())) {
+					// exception
+					throw new IllegalArgumentException("Resources type is already set and can not be changed");
+				}
+				// checks if the resources type is already set and is different from the argument
+				if (!ResourcesType.resources.getModule().equals(resources.getModule())) {
+					// exception
+					throw new IllegalArgumentException("Resources type is already set the module '"+ResourcesType.resources.getModule().getId()+"' and can not be changed");
+				}
 			}
 			// stores the instance
 			ResourcesType.resources = (AbstractResources<ResourcePrototype>) resources;
