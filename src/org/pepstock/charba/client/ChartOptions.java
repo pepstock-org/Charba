@@ -31,7 +31,7 @@ public final class ChartOptions extends ScaledOptions {
 
 	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
 	private static final String INVALID_SCALE_TYPE = "The options is referring to {0} chart with {1} scale type and not to {2} scale type as requested";
-	
+
 	private final Type type;
 
 	/**

@@ -37,7 +37,7 @@ import com.google.gwt.resources.client.TextResource;
  *
  */
 public final class ZoomPlugin {
-	
+
 	/**
 	 * Client bundle to reference ZOOM CHART.JS plugin, wrapped by Charba.
 	 * 
@@ -56,7 +56,7 @@ public final class ZoomPlugin {
 		 * 
 		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a> code
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH +"chartjs-plugin-zoom.min.js")
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-zoom.min.js")
 		TextResource zoomPlugin();
 
 		/**
@@ -65,7 +65,7 @@ public final class ZoomPlugin {
 		 * 
 		 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH +"hammer.min.js")
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "hammer.min.js")
 		TextResource hammerLibrary();
 	}
 

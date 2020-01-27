@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see DateAdaptersOptionsFactory
  */
-public class DateAdapterOptions extends NativeObjectContainer{
+public class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -48,7 +48,7 @@ public class DateAdapterOptions extends NativeObjectContainer{
 	 * 
 	 * @return the native object instance.
 	 */
-	final NativeObject nativeObject(){
+	final NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 

@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
-	
+
 	/**
 	 * Resource client bundle to inject images for clear selection.
 	 * 
@@ -48,7 +48,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 *
 	 */
 	interface ClearSelectionImages extends ClientBundle {
-		
+
 		/**
 		 * Static reference to resources java script source code
 		 */

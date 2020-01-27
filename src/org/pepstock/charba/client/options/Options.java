@@ -511,7 +511,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public String getDefaultFontFamily() {
 		return getValue(Property.DEFAULT_FONT_FAMILY, getDefaultValues().getDefaultFontFamily());
 	}
-	
+
 	/**
 	 * Sets the height of an individual line of text.
 	 * 

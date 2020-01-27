@@ -69,7 +69,7 @@ public interface IsDefaultScale {
 	 * @return the time defaults.
 	 */
 	IsDefaultTime getTime();
-	
+
 	/**
 	 * Returns the adapter defaults.
 	 * 

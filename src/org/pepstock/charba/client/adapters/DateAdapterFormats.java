@@ -59,7 +59,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the object with an empty native object instance.
 	 */

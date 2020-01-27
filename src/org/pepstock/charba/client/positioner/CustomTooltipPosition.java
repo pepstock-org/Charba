@@ -42,7 +42,7 @@ public final class CustomTooltipPosition implements IsTooltipPosition {
 		}
 		// check is the name is the same of already out of the box ones
 		if (Key.hasKeyByValue(TooltipPosition.class, name)) {
-			throw new IllegalArgumentException("The tooltip position '"+name+"' is already defined");
+			throw new IllegalArgumentException("The tooltip position '" + name + "' is already defined");
 		}
 		this.name = name;
 	}

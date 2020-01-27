@@ -37,13 +37,13 @@ public class HorizontalBarChart extends BarChart {
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param extendedType type of chart
 	 */
 	protected HorizontalBarChart(Type extendedType) {
 		super(extendedType);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

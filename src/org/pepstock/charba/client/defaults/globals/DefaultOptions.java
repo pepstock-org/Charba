@@ -40,7 +40,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final String DEFAULT_FONT_COLOR = "#666";
 
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-	
+
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	private static final boolean DEFAULT_SHOW_LINES = true;

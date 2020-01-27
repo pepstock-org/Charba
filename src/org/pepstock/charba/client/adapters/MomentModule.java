@@ -45,8 +45,11 @@ public final class MomentModule extends AbstractModule {
 		return INSTANCE;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.DateAdapterOptions)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.
+	 * DateAdapterOptions)
 	 */
 	@Override
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {
@@ -57,7 +60,7 @@ public final class MomentModule extends AbstractModule {
 		}
 		// if here, the module injected is not MOMENT
 		// then exception
-		throw new IllegalArgumentException("MOMENT module is not injected. The current injected adapter is "+ResourcesType.getModuleId());
+		throw new IllegalArgumentException("MOMENT module is not injected. The current injected adapter is " + ResourcesType.getModuleId());
 	}
 
 }

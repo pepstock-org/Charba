@@ -138,7 +138,7 @@ public final class ChartNode {
 	 * @return the CHART JS chart ID. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getId() {
-		return check(chart.getId(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getId(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -147,7 +147,7 @@ public final class ChartNode {
 	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
-		return check(chart.getWidth(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public final class ChartNode {
 	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
-		return check(chart.getHeight(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getHeight(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public final class ChartNode {
 	 * @return the aspect ratio. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getAspectRatio() {
-		return check(chart.getAspectRatio(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getAspectRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -174,7 +174,7 @@ public final class ChartNode {
 	 * @return the current device pixel ratio. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
-		return check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -183,7 +183,7 @@ public final class ChartNode {
 	 * @return if the chart is animating or not. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
-		return check(chart.isAnimating(), UndefinedValues.BOOLEAN);
+		return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;
 	}
 
 	/**
@@ -192,7 +192,7 @@ public final class ChartNode {
 	 * @return the border width value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
-		return check(chart.getBorderWidth(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -201,7 +201,7 @@ public final class ChartNode {
 	 * @return the outer radius value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
-		return check(chart.getOuterRadius(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getOuterRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public final class ChartNode {
 	 * @return the inner radius value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
-		return check(chart.getInnerRadius(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getInnerRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -219,7 +219,7 @@ public final class ChartNode {
 	 * @return the radius length value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getRadiusLength() {
-		return check(chart.getRadiusLength(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getRadiusLength(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -228,7 +228,7 @@ public final class ChartNode {
 	 * @return the offset X value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetX() {
-		return check(chart.getOffsetX(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -237,7 +237,7 @@ public final class ChartNode {
 	 * @return the offset Y value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetY() {
-		return check(chart.getOffsetY(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -257,15 +257,10 @@ public final class ChartNode {
 	 * @return returns the no-null one.
 	 */
 	private boolean check(boolean value, boolean defaultValue) {
-		// checks if chart is initialized
-		if (initialized) {
-			// transforms the value into string because a boolean can not be null
-			String stringValue = String.valueOf(value);
-			// by java script, if value is null, to string you have "undefined"
-			return ObjectType.UNDEFINED.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
-		}
-		// if here, chart is not initialized
-		return defaultValue;
+		// transforms the value into string because a boolean can not be null
+		String stringValue = String.valueOf(value);
+		// by java script, if value is null, to string you have "undefined"
+		return ObjectType.UNDEFINED.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
 	}
 
 	/**
@@ -276,12 +271,7 @@ public final class ChartNode {
 	 * @return returns the no-null one.
 	 */
 	private int check(int value, int defaultValue) {
-		// checks if chart is initialized
-		if (initialized) {
-			return Double.isNaN(value) ? defaultValue : value;
-		}
-		// if here, chart is not initialized
-		return defaultValue;
+		return Double.isNaN(value) ? defaultValue : value;
 	}
 
 	/**
@@ -292,12 +282,7 @@ public final class ChartNode {
 	 * @return returns the no-null one.
 	 */
 	private double check(double value, double defaultValue) {
-		// checks if chart is initialized
-		if (initialized) {
-			return Double.isNaN(value) ? defaultValue : value;
-		}
-		// if here, chart is not initialized
-		return defaultValue;
+		return Double.isNaN(value) ? defaultValue : value;
 	}
 
 }

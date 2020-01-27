@@ -121,7 +121,7 @@ final class NativeJsHelper {
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	static native void setLineDash(Context2d context, ArrayInteger object);
-	
+
 	/**
 	 * Sets the line dash offset, or "phase."<br>
 	 * 

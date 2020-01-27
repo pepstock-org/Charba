@@ -71,7 +71,7 @@ public final class ResourcesType {
 				// checks if the resources type is already set and is different from the argument
 				if (!ResourcesType.resources.getModule().equals(resources.getModule())) {
 					// exception
-					throw new IllegalArgumentException("Resources type is already set the module '"+ResourcesType.resources.getModule().getId()+"' and can not be changed");
+					throw new IllegalArgumentException("Resources type is already set the module '" + ResourcesType.resources.getModule().getId() + "' and can not be changed");
 				}
 			}
 			// stores the instance
@@ -97,17 +97,17 @@ public final class ResourcesType {
 		// returns the instance
 		return ResourcesType.resources;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the date adapter module is the same of the injected one.
 	 * 
-	 * @param module the date adapter module to check 
+	 * @param module the date adapter module to check
 	 * @return <code>true</code> if the module is the same of the injected one
 	 */
 	public static boolean equalsTo(AbstractModule module) {
 		return getClientBundle().getModule().equals(module);
 	}
-	
+
 	/**
 	 * Returns the date adapter module id.
 	 * 

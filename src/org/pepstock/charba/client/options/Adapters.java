@@ -22,12 +22,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 
 /**
- * The following adapters element is  used to configure a date adapter, injecting to support time series into CAHRT.JS.
+ * The following adapters element is used to configure a date adapter, injecting to support time series into CAHRT.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> implements IsDefaultAdapters {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -58,7 +58,7 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 		}
 
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
 	 * This element does not have any default values.
@@ -85,7 +85,7 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Returns the date adapter options, if exist.<br>
 	 * It uses a factory instance to create a date adapter options.<br>
@@ -101,7 +101,7 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 		if (factory != null) {
 			// checks if there is any date adapter options
 			if (has(Property.DATE)) {
-				// creates and returns the object 
+				// creates and returns the object
 				return factory.create(getValue(Property.DATE));
 			} else {
 				// goes to default value to get the value
@@ -111,5 +111,5 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 		// if here factory is not consistent
 		return null;
 	}
-	
+
 }

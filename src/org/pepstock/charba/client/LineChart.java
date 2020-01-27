@@ -36,11 +36,11 @@ public class LineChart extends AbstractChart<LineDataset> {
 	public LineChart() {
 		this(ChartType.LINE);
 	}
-	
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param extendedType type of chart
 	 */
 	protected LineChart(Type extendedType) {

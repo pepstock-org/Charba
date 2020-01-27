@@ -123,7 +123,7 @@ public class Plugins {
 	public void removeOptions(String pluginId) {
 		extendedOptions.getPlugins().removeOptions(pluginId);
 	}
-	
+
 	/**
 	 * Sets the plugin options.
 	 * 
@@ -133,7 +133,7 @@ public class Plugins {
 	public <T extends AbstractPluginOptions> void setOptions(T options) {
 		extendedOptions.getPlugins().setOptions(options);
 	}
-	
+
 	/**
 	 * Sets the plugin options as list.<br>
 	 * If the list is empty, it does nothing
@@ -190,6 +190,7 @@ public class Plugins {
 	public ObjectType getOptionsType(String pluginId) {
 		return extendedOptions.getPlugins().getOptionsType(pluginId);
 	}
+
 	/**
 	 * Returns the plugin options, if exist.<br>
 	 * It uses a factory instance to create a plugin options.<br>
@@ -203,7 +204,7 @@ public class Plugins {
 	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
 		return extendedOptions.getPlugins().getOptions(factory);
 	}
-	
+
 	/**
 	 * Returns the plugin options, if exist.<br>
 	 * It uses a factory instance to create a plugin options.
@@ -217,7 +218,7 @@ public class Plugins {
 		// returns the configuration by plugin id.
 		return extendedOptions.getPlugins().getOptions(pluginId, factory);
 	}
-	
+
 	/**
 	 * Returns the plugin options as list, if exist.<br>
 	 * It uses a factory instance to create a plugin options.

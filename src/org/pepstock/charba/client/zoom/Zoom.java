@@ -169,7 +169,7 @@ public final class Zoom extends AbstractConfigurationItem {
 		// then returns the default drag object
 		return null;
 	}
-	
+
 	/**
 	 * Sets the speed of element via mouse wheel (percentage of element on a wheel event).<br>
 	 * Must be a value from 0 and 1.
@@ -195,7 +195,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	}
 
 	/**
-	 * Sets the minimal zoom level before actually applying zoom, on category scale. 
+	 * Sets the minimal zoom level before actually applying zoom, on category scale.
 	 * 
 	 * @param sensitivity the minimal zoom level before actually applying zoom, on category scale
 	 */

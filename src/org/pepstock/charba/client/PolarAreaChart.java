@@ -41,7 +41,7 @@ public class PolarAreaChart extends AbstractChart<PolarAreaDataset> {
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param extendedType type of chart
 	 */
 	protected PolarAreaChart(Type extendedType) {

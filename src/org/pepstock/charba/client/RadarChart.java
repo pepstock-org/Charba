@@ -39,7 +39,7 @@ public class RadarChart extends AbstractChart<RadarDataset> {
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param extendedType type of chart
 	 */
 	protected RadarChart(Type extendedType) {

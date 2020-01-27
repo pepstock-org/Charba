@@ -38,7 +38,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param type type of chart
 	 */
 	BaseMeterChart(Type type) {

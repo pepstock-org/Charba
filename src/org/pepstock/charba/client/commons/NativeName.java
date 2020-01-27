@@ -67,7 +67,7 @@ public final class NativeName {
 	 * Charba).
 	 */
 	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
-	
+
 	/**
 	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>,
 	 * (internal of Charba), when {@link HtmlLegend} is activated.
@@ -84,9 +84,10 @@ public final class NativeName {
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART = "Chart";
-	
+
 	/**
-	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).
+	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of
+	 * CHART.JS).
 	 */
 	public static final String CHART_ADAPTERS_DATE = "Chart._adapters._date";
 

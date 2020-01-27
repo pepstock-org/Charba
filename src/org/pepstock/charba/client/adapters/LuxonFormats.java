@@ -46,7 +46,7 @@ public final class LuxonFormats extends DateAdapterFormats {
 		setValue(TimeUnit.QUARTER, "'Q'q - yyyy");
 		setValue(TimeUnit.YEAR, "yyyy");
 	}
-	
+
 	/**
 	 * Returns the singleton instance of module.
 	 * 

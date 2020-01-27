@@ -20,8 +20,7 @@ import com.google.gwt.resources.client.ResourcePrototype;
 
 /**
  * Client bundle to reference CHART.JS java script code, always needed to CHARBA.<br>
- * CHART.JS text resource is just defined because the mode how to inject them depends on the
- * implementation of this interface.
+ * CHART.JS text resource is just defined because the mode how to inject them depends on the implementation of this interface.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> resources prototype type of CHART.JS resource

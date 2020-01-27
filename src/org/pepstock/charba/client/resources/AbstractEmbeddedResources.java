@@ -55,7 +55,7 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 	public final void inject() {
 		// checks if module has been already injected
 		if (!getModule().isInjected()) {
-			// inject Chart.js if not already loaded 
+			// inject Chart.js if not already loaded
 			ensureInjected(EmbeddedChartResources.INSTANCE.chartJs());
 			// gets client bundle
 			EmbeddedDateAdapterResources bundle = getClientBundle();

@@ -188,7 +188,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		Key.checkIfValid(position);
 		// that means that is defined both out of the box or custom one by positioner
 		if (!Key.hasKeyByValue(TooltipPosition.class, position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
-			throw new IllegalArgumentException("The tooltip position '"+position+"' is not consistent");
+			throw new IllegalArgumentException("The tooltip position '" + position + "' is not consistent");
 		}
 		// stores values
 		setValue(Property.POSITION, position);

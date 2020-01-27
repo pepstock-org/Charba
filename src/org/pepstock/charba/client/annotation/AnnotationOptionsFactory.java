@@ -68,8 +68,11 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client.IsChart)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client.
+	 * IsChart)
 	 */
 	@Override
 	public void onBeforeConfigure(IsChart chart) {

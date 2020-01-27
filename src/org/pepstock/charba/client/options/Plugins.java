@@ -46,8 +46,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	// exception message when the plugin id is not the same of options passed as argument
 	private static final String INVALID_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options";
 	// exception message when the plugin id is not the same of factory passed as argument
-	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY ="Plugin id '{0}' is not equals to plugin id '{1}'of factory";
-	 
+	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY = "Plugin id '{0}' is not equals to plugin id '{1}'of factory";
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
@@ -264,7 +263,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (options == null && hasOptions(pluginId)) {
 			// removes configuration if exists
 			remove(pluginIdKey);
-		} else if (options != null){
+		} else if (options != null) {
 			// scans all options to check if the options have got the same plugin id
 			for (AbstractPluginOptions option : options) {
 				// checks plugin
@@ -470,5 +469,5 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_ID_NOT_EQUALS_IN_FACTORY, pluginIdKey.value(), factory.getPluginId()));
 		}
 	}
-	
+
 }

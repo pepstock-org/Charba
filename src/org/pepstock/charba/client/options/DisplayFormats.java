@@ -29,7 +29,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  */
 public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
-	
+
 	// defaults format instance, retrieved by the date adapter
 	private DateAdapterFormats defaultFormats = null;
 

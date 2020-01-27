@@ -1164,9 +1164,9 @@ public abstract class NativeObjectContainer {
 		// gets date value as number
 		double value = getValueForMultipleKeyTypes(key, Double.NaN);
 		// checks if number value is consistent with a date
-		if (!Double.isNaN(value) &&  value > 0D) {
+		if (!Double.isNaN(value) && value > 0D) {
 			// creates and returns a date
-			return new Date((long)value);
+			return new Date((long) value);
 		}
 		// the property is not a string
 		// then returns undefined value

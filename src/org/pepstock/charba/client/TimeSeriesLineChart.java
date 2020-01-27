@@ -35,11 +35,11 @@ public class TimeSeriesLineChart extends AbstractChart<TimeSeriesLineDataset> {
 	public TimeSeriesLineChart() {
 		this(ChartType.LINE);
 	}
-	
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
-	 *  
+	 * 
 	 * @param extendedType type of chart
 	 */
 	protected TimeSeriesLineChart(Type extendedType) {

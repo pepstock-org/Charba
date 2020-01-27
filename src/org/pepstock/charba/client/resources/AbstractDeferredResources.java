@@ -47,7 +47,8 @@ public abstract class AbstractDeferredResources extends AbstractResources<Extern
 	protected abstract DeferredDateAdapterResources getClientBundle();
 
 	/**
-	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a {@link UnsupportedOperationException}.
+	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a
+	 * {@link UnsupportedOperationException}.
 	 */
 	@Override
 	public final void inject() {

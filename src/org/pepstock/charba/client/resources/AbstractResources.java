@@ -45,7 +45,7 @@ public abstract class AbstractResources<T extends ResourcePrototype> {
 		// stores module
 		this.module = module;
 	}
-	
+
 	/**
 	 * Returns the client bundle with date library and adapter java script definition.
 	 * 
@@ -61,7 +61,7 @@ public abstract class AbstractResources<T extends ResourcePrototype> {
 	public final AbstractModule getModule() {
 		return module;
 	}
-	
+
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
 	 */

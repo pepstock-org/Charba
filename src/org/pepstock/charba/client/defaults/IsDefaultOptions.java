@@ -117,7 +117,7 @@ public interface IsDefaultOptions {
 	 * @return the pixel ratio.
 	 */
 	double getDevicePixelRatio();
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
@@ -221,5 +221,5 @@ public interface IsDefaultOptions {
 	 *         otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	boolean isDestroyOnDetach();
-	
+
 }

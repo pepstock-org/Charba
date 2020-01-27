@@ -250,7 +250,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// checks if the axis is a time one
 		if (AxisType.TIME.equals(getType())) {
 			// returns a date
-			return getValue(Property.MAX, (Date)null);
+			return getValue(Property.MAX, (Date) null);
 		}
 		// if here is not a number
 		// then returns undefined double
@@ -266,7 +266,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// checks if the axis is a time one
 		if (AxisType.TIME.equals(getType())) {
 			// returns a date
-			return getValue(Property.MIN, (Date)null);
+			return getValue(Property.MIN, (Date) null);
 		}
 		// if here is not a number
 		// then returns undefined double

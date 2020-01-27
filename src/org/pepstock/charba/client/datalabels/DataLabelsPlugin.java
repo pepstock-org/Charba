@@ -47,15 +47,15 @@ public final class DataLabelsPlugin {
 		static final DataLabelsClientBundle INSTANCE = GWT.create(DataLabelsClientBundle.class);
 
 		/**
-		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-datalabels">datalabels
-		 * plugin</a> code.
+		 * Contains text representation of native chart
+		 * <a href="https://github.com/chartjs/chartjs-plugin-datalabels">datalabels plugin</a> code.
 		 * 
 		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-datalabels">datalabels plugin</a> code
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH +"chartjs-plugin-datalabels.min.js")
+		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-datalabels.min.js")
 		TextResource datalabelsPlugin();
 	}
-	
+
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */

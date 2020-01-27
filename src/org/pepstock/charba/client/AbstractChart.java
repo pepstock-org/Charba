@@ -172,7 +172,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	public abstract D newDataset();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getType()
 	 */
 	@Override

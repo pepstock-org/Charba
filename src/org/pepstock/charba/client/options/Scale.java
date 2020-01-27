@@ -57,7 +57,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	private final PointLabels pointLabels;
 
 	private final Time time;
-	
+
 	private final Adapters adapters;
 
 	/**
@@ -210,7 +210,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	public final Adapters getAdapters() {
 		return adapters;
 	}
-	
+
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.

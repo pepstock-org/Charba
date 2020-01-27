@@ -34,14 +34,14 @@ import com.google.gwt.resources.client.TextResource;
  *
  */
 public final class JsHelper {
-	
+
 	/**
 	 * Client bundle to reference CHARBA java script codes, always needed to CHARBA.<br>
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	interface CharbaHelperResource extends ClientBundle {
-		
+
 		/**
 		 * Static reference to resources java script source code.
 		 */
@@ -57,7 +57,7 @@ public final class JsHelper {
 		TextResource charbaHelper();
 
 	}
-	
+
 	// static instance for singleton
 	private static final JsHelper INSTANCE = new JsHelper();
 

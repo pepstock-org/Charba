@@ -878,7 +878,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	public final Type getType() {
 		return type;
 	}
-	
+
 	/**
 	 * Removes the plugin options.
 	 * 
@@ -893,7 +893,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			remove(pluginIdKey);
 		}
 	}
-	
+
 	/**
 	 * Sets the plugin options.
 	 * 
@@ -958,7 +958,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// if here, factory is not consistent
 		return null;
 	}
-	
+
 	/**
 	 * Returns the plugin options, if exist.<br>
 	 * It uses a factory instance to create a plugin options.<br>

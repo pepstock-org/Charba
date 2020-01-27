@@ -20,7 +20,8 @@ import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Date adapter module for DATE-FNS.<br>
- * <b><a href="https://date-fns.org/">date-fns</a></b> provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates.
+ * <b><a href="https://date-fns.org/">date-fns</a></b> provides the most comprehensive, yet simple and consistent toolset for
+ * manipulating JavaScript dates.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -34,7 +35,7 @@ public final class DatefnsModule extends AbstractModule {
 	private DatefnsModule() {
 		super(DefaultDateAdapter.DATE_FNS);
 	}
-	
+
 	/**
 	 * Returns the singleton instance of module.
 	 * 
@@ -44,8 +45,11 @@ public final class DatefnsModule extends AbstractModule {
 		return INSTANCE;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.DateAdapterOptions)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.
+	 * DateAdapterOptions)
 	 */
 	@Override
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {
@@ -56,7 +60,7 @@ public final class DatefnsModule extends AbstractModule {
 		}
 		// if here, the module injected is not DATE-FNS
 		// then exception
-		throw new IllegalArgumentException("DATE-FNS module is not injected. The current injected adapter is "+ResourcesType.getModuleId());
-	}	
-	
+		throw new IllegalArgumentException("DATE-FNS module is not injected. The current injected adapter is " + ResourcesType.getModuleId());
+	}
+
 }

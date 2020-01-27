@@ -35,7 +35,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	private final TimeAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	private final Time time;
-	
+
 	private final Adapters adapters;
 
 	/**
@@ -92,7 +92,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public Adapters getAdapters() {
 		return adapters;
 	}
-	
+
 	/**
 	 * Sets property controls the data distribution along the scale.
 	 * 

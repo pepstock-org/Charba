@@ -36,7 +36,7 @@ import com.google.gwt.resources.client.TextResource;
  *
  */
 public final class AnnotationPlugin {
-	
+
 	/**
 	 * Client bundle to reference ANNOTATION CHART.JS plugin, wrapped by Charba.
 	 * 
@@ -50,8 +50,8 @@ public final class AnnotationPlugin {
 		static final AnnotationClientBundle INSTANCE = GWT.create(AnnotationClientBundle.class);
 
 		/**
-		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation
-		 * plugin</a> code.
+		 * Contains text representation of native chart
+		 * <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation plugin</a> code.
 		 * 
 		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-annotation">annotation plugin</a> code
 		 */

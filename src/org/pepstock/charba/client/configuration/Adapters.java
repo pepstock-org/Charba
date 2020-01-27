@@ -19,12 +19,12 @@ import org.pepstock.charba.client.adapters.DateAdapterOptions;
 import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 
 /**
- * The following adapters element is  used to configure a date adapter, injecting to support time series into CAHRT.JS.
+ * The following adapters element is used to configure a date adapter, injecting to support time series into CAHRT.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class Adapters extends AxisContainer {
-	
+
 	/**
 	 * Builds the object storing the axis which this adapters belongs to.
 	 * 
@@ -33,7 +33,7 @@ public final class Adapters extends AxisContainer {
 	Adapters(Axis axis) {
 		super(axis);
 	}
-	
+
 	/**
 	 * Sets the date adapters options.
 	 * 
@@ -43,7 +43,7 @@ public final class Adapters extends AxisContainer {
 	public <T extends DateAdapterOptions> void setDate(T options) {
 		getAxis().getScale().getAdapters().setDate(options);
 	}
-	
+
 	/**
 	 * Returns the date adapter options, if exist.<br>
 	 * It uses a factory instance to create a date adapter options.<br>
@@ -57,5 +57,5 @@ public final class Adapters extends AxisContainer {
 	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
 		return getAxis().getScale().getAdapters().getDate(factory);
 	}
-	
+
 }
