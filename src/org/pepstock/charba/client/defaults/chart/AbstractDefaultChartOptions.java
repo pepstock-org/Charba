@@ -52,16 +52,6 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getResponsiveAnimationDuration()
-	 */
-	@Override
-	public final int getResponsiveAnimationDuration() {
-		return options.getResponsiveAnimationDuration();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isMaintainAspectRatio()
 	 */
 	@Override

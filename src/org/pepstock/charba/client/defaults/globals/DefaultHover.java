@@ -28,8 +28,6 @@ public final class DefaultHover implements IsDefaultHover {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
-	private static final int DEFAULT_ANIMATION_DURATION = 400;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -48,16 +46,6 @@ public final class DefaultHover implements IsDefaultHover {
 	@Override
 	public boolean isIntersect() {
 		return DEFAULT_INTERSECT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#getAnimationDuration()
-	 */
-	@Override
-	public int getAnimationDuration() {
-		return DEFAULT_ANIMATION_DURATION;
 	}
 
 	/*

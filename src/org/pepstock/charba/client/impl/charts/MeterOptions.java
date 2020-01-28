@@ -82,7 +82,7 @@ public class MeterOptions extends AbstractPieOptions {
 		// disables legend, title and tooltips.
 		super.getTitle().setDisplay(false);
 		super.getTooltips().setEnabled(false);
-		super.getHover().setAnimationDuration(0);
+		super.getAnimation().getActive().setDuration(0);
 		// creates a wrapper for legend
 		legend = new LegendWrapper(super.getLegend());
 		legend.setDisplay(false);

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -30,6 +31,30 @@ public final class DefaultAnimation implements IsDefaultAnimation {
 	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
+
+	private final DefaultAnimationActive active = new DefaultAnimationActive();
+
+	private final DefaultAnimationResize resize = new DefaultAnimationResize();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getActive()
+	 */
+	@Override
+	public IsDefaultAnimationElement getActive() {
+		return active;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getResize()
+	 */
+	@Override
+	public IsDefaultAnimationElement getResize() {
+		return resize;
+	}
 
 	/*
 	 * (non-Javadoc)

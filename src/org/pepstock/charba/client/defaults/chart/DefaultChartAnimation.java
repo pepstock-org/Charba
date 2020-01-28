@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.options.Animation;
 
@@ -28,6 +29,10 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 
 	private final Animation animation;
 
+	private final DefaultChartAnimationActive animationActive;
+
+	private final DefaultChartAnimationResize animationResize;
+
 	/**
 	 * Creates the object by animation option element instance.
 	 * 
@@ -35,6 +40,28 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 */
 	DefaultChartAnimation(Animation animation) {
 		this.animation = animation;
+		this.animationActive = new DefaultChartAnimationActive(animation.getActive());
+		this.animationResize = new DefaultChartAnimationResize(animation.getResize());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getActive()
+	 */
+	@Override
+	public IsDefaultAnimationElement getActive() {
+		return animationActive;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getResize()
+	 */
+	@Override
+	public IsDefaultAnimationElement getResize() {
+		return animationResize;
 	}
 
 	/*

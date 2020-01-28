@@ -67,7 +67,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		TITLE("title"),
 		PLUGINS("plugins"),
 		RESPONSIVE("responsive"),
-		RESPONSIVE_ANIMATION_DURATION("responsiveAnimationDuration"),
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
 		ASPECT_RATIO("aspectRatio"),
 		EVENTS("events"),
@@ -258,24 +257,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public boolean isResponsive() {
 		return getValue(Property.RESPONSIVE, getDefaultValues().isResponsive());
-	}
-
-	/**
-	 * Sets the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @param milliseconds the duration in milliseconds it takes to animate to new size after a resize event.
-	 */
-	public void setResponsiveAnimationDuration(int milliseconds) {
-		setValue(Property.RESPONSIVE_ANIMATION_DURATION, milliseconds);
-	}
-
-	/**
-	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
-	 */
-	public int getResponsiveAnimationDuration() {
-		return getValue(Property.RESPONSIVE_ANIMATION_DURATION, getDefaultValues().getResponsiveAnimationDuration());
 	}
 
 	/**

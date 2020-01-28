@@ -37,7 +37,10 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		ANIMATE_ROTATE("animateRotate"),
 		ANIMATE_SCALE("animateScale"),
 		DURATION("duration"),
-		EASING("easing");
+		EASING("easing"),
+		ACTIVE("active"),
+		RESIZE("resize"),
+		;
 
 		// name value of property
 		private final String value;
@@ -62,6 +65,10 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		}
 
 	}
+	
+	private final AnimationActive active;
+	
+	private final AnimationResize resize;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
@@ -74,6 +81,26 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 */
 	Animation(Options options, Key childKey, IsDefaultAnimation defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		this.active = new AnimationActive(this, Property.ACTIVE, defaultValues.getActive(), getValue(Property.ACTIVE));
+		this.resize = new AnimationResize(this, Property.RESIZE, defaultValues.getResize(), getValue(Property.RESIZE));
+	}
+
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate hover style changes.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate hover style changes
+	 */
+	public AnimationActive getActive() {
+		return active;
+	}
+
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate to new size after a resize event.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate to new size after a resize event
+	 */
+	public AnimationResize getResize() {
+		return resize;
 	}
 
 	/**

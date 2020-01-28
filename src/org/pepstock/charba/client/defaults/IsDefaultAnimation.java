@@ -23,6 +23,20 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultAnimation {
+	
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate hover style changes.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate hover style changes.
+	 */
+	IsDefaultAnimationElement getActive();
+
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate to new size after a resize event.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate to new size after a resize event.
+	 */
+	IsDefaultAnimationElement getResize();
 
 	/**
 	 * Returns the animation easing.

@@ -27,8 +27,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
-	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
-
 	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
 
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
@@ -74,16 +72,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public boolean isResponsive() {
 		return DEFAULT_RESPONSIVE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getResponsiveAnimationDuration()
-	 */
-	@Override
-	public int getResponsiveAnimationDuration() {
-		return DEFAULT_RESPONSIVE_ANIMATION_DURATION;
 	}
 
 	/*

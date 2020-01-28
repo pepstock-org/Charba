@@ -75,24 +75,6 @@ public class Hover {
 	}
 
 	/**
-	 * Sets the duration in milliseconds it takes to animate hover style changes.
-	 * 
-	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
-	 */
-	public void setAnimationDuration(int milliseconds) {
-		options.getHover().setAnimationDuration(milliseconds);
-	}
-
-	/**
-	 * Returns the duration in milliseconds it takes to animate hover style changes.
-	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes.
-	 */
-	public int getAnimationDuration() {
-		return options.getHover().getAnimationDuration();
-	}
-
-	/**
 	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
 	 * 

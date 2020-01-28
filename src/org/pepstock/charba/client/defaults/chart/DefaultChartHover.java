@@ -61,16 +61,6 @@ public final class DefaultChartHover implements IsDefaultHover {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAnimationDuration()
-	 */
-	@Override
-	public int getAnimationDuration() {
-		return hover.getAnimationDuration();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAxis()
 	 */
 	@Override

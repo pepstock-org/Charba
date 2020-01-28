@@ -17,25 +17,24 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
+ * takes.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefaultHover {
+abstract class AbstractAnimationElement extends AbstractModel<Animation, IsDefaultAnimationElement> implements IsDefaultAnimationElement {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		AXIS("axis");
-
+		DURATION("duration");
+		
 		// name value of property
 		private final String value;
 
@@ -64,54 +63,33 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
 	 * 
-	 * @param options options of the chart.
+	 * @param animation animation options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
-		super(options, childKey, defaultValues, nativeObject);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
-	 */
-	@Override
-	InteractionMode getDefaultMode() {
-		return getDefaultValues().getMode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#isDefaultIntersect()
-	 */
-	@Override
-	boolean isDefaultIntersect() {
-		return getDefaultValues().isIntersect();
+	AbstractAnimationElement(Animation animation, Key childKey, IsDefaultAnimationElement defaultValues, NativeObject nativeObject) {
+		super(animation, childKey, defaultValues, nativeObject);
 	}
 
 	/**
-	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
-	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
+	 * Sets the number of milliseconds an animation takes.
 	 * 
-	 * @param axis define which directions are used in calculating distances.
+	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
-	public void setAxis(InteractionAxis axis) {
-		setValue(Property.AXIS, axis);
+	public void setDuration(int milliseconds) {
+		setValue(Property.DURATION, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return define which directions are used in calculating distances.
+	 * @return the number of milliseconds an animation takes.
 	 */
-	public InteractionAxis getAxis() {
-		return getValue(Property.AXIS, InteractionAxis.class, getDefaultValues().getAxis());
+	public int getDuration() {
+		return getValue(Property.DURATION, getDefaultValues().getDuration());
 	}
 
 }

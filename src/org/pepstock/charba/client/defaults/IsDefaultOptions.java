@@ -87,12 +87,12 @@ public interface IsDefaultOptions {
 	 */
 	boolean isResponsive();
 
-	/**
-	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
-	 */
-	int getResponsiveAnimationDuration();
+//	/**
+//	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
+//	 * 
+//	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
+//	 */
+//	int getResponsiveAnimationDuration();
 
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.

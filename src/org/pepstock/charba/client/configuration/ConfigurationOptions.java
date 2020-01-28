@@ -22,8 +22,8 @@ import java.util.List;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Envelop;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -409,24 +409,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public boolean isResponsive() {
 		return getConfiguration().isResponsive();
-	}
-
-	/**
-	 * Sets the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @param milliseconds the duration in milliseconds it takes to animate to new size after a resize event.
-	 */
-	public void setResponsiveAnimationDuration(int milliseconds) {
-		getConfiguration().setResponsiveAnimationDuration(milliseconds);
-	}
-
-	/**
-	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
-	 */
-	public int getResponsiveAnimationDuration() {
-		return getConfiguration().getResponsiveAnimationDuration();
 	}
 
 	/**

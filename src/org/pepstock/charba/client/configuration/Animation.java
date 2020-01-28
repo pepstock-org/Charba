@@ -76,6 +76,11 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
+	
+	private final AnimationActive active;
+	
+	private final AnimationResize resize;
+
 
 	/**
 	 * Name of properties of native object.
@@ -117,6 +122,9 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	Animation(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
+		// stores inner elements
+		this.active = new AnimationActive(chart, options);
+		this.resize = new AnimationResize(chart, options);
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// -------------------------------
@@ -136,6 +144,24 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 				onProgress(animationObject.getAnimationItem());
 			}
 		});
+	}
+	
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate hover style changes.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate hover style changes
+	 */
+	public AnimationActive getActive() {
+		return active;
+	}
+
+	/**
+	 * Returns the animation element to get the duration in milliseconds it takes to animate to new size after a resize event.
+	 * 
+	 * @return the animation element to get the duration in milliseconds it takes to animate to new size after a resize event
+	 */
+	public AnimationResize getResize() {
+		return resize;
 	}
 
 	/**
