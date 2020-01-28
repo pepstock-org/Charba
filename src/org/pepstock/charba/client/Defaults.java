@@ -80,10 +80,12 @@ public final class Defaults {
 	private Defaults() {
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
-		// gets defaults from CHART.JS
-		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
+		// gets default from Chart
+		NativeObject defaults = Chart.getDefaults();
 		// creates global options wrapping the global property of CHART
-		this.options = new GlobalOptions(wrapperDefaults.getGlobal());
+		this.options = new GlobalOptions(defaults);
+		// gets defaults from CHART.JS
+		wrapperDefaults = new WrapperDefaults(defaults);
 		// creates global scale wrapping the scale property of CHART
 		this.scale = new GlobalScale(wrapperDefaults.getScale());
 		// creates global plugins wrapping the plugins property of CHART
@@ -384,7 +386,7 @@ public final class Defaults {
 
 	/**
 	 * It wraps the defaults object of CHART.JS chart instance.<br>
-	 * It returns the global, scale and chart options.
+	 * It returns the scale and chart options.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -396,7 +398,6 @@ public final class Defaults {
 		 */
 		private enum Property implements Key
 		{
-			GLOBAL("global"),
 			SCALE("scale");
 
 			// name value of property
@@ -429,15 +430,6 @@ public final class Defaults {
 		 */
 		WrapperDefaults(NativeObject nativeObject) {
 			super(nativeObject);
-		}
-
-		/**
-		 * Returns the GLOBAL options of chart as native object.
-		 * 
-		 * @return the GLOBAL options
-		 */
-		NativeObject getGlobal() {
-			return getValue(Property.GLOBAL);
 		}
 
 		/**
