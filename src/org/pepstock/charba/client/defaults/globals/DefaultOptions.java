@@ -53,7 +53,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
 
-	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
+	private static final double DEFAULT_START_ANGLE = 0;
 
 	private static final boolean DEFAULT_DRAW_ON_ATTACH = true;
 
