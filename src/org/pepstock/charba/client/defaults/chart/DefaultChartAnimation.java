@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.enums.InterpolatorType;
 import org.pepstock.charba.client.options.Animation;
 
 /**
@@ -104,4 +105,52 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.isAnimateScale();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isDebug()
+	 */
+	@Override
+	public boolean isDebug() {
+		return animation.isDebug();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDelay()
+	 */
+	@Override
+	public int getDelay() {
+		return animation.getDelay();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isLoop()
+	 */
+	@Override
+	public boolean isLoop() {
+		return animation.isLoop();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getType()
+	 */
+	@Override
+	public InterpolatorType getType() {
+		return animation.getType();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFrom()
+	 */
+	@Override
+	public double getFrom() {
+		return animation.getFrom();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFromAsString()
+	 */
+	@Override
+	public String getFromAsString() {
+		return animation.getFromAsString();
+	}
+	
 }

@@ -17,10 +17,12 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.enums.InterpolatorType;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
@@ -234,6 +236,132 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	public boolean isAnimateScale() {
 		return getConfiguration().getAnimation().isAnimateScale();
+	}
+	
+	/**
+	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
+	 * 
+	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
+	 */
+	public void setDebug(boolean debug) {
+		getConfiguration().getAnimation().setDebug(debug);
+	}
+
+	/**
+	 * Returns <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
+	 * 
+	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
+	 */
+	public boolean isDebug() {
+		return getConfiguration().getAnimation().isDebug();
+	}
+
+	/**
+	 * Sets the delay before starting the animations.
+	 * 
+	 * @param delay the delay before starting the animations
+	 */
+	public void setDelay(int delay) {
+		getConfiguration().getAnimation().setDelay(delay);
+	}
+
+	/**
+	 * Returns the delay before starting the animations.
+	 * 
+	 * @return the delay before starting the animations
+	 */
+	public int getDelay() {
+		return getConfiguration().getAnimation().getDelay();
+	}
+
+	/**
+	 * If set to <code>true</code>, loops the animations endlessly.
+	 * 
+	 * @param loop <code>true</code> if loops the animations endlessly.
+	 */
+	public void setLoop(boolean loop) {
+		getConfiguration().getAnimation().setLoop(loop);
+	}
+
+	/**
+	 * If set to <code>true</code>, loops the animations endlessly.
+	 * 
+	 * @return <code>true</code> if loops the animations endlessly.
+	 */
+	public boolean isLoop() {
+		return getConfiguration().getAnimation().isLoop();
+	}
+
+	/**
+	 * Sets the type of <code>from</code> property and determines the interpolator used.
+	 * 
+	 * @param type the type of <code>from</code> property and determines the interpolator used.
+	 */
+	public void setType(InterpolatorType type) {
+		getConfiguration().getAnimation().setType(type);
+	}
+
+	/**
+	 * Returns the type of <code>from</code> property and determines the interpolator used.
+	 * 
+	 * @return the type of <code>from</code> property and determines the interpolator used.
+	 */
+	public InterpolatorType getType() {
+		return getConfiguration().getAnimation().getType();
+	}
+
+	/**
+	 * Sets the start value for the animation as number.
+	 * 
+	 * @param from the start value for the animation as number.
+	 */
+	public void setFrom(double from) {
+		getConfiguration().getAnimation().setFrom(from);
+	}
+
+	/**
+	 * Sets the start value for the animation as color string.
+	 * 
+	 * @param from the start value for the animation as color string.
+	 */
+	public void setFrom(String from) {
+		getConfiguration().getAnimation().setFrom(from);
+	}
+
+	/**
+	 * Sets the start value for the animation as color.
+	 * 
+	 * @param from the start value for the animation as color.
+	 */
+	public void setFrom(IsColor from) {
+		getConfiguration().getAnimation().setFrom(from);
+	}
+
+	/**
+	 * Returns the start value for the animation as number.
+	 * 
+	 * @return the start value for the animation as number.
+	 */
+	public double getFrom() {
+		return getConfiguration().getAnimation().getFrom();
+	}
+
+	/**
+	 * Returns the start value for the animation as color string.
+	 * 
+	 * @return the start value for the animation as color string.
+	 */
+	public String getFromAsString() {
+		return getConfiguration().getAnimation().getFromAsString();
+	}
+	
+	/**
+	 * Returns the start value for the animation as color.
+	 * 
+	 * @return the start value for the animation as color.
+	 */
+	public IsColor getFromAsColor() {
+		return getConfiguration().getAnimation().getFromAsColor();
 	}
 
 	/*

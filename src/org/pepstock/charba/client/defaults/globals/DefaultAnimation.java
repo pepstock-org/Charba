@@ -18,6 +18,8 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.enums.InterpolatorType;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -31,6 +33,16 @@ public final class DefaultAnimation implements IsDefaultAnimation {
 	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
+
+	private static final boolean DEFAULT_DEBUG = false;
+
+	private static final int DEFAULT_DELAY = UndefinedValues.INTEGER;
+
+	private static final boolean DEFAULT_LOOP = false;
+
+	private static final double DEFAULT_FROM = UndefinedValues.DOUBLE;
+
+	private static final String DEFAULT_FROM_AS_STRING = UndefinedValues.STRING;
 
 	private final DefaultAnimationActive active = new DefaultAnimationActive();
 
@@ -94,6 +106,66 @@ public final class DefaultAnimation implements IsDefaultAnimation {
 	@Override
 	public boolean isAnimateScale() {
 		return DEFAULT_ANIMATE_SCALE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isDebug()
+	 */
+	@Override
+	public boolean isDebug() {
+		return DEFAULT_DEBUG;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDelay()
+	 */
+	@Override
+	public int getDelay() {
+		return DEFAULT_DELAY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isLoop()
+	 */
+	@Override
+	public boolean isLoop() {
+		return DEFAULT_LOOP;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getType()
+	 */
+	@Override
+	public InterpolatorType getType() {
+		return InterpolatorType.UNKNOWN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFrom()
+	 */
+	@Override
+	public double getFrom() {
+		return DEFAULT_FROM;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFromAsString()
+	 */
+	@Override
+	public String getFromAsString() {
+		return DEFAULT_FROM_AS_STRING;
 	}
 
 }

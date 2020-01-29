@@ -15,10 +15,14 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.enums.InterpolatorType;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
@@ -40,7 +44,11 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		EASING("easing"),
 		ACTIVE("active"),
 		RESIZE("resize"),
-		;
+		DEBUG("debug"),
+		DELAY("delay"),
+		LOOP("loop"),
+		TYPE("type"),
+		FROM("from");
 
 		// name value of property
 		private final String value;
@@ -65,9 +73,9 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		}
 
 	}
-	
+
 	private final AnimationActive active;
-	
+
 	private final AnimationResize resize;
 
 	/**
@@ -181,6 +189,200 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 */
 	public boolean isAnimateScale() {
 		return getValue(Property.ANIMATE_SCALE, getDefaultValues().isAnimateScale());
+	}
+
+	/**
+	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
+	 * 
+	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
+	 */
+	public void setDebug(boolean debug) {
+		setValue(Property.DEBUG, debug);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
+	 * 
+	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
+	 */
+	public boolean isDebug() {
+		return getValue(Property.DEBUG, getDefaultValues().isDebug());
+	}
+
+	/**
+	 * Sets the delay before starting the animations.
+	 * 
+	 * @param delay the delay before starting the animations
+	 */
+	public void setDelay(int delay) {
+		setValue(Property.DELAY, delay);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the delay before starting the animations.
+	 * 
+	 * @return the delay before starting the animations
+	 */
+	public int getDelay() {
+		return getValue(Property.DELAY, getDefaultValues().getDelay());
+	}
+
+	/**
+	 * If set to <code>true</code>, loops the animations endlessly.
+	 * 
+	 * @param loop <code>true</code> if loops the animations endlessly.
+	 */
+	public void setLoop(boolean loop) {
+		setValue(Property.LOOP, loop);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If set to <code>true</code>, loops the animations endlessly.
+	 * 
+	 * @return <code>true</code> if loops the animations endlessly.
+	 */
+	public boolean isLoop() {
+		return getValue(Property.LOOP, getDefaultValues().isLoop());
+	}
+
+	/**
+	 * Sets the type of <code>from</code> property and determines the interpolator used.
+	 * 
+	 * @param type the type of <code>from</code> property and determines the interpolator used.
+	 */
+	public void setType(InterpolatorType type) {
+		// checks if type is consistent and not unknown
+		if (type != null && !InterpolatorType.UNKNOWN.equals(type)) {
+			// if consistent, stores type
+			setValue(Property.TYPE, type);
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+			// checks if the current from property is consistent
+			// gets type of property
+			ObjectType propertyType = type(Property.FROM);
+			// checks if the value is stored as the type
+			if (InterpolatorType.NUMBER.equals(type) && !ObjectType.NUMBER.equals(propertyType)) {
+				// if here, the new type is not aligned with from
+				// then removes from
+				removeIfExists(Property.FROM);
+			} else if (InterpolatorType.COLOR.equals(type) && !ObjectType.STRING.equals(propertyType)) {
+				// if here, the new type is not aligned with from
+				// then removes from
+				removeIfExists(Property.FROM);
+			}
+		} else {
+			// removes the key because the type is not consistent
+			removeIfExists(Property.TYPE);
+			// then removes from
+			removeIfExists(Property.FROM);
+		}
+	}
+
+	/**
+	 * Returns the type of <code>from</code> property and determines the interpolator used.
+	 * 
+	 * @return the type of <code>from</code> property and determines the interpolator used.
+	 */
+	public InterpolatorType getType() {
+		return getValue(Property.TYPE, InterpolatorType.class, getDefaultValues().getType());
+	}
+
+	/**
+	 * Sets the start value for the animation as number.
+	 * 
+	 * @param from the start value for the animation as number.
+	 */
+	public void setFrom(double from) {
+		setValue(Property.FROM, from);
+		// override the type
+		setValue(Property.TYPE, InterpolatorType.NUMBER);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets the start value for the animation as color string.
+	 * 
+	 * @param from the start value for the animation as color string.
+	 */
+	public void setFrom(String from) {
+		setValue(Property.FROM, from);
+		// override the type
+		setValue(Property.TYPE, InterpolatorType.COLOR);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets the start value for the animation as color.
+	 * 
+	 * @param from the start value for the animation as color.
+	 */
+	public void setFrom(IsColor from) {
+		setFrom(checkValue(from));
+	}
+
+	/**
+	 * Returns the start value for the animation as number.
+	 * 
+	 * @return the start value for the animation as number.
+	 */
+	public double getFrom() {
+		// gets the type options
+		InterpolatorType storedType = getType();
+		// gets type of property
+		ObjectType propertyType = type(Property.FROM);
+		// checks if the value is stored as the type
+		if (InterpolatorType.NUMBER.equals(storedType) && ObjectType.NUMBER.equals(propertyType)) {
+			return getValue(Property.FROM, getDefaultValues().getFrom());
+		}
+		// if here, the type is not consistent
+		// then returns the default value
+		return getDefaultValues().getFrom();
+	}
+
+	/**
+	 * Returns the start value for the animation as color string.
+	 * 
+	 * @return the start value for the animation as color string.
+	 */
+	public String getFromAsString() {
+		// gets the type options
+		InterpolatorType storedType = getType();
+		// gets type of property
+		ObjectType propertyType = type(Property.FROM);
+		// checks if the value is stored as the type
+		if (InterpolatorType.COLOR.equals(storedType) && ObjectType.STRING.equals(propertyType)) {
+			return getValue(Property.FROM, getDefaultValues().getFromAsString());
+		}
+		// if here, the type is not consistent
+		// then returns the default value
+		return getDefaultValues().getFromAsString();
+	}
+
+	/**
+	 * Returns the start value for the animation as color.
+	 * 
+	 * @return the start value for the animation as color.
+	 */
+	public IsColor getFromAsColor() {
+		// gets value as string
+		String fromAsString = getFromAsString();
+		// checks if consistent
+		if (fromAsString != null) {
+			// creates and returns the color
+			return ColorBuilder.parse(fromAsString);
+		}
+		// if here
+		// no from as string
+		// then returns null
+		return null;
 	}
 
 }
