@@ -17,15 +17,12 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Comfortable object to create {@link LabelsPlugin#ID} plugin options by a builder.
@@ -301,28 +298,6 @@ public final class LabelsOptionsBuilder {
 	 */
 	public LabelsOptionsBuilder setTextMargin(int textMargin) {
 		options.setTextMargin(textMargin);
-		return this;
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 * @return builder instance
-	 */
-	public LabelsOptionsBuilder setImages(ImageResource... images) {
-		options.setImages(images);
-		return this;
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 * @return builder instance
-	 */
-	public LabelsOptionsBuilder setImages(Image... images) {
-		options.setImages(images);
 		return this;
 	}
 

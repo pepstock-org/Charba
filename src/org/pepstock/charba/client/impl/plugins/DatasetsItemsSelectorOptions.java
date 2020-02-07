@@ -260,8 +260,10 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the line dash pattern used when stroking lines.
 	 */
-	public List<Integer> getBorderDash() {
-		return ArrayListHelper.list(getBorderDashAsJavaScriptObject());
+	public List<Integer> getBorderDash() {		
+		// gets array instance
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -280,26 +282,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultsOptions.getBorderDashOffset());
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines.
-	 */
-	ArrayInteger getBorderDashAsJavaScriptObject() {
-		// creates array instance
-		ArrayInteger array = null;
-		// checks if there is the property set
-		if (has(Property.BORDER_DASH)) {
-			// returns array
-			array = getArrayValue(Property.BORDER_DASH);
-		} else {
-			// returns default
-			array = defaultsOptions.getBorderDash();
-		}
-		return array;
 	}
 
 	/**

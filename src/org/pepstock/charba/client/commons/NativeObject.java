@@ -17,9 +17,9 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -210,7 +210,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void definePatternProperty(String key, CanvasPattern value) {
+	void definePatternProperty(String key, CanvasPatternItem value) {
 		// creates a descriptor
 		NativePatternDescriptor descriptor = new NativePatternDescriptor();
 		// sets value
@@ -228,7 +228,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void defineGradientProperty(String key, CanvasGradient value) {
+	void defineGradientProperty(String key, CanvasGradientItem value) {
 		// creates a descriptor
 		NativeGradientDescriptor descriptor = new NativeGradientDescriptor();
 		// sets value

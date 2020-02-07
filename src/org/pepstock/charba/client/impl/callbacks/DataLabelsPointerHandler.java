@@ -19,8 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
-
-import com.google.gwt.dom.client.Style.Cursor;
+import org.pepstock.charba.client.dom.enums.CursorType;
 
 /**
  * {@link DataLabelsPlugin#ID} event callback to change the cursor type when the labels are clickable.
@@ -31,12 +30,12 @@ import com.google.gwt.dom.client.Style.Cursor;
 public class DataLabelsPointerHandler extends AbstractEventHandler {
 
 	/**
-	 * Default pointer cursor to use if omitted, {@link com.google.gwt.dom.client.Style.Cursor#POINTER}.
+	 * Default pointer cursor to use if omitted, {@link CursorType#POINTER}.
 	 */
-	public static final Cursor DEFAULT_CURSOR = Cursor.POINTER;
+	public static final CursorType DEFAULT_CURSOR = CursorType.POINTER;
 
 	// cursor type to be applied on enter
-	private final Cursor cursor;
+	private final CursorType cursor;
 
 	/**
 	 * Creates a callback setting the {@link DataLabelsPointerHandler#DEFAULT_CURSOR} as pointer.
@@ -51,7 +50,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link DataLabelsPointerHandler#DEFAULT_CURSOR} as
 	 *            pointer
 	 */
-	public DataLabelsPointerHandler(Cursor cursor) {
+	public DataLabelsPointerHandler(CursorType cursor) {
 		this.cursor = cursor != null ? cursor : DEFAULT_CURSOR;
 	}
 
@@ -60,7 +59,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 * 
 	 * @return the pointer cursor to use
 	 */
-	public final Cursor getCursor() {
+	public final CursorType getCursor() {
 		return cursor;
 	}
 
@@ -74,7 +73,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	public boolean onLeave(IsChart chart, ScriptableContext context) {
 		// checks consistency of arguments
 		if (IsChart.isConsistent(chart) && chart.isInitialized()) {
-			chart.getCanvas().getElement().getStyle().setCursor(chart.getInitialCursor());
+			chart.getCanvas().getStyle().setCursorType(chart.getInitialCursor());
 		}
 		return true;
 	}
@@ -89,7 +88,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	public boolean onEnter(IsChart chart, ScriptableContext context) {
 		// checks consistency of arguments
 		if (IsChart.isConsistent(chart) && chart.isInitialized()) {
-			chart.getCanvas().getElement().getStyle().setCursor(cursor);
+			chart.getCanvas().getStyle().setCursorType(cursor);
 		}
 		return true;
 	}

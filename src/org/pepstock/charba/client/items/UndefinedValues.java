@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 
 /**
  * Class with default values when the java script object returns an UNDEFINED value.

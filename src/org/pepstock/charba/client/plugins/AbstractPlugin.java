@@ -18,7 +18,7 @@ package org.pepstock.charba.client.plugins;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
@@ -241,10 +241,10 @@ public abstract class AbstractPlugin implements Plugin {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.Plugin#onBeforeEvent(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	 * org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public boolean onBeforeEvent(IsChart chart, ChartNativeEvent event) {
+	public boolean onBeforeEvent(IsChart chart, BaseNativeEvent event) {
 		return true;
 	}
 
@@ -252,10 +252,10 @@ public abstract class AbstractPlugin implements Plugin {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.Plugin#onAfterEvent(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	 * org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
+	public void onAfterEvent(IsChart chart, BaseNativeEvent event) {
 	}
 
 	/*

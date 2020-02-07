@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * Double DIAGONAL drawer to design a set of diagonals into tile.<br>
@@ -42,11 +42,11 @@ class DoubleDiagonal extends Diagonal {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// apply the stroke properties
@@ -67,7 +67,7 @@ class DoubleDiagonal extends Diagonal {
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square
 	 */
-	final void drawWholeDiagonal(Context2d context, int size) {
+	final void drawWholeDiagonal(Context2dItem context, int size) {
 		// draws shape
 		// to point for drawing line
 		context.moveTo(0D, 0D);

@@ -95,25 +95,6 @@
     	return obj[key];
     }  
     /*
-	 Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
-	 and gaps which describe the pattern.
-	 
-	 @param context context of canvas
-	 @param values array of values that specify alternating lengths of lines and gaps which describe the pattern
-    */
-    CharbaJsHelper.setLineDash = function(context, values) {
-    	context.setLineDash(values);
-    }
-    /*
-	 Sets the line dash offset, or "phase."
-	 
-	 @param context context of canvas
-	 @param offset the line dash offset, or "phase."
-    */
-    CharbaJsHelper.setLineDashOffset = function(context, offset) {
-    	context.lineDashOffset = offset;
-    }
-    /*
 	 Creates new proxy for callback which will pass "this" environment of java script as first argument of callback
 	 method.
 	  
@@ -378,31 +359,6 @@
     	if (options != null && typeof options[key] === 'function'){
     		options[key].call(chart, event, items);
     	}
-    }
-    /*
-		JsHtmlLegendBuilderHelpers is an object with a set of static methods used as utility
-		and needed when HtmlLegendBuilder plugin has been activated.   
-	*/
-    function CharbaJsHtmlLegendBuilderHelper() {}
-    /*
-	 Adds event listener to a DOM element.
-	  
-	 @param event event name to add
-	 @param element DOM element to scan
-	 @param proxy charba callback proxy
-    */
-    CharbaJsHtmlLegendBuilderHelper.addEventListener = function(event, element, proxy) {
-    	element.addEventListener(event, proxy, false);
-    } 
-    /*
-	 Removes event listener to a DOM element.
-	  
-	 @param event event name to remove
-	 @param element DOM element to scan
-	 @param proxy charba callback proxy
-    */
-    CharbaJsHtmlLegendBuilderHelper.removeEventListener = function(event, element, proxy) {
-    	element.removeEventListener(event, proxy);
     }
     /*
 		JsZoomHelpers is an object with a set of static methods used as utility

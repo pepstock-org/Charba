@@ -17,8 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 
 /**
  * Callback interface to set <code>borderColor</code>, <code>hoverBorderColor</code>, <code>pointBorderColor</code>or
@@ -28,7 +27,7 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
  *
  * @see IsColor
  * @see Gradient
- * @see CanvasGradient
+ * @see CanvasGradientItem
  */
 public interface BorderColorCallback extends Scriptable<Object> {
 

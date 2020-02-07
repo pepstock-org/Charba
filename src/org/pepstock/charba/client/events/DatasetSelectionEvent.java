@@ -16,9 +16,8 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the chart and selects a dataset.<br>
@@ -26,12 +25,12 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionEventHandler> {
+public final class DatasetSelectionEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<DatasetSelectionEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(DatasetSelectionEvent.class);
 	// item with dataset metadata related to the click
 	private final DatasetItem item;
 	// item with dataset metadata related to the click
@@ -43,7 +42,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * @param nativeEvent native event of this custom event
 	 * @param item dataset metadata item related to the click
 	 */
-	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetItem item) {
+	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, DatasetItem item) {
 		super(nativeEvent);
 		this.item = item;
 		// sets null because already present in native event as source
@@ -57,7 +56,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * @param chart chart instance
 	 * @param item dataset metadata item related to the click
 	 */
-	public DatasetSelectionEvent(NativeEvent nativeEvent, IsChart chart, DatasetItem item) {
+	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, IsChart chart, DatasetItem item) {
 		super(nativeEvent);
 		this.item = item;
 		this.chart = chart;
@@ -93,21 +92,24 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<DatasetSelectionEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(DatasetSelectionEventHandler handler) {
-		handler.onSelect(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof DatasetSelectionEventHandler) {
+			DatasetSelectionEventHandler myHandler = (DatasetSelectionEventHandler)handler;
+			myHandler.onSelect(this);
+		}
 	}
 
 }

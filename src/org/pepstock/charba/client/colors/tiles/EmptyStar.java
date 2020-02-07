@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * STAR drawer to design a star (empty) into tile.<br>
@@ -45,11 +45,11 @@ class EmptyStar extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates quarter dimension
@@ -78,7 +78,7 @@ class EmptyStar extends ShapeDrawer {
 	 * @param innerRadius inner radius of star
 	 * @param outerRadius outer radius of star
 	 */
-	final void drawStar(Context2d context, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
+	final void drawStar(Context2dItem context, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
 		// calculates quarter dimension
 		double rot = Math.PI / 2D * 3D;
 		// calculates the center X of arc

@@ -8,6 +8,7 @@
 	-->
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.xml.XML" />
+	<inherits name="jsinterop.base.Base" />
 
 	<!-- 
 	-   Source path

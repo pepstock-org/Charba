@@ -20,11 +20,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.utils.JSON;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * Base class for all classes which are wrapping a native java script object.
@@ -761,7 +760,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final CanvasGradient getValue(Key key, CanvasGradient defaultValue) {
+	protected final CanvasGradientItem getValue(Key key, CanvasGradientItem defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -779,7 +778,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, CanvasGradient value) {
+	protected final void setValue(Key key, CanvasGradientItem value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -802,7 +801,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values gradients to be set
 	 */
-	protected final void setValueOrArray(Key key, CanvasGradient... values) {
+	protected final void setValueOrArray(Key key, CanvasGradientItem... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -827,7 +826,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single gradient value
 	 * @return value of the property (by array) or an empty array if not exist
 	 */
-	protected final ArrayGradient getValueOrArray(Key key, CanvasGradient defaultValue) {
+	protected final ArrayGradient getValueOrArray(Key key, CanvasGradientItem defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type
@@ -853,7 +852,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final CanvasPattern getValue(Key key, CanvasPattern defaultValue) {
+	protected final CanvasPatternItem getValue(Key key, CanvasPatternItem defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -871,7 +870,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, CanvasPattern value) {
+	protected final void setValue(Key key, CanvasPatternItem value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -894,7 +893,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values patterns to be set
 	 */
-	protected final void setValueOrArray(Key key, CanvasPattern... values) {
+	protected final void setValueOrArray(Key key, CanvasPatternItem... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -919,7 +918,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single pattern value
 	 * @return value of the property (by array)
 	 */
-	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
+	protected final ArrayPattern getValueOrArray(Key key, CanvasPatternItem defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type

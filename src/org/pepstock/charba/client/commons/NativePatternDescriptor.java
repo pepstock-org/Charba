@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -36,7 +36,7 @@ public final class NativePatternDescriptor extends NativeAbstractDescriptor {
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
-	native void setValue(CanvasPattern value);
+	native void setValue(CanvasPatternItem value);
 
 	/**
 	 * Gets the value associated with the property.
@@ -44,6 +44,6 @@ public final class NativePatternDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native CanvasPattern getValue();
+	public native CanvasPatternItem getValue();
 
 }

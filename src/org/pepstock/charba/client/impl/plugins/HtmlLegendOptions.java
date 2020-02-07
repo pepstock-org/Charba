@@ -21,9 +21,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.items.UndefinedValues;
-
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * Configuration options of {@link HtmlLegend#ID} plugin.<br>
@@ -36,7 +35,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	/**
 	 * Default cursor type when the cursor is over the legend, {@link Cursor#POINTER}.
 	 */
-	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
+	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
 	/**
 	 * Default maximum legends columns to show.
 	 */

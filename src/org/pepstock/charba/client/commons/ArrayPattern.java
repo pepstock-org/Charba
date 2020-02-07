@@ -17,7 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Array object which maps the java script object.<br>
- * A simple wrapper around a homogeneous native array of object (CanvasPattern) values.
+ * A simple wrapper around a homogeneous native array of object (CanvasPatternItem) values.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,12 +33,12 @@ import jsinterop.annotations.JsType;
 public final class ArrayPattern extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasPatternItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of patterns.
 	 */
-	private static native ArrayPattern of(CanvasPattern... items);
+	private static native ArrayPattern of(CanvasPatternItem... items);
 
 	/**
 	 * To avoid any instantiation
@@ -47,13 +47,13 @@ public final class ArrayPattern extends Array {
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasPatternItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of patterns or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayPattern fromOrNull(CanvasPattern... items) {
+	public static ArrayPattern fromOrNull(CanvasPatternItem... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns null
@@ -64,13 +64,13 @@ public final class ArrayPattern extends Array {
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasPatternItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of patterns or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayPattern fromOrEmpty(CanvasPattern... items) {
+	public static ArrayPattern fromOrEmpty(CanvasPatternItem... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns null
@@ -87,7 +87,7 @@ public final class ArrayPattern extends Array {
 	 * @return new array instance of patterns or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayPattern fromOrNull(List<CanvasPattern> items) {
+	public static ArrayPattern fromOrNull(List<CanvasPatternItem> items) {
 		// checks if list is null
 		if (items == null || items.isEmpty()) {
 			return null;
@@ -95,7 +95,7 @@ public final class ArrayPattern extends Array {
 		// creates the array
 		ArrayPattern result = new ArrayPattern();
 		// scans all items of list
-		for (CanvasPattern value : items) {
+		for (CanvasPatternItem value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -110,7 +110,7 @@ public final class ArrayPattern extends Array {
 	 * @return new array instance of patterns or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayPattern fromOrEmpty(List<CanvasPattern> items) {
+	public static ArrayPattern fromOrEmpty(List<CanvasPatternItem> items) {
 		// creates the array
 		ArrayPattern result = new ArrayPattern();
 		// checks if list is null
@@ -118,7 +118,7 @@ public final class ArrayPattern extends Array {
 			return result;
 		}
 		// scans all items of list
-		for (CanvasPattern value : items) {
+		for (CanvasPatternItem value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -212,7 +212,7 @@ public final class ArrayPattern extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayPattern splice(int start, int deleteCounts, CanvasPattern item);
+	native ArrayPattern splice(int start, int deleteCounts, CanvasPatternItem item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
@@ -230,7 +230,7 @@ public final class ArrayPattern extends Array {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	CanvasPattern remove(int index) {
+	CanvasPatternItem remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -242,7 +242,7 @@ public final class ArrayPattern extends Array {
 	 * @param item element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, CanvasPattern item) {
+	void insertAt(int index, CanvasPatternItem item) {
 		splice(index, 0, item);
 	}
 
@@ -257,7 +257,7 @@ public final class ArrayPattern extends Array {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public CanvasPattern get(int index) {
+	public CanvasPatternItem get(int index) {
 		return slice(index, index + 1).pop();
 	}
 
@@ -268,21 +268,21 @@ public final class ArrayPattern extends Array {
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(CanvasPattern item, int start, int end);
+	native void fill(CanvasPatternItem item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */
-	native void push(CanvasPattern item);
+	native void push(CanvasPatternItem item);
 
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * 
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native CanvasPattern pop();
+	native CanvasPatternItem pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -294,7 +294,7 @@ public final class ArrayPattern extends Array {
 	 * @param item the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, CanvasPattern item) {
+	void set(int index, CanvasPatternItem item) {
 		fill(item, index, index + 1);
 	}
 }

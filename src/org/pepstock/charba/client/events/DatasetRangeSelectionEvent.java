@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user selects an area on the chart, by {@link DatasetsItemsSelector#ID} plugin.
@@ -25,7 +24,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
+public final class DatasetRangeSelectionEvent extends AbstractEvent {
 
 	/**
 	 * Value <b>{@value CLEAR_SELECTION}</b> of FROM and TO when the event is representing a clear of selection
@@ -35,7 +34,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	/**
 	 * Event type
 	 */
-	public static final Type<DatasetRangeSelectionEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(DatasetRangeSelectionEvent.class);
 	// starting index of selected dataset
 	private final int from;
 	// ending index of selected dataset
@@ -46,7 +45,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 */
-	public DatasetRangeSelectionEvent(NativeEvent nativeEvent) {
+	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent) {
 		this(nativeEvent, CLEAR_SELECTION, CLEAR_SELECTION);
 	}
 
@@ -57,7 +56,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	 * @param from starting index of selected dataset
 	 * @param to ending index of selected dataset
 	 */
-	public DatasetRangeSelectionEvent(NativeEvent nativeEvent, int from, int to) {
+	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent, int from, int to) {
 		super(nativeEvent);
 		this.from = from;
 		this.to = to;
@@ -86,21 +85,24 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<DatasetRangeSelectionEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(DatasetRangeSelectionEventHandler handler) {
-		handler.onSelect(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof DatasetRangeSelectionEventHandler) {
+			DatasetRangeSelectionEventHandler myHandler = (DatasetRangeSelectionEventHandler)handler;
+			myHandler.onSelect(this);
+		}
 	}
-
+	
 }

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * CROSS drawer to design a cross into tile.<br>
@@ -42,11 +42,11 @@ final class Cross extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// apply the stroke properties
@@ -67,7 +67,7 @@ final class Cross extends ShapeDrawer {
 	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 */
-	void drawCross(Context2d context, int size, double offsetX, double offsetY) {
+	void drawCross(Context2dItem context, int size, double offsetX, double offsetY) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates margin from boundary of tile

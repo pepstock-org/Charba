@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * ZIGZAG drawer to design a zigzag line into tile.<br>
@@ -42,11 +42,11 @@ class ZigZag extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// apply the stroke properties
@@ -66,7 +66,7 @@ class ZigZag extends ShapeDrawer {
 	 * @param size the size of tile, which is a square
 	 * @param offsetY offset Y where starts drawing
 	 */
-	final void drawZigZag(Context2d context, int size, double offsetY) {
+	final void drawZigZag(Context2dItem context, int size, double offsetY) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates quarter dimension

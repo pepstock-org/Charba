@@ -18,13 +18,9 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
@@ -135,26 +131,6 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	/**
 	 * Sets the style of the point as image.
 	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(ImageResource pointStyle) {
-		// transform a image resource into image element by image object
-		// creates image object
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(Image pointStyle) {
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
 	 * @param pointStyle image element of the style of the point as image.
 	 */
 	public void setPointStyle(ImageElement pointStyle) {
@@ -177,7 +153,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return image of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
 	 */
-	public ImageElement getPointStyleAsImages() {
+	public ImageElement getPointStyleAsImage() {
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false)) {
 			// gets value

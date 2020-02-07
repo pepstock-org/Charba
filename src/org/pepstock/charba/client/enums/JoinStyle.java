@@ -17,8 +17,6 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
-import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
-
 /**
  * Determines how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
  * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position, are
@@ -28,39 +26,34 @@ import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
  */
 public enum JoinStyle implements Key
 {
-
 	/**
 	 * Fills an additional triangular area between the common end point of connected segments, and the separate outside
 	 * rectangular corners of each segment.
 	 */
-	BEVEL("bevel", LineJoin.BEVEL),
+	BEVEL("bevel"),
 	/**
 	 * Rounds off the corners of a shape by filling an additional sector of disc centered at the common end point of connected
 	 * segments.<br>
 	 * The radius for these rounded corners is equal to the line width.
 	 */
-	ROUND("round", LineJoin.ROUND),
+	ROUND("round"),
 	/**
 	 * Connected segments are joined by extending their outside edges to connect at a single point, with the effect of filling
 	 * an additional shaped area.<br>
 	 * This is the default.
 	 */
-	MITER("miter", LineJoin.MITER);
+	MITER("miter");
 
 	// name value of property
 	private final String value;
-	// GWT line join
-	private final LineJoin lineJoin;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
-	 * @param lineJoin the GWT constant for line join style
 	 */
-	private JoinStyle(String value, LineJoin lineJoin) {
+	private JoinStyle(String value) {
 		this.value = value;
-		this.lineJoin = lineJoin;
 	}
 
 	/*
@@ -71,15 +64,6 @@ public enum JoinStyle implements Key
 	@Override
 	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the GWT constant for line join style.
-	 * 
-	 * @return the GWT constant for line join style
-	 */
-	public LineJoin getLineJoin() {
-		return lineJoin;
 	}
 
 }

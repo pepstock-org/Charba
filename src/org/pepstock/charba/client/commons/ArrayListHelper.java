@@ -19,8 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 
 /**
  * Utility to create array list objects from java script arrays.

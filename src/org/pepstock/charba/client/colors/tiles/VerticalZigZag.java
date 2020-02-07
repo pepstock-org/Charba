@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * ZIGZAG (vertically) drawer to design a zigzag line (vertically) into tile.<br>
@@ -42,11 +42,11 @@ final class VerticalZigZag extends ZigZag {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ZigZag#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ZigZag#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// applies a translation to the current transform
 		context.translate(size, 0D);
 		// applies rotation (90 degrees) to the current transform

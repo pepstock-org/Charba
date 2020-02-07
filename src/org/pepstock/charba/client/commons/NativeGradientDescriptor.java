@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -36,7 +36,7 @@ public final class NativeGradientDescriptor extends NativeAbstractDescriptor {
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
-	native void setValue(CanvasGradient value);
+	native void setValue(CanvasGradientItem value);
 
 	/**
 	 * Gets the value associated with the property.
@@ -44,6 +44,6 @@ public final class NativeGradientDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native CanvasGradient getValue();
+	public native CanvasGradientItem getValue();
 
 }

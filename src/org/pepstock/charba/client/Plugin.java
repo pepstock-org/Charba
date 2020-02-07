@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
@@ -235,7 +235,7 @@ public interface Plugin {
 	 * @param event The event object.
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(IsChart chart, ChartNativeEvent event);
+	boolean onBeforeEvent(IsChart chart, BaseNativeEvent event);
 
 	/**
 	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously
@@ -244,7 +244,7 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 * @param event The event object.
 	 */
-	void onAfterEvent(IsChart chart, ChartNativeEvent event);
+	void onAfterEvent(IsChart chart, BaseNativeEvent event);
 
 	/**
 	 * Called after the chart as been resized.

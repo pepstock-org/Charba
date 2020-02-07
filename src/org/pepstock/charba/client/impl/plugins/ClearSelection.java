@@ -20,18 +20,16 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.resources.ResourcesType;
-import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear
@@ -108,8 +106,10 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default image for clear selection element.
 	 */
-	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
-
+	// FIXME
+	//public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
+	public static final ImageElement DEFAULT_IMAGE = null;
+	
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
 	 */
@@ -388,24 +388,6 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 */
-	public void setImage(ImageResource image) {
-		setImage(Utilities.toImageElement(image));
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 */
-	public void setImage(Image image) {
-		setImage(Utilities.toImageElement(image));
 	}
 
 	/**

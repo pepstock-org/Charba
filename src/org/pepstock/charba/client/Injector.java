@@ -19,11 +19,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.DOM;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.ScriptElement;
+import org.pepstock.charba.client.dom.elements.StyleElement;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.ScriptElement;
-import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
@@ -71,7 +72,7 @@ public final class Injector {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a script element
-			ScriptElement scriptElement = Document.get().createScriptElement();
+			ScriptElement scriptElement = DOMBuilder.get().createScriptElement();
 			// injects it into SCRIPT element
 			ensureInjected(resource, scriptElement);
 		}
@@ -86,7 +87,7 @@ public final class Injector {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a style element
-			StyleElement styleElement = Document.get().createStyleElement();
+			StyleElement styleElement = DOMBuilder.get().createStyleElement();
 			// injects it into STYLE element
 			ensureInjected(resource, styleElement);
 		}
@@ -118,7 +119,7 @@ public final class Injector {
 	 * @param resource script resource
 	 * @param container HTML element which will contains the text resource
 	 */
-	private static void ensureInjected(ResourcePrototype resource, Element container) {
+	private static void ensureInjected(ResourcePrototype resource, BaseHtmlElement container) {
 		// creates a unique key for the resource
 		// to use to understand if is already injected
 		String resourceKey = createKey(resource);
@@ -131,7 +132,7 @@ public final class Injector {
 				// sets the script content source
 				container.setInnerText(textResource.getText());
 				// appends to the head
-				Document.get().getHead().appendChild(container);
+				DOM.getDocument().getHead().appendChild(container);
 			}
 			ELEMENTS_INJECTED.add(resourceKey);
 		}

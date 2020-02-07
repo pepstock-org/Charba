@@ -18,22 +18,21 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.DatasetItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHandler> implements IsChartEvent {
+public final class ChartClickEvent extends AbstractChartEvent implements IsChartEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartClickEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(ChartClickEvent.class);
 
 	// a list of items with dataset metadata related to the click
 	private final List<DatasetItem> items;
@@ -45,7 +44,7 @@ public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHan
 	 * @param functionContext function context provided by CHART.JS
 	 * @param items a list of items with dataset metadata related to the click
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
+	public ChartClickEvent(BaseNativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
 		super(nativeEvent, functionContext, ChartEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (items == null) {
@@ -66,21 +65,24 @@ public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHan
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<ChartClickEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(ChartClickEventHandler handler) {
-		handler.onClick(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof ChartClickEventHandler) {
+			ChartClickEventHandler myHandler = (ChartClickEventHandler)handler;
+			myHandler.onClick(this);
+		}		
 	}
 
 }

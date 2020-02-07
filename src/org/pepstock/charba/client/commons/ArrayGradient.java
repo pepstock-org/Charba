@@ -17,7 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Array object which maps the java script object.<br>
- * A simple wrapper around a homogeneous native array of object (CanvasGradient) values.
+ * A simple wrapper around a homogeneous native array of object (CanvasGradientItem) values.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,12 +33,12 @@ import jsinterop.annotations.JsType;
 public final class ArrayGradient extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of gradients.
 	 */
-	private static native ArrayGradient of(CanvasGradient... items);
+	private static native ArrayGradient of(CanvasGradientItem... items);
 
 	/**
 	 * To avoid any instantiation
@@ -47,13 +47,13 @@ public final class ArrayGradient extends Array {
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrNull(CanvasGradient... items) {
+	public static ArrayGradient fromOrNull(CanvasGradientItem... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -64,13 +64,13 @@ public final class ArrayGradient extends Array {
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
+	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrEmpty(CanvasGradient... items) {
+	public static ArrayGradient fromOrEmpty(CanvasGradientItem... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -87,7 +87,7 @@ public final class ArrayGradient extends Array {
 	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrNull(List<CanvasGradient> items) {
+	public static ArrayGradient fromOrNull(List<CanvasGradientItem> items) {
 		// checks if list is null
 		if (items == null || items.isEmpty()) {
 			return null;
@@ -95,7 +95,7 @@ public final class ArrayGradient extends Array {
 		// creates the array
 		ArrayGradient result = new ArrayGradient();
 		// scans all items of list
-		for (CanvasGradient value : items) {
+		for (CanvasGradientItem value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -110,7 +110,7 @@ public final class ArrayGradient extends Array {
 	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrEmpty(List<CanvasGradient> items) {
+	public static ArrayGradient fromOrEmpty(List<CanvasGradientItem> items) {
 		// creates the array
 		ArrayGradient result = new ArrayGradient();
 		// checks if list is null
@@ -118,7 +118,7 @@ public final class ArrayGradient extends Array {
 			return result;
 		}
 		// scans all items of list
-		for (CanvasGradient value : items) {
+		for (CanvasGradientItem value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -212,7 +212,7 @@ public final class ArrayGradient extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayGradient splice(int start, int deleteCounts, CanvasGradient item);
+	native ArrayGradient splice(int start, int deleteCounts, CanvasGradientItem item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
@@ -230,7 +230,7 @@ public final class ArrayGradient extends Array {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	CanvasGradient remove(int index) {
+	CanvasGradientItem remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -242,7 +242,7 @@ public final class ArrayGradient extends Array {
 	 * @param item element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, CanvasGradient item) {
+	void insertAt(int index, CanvasGradientItem item) {
 		splice(index, 0, item);
 	}
 
@@ -257,7 +257,7 @@ public final class ArrayGradient extends Array {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public CanvasGradient get(int index) {
+	public CanvasGradientItem get(int index) {
 		return slice(index, index + 1).pop();
 	}
 
@@ -268,21 +268,21 @@ public final class ArrayGradient extends Array {
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(CanvasGradient item, int start, int end);
+	native void fill(CanvasGradientItem item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */
-	native void push(CanvasGradient item);
+	native void push(CanvasGradientItem item);
 
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * 
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native CanvasGradient pop();
+	native CanvasGradientItem pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -294,7 +294,7 @@ public final class ArrayGradient extends Array {
 	 * @param item the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, CanvasGradient item) {
+	void set(int index, CanvasGradientItem item) {
 		fill(item, index, index + 1);
 	}
 }

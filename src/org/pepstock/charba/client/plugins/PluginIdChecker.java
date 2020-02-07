@@ -17,9 +17,7 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
-
-import com.google.gwt.regexp.shared.RegExp;
-import com.google.gwt.safehtml.shared.UriUtils;
+import org.pepstock.charba.client.utils.RegExp;
 
 /**
  * This utility checks if the plug ID is acceptable or not.
@@ -31,7 +29,11 @@ public final class PluginIdChecker {
 	// regexp to check if there is an uppercase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
 	// regex instance for font style
-	private static final RegExp REGEXP_HAS_UPPERCASE = RegExp.compile(REGEXP_HAS_UPPERCASE_PATTERN);
+	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
+	// regexp pattern to have only letters and number
+	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_]+$";
+	// regxp objetc to perform check
+	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
 	/**
 	 * To avoid any instantiation
@@ -59,12 +61,12 @@ public final class PluginIdChecker {
 		} else if (id.startsWith(Constants.DOT) || id.startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not start with a dot or an underscore "));
-		} else if (!UriUtils.isSafeUri(id)) {
-			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain any non-URL-safe characters "));
 		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
 			// checks if contains uppercase letters
 			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain uppercase letters "));
+		} else if (REGEXP_ID.exec(id) == null){
+			// checks if is not safe URL
+			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain any invalid characters "));
 		}
 	}
 

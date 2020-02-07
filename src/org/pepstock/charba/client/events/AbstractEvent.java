@@ -16,10 +16,8 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * Abstract event for all events which must contain a native event.<br>
@@ -29,18 +27,17 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @param <H> GWT event object
  */
-public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
+public abstract class AbstractEvent extends Event {
 
 	// native event
-	private final NativeEvent nativeEvent;
+	private final BaseNativeEvent nativeEvent;
 
 	/**
 	 * Creates an event using a native event
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @see com.google.gwt.dom.client.NativeEvent
 	 */
-	protected AbstractEvent(NativeEvent nativeEvent) {
+	protected AbstractEvent(BaseNativeEvent nativeEvent) {
 		super();
 		// checks if argument is consistent
 		if (nativeEvent == null) {
@@ -53,10 +50,9 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * Returns the native event instance.
 	 * 
 	 * @return the nativeEvent
-	 * @see com.google.gwt.dom.client.NativeEvent
 	 * 
 	 */
-	public final NativeEvent getNativeEvent() {
+	public final BaseNativeEvent getNativeEvent() {
 		return nativeEvent;
 	}
 

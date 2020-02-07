@@ -18,12 +18,12 @@ package org.pepstock.charba.client.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.xml.client.XMLParser;
+import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.BaseNode;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 
 /**
  * Utility to have an image to apply to canvas of chart in order to add HTML custom information on chart.<br>
@@ -55,7 +55,7 @@ public final class AnnotationBuilder {
 	// K = svg string argument (with width and height), V = image element
 	private static final Map<String, ImageElement> IMAGES = new HashMap<>();
 	// K = element, V = inner HTML
-	private static final Map<Element, String> ELEMENTS = new HashMap<>();
+	private static final Map<BaseHtmlElement, String> ELEMENTS = new HashMap<>();
 	// template of data image URL to create the image from HTML content
 	private static final String TEMPLATE_IMAGE_URL = "data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{1}\" height=\"{2}\">"
 			+ "<foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\">{0}</div></foreignObject></svg>";
@@ -77,7 +77,7 @@ public final class AnnotationBuilder {
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
-	public static ImageElement build(Element htmlXmlContent, double width, double height) {
+	public static ImageElement build(BaseHtmlElement htmlXmlContent, double width, double height) {
 		// checks if argument element is consistent
 		if (htmlXmlContent == null) {
 			// if not exception
@@ -92,24 +92,24 @@ public final class AnnotationBuilder {
 		} else {
 			// creates a DIV wrapper, needed ONLY to get the inner HTML
 			// this element don't need for further computation
-			DivElement wrapper = Document.get().createDivElement();
+			DivElement wrapper = DOMBuilder.get().createDivElement();
 			// checks if the elements has got a parent
 			// because adding to div element
 			// the element will loose the parent and removed from UI
-			if (htmlXmlContent.hasParentElement()) {
+			if (htmlXmlContent.getParentNode() != null) {
 				// clones node
-				Node clonedNode = htmlXmlContent.cloneNode(true);
+				BaseNode clonedNode = htmlXmlContent.cloneNode(true);
 				// checks if is an element
-				if (clonedNode instanceof Element) {
+				if (clonedNode instanceof BaseElement) {
 					// casts to element
-					Element clonedElement = (Element) clonedNode;
+					BaseElement clonedElement = (BaseElement) clonedNode;
 					// wraps the XML content
 					// adding the element
 					wrapper.appendChild(clonedElement);
 				} else {
 					// if here, the clone node is not a element
-					throw new IllegalArgumentException("Element passed as argument is not cloneale. Class: " + clonedNode.getClass().getName());
-				}
+					throw new IllegalArgumentException("Element passed as argument is not an element. Class: " + clonedNode.getClass().getName());
+				}				// wraps the XML content
 			} else {
 				// wraps the XML content
 				// adding the element
@@ -160,16 +160,8 @@ public final class AnnotationBuilder {
 			return IMAGES.get(key);
 		}
 		// if here, new annotation
-		// checks if valid using XML parser
-		try {
-			// parse the XML document checking if correct
-			XMLParser.parse(htmlXmlContent);
-			// returns it
-			return buildWithValidatedContent(key, htmlXmlContent, width, height);
-		} catch (Exception e) {
-			// the content is not XML well-formed
-			throw new IllegalArgumentException(e);
-		}
+		// returns it
+		return buildWithValidatedContent(key, htmlXmlContent, width, height);
 	}
 
 	/**

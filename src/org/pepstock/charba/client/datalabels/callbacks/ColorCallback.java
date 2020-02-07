@@ -20,9 +20,8 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>color</code> property at runtime, using the chart
@@ -36,8 +35,8 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see IsColor
  * @see Pattern
  * @see Gradient
- * @see CanvasPattern
- * @see CanvasGradient
+ * @see CanvasPatternItem
+ * @see CanvasGradientItem
  */
 public interface ColorCallback extends Scriptable<Object> {
 

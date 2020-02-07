@@ -47,15 +47,14 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -353,7 +352,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 				// gets list of all patterns
 				List<Pattern> patterns = getPatternsContainer().getObjects(key);
 				// creates the list of canvas pattern
-				final List<CanvasPattern> canvasPatternsList = new LinkedList<>();
+				final List<CanvasPatternItem> canvasPatternsList = new LinkedList<>();
 				// scans the patterns
 				for (Pattern pattern : patterns) {
 					// creates the canvas pattern and adds into list
@@ -572,7 +571,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param key key property name to use to store canvas patterns into dataset object.
 	 * @param canvasPatternsList list of canvas patterns
 	 */
-	protected abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
+	protected abstract void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList);
 
 	/**
 	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
@@ -591,7 +590,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 				// gets all gradients for the key
 				List<Gradient> gradients = getGradientsContainer().getObjects(key);
 				// creates a temporary list of gradients
-				List<CanvasGradient> canvasGradientsList = new LinkedList<>();
+				List<CanvasGradientItem> canvasGradientsList = new LinkedList<>();
 				// sets internal dataset index
 				int index = 0;
 				// scans all gradients
@@ -614,7 +613,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param key key property name to use to store canvas gradients into dataset object.
 	 * @param canvasGradientsList list of canvas gradients
 	 */
-	protected abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
+	protected abstract void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList);
 
 	/**
 	 * Sets if the dataset will appear or not.

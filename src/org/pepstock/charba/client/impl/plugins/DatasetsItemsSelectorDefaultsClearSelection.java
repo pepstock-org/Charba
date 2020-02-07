@@ -18,12 +18,11 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * {@link DatasetsItemsSelector#ID} plugin default options for CLEAR SELECTION element.<br>

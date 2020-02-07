@@ -24,9 +24,8 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
+import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.enums.NodeType;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
@@ -225,17 +224,17 @@ public final class JSON {
 	@JsOverlay
 	private static String manageElement(Object value) {
 		// checks if is an element
-		if (value instanceof Element) {
+		if (value instanceof BaseElement) {
 			// casts to element
-			Element element = (Element) value;
+			BaseElement element = (BaseElement) value;
 			// checks if is an element node
-			if (element.getNodeType() == Node.ELEMENT_NODE) {
+			if (NodeType.ELEMENT_NODE.equals(element.getNodeType())) {
 				StringBuilder sb = new StringBuilder();
 				sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
 				List<String> attributes = JsWindowHelper.get().elementAttributes(element);
 				if (!attributes.isEmpty()) {
 					for (String attribute : attributes) {
-						sb.append(" ").append(attribute);
+						sb.append(Constants.BLANK).append(attribute);
 					}
 				}
 				// returns html

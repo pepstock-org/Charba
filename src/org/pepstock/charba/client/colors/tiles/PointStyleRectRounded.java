@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * RECTROUNDED drawer to design a {@link PointStyle#RECT_ROUNDED} into tile.<br>
@@ -41,15 +40,11 @@ import com.google.gwt.canvas.dom.client.Context2d;
  */
 final class PointStyleRectRounded extends AbstractPointStyleShapeDrawer {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.pepstock.charba.client.colors.tiles.AbstractPointStyleShapeDrawer#drawPointStyle(com.google.gwt.canvas.dom.client.
-	 * Context2d, int, double, double, double, double, double)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.colors.tiles.AbstractPointStyleShapeDrawer#drawPointStyle(org.pepstock.charba.client.dom.Context2dItem, int, double, double, double, double, double)
 	 */
 	@Override
-	protected void drawPointStyle(Context2d context, int size, double x, double y, double radius, double rotation, double rad) {
+	protected void drawPointStyle(Context2dItem context, int size, double x, double y, double radius, double rotation, double rad) {
 		// NOTE: the rounded rect implementation changed to use `arc` instead of
 		// `quadraticCurveTo` since it generates better results when rect is
 		// almost a circle. 0.516 (instead of 0.5) produces results with visually

@@ -17,8 +17,8 @@ package org.pepstock.charba.client.events;
 
 import java.util.List;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
+import org.pepstock.charba.client.commons.Key;
+
 
 /**
  * Abstract event which is fired when event handler has been added or removed to/from the chart.<br>
@@ -26,21 +26,19 @@ import com.google.gwt.event.shared.GwtEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> {
+abstract class AbstractHandlerEvent extends Event {
 
 	// type of new handler added to the chart
-	private final Type<? extends EventHandler> handlerType;
+	private final EventType handlerType;
 
 	/**
 	 * Creates the event with the type of new handler.
 	 * 
 	 * @param handlerType the type of new handler.
 	 */
-	public AbstractHandlerEvent(Type<? extends EventHandler> handlerType) {
+	public AbstractHandlerEvent(EventType handlerType) {
 		// checks if argument is consistent
-		if (handlerType == null) {
-			throw new IllegalArgumentException("Handler type argument is null");
-		}
+		Key.checkIfValid(handlerType);
 		this.handlerType = handlerType;
 	}
 
@@ -52,11 +50,11 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @return <code>true</code> if the type of event handler is inside the list provided as argument, otherwise
 	 *         <code>false</code>
 	 */
-	public final boolean isRecognize(List<Type<?>> types) {
+	public final boolean isRecognize(List<EventType> types) {
 		// checks if argument is consistent
 		if (types != null && !types.isEmpty()) {
 			// scans all types
-			for (Type<?> type : types) {
+			for (EventType type : types) {
 				// if types is equals to the type of event
 				if (type.equals(handlerType)) {
 					return true;
@@ -76,7 +74,7 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @return <code>true</code> if the type of event handler is equals to the event handler type provided as argument,
 	 *         otherwise <code>false</code>
 	 */
-	public final boolean isRecognize(Type<?> type) {
+	public final boolean isRecognize(EventType type) {
 		// if types is equals to the type of event
 		return handlerType.equals(type);
 	}

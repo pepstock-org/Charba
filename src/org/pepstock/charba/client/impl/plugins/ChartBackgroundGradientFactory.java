@@ -22,8 +22,8 @@ import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.Center;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Radius;
-
-import com.google.gwt.canvas.client.Canvas;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.DivElement;
 
 /**
  * Utility used by CHART {@link ChartBackgroundColor#ID} PLUGIN.<br>
@@ -33,7 +33,6 @@ import com.google.gwt.canvas.client.Canvas;
  * @author Andrea "Stock" Stocchero
  * 
  * @see Gradient
- * @see com.google.gwt.canvas.dom.client.CanvasGradient
  */
 final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	// singleton instance
@@ -75,13 +74,15 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
 			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			// gets div element
+			DivElement element = abstractChart.getChartElement();
 			// right - the x coordinate of the ending point of the widget
 			// bottom - the y coordinate of the ending point of the widget
-			area.setRight(abstractChart.getOffsetWidth());
-			area.setBottom(abstractChart.getOffsetHeight());
+			area.setRight(element.getOffsetWidth());
+			area.setBottom(element.getOffsetHeight());
 		} else if (IsChart.isValid(chart)) {
 			// gets canvas
-			Canvas canvas = chart.getCanvas();
+			CanvasElement canvas = chart.getCanvas();
 			// right - the x coordinate of the ending point of the canvas
 			// bottom - the y coordinate of the ending point of the canvas
 			area.setRight(canvas.getOffsetWidth());
@@ -108,12 +109,14 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
 			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			// gets div element
+			DivElement element = abstractChart.getChartElement();
 			// these are the coordinates of center of widget
-			center.setX(abstractChart.getOffsetWidth() / 2D);
-			center.setY(abstractChart.getOffsetHeight() / 2D);
+			center.setX(element.getOffsetWidth() / 2D);
+			center.setY(element.getOffsetHeight() / 2D);
 		} else if (IsChart.isValid(chart)) {
 			// gets canvas
-			Canvas canvas = chart.getCanvas();
+			CanvasElement canvas = chart.getCanvas();
 			// these are the coordinates of center of canvas
 			center.setX(canvas.getOffsetWidth() / 2D);
 			center.setY(canvas.getOffsetHeight() / 2D);
@@ -136,11 +139,13 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
 			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			// gets div element
+			DivElement element = abstractChart.getChartElement();
 			// radius - if max value between width and height, divided by 2
-			radius.setOuter(Math.max(abstractChart.getOffsetWidth(), abstractChart.getOffsetHeight()) / 2D);
+			radius.setOuter(Math.max(element.getOffsetWidth(), element.getOffsetHeight()) / 2D);
 		} else if (IsChart.isValid(chart)) {
 			// gets canvas
-			Canvas canvas = chart.getCanvas();
+			CanvasElement canvas = chart.getCanvas();
 			// radius - if max value between width and height, divided by 2
 			radius.setOuter(Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2D);
 		}

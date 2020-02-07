@@ -34,9 +34,8 @@ import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * This dataset is managing some common properties related to background and border colors where every property can be set as a
@@ -562,8 +561,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
-		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
+	protected void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
+		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPatternItem[0]));
 	}
 
 	/*
@@ -572,8 +571,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
-		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
+	protected void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
+		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradientItem[0]));
 	}
 
 }

@@ -17,8 +17,7 @@ package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Constants;
-
-import com.google.gwt.safehtml.shared.UriUtils;
+import org.pepstock.charba.client.utils.RegExp;
 
 /**
  * This utility checks if the controller type is acceptable or not.
@@ -28,6 +27,11 @@ import com.google.gwt.safehtml.shared.UriUtils;
  */
 final class ControllerTypeChecker {
 
+	// regexp pattern to have only letters and number
+	private static final String REGEXP_ID_PATTERN = "^[a-zA-Z0-9_]+$";
+	// regxp objetc to perform check
+	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -40,7 +44,7 @@ final class ControllerTypeChecker {
 	 * A controller type <br>
 	 * <ul>
 	 * <li>can not start with a dot or an underscore
-	 * <li>can not contain any non-URL-safe characters
+	 * <li>can not contain any invalid characters (letters, numbers and underscore are allowed)
 	 * </ul>
 	 * 
 	 * @param type controller type to be checked.
@@ -52,9 +56,9 @@ final class ControllerTypeChecker {
 		if (type.value().startsWith(Constants.DOT) || type.value().startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not start with a dot or an underscore "));
-		} else if (!UriUtils.isSafeUri(type.value())) {
+		} else if (REGEXP_ID.exec(type.value()) == null){
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not contain any non-URL-safe characters "));
+			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not contain any invalid characters "));
 		}
 	}
 

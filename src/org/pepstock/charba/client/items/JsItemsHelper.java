@@ -17,10 +17,9 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartNativeEvent;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -52,11 +51,11 @@ final class JsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
 	 * 
 	 * @param object the legend item on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
+	 * @return <code>true</code> if the property into native object is a {@link CanvasPatternItem}
 	 */
 	boolean isCanvasPattern(LegendItem object, String key) {
 		// checks consistency of arguments
@@ -68,11 +67,11 @@ final class JsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradientItem}.
 	 * 
 	 * @param object the legend item on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
+	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
 	 */
 	boolean isCanvasGradient(LegendItem object, String key) {
 		// checks consistency of arguments
@@ -90,7 +89,7 @@ final class JsItemsHelper {
 	 * @param key key of java script object
 	 * @return a chart native event
 	 */
-	ChartNativeEvent nativeEvent(NativeObject event, String key) {
+	BaseNativeEvent nativeEvent(NativeObject event, String key) {
 		// checks consistency of arguments
 		if (event != null && key != null) {
 			return NativeJsItemsHelper.nativeEvent(event, key);

@@ -97,6 +97,56 @@ public final class NativeName {
 	public static final String WINDOW = "window";
 
 	/**
+	 * Constant to bind java script object as DOM document with name <b>{@value DOM_DOCUMENT}</b>.
+	 */
+	public static final String DOM_DOCUMENT = "Document";
+
+	/**
+	 * Constant to bind java script object as DOM HTML document with name <b>{@value DOM_HTML_DOCUMENT}</b>.
+	 */
+	public static final String DOM_HTML_DOCUMENT = "HTMLDocument";
+
+	/**
+	 * Constant to bind java script object as DOM event target with name <b>{@value DOM_EVENT_TARGET}</b>.
+	 */
+	public static final String DOM_EVENT_TARGET = "EventTarget";
+
+	/**
+	 * Constant to bind java script object as DOM node with name <b>{@value DOM_NODE}</b>.
+	 */
+	public static final String DOM_NODE = "Node";
+
+	/**
+	 * Constant to bind java script object as DOM element with name <b>{@value DOM_NODE}</b>.
+	 */
+	public static final String DOM_ELEMENT = "Element";
+
+	/**
+	 * Constant to bind java script object as DOM HTML element with name <b>{@value DOM_HTML_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_ELEMENT = "HTMLElement";
+
+	/**
+	 * Constant to bind java script object as DOM text node with name <b>{@value DOM_TEXT}</b>.
+	 */
+	public static final String DOM_TEXT = "Text";
+
+	/**
+	 * Constant to bind java script object as DOM CSS properties with name <b>{@value DOM_CSS_PROPERTIES}</b>.
+	 */
+	public static final String DOM_CSS_PROPERTIES = "CSSStyleDeclaration";
+	
+	/**
+	 * Constant to bind java script object as DOM text metrics with name <b>{@value DOM_TEXT_METRICS}</b>.
+	 */
+	public static final String DOM_TEXT_METRICS = "TextMetrics";
+
+	/**
+	 * Constant to bind java script object as DOM touch with name <b>{@value DOM_TOUCH}</b>.
+	 */
+	public static final String DOM_TOUCH = "Touch";
+
+	/**
 	 * To avoid any instantiation
 	 */
 	private NativeName() {

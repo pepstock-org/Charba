@@ -43,7 +43,7 @@ public final class Window {
 	 */
 	@JsProperty
 	public static native Console getConsole();
-
+	
 	/**
 	 * Returns the device pixel ratio
 	 *

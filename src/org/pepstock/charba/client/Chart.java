@@ -19,10 +19,9 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.plugins.NativePlugins;
-
-import com.google.gwt.canvas.dom.client.Context2d;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -79,7 +78,7 @@ public final class Chart {
 	 *            space having x values increasing when going right, and y values increasing when going down.
 	 * @param configuration configuration of CHART (native object).
 	 */
-	protected Chart(Context2d context, Configuration configuration) {
+	protected Chart(Context2dItem context, Configuration configuration) {
 	}
 
 	/**
@@ -173,7 +172,7 @@ public final class Chart {
 	 * @return single element at the event position, as array of native object.
 	 */
 	@JsMethod
-	native ArrayObject getElementAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -184,7 +183,7 @@ public final class Chart {
 	 * @return all elements at the same data index, as array of native object.
 	 */
 	@JsMethod
-	native ArrayObject getElementsAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementsAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the dataset that matches the current index and returns that metadata.
@@ -219,7 +218,7 @@ public final class Chart {
 	 * @return dataset meta data items.
 	 */
 	@JsMethod
-	native NativeObject getDatasetAtEvent(ChartNativeEvent event);
+	native NativeObject getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Returns the CHART JS chart ID.

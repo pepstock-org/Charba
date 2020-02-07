@@ -17,14 +17,12 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.HtmlColor;
-import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.dom.client.CanvasElement;
 
 /**
  * Implements a shape drawer in order to use {@link PointStyle} as shape for tiles.<br>
@@ -51,11 +49,11 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected final void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected final void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// gets all needed variables
 		double rotation = DEFAULT_ROTATION;
 		double radius = size / 2D;
@@ -97,10 +95,10 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		// gets the initialized canvas element
 		CanvasElement canvas = initCanvas(outerCanvas, size);
 		// gets the context
-		Context2d context = canvas.getContext2d();
+		Context2dItem context = canvas.getContext2d();
 		// clears the canvas for new design
 		// sets the TRANSPARENT background color
-		context.setFillStyle(HtmlColor.TRANSPARENT.toRGBA());
+		context.setFillColor(HtmlColor.TRANSPARENT);
 		context.fillRect(0D, 0D, size, size);
 		// applies stroke and fill properties to canvas
 		// by legend item
@@ -116,7 +114,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		context.fill();
 		context.stroke();
 		// returns canvas data
-		return canvas.toDataUrl();
+		return canvas.toDataURL();
 	}
 
 	/**
@@ -130,7 +128,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	 * @param rotation the rotation (in degrees) to create the tile, only for {@link PointStyle} drawing
 	 * @param rad rad calculates on rotation
 	 */
-	protected abstract void drawPointStyle(Context2d context, int size, double x, double y, double radius, double rotation, double rad);
+	protected abstract void drawPointStyle(Context2dItem context, int size, double x, double y, double radius, double rotation, double rad);
 
 	/**
 	 * Applies the common configuration to context for stroke designing, by a {@link LegendItem}.<br>
@@ -140,27 +138,27 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	 * @param size the size of tile, which is a square
 	 * @param legendItem the legend item instance to create the tile
 	 */
-	private void applyStrokeProperties(Context2d context, int size, LegendItem legendItem) {
+	private void applyStrokeProperties(Context2dItem context, int size, LegendItem legendItem) {
 		// checks which kind of fill has been set
 		if (legendItem.isFillStyleAsColor()) {
 			// applies the fill color
-			context.setStrokeStyle(legendItem.getFillStyle().toRGBA());
+			context.setStrokeColor(legendItem.getFillStyle());
 		} else if (legendItem.isFillStyleAsCanvasPattern()) {
 			// applies the fill pattern
-			context.setStrokeStyle(legendItem.getFillStyleAsCanvasPattern());
+			context.setStrokePattern(legendItem.getFillStyleAsCanvasPattern());
 		} else if (legendItem.isFillStyleAsCanvasGradient()) {
 			// applies the fill gradient
-			context.setStrokeStyle(legendItem.getFillStyleAsCanvasGradient());
+			context.setStrokeGradient(legendItem.getFillStyleAsCanvasGradient());
 		}
 		double lineWidth = Math.min(legendItem.getLineWidth(), size / 4);
 		// line width is by default tenth size
 		context.setLineWidth(lineWidth);
 		// sets line cap and join
-		context.setLineJoin(legendItem.getLineJoin().getLineJoin());
-		context.setLineCap(legendItem.getLineCap().getLineCap());
+		context.setLineJoin(legendItem.getLineJoin());
+		context.setLineCap(legendItem.getLineCap());
 		// sets line dash
-		JsHelper.get().setLineDash(context, legendItem.getLineDash());
-		JsHelper.get().setLineDashOffset(context, legendItem.getLineDashOffset());
+		context.setLineDash(legendItem.getLineDash());
+		context.setLineDashOffset(legendItem.getLineDashOffset());
 	}
 
 	/**
@@ -170,17 +168,17 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	 * @param context context of canvas to design the shape
 	 * @param legendItem the legend item instance to create the tile
 	 */
-	private void applyFillProperties(Context2d context, LegendItem legendItem) {
+	private void applyFillProperties(Context2dItem context, LegendItem legendItem) {
 		// checks which kind of fill has been set
 		if (legendItem.isFillStyleAsColor()) {
 			// applies the fill color
-			context.setFillStyle(legendItem.getFillStyle().toRGBA());
+			context.setFillColor(legendItem.getFillStyle());
 		} else if (legendItem.isFillStyleAsCanvasPattern()) {
 			// applies the fill pattern
-			context.setFillStyle(legendItem.getFillStyleAsCanvasPattern());
+			context.setFillPattern(legendItem.getFillStyleAsCanvasPattern());
 		} else if (legendItem.isFillStyleAsCanvasGradient()) {
 			// applies the fill gradient
-			context.setFillStyle(legendItem.getFillStyleAsCanvasGradient());
+			context.setFillGradient(legendItem.getFillStyleAsCanvasGradient());
 		}
 	}
 

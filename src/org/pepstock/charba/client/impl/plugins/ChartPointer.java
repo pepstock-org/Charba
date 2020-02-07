@@ -22,14 +22,12 @@ import java.util.Map;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.DefaultPlugin;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have
@@ -108,14 +106,12 @@ public final class ChartPointer extends AbstractPlugin {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
+	public void onAfterEvent(IsChart chart, BaseNativeEvent event) {
 		// checks if chart is consistent and options of plugin has been stored
 		if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
 			// gets options instance
@@ -124,19 +120,19 @@ public final class ChartPointer extends AbstractPlugin {
 			List<PointerElement> scope = pOptions.getElements();
 			// DATASET SELECTION
 			if (hasDatasetSelection(chart, event, scope)) {
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
 			} else if (hasTitleSelection(chart, event, scope)) {
 				// TITLE SELECTION
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
 			} else if (hasScaleSelection(chart, event, scope)) {
 				// AXIS SELECTION
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
 			} else if (hasLegendSelection(chart, event, scope)) {
 				// LEGEND SELECTION
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
 			} else {
 				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
+				chart.getChartElement().getStyle().setCursorType(chart.getInitialCursor());
 			}
 		}
 	}
@@ -163,7 +159,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to a dataset, otherwise <code>false</code>
 	 */
-	private boolean hasDatasetSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+	private boolean hasDatasetSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if the datasets is in scope
 		if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
 			// if yes, asks the dataset item by event
@@ -181,7 +177,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to the title, otherwise <code>false</code>
 	 */
-	private boolean hasTitleSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+	private boolean hasTitleSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if title display is activated or title plugin is activated
 		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.TITLE);
 		// checks if there is any title click handler and title is in scope
@@ -197,7 +193,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to a scale, otherwise <code>false</code>
 	 */
-	private boolean hasScaleSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+	private boolean hasScaleSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if there is any axis click handler and axis is in scope
 		// and the cursor is over the axis element
 		return chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event);
@@ -211,7 +207,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to the legend, otherwise <code>false</code>
 	 */
-	private boolean hasLegendSelection(IsChart chart, ChartNativeEvent event, List<PointerElement> scope) {
+	private boolean hasLegendSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if legend display is activated or legend plugin is activated
 		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND);
 		// checks if legend is in scope

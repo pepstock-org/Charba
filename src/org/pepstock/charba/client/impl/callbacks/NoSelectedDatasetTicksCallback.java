@@ -22,8 +22,7 @@ import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.items.DatasetMetaItem;
-
-import com.google.gwt.i18n.client.NumberFormat;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implementation of tick callback in order to avoid that when all datasets are hidden, the ticks will get a wrong double
@@ -34,42 +33,37 @@ import com.google.gwt.i18n.client.NumberFormat;
 public final class NoSelectedDatasetTicksCallback implements TickCallback {
 
 	/**
-	 * Default number format to apply to ticks, <b>{@value DEFAULT_FORMAT}</b>.
+	 * Default precision, <b>{@value DEFAULT_PRECISION}</b>.
 	 */
-	public static final String DEFAULT_FORMAT = "0.0";
+	public static final int DEFAULT_PRECISION = 1;
 
-	// it formats the number of ticks
-	private final NumberFormat numberFormat;
-	// instance of format as string
-	private final String format;
+	// it sets the precision of ticks
+	private final int precision;
 
 	/**
-	 * Creates the callback using the {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}.
+	 * Creates the callback using the {@link NoSelectedDatasetTicksCallback#DEFAULT_PRECISION}.
 	 */
 	public NoSelectedDatasetTicksCallback() {
-		this(DEFAULT_FORMAT);
+		this(DEFAULT_PRECISION);
 	}
 
 	/**
-	 * Creates the callback using the argument as number format to apply to ticks.
+	 * Creates the callback using the argument as amount of decimals places to apply to ticks.
 	 * 
-	 * @param stringFormat number format to apply, if <code>null</code> it uses
-	 *            {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}
+	 * @param precision amount of decimals places
 	 */
-	public NoSelectedDatasetTicksCallback(String stringFormat) {
-		// stores the format as string
-		this.format = stringFormat != null ? stringFormat : DEFAULT_FORMAT;
-		// creates the number fomramt
-		this.numberFormat = NumberFormat.getFormat(format);
+	public NoSelectedDatasetTicksCallback(int precision) {
+		// stores the precision
+		this.precision = precision;
 	}
 
 	/**
-	 * Returns the number format applied to ticks.
+	 * Returns the precision applied to ticks.
 	 * 
-	 * @return the number format applied to ticks.
+	 * @return the precision applied to ticks.
 	 */
-	public String getFormat() {
-		return format;
+	public int getPrecision() {
+		return precision;
 	}
 
 	/*
@@ -104,8 +98,8 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 			// if all datasets are hidden
 			if (allHidden) {
 				// uses the tick value (double) provided by CHART.js
-				// applying the number format
-				return numberFormat.format(value);
+				// applying the precision
+				return Utilities.applyPrecision(value, precision);
 			}
 		}
 		// otherwise will return the tick value as string

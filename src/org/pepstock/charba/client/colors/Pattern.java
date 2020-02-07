@@ -19,13 +19,9 @@ import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.enums.ElementRepetition;
 
 /**
  * Entity to apply a canvas pattern into a dataset as background.<br>
@@ -39,7 +35,7 @@ public final class Pattern extends CanvasObject {
 	// default instance of image.
 	private static final ImageElement DEFAULT_IMAGE = null;
 	// default instance of canvas pattern.
-	private static final CanvasPattern DEFAULT_CANVAS_PATTERN = null;
+	private static final CanvasPatternItem DEFAULT_CANVAS_PATTERN = null;
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -81,28 +77,8 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @param image image to use as pattern
 	 */
-	public Pattern(ImageResource image) {
-		this(image, Context2d.Repetition.REPEAT);
-	}
-
-	/**
-	 * Creates the object using an image to use in the pattern.<br>
-	 * The repetition used is repeat.
-	 * 
-	 * @param image image to use as pattern
-	 */
-	public Pattern(Image image) {
-		this(image, Context2d.Repetition.REPEAT);
-	}
-
-	/**
-	 * Creates the object using an image to use in the pattern.<br>
-	 * The repetition used is repeat.
-	 * 
-	 * @param image image to use as pattern
-	 */
 	public Pattern(ImageElement image) {
-		this(image, Context2d.Repetition.REPEAT);
+		this(image, ElementRepetition.REPEAT);
 	}
 
 	/**
@@ -111,34 +87,14 @@ public final class Pattern extends CanvasObject {
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
 	 */
-	public Pattern(ImageResource image, Context2d.Repetition repetition) {
-		this(Utilities.toImageElement(image), repetition);
-	}
-
-	/**
-	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
-	 * 
-	 * @param image image to use as pattern
-	 * @param repetition repetition value to apply to pattern
-	 */
-	public Pattern(Image image, Context2d.Repetition repetition) {
-		this(Utilities.toImageElement(image), repetition);
-	}
-
-	/**
-	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
-	 * 
-	 * @param image image to use as pattern
-	 * @param repetition repetition value to apply to pattern
-	 */
-	public Pattern(ImageElement image, Context2d.Repetition repetition) {
+	public Pattern(ImageElement image, ElementRepetition repetition) {
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
 			setValue(Property.CHARBA_PATTERN_IMG, image);
 			setValue(Property.CHARBA_PATTERN_WIDTH, image.getWidth());
 			setValue(Property.CHARBA_PATTERN_HEIGHT, image.getHeight());
-			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
+			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? ElementRepetition.REPEAT : repetition);
 		} else {
 			// if here, image is null
 			// then exception
@@ -153,7 +109,7 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @param canvasPattern canvas pattern instance
 	 */
-	public Pattern(CanvasPattern canvasPattern) {
+	public Pattern(CanvasPatternItem canvasPattern) {
 		this(canvasPattern, TilesFactoryDefaults.DEFAULT_SIZE, TilesFactoryDefaults.DEFAULT_SIZE);
 	}
 
@@ -164,7 +120,7 @@ public final class Pattern extends CanvasObject {
 	 * @param canvasPattern canvas pattern instance
 	 * @param squareSize size of image applied to canvasPattern to be a square
 	 */
-	public Pattern(CanvasPattern canvasPattern, int squareSize) {
+	public Pattern(CanvasPatternItem canvasPattern, int squareSize) {
 		this(canvasPattern, squareSize, squareSize);
 	}
 
@@ -176,14 +132,14 @@ public final class Pattern extends CanvasObject {
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 */
-	public Pattern(CanvasPattern canvasPattern, int width, int height) {
+	public Pattern(CanvasPatternItem canvasPattern, int width, int height) {
 		// checks if canvas pattern is not consistent
 		if (canvasPattern != null) {
 			// creates pattern
 			setValue(Property.CHARBA_PATTERN_CANVAS, canvasPattern);
 			// sets repetition even is not used
 			// to normalizes the properties
-			setValue(Property.CHARBA_PATTERN_REPETITION, Context2d.Repetition.REPEAT.name());
+			setValue(Property.CHARBA_PATTERN_REPETITION, ElementRepetition.REPEAT);
 			// stores size checks the max value
 			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
 			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
@@ -235,9 +191,8 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @return the repetition to use into pattern
 	 */
-	public Context2d.Repetition getRepetition() {
-		String value = getValue(Property.CHARBA_PATTERN_REPETITION, Context2d.Repetition.REPEAT.name());
-		return Context2d.Repetition.valueOf(value);
+	public ElementRepetition getRepetition() {
+		return getValue(Property.CHARBA_PATTERN_REPETITION, ElementRepetition.class, ElementRepetition.REPEAT);
 	}
 
 	/**
@@ -245,7 +200,7 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @return the canvas pattern if exists, otherwise <code>null</code>.
 	 */
-	public CanvasPattern getCanvasPattern() {
+	public CanvasPatternItem getCanvasPattern() {
 		return getValue(Property.CHARBA_PATTERN_CANVAS, DEFAULT_CANVAS_PATTERN);
 	}
 

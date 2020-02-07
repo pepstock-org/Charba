@@ -21,13 +21,12 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * {@link DataLabelsPlugin#ID} event callbacks to invoke dataset selection handlers if there were defined.<br>
@@ -42,7 +41,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	private final List<DatasetSelectionEventHandler> dataSelectionHandlers = new LinkedList<>();
 
 	/**
-	 * Creates a callback setting {@link com.google.gwt.dom.client.Style.Cursor#POINTER} as pointer.
+	 * Creates a callback setting {@link CursorType#POINTER} as pointer.
 	 */
 	public DataLabelsSelectionHandler() {
 		super();
@@ -51,10 +50,10 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/**
 	 * Creates a callback setting the pointer cursor what is passed as argument.
 	 * 
-	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link com.google.gwt.dom.client.Style.Cursor#POINTER}
+	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link CursorType#POINTER}
 	 *            as pointer
 	 */
-	public DataLabelsSelectionHandler(Cursor cursor) {
+	public DataLabelsSelectionHandler(CursorType cursor) {
 		super(cursor);
 	}
 
@@ -105,7 +104,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 				DatasetItem item = metaItem.getDatasets().get(context.getIndex());
 				// creates the event
 				// setting as native event new change event
-				DatasetSelectionEvent event = new DatasetSelectionEvent(Document.get().createChangeEvent(), chart, item);
+				DatasetSelectionEvent event = new DatasetSelectionEvent(DOMBuilder.get().createChangeEvent(), chart, item);
 				// scans the handlers
 				for (DatasetSelectionEventHandler handler : dataSelectionHandlers) {
 					// invoke the handler

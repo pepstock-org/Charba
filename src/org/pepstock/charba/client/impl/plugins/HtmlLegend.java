@@ -25,21 +25,21 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.BaseNode;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.NodeList;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.elements.TableCellElement;
+import org.pepstock.charba.client.dom.enums.ElementUnit;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.dom.client.NodeList;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.dom.client.TableCellElement;
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
  * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.<br>
@@ -168,7 +168,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (!pluginDivElements.containsKey(chart.getId())) {
 				// if new
 				// creates a DIV element
-				legendElement = Document.get().createDivElement();
+				legendElement = DOMBuilder.get().createDivElement();
 				// sets the id by chart instance
 				legendElement.setId(formatLegendElementId(chart));
 				// stores into map
@@ -178,9 +178,9 @@ public final class HtmlLegend extends AbstractPlugin {
 				legendElement = pluginDivElements.get(chart.getId());
 			}
 			// checks if there is a parent
-			if (!legendElement.hasParentElement()) {
+			if (legendElement.getParentNode() == null) {
 				// if no parent, means new object to add to chart element
-				addLegendElement(chart.getElement(), legendElement, legend.getPosition(), legend.getLabels().getPadding());
+				addLegendElement(chart.getChartElement(), legendElement, legend.getPosition(), legend.getLabels().getPadding());
 			} else {
 				// removes the item
 				// in order to after draw to create the legend
@@ -192,7 +192,8 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			// checks if is full width has been set
 			if (legend.isFullWidth()) {
-				legendElement.getStyle().setWidth(100, Unit.PCT);
+				// sets 100% of width
+				legendElement.getStyle().setWidth(ElementUnit.PCT.parse(100));
 			}
 		}
 		return true;
@@ -405,22 +406,17 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private void addListeners(IsChart chart, DivElement legendElement) {
 		// gets all nodes with TAG TD
-		NodeList<Element> tds = legendElement.getElementsByTagName(TableCellElement.TAG_TD);
+		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCellElement.TAG);
 		// scans all nodes
-		for (int i = 0; i < tds.getLength(); i++) {
-			// gets node
-			Node node = tds.getItem(i);
-			// checks if its an element
-			if (node instanceof Element) {
-				// casts to element
-				Element td = (Element) node;
-				// checks if the element has got a correct ID
-				// starting with chart id
-				if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
-					HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
-					// adds to the element all event listeners
-					callbackProxy.addListeners(td);
-				}
+		for (int i = 0; i < tds.length(); i++) {
+			// gets element
+			BaseElement td = tds.item(i);
+			// checks if the element has got a correct ID
+			// starting with chart id
+			if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
+				HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
+				// adds to the element all event listeners
+				callbackProxy.addListeners(td);
 			}
 		}
 	}
@@ -433,22 +429,17 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private void removeListeners(IsChart chart, DivElement legendElement) {
 		// gets all nodes with TAG TD
-		NodeList<Element> tds = legendElement.getElementsByTagName(TableCellElement.TAG_TD);
+		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCellElement.TAG);
 		// scans all nodes
-		for (int i = 0; i < tds.getLength(); i++) {
-			// gets node
-			Node node = tds.getItem(i);
-			// checks if its an element
-			if (node instanceof Element) {
-				// casts to element
-				Element td = (Element) node;
-				// checks if the element has got a correct ID
-				// starting with chart id
-				if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
-					HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
-					// removes to the element all event listeners
-					callbackProxy.removeListeners(td);
-				}
+		for (int i = 0; i < tds.length(); i++) {
+			// gets element
+			BaseElement td = tds.item(i);
+			// checks if the element has got a correct ID
+			// starting with chart id
+			if (td.getId().startsWith(chart.getId()) && pluginCallbackProxies.containsKey(chart.getId())) {
+				HtmlLegendCallbackProxy callbackProxy = pluginCallbackProxies.get(chart.getId());
+				// removes to the element all event listeners
+				callbackProxy.removeListeners(td);
 			}
 		}
 	}
@@ -461,17 +452,17 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param position position set by legend configuration object
 	 * @param padding padding set by legend configuration object
 	 */
-	private void addLegendElement(Element chartElement, DivElement legendElement, Position position, int padding) {
+	private void addLegendElement(DivElement chartElement, DivElement legendElement, Position position, int padding) {
 		if (mustAddToBottom(position)) {
 			// appends the legend element
 			chartElement.appendChild(legendElement);
 			// and sets the bottom padding
-			legendElement.getStyle().setPaddingBottom(padding, Unit.PX);
+			legendElement.getStyle().setPaddingBottom(ElementUnit.PX.parse(padding));
 		} else {
 			// if not bottom, inserts the legend element as first
-			chartElement.insertFirst(legendElement);
+			chartElement.insertBefore(legendElement, chartElement.getFirstChild());
 			// and sets the top padding
-			legendElement.getStyle().setPaddingTop(padding, Unit.PX);
+			legendElement.getStyle().setPaddingTop(ElementUnit.PX.parse(padding));
 		}
 	}
 
@@ -487,7 +478,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private void manageLegendElement(IsChart chart, DivElement legendElement, Position position) {
 		// gets chart element
-		Element chartElement = chart.getElement();
+		DivElement chartElement = chart.getChartElement();
 		// gets if the legend element has been defined after the canvas
 		boolean isAfterCanvas = isAfterCanvas(chart, legendElement);
 		// gets if the legend must be added to bottom
@@ -503,7 +494,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// then it removes from parent
 			legendElement.removeFromParent();
 			// and inserts it at the beginning
-			chartElement.insertFirst(legendElement);
+			chartElement.insertBefore(legendElement, chartElement.getFirstChild());
 		}
 	}
 
@@ -528,18 +519,18 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	private boolean isAfterCanvas(IsChart chart, DivElement legendElement) {
 		// gets chart element
-		Element chartElement = chart.getElement();
+		DivElement chartElement = chart.getChartElement();
 		// retrieves canvas id of chart
-		String canvasId = chart.getCanvas().getCanvasElement().getId();
+		String canvasId = chart.getCanvas().getId();
 		// scans all children of chart element
-		for (int i = 0; i < chartElement.getChildCount(); i++) {
+		NodeList<BaseNode> children = chartElement.getChildNodes();
+		for (int i = 0; i < children.length(); i++) {
 			// gets the node
-			Node child = chartElement.getChild(i);
-			// checks if the node is an element
-			if (child instanceof Element) {
-				// casts to element
-				Element childElement = (Element) child;
-				// checks if the legend element is queals to the scanned node
+			BaseNode childNode = children.item(i);
+			// checks if is html element
+			if (childNode instanceof BaseHtmlElement) {
+				BaseHtmlElement childElement = (BaseHtmlElement) childNode;
+				// checks if the legend element is equals to the scanned node
 				// by its id
 				if (childElement.getNodeName().equalsIgnoreCase(DivElement.TAG) && legendElement.getId().equalsIgnoreCase(childElement.getId())) {
 					// if here, means that the legend element has been found before the canvas element

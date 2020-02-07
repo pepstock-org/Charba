@@ -18,22 +18,21 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.DatasetItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user hovers on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartHoverEvent extends AbstractChartEvent<ChartHoverEventHandler> implements IsChartEvent {
+public final class ChartHoverEvent extends AbstractChartEvent implements IsChartEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartHoverEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(ChartHoverEvent.class);
 
 	// a list of items with dataset metadata related to the hover
 	private final List<DatasetItem> items;
@@ -45,7 +44,7 @@ public final class ChartHoverEvent extends AbstractChartEvent<ChartHoverEventHan
 	 * @param functionContext function context provided by CHART.JS
 	 * @param items a list of items with dataset metadata related to the hover
 	 */
-	public ChartHoverEvent(NativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
+	public ChartHoverEvent(BaseNativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
 		super(nativeEvent, functionContext, ChartEventProperty.ON_HOVER);
 		// checks if argument is consistent
 		if (items == null) {
@@ -66,21 +65,24 @@ public final class ChartHoverEvent extends AbstractChartEvent<ChartHoverEventHan
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<ChartHoverEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(ChartHoverEventHandler handler) {
-		handler.onHover(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof ChartHoverEventHandler) {
+			ChartHoverEventHandler myHandler = (ChartHoverEventHandler)handler;
+			myHandler.onHover(this);
+		}		
 	}
 
 }

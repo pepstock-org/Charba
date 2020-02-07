@@ -15,21 +15,20 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the animation of the chart is completed.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationCompleteEvent extends AbstractEvent<AnimationCompleteEventHandler> {
+public final class AnimationCompleteEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationCompleteEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(AnimationCompleteEvent.class);
 
 	// animation item with animation info from chart
 	private final AnimationItem item;
@@ -40,7 +39,7 @@ public final class AnimationCompleteEvent extends AbstractEvent<AnimationComplet
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationCompleteEvent(NativeEvent nativeEvent, AnimationItem item) {
+	public AnimationCompleteEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
 		super(nativeEvent);
 		// checks if argument is consistent
 		if (item == null) {
@@ -61,21 +60,23 @@ public final class AnimationCompleteEvent extends AbstractEvent<AnimationComplet
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
-	public Type<AnimationCompleteEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(AnimationCompleteEventHandler handler) {
-		handler.onComplete(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof AnimationCompleteEventHandler) {
+			AnimationCompleteEventHandler myHandler = (AnimationCompleteEventHandler)handler;
+			myHandler.onComplete(this);
+		}
 	}
 
 }

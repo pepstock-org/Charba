@@ -15,21 +15,20 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the animation of the chart is progressing.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationProgressEvent extends AbstractEvent<AnimationProgressEventHandler> {
+public final class AnimationProgressEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationProgressEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(AnimationProgressEvent.class);
 
 	// animation item with animation info from chart
 	private final AnimationItem item;
@@ -40,7 +39,7 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationProgressEvent(NativeEvent nativeEvent, AnimationItem item) {
+	public AnimationProgressEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
 		super(nativeEvent);
 		// checks if argument is consistent
 		if (item == null) {
@@ -61,21 +60,24 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<AnimationProgressEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(AnimationProgressEventHandler handler) {
-		handler.onProgress(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof AnimationProgressEventHandler) {
+			AnimationProgressEventHandler myHandler = (AnimationProgressEventHandler) handler;
+			myHandler.onProgress(this);
+		}
 	}
 
 }

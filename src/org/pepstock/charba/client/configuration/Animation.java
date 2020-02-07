@@ -20,6 +20,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
@@ -28,9 +30,6 @@ import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.items.AnimationObject;
 import org.pepstock.charba.client.options.ExtendedOptions;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.NativeEvent;
 
 import jsinterop.annotations.JsFunction;
 
@@ -273,7 +272,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	private void onProgress(AnimationItem item) {
 		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationProgressEvent(event, item));
 	}
@@ -285,7 +284,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	private void onComplete(AnimationItem item) {
 		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationCompleteEvent(event, item));
 	}

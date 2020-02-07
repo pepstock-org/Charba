@@ -27,17 +27,13 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 import jsinterop.annotations.JsFunction;
 
@@ -663,57 +659,6 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	public int getTextMargin() {
 		return getValue(Property.TEXT_MARGIN, defaultsOptions.getTextMargin());
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 */
-	public void setImages(ImageResource... images) {
-		// checks if argument is consistent
-		if (images != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[images.length];
-			// scans passed array of images
-			for (int i = 0; i < images.length; i++) {
-				// transform a image resource into image element by image object
-				// creates image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(images[i]);
-			}
-			// stores it
-			setImages(array);
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.IMAGES);
-		}
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 */
-	public void setImages(Image... images) {
-		// checks if argument is consistent
-		if (images != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[images.length];
-			// scans passed array of images
-			for (int i = 0; i < images.length; i++) {
-				// transform a image resource into image element by image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(images[i]);
-			}
-			// stores it
-			setImages(array);
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.IMAGES);
-		}
 	}
 
 	/**

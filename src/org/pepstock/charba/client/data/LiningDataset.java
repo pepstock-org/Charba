@@ -52,6 +52,9 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.HasFill;
@@ -59,13 +62,6 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * The chart allows a number of properties to be specified for each dataset.<br>
@@ -1604,57 +1600,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointStyle array of the style of the point as image.
 	 */
-	public void setPointStyle(ImageResource... pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[pointStyle.length];
-			// scans passed array of images
-			for (int i = 0; i < pointStyle.length; i++) {
-				// transform a image resource into image element by image object
-				// creates image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(pointStyle[i]);
-			}
-			// stores it
-			setPointStyle(array);
-		} else {
-			// resets callback and
-			// also flags
-			setPointStyle((PointStyleCallback) null);
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle array of the style of the point as image.
-	 */
-	public void setPointStyle(Image... pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[pointStyle.length];
-			// scans passed array of images
-			for (int i = 0; i < pointStyle.length; i++) {
-				// transform a image resource into image element by image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(pointStyle[i]);
-			}
-			// stores it
-			setPointStyle(array);
-		} else {
-			// resets callback and
-			// also flags
-			setPointStyle((PointStyleCallback) null);
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle array of the style of the point as image.
-	 */
 	public void setPointStyle(ImageElement... pointStyle) {
 		// resets callback and
 		// also flags
@@ -2310,11 +2255,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
 		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key)) {
 			// gets the first element
-			CanvasPattern pattern = canvasPatternsList.get(0);
+			CanvasPatternItem pattern = canvasPatternsList.get(0);
 			// creates pattern and stores it
 			setValue(key, pattern);
 		}
@@ -2326,16 +2271,16 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
 		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.BORDER_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BORDER_COLOR, key)) {
 			// gets the first element
-			CanvasGradient gradient = canvasGradientsList.get(0);
+			CanvasGradientItem gradient = canvasGradientsList.get(0);
 			// creates gradient and stores it
 			setValue(key, gradient);
 		} else {
 			// stores the array
-			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
+			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradientItem[0]));
 		}
 	}
 
@@ -2353,12 +2298,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// is point style instance
 			PointStyle style = (PointStyle) result;
 			return style.value();
-		} else if (result instanceof Image) {
-			// is image instance
-			return Utilities.toImageElement((Image) result);
-		} else if (result instanceof ImageResource) {
-			// is image resource instance
-			return Utilities.toImageElement((ImageResource) result);
 		} else if (result instanceof ImageElement) {
 			// is image element instance
 			return result;

@@ -20,20 +20,20 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.events.EventHandler;
+import org.pepstock.charba.client.events.EventType;
+import org.pepstock.charba.client.events.HandlerRegistration;
+import org.pepstock.charba.client.events.HasHandlers;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
-
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Interface which defines a chart.
@@ -56,7 +56,7 @@ public interface IsChart extends HasHandlers {
 		if (isValid(chart)) {
 			// here checks all mandatory methods of interface to check
 			// if results are consistent
-			return chart.getElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
+			return chart.getChartElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
 					&& chart.getDefaultChartOptions() != null;
 		}
 		return false;
@@ -74,6 +74,21 @@ public interface IsChart extends HasHandlers {
 		if (!isConsistent(chart)) {
 			throw new IllegalArgumentException("Chart is not consistent");
 		}
+	}
+
+	/**
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory
+	 * methods of interface will return consistent instances.<br>
+	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
+	 * 
+	 * @param chart chart to be checked
+	 * @return the chart instance passed as argumet
+	 */
+	static IsChart checkAndGetIfConsistent(IsChart chart) {
+		// checks if chart is consistent
+		checkIfConsistent(chart);
+		// if here is consistent then return it
+		return chart;
 	}
 
 	/**
@@ -118,7 +133,7 @@ public interface IsChart extends HasHandlers {
 	 * @param handler the handler
 	 * @return {@link HandlerRegistration} used to remove the handler
 	 */
-	<H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type);
+	HandlerRegistration addHandler(final EventHandler handler, EventType type);
 
 	/**
 	 * Gets a handle to the object's underlying DOM element.
@@ -126,7 +141,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the object's browser element
 	 */
-	Element getElement();
+	DivElement getChartElement();
 
 	/**
 	 * Returns the options of chart.
@@ -163,7 +178,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the canvas
 	 */
-	Canvas getCanvas();
+	CanvasElement getCanvas();
 
 	/**
 	 * Remove the registration of prevent default mouse listener from canvas.<br>
@@ -176,7 +191,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the initial cursor of the chart.
 	 */
-	Cursor getInitialCursor();
+	CursorType getInitialCursor();
 
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
@@ -324,9 +339,9 @@ public interface IsChart extends HasHandlers {
 	 * update process. This is useful when update is manually called inside an event handler and some different animation is
 	 * desired.
 	 * 
-	 * @param configuration a configuration object can be provided with additional configuration for the update process
+	 * @param config a configuration object can be provided with additional configuration for the update process
 	 */
-	void reconfigure(UpdateConfiguration configuration);
+	void reconfigure(UpdateConfiguration config);
 
 	/**
 	 * Triggers a redraw of all chart elements.<br>
@@ -357,7 +372,7 @@ public interface IsChart extends HasHandlers {
 	 * @param event event of chart.
 	 * @return dataset meta data item.
 	 */
-	DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event);
+	DatasetMetaItem getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
@@ -381,7 +396,7 @@ public interface IsChart extends HasHandlers {
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
-	DatasetItem getElementAtEvent(ChartNativeEvent event);
+	DatasetItem getElementAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -391,7 +406,7 @@ public interface IsChart extends HasHandlers {
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetItem> getElementsAtEvent(ChartNativeEvent event);
+	List<DatasetItem> getElementsAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Draws the chart
@@ -404,5 +419,12 @@ public interface IsChart extends HasHandlers {
 	 * @return the string JSON representation of the object.
 	 */
 	String toJSON();
+	
+	/**
+	 * Creates a new dataset for this chart type.
+	 * 
+	 * @return a new dataset for this chart type
+	 */
+	Dataset newDataset();
 
 }

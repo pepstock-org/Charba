@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * WEAVE drawer to design a weave into tile.<br>
@@ -42,11 +42,11 @@ final class Weave extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A and B section
@@ -62,7 +62,7 @@ final class Weave extends ShapeDrawer {
 	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 */
-	void drawWeave(Context2d context, int size, double offsetX, double offsetY) {
+	void drawWeave(Context2dItem context, int size, double offsetX, double offsetY) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// designs the shape into A section

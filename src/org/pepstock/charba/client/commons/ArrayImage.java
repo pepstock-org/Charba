@@ -17,7 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;

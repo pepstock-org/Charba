@@ -16,22 +16,21 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.SizeItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the chart has been resized.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartResizeEvent extends AbstractChartEvent<ChartResizeEventHandler> {
+public final class ChartResizeEvent extends AbstractChartEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartResizeEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(ChartResizeEvent.class);
 	// item which contains the new size of the chart
 	private final SizeItem size;
 
@@ -42,7 +41,7 @@ public final class ChartResizeEvent extends AbstractChartEvent<ChartResizeEventH
 	 * @param functionContext function context provided by CHART.JS
 	 * @param size item with the new size of the chart
 	 */
-	public ChartResizeEvent(NativeEvent nativeEvent, Chart functionContext, SizeItem size) {
+	public ChartResizeEvent(BaseNativeEvent nativeEvent, Chart functionContext, SizeItem size) {
 		super(nativeEvent, functionContext, ChartEventProperty.ON_RESIZE);
 		// checks if argument is consistent
 		if (size == null) {
@@ -63,21 +62,24 @@ public final class ChartResizeEvent extends AbstractChartEvent<ChartResizeEventH
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<ChartResizeEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(ChartResizeEventHandler handler) {
-		handler.onResize(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof ChartResizeEventHandler) {
+			ChartResizeEventHandler myHandler = (ChartResizeEventHandler)handler;
+			myHandler.onResize(this);
+		}
 	}
-
+	
 }

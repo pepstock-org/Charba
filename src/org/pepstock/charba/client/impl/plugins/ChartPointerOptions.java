@@ -22,9 +22,8 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
-
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * Configuration options of {@link ChartPointer#ID} plugin.<br>
@@ -35,9 +34,9 @@ import com.google.gwt.dom.client.Style.Cursor;
 public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 
 	/**
-	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
+	 * Default cursor type when the cursor is over the dataset item, {@link CursorType#POINTER}.
 	 */
-	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
+	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
 
 	/**
 	 * Name of properties of native object.

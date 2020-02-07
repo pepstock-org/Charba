@@ -20,8 +20,18 @@ import java.util.List;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.BarOptions;
+import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.TextMetricsItem;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
+import org.pepstock.charba.client.dom.BaseEventTypes;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
@@ -32,29 +42,23 @@ import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.utils.Utilities;
 
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
-import com.google.gwt.canvas.dom.client.TextMetrics;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseEvent;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-
 /**
  * Manages the selection on canvas, drawing selection area and implementing mouse listeners for canvas.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
+final class SelectionHandler {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the click function
+	private final CallbackProxy<EventListenerCallback> mouseDownCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover function
+	private final CallbackProxy<EventListenerCallback> mouseMoveCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the leave function
+	private final CallbackProxy<EventListenerCallback> mouseUpCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// chart instance
 	private final IsChart chart;
@@ -72,12 +76,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private ImageElement snapshot = null;
 	// amount of datasets items
 	private int datasetsItemsCount = 0;
-	// event handler registration
-	private HandlerRegistration mouseDown = null;
-	// event handler registration
-	private HandlerRegistration mouseUp = null;
-	// event handler registration
-	private HandlerRegistration mouseMove = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
 	// previous data URL chart as png
@@ -85,7 +83,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	// flag if do not send any event after refresh
 	private boolean skipNextFireEvent = false;
 	// cursor before hover the clear selection
-	private Cursor cursorOverClearSelection = null;
+	private CursorType cursorOverClearSelection = null;
 	// this is a flag to prevent click event after drawing
 	// of selection area
 	private boolean preventClickEvent = false;
@@ -100,6 +98,15 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// stores items
 		this.chart = chart;
 		this.options = options;
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// fires the event
+		mouseDownCallbackProxy.setCallback((context, event) -> onMouseDown(event));
+		// fires the event
+		mouseMoveCallbackProxy.setCallback((context, event) -> onMouseMove(event));
+		// fires the event
+		mouseUpCallbackProxy.setCallback((context, event) -> onMouseUp(event));
 		// gets selection item
 		ClearSelection clearSelection = options.getClearSelection();
 		// checks if display is required
@@ -145,13 +152,32 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		return options;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+	/**
+	 * Adds events listener to canvas element of chart.
 	 */
-	@Override
-	public void onMouseDown(MouseDownEvent event) {
+	void addListeners() {
+		// adds to the canvas all event listeners
+		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Adds events listener to canvas element of chart.
+	 */
+	void removeListeners() {
+		// adds to the canvas all event listeners
+		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Manages the mouse down event on canvas.
+	 * 
+	 * @param event canvas mouse event.
+	 */
+	void onMouseDown(BaseNativeEvent event) {
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
@@ -159,19 +185,18 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// are in chart area and has got datasets items
 		if (hasMinimumDatasetsItems() && isEventInChartArea(event)) {
 			// sets cursor
-			chart.getCanvas().getElement().getStyle().setCursor(Cursor.CROSSHAIR);
+			chart.getCanvas().getStyle().setCursorType(CursorType.CROSSHAIR);
 			// then start selection with X coordinate
 			startSelection(event.getX());
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Manages the mouse move event on canvas.
 	 * 
-	 * @see com.google.gwt.event.dom.client.MouseMoveHandler#onMouseMove(com.google.gwt.event.dom.client.MouseMoveEvent)
+	 * @param event canvas mouse event.
 	 */
-	@Override
-	public void onMouseMove(MouseMoveEvent event) {
+	void onMouseMove(BaseNativeEvent event) {
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
@@ -182,7 +207,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// are out of chart area
 			if (!isEventInChartArea(event)) {
 				// figures out as an end of selection
-				endSelection(event.getNativeEvent());
+				endSelection(event);
 				return;
 			}
 			// updates the selection into canvas
@@ -197,22 +222,21 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				cursorOverClearSelection = Utilities.getCursorOfChart(chart);
 			}
 			// sets cursor pointer because hover the clear selection
-			chart.getCanvas().getElement().getStyle().setCursor(Cursor.POINTER);
+			chart.getCanvas().getStyle().setCursorType(CursorType.POINTER);
 		} else if (cursorOverClearSelection != null) {
 			// if here, the mouse is not selecting and not hover the clear selection
 			// but before it was on clear selection therefore reset the cursor and the instance
-			chart.getCanvas().getElement().getStyle().setCursor(cursorOverClearSelection);
+			chart.getCanvas().getStyle().setCursorType(cursorOverClearSelection);
 			cursorOverClearSelection = null;
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Manages the mouse up event on canvas.
 	 * 
-	 * @see com.google.gwt.event.dom.client.MouseUpHandler#onMouseUp(com.google.gwt.event.dom.client.MouseUpEvent)
+	 * @param event canvas mouse event.
 	 */
-	@Override
-	public void onMouseUp(MouseUpEvent event) {
+	void onMouseUp(BaseNativeEvent event) {
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
@@ -224,8 +248,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// that canvas is generating after mouse up
 			preventClickEvent = true;
 			// sets the cursor
-			chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
-			endSelection(event.getNativeEvent());
+			chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
+			endSelection(event);
 		}
 	}
 
@@ -307,60 +331,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
-	 * Returns the mouse down handler registration.
-	 * 
-	 * @return the mouse down handler registration
-	 */
-	HandlerRegistration getMouseDown() {
-		return mouseDown;
-	}
-
-	/**
-	 * Sets the mouse down handler registration.
-	 * 
-	 * @param mouseDown the mouse down handler registration to set
-	 */
-	void setMouseDown(HandlerRegistration mouseDown) {
-		this.mouseDown = mouseDown;
-	}
-
-	/**
-	 * Returns the mouse up handler registration.
-	 * 
-	 * @return the mouse up handler registration
-	 */
-	HandlerRegistration getMouseUp() {
-		return mouseUp;
-	}
-
-	/**
-	 * Sets the mouse up handler registration.
-	 * 
-	 * @param mouseUp the mouse up handler registration to set
-	 */
-	void setMouseUp(HandlerRegistration mouseUp) {
-		this.mouseUp = mouseUp;
-	}
-
-	/**
-	 * Returns the mouse move handler registration.
-	 * 
-	 * @return the mouse move handler registration
-	 */
-	HandlerRegistration getMouseMove() {
-		return mouseMove;
-	}
-
-	/**
-	 * Sets the mouse move handler registration.
-	 * 
-	 * @param mouseMove the mouse move to set
-	 */
-	void setMouseMove(HandlerRegistration mouseMove) {
-		this.mouseMove = mouseMove;
-	}
-
-	/**
 	 * Returns the minimum amount of datasets, selectable based on chart type.
 	 * 
 	 * @return the minimum amount of datasets
@@ -389,7 +359,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * 
 	 * @param x the starting X coordinate.
 	 */
-	void startSelection(int x) {
+	void startSelection(double x) {
 		// sets status
 		setStatus(SelectionStatus.SELECTING);
 		// gets chart AREA
@@ -410,9 +380,9 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param x new X coordinate.
 	 * @param refresh if <code>true</code> the chart is refreshing therefore it doesn't clear the canvas
 	 */
-	void updateSelection(int x, boolean refresh) {
+	void updateSelection(double x, boolean refresh) {
 		// gets context
-		Context2d ctx = chart.getCanvas().getContext2d();
+		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// save context
 		ctx.save();
 		// the snapshot is the image of chart (without any selection).
@@ -458,7 +428,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			scaleTickX = scaleTickX + scaleTickLength;
 		}
 		// sets the selecting color into canvas
-		ctx.setFillStyle(options.getColorAsString());
+		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
 		ctx.fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
@@ -481,17 +451,17 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * 
 	 * @param ctx rendering interface used to draw on a canvas
 	 */
-	private void applyAreaBorder(Context2d ctx) {
+	private void applyAreaBorder(Context2dItem ctx) {
 		// borders
 		if (options.getBorderWidth() > 0) {
 			ctx.setLineWidth(options.getBorderWidth());
 			List<Integer> borderDash = options.getBorderDash();
 			// sets the selecting color into canvas
-			ctx.setStrokeStyle(options.getBorderColorAsString());
+			ctx.setStrokeColor(options.getBorderColorAsString());
 			if (!borderDash.isEmpty()) {
-				JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
+				ctx.setLineDash(options.getBorderDash());
 			}
-			JsHelper.get().setLineDashOffset(ctx, options.getBorderDashOffset());
+			ctx.setLineDashOffset(options.getBorderDashOffset());
 			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
 	}
@@ -504,7 +474,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param ctx rendering interface used to draw on a canvas
 	 * @param refresh if is called during a refresh
 	 */
-	private void applySnapshot(Context2d ctx, boolean refresh) {
+	private void applySnapshot(Context2dItem ctx, boolean refresh) {
 		// the snapshot is the image of chart (without any selection).
 		// Every time the selection is updating, it removes the previous
 		// selection putting the original chart (image snapshot) and then
@@ -528,7 +498,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param x new X coordinate.
 	 * @param chartArea the area item of chart
 	 */
-	private void updateTrack(int x, ChartAreaNode chartArea) {
+	private void updateTrack(double x, ChartAreaNode chartArea) {
 		// checks if X coordinate is inside of
 		// chart area
 		if (x < chartArea.getLeft()) {
@@ -549,7 +519,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * 
 	 * @param event event which will complete the selection
 	 */
-	void endSelection(NativeEvent event) {
+	void endSelection(BaseNativeEvent event) {
 		endSelection(event, false);
 	}
 
@@ -560,7 +530,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param event event which will complete the selection
 	 * @param skipNextFireEvent if <code>true</code>, does not send any event
 	 */
-	void endSelection(NativeEvent event, boolean skipNextFireEvent) {
+	void endSelection(BaseNativeEvent event, boolean skipNextFireEvent) {
 		// sets status
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
@@ -624,7 +594,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		}
 		// when here, the area has been draw
 		// then complete the selection
-		endSelection(Document.get().createChangeEvent(), skipNextFireEvent);
+		endSelection(DOMBuilder.get().createChangeEvent(), skipNextFireEvent);
 		skipNextFireEvent = false;
 	}
 
@@ -754,13 +724,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// -----
 		// uses context of canvas and text metrics to calculate
 		// the label width
-		Context2d ctx = chart.getCanvas().getContext2d();
+		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// save context
 		ctx.save();
 		// sets font
 		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 		// gets metrics
-		TextMetrics metrics = ctx.measureText(clearSelection.getLabel());
+		TextMetricsItem metrics = ctx.measureText(clearSelection.getLabel());
 		// stores the label width
 		double labelWidth = metrics.getWidth();
 		ctx.restore();
@@ -994,7 +964,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// if clear selection element is enabled
 		if (clearSelection.isDisplay()) {
 			// gets context from canvas
-			Context2d ctx = chart.getCanvas().getContext2d();
+			Context2dItem ctx = chart.getCanvas().getContext2d();
 			// saves context
 			ctx.save();
 			// clear area from canvas of clear selection element
@@ -1009,14 +979,14 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	private void drawClearSelection() {
 		// gets context from canvas
-		Context2d ctx = chart.getCanvas().getContext2d();
+		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
 		// gets clear selection element
 		ClearSelection clearSelection = pOptions.getClearSelection();
 		if (clearSelection.isUseSelectionStyle()) {
 			// sets the selecting color into canvas
-			ctx.setFillStyle(options.getColorAsString());
+			ctx.setFillColor(options.getColorAsString());
 			// draws the rectangle of area selection
 			ctx.fillRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
 			// borders
@@ -1024,11 +994,11 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				ctx.setLineWidth(ClearSelection.BORDER_WIDTH);
 				List<Integer> borderDash = options.getBorderDash();
 				// sets the selecting color into canvas
-				ctx.setStrokeStyle(options.getBorderColorAsString());
+				ctx.setStrokeColor(options.getBorderColorAsString());
 				if (!borderDash.isEmpty()) {
-					JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
+					ctx.setLineDash(options.getBorderDash());
 				}
-				JsHelper.get().setLineDashOffset(ctx, options.getBorderDashOffset());
+				ctx.setLineDashOffset(options.getBorderDashOffset());
 				// gets increment
 				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
 				// draw border fixing the dimansions of rect
@@ -1040,18 +1010,18 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
-			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.TOP);
+			ctx.setTextBaseline(ElementTextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
-			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.TOP);
+			ctx.setTextBaseline(ElementTextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 			// draws scaled image
@@ -1062,9 +1032,9 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
-			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.TOP);
+			ctx.setTextBaseline(ElementTextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.IMAGE.equals(clearSelection.getRender())) {
@@ -1079,7 +1049,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the element, otherwise <code>false</code>.
 	 */
-	private boolean isEventInClearSelection(MouseEvent<?> event) {
+	private boolean isEventInClearSelection(BaseNativeEvent event) {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
 		// gets clear selection element
@@ -1096,7 +1066,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the area, otherwise <code>false</code>.
 	 */
-	private boolean isEventInChartArea(MouseEvent<?> event) {
+	private boolean isEventInChartArea(BaseNativeEvent event) {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode areaInstance = node.getChartArea();

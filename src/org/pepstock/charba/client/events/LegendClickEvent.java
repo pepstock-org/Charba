@@ -16,22 +16,21 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendClickEvent extends AbstractChartEvent<LegendClickEventHandler> implements IsLegendEvent {
+public final class LegendClickEvent extends AbstractChartEvent implements IsLegendEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendClickEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(LegendClickEvent.class);
 	// legend item selected by clicking
 	private final LegendItem item;
 
@@ -42,7 +41,7 @@ public final class LegendClickEvent extends AbstractChartEvent<LegendClickEventH
 	 * @param functionContext function context provided by CHART.JS
 	 * @param item legend item related to the click
 	 */
-	public LegendClickEvent(NativeEvent nativeEvent, Chart functionContext, LegendItem item) {
+	public LegendClickEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
 		super(nativeEvent, functionContext, LegendEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (item == null) {
@@ -63,21 +62,23 @@ public final class LegendClickEvent extends AbstractChartEvent<LegendClickEventH
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<LegendClickEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(LegendClickEventHandler handler) {
-		handler.onClick(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof LegendClickEventHandler) {
+			LegendClickEventHandler myHandler = (LegendClickEventHandler)handler;
+			myHandler.onClick(this);
+		}
 	}
-
 }

@@ -16,22 +16,21 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user hovers on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventHandler> implements IsLegendEvent {
+public final class LegendHoverEvent extends AbstractChartEvent implements IsLegendEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendHoverEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(LegendHoverEvent.class);
 	// legend item selected by hovering
 	private final LegendItem item;
 
@@ -42,7 +41,7 @@ public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventH
 	 * @param functionContext function context provided by CHART.JS
 	 * @param item legend item related to the hover
 	 */
-	public LegendHoverEvent(NativeEvent nativeEvent, Chart functionContext, LegendItem item) {
+	public LegendHoverEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
 		super(nativeEvent, functionContext, LegendEventProperty.ON_HOVER);
 		// checks if argument is consistent
 		if (item == null) {
@@ -63,21 +62,24 @@ public final class LegendHoverEvent extends AbstractChartEvent<LegendHoverEventH
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<LegendHoverEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(LegendHoverEventHandler handler) {
-		handler.onHover(this);
-	}
-
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof LegendHoverEventHandler) {
+			LegendHoverEventHandler myHandler = (LegendHoverEventHandler)handler;
+			myHandler.onHover(this);
+		}
+	}	
+	
 }

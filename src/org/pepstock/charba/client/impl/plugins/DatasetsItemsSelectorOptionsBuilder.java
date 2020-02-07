@@ -17,14 +17,11 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Comfortable object to create {@link DatasetsItemsSelector#ID} plugin options by a builder.
@@ -271,28 +268,6 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setPosition(Position position) {
 		options.getClearSelection().setPosition(position);
-		return this;
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 * @return builder instance
-	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(ImageResource image) {
-		options.getClearSelection().setImage(image);
-		return this;
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 * @return builder instance
-	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(Image image) {
-		options.getClearSelection().setImage(image);
 		return this;
 	}
 

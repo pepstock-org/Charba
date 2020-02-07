@@ -16,21 +16,20 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.ScaleItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the axis of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
+public final class AxisClickEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AxisClickEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(AxisClickEvent.class);
 	// scale item selected by clicking
 	private final ScaleItem item;
 	// axis selected by clicking
@@ -43,7 +42,7 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	 * @param item scale item related to the click
 	 * @param axis axis configuration instance
 	 */
-	public AxisClickEvent(NativeEvent nativeEvent, ScaleItem item, Axis axis) {
+	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
 		super(nativeEvent);
 		// checks if argument is consistent
 		if (item == null) {
@@ -75,21 +74,24 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<AxisClickEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(AxisClickEventHandler handler) {
-		handler.onClick(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof AxisClickEventHandler) {
+			AxisClickEventHandler myHandler = (AxisClickEventHandler)handler;
+			myHandler.onClick(this);
+		}		
 	}
 
 }

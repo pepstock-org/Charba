@@ -25,15 +25,13 @@ import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.TextMetricsItem;
+import org.pepstock.charba.client.dom.enums.ElementTextAlign;
+import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.Context2d.TextAlign;
-import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
-import com.google.gwt.canvas.dom.client.TextMetrics;
-import com.google.gwt.i18n.client.NumberFormat;
 
 /**
  * Controller implementation to create charts like meter of gauges, extending doughnut chart.
@@ -165,7 +163,7 @@ final class BaseMeterController extends AbstractController {
 		// calculate the side of the square where to draw the value
 		final int sideOfSquare = (int) ((item.getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d
-		Context2d ctx = chart.getCanvas().getContext2d();
+		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// gets the chart area of CHART.JS
 		ChartAreaNode area = item.getChartArea();
 		// calculate the center point of the square
@@ -179,9 +177,9 @@ final class BaseMeterController extends AbstractController {
 		// based on easing of drawing
 		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
 		// gets max value into string to check font size
-		final String maxValueToShow = getFormattedValue(maxValue, options.getFormat());
+		final String maxValueToShow = getFormattedValue(chart, options, maxValue, 1D);
 		// value to show with format required
-		final String valueToShow = getFormattedValue(value, options.getFormat());
+		final String valueToShow = getFormattedValue(chart, options, value, ease);
 		// gets font style
 		final FontStyle style = options.getFontStyle() == null ? FontStyle.NORMAL : options.getFontStyle();
 		// gets font family
@@ -195,22 +193,22 @@ final class BaseMeterController extends AbstractController {
 		// calculates the font size
 		int fontSize = calculateFontSize(ctx, sideOfSquare, maxValueToShow, style, fontFamily);
 		// sets color to canvas
-		ctx.setFillStyle(fontColor);
+		ctx.setFillColor(fontColor);
 		// sets alignment
-		ctx.setTextAlign(TextAlign.CENTER);
+		ctx.setTextAlign(ElementTextAlign.CENTER);
 		// checks if it must draw also the label
 		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.BOTTOM);
+			ctx.setTextBaseline(ElementTextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
 			// re-calculates the font size for label
 			fontSize = calculateFontSize(ctx, sideOfSquare, label, style, fontFamily);
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.TOP);
+			ctx.setTextBaseline(ElementTextBaseline.TOP);
 			// draws text
 			ctx.fillText(dataset.getLabel(), centerX, centerY + PADDING);
 		} else {
@@ -218,7 +216,7 @@ final class BaseMeterController extends AbstractController {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(TextBaseline.MIDDLE);
+			ctx.setTextBaseline(ElementTextBaseline.MIDDLE);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY);
 		}
@@ -236,7 +234,7 @@ final class BaseMeterController extends AbstractController {
 	 * @param fontFamily font family
 	 * @return the font size to use
 	 */
-	private int calculateFontSize(Context2d ctx, int sideOfSquare, String value, FontStyle style, String fontFamily) {
+	private int calculateFontSize(Context2dItem ctx, int sideOfSquare, String value, FontStyle style, String fontFamily) {
 		// half of side of square
 		int fontSize = sideOfSquare / 2;
 		boolean check = true;
@@ -245,7 +243,7 @@ final class BaseMeterController extends AbstractController {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// gets metrics
-			TextMetrics metrics = ctx.measureText(value);
+			TextMetricsItem metrics = ctx.measureText(value);
 			// if the width is inside of side (and padding) or
 			// is the minimum size of font
 			// exit
@@ -261,15 +259,27 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Formats the value to display
+	 * Returns a formatted value of the chart applying the precision or invoking the value callback.
 	 * 
-	 * @param value value to display
-	 * @param format number format to use
-	 * @return the formatted value to display
+	 * @param chart chart instance
+	 * @param options chart options instance
+	 * @param value value of the chart
+	 * @param easing the current animation status
+	 * @return a formatted value of the chart
 	 */
-	private String getFormattedValue(double value, String format) {
-		// checks if format is set otherwise it uses the default
-		return format == null ? NumberFormat.getFormat(MeterOptions.DEFAULT_FORMAT).format(value) : NumberFormat.getFormat(format).format(value);
+	private String getFormattedValue(IsChart chart, MeterOptions options, double value, double easing) {
+		// checks if options has got a callback
+		if (options.getValueCallback() != null) {
+			// invokes callback
+			String result = options.getValueCallback().onFormat(chart, value, easing);
+			// checks if result is consistent
+			if (result != null) {
+				// return this value
+				return result;
+			}
+		}
+		// if here, it sues the precision set into options
+		return Utilities.applyPrecision(value, options.getPrecision());
 	}
 
 }

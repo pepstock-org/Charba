@@ -17,8 +17,7 @@ package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
-
-import com.google.gwt.dom.client.Element;
+import org.pepstock.charba.client.dom.BaseElement;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -52,5 +51,5 @@ final class NativeJsWindowHelper {
 	 * @param element DOM element to scan
 	 * @return an array of strings with element attributes
 	 */
-	static native ArrayString elementAttributes(Element element);
+	static native ArrayString elementAttributes(BaseElement element);
 }

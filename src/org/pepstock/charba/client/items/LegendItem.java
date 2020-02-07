@@ -27,13 +27,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.ImageElement;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -183,10 +182,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the fill style of the legend box or <code>null</code> if is not a canvas gradient
 	 */
-	public final CanvasGradient getFillStyleAsCanvasGradient() {
+	public final CanvasGradientItem getFillStyleAsCanvasGradient() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasGradient()) {
-			return getValue(Property.FILL_STYLE, (CanvasGradient) null);
+			return getValue(Property.FILL_STYLE, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -197,10 +196,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the fill style of the legend box or <code>null</code> if is not a canvas pattern
 	 */
-	public final CanvasPattern getFillStyleAsCanvasPattern() {
+	public final CanvasPatternItem getFillStyleAsCanvasPattern() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasPattern()) {
-			return getValue(Property.FILL_STYLE, (CanvasPattern) null);
+			return getValue(Property.FILL_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -252,10 +251,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
 	 */
-	public final CanvasGradient getStrokeStyleAsCanvasGradient() {
+	public final CanvasGradientItem getStrokeStyleAsCanvasGradient() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasGradient()) {
-			return getValue(Property.STROKE_STYLE, (CanvasGradient) null);
+			return getValue(Property.STROKE_STYLE, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -266,10 +265,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
 	 */
-	public final CanvasPattern getStrokeStyleAsCanvasPattern() {
+	public final CanvasPatternItem getStrokeStyleAsCanvasPattern() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasPattern()) {
-			return getValue(Property.STROKE_STYLE, (CanvasPattern) null);
+			return getValue(Property.STROKE_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;

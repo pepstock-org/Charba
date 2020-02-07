@@ -16,22 +16,21 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user leaves on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventHandler> implements IsLegendEvent {
+public final class LegendLeaveEvent extends AbstractChartEvent implements IsLegendEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendLeaveEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(LegendLeaveEvent.class);
 	// legend item selected by hovering
 	private final LegendItem item;
 
@@ -42,7 +41,7 @@ public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventH
 	 * @param functionContext function context provided by CHART.JS
 	 * @param item legend item related to the leaving
 	 */
-	public LegendLeaveEvent(NativeEvent nativeEvent, Chart functionContext, LegendItem item) {
+	public LegendLeaveEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
 		super(nativeEvent, functionContext, LegendEventProperty.ON_LEAVE);
 		// checks if argument is consistent
 		if (item == null) {
@@ -63,21 +62,24 @@ public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventH
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+
 	 */
 	@Override
-	public Type<LegendLeaveEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+
 	 */
 	@Override
-	protected void dispatch(LegendLeaveEventHandler handler) {
-		handler.onLeave(this);
+	protected void dispatch(EventHandler handler) {
+		if (handler instanceof LegendLeaveEventHandler) {
+			LegendLeaveEventHandler myHandler = (LegendLeaveEventHandler)handler;
+			myHandler.onLeave(this);
+		}
 	}
-
+	
 }

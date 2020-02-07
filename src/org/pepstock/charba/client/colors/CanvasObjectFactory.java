@@ -20,11 +20,11 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or
@@ -35,18 +35,18 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * 
  * @see Gradient
  * @see Pattern
- * @see com.google.gwt.canvas.dom.client.CanvasGradient
- * @see com.google.gwt.canvas.dom.client.CanvasPattern
+ * @see CanvasGradientItem
+ * @see CanvasPatternItem
  */
 public abstract class CanvasObjectFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
-	private static final Map<String, Map<Integer, CanvasGradient>> GRADIENTS = new HashMap<>();
+	private static final Map<String, Map<Integer, CanvasGradientItem>> GRADIENTS = new HashMap<>();
 
 	// cache for canvas patterns already created
 	// K = chart id, K = pattern id, V = canvas pattern
-	private static final Map<String, Map<Integer, CanvasPattern>> PATTERNS = new HashMap<>();
+	private static final Map<String, Map<Integer, CanvasPatternItem>> PATTERNS = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -63,11 +63,11 @@ public abstract class CanvasObjectFactory {
 	 * @param pattern pattern instance created at configuration level
 	 * @return a GWT canvas pattern
 	 */
-	public final CanvasPattern createPattern(IsChart chart, Pattern pattern) {
+	public final CanvasPatternItem createPattern(IsChart chart, Pattern pattern) {
 		// checks if arguments are consistent
 		checkArgumentsConsistency(chart, pattern);
 		// map instance
-		final Map<Integer, CanvasPattern> patternsMap;
+		final Map<Integer, CanvasPatternItem> patternsMap;
 		// checks if the pattern is already created
 		if (PATTERNS.containsKey(chart.getId())) {
 			patternsMap = PATTERNS.get(chart.getId());
@@ -83,16 +83,16 @@ public abstract class CanvasObjectFactory {
 		}
 		// checks if canvas pattern already loaded
 		if (pattern.getCanvasPattern() != null) {
-			CanvasPattern result = pattern.getCanvasPattern();
+			CanvasPatternItem result = pattern.getCanvasPattern();
 			// stores canvas pattern into cache
 			patternsMap.put(pattern.getId(), result);
 			return result;
 		}
 		// gets canvas and context 2d
-		Canvas canvas = chart.getCanvas();
-		Context2d context = canvas.getContext2d();
+		CanvasElement canvas = chart.getCanvas();
+		Context2dItem context = canvas.getContext2d();
 		// creates the pattern
-		CanvasPattern result = context.createPattern(pattern.getImage(), pattern.getRepetition());
+		CanvasPatternItem result = context.createPattern(pattern.getImage(), pattern.getRepetition());
 		// stores canvas pattern into cache
 		patternsMap.put(pattern.getId(), result);
 		// returns result
@@ -134,11 +134,11 @@ public abstract class CanvasObjectFactory {
 	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT canvas gradient
 	 */
-	public final CanvasGradient createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		checkArgumentsConsistency(chart, gradient);
 		// checks if the gradient is already created
-		final Map<Integer, CanvasGradient> gradientsMap;
+		final Map<Integer, CanvasGradientItem> gradientsMap;
 		// checks if the gradient is already created
 		if (GRADIENTS.containsKey(chart.getId())) {
 			gradientsMap = GRADIENTS.get(chart.getId());
@@ -155,7 +155,7 @@ public abstract class CanvasObjectFactory {
 		// checks if chart is initialized
 		if (chart.isInitialized() || Charts.hasNative(chart.getId())) {
 			// creates the result instance
-			CanvasGradient result = null;
+			CanvasGradientItem result = null;
 			// checks if the gradient must be linear oe radial
 			if (GradientType.LINEAR.equals(gradient.getType())) {
 				// creates a linear
@@ -192,10 +192,10 @@ public abstract class CanvasObjectFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @return a GWT linear canvas gradient
 	 */
-	private CanvasGradient createLinearGradient(IsChart chart, Gradient gradient) {
+	private CanvasGradientItem createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
-		Canvas canvas = chart.getCanvas();
-		Context2d context = canvas.getContext2d();
+		CanvasElement canvas = chart.getCanvas();
+		Context2dItem context = canvas.getContext2d();
 		// these are the coordinates instances of gradient
 		// x0 - the x coordinate of the starting point of the gradient
 		// y0 - the y coordinate of the starting point of the gradient
@@ -291,10 +291,10 @@ public abstract class CanvasObjectFactory {
 	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT radial canvas gradient
 	 */
-	private CanvasGradient createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
-		Canvas canvas = chart.getCanvas();
-		Context2d context = canvas.getContext2d();
+		CanvasElement canvas = chart.getCanvas();
+		Context2dItem context = canvas.getContext2d();
 		// these are the coordinates and radius instances of gradient
 		// x0 - the x coordinate of the center of the start circle of the gradient
 		// y0 - the y coordinate of the center of the start circle of the gradient

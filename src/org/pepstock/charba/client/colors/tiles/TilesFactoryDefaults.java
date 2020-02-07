@@ -17,9 +17,8 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-
-import com.google.gwt.canvas.dom.client.Context2d.LineCap;
-import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * Contains the defaults configuration of tile builder.
@@ -58,9 +57,9 @@ public final class TilesFactoryDefaults {
 	static final int MINIMUM_SIZE = 10;
 
 	/**
-	 * Default to determine the shape used to draw the end points of lines, {@link LineCap#ROUND}.
+	 * Default to determine the shape used to draw the end points of lines, {@link CapStyle#ROUND}.
 	 */
-	public static final LineCap DEFAULT_LINE_CAP = LineCap.ROUND;
+	public static final CapStyle DEFAULT_LINE_CAP = CapStyle.ROUND;
 
 	/**
 	 * Default the shape, {@link Shape#SQUARE}.
@@ -68,9 +67,9 @@ public final class TilesFactoryDefaults {
 	public static final IsShape DEFAULT_SHAPE = Shape.SQUARE;
 
 	/**
-	 * Default to determine the shape used to join two line segments where they meet, {@link LineJoin#ROUND}.
+	 * Default to determine the shape used to join two line segments where they meet, {@link JoinStyle#ROUND}.
 	 */
-	public static final LineJoin DEFAULT_LINE_JOIN = LineJoin.ROUND;
+	public static final JoinStyle DEFAULT_LINE_JOIN = JoinStyle.ROUND;
 
 	private IsShape shape = DEFAULT_SHAPE;
 
@@ -80,9 +79,9 @@ public final class TilesFactoryDefaults {
 
 	private String shapeColor = DEFAULT_SHAPE_COLOR_AS_STRING;
 
-	private LineCap lineCap = DEFAULT_LINE_CAP;
+	private CapStyle lineCap = DEFAULT_LINE_CAP;
 
-	private LineJoin lineJoin = DEFAULT_LINE_JOIN;
+	private JoinStyle lineJoin = DEFAULT_LINE_JOIN;
 
 	/**
 	 * To avoid any external implementation
@@ -206,7 +205,7 @@ public final class TilesFactoryDefaults {
 	 * @return lineCap the lineCap to determine the shape used to draw the end points of lines. If <code>null</code>, returns
 	 *         the default one
 	 */
-	public LineCap getLineCap() {
+	public CapStyle getLineCap() {
 		return lineCap;
 	}
 
@@ -215,7 +214,7 @@ public final class TilesFactoryDefaults {
 	 * 
 	 * @param lineCap the lineCap to determine the shape used to draw the end points of lines
 	 */
-	public void setLineCap(LineCap lineCap) {
+	public void setLineCap(CapStyle lineCap) {
 		this.lineCap = lineCap == null ? DEFAULT_LINE_CAP : lineCap;
 	}
 
@@ -226,7 +225,7 @@ public final class TilesFactoryDefaults {
 	 * @return lineJoin the lineJoin to determine the shape used to join two line segments where they meet. If
 	 *         <code>null</code>, returns the default one
 	 */
-	public LineJoin getLineJoin() {
+	public JoinStyle getLineJoin() {
 		return lineJoin;
 	}
 
@@ -235,7 +234,7 @@ public final class TilesFactoryDefaults {
 	 * 
 	 * @param lineJoin the lineJoin, to determine the shape used to join two line segments where they meet.
 	 */
-	public void setLineJoin(LineJoin lineJoin) {
+	public void setLineJoin(JoinStyle lineJoin) {
 		this.lineJoin = lineJoin;
 	}
 

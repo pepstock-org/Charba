@@ -17,10 +17,10 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
-
-import com.google.gwt.i18n.client.NumberFormat;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Formatter implementation for {@link DataLabelsPlugin#ID} plugin in order to provide the percentage of the value.<br>
@@ -37,43 +37,42 @@ public final class PercentageCallback implements FormatterCallback {
 	 */
 	public static final String NAN_AS_STRING = "NaN";
 	/**
-	 * Default number format, <b>{@value DEFAULT_FORMAT}</b>.
+	 * Default precision, <b>{@value DEFAULT_PRECISION}</b>.
 	 */
-	public static final String DEFAULT_FORMAT = "##0.##%";
+	public static final int DEFAULT_PRECISION = 2;
+	// public static final String DEFAULT_FORMAT = "##0.##%";
 	// default stacked flag
 	private static final boolean DEFAULT_STACKED = false;
-	// number format
-	private final NumberFormat numberFormat;
-	// number format as string
-	private final String format;
+	// number precision
+	private final int precision;
 	// stacked field
 	private final boolean stacked;
 
 	/**
-	 * Creates the formatter using the default values. The format is {@value PercentageCallback#DEFAULT_FORMAT} and stacked is
-	 * <code>false</code>.
+	 * Creates the formatter using the default values. The precision is {@value PercentageCallback#DEFAULT_PRECISION} and stacked
+	 * is <code>false</code>.
 	 */
 	public PercentageCallback() {
-		this(DEFAULT_FORMAT, DEFAULT_STACKED);
+		this(DEFAULT_PRECISION, DEFAULT_STACKED);
 	}
 
 	/**
-	 * Creates the formatter using the argument as number format. The stacked is <code>false</code>.
+	 * Creates the formatter using the argument as number precision. The stacked is <code>false</code>.
 	 * 
-	 * @param format number format to apply
+	 * @param precision number precision to apply
 	 */
-	public PercentageCallback(String format) {
-		this(format, DEFAULT_STACKED);
+	public PercentageCallback(int precision) {
+		this(precision, DEFAULT_STACKED);
 	}
 
 	/**
 	 * Creates the formatter using the argument as flag to compute the percentage on stacked datasets. The format is
-	 * {@value PercentageCallback#DEFAULT_FORMAT}.
+	 * {@value PercentageCallback#DEFAULT_PRECISION}.
 	 * 
 	 * @param stacked if <code>true</code> computes the percentage on stacked datasets.
 	 */
 	public PercentageCallback(boolean stacked) {
-		this(DEFAULT_FORMAT, stacked);
+		this(DEFAULT_PRECISION, stacked);
 	}
 
 	/**
@@ -82,17 +81,10 @@ public final class PercentageCallback implements FormatterCallback {
 	 * @param format number format to apply
 	 * @param stacked if <code>true</code> computes the percentage on stacked datasets.
 	 */
-	public PercentageCallback(String format, boolean stacked) {
-		// checks if consistent
-		if (format == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Percentage format argument is null");
-		}
+	public PercentageCallback(int precision, boolean stacked) {
 		// stores the arguments
-		this.format = format;
+		this.precision = precision;
 		this.stacked = stacked;
-		// creates the number format
-		this.numberFormat = NumberFormat.getFormat(format);
 	}
 
 	/**
@@ -100,8 +92,8 @@ public final class PercentageCallback implements FormatterCallback {
 	 * 
 	 * @return the number format as string to apply
 	 */
-	public String getFormat() {
-		return format;
+	public int getPrecision() {
+		return precision;
 	}
 
 	/**
@@ -131,7 +123,7 @@ public final class PercentageCallback implements FormatterCallback {
 			return NAN_AS_STRING;
 		}
 		// applies the number format to the percentage
-		return numberFormat.format(percentage);
+		return Utilities.applyPrecision(value, precision) + Constants.PERCENT;
 	}
 
 }

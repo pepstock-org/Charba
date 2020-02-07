@@ -18,16 +18,13 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.shared.SafeHtml;
+import org.pepstock.charba.client.utils.RegExp;
+import org.pepstock.charba.client.utils.RegExpResult;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Utility to managed the id to apply to HTML element when a legend is created.<br>
@@ -42,56 +39,18 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  */
 final class HtmlLegendId {
 
-	/**
-	 * Template interface to HTML element id for label cell of legend table.<br>
-	 * The format is <code>[chartId]_[datasetIndex]_[index]_label</code>.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	public interface LegendLabelColumnIdTemplate extends SafeHtmlTemplates {
+	// Template interface to HTML element id for label cell of legend table.
+	// The format is [chartId]_[datasetIndex]_[index]_label.
+	private static final String LABEl_COLUMN_ID_TEMPLATE = "{0}_{1}_{2}_label";
 
-		/**
-		 * Uses the declared template to create a HTML element id for label cells.
-		 * 
-		 * @param chartId chart id
-		 * @param datasetIndex the dataset index of the chart.
-		 * @param index the data index of the chart
-		 * @return an HTML element id
-		 */
-		@Template("{0}_{1}_{2}_label")
-		SafeHtml id(String chartId, int datasetIndex, int index);
-	}
+	// Template interface to HTML element id for color cell of legend table.
+	// The format is [chartId]_[datasetIndex]_[index]_color.
+	private static final String COLOR_COLUMN_ID_TEMPLATE = "{0}_{1}_{2}_color";
 
-	/**
-	 * Template interface to HTML element id for color cell of legend table.<br>
-	 * The format is <code>[chartId]_[datasetIndex]_[index]_color</code>.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	public interface LegendColorColumnIdTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a HTML element id for color cells.
-		 * 
-		 * @param chartId chart id
-		 * @param datasetIndex the dataset index of the chart.
-		 * @param index the data index of the chart
-		 * @return an HTML element id
-		 */
-		@Template("{0}_{1}_{2}_color")
-		SafeHtml id(String chartId, int datasetIndex, int index);
-	}
-
-	// instance of template for label cells
-	private static final LegendLabelColumnIdTemplate LABEL_COLUMN_ID_TEMPLATE = GWT.create(LegendLabelColumnIdTemplate.class);
-	// instance of template for color cells
-	private static final LegendColorColumnIdTemplate COLOR_COLUMN_ID_TEMPLATE = GWT.create(LegendColorColumnIdTemplate.class);
 	// reg-exp pattern to map a HTML element id
 	private static final String REGEXP_ID_PATTERN = "(\\S+)_(\\d+)_(\\d+)_(\\S+)";
 	// reg-exp to map a HTML element id
-	private static final RegExp REGEXP_ID = RegExp.compile(REGEXP_ID_PATTERN);
+	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 	// chart id
 	private final String chartId;
 	// dataset index
@@ -142,17 +101,17 @@ final class HtmlLegendId {
 		// checks if element id is consistent
 		if (elementId != null) {
 			// executes regular expression
-			MatchResult matcher = REGEXP_ID.exec(elementId);
+			RegExpResult matcher = REGEXP_ID.exec(elementId);
 			boolean matchFound = matcher != null;
 			// checks if matches
-			if (matchFound && matcher.getGroupCount() == 5) {
+			if (matchFound && matcher.length() == 5) {
 				// sets the reference
 				String chartId = null;
 				int datasetIndex = UndefinedValues.INTEGER;
 				int index = UndefinedValues.INTEGER;
 				// scans all token. Starts by 1
-				for (int i = 1; i < matcher.getGroupCount(); i++) {
-					String groupStr = matcher.getGroup(i);
+				for (int i = 1; i < matcher.length(); i++) {
+					String groupStr = matcher.get(i);
 					switch (i) {
 					case 1:
 						chartId = groupStr;
@@ -193,7 +152,7 @@ final class HtmlLegendId {
 	 * @param element HTML element to extract id
 	 * @return an HTML legend id instance
 	 */
-	static HtmlLegendId get(Element element) {
+	static HtmlLegendId get(BaseHtmlElement element) {
 		// checks if element is consistent
 		if (element != null) {
 			return get(element.getId());
@@ -239,10 +198,10 @@ final class HtmlLegendId {
 	private String getIdForColumn(boolean isColor) {
 		// checks if is requesting id from color cell
 		if (isColor) {
-			return COLOR_COLUMN_ID_TEMPLATE.id(chartId, datasetIndex, index).asString();
+			return Utilities.applyTemplate(COLOR_COLUMN_ID_TEMPLATE, chartId, datasetIndex, index);
 		} else {
 			// if here, is requesting id from label cell
-			return LABEL_COLUMN_ID_TEMPLATE.id(chartId, datasetIndex, index).asString();
+			return Utilities.applyTemplate(LABEl_COLUMN_ID_TEMPLATE, chartId, datasetIndex, index);
 		}
 	}
 

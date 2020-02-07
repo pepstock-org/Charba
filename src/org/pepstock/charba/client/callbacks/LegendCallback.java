@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
-
-import com.google.gwt.safehtml.shared.SafeHtml;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 
 /**
  * Sometimes you need a very complex legend.<br>

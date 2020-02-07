@@ -22,8 +22,8 @@ import java.util.List;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Envelop;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
@@ -37,15 +37,18 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartHoverEvent;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
+import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.items.DatasetItem;
@@ -55,10 +58,6 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 import jsinterop.annotations.JsFunction;
 
@@ -84,7 +83,7 @@ import jsinterop.annotations.JsFunction;
 public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, IsEventProvider {
 
 	// list of click event handler types
-	private static final List<Type<?>> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
+	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -106,7 +105,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
 		 */
-		void call(Chart chart, ChartNativeEvent event, ArrayObject items);
+		void call(Chart chart, BaseNativeEvent event, ArrayObject items);
 	}
 
 	/**
@@ -260,7 +259,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
 		// creates new native vent
 		// fires the resize event on chart
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), nativeChart, new SizeItem(size))));
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(DOMBuilder.get().createChangeEvent(), nativeChart, new SizeItem(size))));
 		legendCallbackProxy.setCallback(context -> {
 			// checks if callback is consistent
 			if (legendCallback != null) {
@@ -701,7 +700,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleClickEvent(ChartNativeEvent event) {
+	private void handleClickEvent(BaseNativeEvent event) {
 		// try to manage click of dataset
 		if (handleDatasetSelection(event)) {
 			// if done, returns to caller
@@ -724,7 +723,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 * @return <code>true</code> if the event on chart has been managed as dataset selection, otherwise <code>false</code>.
 	 */
-	private boolean handleDatasetSelection(ChartNativeEvent event) {
+	private boolean handleDatasetSelection(BaseNativeEvent event) {
 		// gets the dataset items by event
 		DatasetItem item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
@@ -744,7 +743,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 * @return <code>true</code> if the event on chart has been managed as title selection, otherwise <code>false</code>.
 	 */
-	private boolean handleTitleSelection(ChartNativeEvent event) {
+	private boolean handleTitleSelection(BaseNativeEvent event) {
 		// checks if title has been selected and there is any handler
 		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
 			// fires the click event on the chart title
@@ -761,7 +760,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleScaleSelection(ChartNativeEvent event) {
+	private void handleScaleSelection(BaseNativeEvent event) {
 		// checks if there is any handler and the chart has got scales
 		if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
 			// gets the scales

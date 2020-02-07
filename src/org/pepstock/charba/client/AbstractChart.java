@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -28,7 +30,22 @@ import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.BaseEventTypes;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.elements.HeadingElement;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.ElementPosition;
+import org.pepstock.charba.client.dom.enums.ElementUnit;
+import org.pepstock.charba.client.events.AddHandlerEvent;
+import org.pepstock.charba.client.events.ChartEventHandler;
+import org.pepstock.charba.client.events.EventHandler;
+import org.pepstock.charba.client.events.EventType;
+import org.pepstock.charba.client.events.HandlerManager;
+import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
@@ -39,17 +56,6 @@ import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.JSON;
 import org.pepstock.charba.client.utils.Utilities;
 
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.SimplePanel;
-
 /**
  * Base class of all charts.<br>
  * It contains Chart.js initialization.
@@ -58,30 +64,35 @@ import com.google.gwt.user.client.ui.SimplePanel;
  *
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<D extends Dataset> extends SimplePanel implements IsChart {
+public abstract class AbstractChart<D extends Dataset> extends HandlerManager implements IsChart, MutationHandler {
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the mouse down function on canvas
+	private final CallbackProxy<EventListenerCallback> canvasCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// PCT standard for width
-	private static final double DEFAULT_PCT_WIDTH = 90D;
+	private static final int DEFAULT_WIDTH = 90;
+	// PCT standard for width
+	private static final int DEFAULT_HEIGHT = 100;
 	// suffix label for canvas element id
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-
 	// chart ID using GWT unique id
-	private final String id = Document.get().createUniqueId();
+	private final String id = DOMBuilder.get().createUniqueId();
 	// stores the type of chart
 	private final Type type;
-	// canvas prevent default handler
-	private final HandlerRegistration preventDisplayHandler;
 	// list of all handle registration when
 	// an handler (for events) has been added to chart
 	// needed for clean up when chart will be destroy
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
-
 	// canvas where Chart.js draws the chart
-	private final Canvas canvas;
+	private final DivElement element;
+	// canvas where Chart.js draws the chart
+	private final CanvasElement canvas;
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
@@ -89,7 +100,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	// plugins of this chart
 	private final Plugins plugins;
 	// gets if Canvas is supported
-	private final boolean isCanvasSupported = Canvas.isSupported();
+	private final boolean isCanvasSupported = DOMBuilder.get().isCanvasSupported();
 	// merged options of defaults
 	private final ChartOptions options;
 	// merged options as default options
@@ -97,7 +108,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	// cursor defined when chart is created
-	private final Cursor initialCursor;
+	private final CursorType initialCursor;
 
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
@@ -110,34 +121,40 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		Type.checkIfValid(type);
 		// stores type
 		this.type = type;
+		// creates the div element
+		element = DOMBuilder.get().createDivElement();
 		// creates DIV
-		getElement().setId(id);
+		element.setId(id);
 		// sets relative position
-		getElement().getStyle().setPosition(Position.RELATIVE);
+		element.getStyle().setPosition(ElementPosition.RELATIVE);
 		// sets default width values
-		getElement().getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
-		getElement().getStyle().setHeight(100, Unit.PCT);
+		element.getStyle().setWidth(ElementUnit.PCT.parse(DEFAULT_WIDTH));
+		element.getStyle().setHeight(ElementUnit.PCT.parse(DEFAULT_HEIGHT));
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas
-			canvas = Canvas.createIfSupported();
+			canvas = DOMBuilder.get().createCanvasElement();
 			// set id to canvas
-			canvas.getCanvasElement().setId(id + SUFFIX_CANVAS_ELEMENT_ID);
+			canvas.setId(id + SUFFIX_CANVAS_ELEMENT_ID);
 			// adds to panel
-			add(canvas);
+			element.appendChild(canvas);
+			// -------------------------------
+			// -- SET CALLBACKS to PROXIES ---
+			// -------------------------------
+			// fires the event
+			canvasCallbackProxy.setCallback((context, event) -> event.preventDefault());
 			// adds the listener to disable canvas selection
 			// removes the default behavior
-			preventDisplayHandler = canvas.addMouseDownHandler(MouseDownEvent::preventDefault);
+			canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 		} else {
 			// creates a header element
-			HeadingElement h = Document.get().createHElement(3);
+			HeadingElement h = DOMBuilder.get().createHeadingElement();
 			// to show the error message
 			// because canvas is not supported
-			h.setInnerText(CANVAS_NOT_SUPPORTED_MESSAGE);
-			getElement().appendChild(h);
+			h.setTextContent(CANVAS_NOT_SUPPORTED_MESSAGE);
+			element.appendChild(h);
 			// resets canvas
 			canvas = null;
-			preventDisplayHandler = null;
 		}
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
@@ -153,16 +170,50 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		defaultChartOptions = new DefaultChartOptions(options);
 		// stores initial cursor
 		initialCursor = Utilities.getCursorOfChart(this);
+		// adds chart observer to get on attach and detach
+		ChartObserver.get().addHandler(this);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#createHandlerManager()
+	 * @see org.pepstock.charba.client.commons.events.HandlerManager#getSource()
 	 */
 	@Override
-	protected final HandlerManager createHandlerManager() {
-		return new ChartHandlerManager(this);
+	protected final IsChart getSource() {
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.events.HandlerManager#addHandler(org.pepstock.charba.client.commons.events.
+	 * EventHandler, org.pepstock.charba.client.commons.events.EventType)
+	 */
+	@Override
+	public final HandlerRegistration addHandler(EventHandler handler, EventType type) {
+		// adds handler
+		HandlerRegistration registration = super.addHandler(handler, type);
+		// if the handler is a chart event handler one
+		if (handler instanceof ChartEventHandler) {
+			// sends the event
+			fireEvent(new AddHandlerEvent(type));
+		}
+		// stores the registration into chart
+		// for cleaning up when chart will be destroy
+		handlerRegistrations.add(registration);
+		// returns registration
+		return registration;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getElement()
+	 */
+	@Override
+	public final DivElement getChartElement() {
+		return element;
 	}
 
 	/**
@@ -242,7 +293,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return the canvas
 	 */
 	@Override
-	public final Canvas getCanvas() {
+	public final CanvasElement getCanvas() {
 		// checks if canvas is initialized
 		if (isCanvasSupported) {
 			// returns it
@@ -259,11 +310,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void removeCanvasPreventDefault() {
-		// checks if consistent
-		if (preventDisplayHandler != null) {
-			// cleans up the handler for mouse listener
-			preventDisplayHandler.removeHandler();
-		}
+		// cleans up the handler for mouse listener
+		canvas.removeEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 	}
 
 	/**
@@ -272,7 +320,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return the initial cursor of the chart.
 	 */
 	@Override
-	public final Cursor getInitialCursor() {
+	public final CursorType getInitialCursor() {
 		return initialCursor;
 	}
 
@@ -424,12 +472,10 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onAttach()
+	 * @see org.pepstock.charba.client.IsChart#onAttach()
 	 */
 	@Override
-	protected void onAttach() {
-		// attaches the widget
-		super.onAttach();
+	public final void onAttach() {
 		// if is not to be drawn on attach, doesn't draw
 		if (isDrawOnAttach()) {
 			draw();
@@ -439,27 +485,15 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onDetach()
+	 * @see org.pepstock.charba.client.IsChart#onDetach()
 	 */
 	@Override
-	protected void onDetach() {
-		// detaches the widget
-		super.onDetach();
+	public final void onDetach() {
 		// if is not to be destroyed on detach, doesn't destroy
 		if (isDestroyOnDetach()) {
 			// then destroy
 			destroy();
 		}
-	}
-
-	/**
-	 * Called by handler manager to store every handler registration in order to remove them automatically when the chart will
-	 * be destroy.
-	 * 
-	 * @param registration new handler registration created
-	 */
-	void addHandlerRegistration(HandlerRegistration registration) {
-		handlerRegistrations.add(registration);
 	}
 
 	/**
@@ -488,6 +522,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		handlerRegistrations.clear();
 		// removes chart instance from collection
 		Charts.remove(getId());
+		// remove chart observer to get on attach and detach
+		ChartObserver.get().removeHandler(this);
 	}
 
 	/**
@@ -708,7 +744,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return dataset meta data item or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
+	public final DatasetMetaItem getDatasetAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -728,7 +764,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean isDatasetVisible(int index) {
+	public final boolean isDatasetVisible(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
@@ -746,7 +782,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link UndefinedValues#INTEGER}.
 	 */
 	@Override
-	public int getVisibleDatasetCount() {
+	public final int getVisibleDatasetCount() {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
@@ -766,7 +802,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
+	public final DatasetItem getElementAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -790,7 +826,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
+	public final List<DatasetItem> getElementsAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event

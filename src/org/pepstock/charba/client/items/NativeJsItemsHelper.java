@@ -17,10 +17,9 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartNativeEvent;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -42,20 +41,20 @@ final class NativeJsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
+	 * @return <code>true</code> if the property into native object is a {@link CanvasPatternItem}
 	 */
 	static native boolean isCanvasPattern(NativeObject object, String key);
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradientItem}.
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
+	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
 	 */
 	static native boolean isCanvasGradient(NativeObject object, String key);
 
@@ -66,6 +65,6 @@ final class NativeJsItemsHelper {
 	 * @param key key of java script object
 	 * @return a chart native event
 	 */
-	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
+	static native BaseNativeEvent nativeEvent(NativeObject event, String key);
 
 }
