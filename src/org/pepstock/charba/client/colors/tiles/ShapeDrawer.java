@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.enums.ElementRepetition;
@@ -52,7 +52,7 @@ public abstract class ShapeDrawer {
 	// rotation of 180 degrees to apply on rotation
 	static final double ROTATION_180_DEGREES = 180D * Math.PI / 180D;
 	// canvas element to draw
-	private CanvasElement canvas = null;
+	private Canvas canvas = null;
 
 	/**
 	 * Creates a tile based on arguments passed. This is the entry point of every drawer.
@@ -63,9 +63,9 @@ public abstract class ShapeDrawer {
 	 * @param size the size of tile, which is a square
 	 * @return a canvas pattern which represents a tile.
 	 */
-	final CanvasPatternItem createTile(CanvasElement outerCanvas, String backgroundColor, String shapeColor, int size) {
+	final CanvasPatternItem createTile(Canvas outerCanvas, String backgroundColor, String shapeColor, int size) {
 		// gets the initialized canvas element
-		CanvasElement innerCanvas = initCanvas(outerCanvas, size);
+		Canvas innerCanvas = initCanvas(outerCanvas, size);
 		Context2dItem context = innerCanvas.getContext2d();
 		// sets the background color
 		context.setFillColor(backgroundColor);
@@ -87,7 +87,7 @@ public abstract class ShapeDrawer {
 	 * @param size dimension of internal canvas
 	 * @return a created and configured canvas element element to use for drawing.
 	 */
-	protected final CanvasElement initCanvas(CanvasElement outerCanvas, int size) {
+	protected final Canvas initCanvas(Canvas outerCanvas, int size) {
 		// changes dimensions of outer canvas
 		outerCanvas.setWidth(size);
 		outerCanvas.setHeight(size);

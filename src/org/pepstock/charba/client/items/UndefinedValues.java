@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * Class with default values when the java script object returns an UNDEFINED value.
@@ -48,7 +48,7 @@ public final class UndefinedValues {
 	/**
 	 * Default value for ImageElement instances, <b>null</b>.
 	 */
-	public static final ImageElement IMAGE_ELEMENT = null;
+	public static final Img IMAGE_ELEMENT = null;
 
 	/**
 	 * To avoid any instantiation

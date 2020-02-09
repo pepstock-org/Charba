@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.ArrayImage
  */
-public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayImage> {
+public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 
 	// delegated array to store objects
 	private final ArrayImage array;
@@ -74,11 +74,11 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(ImageElement... values) {
+	public void addAll(Img... values) {
 		// checks if arguments are consistent
 		if (values != null && values.length > 0) {
 			// scans all elements
-			for (ImageElement val : values) {
+			for (Img val : values) {
 				// adds
 				add(val);
 			}
@@ -89,7 +89,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(ImageElement element) {
+	public boolean add(Img element) {
 		// checks if element is consistent
 		if (element != null) {
 			// adds element
@@ -106,12 +106,12 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends ImageElement> collection) {
+	public boolean addAll(Collection<? extends Img> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
 		// checks if argument is consistent
 		if (modified) {
-			Iterator<? extends ImageElement> iter = collection.iterator();
+			Iterator<? extends Img> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
 				// adds and
@@ -133,10 +133,10 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements
-			List<ImageElement> contained = new ArrayList<>();
+			List<Img> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
-				ImageElement value = get(i);
+				Img value = get(i);
 				// checks if not present into
 				// passed collection
 				if (!collection.contains(value)) {
@@ -147,7 +147,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 			// if temporary list is not empty
 			if (!contained.isEmpty()) {
 				// scans all elements
-				for (ImageElement toRemove : contained) {
+				for (Img toRemove : contained) {
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -168,7 +168,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
 	@Override
-	public ImageElement get(int index) {
+	public Img get(int index) {
 		// checks range
 		if (checkRange(index)) {
 			return array.get(index);
@@ -181,11 +181,11 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * null
 	 */
 	@Override
-	public ImageElement set(int index, ImageElement element) {
+	public Img set(int index, Img element) {
 		// checks if element is consistent and in range
 		if (element != null && checkRange(index)) {
 			// gets current element at that index
-			ImageElement old = array.get(index);
+			Img old = array.get(index);
 			// replaces with new element
 			array.set(index, element);
 			// returns old
@@ -200,7 +200,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * indices).
 	 */
 	@Override
-	public void add(int index, ImageElement element) {
+	public void add(int index, Img element) {
 		// checks if element is consistent
 		if (element != null) {
 			array.insertAt(index, element);
@@ -213,7 +213,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * the list.
 	 */
 	@Override
-	public ImageElement remove(int index) {
+	public Img remove(int index) {
 		// checks range
 		if (checkRange(index)) {
 			return array.remove(index);
@@ -228,8 +228,8 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	@Override
 	public int indexOf(Object object) {
 		// checks if object is consistent
-		if (object instanceof ImageElement) {
-			ImageElement value = (ImageElement) object;
+		if (object instanceof Img) {
+			Img value = (Img) object;
 			// check index of
 			return array.indexOf(value);
 		}
@@ -243,8 +243,8 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	@Override
 	public int lastIndexOf(Object object) {
 		// checks if object is consistent
-		if (object instanceof ImageElement) {
-			ImageElement value = (ImageElement) object;
+		if (object instanceof Img) {
+			Img value = (Img) object;
 			// check last index of
 			return array.lastIndexOf(value);
 		}

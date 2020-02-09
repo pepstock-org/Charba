@@ -16,34 +16,29 @@
 package org.pepstock.charba.client.dom.elements;
 
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 
-import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents an opaque object describing a gradient.
- * 
  * @author Andrea "Stock" Stocchero
+ *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class CanvasGradientItem {
+public final class Span extends BaseHtmlElement {
+
+	/**
+	 * The tag for this element.
+	 */
+	@JsOverlay
+	public static final String TAG = "span";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private CanvasGradientItem() {
-		// do nothing
+	Span() {
 	}
 
-	/**
-	 * Adds a new stop, defined by an offset and a color, to the gradient.<br>
-	 * If the offset is not between 0 and 1, inclusive, an INDEX_SIZE_ERR is raised.<br>
-	 * If the color can't be parsed as a CSS color, a SYNTAX_ERR is raised.
-	 * 
-	 * @param offset 0 and 1 value to define the offset
-	 * @param color the CSS color
-	 */
-	@JsMethod
-	public native void addColorStop(double offset, String color);
 }

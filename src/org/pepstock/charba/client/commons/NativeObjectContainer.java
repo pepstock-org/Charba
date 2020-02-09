@@ -22,7 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
@@ -668,7 +668,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final ImageElement getValue(Key key, ImageElement defaultValue) {
+	protected final Img getValue(Key key, Img defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -686,7 +686,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, ImageElement value) {
+	protected final void setValue(Key key, Img value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -709,7 +709,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values images to be set
 	 */
-	protected final void setValueOrArray(Key key, ImageElement... values) {
+	protected final void setValueOrArray(Key key, Img... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -734,7 +734,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single image value
 	 * @return value of the property (by array)
 	 */
-	protected final ArrayImage getValueOrArray(Key key, ImageElement defaultValue) {
+	protected final ArrayImage getValueOrArray(Key key, Img defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type

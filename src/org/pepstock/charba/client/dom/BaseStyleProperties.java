@@ -35,6 +35,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
+// FIXME name if must be cast
 @JsType(isNative = true, name = NativeName.DOM_CSS_PROPERTIES, namespace = JsPackage.GLOBAL)
 public final class BaseStyleProperties {
 

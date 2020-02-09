@@ -29,8 +29,8 @@ import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.TableCellElement;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
@@ -111,7 +111,7 @@ final class HtmlLegendCallbackProxy {
 			// gets reference of table column
 			BaseHtmlElement legendColumnElement = null;
 			// checks if the element is TD
-			if (element.getNodeName().equalsIgnoreCase(TableCellElement.TAG)) {
+			if (element.getNodeName().equalsIgnoreCase(TableCell.TAG)) {
 				// if TD, the element itself contains the correct ID.
 				legendColumnElement = element;
 			} else {
@@ -151,7 +151,7 @@ final class HtmlLegendCallbackProxy {
 		// checks if has got a parent
 		if (child.getParentElement() != null) {
 			// checks if parent has got the TD element
-			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCellElement.TAG)) {
+			if (child.getParentElement().getNodeName().equalsIgnoreCase(TableCell.TAG)) {
 				// returns parent element
 				return child.getParentHtmlElement();
 			} else {
@@ -274,7 +274,7 @@ final class HtmlLegendCallbackProxy {
 		// checks if there is legend element
 		if (HtmlLegend.get().getPluginDivElements().containsKey(chart.getId())) {
 			// gets legend element
-			DivElement legendElement = HtmlLegend.get().getPluginDivElements().get(chart.getId());
+			Div legendElement = HtmlLegend.get().getPluginDivElements().get(chart.getId());
 			// get options
 			HtmlLegendOptions options = HtmlLegend.get().getPluginOptions().get(chart.getId());
 			// sets cursor

@@ -54,7 +54,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.HasFill;
@@ -1600,7 +1600,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointStyle array of the style of the point as image.
 	 */
-	public void setPointStyle(ImageElement... pointStyle) {
+	public void setPointStyle(Img... pointStyle) {
 		// resets callback and
 		// also flags
 		setPointStyle((PointStyleCallback) null);
@@ -1615,7 +1615,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return list of the style of the point as image. If property is missing or not a image, returns an empty list.
 	 */
-	public List<ImageElement> getPointStyleAsImages() {
+	public List<Img> getPointStyleAsImages() {
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false) && getPointStyleCallback() == null) {
 			// gets array
@@ -2285,10 +2285,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns a {@link PointStyle} or {@link ImageElement} when the callback has been activated.
+	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @return a object property value, as {@link PointStyle} or {@link ImageElement}
+	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
 	private Object onPointStyle(ScriptableContext context) {
 		// gets value
@@ -2298,7 +2298,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// is point style instance
 			PointStyle style = (PointStyle) result;
 			return style.value();
-		} else if (result instanceof ImageElement) {
+		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
 		}

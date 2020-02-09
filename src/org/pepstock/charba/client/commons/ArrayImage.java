@@ -17,7 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -38,7 +38,7 @@ public final class ArrayImage extends Array {
 	 * @param items ImageElement items to create new array
 	 * @return new array instance of images.
 	 */
-	private static native ArrayImage of(ImageElement... items);
+	private static native ArrayImage of(Img... items);
 
 	/**
 	 * To avoid any instantiation
@@ -53,7 +53,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrNull(ImageElement... items) {
+	public static ArrayImage fromOrNull(Img... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -70,7 +70,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrEmpty(ImageElement... items) {
+	public static ArrayImage fromOrEmpty(Img... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -87,7 +87,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrNull(List<ImageElement> items) {
+	public static ArrayImage fromOrNull(List<Img> items) {
 		// checks if list is null
 		if (items == null || items.isEmpty()) {
 			return null;
@@ -102,7 +102,7 @@ public final class ArrayImage extends Array {
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// scans all items of list
-		for (ImageElement value : items) {
+		for (Img value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -117,7 +117,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrEmpty(List<ImageElement> items) {
+	public static ArrayImage fromOrEmpty(List<Img> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayImageList) {
 			// casts to array list
@@ -132,7 +132,7 @@ public final class ArrayImage extends Array {
 			return result;
 		}
 		// scans all items of list
-		for (ImageElement value : items) {
+		for (Img value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -226,7 +226,7 @@ public final class ArrayImage extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayImage splice(int start, int deleteCounts, ImageElement item);
+	native ArrayImage splice(int start, int deleteCounts, Img item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
@@ -244,7 +244,7 @@ public final class ArrayImage extends Array {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	ImageElement remove(int index) {
+	Img remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -256,7 +256,7 @@ public final class ArrayImage extends Array {
 	 * @param item element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, ImageElement item) {
+	void insertAt(int index, Img item) {
 		splice(index, 0, item);
 	}
 
@@ -271,7 +271,7 @@ public final class ArrayImage extends Array {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public ImageElement get(int index) {
+	public Img get(int index) {
 		return slice(index, index + 1).pop();
 	}
 
@@ -282,21 +282,21 @@ public final class ArrayImage extends Array {
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(ImageElement item, int start, int end);
+	native void fill(Img item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */
-	native void push(ImageElement item);
+	native void push(Img item);
 
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * 
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native ImageElement pop();
+	native Img pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -308,7 +308,7 @@ public final class ArrayImage extends Array {
 	 * @param item the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, ImageElement item) {
+	void set(int index, Img item) {
 		fill(item, index, index + 1);
 	}
 }

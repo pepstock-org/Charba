@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -199,7 +199,7 @@ public final class ArrayListHelper {
 	 * @param values array of elements to load when the list is creating.
 	 * @return a array list of strings instance
 	 */
-	public static List<ImageElement> unmodifiableList(ArrayImage values) {
+	public static List<Img> unmodifiableList(ArrayImage values) {
 		return Collections.unmodifiableList(list(values));
 	}
 

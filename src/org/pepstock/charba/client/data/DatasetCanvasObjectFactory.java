@@ -24,7 +24,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientScope;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.Radius;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.ChartAreaNode;
@@ -79,7 +79,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// depending of scope (canvas or chart area)
 		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// gets canvas
-			CanvasElement canvas = chart.getCanvas();
+			Canvas canvas = chart.getCanvas();
 			// sets the coordinates of scope
 			// CANVAS
 			area.setTop(0D);
@@ -112,7 +112,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// depending of scope (canvas or chart area)
 		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// gets canvas
-			CanvasElement canvas = chart.getCanvas();
+			Canvas canvas = chart.getCanvas();
 			// CANVAS
 			// the center of canvas has the following coordinates:
 			// X - the width divided by 2
@@ -154,7 +154,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 				manageRadiusByChartNode(chart, node, datasetIndex, index, radius);
 			} else {
 				// gets canvas
-				CanvasElement canvas = chart.getCanvas();
+				Canvas canvas = chart.getCanvas();
 				// by default is the center of chart area
 				radius.setInner(0D);
 				// radius - if max value between width and height, divided by 2

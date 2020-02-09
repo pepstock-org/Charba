@@ -21,6 +21,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents an opaque object describing a pattern, based on an image or a canvas.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -31,6 +33,7 @@ public final class CanvasPatternItem {
 	 * To avoid any instantiation
 	 */
 	private CanvasPatternItem() {
+		// do nothing
 	}
 	
 }

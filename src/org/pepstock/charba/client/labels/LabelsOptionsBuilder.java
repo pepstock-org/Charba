@@ -17,7 +17,7 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
@@ -307,7 +307,7 @@ public final class LabelsOptionsBuilder {
 	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setImages(ImageElement... images) {
+	public LabelsOptionsBuilder setImages(Img... images) {
 		options.setImages(images);
 		return this;
 	}

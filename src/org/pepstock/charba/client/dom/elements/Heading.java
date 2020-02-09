@@ -20,42 +20,28 @@ import org.pepstock.charba.client.dom.BaseHtmlElement;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents &lt;h3&gt; levels of section heading.<br>
+ * Used internally only to highlight when canvas is not supported.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class StyleElement extends BaseHtmlElement {
+public final class Heading extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "style";
+	public static final String TAG = "h3";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	StyleElement() {
+	private Heading() {
+		// do nothing
 	}
-	
-	/**
-	 * Returns the 'type' property of the HTML STYLE element node.
-	 *
-	 * @return the 'type' property value
-	 */
-	 @JsProperty
-	 public native String getType();
-
-	/**
-	 * Sets the 'type' property of the HTML STYLE element node.
-	 *
-	 * @param type the 'type' property to set 
-	 */
-	 @JsProperty
-	 public native void setType(String type);
-
 }

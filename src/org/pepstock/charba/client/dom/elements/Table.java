@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class TableElement extends BaseHtmlElement {
+public final class Table extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
@@ -39,7 +39,7 @@ public final class TableElement extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	TableElement() {
+	Table() {
 	}
 
 	/**

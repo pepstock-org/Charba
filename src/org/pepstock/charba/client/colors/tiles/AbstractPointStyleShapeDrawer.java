@@ -17,7 +17,7 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.HtmlColor;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
@@ -81,7 +81,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	 * @param htmlLegendItem legend item with all attributes to draw the canvas
 	 * @return a data URL for the current content of the canvas element
 	 */
-	final String drawTile(CanvasElement outerCanvas, HtmlLegendItem htmlLegendItem) {
+	final String drawTile(Canvas outerCanvas, HtmlLegendItem htmlLegendItem) {
 		// gets all variables needed for drawing
 		double radius = htmlLegendItem.getRadius();
 		int size = htmlLegendItem.getSize();
@@ -93,7 +93,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		double x = size / 2D;
 		double y = size / 2D;
 		// gets the initialized canvas element
-		CanvasElement canvas = initCanvas(outerCanvas, size);
+		Canvas canvas = initCanvas(outerCanvas, size);
 		// gets the context
 		Context2dItem context = canvas.getContext2d();
 		// clears the canvas for new design

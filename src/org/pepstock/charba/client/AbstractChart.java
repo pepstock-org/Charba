@@ -34,9 +34,9 @@ import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.HeadingElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.ElementPosition;
 import org.pepstock.charba.client.dom.enums.ElementUnit;
@@ -90,9 +90,9 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	// needed for clean up when chart will be destroy
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 	// canvas where Chart.js draws the chart
-	private final DivElement element;
+	private final Div element;
 	// canvas where Chart.js draws the chart
-	private final CanvasElement canvas;
+	private final Canvas canvas;
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
@@ -148,7 +148,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 		} else {
 			// creates a header element
-			HeadingElement h = DOMBuilder.get().createHeadingElement();
+			Heading h = DOMBuilder.get().createHeadingElement();
 			// to show the error message
 			// because canvas is not supported
 			h.setTextContent(CANVAS_NOT_SUPPORTED_MESSAGE);
@@ -212,7 +212,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	 * @see org.pepstock.charba.client.IsChart#getElement()
 	 */
 	@Override
-	public final DivElement getChartElement() {
+	public final Div getChartElement() {
 		return element;
 	}
 
@@ -293,7 +293,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	 * @return the canvas
 	 */
 	@Override
-	public final CanvasElement getCanvas() {
+	public final Canvas getCanvas() {
 		// checks if canvas is initialized
 		if (isCanvasSupported) {
 			// returns it

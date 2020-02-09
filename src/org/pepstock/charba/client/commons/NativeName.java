@@ -107,6 +107,26 @@ public final class NativeName {
 	public static final String DOM_HTML_DOCUMENT = "HTMLDocument";
 
 	/**
+	 * Constant to bind java script object as DOM HTML body element with name <b>{@value DOM_HTML_BODY_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_BODY_ELEMENT = "HTMLBodyElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML head element with name <b>{@value DOM_HTML_HEAD_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_HEAD_ELEMENT = "HTMLHeadElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML canvas element with name <b>{@value DOM_HTML_CANVAS_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_CANVAS_ELEMENT = "HTMLCanvasElement";
+	
+	/**
+	 * Constant to bind java script object as DOM HTML canvas context 2d item with name <b>{@value DOM_CANVAS_CONTEXT_2D}</b>.
+	 */
+	public static final String DOM_CANVAS_CONTEXT_2D = "CanvasRenderingContext2D";
+
+	/**
 	 * Constant to bind java script object as DOM event target with name <b>{@value DOM_EVENT_TARGET}</b>.
 	 */
 	public static final String DOM_EVENT_TARGET = "EventTarget";

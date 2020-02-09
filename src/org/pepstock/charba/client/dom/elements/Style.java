@@ -20,6 +20,7 @@ import org.pepstock.charba.client.dom.BaseHtmlElement;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -27,18 +28,34 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class SpanElement extends BaseHtmlElement {
+public final class Style extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "span";
+	public static final String TAG = "style";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	SpanElement() {
+	Style() {
 	}
+	
+	/**
+	 * Returns the 'type' property of the HTML STYLE element node.
+	 *
+	 * @return the 'type' property value
+	 */
+	 @JsProperty
+	 public native String getType();
+
+	/**
+	 * Sets the 'type' property of the HTML STYLE element node.
+	 *
+	 * @param type the 'type' property to set 
+	 */
+	 @JsProperty
+	 public native void setType(String type);
 
 }

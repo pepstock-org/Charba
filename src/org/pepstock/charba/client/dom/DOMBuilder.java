@@ -17,17 +17,17 @@ package org.pepstock.charba.client.dom;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.dom.elements.BreakElement;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.HeadingElement;
-import org.pepstock.charba.client.dom.elements.ImageElement;
-import org.pepstock.charba.client.dom.elements.ScriptElement;
-import org.pepstock.charba.client.dom.elements.SpanElement;
-import org.pepstock.charba.client.dom.elements.StyleElement;
-import org.pepstock.charba.client.dom.elements.TableCellElement;
-import org.pepstock.charba.client.dom.elements.TableElement;
-import org.pepstock.charba.client.dom.elements.TableRowElement;
+import org.pepstock.charba.client.dom.elements.LineBreak;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Heading;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.elements.Script;
+import org.pepstock.charba.client.dom.elements.Span;
+import org.pepstock.charba.client.dom.elements.Style;
+import org.pepstock.charba.client.dom.elements.TableCell;
+import org.pepstock.charba.client.dom.elements.Table;
+import org.pepstock.charba.client.dom.elements.TableRow;
 import org.pepstock.charba.client.dom.elements.TextNode;
 
 /**
@@ -47,7 +47,7 @@ public final class DOMBuilder {
 	private final boolean canvasSupported;
 
 	private DOMBuilder() {
-		CanvasElement canvas = createCanvasElement();
+		Canvas canvas = createCanvasElement();
 		this.canvasSupported = canvas.isSupported();
 	}
 
@@ -71,8 +71,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public CanvasElement createCanvasElement() {
-		return DOM.getDocument().createElement(CanvasElement.TAG);
+	public Canvas createCanvasElement() {
+		return DOM.getDocument().createElement(Canvas.TAG);
 	}
 
 	/**
@@ -80,8 +80,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public DivElement createDivElement() {
-		return DOM.getDocument().createElement(DivElement.TAG);
+	public Div createDivElement() {
+		return DOM.getDocument().createElement(Div.TAG);
 	}
 
 	/**
@@ -89,8 +89,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public ScriptElement createScriptElement() {
-		return DOM.getDocument().createElement(ScriptElement.TAG);
+	public Script createScriptElement() {
+		return DOM.getDocument().createElement(Script.TAG);
 	}
 
 	/**
@@ -98,8 +98,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public StyleElement createStyleElement() {
-		return DOM.getDocument().createElement(StyleElement.TAG);
+	public Style createStyleElement() {
+		return DOM.getDocument().createElement(Style.TAG);
 	}
 
 	/**
@@ -107,8 +107,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public BreakElement createBreakElement() {
-		return DOM.getDocument().createElement(BreakElement.TAG);
+	public LineBreak createBreakElement() {
+		return DOM.getDocument().createElement(LineBreak.TAG);
 	}
 
 	/**
@@ -116,8 +116,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public SpanElement createSpanElement() {
-		return DOM.getDocument().createElement(SpanElement.TAG);
+	public Span createSpanElement() {
+		return DOM.getDocument().createElement(Span.TAG);
 	}
 
 	/**
@@ -125,8 +125,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public ImageElement createImageElement() {
-		return DOM.getDocument().createElement(ImageElement.TAG);
+	public Img createImageElement() {
+		return DOM.getDocument().createElement(Img.TAG);
 	}
 
 	/**
@@ -134,8 +134,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public TableElement createTableElement() {
-		return DOM.getDocument().createElement(TableElement.TAG);
+	public Table createTableElement() {
+		return DOM.getDocument().createElement(Table.TAG);
 	}
 
 	/**
@@ -143,8 +143,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public TableRowElement createTableRowElement() {
-		return DOM.getDocument().createElement(TableRowElement.TAG);
+	public TableRow createTableRowElement() {
+		return DOM.getDocument().createElement(TableRow.TAG);
 	}
 
 	/**
@@ -152,8 +152,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public TableCellElement createTableCellElement() {
-		return DOM.getDocument().createElement(TableCellElement.TAG);
+	public TableCell createTableCellElement() {
+		return DOM.getDocument().createElement(TableCell.TAG);
 	}
 	
 	/**
@@ -161,8 +161,8 @@ public final class DOMBuilder {
 	 * 
 	 * @return the newly created element
 	 */
-	public HeadingElement createHeadingElement() {
-		return DOM.getDocument().createElement(HeadingElement.TAG);
+	public Heading createHeadingElement() {
+		return DOM.getDocument().createElement(Heading.TAG);
 	}
 	
 	/**

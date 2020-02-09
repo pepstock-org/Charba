@@ -18,27 +18,23 @@ package org.pepstock.charba.client.dom.elements;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
+ * Contains the descriptive information, or metadata, for a document.
+ *  
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class BreakElement extends BaseHtmlElement {
-
-	/**
-	 * The tag for this element.
-	 */
-	@JsOverlay
-	public static final String TAG = "br";
+@JsType(isNative = true, name = NativeName.DOM_HTML_HEAD_ELEMENT, namespace = JsPackage.GLOBAL)
+public final class Head extends BaseHtmlElement {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	BreakElement() {
+	private Head() {
+		// do nothing
 	}
 
 }

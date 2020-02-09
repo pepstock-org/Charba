@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsItemsHelper {
+public final class JsItemsHelper {
 	// static instance for singleton
 	private static final JsItemsHelper INSTANCE = new JsItemsHelper();
 
@@ -46,8 +46,38 @@ final class JsItemsHelper {
 	 * 
 	 * @return helper instance.
 	 */
-	static JsItemsHelper get() {
+	public static JsItemsHelper get() {
 		return INSTANCE;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasPatternItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasPatternItem}
+	 */
+	public boolean isCanvasPattern(Object object) {
+		// checks consistency of argument
+		if (object != null) {
+			return NativeJsItemsHelper.isCanvasPattern(object, null);
+		}
+		// if here, argument is not consistent
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasGradientItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasGradientItem}
+	 */
+	public boolean isCanvasGradient(Object object) {
+		// checks consistency of argument
+		if (object != null) {
+			return NativeJsItemsHelper.isCanvasGradient(object, null);
+		}
+		// if here, argument is not consistent
+		return false;
 	}
 
 	/**

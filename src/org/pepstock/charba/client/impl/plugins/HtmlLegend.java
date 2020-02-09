@@ -30,9 +30,9 @@ import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNode;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.NodeList;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.TableCellElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.enums.ElementUnit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.DefaultPlugin;
@@ -72,7 +72,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	// cache to store the chart id in order to know when new legend must be created
 	private final Set<String> pluginAddedLegendStatus = new HashSet<>();
 	// cache to store DIV element which contains legend for each chart
-	private final Map<String, DivElement> pluginDivElements = new HashMap<>();
+	private final Map<String, Div> pluginDivElements = new HashMap<>();
 	// cache to store easing during drawing for each chart
 	// this cache is needed in order to recreate the legend when a chart update
 	// is invoked during a previous update
@@ -163,7 +163,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// gets the legend
 			Legend legend = chart.getOptions().getLegend();
 			// creates legend DIV element reference
-			DivElement legendElement = null;
+			Div legendElement = null;
 			// checks if element is alreayd created
 			if (!pluginDivElements.containsKey(chart.getId())) {
 				// if new
@@ -233,7 +233,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// and the chart is is NOT in the set
 			if (pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
 				// gets div element
-				DivElement legendElement = pluginDivElements.get(chart.getId());
+				Div legendElement = pluginDivElements.get(chart.getId());
 				// invokes the legend callback to have the HTML of legend
 				SafeHtml html = CALLBACK.generateLegend(chart);
 				// removes all children of div element
@@ -366,7 +366,7 @@ public final class HtmlLegend extends AbstractPlugin {
 		// checks if there is div element for legend
 		if (pluginDivElements.containsKey(chart.getId())) {
 			// removes from map
-			DivElement legendElement = pluginDivElements.remove(chart.getId());
+			Div legendElement = pluginDivElements.remove(chart.getId());
 			// removes all listeners
 			removeListeners(chart, legendElement);
 			// removes all children
@@ -404,9 +404,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param chart chart instance
 	 * @param legendElement DIV legend element which contains the custom HTML legend.
 	 */
-	private void addListeners(IsChart chart, DivElement legendElement) {
+	private void addListeners(IsChart chart, Div legendElement) {
 		// gets all nodes with TAG TD
-		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCellElement.TAG);
+		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCell.TAG);
 		// scans all nodes
 		for (int i = 0; i < tds.length(); i++) {
 			// gets element
@@ -427,9 +427,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param chart chart instance
 	 * @param legendElement DIV legend element which contains the custom HTML legend.
 	 */
-	private void removeListeners(IsChart chart, DivElement legendElement) {
+	private void removeListeners(IsChart chart, Div legendElement) {
 		// gets all nodes with TAG TD
-		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCellElement.TAG);
+		NodeList<BaseElement> tds = legendElement.getElementsByTagName(TableCell.TAG);
 		// scans all nodes
 		for (int i = 0; i < tds.length(); i++) {
 			// gets element
@@ -452,7 +452,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param position position set by legend configuration object
 	 * @param padding padding set by legend configuration object
 	 */
-	private void addLegendElement(DivElement chartElement, DivElement legendElement, Position position, int padding) {
+	private void addLegendElement(Div chartElement, Div legendElement, Position position, int padding) {
 		if (mustAddToBottom(position)) {
 			// appends the legend element
 			chartElement.appendChild(legendElement);
@@ -476,9 +476,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param legendElement legend HTML element
 	 * @param position position set by legend configuration object
 	 */
-	private void manageLegendElement(IsChart chart, DivElement legendElement, Position position) {
+	private void manageLegendElement(IsChart chart, Div legendElement, Position position) {
 		// gets chart element
-		DivElement chartElement = chart.getChartElement();
+		Div chartElement = chart.getChartElement();
 		// gets if the legend element has been defined after the canvas
 		boolean isAfterCanvas = isAfterCanvas(chart, legendElement);
 		// gets if the legend must be added to bottom
@@ -517,9 +517,9 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * @param legendElement legend HTML element
 	 * @return <code>true</code> if the legend element has been added to chart element after the canvas one
 	 */
-	private boolean isAfterCanvas(IsChart chart, DivElement legendElement) {
+	private boolean isAfterCanvas(IsChart chart, Div legendElement) {
 		// gets chart element
-		DivElement chartElement = chart.getChartElement();
+		Div chartElement = chart.getChartElement();
 		// retrieves canvas id of chart
 		String canvasId = chart.getCanvas().getId();
 		// scans all children of chart element
@@ -532,11 +532,11 @@ public final class HtmlLegend extends AbstractPlugin {
 				BaseHtmlElement childElement = (BaseHtmlElement) childNode;
 				// checks if the legend element is equals to the scanned node
 				// by its id
-				if (childElement.getNodeName().equalsIgnoreCase(DivElement.TAG) && legendElement.getId().equalsIgnoreCase(childElement.getId())) {
+				if (childElement.getNodeName().equalsIgnoreCase(Div.TAG) && legendElement.getId().equalsIgnoreCase(childElement.getId())) {
 					// if here, means that the legend element has been found before the canvas element
 					// then returns false
 					return false;
-				} else if (childElement.getNodeName().equalsIgnoreCase(CanvasElement.TAG) && childElement.getId().equalsIgnoreCase(canvasId)) {
+				} else if (childElement.getNodeName().equalsIgnoreCase(Canvas.TAG) && childElement.getId().equalsIgnoreCase(canvasId)) {
 					// if here, means that the canvas element has been found before the legend element
 					// then returns true
 					return true;
@@ -580,7 +580,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * 
 	 * @return the map of cached DIV elements of HTML legend
 	 */
-	Map<String, DivElement> getPluginDivElements() {
+	Map<String, Div> getPluginDivElements() {
 		return pluginDivElements;
 	}
 

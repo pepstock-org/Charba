@@ -20,7 +20,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
@@ -108,7 +108,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 	// FIXME
 	//public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
-	public static final ImageElement DEFAULT_IMAGE = null;
+	public static final Img DEFAULT_IMAGE = null;
 	
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
@@ -395,7 +395,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * 
 	 * @param image the clear selection image
 	 */
-	public void setImage(ImageElement image) {
+	public void setImage(Img image) {
 		setValue(Property.IMAGE, image);
 	}
 
@@ -404,7 +404,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * 
 	 * @return the clear selection image or <code>null</code> if not set
 	 */
-	public ImageElement getImage() {
+	public Img getImage() {
 		return getValue(Property.IMAGE, defaultsOptions.getImage());
 	}
 

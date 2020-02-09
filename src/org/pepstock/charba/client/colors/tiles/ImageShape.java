@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * This is a shape which can draw an image on the tile.<br>
@@ -46,14 +46,14 @@ public final class ImageShape extends AbstractShape {
 	 */
 	public static final String IMAGE_SHAPE_NAME = "image";
 	// image to draw on the tile
-	private final ImageElement imageElement;
+	private final Img imageElement;
 
 	/**
 	 * Creates a shape with an image.
 	 * 
 	 * @param image image to draw on tile
 	 */
-	public ImageShape(ImageElement image) {
+	public ImageShape(Img image) {
 		super(IMAGE_SHAPE_NAME);
 		// checks if image is not consistent
 		if (image != null) {

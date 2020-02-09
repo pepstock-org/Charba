@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
@@ -277,7 +277,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @param image the clear selection image
 	 * @return builder instance
 	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(ImageElement image) {
+	public DatasetsItemsSelectorOptionsBuilder setImage(Img image) {
 		options.getClearSelection().setImage(image);
 		return this;
 	}

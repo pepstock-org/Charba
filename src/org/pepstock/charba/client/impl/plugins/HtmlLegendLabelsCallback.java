@@ -31,12 +31,12 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.ImageElement;
-import org.pepstock.charba.client.dom.elements.SpanElement;
-import org.pepstock.charba.client.dom.elements.TableCellElement;
-import org.pepstock.charba.client.dom.elements.TableElement;
-import org.pepstock.charba.client.dom.elements.TableRowElement;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.elements.Span;
+import org.pepstock.charba.client.dom.elements.TableCell;
+import org.pepstock.charba.client.dom.elements.Table;
+import org.pepstock.charba.client.dom.elements.TableRow;
 import org.pepstock.charba.client.dom.enums.ElementBorderStyle;
 import org.pepstock.charba.client.dom.enums.ElementDisplay;
 import org.pepstock.charba.client.dom.enums.ElementRepetition;
@@ -98,7 +98,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		// creates a HTML element
 		// as container of result
 		// needed to get innerHTML property
-		SpanElement container = DOMBuilder.get().createSpanElement();
+		Span container = DOMBuilder.get().createSpanElement();
 		// invokes the creation of legend
 		container.appendChild(buildLegend(chart));
 		// appends to safe html builder the innerHTML
@@ -108,19 +108,19 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds the legend for the passed chart using {@link TableElement} as model.
+	 * Builds the legend for the passed chart using {@link Table} as model.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @return the table element instance with the complete legend
 	 */
-	private TableElement buildLegend(IsChart chart) {
+	private Table buildLegend(IsChart chart) {
 		HtmlLegendOptions options = HtmlLegend.get().getPluginOptions().get(chart.getId());
 		// gets max columns for legend
 		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend
 		Legend legend = chart.getOptions().getLegend();
 		// creates table as result
-		final TableElement table = DOMBuilder.get().createTableElement();
+		final Table table = DOMBuilder.get().createTableElement();
 		// retrieves the list of legend items
 		final List<LegendLabelItem> legendItems = extractLegendItems(chart);
 		// checks if there is any items
@@ -140,7 +140,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			int index = 0;
 			// instance of current row
 			// where adds new columns for each legend
-			TableRowElement current = null;
+			TableRow current = null;
 			// gets html legend item wrapper
 			final HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
 			// scans all legend items
@@ -149,7 +149,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// checking max legend items per row
 				if (index % maxColumns == 0) {
 					// new row
-					TableRowElement newRow = DOMBuilder.get().createTableRowElement();
+					TableRow newRow = DOMBuilder.get().createTableRowElement();
 					// appends to table
 					table.appendChild(newRow);
 					// sets the current one
@@ -220,18 +220,18 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the color of dataset.
+	 * Builds a {@link TableCell} which should contains and represents the color of dataset.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param legendId element id for {@link TableCellElement}
+	 * @param legendId element id for {@link TableCell}
 	 * @param htmlLegendItem legend item to show into color cell element
-	 * @return a {@link TableCellElement} which should contains and represents the color of dataset
+	 * @return a {@link TableCell} which should contains and represents the color of dataset
 	 */
-	private TableCellElement buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
+	private TableCell buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// result color cell
-		final TableCellElement colorCell = DOMBuilder.get().createTableCellElement();
+		final TableCell colorCell = DOMBuilder.get().createTableCellElement();
 		// gets legend and legend labels instances
 		Legend legend = chart.getOptions().getLegend();
 		LegendLabels legendLabels = legend.getLabels();
@@ -243,7 +243,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		colorCell.getStyle().setDisplay(ElementDisplay.BLOCK);
 		// creates inner HTML element
 		// where to apply the color
-		DivElement color = DOMBuilder.get().createDivElement();
+		Div color = DOMBuilder.get().createDivElement();
 		colorCell.appendChild(color);
 		// calculates the border width to remove to size of color
 		// because the size of border will be added to element
@@ -274,17 +274,17 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the label of dataset.
+	 * Builds a {@link TableCell} which should contains and represents the label of dataset.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param legendId element id for {@link TableCellElement}
+	 * @param legendId element id for {@link TableCell}
 	 * @param item legend item to show into color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
-	 * @return a {@link TableCellElement} which should contains and represents the label of dataset
+	 * @return a {@link TableCell} which should contains and represents the label of dataset
 	 */
-	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, HtmlLegendTextCallback callback) {
+	private TableCell buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result label cell
-		final TableCellElement labelCell = DOMBuilder.get().createTableCellElement();
+		final TableCell labelCell = DOMBuilder.get().createTableCellElement();
 		// gets legend and legend labels instances
 		Legend legend = chart.getOptions().getLegend();
 		LegendLabels legendLabels = legend.getLabels();
@@ -295,7 +295,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		labelCell.getStyle().setPaddingBottom(ElementUnit.PX.parse(legendLabels.getPadding()));
 		// creates inner HTML element
 		// where to apply the label
-		DivElement label = createLabelText(chart, item, callback);
+		Div label = createLabelText(chart, item, callback);
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
 		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
@@ -315,18 +315,18 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
+	 * Builds a {@link TableCell} which should contains and represents the label of dataset, setting the text of the
 	 * label to apply.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param item legend item to show into color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
-	 * @return a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
+	 * @return a {@link TableCell} which should contains and represents the label of dataset, setting the text of the
 	 *         label to apply
 	 */
-	private DivElement createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
+	private Div createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result text label cell
-		final DivElement element = DOMBuilder.get().createDivElement();
+		final Div element = DOMBuilder.get().createDivElement();
 		// gets text of legend item
 		String text = item.getText();
 		// checks if the text of legend item is consistent
@@ -355,7 +355,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param text normalized text to apply
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	private void managePlainText(IsChart chart, LegendLabelItem item, DivElement element, String text, HtmlLegendTextCallback callback) {
+	private void managePlainText(IsChart chart, LegendLabelItem item, Div element, String text, HtmlLegendTextCallback callback) {
 		// checks if the text contains a carriage return
 		if (text.contains(Constants.LINE_SEPARATOR)) {
 			// splits the text
@@ -402,13 +402,13 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
 	 */
-	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, DivElement color, int width, int height) {
+	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, Div color, int width, int height) {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// checks if point style is an image
 		if (item.isPointStyleAsImage()) {
 			// gets point style image
-			ImageElement image = item.getPointStyleAsImage();
+			Img image = item.getPointStyleAsImage();
 			// if here, apply the point style as image
 			String imageAsCss = Utilities.toCSSBackgroundProperty(image);
 			// applies the point style as background to color element
@@ -510,7 +510,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
 	 */
-	private void applyBackgroundColor(IsChart chart, LegendLabelItem item, DivElement color, int width, int height) {
+	private void applyBackgroundColor(IsChart chart, LegendLabelItem item, Div color, int width, int height) {
 		// checks if fill color has been set
 		if (item.isFillStyleAsColor()) {
 			// if here, apply the fill color as background color
@@ -564,7 +564,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param color TD element where to apply the border style
 	 * @return <code>true</code> if the border has been applied and than color is missing
 	 */
-	private boolean applyBorderWidth(LegendLabelItem item, TableCellElement color) {
+	private boolean applyBorderWidth(LegendLabelItem item, TableCell color) {
 		// gets a correct border width
 		int borderWidth = Math.max(0, item.getLineWidth());
 		// applies the border
@@ -598,7 +598,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply border color
 	 * @param height height to use to apply border color
 	 */
-	private void applyBorderColor(IsChart chart, LegendLabelItem item, TableCellElement color, int width, int height) {
+	private void applyBorderColor(IsChart chart, LegendLabelItem item, TableCell color, int width, int height) {
 		// checks if there is stroke color
 		// to apply to the border
 		if (item.isStrokeStyleAsColor()) {

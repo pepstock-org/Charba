@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -448,7 +448,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param pointStyle the style (as image) of the legend box
 	 */
-	public void setPointStyle(ImageElement pointStyle) {
+	public void setPointStyle(Img pointStyle) {
 		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
 	}
 

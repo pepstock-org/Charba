@@ -23,8 +23,8 @@ import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
-import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
@@ -141,7 +141,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the object's browser element
 	 */
-	DivElement getChartElement();
+	Div getChartElement();
 
 	/**
 	 * Returns the options of chart.
@@ -178,7 +178,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the canvas
 	 */
-	CanvasElement getCanvas();
+	Canvas getCanvas();
 
 	/**
 	 * Remove the registration of prevent default mouse listener from canvas.<br>

@@ -32,10 +32,10 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.ElementRepetition;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -128,7 +128,7 @@ public final class Utilities {
 	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{3\\}";
 
 	// canvas element to draw
-	private static final CanvasElement WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
+	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
 	// instance of template
 	private static final PatternCssTemplate PATTERN_TEMPLATE = GWT.create(PatternCssTemplate.class);
 	// instance of template
@@ -215,7 +215,7 @@ public final class Utilities {
 		// checks if pattern argument is consistent
 		if (pattern != null) {
 			// gets image and canvas instance
-			ImageElement image = pattern.getImage();
+			Img image = pattern.getImage();
 			CanvasPatternItem canvasPattern = pattern.getCanvasPattern();
 			// checks if pattern has been created by image
 			if (image != null) {
@@ -271,7 +271,7 @@ public final class Utilities {
 	 * @param image image element instance to fet as CSS property
 	 * @return a URL CSS property for the current content of the image
 	 */
-	public static String toCSSBackgroundProperty(ImageElement image) {
+	public static String toCSSBackgroundProperty(Img image) {
 		// checks if consistent
 		if (image != null) {
 			// transform into CSS property
@@ -375,7 +375,7 @@ public final class Utilities {
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @return a image element or <code>null</code> if argument is not consistent
 	 */
-	public static ImageElement toImageElement(String url) {
+	public static Img toImageElement(String url) {
 		return toImageElement(url, Integer.MIN_VALUE, Integer.MIN_VALUE);
 	}
 
@@ -388,10 +388,10 @@ public final class Utilities {
 	 * @param height height of image
 	 * @return a image element or <code>null</code> if argument is not consistent
 	 */
-	public static ImageElement toImageElement(String url, int width, int height) {
+	public static Img toImageElement(String url, int width, int height) {
 		// checks if argument is consistent
 		if (url != null) {
-			ImageElement image = DOMBuilder.get().createImageElement();
+			Img image = DOMBuilder.get().createImageElement();
 			// set source
 			image.setSrc(url);
 			// checks if size is consistent

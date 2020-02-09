@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
@@ -128,7 +128,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * 
 	 * @return the clear selection image
 	 */
-	ImageElement getImage() {
+	Img getImage() {
 		return getValue(ClearSelection.Property.IMAGE, ClearSelection.DEFAULT_IMAGE);
 	}
 

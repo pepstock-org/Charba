@@ -22,8 +22,8 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.DOM;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.ScriptElement;
-import org.pepstock.charba.client.dom.elements.StyleElement;
+import org.pepstock.charba.client.dom.elements.Script;
+import org.pepstock.charba.client.dom.elements.Style;
 
 import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
@@ -72,7 +72,7 @@ public final class Injector {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a script element
-			ScriptElement scriptElement = DOMBuilder.get().createScriptElement();
+			Script scriptElement = DOMBuilder.get().createScriptElement();
 			// injects it into SCRIPT element
 			ensureInjected(resource, scriptElement);
 		}
@@ -87,7 +87,7 @@ public final class Injector {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a style element
-			StyleElement styleElement = DOMBuilder.get().createStyleElement();
+			Style styleElement = DOMBuilder.get().createStyleElement();
 			// injects it into STYLE element
 			ensureInjected(resource, styleElement);
 		}

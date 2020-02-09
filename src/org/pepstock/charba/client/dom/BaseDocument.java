@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.dom.elements.HeadElement;
+import org.pepstock.charba.client.dom.elements.Head;
 import org.pepstock.charba.client.dom.elements.TextNode;
 
 import jsinterop.annotations.JsMethod;
@@ -75,7 +75,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the &lt;head&gt; element of the current document
 	 */
 	@JsProperty
-	public native final HeadElement getHead();
+	public native final Head getHead();
 
 	/**
 	 * Returns the last node which is both a child of this parent node and is an element, or <code>null</code> if there is none.

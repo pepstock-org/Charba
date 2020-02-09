@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.dom.safehtml;
 
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.dom.elements.BreakElement;
+import org.pepstock.charba.client.dom.elements.LineBreak;
 
 /**
  * 
@@ -149,7 +149,7 @@ public final class SafeHtmlBuilder {
 	 * @return a reference to safe html builder
 	 */
 	public SafeHtmlBuilder appendEscapedLines(String text) {
-		builder.append(SafeHtmlUtils.htmlEscape(text).replaceAll(Constants.LINE_SEPARATOR, "<"+BreakElement.TAG+">"));
+		builder.append(SafeHtmlUtils.htmlEscape(text).replaceAll(Constants.LINE_SEPARATOR, "<"+LineBreak.TAG+">"));
 		return this;
 	}
 

@@ -18,86 +18,79 @@ package org.pepstock.charba.client.dom.elements;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents an HTML &lt;img&gt; element, providing the properties and methods used to manipulate image elements.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class CanvasElement extends BaseHtmlElement {
+public final class Img extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "canvas";
-	@JsOverlay
-	private static final String CONTEXT_2D = "2d";
+	public static final String TAG = "img";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	CanvasElement() {
+	private Img() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the 'height' property of the HTML CANVAS element.
+	 * Returns the value that reflects the height attribute, indicating the rendered height of the image in CSS pixels.
 	 *
-	 * @return the 'height' property value
+	 * @return the value that reflects the height attribute
 	 */
 	@JsProperty
 	public native int getHeight();
 
 	/**
-	 * Sets the 'height' property of the HTML CANVAS element.
+	 * Sets the value that reflects the height attribute, indicating the rendered height of the image in CSS pixels.
 	 *
-	 * @param height the 'height' property value
+	 * @param height the value that reflects the height attribute
 	 */
 	@JsProperty
 	public native void setHeight(int height);
 
 	/**
-	 * Returns the 'width' property of the HTML CANVAS element.
+	 * Returns the full URL of the image including base URI.
 	 *
-	 * @return the 'width' property value
+	 * @return the full URL of the image including base URI
+	 */
+	@JsProperty
+	public native String getSrc();
+
+	/**
+	 * Sets the full URL of the image including base URI.
+	 *
+	 * @param src the full URL of the image including base URI
+	 */
+	@JsProperty
+	public native void setSrc(String src);
+
+	/**
+	 * Returns the value that reflects the width attribute, indicating the rendered width of the image in CSS pixels.
+	 *
+	 * @return the value that reflects the width attribute
 	 */
 	@JsProperty
 	public native int getWidth();
 
 	/**
-	 * Sets the 'width' property of the HTML CANVAS element.
+	 * Sets the value that reflects the width attribute, indicating the rendered width of the image in CSS pixels.
 	 *
-	 * @param width the 'width' property value
+	 * @param width the value that reflects the width attributet
 	 */
 	@JsProperty
 	public native void setWidth(int width);
 
-	/**
-	 * FIXME test
-	 * @return
-	 */
-	@JsMethod
-	public native String toDataURL();
-
-	@JsMethod
-	private native Context2dItem getContext(String contextId);
-	
-	/**
-	 * @return the context2D
-	 */
-	@JsOverlay
-	public final Context2dItem getContext2d() {
-		return getContext(CONTEXT_2D);
-	}
-
-	@JsOverlay
-	public final boolean isSupported() {
-		return getContext(CONTEXT_2D) != null;
-	}
-	
 }

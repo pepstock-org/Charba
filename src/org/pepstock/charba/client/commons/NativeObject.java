@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -192,7 +192,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void defineImageProperty(String key, ImageElement value) {
+	void defineImageProperty(String key, Img value) {
 		// creates a descriptor
 		NativeImageDescriptor descriptor = new NativeImageDescriptor();
 		// sets value

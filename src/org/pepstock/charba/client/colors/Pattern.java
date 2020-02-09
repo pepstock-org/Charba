@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.ElementRepetition;
 
 /**
@@ -33,7 +33,7 @@ import org.pepstock.charba.client.dom.enums.ElementRepetition;
 public final class Pattern extends CanvasObject {
 
 	// default instance of image.
-	private static final ImageElement DEFAULT_IMAGE = null;
+	private static final Img DEFAULT_IMAGE = null;
 	// default instance of canvas pattern.
 	private static final CanvasPatternItem DEFAULT_CANVAS_PATTERN = null;
 
@@ -77,7 +77,7 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @param image image to use as pattern
 	 */
-	public Pattern(ImageElement image) {
+	public Pattern(Img image) {
 		this(image, ElementRepetition.REPEAT);
 	}
 
@@ -87,7 +87,7 @@ public final class Pattern extends CanvasObject {
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
 	 */
-	public Pattern(ImageElement image, ElementRepetition repetition) {
+	public Pattern(Img image, ElementRepetition repetition) {
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
@@ -164,7 +164,7 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @return the image used into pattern if exists, otherwise <code>null</code>.
 	 */
-	public ImageElement getImage() {
+	public Img getImage() {
 		return getValue(Property.CHARBA_PATTERN_IMG, DEFAULT_IMAGE);
 	}
 

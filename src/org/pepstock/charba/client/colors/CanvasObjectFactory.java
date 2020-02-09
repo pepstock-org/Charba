@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
@@ -89,7 +89,7 @@ public abstract class CanvasObjectFactory {
 			return result;
 		}
 		// gets canvas and context 2d
-		CanvasElement canvas = chart.getCanvas();
+		Canvas canvas = chart.getCanvas();
 		Context2dItem context = canvas.getContext2d();
 		// creates the pattern
 		CanvasPatternItem result = context.createPattern(pattern.getImage(), pattern.getRepetition());
@@ -194,7 +194,7 @@ public abstract class CanvasObjectFactory {
 	 */
 	private CanvasGradientItem createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
-		CanvasElement canvas = chart.getCanvas();
+		Canvas canvas = chart.getCanvas();
 		Context2dItem context = canvas.getContext2d();
 		// these are the coordinates instances of gradient
 		// x0 - the x coordinate of the starting point of the gradient
@@ -293,7 +293,7 @@ public abstract class CanvasObjectFactory {
 	 */
 	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
-		CanvasElement canvas = chart.getCanvas();
+		Canvas canvas = chart.getCanvas();
 		Context2dItem context = canvas.getContext2d();
 		// these are the coordinates and radius instances of gradient
 		// x0 - the x coordinate of the center of the start circle of the gradient

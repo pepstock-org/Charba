@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -133,7 +133,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @param pointStyle image element of the style of the point as image.
 	 */
-	public void setPointStyle(ImageElement pointStyle) {
+	public void setPointStyle(Img pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -153,7 +153,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return image of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
 	 */
-	public ImageElement getPointStyleAsImage() {
+	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false)) {
 			// gets value

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -377,7 +377,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the style (as image) of the legend box
 	 */
-	public final ImageElement getPointStyleAsImage() {
+	public final Img getPointStyleAsImage() {
 		// checks if is an point style and not an image
 		if (isPointStyleAsImage()) {
 			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);

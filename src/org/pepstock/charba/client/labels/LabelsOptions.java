@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
@@ -666,7 +666,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 */
-	public void setImages(ImageElement... images) {
+	public void setImages(Img... images) {
 		// sets property
 		setArrayValue(Property.IMAGES, ArrayImage.fromOrNull(images));
 	}
@@ -676,7 +676,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the images when {@link Render} is {@link Render#IMAGE} or an empty list.
 	 */
-	public List<ImageElement> getImages() {
+	public List<Img> getImages() {
 		// gets array
 		ArrayImage array = getArrayValue(Property.IMAGES);
 		return ArrayListHelper.list(array);
@@ -751,7 +751,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 			Object value = renderCallback.invoke(chart, item);
 			// checks result
 			if (value != null) {
-				if (value instanceof ImageElement) {
+				if (value instanceof Img) {
 					return value;
 				} else {
 					return value.toString();

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
@@ -73,7 +73,7 @@ final class SelectionHandler {
 	// status if selected
 	private SelectionStatus status = SelectionStatus.READY;
 	// copy of chart canvas as image to apply when is drwaing into canvas
-	private ImageElement snapshot = null;
+	private Img snapshot = null;
 	// amount of datasets items
 	private int datasetsItemsCount = 0;
 	// previous chart area
@@ -301,14 +301,14 @@ final class SelectionHandler {
 	 * 
 	 * @return the snapshot
 	 */
-	ImageElement getSnapshot() {
+	Img getSnapshot() {
 		return snapshot;
 	}
 
 	/**
 	 * @param snapshot the snapshot to set
 	 */
-	void setSnapshot(ImageElement snapshot) {
+	void setSnapshot(Img snapshot) {
 		this.snapshot = snapshot;
 	}
 

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.labels.callbacks;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.labels.LabelsPlugin;
 import org.pepstock.charba.client.labels.RenderItem;
 
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.labels.RenderItem;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @see ImageElement
+ * @see Img
  */
 public interface RenderCallback {
 

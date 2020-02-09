@@ -27,17 +27,18 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class HeadingElement extends BaseHtmlElement {
+public final class LineBreak extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "h3";
+	public static final String TAG = "br";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	HeadingElement() {
+	LineBreak() {
 	}
+
 }

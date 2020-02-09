@@ -24,8 +24,8 @@ import org.pepstock.charba.client.UpdateConfiguration;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
-import org.pepstock.charba.client.dom.elements.DivElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
@@ -88,7 +88,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#getChartElement()
 	 */
 	@Override
-	public final DivElement getChartElement() {
+	public final Div getChartElement() {
 		return chart.getChartElement();
 	}
 
@@ -128,7 +128,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#getCanvas()
 	 */
 	@Override
-	public final CanvasElement getCanvas() {
+	public final Canvas getCanvas() {
 		return chart.getCanvas();
 	}
 

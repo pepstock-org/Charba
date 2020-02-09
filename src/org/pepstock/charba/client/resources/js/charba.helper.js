@@ -388,7 +388,10 @@
 	 @return true if the property into native object is a CanvasPattern
     */
     CharbaJsItemsHelper.isCanvasPattern = function(obj, key) {
-    	return obj[key] instanceof CanvasPattern;
+    	if (typeof key === 'string') {
+    		return obj[key] instanceof CanvasPattern;
+    	}
+   		return obj instanceof CanvasPattern;
     } 
     /*
 	 Returns true if the property into native object is a CanvasGradient.
@@ -398,7 +401,10 @@
 	 @return true if the property into native object is a CanvasGradient
     */
     CharbaJsItemsHelper.isCanvasGradient = function(obj, key) {
-    	return obj[key] instanceof CanvasGradient;
+    	if (typeof key === 'string') {
+    		return obj[key] instanceof CanvasGradient;
+    	}
+   		return obj instanceof CanvasGradient;
     } 
     /*
 	 Returns a chart native event from CHART.JS event.

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.CanvasElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
@@ -52,7 +52,7 @@ public final class TilesFactory {
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = DOMBuilder.get().isCanvasSupported();
 	// canvas where draws the pattern
-	private final CanvasElement canvas;
+	private final Canvas canvas;
 	// default configuration
 	private final TilesFactoryDefaults defaults;
 

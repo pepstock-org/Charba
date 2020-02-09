@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -67,7 +67,7 @@ public class Point extends AbstractConfigurationElement {
 	 * 
 	 * @param pointStyle array of the style of the point.
 	 */
-	public void setPointStyle(ImageElement pointStyle) {
+	public void setPointStyle(Img pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
@@ -85,7 +85,7 @@ public class Point extends AbstractConfigurationElement {
 	 * 
 	 * @return the style of the point as image.
 	 */
-	public ImageElement getPointStyleAsImage() {
+	public Img getPointStyleAsImage() {
 		return getOptions().getElements().getPoint().getPointStyleAsImage();
 	}
 

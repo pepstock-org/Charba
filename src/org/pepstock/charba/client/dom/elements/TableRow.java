@@ -28,82 +28,83 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class ScriptElement extends BaseHtmlElement {
+public final class TableRow extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "script";
+	public static final String TAG = "tr";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	ScriptElement() {
+	TableRow() {
 	}
-	
-	/**
-	 * Returns the 'charset' property of the HTML SCRIPT element.
-	 *
-	 * @return the 'charset' property value
-	 */
-	 @JsProperty
-	 public native String getCharset();
 
 	/**
-	 * Sets the 'charset' property of the HTML SCRIPT element.
+	 * Returns the 'align' property of the HTML TABLE ROW element.
 	 *
-	 * @param charset the 'charset' property to set 
+	 * @return the 'align' property value
 	 */
 	 @JsProperty
-	 public native void setCharset(String charset);
+	 public native String getAlign();
 
 	/**
-	 * Returns the 'src' property of the HTML SCRIPT element.
+	 * Sets the 'align' property of the HTML TABLE ROW element.
 	 *
-	 * @return the 'src' property value
+	 * @param align the 'align' property to set 
 	 */
 	 @JsProperty
-	 public native String getSrc();
+	 public native void setAlign(String align);
 
 	/**
-	 * Sets the 'src' property of the HTML SCRIPT element.
+	 * Returns the 'bgColor' property of the HTML TABLE ROW element.
 	 *
-	 * @param src the 'src' property to set 
+	 * @return the 'bgColor' property value
 	 */
 	 @JsProperty
-	 public native void setSrc(String src);
+	 public native String getBgColor();
 
 	/**
-	 * Returns the 'text' property of the HTML SCRIPT element.
+	 * Sets the 'bgColor' property of the HTML TABLE ROW element.
 	 *
-	 * @return the 'text' property value
+	 * @param bgColor the 'bgColor' property to set 
 	 */
 	 @JsProperty
-	 public native String getText();
+	 public native void setBgColor(String bgColor);
+
+// FIXME	 
+//	/**
+//	 * Returns the 'cells' property of the HTML TABLE ROW element.
+//	 *
+//	 * @return the 'cells' property value
+//	 */
+//	 @JsProperty
+//	 public native HTMLCollection getCells();
 
 	/**
-	 * Sets the 'text' property of the HTML SCRIPT element.
+	 * Returns the 'rowIndex' property of the HTML TABLE ROW element.
 	 *
-	 * @param text the 'text' property to set 
+	 * @return the 'rowIndex' property value
 	 */
 	 @JsProperty
-	 public native void setText(String text);
+	 public native int getRowIndex();
 
 	/**
-	 * Returns the 'type' property of the HTML SCRIPT element.
+	 * Returns the 'vAlign' property of the HTML TABLE ROW element.
 	 *
-	 * @return the 'type' property value
+	 * @return the 'vAlign' property value
 	 */
 	 @JsProperty
-	 public native String getType();
+	 public native String getVAlign();
 
 	/**
-	 * Sets the 'type' property of the HTML SCRIPT element.
+	 * Sets the 'vAlign' property of the HTML TABLE ROW element.
 	 *
-	 * @param type the 'type' property to set 
+	 * @param vAlign the 'vAlign' property to set 
 	 */
 	 @JsProperty
-	 public native void setType(String type);
+	 public native void setVAlign(String vAlign);
 
 }

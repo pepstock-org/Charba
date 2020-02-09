@@ -28,62 +28,38 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class ImageElement extends BaseHtmlElement {
+public final class Script extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "img";
+	public static final String TAG = "script";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	ImageElement() {
+	Script() {
 	}
-
+	
 	/**
-	 * Returns the 'height' property of the HTML IMG element.
+	 * Returns the 'charset' property of the HTML SCRIPT element.
 	 *
-	 * @return the 'height' property value
+	 * @return the 'charset' property value
 	 */
 	 @JsProperty
-	 public native int getHeight();
+	 public native String getCharset();
 
 	/**
-	 * Sets the 'height' property of the HTML IMG element.
+	 * Sets the 'charset' property of the HTML SCRIPT element.
 	 *
-	 * @param height the 'height' property to set 
+	 * @param charset the 'charset' property to set 
 	 */
 	 @JsProperty
-	 public native void setHeight(int height);
+	 public native void setCharset(String charset);
 
 	/**
-	 * Returns the 'name' property of the HTML IMG element.
-	 *
-	 * @return the 'name' property value
-	 */
-	 @JsProperty
-	 public native String getName();
-
-	/**
-	 * Sets the 'name' property of the HTML IMG element.
-	 *
-	 * @param name the 'name' property to set 
-	 */
-	 @JsProperty
-	 public native void setName(String name);
-
-	/**
-	 * Returns the 'sizes' property of the HTML IMG element.
-	 *
-	 * @return the 'sizes' property value
-	 */
-	 @JsProperty
-	 public native String getSizes();
-
-	/**
-	 * Returns the 'src' property of the HTML IMG element.
+	 * Returns the 'src' property of the HTML SCRIPT element.
 	 *
 	 * @return the 'src' property value
 	 */
@@ -91,7 +67,7 @@ public final class ImageElement extends BaseHtmlElement {
 	 public native String getSrc();
 
 	/**
-	 * Sets the 'src' property of the HTML IMG element.
+	 * Sets the 'src' property of the HTML SCRIPT element.
 	 *
 	 * @param src the 'src' property to set 
 	 */
@@ -99,20 +75,35 @@ public final class ImageElement extends BaseHtmlElement {
 	 public native void setSrc(String src);
 
 	/**
-	 * Returns the 'width' property of the HTML IMG element.
+	 * Returns the 'text' property of the HTML SCRIPT element.
 	 *
-	 * @return the 'width' property value
+	 * @return the 'text' property value
 	 */
 	 @JsProperty
-	 public native int getWidth();
+	 public native String getText();
 
 	/**
-	 * Sets the 'width' property of the HTML IMG element.
+	 * Sets the 'text' property of the HTML SCRIPT element.
 	 *
-	 * @param width the 'width' property to set 
+	 * @param text the 'text' property to set 
 	 */
 	 @JsProperty
-	 public native void setWidth(int width);
+	 public native void setText(String text);
 
+	/**
+	 * Returns the 'type' property of the HTML SCRIPT element.
+	 *
+	 * @return the 'type' property value
+	 */
+	 @JsProperty
+	 public native String getType();
+
+	/**
+	 * Sets the 'type' property of the HTML SCRIPT element.
+	 *
+	 * @param type the 'type' property to set 
+	 */
+	 @JsProperty
+	 public native void setType(String type);
 
 }

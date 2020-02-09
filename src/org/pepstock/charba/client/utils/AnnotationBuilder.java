@@ -22,8 +22,8 @@ import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNode;
 import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.DivElement;
-import org.pepstock.charba.client.dom.elements.ImageElement;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * Utility to have an image to apply to canvas of chart in order to add HTML custom information on chart.<br>
@@ -53,7 +53,7 @@ public final class AnnotationBuilder {
 
 	// cache of the image created
 	// K = svg string argument (with width and height), V = image element
-	private static final Map<String, ImageElement> IMAGES = new HashMap<>();
+	private static final Map<String, Img> IMAGES = new HashMap<>();
 	// K = element, V = inner HTML
 	private static final Map<BaseHtmlElement, String> ELEMENTS = new HashMap<>();
 	// template of data image URL to create the image from HTML content
@@ -77,7 +77,7 @@ public final class AnnotationBuilder {
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
-	public static ImageElement build(BaseHtmlElement htmlXmlContent, double width, double height) {
+	public static Img build(BaseHtmlElement htmlXmlContent, double width, double height) {
 		// checks if argument element is consistent
 		if (htmlXmlContent == null) {
 			// if not exception
@@ -92,7 +92,7 @@ public final class AnnotationBuilder {
 		} else {
 			// creates a DIV wrapper, needed ONLY to get the inner HTML
 			// this element don't need for further computation
-			DivElement wrapper = DOMBuilder.get().createDivElement();
+			Div wrapper = DOMBuilder.get().createDivElement();
 			// checks if the elements has got a parent
 			// because adding to div element
 			// the element will loose the parent and removed from UI
@@ -145,7 +145,7 @@ public final class AnnotationBuilder {
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
-	public static ImageElement build(String htmlXmlContent, double width, double height) {
+	public static Img build(String htmlXmlContent, double width, double height) {
 		// checks if argument element is consistent
 		if (htmlXmlContent == null) {
 			// if not exception
@@ -187,11 +187,11 @@ public final class AnnotationBuilder {
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
-	private static ImageElement buildWithValidatedContent(String key, String validatedhtmlXmlContent, double width, double height) {
+	private static Img buildWithValidatedContent(String key, String validatedhtmlXmlContent, double width, double height) {
 		// copies the template string
 		String result = Utilities.applyTemplate(TEMPLATE_IMAGE_URL, validatedhtmlXmlContent, width, height);
 		// transforms it into an element
-		ImageElement element = Utilities.toImageElement(result);
+		Img element = Utilities.toImageElement(result);
 		// stores into cache
 		IMAGES.put(key, element);
 		// returns it

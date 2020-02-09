@@ -18,44 +18,24 @@ package org.pepstock.charba.client.dom.elements;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents the content of an HTML document.<br>
+ * There can be only one body element in a document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class DivElement extends BaseHtmlElement {
-
-	/**
-	 * The tag for this element.
-	 */
-	@JsOverlay
-	public static final String TAG = "div";
+@JsType(isNative = true, name = NativeName.DOM_HTML_BODY_ELEMENT, namespace = JsPackage.GLOBAL)
+public final class Body extends BaseHtmlElement {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	DivElement() {
+	private Body() {
+		// do nothing
 	}
-	
-	/**
-	 * Returns the 'align' property of the HTML DIV element.
-	 *
-	 * @return the 'align' property value
-	 */
-	 @JsProperty
-	 public native String getAlign();
-
-	/**
-	 * Sets the 'align' property of the HTML DIV element.
-	 *
-	 * @param align the 'align' property to set 
-	 */
-	 @JsProperty
-	 public native void setAlign(String align);
 
 }

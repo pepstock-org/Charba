@@ -23,22 +23,25 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
+ * Provides a &lt;div&gt; DOM HTML element.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class HeadElement extends BaseHtmlElement {
+public final class Div extends BaseHtmlElement {
 
 	/**
 	 * The tag for this element.
 	 */
 	@JsOverlay
-	public static final String TAG = "head";
+	public static final String TAG = "div";
 
 	/**
 	 * To avoid any instantiation
 	 */
-	HeadElement() {
+	private Div() {
+		// do nothing
 	}
 
 }

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.dom.elements.BodyElement;
+import org.pepstock.charba.client.dom.elements.Body;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -46,7 +46,7 @@ public final class BaseHtmlDocument extends BaseDocument {
 	 * @return the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element exists
 	 */
 	@JsProperty
-	public native BodyElement getBody();
+	public native Body getBody();
 
 	/**
 	 * Creates an event of the type specified.<br>
