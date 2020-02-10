@@ -17,6 +17,7 @@ package org.pepstock.charba.client.dom.elements;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.IsCastable;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -30,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Img extends BaseHtmlElement {
+public final class Img extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * The tag for this element.

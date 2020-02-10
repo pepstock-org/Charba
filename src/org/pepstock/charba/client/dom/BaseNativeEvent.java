@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class BaseNativeEvent extends BaseEvent {
+public final class BaseNativeEvent extends BaseEvent implements IsCastable{
 
 	/**
 	 * To avoid any instantiation

@@ -15,72 +15,117 @@
 */
 package org.pepstock.charba.client.dom.safehtml;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.utils.RegExp;
 
 /**
+ * Internal utility to escape strings in HTML.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class SafeHtmlUtils {
-	
-	private enum CharacterToEscape {
-		
+
+	/**
+	 * Enumerates the set of chars which must be changed inside a string.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private enum CharacterToEscape
+	{
+
 		AMPERSAND("&", "&amp;"),
 		GREATER_THAN(">", "&gt;"),
 		LESS_THANT("<", "&lt;"),
 		SINGLE_QUOTE("\'", "&#39;"),
 		DOUBLE_QUOTE("\"", "&quot;");
-		
+
+		// value to find into the string
 		private final String value;
-		
+		// replacement of the value if found
 		private final String replacement;
 
+		/**
+		 * Creates the object by the value to find and the replacement.
+		 * 
+		 * @param value string value to find into the string
+		 * @param replacement replacement when the value has been found
+		 */
 		private CharacterToEscape(String value, String replacement) {
 			this.value = value;
 			this.replacement = replacement;
 		}
 
 		/**
-		 * @return the value
+		 * Returns the value to find into the string.
+		 * 
+		 * @return the value to find into the string
 		 */
 		String getValue() {
 			return value;
 		}
 
 		/**
-		 * @return the replacement
+		 * Returns the replacement string to apply every time the value is found into the string.
+		 * @return the replacement string to apply every time the value is found into the string
 		 */
 		String getReplacement() {
 			return replacement;
 		}
 
+		/**
+		 * Escapes the char passed as argument.
+		 * 
+		 * @param input char to be escaped
+		 * @return a string of escaped char
+		 */
 		static String escape(char input) {
+			// scans all the escapable chars
 			for (CharacterToEscape charToEscape : values()) {
-				char charToTest = charToEscape.getValue().charAt(0); 
+				// gets the first char
+				char charToTest = charToEscape.getValue().charAt(0);
+				// checks if equals to the argument
 				if (input == charToTest) {
+					// if yes, returns the replacement
 					return charToEscape.getReplacement();
 				}
 			}
-			return ""+input;
+			// if here the char must not be escaped
+			// then returns the argument as string
+			return Constants.EMPTY_STRING + input;
 		}
 
+		/**
+		 * Escapes the string passed as argument.
+		 * 
+		 * @param input string to be escaped
+		 * @return an escaped string
+		 */
 		static String escapeAll(String input) {
+			// stores the argument
 			String result = input;
+			// checks if argument is consistent
+			// if not, returns the argument
 			if (input != null) {
+				// scans all the escapable chars
 				for (CharacterToEscape charToEscape : values()) {
+					// checks if the argument contains the value
 					if (result.contains(charToEscape.getValue())) {
+						// if yes, replace all occurences of the value with the replacement
 						result = result.replaceAll(charToEscape.getValue(), charToEscape.getReplacement());
 					}
 				}
 			}
+			// returns the result
 			return result;
 		}
-		
+
 	}
 
+	// regular expession with all HTML chars to escape
 	private static final RegExp HTML_CHARS_RE = new RegExp("[&<>'\"]");
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -105,9 +150,13 @@ final class SafeHtmlUtils {
 	 * @return the escaped string
 	 */
 	static String htmlEscape(String input) {
+		// checks if the string contains at least 1 char to escape
 		if (!HTML_CHARS_RE.test(input)) {
+			// if not, the argument is returned
+			// without any changes
 			return input;
 		}
+		// applies the replacements and returns the result
 		return CharacterToEscape.escapeAll(input);
 	}
 

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.dom.elements;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.IsCastable;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -30,8 +31,8 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.DOM_HTML_CANVAS_ELEMENT, namespace = JsPackage.GLOBAL)
-public final class Canvas extends BaseHtmlElement {
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+public final class Canvas extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * The tag for this element.

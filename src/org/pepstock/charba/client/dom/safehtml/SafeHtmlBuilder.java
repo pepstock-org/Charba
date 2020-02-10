@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.elements.LineBreak;
 
 /**
+ * Utility to create and manage safe html objects setting strings, chars, numbers.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,10 +27,10 @@ import org.pepstock.charba.client.dom.elements.LineBreak;
 public final class SafeHtmlBuilder {
 
 	/**
-	 * An empty safe HTML.
+	 * Default empty {@link SafeHtml}.
 	 */
 	public static final SafeHtml EMPTY_SAFE_HTML = new SafeHtmlString(Constants.EMPTY_STRING);
-
+	// string builder instance
 	private final StringBuilder builder = new StringBuilder();
 
 	/**
@@ -39,135 +40,118 @@ public final class SafeHtmlBuilder {
 		// do nothing
 	}
 
+	/**
+	 * Creates and returns a safe html builder to consume.
+	 * 
+	 * @return a safe html builder to consume
+	 */
 	public static SafeHtmlBuilder create() {
 		return new SafeHtmlBuilder();
 	}
 
 	/**
-	 * Appends the string representation of a boolean.
+	 * Appends a boolean to the builder.
 	 *
-	 * @param bool the boolean whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the boolean to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(boolean bool) {
-		builder.append(bool);
+	public SafeHtmlBuilder append(boolean value) {
+		builder.append(value);
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a number.
+	 * Appends a byte to the builder.
 	 *
-	 * @param b the number whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the byte to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(byte b) {
-		builder.append(b);
+	public SafeHtmlBuilder append(byte value) {
+		builder.append(value);
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a char.
+	 * Appends a char to the builder.
 	 *
-	 * @param c the character whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the char to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(char c) {
-		builder.append(SafeHtmlUtils.htmlEscape(c));
+	public SafeHtmlBuilder append(char value) {
+		builder.append(SafeHtmlUtils.htmlEscape(value));
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a number.
+	 * Appends a double to the builder.
 	 *
-	 * @param dbl the number whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the double to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(double dbl) {
-		builder.append(dbl);
+	public SafeHtmlBuilder append(double value) {
+		builder.append(value);
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a number.
+	 * Appends a integer to the builder.
 	 *
-	 * @param flt the number whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the integer to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(float flt) {
-		builder.append(flt);
+	public SafeHtmlBuilder append(int value) {
+		builder.append(value);
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a number.
+	 * Appends the contents of another safe html object.
 	 *
-	 * @param num the number whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param html the safe html instance to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(int num) {
-		builder.append(num);
+	public SafeHtmlBuilder append(SafeHtml value) {
+		builder.append(value.asString());
 		return this;
 	}
 
 	/**
-	 * Appends the string representation of a number.
+	 * Appends a string to the builder.
 	 *
-	 * @param num the number whose string representation to append
-	 * @return a reference to safe html builder
+	 * @param value the string to add
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(long num) {
-		builder.append(num);
+	public SafeHtmlBuilder appendEscaped(String value) {
+		builder.append(SafeHtmlUtils.htmlEscape(value));
 		return this;
 	}
 
 	/**
-	 * Appends the contents of another safe html object, without applying HTML-escaping to it.
+	 * Appends a string to the builder, splitting the string if contains line separators.
 	 *
-	 * @param html the safe html to append
-	 * @return a reference to safe html builder
+	 * @param value the string to append
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder append(SafeHtml html) {
-		builder.append(html.asString());
+	public SafeHtmlBuilder appendEscapedLines(String value) {
+		builder.append(SafeHtmlUtils.htmlEscape(value).replaceAll(Constants.LINE_SEPARATOR, "<" + LineBreak.TAG + ">"));
 		return this;
 	}
 
 	/**
-	 * Appends a string after HTML-escaping it.
+	 * Appends a string without any escaping.
 	 *
-	 * @param text the string to append
-	 * @return a reference to safe html builder
+	 * @param value the HTML to be appended
+	 * @return the safe html builder instance
 	 */
-	public SafeHtmlBuilder appendEscaped(String text) {
-		builder.append(SafeHtmlUtils.htmlEscape(text));
+	public SafeHtmlBuilder appendHtmlConstant(String value) {
+		builder.append(value);
 		return this;
 	}
 
 	/**
-	 * Appends a string consisting of several newline-separated lines after HTML-escaping it.
+	 * Returns the safe html instance.
 	 *
-	 * @param text the string to append
-	 * @return a reference to safe html builder
-	 */
-	public SafeHtmlBuilder appendEscapedLines(String text) {
-		builder.append(SafeHtmlUtils.htmlEscape(text).replaceAll(Constants.LINE_SEPARATOR, "<"+LineBreak.TAG+">"));
-		return this;
-	}
-
-	/**
-	 * Appends a compile-time-constant string, which will not be escaped.
-	 *
-	 * @param html the HTML to be appended
-	 * @return a reference to safe html builder
-	 */
-	public SafeHtmlBuilder appendHtmlConstant(String html) {
-		builder.append(html);
-		return this;
-	}
-
-	/**
-	 * Returns the safe HTML accumulated in the builder.
-	 *
-	 * @return a safe html instance
+	 * @return the safe html instance
 	 */
 	public SafeHtml toSafeHtml() {
 		return new SafeHtmlString(builder.toString());

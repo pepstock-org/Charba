@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.dom.elements;
 
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.dom.IsCastable;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -27,7 +28,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class CanvasGradientItem {
+public final class CanvasGradientItem implements IsCastable{
 
 	/**
 	 * To avoid any instantiation

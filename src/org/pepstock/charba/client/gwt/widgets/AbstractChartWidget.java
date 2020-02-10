@@ -38,8 +38,6 @@ import org.pepstock.charba.client.plugins.Plugins;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-import jsinterop.base.Js;
-
 /**
  * @author Andrea "Stock" Stocchero
  *
@@ -49,7 +47,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	private final C chart;
 
 	protected AbstractChartWidget(C chart) {
-		super((Element) Js.cast(IsChart.checkAndGetIfConsistent(chart).getChartElement()));
+		super((Element) IsChart.checkAndGetIfConsistent(chart).getChartElement().as());
 		IsChart.checkIfConsistent(chart);
 		this.chart = chart;
 	}

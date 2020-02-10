@@ -13,36 +13,33 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.dom.elements;
+package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.IsCastable;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 /**
- * Provides a &lt;div&gt; DOM HTML element.
+ * Interface which is implemented to DOM elements or items which can be cast to other objects.<br>
+ * This is the interface in order to enable the link from other DOM tree managers to Charba.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Div extends BaseHtmlElement implements IsCastable{
+public interface IsCastable {
 
 	/**
-	 * The tag for this element.
+	 * Performs checked cast to lefthand-side type.
+	 * 
+	 * @return the same object cast to the type
 	 */
 	@JsOverlay
-	public static final String TAG = "div";
-
-	/**
-	 * To avoid any instantiation
-	 */
-	private Div() {
-		// do nothing
+	default <T> T as(){
+		return Js.cast(this);
 	}
 
 }

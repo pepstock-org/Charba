@@ -16,16 +16,32 @@
 package org.pepstock.charba.client.dom.safehtml;
 
 /**
+ * Interface to map an HTML escaped string.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface SafeHtml {
 
-  String asString();
+	/**
+	 * Returns the object as HTML escaped string.
+	 * 
+	 * @return the object as HTML escaped string
+	 */
+	String asString();
 
-  boolean equals(Object anObject);
+	/**
+	 * Indicates whether some other object is "equal to" this one.
+	 * 
+	 * @param object the reference object with which to compare
+	 * @return <code>true</code> if this object is the same as the object argument
+	 */
+	boolean equals(Object object);
 
-  int hashCode();
+	/**
+	 * Returns a hash code value for the object.
+	 * 
+	 * @return a hash code value for the object
+	 */
+	int hashCode();
 }
-

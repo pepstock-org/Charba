@@ -16,13 +16,14 @@
 package org.pepstock.charba.client.dom.safehtml;
 
 /**
- * Safe html implementation to wrap a string.
+ * Implements a simple {@link SafeHtml} wrapping a string.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class SafeHtmlString implements SafeHtml {
 
+	// html wrapped string 
 	private String html;
 
 	/**
@@ -70,16 +71,21 @@ final class SafeHtmlString implements SafeHtml {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		// checks if is the same object
 		if (this == obj) {
 			return true;
 		}
+		// checks if argument is null
 		if (obj == null) {
 			return false;
 		}
+		// checks if the class is the same
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
+		// casts to a safe html string
 		SafeHtmlString other = (SafeHtmlString) obj;
+		// compares and returns if html wrapped string is equals
 		return html.equals(other.html);
 	}
 

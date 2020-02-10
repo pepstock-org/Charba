@@ -142,7 +142,8 @@ public final class NativeName {
 	public static final String DOM_HTML_HEAD_ELEMENT = "HTMLHeadElement";
 
 	/**
-	 * Constant to bind java script object as DOM HTML canvas element with name <b>{@value DOM_HTML_CANVAS_ELEMENT}</b>.
+	 * Constant to bind java script object as DOM HTML canvas element with name <b>{@value DOM_HTML_CANVAS_ELEMENT}</b>.<br>
+	 * Not used at the moment.
 	 */
 	public static final String DOM_HTML_CANVAS_ELEMENT = "HTMLCanvasElement";
 	
