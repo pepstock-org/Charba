@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.dom.enums.ElementRepetition;
+import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 
@@ -77,7 +77,7 @@ public abstract class ShapeDrawer {
 		// closes the path
 		context.closePath();
 		// transforms the canvas into a pattern
-		return outerCanvas.getContext2d().createPattern(innerCanvas, ElementRepetition.REPEAT);
+		return outerCanvas.getContext2d().createPattern(innerCanvas, Repetition.REPEAT);
 	}
 
 	/**

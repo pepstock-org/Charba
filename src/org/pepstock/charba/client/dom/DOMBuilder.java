@@ -17,50 +17,68 @@ package org.pepstock.charba.client.dom;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.dom.elements.LineBreak;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.elements.LineBreak;
 import org.pepstock.charba.client.dom.elements.Script;
 import org.pepstock.charba.client.dom.elements.Span;
 import org.pepstock.charba.client.dom.elements.Style;
-import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.Table;
+import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.TableRow;
 import org.pepstock.charba.client.dom.elements.TextNode;
 
 /**
- * FIXME
+ * Singleton utility to create and manage DOM element.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class DOMBuilder {
 
+	// singleton instance
 	private static final DOMBuilder INSTANCE = new DOMBuilder();
-
+	// prefix of CHARBA chart id
 	private static final String CHART_PREFIX_ID = "charba-chart-";
-
+	// counter used to create a unique ID
 	private final AtomicInteger counter = new AtomicInteger();
-
+	// flag to know if canvas is supported into the browser
 	private final boolean canvasSupported;
 
+	/**
+	 * To avoid any instantiation
+	 */
 	private DOMBuilder() {
+		// creates a canvas
 		Canvas canvas = createCanvasElement();
+		// checks and stores if the canvas is supported
 		this.canvasSupported = canvas.isSupported();
 	}
 
+	/**
+	 * Returns the singleton instance of the builder.
+	 * 
+	 * @return the singleton instance of the builder
+	 */
 	public static DOMBuilder get() {
 		return INSTANCE;
 	}
 
+	/**
+	 * Creates an unique id for CHARBA charts id.
+	 * 
+	 * @return an unique id for CHARBA charts id
+	 */
 	public String createUniqueId() {
 		return CHART_PREFIX_ID + counter.getAndIncrement();
 	}
 
 	/**
-	 * @return the canvasSupported
+	 * Returns <code>true</code> if the canvas is supported by browser.
+	 * 
+	 * @return <code>true</code> if the canvas is supported by browser
 	 */
 	public boolean isCanvasSupported() {
 		return canvasSupported;
@@ -78,7 +96,7 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;div&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;div&gt; element
 	 */
 	public Div createDivElement() {
 		return DOM.getDocument().createElement(Div.TAG);
@@ -87,16 +105,16 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;script&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;script&gt; element
 	 */
 	public Script createScriptElement() {
 		return DOM.getDocument().createElement(Script.TAG);
 	}
 
 	/**
-	 * Creates a &lt;script&gt; element.
+	 * Creates a &lt;style&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;style&gt; element
 	 */
 	public Style createStyleElement() {
 		return DOM.getDocument().createElement(Style.TAG);
@@ -105,16 +123,16 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;br&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;br&gt; element
 	 */
-	public LineBreak createBreakElement() {
+	public LineBreak createLineBreakElement() {
 		return DOM.getDocument().createElement(LineBreak.TAG);
 	}
 
 	/**
 	 * Creates a &lt;span&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;span&gt; element
 	 */
 	public Span createSpanElement() {
 		return DOM.getDocument().createElement(Span.TAG);
@@ -123,7 +141,7 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;img&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;img&gt; element
 	 */
 	public Img createImageElement() {
 		return DOM.getDocument().createElement(Img.TAG);
@@ -132,7 +150,7 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;table&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;table&gt; element
 	 */
 	public Table createTableElement() {
 		return DOM.getDocument().createElement(Table.TAG);
@@ -141,7 +159,7 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;tr&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;tr&gt; element
 	 */
 	public TableRow createTableRowElement() {
 		return DOM.getDocument().createElement(TableRow.TAG);
@@ -150,39 +168,42 @@ public final class DOMBuilder {
 	/**
 	 * Creates a &lt;td&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;td&gt; element
 	 */
 	public TableCell createTableCellElement() {
 		return DOM.getDocument().createElement(TableCell.TAG);
 	}
-	
+
 	/**
-	 * Creates a heading element element.
+	 * Creates a &lt;h3&gt; element.
 	 * 
-	 * @return the newly created element
+	 * @return a &lt;h3&gt; element
 	 */
 	public Heading createHeadingElement() {
 		return DOM.getDocument().createElement(Heading.TAG);
 	}
-	
+
 	/**
 	 * Creates a text node.
 	 * 
 	 * @param data the text node's initial text
-	 * @return the newly created text node
+	 * @return a text node
 	 */
 	public TextNode createTextNode(String data) {
 		return DOM.getDocument().createTextNode(data);
 	}
 
 	/**
-	 * FIXME
+	 * Creates a change event (based on a mouse event, type {@value BaseEventTypes#CONTEXT_MENU}) for internal use.
 	 * 
-	 * @return the newly created text node
+	 * @return a change event (based on a mouse event, type {@value BaseEventTypes#CONTEXT_MENU})
 	 */
 	public BaseNativeEvent createChangeEvent() {
+		// creates a mouse event
 		BaseNativeEvent event = DOM.getDocument().createEvent(BaseEventTypes.EVENT_MOUSE);
+		// initializes it as contect menu
 		event.initEvent(BaseEventTypes.CONTEXT_MENU);
+		// returns event
 		return event;
 	}
 

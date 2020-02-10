@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains a set of DOM elements that Charba is using.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

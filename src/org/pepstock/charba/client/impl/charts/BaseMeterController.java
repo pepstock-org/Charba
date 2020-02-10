@@ -27,8 +27,8 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
-import org.pepstock.charba.client.dom.enums.ElementTextAlign;
-import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
+import org.pepstock.charba.client.dom.enums.TextAlign;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.utils.Utilities;
@@ -195,20 +195,20 @@ final class BaseMeterController extends AbstractController {
 		// sets color to canvas
 		ctx.setFillColor(fontColor);
 		// sets alignment
-		ctx.setTextAlign(ElementTextAlign.CENTER);
+		ctx.setTextAlign(TextAlign.CENTER);
 		// checks if it must draw also the label
 		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.BOTTOM);
+			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
 			// re-calculates the font size for label
 			fontSize = calculateFontSize(ctx, sideOfSquare, label, style, fontFamily);
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.TOP);
+			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(dataset.getLabel(), centerX, centerY + PADDING);
 		} else {
@@ -216,7 +216,7 @@ final class BaseMeterController extends AbstractController {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.MIDDLE);
+			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY);
 		}

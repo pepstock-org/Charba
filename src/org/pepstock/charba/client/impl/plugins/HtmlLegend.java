@@ -33,7 +33,7 @@ import org.pepstock.charba.client.dom.NodeList;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.TableCell;
-import org.pepstock.charba.client.dom.enums.ElementUnit;
+import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Position;
@@ -193,7 +193,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// checks if is full width has been set
 			if (legend.isFullWidth()) {
 				// sets 100% of width
-				legendElement.getStyle().setWidth(ElementUnit.PCT.parse(100));
+				legendElement.getStyle().setWidth(Unit.PCT.format(100));
 			}
 		}
 		return true;
@@ -457,12 +457,12 @@ public final class HtmlLegend extends AbstractPlugin {
 			// appends the legend element
 			chartElement.appendChild(legendElement);
 			// and sets the bottom padding
-			legendElement.getStyle().setPaddingBottom(ElementUnit.PX.parse(padding));
+			legendElement.getStyle().setPaddingBottom(Unit.PX.format(padding));
 		} else {
 			// if not bottom, inserts the legend element as first
 			chartElement.insertBefore(legendElement, chartElement.getFirstChild());
 			// and sets the top padding
-			legendElement.getStyle().setPaddingTop(ElementUnit.PX.parse(padding));
+			legendElement.getStyle().setPaddingTop(Unit.PX.format(padding));
 		}
 	}
 

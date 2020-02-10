@@ -24,10 +24,12 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Provides special properties and methods for manipulating the layout and presentation of rows in an HTML table.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_TABLE_ROW_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class TableRow extends BaseHtmlElement {
 
 	/**
@@ -39,72 +41,49 @@ public final class TableRow extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	TableRow() {
+	private TableRow() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the 'align' property of the HTML TABLE ROW element.
+	 * Returns the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @return the 'align' property value
+	 * @return the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native String getAlign();
+	@JsProperty
+	public native String getAlign();
 
 	/**
-	 * Sets the 'align' property of the HTML TABLE ROW element.
+	 * Sets the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @param align the 'align' property to set 
+	 * @param align the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native void setAlign(String align);
+	@JsProperty
+	public native void setAlign(String align);
 
 	/**
-	 * Returns the 'bgColor' property of the HTML TABLE ROW element.
+	 * Returns a value which gives the logical position of the row within the entire table.<br>
+	 * If the row is not part of a table, returns -1.
 	 *
-	 * @return the 'bgColor' property value
+	 * @return a value which gives the logical position of the row within the entire table
 	 */
-	 @JsProperty
-	 public native String getBgColor();
+	@JsProperty
+	public native int getRowIndex();
 
 	/**
-	 * Sets the 'bgColor' property of the HTML TABLE ROW element.
+	 * Returns the value indicating how the content of the cell must be vertically aligned.
 	 *
-	 * @param bgColor the 'bgColor' property to set 
+	 * @return the value indicating how the content of the cell must be vertically aligned
 	 */
-	 @JsProperty
-	 public native void setBgColor(String bgColor);
-
-// FIXME	 
-//	/**
-//	 * Returns the 'cells' property of the HTML TABLE ROW element.
-//	 *
-//	 * @return the 'cells' property value
-//	 */
-//	 @JsProperty
-//	 public native HTMLCollection getCells();
+	@JsProperty
+	public native String getVAlign();
 
 	/**
-	 * Returns the 'rowIndex' property of the HTML TABLE ROW element.
+	 * Sets the value indicating how the content of the cell must be vertically aligned.
 	 *
-	 * @return the 'rowIndex' property value
+	 * @param vAlign the value indicating how the content of the cell must be vertically aligned
 	 */
-	 @JsProperty
-	 public native int getRowIndex();
-
-	/**
-	 * Returns the 'vAlign' property of the HTML TABLE ROW element.
-	 *
-	 * @return the 'vAlign' property value
-	 */
-	 @JsProperty
-	 public native String getVAlign();
-
-	/**
-	 * Sets the 'vAlign' property of the HTML TABLE ROW element.
-	 *
-	 * @param vAlign the 'vAlign' property to set 
-	 */
-	 @JsProperty
-	 public native void setVAlign(String vAlign);
+	@JsProperty
+	public native void setVAlign(String vAlign);
 
 }

@@ -35,7 +35,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public final class MutationRecord {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

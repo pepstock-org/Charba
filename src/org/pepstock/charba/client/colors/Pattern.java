@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.dom.enums.ElementRepetition;
+import org.pepstock.charba.client.dom.enums.Repetition;
 
 /**
  * Entity to apply a canvas pattern into a dataset as background.<br>
@@ -78,7 +78,7 @@ public final class Pattern extends CanvasObject {
 	 * @param image image to use as pattern
 	 */
 	public Pattern(Img image) {
-		this(image, ElementRepetition.REPEAT);
+		this(image, Repetition.REPEAT);
 	}
 
 	/**
@@ -87,14 +87,14 @@ public final class Pattern extends CanvasObject {
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
 	 */
-	public Pattern(Img image, ElementRepetition repetition) {
+	public Pattern(Img image, Repetition repetition) {
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
 			setValue(Property.CHARBA_PATTERN_IMG, image);
 			setValue(Property.CHARBA_PATTERN_WIDTH, image.getWidth());
 			setValue(Property.CHARBA_PATTERN_HEIGHT, image.getHeight());
-			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? ElementRepetition.REPEAT : repetition);
+			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Repetition.REPEAT : repetition);
 		} else {
 			// if here, image is null
 			// then exception
@@ -139,7 +139,7 @@ public final class Pattern extends CanvasObject {
 			setValue(Property.CHARBA_PATTERN_CANVAS, canvasPattern);
 			// sets repetition even is not used
 			// to normalizes the properties
-			setValue(Property.CHARBA_PATTERN_REPETITION, ElementRepetition.REPEAT);
+			setValue(Property.CHARBA_PATTERN_REPETITION, Repetition.REPEAT);
 			// stores size checks the max value
 			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
 			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
@@ -191,8 +191,8 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @return the repetition to use into pattern
 	 */
-	public ElementRepetition getRepetition() {
-		return getValue(Property.CHARBA_PATTERN_REPETITION, ElementRepetition.class, ElementRepetition.REPEAT);
+	public Repetition getRepetition() {
+		return getValue(Property.CHARBA_PATTERN_REPETITION, Repetition.class, Repetition.REPEAT);
 	}
 
 	/**

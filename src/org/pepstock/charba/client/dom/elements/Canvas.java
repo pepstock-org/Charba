@@ -38,6 +38,7 @@ public final class Canvas extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public static final String TAG = "canvas";
+	// context id to retrieve
 	@JsOverlay
 	private static final String CONTEXT_2D = "2d";
 

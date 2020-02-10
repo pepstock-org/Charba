@@ -18,6 +18,8 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Enumerates the sets the type of cursor, if any, to show when the mouse pointer is over an element.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -184,19 +186,8 @@ public enum CursorType implements Key
 	 */
 	EW_RESIZE("ew-resize"),
 
-	/**
-	 * 
-	 */
 	NS_RESIZE("ns-resize"),
-
-	/**
-	 * 
-	 */
 	NESW_RESIZE("nesw-resize"),
-
-	/**
-	 * 
-	 */
 	NWSE_RESIZE("nwse-resize"),
 
 	/**

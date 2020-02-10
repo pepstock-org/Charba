@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Contains the descriptive information, or metadata, for a document.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

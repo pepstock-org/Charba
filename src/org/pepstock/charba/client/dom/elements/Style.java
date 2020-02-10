@@ -24,6 +24,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents a &lt;style&gt; and doesn't allow to manipulate the CSS it contains.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -39,23 +41,24 @@ public final class Style extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	Style() {
+	private Style() {
+		// do nothing
 	}
-	
-	/**
-	 * Returns the 'type' property of the HTML STYLE element node.
-	 *
-	 * @return the 'type' property value
-	 */
-	 @JsProperty
-	 public native String getType();
 
 	/**
-	 * Sets the 'type' property of the HTML STYLE element node.
+	 * Returns the type of style being applied by this statement.
 	 *
-	 * @param type the 'type' property to set 
+	 * @return the type of style being applied by this statement
 	 */
-	 @JsProperty
-	 public native void setType(String type);
+	@JsProperty
+	public native String getType();
+
+	/**
+	 * Sets the type of style being applied by this statement.
+	 *
+	 * @param type the type of style being applied by this statement
+	 */
+	@JsProperty
+	public native void setType(String type);
 
 }

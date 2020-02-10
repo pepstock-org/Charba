@@ -35,5 +35,5 @@ public final class CanvasPatternItem {
 	private CanvasPatternItem() {
 		// do nothing
 	}
-	
+
 }

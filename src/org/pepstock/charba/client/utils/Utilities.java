@@ -37,7 +37,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.dom.enums.ElementRepetition;
+import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import com.google.gwt.core.client.GWT;
@@ -227,7 +227,7 @@ public final class Utilities {
 				// sets a consistent height
 				int heightToUse = Math.max(height, pattern.getHeight());
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), ElementRepetition.REPEAT.value()).asString();
+				return PATTERN_TEMPLATE.css(getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), Repetition.REPEAT.value()).asString();
 			}
 		}
 		// if here pattern is not consistent
@@ -242,7 +242,7 @@ public final class Utilities {
 	 * @return a URL CSS property for the current content of the canvas element
 	 */
 	public static String toCSSBackgroundProperty(String dataUrl) {
-		return toCSSBackgroundProperty(dataUrl, ElementRepetition.REPEAT);
+		return toCSSBackgroundProperty(dataUrl, Repetition.REPEAT);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public final class Utilities {
 	 * @param repetition repetition of image
 	 * @return a URL CSS property for the current content of the canvas element
 	 */
-	public static String toCSSBackgroundProperty(String dataUrl, ElementRepetition repetition) {
+	public static String toCSSBackgroundProperty(String dataUrl, Repetition repetition) {
 		// checks if data url is consistent
 		if (dataUrl != null && dataUrl.trim().length() > 0) {
 			// checks the value of repetition

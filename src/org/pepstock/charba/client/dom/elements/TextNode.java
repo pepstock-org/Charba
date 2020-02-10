@@ -18,12 +18,15 @@ package org.pepstock.charba.client.dom.elements;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseNode;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents the textual content of an element or attribute.<br>
+ * If an element has no markup within its content, it has a single child implementing text node that contains the element's
+ * text. However, if the element contains markup, it is parsed into information items and text nodes that form its children.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -33,56 +36,32 @@ public final class TextNode extends BaseNode {
 	/**
 	 * To avoid any instantiation
 	 */
-	TextNode() {
+	private TextNode() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the 'data' property of the TEXT node.
+	 * Returns the textual data contained in this object.
 	 *
-	 * @return the 'data' property value
+	 * @return the textual data contained in this object
 	 */
 	@JsProperty
 	public native String getData();
 
 	/**
-	 * Sets the 'data' property of the TEXT node.
+	 * Sets the textual data contained in this object.
 	 *
-	 * @param data the 'data' property to set
+	 * @param data the textual data contained in this object
 	 */
 	@JsProperty
 	public native void setData(String data);
 
 	/**
-	 * Returns the 'wholeText' property of the TEXT node.
+	 * Returns the value representing the size of the string contained in data.
 	 *
-	 * @return the 'wholeText' property value
+	 * @return the value representing the size of the string contained in data
 	 */
-	@JsProperty
-	public native String getWholeText();
+	@JsProperty(name = "length")
+	public native int length();
 
-	/**
-	 * Returns the 'length' property of the TEXT node.
-	 *
-	 * @return the 'length' property value
-	 */
-	@JsProperty
-	public native int getLength();
-
-	@JsMethod
-	public native TextNode splitText(int offset);
-
-	@JsMethod
-	public native void appendData(String arg);
-
-	@JsMethod
-	public native void deleteData(int offset, int count);
-
-	@JsMethod
-	public native void insertData(int offset, String arg);
-
-	@JsMethod
-	public native void replaceData(int offset, int count, String arg);
-
-	@JsMethod
-	public native String substringData(int offset, int count);
 }

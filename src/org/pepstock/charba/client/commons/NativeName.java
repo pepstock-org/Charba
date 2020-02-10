@@ -107,21 +107,6 @@ public final class NativeName {
 	public static final String DOM_HTML_DOCUMENT = "HTMLDocument";
 
 	/**
-	 * Constant to bind java script object as DOM HTML body element with name <b>{@value DOM_HTML_BODY_ELEMENT}</b>.
-	 */
-	public static final String DOM_HTML_BODY_ELEMENT = "HTMLBodyElement";
-
-	/**
-	 * Constant to bind java script object as DOM HTML head element with name <b>{@value DOM_HTML_HEAD_ELEMENT}</b>.
-	 */
-	public static final String DOM_HTML_HEAD_ELEMENT = "HTMLHeadElement";
-
-	/**
-	 * Constant to bind java script object as DOM HTML canvas element with name <b>{@value DOM_HTML_CANVAS_ELEMENT}</b>.
-	 */
-	public static final String DOM_HTML_CANVAS_ELEMENT = "HTMLCanvasElement";
-	
-	/**
 	 * Constant to bind java script object as DOM HTML canvas context 2d item with name <b>{@value DOM_CANVAS_CONTEXT_2D}</b>.
 	 */
 	public static final String DOM_CANVAS_CONTEXT_2D = "CanvasRenderingContext2D";
@@ -147,15 +132,55 @@ public final class NativeName {
 	public static final String DOM_HTML_ELEMENT = "HTMLElement";
 
 	/**
+	 * Constant to bind java script object as DOM HTML body element with name <b>{@value DOM_HTML_BODY_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_BODY_ELEMENT = "HTMLBodyElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML head element with name <b>{@value DOM_HTML_HEAD_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_HEAD_ELEMENT = "HTMLHeadElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML canvas element with name <b>{@value DOM_HTML_CANVAS_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_CANVAS_ELEMENT = "HTMLCanvasElement";
+	
+	/**
+	 * Constant to bind java script object as DOM HTML script element with name <b>{@value DOM_HTML_SCRIPT_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_SCRIPT_ELEMENT = "HTMLScriptElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML span element with name <b>{@value DOM_HTML_SPAN_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_SPAN_ELEMENT = "HTMLSpanElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML style element with name <b>{@value DOM_HTML_STYLE_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_STYLE_ELEMENT = "HTMLStyleElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML table element with name <b>{@value DOM_HTML_TABLE_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_TABLE_ELEMENT = "HTMLTableElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML table row element with name <b>{@value DOM_HTML_TABLE_ROW_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_TABLE_ROW_ELEMENT = "HTMLTableRowElement";	 
+
+	/**
+	 * Constant to bind java script object as DOM HTML table cell element with name <b>{@value DOM_HTML_TABLE_CELL_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_TABLE_CELL_ELEMENT = "HTMLTableCellElement";	 
+
+	/**
 	 * Constant to bind java script object as DOM text node with name <b>{@value DOM_TEXT}</b>.
 	 */
 	public static final String DOM_TEXT = "Text";
 
-	/**
-	 * Constant to bind java script object as DOM CSS properties with name <b>{@value DOM_CSS_PROPERTIES}</b>.
-	 */
-	public static final String DOM_CSS_PROPERTIES = "CSSStyleDeclaration";
-	
 	/**
 	 * Constant to bind java script object as DOM text metrics with name <b>{@value DOM_TEXT_METRICS}</b>.
 	 */

@@ -24,10 +24,13 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Provides special properties and methods for manipulating the layout and presentation of table cells, either header or data
+ * cells, in an HTML document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_TABLE_CELL_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class TableCell extends BaseHtmlElement {
 
 	/**
@@ -39,144 +42,136 @@ public final class TableCell extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	TableCell() {
+	private TableCell() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the 'align' property of the HTML TABLE CELL element.
+	 * Returns the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @return the 'align' property value
+	 * @return the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native String getAlign();
+	@JsProperty
+	public native String getAlign();
 
 	/**
-	 * Sets the 'align' property of the HTML TABLE CELL element.
+	 * Sets the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @param align the 'align' property to set 
+	 * @param align the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native void setAlign(String align);
+	@JsProperty
+	public native void setAlign(String align);
 
 	/**
-	 * Returns the 'bgColor' property of the HTML TABLE CELL element.
+	 * Returns a value representing the cell's position in the cells collection of the &lt;tr&gt; the cell is contained within.
 	 *
-	 * @return the 'bgColor' property value
+	 * @return a value representing the cell's position in the cells collection of the &lt;tr&gt; the cell is contained within
 	 */
-	 @JsProperty
-	 public native String getBgColor();
+	@JsProperty
+	public native int getCellIndex();
 
 	/**
-	 * Sets the 'bgColor' property of the HTML TABLE CELL element.
+	 * Returns the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
+	 * columns of the table.
 	 *
-	 * @param bgColor the 'bgColor' property to set 
+	 * @return the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
+	 *         columns of the table
 	 */
-	 @JsProperty
-	 public native void setBgColor(String bgColor);
+	@JsProperty
+	public native int getColSpan();
 
 	/**
-	 * Returns the 'cellIndex' property of the HTML TABLE CELL element.
+	 * Sets the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
+	 * columns of the table.
 	 *
-	 * @return the 'cellIndex' property value
+	 * @param colSpan the value indicating the number of columns this cell must span; this lets the cell occupy space across
+	 *            multiple columns of the table
 	 */
-	 @JsProperty
-	 public native int getCellIndex();
+	@JsProperty
+	public native void setColSpan(int colSpan);
 
 	/**
-	 * Returns the 'colSpan' property of the HTML TABLE CELL element.
+	 * Returns the length of pixel of the hinted height of the cell.
 	 *
-	 * @return the 'colSpan' property value
+	 * @return the length of pixel of the hinted height of the cell
 	 */
-	 @JsProperty
-	 public native int getColSpan();
+	@JsProperty
+	public native String getHeight();
 
 	/**
-	 * Sets the 'colSpan' property of the HTML TABLE CELL element.
+	 * Sets the length of pixel of the hinted height of the cell.
 	 *
-	 * @param colSpan the 'colSpan' property to set 
+	 * @param height the length of pixel of the hinted height of the cell
 	 */
-	 @JsProperty
-	 public native void setColSpan(int colSpan);
+	@JsProperty
+	public native void setHeight(String height);
 
 	/**
-	 * Returns the 'height' property of the HTML TABLE CELL element.
+	 * Returns the value reflecting the nowrap attribute and indicating if cell content can be broken in several lines.
 	 *
-	 * @return the 'height' property value
+	 * @return the value reflecting the nowrap attribute and indicating if cell content can be broken in several lines
 	 */
-	 @JsProperty
-	 public native String getHeight();
+	@JsProperty
+	public native boolean isNoWrap();
 
 	/**
-	 * Sets the 'height' property of the HTML TABLE CELL element.
+	 * Sets the value reflecting the nowrap attribute and indicating if cell content can be broken in several lines.
 	 *
-	 * @param height the 'height' property to set 
+	 * @param noWrap the value reflecting the nowrap attribute and indicating if cell content can be broken in several lines
 	 */
-	 @JsProperty
-	 public native void setHeight(String height);
+	@JsProperty
+	public native void setNoWrap(boolean noWrap);
 
 	/**
-	 * Returns the 'noWrap' property of the HTML TABLE CELL element.
+	 * Returns the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows
+	 * of the table.
 	 *
-	 * @return the 'noWrap' property value
+	 * @return the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows
+	 *         of the table
 	 */
-	 @JsProperty
-	 public native boolean isNoWrap();
+	@JsProperty
+	public native int getRowSpan();
 
 	/**
-	 * Sets the 'noWrap' property of the HTML TABLE CELL element.
+	 * Sets the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of
+	 * the table.
 	 *
-	 * @param noWrap the 'noWrap' property to set 
+	 * @param rowSpan the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple
+	 *            rows of the table
 	 */
-	 @JsProperty
-	 public native void setNoWrap(boolean noWrap);
+	@JsProperty
+	public native void setRowSpan(int rowSpan);
 
 	/**
-	 * Returns the 'rowSpan' property of the HTML TABLE CELL element.
+	 * Returns the content of the cell must be vertically aligned.
 	 *
-	 * @return the 'rowSpan' property value
+	 * @return the content of the cell must be vertically aligned
 	 */
-	 @JsProperty
-	 public native int getRowSpan();
+	@JsProperty
+	public native String getVAlign();
 
 	/**
-	 * Sets the 'rowSpan' property of the HTML TABLE CELL element.
+	 * Sets the content of the cell must be vertically aligned.
 	 *
-	 * @param rowSpan the 'rowSpan' property to set 
+	 * @param vAlign the content of the cell must be vertically aligned
 	 */
-	 @JsProperty
-	 public native void setRowSpan(int rowSpan);
+	@JsProperty
+	public native void setVAlign(String vAlign);
 
 	/**
-	 * Returns the 'vAlign' property of the HTML TABLE CELL element.
+	 * Returns the number of pixels wide the cell should be drawn, if possible.
 	 *
-	 * @return the 'vAlign' property value
+	 * @return the number of pixels wide the cell should be drawn, if possible
 	 */
-	 @JsProperty
-	 public native String getVAlign();
+	@JsProperty
+	public native String getWidth();
 
 	/**
-	 * Sets the 'vAlign' property of the HTML TABLE CELL element.
+	 * Sets the number of pixels wide the cell should be drawn, if possible.
 	 *
-	 * @param vAlign the 'vAlign' property to set 
+	 * @param width the number of pixels wide the cell should be drawn, if possible
 	 */
-	 @JsProperty
-	 public native void setVAlign(String vAlign);
-
-	/**
-	 * Returns the 'width' property of the HTML TABLE CELL element.
-	 *
-	 * @return the 'width' property value
-	 */
-	 @JsProperty
-	 public native String getWidth();
-
-	/**
-	 * Sets the 'width' property of the HTML TABLE CELL element.
-	 *
-	 * @param width the 'width' property to set 
-	 */
-	 @JsProperty
-	 public native void setWidth(String width);
-
+	@JsProperty
+	public native void setWidth(String width);
 
 }

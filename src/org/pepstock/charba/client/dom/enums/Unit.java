@@ -18,22 +18,31 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * FIXME
+ * Enumerates the unit of measure for sizes.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ElementBorderStyle implements Key
+public enum Unit implements Key
 {
-	NONE("none"),
-	DOTTED("dotted"),
-	DASHED("dashed"),
-	HIDDEN("hidden"),
-	SOLID("solid");
+	/**
+	 * A percentage value. It is often used to define a size as relative to an element's parent object.
+	 */
+	PCT("%"),
+	/**
+	 * One pixel. For screen displays, it traditionally represents one device pixel (dot).
+	 */
+	PX("px");
 
+	// suffix value of size
 	private final String value;
 
-	private ElementBorderStyle(String value) {
+	/**
+	 * Creates with the suffix value to use into size.
+	 * 
+	 * @param value suffix value of unit
+	 */
+	private Unit(String value) {
 		this.value = value;
 	}
 
@@ -45,5 +54,25 @@ public enum ElementBorderStyle implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Creates a size adding the suffix of unit to the argument.
+	 * 
+	 * @param numValue number which represents the size.
+	 * @return a size as string
+	 */
+	public String format(double numValue) {
+		return numValue + value;
+	}
+
+	/**
+	 * Creates a size adding the suffix of unit to the argument.
+	 * 
+	 * @param numValue number which represents the size.
+	 * @return a size as string
+	 */
+	public String format(int numValue) {
+		return numValue + value;
 	}
 }

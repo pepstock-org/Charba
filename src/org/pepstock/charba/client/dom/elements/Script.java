@@ -24,10 +24,12 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Provides special properties and methods for manipulating the behavior and execution of &lt;script&gt; elements
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_SCRIPT_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class Script extends BaseHtmlElement {
 
 	/**
@@ -39,71 +41,56 @@ public final class Script extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	Script() {
+	private Script() {
+		// do nothing
 	}
-	
-	/**
-	 * Returns the 'charset' property of the HTML SCRIPT element.
-	 *
-	 * @return the 'charset' property value
-	 */
-	 @JsProperty
-	 public native String getCharset();
 
 	/**
-	 * Sets the 'charset' property of the HTML SCRIPT element.
+	 * Returns the character encoding of an external script.
 	 *
-	 * @param charset the 'charset' property to set 
+	 * @return the character encoding of an external script
 	 */
-	 @JsProperty
-	 public native void setCharset(String charset);
+	@JsProperty
+	public native String getCharset();
 
 	/**
-	 * Returns the 'src' property of the HTML SCRIPT element.
+	 * Sets the character encoding of an external script.
 	 *
-	 * @return the 'src' property value
+	 * @param charset the character encoding of an external script
 	 */
-	 @JsProperty
-	 public native String getSrc();
+	@JsProperty
+	public native void setCharset(String charset);
 
 	/**
-	 * Sets the 'src' property of the HTML SCRIPT element.
+	 * Returns the URL of an external script.
 	 *
-	 * @param src the 'src' property to set 
+	 * @return the URL of an external script
 	 */
-	 @JsProperty
-	 public native void setSrc(String src);
+	@JsProperty
+	public native String getSrc();
 
 	/**
-	 * Returns the 'text' property of the HTML SCRIPT element.
+	 * Sets the URL of an external script.
 	 *
-	 * @return the 'text' property value
+	 * @param src the URL of an external script
 	 */
-	 @JsProperty
-	 public native String getText();
+	@JsProperty
+	public native void setSrc(String src);
 
 	/**
-	 * Sets the 'text' property of the HTML SCRIPT element.
+	 * Returns the MIME type of the script.
 	 *
-	 * @param text the 'text' property to set 
+	 * @return the MIME type of the script
 	 */
-	 @JsProperty
-	 public native void setText(String text);
+	@JsProperty
+	public native String getType();
 
 	/**
-	 * Returns the 'type' property of the HTML SCRIPT element.
+	 * Sets the MIME type of the script.
 	 *
-	 * @return the 'type' property value
+	 * @param type the MIME type of the script
 	 */
-	 @JsProperty
-	 public native String getType();
-
-	/**
-	 * Sets the 'type' property of the HTML SCRIPT element.
-	 *
-	 * @param type the 'type' property to set 
-	 */
-	 @JsProperty
-	 public native void setType(String type);
+	@JsProperty
+	public native void setType(String type);
 
 }

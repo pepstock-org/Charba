@@ -38,8 +38,8 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.dom.enums.ElementPosition;
-import org.pepstock.charba.client.dom.enums.ElementUnit;
+import org.pepstock.charba.client.dom.enums.Position;
+import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
 import org.pepstock.charba.client.events.EventHandler;
@@ -126,10 +126,10 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		// creates DIV
 		element.setId(id);
 		// sets relative position
-		element.getStyle().setPosition(ElementPosition.RELATIVE);
+		element.getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		element.getStyle().setWidth(ElementUnit.PCT.parse(DEFAULT_WIDTH));
-		element.getStyle().setHeight(ElementUnit.PCT.parse(DEFAULT_HEIGHT));
+		element.getStyle().setWidth(Unit.PCT.format(DEFAULT_WIDTH));
+		element.getStyle().setHeight(Unit.PCT.format(DEFAULT_HEIGHT));
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas

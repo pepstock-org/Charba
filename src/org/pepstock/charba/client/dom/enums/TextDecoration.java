@@ -18,17 +18,29 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * FIXME
+ * Enumerates the set of values to specify the appearance of decorative lines on text.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ElementRepetition implements Key
+public enum TextDecoration implements Key
 {
-	NO_REPEAT("no-repeat"),
-	REPEAT("repeat"),
-	REPEAT_X("repeat-x"),
-	REPEAT_Y("repeat-y");
+	/**
+	 * Each line of text has a decorative line going through its middle.
+	 */
+	LINE_THROUGH("line-through"),
+	/**
+	 * Produces no text decoration.
+	 */
+	NONE("none"),
+	/**
+	 * Each line of text has a decorative line above it.
+	 */
+	OVERLINE("overline"),
+	/**
+	 * Each line of text has a decorative line beneath it.
+	 */
+	UNDERLINE("underline");
 
 	// name value of property
 	private final String value;
@@ -38,7 +50,7 @@ public enum ElementRepetition implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private ElementRepetition(String value) {
+	private TextDecoration(String value) {
 		this.value = value;
 	}
 
@@ -51,5 +63,4 @@ public enum ElementRepetition implements Key
 	public String value() {
 		return value;
 	}
-
 }

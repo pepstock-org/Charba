@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes needed to work with DOM tree.
+ * Contains all classes needed to work with DOM tree, base classes of a DOM tree.
  * 
  * @author Andrea "Stock" Stocchero
  *

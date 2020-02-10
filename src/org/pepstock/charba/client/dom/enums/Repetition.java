@@ -18,22 +18,42 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Enumerates the set of values how to repeat the pattern's image.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ElementPosition implements Key
+public enum Repetition implements Key
 {
-	STATIC("static"),
-	RELATIVE("relative"),
-	ABSOLUTE("absolute"),
-	FIXED("fixed");
-	
+	/**
+	 * No repeat, neither direction.
+	 */
+	NO_REPEAT("no-repeat"),
+	/**
+	 * Repeats both directions.
+	 */
+	REPEAT("repeat"),
+	/**
+	 * Repeats horizontal only.
+	 */
+	REPEAT_X("repeat-x"),
+	/**
+	 * Repeats vertical only.
+	 */
+	REPEAT_Y("repeat-y");
+
+	// name value of property
 	private final String value;
 
-	private ElementPosition(String value) {
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Repetition(String value) {
 		this.value = value;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -43,4 +63,5 @@ public enum ElementPosition implements Key
 	public String value() {
 		return value;
 	}
+
 }

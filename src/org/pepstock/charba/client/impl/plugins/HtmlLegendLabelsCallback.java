@@ -37,12 +37,12 @@ import org.pepstock.charba.client.dom.elements.Span;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.Table;
 import org.pepstock.charba.client.dom.elements.TableRow;
-import org.pepstock.charba.client.dom.enums.ElementBorderStyle;
-import org.pepstock.charba.client.dom.enums.ElementDisplay;
-import org.pepstock.charba.client.dom.enums.ElementRepetition;
-import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
-import org.pepstock.charba.client.dom.enums.ElementTextDecoration;
-import org.pepstock.charba.client.dom.enums.ElementUnit;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
+import org.pepstock.charba.client.dom.enums.Display;
+import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
+import org.pepstock.charba.client.dom.enums.TextDecoration;
+import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -237,10 +237,10 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		colorCell.setId(legendId.getIdForColor());
-		colorCell.setVAlign(ElementTextBaseline.TOP.value());
-		colorCell.getStyle().setMarginRight(ElementUnit.PX.parse(legendLabels.getPadding() / 2D));
-		colorCell.getStyle().setMarginBottom(ElementUnit.PX.parse(legendLabels.getPadding()));
-		colorCell.getStyle().setDisplay(ElementDisplay.BLOCK);
+		colorCell.setVAlign(TextBaseline.TOP.value());
+		colorCell.getStyle().setMarginRight(Unit.PX.format(legendLabels.getPadding() / 2D));
+		colorCell.getStyle().setMarginBottom(Unit.PX.format(legendLabels.getPadding()));
+		colorCell.getStyle().setDisplay(Display.BLOCK);
 		// creates inner HTML element
 		// where to apply the color
 		Div color = DOMBuilder.get().createDivElement();
@@ -252,9 +252,9 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		int width = legendLabels.getBoxWidth() - borderWidthToRemove;
 		int height = legendLabels.getFontSize() - borderWidthToRemove;
 		// styling the cell with mandatory values
-		color.getStyle().setDisplay(ElementDisplay.BLOCK);
-		color.getStyle().setWidth(ElementUnit.PX.parse(width));
-		color.getStyle().setHeight(ElementUnit.PX.parse(height));
+		color.getStyle().setDisplay(Display.BLOCK);
+		color.getStyle().setWidth(Unit.PX.format(width));
+		color.getStyle().setHeight(Unit.PX.format(height));
 		// checks if must apply point style
 		if (!legendLabels.isUsePointStyle()) {
 			// applies the background color
@@ -290,9 +290,9 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		labelCell.setId(legendId.getIdForLabel());
-		labelCell.setVAlign(ElementTextBaseline.MIDDLE.value());
-		labelCell.getStyle().setPaddingRight(ElementUnit.PX.parse(legendLabels.getPadding()));
-		labelCell.getStyle().setPaddingBottom(ElementUnit.PX.parse(legendLabels.getPadding()));
+		labelCell.setVAlign(TextBaseline.MIDDLE.value());
+		labelCell.getStyle().setPaddingRight(Unit.PX.format(legendLabels.getPadding()));
+		labelCell.getStyle().setPaddingBottom(Unit.PX.format(legendLabels.getPadding()));
 		// creates inner HTML element
 		// where to apply the label
 		Div label = createLabelText(chart, item, callback);
@@ -309,7 +309,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		// checks if item is hidden
 		if (item.isHidden()) {
 			// if hidden, apply a specific text decoration
-			label.getStyle().setTextDecoration(ElementTextDecoration.LINE_THROUGH);
+			label.getStyle().setTextDecoration(TextDecoration.LINE_THROUGH);
 		}
 		return labelCell;
 	}
@@ -366,7 +366,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// means that a text node has been already added
 				// then BR element will be added
 				if (element.hasChildNodes()) {
-					element.appendChild(DOMBuilder.get().createBreakElement());
+					element.appendChild(DOMBuilder.get().createLineBreakElement());
 				}
 				// adds the split text as text element
 				element.appendChild(DOMBuilder.get().createTextNode(singleText));
@@ -414,8 +414,8 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// applies the point style as background to color element
 			color.getStyle().setBackground(imageAsCss);
 			// sets the image size to color element
-			color.getStyle().setWidth(ElementUnit.PX.parse(image.getWidth()));
-			color.getStyle().setHeight(ElementUnit.PX.parse(image.getHeight()));
+			color.getStyle().setWidth(Unit.PX.format(image.getWidth()));
+			color.getStyle().setHeight(Unit.PX.format(image.getHeight()));
 		} else {
 			// calculated size which is ALWAYS a square for point styles
 			int size = Math.min(width, height);
@@ -446,12 +446,12 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if the result of tile factory is consistent
 			if (pattern != null && pattern.trim().length() > 0) {
 				// transforms pattern into CSS property and
-				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, ElementRepetition.NO_REPEAT);
+				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, Repetition.NO_REPEAT);
 				// applies the point style as background to color element
 				color.getStyle().setBackground(patternAsCss);
 				// sets the size to color element
-				color.getStyle().setWidth(ElementUnit.PX.parse(size));
-				color.getStyle().setHeight(ElementUnit.PX.parse(size));
+				color.getStyle().setWidth(Unit.PX.format(size));
+				color.getStyle().setHeight(Unit.PX.format(size));
 			} else {
 				// if here, inconsistent point style representation
 				// applies the background color
@@ -547,7 +547,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// sets gradient as image
 				color.getStyle().setBackgroundImage(gradientAsCss);
 				// gets background size
-				String size = ElementUnit.PX.parse(width)+Constants.BLANK+ElementUnit.PX.parse(height);
+				String size = Unit.PX.format(width)+Constants.BLANK+Unit.PX.format(height);
 				// sets background size property
 				color.getStyle().setBackgroundSize(size);
 			} else {
@@ -568,17 +568,17 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		// gets a correct border width
 		int borderWidth = Math.max(0, item.getLineWidth());
 		// applies the border
-		color.getStyle().setBorderWidth(ElementUnit.PX.parse(borderWidth));
+		color.getStyle().setBorderWidth(Unit.PX.format(borderWidth));
 		// checks if a border must be applied
 		// having a border width more then 0
 		if (borderWidth > 0) {
 			// checking the line has been configured as dashed
 			if (item.getLineDash().isEmpty()) {
 				// if here, solid border, no dashed line
-				color.getStyle().setBorderStyle(ElementBorderStyle.SOLID);
+				color.getStyle().setBorderStyle(BorderStyle.SOLID);
 			} else {
 				// if here, dashed line
-				color.getStyle().setBorderStyle(ElementBorderStyle.DASHED);
+				color.getStyle().setBorderStyle(BorderStyle.DASHED);
 			}
 			// returns true
 			// to apply color
@@ -618,7 +618,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				color.getStyle().setBorderImage(patternAsCss);
 			} else {
 				// if here, remove border
-				color.getStyle().setBorderWidth(ElementUnit.PX.parse(0));
+				color.getStyle().setBorderWidth(Unit.PX.format(0));
 			}
 		} else if (item.isStrokeStyleAsCanvasGradient()) {
 			// gets the gradient by legend item
@@ -636,7 +636,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				color.getStyle().setBorderImage(gradientAsCss);
 			} else {
 				// if here, remove border
-				color.getStyle().setBorderWidth(ElementUnit.PX.parse(0));
+				color.getStyle().setBorderWidth(Unit.PX.format(0));
 			}
 		}
 	}

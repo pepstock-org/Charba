@@ -18,36 +18,43 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * FIXME
+ * Enumerates the horizontal alignment of a block element or table-cell box.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ElementDisplay implements Key
+public enum TextAlign implements Key
 {
-	NONE("none"),
-	BLOCK("block"),
-	INLINE("inline"),
-	INLINE_BLOCK("inline-block"),
-	INLINE_TABLE("inline-table"),
-	LIST_ITEM("list-item"),
-	RUN_IN("run-in"),
-	TABLE("table"),
-	TABLE_CAPTION("table-caption"),
-	TABLE_COLUMN_GROUP("table-column-group"),
-	TABLE_HEADER_GROUP("table-header-group"),
-	TABLE_FOOTER_GROUP("table-footer-group"),
-	TABLE_ROW_GROUP("table-row-group"),
-	TABLE_CELL("table-cell"),
-	TABLE_COLUMN("table-column"),
-	TABLE_ROW("table-row"),
-	INITIAL("initial"),
-	FLEX("flex"),
-	INLINE_FLEX("inline-flex");
+	/**
+	 * The inline contents are centered within the line box.
+	 */
+	CENTER("center"),
+	/**
+	 * The same as right if direction is left-to-right and left if direction is right-to-left.
+	 */
+	END("end"),
+	/**
+	 * The inline contents are aligned to the left edge of the line box.
+	 */
+	LEFT("left"),
+	/**
+	 * The inline contents are aligned to the right edge of the line box.
+	 */
+	RIGHT("right"),
+	/**
+	 * The same as left if direction is left-to-right and right if direction is right-to-left.
+	 */
+	START("start");
 
+	// name value of property
 	private final String value;
 
-	private ElementDisplay(String value) {
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private TextAlign(String value) {
 		this.value = value;
 	}
 
@@ -60,4 +67,5 @@ public enum ElementDisplay implements Key
 	public String value() {
 		return value;
 	}
+
 }

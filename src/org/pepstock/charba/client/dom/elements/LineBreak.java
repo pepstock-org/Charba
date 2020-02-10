@@ -23,6 +23,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
+ * Produces a line break in text (carriage-return).
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -38,7 +40,8 @@ public final class LineBreak extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	LineBreak() {
+	private LineBreak() {
+		// do nothing
 	}
 
 }

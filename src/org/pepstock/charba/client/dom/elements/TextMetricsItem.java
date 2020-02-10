@@ -22,7 +22,9 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * FIXME
+ * Represents the dimensions of a piece of text in the canvas, as created by the {@link Context2dItem#measureText(String)}
+ * method.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -33,15 +35,16 @@ public final class TextMetricsItem {
 	 * To avoid any instantiation
 	 */
 	private TextMetricsItem() {
+		// do nothing
 	}
 
 	/**
-	 * Return the width of the rendered text.
+	 * Return the value giving the calculated width of a segment of inline text in CSS pixels.<br>
+	 * It takes into account the current font of the context..
 	 * 
-	 * @return the width of the text
+	 * @return the value giving the calculated width of a segment of inline text in CSS pixels
 	 */
 	@JsProperty
 	public native double getWidth();
-
 
 }

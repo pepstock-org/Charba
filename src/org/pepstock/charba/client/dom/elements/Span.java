@@ -23,10 +23,12 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
+ * Represents a generic inline container for phrasing content, which does not inherently represent anything.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_SPAN_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class Span extends BaseHtmlElement {
 
 	/**
@@ -38,7 +40,8 @@ public final class Span extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	Span() {
+	private Span() {
+		// do nothing
 	}
 
 }

@@ -18,17 +18,38 @@ package org.pepstock.charba.client.dom.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * FIXME
+ * Enumerates the set of values to specify the current text baseline used when drawing text.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ElementTextBaseline implements Key
+public enum TextBaseline implements Key
 {
+	/**
+	 * The text baseline is the normal alphabetic baseline. Default value.
+	 */
 	ALPHABETIC("alphabetic"),
+	/**
+	 * The text baseline is the bottom of the bounding box. This differs from the ideographic baseline in that the ideographic
+	 * baseline doesn't consider descenders.
+	 */
 	BOTTOM("bottom"),
+	/**
+	 * The text baseline is the hanging baseline.
+	 */
 	HANGING("hanging"),
+	/**
+	 * The text baseline is the ideographic baseline; this is the bottom of the body of the characters, if the main body of
+	 * characters protrudes beneath the alphabetic baseline.
+	 */
 	IDEOGRAPHIC("ideographic"),
+	/**
+	 * The text baseline is the middle of the em square.
+	 */
 	MIDDLE("middle"),
+	/**
+	 * The text baseline is the top of the em square.
+	 */
 	TOP("top");
 
 	// name value of property
@@ -39,7 +60,7 @@ public enum ElementTextBaseline implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private ElementTextBaseline(String value) {
+	private TextBaseline(String value) {
 		this.value = value;
 	}
 

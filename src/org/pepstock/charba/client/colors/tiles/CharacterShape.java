@@ -18,7 +18,7 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
-import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -107,7 +107,7 @@ public final class CharacterShape extends AbstractShape {
 		// sets font as string
 		context.setFont(Utilities.toCSSFontProperty(FontStyle.NORMAL, realFontSize, fontFamily));
 		// sets alignment from center point
-		context.setTextBaseline(ElementTextBaseline.TOP);
+		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
 		TextMetricsItem metrics = context.measureText(character);
 		// designs the shape into A section

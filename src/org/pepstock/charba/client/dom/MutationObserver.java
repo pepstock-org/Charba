@@ -40,12 +40,12 @@ public final class MutationObserver {
 	 */
 	@JsFunction
 	public interface MutationObserverCallback {
-		
+
 		/**
 		 * The callback function takes as input two parameters:<br>
 		 * <ul>
-		 * <li> an array of {@link MutationRecord} objects describing each change that occurred
-		 * <li> the {@link MutationObserver} which invoked the callback.
+		 * <li>an array of {@link MutationRecord} objects describing each change that occurred
+		 * <li>the {@link MutationObserver} which invoked the callback.
 		 * </ul>
 		 * 
 		 * @param mutationRecords an array of {@link MutationRecord} objects describing each change that occurred

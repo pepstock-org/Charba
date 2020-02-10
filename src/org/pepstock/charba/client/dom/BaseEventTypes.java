@@ -75,7 +75,7 @@ public final class BaseEventTypes {
 	 * Touch event {@value} type.
 	 */
 	public static final String TOUCH_START = "touchstart";
-	
+
 	// Mouse event context menu (used only to create internal change events).
 	static final String CONTEXT_MENU = "contextmenu";
 

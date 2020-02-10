@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
@@ -1012,7 +1012,7 @@ final class SelectionHandler {
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.TOP);
+			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
@@ -1021,7 +1021,7 @@ final class SelectionHandler {
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.TOP);
+			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 			// draws scaled image
@@ -1034,7 +1034,7 @@ final class SelectionHandler {
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
-			ctx.setTextBaseline(ElementTextBaseline.TOP);
+			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.IMAGE.equals(clearSelection.getRender())) {

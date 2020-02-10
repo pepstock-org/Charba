@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains enumerations used inside the DOM tree to set properties or invokes methods of elements or items.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

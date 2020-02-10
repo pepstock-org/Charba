@@ -18,10 +18,10 @@ package org.pepstock.charba.client.dom;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.dom.enums.ElementBorderStyle;
-import org.pepstock.charba.client.dom.enums.ElementDisplay;
-import org.pepstock.charba.client.dom.enums.ElementPosition;
-import org.pepstock.charba.client.dom.enums.ElementTextDecoration;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
+import org.pepstock.charba.client.dom.enums.Display;
+import org.pepstock.charba.client.dom.enums.Position;
+import org.pepstock.charba.client.dom.enums.TextDecoration;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -35,8 +35,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-// FIXME name if must be cast
-@JsType(isNative = true, name = NativeName.DOM_CSS_PROPERTIES, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class BaseStyleProperties {
 
 	/**
@@ -604,8 +603,8 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'borderStyle' property
 	 */
 	@JsOverlay
-	public final ElementBorderStyle getBorderStyle() {
-		return Key.getKeyByValue(ElementBorderStyle.class, nativeGetBorderStyle(), ElementBorderStyle.NONE);
+	public final BorderStyle getBorderStyle() {
+		return Key.getKeyByValue(BorderStyle.class, nativeGetBorderStyle(), BorderStyle.NONE);
 	}
 
 	/**
@@ -615,7 +614,7 @@ public final class BaseStyleProperties {
 	 * @param borderStyle the CSS 'borderStyle' property to set
 	 */
 	@JsOverlay
-	public final void setBorderStyle(ElementBorderStyle borderStyle) {
+	public final void setBorderStyle(BorderStyle borderStyle) {
 		// checks if argument is consistent
 		if (Key.isValid(borderStyle)) {
 			nativeSetBorderStyle(borderStyle.value());
@@ -1216,8 +1215,8 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'display' property
 	 */
 	@JsOverlay
-	public final ElementDisplay getDisplay() {
-		return Key.getKeyByValue(ElementDisplay.class, nativeGetDisplay(), ElementDisplay.BLOCK);
+	public final Display getDisplay() {
+		return Key.getKeyByValue(Display.class, nativeGetDisplay(), Display.BLOCK);
 	}
 
 	@JsOverlay
@@ -1227,7 +1226,7 @@ public final class BaseStyleProperties {
 	 *
 	 * @param display the CSS 'display' property to set
 	 */
-	public final void setDisplay(ElementDisplay display) {
+	public final void setDisplay(Display display) {
 		// checks if argument is consistent
 		if (Key.isValid(display)) {
 			nativeSetDisplay(display.value());
@@ -2159,8 +2158,8 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'position' property
 	 */
 	@JsOverlay
-	public final ElementPosition getPosition() {
-		return Key.getKeyByValue(ElementPosition.class, nativeGetPosition(), ElementPosition.RELATIVE);
+	public final Position getPosition() {
+		return Key.getKeyByValue(Position.class, nativeGetPosition(), Position.RELATIVE);
 	}
 
 	/**
@@ -2170,7 +2169,7 @@ public final class BaseStyleProperties {
 	 * @param position the CSS 'position' property to set
 	 */
 	@JsOverlay
-	public final void setPosition(ElementPosition position) {
+	public final void setPosition(Position position) {
 		// checks if argumetn is consistent
 		if (Key.isValid(position)) {
 			nativeSetPosition(position.value());
@@ -2400,8 +2399,8 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'textDecoration' property
 	 */
 	@JsOverlay
-	public final ElementTextDecoration getTextDecoration() {
-		return Key.getKeyByValue(ElementTextDecoration.class, nativeGetTextDecoration(), ElementTextDecoration.NONE);
+	public final TextDecoration getTextDecoration() {
+		return Key.getKeyByValue(TextDecoration.class, nativeGetTextDecoration(), TextDecoration.NONE);
 	}
 
 	/**
@@ -2411,7 +2410,7 @@ public final class BaseStyleProperties {
 	 * @param textDecoration the CSS 'textDecoration' property to set
 	 */
 	@JsOverlay
-	public final void setTextDecoration(ElementTextDecoration textDecoration) {
+	public final void setTextDecoration(TextDecoration textDecoration) {
 		// checks if argument is consistent
 		if (Key.isValid(textDecoration)) {
 			nativeSetTextDecoration(textDecoration.value());

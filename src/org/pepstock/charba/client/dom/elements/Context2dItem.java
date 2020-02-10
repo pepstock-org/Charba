@@ -24,9 +24,9 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.enums.ElementRepetition;
-import org.pepstock.charba.client.dom.enums.ElementTextAlign;
-import org.pepstock.charba.client.dom.enums.ElementTextBaseline;
+import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.dom.enums.TextAlign;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.items.JsItemsHelper;
@@ -549,7 +549,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	public final CanvasPatternItem getStrokePattern() {
 		return getPattern(nativeGetFillStyle());
 	}
-	
+
 	/**
 	 * Returns the current text alignment used when drawing text.
 	 *
@@ -572,7 +572,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param textAlign the current text alignment used when drawing text
 	 */
 	@JsOverlay
-	public void setTextAlign(ElementTextAlign textAlign) {
+	public void setTextAlign(TextAlign textAlign) {
 		// checks if argument is consistent
 		if (Key.isValid(textAlign)) {
 			// stores the text align
@@ -586,8 +586,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return the current text alignment used when drawing text
 	 */
 	@JsOverlay
-	public ElementTextAlign getTextAlign() {
-		return Key.getKeyByValue(ElementTextAlign.class, nativeGetTextAlign(), ElementTextAlign.START);
+	public TextAlign getTextAlign() {
+		return Key.getKeyByValue(TextAlign.class, nativeGetTextAlign(), TextAlign.START);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param textBaseline the current text baseline used when drawing text
 	 */
 	@JsOverlay
-	public void setTextBaseline(ElementTextBaseline textBaseline) {
+	public void setTextBaseline(TextBaseline textBaseline) {
 		// checks if argument is consistent
 		if (Key.isValid(textBaseline)) {
 			// stores the text baseline
@@ -626,8 +626,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return the current text baseline used when drawing text
 	 */
 	@JsOverlay
-	public ElementTextBaseline getTextBaseline() {
-		return Key.getKeyByValue(ElementTextBaseline.class, nativeGetTextBaseline(), ElementTextBaseline.ALPHABETIC);
+	public TextBaseline getTextBaseline() {
+		return Key.getKeyByValue(TextBaseline.class, nativeGetTextBaseline(), TextBaseline.ALPHABETIC);
 	}
 
 	/**
@@ -754,12 +754,12 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return a canvas pattern item
 	 */
 	@JsOverlay
-	public final CanvasPatternItem createPattern(Canvas canvas, ElementRepetition repetition) {
+	public final CanvasPatternItem createPattern(Canvas canvas, Repetition repetition) {
 		// checks if argument is consistent
 		if (canvas != null) {
 			// gets the repetition checking if the argument is consistent
 			// if not, uses the default
-			ElementRepetition checkedRepetition = Key.isValid(repetition) ? repetition : ElementRepetition.NO_REPEAT;
+			Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
 			// creates and returns the pattern
 			return createPattern(canvas, checkedRepetition.value());
 		}
@@ -776,12 +776,12 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return a canvas pattern item
 	 */
 	@JsOverlay
-	public final CanvasPatternItem createPattern(Img image, ElementRepetition repetition) {
+	public final CanvasPatternItem createPattern(Img image, Repetition repetition) {
 		// checks if argument is consistent
 		if (image != null) {
 			// gets the repetition checking if the argument is consistent
 			// if not, uses the default
-			ElementRepetition checkedRepetition = Key.isValid(repetition) ? repetition : ElementRepetition.NO_REPEAT;
+			Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
 			// creates and returns the pattern
 			return createPattern(image, checkedRepetition.value());
 		}
@@ -1151,7 +1151,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsMethod
 	public native void translate(double x, double y);
-	
+
 	/**
 	 * Returns the fill or stroke color is used for shapes.
 	 * 

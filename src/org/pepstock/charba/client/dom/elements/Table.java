@@ -24,10 +24,12 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Provides special properties and methods for manipulating the layout and presentation of tables in an HTML document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_TABLE_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class Table extends BaseHtmlElement {
 
 	/**
@@ -39,112 +41,88 @@ public final class Table extends BaseHtmlElement {
 	/**
 	 * To avoid any instantiation
 	 */
-	Table() {
+	private Table() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the 'align' property of the HTML TABLE element.
+	 * Returns the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @return the 'align' property value
+	 * @return the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native String getAlign();
+	@JsProperty
+	public native String getAlign();
 
 	/**
-	 * Sets the 'align' property of the HTML TABLE element.
+	 * Sets the alignment of the element's contents with respect to the surrounding context.
 	 *
-	 * @param align the 'align' property to set 
+	 * @param align the alignment of the element's contents with respect to the surrounding context
 	 */
-	 @JsProperty
-	 public native void setAlign(String align);
+	@JsProperty
+	public native void setAlign(String align);
 
 	/**
-	 * Returns the 'bgColor' property of the HTML TABLE element.
+	 * Returns the width in pixels of the border of the table.
 	 *
-	 * @return the 'bgColor' property value
+	 * @return the width in pixels of the border of the table
 	 */
-	 @JsProperty
-	 public native String getBgColor();
+	@JsProperty
+	public native String getBorder();
 
 	/**
-	 * Sets the 'bgColor' property of the HTML TABLE element.
+	 * Sets the width in pixels of the border of the table.
 	 *
-	 * @param bgColor the 'bgColor' property to set 
+	 * @param border the width in pixels of the border of the table
 	 */
-	 @JsProperty
-	 public native void setBgColor(String bgColor);
+	@JsProperty
+	public native void setBorder(String border);
 
 	/**
-	 * Returns the 'border' property of the HTML TABLE element.
+	 * Returns the width in pixels of the horizontal and vertical sapce between cell content and cell borders.
 	 *
-	 * @return the 'border' property value
+	 * @return the width in pixels of the horizontal and vertical sapce between cell content and cell borders
 	 */
-	 @JsProperty
-	 public native String getBorder();
+	@JsProperty
+	public native int getCellPadding();
 
 	/**
-	 * Sets the 'border' property of the HTML TABLE element.
+	 * Sets the width in pixels of the horizontal and vertical sapce between cell content and cell borders.
 	 *
-	 * @param border the 'border' property to set 
+	 * @param cellPadding the width in pixels of the horizontal and vertical sapce between cell content and cell borders
 	 */
-	 @JsProperty
-	 public native void setBorder(String border);
+	@JsProperty
+	public native void setCellPadding(int cellPadding);
 
 	/**
-	 * Returns the 'cellPadding' property of the HTML TABLE element.
+	 * Returns the width in pixels of the horizontal and vertical separation between cells.
 	 *
-	 * @return the 'cellPadding' property value
+	 * @return the width in pixels of the horizontal and vertical separation between cells
 	 */
-	 @JsProperty
-	 public native int getCellPadding();
+	@JsProperty
+	public native int getCellSpacing();
 
 	/**
-	 * Sets the 'cellPadding' property of the HTML TABLE element.
+	 * Sets the width in pixels of the horizontal and vertical separation between cells.
 	 *
-	 * @param cellPadding the 'cellPadding' property to set 
+	 * @param cellSpacing the width in pixels of the horizontal and vertical separation between cells
 	 */
-	 @JsProperty
-	 public native void setCellPadding(int cellPadding);
+	@JsProperty
+	public native void setCellSpacing(int cellSpacing);
 
 	/**
-	 * Returns the 'cellSpacing' property of the HTML TABLE element.
+	 * Returns the length in pixels or in percentage of the desired width fo the entire table.
 	 *
-	 * @return the 'cellSpacing' property value
+	 * @return the length in pixels or in percentage of the desired width fo the entire table
 	 */
-	 @JsProperty
-	 public native int getCellSpacing();
+	@JsProperty
+	public native String getWidth();
 
 	/**
-	 * Sets the 'cellSpacing' property of the HTML TABLE element.
+	 * Sets the length in pixels or in percentage of the desired width fo the entire table.
 	 *
-	 * @param cellSpacing the 'cellSpacing' property to set 
+	 * @param width the length in pixels or in percentage of the desired width fo the entire table
 	 */
-	 @JsProperty
-	 public native void setCellSpacing(int cellSpacing);
-
-// FIXME	 
-//	/**
-//	 * Returns the 'rows' property of the HTML TABLE element.
-//	 *
-//	 * @return the 'rows' property value
-//	 */
-//	 @JsProperty
-//	 public native HTMLCollection getRows();
-
-	/**
-	 * Returns the 'width' property of the HTML TABLE element.
-	 *
-	 * @return the 'width' property value
-	 */
-	 @JsProperty
-	 public native String getWidth();
-
-	/**
-	 * Sets the 'width' property of the HTML TABLE element.
-	 *
-	 * @param width the 'width' property to set 
-	 */
-	 @JsProperty
-	 public native void setWidth(String width);
+	@JsProperty
+	public native void setWidth(String width);
 
 }
