@@ -41,7 +41,7 @@ final class HtmlLegendId {
 
 	// Template interface to HTML element id for label cell of legend table.
 	// The format is [chartId]_[datasetIndex]_[index]_label.
-	private static final String LABEl_COLUMN_ID_TEMPLATE = "{0}_{1}_{2}_label";
+	private static final String LABEL_COLUMN_ID_TEMPLATE = "{0}_{1}_{2}_label";
 
 	// Template interface to HTML element id for color cell of legend table.
 	// The format is [chartId]_[datasetIndex]_[index]_color.
@@ -201,7 +201,7 @@ final class HtmlLegendId {
 			return Utilities.applyTemplate(COLOR_COLUMN_ID_TEMPLATE, chartId, datasetIndex, index);
 		} else {
 			// if here, is requesting id from label cell
-			return Utilities.applyTemplate(LABEl_COLUMN_ID_TEMPLATE, chartId, datasetIndex, index);
+			return Utilities.applyTemplate(LABEL_COLUMN_ID_TEMPLATE, chartId, datasetIndex, index);
 		}
 	}
 

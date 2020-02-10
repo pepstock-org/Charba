@@ -23,6 +23,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
@@ -34,7 +35,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * been defined.
  * 
  * @author Andrea "Stock" Stocchero
- * @see Cursor
+ * @see CursorType
  */
 public final class ChartPointer extends AbstractPlugin {
 

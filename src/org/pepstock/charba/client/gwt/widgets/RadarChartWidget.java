@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.RadarOptions;
 import org.pepstock.charba.client.data.RadarDataset;
 
 /**
- * RADAR chart implementation.<br>
+ * RADAR chart GWT WIDGET implementation.<br>
  * A radar chart is a way of showing multiple data points and the variation between them.<br>
  * They are often useful for comparing the points of two or more different data sets.
  * 

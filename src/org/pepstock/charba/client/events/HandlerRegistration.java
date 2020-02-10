@@ -22,18 +22,20 @@ package org.pepstock.charba.client.events;
  *
  */
 public final class HandlerRegistration {
-
+	
+	// handler manager instance
 	private final HandlerManager manager;
-
+	// event handler instance
 	private final EventHandler handler;
-
+	// event type instance
 	private final EventType type;
 
 	/**
-	 * FIXME
-	 * @param manager
-	 * @param handler
-	 * @param type
+	 * Creates a handler registration in order to enable the handler removing.
+	 * 
+	 * @param manager handler manager, the chart instance
+	 * @param handler handler instance to remove
+	 * @param type the event type associated with handler
 	 */
 	HandlerRegistration(HandlerManager manager, EventHandler handler, EventType type) {
 		this.manager = manager;

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.TimeSeriesBarOptions;
 import org.pepstock.charba.client.data.TimeSeriesBarDataset;
 
 /**
- * BAR chart implementation for time series.<br>
+ * BAR chart GWT WIDGET implementation for time series.<br>
  * A bar chart provides a way of showing data values represented as vertical bars.
  * 
  * @author Andrea "Stock" Stocchero

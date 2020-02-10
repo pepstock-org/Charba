@@ -424,7 +424,6 @@ public final class TilesFactory {
 	 * 
 	 * @param htmlLegendItem the legend item instance to create the tile
 	 * @return a point style picture in base64 PNG format
-	 * @see Canvas#toDataUrl()
 	 */
 	public static String createHtmlLegendItem(HtmlLegendItem htmlLegendItem) {
 		// checks if html legend item is consistent

@@ -39,21 +39,34 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
+ * Base class of all GWT WIDGET charts.
+ * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <C> type for the specific chart
  */
 public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel implements IsChart {
 
+	// chart instance
 	private final C chart;
 
+	/**
+	 * Creates a chart widget for GWT by chart element instance.
+	 * 
+	 * @param chart chart instance to wrap by the widget
+	 */
 	protected AbstractChartWidget(C chart) {
+		// creates the simple panel casting the div element of the chart
+		// into a GWT element
 		super((Element) IsChart.checkAndGetIfConsistent(chart).getChartElement().as());
-		IsChart.checkIfConsistent(chart);
+		// stores the chart
 		this.chart = chart;
 	}
 
 	/**
-	 * @return the innerChart
+	 * Returns the chart instance, wrapped by this GWT widget.
+	 * 
+	 * @return the chart instance, wrapped by this GWT widget
 	 */
 	public final C getChart() {
 		return chart;

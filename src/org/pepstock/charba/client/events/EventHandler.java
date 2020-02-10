@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 /**
- * Empty interface for objects which will be handlers.
+ * Interface for objects which will be handlers.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.data.HorizontalBarDataset;
 
 /**
- * HORIZONTAL BAR chart implementation.<br>
+ * HORIZONTAL BAR GWT WIDGET chart implementation.<br>
  * A horizontal bar chart is a variation on a bar chart.<br>
  * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  * 

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.TimeSeriesLineOptions;
 import org.pepstock.charba.client.data.TimeSeriesLineDataset;
 
 /**
- * LINE chart implementation for time series.<br>
+ * LINE chart GWT WIDGET implementation for time series.<br>
  * A line chart is a way of plotting data points on a line.
  * 
  * @author Andrea "Stock" Stocchero

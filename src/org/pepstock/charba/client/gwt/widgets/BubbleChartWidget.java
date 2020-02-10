@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.BubbleOptions;
 import org.pepstock.charba.client.data.BubbleDataset;
 
 /**
- * BUBBLE chart implementation.<br>
+ * BUBBLE chart GWT WIDGET implementation.<br>
  * A bubble chart is used to display three dimensions of data at the same time.<br>
  * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
  * The third dimension is represented by the size of the individual bubbles.

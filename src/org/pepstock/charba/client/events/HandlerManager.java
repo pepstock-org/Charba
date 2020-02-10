@@ -18,98 +18,94 @@ package org.pepstock.charba.client.events;
 import org.pepstock.charba.client.IsChart;
 
 /**
- * Manager responsible for adding handlers to event sources and firing those handlers on passed in events. Primitive ancestor of
- * {@link EventBus}, and used at the core of {org.gwtproject.user.client.ui.Widget}.
- * <p>
- * While widget authors should continue to use
- * {@link org.gwtproject.user.client.ui.Widget#addDomHandler(EventHandler, org.gwtproject.event.dom.client.DomEvent.Type)} and
- * {@link org.gwtproject.user.client.ui.Widget#addHandler(Object, org.pepstock.charba.client.events.gwtproject.event.shared.Event.Type)} , application
- * developers are strongly discouraged from using a HandlerManager instance as a global event dispatch mechanism.
+ * Manager to add, remove event handlers and firing events to registered handlers.<br>
+ * This is currently implemented by all charts.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public abstract class HandlerManager implements HasHandlers {
+public abstract class HandlerManager {
 
-	private final SimpleEventBus eventBus = new SimpleEventBus();
+	// internal bus
+	private final EventBus eventBus = new EventBus();
 
 	/**
-	 * Creates a handler manager with a source to be set on all events fired via {@link #fireEvent(Event)}. Handlers will be
-	 * fired in the order that they are added.
-	 * 
-	 * @param source the default event source
+	 * Creates an empty handler manager
 	 */
 	protected HandlerManager() {
+		// do nothing
 	}
 
+	/**
+	 * Returns a chart instance as source for all events.
+	 * 
+	 * @return a chart instance as source for all events
+	 */
 	protected abstract IsChart getSource();
 
 	/**
-	 * Adds a handler.
+	 * Adds a event handler.
 	 * 
-	 * @param <H> The type of handler
-	 * @param type the event type associated with this handler
-	 * @param handler the handler
-	 * @return the handler registration, can be stored in order to remove the handler later
+	 * @param handler handler instance to add
+	 * @param type the event type associated with handler
+	 * @return the handler registration in order to remove the handler later
 	 */
 	public HandlerRegistration addHandler(EventHandler handler, EventType type) {
+		// adds handler
 		eventBus.addHandler(handler, type);
+		// creates and returns the handler registration
 		return new HandlerRegistration(this, handler, type);
 	}
-
+	
 	/**
-	 * Fires the given event to the handlers listening to the event's type.
-	 * <p>
-	 * Any exceptions thrown by handlers will be bundled into a {@link UmbrellaException} and then re-thrown after all handlers
-	 * have completed. An exception thrown by a handler will not prevent other handlers from executing.
-	 * <p>
-	 * Note, any subclass should be very careful about overriding this method, as adds/removes of handlers will not be safe
-	 * except within this implementation.
-	 * 
-	 * @param event the event
+	 * Fires the event to the handlers.
+	 *
+	 * @param event the event to fire
 	 */
-	@Override
-	public final void fireEvent(Event event) {
-		// checks if source is consistent
-		if (getSource() != null) {
+	public void fireEvent(Event event) {
+		// checks if source chart and event are consistent
+		if (IsChart.isValid(getSource()) && event != null) {
+			// sets the chart as source of event
 			event.setSource(getSource());
+			// fires event
 			eventBus.fireEvent(event);
 		}
 	}
 
 	/**
-	 * Gets the number of handlers listening to the event type.
+	 * Returns the amount of handlers for a specific event type.
 	 * 
-	 * @param type the event type
-	 * @return the number of registered handlers
+	 * @param type event type to use to get the amount of handlers
+	 * @return the amount of handlers for a specific event type
 	 */
 	public final int getHandlerCount(EventType type) {
 		return eventBus.getHandlerCount(type);
 	}
 
 	/**
-	 * Does this handler manager handle the given event type?
+	 * Returns <code>true</code> if there is any event handler for event type passed as argument.
 	 * 
-	 * @param e the event type
-	 * @return whether the given event type is handled
+	 * @param type event type to check
+	 * @return <code>true</code> if there is any event handler for event type passed as argument
 	 */
-	public final boolean isEventHandled(EventType e) {
-		return eventBus.isEventHandled(e);
+	public final boolean isEventHandled(EventType type) {
+		return eventBus.isEventHandled(type);
 	}
 
 	/**
-     * Removes the given handler from the specified event type.
-     * 
-     * @param <H> handler type
-     * 
-     * @param type the event type
-     * @param handler the handler
-     */
-    public final void removeHandler(EventHandler handler, EventType type) {
-    	// removes handler
-    	eventBus.removeHandler(handler, type);
+	 * Removes a handler from the event type, passed as argument.
+	 * 
+	 * @param handler handler instance to remove
+	 * @param type the event type associated with handler
+	 */
+	final void removeHandler(EventHandler handler, EventType type) {
+		// removes handler
+		eventBus.removeHandler(handler, type);
 		// if the handler is a chart event handler one
 		if (handler instanceof ChartEventHandler) {
-			// sends the event
+			// sends the event to remove handler
 			fireEvent(new RemoveHandlerEvent(type));
 		}
-    }
+	}
 
 }

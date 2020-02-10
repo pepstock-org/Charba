@@ -20,7 +20,7 @@ import org.pepstock.charba.client.impl.charts.GaugeDataset;
 import org.pepstock.charba.client.impl.charts.GaugeOptions;
 
 /**
- * GAUGE chart implementation.
+ * GAUGE chart GWT WIDGET implementation.
  * 
  * @author Andrea "Stock" Stocchero
  */

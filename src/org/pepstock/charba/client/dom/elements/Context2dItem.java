@@ -159,7 +159,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Returns the filling styling is used for gradient style inside shapes.
 	 * 
-	 * @returns gradient style to use inside shapes
+	 * @return gradient style to use inside shapes
 	 */
 	@JsOverlay
 	public CanvasGradientItem getFillGradient() {
@@ -533,7 +533,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Returns the stroke gradient is used for the lines around shapes.
 	 * 
-	 * @returns gradient style to use for the lines around shapes
+	 * @return gradient style to use for the lines around shapes
 	 */
 	@JsOverlay
 	public CanvasGradientItem getStrokeGradient() {
@@ -1075,7 +1075,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param x scaling factor in the horizontal direction.<br>
 	 *            A negative value flips pixels across the vertical axis.<br>
 	 *            A value of 1 results in no horizontal scaling
-	 * @param y scaling factor in the vertical direction.<br<A negative value flips pixels across the horizontal axis.<br>
+	 * @param y scaling factor in the vertical direction.<br>
+	 *            A negative value flips pixels across the horizontal axis.<br>
 	 *            A value of 1 results in no vertical scaling
 	 */
 	@JsMethod
@@ -1095,7 +1096,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param x the x-axis coordinate of the rectangle's starting point
 	 * @param y the y-axis coordinate of the rectangle's starting point
 	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
-	 * @param heigth the rectangle's height. Positive values are down, and negative are up
+	 * @param height the rectangle's height. Positive values are down, and negative are up
 	 */
 	@JsMethod
 	public native void strokeRect(double x, double y, double width, double height);

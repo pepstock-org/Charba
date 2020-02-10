@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.PolarAreaOptions;
 import org.pepstock.charba.client.data.PolarAreaDataset;
 
 /**
- * POLAR AREA chart implementation.<br>
+ * POLAR AREA chart GWT WIDGET implementation.<br>
  * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs
  * depending on the value.<br>
  * This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of

@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains all charts classes wrapped as GWT widget in order to enable to use inside to GWT UIBinder.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

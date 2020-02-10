@@ -20,7 +20,7 @@ import org.pepstock.charba.client.impl.charts.MeterDataset;
 import org.pepstock.charba.client.impl.charts.MeterOptions;
 
 /**
- * METER chart implementation.
+ * METER chart GWT WIDGET implementation.
  * 
  * @author Andrea "Stock" Stocchero
  */

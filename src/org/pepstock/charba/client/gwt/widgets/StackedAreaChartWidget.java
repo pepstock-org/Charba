@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.StackedOptions;
 import org.pepstock.charba.client.data.StackedAreaDataset;
 
 /**
- * STACKED AREA chart implementation.<br>
+ * STACKED AREA chart GWT WIDGET implementation.<br>
  * A stacked area chart is a way of plotting data points on a line.<br>
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 

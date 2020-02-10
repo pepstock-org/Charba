@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.ScatterOptions;
 import org.pepstock.charba.client.data.ScatterDataset;
 
 /**
- * SCATTER chart implementation.<br>
+ * SCATTER chart GWT WIDGET implementation.<br>
  * Scatter charts are based on basic line charts with the x axis changed to a linear axis.<br>
  * To use a scatter chart, data must be passed as objects containing X and Y properties.
  * 

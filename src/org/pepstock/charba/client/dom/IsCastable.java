@@ -35,6 +35,7 @@ public interface IsCastable {
 	/**
 	 * Performs checked cast to lefthand-side type.
 	 * 
+	 * @param <T> type of result casting
 	 * @return the same object cast to the type
 	 */
 	@JsOverlay

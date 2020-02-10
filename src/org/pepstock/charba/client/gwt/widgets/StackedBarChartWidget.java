@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.StackedOptions;
 import org.pepstock.charba.client.data.StackedBarDataset;
 
 /**
- * STACKED BAR chart implementation.<br>
+ * STACKED BAR chart GWT WIDGET implementation.<br>
  * Stacked bar charts can be configured like bar charts and changes the settings on the X and Y axes to enable stacking.<br>
  * Stacked bar charts can be used to show how one data series is made up of a number of smaller pieces.
  * 

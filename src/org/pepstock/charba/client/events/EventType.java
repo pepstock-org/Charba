@@ -25,13 +25,15 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public final class EventType implements Key {
-	// unique 
+	
+	// unique value
 	private final String value;
 	
 	/**
 	 * Creates a event type using the class name passed as argument.
 	 * 
 	 * @param clazz class (usually the event one) 
+	 * @param <T> type of event 
 	 * @return the event type.
 	 */
 	public static <T extends Event> EventType create(Class<T> clazz){

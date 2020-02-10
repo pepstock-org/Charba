@@ -33,7 +33,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 
 	/**
-	 * Default cursor type when the cursor is over the legend, {@link Cursor#POINTER}.
+	 * Default cursor type when the cursor is over the legend, {@link CursorType#POINTER}.
 	 */
 	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
 	/**

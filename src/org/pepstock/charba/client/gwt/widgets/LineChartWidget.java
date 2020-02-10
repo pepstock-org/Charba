@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.LineDataset;
 
 /**
- * LINE chart implementation.<br>
+ * LINE chart GWT WIDGET implementation.<br>
  * A line chart is a way of plotting data points on a line.<br>
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 

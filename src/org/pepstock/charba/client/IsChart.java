@@ -26,10 +26,10 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.events.HasHandlers;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -41,7 +41,7 @@ import org.pepstock.charba.client.plugins.Plugins;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsChart extends HasHandlers {
+public interface IsChart {
 
 	/**
 	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
@@ -128,12 +128,18 @@ public interface IsChart extends HasHandlers {
 	/**
 	 * Adds this handler to the widget.
 	 *
-	 * @param <H> the type of handler to add
 	 * @param type the event type
 	 * @param handler the handler
-	 * @return {@link HandlerRegistration} used to remove the handler
+	 * @return handler registration used to remove the handler
 	 */
 	HandlerRegistration addHandler(final EventHandler handler, EventType type);
+	
+	/**
+	 * Fires the event to the handlers.
+	 *
+	 * @param event the event to fire
+	 */
+	void fireEvent(Event event);
 
 	/**
 	 * Gets a handle to the object's underlying DOM element.

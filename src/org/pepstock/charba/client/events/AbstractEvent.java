@@ -25,7 +25,6 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <H> GWT event object
  */
 public abstract class AbstractEvent extends Event {
 

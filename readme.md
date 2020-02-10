@@ -106,6 +106,25 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * remove hard dependency with [Google Web toolkit](http://www.gwtproject.org/) in order to use **Charba** into other framework, [J2CL - JavaToClosure](https://github.com/google/j2cl) base.
+   * The dependency is still there (at runtime) because **Charba** is providing anyway the chart objects wrapper by GWT widget in order to maintain the compatibility witg GWT features, like UIBinder and code splitting. (this part is not completed yet).
+   * All GWT classes are now located into `org.pepstock.charba.client.gwt` in order to enable in next commits the release of 2 artifacts for **Charba**, 1 without any GWT dependencies and 1 with GWT widgets and other few features only for GWT
+ * add dependency at runtime (and compile) to [JSINTEROP base](https://github.com/google/jsinterop-base), version [1.0.0](https://github.com/google/jsinterop-base/releases/tag/1.0.0).
+ * create new DOM tree manager in order to remove all dependencies from other frameworks (for instance GWT, elemental2, GWT Elemento) but provide some hook (helpers or methods to cast to framework's element) where **Charba** can be linked with those frameworks. The **Charba** DOM manager does NOT implement a full DOM engine but only is needed to **Charba** itself.
+   * create base DOM elements (event target, node, element, HTML element, document, HTML document).
+   * create specific DOM elements, internally used, for instance div, span, image, table, table row, table cell, heading, line break, text node, canvas, CSS style properties.
+   * create canvas items, for instance context 2d, canvas gradient, canvas pattern, text metrics.
+   * create base DOM events, base on mouse and touch events and relative event listeners.
+   * create a safe html package (GWT like) for HTML escaping.
+   * create event handlers classes (GWT like) to manage chart events as is today.
+   * implement mutation observer in order to be able to trigger when a chart is attached or detached from DOM document.
+ * remove from `Meter` and `Gauge` charts the number formatting going to 
+   * precision number with the amount of decimal digits to use
+   * new `ValueCallback` in order to customize as the developer wants the value into the charts 
+ * remove from `PercentageCallback` the number formatting going to the precision number with the amount of decimal digits to use
+
 ### Features
 
  * add `adapters.date` property into scale options and configuration in order to configure date time adapters.

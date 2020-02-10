@@ -1041,7 +1041,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param callback callback to invoke
 	 * @param property property of dataset used to store the color
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPattern}, otherwise it
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it
 	 *            skips them.
 	 * @return a value of property as color
 	 */

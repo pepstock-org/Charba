@@ -107,7 +107,7 @@ public final class SafeHtmlBuilder {
 	/**
 	 * Appends the contents of another safe html object.
 	 *
-	 * @param html the safe html instance to add
+	 * @param value the safe html instance to add
 	 * @return the safe html builder instance
 	 */
 	public SafeHtmlBuilder append(SafeHtml value) {

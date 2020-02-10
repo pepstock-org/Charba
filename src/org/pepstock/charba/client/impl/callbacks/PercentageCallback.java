@@ -78,7 +78,7 @@ public final class PercentageCallback implements FormatterCallback {
 	/**
 	 * Creates the formatter using the arguments as number format and as flag to compute the percentage on stacked datasets.
 	 * 
-	 * @param format number format to apply
+	 * @param precision precision to apply
 	 * @param stacked if <code>true</code> computes the percentage on stacked datasets.
 	 */
 	public PercentageCallback(int precision, boolean stacked) {
@@ -88,9 +88,9 @@ public final class PercentageCallback implements FormatterCallback {
 	}
 
 	/**
-	 * Returns the number format as string to apply.
+	 * Returns the number precision to apply.
 	 * 
-	 * @return the number format as string to apply
+	 * @return the number precision to apply
 	 */
 	public int getPrecision() {
 		return precision;

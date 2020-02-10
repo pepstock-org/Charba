@@ -175,7 +175,12 @@ public final class NativeName {
 	/**
 	 * Constant to bind java script object as DOM HTML table cell element with name <b>{@value DOM_HTML_TABLE_CELL_ELEMENT}</b>.
 	 */
-	public static final String DOM_HTML_TABLE_CELL_ELEMENT = "HTMLTableCellElement";	 
+	public static final String DOM_HTML_TABLE_CELL_ELEMENT = "HTMLTableCellElement";
+	
+	/**
+	 * Constant to bind java script object as DOM style element with name <b>{@value DOM_HTML_STYLE_ELEMENT_ITEM}</b>.
+	 */
+	public static final String DOM_HTML_STYLE_ELEMENT_ITEM = "CSSStyleDeclaration";
 
 	/**
 	 * Constant to bind java script object as DOM text node with name <b>{@value DOM_TEXT}</b>.

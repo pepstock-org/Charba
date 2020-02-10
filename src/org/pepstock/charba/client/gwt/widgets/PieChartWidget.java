@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.PieOptions;
 import org.pepstock.charba.client.data.PieDataset;
 
 /**
- * PIE chart implementation.<br>
+ * PIE chart GWT WIDGET implementation.<br>
  * A pie charts are divided into segments, the arc of each segment shows the proportional value of each piece of data.<br>
  * They are excellent at showing the relational proportions between data.
  * 
