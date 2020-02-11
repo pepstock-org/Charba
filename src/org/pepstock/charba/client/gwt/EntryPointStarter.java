@@ -13,9 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.resources.ResourceNames;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
@@ -125,8 +127,10 @@ public final class EntryPointStarter {
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {
+					// creates an injector items
+					InjectableTextResource injectorItem = new InjectableTextResource(ResourceNames.CHART, resource);
 					// injects the CHART.JS
-					Injector.ensureInjected(resource);
+					Injector.ensureInjected(injectorItem);
 					// loads date-time library
 					EntryPointStarter.loadDatetimeLibrary(resources, runnable);
 				}
@@ -169,10 +173,14 @@ public final class EntryPointStarter {
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {
+					// creates an injector items
+					InjectableTextResource injectorLibItem = new InjectableTextResource(ResourceNames.DATE_TIME_LIBRARY, resource);
 					// injects the date time library
-					Injector.ensureInjected(resource);
+					Injector.ensureInjected(injectorLibItem);
+					// creates an injector items
+					InjectableTextResource injectorAdapterItem = new InjectableTextResource(ResourceNames.DATE_TIME_ADAPTER, resources.datetimeAdapter());
 					// injects also the date time adapter, always sync
-					Injector.ensureInjected(resources.datetimeAdapter());
+					Injector.ensureInjected(injectorAdapterItem);
 					// loads date-time adapter library
 					// executes the entry point
 					runnable.run();

@@ -13,13 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
-
 /**
- * Empty interface to notify a date adapter module that has been inject.
+ * Contains the code generator which will creates the {@link org.pepstock.charba.client.resources.InjectableResource} for all java script files that Charba is using.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DateAdapterInjectionComplete {
-}
+package org.pepstock.charba.codegen;

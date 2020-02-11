@@ -13,9 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
 
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ExternalTextResource;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
@@ -24,6 +26,21 @@ import com.google.gwt.resources.client.ExternalTextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DeferredDateAdapterResources extends DateAdpaterResources<ExternalTextResource> {
+public interface DeferredDateAdapterResources extends ClientBundle {
+	
+	/**
+	 * Contains text representation of date-time java script library code.
+	 * 
+	 * @return date-time java script library code
+	 */
+	ExternalTextResource datetimeLibrary();
+
+	/**
+	 * Contains text representation of CHART.JS adapter code.<br>
+	 * There is a specific adapter for the different date-time libraries.
+	 * 
+	 * @return chart.js date adapter code
+	 */
+	TextResource datetimeAdapter();
 
 }

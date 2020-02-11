@@ -15,6 +15,7 @@
 	</tstamp>
 
 	<property name="src.dir" value="src" />
+	<property name="codegen.dir" value="codegen" />
 	<property name="classes.dir" value="classes" />
 	<property name="lib.dir" value="lib-ivy" />
 	<property name="javadoc.dir" value="javadoc" />
@@ -239,7 +240,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
-		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" 
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
 			windowtitle="Charba - GWT Charts library based on CHART.JS" access="private">
 			<classpath>
 				<path refid="ivyPath-runtime" />
@@ -252,6 +253,37 @@
 			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
 		</javadoc>
+	</target>
+	
+	<!--
+        CHARBA - Code generator to wrap the java script files into java classes
+    -->
+	<target name="code-generator" depends="buildInit">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+		</javac>
+		<!-- minify -->
+		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.charba.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.charba.file}" />
+			</sources>
+		</closure-compiler>
+		<echo>Minify LABELS plugin from file "${javascript.labels.file}" to "${javascript.labels.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.labels.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.labels.file}" />
+			</sources>
+		</closure-compiler>
+		<!-- invokes code generator -->
+		<echo>Creating CHARBA injectable resources...</echo>
+		<java classname="org.pepstock.charba.codegen.InjectableResourceGenerator">
+		  <arg value="-h"/>
+		  <classpath>
+		    <pathelement location="${classes.dir}"/>
+		  </classpath>
+		</java>
+		<echo>Created CHARBA injectable resources</echo>
 	</target>
 
 	<!--

@@ -13,13 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
 
 /**
- * Empty interface to notify a date adapter module that has been inject.
+ * Exception created when it's able to load CHART.JS source in deferred mode.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DateAdapterInjectionComplete {
+public final class ResourceLoadException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Creates the exception by a description and the cause.
+	 * 
+	 * @param message description of exception
+	 * @param cause cause of the exception
+	 */
+	ResourceLoadException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

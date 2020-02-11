@@ -144,9 +144,28 @@ public final class DOMBuilder {
 	 * @return a &lt;img&gt; element
 	 */
 	public Img createImageElement() {
-		return DOM.getDocument().createElement(Img.TAG);
+		return createImageElement(null);
 	}
 
+	/**
+	 * Creates a &lt;img&gt; element with the full URL of the image.
+	 * 
+	 * @param src the full URL of the image
+	 * @return a &lt;img&gt; element
+	 */
+	public Img createImageElement(String src) {
+		// creates an image
+		Img image = DOM.getDocument().createElement(Img.TAG);
+		// checks if url of image as argument is consistent
+		if (src != null) {
+			// if her the argument is consistent
+			// then sets it
+			image.setSrc(src);
+		}
+		// return sthe image
+		return image;
+	}
+	
 	/**
 	 * Creates a &lt;table&gt; element.
 	 * 

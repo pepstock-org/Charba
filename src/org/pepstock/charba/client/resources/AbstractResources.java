@@ -17,8 +17,6 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.AbstractModule;
 
-import com.google.gwt.resources.client.ResourcePrototype;
-
 /**
  * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library.<br>
  * Every instance must have a module related to date adapter and library.
@@ -26,7 +24,7 @@ import com.google.gwt.resources.client.ResourcePrototype;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractResources<T extends ResourcePrototype> {
+public abstract class AbstractResources {
 
 	// date adapter library module instance
 	private final AbstractModule module;
@@ -36,7 +34,7 @@ public abstract class AbstractResources<T extends ResourcePrototype> {
 	 * 
 	 * @param module module of date adapter and library.
 	 */
-	AbstractResources(AbstractModule module) {
+	protected AbstractResources(AbstractModule module) {
 		// checks if module is consistent
 		if (module == null) {
 			// if not, exception
@@ -45,13 +43,6 @@ public abstract class AbstractResources<T extends ResourcePrototype> {
 		// stores module
 		this.module = module;
 	}
-
-	/**
-	 * Returns the client bundle with date library and adapter java script definition.
-	 * 
-	 * @return the client bundle with date library and adapter java script definition
-	 */
-	protected abstract DateAdpaterResources<T> getClientBundle();
 
 	/**
 	 * Returns the date adapter module.

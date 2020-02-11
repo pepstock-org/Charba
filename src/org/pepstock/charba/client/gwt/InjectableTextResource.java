@@ -13,25 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
+
+import org.pepstock.charba.client.resources.InjectableResource;
+
+import com.google.gwt.resources.client.TextResource;
 
 /**
- * Exception created when it's able to load CHART.JS source in deferred mode.
- * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ResourceLoadException extends RuntimeException {
+public final class InjectableTextResource extends InjectableResource {
 
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Creates the exception by a description and the cause.
-	 * 
-	 * @param message description of exception
-	 * @param cause cause of the exception
-	 */
-	ResourceLoadException(String message, Throwable cause) {
-		super(message, cause);
+	public InjectableTextResource(TextResource resource) {
+		this(resource.getName(), resource);
 	}
+
+	InjectableTextResource(String name, TextResource resource) {
+		super(name, resource.getText());
+	}
+
 }

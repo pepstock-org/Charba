@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.resources;
 
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ResourcePrototype;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
  * CHART.JS date time adapter library text resource is just defined because the mode how to inject them depends on the
@@ -27,14 +23,14 @@ import com.google.gwt.resources.client.TextResource;
  * @author Andrea "Stock" Stocchero
  * @param <T> resources prototype type of CHART.JS date adapter library resource
  */
-interface DateAdpaterResources<T extends ResourcePrototype> extends ClientBundle {
+interface IsDateAdpaterResources {
 
 	/**
 	 * Contains text representation of date-time java script library code.
 	 * 
 	 * @return date-time java script library code
 	 */
-	T datetimeLibrary();
+	InjectableResource datetimeLibrary();
 
 	/**
 	 * Contains text representation of CHART.JS adapter code.<br>
@@ -42,6 +38,6 @@ interface DateAdpaterResources<T extends ResourcePrototype> extends ClientBundle
 	 * 
 	 * @return chart.js date adapter code
 	 */
-	TextResource datetimeAdapter();
+	InjectableResource datetimeAdapter();
 
 }

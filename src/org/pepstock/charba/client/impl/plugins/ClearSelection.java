@@ -20,16 +20,12 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-import org.pepstock.charba.client.resources.ResourcesType;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ImageResource;
 
 /**
  * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear
@@ -38,46 +34,27 @@ import com.google.gwt.resources.client.ImageResource;
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
+	
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_18 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_24 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_36 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
 
 	/**
-	 * Resource client bundle to inject images for clear selection.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * FIXME
 	 */
-	interface ClearSelectionImages extends ClientBundle {
-
-		/**
-		 * Static reference to resources java script source code
-		 */
-		static final ClearSelectionImages INSTANCE = GWT.create(ClearSelectionImages.class);
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_18dp.png")
-		ImageResource clearSelection18();
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_24dp.png")
-		ImageResource clearSelection24();
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_36dp.png")
-		ImageResource clearSelection36();
-
-	}
-
+	public static final Img DEFAULT_CLEAR_SELECTION_18 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_18); 
+	/*
+	 * 
+	 */
+	public static final Img DEFAULT_CLEAR_SELECTION_24 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_24);
+	/**
+	 * 
+	 */
+	public static final Img DEFAULT_CLEAR_SELECTION_36 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_36);
+	
 	/**
 	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
@@ -106,9 +83,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default image for clear selection element.
 	 */
-	// FIXME
-	//public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
-	public static final Img DEFAULT_IMAGE = null;
+	public static final Img DEFAULT_IMAGE = DEFAULT_CLEAR_SELECTION_18;
 	
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.

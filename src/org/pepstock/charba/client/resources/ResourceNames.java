@@ -16,10 +16,19 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Empty interface to notify a date adapter module that has been inject.
- * 
+ * FIXME
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DateAdapterInjectionComplete {
+public final class ResourceNames {
+	
+	public static final String CHART = "chartJs";
+	
+	public static final String DATE_TIME_ADAPTER = "datetimeAdapter";
+
+	public static final String DATE_TIME_LIBRARY = "datetimeLibrary";
+
+	private ResourceNames() {
+	}
+
 }

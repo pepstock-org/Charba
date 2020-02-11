@@ -18,9 +18,6 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.adapters.AbstractModule;
 
-import com.google.gwt.resources.client.ResourcePrototype;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library will be
  * load in embedded mode.<br>
@@ -29,24 +26,19 @@ import com.google.gwt.resources.client.TextResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEmbeddedResources extends AbstractResources<TextResource> {
+public abstract class AbstractEmbeddedResources extends AbstractResources implements IsDateAdpaterResources {
+
+	// chart js source code
+	private static final ChartJsResource CHARTJS = new ChartJsResource();
 
 	/**
 	 * Creates an embedded resource object by passed module, which represents the date adapter and library, as argument.
 	 * 
 	 * @param module module of date adapter and library.
 	 */
-	public AbstractEmbeddedResources(AbstractModule module) {
+	AbstractEmbeddedResources(AbstractModule module) {
 		super(module);
 	}
-
-	/**
-	 * Returns the client bundle with date library and adapter java script definition.
-	 * 
-	 * @return the client bundle with date library and adapter java script definition
-	 */
-	@Override
-	protected abstract EmbeddedDateAdapterResources getClientBundle();
 
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
@@ -56,18 +48,13 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 		// checks if module has been already injected
 		if (!getModule().isInjected()) {
 			// inject Chart.js if not already loaded
-			ensureInjected(EmbeddedChartResources.INSTANCE.chartJs());
-			// gets client bundle
-			EmbeddedDateAdapterResources bundle = getClientBundle();
-			// checks if resource bundle is consistent
-			if (bundle != null) {
-				// to be sure that date time library has been injected
-				ensureInjected(bundle.datetimeLibrary());
-				// to be sure that date time chart.js adapter has been injected
-				ensureInjected(bundle.datetimeAdapter());
-			}
+			ensureInjected(CHARTJS);
+			// to be sure that date time library has been injected
+			ensureInjected(datetimeLibrary());
+			// to be sure that date time chart.js adapter has been injected
+			ensureInjected(datetimeAdapter());
 			// notify to module that has been injected
-			getModule().injectionComplete(DateAdapterInjectionComplete.get());
+			getModule().injectionComplete(EmbeddedDateAdapterInjectionComplete.get());
 		}
 	}
 
@@ -76,9 +63,9 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 	 * 
 	 * @param resource script resource
 	 */
-	private void ensureInjected(ResourcePrototype resource) {
+	private void ensureInjected(InjectableResource resource) {
 		// checks if prototype is a text resource and not already injected
-		if (resource instanceof TextResource && !Injector.isInjected(resource)) {
+		if (!Injector.isInjected(resource)) {
 			// inject Chart.js if not already loaded
 			Injector.ensureInjected(resource);
 		}

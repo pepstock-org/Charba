@@ -23,10 +23,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
  * The {@value ZoomPlugin#ID} plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
@@ -39,37 +35,6 @@ import com.google.gwt.resources.client.TextResource;
 public final class ZoomPlugin {
 
 	/**
-	 * Client bundle to reference ZOOM CHART.JS plugin, wrapped by Charba.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface ZoomClientBundle extends ClientBundle {
-
-		/**
-		 * Static reference to extensions java script source code
-		 */
-		static final ZoomClientBundle INSTANCE = GWT.create(ZoomClientBundle.class);
-
-		/**
-		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a>
-		 * code.
-		 * 
-		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a> code
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-zoom.min.js")
-		TextResource zoomPlugin();
-
-		/**
-		 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>
-		 * code.
-		 * 
-		 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "hammer.min.js")
-		TextResource hammerLibrary();
-	}
-
-	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "zoom";
@@ -80,6 +45,10 @@ public final class ZoomPlugin {
 	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory();
 	// internal defaults options factory
 	static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
+	// injectable resource for plugin
+	private static final ZoomPluginResource RESOURCE = new ZoomPluginResource();
+	// injectable resource for plugin for additional library
+	private static final ZoomPluginHammerResource RESOURCE_HAMMER = new ZoomPluginHammerResource();
 
 	/**
 	 * To avoid any instantiation
@@ -104,9 +73,9 @@ public final class ZoomPlugin {
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
 		// injects HAMMER plugin
-		Injector.ensureInjected(ZoomClientBundle.INSTANCE.hammerLibrary());
+		Injector.ensureInjected(RESOURCE_HAMMER);
 		// injects ZOOM plugin
-		Injector.ensureInjected(ZoomClientBundle.INSTANCE.zoomPlugin());
+		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}

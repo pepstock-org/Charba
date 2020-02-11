@@ -13,30 +13,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
  * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
- * This resources type will load the CHART.JS in synchronous mode, as part of GWT module to be down-loaded.
+ * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code
+ * splitting is implemented.
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface EmbeddedChartResources extends ChartResources<TextResource> {
+interface DeferredChartResources extends ClientBundle {
 
 	/**
 	 * Static reference to resources java script source code.
 	 */
-	static final EmbeddedChartResources INSTANCE = GWT.create(EmbeddedChartResources.class);
+	static final DeferredChartResources INSTANCE = GWT.create(DeferredChartResources.class);
 
 	/**
 	 * Contains text representation of native chart.js code.
 	 * 
-	 * @return chart.js code in synchronous mode
+	 * @return chart.js code in asynchronous mode
 	 */
-	@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-	TextResource chartJs();
+	@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
+	ExternalTextResource chartJs();
 
 }

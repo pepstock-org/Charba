@@ -13,13 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package ${packageName};
+
+import org.pepstock.charba.client.resources.InjectableResource;
 
 /**
- * Empty interface to notify a date adapter module that has been inject.
+ * Contains the content of <code>${javaScriptFile}</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DateAdapterInjectionComplete {
+public final class ${className} extends InjectableResource {
+
+	// encoded javascript content of ${javaScriptFile}
+	private static final String[] CONTENT = {
+		${javaScriptContent}
+	};
+	
+	/**
+	 * Creates the injectable resource with <code>${javaScriptFile}</code> content.
+	 */
+	${className}() {
+		super(${resourceName}, CONTENT);
+	}
+
 }

@@ -17,11 +17,6 @@ package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.resources.ResourcesType;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -32,38 +27,17 @@ import com.google.gwt.resources.client.TextResource;
  */
 public final class JsHelper {
 
-	/**
-	 * Client bundle to reference CHARBA java script codes, always needed to CHARBA.<br>
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface CharbaHelperResource extends ClientBundle {
-
-		/**
-		 * Static reference to resources java script source code.
-		 */
-		static final CharbaHelperResource INSTANCE = GWT.create(CharbaHelperResource.class);
-
-		/**
-		 * This java script with a set of static methods used as utility and needed to improve JSINTEROP adoption for CHARBA,
-		 * because JSINTEROP is not able to address all java script model.
-		 * 
-		 * @return CHARBA java script code.
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.helper.min.js")
-		TextResource charbaHelper();
-
-	}
-
 	// static instance for singleton
 	private static final JsHelper INSTANCE = new JsHelper();
+	// injectable resource for plugin
+	private final JsHelperResource resource = new JsHelperResource();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private JsHelper() {
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected(CharbaHelperResource.INSTANCE.charbaHelper());
+		Injector.ensureInjected(resource);
 	}
 
 	/**

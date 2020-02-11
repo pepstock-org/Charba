@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.gwt;
 
 import org.pepstock.charba.client.adapters.MomentModule;
 
@@ -46,7 +46,7 @@ public final class DeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return date-time MOMENT java script library code in asynchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
 		ExternalTextResource datetimeLibrary();
 
 		/**
@@ -54,7 +54,7 @@ public final class DeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for MOMENT in synchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
 		TextResource datetimeAdapter();
 
 	}

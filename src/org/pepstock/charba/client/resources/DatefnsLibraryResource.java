@@ -15,23 +15,26 @@
 */
 package org.pepstock.charba.client.resources;
 
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ResourcePrototype;
+import org.pepstock.charba.client.resources.InjectableResource;
 
 /**
- * Client bundle to reference CHART.JS java script code, always needed to CHARBA.<br>
- * CHART.JS text resource is just defined because the mode how to inject them depends on the implementation of this interface.
+ * Contains the content of <code>charba.empty.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> resources prototype type of CHART.JS resource
+ *
  */
-interface ChartResources<T extends ResourcePrototype> extends ClientBundle {
+public final class DatefnsLibraryResource extends InjectableResource {
 
+	// encoded javascript content of charba.empty.js
+	private static final String[] CONTENT = {
+		"/* EMPTY */"
+	};
+	
 	/**
-	 * Contains text representation of native chart.js code.
-	 * 
-	 * @return chart.js code
+	 * Creates the injectable resource with <code>charba.empty.js</code> content.
 	 */
-	T chartJs();
+	DatefnsLibraryResource() {
+		super(ResourceNames.DATE_TIME_LIBRARY, CONTENT);
+	}
 
 }

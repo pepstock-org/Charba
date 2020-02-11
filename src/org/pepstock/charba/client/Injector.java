@@ -24,9 +24,8 @@ import org.pepstock.charba.client.dom.DOM;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Script;
 import org.pepstock.charba.client.dom.elements.Style;
-
-import com.google.gwt.resources.client.ResourcePrototype;
-import com.google.gwt.resources.client.TextResource;
+import org.pepstock.charba.client.dom.elements.TextNode;
+import org.pepstock.charba.client.resources.InjectableResource;
 
 /**
  * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
@@ -62,13 +61,13 @@ public final class Injector {
 		// stores the prefix package name
 		charbaPrefixPackageName = fullClassName.substring(0, fullClassName.indexOf(shortClassname));
 	}
-
+	
 	/**
 	 * Injects a script resource if not injected yet.
 	 * 
 	 * @param resource script resource
 	 */
-	public static void ensureInjected(ResourcePrototype resource) {
+	public static void ensureInjected(InjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a script element
@@ -83,7 +82,7 @@ public final class Injector {
 	 * 
 	 * @param resource CSS style resource
 	 */
-	public static void ensureCssInjected(ResourcePrototype resource) {
+	public static void ensureCssInjected(InjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a style element
@@ -99,7 +98,7 @@ public final class Injector {
 	 * @param resource script or CSS style resource
 	 * @return <code>true</code> if the script or style resource has been already injected
 	 */
-	public static boolean isInjected(ResourcePrototype resource) {
+	public static boolean isInjected(InjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a unique key for the resource
@@ -119,21 +118,20 @@ public final class Injector {
 	 * @param resource script resource
 	 * @param container HTML element which will contains the text resource
 	 */
-	private static void ensureInjected(ResourcePrototype resource, BaseHtmlElement container) {
+	private static void ensureInjected(InjectableResource resource, BaseHtmlElement container) {
 		// creates a unique key for the resource
 		// to use to understand if is already injected
 		String resourceKey = createKey(resource);
 		// checks if already injected
 		if (!ELEMENTS_INJECTED.contains(resourceKey)) {
-			if (resource instanceof TextResource) {
-				TextResource textResource = (TextResource) resource;
-				// sets ID
-				container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
-				// sets the script content source
-				container.setInnerText(textResource.getText());
-				// appends to the head
-				DOM.getDocument().getHead().appendChild(container);
-			}
+			// sets ID
+			container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
+			// creates a node to add the conetnt of resource
+			TextNode node = DOMBuilder.get().createTextNode(resource.getContent());
+			// sets the script content source
+			container.appendChild(node);
+			// appends to the head
+			DOM.getDocument().getHead().appendChild(container);
 			ELEMENTS_INJECTED.add(resourceKey);
 		}
 	}
@@ -146,7 +144,7 @@ public final class Injector {
 	 * @param resource resource instance to to create the key
 	 * @return a unique key for every single resource type
 	 */
-	private static final String createKey(ResourcePrototype resource) {
+	private static final String createKey(InjectableResource resource) {
 		// gets the full class name of resource
 		String fullResourceClassName = resource.getClass().getName();
 		// checks if the resource name is a CHARBA one

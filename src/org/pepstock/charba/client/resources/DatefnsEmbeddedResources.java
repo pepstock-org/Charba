@@ -17,9 +17,6 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.DatefnsModule;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Client bundle to reference DATE-FNS as date time library (synchronous mode).
  * 
@@ -28,40 +25,13 @@ import com.google.gwt.resources.client.TextResource;
 public final class DatefnsEmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
-	 * Client bundle to reference DATE-FNS as date time library.<br>
-	 * It defines the DATE-FNS date time library and its CHART.JS adapter.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface DatefnsEmbeddedResourcesClientBundle extends EmbeddedDateAdapterResources {
-
-		/**
-		 * Static reference to resources java script source code.
-		 */
-		static final DatefnsEmbeddedResourcesClientBundle INSTANCE = GWT.create(DatefnsEmbeddedResourcesClientBundle.class);
-
-		/**
-		 * The DATE-FNS library is not provided as bundle and then it is embedded into the adapter.
-		 * 
-		 * @return an empty java script code
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
-		TextResource datetimeAdapter();
-
-		/**
-		 * Contains text representation of CHART.JS adapter code form DATE-FNS.
-		 * 
-		 * @return chart.js date adapter code for DATE-FNS
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
-		TextResource datetimeLibrary();
-
-	}
-
-	/**
 	 * Static reference to DATE-FNS resources.
 	 */
 	public static final DatefnsEmbeddedResources INSTANCE = new DatefnsEmbeddedResources();
+
+	private final DatefnsAdapterResource dateAdapter = new DatefnsAdapterResource();
+
+	private final DatefnsLibraryResource dateLibrary = new DatefnsLibraryResource();
 
 	/**
 	 * To avoid any instantiation
@@ -73,11 +43,21 @@ public final class DatefnsEmbeddedResources extends AbstractEmbeddedResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractEmbeddedResources#getClientBundle()
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeLibrary()
 	 */
 	@Override
-	protected EmbeddedDateAdapterResources getClientBundle() {
-		return DatefnsEmbeddedResourcesClientBundle.INSTANCE;
+	public InjectableResource datetimeLibrary() {
+		return dateLibrary;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeAdapter()
+	 */
+	@Override
+	public InjectableResource datetimeAdapter() {
+		return dateAdapter;
 	}
 
 }

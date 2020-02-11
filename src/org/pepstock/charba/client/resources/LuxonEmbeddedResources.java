@@ -17,9 +17,6 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.LuxonModule;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Client bundle to reference LUXON as date time library (synchronous mode).
  * 
@@ -28,41 +25,13 @@ import com.google.gwt.resources.client.TextResource;
 public final class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
-	 * Client bundle to reference LUXON as date time library.<br>
-	 * It defines the LUXON date time library and its CHART.JS adapter.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface LuxonEmbeddedResourcesClientBundle extends EmbeddedDateAdapterResources {
-
-		/**
-		 * Static reference to resources java script source code.
-		 */
-		static final LuxonEmbeddedResourcesClientBundle INSTANCE = GWT.create(LuxonEmbeddedResourcesClientBundle.class);
-
-		/**
-		 * Contains text representation of CHART.JS adapter code form LUXON.
-		 * 
-		 * @return chart.js date adapter code for LUXON in synchronous mode
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
-		TextResource datetimeAdapter();
-
-		/**
-		 * Contains text representation of date-time LUXON java script library code.
-		 * 
-		 * @return date-time LUXON java script library code in synchronous mode
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
-		TextResource datetimeLibrary();
-
-	}
-
-	/**
 	 * Static reference to LUXON resources.
 	 */
 	public static final LuxonEmbeddedResources INSTANCE = new LuxonEmbeddedResources();
 
+	private final LuxonAdapterResource dateAdapter = new LuxonAdapterResource();
+
+	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
 	/**
 	 * To avoid any instantiation
 	 */
@@ -73,11 +42,21 @@ public final class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractEmbeddedResources#getClientBundle()
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeLibrary()
 	 */
 	@Override
-	protected EmbeddedDateAdapterResources getClientBundle() {
-		return LuxonEmbeddedResourcesClientBundle.INSTANCE;
+	public InjectableResource datetimeLibrary() {
+		return dateLibrary;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeAdapter()
+	 */
+	@Override
+	public InjectableResource datetimeAdapter() {
+		return dateAdapter;
 	}
 
 }
