@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.adapters.AbstractModule;
 
 /**
- * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library will be
+ * Base class to extend in order to have an java script injection, needed to CHARBA, where CHART.JS and date library will be
  * load in embedded mode.<br>
  * Every instance must have a module related to date adapter and library.
  * 

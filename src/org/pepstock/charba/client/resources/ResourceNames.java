@@ -16,19 +16,33 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * FIXME
+ * Constants name to use as element id for scripts, mandatory to CHARBA to work properly.
+ *  
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ResourceNames {
 	
+	/**
+	 * Script element id for CHART.JS source code.
+	 */
 	public static final String CHART = "chartJs";
-	
+
+	/**
+	 * Script element id for CHART.JS date time adapter.
+	 */
 	public static final String DATE_TIME_ADAPTER = "datetimeAdapter";
 
+	/**
+	 * Script element id for CHART.JS date time library.
+	 */
 	public static final String DATE_TIME_LIBRARY = "datetimeLibrary";
 
+	/**
+	 * To avoid any instantiation
+	 */
 	private ResourceNames() {
+		// do nothing
 	}
 
 }

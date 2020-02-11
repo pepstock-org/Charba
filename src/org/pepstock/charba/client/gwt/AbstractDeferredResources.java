@@ -34,12 +34,6 @@ public abstract class AbstractDeferredResources extends AbstractResources {
 	public static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
 	
 	/**
-	 * FIXME to be removed
-	 * Path into the project where the images resources are stored, <b>{@value}</b>.
-	 */
-	public static final String IMAGES_RESOURCES_PATH = "org/pepstock/charba/client/resources/images/";
-	
-	/**
 	 * Creates a deferred resource object by passed module, which represents the date adapter and library, as argument.
 	 * 
 	 * @param module module of date adapter and library.

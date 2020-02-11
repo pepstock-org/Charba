@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.adapters.DatefnsModule;
 
 /**
- * Client bundle to reference DATE-FNS as date time library (synchronous mode).
+ * Java script resources container to reference DATE-FNS as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -28,9 +28,9 @@ public final class DatefnsEmbeddedResources extends AbstractEmbeddedResources {
 	 * Static reference to DATE-FNS resources.
 	 */
 	public static final DatefnsEmbeddedResources INSTANCE = new DatefnsEmbeddedResources();
-
+	// date adapter java script wrapper
 	private final DatefnsAdapterResource dateAdapter = new DatefnsAdapterResource();
-
+	// date library java script wrapper	
 	private final DatefnsLibraryResource dateLibrary = new DatefnsLibraryResource();
 
 	/**

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.adapters.LuxonModule;
 
 /**
- * Client bundle to reference LUXON as date time library (synchronous mode).
+ * Java script resources container to reference LUXON as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -28,10 +28,11 @@ public final class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 	 * Static reference to LUXON resources.
 	 */
 	public static final LuxonEmbeddedResources INSTANCE = new LuxonEmbeddedResources();
-
+	// date adapter java script wrapper
 	private final LuxonAdapterResource dateAdapter = new LuxonAdapterResource();
-
+	// date library java script wrapper	
 	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
+	
 	/**
 	 * To avoid any instantiation
 	 */

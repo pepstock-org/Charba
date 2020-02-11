@@ -14,6 +14,10 @@
     limitations under the License.
 */
 /**
+ * Contains the fundamental java script resources to inject in order to use Charba by GWT.<br>
+ * It provides all implementations to inject deferred resources for all 3 date adapters, available by CHART.JS
+ * (MOMENT, LUXON and DATE.FNS).
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

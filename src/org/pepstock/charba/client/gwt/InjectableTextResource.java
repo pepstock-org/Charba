@@ -20,15 +20,28 @@ import org.pepstock.charba.client.resources.InjectableResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
+ * Default implementation for an injectable resource related to a text resource.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class InjectableTextResource extends InjectableResource {
 
+	/**
+	 * Creates an injectable resources using the name of text resource and the text of it.
+	 * 
+	 * @param resource text resource to be injected.
+	 */
 	public InjectableTextResource(TextResource resource) {
 		this(resource.getName(), resource);
 	}
 
+	/**
+	 * Creates an injectable resources using the text of it and the name, passed as argument.
+	 * 
+	 * @param name name of injectable resource, should be a unique value in the DOM.
+	 * @param resource text resource to be injected.
+	 */
 	InjectableTextResource(String name, TextResource resource) {
 		super(name, resource.getText());
 	}

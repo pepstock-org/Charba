@@ -16,12 +16,9 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
- * CHART.JS date time adapter library text resource is just defined because the mode how to inject them depends on the
- * implementation of this interface.
+ * Interface to define the CHART.JS date adapter and library java script codes, always needed to CHARBA.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> resources prototype type of CHART.JS date adapter library resource
  */
 interface IsDateAdpaterResources {
 

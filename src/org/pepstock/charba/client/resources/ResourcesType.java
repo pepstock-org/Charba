@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.adapters.AbstractModule;
 
 /**
- * Utility to set which kind of resources type must be use to load text resources.<br>
+ * Utility to set which kind of resources type must be use to load injectable resources.<br>
  * This utility MUST be called as first statement before using Charba.
  * 
  * @author Andrea "Stock" Stocchero

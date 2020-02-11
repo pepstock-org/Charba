@@ -106,7 +106,8 @@ public final class ImagesHelper {
 			// casts and returns the img
 			return Js.cast(img);
 		}
-		// returns null
+		// if here, image argument is not consistent
+		// then returns null
 		return null;
 	}
 

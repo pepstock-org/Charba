@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.adapters.MomentModule;
 
 /**
- * Client bundle to reference MOMENT as date time library (synchronous mode).
+ * Java script resources container to reference MOMENT as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -28,9 +28,9 @@ public final class EmbeddedResources extends AbstractEmbeddedResources {
 	 * Static reference to MOMENT resources.
 	 */
 	public static final EmbeddedResources INSTANCE = new EmbeddedResources();
-
+	// date adapter java script wrapper
 	private final MomentAdapterResource dateAdapter = new MomentAdapterResource();
-
+	// date library java script wrapper
 	private final MomentLibraryResource dateLibrary = new MomentLibraryResource();
 
 
