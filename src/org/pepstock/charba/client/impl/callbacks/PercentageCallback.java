@@ -40,7 +40,6 @@ public final class PercentageCallback implements FormatterCallback {
 	 * Default precision, <b>{@value DEFAULT_PRECISION}</b>.
 	 */
 	public static final int DEFAULT_PRECISION = 2;
-	// public static final String DEFAULT_FORMAT = "##0.##%";
 	// default stacked flag
 	private static final boolean DEFAULT_STACKED = false;
 	// number precision
