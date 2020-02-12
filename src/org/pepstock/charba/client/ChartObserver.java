@@ -139,25 +139,36 @@ final class ChartObserver {
 				if (childNode instanceof BaseElement) {
 					// casts to element
 					BaseElement child = (BaseElement) childNode;
-					// checks if there is any chart with element id of child
-					if (handlers.containsKey(child.getId())) {
-						// gets mutation handler by element id
-						MutationHandler handler = handlers.get(child.getId());
-						// checks if is looking for attach
-						// and the element is referring to a chart not attached yet
-						if (attach && isChartElementAttached(child.getId())) {
-							// invokes the attach method
-							handler.onAttach();
-						} else if (!attach && isChartElementDetached(child.getId())) {
-							// checks if is looking for detach
-							// and the element is referring to a chart is already attached
-							// invokes the detach method
-							handler.onDetach();
-						}
-					}
+					// checks and perform attachment for child
+					checkAndPerformAttachement(child, attach);
 					// recursively scan all children
 					scanAndCheckElements(child, attach);
 				}
+			}
+		}
+	}
+
+	/**
+	 * Checks if the element is related to a chart instance and if <code>true</code>, notify the chart of the attach or detach.
+	 * 
+	 * @param element element to check if is related to a chart
+	 * @param attach if <code>true</code>, checks for attached elements otherwise for detached ones
+	 */
+	private void checkAndPerformAttachement(BaseElement element, boolean attach) {
+		// checks if there is any chart with element id of child
+		if (handlers.containsKey(element.getId())) {
+			// gets mutation handler by element id
+			MutationHandler handler = handlers.get(element.getId());
+			// checks if is looking for attach
+			// and the element is referring to a chart not attached yet
+			if (attach && isChartElementAttached(element.getId())) {
+				// invokes the attach method
+				handler.onAttach();
+			} else if (!attach && isChartElementDetached(element.getId())) {
+				// checks if is looking for detach
+				// and the element is referring to a chart is already attached
+				// invokes the detach method
+				handler.onDetach();
 			}
 		}
 	}

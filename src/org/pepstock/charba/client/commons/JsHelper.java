@@ -154,41 +154,4 @@ public final class JsHelper {
 		return UndefinedValues.STRING;
 	}
 
-//	/**
-//	 * Sets the line dash offset, or "phase."<br>
-//	 * 
-//	 * @param context context of canvas
-//	 * @param offset the line dash offset, or "phase."
-//	 */
-//	public void setLineDashOffset(Context2d context, int offset) {
-//		// checks consistency of context
-//		if (context != null) {
-//			NativeJsHelper.setLineDashOffset(context, offset);
-//		}
-//	}
-//
-//	/**
-//	 * Sets the line dash pattern used when stroking lines.<br>
-//	 * It uses a list of values that specify alternating lengths of lines and gaps which describe the pattern.
-//	 * 
-//	 * @param context context of canvas
-//	 * @param items list of values that specify alternating lengths of lines and gaps which describe the pattern
-//	 */
-//	public void setLineDash(Context2d context, List<Integer> items) {
-//		setLineDash(context, ArrayInteger.fromOrEmpty(items));
-//	}
-//
-//	/**
-//	 * Sets the line dash pattern used when stroking lines.<br>
-//	 * It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
-//	 * 
-//	 * @param context context of canvas
-//	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
-//	 */
-//	public void setLineDash(Context2d context, ArrayInteger object) {
-//		// checks consistency of arguments
-//		if (context != null && object != null && !object.isEmpty()) {
-//			NativeJsHelper.setLineDash(context, object);
-//		}
-//	}
 }

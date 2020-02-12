@@ -39,9 +39,12 @@ import org.pepstock.charba.client.enums.PointStyle;
  *
  */
 final class PointStyleCircle extends AbstractPointStyleShapeDrawer {
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.colors.tiles.AbstractPointStyleShapeDrawer#drawPointStyle(org.pepstock.charba.client.dom.Context2dItem, int, double, double, double, double, double)
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.tiles.AbstractPointStyleShapeDrawer#drawPointStyle(org.pepstock.charba.client.dom.
+	 * Context2dItem, int, double, double, double, double, double)
 	 */
 	@Override
 	protected void drawPointStyle(Context2dItem context, int size, double x, double y, double radius, double rotation, double rad) {

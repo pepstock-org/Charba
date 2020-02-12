@@ -443,7 +443,7 @@ public final class Utilities {
 			// sets the max value because the precision must be greater than 0
 			int checkedPrecision = Math.max(precision, 0);
 			// creates a big decimal with value
-			BigDecimal decimalValue = new BigDecimal(value);
+			BigDecimal decimalValue = BigDecimal.valueOf(value);
 			// sets the scale to the precision and returns the string
 			return decimalValue.setScale(checkedPrecision, RoundingMode.DOWN).toPlainString();
 		}
