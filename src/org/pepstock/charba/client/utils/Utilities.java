@@ -69,7 +69,7 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private final static String GRADIENT_TEMPLATE = "{0}({1},{2})";
+	private static final String GRADIENT_TEMPLATE = "{0}({1},{2})";
 
 	/**
 	 * Template to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
@@ -86,7 +86,7 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private final static String PATTERN_TEMPLATE = "url({0}) {1}";
+	private static final String PATTERN_TEMPLATE = "url({0}) {1}";
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
