@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.resources.InjectableResource;
-
 /**
  * Contains the content of <code>chartjs-adapter-luxon.min.js</code> to inject.<br>
  * 
