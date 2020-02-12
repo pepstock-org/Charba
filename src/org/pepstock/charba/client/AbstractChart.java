@@ -215,13 +215,6 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		return element;
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
-	 * 
-	 * @return a new dataset related to chart type.
-	 */
-	public abstract D newDataset();
-
 	/*
 	 * (non-Javadoc)
 	 * 
