@@ -783,8 +783,7 @@ public final class Context2dItem extends BaseHtmlElement {
 			// if not, uses the default
 			Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
 			// creates and returns the pattern
-			CanvasPatternItem item = createPattern(image, checkedRepetition.value());
-			return item;
+			return createPattern(image, checkedRepetition.value());
 		}
 		// if here the argument is not consistent
 		// then exception
