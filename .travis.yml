@@ -39,14 +39,14 @@ branches:
 # BUILD phase
 #
 # download Ivy, if needed
-before_install: ant buildInit
+before_install: ant init
 # added this statement to avoid to download
 # maven dependencies
 install: /bin/true
 # run the ant main target
 script: 
    - git fetch --unshallow
-   - ant build-bin
+   - ant buildBinaryGwt
    - sonar-scanner
 # list the content of Ivy cache dir AFTER
 after_script: ls -R ~/.ant 

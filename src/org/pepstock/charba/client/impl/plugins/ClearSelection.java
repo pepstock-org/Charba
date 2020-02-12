@@ -34,27 +34,30 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
-	
+
 	// clear selection image into URL base 64
-	private static final String CLEAR_SELECTION_18 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
+	private static final String CLEAR_SELECTION_18 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
 	// clear selection image into URL base 64
-	private static final String CLEAR_SELECTION_24 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
+	private static final String CLEAR_SELECTION_24 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
 	// clear selection image into URL base 64
-	private static final String CLEAR_SELECTION_36 =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
+	private static final String CLEAR_SELECTION_36 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
 
 	/**
-	 * FIXME
+	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==">.
 	 */
-	public static final Img DEFAULT_CLEAR_SELECTION_18 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_18); 
-	/*
-	 * 
+	public static final Img DEFAULT_CLEAR_SELECTION_18 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_18);
+	/**
+	 * Default clear selection image, <img alt="Default image 24x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=">.
 	 */
 	public static final Img DEFAULT_CLEAR_SELECTION_24 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_24);
 	/**
-	 * 
+	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==">.
 	 */
 	public static final Img DEFAULT_CLEAR_SELECTION_36 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_36);
-	
+
 	/**
 	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
@@ -63,7 +66,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default label for clear selection element, value is <b>{@value DEFAULT_LABEL}</b>.
 	 */
-	public static final String DEFAULT_LABEL = "Clear selection";
+	public static final String DEFAULT_LABEL = "Reset selection";
 
 	/**
 	 * Default margin from canvas for clear selection element, value is <b>{@value DEFAULT_MARGIN}</b>.
@@ -84,7 +87,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * Default image for clear selection element.
 	 */
 	public static final Img DEFAULT_IMAGE = DEFAULT_CLEAR_SELECTION_18;
-	
+
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
 	 */

@@ -40,10 +40,6 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.FontStyle;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.shared.SafeHtml;
-
 /**
  * Sets of methods used as common utilities.
  * 
@@ -53,7 +49,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 public final class Utilities {
 
 	/**
-	 * Template interface to create CSS value of gradient, to use for <code>background-image</code> CSS property.<br>
+	 * Template to create CSS value of gradient, to use for <code>background-image</code> CSS property.<br>
 	 * The template for a {@link GradientType#LINEAR} is: <br>
 	 * <code>
 	 * linear-gradient(direction, color-stop1, color-stop2, ...)
@@ -73,22 +69,10 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	interface GradientCssTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a CSS value for gradient.
-		 * 
-		 * @param type type of gradient.
-		 * @param orientation the orientation of gradient
-		 * @param colors list of colors (comma separated) as string.
-		 * @return the CSS value of gradient
-		 */
-		@Template("{0}({1},{2})")
-		SafeHtml css(String type, String orientation, StringBuilder colors);
-	}
+	private final static String GRADIENT_TEMPLATE = "{0}({1},{2})";
 
 	/**
-	 * Template interface to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
+	 * Template to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
 	 * The template for a pattern is: <br>
 	 * <code>
 	 * url(image-url) repetition
@@ -102,20 +86,7 @@ public final class Utilities {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	interface PatternCssTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a CSS value for pattern.
-		 * 
-		 * @param imageSrc URI designating the source of pattern image.
-		 * @param repetition how background images are repeated.<br>
-		 *            A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
-		 * @return the CSS value of pattern
-		 */
-		@Template("url({0}) {1}")
-		SafeHtml css(String imageSrc, String repetition);
-	}
-
+	private final static String PATTERN_TEMPLATE = "url({0}) {1}";
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
@@ -126,13 +97,8 @@ public final class Utilities {
 	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{2\\}";
 	// string format of font family
 	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{3\\}";
-
 	// canvas element to draw
 	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
-	// instance of template
-	private static final PatternCssTemplate PATTERN_TEMPLATE = GWT.create(PatternCssTemplate.class);
-	// instance of template
-	private static final GradientCssTemplate GRADIENT_TEMPLATE = GWT.create(GradientCssTemplate.class);
 	// internal comparator to sort colors by own offset
 	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
 	// internal comparator to sort colors by own offset, descendant
@@ -220,14 +186,14 @@ public final class Utilities {
 			// checks if pattern has been created by image
 			if (image != null) {
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(pattern.getImage().getSrc(), pattern.getRepetition().value()).asString();
+				return applyTemplate(PATTERN_TEMPLATE, pattern.getImage().getSrc(), pattern.getRepetition().value());
 			} else if (canvasPattern != null) {
 				// sets a consistent width
 				int widthToUse = Math.max(width, pattern.getWidth());
 				// sets a consistent height
 				int heightToUse = Math.max(height, pattern.getHeight());
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), Repetition.REPEAT.value()).asString();
+				return applyTemplate(PATTERN_TEMPLATE, getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), Repetition.REPEAT.value());
 			}
 		}
 		// if here pattern is not consistent
@@ -258,7 +224,7 @@ public final class Utilities {
 			// checks the value of repetition
 			// if not consistent is ignored using the default
 			String repetitionToApply = Key.isValid(repetition) ? repetition.value() : Constants.EMPTY_STRING;
-			return PATTERN_TEMPLATE.css(dataUrl, repetitionToApply).asString();
+			return applyTemplate(PATTERN_TEMPLATE, dataUrl, repetitionToApply);
 		}
 		// if here data url is not consistent
 		// returns empty string
@@ -275,7 +241,7 @@ public final class Utilities {
 		// checks if consistent
 		if (image != null) {
 			// transform into CSS property
-			return PATTERN_TEMPLATE.css(image.getSrc(), Constants.EMPTY_STRING).asString();
+			return applyTemplate(PATTERN_TEMPLATE, image.getSrc(), Constants.EMPTY_STRING);
 		}
 		// if here, image not consistent
 		// then returns an empty string
@@ -361,7 +327,7 @@ public final class Utilities {
 				builder.append(Constants.BLANK).append(percentage).append(Constants.PERCENT);
 			}
 			// using the template, returns the CSS value of gradient
-			return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
+			return applyTemplate(GRADIENT_TEMPLATE, type.getCssStatement(), orientation.getCssStatement(), builder);
 		}
 		// if here gradient is not consistent
 		// returns empty string

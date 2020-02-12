@@ -132,6 +132,11 @@ public final class NativeName {
 	public static final String DOM_HTML_ELEMENT = "HTMLElement";
 
 	/**
+	 * Constant to bind java script object as DOM element attribute with name <b>{@value DOM_ELEMENT_ATTR}</b>.
+	 */
+	public static final String DOM_ELEMENT_ATTR = "Attr";
+
+	/**
 	 * Constant to bind java script object as DOM HTML body element with name <b>{@value DOM_HTML_BODY_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_BODY_ELEMENT = "HTMLBodyElement";

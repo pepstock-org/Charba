@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class BaseNativeEvent extends BaseEvent implements IsCastable{
+public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 
 	/**
 	 * To avoid any instantiation
@@ -210,7 +210,20 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable{
 	 * @return the horizontal coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public final double getX() {
+	public double getX() {
+		// gets the event target
+		BaseEventTarget target = getTarget();
+		// checks if is a html element
+		if (target instanceof BaseHtmlElement) {
+			// casts to html element
+			BaseHtmlElement element = (BaseHtmlElement) target;
+			// extracts the scrolling element
+			BaseElement scrollElement = getScrollingElement(element.getOwnerDocument());
+			// calculates the real X coordinate
+			return getClientX() - element.getAbsoluteLeft() + element.getScrollLeft() + scrollElement.getScrollLeft();
+		}
+		// if here, the event target is not a html element
+		// then returns the layer 
 		return getLayerX();
 	}
 
@@ -220,7 +233,38 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable{
 	 * @return the vertical coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public final double getY() {
+	public double getY() {
+		// gets the event target
+		BaseEventTarget target = getTarget();
+		// checks if is a html element
+		if (target instanceof BaseHtmlElement) {
+			// casts to html element
+			BaseHtmlElement element = (BaseHtmlElement) target;
+			// extracts the scrolling element
+			BaseElement scrollElement = getScrollingElement(element.getOwnerDocument());
+			// calculates the real Y coordinate
+			return getClientY() - element.getAbsoluteTop() + element.getScrollTop() + scrollElement.getScrollTop();
+		}
+		// if here, the event target is not a html element
+		// then returns the layer 
 		return getLayerY();
 	}
+
+	/**
+	 * Returns the scrolling element of the document, if there is, or the document element.
+	 * 
+	 * @param document document instance to check
+	 * @return the scrolling element of the document, if there is, or the document element
+	 */
+	@JsOverlay
+	private BaseElement getScrollingElement(BaseDocument document) {
+		// checks if document has got the scrolling
+		if (document.getScrollingElement() != null) {
+			// returns the scrolling element
+			return document.getScrollingElement();
+		}
+		// if not, returns the document element
+		return document.getDocumentElement();
+	}
+
 }

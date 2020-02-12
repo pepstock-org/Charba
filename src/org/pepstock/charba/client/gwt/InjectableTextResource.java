@@ -33,7 +33,7 @@ public final class InjectableTextResource extends InjectableResource {
 	 * @param resource text resource to be injected.
 	 */
 	public InjectableTextResource(TextResource resource) {
-		this(resource.getName(), resource);
+		this(resource != null ? resource.getName() : null, resource);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public final class InjectableTextResource extends InjectableResource {
 	 * @param resource text resource to be injected.
 	 */
 	InjectableTextResource(String name, TextResource resource) {
-		super(name, resource.getText());
+		super(name, resource != null ? resource.getText() : null);
 	}
 
 }

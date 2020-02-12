@@ -155,4 +155,77 @@ public class BaseHtmlElement extends BaseElement {
 		}
 	}
 
+	/**
+	 * Returns an element's absolute top coordinate in the document's coordinate system.
+	 * 
+	 * @return an element's absolute top coordinate in the document's coordinate system
+	 */
+	@JsOverlay
+	public final double getAbsoluteTop() {
+		// initializes the value
+		double top = 0D;
+		// starts scanning from this element
+		BaseHtmlElement currentElement = this;
+		// checks if element is consistent and has got any offset parent
+		while (currentElement != null && currentElement.getOffsetParent() != null) {
+			// removes the top scrolling
+			top -= currentElement.getScrollTop();
+			// gets the parent of current element
+			currentElement = (BaseHtmlElement) currentElement.getParentHtmlElement();
+		}
+		// starts scanning from this element again
+		currentElement = this;
+		// checks if element is consistent
+		while (currentElement != null) {
+			// adds the top offset
+			top += currentElement.getOffsetTop();
+			// checks if the offset parent is a html element
+			if (currentElement.getOffsetParent() instanceof BaseHtmlElement) {
+				// gets the offset parent of current element
+				currentElement = (BaseHtmlElement) currentElement.getOffsetParent();
+			} else {
+				// if here, the offset parent is not a html element
+				// then closes the cycle
+				currentElement = null;
+			}
+		}
+		return top;
+	}
+
+	/**
+	 * Returns an element's absolute left coordinate in the document's coordinate system.
+	 * 
+	 * @return an element's absolute left coordinate in the document's coordinate system
+	 */
+	@JsOverlay
+	public final double getAbsoluteLeft() {
+		// initializes the value
+		double left = 0D;
+		// starts scanning from this element
+		BaseHtmlElement currentElement = this;
+		// checks if element is consistent and has got any offset parent
+		while (currentElement != null && currentElement.getOffsetParent() != null) {
+			// removes the left scrolling
+			left -= currentElement.getScrollLeft();
+			// gets the parent of current element
+			currentElement = (BaseHtmlElement) currentElement.getParentHtmlElement();
+		}
+		// starts scanning from this element again
+		currentElement = this;
+		// checks if element is consistent
+		while (currentElement != null) {
+			// adds the left offset
+			left += currentElement.getOffsetLeft();
+			// checks if the offset parent is a html element
+			if (currentElement.getOffsetParent() instanceof BaseHtmlElement) {
+				// gets the offset parent of current element
+				currentElement = (BaseHtmlElement) currentElement.getOffsetParent();
+			} else {
+				// if here, the offset parent is not a html element
+				// then closes the cycle
+				currentElement = null;
+			}
+		}
+		return left;
+	}
 }

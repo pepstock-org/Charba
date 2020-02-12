@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.utils;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -24,7 +23,9 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.BaseAttribute;
 import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.NamedNodeMap;
 import org.pepstock.charba.client.dom.enums.NodeType;
 
 import jsinterop.annotations.JsFunction;
@@ -158,7 +159,7 @@ public final class JSON {
 					// checks if hashcode
 					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
 						// skips it
-						return JsHelper.get().undefined();
+						return Window.undefined();
 					}
 					// gets the object
 					Object result = manageObject(objects, value);
@@ -229,19 +230,26 @@ public final class JSON {
 			BaseElement element = (BaseElement) value;
 			// checks if is an element node
 			if (NodeType.ELEMENT_NODE.equals(element.getNodeType())) {
+				// creates builder
 				StringBuilder sb = new StringBuilder();
-				sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-				List<String> attributes = JsWindowHelper.get().elementAttributes(element);
-				if (!attributes.isEmpty()) {
-					for (String attribute : attributes) {
-						sb.append(Constants.BLANK).append(attribute);
+				// appends xml values as node
+				sb.append(Constants.LT).append(element.getNodeName().toLowerCase(Locale.getDefault()));
+				// checks if element has got any attributes
+				if (element.hasAttributes()) {
+					// gets attributes map
+					NamedNodeMap<BaseAttribute> attributes = element.getAttributes();
+					// scans all attributes
+					for (int i=0; i<attributes.length(); i++) {
+						// gets attribute by index
+						BaseAttribute attr = attributes.item(i);
+						sb.append(Constants.BLANK).append(attr.getName()).append("='").append(attr.getValue()+"'");
 					}
 				}
 				// returns html
-				return sb.append(">").toString();
+				return sb.append(Constants.GT).toString();
 			}
-		}
-		return null;
+		}return null;
+
 	}
 
 	/**
@@ -328,7 +336,7 @@ public final class JSON {
 			return value;
 		} else {
 			// skip it
-			return JsHelper.get().undefined();
+			return Window.undefined();
 		}
 	}
 

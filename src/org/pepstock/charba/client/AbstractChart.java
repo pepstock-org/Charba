@@ -53,7 +53,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
-import org.pepstock.charba.client.utils.JSON;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -881,16 +880,6 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
-	}
-
-	/**
-	 * Returns the string JSON representation of the object.
-	 * 
-	 * @return the string JSON representation of the object.
-	 */
-	@Override
-	public final String toJSON() {
-		return JSON.stringifyWithReplacer(configuration, 3);
 	}
 
 }

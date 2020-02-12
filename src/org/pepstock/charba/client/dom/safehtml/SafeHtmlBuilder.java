@@ -133,7 +133,7 @@ public final class SafeHtmlBuilder {
 	 * @return the safe html builder instance
 	 */
 	public SafeHtmlBuilder appendEscapedLines(String value) {
-		builder.append(SafeHtmlUtils.htmlEscape(value).replaceAll(Constants.LINE_SEPARATOR, "<" + LineBreak.TAG + ">"));
+		builder.append(SafeHtmlUtils.htmlEscape(value).replaceAll(Constants.LINE_SEPARATOR, Constants.LT + LineBreak.TAG + Constants.GT));
 		return this;
 	}
 

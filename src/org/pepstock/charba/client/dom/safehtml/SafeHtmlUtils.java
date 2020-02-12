@@ -36,8 +36,8 @@ final class SafeHtmlUtils {
 	{
 
 		AMPERSAND("&", "&amp;"),
-		GREATER_THAN(">", "&gt;"),
-		LESS_THANT("<", "&lt;"),
+		GREATER_THAN(Constants.GT, "&gt;"),
+		LESS_THANT(Constants.LT, "&lt;"),
 		SINGLE_QUOTE("\'", "&#39;"),
 		DOUBLE_QUOTE("\"", "&quot;");
 

@@ -35,13 +35,6 @@ final class NativeJsHelper {
 	}
 
 	/**
-	 * Returns an undefined reference
-	 * 
-	 * @return undefined reference
-	 */
-	static native Object undefined();
-
-	/**
 	 * Returns the java script object type of object.
 	 * 
 	 * @param object the object to get type.

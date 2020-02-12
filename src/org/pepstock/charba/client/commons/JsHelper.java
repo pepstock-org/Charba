@@ -50,15 +50,6 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Returns an undefined reference
-	 * 
-	 * @return undefined reference
-	 */
-	public Object undefined() {
-		return NativeJsHelper.undefined();
-	}
-
-	/**
 	 * Returns the java script object type of object.
 	 * 
 	 * @param object the object to get type.

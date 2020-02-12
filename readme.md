@@ -109,8 +109,11 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * remove hard dependency with [Google Web toolkit](http://www.gwtproject.org/) in order to use **Charba** into other framework, [J2CL - JavaToClosure](https://github.com/google/j2cl) base.
-   * The dependency is still there (at runtime) because **Charba** is providing anyway the chart objects wrapper by GWT widget in order to maintain the compatibility witg GWT features, like UIBinder and code splitting. (this part is not completed yet).
-   * All GWT classes are now located into `org.pepstock.charba.client.gwt` in order to enable in next commits the release of 2 artifacts for **Charba**, 1 without any GWT dependencies and 1 with GWT widgets and other few features only for GWT
+   * The dependency is still there (at runtime) because **Charba** is providing anyway the chart objects wrapper by GWT widget in order to maintain the compatibility with GWT features, like UIBinder and code splitting.
+   * All GWT classes are now located into `org.pepstock.charba.client.gwt` in order to enable the release of 2 artifacts for **Charba**, 1 without any GWT dependencies and 1 with GWT widgets and other few features only for GWT:
+      * jar library for J2CL has got the current name, `charba-[version.release].jar`
+      * jar library for GWT has got the current name, `charba-gwt-[version.release].jar`
+   * both artifacts are providing the GWT module (J2Cl without gwt-user inheritance) in order to use on GWT with or without widgets and code splitting.
  * add dependency at runtime (and compile) to [JSINTEROP base](https://github.com/google/jsinterop-base), version [1.0.0](https://github.com/google/jsinterop-base/releases/tag/1.0.0).
  * create new DOM tree manager in order to remove all dependencies from other frameworks (for instance GWT, elemental2, GWT Elemento) but provide some hook (helpers or methods to cast to framework's element) where **Charba** can be linked with those frameworks. The **Charba** DOM manager does NOT implement a full DOM engine but only is needed to **Charba** itself.
    * create base DOM elements (event target, node, element, HTML element, document, HTML document).
@@ -121,9 +124,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * create event handlers classes (GWT like) to manage chart events as is today.
    * implement mutation observer in order to be able to trigger when a chart is attached or detached from DOM document.
  * remove from `Meter` and `Gauge` charts the number formatting going to 
-   * precision number with the amount of decimal digits to use
-   * new `ValueCallback` in order to customize as the developer wants the value into the charts 
- * remove from `PercentageCallback` the number formatting going to the precision number with the amount of decimal digits to use
+   * precision number with the amount of decimal digits to use.
+   * new `ValueCallback` in order to customize as the developer wants the value into the charts .
+ * remove from `PercentageCallback` the number formatting going to the precision number with the amount of decimal digits to use.
 
 ### Features
 
@@ -155,6 +158,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change format from `JsDate` to `double` to store `Date` into configuration and options element.
  * change and reduce visibility of `ClientBundle` interfaces in order to avoid any extension on predefined ones.
  * add checking on arguments in `JSON` class in order to avoid any `NullPointerExcpetion`.
+ * remove `toJson` method from chart instances
  
 License
 -------

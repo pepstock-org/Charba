@@ -452,15 +452,5 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	public final void draw() {
 		chart.draw();
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#toJSON()
-	 */
-	@Override
-	public final String toJSON() {
-		return chart.toJSON();
-	}
 
 }

@@ -37,13 +37,20 @@ public final class Window {
 	}
 
 	/**
+	 * Returns the undefined instance.
+	 * @return the undefined instance
+	 */
+	@JsProperty(name = "undefined")
+	static native Object undefined();
+
+	/**
 	 * Returns the Console object
 	 *
 	 * @return The console object
 	 */
 	@JsProperty
 	public static native Console getConsole();
-	
+
 	/**
 	 * Returns the device pixel ratio
 	 *

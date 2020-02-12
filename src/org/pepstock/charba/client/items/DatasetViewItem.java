@@ -276,9 +276,9 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public double getTension() {
 		return getValue(Property.TENSION, Defaults.get().getGlobal().getElements().getLine().getTension());

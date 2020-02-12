@@ -40,18 +40,18 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @param tension the Bezier curve tension (0 for no Bezier curves).
+	 * @param tension the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public void setTension(double tension) {
 		getOptions().getElements().getLine().setTension(tension);
 	}
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public double getTension() {
 		return getOptions().getElements().getLine().getTension();
@@ -142,18 +142,18 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Sets <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @param capBezierPoints <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @param capBezierPoints <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
 		getOptions().getElements().getLine().setCapBezierPoints(capBezierPoints);
 	}
 
 	/**
-	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Returns <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
 		return getOptions().getElements().getLine().isCapBezierPoints();

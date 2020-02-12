@@ -29,13 +29,6 @@
     	return typeof obj;
     }
    /*
-	 Returns an undefined.
-	 @return undefined
-    */
-    CharbaJsHelper.undefined = function() {
-    	return undefined;
-    }
-   /*
 	 Removes a property from a java script object.
 	 
 	 @param obj the object on which to remove the property.
@@ -243,23 +236,6 @@
   			}
 		}
     }
-    /*
-	 Returns an array of strings with element attributes.
-	  
-	 @param element DOM element to scan
-	 @return an array of strings with element attributes
-    */
-    CharbaJsWindowHelper.elementAttributes = function(element) {
-    	var result = new Array();
-    	// First, let's verify that the paragraph has some attributes    
-     	if (element.hasAttributes()) {
-           var attrs = element.attributes;
-	       for(var i = 0; i < attrs.length; i++) {
-	          result[i] = attrs[i].name + "='" + attrs[i].value +"'";
-	       }
-	    }
-    	return result;
-    }  
     /*
 		JSPositionerHelper is an object with a set of static methods used as utility
 		and needed to add custom positioner on tooltips.   

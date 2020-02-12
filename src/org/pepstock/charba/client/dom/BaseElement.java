@@ -185,6 +185,14 @@ public abstract class BaseElement extends BaseNode {
 	public native final String getTagName();
 
 	/**
+	 * Returns a collection of all attribute nodes registered to the specified node.
+	 * 
+	 * @return a collection of all attribute nodes registered to the specified node
+	 */
+	@JsProperty
+	public native NamedNodeMap<BaseAttribute> getAttributes();
+
+	/**
 	 * Returns a list containing all descendant elements, of a particular tag name, from the current element.
 	 * 
 	 * @param tagname the qualified name to look for. The special string "*" represents all elements.
@@ -198,5 +206,13 @@ public abstract class BaseElement extends BaseNode {
 	 */
 	@JsMethod
 	public native final void remove();
+
+	/**
+	 * Returns a boolean indicating whether the current element has any attributes or not.
+	 * 
+	 * @return <code>true</code> whether the current element has any attributes
+	 */
+	@JsMethod
+	public native final boolean hasAttributes();
 
 }

@@ -28,9 +28,9 @@ import org.pepstock.charba.client.enums.JoinStyle;
 public interface IsDefaultLine extends IsDefaultOptionsElement {
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	double getTension();
 
@@ -60,9 +60,9 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	JoinStyle getBorderJoinStyle();
 
 	/**
-	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Returns <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
 

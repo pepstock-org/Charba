@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="Charba" default="build-bin" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="Charba" default="buildBinaryGwt" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- 
 	    Apache Ivy task definition and load properties
@@ -22,12 +22,26 @@
 	<property name="resources.dir" value="resources" />
 	<property name="retrieve.dir" value="retrieve" />
 	<property name="dist.dir" value="dist" />
+	<property name="all.sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.zip" />
+	
+	<!-- 
+		CHARBA target properties for J2CL distribution
+	-->
 	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}.jar" />
 	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.jar" />
-	<property name="all.sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.zip" />
 	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-javadoc.jar" />
 	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
 
+	<!-- 
+		CHARBA target properties for GWT distribution 
+	-->
+	<property name="bin.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}.jar" />
+	<property name="sources.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}-sources.jar" />
+	<property name="javadoc.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}-javadoc.jar" />
+
+	<!-- 
+		CHARBA target properties for java script files
+	-->
 	<property name="javascript.charba.file" value="charba.helper.js" />
 	<property name="javascript.charba.minify.file" value="charba.helper.min.js" />
 	<property name="javascript.package" value="org/pepstock/charba/client/resources/js" />
@@ -70,40 +84,73 @@
 	<property name="javac.target" value="1.8" />
 	<property name="javac.includeantruntime" value="false" />
 	<property name="javac.nowarn" value="true" />
-
-	<!-- 
-		TARGET SECTIONS 
+	
+	<!--
+		IVY targets for getting build dependencies and Travis CI needed libraries
 	-->
+	<property name="ant.user.home" value="${user.home}/.ant" />
+	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
+	
 	<!-- 
-		CHARBA - Removes the contents from all temporary folders 
+	**** IVY TARGET SECTIONS **** 
 	-->
-	<target name="clean" description="Cleans folders">
-		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${classes.dir}" includes="**/*"/>
-			<fileset dir="${dist.dir}" includes="**/*"/>
-			<fileset dir="${javadoc.dir}" includes="**/*"/>
-		</delete>
+	
+	<!--
+        IVY - Download IVY 
+    -->
+	<target name="ivyDownload">
+		<!-- Download the Ivy jar and then invoke it to download the others task libs -->
+		<mkdir dir="${ant.jar.dir}"/>
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
+	        dest="${ant.jar.dir}" usetimestamp="true"/>
+		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
+		<path id="ivyPath">
+			<fileset dir="${ant.jar.dir}">
+				<include name="**/ivy-*.jar"/>
+			</fileset>
+		</path>
+		<!-- Define the Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
 	</target>
-
+	
+	<!--
+        IVY - ANT task definitions for IVY 
+    -->
+	<target name="ivyTaskdef">
+		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
+		<path id="ivyPath">
+			<fileset dir="${ant.jar.dir}">
+				<include name="**/ivy-*.jar"/>
+			</fileset>
+		</path>
+		<!-- Define the Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
+	</target>
+	
+	<!--
+        IVY - Setup IVY 
+    -->
+	<target name="ivySetup" depends="ivyDownload, ivyTaskdef" />
+	
 	<!--
         IVY - Retrieves by IVY the needed jar 
     -->
-	<target name="ivyRetrieve" depends="ivyRetrieve-compile, ivyRetrieve-runtime" />
-	
-	<target name="ivyRetrieve-runtime" depends="taskdefIvy">
+	<target name="ivyRetrieveRuntime" depends="ivyTaskdef">
 		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
 	</target>
 
-	<target name="ivyRetrieve-compile" depends="taskdefIvy">
+	<target name="ivyRetrieveCompile" depends="ivyTaskdef">
 		<ivy:retrieve sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
 	</target>
+
+	<target name="ivyRetrieve" depends="ivyRetrieveCompile, ivyRetrieveRuntime" />
 
 	<!--
         IVY - Makes POM file 
     -->
-	<target name="makePom" depends="taskdefIvy">
+	<target name="ivyMakepom" depends="ivyTaskdef">
 		<property name="ivy.pom.name" value="Charba"/>
-		<property name="ivy.pom.description" value="Charba, GWT Chart library based on CHART.JS"/>
+		<property name="ivy.pom.description" value="Charba, J2CL and GWT chart library based on CHART.JS"/>
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
 		<property name="ivy.pom.packaging" value="jar"/>
 
@@ -115,7 +162,7 @@
 	<!--
         IVY - Publishes snapshots into MVN 
     -->
-	<target name="ivyPublish-snapshot" depends="taskdefIvy">
+	<target name="ivyPublishSnapshot" depends="ivyTaskdef">
 		<ivy:resolve />
 		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.pubrevision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
@@ -125,81 +172,44 @@
 	<!--
         IVY - Publishes official release into MVN 
     -->
-	<target name="ivyPublish-release" depends="taskdefIvy">
+	<target name="ivyPublishRelease" depends="ivyTaskdef">
 		<ivy:resolve />
 		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.pubrevision}" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
 
-	<!--
-        CHARBA - BUILD all jars artifacts: classes, sources and javadoc
-    -->
-	<target name="build-all" depends="build-bin, build-sources, build-javadoc, build-all-sources" />
-
-	<!--
-        CHARBA - BUILD sources jar
-    -->
-	<target name="build-sources">
-		<jar jarfile="${sources.archive.file}">
-			<fileset dir="${src.dir}" />
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
+	<!-- 
+	**** COMMON SECTIONS **** 
+	-->
+	
+	<!-- 
+		CHARBA - Removes the contents from all temporary folders 
+	-->
+	<target name="clean" description="Cleans folders">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${classes.dir}" includes="**/*"/>
+			<fileset dir="${dist.dir}" includes="**/*"/>
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
+		</delete>
 	</target>
-
+	
 	<!--
-        CHARBA - BUILD javadoc jar
-    -->
-	<target name="build-javadoc" depends="javadoc">
-		<jar jarfile="${javadoc.archive.file}">
-			<fileset dir="${javadoc.dir}" />
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
-	</target>
-
-	<!--
-        CHARBA - BUILD classes jar
-    -->
-	<target name="build-bin" depends="compile">
-		<jar jarfile="${bin.archive.file}">
-			<fileset dir="${classes.dir}"/>
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
-	</target>
-
-	<!--
-        CHARBA - BUILD all sources ZIP
-    -->
-	<target name="build-all-sources" depends="build-bin">
-		<zip destfile="${all.sources.archive.file}">
-			<fileset dir="${classes.dir}" excludes="**/*.class"/>
-		</zip>
+		CHARBA - Closure compiler definition 
+	-->
+	<target name="init" depends="ivySetup, ivyRetrieveCompile">
+		<!-- Define Google Closure task -->
+    	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
 	</target>
 
 	<!--
         CHARBA - JAVA compile, MINIFY CHARBA javascript helper, COPY resources into classes folder
     -->
-	<target name="compile" depends="clean, buildInit, ivyRetrieve-runtime">
+	<target name="compile" depends="clean, init, ivyRetrieveRuntime">
 		<mkdir dir="${classes.dir}"/>
-		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+		<javac includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+			<src path="${src.dir}"/>
+			<src path="${codegen.dir}"/>	
 			<classpath>
 				<path refid="ivyPath-runtime" />
 				<path refid="ivyPath-compile"/>
@@ -218,12 +228,13 @@
 				<file name="${javascript.labels.file}" />
 			</sources>
 		</closure-compiler>
-		<!-- copy is necessary as GWT needs sources: exclude charba.helper.js-->
+		<!-- copy is necessary as GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify-->
 		<copy todir="${classes.dir}">
 			<fileset dir="${src.dir}">
 				<exclude name="**/${javascript.charba.file}"/>
 				<exclude name="**/${javascript.labels.file}"/>
 			</fileset>
+			<fileset dir="${codegen.dir}"/>
 		</copy>
 		<!-- javascript resoures to classes -->
 		<copy todir="${javascript.dist.dir}">
@@ -234,14 +245,38 @@
 	</target>
 
 	<!--
-        CHARBA - JAVADOC execution
+        CHARBA - JAVADOC execution for J2CL
     -->
 	<target name="javadoc" depends="ivyRetrieve">
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
-			windowtitle="Charba - GWT Charts library based on CHART.JS" access="private">
+			windowtitle="Charba - J2CL and GWT charts library based on CHART.JS">
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<fileset dir="${classes.dir}" />
+				<pathelement path="${java.class.path}" />
+			</classpath>
+			<packageset dir="${src.dir}" defaultexcludes="yes">
+				<include name="org/pepstock/**" />
+				<exclude name="org/pepstock/charba/client/gwt/**"/>
+			</packageset>
+			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
+			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
+			<link offline="false" href="https://javadoc.io/doc/com.google.jsinterop/base/latest" />
+		</javadoc>
+	</target>
+
+	<!--
+        CHARBA - JAVADOC execution for GWT
+    -->
+	<target name="javadocGwt" depends="ivyRetrieve">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
+		</delete>
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
+			windowtitle="Charba - J2CL and GWT charts library based on CHART.JS">
 			<classpath>
 				<path refid="ivyPath-runtime" />
 				<fileset dir="${classes.dir}" />
@@ -252,33 +287,163 @@
 			</packageset>
 			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
+			<link offline="false" href="https://javadoc.io/doc/com.google.jsinterop/base/latest" />
 		</javadoc>
 	</target>
+
+	<!--
+        CHARBA - CREATE sources jar file for J2CL
+    -->
+	<target name="createSources">
+		<jar jarfile="${sources.archive.file}">
+			<fileset dir="${classes.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.class"/>
+				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/resources/js/**"/>
+				<exclude name="org/pepstock/charba/codegen/**"/>
+			</fileset>	
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE sources jar file for GWT
+    -->
+	<target name="createSourcesGwt">
+		<jar jarfile="${sources.gwt.archive.file}">
+			<fileset dir="${classes.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.class"/>
+				<exclude name="org/pepstock/charba/codegen/**"/>
+				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
+			</fileset>	
+			<manifest>
+				<!-- FIXME manca copy del GWT module-->
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE javadoc jar file for J2CL
+    -->
+	<target name="createJavadoc" depends="javadoc">
+		<jar jarfile="${javadoc.archive.file}">
+			<fileset dir="${javadoc.dir}" />
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE javadoc jar file for GWT
+    -->
+	<target name="createJavadocGwt" depends="javadocGwt">
+		<jar jarfile="${javadoc.gwt.archive.file}">
+			<fileset dir="${javadoc.dir}" />
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE classes jar file for J2CL
+    -->
+	<target name="createBinary" depends="compile">
+		<jar jarfile="${bin.archive.file}">
+			<fileset dir="${classes.dir}">
+				<include name="**/*"/>
+				<exclude name="org/pepstock/charba/codegen/**"/>
+				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/resources/js/**"/>
+			</fileset>	
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE classes jar file for GWT
+    -->
+	<target name="createBinaryGwt" depends="compile">
+		<copy file="${classes.dir}/org/pepstock/charba/client/gwt/Charba.gwt.xml" todir="${classes.dir}/org/pepstock/charba"/>
+		<jar jarfile="${bin.gwt.archive.file}">
+			<fileset dir="${classes.dir}">
+				<include name="**/*"/>
+				<exclude name="org/pepstock/charba/codegen/**"/>
+				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
+			</fileset>	
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CHARBA - CREATE all sources ZIP file
+    -->
+	<target name="createAllSources">
+		<zip destfile="${all.sources.archive.file}">
+			<fileset dir="${classes.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.class"/>
+				<exclude name="org/pepstock/charba/codegen/**"/>
+			</fileset>	
+		</zip>
+	</target>
+
+	<!--
+        CHARBA - BUILD all binaries
+    -->
+	<target name="buildBinary" depends="createBinary" />
+
+	<!--
+        CHARBA - BUILD all binaries
+    -->
+	<target name="buildBinaryGwt" depends="createBinaryGwt" />
+
+	<!--
+        CHARBA - BUILD all jars artifacts: classes, sources and javadoc
+    -->
+	<target name="buildAll" depends="buildBinary, createSources, createJavadoc, createAllSources, buildBinaryGwt, createSourcesGwt, createJavadocGwt" />
 	
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
     -->
-	<target name="code-generator" depends="buildInit">
-		<mkdir dir="${classes.dir}"/>
-		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
-		</javac>
-		<!-- minify -->
-		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.charba.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.charba.file}" />
-			</sources>
-		</closure-compiler>
-		<echo>Minify LABELS plugin from file "${javascript.labels.file}" to "${javascript.labels.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.labels.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.labels.file}" />
-			</sources>
-		</closure-compiler>
+	<target name="codeGenerator" depends="compile">
 		<!-- invokes code generator -->
 		<echo>Creating CHARBA injectable resources...</echo>
 		<java classname="org.pepstock.charba.codegen.InjectableResourceGenerator">
-		  <arg value="-h"/>
 		  <classpath>
 		    <pathelement location="${classes.dir}"/>
 		  </classpath>
@@ -286,6 +451,10 @@
 		<echo>Created CHARBA injectable resources</echo>
 	</target>
 
+	<!-- 
+	**** RETRIEVE javascript libraries **** 
+	-->
+	
 	<!--
         CHARBA - gets the javascript minify of CHART.JS and datalabels plugin
         PAY ATTENTION: these targets are insterted only for documentation and to get javascripts but before to apply must be checked
@@ -296,7 +465,6 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.chartjs.minify.file}" />
 		</delete>
-		<!--get src="https://cdn.jsdelivr.net/npm/chart.js@${depver.chartjs}/dist/Chart.bundle.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" /-->
 		<get src="https://cdn.jsdelivr.net/npm/chart.js@${depver.chartjs}/dist/Chart.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
 	</target>
 
@@ -380,47 +548,5 @@
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@${depver.chartjs.datefns}/dist/chartjs-adapter-date-fns.bundle.min.js" dest="${retrieve.dir}/${javascript.chartjs.datefns.minify.file}" />
 	</target>
-	
-	<!--
-		IVY targets for getting build dependencies and Travis CI needed libraries
-	-->
-	<property name="ant.user.home" value="${user.home}/.ant" />
-	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
-	
-	<!--
-		Task that download and prepare all build dependencies 
-	-->
-	<target name="buildInit" depends="setupIvy, ivyRetrieve-compile">
-		<!-- Define Google Closure tasks -->
-    	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
-	</target>
 
-	<target name="setupIvy" depends="downloadIvy, taskdefIvy" />
-	
-	<target name="downloadIvy">
-		<!-- Download the Ivy jar and then invoke it to download the others task libs -->
-		<mkdir dir="${ant.jar.dir}"/>
-		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
-	        dest="${ant.jar.dir}" usetimestamp="true"/>
-		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
-		<path id="ivyPath">
-			<fileset dir="${ant.jar.dir}">
-				<include name="**/ivy-*.jar"/>
-			</fileset>
-		</path>
-		<!-- Define the Ivy tasks -->
-		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
-	</target>
-	
-	<target name="taskdefIvy">
-		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
-		<path id="ivyPath">
-			<fileset dir="${ant.jar.dir}">
-				<include name="**/ivy-*.jar"/>
-			</fileset>
-		</path>
-		<!-- Define the Ivy tasks -->
-		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
-	</target>
-	
 </project>

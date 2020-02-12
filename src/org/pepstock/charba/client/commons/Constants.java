@@ -84,6 +84,16 @@ public final class Constants {
 	public static final String UNDERSCORE = "_";
 
 	/**
+	 * Constants for LESS THAN, <b>{@value}</b>.
+	 */
+	public static final String LT = "<";
+
+	/**
+	 * Constants for GREATER THAN, <b>{@value}</b>.
+	 */
+	public static final String GT = ">";
+
+	/**
 	 * To avoid any instantiation
 	 */
 	private Constants() {

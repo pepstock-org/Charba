@@ -418,13 +418,6 @@ public interface IsChart {
 	 * Draws the chart
 	 */
 	void draw();
-
-	/**
-	 * Returns the string JSON representation of the object.
-	 * 
-	 * @return the string JSON representation of the object.
-	 */
-	String toJSON();
 	
 	/**
 	 * Creates a new dataset for this chart type.

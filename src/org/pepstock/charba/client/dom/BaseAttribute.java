@@ -13,34 +13,37 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils;
+package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects.
+ * Represents one of a DOM element's attributes as an object.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-@JsType(isNative = true, name = NativeName.JS_WINDOW_HELPER, namespace = JsPackage.GLOBAL)
-final class NativeJsWindowHelper {
+@JsType(isNative = true, name = NativeName.DOM_ELEMENT_ATTR, namespace = JsPackage.GLOBAL)
+public final class BaseAttribute extends BaseNode{
 
 	/**
-	 * To avoid any instantiation
+	 * Returns the attribute's name.
+	 * 
+	 * @return the attribute's name
 	 */
-	private NativeJsWindowHelper() {
-		// do nothing
-	}
+	@JsProperty
+	public native String getName();
 
 	/**
-	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
-	 * to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
-	 * hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
+	 * Returns the attribute's value.
+	 * 
+	 * @return the attribute's value
 	 */
-	static native void enableResizeOnBeforePrint();
+	@JsProperty
+	public native String getValue();
 
 }

@@ -15,12 +15,7 @@
 */
 package org.pepstock.charba.client.utils;
 
-import java.util.List;
-
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -73,19 +68,6 @@ public final class JsWindowHelper {
 			// sets the flag
 			enableResizeOnBeforePrint = true;
 		}
-	}
-
-	/**
-	 * Returns a list of strings with element attributes.
-	 * 
-	 * @param element DOM element to scan
-	 * @return a list of strings with element attributes
-	 */
-	List<String> elementAttributes(BaseElement element) {
-		// checks if arguments is consistent
-		// if not, uses a null element for array string
-		ArrayString array = element != null ? NativeJsWindowHelper.elementAttributes(element) : null;
-		return ArrayListHelper.unmodifiableList(array);
 	}
 
 }
