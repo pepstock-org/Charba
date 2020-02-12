@@ -104,8 +104,7 @@ public final class Pattern extends CanvasObject {
 
 	/**
 	 * Creates the object using an already created canvas pattern.<br>
-	 * The dimension of canvas pattern image will be the default {@link TilesFactoryDefaults#DEFAULT_SIZE}. This is mainly used
-	 * by tiles.
+	 * The dimension of canvas pattern image will be the default {@link TilesFactoryDefaults#DEFAULT_SIZE}. This is mainly used by tiles.
 	 * 
 	 * @param canvasPattern canvas pattern instance
 	 */
@@ -214,8 +213,7 @@ public final class Pattern extends CanvasObject {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public Pattern create(NativeObject nativeObject) {

@@ -199,11 +199,9 @@ public final class TilesFactoryDefaults {
 	}
 
 	/**
-	 * Returns the lineCap, to determine the shape used to draw the end points of lines. If <code>null</code>, returns the
-	 * default one.
+	 * Returns the lineCap, to determine the shape used to draw the end points of lines. If <code>null</code>, returns the default one.
 	 * 
-	 * @return lineCap the lineCap to determine the shape used to draw the end points of lines. If <code>null</code>, returns
-	 *         the default one
+	 * @return lineCap the lineCap to determine the shape used to draw the end points of lines. If <code>null</code>, returns the default one
 	 */
 	public CapStyle getLineCap() {
 		return lineCap;
@@ -219,11 +217,9 @@ public final class TilesFactoryDefaults {
 	}
 
 	/**
-	 * Returns the lineJoin, to determine the shape used to join two line segments where they meet. If <code>null</code>,
-	 * returns the default one.
+	 * Returns the lineJoin, to determine the shape used to join two line segments where they meet. If <code>null</code>, returns the default one.
 	 * 
-	 * @return lineJoin the lineJoin to determine the shape used to join two line segments where they meet. If
-	 *         <code>null</code>, returns the default one
+	 * @return lineJoin the lineJoin to determine the shape used to join two line segments where they meet. If <code>null</code>, returns the default one
 	 */
 	public JoinStyle getLineJoin() {
 		return lineJoin;

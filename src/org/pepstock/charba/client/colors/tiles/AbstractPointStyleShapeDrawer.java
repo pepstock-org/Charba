@@ -28,8 +28,7 @@ import org.pepstock.charba.client.items.LegendItem;
  * Implements a shape drawer in order to use {@link PointStyle} as shape for tiles.<br>
  * Extends the usage of shape drawer for draw point styles for {@link HtmlLegend} plugin.<br>
  * Implements the drawing of point styles using CHART.JS starting point.<br>
- * See <a href="https://github.com/chartjs/Chart.js/blob/master/src/helpers/helpers.canvas.js">here</a>, at method
- * <code>drawPoint</code>.
+ * See <a href="https://github.com/chartjs/Chart.js/blob/master/src/helpers/helpers.canvas.js">here</a>, at method <code>drawPoint</code>.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -49,8 +48,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
 	protected final void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {

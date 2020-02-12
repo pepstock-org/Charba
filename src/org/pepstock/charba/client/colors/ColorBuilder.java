@@ -395,8 +395,7 @@ public final class ColorBuilder {
 
 	/**
 	 * Convert HSL(A) values to a RGB(A) Color.<br>
-	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace
-	 * conversions, RGB-HSL</a>.
+	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>.
 	 *
 	 * @param hue hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue.
 	 * @param saturation saturation is a percentage value; 0% means a shade of gray and 100% is the full color.

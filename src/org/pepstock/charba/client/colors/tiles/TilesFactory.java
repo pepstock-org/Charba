@@ -31,8 +31,7 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory
- * defaults.
+ * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory defaults.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -96,8 +95,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, shape color and
-	 * size.
+	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a tile as canvas pattern
@@ -107,8 +105,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -119,8 +116,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -194,8 +190,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, shape color and
-	 * size.
+	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a CHARBA pattern
@@ -205,8 +200,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -217,8 +211,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -283,8 +276,7 @@ public final class TilesFactory {
 	// -----------------------------------------
 
 	/**
-	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @return a CHARBA pattern
@@ -294,8 +286,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
-	 * color and size.
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -306,8 +297,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
-	 * color and size.
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -318,8 +308,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
-	 * value.
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default value.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -331,8 +320,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
-	 * value.
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default value.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -455,8 +443,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from
-	 * {@link HtmlLegend} plugin.
+	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from {@link HtmlLegend} plugin.
 	 * 
 	 * @param htmlLegendItem the legend item instance to create the tile
 	 */

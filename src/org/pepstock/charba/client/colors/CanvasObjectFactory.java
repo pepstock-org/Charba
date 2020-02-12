@@ -25,10 +25,8 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
-
 /**
- * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or
- * pattern.<br>
+ * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
  * A Charba gradient or pattern describes how a GWT canvas gradient or pattern must be created.
  * 
  * @author Andrea "Stock" Stocchero
@@ -56,8 +54,7 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a GWT canvas pattern java script object using a Charba pattern and a chart instance which must provide a canvas
-	 * instance and its context.
+	 * Creates a GWT canvas pattern java script object using a Charba pattern and a chart instance which must provide a canvas instance and its context.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param pattern pattern instance created at configuration level
@@ -129,8 +126,7 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a GWT canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas
-	 * instance and its context.
+	 * Creates a GWT canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas instance and its context.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
@@ -189,8 +185,7 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a linear gradient, an image consisting of a progressive transition between two or more colors along a straight
-	 * line.
+	 * Creates a linear gradient, an image consisting of a progressive transition between two or more colors along a straight line.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
@@ -286,8 +281,7 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a radial gradient, an image consisting of a progressive transition between two or more colors that radiate from
-	 * an origin. Its shape may be a circle or an ellipse.
+	 * Creates a radial gradient, an image consisting of a progressive transition between two or more colors that radiate from an origin. Its shape may be a circle or an ellipse.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
