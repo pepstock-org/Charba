@@ -171,7 +171,7 @@ public class BaseHtmlElement extends BaseElement {
 			// removes the top scrolling
 			top -= currentElement.getScrollTop();
 			// gets the parent of current element
-			currentElement = (BaseHtmlElement) currentElement.getParentHtmlElement();
+			currentElement = currentElement.getParentHtmlElement();
 		}
 		// starts scanning from this element again
 		currentElement = this;
@@ -208,7 +208,7 @@ public class BaseHtmlElement extends BaseElement {
 			// removes the left scrolling
 			left -= currentElement.getScrollLeft();
 			// gets the parent of current element
-			currentElement = (BaseHtmlElement) currentElement.getParentHtmlElement();
+			currentElement = currentElement.getParentHtmlElement();
 		}
 		// starts scanning from this element again
 		currentElement = this;
