@@ -41,15 +41,15 @@ public enum NodeType
 	UNKNOWN(Integer.MIN_VALUE);
 
 	// represents the node type
-	private final int nodeType;
+	private final int type;
 
 	/**
 	 * Creates a type of node by its integer representation.
 	 * 
-	 * @param nodeType integer is representing the type of the node
+	 * @param type integer is representing the type of the node
 	 */
-	private NodeType(int nodeType) {
-		this.nodeType = nodeType;
+	private NodeType(int type) {
+		this.type = type;
 	}
 
 	/**
@@ -57,8 +57,8 @@ public enum NodeType
 	 * 
 	 * @return the type integer representation
 	 */
-	public int getNodeType() {
-		return nodeType;
+	public int getType() {
+		return type;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public enum NodeType
 		// scans all node types
 		for (NodeType type : values()) {
 			// checks if argument is equals to node type integer representation
-			if (type.getNodeType() == nodeType) {
+			if (type.getType() == nodeType) {
 				// returns type
 				return type;
 			}
