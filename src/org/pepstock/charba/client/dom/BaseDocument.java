@@ -49,7 +49,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the number of children of this parent node which are elements
 	 */
 	@JsProperty
-	public native final double getChildElementCount();
+	public final native double getChildElementCount();
 
 	/**
 	 * Returns the element that is a direct child of the document.<br>
@@ -58,7 +58,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the element that is a direct child of the document
 	 */
 	@JsProperty
-	public native final BaseElement getDocumentElement();
+	public final native BaseElement getDocumentElement();
 
 	/**
 	 * Returns the first node which is both a child of this parent node and is also an element, or <code>null</code> if there is
@@ -67,7 +67,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the first node which is both a child of this parent node and is also an element
 	 */
 	@JsProperty
-	public native final BaseElement getFirstElementChild();
+	public final native BaseElement getFirstElementChild();
 
 	/**
 	 * Returns the &lt;head&gt; element of the current document.
@@ -75,7 +75,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the &lt;head&gt; element of the current document
 	 */
 	@JsProperty
-	public native final Head getHead();
+	public final native Head getHead();
 
 	/**
 	 * Returns the last node which is both a child of this parent node and is an element, or <code>null</code> if there is none.
@@ -83,7 +83,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the last node which is both a child of this parent node and is an element
 	 */
 	@JsProperty
-	public native final BaseElement getLastElementChild();
+	public final native BaseElement getLastElementChild();
 
 	/**
 	 * Returns a reference to the element that scrolls the document.
@@ -91,7 +91,7 @@ public class BaseDocument extends BaseNode {
 	 * @return a reference to the element that scrolls the document
 	 */
 	@JsProperty
-	public native final BaseElement getScrollingElement();
+	public final native BaseElement getScrollingElement();
 
 	/**
 	 * Creates the HTML element specified by tag name.
@@ -101,7 +101,7 @@ public class BaseDocument extends BaseNode {
 	 * @return the HTML element specified by tag name
 	 */
 	@JsMethod
-	public native final <T extends BaseHtmlElement> T createElement(String tagName);
+	public final native <T extends BaseHtmlElement> T createElement(String tagName);
 
 	/**
 	 * Creates a new text node which can be used to escape HTML characters.
@@ -110,7 +110,7 @@ public class BaseDocument extends BaseNode {
 	 * @return a new text node which can be used to escape HTML characters
 	 */
 	@JsMethod
-	public native final TextNode createTextNode(String data);
+	public final native TextNode createTextNode(String data);
 
 	/**
 	 * Returns an element object representing the element whose id property matches the specified string.
@@ -120,7 +120,7 @@ public class BaseDocument extends BaseNode {
 	 * @return an element object representing the element whose id property matches the specified string
 	 */
 	@JsMethod
-	public native final BaseElement getElementById(String id);
+	public final native BaseElement getElementById(String id);
 
 	/**
 	 * Returns an list of elements with the given tag name.<br>
@@ -130,6 +130,6 @@ public class BaseDocument extends BaseNode {
 	 * @return an list of elements with the given tag name
 	 */
 	@JsMethod
-	public native final NodeList<BaseElement> getElementsByTagName(String tagName);
+	public final native NodeList<BaseElement> getElementsByTagName(String tagName);
 
 }

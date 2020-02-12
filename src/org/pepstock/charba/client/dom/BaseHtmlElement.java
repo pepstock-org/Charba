@@ -46,7 +46,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return the "rendered" text content of a node and its descendants
 	 */
 	@JsProperty
-	public native final String getInnerText();
+	public final native String getInnerText();
 
 	/**
 	 * Sets the "rendered" text content of a node and its descendants.<br>
@@ -56,7 +56,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @param innerText the "rendered" text content of a node and its descendants
 	 */
 	@JsProperty
-	public native final void setInnerText(String innerText);
+	public final native void setInnerText(String innerText);
 
 	/**
 	 * Returns a number containing the height of an element, relative to the layout.
@@ -64,7 +64,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a number containing the height of an element, relative to the layout
 	 */
 	@JsProperty
-	public native final int getOffsetHeight();
+	public final native int getOffsetHeight();
 
 	/**
 	 * Returns a number, the distance from this element's left border to its offsetParent's left border.
@@ -72,7 +72,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a number, the distance from this element's left border to its offsetParent's left border
 	 */
 	@JsProperty
-	public native final int getOffsetLeft();
+	public final native int getOffsetLeft();
 
 	/**
 	 * Returns a element that is the element from which all offset calculations are currently computed.
@@ -80,7 +80,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a element that is the element from which all offset calculations are currently computed
 	 */
 	@JsProperty
-	public native final BaseElement getOffsetParent();
+	public final native BaseElement getOffsetParent();
 
 	/**
 	 * Returns a number, the distance from this element's top border to its offsetParent's top border.
@@ -88,7 +88,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a number, the distance from this element's top border to its offsetParent's top border
 	 */
 	@JsProperty
-	public native final int getOffsetTop();
+	public final native int getOffsetTop();
 
 	/**
 	 * Returns a number containing the width of an element, relative to the layout.
@@ -96,7 +96,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a number containing the width of an element, relative to the layout
 	 */
 	@JsProperty
-	public native final int getOffsetWidth();
+	public final native int getOffsetWidth();
 
 	/**
 	 * Returns an object representing the declarations of an element's style attributes.
@@ -104,7 +104,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return an object representing the declarations of an element's style attributes
 	 */
 	@JsProperty
-	public native final BaseStyleProperties getStyle();
+	public final native BaseStyleProperties getStyle();
 
 	/**
 	 * Returns a number representing the position of the element in the tabbing order.
@@ -112,7 +112,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @return a number representing the position of the element in the tabbing order
 	 */
 	@JsProperty
-	public native final int getTabIndex();
+	public final native int getTabIndex();
 
 	/**
 	 * Sets a number representing the position of the element in the tabbing order.
@@ -120,7 +120,7 @@ public class BaseHtmlElement extends BaseElement {
 	 * @param tabIndex a number representing the position of the element in the tabbing order
 	 */
 	@JsProperty
-	public native final void setTabIndex(int tabIndex);
+	public final native void setTabIndex(int tabIndex);
 
 	/**
 	 * Returns an HTML element that is the parent of this element.<br>

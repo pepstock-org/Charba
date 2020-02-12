@@ -44,7 +44,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the number of children of this element which are elements
 	 */
 	@JsProperty
-	public native final int getChildElementCount();
+	public final native int getChildElementCount();
 
 	/**
 	 * Returns a number representing the inner height of the element.
@@ -52,7 +52,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the inner height of the element
 	 */
 	@JsProperty
-	public native final int getClientHeight();
+	public final native int getClientHeight();
 
 	/**
 	 * Returns a number representing the width of the left border of the element.
@@ -60,7 +60,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the width of the left border of the element
 	 */
 	@JsProperty
-	public native final int getClientLeft();
+	public final native int getClientLeft();
 
 	/**
 	 * Returns a number representing the width of the top border of the element.
@@ -68,7 +68,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the width of the top border of the element
 	 */
 	@JsProperty
-	public native final int getClientTop();
+	public final native int getClientTop();
 
 	/**
 	 * Returns a number representing the inner width of the element.
@@ -76,7 +76,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the inner width of the element
 	 */
 	@JsProperty
-	public native final int getClientWidth();
+	public final native int getClientWidth();
 
 	/**
 	 * Returns the first node which is both a child of this element and is also an element, or <code>null</code> if there is
@@ -86,7 +86,7 @@ public abstract class BaseElement extends BaseNode {
 	 *         none
 	 */
 	@JsProperty
-	public native final BaseElement getFirstElementChild();
+	public final native BaseElement getFirstElementChild();
 
 	/**
 	 * Returns the unique id of the element.
@@ -94,7 +94,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the unique id of the element
 	 */
 	@JsProperty
-	public native final String getId();
+	public final native String getId();
 
 	/**
 	 * Sets the unique id of the element.
@@ -102,7 +102,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @param id the unique id of the element
 	 */
 	@JsProperty
-	public native final void setId(String id);
+	public final native void setId(String id);
 
 	/**
 	 * Returns the markup of the element's content.
@@ -110,7 +110,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the markup of the element's content
 	 */
 	@JsProperty
-	public native final String getInnerHTML();
+	public final native String getInnerHTML();
 
 	/**
 	 * Sets the markup of the element's content..
@@ -118,7 +118,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @param innerHTML the markup of the element's content
 	 */
 	@JsProperty
-	public native final void setInnerHTML(String innerHTML);
+	public final native void setInnerHTML(String innerHTML);
 
 	/**
 	 * Returns the last node which is both a child of this element and is an element, or <code>null</code> if there is none.
@@ -126,7 +126,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the last node which is both a child of this element and is an element, or <code>null</code> if there is none
 	 */
 	@JsProperty
-	public native final BaseElement getLastElementChild();
+	public final native BaseElement getLastElementChild();
 
 	/**
 	 * Returns the element immediately following the given one in the tree, or <code>null</code> if there's no sibling node.
@@ -134,7 +134,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the element immediately following the given one in the tree, or <code>null</code> if there's no sibling node
 	 */
 	@JsProperty
-	public native final BaseElement getNextElementSibling();
+	public final native BaseElement getNextElementSibling();
 
 	/**
 	 * Returns the element immediately preceding the given one in the tree, or <code>null</code> if there is no sibling element.
@@ -142,7 +142,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the element immediately preceding the given one in the tree, or <code>null</code> if there is no sibling element
 	 */
 	@JsProperty
-	public native final BaseElement getPreviousElementSibling();
+	public final native BaseElement getPreviousElementSibling();
 
 	/**
 	 * Returns a number representing the scroll view height of an element.
@@ -150,7 +150,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the scroll view height of an element
 	 */
 	@JsProperty
-	public native final int getScrollHeight();
+	public final native int getScrollHeight();
 
 	/**
 	 * Returns a number representing the left scroll offset of the element.
@@ -158,7 +158,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the left scroll offset of the element
 	 */
 	@JsProperty
-	public native final double getScrollLeft();
+	public final native double getScrollLeft();
 
 	/**
 	 * Returns a number representing number of pixels the top of the document is scrolled vertically.
@@ -166,7 +166,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing number of pixels the top of the document is scrolled vertically
 	 */
 	@JsProperty
-	public native final double getScrollTop();
+	public final native double getScrollTop();
 
 	/**
 	 * Returns a number representing the scroll view width of the element.
@@ -174,7 +174,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a number representing the scroll view width of the element
 	 */
 	@JsProperty
-	public native final int getScrollWidth();
+	public final native int getScrollWidth();
 
 	/**
 	 * Returns the name of the tag for the given element.
@@ -182,7 +182,7 @@ public abstract class BaseElement extends BaseNode {
 	 * @return the name of the tag for the given element
 	 */
 	@JsProperty
-	public native final String getTagName();
+	public final native String getTagName();
 
 	/**
 	 * Returns a collection of all attribute nodes registered to the specified node.
@@ -199,13 +199,13 @@ public abstract class BaseElement extends BaseNode {
 	 * @return a list containing all descendant elements
 	 */
 	@JsMethod
-	public native final NodeList<BaseElement> getElementsByTagName(String tagname);
+	public final native NodeList<BaseElement> getElementsByTagName(String tagname);
 
 	/**
 	 * Removes the element from the children list of its parent.
 	 */
 	@JsMethod
-	public native final void remove();
+	public final native void remove();
 
 	/**
 	 * Returns a boolean indicating whether the current element has any attributes or not.
@@ -213,6 +213,6 @@ public abstract class BaseElement extends BaseNode {
 	 * @return <code>true</code> whether the current element has any attributes
 	 */
 	@JsMethod
-	public native final boolean hasAttributes();
+	public final native boolean hasAttributes();
 
 }
