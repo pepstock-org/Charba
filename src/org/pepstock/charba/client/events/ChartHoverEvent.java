@@ -38,7 +38,6 @@ public final class ChartHoverEvent extends AbstractChartTypedEvent {
 	 * Creates the event with a list of items with dataset metadata related to the hover
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
 	 * @param items a list of items with dataset metadata related to the hover
 	 */
