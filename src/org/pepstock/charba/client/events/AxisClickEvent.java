@@ -43,11 +43,12 @@ public final class AxisClickEvent extends AbstractEvent {
 	 * @param axis axis configuration instance
 	 */
 	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
-		super(nativeEvent);
-		// checks if argument is consistent
+		super(nativeEvent, TYPE);
+		// checks if item is consistent
 		if (item == null) {
 			throw new IllegalArgumentException("Scale item argument is null");
 		}
+		// stores arguments
 		this.item = item;
 		this.axis = axis;
 	}
@@ -62,8 +63,7 @@ public final class AxisClickEvent extends AbstractEvent {
 	}
 
 	/**
-	 * Returns the axis configuration instance if exists. The chart can be implemented without any axis (using defaults) and
-	 * therefore can return <code>null</code>.
+	 * Returns the axis configuration instance if exists. The chart can be implemented without any axis (using defaults) and therefore can return <code>null</code>.
 	 * 
 	 * @return the axis configuration instance or <code>null</code> if no axis configuration has been provided to chart
 	 */
@@ -74,24 +74,17 @@ public final class AxisClickEvent extends AbstractEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof AxisClickEventHandler) {
-			AxisClickEventHandler myHandler = (AxisClickEventHandler)handler;
+			// casts handler
+			AxisClickEventHandler myHandler = (AxisClickEventHandler) handler;
+			// invokes
 			myHandler.onClick(this);
-		}		
+		}
 	}
 
 }

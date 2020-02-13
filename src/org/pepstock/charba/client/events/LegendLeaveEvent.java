@@ -25,14 +25,12 @@ import org.pepstock.charba.client.items.LegendItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLeaveEvent extends AbstractChartEvent implements IsLegendEvent {
+public final class LegendLeaveEvent extends AbstractLegendEvent {
 
 	/**
 	 * Event type
 	 */
 	public static final EventType TYPE = EventType.create(LegendLeaveEvent.class);
-	// legend item selected by hovering
-	private final LegendItem item;
 
 	/**
 	 * Creates the event with legend item related to the leaving.
@@ -42,44 +40,23 @@ public final class LegendLeaveEvent extends AbstractChartEvent implements IsLege
 	 * @param item legend item related to the leaving
 	 */
 	public LegendLeaveEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
-		super(nativeEvent, functionContext, LegendEventProperty.ON_LEAVE);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Legend item argument is null");
-		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns the legend item related to the leaving.
-	 * 
-	 * @return the legend item related to the leaving
-	 */
-	public LegendItem getItem() {
-		return item;
+		super(nativeEvent, TYPE, functionContext, LegendEventProperty.ON_LEAVE, item);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof LegendLeaveEventHandler) {
-			LegendLeaveEventHandler myHandler = (LegendLeaveEventHandler)handler;
+			// casts handler
+			LegendLeaveEventHandler myHandler = (LegendLeaveEventHandler) handler;
+			// invokes
 			myHandler.onLeave(this);
 		}
 	}
-	
+
 }

@@ -23,15 +23,12 @@ import org.pepstock.charba.client.items.AnimationItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationProgressEvent extends AbstractEvent {
+public final class AnimationProgressEvent extends AbstractAnimationEvent {
 
 	/**
 	 * Event type
 	 */
 	public static final EventType TYPE = EventType.create(AnimationProgressEvent.class);
-
-	// animation item with animation info from chart
-	private final AnimationItem item;
 
 	/**
 	 * Creates the event with the animation info from chart.
@@ -40,42 +37,21 @@ public final class AnimationProgressEvent extends AbstractEvent {
 	 * @param item item with animation info from chart
 	 */
 	public AnimationProgressEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
-		super(nativeEvent);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Animation item argument is null");
-		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns item with animation info from chart
-	 * 
-	 * @return the item with animation info from chart
-	 */
-	public AnimationItem getItem() {
-		return item;
+		super(nativeEvent, TYPE, item);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof AnimationProgressEventHandler) {
+			// casts handler
 			AnimationProgressEventHandler myHandler = (AnimationProgressEventHandler) handler;
+			// invokes
 			myHandler.onProgress(this);
 		}
 	}

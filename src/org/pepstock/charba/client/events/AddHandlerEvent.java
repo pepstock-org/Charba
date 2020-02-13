@@ -54,8 +54,11 @@ public final class AddHandlerEvent extends AbstractHandlerEvent {
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof AddHandlerEventHandler) {
+			// casts handler
 			AddHandlerEventHandler myHandler = (AddHandlerEventHandler) handler;
+			// invokes
 			myHandler.onAdd(this);
 		}
 	}

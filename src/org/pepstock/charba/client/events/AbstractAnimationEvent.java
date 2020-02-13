@@ -19,41 +19,39 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 
 /**
- * Event which is fired when the animation of the chart is completed.
+ * Abstract event which is fired when the chart is animating.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationCompleteEvent extends AbstractAnimationEvent {
+abstract class AbstractAnimationEvent extends AbstractEvent {
 
-	/**
-	 * Event type
-	 */
-	public static final EventType TYPE = EventType.create(AnimationCompleteEvent.class);
+	// animation item with animation info from chart
+	private final AnimationItem item;
 
 	/**
 	 * Creates the event with the animation info from chart.
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationCompleteEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
-		super(nativeEvent, TYPE, item);
+	AbstractAnimationEvent(BaseNativeEvent nativeEvent, EventType type, AnimationItem item) {
+		super(nativeEvent, type);
+		// checks if item is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Animation item argument is null");
+		}
+		// stores argument
+		this.item = item;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns item with animation info from chart
 	 * 
-	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 * @return the item with animation info from chart
 	 */
-	@Override
-	protected void dispatch(EventHandler handler) {
-		// checks if handler is a correct instance
-		if (handler instanceof AnimationCompleteEventHandler) {
-			// casts handler
-			AnimationCompleteEventHandler myHandler = (AnimationCompleteEventHandler) handler;
-			// invokes
-			myHandler.onComplete(this);
-		}
+	public final AnimationItem getItem() {
+		return item;
 	}
 
 }

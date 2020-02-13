@@ -43,7 +43,7 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * @param item dataset metadata item related to the click
 	 */
 	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, DatasetItem item) {
-		super(nativeEvent);
+		super(nativeEvent, TYPE);
 		this.item = item;
 		// sets null because already present in native event as source
 		this.chart = null;
@@ -57,7 +57,7 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * @param item dataset metadata item related to the click
 	 */
 	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, IsChart chart, DatasetItem item) {
-		super(nativeEvent);
+		super(nativeEvent, TYPE);
 		this.item = item;
 		this.chart = chart;
 	}
@@ -92,22 +92,15 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof DatasetSelectionEventHandler) {
-			DatasetSelectionEventHandler myHandler = (DatasetSelectionEventHandler)handler;
+			// casts handler
+			DatasetSelectionEventHandler myHandler = (DatasetSelectionEventHandler) handler;
+			// invokes
 			myHandler.onSelect(this);
 		}
 	}

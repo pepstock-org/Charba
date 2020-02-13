@@ -25,14 +25,12 @@ import org.pepstock.charba.client.items.LegendItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendHoverEvent extends AbstractChartEvent implements IsLegendEvent {
+public final class LegendHoverEvent extends AbstractLegendEvent {
 
 	/**
 	 * Event type
 	 */
 	public static final EventType TYPE = EventType.create(LegendHoverEvent.class);
-	// legend item selected by hovering
-	private final LegendItem item;
 
 	/**
 	 * Creates the event with legend item related to the hover
@@ -42,44 +40,23 @@ public final class LegendHoverEvent extends AbstractChartEvent implements IsLege
 	 * @param item legend item related to the hover
 	 */
 	public LegendHoverEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
-		super(nativeEvent, functionContext, LegendEventProperty.ON_HOVER);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Legend item argument is null");
-		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns the legend item related to the hover
-	 * 
-	 * @return the legend item related to the hover
-	 */
-	public LegendItem getItem() {
-		return item;
+		super(nativeEvent, TYPE, functionContext, LegendEventProperty.ON_HOVER, item);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof LegendHoverEventHandler) {
-			LegendHoverEventHandler myHandler = (LegendHoverEventHandler)handler;
+			// casts handler
+			LegendHoverEventHandler myHandler = (LegendHoverEventHandler) handler;
+			// invokes
 			myHandler.onHover(this);
 		}
-	}	
-	
+	}
+
 }

@@ -27,62 +27,39 @@ import org.pepstock.charba.client.items.DatasetItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartHoverEvent extends AbstractChartEvent implements IsChartEvent {
+public final class ChartHoverEvent extends AbstractChartTypedEvent {
 
 	/**
 	 * Event type
 	 */
 	public static final EventType TYPE = EventType.create(ChartHoverEvent.class);
 
-	// a list of items with dataset metadata related to the hover
-	private final List<DatasetItem> items;
-
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the hover
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
 	 * @param items a list of items with dataset metadata related to the hover
 	 */
 	public ChartHoverEvent(BaseNativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
-		super(nativeEvent, functionContext, ChartEventProperty.ON_HOVER);
-		// checks if argument is consistent
-		if (items == null) {
-			throw new IllegalArgumentException("Dataset items list argument is null");
-		}
-		this.items = items;
-	}
-
-	/**
-	 * Returns a list of items with dataset metadata related to the hover
-	 * 
-	 * @return a list of items with dataset metadata related to the hover
-	 */
-	public List<DatasetItem> getItems() {
-		return items;
+		super(nativeEvent, TYPE, functionContext, ChartEventProperty.ON_HOVER, items);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof ChartHoverEventHandler) {
-			ChartHoverEventHandler myHandler = (ChartHoverEventHandler)handler;
+			// casts handler
+			ChartHoverEventHandler myHandler = (ChartHoverEventHandler) handler;
+			// invokes
 			myHandler.onHover(this);
-		}		
+		}
 	}
 
 }

@@ -35,11 +35,12 @@ abstract class AbstractChartEvent extends AbstractEvent {
 	 * Creates the event with legend item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
 	 * @param key options key where default function is stored
 	 */
-	protected AbstractChartEvent(BaseNativeEvent nativeEvent, Chart functionContext, Key key) {
-		super(nativeEvent);
+	protected AbstractChartEvent(BaseNativeEvent nativeEvent, EventType type, Chart functionContext, Key key) {
+		super(nativeEvent, type);
 		// checks if arguments are consistent
 		if (functionContext == null) {
 			throw new IllegalArgumentException("Context argument is null");

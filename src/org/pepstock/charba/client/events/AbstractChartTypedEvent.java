@@ -18,47 +18,46 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.DatasetItem;
 
 /**
- * Event which is fired when the user clicks on the chart.
+ * Abstract event which is fired when the user is acting on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartClickEvent extends AbstractChartTypedEvent {
+abstract class AbstractChartTypedEvent extends AbstractChartEvent implements IsChartEvent {
 
-	/**
-	 * Event type
-	 */
-	public static final EventType TYPE = EventType.create(ChartClickEvent.class);
+	// a list of items with dataset metadata related to the click
+	private final List<DatasetItem> items;
 
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
+	 * @param key options key where default function is stored
 	 * @param items a list of items with dataset metadata related to the click
 	 */
-	public ChartClickEvent(BaseNativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
-		super(nativeEvent, TYPE, functionContext, ChartEventProperty.ON_CLICK, items);
+	AbstractChartTypedEvent(BaseNativeEvent nativeEvent, EventType type, Chart functionContext, Key key, List<DatasetItem> items) {
+		super(nativeEvent, type, functionContext, key);
+		// checks if argument is consistent
+		if (items == null) {
+			throw new IllegalArgumentException("Dataset items list argument is null");
+		}
+		// stores argument
+		this.items = items;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns a list of items with dataset metadata related to the click
 	 * 
-	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 * @return a list of items with dataset metadata related to the click
 	 */
-	@Override
-	protected void dispatch(EventHandler handler) {
-		// checks if handler is a correct instance
-		if (handler instanceof ChartClickEventHandler) {
-			// casts handler
-			ChartClickEventHandler myHandler = (ChartClickEventHandler) handler;
-			// invokes
-			myHandler.onClick(this);
-		}
+	public final List<DatasetItem> getItems() {
+		return items;
 	}
 
 }

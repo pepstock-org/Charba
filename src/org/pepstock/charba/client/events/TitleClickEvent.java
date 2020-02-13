@@ -39,7 +39,7 @@ public final class TitleClickEvent extends AbstractEvent {
 	 * @param item title related to the click
 	 */
 	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
-		super(nativeEvent);
+		super(nativeEvent, TYPE);
 		// checks if argument is consistent
 		if (item == null) {
 			throw new IllegalArgumentException("Title item argument is null");
@@ -59,22 +59,15 @@ public final class TitleClickEvent extends AbstractEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof TitleClickEventHandler) {
-			TitleClickEventHandler myHandler = (TitleClickEventHandler)handler;
+			// casts handler
+			TitleClickEventHandler myHandler = (TitleClickEventHandler) handler;
+			// invokes
 			myHandler.onClick(this);
 		}
 	}

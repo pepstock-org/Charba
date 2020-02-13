@@ -16,46 +16,46 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
 
 /**
- * Event which is fired when the user clicks on the legend of the chart.
+ * Abstract event which is fired when the user is acting on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendClickEvent extends AbstractLegendEvent {
+abstract class AbstractLegendEvent extends AbstractChartEvent implements IsLegendEvent {
 
-	/**
-	 * Event type
-	 */
-	public static final EventType TYPE = EventType.create(LegendClickEvent.class);
+	// legend item selected by clicking
+	private final LegendItem item;
 
 	/**
 	 * Creates the event with legend item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
+	 * @param key options key where default function is stored
 	 * @param item legend item related to the click
 	 */
-	public LegendClickEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
-		super(nativeEvent, TYPE, functionContext, LegendEventProperty.ON_CLICK, item);
+	AbstractLegendEvent(BaseNativeEvent nativeEvent, EventType type, Chart functionContext, Key key, LegendItem item) {
+		super(nativeEvent, type, functionContext, key);
+		// checks if item is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Legend item argument is null");
+		}
+		// stores the item
+		this.item = item;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the legend item related to the click
 	 * 
-	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 * @return the legend item related to the click
 	 */
-	@Override
-	protected void dispatch(EventHandler handler) {
-		// checks if handler is a correct instance
-		if (handler instanceof LegendClickEventHandler) {
-			// casts handler
-			LegendClickEventHandler myHandler = (LegendClickEventHandler) handler;
-			// invokes
-			myHandler.onClick(this);
-		}
+	public final LegendItem getItem() {
+		return item;
 	}
+	
 }

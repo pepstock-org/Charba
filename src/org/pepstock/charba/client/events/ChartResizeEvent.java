@@ -42,7 +42,7 @@ public final class ChartResizeEvent extends AbstractChartEvent {
 	 * @param size item with the new size of the chart
 	 */
 	public ChartResizeEvent(BaseNativeEvent nativeEvent, Chart functionContext, SizeItem size) {
-		super(nativeEvent, functionContext, ChartEventProperty.ON_RESIZE);
+		super(nativeEvent, TYPE, functionContext, ChartEventProperty.ON_RESIZE);
 		// checks if argument is consistent
 		if (size == null) {
 			throw new IllegalArgumentException("Size argument is null");
@@ -62,24 +62,17 @@ public final class ChartResizeEvent extends AbstractChartEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof ChartResizeEventHandler) {
-			ChartResizeEventHandler myHandler = (ChartResizeEventHandler)handler;
+			// casts handler
+			ChartResizeEventHandler myHandler = (ChartResizeEventHandler) handler;
+			// invokes
 			myHandler.onResize(this);
 		}
 	}
-	
+
 }

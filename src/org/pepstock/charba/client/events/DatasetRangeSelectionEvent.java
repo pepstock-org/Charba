@@ -57,7 +57,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	 * @param to ending index of selected dataset
 	 */
 	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent, int from, int to) {
-		super(nativeEvent);
+		super(nativeEvent, TYPE);
 		this.from = from;
 		this.to = to;
 	}
@@ -85,24 +85,17 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
-	 */
-	@Override
-	public EventType getType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof DatasetRangeSelectionEventHandler) {
-			DatasetRangeSelectionEventHandler myHandler = (DatasetRangeSelectionEventHandler)handler;
+			// casts handler
+			DatasetRangeSelectionEventHandler myHandler = (DatasetRangeSelectionEventHandler) handler;
+			// invokes
 			myHandler.onSelect(this);
 		}
 	}
-	
+
 }

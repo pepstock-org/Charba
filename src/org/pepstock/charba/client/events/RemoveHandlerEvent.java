@@ -40,7 +40,7 @@ public final class RemoveHandlerEvent extends AbstractHandlerEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#getType()
 	 */
 	@Override
 	public EventType getType() {
@@ -50,12 +50,15 @@ public final class RemoveHandlerEvent extends AbstractHandlerEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
 	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
 		if (handler instanceof RemoveHandlerEventHandler) {
-			RemoveHandlerEventHandler myHandler = (RemoveHandlerEventHandler)handler;
+			// casts handler
+			RemoveHandlerEventHandler myHandler = (RemoveHandlerEventHandler) handler;
+			// invokes
 			myHandler.onRemove(this);
 		}
 	}
