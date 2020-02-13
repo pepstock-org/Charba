@@ -13,11 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.gwt;
+package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.resources.ResourceNames;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
@@ -78,14 +76,14 @@ public final class EntryPointStarter {
 		// sets deferred resources
 		ResourcesType.setClientBundle(resources);
 		// checks the the date adapter bundle is consistent
-		if (resources.getClientBundle() == null) {
+		if (resources.getDeferredAdapterResources() == null) {
 			// if not, exception
 			throw new IllegalArgumentException("Client bundle is null");
 		}
 		// checks if is already injected
 		if (!ResourcesType.getClientBundle().getModule().isInjected()) {
 			// starts loading the CHART.JS
-			loadChartJS(resources.getClientBundle(), runnable);
+			loadChartJS(resources, runnable);
 			// notify for injection
 			resources.injected();
 		} else {
@@ -102,11 +100,11 @@ public final class EntryPointStarter {
 	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadChartJS(DeferredDateAdapterResources resources, final Runnable runnable) {
+	private static void loadChartJS(AbstractDeferredResources resources, final Runnable runnable) {
 		try {
 			// loads CHART.JS in asynchronous
 			// using the deferred client instance
-			DeferredChartResources.INSTANCE.chartJs().getText(new ResourceCallback<TextResource>() {
+			resources.getDeferredChartResource().chartJs().getText(new ResourceCallback<TextResource>() {
 
 				/*
 				 * (non-Javadoc)
@@ -128,7 +126,7 @@ public final class EntryPointStarter {
 				@Override
 				public void onSuccess(TextResource resource) {
 					// creates an injector items
-					InjectableTextResource injectorItem = new InjectableTextResource(ResourceNames.CHART, resource);
+					InjectableTextResource injectorItem = new InjectableTextResource(ResourceName.CHART, resource);
 					// injects the CHART.JS
 					Injector.ensureInjected(injectorItem);
 					// loads date-time library
@@ -148,11 +146,11 @@ public final class EntryPointStarter {
 	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadDatetimeLibrary(DeferredDateAdapterResources resources, final Runnable runnable) {
+	private static void loadDatetimeLibrary(AbstractDeferredResources resources, final Runnable runnable) {
 		try {
 			// loads date time library in asynchronous
 			// using the deferred client instance
-			resources.datetimeLibrary().getText(new ResourceCallback<TextResource>() {
+			resources.getDeferredAdapterResources().datetimeLibrary().getText(new ResourceCallback<TextResource>() {
 
 				/*
 				 * (non-Javadoc)
@@ -174,11 +172,11 @@ public final class EntryPointStarter {
 				@Override
 				public void onSuccess(TextResource resource) {
 					// creates an injector items
-					InjectableTextResource injectorLibItem = new InjectableTextResource(ResourceNames.DATE_TIME_LIBRARY, resource);
+					InjectableTextResource injectorLibItem = new InjectableTextResource(ResourceName.DATE_TIME_LIBRARY, resource);
 					// injects the date time library
 					Injector.ensureInjected(injectorLibItem);
 					// creates an injector items
-					InjectableTextResource injectorAdapterItem = new InjectableTextResource(ResourceNames.DATE_TIME_ADAPTER, resources.datetimeAdapter());
+					InjectableTextResource injectorAdapterItem = new InjectableTextResource(ResourceName.DATE_TIME_ADAPTER, resources.getDeferredAdapterResources().datetimeAdapter());
 					// injects also the date time adapter, always sync
 					Injector.ensureInjected(injectorAdapterItem);
 					// loads date-time adapter library

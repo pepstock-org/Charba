@@ -34,7 +34,7 @@ public abstract class AbstractResources {
 	 * 
 	 * @param module module of date adapter and library.
 	 */
-	protected AbstractResources(AbstractModule module) {
+	AbstractResources(AbstractModule module) {
 		// checks if module is consistent
 		if (module == null) {
 			// if not, exception

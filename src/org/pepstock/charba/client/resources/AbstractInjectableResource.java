@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.commons.Key;
+
 /**
  * Defines an object which must inject script or CSS style objects into DOM document, at runtime.<br>
  * It must have a name and should be a unique value because it will be used to set the element (script or style) id.
@@ -22,7 +24,7 @@ package org.pepstock.charba.client.resources;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class InjectableResource {
+public abstract class AbstractInjectableResource {
 
 	// name of resources
 	private final String name;
@@ -30,23 +32,33 @@ public abstract class InjectableResource {
 	private final StringBuilder builder = new StringBuilder();
 
 	/**
+	 * Creates the object with a mandatory name as key and the content of injectable resource.
+	 * 
+	 * @param key name of object as key
+	 * @param content content of object to be injected
+	 */
+	protected AbstractInjectableResource(Key key, String... content) {
+		this(Key.checkAndGetIfValid(key).value(), content);
+	}
+	
+	/**
 	 * Creates the object with a mandatory name as string and the content of injectable resource.
 	 * 
 	 * @param name name of object as string
 	 * @param content content of object to be injected
 	 */
-	protected InjectableResource(String name, String... content) {
+	protected AbstractInjectableResource(String name, String... content) {
 		// checks if name is consistent
-		if (name == null) {
+		if (name == null || name.length() == 0) {
 			// if not exception
-			throw new IllegalArgumentException("Name is null");
+			throw new IllegalArgumentException("Name is not consistent");
 		}
-		// checks if name is consistent
+		// checks if content is consistent
 		if (content == null || content.length == 0) {
 			// if not exception
 			throw new IllegalArgumentException("Content is not consistent");
 		}
-		// stores the name
+		// stores name
 		this.name = name;
 		// scans the array
 		for (String line : content) {

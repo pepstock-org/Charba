@@ -27,6 +27,7 @@ import java.nio.charset.Charset;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +53,8 @@ import java.util.regex.Pattern;
  */
 public class InjectableResourceGenerator {
 
+	// log instance
+	private static final Logger LOGGER = Logger.getLogger("codegen");
 	// Represents the end-of-file (or stream).
 	private static final int EOF = -1;
 	// charset must be UTF-8
@@ -68,6 +71,8 @@ public class InjectableResourceGenerator {
 	private static final int CHARS_PER_ARRAY_ITEM = 1000;
 	// defines the line separator
 	private static final byte LINE_SEPARATOR = '\n';
+	// defines the comma
+	private static final String BLANK_STRING = " ";
 	// defines the comma
 	private static final String COMMA_STRING = ",";
 	// defines the dot
@@ -103,6 +108,18 @@ public class InjectableResourceGenerator {
 	// defines the pattern to apply on replace all on the java class template
 	// for java script file content
 	private static final String JAVASCRIPT_CONTENT_VARIABLE = Pattern.quote("${javaScriptContent}");
+	// defines the pattern to apply on replace all on the java class template
+	// for java script file content
+	private static final String ADDITIONAL_PACKAGES_VARIABLE = Pattern.quote("${additionalPackages}");
+	// the package where the common classes for resources are stored
+	// it will use to check if additional imports must be performed
+	private static final String RESOURCES_PACKAGE = "org.pepstock.charba.client.resources";
+	// additional import for classes not in resource package
+	private static final String ADDITIONAL_PACKAGE = "import org.pepstock.charba.client.resources.AbstractInjectableResource;";
+	// prefix of resource name enumeration, needed to know if the resource name enum must be imported
+	private static final String RESOURCE_NAME_PREFIX= "ResourceName.";
+	// additional import for classes not in resource package and they are also using the resource name enumeration
+	private static final String ADDITIONAL_RESOURCE_NAME_PACKAGE = "import org.pepstock.charba.client.resources.ResourceName;";
 
 	/**
 	 * Main program of code generator.<br>
@@ -126,6 +143,7 @@ public class InjectableResourceGenerator {
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			// the key is the java script file name
 			final String javaScriptFileName = entry.getKey().toString();
+			LOGGER.info("Started code generation code for '"+javaScriptFileName+"'");
 			// parses the value of the key
 			String[] values = entry.getValue().toString().split(COMMA_STRING);
 			// checks if the value has got the right format
@@ -155,8 +173,33 @@ public class InjectableResourceGenerator {
 				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_FILE_VARIABLE, Matcher.quoteReplacement(javaScriptFileName));
 				// replaces the java script content into template
 				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_CONTENT_VARIABLE, Matcher.quoteReplacement(builder.toString()));
+				// creates the import string 
+				StringBuilder importBuilder = new StringBuilder();
+				// checks if the imports must be added
+				if (!RESOURCES_PACKAGE.equalsIgnoreCase(packageName)) {
+					// adds injectable resource package
+					importBuilder.append(LINE_SEPARATOR_STRING).append(ADDITIONAL_PACKAGE);
+					// creates a string to import
+					// checks also if the resource name is related to enumeration
+					// in order to add also that import
+					if (resourceName.startsWith(RESOURCE_NAME_PREFIX)) {
+						// adds resource name package
+						importBuilder.append(LINE_SEPARATOR_STRING).append(ADDITIONAL_RESOURCE_NAME_PACKAGE);
+					}
+					// adds new line
+					importBuilder.append(LINE_SEPARATOR_STRING);
+				} else {
+					// adds only a blank
+					importBuilder.append(BLANK_STRING);
+				}
+				// replaces the java script content into template
+				changedTemplate = changedTemplate.replaceAll(ADDITIONAL_PACKAGES_VARIABLE, Matcher.quoteReplacement(importBuilder.toString()));
 				// writes the java class
 				writeJavaClass(packageName, className, changedTemplate);
+				LOGGER.info("Code generation for '"+javaScriptFileName+"' is completed");
+			} else {
+				// if here the source properties are wrong
+				LOGGER.warning("Property format for '"+javaScriptFileName+"' is not correct");
 			}
 		}
 	}

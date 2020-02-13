@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>chartjs-plugin-annotation.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationPluginResource extends InjectableResource {
+public final class AnnotationPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-annotation.min.js
 	private static final String[] CONTENT = {
@@ -57,7 +58,7 @@ public final class AnnotationPluginResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-plugin-annotation.min.js</code> content.
 	 */
 	AnnotationPluginResource() {
-		super(AnnotationPlugin.ID, CONTENT);
+		super(ResourceName.ANNOTATION_PLUGIN, CONTENT);
 	}
 
 }

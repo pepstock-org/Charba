@@ -48,20 +48,26 @@ public final class ResourcesType {
 			// exception
 			throw new IllegalArgumentException("Resources type argument is null");
 		}
-		// checks if the resources type is already set and is different from the argument
-		if (ResourcesType.resources != null) {
-			if (!resources.getClass().equals(ResourcesType.resources.getClass())) {
-				// exception
-				throw new IllegalArgumentException("Resources type is already set and can not be changed");
-			}
+		// checks if is extending a correct abstract resource
+		if (resources instanceof AbstractEmbeddedResources || resources instanceof AbstractDeferredResources) {
 			// checks if the resources type is already set and is different from the argument
-			if (!ResourcesType.resources.getModule().equals(resources.getModule())) {
-				// exception
-				throw new IllegalArgumentException("Resources type is already set the module '" + ResourcesType.resources.getModule().getId() + "' and can not be changed");
+			if (ResourcesType.resources != null) {
+				if (!resources.getClass().equals(ResourcesType.resources.getClass())) {
+					// exception
+					throw new IllegalArgumentException("Resources type is already set and can not be changed");
+				}
+				// checks if the resources type is already set and is different from the argument
+				if (!ResourcesType.resources.getModule().equals(resources.getModule())) {
+					// exception
+					throw new IllegalArgumentException("Resources type is already set the module '" + ResourcesType.resources.getModule().getId() + "' and can not be changed");
+				}
 			}
+			// stores the instance
+			ResourcesType.resources = resources;
+		} else {
+			// exception
+			throw new IllegalArgumentException("Resources type is not correct. Must extend AbstractEmbeddedResources or AbstractDeferredResources classes");
 		}
-		// stores the instance
-		ResourcesType.resources = resources;
 	}
 
 	/**

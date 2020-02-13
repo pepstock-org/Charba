@@ -16,33 +16,22 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Constants name to use as element id for scripts, mandatory to CHARBA to work properly.
- *  
+ * Exception created when it's able to load CHART.JS source in deferred mode.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ResourceNames {
-	
-	/**
-	 * Script element id for CHART.JS source code.
-	 */
-	public static final String CHART = "chartJs";
+public final class ResourceLoadException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Script element id for CHART.JS date time adapter.
+	 * Creates the exception by a description and the cause.
+	 * 
+	 * @param message description of exception
+	 * @param cause cause of the exception
 	 */
-	public static final String DATE_TIME_ADAPTER = "datetimeAdapter";
-
-	/**
-	 * Script element id for CHART.JS date time library.
-	 */
-	public static final String DATE_TIME_LIBRARY = "datetimeLibrary";
-
-	/**
-	 * To avoid any instantiation
-	 */
-	private ResourceNames() {
-		// do nothing
+	ResourceLoadException(String message, Throwable cause) {
+		super(message, cause);
 	}
-
 }

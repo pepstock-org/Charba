@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>charba.empty.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatefnsLibraryResource extends InjectableResource {
+public final class DatefnsLibraryResource extends AbstractInjectableResource {
 
 	// encoded javascript content of charba.empty.js
 	private static final String[] CONTENT = {
@@ -32,7 +32,7 @@ public final class DatefnsLibraryResource extends InjectableResource {
 	 * Creates the injectable resource with <code>charba.empty.js</code> content.
 	 */
 	DatefnsLibraryResource() {
-		super(ResourceNames.DATE_TIME_LIBRARY, CONTENT);
+		super(ResourceName.DATE_TIME_LIBRARY, CONTENT);
 	}
 
 }

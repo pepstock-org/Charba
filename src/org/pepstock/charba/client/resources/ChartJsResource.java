@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>chart.min.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartJsResource extends InjectableResource {
+public final class ChartJsResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chart.min.js
 	private static final String[] CONTENT = {
@@ -212,7 +212,7 @@ public final class ChartJsResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chart.min.js</code> content.
 	 */
 	ChartJsResource() {
-		super(ResourceNames.CHART, CONTENT);
+		super(ResourceName.CHART, CONTENT);
 	}
 
 }

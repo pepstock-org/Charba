@@ -33,6 +33,7 @@ import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFacto
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -63,7 +64,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	// It can not use zoom plugin id
 	// to avoid to load zoom and hammer JS if not needed
 	// it must always aligned with value into zoom plugin moduel
-	private static final String ZOOM_PLUIGIN_ID = "zoom";
+	private static final String ZOOM_PLUIGIN_ID = ResourceName.ZOOM_PLUGIN.value();
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not

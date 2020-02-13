@@ -16,10 +16,30 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Empty interface to notify a date adapter module that has been inject.
+ * Utility object in order to notify a date adapter module that has been inject.<br>
+ * This object can not be instantiated out of this package to avoid that anyone will change the module status without a real
+ * injection.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DateAdapterInjectionComplete {
+public final class DateAdapterInjectionComplete{
+	// singleton instance
+	private static final DateAdapterInjectionComplete INSTANCE = new DateAdapterInjectionComplete();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private DateAdapterInjectionComplete() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance of object.
+	 * 
+	 * @return the singleton instance of object
+	 */
+	static DateAdapterInjectionComplete get() {
+		return INSTANCE;
+	}
 }

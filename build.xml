@@ -207,7 +207,7 @@
     -->
 	<target name="compile" depends="clean, init, ivyRetrieveRuntime">
 		<mkdir dir="${classes.dir}"/>
-		<javac includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+		<javac includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="true">
 			<src path="${src.dir}"/>
 			<src path="${codegen.dir}"/>	
 			<classpath>
@@ -253,15 +253,25 @@
 		</delete>
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
 			windowtitle="Charba - J2CL and GWT charts library based on CHART.JS">
+			<fileset dir="${src.dir}">
+				<include name="org/pepstock/**" />
+				<exclude name="**/*.js" />
+				<exclude name="**/*.xml" />
+				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/resources/AbstractDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DatefnsDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredDateAdapterResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
+				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource.java"/>
+				<exclude name="org/pepstock/charba/client/resources/LuxonDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException.java"/>
+			</fileset>
 			<classpath>
 				<path refid="ivyPath-runtime" />
 				<fileset dir="${classes.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
-			<packageset dir="${src.dir}" defaultexcludes="yes">
-				<include name="org/pepstock/**" />
-				<exclude name="org/pepstock/charba/client/gwt/**"/>
-			</packageset>
 			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
 			<link offline="false" href="https://javadoc.io/doc/com.google.jsinterop/base/latest" />
@@ -300,6 +310,14 @@
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/resources/AbstractDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DatefnsDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredDateAdapterResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
+				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource.java"/>
+				<exclude name="org/pepstock/charba/client/resources/LuxonDeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException.java"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 			</fileset>	
@@ -376,6 +394,14 @@
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/resources/AbstractDeferredResources*"/>
+				<exclude name="org/pepstock/charba/client/resources/DatefnsDeferredResources*"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredDateAdapterResources*"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredResources*"/>
+				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter*"/>
+				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource*"/>
+				<exclude name="org/pepstock/charba/client/resources/LuxonDeferredResources*"/>
+				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException*"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 			</fileset>	
 			<manifest>
@@ -440,7 +466,32 @@
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
     -->
-	<target name="codeGenerator" depends="compile">
+	<target name="codeGenerator" depends="init, ivyRetrieveRuntime">
+		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile"/>
+			</classpath>
+		</javac>
+		<!-- minify -->
+		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.charba.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.charba.file}" />
+			</sources>
+		</closure-compiler>
+		<echo>Minify LABELS plugin from file "${javascript.labels.file}" to "${javascript.labels.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.labels.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.labels.file}" />
+			</sources>
+		</closure-compiler>
+		<!-- javascript resoures to classes -->
+		<copy todir="${javascript.dist.dir}">
+			<fileset dir="${resources.dir}">
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
 		<!-- invokes code generator -->
 		<echo>Creating CHARBA injectable resources...</echo>
 		<java classname="org.pepstock.charba.codegen.InjectableResourceGenerator">

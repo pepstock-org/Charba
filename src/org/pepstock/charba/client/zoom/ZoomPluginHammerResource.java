@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>hammer.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomPluginHammerResource extends InjectableResource {
+public final class ZoomPluginHammerResource extends AbstractInjectableResource {
 
 	// encoded javascript content of hammer.min.js
 	private static final String[] CONTENT = {
@@ -60,7 +61,7 @@ public final class ZoomPluginHammerResource extends InjectableResource {
 	 * Creates the injectable resource with <code>hammer.min.js</code> content.
 	 */
 	ZoomPluginHammerResource() {
-		super("hammerjs", CONTENT);
+		super(ResourceName.HAMMER_LIBRARY, CONTENT);
 	}
 
 }

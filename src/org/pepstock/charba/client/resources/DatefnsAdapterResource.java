@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>chartjs-adapter-date-fns.bundle.min.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatefnsAdapterResource extends InjectableResource {
+public final class DatefnsAdapterResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-adapter-date-fns.bundle.min.js
 	private static final String[] CONTENT = {
@@ -89,7 +89,7 @@ public final class DatefnsAdapterResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-adapter-date-fns.bundle.min.js</code> content.
 	 */
 	DatefnsAdapterResource() {
-		super(ResourceNames.DATE_TIME_ADAPTER, CONTENT);
+		super(ResourceName.DATE_TIME_ADAPTER, CONTENT);
 	}
 
 }

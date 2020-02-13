@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>chartjs-plugin-datalabels.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsPluginResource extends InjectableResource {
+public final class DataLabelsPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-datalabels.min.js
 	private static final String[] CONTENT = {
@@ -53,7 +54,7 @@ public final class DataLabelsPluginResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-plugin-datalabels.min.js</code> content.
 	 */
 	DataLabelsPluginResource() {
-		super(DataLabelsPlugin.ID, CONTENT);
+		super(ResourceName.DATALABELS_PLUGIN, CONTENT);
 	}
 
 }

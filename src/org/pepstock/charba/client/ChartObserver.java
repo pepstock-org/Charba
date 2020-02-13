@@ -114,6 +114,8 @@ final class ChartObserver {
 	private void scanAndCheckElements(List<BaseHtmlElement> elements, boolean attach) {
 		// scans all elements
 		for (BaseHtmlElement element : elements) {
+			// scans the element itself
+			checkAndPerformAttachement(element, attach);
 			// scans recursively the elements tree
 			scanAndCheckElements(element, attach);
 		}

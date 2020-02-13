@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>chartjs-plugin-labels.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsPluginResource extends InjectableResource {
+public final class LabelsPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-labels.min.js
 	private static final String[] CONTENT = {
@@ -67,7 +68,7 @@ public final class LabelsPluginResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-plugin-labels.min.js</code> content.
 	 */
 	LabelsPluginResource() {
-		super(LabelsPlugin.ID, CONTENT);
+		super(ResourceName.LABELS_PLUGIN, CONTENT);
 	}
 
 }

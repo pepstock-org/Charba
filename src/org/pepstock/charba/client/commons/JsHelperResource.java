@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>charba.helper.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JsHelperResource extends InjectableResource {
+public final class JsHelperResource extends AbstractInjectableResource {
 
 	// encoded javascript content of charba.helper.min.js
 	private static final String[] CONTENT = {
@@ -49,7 +50,7 @@ public final class JsHelperResource extends InjectableResource {
 	 * Creates the injectable resource with <code>charba.helper.min.js</code> content.
 	 */
 	JsHelperResource() {
-		super("charbaHelper", CONTENT);
+		super(ResourceName.CHARBA_HELPER, CONTENT);
 	}
 
 }

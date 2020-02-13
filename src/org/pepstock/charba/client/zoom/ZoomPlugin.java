@@ -20,13 +20,14 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
- * The {@value ZoomPlugin#ID} plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
- * The {@value ZoomPlugin#ID} plugin has got a dependency with javascript utility
+ * The ZOOM plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
+ * The ZOOM plugin plugin has got a dependency with javascript utility
  * <a href="https://github.com/hammerjs/hammer.js">hammer</a>, utility used for gesture recognition.
  * 
  * @author Andrea "Stock" Stocchero
@@ -35,9 +36,9 @@ import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFac
 public final class ZoomPlugin {
 
 	/**
-	 * Plugin ID <b>{@value ID}</b>.
+	 * Plugin ID <b>"zoom"</b>.
 	 */
-	public static final String ID = "zoom";
+	public static final String ID = ResourceName.ZOOM_PLUGIN.value();
 
 	/**
 	 * Zoom options factory

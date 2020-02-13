@@ -58,6 +58,20 @@ public interface Key {
 	}
 
 	/**
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a
+	 * {@link IllegalArgumentException}, otherwise it returns the key.
+	 * 
+	 * @param key key to be checked
+	 * @return the same key passed as argument
+	 */
+	static Key checkAndGetIfValid(Key key) {
+		// checks if key is consistent
+		checkIfValid(key);
+		// if here, is consistent
+		// then returns the argument
+		return key;
+	}
+	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
 	 * 
 	 * @param clazz enumeration of keys

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the code generator which will creates the {@link org.pepstock.charba.client.resources.InjectableResource} for all java script files that Charba is using.
+ * Contains the code generator which will creates the {@link org.pepstock.charba.client.resources.AbstractInjectableResource} for all java script files that Charba is using.
  * 
  * @author Andrea "Stock" Stocchero
  *

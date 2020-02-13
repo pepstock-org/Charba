@@ -26,7 +26,7 @@ import org.pepstock.charba.client.adapters.AbstractModule;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEmbeddedResources extends AbstractResources implements IsDateAdpaterResources {
+public abstract class AbstractEmbeddedResources extends AbstractResources {
 
 	// chart js source code
 	private static final ChartJsResource CHARTJS = new ChartJsResource();
@@ -39,6 +39,21 @@ public abstract class AbstractEmbeddedResources extends AbstractResources implem
 	AbstractEmbeddedResources(AbstractModule module) {
 		super(module);
 	}
+	
+	/**
+	 * Contains text representation of date-time java script library code.
+	 * 
+	 * @return date-time java script library code
+	 */
+	protected abstract AbstractInjectableResource datetimeLibrary();
+
+	/**
+	 * Contains text representation of CHART.JS adapter code.<br>
+	 * There is a specific adapter for the different date-time libraries.
+	 * 
+	 * @return chart.js date adapter code
+	 */
+	protected abstract AbstractInjectableResource datetimeAdapter();
 
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
@@ -54,7 +69,7 @@ public abstract class AbstractEmbeddedResources extends AbstractResources implem
 			// to be sure that date time chart.js adapter has been injected
 			ensureInjected(datetimeAdapter());
 			// notify to module that has been injected
-			getModule().injectionComplete(EmbeddedDateAdapterInjectionComplete.get());
+			getModule().injectionComplete(DateAdapterInjectionComplete.get());
 		}
 	}
 
@@ -63,7 +78,7 @@ public abstract class AbstractEmbeddedResources extends AbstractResources implem
 	 * 
 	 * @param resource script resource
 	 */
-	private void ensureInjected(InjectableResource resource) {
+	private void ensureInjected(AbstractInjectableResource resource) {
 		// checks if prototype is a text resource and not already injected
 		if (!Injector.isInjected(resource)) {
 			// inject Chart.js if not already loaded

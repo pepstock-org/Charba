@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.gwt;
+package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.LuxonModule;
 
@@ -74,10 +74,10 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractDeferredResources#getClientBundle()
+	 * @see org.pepstock.charba.client.gwt.AbstractDeferredResources#getDeferredAdapterResources()
 	 */
 	@Override
-	protected DeferredDateAdapterResources getClientBundle() {
+	protected DeferredDateAdapterResources getDeferredAdapterResources() {
 		return LuxonDeferredResourcesClientBundle.INSTANCE;
 	}
 

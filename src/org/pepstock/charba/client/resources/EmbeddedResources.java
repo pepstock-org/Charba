@@ -47,7 +47,7 @@ public final class EmbeddedResources extends AbstractEmbeddedResources {
 	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeLibrary()
 	 */
 	@Override
-	public InjectableResource datetimeLibrary() {
+	public AbstractInjectableResource datetimeLibrary() {
 		return dateLibrary;
 	}
 
@@ -57,7 +57,7 @@ public final class EmbeddedResources extends AbstractEmbeddedResources {
 	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeAdapter()
 	 */
 	@Override
-	public InjectableResource datetimeAdapter() {
+	public AbstractInjectableResource datetimeAdapter() {
 		return dateAdapter;
 	}
 

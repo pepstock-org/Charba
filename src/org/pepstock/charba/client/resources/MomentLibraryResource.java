@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>moment.min.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MomentLibraryResource extends InjectableResource {
+public final class MomentLibraryResource extends AbstractInjectableResource {
 
 	// encoded javascript content of moment.min.js
 	private static final String[] CONTENT = {
@@ -94,7 +94,7 @@ public final class MomentLibraryResource extends InjectableResource {
 	 * Creates the injectable resource with <code>moment.min.js</code> content.
 	 */
 	MomentLibraryResource() {
-		super(ResourceNames.DATE_TIME_LIBRARY, CONTENT);
+		super(ResourceName.DATE_TIME_LIBRARY, CONTENT);
 	}
 
 }

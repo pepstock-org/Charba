@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * Contains the content of <code>chartjs-plugin-zoom.min.js</code> to inject.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.resources.InjectableResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomPluginResource extends InjectableResource {
+public final class ZoomPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-zoom.min.js
 	private static final String[] CONTENT = {
@@ -53,7 +54,7 @@ public final class ZoomPluginResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-plugin-zoom.min.js</code> content.
 	 */
 	ZoomPluginResource() {
-		super(ZoomPlugin.ID, CONTENT);
+		super(ResourceName.ZOOM_PLUGIN, CONTENT);
 	}
 
 }

@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>luxon.min.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LuxonLibraryResource extends InjectableResource {
+public final class LuxonLibraryResource extends AbstractInjectableResource {
 
 	// encoded javascript content of luxon.min.js
 	private static final String[] CONTENT = {
@@ -103,7 +103,7 @@ public final class LuxonLibraryResource extends InjectableResource {
 	 * Creates the injectable resource with <code>luxon.min.js</code> content.
 	 */
 	LuxonLibraryResource() {
-		super(ResourceNames.DATE_TIME_LIBRARY, CONTENT);
+		super(ResourceName.DATE_TIME_LIBRARY, CONTENT);
 	}
 
 }

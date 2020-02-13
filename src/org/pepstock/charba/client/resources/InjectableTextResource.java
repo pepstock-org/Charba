@@ -13,9 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.gwt;
+package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.commons.Key;
 
 import com.google.gwt.resources.client.TextResource;
 
@@ -25,7 +25,7 @@ import com.google.gwt.resources.client.TextResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class InjectableTextResource extends InjectableResource {
+public final class InjectableTextResource extends AbstractInjectableResource {
 
 	/**
 	 * Creates an injectable resources using the name of text resource and the text of it.
@@ -34,13 +34,32 @@ public final class InjectableTextResource extends InjectableResource {
 	 */
 	public InjectableTextResource(TextResource resource) {
 		this(resource != null ? resource.getName() : null, resource);
+		// checks if the name is not overriding the charba resource name
+		// scans resource names
+		for (ResourceName name : ResourceName.values()) {
+			// checks if name of resource is equals to a reserved name
+			if (name.value().equalsIgnoreCase(resource.getName())) {
+				// throws an exception
+				throw new IllegalArgumentException("Resource name '"+resource.getName()+"' is not allowed because is reserved");
+			}
+		}
 	}
 
 	/**
-	 * Creates an injectable resources using the text of it and the name, passed as argument.
+	 * CCreates an injectable resources using the text of it and the name as key, passed as argument.
+	 * 
+	 * @param key name of injectable resource as key , should be a unique value in the DOM.
+	 * @param content content of object to be injected
+	 */
+	InjectableTextResource(Key key, TextResource resource) {
+		super(Key.checkAndGetIfValid(key), resource != null ? resource.getText() : null);
+	}
+
+	/**
+	 * CCreates an injectable resources using the text of it and the name, passed as argument.
 	 * 
 	 * @param name name of injectable resource, should be a unique value in the DOM.
-	 * @param resource text resource to be injected.
+	 * @param content content of object to be injected
 	 */
 	InjectableTextResource(String name, TextResource resource) {
 		super(name, resource != null ? resource.getText() : null);

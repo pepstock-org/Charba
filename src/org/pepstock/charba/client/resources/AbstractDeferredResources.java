@@ -13,10 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.gwt;
+package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.AbstractModule;
-import org.pepstock.charba.client.resources.AbstractResources;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
  * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library must be
@@ -31,7 +34,31 @@ public abstract class AbstractDeferredResources extends AbstractResources {
 	/**
 	 * Path into the project where the java script resources are stored, <b>{@value}</b>.
 	 */
-	public static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
+	static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
+	
+	/**
+	 * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
+	 * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code
+	 * splitting is implemented.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	interface DeferredChartResource extends ClientBundle {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final DeferredChartResource INSTANCE = GWT.create(DeferredChartResource.class);
+
+		/**
+		 * Contains text representation of native chart.js code.
+		 * 
+		 * @return chart.js code in asynchronous mode
+		 */
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
+		ExternalTextResource chartJs();
+
+	}
 	
 	/**
 	 * Creates a deferred resource object by passed module, which represents the date adapter and library, as argument.
@@ -43,11 +70,20 @@ public abstract class AbstractDeferredResources extends AbstractResources {
 	}
 
 	/**
-	 * Returns the client bundle with date library and adapter java script definition.
+	 * Returns the date adapter client bundle with java script definition.
 	 * 
-	 * @return the client bundle with date library and adapter java script definition
+	 * @return the date adapter client bundle with java script definition
 	 */
-	protected abstract DeferredDateAdapterResources getClientBundle();
+	protected abstract DeferredDateAdapterResources getDeferredAdapterResources();
+	
+	/**
+	 * Returns the CHART.JS client bundle with java script definition.
+	 * 
+	 * @return the date adapter client bundle with java script definition
+	 */
+	final DeferredChartResource getDeferredChartResource() {
+		return DeferredChartResource.INSTANCE;
+	}
 
 	/**
 	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a
@@ -69,7 +105,7 @@ public abstract class AbstractDeferredResources extends AbstractResources {
 		// checks if module is already injected
 		if (!getModule().isInjected()) {
 			// notify to module that has been injected
-			getModule().injectionComplete(DeferredDateAdapterInjectionComplete.get());
+			getModule().injectionComplete(DateAdapterInjectionComplete.get());
 		}
 	}
 

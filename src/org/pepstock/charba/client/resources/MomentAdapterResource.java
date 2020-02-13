@@ -14,14 +14,14 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>chartjs-adapter-moment.min.js</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MomentAdapterResource extends InjectableResource {
+public final class MomentAdapterResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-adapter-moment.min.js
 	private static final String[] CONTENT = {
@@ -39,7 +39,7 @@ public final class MomentAdapterResource extends InjectableResource {
 	 * Creates the injectable resource with <code>chartjs-adapter-moment.min.js</code> content.
 	 */
 	MomentAdapterResource() {
-		super(ResourceNames.DATE_TIME_ADAPTER, CONTENT);
+		super(ResourceName.DATE_TIME_ADAPTER, CONTENT);
 	}
 
 }

@@ -18,14 +18,13 @@ package org.pepstock.charba.client;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.DOM;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Script;
 import org.pepstock.charba.client.dom.elements.Style;
 import org.pepstock.charba.client.dom.elements.TextNode;
-import org.pepstock.charba.client.resources.InjectableResource;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
 
 /**
  * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
@@ -39,27 +38,15 @@ import org.pepstock.charba.client.resources.InjectableResource;
  */
 public final class Injector {
 
-	// singleton instance created even if is not a singleton
-	// in order to manage a field with the package name of this class
-	// needed to improve the key calculation
-	private static final Injector INSTANCE = new Injector();
 	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
-	// package name to use to calculate the key of injected resources
-	private final String charbaPrefixPackageName;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Injector() {
-		// gets full class name
-		String fullClassName = getClass().getName();
-		// gets short class name
-		String shortClassname = getClass().getSimpleName();
-		// stores the prefix package name
-		charbaPrefixPackageName = fullClassName.substring(0, fullClassName.indexOf(shortClassname));
 	}
 	
 	/**
@@ -67,7 +54,7 @@ public final class Injector {
 	 * 
 	 * @param resource script resource
 	 */
-	public static void ensureInjected(InjectableResource resource) {
+	public static void ensureInjected(AbstractInjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a script element
@@ -82,7 +69,7 @@ public final class Injector {
 	 * 
 	 * @param resource CSS style resource
 	 */
-	public static void ensureCssInjected(InjectableResource resource) {
+	public static void ensureCssInjected(AbstractInjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a style element
@@ -98,7 +85,7 @@ public final class Injector {
 	 * @param resource script or CSS style resource
 	 * @return <code>true</code> if the script or style resource has been already injected
 	 */
-	public static boolean isInjected(InjectableResource resource) {
+	public static boolean isInjected(AbstractInjectableResource resource) {
 		// checks if resource is consistent
 		if (resource != null) {
 			// creates a unique key for the resource
@@ -118,7 +105,7 @@ public final class Injector {
 	 * @param resource script resource
 	 * @param container HTML element which will contains the text resource
 	 */
-	private static void ensureInjected(InjectableResource resource, BaseHtmlElement container) {
+	private static void ensureInjected(AbstractInjectableResource resource, BaseHtmlElement container) {
 		// creates a unique key for the resource
 		// to use to understand if is already injected
 		String resourceKey = createKey(resource);
@@ -144,18 +131,8 @@ public final class Injector {
 	 * @param resource resource instance to to create the key
 	 * @return a unique key for every single resource type
 	 */
-	private static final String createKey(InjectableResource resource) {
-		// gets the full class name of resource
-		String fullResourceClassName = resource.getClass().getName();
-		// checks if the resource name is a CHARBA one
-		// using the prefix package name
-		if (fullResourceClassName.startsWith(INSTANCE.charbaPrefixPackageName)) {
-			// CHARBA resource
-			return INSTANCE.charbaPrefixPackageName + resource.getName();
-		} else {
-			// not CHARBA resource
-			return fullResourceClassName + Constants.UNDERSCORE + resource.getName();
-		}
-
+	private static final String createKey(AbstractInjectableResource resource) {
+		// CHARBA resource
+		return InjectorPrefixHelper.get().getPrefixPackageName(resource) + resource.getName();
 	}
 }

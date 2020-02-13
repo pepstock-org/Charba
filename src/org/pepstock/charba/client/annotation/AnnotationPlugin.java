@@ -18,14 +18,15 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-annotation">ANNOTATION plugin</a> to enable the plugin.<br>
- * The {@value AnnotationPlugin#ID} plugin draws lines and boxes on the chart area.<br>
- * The {@value AnnotationPlugin#ID} plugin works with line, bar, scatter and bubble charts that use linear, logarithmic, time,
+ * The ANNOTATION plugin draws lines and boxes on the chart area.<br>
+ * The ANNOTATION plugin plugin works with line, bar, scatter and bubble charts that use linear, logarithmic, time,
  * or category scales.<br>
- * The {@value AnnotationPlugin#ID} plugin will not work on any chart that does not have exactly two axes, including pie, radar,
+ * The ANNOTATION plugin plugin will not work on any chart that does not have exactly two axes, including pie, radar,
  * and polar area charts.
  * 
  * @author Andrea "Stock" Stocchero
@@ -34,9 +35,9 @@ import org.pepstock.charba.client.resources.ResourcesType;
 public final class AnnotationPlugin {
 
 	/**
-	 * Plugin ID <b>{@value ID}</b>.
+	 * Plugin ID <b>"annotation"</b>.
 	 */
-	public static final String ID = "annotation";
+	public static final String ID = ResourceName.ANNOTATION_PLUGIN.value();
 
 	/**
 	 * Annotation options factory

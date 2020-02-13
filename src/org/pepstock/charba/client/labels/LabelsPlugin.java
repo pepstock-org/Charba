@@ -18,6 +18,7 @@ package org.pepstock.charba.client.labels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -30,9 +31,9 @@ import org.pepstock.charba.client.resources.ResourcesType;
 public final class LabelsPlugin {
 
 	/**
-	 * Plugin ID <b>{@value ID}</b>.
+	 * Plugin ID <b>"labels"</b>.
 	 */
-	public static final String ID = "labels";
+	public static final String ID = ResourceName.LABELS_PLUGIN.value();
 
 	/**
 	 * Data labels options factory

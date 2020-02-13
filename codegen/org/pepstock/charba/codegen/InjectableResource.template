@@ -14,16 +14,14 @@
     limitations under the License.
 */
 package ${packageName};
-
-import org.pepstock.charba.client.resources.InjectableResource;
-
+${additionalPackages}
 /**
  * Contains the content of <code>${javaScriptFile}</code> to inject.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ${className} extends InjectableResource {
+public final class ${className} extends AbstractInjectableResource {
 
 	// encoded javascript content of ${javaScriptFile}
 	private static final String[] CONTENT = {
