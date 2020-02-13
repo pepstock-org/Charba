@@ -55,12 +55,11 @@ public class BarChartWidget extends AbstractChartWidget<BarChart> {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public BarDataset newDataset() {
 		return getChart().newDataset();
 	}

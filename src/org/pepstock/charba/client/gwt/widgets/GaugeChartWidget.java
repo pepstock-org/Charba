@@ -43,12 +43,11 @@ public final class GaugeChartWidget extends AbstractChartWidget<GaugeChart> {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.AbstractChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public GaugeDataset newDataset() {
 		return getChart().newDataset();
 	}

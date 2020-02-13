@@ -20,7 +20,6 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
-import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -418,12 +417,5 @@ public interface IsChart {
 	 * Draws the chart
 	 */
 	void draw();
-	
-	/**
-	 * Creates a new dataset for this chart type.
-	 * 
-	 * @return a new dataset for this chart type
-	 */
-	Dataset newDataset();
 
 }

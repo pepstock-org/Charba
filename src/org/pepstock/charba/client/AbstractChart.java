@@ -224,6 +224,13 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	public final Type getType() {
 		return type;
 	}
+	
+	/**
+	 * Creates a new dataset related to chart type.
+	 * 
+	 * @return a new dataset related to chart type.
+	 */
+	public abstract D newDataset();
 
 	/**
 	 * Returns the native object related to CHART.JS implementation.

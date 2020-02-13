@@ -57,12 +57,11 @@ public class PolarAreaChartWidget extends AbstractChartWidget<PolarAreaChart> {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public PolarAreaDataset newDataset() {
 		return getChart().newDataset();
 	}

@@ -56,12 +56,11 @@ public class ScatterChartWidget extends AbstractChartWidget<ScatterChart> {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public ScatterDataset newDataset() {
 		return getChart().newDataset();
 	}

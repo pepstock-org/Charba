@@ -54,12 +54,11 @@ public class TimeSeriesBarChartWidget extends AbstractChartWidget<TimeSeriesBarC
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public TimeSeriesBarDataset newDataset() {
 		return getChart().newDataset();
 	}

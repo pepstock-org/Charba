@@ -55,12 +55,11 @@ public class RadarChartWidget extends AbstractChartWidget<RadarChart> {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public RadarDataset newDataset() {
 		return getChart().newDataset();
 	}

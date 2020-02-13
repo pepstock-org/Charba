@@ -56,12 +56,11 @@ public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarC
 		return getChart().getOptions();
 	}
 	
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.BarChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public HorizontalBarDataset newDataset() {
 		return new HorizontalBarDataset(getDefaultChartOptions());
 	}

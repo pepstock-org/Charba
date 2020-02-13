@@ -85,8 +85,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#addHandler(org.pepstock.charba.client.events.EventHandler,
-	 * org.pepstock.charba.client.events.EventType)
+	 * @see org.pepstock.charba.client.IsChart#addHandler(org.pepstock.charba.client.events.EventHandler, org.pepstock.charba.client.events.EventType)
 	 */
 	@Override
 	public final HandlerRegistration addHandler(EventHandler handler, EventType type) {

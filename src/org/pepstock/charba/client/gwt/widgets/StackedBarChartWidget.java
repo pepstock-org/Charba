@@ -56,12 +56,11 @@ public class StackedBarChartWidget extends AbstractChartWidget<StackedBarChart> 
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public StackedBarDataset newDataset() {
 		return getChart().newDataset();
 	}

@@ -56,12 +56,11 @@ public class BubbleChartWidget extends AbstractChartWidget<BubbleChart>  {
 		return getChart().getOptions();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates a new dataset related to chart type.
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @return a new dataset related to chart type.
 	 */
-	@Override
 	public BubbleDataset newDataset() {
 		return getChart().newDataset();
 	}
