@@ -40,7 +40,7 @@ public final class InjectableTextResource extends AbstractInjectableResource {
 	 * Creates an injectable resources using the text of it and the name as key, passed as argument.
 	 * 
 	 * @param key name of injectable resource as key , should be a unique value in the DOM.
-	 * @param content content of object to be injected
+	 * @param resource text resource to be injected.
 	 */
 	public InjectableTextResource(Key key, TextResource resource) {
 		super(key, resource != null ? resource.getText() : null);
@@ -50,7 +50,7 @@ public final class InjectableTextResource extends AbstractInjectableResource {
 	 * Creates an injectable resources using the text of it and the name, passed as argument.
 	 * 
 	 * @param name name of injectable resource, should be a unique value in the DOM.
-	 * @param content content of object to be injected
+	 * @param resource text resource to be injected.
 	 */
 	public InjectableTextResource(String name, TextResource resource) {
 		super(name, resource != null ? resource.getText() : null);
