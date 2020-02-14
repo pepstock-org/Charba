@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeName;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 /**
  * Interface which is implemented to DOM elements or items which can be cast to other objects.<br>
@@ -37,11 +38,9 @@ public interface IsCastable {
 	 * @param <T> type of result casting
 	 * @return the same object cast to the type
 	 */
-	@SuppressWarnings("unchecked")
 	@JsOverlay
 	default <T> T as(){
-		//return Js.cast(this);
-		return (T)this;
+		return Js.cast(this);
 	}
 
 }
