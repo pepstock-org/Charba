@@ -223,8 +223,8 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			return getClientX() - element.getAbsoluteLeft() + element.getScrollLeft() + scrollElement.getScrollLeft();
 		}
 		// if here, the event target is not a html element
-		// then returns the layer 
-		return getLayerX();
+		// then returns the client X 
+		return getClientX();
 	}
 
 	/**
@@ -246,8 +246,8 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			return getClientY() - element.getAbsoluteTop() + element.getScrollTop() + scrollElement.getScrollTop();
 		}
 		// if here, the event target is not a html element
-		// then returns the layer 
-		return getLayerY();
+		// then returns the client Y 
+		return getClientY();
 	}
 
 	/**
