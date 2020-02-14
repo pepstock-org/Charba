@@ -126,7 +126,7 @@ public final class EntryPointStarter {
 				@Override
 				public void onSuccess(TextResource resource) {
 					// creates an injector items
-					InjectableTextResource injectorItem = new InjectableTextResource(ResourceName.CHART, resource);
+					AbstractInjectableResource injectorItem = new InternalInjectableTextResource(ResourceName.CHART, resource);
 					// injects the CHART.JS
 					Injector.ensureInjected(injectorItem);
 					// loads date-time library
@@ -172,11 +172,11 @@ public final class EntryPointStarter {
 				@Override
 				public void onSuccess(TextResource resource) {
 					// creates an injector items
-					InjectableTextResource injectorLibItem = new InjectableTextResource(ResourceName.DATE_TIME_LIBRARY, resource);
+					AbstractInjectableResource injectorLibItem = new InternalInjectableTextResource(ResourceName.DATE_TIME_LIBRARY, resource);
 					// injects the date time library
 					Injector.ensureInjected(injectorLibItem);
 					// creates an injector items
-					InjectableTextResource injectorAdapterItem = new InjectableTextResource(ResourceName.DATE_TIME_ADAPTER, resources.getDeferredAdapterResources().datetimeAdapter());
+					AbstractInjectableResource injectorAdapterItem = new InternalInjectableTextResource(ResourceName.DATE_TIME_ADAPTER, resources.getDeferredAdapterResources().datetimeAdapter());
 					// injects also the date time adapter, always sync
 					Injector.ensureInjected(injectorAdapterItem);
 					// loads date-time adapter library

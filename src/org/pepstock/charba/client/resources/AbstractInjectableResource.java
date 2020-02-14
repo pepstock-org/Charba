@@ -32,20 +32,20 @@ public abstract class AbstractInjectableResource {
 	private final StringBuilder builder = new StringBuilder();
 
 	/**
-	 * Creates the object with a mandatory name as key and the content of injectable resource.
+	 * Creates the resource with a mandatory name as key and the content of injectable resource.
 	 * 
-	 * @param key name of object as key
-	 * @param content content of object to be injected
+	 * @param key name of resource as key
+	 * @param content content of resource to be injected
 	 */
 	protected AbstractInjectableResource(Key key, String... content) {
 		this(Key.checkAndGetIfValid(key).value(), content);
 	}
-	
+
 	/**
-	 * Creates the object with a mandatory name as string and the content of injectable resource.
+	 * Creates the resource with a mandatory name as string and the content of injectable resource.
 	 * 
-	 * @param name name of object as string
-	 * @param content content of object to be injected
+	 * @param name name of resource as string
+	 * @param content content of resource to be injected
 	 */
 	protected AbstractInjectableResource(String name, String... content) {
 		// checks if name is consistent
@@ -57,6 +57,18 @@ public abstract class AbstractInjectableResource {
 		if (content == null || content.length == 0) {
 			// if not exception
 			throw new IllegalArgumentException("Content is not consistent");
+		}
+		// checks if not an internal CHARBA class for deferred resources and
+		// the internals do not need any check because managed by CHARBA and correct by definition
+		if (!(this instanceof InternalInjectableTextResource)) {
+			// checks if the name of resource is a CHARBA one
+			ResourceName resourceName = Key.getKeyByValue(ResourceName.class, name);
+			// checks if it is a CHARBA resource and if it can be override
+			if (resourceName != null && !resourceName.isOverride() && !getClass().getName().equals(resourceName.getClassName())) {
+				// if here the the injectable resource is not a CHARBA class
+				// but try to override with a custom
+				throw new IllegalArgumentException("Unable to override '" + resourceName.value() + "' with a custom implementation");
+			}
 		}
 		// stores name
 		this.name = name;

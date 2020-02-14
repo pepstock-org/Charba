@@ -29,50 +29,58 @@ public enum ResourceName implements Key
 	/**
 	 * Script element id for CHART.JS source code.
 	 */
-	CHART("chartJs"),
+	CHART("chartJs", false, "org.pepstock.charba.client.resources.ChartJsResource"),
 	/**
 	 * Script element id for CHART.JS date time adapter.
 	 */
-	DATE_TIME_ADAPTER("datetimeAdapter"),
+	DATE_TIME_ADAPTER("datetimeAdapter", true, null),
 	/**
 	 * Script element id for CHART.JS date time library.
 	 */
-	DATE_TIME_LIBRARY("datetimeLibrary"),
+	DATE_TIME_LIBRARY("datetimeLibrary", true, null),
 	/**
 	 * Script element id for CHARBA helper.
 	 */
-	CHARBA_HELPER("charbaHelper"),
+	CHARBA_HELPER("charbaHelper", false, "org.pepstock.charba.client.commons.JsHelperResource"),
 	/**
 	 * Script element id for CHART.JS ANNOTATION plugin.
 	 */
-	ANNOTATION_PLUGIN("annotation"),
+	ANNOTATION_PLUGIN("annotation", false, "org.pepstock.charba.client.annotation.AnnotationPluginResource"),
 	/**
 	 * Script element id for CHART.JS DATALABELS plugin.
 	 */
-	DATALABELS_PLUGIN("datalabels"),
+	DATALABELS_PLUGIN("datalabels", false, "org.pepstock.charba.client.datalabels.DataLabelsPluginResource"),
 	/**
 	 * Script element id for CHART.JS ZOOM plugin.
 	 */
-	ZOOM_PLUGIN("zoom"),
+	ZOOM_PLUGIN("zoom", false, "org.pepstock.charba.client.zoom.ZoomPluginResource"),
 	/**
 	 * Script element id for HAMMER JS library.
 	 */
-	HAMMER_LIBRARY("hammerjs"),
+	HAMMER_LIBRARY("hammerjs", false, "org.pepstock.charba.client.zoom.ZoomPluginHammerResource"),
 	/**
 	 * Script element id for CHART.JS LABELS plugin.
 	 */
-	LABELS_PLUGIN("labels");
+	LABELS_PLUGIN("labels", false, "org.pepstock.charba.client.labels.LabelsPluginResource");
 
 	// name value of property
 	private final String value;
+	// flag to know if the resource can be override by user
+	private final boolean override;
+	// class name of CHARBA injectable resource implementation
+	private final String className;
 
 	/**
 	 * Creates with the value of resource name.
 	 * 
 	 * @param value the value of resource name
+	 * @param override <code>true</code> if the resource can be override by user
+	 * @param className class name of CHARBA injectable resource implementation
 	 */
-	private ResourceName(String value) {
+	private ResourceName(String value, boolean override, String className) {
 		this.value = value;
+		this.override = override;
+		this.className = className;
 	}
 
 	/*
@@ -83,6 +91,23 @@ public enum ResourceName implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Returns <code>true</code> if the resource can be override by user.
+	 * 
+	 * @return <code>true</code> if the resource can be override by user
+	 */
+	boolean isOverride() {
+		return override;
+	}
+
+	/**
+	 * Returns the class name of CHARBA injectable resource implementation.
+	 * @return class name of CHARBA injectable resource implementation
+	 */
+	String getClassName() {
+		return className;
 	}
 
 }

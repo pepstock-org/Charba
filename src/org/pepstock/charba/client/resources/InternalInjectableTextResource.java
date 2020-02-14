@@ -20,21 +20,12 @@ import org.pepstock.charba.client.commons.Key;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Default implementation for an injectable resource related to a text resource.
+ * Internal implementation for an injectable resource related to a text resource and used by moudle out of the box provided by CHARBA for deferred resources.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class InjectableTextResource extends AbstractInjectableResource {
-
-	/**
-	 * Creates an injectable resources using the name of text resource and the text of it.
-	 * 
-	 * @param resource text resource to be injected.
-	 */
-	public InjectableTextResource(TextResource resource) {
-		this(resource != null ? resource.getName() : null, resource);
-	}
+final class InternalInjectableTextResource extends AbstractInjectableResource {
 
 	/**
 	 * Creates an injectable resources using the text of it and the name as key, passed as argument.
@@ -42,18 +33,8 @@ public final class InjectableTextResource extends AbstractInjectableResource {
 	 * @param key name of injectable resource as key , should be a unique value in the DOM.
 	 * @param content content of object to be injected
 	 */
-	public InjectableTextResource(Key key, TextResource resource) {
-		super(key, resource != null ? resource.getText() : null);
-	}
-
-	/**
-	 * Creates an injectable resources using the text of it and the name, passed as argument.
-	 * 
-	 * @param name name of injectable resource, should be a unique value in the DOM.
-	 * @param content content of object to be injected
-	 */
-	public InjectableTextResource(String name, TextResource resource) {
-		super(name, resource != null ? resource.getText() : null);
+	InternalInjectableTextResource(Key key, TextResource resource) {
+		super(Key.checkAndGetIfValid(key), resource != null ? resource.getText() : null);
 	}
 
 }

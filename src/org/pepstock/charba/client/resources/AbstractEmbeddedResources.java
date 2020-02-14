@@ -65,9 +65,9 @@ public abstract class AbstractEmbeddedResources extends AbstractResources {
 			// inject Chart.js if not already loaded
 			ensureInjected(CHARTJS);
 			// to be sure that date time library has been injected
-			ensureInjected(datetimeLibrary());
+			ensureInjected(checkAndGetDateTimeResourceName(datetimeLibrary(), ResourceName.DATE_TIME_LIBRARY));
 			// to be sure that date time chart.js adapter has been injected
-			ensureInjected(datetimeAdapter());
+			ensureInjected(checkAndGetDateTimeResourceName(datetimeAdapter(), ResourceName.DATE_TIME_ADAPTER));
 			// notify to module that has been injected
 			getModule().injectionComplete(DateAdapterInjectionComplete.get());
 		}
@@ -84,5 +84,25 @@ public abstract class AbstractEmbeddedResources extends AbstractResources {
 			// inject Chart.js if not already loaded
 			Injector.ensureInjected(resource);
 		}
+	}
+	
+	/**
+	 * Checks and get the resource, passed as argument, with the resource name.<br>
+	 * When you are injecting date library and adapters, it is mandatory they have the correct name, fixed by CHARBA constraints.<br>
+	 * If the resource does not have the right name, throws an {@link IllegalArgumentException}.
+	 *  
+	 * @param resource injectable resource instance to check
+	 * @param resourceName the resource name which must be applied into reosurce instance 
+	 * @return injectable resource instance passed as argument
+	 */
+	private AbstractInjectableResource checkAndGetDateTimeResourceName(AbstractInjectableResource resource, ResourceName resourceName) {
+		// checks if the date time resource has got the right name
+		if (!resourceName.value().equalsIgnoreCase(resource.getName())) {
+			// is trying to inject a resource with a wrong name
+			throw new IllegalArgumentException("Unbale to inject resource because must be '"+resourceName.value()+"' instead of '"+resource.getName()+"'");
+		}
+		// if here the resource is correct
+		// then returns the resource passed as argument
+		return resource;
 	}
 }
