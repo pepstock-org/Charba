@@ -77,31 +77,4 @@ final class NativeJsHelper {
 	 */
 	static native void remove(NativeObject object, String key);
 
-	/**
-	 * Returns a property of java script object as integer.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return integer value
-	 */
-	static native int propertyAsInt(Object object, String key);
-
-	/**
-	 * Returns a property of java script object as double.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return double value
-	 */
-	static native double propertyAsDouble(Object object, String key);
-
-	/**
-	 * Returns a property of java script object as string.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return string value
-	 */
-	static native String propertyAsString(Object object, String key);
-
 }

@@ -113,45 +113,20 @@ public final class JsHelper {
 	 * @param key the string name of the property to be defined or modified..
 	 * @return integer value or {@link UndefinedValues#INTEGER} if arguments are not consistent
 	 */
-	public int propertyAsInt(Object object, String key) {
+	public int propertyAsInt(NativeObject object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {
-			return NativeJsHelper.propertyAsInt(object, key);
+			// accesses to native object to get the descriptor
+			NativeIntegerDescriptor descriptor = object.getIntProperty(key);
+			// checks if the descriptor is consistent
+			// if not, property does not exist
+			if (descriptor != null) {
+				// returns the property value
+				return descriptor.getValue();
+			}
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.INTEGER;
-	}
-
-	/**
-	 * Returns a property of java script object as double.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return double value or {@link UndefinedValues#DOUBLE} if arguments are not consistent
-	 */
-	public double propertyAsDouble(Object object, String key) {
-		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsHelper.propertyAsDouble(object, key);
-		}
-		// if here, arguments not consistent
-		return UndefinedValues.DOUBLE;
-	}
-
-	/**
-	 * Returns a property of java script object as string.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return string value or {@link UndefinedValues#STRING} if arguments are not consistent
-	 */
-	public String propertyAsString(Object object, String key) {
-		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsHelper.propertyAsString(object, key);
-		}
-		// if here, arguments not consistent
-		return UndefinedValues.STRING;
 	}
 
 }

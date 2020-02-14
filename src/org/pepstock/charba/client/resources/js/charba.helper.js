@@ -58,36 +58,6 @@
 	    return Array.isArray(obj[key]);
     }    
     /*
-	 Returns a property of java script object as string.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return string value
-    */
-    CharbaJsHelper.propertyAsString = function(obj, key) {
-    	return obj[key];
-    }
-    /*
-	 Returns a property of java script object as double.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return double value
-    */
-    CharbaJsHelper.propertyAsDouble = function(obj, key) {
-    	return obj[key];
-    }
-    /*
-	 Returns a property of java script object as integer.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return integer value
-    */
-    CharbaJsHelper.propertyAsInt = function(obj, key) {
-    	return obj[key];
-    }  
-    /*
 	 Creates new proxy for callback which will pass "this" environment of java script as first argument of callback
 	 method.
 	  
