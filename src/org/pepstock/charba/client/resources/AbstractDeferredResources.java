@@ -29,7 +29,7 @@ import com.google.gwt.resources.client.ExternalTextResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractDeferredResources extends AbstractResources {
+public abstract class AbstractDeferredResources extends AbstractResources implements IsResourceType{
 
 	/**
 	 * Path into the project where the java script resources are stored, <b>{@value}</b>.

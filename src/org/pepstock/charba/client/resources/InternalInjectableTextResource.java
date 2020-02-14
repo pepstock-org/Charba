@@ -25,13 +25,13 @@ import com.google.gwt.resources.client.TextResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class InternalInjectableTextResource extends AbstractInjectableResource {
+final class InternalInjectableTextResource extends AbstractInjectableResource implements IsInternalInjectableTextResource {
 
 	/**
 	 * Creates an injectable resources using the text of it and the name as key, passed as argument.
 	 * 
 	 * @param key name of injectable resource as key , should be a unique value in the DOM.
-	 * @param content content of object to be injected
+	 * @param resource text resource to be injected.
 	 */
 	InternalInjectableTextResource(Key key, TextResource resource) {
 		super(Key.checkAndGetIfValid(key), resource != null ? resource.getText() : null);

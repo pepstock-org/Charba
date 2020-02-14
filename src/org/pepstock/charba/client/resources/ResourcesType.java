@@ -49,7 +49,7 @@ public final class ResourcesType {
 			throw new IllegalArgumentException("Resources type argument is null");
 		}
 		// checks if is extending a correct abstract resource
-		if (resources instanceof AbstractEmbeddedResources || resources instanceof AbstractDeferredResources) {
+		if (resources instanceof IsResourceType) {
 			// checks if the resources type is already set and is different from the argument
 			if (ResourcesType.resources != null) {
 				if (!resources.getClass().equals(ResourcesType.resources.getClass())) {

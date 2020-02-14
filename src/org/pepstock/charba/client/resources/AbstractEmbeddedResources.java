@@ -26,7 +26,7 @@ import org.pepstock.charba.client.adapters.AbstractModule;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEmbeddedResources extends AbstractResources {
+public abstract class AbstractEmbeddedResources extends AbstractResources implements IsResourceType{
 
 	// chart js source code
 	private static final ChartJsResource CHARTJS = new ChartJsResource();
