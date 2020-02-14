@@ -28,7 +28,8 @@ cache:
    - $HOME/.ant
 # specify the JDKs 
 jdk:
-   - openjdk8
+   - oraclejdk8
+#   - openjdk8
 #   - oraclejdk8
 # specify the branches to build from
 branches:
