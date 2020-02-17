@@ -142,6 +142,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * [Date-fns](https://date-fns.org/) which can be enabled by `DatefnsEmbeddedResources` or `DatefnsDeferredResources` classes. 
    * change the `EntryPointStarter` (for deferred injection) in order to accept ONLY deferred resource client bundle.  
    * provide some classes in order to use the date time adapter in GWT project as well, to manage, parse and format dates using the same object of CHART.JS.
+ * add capability to `ZoomPlugin.enable` methodsto avoid to inject `HammerJS` if it is already loaded by another library or used in whatever other part of application.   
    
 ### Development
 

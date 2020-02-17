@@ -71,16 +71,29 @@ public final class ZoomPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
+		enable(enableToAllCharts, true);
+	}
+
+	/**
+	 * Inject the plugin and by the argument decides to enable the plugin to all charts or not.
+	 * 
+	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
+	 * @param enableHammerInjection if <code>false</code>, HammerJs library will not be injected
+	 */
+	public static void enable(boolean enableToAllCharts, boolean enableHammerInjection) {
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
-		// injects HAMMER plugin
-		Injector.ensureInjected(RESOURCE_HAMMER);
+		// checks if hammer must be injected
+		if (enableHammerInjection) {
+			// injects HAMMER library
+			Injector.ensureInjected(RESOURCE_HAMMER);
+		}
 		// injects ZOOM plugin
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
-
+	
 	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 
