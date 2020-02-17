@@ -94,6 +94,24 @@
 		};
     	return obj;
     }
+        /*
+	 Returns true if the object is a CanvasPattern.
+	  
+	 @param obj the object to check
+	 @return true if the object is a CanvasPattern
+    */
+    CharbaJsHelper.isCanvasPattern = function(obj, key) {
+   		return obj instanceof CanvasPattern;
+    } 
+    /*
+	 Returns true if the object is a CanvasGradient.
+	  
+	 @param obj the object to check
+	 @return true if the object is a CanvasGradient
+    */
+    CharbaJsHelper.isCanvasGradient = function(obj, key) {
+   		return obj instanceof CanvasGradient;
+    } 
     /*
 		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
@@ -330,27 +348,21 @@
 	 Returns true if the property into native object is a CanvasPattern.
 	  
 	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
+	 @param key the string name of the property to be defined or modified.
 	 @return true if the property into native object is a CanvasPattern
     */
     CharbaJsItemsHelper.isCanvasPattern = function(obj, key) {
-    	if (typeof key === 'string') {
-    		return obj[key] instanceof CanvasPattern;
-    	}
-   		return obj instanceof CanvasPattern;
+		return obj[key] instanceof CanvasPattern;
     } 
     /*
 	 Returns true if the property into native object is a CanvasGradient.
 	  
 	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
+	 @param key the string name of the property to be defined or modified.
 	 @return true if the property into native object is a CanvasGradient
     */
     CharbaJsItemsHelper.isCanvasGradient = function(obj, key) {
-    	if (typeof key === 'string') {
-    		return obj[key] instanceof CanvasGradient;
-    	}
-   		return obj instanceof CanvasGradient;
+   		return obj[key] instanceof CanvasGradient;
     } 
     /*
 	 Returns a chart native event from CHART.JS event.

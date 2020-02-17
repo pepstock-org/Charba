@@ -16,11 +16,12 @@
 package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on java script objects.
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -83,8 +84,7 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
-	 * method.
+	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
 	 * 
 	 * @param <T> type of callback wrapped by proxy
 	 * @return new proxy for callback.
@@ -104,6 +104,36 @@ public final class JsHelper {
 		if (object != null && key != null) {
 			NativeJsHelper.remove(object, key);
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasPatternItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasPatternItem}
+	 */
+	public boolean isCanvasPattern(Object object) {
+		// checks consistency of argument
+		if (object != null) {
+			return NativeJsHelper.isCanvasPattern(object);
+		}
+		// if here, argument is not consistent
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasGradientItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasGradientItem}
+	 */
+	public boolean isCanvasGradient(Object object) {
+		// checks consistency of argument
+		if (object != null) {
+			return NativeJsHelper.isCanvasGradient(object);
+		}
+		// if here, argument is not consistent
+		return false;
 	}
 
 	/**

@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects.
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -61,8 +63,7 @@ final class NativeJsHelper {
 	static native boolean isArray(Object object, String key);
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
-	 * method.
+	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
 	 * 
 	 * @param <T> callback proxy type
 	 * @return new proxy for callback.
@@ -76,5 +77,21 @@ final class NativeJsHelper {
 	 * @param key the string name of the property to remove.
 	 */
 	static native void remove(NativeObject object, String key);
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasPatternItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasPatternItem}
+	 */
+	static native boolean isCanvasPattern(Object object);
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link CanvasGradientItem}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasGradientItem}
+	 */
+	static native boolean isCanvasGradient(Object object);
 
 }

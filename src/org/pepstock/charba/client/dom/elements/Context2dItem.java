@@ -21,6 +21,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
@@ -29,7 +30,6 @@ import org.pepstock.charba.client.dom.enums.TextAlign;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.items.JsItemsHelper;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 import jsinterop.annotations.JsMethod;
@@ -1202,7 +1202,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	@JsOverlay
 	private CanvasGradientItem getGradient(Object value) {
 		// checks if value is a string
-		if (JsItemsHelper.get().isCanvasGradient(value)) {
+		if (JsHelper.get().isCanvasGradient(value)) {
 			// casts and returns the value
 			return Js.cast(value);
 		}
@@ -1220,7 +1220,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	@JsOverlay
 	private final CanvasPatternItem getPattern(Object value) {
 		// checks if value is a string
-		if (JsItemsHelper.get().isCanvasPattern(value)) {
+		if (JsHelper.get().isCanvasPattern(value)) {
 			// casts and returns the value
 			return Js.cast(value);
 		}
