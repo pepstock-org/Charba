@@ -33,6 +33,16 @@ public final class CastHelper {
 	}
 
 	/**
+	 * Returns a {@link Div} object casting the argument.
+	 * 
+	 * @param object object to cast to a <b>div</b>
+	 * @return a {@link Div} object
+	 */
+	public static Div toDiv(Object object) {
+		return Js.cast(checkAndGetObject(object));
+	}
+	
+	/**
 	 * Returns a {@link Img} object casting the argument.
 	 * 
 	 * @param object object to cast to an image
