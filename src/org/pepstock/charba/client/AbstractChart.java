@@ -186,8 +186,8 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.events.HandlerManager#addHandler(org.pepstock.charba.client.commons.events.
-	 * EventHandler, org.pepstock.charba.client.commons.events.EventType)
+	 * @see org.pepstock.charba.client.commons.events.HandlerManager#addHandler(org.pepstock.charba.client.commons.events. EventHandler,
+	 * org.pepstock.charba.client.commons.events.EventType)
 	 */
 	@Override
 	public final HandlerRegistration addHandler(EventHandler handler, EventType type) {
@@ -224,7 +224,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	public final Type getType() {
 		return type;
 	}
-	
+
 	/**
 	 * Creates a new dataset related to chart type.
 	 * 
@@ -275,8 +275,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into
-	 * {@link Charts}.
+	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into {@link Charts}.
 	 * 
 	 * @return the CHART.JS instance, check if the inner one is not consistent yet
 	 */
@@ -416,11 +415,9 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	@Override
 	public final boolean isDrawOnAttach() {
@@ -442,11 +439,10 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	@Override
 	public final boolean isDestroyOnDetach() {
@@ -456,8 +452,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
@@ -471,12 +466,13 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#onAttach()
+	 * @see org.pepstock.charba.client.MutationHandler#onAttach(org.pepstock.charba.client.MutationItem)
 	 */
 	@Override
-	public final void onAttach() {
+	public final void onAttach(MutationItem item) {
+		// if item is consistent and
 		// if is not to be drawn on attach, doesn't draw
-		if (isDrawOnAttach()) {
+		if (item != null && isDrawOnAttach()) {
 			draw();
 		}
 	}
@@ -484,20 +480,21 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#onDetach()
+	 * @see org.pepstock.charba.client.MutationHandler#onDetach(org.pepstock.charba.client.MutationItem)
 	 */
 	@Override
-	public final void onDetach() {
+	public final void onDetach(MutationItem item) {
+		// if item is consistent and
 		// if is not to be destroyed on detach, doesn't destroy
-		if (isDestroyOnDetach()) {
+		if (item != null && isDestroyOnDetach()) {
 			// then destroy
 			destroy();
 		}
 	}
 
 	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
-	 * within Chart.js, along with any associated event listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
+	 * listeners attached by Chart.js.
 	 */
 	@Override
 	public final void destroy() {
@@ -542,8 +539,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	/**
 	 * Will clear the chart canvas.<br>
 	 * Used extensively internally between animation frames.<br>
-	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT
-	 * <code>Panel</code> one.
+	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT <code>Panel</code> one.
 	 */
 	@Override
 	public final void clear() {
@@ -601,8 +597,8 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
-	 * this method manually if you change the size of the canvas nodes container element.
+	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
+	 * canvas nodes container element.
 	 */
 	@Override
 	public final void resize() {
@@ -614,8 +610,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
 	 */
 	@Override
 	public final void update() {
@@ -623,10 +618,9 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -646,8 +640,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	@Override
 	public final void reconfigure() {
@@ -655,10 +648,9 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -687,8 +679,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	@Override
 	public final void render() {
@@ -696,9 +687,8 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A configuration object can be provided with additional configuration for the render process. This is useful
-	 * when update is manually called inside an event handler and some different animation is desired.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A configuration object can be provided
+	 * with additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the render process
 	 */
@@ -818,8 +808,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
-	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the
-	 * same position of that event.
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.

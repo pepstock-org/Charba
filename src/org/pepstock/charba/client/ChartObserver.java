@@ -165,12 +165,12 @@ final class ChartObserver {
 			// and the element is referring to a chart not attached yet
 			if (attach && isChartElementAttached(element.getId())) {
 				// invokes the attach method
-				handler.onAttach();
+				handler.onAttach(MutationItem.get());
 			} else if (!attach && isChartElementDetached(element.getId())) {
 				// checks if is looking for detach
 				// and the element is referring to a chart is already attached
 				// invokes the detach method
-				handler.onDetach();
+				handler.onDetach(MutationItem.get());
 			}
 		}
 	}

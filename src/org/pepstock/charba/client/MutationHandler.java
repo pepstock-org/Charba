@@ -33,12 +33,16 @@ interface MutationHandler {
 
 	/**
 	 * Invoked by mutation observer when a chart has been attached into the DOM tree.
+	 * 
+	 * @param item can not be instantiated out of this package to avoid that anyone (apart the observer) will invoke the method.
 	 */
-	void onAttach();
+	void onAttach(MutationItem item);
 
 	/**
 	 * Invoked by mutation observer when a chart has been detached from the DOM tree.
+	 * 
+	 * @param item can not be instantiated out of this package to avoid that anyone (apart the observer) will invoke the method.
 	 */
-	void onDetach();
+	void onDetach(MutationItem item);
 
 }
