@@ -136,8 +136,7 @@ public class LuxonOptions extends DateAdapterOptions {
 
 	/**
 	 * Sets the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available.
-	 * output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
@@ -147,8 +146,7 @@ public class LuxonOptions extends DateAdapterOptions {
 
 	/**
 	 * Returns the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available.
-	 * output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */

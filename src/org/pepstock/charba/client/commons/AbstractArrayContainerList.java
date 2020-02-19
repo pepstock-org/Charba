@@ -62,8 +62,7 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
 	public final boolean addAll(Collection<? extends E> collection) {

@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.DOM_ELEMENT_ATTR, namespace = JsPackage.GLOBAL)
-public final class BaseAttribute extends BaseNode{
+public final class BaseAttribute extends BaseNode {
 
 	/**
 	 * Returns the attribute's name.

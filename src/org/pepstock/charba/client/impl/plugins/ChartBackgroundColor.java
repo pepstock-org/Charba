@@ -252,8 +252,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.SizeItem)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
 	public void onResize(IsChart chart, SizeItem size) {
@@ -345,7 +344,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			chart.getChartElement().getStyle().setBackground(value);
 		}
 	}
-	
+
 	/**
 	 * Applies the background color CSS property into chart HTML element.
 	 * 
@@ -359,7 +358,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			chart.getChartElement().getStyle().setBackgroundColor(value);
 		}
 	}
-	
+
 	/**
 	 * Applies the background image CSS property into chart HTML element.
 	 * 

@@ -31,7 +31,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * A gradient is an image consisting of a progressive transition between two or more colors.<br>
  * Could be <code>Linear</code> or <code>Radial</code>.<br>
  * Can be created using the size of <code>CANVAS</code> or <code>CHART</code> area.<br>
- * The orientation to have a progressive transition, is defined by an enumeration in order to creates the gradient using the right coordinates and dimension, based on existing items (canvas and chart).
+ * The orientation to have a progressive transition, is defined by an enumeration in order to creates the gradient using the right coordinates and dimension, based on existing
+ * items (canvas and chart).
  * 
  * @author Andrea "Stock" Stocchero
  *

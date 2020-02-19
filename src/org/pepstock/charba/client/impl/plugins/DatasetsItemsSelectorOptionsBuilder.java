@@ -74,8 +74,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found
-	 *            x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setXAxisID(String xAxisID) {
@@ -106,8 +105,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 * @return builder instance
@@ -318,8 +316,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise
-	 *            <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setUseSelectionStyle(boolean useSelectionStyle) {

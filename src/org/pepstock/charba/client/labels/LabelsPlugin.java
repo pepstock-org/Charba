@@ -22,8 +22,7 @@ import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * Entry point of <a href="https://github.com/emn178/chartjs-plugin-labels">LABELS plugin</a> with some static utilities to
- * enable it and to get and set options.
+ * Entry point of <a href="https://github.com/emn178/chartjs-plugin-labels">LABELS plugin</a> with some static utilities to enable it and to get and set options.
  * 
  * @author Andrea "Stock" Stocchero
  *

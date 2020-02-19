@@ -318,8 +318,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Returns <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable.<br>
-	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with
-	 * default color.
+	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with default color.
 	 * 
 	 * @return <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable
 	 */
@@ -329,11 +328,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be forcedly disable.<br>
-	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with
-	 * default color.
+	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with default color.
 	 * 
-	 * @param canvasObjectHandling <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be
-	 *            forcedly disable
+	 * @param canvasObjectHandling <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be forcedly disable
 	 */
 	public void setCanvasObjectHandling(boolean canvasObjectHandling) {
 		this.canvasObjectHandling = canvasObjectHandling;
@@ -614,8 +611,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {

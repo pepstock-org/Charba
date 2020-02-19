@@ -25,10 +25,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM
- * tree.<br>
- * It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the
- * document.
+ * Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.<br>
+ * It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -61,8 +59,7 @@ public class BaseDocument extends BaseNode {
 	public final native BaseElement getDocumentElement();
 
 	/**
-	 * Returns the first node which is both a child of this parent node and is also an element, or <code>null</code> if there is
-	 * none.
+	 * Returns the first node which is both a child of this parent node and is also an element, or <code>null</code> if there is none.
 	 *
 	 * @return the first node which is both a child of this parent node and is also an element
 	 */

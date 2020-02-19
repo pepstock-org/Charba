@@ -71,8 +71,7 @@ public final class Fonter extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a fonter with the native object where FONTs properties must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a fonter with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where FONTs properties must be managed
 	 * @param model model which contains the fonter.

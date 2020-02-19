@@ -36,7 +36,7 @@ public final class NamedNodeMap<T extends BaseNode> {
 	 */
 	@JsProperty(name = "length")
 	public native int length();
-	
+
 	/**
 	 * Returns an item in the map by its index, or <code>null</code> if the index is out-of-bounds.
 	 * 

@@ -138,23 +138,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	PINK_ACCENT_4("#c51162"),
 	/**
-	 * GWT material color name "PURPLE_LIGHTEN_5" - <span style="background-color:#f3e5f5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "PURPLE_LIGHTEN_5" -
+	 * <span style="background-color:#f3e5f5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	PURPLE_LIGHTEN_5("#f3e5f5"),
 	/**
-	 * GWT material color name "PURPLE_LIGHTEN_4" - <span style="background-color:#e1bee7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "PURPLE_LIGHTEN_4" -
+	 * <span style="background-color:#e1bee7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	PURPLE_LIGHTEN_4("#e1bee7"),
 	/**
-	 * GWT material color name "PURPLE_LIGHTEN_3" - <span style="background-color:#ce93d8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "PURPLE_LIGHTEN_3" -
+	 * <span style="background-color:#ce93d8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	PURPLE_LIGHTEN_3("#ce93d8"),
 	/**
-	 * GWT material color name "PURPLE_LIGHTEN_2" - <span style="background-color:#ba68c8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "PURPLE_LIGHTEN_2" -
+	 * <span style="background-color:#ba68c8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	PURPLE_LIGHTEN_2("#ba68c8"),
 	/**
-	 * GWT material color name "PURPLE_LIGHTEN_1" - <span style="background-color:#ab47bc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "PURPLE_LIGHTEN_1" -
+	 * <span style="background-color:#ab47bc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	PURPLE_LIGHTEN_1("#ab47bc"),
 	/**
@@ -194,23 +199,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	PURPLE_ACCENT_4("#aa00ff"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_LIGHTEN_5" - <span style="background-color:#ede7f6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_LIGHTEN_5" -
+	 * <span style="background-color:#ede7f6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_LIGHTEN_5("#ede7f6"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_LIGHTEN_4" - <span style="background-color:#d1c4e9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_LIGHTEN_4" -
+	 * <span style="background-color:#d1c4e9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_LIGHTEN_4("#d1c4e9"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_LIGHTEN_3" - <span style="background-color:#b39ddb; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_LIGHTEN_3" -
+	 * <span style="background-color:#b39ddb; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_LIGHTEN_3("#b39ddb"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_LIGHTEN_2" - <span style="background-color:#9575cd; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_LIGHTEN_2" -
+	 * <span style="background-color:#9575cd; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_LIGHTEN_2("#9575cd"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_LIGHTEN_1" - <span style="background-color:#7e57c2; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_LIGHTEN_1" -
+	 * <span style="background-color:#7e57c2; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_LIGHTEN_1("#7e57c2"),
 	/**
@@ -218,55 +228,68 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	DEEP_PURPLE("#673ab7"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_DARKEN_1" - <span style="background-color:#5e35b1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_DARKEN_1" -
+	 * <span style="background-color:#5e35b1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_DARKEN_1("#5e35b1"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_DARKEN_2" - <span style="background-color:#512da8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_DARKEN_2" -
+	 * <span style="background-color:#512da8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_DARKEN_2("#512da8"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_DARKEN_3" - <span style="background-color:#4527a0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_DARKEN_3" -
+	 * <span style="background-color:#4527a0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_DARKEN_3("#4527a0"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_DARKEN_4" - <span style="background-color:#311b92; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_DARKEN_4" -
+	 * <span style="background-color:#311b92; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_DARKEN_4("#311b92"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_ACCENT_1" - <span style="background-color:#b388ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_ACCENT_1" -
+	 * <span style="background-color:#b388ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_ACCENT_1("#b388ff"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_ACCENT_2" - <span style="background-color:#7c4dff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_ACCENT_2" -
+	 * <span style="background-color:#7c4dff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_ACCENT_2("#7c4dff"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_ACCENT_3" - <span style="background-color:#651fff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_ACCENT_3" -
+	 * <span style="background-color:#651fff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_ACCENT_3("#651fff"),
 	/**
-	 * GWT material color name "DEEP_PURPLE_ACCENT_4" - <span style="background-color:#6200ea; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_PURPLE_ACCENT_4" -
+	 * <span style="background-color:#6200ea; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_PURPLE_ACCENT_4("#6200ea"),
 	/**
-	 * GWT material color name "INDIGO_LIGHTEN_5" - <span style="background-color:#e8eaf6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "INDIGO_LIGHTEN_5" -
+	 * <span style="background-color:#e8eaf6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INDIGO_LIGHTEN_5("#e8eaf6"),
 	/**
-	 * GWT material color name "INDIGO_LIGHTEN_4" - <span style="background-color:#c5cae9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "INDIGO_LIGHTEN_4" -
+	 * <span style="background-color:#c5cae9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INDIGO_LIGHTEN_4("#c5cae9"),
 	/**
-	 * GWT material color name "INDIGO_LIGHTEN_3" - <span style="background-color:#9fa8da; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "INDIGO_LIGHTEN_3" -
+	 * <span style="background-color:#9fa8da; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INDIGO_LIGHTEN_3("#9fa8da"),
 	/**
-	 * GWT material color name "INDIGO_LIGHTEN_2" - <span style="background-color:#7986cb; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "INDIGO_LIGHTEN_2" -
+	 * <span style="background-color:#7986cb; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INDIGO_LIGHTEN_2("#7986cb"),
 	/**
-	 * GWT material color name "INDIGO_LIGHTEN_1" - <span style="background-color:#5c6bc0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "INDIGO_LIGHTEN_1" -
+	 * <span style="background-color:#5c6bc0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INDIGO_LIGHTEN_1("#5c6bc0"),
 	/**
@@ -362,23 +385,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	BLUE_ACCENT_4("#2962ff"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_LIGHTEN_5" - <span style="background-color:#e1f5fe; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_LIGHTEN_5" -
+	 * <span style="background-color:#e1f5fe; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_LIGHTEN_5("#e1f5fe"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_LIGHTEN_4" - <span style="background-color:#b3e5fc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_LIGHTEN_4" -
+	 * <span style="background-color:#b3e5fc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_LIGHTEN_4("#b3e5fc"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_LIGHTEN_3" - <span style="background-color:#81d4fa; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_LIGHTEN_3" -
+	 * <span style="background-color:#81d4fa; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_LIGHTEN_3("#81d4fa"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_LIGHTEN_2" - <span style="background-color:#4fc3f7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_LIGHTEN_2" -
+	 * <span style="background-color:#4fc3f7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_LIGHTEN_2("#4fc3f7"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_LIGHTEN_1" - <span style="background-color:#29b6f6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_LIGHTEN_1" -
+	 * <span style="background-color:#29b6f6; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_LIGHTEN_1("#29b6f6"),
 	/**
@@ -386,35 +414,43 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	LIGHT_BLUE("#03a9f4"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_DARKEN_1" - <span style="background-color:#039be5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_DARKEN_1" -
+	 * <span style="background-color:#039be5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_DARKEN_1("#039be5"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_DARKEN_2" - <span style="background-color:#0288d1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_DARKEN_2" -
+	 * <span style="background-color:#0288d1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_DARKEN_2("#0288d1"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_DARKEN_3" - <span style="background-color:#0277bd; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_DARKEN_3" -
+	 * <span style="background-color:#0277bd; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_DARKEN_3("#0277bd"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_DARKEN_4" - <span style="background-color:#01579b; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_DARKEN_4" -
+	 * <span style="background-color:#01579b; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_DARKEN_4("#01579b"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_ACCENT_1" - <span style="background-color:#80d8ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_ACCENT_1" -
+	 * <span style="background-color:#80d8ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_ACCENT_1("#80d8ff"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_ACCENT_2" - <span style="background-color:#40c4ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_ACCENT_2" -
+	 * <span style="background-color:#40c4ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_ACCENT_2("#40c4ff"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_ACCENT_3" - <span style="background-color:#00b0ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_ACCENT_3" -
+	 * <span style="background-color:#00b0ff; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_ACCENT_3("#00b0ff"),
 	/**
-	 * GWT material color name "LIGHT_BLUE_ACCENT_4" - <span style="background-color:#0091ea; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_BLUE_ACCENT_4" -
+	 * <span style="background-color:#0091ea; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_BLUE_ACCENT_4("#0091ea"),
 	/**
@@ -586,23 +622,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	GREEN_ACCENT_4("#00c853"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_LIGHTEN_5" - <span style="background-color:#f1f8e9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_LIGHTEN_5" -
+	 * <span style="background-color:#f1f8e9; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_LIGHTEN_5("#f1f8e9"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_LIGHTEN_4" - <span style="background-color:#dcedc8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_LIGHTEN_4" -
+	 * <span style="background-color:#dcedc8; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_LIGHTEN_4("#dcedc8"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_LIGHTEN_3" - <span style="background-color:#c5e1a5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_LIGHTEN_3" -
+	 * <span style="background-color:#c5e1a5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_LIGHTEN_3("#c5e1a5"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_LIGHTEN_2" - <span style="background-color:#aed581; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_LIGHTEN_2" -
+	 * <span style="background-color:#aed581; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_LIGHTEN_2("#aed581"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_LIGHTEN_1" - <span style="background-color:#9ccc65; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_LIGHTEN_1" -
+	 * <span style="background-color:#9ccc65; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_LIGHTEN_1("#9ccc65"),
 	/**
@@ -610,35 +651,43 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	LIGHT_GREEN("#8bc34a"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_DARKEN_1" - <span style="background-color:#7cb342; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_DARKEN_1" -
+	 * <span style="background-color:#7cb342; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_DARKEN_1("#7cb342"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_DARKEN_2" - <span style="background-color:#689f38; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_DARKEN_2" -
+	 * <span style="background-color:#689f38; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_DARKEN_2("#689f38"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_DARKEN_3" - <span style="background-color:#558b2f; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_DARKEN_3" -
+	 * <span style="background-color:#558b2f; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_DARKEN_3("#558b2f"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_DARKEN_4" - <span style="background-color:#33691e; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_DARKEN_4" -
+	 * <span style="background-color:#33691e; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_DARKEN_4("#33691e"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_ACCENT_1" - <span style="background-color:#ccff90; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_ACCENT_1" -
+	 * <span style="background-color:#ccff90; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_ACCENT_1("#ccff90"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_ACCENT_2" - <span style="background-color:#b2ff59; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_ACCENT_2" -
+	 * <span style="background-color:#b2ff59; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_ACCENT_2("#b2ff59"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_ACCENT_3" - <span style="background-color:#76ff03; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_ACCENT_3" -
+	 * <span style="background-color:#76ff03; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_ACCENT_3("#76ff03"),
 	/**
-	 * GWT material color name "LIGHT_GREEN_ACCENT_4" - <span style="background-color:#64dd17; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "LIGHT_GREEN_ACCENT_4" -
+	 * <span style="background-color:#64dd17; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	LIGHT_GREEN_ACCENT_4("#64dd17"),
 	/**
@@ -698,23 +747,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	LIME_ACCENT_4("#aeea00"),
 	/**
-	 * GWT material color name "YELLOW_LIGHTEN_5" - <span style="background-color:#fffde7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "YELLOW_LIGHTEN_5" -
+	 * <span style="background-color:#fffde7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	YELLOW_LIGHTEN_5("#fffde7"),
 	/**
-	 * GWT material color name "YELLOW_LIGHTEN_4" - <span style="background-color:#fff9c4; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "YELLOW_LIGHTEN_4" -
+	 * <span style="background-color:#fff9c4; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	YELLOW_LIGHTEN_4("#fff9c4"),
 	/**
-	 * GWT material color name "YELLOW_LIGHTEN_3" - <span style="background-color:#fff59d; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "YELLOW_LIGHTEN_3" -
+	 * <span style="background-color:#fff59d; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	YELLOW_LIGHTEN_3("#fff59d"),
 	/**
-	 * GWT material color name "YELLOW_LIGHTEN_2" - <span style="background-color:#fff176; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "YELLOW_LIGHTEN_2" -
+	 * <span style="background-color:#fff176; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	YELLOW_LIGHTEN_2("#fff176"),
 	/**
-	 * GWT material color name "YELLOW_LIGHTEN_1" - <span style="background-color:#ffee58; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "YELLOW_LIGHTEN_1" -
+	 * <span style="background-color:#ffee58; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	YELLOW_LIGHTEN_1("#ffee58"),
 	/**
@@ -810,23 +864,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	AMBER_ACCENT_4("#ffab00"),
 	/**
-	 * GWT material color name "ORANGE_LIGHTEN_5" - <span style="background-color:#fff3e0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "ORANGE_LIGHTEN_5" -
+	 * <span style="background-color:#fff3e0; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ORANGE_LIGHTEN_5("#fff3e0"),
 	/**
-	 * GWT material color name "ORANGE_LIGHTEN_4" - <span style="background-color:#ffe0b2; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "ORANGE_LIGHTEN_4" -
+	 * <span style="background-color:#ffe0b2; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ORANGE_LIGHTEN_4("#ffe0b2"),
 	/**
-	 * GWT material color name "ORANGE_LIGHTEN_3" - <span style="background-color:#ffcc80; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "ORANGE_LIGHTEN_3" -
+	 * <span style="background-color:#ffcc80; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ORANGE_LIGHTEN_3("#ffcc80"),
 	/**
-	 * GWT material color name "ORANGE_LIGHTEN_2" - <span style="background-color:#ffb74d; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "ORANGE_LIGHTEN_2" -
+	 * <span style="background-color:#ffb74d; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ORANGE_LIGHTEN_2("#ffb74d"),
 	/**
-	 * GWT material color name "ORANGE_LIGHTEN_1" - <span style="background-color:#ffa726; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "ORANGE_LIGHTEN_1" -
+	 * <span style="background-color:#ffa726; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ORANGE_LIGHTEN_1("#ffa726"),
 	/**
@@ -866,23 +925,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	ORANGE_ACCENT_4("#ff6d00"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_LIGHTEN_5" - <span style="background-color:#fbe9e7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_LIGHTEN_5" -
+	 * <span style="background-color:#fbe9e7; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_LIGHTEN_5("#fbe9e7"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_LIGHTEN_4" - <span style="background-color:#ffccbc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_LIGHTEN_4" -
+	 * <span style="background-color:#ffccbc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_LIGHTEN_4("#ffccbc"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_LIGHTEN_3" - <span style="background-color:#ffab91; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_LIGHTEN_3" -
+	 * <span style="background-color:#ffab91; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_LIGHTEN_3("#ffab91"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_LIGHTEN_2" - <span style="background-color:#ff8a65; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_LIGHTEN_2" -
+	 * <span style="background-color:#ff8a65; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_LIGHTEN_2("#ff8a65"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_LIGHTEN_1" - <span style="background-color:#ff7043; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_LIGHTEN_1" -
+	 * <span style="background-color:#ff7043; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_LIGHTEN_1("#ff7043"),
 	/**
@@ -890,35 +954,43 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	DEEP_ORANGE("#ff5722"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_DARKEN_1" - <span style="background-color:#f4511e; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_DARKEN_1" -
+	 * <span style="background-color:#f4511e; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_DARKEN_1("#f4511e"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_DARKEN_2" - <span style="background-color:#e64a19; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_DARKEN_2" -
+	 * <span style="background-color:#e64a19; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_DARKEN_2("#e64a19"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_DARKEN_3" - <span style="background-color:#d84315; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_DARKEN_3" -
+	 * <span style="background-color:#d84315; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_DARKEN_3("#d84315"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_DARKEN_4" - <span style="background-color:#bf360c; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_DARKEN_4" -
+	 * <span style="background-color:#bf360c; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_DARKEN_4("#bf360c"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_ACCENT_1" - <span style="background-color:#ff9e80; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_ACCENT_1" -
+	 * <span style="background-color:#ff9e80; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_ACCENT_1("#ff9e80"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_ACCENT_2" - <span style="background-color:#ff6e40; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_ACCENT_2" -
+	 * <span style="background-color:#ff6e40; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_ACCENT_2("#ff6e40"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_ACCENT_3" - <span style="background-color:#ff3d00; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_ACCENT_3" -
+	 * <span style="background-color:#ff3d00; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_ACCENT_3("#ff3d00"),
 	/**
-	 * GWT material color name "DEEP_ORANGE_ACCENT_4" - <span style="background-color:#dd2c00; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "DEEP_ORANGE_ACCENT_4" -
+	 * <span style="background-color:#dd2c00; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEEP_ORANGE_ACCENT_4("#dd2c00"),
 	/**
@@ -1002,23 +1074,28 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	GREY_DARKEN_4("#212121"),
 	/**
-	 * GWT material color name "BLUE_GREY_LIGHTEN_5" - <span style="background-color:#eceff1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_LIGHTEN_5" -
+	 * <span style="background-color:#eceff1; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_LIGHTEN_5("#eceff1"),
 	/**
-	 * GWT material color name "BLUE_GREY_LIGHTEN_4" - <span style="background-color:#cfd8dc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_LIGHTEN_4" -
+	 * <span style="background-color:#cfd8dc; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_LIGHTEN_4("#cfd8dc"),
 	/**
-	 * GWT material color name "BLUE_GREY_LIGHTEN_3" - <span style="background-color:#b0bec5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_LIGHTEN_3" -
+	 * <span style="background-color:#b0bec5; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_LIGHTEN_3("#b0bec5"),
 	/**
-	 * GWT material color name "BLUE_GREY_LIGHTEN_2" - <span style="background-color:#90a4ae; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_LIGHTEN_2" -
+	 * <span style="background-color:#90a4ae; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_LIGHTEN_2("#90a4ae"),
 	/**
-	 * GWT material color name "BLUE_GREY_LIGHTEN_1" - <span style="background-color:#78909c; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_LIGHTEN_1" -
+	 * <span style="background-color:#78909c; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_LIGHTEN_1("#78909c"),
 	/**
@@ -1026,19 +1103,23 @@ public enum GwtMaterialColor implements IsEnumeratedColor
 	 */
 	BLUE_GREY("#607d8b"),
 	/**
-	 * GWT material color name "BLUE_GREY_DARKEN_1" - <span style="background-color:#546e7a; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_DARKEN_1" -
+	 * <span style="background-color:#546e7a; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_DARKEN_1("#546e7a"),
 	/**
-	 * GWT material color name "BLUE_GREY_DARKEN_2" - <span style="background-color:#455a64; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_DARKEN_2" -
+	 * <span style="background-color:#455a64; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_DARKEN_2("#455a64"),
 	/**
-	 * GWT material color name "BLUE_GREY_DARKEN_3" - <span style="background-color:#37474f; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_DARKEN_3" -
+	 * <span style="background-color:#37474f; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_DARKEN_3("#37474f"),
 	/**
-	 * GWT material color name "BLUE_GREY_DARKEN_4" - <span style="background-color:#263238; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * GWT material color name "BLUE_GREY_DARKEN_4" -
+	 * <span style="background-color:#263238; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	BLUE_GREY_DARKEN_4("#263238"),
 	/**

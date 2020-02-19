@@ -16,8 +16,7 @@
 package org.pepstock.charba.client;
 
 /**
- * Default implementation of charts life cycle listener to help who wants to implement only some methods and not the complete
- * interface.<br>
+ * Default implementation of charts life cycle listener to help who wants to implement only some methods and not the complete interface.<br>
  * If the implementation doesn't override the methods, the method doesn't do anything.
  * 
  * @author Andrea "Stock" Stocchero

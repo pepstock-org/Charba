@@ -20,8 +20,7 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.enums.Align;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>align</code> property at runtime, using the chart
- * instance and the plugin context.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>align</code> property at runtime, using the chart instance and the plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *

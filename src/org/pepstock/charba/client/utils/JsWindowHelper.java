@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on <code>window</code> java script object.
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on <code>window</code> java script
+ * object.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -55,9 +55,8 @@ public final class JsWindowHelper {
 	}
 
 	/**
-	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
-	 * to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
-	 * hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
+	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts to need to resize. However, the resize won't happen
+	 * automatically. To support resizing charts when printing, one needs to hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
 	 * 
 	 */
 	public void enableResizeOnBeforePrint() {

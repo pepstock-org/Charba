@@ -137,8 +137,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to
-	 * capture both.<br>
+	 * Sets the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
 	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
 	 * 
 	 * @param speed the double-click speed in milliseconds
@@ -148,8 +147,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to
-	 * capture both.<br>
+	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
 	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
 	 * 
 	 * @return the double-click speed in milliseconds

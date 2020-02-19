@@ -49,7 +49,8 @@ public enum UiGradient
 	ABBAS(UiGradientConstants.COLOR_00FFF0, UiGradientConstants.COLOR_0083FE),
 
 	/**
-	 * UiGradient name "After the Rain" - <span style="background: linear-gradient(to right, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "After the Rain" -
+	 * <span style="background: linear-gradient(to right, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	AFTER_THE_RAIN(UiGradientConstants.COLOR_FF75C3, UiGradientConstants.COLOR_FFA647, UiGradientConstants.COLOR_FFE83F, UiGradientConstants.COLOR_9FFF5B, UiGradientConstants.COLOR_70E2FF, UiGradientConstants.COLOR_CD93FF),
@@ -85,7 +86,8 @@ public enum UiGradient
 	ALMOST(UiGradientConstants.COLOR_DDD6F3, UiGradientConstants.COLOR_FAACA8),
 
 	/**
-	 * UiGradient name "Ameena" - <span style="background: linear-gradient(to right, #0c0c6d, #de512b, #98d0c1, #5bb226, #023c0d); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "Ameena" -
+	 * <span style="background: linear-gradient(to right, #0c0c6d, #de512b, #98d0c1, #5bb226, #023c0d); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	AMEENA(UiGradientConstants.COLOR_0C0C6D, UiGradientConstants.COLOR_DE512B, UiGradientConstants.COLOR_98D0C1, UiGradientConstants.COLOR_5BB226, UiGradientConstants.COLOR_023C0D),
@@ -685,13 +687,15 @@ public enum UiGradient
 	EDS_SUNSET_GRADIENT(UiGradientConstants.COLOR_FF7E5F, UiGradientConstants.COLOR_FEB47B),
 
 	/**
-	 * UiGradient name "Elate The Euge" - <span style="background: linear-gradient(to right, #8BDEDA, 43ADD0, 998EE0, E17DC2, EF9393); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "Elate The Euge" -
+	 * <span style="background: linear-gradient(to right, #8BDEDA, 43ADD0, 998EE0, E17DC2, EF9393); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ELATE_THE_EUGE(UiGradientConstants.COLOR_8BDEDA, UiGradientConstants.COLOR_43ADD0, UiGradientConstants.COLOR_998EE0, UiGradientConstants.COLOR_E17DC2, UiGradientConstants.COLOR_EF9393),
 
 	/**
-	 * UiGradient name "Electric Peacock" - <span style="background: linear-gradient(to right, #8a2be2, #0000cd, #228b22, #ccff00); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "Electric Peacock" -
+	 * <span style="background: linear-gradient(to right, #8a2be2, #0000cd, #228b22, #ccff00); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ELECTRIC_PEACOCK(UiGradientConstants.COLOR_8A2BE2, UiGradientConstants.COLOR_0000CD, UiGradientConstants.COLOR_228B22, UiGradientConstants.COLOR_CCFF00),
@@ -2137,7 +2141,8 @@ public enum UiGradient
 	ULTRA_VOILET(UiGradientConstants.COLOR_654EA3, UiGradientConstants.COLOR_EAAFC8),
 
 	/**
-	 * UiGradient name "Under Blue Green" - <span style="background: linear-gradient(to right, #051937, #004d7a, #008793, #00bf72, #a8eb12); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "Under Blue Green" -
+	 * <span style="background: linear-gradient(to right, #051937, #004d7a, #008793, #00bf72, #a8eb12); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	UNDER_BLUE_GREEN(UiGradientConstants.COLOR_051937, UiGradientConstants.COLOR_004D7A, UiGradientConstants.COLOR_008793, UiGradientConstants.COLOR_00BF72, UiGradientConstants.COLOR_A8EB12),
@@ -2251,7 +2256,8 @@ public enum UiGradient
 	WHAT_LIES_BEYOND(UiGradientConstants.COLOR_F0F2F0, UiGradientConstants.COLOR_000C40),
 
 	/**
-	 * UiGradient name "Whinehouse" - <span style="background: linear-gradient(to right, #f7f7f7, #b9a0a0, #794747, #4e2020, #111111); border-style: solid; border-width: 1px; font-size:
+	 * UiGradient name "Whinehouse" -
+	 * <span style="background: linear-gradient(to right, #f7f7f7, #b9a0a0, #794747, #4e2020, #111111); border-style: solid; border-width: 1px; font-size:
 	 * 150%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	WHINEHOUSE(UiGradientConstants.COLOR_F7F7F7, UiGradientConstants.COLOR_B9A0A0, UiGradientConstants.COLOR_794747, UiGradientConstants.COLOR_4E2020, UiGradientConstants.COLOR_111111),

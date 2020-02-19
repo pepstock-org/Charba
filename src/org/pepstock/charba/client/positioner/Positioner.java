@@ -31,8 +31,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Manages the custom tooltip positioner. With a custom positioner you can decide where the tooltip can appear returning the
- * point in the canvas.
+ * Manages the custom tooltip positioner. With a custom positioner you can decide where the tooltip can appear returning the point in the canvas.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -149,8 +148,7 @@ public final class Positioner {
 
 	/**
 	 * Unregister the tooltips positioner to CHART.JS.<br>
-	 * Pay attention that when a tooltip positioner is unregistered, if any charts, which still have the tooltip position of the
-	 * positioner, will fail.
+	 * Pay attention that when a tooltip positioner is unregistered, if any charts, which still have the tooltip position of the positioner, will fail.
 	 * 
 	 * @param position custom tooltip position instance
 	 */

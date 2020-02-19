@@ -34,20 +34,17 @@ public interface Key {
 	}
 
 	/**
-	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as
-	 * well.
+	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well.
 	 * 
 	 * @param key key to be checked
-	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as
-	 *         well.
+	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well.
 	 */
 	static boolean isValid(Key key) {
 		return key != null && key.value() != null;
 	}
 
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a
-	 * {@link IllegalArgumentException}.
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param key key to be checked
 	 */
@@ -58,8 +55,8 @@ public interface Key {
 	}
 
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a
-	 * {@link IllegalArgumentException}, otherwise it returns the key.
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}, otherwise it
+	 * returns the key.
 	 * 
 	 * @param key key to be checked
 	 * @return the same key passed as argument
@@ -71,6 +68,7 @@ public interface Key {
 		// then returns the argument
 		return key;
 	}
+
 	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
 	 * 
@@ -127,8 +125,7 @@ public interface Key {
 	 * 
 	 * @param k1 the first key to compare
 	 * @param k2 the second key to compare
-	 * @return the value 0 if k1 value is equal to k2; a value less than 0 if k1 value is less than k2; and a value greater than
-	 *         0 if k1 value is greater than k2.
+	 * @return the value 0 if k1 value is equal to k2; a value less than 0 if k1 value is less than k2; and a value greater than 0 if k1 value is greater than k2.
 	 */
 	static int compare(Key k1, Key k2) {
 		// checks if k1 argument is consistent

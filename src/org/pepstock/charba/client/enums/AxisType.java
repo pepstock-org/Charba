@@ -41,8 +41,7 @@ public enum AxisType implements Key
 	 */
 	CATEGORY("category"),
 	/**
-	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most
-	 * comfortable unit base on the size of the scale.<br>
+	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.<br>
 	 * Not implemented
 	 */
 	TIME("time"),

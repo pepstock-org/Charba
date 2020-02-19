@@ -41,8 +41,7 @@ public class RadialPointLabels extends AxisContainer {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called to transform data labels to point labels. The default implementation simply returns
-	 * the current string.<br>
+	 * Java script FUNCTION callback called to transform data labels to point labels. The default implementation simply returns the current string.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -51,8 +50,7 @@ public class RadialPointLabels extends AxisContainer {
 	interface ProxyPointLabelCallback {
 
 		/**
-		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns
-		 * the current string.
+		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns the current string.
 		 * 
 		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item label of the point
@@ -165,16 +163,14 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * Sets the font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *            inherit).
+	 * @param fontStyle font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getAxis().getScale().getPointLabels().setFontStyle(fontStyle);
 	}
 
 	/**
-	 * Returns the font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 * inherit).
+	 * Returns the font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @return font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */

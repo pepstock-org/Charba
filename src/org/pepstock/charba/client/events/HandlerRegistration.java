@@ -22,7 +22,7 @@ package org.pepstock.charba.client.events;
  *
  */
 public final class HandlerRegistration {
-	
+
 	// handler manager instance
 	private final HandlerManager manager;
 	// event handler instance

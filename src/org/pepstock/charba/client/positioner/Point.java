@@ -22,8 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in
- * canvas coordinates.
+ * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in canvas coordinates.
  * 
  * @author Andrea "Stock" Stocchero
  */

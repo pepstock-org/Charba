@@ -20,8 +20,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Date adapter module for LUXON.<br>
- * <b><a href="https://moment.github.io/luxon/">luxon</a></b> provides a powerful, modern, and friendly wrapper for javascript
- * dates and times.
+ * <b><a href="https://moment.github.io/luxon/">luxon</a></b> provides a powerful, modern, and friendly wrapper for javascript dates and times.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -49,8 +48,7 @@ public final class LuxonModule extends AbstractModule {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.
-	 * DateAdapterOptions)
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters. DateAdapterOptions)
 	 */
 	@Override
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {

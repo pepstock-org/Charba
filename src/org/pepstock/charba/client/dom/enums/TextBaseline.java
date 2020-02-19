@@ -30,8 +30,7 @@ public enum TextBaseline implements Key
 	 */
 	ALPHABETIC("alphabetic"),
 	/**
-	 * The text baseline is the bottom of the bounding box. This differs from the ideographic baseline in that the ideographic
-	 * baseline doesn't consider descenders.
+	 * The text baseline is the bottom of the bounding box. This differs from the ideographic baseline in that the ideographic baseline doesn't consider descenders.
 	 */
 	BOTTOM("bottom"),
 	/**
@@ -39,8 +38,7 @@ public enum TextBaseline implements Key
 	 */
 	HANGING("hanging"),
 	/**
-	 * The text baseline is the ideographic baseline; this is the bottom of the body of the characters, if the main body of
-	 * characters protrudes beneath the alphabetic baseline.
+	 * The text baseline is the ideographic baseline; this is the bottom of the body of the characters, if the main body of characters protrudes beneath the alphabetic baseline.
 	 */
 	IDEOGRAPHIC("ideographic"),
 	/**

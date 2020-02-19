@@ -184,11 +184,9 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the
-	 * percentages to 100 in total.
+	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total.
+	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	boolean isShowActualPercentages() {
 		return getValue(LabelsOptions.Property.SHOW_ACTUAL_PERCENTAGES, LabelsOptions.DEFAULT_SHOW_ACTUAL_PERCENTAGES);

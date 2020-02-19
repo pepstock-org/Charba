@@ -191,8 +191,7 @@ final class HtmlLegendId {
 	/**
 	 * Returns the HTML element id for label or color cell.
 	 * 
-	 * @param isColor if <code>true</code>, the HTML id will use {@link HtmlLegendId#COLOR_COLUMN_ID_TEMPLATE}, otherwise
-	 *            {@link HtmlLegendId#LABEL_COLUMN_ID_TEMPLATE}
+	 * @param isColor if <code>true</code>, the HTML id will use {@link HtmlLegendId#COLOR_COLUMN_ID_TEMPLATE}, otherwise {@link HtmlLegendId#LABEL_COLUMN_ID_TEMPLATE}
 	 * @return the HTML element id for label cell
 	 */
 	private String getIdForColumn(boolean isColor) {

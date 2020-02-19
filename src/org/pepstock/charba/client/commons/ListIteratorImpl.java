@@ -20,8 +20,8 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration,
- * and obtain the iterator's current position in the list.
+ * An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration, and obtain the iterator's current position in the
+ * list.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <E> type of list

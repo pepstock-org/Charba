@@ -619,7 +619,8 @@ public enum HtmlColor implements IsEnumeratedColor
 	 */
 	YELLOW_GREEN("#9ACD32"),
 	/**
-	 * HTML color name "TRANSPARENT" - <span style="background-color:rgba(255, 255, 255, 0); border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	 * HTML color name "TRANSPARENT" -
+	 * <span style="background-color:rgba(255, 255, 255, 0); border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	TRANSPARENT("#FFFFFF", 0);
 

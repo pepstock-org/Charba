@@ -18,8 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the text direction that will force the text direction on the canvas for rendering the legend, regardless of the
- * CSS specified on the canvas.
+ * Enumerates the text direction that will force the text direction on the canvas for rendering the legend, regardless of the CSS specified on the canvas.
  * 
  * @author Andrea "Stock" Stocchero
  *

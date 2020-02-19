@@ -165,8 +165,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
-	 * RemoveHandlerEvent)
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events. RemoveHandlerEvent)
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
@@ -334,8 +333,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	}
 
 	/**
-	 * Sets the text direction of the legend that will force the text direction on the canvas for rendering the legend,
-	 * regardless of the CSS specified on the canvas.
+	 * Sets the text direction of the legend that will force the text direction on the canvas for rendering the legend, regardless of the CSS specified on the canvas.
 	 * 
 	 * @param textDirection the text direction of the legend.
 	 */
@@ -344,8 +342,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	}
 
 	/**
-	 * Returns the text direction of the legend that will force the text direction on the canvas for rendering the legend,
-	 * regardless of the CSS specified on the canvas.
+	 * Returns the text direction of the legend that will force the text direction on the canvas for rendering the legend, regardless of the CSS specified on the canvas.
 	 * 
 	 * @return the text direction of the legend.
 	 */

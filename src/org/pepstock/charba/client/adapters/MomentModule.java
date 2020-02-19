@@ -48,8 +48,7 @@ public final class MomentModule extends AbstractModule {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.
-	 * DateAdapterOptions)
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters. DateAdapterOptions)
 	 */
 	@Override
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {

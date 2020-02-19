@@ -34,8 +34,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 import jsinterop.annotations.JsFunction;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
- * takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -239,8 +238,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
-	 * RemoveHandlerEvent)
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events. RemoveHandlerEvent)
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {

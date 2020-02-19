@@ -104,6 +104,7 @@ public enum ResourceName implements Key
 
 	/**
 	 * Returns the class name of CHARBA injectable resource implementation.
+	 * 
 	 * @return class name of CHARBA injectable resource implementation
 	 */
 	String getClassName() {

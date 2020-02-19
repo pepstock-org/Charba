@@ -25,8 +25,7 @@ import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implementation of tick callback in order to avoid that when all datasets are hidden, the ticks will get a wrong double
- * precision.
+ * Implementation of tick callback in order to avoid that when all datasets are hidden, the ticks will get a wrong double precision.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -69,8 +68,7 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TickCallback#onCallback(org.pepstock.charba.client.configuration .Axis, double,
-	 * int, java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TickCallback#onCallback(org.pepstock.charba.client.configuration .Axis, double, int, java.util.List)
 	 */
 	@Override
 	public String onCallback(Axis axis, double value, int index, List<Double> values) {

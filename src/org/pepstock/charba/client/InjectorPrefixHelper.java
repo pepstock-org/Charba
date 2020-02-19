@@ -69,14 +69,14 @@ final class InjectorPrefixHelper {
 	String getCharbaPrefixPackageName() {
 		return charbaPrefixPackageName;
 	}
-	
+
 	/**
 	 * Returns the prefix to apply to injectable resources DOM element id when they will injected.
 	 * 
 	 * @param resource injectable resource to inject
 	 * @return the prefix to apply to injectable resources DOM element id when they will injected
 	 */
-	String getPrefixPackageName(AbstractInjectableResource resource){
+	String getPrefixPackageName(AbstractInjectableResource resource) {
 		// checks if resource is consistent
 		if (resource == null) {
 			throw new IllegalArgumentException("Injectable resource is null");
@@ -91,6 +91,5 @@ final class InjectorPrefixHelper {
 		// if here, returns CUSTOM prefix
 		return customPrefixPackageName;
 	}
-	
 
 }

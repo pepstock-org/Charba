@@ -31,8 +31,7 @@ public interface TooltipItemSortCallback {
 	 * @param chart chart instance
 	 * @param item1 the first object to be compared.
 	 * @param item2 the second object to be compared.
-	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
-	 *         second.
+	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
 	 */
 	int onItemSort(IsChart chart, TooltipItem item1, TooltipItem item2);
 

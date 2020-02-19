@@ -29,8 +29,7 @@ import org.pepstock.charba.client.enums.Position;
 abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractModel<P, IsDefaultPadding> implements IsDefaultPadding {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param model options model of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

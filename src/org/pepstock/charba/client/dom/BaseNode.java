@@ -169,8 +169,8 @@ public abstract class BaseNode extends BaseEventTarget {
 
 	/**
 	 * Adds a node to the end of the list of children of a specified parent node.<br>
-	 * If the given child is a reference to an existing node in the document, it moves it from its current position to the new
-	 * position (there is no requirement to remove the node from its parent node before appending it to some other node).
+	 * If the given child is a reference to an existing node in the document, it moves it from its current position to the new position (there is no requirement to remove the node
+	 * from its parent node before appending it to some other node).
 	 * 
 	 * @param newChild the node to append to the given parent node (commonly an element)
 	 * @return the appended child

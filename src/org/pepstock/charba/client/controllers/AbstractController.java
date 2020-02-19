@@ -19,8 +19,8 @@ import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.IsChart;
 
 /**
- * Abstract implementation of a controller. If the chart type is implemented without returning a <code>null</code>, every method
- * will invoke the default implementation of parent chart.
+ * Abstract implementation of a controller. If the chart type is implemented without returning a <code>null</code>, every method will invoke the default implementation of parent
+ * chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -30,8 +30,7 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context,
-	 * org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, int)
 	 */
 	@Override
 	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
@@ -45,8 +44,7 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#addElements(org.pepstock.charba.client.controllers.Context,
-	 * org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Controller#addElements(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void addElements(ControllerContext context, IsChart chart) {
@@ -60,8 +58,7 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#addElementAndReset(org.pepstock.charba.client.controllers. Context,
-	 * org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.Controller#addElementAndReset(org.pepstock.charba.client.controllers. Context, org.pepstock.charba.client.IsChart, int)
 	 */
 	@Override
 	public void addElementAndReset(ControllerContext context, IsChart chart, int index) {
@@ -75,8 +72,7 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#draw(org.pepstock.charba.client.controllers.Context,
-	 * org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.Controller#draw(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
 	public void draw(ControllerContext context, IsChart chart, double ease) {
@@ -90,8 +86,8 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers. Context,
-	 * org.pepstock.charba.client.IsChart, org.pepstock.charba.client.controllers.StyleElement)
+	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers. Context, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.controllers.StyleElement)
 	 */
 	@Override
 	public void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element) {
@@ -105,8 +101,8 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.Context,
-	 * org.pepstock.charba.client.IsChart, org.pepstock.charba.client.controllers.StyleElement)
+	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.controllers.StyleElement)
 	 */
 	@Override
 	public void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element) {
@@ -120,8 +116,7 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.Context,
-	 * org.pepstock.charba.client.IsChart, boolean)
+	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override
 	public void update(ControllerContext context, IsChart chart, boolean reset) {

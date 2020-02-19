@@ -38,8 +38,7 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * This dataset is managing some common properties related to background and border colors where every property can be set as a
- * single value or an array.
+ * This dataset is managing some common properties related to background and border colors where every property can be set as a single value or an array.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -393,8 +392,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the elements when hovered. If property is missing or not a color, returns an empty
-	 *         list.
+	 * @return list of the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
 		// checks if the property is not a color (therefore a pattern or gradient)
@@ -422,8 +420,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Returns the fill patters of elements when hovered. If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the fill patterns of elements when hovered. If property is missing or not a pattern, returns an empty
-	 *         list.
+	 * @return list of the fill patterns of elements when hovered. If property is missing or not a pattern, returns an empty list.
 	 */
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color)
@@ -440,8 +437,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty
-	 *         list.
+	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -518,11 +514,9 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty
-	 * list.
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an
-	 *         empty list.
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty list.
 	 */
 	public List<Gradient> getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)

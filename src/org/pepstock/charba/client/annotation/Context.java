@@ -25,8 +25,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The callback or handler context, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native
- * chart.
+ * The callback or handler context, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
  * 
  * @author Andrea "Stock" Stocchero
  */

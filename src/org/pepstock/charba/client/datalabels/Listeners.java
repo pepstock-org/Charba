@@ -28,12 +28,11 @@ import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
 import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
 
 /**
- * This is the LISTENER options of {@link DataLabelsPlugin#ID} plugin allows to register callback(s) to be notified when an
- * event is detected on a specific label. This option is an object where the property is the type of the event to listen and the
- * value is a callback with a unique context argument.<br>
+ * This is the LISTENER options of {@link DataLabelsPlugin#ID} plugin allows to register callback(s) to be notified when an event is detected on a specific label. This option is an
+ * object where the property is the type of the event to listen and the value is a callback with a unique context argument.<br>
  * Charba events need to be enabled in order to get the associated label event working.<br>
- * If no listener is registered, incoming events are immediately ignored, preventing extra computation such as intersecting
- * label bounding box. That means there should be no performance penalty for configurations that don't use events.
+ * If no listener is registered, incoming events are immediately ignored, preventing extra computation such as intersecting label bounding box. That means there should be no
+ * performance penalty for configurations that don't use events.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Img extends BaseHtmlElement implements IsCastable{
+public final class Img extends BaseHtmlElement implements IsCastable {
 
 	/**
 	 * The tag for this element.

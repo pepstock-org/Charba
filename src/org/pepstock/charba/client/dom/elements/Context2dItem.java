@@ -312,8 +312,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * Sets the line dash pattern used when stroking lines.<br>
 	 * It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param lineDash an array of integers that specify distances to alternately draw a line and a gap (in coordinate space
-	 *            units).<br>
+	 * @param lineDash an array of integers that specify distances to alternately draw a line and a gap (in coordinate space units).<br>
 	 *            If the number of elements in the array is odd, the elements of the array get copied and concatenated.<br>
 	 *            If the array is empty, the line dash list is cleared and line strokes return to being solid.
 	 */
@@ -324,8 +323,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * Sets the line dash pattern used when stroking lines.<br>
 	 * It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param lineDash an array of integers that specify distances to alternately draw a line and a gap (in coordinate space
-	 *            units).<br>
+	 * @param lineDash an array of integers that specify distances to alternately draw a line and a gap (in coordinate space units).<br>
 	 *            If the number of elements in the array is odd, the elements of the array get copied and concatenated.<br>
 	 *            If the array is empty, the line dash list is cleared and line strokes return to being solid.
 	 */
@@ -338,8 +336,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * Sets the line dash pattern used when stroking lines.<br>
 	 * It uses a list of values that specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param lineDash a list of integers that specify distances to alternately draw a line and a gap (in coordinate space
-	 *            units).<br>
+	 * @param lineDash a list of integers that specify distances to alternately draw a line and a gap (in coordinate space units).<br>
 	 *            If the number of elements in the list is odd, the elements of the list get copied and concatenated.<br>
 	 *            If the list is empty, the line dash list is cleared and line strokes return to being solid.
 	 */
@@ -384,8 +381,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Returns the color of shadows.<br>
-	 * The shadow's rendered opacity will be affected by the opacity of the fillStyle color when filling, and of the strokeStyle
-	 * color when stroking.
+	 * The shadow's rendered opacity will be affected by the opacity of the fillStyle color when filling, and of the strokeStyle color when stroking.
 	 *
 	 * @return the color of shadows
 	 */
@@ -394,8 +390,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Sets the color of shadows.<br>
-	 * The shadow's rendered opacity will be affected by the opacity of the fillStyle color when filling, and of the strokeStyle
-	 * color when stroking.
+	 * The shadow's rendered opacity will be affected by the opacity of the fillStyle color when filling, and of the strokeStyle color when stroking.
 	 *
 	 * @param shadowColor the color of shadows
 	 */
@@ -633,8 +628,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Adds a circular arc to the current sub-path.<br>
 	 * The arc method creates a circular arc centered at (x, y) with a radius of radius.<br>
-	 * The path starts at "startAngle", ends at "endAngle", and travels in the direction given by "anticlockwise" (defaulting to
-	 * clockwise).
+	 * The path starts at "startAngle", ends at "endAngle", and travels in the direction given by "anticlockwise" (defaulting to clockwise).
 	 *
 	 * @param x the horizontal coordinate of the arc's center
 	 * @param y the vertical coordinate of the arc's center
@@ -663,8 +657,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * adds a circular arc to the current sub-path, using the given control points and radius.<br>
-	 * The arc is automatically connected to the path's latest point with a straight line, if necessary for the specified
-	 * parameters.<br>
+	 * The arc is automatically connected to the path's latest point with a straight line, if necessary for the specified parameters.<br>
 	 * This method is commonly used for making rounded corners.
 	 *
 	 * @param x1 the x-axis coordinate of the first control point
@@ -959,8 +952,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Draws a rectangle that is filled according to the current fill style.<br>
-	 * This method draws directly to the canvas without modifying the current path, so any subsequent fill or stroke calls will
-	 * have no effect on it.
+	 * This method draws directly to the canvas without modifying the current path, so any subsequent fill or stroke calls will have no effect on it.
 	 *
 	 * @param x the x-axis coordinate of the rectangle's starting point
 	 * @param y the y-axis coordinate of the rectangle's starting point
@@ -972,8 +964,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Draws a text string at the specified coordinates, filling the string's characters with the current fill style.<br>
-	 * An parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the
-	 * text or by using a lower font size.
+	 * An parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
 	 * @param text the string to render into the context.<br>
 	 *            The text is rendered using the settings specified by font, text align, text baseline, and direction.
@@ -1084,8 +1075,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Strokes (outlines) the current or given path with the current stroke style.<br>
-	 * Strokes are aligned to the center of a path; in other words, half of the stroke is drawn on the inner side, and half on
-	 * the outer side.
+	 * Strokes are aligned to the center of a path; in other words, half of the stroke is drawn on the inner side, and half on the outer side.
 	 */
 	@JsMethod
 	public native void stroke();
@@ -1103,8 +1093,7 @@ public final class Context2dItem extends BaseHtmlElement {
 
 	/**
 	 * Strokes - that is, draws the outlines of - the characters of a text string at the specified coordinates.<br>
-	 * An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by
-	 * condensing the text or by using a lower font size.
+	 * An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
 	 * @param text the text specifying the text string to render into the context.<br>
 	 *            The text is rendered using the settings specified by font, textAlign, textBaseline, and direction.
@@ -1142,8 +1131,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	public native void transform(double m11, double m12, double m21, double m22, double dx, double dy);
 
 	/**
-	 * Adds a translation transformation to the current matrix by moving the canvas and its origin x units horizontally and y
-	 * units vertically on the grid.
+	 * Adds a translation transformation to the current matrix by moving the canvas and its origin x units horizontally and y units vertically on the grid.
 	 *
 	 * @param x distance to move in the horizontal direction.<br>
 	 *            Positive values are to the right, and negative to the left

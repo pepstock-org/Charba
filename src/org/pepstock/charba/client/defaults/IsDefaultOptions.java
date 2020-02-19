@@ -110,9 +110,8 @@ public interface IsDefaultOptions {
 	double getAspectRatio();
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
-	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
-	 * Returns the pixel ratio.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1
+	 * will force the canvas size to be scaled by that amount. Returns the pixel ratio.
 	 * 
 	 * @return the pixel ratio.
 	 */
@@ -154,11 +153,9 @@ public interface IsDefaultOptions {
 	FontStyle getDefaultFontStyle();
 
 	/**
-	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 * font-family options.
+	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 * 
-	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 *         font-family options.
+	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 */
 	String getDefaultFontFamily();
 
@@ -205,20 +202,17 @@ public interface IsDefaultOptions {
 	double getStartAngle();
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	boolean isDrawOnAttach();
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	boolean isDestroyOnDetach();
 

@@ -24,8 +24,7 @@ import jsinterop.base.JsPropertyMap;
 
 /**
  * A dictionary interface which describes the configuration of a mutation observer.<br>
- * As such, it's primarily used as the type of the options parameter on the
- * {@link MutationObserver#observe(BaseNode, MutationObserverInit)} method.
+ * As such, it's primarily used as the type of the options parameter on the {@link MutationObserver#observe(BaseNode, MutationObserverInit)} method.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -54,12 +53,10 @@ public interface MutationObserverInit {
 	void setAttributes(boolean attributes);
 
 	/**
-	 * Set to true to monitor the specified target node or subtree for changes to the character data contained within the node
-	 * or nodes.<br>
+	 * Set to true to monitor the specified target node or subtree for changes to the character data contained within the node or nodes.<br>
 	 * No default value.
 	 * 
-	 * @param characterData true to monitor the specified target node or subtree for changes to the character data contained
-	 *            within the node or nodes
+	 * @param characterData true to monitor the specified target node or subtree for changes to the character data contained within the node or nodes
 	 */
 	@JsProperty
 	void setCharacterData(boolean characterData);
@@ -68,19 +65,16 @@ public interface MutationObserverInit {
 	 * Set to true to record the previous value of a node's text whenever the text changes on nodes being monitored.<br>
 	 * No default value.
 	 * 
-	 * @param characterDataOldValue true to record the previous value of a node's text whenever the text changes on nodes being
-	 *            monitored
+	 * @param characterDataOldValue true to record the previous value of a node's text whenever the text changes on nodes being monitored
 	 */
 	@JsProperty
 	void setCharacterDataOldValue(boolean characterDataOldValue);
 
 	/**
-	 * Set to true to monitor the target node (and, if subtree is true, its descendants) for the addition of new child nodes or
-	 * removal of existing child nodes.<br>
+	 * Set to true to monitor the target node (and, if subtree is true, its descendants) for the addition of new child nodes or removal of existing child nodes.<br>
 	 * The default is false.
 	 * 
-	 * @param childList true to monitor the target node (and, if subtree is true, its descendants) for the addition of new child
-	 *            nodes or removal of existing child nodes
+	 * @param childList true to monitor the target node (and, if subtree is true, its descendants) for the addition of new child nodes or removal of existing child nodes
 	 */
 	@JsProperty
 	void setChildList(boolean childList);

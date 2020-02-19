@@ -375,8 +375,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	/**
 	 * Sets the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward
-	 * the center.
+	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
 	 * 
 	 * @param xAdjust the adjustment along x-axis (left-right) of label
 	 */
@@ -386,8 +385,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	/**
 	 * Returns the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward
-	 * the center.
+	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
 	 * 
 	 * @return the adjustment along x-axis (left-right) of label
 	 */
@@ -398,8 +396,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	/**
 	 * Sets the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward
-	 * the center.
+	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
 	 * 
 	 * @param yAdjust the adjustment along y-axis (top-bottom) of label
 	 */
@@ -409,8 +406,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	/**
 	 * Returns the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward
-	 * the center.
+	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
 	 * 
 	 * @return the adjustment along y-axis (top-bottom) of label
 	 */

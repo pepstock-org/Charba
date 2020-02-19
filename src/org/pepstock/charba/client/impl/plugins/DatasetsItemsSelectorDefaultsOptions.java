@@ -70,11 +70,9 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 * axis.
+	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 *         axis.
+	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	String getXAxisID() {
 		return getValue(DatasetsItemsSelectorOptions.Property.X_AXIS_ID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
@@ -90,8 +88,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @return the line dash pattern used when stroking lines.
 	 */

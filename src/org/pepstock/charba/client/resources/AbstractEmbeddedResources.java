@@ -19,14 +19,13 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.adapters.AbstractModule;
 
 /**
- * Base class to extend in order to have an java script injection, needed to CHARBA, where CHART.JS and date library will be
- * load in embedded mode.<br>
+ * Base class to extend in order to have an java script injection, needed to CHARBA, where CHART.JS and date library will be load in embedded mode.<br>
  * Every instance must have a module related to date adapter and library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEmbeddedResources extends AbstractResources implements IsResourceType{
+public abstract class AbstractEmbeddedResources extends AbstractResources implements IsResourceType {
 
 	// chart js source code
 	private static final ChartJsResource CHARTJS = new ChartJsResource();
@@ -39,7 +38,7 @@ public abstract class AbstractEmbeddedResources extends AbstractResources implem
 	AbstractEmbeddedResources(AbstractModule module) {
 		super(module);
 	}
-	
+
 	/**
 	 * Contains text representation of date-time java script library code.
 	 * 
@@ -85,21 +84,21 @@ public abstract class AbstractEmbeddedResources extends AbstractResources implem
 			Injector.ensureInjected(resource);
 		}
 	}
-	
+
 	/**
 	 * Checks and get the resource, passed as argument, with the resource name.<br>
 	 * When you are injecting date library and adapters, it is mandatory they have the correct name, fixed by CHARBA constraints.<br>
 	 * If the resource does not have the right name, throws an {@link IllegalArgumentException}.
-	 *  
+	 * 
 	 * @param resource injectable resource instance to check
-	 * @param resourceName the resource name which must be applied into reosurce instance 
+	 * @param resourceName the resource name which must be applied into reosurce instance
 	 * @return injectable resource instance passed as argument
 	 */
 	private AbstractInjectableResource checkAndGetDateTimeResourceName(AbstractInjectableResource resource, ResourceName resourceName) {
 		// checks if the date time resource has got the right name
 		if (!resourceName.value().equalsIgnoreCase(resource.getName())) {
 			// is trying to inject a resource with a wrong name
-			throw new IllegalArgumentException("Unbale to inject resource because must be '"+resourceName.value()+"' instead of '"+resource.getName()+"'");
+			throw new IllegalArgumentException("Unbale to inject resource because must be '" + resourceName.value() + "' instead of '" + resource.getName() + "'");
 		}
 		// if here the resource is correct
 		// then returns the resource passed as argument

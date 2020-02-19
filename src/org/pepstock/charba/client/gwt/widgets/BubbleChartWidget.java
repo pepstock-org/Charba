@@ -27,7 +27,7 @@ import org.pepstock.charba.client.data.BubbleDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleChartWidget extends AbstractChartWidget<BubbleChart>  {
+public class BubbleChartWidget extends AbstractChartWidget<BubbleChart> {
 
 	/**
 	 * Builds the object.
@@ -35,7 +35,7 @@ public class BubbleChartWidget extends AbstractChartWidget<BubbleChart>  {
 	public BubbleChartWidget() {
 		super(new BubbleChart());
 	}
-	
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this chart.

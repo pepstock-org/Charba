@@ -24,7 +24,8 @@ package org.pepstock.charba.client.colors;
 public interface IsColor {
 
 	/**
-	 * Returns <code>true</code> if the passed color instance is consistent, that means with a right red, green, blue and alpha values and if the RGBA string representation is consistent as well.
+	 * Returns <code>true</code> if the passed color instance is consistent, that means with a right red, green, blue and alpha values and if the RGBA string representation is
+	 * consistent as well.
 	 * 
 	 * @param color color instance to check
 	 * @return <code>true</code> if the passed color instance is consistent
@@ -148,8 +149,8 @@ public interface IsColor {
 	}
 
 	/**
-	 * As <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1:1999</a>, applies to the encoding and communication of RGB colors used in computer systems and similar applications, by defining encoding transformations for use in defined
-	 * reference conditions.<br>
+	 * As <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1:1999</a>, applies to the encoding and communication of RGB colors used in computer systems and similar
+	 * applications, by defining encoding transformations for use in defined reference conditions.<br>
 	 * <br>
 	 * 
 	 * <pre>
@@ -171,7 +172,8 @@ public interface IsColor {
 	/**
 	 * Creates a new color that is a brighter version of this color. <br>
 	 * This method applies an arbitrary scale factor to each of the three RGB components of this color to create a brighter version of this color.<br>
-	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of rounding errors.
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of
+	 * rounding errors.
 	 * 
 	 * @return a new color object that is a brighter version of this color with the same alpha value.
 	 */
@@ -182,7 +184,8 @@ public interface IsColor {
 	/**
 	 * Creates a new color that is a brighter version of this color. <br>
 	 * This method applies an arbitrary scale factor to each of the three RGB components of this color to create a brighter version of this color.<br>
-	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of rounding errors.
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of
+	 * rounding errors.
 	 * 
 	 * @param alpha the alpha to set
 	 * @return a new color object that is a brighter version of this color with the passed alpha value.
@@ -235,7 +238,8 @@ public interface IsColor {
 	/**
 	 * Creates a new <code>Color</code> that is a darker version of this <code>Color</code>.<br>
 	 * This method applies an arbitrary scale factor to each of the three RGB components of this <code>Color</code> to create a darker version of this <code>Color</code>.<br>
-	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of rounding errors.
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of
+	 * rounding errors.
 	 * 
 	 * @return a new color object that is a darker version of this color with the same alpha value.
 	 */
@@ -246,7 +250,8 @@ public interface IsColor {
 	/**
 	 * Creates a new <code>Color</code> that is a darker version of this <code>Color</code>.<br>
 	 * This method applies an arbitrary scale factor to each of the three RGB components of this <code>Color</code> to create a darker version of this <code>Color</code>.<br>
-	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of rounding errors.
+	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of
+	 * rounding errors.
 	 * 
 	 * @param alpha the alpha to set
 	 * @return a new color object that is a darker version of this color with the passed alpha value.

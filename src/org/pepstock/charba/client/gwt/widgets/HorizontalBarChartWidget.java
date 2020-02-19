@@ -45,7 +45,7 @@ public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarC
 	protected HorizontalBarChartWidget(HorizontalBarChart extendedChart) {
 		super(extendedChart);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -55,7 +55,7 @@ public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarC
 	public BarOptions getOptions() {
 		return getChart().getOptions();
 	}
-	
+
 	/**
 	 * Creates a new dataset related to chart type.
 	 * 

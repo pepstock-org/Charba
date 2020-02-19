@@ -25,24 +25,24 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public final class EventType implements Key {
-	
+
 	// unique value
 	private final String value;
-	
+
 	/**
 	 * Creates a event type using the class name passed as argument.
 	 * 
-	 * @param clazz class (usually the event one) 
-	 * @param <T> type of event 
+	 * @param clazz class (usually the event one)
+	 * @param <T> type of event
 	 * @return the event type.
 	 */
-	public static <T extends Event> EventType create(Class<T> clazz){
+	public static <T extends Event> EventType create(Class<T> clazz) {
 		// checks if class is not null
 		if (clazz == null) {
 			// if here exception
 			throw new IllegalArgumentException("Class is null. Not able to create a event type");
 		}
-		// creates and returns the event type 
+		// creates and returns the event type
 		return new EventType(clazz.getName());
 	}
 

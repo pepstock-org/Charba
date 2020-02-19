@@ -267,11 +267,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages
-	 * to 100 in total.
+	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional
-	 *            logic to fit the percentages to 100 in total.
+	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setShowActualPercentages(boolean showActualPercentages) {

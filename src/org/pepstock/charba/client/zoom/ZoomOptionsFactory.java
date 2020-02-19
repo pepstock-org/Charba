@@ -30,8 +30,7 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link ZoomPlugin#FACTORY}.<br>
-	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
-	 * when the charts will be destroy.
+	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances when the charts will be destroy.
 	 */
 	ZoomOptionsFactory() {
 		super(ZoomPlugin.ID);
@@ -40,8 +39,7 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
@@ -83,8 +81,8 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

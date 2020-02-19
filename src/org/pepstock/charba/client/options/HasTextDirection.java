@@ -62,8 +62,7 @@ interface HasTextDirection extends IsDefaultTextDirectioner {
 	}
 
 	/**
-	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
-	 * regardless of the CSS specified on the canvas.
+	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips, regardless of the CSS specified on the canvas.
 	 * 
 	 * @param textDirection the text direction of the tooltips.
 	 */

@@ -22,7 +22,7 @@ package org.pepstock.charba.client;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MutationItem{
+public final class MutationItem {
 	// singleton instance
 	private static final MutationItem INSTANCE = new MutationItem();
 

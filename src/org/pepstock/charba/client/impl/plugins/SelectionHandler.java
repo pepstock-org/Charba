@@ -468,8 +468,7 @@ final class SelectionHandler {
 
 	/**
 	 * The snapshot is the image of chart (without any selection).<br>
-	 * Every time the selection is updating, it removes the previous selection putting the original chart (image snapshot) and
-	 * then draws new selection.
+	 * Every time the selection is updating, it removes the previous selection putting the original chart (image snapshot) and then draws new selection.
 	 * 
 	 * @param ctx rendering interface used to draw on a canvas
 	 * @param refresh if is called during a refresh
@@ -1113,8 +1112,7 @@ final class SelectionHandler {
 
 	/**
 	 * Checks and returns the offset for BAR chart.<br>
-	 * Based on offset parameter of axis, the bars are drawn in different way and the the total amount of ticks could be
-	 * different.
+	 * Based on offset parameter of axis, the bars are drawn in different way and the the total amount of ticks could be different.
 	 * 
 	 * @return <code>true</code> if an offset has been set otherwise <code>false</code>.
 	 */

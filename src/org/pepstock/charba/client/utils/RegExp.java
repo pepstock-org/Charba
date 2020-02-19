@@ -29,24 +29,20 @@ import jsinterop.annotations.JsType;
 public final class RegExp {
 
 	/**
-	 * Creates a regular expression. See
-	 * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
+	 * Creates a regular expression. See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
 	 * 
-	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider
-	 *            range of values than would a literal string.
+	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider range of values than would a literal string.
 	 */
 	public RegExp(String pattern) {
 		// do nothing
 	}
 
 	/**
-	 * Creates a regular expression. See
-	 * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
+	 * Creates a regular expression. See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
 	 * 
-	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider
-	 *            range of values than would a literal string.
-	 * @param flags If specified, flags indicates the flags to add. If flags is not specified and a regular expressions object
-	 *            is supplied, that object's flags (and lastIndex value) will be copied over.
+	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider range of values than would a literal string.
+	 * @param flags If specified, flags indicates the flags to add. If flags is not specified and a regular expressions object is supplied, that object's flags (and lastIndex
+	 *            value) will be copied over.
 	 */
 	public RegExp(String pattern, String flags) {
 		// do nothing
@@ -60,7 +56,7 @@ public final class RegExp {
 	 * @return an array of information or null on a mismatch.
 	 */
 	public native RegExpResult exec(String s);
-	
+
 	/**
 	 * Executes a search for a match between a regular expression and a specified string.
 	 * 

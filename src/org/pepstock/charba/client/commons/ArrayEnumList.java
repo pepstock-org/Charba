@@ -126,8 +126,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
 	public E set(int index, E element) {
@@ -146,8 +145,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -159,8 +157,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
 	public E remove(int index) {
@@ -173,8 +170,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -192,8 +188,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {

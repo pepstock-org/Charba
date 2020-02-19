@@ -50,8 +50,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/**
 	 * Creates a callback setting the pointer cursor what is passed as argument.
 	 * 
-	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link CursorType#POINTER}
-	 *            as pointer
+	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link CursorType#POINTER} as pointer
 	 */
 	public DataLabelsSelectionHandler(CursorType cursor) {
 		super(cursor);
@@ -87,8 +86,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onClick(IsChart chart, ScriptableContext context) {

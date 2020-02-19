@@ -31,7 +31,7 @@ final class ControllerTypeChecker {
 	private static final String REGEXP_ID_PATTERN = "^[a-zA-Z0-9_]+$";
 	// regxp objetc to perform check
 	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -56,7 +56,7 @@ final class ControllerTypeChecker {
 		if (type.value().startsWith(Constants.DOT) || type.value().startsWith(Constants.UNDERSCORE)) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not start with a dot or an underscore "));
-		} else if (REGEXP_ID.exec(type.value()) == null){
+		} else if (REGEXP_ID.exec(type.value()) == null) {
 			// checks if is not safe URL
 			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not contain any invalid characters "));
 		}

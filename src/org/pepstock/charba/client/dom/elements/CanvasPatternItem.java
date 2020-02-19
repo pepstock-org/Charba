@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class CanvasPatternItem implements IsCastable{
+public final class CanvasPatternItem implements IsCastable {
 
 	/**
 	 * To avoid any instantiation

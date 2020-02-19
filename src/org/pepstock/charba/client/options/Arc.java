@@ -62,8 +62,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param elements parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -96,8 +95,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 
 	/**
 	 * Sets the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
 	 * 
 	 * @param weight the relative thickness of the dataset
 	 */
@@ -109,8 +107,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 
 	/**
 	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
 	 * 
 	 * @return the relative thickness of the dataset
 	 */

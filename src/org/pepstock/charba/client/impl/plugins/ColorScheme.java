@@ -37,20 +37,17 @@ import org.pepstock.charba.client.commons.Key;
 public interface ColorScheme extends Key {
 
 	/**
-	 * Returns <code>true</code> if color scheme passed as argument is not <code>null</code> and its properties are not
-	 * <code>null</code>.
+	 * Returns <code>true</code> if color scheme passed as argument is not <code>null</code> and its properties are not <code>null</code>.
 	 * 
 	 * @param scheme color scheme to be checked
-	 * @return <code>true</code> if color scheme passed as argument is not <code>null</code> and its properties are not
-	 *         <code>null</code>
+	 * @return <code>true</code> if color scheme passed as argument is not <code>null</code> and its properties are not <code>null</code>
 	 */
 	static boolean isValid(ColorScheme scheme) {
 		return Key.isValid(scheme) && scheme.category() != null && scheme.category().trim().length() > 0 && scheme.getColors() != null && !scheme.getColors().isEmpty();
 	}
 
 	/**
-	 * Returns the color scheme category. If not implemented, the default is
-	 * {@link ColorSchemesOptions#DEFAULT_SCHEME_CATEGORY}.
+	 * Returns the color scheme category. If not implemented, the default is {@link ColorSchemesOptions#DEFAULT_SCHEME_CATEGORY}.
 	 * 
 	 * @return the color scheme category. If not implemented, the default is {@link ColorSchemesOptions#DEFAULT_SCHEME_CATEGORY}
 	 */

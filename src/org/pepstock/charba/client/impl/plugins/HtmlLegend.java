@@ -291,8 +291,8 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Manages if the legend must be displayed or not based on choice of user and what can be changed into chart configuration
-	 * after the chart initialization bu a <code>chart.reconfigure</code>.
+	 * Manages if the legend must be displayed or not based on choice of user and what can be changed into chart configuration after the chart initialization bu a
+	 * <code>chart.reconfigure</code>.
 	 * 
 	 * @param chart chart instance to manage
 	 * @param pOptions plugin option for the chart
@@ -467,10 +467,8 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Manages the HTML legend element to the right position into chart element, depending on {@link Position} set for
-	 * legend.<br>
-	 * This method is called when a legend element is already added and the position could be changed comparing when the element
-	 * has been created.
+	 * Manages the HTML legend element to the right position into chart element, depending on {@link Position} set for legend.<br>
+	 * This method is called when a legend element is already added and the position could be changed comparing when the element has been created.
 	 * 
 	 * @param chart chart instance
 	 * @param legendElement legend HTML element

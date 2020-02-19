@@ -18,28 +18,24 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Determines how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
- * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position, are
- * skipped).
+ * Determines how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+ * end points and control points are exactly at the same position, are skipped).
  * 
  * @author Andrea "Stock" Stocchero
  */
 public enum JoinStyle implements Key
 {
 	/**
-	 * Fills an additional triangular area between the common end point of connected segments, and the separate outside
-	 * rectangular corners of each segment.
+	 * Fills an additional triangular area between the common end point of connected segments, and the separate outside rectangular corners of each segment.
 	 */
 	BEVEL("bevel"),
 	/**
-	 * Rounds off the corners of a shape by filling an additional sector of disc centered at the common end point of connected
-	 * segments.<br>
+	 * Rounds off the corners of a shape by filling an additional sector of disc centered at the common end point of connected segments.<br>
 	 * The radius for these rounded corners is equal to the line width.
 	 */
 	ROUND("round"),
 	/**
-	 * Connected segments are joined by extending their outside edges to connect at a single point, with the effect of filling
-	 * an additional shaped area.<br>
+	 * Connected segments are joined by extending their outside edges to connect at a single point, with the effect of filling an additional shaped area.<br>
 	 * This is the default.
 	 */
 	MITER("miter");

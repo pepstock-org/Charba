@@ -46,8 +46,8 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
-	 * @param createScale if <code>true</code> creates a scale object reading the configuration otherwise it leaves the scale
-	 *            instance to <code>null</code> to allow to be set later.
+	 * @param createScale if <code>true</code> creates a scale object reading the configuration otherwise it leaves the scale instance to <code>null</code> to allow to be set
+	 *            later.
 	 */
 	protected MultiScalesOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean createScale) {
 		super(chart, defaultValues);

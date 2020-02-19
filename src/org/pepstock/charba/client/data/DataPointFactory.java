@@ -28,8 +28,7 @@ final class DataPointFactory implements NativeObjectContainerFactory<DataPoint> 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.
-	 * commons.NativeObject)
+	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
 	 */
 	@Override
 	public DataPoint create(NativeObject nativeObject) {

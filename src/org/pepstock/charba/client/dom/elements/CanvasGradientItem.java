@@ -32,7 +32,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class CanvasGradientItem implements IsCastable{
+public final class CanvasGradientItem implements IsCastable {
 
 	/**
 	 * To avoid any instantiation
@@ -51,12 +51,11 @@ public final class CanvasGradientItem implements IsCastable{
 	 */
 	@JsMethod(name = "addColorStop")
 	private native void nativeAddColorStop(double offset, String color);
-	
+
 	/**
 	 * Adds a new stop, defined by an offset and a color, to the gradient.<br>
 	 * If the offset is not between 0 and 1, inclusive, an {@link IllegalArgumentException} is raised.<br>
-	 * If the color is <code>null</code>, the default color for line element is used.
-	 * If the color can't be parsed as a CSS color, a SYNTAX_ERR is raised.
+	 * If the color is <code>null</code>, the default color for line element is used. If the color can't be parsed as a CSS color, a SYNTAX_ERR is raised.
 	 * 
 	 * @param offset 0 and 1 value to define the offset
 	 * @param color the CSS color
@@ -70,12 +69,11 @@ public final class CanvasGradientItem implements IsCastable{
 		// invokes native method
 		nativeAddColorStop(offset, checkedColor);
 	}
-	
+
 	/**
 	 * Adds a new stop, defined by an offset and a color, to the gradient.<br>
 	 * If the offset is not between 0 and 1, inclusive, an {@link IllegalArgumentException} is raised.<br>
-	 * If the color is <code>null</code>, the default color for line element is used.
-	 * If the color can't be parsed as a CSS color, a SYNTAX_ERR is raised.
+	 * If the color is <code>null</code>, the default color for line element is used. If the color can't be parsed as a CSS color, a SYNTAX_ERR is raised.
 	 * 
 	 * @param offset 0 and 1 value to define the offset
 	 * @param color the CSS color

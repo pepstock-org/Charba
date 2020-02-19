@@ -24,8 +24,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to
- * invoke CHART.JS callbacks, provided out of the box, the default one.
+ * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to invoke CHART.JS callbacks, provided out of the box,
+ * the default one.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -41,8 +41,7 @@ final class NativeJsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking
-	 * <code>legendCallback</code> function property.
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -51,8 +50,7 @@ final class NativeJsCallbacksHelper {
 	static native String generateDefaultLegend(Chart chart, NativeObject options);
 
 	/**
-	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box,
-	 * invoking <code>generateLabels</code> function property.
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.

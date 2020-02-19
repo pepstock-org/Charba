@@ -24,8 +24,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each
- * element is inserted. <br>
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as back-end to store objects (images).
  * 
@@ -102,8 +101,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
 	public boolean addAll(Collection<? extends Img> collection) {
@@ -177,8 +175,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
 	public Img set(int index, Img element) {
@@ -196,8 +193,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
 	public void add(int index, Img element) {
@@ -209,8 +205,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
 	public Img remove(int index) {
@@ -222,8 +217,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -237,8 +231,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {

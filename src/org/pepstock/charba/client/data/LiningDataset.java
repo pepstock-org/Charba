@@ -562,11 +562,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		// resets callback
@@ -576,11 +574,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		// checks if a callback has been set for this property
@@ -635,8 +631,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Returns how the end points of every line are drawn.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -651,9 +646,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
@@ -666,9 +660,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -695,8 +688,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation
-	 * is used.
+	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
 	 * 
 	 * @param lineTension curve tension of the line
 	 */
@@ -705,8 +697,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic
-	 * interpolation is used.
+	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
 	 * 
 	 * @return curve tension of the line.
 	 */
@@ -896,11 +887,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
-	 * <code>null</code>.
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
-	 *         <code>null</code>
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>
 	 */
 	public Gradient getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
@@ -944,11 +933,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern, when element is hovered.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element is
+	 * hovered.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern, when element is hovered
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern,
+	 *            when element is hovered
 	 */
 	public void setHoverBorderDash(int... borderDash) {
 		// resets callback
@@ -958,11 +947,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern, when element is hovered.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element
+	 * is hovered.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern, when element is hovered
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element
+	 *         is hovered
 	 */
 	public List<Integer> getHoverBorderDash() {
 		// checks if a callback has been set for this property
@@ -1017,8 +1006,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Returns how the end points of every line are drawn, when element is hovered.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn, when element is hovered
 	 */
@@ -1033,9 +1021,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped), when element is hovered.<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped), when element is hovered.<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
@@ -1048,9 +1035,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped), when element is hovered.<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped), when element is hovered.<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -1108,11 +1094,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color
-	 * color.
+	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color color.
 	 * 
-	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color
-	 *         color.
+	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color color.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1199,8 +1183,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
-	 *         color.
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
 	 */
 	public List<String> getPointBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1219,8 +1202,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
-	 *         color.
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
 	 */
 	public List<IsColor> getPointBorderColor() {
 		return ColorBuilder.parse(getPointBorderColorAsString());
@@ -1344,11 +1326,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
-	 * background color.
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
-	 *         background color.
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1364,11 +1344,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
-	 * background color.
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
-	 *         background color.
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 */
 	public List<IsColor> getPointHoverBackgroundColor() {
 		return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
@@ -1436,8 +1414,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
-	 *         color.
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1455,8 +1432,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
-	 *         color.
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
 		return ColorBuilder.parse(getPointHoverBorderColorAsString());
@@ -1657,22 +1633,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line
+	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
 	 * 
-	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN
-	 *            data will create a break in the line
+	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
 	 */
 	public void setSpanGaps(boolean spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
-	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line.
+	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
 	 * 
-	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
-	 *         create a break in the line.
+	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());

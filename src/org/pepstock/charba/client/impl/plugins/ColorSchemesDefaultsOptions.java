@@ -73,8 +73,7 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
-	 * transparency).
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no transparency).
 	 * 
 	 * @return the transparency value for the background color
 	 */

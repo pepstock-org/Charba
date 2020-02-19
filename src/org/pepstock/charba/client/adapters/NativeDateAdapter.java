@@ -116,8 +116,7 @@ final class NativeDateAdapter {
 	 * 
 	 * @param time the input timestamp
 	 * @param unit the unit as string
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is
-	 *            isoWeek).
+	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
 	 * @return the start of unit for the given timestamp
 	 */
 	@JsMethod

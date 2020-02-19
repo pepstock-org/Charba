@@ -40,8 +40,7 @@ public class BaseHtmlElement extends BaseElement {
 
 	/**
 	 * Returns the "rendered" text content of a node and its descendants.<br>
-	 * As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor
-	 * and then copied it to the clipboard.
+	 * As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
 	 * 
 	 * @return the "rendered" text content of a node and its descendants
 	 */
@@ -50,8 +49,7 @@ public class BaseHtmlElement extends BaseElement {
 
 	/**
 	 * Sets the "rendered" text content of a node and its descendants.<br>
-	 * As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor
-	 * and then copied it to the clipboard.
+	 * As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
 	 * 
 	 * @param innerText the "rendered" text content of a node and its descendants
 	 */

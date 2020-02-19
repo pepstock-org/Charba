@@ -152,11 +152,9 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default
-	 * color, "white".
+	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 * 
-	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default
-	 *         color, "white".
+	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if color has been set
@@ -168,11 +166,9 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default
-	 * color, "white".
+	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 * 
-	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default
-	 *         color, "white".
+	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 */
 	public IsColor getBackgroundColor() {
 		// checks if color has been set

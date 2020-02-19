@@ -47,8 +47,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/**
 	 * Creates a callback setting the pointer cursor what is passed as argument.
 	 * 
-	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link DataLabelsPointerHandler#DEFAULT_CURSOR} as
-	 *            pointer
+	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link DataLabelsPointerHandler#DEFAULT_CURSOR} as pointer
 	 */
 	public DataLabelsPointerHandler(CursorType cursor) {
 		this.cursor = cursor != null ? cursor : DEFAULT_CURSOR;
@@ -66,8 +65,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onLeave(IsChart chart, ScriptableContext context) {
@@ -81,8 +79,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onEnter(IsChart chart, ScriptableContext context) {

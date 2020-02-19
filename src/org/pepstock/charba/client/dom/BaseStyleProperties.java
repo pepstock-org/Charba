@@ -29,8 +29,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents an object that is a CSS declaration block, and exposes style information and various style-related methods and
- * properties.
+ * Represents an object that is a CSS declaration block, and exposes style information and various style-related methods and properties.
  * 
  * @author Andrea "Stock" Stocchero
  *

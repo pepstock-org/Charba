@@ -63,8 +63,7 @@ import jsinterop.annotations.JsFunction;
 /**
  * This is the {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the plugin.<br>
  * The options could be set by simply the value or by setting a callback.<br>
- * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of
- * charts.<br>
+ * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -81,8 +80,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final Align DEFAULT_ALIGN = Align.CENTER;
 
 	/**
-	 * Default anchor point, which is defined by an orientation vector and a position on the data element,
-	 * {@link Anchor#CENTER}.
+	 * Default anchor point, which is defined by an orientation vector and a position on the data element, {@link Anchor#CENTER}.
 	 */
 	public static final Anchor DEFAULT_ANCHOR = Anchor.CENTER;
 
@@ -107,8 +105,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
-	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element,
-	 * <b>{@value DEFAULT_CLAMP}</b>.
+	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element, <b>{@value DEFAULT_CLAMP}</b>.
 	 */
 	public static final boolean DEFAULT_CLAMP = false;
 
@@ -661,22 +658,18 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the
-	 *            associated element (i.e. part inside the chart area).
+	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	public void setClamp(boolean clamp) {
 		setValue(Property.CLAMP, clamp);
 	}
 
 	/**
-	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area).
+	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	public boolean isClamp() {
 		return getValue(Property.CLAMP, defaultsOptions.isClamp());
@@ -685,8 +678,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * When the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 * 
-	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be
-	 *            masked.
+	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	public void setClip(boolean clip) {
 		setValue(Property.CLIP, clip);
@@ -785,22 +777,22 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is
-	 * 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when
-	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is
+	 *            'start', the label is moved in the opposite direction.
 	 */
 	public void setOffset(double offset) {
 		setValue(Property.OFFSET, offset);
 	}
 
 	/**
-	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 *         label is moved in the opposite direction.
 	 */
 	public double getOffset() {
 		return getValue(Property.OFFSET, defaultsOptions.getOffset());

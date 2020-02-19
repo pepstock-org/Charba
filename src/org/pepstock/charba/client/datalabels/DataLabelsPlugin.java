@@ -23,8 +23,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-datalabels">DATALABELS plugin</a> to enable the plugin.<br>
- * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of
- * charts.
+ * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +43,6 @@ public final class DataLabelsPlugin {
 	static final DataLabelsDefaultsOptionsFactory DEFAULTS_FACTORY = new DataLabelsDefaultsOptionsFactory();
 	// injectable resource for plugin
 	private static final DataLabelsPluginResource RESOURCE = new DataLabelsPluginResource();
-
 
 	/**
 	 * To avoid any instantiation

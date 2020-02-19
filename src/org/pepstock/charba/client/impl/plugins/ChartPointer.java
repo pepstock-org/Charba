@@ -31,8 +31,7 @@ import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
- * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have
- * been defined.
+ * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have been defined.
  * 
  * @author Andrea "Stock" Stocchero
  * @see CursorType
@@ -107,8 +106,9 @@ public final class ChartPointer extends AbstractPlugin {
 		return true;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override

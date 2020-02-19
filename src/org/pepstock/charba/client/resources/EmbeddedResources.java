@@ -33,7 +33,6 @@ public final class EmbeddedResources extends AbstractEmbeddedResources {
 	// date library java script wrapper
 	private final MomentLibraryResource dateLibrary = new MomentLibraryResource();
 
-
 	/**
 	 * To avoid any instantiation
 	 */

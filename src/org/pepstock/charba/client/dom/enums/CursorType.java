@@ -62,8 +62,7 @@ public enum CursorType implements Key
 	PROGRESS("progress"),
 
 	/**
-	 * The program is busy, and the user can't interact with the interface (in contrast to progress). Sometimes an image of an
-	 * hourglass or a watch.
+	 * The program is busy, and the user can't interact with the interface (in contrast to progress). Sometimes an image of an hourglass or a watch.
 	 */
 	WAIT("wait"),
 
@@ -128,21 +127,18 @@ public enum CursorType implements Key
 	ALL_SCROLL("all-scroll"),
 
 	/**
-	 * The item/column can be resized horizontally. Often rendered as arrows pointing left and right with a vertical bar
-	 * separating them.
+	 * The item/column can be resized horizontally. Often rendered as arrows pointing left and right with a vertical bar separating them.
 	 */
 	COL_RESIZE("col-resize"),
 
 	/**
-	 * The item/row can be resized vertically. Often rendered as arrows pointing up and down with a horizontal bar separating
-	 * them.
+	 * The item/row can be resized vertically. Often rendered as arrows pointing up and down with a horizontal bar separating them.
 	 */
 	ROW_RESIZE("row-resize"),
 
 	/**
-	 * Example of a resize towards the top cursor;Some edge is to be moved. For example, the se-resize cursor is used when the
-	 * movement starts from the south-east corner of the box. In some environments, an equivalent bidirectional resize cursor is
-	 * shown. For example, n-resize and s-resize are the same as ns-resize.
+	 * Example of a resize towards the top cursor;Some edge is to be moved. For example, the se-resize cursor is used when the movement starts from the south-east corner of the
+	 * box. In some environments, an equivalent bidirectional resize cursor is shown. For example, n-resize and s-resize are the same as ns-resize.
 	 */
 	N_RESIZE("n-resize"),
 

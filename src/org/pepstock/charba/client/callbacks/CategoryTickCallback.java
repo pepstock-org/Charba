@@ -21,8 +21,7 @@ import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian category
- * axes.
+ * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian category axes.
  * 
  * @author Andrea "Stock" Stocchero
  * @see CartesianCategoryAxis

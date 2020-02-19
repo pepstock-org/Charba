@@ -68,6 +68,7 @@ final class SafeHtmlUtils {
 
 		/**
 		 * Returns the replacement string to apply every time the value is found into the string.
+		 * 
 		 * @return the replacement string to apply every time the value is found into the string
 		 */
 		String getReplacement() {

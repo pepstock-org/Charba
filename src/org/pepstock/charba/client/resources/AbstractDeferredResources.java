@@ -22,24 +22,22 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
- * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library must be
- * load in deferred mode.<br>
+ * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library must be load in deferred mode.<br>
  * Every instance must have a module related to date adapter and library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractDeferredResources extends AbstractResources implements IsResourceType{
+public abstract class AbstractDeferredResources extends AbstractResources implements IsResourceType {
 
 	/**
 	 * Path into the project where the java script resources are stored, <b>{@value}</b>.
 	 */
 	static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
-	
+
 	/**
 	 * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
-	 * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code
-	 * splitting is implemented.
+	 * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code splitting is implemented.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
@@ -59,7 +57,7 @@ public abstract class AbstractDeferredResources extends AbstractResources implem
 		ExternalTextResource chartJs();
 
 	}
-	
+
 	/**
 	 * Creates a deferred resource object by passed module, which represents the date adapter and library, as argument.
 	 * 
@@ -75,7 +73,7 @@ public abstract class AbstractDeferredResources extends AbstractResources implem
 	 * @return the date adapter client bundle with java script definition
 	 */
 	protected abstract DeferredDateAdapterResources getDeferredAdapterResources();
-	
+
 	/**
 	 * Returns the CHART.JS client bundle with java script definition.
 	 * 
@@ -86,8 +84,7 @@ public abstract class AbstractDeferredResources extends AbstractResources implem
 	}
 
 	/**
-	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a
-	 * {@link UnsupportedOperationException}.
+	 * Checks if the module has been injected by {@link EntryPointStarter}. if not, throw a {@link UnsupportedOperationException}.
 	 */
 	@Override
 	public final void inject() {

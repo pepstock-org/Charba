@@ -41,7 +41,7 @@ public final class CastHelper {
 	public static Div toDiv(Object object) {
 		return Js.cast(checkAndGetObject(object));
 	}
-	
+
 	/**
 	 * Returns a {@link Img} object casting the argument.
 	 * 

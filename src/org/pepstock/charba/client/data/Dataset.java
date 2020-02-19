@@ -57,8 +57,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * This is the base implementation for all datasets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
@@ -254,8 +253,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern, otherwise <code>false</code>.
 	 * 
 	 * @param key property name to check
 	 * @return <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern.
@@ -321,8 +319,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is
-	 * selected.
+	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is selected.
 	 * 
 	 * @param key key property name to remove.
 	 */
@@ -336,8 +333,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.<br>
+	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas therefore must be created by a chart.<br>
 	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
@@ -574,8 +570,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	protected abstract void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList);
 
 	/**
-	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.<br>
+	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas therefore must be created by a chart.<br>
 	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
@@ -670,8 +665,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values an array of numbers
 	 */
@@ -688,8 +682,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values list of numbers.
 	 */
@@ -706,8 +699,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
@@ -716,8 +709,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
@@ -1034,15 +1027,13 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
-	 * property in color ones.
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
 	 * 
 	 * @param context scriptable context
 	 * @param callback callback to invoke
 	 * @param property property of dataset used to store the color
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it
-	 *            skips them.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
 	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, Key property, String defaultValue, boolean hasPattern) {

@@ -74,8 +74,7 @@ public abstract class BaseEventTarget {
 
 	/**
 	 * Removes from the event target an event listener previously registered.<br>
-	 * The event listener to be removed is identified using a combination of the event type and the event listener function
-	 * itself.
+	 * The event listener to be removed is identified using a combination of the event type and the event listener function itself.
 	 * 
 	 * @param type a string which specifies the type of event for which to remove an event listener
 	 * @param listener function instance of the event handler to remove from the event target.

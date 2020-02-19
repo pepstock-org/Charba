@@ -22,8 +22,8 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code>
- * or <code>pointHoverBackgroundColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code> or <code>pointHoverBackgroundColor</code> property
+ * at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -79,11 +79,9 @@ public abstract class BaseElement extends BaseNode {
 	public final native int getClientWidth();
 
 	/**
-	 * Returns the first node which is both a child of this element and is also an element, or <code>null</code> if there is
-	 * none.
+	 * Returns the first node which is both a child of this element and is also an element, or <code>null</code> if there is none.
 	 * 
-	 * @return the first node which is both a child of this element and is also an element, or <code>null</code> if there is
-	 *         none
+	 * @return the first node which is both a child of this element and is also an element, or <code>null</code> if there is none
 	 */
 	@JsProperty
 	public final native BaseElement getFirstElementChild();

@@ -22,8 +22,7 @@ import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building, for
- * {@link CartesianCategoryAxis}.
+ * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianCategoryAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  */

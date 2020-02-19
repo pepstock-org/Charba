@@ -78,8 +78,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	private final Filler filler;
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param elements parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -123,8 +122,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
-	 * round and square.
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -135,8 +133,8 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set
+	 * to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -145,11 +143,9 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
@@ -158,11 +154,9 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
@@ -190,9 +184,8 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle there are three possible values for this property: round, bevel and miter.
@@ -204,9 +197,8 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return there are three possible values for this property: round, bevel and miter.
@@ -246,10 +238,9 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * </pre>
 	 * 
 	 * <br>
-	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
-	 * datasets.<br>
-	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
-	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local
+	 * extremums (if any) stay at input data points.
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */

@@ -22,8 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents the dimensions of a piece of text in the canvas, as created by the {@link Context2dItem#measureText(String)}
- * method.
+ * Represents the dimensions of a piece of text in the canvas, as created by the {@link Context2dItem#measureText(String)} method.
  * 
  * @author Andrea "Stock" Stocchero
  *

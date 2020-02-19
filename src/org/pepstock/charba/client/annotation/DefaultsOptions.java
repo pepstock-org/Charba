@@ -62,8 +62,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to
-	 * capture both.<br>
+	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
 	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
 	 * 
 	 * @return the double-click speed in milliseconds

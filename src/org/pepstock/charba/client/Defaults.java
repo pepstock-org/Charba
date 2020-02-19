@@ -493,8 +493,7 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart,
-		 * org.pepstock.charba.client.Chart)
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
 		 */
 		@Override
 		public void onAfterInit(IsChart chart, Chart nativeChart) {

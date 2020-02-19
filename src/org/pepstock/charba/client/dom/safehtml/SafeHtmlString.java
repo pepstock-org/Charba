@@ -23,7 +23,7 @@ package org.pepstock.charba.client.dom.safehtml;
  */
 final class SafeHtmlString implements SafeHtml {
 
-	// html wrapped string 
+	// html wrapped string
 	private String html;
 
 	/**

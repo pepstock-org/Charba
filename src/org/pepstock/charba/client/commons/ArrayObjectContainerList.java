@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each
- * element is inserted. <br>
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as back-end to store objects (native object containers).<br>
  * Elements are instances of {@link NativeObjectContainer}.
@@ -186,8 +185,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
 	public E set(int index, E element) {
@@ -205,8 +203,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -220,8 +217,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
 	public E remove(int index) {
@@ -238,8 +234,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -252,8 +247,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {
@@ -274,8 +268,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the
-	 * list.<br>
+	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the list.<br>
 	 * The specified index indicates the first element that would be returned by an initial call to next.<br>
 	 * An initial call to previous would return the element with the specified index minus one.
 	 */

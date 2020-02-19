@@ -165,7 +165,7 @@ public final class DOMBuilder {
 		// return sthe image
 		return image;
 	}
-	
+
 	/**
 	 * Creates a &lt;table&gt; element.
 	 * 

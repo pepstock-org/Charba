@@ -101,8 +101,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent
-	 * render(s)) until another 'update' is triggered.
+	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -114,8 +113,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
-	 * has been previously cancelled.
+	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -126,8 +124,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another
-	 * 'update' is triggered.
+	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -139,8 +136,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
-	 * previously cancelled.
+	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -151,8 +147,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled
-	 * until another 'update' is triggered.
+	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -164,8 +159,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has
-	 * been previously cancelled.
+	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -190,8 +184,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if
-	 * the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.
@@ -203,8 +196,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another
-	 * 'render' is triggered.
+	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -216,8 +208,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the
-	 * rendering has been previously cancelled.
+	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the rendering has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param options plugin options set by user into chart options.
@@ -228,8 +219,8 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns
-	 * <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns <code>false</code>, the frame drawing is cancelled until
+	 * another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -242,8 +233,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the
-	 * drawing has been previously cancelled.
+	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -255,8 +245,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled
-	 * until another 'render' is triggered.
+	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -269,8 +258,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has
-	 * been previously cancelled.
+	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -282,8 +270,8 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any
-	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any plugin returns <code>false</code>, the datasets drawing
+	 * is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.
@@ -296,8 +284,8 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).
-	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order). Note that this hook will not be called if the datasets
+	 * drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.
@@ -309,8 +297,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until
-	 * another 'render' is triggered.
+	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.
@@ -323,8 +310,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously
-	 * cancelled.
+	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.
@@ -349,8 +335,7 @@ final class NativePlugin {
 	}
 
 	/**
-	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously
-	 * discarded.
+	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
 	 * 
 	 * @param chart The chart instance.
 	 * @param item native item instance.

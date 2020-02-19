@@ -22,8 +22,8 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to manage ENTER events on labels.<br>
  * Charba events need to be enabled in order to get the associated label event working.<br>
- * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered.
- * This allows to implement visual interactions with labels such as highlight, selection, etc.
+ * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered. This allows to implement visual interactions with
+ * labels such as highlight, selection, etc.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -35,8 +35,7 @@ public interface EnterEventHandler {
 	 * 
 	 * @param chart chart instance
 	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
-	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-	 *         re-rendered.
+	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered.
 	 */
 	boolean onEnter(IsChart chart, ScriptableContext context);
 

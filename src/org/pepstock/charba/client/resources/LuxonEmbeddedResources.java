@@ -30,9 +30,9 @@ public final class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 	public static final LuxonEmbeddedResources INSTANCE = new LuxonEmbeddedResources();
 	// date adapter java script wrapper
 	private final LuxonAdapterResource dateAdapter = new LuxonAdapterResource();
-	// date library java script wrapper	
+	// date library java script wrapper
 	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

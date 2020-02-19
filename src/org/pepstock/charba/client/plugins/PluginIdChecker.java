@@ -64,7 +64,7 @@ public final class PluginIdChecker {
 		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
 			// checks if contains uppercase letters
 			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain uppercase letters "));
-		} else if (REGEXP_ID.exec(id) == null){
+		} else if (REGEXP_ID.exec(id) == null) {
 			// checks if is not safe URL
 			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain any invalid characters "));
 		}

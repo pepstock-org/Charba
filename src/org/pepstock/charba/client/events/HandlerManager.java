@@ -56,7 +56,7 @@ public abstract class HandlerManager {
 		// creates and returns the handler registration
 		return new HandlerRegistration(this, handler, type);
 	}
-	
+
 	/**
 	 * Fires the event to the handlers.
 	 *

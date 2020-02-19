@@ -24,8 +24,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Provides special properties and methods for manipulating the layout and presentation of table cells, either header or data
- * cells, in an HTML document.
+ * Provides special properties and methods for manipulating the layout and presentation of table cells, either header or data cells, in an HTML document.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -71,21 +70,17 @@ public final class TableCell extends BaseHtmlElement {
 	public native int getCellIndex();
 
 	/**
-	 * Returns the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
-	 * columns of the table.
+	 * Returns the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple columns of the table.
 	 *
-	 * @return the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
-	 *         columns of the table
+	 * @return the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple columns of the table
 	 */
 	@JsProperty
 	public native int getColSpan();
 
 	/**
-	 * Sets the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple
-	 * columns of the table.
+	 * Sets the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple columns of the table.
 	 *
-	 * @param colSpan the value indicating the number of columns this cell must span; this lets the cell occupy space across
-	 *            multiple columns of the table
+	 * @param colSpan the value indicating the number of columns this cell must span; this lets the cell occupy space across multiple columns of the table
 	 */
 	@JsProperty
 	public native void setColSpan(int colSpan);
@@ -123,21 +118,17 @@ public final class TableCell extends BaseHtmlElement {
 	public native void setNoWrap(boolean noWrap);
 
 	/**
-	 * Returns the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows
-	 * of the table.
+	 * Returns the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of the table.
 	 *
-	 * @return the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows
-	 *         of the table
+	 * @return the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of the table
 	 */
 	@JsProperty
 	public native int getRowSpan();
 
 	/**
-	 * Sets the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of
-	 * the table.
+	 * Sets the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of the table.
 	 *
-	 * @param rowSpan the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple
-	 *            rows of the table
+	 * @param rowSpan the value indicating the number of rows this cell must span; this lets a cell occupy space across multiple rows of the table
 	 */
 	@JsProperty
 	public native void setRowSpan(int rowSpan);

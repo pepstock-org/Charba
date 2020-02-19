@@ -101,8 +101,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_OVERLAP = true;
 
 	/**
-	 * Default to enable showing the real calculated percentages from the values,
-	 * <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
+	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
 	 */
 	public static final boolean DEFAULT_SHOW_ACTUAL_PERCENTAGES = false;
 
@@ -112,8 +111,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_OUTSIDE_PADDING = 2;
 
 	/**
-	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER},
-	 * <b>{@value DEFAULT_TEXT_MARGIN}</b>.
+	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}, <b>{@value DEFAULT_TEXT_MARGIN}</b>.
 	 */
 	public static final int DEFAULT_TEXT_MARGIN = 2;
 
@@ -604,22 +602,18 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages
-	 * to 100 in total.
+	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional
-	 *            logic to fit the percentages to 100 in total.
+	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	public void setShowActualPercentages(boolean showActualPercentages) {
 		setValue(Property.SHOW_ACTUAL_PERCENTAGES, showActualPercentages);
 	}
 
 	/**
-	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the
-	 * percentages to 100 in total.
+	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total.
+	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	public boolean isShowActualPercentages() {
 		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultsOptions.isShowActualPercentages());

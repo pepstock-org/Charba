@@ -31,11 +31,9 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
- * a specific dataset.<br>
+ * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * The minimum value of data is 0 (see {@link MeterDataset#MINIMUM_VALUE}).<br>
- * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty
- * one.<br>
+ * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty one.<br>
  * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method.
  * 
  * 

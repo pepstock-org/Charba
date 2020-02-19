@@ -28,8 +28,8 @@ import org.pepstock.charba.client.items.AxisItem;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object to enable the {@link AxisBuildTicksCallback} on an axis, {@link CartesianLinearAxis} or
- * {@link CartesianLogarithmicAxis} or {@link RadialAxis}, when the ticks are building by CHART.JS.
+ * Base object to enable the {@link AxisBuildTicksCallback} on an axis, {@link CartesianLinearAxis} or {@link CartesianLogarithmicAxis} or {@link RadialAxis}, when the ticks are
+ * building by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *

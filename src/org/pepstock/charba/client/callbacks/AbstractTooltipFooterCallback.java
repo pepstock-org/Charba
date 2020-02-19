@@ -22,8 +22,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * Abstract implementation of tooltip footer callback in order to help who will implement it to override ONLY needed methods and
- * use the default for the others.
+ * Abstract implementation of tooltip footer callback in order to help who will implement it to override ONLY needed methods and use the default for the others.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,8 +32,7 @@ public abstract class AbstractTooltipFooterCallback implements TooltipFooterCall
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onBeforeFooter(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onBeforeFooter(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items) {
@@ -44,8 +42,7 @@ public abstract class AbstractTooltipFooterCallback implements TooltipFooterCall
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onFooter(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onFooter(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onFooter(IsChart chart, List<TooltipItem> items) {
@@ -55,8 +52,7 @@ public abstract class AbstractTooltipFooterCallback implements TooltipFooterCall
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onAfterFooter(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback#onAfterFooter(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onAfterFooter(IsChart chart, List<TooltipItem> items) {

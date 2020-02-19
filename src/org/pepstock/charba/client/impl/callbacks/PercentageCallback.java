@@ -24,8 +24,7 @@ import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Formatter implementation for {@link DataLabelsPlugin#ID} plugin in order to provide the percentage of the value.<br>
- * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data
- * index per dataset.
+ * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data index per dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -48,8 +47,7 @@ public final class PercentageCallback implements FormatterCallback {
 	private final boolean stacked;
 
 	/**
-	 * Creates the formatter using the default values. The precision is {@value PercentageCallback#DEFAULT_PRECISION} and stacked
-	 * is <code>false</code>.
+	 * Creates the formatter using the default values. The precision is {@value PercentageCallback#DEFAULT_PRECISION} and stacked is <code>false</code>.
 	 */
 	public PercentageCallback() {
 		this(DEFAULT_PRECISION, DEFAULT_STACKED);
@@ -65,8 +63,7 @@ public final class PercentageCallback implements FormatterCallback {
 	}
 
 	/**
-	 * Creates the formatter using the argument as flag to compute the percentage on stacked datasets. The format is
-	 * {@value PercentageCallback#DEFAULT_PRECISION}.
+	 * Creates the formatter using the argument as flag to compute the percentage on stacked datasets. The format is {@value PercentageCallback#DEFAULT_PRECISION}.
 	 * 
 	 * @param stacked if <code>true</code> computes the percentage on stacked datasets.
 	 */

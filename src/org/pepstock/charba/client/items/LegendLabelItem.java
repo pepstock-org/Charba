@@ -130,8 +130,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by
-	 * CHART.js.
+	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
 	 */
@@ -278,8 +277,7 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are:
-	 * butt, round and square.
+	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param style how the end points of every box border are drawn.
 	 */
@@ -288,11 +286,10 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 *            pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
 		setArrayValue(LegendItem.Property.LINE_DASH, ArrayInteger.fromOrNull(lineDash));
@@ -308,9 +305,8 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end points and
+	 * control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @param style There are three possible values for this property: round, bevel and miter.
@@ -471,8 +467,7 @@ public final class LegendLabelItem extends LegendItem {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public LegendLabelItem create(NativeObject nativeObject) {

@@ -30,7 +30,7 @@ public final class DatefnsEmbeddedResources extends AbstractEmbeddedResources {
 	public static final DatefnsEmbeddedResources INSTANCE = new DatefnsEmbeddedResources();
 	// date adapter java script wrapper
 	private final DatefnsAdapterResource dateAdapter = new DatefnsAdapterResource();
-	// date library java script wrapper	
+	// date library java script wrapper
 	private final DatefnsLibraryResource dateLibrary = new DatefnsLibraryResource();
 
 	/**

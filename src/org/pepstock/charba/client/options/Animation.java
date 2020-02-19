@@ -21,8 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
- * takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -64,8 +63,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

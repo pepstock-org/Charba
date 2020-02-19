@@ -29,8 +29,7 @@ import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.options.Scales;
 
 /**
- * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
- * position.<br>
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * Created and passed by CHART.JS and provide dataset metadata information.<br>
  * Contains all data set items.
  * 

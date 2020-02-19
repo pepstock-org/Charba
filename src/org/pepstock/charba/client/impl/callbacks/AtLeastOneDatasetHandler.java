@@ -37,8 +37,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.LegendClickEventHandler#onClick(org.pepstock.charba.client.events.
-	 * LegendClickEvent)
+	 * @see org.pepstock.charba.client.events.LegendClickEventHandler#onClick(org.pepstock.charba.client.events. LegendClickEvent)
 	 */
 	@Override
 	public void onClick(LegendClickEvent event) {

@@ -50,8 +50,7 @@ public class Time extends AxisContainer {
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
-	 *            will be Sunday.
+	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
 		getAxis().getScale().getTime().setIsoWeekday(isoWeekday);
@@ -60,8 +59,7 @@ public class Time extends AxisContainer {
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
-	 *         Sunday.
+	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	public boolean isIsoWeekday() {
 		return getAxis().getScale().getTime().isIsoWeekday();

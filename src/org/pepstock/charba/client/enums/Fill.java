@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 /**
- * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets
- * or a dataset and a boundary.<br>
+ * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets or a dataset and a boundary.<br>
  * These are the constants of predefined filling mode values.
  * 
  * @author Andrea "Stock" Stocchero

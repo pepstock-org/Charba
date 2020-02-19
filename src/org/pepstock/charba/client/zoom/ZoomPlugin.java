@@ -27,8 +27,7 @@ import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFac
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
  * The ZOOM plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
- * The ZOOM plugin plugin has got a dependency with javascript utility
- * <a href="https://github.com/hammerjs/hammer.js">hammer</a>, utility used for gesture recognition.
+ * The ZOOM plugin plugin has got a dependency with javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>, utility used for gesture recognition.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -93,7 +92,7 @@ public final class ZoomPlugin {
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
-	
+
 	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 

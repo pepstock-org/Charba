@@ -23,8 +23,7 @@ import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.TimeTickItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building, for
- * {@link CartesianTimeAxis}.
+ * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianTimeAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  */

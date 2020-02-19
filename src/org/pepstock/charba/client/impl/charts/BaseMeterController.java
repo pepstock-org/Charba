@@ -75,8 +75,7 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers.
-	 * ControllerContext, org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers. ControllerContext, org.pepstock.charba.client.IsChart, int)
 	 */
 	@Override
 	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
@@ -112,8 +111,7 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context,
-	 * org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context, org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
 	public void draw(ControllerContext context, IsChart chart, double ease) {

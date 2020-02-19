@@ -100,9 +100,8 @@ public final class MutationRecord {
 	}
 
 	/**
-	 * Returns the node the mutation affected, depending on the {@link MutationType}. For {@link MutationType#ATTRIBUTES}, it is
-	 * the element whose attribute changed. For {@link MutationType#CHARACTER_DATA}, it is the character data node. For
-	 * {@link MutationType#CHILD_LIST}, it is the node whose children changed.
+	 * Returns the node the mutation affected, depending on the {@link MutationType}. For {@link MutationType#ATTRIBUTES}, it is the element whose attribute changed. For
+	 * {@link MutationType#CHARACTER_DATA}, it is the character data node. For {@link MutationType#CHILD_LIST}, it is the node whose children changed.
 	 *
 	 * @return the node the mutation affected
 	 */
@@ -110,8 +109,8 @@ public final class MutationRecord {
 	public native BaseNode getTarget();
 
 	/**
-	 * Returns {@link MutationType#ATTRIBUTES} if the mutation was an attribute mutation, {@link MutationType#CHARACTER_DATA} if
-	 * it was a mutation to a CharacterData node, and {@link MutationType#CHILD_LIST} if it was a mutation to the tree of nodes.
+	 * Returns {@link MutationType#ATTRIBUTES} if the mutation was an attribute mutation, {@link MutationType#CHARACTER_DATA} if it was a mutation to a CharacterData node, and
+	 * {@link MutationType#CHILD_LIST} if it was a mutation to the tree of nodes.
 	 *
 	 * @return the type of mutation record
 	 */
@@ -119,8 +118,8 @@ public final class MutationRecord {
 	private native String nativeGetType();
 
 	/**
-	 * Returns {@link MutationType#ATTRIBUTES} if the mutation was an attribute mutation, {@link MutationType#CHARACTER_DATA} if
-	 * it was a mutation to a CharacterData node, and {@link MutationType#CHILD_LIST} if it was a mutation to the tree of nodes.
+	 * Returns {@link MutationType#ATTRIBUTES} if the mutation was an attribute mutation, {@link MutationType#CHARACTER_DATA} if it was a mutation to a CharacterData node, and
+	 * {@link MutationType#CHILD_LIST} if it was a mutation to the tree of nodes.
 	 *
 	 * @return the type of mutation record
 	 */

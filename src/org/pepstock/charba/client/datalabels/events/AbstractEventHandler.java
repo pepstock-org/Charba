@@ -30,8 +30,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onClick(IsChart chart, ScriptableContext context) {
@@ -41,8 +40,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onLeave(IsChart chart, ScriptableContext context) {
@@ -52,8 +50,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public boolean onEnter(IsChart chart, ScriptableContext context) {

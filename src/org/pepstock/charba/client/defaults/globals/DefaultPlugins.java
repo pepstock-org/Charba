@@ -67,8 +67,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptions(java.lang.String,
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptions(java.lang.String, org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
@@ -84,8 +83,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsAsList(java.lang.String,
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsAsList(java.lang.String, org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {

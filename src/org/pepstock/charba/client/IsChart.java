@@ -43,12 +43,12 @@ import org.pepstock.charba.client.plugins.Plugins;
 public interface IsChart {
 
 	/**
-	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 * well, and if mandatory methods of interface will return consistent instances.
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return
+	 * consistent instances.
 	 * 
 	 * @param chart chart to be checked
-	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 *         well, and if mandatory methods of interface will return consistent instances.
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return
+	 *         consistent instances.
 	 */
 	static boolean isConsistent(IsChart chart) {
 		// checks if chart is consistent
@@ -62,8 +62,8 @@ public interface IsChart {
 	}
 
 	/**
-	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory
-	 * methods of interface will return consistent instances.<br>
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return consistent
+	 * instances.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
@@ -76,8 +76,8 @@ public interface IsChart {
 	}
 
 	/**
-	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory
-	 * methods of interface will return consistent instances.<br>
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return consistent
+	 * instances.<br>
 	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
 	 * 
 	 * @param chart chart to be checked
@@ -91,12 +91,10 @@ public interface IsChart {
 	}
 
 	/**
-	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 * well.
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well.
 	 * 
 	 * @param chart chart to be checked
-	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 *         well
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well
 	 */
 	static boolean isValid(IsChart chart) {
 		return chart != null && chart.getId() != null;
@@ -132,7 +130,7 @@ public interface IsChart {
 	 * @return handler registration used to remove the handler
 	 */
 	HandlerRegistration addHandler(final EventHandler handler, EventType type);
-	
+
 	/**
 	 * Fires the event to the handlers.
 	 *
@@ -163,8 +161,8 @@ public interface IsChart {
 	Type getType();
 
 	/**
-	 * Returns the base type of chart that in case of {@link ChartType} is the same of {@link IsChart#getType()} otherwise, in
-	 * case the type of the chart is a {@link ControllerType} is the chart type extension if there is or <code>null</code>.
+	 * Returns the base type of chart that in case of {@link ChartType} is the same of {@link IsChart#getType()} otherwise, in case the type of the chart is a
+	 * {@link ControllerType} is the chart type extension if there is or <code>null</code>.
 	 * 
 	 * @return the base type of chart.
 	 */
@@ -241,11 +239,9 @@ public interface IsChart {
 	IsDefaultScaledOptions getWholeOptions();
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	boolean isDrawOnAttach();
 
@@ -257,31 +253,28 @@ public interface IsChart {
 	void setDrawOnAttach(boolean drawOnAttach);
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	boolean isDestroyOnDetach();
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
 	void setDestroyOnDetach(boolean destroyOnDetach);
 
 	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
-	 * within Chart.js, along with any associated event listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
+	 * listeners attached by Chart.js.
 	 */
 	void destroy();
 
 	/**
-	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
-	 * <code>.render()</code> to re-animate.
+	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call <code>.render()</code> to re-animate.
 	 */
 	void stop();
 
@@ -310,14 +303,13 @@ public interface IsChart {
 	String generateLegend();
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
-	 * this method manually if you change the size of the canvas nodes container element.
+	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
+	 * canvas nodes container element.
 	 */
 	void resize();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
 	 */
 	void update();
 
@@ -333,16 +325,14 @@ public interface IsChart {
 	void update(UpdateConfiguration config);
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	void reconfigure();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
 	 * @param config a configuration object can be provided with additional configuration for the update process
 	 */
@@ -355,9 +345,8 @@ public interface IsChart {
 	void render();
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A config object can be provided with additional configuration for the render process. This is useful when
-	 * update is manually called inside an event handler and some different animation is desired.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A config object can be provided with
+	 * additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param config a config object can be provided with additional configuration for the render process
 	 */
@@ -405,8 +394,7 @@ public interface IsChart {
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
-	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the
-	 * same position of that event.
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.

@@ -25,8 +25,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects for CHARBA items.
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects for CHARBA items.
  * 
  * @author Andrea "Stock" Stocchero
  */

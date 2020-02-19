@@ -38,6 +38,7 @@ public final class Window {
 
 	/**
 	 * Returns the undefined instance.
+	 * 
 	 * @return the undefined instance
 	 */
 	@JsProperty(name = "undefined")
@@ -84,8 +85,7 @@ public final class Window {
 	public static native int getOuterWidth();
 
 	/**
-	 * The outerHeight property returns the outer height of a window, including all interface elements (like
-	 * toolbars/scrollbars).
+	 * The outerHeight property returns the outer height of a window, including all interface elements (like toolbars/scrollbars).
 	 *
 	 * @return The outer height of a window, including all interface elements (like toolbars/scrollbars).
 	 */

@@ -315,14 +315,12 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCell} which should contains and represents the label of dataset, setting the text of the
-	 * label to apply.
+	 * Builds a {@link TableCell} which should contains and represents the label of dataset, setting the text of the label to apply.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param item legend item to show into color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
-	 * @return a {@link TableCell} which should contains and represents the label of dataset, setting the text of the
-	 *         label to apply
+	 * @return a {@link TableCell} which should contains and represents the label of dataset, setting the text of the label to apply
 	 */
 	private Div createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result text label cell
@@ -461,13 +459,11 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
-	 * found.
+	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 * 
 	 * @param chart chart instance
 	 * @param item legend item to use as dataset locator
-	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
-	 *         found.
+	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 */
 	private DatasetViewItem lookForDatasetMetaItem(IsChart chart, LegendItem item) {
 		// prepares the meta item instance
@@ -547,7 +543,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// sets gradient as image
 				color.getStyle().setBackgroundImage(gradientAsCss);
 				// gets background size
-				String size = Unit.PX.format(width)+Constants.BLANK+Unit.PX.format(height);
+				String size = Unit.PX.format(width) + Constants.BLANK + Unit.PX.format(height);
 				// sets background size property
 				color.getStyle().setBackgroundSize(size);
 			} else {

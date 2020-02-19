@@ -58,40 +58,34 @@ public final class MutationObserver {
 	/**
 	 * Creates and returns a new mutation observer which will invoke a specified callback function when DOM changes occur.
 	 * 
-	 * @param callback a function which will be called on each DOM change that qualifies given the targeted node or subtree and
-	 *            options
+	 * @param callback a function which will be called on each DOM change that qualifies given the targeted node or subtree and options
 	 */
 	public MutationObserver(MutationObserver.MutationObserverCallback callback) {
 		// do nothing
 	}
 
 	/**
-	 * Stops the mutation observer instance from receiving further notifications until and unless
-	 * {@link MutationObserver#observe(BaseNode)} is called again.
+	 * Stops the mutation observer instance from receiving further notifications until and unless {@link MutationObserver#observe(BaseNode)} is called again.
 	 */
 	public native void disconnect();
 
 	/**
-	 * Configures the mutation observer to begin receiving notifications through its callback function when DOM changes matching
-	 * the given options occur.
+	 * Configures the mutation observer to begin receiving notifications through its callback function when DOM changes matching the given options occur.
 	 * 
 	 * @param target a DOM node within the DOM tree to watch for changes, or to be the root of a subtree of nodes to be watched
-	 * @param options initialization object providing options that describe what DOM mutations should be reported to the
-	 *            observer's callback
+	 * @param options initialization object providing options that describe what DOM mutations should be reported to the observer's callback
 	 */
 	public native void observe(BaseNode target, MutationObserverInit options);
 
 	/**
-	 * Configures the mutation observer to begin receiving notifications through its callback function when DOM changes matching
-	 * the given options occur.
+	 * Configures the mutation observer to begin receiving notifications through its callback function when DOM changes matching the given options occur.
 	 * 
 	 * @param target a DOM node within the DOM tree to watch for changes, or to be the root of a subtree of nodes to be watched
 	 */
 	public native void observe(BaseNode target);
 
 	/**
-	 * Removes all pending notifications from the mutation observer's notification queue and returns them in a new array of
-	 * mutation record objects.
+	 * Removes all pending notifications from the mutation observer's notification queue and returns them in a new array of mutation record objects.
 	 * 
 	 * @return all pending notifications from the mutation observer's notification queue
 	 */

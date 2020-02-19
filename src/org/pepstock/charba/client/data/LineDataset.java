@@ -40,10 +40,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
 /**
- * The line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
- * All point* properties can be specified as an array. If these are set to an array value, the first value applies to the first
- * point, the second value to the second point, and so on.
+ * The line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * All point* properties can be specified as an array. If these are set to an array value, the first value applies to the first point, the second value to the second point, and so
+ * on.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -147,8 +146,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	/**
 	 * Returns the ID of the x axis to plot this dataset on.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on. Default is
-	 *         {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}
+	 * @return the ID of the x axis to plot this dataset on. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}
 	 */
 	public String getXAxisID() {
 		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
@@ -166,8 +164,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	/**
 	 * Returns the ID of the y axis to plot this dataset on.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on. Default is
-	 *         {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}
+	 * @return the ID of the y axis to plot this dataset on. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}
 	 */
 	public String getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
@@ -184,10 +181,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * </pre>
 	 * 
 	 * <br>
-	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
-	 * datasets.<br>
-	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
-	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local
+	 * extremums (if any) stay at input data points.
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
@@ -307,8 +303,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
 	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
 	 * 
-	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
-	 *         chartArea.<br>
+	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
 	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
 	 */
 	public double getClip() {
@@ -329,8 +324,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
 	 * If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 * 
-	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at
-	 *         chartArea.<br>
+	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
 	 *         If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 */
 	public Clip getClipAsObject() {
@@ -349,8 +343,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of strings. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param data an array of strings
 	 */
@@ -361,8 +354,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of strings. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param data a list of strings
 	 */
@@ -373,8 +365,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#STRINGS}.
 	 */
@@ -383,8 +375,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#STRINGS}.

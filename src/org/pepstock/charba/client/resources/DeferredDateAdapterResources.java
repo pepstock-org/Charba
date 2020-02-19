@@ -21,13 +21,12 @@ import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
- * This resources type will load the date adapter library in asynchronous mode in order to optimize the performance when GWT
- * code splitting is implemented.
+ * This resources type will load the date adapter library in asynchronous mode in order to optimize the performance when GWT code splitting is implemented.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface DeferredDateAdapterResources extends ClientBundle {
-	
+
 	/**
 	 * Contains text representation of date-time java script library code.
 	 * 

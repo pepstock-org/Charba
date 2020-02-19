@@ -21,8 +21,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Base native object which can be extended by native object where additional properties could be needed, added as java script
- * object into a property called 'options'.
+ * Base native object which can be extended by native object where additional properties could be needed, added as java script object into a property called 'options'.
  * 
  * @author Andrea "Stock" Stocchero
  */

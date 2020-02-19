@@ -70,8 +70,7 @@ public final class ScriptableUtils {
 	}
 
 	/**
-	 * Returns the enumeration value of the property by invoking a callback which is typed to a key, passing a default value. as
-	 * argument.
+	 * Returns the enumeration value of the property by invoking a callback which is typed to a key, passing a default value. as argument.
 	 * 
 	 * @param context scriptable context
 	 * @param callback callback to invoke
@@ -134,8 +133,7 @@ public final class ScriptableUtils {
 	}
 
 	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
-	 * property in color ones.<br>
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.<br>
 	 * By defaults, is able to manage also {@link Pattern} or {@link CanvasPatternItem}.
 	 * 
 	 * @param context scriptable context
@@ -148,14 +146,12 @@ public final class ScriptableUtils {
 	}
 
 	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
-	 * property in color ones.
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
 	 * 
 	 * @param context scriptable context
 	 * @param callback callback to invoke
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it
-	 *            skips them.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
 	public static Object getOptionValueAsColor(ScriptableContext context, Scriptable<?> callback, String defaultValue, boolean hasPattern) {
@@ -174,14 +170,12 @@ public final class ScriptableUtils {
 	}
 
 	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
-	 * property in color ones.
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
 	 * 
 	 * @param context scriptable context
 	 * @param result result of callback invocation
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it
-	 *            skips them.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
 	public static Object handleCallbackResultAsColor(ScriptableContext context, Object result, String defaultValue, boolean hasPattern) {

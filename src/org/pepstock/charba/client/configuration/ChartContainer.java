@@ -18,8 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 
 /**
- * Container of a chart instance. Must be extended for all other entities which will trigger events or callbacks to pass the
- * chart instance as parameter of implemented interface.
+ * Container of a chart instance. Must be extended for all other entities which will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
  * 
  * @author Andrea "Stock" Stocchero
  */

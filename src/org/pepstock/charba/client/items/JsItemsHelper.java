@@ -22,8 +22,8 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on java script objects for CHARBA items.
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects for CHARBA
+ * items.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -49,7 +49,7 @@ final class JsItemsHelper {
 	static JsItemsHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
 	 * 

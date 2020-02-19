@@ -24,10 +24,8 @@ import org.pepstock.charba.client.resources.ResourcesType;
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-annotation">ANNOTATION plugin</a> to enable the plugin.<br>
  * The ANNOTATION plugin draws lines and boxes on the chart area.<br>
- * The ANNOTATION plugin plugin works with line, bar, scatter and bubble charts that use linear, logarithmic, time,
- * or category scales.<br>
- * The ANNOTATION plugin plugin will not work on any chart that does not have exactly two axes, including pie, radar,
- * and polar area charts.
+ * The ANNOTATION plugin plugin works with line, bar, scatter and bubble charts that use linear, logarithmic, time, or category scales.<br>
+ * The ANNOTATION plugin plugin will not work on any chart that does not have exactly two axes, including pie, radar, and polar area charts.
  * 
  * @author Andrea "Stock" Stocchero
  *

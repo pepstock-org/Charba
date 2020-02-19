@@ -32,28 +32,25 @@ public enum Position implements Key
 	 */
 	STATIC("static"),
 	/**
-	 * The element is positioned according to the normal flow of the document, and then offset relative to itself based on the
-	 * values of top, right, bottom, and left.<br>
-	 * The offset does not affect the position of any other elements; thus, the space given for the element in the page layout
-	 * is the same as if position were static.
+	 * The element is positioned according to the normal flow of the document, and then offset relative to itself based on the values of top, right, bottom, and left.<br>
+	 * The offset does not affect the position of any other elements; thus, the space given for the element in the page layout is the same as if position were static.
 	 */
 	RELATIVE("relative"),
 	/**
 	 * The element is removed from the normal document flow, and no space is created for the element in the page layout.<br>
-	 * It is positioned relative to its closest positioned ancestor, if any; otherwise, it is placed relative to the initial
-	 * containing block. Its final position is determined by the values of top, right, bottom, and left.
+	 * It is positioned relative to its closest positioned ancestor, if any; otherwise, it is placed relative to the initial containing block. Its final position is determined by
+	 * the values of top, right, bottom, and left.
 	 */
 	ABSOLUTE("absolute"),
 	/**
 	 * The element is removed from the normal document flow, and no space is created for the element in the page layout.<br>
-	 * It is positioned relative to the initial containing block established by the viewport, except when one of its ancestors
-	 * has a transform, perspective, or filter property set to something other than none
+	 * It is positioned relative to the initial containing block established by the viewport, except when one of its ancestors has a transform, perspective, or filter property set
+	 * to something other than none
 	 */
 	FIXED("fixed"),
 	/**
-	 * The element is positioned according to the normal flow of the document, and then offset relative to its nearest scrolling
-	 * ancestor and containing block (nearest block-level ancestor), including table-related elements, based on the values of
-	 * top, right, bottom, and left. The offset does not affect the position of any other elements.
+	 * The element is positioned according to the normal flow of the document, and then offset relative to its nearest scrolling ancestor and containing block (nearest block-level
+	 * ancestor), including table-related elements, based on the values of top, right, bottom, and left. The offset does not affect the position of any other elements.
 	 */
 	STICKY("sticky");
 

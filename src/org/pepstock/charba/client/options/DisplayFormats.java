@@ -59,8 +59,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick
-	 * marks.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
 	 * 
 	 * @param unit time unit.
 	 * @return display format or <code>null</code> if unit is not consistent

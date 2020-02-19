@@ -20,8 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options
- * apply to the configuration attached to a dataset.
+ * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -71,8 +70,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

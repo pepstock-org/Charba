@@ -66,8 +66,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getArea(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.colors.Gradient)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getArea(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient)
 	 */
 	@Override
 	protected Area getArea(IsChart chart, Gradient gradient) {
@@ -98,8 +97,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
 	 */
 	@Override
 	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
@@ -133,8 +131,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
 	 */
 	@Override
 	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {

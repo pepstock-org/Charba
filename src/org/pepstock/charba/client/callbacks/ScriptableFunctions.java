@@ -21,8 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Set of common JSINTEROP functions (mapped as interfaces) to be able to implement scriptable options of CHART.JS. Must be a
- * public interface with only 1 method.
+ * Set of common JSINTEROP functions (mapped as interfaces) to be able to implement scriptable options of CHART.JS. Must be a public interface with only 1 method.
  * 
  * @author Andrea "Stock" Stocchero
  *

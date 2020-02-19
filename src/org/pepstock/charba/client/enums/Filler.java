@@ -64,8 +64,7 @@ public class Filler extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where FILL property must be managed
 	 * @param defaultValue default value of FILL to use when the property does not exist

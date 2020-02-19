@@ -20,8 +20,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The doughnut chart allows a number of properties to be specified for each dataset. These are used to set display properties
- * for a specific dataset.<br>
+ * The doughnut chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Is equals of Pie dataset.
  * 
  * @author Andrea "Stock" Stocchero

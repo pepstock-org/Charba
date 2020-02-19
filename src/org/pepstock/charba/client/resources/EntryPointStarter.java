@@ -109,8 +109,7 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
 				 */
 				@Override
 				public void onError(ResourceException e) {
@@ -120,8 +119,7 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {
@@ -155,8 +153,7 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
 				 */
 				@Override
 				public void onError(ResourceException e) {
@@ -166,8 +163,7 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {

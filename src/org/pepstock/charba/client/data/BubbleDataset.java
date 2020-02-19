@@ -37,8 +37,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
  * The third dimension is represented by the size of the individual bubbles.
  * 

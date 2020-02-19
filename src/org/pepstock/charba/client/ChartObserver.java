@@ -28,8 +28,7 @@ import org.pepstock.charba.client.dom.MutationObserverInit;
 import org.pepstock.charba.client.dom.NodeList;
 
 /**
- * Internal singleton utility which provides the ability to watch for attach and detach changes being made to the DOM tree for a
- * chart instance.
+ * Internal singleton utility which provides the ability to watch for attach and detach changes being made to the DOM tree for a chart instance.
  * 
  * @author Andrea "Stock" Stocchero
  *

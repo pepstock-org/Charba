@@ -30,12 +30,10 @@ import org.pepstock.charba.client.enums.DataType;
 public interface HasTimeSeriesItems extends HasDataPoints {
 
 	/**
-	 * Returns <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time
-	 * and Y value).
+	 * Returns <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time and Y value).
 	 * 
 	 * @param datapoint data point instance to be checked
-	 * @return <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time
-	 *         and Y value)
+	 * @return <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time and Y value)
 	 */
 	static boolean isTimeSeriesItem(DataPoint datapoint) {
 		// checks if there is data point
@@ -43,8 +41,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	}
 
 	/**
-	 * Checks if the list of data points, passed as argument, have got the properties to be time series items (time and Y
-	 * value).<br>
+	 * Checks if the list of data points, passed as argument, have got the properties to be time series items (time and Y value).<br>
 	 * If not, a {@link IllegalArgumentException} will be thrown.
 	 * 
 	 * @param datapoints list of data points to be checked
@@ -155,8 +152,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of time series items.
 	 * 
-	 * @return a list of time series items or an empty list of time series items if the data type is not
-	 *         {@link DataType#POINTS}.
+	 * @return a list of time series items or an empty list of time series items if the data type is not {@link DataType#POINTS}.
 	 */
 	default List<TimeSeriesItem> getTimeSeriesData() {
 		return getTimeSeriesData(false);

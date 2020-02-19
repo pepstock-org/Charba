@@ -30,8 +30,7 @@ public final class ImagesHelper {
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @return a image element or <code>null</code> if argument is not consistent
@@ -41,8 +40,8 @@ public final class ImagesHelper {
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS, forcing the size.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS,
+	 * forcing the size.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @param width width of image

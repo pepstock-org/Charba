@@ -39,7 +39,7 @@ public interface IsCastable {
 	 * @return the same object cast to the type
 	 */
 	@JsOverlay
-	default <T> T as(){
+	default <T> T as() {
 		return Js.cast(this);
 	}
 

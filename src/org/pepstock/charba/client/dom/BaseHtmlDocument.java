@@ -40,8 +40,7 @@ public final class BaseHtmlDocument extends BaseDocument {
 	}
 
 	/**
-	 * Returns the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element
-	 * exists.
+	 * Returns the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element exists.
 	 *
 	 * @return the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element exists
 	 */

@@ -19,8 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Determines how the end points of every line are drawn.<br>
- * There are three possible values for this property and those are: butt, round and square. By default this property is set to
- * butt.
+ * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
  * 
  * @author Andrea "Stock" Stocchero
  */

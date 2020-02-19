@@ -339,8 +339,7 @@ public class DateAdapter {
 	 * Returns the start by weekday for the given timestamp.
 	 * 
 	 * @param time the input timestamp
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is
-	 *            isoWeek).
+	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
 	 * @return the start by weekday for the given date
 	 */
 	public final Date startOf(long time, int weekday) {
@@ -360,8 +359,7 @@ public class DateAdapter {
 	 * Returns the start by weekday for the given date.
 	 * 
 	 * @param time the input date
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is
-	 *            isoWeek).
+	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
 	 * @return the start by weekday for the given date
 	 */
 	public final Date startOf(Date time, int weekday) {

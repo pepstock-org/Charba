@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to activate the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin (AKA
- * <code>chartjs-plugin-zoom.js</code> ) for CHART.js.
+ * Contains all classes to activate the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin (AKA <code>chartjs-plugin-zoom.js</code> ) for CHART.js.
  * 
  * @author Andrea "Stock" Stocchero
  *

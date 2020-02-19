@@ -15,7 +15,7 @@
 */
 /**
  * Contains the classes to use in order to create HTML encoded strings.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

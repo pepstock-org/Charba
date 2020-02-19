@@ -19,8 +19,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the
- * getAxis().<br>
+ * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the getAxis().<br>
  * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
@@ -142,19 +141,16 @@ public class CartesianScaleLabel extends AxisContainer {
 	/**
 	 * Sets the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *            inherit).
+	 * @param fontStyle Font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getAxis().getScale().getScaleLabel().setFontStyle(fontStyle);
 	}
 
 	/**
-	 * Returns the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 * inherit).
+	 * Returns the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *         inherit).
+	 * @return the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return getAxis().getScale().getScaleLabel().getFontStyle();

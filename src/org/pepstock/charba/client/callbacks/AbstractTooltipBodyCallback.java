@@ -22,8 +22,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * Abstract implementation of tooltip body callback in order to help who will implement it to override ONLY needed methods and
- * use the default for the others.
+ * Abstract implementation of tooltip body callback in order to help who will implement it to override ONLY needed methods and use the default for the others.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,8 +32,7 @@ public abstract class AbstractTooltipBodyCallback implements TooltipBodyCallback
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipBodyCallback#onBeforeBody(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipBodyCallback#onBeforeBody(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onBeforeBody(IsChart chart, List<TooltipItem> items) {
@@ -44,8 +42,7 @@ public abstract class AbstractTooltipBodyCallback implements TooltipBodyCallback
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipBodyCallback#onAfterBody(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipBodyCallback#onAfterBody(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onAfterBody(IsChart chart, List<TooltipItem> items) {

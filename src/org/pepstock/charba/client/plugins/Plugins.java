@@ -27,8 +27,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 
 /**
- * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart
- * configuration.
+ * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -126,8 +125,7 @@ public final class Plugins implements ConfigurationElement {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {

@@ -57,5 +57,5 @@ abstract class AbstractLegendEvent extends AbstractChartEvent implements IsLegen
 	public final LegendItem getItem() {
 		return item;
 	}
-	
+
 }

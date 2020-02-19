@@ -59,14 +59,12 @@ public interface IsDefaultPlugins {
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or an empty object if not exist. If factory argument is not
-	 *         consistent, <code>null</code> is returned.
+	 * @return java script object used to configure the plugin or an empty object if not exist. If factory argument is not consistent, <code>null</code> is returned.
 	 */
 	<T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory);
 
 	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object
-	 * container.
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.

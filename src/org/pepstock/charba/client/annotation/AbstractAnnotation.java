@@ -218,8 +218,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	}
 
 	/**
-	 * Removes the ID property form annotation in order that the options can be reloaded by plugin when the chart will be
-	 * reconfigured, by {@link IsChart#reconfigure()}.
+	 * Removes the ID property form annotation in order that the options can be reloaded by plugin when the chart will be reconfigured, by {@link IsChart#reconfigure()}.
 	 */
 	void resetAnnotationId() {
 		removeIfExists(Property.ID);

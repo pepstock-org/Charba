@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>radius</code> or <code>pointRadius</code> (hit and hover) property at runtime, using the
- * chart instance and the context.
+ * Callback interface to set <code>radius</code> or <code>pointRadius</code> (hit and hover) property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *

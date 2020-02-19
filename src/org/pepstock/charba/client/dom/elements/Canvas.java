@@ -32,7 +32,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Canvas extends BaseHtmlElement implements IsCastable{
+public final class Canvas extends BaseHtmlElement implements IsCastable {
 
 	/**
 	 * The tag for this element.
@@ -52,8 +52,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * Returns a positive integer reflecting the height HTML attribute of the canvas element interpreted in CSS pixels.<br>
-	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 150 is
-	 * used.
+	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 150 is used.
 	 *
 	 * @return a positive integer reflecting the height HTML attribute of the canvas element interpreted in CSS pixels
 	 */
@@ -62,8 +61,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * Sets a positive integer reflecting the height HTML attribute of the canvas element interpreted in CSS pixels.<br>
-	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 150 is
-	 * used.
+	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 150 is used.
 	 *
 	 * @param height a positive integer reflecting the height HTML attribute of the canvas element interpreted in CSS pixels
 	 */
@@ -72,8 +70,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * Returns a positive integer reflecting the width HTML attribute of the canvas element interpreted in CSS pixels.<br>
-	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 300 is
-	 * used.
+	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 300 is used.
 	 *
 	 * @return a positive integer reflecting the width HTML attribute of the canvas element interpreted in CSS pixels
 	 */
@@ -82,8 +79,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable{
 
 	/**
 	 * Sets a positive integer reflecting the width HTML attribute of the canvas element interpreted in CSS pixels.<br>
-	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 300 is
-	 * used.
+	 * When the attribute is not specified, or if it is set to an invalid value, like a negative, the default value of 300 is used.
 	 *
 	 * @param width a positive integer reflecting the width HTML attribute of the canvas element interpreted in CSS pixels
 	 */

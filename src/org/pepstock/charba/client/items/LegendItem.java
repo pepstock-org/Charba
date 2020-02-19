@@ -277,8 +277,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through
-	 *         effect.<br>
+	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
 	 *         Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
@@ -286,8 +285,7 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those
-	 * are: butt, round and square.
+	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @return how the end points of every box border are drawn.
 	 */
@@ -296,11 +294,9 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 * of lines and gaps which describe the pattern.
+	 * Returns the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 *         of lines and gaps which describe the pattern.
+	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public final List<Integer> getLineDash() {
 		// gets the array from native object
@@ -319,9 +315,8 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end points
+	 * and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -406,8 +401,7 @@ public class LegendItem extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public LegendItem create(NativeObject nativeObject) {

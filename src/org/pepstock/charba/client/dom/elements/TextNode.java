@@ -24,8 +24,8 @@ import jsinterop.annotations.JsType;
 
 /**
  * Represents the textual content of an element or attribute.<br>
- * If an element has no markup within its content, it has a single child implementing text node that contains the element's
- * text. However, if the element contains markup, it is parsed into information items and text nodes that form its children.
+ * If an element has no markup within its content, it has a single child implementing text node that contains the element's text. However, if the element contains markup, it is
+ * parsed into information items and text nodes that form its children.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -66,8 +66,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param scale scale/axis of this object.
 	 * @param childKey the property name of this element to use to add it to the parent.

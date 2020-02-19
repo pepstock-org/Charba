@@ -27,8 +27,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is
- * called.
+ * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is called.
  * 
  * @author Andrea "Stock" Stocchero
  */

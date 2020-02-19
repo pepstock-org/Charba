@@ -48,8 +48,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin
-	 * properties.
+	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin properties.
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */
@@ -144,11 +143,9 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area).
+	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	boolean isClamp() {
 		return getValue(DataLabelsOptions.Property.CLAMP, DataLabelsOptions.DEFAULT_CLAMP);
@@ -193,11 +190,11 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 *         label is moved in the opposite direction.
 	 */
 	double getOffset() {
 		return getValue(DataLabelsOptions.Property.OFFSET, DataLabelsOptions.DEFAULT_OFFSET);

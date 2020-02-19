@@ -35,8 +35,7 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	double getTension();
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -50,9 +49,8 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	int getBorderDashOffset();
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.

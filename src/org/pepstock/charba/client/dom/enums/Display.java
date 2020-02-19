@@ -26,14 +26,12 @@ import org.pepstock.charba.client.commons.Key;
 public enum Display implements Key
 {
 	/**
-	 * Turns off the display of an element so that it has no effect on layout (the document is rendered as though the element
-	 * did not exist).<br>
+	 * Turns off the display of an element so that it has no effect on layout (the document is rendered as though the element did not exist).<br>
 	 * All descendant elements also have their display turned off.
 	 */
 	NONE("none"),
 	/**
-	 * The element generates a block element box, generating line breaks both before and after the element when in the normal
-	 * flow.
+	 * The element generates a block element box, generating line breaks both before and after the element when in the normal flow.
 	 */
 	BLOCK("block"),
 	/**
@@ -42,14 +40,12 @@ public enum Display implements Key
 	 */
 	INLINE("inline"),
 	/**
-	 * The element generates a block element box that will be flowed with surrounding content as if it were a single inline box
-	 * (behaving much like a replaced element would).
+	 * The element generates a block element box that will be flowed with surrounding content as if it were a single inline box (behaving much like a replaced element would).
 	 */
 	INLINE_BLOCK("inline-block"),
 	/**
 	 * The inline-table value does not have a direct mapping in HTML.<br>
-	 * It behaves like an HTML &lt;table&gt; element, but as an inline box, rather than a block-level box. Inside the table box
-	 * is a block-level context.
+	 * It behaves like an HTML &lt;table&gt; element, but as an inline box, rather than a block-level box. Inside the table box is a block-level context.
 	 */
 	INLINE_TABLE("inline-table"),
 	/**

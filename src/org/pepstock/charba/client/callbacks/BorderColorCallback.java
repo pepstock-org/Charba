@@ -20,8 +20,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 
 /**
- * Callback interface to set <code>borderColor</code>, <code>hoverBorderColor</code>, <code>pointBorderColor</code>or
- * <code>pointHoverBorderColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderColor</code>, <code>hoverBorderColor</code>, <code>pointBorderColor</code>or <code>pointHoverBorderColor</code> property at runtime, using
+ * the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *

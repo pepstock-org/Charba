@@ -90,8 +90,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 
 	/**
 	 * Returns the padding height used by clear selection element if enabled.<br>
-	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the
-	 * element allocated.
+	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the element allocated.
 	 * 
 	 * @param chart chart instance
 	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
@@ -325,8 +324,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
 	public boolean onBeforeEvent(IsChart chart, BaseNativeEvent event) {

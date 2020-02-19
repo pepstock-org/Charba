@@ -28,8 +28,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear
- * the selection.
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear the selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -443,8 +442,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise
-	 *            <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.USE_SELECTION_STYLE, useSelectionStyle);

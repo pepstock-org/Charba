@@ -23,8 +23,7 @@ import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 
 /**
- * Abstract implementation of tooltip label callback in order to help who will implement it to override ONLY needed methods and
- * use the default for the others.
+ * Abstract implementation of tooltip label callback in order to help who will implement it to override ONLY needed methods and use the default for the others.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,8 +33,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onBeforeLabel(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.TooltipItem)
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onBeforeLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
 	public String onBeforeLabel(IsChart chart, TooltipItem item) {
@@ -45,8 +43,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabel(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.TooltipItem)
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
 	public String onLabel(IsChart chart, TooltipItem item) {
@@ -56,8 +53,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabelColor(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.TooltipItem)
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabelColor(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
 	public TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item) {
@@ -67,8 +63,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabelTextColor(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.TooltipItem)
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabelTextColor(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
 	public IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
@@ -84,8 +79,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onAfterLabel(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.TooltipItem)
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onAfterLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
 	public String onAfterLabel(IsChart chart, TooltipItem item) {

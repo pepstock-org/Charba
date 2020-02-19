@@ -67,8 +67,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use
-	 * when the property does not exist.
+	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where text direction properties must be managed
 	 * @param model model which contains the text directioner.
@@ -111,8 +110,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
-	 * regardless of the CSS specified on the canvas.
+	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips, regardless of the CSS specified on the canvas.
 	 * 
 	 * @param textDirection the text direction of the tooltips.
 	 */
@@ -123,8 +121,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
-	 * regardless of the CSS specified on the canvas.
+	 * Returns the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips, regardless of the CSS specified on the canvas.
 	 * 
 	 * @return the text direction of the tooltips.
 	 */

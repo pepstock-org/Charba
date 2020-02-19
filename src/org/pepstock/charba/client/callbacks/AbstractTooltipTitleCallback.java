@@ -22,8 +22,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * Abstract implementation of tooltip title callback in order to help who will implement it to override ONLY needed methods and
- * use the default for the others.
+ * Abstract implementation of tooltip title callback in order to help who will implement it to override ONLY needed methods and use the default for the others.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,8 +32,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onBeforeTitle(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onBeforeTitle(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items) {
@@ -44,8 +42,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onTitle(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onTitle(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onTitle(IsChart chart, List<TooltipItem> items) {
@@ -55,8 +52,7 @@ public abstract class AbstractTooltipTitleCallback implements TooltipTitleCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onAfterTitle(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback#onAfterTitle(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<String> onAfterTitle(IsChart chart, List<TooltipItem> items) {

@@ -203,11 +203,9 @@ public final class DataLabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the
-	 *            associated element (i.e. part inside the chart area).
+	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * @return builder instance
 	 */
 	public DataLabelsOptionsBuilder setClamp(boolean clamp) {
@@ -218,8 +216,7 @@ public final class DataLabelsOptionsBuilder {
 	/**
 	 * When the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 * 
-	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be
-	 *            masked.
+	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 * @return builder instance
 	 */
 	public DataLabelsOptionsBuilder setClip(boolean clip) {
@@ -272,11 +269,11 @@ public final class DataLabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is
-	 * 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when
-	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is
+	 *            'start', the label is moved in the opposite direction.
 	 * @return builder instance
 	 */
 	public DataLabelsOptionsBuilder setOffset(double offset) {

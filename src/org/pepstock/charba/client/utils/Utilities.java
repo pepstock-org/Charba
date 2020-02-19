@@ -60,10 +60,10 @@ public final class Utilities {
 	 * </code> <br>
 	 * See the following links how CSS gradient has been created:<br>
 	 * <ul>
-	 * <li>{@link GradientType#LINEAR}: <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient</a><br>
-	 * <li>{@link GradientType#RADIAL}: <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</a><br>
+	 * <li>{@link GradientType#LINEAR}:
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient</a><br>
+	 * <li>{@link GradientType#RADIAL}:
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</a><br>
 	 * </ul>
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -79,9 +79,7 @@ public final class Utilities {
 	 * </code> <br>
 	 * See the following link how CSS pattern has been created:<br>
 	 * <br>
-	 * <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a>
-	 * <br>
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a> <br>
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -335,8 +333,7 @@ public final class Utilities {
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @return a image element or <code>null</code> if argument is not consistent
@@ -346,8 +343,8 @@ public final class Utilities {
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS, forcing the size.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS,
+	 * forcing the size.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @param width width of image

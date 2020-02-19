@@ -117,8 +117,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	}
 
 	/**
-	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the
-	 * element, it is unchanged.
+	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the element, it is unchanged.
 	 */
 	@Override
 	public final boolean remove(Object object) {
@@ -175,8 +174,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	}
 
 	/**
-	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the
-	 * list.<br>
+	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the list.<br>
 	 * The specified index indicates the first element that would be returned by an initial call to next.<br>
 	 * An initial call to previous would return the element with the specified index minus one.
 	 */

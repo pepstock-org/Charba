@@ -20,8 +20,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Date adapter module for DATE-FNS.<br>
- * <b><a href="https://date-fns.org/">date-fns</a></b> provides the most comprehensive, yet simple and consistent toolset for
- * manipulating JavaScript dates.
+ * <b><a href="https://date-fns.org/">date-fns</a></b> provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -48,8 +47,7 @@ public final class DatefnsModule extends AbstractModule {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters.
-	 * DateAdapterOptions)
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters. DateAdapterOptions)
 	 */
 	@Override
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {

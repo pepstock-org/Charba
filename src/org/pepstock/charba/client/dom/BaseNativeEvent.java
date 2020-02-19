@@ -159,31 +159,25 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	public native BaseHtmlElement getRelatedTarget();
 
 	/**
-	 * Returns a list of all the touch objects representing individual points of contact whose states changed between the
-	 * previous touch event and this one.
+	 * Returns a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one.
 	 * 
-	 * @return a list of all the touch objects representing individual points of contact whose states changed between the
-	 *         previous touch event and this one
+	 * @return a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one
 	 */
 	@JsProperty
 	public native TouchList getChangedTouches();
 
 	/**
-	 * Returns a list of all the touch objects that are both currently in contact with the touch surface and were also started
-	 * on the same element that is the target of the event.
+	 * Returns a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event.
 	 * 
-	 * @return a list of all the touch objects that are both currently in contact with the touch surface and were also started
-	 *         on the same element that is the target of the event
+	 * @return a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event
 	 */
 	@JsProperty
 	public native TouchList getTargetTouches();
 
 	/**
-	 * Returns a list of all the touch objects representing all current points of contact with the surface, regardless of target
-	 * or changed status.
+	 * Returns a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status.
 	 * 
-	 * @return a list of all the touch objects representing all current points of contact with the surface, regardless of target
-	 *         or changed status
+	 * @return a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status
 	 */
 	@JsProperty
 	public native TouchList getTouches();
@@ -223,7 +217,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			return getClientX() - element.getAbsoluteLeft() + element.getScrollLeft() + scrollElement.getScrollLeft();
 		}
 		// if here, the event target is not a html element
-		// then returns the client X 
+		// then returns the client X
 		return getClientX();
 	}
 
@@ -246,7 +240,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			return getClientY() - element.getAbsoluteTop() + element.getScrollTop() + scrollElement.getScrollTop();
 		}
 		// if here, the event target is not a html element
-		// then returns the client Y 
+		// then returns the client Y
 		return getClientY();
 	}
 

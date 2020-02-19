@@ -60,39 +60,31 @@ public interface IsDefaultTicks extends IsDefaultBaseTick {
 	boolean isReverse();
 
 	/**
-	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
-	 * labels no matter what
+	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
 	 * 
-	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
-	 *         show all labels no matter what.
+	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what.
 	 */
 	boolean isAutoSkip();
 
 	/**
-	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to
-	 * horizontal scales.
+	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 *         scales.
+	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
 	int getAutoSkipPadding();
 
 	/**
-	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
-	 * and the x direction for the y axis).<br>
+	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis).
+	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).
 	 */
 	int getLabelOffset();
 
 	/**
-	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
-	 * necessary. Note: Only applicable to horizontal scales.
+	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales.
+	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 */
 	int getMaxRotation();
 
@@ -104,20 +96,18 @@ public interface IsDefaultTicks extends IsDefaultBaseTick {
 	int getMinRotation();
 
 	/**
-	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
-	 * applicable to vertical scales.
+	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 * 
-	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 *         to vertical scales.
+	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 */
 	boolean isMirror();
 
 	/**
-	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
+	 * applies in the vertical (Y) direction.
 	 * 
-	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
+	 *         in the vertical (Y) direction.
 	 */
 	int getPadding();
 

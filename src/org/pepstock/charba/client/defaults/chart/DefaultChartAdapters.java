@@ -41,8 +41,7 @@ public final class DefaultChartAdapters implements IsDefaultAdapters {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate(org.pepstock.charba.client.adapters.
-	 * DateAdaptersOptionsFactory)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate(org.pepstock.charba.client.adapters. DateAdaptersOptionsFactory)
 	 */
 	@Override
 	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {

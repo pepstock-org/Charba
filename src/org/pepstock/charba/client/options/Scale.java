@@ -28,10 +28,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
- * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map points onto the 2 dimensional canvas. These axes
- * are know as 'cartesian axes'.<br>
- * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes are used for line, bar, and bubble charts.
- * Four cartesian axes are included by default.<br>
+ * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map points onto the 2 dimensional canvas. These axes are know as 'cartesian axes'.<br>
+ * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes are used for line, bar, and bubble charts. Four cartesian axes are included by default.<br>
  * <ul>
  * <li>linear
  * <li>logarithmic
@@ -128,8 +126,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -306,8 +303,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
@@ -325,8 +321,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @return display option controls the visibility of axis
 	 */

@@ -33,8 +33,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This object stores the <code>this</code> instance of java script because is necessary to invoke the default methods of
- * controller when it's extending an existing chart.
+ * This object stores the <code>this</code> instance of java script because is necessary to invoke the default methods of controller when it's extending an existing chart.
  * 
  * @author Andrea "Stock" Stocchero
  */

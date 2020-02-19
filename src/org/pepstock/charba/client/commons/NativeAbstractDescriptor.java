@@ -25,10 +25,8 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>value</b>: the value associated with the property (data descriptors only).
  * <li><b>writable</b>: true if and only if the value associated with the property may be changed (data descriptors only).
- * <li><b>configurable</b>: true if and only if the type of this property descriptor may be changed and if the property may be
- * deleted from the corresponding object.
- * <li><b>enumerable</b>: true if and only if this property shows up during enumeration of the properties on the corresponding
- * object.
+ * <li><b>configurable</b>: true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
+ * <li><b>enumerable</b>: true if and only if this property shows up during enumeration of the properties on the corresponding object.
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -38,21 +36,17 @@ import jsinterop.annotations.JsType;
 abstract class NativeAbstractDescriptor {
 
 	/**
-	 * Sets true if and only if the type of this property descriptor may be changed and if the property may be deleted from the
-	 * corresponding object.
+	 * Sets true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
 	 * 
-	 * @param configurable true if and only if the type of this property descriptor may be changed and if the property may be
-	 *            deleted from the corresponding object.
+	 * @param configurable true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
 	 */
 	@JsProperty
 	final native void setConfigurable(boolean configurable);
 
 	/**
-	 * Gets true if and only if the type of this property descriptor may be changed and if the property may be deleted from the
-	 * corresponding object.
+	 * Gets true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
 	 * 
-	 * @return true if and only if the type of this property descriptor may be changed and if the property may be deleted from
-	 *         the corresponding object.
+	 * @return true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
 	 */
 	@JsProperty
 	final native boolean isConfigurable();
@@ -60,8 +54,7 @@ abstract class NativeAbstractDescriptor {
 	/**
 	 * Sets true if and only if this property shows up during enumeration of the properties on the corresponding object.
 	 * 
-	 * @param enumerable true if and only if this property shows up during enumeration of the properties on the corresponding
-	 *            object.
+	 * @param enumerable true if and only if this property shows up during enumeration of the properties on the corresponding object.
 	 */
 	@JsProperty
 	final native void setEnumerable(boolean enumerable);

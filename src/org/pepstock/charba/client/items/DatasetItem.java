@@ -21,11 +21,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
- * position.<br>
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event
- * handler or callbacks to apply own logic.
+ * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -99,8 +97,7 @@ public class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns if the dataset is hidden.
 	 * 
-	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>. Default is
-	 *         {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
@@ -134,8 +131,7 @@ public class DatasetItem extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public DatasetItem create(NativeObject nativeObject) {

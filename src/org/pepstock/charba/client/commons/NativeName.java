@@ -46,8 +46,7 @@ public final class NativeName {
 	public static final String JS_ITEMS_HELPER = "CharbaJsItemsHelper";
 
 	/**
-	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JS_CONTROLLER_HELPER}</b>, (internal of
-	 * Charba).
+	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JS_CONTROLLER_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_CONTROLLER_HELPER = "CharbaJsControllerHelper";
 
@@ -57,26 +56,23 @@ public final class NativeName {
 	public static final String JS_WINDOW_HELPER = "CharbaJsWindowHelper";
 
 	/**
-	 * Constant to bind java script object as JsPositionerHelper with name <b>{@value JS_POSITIONER_HELPER}</b>, (internal of
-	 * Charba).
+	 * Constant to bind java script object as JsPositionerHelper with name <b>{@value JS_POSITIONER_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_POSITIONER_HELPER = "CharbaJsPositionerHelper";
 
 	/**
-	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JS_CALLBACKS_HELPER}</b>, (internal of
-	 * Charba).
+	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JS_CALLBACKS_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
 
 	/**
-	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>,
-	 * (internal of Charba), when {@link HtmlLegend} is activated.
+	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of Charba), when {@link HtmlLegend} is
+	 * activated.
 	 */
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 
 	/**
-	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when
-	 * {@link ZoomPlugin} is activated.
+	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when {@link ZoomPlugin} is activated.
 	 */
 	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
 
@@ -86,8 +82,7 @@ public final class NativeName {
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of
-	 * CHART.JS).
+	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART_ADAPTERS_DATE = "Chart._adapters._date";
 
@@ -151,7 +146,7 @@ public final class NativeName {
 	 * Not used at the moment.
 	 */
 	public static final String DOM_HTML_CANVAS_ELEMENT = "HTMLCanvasElement";
-	
+
 	/**
 	 * Constant to bind java script object as DOM HTML script element with name <b>{@value DOM_HTML_SCRIPT_ELEMENT}</b>.
 	 */
@@ -175,13 +170,13 @@ public final class NativeName {
 	/**
 	 * Constant to bind java script object as DOM HTML table row element with name <b>{@value DOM_HTML_TABLE_ROW_ELEMENT}</b>.
 	 */
-	public static final String DOM_HTML_TABLE_ROW_ELEMENT = "HTMLTableRowElement";	 
+	public static final String DOM_HTML_TABLE_ROW_ELEMENT = "HTMLTableRowElement";
 
 	/**
 	 * Constant to bind java script object as DOM HTML table cell element with name <b>{@value DOM_HTML_TABLE_CELL_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_TABLE_CELL_ELEMENT = "HTMLTableCellElement";
-	
+
 	/**
 	 * Constant to bind java script object as DOM style element with name <b>{@value DOM_HTML_STYLE_ELEMENT_ITEM}</b>.
 	 */

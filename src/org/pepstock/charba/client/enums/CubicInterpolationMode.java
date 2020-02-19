@@ -26,14 +26,13 @@ public enum CubicInterpolationMode implements Key
 {
 
 	/**
-	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
-	 * datasets.<br>
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.<br>
 	 * Default.
 	 */
 	DEFAULT("default"),
 	/**
-	 * The 'monotone' algorithm is more suited to datasets: it preserves monotonicity (or piecewise monotonicity) of the dataset
-	 * being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * The 'monotone' algorithm is more suited to datasets: it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if
+	 * any) stay at input data points.
 	 */
 	MONOTONE("monotone");
 

@@ -29,8 +29,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to invoke CHART.JS callbacks, provided out of the box, the default one.<br>
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to invoke CHART.JS callbacks, provided out of
+ * the box, the default one.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -66,8 +66,7 @@ final class JsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking
-	 * <code>legendCallback</code> function property.
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -78,8 +77,7 @@ final class JsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box,
-	 * invoking <code>generateLabels</code> function property.
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.

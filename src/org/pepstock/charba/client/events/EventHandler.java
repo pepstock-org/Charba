@@ -22,5 +22,5 @@ package org.pepstock.charba.client.events;
  *
  */
 public interface EventHandler {
-	
+
 }

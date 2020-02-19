@@ -21,8 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each
- * element is inserted. <br>
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as back-end to store objects (strings).
  * 
@@ -98,8 +97,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
 	public boolean addAll(Collection<? extends String> collection) {
@@ -172,8 +170,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
 	public String set(int index, String element) {
@@ -191,8 +188,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
 	public void add(int index, String element) {
@@ -205,8 +201,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
 	public String remove(int index) {
@@ -218,8 +213,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -232,8 +226,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {

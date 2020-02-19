@@ -428,8 +428,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item,
-	 * not mapped into {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
+	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item, not mapped into
+	 * {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
 	 * 
 	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
 	 */

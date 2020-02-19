@@ -27,8 +27,7 @@ public interface IsDefaultTime {
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
-	 *         Sunday.
+	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	boolean isIsoWeekday();
 

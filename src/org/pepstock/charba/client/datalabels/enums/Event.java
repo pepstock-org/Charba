@@ -20,8 +20,8 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
  * This {@link DataLabelsPlugin#ID} plugin currently supports the below label events.<br>
- * Charba events that need to be enabled in order to get the associated label event working. Note that by default Charba enables
- * "mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend", meaning that label events work out-of-the-box.
+ * Charba events that need to be enabled in order to get the associated label event working. Note that by default Charba enables "mousemove", "mouseout", "click", "touchstart",
+ * "touchmove", "touchend", meaning that label events work out-of-the-box.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -37,8 +37,7 @@ public enum Event implements Key
 	 */
 	LEAVE("leave"),
 	/**
-	 * The mouse's primary button is pressed and released on a label. Charba
-	 * {@link org.pepstock.charba.client.enums.Event#CLICK} must be enabled.
+	 * The mouse's primary button is pressed and released on a label. Charba {@link org.pepstock.charba.client.enums.Event#CLICK} must be enabled.
 	 */
 	CLICK("click");
 

@@ -34,7 +34,7 @@ public class BarChartWidget extends AbstractChartWidget<BarChart> {
 	public BarChartWidget() {
 		this(new BarChart());
 	}
-	
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this chart.

@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 
-
 /**
  * Abstract event which is fired when event handler has been added or removed to/from the chart.<br>
  * This event should use only for use internal only to manage internally all handlers.
@@ -43,12 +42,10 @@ abstract class AbstractHandlerEvent extends Event {
 	}
 
 	/**
-	 * Returns <code>true</code> if the type of event handler is inside the list provided as argument, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the type of event handler is inside the list provided as argument, otherwise <code>false</code>.
 	 * 
 	 * @param types list of type to use checking if the type of event handler of event is in the list
-	 * @return <code>true</code> if the type of event handler is inside the list provided as argument, otherwise
-	 *         <code>false</code>
+	 * @return <code>true</code> if the type of event handler is inside the list provided as argument, otherwise <code>false</code>
 	 */
 	public final boolean isRecognize(List<EventType> types) {
 		// checks if argument is consistent
@@ -67,12 +64,10 @@ abstract class AbstractHandlerEvent extends Event {
 	}
 
 	/**
-	 * Returns <code>true</code> if the type of event handler is equals to the event handler type provided as argument,
-	 * otherwise <code>false</code>.
+	 * Returns <code>true</code> if the type of event handler is equals to the event handler type provided as argument, otherwise <code>false</code>.
 	 * 
 	 * @param type the event handler type to use checking if equals to the type of event handler of event
-	 * @return <code>true</code> if the type of event handler is equals to the event handler type provided as argument,
-	 *         otherwise <code>false</code>
+	 * @return <code>true</code> if the type of event handler is equals to the event handler type provided as argument, otherwise <code>false</code>
 	 */
 	public final boolean isRecognize(EventType type) {
 		// if types is equals to the type of event

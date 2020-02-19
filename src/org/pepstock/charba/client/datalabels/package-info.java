@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to activate the {@link org.pepstock.charba.client.datalabels.DataLabelsPlugin#ID} plugin (AKA
- * <code>chartjs-plugin-datalabels.js</code> ) for CHART.js.
+ * Contains all classes to activate the {@link org.pepstock.charba.client.datalabels.DataLabelsPlugin#ID} plugin (AKA <code>chartjs-plugin-datalabels.js</code> ) for CHART.js.
  * 
  * @author Andrea "Stock" Stocchero
  *
