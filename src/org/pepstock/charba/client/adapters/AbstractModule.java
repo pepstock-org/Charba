@@ -89,22 +89,7 @@ public abstract class AbstractModule {
 	 * @param options date adapter options.
 	 * @return a date adapter
 	 */
-	public DateAdapter createDateAdapter(DateAdapterOptions options) {
-		// checks if the module is injected
-		if (isInjected()) {
-			// checks if adapter options is null
-			if (options != null) {
-				// if not null, uses the constructor wiht options
-				return new DateAdapter(options);
-			}
-			// if here, creates adapter
-			// without options
-			return new DateAdapter();
-		}
-		// if here, the date adapter module is not ibjected
-		// then exception
-		throw new IllegalArgumentException(id + " module is not injected");
-	}
+	public abstract DateAdapter createDateAdapter(DateAdapterOptions options);
 
 	/**
 	 * Is invoked when the date adapter has been injected.<br>

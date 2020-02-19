@@ -15,29 +15,32 @@
 */
 package org.pepstock.charba.client.adapters;
 
+import org.pepstock.charba.client.enums.TimeUnit;
+
 /**
- * LUXON date adapter implementation in order to return an override formats.<br>
- * The LUXON CHART.JS adapter implements the default formats by <b>Intl.DateTimeFormat</b> instead of strings.
+ * MOMENT date adapter implementation in order to return an override formats (needed for week format).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LuxonDateAdapter extends DateAdapter {
+public final class MomentDateAdapter extends DateAdapter {
+
+	// WEEK time unit formats
+	private static final String WEEK_FORMAT = "w YYYY";
 
 	/**
-	 * Creates a LUXON date adapter without any options.
+	 * Creates a MOMENT date adapter without any options.
 	 */
-	protected LuxonDateAdapter() {
+	protected MomentDateAdapter() {
 		super(null);
 	}
 
 	/**
-	 * Creates a LUXON date adapter using the options passed as argument.<br>
-	 * At the moment ONLY LUXON is enabled to using options to act on dates actions.
+	 * Creates a MOMENT date adapter using the options passed as argument.
 	 * 
-	 * @param options LUXON date adapter options
+	 * @param options MOMENT date adapter options
 	 */
-	protected LuxonDateAdapter(LuxonOptions options) {
+	protected MomentDateAdapter(DateAdapterOptions options) {
 		super(options);
 	}
 
@@ -51,7 +54,7 @@ public final class LuxonDateAdapter extends DateAdapter {
 		// gets the default values
 		DateAdapterFormats formats = super.getFormats();
 		// overrides the defaults
-		LuxonFormats.get().setDefaults(formats);
+		formats.setFormat(TimeUnit.WEEK, WEEK_FORMAT);
 		// returns the constants formats
 		return formats;
 	}

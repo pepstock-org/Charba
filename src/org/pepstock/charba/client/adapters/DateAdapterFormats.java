@@ -180,8 +180,8 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * Returns the format by {@link TimeUnit} provided by adapter.<br>
 	 * If not set, returns {@link Constants#EMPTY_STRING}.
 	 * 
-	 * @param unit time unit to use to get the default.
-	 * @return the year format provided by adapter.
+	 * @param unit time unit to use to get the default
+	 * @return the format provided by adapter
 	 */
 	public final String getFormat(TimeUnit unit) {
 		// check if time unit is consistent and there is into the object
@@ -191,6 +191,19 @@ public class DateAdapterFormats extends NativeObjectContainer {
 		// if here the tine unit is not consistent
 		// then returns an undefined values
 		return Constants.EMPTY_STRING;
+	}
+	
+	/**
+	 * Sets the format by {@link TimeUnit}, overriding what is provided by adapter.
+	 * 
+	 * @param unit time unit to use to set the default
+	 * @param format the format to set
+	 */
+	protected final void setFormat(Key unit, String format) {
+		// check if time unit is consistent and there is into the object
+		if (Key.isValid(unit) && format != null) {
+			setValue(unit, format);
+		}
 	}
 
 }

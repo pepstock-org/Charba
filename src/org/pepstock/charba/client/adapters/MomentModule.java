@@ -54,8 +54,8 @@ public final class MomentModule extends AbstractModule {
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {
 		// checks if the module which has been set is MOMENT
 		if (ResourcesType.equalsTo(INSTANCE)) {
-			// invokes the standard method to create a date adapter
-			return super.createDateAdapter(options);
+			// creates a MOMENT date adapter
+			return new MomentDateAdapter(options);
 		}
 		// if here, the module injected is not MOMENT
 		// then exception

@@ -53,8 +53,8 @@ public final class DatefnsModule extends AbstractModule {
 	public DateAdapter createDateAdapter(DateAdapterOptions options) {
 		// checks if the module is injected and DATE-FNS one
 		if (isInjected() && ResourcesType.equalsTo(INSTANCE)) {
-			// invokes the standard method to create a date adapter
-			return super.createDateAdapter(options);
+			// creates a DATEFNS date adapter
+			return new DatefnsDateAdapter(options);
 		}
 		// if here, the module injected is not DATE-FNS
 		// then exception

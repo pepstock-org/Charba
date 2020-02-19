@@ -42,7 +42,7 @@ public class DateAdapter {
 	// the date adapter ID
 	private final String id;
 	// the date adapter default formats instance
-	private DateAdapterFormats formats;
+	private DateAdapterFormats formats = null;
 
 	/**
 	 * Creates a date adapter without any options.
@@ -82,7 +82,7 @@ public class DateAdapter {
 	 */
 	public DateAdapterFormats getFormats() {
 		// checks if formats have been already loaded
-		if (formats != null) {
+		if (formats == null) {
 			// gets formats
 			// in order to store them once
 			NativeObject nativeObject = nativeAdapter.formats();
@@ -176,7 +176,7 @@ public class DateAdapter {
 		// checks if arguments are consistent
 		if (time >= 0 && Key.isValid(unit)) {
 			// invokes the date adapter to format the time
-			return format(time, formats.getFormat(unit));
+			return format(time, getFormats().getFormat(unit));
 		}
 		// if here, the arguments are not consistent
 		// then returns null

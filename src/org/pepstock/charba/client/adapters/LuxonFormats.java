@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LuxonFormats extends DateAdapterFormats {
+public final class LuxonFormats {
 	// singleton instance
 	private static final LuxonFormats INSTANCE = new LuxonFormats();
 
@@ -33,18 +33,6 @@ public final class LuxonFormats extends DateAdapterFormats {
 	 * Creates the object with an empty native object because it will fill by the constructor
 	 */
 	private LuxonFormats() {
-		super();
-		// sets all default values
-		setValue(DateAdapterFormats.Property.DATETIME, "MMM d, yyyy, h:mm:ss a");
-		setValue(TimeUnit.MILLISECOND, "h:mm:ss.SSS a");
-		setValue(TimeUnit.SECOND, "h:mm:ss a");
-		setValue(TimeUnit.MINUTE, "h:mm a");
-		setValue(TimeUnit.HOUR, "h");
-		setValue(TimeUnit.DAY, "MMM d");
-		setValue(TimeUnit.WEEK, "DD");
-		setValue(TimeUnit.MONTH, "MMM yyyy");
-		setValue(TimeUnit.QUARTER, "'Q'q - yyyy");
-		setValue(TimeUnit.YEAR, "yyyy");
 	}
 
 	/**
@@ -54,6 +42,20 @@ public final class LuxonFormats extends DateAdapterFormats {
 	 */
 	static LuxonFormats get() {
 		return INSTANCE;
+	}
+	
+	void setDefaults(DateAdapterFormats formats) {
+		// sets all default values
+		formats.setFormat(DateAdapterFormats.Property.DATETIME, "MMM d, yyyy, h:mm:ss a");
+		formats.setFormat(TimeUnit.MILLISECOND, "h:mm:ss.SSS a");
+		formats.setFormat(TimeUnit.SECOND, "h:mm:ss a");
+		formats.setFormat(TimeUnit.MINUTE, "h:mm a");
+		formats.setFormat(TimeUnit.HOUR, "ha");
+		formats.setFormat(TimeUnit.DAY, "MMM d");
+		formats.setFormat(TimeUnit.WEEK, "W yyyy");
+		formats.setFormat(TimeUnit.MONTH, "MMM yyyy");
+		formats.setFormat(TimeUnit.QUARTER, "'Q'q - yyyy");
+		formats.setFormat(TimeUnit.YEAR, "yyyy");
 	}
 
 }
