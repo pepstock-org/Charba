@@ -32,10 +32,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Code generator (batch) which reads all java script files needed in Charba and creates the classes which will wrap the java
- * script content of script in order to be able to inject the java script code inside a &lt;script&gt; element.<br>
- * Uses a java class template to create the classes and a properties file with all java script files and their configuration to
- * create classes.<br>
+ * Code generator (batch) which reads all java script files needed in Charba and creates the classes which will wrap the java script content of script in order to be able to inject
+ * the java script code inside a &lt;script&gt; element.<br>
+ * Uses a java class template to create the classes and a properties file with all java script files and their configuration to create classes.<br>
  * The template has got the following variables:<br>
  * <ul>
  * <li>packageName: name of package of class
@@ -117,7 +116,7 @@ public class InjectableResourceGenerator {
 	// additional import for classes not in resource package
 	private static final String ADDITIONAL_PACKAGE = "import org.pepstock.charba.client.resources.AbstractInjectableResource;";
 	// prefix of resource name enumeration, needed to know if the resource name enum must be imported
-	private static final String RESOURCE_NAME_PREFIX= "ResourceName.";
+	private static final String RESOURCE_NAME_PREFIX = "ResourceName.";
 	// additional import for classes not in resource package and they are also using the resource name enumeration
 	private static final String ADDITIONAL_RESOURCE_NAME_PACKAGE = "import org.pepstock.charba.client.resources.ResourceName;";
 
@@ -143,7 +142,7 @@ public class InjectableResourceGenerator {
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			// the key is the java script file name
 			final String javaScriptFileName = entry.getKey().toString();
-			LOGGER.info("Started code generation code for '"+javaScriptFileName+"'");
+			LOGGER.info("Started code generation code for '" + javaScriptFileName + "'");
 			// parses the value of the key
 			String[] values = entry.getValue().toString().split(COMMA_STRING);
 			// checks if the value has got the right format
@@ -173,7 +172,7 @@ public class InjectableResourceGenerator {
 				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_FILE_VARIABLE, Matcher.quoteReplacement(javaScriptFileName));
 				// replaces the java script content into template
 				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_CONTENT_VARIABLE, Matcher.quoteReplacement(builder.toString()));
-				// creates the import string 
+				// creates the import string
 				StringBuilder importBuilder = new StringBuilder();
 				// checks if the imports must be added
 				if (!RESOURCES_PACKAGE.equalsIgnoreCase(packageName)) {
@@ -196,10 +195,10 @@ public class InjectableResourceGenerator {
 				changedTemplate = changedTemplate.replaceAll(ADDITIONAL_PACKAGES_VARIABLE, Matcher.quoteReplacement(importBuilder.toString()));
 				// writes the java class
 				writeJavaClass(packageName, className, changedTemplate);
-				LOGGER.info("Code generation for '"+javaScriptFileName+"' is completed");
+				LOGGER.info("Code generation for '" + javaScriptFileName + "' is completed");
 			} else {
 				// if here the source properties are wrong
-				LOGGER.warning("Property format for '"+javaScriptFileName+"' is not correct");
+				LOGGER.warning("Property format for '" + javaScriptFileName + "' is not correct");
 			}
 		}
 	}
@@ -325,8 +324,7 @@ public class InjectableResourceGenerator {
 	}
 
 	/**
-	 * Reads the content of java script file escaping the character in order to be able to assign the content to a java string
-	 * instance.
+	 * Reads the content of java script file escaping the character in order to be able to assign the content to a java string instance.
 	 * 
 	 * @param buffer array of bytes which are the content of java script file
 	 * @return a string builder with all escaped content of java script file
