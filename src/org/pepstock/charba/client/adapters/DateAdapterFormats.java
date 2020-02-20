@@ -192,5 +192,5 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 		// then returns an undefined values
 		return Constants.EMPTY_STRING;
 	}
-	
+
 }

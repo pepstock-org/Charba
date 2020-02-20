@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  *
  */
 public final class DefaultsFormatsOverrider extends NativeObjectContainer {
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -37,7 +37,7 @@ public final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	DefaultsFormatsOverrider(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Sets the format by {@link TimeUnit}, overriding what is provided by adapter.
 	 * 
@@ -49,6 +49,6 @@ public final class DefaultsFormatsOverrider extends NativeObjectContainer {
 		if (Key.isValid(unit) && format != null) {
 			setValue(unit, format);
 		}
-	}		
+	}
 
 }

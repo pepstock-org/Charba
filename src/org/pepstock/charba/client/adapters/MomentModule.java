@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  *
  */
 public final class MomentModule extends AbstractModule {
-	
+
 	// singleton instance
 	private static final MomentModule INSTANCE = new MomentModule();
 	// WEEK time unit formats
