@@ -27,7 +27,7 @@ import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 public final class DatasetRangeSelectionEvent extends AbstractEvent {
 
 	/**
-	 * Value <b>{@value CLEAR_SELECTION}</b> of FROM and TO when the event is representing a clear of selection
+	 * Value <b>{@value}</b> of FROM and TO when the event is representing a clear of selection
 	 */
 	public static final int CLEAR_SELECTION = Integer.MIN_VALUE;
 
@@ -64,7 +64,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 
 	/**
 	 * Returns the starting index of of selected datasets items.<br>
-	 * If equals to {@link CLEAR_SELECTION}, the event is related to a clear of selection area.
+	 * If equals to {@link DatasetRangeSelectionEvent#CLEAR_SELECTION}, the event is related to a clear of selection area.
 	 * 
 	 * @return the starting index of of selected datasets items.
 	 */
@@ -74,7 +74,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 
 	/**
 	 * Returns the ending index of of selected datasets items.<br>
-	 * If equals to {@link CLEAR_SELECTION}, the event is related to a clear of selection area.
+	 * If equals to {@link DatasetRangeSelectionEvent#CLEAR_SELECTION}, the event is related to a clear of selection area.
 	 * 
 	 * @return the to the ending index of of selected datasets items.
 	 */

@@ -117,21 +117,23 @@ public final class LuxonOptions extends DateAdapterOptions {
 	}
 
 	/**
-	 * Sets the time zone that LUXON must use by the date adapter.
+	 * Sets the locale that LUXON must use by the date adapter.<br>
+	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
 	 * 
-	 * @param zone the time zone that LUXON must use by the date adapter
+	 * @param locale the time zone that LUXON must use by the date adapter
 	 */
-	public void setLocale(String zone) {
-		setValue(Property.ZONE, zone);
+	public void setLocale(String locale) {
+		setValue(Property.LOCALE, locale);
 	}
 
 	/**
-	 * Returns the time zone that LUXON must use by the date adapter.
+	 * Returns the locale that LUXON must use by the date adapter.<br>
+	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
 	 * 
-	 * @return the time zone that LUXON must use by the date adapter
+	 * @return the locale that LUXON must use by the date adapter
 	 */
 	public String getLocale() {
-		return getValue(Property.ZONE, UndefinedValues.STRING);
+		return getValue(Property.LOCALE, UndefinedValues.STRING);
 	}
 
 	/**

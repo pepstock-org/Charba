@@ -36,7 +36,7 @@ import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Default plugin implementation to set the background color, gradient or pattern of chart.<br>
- * If added to defaults, without any configuration, the chart will have a {@link DEFAULT_BACKGROUND_COLOR} background color.
+ * If added to defaults, without any configuration, the chart will have a {@link ChartBackgroundColor#DEFAULT_BACKGROUND_COLOR} background color.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -71,7 +71,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	private final Pattern pattern;
 
 	/**
-	 * Default constructor with {@link DEFAULT_BACKGROUND_COLOR} background color.
+	 * Default constructor with {@link ChartBackgroundColor#DEFAULT_BACKGROUND_COLOR} background color.
 	 */
 	public ChartBackgroundColor() {
 		this(DEFAULT_BACKGROUND_COLOR);
