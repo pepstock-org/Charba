@@ -132,14 +132,23 @@
 	<!--
         IVY - Retrieves by IVY the needed jar 
     -->
-	<target name="ivyRetrieveRuntime" depends="ivyTaskdef">
-		<ivy:retrieve file="${ivy.file}" sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
-		<ivy:report todir="${log.dir}" graph="false"/>
+	<macrodef name="ivyRetrieve">
+		<attribute name="ivyFile"/>
+		<attribute name="conf"/>
+		<attribute name="pattern"/>
+		<attribute name="pathId"/>
+		<sequential>
+			<ivy:retrieve file="@{ivyFile}" conf="@{conf}" pattern="@{pattern}" pathid="@{pathId}" sync="true"/>
+			<ivy:report todir="${log.dir}" graph="false"/>
+		</sequential>
+	</macrodef>
+	
+	<target name="ivyRetrieveCompile" depends="ivyTaskdef">
+		<ivyRetrieve ivyfile="${ivy.file}" conf="compile" pathid="ivyPath-compile" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
 	</target>
 
-	<target name="ivyRetrieveCompile" depends="ivyTaskdef">
-		<ivy:retrieve file="${ivy.file}" sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
-		<ivy:report todir="${log.dir}" graph="true"/>
+	<target name="ivyRetrieveRuntime" depends="ivyTaskdef">
+		<ivyRetrieve ivyfile="${ivy.file}" conf="runtime" pathid="ivyPath-runtime" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
 	</target>
 
 	<target name="ivyRetrieve" depends="ivyRetrieveCompile, ivyRetrieveRuntime" />
@@ -301,7 +310,7 @@
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException.java"/>
 			</fileset>
 			<classpath>
-				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile" />
 				<fileset dir="${classes.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
@@ -321,7 +330,7 @@
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
 			windowtitle="${charba.description}">
 			<classpath>
-				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile" />
 				<fileset dir="${classes.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
