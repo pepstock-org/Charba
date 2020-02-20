@@ -120,7 +120,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
 		if (!getValue(Property.CHARBA_POINT_STYLE, false)) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, getDefaultValues().getPointStyle());
+			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
 		} else {
 			// if here, means the point style as stored as images
 			return null;

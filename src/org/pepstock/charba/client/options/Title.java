@@ -118,7 +118,7 @@ public final class Title extends AbstractLabel<Options, IsDefaultTitle> implemen
 	 * @return the position of title.
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
 
 	/**

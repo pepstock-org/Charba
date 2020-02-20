@@ -256,7 +256,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -328,7 +328,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection align
 	 */
 	public Align getAlign() {
-		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
 	}
 
 	/**
@@ -346,7 +346,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection render
 	 */
 	public Render getRender() {
-		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
 	}
 
 	/**
@@ -364,7 +364,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection label position
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
 	}
 
 	/**

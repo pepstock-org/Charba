@@ -62,7 +62,7 @@ public abstract class AbstractInjectableResource {
 		// the internals do not need any check because managed by CHARBA and correct by definition
 		if (!(this instanceof IsInternalInjectableTextResource)) {
 			// checks if the name of resource is a CHARBA one
-			ResourceName resourceName = Key.getKeyByValue(ResourceName.class, name);
+			ResourceName resourceName = Key.getKeyByValue(ResourceName.values(), name);
 			// checks if it is a CHARBA resource and if it can be override
 			if (resourceName != null && !resourceName.isOverride() && !getClass().getName().equals(resourceName.getClassName())) {
 				// if here the the injectable resource is not a CHARBA class

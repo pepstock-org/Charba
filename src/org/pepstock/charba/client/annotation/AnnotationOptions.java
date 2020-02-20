@@ -133,7 +133,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * @return the draw time which defines when the annotations are drawn
 	 */
 	public DrawTime getDrawTime() {
-		return getValue(Property.DRAW_TIME, DrawTime.class, defaultsOptions.getDrawTime());
+		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultsOptions.getDrawTime());
 	}
 
 	/**

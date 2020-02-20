@@ -526,7 +526,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	public Align getAlign() {
-		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
 	}
 
 	/**
@@ -544,7 +544,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public Anchor getAnchor() {
-		return getValue(Property.ANCHOR, Anchor.class, defaultsOptions.getAnchor());
+		return getValue(Property.ANCHOR, Anchor.values(), defaultsOptions.getAnchor());
 	}
 
 	/**
@@ -770,7 +770,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		} else if (ObjectType.STRING.equals(type)) {
 			// checks if is a string
 			// returns as string
-			return getValue(Property.DISPLAY, Display.class, defaultsOptions.getDisplay());
+			return getValue(Property.DISPLAY, Display.values(), defaultsOptions.getDisplay());
 		}
 		// if here returns defautl value
 		return defaultsOptions.getDisplay();
@@ -849,7 +849,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	public TextAlign getTextAlign() {
-		return getValue(Property.TEXT_ALIGN, TextAlign.class, defaultsOptions.getTextAlign());
+		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultsOptions.getTextAlign());
 	}
 
 	/**

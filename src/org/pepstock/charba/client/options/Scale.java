@@ -267,7 +267,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return the type of axis.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.TYPE, AxisType.class, getDefaultValues().getType());
+		return getValue(Property.TYPE, AxisType.values(), getDefaultValues().getType());
 	}
 
 	/**
@@ -334,7 +334,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 			return value ? Display.TRUE : Display.FALSE;
 		}
 		// returns value. Must be auto
-		return getValue(Property.DISPLAY, Display.class, getDefaultValues().getDisplay());
+		return getValue(Property.DISPLAY, Display.values(), getDefaultValues().getDisplay());
 	}
 
 	/**
@@ -374,7 +374,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return position of axis.
 	 */
 	public final Position getPosition() {
-		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
 
 	/**
@@ -394,7 +394,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return property controls the data distribution along the scale.
 	 */
 	public final ScaleDistribution getDistribution() {
-		return getValue(Property.DISTRIBUTION, ScaleDistribution.class, getDefaultValues().getDistribution());
+		return getValue(Property.DISTRIBUTION, ScaleDistribution.values(), getDefaultValues().getDistribution());
 	}
 
 	/**
@@ -414,7 +414,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	public final ScaleBounds getBounds() {
-		return getValue(Property.BOUNDS, ScaleBounds.class, getDefaultValues().getBounds());
+		return getValue(Property.BOUNDS, ScaleBounds.values(), getDefaultValues().getBounds());
 	}
 
 }

@@ -231,7 +231,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public CapStyle getLineCap() {
-		return Key.getKeyByValue(CapStyle.class, nativeGetLineCap(), CapStyle.BUTT);
+		return Key.getKeyByValue(CapStyle.values(), nativeGetLineCap(), CapStyle.BUTT);
 	}
 
 	/**
@@ -289,7 +289,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public JoinStyle getLineJoin() {
-		return Key.getKeyByValue(JoinStyle.class, nativeGetLineJoin(), JoinStyle.BEVEL);
+		return Key.getKeyByValue(JoinStyle.values(), nativeGetLineJoin(), JoinStyle.BEVEL);
 	}
 
 	/**
@@ -582,7 +582,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public TextAlign getTextAlign() {
-		return Key.getKeyByValue(TextAlign.class, nativeGetTextAlign(), TextAlign.START);
+		return Key.getKeyByValue(TextAlign.values(), nativeGetTextAlign(), TextAlign.START);
 	}
 
 	/**
@@ -622,7 +622,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public TextBaseline getTextBaseline() {
-		return Key.getKeyByValue(TextBaseline.class, nativeGetTextBaseline(), TextBaseline.ALPHABETIC);
+		return Key.getKeyByValue(TextBaseline.values(), nativeGetTextBaseline(), TextBaseline.ALPHABETIC);
 	}
 
 	/**

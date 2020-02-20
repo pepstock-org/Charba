@@ -166,7 +166,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#CATEGORY}.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.TYPE, AxisType.class, AxisType.CATEGORY);
+		return getValue(Property.TYPE, AxisType.values(), AxisType.CATEGORY);
 	}
 
 	/**
@@ -437,7 +437,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// gets the value of native object
 		String value = getValue(Property.POSITION, UndefinedValues.STRING);
 		// if value is not consistent and not a enum item
-		if (value != null && !Key.hasKeyByValue(Position.class, value)) {
+		if (value != null && !Key.hasKeyByValue(Position.values(), value)) {
 			// returns simply the string
 			return value;
 		}

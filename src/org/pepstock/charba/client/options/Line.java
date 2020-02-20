@@ -139,7 +139,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getBorderCapStyle());
+		return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getBorderCapStyle());
 	}
 
 	/**
@@ -204,7 +204,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return there are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
+		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getBorderJoinStyle());
 	}
 
 	/**
@@ -256,7 +256,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, getDefaultValues().getCubicInterpolationMode());
+		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), getDefaultValues().getCubicInterpolationMode());
 	}
 
 	/**

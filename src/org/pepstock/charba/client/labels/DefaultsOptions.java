@@ -54,7 +54,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return what data must be showed.
 	 */
 	Render getRender() {
-		return getValue(LabelsOptions.Property.RENDER, Render.class, LabelsOptions.DEFAULT_RENDER);
+		return getValue(LabelsOptions.Property.RENDER, Render.values(), LabelsOptions.DEFAULT_RENDER);
 	}
 
 	/**
@@ -99,7 +99,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font style.
 	 */
 	FontStyle getFontStyle() {
-		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getDefaultFontStyle());
 	}
 
 	/**
@@ -171,7 +171,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the position to draw label.
 	 */
 	Position getPosition() {
-		return getValue(LabelsOptions.Property.POSITION, Position.class, LabelsOptions.DEFAULT_POSITION);
+		return getValue(LabelsOptions.Property.POSITION, Position.values(), LabelsOptions.DEFAULT_POSITION);
 	}
 
 	/**

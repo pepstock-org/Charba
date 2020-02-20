@@ -154,7 +154,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	public SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.class, defaultsOptions.getSchemeScope());
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), defaultsOptions.getSchemeScope());
 	}
 
 	/**

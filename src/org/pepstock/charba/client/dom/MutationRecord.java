@@ -125,7 +125,7 @@ public final class MutationRecord {
 	 */
 	@JsOverlay
 	public MutationType getType() {
-		return Key.getKeyByValue(MutationType.class, nativeGetType());
+		return Key.getKeyByValue(MutationType.values(), nativeGetType());
 	}
 
 	/**

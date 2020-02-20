@@ -41,7 +41,7 @@ public final class CustomTooltipPosition implements IsTooltipPosition {
 			throw new IllegalArgumentException("The tooltip position argument is null");
 		}
 		// check is the name is the same of already out of the box ones
-		if (Key.hasKeyByValue(TooltipPosition.class, name)) {
+		if (Key.hasKeyByValue(TooltipPosition.values(), name)) {
 			throw new IllegalArgumentException("The tooltip position '" + name + "' is already defined");
 		}
 		this.name = name;

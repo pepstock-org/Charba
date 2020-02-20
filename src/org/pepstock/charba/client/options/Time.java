@@ -151,7 +151,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 			return getDefaultValues().getRound();
 		}
 		// gets the value
-		return getValue(Property.ROUND, TimeUnit.class, getDefaultValues().getRound());
+		return getValue(Property.ROUND, TimeUnit.values(), getDefaultValues().getRound());
 	}
 
 	/**
@@ -211,7 +211,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 			return getDefaultValues().getUnit();
 		}
 		// returns the value
-		return getValue(Property.UNIT, TimeUnit.class, getDefaultValues().getUnit());
+		return getValue(Property.UNIT, TimeUnit.values(), getDefaultValues().getUnit());
 	}
 
 	/**
@@ -251,7 +251,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return minimum display format to be used for a time unit.
 	 */
 	public TimeUnit getMinUnit() {
-		return getValue(Property.MIN_UNIT, TimeUnit.class, getDefaultValues().getMinUnit());
+		return getValue(Property.MIN_UNIT, TimeUnit.values(), getDefaultValues().getMinUnit());
 	}
 
 	/**

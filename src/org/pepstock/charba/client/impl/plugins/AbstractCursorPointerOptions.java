@@ -103,7 +103,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * @return cursor type
 	 */
 	public final CursorType getCursorPointer() {
-		return getValue(Property.CURSOR_POINTER, CursorType.class, getCurrentCursor());
+		return getValue(Property.CURSOR_POINTER, CursorType.values(), getCurrentCursor());
 	}
 
 	/**
@@ -124,7 +124,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * @return cursor type
 	 */
 	final CursorType getCurrentCursor() {
-		return getValue(Property.CURSOR_POINTER, CursorType.class, CursorType.POINTER);
+		return getValue(Property.CURSOR_POINTER, CursorType.values(), CursorType.POINTER);
 	}
 
 }

@@ -72,42 +72,42 @@ public interface Key {
 	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
 	 * 
-	 * @param clazz enumeration of keys
+	 * @param enumValues enumeration values of keys
 	 * @param value value to search into key
 	 * @param <T> type of key
 	 * @return <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>
 	 */
-	static <T extends Key> boolean hasKeyByValue(Class<T> clazz, String value) {
-		return getKeyByValue(clazz, value, null) != null;
+	static <T extends Key> boolean hasKeyByValue(T[] enumValues, String value) {
+		return getKeyByValue(enumValues, value, null) != null;
 	}
 
 	/**
 	 * Returns a key into an enumeration by the value.
 	 * 
-	 * @param clazz enumeration of keys
+	 * @param enumValues enumeration values of keys
 	 * @param value value to search into key
 	 * @param <T> type of key
 	 * @return the found key by value or <code>null</code>
 	 */
-	static <T extends Key> T getKeyByValue(Class<T> clazz, String value) {
-		return getKeyByValue(clazz, value, null);
+	static <T extends Key> T getKeyByValue(T[] enumValues, String value) {
+		return getKeyByValue(enumValues, value, null);
 	}
 
 	/**
 	 * Returns a key into an enumeration by the value, or the default key passed as argument.
 	 * 
-	 * @param clazz enumeration of keys
+	 * @param enumValues enumeration values of keys
 	 * @param value value to search into key
 	 * @param defaultKey default key instance if the value is not found
 	 * @param <T> type of key
 	 * @return the found key by value or the default one
 	 */
-	static <T extends Key> T getKeyByValue(Class<T> clazz, String value, T defaultKey) {
+	static <T extends Key> T getKeyByValue(T[] enumValues, String value, T defaultKey) {
 		// checks if arguments are consistent
-		if (value != null && clazz != null && clazz.isEnum()) {
+		if (value != null && enumValues != null && enumValues.length > 0) {
 			// scans enumeration
-			for (T enumValue : clazz.getEnumConstants()) {
-				// checks if Enum value name is equals to value
+			for (T enumValue : enumValues) {
+				// checks if enumeration value name is equals to value
 				if (enumValue.value().equalsIgnoreCase(value)) {
 					// returns EnumValue
 					return enumValue;

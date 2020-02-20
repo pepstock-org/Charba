@@ -238,7 +238,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, IsDefaultsLineLabel.super.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), IsDefaultsLineLabel.super.getFontStyle());
 	}
 
 	/**
@@ -370,7 +370,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public LineLabelPosition getPosition() {
-		return getValue(Property.POSITION, LineLabelPosition.class, IsDefaultsLineLabel.super.getPosition());
+		return getValue(Property.POSITION, LineLabelPosition.values(), IsDefaultsLineLabel.super.getPosition());
 	}
 
 	/**

@@ -304,7 +304,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip body section.
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.BODY_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
+		return getValue(Property.BODY_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
 	}
 
 	/**
@@ -313,7 +313,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip body section.
 	 */
 	public TextAlign getBodyAlign() {
-		return getValue(Property.BODY_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getBodyAlign());
+		return getValue(Property.BODY_ALIGN, TextAlign.values(), Defaults.get().getGlobal().getTooltips().getBodyAlign());
 	}
 
 	/**
@@ -379,7 +379,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip title section.
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.TITLE_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
+		return getValue(Property.TITLE_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
 	}
 
 	/**
@@ -397,7 +397,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip title section.
 	 */
 	public TextAlign getTitleAlign() {
-		return getValue(Property.TITLE_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getTitleAlign());
+		return getValue(Property.TITLE_ALIGN, TextAlign.values(), Defaults.get().getGlobal().getTooltips().getTitleAlign());
 	}
 
 	/**
@@ -463,7 +463,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip footer section.
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
+		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
 	}
 
 	/**
@@ -481,7 +481,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip footer section.
 	 */
 	public TextAlign getFooterAlign() {
-		return getValue(Property.FOOTER_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getFooterAlign());
+		return getValue(Property.FOOTER_ALIGN, TextAlign.values(), Defaults.get().getGlobal().getTooltips().getFooterAlign());
 	}
 
 	/**

@@ -91,7 +91,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @return animation easing.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.EASING, Easing.class, getDefaultValues().getEasing());
+		return getValue(Property.EASING, Easing.values(), getDefaultValues().getEasing());
 	}
 
 	/**

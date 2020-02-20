@@ -400,7 +400,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
 
 	/**

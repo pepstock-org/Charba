@@ -126,7 +126,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @return the text direction of the tooltips.
 	 */
 	TextDirection getTextDirection() {
-		return getValue(Property.TEXT_DIRECTION, TextDirection.class, defaultValues.getTextDirection());
+		return getValue(Property.TEXT_DIRECTION, TextDirection.values(), defaultValues.getTextDirection());
 	}
 
 }

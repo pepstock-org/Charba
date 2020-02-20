@@ -186,7 +186,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		// checks if the tooltip position is consistent
 		Key.checkIfValid(position);
 		// that means that is defined both out of the box or custom one by positioner
-		if (!Key.hasKeyByValue(TooltipPosition.class, position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
+		if (!Key.hasKeyByValue(TooltipPosition.values(), position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
 			throw new IllegalArgumentException("The tooltip position '" + position + "' is not consistent");
 		}
 		// stores values
@@ -204,9 +204,9 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		// gets string value
 		String value = getValue(Property.POSITION, getDefaultValues().getPosition().value());
 		// checks if is the out of the box one
-		if (Key.hasKeyByValue(TooltipPosition.class, value)) {
+		if (Key.hasKeyByValue(TooltipPosition.values(), value)) {
 			// returns the pout of the box
-			return Key.getKeyByValue(TooltipPosition.class, value);
+			return Key.getKeyByValue(TooltipPosition.values(), value);
 		}
 		// if here, it could be a custom tooltip position
 		// checks if is a custom tooltip position
@@ -313,7 +313,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return title font style.
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.TITLE_FONT_STYLE, FontStyle.class, getDefaultValues().getTitleFontStyle());
+		return getValue(Property.TITLE_FONT_STYLE, FontStyle.values(), getDefaultValues().getTitleFontStyle());
 	}
 
 	/**
@@ -333,7 +333,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return title alignment.
 	 */
 	public TextAlign getTitleAlign() {
-		return getValue(Property.TITLE_ALIGN, TextAlign.class, getDefaultValues().getTitleAlign());
+		return getValue(Property.TITLE_ALIGN, TextAlign.values(), getDefaultValues().getTitleAlign());
 	}
 
 	/**
@@ -471,7 +471,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return body font style.
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.BODY_FONT_STYLE, FontStyle.class, getDefaultValues().getBodyFontStyle());
+		return getValue(Property.BODY_FONT_STYLE, FontStyle.values(), getDefaultValues().getBodyFontStyle());
 	}
 
 	/**
@@ -491,7 +491,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return body alignment.
 	 */
 	public TextAlign getBodyAlign() {
-		return getValue(Property.BODY_ALIGN, TextAlign.class, getDefaultValues().getBodyAlign());
+		return getValue(Property.BODY_ALIGN, TextAlign.values(), getDefaultValues().getBodyAlign());
 	}
 
 	/**
@@ -609,7 +609,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return footer font style.
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.class, getDefaultValues().getFooterFontStyle());
+		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.values(), getDefaultValues().getFooterFontStyle());
 	}
 
 	/**
@@ -629,7 +629,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @return footer alignment.
 	 */
 	public TextAlign getFooterAlign() {
-		return getValue(Property.FOOTER_ALIGN, TextAlign.class, getDefaultValues().getFooterAlign());
+		return getValue(Property.FOOTER_ALIGN, TextAlign.values(), getDefaultValues().getFooterAlign());
 	}
 
 	/**

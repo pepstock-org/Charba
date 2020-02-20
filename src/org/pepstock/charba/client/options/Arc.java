@@ -90,7 +90,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	public BorderAlign getBorderAlign() {
-		return getValue(Property.BORDER_ALIGN, BorderAlign.class, getDefaultValues().getBorderAlign());
+		return getValue(Property.BORDER_ALIGN, BorderAlign.values(), getDefaultValues().getBorderAlign());
 	}
 
 	/**

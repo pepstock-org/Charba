@@ -94,6 +94,6 @@ public final class AnimationItem extends NativeObjectContainer {
 	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}
 	 */
 	public Easing getEasing() {
-		return getValue(Property.EASING, Easing.class, Easing.EASE_OUT_QUART);
+		return getValue(Property.EASING, Easing.values(), Easing.EASE_OUT_QUART);
 	}
 }

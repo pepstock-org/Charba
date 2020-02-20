@@ -234,7 +234,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		// checks if callback has been activated
 		if (getModeCallback() == null) {
 			// no callback
-			return getValue(Property.MODE, InteractionAxis.class, defaultsOptions.getMode());
+			return getValue(Property.MODE, InteractionAxis.values(), defaultsOptions.getMode());
 		}
 		// if here, mode callback has been activated
 		// then returns the default

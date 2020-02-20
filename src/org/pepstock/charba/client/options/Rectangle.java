@@ -115,7 +115,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getBorderSkipped());
 	}
 
 }

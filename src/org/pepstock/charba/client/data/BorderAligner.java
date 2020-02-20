@@ -113,7 +113,7 @@ public final class BorderAligner extends NativeObjectContainer {
 			return defaultValues.getElements().getArc().getBorderAlign();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_ALIGN, BorderAlign.class, defaultValues.getElements().getArc().getBorderAlign());
+		return getValue(Property.BORDER_ALIGN, BorderAlign.values(), defaultValues.getElements().getArc().getBorderAlign());
 	}
 
 	/**

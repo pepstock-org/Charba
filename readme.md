@@ -140,7 +140,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove from `PercentageCallback` the number formatting going to the precision number with the amount of decimal digits to use.
  * change constructor of `ArrayEnumList` which was getting a `enum` class because J2CL doesn't support `Class.getEnumConstants`.
  * change `ArrayListHelper.list` method for `Key` enumerations which was getting a `enum` class because J2CL doesn't support `Class.getEnumConstants`.
-
+ * change `Key.hasKeyByValue` and `Key.getKeyByValue` methods which were getting a `enum` class because J2CL doesn't support `Class.getEnumConstants`.
+ 
 ### Features
 
  * add `adapters.date` property into scale options and configuration in order to configure date time adapters.

@@ -102,7 +102,7 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	 * @return which elements appear in the tooltip.
 	 */
 	public final InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.class, getDefaultMode());
+		return getValue(Property.MODE, InteractionMode.values(), getDefaultMode());
 	}
 
 	/**

@@ -202,7 +202,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	public CubicInterpolationMode getCubicInterpolationMode() {
 		// checks if a callback has been set for this property
 		if (getCubicInterpolationModeCallback() == null) {
-			return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
+			return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), getDefaultValues().getElements().getLine().getCubicInterpolationMode());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -272,7 +272,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			return SteppedLine.FALSE;
 		} else {
 			// otherwise returns the steppedline
-			return getValue(Property.STEPPED_LINE, SteppedLine.class, SteppedLine.FALSE);
+			return getValue(Property.STEPPED_LINE, SteppedLine.values(), SteppedLine.FALSE);
 		}
 	}
 

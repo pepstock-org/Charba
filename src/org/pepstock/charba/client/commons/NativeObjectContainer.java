@@ -941,12 +941,12 @@ public abstract class NativeObjectContainer {
 	 * Returns a value (key) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param clazz class of object to get all enumeration values
+	 * @param enumValues all enumeration values
 	 * @param defaultValue default value if the property is missing
 	 * @param <T> type of key
 	 * @return value of the property
 	 */
-	protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue) {
+	protected final <T extends Key> T getValue(Key key, T[] enumValues, T defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -957,7 +957,7 @@ public abstract class NativeObjectContainer {
 		// gets the string value
 		String value = getValue(key, defaultValue.value());
 		// gets the key by value
-		return Key.getKeyByValue(clazz, value, defaultValue);
+		return Key.getKeyByValue(enumValues, value, defaultValue);
 	}
 
 	/**

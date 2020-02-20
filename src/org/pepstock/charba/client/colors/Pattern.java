@@ -191,7 +191,7 @@ public final class Pattern extends CanvasObject {
 	 * @return the repetition to use into pattern
 	 */
 	public Repetition getRepetition() {
-		return getValue(Property.CHARBA_PATTERN_REPETITION, Repetition.class, Repetition.REPEAT);
+		return getValue(Property.CHARBA_PATTERN_REPETITION, Repetition.values(), Repetition.REPEAT);
 	}
 
 	/**

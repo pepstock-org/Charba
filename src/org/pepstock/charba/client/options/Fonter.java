@@ -130,7 +130,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultValues.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultValues.getFontStyle());
 	}
 
 	/**

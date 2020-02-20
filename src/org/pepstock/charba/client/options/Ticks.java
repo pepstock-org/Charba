@@ -684,7 +684,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return property controls the ticks generation.
 	 */
 	public TickSource getSource() {
-		return getValue(Property.SOURCE, TickSource.class, getDefaultValues().getSource());
+		return getValue(Property.SOURCE, TickSource.values(), getDefaultValues().getSource());
 	}
 
 	/**

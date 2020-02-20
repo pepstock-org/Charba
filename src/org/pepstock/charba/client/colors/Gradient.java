@@ -185,7 +185,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient type
 	 */
 	public GradientType getType() {
-		return getValue(Property.CHARBA_GRADIENT_TYPE, GradientType.class, GradientType.LINEAR);
+		return getValue(Property.CHARBA_GRADIENT_TYPE, GradientType.values(), GradientType.LINEAR);
 	}
 
 	/**
@@ -194,7 +194,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient orientation
 	 */
 	public GradientOrientation getOrientation() {
-		return getValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.class, GradientOrientation.getDefaultByType(getType()));
+		return getValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.values(), GradientOrientation.getDefaultByType(getType()));
 	}
 
 	/**
@@ -203,7 +203,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient scope
 	 */
 	public GradientScope getScope() {
-		return getValue(Property.CHARBA_GRADIENT_SCOPE, GradientScope.class, GradientScope.CHART);
+		return getValue(Property.CHARBA_GRADIENT_SCOPE, GradientScope.values(), GradientScope.CHART);
 	}
 
 	/**

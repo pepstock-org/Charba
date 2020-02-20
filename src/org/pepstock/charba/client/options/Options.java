@@ -482,7 +482,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *         initial, inherit).
 	 */
 	public FontStyle getDefaultFontStyle() {
-		return getValue(Property.DEFAULT_FONT_STYLE, FontStyle.class, getDefaultValues().getDefaultFontStyle());
+		return getValue(Property.DEFAULT_FONT_STYLE, FontStyle.values(), getDefaultValues().getDefaultFontStyle());
 	}
 
 	/**

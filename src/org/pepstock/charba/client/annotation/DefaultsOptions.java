@@ -58,7 +58,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the draw time which defines when the annotations are drawn
 	 */
 	DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.class, AnnotationOptions.DEFAULT_DRAW_TIME);
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), AnnotationOptions.DEFAULT_DRAW_TIME);
 	}
 
 	/**

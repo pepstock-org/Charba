@@ -638,7 +638,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public CapStyle getBorderCapStyle() {
 		// checks if a callback has been set for this property
 		if (getBorderCapStyleCallback() == null) {
-			return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+			return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getElements().getLine().getBorderCapStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -669,7 +669,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public JoinStyle getBorderJoinStyle() {
 		// checks if a callback has been set for this property
 		if (getBorderJoinStyleCallback() == null) {
-			return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+			return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getElements().getLine().getBorderJoinStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -1013,7 +1013,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public CapStyle getHoverBorderCapStyle() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderCapStyleCallback() == null) {
-			return getValue(Property.HOVER_BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+			return getValue(Property.HOVER_BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getElements().getLine().getBorderCapStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -1044,7 +1044,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public JoinStyle getHoverBorderJoinStyle() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderJoinStyleCallback() == null) {
-			return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+			return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getElements().getLine().getBorderJoinStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default

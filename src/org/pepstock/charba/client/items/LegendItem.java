@@ -290,7 +290,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return how the end points of every box border are drawn.
 	 */
 	public final CapStyle getLineCap() {
-		return getValue(Property.LINE_CAP, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
+		return getValue(Property.LINE_CAP, CapStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public final JoinStyle getLineJoin() {
-		return getValue(Property.LINE_JOIN, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.LINE_JOIN, JoinStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -360,7 +360,7 @@ public class LegendItem extends NativeObjectContainer {
 	public final PointStyle getPointStyle() {
 		// checks if is an point style and not an image
 		if (!isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		} else {
 			// returns the default
 			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();

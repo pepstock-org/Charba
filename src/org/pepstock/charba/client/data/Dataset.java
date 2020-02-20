@@ -222,7 +222,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the data type of datasets
 	 */
 	public final DataType getDataType() {
-		return getValue(Property.CHARBA_DATA_TYPE, DataType.class, DataType.UNKNOWN);
+		return getValue(Property.CHARBA_DATA_TYPE, DataType.values(), DataType.UNKNOWN);
 	}
 
 	/**

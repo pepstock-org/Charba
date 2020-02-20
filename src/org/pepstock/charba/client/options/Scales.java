@@ -152,7 +152,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 			return value ? Display.TRUE : Display.FALSE;
 		}
 		// returns value. Must be auto
-		return getValue(Property.DISPLAY, Display.class, getDefaultValues().getDisplay());
+		return getValue(Property.DISPLAY, Display.values(), getDefaultValues().getDisplay());
 	}
 
 	/**

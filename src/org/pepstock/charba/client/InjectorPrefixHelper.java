@@ -82,7 +82,7 @@ final class InjectorPrefixHelper {
 			throw new IllegalArgumentException("Injectable resource is null");
 		}
 		// checks if the name of resource is a CHARBA one
-		Key key = Key.getKeyByValue(ResourceName.class, resource.getName());
+		Key key = Key.getKeyByValue(ResourceName.values(), resource.getName());
 		// if not null, is CHARBA
 		if (key != null) {
 			// then returns CHARBA prefix

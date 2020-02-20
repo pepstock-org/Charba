@@ -266,7 +266,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * @return the draw time which defines when the annotations are drawn
 	 */
 	public final DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.class, defaultsOptions.getDrawTime());
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultsOptions.getDrawTime());
 	}
 
 	/**

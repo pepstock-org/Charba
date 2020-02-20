@@ -137,7 +137,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, BorderSkipped.FALSE);
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), BorderSkipped.FALSE);
 	}
 
 	/**
@@ -271,7 +271,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 			return ArrayListHelper.unmodifiableList(PointStyle.values(), array);
 		} else {
 			// the property is a string or missing
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
 

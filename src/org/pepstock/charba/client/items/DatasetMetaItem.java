@@ -100,7 +100,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		// gets string value from java script object
 		String value = getValue(Property.TYPE, ChartType.BAR.value());
 		// checks if consistent with out of the box chart types
-		Type type = Key.getKeyByValue(ChartType.class, value);
+		Type type = Key.getKeyByValue(ChartType.values(), value);
 		// if not, creates new type being a controller.
 		if (type == null) {
 			// gets type from controllers

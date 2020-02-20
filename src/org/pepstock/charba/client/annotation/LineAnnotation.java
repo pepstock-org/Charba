@@ -222,7 +222,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public LineMode getMode() {
-		return getValue(Property.MODE, LineMode.class, IsDefaultsLineAnnotation.super.getMode());
+		return getValue(Property.MODE, LineMode.values(), IsDefaultsLineAnnotation.super.getMode());
 	}
 
 	/**

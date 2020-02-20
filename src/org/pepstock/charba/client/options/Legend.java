@@ -183,7 +183,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return position of the legend.
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
 
 	/**
@@ -203,7 +203,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return alignment of the legend.
 	 */
 	public LegendAlign getAlign() {
-		return getValue(Property.ALIGN, LegendAlign.class, getDefaultValues().getAlign());
+		return getValue(Property.ALIGN, LegendAlign.values(), getDefaultValues().getAlign());
 	}
 
 }

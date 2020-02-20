@@ -310,7 +310,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return what data must be showed.
 	 */
 	public Render getRender() {
-		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
 	}
 
 	/**
@@ -418,7 +418,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the font style.
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -580,7 +580,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the position to draw label.
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
 	}
 
 	/**

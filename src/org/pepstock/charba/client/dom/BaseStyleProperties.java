@@ -475,7 +475,7 @@ public final class BaseStyleProperties {
 	 */
 	@JsOverlay
 	public final BorderStyle getBorderStyle() {
-		return Key.getKeyByValue(BorderStyle.class, nativeGetBorderStyle(), BorderStyle.NONE);
+		return Key.getKeyByValue(BorderStyle.values(), nativeGetBorderStyle(), BorderStyle.NONE);
 	}
 
 	/**
@@ -716,7 +716,7 @@ public final class BaseStyleProperties {
 	 */
 	@JsOverlay
 	public CursorType getCursorType() {
-		return Key.getKeyByValue(CursorType.class, nativeGetCursor(), CursorType.DEFAULT);
+		return Key.getKeyByValue(CursorType.values(), nativeGetCursor(), CursorType.DEFAULT);
 	}
 
 	/**
@@ -781,7 +781,7 @@ public final class BaseStyleProperties {
 	 */
 	@JsOverlay
 	public final Display getDisplay() {
-		return Key.getKeyByValue(Display.class, nativeGetDisplay(), Display.BLOCK);
+		return Key.getKeyByValue(Display.values(), nativeGetDisplay(), Display.BLOCK);
 	}
 
 	@JsOverlay
@@ -1310,7 +1310,7 @@ public final class BaseStyleProperties {
 	 */
 	@JsOverlay
 	public final Position getPosition() {
-		return Key.getKeyByValue(Position.class, nativeGetPosition(), Position.RELATIVE);
+		return Key.getKeyByValue(Position.values(), nativeGetPosition(), Position.RELATIVE);
 	}
 
 	/**
@@ -1407,7 +1407,7 @@ public final class BaseStyleProperties {
 	 */
 	@JsOverlay
 	public final TextDecoration getTextDecoration() {
-		return Key.getKeyByValue(TextDecoration.class, nativeGetTextDecoration(), TextDecoration.NONE);
+		return Key.getKeyByValue(TextDecoration.values(), nativeGetTextDecoration(), TextDecoration.NONE);
 	}
 
 	/**

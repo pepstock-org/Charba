@@ -84,7 +84,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font style
 	 */
 	FontStyle getFontStyle() {
-		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getDefaultFontStyle());
 	}
 
 	/**
@@ -102,7 +102,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection align
 	 */
 	Align getAlign() {
-		return getValue(ClearSelection.Property.ALIGN, Align.class, ClearSelection.DEFAULT_ALIGN);
+		return getValue(ClearSelection.Property.ALIGN, Align.values(), ClearSelection.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -111,7 +111,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection render.
 	 */
 	Render getRender() {
-		return getValue(ClearSelection.Property.RENDER, Render.class, ClearSelection.DEFAULT_RENDER);
+		return getValue(ClearSelection.Property.RENDER, Render.values(), ClearSelection.DEFAULT_RENDER);
 	}
 
 	/**
@@ -120,7 +120,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection position
 	 */
 	Position getPosition() {
-		return getValue(ClearSelection.Property.POSITION, Position.class, ClearSelection.DEFAULT_POSITION);
+		return getValue(ClearSelection.Property.POSITION, Position.values(), ClearSelection.DEFAULT_POSITION);
 	}
 
 	/**
