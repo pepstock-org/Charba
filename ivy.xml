@@ -6,43 +6,14 @@
 	
     <info organisation="org.pepstock" module="charba" />
     
-    <!--
-    <configurations defaultconf="default" 
-    	defaultconfmapping="master->master; default->default; compile->compile; runtime->runtime; test->test; system->system; sources->sources; javadoc->javadoc; optional->optional;">
-		<conf name="master" 
-			description="contains only the artifact published by this module itself, with no transitive dependencies"/>
-		<conf name="default" 
-			description="runtime dependencies and master artifact can be used with this conf"/>
-		<conf name="compile" 
-			description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths provided this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive"/>
-		<conf name="provided"
-			description="this scope is used to mark dependencies that should be provided at runtime by JDK or a container, hence the name"
-		<conf name="runtime" 
-			description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath"/>
-		<conf name="test" 
-			description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases"/>
-		<conf name="system" 
-			description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly."/>
-		<conf name="sources" 
-			description="this configuration contains the source artifact of this module, if any Source for the project"/>
-		<conf name="javadoc" 
-			description="this configuration contains the javadoc artifact of this module, if any JavaDoc for the project"/>
-		<conf name="optional" 
-			description="contains all optional dependencies"/>
-    </configurations>
-	-->    
-    
     <configurations defaultconf="compile"
-    	defaultconfmapping="compile->master; runtime->default">
+    	defaultconfmapping="compile->master; runtime->master">
     	<conf name="default" />
     	<conf name="compile" />
     	<conf name="runtime" />
         <conf name="sources" />
         <conf name="javadoc" />
         <conf name="optional" />
-        <!--
-    	<conf name="provided" />
-    	-->
     </configurations>
     
     <publications>
@@ -59,11 +30,11 @@
 
     <dependencies>
         <!-- GWT SDK -->
-        <dependency org="com.google.gwt" name="gwt-user" rev="${depver.gwt}" conf="compile; runtime->provided"/>
-        <dependency org="com.google.gwt" name="gwt-dev" rev="${depver.gwt}" conf="compile; runtime->provided"/>
+        <dependency org="com.google.gwt" name="gwt-user" rev="${depver.gwt}" conf="compile"/>
+        <dependency org="com.google.gwt" name="gwt-dev" rev="${depver.gwt}" conf="compile"/>
 
 		<!-- JS INTEROP --> 	
-        <dependency org="com.google.jsinterop" name="base" rev="${depver.jsinterop-base}" conf="compile->default; runtime"/>
+        <dependency org="com.google.jsinterop" name="base" rev="${depver.jsinterop-base}" conf="compile; runtime"/>
         <dependency org="com.google.jsinterop" name="jsinterop-annotations" rev="${depver.jsinterop-annotations}" conf="compile"/>
         
         <!-- CLOSURE COMPILER (to minify javascript) -->
