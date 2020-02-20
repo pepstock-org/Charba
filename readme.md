@@ -112,8 +112,6 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.8/charba.fbp) project to looking offline for bugs.
-
 Going to next release
 -------
 
@@ -124,8 +122,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove hard dependency with [Google Web toolkit](http://www.gwtproject.org/) in order to use **Charba** into other framework, [J2CL - JavaToClosure](https://github.com/google/j2cl) base.
    * The dependency is still there (at runtime) because **Charba** is providing anyway the chart objects wrapper by GWT widget in order to maintain the compatibility with GWT features, like UIBinder and code splitting.
    * All GWT classes are now located into `org.pepstock.charba.client.gwt` in order to enable the release of 2 artifacts for **Charba**, 1 without any GWT dependencies and 1 with GWT widgets and other few features only for GWT:
-      * jar library for J2CL has got the current name, `charba-[version.release].jar`
-      * jar library for GWT has got the current name, `charba-[version.release]-gwt.jar`
+      * jar library for J2CL has got the current name, `charba-[version.release].jar`.
+      * jar library for GWT has got the current name, `charba-[version.release]-gwt.jar`.
    * both artifacts are providing the GWT module (J2Cl without gwt-user inheritance) in order to use on GWT with or without widgets and code splitting.
  * add dependency at runtime (and compile) to [JSINTEROP base](https://github.com/google/jsinterop-base), version [1.0.0](https://github.com/google/jsinterop-base/releases/tag/1.0.0).
  * create new DOM tree manager in order to remove all dependencies from other frameworks (for instance GWT, elemental2, GWT Elemento) but provide some hook (helpers or methods to cast to framework's element) where **Charba** can be linked with those frameworks. The **Charba** DOM manager does NOT implement a full DOM engine but only is needed to **Charba** itself.
@@ -144,9 +142,9 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * add `adapters.date` property into scale options and configuration in order to configure date time adapters.
- * change the injection of CHART.JS, using the `Chart.min.js`
+ * change the injection of CHART.JS, using the `Chart.min.js`:
    * the `Chart.bundle.min.js`, used till version 2.8, won't be provided anymore from **CHART.JS 3.x**.
-   * due to the previous item, the java script date time library `Moment` won't be provided by CHART.JS
+   * due to the previous item, the java script date time library `Moment` won't be provided by CHART.JS.
  * enable the options to decide which java script date time library (available for CHART.JS out of the box) to use:
    * the injection of java script date time library (and its CHART.JS adapter) will be provided out of the box by **Charba**. The different library can be chosen using a different resource client bundle, available both embedded and deferred mode. The current resource client bundle injects [MOMENT.js](https://momentjs.com/). 
    * CHART.JS has got the adapters for:
@@ -172,7 +170,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change format from `JsDate` to `double` to store `Date` into configuration and options element.
  * change and reduce visibility of `ClientBundle` interfaces in order to avoid any extension on predefined ones.
  * add checking on arguments in `JSON` class in order to avoid any `NullPointerExcpetion`.
- * remove `toJson` method from chart instances
+ * remove `toJson` method from chart instances.
+ * remove FINDBUGS configuration file from project because used internally.
  
 License
 -------
