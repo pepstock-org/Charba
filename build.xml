@@ -173,13 +173,13 @@
 
 	<target name="ivyMakePom" depends="ivyTaskdef">
 		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}.pom"
-			name="Charba" description="Charba, J2CL and GWT chart library based on CHART.JS" 
+			name="Charba" description="${charba.description}" 
 			version="${ivy.pubrevision}" url="www.pepstock.org"/>
 	</target>
 
 	<target name="ivyMakePomGwt" depends="ivyTaskdef">
 		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}-gwt.pom"
-			name="Charba GWT" description="Charba, J2CL and GWT chart library based on CHART.JS" 
+			name="Charba GWT" description="${charba.description}" 
 			version="${ivy.pubrevision}-gwt" url="www.pepstock.org"/>
 	</target>
 	
@@ -229,8 +229,8 @@
 			<fileset dir="${classes.dir}" includes="**/*"/>
 			<fileset dir="${dist.dir}" includes="**/*"/>
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
-			<fileset dir="${temp.dir}" />
-			<fileset dir="${log.dir}" />
+			<fileset dir="${temp.dir}" includes="**/*" />
+			<fileset dir="${log.dir}" includes="**/*" />
 		</delete>
 	</target>
 	
