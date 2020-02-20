@@ -77,9 +77,11 @@ abstract class BaseEvent {
 	 * Initialize the value of a created event.
 	 * 
 	 * @param eventTypeArg a string which is defining the type of event
+	 * @param bubbles deciding whether the event should bubble up through the event chain or not
+	 * @param cancelable defining whether the event can be canceled
 	 */
 	@JsMethod
-	public final native void initEvent(String eventTypeArg);
+	public final native void initEvent(String eventTypeArg, boolean bubbles, boolean cancelable);
 
 	/**
 	 * Cancels the event (if it is cancelable).

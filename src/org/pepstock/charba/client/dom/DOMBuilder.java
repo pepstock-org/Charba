@@ -221,7 +221,7 @@ public final class DOMBuilder {
 		// creates a mouse event
 		BaseNativeEvent event = DOM.getDocument().createEvent(BaseEventTypes.EVENT_MOUSE);
 		// initializes it as contect menu
-		event.initEvent(BaseEventTypes.CONTEXT_MENU);
+		event.initEvent(BaseEventTypes.CONTEXT_MENU, true, false);
 		// returns event
 		return event;
 	}
