@@ -82,7 +82,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 		// if the arrays is consistent...
 		if (array != null && !array.isEmpty()) {
 			// ...then returns as list of events
-			return ArrayListHelper.list(Event.class, array);
+			return ArrayListHelper.list(Event.values(), array);
 		}
 		// ... otherwise returns the default
 		return Collections.emptyList();

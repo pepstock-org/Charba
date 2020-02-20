@@ -177,7 +177,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 		// if the arrays is consistent...
 		if (array != null && !array.isEmpty()) {
 			// ...then returns as list of events
-			return ArrayListHelper.list(Event.class, array);
+			return ArrayListHelper.list(Event.values(), array);
 		}
 		// ... otherwise returns the default
 		return defaultsOptions.getEvents();

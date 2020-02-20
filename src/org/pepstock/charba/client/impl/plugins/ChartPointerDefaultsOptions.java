@@ -71,7 +71,7 @@ final class ChartPointerDefaultsOptions extends AbstractPluginOptions {
 		if (has(ChartPointerOptions.Property.ELEMENTS)) {
 			// reads the property
 			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-			return ArrayListHelper.list(PointerElement.class, array);
+			return ArrayListHelper.list(PointerElement.values(), array);
 		}
 		// if here, there is not any property
 		// defaults is all elements

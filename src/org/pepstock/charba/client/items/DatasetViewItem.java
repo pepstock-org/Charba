@@ -268,7 +268,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 			// if array, maps into array
 			ArrayString array = getArrayValue(Property.POINT_STYLE);
 			// returns list
-			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
+			return ArrayListHelper.unmodifiableList(PointStyle.values(), array);
 		} else {
 			// the property is a string or missing
 			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));

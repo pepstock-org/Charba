@@ -33,17 +33,17 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
 	 * 
-	 * @param clazz enumeration class with all values of an enumeration
+	 * @param values all values of an enumeration
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
-	ArrayEnumList(Class<E> clazz, ArrayString array) {
+	ArrayEnumList(E[] values, ArrayString array) {
 		// checks class argument if consistent
-		if (clazz == null || !clazz.isEnum()) {
+		if (values == null || values.length == 0) {
 			// if not, exception
-			throw new IllegalArgumentException("Class argument is null or is not an enum");
+			throw new IllegalArgumentException("Values argument is null or empty");
 		}
 		// sets all enumeration values
-		this.definedValues = clazz.getEnumConstants();
+		this.definedValues = values;
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayString();
@@ -54,12 +54,12 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Creates an empty list by a class which is a enum
+	 * Creates an empty list by all values of an enumeration.
 	 * 
-	 * @param clazz enumeration class with all values of an enumeration
+	 * @param values all values of an enumeration
 	 */
-	public ArrayEnumList(Class<E> clazz) {
-		this(clazz, null);
+	public ArrayEnumList(E[] values) {
+		this(values, null);
 	}
 
 	/*

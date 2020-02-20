@@ -1564,10 +1564,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		if (!getValue(Property.CHARBA_POINT_STYLE, false) && pointStyleCallback == null) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.class, array);
+			return ArrayListHelper.list(PointStyle.values(), array);
 		} else {
 			// if here, means the point style as stored as images or callback
-			return ArrayListHelper.list(PointStyle.class, new PointStyle[0]);
+			return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
 		}
 	}
 

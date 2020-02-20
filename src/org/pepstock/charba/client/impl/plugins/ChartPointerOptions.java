@@ -147,7 +147,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 		if (has(Property.ELEMENTS)) {
 			// reads the property
 			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-			return ArrayListHelper.list(PointerElement.class, array);
+			return ArrayListHelper.list(PointerElement.values(), array);
 		}
 		// if here, there is not any property
 		// returns defaults elements

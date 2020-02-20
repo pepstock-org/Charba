@@ -239,7 +239,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public List<Event> getEvents() {
 		ArrayString array = getArrayValue(Property.EVENTS);
-		return ArrayListHelper.list(Event.class, array);
+		return ArrayListHelper.list(Event.values(), array);
 	}
 
 	/**

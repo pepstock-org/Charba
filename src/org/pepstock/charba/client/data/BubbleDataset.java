@@ -201,11 +201,11 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		if (getPointStyleCallback() == null) {
 			// returns the array
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.class, array);
+			return ArrayListHelper.list(PointStyle.values(), array);
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayEnumList<>(PointStyle.class);
+		return new ArrayEnumList<>(PointStyle.values());
 	}
 
 	/**
