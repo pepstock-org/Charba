@@ -15,7 +15,7 @@
     "chartjs-adapter-moment": "0.1.1",
     "moment": "2.24.0",
     "chartjs-adapter-luxon": "0.2.0",
-    "luxon": "1.21.3",
+    "luxon": "1.22.0",
     "chartjs-adapter-date-fns": "1.0.0",
     "chartjs-plugin-datalabels": "0.7.0",
     "chartjs-plugin-zoom": "0.7.5",
