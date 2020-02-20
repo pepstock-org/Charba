@@ -160,16 +160,14 @@ Here you can find the list of enhancements and updates available on `master` bra
    
 ### Development
 
- * copy the `ZoomPugin.ID` into a private constant into `DatasetsItemsSelector` plugin in order to avoid to add the `Zoom` java script plugin if not used.
  * remove `Extensions` client bundle moving the text resources of extensions java scripts into the classes which are enabled the capabilities in order to avoid to add the java script sources if not used.
  * change `Date` storing into native object from `JsDate` to `double`.
  * change name to `OptionsEnvelop` class into `Envelop` because it can contain a generic object.
  * change from BODY to HEAD element where the resources will be injected.
- * change unique ID of injected resources using the package name instead of the resource class name to avoid to inject the same resource twice, invoking the `Injector` programmatically.
+ * change unique ID of injected resources to avoid to inject the same resource twice, invoking the `Injector` programmatically.
  * normalize the override method name of a `NativeObjectConatiner` implementation.
  * improve the `DefaultPlugin` implementation in order to use the factory and returns an empty options instead of `null`.
  * change `TimeUnit` and `DefaultFormats` to be aligned with new date time library adoption.
- * move resources (not related to CHART.JS and date time library injection) into the objects which needs (`Charba-Helper` and images for `DatasetsItemsSelector`), improving the the initial loading and GWT project build if not used.
  * change format from `JsDate` to `double` to store `Date` into configuration and options element.
  * change and reduce visibility of `ClientBundle` interfaces in order to avoid any extension on predefined ones.
  * add checking on arguments in `JSON` class in order to avoid any `NullPointerExcpetion`.
