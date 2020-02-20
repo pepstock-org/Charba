@@ -8,9 +8,6 @@
   <version>3.0</version>
   <packaging>jar</packaging>
 
-  <name>Charba</name>
-  <description>Charba, GWT Chart library based on CHART.JS</description>
-  <url>www.pepstock.org</url>
 
   <licenses>
     <license>
@@ -49,28 +46,27 @@
     </dependency>
     <dependency>
       <groupId>com.google.jsinterop</groupId>
-      <artifactId>jsinterop-annotations</artifactId>
-      <version>2.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.google.jsinterop</groupId>
       <artifactId>base</artifactId>
       <version>1.0.0</version>
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>com.google.jsinterop</groupId>
+      <artifactId>jsinterop-annotations</artifactId>
+      <version>2.0.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>com.google.javascript</groupId>
       <artifactId>closure-compiler</artifactId>
-      <version>v20200101</version>
+      <version>v20200204</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.apache.ivy</groupId>
       <artifactId>ivy</artifactId>
-      <version>2.4.0</version>
+      <version>2.5.0</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
-
