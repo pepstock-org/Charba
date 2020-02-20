@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="Charba" default="buildBinaryGwt" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
+	<setproxy proxyhost="proxyver.internal.unicredit.eu" proxyport="81" />
+	
 	<!-- 
 	    Apache Ivy task definition and load properties
 	 -->
@@ -9,6 +11,7 @@
 	<!-- 
 		CHARBA configuration and paths
 	-->
+	<property name="charba.description" value="Charba - J2CL and GWT charts library based on CHART.JS"/>
 	<property name="charba.built.by" value="www.pepstock.org" />
 	<tstamp>
 		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -21,8 +24,11 @@
 	<property name="resources.dir" value="resources" />
 	<property name="retrieve.dir" value="retrieve" />
 	<property name="dist.dir" value="dist" />
+	<property name="temp.dir" value="temp"/>
+	<property name="log.dir" value="log"/>
+	<property name="manifest.file" value="${temp.dir}/MANIFEST.MF"/>
 	<property name="all.sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.zip" />
-	
+		
 	<!-- 
 		CHARBA target properties for J2CL distribution
 	-->
@@ -34,9 +40,9 @@
 	<!-- 
 		CHARBA target properties for GWT distribution 
 	-->
-	<property name="bin.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}.jar" />
-	<property name="sources.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}-sources.jar" />
-	<property name="javadoc.gwt.archive.file" value="${dist.dir}/charba-gwt-${ivy.pubrevision}-javadoc.jar" />
+	<property name="bin.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt.jar" />
+	<property name="sources.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt-sources.jar" />
+	<property name="javadoc.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt-javadoc.jar" />
 
 	<!-- 
 		CHARBA target properties for java script files
@@ -87,9 +93,9 @@
 	<!--
 		IVY targets for getting build dependencies and Travis CI needed libraries
 	-->
-	<property name="ant.user.home" value="${user.home}/.ant" />
-	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
-	
+	<property name="ivy.file" value="ivy.xml"/>
+	<property name="ant.jar.dir" value="${user.home}/.ant/lib" />
+
 	<!-- 
 	**** IVY TARGET SECTIONS **** 
 	-->
@@ -102,24 +108,18 @@
 		<mkdir dir="${ant.jar.dir}"/>
 		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
 	        dest="${ant.jar.dir}" usetimestamp="true"/>
-		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
-		<path id="ivyPath">
-			<fileset dir="${ant.jar.dir}">
-				<include name="**/ivy-*.jar"/>
-			</fileset>
-		</path>
-		<!-- Define the Ivy tasks -->
-		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
+		<antcall target="ivyTaskdef" />
 	</target>
 	
 	<!--
         IVY - ANT task definitions for IVY 
     -->
 	<target name="ivyTaskdef">
+		<mkdir dir="${ant.jar.dir}"/>
 		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
 		<path id="ivyPath">
 			<fileset dir="${ant.jar.dir}">
-				<include name="**/ivy-*.jar"/>
+				<include name="**/ivy-${depver.ivy}.jar"/>
 			</fileset>
 		</path>
 		<!-- Define the Ivy tasks -->
@@ -135,11 +135,13 @@
         IVY - Retrieves by IVY the needed jar 
     -->
 	<target name="ivyRetrieveRuntime" depends="ivyTaskdef">
-		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
+		<ivy:retrieve file="${ivy.file}" sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
+		<ivy:report todir="${log.dir}" graph="false"/>
 	</target>
 
 	<target name="ivyRetrieveCompile" depends="ivyTaskdef">
-		<ivy:retrieve sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
+		<ivy:retrieve file="${ivy.file}" sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
+		<ivy:report todir="${log.dir}" graph="true"/>
 	</target>
 
 	<target name="ivyRetrieve" depends="ivyRetrieveCompile, ivyRetrieveRuntime" />
@@ -147,49 +149,79 @@
 	<!--
         IVY - Makes POM file 
     -->
-	<target name="ivyMakepom" depends="ivyTaskdef">
-		<property name="ivy.pom.name" value="Charba"/>
-		<property name="ivy.pom.description" value="Charba, J2CL and GWT chart library based on CHART.JS"/>
-		<property name="ivy.pom.url" value="www.pepstock.org"/>
-		<property name="ivy.pom.packaging" value="jar"/>
+	<macrodef name="makePom">
+		<attribute name="pomFile"/>
+		<attribute name="name"/>
+		<attribute name="description"/>
+		<attribute name="url"/>
+		<sequential>
+			<property name="ivy.pom.packaging" value="jar"/>
+			<ivy:makepom ivyfile="ivy.xml" pomfile="@{pomFile}" templatefile="pom.template" >
+				<mapping conf="default" scope="compile" />
+			</ivy:makepom>
+		</sequential>
+	</macrodef>
 
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.pubrevision}.pom" templatefile="pom.template" >
-			<mapping conf="default" scope="compile" />
-		</ivy:makepom>
+	<target name="ivyMakePom" depends="ivyTaskdef">
+		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}.pom"
+			name="Charba" description="Charba, J2CL and GWT chart library based on CHART.JS" 
+			url="www.pepstock.org"/>
+	</target>
+
+	<target name="ivyMakePomGwt" depends="ivyTaskdef">
+		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}-gwt.pom"
+			name="Charba GWT" description="Charba, J2CL and GWT chart library based on CHART.JS" 
+			url="www.pepstock.org"/>
+	</target>
+	
+	<!--
+        IVY - Publishes official release into MVN 
+    -->
+	<macrodef name="ivyPublish">
+		<attribute name="resolver"/>
+		<attribute name="version"/>
+		
+		<sequential>
+			<ivy:resolve file="${ivy.file}" revision="@{version}"/>
+			<ivy:publish resolver="@{resolver}" pubrevision="@{version}" forcedeliver="true" overwrite="true"  
+				publishivy="false" artifactspattern="${artifact.pattern}" />
+		</sequential>
+	</macrodef>
+
+	<target name="ivyPublishRelease" depends="ivyTaskdef">
+		<ivyPublish resolver="nexus-releases" version="${ivy.pubrevision}" />
+	</target>
+
+	<target name="ivyPublishReleaseGwt" depends="ivyTaskdef">
+		<ivyPublish resolver="nexus-releases" version="${ivy.pubrevision}-gwt" />
 	</target>
 
 	<!--
         IVY - Publishes snapshots into MVN 
     -->
 	<target name="ivyPublishSnapshot" depends="ivyTaskdef">
-		<ivy:resolve />
-		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.pubrevision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${artifact.pattern}" />
-		</ivy:publish>
+		<ivyPublish resolver="nexus-snapshots" version="${ivy.pubrevision}-SNAPSHOT" />
 	</target>
-
-	<!--
-        IVY - Publishes official release into MVN 
-    -->
-	<target name="ivyPublishRelease" depends="ivyTaskdef">
-		<ivy:resolve />
-		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.pubrevision}" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${artifact.pattern}" />
-		</ivy:publish>
+	
+	<target name="ivyPublishSnapshotGwt" depends="ivyTaskdef">
+		<ivyPublish resolver="nexus-snapshots" version="${ivy.pubrevision}-gwt-SNAPSHOT" />
 	</target>
 
 	<!-- 
 	**** COMMON SECTIONS **** 
 	-->
-	
+
 	<!-- 
-		CHARBA - Removes the contents from all used folders 
+		CHARBA - Removes the unused forders and contents from all used folders 
 	-->
 	<target name="clean" description="Cleans folders">
 		<delete failonerror="false" includeemptydirs="true">
+			<!-- includes="**/*" attribute deletes only content leaving directory empty -->
 			<fileset dir="${classes.dir}" includes="**/*"/>
 			<fileset dir="${dist.dir}" includes="**/*"/>
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
+			<fileset dir="${temp.dir}" />
+			<fileset dir="${log.dir}" />
 		</delete>
 	</target>
 	
@@ -254,7 +286,7 @@
 		</delete>
 		<!-- exclude from java doc all classes where GWT is used and all files not JAVA -->
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
-			windowtitle="Charba - J2CL and GWT charts library based on CHART.JS">
+			windowtitle="${charba.description}">
 			<fileset dir="${src.dir}">
 				<include name="org/pepstock/**" />
 				<exclude name="**/*.js" />
@@ -289,7 +321,7 @@
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
-			windowtitle="Charba - J2CL and GWT charts library based on CHART.JS">
+			windowtitle="${charba.description}">
 			<classpath>
 				<path refid="ivyPath-runtime" />
 				<fileset dir="${classes.dir}" />
@@ -307,9 +339,9 @@
 	<!--
         CHARBA - CREATE sources jar file for J2CL
     -->
-	<target name="createSources">
+	<target name="createSources" depends="makeManifest">
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
-		<jar jarfile="${sources.archive.file}">
+		<jar jarfile="${sources.archive.file}" manifest="${manifest.file}">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
@@ -326,76 +358,75 @@
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 			</fileset>	
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
 		</jar>
 	</target>
 
+	<!-- 
+		CHARBA - CREATE manifest file shared among all archives in a temporary directory 
+	-->
+	<target name="makeManifest">
+		<mkdir dir="${temp.dir}"/>
+		<manifest file="${manifest.file}">
+			<section name="Charba">
+				<attribute name="Version" value="${ivy.pubrevision}" />
+				<attribute name="Built-By" value="${charba.built.by}" />
+				<attribute name="Creation-time" value="${TODAY}" />
+			</section>
+		</manifest>
+	</target>
+	
 	<!--
         CHARBA - CREATE sources jar file for GWT
     -->
-	<target name="createSourcesGwt">
+	<target name="createSourcesGwt" depends="makeManifest">
 		<!-- exclude from jar the GWT module defined for Charba J2CL and code gen source folder -->
-		<jar jarfile="${sources.gwt.archive.file}">
+		<jar jarfile="${sources.gwt.archive.file}" manifest="${manifest.file}">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
 			</fileset>	
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
 		</jar>
 	</target>
 
 	<!--
         CHARBA - CREATE javadoc jar file for J2CL
     -->
+	<macrodef name="createJavadoc">
+		<attribute name="file" />
+		
+		<sequential>
+			<jar jarfile="@{file}">
+				<fileset dir="${javadoc.dir}" />
+				<manifest>
+					<section name="Charba">
+						<attribute name="Version" value="${ivy.pubrevision}" />
+						<attribute name="Built-By" value="${charba.built.by}" />
+						<attribute name="Creation-time" value="${TODAY}" />
+					</section>
+				</manifest>
+			</jar>
+		</sequential>
+	</macrodef>
+	
 	<target name="createJavadoc" depends="javadoc">
-		<jar jarfile="${javadoc.archive.file}">
-			<fileset dir="${javadoc.dir}" />
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
+		<createJavadoc file="${javadoc.archive.file}"/>
 	</target>
 
 	<!--
         CHARBA - CREATE javadoc jar file for GWT
     -->
 	<target name="createJavadocGwt" depends="javadocGwt">
-		<jar jarfile="${javadoc.gwt.archive.file}">
-			<fileset dir="${javadoc.dir}" />
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
+		<createJavadoc file="${javadoc.gwt.archive.file}"/>
 	</target>
 
 	<!--
         CHARBA - CREATE classes jar file for J2CL
     -->
-	<target name="createBinary" depends="compile">
+	<target name="createBinary" depends="compile, makeManifest">
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
-		<jar jarfile="${bin.archive.file}">
+		<jar jarfile="${bin.archive.file}" manifest="${manifest.file}">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
@@ -411,36 +442,22 @@
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException*"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 			</fileset>	
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
 		</jar>
 	</target>
 
 	<!--
         CHARBA - CREATE classes jar file for GWT
     -->
-	<target name="createBinaryGwt" depends="compile">
+	<target name="createBinaryGwt" depends="compile, makeManifest">
 		<!-- override the GWT module defined for Charba J2CL with GWT one -->
 		<copy file="${classes.dir}/org/pepstock/charba/client/gwt/Charba.gwt.xml" todir="${classes.dir}/org/pepstock/charba"/>
 		<!-- exclude from jar the GWT module defined for Charba GWT (because copied on right folder above) and code gen source folder -->
-		<jar jarfile="${bin.gwt.archive.file}">
+		<jar jarfile="${bin.gwt.archive.file}" manifest="${manifest.file}">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
 			</fileset>	
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${ivy.pubrevision}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
 		</jar>
 	</target>
 
