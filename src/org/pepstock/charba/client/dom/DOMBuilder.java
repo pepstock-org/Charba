@@ -213,9 +213,9 @@ public final class DOMBuilder {
 	}
 
 	/**
-	 * Creates a change event (based on a mouse event, type {@value BaseEventTypes#CONTEXT_MENU}) for internal use.
+	 * Creates a change event (based on a mouse event, type {@link BaseEventTypes#CONTEXT_MENU}) for internal use.
 	 * 
-	 * @return a change event (based on a mouse event, type {@value BaseEventTypes#CONTEXT_MENU})
+	 * @return a change event (based on a mouse event, type {@link BaseEventTypes#CONTEXT_MENU})
 	 */
 	public BaseNativeEvent createChangeEvent() {
 		// creates a mouse event

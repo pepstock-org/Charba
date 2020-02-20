@@ -47,7 +47,7 @@ public final class PercentageCallback implements FormatterCallback {
 	private final boolean stacked;
 
 	/**
-	 * Creates the formatter using the default values. The precision is {@value PercentageCallback#DEFAULT_PRECISION} and stacked is <code>false</code>.
+	 * Creates the formatter using the default values. The precision is {@link PercentageCallback#DEFAULT_PRECISION} and stacked is <code>false</code>.
 	 */
 	public PercentageCallback() {
 		this(DEFAULT_PRECISION, DEFAULT_STACKED);
