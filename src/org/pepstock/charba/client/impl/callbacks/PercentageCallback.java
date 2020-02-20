@@ -63,7 +63,7 @@ public final class PercentageCallback implements FormatterCallback {
 	}
 
 	/**
-	 * Creates the formatter using the argument as flag to compute the percentage on stacked datasets. The format is {@value PercentageCallback#DEFAULT_PRECISION}.
+	 * Creates the formatter using the argument as flag to compute the percentage on stacked datasets. The format is {@link PercentageCallback#DEFAULT_PRECISION}.
 	 * 
 	 * @param stacked if <code>true</code> computes the percentage on stacked datasets.
 	 */
