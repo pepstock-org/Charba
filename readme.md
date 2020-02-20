@@ -76,6 +76,19 @@ As the name suggests, JsInterop is a way of interoperating Java with JavaScript.
 
 **Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExports` to be passed.
 
+If you are using [Apache Maven](https://maven.apache.org/):
+
+```xml
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>gwt-maven-plugin</artifactId>
+  ...
+  <configuration>
+    <generateJsInteropExports>true</generateJsInteropExports>
+  </configuration>
+</plugin>
+```
+
 Documentation
 -------------
 
@@ -112,7 +125,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * The dependency is still there (at runtime) because **Charba** is providing anyway the chart objects wrapper by GWT widget in order to maintain the compatibility with GWT features, like UIBinder and code splitting.
    * All GWT classes are now located into `org.pepstock.charba.client.gwt` in order to enable the release of 2 artifacts for **Charba**, 1 without any GWT dependencies and 1 with GWT widgets and other few features only for GWT:
       * jar library for J2CL has got the current name, `charba-[version.release].jar`
-      * jar library for GWT has got the current name, `charba-gwt-[version.release].jar`
+      * jar library for GWT has got the current name, `charba-[version.release]-gwt.jar`
    * both artifacts are providing the GWT module (J2Cl without gwt-user inheritance) in order to use on GWT with or without widgets and code splitting.
  * add dependency at runtime (and compile) to [JSINTEROP base](https://github.com/google/jsinterop-base), version [1.0.0](https://github.com/google/jsinterop-base/releases/tag/1.0.0).
  * create new DOM tree manager in order to remove all dependencies from other frameworks (for instance GWT, elemental2, GWT Elemento) but provide some hook (helpers or methods to cast to framework's element) where **Charba** can be linked with those frameworks. The **Charba** DOM manager does NOT implement a full DOM engine but only is needed to **Charba** itself.
