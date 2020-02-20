@@ -160,9 +160,11 @@
 		<attribute name="pomFile"/>
 		<attribute name="name"/>
 		<attribute name="description"/>
+		<attribute name="version"/>
 		<attribute name="url"/>
 		<sequential>
 			<property name="ivy.pom.packaging" value="jar"/>
+			<property name="ivy.pom.version" value="@{version}"/>
 			<ivy:makepom ivyfile="ivy.xml" pomfile="@{pomFile}" templatefile="pom.template" >
 				<mapping conf="default" scope="compile" />
 			</ivy:makepom>
@@ -172,13 +174,13 @@
 	<target name="ivyMakePom" depends="ivyTaskdef">
 		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}.pom"
 			name="Charba" description="Charba, J2CL and GWT chart library based on CHART.JS" 
-			url="www.pepstock.org"/>
+			version="${ivy.pubrevision}" url="www.pepstock.org"/>
 	</target>
 
 	<target name="ivyMakePomGwt" depends="ivyTaskdef">
 		<makePom pomfile="${dist.dir}/charba-${ivy.pubrevision}-gwt.pom"
 			name="Charba GWT" description="Charba, J2CL and GWT chart library based on CHART.JS" 
-			url="www.pepstock.org"/>
+			version="${ivy.pubrevision}-gwt" url="www.pepstock.org"/>
 	</target>
 	
 	<!--
