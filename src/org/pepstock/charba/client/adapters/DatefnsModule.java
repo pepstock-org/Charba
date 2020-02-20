@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.enums.DefaultDateAdapter;
-import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
  * Date adapter module for DATE-FNS.<br>
@@ -27,6 +27,8 @@ import org.pepstock.charba.client.resources.ResourcesType;
 public final class DatefnsModule extends AbstractModule {
 	// singleton instance of module
 	private static final DatefnsModule INSTANCE = new DatefnsModule();
+	// WEEK time unit formats
+	private static final String WEEK_FORMAT = "I yyyy";
 
 	/**
 	 * To avoid any instantiation
@@ -47,18 +49,15 @@ public final class DatefnsModule extends AbstractModule {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters. DateAdapterOptions)
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#overrideDefaultFormats(org.pepstock.charba.client.adapters.AbstractModule.DefaultsFormatsOverrider)
 	 */
 	@Override
-	public DateAdapter createDateAdapter(DateAdapterOptions options) {
-		// checks if the module is injected and DATE-FNS one
-		if (isInjected() && ResourcesType.equalsTo(INSTANCE)) {
-			// creates a DATEFNS date adapter
-			return new DatefnsDateAdapter(options);
+	public void overrideDefaultFormats(DefaultsFormatsOverrider overrider) {
+		// checks if argument is consistent
+		if (overrider != null) {
+			// overrides the defaults
+			overrider.setFormat(TimeUnit.WEEK, WEEK_FORMAT);
 		}
-		// if here, the module injected is not DATE-FNS
-		// then exception
-		throw new IllegalArgumentException("DATE-FNS module is not injected. The current injected adapter is " + ResourcesType.getModuleId());
 	}
 
 }

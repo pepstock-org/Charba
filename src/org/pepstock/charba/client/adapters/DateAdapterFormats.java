@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class DateAdapterFormats extends NativeObjectContainer {
+public final class DateAdapterFormats extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -54,7 +54,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 		 * @see org.pepstock.charba.client.commons.Key#value()
 		 */
 		@Override
-		public final String value() {
+		public String value() {
 			return value;
 		}
 
@@ -82,7 +82,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the date time format provided by adapter.
 	 */
-	public final String getDateTime() {
+	public String getDateTime() {
 		return getValue(Property.DATETIME, Constants.EMPTY_STRING);
 	}
 
@@ -92,7 +92,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the millisecond format provided by adapter.
 	 */
-	public final String getMillisecond() {
+	public String getMillisecond() {
 		return getFormat(TimeUnit.MILLISECOND);
 	}
 
@@ -102,7 +102,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the second format provided by adapter.
 	 */
-	public final String getSecond() {
+	public String getSecond() {
 		return getFormat(TimeUnit.SECOND);
 	}
 
@@ -112,7 +112,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the minute format provided by adapter.
 	 */
-	public final String getMinute() {
+	public String getMinute() {
 		return getFormat(TimeUnit.MINUTE);
 	}
 
@@ -122,7 +122,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the hour format provided by adapter.
 	 */
-	public final String getHour() {
+	public String getHour() {
 		return getFormat(TimeUnit.HOUR);
 	}
 
@@ -132,7 +132,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the day format provided by adapter.
 	 */
-	public final String getDay() {
+	public String getDay() {
 		return getFormat(TimeUnit.DAY);
 	}
 
@@ -142,7 +142,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the week format provided by adapter.
 	 */
-	public final String getWeek() {
+	public String getWeek() {
 		return getFormat(TimeUnit.WEEK);
 	}
 
@@ -152,7 +152,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the month format provided by adapter.
 	 */
-	public final String getMonth() {
+	public String getMonth() {
 		return getFormat(TimeUnit.MONTH);
 	}
 
@@ -162,7 +162,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the quarter format provided by adapter.
 	 */
-	public final String getQuarter() {
+	public String getQuarter() {
 		return getFormat(TimeUnit.QUARTER);
 	}
 
@@ -172,7 +172,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * 
 	 * @return the year format provided by adapter.
 	 */
-	public final String getYear() {
+	public String getYear() {
 		return getFormat(TimeUnit.YEAR);
 	}
 
@@ -183,7 +183,7 @@ public class DateAdapterFormats extends NativeObjectContainer {
 	 * @param unit time unit to use to get the default
 	 * @return the format provided by adapter
 	 */
-	public final String getFormat(TimeUnit unit) {
+	public String getFormat(TimeUnit unit) {
 		// check if time unit is consistent and there is into the object
 		if (Key.isValid(unit) && has(unit)) {
 			return getValue(unit, Constants.EMPTY_STRING);
@@ -193,17 +193,4 @@ public class DateAdapterFormats extends NativeObjectContainer {
 		return Constants.EMPTY_STRING;
 	}
 	
-	/**
-	 * Sets the format by {@link TimeUnit}, overriding what is provided by adapter.
-	 * 
-	 * @param unit time unit to use to set the default
-	 * @param format the format to set
-	 */
-	protected final void setFormat(Key unit, String format) {
-		// check if time unit is consistent and there is into the object
-		if (Key.isValid(unit) && format != null) {
-			setValue(unit, format);
-		}
-	}
-
 }

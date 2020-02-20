@@ -24,7 +24,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LuxonOptions extends DateAdapterOptions {
+public final class LuxonOptions extends DateAdapterOptions {
 
 	/**
 	 * Name of properties of native object.

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.enums.DefaultDateAdapter;
-import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
  * Date adapter module for MOMENT.<br>
@@ -26,8 +26,11 @@ import org.pepstock.charba.client.resources.ResourcesType;
  *
  */
 public final class MomentModule extends AbstractModule {
+	
 	// singleton instance
 	private static final MomentModule INSTANCE = new MomentModule();
+	// WEEK time unit formats
+	private static final String WEEK_FORMAT = "w YYYY";
 
 	/**
 	 * To avoid any instantiation
@@ -48,18 +51,15 @@ public final class MomentModule extends AbstractModule {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.adapters.AbstractModule#createDateAdapter(org.pepstock.charba.client.adapters. DateAdapterOptions)
+	 * @see org.pepstock.charba.client.adapters.AbstractModule#overrideDefaultFormats(org.pepstock.charba.client.adapters.AbstractModule.DefaultsFormatsOverrider)
 	 */
 	@Override
-	public DateAdapter createDateAdapter(DateAdapterOptions options) {
-		// checks if the module which has been set is MOMENT
-		if (ResourcesType.equalsTo(INSTANCE)) {
-			// creates a MOMENT date adapter
-			return new MomentDateAdapter(options);
+	public void overrideDefaultFormats(DefaultsFormatsOverrider overrider) {
+		// checks if argument is consistent
+		if (overrider != null) {
+			// overrides the defaults
+			overrider.setFormat(TimeUnit.WEEK, WEEK_FORMAT);
 		}
-		// if here, the module injected is not MOMENT
-		// then exception
-		throw new IllegalArgumentException("MOMENT module is not injected. The current injected adapter is " + ResourcesType.getModuleId());
 	}
 
 }

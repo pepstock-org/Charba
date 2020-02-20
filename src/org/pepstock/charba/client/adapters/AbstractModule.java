@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.DateAdapterInjectionComplete;
 
 /**
@@ -75,21 +76,11 @@ public abstract class AbstractModule {
 	}
 
 	/**
-	 * Creates a date adapter.
+	 * Invokes after the initialization of date adapter in order to override default formats if needed.
 	 * 
-	 * @return a date adapter
+	 * @param overrider native object wrapper of default formats of adapater
 	 */
-	public final DateAdapter createDateAdapter() {
-		return createDateAdapter(null);
-	}
-
-	/**
-	 * Creates a date adapter with specific options.
-	 * 
-	 * @param options date adapter options.
-	 * @return a date adapter
-	 */
-	public abstract DateAdapter createDateAdapter(DateAdapterOptions options);
+	public abstract void overrideDefaultFormats(DefaultsFormatsOverrider overrider);
 
 	/**
 	 * Is invoked when the date adapter has been injected.<br>
@@ -102,6 +93,19 @@ public abstract class AbstractModule {
 		if (injectionComplete != null) {
 			// sets that it has been injected
 			this.injected = true;
+			// creates an empty ooptions
+			DateAdapterOptions options = new DateAdapterOptions();
+			// creates a native date adapter
+			NativeDateAdapter nativeAdapter = new NativeDateAdapter(options.nativeObject());
+			// gets formats
+			NativeObject nativeObject = nativeAdapter.formats();
+			// checks if formats are consistent
+			if (nativeObject != null) {
+				// creates an overrider object
+				DefaultsFormatsOverrider overrider = new DefaultsFormatsOverrider(nativeObject);
+				// invokes to override default
+				overrideDefaultFormats(overrider);
+			}
 		}
 	}
 
