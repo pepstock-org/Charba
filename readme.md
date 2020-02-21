@@ -44,6 +44,8 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file into `dist` folder, ready to be included into your project.
 
+[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/3.0/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+
 Installation
 ------------
 
@@ -85,8 +87,6 @@ To install in your GWT project, both for GWT and for J2CL artifacts, you must th
     <inherits name="org.pepstock.charba.Charba"/>
 ...
 ```
-
-[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/2.8/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 **Charba** version 1.x is based on [JSNI](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html) method to integrate java script objects. 
 
