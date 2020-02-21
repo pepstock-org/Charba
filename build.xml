@@ -144,11 +144,11 @@
 	</macrodef>
 	
 	<target name="ivyRetrieveCompile" depends="ivyTaskdef">
-		<ivyRetrieve ivyfile="${ivy.file}" conf="compile" pathid="ivyPath-compile" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
+		<ivyRetrieve ivyfile="${ivy.file}" conf="compile" pathid="ivyPath-compile" pattern="${lib.dir}/compile/[artifact]-[revision](-[classifier]).[ext]"/>
 	</target>
 
 	<target name="ivyRetrieveRuntime" depends="ivyTaskdef">
-		<ivyRetrieve ivyfile="${ivy.file}" conf="runtime" pathid="ivyPath-runtime" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
+		<ivyRetrieve ivyfile="${ivy.file}" conf="runtime" pathid="ivyPath-runtime" pattern="${lib.dir}/runtime/[artifact]-[revision](-[classifier]).[ext]"/>
 	</target>
 
 	<target name="ivyRetrieve" depends="ivyRetrieveCompile, ivyRetrieveRuntime" />
