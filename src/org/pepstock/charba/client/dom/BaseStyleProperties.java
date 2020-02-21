@@ -474,7 +474,7 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'borderStyle' property
 	 */
 	@JsOverlay
-	public final BorderStyle getBorderStyle() {
+	public BorderStyle getBorderStyle() {
 		return Key.getKeyByValue(BorderStyle.values(), nativeGetBorderStyle(), BorderStyle.NONE);
 	}
 
@@ -485,7 +485,7 @@ public final class BaseStyleProperties {
 	 * @param borderStyle the CSS 'borderStyle' property to set
 	 */
 	@JsOverlay
-	public final void setBorderStyle(BorderStyle borderStyle) {
+	public void setBorderStyle(BorderStyle borderStyle) {
 		// checks if argument is consistent
 		if (Key.isValid(borderStyle)) {
 			nativeSetBorderStyle(borderStyle.value());
@@ -780,7 +780,7 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'display' property
 	 */
 	@JsOverlay
-	public final Display getDisplay() {
+	public Display getDisplay() {
 		return Key.getKeyByValue(Display.values(), nativeGetDisplay(), Display.BLOCK);
 	}
 
@@ -791,7 +791,7 @@ public final class BaseStyleProperties {
 	 *
 	 * @param display the CSS 'display' property to set
 	 */
-	public final void setDisplay(Display display) {
+	public void setDisplay(Display display) {
 		// checks if argument is consistent
 		if (Key.isValid(display)) {
 			nativeSetDisplay(display.value());
@@ -1309,7 +1309,7 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'position' property
 	 */
 	@JsOverlay
-	public final Position getPosition() {
+	public Position getPosition() {
 		return Key.getKeyByValue(Position.values(), nativeGetPosition(), Position.RELATIVE);
 	}
 
@@ -1320,7 +1320,7 @@ public final class BaseStyleProperties {
 	 * @param position the CSS 'position' property to set
 	 */
 	@JsOverlay
-	public final void setPosition(Position position) {
+	public void setPosition(Position position) {
 		// checks if argumetn is consistent
 		if (Key.isValid(position)) {
 			nativeSetPosition(position.value());
@@ -1406,7 +1406,7 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'textDecoration' property
 	 */
 	@JsOverlay
-	public final TextDecoration getTextDecoration() {
+	public TextDecoration getTextDecoration() {
 		return Key.getKeyByValue(TextDecoration.values(), nativeGetTextDecoration(), TextDecoration.NONE);
 	}
 
@@ -1417,7 +1417,7 @@ public final class BaseStyleProperties {
 	 * @param textDecoration the CSS 'textDecoration' property to set
 	 */
 	@JsOverlay
-	public final void setTextDecoration(TextDecoration textDecoration) {
+	public void setTextDecoration(TextDecoration textDecoration) {
 		// checks if argument is consistent
 		if (Key.isValid(textDecoration)) {
 			nativeSetTextDecoration(textDecoration.value());
