@@ -23,7 +23,7 @@ Even if **Charba** was born only as GWT chart library, since version **3**, **Ch
 
 Since version **3**, **Charba** has got an own DOM tree manager which allows to it to be independent from any other DOM tree frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
 
-[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
+[![CharbaDiagram](https://github.com/pepstock-org/Charba/wiki/images/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
     
 Building
 --------
@@ -85,6 +85,8 @@ To install in your GWT project, both for GWT and for J2CL artifacts, you must th
     <inherits name="org.pepstock.charba.Charba"/>
 ...
 ```
+
+[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/2.8/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 **Charba** version 1.x is based on [JSNI](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html) method to integrate java script objects. 
 
