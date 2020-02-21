@@ -23,7 +23,7 @@ Even if **Charba** was born only as GWT chart library, since version **3**, **Ch
 
 Since version **3**, **Charba** has got an own DOM tree manager which allows to it to be independent from any other DOM tree frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
 
-[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charbaDiagram.png.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
+[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
     
 Building
 --------
