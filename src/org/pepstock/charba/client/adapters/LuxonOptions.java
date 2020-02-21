@@ -68,11 +68,11 @@ public final class LuxonOptions extends DateAdapterOptions {
 	}
 
 	/**
-	 * Creates an empty LUXON adapter options using a native object.
+	 * Creates a LUXON adapter options using a native object.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected LuxonOptions(NativeObject nativeObject) {
+	LuxonOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
