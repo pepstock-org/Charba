@@ -63,14 +63,21 @@ If you are using [Apache Maven](https://maven.apache.org/):
     <!-- for GWT -->
     <version>3.0-gwt</version>
 </dependency>
+<dependency>
+    <groupId>com.google.jsinterop</groupId>
+    <artifactId>base</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
 <dependency org="org.pepstock" name="charba" rev="3.0"/>
+<dependency org="com.google.jsinterop" name="base" rev="1.0.0" conf="*->master" />
 <!-- for GWT -->
 <dependency org="org.pepstock" name="charba" rev="3.0-gwt"/>
+<dependency org="com.google.jsinterop" name="base" rev="1.0.0" conf="*->master" />
 ```
 
 If you are using [Gradle](https://gradle.org/):
@@ -78,6 +85,8 @@ If you are using [Gradle](https://gradle.org/):
 ```json
 compile group: 'org.pepstock', name: 'charba', version: '3.0'
 compile group: 'org.pepstock', name: 'charba', version: '3.0-gwt'
+
+compile group: 'com.google.jsinterop', name: 'base', version: '1.0.0'
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration into your GWT project module configuration:
