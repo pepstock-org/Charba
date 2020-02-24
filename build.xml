@@ -163,8 +163,12 @@
 		<attribute name="version"/>
 		<attribute name="url"/>
 		<sequential>
-			<property name="ivy.pom.packaging" value="jar"/>
+			<property name="ivy.pom.name" value="@{name}"/>
+			<property name="ivy.pom.description" value="@{description}"/>
 			<property name="ivy.pom.version" value="@{version}"/>
+			<property name="ivy.pom.url" value="@{url}"/>
+			<property name="ivy.pom.packaging" value="jar"/>
+			
 			<ivy:makepom ivyfile="ivy.xml" pomfile="@{pomFile}" templatefile="pom.template" >
 				<mapping conf="default" scope="compile" />
 			</ivy:makepom>
