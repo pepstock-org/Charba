@@ -169,8 +169,8 @@
 			<property name="ivy.pom.url" value="@{url}"/>
 			<property name="ivy.pom.packaging" value="jar"/>
 			
-			<ivy:makepom ivyfile="ivy.xml" pomfile="@{pomFile}" templatefile="pom.template" >
-				<mapping conf="default" scope="compile" />
+			<ivy:makepom ivyfile="ivy.xml" pomfile="@{pomFile}" templatefile="pom.template" conf="runtime">
+				<mapping conf="runtime" scope="runtime" />
 			</ivy:makepom>
 		</sequential>
 	</macrodef>
