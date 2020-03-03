@@ -100,7 +100,7 @@
 	 @param obj the object to check
 	 @return true if the object is a CanvasPattern
     */
-    CharbaJsHelper.isCanvasPattern = function(obj, key) {
+    CharbaJsHelper.isCanvasPattern = function(obj) {
    		return obj instanceof CanvasPattern;
     } 
     /*
@@ -109,7 +109,7 @@
 	 @param obj the object to check
 	 @return true if the object is a CanvasGradient
     */
-    CharbaJsHelper.isCanvasGradient = function(obj, key) {
+    CharbaJsHelper.isCanvasGradient = function(obj) {
    		return obj instanceof CanvasGradient;
     } 
     /*
