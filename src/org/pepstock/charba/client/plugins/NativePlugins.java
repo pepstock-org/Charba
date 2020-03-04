@@ -44,7 +44,7 @@ public final class NativePlugins {
 	 * @param plugin plugin instance.
 	 */
 	@JsMethod
-	native void register(NativePlugin plugin);
+	native void register(NativeObject plugin);
 
 	/**
 	 * Unregisters the given plugin only if registered.

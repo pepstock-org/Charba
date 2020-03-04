@@ -385,13 +385,6 @@ public final class Chart {
 	 */
 	@JsOverlay
 	public IsChart getChart() {
-		// gets charba id
-		String charbaId = getCharbaId();
-		// checks if not null
-		if (charbaId != null) {
-			return Charts.get(Id.get(getOptions()));
-		}
-		// if here, charba id is null
-		return null;
+		return Charts.get(getCharbaId());
 	}
 }

@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.data.Data;
-import org.pepstock.charba.client.plugins.ArrayPlugin;
 import org.pepstock.charba.client.plugins.Plugins;
 
 import jsinterop.annotations.JsOverlay;
@@ -29,8 +29,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is the configuration object of a chart.<br>
- * It contains always the type, options, plugins and data.<br>
- * THIS IS AN EXPORTED OBJECT.
+ * It contains always the type, options, plugins and data.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -82,7 +81,7 @@ public final class Configuration {
 	 * @param plugins inline plugins of chart as array of plugin native object.
 	 */
 	@JsProperty
-	public native void setPlugins(ArrayPlugin plugins);
+	public native void setPlugins(ArrayObject plugins);
 
 	/**
 	 * Sets the type of chart.
