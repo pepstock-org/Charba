@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * The callback or handler context, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
+ * The callback or handler context wrapper, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
