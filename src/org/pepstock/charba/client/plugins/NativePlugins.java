@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART_PLUGINS, namespace = JsPackage.GLOBAL)
 public final class NativePlugins {
 
 	/**

@@ -13,28 +13,29 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.dom.elements;
+package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.dom.IsCastable;
+import org.pepstock.charba.client.Chart;
 
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents an opaque object describing a pattern, based on an image or a canvas.
+ * A property descriptor is a record which describes a java script property (chart).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.DOM_CANVAS_PATTERN, namespace = JsPackage.GLOBAL)
-public final class CanvasPatternItem implements IsCastable {
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+public final class NativeChartDescriptor extends NativeAbstractDescriptor {
 
 	/**
-	 * To avoid any instantiation
+	 * Gets the value associated with the property.
+	 * 
+	 * @return the value associated with the property
 	 */
-	private CanvasPatternItem() {
-		// do nothing
-	}
+	@JsProperty
+	public native Chart getValue();
 
 }

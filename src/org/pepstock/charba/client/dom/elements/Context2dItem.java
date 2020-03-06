@@ -810,8 +810,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 *            This allows scaling of the drawn image.<br>
 	 *            If not specified, the image is not scaled in height when drawn
 	 */
-	@JsMethod
-	private native void drawImage(Object image, double dx, double dy, double dWidth, double dHeight);
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Canvas image, double dx, double dy, double dWidth, double dHeight);
 
 	/**
 	 * Draws an image onto the canvas.
@@ -823,8 +823,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 *            This allows scaling of the drawn image.<br>
 	 *            If not specified, the image is not scaled in width when drawn
 	 */
-	@JsMethod
-	private native void drawImage(Object image, double dx, double dy, double dWidth);
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Canvas image, double dx, double dy, double dWidth);
 
 	/**
 	 * Draws an image onto the canvas.
@@ -833,8 +833,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 */
-	@JsMethod
-	private native void drawImage(Object image, double dx, double dy);
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Canvas image, double dx, double dy);
 
 	/**
 	 * Draws a canvas onto the canvas.
@@ -851,9 +851,9 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Canvas canvas, double dx, double dy, double dWidth, double dHeight) {
-		drawImage(checkAndGetDrawImageArgument(canvas), dx, dy, dWidth, dHeight);
+		nativeDrawImage(checkAndGetDrawImageArgument(canvas), dx, dy, dWidth, dHeight);
 	}
-
+	
 	/**
 	 * Draws a canvas onto the canvas.
 	 * 
@@ -866,7 +866,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Canvas canvas, double dx, double dy, double dWidth) {
-		drawImage(checkAndGetDrawImageArgument(canvas), dx, dy, dWidth);
+		nativeDrawImage(checkAndGetDrawImageArgument(canvas), dx, dy, dWidth);
 	}
 
 	/**
@@ -878,9 +878,48 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Canvas canvas, double dx, double dy) {
-		drawImage(checkAndGetDrawImageArgument(canvas), dx, dy);
+		nativeDrawImage(checkAndGetDrawImageArgument(canvas), dx, dy);
 	}
 
+	/**
+	 * Draws a canvas image source onto the canvas.
+	 * 
+	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 * @param dWidth the width to draw the image in the destination canvas.<br>
+	 *            This allows scaling of the drawn image.<br>
+	 *            If not specified, the image is not scaled in width when drawn
+	 * @param dHeight the height to draw the image in the destination canvas.<br>
+	 *            This allows scaling of the drawn image.<br>
+	 *            If not specified, the image is not scaled in height when drawn
+	 */
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Img image, double dx, double dy, double dWidth, double dHeight);
+
+	/**
+	 * Draws an image onto the canvas.
+	 * 
+	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 * @param dWidth the width to draw the image in the destination canvas.<br>
+	 *            This allows scaling of the drawn image.<br>
+	 *            If not specified, the image is not scaled in width when drawn
+	 */
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Img image, double dx, double dy, double dWidth);
+
+	/**
+	 * Draws an image onto the canvas.
+	 * 
+	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
+	 */
+	@JsMethod(name = "drawImage")
+	private native void nativeDrawImage(Img image, double dx, double dy);
+	
 	/**
 	 * Draws an image onto the canvas.
 	 * 
@@ -896,7 +935,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Img image, double dx, double dy, double dWidth, double dHeight) {
-		drawImage(checkAndGetDrawImageArgument(image), dx, dy, dWidth, dHeight);
+		nativeDrawImage(checkAndGetDrawImageArgument(image), dx, dy, dWidth, dHeight);
 	}
 
 	/**
@@ -911,7 +950,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Img image, double dx, double dy, double dWidth) {
-		drawImage(checkAndGetDrawImageArgument(image), dx, dy, dWidth);
+		nativeDrawImage(checkAndGetDrawImageArgument(image), dx, dy, dWidth);
 	}
 
 	/**
@@ -923,7 +962,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsOverlay
 	public final void drawImage(Img image, double dx, double dy) {
-		drawImage(checkAndGetDrawImageArgument(image), dx, dy);
+		nativeDrawImage(checkAndGetDrawImageArgument(image), dx, dy);
 	}
 
 	/**
@@ -934,7 +973,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return the instance of the object passed as argument
 	 */
 	@JsOverlay
-	private final Object checkAndGetDrawImageArgument(Object object) {
+	private final <T> T checkAndGetDrawImageArgument(T object) {
 		// checks if argument is consistent
 		if (object == null) {
 			// if here, argument is null

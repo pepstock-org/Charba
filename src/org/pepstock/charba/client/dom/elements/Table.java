@@ -83,7 +83,7 @@ public final class Table extends BaseHtmlElement {
 	 * @return the width in pixels of the horizontal and vertical sapce between cell content and cell borders
 	 */
 	@JsProperty
-	public native int getCellPadding();
+	public native String getCellPadding();
 
 	/**
 	 * Sets the width in pixels of the horizontal and vertical sapce between cell content and cell borders.
@@ -91,7 +91,7 @@ public final class Table extends BaseHtmlElement {
 	 * @param cellPadding the width in pixels of the horizontal and vertical sapce between cell content and cell borders
 	 */
 	@JsProperty
-	public native void setCellPadding(int cellPadding);
+	public native void setCellPadding(String cellPadding);
 
 	/**
 	 * Returns the width in pixels of the horizontal and vertical separation between cells.
@@ -99,7 +99,7 @@ public final class Table extends BaseHtmlElement {
 	 * @return the width in pixels of the horizontal and vertical separation between cells
 	 */
 	@JsProperty
-	public native int getCellSpacing();
+	public native String getCellSpacing();
 
 	/**
 	 * Sets the width in pixels of the horizontal and vertical separation between cells.
@@ -107,7 +107,7 @@ public final class Table extends BaseHtmlElement {
 	 * @param cellSpacing the width in pixels of the horizontal and vertical separation between cells
 	 */
 	@JsProperty
-	public native void setCellSpacing(int cellSpacing);
+	public native void setCellSpacing(String cellSpacing);
 
 	/**
 	 * Returns the length in pixels or in percentage of the desired width fo the entire table.

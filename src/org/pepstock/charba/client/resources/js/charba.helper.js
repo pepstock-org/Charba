@@ -14,6 +14,15 @@
 	    limitations under the License.
 	*/
 	/*
+		This object is used to get a proxy instance which is able to call a 
+		java script function passing also "this" java script value, to maintain 
+		the environment when required.
+	*/
+	var CharbaCallbackProxy = {
+  		callback: null,
+  		proxy: null
+	}	
+	/*
 		JSHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA, because 
 		JSINTEROP is not able to address all javascript model.   
@@ -69,7 +78,7 @@
     		CALLBACK: contains user callback implementation which must be called
     		PROXY: contains a function which can call CALLBACk passing "this" 
     	 */
-    	var obj = new Object();
+    	var obj = Object.create(CharbaCallbackProxy);
 		// CALLBACK
     	obj.callback = null;
     	// PROXY
@@ -374,3 +383,17 @@
     CharbaJsItemsHelper.nativeEvent = function(obj, key) {
     	return obj[key];
     }
+    
+    /*
+		JsDateAdapterHelper is an object to create a CHART.JS date adapter  
+	*/
+    function CharbaJsDateAdapterHelper() {} 
+    /*
+	 Returns a date adapter instance.
+	  
+	 @param options options to configure date adapter.
+	 @return a date adapter instance
+    */
+    CharbaJsDateAdapterHelper.create = function(options) {
+		return new Chart._adapters._date(options);
+    } 

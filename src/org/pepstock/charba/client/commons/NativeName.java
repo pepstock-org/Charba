@@ -36,6 +36,11 @@ public final class NativeName {
 	public static final String ARRAY = "Array";
 
 	/**
+	 * Constant to bind java script object as CallbackProxy with name <b>{@value JS_CALLBACK_PROXY}</b>, (internal of Charba).
+	 */
+	public static final String JS_CALLBACK_PROXY = "CharbaCallbackProxy";
+
+	/**
 	 * Constant to bind java script object as JsHelper with name <b>{@value JS_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_HELPER = "CharbaJsHelper";
@@ -66,6 +71,11 @@ public final class NativeName {
 	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
 
 	/**
+	 * Constant to bind java script object as JsDateAdapterHelper with name <b>{@value JS_DATE_ADAPTER_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_DATE_ADAPTER_HELPER = "CharbaJsDateAdapterHelper";
+
+	/**
 	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of Charba), when {@link HtmlLegend} is
 	 * activated.
 	 */
@@ -82,9 +92,27 @@ public final class NativeName {
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).
+	 * Constant to bind java script object as chart helper with name <b>{@value CHART_HELPERS}</b>, (internal of CHART.JS).
 	 */
-	public static final String CHART_ADAPTERS_DATE = "Chart._adapters._date";
+	public static final String CHART_HELPERS = "CharbaChartHelpers";
+
+	/**
+	 * Constant to bind java script object as chart scale service with name <b>{@value CHART_SCALE_SERVICE}</b>, (internal of CHART.JS).<br>
+	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
+	 */
+	public static final String CHART_SCALE_SERVICE = "CharbaChartScaleService";
+
+	/**
+	 * Constant to bind java script object as chart plugins service with name <b>{@value CHART_PLUGINS}</b>, (internal of CHART.JS).<br>
+	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
+	 */
+	public static final String CHART_PLUGINS = "CharbaChartPlugins";
+
+	/**
+	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).<br>
+	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
+	 */
+	public static final String CHART_ADAPTERS_DATE = "CharbaChartAdaptersDate";
 
 	/**
 	 * Constant to bind java script object as window with name <b>{@value WINDOW}</b>.
@@ -137,6 +165,11 @@ public final class NativeName {
 	public static final String DOM_HTML_BODY_ELEMENT = "HTMLBodyElement";
 
 	/**
+	 * Constant to bind java script object as DOM HTML div element with name <b>{@value DOM_HTML_DIV_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_DIV_ELEMENT = "HTMLDivElement";
+
+	/**
 	 * Constant to bind java script object as DOM HTML head element with name <b>{@value DOM_HTML_HEAD_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_HEAD_ELEMENT = "HTMLHeadElement";
@@ -156,6 +189,11 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM HTML span element with name <b>{@value DOM_HTML_SPAN_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_SPAN_ELEMENT = "HTMLSpanElement";
+
+	/**
+	 * Constant to bind java script object as DOM HTML image element with name <b>{@value DOM_HTML_IMAGE_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_IMAGE_ELEMENT = "HTMLImageElement";
 
 	/**
 	 * Constant to bind java script object as DOM HTML style element with name <b>{@value DOM_HTML_STYLE_ELEMENT}</b>.
@@ -186,6 +224,21 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM text node with name <b>{@value DOM_TEXT}</b>.
 	 */
 	public static final String DOM_TEXT = "Text";
+	
+	/**
+	 * Constant to bind java script object as DOM event with name <b>{@value DOM_EVENT}</b>.
+	 */
+	public static final String DOM_EVENT = "Event";
+
+	/**
+	 * Constant to bind java script object as DOM canvas gradient with name <b>{@value DOM_CANVAS_GRADIENT}</b>.
+	 */
+	public static final String DOM_CANVAS_GRADIENT = "CanvasGradient";
+	
+	/**
+	 * Constant to bind java script object as DOM canvas pattern with name <b>{@value DOM_CANVAS_PATTERN}</b>.
+	 */
+	public static final String DOM_CANVAS_PATTERN = "CanvasPattern";
 
 	/**
 	 * Constant to bind java script object as DOM text metrics with name <b>{@value DOM_TEXT_METRICS}</b>.

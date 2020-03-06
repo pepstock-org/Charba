@@ -153,6 +153,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * change `WrapperPlugin` class in order to be a native `JsType` instead of an exportable one.
+ * remove `NativeAdapters` class because not used anymore.
+ * change namespace of `JsType` on native objects in order to be aligned with J2CL and Google Closure requirements.
 
 License
 -------

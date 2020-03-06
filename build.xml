@@ -354,7 +354,7 @@
     -->
 	<target name="createSources" depends="makeManifest">
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
-		<jar jarfile="${sources.archive.file}" manifest="${manifest.file}">
+		<jar jarfile="${sources.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
@@ -393,7 +393,7 @@
     -->
 	<target name="createSourcesGwt" depends="makeManifest">
 		<!-- exclude from jar the GWT module defined for Charba J2CL and code gen source folder -->
-		<jar jarfile="${sources.gwt.archive.file}" manifest="${manifest.file}">
+		<jar jarfile="${sources.gwt.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
@@ -410,7 +410,7 @@
 		<attribute name="file" />
 		
 		<sequential>
-			<jar jarfile="@{file}">
+			<jar jarfile="@{file}" encoding="UTF-8">
 				<fileset dir="${javadoc.dir}" />
 				<manifest>
 					<section name="Charba">
@@ -439,7 +439,7 @@
     -->
 	<target name="createBinary" depends="compile, makeManifest">
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
-		<jar jarfile="${bin.archive.file}" manifest="${manifest.file}">
+		<jar jarfile="${bin.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
@@ -465,7 +465,7 @@
 		<!-- override the GWT module defined for Charba J2CL with GWT one -->
 		<copy file="${classes.dir}/org/pepstock/charba/client/gwt/Charba.gwt.xml" todir="${classes.dir}/org/pepstock/charba"/>
 		<!-- exclude from jar the GWT module defined for Charba GWT (because copied on right folder above) and code gen source folder -->
-		<jar jarfile="${bin.gwt.archive.file}" manifest="${manifest.file}">
+		<jar jarfile="${bin.gwt.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>

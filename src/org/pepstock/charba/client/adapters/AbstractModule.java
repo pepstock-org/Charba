@@ -96,7 +96,7 @@ public abstract class AbstractModule {
 			// creates an empty ooptions
 			DateAdapterOptions options = new DateAdapterOptions();
 			// creates a native date adapter
-			NativeDateAdapter nativeAdapter = new NativeDateAdapter(options.nativeObject());
+			NativeDateAdapter nativeAdapter = JsDateAdapterHelper.get().create(options);
 			// gets formats
 			NativeObject nativeObject = nativeAdapter.formats();
 			// checks if formats are consistent

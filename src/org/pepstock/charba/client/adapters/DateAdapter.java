@@ -61,7 +61,7 @@ public final class DateAdapter {
 		// checks if argument is consistent
 		this.options = options != null ? options : new DateAdapterOptions();
 		// creates a native date adapter
-		this.nativeAdapter = new NativeDateAdapter(this.options.nativeObject());
+		this.nativeAdapter = JsDateAdapterHelper.get().create(this.options);
 		// stores the ID
 		this.id = nativeAdapter.getId();
 		// gets formats

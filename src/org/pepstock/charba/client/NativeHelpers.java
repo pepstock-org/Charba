@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART_HELPERS, namespace = JsPackage.GLOBAL)
 final class NativeHelpers {
 
 	/**

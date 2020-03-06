@@ -22,13 +22,13 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is a native object which wraps a java script object created by {@link JsHelper}.<br>
- * This object is used to get a proxy instance which is able to call a java script function passing laso <code>this</code> java script value, to maintain the environment when
+ * This object is used to get a proxy instance which is able to call a java script function passing also <code>this</code> java script value, to maintain the environment when
  * required.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.JS_CALLBACK_PROXY)
 public final class CallbackProxy<T> {
 
 	/**
