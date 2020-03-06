@@ -63,7 +63,6 @@ public final class AnimationObject extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	// FIXME
 	public AnimationObject(NativeObject nativeObject) {
 		super(nativeObject);
 	}
