@@ -56,7 +56,7 @@ final class LiningDatasetFiller extends Filler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(context));
+		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(context)));
 	}
 
 	/*

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -89,7 +90,7 @@ public final class BorderAligner extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value and calls the callback
-		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
+		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(context), borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**

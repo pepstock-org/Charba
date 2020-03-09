@@ -230,45 +230,43 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -------------------------------
 		// gets value calling callback
 		pointBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
-		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointHoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
+		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointHoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
-		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// gets value calling callback
-		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// gets value calling callback
-		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// gets value calling callback
-		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(context)));
 		// gets value calling callback
-		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, borderCapStyleCallback));
+		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(context), borderCapStyleCallback));
 		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, borderDashCallback));
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(context), borderDashCallback));
 		// gets value calling callback
-		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
-		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, borderJoinStyleCallback));
+		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(context), borderJoinStyleCallback));
 		// gets value calling callback
-		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, hoverBorderCapStyleCallback));
+		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(context), hoverBorderCapStyleCallback));
 		// gets value calling callback
-		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, hoverBorderDashCallback));
+		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(context), hoverBorderDashCallback));
 		// gets value calling callback
-		hoverBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		hoverBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
-		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, hoverBorderJoinStyleCallback));
+		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(context), hoverBorderJoinStyleCallback));
 	}
 
 	/*

@@ -121,7 +121,6 @@ public final class ScriptableUtils {
 		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
 		if (IsChart.isValid(chart) && callback != null) {
-			// calls callback
 			T result = callback.invoke(chart, context);
 			// checks if consistent
 			if (result != null) {
