@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativePatternDescriptor extends NativeAbstractDescriptor {
+final class NativePatternDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -44,6 +44,6 @@ public final class NativePatternDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native CanvasPatternItem getValue();
+	native CanvasPatternItem getValue();
 
 }

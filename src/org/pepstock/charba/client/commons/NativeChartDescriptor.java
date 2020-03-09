@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeChartDescriptor extends NativeAbstractDescriptor {
+final class NativeChartDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Gets the value associated with the property.
@@ -36,6 +36,6 @@ public final class NativeChartDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native Chart getValue();
+	native Chart getValue();
 
 }
