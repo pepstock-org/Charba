@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.AbstractModule;
+import org.pepstock.charba.client.commons.JsHelper;
 
 /**
  * Utility to set which kind of resources type must be use to load injectable resources.<br>
@@ -43,6 +44,8 @@ public final class ResourcesType {
 	 * @param resources the resources type to use to inject java script code
 	 */
 	public static void setClientBundle(AbstractResources resources) {
+		// injects Charba helper because always needed
+		JsHelper.get();
 		// checks if argument is null
 		if (resources == null) {
 			// exception

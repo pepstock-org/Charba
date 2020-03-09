@@ -112,7 +112,7 @@ public final class Injector {
 		if (!ELEMENTS_INJECTED.contains(resourceKey)) {
 			// sets ID
 			container.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resourceKey);
-			// creates a node to add the conetnt of resource
+			// creates a node to add the content of resource
 			TextNode node = DOMBuilder.get().createTextNode(resource.getContent());
 			// sets the script content source
 			container.appendChild(node);

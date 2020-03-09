@@ -112,7 +112,7 @@ public final class NativeName {
 	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).<br>
 	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
 	 */
-	public static final String CHART_ADAPTERS_DATE = "CharbaChartAdaptersDate";
+	public static final String CHART_ADAPTERS_DATE = "CharbaChartAdaptersDate"; 
 
 	/**
 	 * Constant to bind java script object as chart controller context with name <b>{@value CHART_CONTROLLER_CONTEXT}</b>, (internal of CHART.JS).<br>
