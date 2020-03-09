@@ -75,7 +75,7 @@ final class Context extends NativeObjectContainer {
 	 */
 	IsChart getChart() {
 		// gets native chart
-		Chart nativeChart = getChart(Property.CHART_INSTANCE);
+		Chart nativeChart = getNativeChart(Property.CHART_INSTANCE);
 		// checks if native chart is present
 		if (nativeChart != null) {
 			// returns is chart instance
