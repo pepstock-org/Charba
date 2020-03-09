@@ -1114,13 +1114,14 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- CHART
 	// ------------------------------------------
+
 	/**
 	 * Returns a value (chart) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @return value of the property
 	 */
-	protected final Chart getChart(Key key) {
+	protected final Chart getNativeChart(Key key) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns null
