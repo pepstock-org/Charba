@@ -37,7 +37,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART_CONTROLLER_CONTEXT, namespace = JsPackage.GLOBAL)
 public final class ControllerContext {
 
 	/**
