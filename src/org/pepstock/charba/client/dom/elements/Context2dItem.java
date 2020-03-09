@@ -970,6 +970,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * If not, throws a {@link IllegalArgumentException}.
 	 * 
 	 * @param object object to check
+	 * @param <T> type of drawable object, image or canvas
 	 * @return the instance of the object passed as argument
 	 */
 	@JsOverlay
