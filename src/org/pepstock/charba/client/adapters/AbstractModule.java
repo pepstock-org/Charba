@@ -93,7 +93,7 @@ public abstract class AbstractModule {
 		if (injectionComplete != null) {
 			// sets that it has been injected
 			this.injected = true;
-			// creates an empty ooptions
+			// creates an empty options
 			DateAdapterOptions options = new DateAdapterOptions();
 			// creates a native date adapter
 			NativeDateAdapter nativeAdapter = JsDateAdapterHelper.get().create(options);
