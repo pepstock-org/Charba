@@ -18,6 +18,7 @@ package org.pepstock.charba.client.positioner;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -84,6 +85,14 @@ final class JsPositionerHelper {
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist
 	 */
 	Point invoke(IsTooltipPosition position, PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
-		return NativeJsPositionerHelper.invoke(position.value(), context, datasetItems, eventPoint);
+		// invokes actively the helper
+		NativeObject pointAsObject = NativeJsPositionerHelper.invoke(position.value(), context.nativeObject(), datasetItems, eventPoint.nativeObject());
+		// checks if consistent
+		if (pointAsObject != null) {
+			return new Point(pointAsObject);
+		}
+		// if here, the object is not cosnsitent
+		// then return an empy point
+		return new Point();
 	}
 }

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.positioner;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -62,6 +63,6 @@ final class NativeJsPositionerHelper {
 	 * @param eventPoint point on the canvas where the event occurred.
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist
 	 */
-	static native Point invoke(String name, PositionerContext context, ArrayObject datasetItems, Point eventPoint);
+	static native NativeObject invoke(String name, NativeObject context, ArrayObject datasetItems, NativeObject eventPoint);
 
 }

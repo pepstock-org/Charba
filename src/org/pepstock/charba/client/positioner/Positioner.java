@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.items.DatasetItem;
 
@@ -62,7 +63,7 @@ public final class Positioner {
 		 * @param eventPoint point on the canvas where the event occurred.
 		 * @return point to show the tooltip
 		 */
-		Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint);
+		NativeObject call(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint);
 	}
 
 	// ---------------------------
@@ -170,9 +171,13 @@ public final class Positioner {
 	 * @param eventPoint point on the canvas where the event occurred.
 	 * @return point to show the tooltip
 	 */
-	private Point onToolipPosition(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
+	private NativeObject onToolipPosition(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint) {
+		// creates the context
+		PositionerContext internalContext = new PositionerContext(context);
+		// creates the point
+		Point internalPoint = new Point(eventPoint);
 		// gets chart instance
-		IsChart chart = context.getChart();
+		IsChart chart = internalContext.getChart();
 		// checks if the chart is consistent
 		if (IsChart.isValid(chart)) {
 			// gets the tooltip position requested
@@ -185,10 +190,10 @@ public final class Positioner {
 				// list of dataset items
 				List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
 				// and invokes it
-				Point result = positioner.computePosition(chart, items, eventPoint);
+				Point result = positioner.computePosition(chart, items, internalPoint);
 				// checks if the result is consistent
 				if (result != null) {
-					return result;
+					return result.nativeObject();
 				}
 			}
 		}
@@ -197,8 +202,8 @@ public final class Positioner {
 		// then gets the default tooltip position
 		IsTooltipPosition defaultValue = Defaults.get().getGlobal().getTooltips().getPosition();
 		// invokes the positioner of the default one getting the point
-		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
+		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, internalContext, datasetItems, internalPoint);
 		// if the result is ok, return it otherwise returns the point of event
-		return defaultPoint != null ? defaultPoint : eventPoint;
+		return defaultPoint != null ? defaultPoint.nativeObject() : eventPoint;
 	}
 }
