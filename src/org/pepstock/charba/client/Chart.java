@@ -78,7 +78,7 @@ public final class Chart {
 	 *            values increasing when going down.
 	 * @param configuration configuration of CHART (native object).
 	 */
-	protected Chart(Context2dItem context, Configuration configuration) {
+	protected Chart(Context2dItem context, NativeObject configuration) {
 	}
 
 	/**
