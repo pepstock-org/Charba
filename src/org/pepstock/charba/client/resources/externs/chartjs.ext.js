@@ -1,4 +1,7 @@
 /**
+ * @externs
+ */
+/**
  * @constructor
  * @param {CanvasRenderingContext2D} context
  * @param {Object} configuration

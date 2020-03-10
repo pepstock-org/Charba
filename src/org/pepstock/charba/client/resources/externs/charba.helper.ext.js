@@ -1,4 +1,7 @@
 /**
+ * @externs
+ */
+/**
  * @constructor
  * @return {CharbaCallbackProxy}
  */
