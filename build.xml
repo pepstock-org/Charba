@@ -398,6 +398,7 @@
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
+				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
 			</fileset>	
 		</jar>
@@ -469,6 +470,7 @@
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
+				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
 			</fileset>	
 		</jar>
