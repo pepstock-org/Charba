@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeCallbackProxyDescriptor extends NativeAbstractDescriptor {
+final class NativeCallbackProxyDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -41,6 +41,6 @@ public final class NativeCallbackProxyDescriptor extends NativeAbstractDescripto
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native CallbackProxy.Proxy getValue();
+	native CallbackProxy.Proxy getValue();
 
 }

@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeObjectDescriptor extends NativeAbstractDescriptor {
+final class NativeObjectDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -42,6 +42,6 @@ public final class NativeObjectDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native NativeObject getValue();
+	native NativeObject getValue();
 
 }

@@ -865,7 +865,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			// stores the chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
-			chart = new Chart(canvas.getContext2d(), configuration);
+			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
 			// notify after init
 			Charts.fireAfterInit(this);
 		}

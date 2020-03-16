@@ -20,6 +20,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
@@ -57,9 +58,9 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 		 * Method of function to be called when animation is changing.
 		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param animationObject java script object which contains animation object
+		 * @param nativeObject java script object which contains animation object
 		 */
-		void call(Chart context, AnimationObject animationObject);
+		void call(Chart context, NativeObject nativeObject);
 	}
 
 	// ---------------------------
@@ -120,16 +121,20 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		completeCallbackProxy.setCallback((context, animationObject) -> {
+		completeCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
-			if (animationObject != null) {
+			if (nativeObject != null) {
+				// creates animation object
+				AnimationObject animationObject = new AnimationObject(nativeObject);
 				// invokes the custom callback
 				onComplete(animationObject.getAnimationItem());
 			}
 		});
-		progressCallbackProxy.setCallback((context, animationObject) -> {
+		progressCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
-			if (animationObject != null) {
+			if (nativeObject != null) {
+				// creates animation object
+				AnimationObject animationObject = new AnimationObject(nativeObject);
 				// invokes the custom callback
 				onProgress(animationObject.getAnimationItem());
 			}

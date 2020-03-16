@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeBooleanDescriptor extends NativeAbstractDescriptor {
+final class NativeBooleanDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -41,6 +41,6 @@ public final class NativeBooleanDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native boolean getValue();
+	native boolean getValue();
 
 }

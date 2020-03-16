@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeDoubleDescriptor extends NativeAbstractDescriptor {
+final class NativeDoubleDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -41,6 +41,6 @@ public final class NativeDoubleDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native double getValue();
+	native double getValue();
 
 }

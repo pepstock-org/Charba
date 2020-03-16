@@ -15,28 +15,55 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.data.Data;
-import org.pepstock.charba.client.plugins.ArrayPlugin;
 import org.pepstock.charba.client.plugins.Plugins;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * This is the configuration object of a chart.<br>
- * It contains always the type, options, plugins and data.<br>
- * THIS IS AN EXPORTED OBJECT.
+ * It contains always the type, options, plugins and data.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class Configuration {
+public final class Configuration extends NativeObjectContainer{
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		TYPE("type"),
+		OPTIONS("options"),
+		DATA("data"),
+		PLUGINS("plugins");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -45,53 +72,48 @@ public final class Configuration {
 	}
 
 	/**
-	 * Sets the type of chart by the <code>type</code> property into native object.
-	 * 
-	 * @param type type of chart as string.
-	 */
-	@JsProperty(name = "type")
-	native void setNativeType(String type);
-
-	/**
-	 * Returns the options of chart by the <code>options</code> property into native object.
-	 * 
-	 * @return options options of chart as native object.
-	 */
-	@JsProperty
-	native NativeObject getOptions();
-
-	/**
 	 * Sets the options of chart by the <code>options</code> property into native object.
 	 * 
 	 * @param options options of chart as native object.
 	 */
-	@JsProperty
-	public native void setOptions(NativeObject options);
+	public void setOptions(NativeObject options) {
+		setValue(Property.OPTIONS, options);
+	}
+	
+	/**
+	 * Returns the options of chart by the <code>options</code> property into native object.
+	 * 
+	 * @return options of chart as native object.
+	 */
+	NativeObject getOptions() {
+		return getValue(Property.OPTIONS);
+	}
 
 	/**
 	 * Sets the data of chart by the <code>data</code> property into native object.
 	 * 
 	 * @param data data of chart as native object.
 	 */
-	@JsProperty
-	public native void setData(NativeObject data);
+	public void setData(NativeObject data) {
+		setValue(Property.DATA, data);
+	}
 
 	/**
 	 * Sets the inline plugins of chart by the <code>plugins</code> property into native object.
 	 * 
 	 * @param plugins inline plugins of chart as array of plugin native object.
 	 */
-	@JsProperty
-	public native void setPlugins(ArrayPlugin plugins);
+	public void setPlugins(ArrayObject plugins) {
+		setArrayValue(Property.PLUGINS, plugins);
+	}
 
 	/**
 	 * Sets the type of chart.
 	 * 
 	 * @param type type of chart.
 	 */
-	@JsOverlay
 	void setType(Type type) {
-		setNativeType(type.value());
+		setValue(Property.TYPE, type);
 	}
 
 	/**
@@ -101,7 +123,6 @@ public final class Configuration {
 	 * @param options the options of the chart.
 	 * @param <T> type of options
 	 */
-	@JsOverlay
 	<T extends ConfigurationOptions> void setOptions(IsChart chart, T options) {
 		options.load(chart, this);
 	}
@@ -112,7 +133,6 @@ public final class Configuration {
 	 * @param chart chart instance
 	 * @param data the data of chart.
 	 */
-	@JsOverlay
 	void setData(IsChart chart, Data data) {
 		data.load(chart, this);
 	}
@@ -123,9 +143,18 @@ public final class Configuration {
 	 * @param chart chart instance
 	 * @param plugins the plugins of chart.
 	 */
-	@JsOverlay
 	void setPlugins(IsChart chart, Plugins plugins) {
 		plugins.load(chart, this);
+	}
+	
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return getNativeObject();
 	}
 
 }

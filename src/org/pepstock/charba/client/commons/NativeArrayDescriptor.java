@@ -27,7 +27,7 @@ import jsinterop.annotations.JsType;
  * @param <T> type of property which extends an array
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeArrayDescriptor<T extends Array> extends NativeAbstractDescriptor {
+final class NativeArrayDescriptor<T extends Array> extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -43,6 +43,6 @@ public final class NativeArrayDescriptor<T extends Array> extends NativeAbstract
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native T getValue();
+	native T getValue();
 
 }

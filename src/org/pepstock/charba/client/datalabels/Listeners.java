@@ -63,9 +63,9 @@ public final class Listeners extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(context));
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(context));
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(context));
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new ScriptableContext(context)));
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new ScriptableContext(context)));
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new ScriptableContext(context)));
 	}
 
 	/**

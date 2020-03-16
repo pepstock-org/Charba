@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -135,7 +136,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		 * @param item native object as render item.
 		 * @return image or string for rendering.
 		 */
-		Object call(CallbackFunctionContext context, RenderItem item);
+		Object call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	/**
@@ -154,7 +155,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		 * @param item native object as font color item.
 		 * @return string as color representation.
 		 */
-		String call(CallbackFunctionContext context, FontColorItem item);
+		String call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	// ---------------------------
@@ -284,8 +285,8 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(item));
-		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(item));
+		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new RenderItem(item)));
+		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(new FontColorItem(item)));
 	}
 
 	/**
@@ -738,7 +739,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	private Object onRenderCallback(RenderItem item) {
 		// gets chart instance
-		IsChart chart = item.getNativeChart().getChart();
+		IsChart chart = item.getChart();
 		// checks if the callback is set
 		if (IsChart.isValid(chart) && renderCallback != null) {
 			// calls callback
@@ -764,7 +765,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	private String onFontColorCallback(FontColorItem item) {
 		// gets chart instance
-		IsChart chart = item.getNativeChart().getChart();
+		IsChart chart = item.getChart();
 		// checks if the callback is set
 		if (IsChart.isValid(chart) && fontColorCallback != null) {
 			// calls callback

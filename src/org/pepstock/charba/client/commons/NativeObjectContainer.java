@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -1027,7 +1028,6 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- ARRAYS
 	// ------------------------------------------
-
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.
 	 * 
@@ -1109,6 +1109,28 @@ public abstract class NativeObjectContainer {
 		// check color value is consistent
 		// and returns the RGBA value accordingly
 		return IsColor.isConsistent(value) ? value.toRGBA() : null;
+	}
+	
+	// ------------------------------------------
+	// --- CHART
+	// ------------------------------------------
+
+	/**
+	 * Returns a value (chart) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property
+	 */
+	protected final Chart getNativeChart(Key key) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns null
+			return null;
+		}
+		// gets descriptor
+		NativeChartDescriptor descriptor = nativeObject.getChartProperty(key.value());
+		// returns value
+		return descriptor == null ? null : descriptor.getValue();
 	}
 
 	// ------------------------------------------

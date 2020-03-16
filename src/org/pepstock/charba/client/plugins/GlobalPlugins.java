@@ -73,7 +73,7 @@ public final class GlobalPlugins {
 			}
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-			plugins.register(wPlugin.getNativeObject());
+			plugins.register(wPlugin.nativeObject());
 			// stores the id and object into a map
 			pluginIds.put(plugin.getId(), wPlugin);
 			return true;

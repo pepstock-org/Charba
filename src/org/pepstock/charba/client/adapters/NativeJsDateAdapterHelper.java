@@ -13,38 +13,37 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
+package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Native object which is mapping the <code>_adapters</code> of CHART.JS.<br>
- * The adapters contains all adapters applied to CHART.JS.
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation to create a date adapter from CHART.JS.
+ * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-final class NativeAdapters {
+@JsType(isNative = true, name = NativeName.JS_DATE_ADAPTER_HELPER, namespace = JsPackage.GLOBAL)
+final class NativeJsDateAdapterHelper {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private NativeAdapters() {
+	private NativeJsDateAdapterHelper() {
 		// do nothing
 	}
 
 	/**
-	 * Returns the date adapter.
+	 * Returns a date adapter instance, using the options passed as argument.
 	 * 
-	 * @return a native object with date adapter
+	 * @param options date adapter options.
+	 * @return a date adapter instance.
 	 */
-	@JsProperty(name = "_date")
-	native NativeObject getDate();
+	static native NativeDateAdapter create(NativeObject options);
 
 }

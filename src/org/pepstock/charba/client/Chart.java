@@ -78,7 +78,7 @@ public final class Chart {
 	 *            values increasing when going down.
 	 * @param configuration configuration of CHART (native object).
 	 */
-	protected Chart(Context2dItem context, Configuration configuration) {
+	protected Chart(Context2dItem context, NativeObject configuration) {
 	}
 
 	/**
@@ -385,13 +385,6 @@ public final class Chart {
 	 */
 	@JsOverlay
 	public IsChart getChart() {
-		// gets charba id
-		String charbaId = getCharbaId();
-		// checks if not null
-		if (charbaId != null) {
-			return Charts.get(Id.get(getOptions()));
-		}
-		// if here, charba id is null
-		return null;
+		return Charts.get(getCharbaId());
 	}
 }

@@ -25,6 +25,7 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
+import org.pepstock.charba.client.commons.ArrayObject;
 
 /**
  * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart configuration.
@@ -139,8 +140,8 @@ public final class Plugins implements ConfigurationElement {
 			// gets the globals plugin IDs
 			// checks if ID is already registered
 			Set<String> globalPluginIds = Defaults.get().getPlugins().getIds();
-			// new array
-			ArrayPlugin array = new ArrayPlugin();
+			// create a list of plugins
+			List<WrapperPlugin> pluginsListToSet = new LinkedList<>();
 			// adds all java script object of the plugin wrapper
 			// scans all plugins
 			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
@@ -150,16 +151,16 @@ public final class Plugins implements ConfigurationElement {
 				// checks if the plugin is already loaded into global ones
 				if (!globalPluginIds.contains(plugin.getId())) {
 					// if not, adds plugin
-					array.push(plugin.getNativeObject());
+					pluginsListToSet.add(plugin);
 				} else {
 					// removes it if already set into global
 					iter.remove();
 				}
 			}
-			// checks if array is empyt
-			if (!array.isEmpty()) {
+			// checks if list of plugins is empty
+			if (!pluginsListToSet.isEmpty()) {
 				// sets it to configuration object
-				configuration.setPlugins(array);
+				configuration.setPlugins(ArrayObject.fromOrEmpty(pluginsListToSet));
 			}
 		}
 	}

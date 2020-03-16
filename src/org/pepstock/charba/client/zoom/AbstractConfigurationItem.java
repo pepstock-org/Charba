@@ -51,7 +51,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		 * @param context wrapper of native chart instance
 		 * @return a string mode (direction) value
 		 */
-		String call(NativeObject contextFunction, Context context);
+		String call(NativeObject contextFunction, NativeObject context);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		 * @param contextFunction context value of <code>this</code> to the execution context of function
 		 * @param context native chart
 		 */
-		void call(NativeObject contextFunction, Context context);
+		void call(NativeObject contextFunction, NativeObject context);
 	}
 
 	// ---------------------------
@@ -176,9 +176,9 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(context));
-		progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(context));
-		completeCallbackProxy.setCallback((contextFunction, context) -> onComplete(context));
+		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new Context(context)));
+		progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new Context(context)));
+		completeCallbackProxy.setCallback((contextFunction, context) -> onComplete(new Context(context)));
 	}
 
 	/**
@@ -404,7 +404,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the callback must be invoked, checking callback and chart consistency
 	 */
 	private boolean isFunctionInvocationConsistent(Object function, Context context) {
-		return function != null && context.getNativeChart() != null && IsChart.isValid(context.getChart());
+		return function != null && context != null && IsChart.isValid(context.getChart());
 	}
 
 	/**

@@ -16,8 +16,7 @@ dist: trusty
 addons:
   sonarcloud:
     organization: "pepstock-org"
-    token:
-      secure: ${SONAR_TOKEN}
+    token: ${SONAR_TOKEN}
 #
 # CACHE
 #

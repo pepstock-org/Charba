@@ -17,43 +17,81 @@ package org.pepstock.charba.client.positioner;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * The positioner context is used to give contextual information to the tooltip positioner function.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class PositionerContext {
-
+public final class PositionerContext extends NativeObjectContainer{
+	
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of native object.
 	 */
-	protected PositionerContext() {
+	private enum Property implements Key
+	{
+		CHART("_chart");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
-	 * Returns the <code>chart</code> property by native object.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return the <code>chart</code> property by native object.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty(name = "_chart")
-	native Chart getNativeChart();
+	PositionerContext(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
 	 * @return the CHARBA chart instance
 	 */
-	@JsOverlay
 	IsChart getChart() {
-		return getNativeChart().getChart();
+		// gets native chart
+		Chart chart = getNativeChart(Property.CHART);
+		// checks if consistent
+		if (chart != null) {
+			// returns chart instance
+			return chart.getChart();
+		}
+		// if here, not consistent
+		//the returns null
+		return null;
+	}
+	
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return getNativeObject();
 	}
 
 }

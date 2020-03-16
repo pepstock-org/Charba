@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART_PLUGINS, namespace = JsPackage.GLOBAL)
 public final class NativePlugins {
 
 	/**
@@ -44,7 +44,7 @@ public final class NativePlugins {
 	 * @param plugin plugin instance.
 	 */
 	@JsMethod
-	native void register(NativePlugin plugin);
+	native void register(NativeObject plugin);
 
 	/**
 	 * Unregisters the given plugin only if registered.

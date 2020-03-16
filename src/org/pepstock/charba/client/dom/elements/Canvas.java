@@ -24,6 +24,7 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 /**
  * Represents a DOM element that enables drawing graphics and animations with own the canvas scripting API.
@@ -31,7 +32,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_CANVAS_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class Canvas extends BaseHtmlElement implements IsCastable {
 
 	/**
@@ -103,7 +104,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	 * @return a drawing context on the canvas
 	 */
 	@JsMethod
-	private native Context2dItem getContext(String contextId);
+	private native Object getContext(String contextId);
 
 	/**
 	 * Returns a drawing 2D context on the canvas.
@@ -112,7 +113,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	 */
 	@JsOverlay
 	public final Context2dItem getContext2d() {
-		return getContext(CONTEXT_2D);
+		return Js.cast(getContext(CONTEXT_2D));
 	}
 
 	/**

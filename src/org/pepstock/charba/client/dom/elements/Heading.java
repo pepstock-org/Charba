@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.DOM_HTML_ELEMENT, namespace = JsPackage.GLOBAL)
 public final class Heading extends BaseHtmlElement {
 
 	/**

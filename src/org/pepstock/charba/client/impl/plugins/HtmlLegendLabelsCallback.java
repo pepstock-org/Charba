@@ -34,8 +34,8 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.Span;
-import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.Table;
+import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.TableRow;
 import org.pepstock.charba.client.dom.enums.BorderStyle;
 import org.pepstock.charba.client.dom.enums.Display;
@@ -132,8 +132,8 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				Collections.sort(legendItems, COMPARATOR);
 			}
 			// resets padding and spacing
-			table.setCellPadding(0);
-			table.setCellSpacing(0);
+			table.setCellPadding(String.valueOf(0));
+			table.setCellSpacing(String.valueOf(0));
 			// sets horizontal alignment
 			table.setAlign(legend.getAlign().getHorizontalAlignmentValue());
 			// sets index to check when to have more lines

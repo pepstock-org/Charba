@@ -18,14 +18,8 @@ package org.pepstock.charba.client.labels;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.commons.ObjectType;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the FONTCOLOR function is called.
@@ -33,36 +27,54 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class FontColorItem extends RenderItem {
-
+	
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of native object.
 	 */
-	FontColorItem() {
+	private enum Property implements Key
+	{
+		BACKGROUND_COLOR("backgroundColor");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
-	 * Returns the <code>background</code> property by native object.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return the <code>label</code> property by native object.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty(name = "backgroundColor")
-	final native String getNativeBackgroundColor();
+	FontColorItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the fill color
 	 * 
 	 * @return the fill color. Default is {@link HtmlColor#WHITE}.
 	 */
-	@JsOverlay
 	public String getBackgroundColorAsString() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
-			return HtmlColor.WHITE.toRGBA();
-		}
-		// returns property value
-		return getNativeBackgroundColor();
+		return getValue(Property.BACKGROUND_COLOR, HtmlColor.WHITE.toRGBA());
 	}
 
 	/**
@@ -70,7 +82,6 @@ public final class FontColorItem extends RenderItem {
 	 * 
 	 * @return the fill color under the line. Default is {@link HtmlColor#WHITE}.
 	 */
-	@JsOverlay
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
