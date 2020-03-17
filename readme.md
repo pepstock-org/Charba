@@ -6,7 +6,7 @@ Charba - J2CL and GWT Charts library based on CHART.JS
 What's Charba
 --------
 
-[Google Web toolkit](http://www.gwtproject.org/) doesn't have charting library available out of the box.
+[GWT Web toolkit](http://www.gwtproject.org/) doesn't have charting library available out of the box.
 
 There are some open source charting libraries for GWT available to be used but with some constraints or unclear items:
 
