@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.AbstractModule;
+import org.pepstock.charba.client.commons.JsHelper;
 
 /**
  * Utility to set which kind of resources type must be use to load injectable resources.<br>
@@ -64,6 +65,10 @@ public final class ResourcesType {
 			}
 			// stores the instance
 			ResourcesType.resources = resources;
+			// to be sure that CHARBA java script object is injected
+			// invoking the JsHelper
+			// PAY ATTENTION: MUST be called before injecting CHART.JS
+			JsHelper.get();
 		} else {
 			// exception
 			throw new IllegalArgumentException("Resources type is not correct. Must extend AbstractEmbeddedResources or AbstractDeferredResources classes");
