@@ -25,8 +25,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class Context extends NativeObjectContainer{
-	
+final class Context extends NativeObjectContainer {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -61,7 +61,7 @@ final class Context extends NativeObjectContainer{
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
-	 */	
+	 */
 	Context(NativeObject nativeObject) {
 		super(nativeObject);
 	}

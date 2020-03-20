@@ -29,7 +29,7 @@ import org.pepstock.charba.client.plugins.Plugins;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Configuration extends NativeObjectContainer{
+public final class Configuration extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -63,7 +63,7 @@ public final class Configuration extends NativeObjectContainer{
 			return value;
 		}
 	}
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -79,7 +79,7 @@ public final class Configuration extends NativeObjectContainer{
 	public void setOptions(NativeObject options) {
 		setValue(Property.OPTIONS, options);
 	}
-	
+
 	/**
 	 * Returns the options of chart by the <code>options</code> property into native object.
 	 * 
@@ -146,7 +146,6 @@ public final class Configuration extends NativeObjectContainer{
 	void setPlugins(IsChart chart, Plugins plugins) {
 		plugins.load(chart, this);
 	}
-	
 
 	/**
 	 * Returns the native object instance.

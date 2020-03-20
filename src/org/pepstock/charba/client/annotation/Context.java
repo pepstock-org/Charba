@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  */
 final class Context extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */

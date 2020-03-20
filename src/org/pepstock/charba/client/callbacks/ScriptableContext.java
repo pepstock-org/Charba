@@ -33,7 +33,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScriptableContext extends NativeObjectContainer{
+public final class ScriptableContext extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -125,7 +125,7 @@ public final class ScriptableContext extends NativeObjectContainer{
 		// returns default value
 		return false;
 	}
-	
+
 	/**
 	 * Sets the additional options.
 	 * 

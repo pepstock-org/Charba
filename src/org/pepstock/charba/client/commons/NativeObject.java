@@ -410,7 +410,7 @@ public final class NativeObject {
 	NativeObjectDescriptor getObjectProperty(String key) {
 		return getInternalObjectProperty(key);
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 

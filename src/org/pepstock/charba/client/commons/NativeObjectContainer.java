@@ -1110,7 +1110,7 @@ public abstract class NativeObjectContainer {
 		// and returns the RGBA value accordingly
 		return IsColor.isConsistent(value) ? value.toRGBA() : null;
 	}
-	
+
 	// ------------------------------------------
 	// --- CHART
 	// ------------------------------------------

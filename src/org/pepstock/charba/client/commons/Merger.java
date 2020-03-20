@@ -160,7 +160,7 @@ public final class Merger {
 		Type.checkIfValid(type);
 		// gets chart.defaults[type]
 		ChartOptions base = Defaults.get().getOptions(type);
-		
+
 		// gets chart.defaults.scale
 		Scale scale = Defaults.get().getScale();
 		// gets chart.defaults.global

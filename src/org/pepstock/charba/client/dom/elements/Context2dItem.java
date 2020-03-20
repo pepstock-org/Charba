@@ -853,7 +853,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	public final void drawImage(Canvas canvas, double dx, double dy, double dWidth, double dHeight) {
 		nativeDrawImage(checkAndGetDrawImageArgument(canvas), dx, dy, dWidth, dHeight);
 	}
-	
+
 	/**
 	 * Draws a canvas onto the canvas.
 	 * 
@@ -919,7 +919,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsMethod(name = "drawImage")
 	private native void nativeDrawImage(Img image, double dx, double dy);
-	
+
 	/**
 	 * Draws an image onto the canvas.
 	 * 

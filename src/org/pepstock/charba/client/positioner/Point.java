@@ -106,7 +106,7 @@ public final class Point extends NativeObjectContainer {
 	 * 
 	 * @return the Y coordinate of the point.
 	 */
-	public int getY(){
+	public int getY() {
 		return getValue(Property.Y, UndefinedValues.INTEGER);
 	}
 

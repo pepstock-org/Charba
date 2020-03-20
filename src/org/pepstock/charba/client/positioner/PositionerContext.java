@@ -26,8 +26,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class PositionerContext extends NativeObjectContainer{
-	
+public final class PositionerContext extends NativeObjectContainer {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -81,10 +81,10 @@ public final class PositionerContext extends NativeObjectContainer{
 			return chart.getChart();
 		}
 		// if here, not consistent
-		//the returns null
+		// the returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

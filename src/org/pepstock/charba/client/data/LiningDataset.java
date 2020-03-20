@@ -232,13 +232,16 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		pointBackgroundColorCallbackProxy
 				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointBorderColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
 		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
+		pointHoverBackgroundColorCallbackProxy.setCallback(
+				(contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointHoverBorderColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
 		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
@@ -264,7 +267,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// gets value calling callback
 		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(context), hoverBorderDashCallback));
 		// gets value calling callback
-		hoverBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		hoverBorderDashOffsetCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
 		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(context), hoverBorderJoinStyleCallback));
 	}

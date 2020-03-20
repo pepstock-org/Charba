@@ -63,7 +63,7 @@ public class RenderItem extends NativeObjectContainer {
 			return value;
 		}
 	}
-	
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 

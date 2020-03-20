@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  *
  */
 public final class FontColorItem extends RenderItem {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */

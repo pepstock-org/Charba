@@ -112,7 +112,7 @@ public final class NativeName {
 	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).<br>
 	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
 	 */
-	public static final String CHART_ADAPTERS_DATE = "CharbaChartAdaptersDate"; 
+	public static final String CHART_ADAPTERS_DATE = "CharbaChartAdaptersDate";
 
 	/**
 	 * Constant to bind java script object as chart controller context with name <b>{@value CHART_CONTROLLER_CONTEXT}</b>, (internal of CHART.JS).<br>
@@ -230,7 +230,7 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM text node with name <b>{@value DOM_TEXT}</b>.
 	 */
 	public static final String DOM_TEXT = "Text";
-	
+
 	/**
 	 * Constant to bind java script object as DOM event with name <b>{@value DOM_EVENT}</b>.
 	 */
@@ -240,7 +240,7 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM canvas gradient with name <b>{@value DOM_CANVAS_GRADIENT}</b>.
 	 */
 	public static final String DOM_CANVAS_GRADIENT = "CanvasGradient";
-	
+
 	/**
 	 * Constant to bind java script object as DOM canvas pattern with name <b>{@value DOM_CANVAS_PATTERN}</b>.
 	 */

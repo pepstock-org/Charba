@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation to create a date adapter from CHART.JS.
- * This wrapper is necessary to ensure that script is injected with CHART.JS.
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation to create a date adapter from CHART.JS. This wrapper is necessary
+ * to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
