@@ -158,6 +158,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `WrapperPlugin` class in order to be a native `JsType` instead of an exportable one.
  * remove `NativeAdapters` class because not used anymore.
  * change namespaces of `JsType` on native objects in order to be aligned with [J2CL](https://github.com/google/j2cl) and Google Closure requirements.
+ * reduce visibility of some internal values of `Dataset.Property` enumeration.
 
 License
 -------

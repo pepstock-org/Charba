@@ -169,7 +169,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public String getLabel() {
-		return getValue(Dataset.Property.LABEL, DEFAULT_LABEL);
+		return getValue(Dataset.InternalProperty.LABEL, DEFAULT_LABEL);
 	}
 
 	/**

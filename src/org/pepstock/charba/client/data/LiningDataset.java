@@ -320,7 +320,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	@Override
 	public String getLabel() {
-		return getValue(Dataset.Property.LABEL, DEFAULT_LABEL);
+		return getValue(Dataset.InternalProperty.LABEL, DEFAULT_LABEL);
 	}
 
 	/**

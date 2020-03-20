@@ -124,20 +124,50 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
 	/**
-	 * Name of properties of native object.
+	 * Name of common properties of native object related to a dataset.
 	 */
 	protected enum Property implements Key
 	{
-		LABEL("label"),
-		DATA("data"),
-		TYPE("type"),
-		HIDDEN("hidden"),
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
 		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
 		HOVER_BORDER_COLOR("hoverBorderColor"),
-		HOVER_BORDER_WIDTH("hoverBorderWidth"),
+		HOVER_BORDER_WIDTH("hoverBorderWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	/**
+	 * Name of private properties of native object.
+	 */
+	enum InternalProperty implements Key
+	{
+		LABEL("label"),
+		DATA("data"),
+		TYPE("type"),
+		HIDDEN("hidden"),
 		// internal key to store a unique id
 		CHARBA_ID("_charbaId"),
 		// internal key to store patterns and gradients
@@ -154,7 +184,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		 * 
 		 * @param value value of property name
 		 */
-		private Property(String value) {
+		private InternalProperty(String value) {
 			this.value = value;
 		}
 
@@ -182,14 +212,14 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		Type.checkIfValid(type);
 		this.type = type;
 		// stores the type
-		setValue(Property.TYPE, type);
+		setValue(InternalProperty.TYPE, type);
 		// stores the id based on a counter
-		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
+		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
-		setValue(Property.CHARBA_PATTERNS, patternsContainer);
-		setValue(Property.CHARBA_GRADIENTS, gradientsContainer);
+		setValue(InternalProperty.CHARBA_PATTERNS, patternsContainer);
+		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
-		setValue(Property.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -213,7 +243,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the unique id of datasets
 	 */
 	public final int getId() {
-		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
+		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -222,7 +252,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the data type of datasets
 	 */
 	public final DataType getDataType() {
-		return getValue(Property.CHARBA_DATA_TYPE, DataType.values(), DataType.UNKNOWN);
+		return getValue(InternalProperty.CHARBA_DATA_TYPE, DataType.values(), DataType.UNKNOWN);
 	}
 
 	/**
@@ -619,11 +649,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// checks if is hidden
 		if (hidden) {
 			// then sets it
-			setValue(Property.HIDDEN, hidden);
+			setValue(InternalProperty.HIDDEN, hidden);
 		} else {
 			// if is not hidden
 			// remove the property
-			remove(Property.HIDDEN);
+			remove(InternalProperty.HIDDEN);
 		}
 	}
 
@@ -633,7 +663,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return if the dataset will appear or not. Default is <code>false</code>
 	 */
 	public boolean isHidden() {
-		return getValue(Property.HIDDEN, DEFAULT_HIDDEN);
+		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);
 	}
 
 	/**
@@ -642,7 +672,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
-		setValue(Property.LABEL, label);
+		setValue(InternalProperty.LABEL, label);
 	}
 
 	/**
@@ -651,7 +681,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the label for the dataset which appears in the legend and tooltips.
 	 */
 	public String getLabel() {
-		return getValue(Property.LABEL, UndefinedValues.STRING);
+		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -676,9 +706,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// set value. If null, removes key and then..
-		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -693,9 +723,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// set value. If null, removes key and then..
-		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -722,9 +752,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// checks if is a numbers data type
-		if (has(Property.DATA) && DataType.NUMBERS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers
-			ArrayDouble array = getArrayValue(Property.DATA);
+			ArrayDouble array = getArrayValue(InternalProperty.DATA);
 			// returns array
 			return ArrayListHelper.list(array);
 		}
@@ -732,9 +762,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayDoubleList result = new ArrayDoubleList();
 			// set value
-			setArrayValue(Property.DATA, ArrayDouble.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrEmpty(result));
 			// sets data type
-			setValue(Property.CHARBA_DATA_TYPE, DataType.NUMBERS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.NUMBERS);
 			// returns list
 			return result;
 		}
@@ -751,9 +781,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	final List<DataPoint> getDataPoints(DataPointFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(Dataset.Property.DATA);
+			ArrayObject array = getArrayValue(InternalProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -761,9 +791,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
-			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
 			return result;
 		}
@@ -777,9 +807,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param datapoints an array of data points
 	 */
 	final void setInternalDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -788,9 +818,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param datapoints a list of data points
 	 */
 	final void setInternalDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -802,9 +832,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(Dataset.Property.DATA);
+			ArrayObject array = getArrayValue(InternalProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -812,9 +842,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayObjectContainerList<TimeSeriesItem> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
-			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
 			return result;
 		}
@@ -832,9 +862,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (timeSeriesItems != null) {
 			Arrays.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -847,9 +877,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (timeSeriesItems != null) {
 			Collections.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/*
