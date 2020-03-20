@@ -28,9 +28,9 @@ Since version **3**, **Charba** has got an own DOM tree manager which allows to 
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.0/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.1/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.0/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -59,34 +59,26 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>3.0</version>
+    <version>3.1</version>
     <!-- for GWT -->
-    <version>3.0-gwt</version>
-</dependency>
-<dependency>
-    <groupId>com.google.jsinterop</groupId>
-    <artifactId>base</artifactId>
-    <version>1.0.0</version>
+    <version>3.1-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="3.0"/>
-<dependency org="com.google.jsinterop" name="base" rev="1.0.0" conf="*->master" />
+<dependency org="org.pepstock" name="charba" rev="3.1"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="3.0-gwt"/>
-<dependency org="com.google.jsinterop" name="base" rev="1.0.0" conf="*->master" />
+<dependency org="org.pepstock" name="charba" rev="3.1-gwt"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '3.0'
-compile group: 'org.pepstock', name: 'charba', version: '3.0-gwt'
+compile group: 'org.pepstock', name: 'charba', version: '3.1'
 
-compile group: 'com.google.jsinterop', name: 'base', version: '1.0.0'
+compile group: 'org.pepstock', name: 'charba', version: '3.1-gwt'
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration into your GWT project module configuration:
@@ -103,7 +95,7 @@ Since version **2.x**, **Charba** is based on [JSINTEROP](http://www.gwtproject.
 
 As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write java script in your classes (using JSNI).
 
-**Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExports` to be passed.
+**PAY ATTENTION** that if you are using a **Charba** version between **2.0** and **3.0** (included), GWT compiler (you are using for your project) requires `-generateJsInteropExports` to be passed. 
 
 If you are using [Apache Maven](https://maven.apache.org/):
 
@@ -118,19 +110,25 @@ If you are using [Apache Maven](https://maven.apache.org/):
 </plugin>
 ```
 
+From **Charba** version **3.1**, this is NOT needed anymore. 
+
 Documentation
 -------------
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/3.0/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/3.1/index.html).
 
 Showcase
 --------
 
-See [Charba showcase](http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html) to have a look what you can do with it.
+See [Charba showcase on GWT](http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html) to have a look what you can do with it.
 
-See also [Charba showcase source code](https://github.com/pepstock-org/Charba-Showcase) on GitHub as starting point.
+See also [Charba showcase GWT source code](https://github.com/pepstock-org/Charba-Showcase) on GitHub as starting point, if you are going to use on GWT.
+
+See [Charba showcase built by J2CL](http://www.pepstock.org/Charba-Showcase-J2CL/Charba_Showcase_J2CL.html) and based on [Google Elemental2](https://github.com/google/elemental2), to have a look what you can do with it.
+
+See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Charba-Showcase-J2CL) on GitHub as starting point, if you are going to use on J2CL.
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
 
@@ -140,25 +138,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge into `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Features
-
- * fully compliant to [J2CL](https://github.com/google/j2cl).
-   * create specific [showcase project](https://github.com/pepstock-org/Charba-Showcase-J2CL), based on [J2CL](https://github.com/google/j2cl) and [Elemental2](https://github.com/google/elemental2).
-   * deploy [Charba showcase on J2CL](http://www.pepstock.org/Charba-Showcase-J2CL/Charba_Showcase_J2CL.html).
- * `-generateJsInteropExports` is not longer needed to GWT compiler.
-   
-### Development
-
- * change `WrapperPlugin` class in order to be a native `JsType` instead of an exportable one.
- * remove `NativeAdapters` class because not used anymore.
- * change namespaces of `JsType` on native objects in order to be aligned with [J2CL](https://github.com/google/j2cl) and Google Closure requirements.
- * reduce visibility of some internal values of `Dataset.Property` enumeration.
 
 License
 -------
