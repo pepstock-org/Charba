@@ -148,13 +148,16 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * fully compliant to [J2CL](https://github.com/google/j2cl).
+   * create specific [showcase project](https://github.com/pepstock-org/Charba-Showcase-J2CL), based on [J2CL](https://github.com/google/j2cl) and [Elemental2](https://github.com/google/elemental2).
+   * deploy [Charba showcase on J2CL](http://www.pepstock.org/Charba-Showcase-J2CL/Charba_Showcase_J2CL.html).
  * `-generateJsInteropExports` is not longer needed to GWT compiler.
    
 ### Development
 
  * change `WrapperPlugin` class in order to be a native `JsType` instead of an exportable one.
  * remove `NativeAdapters` class because not used anymore.
- * change namespaces of `JsType` on native objects in order to be aligned with J2CL and Google Closure requirements.
+ * change namespaces of `JsType` on native objects in order to be aligned with [J2CL](https://github.com/google/j2cl) and Google Closure requirements.
 
 License
 -------
