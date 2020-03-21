@@ -23,7 +23,10 @@ import java.util.List;
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script array as back-end to store objects (integers).
+ * This implementation uses a java script array as back-end to store objects (integers).<br>
+ * <br>
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -84,6 +87,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	/**
 	 * Appends the specified element to the end of this list
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public boolean add(Integer element) {
 		// checks if argument is consistent
@@ -161,6 +165,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	/**
 	 * Returns the element at the specified position in this list. If index out of range, returns Integer.MIN_VALUE
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public Integer get(int index) {
 		// checks range
@@ -173,6 +178,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	/**
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns Integer.MIN_VALUE
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public Integer set(int index, Integer element) {
 		// checks if element is consistent and in range
@@ -191,6 +197,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * Inserts the specified element at the specified position in this list.<br>
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public void add(int index, Integer element) {
 		// checks if element is consistent
@@ -204,6 +211,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * Removes the element at the specified position in this list.<br>
 	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public Integer remove(int index) {
 		// checks range

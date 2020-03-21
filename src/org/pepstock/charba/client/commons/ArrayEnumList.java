@@ -18,7 +18,10 @@ package org.pepstock.charba.client.commons;
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script object as back-end to store objects (enumeration values).
+ * This implementation uses a java script object as back-end to store objects (enumeration values).<br>
+ * <br>
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -91,6 +94,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Appends the specified element to the end of this list
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public boolean add(E element) {
 		// checks if element is consistent
@@ -115,6 +119,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E get(int index) {
 		// checks range
@@ -128,6 +133,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E set(int index, E element) {
 		// checks element is consistent and in range
@@ -147,6 +153,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * Inserts the specified element at the specified position in this list.<br>
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public void add(int index, E element) {
 		// checks if element is consistent
@@ -159,6 +166,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * Removes the element at the specified position in this list.<br>
 	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E remove(int index) {
 		// checks range
