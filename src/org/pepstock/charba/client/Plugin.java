@@ -15,14 +15,13 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
 
 /**
- * This interface is defining the extension hook for Chart.JS plugin implementation (both for <i>inline</i> and <i>global</i>
- * plugins).<br>
+ * This interface is defining the extension hook for Chart.JS plugin implementation (both for <i>inline</i> and <i>global</i> plugins).<br>
  * Plugins are the most efficient way to customize or change the default behavior of a chart.
  * 
  * @author Andrea "Stock" Stocchero
@@ -66,8 +65,7 @@ public interface Plugin {
 	void onAfterInit(IsChart chart, Chart nativeChart);
 
 	/**
-	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent
-	 * render(s)) until another 'update' is triggered.
+	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart update.
@@ -75,16 +73,14 @@ public interface Plugin {
 	boolean onBeforeUpdate(IsChart chart);
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
-	 * has been previously cancelled.
+	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
 	void onAfterUpdate(IsChart chart);
 
 	/**
-	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another
-	 * 'update' is triggered.
+	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart layout.
@@ -92,16 +88,14 @@ public interface Plugin {
 	boolean onBeforeLayout(IsChart chart);
 
 	/**
-	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
-	 * previously cancelled.
+	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
 	void onAfterLayout(IsChart chart);
 
 	/**
-	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled
-	 * until another 'update' is triggered.
+	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the datasets update.
@@ -109,16 +103,15 @@ public interface Plugin {
 	boolean onBeforeDatasetsUpdate(IsChart chart);
 
 	/**
-	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has
-	 * been previously cancelled.
+	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
 	void onAfterDatasetsUpdate(IsChart chart);
 
 	/**
-	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the
-	 * datasets update is cancelled until another 'update' is triggered.
+	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is
+	 * triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -127,8 +120,7 @@ public interface Plugin {
 	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item);
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if
-	 * the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -136,8 +128,7 @@ public interface Plugin {
 	void onAfterDatasetUpdate(IsChart chart, DatasetPluginItem item);
 
 	/**
-	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another
-	 * 'render' is triggered.
+	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart rendering.
@@ -145,16 +136,15 @@ public interface Plugin {
 	boolean onBeforeRender(IsChart chart);
 
 	/**
-	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the
-	 * rendering has been previously cancelled.
+	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the rendering has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
 	void onAfterRender(IsChart chart);
 
 	/**
-	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns
-	 * <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns <code>false</code>, the frame drawing is cancelled until
+	 * another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -163,8 +153,7 @@ public interface Plugin {
 	boolean onBeforeDraw(IsChart chart, double easing);
 
 	/**
-	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the
-	 * drawing has been previously cancelled.
+	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -172,8 +161,7 @@ public interface Plugin {
 	void onAfterDraw(IsChart chart, double easing);
 
 	/**
-	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled
-	 * until another 'render' is triggered.
+	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -182,8 +170,7 @@ public interface Plugin {
 	boolean onBeforeDatasetsDraw(IsChart chart, double easing);
 
 	/**
-	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has
-	 * been previously cancelled.
+	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
@@ -191,8 +178,8 @@ public interface Plugin {
 	void onAfterDatasetsDraw(IsChart chart, double easing);
 
 	/**
-	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any
-	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any plugin returns <code>false</code>, the datasets drawing
+	 * is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -201,8 +188,8 @@ public interface Plugin {
 	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item);
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).
-	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order). Note that this hook will not be called if the datasets
+	 * drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -210,8 +197,7 @@ public interface Plugin {
 	void onAfterDatasetDraw(IsChart chart, DatasetPluginItem item);
 
 	/**
-	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until
-	 * another 'render' is triggered.
+	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item The tooltip instance.
@@ -220,8 +206,7 @@ public interface Plugin {
 	boolean onBeforeTooltipDraw(IsChart chart, TooltipPluginItem item);
 
 	/**
-	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously
-	 * cancelled.
+	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item The tooltip instance.
@@ -235,16 +220,15 @@ public interface Plugin {
 	 * @param event The event object.
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(IsChart chart, ChartNativeEvent event);
+	boolean onBeforeEvent(IsChart chart, BaseNativeEvent event);
 
 	/**
-	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously
-	 * discarded.
+	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
 	 * 
 	 * @param chart the chart instance.
 	 * @param event The event object.
 	 */
-	void onAfterEvent(IsChart chart, ChartNativeEvent event);
+	void onAfterEvent(IsChart chart, BaseNativeEvent event);
 
 	/**
 	 * Called after the chart as been resized.

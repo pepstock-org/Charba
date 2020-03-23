@@ -54,7 +54,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	FontStyle getFontStyle() {
-		return getValue(Font.Property.STYLE, FontStyle.class, Defaults.get().getGlobal().getFontStyle());
+		return getValue(Font.Property.STYLE, FontStyle.values(), Defaults.get().getGlobal().getFontStyle());
 	}
 
 	/**
@@ -72,7 +72,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	Weight getWeight() {
-		return getValue(Font.Property.WEIGHT, Weight.class, Font.DEFAULT_WEIGHT);
+		return getValue(Font.Property.WEIGHT, Weight.values(), Font.DEFAULT_WEIGHT);
 	}
 
 	/**

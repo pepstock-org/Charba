@@ -98,22 +98,18 @@ abstract class Tick extends BaseTick<Ticks> {
 	}
 
 	/**
-	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
-	 * datasets, greater than 0 on top.
+	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn
-	 *            under datasets, greater than 0 on top.
+	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		getConfiguration().setZ(z);
 	}
 
 	/**
-	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
-	 * datasets, greater than 0 on top.
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
-	 *         datasets, greater than 0 on top.
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
 		return getConfiguration().getZ();

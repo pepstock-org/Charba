@@ -43,8 +43,7 @@ import jsinterop.annotations.JsFunction;
 /**
  * Axes are an integral part of a chart.<br>
  * They are used to determine how data maps to a pixel value on the chart.<br>
- * It contains a number of config callbacks that can be used to change parameters in the scale at different points in the update
- * process.
+ * It contains a number of config callbacks that can be used to change parameters in the scale at different points in the update process.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -225,8 +224,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
 	 * 
-	 * @param display If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and
-	 *            ticks.display.
+	 * @param display If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
 	 */
 	public void setDisplay(boolean display) {
 		getScale().setDisplay(display);
@@ -234,8 +232,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
@@ -245,8 +242,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @return display option controls the visibility of axis
 	 */

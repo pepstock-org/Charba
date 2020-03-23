@@ -16,92 +16,88 @@
 package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
 
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
-
 /**
- * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is
- * called.
+ * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is called.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public class RenderItem {
+public class RenderItem extends NativeObjectContainer {
 
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of native object.
 	 */
-	RenderItem() {
+	private enum Property implements Key
+	{
+		CHART("chart"),
+		DATASET_INDEX("datasetIndex"),
+		INDEX("index"),
+		LABEL("label"),
+		VALUE("value"),
+		PERCENTAGE("percentage");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
-	 * Returns the <code>chart</code> property by native object.
+	 * Returns the CHARBA chart instance.
 	 * 
-	 * @return the <code>chart</code> property by native object.
+	 * @return the CHARBA chart instance
 	 */
-	@JsProperty(name = "chart")
-	final native Chart getNativeChart();
+	IsChart getChart() {
+		// gets native chart
+		Chart nativeChart = getNativeChart(Property.CHART);
+		// checks if native chart is present
+		if (nativeChart != null) {
+			// returns is chart instance
+			return nativeChart.getChart();
+		}
+		// if here, the native chart is not consistent
+		return null;
+	}
 
 	/**
-	 * Returns the <code>datasetIndex</code> property by native object.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return the <code>datasetIndex</code> property by native object.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty(name = "datasetIndex")
-	final native int getNativeDatasetIndex();
-
-	/**
-	 * Returns the <code>index</code> property by native object.
-	 * 
-	 * @return the <code>index</code> property by native object.
-	 */
-	@JsProperty(name = "index")
-	final native int getNativeIndex();
-
-	/**
-	 * Returns the <code>label</code> property by native object.
-	 * 
-	 * @return the <code>label</code> property by native object.
-	 */
-	@JsProperty(name = "label")
-	final native String getNativeLabel();
-
-	/**
-	 * Returns the <code>value</code> property by native object.
-	 * 
-	 * @return the <code>value</code> property by native object.
-	 */
-	@JsProperty(name = "value")
-	final native double getNativeValue();
-
-	/**
-	 * Returns the <code>percentage</code> property by native object.
-	 * 
-	 * @return the <code>percentage</code> property by native object.
-	 */
-	@JsProperty(name = "percentage")
-	final native double getNativePercentage();
+	RenderItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
+
 	public final int getIndex() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "index"))) {
-			return UndefinedValues.INTEGER;
-		}
-		// returns property value
-		return getNativeIndex();
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -109,14 +105,8 @@ public class RenderItem {
 	 * 
 	 * @return the dataset index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getDatasetIndex() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
-			return UndefinedValues.INTEGER;
-		}
-		// returns property value
-		return getNativeDatasetIndex();
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -124,14 +114,8 @@ public class RenderItem {
 	 * 
 	 * @return the label for the dataset. Default is {@link UndefinedValues#STRING}.
 	 */
-	@JsOverlay
 	public final String getLabel() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "label"))) {
-			return UndefinedValues.STRING;
-		}
-		// returns property value
-		return getNativeLabel();
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -139,14 +123,8 @@ public class RenderItem {
 	 * 
 	 * @return the percentage for the dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public final double getPercentage() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "percentage"))) {
-			return UndefinedValues.DOUBLE;
-		}
-		// returns property value
-		return getNativePercentage();
+		return getValue(Property.PERCENTAGE, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -154,13 +132,7 @@ public class RenderItem {
 	 * 
 	 * @return the value for the dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public final double getValue() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "value"))) {
-			return UndefinedValues.DOUBLE;
-		}
-		// returns property value
-		return getNativeValue();
+		return getValue(Property.VALUE, UndefinedValues.DOUBLE);
 	}
 }

@@ -23,8 +23,7 @@ import org.pepstock.charba.client.items.TooltipItem;
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
- * text.<br>
+ * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.<br>
  * This interface takes care about labels to apply to the footer.
  * 
  * @author Andrea "Stock" Stocchero

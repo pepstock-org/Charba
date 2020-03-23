@@ -26,8 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
- * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at
- * runtime.
+ * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  */

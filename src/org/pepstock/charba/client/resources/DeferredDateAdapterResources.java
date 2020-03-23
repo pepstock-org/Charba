@@ -15,15 +15,31 @@
 */
 package org.pepstock.charba.client.resources;
 
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ExternalTextResource;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to CHART.JS date adapter library java script codes, always needed to CHARBA.<br>
- * This resources type will load the date adapter library in asynchronous mode in order to optimize the performance when GWT
- * code splitting is implemented.
+ * This resources type will load the date adapter library in asynchronous mode in order to optimize the performance when GWT code splitting is implemented.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DeferredDateAdapterResources extends DateAdpaterResources<ExternalTextResource> {
+public interface DeferredDateAdapterResources extends ClientBundle {
+
+	/**
+	 * Contains text representation of date-time java script library code.
+	 * 
+	 * @return date-time java script library code
+	 */
+	ExternalTextResource datetimeLibrary();
+
+	/**
+	 * Contains text representation of CHART.JS adapter code.<br>
+	 * There is a specific adapter for the different date-time libraries.
+	 * 
+	 * @return chart.js date adapter code
+	 */
+	TextResource datetimeAdapter();
 
 }

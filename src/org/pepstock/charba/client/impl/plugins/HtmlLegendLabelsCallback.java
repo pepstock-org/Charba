@@ -30,6 +30,21 @@ import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.elements.Span;
+import org.pepstock.charba.client.dom.elements.Table;
+import org.pepstock.charba.client.dom.elements.TableCell;
+import org.pepstock.charba.client.dom.elements.TableRow;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
+import org.pepstock.charba.client.dom.enums.Display;
+import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
+import org.pepstock.charba.client.dom.enums.TextDecoration;
+import org.pepstock.charba.client.dom.enums.Unit;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
+import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
@@ -38,24 +53,6 @@ import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.Context2d.Repetition;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.dom.client.SpanElement;
-import com.google.gwt.dom.client.Style.BorderStyle;
-import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.TextDecoration;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.dom.client.TableCellElement;
-import com.google.gwt.dom.client.TableElement;
-import com.google.gwt.dom.client.TableRowElement;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 /**
  * Legend callback implementation to override the standard HTML format of CHART.JS legend.<br>
@@ -82,41 +79,12 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
  */
 final class HtmlLegendLabelsCallback implements LegendCallback {
 
-	/**
-	 * Template interface to create CSS value of gradient, to use for <code>background-size</code> CSS property.<br>
-	 * The template is: <br>
-	 * <code>
-	 * [width]px [height]px
-	 * </code> <br>
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	interface BackgroundSizeCssTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a CSS value for <code>background-size</code> CSS property.
-		 * 
-		 * @param width width of background size
-		 * @param height height of background size
-		 * @return the CSS value of background sizef
-		 */
-		@Template("{0}px {1}px")
-		SafeHtml css(int width, int height);
-	}
-
-	// instance of template
-	private static final BackgroundSizeCssTemplate BACKGROUND_SIZE_TEMPLATE = GWT.create(BackgroundSizeCssTemplate.class);
 	// internal comparator to sort legend item by own index
 	private static final Comparator<LegendLabelItem> COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o1.getDatasetIndex(), o2.getDatasetIndex()) + Double.compare(o1.getIndex(), o2.getIndex());
 	// internal comparator to sort legend item by reverse own index
 	private static final Comparator<LegendLabelItem> REVERSE_COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o2.getDatasetIndex(), o1.getDatasetIndex()) + Double.compare(o2.getIndex(), o1.getIndex());
 	// default radius value
 	private static final double DEFAULT_RADIUS = Defaults.get().getGlobal().getElements().getPoint().getRadius();
-	// CSS style property for horizontal alignment
-	private static final String STYLE_ALIGN = "align";
-	// CSS style property for horizontal alignment
-	private static final String STYLE_DIRECTION = "direction";
 
 	/*
 	 * (non-Javadoc)
@@ -127,35 +95,32 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	public SafeHtml generateLegend(IsChart chart) {
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
-		// create safe html builder
-		SafeHtmlBuilder builder = new SafeHtmlBuilder();
 		// creates a HTML element
 		// as container of result
 		// needed to get innerHTML property
-		SpanElement container = Document.get().createSpanElement();
+		Span container = DOMBuilder.get().createSpanElement();
 		// invokes the creation of legend
 		container.appendChild(buildLegend(chart));
 		// appends to safe html builder the innerHTML
 		// of container
-		builder.appendHtmlConstant(container.getInnerHTML());
 		// returns as safe html
-		return builder.toSafeHtml();
+		return SafeHtmlBuilder.create().appendHtmlConstant(container.getInnerHTML()).toSafeHtml();
 	}
 
 	/**
-	 * Builds the legend for the passed chart using {@link TableElement} as model.
+	 * Builds the legend for the passed chart using {@link Table} as model.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @return the table element instance with the complete legend
 	 */
-	private TableElement buildLegend(IsChart chart) {
+	private Table buildLegend(IsChart chart) {
 		HtmlLegendOptions options = HtmlLegend.get().getPluginOptions().get(chart.getId());
 		// gets max columns for legend
 		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend
 		Legend legend = chart.getOptions().getLegend();
 		// creates table as result
-		final TableElement table = Document.get().createTableElement();
+		final Table table = DOMBuilder.get().createTableElement();
 		// retrieves the list of legend items
 		final List<LegendLabelItem> legendItems = extractLegendItems(chart);
 		// checks if there is any items
@@ -167,15 +132,15 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				Collections.sort(legendItems, COMPARATOR);
 			}
 			// resets padding and spacing
-			table.setCellPadding(0);
-			table.setCellSpacing(0);
+			table.setCellPadding(String.valueOf(0));
+			table.setCellSpacing(String.valueOf(0));
 			// sets horizontal alignment
-			table.setAttribute(STYLE_ALIGN, legend.getAlign().getHorizontalAlignmentValue());
+			table.setAlign(legend.getAlign().getHorizontalAlignmentValue());
 			// sets index to check when to have more lines
 			int index = 0;
 			// instance of current row
 			// where adds new columns for each legend
-			TableRowElement current = null;
+			TableRow current = null;
 			// gets html legend item wrapper
 			final HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);
 			// scans all legend items
@@ -184,7 +149,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// checking max legend items per row
 				if (index % maxColumns == 0) {
 					// new row
-					TableRowElement newRow = Document.get().createTRElement();
+					TableRow newRow = DOMBuilder.get().createTableRowElement();
 					// appends to table
 					table.appendChild(newRow);
 					// sets the current one
@@ -255,30 +220,30 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the color of dataset.
+	 * Builds a {@link TableCell} which should contains and represents the color of dataset.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param legendId element id for {@link TableCellElement}
+	 * @param legendId element id for {@link TableCell}
 	 * @param htmlLegendItem legend item to show into color cell element
-	 * @return a {@link TableCellElement} which should contains and represents the color of dataset
+	 * @return a {@link TableCell} which should contains and represents the color of dataset
 	 */
-	private TableCellElement buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
+	private TableCell buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// result color cell
-		final TableCellElement colorCell = Document.get().createTDElement();
+		final TableCell colorCell = DOMBuilder.get().createTableCellElement();
 		// gets legend and legend labels instances
 		Legend legend = chart.getOptions().getLegend();
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		colorCell.setId(legendId.getIdForColor());
-		colorCell.setVAlign(HasVerticalAlignment.ALIGN_TOP.getVerticalAlignString());
-		colorCell.getStyle().setMarginRight(legendLabels.getPadding() / 2D, Unit.PX);
-		colorCell.getStyle().setMarginBottom(legendLabels.getPadding(), Unit.PX);
+		colorCell.setVAlign(TextBaseline.TOP.value());
+		colorCell.getStyle().setMarginRight(Unit.PX.format(legendLabels.getPadding() / 2D));
+		colorCell.getStyle().setMarginBottom(Unit.PX.format(legendLabels.getPadding()));
 		colorCell.getStyle().setDisplay(Display.BLOCK);
 		// creates inner HTML element
 		// where to apply the color
-		DivElement color = Document.get().createDivElement();
+		Div color = DOMBuilder.get().createDivElement();
 		colorCell.appendChild(color);
 		// calculates the border width to remove to size of color
 		// because the size of border will be added to element
@@ -288,8 +253,8 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		int height = legendLabels.getFontSize() - borderWidthToRemove;
 		// styling the cell with mandatory values
 		color.getStyle().setDisplay(Display.BLOCK);
-		color.getStyle().setWidth(width, Unit.PX);
-		color.getStyle().setHeight(height, Unit.PX);
+		color.getStyle().setWidth(Unit.PX.format(width));
+		color.getStyle().setHeight(Unit.PX.format(height));
 		// checks if must apply point style
 		if (!legendLabels.isUsePointStyle()) {
 			// applies the background color
@@ -309,37 +274,37 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the label of dataset.
+	 * Builds a {@link TableCell} which should contains and represents the label of dataset.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param legendId element id for {@link TableCellElement}
+	 * @param legendId element id for {@link TableCell}
 	 * @param item legend item to show into color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
-	 * @return a {@link TableCellElement} which should contains and represents the label of dataset
+	 * @return a {@link TableCell} which should contains and represents the label of dataset
 	 */
-	private TableCellElement buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, HtmlLegendTextCallback callback) {
+	private TableCell buildLabelCell(IsChart chart, HtmlLegendId legendId, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result label cell
-		final TableCellElement labelCell = Document.get().createTDElement();
+		final TableCell labelCell = DOMBuilder.get().createTableCellElement();
 		// gets legend and legend labels instances
 		Legend legend = chart.getOptions().getLegend();
 		LegendLabels legendLabels = legend.getLabels();
 		// styling the cell
 		labelCell.setId(legendId.getIdForLabel());
-		labelCell.setVAlign(HasVerticalAlignment.ALIGN_MIDDLE.getVerticalAlignString());
-		labelCell.getStyle().setPaddingRight(legendLabels.getPadding(), Unit.PX);
-		labelCell.getStyle().setPaddingBottom(legendLabels.getPadding(), Unit.PX);
+		labelCell.setVAlign(TextBaseline.MIDDLE.value());
+		labelCell.getStyle().setPaddingRight(Unit.PX.format(legendLabels.getPadding()));
+		labelCell.getStyle().setPaddingBottom(Unit.PX.format(legendLabels.getPadding()));
 		// creates inner HTML element
 		// where to apply the label
-		DivElement label = createLabelText(chart, item, callback);
+		Div label = createLabelText(chart, item, callback);
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
-		label.getStyle().setProperty(Utilities.CSS_FONT_PROPERTY, Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
+		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
 		label.getStyle().setColor(legendLabels.getFontColor().toRGBA());
 		// checks text direction
 		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
-			label.getStyle().setProperty(STYLE_DIRECTION, TextDirection.RIGHT_TO_LEFT.value());
+			label.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());
 		} else {
-			label.getStyle().setProperty(STYLE_DIRECTION, TextDirection.LEFT_TO_RIGHT.value());
+			label.getStyle().setDirection(TextDirection.LEFT_TO_RIGHT.value());
 		}
 		// checks if item is hidden
 		if (item.isHidden()) {
@@ -350,18 +315,16 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Builds a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
-	 * label to apply.
+	 * Builds a {@link TableCell} which should contains and represents the label of dataset, setting the text of the label to apply.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param item legend item to show into color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
-	 * @return a {@link TableCellElement} which should contains and represents the label of dataset, setting the text of the
-	 *         label to apply
+	 * @return a {@link TableCell} which should contains and represents the label of dataset, setting the text of the label to apply
 	 */
-	private DivElement createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
+	private Div createLabelText(IsChart chart, LegendLabelItem item, HtmlLegendTextCallback callback) {
 		// result text label cell
-		final DivElement element = Document.get().createDivElement();
+		final Div element = DOMBuilder.get().createDivElement();
 		// gets text of legend item
 		String text = item.getText();
 		// checks if the text of legend item is consistent
@@ -390,7 +353,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param text normalized text to apply
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	private void managePlainText(IsChart chart, LegendLabelItem item, DivElement element, String text, HtmlLegendTextCallback callback) {
+	private void managePlainText(IsChart chart, LegendLabelItem item, Div element, String text, HtmlLegendTextCallback callback) {
 		// checks if the text contains a carriage return
 		if (text.contains(Constants.LINE_SEPARATOR)) {
 			// splits the text
@@ -400,11 +363,11 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// if elements has got more than 0 children
 				// means that a text node has been already added
 				// then BR element will be added
-				if (element.getChildCount() > 0) {
-					element.appendChild(Document.get().createBRElement());
+				if (element.hasChildNodes()) {
+					element.appendChild(DOMBuilder.get().createLineBreakElement());
 				}
 				// adds the split text as text element
-				element.appendChild(Document.get().createTextNode(singleText));
+				element.appendChild(DOMBuilder.get().createTextNode(singleText));
 			}
 		} else if (callback != null) {
 			// if here there is a callback to invoke
@@ -437,20 +400,20 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
 	 */
-	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, DivElement color, int width, int height) {
+	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, Div color, int width, int height) {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// checks if point style is an image
 		if (item.isPointStyleAsImage()) {
 			// gets point style image
-			ImageElement image = item.getPointStyleAsImage();
+			Img image = item.getPointStyleAsImage();
 			// if here, apply the point style as image
 			String imageAsCss = Utilities.toCSSBackgroundProperty(image);
 			// applies the point style as background to color element
-			color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, imageAsCss);
+			color.getStyle().setBackground(imageAsCss);
 			// sets the image size to color element
-			color.getStyle().setWidth(image.getWidth(), Unit.PX);
-			color.getStyle().setHeight(image.getHeight(), Unit.PX);
+			color.getStyle().setWidth(Unit.PX.format(image.getWidth()));
+			color.getStyle().setHeight(Unit.PX.format(image.getHeight()));
 		} else {
 			// calculated size which is ALWAYS a square for point styles
 			int size = Math.min(width, height);
@@ -483,10 +446,10 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// transforms pattern into CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, Repetition.NO_REPEAT);
 				// applies the point style as background to color element
-				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
+				color.getStyle().setBackground(patternAsCss);
 				// sets the size to color element
-				color.getStyle().setWidth(size, Unit.PX);
-				color.getStyle().setHeight(size, Unit.PX);
+				color.getStyle().setWidth(Unit.PX.format(size));
+				color.getStyle().setHeight(Unit.PX.format(size));
 			} else {
 				// if here, inconsistent point style representation
 				// applies the background color
@@ -496,13 +459,11 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	}
 
 	/**
-	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
-	 * found.
+	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 * 
 	 * @param chart chart instance
 	 * @param item legend item to use as dataset locator
-	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not
-	 *         found.
+	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 */
 	private DatasetViewItem lookForDatasetMetaItem(IsChart chart, LegendItem item) {
 		// prepares the meta item instance
@@ -545,7 +506,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
 	 */
-	private void applyBackgroundColor(IsChart chart, LegendLabelItem item, DivElement color, int width, int height) {
+	private void applyBackgroundColor(IsChart chart, LegendLabelItem item, Div color, int width, int height) {
 		// checks if fill color has been set
 		if (item.isFillStyleAsColor()) {
 			// if here, apply the fill color as background color
@@ -562,7 +523,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			if (pattern != null) {
 				// transforms pattern into CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height);
-				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_PROPERTY, patternAsCss);
+				color.getStyle().setBackground(patternAsCss);
 			} else {
 				// if here, apply the fill color as background color
 				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
@@ -580,11 +541,11 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// reference to CCS gradient
 				String gradientAsCss = Utilities.toCSSBackgroundProperty(gradient);
 				// sets gradient as image
-				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_IMAGE_PROPERTY, gradientAsCss);
+				color.getStyle().setBackgroundImage(gradientAsCss);
 				// gets background size
-				String size = BACKGROUND_SIZE_TEMPLATE.css(width, height).asString();
+				String size = Unit.PX.format(width) + Constants.BLANK + Unit.PX.format(height);
 				// sets background size property
-				color.getStyle().setProperty(Utilities.CSS_BACKGROUND_SIZE_PROPERTY, size);
+				color.getStyle().setBackgroundSize(size);
 			} else {
 				// if here, apply the fill color as background color
 				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
@@ -599,11 +560,11 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param color TD element where to apply the border style
 	 * @return <code>true</code> if the border has been applied and than color is missing
 	 */
-	private boolean applyBorderWidth(LegendLabelItem item, TableCellElement color) {
+	private boolean applyBorderWidth(LegendLabelItem item, TableCell color) {
 		// gets a correct border width
 		int borderWidth = Math.max(0, item.getLineWidth());
 		// applies the border
-		color.getStyle().setBorderWidth(borderWidth, Unit.PX);
+		color.getStyle().setBorderWidth(Unit.PX.format(borderWidth));
 		// checks if a border must be applied
 		// having a border width more then 0
 		if (borderWidth > 0) {
@@ -633,7 +594,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param width width to use to apply border color
 	 * @param height height to use to apply border color
 	 */
-	private void applyBorderColor(IsChart chart, LegendLabelItem item, TableCellElement color, int width, int height) {
+	private void applyBorderColor(IsChart chart, LegendLabelItem item, TableCell color, int width, int height) {
 		// checks if there is stroke color
 		// to apply to the border
 		if (item.isStrokeStyleAsColor()) {
@@ -650,10 +611,10 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			if (pattern != null) {
 				// transforms pattern into CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height) + " 1";
-				color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, patternAsCss);
+				color.getStyle().setBorderImage(patternAsCss);
 			} else {
 				// if here, remove border
-				color.getStyle().setBorderWidth(0D, Unit.PX);
+				color.getStyle().setBorderWidth(Unit.PX.format(0));
 			}
 		} else if (item.isStrokeStyleAsCanvasGradient()) {
 			// gets the gradient by legend item
@@ -668,10 +629,10 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 				// reference to CCS gradient
 				String gradientAsCss = Utilities.toCSSBackgroundProperty(gradient) + " 1";
 				// sets border imaged property
-				color.getStyle().setProperty(Utilities.CSS_BORDER_IMAGE_PROPERTY, gradientAsCss);
+				color.getStyle().setBorderImage(gradientAsCss);
 			} else {
 				// if here, remove border
-				color.getStyle().setBorderWidth(0D, Unit.PX);
+				color.getStyle().setBorderWidth(Unit.PX.format(0));
 			}
 		}
 	}

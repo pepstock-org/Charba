@@ -194,28 +194,23 @@ public final class ArrayObject extends Array {
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
-	 *         element
+	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
 	native int lastIndexOf(Object value);
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
-	 * the element.
+	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
-	 *         the element
+	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
 	native int indexOf(Object value);
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not
-	 * included).<br>
+	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>
@@ -224,8 +219,8 @@ public final class ArrayObject extends Array {
 	 *            If begin is greater than the length of the sequence, an empty array is returned.
 	 * @param end Zero-based index before which to end extraction. <code>slice</code> extracts up to but not including end.<br>
 	 *            A negative index can be used, indicating an offset from the end of the sequence.<br>
-	 *            If end is omitted, slice extracts through the end of the sequence (array.length()). If end is greater than the
-	 *            length of the sequence, <code>slice</code> extracts through to the end of the sequence (array.length()).
+	 *            If end is omitted, slice extracts through the end of the sequence (array.length()). If end is greater than the length of the sequence, <code>slice</code> extracts
+	 *            through to the end of the sequence (array.length()).
 	 * @return A new array containing the extracted elements.
 	 */
 	native ArrayObject slice(int start, int end);
@@ -251,9 +246,8 @@ public final class ArrayObject extends Array {
 	 *            If negative, will begin that many elements from the end of the array (with origin -1) and <br>
 	 *            will be set to 0 if absolute value is greater than the length of the array.
 	 * @param deleteCounts indicating the number of old array elements to remove.<br>
-	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater
-	 *            than the number of elements left in the array, starting at start), then all of the elements from start through
-	 *            the end of the array will be deleted.<br>
+	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *            starting at start), then all of the elements from start through the end of the array will be deleted.<br>
 	 *            If deleteCount is 0 or negative, no elements are removed.
 	 * @return an array containing the deleted elements.<br>
 	 *         If only one element is removed, an array of one element is returned.<br>
@@ -269,12 +263,10 @@ public final class ArrayObject extends Array {
 	 *            If negative, will begin that many elements from the end of the array (with origin -1) and <br>
 	 *            will be set to 0 if absolute value is greater than the length of the array.
 	 * @param deleteCounts indicating the number of old array elements to remove.<br>
-	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater
-	 *            than the number of elements left in the array, starting at start), then all of the elements from start through
-	 *            the end of the array will be deleted.<br>
+	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *            starting at start), then all of the elements from start through the end of the array will be deleted.<br>
 	 *            If deleteCount is 0 or negative, no elements are removed.
-	 * @param item the element to add to the array, beginning at the start index. If you don't specify any elements, will only
-	 *            remove elements from the array.
+	 * @param item the element to add to the array, beginning at the start index. If you don't specify any elements, will only remove elements from the array.
 	 * @return an array containing the deleted elements.<br>
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
@@ -290,8 +282,8 @@ public final class ArrayObject extends Array {
 	}
 
 	/**
-	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one
-	 * from their indices). Returns the element that was removed from the array.
+	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was
+	 * removed from the array.
 	 * 
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
@@ -302,8 +294,8 @@ public final class ArrayObject extends Array {
 	}
 
 	/**
-	 * Inserts the specified element at the specified position in this array. Shifts the element currently at that position (if
-	 * any) and any subsequent elements to the right (adds one to their indices).
+	 * Inserts the specified element at the specified position in this array. Shifts the element currently at that position (if any) and any subsequent elements to the right (adds
+	 * one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
 	 * @param item element to be inserted
@@ -316,9 +308,8 @@ public final class ArrayObject extends Array {
 	/**
 	 * Gets the value at a given index.
 	 * 
-	 * If no value exists at the given index, a type-conversion error will occur in Development Mode and unpredictable behavior
-	 * may occur in Production Mode. If the numeric value returned is non-integral, it will cause a warning in Development Mode,
-	 * and may affect the results of mathematical expressions.
+	 * If no value exists at the given index, a type-conversion error will occur in Development Mode and unpredictable behavior may occur in Production Mode. If the numeric value
+	 * returned is non-integral, it will cause a warning in Development Mode, and may affect the results of mathematical expressions.
 	 *
 	 * @param index the index to be retrieved
 	 * @return the value at the given index
@@ -354,8 +345,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Sets the value value at a given index.
 	 * 
-	 * If the index is out of bounds, the value will still be set. The array's length will be updated to encompass the bounds
-	 * implied by the added value.
+	 * If the index is out of bounds, the value will still be set. The array's length will be updated to encompass the bounds implied by the added value.
 	 * 
 	 * @param index the index to be set
 	 * @param item the value to be stored

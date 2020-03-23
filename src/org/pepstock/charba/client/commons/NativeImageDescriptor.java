@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeImageDescriptor extends NativeAbstractDescriptor {
+final class NativeImageDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -36,7 +36,7 @@ public final class NativeImageDescriptor extends NativeAbstractDescriptor {
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
-	native void setValue(ImageElement value);
+	native void setValue(Img value);
 
 	/**
 	 * Gets the value associated with the property.
@@ -44,6 +44,6 @@ public final class NativeImageDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native ImageElement getValue();
+	native Img getValue();
 
 }

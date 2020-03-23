@@ -46,7 +46,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return date-time LUXON java script library code in asynchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
 		ExternalTextResource datetimeLibrary();
 
 		/**
@@ -54,7 +54,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for LUXON in synchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
 		TextResource datetimeAdapter();
 
 	}
@@ -74,10 +74,10 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractDeferredResources#getClientBundle()
+	 * @see org.pepstock.charba.client.gwt.AbstractDeferredResources#getDeferredAdapterResources()
 	 */
 	@Override
-	protected DeferredDateAdapterResources getClientBundle() {
+	protected DeferredDateAdapterResources getDeferredAdapterResources() {
 		return LuxonDeferredResourcesClientBundle.INSTANCE;
 	}
 

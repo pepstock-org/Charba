@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * This is a shape which can draw an image on the tile.<br>
@@ -50,32 +46,14 @@ public final class ImageShape extends AbstractShape {
 	 */
 	public static final String IMAGE_SHAPE_NAME = "image";
 	// image to draw on the tile
-	private final ImageElement imageElement;
+	private final Img imageElement;
 
 	/**
 	 * Creates a shape with an image.
 	 * 
 	 * @param image image to draw on tile
 	 */
-	public ImageShape(ImageResource image) {
-		this(Utilities.toImageElement(image));
-	}
-
-	/**
-	 * Creates a shape with an image.
-	 * 
-	 * @param image image to draw on tile
-	 */
-	public ImageShape(Image image) {
-		this(Utilities.toImageElement(image));
-	}
-
-	/**
-	 * Creates a shape with an image.
-	 * 
-	 * @param image image to draw on tile
-	 */
-	public ImageShape(ImageElement image) {
+	public ImageShape(Img image) {
 		super(IMAGE_SHAPE_NAME);
 		// checks if image is not consistent
 		if (image != null) {
@@ -93,11 +71,10 @@ public final class ImageShape extends AbstractShape {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// 1 pox of margin for all dimensions
 		final double realSize = size - 2D;
 		// draws a scaled image

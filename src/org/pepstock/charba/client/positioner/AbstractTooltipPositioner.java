@@ -18,8 +18,7 @@ package org.pepstock.charba.client.positioner;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
- * Abstract class which implements a positioner. It helps to create a custom positioner, creating a custom tooltip position
- * using the name as string passed as argument.
+ * Abstract class which implements a positioner. It helps to create a custom positioner, creating a custom tooltip position using the name as string passed as argument.
  * 
  * @author Andrea "Stock" Stocchero
  *

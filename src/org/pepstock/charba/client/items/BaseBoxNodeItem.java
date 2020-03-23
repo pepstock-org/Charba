@@ -120,7 +120,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
 	 */
 	public final Position getPosition() {
-		return getValue(Property.POSITION, Position.class, Position.TOP);
+		return getValue(Property.POSITION, Position.values(), Position.TOP);
 	}
 
 	/**

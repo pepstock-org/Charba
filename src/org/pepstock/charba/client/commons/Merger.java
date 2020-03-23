@@ -31,8 +31,7 @@ import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * Singleton utility to merge java script object into another one and provide the service to get the chart options with all
- * defaults.
+ * Singleton utility to merge java script object into another one and provide the service to get the chart options with all defaults.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -93,8 +92,7 @@ public final class Merger {
 	}
 
 	/**
-	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
-	 * options (by chart.defaults.global) and chart options.<br>
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global) and chart options.<br>
 	 * The chain of priority is:<br>
 	 * <ul>
 	 * <li>chart options
@@ -124,8 +122,7 @@ public final class Merger {
 	}
 
 	/**
-	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
-	 * options (by chart.defaults.global).<br>
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global).<br>
 	 * The chain of priority is:<br>
 	 * <ul>
 	 * <li>chart default options (by chart.defaults[type])
@@ -147,8 +144,7 @@ public final class Merger {
 	}
 
 	/**
-	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
-	 * options (by chart.defaults.global).<br>
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global).<br>
 	 * The chain of priority is:<br>
 	 * <ul>
 	 * <li>chart default options (by chart.defaults[type])
@@ -164,6 +160,7 @@ public final class Merger {
 		Type.checkIfValid(type);
 		// gets chart.defaults[type]
 		ChartOptions base = Defaults.get().getOptions(type);
+
 		// gets chart.defaults.scale
 		Scale scale = Defaults.get().getScale();
 		// gets chart.defaults.global
@@ -278,8 +275,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
-	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -295,8 +292,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
-	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -312,8 +309,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
-	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -329,8 +326,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
-	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -346,8 +343,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
-	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -379,8 +376,7 @@ public final class Merger {
 	}
 
 	/**
-	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an
-	 * {@link IllegalArgumentException}.
+	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an {@link IllegalArgumentException}.
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source Object to merge into <code>target</code>.

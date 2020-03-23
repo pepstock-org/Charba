@@ -17,51 +17,21 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.MomentModule;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * Client bundle to reference MOMENT as date time library (synchronous mode).
+ * Java script resources container to reference MOMENT as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class EmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
-	 * Client bundle to reference MOMENT as date time library.<br>
-	 * It defines the MOMENT date time library and its CHART.JS adapter.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface EmbeddedResourcesClientBundle extends EmbeddedDateAdapterResources {
-
-		/**
-		 * Static reference to resources java script source code.
-		 */
-		static final EmbeddedResourcesClientBundle INSTANCE = GWT.create(EmbeddedResourcesClientBundle.class);
-
-		/**
-		 * Contains text representation of CHART.JS adapter code form MOMENT.
-		 * 
-		 * @return chart.js date adapter code for MOMENT in synchronous mode
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
-		TextResource datetimeAdapter();
-
-		/**
-		 * Contains text representation of date-time MOMENT java script library code.
-		 * 
-		 * @return date-time MOMENT java script library code in synchronous mode
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
-		TextResource datetimeLibrary();
-
-	}
-
-	/**
 	 * Static reference to MOMENT resources.
 	 */
 	public static final EmbeddedResources INSTANCE = new EmbeddedResources();
+	// date adapter java script wrapper
+	private final MomentAdapterResource dateAdapter = new MomentAdapterResource();
+	// date library java script wrapper
+	private final MomentLibraryResource dateLibrary = new MomentLibraryResource();
 
 	/**
 	 * To avoid any instantiation
@@ -73,11 +43,21 @@ public final class EmbeddedResources extends AbstractEmbeddedResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractEmbeddedResources#getClientBundle()
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeLibrary()
 	 */
 	@Override
-	protected EmbeddedDateAdapterResources getClientBundle() {
-		return EmbeddedResourcesClientBundle.INSTANCE;
+	public AbstractInjectableResource datetimeLibrary() {
+		return dateLibrary;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeAdapter()
+	 */
+	@Override
+	public AbstractInjectableResource datetimeAdapter() {
+		return dateAdapter;
 	}
 
 }

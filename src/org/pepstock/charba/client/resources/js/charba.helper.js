@@ -14,6 +14,15 @@
 	    limitations under the License.
 	*/
 	/*
+		This object is used to get a proxy instance which is able to call a 
+		java script function passing also "this" java script value, to maintain 
+		the environment when required.
+	*/
+	var CharbaCallbackProxy = {
+  		callback: null,
+  		proxy: null
+	}	
+	/*
 		JSHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA, because 
 		JSINTEROP is not able to address all javascript model.   
@@ -27,13 +36,6 @@
     */
     CharbaJsHelper.typeOf = function(obj) {
     	return typeof obj;
-    }
-   /*
-	 Returns an undefined.
-	 @return undefined
-    */
-    CharbaJsHelper.undefined = function() {
-    	return undefined;
     }
    /*
 	 Removes a property from a java script object.
@@ -65,55 +67,6 @@
 	    return Array.isArray(obj[key]);
     }    
     /*
-	 Returns a property of java script object as string.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return string value
-    */
-    CharbaJsHelper.propertyAsString = function(obj, key) {
-    	return obj[key];
-    }
-    /*
-	 Returns a property of java script object as double.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return double value
-    */
-    CharbaJsHelper.propertyAsDouble = function(obj, key) {
-    	return obj[key];
-    }
-    /*
-	 Returns a property of java script object as integer.
-	  
-	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
-	 @return integer value
-    */
-    CharbaJsHelper.propertyAsInt = function(obj, key) {
-    	return obj[key];
-    }  
-    /*
-	 Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
-	 and gaps which describe the pattern.
-	 
-	 @param context context of canvas
-	 @param values array of values that specify alternating lengths of lines and gaps which describe the pattern
-    */
-    CharbaJsHelper.setLineDash = function(context, values) {
-    	context.setLineDash(values);
-    }
-    /*
-	 Sets the line dash offset, or "phase."
-	 
-	 @param context context of canvas
-	 @param offset the line dash offset, or "phase."
-    */
-    CharbaJsHelper.setLineDashOffset = function(context, offset) {
-    	context.lineDashOffset = offset;
-    }
-    /*
 	 Creates new proxy for callback which will pass "this" environment of java script as first argument of callback
 	 method.
 	  
@@ -125,7 +78,7 @@
     		CALLBACK: contains user callback implementation which must be called
     		PROXY: contains a function which can call CALLBACk passing "this" 
     	 */
-    	var obj = new Object();
+    	var obj = Object.create(CharbaCallbackProxy);
 		// CALLBACK
     	obj.callback = null;
     	// PROXY
@@ -150,6 +103,24 @@
 		};
     	return obj;
     }
+        /*
+	 Returns true if the object is a CanvasPattern.
+	  
+	 @param obj the object to check
+	 @return true if the object is a CanvasPattern
+    */
+    CharbaJsHelper.isCanvasPattern = function(obj) {
+   		return obj instanceof CanvasPattern;
+    } 
+    /*
+	 Returns true if the object is a CanvasGradient.
+	  
+	 @param obj the object to check
+	 @return true if the object is a CanvasGradient
+    */
+    CharbaJsHelper.isCanvasGradient = function(obj) {
+   		return obj instanceof CanvasGradient;
+    } 
     /*
 		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
@@ -263,23 +234,6 @@
 		}
     }
     /*
-	 Returns an array of strings with element attributes.
-	  
-	 @param element DOM element to scan
-	 @return an array of strings with element attributes
-    */
-    CharbaJsWindowHelper.elementAttributes = function(element) {
-    	var result = new Array();
-    	// First, let's verify that the paragraph has some attributes    
-     	if (element.hasAttributes()) {
-           var attrs = element.attributes;
-	       for(var i = 0; i < attrs.length; i++) {
-	          result[i] = attrs[i].name + "='" + attrs[i].value +"'";
-	       }
-	    }
-    	return result;
-    }  
-    /*
 		JSPositionerHelper is an object with a set of static methods used as utility
 		and needed to add custom positioner on tooltips.   
 	*/
@@ -380,31 +334,6 @@
     	}
     }
     /*
-		JsHtmlLegendBuilderHelpers is an object with a set of static methods used as utility
-		and needed when HtmlLegendBuilder plugin has been activated.   
-	*/
-    function CharbaJsHtmlLegendBuilderHelper() {}
-    /*
-	 Adds event listener to a DOM element.
-	  
-	 @param event event name to add
-	 @param element DOM element to scan
-	 @param proxy charba callback proxy
-    */
-    CharbaJsHtmlLegendBuilderHelper.addEventListener = function(event, element, proxy) {
-    	element.addEventListener(event, proxy, false);
-    } 
-    /*
-	 Removes event listener to a DOM element.
-	  
-	 @param event event name to remove
-	 @param element DOM element to scan
-	 @param proxy charba callback proxy
-    */
-    CharbaJsHtmlLegendBuilderHelper.removeEventListener = function(event, element, proxy) {
-    	element.removeEventListener(event, proxy);
-    }
-    /*
 		JsZoomHelpers is an object with a set of static methods used as utility
 		and needed when ZOOM plugin has been activated.   
 	*/
@@ -428,21 +357,21 @@
 	 Returns true if the property into native object is a CanvasPattern.
 	  
 	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
+	 @param key the string name of the property to be defined or modified.
 	 @return true if the property into native object is a CanvasPattern
     */
     CharbaJsItemsHelper.isCanvasPattern = function(obj, key) {
-    	return obj[key] instanceof CanvasPattern;
+		return obj[key] instanceof CanvasPattern;
     } 
     /*
 	 Returns true if the property into native object is a CanvasGradient.
 	  
 	 @param obj the object on which to define the property.
-	 @param key the string name of the property to be defined or modified..
+	 @param key the string name of the property to be defined or modified.
 	 @return true if the property into native object is a CanvasGradient
     */
     CharbaJsItemsHelper.isCanvasGradient = function(obj, key) {
-    	return obj[key] instanceof CanvasGradient;
+   		return obj[key] instanceof CanvasGradient;
     } 
     /*
 	 Returns a chart native event from CHART.JS event.
@@ -454,3 +383,17 @@
     CharbaJsItemsHelper.nativeEvent = function(obj, key) {
     	return obj[key];
     }
+    
+    /*
+		JsDateAdapterHelper is an object to create a CHART.JS date adapter  
+	*/
+    function CharbaJsDateAdapterHelper() {} 
+    /*
+	 Returns a date adapter instance.
+	  
+	 @param options options to configure date adapter.
+	 @return a date adapter instance
+    */
+    CharbaJsDateAdapterHelper.create = function(options) {
+		return new Chart._adapters._date(options);
+    } 

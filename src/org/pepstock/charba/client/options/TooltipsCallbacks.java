@@ -21,8 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 
 /**
  * Contains all callbacks defined for a tooltips.<br>
- * Is empty because this is only the container of all properties related to callbacks which must be defined into chart
- * configuration.
+ * Is empty because this is only the container of all properties related to callbacks which must be defined into chart configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -30,8 +29,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 public final class TooltipsCallbacks extends AbstractModel<Tooltips, IsDefaultTooltips> {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param tooltips tooltips of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

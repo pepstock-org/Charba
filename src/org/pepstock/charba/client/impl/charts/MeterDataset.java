@@ -27,16 +27,13 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
- * a specific dataset.<br>
+ * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * The minimum value of data is 0 (see {@link MeterDataset#MINIMUM_VALUE}).<br>
- * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty
- * one.<br>
+ * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty one.<br>
  * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method.
  * 
  * 
@@ -82,38 +79,6 @@ public class MeterDataset extends Dataset {
 	private double value = MINIMUM_VALUE;
 
 	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
-		HOVER_BORDER_WIDTH("hoverBorderWidth");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
 	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
 	 * 
 	 * @param max maximum value of dataset.
@@ -147,11 +112,11 @@ public class MeterDataset extends Dataset {
 		// sets default dataset values
 		// removing borders
 		setArrayValue(Dataset.Property.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
-		setArrayValue(Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Dataset.Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
 		// sets the color of datasets.
 		setArrayValue(Dataset.Property.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disable hover back ground color
-		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
+		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 	}
 
 	/**
@@ -174,7 +139,7 @@ public class MeterDataset extends Dataset {
 		ArrayString array = ArrayString.fromOrEmpty(valueToSet, getEmptyColorAsString());
 		// stores value
 		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
-		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, array);
 	}
 
 	/**
@@ -217,7 +182,7 @@ public class MeterDataset extends Dataset {
 		ArrayString array = ArrayString.fromOrEmpty(getColorAsString(), valueToSet);
 		// stores value
 		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
-		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, array);
 	}
 
 	/**
@@ -319,7 +284,7 @@ public class MeterDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
 		// do nothing
 	}
 
@@ -329,7 +294,7 @@ public class MeterDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
 		// do nothing
 	}
 }

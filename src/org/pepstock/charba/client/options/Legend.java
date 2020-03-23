@@ -72,8 +72,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -184,7 +183,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return position of the legend.
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
 
 	/**
@@ -204,7 +203,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return alignment of the legend.
 	 */
 	public LegendAlign getAlign() {
-		return getValue(Property.ALIGN, LegendAlign.class, getDefaultValues().getAlign());
+		return getValue(Property.ALIGN, LegendAlign.values(), getDefaultValues().getAlign());
 	}
 
 }

@@ -22,18 +22,18 @@ package org.pepstock.charba.client.impl.plugins;
  */
 final class SelectionTrack {
 
-	private final int starting;
+	private final double starting;
 
-	private int start = Integer.MIN_VALUE;
+	private double start = Double.NaN;
 
-	private int end = Integer.MIN_VALUE;
+	private double end = Double.NaN;
 
 	/**
 	 * Creates the object storing the original X point of mouse down.
 	 * 
 	 * @param starting the original X point of mouse down.
 	 */
-	SelectionTrack(int starting) {
+	SelectionTrack(double starting) {
 		this.starting = starting;
 		// sets as start point as well
 		this.start = starting;
@@ -44,7 +44,7 @@ final class SelectionTrack {
 	 * 
 	 * @return the starting
 	 */
-	int getStarting() {
+	double getStarting() {
 		return starting;
 	}
 
@@ -53,7 +53,7 @@ final class SelectionTrack {
 	 * 
 	 * @return the new starting point
 	 */
-	int getStart() {
+	double getStart() {
 		return start;
 	}
 
@@ -62,7 +62,7 @@ final class SelectionTrack {
 	 * 
 	 * @return the end
 	 */
-	int getEnd() {
+	double getEnd() {
 		return end;
 	}
 
@@ -71,7 +71,7 @@ final class SelectionTrack {
 	 * 
 	 * @param position new X point position of mouse.
 	 */
-	void setCurrent(int position) {
+	void setCurrent(double position) {
 		// if new position is less of starting point
 		if (position < starting) {
 			// sets accordingly start and end
@@ -92,7 +92,7 @@ final class SelectionTrack {
 	 * @return <code>true</code> if start and end positions are consistent and that means an area has been selected
 	 */
 	boolean isValid() {
-		return start != Integer.MIN_VALUE && end != Integer.MIN_VALUE;
+		return !Double.isNaN(start) && !Double.isNaN(end);
 	}
 
 	/*

@@ -41,8 +41,7 @@ public final class Threshold implements IsThreshold {
 	private IsColor color = DEFAULT_VALUE_COLOR;
 
 	/**
-	 * Creates a threshold with standard color ({@link Threshold#DEFAULT_VALUE_COLOR}) and value
-	 * ({@link java.lang.Double#MAX_VALUE}).
+	 * Creates a threshold with standard color ({@link Threshold#DEFAULT_VALUE_COLOR}) and value ({@link java.lang.Double#MAX_VALUE}).
 	 * 
 	 * @param name name of threshold
 	 */

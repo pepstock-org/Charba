@@ -32,11 +32,9 @@ public interface IsDefaultTextDirectioner {
 	boolean isRtl();
 
 	/**
-	 * Returns the text direction that will force on the canvas for rendering the object, regardless of the CSS specified on the
-	 * canvas.
+	 * Returns the text direction that will force on the canvas for rendering the object, regardless of the CSS specified on the canvas.
 	 * 
-	 * @return the text direction that will force on the canvas for rendering the object, regardless of the CSS specified on the
-	 *         canvas
+	 * @return the text direction that will force on the canvas for rendering the object, regardless of the CSS specified on the canvas
 	 */
 	TextDirection getTextDirection();
 }

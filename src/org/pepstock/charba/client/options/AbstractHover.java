@@ -60,8 +60,7 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -103,14 +102,13 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	 * @return which elements appear in the tooltip.
 	 */
 	public final InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.class, getDefaultMode());
+		return getValue(Property.MODE, InteractionMode.values(), getDefaultMode());
 	}
 
 	/**
 	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the
-	 *            chart.
+	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public final void setIntersect(boolean intersect) {
 		setValue(Property.INTERSECT, intersect);

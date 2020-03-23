@@ -37,8 +37,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
  * The third dimension is represented by the size of the individual bubbles.
  * 
@@ -149,15 +148,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// gets value calling callback
-		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// gets value calling callback
-		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// gets value calling callback
-		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(context)));
 	}
 
 	/*
@@ -202,11 +201,11 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		if (getPointStyleCallback() == null) {
 			// returns the array
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.class, array);
+			return ArrayListHelper.list(PointStyle.values(), array);
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayEnumList<>(PointStyle.class);
+		return new ArrayEnumList<>(PointStyle.values());
 	}
 
 	/**

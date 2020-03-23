@@ -45,8 +45,7 @@ public class DisplayFormats extends AxisContainer {
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick
-	 * marks.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
 	 * 
 	 * @param unit time unit.
 	 * @return display format

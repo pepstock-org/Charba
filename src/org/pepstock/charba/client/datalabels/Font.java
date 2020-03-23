@@ -139,7 +139,7 @@ public final class Font extends AbstractElement {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getStyle() {
-		return getValue(Property.STYLE, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -175,7 +175,7 @@ public final class Font extends AbstractElement {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	public Weight getWeight() {
-		return getValue(Property.WEIGHT, Weight.class, defaultsOptions.getWeight());
+		return getValue(Property.WEIGHT, Weight.values(), defaultsOptions.getWeight());
 	}
 
 	/**

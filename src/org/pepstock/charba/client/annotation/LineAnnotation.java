@@ -161,11 +161,9 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		// stores value
@@ -173,11 +171,9 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	@Override
 	public List<Integer> getBorderDash() {
@@ -226,7 +222,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public LineMode getMode() {
-		return getValue(Property.MODE, LineMode.class, IsDefaultsLineAnnotation.super.getMode());
+		return getValue(Property.MODE, LineMode.values(), IsDefaultsLineAnnotation.super.getMode());
 	}
 
 	/**

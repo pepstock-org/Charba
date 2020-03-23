@@ -45,8 +45,7 @@ final class LiningDatasetFiller extends Filler {
 	private FillCallback fillCallback = null;
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where FILL property must be managed
 	 * @param defaultValue default value of FILL to use when the property does not exist
@@ -57,7 +56,7 @@ final class LiningDatasetFiller extends Filler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(context));
+		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(context)));
 	}
 
 	/*

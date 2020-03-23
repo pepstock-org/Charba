@@ -20,8 +20,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The radar chart allows a number of properties to be specified for each dataset. These are used to set display properties for
- * a specific dataset.
+ * The radar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -29,8 +29,8 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 /**
  * Internal plugin, set by data object before a chart is initializing.<br>
  * This plugin is added to the chart ONLY if the dataset is configured to have patterns and gradients.<br>
- * This is mandatory because gradients and pattern must be created using the canvas and its context of chart, therefore must be
- * set ONLY when the dimension of chart/canvas are available.
+ * This is mandatory because gradients and pattern must be created using the canvas and its context of chart, therefore must be set ONLY when the dimension of chart/canvas are
+ * available.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -193,8 +193,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.items.SizeItem)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
 	public void onResize(IsChart chart, SizeItem size) {

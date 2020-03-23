@@ -71,8 +71,7 @@ public final class Fonter extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a fonter with the native object where FONTs properties must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a fonter with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where FONTs properties must be managed
 	 * @param model model which contains the fonter.
@@ -131,7 +130,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultValues.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultValues.getFontStyle());
 	}
 
 	/**

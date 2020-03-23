@@ -190,19 +190,16 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found
-	 *            x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public void setXAxisID(String xAxisID) {
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 * axis.
+	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 *         axis.
+	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID() {
 		return getValue(Property.X_AXIS_ID, defaultsOptions.getXAxisID());
@@ -245,8 +242,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
@@ -255,13 +251,14 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.list(getBorderDashAsJavaScriptObject());
+		// gets array instance
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -280,26 +277,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultsOptions.getBorderDashOffset());
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines.
-	 */
-	ArrayInteger getBorderDashAsJavaScriptObject() {
-		// creates array instance
-		ArrayInteger array = null;
-		// checks if there is the property set
-		if (has(Property.BORDER_DASH)) {
-			// returns array
-			array = getArrayValue(Property.BORDER_DASH);
-		} else {
-			// returns default
-			array = defaultsOptions.getBorderDash();
-		}
-		return array;
 	}
 
 	/**

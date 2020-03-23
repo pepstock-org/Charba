@@ -15,48 +15,52 @@
 */
 package org.pepstock.charba.client.events;
 
-import com.google.gwt.event.shared.EventHandler;
-
 /**
  * Event which is fired when new event handler has been added to the chart.<br>
  * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AddHandlerEvent extends AbstractHandlerEvent<AddHandlerEventHandler> {
+public final class AddHandlerEvent extends AbstractHandlerEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AddHandlerEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(AddHandlerEvent.class);
 
 	/**
 	 * Creates the event with the type of new handler.
 	 * 
 	 * @param handlerType the type of new handler.
 	 */
-	public AddHandlerEvent(Type<? extends EventHandler> handlerType) {
+	public AddHandlerEvent(EventType handlerType) {
 		super(handlerType);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 * @see org.pepstock.charba.client.commons.events.Event#getAssociatedType()
 	 */
 	@Override
-	public Type<AddHandlerEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+	 * @see org.pepstock.charba.client.commons.events.Event#dispatch(org.pepstock.charba.client.commons.events.EventHandler)
 	 */
 	@Override
-	protected void dispatch(AddHandlerEventHandler handler) {
-		handler.onAdd(this);
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof AddHandlerEventHandler) {
+			// casts handler
+			AddHandlerEventHandler myHandler = (AddHandlerEventHandler) handler;
+			// invokes
+			myHandler.onAdd(this);
+		}
 	}
 
 }

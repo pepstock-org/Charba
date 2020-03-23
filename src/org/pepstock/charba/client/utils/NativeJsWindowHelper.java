@@ -15,17 +15,13 @@
 */
 package org.pepstock.charba.client.utils;
 
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
-
-import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects.
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -40,17 +36,9 @@ final class NativeJsWindowHelper {
 	}
 
 	/**
-	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
-	 * to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
-	 * hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
+	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts to need to resize. However, the resize won't happen
+	 * automatically. To support resizing charts when printing, one needs to hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
 	 */
 	static native void enableResizeOnBeforePrint();
 
-	/**
-	 * Returns an array of strings with element attributes.
-	 * 
-	 * @param element DOM element to scan
-	 * @return an array of strings with element attributes
-	 */
-	static native ArrayString elementAttributes(Element element);
 }

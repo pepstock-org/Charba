@@ -25,8 +25,7 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as
- * default of the chart one, if exist.
+ * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as default of the chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -72,7 +71,7 @@ final class ChartPointerDefaultsOptions extends AbstractPluginOptions {
 		if (has(ChartPointerOptions.Property.ELEMENTS)) {
 			// reads the property
 			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-			return ArrayListHelper.list(PointerElement.class, array);
+			return ArrayListHelper.list(PointerElement.values(), array);
 		}
 		// if here, there is not any property
 		// defaults is all elements

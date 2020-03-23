@@ -25,14 +25,14 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.items.DatasetItem;
 
 import jsinterop.annotations.JsFunction;
 
 /**
- * Manages the custom tooltip positioner. With a custom positioner you can decide where the tooltip can appear returning the
- * point in the canvas.
+ * Manages the custom tooltip positioner. With a custom positioner you can decide where the tooltip can appear returning the point in the canvas.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -63,7 +63,7 @@ public final class Positioner {
 		 * @param eventPoint point on the canvas where the event occurred.
 		 * @return point to show the tooltip
 		 */
-		Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint);
+		NativeObject call(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint);
 	}
 
 	// ---------------------------
@@ -149,8 +149,7 @@ public final class Positioner {
 
 	/**
 	 * Unregister the tooltips positioner to CHART.JS.<br>
-	 * Pay attention that when a tooltip positioner is unregistered, if any charts, which still have the tooltip position of the
-	 * positioner, will fail.
+	 * Pay attention that when a tooltip positioner is unregistered, if any charts, which still have the tooltip position of the positioner, will fail.
 	 * 
 	 * @param position custom tooltip position instance
 	 */
@@ -172,9 +171,13 @@ public final class Positioner {
 	 * @param eventPoint point on the canvas where the event occurred.
 	 * @return point to show the tooltip
 	 */
-	private Point onToolipPosition(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
+	private NativeObject onToolipPosition(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint) {
+		// creates the context
+		PositionerContext internalContext = new PositionerContext(context);
+		// creates the point
+		Point internalPoint = new Point(eventPoint);
 		// gets chart instance
-		IsChart chart = context.getChart();
+		IsChart chart = internalContext.getChart();
 		// checks if the chart is consistent
 		if (IsChart.isValid(chart)) {
 			// gets the tooltip position requested
@@ -187,10 +190,10 @@ public final class Positioner {
 				// list of dataset items
 				List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
 				// and invokes it
-				Point result = positioner.computePosition(chart, items, eventPoint);
+				Point result = positioner.computePosition(chart, items, internalPoint);
 				// checks if the result is consistent
 				if (result != null) {
-					return result;
+					return result.nativeObject();
 				}
 			}
 		}
@@ -199,8 +202,8 @@ public final class Positioner {
 		// then gets the default tooltip position
 		IsTooltipPosition defaultValue = Defaults.get().getGlobal().getTooltips().getPosition();
 		// invokes the positioner of the default one getting the point
-		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
+		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, internalContext, datasetItems, internalPoint);
 		// if the result is ok, return it otherwise returns the point of event
-		return defaultPoint != null ? defaultPoint : eventPoint;
+		return defaultPoint != null ? defaultPoint.nativeObject() : eventPoint;
 	}
 }

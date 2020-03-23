@@ -44,8 +44,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	private static final Map<Integer, AbstractPluginCachedOptions> OPTIONS = new HashMap<>();
 
 	/**
-	 * Adds itself as charts life cycle listener to manage the cache of plugin options, in order to clean the instances when the
-	 * charts will be destroy.
+	 * Adds itself as charts life cycle listener to manage the cache of plugin options, in order to clean the instances when the charts will be destroy.
 	 * 
 	 * @param pluginId plugin id
 	 */
@@ -56,8 +55,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	}
 
 	/**
-	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin options
-	 * can contain callbacks and references to be maintained.
+	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin options can contain callbacks and references to be maintained.
 	 * 
 	 * @param options plugin options to be stored
 	 */
@@ -221,8 +219,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	}
 
 	/**
-	 * Unregisters existing plugin options at global or chart type level to avoid to have in cache unused options, created only
-	 * reading the existing options.<br>
+	 * Unregisters existing plugin options at global or chart type level to avoid to have in cache unused options, created only reading the existing options.<br>
 	 * This is what happens with DATALABELS plugin which add ALWAYS a default options into global options.
 	 * 
 	 * @param scope scope of the options

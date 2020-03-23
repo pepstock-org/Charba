@@ -18,8 +18,7 @@ package org.pepstock.charba.client.annotation.callbacks;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
-
-import com.google.gwt.dom.client.NativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once mouseover is fired.
@@ -36,6 +35,6 @@ public interface MouseOverCallback {
 	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
-	void onMouseOver(IsChart chart, NativeEvent event, AbstractAnnotation annotation);
+	void onMouseOver(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
 
 }

@@ -17,47 +17,69 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * The callback or handler context, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native
- * chart.
+ * The callback or handler context wrapper, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-final class Context {
+final class Context extends NativeObjectContainer {
 
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of native object.
 	 */
-	private Context() {
+	private enum Property implements Key
+	{
+		CHART_INSTANCE("chartInstance");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
-	 * Returns the <code>chart</code> property by native object.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return the <code>chart</code> property by native object.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty(name = "chartInstance")
-	native Chart getNativeChart();
+	Context(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
 	 * @return the CHARBA chart instance
 	 */
-	@JsOverlay
 	IsChart getChart() {
+		// gets native chart
+		Chart nativeChart = getNativeChart(Property.CHART_INSTANCE);
 		// checks if native chart is present
-		if (getNativeChart() != null) {
+		if (nativeChart != null) {
 			// returns is chart instance
-			return getNativeChart().getChart();
+			return nativeChart.getChart();
 		}
 		// if here, the native chart is not consistent
 		return null;

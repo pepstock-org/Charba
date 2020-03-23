@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -26,26 +28,17 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientType;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.FontStyle;
-
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.Context2d.Repetition;
-import com.google.gwt.canvas.dom.client.FillStrokeStyle;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.regexp.shared.RegExp;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Sets of methods used as common utilities.
@@ -56,7 +49,7 @@ import com.google.gwt.user.client.ui.Image;
 public final class Utilities {
 
 	/**
-	 * Template interface to create CSS value of gradient, to use for <code>background-image</code> CSS property.<br>
+	 * Template to create CSS value of gradient, to use for <code>background-image</code> CSS property.<br>
 	 * The template for a {@link GradientType#LINEAR} is: <br>
 	 * <code>
 	 * linear-gradient(direction, color-stop1, color-stop2, ...)
@@ -67,98 +60,31 @@ public final class Utilities {
 	 * </code> <br>
 	 * See the following links how CSS gradient has been created:<br>
 	 * <ul>
-	 * <li>{@link GradientType#LINEAR}: <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient</a><br>
-	 * <li>{@link GradientType#RADIAL}: <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</a><br>
+	 * <li>{@link GradientType#LINEAR}:
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient</a><br>
+	 * <li>{@link GradientType#RADIAL}:
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</a><br>
 	 * </ul>
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	interface GradientCssTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a CSS value for gradient.
-		 * 
-		 * @param type type of gradient.
-		 * @param orientation the orientation of gradient
-		 * @param colors list of colors (comma separated) as string.
-		 * @return the CSS value of gradient
-		 */
-		@Template("{0}({1},{2})")
-		SafeHtml css(String type, String orientation, StringBuilder colors);
-	}
+	private static final String GRADIENT_TEMPLATE = "{0}({1},{2})";
 
 	/**
-	 * Template interface to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
+	 * Template to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
 	 * The template for a pattern is: <br>
 	 * <code>
 	 * url(image-url) repetition
 	 * </code> <br>
 	 * See the following link how CSS pattern has been created:<br>
 	 * <br>
-	 * <a href=
-	 * "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a>
-	 * <br>
+	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a> <br>
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	interface PatternCssTemplate extends SafeHtmlTemplates {
-
-		/**
-		 * Uses the declared template to create a CSS value for pattern.
-		 * 
-		 * @param imageSrc URI designating the source of pattern image.
-		 * @param repetition how background images are repeated.<br>
-		 *            A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
-		 * @return the CSS value of pattern
-		 */
-		@Template("url({0}) {1}")
-		SafeHtml css(String imageSrc, String repetition);
-	}
-
-	/**
-	 * Constant for CSS property for font.
-	 */
-	public static final String CSS_FONT_PROPERTY = "font";
-
-	/**
-	 * Constant for CSS property for {@link Pattern}.
-	 */
-	public static final String CSS_BACKGROUND_PROPERTY = "background";
-
-	/**
-	 * Constant for CSS property for {@link Pattern} for border.
-	 */
-	public static final String CSS_BORDER_PROPERTY = "border";
-
-	/**
-	 * Constant for CSS property for {@link Gradient}.
-	 */
-	public static final String CSS_BACKGROUND_IMAGE_PROPERTY = "backgroundImage";
-
-	/**
-	 * Constant for CSS property for {@link Gradient}.
-	 */
-	public static final String CSS_BACKGROUND_SIZE_PROPERTY = "backgroundSize";
-
-	/**
-	 * Constant for CSS property for {@link Gradient}, for border.
-	 */
-	public static final String CSS_BORDER_IMAGE_PROPERTY = "borderImage";
-
-	/**
-	 * Constant for CSS property for {@link IsColor}.
-	 */
-	public static final String CSS_BACKGROUND_COLOR_PROPERTY = "backgroundColor";
-
-	/**
-	 * Constant for CSS property for {@link IsColor}, for border.
-	 */
-	public static final String CSS_BORDER_COLOR_PROPERTY = "borderColor";
-
+	private static final String PATTERN_TEMPLATE = "url({0}) {1}";
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
@@ -169,20 +95,8 @@ public final class Utilities {
 	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{2\\}";
 	// string format of font family
 	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{3\\}";
-	// regex instance for font style
-	private static final RegExp REGEXP_FONT_STYLE = RegExp.compile(REGEXP_FONT_STYLE_PATTERN);
-	// regex instance for font style
-	private static final RegExp REGEXP_FONT_WEIGHT = RegExp.compile(REGEXP_FONT_WEIGHT_PATTERN);
-	// regex instance for font style
-	private static final RegExp REGEXP_FONT_SIZE = RegExp.compile(REGEXP_FONT_SIZE_PATTERN);
-	// regex instance for font style
-	private static final RegExp REGEXP_FONT_FAMILY = RegExp.compile(REGEXP_FONT_FAMILY_PATTERN);
 	// canvas element to draw
-	private static final CanvasElement WORKING_CANVAS = Canvas.isSupported() ? Document.get().createCanvasElement() : null;
-	// instance of template
-	private static final PatternCssTemplate PATTERN_TEMPLATE = GWT.create(PatternCssTemplate.class);
-	// instance of template
-	private static final GradientCssTemplate GRADIENT_TEMPLATE = GWT.create(GradientCssTemplate.class);
+	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
 	// internal comparator to sort colors by own offset
 	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
 	// internal comparator to sort colors by own offset, descendant
@@ -226,7 +140,7 @@ public final class Utilities {
 		// checks if font family is consistent
 		final String fontFamily = family == null ? Defaults.get().getGlobal().getFontFamily() : family;
 		// by regex changes the value of format
-		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_WEIGHT.replace(REGEXP_FONT_STYLE.replace(result, fontStyle.value()), fontWeight.value()), String.valueOf(size)), fontFamily);
+		return result.replaceAll(REGEXP_FONT_STYLE_PATTERN, fontStyle.value()).replaceAll(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value()).replaceAll(REGEXP_FONT_SIZE_PATTERN, String.valueOf(size)).replaceAll(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
 	}
 
 	/**
@@ -265,19 +179,19 @@ public final class Utilities {
 		// checks if pattern argument is consistent
 		if (pattern != null) {
 			// gets image and canvas instance
-			ImageElement image = pattern.getImage();
-			CanvasPattern canvasPattern = pattern.getCanvasPattern();
+			Img image = pattern.getImage();
+			CanvasPatternItem canvasPattern = pattern.getCanvasPattern();
 			// checks if pattern has been created by image
 			if (image != null) {
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(pattern.getImage().getSrc(), pattern.getRepetition().getValue()).asString();
+				return applyTemplate(PATTERN_TEMPLATE, pattern.getImage().getSrc(), pattern.getRepetition().value());
 			} else if (canvasPattern != null) {
 				// sets a consistent width
 				int widthToUse = Math.max(width, pattern.getWidth());
 				// sets a consistent height
 				int heightToUse = Math.max(height, pattern.getHeight());
 				// using the template, returns the CSS value of pattern
-				return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(canvasPattern, widthToUse, heightToUse), Context2d.Repetition.REPEAT.getValue()).asString();
+				return applyTemplate(PATTERN_TEMPLATE, getImageURLFromCanvasPattern(canvasPattern, widthToUse, heightToUse), Repetition.REPEAT.value());
 			}
 		}
 		// if here pattern is not consistent
@@ -307,44 +221,12 @@ public final class Utilities {
 		if (dataUrl != null && dataUrl.trim().length() > 0) {
 			// checks the value of repetition
 			// if not consistent is ignored using the default
-			String repetitionToApply = repetition != null ? repetition.getValue() : Constants.EMPTY_STRING;
-			return PATTERN_TEMPLATE.css(dataUrl, repetitionToApply).asString();
+			String repetitionToApply = Key.isValid(repetition) ? repetition.value() : Constants.EMPTY_STRING;
+			return applyTemplate(PATTERN_TEMPLATE, dataUrl, repetitionToApply);
 		}
 		// if here data url is not consistent
 		// returns empty string
 		return Constants.EMPTY_STRING;
-	}
-
-	/**
-	 * Returns a URL CSS property for the current content of a fill or stroke canvas style instance.
-	 * 
-	 * @param style fill or stroke canvas style instance
-	 * @param width width of image applied to canvasPattern
-	 * @param height height of image applied to canvasPattern
-	 * @return a URL CSS property for the current content of the canvas pattern
-	 */
-	public static String toCSSBackgroundProperty(FillStrokeStyle style, int width, int height) {
-		return PATTERN_TEMPLATE.css(getImageURLFromFillStrokeStyle(style, width, height), Constants.EMPTY_STRING).asString();
-	}
-
-	/**
-	 * Returns a URL CSS property for the current content of an image resource instance.
-	 * 
-	 * @param image image resource instance to get as CSS property
-	 * @return a URL CSS property for the current content of the image
-	 */
-	public static String toCSSBackgroundProperty(ImageResource image) {
-		return toCSSBackgroundProperty(toImageElement(image));
-	}
-
-	/**
-	 * Returns a URL CSS property for the current content of an image instance.
-	 * 
-	 * @param image image instance to get as CSS property
-	 * @return a URL CSS property for the current content of the image
-	 */
-	public static String toCSSBackgroundProperty(Image image) {
-		return toCSSBackgroundProperty(toImageElement(image));
 	}
 
 	/**
@@ -353,11 +235,11 @@ public final class Utilities {
 	 * @param image image element instance to fet as CSS property
 	 * @return a URL CSS property for the current content of the image
 	 */
-	public static String toCSSBackgroundProperty(ImageElement image) {
+	public static String toCSSBackgroundProperty(Img image) {
 		// checks if consistent
 		if (image != null) {
 			// transform into CSS property
-			return PATTERN_TEMPLATE.css(image.getSrc(), Constants.EMPTY_STRING).asString();
+			return applyTemplate(PATTERN_TEMPLATE, image.getSrc(), Constants.EMPTY_STRING);
 		}
 		// if here, image not consistent
 		// then returns an empty string
@@ -365,18 +247,18 @@ public final class Utilities {
 	}
 
 	/**
-	 * Returns a data URL for the current content of a fill or stroke canvas style instance.
+	 * Returns a data URL for the current content of a canvas pattern instance.
 	 * 
-	 * @param style fill or stroke canvas style instance
-	 * @param width width of canvas styapplied to canvasPattern
+	 * @param pattern canvas pattern instance
+	 * @param width width of canvas applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 * @return a data URL for the current content of the canvas pattern
 	 */
-	private static String getImageURLFromFillStrokeStyle(FillStrokeStyle style, int width, int height) {
+	private static String getImageURLFromCanvasPattern(CanvasPatternItem pattern, int width, int height) {
 		// checks if argument is consistent
 		// checks if canvas is created
 		// if not returns an empty string
-		if (style == null || WORKING_CANVAS == null) {
+		if (pattern == null || WORKING_CANVAS == null) {
 			// returns empty string
 			return Constants.EMPTY_STRING;
 		}
@@ -384,11 +266,11 @@ public final class Utilities {
 		WORKING_CANVAS.setWidth(width);
 		WORKING_CANVAS.setHeight(height);
 		// gets the context
-		Context2d context = WORKING_CANVAS.getContext2d();
+		Context2dItem context = WORKING_CANVAS.getContext2d();
 		// clears the canvas for new design
 		context.clearRect(0D, 0D, WORKING_CANVAS.getWidth(), WORKING_CANVAS.getHeight());
 		// sets the background color
-		context.setFillStyle(style);
+		context.setFillPattern(pattern);
 		// begins a new path.
 		context.beginPath();
 		// strokes
@@ -396,7 +278,7 @@ public final class Utilities {
 		// closes the path
 		context.closePath();
 		// returns
-		return WORKING_CANVAS.toDataUrl();
+		return WORKING_CANVAS.toDataURL();
 	}
 
 	/**
@@ -443,7 +325,7 @@ public final class Utilities {
 				builder.append(Constants.BLANK).append(percentage).append(Constants.PERCENT);
 			}
 			// using the template, returns the CSS value of gradient
-			return GRADIENT_TEMPLATE.css(type.getCssStatement(), orientation.getCssStatement(), builder).asString();
+			return applyTemplate(GRADIENT_TEMPLATE, type.getCssStatement(), orientation.getCssStatement(), builder);
 		}
 		// if here gradient is not consistent
 		// returns empty string
@@ -451,79 +333,38 @@ public final class Utilities {
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @return a image element or <code>null</code> if argument is not consistent
 	 */
-	public static ImageElement toImageElement(String url) {
+	public static Img toImageElement(String url) {
 		return toImageElement(url, Integer.MIN_VALUE, Integer.MIN_VALUE);
 	}
 
 	/**
-	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's
-	 * commonly used to embed images in HTML and CSS, forcing the size.
+	 * Creates a image element by a data URL which is a URI scheme that provides a way to in-line data in a document, and it's commonly used to embed images in HTML and CSS,
+	 * forcing the size.
 	 * 
 	 * @param url a URI scheme that provides a way to in-line data
 	 * @param width width of image
 	 * @param height height of image
 	 * @return a image element or <code>null</code> if argument is not consistent
 	 */
-	public static ImageElement toImageElement(String url, int width, int height) {
-		return (url != null) ? toImageElement(new Image(url), width, height) : null;
-	}
-
-	/**
-	 * Creates a image element by image resource which provides access to image data at runtime.
-	 * 
-	 * @param image image resource instance
-	 * @return a image element instance or <code>null</code> if argument is not consistent
-	 */
-	public static ImageElement toImageElement(ImageResource image) {
-		return toImageElement(image, Integer.MIN_VALUE, Integer.MIN_VALUE);
-	}
-
-	/**
-	 * Creates a image element by image resource which provides access to image data at runtime, forcing the size.
-	 * 
-	 * @param image image resource instance
-	 * @param width width of image
-	 * @param height height of image
-	 * @return a image element or <code>null</code> if argument is not consistent
-	 */
-	public static ImageElement toImageElement(ImageResource image, int width, int height) {
-		return (image != null) ? toImageElement(new Image(image), width, height) : null;
-	}
-
-	/**
-	 * Creates a image element by image widget that displays the image at a given URL.
-	 * 
-	 * @param image image widget instance
-	 * @return a image element or <code>null</code> if argument is not consistent
-	 */
-	public static ImageElement toImageElement(Image image) {
-		return toImageElement(image, Integer.MIN_VALUE, Integer.MIN_VALUE);
-	}
-
-	/**
-	 * Creates a image element by image widget that displays the image at a given URL, forcing the size.
-	 * 
-	 * @param image image widget instance
-	 * @param width width of image
-	 * @param height height of image
-	 * @return a image element or <code>null</code> if argument is not consistent
-	 */
-	public static ImageElement toImageElement(Image image, int width, int height) {
+	public static Img toImageElement(String url, int width, int height) {
 		// checks if argument is consistent
-		if (image != null) {
+		if (url != null) {
+			Img image = DOMBuilder.get().createImageElement();
+			// set source
+			image.setSrc(url);
 			// checks if size is consistent
 			if (width > 0 && height > 0) {
 				// forces size to image
-				image.setPixelSize(width, height);
+				image.setWidth(width);
+				image.setHeight(height);
 			}
-			// transform into image element
-			return ImageElement.as(image.getElement());
+			// return image element
+			return image;
 		}
 		// returns null
 		return null;
@@ -533,23 +374,17 @@ public final class Utilities {
 	 * Returns the cursor currently set into chart.
 	 * 
 	 * @param chart chart instance
-	 * @return the cursor currently set into chart. Default is {@link Cursor#DEFAULT}.
+	 * @return the cursor currently set into chart. Default is {@link CursorType#DEFAULT}.
 	 */
-	public static Cursor getCursorOfChart(IsChart chart) {
+	public static CursorType getCursorOfChart(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isConsistent(chart)) {
-			// scans all cursors to check if any cursor is already set
-			// needs to scan them because with valueOf there is an exception
 			// if the value does not match any element of enumeration
-			for (Cursor cursor : Cursor.values()) {
-				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
-					// stores the current cursor
-					return cursor;
-				}
-			}
+			// return default
+			return chart.getChartElement().getStyle().getCursorType();
 		}
 		// if here, not found
-		return Cursor.DEFAULT;
+		return CursorType.DEFAULT;
 	}
 
 	/**
@@ -590,6 +425,28 @@ public final class Utilities {
 		}
 		// returns the result
 		return result;
+	}
+
+	/**
+	 * Converts a double into a string setting the decimals places to maintain.
+	 * 
+	 * @param value value to convert. If is {@link Double#NaN}, return {@link Constants#NULL_STRING}
+	 * @param precision decimals places to apply. If less than 0, uses 0
+	 * @return a string which represents the double value
+	 */
+	public static String applyPrecision(double value, int precision) {
+		// checks if the value is consistent
+		if (!Double.isNaN(value)) {
+			// sets the max value because the precision must be greater than 0
+			int checkedPrecision = Math.max(precision, 0);
+			// creates a big decimal with value
+			BigDecimal decimalValue = BigDecimal.valueOf(value);
+			// sets the scale to the precision and returns the string
+			return decimalValue.setScale(checkedPrecision, RoundingMode.DOWN).toPlainString();
+		}
+		// if here the value is not consistent
+		// then returns an empty string
+		return Constants.NULL_STRING;
 	}
 
 }

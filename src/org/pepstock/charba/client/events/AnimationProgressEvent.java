@@ -15,24 +15,20 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the animation of the chart is progressing.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationProgressEvent extends AbstractEvent<AnimationProgressEventHandler> {
+public final class AnimationProgressEvent extends AbstractAnimationEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationProgressEventHandler> TYPE = new Type<>();
-
-	// animation item with animation info from chart
-	private final AnimationItem item;
+	public static final EventType TYPE = EventType.create(AnimationProgressEvent.class);
 
 	/**
 	 * Creates the event with the animation info from chart.
@@ -40,42 +36,24 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationProgressEvent(NativeEvent nativeEvent, AnimationItem item) {
-		super(nativeEvent);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Animation item argument is null");
+	public AnimationProgressEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
+		super(nativeEvent, TYPE, item);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 */
+	@Override
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof AnimationProgressEventHandler) {
+			// casts handler
+			AnimationProgressEventHandler myHandler = (AnimationProgressEventHandler) handler;
+			// invokes
+			myHandler.onProgress(this);
 		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns item with animation info from chart
-	 * 
-	 * @return the item with animation info from chart
-	 */
-	public AnimationItem getItem() {
-		return item;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<AnimationProgressEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(AnimationProgressEventHandler handler) {
-		handler.onProgress(this);
 	}
 
 }

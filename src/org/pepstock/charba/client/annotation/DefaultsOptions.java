@@ -58,12 +58,11 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the draw time which defines when the annotations are drawn
 	 */
 	DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.class, AnnotationOptions.DEFAULT_DRAW_TIME);
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), AnnotationOptions.DEFAULT_DRAW_TIME);
 	}
 
 	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to
-	 * capture both.<br>
+	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
 	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
 	 * 
 	 * @return the double-click speed in milliseconds
@@ -83,7 +82,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 		// if the arrays is consistent...
 		if (array != null && !array.isEmpty()) {
 			// ...then returns as list of events
-			return ArrayListHelper.list(Event.class, array);
+			return ArrayListHelper.list(Event.values(), array);
 		}
 		// ... otherwise returns the default
 		return Collections.emptyList();

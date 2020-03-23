@@ -18,7 +18,10 @@ package org.pepstock.charba.client.commons;
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script object as back-end to store objects (enumeration values).
+ * This implementation uses a java script object as back-end to store objects (enumeration values).<br>
+ * <br>
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,17 +36,17 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
 	 * 
-	 * @param clazz enumeration class with all values of an enumeration
+	 * @param values all values of an enumeration
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
-	ArrayEnumList(Class<E> clazz, ArrayString array) {
+	ArrayEnumList(E[] values, ArrayString array) {
 		// checks class argument if consistent
-		if (clazz == null || !clazz.isEnum()) {
+		if (values == null || values.length == 0) {
 			// if not, exception
-			throw new IllegalArgumentException("Class argument is null or is not an enum");
+			throw new IllegalArgumentException("Values argument is null or empty");
 		}
 		// sets all enumeration values
-		this.definedValues = clazz.getEnumConstants();
+		this.definedValues = values;
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayString();
@@ -54,12 +57,12 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Creates an empty list by a class which is a enum
+	 * Creates an empty list by all values of an enumeration.
 	 * 
-	 * @param clazz enumeration class with all values of an enumeration
+	 * @param values all values of an enumeration
 	 */
-	public ArrayEnumList(Class<E> clazz) {
-		this(clazz, null);
+	public ArrayEnumList(E[] values) {
+		this(values, null);
 	}
 
 	/*
@@ -91,6 +94,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Appends the specified element to the end of this list
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public boolean add(E element) {
 		// checks if element is consistent
@@ -115,6 +119,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E get(int index) {
 		// checks range
@@ -126,9 +131,9 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E set(int index, E element) {
 		// checks element is consistent and in range
@@ -146,9 +151,9 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public void add(int index, E element) {
 		// checks if element is consistent
@@ -159,9 +164,9 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
+	@SuppressWarnings("unusable-by-js")
 	@Override
 	public E remove(int index) {
 		// checks range
@@ -173,8 +178,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -192,8 +196,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {

@@ -30,10 +30,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Custom legend labels callback to change the colors when the a {@link ColorSchemes} plugin has been activated.<br>
- * This callback solved the issue that the legend does not change when colors are applied to the chart which is already
- * instantiated.<br>
- * If the chart has been configured to have a own callback, this implementation will wrap it and invoke it after updating the
- * legend items.
+ * This callback solved the issue that the legend does not change when colors are applied to the chart which is already instantiated.<br>
+ * If the chart has been configured to have a own callback, this implementation will wrap it and invoke it after updating the legend items.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -76,8 +74,7 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.LegendLabelsCallback#generateLegendLabels(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.LegendLabelsCallback#generateLegendLabels(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<LegendLabelItem> generateLegendLabels(IsChart chart, List<LegendLabelItem> defaultLabels) {

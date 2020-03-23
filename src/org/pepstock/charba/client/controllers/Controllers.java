@@ -57,8 +57,7 @@ public final class Controllers {
 	 * Registers a controller as global, to apply to all charts.
 	 * 
 	 * @param controller controller instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the
-	 *         controller type of controller instance.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
 	 */
 	public boolean extend(Controller controller) {
 		// checks the consistency of controller

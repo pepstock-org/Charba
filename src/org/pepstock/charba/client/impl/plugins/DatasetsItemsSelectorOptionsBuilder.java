@@ -17,14 +17,11 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Comfortable object to create {@link DatasetsItemsSelector#ID} plugin options by a builder.
@@ -77,8 +74,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found
-	 *            x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setXAxisID(String xAxisID) {
@@ -109,8 +105,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 * @return builder instance
@@ -280,29 +275,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @param image the clear selection image
 	 * @return builder instance
 	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(ImageResource image) {
-		options.getClearSelection().setImage(image);
-		return this;
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 * @return builder instance
-	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(Image image) {
-		options.getClearSelection().setImage(image);
-		return this;
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 * @return builder instance
-	 */
-	public DatasetsItemsSelectorOptionsBuilder setImage(ImageElement image) {
+	public DatasetsItemsSelectorOptionsBuilder setImage(Img image) {
 		options.getClearSelection().setImage(image);
 		return this;
 	}
@@ -343,8 +316,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise
-	 *            <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setUseSelectionStyle(boolean useSelectionStyle) {

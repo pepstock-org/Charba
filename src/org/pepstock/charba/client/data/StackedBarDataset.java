@@ -19,8 +19,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The stacked bar area chart allows a number of properties to be specified for each dataset. These are used to set display
- * properties for a specific dataset.<br>
+ * The stacked bar area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Extends the bar dataset setting <code>stack</code> property.
  * 
  * @author Andrea "Stock" Stocchero

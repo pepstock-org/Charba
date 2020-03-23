@@ -17,16 +17,14 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.Key;
-
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.shared.EventHandler;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Abstract event which represents a CHART.JS event, which contains a function context, as chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractChartEvent<H extends EventHandler> extends AbstractEvent<H> {
+abstract class AbstractChartEvent extends AbstractEvent {
 
 	// instance of function context
 	private final Chart functionContext;
@@ -37,11 +35,12 @@ abstract class AbstractChartEvent<H extends EventHandler> extends AbstractEvent<
 	 * Creates the event with legend item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param type type of event
 	 * @param functionContext function context provided by CHART.JS
 	 * @param key options key where default function is stored
 	 */
-	protected AbstractChartEvent(NativeEvent nativeEvent, Chart functionContext, Key key) {
-		super(nativeEvent);
+	protected AbstractChartEvent(BaseNativeEvent nativeEvent, EventType type, Chart functionContext, Key key) {
+		super(nativeEvent, type);
 		// checks if arguments are consistent
 		if (functionContext == null) {
 			throw new IllegalArgumentException("Context argument is null");

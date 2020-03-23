@@ -19,8 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 
 /**
- * The textAlign option only applies to multi-line labels and specifies the text alignment being used when drawing the label
- * text.
+ * The textAlign option only applies to multi-line labels and specifies the text alignment being used when drawing the label text.
  * 
  * @author Andrea "Stock" Stocchero
  * 

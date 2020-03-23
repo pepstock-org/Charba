@@ -16,9 +16,8 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.items.UndefinedValues;
-
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
+import org.pepstock.charba.client.utils.RegExp;
+import org.pepstock.charba.client.utils.RegExpResult;
 
 /**
  * Fill object to configure chart to use a relative dataset index.<br>
@@ -36,6 +35,9 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 	public static final String DEFAULT_VALUE = String.valueOf(AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT);
 	// regex string to check the string format, which must be sign and number (both mandatory)
 	private static final String RELATIVE_INDEX_PATTERN = "\\+{1}?\\d+|\\-{1}\\d+";
+	// creates regular expression to check the argument
+	private static final RegExp RELATIVE_INDEX = new RegExp(RELATIVE_INDEX_PATTERN);
+
 	// the name of fill
 	private final String name;
 
@@ -48,10 +50,8 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 		// creates the abstract object passing the filling mode (always relative filling mode
 		// and undefined integer for index as integer (relative ONLY string)
 		super(FillingMode.RELATIVE_DATASET_INDEX, UndefinedValues.INTEGER, index);
-		// creates regular expression to check th argument
-		RegExp regExp = RegExp.compile(RELATIVE_INDEX_PATTERN);
 		// applies the regex
-		MatchResult matcher = regExp.exec(index);
+		RegExpResult matcher = RELATIVE_INDEX.exec(index);
 		// if does not match
 		if (matcher == null) {
 			// exception because is not in right format

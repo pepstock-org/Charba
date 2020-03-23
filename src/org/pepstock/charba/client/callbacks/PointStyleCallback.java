@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Callback interface to set <code>pointStyle</code> property at runtime, using the chart instance and the context.
@@ -27,9 +24,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  * @see PointStyle
- * @see Image
- * @see ImageResource
- * @see ImageElement
+ * @see Img
  */
 public interface PointStyleCallback extends Scriptable<Object> {
 

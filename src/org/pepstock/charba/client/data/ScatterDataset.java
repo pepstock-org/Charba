@@ -23,8 +23,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 
 /**
- * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties
- * for a specific dataset.<br>
+ * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Extends the line dataset to set fixed properties for scatter chart.<br>
  * The scatter dataset can use ONLY data points. If you try to use array of data numbers, an exception will be thrown.
  * 

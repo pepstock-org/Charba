@@ -26,18 +26,15 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 import jsinterop.annotations.JsFunction;
 
@@ -105,8 +102,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_OVERLAP = true;
 
 	/**
-	 * Default to enable showing the real calculated percentages from the values,
-	 * <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
+	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
 	 */
 	public static final boolean DEFAULT_SHOW_ACTUAL_PERCENTAGES = false;
 
@@ -116,8 +112,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_OUTSIDE_PADDING = 2;
 
 	/**
-	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER},
-	 * <b>{@value DEFAULT_TEXT_MARGIN}</b>.
+	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}, <b>{@value DEFAULT_TEXT_MARGIN}</b>.
 	 */
 	public static final int DEFAULT_TEXT_MARGIN = 2;
 
@@ -141,7 +136,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		 * @param item native object as render item.
 		 * @return image or string for rendering.
 		 */
-		Object call(CallbackFunctionContext context, RenderItem item);
+		Object call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	/**
@@ -160,7 +155,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		 * @param item native object as font color item.
 		 * @return string as color representation.
 		 */
-		String call(CallbackFunctionContext context, FontColorItem item);
+		String call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	// ---------------------------
@@ -290,8 +285,8 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(item));
-		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(item));
+		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new RenderItem(item)));
+		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(new FontColorItem(item)));
 	}
 
 	/**
@@ -316,7 +311,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return what data must be showed.
 	 */
 	public Render getRender() {
-		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
 	}
 
 	/**
@@ -424,7 +419,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the font style.
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -586,7 +581,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the position to draw label.
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
 	}
 
 	/**
@@ -608,22 +603,18 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages
-	 * to 100 in total.
+	 * Sets if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional
-	 *            logic to fit the percentages to 100 in total.
+	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	public void setShowActualPercentages(boolean showActualPercentages) {
 		setValue(Property.SHOW_ACTUAL_PERCENTAGES, showActualPercentages);
 	}
 
 	/**
-	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the
-	 * percentages to 100 in total.
+	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total.
+	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	public boolean isShowActualPercentages() {
 		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultsOptions.isShowActualPercentages());
@@ -670,58 +661,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 */
-	public void setImages(ImageResource... images) {
-		// checks if argument is consistent
-		if (images != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[images.length];
-			// scans passed array of images
-			for (int i = 0; i < images.length; i++) {
-				// transform a image resource into image element by image object
-				// creates image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(images[i]);
-			}
-			// stores it
-			setImages(array);
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.IMAGES);
-		}
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 */
-	public void setImages(Image... images) {
-		// checks if argument is consistent
-		if (images != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[images.length];
-			// scans passed array of images
-			for (int i = 0; i < images.length; i++) {
-				// transform a image resource into image element by image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(images[i]);
-			}
-			// stores it
-			setImages(array);
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.IMAGES);
-		}
-	}
-
-	/**
-	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
-	 * 
-	 * @param images images when {@link Render} is {@link Render#IMAGE}.
-	 */
-	public void setImages(ImageElement... images) {
+	public void setImages(Img... images) {
 		// sets property
 		setArrayValue(Property.IMAGES, ArrayImage.fromOrNull(images));
 	}
@@ -731,7 +671,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the images when {@link Render} is {@link Render#IMAGE} or an empty list.
 	 */
-	public List<ImageElement> getImages() {
+	public List<Img> getImages() {
 		// gets array
 		ArrayImage array = getArrayValue(Property.IMAGES);
 		return ArrayListHelper.list(array);
@@ -799,14 +739,14 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	private Object onRenderCallback(RenderItem item) {
 		// gets chart instance
-		IsChart chart = item.getNativeChart().getChart();
+		IsChart chart = item.getChart();
 		// checks if the callback is set
 		if (IsChart.isValid(chart) && renderCallback != null) {
 			// calls callback
 			Object value = renderCallback.invoke(chart, item);
 			// checks result
 			if (value != null) {
-				if (value instanceof ImageElement) {
+				if (value instanceof Img) {
 					return value;
 				} else {
 					return value.toString();
@@ -825,7 +765,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	private String onFontColorCallback(FontColorItem item) {
 		// gets chart instance
-		IsChart chart = item.getNativeChart().getChart();
+		IsChart chart = item.getChart();
 		// checks if the callback is set
 		if (IsChart.isValid(chart) && fontColorCallback != null) {
 			// calls callback

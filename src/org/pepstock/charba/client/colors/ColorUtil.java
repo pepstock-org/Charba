@@ -19,8 +19,7 @@ import org.pepstock.charba.client.commons.Constants;
 
 /**
  * Utility to check alpha value.<br>
- * Internally is checking red, green, blue and alpha values and creates string representation of a color, to HEX, RGB, RGBA, HSL
- * or HSLA strings.
+ * Internally is checking red, green, blue and alpha values and creates string representation of a color, to HEX, RGB, RGBA, HSL or HSLA strings.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -174,8 +173,7 @@ public final class ColorUtil {
 
 	/**
 	 * Convert a RGB Color to it corresponding HSL values.<br>
-	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace
-	 * conversions, RGB-HSL</a>.
+	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>.
 	 * 
 	 * @param red red value
 	 * @param green green value

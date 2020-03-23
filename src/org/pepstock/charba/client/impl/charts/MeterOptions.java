@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
+import org.pepstock.charba.client.callbacks.ValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
@@ -37,9 +38,9 @@ import org.pepstock.charba.client.enums.FontStyle;
 public class MeterOptions extends AbstractPieOptions {
 
 	/**
-	 * Default number format <b>{@value DEFAULT_FORMAT}</b> to apply displaying the value or percentage.
+	 * Default precision <b>{@value DEFAULT_PRECISION}</b> to apply displaying the value or percentage.
 	 */
-	public static final String DEFAULT_FORMAT = "##0";
+	public static final int DEFAULT_PRECISION = 2;
 
 	/**
 	 * Default color of display, <b>rgb(128, 128, 128)</b>
@@ -59,7 +60,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private MeterDisplay display = MeterDisplay.VALUE;
 
-	private String format = DEFAULT_FORMAT;
+	private int precision = DEFAULT_PRECISION;
 
 	private String fontFamily = Defaults.get().getGlobal().getFontFamily();
 
@@ -68,6 +69,8 @@ public class MeterOptions extends AbstractPieOptions {
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
+
+	private ValueCallback valueCallback = null;
 
 	private final LegendWrapper legend;
 
@@ -195,21 +198,21 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Sets the format to apply to display the value.
+	 * Returns the decimal places to apply to display the value.
 	 * 
-	 * @return the format to apply to the value in chart.
+	 * @return the decimal places to apply to the value in chart
 	 */
-	public final String getFormat() {
-		return format;
+	public final int getPrecision() {
+		return precision;
 	}
 
 	/**
-	 * Sets the format to apply to display the value.
+	 * Sets the decimal places to apply to display the value.
 	 * 
-	 * @param format the format to set
+	 * @param precision the decimal places to apply to the value in chart
 	 */
-	public final void setFormat(String format) {
-		this.format = format == null ? DEFAULT_FORMAT : format;
+	public final void setPrecision(int precision) {
+		this.precision = precision;
 	}
 
 	/**
@@ -282,6 +285,24 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
 		this.animatedDisplay = animatedDisplay;
+	}
+
+	/**
+	 * Returns the callback to customize the value string into chart.
+	 * 
+	 * @return the callback to customize the value string into chart
+	 */
+	public final ValueCallback getValueCallback() {
+		return valueCallback;
+	}
+
+	/**
+	 * Sets the callback to customize the value string into chart.
+	 * 
+	 * @param valueCallback the callback to customize the value string into chart
+	 */
+	public final void setValueCallback(ValueCallback valueCallback) {
+		this.valueCallback = valueCallback;
 	}
 
 	/**

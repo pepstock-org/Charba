@@ -17,7 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -38,7 +38,7 @@ public final class ArrayImage extends Array {
 	 * @param items ImageElement items to create new array
 	 * @return new array instance of images.
 	 */
-	private static native ArrayImage of(ImageElement... items);
+	private static native ArrayImage of(Img... items);
 
 	/**
 	 * To avoid any instantiation
@@ -53,7 +53,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrNull(ImageElement... items) {
+	public static ArrayImage fromOrNull(Img... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -70,7 +70,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrEmpty(ImageElement... items) {
+	public static ArrayImage fromOrEmpty(Img... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -87,7 +87,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrNull(List<ImageElement> items) {
+	public static ArrayImage fromOrNull(List<Img> items) {
 		// checks if list is null
 		if (items == null || items.isEmpty()) {
 			return null;
@@ -102,7 +102,7 @@ public final class ArrayImage extends Array {
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// scans all items of list
-		for (ImageElement value : items) {
+		for (Img value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -117,7 +117,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayImage fromOrEmpty(List<ImageElement> items) {
+	public static ArrayImage fromOrEmpty(List<Img> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayImageList) {
 			// casts to array list
@@ -132,7 +132,7 @@ public final class ArrayImage extends Array {
 			return result;
 		}
 		// scans all items of list
-		for (ImageElement value : items) {
+		for (Img value : items) {
 			// adds elements
 			result.push(value);
 		}
@@ -141,28 +141,23 @@ public final class ArrayImage extends Array {
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
-	 *         element
+	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
 	native int lastIndexOf(Object value);
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
-	 * the element.
+	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
-	 *         the element
+	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
 	native int indexOf(Object value);
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not
-	 * included).<br>
+	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>
@@ -171,8 +166,8 @@ public final class ArrayImage extends Array {
 	 *            If begin is greater than the length of the sequence, an empty array is returned.
 	 * @param end Zero-based index before which to end extraction. <code>slice</code> extracts up to but not including end.<br>
 	 *            A negative index can be used, indicating an offset from the end of the sequence.<br>
-	 *            If end is omitted, slice extracts through the end of the sequence (array.length()). If end is greater than the
-	 *            length of the sequence, <code>slice</code> extracts through to the end of the sequence (array.length()).
+	 *            If end is omitted, slice extracts through the end of the sequence (array.length()). If end is greater than the length of the sequence, <code>slice</code> extracts
+	 *            through to the end of the sequence (array.length()).
 	 * @return A new array containing the extracted elements.
 	 */
 	native ArrayImage slice(int start, int end);
@@ -198,9 +193,8 @@ public final class ArrayImage extends Array {
 	 *            If negative, will begin that many elements from the end of the array (with origin -1) and <br>
 	 *            will be set to 0 if absolute value is greater than the length of the array.
 	 * @param deleteCounts indicating the number of old array elements to remove.<br>
-	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater
-	 *            than the number of elements left in the array, starting at start), then all of the elements from start through
-	 *            the end of the array will be deleted.<br>
+	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *            starting at start), then all of the elements from start through the end of the array will be deleted.<br>
 	 *            If deleteCount is 0 or negative, no elements are removed.
 	 * @return an array containing the deleted elements.<br>
 	 *         If only one element is removed, an array of one element is returned.<br>
@@ -216,17 +210,15 @@ public final class ArrayImage extends Array {
 	 *            If negative, will begin that many elements from the end of the array (with origin -1) and <br>
 	 *            will be set to 0 if absolute value is greater than the length of the array.
 	 * @param deleteCounts indicating the number of old array elements to remove.<br>
-	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater
-	 *            than the number of elements left in the array, starting at start), then all of the elements from start through
-	 *            the end of the array will be deleted.<br>
+	 *            If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *            starting at start), then all of the elements from start through the end of the array will be deleted.<br>
 	 *            If deleteCount is 0 or negative, no elements are removed.
-	 * @param item the element to add to the array, beginning at the start index. If you don't specify any elements, will only
-	 *            remove elements from the array.
+	 * @param item the element to add to the array, beginning at the start index. If you don't specify any elements, will only remove elements from the array.
 	 * @return an array containing the deleted elements.<br>
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayImage splice(int start, int deleteCounts, ImageElement item);
+	native ArrayImage splice(int start, int deleteCounts, Img item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
@@ -237,41 +229,40 @@ public final class ArrayImage extends Array {
 	}
 
 	/**
-	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one
-	 * from their indices). Returns the element that was removed from the array.
+	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was
+	 * removed from the array.
 	 * 
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	ImageElement remove(int index) {
+	Img remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
 	/**
-	 * Inserts the specified element at the specified position in this array. Shifts the element currently at that position (if
-	 * any) and any subsequent elements to the right (adds one to their indices).
+	 * Inserts the specified element at the specified position in this array. Shifts the element currently at that position (if any) and any subsequent elements to the right (adds
+	 * one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
 	 * @param item element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, ImageElement item) {
+	void insertAt(int index, Img item) {
 		splice(index, 0, item);
 	}
 
 	/**
 	 * Gets the value at a given index.
 	 * 
-	 * If no value exists at the given index, a type-conversion error will occur in Development Mode and unpredictable behavior
-	 * may occur in Production Mode. If the numeric value returned is non-integral, it will cause a warning in Development Mode,
-	 * and may affect the results of mathematical expressions.
+	 * If no value exists at the given index, a type-conversion error will occur in Development Mode and unpredictable behavior may occur in Production Mode. If the numeric value
+	 * returned is non-integral, it will cause a warning in Development Mode, and may affect the results of mathematical expressions.
 	 *
 	 * @param index the index to be retrieved
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public ImageElement get(int index) {
+	public Img get(int index) {
 		return slice(index, index + 1).pop();
 	}
 
@@ -282,33 +273,32 @@ public final class ArrayImage extends Array {
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(ImageElement item, int start, int end);
+	native void fill(Img item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */
-	native void push(ImageElement item);
+	native void push(Img item);
 
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * 
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native ImageElement pop();
+	native Img pop();
 
 	/**
 	 * Sets the value value at a given index.
 	 * 
-	 * If the index is out of bounds, the value will still be set. The array's length will be updated to encompass the bounds
-	 * implied by the added value.
+	 * If the index is out of bounds, the value will still be set. The array's length will be updated to encompass the bounds implied by the added value.
 	 * 
 	 * @param index the index to be set
 	 * @param item the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, ImageElement item) {
+	void set(int index, Img item) {
 		fill(item, index, index + 1);
 	}
 }

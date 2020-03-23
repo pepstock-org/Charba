@@ -49,9 +49,8 @@ public enum ObjectType
 	 */
 	BOOLEAN,
 	/**
-	 * According to the ECMAScript standard, there is only one number type: the double-precision 64-bit binary format IEEE 754
-	 * value (numbers between -(2^53 -1) and 2^53 -1). There is no specific type for integers. In addition to being able to
-	 * represent floating-point numbers, the number type has three symbolic values: +Infinity, -Infinity, and NaN
+	 * According to the ECMAScript standard, there is only one number type: the double-precision 64-bit binary format IEEE 754 value (numbers between -(2^53 -1) and 2^53 -1). There
+	 * is no specific type for integers. In addition to being able to represent floating-point numbers, the number type has three symbolic values: +Infinity, -Infinity, and NaN
 	 * (not-a-number).
 	 */
 	NUMBER,
@@ -72,8 +71,7 @@ public enum ObjectType
 	 */
 	OBJECT,
 	/**
-	 * Arrays are regular objects for which there is a particular relationship between integer-key-ed properties and the
-	 * 'length' property.
+	 * Arrays are regular objects for which there is a particular relationship between integer-key-ed properties and the 'length' property.
 	 */
 	ARRAY;
 

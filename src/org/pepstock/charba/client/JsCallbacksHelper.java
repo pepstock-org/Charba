@@ -22,16 +22,15 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to invoke CHART.JS callbacks, provided out of the box, the default one.<br>
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to invoke CHART.JS callbacks, provided out of
+ * the box, the default one.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -67,8 +66,7 @@ final class JsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking
-	 * <code>legendCallback</code> function property.
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -79,8 +77,7 @@ final class JsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box,
-	 * invoking <code>generateLabels</code> function property.
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -100,7 +97,7 @@ final class JsCallbacksHelper {
 	 * @param event native event from user interface
 	 * @param item legend item native
 	 */
-	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, NativeEvent event, NativeObject item) {
+	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, BaseNativeEvent event, NativeObject item) {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes legend event callback
@@ -117,7 +114,7 @@ final class JsCallbacksHelper {
 	 * @param event native event from user interface
 	 * @param items array of datasets native objects
 	 */
-	void invokeDefaultChartEvent(ChartOptions options, Key key, Chart context, NativeEvent event, ArrayObject items) {
+	void invokeDefaultChartEvent(ChartOptions options, Key key, Chart context, BaseNativeEvent event, ArrayObject items) {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes chart event callback

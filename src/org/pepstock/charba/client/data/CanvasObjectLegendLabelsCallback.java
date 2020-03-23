@@ -24,10 +24,8 @@ import org.pepstock.charba.client.items.LegendLabelItem;
 
 /**
  * Custom legend labels callback to change the gradients when the a {@link CanvasObjectHandler} plugin has been activated.<br>
- * This callback solved the issue that the legend does not change when gradient are applied to the chart which is already
- * instantiated.<br>
- * If the chart has been configured to have a own callback, this implementation will wrap it and invoke it after updating the
- * legend items.
+ * This callback solved the issue that the legend does not change when gradient are applied to the chart which is already instantiated.<br>
+ * If the chart has been configured to have a own callback, this implementation will wrap it and invoke it after updating the legend items.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -62,8 +60,7 @@ final class CanvasObjectLegendLabelsCallback implements LegendLabelsCallback {
 	/**
 	 * Sets <code>true</code> if the callback must retrieve the gradients from datasets and apply to the legend.
 	 * 
-	 * @param gradientsHandling <code>true</code> if the callback must retrieve the gradients from datasets and apply to the
-	 *            legend
+	 * @param gradientsHandling <code>true</code> if the callback must retrieve the gradients from datasets and apply to the legend
 	 */
 	void setGradientsHandling(boolean gradientsHandling) {
 		this.gradientsHandling = gradientsHandling;
@@ -72,8 +69,7 @@ final class CanvasObjectLegendLabelsCallback implements LegendLabelsCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.LegendLabelsCallback#generateLegendLabels(org.pepstock.charba.client.IsChart,
-	 * java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.LegendLabelsCallback#generateLegendLabels(org.pepstock.charba.client.IsChart, java.util.List)
 	 */
 	@Override
 	public List<LegendLabelItem> generateLegendLabels(IsChart chart, List<LegendLabelItem> defaultLabels) {

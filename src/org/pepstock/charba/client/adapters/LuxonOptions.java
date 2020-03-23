@@ -24,7 +24,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LuxonOptions extends DateAdapterOptions {
+public final class LuxonOptions extends DateAdapterOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -68,11 +68,11 @@ public class LuxonOptions extends DateAdapterOptions {
 	}
 
 	/**
-	 * Creates an empty LUXON adapter options using a native object.
+	 * Creates a LUXON adapter options using a native object.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected LuxonOptions(NativeObject nativeObject) {
+	LuxonOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
@@ -117,27 +117,28 @@ public class LuxonOptions extends DateAdapterOptions {
 	}
 
 	/**
-	 * Sets the time zone that LUXON must use by the date adapter.
+	 * Sets the locale that LUXON must use by the date adapter.<br>
+	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
 	 * 
-	 * @param zone the time zone that LUXON must use by the date adapter
+	 * @param locale the time zone that LUXON must use by the date adapter
 	 */
-	public void setLocale(String zone) {
-		setValue(Property.ZONE, zone);
+	public void setLocale(String locale) {
+		setValue(Property.LOCALE, locale);
 	}
 
 	/**
-	 * Returns the time zone that LUXON must use by the date adapter.
+	 * Returns the locale that LUXON must use by the date adapter.<br>
+	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
 	 * 
-	 * @return the time zone that LUXON must use by the date adapter
+	 * @return the locale that LUXON must use by the date adapter
 	 */
 	public String getLocale() {
-		return getValue(Property.ZONE, UndefinedValues.STRING);
+		return getValue(Property.LOCALE, UndefinedValues.STRING);
 	}
 
 	/**
 	 * Sets the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available.
-	 * output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
@@ -147,8 +148,7 @@ public class LuxonOptions extends DateAdapterOptions {
 
 	/**
 	 * Returns the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available.
-	 * output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */

@@ -33,8 +33,7 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 
 	/**
 	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
 	 * 
 	 * @return the relative thickness of the dataset
 	 */

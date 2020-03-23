@@ -61,8 +61,7 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -111,7 +110,7 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
-		return getValue(Property.AXIS, InteractionAxis.class, getDefaultValues().getAxis());
+		return getValue(Property.AXIS, InteractionAxis.values(), getDefaultValues().getAxis());
 	}
 
 }

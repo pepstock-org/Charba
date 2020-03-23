@@ -16,11 +16,10 @@
 package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.adapters.AbstractModule;
-
-import com.google.gwt.resources.client.ResourcePrototype;
+import org.pepstock.charba.client.commons.JsHelper;
 
 /**
- * Utility to set which kind of resources type must be use to load text resources.<br>
+ * Utility to set which kind of resources type must be use to load injectable resources.<br>
  * This utility MUST be called as first statement before using Charba.
  * 
  * @author Andrea "Stock" Stocchero
@@ -28,16 +27,8 @@ import com.google.gwt.resources.client.ResourcePrototype;
  */
 public final class ResourcesType {
 
-	/**
-	 * Path into the project where the java script resources are stored, <b>{@value}</b>.
-	 */
-	public static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
-	/**
-	 * Path into the project where the images resources are stored, <b>{@value}</b>.
-	 */
-	public static final String IMAGES_RESOURCES_PATH = "org/pepstock/charba/client/resources/images/";
 	// static instance of resources to be loaded
-	private static AbstractResources<ResourcePrototype> resources = null;
+	private static AbstractResources resources = null;
 
 	/**
 	 * To avoid any instantiation
@@ -51,17 +42,15 @@ public final class ResourcesType {
 	 * If the resources type was already set or if is <code>null</code> an exception will be throw.
 	 * 
 	 * @param resources the resources type to use to inject java script code
-	 * @param <T> type of resources to be loaded.
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T extends ResourcePrototype> void setClientBundle(AbstractResources<T> resources) {
+	public static void setClientBundle(AbstractResources resources) {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
 			throw new IllegalArgumentException("Resources type argument is null");
 		}
 		// checks if is extending a correct abstract resource
-		if (resources instanceof AbstractEmbeddedResources || resources instanceof AbstractDeferredResources) {
+		if (resources instanceof IsResourceType) {
 			// checks if the resources type is already set and is different from the argument
 			if (ResourcesType.resources != null) {
 				if (!resources.getClass().equals(ResourcesType.resources.getClass())) {
@@ -75,7 +64,11 @@ public final class ResourcesType {
 				}
 			}
 			// stores the instance
-			ResourcesType.resources = (AbstractResources<ResourcePrototype>) resources;
+			ResourcesType.resources = resources;
+			// to be sure that CHARBA java script object is injected
+			// invoking the JsHelper
+			// PAY ATTENTION: MUST be called before injecting CHART.JS
+			JsHelper.get();
 		} else {
 			// exception
 			throw new IllegalArgumentException("Resources type is not correct. Must extend AbstractEmbeddedResources or AbstractDeferredResources classes");
@@ -88,7 +81,7 @@ public final class ResourcesType {
 	 * 
 	 * @return the resources type to use to inject java script code
 	 */
-	public static AbstractResources<ResourcePrototype> getClientBundle() {
+	public static AbstractResources getClientBundle() {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception

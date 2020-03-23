@@ -40,8 +40,7 @@ public interface Controller {
 	}
 
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its type is valid as well. If not, throw a
-	 * {@link IllegalArgumentException}.
+	 * Checks if key passed as argument is not <code>null</code> and its type is valid as well. If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param controller controller instance to check
 	 */

@@ -21,8 +21,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.
+ * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -112,8 +111,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 
 	/**
 	 * Sets the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
 	 * 
 	 * @param weight the relative thickness of the dataset
 	 */
@@ -123,8 +121,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 
 	/**
 	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
 	 * 
 	 * @return the relative thickness of the dataset
 	 */

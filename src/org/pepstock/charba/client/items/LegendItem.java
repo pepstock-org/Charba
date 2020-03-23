@@ -27,13 +27,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -183,10 +182,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the fill style of the legend box or <code>null</code> if is not a canvas gradient
 	 */
-	public final CanvasGradient getFillStyleAsCanvasGradient() {
+	public final CanvasGradientItem getFillStyleAsCanvasGradient() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasGradient()) {
-			return getValue(Property.FILL_STYLE, (CanvasGradient) null);
+			return getValue(Property.FILL_STYLE, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -197,10 +196,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the fill style of the legend box or <code>null</code> if is not a canvas pattern
 	 */
-	public final CanvasPattern getFillStyleAsCanvasPattern() {
+	public final CanvasPatternItem getFillStyleAsCanvasPattern() {
 		// checks if the fill style has been set as color
 		if (isFillStyleAsCanvasPattern()) {
-			return getValue(Property.FILL_STYLE, (CanvasPattern) null);
+			return getValue(Property.FILL_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -252,10 +251,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
 	 */
-	public final CanvasGradient getStrokeStyleAsCanvasGradient() {
+	public final CanvasGradientItem getStrokeStyleAsCanvasGradient() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasGradient()) {
-			return getValue(Property.STROKE_STYLE, (CanvasGradient) null);
+			return getValue(Property.STROKE_STYLE, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -266,10 +265,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
 	 */
-	public final CanvasPattern getStrokeStyleAsCanvasPattern() {
+	public final CanvasPatternItem getStrokeStyleAsCanvasPattern() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsCanvasPattern()) {
-			return getValue(Property.STROKE_STYLE, (CanvasPattern) null);
+			return getValue(Property.STROKE_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -278,8 +277,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through
-	 *         effect.<br>
+	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
 	 *         Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
@@ -287,21 +285,18 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those
-	 * are: butt, round and square.
+	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @return how the end points of every box border are drawn.
 	 */
 	public final CapStyle getLineCap() {
-		return getValue(Property.LINE_CAP, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
+		return getValue(Property.LINE_CAP, CapStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
-	 * Returns the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 * of lines and gaps which describe the pattern.
+	 * Returns the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 *         of lines and gaps which describe the pattern.
+	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public final List<Integer> getLineDash() {
 		// gets the array from native object
@@ -320,15 +315,14 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end points
+	 * and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public final JoinStyle getLineJoin() {
-		return getValue(Property.LINE_JOIN, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.LINE_JOIN, JoinStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -366,7 +360,7 @@ public class LegendItem extends NativeObjectContainer {
 	public final PointStyle getPointStyle() {
 		// checks if is an point style and not an image
 		if (!isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		} else {
 			// returns the default
 			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
@@ -378,7 +372,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the style (as image) of the legend box
 	 */
-	public final ImageElement getPointStyleAsImage() {
+	public final Img getPointStyleAsImage() {
 		// checks if is an point style and not an image
 		if (isPointStyleAsImage()) {
 			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
@@ -407,8 +401,7 @@ public class LegendItem extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public LegendItem create(NativeObject nativeObject) {

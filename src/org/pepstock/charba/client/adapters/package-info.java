@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to interact with date adapters implemented by CHART.JS to be abstract from date time java script library
- * to use.
+ * Contains all classes to interact with date adapters implemented by CHART.JS to be abstract from date time java script library to use.
  * 
  * @author Andrea "Stock" Stocchero
  *

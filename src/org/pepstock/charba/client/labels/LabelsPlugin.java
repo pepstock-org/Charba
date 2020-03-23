@@ -18,15 +18,11 @@ package org.pepstock.charba.client.labels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * Entry point of <a href="https://github.com/emn178/chartjs-plugin-labels">LABELS plugin</a> with some static utilities to
- * enable it and to get and set options.
+ * Entry point of <a href="https://github.com/emn178/chartjs-plugin-labels">LABELS plugin</a> with some static utilities to enable it and to get and set options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,32 +30,9 @@ import com.google.gwt.resources.client.TextResource;
 public final class LabelsPlugin {
 
 	/**
-	 * Client bundle to reference LABELS CHART.JS plugin, wrapped by Charba.
-	 * 
-	 * @author Andrea "Stock" Stocchero
+	 * Plugin ID <b>"labels"</b>.
 	 */
-	interface LabelsClientBundle extends ClientBundle {
-
-		/**
-		 * Static reference to extensions java script source code
-		 */
-		static final LabelsClientBundle INSTANCE = GWT.create(LabelsClientBundle.class);
-
-		/**
-		 * Contains text representation of native chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels
-		 * plugin</a> code.
-		 * 
-		 * @return chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code. <b>PAY ATTENTION</b>
-		 *         wait for approval of pull request to LABELS plugin
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-labels.min.js")
-		TextResource labelsPlugin();
-	}
-
-	/**
-	 * Plugin ID <b>{@value ID}</b>.
-	 */
-	public static final String ID = "labels";
+	public static final String ID = ResourceName.LABELS_PLUGIN.value();
 
 	/**
 	 * Data labels options factory
@@ -67,6 +40,8 @@ public final class LabelsPlugin {
 	public static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
 	// defaults global options factory
 	static final LabelsDefaultsOptionsFactory DEFAULTS_FACTORY = new LabelsDefaultsOptionsFactory();
+	// injectable resource for plugin
+	private static final LabelsPluginResource RESOURCE = new LabelsPluginResource();
 
 	/**
 	 * To avoid any instantiation
@@ -91,7 +66,7 @@ public final class LabelsPlugin {
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
 		// injects LABELS plugin
-		Injector.ensureInjected(LabelsClientBundle.INSTANCE.labelsPlugin());
+		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 

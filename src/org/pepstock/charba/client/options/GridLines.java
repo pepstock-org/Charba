@@ -82,8 +82,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param scale scale/axis of this object.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -135,11 +134,9 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
-	 *            second to the second grid line and so on.
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
 		setValueOrArray(Property.COLOR, color);
@@ -148,11 +145,9 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
-	 *            second to the second grid line and so on.
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
 		setValueOrArray(Property.COLOR, color);
@@ -161,8 +156,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -178,8 +172,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -199,8 +192,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -260,11 +252,10 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and
-	 * you need to control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when
-	 *            there are multiple axes and you need to control which grid lines are drawn.
+	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which
+	 *            grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		setValue(Property.DRAW_ON_CHART_AREA, drawOnChartArea);
@@ -273,11 +264,10 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and
-	 * you need to control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple
-	 *         axes and you need to control which grid lines are drawn.
+	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are
+	 *         drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getValue(Property.DRAW_ON_CHART_AREA, getDefaultValues().isDrawOnChartArea());
@@ -423,8 +413,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart
-	 * by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
@@ -435,8 +424,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart
-	 * by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */

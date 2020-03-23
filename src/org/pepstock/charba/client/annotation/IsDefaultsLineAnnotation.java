@@ -71,11 +71,9 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	default List<Integer> getBorderDash() {
 		return Collections.emptyList();

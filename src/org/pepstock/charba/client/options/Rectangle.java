@@ -60,8 +60,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param elements parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -116,7 +115,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getBorderSkipped());
 	}
 
 }

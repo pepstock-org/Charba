@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -28,7 +30,22 @@ import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.BaseEventTypes;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.elements.Heading;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.Position;
+import org.pepstock.charba.client.dom.enums.Unit;
+import org.pepstock.charba.client.events.AddHandlerEvent;
+import org.pepstock.charba.client.events.ChartEventHandler;
+import org.pepstock.charba.client.events.EventHandler;
+import org.pepstock.charba.client.events.EventType;
+import org.pepstock.charba.client.events.HandlerManager;
+import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
@@ -36,19 +53,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
-import org.pepstock.charba.client.utils.JSON;
 import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Base class of all charts.<br>
@@ -58,28 +63,33 @@ import com.google.gwt.user.client.ui.SimplePanel;
  *
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<D extends Dataset> extends SimplePanel implements IsChart {
+public abstract class AbstractChart<D extends Dataset> extends HandlerManager implements IsChart, MutationHandler {
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the mouse down function on canvas
+	private final CallbackProxy<EventListenerCallback> canvasCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// PCT standard for width
-	private static final double DEFAULT_PCT_WIDTH = 90D;
+	private static final int DEFAULT_WIDTH = 90;
+	// PCT standard for width
+	private static final int DEFAULT_HEIGHT = 100;
 	// suffix label for canvas element id
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-
 	// chart ID using GWT unique id
-	private final String id = Document.get().createUniqueId();
+	private final String id = DOMBuilder.get().createUniqueId();
 	// stores the type of chart
 	private final Type type;
-	// canvas prevent default handler
-	private final HandlerRegistration preventDisplayHandler;
 	// list of all handle registration when
 	// an handler (for events) has been added to chart
 	// needed for clean up when chart will be destroy
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
-
+	// canvas where Chart.js draws the chart
+	private final Div element;
 	// canvas where Chart.js draws the chart
 	private final Canvas canvas;
 	// CHart configuration object
@@ -89,7 +99,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	// plugins of this chart
 	private final Plugins plugins;
 	// gets if Canvas is supported
-	private final boolean isCanvasSupported = Canvas.isSupported();
+	private final boolean isCanvasSupported = DOMBuilder.get().isCanvasSupported();
 	// merged options of defaults
 	private final ChartOptions options;
 	// merged options as default options
@@ -97,7 +107,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	// cursor defined when chart is created
-	private final Cursor initialCursor;
+	private final CursorType initialCursor;
 
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
@@ -110,34 +120,40 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		Type.checkIfValid(type);
 		// stores type
 		this.type = type;
+		// creates the div element
+		element = DOMBuilder.get().createDivElement();
 		// creates DIV
-		getElement().setId(id);
+		element.setId(id);
 		// sets relative position
-		getElement().getStyle().setPosition(Position.RELATIVE);
+		element.getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		getElement().getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
-		getElement().getStyle().setHeight(100, Unit.PCT);
+		element.getStyle().setWidth(Unit.PCT.format(DEFAULT_WIDTH));
+		element.getStyle().setHeight(Unit.PCT.format(DEFAULT_HEIGHT));
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas
-			canvas = Canvas.createIfSupported();
+			canvas = DOMBuilder.get().createCanvasElement();
 			// set id to canvas
-			canvas.getCanvasElement().setId(id + SUFFIX_CANVAS_ELEMENT_ID);
+			canvas.setId(id + SUFFIX_CANVAS_ELEMENT_ID);
 			// adds to panel
-			add(canvas);
+			element.appendChild(canvas);
+			// -------------------------------
+			// -- SET CALLBACKS to PROXIES ---
+			// -------------------------------
+			// fires the event
+			canvasCallbackProxy.setCallback((context, event) -> event.preventDefault());
 			// adds the listener to disable canvas selection
 			// removes the default behavior
-			preventDisplayHandler = canvas.addMouseDownHandler(MouseDownEvent::preventDefault);
+			canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 		} else {
 			// creates a header element
-			HeadingElement h = Document.get().createHElement(3);
+			Heading h = DOMBuilder.get().createHeadingElement();
 			// to show the error message
 			// because canvas is not supported
-			h.setInnerText(CANVAS_NOT_SUPPORTED_MESSAGE);
-			getElement().appendChild(h);
+			h.setTextContent(CANVAS_NOT_SUPPORTED_MESSAGE);
+			element.appendChild(h);
 			// resets canvas
 			canvas = null;
-			preventDisplayHandler = null;
 		}
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
@@ -153,24 +169,51 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		defaultChartOptions = new DefaultChartOptions(options);
 		// stores initial cursor
 		initialCursor = Utilities.getCursorOfChart(this);
+		// adds chart observer to get on attach and detach
+		ChartObserver.get().addHandler(this);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#createHandlerManager()
+	 * @see org.pepstock.charba.client.commons.events.HandlerManager#getSource()
 	 */
 	@Override
-	protected final HandlerManager createHandlerManager() {
-		return new ChartHandlerManager(this);
+	protected final IsChart getSource() {
+		return this;
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.commons.events.HandlerManager#addHandler(org.pepstock.charba.client.commons.events. EventHandler,
+	 * org.pepstock.charba.client.commons.events.EventType)
 	 */
-	public abstract D newDataset();
+	@Override
+	public final HandlerRegistration addHandler(EventHandler handler, EventType type) {
+		// adds handler
+		HandlerRegistration registration = super.addHandler(handler, type);
+		// if the handler is a chart event handler one
+		if (handler instanceof ChartEventHandler) {
+			// sends the event
+			fireEvent(new AddHandlerEvent(type));
+		}
+		// stores the registration into chart
+		// for cleaning up when chart will be destroy
+		handlerRegistrations.add(registration);
+		// returns registration
+		return registration;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getElement()
+	 */
+	@Override
+	public final Div getChartElement() {
+		return element;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -181,6 +224,13 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final Type getType() {
 		return type;
 	}
+
+	/**
+	 * Creates a new dataset related to chart type.
+	 * 
+	 * @return a new dataset related to chart type.
+	 */
+	public abstract D newDataset();
 
 	/**
 	 * Returns the native object related to CHART.JS implementation.
@@ -225,8 +275,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into
-	 * {@link Charts}.
+	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into {@link Charts}.
 	 * 
 	 * @return the CHART.JS instance, check if the inner one is not consistent yet
 	 */
@@ -259,11 +308,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final void removeCanvasPreventDefault() {
-		// checks if consistent
-		if (preventDisplayHandler != null) {
-			// cleans up the handler for mouse listener
-			preventDisplayHandler.removeHandler();
-		}
+		// cleans up the handler for mouse listener
+		canvas.removeEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 	}
 
 	/**
@@ -272,7 +318,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return the initial cursor of the chart.
 	 */
 	@Override
-	public final Cursor getInitialCursor() {
+	public final CursorType getInitialCursor() {
 		return initialCursor;
 	}
 
@@ -369,11 +415,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	@Override
 	public final boolean isDrawOnAttach() {
@@ -395,11 +439,10 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	@Override
 	public final boolean isDestroyOnDetach() {
@@ -409,8 +452,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
@@ -424,14 +466,13 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onAttach()
+	 * @see org.pepstock.charba.client.MutationHandler#onAttach(org.pepstock.charba.client.MutationItem)
 	 */
 	@Override
-	protected void onAttach() {
-		// attaches the widget
-		super.onAttach();
+	public final void onAttach(MutationItem item) {
+		// if item is consistent and
 		// if is not to be drawn on attach, doesn't draw
-		if (isDrawOnAttach()) {
+		if (item != null && isDrawOnAttach()) {
 			draw();
 		}
 	}
@@ -439,32 +480,21 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onDetach()
+	 * @see org.pepstock.charba.client.MutationHandler#onDetach(org.pepstock.charba.client.MutationItem)
 	 */
 	@Override
-	protected void onDetach() {
-		// detaches the widget
-		super.onDetach();
+	public final void onDetach(MutationItem item) {
+		// if item is consistent and
 		// if is not to be destroyed on detach, doesn't destroy
-		if (isDestroyOnDetach()) {
+		if (item != null && isDestroyOnDetach()) {
 			// then destroy
 			destroy();
 		}
 	}
 
 	/**
-	 * Called by handler manager to store every handler registration in order to remove them automatically when the chart will
-	 * be destroy.
-	 * 
-	 * @param registration new handler registration created
-	 */
-	void addHandlerRegistration(HandlerRegistration registration) {
-		handlerRegistrations.add(registration);
-	}
-
-	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
-	 * within Chart.js, along with any associated event listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
+	 * listeners attached by Chart.js.
 	 */
 	@Override
 	public final void destroy() {
@@ -488,6 +518,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		handlerRegistrations.clear();
 		// removes chart instance from collection
 		Charts.remove(getId());
+		// remove chart observer to get on attach and detach
+		ChartObserver.get().removeHandler(this);
 	}
 
 	/**
@@ -507,8 +539,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	/**
 	 * Will clear the chart canvas.<br>
 	 * Used extensively internally between animation frames.<br>
-	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT
-	 * <code>Panel</code> one.
+	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT <code>Panel</code> one.
 	 */
 	@Override
 	public final void clear() {
@@ -566,8 +597,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
-	 * this method manually if you change the size of the canvas nodes container element.
+	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
+	 * canvas nodes container element.
 	 */
 	@Override
 	public final void resize() {
@@ -579,8 +610,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
 	 */
 	@Override
 	public final void update() {
@@ -588,10 +618,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -611,8 +640,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	@Override
 	public final void reconfigure() {
@@ -620,10 +648,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -652,8 +679,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	@Override
 	public final void render() {
@@ -661,9 +687,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A configuration object can be provided with additional configuration for the render process. This is useful
-	 * when update is manually called inside an event handler and some different animation is desired.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A configuration object can be provided
+	 * with additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the render process
 	 */
@@ -708,7 +733,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return dataset meta data item or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
+	public final DatasetMetaItem getDatasetAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -728,7 +753,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean isDatasetVisible(int index) {
+	public final boolean isDatasetVisible(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
@@ -746,7 +771,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link UndefinedValues#INTEGER}.
 	 */
 	@Override
-	public int getVisibleDatasetCount() {
+	public final int getVisibleDatasetCount() {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
@@ -766,7 +791,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
+	public final DatasetItem getElementAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -783,14 +808,13 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
-	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the
-	 * same position of that event.
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
+	public final List<DatasetItem> getElementsAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -841,20 +865,10 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			// stores the chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
-			chart = new Chart(canvas.getContext2d(), configuration);
+			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
-	}
-
-	/**
-	 * Returns the string JSON representation of the object.
-	 * 
-	 * @return the string JSON representation of the object.
-	 */
-	@Override
-	public final String toJSON() {
-		return JSON.stringifyWithReplacer(configuration, 3);
 	}
 
 }

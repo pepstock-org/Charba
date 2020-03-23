@@ -27,8 +27,7 @@ import org.pepstock.charba.client.items.AxisItem;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object to enable the {@link TimeAxisBuildTicksCallback} on an axis, {@link CartesianTimeAxis}, when the ticks are
- * building by CHART.JS.
+ * Base object to enable the {@link TimeAxisBuildTicksCallback} on an axis, {@link CartesianTimeAxis}, when the ticks are building by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *

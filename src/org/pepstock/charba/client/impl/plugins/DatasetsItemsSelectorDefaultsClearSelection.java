@@ -18,12 +18,11 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * {@link DatasetsItemsSelector#ID} plugin default options for CLEAR SELECTION element.<br>
@@ -85,7 +84,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font style
 	 */
 	FontStyle getFontStyle() {
-		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getFontStyle());
+		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getFontStyle());
 	}
 
 	/**
@@ -103,7 +102,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection align
 	 */
 	Align getAlign() {
-		return getValue(ClearSelection.Property.ALIGN, Align.class, ClearSelection.DEFAULT_ALIGN);
+		return getValue(ClearSelection.Property.ALIGN, Align.values(), ClearSelection.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -112,7 +111,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection render.
 	 */
 	Render getRender() {
-		return getValue(ClearSelection.Property.RENDER, Render.class, ClearSelection.DEFAULT_RENDER);
+		return getValue(ClearSelection.Property.RENDER, Render.values(), ClearSelection.DEFAULT_RENDER);
 	}
 
 	/**
@@ -121,7 +120,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection position
 	 */
 	Position getPosition() {
-		return getValue(ClearSelection.Property.POSITION, Position.class, ClearSelection.DEFAULT_POSITION);
+		return getValue(ClearSelection.Property.POSITION, Position.values(), ClearSelection.DEFAULT_POSITION);
 	}
 
 	/**
@@ -129,7 +128,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * 
 	 * @return the clear selection image
 	 */
-	ImageElement getImage() {
+	Img getImage() {
 		return getValue(ClearSelection.Property.IMAGE, ClearSelection.DEFAULT_IMAGE);
 	}
 

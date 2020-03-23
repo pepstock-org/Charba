@@ -73,30 +73,25 @@ public class GridLines extends AxisContainer {
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
-	 *            second to the second grid line and so on.
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
 		getAxis().getScale().getGrideLines().setColor(color);
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
-	 *            second to the second grid line and so on.
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
 		getAxis().getScale().getGrideLines().setColor(color);
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -105,8 +100,7 @@ public class GridLines extends AxisContainer {
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -115,8 +109,7 @@ public class GridLines extends AxisContainer {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
@@ -125,8 +118,7 @@ public class GridLines extends AxisContainer {
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @return the line dash pattern used when stroking lines.
 	 */
@@ -189,22 +181,19 @@ public class GridLines extends AxisContainer {
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
-	 * control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @param drawOnChartArea If true, draw lines on the chart area inside the axis lines. This is useful when there are
-	 *            multiple axes and you need to control which grid lines are drawn.
+	 * @param drawOnChartArea If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are
+	 *            drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		getAxis().getScale().getGrideLines().setDrawOnChartArea(drawOnChartArea);
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
-	 * control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn.
+	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getAxis().getScale().getGrideLines().isDrawOnChartArea();

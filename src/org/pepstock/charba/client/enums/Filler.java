@@ -64,8 +64,7 @@ public class Filler extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where FILL property must be managed
 	 * @param defaultValue default value of FILL to use when the property does not exist
@@ -159,7 +158,7 @@ public class Filler extends NativeObjectContainer {
 		// checks if there is the property
 		if (has(Property.CHARBA_FILLING_MODE)) {
 			// gets the filling mode
-			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.class, FillingMode.PREDEFINED);
+			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.values(), FillingMode.PREDEFINED);
 			// checks all possible types of filling mode
 			// to return the right value
 			if (FillingMode.PREDEFINED_BOOLEAN.equals(mode)) {
@@ -167,7 +166,7 @@ public class Filler extends NativeObjectContainer {
 				return getValue(Property.FILL, false) ? Fill.ORIGIN : Fill.FALSE;
 			} else if (FillingMode.PREDEFINED.equals(mode)) {
 				// gets the fill value, using null as default
-				IsFill fill = getValue(Property.FILL, Fill.class, null);
+				IsFill fill = getValue(Property.FILL, Fill.values(), null);
 				// if null, returns the default one
 				return fill == null ? defaultValue : fill;
 			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {

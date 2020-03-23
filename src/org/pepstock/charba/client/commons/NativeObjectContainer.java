@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.JSON;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * Base class for all classes which are wrapping a native java script object.
@@ -669,7 +669,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final ImageElement getValue(Key key, ImageElement defaultValue) {
+	protected final Img getValue(Key key, Img defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -687,7 +687,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, ImageElement value) {
+	protected final void setValue(Key key, Img value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -710,7 +710,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values images to be set
 	 */
-	protected final void setValueOrArray(Key key, ImageElement... values) {
+	protected final void setValueOrArray(Key key, Img... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -735,7 +735,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single image value
 	 * @return value of the property (by array)
 	 */
-	protected final ArrayImage getValueOrArray(Key key, ImageElement defaultValue) {
+	protected final ArrayImage getValueOrArray(Key key, Img defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type
@@ -761,7 +761,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final CanvasGradient getValue(Key key, CanvasGradient defaultValue) {
+	protected final CanvasGradientItem getValue(Key key, CanvasGradientItem defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -779,7 +779,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, CanvasGradient value) {
+	protected final void setValue(Key key, CanvasGradientItem value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -802,7 +802,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values gradients to be set
 	 */
-	protected final void setValueOrArray(Key key, CanvasGradient... values) {
+	protected final void setValueOrArray(Key key, CanvasGradientItem... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -827,7 +827,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single gradient value
 	 * @return value of the property (by array) or an empty array if not exist
 	 */
-	protected final ArrayGradient getValueOrArray(Key key, CanvasGradient defaultValue) {
+	protected final ArrayGradient getValueOrArray(Key key, CanvasGradientItem defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type
@@ -853,7 +853,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the property is missing
 	 * @return value of the property
 	 */
-	protected final CanvasPattern getValue(Key key, CanvasPattern defaultValue) {
+	protected final CanvasPatternItem getValue(Key key, CanvasPatternItem defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -871,7 +871,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, CanvasPattern value) {
+	protected final void setValue(Key key, CanvasPatternItem value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -894,7 +894,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param values patterns to be set
 	 */
-	protected final void setValueOrArray(Key key, CanvasPattern... values) {
+	protected final void setValueOrArray(Key key, CanvasPatternItem... values) {
 		// checks if values are consistent
 		if (values != null) {
 			// checks if there is only 1 element
@@ -919,7 +919,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value if the value was stored as single pattern value
 	 * @return value of the property (by array)
 	 */
-	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
+	protected final ArrayPattern getValueOrArray(Key key, CanvasPatternItem defaultValue) {
 		// gets object type of key
 		ObjectType type = type(key);
 		// checks if property type
@@ -942,12 +942,12 @@ public abstract class NativeObjectContainer {
 	 * Returns a value (key) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param clazz class of object to get all enumeration values
+	 * @param enumValues all enumeration values
 	 * @param defaultValue default value if the property is missing
 	 * @param <T> type of key
 	 * @return value of the property
 	 */
-	protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue) {
+	protected final <T extends Key> T getValue(Key key, T[] enumValues, T defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -958,7 +958,7 @@ public abstract class NativeObjectContainer {
 		// gets the string value
 		String value = getValue(key, defaultValue.value());
 		// gets the key by value
-		return Key.getKeyByValue(clazz, value, defaultValue);
+		return Key.getKeyByValue(enumValues, value, defaultValue);
 	}
 
 	/**
@@ -1028,7 +1028,6 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- ARRAYS
 	// ------------------------------------------
-
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.
 	 * 
@@ -1110,6 +1109,28 @@ public abstract class NativeObjectContainer {
 		// check color value is consistent
 		// and returns the RGBA value accordingly
 		return IsColor.isConsistent(value) ? value.toRGBA() : null;
+	}
+
+	// ------------------------------------------
+	// --- CHART
+	// ------------------------------------------
+
+	/**
+	 * Returns a value (chart) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property
+	 */
+	protected final Chart getNativeChart(Key key) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns null
+			return null;
+		}
+		// gets descriptor
+		NativeChartDescriptor descriptor = nativeObject.getChartProperty(key.value());
+		// returns value
+		return descriptor == null ? null : descriptor.getValue();
 	}
 
 	// ------------------------------------------

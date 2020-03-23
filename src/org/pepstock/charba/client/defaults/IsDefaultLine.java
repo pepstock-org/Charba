@@ -28,15 +28,14 @@ import org.pepstock.charba.client.enums.JoinStyle;
 public interface IsDefaultLine extends IsDefaultOptionsElement {
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	double getTension();
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -50,9 +49,8 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	int getBorderDashOffset();
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -60,9 +58,9 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	JoinStyle getBorderJoinStyle();
 
 	/**
-	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Returns <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
 

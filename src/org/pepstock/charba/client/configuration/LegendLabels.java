@@ -48,8 +48,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called to generate legend items for each thing in the legend. Default implementation
-	 * returns the text + styling for the color box.<br>
+	 * Java script FUNCTION callback called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -58,8 +57,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	interface ProxyGenerateLabelsCallback {
 
 		/**
-		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns
-		 * the text + styling for the color box.
+		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart chart instance.
@@ -192,8 +190,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *            inherit).
+	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getConfiguration().getLegend().getLabels().setFontStyle(fontStyle);
@@ -265,19 +262,16 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used
-	 *            in this case).
+	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		getConfiguration().getLegend().getLabels().setUsePointStyle(usePointStyle);
 	}
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 * case).
+	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 *         case).
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getConfiguration().getLegend().getLabels().isUsePointStyle();

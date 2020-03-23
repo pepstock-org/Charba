@@ -17,9 +17,8 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
-
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * Common configuration options for plugins which are managing cursor style.
@@ -90,9 +89,8 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * Sets the cursor type when the cursor is over the dataset item.
 	 * 
 	 * @param cursor cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public final void setCursorPointer(Cursor cursor) {
+	public final void setCursorPointer(CursorType cursor) {
 		// checks if cursor is consistent
 		if (cursor != null) {
 			setValue(Property.CURSOR_POINTER, cursor.name());
@@ -103,20 +101,17 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * Returns the cursor type when the cursor is over the dataset item.
 	 * 
 	 * @return cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public final Cursor getCursorPointer() {
-		String name = getValue(Property.CURSOR_POINTER, getCursorPointerAsString());
-		return Cursor.valueOf(name);
+	public final CursorType getCursorPointer() {
+		return getValue(Property.CURSOR_POINTER, CursorType.values(), getCurrentCursor());
 	}
 
 	/**
 	 * Sets the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @param cursor cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	final void setCurrentCursor(Cursor cursor) {
+	final void setCurrentCursor(CursorType cursor) {
 		// checks if cursor argument is consistent
 		if (cursor != null) {
 			setValue(Property.CURSOR_DEFAULT, cursor.name());
@@ -127,11 +122,9 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * Returns the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @return cursor type
-	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	final Cursor getCurrentCursor() {
-		String name = getValue(Property.CURSOR_DEFAULT, Cursor.DEFAULT.name());
-		return Cursor.valueOf(name);
+	final CursorType getCurrentCursor() {
+		return getValue(Property.CURSOR_POINTER, CursorType.values(), CursorType.POINTER);
 	}
 
 }

@@ -17,9 +17,9 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -51,8 +51,7 @@ public final class NativeObject {
 	static native <T extends NativeAbstractDescriptor> void defineProperty(NativeObject source, String key, T descriptor);
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param source the object in which to look for the property.
 	 * @param key the name of the property whose description is to be retrieved.
@@ -192,7 +191,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void defineImageProperty(String key, ImageElement value) {
+	void defineImageProperty(String key, Img value) {
 		// creates a descriptor
 		NativeImageDescriptor descriptor = new NativeImageDescriptor();
 		// sets value
@@ -210,7 +209,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void definePatternProperty(String key, CanvasPattern value) {
+	void definePatternProperty(String key, CanvasPatternItem value) {
 		// creates a descriptor
 		NativePatternDescriptor descriptor = new NativePatternDescriptor();
 		// sets value
@@ -228,7 +227,7 @@ public final class NativeObject {
 	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
-	void defineGradientProperty(String key, CanvasGradient value) {
+	void defineGradientProperty(String key, CanvasGradientItem value) {
 		// creates a descriptor
 		NativeGradientDescriptor descriptor = new NativeGradientDescriptor();
 		// sets value
@@ -295,8 +294,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -313,8 +311,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -325,8 +322,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -337,8 +333,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @param <T> type of descriptor to use
@@ -356,8 +351,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -374,8 +368,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -386,8 +379,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -398,8 +390,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -410,8 +401,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
@@ -422,8 +412,18 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	NativeChartDescriptor getChartProperty(String key) {
+		return getInternalObjectProperty(key);
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test
 	 * @param <T> type of descriptor to use
@@ -441,8 +441,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @param <T> type of array to use
@@ -460,8 +459,7 @@ public final class NativeObject {
 	}
 
 	/**
-	 * Sets the properties of a descriptor to <code>true</code>, as default in java script when you use
-	 * <code>obj[key] = value</code>
+	 * Sets the properties of a descriptor to <code>true</code>, as default in java script when you use <code>obj[key] = value</code>
 	 * 
 	 * @param descriptor the descriptor to be set
 	 */

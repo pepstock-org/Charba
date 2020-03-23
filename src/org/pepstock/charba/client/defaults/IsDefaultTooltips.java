@@ -42,11 +42,9 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	InteractionMode getMode();
 
 	/**
-	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
-	 * applied at all times.
+	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 * 
-	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times.
+	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 */
 	boolean isIntersect();
 

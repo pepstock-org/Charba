@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * DASH drawer to design a {@link PointStyle#DASH} into tile.<br>
@@ -41,15 +40,19 @@ import com.google.gwt.canvas.dom.client.Context2d;
  */
 final class PointStyleDash extends AbstractPointStyleShapeDrawer {
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Draws the tile using the point style applying the requested shape.
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.colors.tiles.AbstractPointStyleShapeDrawer#drawPointStyle(com.google.gwt.canvas.dom.client.
-	 * Context2d, int, double, double, double, double, double)
+	 * @param context context of canvas to design the shape
+	 * @param size the size of tile, which is a square
+	 * @param x x point center of canvas
+	 * @param y y point center of canvas
+	 * @param radius the radius of the tile, only for {@link PointStyle} drawing
+	 * @param rotation the rotation (in degrees) to create the tile, only for {@link PointStyle} drawing
+	 * @param rad rad calculates on rotation
 	 */
 	@Override
-	protected void drawPointStyle(Context2d context, int size, double x, double y, double radius, double rotation, double rad) {
+	protected void drawPointStyle(Context2dItem context, int size, double x, double y, double radius, double rotation, double rad) {
 		context.moveTo(x, y);
 		context.lineTo(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
 	}

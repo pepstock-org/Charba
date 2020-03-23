@@ -18,7 +18,7 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * This is a wrapper of java script object which represents a event.<br>
@@ -79,7 +79,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * 
 	 * @return the native event into the CHART.JS event or <code>null</code> if doen't not exist.
 	 */
-	public ChartNativeEvent getEvent() {
+	public BaseNativeEvent getEvent() {
 		return JsItemsHelper.get().nativeEvent(getNativeObject(), NATIVE_KEY);
 	}
 

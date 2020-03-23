@@ -19,8 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * The display option controls the visibility of axis and the display option controls the visibility of data labels plugin.<br>
- * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if
- * at least one associated dataset is visible.
+ * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -40,14 +39,12 @@ public enum Display implements Key
 	/**
 	 * The axis is visible only if at least one associated dataset is visible.<br>
 	 * For plugin, the label is hidden if it overlap with another label.<br>
-	 * The display 'auto' option can be used to prevent overlapping labels, based on the following rules when two labels
-	 * overlap:<br>
+	 * The display 'auto' option can be used to prevent overlapping labels, based on the following rules when two labels overlap:<br>
 	 * <ul>
 	 * <li>if both labels are display: true, they will be drawn overlapping
-	 * <li>if both labels are display: 'auto', the one with the highest data index will be hidden. If labels are at the same
-	 * data index, the one with the lowest dataset index will be hidden.
-	 * <li>if one label is display: true and the other one is display: 'auto', the one with 'auto' will be hidden (whatever the
-	 * data/dataset indices).
+	 * <li>if both labels are display: 'auto', the one with the highest data index will be hidden. If labels are at the same data index, the one with the lowest dataset index will
+	 * be hidden.
+	 * <li>if one label is display: true and the other one is display: 'auto', the one with 'auto' will be hidden (whatever the data/dataset indices).
 	 * </ul>
 	 */
 	AUTO("auto");

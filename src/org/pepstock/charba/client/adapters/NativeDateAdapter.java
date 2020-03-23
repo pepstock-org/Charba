@@ -38,19 +38,12 @@ import jsinterop.annotations.JsType;
 final class NativeDateAdapter {
 
 	/**
-	 * Creates an object with date adapters options
-	 * 
-	 * @param options date adapters options
-	 */
-	NativeDateAdapter(NativeObject options) {
-	}
-
-	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.
 	 * 
 	 * @param key the string name of the property to test.
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
+	@JsMethod
 	native boolean hasOwnProperty(String key);
 
 	/**
@@ -77,7 +70,7 @@ final class NativeDateAdapter {
 	 * @return number date representation or <code>null</code>
 	 */
 	@JsMethod
-	native double parse(Object time, String format);
+	native double parse(String time, String format);
 
 	/**
 	 * Returns the formatted date in the specified format for a given timestamp.
@@ -116,8 +109,7 @@ final class NativeDateAdapter {
 	 * 
 	 * @param time the input timestamp
 	 * @param unit the unit as string
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is
-	 *            isoWeek).
+	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
 	 * @return the start of unit for the given timestamp
 	 */
 	@JsMethod

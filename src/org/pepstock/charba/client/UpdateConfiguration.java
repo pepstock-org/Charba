@@ -80,7 +80,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return the animation easing function.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.EASING, Easing.class, Defaults.get().getGlobal().getAnimation().getEasing());
+		return getValue(Property.EASING, Easing.values(), Defaults.get().getGlobal().getAnimation().getEasing());
 	}
 
 	/**

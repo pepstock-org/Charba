@@ -16,12 +16,11 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.TextMetricsItem;
+import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
-import com.google.gwt.canvas.dom.client.TextMetrics;
 
 /**
  * This is a shape which can draw a character on the tile.<br>
@@ -94,11 +93,10 @@ public final class CharacterShape extends AbstractShape {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// sets real font size
@@ -110,7 +108,7 @@ public final class CharacterShape extends AbstractShape {
 		// sets alignment from center point
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
-		TextMetrics metrics = context.measureText(character);
+		TextMetricsItem metrics = context.measureText(character);
 		// designs the shape into A section
 		drawChar(context, size, 0, 0, character, realFontSize, metrics);
 		// designs the shape into B section
@@ -130,7 +128,7 @@ public final class CharacterShape extends AbstractShape {
 	 * @param fontSize font size to apply to character
 	 * @param metrics canvas metrics to know the width of character
 	 */
-	private void drawChar(Context2d context, int size, double offsetX, double offsetY, String character, int fontSize, TextMetrics metrics) {
+	private void drawChar(Context2dItem context, int size, double offsetX, double offsetY, String character, int fontSize, TextMetricsItem metrics) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates x point (centering the char)
@@ -142,16 +140,6 @@ public final class CharacterShape extends AbstractShape {
 	}
 
 	/**
-	 * Calculates the font size based on available space into square into doughnut inner radius.
-	 * 
-	 * @param context canvas context
-	 * @param sideOfSquare side of square
-	 * @param value value to display
-	 * @param style font style
-	 * @param fontFamily font family
-	 * @return the font size to use
-	 */
-	/**
 	 * Calculates the font size based on available space of the tile.
 	 * 
 	 * @param context context of canvas to design the shape
@@ -161,7 +149,7 @@ public final class CharacterShape extends AbstractShape {
 	 * @param fontFamily font family to use to apply the char on tile
 	 * @return the font size to use
 	 */
-	private int calculateFontSize(Context2d context, String value, double size, FontStyle style, String fontFamily) {
+	private int calculateFontSize(Context2dItem context, String value, double size, FontStyle style, String fontFamily) {
 		// creates an instance for font size
 		int calculatedFontSize = (int) size;
 		// flag to exit form loop
@@ -171,7 +159,7 @@ public final class CharacterShape extends AbstractShape {
 			// sets font
 			context.setFont(Utilities.toCSSFontProperty(style, calculatedFontSize, fontFamily));
 			// gets metrics
-			TextMetrics metrics = context.measureText(value);
+			TextMetricsItem metrics = context.measureText(value);
 			// if the width is inside of tile size
 			// exit
 			if (metrics.getWidth() < (int) size) {

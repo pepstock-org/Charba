@@ -25,19 +25,15 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
+import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * This object is created by callbacks and returned to CHART.JS as native object to configure the legend.
@@ -134,8 +130,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by
-	 * CHART.js.
+	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
 	 */
@@ -147,9 +142,8 @@ public final class LegendLabelItem extends LegendItem {
 			// if html text is consistent
 			if (html != null) {
 				// creates safe html builder
-				SafeHtmlBuilder builder = new SafeHtmlBuilder();
 				// creates and returns a safe html
-				return builder.appendHtmlConstant(html).toSafeHtml();
+				return SafeHtmlBuilder.create().appendHtmlConstant(html).toSafeHtml();
 			}
 		}
 		// if here the text has not been stored as HTML
@@ -190,7 +184,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param pattern the fill style of the legend box as canvas pattern
 	 */
-	public void setFillStyle(CanvasPattern pattern) {
+	public void setFillStyle(CanvasPatternItem pattern) {
 		setValue(LegendItem.Property.FILL_STYLE, pattern);
 	}
 
@@ -235,7 +229,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param gradient the fill style of the legend box as canvas gradient
 	 */
-	public void setFillStyle(CanvasGradient gradient) {
+	public void setFillStyle(CanvasGradientItem gradient) {
 		setValue(LegendItem.Property.FILL_STYLE, gradient);
 	}
 
@@ -283,8 +277,7 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are:
-	 * butt, round and square.
+	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param style how the end points of every box border are drawn.
 	 */
@@ -293,11 +286,10 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 *            pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
 		setArrayValue(LegendItem.Property.LINE_DASH, ArrayInteger.fromOrNull(lineDash));
@@ -313,9 +305,8 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end points and
+	 * control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @param style There are three possible values for this property: round, bevel and miter.
@@ -356,7 +347,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param pattern the stroke style of the legend box as canvas pattern
 	 */
-	public void setStrokeStyle(CanvasPattern pattern) {
+	public void setStrokeStyle(CanvasPatternItem pattern) {
 		setValue(LegendItem.Property.STROKE_STYLE, pattern);
 	}
 
@@ -401,7 +392,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param gradient the stroke style of the legend box as canvas gradient
 	 */
-	public void setStrokeStyle(CanvasGradient gradient) {
+	public void setStrokeStyle(CanvasGradientItem gradient) {
 		setValue(LegendItem.Property.STROKE_STYLE, gradient);
 	}
 
@@ -449,31 +440,11 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(ImageResource pointStyle) {
-		// transform a image resource into image element by image object
-		// creates image object
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(Image pointStyle) {
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
 	 * Sets the style (as image) of the legend box (only used if usePointStyle is true)
 	 * 
 	 * @param pointStyle the style (as image) of the legend box
 	 */
-	public void setPointStyle(ImageElement pointStyle) {
+	public void setPointStyle(Img pointStyle) {
 		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
 	}
 
@@ -496,8 +467,7 @@ public final class LegendLabelItem extends LegendItem {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public LegendLabelItem create(NativeObject nativeObject) {

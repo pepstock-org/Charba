@@ -16,24 +16,21 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user leaves on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventHandler> implements IsLegendEvent {
+public final class LegendLeaveEvent extends AbstractLegendEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendLeaveEventHandler> TYPE = new Type<>();
-	// legend item selected by hovering
-	private final LegendItem item;
+	public static final EventType TYPE = EventType.create(LegendLeaveEvent.class);
 
 	/**
 	 * Creates the event with legend item related to the leaving.
@@ -42,42 +39,24 @@ public final class LegendLeaveEvent extends AbstractChartEvent<LegendLeaveEventH
 	 * @param functionContext function context provided by CHART.JS
 	 * @param item legend item related to the leaving
 	 */
-	public LegendLeaveEvent(NativeEvent nativeEvent, Chart functionContext, LegendItem item) {
-		super(nativeEvent, functionContext, LegendEventProperty.ON_LEAVE);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Legend item argument is null");
+	public LegendLeaveEvent(BaseNativeEvent nativeEvent, Chart functionContext, LegendItem item) {
+		super(nativeEvent, TYPE, functionContext, LegendEventProperty.ON_LEAVE, item);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 */
+	@Override
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof LegendLeaveEventHandler) {
+			// casts handler
+			LegendLeaveEventHandler myHandler = (LegendLeaveEventHandler) handler;
+			// invokes
+			myHandler.onLeave(this);
 		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns the legend item related to the leaving.
-	 * 
-	 * @return the legend item related to the leaving
-	 */
-	public LegendItem getItem() {
-		return item;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<LegendLeaveEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(LegendLeaveEventHandler handler) {
-		handler.onLeave(this);
 	}
 
 }

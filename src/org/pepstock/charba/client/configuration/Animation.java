@@ -21,6 +21,9 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.enums.InterpolatorType;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -31,14 +34,10 @@ import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.items.AnimationObject;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.NativeEvent;
-
 import jsinterop.annotations.JsFunction;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
- * takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -61,9 +60,9 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 		 * Method of function to be called when animation is changing.
 		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param animationObject java script object which contains animation object
+		 * @param nativeObject java script object which contains animation object
 		 */
-		void call(Chart context, AnimationObject animationObject);
+		void call(Chart context, NativeObject nativeObject);
 	}
 
 	// ---------------------------
@@ -132,16 +131,20 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		completeCallbackProxy.setCallback((context, animationObject) -> {
+		completeCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
-			if (animationObject != null) {
+			if (nativeObject != null) {
+				// creates animation object
+				AnimationObject animationObject = new AnimationObject(nativeObject);
 				// invokes the custom callback
 				onComplete(animationObject.getAnimationItem());
 			}
 		});
-		progressCallbackProxy.setCallback((context, animationObject) -> {
+		progressCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
-			if (animationObject != null) {
+			if (nativeObject != null) {
+				// creates animation object
+				AnimationObject animationObject = new AnimationObject(nativeObject);
 				// invokes the custom callback
 				onProgress(animationObject.getAnimationItem());
 			}
@@ -394,8 +397,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
-	 * RemoveHandlerEvent)
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events. RemoveHandlerEvent)
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
@@ -427,7 +429,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	private void onProgress(AnimationItem item) {
 		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationProgressEvent(event, item));
 	}
@@ -439,7 +441,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	private void onComplete(AnimationItem item) {
 		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationCompleteEvent(event, item));
 	}

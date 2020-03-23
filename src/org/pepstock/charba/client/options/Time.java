@@ -72,8 +72,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param scale scale/axis of object.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -96,11 +95,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
-	 * Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday.
-	 *            Otherwise, it will be Sunday.
+	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
 		setValue(Property.ISO_WEEKDAY, isoWeekday);
@@ -109,11 +106,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
-	 * Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
-	 *         will be Sunday.
+	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	public boolean isIsoWeekday() {
 		return getValue(Property.ISO_WEEKDAY, getDefaultValues().isIsoWeekday());
@@ -156,7 +151,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 			return getDefaultValues().getRound();
 		}
 		// gets the value
-		return getValue(Property.ROUND, TimeUnit.class, getDefaultValues().getRound());
+		return getValue(Property.ROUND, TimeUnit.values(), getDefaultValues().getRound());
 	}
 
 	/**
@@ -216,7 +211,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 			return getDefaultValues().getUnit();
 		}
 		// returns the value
-		return getValue(Property.UNIT, TimeUnit.class, getDefaultValues().getUnit());
+		return getValue(Property.UNIT, TimeUnit.values(), getDefaultValues().getUnit());
 	}
 
 	/**
@@ -256,7 +251,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return minimum display format to be used for a time unit.
 	 */
 	public TimeUnit getMinUnit() {
-		return getValue(Property.MIN_UNIT, TimeUnit.class, getDefaultValues().getMinUnit());
+		return getValue(Property.MIN_UNIT, TimeUnit.values(), getDefaultValues().getMinUnit());
 	}
 
 	/**

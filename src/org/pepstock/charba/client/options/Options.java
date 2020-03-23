@@ -238,7 +238,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public List<Event> getEvents() {
 		ArrayString array = getArrayValue(Property.EVENTS);
-		return ArrayListHelper.list(Event.class, array);
+		return ArrayListHelper.list(Event.values(), array);
 	}
 
 	/**
@@ -298,8 +298,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
-	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1
+	 * will force the canvas size to be scaled by that amount.
 	 * 
 	 * @param ratio the pixel ratio.
 	 */
@@ -308,9 +308,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
-	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
-	 * Returns the pixel ratio.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1
+	 * will force the canvas size to be scaled by that amount. Returns the pixel ratio.
 	 * 
 	 * @return the pixel ratio.
 	 */
@@ -319,11 +318,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	public boolean isDrawOnAttach() {
 		return getValue(Property.CHARBA_DRAW_ON_ATTACH, getDefaultValues().isDrawOnAttach());
@@ -339,19 +336,17 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	public boolean isDestroyOnDetach() {
 		return getValue(Property.CHARBA_DESTROY_ON_DETACH, getDefaultValues().isDestroyOnDetach());
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
@@ -450,44 +445,40 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
+	 * initial, inherit).
 	 * 
-	 * @param fontStyle font style to use in the chart, on all objects, if not override by the specific configuration, follows
-	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
+	 *            initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.FONT_STYLE, fontStyle.value());
 	}
 
 	/**
-	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
+	 * initial, inherit).
 	 * 
-	 * @return the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 *         font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @return the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
+	 *         initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, getDefaultValues().getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), getDefaultValues().getFontStyle());
 	}
 
 	/**
-	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 * font-family options.
+	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 * 
-	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows
-	 *            CSS font-family options.
+	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.FONT_FAMILY, fontFamily);
 	}
 
 	/**
-	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 * font-family options.
+	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 * 
-	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 *         font-family options.
+	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.FONT_FAMILY, getDefaultValues().getFontFamily());

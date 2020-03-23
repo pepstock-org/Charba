@@ -18,10 +18,8 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Represents how to fill the area under the line. This is an interfaces implemented on different way, as CHART.JS has
- * implemented.<br>
- * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets
- * or a dataset.<br>
+ * Represents how to fill the area under the line. This is an interfaces implemented on different way, as CHART.JS has implemented.<br>
+ * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets or a dataset.<br>
  * These are the different kinds of fill you can set:<br>
  * <ul>
  * <li>Predefined values, mapped by {@link Fill}.

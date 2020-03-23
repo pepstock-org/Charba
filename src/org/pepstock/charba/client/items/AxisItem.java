@@ -26,8 +26,7 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
- * update process.<br>
+ * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the update process.<br>
  * This is a wrapper of the CHART.JS item with all needed info about an axis.<br>
  * Implements all <code>set</code> methods to change java script object properties.
  * 

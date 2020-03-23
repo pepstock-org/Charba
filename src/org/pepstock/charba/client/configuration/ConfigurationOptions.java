@@ -37,15 +37,18 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartHoverEvent;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
+import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.items.DatasetItem;
@@ -56,10 +59,6 @@ import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.safehtml.shared.SafeHtml;
-
 import jsinterop.annotations.JsFunction;
 
 /**
@@ -67,16 +66,14 @@ import jsinterop.annotations.JsFunction;
  * Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
  * Important topics to take care:<br>
  * <b> Responsive </b><br>
- * When it comes to change the chart size based on the window size, a major limitation is that the canvas render size
- * (canvas.width and .height) can not be expressed with relative values, contrary to the display size (canvas.style.width and
- * .height). Furthermore, these sizes are independent from each other and thus the canvas render size does not adjust
+ * When it comes to change the chart size based on the window size, a major limitation is that the canvas render size (canvas.width and .height) can not be expressed with relative
+ * values, contrary to the display size (canvas.style.width and .height). Furthermore, these sizes are independent from each other and thus the canvas render size does not adjust
  * automatically based on the display size, making the rendering inaccurate.<br>
- * It provides a few options to enable responsiveness and control the resize behavior of charts by detecting when the canvas
- * display size changes and update the render size accordingly.<br>
+ * It provides a few options to enable responsiveness and control the resize behavior of charts by detecting when the canvas display size changes and update the render size
+ * accordingly.<br>
  * <b> Legend </b><br>
- * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
- * generateLegend() method on their prototype that returns an HTML string for the legend. To configure how this legend is
- * generated, you can set the legendCallback.<br>
+ * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a generateLegend() method on their prototype that returns an
+ * HTML string for the legend. To configure how this legend is generated, you can set the legendCallback.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -84,7 +81,7 @@ import jsinterop.annotations.JsFunction;
 public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, IsEventProvider {
 
 	// list of click event handler types
-	private static final List<Type<?>> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
+	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -106,7 +103,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
 		 */
-		void call(Chart chart, ChartNativeEvent event, ArrayObject items);
+		void call(Chart chart, BaseNativeEvent event, ArrayObject items);
 	}
 
 	/**
@@ -260,7 +257,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
 		// creates new native vent
 		// fires the resize event on chart
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), nativeChart, new SizeItem(size))));
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(DOMBuilder.get().createChangeEvent(), nativeChart, new SizeItem(size))));
 		legendCallbackProxy.setCallback(context -> {
 			// checks if callback is consistent
 			if (legendCallback != null) {
@@ -279,8 +276,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
-	 * options (by chart.defaults.global) and chart options.<br>
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global) and chart options.<br>
 	 * The chain of priority is:<br>
 	 * <ul>
 	 * <li>chart options
@@ -450,8 +446,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
-	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1
+	 * will force the canvas size to be scaled by that amount.
 	 * 
 	 * @param ratio the pixel ratio.
 	 */
@@ -460,9 +456,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
-	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
-	 * Returns the pixel ratio.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1
+	 * will force the canvas size to be scaled by that amount. Returns the pixel ratio.
 	 * 
 	 * @return the pixel ratio..
 	 */
@@ -471,11 +466,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	public boolean isDrawOnAttach() {
 		return getConfiguration().isDrawOnAttach();
@@ -491,19 +484,17 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	public boolean isDestroyOnDetach() {
 		return getConfiguration().isDestroyOnDetach();
 	}
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
@@ -591,8 +582,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
-	 * RemoveHandlerEvent)
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events. RemoveHandlerEvent)
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
@@ -669,8 +659,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
@@ -683,7 +672,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleClickEvent(ChartNativeEvent event) {
+	private void handleClickEvent(BaseNativeEvent event) {
 		// try to manage click of dataset
 		if (handleDatasetSelection(event)) {
 			// if done, returns to caller
@@ -706,7 +695,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 * @return <code>true</code> if the event on chart has been managed as dataset selection, otherwise <code>false</code>.
 	 */
-	private boolean handleDatasetSelection(ChartNativeEvent event) {
+	private boolean handleDatasetSelection(BaseNativeEvent event) {
 		// gets the dataset items by event
 		DatasetItem item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
@@ -726,7 +715,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 * @return <code>true</code> if the event on chart has been managed as title selection, otherwise <code>false</code>.
 	 */
-	private boolean handleTitleSelection(ChartNativeEvent event) {
+	private boolean handleTitleSelection(BaseNativeEvent event) {
 		// checks if title has been selected and there is any handler
 		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
 			// fires the click event on the chart title
@@ -743,7 +732,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleScaleSelection(ChartNativeEvent event) {
+	private void handleScaleSelection(BaseNativeEvent event) {
 		// checks if there is any handler and the chart has got scales
 		if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
 			// gets the scales

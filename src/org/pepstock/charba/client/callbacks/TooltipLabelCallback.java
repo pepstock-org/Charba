@@ -23,8 +23,7 @@ import org.pepstock.charba.client.items.TooltipLabelColor;
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.
- * This interface takes care about labels.
+ * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text. This interface takes care about labels.
  * 
  * @author Andrea "Stock" Stocchero
  */

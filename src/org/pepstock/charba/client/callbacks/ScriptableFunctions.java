@@ -21,8 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Set of common JSINTEROP functions (mapped as interfaces) to be able to implement scriptable options of CHART.JS. Must be a
- * public interface with only 1 method.
+ * Set of common JSINTEROP functions (mapped as interfaces) to be able to implement scriptable options of CHART.JS. Must be a public interface with only 1 method.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -48,7 +47,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a double property value.
 		 */
-		double call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		double call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -66,7 +65,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a boolean property value.
 		 */
-		boolean call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		boolean call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -84,7 +83,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a integer property value.
 		 */
-		int call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		int call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -102,7 +101,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a string property value.
 		 */
-		String call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		String call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -120,7 +119,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a object property value.
 		 */
-		Object call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		Object call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -138,7 +137,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return a object proeprty value.
 		 */
-		NativeObject call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		NativeObject call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -156,7 +155,7 @@ public final class ScriptableFunctions {
 		 * @param context native object as context.
 		 * @return an array instance
 		 */
-		Array call(CallbackFunctionContext contextFunction, ScriptableContext context);
+		Array call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**

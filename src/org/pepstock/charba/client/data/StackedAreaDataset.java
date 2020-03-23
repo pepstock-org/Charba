@@ -21,8 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display
- * properties for a specific dataset.<br>
+ * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Extends the line dataset setting <code>stack</code> property.
  * 
  * @author Andrea "Stock" Stocchero

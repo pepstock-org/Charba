@@ -81,8 +81,7 @@ public class IteratorImpl<E> implements Iterator<E> {
 	}
 
 	/**
-	 * Removes from the underlying collection the last element returned by this iterator. This method can be called only once
-	 * per call to <code>next()</code>.
+	 * Removes from the underlying collection the last element returned by this iterator. This method can be called only once per call to <code>next()</code>.
 	 */
 	@Override
 	public void remove() {

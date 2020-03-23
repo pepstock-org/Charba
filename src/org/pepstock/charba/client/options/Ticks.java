@@ -98,8 +98,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param scale scale/axis of object.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -192,11 +191,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
-	 * off to show all labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
 	 * 
-	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels
-	 *            accordingly. Turn it off to show all labels no matter what
+	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValue(Property.AUTO_SKIP, autoSkip);
@@ -205,22 +202,18 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
-	 * off to show all labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
 	 * 
-	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.
-	 *         Turn it off to show all labels no matter what.
+	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what.
 	 */
 	public boolean isAutoSkip() {
 		return getValue(Property.AUTO_SKIP, getDefaultValues().isAutoSkip());
 	}
 
 	/**
-	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 * scales.
+	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 * 
-	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable
-	 *            to horizontal scales.
+	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
 		setValue(Property.AUTO_SKIP_PADDING, autoSkipPadding);
@@ -229,23 +222,19 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to
-	 * horizontal scales.
+	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 *         scales.
+	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
 	public int getAutoSkipPadding() {
 		return getValue(Property.AUTO_SKIP_PADDING, getDefaultValues().getAutoSkipPadding());
 	}
 
 	/**
-	 * Sets the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and
-	 * the x direction for the y axis).<br>
+	 * Sets the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @param labelOffset the distance in pixels to offset the label from the center point of the tick (in the y direction for
-	 *            the x axis, and the x direction for the y axis)
+	 * @param labelOffset the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
 		setValue(Property.LABEL_OFFSET, labelOffset);
@@ -254,23 +243,20 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
-	 * and the x direction for the y axis).<br>
+	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis).
+	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).
 	 */
 	public int getLabelOffset() {
 		return getValue(Property.LABEL_OFFSET, getDefaultValues().getLabelOffset());
 	}
 
 	/**
-	 * Sets the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 * Note: Only applicable to horizontal scales.
+	 * Sets the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 * 
-	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
-	 *            necessary. Note: Only applicable to horizontal scales.
+	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal
+	 *            scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
 		setValue(Property.MAX_ROTATION, maxRotation);
@@ -279,11 +265,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
-	 * necessary. Note: Only applicable to horizontal scales.
+	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales.
+	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 */
 	public int getMaxRotation() {
 		return getValue(Property.MAX_ROTATION, getDefaultValues().getMaxRotation());
@@ -310,11 +294,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 * to vertical scales.
+	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 * 
-	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
-	 *            applicable to vertical scales.
+	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
 		setValue(Property.MIRROR, mirror);
@@ -323,22 +305,20 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
-	 * applicable to vertical scales.
+	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 * 
-	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 *         to vertical scales.
+	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 */
 	public boolean isMirror() {
 		return getValue(Property.MIRROR, getDefaultValues().isMirror());
 	}
 
 	/**
-	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
+	 * in the vertical (Y) direction.
 	 * 
-	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal
-	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
+	 *            applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.PADDING, padding);
@@ -347,11 +327,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
+	 * applies in the vertical (Y) direction.
 	 * 
-	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
+	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
+	 *         in the vertical (Y) direction.
 	 */
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
@@ -704,7 +684,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return property controls the ticks generation.
 	 */
 	public TickSource getSource() {
-		return getValue(Property.SOURCE, TickSource.class, getDefaultValues().getSource());
+		return getValue(Property.SOURCE, TickSource.values(), getDefaultValues().getSource());
 	}
 
 	/**

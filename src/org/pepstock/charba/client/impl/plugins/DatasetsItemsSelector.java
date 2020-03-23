@@ -21,20 +21,20 @@ import java.util.Map;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.Event;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
+import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
@@ -64,7 +64,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	// It can not use zoom plugin id
 	// to avoid to load zoom and hammer JS if not needed
 	// it must always aligned with value into zoom plugin moduel
-	private static final String ZOOM_PLUIGIN_ID = "zoom";
+	private static final String ZOOM_PLUIGIN_ID = ResourceName.ZOOM_PLUGIN.value();
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
@@ -90,8 +90,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 
 	/**
 	 * Returns the padding height used by clear selection element if enabled.<br>
-	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the
-	 * element allocated.
+	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the element allocated.
 	 * 
 	 * @param chart chart instance
 	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
@@ -166,7 +165,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
-			chart.fireEvent(new DatasetRangeSelectionEvent(Document.get().createChangeEvent()));
+			chart.fireEvent(new DatasetRangeSelectionEvent(DOMBuilder.get().createChangeEvent()));
 		}
 		// updates the chart only if the selection was done
 		if (mustBeUpdated) {
@@ -246,9 +245,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// removes the default mouse down listener
 			chart.removeCanvasPreventDefault();
 			// adds all mouse listeners to canvas
-			handler.setMouseDown(chart.getCanvas().addMouseDownHandler(handler));
-			handler.setMouseUp(chart.getCanvas().addMouseUpHandler(handler));
-			handler.setMouseMove(chart.getCanvas().addMouseMoveHandler(handler));
+			handler.addListeners();
 			// stores selection handler
 			pluginSelectionHandlers.put(chart.getId(), handler);
 		}
@@ -281,7 +278,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// sets cursor wait because the chart is drawing and not selectable
-			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
+			chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// calculates the coordinates of clear selection element
@@ -310,17 +307,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 				// at chart destroy phase, all handler will be removed form canvas
 				// removes mouse handler if consistent
-				if (handler.getMouseDown() != null) {
-					handler.getMouseDown().removeHandler();
-				}
-				// removes mouse handler if consistent
-				if (handler.getMouseUp() != null) {
-					handler.getMouseUp().removeHandler();
-				}
-				// removes mouse handler if consistent
-				if (handler.getMouseMove() != null) {
-					handler.getMouseMove().removeHandler();
-				}
+				handler.removeListeners();
 				// removes handler from map
 				pluginSelectionHandlers.remove(chart.getId());
 			}
@@ -337,11 +324,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public boolean onBeforeEvent(IsChart chart, ChartNativeEvent event) {
+	public boolean onBeforeEvent(IsChart chart, BaseNativeEvent event) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
@@ -395,7 +381,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param handler selection handler related to chart instance
 	 * @return <code>true</code> if must continue the event management
 	 */
-	private boolean manageClickEvent(IsChart chart, ChartNativeEvent event, SelectionHandler handler) {
+	private boolean manageClickEvent(IsChart chart, BaseNativeEvent event, SelectionHandler handler) {
 		// checks if it is a click event
 		// ONLY click are caught
 		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
@@ -434,7 +420,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if there is the amount of datasets for selection
 		if (handler.hasMinimumDatasetsItems()) {
 			// gets the image from canvas
-			String dataUrl = chart.getCanvas().toDataUrl();
+			String dataUrl = chart.getCanvas().toDataURL();
 			// checks if chart is changed
 			if (handler.isChartChanged(dataUrl)) {
 				// this is necessary to apply every time the handler
@@ -453,7 +439,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 		// the drawing of chart is completed and set the default cursor
 		// removing the "wait" one.
-		chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
+		chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
 	}
 
 	/**

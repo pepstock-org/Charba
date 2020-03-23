@@ -15,24 +15,20 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the animation of the chart is completed.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnimationCompleteEvent extends AbstractEvent<AnimationCompleteEventHandler> {
+public final class AnimationCompleteEvent extends AbstractAnimationEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationCompleteEventHandler> TYPE = new Type<>();
-
-	// animation item with animation info from chart
-	private final AnimationItem item;
+	public static final EventType TYPE = EventType.create(AnimationCompleteEvent.class);
 
 	/**
 	 * Creates the event with the animation info from chart.
@@ -40,42 +36,24 @@ public final class AnimationCompleteEvent extends AbstractEvent<AnimationComplet
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationCompleteEvent(NativeEvent nativeEvent, AnimationItem item) {
-		super(nativeEvent);
-		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Animation item argument is null");
+	public AnimationCompleteEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
+		super(nativeEvent, TYPE, item);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 */
+	@Override
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof AnimationCompleteEventHandler) {
+			// casts handler
+			AnimationCompleteEventHandler myHandler = (AnimationCompleteEventHandler) handler;
+			// invokes
+			myHandler.onComplete(this);
 		}
-		this.item = item;
-	}
-
-	/**
-	 * Returns item with animation info from chart
-	 * 
-	 * @return the item with animation info from chart
-	 */
-	public AnimationItem getItem() {
-		return item;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<AnimationCompleteEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(AnimationCompleteEventHandler handler) {
-		handler.onComplete(this);
 	}
 
 }

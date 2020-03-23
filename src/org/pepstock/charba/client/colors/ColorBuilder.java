@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
+import org.pepstock.charba.client.utils.RegExp;
+import org.pepstock.charba.client.utils.RegExpResult;
 
 /**
  * Utility to create colors by red, green and blue values, HEX value and RGB and RGBA strings.<br>
@@ -41,13 +41,13 @@ public final class ColorBuilder {
 	// REGEXP pattern for HSLA
 	private static final String REGEXP_HSLA_PATTERN = "hsla\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
 	// REGEXP for RGB
-	private static final RegExp REGEXP_RGB = RegExp.compile(REGEXP_RGB_PATTERN);
+	private static final RegExp REGEXP_RGB = new RegExp(REGEXP_RGB_PATTERN);
 	// REGEXP for RGBA
-	private static final RegExp REGEXP_RGBA = RegExp.compile(REGEXP_RGBA_PATTERN);
+	private static final RegExp REGEXP_RGBA = new RegExp(REGEXP_RGBA_PATTERN);
 	// REGEXP for HSL
-	private static final RegExp REGEXP_HSL = RegExp.compile(REGEXP_HSL_PATTERN);
+	private static final RegExp REGEXP_HSL = new RegExp(REGEXP_HSL_PATTERN);
 	// REGEXP for HSLA
-	private static final RegExp REGEXP_HSLA = RegExp.compile(REGEXP_HSLA_PATTERN);
+	private static final RegExp REGEXP_HSLA = new RegExp(REGEXP_HSLA_PATTERN);
 
 	/**
 	 * To avoid any instantiation
@@ -229,17 +229,17 @@ public final class ColorBuilder {
 	 */
 	private static IsColor buildByRGBValue(String rgbvalue) {
 		// executes regular expression
-		MatchResult matcher = REGEXP_RGB.exec(rgbvalue);
+		RegExpResult matcher = REGEXP_RGB.exec(rgbvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.getGroupCount() == 4) {
+		if (matchFound && matcher.length() == 4) {
 			// init int values
 			int red = 0;
 			int green = 0;
 			int blue = 0;
 			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.getGroupCount(); i++) {
-				String groupStr = matcher.getGroup(i);
+			for (int i = 1; i < matcher.length(); i++) {
+				String groupStr = matcher.get(i);
 				switch (i) {
 				case 1:
 					red = Integer.parseInt(groupStr);
@@ -270,18 +270,18 @@ public final class ColorBuilder {
 	 */
 	private static IsColor buildByRGBAValue(String rgbavalue) {
 		// executes regular expression
-		MatchResult matcher = REGEXP_RGBA.exec(rgbavalue);
+		RegExpResult matcher = REGEXP_RGBA.exec(rgbavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.getGroupCount() == 5) {
+		if (matchFound && matcher.length() == 5) {
 			// init int values
 			int red = 0;
 			int green = 0;
 			int blue = 0;
 			double alpha = Color.DEFAULT_ALPHA;
 			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.getGroupCount(); i++) {
-				String groupStr = matcher.getGroup(i);
+			for (int i = 1; i < matcher.length(); i++) {
+				String groupStr = matcher.get(i);
 				switch (i) {
 				case 1:
 					red = Integer.parseInt(groupStr);
@@ -315,17 +315,17 @@ public final class ColorBuilder {
 	 */
 	private static IsColor buildByHSLValue(String hslvalue) {
 		// executes regular expression
-		MatchResult matcher = REGEXP_HSL.exec(hslvalue);
+		RegExpResult matcher = REGEXP_HSL.exec(hslvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.getGroupCount() == 4) {
+		if (matchFound && matcher.length() == 4) {
 			// init int values
 			int hue = 0;
 			int saturation = 0;
 			int lightness = 0;
 			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.getGroupCount(); i++) {
-				String groupStr = matcher.getGroup(i);
+			for (int i = 1; i < matcher.length(); i++) {
+				String groupStr = matcher.get(i);
 				switch (i) {
 				case 1:
 					hue = Integer.parseInt(groupStr);
@@ -356,18 +356,18 @@ public final class ColorBuilder {
 	 */
 	private static IsColor buildByHSLAValue(String hslavalue) {
 		// executes regular expression
-		MatchResult matcher = REGEXP_HSLA.exec(hslavalue);
+		RegExpResult matcher = REGEXP_HSLA.exec(hslavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.getGroupCount() == 5) {
+		if (matchFound && matcher.length() == 5) {
 			// init int values
 			int hue = 0;
 			int saturation = 0;
 			int lightness = 0;
 			double alpha = Color.DEFAULT_ALPHA;
 			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.getGroupCount(); i++) {
-				String groupStr = matcher.getGroup(i);
+			for (int i = 1; i < matcher.length(); i++) {
+				String groupStr = matcher.get(i);
 				switch (i) {
 				case 1:
 					hue = Integer.parseInt(groupStr);
@@ -395,8 +395,7 @@ public final class ColorBuilder {
 
 	/**
 	 * Convert HSL(A) values to a RGB(A) Color.<br>
-	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace
-	 * conversions, RGB-HSL</a>.
+	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>.
 	 *
 	 * @param hue hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue.
 	 * @param saturation saturation is a percentage value; 0% means a shade of gray and 100% is the full color.

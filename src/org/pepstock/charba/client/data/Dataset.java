@@ -47,6 +47,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -54,12 +56,8 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * This is the base implementation for all datasets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
@@ -126,20 +124,50 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
 	/**
-	 * Name of properties of native object.
+	 * Name of common properties of native object related to a dataset.
 	 */
 	protected enum Property implements Key
 	{
-		LABEL("label"),
-		DATA("data"),
-		TYPE("type"),
-		HIDDEN("hidden"),
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
 		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
 		HOVER_BORDER_COLOR("hoverBorderColor"),
-		HOVER_BORDER_WIDTH("hoverBorderWidth"),
+		HOVER_BORDER_WIDTH("hoverBorderWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	/**
+	 * Name of private properties of native object.
+	 */
+	enum InternalProperty implements Key
+	{
+		LABEL("label"),
+		DATA("data"),
+		TYPE("type"),
+		HIDDEN("hidden"),
 		// internal key to store a unique id
 		CHARBA_ID("_charbaId"),
 		// internal key to store patterns and gradients
@@ -156,7 +184,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		 * 
 		 * @param value value of property name
 		 */
-		private Property(String value) {
+		private InternalProperty(String value) {
 			this.value = value;
 		}
 
@@ -184,29 +212,29 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		Type.checkIfValid(type);
 		this.type = type;
 		// stores the type
-		setValue(Property.TYPE, type);
+		setValue(InternalProperty.TYPE, type);
 		// stores the id based on a counter
-		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
+		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
-		setValue(Property.CHARBA_PATTERNS, patternsContainer);
-		setValue(Property.CHARBA_GRADIENTS, gradientsContainer);
+		setValue(InternalProperty.CHARBA_PATTERNS, patternsContainer);
+		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
-		setValue(Property.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultBorderWidth()).intValue());
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
-		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
-		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
+		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/**
@@ -215,7 +243,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the unique id of datasets
 	 */
 	public final int getId() {
-		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
+		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -224,7 +252,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the data type of datasets
 	 */
 	public final DataType getDataType() {
-		return getValue(Property.CHARBA_DATA_TYPE, DataType.class, DataType.UNKNOWN);
+		return getValue(InternalProperty.CHARBA_DATA_TYPE, DataType.values(), DataType.UNKNOWN);
 	}
 
 	/**
@@ -255,8 +283,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern, otherwise <code>false</code>.
 	 * 
 	 * @param key property name to check
 	 * @return <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern.
@@ -322,8 +349,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is
-	 * selected.
+	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is selected.
 	 * 
 	 * @param key key property name to remove.
 	 */
@@ -337,8 +363,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.<br>
+	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas therefore must be created by a chart.<br>
 	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
@@ -353,7 +378,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 				// gets list of all patterns
 				List<Pattern> patterns = getPatternsContainer().getObjects(key);
 				// creates the list of canvas pattern
-				final List<CanvasPattern> canvasPatternsList = new LinkedList<>();
+				final List<CanvasPatternItem> canvasPatternsList = new LinkedList<>();
 				// scans the patterns
 				for (Pattern pattern : patterns) {
 					// creates the canvas pattern and adds into list
@@ -572,11 +597,10 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param key key property name to use to store canvas patterns into dataset object.
 	 * @param canvasPatternsList list of canvas patterns
 	 */
-	protected abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
+	protected abstract void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList);
 
 	/**
-	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.<br>
+	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas therefore must be created by a chart.<br>
 	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
@@ -591,7 +615,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 				// gets all gradients for the key
 				List<Gradient> gradients = getGradientsContainer().getObjects(key);
 				// creates a temporary list of gradients
-				List<CanvasGradient> canvasGradientsList = new LinkedList<>();
+				List<CanvasGradientItem> canvasGradientsList = new LinkedList<>();
 				// sets internal dataset index
 				int index = 0;
 				// scans all gradients
@@ -614,7 +638,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param key key property name to use to store canvas gradients into dataset object.
 	 * @param canvasGradientsList list of canvas gradients
 	 */
-	protected abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
+	protected abstract void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList);
 
 	/**
 	 * Sets if the dataset will appear or not.
@@ -625,11 +649,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// checks if is hidden
 		if (hidden) {
 			// then sets it
-			setValue(Property.HIDDEN, hidden);
+			setValue(InternalProperty.HIDDEN, hidden);
 		} else {
 			// if is not hidden
 			// remove the property
-			remove(Property.HIDDEN);
+			remove(InternalProperty.HIDDEN);
 		}
 	}
 
@@ -639,7 +663,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return if the dataset will appear or not. Default is <code>false</code>
 	 */
 	public boolean isHidden() {
-		return getValue(Property.HIDDEN, DEFAULT_HIDDEN);
+		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);
 	}
 
 	/**
@@ -648,7 +672,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
-		setValue(Property.LABEL, label);
+		setValue(InternalProperty.LABEL, label);
 	}
 
 	/**
@@ -657,7 +681,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the label for the dataset which appears in the legend and tooltips.
 	 */
 	public String getLabel() {
-		return getValue(Property.LABEL, UndefinedValues.STRING);
+		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -671,8 +695,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values an array of numbers
 	 */
@@ -683,14 +706,13 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// set value. If null, removes key and then..
-		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values list of numbers.
 	 */
@@ -701,14 +723,14 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// set value. If null, removes key and then..
-		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
@@ -717,8 +739,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
+	 * axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
@@ -730,9 +752,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 		}
 		// checks if is a numbers data type
-		if (has(Property.DATA) && DataType.NUMBERS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers
-			ArrayDouble array = getArrayValue(Property.DATA);
+			ArrayDouble array = getArrayValue(InternalProperty.DATA);
 			// returns array
 			return ArrayListHelper.list(array);
 		}
@@ -740,9 +762,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayDoubleList result = new ArrayDoubleList();
 			// set value
-			setArrayValue(Property.DATA, ArrayDouble.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrEmpty(result));
 			// sets data type
-			setValue(Property.CHARBA_DATA_TYPE, DataType.NUMBERS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.NUMBERS);
 			// returns list
 			return result;
 		}
@@ -759,9 +781,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	final List<DataPoint> getDataPoints(DataPointFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(Dataset.Property.DATA);
+			ArrayObject array = getArrayValue(InternalProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -769,9 +791,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
-			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
 			return result;
 		}
@@ -785,9 +807,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param datapoints an array of data points
 	 */
 	final void setInternalDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -796,9 +818,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param datapoints a list of data points
 	 */
 	final void setInternalDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -810,9 +832,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(Dataset.Property.DATA);
+			ArrayObject array = getArrayValue(InternalProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -820,9 +842,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (binding) {
 			ArrayObjectContainerList<TimeSeriesItem> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
-			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
 			return result;
 		}
@@ -840,9 +862,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (timeSeriesItems != null) {
 			Arrays.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -855,9 +877,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		if (timeSeriesItems != null) {
 			Collections.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/*
@@ -1035,15 +1057,13 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the
-	 * property in color ones.
+	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
 	 * 
 	 * @param context scriptable context
 	 * @param callback callback to invoke
 	 * @param property property of dataset used to store the color
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPattern}, otherwise it
-	 *            skips them.
+	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
 	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, Key property, String defaultValue, boolean hasPattern) {

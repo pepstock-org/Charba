@@ -15,48 +15,52 @@
 */
 package org.pepstock.charba.client.events;
 
-import com.google.gwt.event.shared.EventHandler;
-
 /**
  * Event which is fired when new event handler has been removed to the chart.<br>
  * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class RemoveHandlerEvent extends AbstractHandlerEvent<RemoveHandlerEventHandler> {
+public final class RemoveHandlerEvent extends AbstractHandlerEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<RemoveHandlerEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(RemoveHandlerEvent.class);
 
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
 	 * @param handlerType the type of removed handler.
 	 */
-	public RemoveHandlerEvent(Type<? extends EventHandler> handlerType) {
+	public RemoveHandlerEvent(EventType handlerType) {
 		super(handlerType);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 * @see org.pepstock.charba.client.events.Event#getType()
 	 */
 	@Override
-	public Type<RemoveHandlerEventHandler> getAssociatedType() {
+	public EventType getType() {
 		return TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
-	protected void dispatch(RemoveHandlerEventHandler handler) {
-		handler.onRemove(this);
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof RemoveHandlerEventHandler) {
+			// casts handler
+			RemoveHandlerEventHandler myHandler = (RemoveHandlerEventHandler) handler;
+			// invokes
+			myHandler.onRemove(this);
+		}
 	}
 
 }

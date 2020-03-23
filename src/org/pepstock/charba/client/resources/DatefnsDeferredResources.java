@@ -46,7 +46,7 @@ public final class DatefnsDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for DATE-FNS in asynchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
 		ExternalTextResource datetimeLibrary();
 
 		/**
@@ -54,7 +54,7 @@ public final class DatefnsDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return an empty java script code in synchronous mode
 		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
+		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
 		TextResource datetimeAdapter();
 
 	}
@@ -74,10 +74,10 @@ public final class DatefnsDeferredResources extends AbstractDeferredResources {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.resources.AbstractDeferredResources#getClientBundle()
+	 * @see org.pepstock.charba.client.gwt.AbstractDeferredResources#getDeferredAdapterResources()
 	 */
 	@Override
-	protected DeferredDateAdapterResources getClientBundle() {
+	protected DeferredDateAdapterResources getDeferredAdapterResources() {
 		return DatefnsDeferredResourcesClientBundle.INSTANCE;
 	}
 

@@ -28,8 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
 public final class Padding extends AbstractPadding<Layout> {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param layout options layout of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

@@ -60,8 +60,7 @@ public final class GlobalPlugins {
 	 * Registers a plugin as global, to apply to all charts.
 	 * 
 	 * @param plugin plugin instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin
-	 *         id of plugin instance.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
 	 */
 	public boolean register(Plugin plugin) {
 		// checks if plugin is consistent
@@ -74,7 +73,7 @@ public final class GlobalPlugins {
 			}
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-			plugins.register(wPlugin.getNativeObject());
+			plugins.register(wPlugin.nativeObject());
 			// stores the id and object into a map
 			pluginIds.put(plugin.getId(), wPlugin);
 			return true;
@@ -137,8 +136,8 @@ public final class GlobalPlugins {
 	}
 
 	/**
-	 * Setting <code>false</code> for plugin id, the global plugin is disable to all charts and to activate the plugin on a
-	 * specific chart, is it enough to enable the plugin by options.
+	 * Setting <code>false</code> for plugin id, the global plugin is disable to all charts and to activate the plugin on a specific chart, is it enough to enable the plugin by
+	 * options.
 	 * 
 	 * @param pluginId plug id to enable
 	 * @param enable <code>true</code> to enable to all charts, otherwise <code>false</code>.

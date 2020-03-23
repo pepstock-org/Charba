@@ -106,8 +106,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	/**
 	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *            inherit).
+	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		configuration.setFontStyle(fontStyle);

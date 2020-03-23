@@ -30,8 +30,7 @@ public interface IsDefaultGridLines {
 	boolean isDisplay();
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -59,11 +58,9 @@ public interface IsDefaultGridLines {
 	boolean isDrawBorder();
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
-	 * control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn.
+	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	boolean isDrawOnChartArea();
 

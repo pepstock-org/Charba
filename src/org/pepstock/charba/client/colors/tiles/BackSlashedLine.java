@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * BACK SLASH drawer to design a back slash into tile.<br>
@@ -42,11 +42,10 @@ class BackSlashedLine extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates fifth dimension
 		final double quarterSize = size / 4D;
 		// apply the stroke properties
@@ -70,7 +69,7 @@ class BackSlashedLine extends ShapeDrawer {
 	 * @param endX offset X where ends drawing
 	 * @param endY offset Y where ends drawing
 	 */
-	final void drawDiagonal(Context2d context, double startX, double startY, double endX, double endY) {
+	final void drawDiagonal(Context2dItem context, double startX, double startY, double endX, double endY) {
 		// draws shape
 		// to point for drawing line
 		context.moveTo(startX, startY);

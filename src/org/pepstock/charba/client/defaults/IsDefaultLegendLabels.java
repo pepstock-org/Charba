@@ -24,11 +24,9 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultLegendLabels extends IsDefaultFontItem {
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 * case).
+	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 *         case).
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	boolean isUsePointStyle();
 

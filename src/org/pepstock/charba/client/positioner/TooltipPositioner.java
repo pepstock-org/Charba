@@ -22,8 +22,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.options.Tooltips;
 
 /**
- * Interface to be implemented to create a custom tooltip positionier in order address where the tooltip must be showed on
- * canvas.
+ * Interface to be implemented to create a custom tooltip positionier in order address where the tooltip must be showed on canvas.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -31,12 +30,10 @@ import org.pepstock.charba.client.options.Tooltips;
 public interface TooltipPositioner {
 
 	/**
-	 * Returns <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not
-	 * <code>null</code> as well.
+	 * Returns <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not <code>null</code> as well.
 	 * 
 	 * @param tooltipPositioner tooltip positioner to be checked
-	 * @return <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not
-	 *         <code>null</code>
+	 * @return <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not <code>null</code>
 	 */
 	static boolean isValid(TooltipPositioner tooltipPositioner) {
 		return tooltipPositioner != null && tooltipPositioner.getName() != null;
@@ -56,8 +53,8 @@ public interface TooltipPositioner {
 	 * @param chart chart instance
 	 * @param items list of dataset items
 	 * @param eventPoint the point of event when the method has been invoked
-	 * @return the point where the tooltip must be showed. If <code>null</code>, the default tooltip positioner will be used to
-	 *         provide a consistent point where tooltip will be showed
+	 * @return the point where the tooltip must be showed. If <code>null</code>, the default tooltip positioner will be used to provide a consistent point where tooltip will be
+	 *         showed
 	 */
 	Point computePosition(IsChart chart, List<DatasetItem> items, Point eventPoint);
 

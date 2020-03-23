@@ -63,8 +63,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	private final Fonter fonter;
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param legend legend of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -89,8 +88,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used
-	 *            in this case).
+	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		setValue(Property.USE_POINT_STYLE, usePointStyle);
@@ -99,11 +97,9 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	}
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 * case).
+	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not
-	 *         used in this case).
+	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());

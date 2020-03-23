@@ -16,10 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
-
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Abstract event for all events which must contain a native event.<br>
@@ -27,36 +24,52 @@ import com.google.gwt.event.shared.GwtEvent;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <H> GWT event object
  */
-public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
+public abstract class AbstractEvent extends Event {
 
+	// event type instance
+	private final EventType type;
 	// native event
-	private final NativeEvent nativeEvent;
+	private final BaseNativeEvent nativeEvent;
 
 	/**
 	 * Creates an event using a native event
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @see com.google.gwt.dom.client.NativeEvent
+	 * @param type type of event
 	 */
-	protected AbstractEvent(NativeEvent nativeEvent) {
+	protected AbstractEvent(BaseNativeEvent nativeEvent, EventType type) {
 		super();
-		// checks if argument is consistent
+		// checks if native event is consistent
 		if (nativeEvent == null) {
 			throw new IllegalArgumentException("Native event argument is null");
 		}
+		// checks if event type is consistent
+		if (type == null) {
+			throw new IllegalArgumentException("Event type argument is null");
+		}
+		// stores arguments
 		this.nativeEvent = nativeEvent;
+		this.type = type;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.Event#getType()
+	 */
+	@Override
+	public final EventType getType() {
+		return type;
 	}
 
 	/**
 	 * Returns the native event instance.
 	 * 
 	 * @return the nativeEvent
-	 * @see com.google.gwt.dom.client.NativeEvent
 	 * 
 	 */
-	public final NativeEvent getNativeEvent() {
+	public final BaseNativeEvent getNativeEvent() {
 		return nativeEvent;
 	}
 

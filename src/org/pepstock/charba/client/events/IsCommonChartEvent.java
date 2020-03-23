@@ -18,8 +18,7 @@ package org.pepstock.charba.client.events;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-
-import com.google.gwt.dom.client.NativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Interface which maps a common chart event, an event generated from CHART.JS.
@@ -55,6 +54,6 @@ public interface IsCommonChartEvent {
 	 * 
 	 * @return the nativeEvent
 	 */
-	NativeEvent getNativeEvent();
+	BaseNativeEvent getNativeEvent();
 
 }

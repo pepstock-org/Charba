@@ -48,8 +48,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin
-	 * properties.
+	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin properties.
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */
@@ -95,7 +94,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	Align getAlign() {
-		return getValue(DataLabelsOptions.Property.ALIGN, Align.class, DataLabelsOptions.DEFAULT_ALIGN);
+		return getValue(DataLabelsOptions.Property.ALIGN, Align.values(), DataLabelsOptions.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -104,7 +103,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	Anchor getAnchor() {
-		return getValue(DataLabelsOptions.Property.ANCHOR, Anchor.class, DataLabelsOptions.DEFAULT_ANCHOR);
+		return getValue(DataLabelsOptions.Property.ANCHOR, Anchor.values(), DataLabelsOptions.DEFAULT_ANCHOR);
 	}
 
 	/**
@@ -144,11 +143,9 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area).
+	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	boolean isClamp() {
 		return getValue(DataLabelsOptions.Property.CLAMP, DataLabelsOptions.DEFAULT_CLAMP);
@@ -187,17 +184,17 @@ final class DefaultsOptions extends AbstractPluginOptions {
 			return value ? Display.TRUE : Display.FALSE;
 		} else if (ObjectType.STRING.equals(type)) {
 			// if string
-			return getValue(DataLabelsOptions.Property.DISPLAY, Display.class, DataLabelsOptions.DEFAULT_DISPLAY);
+			return getValue(DataLabelsOptions.Property.DISPLAY, Display.values(), DataLabelsOptions.DEFAULT_DISPLAY);
 		}
 		return DataLabelsOptions.DEFAULT_DISPLAY;
 	}
 
 	/**
-	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 *         label is moved in the opposite direction.
 	 */
 	double getOffset() {
 		return getValue(DataLabelsOptions.Property.OFFSET, DataLabelsOptions.DEFAULT_OFFSET);
@@ -227,7 +224,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.class, DataLabelsOptions.DEFAULT_TEXT_ALIGN);
+		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.values(), DataLabelsOptions.DEFAULT_TEXT_ALIGN);
 	}
 
 	/**

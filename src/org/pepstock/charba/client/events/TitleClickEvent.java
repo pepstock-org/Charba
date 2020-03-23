@@ -15,21 +15,20 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.options.Title;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the title of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleClickEvent extends AbstractEvent<TitleClickEventHandler> {
+public final class TitleClickEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<TitleClickEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(TitleClickEvent.class);
 	// title item selected by clicking
 	private final Title item;
 
@@ -39,8 +38,8 @@ public final class TitleClickEvent extends AbstractEvent<TitleClickEventHandler>
 	 * @param nativeEvent native event of this custom event
 	 * @param item title related to the click
 	 */
-	public TitleClickEvent(NativeEvent nativeEvent, Title item) {
-		super(nativeEvent);
+	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
+		super(nativeEvent, TYPE);
 		// checks if argument is consistent
 		if (item == null) {
 			throw new IllegalArgumentException("Title item argument is null");
@@ -60,21 +59,17 @@ public final class TitleClickEvent extends AbstractEvent<TitleClickEventHandler>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
-	public Type<TitleClickEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(TitleClickEventHandler handler) {
-		handler.onClick(this);
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof TitleClickEventHandler) {
+			// casts handler
+			TitleClickEventHandler myHandler = (TitleClickEventHandler) handler;
+			// invokes
+			myHandler.onClick(this);
+		}
 	}
 
 }

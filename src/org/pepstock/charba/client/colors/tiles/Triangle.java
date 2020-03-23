@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * TRIANGLE drawer to design a triangle into tile.<br>
@@ -42,11 +42,10 @@ class Triangle extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// apply the fill properties
@@ -67,7 +66,7 @@ class Triangle extends ShapeDrawer {
 	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 */
-	final void drawTriangle(Context2d context, int size, double offsetX, double offsetY) {
+	final void drawTriangle(Context2dItem context, int size, double offsetX, double offsetY) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates quarter dimension

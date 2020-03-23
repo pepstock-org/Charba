@@ -90,8 +90,7 @@ public final class ColorSchemesOptionsBuilder {
 	}
 
 	/**
-	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
-	 * transparency).
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no transparency).
 	 * 
 	 * @param backgroundColorAlpha the transparency value for the background color
 	 * @return builder instance

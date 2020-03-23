@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DIAGONAL drawer to design a diagonal into tile, from right to left.<br>
@@ -42,11 +42,10 @@ final class InvertedDiagonal extends Diagonal {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// applies a translation to the current transform
 		context.translate(size, 0);
 		// applies rotation (90 degrees) to the current transform

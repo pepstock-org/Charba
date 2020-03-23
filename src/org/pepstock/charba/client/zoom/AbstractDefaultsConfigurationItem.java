@@ -74,7 +74,7 @@ abstract class AbstractDefaultsConfigurationItem extends NativeObjectContainer {
 	 * @return the element (panning or zooming) directions
 	 */
 	final InteractionAxis getMode() {
-		return getValue(AbstractConfigurationItem.Property.MODE, InteractionAxis.class, AbstractConfigurationItem.DEFAULT_MODE);
+		return getValue(AbstractConfigurationItem.Property.MODE, InteractionAxis.values(), AbstractConfigurationItem.DEFAULT_MODE);
 	}
 
 	/**

@@ -17,12 +17,9 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
-import com.google.gwt.canvas.dom.client.Context2d.LineCap;
-
 /**
  * Determines how the end points of every line are drawn.<br>
- * There are three possible values for this property and those are: butt, round and square. By default this property is set to
- * butt.
+ * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,30 +29,26 @@ public enum CapStyle implements Key
 	 * The ends of lines are squared off at the end points.<br>
 	 * Default.
 	 */
-	BUTT("butt", LineCap.BUTT),
+	BUTT("butt"),
 	/**
 	 * The ends of lines are rounded.
 	 */
-	ROUND("round", LineCap.ROUND),
+	ROUND("round"),
 	/**
 	 * The ends of lines are squared off by adding a box with an equal width and half the height of the line's thickness.
 	 */
-	SQUARE("square", LineCap.SQUARE);
+	SQUARE("square");
 
 	// name value of property
 	private final String value;
-	// GWT line cap
-	private final LineCap lineCap;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
-	 * @param lineCap the GWT constant for line cap style
 	 */
-	private CapStyle(String value, LineCap lineCap) {
+	private CapStyle(String value) {
 		this.value = value;
-		this.lineCap = lineCap;
 	}
 
 	/*
@@ -68,12 +61,4 @@ public enum CapStyle implements Key
 		return value;
 	}
 
-	/**
-	 * Returns the GWT constant for line cap style.
-	 * 
-	 * @return the GWT constant for line cap style
-	 */
-	public LineCap getLineCap() {
-		return lineCap;
-	}
 }

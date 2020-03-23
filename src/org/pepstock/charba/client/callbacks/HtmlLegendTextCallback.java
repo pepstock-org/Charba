@@ -16,10 +16,9 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.LegendItem;
-
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
  * This callback can be implemented to change the text of legend for a specific item, as HTML.<br>

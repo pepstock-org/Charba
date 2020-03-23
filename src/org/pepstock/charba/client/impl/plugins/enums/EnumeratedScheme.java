@@ -34,9 +34,9 @@ final class EnumeratedScheme implements ColorScheme {
 	private final String category;
 
 	private final String value;
-	
+
 	private final String[] colorsAsStrings;
-	
+
 	private final List<IsColor> colors = new LinkedList<>();
 
 	/**
@@ -63,7 +63,7 @@ final class EnumeratedScheme implements ColorScheme {
 		this.value = value;
 		this.colorsAsStrings = null;
 	}
-	
+
 	/**
 	 * Adds a list of colors.
 	 * 

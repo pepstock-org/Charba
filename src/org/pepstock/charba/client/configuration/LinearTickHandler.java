@@ -26,8 +26,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object to map an axis tick for LINEAR axes, {@link CartesianLinearAxis}, {@link CartesianLogarithmicAxis} or
- * {@link RadialAxis}.<br>
+ * Base object to map an axis tick for LINEAR axes, {@link CartesianLinearAxis}, {@link CartesianLogarithmicAxis} or {@link RadialAxis}.<br>
  * It is also common to want to change the tick marks to include information about the data type.<br>
  * To do this, you need to add a callback in the axis configuration. <br>
  * If the callback returns null or undefined the associated grid line will be hidden.

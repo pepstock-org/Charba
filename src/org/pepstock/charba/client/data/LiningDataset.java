@@ -52,6 +52,9 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.HasFill;
@@ -59,13 +62,6 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * The chart allows a number of properties to be specified for each dataset.<br>
@@ -234,45 +230,47 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -------------------------------
 		// gets value calling callback
 		pointBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBackgroundColorCallback, Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(context, pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		pointBorderColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointBorderColorCallback, Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
-		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointHoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
+		pointHoverBackgroundColorCallbackProxy.setCallback(
+				(contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBackgroundColorCallback, Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString(), true));
 		// gets value calling callback
 		pointHoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(context, pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), pointHoverBorderColorCallback, Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
 		// gets value calling callback
-		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// gets value calling callback
-		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// gets value calling callback
-		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// gets value calling callback
-		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(context)));
 		// gets value calling callback
-		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, borderCapStyleCallback));
+		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(context), borderCapStyleCallback));
 		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, borderDashCallback));
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(context), borderDashCallback));
 		// gets value calling callback
-		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
-		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, borderJoinStyleCallback));
+		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(context), borderJoinStyleCallback));
 		// gets value calling callback
-		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context, hoverBorderCapStyleCallback));
+		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(context), hoverBorderCapStyleCallback));
 		// gets value calling callback
-		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context, hoverBorderDashCallback));
+		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(context), hoverBorderDashCallback));
 		// gets value calling callback
-		hoverBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		hoverBorderDashOffsetCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
 		// gets value calling callback
-		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context, hoverBorderJoinStyleCallback));
+		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(context), hoverBorderJoinStyleCallback));
 	}
 
 	/*
@@ -322,7 +320,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	@Override
 	public String getLabel() {
-		return getValue(Dataset.Property.LABEL, DEFAULT_LABEL);
+		return getValue(Dataset.InternalProperty.LABEL, DEFAULT_LABEL);
 	}
 
 	/**
@@ -566,11 +564,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		// resets callback
@@ -580,11 +576,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		// checks if a callback has been set for this property
@@ -639,15 +633,14 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Returns how the end points of every line are drawn.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
 		// checks if a callback has been set for this property
 		if (getBorderCapStyleCallback() == null) {
-			return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+			return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getElements().getLine().getBorderCapStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -655,9 +648,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
@@ -670,9 +662,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -680,7 +671,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public JoinStyle getBorderJoinStyle() {
 		// checks if a callback has been set for this property
 		if (getBorderJoinStyleCallback() == null) {
-			return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+			return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getElements().getLine().getBorderJoinStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -699,8 +690,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation
-	 * is used.
+	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
 	 * 
 	 * @param lineTension curve tension of the line
 	 */
@@ -709,8 +699,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic
-	 * interpolation is used.
+	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
 	 * 
 	 * @return curve tension of the line.
 	 */
@@ -900,11 +889,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
-	 * <code>null</code>.
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns
-	 *         <code>null</code>
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>
 	 */
 	public Gradient getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
@@ -948,11 +935,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern, when element is hovered.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element is
+	 * hovered.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern, when element is hovered
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern,
+	 *            when element is hovered
 	 */
 	public void setHoverBorderDash(int... borderDash) {
 		// resets callback
@@ -962,11 +949,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern, when element is hovered.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element
+	 * is hovered.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern, when element is hovered
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern, when element
+	 *         is hovered
 	 */
 	public List<Integer> getHoverBorderDash() {
 		// checks if a callback has been set for this property
@@ -1021,15 +1008,14 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Returns how the end points of every line are drawn, when element is hovered.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn, when element is hovered
 	 */
 	public CapStyle getHoverBorderCapStyle() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderCapStyleCallback() == null) {
-			return getValue(Property.HOVER_BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+			return getValue(Property.HOVER_BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getElements().getLine().getBorderCapStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -1037,9 +1023,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped), when element is hovered.<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped), when element is hovered.<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
@@ -1052,9 +1037,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped), when element is hovered.<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped), when element is hovered.<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -1062,7 +1046,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public JoinStyle getHoverBorderJoinStyle() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderJoinStyleCallback() == null) {
-			return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+			return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getElements().getLine().getBorderJoinStyle());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -1112,11 +1096,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color
-	 * color.
+	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color color.
 	 * 
-	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color
-	 *         color.
+	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color color.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1203,8 +1185,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
-	 *         color.
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
 	 */
 	public List<String> getPointBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1223,8 +1204,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
-	 *         color.
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
 	 */
 	public List<IsColor> getPointBorderColor() {
 		return ColorBuilder.parse(getPointBorderColorAsString());
@@ -1348,11 +1328,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
-	 * background color.
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
-	 *         background color.
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1368,11 +1346,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
-	 * background color.
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
-	 *         background color.
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point background color.
 	 */
 	public List<IsColor> getPointHoverBackgroundColor() {
 		return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
@@ -1440,8 +1416,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
-	 *         color.
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1459,8 +1434,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
-	 *         color.
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
 		return ColorBuilder.parse(getPointHoverBorderColorAsString());
@@ -1592,10 +1566,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		if (!getValue(Property.CHARBA_POINT_STYLE, false) && pointStyleCallback == null) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.class, array);
+			return ArrayListHelper.list(PointStyle.values(), array);
 		} else {
 			// if here, means the point style as stored as images or callback
-			return ArrayListHelper.list(PointStyle.class, new PointStyle[0]);
+			return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
 		}
 	}
 
@@ -1604,58 +1578,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointStyle array of the style of the point as image.
 	 */
-	public void setPointStyle(ImageResource... pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[pointStyle.length];
-			// scans passed array of images
-			for (int i = 0; i < pointStyle.length; i++) {
-				// transform a image resource into image element by image object
-				// creates image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(pointStyle[i]);
-			}
-			// stores it
-			setPointStyle(array);
-		} else {
-			// resets callback and
-			// also flags
-			setPointStyle((PointStyleCallback) null);
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle array of the style of the point as image.
-	 */
-	public void setPointStyle(Image... pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// creates a temporary array
-			ImageElement[] array = new ImageElement[pointStyle.length];
-			// scans passed array of images
-			for (int i = 0; i < pointStyle.length; i++) {
-				// transform a image resource into image element by image object
-				// stores into array changing in image element
-				array[i] = Utilities.toImageElement(pointStyle[i]);
-			}
-			// stores it
-			setPointStyle(array);
-		} else {
-			// resets callback and
-			// also flags
-			setPointStyle((PointStyleCallback) null);
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle array of the style of the point as image.
-	 */
-	public void setPointStyle(ImageElement... pointStyle) {
+	public void setPointStyle(Img... pointStyle) {
 		// resets callback and
 		// also flags
 		setPointStyle((PointStyleCallback) null);
@@ -1670,7 +1593,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return list of the style of the point as image. If property is missing or not a image, returns an empty list.
 	 */
-	public List<ImageElement> getPointStyleAsImages() {
+	public List<Img> getPointStyleAsImages() {
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false) && getPointStyleCallback() == null) {
 			// gets array
@@ -1712,22 +1635,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line
+	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
 	 * 
-	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN
-	 *            data will create a break in the line
+	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
 	 */
 	public void setSpanGaps(boolean spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
-	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line.
+	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
 	 * 
-	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
-	 *         create a break in the line.
+	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
@@ -2310,11 +2229,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
 		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key)) {
 			// gets the first element
-			CanvasPattern pattern = canvasPatternsList.get(0);
+			CanvasPatternItem pattern = canvasPatternsList.get(0);
 			// creates pattern and stores it
 			setValue(key, pattern);
 		}
@@ -2326,24 +2245,24 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
 		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.BORDER_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BORDER_COLOR, key)) {
 			// gets the first element
-			CanvasGradient gradient = canvasGradientsList.get(0);
+			CanvasGradientItem gradient = canvasGradientsList.get(0);
 			// creates gradient and stores it
 			setValue(key, gradient);
 		} else {
 			// stores the array
-			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
+			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradientItem[0]));
 		}
 	}
 
 	/**
-	 * Returns a {@link PointStyle} or {@link ImageElement} when the callback has been activated.
+	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @return a object property value, as {@link PointStyle} or {@link ImageElement}
+	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
 	private Object onPointStyle(ScriptableContext context) {
 		// gets value
@@ -2353,13 +2272,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// is point style instance
 			PointStyle style = (PointStyle) result;
 			return style.value();
-		} else if (result instanceof Image) {
-			// is image instance
-			return Utilities.toImageElement((Image) result);
-		} else if (result instanceof ImageResource) {
-			// is image resource instance
-			return Utilities.toImageElement((ImageResource) result);
-		} else if (result instanceof ImageElement) {
+		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
 		}

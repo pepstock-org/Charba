@@ -23,8 +23,7 @@ import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
 import org.pepstock.charba.client.configuration.RadialAxis;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type, for axes which are
- * showing data as numbers.
+ * Interface to implement if wants to change the tick marks to include information about the data type, for axes which are showing data as numbers.
  * 
  * @author Andrea "Stock" Stocchero
  * @see CartesianLinearAxis

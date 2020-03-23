@@ -20,18 +20,14 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-zoom">ZOOM plugin</a> to enable the plugin.<br>
- * The {@value ZoomPlugin#ID} plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
- * The {@value ZoomPlugin#ID} plugin has got a dependency with javascript utility
- * <a href="https://github.com/hammerjs/hammer.js">hammer</a>, utility used for gesture recognition.
+ * The ZOOM plugin is highly customizable CHART.JS plugin that is zooming data of charts.<br>
+ * The ZOOM plugin plugin has got a dependency with javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>, utility used for gesture recognition.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -39,40 +35,9 @@ import com.google.gwt.resources.client.TextResource;
 public final class ZoomPlugin {
 
 	/**
-	 * Client bundle to reference ZOOM CHART.JS plugin, wrapped by Charba.
-	 * 
-	 * @author Andrea "Stock" Stocchero
+	 * Plugin ID <b>"zoom"</b>.
 	 */
-	interface ZoomClientBundle extends ClientBundle {
-
-		/**
-		 * Static reference to extensions java script source code
-		 */
-		static final ZoomClientBundle INSTANCE = GWT.create(ZoomClientBundle.class);
-
-		/**
-		 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a>
-		 * code.
-		 * 
-		 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-zoom">zoom plugin</a> code
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "chartjs-plugin-zoom.min.js")
-		TextResource zoomPlugin();
-
-		/**
-		 * Contains text representation of native javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a>
-		 * code.
-		 * 
-		 * @return javascript utility <a href="https://github.com/hammerjs/hammer.js">hammer</a> code
-		 */
-		@Source(ResourcesType.JAVASCRIPT_RESOURCES_PATH + "hammer.min.js")
-		TextResource hammerLibrary();
-	}
-
-	/**
-	 * Plugin ID <b>{@value ID}</b>.
-	 */
-	public static final String ID = "zoom";
+	public static final String ID = ResourceName.ZOOM_PLUGIN.value();
 
 	/**
 	 * Zoom options factory
@@ -80,6 +45,10 @@ public final class ZoomPlugin {
 	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory();
 	// internal defaults options factory
 	static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
+	// injectable resource for plugin
+	private static final ZoomPluginResource RESOURCE = new ZoomPluginResource();
+	// injectable resource for plugin for additional library
+	private static final ZoomPluginHammerResource RESOURCE_HAMMER = new ZoomPluginHammerResource();
 
 	/**
 	 * To avoid any instantiation
@@ -101,12 +70,25 @@ public final class ZoomPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
+		enable(enableToAllCharts, true);
+	}
+
+	/**
+	 * Inject the plugin and by the argument decides to enable the plugin to all charts or not.
+	 * 
+	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
+	 * @param enableHammerInjection if <code>false</code>, HammerJs library will not be injected
+	 */
+	public static void enable(boolean enableToAllCharts, boolean enableHammerInjection) {
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getClientBundle().inject();
-		// injects HAMMER plugin
-		Injector.ensureInjected(ZoomClientBundle.INSTANCE.hammerLibrary());
+		// checks if hammer must be injected
+		if (enableHammerInjection) {
+			// injects HAMMER library
+			Injector.ensureInjected(RESOURCE_HAMMER);
+		}
 		// injects ZOOM plugin
-		Injector.ensureInjected(ZoomClientBundle.INSTANCE.zoomPlugin());
+		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}

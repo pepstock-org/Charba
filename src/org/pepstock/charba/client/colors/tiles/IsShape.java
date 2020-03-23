@@ -26,20 +26,17 @@ import org.pepstock.charba.client.commons.Key;
 public interface IsShape extends Key {
 
 	/**
-	 * Returns <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
-	 * <code>null</code> as well.
+	 * Returns <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning <code>null</code> as well.
 	 * 
 	 * @param shape shape to be checked
-	 * @return <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning
-	 *         <code>null</code> as well.
+	 * @return <code>true</code> if shape passed as argument is not <code>null</code> and its methods are not returning <code>null</code> as well.
 	 */
 	static boolean isValid(IsShape shape) {
 		return Key.isValid(shape) && shape.getKeyPrefix() != null && shape.getDrawer() != null;
 	}
 
 	/**
-	 * Checks if shape passed as argument is not <code>null</code> and its methods are not returning <code>null</code> as
-	 * well.<br>
+	 * Checks if shape passed as argument is not <code>null</code> and its methods are not returning <code>null</code> as well.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param shape shape to be checked

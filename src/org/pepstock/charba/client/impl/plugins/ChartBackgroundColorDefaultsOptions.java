@@ -53,7 +53,7 @@ final class ChartBackgroundColorDefaultsOptions extends AbstractPluginOptions {
 	 * @return the type of background color has been set
 	 */
 	ColorType getColorType() {
-		return getValue(ChartBackgroundColorOptions.Property.COLOR_TYPE, ColorType.class, ColorType.COLOR);
+		return getValue(ChartBackgroundColorOptions.Property.COLOR_TYPE, ColorType.values(), ColorType.COLOR);
 	}
 
 	/**

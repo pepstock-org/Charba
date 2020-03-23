@@ -49,8 +49,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called to hook into the tooltip rendering process so that you can render the tooltip in
-	 * your own custom way.<br>
+	 * Java script FUNCTION callback called to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -59,8 +58,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	interface ProxyCustomCallback {
 
 		/**
-		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your
-		 * own custom way.
+		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param model all info about tooltip to create own HTML tooltip.
@@ -102,8 +100,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item1 the first object to be compared.
 		 * @param item2 the second object to be compared.
-		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than
-		 *         the second.
+		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
 		 */
 		int call(CallbackFunctionContext context, NativeObject item1, NativeObject item2);
 	}
@@ -248,22 +245,18 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
-	 * applied at all times.
+	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 * 
-	 * @param intersect if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the
-	 *            mode will be applied at all times.
+	 * @param intersect if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 */
 	public void setIntersect(boolean intersect) {
 		getConfiguration().getTooltips().setIntersect(intersect);
 	}
 
 	/**
-	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
-	 * applied at all times.
+	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 * 
-	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times.
+	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
 	 */
 	public boolean isIntersect() {
 		return getConfiguration().getTooltips().isIntersect();
@@ -954,8 +947,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip,
-	 * regardless of the CSS specified on the canvas.
+	 * Sets the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip, regardless of the CSS specified on the canvas.
 	 * 
 	 * @param textDirection the text direction of the tooltip.
 	 */
@@ -964,8 +956,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Returns the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip,
-	 * regardless of the CSS specified on the canvas.
+	 * Returns the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip, regardless of the CSS specified on the canvas.
 	 * 
 	 * @return the text direction of the tooltip.
 	 */

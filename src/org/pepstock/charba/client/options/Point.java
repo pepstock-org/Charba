@@ -18,13 +18,9 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
@@ -72,8 +68,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param elements parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -125,7 +120,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
 		if (!getValue(Property.CHARBA_POINT_STYLE, false)) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, getDefaultValues().getPointStyle());
+			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
 		} else {
 			// if here, means the point style as stored as images
 			return null;
@@ -135,29 +130,9 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	/**
 	 * Sets the style of the point as image.
 	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(ImageResource pointStyle) {
-		// transform a image resource into image element by image object
-		// creates image object
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image resource of the style of the point as image.
-	 */
-	public void setPointStyle(Image pointStyle) {
-		setPointStyle(Utilities.toImageElement(pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
 	 * @param pointStyle image element of the style of the point as image.
 	 */
-	public void setPointStyle(ImageElement pointStyle) {
+	public void setPointStyle(Img pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -177,7 +152,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return image of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
 	 */
-	public ImageElement getPointStyleAsImages() {
+	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false)) {
 			// gets value

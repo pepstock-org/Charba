@@ -31,8 +31,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * A gradient is an image consisting of a progressive transition between two or more colors.<br>
  * Could be <code>Linear</code> or <code>Radial</code>.<br>
  * Can be created using the size of <code>CANVAS</code> or <code>CHART</code> area.<br>
- * The orientation to have a progressive transition, is defined by an enumeration in order to creates the gradient using the
- * right coordinates and dimension, based on existing items (canvas and chart).
+ * The orientation to have a progressive transition, is defined by an enumeration in order to creates the gradient using the right coordinates and dimension, based on existing
+ * items (canvas and chart).
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -185,7 +185,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient type
 	 */
 	public GradientType getType() {
-		return getValue(Property.CHARBA_GRADIENT_TYPE, GradientType.class, GradientType.LINEAR);
+		return getValue(Property.CHARBA_GRADIENT_TYPE, GradientType.values(), GradientType.LINEAR);
 	}
 
 	/**
@@ -194,7 +194,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient orientation
 	 */
 	public GradientOrientation getOrientation() {
-		return getValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.class, GradientOrientation.getDefaultByType(getType()));
+		return getValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.values(), GradientOrientation.getDefaultByType(getType()));
 	}
 
 	/**
@@ -203,7 +203,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient scope
 	 */
 	public GradientScope getScope() {
-		return getValue(Property.CHARBA_GRADIENT_SCOPE, GradientScope.class, GradientScope.CHART);
+		return getValue(Property.CHARBA_GRADIENT_SCOPE, GradientScope.values(), GradientScope.CHART);
 	}
 
 	/**
@@ -367,8 +367,7 @@ public final class Gradient extends CanvasObject {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public Gradient create(NativeObject nativeObject) {

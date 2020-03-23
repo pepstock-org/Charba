@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.utils;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -24,9 +23,10 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
+import org.pepstock.charba.client.dom.BaseAttribute;
+import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.NamedNodeMap;
+import org.pepstock.charba.client.dom.enums.NodeType;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
@@ -43,8 +43,8 @@ import jsinterop.annotations.JsType;
 public final class JSON {
 
 	/**
-	 * A function that alters the behavior of the stringification process. If this value is null or not provided, all properties
-	 * of the object are included in the resulting JSON string.<br>
+	 * A function that alters the behavior of the stringification process. If this value is null or not provided, all properties of the object are included in the resulting JSON
+	 * string.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -70,24 +70,22 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string, optionally replacing values if a replacer function is specified
-	 * or optionally including only the specified properties if a replacer array is specified.<br>
+	 * Converts a JavaScript object or value to a JSON string, optionally replacing values if a replacer function is specified or optionally including only the specified properties
+	 * if a replacer array is specified.<br>
 	 * it can throw an exception, TypeError ("cyclic object value") exception when a circular reference is found.
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param function A function that alters the behavior of the stringification process, or an array of String and Number
-	 *            objects that serve as a whitelist for selecting/filtering the properties of the value object to be included in
-	 *            the JSON string. If this value is null or not provided, all properties of the object are included in the
-	 *            resulting JSON string.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @param function A function that alters the behavior of the stringification process, or an array of String and Number objects that serve as a whitelist for
+	 *            selecting/filtering the properties of the value object to be included in the JSON string. If this value is null or not provided, all properties of the object are
+	 *            included in the resulting JSON string.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is greater, the value is just 10). Values less than 1
+	 *            indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	static native String stringify(Object obj, Replacer function, int spaces);
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be
-	 * used.
+	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be used.
 	 * 
 	 * @param obj The value to convert to a JSON string.
 	 * @return A JSON string representing the given value.
@@ -108,8 +106,8 @@ public final class JSON {
 	 * Converts a JavaScript object or value to a JSON string.
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is greater, the value is just 10). Values less than 1
+	 *            indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	@JsOverlay
@@ -125,8 +123,8 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string, the space value is set to -1 that no space should be used and
-	 * uses a default replacer to avoid <code>TypeError: cyclic object value</code>.
+	 * Converts a JavaScript object or value to a JSON string, the space value is set to -1 that no space should be used and uses a default replacer to avoid
+	 * <code>TypeError: cyclic object value</code>.
 	 * 
 	 * @param obj The value to convert to a JSON string.
 	 * @return A JSON string representing the given value.
@@ -137,12 +135,11 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string, using a default replacer to avoid
-	 * <code>TypeError: cyclic object value</code>.
+	 * Converts a JavaScript object or value to a JSON string, using a default replacer to avoid <code>TypeError: cyclic object value</code>.
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is greater, the value is just 10). Values less than 1
+	 *            indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	@JsOverlay
@@ -159,7 +156,7 @@ public final class JSON {
 					// checks if hashcode
 					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
 						// skips it
-						return JsHelper.get().undefined();
+						return Window.undefined();
 					}
 					// gets the object
 					Object result = manageObject(objects, value);
@@ -225,24 +222,32 @@ public final class JSON {
 	@JsOverlay
 	private static String manageElement(Object value) {
 		// checks if is an element
-		if (value instanceof Element) {
+		if (value instanceof BaseElement) {
 			// casts to element
-			Element element = (Element) value;
+			BaseElement element = (BaseElement) value;
 			// checks if is an element node
-			if (element.getNodeType() == Node.ELEMENT_NODE) {
+			if (NodeType.ELEMENT_NODE.equals(element.getNodeType())) {
+				// creates builder
 				StringBuilder sb = new StringBuilder();
-				sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-				List<String> attributes = JsWindowHelper.get().elementAttributes(element);
-				if (!attributes.isEmpty()) {
-					for (String attribute : attributes) {
-						sb.append(" ").append(attribute);
+				// appends xml values as node
+				sb.append(Constants.LT).append(element.getNodeName().toLowerCase(Locale.getDefault()));
+				// checks if element has got any attributes
+				if (element.hasAttributes()) {
+					// gets attributes map
+					NamedNodeMap<BaseAttribute> attributes = element.getAttributes();
+					// scans all attributes
+					for (int i = 0; i < attributes.length(); i++) {
+						// gets attribute by index
+						BaseAttribute attr = attributes.item(i);
+						sb.append(Constants.BLANK).append(attr.getName()).append("='").append(attr.getValue() + "'");
 					}
 				}
 				// returns html
-				return sb.append(">").toString();
+				return sb.append(Constants.GT).toString();
 			}
 		}
 		return null;
+
 	}
 
 	/**
@@ -250,8 +255,8 @@ public final class JSON {
 	 * 
 	 * @param obj The value to convert to a JSON string.
 	 * @param replacer A function that alters the behavior of the stringification process.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is greater, the value is just 10). Values less than 1
+	 *            indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	@JsOverlay
@@ -274,12 +279,11 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string, using a specific replacer to avoid to print internal keys of
-	 * CHART.js
+	 * Converts a JavaScript object or value to a JSON string, using a specific replacer to avoid to print internal keys of CHART.js
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is greater, the value is just 10). Values less than 1
+	 *            indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	@JsOverlay
@@ -329,7 +333,7 @@ public final class JSON {
 			return value;
 		} else {
 			// skip it
-			return JsHelper.get().undefined();
+			return Window.undefined();
 		}
 	}
 

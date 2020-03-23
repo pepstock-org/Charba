@@ -15,14 +15,14 @@
 */
 package org.pepstock.charba.client.commons;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects.
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -35,13 +35,6 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
-
-	/**
-	 * Returns an undefined reference
-	 * 
-	 * @return undefined reference
-	 */
-	static native Object undefined();
 
 	/**
 	 * Returns the java script object type of object.
@@ -70,8 +63,7 @@ final class NativeJsHelper {
 	static native boolean isArray(Object object, String key);
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
-	 * method.
+	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
 	 * 
 	 * @param <T> callback proxy type
 	 * @return new proxy for callback.
@@ -87,47 +79,19 @@ final class NativeJsHelper {
 	static native void remove(NativeObject object, String key);
 
 	/**
-	 * Returns a property of java script object as integer.
+	 * Returns <code>true</code> if the object is a {@link CanvasPatternItem}.
 	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return integer value
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasPatternItem}
 	 */
-	static native int propertyAsInt(Object object, String key);
+	static native boolean isCanvasPattern(Object object);
 
 	/**
-	 * Returns a property of java script object as double.
+	 * Returns <code>true</code> if the object is a {@link CanvasGradientItem}.
 	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return double value
+	 * @param object the object instance on which to check
+	 * @return <code>true</code> if the object is a {@link CanvasGradientItem}
 	 */
-	static native double propertyAsDouble(Object object, String key);
-
-	/**
-	 * Returns a property of java script object as string.
-	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return string value
-	 */
-	static native String propertyAsString(Object object, String key);
-
-	/**
-	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
-	 * and gaps which describe the pattern.
-	 * 
-	 * @param context context of canvas
-	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
-	 */
-	static native void setLineDash(Context2d context, ArrayInteger object);
-
-	/**
-	 * Sets the line dash offset, or "phase."<br>
-	 * 
-	 * @param context context of canvas
-	 * @param offset the line dash offset, or "phase."
-	 */
-	static native void setLineDashOffset(Context2d context, int offset);
+	static native boolean isCanvasGradient(Object object);
 
 }

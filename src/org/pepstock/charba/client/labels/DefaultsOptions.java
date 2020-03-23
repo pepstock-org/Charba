@@ -54,7 +54,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return what data must be showed.
 	 */
 	Render getRender() {
-		return getValue(LabelsOptions.Property.RENDER, Render.class, LabelsOptions.DEFAULT_RENDER);
+		return getValue(LabelsOptions.Property.RENDER, Render.values(), LabelsOptions.DEFAULT_RENDER);
 	}
 
 	/**
@@ -99,7 +99,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the font style.
 	 */
 	FontStyle getFontStyle() {
-		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getFontStyle());
+		return getValue(LabelsOptions.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getFontStyle());
 	}
 
 	/**
@@ -171,7 +171,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the position to draw label.
 	 */
 	Position getPosition() {
-		return getValue(LabelsOptions.Property.POSITION, Position.class, LabelsOptions.DEFAULT_POSITION);
+		return getValue(LabelsOptions.Property.POSITION, Position.values(), LabelsOptions.DEFAULT_POSITION);
 	}
 
 	/**
@@ -184,11 +184,9 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the
-	 * percentages to 100 in total.
+	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * 
-	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total.
+	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
 	boolean isShowActualPercentages() {
 		return getValue(LabelsOptions.Property.SHOW_ACTUAL_PERCENTAGES, LabelsOptions.DEFAULT_SHOW_ACTUAL_PERCENTAGES);

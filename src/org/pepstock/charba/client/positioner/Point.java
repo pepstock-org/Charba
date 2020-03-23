@@ -15,26 +15,63 @@
 */
 package org.pepstock.charba.client.positioner;
 
-import org.pepstock.charba.client.commons.NativeName;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in
- * canvas coordinates.
+ * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in canvas coordinates.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Point {
+public final class Point extends NativeObjectContainer {
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		X("x"),
+		Y("y");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
 
 	/**
 	 * Creates an empty object
 	 */
 	public Point() {
-		// must be empty
+		super();
+	}
+
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
+	Point(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -42,31 +79,43 @@ public final class Point {
 	 * 
 	 * @param x the X coordinate of the point.
 	 */
-	@JsProperty(name = "x")
-	public native void setX(int x);
+	public void setX(int x) {
+		setValue(Property.X, x);
+	}
 
 	/**
 	 * Returns the X coordinate of the point.
 	 * 
 	 * @return the X coordinate of the point.
 	 */
-	@JsProperty(name = "x")
-	public native int getX();
+	public int getX() {
+		return getValue(Property.X, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Sets the Y coordinate of the point.
 	 * 
 	 * @param y the Y coordinate of the point.
 	 */
-	@JsProperty(name = "y")
-	public native void setY(int y);
+	public void setY(int y) {
+		setValue(Property.Y, y);
+	}
 
 	/**
 	 * Returns the Y coordinate of the point.
 	 * 
 	 * @return the Y coordinate of the point.
 	 */
-	@JsProperty(name = "y")
-	public native int getY();
+	public int getY() {
+		return getValue(Property.Y, UndefinedValues.INTEGER);
+	}
 
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return getNativeObject();
+	}
 }

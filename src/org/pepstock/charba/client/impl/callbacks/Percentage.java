@@ -40,30 +40,28 @@ public final class Percentage {
 	}
 
 	/**
-	 * Computes the percentage of the value based on the data of datasets. If the dataset is composed by {@link DataPoint}, it
-	 * uses the {@link DataPoint#getY()} value to compute the percentage. The stack is ignored.
+	 * Computes the percentage of the value based on the data of datasets. If the dataset is composed by {@link DataPoint}, it uses the {@link DataPoint#getY()} value to compute
+	 * the percentage. The stack is ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param value current value to be evaluated
 	 * @param context data labels plugin context
-	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return
-	 *         {@link Double#NaN}.
+	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return {@link Double#NaN}.
 	 */
 	public static double compute(IsChart chart, double value, ScriptableContext context) {
 		return compute(chart, value, context, false);
 	}
 
 	/**
-	 * Computes the percentage of the value based on the data of datasets. If the dataset is composed by {@link DataPoint}, it
-	 * uses the {@link DataPoint#getY()} value to compute the percentage.
+	 * Computes the percentage of the value based on the data of datasets. If the dataset is composed by {@link DataPoint}, it uses the {@link DataPoint#getY()} value to compute
+	 * the percentage.
 	 * 
 	 * @param chart chart instance
 	 * @param value current value to be evaluated
 	 * @param context data labels plugin context
-	 * @param stacked if <code>true</code>, it calculates the total at the same data index (cross datasets), otherwise if
-	 *            <code>false</code> it calculates the total at the same dataset index (single dataset)
-	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return
-	 *         {@link Double#NaN}.
+	 * @param stacked if <code>true</code>, it calculates the total at the same data index (cross datasets), otherwise if <code>false</code> it calculates the total at the same
+	 *            dataset index (single dataset)
+	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return {@link Double#NaN}.
 	 */
 	public static double compute(IsChart chart, double value, ScriptableContext context, boolean stacked) {
 		// checks if arguments are consistent

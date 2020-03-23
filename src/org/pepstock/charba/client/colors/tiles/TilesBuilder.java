@@ -17,9 +17,8 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * Comfortable object to create tiles (as CHARBA pattern or canvas pattern) by a builder.
@@ -141,7 +140,7 @@ public final class TilesBuilder {
 	 * 
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern asTile() {
+	public CanvasPatternItem asTile() {
 		return TilesFactory.createTile(shape, backgroundColor, shapeColor, size);
 	}
 

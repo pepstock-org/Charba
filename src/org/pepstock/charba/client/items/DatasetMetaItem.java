@@ -29,8 +29,7 @@ import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.options.Scales;
 
 /**
- * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
- * position.<br>
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * Created and passed by CHART.JS and provide dataset metadata information.<br>
  * Contains all data set items.
  * 
@@ -101,7 +100,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		// gets string value from java script object
 		String value = getValue(Property.TYPE, ChartType.BAR.value());
 		// checks if consistent with out of the box chart types
-		Type type = Key.getKeyByValue(ChartType.class, value);
+		Type type = Key.getKeyByValue(ChartType.values(), value);
 		// if not, creates new type being a controller.
 		if (type == null) {
 			// gets type from controllers

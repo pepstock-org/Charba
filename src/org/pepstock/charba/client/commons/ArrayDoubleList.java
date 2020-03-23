@@ -97,8 +97,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
 	public boolean addAll(Collection<? extends Double> collection) {
@@ -172,8 +171,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * NaN
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns NaN
 	 */
 	@Override
 	public Double set(int index, Double element) {
@@ -191,8 +189,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
-	 * indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
 	public void add(int index, Double element) {
@@ -205,8 +202,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
-	 * the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
 	public Double remove(int index) {
@@ -218,8 +214,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int indexOf(Object object) {
@@ -233,8 +228,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
-	 * element.
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
 	public int lastIndexOf(Object object) {

@@ -21,8 +21,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.ScaleItem;
 
 /**
- * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contains information
- * about the dataset, chart and scales to use.
+ * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contains information about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
  *

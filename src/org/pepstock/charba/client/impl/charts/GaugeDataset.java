@@ -26,12 +26,10 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The Gauge chart allows a number of properties to be specified for each dataset. These are used to set display properties for
- * a specific dataset.<br>
+ * The Gauge chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Is equals of Meter dataset.<br>
  * The minimum value of data is 0 (see {@link MeterDataset#MINIMUM_VALUE}).<br>
- * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method instead of
- * {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
+ * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method instead of {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
  * 
  * @author Andrea "Stock" Stocchero
  */

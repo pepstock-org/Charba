@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 /**
- * Entity class which contains the amount of datasets items on area, the X coordinate of selection area and the width between
- * ticks.
+ * Entity class which contains the amount of datasets items on area, the X coordinate of selection area and the width between ticks.
  * 
  * @author Andrea "Stock" Stocchero
  *

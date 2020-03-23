@@ -19,10 +19,9 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.plugins.NativePlugins;
-
-import com.google.gwt.canvas.dom.client.Context2d;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -75,31 +74,30 @@ public final class Chart {
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
 	 * 
-	 * @param context represents a flat cartesian surface whose origin (0,0) is at the top left corner, with the coordinate
-	 *            space having x values increasing when going right, and y values increasing when going down.
+	 * @param context represents a flat cartesian surface whose origin (0,0) is at the top left corner, with the coordinate space having x values increasing when going right, and y
+	 *            values increasing when going down.
 	 * @param configuration configuration of CHART (native object).
 	 */
-	protected Chart(Context2d context, Configuration configuration) {
+	protected Chart(Context2dItem context, NativeObject configuration) {
 	}
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
-	 * this method manually if you change the size of the canvas nodes container element.
+	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
+	 * canvas nodes container element.
 	 */
 	@JsMethod
 	native void resize();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
 	 */
 	@JsMethod
 	native void update();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A config object can be provided with additional configuration for the update
-	 * process. This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart. A config
+	 * object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some different
+	 * animation is desired.
 	 * 
 	 * @param config a config object can be provided with additional configuration for the update process
 	 */
@@ -107,16 +105,14 @@ public final class Chart {
 	native void update(NativeObject config);
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	@JsMethod
 	native void render();
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A config object can be provided with additional configuration for the render process. This is useful when
-	 * update is manually called inside an event handler and some different animation is desired.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A config object can be provided with
+	 * additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param config a config object can be provided with additional configuration for the render process
 	 */
@@ -124,15 +120,14 @@ public final class Chart {
 	native void render(NativeObject config);
 
 	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
-	 * within Chart.js, along with any associated event listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
+	 * listeners attached by Chart.js.
 	 */
 	@JsMethod
 	native void destroy();
 
 	/**
-	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
-	 * <code>.render()</code> to re-animate.
+	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call <code>.render()</code> to re-animate.
 	 */
 	@JsMethod
 	native void stop();
@@ -173,18 +168,17 @@ public final class Chart {
 	 * @return single element at the event position, as array of native object.
 	 */
 	@JsMethod
-	native ArrayObject getElementAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
-	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the
-	 * same position of that event.
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
 	 * @return all elements at the same data index, as array of native object.
 	 */
 	@JsMethod
-	native ArrayObject getElementsAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementsAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the dataset that matches the current index and returns that metadata.
@@ -219,7 +213,7 @@ public final class Chart {
 	 * @return dataset meta data items.
 	 */
 	@JsMethod
-	native NativeObject getDatasetAtEvent(ChartNativeEvent event);
+	native NativeObject getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Returns the CHART JS chart ID.
@@ -391,13 +385,6 @@ public final class Chart {
 	 */
 	@JsOverlay
 	public IsChart getChart() {
-		// gets charba id
-		String charbaId = getCharbaId();
-		// checks if not null
-		if (charbaId != null) {
-			return Charts.get(Id.get(getOptions()));
-		}
-		// if here, charba id is null
-		return null;
+		return Charts.get(getCharbaId());
 	}
 }

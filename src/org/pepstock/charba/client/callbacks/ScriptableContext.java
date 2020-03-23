@@ -15,18 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.NativeExtendedObject;
-import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * The option context is used to give contextual information when resolving options.<br>
@@ -39,60 +33,59 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class ScriptableContext extends NativeExtendedObject {
+public final class ScriptableContext extends NativeObjectContainer {
 
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of native object.
 	 */
-	protected ScriptableContext() {
+	private enum Property implements Key
+	{
+		CHART("chart"),
+		DATA_INDEX("dataIndex"),
+		DATASET_INDEX("datasetIndex"),
+		ACTIVE("active"),
+		HOVER("hover"),
+		OPTIONS("options");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
-	 * Returns the <code>chart</code> property by native object.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return the <code>chart</code> property by native object.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty(name = "chart")
-	native Chart getNativeChart();
-
-	/**
-	 * Returns the <code>dataIndex</code> property by native object.
-	 * 
-	 * @return the <code>dataIndex</code> property by native object.
-	 */
-	@JsProperty(name = "dataIndex")
-	native int getNativeDataIndex();
-
-	/**
-	 * Returns the <code>datasetIndex</code> property by native object.
-	 * 
-	 * @return the <code>datasetIndex</code> property by native object.
-	 */
-	@JsProperty(name = "datasetIndex")
-	native int getNativeDatasetIndex();
-
-	/**
-	 * Returns the <code>hover</code> property by native object.
-	 * 
-	 * @return the <code>hover</code> property by native object.
-	 */
-	@JsProperty(name = "hover")
-	native boolean isNativeHover();
+	public ScriptableContext(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public int getIndex() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "dataIndex"))) {
-			return UndefinedValues.INTEGER;
-		}
-		// returns property value
-		return getNativeDataIndex();
+		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -100,14 +93,8 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * 
 	 * @return the dataset index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public int getDatasetIndex() {
-		// checks if is defined
-		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
-			return UndefinedValues.INTEGER;
-		}
-		// returns property value
-		return getNativeDatasetIndex();
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -115,9 +102,8 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * 
 	 * @return the CHARBA chart instance
 	 */
-	@JsOverlay
 	public IsChart getChart() {
-		return getNativeChart().getChart();
+		return getNativeChart(Property.CHART).getChart();
 	}
 
 	/**
@@ -125,16 +111,61 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * 
 	 * @return whether the associated element is hovered. Default is false.
 	 */
-	@JsOverlay
 	public boolean isHover() {
 		// checks if active property is defined
-		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, "hover"))) {
+		if (has(Property.ACTIVE)) {
 			// if here, there is hover property
 			// used by Chart.js scriptable options
-			return isNativeHover();
+			return getValue(Property.ACTIVE, false);
+		} else if (has(Property.HOVER)) {
+			// if here, there is active property
+			// used by Datalabels plugin
+			return getValue(Property.HOVER, false);
 		}
 		// returns default value
 		return false;
+	}
+
+	/**
+	 * Sets the additional options.
+	 * 
+	 * @param options additional options instance.
+	 * @param <T> type of native object container to store
+	 */
+	public <T extends NativeObjectContainer> void setOptions(T options) {
+		// if null, removes the configuration
+		if (options != null) {
+			// stores configuration
+			setValue(Property.OPTIONS, options);
+		} else {
+			// removes configuration if exists
+			removeIfExists(Property.OPTIONS);
+		}
+	}
+
+	/**
+	 * Checks if there is any options.
+	 * 
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 */
+	public boolean hasOptions() {
+		return has(Property.OPTIONS);
+	}
+
+	/**
+	 * Returns the options, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
+	 * @return java script object used to map the options or an empty object if not exist.
+	 */
+	public <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
+		// checks if argument is consistent
+		if (factory != null) {
+			return factory.create(getValue(Property.OPTIONS));
+		}
+		// if here, argument is not consistent
+		return null;
 	}
 
 }

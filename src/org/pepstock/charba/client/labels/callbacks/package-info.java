@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the {@link org.pepstock.charba.client.labels.LabelsPlugin#ID} plugin callback interfaces to configure the plugin
- * itself.
+ * Contains the {@link org.pepstock.charba.client.labels.LabelsPlugin#ID} plugin callback interfaces to configure the plugin itself.
  * 
  * @author Andrea "Stock" Stocchero
  *

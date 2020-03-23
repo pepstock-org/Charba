@@ -31,8 +31,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link AnnotationPlugin#FACTORY}.<br>
-	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
-	 * when the charts will be destroy.
+	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances when the charts will be destroy.
 	 */
 	AnnotationOptionsFactory() {
 		super(AnnotationPlugin.ID);
@@ -41,8 +40,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
@@ -71,8 +69,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client.
-	 * IsChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client. IsChart)
 	 */
 	@Override
 	public void onBeforeConfigure(IsChart chart) {
@@ -104,8 +101,8 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

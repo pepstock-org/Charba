@@ -18,21 +18,20 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code>
- * or <code>pointHoverBackgroundColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code> or <code>pointHoverBackgroundColor</code> property
+ * at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  * @see IsColor
  * @see Pattern
  * @see Gradient
- * @see CanvasPattern
- * @see CanvasGradient
+ * @see CanvasPatternItem
+ * @see CanvasGradientItem
  */
 public interface BackgroundColorCallback extends Scriptable<Object> {
 

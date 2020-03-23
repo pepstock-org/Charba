@@ -20,65 +20,42 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-import org.pepstock.charba.client.resources.ResourcesType;
-import org.pepstock.charba.client.utils.Utilities;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Image;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear
- * the selection.
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear the selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
 
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_18 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_24 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
+	// clear selection image into URL base 64
+	private static final String CLEAR_SELECTION_36 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
+
 	/**
-	 * Resource client bundle to inject images for clear selection.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==">.
 	 */
-	interface ClearSelectionImages extends ClientBundle {
-
-		/**
-		 * Static reference to resources java script source code
-		 */
-		static final ClearSelectionImages INSTANCE = GWT.create(ClearSelectionImages.class);
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_18dp.png")
-		ImageResource clearSelection18();
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_24dp.png")
-		ImageResource clearSelection24();
-
-		/**
-		 * Returns a image to use into datasets items selector plugin as clear icon.
-		 * 
-		 * @return a image to use into datasets items selector plugin as clear icon
-		 */
-		@Source(ResourcesType.IMAGES_RESOURCES_PATH + "clear_black_36dp.png")
-		ImageResource clearSelection36();
-
-	}
+	public static final Img DEFAULT_CLEAR_SELECTION_18 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_18);
+	/**
+	 * Default clear selection image, <img alt="Default image 24x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=">.
+	 */
+	public static final Img DEFAULT_CLEAR_SELECTION_24 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_24);
+	/**
+	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==">.
+	 */
+	public static final Img DEFAULT_CLEAR_SELECTION_36 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_36);
 
 	/**
 	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
@@ -88,7 +65,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default label for clear selection element, value is <b>{@value DEFAULT_LABEL}</b>.
 	 */
-	public static final String DEFAULT_LABEL = "Clear selection";
+	public static final String DEFAULT_LABEL = "Reset selection";
 
 	/**
 	 * Default margin from canvas for clear selection element, value is <b>{@value DEFAULT_MARGIN}</b>.
@@ -108,7 +85,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default image for clear selection element.
 	 */
-	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ClearSelectionImages.INSTANCE.clearSelection18());
+	public static final Img DEFAULT_IMAGE = DEFAULT_CLEAR_SELECTION_18;
 
 	/**
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
@@ -279,7 +256,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -351,7 +328,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection align
 	 */
 	public Align getAlign() {
-		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
 	}
 
 	/**
@@ -369,7 +346,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection render
 	 */
 	public Render getRender() {
-		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
 	}
 
 	/**
@@ -387,7 +364,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection label position
 	 */
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
 	}
 
 	/**
@@ -395,25 +372,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * 
 	 * @param image the clear selection image
 	 */
-	public void setImage(ImageResource image) {
-		setImage(Utilities.toImageElement(image));
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 */
-	public void setImage(Image image) {
-		setImage(Utilities.toImageElement(image));
-	}
-
-	/**
-	 * Sets the clear selection image.
-	 * 
-	 * @param image the clear selection image
-	 */
-	public void setImage(ImageElement image) {
+	public void setImage(Img image) {
 		setValue(Property.IMAGE, image);
 	}
 
@@ -422,7 +381,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * 
 	 * @return the clear selection image or <code>null</code> if not set
 	 */
-	public ImageElement getImage() {
+	public Img getImage() {
 		return getValue(Property.IMAGE, defaultsOptions.getImage());
 	}
 
@@ -483,8 +442,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise
-	 *            <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.USE_SELECTION_STYLE, useSelectionStyle);

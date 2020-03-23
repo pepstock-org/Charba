@@ -18,8 +18,8 @@ package org.pepstock.charba.client.datalabels.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * An anchor point is defined by an orientation vector and a position on the data element. The orientation depends on the scale
- * type (vertical, horizontal or radial). The position is calculated based on the anchor option and the orientation vector.
+ * An anchor point is defined by an orientation vector and a position on the data element. The orientation depends on the scale type (vertical, horizontal or radial). The position
+ * is calculated based on the anchor option and the orientation vector.
  * 
  * @author Andrea "Stock" Stocchero
  *

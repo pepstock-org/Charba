@@ -42,8 +42,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin
-	 * properties.
+	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin properties.
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */

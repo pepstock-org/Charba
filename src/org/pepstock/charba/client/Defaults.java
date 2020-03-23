@@ -453,7 +453,7 @@ public final class Defaults {
 			GlobalOptions global = Defaults.get().getGlobal();
 			// checks if the property is present
 			if (ObjectType.OBJECT.equals(type(type))) {
-				// creatws a chart options using global a default scaled as default
+				// creates a chart options using global a default scaled as default
 				return new ChartOptions(type, getValue(type), new DefaultGlobalOptions(global));
 			} else {
 				// if here, the chart type is not defined (could be a controller)
@@ -485,8 +485,7 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart,
-		 * org.pepstock.charba.client.Chart)
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
 		 */
 		@Override
 		public void onAfterInit(IsChart chart, Chart nativeChart) {

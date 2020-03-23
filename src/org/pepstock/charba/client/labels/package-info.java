@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to use {@link org.pepstock.charba.client.labels.LabelsPlugin#ID} plugin (AKA
- * <code>chartjs-plugin-labels.js</code>) available for CHART.JS
+ * Contains all classes to use {@link org.pepstock.charba.client.labels.LabelsPlugin#ID} plugin (AKA <code>chartjs-plugin-labels.js</code>) available for CHART.JS
  * 
  * @author Andrea "Stock" Stocchero
  *

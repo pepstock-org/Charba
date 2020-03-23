@@ -69,12 +69,11 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.class, ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
 	}
 
 	/**
-	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
-	 * transparency).
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no transparency).
 	 * 
 	 * @return the transparency value for the background color
 	 */

@@ -25,20 +25,17 @@ import org.pepstock.charba.client.commons.Key;
 public interface Type extends Key {
 
 	/**
-	 * Returns <code>true</code> if type passed as argument is not <code>null</code> and its scale type is not <code>null</code>
-	 * as well.
+	 * Returns <code>true</code> if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well.
 	 * 
 	 * @param type type to be checked
-	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its scale type is not <code>null</code>
-	 *         as well.
+	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well.
 	 */
 	static boolean isValid(Type type) {
 		return Key.isValid(type) && type.scaleType() != null;
 	}
 
 	/**
-	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well. If not,
-	 * throw a {@link IllegalArgumentException}.
+	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param type type to be checked
 	 */

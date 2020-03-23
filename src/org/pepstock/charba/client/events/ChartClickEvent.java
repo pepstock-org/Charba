@@ -18,25 +18,21 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.DatasetItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHandler> implements IsChartEvent {
+public final class ChartClickEvent extends AbstractChartTypedEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartClickEventHandler> TYPE = new Type<>();
-
-	// a list of items with dataset metadata related to the click
-	private final List<DatasetItem> items;
+	public static final EventType TYPE = EventType.create(ChartClickEvent.class);
 
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the click
@@ -45,42 +41,24 @@ public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHan
 	 * @param functionContext function context provided by CHART.JS
 	 * @param items a list of items with dataset metadata related to the click
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
-		super(nativeEvent, functionContext, ChartEventProperty.ON_CLICK);
-		// checks if argument is consistent
-		if (items == null) {
-			throw new IllegalArgumentException("Dataset items list argument is null");
+	public ChartClickEvent(BaseNativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
+		super(nativeEvent, TYPE, functionContext, ChartEventProperty.ON_CLICK, items);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 */
+	@Override
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof ChartClickEventHandler) {
+			// casts handler
+			ChartClickEventHandler myHandler = (ChartClickEventHandler) handler;
+			// invokes
+			myHandler.onClick(this);
 		}
-		this.items = items;
-	}
-
-	/**
-	 * Returns a list of items with dataset metadata related to the click
-	 * 
-	 * @return a list of items with dataset metadata related to the click
-	 */
-	public List<DatasetItem> getItems() {
-		return items;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<ChartClickEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(ChartClickEventHandler handler) {
-		handler.onClick(this);
 	}
 
 }

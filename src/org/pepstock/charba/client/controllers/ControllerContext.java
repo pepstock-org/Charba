@@ -33,12 +33,11 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This object stores the <code>this</code> instance of java script because is necessary to invoke the default methods of
- * controller when it's extending an existing chart.
+ * This object stores the <code>this</code> instance of java script because is necessary to invoke the default methods of controller when it's extending an existing chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART_CONTROLLER_CONTEXT, namespace = JsPackage.GLOBAL)
 public final class ControllerContext {
 
 	/**

@@ -18,35 +18,41 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.adapters.AbstractModule;
 
-import com.google.gwt.resources.client.ResourcePrototype;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * Base class to extend in order to have a resource client bundle, needed to CHARBA, where CHART.JS and date library will be
- * load in embedded mode.<br>
+ * Base class to extend in order to have an java script injection, needed to CHARBA, where CHART.JS and date library will be load in embedded mode.<br>
  * Every instance must have a module related to date adapter and library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEmbeddedResources extends AbstractResources<TextResource> {
+public abstract class AbstractEmbeddedResources extends AbstractResources implements IsResourceType {
+
+	// chart js source code
+	private static final ChartJsResource CHARTJS = new ChartJsResource();
 
 	/**
 	 * Creates an embedded resource object by passed module, which represents the date adapter and library, as argument.
 	 * 
 	 * @param module module of date adapter and library.
 	 */
-	public AbstractEmbeddedResources(AbstractModule module) {
+	AbstractEmbeddedResources(AbstractModule module) {
 		super(module);
 	}
 
 	/**
-	 * Returns the client bundle with date library and adapter java script definition.
+	 * Contains text representation of date-time java script library code.
 	 * 
-	 * @return the client bundle with date library and adapter java script definition
+	 * @return date-time java script library code
 	 */
-	@Override
-	protected abstract EmbeddedDateAdapterResources getClientBundle();
+	protected abstract AbstractInjectableResource datetimeLibrary();
+
+	/**
+	 * Contains text representation of CHART.JS adapter code.<br>
+	 * There is a specific adapter for the different date-time libraries.
+	 * 
+	 * @return chart.js date adapter code
+	 */
+	protected abstract AbstractInjectableResource datetimeAdapter();
 
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
@@ -56,16 +62,11 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 		// checks if module has been already injected
 		if (!getModule().isInjected()) {
 			// inject Chart.js if not already loaded
-			ensureInjected(EmbeddedChartResources.INSTANCE.chartJs());
-			// gets client bundle
-			EmbeddedDateAdapterResources bundle = getClientBundle();
-			// checks if resource bundle is consistent
-			if (bundle != null) {
-				// to be sure that date time library has been injected
-				ensureInjected(bundle.datetimeLibrary());
-				// to be sure that date time chart.js adapter has been injected
-				ensureInjected(bundle.datetimeAdapter());
-			}
+			ensureInjected(CHARTJS);
+			// to be sure that date time library has been injected
+			ensureInjected(checkAndGetDateTimeResourceName(datetimeLibrary(), ResourceName.DATE_TIME_LIBRARY));
+			// to be sure that date time chart.js adapter has been injected
+			ensureInjected(checkAndGetDateTimeResourceName(datetimeAdapter(), ResourceName.DATE_TIME_ADAPTER));
 			// notify to module that has been injected
 			getModule().injectionComplete(DateAdapterInjectionComplete.get());
 		}
@@ -76,11 +77,31 @@ public abstract class AbstractEmbeddedResources extends AbstractResources<TextRe
 	 * 
 	 * @param resource script resource
 	 */
-	private void ensureInjected(ResourcePrototype resource) {
+	private void ensureInjected(AbstractInjectableResource resource) {
 		// checks if prototype is a text resource and not already injected
-		if (resource instanceof TextResource && !Injector.isInjected(resource)) {
+		if (!Injector.isInjected(resource)) {
 			// inject Chart.js if not already loaded
 			Injector.ensureInjected(resource);
 		}
+	}
+
+	/**
+	 * Checks and get the resource, passed as argument, with the resource name.<br>
+	 * When you are injecting date library and adapters, it is mandatory they have the correct name, fixed by CHARBA constraints.<br>
+	 * If the resource does not have the right name, throws an {@link IllegalArgumentException}.
+	 * 
+	 * @param resource injectable resource instance to check
+	 * @param resourceName the resource name which must be applied into reosurce instance
+	 * @return injectable resource instance passed as argument
+	 */
+	private AbstractInjectableResource checkAndGetDateTimeResourceName(AbstractInjectableResource resource, ResourceName resourceName) {
+		// checks if the date time resource has got the right name
+		if (!resourceName.value().equalsIgnoreCase(resource.getName())) {
+			// is trying to inject a resource with a wrong name
+			throw new IllegalArgumentException("Unbale to inject resource because must be '" + resourceName.value() + "' instead of '" + resource.getName() + "'");
+		}
+		// if here the resource is correct
+		// then returns the resource passed as argument
+		return resource;
 	}
 }

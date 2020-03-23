@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.events;
 
-import com.google.gwt.event.shared.EventHandler;
-
 /**
  * Event handler for removing a chart event handler.
  * 

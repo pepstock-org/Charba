@@ -21,8 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to manage CHART.JS controllers.<br>
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage CHART.JS controllers.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero

@@ -65,8 +65,7 @@ abstract class AbstractScaleLine<D> extends AbstractModel<Scale, D> {
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param scale scale/axis of this object.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -78,8 +77,7 @@ abstract class AbstractScaleLine<D> extends AbstractModel<Scale, D> {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
@@ -90,8 +88,7 @@ abstract class AbstractScaleLine<D> extends AbstractModel<Scale, D> {
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @return the line dash pattern used when stroking lines
 	 */

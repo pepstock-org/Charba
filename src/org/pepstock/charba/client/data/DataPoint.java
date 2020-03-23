@@ -22,8 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y
- * properties.
+ * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
  * 
  * @author Andrea "Stock" Stocchero
  *

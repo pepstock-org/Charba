@@ -18,15 +18,14 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-
-import com.google.gwt.dom.client.NativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to
- * invoke CHART.JS callbacks, provided out of the box, the default one.
+ * This is a wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to invoke CHART.JS callbacks, provided out of the box,
+ * the default one.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -42,8 +41,7 @@ final class NativeJsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking
-	 * <code>legendCallback</code> function property.
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -52,8 +50,7 @@ final class NativeJsCallbacksHelper {
 	static native String generateDefaultLegend(Chart chart, NativeObject options);
 
 	/**
-	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box,
-	 * invoking <code>generateLabels</code> function property.
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
@@ -70,7 +67,7 @@ final class NativeJsCallbacksHelper {
 	 * @param event native event from user interface
 	 * @param item legend item native
 	 */
-	static native void invokeDefaultLegendEvent(NativeObject options, String key, Chart chart, NativeEvent event, NativeObject item);
+	static native void invokeDefaultLegendEvent(NativeObject options, String key, Chart chart, BaseNativeEvent event, NativeObject item);
 
 	/**
 	 * Invokes the chart event callbacks, provided out of the box by CHART.JS.
@@ -81,6 +78,6 @@ final class NativeJsCallbacksHelper {
 	 * @param event native event from user interface
 	 * @param items array of datasets native objects
 	 */
-	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeEvent event, ArrayObject items);
+	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, BaseNativeEvent event, ArrayObject items);
 
 }

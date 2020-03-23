@@ -39,7 +39,7 @@ public class DateAdapterOptions extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected DateAdapterOptions(NativeObject nativeObject) {
+	DateAdapterOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

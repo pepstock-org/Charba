@@ -28,8 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
 public final class TickMinor extends AbstractTick<Ticks, IsDefaultMinorTick> implements IsDefaultMinorTick {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param ticks ticks of axis.
 	 * @param childKey the property name of this element to use to add it to the parent.

@@ -32,13 +32,11 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -58,8 +56,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key,
-	 * java.lang.String[])
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key, java.lang.String[])
 	 */
 	@Override
 	void setColors(Key key, String... colors) {
@@ -70,8 +67,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key,
-	 * org.pepstock.charba.client.colors.IsColor[])
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key, org.pepstock.charba.client.colors.IsColor[])
 	 */
 	@Override
 	void setColors(Key key, IsColor... colors) {
@@ -82,8 +78,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getColors(org.pepstock.charba.client.commons.Key,
-	 * java.lang.String)
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getColors(org.pepstock.charba.client.commons.Key, java.lang.String)
 	 */
 	@Override
 	ArrayString getColors(Key key, String defaultvalue) {
@@ -166,8 +161,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/**
 	 * Returns the fill color of the arcs when hovered as string. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the arcs when hovered as string. If property is missing or not a color, returns an
-	 *         empty list.
+	 * @return list of the fill color of the arcs when hovered as string. If property is missing or not a color, returns an empty list.
 	 */
 	@Override
 	public List<String> getHoverBackgroundColorAsString() {
@@ -182,11 +176,9 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an
-	 * empty list.
+	 * Returns the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern,
-	 *         returns an empty list.
+	 * @return list of the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
 	 */
 	@Override
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
@@ -202,11 +194,9 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient, returns an
-	 * empty list.
+	 * Returns the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient,
-	 *         returns an empty list.
+	 * @return list of the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	@Override
 	public List<Gradient> getHoverBackgroundColorAsGradient() {
@@ -277,11 +267,9 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an
-	 * empty list.
+	 * Returns the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern,
-	 *         returns an empty list.
+	 * @return list of the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
 	 */
 	@Override
 	public List<Gradient> getHoverBorderColorAsGradient() {
@@ -318,7 +306,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
 		setArrayValue(key, ArrayPattern.fromOrEmpty(canvasPatternsList));
 	}
 
@@ -328,7 +316,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
 		setArrayValue(key, ArrayGradient.fromOrEmpty(canvasGradientsList));
 	}
 }

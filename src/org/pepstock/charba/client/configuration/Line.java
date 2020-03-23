@@ -40,26 +40,25 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @param tension the Bezier curve tension (0 for no Bezier curves).
+	 * @param tension the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public void setTension(double tension) {
 		getOptions().getElements().getLine().setTension(tension);
 	}
 
 	/**
-	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public double getTension() {
 		return getOptions().getElements().getLine().getTension();
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
-	 * round and square.
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -68,8 +67,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set
+	 * to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -78,22 +77,18 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		getOptions().getElements().getLine().setBorderDash(borderDash);
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		return getOptions().getElements().getLine().getBorderDash();
@@ -118,9 +113,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
@@ -130,9 +124,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
-	 * are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
@@ -142,18 +135,18 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Sets <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @param capBezierPoints <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @param capBezierPoints <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
 		getOptions().getElements().getLine().setCapBezierPoints(capBezierPoints);
 	}
 
 	/**
-	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * Returns <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
 		return getOptions().getElements().getLine().isCapBezierPoints();
@@ -170,10 +163,9 @@ public class Line extends AbstractConfigurationElement {
 	 * </pre>
 	 * 
 	 * <br>
-	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
-	 * datasets.<br>
-	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
-	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local
+	 * extremums (if any) stay at input data points.
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */

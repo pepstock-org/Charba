@@ -21,19 +21,18 @@ import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Div;
+import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.events.Event;
+import org.pepstock.charba.client.events.EventHandler;
+import org.pepstock.charba.client.events.EventType;
+import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
-
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Interface which defines a chart.
@@ -41,30 +40,30 @@ import com.google.gwt.event.shared.HasHandlers;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsChart extends HasHandlers {
+public interface IsChart {
 
 	/**
-	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 * well, and if mandatory methods of interface will return consistent instances.
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return
+	 * consistent instances.
 	 * 
 	 * @param chart chart to be checked
-	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 *         well, and if mandatory methods of interface will return consistent instances.
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return
+	 *         consistent instances.
 	 */
 	static boolean isConsistent(IsChart chart) {
 		// checks if chart is consistent
 		if (isValid(chart)) {
 			// here checks all mandatory methods of interface to check
 			// if results are consistent
-			return chart.getElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
+			return chart.getChartElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
 					&& chart.getDefaultChartOptions() != null;
 		}
 		return false;
 	}
 
 	/**
-	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory
-	 * methods of interface will return consistent instances.<br>
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return consistent
+	 * instances.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param chart chart to be checked
@@ -77,12 +76,25 @@ public interface IsChart extends HasHandlers {
 	}
 
 	/**
-	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 * well.
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well, and if mandatory methods of interface will return consistent
+	 * instances.<br>
+	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
 	 * 
 	 * @param chart chart to be checked
-	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as
-	 *         well
+	 * @return the chart instance passed as argumet
+	 */
+	static IsChart checkAndGetIfConsistent(IsChart chart) {
+		// checks if chart is consistent
+		checkIfConsistent(chart);
+		// if here is consistent then return it
+		return chart;
+	}
+
+	/**
+	 * Returns <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well.
+	 * 
+	 * @param chart chart to be checked
+	 * @return <code>true</code> if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well
 	 */
 	static boolean isValid(IsChart chart) {
 		return chart != null && chart.getId() != null;
@@ -113,12 +125,18 @@ public interface IsChart extends HasHandlers {
 	/**
 	 * Adds this handler to the widget.
 	 *
-	 * @param <H> the type of handler to add
 	 * @param type the event type
 	 * @param handler the handler
-	 * @return {@link HandlerRegistration} used to remove the handler
+	 * @return handler registration used to remove the handler
 	 */
-	<H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type);
+	HandlerRegistration addHandler(final EventHandler handler, EventType type);
+
+	/**
+	 * Fires the event to the handlers.
+	 *
+	 * @param event the event to fire
+	 */
+	void fireEvent(Event event);
 
 	/**
 	 * Gets a handle to the object's underlying DOM element.
@@ -126,7 +144,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the object's browser element
 	 */
-	Element getElement();
+	Div getChartElement();
 
 	/**
 	 * Returns the options of chart.
@@ -143,8 +161,8 @@ public interface IsChart extends HasHandlers {
 	Type getType();
 
 	/**
-	 * Returns the base type of chart that in case of {@link ChartType} is the same of {@link IsChart#getType()} otherwise, in
-	 * case the type of the chart is a {@link ControllerType} is the chart type extension if there is or <code>null</code>.
+	 * Returns the base type of chart that in case of {@link ChartType} is the same of {@link IsChart#getType()} otherwise, in case the type of the chart is a
+	 * {@link ControllerType} is the chart type extension if there is or <code>null</code>.
 	 * 
 	 * @return the base type of chart.
 	 */
@@ -176,7 +194,7 @@ public interface IsChart extends HasHandlers {
 	 * 
 	 * @return the initial cursor of the chart.
 	 */
-	Cursor getInitialCursor();
+	CursorType getInitialCursor();
 
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
@@ -221,11 +239,9 @@ public interface IsChart extends HasHandlers {
 	IsDefaultScaledOptions getWholeOptions();
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
-	 *         <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
 	boolean isDrawOnAttach();
 
@@ -237,31 +253,28 @@ public interface IsChart extends HasHandlers {
 	void setDrawOnAttach(boolean drawOnAttach);
 
 	/**
-	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
-	 *         otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>. Default is
+	 *         <code>true</code>.
 	 */
 	boolean isDestroyOnDetach();
 
 	/**
-	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
-	 * <code>false</code>.
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>.
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
 	void setDestroyOnDetach(boolean destroyOnDetach);
 
 	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
-	 * within Chart.js, along with any associated event listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
+	 * listeners attached by Chart.js.
 	 */
 	void destroy();
 
 	/**
-	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
-	 * <code>.render()</code> to re-animate.
+	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call <code>.render()</code> to re-animate.
 	 */
 	void stop();
 
@@ -290,14 +303,13 @@ public interface IsChart extends HasHandlers {
 	String generateLegend();
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
-	 * this method manually if you change the size of the canvas nodes container element.
+	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
+	 * canvas nodes container element.
 	 */
 	void resize();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
 	 */
 	void update();
 
@@ -313,20 +325,18 @@ public interface IsChart extends HasHandlers {
 	void update(UpdateConfiguration config);
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	void reconfigure();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
-	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
-	 * update process. This is useful when update is manually called inside an event handler and some different animation is
-	 * desired.
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
+	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
+	 * different animation is desired.
 	 * 
-	 * @param configuration a configuration object can be provided with additional configuration for the update process
+	 * @param config a configuration object can be provided with additional configuration for the update process
 	 */
-	void reconfigure(UpdateConfiguration configuration);
+	void reconfigure(UpdateConfiguration config);
 
 	/**
 	 * Triggers a redraw of all chart elements.<br>
@@ -335,9 +345,8 @@ public interface IsChart extends HasHandlers {
 	void render();
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A config object can be provided with additional configuration for the render process. This is useful when
-	 * update is manually called inside an event handler and some different animation is desired.
+	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A config object can be provided with
+	 * additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param config a config object can be provided with additional configuration for the render process
 	 */
@@ -357,7 +366,7 @@ public interface IsChart extends HasHandlers {
 	 * @param event event of chart.
 	 * @return dataset meta data item.
 	 */
-	DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event);
+	DatasetMetaItem getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
@@ -381,28 +390,20 @@ public interface IsChart extends HasHandlers {
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
-	DatasetItem getElementAtEvent(ChartNativeEvent event);
+	DatasetItem getElementAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
-	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the
-	 * same position of that event.
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetItem> getElementsAtEvent(ChartNativeEvent event);
+	List<DatasetItem> getElementsAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Draws the chart
 	 */
 	void draw();
-
-	/**
-	 * Returns the string JSON representation of the object.
-	 * 
-	 * @return the string JSON representation of the object.
-	 */
-	String toJSON();
 
 }

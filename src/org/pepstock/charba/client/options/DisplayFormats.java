@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.NoDefaults;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -59,8 +58,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick
-	 * marks.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
 	 * 
 	 * @param unit time unit.
 	 * @return display format or <code>null</code> if unit is not consistent
@@ -71,7 +69,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 			// checks if format is already loaded
 			if (defaultFormats == null) {
 				// gets a date adapter
-				DateAdapter adapter = ResourcesType.getClientBundle().getModule().createDateAdapter();
+				DateAdapter adapter = new DateAdapter();
 				// stores the default formats
 				defaultFormats = adapter.getFormats();
 			}

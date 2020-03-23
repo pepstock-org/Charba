@@ -16,21 +16,20 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.ScaleItem;
-
-import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the axis of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
+public final class AxisClickEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<AxisClickEventHandler> TYPE = new Type<>();
+	public static final EventType TYPE = EventType.create(AxisClickEvent.class);
 	// scale item selected by clicking
 	private final ScaleItem item;
 	// axis selected by clicking
@@ -43,12 +42,13 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	 * @param item scale item related to the click
 	 * @param axis axis configuration instance
 	 */
-	public AxisClickEvent(NativeEvent nativeEvent, ScaleItem item, Axis axis) {
-		super(nativeEvent);
-		// checks if argument is consistent
+	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
+		super(nativeEvent, TYPE);
+		// checks if item is consistent
 		if (item == null) {
 			throw new IllegalArgumentException("Scale item argument is null");
 		}
+		// stores arguments
 		this.item = item;
 		this.axis = axis;
 	}
@@ -63,8 +63,7 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	}
 
 	/**
-	 * Returns the axis configuration instance if exists. The chart can be implemented without any axis (using defaults) and
-	 * therefore can return <code>null</code>.
+	 * Returns the axis configuration instance if exists. The chart can be implemented without any axis (using defaults) and therefore can return <code>null</code>.
 	 * 
 	 * @return the axis configuration instance or <code>null</code> if no axis configuration has been provided to chart
 	 */
@@ -75,21 +74,17 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
 	 */
 	@Override
-	public Type<AxisClickEventHandler> getAssociatedType() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	protected void dispatch(AxisClickEventHandler handler) {
-		handler.onClick(this);
+	protected void dispatch(EventHandler handler) {
+		// checks if handler is a correct instance
+		if (handler instanceof AxisClickEventHandler) {
+			// casts handler
+			AxisClickEventHandler myHandler = (AxisClickEventHandler) handler;
+			// invokes
+			myHandler.onClick(this);
+		}
 	}
 
 }

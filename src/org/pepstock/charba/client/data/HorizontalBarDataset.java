@@ -20,10 +20,8 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The horizontal bar chart allows a number of properties to be specified for each dataset. These are used to set display
- * properties for a specific dataset.<br>
- * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar,
- * the second value to the second bar, and so on.
+ * The horizontal bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
  */

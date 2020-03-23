@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DOT drawer to design a dot into tile.<br>
@@ -42,11 +42,10 @@ class Dot extends ShapeDrawer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(com.google.gwt.canvas.dom.client.Context2d,
-	 * java.lang.String, java.lang.String, int)
+	 * @see org.pepstock.charba.client.colors.tiles.ShapeDrawer#drawTile(org.pepstock.charba.client.dom.Context2dItem, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates diameter of dot
@@ -70,7 +69,7 @@ class Dot extends ShapeDrawer {
 	 * @param offsetY offset Y where starts drawing
 	 * @param diameter diameter of arc to design
 	 */
-	final void drawDot(Context2d context, int size, double offsetX, double offsetY, double diameter) {
+	final void drawDot(Context2dItem context, int size, double offsetX, double offsetY, double diameter) {
 		// calculates quarter dimension
 		final double quarterSize = size / 4D;
 		// calculates the center X of arc

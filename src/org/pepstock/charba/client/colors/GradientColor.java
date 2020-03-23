@@ -136,7 +136,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * 
 	 * @param offset value between 0 and 1 for where the color stop is located.
 	 */
-	static void checkOffsetWithinBounds(double offset) {
+	public static void checkOffsetWithinBounds(double offset) {
 		if (offset < DEFAULT_OFFSET_START || offset > DEFAULT_OFFSET_STOP) {
 			throw new IllegalArgumentException("Offset argument (" + offset + ") is not within bounds (0D-1D)");
 		}
@@ -152,8 +152,7 @@ public final class GradientColor extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public GradientColor create(NativeObject nativeObject) {

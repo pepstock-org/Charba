@@ -36,8 +36,7 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
@@ -70,8 +69,8 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public ColorSchemesDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

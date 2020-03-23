@@ -19,10 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Represents how to fill the area under the line. This is an interfaces implemented on different way, as CHART.JS has
- * implemented.<br>
- * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets
- * or a dataset.<br>
+ * Represents how to fill the area under the line. This is an interfaces implemented on different way, as CHART.JS has implemented.<br>
+ * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets or a dataset.<br>
  * These are the different kinds of fill you can set:<br>
  * <ul>
  * <li>Predefined values, mapped by {@link Fill}.
@@ -37,12 +35,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public interface IsFill extends Key {
 
 	/**
-	 * Returns <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and
-	 * its mode is not <code>null</code> as well.
+	 * Returns <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and its mode is not <code>null</code> as well.
 	 * 
 	 * @param fill fill to be checked
-	 * @return <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and
-	 *         its mode is not <code>null</code> as well.
+	 * @return <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and its mode is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsFill fill) {
 		return Key.isValid(fill) && fill.getMode() != null;
@@ -63,11 +59,9 @@ public interface IsFill extends Key {
 	int getValueAsInt();
 
 	/**
-	 * Returns the value as string (valid ONLY for relative dataset index and predefined), otherwise
-	 * {@link UndefinedValues#STRING}.
+	 * Returns the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link UndefinedValues#STRING}.
 	 * 
-	 * @return the value as string (valid ONLY for relative dataset index and predefined), otherwise
-	 *         {@link UndefinedValues#STRING}.
+	 * @return the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link UndefinedValues#STRING}.
 	 */
 	String getValue();
 

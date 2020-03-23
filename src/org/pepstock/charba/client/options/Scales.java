@@ -121,8 +121,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
@@ -140,8 +139,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
-	 * only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
@@ -154,7 +152,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 			return value ? Display.TRUE : Display.FALSE;
 		}
 		// returns value. Must be auto
-		return getValue(Property.DISPLAY, Display.class, getDefaultValues().getDisplay());
+		return getValue(Property.DISPLAY, Display.values(), getDefaultValues().getDisplay());
 	}
 
 	/**
@@ -240,8 +238,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
 		 */
 		@Override
 		public Scale create(NativeObject nativeObject) {

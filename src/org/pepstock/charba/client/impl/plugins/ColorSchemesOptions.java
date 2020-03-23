@@ -52,8 +52,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	public static final boolean DEFAULT_REVERSE = false;
 
 	/**
-	 * Default category when new color scheme has been created on top of the available schemes,
-	 * <b>{@value DEFAULT_SCHEME_CATEGORY}</b>.
+	 * Default category when new color scheme has been created on top of the available schemes, <b>{@value DEFAULT_SCHEME_CATEGORY}</b>.
 	 */
 	public static final String DEFAULT_SCHEME_CATEGORY = "custom";
 
@@ -155,7 +154,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	public SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.class, defaultsOptions.getSchemeScope());
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), defaultsOptions.getSchemeScope());
 	}
 
 	/**
@@ -198,8 +197,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
-	 * transparency).
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no transparency).
 	 * 
 	 * @param backgroundColorAlpha the transparency value for the background color
 	 */
@@ -210,8 +208,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
-	 * transparency).
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no transparency).
 	 * 
 	 * @return the transparency value for the background color
 	 */

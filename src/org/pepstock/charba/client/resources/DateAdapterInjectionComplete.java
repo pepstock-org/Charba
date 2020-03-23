@@ -17,8 +17,7 @@ package org.pepstock.charba.client.resources;
 
 /**
  * Utility object in order to notify a date adapter module that has been inject.<br>
- * This object can not be instantiated out of this package to avoid that anyone will change the module status without a real
- * injection.
+ * This object can not be instantiated out of this package to avoid that anyone will change the module status without a real injection.
  * 
  * @author Andrea "Stock" Stocchero
  *

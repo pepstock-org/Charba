@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Property to set the border position on chart datasets.<br>
- * This setting is used to avoid drawing the bar stroke at the base of the fill. In general, this does not need to be changed
- * except when creating chart types that derive from a bar chart.<br>
+ * This setting is used to avoid drawing the bar stroke at the base of the fill. In general, this does not need to be changed except when creating chart types that derive from a
+ * bar chart.<br>
  * For negative bars in vertical chart, top and bottom are flipped. Same goes for left and right in horizontal chart.
  * 
  * @author Andrea "Stock" Stocchero

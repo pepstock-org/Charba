@@ -19,8 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-
-import com.google.gwt.dom.client.ImageElement;
+import org.pepstock.charba.client.dom.elements.Img;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -104,14 +103,14 @@ public final class ArrayListHelper {
 	/**
 	 * Creates a array list of enumeration values (instance of {@link Key}).
 	 * 
-	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param enumValues all possible values of an enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
 	 * @return a array list of values
 	 */
-	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, E[] values) {
+	public static <E extends Key> ArrayEnumList<E> list(E[] enumValues, E[] values) {
 		// creates the list
-		ArrayEnumList<E> result = new ArrayEnumList<>(clazz);
+		ArrayEnumList<E> result = new ArrayEnumList<>(enumValues);
 		// checks if array is null
 		if (values != null) {
 			// adds all elements
@@ -124,16 +123,16 @@ public final class ArrayListHelper {
 	/**
 	 * Creates a array list of enumeration values by an java script array of strings.
 	 * 
-	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param enumValues all possible values of an enumeration
 	 * @param array array of strings to load when the list is creating.
 	 * @param <E> type of key
 	 * @return a array list of values.
 	 */
-	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, ArrayString array) {
+	public static <E extends Key> ArrayEnumList<E> list(E[] enumValues, ArrayString array) {
 		// returns the list adding the string array list to initialize it
 		// PAY ATTENTION: no checks if the values of strings are
 		// consistent with the enumeration values
-		return new ArrayEnumList<>(clazz, array);
+		return new ArrayEnumList<>(enumValues, array);
 	}
 
 	/**
@@ -200,32 +199,32 @@ public final class ArrayListHelper {
 	 * @param values array of elements to load when the list is creating.
 	 * @return a array list of strings instance
 	 */
-	public static List<ImageElement> unmodifiableList(ArrayImage values) {
+	public static List<Img> unmodifiableList(ArrayImage values) {
 		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
 	 * Creates an unmodifiable array list of enumeration values (instance of {@link Key}).
 	 * 
-	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param enumValues all possible values of an enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
 	 * @return a array list of values
 	 */
-	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, E[] values) {
-		return Collections.unmodifiableList(list(clazz, values));
+	public static <E extends Key> List<E> unmodifiableList(E[] enumValues, E[] values) {
+		return Collections.unmodifiableList(list(enumValues, values));
 	}
 
 	/**
 	 * Creates an unmodifiable array list of enumeration values by an java script array of strings.
 	 * 
-	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param enumValues all possible values of an enumeration
 	 * @param array array of strings to load when the list is creating.
 	 * @param <E> type of key
 	 * @return a array list of values
 	 */
-	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, ArrayString array) {
-		return Collections.unmodifiableList(list(clazz, array));
+	public static <E extends Key> List<E> unmodifiableList(E[] enumValues, ArrayString array) {
+		return Collections.unmodifiableList(list(enumValues, array));
 	}
 
 	/**

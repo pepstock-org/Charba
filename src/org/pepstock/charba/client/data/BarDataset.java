@@ -31,10 +31,8 @@ import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.options.Scales;
 
 /**
- * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
- * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar,
- * the second value to the second bar, and so on.
+ * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -43,10 +41,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
 	/**
-	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
-	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
-	 * There is no gap when the percentage options are 1. This mode generates bars with different widths when data are not
-	 * evenly spaced, {@link Integer#MIN_VALUE}.
+	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
+	 * overlap. Then, bars are sized using barPercentage and categoryPercentage. There is no gap when the percentage options are 1. This mode generates bars with different widths
+	 * when data are not evenly spaced, {@link Integer#MIN_VALUE}.
 	 */
 	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
 	// this is the value which must be stored in JS object when flex bar thickness is set
@@ -152,7 +149,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(context));
+		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new ScriptableContext(context)));
 	}
 
 	/*
@@ -172,25 +169,22 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public String getLabel() {
-		return getValue(Dataset.Property.LABEL, DEFAULT_LABEL);
+		return getValue(Dataset.InternalProperty.LABEL, DEFAULT_LABEL);
 	}
 
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found
-	 *            x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public void setXAxisID(String xAxisID) {
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 * axis.
+	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
-	 *         axis.
+	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID() {
 		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
@@ -199,41 +193,36 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	/**
 	 * Sets the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found
-	 *            y axis.
+	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public void setYAxisID(String yAxisID) {
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
 	/**
-	 * Returns the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y
-	 * axis.
+	 * Returns the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y
-	 *         axis.
+	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
-	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 * category width and put the bars right next to each other.
+	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 * 
-	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the
-	 *            whole category width and put the bars right next to each other.
+	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
+	 *            each other.
 	 */
 	public void setBarPercentage(double barPercentage) {
 		setValue(Property.BAR_PERCENTAGE, barPercentage);
 	}
 
 	/**
-	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 * category width and put the bars right next to each other.
+	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
+	 * other.
 	 * 
-	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 *         category width and put the bars right next to each other.
+	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public double getBarPercentage() {
 		return getValue(Property.BAR_PERCENTAGE, DEFAULT_BAR_PERCENTAGE);
@@ -258,13 +247,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
-	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
-	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths are
+	 * calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
-	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that
-	 *            they take the full available widths without overlap. Then, the bars are sized using barPercentage and
-	 *            categoryPercentage.
+	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.
+	 *            Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	public void setBarThickness(int barThickness) {
 		// checks if FLEX value has been set
@@ -277,12 +264,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
-	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
-	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths
+	 * are calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
-	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
-	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
+	 *         bars are sized using barPercentage and categoryPercentage.
 	 */
 	public int getBarThickness() {
 		// checks if flex has been set
@@ -414,7 +400,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
 
 	/**

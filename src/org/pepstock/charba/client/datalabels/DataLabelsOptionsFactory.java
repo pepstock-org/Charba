@@ -22,8 +22,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (form chart, form dataset or from default global ones) related to {@link DataLabelsPlugin#ID}
- * plugin.
+ * Factory to get the options (form chart, form dataset or from default global ones) related to {@link DataLabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -31,8 +30,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link DataLabelsPlugin#FACTORY}.<br>
-	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
-	 * when the charts will be destroy.
+	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances when the charts will be destroy.
 	 */
 	DataLabelsOptionsFactory() {
 		super(DataLabelsPlugin.ID);
@@ -41,8 +39,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
@@ -84,8 +81,8 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.
-		 * NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
 		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {

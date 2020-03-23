@@ -63,8 +63,7 @@ import jsinterop.annotations.JsFunction;
 /**
  * This is the {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the plugin.<br>
  * The options could be set by simply the value or by setting a callback.<br>
- * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of
- * charts.<br>
+ * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -81,8 +80,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final Align DEFAULT_ALIGN = Align.CENTER;
 
 	/**
-	 * Default anchor point, which is defined by an orientation vector and a position on the data element,
-	 * {@link Anchor#CENTER}.
+	 * Default anchor point, which is defined by an orientation vector and a position on the data element, {@link Anchor#CENTER}.
 	 */
 	public static final Anchor DEFAULT_ANCHOR = Anchor.CENTER;
 
@@ -107,8 +105,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
-	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element,
-	 * <b>{@value DEFAULT_CLAMP}</b>.
+	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element, <b>{@value DEFAULT_CLAMP}</b>.
 	 */
 	public static final boolean DEFAULT_CLAMP = false;
 
@@ -173,7 +170,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return string with formatted value.
 		 */
-		String call(CallbackFunctionContext contextFunction, double value, ScriptableContext context);
+		String call(CallbackFunctionContext contextFunction, double value, NativeObject context);
 	}
 
 	// ---------------------------
@@ -404,47 +401,47 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(context, value));
+		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new ScriptableContext(context), value));
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString()));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(context), backgroundColorCallback, getBackgroundColorAsString()));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString()));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(context), borderColorCallback, getBorderColorAsString()));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString()));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(context), colorCallback, getColorAsString()));
 		// gets value calling callback
-		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value());
+		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(context), alignCallback, getAlign()).value());
 		// gets value calling callback
-		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value());
+		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(context), anchorCallback, getAnchor()).value());
 		// gets value calling callback
-		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue());
+		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderRadiusCallback, getBorderRadius()).doubleValue());
 		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue());
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderWidthCallback, getBorderWidth()).intValue());
 		// gets value calling callback
-		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue());
+		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), clampCallback, isClamp()).booleanValue());
 		// gets value calling callback
-		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue());
+		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), clipCallback, isClip()).booleanValue());
 		// gets value calling callback
-		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(context));
+		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new ScriptableContext(context)));
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue());
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), offsetCallback, getOffset()).doubleValue());
 		// gets value calling callback
-		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue());
+		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), opacityCallback, getOpacity()).doubleValue());
 		// gets value calling callback
-		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue());
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), rotationCallback, getRotation()).doubleValue());
 		// gets value calling callback
-		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value());
+		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(context), textAlignCallback, getTextAlign()).value());
 		// gets value calling callback
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString()));
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(context), textStrokeColorCallback, getTextStrokeColorAsString()));
 		// gets value calling callback
-		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue());
+		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), textStrokeWidthCallback, getTextStrokeWidth()).intValue());
 		// gets value calling callback
-		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue());
+		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), textShadowBlurCallback, getTextShadowBlur()).doubleValue());
 		// gets value calling callback
-		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString()));
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(context), textShadowColorCallback, getTextShadowColorAsString()));
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(context, fontCallback));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(context), fontCallback));
 		// gets value calling callback
-		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(context, paddingCallback));
+		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(context), paddingCallback));
 	}
 
 	/**
@@ -529,7 +526,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	public Align getAlign() {
-		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
 	}
 
 	/**
@@ -547,7 +544,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public Anchor getAnchor() {
-		return getValue(Property.ANCHOR, Anchor.class, defaultsOptions.getAnchor());
+		return getValue(Property.ANCHOR, Anchor.values(), defaultsOptions.getAnchor());
 	}
 
 	/**
@@ -661,22 +658,18 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the
-	 *            associated element (i.e. part inside the chart area).
+	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	public void setClamp(boolean clamp) {
 		setValue(Property.CLAMP, clamp);
 	}
 
 	/**
-	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 * element (i.e. part inside the chart area).
+	 * Returns <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 * 
-	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area).
+	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	public boolean isClamp() {
 		return getValue(Property.CLAMP, defaultsOptions.isClamp());
@@ -685,8 +678,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * When the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 * 
-	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be
-	 *            masked.
+	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	public void setClip(boolean clip) {
 		setValue(Property.CLIP, clip);
@@ -778,29 +770,29 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		} else if (ObjectType.STRING.equals(type)) {
 			// checks if is a string
 			// returns as string
-			return getValue(Property.DISPLAY, Display.class, defaultsOptions.getDisplay());
+			return getValue(Property.DISPLAY, Display.values(), defaultsOptions.getDisplay());
 		}
 		// if here returns defautl value
 		return defaultsOptions.getDisplay();
 	}
 
 	/**
-	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is
-	 * 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when
-	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is
+	 *            'start', the label is moved in the opposite direction.
 	 */
 	public void setOffset(double offset) {
 		setValue(Property.OFFSET, offset);
 	}
 
 	/**
-	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * Returns the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 * label is moved in the opposite direction.
 	 * 
-	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
+	 *         label is moved in the opposite direction.
 	 */
 	public double getOffset() {
 		return getValue(Property.OFFSET, defaultsOptions.getOffset());
@@ -857,7 +849,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	public TextAlign getTextAlign() {
-		return getValue(Property.TEXT_ALIGN, TextAlign.class, defaultsOptions.getTextAlign());
+		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultsOptions.getTextAlign());
 	}
 
 	/**

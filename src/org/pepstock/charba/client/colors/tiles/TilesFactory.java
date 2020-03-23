@@ -22,20 +22,16 @@ import java.util.Map;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.regexp.shared.RegExp;
-
 /**
- * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory
- * defaults.
+ * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory defaults.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -45,19 +41,17 @@ public final class TilesFactory {
 	// static instance for singleton
 	private static final TilesFactory INSTANCE = new TilesFactory();
 	// cache of canvas patterns to avoid to create the same canvas pattern if already used
-	private static final Map<String, CanvasPattern> CANVAS_PATTERNS = new HashMap<>();
+	private static final Map<String, CanvasPatternItem> CANVAS_PATTERNS = new HashMap<>();
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// cache of canvas patterns to avoid to create the same canvas pattern if already used
 	private static final Map<String, String> HTML_LEGEND_ITEMS = new HashMap<>();
 	// string format to trim blanks
 	private static final String REGEXP_TRIM_SPACES_PATTERN = "\\s+";
-	// regexp instance to trim blanks
-	private static final RegExp REGEXP_TRIM_SPACES = RegExp.compile(REGEXP_TRIM_SPACES_PATTERN);
 	// gets if Canvas is supported
-	private final boolean isCanvasSupported = Canvas.isSupported();
+	private final boolean isCanvasSupported = DOMBuilder.get().isCanvasSupported();
 	// canvas where draws the pattern
-	private final CanvasElement canvas;
+	private final Canvas canvas;
 	// default configuration
 	private final TilesFactoryDefaults defaults;
 
@@ -68,7 +62,7 @@ public final class TilesFactory {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas
-			canvas = Document.get().createCanvasElement();
+			canvas = DOMBuilder.get().createCanvasElement();
 			// defaults configuration
 			defaults = new TilesFactoryDefaults();
 		} else {
@@ -88,7 +82,7 @@ public final class TilesFactory {
 	}
 
 	// -----------------------------------------
-	// --- TILE - CanvasPattern
+	// --- TILE - CanvasPatternItem
 	// -----------------------------------------
 
 	/**
@@ -96,42 +90,39 @@ public final class TilesFactory {
 	 * 
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile() {
+	public static CanvasPatternItem createTile() {
 		return createTile(INSTANCE.defaults.getShape());
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, shape color and
-	 * size.
+	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape) {
+	public static CanvasPatternItem createTile(IsShape shape) {
 		return createTile(shape, INSTANCE.defaults.getBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, IsColor backgroundColor) {
+	public static CanvasPatternItem createTile(IsShape shape, IsColor backgroundColor) {
 		return createTile(shape, backgroundColor, INSTANCE.defaults.getShapeColor());
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, String backgroundColor) {
+	public static CanvasPatternItem createTile(IsShape shape, String backgroundColor) {
 		return createTile(shape, backgroundColor, INSTANCE.defaults.getShapeColorAsString());
 	}
 
@@ -143,7 +134,7 @@ public final class TilesFactory {
 	 * @param shapeColor shape color
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor) {
+	public static CanvasPatternItem createTile(IsShape shape, String backgroundColor, String shapeColor) {
 		return createTile(shape, backgroundColor, shapeColor, INSTANCE.defaults.getSize());
 	}
 
@@ -155,7 +146,7 @@ public final class TilesFactory {
 	 * @param shapeColor shape color
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
+	public static CanvasPatternItem createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
 		return createTile(shape, backgroundColor, shapeColor, INSTANCE.defaults.getSize());
 	}
 
@@ -168,7 +159,7 @@ public final class TilesFactory {
 	 * @param size size of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
+	public static CanvasPatternItem createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
 		return createTile(shape, IsColor.isConsistent(backgroundColor) ? backgroundColor.toRGBA() : INSTANCE.defaults.getBackgroundColorAsString(), IsColor.isConsistent(shapeColor) ? shapeColor.toRGBA() : INSTANCE.defaults.getShapeColorAsString(), size);
 	}
 
@@ -181,7 +172,7 @@ public final class TilesFactory {
 	 * @param size size of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public static CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
+	public static CanvasPatternItem createTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
 		return buildTile(shape, backgroundColor, shapeColor, size);
 	}
 
@@ -199,8 +190,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, shape color and
-	 * size.
+	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a CHARBA pattern
@@ -210,8 +200,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -222,8 +211,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -288,8 +276,7 @@ public final class TilesFactory {
 	// -----------------------------------------
 
 	/**
-	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color
-	 * and size.
+	 * Returns a CHARBA pattern, using the point style as argument and the other default values, background color, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @return a CHARBA pattern
@@ -299,8 +286,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
-	 * color and size.
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -311,8 +297,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape
-	 * color and size.
+	 * Returns a CHARBA pattern, using the point style and back ground color as arguments and the other default values, shape color and size.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -323,8 +308,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
-	 * value.
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default value.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -336,8 +320,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default
-	 * value.
+	 * Returns a CHARBA pattern, using the point style, back ground color and shape color as arguments and the size as default value.
 	 * 
 	 * @param style point style to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -387,7 +370,7 @@ public final class TilesFactory {
 	 * @param size size of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	private static CanvasPattern buildTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
+	private static CanvasPatternItem buildTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
 		// checks consistency of all parameters
 		// if not consistent, it applies the default value
 		IsShape shapeParam = IsShape.isValid(shape) ? shape : INSTANCE.defaults.getShape();
@@ -400,20 +383,20 @@ public final class TilesFactory {
 		String shapeColorParam = shapeColor != null ? shapeColor : TilesFactoryDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
 		// checks the minimum size of canvas pattern
 		int sizeParam = Math.max(size, TilesFactoryDefaults.MINIMUM_SIZE);
-		// checks the minimum size of radius and rotaion
+		// checks the minimum size of radius and rotation
 		// creates a unique key based on arguments
 		// in order to store the canvas pattern when created and
 		// if all further requests for the same canvas pattern, returns the cached one
 		StringBuilder keyBuilder = new StringBuilder(shape.getKeyPrefix());
 		keyBuilder.append(backgroundColor).append(shapeColor).append(size);
-		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Constants.EMPTY_STRING).toLowerCase(Locale.getDefault());
+		String key = keyBuilder.toString().replace(REGEXP_TRIM_SPACES_PATTERN, Constants.EMPTY_STRING).toLowerCase(Locale.getDefault());
 		// checks if the canvas pattern is already created with those parameters
 		if (CANVAS_PATTERNS.containsKey(key)) {
 			// if yes returns the cached one
 			return CANVAS_PATTERNS.get(key);
 		}
 		// creates a canvas pattern
-		CanvasPattern pattern = shapeParam.getDrawer().createTile(INSTANCE.canvas, backgroundColorParam, shapeColorParam, sizeParam);
+		CanvasPatternItem pattern = shapeParam.getDrawer().createTile(INSTANCE.canvas, backgroundColorParam, shapeColorParam, sizeParam);
 		// stores it into cache
 		CANVAS_PATTERNS.put(key, pattern);
 		return pattern;
@@ -429,7 +412,6 @@ public final class TilesFactory {
 	 * 
 	 * @param htmlLegendItem the legend item instance to create the tile
 	 * @return a point style picture in base64 PNG format
-	 * @see Canvas#toDataUrl()
 	 */
 	public static String createHtmlLegendItem(HtmlLegendItem htmlLegendItem) {
 		// checks if html legend item is consistent
@@ -461,8 +443,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from
-	 * {@link HtmlLegend} plugin.
+	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from {@link HtmlLegend} plugin.
 	 * 
 	 * @param htmlLegendItem the legend item instance to create the tile
 	 */

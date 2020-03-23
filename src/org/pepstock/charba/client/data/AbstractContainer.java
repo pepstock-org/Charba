@@ -28,10 +28,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Common utility to manage inside the configuration items, the canvas objects (pattern or gradient), set to the specific
- * properties of the elements.<br>
- * It stores the canvas object information into a native object added to Charba configuration, on specific property names for
- * Charba.<br>
+ * Common utility to manage inside the configuration items, the canvas objects (pattern or gradient), set to the specific properties of the elements.<br>
+ * It stores the canvas object information into a native object added to Charba configuration, on specific property names for Charba.<br>
  * The canvas object are stored into native object by the "original" property names to use to configure CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero

@@ -21,8 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Base class for all options, which will wraps a native object and manages the relations about parent and children
- * elements.<br>
+ * Base class for all options, which will wraps a native object and manages the relations about parent and children elements.<br>
  * Provides also a set of methods to manages callbacks and events.
  * 
  * @author Andrea "Stock" Stocchero
@@ -72,8 +71,7 @@ abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObj
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param parent parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.

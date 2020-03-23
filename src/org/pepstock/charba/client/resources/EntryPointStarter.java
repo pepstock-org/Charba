@@ -76,14 +76,14 @@ public final class EntryPointStarter {
 		// sets deferred resources
 		ResourcesType.setClientBundle(resources);
 		// checks the the date adapter bundle is consistent
-		if (resources.getClientBundle() == null) {
+		if (resources.getDeferredAdapterResources() == null) {
 			// if not, exception
 			throw new IllegalArgumentException("Client bundle is null");
 		}
 		// checks if is already injected
 		if (!ResourcesType.getClientBundle().getModule().isInjected()) {
 			// starts loading the CHART.JS
-			loadChartJS(resources.getClientBundle(), runnable);
+			loadChartJS(resources, runnable);
 			// notify for injection
 			resources.injected();
 		} else {
@@ -100,17 +100,16 @@ public final class EntryPointStarter {
 	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadChartJS(DeferredDateAdapterResources resources, final Runnable runnable) {
+	private static void loadChartJS(AbstractDeferredResources resources, final Runnable runnable) {
 		try {
 			// loads CHART.JS in asynchronous
 			// using the deferred client instance
-			DeferredChartResources.INSTANCE.chartJs().getText(new ResourceCallback<TextResource>() {
+			resources.getDeferredChartResource().chartJs().getText(new ResourceCallback<TextResource>() {
 
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
 				 */
 				@Override
 				public void onError(ResourceException e) {
@@ -120,13 +119,14 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {
+					// creates an injector items
+					AbstractInjectableResource injectorItem = new InternalInjectableTextResource(ResourceName.CHART, resource);
 					// injects the CHART.JS
-					Injector.ensureInjected(resource);
+					Injector.ensureInjected(injectorItem);
 					// loads date-time library
 					EntryPointStarter.loadDatetimeLibrary(resources, runnable);
 				}
@@ -144,17 +144,16 @@ public final class EntryPointStarter {
 	 * @param resources deferred date adapter resources instance to set
 	 * @param runnable the entry point instance as runnable
 	 */
-	private static void loadDatetimeLibrary(DeferredDateAdapterResources resources, final Runnable runnable) {
+	private static void loadDatetimeLibrary(AbstractDeferredResources resources, final Runnable runnable) {
 		try {
 			// loads date time library in asynchronous
 			// using the deferred client instance
-			resources.datetimeLibrary().getText(new ResourceCallback<TextResource>() {
+			resources.getDeferredAdapterResources().datetimeLibrary().getText(new ResourceCallback<TextResource>() {
 
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onError(com.google.gwt.resources.client.ResourceException)
 				 */
 				@Override
 				public void onError(ResourceException e) {
@@ -164,15 +163,18 @@ public final class EntryPointStarter {
 				/*
 				 * (non-Javadoc)
 				 * 
-				 * @see
-				 * com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
+				 * @see com.google.gwt.resources.client.ResourceCallback#onSuccess(com.google.gwt.resources.client.ResourcePrototype)
 				 */
 				@Override
 				public void onSuccess(TextResource resource) {
+					// creates an injector items
+					AbstractInjectableResource injectorLibItem = new InternalInjectableTextResource(ResourceName.DATE_TIME_LIBRARY, resource);
 					// injects the date time library
-					Injector.ensureInjected(resource);
+					Injector.ensureInjected(injectorLibItem);
+					// creates an injector items
+					AbstractInjectableResource injectorAdapterItem = new InternalInjectableTextResource(ResourceName.DATE_TIME_ADAPTER, resources.getDeferredAdapterResources().datetimeAdapter());
 					// injects also the date time adapter, always sync
-					Injector.ensureInjected(resources.datetimeAdapter());
+					Injector.ensureInjected(injectorAdapterItem);
 					// loads date-time adapter library
 					// executes the entry point
 					runnable.run();

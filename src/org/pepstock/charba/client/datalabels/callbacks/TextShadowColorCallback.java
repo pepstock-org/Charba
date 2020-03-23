@@ -20,24 +20,21 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textShadowColor</code> property at runtime, using the
- * chart instance and the plugin context.<br>
- * <b>PAY ATTENTION</b> that with the current release of {@link DataLabelsPlugin#ID} plugin, the GRADIENT coordinates are
- * relative the the label coordinates (local), not relative to the canvas coordinates (global), therefore NOT USE GRADIENT
- * Charba object, waiting for {@link DataLabelsPlugin#ID} enhancement.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textShadowColor</code> property at runtime, using the chart instance and the plugin context.<br>
+ * <b>PAY ATTENTION</b> that with the current release of {@link DataLabelsPlugin#ID} plugin, the GRADIENT coordinates are relative the the label coordinates (local), not relative
+ * to the canvas coordinates (global), therefore NOT USE GRADIENT Charba object, waiting for {@link DataLabelsPlugin#ID} enhancement.
  * 
  * @author Andrea "Stock" Stocchero
  *
  * @see IsColor
  * @see Pattern
  * @see Gradient
- * @see CanvasPattern
- * @see CanvasGradient
+ * @see CanvasPatternItem
+ * @see CanvasGradientItem
  */
 public interface TextShadowColorCallback extends Scriptable<Object> {
 

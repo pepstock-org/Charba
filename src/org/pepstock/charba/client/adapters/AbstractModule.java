@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.DateAdapterInjectionComplete;
 
 /**
@@ -75,36 +76,11 @@ public abstract class AbstractModule {
 	}
 
 	/**
-	 * Creates a date adapter.
+	 * Invokes after the initialization of date adapter in order to override default formats if needed.
 	 * 
-	 * @return a date adapter
+	 * @param overrider native object wrapper of default formats of adapater
 	 */
-	public final DateAdapter createDateAdapter() {
-		return createDateAdapter(null);
-	}
-
-	/**
-	 * Creates a date adapter with specific options.
-	 * 
-	 * @param options date adapter options.
-	 * @return a date adapter
-	 */
-	public DateAdapter createDateAdapter(DateAdapterOptions options) {
-		// checks if the module is injected
-		if (isInjected()) {
-			// checks if adapter options is null
-			if (options != null) {
-				// if not null, uses the constructor wiht options
-				return new DateAdapter(options);
-			}
-			// if here, creates adapter
-			// without options
-			return new DateAdapter();
-		}
-		// if here, the date adapter module is not ibjected
-		// then exception
-		throw new IllegalArgumentException(id + " module is not injected");
-	}
+	public abstract void overrideDefaultFormats(DefaultsFormatsOverrider overrider);
 
 	/**
 	 * Is invoked when the date adapter has been injected.<br>
@@ -117,6 +93,19 @@ public abstract class AbstractModule {
 		if (injectionComplete != null) {
 			// sets that it has been injected
 			this.injected = true;
+			// creates an empty options
+			DateAdapterOptions options = new DateAdapterOptions();
+			// creates a native date adapter
+			NativeDateAdapter nativeAdapter = JsDateAdapterHelper.get().create(options);
+			// gets formats
+			NativeObject nativeObject = nativeAdapter.formats();
+			// checks if formats are consistent
+			if (nativeObject != null) {
+				// creates an overrider object
+				DefaultsFormatsOverrider overrider = new DefaultsFormatsOverrider(nativeObject);
+				// invokes to override default
+				overrideDefaultFormats(overrider);
+			}
 		}
 	}
 

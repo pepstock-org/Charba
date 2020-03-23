@@ -263,8 +263,7 @@ public final class Clip extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets <code>false</code> disabling clip for passed position but if <code>true</code> is passed, removes the previous value
-	 * if boolean, using the default number.
+	 * Sets <code>false</code> disabling clip for passed position but if <code>true</code> is passed, removes the previous value if boolean, using the default number.
 	 * 
 	 * @param position position to check
 	 * @param value <code>false</code> to disable clip or <code>true</code> to remove previous disable.

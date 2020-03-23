@@ -15,45 +15,71 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * This is native java script object, passed by CHART.JS during the animation events, which contains the animation item.<br>
+ * This is the wrapper of native java script object, passed by CHART.JS during the animation events, which contains the animation item.<br>
  * This is the CHART.JS item with all needed info.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class AnimationObject {
+public final class AnimationObject extends NativeObjectContainer {
 
 	/**
-	 * To avoid any user creation
+	 * Name of properties of native object.
 	 */
-	AnimationObject() {
+	private enum Property implements Key
+	{
+		ANIMATION_OBJECT("animationObject");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
-	 * Returns the native property of java script object related to animation item.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @return java script object related to animation item.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	@JsProperty
-	native NativeObject getAnimationObject();
+	public AnimationObject(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the animation item, by the native java script object.
 	 * 
 	 * @return the animation item, by the native java script object.
 	 */
-	@JsOverlay
 	public AnimationItem getAnimationItem() {
-		return new AnimationItem(getAnimationObject());
+		// checks if animation object is present
+		if (has(Property.ANIMATION_OBJECT)) {
+			return new AnimationItem(getValue(Property.ANIMATION_OBJECT));
+		} else {
+			// if here, no animation obejct then it is already an item
+			return new AnimationItem(getNativeObject());
+		}
 	}
 
 }
