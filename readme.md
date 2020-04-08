@@ -110,7 +110,7 @@ If you are using [Apache Maven](https://maven.apache.org/):
 </plugin>
 ```
 
-From **Charba** version **3.1**, this is NOT needed anymore. 
+Since **Charba** version **3.1**, this is NOT needed anymore. 
 
 Documentation
 -------------
