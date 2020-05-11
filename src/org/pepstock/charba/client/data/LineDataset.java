@@ -35,7 +35,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
-import org.pepstock.charba.client.enums.SteppedLine;
+import org.pepstock.charba.client.enums.Stepped;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
@@ -67,7 +67,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		SHOW_LINE("showLine"),
 		CLIP("clip"),
-		STEPPED_LINE("steppedLine");
+		STEPPED("stepped");
 
 		// name value of property
 		private final String value;
@@ -229,35 +229,35 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 
 	/**
 	 * Sets if the line is shown as a stepped line.<br>
-	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.
+	 * If the stepped value is set to anything other than false, lineTension will be ignored.
 	 * 
 	 * @param line if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
-	public void setSteppedLine(boolean line) {
+	public void setStepped(boolean line) {
 		// checks if no stepped line
 		if (!line) {
 			// sets boolean value instead of string one
-			setValue(Property.STEPPED_LINE, false);
+			setValue(Property.STEPPED, false);
 		} else {
 			// sets value before, equals to true
-			setValue(Property.STEPPED_LINE, SteppedLine.BEFORE);
+			setValue(Property.STEPPED, Stepped.BEFORE);
 		}
 	}
 
 	/**
 	 * Sets if the line is shown as a stepped line.<br>
-	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.
+	 * If the stepped value is set to anything other than false, lineTension will be ignored.
 	 * 
 	 * @param line if the line is shown as a stepped line.
 	 */
-	public void setSteppedLine(SteppedLine line) {
+	public void setStepped(Stepped line) {
 		// checks if no stepped line
-		if (SteppedLine.FALSE.equals(line)) {
+		if (Stepped.FALSE.equals(line)) {
 			// sets boolean value instead of string one
-			setValue(Property.STEPPED_LINE, false);
+			setValue(Property.STEPPED, false);
 		} else {
 			// sets value
-			setValue(Property.STEPPED_LINE, line);
+			setValue(Property.STEPPED, line);
 		}
 	}
 
@@ -266,13 +266,13 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @return If the line is shown as a stepped line.
 	 */
-	public SteppedLine getSteppedLine() {
+	public Stepped getStepped() {
 		// checks if value of stepped line is a boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.STEPPED_LINE))) {
-			return SteppedLine.FALSE;
+		if (ObjectType.BOOLEAN.equals(type(Property.STEPPED))) {
+			return Stepped.FALSE;
 		} else {
-			// otherwise returns the steppedline
-			return getValue(Property.STEPPED_LINE, SteppedLine.values(), SteppedLine.FALSE);
+			// otherwise returns the stepped
+			return getValue(Property.STEPPED, Stepped.values(), Stepped.FALSE);
 		}
 	}
 

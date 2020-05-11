@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum SteppedLine implements Key
+public enum Stepped implements Key
 {
 	/**
 	 * Step-before Interpolation
@@ -49,7 +49,7 @@ public enum SteppedLine implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private SteppedLine(String value) {
+	private Stepped(String value) {
 		this.value = value;
 	}
 
