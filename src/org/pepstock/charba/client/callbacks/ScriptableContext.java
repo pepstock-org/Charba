@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
- * <li><b>hover</b>(boolean): if the data and dataset item is hovered.
+ * <li><b>active</b>(boolean): if the data and dataset item is hovered/active.
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -44,7 +44,6 @@ public final class ScriptableContext extends NativeObjectContainer {
 		DATA_INDEX("dataIndex"),
 		DATASET_INDEX("datasetIndex"),
 		ACTIVE("active"),
-		HOVER("hover"),
 		OPTIONS("options");
 
 		// name value of property
@@ -107,23 +106,12 @@ public final class ScriptableContext extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns whether the associated element is hovered.
+	 * Returns whether the associated element is active.
 	 * 
-	 * @return whether the associated element is hovered. Default is false.
+	 * @return whether the associated element is active. Default is false.
 	 */
 	public boolean isHover() {
-		// checks if active property is defined
-		if (has(Property.ACTIVE)) {
-			// if here, there is hover property
-			// used by Chart.js scriptable options
-			return getValue(Property.ACTIVE, false);
-		} else if (has(Property.HOVER)) {
-			// if here, there is active property
-			// used by Datalabels plugin
-			return getValue(Property.HOVER, false);
-		}
-		// returns default value
-		return false;
+		return getValue(Property.ACTIVE, false);
 	}
 
 	/**
