@@ -48,8 +48,8 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	{
 		LABELS("labels"),
 		DATASETS("datasets"),
-		X_LABELS("xLabels"),
-		Y_LABELS("yLabels");
+		X_LABELS("xLabels"), // TO BE CHECK if needed
+		Y_LABELS("yLabels"); // TO BE CHECK if needed
 
 		// name value of property
 		private final String value;

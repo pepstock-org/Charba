@@ -268,48 +268,48 @@ public final class Chart {
 	 * 
 	 * @return the border width value.
 	 */
-	@JsProperty
-	native int getBorderWidth();
+//	@JsProperty
+//	native int getBorderWidth();
 
 	/**
 	 * Returns the outer radius value.
 	 * 
 	 * @return the outer radius value.
 	 */
-	@JsProperty
-	native double getOuterRadius();
+//	@JsProperty
+//	native double getOuterRadius();
 
 	/**
 	 * Returns the inner radius value.
 	 * 
 	 * @return the inner radius value.
 	 */
-	@JsProperty
-	native double getInnerRadius();
+//	@JsProperty
+//	native double getInnerRadius();
 
 	/**
 	 * Returns the radius length value.
 	 * 
 	 * @return the radius length value.
 	 */
-	@JsProperty
-	native double getRadiusLength();
+//	@JsProperty
+//	native double getRadiusLength();
 
 	/**
 	 * Returns the offset X value.
 	 * 
 	 * @return the offset X value.
 	 */
-	@JsProperty
-	native int getOffsetX();
+//	@JsProperty
+//	native int getOffsetX();
 
 	/**
 	 * Returns the offset Y value.
 	 * 
 	 * @return the offset Y value.
 	 */
-	@JsProperty
-	native int getOffsetY();
+//	@JsProperty
+//	native int getOffsetY();
 
 	/**
 	 * Returns the chart area node, as native object.

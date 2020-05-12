@@ -185,14 +185,14 @@ public final class ChartNode {
 		return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;
 	}
 
-	/**
-	 * Returns the border width value.
-	 * 
-	 * @return the border width value. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getBorderWidth() {
-		return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	}
+//	/**
+//	 * Returns the border width value.
+//	 * 
+//	 * @return the border width value. Default is {@link UndefinedValues#INTEGER}.
+//	 */
+//	public int getBorderWidth() {
+//		return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+//	}
 
 	/**
 	 * Returns the outer radius value.
@@ -221,23 +221,23 @@ public final class ChartNode {
 		return initialized ? check(chart.getRadiusLength(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
-	/**
-	 * Returns the offset X value.
-	 * 
-	 * @return the offset X value. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getOffsetX() {
-		return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	}
+//	/**
+//	 * Returns the offset X value.
+//	 * 
+//	 * @return the offset X value. Default is {@link UndefinedValues#INTEGER}.
+//	 */
+//	public int getOffsetX() {
+//		return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+//	}
 
-	/**
-	 * Returns the offset Y value.
-	 * 
-	 * @return the offset Y value. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getOffsetY() {
-		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	}
+//	/**
+//	 * Returns the offset Y value.
+//	 * 
+//	 * @return the offset Y value. Default is {@link UndefinedValues#INTEGER}.
+//	 */
+//	public int getOffsetY() {
+//		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+//	}
 
 	/**
 	 * Returns the string JSON representation of the object.
