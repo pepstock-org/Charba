@@ -39,6 +39,11 @@ public enum DataType implements Key
 	 */
 	POINTS("points"),
 	/**
+	 * The data property is set as array of floating data.<br>
+	 * Only for <b>BAR</b> datasets.
+	 */
+	FLOATING("floating"),
+	/**
 	 * The data property is set as array of strings.
 	 */
 	STRINGS("strings");

@@ -15,12 +15,18 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.ArrayDoubleArray;
+import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -28,6 +34,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -58,6 +65,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
 	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
+	
+	// floating data factory
+	private static final FloatingDatatFactory FLOATING_DATA_FACTORY = new FloatingDatatFactory();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -401,6 +411,65 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
+	}
+	
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#FLOATING}.
+	 */
+	public List<FloatingData> getFloatingData() {
+		return getFloatingData(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#FLOATING}.
+	 */
+	public List<FloatingData> getFloatingData(boolean binding) {
+		// checks if is a floating data type
+		if (has(InternalProperty.DATA) && DataType.FLOATING.equals(getDataType())) {
+			// gets array
+			ArrayDoubleArray array = getArrayValue(InternalProperty.DATA);
+			// returns floating data
+			return ArrayListHelper.list(array, FLOATING_DATA_FACTORY);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayDoubleArrayList<FloatingData> result = new ArrayDoubleArrayList<>();
+			// set value
+			setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrEmpty(result));
+			// sets data type
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.FLOATING);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param floatingData an array of floating data
+	 */
+	public void setFloatingData(FloatingData... floatingData) {
+		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		// sets data type checking if the key exists
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.FLOATING : DataType.UNKNOWN);
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param floatingData an array of floating data
+	 */
+	public void setFloatingData(List<FloatingData> floatingData) {
+		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		// sets data type checking if the key exists
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.FLOATING : DataType.UNKNOWN);
 	}
 
 	/**

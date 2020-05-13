@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.data.HovingDataset;
@@ -334,6 +335,10 @@ public final class ColorSchemes extends AbstractPlugin {
 			// ONLY datasets which implements the interface have got the data POINTS
 			HasDataPoints dataPointsDataset = (HasDataPoints) dataset;
 			amountOfData = dataPointsDataset.getDataPoints().size();
+		} else if (DataType.FLOATING.equals(type) && dataset instanceof BarDataset) {
+			// ONLY BAR datasets have got the data FLOATING
+			BarDataset barDataset = (BarDataset) dataset;
+			amountOfData = barDataset.getFloatingData().size();
 		}
 		// creates an array with the data dimension
 		IsColor[] colorsToSet = new IsColor[amountOfData];

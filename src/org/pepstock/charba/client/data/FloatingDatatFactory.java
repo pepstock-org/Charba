@@ -13,30 +13,26 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.commons;
+package org.pepstock.charba.client.data;
+
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 
 /**
- * Interface to be implemented to load elements from an array of native object.
+ * Factory to create a floating data from a native array, used for array container lists.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface NativeObjectContainerFactory<T extends NativeObjectContainer> {
+public final class FloatingDatatFactory implements NativeArrayContainerFactory<ArrayDouble, FloatingData> {
 
-	/**
-	 * Creates a native object container instance by an empty native object.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return native object container element instance
+	 * @see org.pepstock.charba.client.commons.NativeArrayContainerFactory#create(org.pepstock.charba.client.commons.Array)
 	 */
-	default T create() {
-		return create(null);
+	@Override
+	public FloatingData create(ArrayDouble nativeArray) {
+		return new FloatingData(nativeArray);
 	}
-
-	/**
-	 * Creates a native object container instance by a native object.
-	 * 
-	 * @param nativeObject native object
-	 * @return native object container element instance
-	 */
-	T create(final NativeObject nativeObject);
 
 }

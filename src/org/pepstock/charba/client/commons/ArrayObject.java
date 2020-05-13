@@ -48,7 +48,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
-	 * @param item list of objects to load into new java script array.
+	 * @param item single object to load into new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of ONE 1 element or <code>null</code> if argument is <code>null</code>
 	 */
@@ -329,7 +329,7 @@ public final class ArrayObject extends Array {
 	native void fill(NativeObject item, int start, int end);
 
 	/**
-	 * Adds one element to the end of an array and returns the new length of the array.
+	 * Adds one element to the end of an array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */

@@ -831,7 +831,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
-		// checks if is a numbers data type
+		// checks if is a points data type
 		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
 			ArrayObject array = getArrayValue(InternalProperty.DATA);
