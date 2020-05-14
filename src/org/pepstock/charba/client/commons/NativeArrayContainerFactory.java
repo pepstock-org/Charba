@@ -39,5 +39,4 @@ public interface NativeArrayContainerFactory<A extends Array, T extends NativeAr
 	 */
 	T create(final A nativeArray);
 
-
 }

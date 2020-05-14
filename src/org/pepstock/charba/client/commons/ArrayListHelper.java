@@ -162,7 +162,7 @@ public final class ArrayListHelper {
 		// creates an empty list
 		return new ArrayObjectContainerList<>(array, factory);
 	}
-	
+
 	/**
 	 * Creates a array list of java script native double array container by a java script array and a factory.
 	 * 
@@ -263,7 +263,7 @@ public final class ArrayListHelper {
 	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		return Collections.unmodifiableList(list(array, factory));
 	}
-	
+
 	/**
 	 * Creates an unmodifiable array list of java script native double array container by a java script array and a factory.
 	 * 

@@ -633,7 +633,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.value(), container.getArray());
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- NATIVE ARRAY CONTAINERS
 	// ------------------------------------------
