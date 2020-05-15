@@ -637,7 +637,28 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- NATIVE ARRAY CONTAINERS
 	// ------------------------------------------
-
+	/**
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by array container.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, NativeArrayContainer<?> value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			removeIfExists(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			nativeObject.defineArrayProperty(key.value(), value.getNativeArray());
+		}
+	}
+	
 	/**
 	 * Sets a value (Array from a double array container list) into embedded JavaScript object at specific property.
 	 * 

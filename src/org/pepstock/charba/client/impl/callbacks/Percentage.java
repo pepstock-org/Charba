@@ -19,8 +19,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.enums.DataType;
 
@@ -86,7 +88,7 @@ public final class Percentage {
 			return Double.NaN;
 		}
 		// calculates the percentage
-		return value / total;
+		return Math.abs(value) / total;
 	}
 
 	/**
@@ -102,20 +104,28 @@ public final class Percentage {
 		// scans all datasets
 		for (Dataset ds : chart.getData().getDatasets()) {
 			// if dataset contains data points
-			if (DataType.POINTS.equals(ds.getDataType())) {
+			if (DataType.POINTS.equals(ds.getDataType()) && ds instanceof HasDataPoints) {
 				// then dataset is data point container
 				// and then cast it
 				HasDataPoints hasDataPoints = (HasDataPoints) ds;
 				// gets the data points at data index
 				DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
 				// adds the Y value to the total
-				total = total + point.getY();
+				total = total + Math.abs(point.getY());
+			} else if (DataType.FLOATING.equals(ds.getDataType()) && ds instanceof BarDataset) {
+				// then dataset is floating bar chart
+				// and then cast it
+				BarDataset barDataset = (BarDataset) ds;
+				// gets the floating data
+				FloatingData data = barDataset.getFloatingData().get(context.getIndex());
+				// adds the absolute differences between start and end
+				total = total + Math.abs(data.getEnd() - data.getStart());
 			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 				// if here, the dataset has got data as doubles
 				// then it get the double at data index
 				double data = ds.getData().get(context.getIndex());
 				// adds it to total
-				total = total + data;
+				total = total + Math.abs(data);
 			}
 		}
 		return total;
@@ -135,7 +145,7 @@ public final class Percentage {
 		// then it calculates the values inside the dataset
 		Dataset ds = chart.getData().getDatasets().get(context.getDatasetIndex());
 		// if dataset contains data points
-		if (DataType.POINTS.equals(ds.getDataType())) {
+		if (DataType.POINTS.equals(ds.getDataType()) && ds instanceof HasDataPoints) {
 			// then dataset is data points container
 			// and then cast it
 			HasDataPoints hasDataPoints = (HasDataPoints) ds;
@@ -144,7 +154,18 @@ public final class Percentage {
 			// scans data points
 			for (DataPoint dataPoint : points) {
 				// adds the Y value to the total
-				total = total + dataPoint.getY();
+				total = total + Math.abs(dataPoint.getY());
+			}
+		} else if (DataType.FLOATING.equals(ds.getDataType()) && ds instanceof BarDataset) {
+			// then dataset is floating bar chart
+			// and then cast it
+			BarDataset barDataset = (BarDataset) ds;
+			// gets the floating data
+			List<FloatingData> data = barDataset.getFloatingData();
+			// scans data
+			for (FloatingData dataFloat : data) {
+				// adds the absolute differences between start and end
+				total = total + Math.abs(dataFloat.getEnd() - dataFloat.getStart());
 			}
 		} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 			// if here, the dataset has got data as doubles
@@ -153,7 +174,7 @@ public final class Percentage {
 			// scans doubles
 			for (Double dataValue : data) {
 				// adds it to total
-				total = total + dataValue;
+				total = total + Math.abs(dataValue);
 			}
 		}
 		return total;
