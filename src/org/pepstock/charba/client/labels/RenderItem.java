@@ -17,9 +17,13 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.FloatingData;
+import org.pepstock.charba.client.data.FloatingDatatFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -28,6 +32,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public class RenderItem extends NativeObjectContainer {
+	
+	// creates the floating data factory
+	private static final FloatingDatatFactory FACTORY = new FloatingDatatFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -133,6 +140,41 @@ public class RenderItem extends NativeObjectContainer {
 	 * @return the value for the dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getValue() {
+		// checks if is floating data
+		if (isFloatingData()) {
+			// returns the default
+			return UndefinedValues.DOUBLE;
+		}
+		// here the value is a number then returns the value
 		return getValue(Property.VALUE, UndefinedValues.DOUBLE);
 	}
+
+	/**
+	 * Returns <code>true</code> if the value is represented by a {@link FloatingData} for the BAR dataset.
+	 * 
+	 * @return <code>true</code> if the value is represented by a {@link FloatingData} for the BAR dataset.
+	 */
+	public final boolean isFloatingData() {
+		// check if object type is a Number
+		return ObjectType.ARRAY.equals(type(Property.VALUE));
+	}
+
+	/**
+	 * Returns the value for the dataset as {@link FloatingData} if it is.
+	 * 
+	 * @return the value for the dataset as {@link FloatingData} if it is or <code>null</code>.
+	 */
+	public final FloatingData getValueAsFloatingData() {
+		// checks if is floating data
+		if (isFloatingData()) {
+			// gets the array
+			ArrayDouble array = getArrayValue(Property.VALUE);
+			// creates and returns the floating data
+			return FACTORY.create(array);
+		}
+		// here the value is not a floating bar
+		// then returns null
+		return null;
+	}
+
 }
