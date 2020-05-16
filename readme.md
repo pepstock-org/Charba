@@ -152,6 +152,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * implement **floating-bars** for BAR datasets. Thanks @rr22x.
+ * change `DataPoint` class setting `void setT(Date)` and `Date getT()` to **deprecated**. Use `void setX(Date)` and `Date getXAsDate()` instead. 
  
 ### Fixed Bugs
 

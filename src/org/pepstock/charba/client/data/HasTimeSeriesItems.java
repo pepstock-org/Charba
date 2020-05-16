@@ -37,7 +37,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	 */
 	static boolean isTimeSeriesItem(DataPoint datapoint) {
 		// checks if there is data point
-		return datapoint != null && datapoint.getT() != null && Double.isNaN(datapoint.getX()) && Double.isNaN(datapoint.getR());
+		return datapoint != null && datapoint.getXAsDate() != null && Double.isNaN(datapoint.getR());
 	}
 
 	/**
