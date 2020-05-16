@@ -22,8 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.data.FloatingData;
-import org.pepstock.charba.client.data.FloatingDatatFactory;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -32,9 +31,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public class RenderItem extends NativeObjectContainer {
-	
-	// creates the floating data factory
-	private static final FloatingDatatFactory FACTORY = new FloatingDatatFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -71,6 +67,37 @@ public class RenderItem extends NativeObjectContainer {
 		}
 	}
 
+	// instacne of data item to wrap the value
+	private final DataItem dataItem;
+
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
+	RenderItem(NativeObject nativeObject) {
+		super(nativeObject);
+		// gets the type of value
+		ObjectType type = type(Property.VALUE);
+		// object instance for data item
+		Object object = null;
+		// checks if is floating data
+		if (ObjectType.NUMBER.equals(type)) {
+			// get the value as double
+			object = getValue(Property.VALUE, UndefinedValues.DOUBLE);
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// get the value as array
+			ArrayDouble array = getArrayValue(Property.VALUE);
+			// sets object
+			object = array;
+		} else if (ObjectType.STRING.equals(type)) {
+			// get the value as string
+			object = getValue(Property.VALUE, UndefinedValues.STRING);
+		}
+		// stores the data item
+		this.dataItem = new DataItem(object);
+	}
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
@@ -86,15 +113,6 @@ public class RenderItem extends NativeObjectContainer {
 		}
 		// if here, the native chart is not consistent
 		return null;
-	}
-
-	/**
-	 * Creates the object with native object instance to be wrapped.
-	 * 
-	 * @param nativeObject native object instance to be wrapped.
-	 */
-	RenderItem(NativeObject nativeObject) {
-		super(nativeObject);
 	}
 
 	/**
@@ -135,46 +153,12 @@ public class RenderItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the value for the dataset.
+	 * Returns the value for the dataset by a {@link DataItem}.
 	 * 
-	 * @return the value for the dataset. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the value for the dataset by a {@link DataItem}.
 	 */
-	public final double getValue() {
-		// checks if is floating data
-		if (isFloatingData()) {
-			// returns the default
-			return UndefinedValues.DOUBLE;
-		}
-		// here the value is a number then returns the value
-		return getValue(Property.VALUE, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns <code>true</code> if the value is represented by a {@link FloatingData} for the BAR dataset.
-	 * 
-	 * @return <code>true</code> if the value is represented by a {@link FloatingData} for the BAR dataset.
-	 */
-	public final boolean isFloatingData() {
-		// check if object type is a Number
-		return ObjectType.ARRAY.equals(type(Property.VALUE));
-	}
-
-	/**
-	 * Returns the value for the dataset as {@link FloatingData} if it is.
-	 * 
-	 * @return the value for the dataset as {@link FloatingData} if it is or <code>null</code>.
-	 */
-	public final FloatingData getValueAsFloatingData() {
-		// checks if is floating data
-		if (isFloatingData()) {
-			// gets the array
-			ArrayDouble array = getArrayValue(Property.VALUE);
-			// creates and returns the floating data
-			return FACTORY.create(array);
-		}
-		// here the value is not a floating bar
-		// then returns null
-		return null;
+	public final DataItem getDataItem() {
+		return dataItem;
 	}
 
 }

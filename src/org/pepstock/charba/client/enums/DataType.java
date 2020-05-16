@@ -42,7 +42,7 @@ public enum DataType implements Key
 	 * The data property is set as array of floating data.<br>
 	 * Only for <b>BAR</b> datasets.
 	 */
-	FLOATING("floating"),
+	ARRAYS("arrays"),
 	/**
 	 * The data property is set as array of strings.
 	 */

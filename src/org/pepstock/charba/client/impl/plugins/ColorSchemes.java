@@ -335,7 +335,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// ONLY datasets which implements the interface have got the data POINTS
 			HasDataPoints dataPointsDataset = (HasDataPoints) dataset;
 			amountOfData = dataPointsDataset.getDataPoints().size();
-		} else if (DataType.FLOATING.equals(type) && dataset instanceof BarDataset) {
+		} else if (DataType.ARRAYS.equals(type) && dataset instanceof BarDataset) {
 			// ONLY BAR datasets have got the data FLOATING
 			BarDataset barDataset = (BarDataset) dataset;
 			amountOfData = barDataset.getFloatingData().size();

@@ -48,6 +48,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
 	/**
+	 * Floating bars data factory to create {@link FloatingData}s.
+	 */
+	public static final FloatingDatatFactory FLOATING_BAR_DATA_FACTORY = new FloatingDatatFactory();
+
+	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
 	 * overlap. Then, bars are sized using barPercentage and categoryPercentage. There is no gap when the percentage options are 1. This mode generates bars with different widths
 	 * when data are not evenly spaced, {@link Integer#MIN_VALUE}.
@@ -65,9 +70,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
 	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
-	
-	// floating data factory
-	private static final FloatingDatatFactory FLOATING_DATA_FACTORY = new FloatingDatatFactory();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -412,11 +414,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
-	
+
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
 	 * 
-	 * @return a list of floating data or an empty list if the data type is not {@link DataType#FLOATING}.
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
 	 */
 	public List<FloatingData> getFloatingData() {
 		return getFloatingData(false);
@@ -426,15 +428,15 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of floating data or an empty list if the data type is not {@link DataType#FLOATING}.
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
 	 */
 	public List<FloatingData> getFloatingData(boolean binding) {
 		// checks if is a floating data type
-		if (has(InternalProperty.DATA) && DataType.FLOATING.equals(getDataType())) {
+		if (has(InternalProperty.DATA) && DataType.ARRAYS.equals(getDataType())) {
 			// gets array
 			ArrayDoubleArray array = getArrayValue(InternalProperty.DATA);
 			// returns floating data
-			return ArrayListHelper.list(array, FLOATING_DATA_FACTORY);
+			return ArrayListHelper.list(array, FLOATING_BAR_DATA_FACTORY);
 		}
 		// checks if wants to bind the array
 		if (binding) {
@@ -442,7 +444,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			// set value
 			setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrEmpty(result));
 			// sets data type
-			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.FLOATING);
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.ARRAYS);
 			// returns list
 			return result;
 		}
@@ -458,7 +460,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public void setFloatingData(FloatingData... floatingData) {
 		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.FLOATING : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -469,7 +471,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public void setFloatingData(List<FloatingData> floatingData) {
 		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.FLOATING : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 
 	/**

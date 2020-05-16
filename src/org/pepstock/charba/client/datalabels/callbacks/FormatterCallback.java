@@ -17,7 +17,9 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.items.DataItem;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>formatter</code> property at runtime, using the chart instance and the plugin context.<br>
@@ -33,10 +35,10 @@ public interface FormatterCallback {
 	 * Returns the <code>formatter</code> property at runtime, using the chart instance and the plugin context.
 	 * 
 	 * @param chart chart instance
-	 * @param value to be formatted
+	 * @param dataItem value container to be formatted, Can be a simple <code>double</code>, {@link String} or a {@link FloatingData}.
 	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
 	 * @return the label value to be showed
 	 */
-	String invoke(IsChart chart, double value, ScriptableContext context);
+	String invoke(IsChart chart, DataItem dataItem, ScriptableContext context);
 
 }

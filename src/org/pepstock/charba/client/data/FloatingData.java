@@ -56,6 +56,7 @@ public final class FloatingData extends NativeArrayDoubleContainer {
 
 	/**
 	 * Returns the start point of a bar.
+	 * 
 	 * @return the start point of a bar
 	 */
 	public double getStart() {
@@ -64,6 +65,7 @@ public final class FloatingData extends NativeArrayDoubleContainer {
 
 	/**
 	 * Returns the end point of a bar.
+	 * 
 	 * @return the end point of a bar
 	 */
 	public double getEnd() {
@@ -82,4 +84,43 @@ public final class FloatingData extends NativeArrayDoubleContainer {
 		// adds new items
 		super.push(start, end);
 	}
+
+	/**
+	 * Returns the value which is calculating subtracting the start point from end point.
+	 * 
+	 * @return the value which is calculating subtracting the start point from end point
+	 */
+	public double getValue() {
+		// gets values from array
+		double start = getStart();
+		double end = getEnd();
+		// checks if the values are consistent
+		if (Double.isNaN(start) || Double.isNaN(end)) {
+			// if not consistent, returns 0
+			return 0D;
+		}
+		// if here the array is consistent then
+		// returns the end minus start
+		return end - start;
+	}
+
+	/**
+	 * Returns the absolute value which is calculating subtracting the start point from end point.
+	 * 
+	 * @return the absolute value which is calculating subtracting the start point from end point
+	 */
+	public double getAbsValue() {
+		return Math.abs(getValue());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[" + getStart() + "," + getEnd() + "]";
+	}
+
 }

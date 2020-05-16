@@ -112,14 +112,14 @@ public final class Percentage {
 				DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
 				// adds the Y value to the total
 				total = total + Math.abs(point.getY());
-			} else if (DataType.FLOATING.equals(ds.getDataType()) && ds instanceof BarDataset) {
+			} else if (DataType.ARRAYS.equals(ds.getDataType()) && ds instanceof BarDataset) {
 				// then dataset is floating bar chart
 				// and then cast it
 				BarDataset barDataset = (BarDataset) ds;
 				// gets the floating data
 				FloatingData data = barDataset.getFloatingData().get(context.getIndex());
 				// adds the absolute differences between start and end
-				total = total + Math.abs(data.getEnd() - data.getStart());
+				total = total + data.getAbsValue();
 			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 				// if here, the dataset has got data as doubles
 				// then it get the double at data index
@@ -156,7 +156,7 @@ public final class Percentage {
 				// adds the Y value to the total
 				total = total + Math.abs(dataPoint.getY());
 			}
-		} else if (DataType.FLOATING.equals(ds.getDataType()) && ds instanceof BarDataset) {
+		} else if (DataType.ARRAYS.equals(ds.getDataType()) && ds instanceof BarDataset) {
 			// then dataset is floating bar chart
 			// and then cast it
 			BarDataset barDataset = (BarDataset) ds;
@@ -165,7 +165,7 @@ public final class Percentage {
 			// scans data
 			for (FloatingData dataFloat : data) {
 				// adds the absolute differences between start and end
-				total = total + Math.abs(dataFloat.getEnd() - dataFloat.getStart());
+				total = total + dataFloat.getAbsValue();
 			}
 		} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 			// if here, the dataset has got data as doubles

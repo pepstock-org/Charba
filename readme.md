@@ -144,9 +144,18 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * change `FormatterCallback` interface for `DataLabelsPlugin` enabling the formatting different kind of values of datasets which can be doubles, strings (for lining datasets) and arrays of doubles (for floating bars datasets).
+ * change `RenderItem` object for `LabelsPlugin` managing different kinds of values of datasets which can be doubles, strings (for lining datasets) and arrays of doubles (for floating bars datasets).
+
 ### Features
 
- * implement **floating-bars** for BAR datasets.
+ * implement **floating-bars** for BAR datasets. Thanks @rr22x.
+ 
+### Fixed Bugs
+
+ * [#55](https://github.com/pepstock-org/Charba/issues/55) implement **floating-bars** for BAR datasets. Thanks @rr22x. 
  
 License
 -------

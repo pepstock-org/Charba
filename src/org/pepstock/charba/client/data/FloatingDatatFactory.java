@@ -19,7 +19,8 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 
 /**
- * Factory to create a floating data from a native array, used for array container lists.
+ * Factory to create a floating data from a native array, used for array container lists.<br>
+ * The array must contain and only 2 values.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,7 +33,17 @@ public final class FloatingDatatFactory implements NativeArrayContainerFactory<A
 	 */
 	@Override
 	public FloatingData create(ArrayDouble nativeArray) {
-		return new FloatingData(nativeArray);
+		// checks consistency of array
+		if (nativeArray != null) {
+			// the array must contains and only 2 values
+			if (nativeArray.length() == 2) {
+				return new FloatingData(nativeArray);
+			}
+			// exception
+			throw new IllegalArgumentException("The array contains " + nativeArray.length() + " instead of 2");
+		}
+		// exception
+		throw new IllegalArgumentException("The array is not consistent");
 	}
 
 }
