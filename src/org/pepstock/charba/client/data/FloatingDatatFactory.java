@@ -42,8 +42,9 @@ public final class FloatingDatatFactory implements NativeArrayContainerFactory<A
 			// exception
 			throw new IllegalArgumentException("The array contains " + nativeArray.length() + " instead of 2");
 		}
-		// exception
-		throw new IllegalArgumentException("The array is not consistent");
+		// if here, the array is not consistent
+		// then it creates an array with nan values
+		return new FloatingData(ArrayDouble.fromOrEmpty(Double.NaN, Double.NaN));
 	}
 
 }

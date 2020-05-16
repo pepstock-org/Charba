@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleArray;
 import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -450,6 +451,32 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		}
 		// returns an empty list
 		return new LinkedList<>();
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of arrays of doubles.
+	 * 
+	 * @param floatingData an array of arrays of doubles.
+	 */
+	public void setFloatingData(double[][] floatingData) {
+		// checks consistency
+		if (floatingData != null && floatingData.length > 0) {
+			// creates a list of floating data
+			List<FloatingData> dataList = new LinkedList<>();
+			// scans the array of arrays
+			for (int i = 0; i < floatingData.length; i++) {
+				// creates the floating bar data by the array
+				dataList.add(FLOATING_BAR_DATA_FACTORY.create(ArrayDouble.fromOrEmpty(floatingData[i])));
+			}
+			// invokes the set method for a list
+			setFloatingData(dataList);
+		} else {
+			// if here the array is not consistent
+			// then removes the property
+			removeIfExists(InternalProperty.DATA);
+			// sets data type as unknown
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		}
 	}
 
 	/**
