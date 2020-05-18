@@ -151,21 +151,19 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * Charba GWT showcase successfully tested on [GWT 2.9.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0).
  * implement **floating-bars** for BAR datasets. Thanks @rr22x.
  * change `DataPoint` class setting `void setT(Date)` and `Date getT()` to **deprecated**. Use `void setX(Date)` and `Date getXAsDate()` instead.
  * add `setX` and `getXAsString` methods to `DataPoint` class in order to manage X values as strings.
  * import new [MOMENT.js](https://momentjs.com/) library, version [2.25.3](https://github.com/moment/moment/releases/tag/2.25.3).
  * import new [Luxon](https://moment.github.io/luxon/) library, version [1.24.1](https://github.com/moment/luxon/releases/tag/1.24.1).
+ * import new [Luxon adapter](https://github.com/chartjs/chartjs-adapter-luxon), at version [0.2.1](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v0.2.1).
  * import new [Annotation](https://github.com/chartjs/chartjs-plugin-annotation) plugin library, currently at `master` commit id [53630421b5d2e5d6790de3d32c1fb7d3cdc590e2](https://github.com/chartjs/chartjs-plugin-annotation)
  * add `rotation` property into `LineLabel` class of [Annotation](https://github.com/chartjs/chartjs-plugin-annotation) plugin. 
  
 ### Fixed Bugs
 
  * [#55](https://github.com/pepstock-org/Charba/issues/55) implement **floating-bars** for BAR datasets. Thanks @rr22x. 
- 
-### Development
- 
- * Charba GWT showcase tested on [GWT 2.9.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0).  
  
 License
 -------
