@@ -154,6 +154,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * implement **floating-bars** for BAR datasets. Thanks @rr22x.
  * change `DataPoint` class setting `void setT(Date)` and `Date getT()` to **deprecated**. Use `void setX(Date)` and `Date getXAsDate()` instead.
  * add `setX` and `getXAsString` methods to `DataPoint` class in order to manage X values as strings.
+ * import new [MOMENT.js](https://momentjs.com/) library, version [2.25.3](https://github.com/moment/moment/releases/tag/2.25.3).
+ * import new [Luxon](https://moment.github.io/luxon/) library, version [1.24.1](https://github.com/moment/luxon/releases/tag/1.24.1).
  
 ### Fixed Bugs
 
