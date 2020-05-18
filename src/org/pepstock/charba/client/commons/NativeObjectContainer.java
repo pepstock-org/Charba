@@ -658,7 +658,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.value(), value.getNativeArray());
 		}
 	}
-	
+
 	/**
 	 * Sets a value (Array from a double array container list) into embedded JavaScript object at specific property.
 	 * 

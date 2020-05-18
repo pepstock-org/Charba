@@ -159,6 +159,10 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * [#55](https://github.com/pepstock-org/Charba/issues/55) implement **floating-bars** for BAR datasets. Thanks @rr22x. 
  
+### Development
+ 
+ * Charba GWT showcase tested on [GWT 2.9.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0).  
+ 
 License
 -------
 

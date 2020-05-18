@@ -13,9 +13,9 @@
   "dependencies": {
     "chart.js": "2.9.3",
     "chartjs-adapter-moment": "0.1.1",
-    "moment": "2.24.0",
+    "moment": "2.25.3",
     "chartjs-adapter-luxon": "0.2.0",
-    "luxon": "1.22.0",
+    "luxon": "1.24.1",
     "chartjs-adapter-date-fns": "1.0.0",
     "chartjs-plugin-datalabels": "0.7.0",
     "chartjs-plugin-zoom": "0.7.5",
