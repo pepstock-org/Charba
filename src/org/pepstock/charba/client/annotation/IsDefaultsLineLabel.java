@@ -137,4 +137,13 @@ interface IsDefaultsLineLabel {
 		return LineLabel.DEFAULT_Y_ADJUST;
 	}
 
+	/**
+	 * Returns the rotation of label in degrees.
+	 * 
+	 * @return the rotation of label in degrees
+	 */
+	default double getRotation() {
+		return LineLabel.DEFAULT_ROTATION;
+	}
+
 }
