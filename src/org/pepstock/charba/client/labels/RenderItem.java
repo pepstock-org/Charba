@@ -17,9 +17,12 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -64,6 +67,37 @@ public class RenderItem extends NativeObjectContainer {
 		}
 	}
 
+	// instacne of data item to wrap the value
+	private final DataItem dataItem;
+
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
+	RenderItem(NativeObject nativeObject) {
+		super(nativeObject);
+		// gets the type of value
+		ObjectType type = type(Property.VALUE);
+		// object instance for data item
+		Object object = null;
+		// checks if is floating data
+		if (ObjectType.NUMBER.equals(type)) {
+			// get the value as double
+			object = getValue(Property.VALUE, UndefinedValues.DOUBLE);
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// get the value as array
+			ArrayDouble array = getArrayValue(Property.VALUE);
+			// sets object
+			object = array;
+		} else if (ObjectType.STRING.equals(type)) {
+			// get the value as string
+			object = getValue(Property.VALUE, UndefinedValues.STRING);
+		}
+		// stores the data item
+		this.dataItem = new DataItem(object);
+	}
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
@@ -79,15 +113,6 @@ public class RenderItem extends NativeObjectContainer {
 		}
 		// if here, the native chart is not consistent
 		return null;
-	}
-
-	/**
-	 * Creates the object with native object instance to be wrapped.
-	 * 
-	 * @param nativeObject native object instance to be wrapped.
-	 */
-	RenderItem(NativeObject nativeObject) {
-		super(nativeObject);
 	}
 
 	/**
@@ -128,11 +153,12 @@ public class RenderItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the value for the dataset.
+	 * Returns the value for the dataset by a {@link DataItem}.
 	 * 
-	 * @return the value for the dataset. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the value for the dataset by a {@link DataItem}.
 	 */
-	public final double getValue() {
-		return getValue(Property.VALUE, UndefinedValues.DOUBLE);
+	public final DataItem getDataItem() {
+		return dataItem;
 	}
+
 }

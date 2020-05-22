@@ -154,13 +154,28 @@ public final class ArrayListHelper {
 	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @return the instance of updated list
+	 * @return the instance of native object containers list
 	 */
 	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		// creates the list
 		// if values not consistent
 		// creates an empty list
 		return new ArrayObjectContainerList<>(array, factory);
+	}
+
+	/**
+	 * Creates a array list of java script native double array container by a java script array and a factory.
+	 * 
+	 * @param array array of elements to load when the list is creating.
+	 * @param factory factory implementation to create containers by a single native array of the arrays.
+	 * @param <E> type of native double array container
+	 * @return the instance of native double array containers list
+	 */
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArrayList<E> list(ArrayDoubleArray array, NativeArrayContainerFactory<ArrayDouble, E> factory) {
+		// creates the list
+		// if values not consistent
+		// creates an empty list
+		return new ArrayDoubleArrayList<>(array, factory);
 	}
 
 	/**
@@ -243,9 +258,21 @@ public final class ArrayListHelper {
 	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @return the instance of updated list
+	 * @return the instance of native object containers list
 	 */
 	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
+		return Collections.unmodifiableList(list(array, factory));
+	}
+
+	/**
+	 * Creates an unmodifiable array list of java script native double array container by a java script array and a factory.
+	 * 
+	 * @param array array of elements to load when the list is creating.
+	 * @param factory factory implementation to create containers by a single native array of the arrays.
+	 * @param <E> type of native double array container
+	 * @return the instance of native double array containers list
+	 */
+	public static <E extends NativeArrayContainer<ArrayDouble>> List<E> unmodifiableListt(ArrayDoubleArray array, NativeArrayContainerFactory<ArrayDouble, E> factory) {
 		return Collections.unmodifiableList(list(array, factory));
 	}
 

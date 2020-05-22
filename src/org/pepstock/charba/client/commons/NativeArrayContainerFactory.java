@@ -16,27 +16,27 @@
 package org.pepstock.charba.client.commons;
 
 /**
- * Interface to be implemented to load elements from an array of native object.
+ * Interface to be implemented to load elements from an array of native array.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface NativeObjectContainerFactory<T extends NativeObjectContainer> {
+public interface NativeArrayContainerFactory<A extends Array, T extends NativeArrayContainer<A>> {
 
 	/**
-	 * Creates a native object container instance by an empty native object.
+	 * Creates a native array container instance by an empty native array.
 	 * 
-	 * @return native object container element instance
+	 * @return native array container element instance
 	 */
 	default T create() {
 		return create(null);
 	}
 
 	/**
-	 * Creates a native object container instance by a native object.
+	 * Creates a native array container instance by a native array.
 	 * 
-	 * @param nativeObject native object
-	 * @return native object container element instance
+	 * @param nativeArray native object
+	 * @return native array container element instance
 	 */
-	T create(final NativeObject nativeObject);
+	T create(final A nativeArray);
 
 }

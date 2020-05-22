@@ -20,6 +20,8 @@ import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
+import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -104,22 +106,30 @@ public final class PercentageCallback implements FormatterCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#format(org.pepstock.charba.client.IsChart, double,
+	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#invoke(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.DataItem,
 	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public String invoke(IsChart chart, double value, ScriptableContext context) {
-		// the arguments are checked because
-		// they will be checked inside percentage compute method
-		// computes the percentage
-		double percentage = Percentage.compute(chart, value, context, stacked);
-		// checks if consistent
-		if (Double.isNaN(percentage)) {
-			// if not, returns NaN as string
-			return NAN_AS_STRING;
+	public String invoke(IsChart chart, DataItem dataItem, ScriptableContext context) {
+		// checks if the data type is a possible numbers
+		if (DataType.NUMBERS.equals(dataItem.getDataType()) || DataType.ARRAYS.equals(dataItem.getDataType())) {
+			// calculates the value to use for percentage
+			double value = DataType.ARRAYS.equals(dataItem.getDataType()) ? dataItem.getValueAsFloatingData().getAbsValue() : dataItem.getValue();
+			// the arguments are not checked because
+			// they will be checked inside percentage compute method
+			// computes the percentage
+			double percentage = Percentage.compute(chart, value, context, stacked);
+			// checks if consistent
+			if (Double.isNaN(percentage)) {
+				// if not, returns NaN as string
+				return NAN_AS_STRING;
+			}
+			// applies the number format to the percentage
+			return Utilities.applyPrecision(value, precision) + Constants.PERCENT;
 		}
-		// applies the number format to the percentage
-		return Utilities.applyPrecision(value, precision) + Constants.PERCENT;
+		// if here, the data type of value is not a number
+		// then returns NaN as string
+		return NAN_AS_STRING;
 	}
 
 }

@@ -20,6 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
@@ -30,11 +31,11 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 public final class DataPoint extends NativeObjectContainer {
 
 	// default value for X. No private because it is used by time series item
-	static final double DEFAULT_X = Double.NaN;
+	static final double DEFAULT_X = UndefinedValues.DOUBLE;
 	// default value for R. No private because it is used by time series item
-	static final double DEFAULT_R = Double.NaN;
+	static final double DEFAULT_R = UndefinedValues.DOUBLE;
 	// default value for Y. No private because it is used by time series item
-	static final double DEFAULT_Y = Double.NaN;
+	static final double DEFAULT_Y = UndefinedValues.DOUBLE;
 
 	/**
 	 * Name of properties of native object.<br>
@@ -44,8 +45,7 @@ public final class DataPoint extends NativeObjectContainer {
 	{
 		X("x"),
 		Y("y"),
-		R("r"),
-		T("t");
+		R("r");
 
 		// name value of property
 		private final String value;
@@ -88,21 +88,57 @@ public final class DataPoint extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets X value.
+	 * Sets X value as double (for scatter and bubble datasets).
 	 * 
-	 * @param x X value.
+	 * @param x X value as double
 	 */
 	public void setX(double x) {
 		setValue(Property.X, x);
 	}
 
 	/**
-	 * Returns X value.
+	 * Returns X value as double (for scatter and bubble datasets).
 	 * 
-	 * @return X value.
+	 * @return X value as double
 	 */
 	public double getX() {
 		return getValue(Property.X, DEFAULT_X);
+	}
+
+	/**
+	 * Sets X value as date for time series.
+	 * 
+	 * @param x X value as date for time series
+	 */
+	public void setX(Date x) {
+		setValue(Property.X, x);
+	}
+
+	/**
+	 * Returns X value as date for time series.
+	 * 
+	 * @return X value as date for time series or <code>null</code> if is not set
+	 */
+	public Date getXAsDate() {
+		return getValue(Property.X, (Date) null);
+	}
+
+	/**
+	 * Sets X value as string.
+	 * 
+	 * @param x X value as string
+	 */
+	public void setX(String x) {
+		setValue(Property.X, x);
+	}
+
+	/**
+	 * Returns X value as string.
+	 * 
+	 * @return X value as string or {@link UndefinedValues#STRING} if is not set
+	 */
+	public String getXAsString() {
+		return getValue(Property.X, UndefinedValues.STRING);
 	}
 
 	/**
@@ -146,18 +182,22 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Sets T value, is the date for time series.
 	 * 
 	 * @param t T value.
+	 * @deprecated use {@link DataPoint#setX(Date)} instead.
 	 */
+	@Deprecated
 	public void setT(Date t) {
-		setValue(Property.T, t);
+		setX(t);
 	}
 
 	/**
 	 * Returns T value, is the date for time series.
 	 * 
-	 * @return T value. <code>null</code> is not set.
+	 * @return T value or <code>null</code> if is not set.
+	 * @deprecated use {@link DataPoint#getXAsDate()} instead.
 	 */
+	@Deprecated
 	public Date getT() {
-		return getValue(Property.T, (Date) null);
+		return getXAsDate();
 	}
 
 	/**
@@ -174,9 +214,9 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Returns a custom field value from data point.
 	 * 
 	 * @param key key of java script object to get.
-	 * @return custom field value from data point. Default is {@link java.lang.Double#NaN}.
+	 * @return custom field value from data point. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getAttribute(Key key) {
-		return getValue(key, Double.NaN);
+		return getValue(key, UndefinedValues.DOUBLE);
 	}
 }

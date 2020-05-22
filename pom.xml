@@ -5,7 +5,7 @@
   
   <groupId>org.pepstock</groupId>
   <artifactId>charba</artifactId>
-  <version>3.0</version>
+  <version>3.2</version>
   <packaging>jar</packaging>
 
 
@@ -59,7 +59,7 @@
     <dependency>
       <groupId>com.google.javascript</groupId>
       <artifactId>closure-compiler</artifactId>
-      <version>v20200224</version>
+      <version>v20200504</version>
       <optional>true</optional>
     </dependency>
     <dependency>

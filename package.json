@@ -1,7 +1,7 @@
 {
   "name": "Charba",
   "description": "Charba, J2Cl and GWT Chart library based on CHART.JS",
-  "version": "3.0",
+  "version": "3.2",
   "author": "The Pepstock Team <info@pepstock.org>",
   "license": "Apache-2.0",
   "homepage": "https://github.com/pepstock-org/Charba/wiki",
@@ -13,9 +13,9 @@
   "dependencies": {
     "chart.js": "2.9.3",
     "chartjs-adapter-moment": "0.1.1",
-    "moment": "2.24.0",
-    "chartjs-adapter-luxon": "0.2.0",
-    "luxon": "1.22.0",
+    "moment": "2.25.3",
+    "chartjs-adapter-luxon": "0.2.1",
+    "luxon": "1.24.1",
     "chartjs-adapter-date-fns": "1.0.0",
     "chartjs-plugin-datalabels": "0.7.0",
     "chartjs-plugin-zoom": "0.7.5",

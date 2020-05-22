@@ -98,6 +98,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final int DEFAULT_Y_ADJUST = 0;
 
 	/**
+	 * Default line label rotation, <b>{@value DEFAULT_ROTATION}</b>.
+	 */
+	public static final double DEFAULT_ROTATION = 0D;
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
@@ -114,7 +119,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		POSITION("position"),
 		X_ADJUST("xAdjust"),
 		Y_ADJUST("yAdjust"),
-		CONTENT("content");
+		CONTENT("content"),
+		ROTATION("rotation");
 
 		// name value of property
 		private final String value;
@@ -413,6 +419,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	@Override
 	public int getYAdjust() {
 		return getValue(Property.Y_ADJUST, IsDefaultsLineLabel.super.getYAdjust());
+	}
+
+	/**
+	 * Sets the rotation of label in degrees.
+	 * 
+	 * @param rotation the rotation of label in degrees
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.ROTATION, rotation);
+	}
+
+	/**
+	 * Returns the rotation of label in degrees.
+	 * 
+	 * @return the rotation of label in degrees
+	 */
+	@Override
+	public double getRotation() {
+		return getValue(Property.ROTATION, IsDefaultsLineLabel.super.getRotation());
 	}
 
 	/**

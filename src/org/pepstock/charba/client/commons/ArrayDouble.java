@@ -274,7 +274,7 @@ public final class ArrayDouble extends Array {
 	native void fill(double item, int start, int end);
 
 	/**
-	 * Adds one element to the end of an array and returns the new length of the array.
+	 * Adds one element to the end of an array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */

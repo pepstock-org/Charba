@@ -15,12 +15,19 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayDoubleArray;
+import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -28,6 +35,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -39,6 +47,11 @@ import org.pepstock.charba.client.options.Scales;
 public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder {
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
+
+	/**
+	 * Floating bars data factory to create {@link FloatingData}s.
+	 */
+	public static final FloatingDatatFactory FLOATING_BAR_DATA_FACTORY = new FloatingDatatFactory();
 
 	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
@@ -401,6 +414,91 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
+	 */
+	public List<FloatingData> getFloatingData() {
+		return getFloatingData(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
+	 */
+	public List<FloatingData> getFloatingData(boolean binding) {
+		// checks if is a floating data type
+		if (has(InternalProperty.DATA) && DataType.ARRAYS.equals(getDataType())) {
+			// gets array
+			ArrayDoubleArray array = getArrayValue(InternalProperty.DATA);
+			// returns floating data
+			return ArrayListHelper.list(array, FLOATING_BAR_DATA_FACTORY);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayDoubleArrayList<FloatingData> result = new ArrayDoubleArrayList<>();
+			// set value
+			setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrEmpty(result));
+			// sets data type
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.ARRAYS);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of arrays of doubles.
+	 * 
+	 * @param floatingData an array of arrays of doubles.
+	 */
+	public void setFloatingData(double[][] floatingData) {
+		// checks consistency
+		if (floatingData != null && floatingData.length > 0) {
+			// creates a list of floating data
+			List<FloatingData> dataList = new LinkedList<>();
+			// scans the array of arrays
+			for (int i = 0; i < floatingData.length; i++) {
+				// creates the floating bar data by the array
+				dataList.add(FLOATING_BAR_DATA_FACTORY.create(ArrayDouble.fromOrEmpty(floatingData[i])));
+			}
+			// invokes the set method for a list
+			setFloatingData(dataList);
+		} else {
+			// if here the array is not consistent
+			// then removes the property
+			removeIfExists(InternalProperty.DATA);
+			// sets data type as unknown
+			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		}
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param floatingData an array of floating data
+	 */
+	public void setFloatingData(FloatingData... floatingData) {
+		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		// sets data type checking if the key exists
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * 
+	 * @param floatingData an array of floating data
+	 */
+	public void setFloatingData(List<FloatingData> floatingData) {
+		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		// sets data type checking if the key exists
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 
 	/**

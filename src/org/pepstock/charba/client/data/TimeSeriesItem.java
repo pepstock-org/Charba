@@ -90,7 +90,7 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 	 * @param time the time of time series item
 	 */
 	private void setTime(Date time) {
-		setValue(DataPoint.Property.T, time);
+		setValue(DataPoint.Property.X, time);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 	 * @return the time of time series item
 	 */
 	public Date getTime() {
-		return getValue(DataPoint.Property.T, (Date) null);
+		return getValue(DataPoint.Property.X, (Date) null);
 	}
 
 }

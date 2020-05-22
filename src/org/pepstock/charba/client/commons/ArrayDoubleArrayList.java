@@ -18,20 +18,20 @@ package org.pepstock.charba.client.commons;
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script array as back-end to store objects (native object containers).<br>
- * Elements are instances of {@link NativeObjectContainer}.<br>
+ * This implementation uses a java script array as back-end to store objects (native array containers).<br>
+ * Elements are instances of {@link NativeArrayContainer}.<br>
  * <br>
  * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
  * this collection must not be passed to any java scriptcode.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <E> extension of {@link NativeObjectContainer}
+ * @param <E> extension of {@link NativeArrayContainer}
  * 
  */
-public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayNativeContainerList<E, ArrayObject> {
+public final class ArrayDoubleArrayList<E extends NativeArrayContainer<ArrayDouble>> extends AbstractArrayNativeContainerList<E, ArrayDoubleArray> {
 
 	// delegated array to store objects
-	private final ArrayObject array;
+	private final ArrayDoubleArray array;
 
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
@@ -39,14 +39,14 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 * @param factory factory instance to create the object from a native one.
 	 */
-	ArrayObjectContainerList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
+	ArrayDoubleArrayList(ArrayDoubleArray array, NativeArrayContainerFactory<ArrayDouble, E> factory) {
 		// if null, creates a new array
 		if (array == null) {
-			this.array = new ArrayObject();
+			this.array = new ArrayDoubleArray();
 		} else if (factory == null) {
 			// factory is not consistent and array is consistent EXCEPTION
-			// factory is mandatory to initialize the list creating the elements from native object
-			throw new IllegalArgumentException("Unable to create NativeObjectContainer without a factory which is null");
+			// factory is mandatory to initialize the list creating the elements from native array
+			throw new IllegalArgumentException("Unable to create NativeArrayContainer without a factory which is null");
 		} else {
 			// uses an existing array
 			this.array = array;
@@ -61,7 +61,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	/**
 	 * Creates an empty list
 	 */
-	public ArrayObjectContainerList() {
+	public ArrayDoubleArrayList() {
 		this(null, null);
 	}
 
@@ -71,26 +71,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * @see org.pepstock.charba.client.commons.AbstractArrayList#getArray()
 	 */
 	@Override
-	ArrayObject getArray() {
+	ArrayDoubleArray getArray() {
 		return array;
-	}
-
-	/**
-	 * Appends the specified element to the end of this list
-	 */
-	@SuppressWarnings("unusable-by-js")
-	@Override
-	public boolean add(E element) {
-		// invokes and get if element has been added
-		// if added
-		if (super.add(element)) {
-			// adds to JS array
-			array.push(element.getNativeObject());
-			return true;
-		}
-		// if here, element is not consistent
-		// and not added
-		return false;
 	}
 
 	/**
@@ -103,6 +85,24 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
+	 * Appends the specified element to the end of this list
+	 */
+	@SuppressWarnings("unusable-by-js")
+	@Override
+	public boolean add(E element) {
+		// invokes and get if element has been added
+		// if added
+		if (super.add(element)) {
+			// adds to JS array
+			array.push(element.getNativeArray());
+			return true;
+		}
+		// if here, element is not consistent
+		// and not added
+		return false;
+	}
+
+	/**
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@SuppressWarnings("unusable-by-js")
@@ -112,7 +112,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		E old = super.set(index, element);
 		// checks element has been set
 		if (old != null) {
-			array.set(index, element.getNativeObject());
+			array.set(index, element.getNativeArray());
 			// returns old value
 			return old;
 		}
@@ -131,7 +131,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 			// invokes to add
 			super.add(index, element);
 			// adds element
-			array.insertAt(index, element.getNativeObject());
+			array.insertAt(index, element.getNativeArray());
 		}
 	}
 

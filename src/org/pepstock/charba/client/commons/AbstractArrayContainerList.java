@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Abstract list for enumeration and object container list which has got common methods.
+ * Abstract list for enumeration and object/array container list which has got common methods.
  * 
  * @author Andrea "Stock" Stocchero
  *

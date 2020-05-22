@@ -56,6 +56,7 @@ import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -170,7 +171,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return string with formatted value.
 		 */
-		String call(CallbackFunctionContext contextFunction, double value, NativeObject context);
+		String call(CallbackFunctionContext contextFunction, Object value, NativeObject context);
 	}
 
 	// ---------------------------
@@ -1534,13 +1535,13 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param value value to be formatted
 	 * @return a string as formatted value
 	 */
-	private String onFormatter(ScriptableContext context, double value) {
+	private String onFormatter(ScriptableContext context, Object value) {
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 		// checks if the handler is set
 		if (IsChart.isValid(chart)) {
 			// calls callback
-			String result = formatterCallback.invoke(chart, value, context);
+			String result = formatterCallback.invoke(chart, new DataItem(value), context);
 			// checks result
 			if (result != null) {
 				return result;

@@ -9,7 +9,7 @@
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUint WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    WITHOUdouble WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */
@@ -17,110 +17,176 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
  * Array object which maps the java script object.<br>
- * A simple wrapper around a homogeneous native array of object (CanvasGradientItem) values.
+ * A simple wrapper around a homogeneous native array of arrays of numeric (doubles) values.
  * 
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class ArrayGradient extends Array {
+public final class ArrayDoubleArray extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
+	 * This method creates new array instance with a variable number of arrays of <code>double</code> arguments.
 	 * 
-	 * @param items canvasPattern items to create new array
-	 * @return new array instance of gradients.
+	 * @param items double items to create new array
+	 * @return new array instance of doubles.
 	 */
-	private static native ArrayGradient of(CanvasGradientItem... items);
+	private static native ArrayDoubleArray of(ArrayDouble... items);
 
 	/**
 	 * To avoid any instantiation
 	 */
-	ArrayGradient() {
+	ArrayDoubleArray() {
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
+	 * Creates a java script array of arrays starting from a native array containers and the array will have ONE 1 element.
 	 * 
-	 * @param items canvasPattern items to create new array
-	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or length to 0
+	 * @param item single array to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of ONE 1 element or <code>null</code> if argument is <code>null</code>
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrNull(CanvasGradientItem... items) {
-		// checks if consistent
-		if (items == null || items.length == 0) {
-			// returns an empty array
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrNull(E item) {
+		// checks if array is null
+		if (item == null) {
 			return null;
 		}
-		// returns array
-		return ArrayGradient.of(items);
+		// returns the array
+		return ArrayDoubleArray.of(item.getNativeArray());
 	}
 
 	/**
-	 * This method creates new array instance with a variable number of <code>CanvasGradientItem</code> arguments.
+	 * Creates a java script array of arrays starting from a native array containers and the array will have ONE 1 element.
 	 * 
-	 * @param items canvasPattern items to create new array
-	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or length to 0
+	 * @param item list of arrays to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of ONE 1 element or an empty array if argument is <code>null</code>
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrEmpty(CanvasGradientItem... items) {
-		// checks if consistent
-		if (items == null || items.length == 0) {
-			// returns an empty array
-			return new ArrayGradient();
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrEmpty(E item) {
+		// creates the array
+		ArrayDoubleArray result = new ArrayDoubleArray();
+		// checks if array is null
+		if (item == null) {
+			return result;
 		}
-		// returns array
-		return ArrayGradient.of(items);
+		// adds element
+		result.push(item.getNativeArray());
+		// returns the array
+		return result;
 	}
 
 	/**
-	 * Creates a java script array of gradients starting from list of gradients.
+	 * Creates a java script array of arrays starting from an array of native array containers.
 	 * 
-	 * @param items list of gradients to load into new java script array.
-	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or empty
+	 * @param items list of arrays to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of arrays or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrNull(List<CanvasGradientItem> items) {
-		// checks if list is null
-		if (items == null || items.isEmpty()) {
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrNull(E[] items) {
+		// checks if array is null
+		if (items == null || items.length == 0) {
 			return null;
 		}
 		// creates the array
-		ArrayGradient result = new ArrayGradient();
-		// scans all items of list
-		for (CanvasGradientItem value : items) {
-			// adds elements
-			result.push(value);
+		ArrayDoubleArray result = new ArrayDoubleArray();
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeArray());
 		}
 		// returns the array
 		return result;
 	}
 
 	/**
-	 * Creates a java script array of gradients starting from list of gradients.
+	 * Creates a java script array of arrays starting from an array of native array containers.
 	 * 
-	 * @param items list of gradients to load into new java script array.
-	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or empty
+	 * @param items list of arrays to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of arrays or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayGradient fromOrEmpty(List<CanvasGradientItem> items) {
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrEmpty(E[] items) {
 		// creates the array
-		ArrayGradient result = new ArrayGradient();
-		// checks if list is null
+		ArrayDoubleArray result = new ArrayDoubleArray();
+		// checks if array is null
+		if (items == null || items.length == 0) {
+			return result;
+		}
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeArray());
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of arrays starting from a list of native array containers.
+	 * 
+	 * @param items list of arrays to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of arrays or <code>null</code> if the argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrNull(List<E> items) {
+		// checks if array is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// checks if is already a list with array
+		if (items instanceof ArrayDoubleArrayList<?>) {
+			// casts to array list
+			ArrayDoubleArrayList<?> list = (ArrayDoubleArrayList<?>) items;
+			// returns array
+			return list.getArray();
+		}
+		// creates the array
+		ArrayDoubleArray result = new ArrayDoubleArray();
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeArray());
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of arrays starting from a list of native array containers.
+	 * 
+	 * @param items list of arrays to load into new java script array.
+	 * @param <E> type of native array containers
+	 * @return new array instance of arrays or an empty array if argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrEmpty(List<E> items) {
+		// checks if is already a list with array
+		if (items instanceof ArrayDoubleArrayList<?>) {
+			// casts to array list
+			ArrayDoubleArrayList<?> list = (ArrayDoubleArrayList<?>) items;
+			// returns array
+			return list.getArray();
+		}
+		// creates the array
+		ArrayDoubleArray result = new ArrayDoubleArray();
+		// checks if array is null
 		if (items == null || items.isEmpty()) {
 			return result;
 		}
-		// scans all items of list
-		for (CanvasGradientItem value : items) {
-			// adds elements
-			result.push(value);
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeArray());
 		}
 		// returns the array
 		return result;
@@ -132,7 +198,7 @@ public final class ArrayGradient extends Array {
 	 * @param value element to search for
 	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
-	native int lastIndexOf(Object value);
+	native int lastIndexOf(ArrayDouble value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element.
@@ -140,7 +206,7 @@ public final class ArrayGradient extends Array {
 	 * @param value element to search for
 	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain the element
 	 */
-	native int indexOf(Object value);
+	native int indexOf(ArrayDouble value);
 
 	/**
 	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
@@ -156,7 +222,7 @@ public final class ArrayGradient extends Array {
 	 *            through to the end of the sequence (array.length()).
 	 * @return A new array containing the extracted elements.
 	 */
-	native ArrayGradient slice(int start, int end);
+	native ArrayDoubleArray slice(int start, int end);
 
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -169,7 +235,7 @@ public final class ArrayGradient extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayGradient splice(int start);
+	native ArrayDoubleArray splice(int start);
 
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -186,7 +252,7 @@ public final class ArrayGradient extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayGradient splice(int start, int deleteCounts);
+	native ArrayDoubleArray splice(int start, int deleteCounts);
 
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -204,10 +270,10 @@ public final class ArrayGradient extends Array {
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayGradient splice(int start, int deleteCounts, CanvasGradientItem item);
+	native ArrayDoubleArray splice(int start, int deleteCounts, ArrayDouble item);
 
 	/**
-	 * Removes all of the elements from this object. The object will be empty after this call returns.
+	 * Removes all of the elements from this array. The object will be empty after this call returns.
 	 */
 	@JsOverlay
 	void clear() {
@@ -222,7 +288,7 @@ public final class ArrayGradient extends Array {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	CanvasGradientItem remove(int index) {
+	ArrayDouble remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -234,7 +300,7 @@ public final class ArrayGradient extends Array {
 	 * @param item element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, CanvasGradientItem item) {
+	void insertAt(int index, ArrayDouble item) {
 		splice(index, 0, item);
 	}
 
@@ -248,7 +314,7 @@ public final class ArrayGradient extends Array {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public CanvasGradientItem get(int index) {
+	public ArrayDouble get(int index) {
 		return slice(index, index + 1).pop();
 	}
 
@@ -259,21 +325,21 @@ public final class ArrayGradient extends Array {
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(CanvasGradientItem item, int start, int end);
+	native void fill(ArrayDouble item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array.
 	 * 
 	 * @param item The element to add to the end of the array.
 	 */
-	native void push(CanvasGradientItem item);
+	native void push(ArrayDouble item);
 
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * 
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native CanvasGradientItem pop();
+	native ArrayDouble pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -284,7 +350,7 @@ public final class ArrayGradient extends Array {
 	 * @param item the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, CanvasGradientItem item) {
+	void set(int index, ArrayDouble item) {
 		fill(item, index, index + 1);
 	}
 }
