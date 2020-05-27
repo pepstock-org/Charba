@@ -47,23 +47,17 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 			IsChart chart = event.getChart();
 			// checks if legend is related to a dataset or index
 			if (event.getItem().getDatasetIndex() != UndefinedValues.INTEGER) {
-				// gets the dataset by the legend item and its relation with dataset
-				DatasetMetaItem metadata = chart.getDatasetMeta(event.getItem().getDatasetIndex());
 				// if the dataset is already hidden
 				// checks if there is ONLY 1 visible dataset
-				if (!metadata.isHidden() && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
+				if (chart.isDatasetVisible(event.getItem().getDatasetIndex()) && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
 					return;
 				}
 				// invokes default click callbacks
 				Defaults.get().invokeLegendOnClick(event);
 			} else if (event.getItem().getIndex() != UndefinedValues.INTEGER) {
-				// gets metadata to know if is hidden
-				DatasetMetaItem metadataItem = chart.getDatasetMeta(0);
-				// gets all items
-				List<DatasetItem> items = metadataItem.getDatasets();
-				// gets dataset item
-				DatasetItem item = items.get(event.getItem().getIndex());
-				if (!item.isHidden() && !checkByIndex(chart, event.getItem().getIndex())) {
+				// if the data is already hidden
+				// checks if there is ONLY 1 visible data
+				if (chart.isDataVisible(event.getItem().getIndex()) && !checkByIndex(chart, event.getItem().getIndex())) {
 					return;
 				}
 				// invokes default click callbacks
@@ -85,11 +79,9 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 		// scans them by for cycle to have the index for retrieving
 		// the dataset metadata
 		for (int i = 0; i < dss.size(); i++) {
-			// gets metadata to know if is hidden
-			DatasetMetaItem metadataItem = chart.getDatasetMeta(i);
 			// if visible return can be hidden
 			// ignoring the dataset index related to event
-			if (i != datasetIndex && !metadataItem.isHidden()) {
+			if (i != datasetIndex && chart.isDatasetVisible(i)) {
 				return true;
 			}
 		}
@@ -110,16 +102,16 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 		// scans them by for cycle to have the index for retrieving
 		// the dataset metadata
 		for (int i = 0; i < dss.size(); i++) {
-			// gets metadata to know if is hidden
-			DatasetMetaItem metadataItem = chart.getDatasetMeta(i);
-			if (!metadataItem.isHidden()) {
+			if (chart.isDatasetVisible(i)) {
+				// gets metadata
+				DatasetMetaItem metadataItem = chart.getDatasetMeta(i);
 				// gets all items
 				List<DatasetItem> items = metadataItem.getDatasets();
-				// scans all items
-				for (DatasetItem item : items) {
+				// scans all items by index
+				for (int k = 0; k < items.size(); k++) {
 					// if visible return can be hidden
 					// ignoring the index related to event
-					if (item.getIndex() != index && !item.isHidden()) {
+					if (k != index && chart.isDataVisible(k)) {
 						return true;
 					}
 				}

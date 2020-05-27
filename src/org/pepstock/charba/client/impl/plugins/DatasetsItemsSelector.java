@@ -487,13 +487,13 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			for (DatasetItem item : items.getDatasets()) {
 				// if the chart is line
 				// and X coordinate is less the width of canvas (item is inside of canvas)
-				if (ChartType.LINE.equals(chart.getBaseType()) && item.getView().getX() <= limitRight) {
+				if (ChartType.LINE.equals(chart.getBaseType()) && item.getX() <= limitRight) {
 					itemsCount++;
 				}
 				// if the chart is line
 				// and X coordinate is less the width of canvas
 				// and the width of bar is less of width of canvas (item is inside of canvas)
-				if (ChartType.BAR.equals(chart.getBaseType()) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
+				if (ChartType.BAR.equals(chart.getBaseType()) && (item.getX() <= limitRight || (item.getX() + item.getWidth()) <= limitRight)) {
 					itemsCount++;
 				}
 			}

@@ -26,8 +26,11 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.HasDataPoints;
+import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
@@ -40,6 +43,7 @@ import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
 import org.pepstock.charba.client.events.EventHandler;
@@ -718,7 +722,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
-		if (instance != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
+		if (instance != null && isValidDatasetIndex(index)) {
 			// returns the array
 			return new DatasetMetaItem(instance.getDatasetMeta(index));
 		}
@@ -757,7 +761,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
-		if (instance != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
+		if (instance != null && isValidDatasetIndex(index)) {
 			// gets if dataset is visible or not
 			return instance.isDatasetVisible(index);
 		}
@@ -781,6 +785,98 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		}
 		// returns undefined
 		return UndefinedValues.INTEGER;
+	}
+
+	/**
+	 * Sets the visibility for a given dataset.<br>
+	 * This can be used to build a chart legend in HTML.<br>
+	 * During click on one of the HTML items, you can call it to change the appropriate dataset.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param visibility if <code>true</code> enables the visibility otherwise <code>false</code>
+	 */
+	@Override
+	public final void setDatasetVisibility(int datasetIndex, boolean visibility) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and datasets
+		if (instance != null && isValidDatasetIndex(datasetIndex)) {
+			// sets dataset visibility
+			instance.setDatasetVisibility(datasetIndex, visibility);
+		}
+	}
+
+	/**
+	 * Toggles the visibility of an item in all datasets.<br>
+	 * A dataset needs to explicitly support this feature for it to have an effect.<br>
+	 * From internal chart types, doughnut / pie and polar area use this.
+	 * 
+	 * @param index data index
+	 */
+	@Override
+	public final void toggleDataVisibility(int index) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and datasets for the first dataset
+		if (instance != null && isValidDataIndex(0, index)) {
+			// toggles data index
+			instance.toggleDataVisibility(index);
+		}
+	}
+
+	/**
+	 * Returns the stored visibility state of an data index for all datasets.
+	 * 
+	 * @param index data index
+	 * @return <code>true</code> if the data item is visible
+	 */
+	@Override
+	public final boolean isDataVisible(int index) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and datasets for the first dataset
+		if (instance != null && isValidDataIndex(0, index)) {
+			// returns data index visibility
+			return instance.getDataVisibility(index);
+		}
+		// if here, the chart instance or data index is not consistent
+		return false;
+	}
+
+	/**
+	 * Sets the visibility for the given dataset to false.<br>
+	 * Updates the chart and animates the dataset with 'hide' mode.<br>
+	 * This animation can be configured under the hide key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	@Override
+	public final void hide(int datasetIndex) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and datasets
+		if (instance != null && isValidDatasetIndex(datasetIndex)) {
+			// hides dataset
+			instance.hide(datasetIndex);
+		}
+	}
+
+	/**
+	 * Sets the visibility for the given dataset to true.<br>
+	 * Updates the chart and animates the dataset with 'show' mode.<br>
+	 * This animation can be configured under the show key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	@Override
+	public final void show(int datasetIndex) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and datasets
+		if (instance != null && isValidDatasetIndex(datasetIndex)) {
+			// hides dataset
+			instance.show(datasetIndex);
+		}
 	}
 
 	/**
@@ -869,6 +965,67 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the dataset index, passed as argument, is a valid index.
+	 * 
+	 * @param datasetIndex dataset index to check
+	 * @return <code>true</code> if the dataset index, passed as argument, is a valid index
+	 */
+	private boolean isValidDatasetIndex(int datasetIndex) {
+		return !data.getDatasets().isEmpty() && datasetIndex < data.getDatasets().size() && datasetIndex >= 0;
+	}
+
+	/**
+	 * Returns <code>true</code> if the dataset index and data index, passed as arguments, are valid indexes.
+	 * 
+	 * @param datasetIndex dataset index to check
+	 * @param index data index
+	 * @return <code>true</code> if the dataset index and data index, passed as arguments, are valid indexes.
+	 */
+	private boolean isValidDataIndex(int datasetIndex, int index) {
+		// checks if dataset index is valid
+		if (isValidDatasetIndex(datasetIndex)) {
+			// gets dataset instance
+			Dataset dataset = data.getDatasets().get(datasetIndex);
+			// get data type
+			DataType dataType = dataset.getDataType();
+			// checks all types of data
+			if (DataType.NUMBERS.equals(dataType)) {
+				// checks and returns if valid
+				return isInRange(dataset.getData(), index);
+			} else if (DataType.POINTS.equals(dataType) && dataset instanceof HasDataPoints) {
+				// casts to interface
+				HasDataPoints dataPoints = (HasDataPoints) dataset;
+				// checks and returns if valid
+				return isInRange(dataPoints.getDataPoints(), index);
+			} else if (DataType.ARRAYS.equals(dataType) && dataset instanceof BarDataset) {
+				// casts to bar dataset
+				BarDataset barDataset = (BarDataset) dataset;
+				// checks and returns if valid
+				return isInRange(barDataset.getFloatingData(), index);
+			} else if (DataType.STRINGS.equals(dataType) && dataset instanceof LineDataset) {
+				// casts to line dataset
+				LineDataset lineDataset = (LineDataset) dataset;
+				// checks and returns if valid
+				return isInRange(lineDataset.getDataString(), index);
+			}
+		}
+		// if here, the dataset index is not valid
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the index, passed as argument, is in range of the list.
+	 * 
+	 * @param data list of element to use for checking
+	 * @param index index to check against the list
+	 * @return <code>true</code> if the index, passed as argument, is in range of the list
+	 */
+	private boolean isInRange(List<?> data, int index) {
+		// checks and returns if valid
+		return data != null && !data.isEmpty() && index < data.size() && index >= 0;
 	}
 
 }

@@ -425,6 +425,56 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#setDatasetVisibility(int, boolean)
+	 */
+	@Override
+	public void setDatasetVisibility(int datasetIndex, boolean visibility) {
+		chart.setDatasetVisibility(datasetIndex, visibility);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#toggleDataVisibility(int)
+	 */
+	@Override
+	public void toggleDataVisibility(int index) {
+		chart.toggleDataVisibility(index);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#isDataVisible(int)
+	 */
+	@Override
+	public boolean isDataVisible(int index) {
+		return chart.isDataVisible(index);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#hide(int)
+	 */
+	@Override
+	public void hide(int datasetIndex) {
+		chart.hide(datasetIndex);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#show(int)
+	 */
+	@Override
+	public void show(int datasetIndex) {
+		chart.show(datasetIndex);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getElementAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override

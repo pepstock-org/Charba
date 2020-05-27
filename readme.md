@@ -139,6 +139,37 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Breaking changes
+
+ * remove following capabilities by new **CHART.JS version**:
+   * `isAnimating` method from `ChartNode` class.
+   * `getBorderWidth` method from `ChartNode` class.
+   * `getOuterRadius` method from `ChartNode` class.
+   * `getInnerRadius` method from `ChartNode` class.
+   * `getRadiusLength` method from `ChartNode` class.
+   * `getOffsetX` method from `ChartNode` class.
+   * `getOffsetY` method from `ChartNode` class.
+   * `isHover` method of `ScriptableContext` class.
+ * change following capabilities by new **CHART.JS version**:
+   * rename `steppedLine` from the dataset options to `stepped`.
+   * rename `tension` from the dataset option to `lineTension`.
+   * rename `defaultColor` from `Defaults` global options to `color`. 
+   * change structure of `DatasetMetaItem`  
+
+### Features
+
+* **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
+   * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
+   * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
+   * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
+   * add `hide` method to `AbstractChart` class in order to hide a dataset. 
+   * add `show` method to `AbstractChart` class in order to show a dataset. 
+
 License
 -------
 

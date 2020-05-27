@@ -42,11 +42,18 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		HIDDEN("hidden"),
-		TYPE("type"),
+		CONTROLLER("controller"),
 		DATA("data"),
+		HIDDEN("hidden"),
+		INDEX("index"),
+		LABEL("label"),
+		ORDER("order"),
+		TYPE("type"),
+		VISIBLE("visible"),
 		Y_AXIS_ID("yAxisID"),
-		X_AXIS_ID("xAxisID");
+		X_AXIS_ID("xAxisID"),
+		// doughnut, pie
+		TOTAL("total");
 
 		// name value of property
 		private final String value;
@@ -74,12 +81,14 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
+	// instance of controoler
+	private final DatasetItemController datasetItemController;
 
 	/**
 	 * To avoid any user creation but provides an empty object
 	 */
 	DatasetMetaItem() {
-		// do noting
+		this(null);
 	}
 
 	/**
@@ -89,6 +98,17 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 */
 	public DatasetMetaItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// stores controller
+		datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
+	}
+
+	/**
+	 * Returns the dataset controller.
+	 * 
+	 * @return the dataset controller
+	 */
+	public DatasetItemController getController() {
+		return datasetItemController;
 	}
 
 	/**
@@ -110,6 +130,15 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns if the dataset is visible.
+	 * 
+	 * @return <code>true</code> if the dataset is visible, otherwise is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isVisible() {
+		return getValue(Property.VISIBLE, UndefinedValues.BOOLEAN);
+	}
+
+	/**
 	 * Returns if the dataset is hidden.
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
@@ -123,8 +152,35 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
 	 */
-	public void setHidden(boolean hidden) {
-		setValue(Property.HIDDEN, hidden);
+	// public void setHidden(boolean hidden) {
+	// setValue(Property.HIDDEN, hidden);
+	// }
+
+	/**
+	 * Returns the dataset index.
+	 * 
+	 * @return the dataset index. Default is {@link UndefinedValues#INTEGER}.
+	 */
+	public int getIndex() {
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the dataset order.
+	 * 
+	 * @return the dataset order. Default is {@link UndefinedValues#INTEGER}.
+	 */
+	public int getOrder() {
+		return getValue(Property.ORDER, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the dataset label.
+	 * 
+	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
+	 */
+	public String getLabel() {
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -143,6 +199,15 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 */
 	public String getXAxisID() {
 		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
+	}
+
+	/**
+	 * Returns the dataset total value of data.
+	 * 
+	 * @return the dataset total value of data. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public double getTotal() {
+		return getValue(Property.TOTAL, UndefinedValues.DOUBLE);
 	}
 
 	/**

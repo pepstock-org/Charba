@@ -216,6 +216,56 @@ public final class Chart {
 	native NativeObject getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
+	 * Sets the visibility for a given dataset.<br>
+	 * This can be used to build a chart legend in HTML.<br>
+	 * During click on one of the HTML items, you can call it to change the appropriate dataset.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param visibility if <code>true</code> enables the visibility otherwise <code>false</code>
+	 */
+	@JsMethod
+	native void setDatasetVisibility(int datasetIndex, boolean visibility);
+
+	/**
+	 * Toggles the visibility of an item in all datasets.<br>
+	 * A dataset needs to explicitly support this feature for it to have an effect.<br>
+	 * From internal chart types, doughnut / pie and polar area use this.
+	 * 
+	 * @param index data index
+	 */
+	@JsMethod
+	native void toggleDataVisibility(int index);
+
+	/**
+	 * Returns the stored visibility state of an data index for all datasets.
+	 * 
+	 * @param index data index
+	 * @return <code>true</code> if the data item is visible
+	 */
+	@JsMethod
+	native boolean getDataVisibility(int index);
+
+	/**
+	 * Sets the visibility for the given dataset to false.<br>
+	 * Updates the chart and animates the dataset with 'hide' mode.<br>
+	 * This animation can be configured under the hide key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	@JsMethod
+	native void hide(int datasetIndex);
+
+	/**
+	 * Sets the visibility for the given dataset to true.<br>
+	 * Updates the chart and animates the dataset with 'show' mode.<br>
+	 * This animation can be configured under the show key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	@JsMethod
+	native void show(int datasetIndex);
+
+	/**
 	 * Returns the CHART JS chart ID.
 	 * 
 	 * @return the CHART JS chart ID.
@@ -254,62 +304,6 @@ public final class Chart {
 	 */
 	@JsProperty
 	native double getCurrentDevicePixelRatio();
-
-	/**
-	 * Returns if the chart is animating or not.
-	 * 
-	 * @return if the chart is animating or not.
-	 */
-	@JsProperty
-	native boolean isAnimating();
-
-	/**
-	 * Returns the border width value.
-	 * 
-	 * @return the border width value.
-	 */
-//	@JsProperty
-//	native int getBorderWidth();
-
-	/**
-	 * Returns the outer radius value.
-	 * 
-	 * @return the outer radius value.
-	 */
-//	@JsProperty
-//	native double getOuterRadius();
-
-	/**
-	 * Returns the inner radius value.
-	 * 
-	 * @return the inner radius value.
-	 */
-//	@JsProperty
-//	native double getInnerRadius();
-
-	/**
-	 * Returns the radius length value.
-	 * 
-	 * @return the radius length value.
-	 */
-//	@JsProperty
-//	native double getRadiusLength();
-
-	/**
-	 * Returns the offset X value.
-	 * 
-	 * @return the offset X value.
-	 */
-//	@JsProperty
-//	native int getOffsetX();
-
-	/**
-	 * Returns the offset Y value.
-	 * 
-	 * @return the offset Y value.
-	 */
-//	@JsProperty
-//	native int getOffsetY();
 
 	/**
 	 * Returns the chart area node, as native object.

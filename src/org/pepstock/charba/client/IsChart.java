@@ -384,6 +384,51 @@ public interface IsChart {
 	int getVisibleDatasetCount();
 
 	/**
+	 * Sets the visibility for a given dataset.<br>
+	 * This can be used to build a chart legend in HTML.<br>
+	 * During click on one of the HTML items, you can call it to change the appropriate dataset.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param visibility if <code>true</code> enables the visibility otherwise <code>false</code>
+	 */
+	void setDatasetVisibility(int datasetIndex, boolean visibility);
+
+	/**
+	 * Toggles the visibility of an item in all datasets.<br>
+	 * A dataset needs to explicitly support this feature for it to have an effect.<br>
+	 * From internal chart types, doughnut / pie and polar area use this.
+	 * 
+	 * @param index data index
+	 */
+	void toggleDataVisibility(int index);
+
+	/**
+	 * Returns the stored visibility state of an data index for all datasets.
+	 * 
+	 * @param index data index
+	 * @return <code>true</code> if the data item is visible
+	 */
+	boolean isDataVisible(int index);
+
+	/**
+	 * Sets the visibility for the given dataset to false.<br>
+	 * Updates the chart and animates the dataset with 'hide' mode.<br>
+	 * This animation can be configured under the hide key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	void hide(int datasetIndex);
+
+	/**
+	 * Sets the visibility for the given dataset to true.<br>
+	 * Updates the chart and animates the dataset with 'show' mode.<br>
+	 * This animation can be configured under the show key in animation options.
+	 * 
+	 * @param datasetIndex dataset index
+	 */
+	void show(int datasetIndex);
+
+	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
 	 * If there are multiple items within range, only the first is returned.
 	 * 

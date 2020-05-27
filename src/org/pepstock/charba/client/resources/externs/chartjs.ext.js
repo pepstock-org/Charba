@@ -71,6 +71,32 @@ Chart.prototype.isDatasetVisible = function(index) {};
  */
 Chart.prototype.getVisibleDatasetCount = function() {};
 /**
+ * @param {number} datasetIndex
+ * @param {boolean} visibility
+ * @return {undefined}
+ */
+Chart.prototype.setDatasetVisibility = function(datasetIndex, visibility) {};
+/**
+ * @param {number} index
+ * @return {undefined}
+ */
+Chart.prototype.toggleDataVisibility = function(index) {};
+/**
+ * @param {number} index
+ * @return {boolean}
+ */
+Chart.prototype.getDataVisibility = function(index) {};
+/**
+ * @param {number} datasetIndex
+ * @return {undefined}
+ */
+Chart.prototype.hide = function(datasetIndex) {};
+/**
+ * @param {number} datasetIndex
+ * @return {undefined}
+ */
+Chart.prototype.show = function(datasetIndex) {};
+/**
  * @param {Object} event
  * @return {Object}
  */
@@ -95,34 +121,6 @@ Chart.prototype.aspectRatio;
  * @type {number}
  */
 Chart.prototype.currentDevicePixelRatio;
-/**
- * @type {boolean}
- */
-Chart.prototype.animating;
-/**
- * @type {number}
- */
-Chart.prototype.borderWidth;
-/**
- * @type {number}
- */
-Chart.prototype.outerRadius;
-/**
- * @type {number}
- */
-Chart.prototype.innerRadius;
-/**
- * @type {number}
- */
-Chart.prototype.radiusLength;
-/**
- * @type {number}
- */
-Chart.prototype.offsetX;
-/**
- * @type {number}
- */
-Chart.prototype.offsetY;
 /**
  * @type {Object}
  */

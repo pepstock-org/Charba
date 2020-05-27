@@ -31,6 +31,7 @@ import org.pepstock.charba.client.dom.enums.TextAlign;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -158,8 +159,11 @@ final class BaseMeterController extends AbstractController {
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
 	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
+		// gets dataset item at index 0
+		// it can not be null
+		DatasetMetaItem datasetMetaItem = chart.getDatasetMeta(0);
 		// calculate the side of the square where to draw the value
-		final int sideOfSquare = (int) ((item.getInnerRadius() * 2) / SQRT_2);
+		final int sideOfSquare = (int) ((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// gets the chart area of CHART.JS

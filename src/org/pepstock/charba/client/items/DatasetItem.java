@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -23,23 +24,43 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event handler or callbacks to apply own logic.
+ * This is the CHART.JS item with all needed info about a selected dataset.<br>
+ * This object has been created and passed to event handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public class DatasetItem extends NativeObjectContainer {
-
-	private final DatasetViewItem view;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		DATASET_INDEX("_datasetIndex"),
-		INDEX("_index"),
-		VIEW("_view"),
-		HIDDEN("hidden");
+		// for all chart types
+		ACTIVE("active"),
+		X("x"),
+		Y("y"),
+		OPTIONS("options"),
+		// for bar chart
+		BASE("base"),
+		HEIGHT("height"),
+		HORIZONTAL("horizontal"),
+		WIDTH("width"),
+		// doughnut, pie, polar area
+		CIRCUMFERENCE("circumference"),
+		END_ANGLE("endAngle"),
+		INNER_RADIUS("innerRadius"),
+		OUTER_RADIUS("outerRadius"),
+		START_ANGLE("startAngle"),
+		// bubble, line, radar
+		SKIP("skip"),
+		// line
+		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
+		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
+		CONTROL_POINT_NEXT_X("controlPointNextX"),
+		CONTROL_POINT_NEXT_Y("controlPointNextY"),
+		// radar
+		ANGLE("angle");
 
 		// name value of property
 		private final String value;
@@ -65,6 +86,9 @@ public class DatasetItem extends NativeObjectContainer {
 
 	}
 
+	// dataset item options instance
+	private final DatasetItemOptions options;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -72,53 +96,170 @@ public class DatasetItem extends NativeObjectContainer {
 	 */
 	public DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// initializes the sub objects
-		view = new DatasetViewItem(getValue(Property.VIEW));
+		// set the dataset item options
+		options = new DatasetItemOptions(getValue(Property.OPTIONS));
 	}
 
 	/**
-	 * Returns the dataset index of the chart
-	 * 
-	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
+	 * Returns the dataset label.
+	 *
+	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
 	 */
-	public final int getDatasetIndex() {
-		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
+	public final DatasetItemOptions getOptions() {
+		return options;
 	}
 
 	/**
-	 * Returns the index of the data inside the dataset.
+	 * Returns if is an horizontal view.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return <code>true</code> if is an horizontal view. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
-	public final int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	public final boolean isHorizontal() {
+		return getValue(Property.HORIZONTAL, UndefinedValues.BOOLEAN);
 	}
 
 	/**
-	 * Returns if the dataset is hidden.
+	 * Returns the base value of dataset.
 	 * 
-	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return the base value of dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final boolean isHidden() {
-		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
+	public final double getBase() {
+		return getValue(Property.BASE, UndefinedValues.DOUBLE);
 	}
 
 	/**
-	 * Sets if the dataset must be hidden.
+	 * Returns the X location of dataset item in pixel.
 	 * 
-	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
+	 * @return the X location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final void setHidden(boolean hidden) {
-		setValue(Property.HIDDEN, hidden);
+	public final double getX() {
+		return getValue(Property.X, UndefinedValues.DOUBLE);
 	}
 
 	/**
-	 * Returns all view information about the dataset.
+	 * Returns the Y location of dataset item in pixel.
 	 * 
-	 * @return all view information about the dataset.
+	 * @return the Y location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final DatasetViewItem getView() {
-		return view;
+	public final double getY() {
+		return getValue(Property.Y, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the width of dataset item in pixel.
+	 * 
+	 * @return the width of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getWidth() {
+		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the height of dataset item in pixel.
+	 * 
+	 * @return the height of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getHeight() {
+		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns <code>true</code> if skipped.
+	 * 
+	 * @return <code>true</code> if skipped. Default is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public final boolean isSkipped() {
+		return getValue(Property.SKIP, UndefinedValues.BOOLEAN);
+	}
+
+	/**
+	 * Returns the previous X control point of dataset item in pixel.
+	 * 
+	 * @return the previous X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getControlPointPreviousX() {
+		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the previous Y control point of dataset item in pixel.
+	 * 
+	 * @return the previous Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getControlPointPreviousY() {
+		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the next X control point of dataset item in pixel.
+	 * 
+	 * @return the next X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getControlPointNextX() {
+		return getValue(Property.CONTROL_POINT_NEXT_X, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the next Y control point of dataset item in pixel.
+	 * 
+	 * @return the next Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getControlPointNextY() {
+		return getValue(Property.CONTROL_POINT_NEXT_Y, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the angle of dataset item.
+	 * 
+	 * @return the angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getAngle() {
+		return getValue(Property.ANGLE, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the start angle of dataset item.
+	 * 
+	 * @return the start angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getStartAngle() {
+		return getValue(Property.START_ANGLE, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the end angle of dataset item.
+	 * 
+	 * @return the end angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public double getEndAngle() {
+		return getValue(Property.END_ANGLE, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the circumference of dataset item.
+	 * 
+	 * @return the circumference of dataset item.
+	 */
+	public double getCircumference() {
+		return getValue(Property.CIRCUMFERENCE, Defaults.get().getGlobal().getCircumference());
+	}
+
+	/**
+	 * Returns the outer radius of dataset item in pixel.
+	 * 
+	 * @return the outer radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public double getOuterRadius() {
+		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the inner radius of dataset item in pixel.
+	 * 
+	 * @return the inner radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public double getInnerRadius() {
+		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
 	}
 
 	/**

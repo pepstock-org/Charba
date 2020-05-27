@@ -110,7 +110,7 @@ public final class ScriptableContext extends NativeObjectContainer {
 	 * 
 	 * @return whether the associated element is active. Default is false.
 	 */
-	public boolean isHover() {
+	public boolean isActive() {
 		return getValue(Property.ACTIVE, false);
 	}
 

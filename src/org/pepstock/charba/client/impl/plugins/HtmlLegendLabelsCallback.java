@@ -47,8 +47,8 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetItemOptions;
 import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.DatasetViewItem;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -420,7 +420,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// calculated a radius, predefined by size
 			double radius = (size - 2) / 2D;
 			// here is searching for radius set to dataset level
-			DatasetViewItem datasetViewItem = lookForDatasetMetaItem(chart, item);
+			DatasetItemOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
 			// checks if dataset item is consistent
 			if (datasetViewItem != null) {
 				// if dataset item is found
@@ -465,7 +465,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	 * @param item legend item to use as dataset locator
 	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 */
-	private DatasetViewItem lookForDatasetMetaItem(IsChart chart, LegendItem item) {
+	private DatasetItemOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
 		// prepares the meta item instance
 		DatasetMetaItem datasetMetaItem = null;
 		// item index set to 0 for dataset index locator
@@ -489,7 +489,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 			// checks if consistent
 			if (datasetItem != null) {
 				// returns the meta data view
-				return datasetItem.getView();
+				return datasetItem.getOptions();
 			}
 		}
 		// if here, the locator is not able to get the right dataset item

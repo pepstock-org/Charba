@@ -141,14 +141,16 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		ChartNode node = chart.getNode();
 		// gets chart area
 		ChartAreaNode chartArea = node.getChartArea();
+		// gets dataset item at index 0
+		DatasetMetaItem datasetMetaItem = chart.getDatasetMeta(datasetIndex);
 		// depending of scope (canvas or chart area)
 		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// CANVAS
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
+			if (datasetMetaItem != null && !Double.isNaN(datasetMetaItem.getController().getInnerRadius()) && !Double.isNaN(datasetMetaItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, node, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetMetaItem, datasetIndex, index, radius);
 			} else {
 				// gets canvas
 				Canvas canvas = chart.getCanvas();
@@ -161,9 +163,9 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
+			if (datasetMetaItem != null && !Double.isNaN(datasetMetaItem.getController().getInnerRadius()) && !Double.isNaN(datasetMetaItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, node, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetMetaItem, datasetIndex, index, radius);
 			} else {
 				// by default is the center of chart area
 				radius.setInner(0);
@@ -185,29 +187,29 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * @param index data index
 	 * @param radius radius instance to be updated
 	 */
-	private void manageRadiusByChartNode(IsChart chart, ChartNode node, int datasetIndex, int index, Radius radius) {
+	private void manageRadiusByChartNode(IsChart chart, DatasetMetaItem node, int datasetIndex, int index, Radius radius) {
 		// gets meta data
 		DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
 		// checks if datasetIndex is consistent
 		if (metaItem != null && index < metaItem.getDatasets().size() && index >= 0) {
 			DatasetItem item = metaItem.getDatasets().get(index);
 			// checks if chart is circular or not
-			if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
+			if (!Double.isNaN(item.getInnerRadius()) && !Double.isNaN(item.getOuterRadius())) {
 				// uses the inner radius
-				radius.setInner(Math.max(item.getView().getInnerRadius(), node.getInnerRadius()));
+				radius.setInner(Math.max(item.getInnerRadius(), node.getController().getInnerRadius()));
 				// uses the outer radius
-				radius.setOuter(Math.max(item.getView().getOuterRadius(), node.getOuterRadius()));
+				radius.setOuter(Math.max(item.getOuterRadius(), node.getController().getOuterRadius()));
 			} else {
 				// uses the inner radius
-				radius.setInner(node.getInnerRadius());
+				radius.setInner(node.getController().getInnerRadius());
 				// uses the outer radius
-				radius.setOuter(node.getOuterRadius());
+				radius.setOuter(node.getController().getOuterRadius());
 			}
 		} else {
 			// uses the inner radius
-			radius.setInner(node.getInnerRadius());
+			radius.setInner(node.getController().getInnerRadius());
 			// uses the outer radius
-			radius.setOuter(node.getOuterRadius());
+			radius.setOuter(node.getController().getOuterRadius());
 		}
 	}
 
