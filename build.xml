@@ -569,7 +569,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.chartjs.minify.file}" />
 		</delete>
-		<get src="https://www.chartjs.org/dist/master/Chart.bundle.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
+		<get src="https://www.chartjs.org/dist/master/chart.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
 	</target>
 
 	<target name="retrieveOfficialDatalabels">
