@@ -17,8 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.Scales;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
@@ -63,7 +63,7 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation {
 	 * @return the ID of the X scale to bind onto
 	 */
 	default String getXScaleID() {
-		return Scales.DEFAULT_X_AXIS_ID;
+		return DefaultScaleId.X.value();
 	}
 
 	/**
@@ -126,7 +126,7 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation {
 	 * @return the ID of the Y scale to bind onto
 	 */
 	default String getYScaleID() {
-		return Scales.DEFAULT_Y_AXIS_ID;
+		return DefaultScaleId.Y.value();
 	}
 
 	/**

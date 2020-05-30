@@ -18,6 +18,8 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
  * Radial axes are used specifically for the radar and polar area chart types.<br>
@@ -47,7 +49,7 @@ public class RadialAxis extends Axis {
 	 * @param chart chart instance
 	 */
 	public RadialAxis(IsChart chart) {
-		super(chart, AxisType.RADIAL_LINEAR);
+		super(chart, DefaultScaleId.UNKNOWN, AxisType.RADIAL_LINEAR, CartesianAxisType.Y);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
 		grideLines = new GridLines(this);

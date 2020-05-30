@@ -33,10 +33,12 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.options.ExtendedScale;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.ScaleIdChecker;
 
 import jsinterop.annotations.JsFunction;
 
@@ -166,15 +168,21 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
+	 * @param id axis id
 	 * @param type axis type
+	 * @param cartesiantype cartesian type
 	 */
-	Axis(IsChart chart, AxisType type) {
+	Axis(IsChart chart, Key id, AxisType type, CartesianAxisType cartesiantype) {
 		super(chart);
+		// checks if id is consistent
+		ScaleIdChecker.check(id);
+		// checks cartesian type
+		Key.checkIfValid(cartesiantype);
 		// stores internally the axis type
-		this.storeType = type;
+		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(getDefaultScale()));
+		setConfiguration(new ExtendedScale(id, getDefaultScale(cartesiantype)));
 		// stores axis type
 		setType(type);
 		// -------------------------------
@@ -201,6 +209,26 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	public final int getCharbaId() {
 		return getConfiguration().getCharbaId();
+	}
+	
+	/**
+	 * The ID is used to link datasets and scale axes together.<br>
+	 * This is especially needed if multi-axes charts are used.
+	 * 
+	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
+	 */
+	public final String getId() {
+		return getConfiguration().getId();
+	}
+	
+	/**
+	 * The ID is used to link datasets and scale axes together.<br>
+	 * This is especially needed if multi-axes charts are used.
+	 * 
+	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
+	 */
+	public final Key getIdAsKey() {
+		return getConfiguration().getIdAsKey();
 	}
 
 	/**
@@ -280,25 +308,19 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the global options for this chart.
 	 * 
+	 * @param cartesiantype cartesian type
 	 * @return the global options for this chart.
 	 */
-	IsDefaultScale getDefaultScale() {
+	private IsDefaultScale getDefaultScale(CartesianAxisType cartesiantype) {
 		// gets the global option for the chart.
 		IsDefaultScaledOptions options = getChart().getDefaultChartOptions();
 		// if is a multi scale chart
 		if (ScaleType.MULTI.equals(getChart().getType().scaleType())) {
-			CartesianAxisType type = null;
 			// checks if is cartesian axis
-			// only cartesian axis has got the mutli scale
-			if (this instanceof CartesianAxis<?>) {
-				CartesianAxis<?> cAxis = (CartesianAxis<?>) this;
-				// gets cartesian type
-				type = cAxis.getCartesianType();
-			}
-			// if type is consistent
-			if (type != null) {
+			// only cartesian axis has got the multi scale
+			if (Key.isValid(cartesiantype)) {
 				// returns the option for x or y scale.
-				return getCartesianScale(CartesianAxisType.X.equals(type) ? options.getScales().getXAxis() : options.getScales().getYAxis());
+				return getCartesianScale(CartesianAxisType.X.equals(cartesiantype) ? options.getScales().getXAxis() : options.getScales().getYAxis());
 			}
 		} else if (ScaleType.SINGLE.equals(getChart().getType().scaleType())) {
 			// being a single scale
@@ -317,7 +339,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private IsDefaultScale getCartesianScale(IsDefaultScale axis) {
 		// if configuration type equals to this axis
-		if (getType().equals(axis.getType())) {
+		if (storeType.equals(axis.getType())) {
 			// returns scale config
 			return axis;
 		}

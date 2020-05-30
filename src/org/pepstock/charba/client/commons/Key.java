@@ -59,9 +59,10 @@ public interface Key {
 	 * returns the key.
 	 * 
 	 * @param key key to be checked
+	 * @param <T> type of key
 	 * @return the same key passed as argument
 	 */
-	static Key checkAndGetIfValid(Key key) {
+	static <T extends Key> T checkAndGetIfValid(T key) {
 		// checks if key is consistent
 		checkIfValid(key);
 		// if here, is consistent

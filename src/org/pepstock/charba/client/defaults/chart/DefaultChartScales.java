@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -27,8 +27,6 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultChartScales implements IsDefaultScales {
-
-	private final Scales scales;
 
 	private final IsDefaultScale xAxis;
 
@@ -40,33 +38,34 @@ public final class DefaultChartScales implements IsDefaultScales {
 	 * @param scales scales option element instance.
 	 */
 	public DefaultChartScales(Scales scales) {
-		this.scales = scales;
+		// checks if argument is consistent
+		if (scales == null) {
+			// exception
+			throw new IllegalArgumentException("Scales instance is not consistent");
+		}
 		// checks if there is any x axes
-		if (!scales.getXAxes().isEmpty()) {
-			// uses the first one as default
-			xAxis = scales.getXAxes().get(0);
+		if (!scales.getAxes().isEmpty()) {
+			// looks for X default
+			if (scales.hasAxis(DefaultScaleId.X)) {
+				// gets the stored axis as X
+				xAxis = scales.getAxis(DefaultScaleId.X);
+			} else {
+				// uses the default
+				xAxis = DefaultsBuilder.get().getScaledOptions().getScale();
+			}
+			// looks for X default
+			if (scales.hasAxis(DefaultScaleId.Y)) {
+				// gets the stored axis as Y
+				yAxis = scales.getAxis(DefaultScaleId.Y);
+			} else {
+				// uses the default
+				yAxis = DefaultsBuilder.get().getScaledOptions().getScale();
+			}
 		} else {
 			// uses the default
 			xAxis = DefaultsBuilder.get().getScaledOptions().getScale();
-		}
-		// checks if there is any y axes
-		if (!scales.getYAxes().isEmpty()) {
-			// uses the first one as default
-			yAxis = scales.getYAxes().get(0);
-		} else {
-			// uses the default
 			yAxis = DefaultsBuilder.get().getScaledOptions().getScale();
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getDisplay()
-	 */
-	@Override
-	public Display getDisplay() {
-		return scales.getDisplay();
 	}
 
 	/*

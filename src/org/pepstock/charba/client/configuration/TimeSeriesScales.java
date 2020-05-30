@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -43,9 +44,8 @@ public final class TimeSeriesScales extends Scales {
 		// creates the axes
 		// out of the box
 		timeAxis = new CartesianTimeAxis(chart);
-		super.setXAxes(timeAxis);
 		linearAxis = new CartesianLinearAxis(chart);
-		super.setYAxes(linearAxis);
+		super.setAxes(timeAxis, linearAxis);
 	}
 
 	/**
@@ -69,11 +69,33 @@ public final class TimeSeriesScales extends Scales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.Scales#setXAxes(org.pepstock.charba.client.configuration. Axis[])
+	 * @see org.pepstock.charba.client.configuration.Scales#setAxes(org.pepstock.charba.client.configuration.Axis[])
 	 */
 	@Override
-	public void setXAxes(Axis... axes) {
-		throw new UnsupportedOperationException("Do not set any X axes because TIME axis is already created. Use getTimeAxis to configure it");
+	public void setAxes(Axis... axes) {
+		// checks consistency of arguments
+		if (axes != null && axes.length > 0) {
+			// creates an empty array of axis plus 1 for X axis
+			Axis[] toStore = new Axis[axes.length+1];
+			// stores x axis
+			toStore[0] = timeAxis;
+			// sets an index to load the array
+			int index = 1;
+			// scans all axes to check if there is any other x axis
+			for (Axis axis : axes) {
+				// checks if x axis
+				if (CartesianAxisType.hasAxisType(axis, CartesianAxisType.X)) {
+					// not allowed
+					throw new UnsupportedOperationException("Do not set any X axes because TIME axis is already created. Use getTimeAxis to configure it");
+				}
+				// stores the axis into array
+				toStore[index] = axis;
+				// increments index
+				index++;
+			}
+			// stores the axes
+			super.setAxes(toStore);
+		}
 	}
 
 }

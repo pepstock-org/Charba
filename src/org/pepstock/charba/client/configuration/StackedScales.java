@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -59,32 +60,31 @@ public class StackedScales extends Scales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.Scales#setXAxes(org.pepstock.charba.client.configuration. Axis[])
+	 * @see org.pepstock.charba.client.configuration.Scales#setAxes(org.pepstock.charba.client.configuration.Axis[])
 	 */
 	@Override
-	public void setXAxes(Axis... axes) {
-		// if not ONLY X axis
-		if (!isOnlyYAxis) {
-			// changes the stacked field
-			// for all axes
-			setStackedProperty(axes);
+	public void setAxes(Axis... axes) {
+		// checks consistency of arguments
+		if (axes != null && axes.length > 0) {
+			// if not ONLY Y axis
+			if (!isOnlyYAxis) {
+				// changes the stacked field
+				// for all axes
+				setStackedProperty(axes);
+			} else {
+				// if here the stacked property mu st be applied
+				// only to Y axes
+				for (Axis axis : axes) {
+					// checks if is cartesian axis
+					// only cartesian axis has got the multi scale
+					if (CartesianAxisType.hasAxisType(axis, CartesianAxisType.Y)) {
+						setStackedProperty(axis);
+					}
+				}
+			}
+			// stores the axes
+			super.setAxes(axes);
 		}
-		// calls super method
-		super.setXAxes(axes);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.Scales#setYAxes(org.pepstock.charba.client.configuration. Axis[])
-	 */
-	@Override
-	public void setYAxes(Axis... axes) {
-		// changes the stacked field
-		// for all axes
-		setStackedProperty(axes);
-		// calls super method
-		super.setYAxes(axes);
 	}
 
 	/**

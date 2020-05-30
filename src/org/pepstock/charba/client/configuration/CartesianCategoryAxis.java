@@ -17,8 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CategoryAxisBuildTicksCallback;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.options.ScaleIdChecker;
 
 /**
  * This object is used to map defined axis as category.
@@ -37,9 +39,30 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param chart chart instance
 	 */
 	public CartesianCategoryAxis(IsChart chart) {
-		this(chart, CartesianAxisType.X);
+		// uses X as axis id
+		this(chart, CartesianAxisType.X.getDefaultScaleId());
 	}
 
+	/**
+	 * Builds the object storing the chart instance. Axis type is X by default.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 */
+	public CartesianCategoryAxis(IsChart chart, String id) {
+		this(chart, ScaleIdChecker.key(id));
+	}
+
+	/**
+	 * Builds the object storing the chart instance. Axis type is X by default.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 */
+	public CartesianCategoryAxis(IsChart chart, Key id) {
+		this(chart, id, null);
+	}
+	
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -47,7 +70,31 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianCategoryAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart, AxisType.CATEGORY, cartesianType);
+		// uses cartesian type as axis id
+		// checking if consistent
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+	}
+	
+	/**
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param cartesianType cartesian axis type.
+	 */
+	public CartesianCategoryAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
+		this(chart, ScaleIdChecker.key(id), cartesianType);
+	}
+
+	/**
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param cartesianType cartesian axis type.
+	 */
+	public CartesianCategoryAxis(IsChart chart, Key id, CartesianAxisType cartesianType) {
+		super(chart, id, AxisType.CATEGORY, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.X));
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 		// create build ticks callback handler

@@ -17,8 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.options.ScaleIdChecker;
 
 /**
  * This object is used to map defined axis as logarithmic.
@@ -38,9 +40,30 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param chart chart instance
 	 */
 	public CartesianLogarithmicAxis(IsChart chart) {
-		this(chart, CartesianAxisType.Y);
+		// uses Y as axis id
+		this(chart, CartesianAxisType.Y.getDefaultScaleId());
 	}
-
+	
+	/**
+	 * Builds the object storing the chart instance. Axis type is Y by default.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 */
+	public CartesianLogarithmicAxis(IsChart chart, String id) {
+		this(chart, ScaleIdChecker.key(id));
+	}
+	
+	/**
+	 * Builds the object storing the chart instance. Axis type is Y by default.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 */
+	public CartesianLogarithmicAxis(IsChart chart, Key id) {
+		this(chart, id, null);
+	}
+	
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -48,7 +71,31 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart, AxisType.LOGARITHMIC, cartesianType);
+		// uses cartesian type as axis id
+		// checking if consistent
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+	}
+	
+	/**
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param cartesianType cartesian axis type.
+	 */
+	public CartesianLogarithmicAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
+		this(chart, ScaleIdChecker.key(id), cartesianType);
+	}
+
+	/**
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param cartesianType cartesian axis type.
+	 */
+	public CartesianLogarithmicAxis(IsChart chart, Key id, CartesianAxisType cartesianType) {
+		super(chart, id, AxisType.LOGARITHMIC, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 		// create build ticks callback handler

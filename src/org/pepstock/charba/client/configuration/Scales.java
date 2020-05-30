@@ -16,12 +16,16 @@
 package org.pepstock.charba.client.configuration;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.ScaleIdChecker;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -31,9 +35,7 @@ import org.pepstock.charba.client.options.Scale;
 public class Scales extends ConfigurationContainer<ExtendedOptions> {
 
 	// buffer to maintain axes
-	private final List<Axis> yAxes = new LinkedList<>();
-	// buffer to maintain axes
-	private final List<Axis> xAxes = new LinkedList<>();
+	private final Map<String, Axis> storedAxes = new HashMap<>();
 
 	/**
 	 * Builds the object storing the chart instance and the root options element.
@@ -50,11 +52,11 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @param axes an array of axes.
 	 */
-	public void setXAxes(Axis... axes) {
+	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
 			// clears the buffer
-			xAxes.clear();
+			storedAxes.clear();
 			// creates the array
 			Scale[] scales = new Scale[axes.length];
 			// scans all scale arguments
@@ -62,11 +64,32 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer
-				xAxes.add(axes[i]);
+				storedAxes.put(axes[i].getId(), axes[i]);
 			}
 			// sets the array
-			getConfiguration().getScales().setXAxes(scales);
+			getConfiguration().getScales().setAxes(scales);
 		}
+	}
+	
+	/**
+	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * @param scaleId scale id to check
+	 * @return the scale with the id passed as argument or <code>null</code> if not exist
+	 */
+	public Axis getAxisById(String scaleId) {
+		return storedAxes.get(scaleId);
+	}
+
+	/**
+	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * @param scaleId scale id to check
+	 * @return the scale with the id passed as argument or <code>null</code> if not exist
+	 */
+	public Axis getAxisById(Key scaleId) {
+		// checks if the scale id is consistent
+		ScaleIdChecker.check(scaleId);
+		// returns the object if exist
+		return storedAxes.get(scaleId.value());
 	}
 
 	/**
@@ -74,41 +97,11 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @return the xAxes by a unmodifiable list
 	 */
-	public List<Axis> getXAxes() {
-		return xAxes.isEmpty() ? null : Collections.unmodifiableList(xAxes);
-	}
-
-	/**
-	 * Sets an array of Y axes.
-	 * 
-	 * @param axes an array of axes.
-	 */
-	public void setYAxes(Axis... axes) {
-		// checks consistency of arguments
-		if (axes != null && axes.length > 0) {
-			// clears the buffer
-			yAxes.clear();
-			// creates the array
-			Scale[] scales = new Scale[axes.length];
-			// scans all scale arguments
-			for (int i = 0; i < axes.length; i++) {
-				// adds to array
-				scales[i] = axes[i].getScale();
-				// adds to buffer
-				yAxes.add(axes[i]);
-			}
-			// sets the array
-			getConfiguration().getScales().setYAxes(scales);
-		}
-	}
-
-	/**
-	 * Returns the list of Y axes.
-	 * 
-	 * @return the yAxes by a unmodifiable list
-	 */
-	public List<Axis> getYAxes() {
-		return yAxes.isEmpty() ? null : Collections.unmodifiableList(yAxes);
+	public List<Axis> getAxes() {
+		// sets reference
+		List<Axis> result = storedAxes.isEmpty() ? Collections.emptyList() : new LinkedList<Axis>(storedAxes.values());
+		// returns the unmodifiable list
+		return Collections.unmodifiableList(result);
 	}
 
 }

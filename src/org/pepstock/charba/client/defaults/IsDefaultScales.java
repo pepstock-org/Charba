@@ -15,21 +15,12 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.Display;
-
 /**
  * Interface to define scales/axes object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultScales {
-
-	/**
-	 * The display option controls the visibility of axis
-	 * 
-	 * @return the display option controls the visibility of axis
-	 */
-	Display getDisplay();
 
 	/**
 	 * Returns the default configuration for x axis.

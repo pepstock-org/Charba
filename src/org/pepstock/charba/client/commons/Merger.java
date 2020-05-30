@@ -46,9 +46,7 @@ public final class Merger {
 	private enum Property implements Key
 	{
 		SCALE("scale"),
-		SCALES("scales"),
-		X_AXES("xAxes"),
-		Y_AXES("yAxes");
+		SCALES("scales");
 
 		// name value of property
 		private final String value;
@@ -197,50 +195,38 @@ public final class Merger {
 			// gets the native object for scales
 			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALES.value());
 			NativeObject scales = descriptor.getValue();
-			// checks and apply X scale
-			applyDefaultsOnScales(Property.X_AXES, base.getScales().getXAxes(), scales, scaleOptions);
-			// checks and apply Y scale
-			applyDefaultsOnScales(Property.Y_AXES, base.getScales().getYAxes(), scales, scaleOptions);
+			// checks and apply scales
+			applyDefaultsOnScales(base.getScales().getAxes(), scales, scaleOptions);
 		}
 	}
 
 	/**
 	 * Applies the defaults to all scales (X and Y) defined for a chart.
 	 * 
-	 * @param axisProperty type of scales to be managed
 	 * @param storedScales the list of object with all defined scales
 	 * @param scales native object with scales
 	 * @param scaleOptions defaults scales native object
 	 */
-	private void applyDefaultsOnScales(Property axisProperty, List<Scale> storedScales, NativeObject scales, NativeObject scaleOptions) {
-		// checks if there is x axes
-		if (scales.hasProperty(axisProperty.value())) {
-			// gets the array about x axes
-			NativeArrayDescriptor<ArrayObject> scalesDescriptor = scales.getArrayProperty(axisProperty.value());
-			ArrayObject singleScales = scalesDescriptor.getValue();
+	private void applyDefaultsOnScales(List<Scale> storedScales, NativeObject scales, NativeObject scaleOptions) {
+		// scans all scales
+		for (Scale storedScale : storedScales) {
+			// gets the object about x axes by id
+			NativeObjectDescriptor scaleDescriptor = scales.getObjectProperty(storedScale.getId());
+			// gets native object of scale
+			NativeObject scaleObject = scaleDescriptor.getValue();
 			// create instance for axis type
-			AxisType type = null;
-			// checks if there is at least 1 element
-			if (!storedScales.isEmpty()) {
-				// gets default axis type of chart
-				type = storedScales.get(0).getType();
-			}
+			AxisType type = storedScale.getType();
 			// checks if axis type is consistent
 			if (Key.isValid(type)) {
 				// gets default by axis type
 				GlobalScale axisDefault = Defaults.get().getScale(type);
-				// scans all x axes applying the default scale
-				for (int i = 0; i < singleScales.length(); i++) {
-					// before it applies the axis defaults by its type
-					NativeObject tempObject = mergeNativeObjects(singleScales.get(i), axisDefault.getNativeObject());
-					// then it applies defaults scale
-					singleScales.set(i, mergeNativeObjects(tempObject, scaleOptions));
-				}
+				// before it applies the axis defaults by its type
+				NativeObject tempObject = mergeNativeObjects(scaleObject, axisDefault.getNativeObject());
+				// then it applies defaults scale
+				scales.defineObjectProperty(storedScale.getId(), mergeNativeObjects(tempObject, scaleOptions));
 			} else {
-				// scans all x axes applying the default scale
-				for (int i = 0; i < singleScales.length(); i++) {
-					singleScales.set(i, mergeNativeObjects(singleScales.get(i), scaleOptions));
-				}
+				// then it applies defaults scale
+				scales.defineObjectProperty(storedScale.getId(), mergeNativeObjects(scaleObject, scaleOptions));
 			}
 		}
 	}

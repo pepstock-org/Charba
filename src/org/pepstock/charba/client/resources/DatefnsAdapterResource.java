@@ -14,7 +14,7 @@
     limitations under the License.
 */
 package org.pepstock.charba.client.resources;
-
+ 
 /**
  * Contains the content of <code>charba.empty.js</code> to inject.<br>
  * 
@@ -24,8 +24,10 @@ package org.pepstock.charba.client.resources;
 public final class DatefnsAdapterResource extends AbstractInjectableResource {
 
 	// encoded javascript content of charba.empty.js
-	private static final String[] CONTENT = { "/* EMPTY */" };
-
+	private static final String[] CONTENT = {
+		"/* EMPTY */"
+	};
+	
 	/**
 	 * Creates the injectable resource with <code>charba.empty.js</code> content.
 	 */

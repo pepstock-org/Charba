@@ -69,10 +69,11 @@ public final class ExtendedScale extends Scale {
 	/**
 	 * Creates a scale with default provider. The native object is created empty.
 	 * 
+	 * @param id scale id
 	 * @param defaultValues default provider.
 	 */
-	public ExtendedScale(IsDefaultScale defaultValues) {
-		super(defaultValues);
+	public ExtendedScale(Key id, IsDefaultScale defaultValues) {
+		super(id, defaultValues);
 		// stores the id based on a counter
 		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 	}

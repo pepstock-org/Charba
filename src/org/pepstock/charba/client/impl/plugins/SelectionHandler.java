@@ -24,15 +24,16 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.BaseEventTypes;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
@@ -1121,15 +1122,16 @@ final class SelectionHandler {
 		boolean offset = false;
 		// checks if is a BAR chart
 		if (ChartType.BAR.equals(chart.getBaseType()) && chart.getOptions() instanceof BarOptions) {
-			// gets the scales for X
-			List<Scale> scales = chart.getNode().getOptions().getScales().getXAxes();
+			// gets all scales 
+			List<Scale> scales = chart.getNode().getOptions().getScales().getAxes();
 			// checks if any scale has been configured
 			if (!scales.isEmpty()) {
 				// scans configured scales
 				for (Scale scale : scales) {
 					// checks if is the right scale
 					// used for selection by ID
-					if (options.getXAxisID().equalsIgnoreCase(scale.getId())) {
+					// and is is a X scale
+					if (CartesianAxisType.X.equals(scale.getAxis()) && options.getXAxisID().equalsIgnoreCase(scale.getId())) {
 						// gets the offset
 						offset = scale.isOffset();
 					}

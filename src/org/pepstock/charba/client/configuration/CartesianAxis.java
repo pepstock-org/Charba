@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
@@ -35,25 +36,26 @@ import org.pepstock.charba.client.enums.Position;
  *
  * @param <T> type of tick to apply to axis
  */
-abstract class CartesianAxis<T extends CartesianTick> extends Axis {
+public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	private final GridLines grideLines;
 
 	private final CartesianScaleLabel scaleLabel;
-
-	private final CartesianAxisType cartesianType;
-
+	
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
 	 * 
 	 * @param chart chart instance
+	 * @param id axis id
 	 * @param type axis type
 	 * @param cartesianType cartesian type
 	 */
-	CartesianAxis(IsChart chart, AxisType type, CartesianAxisType cartesianType) {
-		super(chart, type);
+	CartesianAxis(IsChart chart, Key id, AxisType type, CartesianAxisType cartesianType) {
+		super(chart, id, type, cartesianType);
+		// gets the cartesian type
+		// by scale id
 		// stores the axis type
-		this.cartesianType = cartesianType;
+		getScale().setAxis(cartesianType);
 		// sets to the objects
 		grideLines = new GridLines(this);
 		scaleLabel = new CartesianScaleLabel(this);
@@ -83,14 +85,27 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public GridLines getGrideLines() {
 		return grideLines;
 	}
+	
+	/**
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * 
+	 * @param type type of axis
+	 */
+	public final void setAxis(CartesianAxisType type) {
+		getScale().setAxis(type);
+	}
 
 	/**
-	 * Returns the axis type
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
 	 * 
-	 * @return the cartesianType
+	 * @return the type of axis.
 	 */
-	public CartesianAxisType getCartesianType() {
-		return cartesianType;
+	public final CartesianAxisType getAxis() {
+		return getScale().getAxis();
 	}
 
 	/**
@@ -127,26 +142,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public boolean isOffset() {
 		return getScale().isOffset();
-	}
-
-	/**
-	 * The ID is used to link datasets and scale axes together.<br>
-	 * This is especially needed if multi-axes charts are used.
-	 * 
-	 * @param id The ID is used to link datasets and scale axes together
-	 */
-	public void setId(String id) {
-		getScale().setId(id);
-	}
-
-	/**
-	 * The ID is used to link datasets and scale axes together.<br>
-	 * This is especially needed if multi-axes charts are used.
-	 * 
-	 * @return The ID is used to link datasets and scale axes together
-	 */
-	public String getId() {
-		return getScale().getId();
 	}
 
 	/**

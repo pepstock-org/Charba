@@ -20,11 +20,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
@@ -63,22 +64,23 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	private enum Property implements Key
 	{
-		GRID_LINES("gridLines"),
-		SCALE_LABEL("scaleLabel"),
-		TICKS("ticks"),
-		ANGLE_LINES("angleLines"),
-		POINT_LABELS("pointLabels"),
-		TIME("time"),
 		ADAPTERS("adapters"),
-		ID("id"),
-		TYPE("type"),
+		ANGLE_LINES("angleLines"),
+		AXIS("axis"),
+		BOUNDS("bounds"),
 		DISPLAY("display"),
-		WEIGHT("weight"),
-		POSITION("position"),
-		OFFSET("offset"),
-		STACKED("stacked"),
 		DISTRIBUTION("distribution"),
-		BOUNDS("bounds");
+		GRID_LINES("gridLines"),
+		ID("id"),
+		OFFSET("offset"),
+		POINT_LABELS("pointLabels"),
+		POSITION("position"),
+		SCALE_LABEL("scaleLabel"),
+		STACKED("stacked"),
+		TICKS("ticks"),
+		TIME("time"),
+		TYPE("type"),
+		WEIGHT("weight");
 
 		// name value of property
 		private final String value;
@@ -108,11 +110,26 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * Creates the object only with default provider. This is used when the scale is the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
+	 * @param id scale id
 	 * @param defaultValues default provider instance.
 	 */
-	public Scale(IsDefaultScale defaultValues) {
+	public Scale(String id, IsDefaultScale defaultValues) {
+		// no parent, child key and native object
+		this(ScaleIdChecker.key(id), defaultValues);
+	}
+
+	/**
+	 * Creates the object only with default provider. This is used when the scale is the root element.<br>
+	 * New native java script object is created and it's empty.
+	 * 
+	 * @param id scale id
+	 * @param defaultValues default provider instance.
+	 */
+	public Scale(Key id, IsDefaultScale defaultValues) {
 		// no parent, child key and native object
 		this(null, null, defaultValues, null);
+		// sets the ID
+		setId(id);
 	}
 
 	/**
@@ -214,20 +231,47 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
-	public final void setId(String id) {
-		setValue(Property.ID, id);
-		// checks if all parents are attached
-		checkAndAddToParent();
+	void setId(Key id) {
+		// checks if key is consistent
+		ScaleIdChecker.check(id);
+		// if the scale id is UNKNWON (set by Charba)
+		// does not store
+		// this is for radial axis where id must miss
+		if (!DefaultScaleId.UNKNOWN.value().equals(id.value())) {
+			// stores id
+			setValue(Property.ID, id);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		}
 	}
 
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together or {@link UndefinedValues#STRING} if not set
+	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
 	public final String getId() {
-		return getValue(Property.ID, UndefinedValues.STRING);
+		return getValue(Property.ID, DefaultScaleId.UNKNOWN.value());
+	}
+
+	/**
+	 * The ID is used to link datasets and scale axes together.<br>
+	 * This is especially needed if multi-axes charts are used.
+	 * 
+	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
+	 */
+	public final Key getIdAsKey() {
+		// checks if property is set
+		if (has(Property.ID)) {
+			// gets id as string
+			String id = getId();
+			// transforms it in a key
+			return ScaleIdChecker.key(id);
+		}
+		// if here, id is not set
+		// then returns unknown
+		return DefaultScaleId.UNKNOWN;
 	}
 
 	/**
@@ -268,6 +312,37 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final AxisType getType() {
 		return getValue(Property.TYPE, AxisType.values(), getDefaultValues().getType());
+	}
+
+	/**
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * 
+	 * @param type type of axis
+	 */
+	public final void setAxis(CartesianAxisType type) {
+		setValue(Property.AXIS, type);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * 
+	 * @return the type of axis.
+	 */
+	public final CartesianAxisType getAxis() {
+		// checks if there is the property
+		if (has(Property.AXIS)) {
+			// returns the property
+			return getValue(Property.AXIS, CartesianAxisType.values(), getDefaultValues().getAxis());
+		}
+		// if here the property doesn't exist
+		// then returns base on scale id
+		return CartesianAxisType.getByScaleId(getId());
 	}
 
 	/**

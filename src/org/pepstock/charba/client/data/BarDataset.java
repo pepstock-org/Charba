@@ -36,7 +36,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
-import org.pepstock.charba.client.options.Scales;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -200,7 +200,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
+		return getValue(Property.X_AXIS_ID, DefaultScaleId.X.value());
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID() {
-		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
+		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y.value());
 	}
 
 	/**

@@ -58,6 +58,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Base class of all charts.<br>
@@ -634,6 +635,8 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		if (chart != null) {
 			// if config is not passed..
 			if (configuration == null) {
+				// FIXME
+				Window.getConsole().log("update!!");
 				// .. calls the update
 				chart.update();
 			} else {

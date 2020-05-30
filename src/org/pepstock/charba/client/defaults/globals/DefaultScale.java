@@ -24,6 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -144,6 +145,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public AxisType getType() {
 		return AxisType.LINEAR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getAxis()
+	 */
+	@Override
+	public CartesianAxisType getAxis() {
+		return CartesianAxisType.Y;
 	}
 
 	/*

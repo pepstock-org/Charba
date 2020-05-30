@@ -74,25 +74,12 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 */
 	@Override
 	Axis getAxisById(int id) {
-		// gets all X axes
-		List<Axis> xAxes = scales.getXAxes();
+		// gets all axes
+		List<Axis> xAxes = scales.getAxes();
 		// checks if consistent
 		if (xAxes != null && !xAxes.isEmpty()) {
 			// scans all axes
 			for (Axis axis : xAxes) {
-				// checks if charba ID is the same of argument
-				if (axis.getCharbaId() == id) {
-					// axis found! returns it
-					return axis;
-				}
-			}
-		}
-		// gets all Y axes
-		List<Axis> yAxes = scales.getYAxes();
-		// checks if consistent
-		if (yAxes != null && !yAxes.isEmpty()) {
-			// scans all axes
-			for (Axis axis : yAxes) {
 				// checks if charba ID is the same of argument
 				if (axis.getCharbaId() == id) {
 					// axis found! returns it

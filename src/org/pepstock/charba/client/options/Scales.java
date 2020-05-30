@@ -15,17 +15,16 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -34,58 +33,6 @@ import org.pepstock.charba.client.enums.Display;
  *
  */
 public final class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
-
-	/**
-	 * Default name of X axis is <b>{@value DEFAULT_X_AXIS_ID}</b>.
-	 */
-	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
-
-	/**
-	 * Default name of Y axis is <b>{@value DEFAULT_Y_AXIS_ID}</b>.
-	 */
-	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
-
-	/**
-	 * Default name of axis when the chart has got only 1 scale (polar, radar) is <b>{@value DEFAULT_SINGLE_AXIS_ID}</b>.
-	 */
-	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
-	// factory to create X scale by native object
-	private final ScaleListFactory xAxisFactory = new ScaleListFactory(Property.X_AXES);
-	// factory to create Y scale by native object
-	private final ScaleListFactory yAxisfactory = new ScaleListFactory(Property.Y_AXES);
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		DISPLAY("display"),
-		X_AXES("xAxes"),
-		Y_AXES("yAxes");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	/**
 	 * Creates a scales object by defaults values. This method is creating the root element of scales.
@@ -109,61 +56,94 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	}
 
 	/**
-	 * If <code>true</code>, shows the axis.
-	 * 
-	 * @param display if <code>true</code>, shows the axes.
-	 */
-	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
-	 * 
-	 * @param display display option controls the visibility of axis
-	 */
-	public void setDisplay(Display display) {
-		// checks if is setting auto
-		if (Display.AUTO.equals(display)) {
-			setValue(Property.DISPLAY, display);
-			// checks if all parents are attached
-			checkAndAddToParent();
-		} else {
-			// otherwise transforms into a boolean
-			setDisplay(Display.TRUE.equals(display));
-		}
-	}
-
-	/**
-	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
-	 * 
-	 * @return display option controls the visibility of axis
-	 */
-	public Display getDisplay() {
-		// checks if is boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.DISPLAY))) {
-			// gets value
-			boolean value = getValue(Property.DISPLAY, true);
-			// returns value
-			return value ? Display.TRUE : Display.FALSE;
-		}
-		// returns value. Must be auto
-		return getValue(Property.DISPLAY, Display.values(), getDefaultValues().getDisplay());
-	}
-
-	/**
-	 * Sets all X axes of chart.
+	 * Sets all axes of chart.
 	 * 
 	 * @param scales array of axes.
 	 */
-	public void setXAxes(Scale... scales) {
-		setArrayValue(Property.X_AXES, ArrayObject.fromOrNull(scales));
-		// checks if all parents are attached
-		checkAndAddToParent();
+	public void setAxes(Scale... scales) {
+		// clears the object from previous scales
+		if (!empty()) {
+			// removes all keys
+			for (Key key : keys()) {
+				// remove key
+				remove(key);
+			}
+		}
+		// checks if the arguments are consistent
+		if (scales != null && scales.length > 0) {
+			// scans passed scales
+			for (Scale scale : scales) {
+				// checks if not null
+				// and not a radial scale
+				if (scale != null && !AxisType.RADIAL_LINEAR.equals(scale.getType())) {
+					// gets id as key
+					Key id = scale.getIdAsKey();
+					// checks if the id is already into object
+					// that means there are 2 or more scales to add
+					// with the same id
+					if (has(id)) {
+						throw new IllegalArgumentException("A scale with id " + id.value() + " has been already added");
+					}
+					// stores scale
+					setValue(id, scale);
+				}
+			}
+			// checks if all parents are attached
+			checkAndAddToParent();
+		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if the scale with the id passed as argument exists.
+	 * 
+	 * @param scaleId scale id to check
+	 * @return <code>true</code> if the scale with the id passed as argument exists
+	 */
+	public boolean hasAxis(String scaleId) {
+		return hasAxis(ScaleIdChecker.key(scaleId));
+	}
+
+	/**
+	 * Returns <code>true</code> if the scale with the id passed as argument exists.
+	 * 
+	 * @param scaleId scale id to check
+	 * @return <code>true</code> if the scale with the id passed as argument exists
+	 */
+	public boolean hasAxis(Key scaleId) {
+		// checks if the scale id is consistent
+		ScaleIdChecker.check(scaleId);
+		// checks if the scale id exist
+		return has(scaleId);
+	}
+
+
+	/**
+	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * 
+	 * @param scaleId scale id to check
+	 * @return the scale with the id passed as argument or <code>null</code> if not exist
+	 */
+	public Scale getAxis(String scaleId) {
+		return getAxis(ScaleIdChecker.key(scaleId));
+	}
+
+	/**
+	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * 
+	 * @param scaleId scale id to check
+	 * @return the scale with the id passed as argument or <code>null</code> if not exist
+	 */
+	public Scale getAxis(Key scaleId) {
+		// checks if the scale id is consistent
+		ScaleIdChecker.check(scaleId);
+		// checks if the scale id exist
+		if (has(scaleId)) {
+			// gets and creates the scale
+			return getAndCreate(scaleId);
+		}
+		// if here, the scale id does not exist
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -171,30 +151,15 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * 
 	 * @return a list of X axes.
 	 */
-	public List<Scale> getXAxes() {
-		ArrayObject array = getArrayValue(Property.X_AXES);
-		return ArrayListHelper.list(array, xAxisFactory);
-	}
-
-	/**
-	 * Sets all Y axes of chart.
-	 * 
-	 * @param scales array of axes.
-	 */
-	public void setYAxes(Scale... scales) {
-		setArrayValue(Property.Y_AXES, ArrayObject.fromOrNull(scales));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns a list of Y axes.
-	 * 
-	 * @return a list of Y axes.
-	 */
-	public List<Scale> getYAxes() {
-		ArrayObject array = getArrayValue(Property.Y_AXES);
-		return ArrayListHelper.list(array, yAxisfactory);
+	public List<Scale> getAxes() {
+		// creates the result
+		List<Scale> result = new LinkedList<>();
+		// gets all keys
+		for (Key key : keys()) {
+			// gets and creates the scale
+			result.add(getAndCreate(key));
+		}
+		return result;
 	}
 
 	/*
@@ -218,35 +183,24 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	}
 
 	/**
-	 * Inner class to create scale item by a native object.
+	 * Gets from the native object the scale object by its id and creates a scale instance.
 	 * 
-	 * @author Andrea "Stock" Stocchero *
+	 * @param scaleId scale id
+	 * @return a scale instance
 	 */
-	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
-
-		private final Key property;
-
-		/**
-		 * Creates the factory with the key to use
-		 * 
-		 * @param property property of native object.
-		 */
-		public ScaleListFactory(Key property) {
-			this.property = property;
+	private Scale getAndCreate(Key scaleId) {
+		// gets cartesian type by scale id
+		CartesianAxisType type = CartesianAxisType.getByScaleId(scaleId);
+		// gets default value based on cartesian type of the object
+		IsDefaultScale defaultValue = CartesianAxisType.X.equals(type) ? getXAxis() : getYAxis();
+		// creates the scale
+		Scale scale =  new Scale(defaultValue, getValue(scaleId));
+		// checks if scale has got the id
+		if (DefaultScaleId.UNKNOWN.value().equals(scale.getId())) {
+			// sets id
+			scale.setId(scaleId);
 		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public Scale create(NativeObject nativeObject) {
-			// gets default value based on key of the object
-			IsDefaultScale defaultValue = Property.X_AXES.equals(property) ? getXAxis() : getYAxis();
-			// creates the scale
-			return new Scale(defaultValue, nativeObject);
-		}
-
+		// returns scale
+		return scale;
 	}
 }

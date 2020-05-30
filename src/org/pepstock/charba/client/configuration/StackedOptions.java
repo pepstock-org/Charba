@@ -45,9 +45,8 @@ public class StackedOptions extends MultiScalesOptions {
 		scales.setOnlyYAxis(onlyYScaled);
 		// creates the axes
 		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart);
-		scales.setXAxes(axis1);
 		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart);
-		scales.setYAxes(axis2);
+		scales.setAxes(axis1, axis2);
 	}
 
 	/**
