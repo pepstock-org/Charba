@@ -78,6 +78,12 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 				if (scale != null && !AxisType.RADIAL_LINEAR.equals(scale.getType())) {
 					// gets id as key
 					Key id = scale.getIdAsKey();
+					// checks if scale id of scale is consistent
+					// used for cartesian, it must not be set to unknown
+					if (DefaultScaleId.UNKNOWN.is(id.value())) {
+						// throw an exception
+						throw new IllegalArgumentException("The scale id is missing or invalid");
+					}
 					// checks if the id is already into object
 					// that means there are 2 or more scales to add
 					// with the same id
@@ -196,7 +202,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		// creates the scale
 		Scale scale =  new Scale(defaultValue, getValue(scaleId));
 		// checks if scale has got the id
-		if (DefaultScaleId.UNKNOWN.value().equals(scale.getId())) {
+		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id
 			scale.setId(scaleId);
 		}

@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -41,7 +42,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private final GridLines grideLines;
 
 	private final CartesianScaleLabel scaleLabel;
-	
+
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
 	 * 
@@ -52,6 +53,12 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	CartesianAxis(IsChart chart, Key id, AxisType type, CartesianAxisType cartesianType) {
 		super(chart, id, type, cartesianType);
+		// checks if scale id of scale is consistent
+		// used for cartesian, it must not be set to unknown
+		if (DefaultScaleId.UNKNOWN.is(id.value())) {
+			// throw an exception
+			throw new IllegalArgumentException("The scale id is invalid. It must not be " + id.value());
+		}
 		// gets the cartesian type
 		// by scale id
 		// stores the axis type
@@ -85,7 +92,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public GridLines getGrideLines() {
 		return grideLines;
 	}
-	
+
 	/**
 	 * Which type of axis this is.<br>
 	 * Possible values are: 'x', 'y'.<br>

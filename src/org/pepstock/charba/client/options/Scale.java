@@ -237,7 +237,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		// if the scale id is UNKNWON (set by Charba)
 		// does not store
 		// this is for radial axis where id must miss
-		if (!DefaultScaleId.UNKNOWN.value().equals(id.value())) {
+		if (!DefaultScaleId.UNKNOWN.is(id.value())) {
 			// stores id
 			setValue(Property.ID, id);
 			// checks if all parents are attached
