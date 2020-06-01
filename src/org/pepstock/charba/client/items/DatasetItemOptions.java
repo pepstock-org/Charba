@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * FIXME This item provides all information about the view where a dataset has been displayed.<br>
+ * This item provides all information about the view where a dataset has been displayed.<br>
  * This object has been created and passed to event handler or callbacks to apply own logic.<br>
  * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
@@ -98,7 +98,7 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 *
-	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.BorderSkipped#FALSE}.
+	 * @return the edge to skip drawing the border for. Default is {@link BorderSkipped#FALSE}.
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set

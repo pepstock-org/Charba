@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME This item provides all information about the view where a dataset has been displayed.<br>
+ * This item provides all information about the dataset controller which has been displayed.<br>
  * This object has been created and passed to event handler or callbacks to apply own logic.<br>
  * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
@@ -34,7 +34,6 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		// all charts
 		INDEX("index"),
 		INNER_RADIUS("innerRadius"),
 		OUTER_RADIUS("outerRadius"),
