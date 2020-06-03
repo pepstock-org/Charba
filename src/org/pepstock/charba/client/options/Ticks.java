@@ -750,6 +750,6 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the number of ticks to examine when deciding how many labels will fit.
 	 */
 	public int getSampleSize() {
-		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getZ());
+		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getSampleSize());
 	}
 }
