@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.ScaleLabelAlign;
 import org.pepstock.charba.client.options.ScaleLabel;
 
 /**
@@ -120,6 +121,16 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	@Override
 	public double getLineHeight() {
 		return scaleLabel.getLineHeight();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getAlign()
+	 */
+	@Override
+	public ScaleLabelAlign getAlign() {
+		return scaleLabel.getAlign();
 	}
 
 }

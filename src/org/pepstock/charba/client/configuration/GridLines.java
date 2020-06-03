@@ -107,6 +107,60 @@ public class GridLines extends AxisContainer {
 	public List<IsColor> getColor() {
 		return getAxis().getScale().getGrideLines().getColor();
 	}
+	
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public void setBorderColor(IsColor color) {
+		getAxis().getScale().getGrideLines().setBorderColor(color);
+	}
+
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public void setBorderColor(String color) {
+		getAxis().getScale().getGrideLines().setBorderColor(color);
+	}
+
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public String getBorderColorAsString() {
+		return getAxis().getScale().getGrideLines().getBorderColorAsString();
+	}
+	
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public IsColor getBorderColor() {
+		return getAxis().getScale().getGrideLines().getBorderColor();
+	}
+	
+	/**
+	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * 
+	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		getAxis().getScale().getGrideLines().setBorderWidth(borderWidth);
+	}
+
+	/**
+	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * 
+	 * @return if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 */
+	public int getBorderWidth() {
+		return getAxis().getScale().getGrideLines().getBorderWidth();
+	}
 
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
@@ -234,6 +288,42 @@ public class GridLines extends AxisContainer {
 	public int getTickMarkLength() {
 		return getAxis().getScale().getGrideLines().getTickMarkLength();
 	}
+	
+	/**
+	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * 
+	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
+	 */
+	public void setOffsetGridLines(boolean offsetGridLines) {
+		getAxis().getScale().getGrideLines().setOffsetGridLines(offsetGridLines);
+	}
+
+	/**
+	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * 
+	 * @return If true, grid lines will be shifted to be between labels.
+	 */
+	public boolean isOffsetGridLines() {
+		return getAxis().getScale().getGrideLines().isOffsetGridLines();
+	}
+
+	/**
+	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public void setZ(int z) {
+		getAxis().getScale().getGrideLines().setZ(z);
+	}
+
+	/**
+	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public int getZ() {
+		return getAxis().getScale().getGrideLines().getZ();
+	}
 
 	/**
 	 * Sets the stroke width of the grid line for the first index (index 0).
@@ -323,42 +413,6 @@ public class GridLines extends AxisContainer {
 	 */
 	public int getZeroLineBorderDashOffset() {
 		return getAxis().getScale().getGrideLines().getZeroLineBorderDashOffset();
-	}
-
-	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
-	 * 
-	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
-	 */
-	public void setOffsetGridLines(boolean offsetGridLines) {
-		getAxis().getScale().getGrideLines().setOffsetGridLines(offsetGridLines);
-	}
-
-	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
-	 * 
-	 * @return If true, grid lines will be shifted to be between labels.
-	 */
-	public boolean isOffsetGridLines() {
-		return getAxis().getScale().getGrideLines().isOffsetGridLines();
-	}
-
-	/**
-	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 * 
-	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 */
-	public void setZ(int z) {
-		getAxis().getScale().getGrideLines().setZ(z);
-	}
-
-	/**
-	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 * 
-	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 */
-	public int getZ() {
-		return getAxis().getScale().getGrideLines().getZ();
 	}
 
 }

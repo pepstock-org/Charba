@@ -233,7 +233,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * The minimum display format to be used for a time unit.
+	 * Sets the minimum display format to be used for a time unit.
 	 * 
 	 * @param unit minimum display format to be used for a time unit.
 	 */
@@ -244,7 +244,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * The minimum display format to be used for a time unit.
+	 * Returns the minimum display format to be used for a time unit.
 	 * 
 	 * @return minimum display format to be used for a time unit.
 	 */

@@ -19,6 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
  * CHART.JS default values for SCALELABEL element.
@@ -61,6 +62,16 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	@Override
 	public String getLabelString() {
 		return DEFAULT_LABEL_STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getAlign()
+	 */
+	@Override
+	public ScaleLabelAlign getAlign() {
+		return ScaleLabelAlign.CENTER;
 	}
 
 	/*

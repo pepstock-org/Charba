@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.ScaleLabelAlign;
+
 /**
  * Interface to define scale label object defaults.
  * 
@@ -42,6 +44,13 @@ public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 	 * @return The text for the scale string.
 	 */
 	String getLabelString();
+	
+	/**
+	 * Returns the alignment of the axis title.
+	 * 
+	 * @return the alignment of the axis title.
+	 */
+	ScaleLabelAlign getAlign();
 
 	/**
 	 * Returns the height of an individual line of text.

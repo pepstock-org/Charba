@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
@@ -35,9 +36,10 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 	 */
 	private enum Property implements Key
 	{
-		PADDING("padding"),
+		ALIGN("align"),
 		DISPLAY("display"),
-		LABEL_STRING("labelString");
+		LABEL_STRING("labelString"),
+		PADDING("padding");
 
 		// name value of property
 		private final String value;
@@ -124,6 +126,26 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 	 */
 	public String getLabelString() {
 		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
+	}
+	
+	/**
+	 * Sets the alignment of the axis title.
+	 * 
+	 * @param align the alignment of the axis title
+	 */
+	public void setAlign(ScaleLabelAlign align) {
+		setValue(Property.ALIGN, align);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the alignment of the axis title.
+	 * 
+	 * @return the alignment of the axis title
+	 */
+	public ScaleLabelAlign getAlign() {
+		return getValue(Property.ALIGN, ScaleLabelAlign.values(), getDefaultValues().getAlign());
 	}
 
 	/*

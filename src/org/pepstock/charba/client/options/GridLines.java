@@ -42,19 +42,21 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 */
 	private enum Property implements Key
 	{
-		DISPLAY("display"),
 		CIRCULAR("circular"),
 		COLOR("color"),
-		LINE_WIDTH("lineWidth"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
+		DISPLAY("display"),
 		DRAW_BORDER("drawBorder"),
 		DRAW_ON_CHART_AREA("drawOnChartArea"),
 		DRAW_TICKS("drawTicks"),
+		LINE_WIDTH("lineWidth"),
+		OFFSET_GRID_LINES("offsetGridLines"),
 		TICK_MARK_LENGTH("tickMarkLength"),
 		ZERO_LINE_WIDTH("zeroLineWidth"),
 		ZERO_LINE_COLOR("zeroLineColor"),
 		ZERO_LINE_BORDER_DASH("zeroLineBorderDash"),
 		ZERO_LINE_BORDER_DASH_OFFSET("zeroLineBorderDashOffset"),
-		OFFSET_GRID_LINES("offsetGridLines"),
 		Z("z");
 
 		// name value of property
@@ -91,6 +93,16 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 */
 	GridLines(Scale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
+	 */
+	@Override
+	int getDefaultBorderDashOffset() {
+		return getDefaultValues().getBorderDashOffset();
 	}
 
 	/**
@@ -133,6 +145,52 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 		return getValue(Property.CIRCULAR, getDefaultValues().isCircular());
 	}
 
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public void setBorderColor(IsColor color) {
+		setBorderColor(checkValue(color));
+	}
+
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public void setBorderColor(String color) {
+		setValue(Property.BORDER_COLOR, color);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public String getBorderColorAsString() {
+		// gets the color sets
+		List<String> colors = getColorsAsString();
+		// checks if list of colors are consistent
+		if (colors != null && !colors.isEmpty()) {
+			return getValue(Property.BORDER_COLOR, colors.get(0));
+		}
+		// if here, the colors are not consistent
+		// then uses the default color as default for border color
+		return getValue(Property.BORDER_COLOR, getDefaultValues().getColorAsString());
+	}
+	
+	/**
+	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * 
+	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+	
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
@@ -199,7 +257,27 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
 	}
+	
+	/**
+	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * 
+	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		setValue(Property.BORDER_WIDTH, borderWidth);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
 
+	/**
+	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * 
+	 * @return if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 */
+	public int getBorderWidth() {
+		return getValue(Property.BORDER_WIDTH, getLineWidth());
+	}
+	
 	/**
 	 * Sets the stroke widths of grid lines.
 	 * 
@@ -214,7 +292,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	/**
 	 * Returns the stroke width of grid lines. The first element if set as array.
 	 * 
-	 * @return lineWidth stroke width of grid lines. The first element if set as array.
+	 * @return stroke width of grid lines. The first element if set as array.
 	 */
 	public int getLineWidth() {
 		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
@@ -224,7 +302,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines.
+	 * @return stroke widths of grid lines.
 	 */
 	public List<Integer> getLinesWidth() {
 		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
@@ -311,6 +389,47 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 */
 	public int getTickMarkLength() {
 		return getValue(Property.TICK_MARK_LENGTH, getDefaultValues().getTickMarkLength());
+	}
+	
+
+	/**
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * 
+	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
+	 */
+	public void setOffsetGridLines(boolean offsetGridLines) {
+		setValue(Property.OFFSET_GRID_LINES, offsetGridLines);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * 
+	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
+	 */
+	public boolean isOffsetGridLines() {
+		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
+	}
+
+	/**
+	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public void setZ(int z) {
+		setValue(Property.Z, z);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public int getZ() {
+		return getValue(Property.Z, getDefaultValues().getZ());
 	}
 
 	/**
@@ -410,56 +529,6 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 */
 	public int getZeroLineBorderDashOffset() {
 		return getValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, getDefaultValues().getZeroLineBorderDashOffset());
-	}
-
-	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
-	 * 
-	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
-	 */
-	public void setOffsetGridLines(boolean offsetGridLines) {
-		setValue(Property.OFFSET_GRID_LINES, offsetGridLines);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
-	 * 
-	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
-	 */
-	public boolean isOffsetGridLines() {
-		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
-	}
-
-	/**
-	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 * 
-	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 */
-	public void setZ(int z) {
-		setValue(Property.Z, z);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 * 
-	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
-	 */
-	public int getZ() {
-		return getValue(Property.Z, getDefaultValues().getZ());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
-	 */
-	@Override
-	int getDefaultBorderDashOffset() {
-		return getDefaultValues().getBorderDashOffset();
 	}
 
 }
