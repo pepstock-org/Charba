@@ -110,6 +110,4 @@ public interface IsLinearTick {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().getTicks().getPrecision();
 	}
-
-
 }
