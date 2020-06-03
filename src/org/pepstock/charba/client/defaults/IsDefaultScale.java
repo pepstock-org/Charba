@@ -77,6 +77,48 @@ public interface IsDefaultScale {
 	 * @return the adapter defaults.
 	 */
 	IsDefaultAdapters getAdapters();
+	
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @return if true, scale will include 0 if it is not already included.
+	 */
+	boolean isBeginAtZero();
+
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	double getMin();
+
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	double getMax();
+
+	/**
+	 * Returns the adjustment used when calculating the maximum data value.
+	 * 
+	 * @return adjustment used when calculating the maximum data value.
+	 */
+	double getSuggestedMax();
+
+	/**
+	 * Returns the adjustment used when calculating the minimum data value.
+	 * 
+	 * @return adjustment used when calculating the minimum data value.
+	 */
+	double getSuggestedMin();
+	
+	/**
+	 * Returns the reverses order of tick labels.
+	 * 
+	 * @return reverses order of tick labels.
+	 */
+	boolean isReverse();
 
 	/**
 	 * Returns if the axis are stacked or not.

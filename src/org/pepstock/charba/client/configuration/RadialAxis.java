@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class RadialAxis extends Axis {
+public class RadialAxis extends Axis implements IsLinearAxis {
 
 	// sub elements of axis
 	private final GridLines grideLines;
@@ -57,6 +57,16 @@ public class RadialAxis extends Axis {
 		angleLines = new RadialAngleLines(this);
 		// create build ticks callback handler
 		this.buildTicksCallbackHandler = new LinearAxisBuildTicksCallbackHandler(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsLinearAxis#getAxisElement()
+	 */
+	@Override
+	public Axis getAxisElement() {
+		return this;
 	}
 
 	/**

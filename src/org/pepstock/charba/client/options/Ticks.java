@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -34,44 +33,42 @@ import org.pepstock.charba.client.enums.TickSource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements IsDefaultTicks {
+public final class Ticks extends AbstractLabel<Scale, IsDefaultTicks> implements IsDefaultTicks {
 
-	private final TickMinor minor;
-
-	private final TickMajor major;
+	private final Major major;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		MINOR("minor"),
-		MAJOR("major"),
+		// commons
 		DISPLAY("display"),
-		REVERSE("reverse"),
+		FONT("font"), //FIXME missing
+		MAJOR("major"),
+		PADDING("padding"),
+		Z("z"),
+		// cartesian
 		AUTO_SKIP("autoSkip"),
 		AUTO_SKIP_PADDING("autoSkipPadding"),
 		LABEL_OFFSET("labelOffset"),
 		MAX_ROTATION("maxRotation"),
 		MIN_ROTATION("minRotation"),
 		MIRROR("mirror"),
-		PADDING("padding"),
-		BEGIN_AT_ZERO("beginAtZero"),
-		MIN("min"),
-		MAX("max"),
+		SAMPLE_SIZE("sampleSize"),
+		// category cartesian
+		LABELS("labels"),
+		// linear cartesian
 		MAX_TICKS_LIMIT("maxTicksLimit"),
+		PRECISION("precision"),
 		STEP_SIZE("stepSize"),
-		SUGGESTED_MAX("suggestedMax"),
-		SUGGESTED_MIN("suggestedMin"),
+		// linear radial
 		BACKDROP_COLOR("backdropColor"),
 		BACKDROP_PADDING_X("backdropPaddingX"),
 		BACKDROP_PADDING_Y("backdropPaddingY"),
 		SHOW_LABEL_BACKDROP("showLabelBackdrop"),
-		LABELS("labels"),
-		SOURCE("source"),
-		PRECISION("precision"),
-		Z("z"),
-		SAMPLE_SIZE("sampleSize");
+		// time ticks
+		SOURCE("source");
 
 		// name value of property
 		private final String value;
@@ -108,17 +105,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	Ticks(Scale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
-		minor = new TickMinor(this, Property.MINOR, getDefaultValues().getMinor(), getValue(Property.MINOR));
-		major = new TickMajor(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
-	}
-
-	/**
-	 * Returns the minor tick element.
-	 * 
-	 * @return the minor
-	 */
-	public TickMinor getMinor() {
-		return minor;
+		major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
 	}
 
 	/**
@@ -126,28 +113,19 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * 
 	 * @return the major
 	 */
-	public TickMajor getMajor() {
+	public Major getMajor() {
 		return major;
 	}
-
-	/**
-	 * If <code>true</code>, scale will include 0 if it is not already included.
+	
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
+	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
 	 */
-	public void setBeginAtZero(boolean beginAtZero) {
-		setValue(Property.BEGIN_AT_ZERO, beginAtZero);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If <code>true</code>, scale will include 0 if it is not already included.
-	 * 
-	 * @return if <code>true</code>, scale will include 0 if it is not already included.
-	 */
-	public boolean isBeginAtZero() {
-		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
+	@Override
+	double getDefaultLineHeight() {
+		// FIXME to remove
+		return getDefaultValues().getLineHeight();
 	}
 
 	/**
@@ -168,26 +146,6 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/**
-	 * Sets the reverses order of tick labels.
-	 * 
-	 * @param reverse reverses order of tick labels.
-	 */
-	public void setReverse(boolean reverse) {
-		setValue(Property.REVERSE, reverse);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the reverses order of tick labels.
-	 * 
-	 * @return if <code>true</code> reverses order of tick labels.
-	 */
-	public boolean isReverse() {
-		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
 
 	/**
@@ -337,125 +295,6 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
-	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public void setMin(double min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public double getMin() {
-		return getValueForMultipleKeyTypes(Property.MIN, getDefaultValues().getMin());
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @param min If defined, this will override the data minimum.
-	 */
-	public void setMin(Date min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @return If defined, this will override the data minimum.
-	 */
-	public Date getMinAsDate() {
-		return getValue(Property.MIN, (Date) null);
-	}
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public void setMax(double max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public double getMax() {
-		return getValueForMultipleKeyTypes(Property.MAX, getDefaultValues().getMax());
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @param max if defined, this will override the data maximum.
-	 */
-	public void setMax(Date max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @return if defined, this will override the data maximum.
-	 */
-	public Date getMaxAsDate() {
-		return getValue(Property.MAX, (Date) null);
-	}
-
-	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public void setMin(String min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public String getMinAsString() {
-		return getValueForMultipleKeyTypes(Property.MIN, String.valueOf(getDefaultValues().getMin()));
-	}
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public void setMax(String max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public String getMaxAsString() {
-		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
-	}
 
 	/**
 	 * Sets the maximum number of ticks and gridlines to show.
@@ -495,46 +334,6 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	public double getStepSize() {
 		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
-	}
-
-	/**
-	 * Sets the adjustment used when calculating the maximum data value.
-	 * 
-	 * @param suggestedMax adjustment used when calculating the maximum data value.
-	 */
-	public void setSuggestedMax(double suggestedMax) {
-		setValue(Property.SUGGESTED_MAX, suggestedMax);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the adjustment used when calculating the maximum data value.
-	 * 
-	 * @return adjustment used when calculating the maximum data value.
-	 */
-	public double getSuggestedMax() {
-		return getValue(Property.SUGGESTED_MAX, getDefaultValues().getSuggestedMax());
-	}
-
-	/**
-	 * Sets the adjustment used when calculating the minimum data value.
-	 * 
-	 * @param suggestedMin adjustment used when calculating the minimum data value.
-	 */
-	public void setSuggestedMin(double suggestedMin) {
-		setValue(Property.SUGGESTED_MIN, suggestedMin);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the adjustment used when calculating the minimum data value.
-	 * 
-	 * @return adjustment used when calculating the minimum data value.
-	 */
-	public double getSuggestedMin() {
-		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
 	}
 
 	/**
@@ -750,6 +549,6 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the number of ticks to examine when deciding how many labels will fit.
 	 */
 	public int getSampleSize() {
-		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getZ());
+		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getSampleSize());
 	}
 }

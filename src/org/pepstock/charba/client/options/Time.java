@@ -38,8 +38,6 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	{
 		DISPLAY_FORMATS("displayFormats"),
 		ISO_WEEKDAY("isoWeekday"),
-		MAX("max"),
-		MIN("min"),
 		PARSER("parser"),
 		ROUND("round"),
 		TOOLTIP_FORMAT("tooltipFormat"),

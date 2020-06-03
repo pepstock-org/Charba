@@ -104,7 +104,7 @@ public final class ExtendedScale extends Scale {
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
 	 */
-	public void setCallback(AbstractTick<?, ?> tick, Key property, CallbackProxy.Proxy proxy) {
+	public void setCallback(Ticks tick, Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(tick, property, proxy);
 	}
 

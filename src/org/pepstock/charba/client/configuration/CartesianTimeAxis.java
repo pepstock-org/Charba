@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TimeAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
@@ -174,6 +176,42 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 */
 	public ScaleBounds getBounds() {
 		return getScale().getBounds();
+	}
+	
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @param max If defined, this will override the data maximum.
+	 */
+	public void setMax(Date max) {
+		getScale().setMax(max);
+	}
+
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @return If defined, this will override the data maximum.
+	 */
+	public Date getMax() {
+		return getScale().getMaxAsDate();
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @param min If defined, this will override the data minimum.
+	 */
+	public void setMin(Date min) {
+		getScale().setMin(min);
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @return If defined, this will override the data minimum.
+	 */
+	public Date getMin() {
+		return getScale().getMinAsDate();
 	}
 
 	/**

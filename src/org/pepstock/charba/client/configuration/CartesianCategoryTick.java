@@ -69,42 +69,6 @@ public class CartesianCategoryTick extends CartesianTick {
 	}
 
 	/**
-	 * Sets the minimum item to display.
-	 * 
-	 * @param min The minimum item to display
-	 */
-	public void setMin(String min) {
-		getConfiguration().setMin(min);
-	}
-
-	/**
-	 * Returns the minimum item to display
-	 * 
-	 * @return The minimum item to display
-	 */
-	public String getMin() {
-		return getConfiguration().getMinAsString();
-	}
-
-	/**
-	 * Sets the maximum item to display.
-	 * 
-	 * @param max the maximum item to display.
-	 */
-	public void setMax(String max) {
-		getConfiguration().setMax(max);
-	}
-
-	/**
-	 * Returns the maximum item to display.
-	 * 
-	 * @return the maximum item to display.
-	 */
-	public String getMax() {
-		return getConfiguration().getMaxAsString();
-	}
-
-	/**
 	 * Returns the user callback instance.
 	 * 
 	 * @return the callback

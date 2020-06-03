@@ -22,42 +22,29 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTicks extends IsDefaultBaseTick {
-
-	/**
-	 * Returns the minor tick defaults.
-	 * 
-	 * @return the minor tick defaults.
-	 */
-	IsDefaultMinorTick getMinor();
+public interface IsDefaultTicks extends IsDefaultFontItem {
 
 	/**
 	 * Returns the major tick defaults.
 	 * 
 	 * @return the major tick defaults.
 	 */
-	IsDefaultMajorTick getMajor();
+	IsDefaultMajor getMajor();
 
 	/**
-	 * If true, scale will include 0 if it is not already included.
+	 * FIXME to be removed
+	 * Returns the height of an individual line of text.
 	 * 
-	 * @return if true, scale will include 0 if it is not already included.
+	 * @return the height of an individual line of text.
 	 */
-	boolean isBeginAtZero();
-
+	double getLineHeight();
+	
 	/**
 	 * If true, show tick marks
 	 * 
 	 * @return if true, show tick marks.
 	 */
 	boolean isDisplay();
-
-	/**
-	 * Returns the reverses order of tick labels.
-	 * 
-	 * @return reverses order of tick labels.
-	 */
-	boolean isReverse();
 
 	/**
 	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
@@ -112,20 +99,6 @@ public interface IsDefaultTicks extends IsDefaultBaseTick {
 	int getPadding();
 
 	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	double getMin();
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	double getMax();
-
-	/**
 	 * Returns the maximum number of ticks and gridlines to show.
 	 * 
 	 * @return maximum number of ticks and gridlines to show.
@@ -138,20 +111,6 @@ public interface IsDefaultTicks extends IsDefaultBaseTick {
 	 * @return user defined fixed step size for the scale.
 	 */
 	double getStepSize();
-
-	/**
-	 * Returns the adjustment used when calculating the maximum data value.
-	 * 
-	 * @return adjustment used when calculating the maximum data value.
-	 */
-	double getSuggestedMax();
-
-	/**
-	 * Returns the adjustment used when calculating the minimum data value.
-	 * 
-	 * @return adjustment used when calculating the minimum data value.
-	 */
-	double getSuggestedMin();
 
 	/**
 	 * Returns the color of label backdrops.

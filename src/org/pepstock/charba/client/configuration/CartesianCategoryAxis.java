@@ -110,6 +110,43 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryTick getTicks() {
 		return ticks;
 	}
+	
+
+	/**
+	 * Sets the minimum item to display.
+	 * 
+	 * @param min The minimum item to display
+	 */
+	public void setMin(String min) {
+		getScale().setMin(min);
+	}
+
+	/**
+	 * Returns the minimum item to display
+	 * 
+	 * @return The minimum item to display
+	 */
+	public String getMin() {
+		return getScale().getMinAsString();
+	}
+
+	/**
+	 * Sets the maximum item to display.
+	 * 
+	 * @param max the maximum item to display.
+	 */
+	public void setMax(String max) {
+		getScale().setMax(max);
+	}
+
+	/**
+	 * Returns the maximum item to display.
+	 * 
+	 * @return the maximum item to display.
+	 */
+	public String getMax() {
+		return getScale().getMaxAsString();
+	}
 
 	/**
 	 * Returns the user callback that runs before/after ticks are created.

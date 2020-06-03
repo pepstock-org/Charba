@@ -144,28 +144,6 @@ abstract class CartesianTick extends Tick {
 	}
 
 	/**
-	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
-	 * in the vertical (Y) direction.
-	 * 
-	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
-	 *            applies in the vertical (Y) direction.
-	 */
-	public void setPadding(int padding) {
-		getConfiguration().setPadding(padding);
-	}
-
-	/**
-	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
-	 * applies in the vertical (Y) direction.
-	 * 
-	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
-	 *         in the vertical (Y) direction.
-	 */
-	public int getPadding() {
-		return getConfiguration().getPadding();
-	}
-
-	/**
 	 * Sets the number of ticks to examine when deciding how many labels will fit.<br>
 	 * Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.
 	 * 

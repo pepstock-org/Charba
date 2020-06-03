@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.TickMajor;
-import org.pepstock.charba.client.options.TickMinor;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.options.Ticks;
 
 /**
@@ -25,11 +26,43 @@ import org.pepstock.charba.client.options.Ticks;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class Tick extends BaseTick<Ticks> {
+abstract class Tick extends AxisContainer {
+	
+	// the axis instance, owner of this tick
+	private final Ticks configuration;
 
-	private final BaseTickMinor minor;
+	private final Major major;
+	
+	/**
+	 * Name of properties of native object.
+	 */
+	enum Property implements Key
+	{
+		CALLBACK("callback");
 
-	private final BaseTickMajor major;
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
 
 	/**
 	 * Builds the object storing the axis which this tick belongs to.
@@ -37,19 +70,20 @@ abstract class Tick extends BaseTick<Ticks> {
 	 * @param axis axis which this tick belongs to.
 	 */
 	Tick(Axis axis) {
-		super(axis, axis.getScale().getTicks());
+		super(axis);
+		// stores the options element
+		this.configuration = axis.getScale().getTicks();
 		// creates sub element, min and max
-		minor = new BaseTickMinor(axis, axis.getScale().getTicks().getMinor());
-		major = new BaseTickMajor(axis, axis.getScale().getTicks().getMajor());
+		major = new Major(axis, axis.getScale().getTicks());
 	}
-
+	
 	/**
-	 * Returns minor tick element.
+	 * Returns the options element for tick.
 	 * 
-	 * @return the minor
+	 * @return the configuration
 	 */
-	public BaseTick<TickMinor> getMinor() {
-		return minor;
+	final Ticks getConfiguration() {
+		return configuration;
 	}
 
 	/**
@@ -57,7 +91,7 @@ abstract class Tick extends BaseTick<Ticks> {
 	 * 
 	 * @return the major
 	 */
-	public BaseTick<TickMajor> getMajor() {
+	public Major getMajor() {
 		return major;
 	}
 
@@ -80,24 +114,6 @@ abstract class Tick extends BaseTick<Ticks> {
 	}
 
 	/**
-	 * Sets the reverses order of tick labels.
-	 * 
-	 * @param reverse reverses order of tick labels.
-	 */
-	public void setReverse(boolean reverse) {
-		getConfiguration().setReverse(reverse);
-	}
-
-	/**
-	 * Returns the reverses order of tick labels.
-	 * 
-	 * @return reverses order of tick labels.
-	 */
-	public boolean isReverse() {
-		return getConfiguration().isReverse();
-	}
-
-	/**
 	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
 	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
@@ -113,6 +129,154 @@ abstract class Tick extends BaseTick<Ticks> {
 	 */
 	public int getZ() {
 		return getConfiguration().getZ();
+	}
+	
+	/**
+	 * Sets the font size for tick.
+	 * 
+	 * @param fontSize the font size for tick.
+	 */
+	public void setFontSize(int fontSize) {
+		configuration.setFontSize(fontSize);
+	}
+
+	/**
+	 * Returns the font size for tick.
+	 * 
+	 * @return the font size for tick.
+	 */
+	public int getFontSize() {
+		return configuration.getFontSize();
+	}
+
+	/**
+	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 */
+	public void setFontStyle(FontStyle fontStyle) {
+		configuration.setFontStyle(fontStyle);
+	}
+
+	/**
+	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 */
+	public FontStyle getFontStyle() {
+		return configuration.getFontStyle();
+	}
+
+	/**
+	 * Sets the font color for tick
+	 * 
+	 * @param fontColor Font color for tick
+	 */
+	public void setFontColor(IsColor fontColor) {
+		configuration.setFontColor(fontColor);
+	}
+
+	/**
+	 * Sets the font color for tick
+	 * 
+	 * @param fontColor Font color for tick
+	 */
+	public void setFontColor(String fontColor) {
+		configuration.setFontColor(fontColor);
+	}
+
+	/**
+	 * Returns the font color for tick
+	 * 
+	 * @return Font color for tick.
+	 */
+	public String getFontColorAsString() {
+		return configuration.getFontColorAsString();
+	}
+
+	/**
+	 * Returns the font color for tick
+	 * 
+	 * @return Font color for tick.
+	 */
+	public IsColor getFontColor() {
+		return configuration.getFontColor();
+	}
+
+	/**
+	 * Sets the font family for the tick, follows CSS font-family options.
+	 * 
+	 * @param fontFamily Font family for the tick, follows CSS font-family options.
+	 */
+	public void setFontFamily(String fontFamily) {
+		configuration.setFontFamily(fontFamily);
+	}
+
+	/**
+	 * Returns the font family for the tick, follows CSS font-family options.
+	 * 
+	 * @return Font family for the tick, follows CSS font-family options.
+	 */
+	public String getFontFamily() {
+		return configuration.getFontFamily();
+	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		getConfiguration().setLineHeight(lineHeight);
+	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		getConfiguration().setLineHeight(lineHeight);
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		return getConfiguration().getLineHeight();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		return getConfiguration().getLineHeightAsString();
+	}
+	
+	/**
+	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
+	 * in the vertical (Y) direction.
+	 * 
+	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
+	 *            applies in the vertical (Y) direction.
+	 */
+	public void setPadding(int padding) {
+		getConfiguration().setPadding(padding);
+	}
+
+	/**
+	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
+	 * applies in the vertical (Y) direction.
+	 * 
+	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
+	 *         in the vertical (Y) direction.
+	 */
+	public int getPadding() {
+		return getConfiguration().getPadding();
 	}
 
 }

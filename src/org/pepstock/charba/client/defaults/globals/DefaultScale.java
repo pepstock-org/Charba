@@ -43,6 +43,18 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final boolean DEFAULT_STACKED = false;
 
+	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
+
+	private static final boolean DEFAULT_REVERSE = false;
+
+	private static final double DEFAULT_MIN = Double.MIN_VALUE;
+
+	private static final double DEFAULT_MAX = Double.MAX_VALUE;
+
+	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
+
+	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
+
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
 	private final DefaultGridLines gridLines = new DefaultGridLines();
@@ -215,6 +227,66 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public ScaleBounds getBounds() {
 		return ScaleBounds.DATA;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isBeginAtZero()
+	 */
+	@Override
+	public boolean isBeginAtZero() {
+		return DEFAULT_BEGIN_AT_ZERO;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMin()
+	 */
+	@Override
+	public double getMin() {
+		return DEFAULT_MIN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMax()
+	 */
+	@Override
+	public double getMax() {
+		return DEFAULT_MAX;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getSuggestedMax()
+	 */
+	@Override
+	public double getSuggestedMax() {
+		return DEFAULT_SUGGESTED_MAX;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getSuggestedMin()
+	 */
+	@Override
+	public double getSuggestedMin() {
+		return DEFAULT_SUGGESTED_MIN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isReverse()
+	 */
+	@Override
+	public boolean isReverse() {
+		return DEFAULT_REVERSE;
 	}
 
 }

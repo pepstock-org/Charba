@@ -27,12 +27,12 @@ import org.pepstock.charba.client.options.ScaleIdChecker;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
+public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> implements IsLinearAxis {
 
 	private final CartesianLinearTick ticks;
 
 	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -52,7 +52,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearAxis(IsChart chart, String id) {
 		this(chart, ScaleIdChecker.key(id));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -62,7 +62,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearAxis(IsChart chart, Key id) {
 		this(chart, id, null);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -72,7 +72,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearAxis(IsChart chart, CartesianAxisType cartesianType) {
 		// uses cartesian type as axis id
 		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
 		this(chart, ScaleIdChecker.key(id), cartesianType);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -99,6 +99,16 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 		this.ticks = new CartesianLinearTick(this);
 		// create build ticks callback handler
 		this.buildTicksCallbackHandler = new LinearAxisBuildTicksCallbackHandler(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsLinearAxis#getAxisElement()
+	 */
+	@Override
+	public final Axis getAxisElement() {
+		return this;
 	}
 
 	/*

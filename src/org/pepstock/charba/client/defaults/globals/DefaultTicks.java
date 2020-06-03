@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
-import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -26,14 +26,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
+public class DefaultTicks extends  AbstractDefaultFontItem implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
-
-	private static final boolean DEFAULT_REVERSE = false;
-
+ 
 	private static final boolean DEFAULT_AUTO_SKIP = true;
 
 	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
@@ -48,17 +44,9 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 
 	private static final int DEFAULT_PADDING = 0;
 
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
 	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
 
 	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
 
 	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
 
@@ -72,18 +60,16 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 
 	private static final int DEFAULT_Z = 0;
 
-	private final DefaultMinorTickItem minor = new DefaultMinorTickItem();
-
-	private final DefaultMajorTickItem major = new DefaultMajorTickItem();
+	private final DefaultMajor major = new DefaultMajor();
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseTick#getLineHeight()
 	 */
 	@Override
-	public IsDefaultMinorTick getMinor() {
-		return minor;
+	public double getLineHeight() {
+		return Defaults.get().getGlobal().getLineHeight();
 	}
 
 	/*
@@ -92,18 +78,8 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
-	public IsDefaultMajorTick getMajor() {
+	public IsDefaultMajor getMajor() {
 		return major;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isBeginAtZero()
-	 */
-	@Override
-	public boolean isBeginAtZero() {
-		return DEFAULT_BEGIN_AT_ZERO;
 	}
 
 	/*
@@ -114,16 +90,6 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	@Override
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isReverse()
-	 */
-	@Override
-	public boolean isReverse() {
-		return DEFAULT_REVERSE;
 	}
 
 	/*
@@ -199,26 +165,6 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMin()
-	 */
-	@Override
-	public double getMin() {
-		return DEFAULT_MIN;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMax()
-	 */
-	@Override
-	public double getMax() {
-		return DEFAULT_MAX;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMaxTicksLimit()
 	 */
 	@Override
@@ -234,26 +180,6 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	@Override
 	public double getStepSize() {
 		return DEFAULT_STEP_SIZE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMax()
-	 */
-	@Override
-	public double getSuggestedMax() {
-		return DEFAULT_SUGGESTED_MAX;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMin()
-	 */
-	@Override
-	public double getSuggestedMin() {
-		return DEFAULT_SUGGESTED_MIN;
 	}
 
 	/*

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -64,23 +66,34 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	private enum Property implements Key
 	{
-		ADAPTERS("adapters"),
-		ANGLE_LINES("angleLines"),
-		AXIS("axis"),
-		BOUNDS("bounds"),
+		// common scale
 		DISPLAY("display"),
-		DISTRIBUTION("distribution"),
-		GRID_LINES("gridLines"),
-		ID("id"),
-		OFFSET("offset"),
-		POINT_LABELS("pointLabels"),
-		POSITION("position"),
-		SCALE_LABEL("scaleLabel"),
-		STACKED("stacked"),
+		WEIGHT("weight"),
 		TICKS("ticks"),
-		TIME("time"),
+		// cartesian
 		TYPE("type"),
-		WEIGHT("weight");
+		POSITION("position"),
+		AXIS("axis"),
+		OFFSET("offset"),
+		ID("id"),
+		GRID_LINES("gridLines"),
+		SCALE_LABEL("scaleLabel"),
+		// linear cartesian
+		BEGIN_AT_ZERO("beginAtZero"),
+		MIN("min"),
+		MAX("max"),
+		SUGGESTED_MAX("suggestedMax"),
+		SUGGESTED_MIN("suggestedMin"),
+		// time cartesian
+		ADAPTERS("adapters"),
+		DISTRIBUTION("distribution"),
+		BOUNDS("bounds"),
+		TIME("time"),
+		// radial linear
+		ANGLE_LINES("angleLines"),
+		POINT_LABELS("pointLabels"),
+		REVERSE("reverse"),
+		STACKED("stacked");
 
 		// name value of property
 		private final String value;
@@ -272,6 +285,206 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		// if here, id is not set
 		// then returns unknown
 		return DefaultScaleId.UNKNOWN;
+	}
+	
+	/**
+	 * If <code>true</code>, scale will include 0 if it is not already included.
+	 * 
+	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
+	 */
+	public void setBeginAtZero(boolean beginAtZero) {
+		setValue(Property.BEGIN_AT_ZERO, beginAtZero);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If <code>true</code>, scale will include 0 if it is not already included.
+	 * 
+	 * @return if <code>true</code>, scale will include 0 if it is not already included.
+	 */
+	public boolean isBeginAtZero() {
+		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
+	}
+ 
+	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	public void setMin(double min) {
+		setValue(Property.MIN, min);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	public double getMin() {
+		return getValueForMultipleKeyTypes(Property.MIN, getDefaultValues().getMin());
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @param min If defined, this will override the data minimum.
+	 */
+	public void setMin(Date min) {
+		setValue(Property.MIN, min);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @return If defined, this will override the data minimum.
+	 */
+	public Date getMinAsDate() {
+		return getValue(Property.MIN, (Date) null);
+	}
+
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @param max user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	public void setMax(double max) {
+		setValue(Property.MAX, max);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	public double getMax() {
+		return getValueForMultipleKeyTypes(Property.MAX, getDefaultValues().getMax());
+	}
+
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @param max if defined, this will override the data maximum.
+	 */
+	public void setMax(Date max) {
+		setValue(Property.MAX, max);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @return if defined, this will override the data maximum.
+	 */
+	public Date getMaxAsDate() {
+		return getValue(Property.MAX, (Date) null);
+	}
+
+	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	public void setMin(String min) {
+		setValue(Property.MIN, min);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	public String getMinAsString() {
+		return getValueForMultipleKeyTypes(Property.MIN, String.valueOf(getDefaultValues().getMin()));
+	}
+
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @param max user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	public void setMax(String max) {
+		setValue(Property.MAX, max);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	public String getMaxAsString() {
+		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
+	}
+
+	/**
+	 * Sets the adjustment used when calculating the maximum data value.
+	 * 
+	 * @param suggestedMax adjustment used when calculating the maximum data value.
+	 */
+	public void setSuggestedMax(double suggestedMax) {
+		setValue(Property.SUGGESTED_MAX, suggestedMax);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the adjustment used when calculating the maximum data value.
+	 * 
+	 * @return adjustment used when calculating the maximum data value.
+	 */
+	public double getSuggestedMax() {
+		return getValue(Property.SUGGESTED_MAX, getDefaultValues().getSuggestedMax());
+	}
+
+	/**
+	 * Sets the adjustment used when calculating the minimum data value.
+	 * 
+	 * @param suggestedMin adjustment used when calculating the minimum data value.
+	 */
+	public void setSuggestedMin(double suggestedMin) {
+		setValue(Property.SUGGESTED_MIN, suggestedMin);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the adjustment used when calculating the minimum data value.
+	 * 
+	 * @return adjustment used when calculating the minimum data value.
+	 */
+	public double getSuggestedMin() {
+		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
+	}
+
+	/**
+	 * Sets the reverses order of tick labels.
+	 * 
+	 * @param reverse reverses order of tick labels.
+	 */
+	public void setReverse(boolean reverse) {
+		setValue(Property.REVERSE, reverse);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the reverses order of tick labels.
+	 * 
+	 * @return if <code>true</code> reverses order of tick labels.
+	 */
+	public boolean isReverse() {
+		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
 
 	/**

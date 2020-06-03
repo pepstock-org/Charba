@@ -15,14 +15,14 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
+import org.pepstock.charba.client.defaults.IsDefaultMajor;
 
 /**
  * CHART.JS default values for MAJOR tick element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultMajorTickItem extends DefaultTickItem implements IsDefaultMajorTick {
+public final class DefaultMajor implements IsDefaultMajor {
 
 	private static final boolean DEFAULT_ENABLED = false;
 

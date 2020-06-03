@@ -41,42 +41,6 @@ public class CartesianLogarithmicTick extends CartesianTick {
 	}
 
 	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public void setMin(double min) {
-		getConfiguration().setMin(min);
-	}
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public double getMin() {
-		return getConfiguration().getMin();
-	}
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public void setMax(double max) {
-		getConfiguration().setMax(max);
-	}
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public double getMax() {
-		return getConfiguration().getMax();
-	}
-
-	/**
 	 * Returns the user callback instance.
 	 * 
 	 * @return the callback

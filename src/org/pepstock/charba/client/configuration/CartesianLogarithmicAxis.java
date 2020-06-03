@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.ScaleIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
+public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> implements IsNumericAxis {
 
 	private final CartesianLogarithmicTick ticks;
 
@@ -43,7 +43,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 		// uses Y as axis id
 		this(chart, CartesianAxisType.Y.getDefaultScaleId());
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -53,7 +53,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	public CartesianLogarithmicAxis(IsChart chart, String id) {
 		this(chart, ScaleIdChecker.key(id));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -63,7 +63,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	public CartesianLogarithmicAxis(IsChart chart, Key id) {
 		this(chart, id, null);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -73,9 +73,9 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	public CartesianLogarithmicAxis(IsChart chart, CartesianAxisType cartesianType) {
 		// uses cartesian type as axis id
 		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -110,6 +110,16 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	@Override
 	public CartesianLogarithmicTick getTicks() {
 		return ticks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsNumericAxis#getAxisElement()
+	 */
+	@Override
+	public Axis getAxisElement() {
+		return this;
 	}
 
 	/**

@@ -231,4 +231,64 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.getBounds();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isBeginAtZero()
+	 */
+	@Override
+	public boolean isBeginAtZero() {
+		return scale.isBeginAtZero();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMin()
+	 */
+	@Override
+	public double getMin() {
+		return scale.getMin();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMax()
+	 */
+	@Override
+	public double getMax() {
+		return scale.getMax();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getSuggestedMax()
+	 */
+	@Override
+	public double getSuggestedMax() {
+		return scale.getSuggestedMax();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getSuggestedMin()
+	 */
+	@Override
+	public double getSuggestedMin() {
+		return scale.getSuggestedMin();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isReverse()
+	 */
+	@Override
+	public boolean isReverse() {
+		return scale.isReverse();
+	}
+
 }

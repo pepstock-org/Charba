@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
-import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
+import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TickSource;
@@ -83,31 +82,11 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
-	 */
-	@Override
-	public IsDefaultMinorTick getMinor() {
-		return ticks.getMinor();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
-	public IsDefaultMajorTick getMajor() {
+	public IsDefaultMajor getMajor() {
 		return ticks.getMajor();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isBeginAtZero()
-	 */
-	@Override
-	public boolean isBeginAtZero() {
-		return ticks.isBeginAtZero();
 	}
 
 	/*
@@ -118,16 +97,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public boolean isDisplay() {
 		return ticks.isDisplay();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isReverse()
-	 */
-	@Override
-	public boolean isReverse() {
-		return ticks.isReverse();
 	}
 
 	/*
@@ -203,26 +172,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMin()
-	 */
-	@Override
-	public double getMin() {
-		return ticks.getMin();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMax()
-	 */
-	@Override
-	public double getMax() {
-		return ticks.getMax();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMaxTicksLimit()
 	 */
 	@Override
@@ -238,26 +187,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public double getStepSize() {
 		return ticks.getStepSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMax()
-	 */
-	@Override
-	public double getSuggestedMax() {
-		return ticks.getSuggestedMax();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMin()
-	 */
-	@Override
-	public double getSuggestedMin() {
-		return ticks.getSuggestedMin();
 	}
 
 	/*

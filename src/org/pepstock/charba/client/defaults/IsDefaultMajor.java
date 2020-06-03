@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultMajorTick extends IsDefaultBaseTick {
+public interface IsDefaultMajor {
 
 	/**
 	 * If <code>true</code>, major tick options are used to show major ticks.

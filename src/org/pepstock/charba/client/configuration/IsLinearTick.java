@@ -18,8 +18,8 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.Defaults;
 
 /**
- * Common methods for linear scale is use to chart numerical data.<br>
- * Can be used for cartesian and radial axes.
+ * Common methods for linear scale tick is use to chart numerical data.<br>
+ * Can be used for linear cartesian and radial ticks.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -32,84 +32,6 @@ public interface IsLinearTick {
 	 * @return the axis
 	 */
 	Axis getAxis();
-
-	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @param beginAtZero if true, scale will include 0 if it is not already included.
-	 */
-	default void setBeginAtZero(boolean beginAtZero) {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			getAxis().getScale().getTicks().setBeginAtZero(beginAtZero);
-		}
-	}
-
-	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @return if true, scale will include 0 if it is not already included.
-	 */
-	default boolean isBeginAtZero() {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			return getAxis().getScale().getTicks().isBeginAtZero();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().isBeginAtZero();
-	}
-
-	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	default void setMin(double min) {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			getAxis().getScale().getTicks().setMin(min);
-		}
-	}
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	default double getMin() {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			return getAxis().getScale().getTicks().getMin();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getMin();
-	}
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	default void setMax(double max) {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			getAxis().getScale().getTicks().setMax(max);
-		}
-	}
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	default double getMax() {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			return getAxis().getScale().getTicks().getMax();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getMax();
-	}
 
 	/**
 	 * Sets the maximum number of ticks and grid lines to show.
@@ -134,7 +56,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getMaxTicksLimit();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getMaxTicksLimit();
+		return Defaults.get().getScale().getTicks().getMaxTicksLimit();
 	}
 
 	/**
@@ -160,59 +82,34 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getStepSize();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getStepSize();
+		return Defaults.get().getScale().getTicks().getStepSize();
 	}
 
 	/**
-	 * Sets the adjustment used when calculating the maximum data value.
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
-	 * @param suggestedMax adjustment used when calculating the maximum data value.
+	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
-	default void setSuggestedMax(double suggestedMax) {
+	default void setPrecision(int precision) {
 		// checks if axis is consistent
 		if (getAxis() != null) {
-			getAxis().getScale().getTicks().setSuggestedMax(suggestedMax);
+			getAxis().getScale().getTicks().setPrecision(precision);
 		}
 	}
 
 	/**
-	 * Returns the adjustment used when calculating the maximum data value.
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
-	 * @return adjustment used when calculating the maximum data value.
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
-	default double getSuggestedMax() {
+	default int getPrecision() {
 		// checks if axis is consistent
 		if (getAxis() != null) {
-			return getAxis().getScale().getTicks().getSuggestedMax();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getSuggestedMax();
-	}
-
-	/**
-	 * Sets the adjustment used when calculating the minimum data value.
-	 * 
-	 * @param suggestedMin adjustment used when calculating the minimum data value.
-	 */
-	default void setSuggestedMin(double suggestedMin) {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			getAxis().getScale().getTicks().setSuggestedMin(suggestedMin);
-		}
-	}
-
-	/**
-	 * Returns the adjustment used when calculating the minimum data value.
-	 * 
-	 * @return adjustment used when calculating the minimum data value.
-	 */
-	default double getSuggestedMin() {
-		// checks if axis is consistent
-		if (getAxis() != null) {
-			return getAxis().getScale().getTicks().getSuggestedMin();
+			return getAxis().getScale().getTicks().getPrecision();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale(getAxis().getType()).getTicks().getSuggestedMin();
+		return Defaults.get().getScale().getTicks().getPrecision();
 	}
+
 
 }
