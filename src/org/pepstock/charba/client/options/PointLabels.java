@@ -15,12 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.List;
-
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -32,13 +26,14 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels {
+public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		FONT("font"),
 		DISPLAY("display");
 
 		// name value of property
@@ -65,6 +60,9 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 
 	}
 
+	// instance of font
+	private final Font font;
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -75,6 +73,16 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	 */
 	PointLabels(Scale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -95,83 +103,6 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
-	 */
-	@Override
-	double getDefaultLineHeight() {
-		return getDefaultValues().getLineHeight();
-	}
-
-	/**
-	 * Sets an array of font colors.
-	 * 
-	 * @param fontColors an array of font colors
-	 */
-	public void setFontColor(IsColor... fontColors) {
-		// stores value
-		setValueOrArray(Fonter.Property.FONT_COLOR, fontColors);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets an array of font colors.
-	 * 
-	 * @param fontColors an array of font colors
-	 */
-	public void setFontColor(String... fontColors) {
-		// stores value
-		setValueOrArray(Fonter.Property.FONT_COLOR, fontColors);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
-	 */
-	@Override
-	public String getFontColorAsString() {
-		// gets list of colors
-		List<String> colors = getFontColorsAsString();
-		// if list is empty, retruns default otherwise the first color
-		return colors.isEmpty() ? getDefaultValues().getFontColorAsString() : colors.get(0);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#getFontColor()
-	 */
-	@Override
-	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
-	}
-
-	/**
-	 * Returns the font colors as list.
-	 * 
-	 * @return Font color as list
-	 */
-	public List<String> getFontColorsAsString() {
-		// returns list of colors
-		ArrayString array = getValueOrArray(Fonter.Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Returns the font colors as list.
-	 * 
-	 * @return Font color as list
-	 */
-	public List<IsColor> getFontColors() {
-		return ColorBuilder.parse(getFontColorsAsString());
 	}
 
 }

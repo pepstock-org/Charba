@@ -185,7 +185,7 @@ final class BaseMeterController extends AbstractController {
 		// gets font style
 		final FontStyle style = options.getFontStyle() == null ? FontStyle.NORMAL : options.getFontStyle();
 		// gets font family
-		final String fontFamily = options.getFontFamily() == null ? Defaults.get().getGlobal().getFontFamily() : options.getFontFamily();
+		final String fontFamily = options.getFontFamily() == null ? Defaults.get().getGlobal().getFont().getFamily() : options.getFontFamily();
 		// gets font color
 		final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR.toRGBA() : options.getDisplayFontColor().toRGBA();
 		// gets the label

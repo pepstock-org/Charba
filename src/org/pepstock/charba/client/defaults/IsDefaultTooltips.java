@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -67,21 +66,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * 
 	 * @return the title font.
 	 */
-	String getTitleFontFamily();
-
-	/**
-	 * Returns the title font size.
-	 * 
-	 * @return Title font size.
-	 */
-	int getTitleFontSize();
-
-	/**
-	 * Returns the title font style.
-	 * 
-	 * @return title font style.
-	 */
-	FontStyle getTitleFontStyle();
+	IsDefaultFont getTitleFont();
 
 	/**
 	 * Returns the title alignment.
@@ -89,13 +74,6 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * @return title alignment.
 	 */
 	TextAlign getTitleAlign();
-
-	/**
-	 * Returns the title font color.
-	 * 
-	 * @return title font color.
-	 */
-	String getTitleFontColorAsString();
 
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
@@ -116,21 +94,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * 
 	 * @return body line font.
 	 */
-	String getBodyFontFamily();
-
-	/**
-	 * Returns the body font size.
-	 * 
-	 * @return body font size.
-	 */
-	int getBodyFontSize();
-
-	/**
-	 * Returns the body font style.
-	 * 
-	 * @return body font style.
-	 */
-	FontStyle getBodyFontStyle();
+	IsDefaultFont getBodyFont();
 
 	/**
 	 * Returns the body alignment.
@@ -138,13 +102,6 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * @return body alignment.
 	 */
 	TextAlign getBodyAlign();
-
-	/**
-	 * Returns the body font color.
-	 * 
-	 * @return body font color.
-	 */
-	String getBodyFontColorAsString();
 
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
@@ -158,21 +115,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * 
 	 * @return footer font.
 	 */
-	String getFooterFontFamily();
-
-	/**
-	 * Returns the footer font size.
-	 * 
-	 * @return footer font size.
-	 */
-	int getFooterFontSize();
-
-	/**
-	 * Returns the footer font style.
-	 * 
-	 * @return footer font style.
-	 */
-	FontStyle getFooterFontStyle();
+	IsDefaultFont getFooterFont();
 
 	/**
 	 * Returns the footer alignment.
@@ -180,13 +123,6 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * @return footer alignment.
 	 */
 	TextAlign getFooterAlign();
-
-	/**
-	 * Returns the footer font color.
-	 * 
-	 * @return footer font color.
-	 */
-	String getFooterFontColorAsString();
 
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.

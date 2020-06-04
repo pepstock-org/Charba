@@ -20,7 +20,14 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPointLabels extends IsDefaultFontItem {
+public interface IsDefaultPointLabels {
+	
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns if the title is shown.
@@ -28,12 +35,5 @@ public interface IsDefaultPointLabels extends IsDefaultFontItem {
 	 * @return if the title is shown.
 	 */
 	boolean isDisplay();
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	double getLineHeight();
 
 }

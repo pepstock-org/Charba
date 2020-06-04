@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels.enums;
+package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 

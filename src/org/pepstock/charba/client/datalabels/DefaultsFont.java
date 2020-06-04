@@ -18,8 +18,8 @@ package org.pepstock.charba.client.datalabels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Weight;
 
 /**
  * {@link DataLabelsPlugin#ID} plugin default options for FONT element.<br>
@@ -45,7 +45,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font size.
 	 */
 	int getFontSize() {
-		return getValue(Font.Property.SIZE, Defaults.get().getGlobal().getFontSize());
+		return getValue(Font.Property.SIZE, Defaults.get().getGlobal().getFont().getSize());
 	}
 
 	/**
@@ -54,7 +54,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	FontStyle getFontStyle() {
-		return getValue(Font.Property.STYLE, FontStyle.values(), Defaults.get().getGlobal().getFontStyle());
+		return getValue(Font.Property.STYLE, FontStyle.values(), Defaults.get().getGlobal().getFont().getStyle());
 	}
 
 	/**
@@ -63,7 +63,7 @@ final class DefaultsFont extends NativeObjectContainer {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	String getFontFamily() {
-		return getValue(Font.Property.FAMILY, Defaults.get().getGlobal().getFontFamily());
+		return getValue(Font.Property.FAMILY, Defaults.get().getGlobal().getFont().getFamily());
 	}
 
 	/**

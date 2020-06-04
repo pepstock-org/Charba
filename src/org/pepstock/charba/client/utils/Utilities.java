@@ -138,7 +138,7 @@ public final class Utilities {
 			fontWeight = FontStyle.NORMAL;
 		}
 		// checks if font family is consistent
-		final String fontFamily = family == null ? Defaults.get().getGlobal().getFontFamily() : family;
+		final String fontFamily = family == null ? Defaults.get().getGlobal().getFont().getFamily() : family;
 		// by regex changes the value of format
 		return result.replaceAll(REGEXP_FONT_STYLE_PATTERN, fontStyle.value()).replaceAll(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value()).replaceAll(REGEXP_FONT_SIZE_PATTERN, String.valueOf(size)).replaceAll(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
 	}

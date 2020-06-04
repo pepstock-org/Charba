@@ -26,7 +26,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Event;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -52,12 +51,15 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Tooltips tooltips;
 
 	private final Plugins plugins;
+	
+	private final Font font;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		FONT("font"),
 		HOVER("hover"),
 		ELEMENTS("elements"),
 		LAYOUT("layout"),
@@ -71,11 +73,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		ASPECT_RATIO("aspectRatio"),
 		EVENTS("events"),
 		COLOR("color"),
-		FONT_COLOR("fontColor"),
-		FONT_FAMILY("fontFamily"),
-		FONT_SIZE("fontSize"),
-		FONT_STYLE("fontStyle"),
-		LINE_HEIGHT("lineHeight"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
 		SHOW_LINES("showLines"),
 		SPAN_GAPS("spanGaps"),
@@ -138,8 +135,19 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
 		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
 
+	/**
+	 * FIXME check if we can reduce visibility ONLY to global options
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
+	}
+	
 	/**
 	 * Returns the animation element.
 	 * 
@@ -388,118 +396,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
-	}
-
-	/**
-	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @param defaultFontColor font color to use into chart.
-	 */
-	public void setFontColor(IsColor defaultFontColor) {
-		setFontColor(checkValue(defaultFontColor));
-	}
-
-	/**
-	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @param defaultFontColor font color to use into chart.
-	 */
-	public void setFontColor(String defaultFontColor) {
-		setValue(Property.FONT_COLOR, defaultFontColor);
-	}
-
-	/**
-	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return font color to use into chart.
-	 */
-	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
-	}
-
-	/**
-	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return font color to use into chart.
-	 */
-	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
-	}
-
-	/**
-	 * Sets the font size to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @param fontSize Font size into chart.
-	 */
-	public void setFontSize(int fontSize) {
-		setValue(Property.FONT_SIZE, fontSize);
-	}
-
-	/**
-	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return font size into chart.
-	 */
-	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, getDefaultValues().getFontSize());
-	}
-
-	/**
-	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
-	 * initial, inherit).
-	 * 
-	 * @param fontStyle font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
-	 *            initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.FONT_STYLE, fontStyle.value());
-	}
-
-	/**
-	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
-	 * initial, inherit).
-	 * 
-	 * @return the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique,
-	 *         initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.values(), getDefaultValues().getFontStyle());
-	}
-
-	/**
-	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		setValue(Property.FONT_FAMILY, fontFamily);
-	}
-
-	/**
-	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 * 
-	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, getDefaultValues().getFontFamily());
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return getValue(Property.LINE_HEIGHT, getDefaultValues().getLineHeight());
 	}
 
 	/**

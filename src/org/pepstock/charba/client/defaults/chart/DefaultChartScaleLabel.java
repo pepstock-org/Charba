@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
 import org.pepstock.charba.client.options.ScaleLabel;
 
@@ -46,41 +46,11 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getFont()
 	 */
 	@Override
-	public String getFontColorAsString() {
-		return scaleLabel.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return scaleLabel.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return scaleLabel.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return scaleLabel.getFontFamily();
+	public IsDefaultFont getFont() {
+		return scaleLabel.getFont();
 	}
 
 	/*
@@ -111,16 +81,6 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	@Override
 	public String getLabelString() {
 		return scaleLabel.getLabelString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return scaleLabel.getLineHeight();
 	}
 
 	/*

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -73,6 +73,78 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 	private static final boolean DEFAULT_RTL = false;
 
+	private final DefaultFont titleFont = new DefaultFont() {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_TITLE_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.BOLD;
+		}
+
+	};
+
+	private final DefaultFont bodyFont = new DefaultFont() {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_BODY_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.NORMAL;
+		}
+
+	};
+
+	private final DefaultFont footerFont = new DefaultFont() {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_FOOTER_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.BOLD;
+		}
+
+	};
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -126,31 +198,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getTitleFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFont()
 	 */
 	@Override
-	public String getTitleFontFamily() {
-		return Defaults.get().getGlobal().getFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getTitleFontSize()
-	 */
-	@Override
-	public int getTitleFontSize() {
-		return Defaults.get().getGlobal().getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getTitleFontStyle()
-	 */
-	@Override
-	public FontStyle getTitleFontStyle() {
-		return FontStyle.BOLD;
+	public IsDefaultFont getTitleFont() {
+		return titleFont;
 	}
 
 	/*
@@ -161,16 +213,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public TextAlign getTitleAlign() {
 		return TextAlign.LEFT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getTitleFontColorAsString()
-	 */
-	@Override
-	public String getTitleFontColorAsString() {
-		return DEFAULT_TITLE_FONT_COLOR;
 	}
 
 	/*
@@ -196,31 +238,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getBodyFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFont()
 	 */
 	@Override
-	public String getBodyFontFamily() {
-		return Defaults.get().getGlobal().getFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getBodyFontSize()
-	 */
-	@Override
-	public int getBodyFontSize() {
-		return Defaults.get().getGlobal().getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getBodyFontStyle()
-	 */
-	@Override
-	public FontStyle getBodyFontStyle() {
-		return FontStyle.NORMAL;
+	public IsDefaultFont getBodyFont() {
+		return bodyFont;
 	}
 
 	/*
@@ -236,16 +258,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getBodyFontColorAsString()
-	 */
-	@Override
-	public String getBodyFontColorAsString() {
-		return DEFAULT_BODY_FONT_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getBodySpacing()
 	 */
 	@Override
@@ -256,31 +268,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getFooterFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFont()
 	 */
 	@Override
-	public String getFooterFontFamily() {
-		return Defaults.get().getGlobal().getFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getFooterFontSize()
-	 */
-	@Override
-	public int getFooterFontSize() {
-		return Defaults.get().getGlobal().getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getFooterFontStyle()
-	 */
-	@Override
-	public FontStyle getFooterFontStyle() {
-		return FontStyle.BOLD;
+	public IsDefaultFont getFooterFont() {
+		return footerFont;
 	}
 
 	/*
@@ -291,16 +283,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public TextAlign getFooterAlign() {
 		return TextAlign.LEFT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getFooterFontColorAsString()
-	 */
-	@Override
-	public String getFooterFontColorAsString() {
-		return DEFAULT_FOOTER_FONT_COLOR;
 	}
 
 	/*

@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
-import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Weight;
 
 /**
  * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>

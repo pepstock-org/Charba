@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
@@ -26,13 +26,25 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultScaleLabel extends AbstractDefaultFontItem implements IsDefaultScaleLabel {
+public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
 	private static final String DEFAULT_LABEL_STRING = Constants.EMPTY_STRING;
 
 	private final DefaultScaleLabelPadding padding = new DefaultScaleLabelPadding();
+
+	private final DefaultFont font = new DefaultFont();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getFont()
+	 */
+	@Override
+	public IsDefaultFont getFont() {
+		return font;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -72,16 +84,6 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	@Override
 	public ScaleLabelAlign getAlign() {
 		return ScaleLabelAlign.CENTER;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return Defaults.get().getGlobal().getLineHeight();
 	}
 
 }

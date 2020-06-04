@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.FontStyle;
-
 /**
  * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
  * 
@@ -79,6 +77,13 @@ public interface IsDefaultOptions {
 	 * @return the plugins defaults.
 	 */
 	IsDefaultPlugins getPlugins();
+	
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns the resizing of the chart canvas when its container does.
@@ -117,12 +122,12 @@ public interface IsDefaultOptions {
 	 */
 	double getDevicePixelRatio();
 
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	double getLineHeight();
+//	/**
+//	 * Returns the height of an individual line of text.
+//	 * 
+//	 * @return the height of an individual line of text.
+//	 */
+//	double getLineHeight();
 
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
@@ -131,33 +136,33 @@ public interface IsDefaultOptions {
 	 */
 	String getColorAsString();
 
-	/**
-	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return font color to use into chart.
-	 */
-	String getFontColorAsString();
+//	/**
+//	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
+//	 * 
+//	 * @return font color to use into chart.
+//	 */
+//	String getFontColorAsString();
 
-	/**
-	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return Font size into chart.
-	 */
-	int getFontSize();
-
-	/**
-	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration.
-	 * 
-	 * @return Font style into chart.
-	 */
-	FontStyle getFontStyle();
-
-	/**
-	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 * 
-	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	 */
-	String getFontFamily();
+//	/**
+//	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
+//	 * 
+//	 * @return Font size into chart.
+//	 */
+//	int getFontSize();
+//
+//	/**
+//	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration.
+//	 * 
+//	 * @return Font style into chart.
+//	 */
+//	FontStyle getFontStyle();
+//
+//	/**
+//	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
+//	 * 
+//	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
+//	 */
+//	String getFontFamily();
 
 	/**
 	 * If false, the lines between points are not drawn.

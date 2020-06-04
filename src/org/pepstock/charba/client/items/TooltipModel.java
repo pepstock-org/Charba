@@ -277,7 +277,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip body section.
 	 */
 	public String getBodyFontColorAsString() {
-		return getValue(Property.BODY_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getBodyFontColorAsString());
+		return getValue(Property.BODY_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getBodyFont().getColorAsString());
 	}
 
 	/**
@@ -295,7 +295,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip body section.
 	 */
 	public String getBodyFontFamily() {
-		return getValue(Property.BODY_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getBodyFontFamily());
+		return getValue(Property.BODY_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getBodyFont().getFamily());
 	}
 
 	/**
@@ -304,7 +304,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip body section.
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.BODY_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
+		return getValue(Property.BODY_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getBodyFont().getStyle());
 	}
 
 	/**
@@ -322,7 +322,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip body section.
 	 */
 	public int getBodyFontSize() {
-		return getValue(Property.BODY_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getBodyFontSize());
+		return getValue(Property.BODY_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getBodyFont().getSize());
 	}
 
 	/**
@@ -352,7 +352,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip title section.
 	 */
 	public String getTitleFontColorAsString() {
-		return getValue(Property.TITLE_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getTitleFontColorAsString());
+		return getValue(Property.TITLE_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getTitleFont().getColorAsString());
 	}
 
 	/**
@@ -370,7 +370,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip title section.
 	 */
 	public String getTitleFontFamily() {
-		return getValue(Property.TITLE_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getTitleFontFamily());
+		return getValue(Property.TITLE_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getTitleFont().getFamily());
 	}
 
 	/**
@@ -379,7 +379,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip title section.
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.TITLE_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
+		return getValue(Property.TITLE_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getTitleFont().getStyle());
 	}
 
 	/**
@@ -388,7 +388,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip title section.
 	 */
 	public int getTitleFontSize() {
-		return getValue(Property.TITLE_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getTitleFontSize());
+		return getValue(Property.TITLE_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getTitleFont().getSize());
 	}
 
 	/**
@@ -436,7 +436,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip footer section.
 	 */
 	public String getFooterFontColorAsString() {
-		return getValue(Property.FOOTER_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getFooterFontColorAsString());
+		return getValue(Property.FOOTER_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getFooterFont().getColorAsString());
 	}
 
 	/**
@@ -454,7 +454,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip footer section.
 	 */
 	public String getFooterFontFamily() {
-		return getValue(Property.FOOTER_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getFooterFontFamily());
+		return getValue(Property.FOOTER_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getFooterFont().getFamily());
 	}
 
 	/**
@@ -463,7 +463,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip footer section.
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
+		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getTooltips().getFooterFont().getStyle());
 	}
 
 	/**
@@ -472,7 +472,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip footer section.
 	 */
 	public int getFooterFontSize() {
-		return getValue(Property.FOOTER_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getFooterFontSize());
+		return getValue(Property.FOOTER_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getFooterFont().getSize());
 	}
 
 	/**

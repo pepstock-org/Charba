@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Base class for all options, which will wraps a native object and manages the relations about parent and children elements.<br>
@@ -29,13 +28,11 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObjectContainer {
+abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends AbstractNode {
 
 	private final D defaultValues;
 
 	private final P parent;
-
-	private final Key childKey;
 
 	/**
 	 * Creates the object with default provider.<br>
@@ -79,24 +76,14 @@ abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObj
 	 * @param nativeObject native object to map java script properties
 	 */
 	AbstractModel(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
-		super(nativeObject);
+		super(parent, childKey, nativeObject);
 		// checks if default value is consistent
 		if (defaultValues == null) {
 			// if not consistent, exception
 			throw new IllegalArgumentException("Default values argument is null");
 		}
-		this.childKey = childKey;
 		this.parent = parent;
 		this.defaultValues = defaultValues;
-	}
-
-	/**
-	 * Returns the property name to use to add this element to its parent.
-	 * 
-	 * @return the childKey or <code>null</code> if is a root element.
-	 */
-	protected final Key getChildKey() {
-		return childKey;
 	}
 
 	/**
@@ -156,20 +143,4 @@ abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObj
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();
 	}
-
-	/**
-	 * Called recursively when a property has been set in the item.<br>
-	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
-	 */
-	protected final void checkAndAddToParent() {
-		// checks if we are at root element
-		// or if the parent hasn't got the key
-		if (parent != null && !parent.has(childKey)) {
-			// sets the java script of this element into parent
-			parent.setValue(childKey, getNativeObject());
-			// recursively call to parent of parent
-			parent.checkAndAddToParent();
-		}
-	}
-
 }

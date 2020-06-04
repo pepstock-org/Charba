@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -94,31 +94,11 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFont()
 	 */
 	@Override
-	public String getTitleFontFamily() {
-		return tooltips.getTitleFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontSize()
-	 */
-	@Override
-	public int getTitleFontSize() {
-		return tooltips.getTitleFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontStyle()
-	 */
-	@Override
-	public FontStyle getTitleFontStyle() {
-		return tooltips.getTitleFontStyle();
+	public IsDefaultFont getTitleFont() {
+		return tooltips.getTitleFont();
 	}
 
 	/*
@@ -129,16 +109,6 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public TextAlign getTitleAlign() {
 		return tooltips.getTitleAlign();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontColorAsString()
-	 */
-	@Override
-	public String getTitleFontColorAsString() {
-		return tooltips.getTitleFontColorAsString();
 	}
 
 	/*
@@ -164,31 +134,11 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFont()
 	 */
 	@Override
-	public String getBodyFontFamily() {
-		return tooltips.getBodyFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontSize()
-	 */
-	@Override
-	public int getBodyFontSize() {
-		return tooltips.getBodyFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontStyle()
-	 */
-	@Override
-	public FontStyle getBodyFontStyle() {
-		return tooltips.getBodyFontStyle();
+	public IsDefaultFont getBodyFont() {
+		return tooltips.getBodyFont();
 	}
 
 	/*
@@ -204,16 +154,6 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontColorAsString()
-	 */
-	@Override
-	public String getBodyFontColorAsString() {
-		return tooltips.getBodyFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodySpacing()
 	 */
 	@Override
@@ -224,31 +164,11 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFont()
 	 */
 	@Override
-	public String getFooterFontFamily() {
-		return tooltips.getFooterFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontSize()
-	 */
-	@Override
-	public int getFooterFontSize() {
-		return tooltips.getFooterFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontStyle()
-	 */
-	@Override
-	public FontStyle getFooterFontStyle() {
-		return tooltips.getFooterFontStyle();
+	public IsDefaultFont getFooterFont() {
+		return tooltips.getFooterFont();
 	}
 
 	/*
@@ -259,16 +179,6 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public TextAlign getFooterAlign() {
 		return tooltips.getFooterAlign();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontColorAsString()
-	 */
-	@Override
-	public String getFooterFontColorAsString() {
-		return tooltips.getFooterFontColorAsString();
 	}
 
 	/*

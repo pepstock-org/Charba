@@ -73,7 +73,7 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 		}
 		// if here, chart is not consistent
 		// then return the default font color
-		return Defaults.get().getGlobal().getFontColor();
+		return Defaults.get().getGlobal().getFont().getColor();
 	}
 
 	/*

@@ -27,15 +27,19 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
+public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
 
 	private final ScaleLabelPadding padding;
+	
+	// instance of font
+	private final Font font;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		FONT("font"),
 		ALIGN("align"),
 		DISPLAY("display"),
 		LABEL_STRING("labelString"),
@@ -77,6 +81,16 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -146,16 +160,6 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 	 */
 	public ScaleLabelAlign getAlign() {
 		return getValue(Property.ALIGN, ScaleLabelAlign.values(), getDefaultValues().getAlign());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
-	 */
-	@Override
-	double getDefaultLineHeight() {
-		return getDefaultValues().getLineHeight();
 	}
 
 }

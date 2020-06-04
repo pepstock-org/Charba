@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
@@ -26,10 +26,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultTicks extends  AbstractDefaultFontItem implements IsDefaultTicks {
+public class DefaultTicks implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_DISPLAY = true;
- 
+
 	private static final boolean DEFAULT_AUTO_SKIP = true;
 
 	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
@@ -62,14 +62,16 @@ public class DefaultTicks extends  AbstractDefaultFontItem implements IsDefaultT
 
 	private final DefaultMajor major = new DefaultMajor();
 
+	private final DefaultFont font = new DefaultFont();
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseTick#getLineHeight()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getFont()
 	 */
 	@Override
-	public double getLineHeight() {
-		return Defaults.get().getGlobal().getLineHeight();
+	public IsDefaultFont getFont() {
+		return font;
 	}
 
 	/*

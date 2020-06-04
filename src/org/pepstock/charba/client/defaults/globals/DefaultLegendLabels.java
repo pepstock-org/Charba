@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 
 /**
@@ -22,13 +23,25 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultLegendLabels extends AbstractDefaultFontItem implements IsDefaultLegendLabels {
+public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private static final int DEFAULT_PADDING = 10;
 
 	private static final int DEFAULT_BOX_WIDTH = 40;
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
+
+	private final DefaultFont font = new DefaultFont();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getFont()
+	 */
+	@Override
+	public IsDefaultFont getFont() {
+		return font;
+	}
 
 	/*
 	 * (non-Javadoc)

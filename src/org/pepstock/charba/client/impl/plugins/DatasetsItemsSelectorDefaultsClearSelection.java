@@ -66,7 +66,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font size
 	 */
 	int getFontSize() {
-		return getValue(ClearSelection.Property.FONT_SIZE, Defaults.get().getGlobal().getFontSize());
+		return getValue(ClearSelection.Property.FONT_SIZE, Defaults.get().getGlobal().getFont().getSize());
 	}
 
 	/**
@@ -75,7 +75,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font family
 	 */
 	String getFontFamily() {
-		return getValue(ClearSelection.Property.FONT_FAMILY, Defaults.get().getGlobal().getFontFamily());
+		return getValue(ClearSelection.Property.FONT_FAMILY, Defaults.get().getGlobal().getFont().getFamily());
 	}
 
 	/**
@@ -84,7 +84,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font style
 	 */
 	FontStyle getFontStyle() {
-		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getFontStyle());
+		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.values(), Defaults.get().getGlobal().getFont().getStyle());
 	}
 
 	/**

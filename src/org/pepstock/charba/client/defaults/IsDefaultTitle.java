@@ -22,7 +22,14 @@ import org.pepstock.charba.client.enums.Position;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultFontItem {
+public interface IsDefaultTitle {
+	
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns if the title is shown.
@@ -51,12 +58,5 @@ public interface IsDefaultTitle extends IsDefaultFontItem {
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	boolean isFullWidth();
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	double getLineHeight();
 
 }

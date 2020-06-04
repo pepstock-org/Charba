@@ -166,7 +166,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the color as string.
 	 */
 	String getColorAsString() {
-		return getValue(DataLabelsOptions.Property.COLOR, Defaults.get().getGlobal().getFontColorAsString());
+		return getValue(DataLabelsOptions.Property.COLOR, Defaults.get().getGlobal().getFont().getColorAsString());
 	}
 
 	/**

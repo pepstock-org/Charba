@@ -20,7 +20,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -38,6 +37,13 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	private final TooltipsCallbacks callbacks;
 
 	private final TextDirectioner textDirectioner;
+	
+	// instance of font for title
+	private final Font titleFont;
+	// instance of font for body
+	private final Font bodyFont;
+	// instance of font for footer
+	private final Font footerFont;
 
 	/**
 	 * Name of properties of native object.
@@ -48,23 +54,14 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		ENABLED("enabled"),
 		POSITION("position"),
 		BACKGROUND_COLOR("backgroundColor"),
-		TITLE_FONT_FAMILY("titleFontFamily"),
-		TITLE_FONT_SIZE("titleFontSize"),
-		TITLE_FONT_STYLE("titleFontStyle"),
-		TITLE_FONT_COLOR("titleFontColor"),
+		TITLE_FONT("titleFont"),
 		TITLE_SPACING("titleSpacing"),
 		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
 		TITLE_ALIGN("titleAlign"),
-		BODY_FONT_FAMILY("bodyFontFamily"),
-		BODY_FONT_SIZE("bodyFontSize"),
-		BODY_FONT_STYLE("bodyFontStyle"),
-		BODY_FONT_COLOR("bodyFontColor"),
+		BODY_FONT("bodyFont"),
 		BODY_SPACING("bodySpacing"),
 		BODY_ALIGN("bodyAlign"),
-		FOOTER_FONT_FAMILY("footerFontFamily"),
-		FOOTER_FONT_SIZE("footerFontSize"),
-		FOOTER_FONT_STYLE("footerFontStyle"),
-		FOOTER_FONT_COLOR("footerFontColor"),
+		FOOTER_FONT("footerFont"),
 		FOOTER_SPACING("footerSpacing"),
 		FOOTER_MARGIN_TOP("footerMarginTop"),
 		FOOTER_ALIGN("footerAlign"),
@@ -114,8 +111,12 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, defaultValues, getValue(Property.CALLBACKS));
+		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
+		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
+		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text directioner
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
+		
 	}
 
 	/*
@@ -255,65 +256,14 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-
+	
 	/**
-	 * Sets the title font.
+	 * Returns the title font element.
 	 * 
-	 * @param titleFontFamily title font.
+	 * @return the font
 	 */
-	public void setTitleFontFamily(String titleFontFamily) {
-		setValue(Property.TITLE_FONT_FAMILY, titleFontFamily);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the title font.
-	 * 
-	 * @return the title font.
-	 */
-	public String getTitleFontFamily() {
-		return getValue(Property.TITLE_FONT_FAMILY, getDefaultValues().getTitleFontFamily());
-	}
-
-	/**
-	 * Sets the title font size.
-	 * 
-	 * @param titleFontSize title font size.
-	 */
-	public void setTitleFontSize(int titleFontSize) {
-		setValue(Property.TITLE_FONT_SIZE, titleFontSize);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the title font size.
-	 * 
-	 * @return title font size.
-	 */
-	public int getTitleFontSize() {
-		return getValue(Property.TITLE_FONT_SIZE, getDefaultValues().getTitleFontSize());
-	}
-
-	/**
-	 * Sets the title font style.
-	 * 
-	 * @param titleFontStyle title font style.
-	 */
-	public void setTitleFontStyle(FontStyle titleFontStyle) {
-		setValue(Property.TITLE_FONT_STYLE, titleFontStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the title font style.
-	 * 
-	 * @return title font style.
-	 */
-	public FontStyle getTitleFontStyle() {
-		return getValue(Property.TITLE_FONT_STYLE, FontStyle.values(), getDefaultValues().getTitleFontStyle());
+	public Font getTitleFont() {
+		return titleFont;
 	}
 
 	/**
@@ -334,44 +284,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	public TextAlign getTitleAlign() {
 		return getValue(Property.TITLE_ALIGN, TextAlign.values(), getDefaultValues().getTitleAlign());
-	}
-
-	/**
-	 * Sets the title font color.
-	 * 
-	 * @param titleFontColor title font color.
-	 */
-	public void setTitleFontColor(IsColor titleFontColor) {
-		setTitleFontColor(checkValue(titleFontColor));
-	}
-
-	/**
-	 * Sets the title font color.
-	 * 
-	 * @param titleFontColor title font color.
-	 */
-	public void setTitleFontColor(String titleFontColor) {
-		setValue(Property.TITLE_FONT_COLOR, titleFontColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the title font color.
-	 * 
-	 * @return title font color.
-	 */
-	public String getTitleFontColorAsString() {
-		return getValue(Property.TITLE_FONT_COLOR, getDefaultValues().getTitleFontColorAsString());
-	}
-
-	/**
-	 * Returns the title font color.
-	 * 
-	 * @return title font color.
-	 */
-	public IsColor getTitleFontColor() {
-		return ColorBuilder.parse(getTitleFontColorAsString());
 	}
 
 	/**
@@ -415,63 +327,12 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	}
 
 	/**
-	 * Sets the body line font.
+	 * Returns the body font element.
 	 * 
-	 * @param bodyFontFamily body line font.
+	 * @return the font
 	 */
-	public void setBodyFontFamily(String bodyFontFamily) {
-		setValue(Property.BODY_FONT_FAMILY, bodyFontFamily);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the body line font.
-	 * 
-	 * @return body line font.
-	 */
-	public String getBodyFontFamily() {
-		return getValue(Property.BODY_FONT_FAMILY, getDefaultValues().getBodyFontFamily());
-	}
-
-	/**
-	 * Sets the body font size.
-	 * 
-	 * @param bodyFontSize body font size.
-	 */
-	public void setBodyFontSize(int bodyFontSize) {
-		setValue(Property.BODY_FONT_SIZE, bodyFontSize);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the body font size.
-	 * 
-	 * @return body font size.
-	 */
-	public int getBodyFontSize() {
-		return getValue(Property.BODY_FONT_SIZE, getDefaultValues().getBodyFontSize());
-	}
-
-	/**
-	 * Sets the body font style.
-	 * 
-	 * @param bodyFontStyle body font style.
-	 */
-	public void setBodyFontStyle(FontStyle bodyFontStyle) {
-		setValue(Property.BODY_FONT_STYLE, bodyFontStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the body font style.
-	 * 
-	 * @return body font style.
-	 */
-	public FontStyle getBodyFontStyle() {
-		return getValue(Property.BODY_FONT_STYLE, FontStyle.values(), getDefaultValues().getBodyFontStyle());
+	public Font getBodyFont() {
+		return bodyFont;
 	}
 
 	/**
@@ -495,44 +356,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	}
 
 	/**
-	 * Sets the body font color.
-	 * 
-	 * @param bodyFontColor body font color.
-	 */
-	public void setBodyFontColor(IsColor bodyFontColor) {
-		setBodyFontColor(checkValue(bodyFontColor));
-	}
-
-	/**
-	 * Sets the body font color.
-	 * 
-	 * @param bodyFontColor body font color.
-	 */
-	public void setBodyFontColor(String bodyFontColor) {
-		setValue(Property.BODY_FONT_COLOR, bodyFontColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the body font color.
-	 * 
-	 * @return body font color.
-	 */
-	public String getBodyFontColorAsString() {
-		return getValue(Property.BODY_FONT_COLOR, getDefaultValues().getBodyFontColorAsString());
-	}
-
-	/**
-	 * Returns the body font color.
-	 * 
-	 * @return body font color.
-	 */
-	public IsColor getBodyFontColor() {
-		return ColorBuilder.parse(getBodyFontColorAsString());
-	}
-
-	/**
 	 * Sets the spacing to add to top and bottom of each tooltip item.
 	 * 
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
@@ -551,65 +374,14 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public int getBodySpacing() {
 		return getValue(Property.BODY_SPACING, getDefaultValues().getBodySpacing());
 	}
-
+	
 	/**
-	 * Sets the footer font.
+	 * Returns the footer font element.
 	 * 
-	 * @param footerFontFamily footer font.
+	 * @return the font
 	 */
-	public void setFooterFontFamily(String footerFontFamily) {
-		setValue(Property.FOOTER_FONT_FAMILY, footerFontFamily);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the footer font.
-	 * 
-	 * @return footer font.
-	 */
-	public String getFooterFontFamily() {
-		return getValue(Property.FOOTER_FONT_FAMILY, getDefaultValues().getFooterFontFamily());
-	}
-
-	/**
-	 * Sets the footer font size.
-	 * 
-	 * @param footerFontSize footer font size.
-	 */
-	public void setFooterFontSize(int footerFontSize) {
-		setValue(Property.FOOTER_FONT_SIZE, footerFontSize);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the footer font size.
-	 * 
-	 * @return footer font size.
-	 */
-	public int getFooterFontSize() {
-		return getValue(Property.FOOTER_FONT_SIZE, getDefaultValues().getFooterFontSize());
-	}
-
-	/**
-	 * Sets the footer font style.
-	 * 
-	 * @param footerFontStyle the footer font style.
-	 */
-	public void setFooterFontStyle(FontStyle footerFontStyle) {
-		setValue(Property.FOOTER_FONT_STYLE, footerFontStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the footer font style.
-	 * 
-	 * @return footer font style.
-	 */
-	public FontStyle getFooterFontStyle() {
-		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.values(), getDefaultValues().getFooterFontStyle());
+	public Font getFooterFont() {
+		return footerFont;
 	}
 
 	/**
@@ -630,44 +402,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	public TextAlign getFooterAlign() {
 		return getValue(Property.FOOTER_ALIGN, TextAlign.values(), getDefaultValues().getFooterAlign());
-	}
-
-	/**
-	 * Sets the footer font color.
-	 * 
-	 * @param footerFontColor footer font color.
-	 */
-	public void setFooterFontColor(IsColor footerFontColor) {
-		setFooterFontColor(checkValue(footerFontColor));
-	}
-
-	/**
-	 * Sets the footer font color.
-	 * 
-	 * @param footerFontColor footer font color.
-	 */
-	public void setFooterFontColor(String footerFontColor) {
-		setValue(Property.FOOTER_FONT_COLOR, footerFontColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the footer font color.
-	 * 
-	 * @return footer font color.
-	 */
-	public String getFooterFontColorAsString() {
-		return getValue(Property.FOOTER_FONT_COLOR, getDefaultValues().getFooterFontColorAsString());
-	}
-
-	/**
-	 * Returns the footer font color.
-	 * 
-	 * @return footer font color.
-	 */
-	public IsColor getFooterFontColor() {
-		return ColorBuilder.parse(getFooterFontColorAsString());
 	}
 
 	/**

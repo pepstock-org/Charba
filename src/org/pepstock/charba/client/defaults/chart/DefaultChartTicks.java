@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.options.Ticks;
 
@@ -42,41 +42,11 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getFont()
 	 */
 	@Override
-	public String getFontColorAsString() {
-		return ticks.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return ticks.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return ticks.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return ticks.getFontFamily();
+	public IsDefaultFont getFont() {
+		return ticks.getFont();
 	}
 
 	/*
@@ -247,16 +217,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public int getPrecision() {
 		return ticks.getPrecision();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return ticks.getLineHeight();
 	}
 
 	/*

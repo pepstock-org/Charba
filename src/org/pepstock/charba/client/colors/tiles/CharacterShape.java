@@ -62,7 +62,7 @@ public final class CharacterShape extends AbstractShape {
 	 * @param character character to draw into tile as shape
 	 */
 	public CharacterShape(String character) {
-		this(character, Defaults.get().getGlobal().getFontFamily());
+		this(character, Defaults.get().getGlobal().getFont().getFamily());
 	}
 
 	/**
@@ -85,7 +85,7 @@ public final class CharacterShape extends AbstractShape {
 		}
 		// stores attributes
 		this.character = character;
-		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getFontFamily();
+		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getFont().getFamily();
 		// creates the prefix key for caching
 		super.setKeyPrefix(CHARACTER_SHAPE_NAME + character + fontFamily);
 	}

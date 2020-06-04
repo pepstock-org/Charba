@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.options.PointLabels;
 
 /**
@@ -40,41 +40,11 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getFont()
 	 */
 	@Override
-	public String getFontColorAsString() {
-		return pointLabels.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return pointLabels.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return pointLabels.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return pointLabels.getFontFamily();
+	public IsDefaultFont getFont() {
+		return pointLabels.getFont();
 	}
 
 	/*
@@ -85,16 +55,6 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	@Override
 	public boolean isDisplay() {
 		return pointLabels.isDisplay();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return pointLabels.getLineHeight();
 	}
 
 }

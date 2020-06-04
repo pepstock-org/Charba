@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.options.LegendLabels;
 
 /**
@@ -40,41 +40,11 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getFont()
 	 */
 	@Override
-	public String getFontColorAsString() {
-		return labels.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return labels.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return labels.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return labels.getFontFamily();
+	public IsDefaultFont getFont() {
+		return labels.getFont();
 	}
 
 	/*

@@ -22,7 +22,14 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultScaleLabel extends IsDefaultFontItem {
+public interface IsDefaultScaleLabel {
+	
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns the padding defaults.
@@ -51,12 +58,5 @@ public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 	 * @return the alignment of the axis title.
 	 */
 	ScaleLabelAlign getAlign();
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	double getLineHeight();
 
 }

@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
-import org.pepstock.charba.client.enums.FontStyle;
 
 /**
  * Abstract defaults for options element, based on chart type. THIS IS MUST BE EXTENDED AS ROOT OF ALL ELEMENTS CHART DEFAULTS.
@@ -92,51 +92,11 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFont()
 	 */
 	@Override
-	public final String getFontColorAsString() {
-		return options.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontSize()
-	 */
-	@Override
-	public final int getFontSize() {
-		return options.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontStyle()
-	 */
-	@Override
-	public final FontStyle getFontStyle() {
-		return options.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFontFamily()
-	 */
-	@Override
-	public final String getFontFamily() {
-		return options.getFontFamily();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLineHeight()
-	 */
-	@Override
-	public final double getLineHeight() {
-		return options.getLineHeight();
+	public final IsDefaultFont getFont() {
+		return options.getFont();
 	}
 
 	/*

@@ -16,39 +16,70 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Weight;
 
 /**
- * Interface for elements object defaults.
+ * Interface to define fomt object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultFontItem {
+public interface IsDefaultFont {
 
 	/**
 	 * Returns the font color
 	 * 
 	 * @return Font color
 	 */
-	String getFontColorAsString();
+	String getColorAsString();
 
 	/**
 	 * Returns the font size.
 	 * 
 	 * @return the font size.
 	 */
-	int getFontSize();
+	int getSize();
 
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
-	FontStyle getFontStyle();
+	FontStyle getStyle();
 
 	/**
 	 * Returns the font family, follows CSS font-family options.
 	 * 
 	 * @return Font family, follows CSS font-family options.
 	 */
-	String getFontFamily();
+	String getFamily();
+
+	/**
+	 * Returns the font weight, follows CSS font-style-weight options.
+	 * 
+	 * @return the font weight, follows CSS font-style-weight options.
+	 */
+	Weight getWeight();
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	double getLineHeight();
+	
+	/**
+	 * Returns the stroke width around the text.<br>
+	 * Currently only supported by ticks.
+	 * 
+	 * @return the stroke width around the text
+	 */
+	int getLineWidth();
+	
+	/**
+	 * Returns the color of the stroke around the text.<br>
+	 * Currently only supported by ticks.
+	 * 
+	 * @return the color of the stroke around the text
+	 */
+	String getStrokeStyleAsString();
 }

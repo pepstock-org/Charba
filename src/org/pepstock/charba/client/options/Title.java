@@ -31,16 +31,18 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractLabel<Options, IsDefaultTitle> implements IsDefaultTitle {
+public final class Title extends AbstractModel<Options, IsDefaultTitle> implements IsDefaultTitle {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		// FIXME ALIGN is missing
 		DISPLAY("display"),
-		FONT_STYLE("fontStyle"),
+		FONT("font"),
 		POSITION("position"),
+		// FIXME Padding by object top: x, bottom: x
 		PADDING("padding"),
 		FULL_WIDTH("fullWidth"),
 		TEXT("text");
@@ -68,6 +70,9 @@ public final class Title extends AbstractLabel<Options, IsDefaultTitle> implemen
 		}
 
 	}
+	
+	// instance of font
+	private final Font font;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -79,6 +84,16 @@ public final class Title extends AbstractLabel<Options, IsDefaultTitle> implemen
 	 */
 	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -159,16 +174,6 @@ public final class Title extends AbstractLabel<Options, IsDefaultTitle> implemen
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
-	 */
-	@Override
-	double getDefaultLineHeight() {
-		return getDefaultValues().getLineHeight();
 	}
 
 	/**

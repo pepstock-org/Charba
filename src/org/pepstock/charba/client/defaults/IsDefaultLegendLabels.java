@@ -21,8 +21,15 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendLabels extends IsDefaultFontItem {
+public interface IsDefaultLegendLabels {
 
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
+	
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 

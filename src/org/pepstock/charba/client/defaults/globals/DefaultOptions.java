@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -32,14 +31,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_FONT_SIZE = 12;
-
-	private static final String DEFAULT_FONT_COLOR = "#666";
-
-	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	private static final boolean DEFAULT_SHOW_LINES = true;
 
@@ -60,7 +51,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	/**
 	 * Creates the object. Protected to avoid any instantiation
 	 */
-	protected DefaultOptions() {
+	DefaultOptions() {
 		super();
 	}
 
@@ -112,56 +103,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public String getColorAsString() {
 		return DEFAULT_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontColorAsString()
-	 */
-	@Override
-	public String getFontColorAsString() {
-		return DEFAULT_FONT_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return DEFAULT_FONT_SIZE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return FontStyle.NORMAL;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return DEFAULT_FONT_FAMILY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDefaultLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
 	}
 
 	/*

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultHover;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
@@ -47,6 +48,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	private final IsDefaultTooltips tooltips;
 
 	private final IsDefaultPlugins plugins;
+	
+	private final IsDefaultFont font;
 
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
@@ -62,6 +65,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.legend = new DefaultLegend();
 		this.tooltips = new DefaultTooltips();
 		this.plugins = new DefaultPlugins();
+		this.font = new DefaultFont();
 	}
 
 	/**
@@ -83,6 +87,15 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.legend = options.getLegend();
 		this.tooltips = options.getTooltips();
 		this.plugins = options.getPlugins();
+		this.font = options.getFont();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFont()
+	 */
+	@Override
+	public IsDefaultFont getFont() {
+		return font;
 	}
 
 	/*

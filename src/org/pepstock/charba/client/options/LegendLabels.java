@@ -24,13 +24,14 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasFont {
+public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		FONT("font"),
 		BOX_WIDTH("boxWidth"),
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
@@ -59,8 +60,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 
 	}
 
-	// instance of font manager
-	private final Fonter fonter;
+	// instance of font
+	private final Font font;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -72,23 +73,22 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	LegendLabels(Legend legend, Key childKey, IsDefaultLegendLabels defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
-		this.fonter = new Fonter(getNativeObject(), this, getDefaultValues());
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-
-	/*
-	 * (non-Javadoc)
+	
+	/**
+	 * Returns the font element.
 	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#getFonter()
+	 * @return the font
 	 */
-	@Override
-	public final Fonter getFonter() {
-		return fonter;
+	public Font getFont() {
+		return font;
 	}
 
 	/**
-	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * Sets if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 * 
-	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @param usePointStyle if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		setValue(Property.USE_POINT_STYLE, usePointStyle);
@@ -97,9 +97,9 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	}
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * Returns if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 * 
-	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @return <code>true</code> if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());

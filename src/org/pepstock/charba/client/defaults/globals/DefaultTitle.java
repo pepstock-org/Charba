@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,13 +24,25 @@ import org.pepstock.charba.client.enums.Position;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
+public final class DefaultTitle implements IsDefaultTitle {
 
 	private static final int DEFAULT_PADDING = 10;
 
 	private static final boolean DEFAULT_FULL_WIDTH = true;
 
 	private static final boolean DEFAULT_DISPLAY = false;
+
+	private final DefaultFont font = new DefaultFont();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getFont()
+	 */
+	@Override
+	public IsDefaultFont getFont() {
+		return font;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -71,26 +82,6 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	@Override
 	public boolean isFullWidth() {
 		return DEFAULT_FULL_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return Defaults.get().getGlobal().getLineHeight();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.AbstractDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return FontStyle.BOLD;
 	}
 
 }

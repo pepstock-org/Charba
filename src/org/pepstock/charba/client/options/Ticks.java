@@ -33,9 +33,11 @@ import org.pepstock.charba.client.enums.TickSource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends AbstractLabel<Scale, IsDefaultTicks> implements IsDefaultTicks {
+public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements IsDefaultTicks {
 
 	private final Major major;
+	// instance of font
+	private final Font font;
 
 	/**
 	 * Name of properties of native object.
@@ -44,7 +46,7 @@ public final class Ticks extends AbstractLabel<Scale, IsDefaultTicks> implements
 	{
 		// commons
 		DISPLAY("display"),
-		FONT("font"), //FIXME missing
+		FONT("font"),
 		MAJOR("major"),
 		PADDING("padding"),
 		Z("z"),
@@ -106,6 +108,16 @@ public final class Ticks extends AbstractLabel<Scale, IsDefaultTicks> implements
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
+		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -115,17 +127,6 @@ public final class Ticks extends AbstractLabel<Scale, IsDefaultTicks> implements
 	 */
 	public Major getMajor() {
 		return major;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
-	 */
-	@Override
-	double getDefaultLineHeight() {
-		// FIXME to remove
-		return getDefaultValues().getLineHeight();
 	}
 
 	/**

@@ -22,7 +22,14 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTicks extends IsDefaultFontItem {
+public interface IsDefaultTicks {
+	
+	/**
+	 * Returns the font defaults.
+	 * 
+	 * @return the font defaults.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns the major tick defaults.
@@ -31,14 +38,6 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 */
 	IsDefaultMajor getMajor();
 
-	/**
-	 * FIXME to be removed
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	double getLineHeight();
-	
 	/**
 	 * If true, show tick marks
 	 * 

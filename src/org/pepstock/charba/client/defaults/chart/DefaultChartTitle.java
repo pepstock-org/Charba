@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Title;
 
@@ -41,41 +41,11 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getFont()
 	 */
 	@Override
-	public String getFontColorAsString() {
-		return title.getFontColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
-	 */
-	@Override
-	public int getFontSize() {
-		return title.getFontSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return title.getFontStyle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
-	 */
-	@Override
-	public String getFontFamily() {
-		return title.getFontFamily();
+	public IsDefaultFont getFont() {
+		return title.getFont();
 	}
 
 	/*
@@ -116,16 +86,6 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	@Override
 	public boolean isFullWidth() {
 		return title.isFullWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getLineHeight()
-	 */
-	@Override
-	public double getLineHeight() {
-		return title.getLineHeight();
 	}
 
 }
