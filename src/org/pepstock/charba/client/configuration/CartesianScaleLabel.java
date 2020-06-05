@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.FontStyle;
-
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the getAxis().<br>
  * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
@@ -28,6 +25,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 public class CartesianScaleLabel extends AxisContainer {
 
 	private final CartesianPadding padding;
+	// font instance
+	private final Font font;
 
 	/**
 	 * Builds the object storing the axis which this scale label belongs to.
@@ -36,7 +35,18 @@ public class CartesianScaleLabel extends AxisContainer {
 	 */
 	CartesianScaleLabel(Axis axis) {
 		super(axis);
+		// gets embedded elements
 		padding = new CartesianPadding(axis);
+		font = new Font(axis.getConfiguration().getScaleLabel().getFont());
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -82,132 +92,6 @@ public class CartesianScaleLabel extends AxisContainer {
 	 */
 	public String getLabelString() {
 		return getAxis().getScale().getScaleLabel().getLabelString();
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight Height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		getAxis().getScale().getScaleLabel().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight Height of an individual line of text.
-	 */
-	public void setLineHeight(String lineHeight) {
-		getAxis().getScale().getScaleLabel().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return getAxis().getScale().getScaleLabel().getLineHeight();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public String getLineHeightAsString() {
-		return getAxis().getScale().getScaleLabel().getLineHeightAsString();
-	}
-
-	/**
-	 * Sets the font size for scale label.
-	 * 
-	 * @param fontSize Font size for scale label.
-	 */
-	public void setFontSize(int fontSize) {
-		getAxis().getScale().getScaleLabel().setFontSize(fontSize);
-	}
-
-	/**
-	 * Returns the font size for scale label.
-	 * 
-	 * @return Font size for scale label.
-	 */
-	public int getFontSize() {
-		return getAxis().getScale().getScaleLabel().getFontSize();
-	}
-
-	/**
-	 * Sets the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		getAxis().getScale().getScaleLabel().setFontStyle(fontStyle);
-	}
-
-	/**
-	 * Returns the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return getAxis().getScale().getScaleLabel().getFontStyle();
-	}
-
-	/**
-	 * Sets the font color for scale label
-	 * 
-	 * @param fontColor Font color for scale label
-	 */
-	public void setFontColor(IsColor fontColor) {
-		getAxis().getScale().getScaleLabel().setFontColor(fontColor);
-	}
-
-	/**
-	 * Sets the font color for scale label
-	 * 
-	 * @param fontColor Font color for scale label
-	 */
-	public void setFontColor(String fontColor) {
-		getAxis().getScale().getScaleLabel().setFontColor(fontColor);
-	}
-
-	/**
-	 * Returns the font color for scale label
-	 * 
-	 * @return Font color for scale label.
-	 */
-	public String getFontColorAsString() {
-		return getAxis().getScale().getScaleLabel().getFontColorAsString();
-	}
-
-	/**
-	 * Returns the font color for scale label
-	 * 
-	 * @return Font color for scale label.
-	 */
-	public IsColor getFontColor() {
-		return getAxis().getScale().getScaleLabel().getFontColor();
-	}
-
-	/**
-	 * Sets the font family for the scale label, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family for the scale label, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		getAxis().getScale().getScaleLabel().setFontFamily(fontFamily);
-	}
-
-	/**
-	 * Returns the font family for the scale label, follows CSS font-family options.
-	 * 
-	 * @return Font family for the scale label, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return getAxis().getScale().getScaleLabel().getFontFamily();
 	}
 
 }

@@ -250,7 +250,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		// applying the border afterwards
 		int borderWidthToRemove = Math.max(0, item.getLineWidth());
 		int width = legendLabels.getBoxWidth() - borderWidthToRemove;
-		int height = legendLabels.getFontSize() - borderWidthToRemove;
+		int height = legendLabels.getFont().getSize() - borderWidthToRemove;
 		// styling the cell with mandatory values
 		color.getStyle().setDisplay(Display.BLOCK);
 		color.getStyle().setWidth(Unit.PX.format(width));
@@ -298,8 +298,8 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		Div label = createLabelText(chart, item, callback);
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
-		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFontStyle(), legendLabels.getFontSize(), legendLabels.getFontFamily()));
-		label.getStyle().setColor(legendLabels.getFontColor().toRGBA());
+		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFont()));
+		label.getStyle().setColor(legendLabels.getFont().getColor().toRGBA());
 		// checks text direction
 		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
 			label.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());

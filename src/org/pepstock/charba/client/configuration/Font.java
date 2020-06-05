@@ -13,82 +13,36 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.options.IsFont;
 
 /**
- * Base object to map font options for configuration.
+ * Base object to map font configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font extends AbstractNode implements IsFont {
+public final class Font implements IsFont {
 	
-	// default font values
-	private final IsDefaultFont defaultValues;
+	// font options element
+	private final IsFont font;
 
 	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		COLOR("color"),
-		FAMILY("family"),
-		SIZE("size"),
-		STYLE("style"),
-		WEIGHT("weight"),
-		LINE_HEIGHT("lineHeight"),
-		LINE_WIDTH("lineWidth"),
-		STROKE_STYLE("strokeStyle");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Builds the object storing the font options.
 	 * 
-	 * @param parent parent of the font.
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
-	 * @param nativeObject native object to map java script properties
+	 * @param font font options element
 	 */
-	Font(AbstractNode parent, Key childKey, IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
-		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
+	Font(IsFont font) {
+		// checks if font container is consistent
+		if (font == null) {
+			throw new IllegalArgumentException("Font argument is null");
 		}
-		// stores defaults values
-		this.defaultValues = defaultValues;
+		// stores font container
+		this.font = font;
 	}
 
 	/**
@@ -97,7 +51,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param color font color.
 	 */
 	public void setColor(IsColor color) {
-		setColor(checkValue(color));
+		font.setColor(color);
 	}
 
 	/**
@@ -106,9 +60,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
-		setValue(Property.COLOR, color);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setColor(color);
 	}
 
 	/**
@@ -117,7 +69,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return font color as string
 	 */
 	public String getColorAsString() {
-		return getValue(Property.COLOR, defaultValues.getColorAsString());
+		return font.getColorAsString();
 	}
 
 	/**
@@ -135,9 +87,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param size the font size.
 	 */
 	public void setSize(int size) {
-		setValue(Property.SIZE, size);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setSize(size);
 	}
 
 	/**
@@ -146,7 +96,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the font size.
 	 */
 	public int getSize() {
-		return getValue(Property.SIZE, defaultValues.getSize());
+		return font.getSize();
 	}
 
 	/**
@@ -155,9 +105,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setStyle(FontStyle style) {
-		setValue(Property.STYLE, style);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setStyle(style);
 	}
 
 	/**
@@ -166,7 +114,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getStyle() {
-		return getValue(Property.STYLE, FontStyle.values(), defaultValues.getStyle());
+		return font.getStyle();
 	}
 
 	/**
@@ -175,9 +123,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param family Font family, follows CSS font-family options.
 	 */
 	public void setFamily(String family) {
-		setValue(Property.FAMILY, family);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setFamily(family);
 	}
 
 	/**
@@ -186,7 +132,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFamily() {
-		return getValue(Property.FAMILY, defaultValues.getFamily());
+		return font.getFamily();
 	}
 
 	/**
@@ -195,9 +141,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param weight font weight, follows CSS font-style-weight options.
 	 */
 	public void setWeight(Weight weight) {
-		setValue(Property.WEIGHT, weight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setWeight(weight);
 	}
 
 	/**
@@ -206,7 +150,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	public Weight getWeight() {
-		return getValue(Property.WEIGHT, Weight.values(), defaultValues.getWeight());
+		return font.getWeight();
 	}
 
 	/**
@@ -215,9 +159,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param lineHeight the line height.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setLineHeight(lineHeight);
 	}
 
 	/**
@@ -226,9 +168,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param lineHeight the line height.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setLineHeight(lineHeight);
 	}
 
 	/**
@@ -237,16 +177,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
-		// creates default
-		double defaultValue = defaultValues.getLineHeight();
-		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
-			// reads and returns as double
-			return getValue(Property.LINE_HEIGHT, defaultValue);
-		}
-		// if here, is not a number
-		// then returns the default
-		return defaultValue;
+		return font.getLineHeight();
 	}
 
 	/**
@@ -255,16 +186,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the height of an individual line of text.
 	 */
 	public String getLineHeightAsString() {
-		// creates default
-		String defaultValue = String.valueOf(defaultValues.getLineHeight());
-		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
-			// reads and returns as string
-			return getValue(Property.LINE_HEIGHT, defaultValue);
-		}
-		// if here, is not a number
-		// then returns the default
-		return defaultValue;
+		return font.getLineHeightAsString();
 	}
 
 	/**
@@ -274,9 +196,8 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param lineWidth the stroke width around the text
 	 */
 	public void setLineWidth(int lineWidth) {
-		setValue(Property.LINE_WIDTH, lineWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setLineWidth(lineWidth);
+
 	}
 
 	/**
@@ -286,7 +207,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the stroke width around the text
 	 */
 	public int getLineWidth() {
-		return getValue(Property.LINE_WIDTH, defaultValues.getLineWidth());
+		return font.getLineWidth();
 	}
 
 	/**
@@ -296,7 +217,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param strokeStyle the color of the stroke around the text
 	 */
 	public void setStrokeStyle(IsColor strokeStyle) {
-		setColor(checkValue(strokeStyle));
+		font.setStrokeStyle(strokeStyle);
 	}
 
 	/**
@@ -306,9 +227,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param strokeStyle the color of the stroke around the text
 	 */
 	public void setStrokeStyle(String strokeStyle) {
-		setValue(Property.STROKE_STYLE, strokeStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		font.setStrokeStyle(strokeStyle);
 	}
 
 	/**
@@ -318,7 +237,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @return the color of the stroke around the text
 	 */
 	public String getStrokeStyleAsString() {
-		return getValue(Property.STROKE_STYLE, defaultValues.getStrokeStyleAsString());
+		return font.getStrokeStyleAsString();
 	}
 
 	/**

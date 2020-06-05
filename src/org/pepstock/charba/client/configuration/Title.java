@@ -17,8 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -31,6 +29,8 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 public class Title {
 
 	private final ExtendedOptions options;
+	// font instance
+	private final Font font;
 
 	/**
 	 * Builds the object storing the root options element.
@@ -39,96 +39,21 @@ public class Title {
 	 */
 	Title(ExtendedOptions options) {
 		this.options = options;
+		// checks if configuration is consistent
+		if (options == null) {
+			// if not exception
+			throw new IllegalArgumentException("Options argument is null");
+		}
+		this.font = new Font(options.getTitle().getFont());
 	}
-
+	
 	/**
-	 * Sets the font size for title.
+	 * Returns the font element.
 	 * 
-	 * @param fontSize Font size for title.
+	 * @return the font
 	 */
-	public void setFontSize(int fontSize) {
-		options.getTitle().setFontSize(fontSize);
-	}
-
-	/**
-	 * Returns the font size for title.
-	 * 
-	 * @return Font size for title.
-	 */
-	public int getFontSize() {
-		return options.getTitle().getFontSize();
-	}
-
-	/**
-	 * Sets the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		options.getTitle().setFontStyle(fontStyle);
-	}
-
-	/**
-	 * Returns the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return options.getTitle().getFontStyle();
-	}
-
-	/**
-	 * Sets the font color for title
-	 * 
-	 * @param fontColor Font color for title
-	 */
-	public void setFontColor(IsColor fontColor) {
-		options.getTitle().setFontColor(fontColor);
-	}
-
-	/**
-	 * Sets the font color for title
-	 * 
-	 * @param fontColor Font color for title
-	 */
-	public void setFontColor(String fontColor) {
-		options.getTitle().setFontColor(fontColor);
-	}
-
-	/**
-	 * Returns the font color for title
-	 * 
-	 * @return Font color for title.
-	 */
-	public String getFontColorAsString() {
-		return options.getTitle().getFontColorAsString();
-	}
-
-	/**
-	 * Returns the font color for title
-	 * 
-	 * @return Font color for title.
-	 */
-	public IsColor getFontColor() {
-		return options.getTitle().getFontColor();
-	}
-
-	/**
-	 * Sets the font family for title, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family for title, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		options.getTitle().setFontFamily(fontFamily);
-	}
-
-	/**
-	 * Returns the font family for title, follows CSS font-family options.
-	 * 
-	 * @return Font family for title, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return options.getTitle().getFontFamily();
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -219,42 +144,6 @@ public class Title {
 	 */
 	public boolean isFullWidth() {
 		return options.getTitle().isFullWidth();
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		options.getTitle().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(String lineHeight) {
-		options.getTitle().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return options.getTitle().getLineHeight();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return height of an individual line of text.
-	 */
-	public String getLineHeightAsString() {
-		return options.getTitle().getLineHeightAsString();
 	}
 
 }

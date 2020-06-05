@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
 
@@ -87,16 +86,6 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	@Override
 	public final String getColorAsString() {
 		return options.getColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFont()
-	 */
-	@Override
-	public final IsDefaultFont getFont() {
-		return options.getFont();
 	}
 
 	/*

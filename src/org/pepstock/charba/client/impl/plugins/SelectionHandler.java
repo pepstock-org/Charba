@@ -35,6 +35,7 @@ import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
@@ -728,7 +729,7 @@ final class SelectionHandler {
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
 		// gets metrics
 		TextMetricsItem metrics = ctx.measureText(clearSelection.getLabel());
 		// stores the label width
@@ -1008,7 +1009,7 @@ final class SelectionHandler {
 		// checks based on render type what must be draw
 		if (Render.LABEL.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -1017,7 +1018,7 @@ final class SelectionHandler {
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -1030,7 +1031,7 @@ final class SelectionHandler {
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillColor(clearSelection.getFontColorAsString());
 			// sets alignment from center point

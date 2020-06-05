@@ -31,6 +31,7 @@ import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -39,6 +40,8 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.options.Font;
 
 /**
  * Sets of methods used as common utilities.
@@ -109,6 +112,26 @@ public final class Utilities {
 	private Utilities() {
 		// do nothing
 	}
+	
+	/**
+	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
+	 * The format is [font-style] [font-variant] [font-weight] [font-size] [font-family].<br>
+	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
+	 * 
+	 * @param font font element to use
+	 * @return the font string to use in the canvas object.
+	 */
+	public static String toCSSFontProperty(IsDefaultFont font) {
+		// checks if argument is consistent
+		if (font != null) {
+			return toCSSFontProperty(font.getStyle(), font.getWeight(), font.getSize(), font.getFamily());
+		}
+		// if here the font is not consistent
+		// and the returns the default font
+		Font globalFont = Defaults.get().getGlobal().getFont();
+		return toCSSFontProperty(globalFont.getStyle(), globalFont.getWeight(), globalFont.getSize(), globalFont.getFamily());
+	}
+
 
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
@@ -116,27 +139,18 @@ public final class Utilities {
 	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
 	 * 
 	 * @param style font style to use
+	 * @param weight font weight
 	 * @param size font size
 	 * @param family font family
 	 * @return the font string to use in the canvas object.
 	 */
-	public static String toCSSFontProperty(FontStyle style, int size, String family) {
+	public static String toCSSFontProperty(FontStyle style, Weight weight, int size, String family) {
 		// gets template
 		final String result = FONT_TEMPLATE;
-		final FontStyle fontStyle;
-		final FontStyle fontWeight;
 		// checks if font style is consistent
 		// setting style and weight CSS
-		if (style != null) {
-			// checks font style. If bold is always NORMAl
-			fontStyle = FontStyle.BOLD.equals(style) ? FontStyle.NORMAL : style;
-			// checks font weight. If not bold is always NORMAl
-			fontWeight = FontStyle.BOLD.equals(style) ? FontStyle.BOLD : FontStyle.NORMAL;
-		} else {
-			// not consistent sets normal
-			fontStyle = FontStyle.NORMAL;
-			fontWeight = FontStyle.NORMAL;
-		}
+		final FontStyle fontStyle = style == null ? Defaults.get().getGlobal().getFont().getStyle() : style;
+		final Weight fontWeight = weight == null ? Defaults.get().getGlobal().getFont().getWeight() : weight;
 		// checks if font family is consistent
 		final String fontFamily = family == null ? Defaults.get().getGlobal().getFont().getFamily() : family;
 		// by regex changes the value of format

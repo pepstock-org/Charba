@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.options.Font;
 import org.pepstock.charba.client.options.Options;
 
 /**
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.options.Options;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
-
+	
 	/**
 	 * Creates the object with the native object which maps the java script object chart.defaults.global.
 	 * 
@@ -34,6 +35,16 @@ public final class GlobalOptions extends Options {
 	GlobalOptions(NativeObject nativeObject) {
 		// uses the CHART.JS default options as default one
 		super(DefaultsBuilder.get().getOptions(), nativeObject);
+	}
+	
+	/**
+	 * Returns the font element.<br>
+	 * It contains the global defaults for font.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return super.getDefaultsFont();
 	}
 
 }

@@ -79,13 +79,6 @@ public interface IsDefaultOptions {
 	IsDefaultPlugins getPlugins();
 	
 	/**
-	 * Returns the font defaults.
-	 * 
-	 * @return the font defaults.
-	 */
-	IsDefaultFont getFont();
-
-	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
 	 * @return the resizing of the chart canvas when its container does.

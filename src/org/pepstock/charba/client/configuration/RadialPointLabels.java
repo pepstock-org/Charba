@@ -15,15 +15,11 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.List;
-
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.FontStyle;
 
 import jsinterop.annotations.JsFunction;
 
@@ -102,6 +98,9 @@ public class RadialPointLabels extends AxisContainer {
 		}
 
 	}
+	
+	// font instance
+	private final Font font;
 
 	/**
 	 * Builds the object storing the axis which this point labels belongs to.
@@ -110,6 +109,8 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	RadialPointLabels(Axis axis) {
 		super(axis);
+		// gets embedded elements
+		font = new Font(axis.getConfiguration().getPointLabels().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -122,6 +123,15 @@ public class RadialPointLabels extends AxisContainer {
 			// returns passed item
 			return item;
 		});
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -140,132 +150,6 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	public boolean isDisplay() {
 		return getAxis().getScale().getPointLabels().isDisplay();
-	}
-
-	/**
-	 * Sets the font size for the tick labels.
-	 * 
-	 * @param fontSize font size for the tick labels.
-	 */
-	public void setFontSize(int fontSize) {
-		getAxis().getScale().getPointLabels().setFontSize(fontSize);
-	}
-
-	/**
-	 * Returns the font size for the tick labels.
-	 * 
-	 * @return font size for the tick labels.
-	 */
-	public int getFontSize() {
-		return getAxis().getScale().getPointLabels().getFontSize();
-	}
-
-	/**
-	 * Sets the font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		getAxis().getScale().getPointLabels().setFontStyle(fontStyle);
-	}
-
-	/**
-	 * Returns the font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return getAxis().getScale().getPointLabels().getFontStyle();
-	}
-
-	/**
-	 * Sets the font color for tick labels.
-	 * 
-	 * @param fontColor font color for tick labels.
-	 */
-	public void setFontColor(IsColor... fontColor) {
-		getAxis().getScale().getPointLabels().setFontColor(fontColor);
-	}
-
-	/**
-	 * Sets the font color for tick labels.
-	 * 
-	 * @param fontColor font color for tick labels.
-	 */
-	public void setFontColor(String... fontColor) {
-		getAxis().getScale().getPointLabels().setFontColor(fontColor);
-	}
-
-	/**
-	 * Returns the font color for tick labels.
-	 * 
-	 * @return font color for tick labels.
-	 */
-	public List<String> getFontColorAsString() {
-		return getAxis().getScale().getPointLabels().getFontColorsAsString();
-	}
-
-	/**
-	 * Returns the font color for tick labels.
-	 * 
-	 * @return font color for tick labels.
-	 */
-	public List<IsColor> getFontColor() {
-		return getAxis().getScale().getPointLabels().getFontColors();
-	}
-
-	/**
-	 * Sets the font family for the tick labels, follows CSS font-family options.
-	 * 
-	 * @param fontFamily font family for the tick labels, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		getAxis().getScale().getPointLabels().setFontFamily(fontFamily);
-	}
-
-	/**
-	 * Returns the font family for the tick labels, follows CSS font-family options.
-	 * 
-	 * @return font family for the tick labels, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return getAxis().getScale().getPointLabels().getFontFamily();
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		getAxis().getScale().getPointLabels().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(String lineHeight) {
-		getAxis().getScale().getPointLabels().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return getAxis().getScale().getPointLabels().getLineHeight();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public String getLineHeightAsString() {
-		return getAxis().getScale().getPointLabels().getLineHeightAsString();
 	}
 
 	/**

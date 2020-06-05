@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
+public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
 
 	private final ScaleLabelPadding padding;
 	

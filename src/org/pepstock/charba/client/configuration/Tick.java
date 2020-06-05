@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.options.Ticks;
 
 /**
@@ -32,6 +30,9 @@ abstract class Tick extends AxisContainer {
 	private final Ticks configuration;
 
 	private final Major major;
+	
+	// font instance
+	private final Font font;
 	
 	/**
 	 * Name of properties of native object.
@@ -75,6 +76,7 @@ abstract class Tick extends AxisContainer {
 		this.configuration = axis.getScale().getTicks();
 		// creates sub element, min and max
 		major = new Major(axis, axis.getScale().getTicks());
+		font = new Font(axis.getConfiguration().getTicks().getFont());
 	}
 	
 	/**
@@ -93,6 +95,15 @@ abstract class Tick extends AxisContainer {
 	 */
 	public Major getMajor() {
 		return major;
+	}
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -129,132 +140,6 @@ abstract class Tick extends AxisContainer {
 	 */
 	public int getZ() {
 		return getConfiguration().getZ();
-	}
-	
-	/**
-	 * Sets the font size for tick.
-	 * 
-	 * @param fontSize the font size for tick.
-	 */
-	public void setFontSize(int fontSize) {
-		configuration.setFontSize(fontSize);
-	}
-
-	/**
-	 * Returns the font size for tick.
-	 * 
-	 * @return the font size for tick.
-	 */
-	public int getFontSize() {
-		return configuration.getFontSize();
-	}
-
-	/**
-	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		configuration.setFontStyle(fontStyle);
-	}
-
-	/**
-	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return configuration.getFontStyle();
-	}
-
-	/**
-	 * Sets the font color for tick
-	 * 
-	 * @param fontColor Font color for tick
-	 */
-	public void setFontColor(IsColor fontColor) {
-		configuration.setFontColor(fontColor);
-	}
-
-	/**
-	 * Sets the font color for tick
-	 * 
-	 * @param fontColor Font color for tick
-	 */
-	public void setFontColor(String fontColor) {
-		configuration.setFontColor(fontColor);
-	}
-
-	/**
-	 * Returns the font color for tick
-	 * 
-	 * @return Font color for tick.
-	 */
-	public String getFontColorAsString() {
-		return configuration.getFontColorAsString();
-	}
-
-	/**
-	 * Returns the font color for tick
-	 * 
-	 * @return Font color for tick.
-	 */
-	public IsColor getFontColor() {
-		return configuration.getFontColor();
-	}
-
-	/**
-	 * Sets the font family for the tick, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family for the tick, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		configuration.setFontFamily(fontFamily);
-	}
-
-	/**
-	 * Returns the font family for the tick, follows CSS font-family options.
-	 * 
-	 * @return Font family for the tick, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return configuration.getFontFamily();
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		getConfiguration().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(String lineHeight) {
-		getConfiguration().setLineHeight(lineHeight);
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return getConfiguration().getLineHeight();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public String getLineHeightAsString() {
-		return getConfiguration().getLineHeightAsString();
 	}
 	
 	/**

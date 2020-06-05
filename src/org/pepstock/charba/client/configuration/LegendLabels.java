@@ -23,13 +23,11 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -102,6 +100,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private LegendLabelsCallback labelsCallback = null;
 	// empty result
 	private static final LegendLabelItem[] EMPTY_RESULT = new LegendLabelItem[0];
+	// font instance
+	private final Font font;
 
 	/**
 	 * Name of properties of native object.
@@ -143,6 +143,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	LegendLabels(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
+		// get embedded elements
+		this.font = new Font(options.getLegend().getLabels().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -168,95 +170,14 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			return ArrayObject.fromOrEmpty(EMPTY_RESULT);
 		});
 	}
-
+	
 	/**
-	 * Sets the font size for label.
+	 * Returns the font element.
 	 * 
-	 * @param fontSize Font size for label.
+	 * @return the font
 	 */
-	public void setFontSize(int fontSize) {
-		getConfiguration().getLegend().getLabels().setFontSize(fontSize);
-	}
-
-	/**
-	 * Returns the font size for label.
-	 * 
-	 * @return Font size for label.
-	 */
-	public int getFontSize() {
-		return getConfiguration().getLegend().getLabels().getFontSize();
-	}
-
-	/**
-	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		getConfiguration().getLegend().getLabels().setFontStyle(fontStyle);
-	}
-
-	/**
-	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public FontStyle getFontStyle() {
-		return getConfiguration().getLegend().getLabels().getFontStyle();
-	}
-
-	/**
-	 * Sets the font color for label
-	 * 
-	 * @param fontColor Font color for label
-	 */
-	public void setFontColor(IsColor fontColor) {
-		getConfiguration().getLegend().getLabels().setFontColor(fontColor);
-	}
-
-	/**
-	 * Sets the font color for label
-	 * 
-	 * @param fontColor Font color for label
-	 */
-	public void setFontColor(String fontColor) {
-		getConfiguration().getLegend().getLabels().setFontColor(fontColor);
-	}
-
-	/**
-	 * Returns the font color for label
-	 * 
-	 * @return Font color for label.
-	 */
-	public String getFontColorAsString() {
-		return getConfiguration().getLegend().getLabels().getFontColorAsString();
-	}
-
-	/**
-	 * Returns the font color for label
-	 * 
-	 * @return Font color for label.
-	 */
-	public IsColor getFontColor() {
-		return getConfiguration().getLegend().getLabels().getFontColor();
-	}
-
-	/**
-	 * Sets the font family for the label, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family for the label, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		getConfiguration().getLegend().getLabels().setFontFamily(fontFamily);
-	}
-
-	/**
-	 * Returns the font family for the label, follows CSS font-family options.
-	 * 
-	 * @return Font family for the label, follows CSS font-family options.
-	 */
-	public String getFontFamily() {
-		return getConfiguration().getLegend().getLabels().getFontFamily();
+	public Font getFont() {
+		return font;
 	}
 
 	/**

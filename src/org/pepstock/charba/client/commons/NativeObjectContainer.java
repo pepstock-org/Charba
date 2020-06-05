@@ -1152,6 +1152,7 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 * @return the string RGBA color representation or <code>null</code> if color is null
 	 */
+	// FIXME remove
 	protected final String checkValue(IsColor value) {
 		// check color value is consistent
 		// and returns the RGBA value accordingly

@@ -61,6 +61,18 @@ public interface IsColor {
 		ColorUtil.checkChannelWithinBounds(color.getBlue());
 		ColorUtil.checkAlphaWithinBounds(color.getAlpha());
 	}
+	
+	/**
+	 * Checks a color value if consistent, returning the RGBA representation, otherwise <code>null</code>.
+	 * 
+	 * @param value value to be set
+	 * @return the string RGBA color representation or <code>null</code> if color is null
+	 */
+	static String checkAndGetValue(IsColor value) {
+		// check color value is consistent
+		// and returns the RGBA value accordingly
+		return IsColor.isConsistent(value) ? value.toRGBA() : null;
+	}
 
 	/**
 	 * Returns the red value.

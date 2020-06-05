@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -135,16 +136,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
 		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
 	}
 
 	/**
-	 * FIXME check if we can reduce visibility ONLY to global options
-	 * Returns the font element.
+	 * Returns the font element.<br>
+	 * It contains the global defaults for font.
 	 * 
 	 * @return the font
 	 */
-	public Font getFont() {
+	protected final Font getDefaultsFont() {
 		return font;
 	}
 	

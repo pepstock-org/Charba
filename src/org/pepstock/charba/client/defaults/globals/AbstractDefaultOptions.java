@@ -48,8 +48,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	private final IsDefaultTooltips tooltips;
 
 	private final IsDefaultPlugins plugins;
-	
-	private final IsDefaultFont font;
+
+	private final IsDefaultFont font = new DefaultFont();
 
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
@@ -65,7 +65,6 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.legend = new DefaultLegend();
 		this.tooltips = new DefaultTooltips();
 		this.plugins = new DefaultPlugins();
-		this.font = new DefaultFont();
 	}
 
 	/**
@@ -87,14 +86,15 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.legend = options.getLegend();
 		this.tooltips = options.getTooltips();
 		this.plugins = options.getPlugins();
-		this.font = options.getFont();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFont()
+	/**
+	 * Returns the font element.<br>
+	 * It contains the global defaults for font.
+	 * 
+	 * @return the font
 	 */
-	@Override
-	public IsDefaultFont getFont() {
+	public final IsDefaultFont getDefaultsFont() {
 		return font;
 	}
 

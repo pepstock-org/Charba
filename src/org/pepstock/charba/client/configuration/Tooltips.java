@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -127,6 +126,12 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 
 	// sub element of tooltip
 	private final TooltipsCallbacks callbacks;
+	// title font instance
+	private final Font titleFont;
+	// body font instance
+	private final Font bodyFont;
+	// footer font instance
+	private final Font footerFont;
 
 	/**
 	 * Name of properties of native object.
@@ -171,6 +176,9 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		super(chart, options);
 		// sets callbacks sub element
 		callbacks = new TooltipsCallbacks(chart, options);
+		titleFont = new Font(options.getTooltips().getTitleFont());
+		bodyFont = new Font(options.getTooltips().getBodyFont());
+		footerFont = new Font(options.getTooltips().getFooterFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -315,59 +323,14 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public IsColor getBackgroundColor() {
 		return getConfiguration().getTooltips().getBackgroundColor();
 	}
-
+	
 	/**
-	 * Sets the title font.
+	 * Returns the title font element.
 	 * 
-	 * @param titleFontFamily title font.
+	 * @return the title font
 	 */
-	public void setTitleFontFamily(String titleFontFamily) {
-		getConfiguration().getTooltips().setTitleFontFamily(titleFontFamily);
-	}
-
-	/**
-	 * Returns the title font.
-	 * 
-	 * @return the title font.
-	 */
-	public String getTitleFontFamily() {
-		return getConfiguration().getTooltips().getTitleFontFamily();
-	}
-
-	/**
-	 * Sets the title font size.
-	 * 
-	 * @param titleFontSize title font size.
-	 */
-	public void setTitleFontSize(int titleFontSize) {
-		getConfiguration().getTooltips().setTitleFontSize(titleFontSize);
-	}
-
-	/**
-	 * Returns the title font size.
-	 * 
-	 * @return Title font size.
-	 */
-	public int getTitleFontSize() {
-		return getConfiguration().getTooltips().getTitleFontSize();
-	}
-
-	/**
-	 * Sets the title font style.
-	 * 
-	 * @param titleFontStyle title font style.
-	 */
-	public void setTitleFontStyle(FontStyle titleFontStyle) {
-		getConfiguration().getTooltips().setTitleFontStyle(titleFontStyle);
-	}
-
-	/**
-	 * Returns the title font style.
-	 * 
-	 * @return title font style.
-	 */
-	public FontStyle getTitleFontStyle() {
-		return getConfiguration().getTooltips().getTitleFontStyle();
+	public Font getTitleFont() {
+		return titleFont;
 	}
 
 	/**
@@ -386,42 +349,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public TextAlign getTitleAlign() {
 		return getConfiguration().getTooltips().getTitleAlign();
-	}
-
-	/**
-	 * Sets the title font color.
-	 * 
-	 * @param titleFontColor title font color.
-	 */
-	public void setTitleFontColor(IsColor titleFontColor) {
-		getConfiguration().getTooltips().setTitleFontColor(titleFontColor);
-	}
-
-	/**
-	 * Sets the title font color.
-	 * 
-	 * @param titleFontColor title font color.
-	 */
-	public void setTitleFontColor(String titleFontColor) {
-		getConfiguration().getTooltips().setTitleFontColor(titleFontColor);
-	}
-
-	/**
-	 * Returns the title font color.
-	 * 
-	 * @return title font color.
-	 */
-	public String getTitleFontColorAsString() {
-		return getConfiguration().getTooltips().getTitleFontColorAsString();
-	}
-
-	/**
-	 * Returns the title font color.
-	 * 
-	 * @return title font color.
-	 */
-	public IsColor getTitleFontColor() {
-		return getConfiguration().getTooltips().getTitleFontColor();
 	}
 
 	/**
@@ -459,59 +386,14 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public int getTitleMarginBottom() {
 		return getConfiguration().getTooltips().getTitleMarginBottom();
 	}
-
+	
 	/**
-	 * Sets the body line font.
+	 * Returns the body font element.
 	 * 
-	 * @param bodyFontFamily body line font.
+	 * @return the body font
 	 */
-	public void setBodyFontFamily(String bodyFontFamily) {
-		getConfiguration().getTooltips().setBodyFontFamily(bodyFontFamily);
-	}
-
-	/**
-	 * Returns the body line font.
-	 * 
-	 * @return body line font.
-	 */
-	public String getBodyFontFamily() {
-		return getConfiguration().getTooltips().getBodyFontFamily();
-	}
-
-	/**
-	 * Sets the body font size.
-	 * 
-	 * @param bodyFontSize body font size.
-	 */
-	public void setBodyFontSize(int bodyFontSize) {
-		getConfiguration().getTooltips().setBodyFontSize(bodyFontSize);
-	}
-
-	/**
-	 * Returns the body font size.
-	 * 
-	 * @return body font size.
-	 */
-	public int getBodyFontSize() {
-		return getConfiguration().getTooltips().getBodyFontSize();
-	}
-
-	/**
-	 * Sets the body font style.
-	 * 
-	 * @param bodyFontStyle body font style.
-	 */
-	public void setBodyFontStyle(FontStyle bodyFontStyle) {
-		getConfiguration().getTooltips().setBodyFontStyle(bodyFontStyle);
-	}
-
-	/**
-	 * Returns the body font style.
-	 * 
-	 * @return body font style.
-	 */
-	public FontStyle getBodyFontStyle() {
-		return getConfiguration().getTooltips().getBodyFontStyle();
+	public Font getBodyFont() {
+		return bodyFont;
 	}
 
 	/**
@@ -533,42 +415,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the body font color.
-	 * 
-	 * @param bodyFontColor body font color.
-	 */
-	public void setBodyFontColor(IsColor bodyFontColor) {
-		getConfiguration().getTooltips().setBodyFontColor(bodyFontColor);
-	}
-
-	/**
-	 * Sets the body font color.
-	 * 
-	 * @param bodyFontColor body font color.
-	 */
-	public void setBodyFontColor(String bodyFontColor) {
-		getConfiguration().getTooltips().setBodyFontColor(bodyFontColor);
-	}
-
-	/**
-	 * Returns the body font color.
-	 * 
-	 * @return body font color.
-	 */
-	public String getBodyFontColorAsString() {
-		return getConfiguration().getTooltips().getBodyFontColorAsString();
-	}
-
-	/**
-	 * Returns the body font color.
-	 * 
-	 * @return body font color.
-	 */
-	public IsColor getBodyFontColor() {
-		return getConfiguration().getTooltips().getBodyFontColor();
-	}
-
-	/**
 	 * Sets the spacing to add to top and bottom of each tooltip item.
 	 * 
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
@@ -587,59 +433,14 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the footer font.
+	 * Returns the footer font element.
 	 * 
-	 * @param footerFontFamily footer font.
+	 * @return the footer font
 	 */
-	public void setFooterFontFamily(String footerFontFamily) {
-		getConfiguration().getTooltips().setFooterFontFamily(footerFontFamily);
+	public Font getFooterFont() {
+		return footerFont;
 	}
-
-	/**
-	 * Returns the footer font.
-	 * 
-	 * @return footer font.
-	 */
-	public String getFooterFontFamily() {
-		return getConfiguration().getTooltips().getBodyFontFamily();
-	}
-
-	/**
-	 * Sets the footer font size.
-	 * 
-	 * @param footerFontSize footer font size.
-	 */
-	public void setFooterFontSize(int footerFontSize) {
-		getConfiguration().getTooltips().setFooterFontSize(footerFontSize);
-	}
-
-	/**
-	 * Returns the footer font size.
-	 * 
-	 * @return footer font size.
-	 */
-	public int getFooterFontSize() {
-		return getConfiguration().getTooltips().getFooterFontSize();
-	}
-
-	/**
-	 * Sets the footer font style.
-	 * 
-	 * @param footerFontStyle the footer font style.
-	 */
-	public void setFooterFontStyle(FontStyle footerFontStyle) {
-		getConfiguration().getTooltips().setFooterFontStyle(footerFontStyle);
-	}
-
-	/**
-	 * Returns the footer font style.
-	 * 
-	 * @return footer font style.
-	 */
-	public FontStyle getFooterFontStyle() {
-		return getConfiguration().getTooltips().getFooterFontStyle();
-	}
-
+	
 	/**
 	 * Sets the footer alignment.
 	 * 
@@ -656,42 +457,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public TextAlign getFooterAlign() {
 		return getConfiguration().getTooltips().getFooterAlign();
-	}
-
-	/**
-	 * Sets the footer font color.
-	 * 
-	 * @param footerFontColor footer font color.
-	 */
-	public void setFooterFontColor(IsColor footerFontColor) {
-		getConfiguration().getTooltips().setFooterFontColor(footerFontColor);
-	}
-
-	/**
-	 * Sets the footer font color.
-	 * 
-	 * @param footerFontColor footer font color.
-	 */
-	public void setFooterFontColor(String footerFontColor) {
-		getConfiguration().getTooltips().setFooterFontColor(footerFontColor);
-	}
-
-	/**
-	 * Returns the footer font color.
-	 * 
-	 * @return footer font color.
-	 */
-	public String getFooterFontColorAsString() {
-		return getConfiguration().getTooltips().getFooterFontColorAsString();
-	}
-
-	/**
-	 * Returns the footer font color.
-	 * 
-	 * @return footer font color.
-	 */
-	public IsColor getFooterFontColor() {
-		return getConfiguration().getTooltips().getFooterFontColor();
 	}
 
 	/**
