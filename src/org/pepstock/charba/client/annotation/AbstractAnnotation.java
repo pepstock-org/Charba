@@ -276,7 +276,7 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * @param borderColor the color of the border of annotation
 	 */
 	public final void setBorderColor(IsColor borderColor) {
-		setBorderColor(checkValue(borderColor));
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
 	}
 
 	/**

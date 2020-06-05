@@ -323,7 +323,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @param from the start value for the animation as color.
 	 */
 	public void setFrom(IsColor from) {
-		setFrom(checkValue(from));
+		setFrom(IsColor.checkAndGetValue(from));
 	}
 
 	/**

@@ -245,7 +245,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @param color the background color.
 	 */
 	public void setBackgroundColor(IsColor color) {
-		setBackgroundColor(checkValue(color));
+		setBackgroundColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**

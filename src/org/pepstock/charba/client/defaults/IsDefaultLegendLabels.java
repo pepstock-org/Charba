@@ -29,7 +29,7 @@ public interface IsDefaultLegendLabels {
 	 * @return the font defaults.
 	 */
 	IsDefaultFont getFont();
-	
+
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 

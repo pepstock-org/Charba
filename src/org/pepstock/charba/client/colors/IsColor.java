@@ -61,7 +61,7 @@ public interface IsColor {
 		ColorUtil.checkChannelWithinBounds(color.getBlue());
 		ColorUtil.checkAlphaWithinBounds(color.getAlpha());
 	}
-	
+
 	/**
 	 * Checks a color value if consistent, returning the RGBA representation, otherwise <code>null</code>.
 	 * 

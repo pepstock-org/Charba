@@ -107,7 +107,7 @@ public class GridLines extends AxisContainer {
 	public List<IsColor> getColor() {
 		return getAxis().getScale().getGrideLines().getColor();
 	}
-	
+
 	/**
 	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
 	 * 
@@ -134,7 +134,7 @@ public class GridLines extends AxisContainer {
 	public String getBorderColorAsString() {
 		return getAxis().getScale().getGrideLines().getBorderColorAsString();
 	}
-	
+
 	/**
 	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
 	 * 
@@ -143,7 +143,7 @@ public class GridLines extends AxisContainer {
 	public IsColor getBorderColor() {
 		return getAxis().getScale().getGrideLines().getBorderColor();
 	}
-	
+
 	/**
 	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
 	 * 
@@ -288,7 +288,7 @@ public class GridLines extends AxisContainer {
 	public int getTickMarkLength() {
 		return getAxis().getScale().getGrideLines().getTickMarkLength();
 	}
-	
+
 	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 

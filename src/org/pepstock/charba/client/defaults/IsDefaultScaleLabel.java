@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultScaleLabel {
-	
+
 	/**
 	 * Returns the font defaults.
 	 * 
@@ -51,7 +51,7 @@ public interface IsDefaultScaleLabel {
 	 * @return The text for the scale string.
 	 */
 	String getLabelString();
-	
+
 	/**
 	 * Returns the alignment of the axis title.
 	 * 

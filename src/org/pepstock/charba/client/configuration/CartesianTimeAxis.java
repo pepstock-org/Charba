@@ -41,7 +41,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	private final Time time;
 
 	private final Adapters adapters;
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
@@ -61,7 +61,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public CartesianTimeAxis(IsChart chart, String id) {
 		this(chart, ScaleIdChecker.key(id));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
@@ -71,7 +71,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public CartesianTimeAxis(IsChart chart, Key id) {
 		this(chart, id, null);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -81,9 +81,9 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public CartesianTimeAxis(IsChart chart, CartesianAxisType cartesianType) {
 		// uses cartesian type as axis id
 		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -177,7 +177,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public ScaleBounds getBounds() {
 		return getScale().getBounds();
 	}
-	
+
 	/**
 	 * If defined, this will override the data maximum.
 	 * 

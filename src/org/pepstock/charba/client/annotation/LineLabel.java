@@ -178,7 +178,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param backgroundColor the background color of label
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(checkValue(backgroundColor));
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
 	/**
@@ -253,7 +253,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param fontColor the font color of text
 	 */
 	public void setFontColor(IsColor fontColor) {
-		setFontColor(checkValue(fontColor));
+		setFontColor(IsColor.checkAndGetValue(fontColor));
 	}
 
 	/**

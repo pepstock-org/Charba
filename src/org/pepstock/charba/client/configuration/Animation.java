@@ -77,11 +77,10 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
-	
-	private final AnimationActive active;
-	
-	private final AnimationResize resize;
 
+	private final AnimationActive active;
+
+	private final AnimationResize resize;
 
 	/**
 	 * Name of properties of native object.
@@ -150,7 +149,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 			}
 		});
 	}
-	
+
 	/**
 	 * Returns the animation element to get the duration in milliseconds it takes to animate hover style changes.
 	 * 
@@ -240,7 +239,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	public boolean isAnimateScale() {
 		return getConfiguration().getAnimation().isAnimateScale();
 	}
-	
+
 	/**
 	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
 	 * 
@@ -357,7 +356,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	public String getFromAsString() {
 		return getConfiguration().getAnimation().getFromAsString();
 	}
-	
+
 	/**
 	 * Returns the start value for the animation as color.
 	 * 

@@ -310,7 +310,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param color the clear selection label font color.
 	 */
 	public void setFontColor(IsColor color) {
-		setFontColor(checkValue(color));
+		setFontColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**

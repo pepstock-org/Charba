@@ -66,7 +66,7 @@ public interface IsDefaultFont {
 	 * @return the height of an individual line of text.
 	 */
 	double getLineHeight();
-	
+
 	/**
 	 * Returns the stroke width around the text.<br>
 	 * Currently only supported by ticks.
@@ -74,7 +74,7 @@ public interface IsDefaultFont {
 	 * @return the stroke width around the text
 	 */
 	int getLineWidth();
-	
+
 	/**
 	 * Returns the color of the stroke around the text.<br>
 	 * Currently only supported by ticks.

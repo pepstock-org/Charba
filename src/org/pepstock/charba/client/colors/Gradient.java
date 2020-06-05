@@ -213,7 +213,7 @@ public final class Gradient extends CanvasObject {
 	 * @param stop stopping color, with offset 1
 	 */
 	public void addColorsStartStop(IsColor start, IsColor stop) {
-		addColorsStartStop(checkValue(start), checkValue(stop));
+		addColorsStartStop(IsColor.checkAndGetValue(start), IsColor.checkAndGetValue(stop));
 	}
 
 	/**
@@ -235,7 +235,7 @@ public final class Gradient extends CanvasObject {
 	 * @param color color instance
 	 */
 	public void addColorStop(double offset, IsColor color) {
-		addColorStop(offset, checkValue(color));
+		addColorStop(offset, IsColor.checkAndGetValue(color));
 	}
 
 	/**

@@ -39,12 +39,12 @@ public interface IsDefaultHover {
 	 */
 	boolean isIntersect();
 
-//	/**
-//	 * Returns the duration in milliseconds it takes to animate hover style changes.
-//	 * 
-//	 * @return duration in milliseconds it takes to animate hover style changes.
-//	 */
-//	int getAnimationDuration();
+	// /**
+	// * Returns the duration in milliseconds it takes to animate hover style changes.
+	// *
+	// * @return duration in milliseconds it takes to animate hover style changes.
+	// */
+	// int getAnimationDuration();
 
 	/**
 	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.

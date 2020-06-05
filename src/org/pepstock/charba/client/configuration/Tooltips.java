@@ -323,7 +323,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public IsColor getBackgroundColor() {
 		return getConfiguration().getTooltips().getBackgroundColor();
 	}
-	
+
 	/**
 	 * Returns the title font element.
 	 * 
@@ -386,7 +386,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public int getTitleMarginBottom() {
 		return getConfiguration().getTooltips().getTitleMarginBottom();
 	}
-	
+
 	/**
 	 * Returns the body font element.
 	 * 
@@ -440,7 +440,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public Font getFooterFont() {
 		return footerFont;
 	}
-	
+
 	/**
 	 * Sets the footer alignment.
 	 * 

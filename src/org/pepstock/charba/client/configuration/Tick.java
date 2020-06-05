@@ -25,15 +25,15 @@ import org.pepstock.charba.client.options.Ticks;
  *
  */
 abstract class Tick extends AxisContainer {
-	
+
 	// the axis instance, owner of this tick
 	private final Ticks configuration;
 
 	private final Major major;
-	
+
 	// font instance
 	private final Font font;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -78,7 +78,7 @@ abstract class Tick extends AxisContainer {
 		major = new Major(axis, axis.getScale().getTicks());
 		font = new Font(axis.getConfiguration().getTicks().getFont());
 	}
-	
+
 	/**
 	 * Returns the options element for tick.
 	 * 
@@ -96,7 +96,7 @@ abstract class Tick extends AxisContainer {
 	public Major getMajor() {
 		return major;
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 
@@ -141,7 +141,7 @@ abstract class Tick extends AxisContainer {
 	public int getZ() {
 		return getConfiguration().getZ();
 	}
-	
+
 	/**
 	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
 	 * in the vertical (Y) direction.

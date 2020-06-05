@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 
 /**
- * It contains the animation options to set and get the duration in milliseconds it takes to animate hover style changes. 
+ * It contains the animation options to set and get the duration in milliseconds it takes to animate hover style changes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -28,8 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 public class AnimationActive extends AbstractAnimationElement {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param animation animation options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

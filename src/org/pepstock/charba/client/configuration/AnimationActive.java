@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * It contains the animation options to set and get the duration in milliseconds it takes to animate hover style changes. 
+ * It contains the animation options to set and get the duration in milliseconds it takes to animate hover style changes.
  * 
  * @author Andrea "Stock" Stocchero
  */

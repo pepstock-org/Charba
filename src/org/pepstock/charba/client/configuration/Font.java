@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.IsFont;
  * @author Andrea "Stock" Stocchero
  */
 public final class Font implements IsFont {
-	
+
 	// font options element
 	private final IsFont font;
 

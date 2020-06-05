@@ -70,7 +70,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 		}
 
 	}
-	
+
 	// instance of font
 	private final Font font;
 
@@ -86,7 +86,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 		super(options, childKey, defaultValues, nativeObject);
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

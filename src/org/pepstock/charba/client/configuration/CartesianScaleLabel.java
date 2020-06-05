@@ -39,7 +39,7 @@ public class CartesianScaleLabel extends AxisContainer {
 		padding = new CartesianPadding(axis);
 		font = new Font(axis.getConfiguration().getScaleLabel().getFont());
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

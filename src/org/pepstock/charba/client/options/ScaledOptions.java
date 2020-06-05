@@ -102,7 +102,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 			// being a single scale, must be set to unknown
 			if (!DefaultScaleId.UNKNOWN.is(scale.getId())) {
 				// throw an exception
-				throw new IllegalArgumentException("The scale has got "+scale.getId()+" as id but the id must not be set");
+				throw new IllegalArgumentException("The scale has got " + scale.getId() + " as id but the id must not be set");
 			}
 			this.scale = scale;
 			// set values

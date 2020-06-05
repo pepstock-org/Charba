@@ -60,7 +60,7 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 * 
 	 * @return the parent node or <code>null</code> if is a root node.
 	 */
-	protected final AbstractNode getParentNode(){
+	protected final AbstractNode getParentNode() {
 		return parent;
 	}
 

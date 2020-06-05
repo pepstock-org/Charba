@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Key;
 public enum InterpolatorType implements Key
 {
 	/**
-	 * Uses a number to interpolate animation. 
+	 * Uses a number to interpolate animation.
 	 */
 	NUMBER("number"),
 	/**

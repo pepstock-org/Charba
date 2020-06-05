@@ -75,7 +75,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		super(legend, childKey, defaultValues, nativeObject);
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

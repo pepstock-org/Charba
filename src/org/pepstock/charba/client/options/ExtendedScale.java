@@ -67,8 +67,7 @@ public final class ExtendedScale extends Scale {
 	}
 
 	/**
-	 * FIXME maybe an envelop could be helpful to avoid to use this scale instance out of configuration
-	 * Creates a scale with default provider. The native object is created empty.
+	 * FIXME maybe an envelop could be helpful to avoid to use this scale instance out of configuration Creates a scale with default provider. The native object is created empty.
 	 * 
 	 * @param id scale id
 	 * @param defaultValues default provider.

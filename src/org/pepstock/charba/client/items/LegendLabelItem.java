@@ -167,7 +167,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the fill style of the legend box as color
 	 */
 	public void setFillStyle(IsColor color) {
-		setFillStyle(checkValue(color));
+		setFillStyle(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -330,7 +330,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the stroke style of the legend box as color
 	 */
 	public void setStrokeStyle(IsColor color) {
-		setStrokeStyle(checkValue(color));
+		setStrokeStyle(IsColor.checkAndGetValue(color));
 	}
 
 	/**

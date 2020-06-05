@@ -37,7 +37,7 @@ public class DefaultFont implements IsDefaultFont {
 	private static final String DEFAULT_STROKE_STYLE = "rgba(255, 255, 255, 0)";
 
 	private static final int DEFAULT_LINE_WIDTH = 0;
-	
+
 	/**
 	 * Creates the object. Protected to avoid any instantiation
 	 */

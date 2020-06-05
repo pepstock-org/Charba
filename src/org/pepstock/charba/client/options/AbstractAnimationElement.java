@@ -20,8 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
- * takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,7 +33,7 @@ abstract class AbstractAnimationElement extends AbstractModel<Animation, IsDefau
 	private enum Property implements Key
 	{
 		DURATION("duration");
-		
+
 		// name value of property
 		private final String value;
 
@@ -60,8 +59,7 @@ abstract class AbstractAnimationElement extends AbstractModel<Animation, IsDefau
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param animation animation options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.

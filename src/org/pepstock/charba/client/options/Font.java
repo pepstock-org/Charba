@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  */
 public final class Font extends AbstractNode implements IsFont {
-	
+
 	// default font values
 	private final IsDefaultFont defaultValues;
 
@@ -97,7 +97,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param color font color.
 	 */
 	public void setColor(IsColor color) {
-		setColor(checkValue(color));
+		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -296,7 +296,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * @param strokeStyle the color of the stroke around the text
 	 */
 	public void setStrokeStyle(IsColor strokeStyle) {
-		setColor(checkValue(strokeStyle));
+		setColor(IsColor.checkAndGetValue(strokeStyle));
 	}
 
 	/**

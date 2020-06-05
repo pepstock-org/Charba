@@ -110,7 +110,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 		major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 
@@ -296,7 +296,6 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
-
 	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 
@@ -343,7 +342,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(IsColor backdropColor) {
-		setBackdropColor(checkValue(backdropColor));
+		setBackdropColor(IsColor.checkAndGetValue(backdropColor));
 	}
 
 	/**

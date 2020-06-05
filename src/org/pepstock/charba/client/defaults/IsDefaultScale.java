@@ -77,7 +77,7 @@ public interface IsDefaultScale {
 	 * @return the adapter defaults.
 	 */
 	IsDefaultAdapters getAdapters();
-	
+
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
@@ -112,7 +112,7 @@ public interface IsDefaultScale {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	double getSuggestedMin();
-	
+
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
@@ -133,7 +133,7 @@ public interface IsDefaultScale {
 	 * @return the type of axis.
 	 */
 	AxisType getType();
-	
+
 	/**
 	 * Which type of axis this is.<br>
 	 * Possible values are: 'x', 'y'.<br>

@@ -94,7 +94,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	GridLines(Scale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -151,7 +151,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(IsColor color) {
-		setBorderColor(checkValue(color));
+		setBorderColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -181,7 +181,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 		// then uses the default color as default for border color
 		return getValue(Property.BORDER_COLOR, getDefaultValues().getColorAsString());
 	}
-	
+
 	/**
 	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
 	 * 
@@ -190,7 +190,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
-	
+
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
@@ -257,7 +257,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
 	}
-	
+
 	/**
 	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
 	 * 
@@ -277,7 +277,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getLineWidth());
 	}
-	
+
 	/**
 	 * Sets the stroke widths of grid lines.
 	 * 
@@ -390,7 +390,6 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public int getTickMarkLength() {
 		return getValue(Property.TICK_MARK_LENGTH, getDefaultValues().getTickMarkLength());
 	}
-	
 
 	/**
 	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
@@ -458,7 +457,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineColor(IsColor zeroLineColor) {
-		setZeroLineColor(checkValue(zeroLineColor));
+		setZeroLineColor(IsColor.checkAndGetValue(zeroLineColor));
 	}
 
 	/**

@@ -60,7 +60,7 @@ public enum DefaultScaleId implements Key
 	public String value() {
 		return value;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the scale id is related to this axis id.
 	 * 

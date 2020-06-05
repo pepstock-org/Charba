@@ -52,7 +52,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Tooltips tooltips;
 
 	private final Plugins plugins;
-	
+
 	private final Font font;
 
 	/**
@@ -148,7 +148,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	protected final Font getDefaultsFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -369,7 +369,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param defaultColor color to use into chart.
 	 */
 	public void setColor(IsColor defaultColor) {
-		setColor(checkValue(defaultColor));
+		setColor(IsColor.checkAndGetValue(defaultColor));
 	}
 
 	/**

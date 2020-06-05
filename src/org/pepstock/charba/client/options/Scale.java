@@ -286,7 +286,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		// then returns unknown
 		return DefaultScaleId.UNKNOWN;
 	}
-	
+
 	/**
 	 * If <code>true</code>, scale will include 0 if it is not already included.
 	 * 
@@ -306,7 +306,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	public boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
 	}
- 
+
 	/**
 	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
 	 * 

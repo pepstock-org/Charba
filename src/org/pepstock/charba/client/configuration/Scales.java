@@ -70,9 +70,10 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 			getConfiguration().getScales().setAxes(scales);
 		}
 	}
-	
+
 	/**
 	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * 
 	 * @param scaleId scale id to check
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
@@ -82,6 +83,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 
 	/**
 	 * Returns the scale with the id passed as argument or <code>null</code> if not exist.
+	 * 
 	 * @param scaleId scale id to check
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */

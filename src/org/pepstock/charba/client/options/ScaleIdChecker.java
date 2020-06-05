@@ -65,7 +65,7 @@ public final class ScaleIdChecker {
 			throw new IllegalArgumentException(buildMessage(id, "Scale id can not contain any invalid characters "));
 		}
 	}
-	
+
 	/**
 	 * Checks if the scale is compliant with the constraints of scale id.<br>
 	 * A scale id <br>

@@ -105,7 +105,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.isAnimateScale();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isDebug()
 	 */
 	@Override
@@ -113,7 +115,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.isDebug();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDelay()
 	 */
 	@Override
@@ -121,7 +125,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.getDelay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isLoop()
 	 */
 	@Override
@@ -129,7 +135,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.isLoop();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getType()
 	 */
 	@Override
@@ -137,7 +145,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.getType();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFrom()
 	 */
 	@Override
@@ -145,12 +155,14 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 		return animation.getFrom();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFromAsString()
 	 */
 	@Override
 	public String getFromAsString() {
 		return animation.getFromAsString();
 	}
-	
+
 }

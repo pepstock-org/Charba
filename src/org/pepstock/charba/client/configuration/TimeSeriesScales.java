@@ -76,7 +76,7 @@ public final class TimeSeriesScales extends Scales {
 		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
 			// creates an empty array of axis plus 1 for X axis
-			Axis[] toStore = new Axis[axes.length+1];
+			Axis[] toStore = new Axis[axes.length + 1];
 			// stores x axis
 			toStore[0] = timeAxis;
 			// sets an index to load the array

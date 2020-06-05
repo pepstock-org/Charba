@@ -112,7 +112,7 @@ public final class Utilities {
 	private Utilities() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
 	 * The format is [font-style] [font-variant] [font-weight] [font-size] [font-family].<br>
@@ -131,7 +131,6 @@ public final class Utilities {
 		Font globalFont = Defaults.get().getGlobal().getFont();
 		return toCSSFontProperty(globalFont.getStyle(), globalFont.getWeight(), globalFont.getSize(), globalFont.getFamily());
 	}
-
 
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>

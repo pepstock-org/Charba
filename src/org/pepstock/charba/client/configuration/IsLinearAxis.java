@@ -24,7 +24,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsLinearAxis extends IsNumericAxis{
+public interface IsLinearAxis extends IsNumericAxis {
 
 	/**
 	 * If true, scale will include 0 if it is not already included.
@@ -51,7 +51,7 @@ public interface IsLinearAxis extends IsNumericAxis{
 		// if here, axis is not consistent
 		return Defaults.get().getScale().isBeginAtZero();
 	}
-		
+
 	/**
 	 * Sets the reverses order of tick labels.
 	 * 

@@ -27,10 +27,10 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
+public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
 
 	private final ScaleLabelPadding padding;
-	
+
 	// instance of font
 	private final Font font;
 
@@ -83,7 +83,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 
@@ -141,7 +141,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	public String getLabelString() {
 		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
 	}
-	
+
 	/**
 	 * Sets the alignment of the axis title.
 	 * 

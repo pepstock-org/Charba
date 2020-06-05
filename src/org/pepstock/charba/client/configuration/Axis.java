@@ -210,7 +210,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public final int getCharbaId() {
 		return getConfiguration().getCharbaId();
 	}
-	
+
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
@@ -220,7 +220,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public final String getId() {
 		return getConfiguration().getId();
 	}
-	
+
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.

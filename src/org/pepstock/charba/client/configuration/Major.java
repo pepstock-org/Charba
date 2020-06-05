@@ -26,7 +26,7 @@ public class Major extends AxisContainer {
 
 	// the axis instance, owner of this tick
 	private final Ticks ticks;
-	
+
 	/**
 	 * Creates the major tick
 	 * 

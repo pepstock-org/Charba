@@ -62,7 +62,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryAxis(IsChart chart, Key id) {
 		this(chart, id, null);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -72,9 +72,9 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryAxis(IsChart chart, CartesianAxisType cartesianType) {
 		// uses cartesian type as axis id
 		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId() , cartesianType);
+		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and axis type.
 	 * 
@@ -110,7 +110,6 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryTick getTicks() {
 		return ticks;
 	}
-	
 
 	/**
 	 * Sets the minimum item to display.

@@ -1123,7 +1123,7 @@ final class SelectionHandler {
 		boolean offset = false;
 		// checks if is a BAR chart
 		if (ChartType.BAR.equals(chart.getBaseType()) && chart.getOptions() instanceof BarOptions) {
-			// gets all scales 
+			// gets all scales
 			List<Scale> scales = chart.getNode().getOptions().getScales().getAxes();
 			// checks if any scale has been configured
 			if (!scales.isEmpty()) {

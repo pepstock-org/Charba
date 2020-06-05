@@ -46,7 +46,7 @@ public class Title {
 		}
 		this.font = new Font(options.getTitle().getFont());
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

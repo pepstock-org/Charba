@@ -170,7 +170,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			return ArrayObject.fromOrEmpty(EMPTY_RESULT);
 		});
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

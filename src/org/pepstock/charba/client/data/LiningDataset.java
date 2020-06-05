@@ -329,7 +329,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(checkValue(backgroundColor));
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
 	/**
@@ -453,7 +453,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setBorderColor(checkValue(borderColor));
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
 	}
 
 	/**
@@ -713,7 +713,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param color the fill color of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(IsColor color) {
-		setHoverBackgroundColor(checkValue(color));
+		setHoverBackgroundColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -830,7 +830,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderColor(IsColor color) {
 		// resets callback
-		setHoverBorderColor(checkValue(color));
+		setHoverBorderColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**

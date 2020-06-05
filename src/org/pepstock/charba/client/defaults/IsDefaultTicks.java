@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultTicks {
-	
+
 	/**
 	 * Returns the font defaults.
 	 * 

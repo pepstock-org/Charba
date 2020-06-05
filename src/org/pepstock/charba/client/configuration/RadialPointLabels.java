@@ -98,7 +98,7 @@ public class RadialPointLabels extends AxisContainer {
 		}
 
 	}
-	
+
 	// font instance
 	private final Font font;
 
@@ -124,7 +124,7 @@ public class RadialPointLabels extends AxisContainer {
 			return item;
 		});
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

@@ -37,7 +37,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	private final TooltipsCallbacks callbacks;
 
 	private final TextDirectioner textDirectioner;
-	
+
 	// instance of font for title
 	private final Font titleFont;
 	// instance of font for body
@@ -116,7 +116,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text directioner
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
-		
+
 	}
 
 	/*
@@ -225,7 +225,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param backgroundColor background color of the tooltip.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(checkValue(backgroundColor));
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
 	/**
@@ -256,7 +256,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Returns the title font element.
 	 * 
@@ -374,7 +374,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public int getBodySpacing() {
 		return getValue(Property.BODY_SPACING, getDefaultValues().getBodySpacing());
 	}
-	
+
 	/**
 	 * Returns the footer font element.
 	 * 
@@ -550,7 +550,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public void setMultiKeyBackground(IsColor multiKeyBackground) {
-		setMultiKeyBackground(checkValue(multiKeyBackground));
+		setMultiKeyBackground(IsColor.checkAndGetValue(multiKeyBackground));
 	}
 
 	/**
@@ -608,7 +608,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param borderColor color of the border.
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setBorderColor(checkValue(borderColor));
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
 	}
 
 	/**

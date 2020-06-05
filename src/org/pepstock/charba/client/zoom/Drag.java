@@ -112,7 +112,7 @@ public final class Drag extends NativeObjectContainer {
 	 * @param backgroundColor the fill color during dragging
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(checkValue(backgroundColor));
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
 	/**
@@ -150,7 +150,7 @@ public final class Drag extends NativeObjectContainer {
 	 * @param borderColor the color of the border during dragging
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setBorderColor(checkValue(borderColor));
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
 	}
 
 	/**

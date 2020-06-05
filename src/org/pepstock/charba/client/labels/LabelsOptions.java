@@ -374,7 +374,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the font color as color.
 	 */
 	public void setFontColor(IsColor color) {
-		setFontColor(checkValue(color));
+		setFontColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -518,7 +518,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param shadowColor the text shadow color as color.
 	 */
 	public void setShadowColor(IsColor shadowColor) {
-		setShadowColor(checkValue(shadowColor));
+		setShadowColor(IsColor.checkAndGetValue(shadowColor));
 	}
 
 	/**

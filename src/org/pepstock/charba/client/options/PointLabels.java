@@ -75,7 +75,7 @@ public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels
 		super(scale, childKey, defaultValues, nativeObject);
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
-	
+
 	/**
 	 * Returns the font element.
 	 * 

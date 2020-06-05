@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultPointLabels {
-	
+
 	/**
 	 * Returns the font defaults.
 	 * 

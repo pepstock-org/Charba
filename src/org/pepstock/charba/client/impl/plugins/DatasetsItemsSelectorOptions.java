@@ -239,7 +239,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setColor(IsColor color) {
-		setColor(checkValue(color));
+		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -331,7 +331,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setBorderColor(IsColor color) {
-		setBorderColor(checkValue(color));
+		setBorderColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
