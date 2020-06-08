@@ -146,21 +146,59 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
 
- * remove following capabilities by new **CHART.JS version**:
-   * `isAnimating` method from `ChartNode` class.
-   * `getBorderWidth` method from `ChartNode` class.
-   * `getOuterRadius` method from `ChartNode` class.
-   * `getInnerRadius` method from `ChartNode` class.
-   * `getRadiusLength` method from `ChartNode` class.
-   * `getOffsetX` method from `ChartNode` class.
-   * `getOffsetY` method from `ChartNode` class.
-   * `isHover` method of `ScriptableContext` class.
- * change following capabilities by new **CHART.JS version**:
+ * changes by new **CHART.JS version**:
+   * remove `isAnimating` method from `ChartNode` class.
+   * remove `getBorderWidth` method from `ChartNode` class.
+   * remove `getOuterRadius` method from `ChartNode` class.
+   * remove `getInnerRadius` method from `ChartNode` class.
+   * remove `getRadiusLength` method from `ChartNode` class.
+   * remove `getOffsetX` method from `ChartNode` class.
+   * remove `getOffsetY` method from `ChartNode` class.
+   * remove `isHover` method from `ScriptableContext` class.
+   * remove `getXAxes` and `setXAxes` methods from `Scales` classes, use `getAxes` and `setAxes` methods.
+   * remove `getYAxes` and `setYAxes` methods from `Scales` classes, use `getAxes` and `setAxes` methods.
    * rename `steppedLine` from the dataset options to `stepped`.
    * rename `tension` from the dataset option to `lineTension`.
    * rename `defaultColor` from `Defaults` global options to `color`. 
-   * change structure of `DatasetMetaItem`  
-
+   * change structure of `DatasetMetaItem`.
+   * rename `SteppedLine` enumeration to `Stepped`.
+   * rename `setSteppedLine` and `getSteppedLine` methods on line datasets to `setStepped` and `getStepped`.
+   * move `beginAtZero` property from ticks to axis/scale.
+   * move `min` property from ticks to axis/scale.
+   * move `max` property from ticks to axis/scale.
+   * move `reverse` property from ticks to axis/scale.
+   * move `suggestedMax` property from ticks to axis/scale.
+   * move `suggestedMin` property from ticks to axis/scale.
+   * move `min` property from time object to axis/scale.
+   * move `max` property from time object to axis/scale.
+   * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
+   * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
+   * add mandatory scale id parameter to `Scale` class constructor.
+   * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
+   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following options classes, because new `Font` implementation must be used:
+      * `Options`
+      * `LegendLabels`
+      * `Title`
+      * `Tooltips`
+      * `PointLabels`
+      * `ScaleLabel`
+      * `Ticks`
+   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following configuration classes, because new `Font` implementation must be used:
+      * `LegendLabels`
+      * `Title`
+      * `Tooltips`
+      * `PointLabels`
+      * `CartesianScaleLabel`
+      * `Ticks`
+   * change `toFont` method to `Utilities` class in order to get the weight of the font.
+   * remove `DefaultFontItem` class, use `DefaultFont`. 
+   * remove the following classes because the ticks implementation is updated:
+       * TickMinor, IsDefaultMinorTick, AbstractTick, IsDefaultBaseTick, DefaultTickItem, DefaultMinorTickItem, BaseTickMinor, BaseTick
+   * remove `getMinor` method from `IsDefaultTicks` interface and then from `DefaultTicks` and `DefaultChartTicks` classes.
+   * rename `TickMajor` option class to `Major`.
+   * rename `DefaultMajorTickItem` class to `DefaultMajor`.
+   * rename `BaseTickMinor` configuration class renamed to `Major`.   
+      
 ### Features
 
 * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
@@ -169,6 +207,13 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
    * add `hide` method to `AbstractChart` class in order to hide a dataset. 
    * add `show` method to `AbstractChart` class in order to show a dataset. 
+   * add axis id parameter to cartesian axes classes constructor.
+   * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter. 
+
+### Development
+
+   * change visibility of `CartesianAxis` class, now it is public.
+   * add `checkAndGetValue` static method to `IsColor` class.
 
 License
 -------
