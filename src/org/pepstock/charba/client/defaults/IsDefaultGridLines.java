@@ -79,27 +79,6 @@ public interface IsDefaultGridLines {
 	int getTickMarkLength();
 
 	/**
-	 * Returns the stroke width of the grid line for the first index (index 0).
-	 * 
-	 * @return Stroke width of the grid line for the first index (index 0).
-	 */
-	int getZeroLineWidth();
-
-	/**
-	 * Returns the stroke color of the grid line for the first index (index 0).
-	 * 
-	 * @return Stroke color of the grid line for the first index (index 0).
-	 */
-	String getZeroLineColorAsString();
-
-	/**
-	 * Returns the offset for line dashes of the grid line for the first index (index 0).
-	 * 
-	 * @return the offset for line dashes of the grid line for the first index (index 0).
-	 */
-	int getZeroLineBorderDashOffset();
-
-	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 
 	 * @return If true, grid lines will be shifted to be between labels.

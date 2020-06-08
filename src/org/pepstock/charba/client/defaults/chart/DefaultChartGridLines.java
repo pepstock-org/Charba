@@ -119,36 +119,6 @@ public final class DefaultChartGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineWidth()
-	 */
-	@Override
-	public int getZeroLineWidth() {
-		return gridLines.getZeroLineWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineColorAsString()
-	 */
-	@Override
-	public String getZeroLineColorAsString() {
-		return gridLines.getZeroLineColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineBorderDashOffset()
-	 */
-	@Override
-	public int getZeroLineBorderDashOffset() {
-		return gridLines.getZeroLineBorderDash().get(0);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isOffsetGridLines()
 	 */
 	@Override

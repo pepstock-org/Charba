@@ -40,12 +40,6 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final int DEFAULT_TICK_MARK_LENGTH = 10;
 
-	private static final int DEFAULT_ZERO_LINE_WIDTH = 1;
-
-	private static final String DEFAULT_ZERO_LINE_COLOR = "rgba(0,0,0,0.25)";
-
-	private static final int DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET = 0;
-
 	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
 
 	private static final boolean DEFAULT_CIRCULAR = false;
@@ -130,36 +124,6 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	@Override
 	public int getTickMarkLength() {
 		return DEFAULT_TICK_MARK_LENGTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineWidth()
-	 */
-	@Override
-	public int getZeroLineWidth() {
-		return DEFAULT_ZERO_LINE_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineColorAsString()
-	 */
-	@Override
-	public String getZeroLineColorAsString() {
-		return DEFAULT_ZERO_LINE_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZeroLineBorderDashOffset()
-	 */
-	@Override
-	public int getZeroLineBorderDashOffset() {
-		return DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET;
 	}
 
 	/*

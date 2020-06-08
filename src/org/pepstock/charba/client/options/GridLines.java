@@ -53,10 +53,6 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 		LINE_WIDTH("lineWidth"),
 		OFFSET_GRID_LINES("offsetGridLines"),
 		TICK_MARK_LENGTH("tickMarkLength"),
-		ZERO_LINE_WIDTH("zeroLineWidth"),
-		ZERO_LINE_COLOR("zeroLineColor"),
-		ZERO_LINE_BORDER_DASH("zeroLineBorderDash"),
-		ZERO_LINE_BORDER_DASH_OFFSET("zeroLineBorderDashOffset"),
 		Z("z");
 
 		// name value of property
@@ -439,108 +435,6 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	@Override
 	public int getZ() {
 		return getValue(Property.Z, getDefaultValues().getZ());
-	}
-
-	/**
-	 * Sets the stroke width of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineWidth Stroke width of the grid line for the first index (index 0).
-	 */
-	public void setZeroLineWidth(int zeroLineWidth) {
-		setValue(Property.ZERO_LINE_WIDTH, zeroLineWidth);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the stroke width of the grid line for the first index (index 0).
-	 * 
-	 * @return Stroke width of the grid line for the first index (index 0).
-	 */
-	@Override
-	public int getZeroLineWidth() {
-		return getValue(Property.ZERO_LINE_WIDTH, getDefaultValues().getZeroLineWidth());
-	}
-
-	/**
-	 * Sets the stroke color of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
-	 */
-	public void setZeroLineColor(IsColor zeroLineColor) {
-		setZeroLineColor(IsColor.checkAndGetValue(zeroLineColor));
-	}
-
-	/**
-	 * Sets the stroke color of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
-	 */
-	public void setZeroLineColor(String zeroLineColor) {
-		setValue(Property.ZERO_LINE_COLOR, zeroLineColor);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the stroke color of the grid line for the first index (index 0).
-	 * 
-	 * @return Stroke color of the grid line for the first index (index 0).
-	 */
-	@Override
-	public String getZeroLineColorAsString() {
-		return getValue(Property.ZERO_LINE_COLOR, getDefaultValues().getZeroLineColorAsString());
-	}
-
-	/**
-	 * Returns the stroke color of the grid line for the first index (index 0).
-	 * 
-	 * @return Stroke color of the grid line for the first index (index 0).
-	 */
-	public IsColor getZeroLineColor() {
-		return ColorBuilder.parse(getZeroLineColorAsString());
-	}
-
-	/**
-	 * Sets the length and spacing of dashes of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
-	 */
-	public void setZeroLineBorderDash(int... zeroLineBorderDash) {
-		setArrayValue(Property.ZERO_LINE_BORDER_DASH, ArrayInteger.fromOrNull(zeroLineBorderDash));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the length and spacing of dashes of the grid line for the first index (index 0).
-	 * 
-	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
-	 */
-	public List<Integer> getZeroLineBorderDash() {
-		ArrayInteger array = getArrayValue(Property.ZERO_LINE_BORDER_DASH);
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Sets the offset for line dashes of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineBorderDashOffset the offset for line dashes of the grid line for the first index (index 0).
-	 */
-	public void setZeroLineBorderDashOffset(int zeroLineBorderDashOffset) {
-		setValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, zeroLineBorderDashOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the offset for line dashes of the grid line for the first index (index 0).
-	 * 
-	 * @return the offset for line dashes of the grid line for the first index (index 0).
-	 */
-	@Override
-	public int getZeroLineBorderDashOffset() {
-		return getValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, getDefaultValues().getZeroLineBorderDashOffset());
 	}
 
 }

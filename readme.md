@@ -192,11 +192,12 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `toFont` method to `Utilities` class in order to get the weight of the font.
    * remove `DefaultFontItem` class, use `DefaultFont`. 
    * remove the following classes because the ticks implementation is updated:
-       * TickMinor, IsDefaultMinorTick, AbstractTick, IsDefaultBaseTick, DefaultTickItem, DefaultMinorTickItem, BaseTickMinor, BaseTick
+       * `TickMinor`, `IsDefaultMinorTick`, `AbstractTick`, `IsDefaultBaseTick`, `DefaultTickItem`, `DefaultMinorTickItem`, `BaseTickMinor` and `BaseTick`
    * remove `getMinor` method from `IsDefaultTicks` interface and then from `DefaultTicks` and `DefaultChartTicks` classes.
    * rename `TickMajor` option class to `Major`.
    * rename `DefaultMajorTickItem` class to `DefaultMajor`.
-   * rename `BaseTickMinor` configuration class renamed to `Major`.   
+   * rename `BaseTickMinor` configuration class renamed to `Major`.
+   * remove `zeroLineWidth`, `zeroLineColor`, `zeroLineBorderDash` and `zeroLineBorderDashOffset` properties from `GridLines` options and configuration classes.
       
 ### Features
 
