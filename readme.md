@@ -207,7 +207,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `hide` method to `AbstractChart` class in order to hide a dataset. 
    * add `show` method to `AbstractChart` class in order to show a dataset. 
    * add axis id parameter to cartesian axes classes constructor.
-   * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter. 
+   * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
+   * add new `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
 
 ### Development
 

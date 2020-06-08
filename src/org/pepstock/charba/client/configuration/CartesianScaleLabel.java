@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.enums.ScaleLabelAlign;
+
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the getAxis().<br>
  * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
@@ -92,6 +94,24 @@ public class CartesianScaleLabel extends AxisContainer {
 	 */
 	public String getLabelString() {
 		return getAxis().getScale().getScaleLabel().getLabelString();
+	}
+
+	/**
+	 * Sets the alignment of the axis title.
+	 * 
+	 * @param align the alignment of the axis title
+	 */
+	public void setAlign(ScaleLabelAlign align) {
+		getAxis().getScale().getScaleLabel().setAlign(align);
+	}
+
+	/**
+	 * Returns the alignment of the axis title.
+	 * 
+	 * @return the alignment of the axis title
+	 */
+	public ScaleLabelAlign getAlign() {
+		return getAxis().getScale().getScaleLabel().getAlign();
 	}
 
 }
