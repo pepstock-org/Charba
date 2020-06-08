@@ -92,6 +92,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFont() {
 		return font;
 	}
@@ -112,6 +113,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 * 
 	 * @return if <code>true</code> the title is shown.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -132,6 +134,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 * 
 	 * @return the position of title.
 	 */
+	@Override
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
@@ -152,6 +155,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 * 
 	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
+	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
@@ -172,6 +176,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 * 
 	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
+	@Override
 	public boolean isFullWidth() {
 		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
 	}

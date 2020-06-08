@@ -86,6 +86,7 @@ public final class Major extends AbstractModel<Ticks, IsDefaultMajor> implements
 	 * 
 	 * @return if <code>true</code>, major tick options are used to show major ticks
 	 */
+	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
 	}

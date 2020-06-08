@@ -81,6 +81,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFont() {
 		return font;
 	}
@@ -101,6 +102,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * 
 	 * @return <code>true</code> if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 */
+	@Override
 	public boolean isUsePointStyle() {
 		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());
 	}
@@ -121,6 +123,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * 
 	 * @return width of colored box.
 	 */
+	@Override
 	public int getBoxWidth() {
 		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
 	}
@@ -141,6 +144,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * 
 	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
+	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}

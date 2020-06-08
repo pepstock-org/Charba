@@ -116,6 +116,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFont() {
 		return font;
 	}
@@ -125,6 +126,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return the major
 	 */
+	@Override
 	public Major getMajor() {
 		return major;
 	}
@@ -145,6 +147,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return if <code>true</code>, show tick marks.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -165,6 +168,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what.
 	 */
+	@Override
 	public boolean isAutoSkip() {
 		return getValue(Property.AUTO_SKIP, getDefaultValues().isAutoSkip());
 	}
@@ -185,6 +189,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
+	@Override
 	public int getAutoSkipPadding() {
 		return getValue(Property.AUTO_SKIP_PADDING, getDefaultValues().getAutoSkipPadding());
 	}
@@ -207,6 +212,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).
 	 */
+	@Override
 	public int getLabelOffset() {
 		return getValue(Property.LABEL_OFFSET, getDefaultValues().getLabelOffset());
 	}
@@ -228,6 +234,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 */
+	@Override
 	public int getMaxRotation() {
 		return getValue(Property.MAX_ROTATION, getDefaultValues().getMaxRotation());
 	}
@@ -248,6 +255,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
+	@Override
 	public int getMinRotation() {
 		return getValue(Property.MIN_ROTATION, getDefaultValues().getMinRotation());
 	}
@@ -268,6 +276,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 */
+	@Override
 	public boolean isMirror() {
 		return getValue(Property.MIRROR, getDefaultValues().isMirror());
 	}
@@ -292,6 +301,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
 	 *         in the vertical (Y) direction.
 	 */
+	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
@@ -312,6 +322,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return maximum number of ticks and gridlines to show.
 	 */
+	@Override
 	public int getMaxTicksLimit() {
 		return getValue(Property.MAX_TICKS_LIMIT, getDefaultValues().getMaxTicksLimit());
 	}
@@ -332,6 +343,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return user defined fixed step size for the scale.
 	 */
+	@Override
 	public double getStepSize() {
 		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
 	}
@@ -361,6 +373,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return color of label backdrops.
 	 */
+	@Override
 	public String getBackdropColorAsString() {
 		return getValue(Property.BACKDROP_COLOR, getDefaultValues().getBackdropColorAsString());
 	}
@@ -390,6 +403,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return horizontal padding of label backdrop.
 	 */
+	@Override
 	public int getBackdropPaddingX() {
 		return getValue(Property.BACKDROP_PADDING_X, getDefaultValues().getBackdropPaddingX());
 	}
@@ -410,6 +424,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return vertical padding of label backdrop.
 	 */
+	@Override
 	public int getBackdropPaddingY() {
 		return getValue(Property.BACKDROP_PADDING_Y, getDefaultValues().getBackdropPaddingY());
 	}
@@ -430,6 +445,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return if <code>true</code>, draw a background behind the tick labels.
 	 */
+	@Override
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.SHOW_LABEL_BACKDROP, getDefaultValues().isShowLabelBackdrop());
 	}
@@ -482,6 +498,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return property controls the ticks generation.
 	 */
+	@Override
 	public TickSource getSource() {
 		return getValue(Property.SOURCE, TickSource.values(), getDefaultValues().getSource());
 	}
@@ -502,6 +519,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
+	@Override
 	public int getPrecision() {
 		return getValue(Property.PRECISION, getDefaultValues().getPrecision());
 	}
@@ -526,6 +544,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * @return z-index of tick layer. Useful when ticks are drawn on chart area.<br>
 	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
+	@Override
 	public int getZ() {
 		return getValue(Property.Z, getDefaultValues().getZ());
 	}
@@ -548,6 +567,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * 
 	 * @return the number of ticks to examine when deciding how many labels will fit.
 	 */
+	@Override
 	public int getSampleSize() {
 		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getSampleSize());
 	}

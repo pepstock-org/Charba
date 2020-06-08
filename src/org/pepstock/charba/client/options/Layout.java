@@ -79,6 +79,7 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	 * 
 	 * @return the padding
 	 */
+	@Override
 	public Padding getPadding() {
 		return padding;
 	}

@@ -54,6 +54,7 @@ abstract class AbstractLegendEvent extends AbstractChartEvent implements IsLegen
 	 * 
 	 * @return the legend item related to the click
 	 */
+	@Override
 	public final LegendItem getItem() {
 		return item;
 	}

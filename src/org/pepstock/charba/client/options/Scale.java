@@ -180,6 +180,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the scaleLabel
 	 */
+	@Override
 	public final ScaleLabel getScaleLabel() {
 		return scaleLabel;
 	}
@@ -189,6 +190,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the ticks
 	 */
+	@Override
 	public final Ticks getTicks() {
 		return ticks;
 	}
@@ -198,6 +200,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the grideLines
 	 */
+	@Override
 	public final GridLines getGrideLines() {
 		return gridLines;
 	}
@@ -207,6 +210,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the angleLines
 	 */
+	@Override
 	public final AngleLines getAngleLines() {
 		return angleLines;
 	}
@@ -216,6 +220,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the pointLabels
 	 */
+	@Override
 	public final PointLabels getPointLabels() {
 		return pointLabels;
 	}
@@ -225,6 +230,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the time
 	 */
+	@Override
 	public final Time getTime() {
 		return time;
 	}
@@ -234,6 +240,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the adapters
 	 */
+	@Override
 	public final Adapters getAdapters() {
 		return adapters;
 	}
@@ -303,6 +310,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return if <code>true</code>, scale will include 0 if it is not already included.
 	 */
+	@Override
 	public boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
 	}
@@ -323,6 +331,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
+	@Override
 	public double getMin() {
 		return getValueForMultipleKeyTypes(Property.MIN, getDefaultValues().getMin());
 	}
@@ -363,6 +372,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
+	@Override
 	public double getMax() {
 		return getValueForMultipleKeyTypes(Property.MAX, getDefaultValues().getMax());
 	}
@@ -443,6 +453,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return adjustment used when calculating the maximum data value.
 	 */
+	@Override
 	public double getSuggestedMax() {
 		return getValue(Property.SUGGESTED_MAX, getDefaultValues().getSuggestedMax());
 	}
@@ -463,6 +474,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return adjustment used when calculating the minimum data value.
 	 */
+	@Override
 	public double getSuggestedMin() {
 		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
 	}
@@ -483,6 +495,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return if <code>true</code> reverses order of tick labels.
 	 */
+	@Override
 	public boolean isReverse() {
 		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
@@ -503,6 +516,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return if the axis are stacked or not.
 	 */
+	@Override
 	public final boolean isStacked() {
 		return getValue(Property.STACKED, getDefaultValues().isStacked());
 	}
@@ -523,6 +537,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the type of axis.
 	 */
+	@Override
 	public final AxisType getType() {
 		return getValue(Property.TYPE, AxisType.values(), getDefaultValues().getType());
 	}
@@ -547,6 +562,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return the type of axis.
 	 */
+	@Override
 	public final CartesianAxisType getAxis() {
 		// checks if there is the property
 		if (has(Property.AXIS)) {
@@ -574,6 +590,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return weight of axis.
 	 */
+	@Override
 	public final double getWeight() {
 		return getValue(Property.WEIGHT, getDefaultValues().getWeight());
 	}
@@ -613,6 +630,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
+	@Override
 	public final Display getDisplay() {
 		// checks if is boolean
 		if (ObjectType.BOOLEAN.equals(type(Property.DISPLAY))) {
@@ -641,6 +659,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return extra space of axis.
 	 */
+	@Override
 	public final boolean isOffset() {
 		return getValue(Property.OFFSET, getDefaultValues().isOffset());
 	}
@@ -661,6 +680,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return position of axis.
 	 */
+	@Override
 	public final Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
@@ -681,6 +701,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return property controls the data distribution along the scale.
 	 */
+	@Override
 	public final ScaleDistribution getDistribution() {
 		return getValue(Property.DISTRIBUTION, ScaleDistribution.values(), getDefaultValues().getDistribution());
 	}
@@ -701,6 +722,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
+	@Override
 	public final ScaleBounds getBounds() {
 		return getValue(Property.BOUNDS, ScaleBounds.values(), getDefaultValues().getBounds());
 	}

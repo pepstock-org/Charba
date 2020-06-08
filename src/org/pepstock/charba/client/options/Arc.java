@@ -89,6 +89,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * 
 	 * @return the property to set the border alignment on chart datasets.
 	 */
+	@Override
 	public BorderAlign getBorderAlign() {
 		return getValue(Property.BORDER_ALIGN, BorderAlign.values(), getDefaultValues().getBorderAlign());
 	}
@@ -111,6 +112,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * 
 	 * @return the relative thickness of the dataset
 	 */
+	@Override
 	public double getWeight() {
 		return getValue(Property.WEIGHT, getDefaultValues().getWeight());
 	}
@@ -131,6 +133,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * 
 	 * @return the arc angle to cover
 	 */
+	@Override
 	public double getAngle() {
 		return getValue(Property.ANGLE, getDefaultValues().getAngle());
 	}

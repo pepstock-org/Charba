@@ -121,6 +121,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return If <code>false</code>, do not display grid lines for this axis.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -141,6 +142,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
+	@Override
 	public boolean isCircular() {
 		return getValue(Property.CIRCULAR, getDefaultValues().isCircular());
 	}
@@ -218,6 +220,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
+	@Override
 	public String getColorAsString() {
 		// checks if the stored value is a string
 		if (ObjectType.STRING.equals(type(Property.COLOR)) || !has(Property.COLOR)) {
@@ -294,6 +297,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return stroke width of grid lines. The first element if set as array.
 	 */
+	@Override
 	public int getLineWidth() {
 		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 		return array.isEmpty() ? getDefaultValues().getLineWidth() : array.get(0);
@@ -325,6 +329,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
+	@Override
 	public boolean isDrawBorder() {
 		return getValue(Property.DRAW_BORDER, getDefaultValues().isDrawBorder());
 	}
@@ -347,6 +352,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are
 	 *         drawn.
 	 */
+	@Override
 	public boolean isDrawOnChartArea() {
 		return getValue(Property.DRAW_ON_CHART_AREA, getDefaultValues().isDrawOnChartArea());
 	}
@@ -367,6 +373,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
+	@Override
 	public boolean isDrawTicks() {
 		return getValue(Property.DRAW_TICKS, getDefaultValues().isDrawTicks());
 	}
@@ -387,6 +394,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
+	@Override
 	public int getTickMarkLength() {
 		return getValue(Property.TICK_MARK_LENGTH, getDefaultValues().getTickMarkLength());
 	}
@@ -407,6 +415,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
+	@Override
 	public boolean isOffsetGridLines() {
 		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
 	}
@@ -427,6 +436,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
+	@Override
 	public int getZ() {
 		return getValue(Property.Z, getDefaultValues().getZ());
 	}
@@ -447,6 +457,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return Stroke width of the grid line for the first index (index 0).
 	 */
+	@Override
 	public int getZeroLineWidth() {
 		return getValue(Property.ZERO_LINE_WIDTH, getDefaultValues().getZeroLineWidth());
 	}
@@ -476,6 +487,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
+	@Override
 	public String getZeroLineColorAsString() {
 		return getValue(Property.ZERO_LINE_COLOR, getDefaultValues().getZeroLineColorAsString());
 	}
@@ -526,6 +538,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * 
 	 * @return the offset for line dashes of the grid line for the first index (index 0).
 	 */
+	@Override
 	public int getZeroLineBorderDashOffset() {
 		return getValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, getDefaultValues().getZeroLineBorderDashOffset());
 	}

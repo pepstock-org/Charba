@@ -46,6 +46,7 @@ public final class DatefnsDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for DATE-FNS in asynchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-date-fns.bundle.min.js")
 		ExternalTextResource datetimeLibrary();
 
@@ -54,6 +55,7 @@ public final class DatefnsDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return an empty java script code in synchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
 		TextResource datetimeAdapter();
 

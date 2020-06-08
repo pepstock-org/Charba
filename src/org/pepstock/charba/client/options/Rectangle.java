@@ -108,6 +108,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
+	@Override
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
 		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {

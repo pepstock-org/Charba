@@ -46,6 +46,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return date-time LUXON java script library code in asynchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
 		ExternalTextResource datetimeLibrary();
 
@@ -54,6 +55,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for LUXON in synchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
 		TextResource datetimeAdapter();
 

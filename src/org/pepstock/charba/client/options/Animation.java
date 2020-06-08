@@ -96,6 +96,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the animation element to get the duration in milliseconds it takes to animate hover style changes
 	 */
+	@Override
 	public AnimationActive getActive() {
 		return active;
 	}
@@ -105,6 +106,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the animation element to get the duration in milliseconds it takes to animate to new size after a resize event
 	 */
+	@Override
 	public AnimationResize getResize() {
 		return resize;
 	}
@@ -125,6 +127,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return animation easing.
 	 */
+	@Override
 	public Easing getEasing() {
 		return getValue(Property.EASING, Easing.values(), getDefaultValues().getEasing());
 	}
@@ -145,6 +148,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the number of milliseconds an animation takes.
 	 */
+	@Override
 	public int getDuration() {
 		return getValue(Property.DURATION, getDefaultValues().getDuration());
 	}
@@ -165,6 +169,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
+	@Override
 	public boolean isAnimateRotate() {
 		return getValue(Property.ANIMATE_ROTATE, getDefaultValues().isAnimateRotate());
 	}
@@ -185,6 +190,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
+	@Override
 	public boolean isAnimateScale() {
 		return getValue(Property.ANIMATE_SCALE, getDefaultValues().isAnimateScale());
 	}
@@ -205,6 +211,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
 	 */
+	@Override
 	public boolean isDebug() {
 		return getValue(Property.DEBUG, getDefaultValues().isDebug());
 	}
@@ -225,6 +232,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the delay before starting the animations
 	 */
+	@Override
 	public int getDelay() {
 		return getValue(Property.DELAY, getDefaultValues().getDelay());
 	}
@@ -245,6 +253,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
+	@Override
 	public boolean isLoop() {
 		return getValue(Property.LOOP, getDefaultValues().isLoop());
 	}
@@ -287,6 +296,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the type of <code>from</code> property and determines the interpolator used.
 	 */
+	@Override
 	public InterpolatorType getType() {
 		return getValue(Property.TYPE, InterpolatorType.values(), getDefaultValues().getType());
 	}
@@ -331,6 +341,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the start value for the animation as number.
 	 */
+	@Override
 	public double getFrom() {
 		// gets the type options
 		InterpolatorType storedType = getType();
@@ -350,6 +361,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * 
 	 * @return the start value for the animation as color string.
 	 */
+	@Override
 	public String getFromAsString() {
 		// gets the type options
 		InterpolatorType storedType = getType();

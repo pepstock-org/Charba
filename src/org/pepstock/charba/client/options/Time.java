@@ -108,6 +108,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
+	@Override
 	public boolean isIsoWeekday() {
 		return getValue(Property.ISO_WEEKDAY, getDefaultValues().isIsoWeekday());
 	}
@@ -141,6 +142,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return if defined, dates will be rounded to the start of this unit.
 	 */
+	@Override
 	public TimeUnit getRound() {
 		// checks if value is a boolean
 		if (ObjectType.BOOLEAN.equals(type(Property.ROUND))) {
@@ -168,6 +170,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return the format string to use for the tooltip.
 	 */
+	@Override
 	public String getTooltipFormat() {
 		return getValue(Property.TOOLTIP_FORMAT, getDefaultValues().getTooltipFormat());
 	}
@@ -201,6 +204,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return if defined, will force the unit to be a certain type.
 	 */
+	@Override
 	public TimeUnit getUnit() {
 		// checks if value is a boolean
 		if (ObjectType.BOOLEAN.equals(type(Property.UNIT))) {
@@ -228,6 +232,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return number of units between grid lines.
 	 */
+	@Override
 	public double getStepSize() {
 		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
 	}
@@ -248,6 +253,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return minimum display format to be used for a time unit.
 	 */
+	@Override
 	public TimeUnit getMinUnit() {
 		return getValue(Property.MIN_UNIT, TimeUnit.values(), getDefaultValues().getMinUnit());
 	}
@@ -268,6 +274,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * 
 	 * @return defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
+	@Override
 	public String getParser() {
 		return getValue(Property.PARSER, getDefaultValues().getParser());
 	}

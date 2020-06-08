@@ -162,7 +162,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `defaultColor` from `Defaults` global options to `color`. 
    * change structure of `DatasetMetaItem`.
    * rename `SteppedLine` enumeration to `Stepped`.
-   * rename `setSteppedLine` and `getSteppedLine` methods on line datasets to `setStepped` and `getStepped`.
    * move `beginAtZero` property from ticks to axis/scale.
    * move `min` property from ticks to axis/scale.
    * move `max` property from ticks to axis/scale.
@@ -214,6 +213,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
    * change visibility of `CartesianAxis` class, now it is public.
    * add `checkAndGetValue` static method to `IsColor` class.
+   * add `@Override` annotation to all overriding methods. 
 
 License
 -------

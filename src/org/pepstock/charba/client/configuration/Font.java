@@ -50,6 +50,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param color font color.
 	 */
+	@Override
 	public void setColor(IsColor color) {
 		font.setColor(color);
 	}
@@ -59,6 +60,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param color font color.
 	 */
+	@Override
 	public void setColor(String color) {
 		font.setColor(color);
 	}
@@ -68,6 +70,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return font color as string
 	 */
+	@Override
 	public String getColorAsString() {
 		return font.getColorAsString();
 	}
@@ -77,6 +80,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return font color
 	 */
+	@Override
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
@@ -86,6 +90,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param size the font size.
 	 */
+	@Override
 	public void setSize(int size) {
 		font.setSize(size);
 	}
@@ -95,6 +100,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the font size.
 	 */
+	@Override
 	public int getSize() {
 		return font.getSize();
 	}
@@ -104,6 +110,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
+	@Override
 	public void setStyle(FontStyle style) {
 		font.setStyle(style);
 	}
@@ -113,6 +120,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
+	@Override
 	public FontStyle getStyle() {
 		return font.getStyle();
 	}
@@ -122,6 +130,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param family Font family, follows CSS font-family options.
 	 */
+	@Override
 	public void setFamily(String family) {
 		font.setFamily(family);
 	}
@@ -131,6 +140,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return Font family, follows CSS font-family options.
 	 */
+	@Override
 	public String getFamily() {
 		return font.getFamily();
 	}
@@ -140,6 +150,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param weight font weight, follows CSS font-style-weight options.
 	 */
+	@Override
 	public void setWeight(Weight weight) {
 		font.setWeight(weight);
 	}
@@ -149,6 +160,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
+	@Override
 	public Weight getWeight() {
 		return font.getWeight();
 	}
@@ -158,6 +170,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param lineHeight the line height.
 	 */
+	@Override
 	public void setLineHeight(double lineHeight) {
 		font.setLineHeight(lineHeight);
 	}
@@ -167,6 +180,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param lineHeight the line height.
 	 */
+	@Override
 	public void setLineHeight(String lineHeight) {
 		font.setLineHeight(lineHeight);
 	}
@@ -176,6 +190,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the height of an individual line of text.
 	 */
+	@Override
 	public double getLineHeight() {
 		return font.getLineHeight();
 	}
@@ -185,6 +200,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the height of an individual line of text.
 	 */
+	@Override
 	public String getLineHeightAsString() {
 		return font.getLineHeightAsString();
 	}
@@ -195,6 +211,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param lineWidth the stroke width around the text
 	 */
+	@Override
 	public void setLineWidth(int lineWidth) {
 		font.setLineWidth(lineWidth);
 
@@ -206,6 +223,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the stroke width around the text
 	 */
+	@Override
 	public int getLineWidth() {
 		return font.getLineWidth();
 	}
@@ -216,6 +234,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param strokeStyle the color of the stroke around the text
 	 */
+	@Override
 	public void setStrokeStyle(IsColor strokeStyle) {
 		font.setStrokeStyle(strokeStyle);
 	}
@@ -226,6 +245,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @param strokeStyle the color of the stroke around the text
 	 */
+	@Override
 	public void setStrokeStyle(String strokeStyle) {
 		font.setStrokeStyle(strokeStyle);
 	}
@@ -236,6 +256,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the color of the stroke around the text
 	 */
+	@Override
 	public String getStrokeStyleAsString() {
 		return font.getStrokeStyleAsString();
 	}
@@ -246,6 +267,7 @@ public final class Font implements IsFont {
 	 * 
 	 * @return the color of the stroke around the text
 	 */
+	@Override
 	public IsColor getStrokeStyle() {
 		return ColorBuilder.parse(getStrokeStyleAsString());
 	}

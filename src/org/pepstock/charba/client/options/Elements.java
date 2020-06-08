@@ -91,6 +91,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	 * 
 	 * @return the arc
 	 */
+	@Override
 	public Arc getArc() {
 		return arc;
 	}
@@ -100,6 +101,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	 * 
 	 * @return the line
 	 */
+	@Override
 	public Line getLine() {
 		return line;
 	}
@@ -109,6 +111,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	 * 
 	 * @return the point
 	 */
+	@Override
 	public Point getPoint() {
 		return point;
 	}
@@ -118,6 +121,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	 * 
 	 * @return the rectangle
 	 */
+	@Override
 	public Rectangle getRectangle() {
 		return rectangle;
 	}

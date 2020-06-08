@@ -86,6 +86,7 @@ abstract class AbstractAnimationElement extends AbstractModel<Animation, IsDefau
 	 * 
 	 * @return the number of milliseconds an animation takes.
 	 */
+	@Override
 	public int getDuration() {
 		return getValue(Property.DURATION, getDefaultValues().getDuration());
 	}

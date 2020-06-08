@@ -117,6 +117,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
+	@Override
 	public double getTension() {
 		return getValue(Property.TENSION, getDefaultValues().getTension());
 	}
@@ -138,6 +139,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
+	@Override
 	public CapStyle getBorderCapStyle() {
 		return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), getDefaultValues().getBorderCapStyle());
 	}
@@ -179,6 +181,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return the line dash pattern offset or "phase".
 	 */
+	@Override
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
@@ -203,6 +206,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return there are three possible values for this property: round, bevel and miter.
 	 */
+	@Override
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getBorderJoinStyle());
 	}
@@ -223,6 +227,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
+	@Override
 	public boolean isCapBezierPoints() {
 		return getValue(Property.CAP_BEZIER_POINTS, getDefaultValues().isCapBezierPoints());
 	}
@@ -255,6 +260,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
 	 */
+	@Override
 	public CubicInterpolationMode getCubicInterpolationMode() {
 		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), getDefaultValues().getCubicInterpolationMode());
 	}

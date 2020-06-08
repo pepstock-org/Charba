@@ -81,6 +81,7 @@ public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFont() {
 		return font;
 	}
@@ -101,6 +102,7 @@ public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels
 	 * 
 	 * @return if <code>true</code>, labels are shown.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}

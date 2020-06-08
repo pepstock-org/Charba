@@ -174,6 +174,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return <code>true</code> if tooltips are enabled.
 	 */
+	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
 	}
@@ -201,6 +202,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return mode for positioning the tooltip.
 	 */
+	@Override
 	public IsTooltipPosition getPosition() {
 		// gets string value
 		String value = getValue(Property.POSITION, getDefaultValues().getPosition().value());
@@ -244,6 +246,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return background color of the tooltip.
 	 */
+	@Override
 	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, getDefaultValues().getBackgroundColorAsString());
 	}
@@ -262,6 +265,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getTitleFont() {
 		return titleFont;
 	}
@@ -282,6 +286,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return title alignment.
 	 */
+	@Override
 	public TextAlign getTitleAlign() {
 		return getValue(Property.TITLE_ALIGN, TextAlign.values(), getDefaultValues().getTitleAlign());
 	}
@@ -302,6 +307,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return spacing to add to top and bottom of each title line.
 	 */
+	@Override
 	public int getTitleSpacing() {
 		return getValue(Property.TITLE_SPACING, getDefaultValues().getTitleSpacing());
 	}
@@ -322,6 +328,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return margin to add on bottom of title section.
 	 */
+	@Override
 	public int getTitleMarginBottom() {
 		return getValue(Property.TITLE_MARGIN_BOTTOM, getDefaultValues().getTitleMarginBottom());
 	}
@@ -331,6 +338,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getBodyFont() {
 		return bodyFont;
 	}
@@ -351,6 +359,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return body alignment.
 	 */
+	@Override
 	public TextAlign getBodyAlign() {
 		return getValue(Property.BODY_ALIGN, TextAlign.values(), getDefaultValues().getBodyAlign());
 	}
@@ -371,6 +380,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return spacing to add to top and bottom of each tooltip item.
 	 */
+	@Override
 	public int getBodySpacing() {
 		return getValue(Property.BODY_SPACING, getDefaultValues().getBodySpacing());
 	}
@@ -380,6 +390,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFooterFont() {
 		return footerFont;
 	}
@@ -400,6 +411,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return footer alignment.
 	 */
+	@Override
 	public TextAlign getFooterAlign() {
 		return getValue(Property.FOOTER_ALIGN, TextAlign.values(), getDefaultValues().getFooterAlign());
 	}
@@ -420,6 +432,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return spacing to add to top and bottom of each footer line.
 	 */
+	@Override
 	public int getFooterSpacing() {
 		return getValue(Property.FOOTER_SPACING, getDefaultValues().getFooterSpacing());
 	}
@@ -440,6 +453,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return margin to add before drawing the footer.
 	 */
+	@Override
 	public int getFooterMarginTop() {
 		return getValue(Property.FOOTER_MARGIN_TOP, getDefaultValues().getFooterMarginTop());
 	}
@@ -460,6 +474,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return padding to add on left and right of tooltip.
 	 */
+	@Override
 	public int getXPadding() {
 		return getValue(Property.X_PADDING, getDefaultValues().getXPadding());
 	}
@@ -480,6 +495,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return padding to add on top and bottom of tooltip.
 	 */
+	@Override
 	public int getYPadding() {
 		return getValue(Property.Y_PADDING, getDefaultValues().getYPadding());
 	}
@@ -500,6 +516,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
+	@Override
 	public int getCaretPadding() {
 		return getValue(Property.CARET_PADDING, getDefaultValues().getCaretPadding());
 	}
@@ -520,6 +537,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return size, in pixels, of the tooltip arrow.
 	 */
+	@Override
 	public int getCaretSize() {
 		return getValue(Property.CARET_SIZE, getDefaultValues().getCaretSize());
 	}
@@ -540,6 +558,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return radius of tooltip corner curves.
 	 */
+	@Override
 	public int getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, getDefaultValues().getCornerRadius());
 	}
@@ -569,6 +588,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
+	@Override
 	public String getMultiKeyBackgroundAsString() {
 		return getValue(Property.MULTI_KEY_BACKGROUND, getDefaultValues().getMultiKeyBackgroundAsString());
 	}
@@ -598,6 +618,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return if <code>true</code>, color boxes are shown in the tooltip.
 	 */
+	@Override
 	public boolean isDisplayColors() {
 		return getValue(Property.DISPLAY_COLORS, getDefaultValues().isDisplayColors());
 	}
@@ -627,6 +648,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return color of the border.
 	 */
+	@Override
 	public String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
 	}
@@ -656,6 +678,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * 
 	 * @return size of the border.
 	 */
+	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}

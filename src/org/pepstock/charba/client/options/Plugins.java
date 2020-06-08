@@ -99,6 +99,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 */
+	@Override
 	public boolean isEnabled(String pluginId) {
 		// creates the key to avoid many calls to plugin checker
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
@@ -282,6 +283,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
+	@Override
 	public boolean hasOptions(String pluginId) {
 		// creates the key to avoid many calls to plugin checker
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
@@ -299,6 +301,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @return the options type
 	 */
+	@Override
 	public ObjectType getOptionsType(String pluginId) {
 		return type(PluginIdChecker.key(pluginId));
 	}
@@ -344,6 +347,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
+	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
@@ -409,6 +413,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param <T> type of plugin options to return
 	 * @return the plugin options as list or empty list if not exist.
 	 */
+	@Override
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {

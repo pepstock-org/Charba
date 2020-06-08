@@ -56,6 +56,7 @@ abstract class AbstractChartTypedEvent extends AbstractChartEvent implements IsC
 	 * 
 	 * @return a list of items with dataset metadata related to the click
 	 */
+	@Override
 	public final List<DatasetItem> getItems() {
 		return items;
 	}

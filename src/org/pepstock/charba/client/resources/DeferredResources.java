@@ -46,6 +46,7 @@ public final class DeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return date-time MOMENT java script library code in asynchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
 		ExternalTextResource datetimeLibrary();
 
@@ -54,6 +55,7 @@ public final class DeferredResources extends AbstractDeferredResources {
 		 * 
 		 * @return chart.js date adapter code for MOMENT in synchronous mode
 		 */
+		@Override
 		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
 		TextResource datetimeAdapter();
 

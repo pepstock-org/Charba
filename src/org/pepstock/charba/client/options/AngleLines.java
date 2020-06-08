@@ -90,6 +90,7 @@ public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> imp
 	 * 
 	 * @return if <code>true</code>, angle lines are shown.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -119,6 +120,7 @@ public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> imp
 	 * 
 	 * @return color of angled lines.
 	 */
+	@Override
 	public String getColorAsString() {
 		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 	}
@@ -148,6 +150,7 @@ public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> imp
 	 * 
 	 * @return width of angled lines.
 	 */
+	@Override
 	public int getLineWidth() {
 		return getValue(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 	}

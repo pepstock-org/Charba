@@ -68,6 +68,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * 
 	 * @return the padding left in pixel.
 	 */
+	@Override
 	public final int getLeft() {
 		return getValue(Position.LEFT, getDefaultValues().getLeft());
 	}
@@ -88,6 +89,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * 
 	 * @return the padding right in pixel.
 	 */
+	@Override
 	public final int getRight() {
 		return getValue(Position.RIGHT, getDefaultValues().getRight());
 	}
@@ -108,6 +110,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * 
 	 * @return the padding top in pixel.
 	 */
+	@Override
 	public final int getTop() {
 		return getValue(Position.TOP, getDefaultValues().getTop());
 	}
@@ -128,6 +131,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * 
 	 * @return the padding bottom in pixel.
 	 */
+	@Override
 	public final int getBottom() {
 		return getValue(Position.BOTTOM, getDefaultValues().getBottom());
 	}

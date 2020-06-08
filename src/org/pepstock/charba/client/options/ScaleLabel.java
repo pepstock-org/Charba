@@ -89,6 +89,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * 
 	 * @return the font
 	 */
+	@Override
 	public Font getFont() {
 		return font;
 	}
@@ -98,6 +99,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * 
 	 * @return the padding
 	 */
+	@Override
 	public ScaleLabelPadding getPadding() {
 		return padding;
 	}
@@ -118,6 +120,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * 
 	 * @return if <code>true</code>, display the axis title.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -138,6 +141,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * 
 	 * @return the text for the scale string.
 	 */
+	@Override
 	public String getLabelString() {
 		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
 	}
@@ -158,6 +162,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * 
 	 * @return the alignment of the axis title
 	 */
+	@Override
 	public ScaleLabelAlign getAlign() {
 		return getValue(Property.ALIGN, ScaleLabelAlign.values(), getDefaultValues().getAlign());
 	}

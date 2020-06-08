@@ -36,6 +36,7 @@ public interface SafeHtml {
 	 * @param object the reference object with which to compare
 	 * @return <code>true</code> if this object is the same as the object argument
 	 */
+	@Override
 	boolean equals(Object object);
 
 	/**
@@ -43,5 +44,6 @@ public interface SafeHtml {
 	 * 
 	 * @return a hash code value for the object
 	 */
+	@Override
 	int hashCode();
 }

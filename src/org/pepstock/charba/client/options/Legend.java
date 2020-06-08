@@ -102,6 +102,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return the labels
 	 */
+	@Override
 	public LegendLabels getLabels() {
 		return labels;
 	}
@@ -122,6 +123,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return <code>true</code> if the legend is shown.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
@@ -142,6 +144,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
+	@Override
 	public boolean isFullWidth() {
 		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
 	}
@@ -162,6 +165,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return <code>true</code> if legend will show datasets in reverse order.
 	 */
+	@Override
 	public boolean isReverse() {
 		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
@@ -182,6 +186,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return position of the legend.
 	 */
+	@Override
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
@@ -202,6 +207,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * 
 	 * @return alignment of the legend.
 	 */
+	@Override
 	public LegendAlign getAlign() {
 		return getValue(Property.ALIGN, LegendAlign.values(), getDefaultValues().getAlign());
 	}

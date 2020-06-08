@@ -95,6 +95,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
+	@Override
 	public double getRadius() {
 		return getValue(Property.RADIUS, getDefaultValues().getRadius());
 	}
@@ -117,6 +118,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return the style of the point or <code>null</code> if point style is set as image
 	 */
+	@Override
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
 		if (!getValue(Property.CHARBA_POINT_STYLE, false)) {
@@ -179,6 +181,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return the pixel size of the non-displayed point.
 	 */
+	@Override
 	public double getHitRadius() {
 		return getValue(Property.HIT_RADIUS, getDefaultValues().getHitRadius());
 	}
@@ -199,6 +202,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return the radius of the point when hovered.
 	 */
+	@Override
 	public double getHoverRadius() {
 		return getValue(Property.HOVER_RADIUS, getDefaultValues().getHoverRadius());
 	}
@@ -219,6 +223,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return the border width of point when hovered.
 	 */
+	@Override
 	public int getHoverBorderWidth() {
 		return getValue(Property.HOVER_BORDER_WIDTH, getDefaultValues().getHoverBorderWidth());
 	}
@@ -239,6 +244,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * 
 	 * @return the point rotation (in degrees).
 	 */
+	@Override
 	public double getRotation() {
 		return getValue(Property.ROTATION, getDefaultValues().getRotation());
 	}

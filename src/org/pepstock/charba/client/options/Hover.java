@@ -109,6 +109,7 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	 * 
 	 * @return define which directions are used in calculating distances.
 	 */
+	@Override
 	public InteractionAxis getAxis() {
 		return getValue(Property.AXIS, InteractionAxis.values(), getDefaultValues().getAxis());
 	}

@@ -154,6 +154,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the animation
 	 */
+	@Override
 	public Animation getAnimation() {
 		return animation;
 	}
@@ -163,6 +164,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the legend
 	 */
+	@Override
 	public Legend getLegend() {
 		return legend;
 	}
@@ -172,6 +174,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the hover
 	 */
+	@Override
 	public final Hover getHover() {
 		return hover;
 	}
@@ -181,6 +184,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the layout
 	 */
+	@Override
 	public final Layout getLayout() {
 		return layout;
 	}
@@ -190,6 +194,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the elements
 	 */
+	@Override
 	public final Elements getElements() {
 		return elements;
 	}
@@ -199,6 +204,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the title
 	 */
+	@Override
 	public final Title getTitle() {
 		return title;
 	}
@@ -208,6 +214,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the tooltips
 	 */
+	@Override
 	public final Tooltips getTooltips() {
 		return tooltips;
 	}
@@ -217,6 +224,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the plugins
 	 */
+	@Override
 	public final Plugins getPlugins() {
 		return plugins;
 	}
@@ -264,6 +272,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the resizing of the chart canvas when its container does.
 	 */
+	@Override
 	public boolean isResponsive() {
 		return getValue(Property.RESPONSIVE, getDefaultValues().isResponsive());
 	}
@@ -282,6 +291,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
+	@Override
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.MAINTAIN_ASPECT_RATIO, getDefaultValues().isMaintainAspectRatio());
 	}
@@ -302,6 +312,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the aspect ratio.
 	 */
+	@Override
 	public double getAspectRatio() {
 		return getValue(Property.ASPECT_RATIO, getDefaultValues().getAspectRatio());
 	}
@@ -322,6 +333,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the pixel ratio.
 	 */
+	@Override
 	public double getDevicePixelRatio() {
 		return getValue(Property.DEVICE_PIXEL_RATIO, getDefaultValues().getDevicePixelRatio());
 	}
@@ -331,6 +343,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
 	 */
+	@Override
 	public boolean isDrawOnAttach() {
 		return getValue(Property.CHARBA_DRAW_ON_ATTACH, getDefaultValues().isDrawOnAttach());
 	}
@@ -350,6 +363,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise <code>false</code>. Default is
 	 *         <code>true</code>.
 	 */
+	@Override
 	public boolean isDestroyOnDetach() {
 		return getValue(Property.CHARBA_DESTROY_ON_DETACH, getDefaultValues().isDestroyOnDetach());
 	}
@@ -386,6 +400,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return color to use into chart.
 	 */
+	@Override
 	public String getColorAsString() {
 		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 	}
@@ -413,6 +428,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return if <code>false</code>, the lines between points are not drawn..
 	 */
+	@Override
 	public boolean isShowLines() {
 		return getValue(Property.SHOW_LINES, getDefaultValues().isShowLines());
 	}
@@ -431,6 +447,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return if <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 */
+	@Override
 	public boolean isSpanGaps() {
 		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
@@ -449,6 +466,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the percentage of the chart that is cut out of the middle.
 	 */
+	@Override
 	public double getCutoutPercentage() {
 		return getValue(Property.CUTOUT_PERCENTAGE, getDefaultValues().getCutoutPercentage());
 	}
@@ -467,6 +485,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return starting angle to draw arcs from.
 	 */
+	@Override
 	public double getRotation() {
 		return getValue(Property.ROTATION, getDefaultValues().getRotation());
 	}
@@ -485,6 +504,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return the sweep to allow arcs to cover.
 	 */
+	@Override
 	public double getCircumference() {
 		return getValue(Property.CIRCUMFERENCE, getDefaultValues().getCircumference());
 	}
@@ -503,6 +523,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
+	@Override
 	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}

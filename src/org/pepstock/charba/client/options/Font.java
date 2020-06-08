@@ -96,6 +96,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param color font color.
 	 */
+	@Override
 	public void setColor(IsColor color) {
 		setColor(IsColor.checkAndGetValue(color));
 	}
@@ -105,6 +106,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param color font color.
 	 */
+	@Override
 	public void setColor(String color) {
 		setValue(Property.COLOR, color);
 		// checks if the node is already added to parent
@@ -116,6 +118,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return font color as string
 	 */
+	@Override
 	public String getColorAsString() {
 		return getValue(Property.COLOR, defaultValues.getColorAsString());
 	}
@@ -125,6 +128,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return font color
 	 */
+	@Override
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
@@ -134,6 +138,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param size the font size.
 	 */
+	@Override
 	public void setSize(int size) {
 		setValue(Property.SIZE, size);
 		// checks if the node is already added to parent
@@ -145,6 +150,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the font size.
 	 */
+	@Override
 	public int getSize() {
 		return getValue(Property.SIZE, defaultValues.getSize());
 	}
@@ -154,6 +160,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
+	@Override
 	public void setStyle(FontStyle style) {
 		setValue(Property.STYLE, style);
 		// checks if the node is already added to parent
@@ -165,6 +172,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
+	@Override
 	public FontStyle getStyle() {
 		return getValue(Property.STYLE, FontStyle.values(), defaultValues.getStyle());
 	}
@@ -174,6 +182,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param family Font family, follows CSS font-family options.
 	 */
+	@Override
 	public void setFamily(String family) {
 		setValue(Property.FAMILY, family);
 		// checks if the node is already added to parent
@@ -185,6 +194,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return Font family, follows CSS font-family options.
 	 */
+	@Override
 	public String getFamily() {
 		return getValue(Property.FAMILY, defaultValues.getFamily());
 	}
@@ -194,6 +204,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param weight font weight, follows CSS font-style-weight options.
 	 */
+	@Override
 	public void setWeight(Weight weight) {
 		setValue(Property.WEIGHT, weight);
 		// checks if the node is already added to parent
@@ -205,6 +216,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
+	@Override
 	public Weight getWeight() {
 		return getValue(Property.WEIGHT, Weight.values(), defaultValues.getWeight());
 	}
@@ -214,6 +226,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param lineHeight the line height.
 	 */
+	@Override
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
@@ -225,6 +238,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param lineHeight the line height.
 	 */
+	@Override
 	public void setLineHeight(String lineHeight) {
 		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
@@ -236,6 +250,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the height of an individual line of text.
 	 */
+	@Override
 	public double getLineHeight() {
 		// creates default
 		double defaultValue = defaultValues.getLineHeight();
@@ -254,6 +269,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the height of an individual line of text.
 	 */
+	@Override
 	public String getLineHeightAsString() {
 		// creates default
 		String defaultValue = String.valueOf(defaultValues.getLineHeight());
@@ -273,6 +289,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param lineWidth the stroke width around the text
 	 */
+	@Override
 	public void setLineWidth(int lineWidth) {
 		setValue(Property.LINE_WIDTH, lineWidth);
 		// checks if the node is already added to parent
@@ -285,6 +302,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the stroke width around the text
 	 */
+	@Override
 	public int getLineWidth() {
 		return getValue(Property.LINE_WIDTH, defaultValues.getLineWidth());
 	}
@@ -295,6 +313,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param strokeStyle the color of the stroke around the text
 	 */
+	@Override
 	public void setStrokeStyle(IsColor strokeStyle) {
 		setColor(IsColor.checkAndGetValue(strokeStyle));
 	}
@@ -305,6 +324,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @param strokeStyle the color of the stroke around the text
 	 */
+	@Override
 	public void setStrokeStyle(String strokeStyle) {
 		setValue(Property.STROKE_STYLE, strokeStyle);
 		// checks if the node is already added to parent
@@ -317,6 +337,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the color of the stroke around the text
 	 */
+	@Override
 	public String getStrokeStyleAsString() {
 		return getValue(Property.STROKE_STYLE, defaultValues.getStrokeStyleAsString());
 	}
@@ -327,6 +348,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return the color of the stroke around the text
 	 */
+	@Override
 	public IsColor getStrokeStyle() {
 		return ColorBuilder.parse(getStrokeStyleAsString());
 	}

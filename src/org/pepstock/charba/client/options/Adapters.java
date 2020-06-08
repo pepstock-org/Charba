@@ -96,6 +96,7 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 	 * @return date adapter options used to configure the date adapter or an empty object if not exist.<br>
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
+	@Override
 	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
