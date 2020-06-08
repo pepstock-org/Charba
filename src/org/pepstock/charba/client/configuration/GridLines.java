@@ -71,7 +71,7 @@ public class GridLines extends AxisContainer {
 	public boolean isCircular() {
 		return getAxis().getScale().getGrideLines().isCircular();
 	}
-
+	
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 

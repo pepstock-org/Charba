@@ -209,6 +209,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add axis id parameter to cartesian axes classes constructor.
    * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
    * add new `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
+   * add new `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
 
 ### Development
 
