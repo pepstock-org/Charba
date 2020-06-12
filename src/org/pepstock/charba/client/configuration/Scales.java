@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
@@ -35,7 +32,7 @@ import org.pepstock.charba.client.options.ScaleIdChecker;
 public class Scales extends ConfigurationContainer<ExtendedOptions> {
 
 	// buffer to maintain axes
-	private final Map<String, Axis> storedAxes = new HashMap<>();
+	//private final Map<String, Axis> storedAxes = new HashMap<>();
 
 	/**
 	 * Builds the object storing the chart instance and the root options element.
@@ -56,7 +53,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
 			// clears the buffer
-			storedAxes.clear();
+//			storedAxes.clear();
 			// creates the array
 			Scale[] scales = new Scale[axes.length];
 			// scans all scale arguments
@@ -64,7 +61,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer
-				storedAxes.put(axes[i].getId(), axes[i]);
+//				storedAxes.put(axes[i].getId(), axes[i]);
 			}
 			// sets the array
 			getConfiguration().getScales().setAxes(scales);
@@ -78,7 +75,8 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
 	public Axis getAxisById(String scaleId) {
-		return storedAxes.get(scaleId);
+//		return storedAxes.get(scaleId);
+		return null;
 	}
 
 	/**
@@ -91,7 +89,8 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 		// checks if the scale id is consistent
 		ScaleIdChecker.check(scaleId);
 		// returns the object if exist
-		return storedAxes.get(scaleId.value());
+//		return storedAxes.get(scaleId.value());
+		return null;
 	}
 
 	/**
@@ -101,9 +100,10 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public List<Axis> getAxes() {
 		// sets reference
-		List<Axis> result = storedAxes.isEmpty() ? Collections.emptyList() : new LinkedList<Axis>(storedAxes.values());
+//		List<Axis> result = storedAxes.isEmpty() ? Collections.emptyList() : new LinkedList<Axis>(storedAxes.values());
 		// returns the unmodifiable list
-		return Collections.unmodifiableList(result);
+//		return Collections.unmodifiableList(result);
+		return new ArrayList<>();
 	}
 
 }

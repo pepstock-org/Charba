@@ -31,7 +31,7 @@ public final class ScaleIdChecker {
 	// regex instance for font style
 	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
 	// regexp pattern to have only letters and number
-	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_]+$";
+	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_-]+$";
 	// regxp objetc to perform check
 	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 

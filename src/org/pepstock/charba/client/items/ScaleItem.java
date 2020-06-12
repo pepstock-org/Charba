@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,12 +27,10 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
-import org.pepstock.charba.client.configuration.CartesianTimeAxis;
 import org.pepstock.charba.client.configuration.RadialAxis;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
-import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
 
 /**
  * Wraps the scale item of CHART JS chart.<br>
@@ -47,8 +43,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	private final ScaleLongestTextCacheItem longestTextCache;
 
 	private final ScaleTickItemFactory itemFactory;
-
-	private final TimeTickItemFactory timeItemFactory;
 
 	/**
 	 * Name of properties of native object.
@@ -117,8 +111,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// initializes sub objects
 		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.LONGEST_TEXT_CACHE));
 		// creates the factories
+		// FIXME must be static?
 		itemFactory = new ScaleTickItemFactory();
-		timeItemFactory = new TimeTickItemFactory();
 	}
 
 	/**
@@ -293,32 +287,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final List<ScaleTickItem> getTickItems() {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.INTERNAL_TICKS);
-		// checks if is a time axis
-		if (!AxisType.TIME.equals(getType())) {
-			// returns list
-			return ArrayListHelper.unmodifiableList(array, itemFactory);
-		}
-		// if here the axis is time
-		// therefore returns an empty list
-		return Collections.unmodifiableList(new ArrayList<>());
-	}
-
-	/**
-	 * Returns the list of time tick items, only for {@link CartesianTimeAxis}.
-	 * 
-	 * @return the list of time tick items.
-	 */
-	public final List<TimeTickItem> getTimeTickItems() {
-		// gets array from native object
-		ArrayObject array = getArrayValue(Property.INTERNAL_TICKS);
-		// checks if is a time axis
-		if (AxisType.TIME.equals(getType())) {
-			// returns list
-			return ArrayListHelper.unmodifiableList(array, timeItemFactory);
-		}
-		// if here the axis is time
-		// therefore returns an empty list
-		return Collections.unmodifiableList(new ArrayList<>());
+		// returns list
+		return ArrayListHelper.unmodifiableList(array, itemFactory);
 	}
 
 	/**

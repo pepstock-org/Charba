@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -25,13 +27,14 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ScaleTickItem extends AbstractTickItem {
+public final class ScaleTickItem extends AbstractTickItem {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		// FIXME check parameters
 		INDEX("_index"),
 		LABEL("label"),
 		VALUE("value");
@@ -88,6 +91,15 @@ public class ScaleTickItem extends AbstractTickItem {
 	}
 
 	/**
+	 * Returns the value of the tick as double.
+	 * 
+	 * @return the value of the tick or {@link UndefinedValues#DOUBLE} if missing or not a double.
+	 */
+	public final double getValue() {
+		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.DOUBLE);
+	}
+	
+	/**
 	 * Returns the value of the tick as string.
 	 * 
 	 * @return the value of the tick or {@link UndefinedValues#STRING} if missing or not a string.
@@ -95,14 +107,14 @@ public class ScaleTickItem extends AbstractTickItem {
 	public final String getValueAsString() {
 		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.STRING);
 	}
-
+	
 	/**
-	 * Returns the value of the tick as double.
+	 * Returns the date of the tick.
 	 * 
-	 * @return the value of the tick or {@link UndefinedValues#DOUBLE} if missing or not a double.
+	 * @return the date of the tick or <code>null</code> if missing.
 	 */
-	public final double getValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.DOUBLE);
+	public Date getValueAsDate() {
+		return getValue(Property.VALUE, (Date) null);
 	}
 
 	/**
@@ -110,7 +122,7 @@ public class ScaleTickItem extends AbstractTickItem {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class ScaleTickItemFactory implements NativeObjectContainerFactory<ScaleTickItem> {
+	public static final class ScaleTickItemFactory implements NativeObjectContainerFactory<ScaleTickItem> {
 
 		/*
 		 * (non-Javadoc)

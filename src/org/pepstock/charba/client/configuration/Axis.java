@@ -295,6 +295,25 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public double getWeight() {
 		return getScale().getWeight();
 	}
+	
+	/**
+	 * Sets the reverses order of tick labels.
+	 * 
+	 * @param reverse reverses order of tick labels.
+	 */
+	public void setReverse(boolean reverse) {
+		getScale().setReverse(reverse);
+	}
+
+	/**
+	 * Returns the reverses order of tick labels.
+	 * 
+	 * @return reverses order of tick labels.
+	 */
+	public boolean isReverse() {
+		return getScale().isReverse();
+	}
+
 
 	/**
 	 * Returns the scale configuration

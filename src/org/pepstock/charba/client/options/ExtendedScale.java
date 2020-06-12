@@ -98,19 +98,19 @@ public final class ExtendedScale extends Scale {
 	}
 
 	/**
-	 * Adds a callback proxy function to tick element instance.
+	 * Adds a callback proxy function to ticks element instance.
 	 * 
-	 * @param tick tick element instance.
+	 * @param ticks ticks element instance.
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
 	 */
-	public void setCallback(Ticks tick, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(tick, property, proxy);
+	public void setCallback(Ticks ticks, Key property, CallbackProxy.Proxy proxy) {
+		setCallbackToModel(ticks, property, proxy);
 	}
 
 	/**
 	 * Adds a callback proxy function to point labels element instance.
-	 * 
+	 *
 	 * @param pointLabels point labels element instance.
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
@@ -118,4 +118,16 @@ public final class ExtendedScale extends Scale {
 	public void setCallback(PointLabels pointLabels, Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(pointLabels, property, proxy);
 	}
+
+	/**
+	 * Adds a callback proxy function to gridlines element instance.
+	 *
+	 * @param gridLInes gridlines element instance.
+	 * @param property property name.
+	 * @param proxy function proxy to activate.
+	 */
+	public void setCallback(GridLines gridLInes, Key property, CallbackProxy.Proxy proxy) {
+		setCallbackToModel(gridLInes, property, proxy);
+	}
+
 }

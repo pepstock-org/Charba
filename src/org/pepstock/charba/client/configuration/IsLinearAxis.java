@@ -51,33 +51,7 @@ public interface IsLinearAxis extends IsNumericAxis {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().isBeginAtZero();
 	}
-
-	/**
-	 * Sets the reverses order of tick labels.
-	 * 
-	 * @param reverse reverses order of tick labels.
-	 */
-	default void setReverse(boolean reverse) {
-		// checks if axis is consistent
-		if (getAxisElement() != null) {
-			getAxisElement().getScale().setReverse(reverse);
-		}
-	}
-
-	/**
-	 * Returns the reverses order of tick labels.
-	 * 
-	 * @return reverses order of tick labels.
-	 */
-	default boolean isReverse() {
-		// checks if axis is consistent
-		if (getAxisElement() != null) {
-			return getAxisElement().getScale().isReverse();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale().isReverse();
-	}
-
+	
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
 	 * 

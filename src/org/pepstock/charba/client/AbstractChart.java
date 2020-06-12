@@ -58,6 +58,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Base class of all charts.<br>
@@ -670,8 +671,15 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			ConfigurationOptions internalOptions = getOptions();
 			// sets options by temporary configuration
 			tempConfiguration.setOptions(this, internalOptions);
+			// clones the current chart config
+			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
+			// merges config options and chart ones
+			Helpers.get().mergeIf(clonedOptions, chart.getOptions());
+			// FIXME sounds not working
+			Window.getConsole().log("options", tempConfiguration.getOptions());
+			Window.getConsole().log("all", clonedOptions);
 			// replace the options
-			chart.setOptions(tempConfiguration.getOptions());
+			chart.setOptions(clonedOptions);
 			// calls plugins for onConfigure method
 			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
 			plugins.onChartConfigure(tempConfiguration, this);

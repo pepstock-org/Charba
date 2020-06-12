@@ -17,7 +17,18 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.LineWidthCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -27,6 +38,51 @@ import org.pepstock.charba.client.colors.IsColor;
  */
 public class GridLines extends AxisContainer {
 
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the line width function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// hover background color callback instance
+	private ColorCallback colorCallback = null;
+	// hover border color callback instance
+	private LineWidthCallback lineWidthCallback = null;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		COLOR("color"),
+		LINE_WIDTH("lineWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	/**
 	 * Builds the object storing the axis which this grid lines belongs to.
 	 * 
@@ -34,6 +90,22 @@ public class GridLines extends AxisContainer {
 	 */
 	GridLines(Axis axis) {
 		super(axis);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(context), colorCallback, getAxis().getScale().getGrideLines().getColorAsString(), false));
+		// gets value calling callback
+		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(context), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
+		// FIXME
+		lineWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
+			
+			@Override
+			public int call(CallbackFunctionContext contextFunction, NativeObject context) {
+				Window.getConsole().log("context", context);
+				return 1;
+			}
+		});
 	}
 
 	/**
@@ -71,7 +143,7 @@ public class GridLines extends AxisContainer {
 	public boolean isCircular() {
 		return getAxis().getScale().getGrideLines().isCircular();
 	}
-	
+
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
@@ -323,6 +395,59 @@ public class GridLines extends AxisContainer {
 	 */
 	public int getZ() {
 		return getAxis().getScale().getGrideLines().getZ();
+	}
+
+	/**
+	 * Returns the color callback instance.
+	 * 
+	 * @return the color callback instance
+	 */
+	public ColorCallback getColorCallback() {
+		return colorCallback;
+	}
+
+	/**
+	 * Sets the color callback instance.
+	 * 
+	 * @param colorCallback the color callback instance
+	 */
+	public void setColorCallback(ColorCallback colorCallback) {
+		// stores callback
+		this.colorCallback = colorCallback;
+		// checks if consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.COLOR, colorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.COLOR, null);
+		}
+	}
+
+	/**
+	 * Returns the line width callback instance.
+	 * 
+	 * @return the line width callback instance
+	 */
+	public LineWidthCallback getLineWidthCallback() {
+		return lineWidthCallback;
+	}
+
+	/**
+	 * Sets the line width callback instance.
+	 * @param lineWidthCallback the line width callback instance.
+	 */
+	public void setLineWidthCallback(LineWidthCallback lineWidthCallback) {
+		// stores callback
+		this.lineWidthCallback = lineWidthCallback;
+		// checks if consistent
+		if (lineWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.LINE_WIDTH, lineWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.LINE_WIDTH, null);
+		}
 	}
 
 }

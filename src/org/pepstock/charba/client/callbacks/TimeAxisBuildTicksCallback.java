@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
 import org.pepstock.charba.client.items.AxisItem;
-import org.pepstock.charba.client.items.TimeTickItem;
+import org.pepstock.charba.client.items.ScaleTickItem;
 
 /**
  * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianTimeAxis}.
@@ -36,6 +36,6 @@ public interface TimeAxisBuildTicksCallback extends BaseAxisBuildTicksCallback {
 	 * @param item axis item instance
 	 * @param ticks list of created ticks
 	 */
-	void onAfterBuildTicks(Axis axis, AxisItem item, List<TimeTickItem> ticks);
+	void onAfterBuildTicks(Axis axis, AxisItem item, List<ScaleTickItem> ticks);
 
 }

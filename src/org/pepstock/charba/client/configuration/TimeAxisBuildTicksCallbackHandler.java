@@ -100,7 +100,7 @@ final class TimeAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCall
 		if (getCallback() != null) {
 			AxisItem mItem = new AxisItem(item);
 			// then it is called
-			getCallback().onAfterBuildTicks(getAxis(), mItem, ticks.getTickHandler().getTimeTickItems(tickItems));
+			getCallback().onAfterBuildTicks(getAxis(), mItem, ticks.getTickHandler().getTickItems(tickItems));
 		}
 	}
 

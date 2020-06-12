@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends AbstractNode {
+public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends AbstractNode {
 
 	private final D defaultValues;
 

@@ -26,8 +26,8 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.items.TimeTickItem;
-import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
+import org.pepstock.charba.client.items.ScaleTickItem;
+import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 
 import jsinterop.annotations.JsFunction;
 
@@ -71,8 +71,8 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	// ---------------------------
 	// callback proxy to invoke the tick function
 	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// factory of time tick items
-	private final TimeTickItemFactory factory = new TimeTickItemFactory();
+	// factory of scale tick items
+	private final ScaleTickItemFactory factory = new ScaleTickItemFactory();
 
 	/**
 	 * Builds the object storing the axis instance and options element, based on different kind of axis.
@@ -89,11 +89,11 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// gets as list the tick items
-				List<TimeTickItem> tickItems = getTimeTickItems(values);
+				List<ScaleTickItem> tickItems = getTickItems(values);
 				// retrieves the current value
-				Date value = tickItems.get(index).getValue();
+				Date value = tickItems.get(index).getValueAsDate();
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, label, index, getTimeTickItems(values));
+				return getCallback().onCallback(getAxis(), value, label, index, getTickItems(values));
 			}
 			// default tick is the tick label
 			return label;
@@ -106,7 +106,7 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	 * @param values an array of native objects passed by CHART.JS
 	 * @return a list of time tick items
 	 */
-	final List<TimeTickItem> getTimeTickItems(ArrayObject values) {
+	final List<ScaleTickItem> getTickItems(ArrayObject values) {
 		return ArrayListHelper.unmodifiableList(values, factory);
 	}
 

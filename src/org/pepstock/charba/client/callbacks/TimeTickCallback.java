@@ -21,7 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.items.TimeTickItem;
+import org.pepstock.charba.client.items.ScaleTickItem;
 
 /**
  * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian time axes.
@@ -41,6 +41,6 @@ public interface TimeTickCallback {
 	 * @param values list of all tick values
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
 	 */
-	String onCallback(Axis axis, Date value, String label, int index, List<TimeTickItem> values);
+	String onCallback(Axis axis, Date value, String label, int index, List<ScaleTickItem> values);
 
 }

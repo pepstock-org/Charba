@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -33,14 +32,13 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScriptableContext extends NativeObjectContainer {
+public final class ScriptableContext extends AbstractScriptableContext {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		CHART("chart"),
 		DATA_INDEX("dataIndex"),
 		DATASET_INDEX("datasetIndex"),
 		ACTIVE("active"),
@@ -94,15 +92,6 @@ public final class ScriptableContext extends NativeObjectContainer {
 	 */
 	public int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the CHARBA chart instance.
-	 * 
-	 * @return the CHARBA chart instance
-	 */
-	public IsChart getChart() {
-		return getNativeChart(Property.CHART).getChart();
 	}
 
 	/**

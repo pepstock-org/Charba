@@ -198,7 +198,13 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `DefaultMajorTickItem` class to `DefaultMajor`.
    * rename `BaseTickMinor` configuration class renamed to `Major`.
    * remove `zeroLineWidth`, `zeroLineColor`, `zeroLineBorderDash` and `zeroLineBorderDashOffset` properties from `GridLines` options and configuration classes.
-      
+ * remove `TimeTickItem` class, use `ScaleTickItem` class.
+   * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
+   * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
+   * remove `getTimeTickItems` method from `ScaleItem` class, use `getTickItems`.
+   * change `onCallback` method signature of `TimeTickCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
+   * change `onAfterBuildTicks` method signature of `TimeAxisBuildTicksCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
+         
 ### Features
 
 * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
@@ -215,8 +221,10 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
    * change visibility of `CartesianAxis` class, now it is public.
+   * change visibility of `AbstractModel` class, now it is public.
    * add `checkAndGetValue` static method to `IsColor` class.
    * add `@Override` annotation to all overriding methods. 
+   * override the hashCode `$H` property for `NativeObject` objects that GWT is adding to objects in order to set the property as NOT enumerable and NOT configurable.
 
 License
 -------

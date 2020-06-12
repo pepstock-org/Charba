@@ -33,7 +33,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  *
  */
 public final class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
-
+	
 	/**
 	 * Creates a scales object by defaults values. This method is creating the root element of scales.
 	 * 
