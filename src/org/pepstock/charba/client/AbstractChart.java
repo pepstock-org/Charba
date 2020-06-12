@@ -673,11 +673,12 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			tempConfiguration.setOptions(this, internalOptions);
 			// clones the current chart config
 			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
-			// merges config options and chart ones
+			// merges config options and whole defaults
+			// ----------------------------------------
+			// pay attention that if the options has been removed 
+			// that's not currently reflected here
+			// ----------------------------------------
 			Helpers.get().mergeIf(clonedOptions, chart.getOptions());
-			// FIXME sounds not working
-			Window.getConsole().log("options", tempConfiguration.getOptions());
-			Window.getConsole().log("all", clonedOptions);
 			// replace the options
 			chart.setOptions(clonedOptions);
 			// calls plugins for onConfigure method
@@ -687,6 +688,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			Charts.fireAfterConfigure(this);
 			// update chart
 			update(configuration);
+			Window.getConsole().log("update");
 		}
 	}
 
