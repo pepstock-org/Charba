@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -70,10 +71,11 @@ public final class ExtendedScale extends Scale {
 	 * FIXME maybe an envelop could be helpful to avoid to use this scale instance out of configuration Creates a scale with default provider. The native object is created empty.
 	 * 
 	 * @param id scale id
+	 * @param type scale type
 	 * @param defaultValues default provider.
 	 */
-	public ExtendedScale(IsScaleId id, IsDefaultScale defaultValues) {
-		super(id, defaultValues);
+	public ExtendedScale(IsScaleId id, AxisType type, IsDefaultScale defaultValues) {
+		super(id, type, defaultValues);
 		// stores the id based on a counter
 		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 	}

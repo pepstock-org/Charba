@@ -172,7 +172,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * move `max` property from time object to axis/scale.
    * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
    * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
-   * add mandatory scale id parameter to `Scale` class constructor.
+   * add mandatory scale id and type parameters to `Scale` class constructor.
    * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
    * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following options classes, because new `Font` implementation must be used:
       * `Options`

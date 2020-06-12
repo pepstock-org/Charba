@@ -182,7 +182,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(id, getDefaultScale(cartesiantype)));
+		setConfiguration(new ExtendedScale(id, type, getDefaultScale(cartesiantype)));
 		// stores axis type
 		setType(type);
 		// -------------------------------

@@ -29,40 +29,44 @@ public enum AxisType implements Key
 	 * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
 	 * The linear interpolation is used to determine where a value lies on the axis.
 	 */
-	LINEAR("linear"),
+	LINEAR("linear", DefaultScaleId.Y),
 	/**
 	 * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis. <br>
 	 * The logarithmic interpolation is used to determine where a value lies on the axis.
 	 */
-	LOGARITHMIC("logarithmic"),
+	LOGARITHMIC("logarithmic", DefaultScaleId.Y),
 	/**
 	 * The labels are drawn from one of the label arrays included in the chart data.<br>
 	 * Where not specified, this is the default.
 	 */
-	CATEGORY("category"),
+	CATEGORY("category", DefaultScaleId.X),
 	/**
 	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.<br>
 	 * Not implemented
 	 */
-	TIME("time"),
+	TIME("time", DefaultScaleId.X),
 	/**
 	 * Radial axes are used specifically for the radar and polar area chart types.<br>
 	 * These axes overlay the chart area, rather than being positioned on one of the edges.<br>
 	 * The linear scale is use to chart numerical data.<br>
 	 * The linear interpolation is used to determine where a value lies in relation the center of the axis.
 	 */
-	RADIAL_LINEAR("radialLinear");
+	RADIAL_LINEAR("radialLinear", DefaultScaleId.UNKNOWN);
 
 	// name value of property
 	private final String value;
+
+	// default scale id
+	private final DefaultScaleId defaultScaleId;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
 	 */
-	private AxisType(String value) {
+	private AxisType(String value, DefaultScaleId defaultScaleId) {
 		this.value = value;
+		this.defaultScaleId = defaultScaleId;
 	}
 
 	/*
@@ -73,6 +77,15 @@ public enum AxisType implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Returns the default scale id for this axis type.
+	 * 
+	 * @return the default scale id for this axis type
+	 */
+	public DefaultScaleId getDefaultScaleId() {
+		return defaultScaleId;
 	}
 
 }

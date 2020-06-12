@@ -70,8 +70,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		DISPLAY("display"),
 		WEIGHT("weight"),
 		TICKS("ticks"),
-		// cartesian
 		TYPE("type"),
+		// cartesian
 		POSITION("position"),
 		AXIS("axis"),
 		OFFSET("offset"),
@@ -120,31 +120,47 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * Creates the object only with default provider and scale id as string.<br>
+	 * Creates the object only with default provider and type.<br>
+	 * This is used when the scale is the root element.<br>
+	 * New native java script object is created and it's empty.
+	 * 
+	 * @param type scale type
+	 * @param defaultValues default provider instance.
+	 */
+	public Scale(AxisType type, IsDefaultScale defaultValues) {
+		this(Key.checkAndGetIfValid(type).getDefaultScaleId(), type, defaultValues);
+	}
+	
+	/**
+	 * Creates the object only with default provider, type and scale id as string.<br>
 	 * This is used when the scale is the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
 	 * @param id scale id
+	 * @param type scale type
 	 * @param defaultValues default provider instance.
 	 */
-	public Scale(String id, IsDefaultScale defaultValues) {
-		// no parent, child key and native object
-		this(IsScaleId.create(id), defaultValues);
+	public Scale(String id, AxisType type, IsDefaultScale defaultValues) {
+		this(IsScaleId.create(id), type, defaultValues);
 	}
 
 	/**
-	 * Creates the object only with default provider and scale id.<br>
+	 * Creates the object only with default provider, type and scale id.<br>
 	 * This is used when the scale is the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
 	 * @param id scale id
 	 * @param defaultValues default provider instance.
 	 */
-	public Scale(IsScaleId id, IsDefaultScale defaultValues) {
+	public Scale(IsScaleId id, AxisType type, IsDefaultScale defaultValues) {
 		// no parent, child key and native object
 		this(null, null, defaultValues, null);
+		// checks axis type
+		Key.checkIfValid(type);
 		// sets the ID
 		setId(id);
+		// sets the type
+		setType(type);
 	}
 
 	/**
