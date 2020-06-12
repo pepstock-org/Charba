@@ -23,6 +23,7 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Implements a BOX annotation which draws a box into a chart.<br>
@@ -190,16 +191,31 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param scaleId the ID of the X scale to bind onto
 	 */
 	public void setXScaleID(String scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
 		setValue(Property.X_SCALE_ID, scaleId);
 	}
 
+	/**
+	 * Sets the ID of the X scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the X scale to bind onto
+	 */
+	public void setXScaleID(IsScaleId scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.X_SCALE_ID, scaleId);
+	}
+	
 	/**
 	 * Returns the ID of the X scale to bind onto.
 	 * 
 	 * @return the ID of the X scale to bind onto
 	 */
 	@Override
-	public String getXScaleID() {
+	public IsScaleId getXScaleID() {
 		return getValue(Property.X_SCALE_ID, IsDefaultsBoxAnnotation.super.getXScaleID());
 	}
 
@@ -323,6 +339,21 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param scaleId the ID of the Y scale to bind onto
 	 */
 	public void setYScaleID(String scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.Y_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Sets the ID of the Y scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the Y scale to bind onto
+	 */
+	public void setYScaleID(IsScaleId scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
 		setValue(Property.Y_SCALE_ID, scaleId);
 	}
 
@@ -332,7 +363,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @return the ID of the Y scale to bind onto
 	 */
 	@Override
-	public String getYScaleID() {
+	public IsScaleId getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, IsDefaultsBoxAnnotation.super.getYScaleID());
 	}
 

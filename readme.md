@@ -205,6 +205,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `onCallback` method signature of `TimeTickCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
    * change `onAfterBuildTicks` method signature of `TimeAxisBuildTicksCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.
  * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
+ * change `getXScaleID` and `getXScaleID` methods into `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -222,6 +223,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add new `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
    * add new `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
+ * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `BarDataset` class in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` methods to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
