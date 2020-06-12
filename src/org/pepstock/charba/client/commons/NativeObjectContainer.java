@@ -50,6 +50,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected NativeObjectContainer(NativeObject nativeObject) {
 		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
+		NativeObjectHashing.handleHashCode(this.nativeObject);
 	}
 
 	// ------------------------------------------

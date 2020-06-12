@@ -33,7 +33,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeObject {
-
+	
 	/**
 	 * To avoid any instantiation
 	 */
