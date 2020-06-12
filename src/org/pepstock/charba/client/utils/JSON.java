@@ -153,11 +153,6 @@ public final class JSON {
 				// if key is null of empty
 				// means that is first object then skip
 				if (key != null && key.trim().length() > 0) {
-					// checks if hashcode
-					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
-						// skips it
-						return Window.undefined();
-					}
 					// gets the object
 					Object result = manageObject(objects, value);
 					// if result is not consistent, returns the value

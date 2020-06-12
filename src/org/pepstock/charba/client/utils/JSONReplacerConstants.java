@@ -27,9 +27,7 @@ final class JSONReplacerConstants {
 
 	// used into JSON stringfy replacer when the object is already passed
 	static final String CYCLE_PROPERTY_VALUE = Constants.EMPTY_STRING;
-	// used into JSON stringfy replacer when the key of object is the hashcode
-	static final String HASHCODE_PROPERTY_KEY = "$H";
-	// used into JSON stringfy replacer when the key of object is Chara internal
+	// used into JSON stringfy replacer when the key of object is Charba internal
 	static final String CHARBA_PROPERTY_KEY_PREFIX = "_charba";
 	// empty json object when a null instance is passed
 	static final String EMPTY_JSON_OBJECT = "{}";
