@@ -23,6 +23,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.enums.LineMode;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LINE annotation DEFAULTS options.
@@ -66,8 +67,8 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 * 
 	 * @return the ID of the scale to bind onto
 	 */
-	default String getScaleID() {
-		return DefaultScaleId.Y.value();
+	default IsScaleId getScaleID() {
+		return DefaultScaleId.Y;
 	}
 
 	/**

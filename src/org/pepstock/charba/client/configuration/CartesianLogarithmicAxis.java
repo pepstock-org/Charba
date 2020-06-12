@@ -20,7 +20,7 @@ import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
-import org.pepstock.charba.client.options.ScaleIdChecker;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * This object is used to map defined axis as logarithmic.
@@ -51,7 +51,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param id axis id
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, String id) {
-		this(chart, ScaleIdChecker.key(id));
+		this(chart, IsScaleId.create(id));
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param chart chart instance
 	 * @param id axis id
 	 */
-	public CartesianLogarithmicAxis(IsChart chart, Key id) {
+	public CartesianLogarithmicAxis(IsChart chart, IsScaleId id) {
 		this(chart, id, null);
 	}
 
@@ -84,7 +84,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
-		this(chart, ScaleIdChecker.key(id), cartesianType);
+		this(chart, IsScaleId.create(id), cartesianType);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param id axis id
 	 * @param cartesianType cartesian axis type.
 	 */
-	public CartesianLogarithmicAxis(IsChart chart, Key id, CartesianAxisType cartesianType) {
+	public CartesianLogarithmicAxis(IsChart chart, IsScaleId id, CartesianAxisType cartesianType) {
 		super(chart, id, AxisType.LOGARITHMIC, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);

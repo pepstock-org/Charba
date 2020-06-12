@@ -203,11 +203,15 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
    * remove `getTimeTickItems` method from `ScaleItem` class, use `getTickItems`.
    * change `onCallback` method signature of `TimeTickCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
-   * change `onAfterBuildTicks` method signature of `TimeAxisBuildTicksCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
+   * change `onAfterBuildTicks` method signature of `TimeAxisBuildTicksCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.
+ * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
+ * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
+ * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
+ * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
          
 ### Features
 
-* **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
+ * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
    * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
    * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
@@ -217,14 +221,19 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
    * add new `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
    * add new `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
-
+ * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
+ * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
+ * add `setXAxisID` and `setYAxisID` methods to `BarDataset` class in order to set the scale id using `IsScaleId` implementation.
+ * add `setXAxisID` methods to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
+ 
 ### Development
 
-   * change visibility of `CartesianAxis` class, now it is public.
-   * change visibility of `AbstractModel` class, now it is public.
-   * add `checkAndGetValue` static method to `IsColor` class.
-   * add `@Override` annotation to all overriding methods. 
-   * override the hashCode `$H` property for `NativeObject` objects that GWT is adding to objects in order to set the property as NOT enumerable and NOT configurable.
+ * change visibility of `CartesianAxis` class, now it is public.
+ * change visibility of `AbstractModel` class, now it is public.
+ * add `checkAndGetValue` static method to `IsColor` class.
+ * add `@Override` annotation to all overriding methods. 
+ * override the hashCode `$H` property for `NativeObject` objects that GWT is adding to objects in order to set the property as NOT enumerable and NOT configurable.
+ * change `compare` static method of `Key` interface in order to test if the keys are valid and not only not `null`.
 
 License
 -------

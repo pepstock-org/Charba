@@ -211,7 +211,7 @@ public final class Merger {
 		// scans all scales
 		for (Scale storedScale : storedScales) {
 			// gets the object about x axes by id
-			NativeObjectDescriptor scaleDescriptor = scales.getObjectProperty(storedScale.getId());
+			NativeObjectDescriptor scaleDescriptor = scales.getObjectProperty(storedScale.getId().value());
 			// gets native object of scale
 			NativeObject scaleObject = scaleDescriptor.getValue();
 			// create instance for axis type
@@ -223,10 +223,10 @@ public final class Merger {
 				// before it applies the axis defaults by its type
 				NativeObject tempObject = mergeNativeObjects(scaleObject, axisDefault.getNativeObject());
 				// then it applies defaults scale
-				scales.defineObjectProperty(storedScale.getId(), mergeNativeObjects(tempObject, scaleOptions));
+				scales.defineObjectProperty(storedScale.getId().value(), mergeNativeObjects(tempObject, scaleOptions));
 			} else {
 				// then it applies defaults scale
-				scales.defineObjectProperty(storedScale.getId(), mergeNativeObjects(scaleObject, scaleOptions));
+				scales.defineObjectProperty(storedScale.getId().value(), mergeNativeObjects(scaleObject, scaleOptions));
 			}
 		}
 	}

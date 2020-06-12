@@ -130,9 +130,9 @@ public interface Key {
 	 */
 	static int compare(Key k1, Key k2) {
 		// checks if k1 argument is consistent
-		if (k1 == null) {
+		if (!Key.isValid(k1)) {
 			// checks if k2 argument is consistent
-			if (k2 == null) {
+			if (!Key.isValid(k2)) {
 				// both are null then equals
 				return 0;
 			}
@@ -140,7 +140,7 @@ public interface Key {
 			return -1;
 		} else {
 			// checks if k2 argument is consistent
-			if (k2 == null) {
+			if (!Key.isValid(k2)) {
 				// k2 is less being not null
 				return 1;
 			}

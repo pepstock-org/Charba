@@ -120,7 +120,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * Creates the object only with default provider. This is used when the scale is the root element.<br>
+	 * Creates the object only with default provider and scale id as string.<br>
+	 * This is used when the scale is the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
 	 * @param id scale id
@@ -128,17 +129,18 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public Scale(String id, IsDefaultScale defaultValues) {
 		// no parent, child key and native object
-		this(ScaleIdChecker.key(id), defaultValues);
+		this(IsScaleId.create(id), defaultValues);
 	}
 
 	/**
-	 * Creates the object only with default provider. This is used when the scale is the root element.<br>
+	 * Creates the object only with default provider and scale id.<br>
+	 * This is used when the scale is the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
 	 * @param id scale id
 	 * @param defaultValues default provider instance.
 	 */
-	public Scale(Key id, IsDefaultScale defaultValues) {
+	public Scale(IsScaleId id, IsDefaultScale defaultValues) {
 		// no parent, child key and native object
 		this(null, null, defaultValues, null);
 		// sets the ID
@@ -251,7 +253,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
-	void setId(Key id) {
+	void setId(IsScaleId id) {
 		// checks if key is consistent
 		ScaleIdChecker.check(id);
 		// if the scale id is UNKNWON (set by Charba)
@@ -271,27 +273,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
-	public final String getId() {
-		return getValue(Property.ID, DefaultScaleId.UNKNOWN.value());
-	}
-
-	/**
-	 * The ID is used to link datasets and scale axes together.<br>
-	 * This is especially needed if multi-axes charts are used.
-	 * 
-	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
-	 */
-	public final Key getIdAsKey() {
-		// checks if property is set
-		if (has(Property.ID)) {
-			// gets id as string
-			String id = getId();
-			// transforms it in a key
-			return ScaleIdChecker.key(id);
-		}
-		// if here, id is not set
-		// then returns unknown
-		return DefaultScaleId.UNKNOWN;
+	public final IsScaleId getId() {
+		return getValue(Property.ID, DefaultScaleId.UNKNOWN);
 	}
 
 	/**

@@ -77,7 +77,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 				// and not a radial scale
 				if (scale != null && !AxisType.RADIAL_LINEAR.equals(scale.getType())) {
 					// gets id as key
-					Key id = scale.getIdAsKey();
+					IsScaleId id = scale.getId();
 					// checks if scale id of scale is consistent
 					// used for cartesian, it must not be set to unknown
 					if (DefaultScaleId.UNKNOWN.is(id.value())) {
@@ -106,7 +106,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @return <code>true</code> if the scale with the id passed as argument exists
 	 */
 	public boolean hasAxis(String scaleId) {
-		return hasAxis(ScaleIdChecker.key(scaleId));
+		return hasAxis(IsScaleId.create(scaleId));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @param scaleId scale id to check
 	 * @return <code>true</code> if the scale with the id passed as argument exists
 	 */
-	public boolean hasAxis(Key scaleId) {
+	public boolean hasAxis(IsScaleId scaleId) {
 		// checks if the scale id is consistent
 		ScaleIdChecker.check(scaleId);
 		// checks if the scale id exist
@@ -129,7 +129,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
 	public Scale getAxis(String scaleId) {
-		return getAxis(ScaleIdChecker.key(scaleId));
+		return getAxis(IsScaleId.create(scaleId));
 	}
 
 	/**
@@ -138,7 +138,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @param scaleId scale id to check
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
-	public Scale getAxis(Key scaleId) {
+	public Scale getAxis(IsScaleId scaleId) {
 		// checks if the scale id is consistent
 		ScaleIdChecker.check(scaleId);
 		// checks if the scale id exist
@@ -203,7 +203,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		// checks if scale has got the id
 		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id
-			scale.setId(scaleId);
+			scale.setId(IsScaleId.create(scaleId.value()));
 		}
 		// returns scale
 		return scale;

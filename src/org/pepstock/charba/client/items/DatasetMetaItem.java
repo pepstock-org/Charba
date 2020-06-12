@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -147,7 +148,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
-	/**
+	/**FIXME
 	 * Sets if the dataset must be hidden.
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
@@ -188,8 +189,8 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * 
 	 * @return the Y axis ID. Default is {@link DefaultScaleId#Y}.
 	 */
-	public String getYAxisID() {
-		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y.value());
+	public IsScaleId getYAxisID() {
+		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
 
 	/**
@@ -197,8 +198,8 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * 
 	 * @return the X axis ID. Default is {@link DefaultScaleId#X}.
 	 */
-	public String getXAxisID() {
-		return getValue(Property.X_AXIS_ID, DefaultScaleId.X.value());
+	public IsScaleId getXAxisID() {
+		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
 	}
 
 	/**

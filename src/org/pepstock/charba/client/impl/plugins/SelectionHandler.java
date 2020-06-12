@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.BaseEventTypes;
@@ -342,7 +343,7 @@ final class SelectionHandler {
 		ChartNode node = chart.getNode();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
 		// if chart is line or axis time is equals to 2
 		// else if bar chart is equals to 1
 		int minimDatasetsItemsCount;
@@ -541,7 +542,7 @@ final class SelectionHandler {
 			ChartNode node = chart.getNode();
 			// gets the scale element of chart
 			// using the X axis id of plugin options
-			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
 			// checks the type of chart and scale
 			// LINE and axis TIME must be added by 1 end of datasets
 			if (ChartType.LINE.equals(chart.getBaseType())) {
@@ -1090,7 +1091,7 @@ final class SelectionHandler {
 		final SelectionTicks selectionTicks = new SelectionTicks();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
 		// calculates the amount of sections into chart based on
 		// amount of dataset items
 		// in case of time axis, it must be reduce by1 because the dataset items
@@ -1132,7 +1133,7 @@ final class SelectionHandler {
 					// checks if is the right scale
 					// used for selection by ID
 					// and is is a X scale
-					if (CartesianAxisType.X.equals(scale.getAxis()) && options.getXAxisID().equalsIgnoreCase(scale.getId())) {
+					if (CartesianAxisType.X.equals(scale.getAxis()) && Key.equals(options.getXAxisID(), scale.getId())) {
 						// gets the offset
 						offset = scale.isOffset();
 					}

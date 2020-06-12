@@ -26,6 +26,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Implements a LINE annotation which draws a line into a chart.<br>
@@ -231,6 +232,21 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param scaleId the ID of the scale to bind onto
 	 */
 	public void setScaleID(String scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Sets the ID of the scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the scale to bind onto
+	 */
+	public void setScaleID(IsScaleId scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
 		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
 	}
 
@@ -240,7 +256,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @return the ID of the scale to bind onto
 	 */
 	@Override
-	public String getScaleID() {
+	public IsScaleId getScaleID() {
 		return getValue(Property.SCALE_ID, IsDefaultsLineAnnotation.super.getScaleID());
 	}
 

@@ -37,6 +37,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -186,39 +187,68 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * Sets the ID of the x axis to plot this dataset on.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on.<br>
+	 * 
 	 */
 	public void setXAxisID(String xAxisID) {
+		// checks if is valid scale id
+		IsScaleId.checkIfValid(xAxisID);
+		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * Sets the ID of the x axis to plot this dataset on.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * @param xAxisID the ID of the x axis to plot this dataset on.
 	 */
-	public String getXAxisID() {
-		return getValue(Property.X_AXIS_ID, DefaultScaleId.X.value());
+	public void setXAxisID(IsScaleId xAxisID) {
+		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * Returns the ID of the x axis to plot this dataset on.<br>
+	 * If not specified, this defaults to the ID of {@link DefaultScaleId#X}.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * @return the ID of the x axis to plot this dataset on.<br>
+	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#X}
+	 */
+	public IsScaleId getXAxisID() {
+		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
+	}
+
+	/**
+	 * Sets the ID of the y axis to plot this dataset on.
+	 * 
+	 * @param yAxisID the ID of the y axis to plot this dataset on.
 	 */
 	public void setYAxisID(String yAxisID) {
+		// checks if is valid scale id
+		IsScaleId.checkIfValid(yAxisID);
+		// stores
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
 	/**
-	 * Returns the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * Sets the ID of the y axis to plot this dataset on.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * @param yAxisID the ID of the y axis to plot this dataset on.
 	 */
-	public String getYAxisID() {
-		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y.value());
+	public void setYAxisID(IsScaleId yAxisID) {
+		setValue(Property.Y_AXIS_ID, yAxisID);
+	}
+
+	/**
+	 * Returns the ID of the y axis to plot this dataset on. <br>
+	 * If not specified, this defaults to the ID of {@link DefaultScaleId#Y}.
+	 * 
+	 * @return the ID of the y axis to plot this dataset on.<br>
+	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#Y}
+	 */
+	public IsScaleId getYAxisID() {
+		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
 
 	/**

@@ -18,13 +18,14 @@ package org.pepstock.charba.client.enums;
 import java.util.Locale;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Enumerates the default scale id.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultScaleId implements Key
+public enum DefaultScaleId implements IsScaleId
 {
 	/**
 	 * Default scale id for X axis.
@@ -85,8 +86,29 @@ public enum DefaultScaleId implements Key
 	 * @param scaleId scale id to be checked
 	 * @return <code>true</code> if the scale id is related to this axis id
 	 */
-	public boolean is(Key scaleId) {
+	public boolean is(IsScaleId scaleId) {
 		return is(Key.checkAndGetIfValid(scaleId).value());
+	}
+	
+	/**
+	 * Returns the default scale id instance if the id is one of default ones, otherwise will return <code>null</code> if not found.
+	 * 
+	 * @param id scale id as string to scan
+	 * @return the default scale id instance, otherwise will return <code>null</code> if not found
+	 */
+	public static DefaultScaleId getByScaleId(String id) {
+		// checks if id is consistent
+		if (id != null) {
+			// scans all defaults to check with the argument
+			for (DefaultScaleId scaleId : values()) {
+				// checks if default scale id matches with argument
+				if (scaleId.value().equals(id)) {
+					return scaleId;
+				}
+			}
+		}
+		// if here, the id does not match
+		return null;
 	}
 
 }

@@ -37,8 +37,8 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.options.ExtendedScale;
+import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
-import org.pepstock.charba.client.options.ScaleIdChecker;
 
 import jsinterop.annotations.JsFunction;
 
@@ -172,10 +172,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param type axis type
 	 * @param cartesiantype cartesian type
 	 */
-	Axis(IsChart chart, Key id, AxisType type, CartesianAxisType cartesiantype) {
+	Axis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesiantype) {
 		super(chart);
 		// checks if id is consistent
-		ScaleIdChecker.check(id);
+		IsScaleId.checkIfValid(id);
 		// checks cartesian type
 		Key.checkIfValid(cartesiantype);
 		// stores internally the axis type
@@ -217,18 +217,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
-	public final String getId() {
+	public final IsScaleId getId() {
 		return getConfiguration().getId();
-	}
-
-	/**
-	 * The ID is used to link datasets and scale axes together.<br>
-	 * This is especially needed if multi-axes charts are used.
-	 * 
-	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
-	 */
-	public final Key getIdAsKey() {
-		return getConfiguration().getIdAsKey();
 	}
 
 	/**

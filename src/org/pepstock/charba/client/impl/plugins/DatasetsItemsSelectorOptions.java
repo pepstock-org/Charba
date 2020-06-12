@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -58,7 +59,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	/**
 	 * Default X axis id, {@link DefaultScaleId#X}.
 	 */
-	public static final String DEFAULT_AXIS_ID = DefaultScaleId.X.value();
+	public static final DefaultScaleId DEFAULT_AXIS_ID = DefaultScaleId.X;
 
 	/**
 	 * Default border width of selection area, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -193,15 +194,30 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public void setXAxisID(String xAxisID) {
+		// checks if is valid scale id
+		IsScaleId.checkIfValid(xAxisID);
+		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
+	/**
+	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * 
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 */
+	public void setXAxisID(IsScaleId xAxisID) {
+		// checks if is valid scale id
+		IsScaleId.checkIfValid(xAxisID);
+		// stores
+		setValue(Property.X_AXIS_ID, xAxisID);
+	}
+	
 	/**
 	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
-	public String getXAxisID() {
+	public IsScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, defaultsOptions.getXAxisID());
 	}
 

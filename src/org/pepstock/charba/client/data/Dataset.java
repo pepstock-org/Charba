@@ -639,7 +639,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param canvasGradientsList list of canvas gradients
 	 */
 	protected abstract void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList);
-
+	
 	/**
 	 * Sets if the dataset will appear or not.
 	 * 

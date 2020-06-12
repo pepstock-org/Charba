@@ -24,7 +24,7 @@ import org.pepstock.charba.client.utils.RegExp;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScaleIdChecker {
+final class ScaleIdChecker {
 
 	// regexp to check if there is an uppercase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
@@ -41,19 +41,33 @@ public final class ScaleIdChecker {
 	private ScaleIdChecker() {
 		// do nothing
 	}
+	
+	/**
+	 * Returns <code>true</code> if the scale is compliant with the constraints of scale id.<br>
+	 * A scale id <br>
+	 * <ul>
+	 * <li>can not contain any non-URL-safe characters
+	 * <li>cannot contain upper case letters
+	 * </ul>
+	 * 
+	 * @param id scale id to be checked.
+	 * @return <code>true</code> if the scale is compliant with the constraints of scale id
+	 */
+	static boolean isValid(String id) {
+		return (id != null && REGEXP_HAS_UPPERCASE.exec(id) == null && REGEXP_ID.exec(id) != null);
+	}
 
 	/**
 	 * Checks if the scale is compliant with the constraints of scale id.<br>
 	 * A scale id <br>
 	 * <ul>
-	 * <li>must start with 'x' or 'y'
 	 * <li>can not contain any non-URL-safe characters
 	 * <li>cannot contain upper case letters
 	 * </ul>
 	 * 
 	 * @param id scale id to be checked.
 	 */
-	public static void check(String id) {
+	static void check(String id) {
 		// checks if is null
 		if (id == null) {
 			throw new IllegalArgumentException("Scale id can not be null");
@@ -70,27 +84,14 @@ public final class ScaleIdChecker {
 	 * Checks if the scale is compliant with the constraints of scale id.<br>
 	 * A scale id <br>
 	 * <ul>
-	 * <li>must start with 'x' or 'y'
 	 * <li>can not contain any non-URL-safe characters
 	 * <li>cannot contain upper case letters
 	 * </ul>
 	 * 
 	 * @param id scale id to be checked.
 	 */
-	public static void check(Key id) {
+	static void check(IsScaleId id) {
 		check(Key.checkAndGetIfValid(id).value());
-	}
-
-	/**
-	 * Creates a key by the scale id as string
-	 * 
-	 * @param id the scale id as string
-	 * @return a key by the scale id as string
-	 */
-	public static Key key(String id) {
-		// checks
-		check(id);
-		return Key.create(id);
 	}
 
 	/**

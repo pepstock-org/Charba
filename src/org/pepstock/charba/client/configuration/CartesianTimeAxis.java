@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
-import org.pepstock.charba.client.options.ScaleIdChecker;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * This object is used to map defined axis as time. This is used to have time series charts.
@@ -59,7 +59,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param id axis id
 	 */
 	public CartesianTimeAxis(IsChart chart, String id) {
-		this(chart, ScaleIdChecker.key(id));
+		this(chart, IsScaleId.create(id));
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param chart chart instance
 	 * @param id axis id
 	 */
-	public CartesianTimeAxis(IsChart chart, Key id) {
+	public CartesianTimeAxis(IsChart chart, IsScaleId id) {
 		this(chart, id, null);
 	}
 
@@ -92,7 +92,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianTimeAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
-		this(chart, ScaleIdChecker.key(id), cartesianType);
+		this(chart, IsScaleId.create(id), cartesianType);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param id axis id
 	 * @param cartesianType cartesian axis type.
 	 */
-	public CartesianTimeAxis(IsChart chart, Key id, CartesianAxisType cartesianType) {
+	public CartesianTimeAxis(IsChart chart, IsScaleId id, CartesianAxisType cartesianType) {
 		super(chart, id, AxisType.TIME, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.X));
 		// creates the time object
 		this.time = new Time(this);

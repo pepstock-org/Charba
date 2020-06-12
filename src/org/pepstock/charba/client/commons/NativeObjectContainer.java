@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
@@ -982,31 +983,27 @@ public abstract class NativeObjectContainer {
 		// if here the property doesn't exist or has got a wrong type
 		return ArrayPattern.fromOrEmpty(defaultValue);
 	}
-
+	
 	// ------------------------------------------
-	// --- ENUMERATIONS
+	// --- KEYS
 	// ------------------------------------------
 	/**
-	 * Returns a value (key) into embedded JavaScript object at specific property.
+	 * Returns a value (string) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param enumValues all enumeration values
-	 * @param defaultValue default value if the property is missing
-	 * @param <T> type of key
+	 * @param defaultValue default value as key if the property is missing
 	 * @return value of the property
 	 */
-	protected final <T extends Key> T getValue(Key key, T[] enumValues, T defaultValue) {
+	protected final String getValue(Key key, Key defaultValue) {
+		// checks consistency of default value
+		Key.checkIfValid(defaultValue);
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
-			return defaultValue;
+			return defaultValue.value();
 		}
-		// checks consistency of default value
-		Key.checkIfValid(defaultValue);
 		// gets the string value
-		String value = getValue(key, defaultValue.value());
-		// gets the key by value
-		return Key.getKeyByValue(enumValues, value, defaultValue);
+		return getValue(key, defaultValue.value());
 	}
 
 	/**
@@ -1033,6 +1030,55 @@ public abstract class NativeObjectContainer {
 			// sets value
 			nativeObject.defineStringProperty(key.value(), value.value());
 		}
+	}
+	
+	// ------------------------------------------
+	// --- Special case for ScaleId
+	// ------------------------------------------
+	/**
+	 * Returns a value (ScaleId) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value as key if the property is missing
+	 * @return value of the property
+	 */
+	protected final IsScaleId getValue(Key key, IsScaleId defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// checks consistency of default value
+		Key.checkIfValid(defaultValue);
+		// gets the string value
+		// checks and gets the scale id
+		return IsScaleId.checkAndGetScaleID(getValue(key, defaultValue.value()), defaultValue);
+	}
+	
+	// ------------------------------------------
+	// --- ENUMERATIONS
+	// ------------------------------------------
+	/**
+	 * Returns a value (key) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param enumValues all enumeration values
+	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of key
+	 * @return value of the property
+	 */
+	protected final <T extends Key> T getValue(Key key, T[] enumValues, T defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// checks consistency of default value
+		Key.checkIfValid(defaultValue);
+		// gets the string value
+		String value = getValue(key, defaultValue.value());
+		// gets the key by value
+		return Key.getKeyByValue(enumValues, value, defaultValue);
 	}
 
 	/**

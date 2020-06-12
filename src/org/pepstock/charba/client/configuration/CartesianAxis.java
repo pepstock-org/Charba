@@ -16,11 +16,11 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
@@ -54,7 +54,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param type axis type
 	 * @param cartesianType cartesian type
 	 */
-	CartesianAxis(IsChart chart, Key id, AxisType type, CartesianAxisType cartesianType) {
+	CartesianAxis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesianType) {
 		super(chart, id, type, cartesianType);
 		// checks if scale id of scale is consistent
 		// used for cartesian, it must not be set to unknown
