@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.LineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
@@ -27,8 +26,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -97,15 +94,6 @@ public class GridLines extends AxisContainer {
 		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(context), colorCallback, getAxis().getScale().getGrideLines().getColorAsString(), false));
 		// gets value calling callback
 		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(context), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
-		// FIXME
-		lineWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-			
-			@Override
-			public int call(CallbackFunctionContext contextFunction, NativeObject context) {
-				Window.getConsole().log("context", context);
-				return 1;
-			}
-		});
 	}
 
 	/**
