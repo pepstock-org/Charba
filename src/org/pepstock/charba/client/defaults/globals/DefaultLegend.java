@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
-import org.pepstock.charba.client.enums.LegendAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
 
@@ -107,8 +107,8 @@ public final class DefaultLegend implements IsDefaultLegend {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getAlign()
 	 */
 	@Override
-	public LegendAlign getAlign() {
-		return LegendAlign.CENTER;
+	public ElementAlign getAlign() {
+		return ElementAlign.CENTER;
 	}
 
 	/*

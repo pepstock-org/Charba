@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.LegendAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -72,6 +72,6 @@ public interface IsDefaultLegend extends IsDefaultTextDirectioner {
 	 * 
 	 * @return alignment of the legend.
 	 */
-	LegendAlign getAlign();
+	ElementAlign getAlign();
 
 }

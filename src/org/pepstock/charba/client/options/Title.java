@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -38,7 +39,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 */
 	private enum Property implements Key
 	{
-		// FIXME ALIGN is missing
+		ALIGN("align"),
 		DISPLAY("display"),
 		FONT("font"),
 		POSITION("position"),
@@ -137,6 +138,27 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	@Override
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
+	}
+
+	/**
+	 * Sets the alignment of the title.
+	 * 
+	 * @param alignment alignment of the title.
+	 */
+	public void setAlign(ElementAlign alignment) {
+		setValue(Property.ALIGN, alignment);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the alignment of the title.
+	 * 
+	 * @return alignment of the title.
+	 */
+	@Override
+	public ElementAlign getAlign() {
+		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
 	}
 
 	/**

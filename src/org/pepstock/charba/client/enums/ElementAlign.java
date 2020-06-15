@@ -18,11 +18,11 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Property to set alignment of the legend.
+ * Property to set alignment of the legend and the title.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum LegendAlign implements Key
+public enum ElementAlign implements Key
 {
 	/**
 	 * the property sets the start alignment.
@@ -48,7 +48,7 @@ public enum LegendAlign implements Key
 	 * @param value value of property name
 	 * @param horizontalAlignmentValue CSS value to apply to horizontal alignment
 	 */
-	private LegendAlign(String value, String horizontalAlignmentValue) {
+	private ElementAlign(String value, String horizontalAlignmentValue) {
 		this.value = value;
 		this.horizontalAlignmentValue = horizontalAlignmentValue;
 	}

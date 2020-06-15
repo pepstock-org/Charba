@@ -211,6 +211,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
  * remove `Event.TOUCHEND` item
+ * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
          
 ### Features
 
@@ -228,6 +229,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `ColorCallback` interface to use into a `GridLines` options in order to set `color` property at runtime.
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
    * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
+   * add `align` property to `Title` options and configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

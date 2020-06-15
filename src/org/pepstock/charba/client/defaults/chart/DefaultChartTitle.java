@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Title;
 
@@ -88,4 +89,12 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 		return title.isFullWidth();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getAlign()
+	 */
+	@Override
+	public ElementAlign getAlign() {
+		return title.getAlign();
+	}
+	
 }

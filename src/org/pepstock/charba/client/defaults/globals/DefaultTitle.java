@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -82,6 +83,16 @@ public final class DefaultTitle implements IsDefaultTitle {
 	@Override
 	public boolean isFullWidth() {
 		return DEFAULT_FULL_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getAlign()
+	 */
+	@Override
+	public ElementAlign getAlign() {
+		return ElementAlign.CENTER;
 	}
 
 }

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -144,6 +145,24 @@ public class Title {
 	 */
 	public boolean isFullWidth() {
 		return options.getTitle().isFullWidth();
+	}
+	
+	/**
+	 * Sets the alignment of the title.
+	 * 
+	 * @param alignment alignment of the title.
+	 */
+	public void setAlign(ElementAlign alignment) {
+		options.getTitle().setAlign(alignment);
+	}
+
+	/**
+	 * Returns the alignment of the title.
+	 * 
+	 * @return alignment of the title.
+	 */
+	public ElementAlign getAlign() {
+		return options.getTitle().getAlign();
 	}
 
 }

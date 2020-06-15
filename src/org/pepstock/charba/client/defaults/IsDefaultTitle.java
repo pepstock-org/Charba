@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -58,5 +59,12 @@ public interface IsDefaultTitle {
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	boolean isFullWidth();
+
+	/**
+	 * Returns the alignment of the title.
+	 * 
+	 * @return alignment of the title.
+	 */
+	ElementAlign getAlign();
 
 }

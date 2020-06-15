@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.enums.LegendAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -312,7 +312,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 * 
 	 * @param alignment alignment of the legend.
 	 */
-	public void setAlign(LegendAlign alignment) {
+	public void setAlign(ElementAlign alignment) {
 		getConfiguration().getLegend().setAlign(alignment);
 	}
 
@@ -321,7 +321,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 * 
 	 * @return alignment of the legend.
 	 */
-	public LegendAlign getAlign() {
+	public ElementAlign getAlign() {
 		return getConfiguration().getLegend().getAlign();
 	}
 
