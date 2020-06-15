@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum Event implements Key
 {
-
 	/**
 	 * The user moves the mouse over an element
 	 */
@@ -44,11 +43,7 @@ public enum Event implements Key
 	/**
 	 * The user touches a point is moved along the touch surface.
 	 */
-	TOUCHMOVE("touchmove"),
-	/**
-	 * The user touches a point is removed from the touch surface.
-	 */
-	TOUCHEND("touchend");
+	TOUCHMOVE("touchmove");
 
 	// name value of property
 	private final String value;
