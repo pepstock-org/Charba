@@ -39,9 +39,11 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	private enum Property implements Key
 	{
 		LABELS("labels"),
-		ALIGN("align"),
+		TITLE("title"),
+		// simple properties
 		DISPLAY("display"),
 		POSITION("position"),
+		ALIGN("align"),
 		FULL_WIDTH("fullWidth"),
 		REVERSE("reverse"),
 		RTL("rtl"),
@@ -129,6 +131,48 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	}
 
 	/**
+	 * Sets the position of the legend.
+	 * 
+	 * @param position Position of the legend.
+	 */
+	public void setPosition(Position position) {
+		setValue(Property.POSITION, position);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the position of the legend.
+	 * 
+	 * @return position of the legend.
+	 */
+	@Override
+	public Position getPosition() {
+		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
+	}
+	
+	/**
+	 * Sets the alignment of the legend.
+	 * 
+	 * @param alignment alignment of the legend.
+	 */
+	public void setAlign(LegendAlign alignment) {
+		setValue(Property.ALIGN, alignment);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the alignment of the legend.
+	 * 
+	 * @return alignment of the legend.
+	 */
+	@Override
+	public LegendAlign getAlign() {
+		return getValue(Property.ALIGN, LegendAlign.values(), getDefaultValues().getAlign());
+	}
+
+	/**
 	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 * 
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
@@ -168,48 +212,6 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	@Override
 	public boolean isReverse() {
 		return getValue(Property.REVERSE, getDefaultValues().isReverse());
-	}
-
-	/**
-	 * Sets the position of the legend.
-	 * 
-	 * @param position Position of the legend.
-	 */
-	public void setPosition(Position position) {
-		setValue(Property.POSITION, position);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the position of the legend.
-	 * 
-	 * @return position of the legend.
-	 */
-	@Override
-	public Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
-	}
-
-	/**
-	 * Sets the alignment of the legend.
-	 * 
-	 * @param alignment alignment of the legend.
-	 */
-	public void setAlign(LegendAlign alignment) {
-		setValue(Property.ALIGN, alignment);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the alignment of the legend.
-	 * 
-	 * @return alignment of the legend.
-	 */
-	@Override
-	public LegendAlign getAlign() {
-		return getValue(Property.ALIGN, LegendAlign.values(), getDefaultValues().getAlign());
 	}
 
 }

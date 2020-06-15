@@ -43,6 +43,13 @@ public interface IsDefaultLegendLabels {
 	 * @return width of colored box.
 	 */
 	int getBoxWidth();
+	
+	/**
+	 * Returns the height of colored box.
+	 * 
+	 * @return height of colored box.
+	 */
+	int getBoxHeight();
 
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.

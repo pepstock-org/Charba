@@ -217,6 +217,24 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
+	 * Sets the height of colored box.
+	 * 
+	 * @param boxHeight height of colored box.
+	 */
+	public void setBoxHeight(int boxHeight) {
+		getConfiguration().getLegend().getLabels().setBoxHeight(boxHeight);
+	}
+
+	/**
+	 * Returns the height of colored box.
+	 * 
+	 * @return height of colored box.
+	 */
+	public int getBoxHeight() {
+		return getConfiguration().getLegend().getLabels().getBoxHeight();
+	}
+
+	/**
 	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
 	 * @param padding Padding to apply around labels. Only top and bottom are implemented.

@@ -33,6 +33,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	{
 		FONT("font"),
 		BOX_WIDTH("boxWidth"),
+		BOX_HEIGHT("boxHeight"), // FIXME missing
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
 
@@ -126,6 +127,27 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	@Override
 	public int getBoxWidth() {
 		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
+	}
+	
+	/**
+	 * Sets the height of colored box.
+	 * 
+	 * @param boxHeight width of colored box.
+	 */
+	public void setBoxHeight(int boxHeight) {
+		setValue(Property.BOX_HEIGHT, boxHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the height of colored box.
+	 * 
+	 * @return height of colored box.
+	 */
+	@Override
+	public int getBoxHeight() {
+		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
 	}
 
 	/**

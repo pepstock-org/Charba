@@ -60,6 +60,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	private enum Property implements Key
 	{
+		// object properties
 		FONT("font"),
 		HOVER("hover"),
 		ELEMENTS("elements"),
@@ -69,12 +70,15 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		LEGEND("legend"),
 		TITLE("title"),
 		PLUGINS("plugins"),
+		// global options
+		COLOR("color"),
+		// simple properties
 		RESPONSIVE("responsive"),
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
 		ASPECT_RATIO("aspectRatio"),
-		EVENTS("events"),
-		COLOR("color"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
+		EVENTS("events"),
+		// specific for chart type
 		SHOW_LINES("showLines"),
 		SPAN_GAPS("spanGaps"),
 		CUTOUT_PERCENTAGE("cutoutPercentage"),

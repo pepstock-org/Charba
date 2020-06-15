@@ -66,6 +66,16 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getBoxHeight()
+	 */
+	@Override
+	public int getBoxHeight() {
+		return font.getSize();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#getPadding()
 	 */
 	@Override

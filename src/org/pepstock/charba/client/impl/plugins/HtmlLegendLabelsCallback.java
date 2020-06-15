@@ -250,7 +250,7 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 		// applying the border afterwards
 		int borderWidthToRemove = Math.max(0, item.getLineWidth());
 		int width = legendLabels.getBoxWidth() - borderWidthToRemove;
-		int height = legendLabels.getFont().getSize() - borderWidthToRemove;
+		int height = legendLabels.getBoxHeight() - borderWidthToRemove;
 		// styling the cell with mandatory values
 		color.getStyle().setDisplay(Display.BLOCK);
 		color.getStyle().setWidth(Unit.PX.format(width));

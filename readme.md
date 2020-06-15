@@ -198,6 +198,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `DefaultMajorTickItem` class to `DefaultMajor`.
    * rename `BaseTickMinor` configuration class renamed to `Major`.
    * remove `zeroLineWidth`, `zeroLineColor`, `zeroLineBorderDash` and `zeroLineBorderDashOffset` properties from `GridLines` options and configuration classes.
+   * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -209,6 +210,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
+ * remove `Event.TOUCHEND` item
          
 ### Features
 
@@ -220,8 +222,11 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `show` method to `AbstractChart` class in order to show a dataset. 
    * add axis id parameter to cartesian axes classes constructor.
    * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
-   * add new `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
-   * add new `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
+   * add `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
+   * add `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
+   * add `LineWidthCallback` interface to use into a `GridLines` options in order to set `lineWidth` property at runtime.
+   * add `ColorCallback` interface to use into a `GridLines` options in order to set `color` property at runtime.
+   * add `boxHeight` property to `LegendLabels` options and configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
