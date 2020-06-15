@@ -201,5 +201,19 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 	 * @return size of the border.
 	 */
 	int getBorderWidth();
+	
+	/**
+	 * Returns the width of the colored box if displayColors is <code>true</code>.
+	 * 
+	 * @return width of colored box.
+	 */
+	int getBoxWidth();
+	
+	/**
+	 * Returns the height of the colored box if displayColors is <code>true</code>.
+	 * 
+	 * @return height of colored box.
+	 */
+	int getBoxHeight();
 
 }

@@ -692,6 +692,43 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public int getBorderWidth() {
 		return getConfiguration().getTooltips().getBorderWidth();
 	}
+	
+	/**
+	 * Sets the width of of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @param boxWidth width of colored box.
+	 */
+	public void setBoxWidth(int boxWidth) {
+		getConfiguration().getTooltips().setBoxWidth(boxWidth);
+	}
+
+	/**
+	 * Returns the width of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @return width of colored box.
+	 */
+	public int getBoxWidth() {
+		return getConfiguration().getTooltips().getBoxWidth();
+	}
+	
+	/**
+	 * Sets the height of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @param boxHeight width of colored box.
+	 */
+	public void setBoxHeight(int boxHeight) {
+		getConfiguration().getTooltips().setBoxHeight(boxHeight);
+	}
+
+	/**
+	 * Returns the height of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @return height of colored box.
+	 */
+	public int getBoxHeight() {
+		return getConfiguration().getTooltips().getBoxHeight();
+	}
+
 
 	/**
 	 * Sets <code>true</code> for rendering the tooltips from right to left.

@@ -230,6 +230,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
    * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
    * add `align` property to `Title` options and configuration classes.
+   * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

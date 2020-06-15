@@ -51,13 +51,14 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	private enum Property implements Key
 	{
 		CALLBACKS("callbacks"),
+		// simple properties
 		ENABLED("enabled"),
 		POSITION("position"),
 		BACKGROUND_COLOR("backgroundColor"),
 		TITLE_FONT("titleFont"),
+		TITLE_ALIGN("titleAlign"),
 		TITLE_SPACING("titleSpacing"),
 		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
-		TITLE_ALIGN("titleAlign"),
 		BODY_FONT("bodyFont"),
 		BODY_SPACING("bodySpacing"),
 		BODY_ALIGN("bodyAlign"),
@@ -72,6 +73,8 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		CORNER_RADIUS("cornerRadius"),
 		MULTI_KEY_BACKGROUND("multiKeyBackground"),
 		DISPLAY_COLORS("displayColors"),
+		BOX_WIDTH("boxWidth"),
+		BOX_HEIGHT("boxHeight"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth");
 
@@ -681,6 +684,48 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
+	}
+	
+	/**
+	 * Sets the width of of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @param boxWidth width of colored box.
+	 */
+	public void setBoxWidth(int boxWidth) {
+		setValue(Property.BOX_WIDTH, boxWidth);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the width of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @return width of colored box.
+	 */
+	@Override
+	public int getBoxWidth() {
+		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
+	}
+	
+	/**
+	 * Sets the height of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @param boxHeight width of colored box.
+	 */
+	public void setBoxHeight(int boxHeight) {
+		setValue(Property.BOX_HEIGHT, boxHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the height of the colored box if displayColors is <code>true</code>..
+	 * 
+	 * @return height of colored box.
+	 */
+	@Override
+	public int getBoxHeight() {
+		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
 	}
 
 }

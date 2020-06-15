@@ -311,4 +311,24 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 		return tooltips.getTextDirection();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxWidth()
+	 */
+	@Override
+	public int getBoxWidth() {
+		return tooltips.getBoxWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxHeight()
+	 */
+	@Override
+	public int getBoxHeight() {
+		return tooltips.getBoxHeight();
+	}
+
 }

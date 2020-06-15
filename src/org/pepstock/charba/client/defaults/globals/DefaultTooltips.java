@@ -415,4 +415,24 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		return TextDirection.LEFT_TO_RIGHT;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxWidth()
+	 */
+	@Override
+	public int getBoxWidth() {
+		return bodyFont.getSize();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxHeight()
+	 */
+	@Override
+	public int getBoxHeight() {
+		return bodyFont.getSize();
+	}
+
 }
