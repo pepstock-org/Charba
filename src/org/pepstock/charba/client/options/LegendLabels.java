@@ -33,7 +33,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	{
 		FONT("font"),
 		BOX_WIDTH("boxWidth"),
-		BOX_HEIGHT("boxHeight"), // FIXME missing
+		BOX_HEIGHT("boxHeight"),
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
 

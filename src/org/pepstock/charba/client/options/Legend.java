@@ -29,7 +29,9 @@ import org.pepstock.charba.client.enums.Position;
  */
 public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
 
-	private LegendLabels labels;
+	private final LegendLabels labels;
+
+	private final LegendTitle title;
 
 	private final TextDirectioner textDirectioner;
 
@@ -84,7 +86,8 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	Legend(Options options, Key childKey, IsDefaultLegend defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
-		labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
+		this.labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
+		this.title = new LegendTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		// creates text directioner
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
 	}
@@ -107,6 +110,16 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	@Override
 	public LegendLabels getLabels() {
 		return labels;
+	}
+	
+	/**
+	 * Returns the legend title element.
+	 * 
+	 * @return the title
+	 */
+	@Override
+	public LegendTitle getTitle() {
+		return title;
 	}
 
 	/**
@@ -150,7 +163,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
 	}
-	
+
 	/**
 	 * Sets the alignment of the legend.
 	 * 

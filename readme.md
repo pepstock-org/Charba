@@ -227,6 +227,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `LineWidthCallback` interface to use into a `GridLines` options in order to set `lineWidth` property at runtime.
    * add `ColorCallback` interface to use into a `GridLines` options in order to set `color` property at runtime.
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
+   * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

@@ -77,8 +77,9 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// legend item factory
 	static final LegendItemFactory FACTORY = new LegendItemFactory();
-	// sub element of legend
+	// sub elements of legend
 	private final LegendLabels labels;
+	private final LegendTitle title;
 	// amount of click handlers
 	private int onClickHandlers = 0;
 	// amount of hover handlers
@@ -96,17 +97,18 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		super(chart, options);
 		// registers as event handler
 		IsEventProvider.register(chart, this);
-		// creates sub element
-		labels = new LegendLabels(chart, options);
+		// creates sub elements
+		this.labels = new LegendLabels(chart, options);
+		this.title = new LegendTitle(chart, options);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, FACTORY.create(item))));
+		this.clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, FACTORY.create(item))));
 		// fires the event
-		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, FACTORY.create(item))));
+		this.hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, FACTORY.create(item))));
 		// fires the event
-		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, FACTORY.create(item))));
+		this.leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, FACTORY.create(item))));
 	}
 
 	/**
@@ -125,6 +127,15 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 */
 	public LegendLabels getLabels() {
 		return labels;
+	}
+
+	/**
+	 * Returns the legend title element.
+	 * 
+	 * @return the title
+	 */
+	public LegendTitle getTitle() {
+		return title;
 	}
 
 	/*

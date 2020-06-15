@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -38,6 +39,8 @@ public final class DefaultLegend implements IsDefaultLegend {
 
 	private final DefaultLegendLabels legendLabels = new DefaultLegendLabels();
 
+	private final DefaultLegendTitle legendTitle = new DefaultLegendTitle();
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -46,6 +49,16 @@ public final class DefaultLegend implements IsDefaultLegend {
 	@Override
 	public IsDefaultLegendLabels getLabels() {
 		return legendLabels;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getTitle()
+	 */
+	@Override
+	public IsDefaultLegendTitle getTitle() {
+		return legendTitle;
 	}
 
 	/*
