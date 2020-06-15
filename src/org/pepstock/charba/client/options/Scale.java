@@ -150,6 +150,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * New native java script object is created and it's empty.
 	 * 
 	 * @param id scale id
+	 * @param type scale type
 	 * @param defaultValues default provider instance.
 	 */
 	public Scale(IsScaleId id, AxisType type, IsDefaultScale defaultValues) {
@@ -525,7 +526,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @param type type of axis
 	 */
-	public final void setType(AxisType type) {
+	private void setType(AxisType type) {
 		setValue(Property.TYPE, type);
 		// checks if all parents are attached
 		checkAndAddToParent();

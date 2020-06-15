@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.enums.AxisType;
@@ -65,8 +66,12 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		if (!empty()) {
 			// removes all keys
 			for (Key key : keys()) {
-				// remove key
-				remove(key);
+				// checks if the property is related to an object
+				// otherwise is not a scale
+				if (ObjectType.OBJECT.equals(type(key))) {
+					// remove key
+					remove(key);
+				}
 			}
 		}
 		// checks if the arguments are consistent
