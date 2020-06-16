@@ -245,6 +245,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `@Override` annotation to all overriding methods. 
  * override the hashCode `$H` property for `NativeObject` objects that GWT is adding to objects in order to set the property as NOT enumerable and NOT configurable.
  * change `compare` static method of `Key` interface in order to test if the keys are valid and not only not `null`.
+ * change the registering of tooltips positioner in order to apply to CHART.JS tooltips plugin. 
 
 License
 -------

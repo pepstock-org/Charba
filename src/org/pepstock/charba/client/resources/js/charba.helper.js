@@ -144,7 +144,11 @@
     */
     CharbaJsControllerHelper.extend = function(controllerType, chartType, instance) {
 		Chart.defaults[controllerType] = Chart.defaults[chartType];
-		Chart.defaults.global.datasets[controllerType] = Chart.defaults.global.datasets[chartType];
+		//Chart.defaults.datasets[controllerType] = Chart.defaults.datasets[chartType];
+		console.log("chart type", chartType);
+		console.log("controller type", controllerType);
+		console.log("controllers", Chart.controllers);
+		console.log("controllers-type", Chart.controllers[chartType]);
 		Chart.controllers[controllerType] = Chart.controllers[chartType].extend(instance);
     }
     /*
@@ -192,9 +196,11 @@
 	 @param controllerType controller type
 	 @param context context of controller
 	 @param element element to be remove.
-    */
-    CharbaJsControllerHelper.removeHoverStyle = function(controllerType, context, element) {
-    	Chart.controllers[controllerType].prototype.removeHoverStyle.call(context, element);
+	 @param datasetIndex dataset index
+	 @param index data index
+	 */
+    CharbaJsControllerHelper.removeHoverStyle = function(controllerType, context, element, datasetIndex, index) {
+    	Chart.controllers[controllerType].prototype.removeHoverStyle.call(context, element, datasetIndex, index);
     }
     /*
 	 Invokes the default "setHoverStyle" method.
@@ -202,9 +208,11 @@
 	 @param controllerType controller type
 	 @param context context of controller
 	 @param element element to be set.
+	 @param datasetIndex dataset index
+	 @param index data index
     */
-    CharbaJsControllerHelper.setHoverStyle = function(controllerType, context, element) {
-    	Chart.controllers[controllerType].prototype.setHoverStyle.call(context, element);
+    CharbaJsControllerHelper.setHoverStyle = function(controllerType, context, element, datasetIndex, index) {
+    	Chart.controllers[controllerType].prototype.setHoverStyle.call(context, element, datasetIndex, index);
     }
     /*
 	 Invokes the default "update" method.
@@ -246,7 +254,8 @@
     */
     CharbaJsPositionerHelper.register = function(name, module) {
     	if (module != null && typeof module === 'function'){
-	    	Chart.Tooltip.positioners[name] = module;
+    	    const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+            tooltipPlugin.positioners[name] = module;
     	}
     }
     /*
@@ -255,8 +264,9 @@
 	 @param name name of new position to set into tooltip config
     */
     CharbaJsPositionerHelper.unregister = function(name) {
-    	if (Chart.Tooltip.positioners[name] != 'undefined'){
- 		    delete Chart.Tooltip.positioners[name];
+   	    const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+    	if (tooltipPlugin.positioners[name] != 'undefined'){
+ 		    delete tooltipPlugin.positioners[name];
     	}
     }
     /*
@@ -269,8 +279,9 @@
 	 @return the point calculated by positioner or <code>null</code> if positioner does not exist
     */
     CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
-    	if (Chart.Tooltip.positioners[name] != 'undefined'){
-    		return Chart.Tooltip.positioners[name].apply(context, Array.of(elements, eventPoint));
+        const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+    	if (tooltipPlugin.positioners[name]  != 'undefined'){
+    		return tooltipPlugin.positioners[name].apply(context, Array.of(elements, eventPoint));
     	}
     	return null;
     }

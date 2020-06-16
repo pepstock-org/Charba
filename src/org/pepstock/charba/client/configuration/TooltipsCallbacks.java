@@ -173,7 +173,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		BEFORE_FOOTER("beforeFooter"),
 		FOOTER("footer"),
 		AFTER_FOOTER("afterFooter");
-
+		
 		// name value of property
 		private final String value;
 

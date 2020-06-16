@@ -60,7 +60,7 @@ final class JsPositionerHelper {
 	 * Register the tooltips positioner to CHART.JS.
 	 * 
 	 * @param position new position for tooltips
-	 * @param object callback to invoke the tolltip positioner
+	 * @param object callback to invoke the tooltip positioner
 	 */
 	void register(IsTooltipPosition position, Proxy object) {
 		NativeJsPositionerHelper.register(position.value(), object);
@@ -91,8 +91,8 @@ final class JsPositionerHelper {
 		if (pointAsObject != null) {
 			return new Point(pointAsObject);
 		}
-		// if here, the object is not cosnsitent
-		// then return an empy point
+		// if here, the object is not consistent
+		// then return an empty point
 		return new Point();
 	}
 }

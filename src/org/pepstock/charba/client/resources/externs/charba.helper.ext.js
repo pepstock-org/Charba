@@ -105,16 +105,20 @@ CharbaJsControllerHelper.draw = function(chartType, context, ease) {};
  * @param {string} chartType 
  * @param {Object} context 
  * @param {Object} element
+ * @param {number} datasetIndex
+ * @param {number} index
  * @return {undefined}
  */
-CharbaJsControllerHelper.removeHoverStyle = function(chartType, context, element) {};
+CharbaJsControllerHelper.removeHoverStyle = function(chartType, context, element, datasetIndex, index) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 
  * @param {Object} element
+ * @param {number} datasetIndex
+ * @param {number} index
  * @return {undefined}
  */
-CharbaJsControllerHelper.setHoverStyle = function(chartType, context, element) {};
+CharbaJsControllerHelper.setHoverStyle = function(chartType, context, element, datasetIndex, index) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 
