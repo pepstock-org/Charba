@@ -198,6 +198,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `DefaultMajorTickItem` class to `DefaultMajor`.
    * rename `BaseTickMinor` configuration class renamed to `Major`.
    * remove `zeroLineWidth`, `zeroLineColor`, `zeroLineBorderDash` and `zeroLineBorderDashOffset` properties from `GridLines` options and configuration classes.
+   * remove `x` and `y` properties from `TooltipItem` class.
    * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.

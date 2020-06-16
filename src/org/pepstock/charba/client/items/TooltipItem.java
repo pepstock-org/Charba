@@ -38,9 +38,7 @@ public final class TooltipItem extends NativeObjectContainer {
 		LABEL("label"),
 		VALUE("value"),
 		DATASET_INDEX("datasetIndex"),
-		INDEX("index"),
-		X("x"),
-		Y("y");
+		INDEX("index");
 
 		// name value of property
 		private final String value;
@@ -109,24 +107,6 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	public int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the X location of tooltip item.
-	 * 
-	 * @return the X location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getX() {
-		return getValue(Property.X, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the Y location of tooltip item.
-	 * 
-	 * @return the Y location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getY() {
-		return getValue(Property.Y, UndefinedValues.INTEGER);
 	}
 
 	/**
