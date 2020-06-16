@@ -43,7 +43,7 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final boolean DEFAULT_STACKED = false;
 
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
+	private static final boolean DEFAULT_BEGIN_AT_ZERO = true;
 
 	private static final boolean DEFAULT_REVERSE = false;
 
