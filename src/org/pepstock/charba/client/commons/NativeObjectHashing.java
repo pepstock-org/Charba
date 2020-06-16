@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.commons;
 
 /**
- * Utility class to generate hash code for {@link NativeObject}.
+ * Utility class to redefine hash code for {@link NativeObject}, setting the hashCode property as not enumerable and not configurable.
  * 
  * @author Andrea "Stock" Stocchero
  *

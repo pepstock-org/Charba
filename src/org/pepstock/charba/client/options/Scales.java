@@ -54,6 +54,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		super.redefineHashcode();
 	}
 
 	/**

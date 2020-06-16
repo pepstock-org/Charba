@@ -51,7 +51,6 @@ public abstract class NativeObjectContainer {
 	 */
 	protected NativeObjectContainer(NativeObject nativeObject) {
 		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
-		NativeObjectHashing.handleHashCode(this.nativeObject);
 	}
 
 	// ------------------------------------------
@@ -65,6 +64,13 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final NativeObject getNativeObject() {
 		return nativeObject;
+	}
+
+	/**
+	 * Redefine hash code for {@link NativeObject}, setting the hashCode property as not enumerable and not configurable
+	 */
+	protected final void redefineHashcode() {
+		NativeObjectHashing.handleHashCode(this.nativeObject);
 	}
 
 	/**
@@ -983,7 +989,7 @@ public abstract class NativeObjectContainer {
 		// if here the property doesn't exist or has got a wrong type
 		return ArrayPattern.fromOrEmpty(defaultValue);
 	}
-	
+
 	// ------------------------------------------
 	// --- KEYS
 	// ------------------------------------------
@@ -1031,7 +1037,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineStringProperty(key.value(), value.value());
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- Special case for ScaleId
 	// ------------------------------------------
@@ -1054,7 +1060,7 @@ public abstract class NativeObjectContainer {
 		// checks and gets the scale id
 		return IsScaleId.checkAndGetScaleID(getValue(key, defaultValue.value()), defaultValue);
 	}
-	
+
 	// ------------------------------------------
 	// --- ENUMERATIONS
 	// ------------------------------------------
