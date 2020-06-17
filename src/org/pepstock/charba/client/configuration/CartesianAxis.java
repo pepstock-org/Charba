@@ -62,10 +62,12 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 			// throw an exception
 			throw new IllegalArgumentException("The scale id is invalid. It must not be " + id.value());
 		}
-		// gets the cartesian type
-		// by scale id
-		// stores the axis type
-		getScale().setAxis(cartesianType);
+		// checks if scale id of scale is consistent
+		// used for cartesian, it must not be set to unknown
+		if (CartesianAxisType.R.equals(cartesianType)) {
+			// throw an exception
+			throw new IllegalArgumentException("The cartesian type is invalid. It must not be " + CartesianAxisType.R.value());
+		}
 		// sets to the objects
 		grideLines = new GridLines(this);
 		scaleLabel = new CartesianScaleLabel(this);
@@ -94,28 +96,6 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public GridLines getGrideLines() {
 		return grideLines;
-	}
-
-	/**
-	 * Which type of axis this is.<br>
-	 * Possible values are: 'x', 'y'.<br>
-	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
-	 * 
-	 * @param type type of axis
-	 */
-	public final void setAxis(CartesianAxisType type) {
-		getScale().setAxis(type);
-	}
-
-	/**
-	 * Which type of axis this is.<br>
-	 * Possible values are: 'x', 'y'.<br>
-	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
-	 * 
-	 * @return the type of axis.
-	 */
-	public final CartesianAxisType getAxis() {
-		return getScale().getAxis();
 	}
 
 	/**

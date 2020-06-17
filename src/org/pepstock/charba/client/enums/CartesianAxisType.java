@@ -17,7 +17,6 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.configuration.CartesianAxis;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
@@ -34,7 +33,11 @@ public enum CartesianAxisType implements Key
 	/**
 	 * Y directions are used in calculating axis.
 	 */
-	Y("y", DefaultScaleId.Y);
+	Y("y", DefaultScaleId.Y),
+	/**
+	 * This is the axis type used by radial linear axis even if it is not a cartesian axis.
+	 */
+	R("r", DefaultScaleId.R);
 
 	// name value of property
 	private final String value;
@@ -133,17 +136,13 @@ public enum CartesianAxisType implements Key
 	 * Returns <code>true</code> if the axis has been defined with that cartesian type.
 	 * 
 	 * @param axis axis instance to check
-	 * @param cartesiantype cartesian type instance to use for checking
+	 * @param cartesianType cartesian type instance to use for checking
 	 * @return <code>true</code> if the axis has been defined with that cartesian type
 	 */
-	public static boolean hasAxisType(Axis axis, CartesianAxisType cartesiantype) {
-		// checks if is cartesian axis
-		// only cartesian axis has got the multi scale
-		// and if cartesian type passed as argument is consistent
-		if (axis instanceof CartesianAxis && Key.isValid(cartesiantype)) {
-			CartesianAxis<?> cAxis = (CartesianAxis<?>) axis;
+	public static boolean hasAxisType(Axis axis, CartesianAxisType cartesianType) {
+		if (axis != null && Key.isValid(cartesianType)) {
 			// checks if x axis
-			return cartesiantype.equals(cAxis.getAxis());
+			return cartesianType.equals(axis.getAxis());
 		}
 		// if here the axis is not consistent
 		return false;

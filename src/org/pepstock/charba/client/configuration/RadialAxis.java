@@ -49,7 +49,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 * @param chart chart instance
 	 */
 	public RadialAxis(IsChart chart) {
-		super(chart, DefaultScaleId.UNKNOWN, AxisType.RADIAL_LINEAR, CartesianAxisType.Y);
+		super(chart, DefaultScaleId.R, AxisType.RADIAL_LINEAR, CartesianAxisType.R);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
 		grideLines = new GridLines(this);

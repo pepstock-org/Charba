@@ -51,7 +51,7 @@ public enum AxisType implements Key
 	 * The linear scale is use to chart numerical data.<br>
 	 * The linear interpolation is used to determine where a value lies in relation the center of the axis.
 	 */
-	RADIAL_LINEAR("radialLinear", DefaultScaleId.UNKNOWN);
+	RADIAL_LINEAR("radialLinear", DefaultScaleId.R);
 
 	// name value of property
 	private final String value;

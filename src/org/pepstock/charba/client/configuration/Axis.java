@@ -170,19 +170,21 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param chart chart instance
 	 * @param id axis id
 	 * @param type axis type
-	 * @param cartesiantype cartesian type
+	 * @param cartesianType cartesian type
 	 */
-	Axis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesiantype) {
+	Axis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesianType) {
 		super(chart);
 		// checks if id is consistent
 		IsScaleId.checkIfValid(id);
 		// checks cartesian type
-		Key.checkIfValid(cartesiantype);
+		Key.checkIfValid(cartesianType);
 		// stores internally the axis type
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(id, type, getDefaultScale(cartesiantype)));
+		setConfiguration(new ExtendedScale(id, type, getDefaultScale(cartesianType)));
+		// stores the axis type
+		setAxis(cartesianType);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -224,8 +226,31 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return the type of axis
 	 */
-	public AxisType getType() {
+	public final AxisType getType() {
 		return getScale().getType();
+	}
+	
+
+	/**
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * 
+	 * @param type type of axis
+	 */
+	public final void setAxis(CartesianAxisType type) {
+		getScale().setAxis(type);
+	}
+
+	/**
+	 * Which type of axis this is.<br>
+	 * Possible values are: 'x', 'y'.<br>
+	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * 
+	 * @return the type of axis.
+	 */
+	public final CartesianAxisType getAxis() {
+		return getScale().getAxis();
 	}
 
 	/**

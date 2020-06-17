@@ -28,13 +28,17 @@ import org.pepstock.charba.client.options.IsScaleId;
 public enum DefaultScaleId implements IsScaleId
 {
 	/**
-	 * Default scale id for X axis.
+	 * Default scale id for X cartesian axis.
 	 */
 	X("x"),
 	/**
-	 * Default scale id for Y axis.
+	 * Default scale id for Y cartesian axis.
 	 */
 	Y("y"),
+	/**
+	 * Default scale id for radial linear axis.
+	 */
+	R("r"),
 	/**
 	 * Default scale id for chart with a single axis.
 	 */
@@ -70,7 +74,9 @@ public enum DefaultScaleId implements IsScaleId
 	 */
 	public boolean is(String scaleId) {
 		// checks id if consistent
-		if (scaleId != null) {
+		// and if is testing for radial linear default
+		// that it should not be used
+		if (scaleId != null && !R.equals(this)) {
 			// put to lower case
 			String id = scaleId.toLowerCase(Locale.getDefault());
 			// checks if starts with

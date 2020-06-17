@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
  * Base object which maps chart options, with scales elements to set axes configurations.
@@ -98,12 +97,6 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	public final void setScale(Scale scale) {
 		// checks if scale is consistent
 		if (scale != null) {
-			// checks if scale id of scale is consistent
-			// being a single scale, must be set to unknown
-			if (!DefaultScaleId.UNKNOWN.is(scale.getId())) {
-				// throw an exception
-				throw new IllegalArgumentException("The scale has got " + scale.getId() + " as id but the id must not be set");
-			}
 			this.scale = scale;
 			// set values
 			setValue(Property.SCALE, this.scale);

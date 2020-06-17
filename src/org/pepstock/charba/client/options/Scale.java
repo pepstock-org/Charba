@@ -64,7 +64,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		// common scale
 		DISPLAY("display"),
@@ -158,6 +158,18 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		this(null, null, defaultValues, null);
 		// checks axis type
 		Key.checkIfValid(type);
+		// if axis type is radial linear
+		// you can not set the id not equals to default R
+		if (AxisType.RADIAL_LINEAR.equals(type) && !Key.equals(DefaultScaleId.R, id)) {
+			// exception
+			throw new IllegalArgumentException("The scale id '"+id.value()+"' can not be applied to a radial linear scale.");
+		}
+		// if scale id is unknown
+		// an exception will be thrown
+		if (DefaultScaleId.UNKNOWN.is(id)) {
+			// exception
+			throw new IllegalArgumentException("The scale id '"+id.value()+"' can not be applied to a scale.");
+		}
 		// sets the ID
 		setId(id);
 		// sets the type
@@ -550,9 +562,14 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param type type of axis
 	 */
 	public final void setAxis(CartesianAxisType type) {
-		setValue(Property.AXIS, type);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		// checks if type is not equals to R
+		// because R can not be set
+		// being the default for radial linear
+		if (!CartesianAxisType.R.equals(type) && !AxisType.RADIAL_LINEAR.equals(getType())) {
+			setValue(Property.AXIS, type);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		}
 	}
 
 	/**
@@ -568,8 +585,11 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		if (has(Property.AXIS)) {
 			// returns the property
 			return getValue(Property.AXIS, CartesianAxisType.values(), getDefaultValues().getAxis());
+		} else if (AxisType.RADIAL_LINEAR.equals(getType())) {
+			// if here the property doesn't exist
+			// checks if is a radial linear
+			return CartesianAxisType.R;
 		}
-		// if here the property doesn't exist
 		// then returns base on scale id
 		return CartesianAxisType.getByScaleId(getId());
 	}
