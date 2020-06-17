@@ -60,6 +60,9 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
 		// no default values for this element
 		super(options, childKey, defaultValues, nativeObject);
+		// redefines hashcode in order do not have 
+		// the property $H for hashcode
+		super.redefineHashcode();
 	}
 
 	/**

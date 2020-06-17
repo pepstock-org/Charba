@@ -54,6 +54,8 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		// redefines hashcode in order do not have 
+		// the property $H for hashcode
 		super.redefineHashcode();
 	}
 

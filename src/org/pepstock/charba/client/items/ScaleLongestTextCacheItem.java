@@ -142,6 +142,9 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		 */
 		Data(NativeObject nativeObject) {
 			super(nativeObject);
+			// redefines hashcode in order do not have 
+			// the property $H for hashcode
+			super.redefineHashcode();
 		}
 
 		/**
