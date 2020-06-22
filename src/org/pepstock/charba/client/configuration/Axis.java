@@ -31,8 +31,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
@@ -170,21 +170,21 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param chart chart instance
 	 * @param id axis id
 	 * @param type axis type
-	 * @param cartesianType cartesian type
+	 * @param kind axis kind to set the right position
 	 */
-	Axis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesianType) {
+	Axis(IsChart chart, IsScaleId id, AxisType type, AxisKind kind) {
 		super(chart);
 		// checks if id is consistent
 		IsScaleId.checkIfValid(id);
 		// checks cartesian type
-		Key.checkIfValid(cartesianType);
+		Key.checkIfValid(kind);
 		// stores internally the axis type
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(id, type, getDefaultScale(cartesianType)));
-		// stores the axis type
-		setAxis(cartesianType);
+		setConfiguration(new ExtendedScale(new ScaleIdEnvelop(id), type, getDefaultScale(kind)));
+		// stores the axis type, overriding the default
+		setAxis(kind);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -232,24 +232,22 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	
 
 	/**
-	 * Which type of axis this is.<br>
-	 * Possible values are: 'x', 'y'.<br>
-	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
-	 * 
-	 * @param type type of axis
+	 * Which kind of axis this is.<br>
+	 * Possible values are: 'x', 'y' or 'r'.
+s	 * 
+	 * @param kind type of axis
 	 */
-	public final void setAxis(CartesianAxisType type) {
-		getScale().setAxis(type);
+	public final void setAxis(AxisKind kind) {
+		getScale().setAxis(kind);
 	}
 
 	/**
-	 * Which type of axis this is.<br>
-	 * Possible values are: 'x', 'y'.<br>
-	 * If not set, this is inferred from the first character of the ID which should be 'x' or 'y'.
+	 * Which kind of axis this is.<br>
+	 * Possible values are: 'x', 'y' or 'r'.
 	 * 
-	 * @return the type of axis.
+	 * @return the kind of axis.
 	 */
-	public final CartesianAxisType getAxis() {
+	public final AxisKind getAxis() {
 		return getScale().getAxis();
 	}
 
@@ -331,40 +329,35 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the global options for this chart.
 	 * 
-	 * @param cartesiantype cartesian type
+	 * @param kind axis kind instance
 	 * @return the global options for this chart.
 	 */
-	private IsDefaultScale getDefaultScale(CartesianAxisType cartesiantype) {
+	private IsDefaultScale getDefaultScale(AxisKind kind) {
 		// gets the global option for the chart.
 		IsDefaultScaledOptions options = getChart().getDefaultChartOptions();
-		// if is a multi scale chart
-		if (ScaleType.MULTI.equals(getChart().getType().scaleType())) {
-			// checks if is cartesian axis
-			// only cartesian axis has got the multi scale
-			if (Key.isValid(cartesiantype)) {
-				// returns the option for x or y scale.
-				return getCartesianScale(CartesianAxisType.X.equals(cartesiantype) ? options.getScales().getXAxis() : options.getScales().getYAxis());
+		// if is a a chart with scales
+		if (!ScaleType.NONE.equals(getChart().getType().scaleType())) {
+			// checks if axis kind is consistent
+			if (Key.isValid(kind)) {
+				// creates reference for scale
+				IsDefaultScale scale = null;
+				// based on axis kind
+				switch(kind) {
+				case X:
+					// X cartesian
+					scale = options.getScales().getXAxis();
+					break; 
+				case R:
+					// R radial linear
+					scale = options.getScales().getRAxis();
+					break;
+				default: 
+					// Y cartesian
+					scale = options.getScales().getYAxis();
+				}
+				// returns the option for x, r or y scale.
+				return scale;
 			}
-		} else if (ScaleType.SINGLE.equals(getChart().getType().scaleType())) {
-			// being a single scale
-			// returns scale option
-			return options.getScale();
-		}
-		// returns default scale
-		return Defaults.get().getScale(this.storeType);
-	}
-
-	/**
-	 * Returns the scale option for multi-scale chart using the axis type.
-	 * 
-	 * @param axis X or Y scale option.
-	 * @return a scale object with axis configuration
-	 */
-	private IsDefaultScale getCartesianScale(IsDefaultScale axis) {
-		// if configuration type equals to this axis
-		if (storeType.equals(axis.getType())) {
-			// returns scale config
-			return axis;
 		}
 		// returns default scale
 		return Defaults.get().getScale(this.storeType);

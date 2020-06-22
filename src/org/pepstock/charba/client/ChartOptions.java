@@ -17,7 +17,6 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaledOptions;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.utils.Utilities;
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
 public final class ChartOptions extends ScaledOptions {
 
 	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
-	private static final String INVALID_SCALE_TYPE = "The options is referring to {0} chart with {1} scale type and not to {2} scale type as requested";
+	private static final String INVALID_SCALE_TYPE = "The options is referring to {0} chart with {1} scale type and not to MULTI/SINGLE scale type as requested";
 
 	private final Type type;
 
@@ -65,29 +64,13 @@ public final class ChartOptions extends ScaledOptions {
 	 */
 	@Override
 	public Scales getScales() {
-		// checks if the chart is multi-scales
-		if (ScaleType.MULTI.equals(type.scaleType())) {
-			// returns the scales
-			return super.getScales();
+		// checks if the chart is no-scales
+		if (ScaleType.NONE.equals(type.scaleType())) {
+			// if here, the chart is none scales therefore exception
+			throw new UnsupportedOperationException(Utilities.applyTemplate(INVALID_SCALE_TYPE, type.value(), type.scaleType().name()));
 		}
-		// if here, the chart is not multi scales therefore exception
-		throw new UnsupportedOperationException(Utilities.applyTemplate(INVALID_SCALE_TYPE, type.value(), type.scaleType().name(), ScaleType.MULTI.name()));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.ScaledOptions#getScale()
-	 */
-	@Override
-	public Scale getScale() {
-		// checks if the chart is single-scales
-		if (ScaleType.SINGLE.equals(type.scaleType())) {
-			// returns the scale
-			return super.getScale();
-		}
-		// if here, the chart is not single scale therefore exception
-		throw new UnsupportedOperationException(Utilities.applyTemplate(INVALID_SCALE_TYPE, type.value(), type.scaleType().name(), ScaleType.SINGLE.name()));
+		// returns the scales
+		return super.getScales();
 	}
 
 	/**

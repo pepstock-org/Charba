@@ -58,7 +58,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Base class of all charts.<br>
@@ -589,7 +588,9 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
 	 */
 	@Override
+	@Deprecated
 	public final String generateLegend() {
+		// FIXME to remove
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if chart is created
@@ -688,7 +689,6 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			Charts.fireAfterConfigure(this);
 			// update chart
 			update(configuration);
-			Window.getConsole().log("update");
 		}
 	}
 

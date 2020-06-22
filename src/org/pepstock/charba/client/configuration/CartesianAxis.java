@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -52,21 +52,21 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param chart chart instance
 	 * @param id axis id
 	 * @param type axis type
-	 * @param cartesianType cartesian type
+	 * @param kind axis kind
 	 */
-	CartesianAxis(IsChart chart, IsScaleId id, AxisType type, CartesianAxisType cartesianType) {
-		super(chart, id, type, cartesianType);
+	CartesianAxis(IsChart chart, IsScaleId id, AxisType type, AxisKind kind) {
+		super(chart, id, type, kind);
 		// checks if scale id of scale is consistent
 		// used for cartesian, it must not be set to unknown
 		if (DefaultScaleId.UNKNOWN.is(id.value())) {
 			// throw an exception
 			throw new IllegalArgumentException("The scale id is invalid. It must not be " + id.value());
 		}
-		// checks if scale id of scale is consistent
-		// used for cartesian, it must not be set to unknown
-		if (CartesianAxisType.R.equals(cartesianType)) {
+		// checks if axis kind of scale is consistent
+		// used for cartesian, it must not be set to R
+		if (AxisKind.R.equals(kind)) {
 			// throw an exception
-			throw new IllegalArgumentException("The cartesian type is invalid. It must not be " + CartesianAxisType.R.value());
+			throw new IllegalArgumentException("The axis kind is invalid. It must not be " + AxisKind.R.value());
 		}
 		// sets to the objects
 		grideLines = new GridLines(this);

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -31,8 +30,6 @@ import org.pepstock.charba.client.options.ScaledOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultChartOptions extends AbstractDefaultChartOptions implements IsDefaultScaledOptions {
-
-	private final IsDefaultScale scale;
 
 	private final IsDefaultScales scales;
 
@@ -64,33 +61,14 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 		super(chartOptions);
 		// checks type
 		Type.checkIfValid(type);
-		// checks if the chart options is related to axes
-		// checks if single scale
-		if (ScaleType.SINGLE.equals(type.scaleType())) {
-			// gets scale
-			this.scale = new DefaultChartScale(chartOptions.getScale());
+		// checks if the chart has got scales
+		if (ScaleType.NONE.equals(type.scaleType())){
+			// gets default scales
+			scales = DefaultsBuilder.get().getScaledOptions().getScales();
 		} else {
-			// uses the default scale
-			scale = DefaultsBuilder.get().getScaledOptions().getScale();
-		}
-		// checks if multi scale
-		if (ScaleType.MULTI.equals(type.scaleType())) {
 			// gets scale
 			scales = new DefaultChartScales(chartOptions.getScales());
-		} else {
-			// uses the default scales
-			scales = DefaultsBuilder.get().getScaledOptions().getScales();
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getScale()
-	 */
-	@Override
-	public IsDefaultScale getScale() {
-		return scale;
 	}
 
 	/*

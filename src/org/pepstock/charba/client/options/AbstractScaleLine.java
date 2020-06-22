@@ -30,7 +30,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @param <D> defaults provider class
  *
  */
-abstract class AbstractScaleLine<D> extends AbstractModel<Scale, D> {
+abstract class AbstractScaleLine<D> extends AbstractModel<AbstractScale, D> {
 
 	/**
 	 * Name of properties of native object.
@@ -72,7 +72,7 @@ abstract class AbstractScaleLine<D> extends AbstractModel<Scale, D> {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractScaleLine(Scale scale, Key childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractScaleLine(AbstractScale scale, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
 

@@ -47,6 +47,16 @@ public final class DefaultScales implements IsDefaultScales {
 		return getDefaultScale();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getRAxis()
+	 */
+	@Override
+	public IsDefaultScale getRAxis() {
+		return getDefaultScale();
+	}
+
 	/**
 	 * Returns the default scale to other methods.
 	 * 

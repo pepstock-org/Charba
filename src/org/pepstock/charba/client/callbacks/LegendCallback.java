@@ -20,8 +20,7 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 
 /**
  * Sometimes you need a very complex legend.<br>
- * In these cases, it makes sense to generate an HTML legend.<br>
- * Charts provide a {@link IsChart#generateLegend()} method that returns an HTML string for the legend.
+ * In these cases, it makes sense to generate an HTML legend.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.GlobalOptions;
-import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -39,16 +38,6 @@ public final class DefaultGlobalOptions extends AbstractDefaultChartOptions impl
 		super(globalOptions);
 		// uses the default scaled options
 		this.scalesOptions = DefaultsBuilder.get().getScaledOptions();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getScale()
-	 */
-	@Override
-	public IsDefaultScale getScale() {
-		return scalesOptions.getScale();
 	}
 
 	/*

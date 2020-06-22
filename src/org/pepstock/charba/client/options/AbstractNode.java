@@ -44,6 +44,9 @@ abstract class AbstractNode extends NativeObjectContainer {
 		// stores arguments
 		this.childKey = childKey;
 		this.parent = parent;
+		// redefines hashcode in order do not have 
+		// the property $H for hashcode
+		super.redefineHashcode();
 	}
 
 	/**

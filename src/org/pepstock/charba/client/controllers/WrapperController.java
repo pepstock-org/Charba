@@ -86,7 +86,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * Create a single element for the data at the given index and reset its state.
 		 * 
 		 * @param context java script <code>this</code> function context.
-		 * @param index dataset index
+		 * @param index data index
 		 */
 		void call(ControllerContext context, int index);
 	}
@@ -121,8 +121,10 @@ final class WrapperController extends NativeObjectContainer {
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be removed.
+		 * @param datasetIndex dataset index
+		 * @param index data index
 		 */
-		void call(ControllerContext context, NativeObject element);
+		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
 	}
 
 	/**
@@ -138,8 +140,10 @@ final class WrapperController extends NativeObjectContainer {
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be set.
+		 * @param datasetIndex dataset index
+		 * @param index data index
 		 */
-		void call(ControllerContext context, NativeObject element);
+		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
 	}
 
 	/**
@@ -251,9 +255,9 @@ final class WrapperController extends NativeObjectContainer {
 		// invoke user method implementation
 		drawCallbackProxy.setCallback((context, ease) -> onDraw(context, context.getChart(), ease));
 		// invoke user method implementation
-		removeHoverStyleCallbackProxy.setCallback((context, element) -> onRemoveHoverStyle(context, context.getChart(), element));
+		removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
-		setHoverStyleCallbackProxy.setCallback((context, element) -> onSetHoverStyle(context, context.getChart(), element));
+		setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
 		updateCallbackProxy.setCallback((context, reset) -> onUpdate(context, context.getChart(), reset));
 		// adds all proxy functions to call the functions to the native object
@@ -317,7 +321,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
-	 * @param index dataset index
+	 * @param index data index
 	 */
 	void onAddElementAndReset(ControllerContext context, IsChart chart, int index) {
 		// if consistent, calls controller
@@ -346,11 +350,13 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chart chart chart instance
 	 * @param object element to be removed.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
+	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.removeHoverStyle(context, chart, new StyleElement(object));
+			delegation.removeHoverStyle(context, chart, new StyleElement(object), datasetIndex, index);
 		}
 	}
 
@@ -360,11 +366,13 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chart chart chart instance
 	 * @param object element to be set.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object) {
+	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.setHoverStyle(context, chart, new StyleElement(object));
+			delegation.setHoverStyle(context, chart, new StyleElement(object), datasetIndex, index);
 		}
 	}
 

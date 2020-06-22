@@ -41,6 +41,7 @@ import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -69,7 +70,7 @@ public final class Defaults {
 	// cache for chart options already implemented to improve performance
 	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
 	// cache for scale options already implemented to improve performance
-	private final Map<String, GlobalScale> scaleOptions = new HashMap<>();
+	private final Map<String, InternalDefaultScale> scaleOptions = new HashMap<>();
 	// controllers
 	private final Controllers controllers;
 
@@ -130,13 +131,13 @@ public final class Defaults {
 	 * @param axisType the axis type to use to get defaults.
 	 * @return a global scale for that axis type.
 	 */
-	public GlobalScale getScale(AxisType axisType) {
+	public Scale getScale(AxisType axisType) {
 		// checks if axis type is consistent
 		Key.checkIfValid(axisType);
 		// checks if the options have already stored
 		if (!scaleOptions.containsKey(axisType.value())) {
 			// if not, creates and stores new options by axis type
-			GlobalScale storedScale = new GlobalScale(Chart.getScaleService().getScaleDefaults(axisType.value()));
+			InternalDefaultScale storedScale = new InternalDefaultScale(axisType, Chart.getScaleService().getScaleDefaults(axisType.value()));
 			scaleOptions.put(axisType.value(), storedScale);
 		}
 		// returns the existing options
@@ -154,7 +155,7 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (scaleOptions.containsKey(axisType.value())) {
 			// if not, gets options by axis type
-			GlobalScale storedScale = scaleOptions.get(axisType.value());
+			InternalDefaultScale storedScale = scaleOptions.get(axisType.value());
 			// stores the defaults options by scale service
 			Chart.getScaleService().updateScaleDefaults(axisType.value(), storedScale.nativeObject());
 		}
@@ -198,6 +199,7 @@ public final class Defaults {
 		// returns a default option with all configuration
 		// it uses the default builder and the default scaled options
 		// because chart options is already a merge between global and chart global
+		// FIXME perché scaled options?
 		return new ChartOptions(type, envelop.getContent(), DefaultsBuilder.get().getScaledOptions());
 	}
 
@@ -460,6 +462,37 @@ public final class Defaults {
 				// therefore returns an empty options
 				return new ChartOptions(type, null, new DefaultGlobalOptions(global));
 			}
+		}
+
+	}
+
+	/**
+	 * Internal typed scale which is used to read the default scale by type.<br>
+	 * It has been implemented in order to store teh axis type, mandatory for whatever operation with a scale.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class InternalDefaultScale extends Scale {
+
+		/**
+		 * Creates the object only with aixs type and native object.<br>
+		 * This is used when the default scale is read by {@link Defaults#getScale(AxisType)}.
+		 * 
+		 * @param type scale type
+		 * @param nativeObject native object to store properties.
+		 */
+		InternalDefaultScale(AxisType type, NativeObject nativeObject) {
+			super(type, DefaultsBuilder.get().getScale(), nativeObject);
+		}
+		
+		/**
+		 * Returns the native object instance.
+		 * 
+		 * @return the native object instance.
+		 */
+		NativeObject nativeObject() {
+			return super.getNativeObject();
 		}
 
 	}

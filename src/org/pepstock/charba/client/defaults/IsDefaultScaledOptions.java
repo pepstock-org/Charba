@@ -29,11 +29,4 @@ public interface IsDefaultScaledOptions extends IsDefaultOptions {
 	 */
 	IsDefaultScales getScales();
 
-	/**
-	 * Returns the scale/axis defaults.
-	 * 
-	 * @return the scale/axis defaults.
-	 */
-	IsDefaultScale getScale();
-
 }

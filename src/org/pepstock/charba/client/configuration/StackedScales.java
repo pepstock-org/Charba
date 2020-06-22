@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -72,12 +72,12 @@ public class StackedScales extends Scales {
 				// for all axes
 				setStackedProperty(axes);
 			} else {
-				// if here the stacked property mu st be applied
+				// if here the stacked property must be applied
 				// only to Y axes
 				for (Axis axis : axes) {
 					// checks if is cartesian axis
-					// only cartesian axis has got the multi scale
-					if (CartesianAxisType.hasAxisType(axis, CartesianAxisType.Y)) {
+					// only axis kind is for Y cartesian axis
+					if (axis instanceof CartesianAxis && AxisKind.Y.equals(axis.getAxis())) {
 						setStackedProperty(axis);
 					}
 				}

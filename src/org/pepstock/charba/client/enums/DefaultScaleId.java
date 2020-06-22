@@ -30,30 +30,35 @@ public enum DefaultScaleId implements IsScaleId
 	/**
 	 * Default scale id for X cartesian axis.
 	 */
-	X("x"),
+	X("x", AxisKind.X),
 	/**
 	 * Default scale id for Y cartesian axis.
 	 */
-	Y("y"),
+	Y("y",AxisKind.Y),
 	/**
 	 * Default scale id for radial linear axis.
 	 */
-	R("r"),
+	R("r",AxisKind.R),
 	/**
 	 * Default scale id for chart with a single axis.
 	 */
-	UNKNOWN("_charbaunknown");
+	UNKNOWN("_charbaunknown", null);
 
 	// name value of property
 	private final String value;
+
+	// default axis kind
+	private final AxisKind axisKind;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
+	 * @param kind default axis kind for this default scale id
 	 */
-	private DefaultScaleId(String value) {
+	private DefaultScaleId(String value, AxisKind kind) {
 		this.value = value;
+		this.axisKind = kind;
 	}
 
 	/*
@@ -67,6 +72,15 @@ public enum DefaultScaleId implements IsScaleId
 	}
 
 	/**
+	 * Returns the default axis kind for this default scale id.
+	 * 
+	 * @return the default axis kind for this default scale id
+	 */
+	public AxisKind getAxisKind() {
+		return axisKind;
+	}
+
+	/**
 	 * Returns <code>true</code> if the scale id is related to this axis id.
 	 * 
 	 * @param scaleId scale id to be checked
@@ -74,9 +88,7 @@ public enum DefaultScaleId implements IsScaleId
 	 */
 	public boolean is(String scaleId) {
 		// checks id if consistent
-		// and if is testing for radial linear default
-		// that it should not be used
-		if (scaleId != null && !R.equals(this)) {
+		if (scaleId != null) {
 			// put to lower case
 			String id = scaleId.toLowerCase(Locale.getDefault());
 			// checks if starts with
@@ -97,24 +109,61 @@ public enum DefaultScaleId implements IsScaleId
 	}
 	
 	/**
-	 * Returns the default scale id instance if the id is one of default ones, otherwise will return <code>null</code> if not found.
+	 * Returns the default scale id instance by axis kind, otherwise will return <code>null</code> if not found.
 	 * 
-	 * @param id scale id as string to scan
+	 * @param kind axis kind to use to get the related default scale id
+	 * @param defaultValue default axis id to use if it's not matching 
 	 * @return the default scale id instance, otherwise will return <code>null</code> if not found
 	 */
-	public static DefaultScaleId getByScaleId(String id) {
-		// checks if id is consistent
-		if (id != null) {
+	public static DefaultScaleId getByAxisKind(AxisKind kind, DefaultScaleId defaultValue) {
+		// checks if kind is consistent
+		if (Key.isValid(kind)) {
 			// scans all defaults to check with the argument
 			for (DefaultScaleId scaleId : values()) {
-				// checks if default scale id matches with argument
-				if (scaleId.value().equals(id)) {
+				// checks if default axis kind matches with argument
+				if (scaleId.getAxisKind().equals(kind)) {
 					return scaleId;
 				}
 			}
 		}
 		// if here, the id does not match
-		return null;
+		return Key.checkAndGetIfValid(defaultValue);
+	}
+
+	/**
+	 * Returns the axis kind inferring from the first character of the scale id which should be 'x', 'y' or 'r'.
+	 * 
+	 * @param scaleId scale id
+	 * @param defaultValue default value for axis kind when it can not be recognized by scale id
+	 * @return the axis kind inferring from the first character of the scale id which should be 'x', 'y' or 'r'
+	 */
+	public static AxisKind getAxisKindByScaleId(Key scaleId, AxisKind defaultValue) {
+		return getAxisKindByScaleId(Key.checkAndGetIfValid(scaleId).value(), defaultValue);
+	}
+
+	/**
+	 * Returns the axis kind inferring from the first character of the scale id which should be 'x', 'y' or 'r'.
+	 * 
+	 * @param scaleId scale id
+	 * @param defaultValue default value for axis kind when it can not be recognized by scale id
+	 * @return the axis kind inferring from the first character of the scale id which should be 'x' or 'y'
+	 */
+	public static AxisKind getAxisKindByScaleId(String scaleId, AxisKind defaultValue) {
+		// checks if argument is consistent
+		if (scaleId != null) {
+			// scans all types
+			for (DefaultScaleId defaultScaleId : values()) {
+				// checks if scale id starts with the default
+				// and is consistent, ignoring unknown scale id
+				if (defaultScaleId.is(scaleId) && defaultScaleId.getAxisKind() != null) {
+					// matches with default scale id
+					return defaultScaleId.getAxisKind();
+				}
+			}
+		}
+		// checks if default value is consistent
+		// and returns it
+		return Key.checkAndGetIfValid(defaultValue);
 	}
 
 }

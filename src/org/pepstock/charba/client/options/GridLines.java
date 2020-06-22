@@ -87,7 +87,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	GridLines(Scale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
+	GridLines(AbstractScale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
 

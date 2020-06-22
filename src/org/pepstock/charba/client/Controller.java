@@ -109,8 +109,10 @@ public interface Controller {
 	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param element element to be removed.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element);
+	void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index);
 
 	/**
 	 * Add hover styling to the given element.
@@ -118,8 +120,10 @@ public interface Controller {
 	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param element element to be set.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element);
+	void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index);
 
 	/**
 	 * Update the elements in response to new data.

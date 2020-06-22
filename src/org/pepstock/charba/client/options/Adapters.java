@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAdapters;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> implements IsDefaultAdapters {
+public final class Adapters extends AbstractModel<AbstractScale, IsDefaultAdapters> implements IsDefaultAdapters {
 
 	/**
 	 * Name of properties of native object.
@@ -68,7 +68,7 @@ public final class Adapters extends AbstractModel<Scale, IsDefaultAdapters> impl
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Adapters(Scale time, Key childKey, IsDefaultAdapters defaultValues, NativeObject nativeObject) {
+	Adapters(AbstractScale time, Key childKey, IsDefaultAdapters defaultValues, NativeObject nativeObject) {
 		// no default values
 		super(time, childKey, defaultValues, nativeObject);
 	}

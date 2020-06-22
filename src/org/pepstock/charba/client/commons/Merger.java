@@ -45,7 +45,6 @@ public final class Merger {
 	 */
 	private enum Property implements Key
 	{
-		SCALE("scale"),
 		SCALES("scales");
 
 		// name value of property
@@ -160,7 +159,7 @@ public final class Merger {
 		ChartOptions base = Defaults.get().getOptions(type);
 
 		// gets chart.defaults.scale
-		Scale scale = Defaults.get().getScale();
+		GlobalScale scale = Defaults.get().getScale();
 		// gets chart.defaults.global
 		GlobalOptions global = Defaults.get().getGlobal();
 		// clones all native object to avoid to changes the sources
@@ -169,10 +168,7 @@ public final class Merger {
 		NativeObject globalOptions = Helpers.get().clone(global.getNativeObject());
 		// checks if the chart options has got scale (only 1)
 		// chart without scales don't do anything
-		if (ScaleType.SINGLE.equals(type.scaleType())) {
-			// manages single scale chart type
-			handleSingleScalesType(base, chartOptions, scaleOptions);
-		} else if (ScaleType.MULTI.equals(type.scaleType())) {
+		if (!ScaleType.NONE.equals(type.scaleType())) {
 			// manages multi scale chart type
 			handleMultiScalesType(base, chartOptions, scaleOptions);
 		}
@@ -219,7 +215,7 @@ public final class Merger {
 			// checks if axis type is consistent
 			if (Key.isValid(type)) {
 				// gets default by axis type
-				GlobalScale axisDefault = Defaults.get().getScale(type);
+				Scale axisDefault = Defaults.get().getScale(type);
 				// before it applies the axis defaults by its type
 				NativeObject tempObject = mergeNativeObjects(scaleObject, axisDefault.getNativeObject());
 				// then it applies defaults scale
@@ -227,35 +223,6 @@ public final class Merger {
 			} else {
 				// then it applies defaults scale
 				scales.defineObjectProperty(storedScale.getId().value(), mergeNativeObjects(scaleObject, scaleOptions));
-			}
-		}
-	}
-
-	/**
-	 * Manages the merge of options for chart with single scale.
-	 * 
-	 * @param base base chart options
-	 * @param chartOptions default chart options
-	 * @param scaleOptions default scale options
-	 */
-	private void handleSingleScalesType(ChartOptions base, NativeObject chartOptions, NativeObject scaleOptions) {
-		// checks if scale object is present
-		if (chartOptions.hasProperty(Property.SCALE.value())) {
-			// if has got scale
-			// apply the default scale to single scale of chart options
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALE.value());
-			// gets default axis type of chart
-			AxisType type = base.getScale().getType();
-			if (Key.isValid(type)) {
-				// gets default by axis type
-				GlobalScale axisDefault = Defaults.get().getScale(type);
-				// before it applies the axis defaults by its type
-				NativeObject tempObject = mergeNativeObjects(descriptor.getValue(), axisDefault.getNativeObject());
-				// then it applies defaults scale
-				chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(tempObject, scaleOptions));
-			} else {
-				// if here it applies ONLY scale default
-				chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
 			}
 		}
 	}

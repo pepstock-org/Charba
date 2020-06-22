@@ -87,10 +87,15 @@ public interface IsScaleId extends Key {
 		if (IsScaleId.isValid(id)) {
 			// gets and checks if a default scale
 			// has been stored
-			DefaultScaleId scaleId = DefaultScaleId.getByScaleId(id);
-			// returns the default if consistent or creates
-			// new scale id with id stored into the object
-			return scaleId != null ? scaleId : IsScaleId.create(id);
+			// scans all defaults to check with the argument
+			for (DefaultScaleId scaleId : DefaultScaleId.values()) {
+				// checks if default scale id matches with argument
+				if (scaleId.value().equals(id)) {
+					return scaleId;
+				}
+			}
+			// creates new scale id with id stored into the object
+			return IsScaleId.create(id);
 		}
 		// if here not, default value is not consistent
 		// then returns the default

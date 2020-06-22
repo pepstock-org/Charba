@@ -33,7 +33,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements IsDefaultTicks {
+public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> implements IsDefaultTicks {
 
 	private final Major major;
 	// instance of font
@@ -104,7 +104,7 @@ public final class Ticks extends AbstractModel<Scale, IsDefaultTicks> implements
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Ticks(Scale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
+	Ticks(AbstractScale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PolarAreaOptions extends SingleScaleOptions {
+public class PolarAreaOptions extends MultiScalesOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.

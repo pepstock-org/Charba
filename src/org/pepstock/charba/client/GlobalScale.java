@@ -17,14 +17,14 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.AbstractScale;
 
 /**
  * Default global scale (maps the java script object <code>Chart.defaults.scale</code> and the result of <code>Chart.scaleService</code>).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class GlobalScale extends Scale {
+public final class GlobalScale extends AbstractScale {
 
 	/**
 	 * Creates the object with the native object which maps the java script object chart.defaults.scale.
@@ -33,7 +33,7 @@ public final class GlobalScale extends Scale {
 	 */
 	GlobalScale(NativeObject nativeObject) {
 		// uses the CHART.JS scale of default options as default one
-		super(DefaultsBuilder.get().getScaledOptions().getScale(), nativeObject);
+		super(DefaultsBuilder.get().getScale(), nativeObject);
 	}
 
 	/**

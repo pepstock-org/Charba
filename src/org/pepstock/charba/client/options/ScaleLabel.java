@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.ScaleLabelAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
+public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
 
 	private final ScaleLabelPadding padding;
 
@@ -77,7 +77,7 @@ public final class ScaleLabel extends AbstractModel<Scale, IsDefaultScaleLabel> 
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject nativeObject) {
+	ScaleLabel(AbstractScale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));

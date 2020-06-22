@@ -20,8 +20,9 @@ import java.util.Date;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TimeAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -49,7 +50,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 */
 	public CartesianTimeAxis(IsChart chart) {
 		// uses X as axis id
-		this(chart, CartesianAxisType.X.getDefaultScaleId());
+		this(chart, AxisType.TIME.getDefaultScaleId());
 	}
 
 	/**
@@ -76,12 +77,10 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Builds the object storing the chart instance and axis type.
 	 * 
 	 * @param chart chart instance
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianTimeAxis(IsChart chart, CartesianAxisType cartesianType) {
-		// uses cartesian type as axis id
-		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
+	public CartesianTimeAxis(IsChart chart, AxisKind kind) {
+		this(chart,  DefaultScaleId.getByAxisKind(kind, AxisType.TIME.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -89,10 +88,10 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianTimeAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
-		this(chart, IsScaleId.create(id), cartesianType);
+	public CartesianTimeAxis(IsChart chart, String id, AxisKind kind) {
+		this(chart, IsScaleId.create(id), kind);
 	}
 
 	/**
@@ -100,10 +99,10 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianTimeAxis(IsChart chart, IsScaleId id, CartesianAxisType cartesianType) {
-		super(chart, id, AxisType.TIME, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.X));
+	public CartesianTimeAxis(IsChart chart, IsScaleId id, AxisKind kind) {
+		super(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the time object
 		this.time = new Time(this);
 		// creates the ticks instance

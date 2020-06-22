@@ -86,30 +86,30 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers. Context, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.StyleElement)
+	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.controllers.StyleElement, int, int)
 	 */
 	@Override
-	public void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element) {
+	public void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
 			// invokes default
-			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.nativeObject());
+			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.nativeObject(), datasetIndex, index);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.StyleElement)
+	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.controllers.StyleElement, int, int)
 	 */
 	@Override
-	public void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element) {
+	public void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
 			// invokes default
-			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.nativeObject());
+			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.nativeObject(), datasetIndex, index);
 		}
 	}
 

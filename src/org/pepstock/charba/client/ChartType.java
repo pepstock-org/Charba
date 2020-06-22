@@ -34,6 +34,7 @@ public enum ChartType implements Type
 	/**
 	 * A horizontal bar chart is a variation on a vertical bar chart. It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
 	 */
+	// FIXME to be removed
 	HORIZONTAL_BAR("horizontalBar", ScaleType.MULTI),
 	/**
 	 * Pie chart is probably the most commonly used chart. It is divided into segments, the arc of each segment shows the proportional value of each piece of data. It is excellent

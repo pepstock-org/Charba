@@ -34,7 +34,7 @@ import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
@@ -1133,7 +1133,7 @@ final class SelectionHandler {
 					// checks if is the right scale
 					// used for selection by ID
 					// and is is a X scale
-					if (CartesianAxisType.X.equals(scale.getAxis()) && Key.equals(options.getXAxisID(), scale.getId())) {
+					if (AxisKind.X.equals(scale.getAxis()) && Key.equals(options.getXAxisID(), scale.getId())) {
 						// gets the offset
 						offset = scale.isOffset();
 					}

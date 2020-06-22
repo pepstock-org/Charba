@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Time extends AbstractModel<Scale, IsDefaultTime> implements IsDefaultTime {
+public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> implements IsDefaultTime {
 
 	private final DisplayFormats displayFormats;
 
@@ -77,7 +77,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Time(Scale scale, Key childKey, IsDefaultTime defaultValues, NativeObject nativeObject) {
+	Time(AbstractScale scale, Key childKey, IsDefaultTime defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		displayFormats = new DisplayFormats(this, Property.DISPLAY_FORMATS, getValue(Property.DISPLAY_FORMATS));

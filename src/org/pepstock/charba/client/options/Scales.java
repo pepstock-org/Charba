@@ -18,15 +18,13 @@ package org.pepstock.charba.client.options;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -36,7 +34,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  *
  */
 public final class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
-	
+
 	/**
 	 * Creates a scales object by defaults values. This method is creating the root element of scales.
 	 * 
@@ -56,9 +54,6 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-		// redefines hashcode in order do not have 
-		// the property $H for hashcode
-		super.redefineHashcode();
 	}
 
 	/**
@@ -81,40 +76,57 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		}
 		// checks if the arguments are consistent
 		if (scales != null && scales.length > 0) {
+			// sets a index
+			int index = 0;
+			// checks if is 
 			// scans passed scales
 			for (Scale scale : scales) {
 				// checks if not null
 				if (scale != null) {
+					// get the axis type and default id
+					AxisType type = scale.getType();
+					// checks if type is consistent
+					// it MUST
+					Key.checkIfValid(type);
 					// gets id as key
-					IsScaleId id = scale.getId();
-					// checks if scale id of scale is consistent
-					// used for cartesian, it must not be set to unknown
-					if (DefaultScaleId.UNKNOWN.is(id)) {
-						// get the axis type and default id
-						AxisType type = scale.getType();
-						// checks if type is consistent 
-						// it MUST
-						Key.checkIfValid(type);
-						// stores default id as id
-						id = type.getDefaultScaleId();
-						// override the id
-						scale.setId(id);
-					}
-					// checks if the id is already into object
-					// that means there are 2 or more scales to add
-					// with the same id
-					if (has(id)) {
-						throw new IllegalArgumentException("A scale with id " + id.value() + " has been already added");
+					IsScaleId id = checkAndGetScaleId(scale);
+					// checks for radial
+					// must be the first one
+					// and must have only 1 scale being a radial
+					if (AxisType.RADIAL_LINEAR.equals(type) && (index > 0 || scales.length != 1)) {
+						throw new IllegalArgumentException("A radial linear scale can not be added to a scales with other scales");
 					}
 					// stores scale
 					setValue(id, scale);
+					// increments only if added
+					index++;
 				}
 			}
 			// checks if all parents are attached
 			checkAndAddToParent();
 		}
 	}
-
+	
+	private IsScaleId checkAndGetScaleId(Scale scale) {
+		// gets id as key
+		IsScaleId id = scale.getId();
+		// checks if scale id of scale is consistent
+		// used for cartesian, it must not be set to unknown
+		if (DefaultScaleId.UNKNOWN.is(id)) {
+			// stores default id as id
+			id = scale.getType().getDefaultScaleId();
+			// override the id
+			scale.setId(id);
+		}
+		// checks if the id is already into object
+		// that means there are 2 or more scales to add
+		// with the same id
+		if (has(id)) {
+			throw new IllegalArgumentException("A scale with id " + id.value() + " has been already added");
+		}
+		return id;
+	}
+	
 	/**
 	 * Returns <code>true</code> if the scale with the id passed as argument exists.
 	 * 
@@ -203,6 +215,16 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		return getDefaultValues().getYAxis();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getRAxis()
+	 */
+	@Override
+	public IsDefaultScale getRAxis() {
+		return getDefaultValues().getRAxis();
+	}
+
 	/**
 	 * Gets from the native object the scale object by its id and creates a scale instance.
 	 * 
@@ -210,24 +232,26 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @return a scale instance
 	 */
 	private Scale getAndCreate(Key scaleId) {
-		// gets object 
-		NativeObject object = getValue(scaleId);
-		// gets temporary scale wrapper
-		InternalTemporaryScaleWrapper internalScale = new InternalTemporaryScaleWrapper(object);
+		// gets temporary scale
+		Scale internalScale = new Scale(DefaultsBuilder.get().getScale(), getValue(scaleId));
 		// create default scale reference
 		IsDefaultScale defaultValue = null;
-		// checks if is a cartesian axis
-		if (!AxisType.RADIAL_LINEAR.equals(internalScale.getType())){
-			// gets cartesian type by scale id
-			CartesianAxisType type = CartesianAxisType.getByScaleId(scaleId);
-			// gets default value based on cartesian type of the object
-			defaultValue = CartesianAxisType.X.equals(type) ? getXAxis() : getYAxis();
-		} else {
-			// gets default value from global axis
-			defaultValue = Defaults.get().getScale(AxisType.RADIAL_LINEAR);
+		// based on cartesian axis type
+		switch(internalScale.getAxis()) {
+		case X:
+			// X cartesian
+			defaultValue = getXAxis();
+			break; 
+		case R:
+			// R radial linear
+			defaultValue = getRAxis();
+			break;
+		default: 
+			// Y cartesian
+			defaultValue = getYAxis();
 		}
 		// creates the scale
-		Scale scale = new Scale(defaultValue, object);
+		Scale scale = new Scale(defaultValue, getValue(scaleId));
 		// checks if scale has got the id
 		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id
@@ -236,38 +260,5 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		// returns scale
 		return scale;
 	}
-	
-	/**
-	 * Temporary wrapper of a scale object, read as native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalTemporaryScaleWrapper extends NativeObjectContainer{
-		
-		/**
-		 * Creates the object with native object instance to be wrapped.
-		 * 
-		 * @param nativeObject native object instance to be wrapped.
-		 */
-		private InternalTemporaryScaleWrapper(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-		
-		/**
-		 * Returns the type of axis.
-		 * 
-		 * @return the type of axis.
-		 */
-		private AxisType getType() {
-			// checks if has got the axis type
-			if (has(Scale.Property.TYPE)) {
-				return getValue(Scale.Property.TYPE, AxisType.values(), AxisType.LINEAR);
-			}
-			// if here, there is not axis type
-			// then exception
-			throw new IllegalArgumentException("The axis type is not stored into scale native object.");
-		}
 
-	}
 }

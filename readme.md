@@ -172,7 +172,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * move `max` property from time object to axis/scale.
    * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
    * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
-   * add mandatory scale id and type parameters to `Scale` class constructor.
+   * add mandatory axis type parameters to `Scale` class constructor.
    * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
    * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following options classes, because new `Font` implementation must be used:
       * `Options`
@@ -213,6 +213,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
  * remove `Event.TOUCHEND` item
  * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
+ * rename `CartesianAxisType` class into `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
          
 ### Features
 
@@ -246,7 +247,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `@Override` annotation to all overriding methods. 
  * override the hashCode `$H` property for `NativeObject` objects that GWT is adding to objects in order to set the property as NOT enumerable and NOT configurable.
  * change `compare` static method of `Key` interface in order to test if the keys are valid and not only not `null`.
- * change the registering of tooltips positioner in order to apply to CHART.JS tooltips plugin. 
+ * change the registering of tooltips positioner in order to apply to CHART.JS tooltips plugin.
+ * remove `SingleScaleOptions` class because the radial linear axis is managed like the cartesian ones.
+ * remove `getAxis` method from `IsDefaultScale` interface because the axis kind does not any default and, when not set, depends on scale id. 
 
 License
 -------

@@ -58,6 +58,7 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -99,11 +100,12 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called when a event on chart is triggered.
 		 * 
-		 * @param chart Value of <code>this</code> to the execution context of function. It's the java script chart.
+		 * @param context value of <code>this</code> to the execution context of function. It's the java script chart.
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
+		 * @param chart chart instance
 		 */
-		void call(Chart chart, BaseNativeEvent event, ArrayObject items);
+		void call(CallbackFunctionContext context, BaseNativeEvent event, ArrayObject items, Chart chart);
 	}
 
 	/**
@@ -247,14 +249,16 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback((nativeChart, event, items) -> {
+		clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+			//FIXME
+			Window.getConsole().log("items", items);
 			// handle click event
 			handleClickEvent(event);
 			// fires the click event on the chart
 			getChart().fireEvent(new ChartClickEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
 		// fires the hover hover on the chart
-		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
+		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
 		// creates new native vent
 		// fires the resize event on chart
 		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(DOMBuilder.get().createChangeEvent(), nativeChart, new SizeItem(size))));

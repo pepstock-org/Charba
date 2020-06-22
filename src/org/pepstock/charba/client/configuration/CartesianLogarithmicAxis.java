@@ -18,8 +18,9 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -41,7 +42,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 */
 	public CartesianLogarithmicAxis(IsChart chart) {
 		// uses Y as axis id
-		this(chart, CartesianAxisType.Y.getDefaultScaleId());
+		this(chart, AxisType.LOGARITHMIC.getDefaultScaleId());
 	}
 
 	/**
@@ -68,12 +69,10 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * Builds the object storing the chart instance and axis type.
 	 * 
 	 * @param chart chart instance
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianLogarithmicAxis(IsChart chart, CartesianAxisType cartesianType) {
-		// uses cartesian type as axis id
-		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
+	public CartesianLogarithmicAxis(IsChart chart, AxisKind kind) {
+		this(chart,  DefaultScaleId.getByAxisKind(kind, AxisType.LOGARITHMIC.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -81,10 +80,10 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianLogarithmicAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
-		this(chart, IsScaleId.create(id), cartesianType);
+	public CartesianLogarithmicAxis(IsChart chart, String id, AxisKind kind) {
+		this(chart, IsScaleId.create(id), kind);
 	}
 
 	/**
@@ -92,10 +91,10 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind
 	 */
-	public CartesianLogarithmicAxis(IsChart chart, IsScaleId id, CartesianAxisType cartesianType) {
-		super(chart, id, AxisType.LOGARITHMIC, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.Y));
+	public CartesianLogarithmicAxis(IsChart chart, IsScaleId id, AxisKind kind) {
+		super(chart, id, AxisType.LOGARITHMIC, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 		// create build ticks callback handler

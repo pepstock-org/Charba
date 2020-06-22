@@ -13,26 +13,31 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
+package org.pepstock.charba.client.configuration;
+
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * This object is a container of hidden object.<br>
+ * This object is a container of hidden scale id.<br>
  * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  * @param <T> type of envelop content.
  */
-public final class Envelop<T> {
+public final class ScaleIdEnvelop {
 
-	// instance of enveloped content
-	private T content = null;
+	// instance of enveloped scale id
+	private IsScaleId scaleId = null;
 
 	/**
-	 * To avoid any instantiation
+	 * Create the object with the scale id instance.<br>
+	 * Protected to avoid any instantiation.
+	 * 
+	 * @param scaleId scale id to put as content of envelop
 	 */
-	Envelop() {
-		// do nothing
+	ScaleIdEnvelop(IsScaleId scaleId) {
+		this.scaleId = scaleId;
 	}
 
 	/**
@@ -40,17 +45,8 @@ public final class Envelop<T> {
 	 * 
 	 * @return the content of envelop
 	 */
-	public T getContent() {
-		return content;
-	}
-
-	/**
-	 * Stores the content of envelop.
-	 * 
-	 * @param content the content of envelop to store
-	 */
-	public void setContent(T content) {
-		this.content = content;
+	public IsScaleId getContent() {
+		return scaleId;
 	}
 
 }

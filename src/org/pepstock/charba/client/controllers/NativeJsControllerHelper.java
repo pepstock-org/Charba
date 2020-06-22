@@ -95,8 +95,10 @@ final class NativeJsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be remove.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	static native void removeHoverStyle(String chartType, ControllerContext context, NativeObject element);
+	static native void removeHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
 
 	/**
 	 * Invokes the default <code>setHoverStyle</code> method.
@@ -104,8 +106,10 @@ final class NativeJsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be set.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	static native void setHoverStyle(String chartType, ControllerContext context, NativeObject element);
+	static native void setHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
 
 	/**
 	 * Invokes the default <code>update</code> method.

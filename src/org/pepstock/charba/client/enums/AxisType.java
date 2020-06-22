@@ -63,10 +63,12 @@ public enum AxisType implements Key
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
+	 * @param defaultScaleId default scale id for this axis type
 	 */
 	private AxisType(String value, DefaultScaleId defaultScaleId) {
 		this.value = value;
 		this.defaultScaleId = defaultScaleId;
+
 	}
 
 	/*

@@ -123,10 +123,12 @@ final class JsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param element element to be remove.
+	 * @param element element to be remove
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void removeHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
-		NativeJsControllerHelper.removeHoverStyle(chartType.value(), context, element);
+	void removeHoverStyle(ChartType chartType, ControllerContext context, NativeObject element, int datasetIndex, int index) {
+		NativeJsControllerHelper.removeHoverStyle(chartType.value(), context, element, datasetIndex, index);
 	}
 
 	/**
@@ -135,9 +137,11 @@ final class JsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be set.
+	 * @param datasetIndex dataset index
+	 * @param index data index
 	 */
-	void setHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
-		NativeJsControllerHelper.setHoverStyle(chartType.value(), context, element);
+	void setHoverStyle(ChartType chartType, ControllerContext context, NativeObject element, int datasetIndex, int index) {
+		NativeJsControllerHelper.setHoverStyle(chartType.value(), context, element, datasetIndex, index);
 	}
 
 	/**

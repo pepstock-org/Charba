@@ -18,8 +18,9 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CategoryAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -40,7 +41,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 */
 	public CartesianCategoryAxis(IsChart chart) {
 		// uses X as axis id
-		this(chart, CartesianAxisType.X.getDefaultScaleId());
+		this(chart, AxisType.CATEGORY.getDefaultScaleId());
 	}
 
 	/**
@@ -67,12 +68,10 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * Builds the object storing the chart instance and axis type.
 	 * 
 	 * @param chart chart instance
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind.
 	 */
-	public CartesianCategoryAxis(IsChart chart, CartesianAxisType cartesianType) {
-		// uses cartesian type as axis id
-		// checking if consistent
-		this(chart, Key.checkAndGetIfValid(cartesianType).getDefaultScaleId(), cartesianType);
+	public CartesianCategoryAxis(IsChart chart, AxisKind kind) {
+		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.CATEGORY.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -80,10 +79,10 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind.
 	 */
-	public CartesianCategoryAxis(IsChart chart, String id, CartesianAxisType cartesianType) {
-		this(chart, IsScaleId.create(id), cartesianType);
+	public CartesianCategoryAxis(IsChart chart, String id, AxisKind kind) {
+		this(chart, IsScaleId.create(id), kind);
 	}
 
 	/**
@@ -91,10 +90,10 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * 
 	 * @param chart chart instance
 	 * @param id axis id
-	 * @param cartesianType cartesian axis type.
+	 * @param kind axis kind.
 	 */
-	public CartesianCategoryAxis(IsChart chart, IsScaleId id, CartesianAxisType cartesianType) {
-		super(chart, id, AxisType.CATEGORY, Key.isValid(cartesianType) ? cartesianType : CartesianAxisType.getByScaleId(id, CartesianAxisType.X));
+	public CartesianCategoryAxis(IsChart chart, IsScaleId id, AxisKind kind) {
+		super(chart, id, AxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 		// create build ticks callback handler

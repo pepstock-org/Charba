@@ -32,6 +32,8 @@ public final class DefaultChartScales implements IsDefaultScales {
 
 	private final IsDefaultScale yAxis;
 
+	private final IsDefaultScale rAxis;
+
 	/**
 	 * Creates the object by scales option element instance.
 	 * 
@@ -48,23 +50,32 @@ public final class DefaultChartScales implements IsDefaultScales {
 			// looks for X default
 			if (scales.hasAxis(DefaultScaleId.X)) {
 				// gets the stored axis as X
-				xAxis = scales.getAxis(DefaultScaleId.X);
+				xAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.X));
 			} else {
 				// uses the default
-				xAxis = DefaultsBuilder.get().getScaledOptions().getScale();
+				xAxis = DefaultsBuilder.get().getScaledOptions().getScales().getXAxis();
 			}
 			// looks for X default
 			if (scales.hasAxis(DefaultScaleId.Y)) {
 				// gets the stored axis as Y
-				yAxis = scales.getAxis(DefaultScaleId.Y);
+				yAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.Y));
 			} else {
 				// uses the default
-				yAxis = DefaultsBuilder.get().getScaledOptions().getScale();
+				yAxis = DefaultsBuilder.get().getScaledOptions().getScales().getYAxis();
+			}
+			// looks for X default
+			if (scales.hasAxis(DefaultScaleId.R)) {
+				// gets the stored axis as Y
+				rAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.R));
+			} else {
+				// uses the default
+				rAxis = DefaultsBuilder.get().getScaledOptions().getScales().getRAxis();
 			}
 		} else {
-			// uses the default
-			xAxis = DefaultsBuilder.get().getScaledOptions().getScale();
-			yAxis = DefaultsBuilder.get().getScaledOptions().getScale();
+			// uses the defaults
+			xAxis = DefaultsBuilder.get().getScaledOptions().getScales().getXAxis();
+			yAxis = DefaultsBuilder.get().getScaledOptions().getScales().getYAxis();
+			rAxis = DefaultsBuilder.get().getScaledOptions().getScales().getRAxis();
 		}
 	}
 
@@ -86,6 +97,16 @@ public final class DefaultChartScales implements IsDefaultScales {
 	@Override
 	public IsDefaultScale getYAxis() {
 		return yAxis;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getRAxis()
+	 */
+	@Override
+	public IsDefaultScale getRAxis() {
+		return rAxis;
 	}
 
 }

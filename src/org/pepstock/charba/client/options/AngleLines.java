@@ -70,7 +70,7 @@ public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> imp
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AngleLines(Scale scale, Key childKey, IsDefaultAngleLines defaultValues, NativeObject nativeObject) {
+	AngleLines(AbstractScale scale, Key childKey, IsDefaultAngleLines defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
 

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -83,10 +83,13 @@ public final class TimeSeriesScales extends Scales {
 			int index = 1;
 			// scans all axes to check if there is any other x axis
 			for (Axis axis : axes) {
-				// checks if x axis
-				if (CartesianAxisType.hasAxisType(axis, CartesianAxisType.X)) {
+				// checks if x axis kind
+				if (AxisKind.X.equals(axis.getAxis())) {
 					// not allowed
 					throw new UnsupportedOperationException("Do not set any X axes because TIME axis is already created. Use getTimeAxis to configure it");
+				} else if (AxisKind.R.equals(axis.getAxis())) {
+					// not allowed
+					throw new UnsupportedOperationException("Do not set any radial linear axis to a time series chart");
 				}
 				// stores the axis into array
 				toStore[index] = axis;

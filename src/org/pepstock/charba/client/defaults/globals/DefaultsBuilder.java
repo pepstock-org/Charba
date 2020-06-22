@@ -28,6 +28,8 @@ public final class DefaultsBuilder {
 	private final DefaultOptions noneScale = new DefaultOptions();
 	// the defaults options with scales
 	private final DefaultScaledOptions multiScales = new DefaultScaledOptions();
+	// the defaults scale
+	private final DefaultScale scale = new DefaultScale();
 
 	/**
 	 * To avoid any instantiation
@@ -61,6 +63,15 @@ public final class DefaultsBuilder {
 	 */
 	public DefaultScaledOptions getScaledOptions() {
 		return multiScales;
+	}
+
+	/**
+	 * Returns the default scale.
+	 * 
+	 * @return the default scale.
+	 */
+	public DefaultScale getScale() {
+		return scale;
 	}
 
 }

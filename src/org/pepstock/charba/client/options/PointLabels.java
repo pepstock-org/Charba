@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels {
+public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPointLabels> implements IsDefaultPointLabels {
 
 	/**
 	 * Name of properties of native object.
@@ -71,7 +71,7 @@ public final class PointLabels extends AbstractModel<Scale, IsDefaultPointLabels
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	PointLabels(Scale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
+	PointLabels(AbstractScale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
