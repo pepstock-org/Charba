@@ -15,20 +15,20 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (chart).
+ * A property descriptor is a record which describes a java script property (native event).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-final class NativeChartDescriptor extends NativeAbstractDescriptor {
+final class NativeEventDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
@@ -36,7 +36,7 @@ final class NativeChartDescriptor extends NativeAbstractDescriptor {
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
-	native void setValue(Chart value);
+	native void setValue(BaseNativeEvent value);
 
 	/**
 	 * Gets the value associated with the property.
@@ -44,6 +44,6 @@ final class NativeChartDescriptor extends NativeAbstractDescriptor {
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	native Chart getValue();
+	native BaseNativeEvent getValue();
 
 }

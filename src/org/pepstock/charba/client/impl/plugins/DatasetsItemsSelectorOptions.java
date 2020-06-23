@@ -211,7 +211,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
-	
+
 	/**
 	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 

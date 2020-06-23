@@ -15,17 +15,17 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.events.AddHandlerEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
@@ -59,11 +59,12 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		/**
 		 * Method of function to be called when a event on the legend is raised.
 		 * 
-		 * @param chart context value of <code>this</code> to the execution context of function. It is the chart instance.
+		 * @param context value of <code>this</code> to the execution context of function
 		 * @param event native event
 		 * @param item legend item affected by event
+		 * @param legend legend instance affected by event
 		 */
-		void call(Chart chart, BaseNativeEvent event, NativeObject item);
+		void call(CallbackFunctionContext context, NativeObject event, NativeObject item, NativeObject legend);
 	}
 
 	// ---------------------------
@@ -104,11 +105,11 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		this.clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, FACTORY.create(item))));
+		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(event), FACTORY.create(item))));
 		// fires the event
-		this.hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, FACTORY.create(item))));
+		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(event), FACTORY.create(item))));
 		// fires the event
-		this.leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, FACTORY.create(item))));
+		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(event), FACTORY.create(item))));
 	}
 
 	/**

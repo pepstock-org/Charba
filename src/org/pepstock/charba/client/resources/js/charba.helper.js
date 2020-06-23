@@ -327,7 +327,7 @@
     */
     CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {
     	if (options != null && typeof options.legend === 'object' && typeof options.legend[key] === 'function'){
-    		options.legend[key].call(chart, event, item);
+    		options.legend[key].call(chart, event, item, chart.legend);
     	}
     }
     /*
@@ -341,7 +341,7 @@
     */
     CharbaJsCallbacksHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {
     	if (options != null && typeof options[key] === 'function'){
-    		options[key].call(chart, event, items);
+    		options[key].call(chart, event, items, chart);
     	}
     }
     /*

@@ -72,7 +72,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param kind axis kind
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, AxisKind kind) {
-		this(chart,  DefaultScaleId.getByAxisKind(kind, AxisType.LOGARITHMIC.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.LOGARITHMIC.getDefaultScaleId()), kind);
 	}
 
 	/**

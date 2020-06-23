@@ -38,6 +38,7 @@ public final class StyleElement extends DatasetItem {
 	private enum Property implements Key
 	{
 		X_SCALE("_xScale"),
+		// FIXME R scale is missing. CHECK
 		Y_SCALE("_yScale");
 
 		// name value of property

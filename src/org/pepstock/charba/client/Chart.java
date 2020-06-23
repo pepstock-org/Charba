@@ -213,7 +213,7 @@ public final class Chart {
 	 * @return dataset meta data items.
 	 */
 	@JsMethod
-	native NativeObject getDatasetAtEvent(BaseNativeEvent event);
+	native ArrayObject getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Sets the visibility for a given dataset.<br>

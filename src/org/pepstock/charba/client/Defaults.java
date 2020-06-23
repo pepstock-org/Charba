@@ -32,6 +32,7 @@ import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.events.ChartClickEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
 import org.pepstock.charba.client.events.IsChartEvent;
 import org.pepstock.charba.client.events.IsLegendEvent;
@@ -303,10 +304,12 @@ public final class Defaults {
 			IsChart chart = event.getChart();
 			// checks if argument is consistent
 			if (IsChart.isValid(chart) && chart.isInitialized()) {
+				// gets event context
+				ChartEventContext eventContext = event.getContext();
 				// gets array object
 				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), array);
+				JsCallbacksHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), array);
 			}
 		}
 	}
@@ -350,10 +353,12 @@ public final class Defaults {
 			IsChart chart = IsChart.isValid(event.getChart()) ? event.getChart() : event.getContext().getChart();
 			// checks if argument is consistent
 			if (IsChart.isValid(chart) && chart.isInitialized()) {
+				// gets event context
+				ChartEventContext eventContext = event.getContext();
 				// creates a wrapper
 				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.internalNativeObject());
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), wrapper.internalNativeObject());
 			}
 		}
 	}
@@ -485,7 +490,7 @@ public final class Defaults {
 		InternalDefaultScale(AxisType type, NativeObject nativeObject) {
 			super(type, DefaultsBuilder.get().getScale(), nativeObject);
 		}
-		
+
 		/**
 		 * Returns the native object instance.
 		 * 

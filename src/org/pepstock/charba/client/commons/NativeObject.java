@@ -17,6 +17,8 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -33,7 +35,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeObject {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -279,6 +281,42 @@ public final class NativeObject {
 	 * 
 	 * @param key the name of the property to be defined or modified.
 	 * @param value the object associated with the property.
+	 */
+	@JsOverlay
+	void defineChartProperty(String key, Chart value) {
+		// creates a descriptor
+		NativeChartDescriptor descriptor = new NativeChartDescriptor();
+		// sets value
+		descriptor.setValue(value);
+		// sets attributes of descriptor to true
+		resetPropertyDescriptor(descriptor);
+		// defines the property
+		defineProperty(this, key, descriptor);
+	}
+
+	/**
+	 * Defines a new property directly on this object, or modifies an existing property.
+	 * 
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
+	 */
+	@JsOverlay
+	void defineEventProperty(String key, BaseNativeEvent value) {
+		// creates a descriptor
+		NativeEventDescriptor descriptor = new NativeEventDescriptor();
+		// sets value
+		descriptor.setValue(value);
+		// sets attributes of descriptor to true
+		resetPropertyDescriptor(descriptor);
+		// defines the property
+		defineProperty(this, key, descriptor);
+	}
+
+	/**
+	 * Defines a new property directly on this object, or modifies an existing property.
+	 * 
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
 	 * @param <T> type of array to define
 	 */
 	@JsOverlay
@@ -419,6 +457,17 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeChartDescriptor getChartProperty(String key) {
+		return getInternalObjectProperty(key);
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	NativeEventDescriptor getEventProperty(String key) {
 		return getInternalObjectProperty(key);
 	}
 

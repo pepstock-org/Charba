@@ -200,6 +200,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `zeroLineWidth`, `zeroLineColor`, `zeroLineBorderDash` and `zeroLineBorderDashOffset` properties from `GridLines` options and configuration classes.
    * remove `x` and `y` properties from `TooltipItem` class.
    * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
+   * change the chart events constructor using `ChartEventContext` which contains the chart and the native event.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -214,7 +215,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `Event.TOUCHEND` item
  * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
  * rename `CartesianAxisType` class into `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
-         
+ 
 ### Features
 
  * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).

@@ -51,7 +51,7 @@ public interface IsLinearAxis extends IsNumericAxis {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().isBeginAtZero();
 	}
-	
+
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
 	 * 

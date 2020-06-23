@@ -80,7 +80,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeAxis(IsChart chart, AxisKind kind) {
-		this(chart,  DefaultScaleId.getByAxisKind(kind, AxisType.TIME.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.TIME.getDefaultScaleId()), kind);
 	}
 
 	/**

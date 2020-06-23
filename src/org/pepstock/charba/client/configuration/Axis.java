@@ -229,12 +229,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public final AxisType getType() {
 		return getScale().getType();
 	}
-	
 
 	/**
 	 * Which kind of axis this is.<br>
-	 * Possible values are: 'x', 'y' or 'r'.
-s	 * 
+	 * Possible values are: 'x', 'y' or 'r'. s *
+	 * 
 	 * @param kind type of axis
 	 */
 	public final void setAxis(AxisKind kind) {
@@ -297,7 +296,7 @@ s	 *
 	public double getWeight() {
 		return getScale().getWeight();
 	}
-	
+
 	/**
 	 * Sets the reverses order of tick labels.
 	 * 
@@ -315,7 +314,6 @@ s	 *
 	public boolean isReverse() {
 		return getScale().isReverse();
 	}
-
 
 	/**
 	 * Returns the scale configuration
@@ -342,16 +340,16 @@ s	 *
 				// creates reference for scale
 				IsDefaultScale scale = null;
 				// based on axis kind
-				switch(kind) {
+				switch (kind) {
 				case X:
 					// X cartesian
 					scale = options.getScales().getXAxis();
-					break; 
+					break;
 				case R:
 					// R radial linear
 					scale = options.getScales().getRAxis();
 					break;
-				default: 
+				default:
 					// Y cartesian
 					scale = options.getScales().getYAxis();
 				}

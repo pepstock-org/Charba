@@ -17,7 +17,7 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetReferenceItem;
 
 /**
  * Event which is fired when the user clicks on the chart and selects a dataset.<br>
@@ -31,18 +31,18 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * Event type
 	 */
 	public static final EventType TYPE = EventType.create(DatasetSelectionEvent.class);
-	// item with dataset metadata related to the click
-	private final DatasetItem item;
-	// item with dataset metadata related to the click
+	// item with dataset reference related to the click
+	private final DatasetReferenceItem item;
+	// chart instance
 	private final IsChart chart;
 
 	/**
-	 * Creates the event with dataset metadata item related to the click
+	 * Creates the event with dataset reference item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click
+	 * @param item dataset reference item related to the click
 	 */
-	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, DatasetItem item) {
+	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, DatasetReferenceItem item) {
 		super(nativeEvent, TYPE);
 		this.item = item;
 		// sets null because already present in native event as source
@@ -50,13 +50,13 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	}
 
 	/**
-	 * Creates the event with dataset metadata item related to the click and the chart instance
+	 * Creates the event with dataset reference item related to the click and the chart instance
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param chart chart instance
-	 * @param item dataset metadata item related to the click
+	 * @param item dataset reference item related to the click
 	 */
-	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, IsChart chart, DatasetItem item) {
+	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, IsChart chart, DatasetReferenceItem item) {
 		super(nativeEvent, TYPE);
 		this.item = item;
 		this.chart = chart;
@@ -67,7 +67,7 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * 
 	 * @return the item with dataset metadata related to the click
 	 */
-	public DatasetItem getItem() {
+	public DatasetReferenceItem getItem() {
 		return item;
 	}
 

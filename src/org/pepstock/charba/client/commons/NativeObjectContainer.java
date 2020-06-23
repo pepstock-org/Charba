@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -1204,6 +1205,28 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 
 	/**
+	 * Sets a value (chart) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, Chart value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			removeIfExists(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			nativeObject.defineChartProperty(key.value(), value);
+		}
+	}
+
+	/**
 	 * Returns a value (chart) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1217,6 +1240,50 @@ public abstract class NativeObjectContainer {
 		}
 		// gets descriptor
 		NativeChartDescriptor descriptor = nativeObject.getChartProperty(key.value());
+		// returns value
+		return descriptor == null ? null : descriptor.getValue();
+	}
+
+	// ------------------------------------------
+	// --- EVENT
+	// ------------------------------------------
+
+	/**
+	 * Sets a value (event) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, BaseNativeEvent value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			removeIfExists(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			nativeObject.defineEventProperty(key.value(), value);
+		}
+	}
+
+	/**
+	 * Returns a value (native event) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property
+	 */
+	protected final BaseNativeEvent getNativeEvent(Key key) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns null
+			return null;
+		}
+		// gets descriptor
+		NativeEventDescriptor descriptor = nativeObject.getEventProperty(key.value());
 		// returns value
 		return descriptor == null ? null : descriptor.getValue();
 	}

@@ -94,16 +94,16 @@ public class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public DatasetItem(NativeObject nativeObject) {
+	protected DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// set the dataset item options
+		// sets the dataset item options
 		options = new DatasetItemOptions(getValue(Property.OPTIONS));
 	}
 
 	/**
-	 * Returns the dataset label.
+	 * Returns the dataset item options.
 	 *
-	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
+	 * @return the dataset item options.
 	 */
 	public final DatasetItemOptions getOptions() {
 		return options;
@@ -267,7 +267,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
+	static final class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
 
 		/*
 		 * (non-Javadoc)

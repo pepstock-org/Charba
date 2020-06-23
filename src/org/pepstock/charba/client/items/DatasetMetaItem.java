@@ -148,8 +148,8 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
-	/**FIXME
-	 * Sets if the dataset must be hidden.
+	/**
+	 * FIXME Sets if the dataset must be hidden.
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
 	 */

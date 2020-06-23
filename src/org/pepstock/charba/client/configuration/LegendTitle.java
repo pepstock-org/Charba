@@ -69,7 +69,7 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the padding to apply around title. 
+	 * Sets the padding to apply around title.
 	 * 
 	 * @param padding padding to apply around title.
 	 */

@@ -50,9 +50,9 @@ import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerManager;
 import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.Plugins;
@@ -108,8 +108,8 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	private final ChartOptions options;
 	// merged options as default options
 	private final IsDefaultScaledOptions defaultChartOptions;
-	// instance of dataset items factory.
-	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
+	// instance of dataset reference items factory.
+	private final DatasetReferenceItemFactory datasetReferenceItemFactory = new DatasetReferenceItemFactory();
 	// cursor defined when chart is created
 	private final CursorType initialCursor;
 
@@ -676,7 +676,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
 			// merges config options and whole defaults
 			// ----------------------------------------
-			// pay attention that if the options has been removed 
+			// pay attention that if the options has been removed
 			// that's not currently reflected here
 			// ----------------------------------------
 			Helpers.get().mergeIf(clonedOptions, chart.getOptions());
@@ -710,7 +710,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	public final void render(UpdateConfiguration configuration) {
 		// checks if chart is created
 		if (chart != null) {
-			// if config is not passed..
+			// if configuration is not passed..
 			if (configuration == null) {
 				// .. calls the render
 				chart.render();
@@ -741,23 +741,24 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Looks for the dataset that matches the event and returns that metadata.
+	 * Looks for the datasets that matches the event and returns the dataset items references as a list.
 	 * 
 	 * @param event event of chart.
-	 * @return dataset meta data item or <code>null</code> if event is not consistent
+	 * @return dataset items references list or or an empty list.
 	 */
 	@Override
-	public final DatasetMetaItem getDatasetAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReferenceItem> getDatasetAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
-			// gets dataset and
+			// gets datasets
+			ArrayObject array = instance.getDatasetAtEvent(event);
 			// returns the array
-			return new DatasetMetaItem(instance.getDatasetAtEvent(event));
+			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
 		}
-		// if here, chart or event not valid than returns null
-		return null;
+		// if here, chart and event npot consistent then returns an empty list
+		return Collections.emptyList();
 	}
 
 	/**
@@ -897,7 +898,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetItem getElementAtEvent(BaseNativeEvent event) {
+	public final DatasetReferenceItem getElementAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -905,7 +906,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			// gets element
 			ArrayObject result = instance.getElementAtEvent(event);
 			if (result != null && !result.isEmpty()) {
-				return new DatasetItem(result.get(0));
+				return datasetReferenceItemFactory.create(result.get(0));
 			}
 		}
 		// if here, inconsistent result
@@ -920,7 +921,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetItem> getElementsAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReferenceItem> getElementsAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -928,7 +929,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			// gets elements
 			ArrayObject array = instance.getElementsAtEvent(event);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
+			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
 		}
 		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();

@@ -32,6 +32,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
@@ -200,12 +201,14 @@ final class HtmlLegendCallbackProxy {
 	private void onClick(IsChart chart, LegendItem selectedItem, BaseNativeEvent event) {
 		// retrieves native chart, needed to create the event
 		Chart nativeChart = Charts.getNative(chart);
+		// creates a event context
+		ChartEventContext eventContext = new ChartEventContext(nativeChart, event);
 		// removes the chart id because
 		// usually the click set hidden which needs an update of chart
 		// and removing here the legend will be created to next update
 		HtmlLegend.get().getPluginAddedLegendStatus().remove(chart.getId());
 		// creates the event
-		LegendClickEvent eventToFire = new LegendClickEvent(event, nativeChart, selectedItem);
+		LegendClickEvent eventToFire = new LegendClickEvent(eventContext, selectedItem);
 		// checks if there is any event handler
 		if (chart.getOptions().getLegend().hasClickHandlers()) {
 			// if yes, fires the event by chart
@@ -226,10 +229,12 @@ final class HtmlLegendCallbackProxy {
 	private void onHover(IsChart chart, LegendItem selectedItem, BaseNativeEvent event) {
 		// retrieves native chart, needed to create the event
 		Chart nativeChart = Charts.getNative(chart);
+		// creates a event context
+		ChartEventContext eventContext = new ChartEventContext(nativeChart, event);
 		// set cursor
 		setCursorOnLegend(chart, true);
 		// creates the event
-		LegendHoverEvent eventToFire = new LegendHoverEvent(event, nativeChart, selectedItem);
+		LegendHoverEvent eventToFire = new LegendHoverEvent(eventContext, selectedItem);
 		// checks if there is any event handler
 		if (chart.getOptions().getLegend().hasHoverHandlers()) {
 			// if yes, fires the event by chart
@@ -250,10 +255,12 @@ final class HtmlLegendCallbackProxy {
 	private void onLeave(IsChart chart, LegendItem selectedItem, BaseNativeEvent event) {
 		// retrieves native chart, needed to create the event
 		Chart nativeChart = Charts.getNative(chart);
+		// creates a event context
+		ChartEventContext eventContext = new ChartEventContext(nativeChart, event);
 		// set cursor
 		setCursorOnLegend(chart, false);
 		// creates the event
-		LegendLeaveEvent eventToFire = new LegendLeaveEvent(event, nativeChart, selectedItem);
+		LegendLeaveEvent eventToFire = new LegendLeaveEvent(eventContext, selectedItem);
 		// checks if there is any event handler
 		if (chart.getOptions().getLegend().hasLeaveHandlers()) {
 			// if yes, fires the event by chart

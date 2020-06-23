@@ -423,6 +423,7 @@ public class GridLines extends AxisContainer {
 
 	/**
 	 * Sets the line width callback instance.
+	 * 
 	 * @param lineWidthCallback the line width callback instance.
 	 */
 	public void setLineWidthCallback(LineWidthCallback lineWidthCallback) {

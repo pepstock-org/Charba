@@ -71,7 +71,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 * @param kind axis kind.
 	 */
 	public CartesianLinearAxis(IsChart chart, AxisKind kind) {
-		this(chart,  DefaultScaleId.getByAxisKind(kind, AxisType.LINEAR.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.LINEAR.getDefaultScaleId()), kind);
 	}
 
 	/**

@@ -38,27 +38,26 @@ import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
-import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
+import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -100,12 +99,12 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called when a event on chart is triggered.
 		 * 
-		 * @param context value of <code>this</code> to the execution context of function. It's the java script chart.
-		 * @param event native event
+		 * @param context value of <code>this</code> to the execution context of function.
+		 * @param event CHART.JS event which wraps the native event
 		 * @param items array of chart elements affected by the event
 		 * @param chart chart instance
 		 */
-		void call(CallbackFunctionContext context, BaseNativeEvent event, ArrayObject items, Chart chart);
+		void call(CallbackFunctionContext context, NativeObject event, ArrayObject items, Chart chart);
 	}
 
 	/**
@@ -220,8 +219,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 
 	}
 
-	// factory to transform a native object into a dataset item
-	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
+	// factory to transform a native object into a dataset reference item
+	private final DatasetReferenceItemFactory datasetItemFactory = new DatasetReferenceItemFactory();
 
 	/**
 	 * Builds the object storing the chart instance and defaults options.
@@ -250,18 +249,28 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
-			//FIXME
-			Window.getConsole().log("items", items);
+			// creates a event context
+			ChartEventContext eventContext = new ChartEventContext(event);
+			// gets the native event
+			BaseNativeEvent nativeEvent = eventContext.getNativeEvent();
 			// handle click event
-			handleClickEvent(event);
+			handleClickEvent(nativeEvent);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
 		// fires the hover hover on the chart
-		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
-		// creates new native vent
-		// fires the resize event on chart
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(DOMBuilder.get().createChangeEvent(), nativeChart, new SizeItem(size))));
+		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+			// creates a event context
+			ChartEventContext eventContext = new ChartEventContext(event);
+			// fires the hover event on the chart
+			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+		});
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
+			// creates a event context
+			ChartEventContext eventContext = new ChartEventContext(nativeChart);
+			// fires the resize event on chart
+			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(size)));
+		});
 		legendCallbackProxy.setCallback(context -> {
 			// checks if callback is consistent
 			if (legendCallback != null) {
@@ -701,7 +710,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	private boolean handleDatasetSelection(BaseNativeEvent event) {
 		// gets the dataset items by event
-		DatasetItem item = getChart().getElementAtEvent(event);
+		DatasetReferenceItem item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
 		if (item != null && hasDatasetSelectionHandlers()) {
 			// fires the event for dataset selection

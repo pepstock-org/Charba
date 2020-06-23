@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -94,10 +93,10 @@ final class JsCallbacksHelper {
 	 * @param options chart options, generated merging all defaults.
 	 * @param key the key of options which should have the event callback
 	 * @param context chart instance, used as function context
-	 * @param event native event from user interface
+	 * @param event native object of event wrapper from user interface
 	 * @param item legend item native
 	 */
-	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, BaseNativeEvent event, NativeObject item) {
+	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, NativeObject event, NativeObject item) {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes legend event callback
@@ -111,10 +110,10 @@ final class JsCallbacksHelper {
 	 * @param options chart options, generated merging all defaults.
 	 * @param key the key of options which should have the event callback
 	 * @param context chart instance, used as function context
-	 * @param event native event from user interface
+	 * @param event native object of event wrapper from user interface
 	 * @param items array of datasets native objects
 	 */
-	void invokeDefaultChartEvent(ChartOptions options, Key key, Chart context, BaseNativeEvent event, ArrayObject items) {
+	void invokeDefaultChartEvent(ChartOptions options, Key key, Chart context, NativeObject event, ArrayObject items) {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes chart event callback

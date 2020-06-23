@@ -146,7 +146,7 @@ public class Title {
 	public boolean isFullWidth() {
 		return options.getTitle().isFullWidth();
 	}
-	
+
 	/**
 	 * Sets the alignment of the title.
 	 * 

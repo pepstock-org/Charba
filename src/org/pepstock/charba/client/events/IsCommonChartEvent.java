@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -33,7 +32,7 @@ public interface IsCommonChartEvent {
 	 * 
 	 * @return the java script function context of CHART.JS events.
 	 */
-	Chart getContext();
+	ChartEventContext getContext();
 
 	/**
 	 * Returns the options key where default function is stored.

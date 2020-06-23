@@ -25,7 +25,7 @@ final class NativeObjectHashing {
 
 	// property name used by GWT to store hashcode
 	private static final String HASH_CODE_PROPERTY = "$H";
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -43,7 +43,7 @@ final class NativeObjectHashing {
 		if (nativeObject != null) {
 			// creates a descriptor
 			NativeIntegerDescriptor descriptor = NativeObject.getOwnPropertyDescriptor(nativeObject, HASH_CODE_PROPERTY);
-			// checks if descriptor is consistent and already configured 
+			// checks if descriptor is consistent and already configured
 			if (descriptor != null && !descriptor.isConfigurable() && !descriptor.isEnumerable()) {
 				// already not enumerable and not configurable
 				return;
