@@ -33,6 +33,13 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultLegendLabels() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

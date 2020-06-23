@@ -48,6 +48,14 @@ public final class DefaultAnimation implements IsDefaultAnimation {
 
 	private final DefaultAnimationResize resize = new DefaultAnimationResize();
 
+	/**
+	 * To avoid any instantiation
+	 */
+
+	DefaultAnimation() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

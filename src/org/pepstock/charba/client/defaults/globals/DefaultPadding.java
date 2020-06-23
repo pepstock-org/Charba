@@ -25,9 +25,9 @@ public final class DefaultPadding extends AbstractDefaultPadding {
 	private static final int DEFAULT_PADDING = 0;
 
 	/**
-	 * Creates a default PADDING element.
+	 * To avoid any instantiation
 	 */
-	public DefaultPadding() {
+	DefaultPadding() {
 		super(DEFAULT_PADDING);
 	}
 

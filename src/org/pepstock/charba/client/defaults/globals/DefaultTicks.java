@@ -64,6 +64,13 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultTicks() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

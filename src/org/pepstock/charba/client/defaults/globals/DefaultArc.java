@@ -35,9 +35,9 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	private static final double DEFAULT_WEIGHT = 1D;
 
 	/**
-	 * Creates a defualt arc
+	 * Creates a default arc
 	 */
-	public DefaultArc() {
+	DefaultArc() {
 		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 

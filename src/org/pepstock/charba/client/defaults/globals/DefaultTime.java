@@ -29,6 +29,13 @@ public class DefaultTime implements IsDefaultTime {
 
 	private static final double DEFAULT_STEP_SIZE = 1D;
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultTime() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

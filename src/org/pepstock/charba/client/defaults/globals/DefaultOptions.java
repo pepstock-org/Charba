@@ -49,7 +49,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
 
 	/**
-	 * Creates the object. Protected to avoid any instantiation
+	 * To avoid any instantiation
 	 */
 	DefaultOptions() {
 		super();

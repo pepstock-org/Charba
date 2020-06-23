@@ -67,6 +67,13 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private final DefaultAdapters adapters = new DefaultAdapters();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultScale() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

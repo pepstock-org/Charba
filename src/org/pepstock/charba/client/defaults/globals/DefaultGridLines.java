@@ -46,6 +46,13 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final int DEFAULT_Z = 0;
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultGridLines() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

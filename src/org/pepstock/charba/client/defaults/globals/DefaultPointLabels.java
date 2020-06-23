@@ -29,6 +29,13 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultPointLabels() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

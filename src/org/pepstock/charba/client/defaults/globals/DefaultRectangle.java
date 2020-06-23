@@ -32,9 +32,9 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
 	/**
-	 * Creates a defualt arc
+	 * To avoid any instantiation
 	 */
-	public DefaultRectangle() {
+	DefaultRectangle() {
 		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 

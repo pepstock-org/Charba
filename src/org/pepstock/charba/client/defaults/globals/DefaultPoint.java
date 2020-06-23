@@ -42,9 +42,9 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 	private static final double DEFAULT_ROTATION = 0D;
 
 	/**
-	 * Creates a defualt arc
+	 * To avoid any instantiation
 	 */
-	public DefaultPoint() {
+	DefaultPoint() {
 		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 

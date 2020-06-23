@@ -35,6 +35,13 @@ public final class DefaultTitle implements IsDefaultTitle {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultTitle() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

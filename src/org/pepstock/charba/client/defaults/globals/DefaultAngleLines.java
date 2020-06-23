@@ -31,6 +31,13 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 
 	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultAngleLines() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

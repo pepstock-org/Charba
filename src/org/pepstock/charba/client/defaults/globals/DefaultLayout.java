@@ -27,6 +27,13 @@ public final class DefaultLayout implements IsDefaultLayout {
 
 	private final DefaultPadding padding = new DefaultPadding();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultLayout() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

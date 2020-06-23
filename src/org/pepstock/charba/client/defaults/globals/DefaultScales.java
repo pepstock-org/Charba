@@ -27,6 +27,13 @@ public final class DefaultScales implements IsDefaultScales {
 
 	private final DefaultScale scale = new DefaultScale();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultScales() {
+		// to avoid any instantiation
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

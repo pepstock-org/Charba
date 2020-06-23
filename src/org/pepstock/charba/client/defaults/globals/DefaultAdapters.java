@@ -26,6 +26,13 @@ import org.pepstock.charba.client.defaults.IsDefaultAdapters;
  */
 public class DefaultAdapters implements IsDefaultAdapters {
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultAdapters() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

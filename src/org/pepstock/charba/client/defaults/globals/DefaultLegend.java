@@ -41,6 +41,13 @@ public final class DefaultLegend implements IsDefaultLegend {
 
 	private final DefaultLegendTitle legendTitle = new DefaultLegendTitle();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultLegend() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

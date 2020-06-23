@@ -31,6 +31,13 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultLegendTitle() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

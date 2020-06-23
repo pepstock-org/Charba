@@ -25,9 +25,9 @@ public final class DefaultScaleLabelPadding extends AbstractDefaultPadding {
 	private static final int DEFAULT_PADDING = 4;
 
 	/**
-	 * Creates a default PADDING element for scale.
+	 * To avoid any instantiation
 	 */
-	public DefaultScaleLabelPadding() {
+	DefaultScaleLabelPadding() {
 		super(DEFAULT_PADDING);
 	}
 

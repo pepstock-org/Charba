@@ -39,7 +39,7 @@ public class DefaultFont implements IsDefaultFont {
 	private static final int DEFAULT_LINE_WIDTH = 0;
 
 	/**
-	 * Creates the object. Protected to avoid any instantiation
+	 * To avoid any instantiation
 	 */
 	DefaultFont() {
 		// do nothing

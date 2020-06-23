@@ -39,7 +39,7 @@ public class DefaultElements implements IsDefaultElements {
 	/**
 	 * Creates the object using inner default elements.
 	 */
-	public DefaultElements() {
+	DefaultElements() {
 		this(new DefaultArc(), new DefaultLine(), new DefaultPoint(), new DefaultRectangle());
 	}
 
@@ -51,7 +51,7 @@ public class DefaultElements implements IsDefaultElements {
 	 * @param point point element instance
 	 * @param rectangle rectangle element instance
 	 */
-	public DefaultElements(IsDefaultArc arc, IsDefaultLine line, IsDefaultPoint point, IsDefaultRectangle rectangle) {
+	protected DefaultElements(IsDefaultArc arc, IsDefaultLine line, IsDefaultPoint point, IsDefaultRectangle rectangle) {
 		super();
 		this.arc = arc;
 		this.line = line;

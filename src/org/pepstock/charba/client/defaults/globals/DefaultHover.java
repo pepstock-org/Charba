@@ -28,6 +28,13 @@ public final class DefaultHover implements IsDefaultHover {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultHover() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

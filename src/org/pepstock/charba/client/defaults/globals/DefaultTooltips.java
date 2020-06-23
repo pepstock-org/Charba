@@ -145,6 +145,13 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 	};
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultTooltips() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -36,6 +36,13 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 
 	private final DefaultFont font = new DefaultFont();
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultScaleLabel() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

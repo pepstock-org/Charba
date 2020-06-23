@@ -26,6 +26,13 @@ public final class DefaultMajor implements IsDefaultMajor {
 
 	private static final boolean DEFAULT_ENABLED = false;
 
+	/**
+	 * To avoid any instantiation
+	 */
+	DefaultMajor() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

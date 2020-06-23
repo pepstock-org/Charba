@@ -45,9 +45,9 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	private static final boolean DEFAULT_STEPPED = false;
 
 	/**
-	 * Creates a defualt arc
+	 * To avoid any instantiation
 	 */
-	public DefaultLine() {
+	DefaultLine() {
 		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 
