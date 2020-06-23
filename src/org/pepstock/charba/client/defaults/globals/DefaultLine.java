@@ -32,11 +32,11 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	// default line tension
 	private static final float DEFAULT_TENSION = 0.4F;
 	// default background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
+	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
 	// default border width
 	private static final int DEFAULT_BORDER_WIDTH = 3;
 	// default line tension
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
+	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
 
 	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
 
@@ -118,7 +118,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public IsFill getFill() {
-		return Fill.FALSE;
+		return Fill.ORIGIN;
 	}
 
 	/*

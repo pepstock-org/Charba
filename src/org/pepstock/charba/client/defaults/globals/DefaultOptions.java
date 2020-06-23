@@ -24,13 +24,13 @@ import org.pepstock.charba.client.utils.Window;
  */
 public class DefaultOptions extends AbstractDefaultOptions {
 
+	static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
+
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
 	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
 
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
-
-	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final boolean DEFAULT_SHOW_LINES = true;
 

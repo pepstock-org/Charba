@@ -25,11 +25,11 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  */
 public final class DefaultRectangle extends AbstractDefaultOptionsElement implements IsDefaultRectangle {
 
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
+	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
+	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
 
 	/**
 	 * To avoid any instantiation
@@ -45,7 +45,7 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	 */
 	@Override
 	public BorderSkipped getBorderSkipped() {
-		return BorderSkipped.BOTTOM;
+		return BorderSkipped.START;
 	}
 
 }

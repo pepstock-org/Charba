@@ -28,6 +28,14 @@ import org.pepstock.charba.client.commons.Key;
 public enum BorderSkipped implements Key
 {
 	/**
+	 * The start property sets the start edge of an element to a unit above/below its normal position.
+	 */
+	START("start"),
+	/**
+	 * The end property sets the end edge of an element to a unit above/below its normal position.
+	 */
+	END("end"),
+	/**
 	 * The top property sets the top edge of an element to a unit above/below its normal position.
 	 */
 	TOP("top"),
