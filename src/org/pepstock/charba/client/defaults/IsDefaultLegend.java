@@ -31,7 +31,7 @@ public interface IsDefaultLegend extends IsDefaultTextDirectioner {
 	 * @return the labels object instance
 	 */
 	IsDefaultLegendLabels getLabels();
-	
+
 	/**
 	 * Returns the title object defaults.
 	 * 

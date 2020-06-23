@@ -52,7 +52,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	 */
 	AbstractContainer() {
 		super();
-		// redefines hashcode in order do not have 
+		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
 	}

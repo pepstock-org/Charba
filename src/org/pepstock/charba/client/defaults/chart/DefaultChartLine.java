@@ -20,7 +20,6 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.options.Line;
 
 /**
  * Defaults for line option element, based on chart type.
@@ -29,14 +28,14 @@ import org.pepstock.charba.client.options.Line;
  */
 public final class DefaultChartLine implements IsDefaultLine {
 
-	private final Line line;
+	private final IsDefaultLine line;
 
 	/**
 	 * Creates the object by line option element instance.
 	 * 
 	 * @param line line option element instance.
 	 */
-	DefaultChartLine(Line line) {
+	DefaultChartLine(IsDefaultLine line) {
 		this.line = line;
 	}
 

@@ -43,7 +43,7 @@ public interface IsDefaultLegendLabels {
 	 * @return width of colored box.
 	 */
 	int getBoxWidth();
-	
+
 	/**
 	 * Returns the height of colored box.
 	 * 

@@ -111,7 +111,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	public LegendLabels getLabels() {
 		return labels;
 	}
-	
+
 	/**
 	 * Returns the legend title element.
 	 * 

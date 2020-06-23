@@ -685,7 +685,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the width of of the colored box if displayColors is <code>true</code>..
 	 * 
@@ -706,7 +706,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	public int getBoxWidth() {
 		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
 	}
-	
+
 	/**
 	 * Sets the height of the colored box if displayColors is <code>true</code>..
 	 * 

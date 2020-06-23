@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.options.Padding;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
 /**
  * Defaults for padding option element, based on chart type.
@@ -29,7 +29,7 @@ public final class DefaultChartPadding extends AbstractDefaultChartPadding {
 	 * 
 	 * @param padding padding option element instance.
 	 */
-	DefaultChartPadding(Padding padding) {
+	DefaultChartPadding(IsDefaultPadding padding) {
 		super(padding);
 	}
 

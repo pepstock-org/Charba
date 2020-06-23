@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.globals.DefaultElements;
-import org.pepstock.charba.client.options.Elements;
 
 /**
  * Defaults for elements option element, based on chart type.
@@ -30,7 +30,7 @@ public final class DefaultChartElements extends DefaultElements {
 	 * 
 	 * @param elements elements option element instance.
 	 */
-	DefaultChartElements(Elements elements) {
+	public DefaultChartElements(IsDefaultElements elements) {
 		super(new DefaultChartArc(elements.getArc()), new DefaultChartLine(elements.getLine()), new DefaultChartPoint(elements.getPoint()), new DefaultChartRectangle(elements.getRectangle()));
 	}
 

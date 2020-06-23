@@ -29,7 +29,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
 import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
-import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -174,8 +173,6 @@ public final class Positioner {
 	 * @return point to show the tooltip
 	 */
 	private NativeObject onToolipPosition(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint) {
-		// FIXME
-		Window.getConsole().log(datasetItems);
 		// creates the context
 		PositionerContext internalContext = new PositionerContext(context);
 		// creates the point

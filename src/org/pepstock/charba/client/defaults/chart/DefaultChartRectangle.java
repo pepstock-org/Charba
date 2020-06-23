@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultRectangle;
 import org.pepstock.charba.client.enums.BorderSkipped;
-import org.pepstock.charba.client.options.Rectangle;
 
 /**
  * Defaults for rectangle option element, based on chart type.
@@ -26,14 +25,14 @@ import org.pepstock.charba.client.options.Rectangle;
  */
 public final class DefaultChartRectangle implements IsDefaultRectangle {
 
-	private final Rectangle rectangle;
+	private final IsDefaultRectangle rectangle;
 
 	/**
 	 * Creates the object by rectangle option element instance.
 	 * 
 	 * @param rectangle rectangle option element instance.
 	 */
-	DefaultChartRectangle(Rectangle rectangle) {
+	DefaultChartRectangle(IsDefaultRectangle rectangle) {
 		this.rectangle = rectangle;
 	}
 

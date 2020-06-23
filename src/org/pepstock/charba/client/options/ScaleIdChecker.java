@@ -41,7 +41,7 @@ final class ScaleIdChecker {
 	private ScaleIdChecker() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the scale is compliant with the constraints of scale id.<br>
 	 * A scale id <br>

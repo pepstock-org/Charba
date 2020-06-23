@@ -79,6 +79,13 @@ public interface IsDefaultOptions {
 	IsDefaultPlugins getPlugins();
 
 	/**
+	 * Returns the plugins defaults.
+	 * 
+	 * @return the plugins defaults.
+	 */
+	IsDefaultDatasets getDatasets();
+
+	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
 	 * @return the resizing of the chart canvas when its container does.

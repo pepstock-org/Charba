@@ -128,7 +128,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	public int getBoxWidth() {
 		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
 	}
-	
+
 	/**
 	 * Sets the height of colored box.
 	 * 

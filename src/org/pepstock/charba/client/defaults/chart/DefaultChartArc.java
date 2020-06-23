@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
-import org.pepstock.charba.client.options.Arc;
 
 /**
  * Defaults for arc option element, based on chart type.
@@ -26,14 +25,14 @@ import org.pepstock.charba.client.options.Arc;
  */
 public final class DefaultChartArc implements IsDefaultArc {
 
-	private final Arc arc;
+	private final IsDefaultArc arc;
 
 	/**
 	 * Creates the object by arc option element instance.
 	 * 
 	 * @param arc arc option element instance.
 	 */
-	DefaultChartArc(Arc arc) {
+	DefaultChartArc(IsDefaultArc arc) {
 		this.arc = arc;
 	}
 

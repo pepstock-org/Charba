@@ -19,7 +19,6 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.options.Title;
 
 /**
  * Defaults for title option element, based on chart type.
@@ -28,14 +27,14 @@ import org.pepstock.charba.client.options.Title;
  */
 public final class DefaultChartTitle implements IsDefaultTitle {
 
-	private final Title title;
+	private final IsDefaultTitle title;
 
 	/**
 	 * Creates the object by title option element instance.
 	 * 
 	 * @param title title option element instance.
 	 */
-	DefaultChartTitle(Title title) {
+	public DefaultChartTitle(IsDefaultTitle title) {
 		this.title = title;
 	}
 
@@ -89,12 +88,14 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 		return title.isFullWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getAlign()
 	 */
 	@Override
 	public ElementAlign getAlign() {
 		return title.getAlign();
 	}
-	
+
 }

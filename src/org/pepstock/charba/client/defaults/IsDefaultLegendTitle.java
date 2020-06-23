@@ -29,7 +29,7 @@ public interface IsDefaultLegendTitle {
 	 * @return the font defaults.
 	 */
 	IsDefaultFont getFont();
-	
+
 	/**
 	 * Returns <code>true</code> if the legend title is shown.
 	 * 

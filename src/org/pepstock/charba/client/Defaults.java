@@ -200,7 +200,6 @@ public final class Defaults {
 		// returns a default option with all configuration
 		// it uses the default builder and the default scaled options
 		// because chart options is already a merge between global and chart global
-		// FIXME perché scaled options?
 		return new ChartOptions(type, envelop.getContent(), DefaultsBuilder.get().getScaledOptions());
 	}
 

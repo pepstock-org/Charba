@@ -78,7 +78,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		if (scales != null && scales.length > 0) {
 			// sets a index
 			int index = 0;
-			// checks if is 
+			// checks if is
 			// scans passed scales
 			for (Scale scale : scales) {
 				// checks if not null
@@ -106,7 +106,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 			checkAndAddToParent();
 		}
 	}
-	
+
 	private IsScaleId checkAndGetScaleId(Scale scale) {
 		// gets id as key
 		IsScaleId id = scale.getId();
@@ -126,7 +126,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		}
 		return id;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the scale with the id passed as argument exists.
 	 * 
@@ -237,16 +237,16 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		// create default scale reference
 		IsDefaultScale defaultValue = null;
 		// based on cartesian axis type
-		switch(internalScale.getAxis()) {
+		switch (internalScale.getAxis()) {
 		case X:
 			// X cartesian
 			defaultValue = getXAxis();
-			break; 
+			break;
 		case R:
 			// R radial linear
 			defaultValue = getRAxis();
 			break;
-		default: 
+		default:
 			// Y cartesian
 			defaultValue = getYAxis();
 		}

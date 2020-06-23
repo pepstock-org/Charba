@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
-import org.pepstock.charba.client.options.AnimationActive;
 
 /**
  * Defaults for animation active option element, based on chart type.
@@ -25,14 +24,14 @@ import org.pepstock.charba.client.options.AnimationActive;
  */
 public final class DefaultChartAnimationActive implements IsDefaultAnimationElement {
 
-	private final AnimationActive animationActive;
+	private final IsDefaultAnimationElement animationActive;
 
 	/**
 	 * Creates the object by animation active option element instance.
 	 * 
 	 * @param animationActive animation active option element instance.
 	 */
-	DefaultChartAnimationActive(AnimationActive animationActive) {
+	DefaultChartAnimationActive(IsDefaultAnimationElement animationActive) {
 		this.animationActive = animationActive;
 	}
 

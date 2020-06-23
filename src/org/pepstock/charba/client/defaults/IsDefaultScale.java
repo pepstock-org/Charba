@@ -125,20 +125,20 @@ public interface IsDefaultScale {
 	 */
 	boolean isStacked();
 
-//	/**
-//	 * Returns the type of axis.
-//	 * 
-//	 * @return the type of axis.
-//	 */
-//	AxisType getType();
-//
-//	/**
-//	 * Which type of axis this is.<br>
-//	 * Possible values are: 'x', 'y' or 'r'.
-//	 * 
-//	 * @return the type of axis.
-//	 */
-//	CartesianAxisType getAxis();
+	// /**
+	// * Returns the type of axis.
+	// *
+	// * @return the type of axis.
+	// */
+	// AxisType getType();
+	//
+	// /**
+	// * Which type of axis this is.<br>
+	// * Possible values are: 'x', 'y' or 'r'.
+	// *
+	// * @return the type of axis.
+	// */
+	// CartesianAxisType getAxis();
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.

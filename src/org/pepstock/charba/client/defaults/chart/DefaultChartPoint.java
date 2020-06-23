@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.options.Point;
 
 /**
  * Defaults for point option element, based on chart type.
@@ -26,14 +25,14 @@ import org.pepstock.charba.client.options.Point;
  */
 public final class DefaultChartPoint implements IsDefaultPoint {
 
-	private final Point point;
+	private final IsDefaultPoint point;
 
 	/**
 	 * Creates the object by point option element instance.
 	 * 
 	 * @param point point option element instance.
 	 */
-	DefaultChartPoint(Point point) {
+	DefaultChartPoint(IsDefaultPoint point) {
 		this.point = point;
 	}
 

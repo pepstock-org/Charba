@@ -78,40 +78,40 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	protected ScaledOptions(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets scales sub elements
-//		defaultScale = new Scale(this, Property.SCALE, defaultValues.getScale(), getValue(Property.SCALE));
+		// defaultScale = new Scale(this, Property.SCALE, defaultValues.getScale(), getValue(Property.SCALE));
 		scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
 		// sets the default as current one
-//		scale = defaultScale;
+		// scale = defaultScale;
 	}
 
-//	/**
-//	 * Sets a scale instance for options.
-//	 * 
-//	 * @param scale the scale to set
-//	 */
-//	public final void setScale(Scale scale) {
-//		// checks if scale is consistent
-//		if (scale != null) {
-//			this.scale = scale;
-//			// set values
-//			setValue(Property.SCALE, this.scale);
-//		} else {
-//			// remove current configuration if exists
-//			removeIfExists(Property.SCALE);
-//			// resets the current scale with the default one
-//			this.scale = defaultScale;
-//		}
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScale()
-//	 */
-//	@Override
-//	public Scale getScale() {
-//		return scale;
-//	}
+	// /**
+	// * Sets a scale instance for options.
+	// *
+	// * @param scale the scale to set
+	// */
+	// public final void setScale(Scale scale) {
+	// // checks if scale is consistent
+	// if (scale != null) {
+	// this.scale = scale;
+	// // set values
+	// setValue(Property.SCALE, this.scale);
+	// } else {
+	// // remove current configuration if exists
+	// removeIfExists(Property.SCALE);
+	// // resets the current scale with the default one
+	// this.scale = defaultScale;
+	// }
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScale()
+	// */
+	// @Override
+	// public Scale getScale() {
+	// return scale;
+	// }
 
 	/*
 	 * (non-Javadoc)

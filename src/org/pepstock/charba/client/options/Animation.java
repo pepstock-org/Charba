@@ -25,8 +25,7 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.enums.InterpolatorType;
 
 /**
- * FIXME
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * FIXME It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultHover;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.options.Hover;
 
 /**
  * Defaults for hover option element, based on chart type.
@@ -27,14 +26,14 @@ import org.pepstock.charba.client.options.Hover;
  */
 public final class DefaultChartHover implements IsDefaultHover {
 
-	private final Hover hover;
+	private final IsDefaultHover hover;
 
 	/**
 	 * Creates the object by hover option element instance.
 	 * 
 	 * @param hover hover option element instance.
 	 */
-	DefaultChartHover(Hover hover) {
+	public DefaultChartHover(IsDefaultHover hover) {
 		this.hover = hover;
 	}
 

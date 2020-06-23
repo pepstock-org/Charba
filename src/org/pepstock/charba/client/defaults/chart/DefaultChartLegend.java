@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
-import org.pepstock.charba.client.options.Legend;
 
 /**
  * Defaults for legend option element, based on chart type.
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.options.Legend;
  */
 public final class DefaultChartLegend implements IsDefaultLegend {
 
-	private final Legend legend;
+	private final IsDefaultLegend legend;
 
 	private final DefaultChartLegendLabels labels;
 
@@ -41,7 +40,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	 * 
 	 * @param legend legend option element instance.
 	 */
-	DefaultChartLegend(Legend legend) {
+	public DefaultChartLegend(IsDefaultLegend legend) {
 		this.legend = legend;
 		// creates sub element
 		labels = new DefaultChartLegendLabels(legend.getLabels());

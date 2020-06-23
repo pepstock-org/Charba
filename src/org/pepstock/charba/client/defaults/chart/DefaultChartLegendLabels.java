@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
-import org.pepstock.charba.client.options.LegendLabels;
 
 /**
  * Defaults for legend labels option element, based on chart type.
@@ -26,14 +25,14 @@ import org.pepstock.charba.client.options.LegendLabels;
  */
 public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 
-	private final LegendLabels labels;
+	private final IsDefaultLegendLabels labels;
 
 	/**
 	 * Creates the object by legend labels option element instance.
 	 * 
 	 * @param labels legend labels option element instance.
 	 */
-	DefaultChartLegendLabels(LegendLabels labels) {
+	DefaultChartLegendLabels(IsDefaultLegendLabels labels) {
 		this.labels = labels;
 	}
 

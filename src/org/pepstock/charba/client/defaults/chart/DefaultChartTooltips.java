@@ -21,7 +21,6 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
-import org.pepstock.charba.client.options.Tooltips;
 
 /**
  * Defaults for tooltips option element, based on chart type.
@@ -30,14 +29,14 @@ import org.pepstock.charba.client.options.Tooltips;
  */
 public final class DefaultChartTooltips implements IsDefaultTooltips {
 
-	private final Tooltips tooltips;
+	private final IsDefaultTooltips tooltips;
 
 	/**
 	 * Creates the object by tooltips option element instance.
 	 * 
 	 * @param tooltips tooltips option element instance.
 	 */
-	DefaultChartTooltips(Tooltips tooltips) {
+	public DefaultChartTooltips(IsDefaultTooltips tooltips) {
 		this.tooltips = tooltips;
 	}
 

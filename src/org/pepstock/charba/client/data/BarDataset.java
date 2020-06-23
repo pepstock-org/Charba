@@ -34,6 +34,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -53,25 +54,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * Floating bars data factory to create {@link FloatingData}s.
 	 */
 	public static final FloatingDatatFactory FLOATING_BAR_DATA_FACTORY = new FloatingDatatFactory();
-
-	/**
-	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
-	 * overlap. Then, bars are sized using barPercentage and categoryPercentage. There is no gap when the percentage options are 1. This mode generates bars with different widths
-	 * when data are not evenly spaced, {@link Integer#MIN_VALUE}.
-	 */
-	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
-	// this is the value which must be stored in JS object when flex bar thickness is set
-	private static final String FLEX_BAR_THICKNESS_VALUE = "flex";
-
-	private static final double DEFAULT_BAR_PERCENTAGE = 0.9D;
-
-	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8D;
-
-	private static final int DEFAULT_BAR_THICKNESS = 0;
-
-	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
-
-	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -268,7 +250,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, DEFAULT_BAR_PERCENTAGE);
+		return getValue(Property.BAR_PERCENTAGE, getDefaultValues().getDatasets().getBarPercentage());
 	}
 
 	/**
@@ -286,7 +268,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, DEFAULT_CATEGORY_PERCENTAGE);
+		return getValue(Property.CATEGORY_PERCENTAGE, getDefaultValues().getDatasets().getCategoryPercentage());
 	}
 
 	/**
@@ -298,9 +280,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public void setBarThickness(int barThickness) {
 		// checks if FLEX value has been set
-		if (FLEX_BAR_THICKNESS == barThickness) {
+		if (DefaultDatasets.FLEX_BAR_THICKNESS == barThickness) {
 			// flex must be set
-			setValue(Property.BAR_THICKNESS, FLEX_BAR_THICKNESS_VALUE);
+			setValue(Property.BAR_THICKNESS, DefaultDatasets.FLEX_BAR_THICKNESS_VALUE);
 		} else {
 			setValue(Property.BAR_THICKNESS, barThickness);
 		}
@@ -316,10 +298,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public int getBarThickness() {
 		// checks if flex has been set
 		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
-			return FLEX_BAR_THICKNESS;
+			return DefaultDatasets.FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex
-		return getValue(Property.BAR_THICKNESS, DEFAULT_BAR_THICKNESS);
+		return getValue(Property.BAR_THICKNESS, getDefaultValues().getDatasets().getBarThickness());
 	}
 
 	/**
@@ -337,7 +319,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the maximum bar thickness.
 	 */
 	public int getMaxBarThickness() {
-		return getValue(Property.MAX_BAR_THICKNESS, DEFAULT_MAX_BAR_THICKNESS);
+		return getValue(Property.MAX_BAR_THICKNESS, getDefaultValues().getDatasets().getMaxBarThickness());
 	}
 
 	/**
@@ -355,7 +337,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return a minimum length in pixels.
 	 */
 	public int getMinBarLength() {
-		return getValue(Property.MIN_BAR_LENGTH, DEFAULT_MIN_BAR_LENGTH);
+		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getDatasets().getMinBarLength());
 	}
 
 	/**

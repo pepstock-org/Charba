@@ -21,7 +21,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
- * Defaults for options element, using the defualt global options. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
+ * Defaults for options element, using the defualt global options.<br>
+ * THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  */

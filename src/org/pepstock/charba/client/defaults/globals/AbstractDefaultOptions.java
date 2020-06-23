@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultHover;
@@ -25,6 +26,15 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.defaults.chart.DefaultChartAnimation;
+import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
+import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
+import org.pepstock.charba.client.defaults.chart.DefaultChartHover;
+import org.pepstock.charba.client.defaults.chart.DefaultChartLayout;
+import org.pepstock.charba.client.defaults.chart.DefaultChartLegend;
+import org.pepstock.charba.client.defaults.chart.DefaultChartPlugins;
+import org.pepstock.charba.client.defaults.chart.DefaultChartTitle;
+import org.pepstock.charba.client.defaults.chart.DefaultChartTooltips;
 
 /**
  * Abstract CHART.JS default values for OPTIONS element with all inner elements.
@@ -49,6 +59,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultPlugins plugins;
 
+	private final IsDefaultDatasets datasets;
+
 	private final IsDefaultFont font = new DefaultFont();
 
 	/**
@@ -65,6 +77,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.legend = new DefaultLegend();
 		this.tooltips = new DefaultTooltips();
 		this.plugins = new DefaultPlugins();
+		this.datasets = new DefaultDatasets();
 	}
 
 	/**
@@ -78,14 +91,15 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 			throw new IllegalArgumentException("Default options argument is null");
 		}
 		// stores all inner elements
-		this.animation = options.getAnimation();
-		this.hover = options.getHover();
-		this.elements = options.getElements();
-		this.layout = options.getLayout();
-		this.title = options.getTitle();
-		this.legend = options.getLegend();
-		this.tooltips = options.getTooltips();
-		this.plugins = options.getPlugins();
+		this.animation = new DefaultChartAnimation(options.getAnimation());
+		this.hover = new DefaultChartHover(options.getHover());
+		this.elements = new DefaultChartElements(options.getElements());
+		this.layout = new DefaultChartLayout(options.getLayout());
+		this.title = new DefaultChartTitle(options.getTitle());
+		this.legend = new DefaultChartLegend(options.getLegend());
+		this.tooltips = new DefaultChartTooltips(options.getTooltips());
+		this.plugins = new DefaultChartPlugins(options.getPlugins());
+		this.datasets = new DefaultChartDatasets(options.getDatasets());
 	}
 
 	/**
@@ -176,6 +190,16 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	@Override
 	public IsDefaultPlugins getPlugins() {
 		return plugins;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDatasets()
+	 */
+	@Override
+	public IsDefaultDatasets getDatasets() {
+		return datasets;
 	}
 
 }

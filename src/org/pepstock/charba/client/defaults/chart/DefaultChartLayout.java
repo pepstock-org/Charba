@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.options.Layout;
 
 /**
  * Defaults for layout option element, based on chart type.
@@ -33,7 +32,7 @@ public final class DefaultChartLayout implements IsDefaultLayout {
 	 * 
 	 * @param layout layout option element instance.
 	 */
-	DefaultChartLayout(Layout layout) {
+	public DefaultChartLayout(IsDefaultLayout layout) {
 		padding = new DefaultChartPadding(layout.getPadding());
 	}
 

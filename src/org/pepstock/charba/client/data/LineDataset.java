@@ -260,7 +260,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public boolean isShowLine() {
-		return getValue(Property.SHOW_LINE, getDefaultValues().isShowLines());
+		return getValue(Property.SHOW_LINE, getDefaultValues().getDatasets().isShowLine());
 	}
 
 	/**

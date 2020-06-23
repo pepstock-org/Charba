@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
-import org.pepstock.charba.client.options.AnimationResize;
 
 /**
  * Defaults for animation resize option element, based on chart type.
@@ -25,14 +24,14 @@ import org.pepstock.charba.client.options.AnimationResize;
  */
 public final class DefaultChartAnimationResize implements IsDefaultAnimationElement {
 
-	private final AnimationResize animationResize;
+	private final IsDefaultAnimationElement animationResize;
 
 	/**
 	 * Creates the object by animation resize option element instance.
 	 * 
 	 * @param animationResize animation resize option element instance.
 	 */
-	DefaultChartAnimationResize(AnimationResize animationResize) {
+	DefaultChartAnimationResize(IsDefaultAnimationElement animationResize) {
 		this.animationResize = animationResize;
 	}
 

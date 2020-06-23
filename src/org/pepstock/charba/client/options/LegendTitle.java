@@ -37,7 +37,6 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 		PADDING("padding"),
 		TEXT("text");
 
-
 		// name value of property
 		private final String value;
 
@@ -110,7 +109,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	}
 
 	/**
-	 * Sets the padding to apply around title. 
+	 * Sets the padding to apply around title.
 	 * 
 	 * @param padding padding to apply around title.
 	 */

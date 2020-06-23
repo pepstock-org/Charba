@@ -55,6 +55,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final Font font;
 
+	private final Datasets datasets;
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -70,6 +72,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		LEGEND("legend"),
 		TITLE("title"),
 		PLUGINS("plugins"),
+		DATASETS("datasets"),
 		// global options
 		COLOR("color"),
 		// simple properties
@@ -134,13 +137,14 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// gets all sub elements
 		animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
 		legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
-		elements = new Elements(this, Property.ELEMENTS, defaultValues.getElements(), getValue(Property.ELEMENTS));
+		elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
 		hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
-		layout = new Layout(this, Property.LAYOUT, defaultValues.getLayout(), getValue(Property.LAYOUT));
+		layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
 		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
 		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 		font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
+		datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
 	}
 
 	/**
@@ -231,6 +235,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final Plugins getPlugins() {
 		return plugins;
+	}
+
+	/**
+	 * Returns the datasets element.
+	 * 
+	 * @return the datasets
+	 */
+	@Override
+	public Datasets getDatasets() {
+		return datasets;
 	}
 
 	/**

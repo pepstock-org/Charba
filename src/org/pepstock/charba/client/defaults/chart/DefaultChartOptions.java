@@ -62,7 +62,7 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 		// checks type
 		Type.checkIfValid(type);
 		// checks if the chart has got scales
-		if (ScaleType.NONE.equals(type.scaleType())){
+		if (ScaleType.NONE.equals(type.scaleType())) {
 			// gets default scales
 			scales = DefaultsBuilder.get().getScaledOptions().getScales();
 		} else {

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
-import org.pepstock.charba.client.options.LegendTitle;
 
 /**
  * Defaults for legend title option element, based on chart type.
@@ -26,14 +25,14 @@ import org.pepstock.charba.client.options.LegendTitle;
  */
 public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 
-	private final LegendTitle title;
+	private final IsDefaultLegendTitle title;
 
 	/**
 	 * Creates the object by legend title option element instance.
 	 * 
 	 * @param title legend title option element instance.
 	 */
-	DefaultChartLegendTitle(LegendTitle title) {
+	DefaultChartLegendTitle(IsDefaultLegendTitle title) {
 		this.title = title;
 	}
 

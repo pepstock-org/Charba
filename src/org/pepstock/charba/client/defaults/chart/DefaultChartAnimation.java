@@ -19,7 +19,6 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.enums.InterpolatorType;
-import org.pepstock.charba.client.options.Animation;
 
 /**
  * Defaults for animation option element, based on chart type.
@@ -28,7 +27,7 @@ import org.pepstock.charba.client.options.Animation;
  */
 public final class DefaultChartAnimation implements IsDefaultAnimation {
 
-	private final Animation animation;
+	private final IsDefaultAnimation animation;
 
 	private final DefaultChartAnimationActive animationActive;
 
@@ -39,7 +38,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 * 
 	 * @param animation animation option element instance.
 	 */
-	DefaultChartAnimation(Animation animation) {
+	public DefaultChartAnimation(IsDefaultAnimation animation) {
 		this.animation = animation;
 		this.animationActive = new DefaultChartAnimationActive(animation.getActive());
 		this.animationResize = new DefaultChartAnimationResize(animation.getResize());

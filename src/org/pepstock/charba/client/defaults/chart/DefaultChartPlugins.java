@@ -13,9 +13,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ObjectType;
@@ -24,21 +23,21 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * CHART.JS default values for LEGEND element.
+ * Defaults for plugins options, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultPlugins implements IsDefaultPlugins {
+public final class DefaultChartPlugins implements IsDefaultPlugins {
 
-	private static final boolean DEFAULT_ENABLED = false;
-
-	private static final boolean DEFAULT_HAS_OPTIONS = false;
+	private final IsDefaultPlugins plugins;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object by plugins option element instance.
+	 * 
+	 * @param plugins plugins option element instance.
 	 */
-	DefaultPlugins() {
-		// do nothing
+	public DefaultChartPlugins(IsDefaultPlugins plugins) {
+		this.plugins = plugins;
 	}
 
 	/*
@@ -48,7 +47,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public boolean isEnabled(String pluginId) {
-		return DEFAULT_ENABLED;
+		return plugins.isEnabled(pluginId);
 	}
 
 	/*
@@ -58,7 +57,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public boolean hasOptions(String pluginId) {
-		return DEFAULT_HAS_OPTIONS;
+		return plugins.hasOptions(pluginId);
 	}
 
 	/*
@@ -68,7 +67,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public ObjectType getOptionsType(String pluginId) {
-		return ObjectType.UNDEFINED;
+		return plugins.getOptionsType(pluginId);
 	}
 
 	/*
@@ -78,13 +77,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// creates a empty options
-			return factory.create(null, null);
-		}
-		// if here factory is not consistent
-		return null;
+		return plugins.getOptions(pluginId, factory);
 	}
 
 	/*
@@ -94,7 +87,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		return Collections.emptyList();
+		return plugins.getOptionsAsList(pluginId, factory);
 	}
 
 }
