@@ -37,7 +37,9 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 		TOP("top"),
 		RIGHT("right"),
 		BOTTOM("bottom"),
-		LEFT("left");
+		LEFT("left"),
+		WIDTH("width"),
+		HEIGHT("height");
 
 		// name value of property
 		private final String value;
@@ -74,38 +76,58 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the top of chart area.
 	 * 
-	 * @return the top of chart area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the top of chart area. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getTop() {
-		return getValue(Property.TOP, UndefinedValues.INTEGER);
+	public final double getTop() {
+		return getValue(Property.TOP, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the right of chart area.
 	 * 
-	 * @return the right of chart area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the right of chart area. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getRight() {
-		return getValue(Property.RIGHT, UndefinedValues.INTEGER);
+	public final double getRight() {
+		return getValue(Property.RIGHT, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the bottom of chart area.
 	 * 
-	 * @return the bottom of chart area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the bottom of chart area. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getBottom() {
-		return getValue(Property.BOTTOM, UndefinedValues.INTEGER);
+	public final double getBottom() {
+		return getValue(Property.BOTTOM, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the left of chart area.
 	 * 
-	 * @return the left of chart area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the left of chart area. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getLeft() {
-		return getValue(Property.LEFT, UndefinedValues.INTEGER);
+	public final double getLeft() {
+		return getValue(Property.LEFT, UndefinedValues.DOUBLE);
 	}
+	
+
+	/**
+	 * Returns the width in pixel.
+	 * 
+	 * @return the width in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getWidth() {
+		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns the height in pixel.
+	 * 
+	 * @return the height in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getHeight() {
+		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
+	}
+	
 
 	/**
 	 * Returns <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>.

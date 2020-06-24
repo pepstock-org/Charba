@@ -237,6 +237,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
    * add `Datasets` class in order to manage datasets options and configuration classes.
    * add `START` and `END` items to `BorderSkipped` enumeration
+   * add `width` and `height` options into `ChartAreaNode` class
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -254,7 +255,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `compare` static method of `Key` interface in order to test if the keys are valid and not only not `null`.
  * change the registering of tooltips positioner in order to apply to CHART.JS tooltips plugin.
  * remove `SingleScaleOptions` class because the radial linear axis is managed like the cartesian ones.
- * remove `getAxis` method from `IsDefaultScale` interface because the axis kind does not any default and, when not set, depends on scale id. 
+ * remove `getAxis` method from `IsDefaultScale` interface because the axis kind does not any default and, when not set, depends on scale id.
+ * move `width` and `height` options into `BaseBoxitem` class.
+ * change all properties of `BaseBoxitem` from `int` to `double`.
 
 License
 -------

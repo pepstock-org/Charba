@@ -170,8 +170,8 @@ final class BaseMeterController extends AbstractController {
 		// gets the chart area of CHART.JS
 		ChartAreaNode area = item.getChartArea();
 		// calculate the center point of the square
-		final int centerX = (area.getRight() - area.getLeft()) / 2 + area.getLeft();
-		final int centerY = (area.getBottom() - area.getTop()) / 2 + area.getTop();
+		final double centerX = (area.getRight() - area.getLeft()) / 2D + area.getLeft();
+		final double centerY = (area.getBottom() - area.getTop()) / 2D + area.getTop();
 		// gets max value
 		final double maxValue = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value

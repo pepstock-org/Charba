@@ -98,7 +98,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param height the height of axis in pixel.
 	 */
 	public void setHeight(int height) {
-		setValue(BaseBoxNodeItem.Property.HEIGHT, height);
+		setValue(BaseBoxItem.Property.HEIGHT, height);
 	}
 
 	/**
@@ -290,7 +290,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param width the width of axis
 	 */
 	public void setWidth(int width) {
-		setValue(BaseBoxNodeItem.Property.WIDTH, width);
+		setValue(BaseBoxItem.Property.WIDTH, width);
 	}
 
 	/**

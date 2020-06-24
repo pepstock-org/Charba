@@ -38,8 +38,6 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		FULL_WIDTH("fullWidth"),
 		POSITION("position"),
 		WEIGHT("weight"),
-		WIDTH("width"),
-		HEIGHT("height"),
 		MAX_WIDTH("maxWidth"),
 		MAX_HEIGHT("maxHeight"),
 		PADDING_TOP("paddingTop"),
@@ -117,24 +115,6 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	public final double getWeight() {
 		return getValue(Property.WEIGHT, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the width in pixel.
-	 * 
-	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the height in pixel.
-	 * 
-	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
 
 	/**
