@@ -78,7 +78,8 @@ public final class ChartEventContext extends NativeObjectContainer {
 	/**
 	 * Creates the object with the chart instance, creating a change native event.
 	 * 
-	 * @param chart chart instance.
+	 * @param chart chart instance to store into object
+	 * @param event native event instance to store into object
 	 */
 	public ChartEventContext(Chart chart, BaseNativeEvent event) {
 		// creates an empty native object

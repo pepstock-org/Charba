@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.options.IsScaleId;
+
 /**
  * Interface to define scales/axes object defaults.
  * 
@@ -25,22 +28,10 @@ public interface IsDefaultScales {
 	/**
 	 * Returns the default configuration for x axis.
 	 * 
+	 * @param scaleId the scale id to use to get the default
+	 * @param kind axis kind to use if the scale id is not recognizable
 	 * @return the default configuration for x axis.
 	 */
-	IsDefaultScale getXAxis();
-
-	/**
-	 * Returns the default configuration for y axis.
-	 * 
-	 * @return the default configuration for y axis.
-	 */
-	IsDefaultScale getYAxis();
-
-	/**
-	 * Returns the default configuration for radial linear axis.
-	 * 
-	 * @return the default configuration for radial axis.
-	 */
-	IsDefaultScale getRAxis();
+	IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind);
 
 }

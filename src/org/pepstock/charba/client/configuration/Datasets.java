@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends ConfigurationContainer<ExtendedOptions>{
+public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 
 	/**
 	 * Builds the object storing the chart instance and the root options element.

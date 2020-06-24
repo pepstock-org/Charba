@@ -182,7 +182,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(new ScaleIdEnvelop(id), type, getDefaultScale(kind)));
+		setConfiguration(new ExtendedScale(new ScaleIdEnvelop(id), type, getDefaultScale(id, kind)));
 		// stores the axis type, overriding the default
 		setAxis(kind);
 		// -------------------------------
@@ -327,10 +327,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the global options for this chart.
 	 * 
+	 * @param scaleId the scale id to use to get the default
 	 * @param kind axis kind instance
 	 * @return the global options for this chart.
 	 */
-	private IsDefaultScale getDefaultScale(AxisKind kind) {
+	private IsDefaultScale getDefaultScale(IsScaleId scaleId, AxisKind kind) {
 		// gets the global option for the chart.
 		IsDefaultScaledOptions options = getChart().getDefaultChartOptions();
 		// if is a a chart with scales
@@ -338,23 +339,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			// checks if axis kind is consistent
 			if (Key.isValid(kind)) {
 				// creates reference for scale
-				IsDefaultScale scale = null;
-				// based on axis kind
-				switch (kind) {
-				case X:
-					// X cartesian
-					scale = options.getScales().getXAxis();
-					break;
-				case R:
-					// R radial linear
-					scale = options.getScales().getRAxis();
-					break;
-				default:
-					// Y cartesian
-					scale = options.getScales().getYAxis();
-				}
-				// returns the option for x, r or y scale.
-				return scale;
+				// returns default scale reference
+				return options.getScales().getAxis(scaleId, kind);
 			}
 		}
 		// returns default scale

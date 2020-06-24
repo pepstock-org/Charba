@@ -32,6 +32,16 @@ public interface IsScaleId extends Key {
 	 * @return new scale id instance
 	 */
 	static IsScaleId create(String id) {
+		// checks if id as argument is a default one
+		for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
+			// checks if id is equals to default
+			if (defScaleId.value().equals(id)) {
+				// if equals, returns the default id
+				return defScaleId;
+			}
+		}
+		// if here, is not a default one
+		// then creates new scale id
 		return new StandardScaleId(id);
 	}
 

@@ -46,6 +46,7 @@ import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * This singleton is a wrapper to <code>defaults</code> object that CHART.JS (by CHART object) provides to get defaults values.
@@ -197,6 +198,8 @@ public final class Defaults {
 		Envelop<NativeObject> envelop = new Envelop<>();
 		// load the envelop
 		Merger.get().load(type, envelop);
+		// FIXME
+		Window.getConsole().log("cahrt options", envelop.getContent());
 		// returns a default option with all configuration
 		// it uses the default builder and the default scaled options
 		// because chart options is already a merge between global and chart global

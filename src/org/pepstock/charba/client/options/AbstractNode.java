@@ -36,7 +36,6 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 * 
 	 * @param parent parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
 	AbstractNode(AbstractNode parent, Key childKey, NativeObject nativeObject) {

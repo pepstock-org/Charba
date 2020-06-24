@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
@@ -198,64 +199,32 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getXAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.IsScaleId, org.pepstock.charba.client.enums.AxisKind)
 	 */
 	@Override
-	public IsDefaultScale getXAxis() {
-		return getDefaultValues().getXAxis();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getYAxis()
-	 */
-	@Override
-	public IsDefaultScale getYAxis() {
-		return getDefaultValues().getYAxis();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getRAxis()
-	 */
-	@Override
-	public IsDefaultScale getRAxis() {
-		return getDefaultValues().getRAxis();
+	public IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind) {
+		return getDefaultValues().getAxis(scaleId, kind);
 	}
 
 	/**
 	 * Gets from the native object the scale object by its id and creates a scale instance.
 	 * 
-	 * @param scaleId scale id
+	 * @param propertyKey property key of the object as scale id
 	 * @return a scale instance
 	 */
-	private Scale getAndCreate(Key scaleId) {
+	private Scale getAndCreate(Key propertyKey) {
+		// creates scale id
+		IsScaleId scaleId = IsScaleId.create(propertyKey.value());
 		// gets temporary scale
-		Scale internalScale = new Scale(DefaultsBuilder.get().getScale(), getValue(scaleId));
+		Scale internalScale = new Scale(DefaultsBuilder.get().getScale(), getValue(propertyKey));
 		// create default scale reference
-		IsDefaultScale defaultValue = null;
-		// based on cartesian axis type
-		switch (internalScale.getAxis()) {
-		case X:
-			// X cartesian
-			defaultValue = getXAxis();
-			break;
-		case R:
-			// R radial linear
-			defaultValue = getRAxis();
-			break;
-		default:
-			// Y cartesian
-			defaultValue = getYAxis();
-		}
+		IsDefaultScale defaultValue = getAxis(scaleId, internalScale.getAxis());
 		// creates the scale
-		Scale scale = new Scale(defaultValue, getValue(scaleId));
+		Scale scale = new Scale(defaultValue, getValue(propertyKey));
 		// checks if scale has got the id
 		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id
-			scale.setId(IsScaleId.create(scaleId.value()));
+			scale.setId(IsScaleId.create(propertyKey.value()));
 		}
 		// returns scale
 		return scale;

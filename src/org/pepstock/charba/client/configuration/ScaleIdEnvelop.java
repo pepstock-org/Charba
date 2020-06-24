@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.IsScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @param <T> type of envelop content.
  */
 public final class ScaleIdEnvelop {
 

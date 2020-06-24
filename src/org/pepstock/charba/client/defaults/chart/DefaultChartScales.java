@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -28,11 +31,7 @@ import org.pepstock.charba.client.options.Scales;
  */
 public final class DefaultChartScales implements IsDefaultScales {
 
-	private final IsDefaultScale xAxis;
-
-	private final IsDefaultScale yAxis;
-
-	private final IsDefaultScale rAxis;
+	private final Scales scales;
 
 	/**
 	 * Creates the object by scales option element instance.
@@ -45,68 +44,43 @@ public final class DefaultChartScales implements IsDefaultScales {
 			// exception
 			throw new IllegalArgumentException("Scales instance is not consistent");
 		}
-		// checks if there is any x axes
-		if (!scales.getAxes().isEmpty()) {
-			// looks for X default
-			if (scales.hasAxis(DefaultScaleId.X)) {
-				// gets the stored axis as X
-				xAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.X));
-			} else {
-				// uses the default
-				xAxis = DefaultsBuilder.get().getScaledOptions().getScales().getXAxis();
-			}
-			// looks for X default
-			if (scales.hasAxis(DefaultScaleId.Y)) {
+		this.scales = scales;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.IsScaleId, org.pepstock.charba.client.enums.AxisKind)
+	 */
+	@Override
+	public IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind) {
+		// checks if scale id is consistent
+		if (IsScaleId.isValid(scaleId)) {
+			// looks for scale id default
+			if (scales.hasAxis(scaleId)) {
 				// gets the stored axis as Y
-				yAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.Y));
+				return new DefaultChartScale(scales.getAxis(scaleId));
 			} else {
-				// uses the default
-				yAxis = DefaultsBuilder.get().getScaledOptions().getScales().getYAxis();
+				// scans all defaults ids
+				for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
+					// checks if default scale id matches with argument
+					if (defScaleId.is(scaleId) && scales.hasAxis(defScaleId)) {
+						// gets the stored axis as Y
+						return new DefaultChartScale(scales.getAxis(defScaleId));
+					}
+				}
+				// checks consistency of kind
+				if (Key.isValid(kind)) {
+					DefaultScaleId defScaleId = DefaultScaleId.getByAxisKind(kind, DefaultScaleId.UNKNOWN);
+					if (!DefaultScaleId.UNKNOWN.equals(defScaleId) && scales.hasAxis(defScaleId)) {
+						// gets the stored axis as Y
+						return new DefaultChartScale(scales.getAxis(defScaleId));
+					}
+				}
+				// FIXME _index_ and _value_ scale ids are missing
 			}
-			// looks for X default
-			if (scales.hasAxis(DefaultScaleId.R)) {
-				// gets the stored axis as Y
-				rAxis = new DefaultChartScale(scales.getAxis(DefaultScaleId.R));
-			} else {
-				// uses the default
-				rAxis = DefaultsBuilder.get().getScaledOptions().getScales().getRAxis();
-			}
-		} else {
-			// uses the defaults
-			xAxis = DefaultsBuilder.get().getScaledOptions().getScales().getXAxis();
-			yAxis = DefaultsBuilder.get().getScaledOptions().getScales().getYAxis();
-			rAxis = DefaultsBuilder.get().getScaledOptions().getScales().getRAxis();
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getXAxis()
-	 */
-	@Override
-	public IsDefaultScale getXAxis() {
-		return xAxis;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getYAxis()
-	 */
-	@Override
-	public IsDefaultScale getYAxis() {
-		return yAxis;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getRAxis()
-	 */
-	@Override
-	public IsDefaultScale getRAxis() {
-		return rAxis;
+		return DefaultsBuilder.get().getScale();
 	}
 
 }
