@@ -35,6 +35,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	enum Property implements Key
 	{
+		// FIXME should add ACTIVE?
 		FULL_WIDTH("fullWidth"),
 		POSITION("position"),
 		WEIGHT("weight"),
@@ -44,7 +45,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		PADDING_RIGHT("paddingRight"),
 		PADDING_LEFT("paddingLeft"),
 		PADDING_BOTTOM("paddingBottom"),
-		MIN_SIZE("minSize");
+		MIN_SIZE("minSize"); // FIXME to be removed?
 
 		// name value of property
 		private final String value;

@@ -39,19 +39,19 @@ public final class LegendHitBoxItem extends SizeItem {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding left in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public int getLeft() {
+	public double getLeft() {
 		return getValue(Position.LEFT, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding top in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public int getTop() {
-		return getValue(Position.TOP, UndefinedValues.INTEGER);
+	public double getTop() {
+		return getValue(Position.TOP, UndefinedValues.DOUBLE);
 	}
 
 	/**

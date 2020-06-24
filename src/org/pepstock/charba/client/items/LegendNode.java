@@ -17,7 +17,7 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
@@ -42,6 +42,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 		LEGEND_ITEMS("legendItems"),
 		LEGEND_HIT_BOXES("legendHitBoxes"),
 		LINE_WIDTHS("lineWidths"),
+		COLUMN_HEIGHTS("columnHights"),
 		COLUMN_WIDTHS("columnWidths");
 
 		// name value of property
@@ -96,9 +97,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of line widths.
 	 */
-	public List<Integer> getLineWidths() {
+	public List<Double> getLineWidths() {
 		// gets array from native object
-		ArrayInteger array = getArrayValue(Property.LINE_WIDTHS);
+		ArrayDouble array = getArrayValue(Property.LINE_WIDTHS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -108,9 +109,21 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of columns widths.
 	 */
-	public List<Integer> getColumnWidths() {
+	public List<Double> getColumnWidths() {
 		// gets array from native object
-		ArrayInteger array = getArrayValue(Property.COLUMN_WIDTHS);
+		ArrayDouble array = getArrayValue(Property.COLUMN_WIDTHS);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
+	}
+	
+	/**
+	 * Returns the list of columns heights.
+	 * 
+	 * @return the list of columns heights.
+	 */
+	public List<Double> getColumnHeights() {
+		// gets array from native object
+		ArrayDouble array = getArrayValue(Property.COLUMN_HEIGHTS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}

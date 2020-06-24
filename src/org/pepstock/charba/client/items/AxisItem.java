@@ -34,8 +34,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 public final class AxisItem extends ScaleItem {
 
-	private final AxisMinSizeItem minSize;
-
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -43,8 +41,6 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public AxisItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// initializes the sub objects
-		minSize = new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.MIN_SIZE));
 	}
 
 	/**
@@ -318,15 +314,6 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(BaseBoxNodeItem.Property.POSITION, position);
-	}
-
-	/**
-	 * Returns the minimum size of axis
-	 * 
-	 * @return the minimum size of axis
-	 */
-	public AxisMinSizeItem getAxisMinSize() {
-		return minSize;
 	}
 
 }
