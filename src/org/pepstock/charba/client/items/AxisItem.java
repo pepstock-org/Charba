@@ -34,8 +34,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 public final class AxisItem extends ScaleItem {
 
-	private final AxisMarginsItem margins;
-
 	private final AxisMinSizeItem minSize;
 
 	/**
@@ -46,7 +44,6 @@ public final class AxisItem extends ScaleItem {
 	public AxisItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// initializes the sub objects
-		margins = new AxisMarginsItem(getValue(BaseBoxNodeItem.Property.MARGINS));
 		minSize = new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.MIN_SIZE));
 	}
 
@@ -321,15 +318,6 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(BaseBoxNodeItem.Property.POSITION, position);
-	}
-
-	/**
-	 * Returns the margins of axis
-	 * 
-	 * @return the margins of axis
-	 */
-	public AxisMarginsItem getAxisMargins() {
-		return margins;
 	}
 
 	/**

@@ -28,8 +28,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 public abstract class BaseBoxNodeItem extends BaseBoxItem {
 
-	private final MarginsItem margins;
-
 	private final SizeItem minSize;
 
 	/**
@@ -44,7 +42,6 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		HEIGHT("height"),
 		MAX_WIDTH("maxWidth"),
 		MAX_HEIGHT("maxHeight"),
-		MARGINS("margins"),
 		PADDING_TOP("paddingTop"),
 		PADDING_RIGHT("paddingRight"),
 		PADDING_LEFT("paddingLeft"),
@@ -83,17 +80,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	BaseBoxNodeItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// initializes the sub objects
-		margins = new MarginsItem(getValue(Property.MARGINS));
 		minSize = new SizeItem(getValue(Property.MIN_SIZE));
-	}
-
-	/**
-	 * Returns the margin item.
-	 * 
-	 * @return the margin item.
-	 */
-	public final MarginsItem getMargins() {
-		return margins;
 	}
 
 	/**

@@ -215,6 +215,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `Event.TOUCHEND` item
  * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
  * rename `CartesianAxisType` class into `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
+ * remove `MarginsItem` and `AxisMarginsItem` classes because they are not visible in CHART.JS anymore. 
  
 ### Features
 
