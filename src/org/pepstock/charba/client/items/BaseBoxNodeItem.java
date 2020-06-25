@@ -33,9 +33,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	enum Property implements Key
 	{
-		// FIXME should add ACTIVE?
-//		x: undefined
-//		y: undefined
+		ACTIVE("active"),
 		FULL_WIDTH("fullWidth"),
 		POSITION("position"),
 		WEIGHT("weight"),
@@ -79,6 +77,15 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		super(nativeObject);
 	}
 
+	/**
+	 * Returns <code>true</code> if the element is active.
+	 * 
+	 * @return <code>true</code> if the element is active. Default is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public final boolean isActive() {
+		return getValue(Property.ACTIVE, UndefinedValues.BOOLEAN);
+	}
+	
 	/**
 	 * Returns the full width in pixel.
 	 * 

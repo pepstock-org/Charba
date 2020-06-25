@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.ScaledOptions;
 
 /**
@@ -29,9 +29,10 @@ public final class OptionsNode extends ScaledOptions {
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
+	 * @param defaultValues default provider instance.
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public OptionsNode(NativeObject nativeObject) {
-		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
+	public OptionsNode(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
+		super(defaultValues, nativeObject);
 	}
 }

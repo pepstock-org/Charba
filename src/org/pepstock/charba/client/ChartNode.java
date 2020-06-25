@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.LegendNode;
 import org.pepstock.charba.client.items.OptionsNode;
@@ -58,8 +60,10 @@ public final class ChartNode {
 		this.chart = chart;
 		// sets if is initialized checking the CHART instance
 		initialized = chart != null;
+		// gets the defaults for options
+		IsDefaultScaledOptions defaultValues = initialized ? chart.getChart().getDefaultChartOptions() : DefaultsBuilder.get().getScaledOptions();
 		// creates all sub elements
-		options = new OptionsNode(initialized ? chart.getOptions() : null);
+		options = new OptionsNode(defaultValues, initialized ? chart.getOptions() : null);
 		legend = new LegendNode(initialized ? chart.getLegend() : null);
 		scales = new ScalesNode(initialized ? chart.getScales() : null);
 		chartArea = new ChartAreaNode(initialized ? chart.getChartArea() : null);
