@@ -28,14 +28,14 @@ import org.pepstock.charba.client.enums.Position;
  */
 public abstract class BaseBoxNodeItem extends BaseBoxItem {
 
-	private final SizeItem minSize;
-
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
 		// FIXME should add ACTIVE?
+//		x: undefined
+//		y: undefined
 		FULL_WIDTH("fullWidth"),
 		POSITION("position"),
 		WEIGHT("weight"),
@@ -44,8 +44,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		PADDING_TOP("paddingTop"),
 		PADDING_RIGHT("paddingRight"),
 		PADDING_LEFT("paddingLeft"),
-		PADDING_BOTTOM("paddingBottom"),
-		MIN_SIZE("minSize"); // FIXME to be removed?
+		PADDING_BOTTOM("paddingBottom");
 
 		// name value of property
 		private final String value;
@@ -78,17 +77,6 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	BaseBoxNodeItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// initializes the sub objects
-		minSize = new SizeItem(getValue(Property.MIN_SIZE));
-	}
-
-	/**
-	 * Returns the min size item.
-	 * 
-	 * @return the min size item.
-	 */
-	public final SizeItem getMinSize() {
-		return minSize;
 	}
 
 	/**

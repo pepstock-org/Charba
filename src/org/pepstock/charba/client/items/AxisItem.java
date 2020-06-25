@@ -17,12 +17,8 @@ package org.pepstock.charba.client.items;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
-import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -41,15 +37,6 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public AxisItem(NativeObject nativeObject) {
 		super(nativeObject);
-	}
-
-	/**
-	 * Sets if the axis must be hidden.
-	 * 
-	 * @param hidden <code>true</code> if the axis must be hidden, otherwise <code>false</code>.
-	 */
-	public void setHidden(boolean hidden) {
-		setValue(ScaleItem.Property.HIDDEN, hidden);
 	}
 
 	/**
@@ -206,16 +193,6 @@ public final class AxisItem extends ScaleItem {
 	}
 
 	/**
-	 * Sets the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
-	 * 
-	 * @param min the minimum value not zero of scale.
-	 */
-	public void setMinNotZero(double min) {
-		// sets values
-		setValue(ScaleItem.Property.MIN_NOT_ZERO, min);
-	}
-
-	/**
 	 * Sets an array of ticks
 	 * 
 	 * @param ticks the array of ticks
@@ -240,35 +217,6 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public void setEnd(int end) {
 		setValue(ScaleItem.Property.END, end);
-	}
-
-	/**
-	 * Sets an array of ticks
-	 * 
-	 * @param ticksAsNumbers the array of ticks
-	 */
-	public void setTicksAsNumbers(double... ticksAsNumbers) {
-		// gets a key reference
-		Key key = null;
-		// checks if the axis type is log
-		if (AxisType.LOGARITHMIC.equals(getType())) {
-			// sets key value
-			key = ScaleItem.Property.TICKS_VALUES;
-		} else {
-			// sets for all other linear axes
-			key = ScaleItem.Property.TICKS_AS_NUMBERS;
-		}
-		// sets value
-		setArrayValue(key, ArrayDouble.fromOrEmpty(ticksAsNumbers));
-	}
-
-	/**
-	 * Sets the index of line 0 of axis
-	 * 
-	 * @param zeroLineIndex the index of line 0 of axis
-	 */
-	public void setZeroLineIndex(int zeroLineIndex) {
-		setValue(ScaleItem.Property.ZERO_LINE_INDEX, zeroLineIndex);
 	}
 
 	/**

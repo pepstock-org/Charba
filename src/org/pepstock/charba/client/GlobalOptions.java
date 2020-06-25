@@ -16,6 +16,8 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.options.Font;
 import org.pepstock.charba.client.options.Options;
@@ -26,6 +28,9 @@ import org.pepstock.charba.client.options.Options;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
+	
+	// instance to store the global options as default
+	private final IsDefaultScaledOptions defaultOptions;
 
 	/**
 	 * Creates the object with the native object which maps the java script object chart.defaults.global.
@@ -35,6 +40,8 @@ public final class GlobalOptions extends Options {
 	GlobalOptions(NativeObject nativeObject) {
 		// uses the CHART.JS default options as default one
 		super(DefaultsBuilder.get().getOptions(), nativeObject);
+		// stores default
+		this.defaultOptions = new DefaultGlobalOptions(this);
 	}
 
 	/**
@@ -45,6 +52,15 @@ public final class GlobalOptions extends Options {
 	 */
 	public Font getFont() {
 		return super.getDefaultsFont();
+	}
+	
+	/**
+	 * Returns the global options as default scaled options.
+	 * 
+	 * @return the global options as default scaled options
+	 */
+	public IsDefaultScaledOptions asDefault() {
+		return defaultOptions;
 	}
 
 }

@@ -108,9 +108,10 @@ public final class Merger {
 		// checks if envelop is consistent
 		if (envelop != null) {
 			// gets global and chart type options merged
-			NativeObject defaults = get(chart.getType());
+			NativeObject defaults = get(chart.getType(), Defaults.get().getOptions(chart.getType()));
 			// clones native object to avoid to changes the sources
 			NativeObject chartOptions = Helpers.get().clone(options.getNativeObject());
+			// FIXME check whole creation
 			// merges the current chart options with the global and chart type ones
 			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
 			// loads whole options into envelop
@@ -134,7 +135,30 @@ public final class Merger {
 		// checks if envelop is consistent
 		if (envelop != null) {
 			// gets global and chart type options merged
-			NativeObject defaults = get(type);
+			NativeObject defaults = get(type, Defaults.get().getOptions(type));
+			// loads whole options into envelop
+			envelop.setContent(defaults);
+		}
+	}
+	
+	/**
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global).<br>
+	 * The chain of priority is:<br>
+	 * <ul>
+	 * <li>chart default options (by chart.defaults[type])
+	 * <li>default scale options (by chart.defaults.scale)
+	 * <li>global options (by chart.defaults.global)
+	 * </ul>
+	 * 
+	 * @param type chart type
+	 * @param options temporary chart options in order to get a default for the chart options
+	 * @param envelop the envelop for options as native options
+	 */
+	public void load(Type type, Envelop<ChartOptions> options, Envelop<NativeObject> envelop) {
+		// checks if envelop is consistent
+		if (envelop != null && options != null && options.getContent() != null) {
+			// gets global and chart type options merged
+			NativeObject defaults = get(type, options.getContent());
 			// loads whole options into envelop
 			envelop.setContent(defaults);
 		}
@@ -150,14 +174,12 @@ public final class Merger {
 	 * </ul>
 	 * 
 	 * @param type chart type
+	 * @param base default for the chart options instance
 	 * @return a native object to be mapped with all defaults for that chart type.
 	 */
-	private NativeObject get(Type type) {
+	private NativeObject get(Type type, ChartOptions base) {
 		// checks if argument is consistent
 		Type.checkIfValid(type);
-		// gets chart.defaults[type]
-		ChartOptions base = Defaults.get().getOptions(type);
-
 		// gets chart.defaults.scale
 		GlobalScale scale = Defaults.get().getScale();
 		// gets chart.defaults.global
@@ -174,7 +196,8 @@ public final class Merger {
 		}
 		// merges chart options (maybe already updated by scales)
 		// and the global ones
-		return mergeNativeObjects(chartOptions, globalOptions);
+		NativeObject r = mergeNativeObjects(chartOptions, globalOptions);
+		return r;
 	}
 
 	/**

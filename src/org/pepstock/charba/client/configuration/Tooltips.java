@@ -32,7 +32,6 @@ import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -186,9 +185,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		customCallbackProxy.setCallback((context, model) -> {
 			// checks if callback is consistent
 			if (customCallback != null) {
-				// FIXME
-				Window.getConsole().log("context", context);
-				Window.getConsole().log("model", model);
 				// calls callback
 				customCallback.onCustom(getChart(), new TooltipModel(model));
 			}

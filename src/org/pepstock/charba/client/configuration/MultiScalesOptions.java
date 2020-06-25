@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
-/**
+/** FIXME change name
  * Configuration of chart with multiple scales.
  * 
  * @author Andrea "Stock" Stocchero

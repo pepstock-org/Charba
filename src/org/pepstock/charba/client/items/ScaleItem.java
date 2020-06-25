@@ -15,22 +15,27 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
 import org.pepstock.charba.client.configuration.RadialAxis;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Wraps the scale item of CHART JS chart.<br>
@@ -40,9 +45,7 @@ import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
  */
 public class ScaleItem extends BaseBoxNodeItem {
 
-	private final ScaleLongestTextCacheItem longestTextCache;
-
-	private final ScaleTickItemFactory itemFactory;
+	private static final ScaleTickItemFactory ITEM_FACTORY = new ScaleTickItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -50,27 +53,18 @@ public class ScaleItem extends BaseBoxNodeItem {
 	enum Property implements Key
 	{
 		ID("id"),
-		HIDDEN("hidden"),
-		LONGEST_TEXT_CACHE("longestTextCache"),
-		MIN_INDEX("minIndex"),
-		MAX_INDEX("maxIndex"),
-		MIN_NOT_ZERO("minNotZero"),
+		AXIS("axis"),
 		MIN("min"),
 		MAX("max"),
 		TICKS("ticks"),
 		LABEL_ROTATION("labelRotation"),
-		LONGEST_LABEL_WIDTH("longestLabelWidth"),
 		START("start"),
 		END("end"),
-		TICKS_AS_NUMBERS("ticksAsNumbers"),
-		TICKS_VALUES("tickValues"),
-		ZERO_LINE_INDEX("zeroLineIndex"),
 		X_CENTER("xCenter"),
 		Y_CENTER("yCenter"),
 		DRAWING_AREA("drawingArea"),
 		POINT_LABELS("pointLabels"),
 		TYPE("type"),
-		INTERNAL_TICKS("_ticks"),
 		// override the key of parent
 		POSITION("position"),
 		OPTIONS("options"),
@@ -101,6 +95,23 @@ public class ScaleItem extends BaseBoxNodeItem {
 
 	}
 
+	// reference to scale id
+	private IsScaleId scaleId;
+
+	/**
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param scaleId this is the scale id.
+	 * @param nativeObject native java script object which contains all properties.
+	 */
+	ScaleItem(IsScaleId scaleId, NativeObject nativeObject) {
+		super(nativeObject);
+		// checks scale id
+		IsScaleId.checkIfValid(scaleId);
+		// stores scale id
+		this.scaleId = scaleId;
+	}
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -108,29 +119,25 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public ScaleItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// initializes sub objects
-		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.LONGEST_TEXT_CACHE));
-		// creates the factories
-		// FIXME must be static?
-		itemFactory = new ScaleTickItemFactory();
-	}
-
-	/**
-	 * Returns the longest text cache item.
-	 * 
-	 * @return the longest text cache item.
-	 */
-	public final ScaleLongestTextCacheItem getLongestTextCache() {
-		return longestTextCache;
+		// stores scale id
+		this.scaleId = null;
 	}
 
 	/**
 	 * Returns the id of scale
 	 * 
-	 * @return the id of scale. Default is {@link UndefinedValues#STRING}.
+	 * @return the id of scale.
 	 */
-	public final String getId() {
-		return getValue(Property.ID, UndefinedValues.STRING);
+	public final IsScaleId getId() {
+		// checks if scale has been previously set
+		if (scaleId == null) {
+			// gets the value
+			String storedId = getValue(Property.ID, getType().getDefaultScaleId().value());
+			// stores the scale id
+			scaleId = IsScaleId.create(storedId);
+		}
+		// returns the stored scale id
+		return scaleId;
 	}
 
 	/**
@@ -139,6 +146,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the unique id of scale. Default or if does not exist is Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getCharbaId() {
+		// FIXME to be checked
 		// the unique id is under options object of scale item
 		// checks if there is
 		if (has(Property.OPTIONS)) {
@@ -155,39 +163,22 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
+	 * Which kind of axis this is.<br>
+	 * Possible values are: ''x', 'y' or 'r'.
+	 * 
+	 * @return the kind of axis.
+	 */
+	public final AxisKind getAxis() {
+		return getValue(Property.AXIS, AxisKind.values(), getType().getDefaultScaleId().getAxisKind());
+	}
+
+	/**
 	 * Returns the type of scale
 	 * 
 	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#CATEGORY}.
 	 */
 	public final AxisType getType() {
 		return getValue(Property.TYPE, AxisType.values(), AxisType.CATEGORY);
-	}
-
-	/**
-	 * Returns true if this item represents a hidden scale.
-	 * 
-	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link UndefinedValues#BOOLEAN}.
-	 */
-	public final boolean isHidden() {
-		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
-	}
-
-	/**
-	 * Returns the max index of scale.
-	 * 
-	 * @return the max index of scale. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getMaxIndex() {
-		return getValue(Property.MAX_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the minimum index of scale.
-	 * 
-	 * @return the minimum index of scale. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getMinIndex() {
-		return getValue(Property.MIN_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -206,15 +197,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final double getMin() {
 		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
-	 * 
-	 * @return the minimum value not zero of scale. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getMinNotZero() {
-		return getValue(Property.MIN_NOT_ZERO, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -272,23 +254,11 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of ticks.
 	 */
-	public final List<String> getTicks() {
+	public final List<ScaleTickItem> getTicks() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.TICKS);
+		ArrayObject array = getArrayValue(Property.TICKS);
 		// returns list
-		return ArrayListHelper.unmodifiableList(array);
-	}
-
-	/**
-	 * Returns the list of tick items.
-	 * 
-	 * @return the list of tick items.
-	 */
-	public final List<ScaleTickItem> getTickItems() {
-		// gets array from native object
-		ArrayObject array = getArrayValue(Property.INTERNAL_TICKS);
-		// returns list
-		return ArrayListHelper.unmodifiableList(array, itemFactory);
+		return ArrayListHelper.unmodifiableList(array, ITEM_FACTORY);
 	}
 
 	/**
@@ -298,15 +268,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final double getLabelRotation() {
 		return getValue(Property.LABEL_ROTATION, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the longest width of label of ticks.
-	 * 
-	 * @return the longest width of label of ticks.Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getLongestLabelWidth() {
-		return getValue(Property.LONGEST_LABEL_WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -325,37 +286,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final double getEnd() {
 		return getValue(Property.END, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the list of ticks as number.
-	 * 
-	 * @return the list of ticks as number.
-	 */
-	public final List<Double> getTicksAsNumber() {
-		// gets a key reference
-		Key key = null;
-		// checks if the axis type is log
-		if (AxisType.LOGARITHMIC.equals(getType())) {
-			// sets key value
-			key = Property.TICKS_VALUES;
-		} else {
-			// sets for all other linear axes
-			key = Property.TICKS_AS_NUMBERS;
-		}
-		// array reference to return
-		ArrayDouble array = getArrayValue(key);
-		// returns array as list
-		return ArrayListHelper.unmodifiableList(array);
-	}
-
-	/**
-	 * Returns the zero line index of scale.
-	 * 
-	 * @return the zero line index of scale. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getZeroLineIndex() {
-		return getValue(Property.ZERO_LINE_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -392,14 +322,54 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final List<String> getPointLabels() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.POINT_LABELS);
+		ArrayMixedObject array = getArrayValue(Property.POINT_LABELS);
+		// checks if array is consistent
+		if (array != null && !array.isEmpty()) {
+			// creates list to return
+			List<String> result = new LinkedList<>();
+			// scans all array
+			for (int i = 0; i < array.length(); i++) {
+				result.add(getPointLabelAsString(array.get(i)));
+			}
+			// returns the result
+			return Collections.unmodifiableList(result);
+		}
 		// returns the list
-		return ArrayListHelper.unmodifiableList(array);
+		return Collections.emptyList();
 	}
 
 	/**
-	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item, not mapped into
-	 * {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
+	 * Returns a label at a specific index.<br>
+	 * If at index there is multi-line label, returns labels with {@link Constants#LINE_SEPARATOR} as separator.
+	 * 
+	 * @param element element of the array
+	 * @return a label of an element
+	 */
+	private String getPointLabelAsString(Object element) {
+		if (Array.isArray(element)) {
+			ArrayString internalArray = (ArrayString) element;
+			// creates an string builder
+			StringBuilder result = new StringBuilder();
+			// scans all values
+			for (int i = 0; i < internalArray.length(); i++) {
+				// adds separator after 1 element
+				if (i > 0) {
+					result.append(Constants.LINE_SEPARATOR);
+				}
+				// adds to builder
+				result.append(internalArray.get(i));
+			}
+			// returns string
+			return result.toString();
+		}
+		// returns string
+		// string can not be null, because checked during loading
+		return (String) element;
+	}
+
+	/**
+	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item, not mapped into {@link Position} enumeration, like for
+	 * {@link RadialAxis}.
 	 * 
 	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
 	 */

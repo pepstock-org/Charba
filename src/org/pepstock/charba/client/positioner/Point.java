@@ -79,7 +79,7 @@ public final class Point extends NativeObjectContainer {
 	 * 
 	 * @param x the X coordinate of the point.
 	 */
-	public void setX(int x) {
+	public void setX(double x) {
 		setValue(Property.X, x);
 	}
 
@@ -88,8 +88,8 @@ public final class Point extends NativeObjectContainer {
 	 * 
 	 * @return the X coordinate of the point.
 	 */
-	public int getX() {
-		return getValue(Property.X, UndefinedValues.INTEGER);
+	public double getX() {
+		return getValue(Property.X, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public final class Point extends NativeObjectContainer {
 	 * 
 	 * @param y the Y coordinate of the point.
 	 */
-	public void setY(int y) {
+	public void setY(double y) {
 		setValue(Property.Y, y);
 	}
 
@@ -106,8 +106,8 @@ public final class Point extends NativeObjectContainer {
 	 * 
 	 * @return the Y coordinate of the point.
 	 */
-	public int getY() {
-		return getValue(Property.Y, UndefinedValues.INTEGER);
+	public double getY() {
+		return getValue(Property.Y, UndefinedValues.DOUBLE);
 	}
 
 	/**

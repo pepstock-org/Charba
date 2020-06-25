@@ -282,6 +282,7 @@ public final class ColorSchemes extends AbstractPlugin {
 			// if here is at dataset level
 			// every dataset has got own color
 			// sets background colors, applying the transparency
+			
 			hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
 			// checks if border has been requested
 			if (ColorSchemesUtil.get().getMaxBorderWidth(hovingDataset) > 0) {

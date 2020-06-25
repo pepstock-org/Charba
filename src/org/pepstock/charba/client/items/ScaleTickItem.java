@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -27,15 +28,14 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScaleTickItem extends AbstractTickItem {
+public final class ScaleTickItem extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		// FIXME check parameters
-		INDEX("_index"),
+		MAJOR("major"),
 		LABEL("label"),
 		VALUE("value");
 
@@ -73,15 +73,6 @@ public final class ScaleTickItem extends AbstractTickItem {
 	}
 
 	/**
-	 * Returns the index of the tick.
-	 * 
-	 * @return the index of the tick or {@link UndefinedValues#INTEGER} if missing.
-	 */
-	public final int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
 	 * Returns the label of the tick.
 	 * 
 	 * @return the label of the tick or {@link UndefinedValues#STRING} if missing.
@@ -115,6 +106,15 @@ public final class ScaleTickItem extends AbstractTickItem {
 	 */
 	public Date getValueAsDate() {
 		return getValue(Property.VALUE, (Date) null);
+	}
+	
+	/**
+	 * Returns <code>true</code> if is the major tick, otherwise {@link UndefinedValues#BOOLEAN}.
+	 * 
+	 * @return <code>true</code> if is the major tick, otherwise {@link UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isMajor() {
+		return getValue(Property.MAJOR, UndefinedValues.BOOLEAN);
 	}
 
 	/**

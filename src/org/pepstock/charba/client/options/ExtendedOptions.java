@@ -101,6 +101,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
 	 */
+	// FIXME check if still used
 	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(this, property, proxy);
 	}

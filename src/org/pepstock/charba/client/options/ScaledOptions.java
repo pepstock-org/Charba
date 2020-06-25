@@ -84,35 +84,6 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 		// scale = defaultScale;
 	}
 
-	// /**
-	// * Sets a scale instance for options.
-	// *
-	// * @param scale the scale to set
-	// */
-	// public final void setScale(Scale scale) {
-	// // checks if scale is consistent
-	// if (scale != null) {
-	// this.scale = scale;
-	// // set values
-	// setValue(Property.SCALE, this.scale);
-	// } else {
-	// // remove current configuration if exists
-	// removeIfExists(Property.SCALE);
-	// // resets the current scale with the default one
-	// this.scale = defaultScale;
-	// }
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScale()
-	// */
-	// @Override
-	// public Scale getScale() {
-	// return scale;
-	// }
-
 	/*
 	 * (non-Javadoc)
 	 * 

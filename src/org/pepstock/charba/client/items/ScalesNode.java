@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Wrapper of scales node of CHART.JS.<br>
@@ -60,7 +61,7 @@ public final class ScalesNode extends NativeObjectContainer {
 			// scans all keys
 			for (Key key : keys) {
 				// loads scale item
-				result.put(key.value(), new ScaleItem(getValue(key)));
+				result.put(key.value(), new ScaleItem(IsScaleId.create(key.value()), getValue(key)));
 			}
 		}
 		// returns a unmodifiable map
@@ -81,7 +82,7 @@ public final class ScalesNode extends NativeObjectContainer {
 			// scans all keys
 			for (Key key : keys) {
 				// loads scale item
-				ScaleItem scaleItem = new ScaleItem(getValue(key));
+				ScaleItem scaleItem = new ScaleItem(IsScaleId.create(key.value()), getValue(key));
 				// checks if event is inside
 				if (scaleItem.isInside(event)) {
 					// returns scale item

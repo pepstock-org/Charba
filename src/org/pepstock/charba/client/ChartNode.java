@@ -175,69 +175,6 @@ public final class ChartNode {
 		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
-	// /**
-	// * Returns if the chart is animating or not.
-	// *
-	// * @return if the chart is animating or not. Default is {@link UndefinedValues#BOOLEAN}.
-	// */
-	// public boolean isAnimating() {
-	// return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;
-	// }
-
-	// /**
-	// * Returns the border width value.
-	// *
-	// * @return the border width value. Default is {@link UndefinedValues#INTEGER}.
-	// */
-	// public int getBorderWidth() {
-	// return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	// }
-	//
-	// /**
-	// * Returns the outer radius value.
-	// *
-	// * @return the outer radius value. Default is {@link UndefinedValues#DOUBLE}.
-	// */
-	// public double getOuterRadius() {
-	// return initialized ? check(chart.getOuterRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
-	// }
-	//
-	// /**
-	// * Returns the inner radius value.
-	// *
-	// * @return the inner radius value. Default is {@link UndefinedValues#DOUBLE}.
-	// */
-	// public double getInnerRadius() {
-	// return initialized ? check(chart.getInnerRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
-	// }
-	//
-	// /**
-	// * Returns the radius length value.
-	// *
-	// * @return the radius length value. Default is {@link UndefinedValues#DOUBLE}.
-	// */
-	// public double getRadiusLength() {
-	// return initialized ? check(chart.getRadiusLength(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
-	// }
-
-	// /**
-	// * Returns the offset X value.
-	// *
-	// * @return the offset X value. Default is {@link UndefinedValues#INTEGER}.
-	// */
-	// public int getOffsetX() {
-	// return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	// }
-
-	// /**
-	// * Returns the offset Y value.
-	// *
-	// * @return the offset Y value. Default is {@link UndefinedValues#INTEGER}.
-	// */
-	// public int getOffsetY() {
-	// return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
-	// }
-
 	/**
 	 * Returns the string JSON representation of the object.
 	 * 

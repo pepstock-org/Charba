@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
-import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.events.ChartClickEvent;
@@ -41,7 +41,6 @@ import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
@@ -220,23 +219,6 @@ public final class Defaults {
 		}
 		// returns the existing options
 		return chartOptions.get(type.value());
-	}
-
-	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
-	 * 
-	 * @param chart chart instance to use to get default HTML legend
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
-	 */
-	public String generateLegend(IsChart chart) {
-		// checks if argument is consistent
-		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
-			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLegend(Charts.getNative(chart), getChartOptions(chart.getType()));
-		}
-		// if here, the chart is not abstract therefore
-		// we don't know which method has got to get default hTML legend
-		return UndefinedValues.STRING;
 	}
 
 	/**
@@ -457,17 +439,37 @@ public final class Defaults {
 		ChartOptions chart(Type type) {
 			// gets global options
 			GlobalOptions global = Defaults.get().getGlobal();
+			// checks if has got scales
+			if (!ScaleType.NONE.equals(type.scaleType())) {
+				// creates an envelop for options
+				Envelop<ChartOptions> envelopOptions = new Envelop<>();
+				// stores a temporary chart options
+				envelopOptions.setContent(createChartOptions(type, DefaultsBuilder.get().getScaledOptions()));
+				// creates an envelop for native object of options
+				Envelop<NativeObject> envelop = new Envelop<>();
+				// load the envelop
+				Merger.get().load(type, envelopOptions, envelop);
+				// creates defaults
+				ChartOptions defaultOptions = new ChartOptions(type, envelop.getContent(), global.asDefault());
+				// returns a default option with all configuration
+				return createChartOptions(type, defaultOptions);
+			} else {
+				// if here, is not a scalesd chart
+				return createChartOptions(type, global.asDefault());
+			}
+		}
+		
+		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultsOptions) {
 			// checks if the property is present
 			if (ObjectType.OBJECT.equals(type(type))) {
 				// creates a chart options using global a default scaled as default
-				return new ChartOptions(type, getValue(type), new DefaultGlobalOptions(global));
+				return new ChartOptions(type, getValue(type), defaultsOptions);
 			} else {
 				// if here, the chart type is not defined (could be a controller)
 				// therefore returns an empty options
-				return new ChartOptions(type, null, new DefaultGlobalOptions(global));
+				return new ChartOptions(type, null, defaultsOptions);
 			}
 		}
-
 	}
 
 	/**
@@ -487,7 +489,8 @@ public final class Defaults {
 		 * @param nativeObject native object to store properties.
 		 */
 		InternalDefaultScale(AxisType type, NativeObject nativeObject) {
-			super(type, DefaultsBuilder.get().getScale(), nativeObject);
+			// uses the global scale as default
+			super(type, getScale(), nativeObject);
 		}
 
 		/**

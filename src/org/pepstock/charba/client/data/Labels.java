@@ -176,7 +176,9 @@ public final class Labels {
 	}
 
 	/**
-	 * Returns a label at a specific index. If at index there is multi-line label, returns labels with '\n' as separator. If the index is out of bounds, throws an exception.
+	 * Returns a label at a specific index.<br>
+	 * If at index there is multi-line label, returns labels with {@link Constants#LINE_SEPARATOR} as separator.<br>
+	 * If the index is out of bounds, throws an exception.
 	 * 
 	 * @param index index of label
 	 * @return a label at a specific index
@@ -205,7 +207,8 @@ public final class Labels {
 	}
 
 	/**
-	 * Returns a multi line label at a specific index. An unmodifiable list of strings is returned. If the index is out of bounds, throws an exception.
+	 * Returns a multi line label at a specific index. An unmodifiable list of strings is returned.<br>
+	 * If the index is out of bounds, throws an exception.
 	 * 
 	 * @param index index of label
 	 * @return a unmodifiable list of strings
@@ -239,7 +242,8 @@ public final class Labels {
 	}
 
 	/**
-	 * Checks if the index is in the right range. If the index is out of bounds, throws an exception.
+	 * Checks if the index is in the right range.<br>
+	 * If the index is out of bounds, throws an exception.
 	 * 
 	 * @param index index to be checked
 	 */
