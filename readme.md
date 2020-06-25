@@ -241,6 +241,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `START` and `END` items to `BorderSkipped` enumeration
    * add `width` and `height` options into `ChartAreaNode` class
    * add `onReset` method to `Plugin` interface in order to enable to catch when a chart is resetting.
+   * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

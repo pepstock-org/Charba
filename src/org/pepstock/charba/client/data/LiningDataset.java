@@ -51,6 +51,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -1635,23 +1636,50 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
+	 * Sets if lines will be drawn between points with no or null data.<br>
+	 * If <code>false</code>, points with {@link Double#NaN} data will create a break in the line.
 	 * 
-	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
+	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data.<br>
+	 *            If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
 	public void setSpanGaps(boolean spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
-	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
+	 * Sets the value of the data if lines will be drawn between points with no or null data.
 	 * 
-	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
+	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
+	 */
+	public void setSpanGaps(double spanGaps) {
+		setValue(Property.SPAN_GAPS, spanGaps);
+	}
+
+	/**
+	 * Returns if lines will be drawn between points with no or null data.<br>
+	 * If <code>false</code>, points with {@link Double#NaN} data will create a break in the line.
+	 * 
+	 * @return <code>true</code> if lines will be drawn between points with no or null data.<br>
+	 *         If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
 	public boolean isSpanGaps() {
+		// checks the type of stored value
+		if (ObjectType.NUMBER.equals(type(Property.SPAN_GAPS))) {
+			// if the there is a number, span gaps is activated
+			return true;
+		}
 		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
 
+	/**
+	 * Returns the value of the data if lines will be drawn between points with no or null data.
+	 * 
+	 * @return the value of the data if lines will be drawn between points with no or null data
+	 */
+	public double getSpanGaps() {
+		return getValue(Property.SPAN_GAPS, UndefinedValues.DOUBLE);
+	}
+	
 	/**
 	 * Returns the point background color callback, if set, otherwise <code>null</code>.
 	 * 
