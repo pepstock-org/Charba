@@ -182,9 +182,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(new ScaleIdEnvelop(id), type, getDefaultScale(id, kind)));
-		// stores the axis type, overriding the default
-		setAxis(kind);
+		setConfiguration(new ExtendedScale(new ScaleIdEnvelop(id), type, kind, getDefaultScale(id, kind)));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -228,16 +226,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	public final AxisType getType() {
 		return getScale().getType();
-	}
-
-	/**
-	 * Which kind of axis this is.<br>
-	 * Possible values are: 'x', 'y' or 'r'. s *
-	 * 
-	 * @param kind type of axis
-	 */
-	public final void setAxis(AxisKind kind) {
-		getScale().setAxis(kind);
 	}
 
 	/**

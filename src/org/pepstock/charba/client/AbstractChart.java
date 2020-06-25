@@ -409,6 +409,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 			Envelop<NativeObject> envelop = new Envelop<>();
 			// load the envelop
 			getOptions().loadOptions(envelop);
+			// FIXME checks
 			// creates a chart options with complete configuration of chart
 			ExtendedOptions chartOptions = new ExtendedOptions(this, defaultChartOptions, envelop);
 			// returns a default option with all configuration

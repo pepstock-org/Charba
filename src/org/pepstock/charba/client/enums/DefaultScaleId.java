@@ -17,6 +17,7 @@ package org.pepstock.charba.client.enums;
 
 import java.util.Locale;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.IsScaleId;
 
@@ -43,6 +44,16 @@ public enum DefaultScaleId implements IsScaleId
 	 * Default scale id for chart with a single axis.
 	 */
 	UNKNOWN("_charbaunknown", null);
+	
+	/**
+	 * Default scale id for X scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
+	 */
+	public static final String DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS = "_index_"; 
+
+	/**
+	 * Default scale id for Y scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
+	 */
+	public static final String DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS = "_value_"; 
 
 	// name value of property
 	private final String value;
@@ -160,6 +171,14 @@ public enum DefaultScaleId implements IsScaleId
 					return defaultScaleId.getAxisKind();
 				}
 			}
+		}
+		// further check for default of bar/line default chart options.
+		if (DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS.equals(scaleId)) {
+			// returns x
+			return AxisKind.X;
+		} else 	if (DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS.equals(scaleId)) {
+			// returns x
+			return AxisKind.Y;
 		}
 		// checks if default value is consistent
 		// and returns it

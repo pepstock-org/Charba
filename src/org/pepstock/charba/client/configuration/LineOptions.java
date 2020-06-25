@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineOptions extends MultiScalesOptions implements HasLineOptions {
+public class LineOptions extends ScalesOptions implements HasLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -42,7 +42,7 @@ public class LineOptions extends MultiScalesOptions implements HasLineOptions {
 	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
 	 */
 	@Override
-	public final MultiScalesOptions getOptions() {
+	public final ScalesOptions getOptions() {
 		return this;
 	}
 

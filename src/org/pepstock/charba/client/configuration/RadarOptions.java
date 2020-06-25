@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarOptions extends MultiScalesOptions implements HasLineOptions {
+public class RadarOptions extends ScalesOptions implements HasLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.

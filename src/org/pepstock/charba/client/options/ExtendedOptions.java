@@ -24,7 +24,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
- * Options used internally inside the chart configuration. This is the root element of configuration.<br>
+ * Options used internally inside the chart configuration.<br>
+ * This is the root element of configuration.<br>
  * Extends the normal options (with scales) with all methods to add callbacks and events.<br>
  * It provides also the method to set the CHARBA id when new chart is created.
  * 
@@ -35,6 +36,8 @@ public final class ExtendedOptions extends ScaledOptions {
 
 	// chart instance of the options
 	private final IsChart chart;
+	// extends scales instances
+	private final ExtendedScales scales;
 
 	/**
 	 * Creates an options with default provider. The native object is created empty.
@@ -59,6 +62,8 @@ public final class ExtendedOptions extends ScaledOptions {
 		IsChart.checkIfValid(chart);
 		// stores chart instance
 		this.chart = chart;
+		// gets scales sub elements
+		scales = new ExtendedScales(this, ScaledOptions.Property.SCALES, defaultValues.getScales(), getValue(ScaledOptions.Property.SCALES));
 	}
 
 	/**
@@ -83,6 +88,16 @@ public final class ExtendedOptions extends ScaledOptions {
 			throw new IllegalArgumentException("CHARBA id argument is null");
 		}
 		setValue(Id.CHARBA_ID, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.ScaledOptions#getScales()
+	 */
+	@Override
+	public ExtendedScales getScales() {
+		return scales;
 	}
 
 	/**

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class TimeSeriesOptions extends MultiScalesOptions {
+abstract class TimeSeriesOptions extends ScalesOptions {
 
 	private final TimeSeriesScales scales;
 

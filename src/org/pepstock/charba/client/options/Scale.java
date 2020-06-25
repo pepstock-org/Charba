@@ -81,72 +81,13 @@ public class Scale extends AbstractScale {
 	 * @param type scale type
 	 * @param defaultValues default provider instance.
 	 */
-	public Scale(AxisType type, IsDefaultScale defaultValues) {
-		this(type, Key.checkAndGetIfValid(type).getDefaultScaleId(), defaultValues);
-	}
-
-	/**
-	 * Creates the object only with default provider and type.<br>
-	 * This is used when the scale is the root element.<br>
-	 * New native java script object is created and it's empty.
-	 * 
-	 * @param type scale type
-	 * @param id The ID is used to link datasets and scale axes together
-	 * @param defaultValues default provider instance.
-	 */
-	public Scale(AxisType type, DefaultScaleId id, IsDefaultScale defaultValues) {
-		this(type, id, Key.checkAndGetIfValid(id).getAxisKind(), defaultValues);
-	}
-
-	/**
-	 * Creates the object only with default provider and type.<br>
-	 * This is used when the scale is the root element.<br>
-	 * New native java script object is created and it's empty.
-	 * 
-	 * @param type scale type
-	 * @param id The ID is used to link datasets and scale axes together
-	 * @param kind kind of axis
-	 * @param defaultValues default provider instance.
-	 */
-	public Scale(AxisType type, DefaultScaleId id, AxisKind kind, IsDefaultScale defaultValues) {
+	Scale(AxisType type, IsDefaultScale defaultValues) {
 		// no parent, child key and native object
 		this(defaultValues, null);
 		// checks axis type
 		Key.checkIfValid(type);
-		// checks scale id
-		Key.checkIfValid(id);
-		// checks axis kind
-		Key.checkIfValid(kind);
-		// checks if radial linear
-		if (AxisType.RADIAL_LINEAR.equals(type)) {
-			// if radial linear,
-			// checks if is R
-			if (!DefaultScaleId.R.equals(id)) {
-				// if not, exception
-				throw new IllegalArgumentException("The scale id '" + id.value() + "' is invalid for radial linear axis. Must be '" + DefaultScaleId.R + "'");
-			} else if (!AxisKind.R.equals(kind)) {
-				// checks if axis kind is R
-				// if not, exception
-				throw new IllegalArgumentException("The area kind '" + kind.value() + "' is invalid for radial linear axis. Must be '" + AxisKind.R + "'");
-			}
-		} else {
-			// if here, it a cartesian axis
-			// checks if is R
-			if (DefaultScaleId.R.equals(id)) {
-				// if is, exception
-				throw new IllegalArgumentException("The scale id '" + id.value() + "' is invalid for cartesian axis");
-			} else if (AxisKind.R.equals(kind)) {
-				// checks if axis kind is R
-				// if is, exception
-				throw new IllegalArgumentException("The area kind '" + kind.value() + "' is invalid for cartesian axis");
-			}
-		}
 		// sets the type
 		setType(type);
-		// sets the ID
-		setId(id);
-		// sets axis kind
-		setAxis(kind);
 	}
 
 	/**
@@ -183,7 +124,7 @@ public class Scale extends AbstractScale {
 	 * 
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
-	void setId(IsScaleId id) {
+	final void setId(IsScaleId id) {
 		// checks if key is consistent
 		ScaleIdChecker.check(id);
 		// if the scale id is UNKNWON (set by Charba)
@@ -241,7 +182,7 @@ public class Scale extends AbstractScale {
 	 * 
 	 * @param kind kind of axis
 	 */
-	public final void setAxis(AxisKind kind) {
+	final void setAxis(AxisKind kind) {
 		// checks if axis type is radial
 		// gets axis type
 		AxisType type = getType();

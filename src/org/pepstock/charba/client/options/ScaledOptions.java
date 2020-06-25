@@ -31,7 +31,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		SCALES("scales");
 
@@ -78,10 +78,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	protected ScaledOptions(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets scales sub elements
-		// defaultScale = new Scale(this, Property.SCALE, defaultValues.getScale(), getValue(Property.SCALE));
 		scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
-		// sets the default as current one
-		// scale = defaultScale;
 	}
 
 	/*

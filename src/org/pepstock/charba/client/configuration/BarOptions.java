@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarOptions extends MultiScalesOptions {
+public class BarOptions extends ScalesOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.

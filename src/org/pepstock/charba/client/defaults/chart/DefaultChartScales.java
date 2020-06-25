@@ -61,26 +61,66 @@ public final class DefaultChartScales implements IsDefaultScales {
 				// gets the stored axis as Y
 				return new DefaultChartScale(scales.getAxis(scaleId));
 			} else {
-				// scans all defaults ids
-				for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
-					// checks if default scale id matches with argument
-					if (defScaleId.is(scaleId) && scales.hasAxis(defScaleId)) {
-						// gets the stored axis as Y
-						return new DefaultChartScale(scales.getAxis(defScaleId));
-					}
+				// instance of result
+				DefaultChartScale result = searchByDefaultScaleId(scaleId, kind);
+				// checks if result is consistent
+				if (result != null) {
+					return result;
 				}
-				// checks consistency of kind
-				if (Key.isValid(kind)) {
-					DefaultScaleId defScaleId = DefaultScaleId.getByAxisKind(kind, DefaultScaleId.UNKNOWN);
-					if (!DefaultScaleId.UNKNOWN.equals(defScaleId) && scales.hasAxis(defScaleId)) {
-						// gets the stored axis as Y
-						return new DefaultChartScale(scales.getAxis(defScaleId));
-					}
-				}
-				// FIXME _index_ and _value_ scale ids are missing
 			}
 		}
+		// if here, the scale is is not consistent
+		// or the further searches by default scale id and axis kind
+		// do not find anything
+		// the return the default
 		return DefaultsBuilder.get().getScale();
+	}
+	
+	/**
+	 * Uses the default scale id to retrieve the scale by id.
+	 * 
+	 * @param scaleId scale id to use to retrieve the scale
+	 * @param kind axis kind to use to retrieve the scale
+	 * @return the default scale or <code>null</code> if not found
+	 */
+	private DefaultChartScale searchByDefaultScaleId(IsScaleId scaleId, AxisKind kind) {
+		// scans all defaults ids
+		for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
+			// checks if default scale id matches with argument
+			if (defScaleId.is(scaleId) && scales.hasAxis(defScaleId)) {
+				// gets the stored axis as Y
+				return new DefaultChartScale(scales.getAxis(defScaleId));
+			}
+		}
+		return searchByAxisKind(kind);
+	}
+	
+	/**
+	 * Uses the axis kind to retrieve the scale by id.
+	 * 
+	 * @param kind axis kind to use to retrieve the scale
+	 * @return the default scale or <code>null</code> if not found
+	 */
+	private DefaultChartScale searchByAxisKind(AxisKind kind) {
+		// checks consistency of kind
+		if (Key.isValid(kind)) {
+			DefaultScaleId defScaleId = DefaultScaleId.getByAxisKind(kind, DefaultScaleId.UNKNOWN);
+			if (!DefaultScaleId.UNKNOWN.equals(defScaleId) && scales.hasAxis(defScaleId)) {
+				// gets the stored axis as Y
+				return new DefaultChartScale(scales.getAxis(defScaleId));
+			}
+			// checks if there is any scales as index
+			if (scales.hasAxis(DefaultScaleId.DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS) && AxisKind.X.equals(kind)) {
+				// gets the stored axis as _index_
+				return new DefaultChartScale(scales.getAxis(DefaultScaleId.DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS));
+			} else if (scales.hasAxis(DefaultScaleId.DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS) && AxisKind.Y.equals(kind)) {
+				// gets the stored axis as _value_
+				return new DefaultChartScale(scales.getAxis(DefaultScaleId.DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS));
+			}
+		}
+		// if here, axis kind not consistent
+		// then returns null
+		return null;
 	}
 
 }

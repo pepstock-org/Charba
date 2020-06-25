@@ -20,13 +20,13 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
-/** FIXME change name
+/**
  * Configuration of chart with multiple scales.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class MultiScalesOptions extends ConfigurationOptions {
+abstract class ScalesOptions extends ConfigurationOptions {
 	// not final in order it can be set from
 	// options which inherits this class
 	private Scales scales = null;
@@ -37,7 +37,7 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	protected MultiScalesOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	protected ScalesOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		this(chart, defaultValues, true);
 	}
 
@@ -49,7 +49,7 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * @param createScale if <code>true</code> creates a scale object reading the configuration otherwise it leaves the scale instance to <code>null</code> to allow to be set
 	 *            later.
 	 */
-	protected MultiScalesOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean createScale) {
+	protected ScalesOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean createScale) {
 		super(chart, defaultValues);
 		// checks if a scale must be created
 		if (createScale) {

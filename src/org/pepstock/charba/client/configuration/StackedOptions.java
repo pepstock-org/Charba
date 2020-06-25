@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StackedOptions extends MultiScalesOptions {
+public class StackedOptions extends ScalesOptions {
 
 	private final StackedScales scales;
 
