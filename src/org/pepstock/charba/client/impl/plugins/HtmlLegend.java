@@ -323,9 +323,6 @@ public final class HtmlLegend extends AbstractPlugin {
 		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
 			// disable legend
 			chart.getOptions().getLegend().setDisplay(false);
-			// sets legend callback
-			// overriding whatever other callback has been set
-			chart.getOptions().setLegendCallback(CALLBACK);
 			// sets easing to zero
 			pluginEasingStatus.put(chart.getId(), 0D);
 			// creates options instance

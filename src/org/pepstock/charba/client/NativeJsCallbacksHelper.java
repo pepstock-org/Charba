@@ -40,15 +40,6 @@ final class NativeJsCallbacksHelper {
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
-	 * 
-	 * @param chart chart instance
-	 * @param options chart options, generated merging all defaults.
-	 * @return the HTML legend.
-	 */
-	static native String generateDefaultLegend(Chart chart, NativeObject options);
-
-	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
 	 * @param chart chart instance

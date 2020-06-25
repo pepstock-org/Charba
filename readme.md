@@ -201,6 +201,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `x` and `y` properties from `TooltipItem` class.
    * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
    * change the chart events constructor using `ChartEventContext` which contains the chart and the native event.
+   * remove `generateLegend` method from `Defaults` class and from `IsChart` class because the prototype is not available anymore.
+   * remove `LegendCallback` interface and its usage into `ConfigurationOptions` class because the prototype is not available anymore.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.

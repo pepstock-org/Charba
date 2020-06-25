@@ -583,26 +583,6 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	}
 
 	/**
-	 * Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
-	 * 
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
-	 */
-	@Override
-	@Deprecated
-	public final String generateLegend() {
-		// FIXME to remove
-		// get consistent chart instance
-		Chart instance = lookForConsistentInstance();
-		// checks if chart is created
-		if (instance != null) {
-			// returns custom HTML legend
-			return instance.generateLegend();
-		}
-		// default
-		return UndefinedValues.STRING;
-	}
-
-	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
 	 * canvas nodes container element.
 	 */

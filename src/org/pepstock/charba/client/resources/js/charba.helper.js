@@ -291,19 +291,6 @@
 	*/
     function CharbaJsCallbacksHelper() {}
     /*
-     Invokes the default generate legend callbacks from CHART.JS.
-
-	 @param chart chart instance
-	 @param options chart options where generate legend callback is stored
-	 @return HTML legend
-    */
-    CharbaJsCallbacksHelper.generateDefaultLegend = function(chart, options) {
-    	if (options != null && typeof options.legendCallback === 'function'){
-    		return options.legendCallback.call(chart, chart);
-    	}
-    	return null;
-    }
-    /*
      Invokes the default generate labels callbacks from CHART.JS.
 
 	 @param chart chart instance

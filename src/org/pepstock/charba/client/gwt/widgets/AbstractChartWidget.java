@@ -305,16 +305,6 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#generateLegend()
-	 */
-	@Override
-	public final String generateLegend() {
-		return chart.generateLegend();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.IsChart#resize()
 	 */
 	@Override

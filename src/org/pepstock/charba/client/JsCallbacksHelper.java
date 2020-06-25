@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
-import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -62,17 +61,6 @@ final class JsCallbacksHelper {
 	 */
 	static JsCallbacksHelper get() {
 		return INSTANCE;
-	}
-
-	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box, invoking <code>legendCallback</code> function property.
-	 * 
-	 * @param chart chart instance
-	 * @param options chart options, generated merging all defaults.
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart or options are not consistent.
-	 */
-	String generateDefaultLegend(Chart chart, ChartOptions options) {
-		return NativeJsCallbacksHelper.generateDefaultLegend(chart, options.nativeObject());
 	}
 
 	/**

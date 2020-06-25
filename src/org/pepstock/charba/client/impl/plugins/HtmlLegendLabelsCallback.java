@@ -23,7 +23,6 @@ import java.util.List;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
-import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
@@ -77,7 +76,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class HtmlLegendLabelsCallback implements LegendCallback {
+final class HtmlLegendLabelsCallback {
 
 	// internal comparator to sort legend item by own index
 	private static final Comparator<LegendLabelItem> COMPARATOR = (LegendLabelItem o1, LegendLabelItem o2) -> Double.compare(o1.getDatasetIndex(), o2.getDatasetIndex()) + Double.compare(o1.getIndex(), o2.getIndex());
@@ -86,13 +85,13 @@ final class HtmlLegendLabelsCallback implements LegendCallback {
 	// default radius value
 	private static final double DEFAULT_RADIUS = Defaults.get().getGlobal().getElements().getPoint().getRadius();
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates HTML representation of legend.
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.LegendCallback#generateLegend(org.pepstock.charba.client.IsChart)
+	 * @param chart chart instance
+	 * @return HTML legend representation as SafeHTML
 	 */
-	@Override
-	public SafeHtml generateLegend(IsChart chart) {
+	SafeHtml generateLegend(IsChart chart) {
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
 		// creates a HTML element

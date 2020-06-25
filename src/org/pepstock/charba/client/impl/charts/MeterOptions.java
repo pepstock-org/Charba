@@ -17,7 +17,6 @@ package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.callbacks.ValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
@@ -165,16 +164,6 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public final Tooltips getTooltips() {
-		throw new UnsupportedOperationException(INVALID_CALL);
-	}
-
-	/**
-	 * Throws an exception because not available.
-	 * 
-	 * @param legendCallback ignored because will throw an exception
-	 */
-	@Override
-	public final void setLegendCallback(LegendCallback legendCallback) {
 		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 

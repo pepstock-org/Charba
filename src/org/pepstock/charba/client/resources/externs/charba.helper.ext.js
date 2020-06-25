@@ -167,12 +167,6 @@ function CharbaJsCallbacksHelper() {}
 /**
  * @param {Chart} chart 
  * @param {Object} options 
- * @return {string}
- */
-CharbaJsCallbacksHelper.generateDefaultLegend = function(chart, options) {};    
-/**
- * @param {Chart} chart 
- * @param {Object} options 
  * @return {Array}
  */
 CharbaJsCallbacksHelper.generateDefaultLabels = function(chart, options) {};

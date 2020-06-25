@@ -26,19 +26,15 @@ import org.pepstock.charba.client.Envelop;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
-import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -126,24 +122,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		void call(CallbackFunctionContext context, Chart chart, NativeObject size);
 	}
 
-	/**
-	 * Java script FUNCTION callback when runs it generates an HTML legend.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyGenerateLegendCallback {
-
-		/**
-		 * Method of function to be called to generate an HTML legend.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @return an HTML string which represents the legend.
-		 */
-		String call(CallbackFunctionContext context);
-	}
-
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -154,8 +132,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final CallbackProxy<ProxyChartEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the generate legend function
-	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	private final Animation animation;
 
@@ -173,8 +149,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 
 	private final Plugins plugins;
 
-	private LegendCallback legendCallback = null;
-
 	// amount of dataset selection event handlers
 	private int onDatasetSelectionHandlers = 0;
 	// amount of click event handlers
@@ -187,37 +161,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private int onTitleClickHandlers = 0;
 	// amount of resize event handlers
 	private int onAxisClickHandlers = 0;
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		LEGEND_CALLBACK("legendCallback");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	// factory to transform a native object into a dataset reference item
 	private final DatasetReferenceItemFactory datasetItemFactory = new DatasetReferenceItemFactory();
@@ -270,21 +213,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			ChartEventContext eventContext = new ChartEventContext(nativeChart);
 			// fires the resize event on chart
 			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(size)));
-		});
-		legendCallbackProxy.setCallback(context -> {
-			// checks if callback is consistent
-			if (legendCallback != null) {
-				// calls callback
-				SafeHtml html = legendCallback.generateLegend(getChart());
-				// checks if html result is consistent
-				if (html != null) {
-					// returns HTML as string
-					return html.asString();
-				}
-			}
-			// if here, no callback
-			// returns an empty string
-			return Constants.EMPTY_STRING;
 		});
 	}
 
@@ -639,33 +567,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				// removes the java script object
 				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, null);
 			}
-		}
-	}
-
-	/**
-	 * Returns the legend callback instance
-	 * 
-	 * @return the legendCallBack
-	 */
-	public LegendCallback getLegendCallback() {
-		return legendCallback;
-	}
-
-	/**
-	 * Sets the legend callback instance
-	 * 
-	 * @param legendCallback the legendCallBack to set
-	 */
-	public void setLegendCallback(LegendCallback legendCallback) {
-		// sets the callback
-		this.legendCallback = legendCallback;
-		// checks if callback is consistent
-		if (legendCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.LEGEND_CALLBACK, legendCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.LEGEND_CALLBACK, null);
 		}
 	}
 

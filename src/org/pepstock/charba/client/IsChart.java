@@ -296,13 +296,6 @@ public interface IsChart {
 	String toBase64Image();
 
 	/**
-	 * Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
-	 * 
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
-	 */
-	String generateLegend();
-
-	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
 	 * canvas nodes container element.
 	 */
