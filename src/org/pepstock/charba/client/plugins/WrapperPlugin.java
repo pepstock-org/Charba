@@ -478,6 +478,24 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 */
 		void call(CallbackFunctionContext context, Chart chart, NativeObject size, NativeObject options);
 	}
+	
+	/**
+	 * Java script FUNCTION callback called during chart reset.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyResetCallback {
+
+		/**
+		 * Called during chart reset.
+		 * 
+		 * @param context context value of <code>this</code> to the execution context of function.
+		 * @param chart The chart instance.
+		 * @param options plugin options set by user into chart options.
+		 */
+		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
+	}
 
 	/**
 	 * Java script FUNCTION callback called after the chart as been resized.
@@ -530,6 +548,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		BEFORE_TOOLTIP_DRAW("beforeTooltipDraw"),
 		BEFORE_UPDATE("beforeUpdate"),
 		DESTROY("destroy"),
+		RESET("reset"),
 		RESIZE("resize");
 
 		// name value of property
@@ -607,6 +626,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	private final CallbackProxy<ProxyDestroyCallback> destroyCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the resize function
 	private final CallbackProxy<ProxyResizeCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the reset function
+	private final CallbackProxy<ProxyResetCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// user plugin implementation
 	private final Plugin delegation;
@@ -672,6 +693,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 		destroyCallbackProxy.setCallback((context, chart, options) -> onDestroy(chart.getChart()));
 		// invoke user method implementation
 		resizeCallbackProxy.setCallback((context, chart, size, options) -> onResize(chart.getChart(), new SizeItem(size)));
+		// invoke user method implementation
+		resetCallbackProxy.setCallback((context, chart, options) -> onReset(chart.getChart()));
 		// ------------------------------------
 		// -- SET ALL FUNCTIONS into object ---
 		// ------------------------------------
@@ -723,6 +746,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 		setValue(Property.DESTROY, destroyCallbackProxy.getProxy());
 		// sets proxy instance into resize property
 		setValue(Property.RESIZE, resizeCallbackProxy.getProxy());
+		// sets proxy instance into reset property
+		setValue(Property.RESET, resetCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1070,6 +1095,18 @@ final class WrapperPlugin extends NativeObjectContainer {
 		}
 	}
 
+	/**
+	 * Called during chart reset.
+	 * 
+	 * @param chart chart instance
+	 */
+	void onReset(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onReset(chart);
+		}
+	}
+	
 	/**
 	 * Called after the chart as been destroyed.
 	 * 

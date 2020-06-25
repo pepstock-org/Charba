@@ -237,6 +237,13 @@ public interface Plugin {
 	 * @param size The new canvas display size (eq. canvas.style width and height).
 	 */
 	void onResize(IsChart chart, SizeItem size);
+	
+	/**
+	 * Called during chart reset.
+	 * 
+	 * @param chart the chart instance.
+	 */
+	void onReset(IsChart chart);
 
 	/**
 	 * Called after the chart as been destroyed.

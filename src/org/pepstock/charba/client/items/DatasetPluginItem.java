@@ -80,6 +80,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 * 
 	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
 	 */
+	// FIXME check if exist
 	public double getEasing() {
 		return getValue(Property.EASING, UndefinedValues.DOUBLE);
 	}
