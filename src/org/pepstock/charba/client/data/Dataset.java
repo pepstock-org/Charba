@@ -207,9 +207,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param defaultValues default options
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues) {
-		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
-		// checks if type is consistent
-		Type.checkIfValid(type);
+		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Key.checkAndGetIfValid(type)): defaultValues;
+		// stores the type
 		this.type = type;
 		// stores the type
 		setValue(InternalProperty.TYPE, type);
