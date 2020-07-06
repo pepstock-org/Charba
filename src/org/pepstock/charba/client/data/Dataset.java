@@ -46,6 +46,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -128,6 +129,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	protected enum Property implements Key
 	{
+		CLIP("clip"),
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
@@ -683,6 +685,73 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	public String getLabel() {
 		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
 	}
+	
+	/**
+	 * Sets how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * 
+	 * @param clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea
+	 */
+	public void setClip(double clip) {
+		// sets value
+		setValue(Property.CLIP, clip);
+	}
+
+	/**
+	 * Sets how to clip relative to chartArea, by an object which configures clipping per side.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * 
+	 * @param clip object which configures clipping per side
+	 */
+	public void setClip(Clip clip) {
+		// sets value
+		setValue(Property.CLIP, clip);
+	}
+
+	/**
+	 * Returns how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
+	 * 
+	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
+	 */
+	public double getClip() {
+		// gets the type stored
+		ObjectType type = type(Property.CLIP);
+		// checks if previously was set to a clip object
+		// therefore NaN
+		if (ObjectType.OBJECT.equals(type)) {
+			// if object returns NaN
+			return UndefinedValues.DOUBLE;
+		}
+		// gets value as number
+		return getValue(Property.CLIP, Defaults.get().getGlobal().getElements().getLine().getBorderWidth() / 2D);
+	}
+
+	/**
+	 * Returns how to clip relative to chartArea.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
+	 * 
+	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 *         If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
+	 */
+	public Clip getClipAsObject() {
+		// gets the type stored
+		ObjectType type = type(Property.CLIP);
+		// checks if previously was set to a number
+		// therefore new object with the same values
+		if (ObjectType.NUMBER.equals(type)) {
+			// new object
+			// with the same value
+			return new Clip(getClip());
+		}
+		// creates new value with previous item
+		// if there is otherwise an empyt object
+		return new Clip(getValue(Property.CLIP));
+	}
+
 
 	/**
 	 * Returns <code>true</code> if dataset must use only data points otherwise <code>false</code>.<br>

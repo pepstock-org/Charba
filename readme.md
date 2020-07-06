@@ -246,6 +246,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `onReset` method to `Plugin` interface in order to enable to catch when a chart is resetting.
    * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
    * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
+   * add `clip` property to all datasets types.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
