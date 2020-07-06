@@ -51,7 +51,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -63,6 +62,8 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.HasSpanGaps;
+import org.pepstock.charba.client.options.SpanGapper;
 
 /**
  * The chart allows a number of properties to be specified for each dataset.<br>
@@ -72,7 +73,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles {
+public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles, HasSpanGaps {
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
@@ -182,7 +183,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		POINT_HOVER_BORDER_WIDTH("pointHoverBorderWidth"),
 		POINT_HOVER_RADIUS("pointHoverRadius"),
 		POINT_ROTATION("pointRotation"),
-		SPAN_GAPS("spanGaps"),
 		// internal key to store if point style is an image or not
 		CHARBA_POINT_STYLE("_charbaPointStyle");
 
@@ -214,6 +214,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final LiningDatasetFiller filler;
 	// instance or orderer
 	private final Orderer orderer;
+	// span gapper instance
+	private final SpanGapper spanGapper;
 
 	/**
 	 * Creates the dataset using a default and chart type related to the dataset.
@@ -226,6 +228,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
+		// sets span gapper
+		this.spanGapper = new SpanGapper(getNativeObject(), getDefaultValues());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -292,6 +296,16 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	public Orderer getOrderer() {
 		return orderer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapper()
+	 */
+	@Override
+	public SpanGapper getSpanGapper() {
+		return spanGapper;
 	}
 
 	/*
@@ -1635,51 +1649,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		return new ArrayDoubleList();
 	}
 
-	/**
-	 * Sets if lines will be drawn between points with no or null data.<br>
-	 * If <code>false</code>, points with {@link Double#NaN} data will create a break in the line.
-	 * 
-	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data.<br>
-	 *            If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
-	 */
-	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
-	}
-
-	/**
-	 * Sets the value of the data if lines will be drawn between points with no or null data.
-	 * 
-	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
-	 */
-	public void setSpanGaps(double spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
-	}
-
-	/**
-	 * Returns if lines will be drawn between points with no or null data.<br>
-	 * If <code>false</code>, points with {@link Double#NaN} data will create a break in the line.
-	 * 
-	 * @return <code>true</code> if lines will be drawn between points with no or null data.<br>
-	 *         If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
-	 */
-	public boolean isSpanGaps() {
-		// checks the type of stored value
-		if (ObjectType.NUMBER.equals(type(Property.SPAN_GAPS))) {
-			// if the there is a number, span gaps is activated
-			return true;
-		}
-		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
-	}
-
-	/**
-	 * Returns the value of the data if lines will be drawn between points with no or null data.
-	 * 
-	 * @return the value of the data if lines will be drawn between points with no or null data
-	 */
-	public double getSpanGaps() {
-		return getValue(Property.SPAN_GAPS, UndefinedValues.DOUBLE);
-	}
-	
 	/**
 	 * Returns the point background color callback, if set, otherwise <code>null</code>.
 	 * 

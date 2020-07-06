@@ -204,6 +204,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `LegendCallback` interface and its usage into `ConfigurationOptions` class because the prototype is not available anymore.
    * remove `easing` properties from `DatasetPluginItem` and `TooltipPluginItem` classes because it is not provided anymore.
    * remove `easing` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw` and `onAfterDatasetsDraw` methods of `Plugin` interface because it is not provided anymore.
+   * remove `HORIZONTAL_BAR` item of `ChartType` enumeration because the horizontal bar is not a chart type anymore.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -244,6 +245,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `width` and `height` options into `ChartAreaNode` class
    * add `onReset` method to `Plugin` interface in order to enable to catch when a chart is resetting.
    * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
+   * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

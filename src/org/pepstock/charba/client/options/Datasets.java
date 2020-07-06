@@ -17,9 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
-import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
 
 /**
  * Contains the options for the datasets.
@@ -27,19 +25,14 @@ import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets {
+public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets, HasBarDatasetOptions {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		// BAR dataset
-		BAR_PERCENTAGE("barPercentage"),
-		CATEGORY_PERCENTAGE("categoryPercentage"),
-		BAR_THICKNESS("barThickness"),
-		MAX_BAR_THICKNESS("maxBarThickness"),
-		MIN_BAR_LENGTH("minBarLength"),
+		// FIXME interface is needed do not duplicate code with the bar dataset
 		// lining datasets
 		SHOW_LINE("showLine");
 
@@ -67,6 +60,9 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 
 	}
 
+	// bar options handler instance
+	private final BarDatasetOptionsHandler barOptionsHandler;
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -77,7 +73,18 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	Datasets(Options options, Key childKey, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		// creates the properties handlers
+		this.barOptionsHandler = new BarDatasetOptionsHandler(getNativeObject(), getDefaultValues());
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasBarDatasetOptions#getDatasetOptionsHandler()
+	 */
+	@Override
+	public BarDatasetOptionsHandler getDatasetOptionsHandler() {
+		return barOptionsHandler;
 	}
 
 	/**
@@ -86,8 +93,9 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
 	 *            each other.
 	 */
+	@Override
 	public void setBarPercentage(double barPercentage) {
-		setValue(Property.BAR_PERCENTAGE, barPercentage);
+		HasBarDatasetOptions.super.setBarPercentage(barPercentage);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -100,7 +108,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, getDefaultValues().getBarPercentage());
+		return HasBarDatasetOptions.super.getBarPercentage();
 	}
 
 	/**
@@ -108,8 +116,10 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 * 
 	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
 	 */
+	@Override
 	public void setCategoryPercentage(double categoryPercentage) {
-		setValue(Property.CATEGORY_PERCENTAGE, categoryPercentage);
+		// FIXME checks if between 0 and 1
+		HasBarDatasetOptions.super.setCategoryPercentage(categoryPercentage);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -121,7 +131,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, getDefaultValues().getCategoryPercentage());
+		return HasBarDatasetOptions.super.getCategoryPercentage();
 	}
 
 	/**
@@ -131,18 +141,11 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.
 	 *            Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
+	@Override
 	public void setBarThickness(int barThickness) {
-		// checks if FLEX value has been set
-		if (DefaultDatasets.FLEX_BAR_THICKNESS == barThickness) {
-			// flex must be set
-			setValue(Property.BAR_THICKNESS, DefaultDatasets.FLEX_BAR_THICKNESS_VALUE);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			setValue(Property.BAR_THICKNESS, barThickness);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		}
+		HasBarDatasetOptions.super.setBarThickness(barThickness);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -154,12 +157,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public int getBarThickness() {
-		// checks if flex has been set
-		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
-			return DefaultDatasets.FLEX_BAR_THICKNESS;
-		}
-		// if here, is not flex
-		return getValue(Property.BAR_THICKNESS, getDefaultValues().getBarThickness());
+		return HasBarDatasetOptions.super.getBarThickness();
 	}
 
 	/**
@@ -167,8 +165,11 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 * 
 	 * @param maxBarThickness the maximum bar thickness.
 	 */
+	@Override
 	public void setMaxBarThickness(int maxBarThickness) {
-		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
+		HasBarDatasetOptions.super.setMaxBarThickness(maxBarThickness);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public int getMaxBarThickness() {
-		return getValue(Property.MAX_BAR_THICKNESS, getDefaultValues().getMaxBarThickness());
+		return HasBarDatasetOptions.super.getMaxBarThickness();
 	}
 
 	/**
@@ -186,8 +187,11 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 * 
 	 * @param minBarLength a minimum length in pixels.
 	 */
+	@Override
 	public void setMinBarLength(int minBarLength) {
-		setValue(Property.MIN_BAR_LENGTH, minBarLength);
+		HasBarDatasetOptions.super.setMinBarLength(minBarLength);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -197,7 +201,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public int getMinBarLength() {
-		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
+		return HasBarDatasetOptions.super.getMinBarLength();
 	}
 
 	/**

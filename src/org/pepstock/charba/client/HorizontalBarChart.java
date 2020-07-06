@@ -31,7 +31,7 @@ public class HorizontalBarChart extends BarChart {
 	 * Builds the object.
 	 */
 	public HorizontalBarChart() {
-		this(ChartType.HORIZONTAL_BAR);
+		this(ChartType.BAR);
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
  * The horizontal bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -32,7 +33,7 @@ public class HorizontalBarDataset extends BarDataset {
 	 * It uses the global options has default.
 	 */
 	public HorizontalBarDataset() {
-		this(ChartType.HORIZONTAL_BAR);
+		this(ChartType.BAR);
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class HorizontalBarDataset extends BarDataset {
 	 * @param defaultValues default options
 	 */
 	public HorizontalBarDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.HORIZONTAL_BAR, defaultValues);
+		this(ChartType.BAR, defaultValues);
 	}
 
 	/**
@@ -61,6 +62,17 @@ public class HorizontalBarDataset extends BarDataset {
 	 */
 	protected HorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues);
+		// always y being an horizontal dataset
+		super.setIndexAxis(IndexAxis.Y);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.BarDataset#setIndexAxis(org.pepstock.charba.client.enums.IndexAxis)
+	 */
+	@Override
+	public void setIndexAxis(IndexAxis indexAxis) {
+		// always y being an horizontal dataset
+		super.setIndexAxis(IndexAxis.Y);
 	}
 
 }

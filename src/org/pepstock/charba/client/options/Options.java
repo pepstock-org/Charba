@@ -34,7 +34,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps {
 
 	// all sub elements
 	private final Animation animation;
@@ -83,7 +83,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		EVENTS("events"),
 		// specific for chart type
 		SHOW_LINES("showLines"),
-		SPAN_GAPS("spanGaps"),
 		CUTOUT_PERCENTAGE("cutoutPercentage"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
@@ -116,6 +115,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	}
 
+	// span gapper instance
+	private final SpanGapper spanGapper;
+
 	/**
 	 * Creates the object only with default provider. This is used as the root element.<br>
 	 * New native java script object is created and it's empty.
@@ -135,16 +137,18 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	protected Options(IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets all sub elements
-		animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
-		legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
-		elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
-		hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
-		layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
-		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
-		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
-		plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
-		font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
-		datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
+		this.animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
+		this.legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
+		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
+		this.hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
+		this.layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
+		this.title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
+		this.tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
+		this.plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
+		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
+		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
+		// sets span gapper
+		this.spanGapper = new SpanGapper(getNativeObject(), getDefaultValues());
 	}
 
 	/**
@@ -155,6 +159,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	protected final Font getDefaultsFont() {
 		return font;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapper()
+	 */
+	@Override
+	public final SpanGapper getSpanGapper() {
+		return spanGapper;
 	}
 
 	/**
@@ -452,25 +466,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * If <code>false</code>, <code>NaN</code> data causes a break in the line.
-	 * 
-	 * @param spanGaps if <code>false</code>, <code>NaN</code> data causes a break in the line.
-	 */
-	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
-	}
-
-	/**
-	 * If <code>false</code>, <code>NaN</code> data causes a break in the line.
-	 * 
-	 * @return if <code>false</code>, <code>NaN</code> data causes a break in the line.
-	 */
-	@Override
-	public boolean isSpanGaps() {
-		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
-	}
-
-	/**
 	 * Sets the percentage of the chart that is cut out of the middle.
 	 * 
 	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
@@ -545,4 +540,15 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isSpanGaps()
+	 */
+	@Override
+	public boolean isSpanGaps() {
+		return spanGapper.isSpanGaps();
+	}
+
 }

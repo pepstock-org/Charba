@@ -20,11 +20,14 @@ import java.util.Map;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -368,8 +371,39 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeActivated) {
 			// .. is adding an additional check on ZOOM plugin, if enabled
 			mustBeActivated = !chart.getOptions().getPlugins().isEnabled(ZOOM_PLUIGIN_ID);
+			// checks if it's an horizontal bar
+			if (mustBeActivated && ChartType.BAR.equals(chart.getBaseType())) {
+				// sets if must be activated checking if the bar datasets
+				// are horizontal.
+				mustBeActivated = checkBarDatasets(chart);
+			}
 		}
 		return mustBeActivated;
+	}
+	
+	/**
+	 * Returns <code>true</code> if all datasets of bar chart have got teh {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar.
+	 * 
+	 * @param chart chart instance
+	 * @return <code>true</code> if all datasets of bar chart have got teh {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar
+	 */
+	private boolean checkBarDatasets(IsChart chart) {
+		// scans all datasets to check if they are set as horizontal
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			// checks if is a bar dataset
+			if (dataset instanceof BarDataset) {
+				// casts to bar dataset
+				BarDataset barDataset = (BarDataset)dataset;
+				// checks if is horizontal
+				if (IndexAxis.Y.equals(barDataset.getIndexAxis())) {
+					// is horizontal, then return false;
+					return false;
+				}
+				
+			}
+		}
+		// every dataset is ok, not horizontal
+		return true;
 	}
 
 	/**
