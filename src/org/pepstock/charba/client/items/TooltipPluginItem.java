@@ -33,7 +33,6 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		EASING("easing"),
 		TOOLTIP("tooltip");
 
 		// name value of property
@@ -71,15 +70,6 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 		super(nativeObject);
 		// creates sub element
 		node = new TooltipNode(getValue(Property.TOOLTIP));
-	}
-
-	/**
-	 * Returns the total number of animation frames.
-	 * 
-	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public double getEasing() {
-		return getValue(Property.EASING, UndefinedValues.DOUBLE);
 	}
 
 	/**

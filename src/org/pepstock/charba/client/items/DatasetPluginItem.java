@@ -32,7 +32,6 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		EASING("easing"),
 		INDEX("index"),
 		META("meta");
 
@@ -73,16 +72,6 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 		// checks if meta data are present
 		// creating it or setting an empty object
 		meta = has(Property.META) ? new DatasetMetaItem(getValue(Property.META)) : new DatasetMetaItem();
-	}
-
-	/**
-	 * Returns the current animation frame number.
-	 * 
-	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	// FIXME check if exist
-	public double getEasing() {
-		return getValue(Property.EASING, UndefinedValues.DOUBLE);
 	}
 
 	/**

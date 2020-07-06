@@ -48,6 +48,21 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 */
 	void onConfigure(IsChart chart);
+	
+	/**
+	 * Called before every drawing cycle, coming from initialization, updating or rendering of chart.
+	 * 
+	 * @param chart the chart instance
+	 * @param overridePreviousUpdate if <code>true</code> the drawing was already running.
+	 */
+	void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate);
+	
+	/**
+	 * Called after every drawing cycle, coming from initialization, updating or rendering of chart.
+	 * 
+	 * @param chart the chart instance
+	 */
+	void onEndDrawing(IsChart chart);
 
 	/**
 	 * Called before initializing 'chart'.

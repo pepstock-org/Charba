@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
@@ -478,7 +482,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 */
 		void call(CallbackFunctionContext context, Chart chart, NativeObject size, NativeObject options);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback called during chart reset.
 	 * 
@@ -631,6 +635,9 @@ final class WrapperPlugin extends NativeObjectContainer {
 
 	// user plugin implementation
 	private final Plugin delegation;
+	// cache to store true during drawing for each chart
+	// K = chart id, V = counter of update cycles
+	private final Map<String, AtomicInteger> drawingStatus = new HashMap<>();
 
 	/**
 	 * Builds the object with plugin instance
@@ -768,6 +775,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		return super.getNativeObject();
 	}
 
+	// ----------------------------
+	// -- INITIALIZATION ---
+	// ----------------------------
+
 	/**
 	 * Called before creation of 'chart' java script.
 	 * 
@@ -788,6 +799,9 @@ final class WrapperPlugin extends NativeObjectContainer {
 	void onBeforeInit(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
+			// stores the counter
+			drawingStatus.put(chart.getId(), new AtomicInteger(0));
+			// invokes plugin method
 			delegation.onBeforeInit(chart);
 		}
 	}
@@ -805,6 +819,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		}
 	}
 
+	// ----------------------------
+	// -- UPDATE ---
+	// ----------------------------
+
 	/**
 	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
@@ -814,7 +832,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeUpdate(chart);
+			// gets the counter
+			AtomicInteger counter = drawingStatus.get(chart.getId());
+			// invokes begin drawing
+			// if after increment the value is greater than1 means that this is the only current update
+			delegation.onBeginDrawing(chart, counter.incrementAndGet() > 1);
+			// invokes the before update, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeUpdate(chart));
 		}
 		return true;
 	}
@@ -840,8 +864,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeLayout(IsChart chart) {
 		// if consistent
 		if (IsChart.isValid(chart)) {
-			// calls plugin
-			return delegation.onBeforeLayout(chart);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeLayout(chart));
 		}
 		return true;
 	}
@@ -867,7 +891,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeDatasetsUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeDatasetsUpdate(chart);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsUpdate(chart));
 		}
 		return true;
 	}
@@ -895,7 +920,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeDatasetUpdate(chart, item);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetUpdate(chart, item));
 		}
 		return true;
 	}
@@ -913,6 +939,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		}
 	}
 
+	// ----------------------------
+	// -- RENDER ---
+	// ----------------------------
+
 	/**
 	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
 	 * 
@@ -920,9 +950,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	boolean onBeforeRender(IsChart chart) {
+		// FIXME https://github.com/chartjs/Chart.js/blob/40871b0062637adf2245ba0d6afcbb81f1d4c55b/src/core/core.controller.js#L1091
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeRender(chart);
+			// invokes the before render, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeRender(chart));
 		}
 		return true;
 	}
@@ -935,7 +967,17 @@ final class WrapperPlugin extends NativeObjectContainer {
 	void onAfterRender(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
+			// invokes after render
 			delegation.onAfterRender(chart);
+			// gets the counter
+			AtomicInteger counter = drawingStatus.get(chart.getId());
+			// checks if counter is consistent, greater than 1
+			if (counter.intValue() > 0) {
+				// invokes the end drawing
+				delegation.onEndDrawing(chart);
+			}
+			// reset to 0
+			counter.set(0);
 		}
 	}
 
@@ -950,7 +992,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeDraw(chart, easing);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDraw(chart, easing));
 		}
 		return true;
 	}
@@ -978,7 +1021,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeDatasetsDraw(chart, easing);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsDraw(chart, easing));
 		}
 		return true;
 	}
@@ -1007,7 +1051,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			return delegation.onBeforeDatasetDraw(chart, item);
+			// invokes the call plugin, checking result for plugin status
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetDraw(chart, item));
 		}
 		return true;
 	}
@@ -1025,6 +1070,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 			delegation.onAfterDatasetDraw(chart, item);
 		}
 	}
+
+	// ----------------------------
+	// -- TOOLTIP ---
+	// ----------------------------
 
 	/**
 	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
@@ -1054,6 +1103,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		}
 	}
 
+	// ----------------------------
+	// -- EVENT ---
+	// ----------------------------
+
 	/**
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
@@ -1082,6 +1135,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		}
 	}
 
+	// ----------------------------
+	// -- RESIZE, RESET, DESTORY --
+	// ----------------------------
+
 	/**
 	 * Called after the chart as been resized.
 	 * 
@@ -1103,10 +1160,15 @@ final class WrapperPlugin extends NativeObjectContainer {
 	void onReset(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
+			// gets the counter
+			AtomicInteger counter = drawingStatus.get(chart.getId());
+			// reset to 0
+			counter.set(0);
+			// invokes the reset of plugin
 			delegation.onReset(chart);
 		}
 	}
-	
+
 	/**
 	 * Called after the chart as been destroyed.
 	 * 
@@ -1115,8 +1177,35 @@ final class WrapperPlugin extends NativeObjectContainer {
 	void onDestroy(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
+			// removes the counter
+			drawingStatus.remove(chart.getId());
+			// invokes the destroy of plugin
 			delegation.onDestroy(chart);
 		}
+	}
+
+	/**
+	 * Returns the returned boolean value of "before" methods of plugin.<br>
+	 * It checks if returning <code>false</code> and then stopping the chart drawing, the counter must be decremented in order to be always aligned with overriding parameter
+	 * of {@link Plugin#onBeginDrawing(IsChart, boolean)}.
+	 * 
+	 * @param chart chart instance where the plugin has been applied
+	 * @param returnedValue the returned boolean value of "before" method of plugin
+	 * @return the returned boolean value of "before" method of plugin
+	 */
+	private boolean checkAndGetBeforeContinue(IsChart chart, boolean returnedValue) {
+		// checks if result of plugin call is to stop the rendering
+		if (!returnedValue && drawingStatus.containsKey(chart.getId())) {
+			// gets the counter
+			AtomicInteger counter = drawingStatus.get(chart.getId());
+			// checks if counter is consistent and then greater than 0
+			if (counter.intValue() > 0) {
+				// decrements of 1
+				counter.decrementAndGet();
+			}
+		}
+		// returns the value of plugin call
+		return returnedValue;
 	}
 
 }

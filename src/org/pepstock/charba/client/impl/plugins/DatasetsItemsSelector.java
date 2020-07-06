@@ -35,6 +35,7 @@ import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
@@ -254,10 +255,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart) {
+	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
+		Window.getConsole().log("Begin", overridePreviousUpdate);
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		// adds checks if there is any dataset selection handler into option
 		// if yes exception
@@ -265,16 +267,16 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// throw exception
 			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined");
 		}
-		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterDraw(IsChart chart, double easing) {
+	public void onEndDrawing(IsChart chart) {
+		Window.getConsole().log("End");
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// sets cursor wait because the chart is drawing and not selectable
@@ -285,10 +287,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			handler.calculateClearSelectionPositions();
 			// checks if the draw if at the end of animation
 			// and if the selection is not already started
-			if (easing == 1D) {
-				// the selection is managed
-				manageSelection(chart, handler);
-			}
+			// the selection is managed
+			manageSelection(chart, handler);
 		}
 	}
 

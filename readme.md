@@ -202,6 +202,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change the chart events constructor using `ChartEventContext` which contains the chart and the native event.
    * remove `generateLegend` method from `Defaults` class and from `IsChart` class because the prototype is not available anymore.
    * remove `LegendCallback` interface and its usage into `ConfigurationOptions` class because the prototype is not available anymore.
+   * remove `easing` properties from `DatasetPluginItem` and `TooltipPluginItem` classes because it is not provided anymore.
+   * remove `easing` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw` and `onAfterDatasetsDraw` methods of `Plugin` interface because it is not provided anymore.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -248,6 +250,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `setXAxisID` and `setYAxisID` methods to `BarDataset` class in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` method to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
  * add `getAxis(scaleId, axisKind)` method from `IsDefaultScale`s interface in order to get the default scale and remove `getXAxis` and `getYAxis` methods.
+ * add `onBeginDrawing` and `onEndDrawing` methods to `Plugin` interface in order to invoke the plugin once before starting and after ending any drawing.  
  
 ### Development
 

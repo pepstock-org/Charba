@@ -18,7 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Can be set to 'x', 'y' or 'r' to define which directions are used in axis.<br>
+ * Can be set to 'x', 'y' or 'r' to define which directions are used in axis.
  * 
  * @author Andrea "Stock" Stocchero
  */
