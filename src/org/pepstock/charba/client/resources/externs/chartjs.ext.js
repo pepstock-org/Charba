@@ -158,10 +158,6 @@ Chart.helpers;
  */
 Chart.plugins;
 /**
- * @type {CharbaChartScaleService}
- */
-Chart.scaleService;
-/**
  * @constructor
  * @return {CharbaChartHelpers}
  */
@@ -204,22 +200,6 @@ CharbaChartPlugins.prototype.count = function() {};
  * @return {Array}
  */
 CharbaChartPlugins.prototype.getAll = function() {};
-/**
- * @constructor
- * @return {CharbaChartScaleService}
- */
-function CharbaChartScaleService() {}
-/**
- * @param {string} axisType
- * @return {Object}
- */
-CharbaChartScaleService.prototype.getScaleDefaults = function(axisType){};
-/**
- * @param {string} axisType
- * @param {Object} newOptions
- * @return {undefined}
- */
-CharbaChartScaleService.prototype.updateScaleDefaults = function(axisType, newOptions){};
 /**
  * @constructor
  * @return {CharbaChartAdaptersDate}

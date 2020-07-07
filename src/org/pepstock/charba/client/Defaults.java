@@ -65,6 +65,8 @@ public final class Defaults {
 	private final GlobalOptions options;
 	// global scale
 	private final GlobalScale scale;
+	// global scales defaults
+	private final InternalDefaultScales scales;
 	// global plugins
 	private final GlobalPlugins plugins;
 	// cache for chart options already implemented to improve performance
@@ -89,6 +91,8 @@ public final class Defaults {
 		wrapperDefaults = new WrapperDefaults(defaults);
 		// creates global scale wrapping the scale property of CHART
 		this.scale = new GlobalScale(wrapperDefaults.getScale());
+		// creates global scales wrapping the scales property of CHART
+		this.scales = new InternalDefaultScales(wrapperDefaults.getScales());
 		// creates global plugins wrapping the plugins property of CHART
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
 		// creates the controller object
@@ -137,28 +141,11 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (!scaleOptions.containsKey(axisType.value())) {
 			// if not, creates and stores new options by axis type
-			InternalDefaultScale storedScale = new InternalDefaultScale(axisType, Chart.getScaleService().getScaleDefaults(axisType.value()));
+			InternalDefaultScale storedScale = new InternalDefaultScale(axisType, scales.getScale(axisType));
 			scaleOptions.put(axisType.value(), storedScale);
 		}
 		// returns the existing options
 		return scaleOptions.get(axisType.value());
-	}
-
-	/**
-	 * Update the global scale by axis type.
-	 * 
-	 * @param axisType the axis type to use to set defaults.
-	 */
-	public void updateScale(AxisType axisType) {
-		// checks if axis type is consistent
-		Key.checkIfValid(axisType);
-		// checks if the options have already stored
-		if (scaleOptions.containsKey(axisType.value())) {
-			// if not, gets options by axis type
-			InternalDefaultScale storedScale = scaleOptions.get(axisType.value());
-			// stores the defaults options by scale service
-			Chart.getScaleService().updateScaleDefaults(axisType.value(), storedScale.nativeObject());
-		}
 	}
 
 	/**
@@ -386,7 +373,8 @@ public final class Defaults {
 		 */
 		private enum Property implements Key
 		{
-			SCALE("scale");
+			SCALE("scale"),
+			SCALES("scales");
 
 			// name value of property
 			private final String value;
@@ -427,6 +415,16 @@ public final class Defaults {
 		 */
 		NativeObject getScale() {
 			return getValue(Property.SCALE);
+
+		}
+		
+		/**
+		 * Returns the SCALE global options of chart as native object.
+		 * 
+		 * @return the SCALE global options
+		 */
+		NativeObject getScales() {
+			return getValue(Property.SCALES);
 
 		}
 
@@ -471,6 +469,31 @@ public final class Defaults {
 			}
 		}
 	}
+	
+	private static class InternalDefaultScales extends NativeObjectContainer {
+
+		/**
+		 * Creates the item using a native java script object which contains all properties.
+		 * 
+		 * @param nativeObject native java script object which contains all properties.
+		 */
+		InternalDefaultScales(NativeObject nativeObject) {
+			super(nativeObject);
+			// redefines hashcode in order do not have 
+			// the property $H for hashcode
+			super.redefineHashcode();
+		}
+
+		/**
+		 * Returns the scale defaults by axis type.
+		 * 
+		 * @return the scale defaults by axis type
+		 */
+		NativeObject getScale(AxisType type) {
+			// checks if axis type is consistent
+			return getValue(Key.checkAndGetIfValid(type));
+		}
+	}
 
 	/**
 	 * Internal typed scale which is used to read the default scale by type.<br>
@@ -491,15 +514,6 @@ public final class Defaults {
 		InternalDefaultScale(AxisType type, NativeObject nativeObject) {
 			// uses the global scale as default
 			super(type, getScale(), nativeObject);
-		}
-
-		/**
-		 * Returns the native object instance.
-		 * 
-		 * @return the native object instance.
-		 */
-		NativeObject nativeObject() {
-			return super.getNativeObject();
 		}
 
 	}

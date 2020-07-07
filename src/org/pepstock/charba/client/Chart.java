@@ -63,14 +63,6 @@ public final class Chart {
 	static native NativePlugins getPlugins();
 
 	/**
-	 * Returns the <code>scaleService</code> property by native object.
-	 * 
-	 * @return the <code>scaleService</code> property by native object.
-	 */
-	@JsProperty
-	static native ScaleService getScaleService();
-
-	/**
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
 	 * 

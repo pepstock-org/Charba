@@ -97,12 +97,6 @@ public final class NativeName {
 	public static final String CHART_HELPERS = "CharbaChartHelpers";
 
 	/**
-	 * Constant to bind java script object as chart scale service with name <b>{@value CHART_SCALE_SERVICE}</b>, (internal of CHART.JS).<br>
-	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
-	 */
-	public static final String CHART_SCALE_SERVICE = "CharbaChartScaleService";
-
-	/**
 	 * Constant to bind java script object as chart plugins service with name <b>{@value CHART_PLUGINS}</b>, (internal of CHART.JS).<br>
 	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
 	 */
