@@ -25,6 +25,8 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -60,9 +62,9 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param model all info about tooltip to create own HTML tooltip.
+		 * @param tooltipContext all info about tooltip to create own HTML tooltip.
 		 */
-		void call(CallbackFunctionContext context, NativeObject model);
+		void call(CallbackFunctionContext context, NativeObject tooltipContext);
 	}
 
 	/**
@@ -138,7 +140,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	private enum Property implements Key
 	{
-		CUSTOM("custom"), // FIXME https://github.com/chartjs/Chart.js/issues/7515
+		CUSTOM("custom"),
 		ITEM_SORT("itemSort"),
 		FILTER("filter");
 
@@ -182,11 +184,13 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		customCallbackProxy.setCallback((context, model) -> {
+		customCallbackProxy.setCallback((context, tooltipContext) -> {
 			// checks if callback is consistent
 			if (customCallback != null) {
+				// creates tootltip context
+				TooltipContext tempContext = new TooltipContext(tooltipContext);
 				// calls callback
-				customCallback.onCustom(getChart(), new TooltipModel(model));
+				customCallback.onCustom(getChart(), tempContext.getModel());
 			}
 		});
 		itemSortCallbackProxy.setCallback((context, item1, item2) -> {
@@ -844,6 +848,64 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.FILTER, null);
+		}
+	}
+
+	/**
+	 * Internal class to map the custom callback function argument, which is an object with the chart instance and teh tooltip model.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class TooltipContext extends NativeObjectContainer {
+
+		/**
+		 * Name of properties of native object.
+		 */
+		private enum Property implements Key
+		{
+			TOOLTIP("tooltip");
+
+			// name value of property
+			private final String value;
+
+			/**
+			 * Creates with the property value to use into native object.
+			 * 
+			 * @param value value of property name
+			 */
+			private Property(String value) {
+				this.value = value;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.commons.Key#value()
+			 */
+			@Override
+			public String value() {
+				return value;
+			}
+		}
+		
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
+		TooltipContext(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
+		TooltipModel getModel() {
+			// checks if model is inside the context
+			if (ObjectType.OBJECT.equals(type(Property.TOOLTIP))) {
+				return new TooltipModel(getValue(Property.TOOLTIP));
+			}
+			// if here the context is not consistent
+			// returns null
+			return null;
 		}
 	}
 }

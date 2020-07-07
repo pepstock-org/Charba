@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Wrapper of tooltip node of CHART.JS.<br>
@@ -26,40 +24,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipNode extends NativeObjectContainer {
+public final class TooltipNode {
 
 	private final TooltipModel model;
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		MODEL("_model");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
@@ -67,9 +34,8 @@ public final class TooltipNode extends NativeObjectContainer {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public TooltipNode(NativeObject nativeObject) {
-		super(nativeObject);
 		// creates sub element
-		model = new TooltipModel(getValue(Property.MODEL));
+		model = new TooltipModel(nativeObject);
 	}
 
 	/**
