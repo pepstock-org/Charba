@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object to map an axis tick for TIME axes, {@link CartesianTimeAxis}.<br>
+ * Base object to map an axis tick for TIME axes, {@link CartesianTimeAxis} or {@link CartesianTimeSeriesAxis}.<br>
  * It is also common to want to change the tick marks to include information about the data type.<br>
  * To do this, you need to add a callback in the axis configuration. <br>
  * If the callback returns null or undefined the associated grid line will be hidden.

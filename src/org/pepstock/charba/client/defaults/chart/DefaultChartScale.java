@@ -26,7 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
-import org.pepstock.charba.client.enums.ScaleDistribution;
 import org.pepstock.charba.client.options.Scale;
 
 /**
@@ -207,16 +206,6 @@ public final class DefaultChartScale implements IsDefaultScale {
 	@Override
 	public Position getPosition() {
 		return scale.getPosition();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getDistribution()
-	 */
-	@Override
-	public ScaleDistribution getDistribution() {
-		return scale.getDistribution();
 	}
 
 	/*

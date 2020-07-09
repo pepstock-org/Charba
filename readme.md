@@ -207,6 +207,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `HORIZONTAL_BAR` item of `ChartType` enumeration because the horizontal bar is not a chart type anymore.
    * remove `updateScale` method from `Defaults` because is not available anymore. Use `getScale(AxisType type)` instead.
    * redesign of `TooltipModel` class in according with new Chart.js model.
+   * remove `ScaleDistribution` enumeration. Use new scale `CartesianTimeSeriesAxis`, introduced in its place
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -249,6 +250,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
    * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
    * add `clip` property to all datasets types.
+   * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

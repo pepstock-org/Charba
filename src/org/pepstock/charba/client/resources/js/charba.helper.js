@@ -37,7 +37,7 @@
     CharbaJsHelper.typeOf = function(obj) {
     	return typeof obj;
     }
-   /*
+    /*
 	 Removes a property from a java script object.
 	 
 	 @param obj the object on which to remove the property.

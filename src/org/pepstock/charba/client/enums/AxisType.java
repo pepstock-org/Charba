@@ -36,15 +36,17 @@ public enum AxisType implements Key
 	 */
 	LOGARITHMIC("logarithmic", DefaultScaleId.Y),
 	/**
-	 * The labels are drawn from one of the label arrays included in the chart data.<br>
-	 * Where not specified, this is the default.
+	 * The labels are drawn from one of the label arrays included in the chart data.
 	 */
 	CATEGORY("category", DefaultScaleId.X),
 	/**
-	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.<br>
-	 * Not implemented
+	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.
 	 */
 	TIME("time", DefaultScaleId.X),
+	/**
+	 * The time series scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.
+	 */
+	TIMESERIES("timeseries", DefaultScaleId.X),	
 	/**
 	 * Radial axes are used specifically for the radar and polar area chart types.<br>
 	 * These axes overlay the chart area, rather than being positioned on one of the edges.<br>

@@ -104,6 +104,7 @@ public class SpanGapper extends NativeObjectContainer {
 	 * 
 	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
 	 */
+	// FIXME must be non callable by options, only datasets
 	public void setSpanGaps(double spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}

@@ -24,7 +24,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
-import org.pepstock.charba.client.enums.ScaleDistribution;
 
 /**
  * Scales are an integral part of a chart.<br>
@@ -80,7 +79,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		SUGGESTED_MIN("suggestedMin"),
 		// time cartesian
 		ADAPTERS("adapters"),
-		DISTRIBUTION("distribution"),
 		BOUNDS("bounds"),
 		TIME("time"),
 		// radial linear
@@ -537,27 +535,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
-	}
-
-	/**
-	 * Sets property controls the data distribution along the scale.
-	 * 
-	 * @param distribution property controls the data distribution along the scale.
-	 */
-	public final void setDistribution(ScaleDistribution distribution) {
-		setValue(Property.DISTRIBUTION, distribution);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the property controls the data distribution along the scale.
-	 * 
-	 * @return property controls the data distribution along the scale.
-	 */
-	@Override
-	public final ScaleDistribution getDistribution() {
-		return getValue(Property.DISTRIBUTION, ScaleDistribution.values(), getDefaultValues().getDistribution());
 	}
 
 	/**

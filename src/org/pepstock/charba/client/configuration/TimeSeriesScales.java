@@ -21,7 +21,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Specific scales for time series charts.<br>
- * It uses TIME axis for X axis and Linear for Y axis.
+ * It uses {@link CartesianTimeSeriesAxis} for X axis and Linear for Y axis.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 public final class TimeSeriesScales extends Scales {
 
 	// X axis (time)
-	private final CartesianTimeAxis timeAxis;
+	private final CartesianTimeSeriesAxis timeAxis;
 	// Y axis (linear)
 	private final CartesianLinearAxis linearAxis;
 
@@ -43,7 +43,7 @@ public final class TimeSeriesScales extends Scales {
 		super(chart, options);
 		// creates the axes
 		// out of the box
-		timeAxis = new CartesianTimeAxis(chart);
+		timeAxis = new CartesianTimeSeriesAxis(chart);
 		linearAxis = new CartesianLinearAxis(chart);
 		super.setAxes(timeAxis, linearAxis);
 	}
@@ -53,7 +53,7 @@ public final class TimeSeriesScales extends Scales {
 	 * 
 	 * @return the axis for time
 	 */
-	public CartesianTimeAxis getTimeAxis() {
+	public CartesianTimeSeriesAxis getTimeAxis() {
 		return timeAxis;
 	}
 

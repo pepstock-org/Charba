@@ -33,8 +33,8 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
@@ -350,7 +350,7 @@ final class SelectionHandler {
 		if (ChartType.LINE.equals(chart.getBaseType())) {
 			minimDatasetsItemsCount = 2;
 		} else {
-			minimDatasetsItemsCount = AxisType.TIME.equals(scaleItem.getType()) ? 2 : 1;
+			minimDatasetsItemsCount = isTimeAxis(scaleItem) ? 2 : 1;
 		}
 		// returns checking the value with amount of datasets items
 		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
@@ -551,7 +551,7 @@ final class SelectionHandler {
 			} else if (ChartType.BAR.equals(chart.getBaseType())) {
 				// checks if there is an offset
 				boolean barOffset = getOffset();
-				if (AxisType.TIME.equals(scaleItem.getType()) && !barOffset) {
+				if (isTimeAxis(scaleItem) && !barOffset) {
 					// fires the event that dataset items selection
 					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
 				} else {
@@ -1102,7 +1102,7 @@ final class SelectionHandler {
 			// calculates the offset parameter
 			boolean barOffset = getOffset();
 			// then calculated the amount of ticks
-			selectionTicks.setCount(AxisType.TIME.equals(scaleItem.getType()) && !barOffset ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
+			selectionTicks.setCount(isTimeAxis(scaleItem) && !barOffset ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
 		}
 		// gets the left of chart area as starting point
 		selectionTicks.setX(chartArea.getLeft());
@@ -1142,6 +1142,16 @@ final class SelectionHandler {
 		}
 		// returns offset
 		return offset;
+	}
+
+	/**
+	 * Returns <code>true</code> if the scale type is {@link AxisType#TIME} or {@link AxisType#TIMESERIES}.
+	 * 
+	 * @param scaleItem scale item instance to check
+	 * @return <code>true</code> if the scale type is {@link AxisType#TIME} or {@link AxisType#TIMESERIES}
+	 */
+	private boolean isTimeAxis(ScaleItem scaleItem) {
+		return scaleItem != null && (AxisType.TIME.equals(scaleItem.getType()) || AxisType.TIMESERIES.equals(scaleItem.getType()));
 	}
 
 }

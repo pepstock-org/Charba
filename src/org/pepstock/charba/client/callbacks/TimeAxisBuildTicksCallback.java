@@ -19,11 +19,12 @@ import java.util.List;
 
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeSeriesAxis;
 import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianTimeAxis}.
+ * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianTimeAxis} or {@link CartesianTimeSeriesAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  */

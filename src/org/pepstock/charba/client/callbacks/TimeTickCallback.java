@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeSeriesAxis;
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.items.ScaleTickItem;
 
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.items.ScaleTickItem;
  * 
  * @author Andrea "Stock" Stocchero
  * @see CartesianTimeAxis
+ * @see CartesianTimeSeriesAxis
  */
 public interface TimeTickCallback {
 
