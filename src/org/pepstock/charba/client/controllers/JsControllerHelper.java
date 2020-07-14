@@ -19,6 +19,7 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage CHART.JS controllers.<br>
@@ -30,7 +31,71 @@ import org.pepstock.charba.client.resources.ResourcesType;
 final class JsControllerHelper {
 	// static instance for singleton
 	private static final JsControllerHelper INSTANCE = new JsControllerHelper();
-
+	// java script definition of controller controller:
+	private static final String CONTROLLER_TEMPLATE = "function Charba{0}() {"+
+			"Chart.controllers.{1}.apply(this, arguments);"+
+			"}"+
+			"Charba{0}.prototype = Object.create(Chart.controllers.{1}.prototype);"+
+			"Charba{0}.prototype.constructor = Charba{0};"+
+			"Charba{0}.prototype.checkAndGetWrapper = function(property){"+
+			"var delegated = CharbaJsControllerHelper.wrappers.{0};"+
+			"if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){"+
+			"return delegated;"+
+			"}"+
+			"return null;"+
+			"};"+
+			"Charba{0}.prototype.initialize = function() {"+
+			"var delegated = this.checkAndGetWrapper('initialize');"+
+			"if (delegated !== null){"+
+			"delegated.initialize.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.initialize.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.prototype.addElements = function() {"+
+			"var delegated = this.checkAndGetWrapper('addElements');"+
+			"if (delegated !== null){"+
+			"delegated.addElements.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.addElements.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.prototype.draw = function() {"+
+			"var delegated = this.checkAndGetWrapper('draw');"+
+			"if (delegated !== null){"+
+			"delegated.draw.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.draw.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.prototype.removeHoverStyle = function() {"+
+			"var delegated = this.checkAndGetWrapper('removeHoverStyle');"+
+			"if (delegated !== null){"+
+			"delegated.removeHoverStyle.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.prototype.setHoverStyle = function() {"+
+			"var delegated = this.checkAndGetWrapper('setHoverStyle');"+
+			"if (delegated !== null){"+
+			"delegated.setHoverStyle.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.prototype.update = function() {"+
+			"var delegated = this.checkAndGetWrapper('update');"+
+			"if (delegated !== null){"+
+			"delegated.update.apply(this, arguments);"+
+			"} else {"+
+			"Chart.controllers.{1}.prototype.update.apply(this, arguments);"+
+			"}"+
+			"};"+
+			"Charba{0}.id = '{0}';"+
+			"Charba{0}.defaults = Chart.defaults.{1};"+
+			"Chart.registry.addControllers([Charba{0}]);";
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -55,6 +120,7 @@ final class JsControllerHelper {
 	}
 
 	/**
+	 * FIXME to be removed
 	 * Register the controller which does not extend any existing one.
 	 * 
 	 * @param controllerType controller type
@@ -72,6 +138,13 @@ final class JsControllerHelper {
 	 * @param instance controller java script instance
 	 */
 	void extend(ControllerType controllerType, ChartType chartType, NativeObject instance) {
+		// uses the controller template applying hte chart and controller types
+		String javaScript = Utilities.applyTemplate(CONTROLLER_TEMPLATE, controllerType.value(), chartType.value());
+		// creates a function with teh template
+		NativeFunction function = new NativeFunction(javaScript);
+		// executes the function
+		function.call();
+		// registers new controller
 		NativeJsControllerHelper.extend(controllerType.value(), chartType.value(), instance);
 	}
 
@@ -80,10 +153,9 @@ final class JsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param datasetIndex dataset index
 	 */
-	void initialize(ChartType chartType, ControllerContext context, int datasetIndex) {
-		NativeJsControllerHelper.initialize(chartType.value(), context, datasetIndex);
+	void initialize(ChartType chartType, ControllerContext context) {
+		NativeJsControllerHelper.initialize(chartType.value(), context);
 	}
 
 	/**
@@ -97,25 +169,13 @@ final class JsControllerHelper {
 	}
 
 	/**
-	 * Invokes the default <code>addElementAndReset</code> method.
-	 * 
-	 * @param chartType extended chart type
-	 * @param context context of controller
-	 * @param index dataset index
-	 */
-	void addElementAndReset(ChartType chartType, ControllerContext context, int index) {
-		NativeJsControllerHelper.addElementAndReset(chartType.value(), context, index);
-	}
-
-	/**
 	 * Invokes the default <code>draw</code> method.
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void draw(ChartType chartType, ControllerContext context, double ease) {
-		NativeJsControllerHelper.draw(chartType.value(), context, ease);
+	void draw(ChartType chartType, ControllerContext context) {
+		NativeJsControllerHelper.draw(chartType.value(), context);
 	}
 
 	/**
@@ -149,10 +209,10 @@ final class JsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param reset if true, put the elements into a reset state so they can animate to their final values
+	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void update(ChartType chartType, ControllerContext context, boolean reset) {
-		NativeJsControllerHelper.update(chartType.value(), context, reset);
+	void update(ChartType chartType, ControllerContext context, String mode) {
+		NativeJsControllerHelper.update(chartType.value(), context, mode);
 	}
 
 }

@@ -15,13 +15,9 @@
 */
 package org.pepstock.charba.client.controllers;
 
-import java.util.List;
-
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -55,28 +51,12 @@ public final class ControllerContext {
 	native Chart getNativeChart();
 
 	/**
-	 * Sets the <code>chart</code> property by native object.
-	 * 
-	 * @param chart the <code>chart</code> property by native object.
-	 */
-	@JsProperty(name = "chart")
-	native void setNativeChart(Chart chart);
-
-	/**
 	 * Returns the <code>index</code> property by native object.
 	 * 
 	 * @return the <code>index</code> property by native object.
 	 */
 	@JsProperty(name = "index")
 	native int getNativeIndex();
-
-	/**
-	 * Returns the <code>_data</code> property by native object.
-	 * 
-	 * @return the <code>_data</code> property by native object.
-	 */
-	@JsProperty(name = "_data")
-	native ArrayInteger getNativeData();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -112,14 +92,4 @@ public final class ControllerContext {
 		return new ChartNode(getNativeChart());
 	}
 
-	/**
-	 * Returns an array of integer of data
-	 * 
-	 * @return an array of integer of data
-	 */
-	@JsOverlay
-	public final List<Integer> getData() {
-		ArrayInteger array = getNativeData();
-		return ArrayListHelper.unmodifiableList(array);
-	}
 }

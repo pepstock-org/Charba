@@ -36,6 +36,11 @@ public final class NativeName {
 	public static final String ARRAY = "Array";
 
 	/**
+	 * Constant to bind java script function with name <b>{@value FUNCTION}</b>.
+	 */
+	public static final String FUNCTION = "Function";
+	
+	/**
 	 * Constant to bind java script object as CallbackProxy with name <b>{@value JS_CALLBACK_PROXY}</b>, (internal of Charba).
 	 */
 	public static final String JS_CALLBACK_PROXY = "CharbaCallbackProxy";
@@ -54,6 +59,11 @@ public final class NativeName {
 	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JS_CONTROLLER_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_CONTROLLER_HELPER = "CharbaJsControllerHelper";
+
+	/**
+	 * Constant to bind java script object as JsPluginHelper with name <b>{@value JS_PLUGIN_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_PLUGIN_HELPER = "CharbaJsPluginHelper";
 
 	/**
 	 * Constant to bind java script object as JsWindowHelper with name <b>{@value JS_WINDOW_HELPER}</b>, (internal of Charba).
@@ -95,12 +105,6 @@ public final class NativeName {
 	 * Constant to bind java script object as chart helper with name <b>{@value CHART_HELPERS}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART_HELPERS = "CharbaChartHelpers";
-
-	/**
-	 * Constant to bind java script object as chart plugins service with name <b>{@value CHART_PLUGINS}</b>, (internal of CHART.JS).<br>
-	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
-	 */
-	public static final String CHART_PLUGINS = "CharbaChartPlugins";
 
 	/**
 	 * Constant to bind java script object as chart adapters date with name <b>{@value CHART_ADAPTERS_DATE}</b>, (internal of CHART.JS).<br>

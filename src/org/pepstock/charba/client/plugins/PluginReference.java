@@ -86,4 +86,5 @@ final class PluginReference extends NativeObjectContainer {
 		return super.getNativeObject();
 	}
 
+
 }

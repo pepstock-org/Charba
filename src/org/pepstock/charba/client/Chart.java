@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.plugins.NativePlugins;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -55,14 +54,6 @@ public final class Chart {
 	static native NativeHelpers getHelpers();
 
 	/**
-	 * Returns the <code>plugins</code> property by native object.
-	 * 
-	 * @return the <code>plugins</code> property by native object.
-	 */
-	@JsProperty
-	static native NativePlugins getPlugins();
-
-	/**
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
 	 * 
@@ -72,6 +63,14 @@ public final class Chart {
 	 */
 	protected Chart(Context2dItem context, NativeObject configuration) {
 	}
+
+	/**
+	 * Registers a plugin by chart registry.
+	 * 
+	 * @param plugin plugin instance to register
+	 */
+	@JsMethod
+	native void register(NativeObject plugin);
 
 	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the

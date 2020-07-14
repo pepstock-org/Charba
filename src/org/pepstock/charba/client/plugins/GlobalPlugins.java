@@ -17,6 +17,7 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,7 +25,9 @@ import java.util.Set;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -37,23 +40,17 @@ public final class GlobalPlugins {
 	// list of global plugins set by user (not OOTB)
 	// K = plugin id, V = plugin instance
 	private final Map<String, WrapperPlugin> pluginIds = new HashMap<>();
-	// native object of plugins
-	private final NativePlugins plugins;
+	// internal plugins container
+	private final InternalPlugins plugins;
 	// set of embedded plugin ids to disable for charts
 	private final Set<String> pluginsToBeDisabled = new HashSet<>();
 
 	/**
-	 * Builds the object by the native object which maps <code>chart.plugins</code>
-	 * 
-	 * @param plugins the native object which maps <code>chart.plugins</code>
+	 * Builds the object by the native object which maps <code>chart.registry.plugins</code>
 	 */
-	public GlobalPlugins(NativePlugins plugins) {
-		// checks if native plugins is consistent
-		if (plugins == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Native plugins instance is null");
-		}
-		this.plugins = plugins;
+	public GlobalPlugins() {
+		// stores plugins items
+		this.plugins = new InternalPlugins(JsPluginHelper.get().getAll());
 	}
 
 	/**
@@ -73,7 +70,7 @@ public final class GlobalPlugins {
 			}
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-			plugins.register(wPlugin.nativeObject());
+			JsPluginHelper.get().register(wPlugin);
 			// stores the id and object into a map
 			pluginIds.put(plugin.getId(), wPlugin);
 			return true;
@@ -95,15 +92,13 @@ public final class GlobalPlugins {
 		if (!pluginIds.containsKey(pluginId)) {
 			return false;
 		}
-		// gets plugins ids requesting to CHART.JS.
-		ArrayObject existingPlugins = plugins.getAll();
 		// scans ids
-		for (int i = 0; i < existingPlugins.length(); i++) {
+		for (Key key : plugins.ids()) {
 			// creates the plugin reference
-			PluginReference reference = new PluginReference(existingPlugins.get(i));
+			PluginReference reference = new PluginReference(plugins.plugin(key));
 			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
 				// unregister the plugin
-				plugins.unregister(reference.nativeObject());
+				JsPluginHelper.get().unregister(reference);
 				// removes the plugin
 				pluginIds.remove(pluginId);
 				return true;
@@ -118,19 +113,12 @@ public final class GlobalPlugins {
 	 * @return all global registered plugins ids.
 	 */
 	public Set<String> getIds() {
-		// gets plugins ids requesting to CHART.JS.
-		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<>();
-		// checks the result from CHART.JS
-		if (existingPlugins != null && !existingPlugins.isEmpty()) {
-			// scans ids
-			for (int i = 0; i < existingPlugins.length(); i++) {
-				// creates the reference
-				PluginReference reference = new PluginReference(existingPlugins.get(i));
-				// adds plugin id
-				pluginsIds.add(reference.getId());
-			}
+		// scans ids
+		for (Key key : plugins.ids()) {
+			// stors into results
+			pluginsIds.add(key.value());
 		}
 		return pluginsIds;
 	}
@@ -208,5 +196,32 @@ public final class GlobalPlugins {
 				entry.getValue().onConfigure(chart);
 			}
 		}
+	}
+
+	private static class InternalPlugins extends NativeObjectContainer {
+
+		InternalPlugins(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
+		/**
+		 * Returns the list of plugin ids.
+		 * 
+		 * @return the list of plugin ids.
+		 */
+		List<Key> ids() {
+			return super.keys();
+		}
+
+		/**
+		 * Returns the plugin instance by its id.
+		 * 
+		 * @param pluginId plugin id
+		 * @return the plugin instance by its id
+		 */
+		NativeObject plugin(Key pluginId) {
+			return getValue(pluginId);
+		}
+
 	}
 }

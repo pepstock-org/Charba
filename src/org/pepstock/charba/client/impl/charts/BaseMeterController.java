@@ -77,31 +77,31 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers. ControllerContext, org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
+	public void initialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
 			// gets the dataset at index
-			Dataset dataset = chart.getData().getDatasets().get(datasetIndex);
+			Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
 			// checks if is a meter dataset (or gauge)
 			if (dataset instanceof MeterDataset) {
 				// casts to meter dataset
 				MeterDataset meterDataset = (MeterDataset) dataset;
 				// meter or gauge charts must have only 1 dataset
 				// checks if there is more than 1
-				if (datasetIndex > 0) {
+				if (context.getIndex() > 0) {
 					// if more than 1
 					// forces hidden dataset
 					meterDataset.hide();
 				}
 				// invokes the initialization
-				super.initialize(context, chart, datasetIndex);
+				super.initialize(context, chart);
 			} else {
 				// if not meter dataset
 				// exception
-				throw new IllegalArgumentException("Dataset at index " + datasetIndex + " is not a MeterDataset");
+				throw new IllegalArgumentException("Dataset at index " + context.getIndex() + " is not a MeterDataset");
 			}
 		} else {
 			// if here, arguments are not consistent
@@ -113,14 +113,14 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context, org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void draw(ControllerContext context, IsChart chart, double ease) {
+	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
 			// draw the doughnut chart
-			super.draw(context, chart, ease);
+			super.draw(context, chart);
 			// gets the list of datasets
 			List<Dataset> datasets = chart.getData().getDatasets();
 			// checks if not empty
@@ -134,13 +134,15 @@ final class BaseMeterController extends AbstractController {
 					MeterChart meterChart = (MeterChart) chart;
 					MeterOptions options = meterChart.getOptions();
 					// let's draw the value inside the doughnut
-					execute(chart, item, dataset, options, ease);
+					// FIXME ease value
+					execute(chart, item, dataset, options, 1D);
 				} else if (chart instanceof GaugeChart) {
 					// checks if meter chart
 					GaugeChart gaugeChart = (GaugeChart) chart;
 					GaugeOptions options = gaugeChart.getOptions();
 					// let's draw the value inside the doughnut
-					execute(chart, item, dataset, options, ease);
+					// FIXME ease value
+					execute(chart, item, dataset, options, 1D);
 				}
 			}
 		} else {

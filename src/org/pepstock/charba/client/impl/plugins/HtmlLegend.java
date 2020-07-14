@@ -211,6 +211,9 @@ public final class HtmlLegend extends AbstractPlugin {
 		// if the previous stored easing is greater than the current one her
 		// means that the is chart is updating without waiting for ending
 		// the previous update
+		
+		// FIXME https://github.com/chartjs/Chart.js/issues/7549
+		
 		if (mustBeDisplay(chart) && pluginEasingStatus.put(chart.getId(), easing) > easing) {
 			// removes the item
 			// in order to after draw to create the legend

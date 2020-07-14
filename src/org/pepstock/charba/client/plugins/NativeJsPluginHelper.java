@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -24,56 +23,43 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is the java script native object which is the plugins utility of CHART.JS.<br>
- * It maps the java script object <code>chart.plugins</code>.
+ * This is a Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage CHART.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-@JsType(isNative = true, name = NativeName.CHART_PLUGINS, namespace = JsPackage.GLOBAL)
-public final class NativePlugins {
+@JsType(isNative = true, name = NativeName.JS_PLUGIN_HELPER, namespace = JsPackage.GLOBAL)
+final class NativeJsPluginHelper {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	NativePlugins() {
+	private NativeJsPluginHelper() {
+		// do nothing
 	}
 
 	/**
-	 * Registers the given plugin if not already registered.
+	 * Register new plugin.
 	 * 
-	 * @param plugin plugin instance.
+	 * @param object plugin java script instance
 	 */
 	@JsMethod
-	native void register(NativeObject plugin);
+	static native void register(NativeObject object);
 
 	/**
-	 * Unregisters the given plugin only if registered.
+	 * Unregister an existing plugin.
 	 * 
-	 * @param plugin plugin instance reference.
+	 * @param object plugin java script instance
 	 */
 	@JsMethod
-	native void unregister(NativeObject plugin);
+	static native void unregister(NativeObject object);
 
 	/**
-	 * Remove all registered plugins.
-	 */
-	@JsMethod
-	native void clear();
-
-	/**
-	 * Returns the number of registered plugins
+	 * Returns all registered plugins as object.
 	 * 
-	 * @return amount of registered plugins
+	 * @return all registered plugins as object
 	 */
 	@JsMethod
-	native int count();
-
-	/**
-	 * Returns all registered plugin instances.
-	 * 
-	 * @return array of plugin objects.
-	 */
-	@JsMethod
-	native ArrayObject getAll();
+	static native NativeObject getAll();
 
 }

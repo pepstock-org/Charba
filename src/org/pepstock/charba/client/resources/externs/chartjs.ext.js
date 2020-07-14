@@ -154,10 +154,6 @@ Chart.defaults;
  */
 Chart.helpers;
 /**
- * @type {CharbaChartPlugins}
- */
-Chart.plugins;
-/**
  * @constructor
  * @return {CharbaChartHelpers}
  */
@@ -173,33 +169,25 @@ CharbaChartHelpers.prototype.mergeIf = function(target, source){};
  * @return {Object}
  */
 CharbaChartHelpers.prototype.clone = function(source){};
-/**
+/** FIXME
  * @constructor
- * @return {CharbaChartPlugins}
+ * @return {CharbaChartRegistry}
  */
-function CharbaChartPlugins() {}
+function CharbaChartRegistry() {}
 /**
- * @param {Object} plugin
+ * @param {Array} plugins
  * @return {undefined}
  */
-CharbaChartPlugins.prototype.register = function(plugin){};
+CharbaChartRegistry.prototype.addPlugins = function(plugins){};
 /**
- * @param {Object} plugin
+ * @param {Array} plugins
  * @return {undefined}
  */
-CharbaChartPlugins.prototype.unregister = function(plugin){};
+CharbaChartRegistry.prototype.remove = function(plugins){};
 /**
- * @return {undefined}
+ * @type {Object}
  */
-CharbaChartPlugins.prototype.clear = function() {};
-/**
- * @return {number}
- */
-CharbaChartPlugins.prototype.count = function() {};
-/**
- * @return {Array}
- */
-CharbaChartPlugins.prototype.getAll = function() {};
+CharbaChartRegistry.prototype.plugins;
 /**
  * @constructor
  * @return {CharbaChartAdaptersDate}

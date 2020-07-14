@@ -38,7 +38,6 @@ import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
@@ -262,13 +261,17 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
-		Window.getConsole().log("Begin", overridePreviousUpdate);
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		// adds checks if there is any dataset selection handler into option
-		// if yes exception
-		if (mustBeActivated(chart) && chart.getOptions().hasDatasetSelectionHandlers()) {
-			// throw exception
-			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined");
+		if (mustBeActivated(chart)) {
+			// adds checks if there is any dataset selection handler into option
+			// if yes exception
+			if (chart.getOptions().hasDatasetSelectionHandlers()) {
+				// throw exception
+				throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined");
+			} else if (pluginSelectionHandlers.containsKey(chart.getId())) {
+				// sets cursor wait because the chart is drawing and not selectable
+				chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
+			}
 		}
 	}
 
@@ -279,11 +282,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onEndDrawing(IsChart chart) {
-		Window.getConsole().log("End");
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
-			// sets cursor wait because the chart is drawing and not selectable
-			chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// calculates the coordinates of clear selection element
@@ -380,7 +380,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 		return mustBeActivated;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if all datasets of bar chart have got teh {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar.
 	 * 
@@ -393,13 +393,13 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// checks if is a bar dataset
 			if (dataset instanceof BarDataset) {
 				// casts to bar dataset
-				BarDataset barDataset = (BarDataset)dataset;
+				BarDataset barDataset = (BarDataset) dataset;
 				// checks if is horizontal
 				if (IndexAxis.Y.equals(barDataset.getIndexAxis())) {
 					// is horizontal, then return false;
 					return false;
 				}
-				
+
 			}
 		}
 		// every dataset is ok, not horizontal

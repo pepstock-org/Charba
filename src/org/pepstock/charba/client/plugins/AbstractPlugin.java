@@ -44,21 +44,23 @@ public abstract class AbstractPlugin implements Plugin {
 	public void onConfigure(IsChart chart) {
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override
 	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onEndDrawing(IsChart chart) {
 	}
-
-
 
 	/*
 	 * (non-Javadoc)

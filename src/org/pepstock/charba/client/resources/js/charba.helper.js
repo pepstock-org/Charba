@@ -122,6 +122,35 @@
    		return obj instanceof CanvasGradient;
     } 
     /*
+		JSPluginHelper is an object with a set of static methods used as utility
+		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
+	*/
+    function CharbaJsPluginHelper() {}
+    /*
+     Registers new plugin.
+	  
+	 @param instance plugin java script instance
+    */
+    CharbaJsPluginHelper.register = function(instance) {
+    	Chart.registry.addPlugins([instance]);
+    }
+    /*
+     Unregisters an existing plugin.
+	  
+	 @param instance plugin java script instance
+    */
+    CharbaJsPluginHelper.unregister = function(instance) {
+    	Chart.registry.remove([instance]);
+    }
+    /*
+     Returns all registered plugins as object.
+	  
+	 @return all registered plugins as object
+    */
+    CharbaJsPluginHelper.getAll = function() {
+    	return Chart.registry.plugins.items;
+    }
+    /*
 		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
 	*/
@@ -133,6 +162,7 @@
 	 @param instance controller java script instance
     */
     CharbaJsControllerHelper.register = function(controllerType, instance) {
+    	// FIXME to be removed
     	Chart.controllers[controllerType] = Chart.DatasetController.extend(instance);
     }
     /*
@@ -143,23 +173,25 @@
 	 @param instance controller java script instance    
     */
     CharbaJsControllerHelper.extend = function(controllerType, chartType, instance) {
-		Chart.defaults[controllerType] = Chart.defaults[chartType];
-		//Chart.defaults.datasets[controllerType] = Chart.defaults.datasets[chartType];
-		console.log("chart type", chartType);
-		console.log("controller type", controllerType);
-		console.log("controllers", Chart.controllers);
-		console.log("controllers-type", Chart.controllers[chartType]);
-		Chart.controllers[controllerType] = Chart.controllers[chartType].extend(instance);
+    	console.log("type ", controllerType, chartType, instance);
+    	if (typeof CharbaJsControllerHelper.wrappers === 'undefined'){ 
+			Object.defineProperty(CharbaJsControllerHelper, 'wrappers', {
+				value: {},
+				configurable: false,
+				enumerable: false,
+				writable: false
+			});
+		}
+		CharbaJsControllerHelper.wrappers[controllerType] = instance;
     }
     /*
 	 Invokes the default "initialize" method.
 	  
 	 @param controllerType controller type
 	 @param context context of controller
-	 @param datasetIndex dataset index
     */
-    CharbaJsControllerHelper.initialize = function(controllerType, context, datasetIndex) {
-    	Chart.controllers[controllerType].prototype.initialize.call(context, context.chart, datasetIndex);
+    CharbaJsControllerHelper.initialize = function(controllerType, context) {
+    	Chart.controllers[controllerType].prototype.initialize.call(context);
     }
     /*
 	 Invokes the default "AddElements" method.
@@ -171,24 +203,14 @@
        	Chart.controllers[controllerType].prototype.addElements.call(context);
     }
     /*
-	 Invokes the default "addElementAndReset" method.
-	  
-	 @param controllerType controller type
-	 @param context context of controller
-	 @param index dataset index
-    */
-    CharbaJsControllerHelper.addElementAndReset = function(controllerType, context, index) {
-    	Chart.controllers[controllerType].prototype.addElementAndReset.call(context, index);
-    }
-    /*
 	 Invokes the default "draw" method.
 	  
 	 @param controllerType controller type
 	 @param context context of controller
 	 @param ease if specified, this number represents how far to transition elements.
     */
-    CharbaJsControllerHelper.draw = function(controllerType, context, ease) {
-    	Chart.controllers[controllerType].prototype.draw.call(context, ease);
+    CharbaJsControllerHelper.draw = function(controllerType, context) {
+    	Chart.controllers[controllerType].prototype.draw.call(context);
     }
     /*
 	 Invokes the default "removeHoverStyle" method.
@@ -219,10 +241,10 @@
 	  
 	 @param controllerType controller type
 	 @param context context of controller
-	 @param reset if true, put the elements into a reset state so they can animate to their final values
+	 @param mode update mode, core calls this method using any of `'active'`, `'hide'`, `'reset'`, `'resize'`, `'show'` or `undefined`
     */
-    CharbaJsControllerHelper.update = function(controllerType, context, reset) {
-    	Chart.controllers[controllerType].prototype.update.call(context, reset);
+    CharbaJsControllerHelper.update = function(controllerType, context, mode) {
+    	Chart.controllers[controllerType].prototype.update.call(context, mode);
     }
     /*
 		JSWindowHelper is an object with a set of static methods used as utility

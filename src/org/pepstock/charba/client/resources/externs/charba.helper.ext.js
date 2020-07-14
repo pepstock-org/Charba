@@ -58,6 +58,25 @@ CharbaJsHelper.isCanvasPattern = function(object) {};
 CharbaJsHelper.isCanvasGradient = function(object) {};
 /**
  * @constructor
+ * @return {CharbaJsPluginHelper}
+ */
+function CharbaJsPluginHelper() {}
+/**
+ * @param {Object} object
+ * @return {undefined}
+ */
+CharbaJsPluginHelper.register = function(instance) {};
+/**
+ * @param {Object} object
+ * @return {undefined}
+ */
+CharbaJsPluginHelper.unregister = function(instance) {};
+/**
+ * @return {Object}
+ */
+CharbaJsPluginHelper.getAll = function() {}; 
+/**
+ * @constructor
  * @return {CharbaJsControllerHelper}
  */
 function CharbaJsControllerHelper() {}
@@ -77,10 +96,9 @@ CharbaJsControllerHelper.extend = function(controllerType, chartType, object) {}
 /**
  * @param {string} chartType 
  * @param {Object} context 
- * @param {number} datasetIndex
  * @return {undefined}
  */
-CharbaJsControllerHelper.initialize = function(chartType, context, datasetIndex) {};
+CharbaJsControllerHelper.initialize = function(chartType, context) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 
@@ -90,17 +108,9 @@ CharbaJsControllerHelper.addElements = function(chartType, context) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 
- * @param {number} index
  * @return {undefined}
  */
-CharbaJsControllerHelper.addElementAndReset = function(chartType, context, index) {};
-/**
- * @param {string} chartType 
- * @param {Object} context 
- * @param {number} ease
- * @return {undefined}
- */
-CharbaJsControllerHelper.draw = function(chartType, context, ease) {};
+CharbaJsControllerHelper.draw = function(chartType, context) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 
@@ -122,10 +132,10 @@ CharbaJsControllerHelper.setHoverStyle = function(chartType, context, element, d
 /**
  * @param {string} chartType 
  * @param {Object} context 
- * @param {boolean} reset
+ * @param {string} mode
  * @return {undefined}
  */
-CharbaJsControllerHelper.update = function(chartType, context, reset) {};
+CharbaJsControllerHelper.update = function(chartType, context, mode) {};
 /**
  * @constructor
  * @return {CharbaJsWindowHelper}

@@ -93,8 +93,8 @@ public final class Defaults {
 		this.scale = new GlobalScale(wrapperDefaults.getScale());
 		// creates global scales wrapping the scales property of CHART
 		this.scales = new InternalDefaultScales(wrapperDefaults.getScales());
-		// creates global plugins wrapping the plugins property of CHART
-		this.plugins = new GlobalPlugins(Chart.getPlugins());
+		// creates global plugins manager
+		this.plugins = new GlobalPlugins();
 		// creates the controller object
 		this.controllers = Controllers.get();
 		// adds the internal plugin to all charts
@@ -417,7 +417,7 @@ public final class Defaults {
 			return getValue(Property.SCALE);
 
 		}
-		
+
 		/**
 		 * Returns the SCALE global options of chart as native object.
 		 * 
@@ -456,7 +456,7 @@ public final class Defaults {
 				return createChartOptions(type, global.asDefault());
 			}
 		}
-		
+
 		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultsOptions) {
 			// checks if the property is present
 			if (ObjectType.OBJECT.equals(type(type))) {
@@ -469,7 +469,7 @@ public final class Defaults {
 			}
 		}
 	}
-	
+
 	private static class InternalDefaultScales extends NativeObjectContainer {
 
 		/**
@@ -479,7 +479,7 @@ public final class Defaults {
 		 */
 		InternalDefaultScales(NativeObject nativeObject) {
 			super(nativeObject);
-			// redefines hashcode in order do not have 
+			// redefines hashcode in order do not have
 			// the property $H for hashcode
 			super.redefineHashcode();
 		}
@@ -487,6 +487,7 @@ public final class Defaults {
 		/**
 		 * Returns the scale defaults by axis type.
 		 * 
+		 * @param type
 		 * @return the scale defaults by axis type
 		 */
 		NativeObject getScale(AxisType type) {

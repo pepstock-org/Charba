@@ -30,14 +30,14 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
+	public void initialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
 			// invokes default
-			JsControllerHelper.get().initialize(getType().getChartType(), context, datasetIndex);
+			JsControllerHelper.get().initialize(getType().getChartType(), context);
 		}
 	}
 
@@ -58,28 +58,14 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#addElementAndReset(org.pepstock.charba.client.controllers. Context, org.pepstock.charba.client.IsChart, int)
+	 * @see org.pepstock.charba.client.Controller#draw(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void addElementAndReset(ControllerContext context, IsChart chart, int index) {
+	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
 			// invokes default
-			JsControllerHelper.get().addElementAndReset(getType().getChartType(), context, index);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#draw(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, double)
-	 */
-	@Override
-	public void draw(ControllerContext context, IsChart chart, double ease) {
-		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
-			// invokes default
-			JsControllerHelper.get().draw(getType().getChartType(), context, ease);
+			JsControllerHelper.get().draw(getType().getChartType(), context);
 		}
 	}
 
@@ -116,14 +102,14 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart, boolean)
+	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart, java.lang.String)
 	 */
 	@Override
-	public void update(ControllerContext context, IsChart chart, boolean reset) {
+	public void update(ControllerContext context, IsChart chart, String mode) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
 			// invokes default
-			JsControllerHelper.get().update(getType().getChartType(), context, reset);
+			JsControllerHelper.get().update(getType().getChartType(), context, mode);
 		}
 	}
 }

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.controllers;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -43,6 +44,7 @@ final class NativeJsControllerHelper {
 	 * @param controllerType controller type
 	 * @param object controller java script instance
 	 */
+	@JsMethod
 	static native void register(String controllerType, NativeObject object);
 
 	/**
@@ -52,6 +54,7 @@ final class NativeJsControllerHelper {
 	 * @param chartType type of extended chart
 	 * @param object controller java script instance
 	 */
+	@JsMethod
 	static native void extend(String controllerType, String chartType, NativeObject object);
 
 	/**
@@ -61,7 +64,8 @@ final class NativeJsControllerHelper {
 	 * @param context context of controller
 	 * @param datasetIndex dataset index
 	 */
-	static native void initialize(String chartType, ControllerContext context, int datasetIndex);
+	@JsMethod
+	static native void initialize(String chartType, ControllerContext context);
 
 	/**
 	 * Invokes the default <code>AddElements</code> method.
@@ -69,25 +73,17 @@ final class NativeJsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 */
+	@JsMethod
 	static native void addElements(String chartType, ControllerContext context);
-
-	/**
-	 * Invokes the default <code>addElementAndReset</code> method.
-	 * 
-	 * @param chartType extended chart type
-	 * @param context context of controller
-	 * @param index dataset index
-	 */
-	static native void addElementAndReset(String chartType, ControllerContext context, int index);
 
 	/**
 	 * Invokes the default <code>draw</code> method.
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	static native void draw(String chartType, ControllerContext context, double ease);
+	@JsMethod
+	static native void draw(String chartType, ControllerContext context);
 
 	/**
 	 * Invokes the default <code>removeHoverStyle</code> method.
@@ -98,6 +94,7 @@ final class NativeJsControllerHelper {
 	 * @param datasetIndex dataset index
 	 * @param index data index
 	 */
+	@JsMethod
 	static native void removeHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
 
 	/**
@@ -109,6 +106,7 @@ final class NativeJsControllerHelper {
 	 * @param datasetIndex dataset index
 	 * @param index data index
 	 */
+	@JsMethod
 	static native void setHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
 
 	/**
@@ -116,8 +114,9 @@ final class NativeJsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param reset if true, put the elements into a reset state so they can animate to their final values
+	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	static native void update(String chartType, ControllerContext context, boolean reset);
+	@JsMethod
+	static native void update(String chartType, ControllerContext context, String mode);
 
 }

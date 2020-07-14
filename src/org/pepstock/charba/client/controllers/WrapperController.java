@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.controllers;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.IsChart;
@@ -51,10 +50,8 @@ final class WrapperController extends NativeObjectContainer {
 		 * Initializes the controller.
 		 * 
 		 * @param context java script <code>this</code> function context.
-		 * @param chart CHART.JS chart instance
-		 * @param datasetIndex dataset index
 		 */
-		void call(ControllerContext context, Chart chart, int datasetIndex);
+		void call(ControllerContext context);
 	}
 
 	/**
@@ -75,23 +72,6 @@ final class WrapperController extends NativeObjectContainer {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to catch the chart add element and reset.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAddElementAndResetCallback {
-
-		/**
-		 * Create a single element for the data at the given index and reset its state.
-		 * 
-		 * @param context java script <code>this</code> function context.
-		 * @param index data index
-		 */
-		void call(ControllerContext context, int index);
-	}
-
-	/**
 	 * Java script FUNCTION callback called to catch the chart drawing.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -103,9 +83,8 @@ final class WrapperController extends NativeObjectContainer {
 		 * Draw the representation of the dataset.
 		 * 
 		 * @param context java script <code>this</code> function context.
-		 * @param ease if specified, this number represents how far to transition elements.
 		 */
-		void call(ControllerContext context, double ease);
+		void call(ControllerContext context);
 	}
 
 	/**
@@ -158,9 +137,9 @@ final class WrapperController extends NativeObjectContainer {
 		 * Update the elements in response to new data.
 		 * 
 		 * @param context java script <code>this</code> function context.
-		 * @param reset if true, put the elements into a reset state so they can animate to their final values
+		 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 		 */
-		void call(ControllerContext context, boolean reset);
+		void call(ControllerContext context, String mode);
 	}
 
 	// ---------------------------
@@ -170,8 +149,6 @@ final class WrapperController extends NativeObjectContainer {
 	private final CallbackProxy<ProxyInitializeCallback> initializeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the add elements function
 	private final CallbackProxy<ProxyAddElementsCallback> addElementsCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the add element and reset function
-	private final CallbackProxy<ProxyAddElementAndResetCallback> addElementAndResetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the draw function
 	private final CallbackProxy<ProxyDrawCallback> drawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the remove hover function
@@ -192,7 +169,6 @@ final class WrapperController extends NativeObjectContainer {
 		TYPE("type"),
 		INITIALIZE("initialize"),
 		ADD_ELEMENTS("addElements"),
-		ADD_ELEMENT_AND_RESET("addElementAndReset"),
 		DRAW("draw"),
 		REMOVE_HOVER_STYLE("removeHoverStyle"),
 		SET_HOVER_STYLE("setHoverStyle"),
@@ -235,35 +211,27 @@ final class WrapperController extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		initializeCallbackProxy.setCallback((context, chart, datasetIndex) -> {
+		initializeCallbackProxy.setCallback((context) -> {
 			// checks if context and native chart are consistent
-			if (context != null && chart != null) {
-				// adds the chart instance to the context
-				// PAY ATTENTION: this is mandatory
-				context.setNativeChart(chart);
-				// checks if chart is consistent
-				if (IsChart.isValid(chart.getChart())) {
-					// invoke user method implementation
-					onInitialize(context, chart.getChart(), datasetIndex);
-				}
+			// checks if chart is consistent
+			if (context != null && context.getNativeChart() != null && IsChart.isValid(context.getChart())) {
+				// invoke user method implementation
+				onInitialize(context, context.getChart());
 			}
 		});
 		// invoke user method implementation
 		addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
 		// invoke user method implementation
-		addElementAndResetCallbackProxy.setCallback((context, index) -> onAddElementAndReset(context, context.getChart(), index));
-		// invoke user method implementation
-		drawCallbackProxy.setCallback((context, ease) -> onDraw(context, context.getChart(), ease));
+		drawCallbackProxy.setCallback((context) -> onDraw(context, context.getChart()));
 		// invoke user method implementation
 		removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
 		setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
-		updateCallbackProxy.setCallback((context, reset) -> onUpdate(context, context.getChart(), reset));
+		updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
-		setValue(Property.ADD_ELEMENT_AND_RESET, addElementAndResetCallbackProxy.getProxy());
 		setValue(Property.DRAW, drawCallbackProxy.getProxy());
 		setValue(Property.REMOVE_HOVER_STYLE, removeHoverStyleCallbackProxy.getProxy());
 		setValue(Property.SET_HOVER_STYLE, setHoverStyleCallbackProxy.getProxy());
@@ -294,12 +262,11 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
-	 * @param datasetIndex dataset index
 	 */
-	void onInitialize(ControllerContext context, IsChart chart, int datasetIndex) {
+	void onInitialize(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.initialize(context, chart, datasetIndex);
+			delegation.initialize(context, chart);
 		}
 	}
 
@@ -317,30 +284,15 @@ final class WrapperController extends NativeObjectContainer {
 	}
 
 	/**
-	 * Create a single element for the data at the given index and reset its state.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart chart instance
-	 * @param index data index
-	 */
-	void onAddElementAndReset(ControllerContext context, IsChart chart, int index) {
-		// if consistent, calls controller
-		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.addElementAndReset(context, chart, index);
-		}
-	}
-
-	/**
 	 * Draw the representation of the dataset.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
-	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void onDraw(ControllerContext context, IsChart chart, double ease) {
+	void onDraw(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.draw(context, chart, ease);
+			delegation.draw(context, chart);
 		}
 	}
 
@@ -381,9 +333,9 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
-	 * @param reset if true, put the elements into a reset state so they can animate to their final values
+	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void onUpdate(ControllerContext context, IsChart chart, boolean reset) {
+	void onUpdate(ControllerContext context, IsChart chart, String reset) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.update(context, chart, reset);

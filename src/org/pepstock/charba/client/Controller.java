@@ -73,9 +73,8 @@ public interface Controller {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
-	 * @param datasetIndex dataset index
 	 */
-	void initialize(ControllerContext context, IsChart chart, int datasetIndex);
+	void initialize(ControllerContext context, IsChart chart);
 
 	/**
 	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
@@ -86,22 +85,12 @@ public interface Controller {
 	void addElements(ControllerContext context, IsChart chart);
 
 	/**
-	 * Create a single element for the data at the given index and reset its state.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart instance
-	 * @param index dataset index
-	 */
-	void addElementAndReset(ControllerContext context, IsChart chart, int index);
-
-	/**
 	 * Draw the representation of the dataset.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
-	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void draw(ControllerContext context, IsChart chart, double ease);
+	void draw(ControllerContext context, IsChart chart);
 
 	/**
 	 * Remove hover styling from the given element.
@@ -130,8 +119,8 @@ public interface Controller {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
-	 * @param reset if true, put the elements into a reset state so they can animate to their final values
+	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void update(ControllerContext context, IsChart chart, boolean reset);
+	void update(ControllerContext context, IsChart chart, String mode);
 
 }
