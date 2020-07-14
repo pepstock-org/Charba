@@ -119,4 +119,22 @@ final class NativeJsControllerHelper {
 	@JsMethod
 	static native void update(String chartType, ControllerContext context, String mode);
 
+	/**
+	 * Invokes the default <code>linkScales</code> method.
+	 * 
+	 * @param chartType extended chart type
+	 * @param context context of controller
+	 */
+	@JsMethod
+	static native void linkScales(String chartType, ControllerContext context);
+
+	/**
+	 * Invokes the default <code>buildOrUpdateElements</code> method.
+	 * 
+	 * @param chartType extended chart type
+	 * @param context context of controller
+	 */
+	@JsMethod
+	static native void buildOrUpdateElements(String chartType, ControllerContext context);
+
 }

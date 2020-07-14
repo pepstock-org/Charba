@@ -140,7 +140,7 @@ public final class Merger {
 			envelop.setContent(defaults);
 		}
 	}
-	
+
 	/**
 	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global).<br>
 	 * The chain of priority is:<br>

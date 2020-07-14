@@ -207,7 +207,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `HORIZONTAL_BAR` item of `ChartType` enumeration because the horizontal bar is not a chart type anymore.
    * remove `updateScale` method from `Defaults` because is not available anymore. Use `getScale(AxisType type)` instead.
    * redesign of `TooltipModel` class in according with new Chart.js model.
-   * remove `ScaleDistribution` enumeration. Use new scale `CartesianTimeSeriesAxis`, introduced in its place
+   * remove `ScaleDistribution` enumeration. Use new scale `CartesianTimeSeriesAxis`, introduced in its place.
+   * remove `ease` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw`, `onAfterDatasetsDraw`, `onBeforeDatasetDraw` and `onBeforeDatasetDraw` methods of `Plugin` interface because is not passed by CHART.JS anymore.
+   * change `Controller` interface in order to be align with new interface implemented in new CHART.JS.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
@@ -257,7 +259,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `setXAxisID` and `setYAxisID` methods to `BarDataset` class in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` method to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
  * add `getAxis(scaleId, axisKind)` method from `IsDefaultScale`s interface in order to get the default scale and remove `getXAxis` and `getYAxis` methods.
- * add `onBeginDrawing` and `onEndDrawing` methods to `Plugin` interface in order to invoke the plugin once before starting and after ending any drawing.  
+ * add `onBeginDrawing` and `onEndDrawing` methods to `Plugin` interface in order to invoke the plugin once before starting and after ending any drawing.
+ * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
  
 ### Development
 
@@ -276,6 +279,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `getLineWidths` and `getColumnWidths` methods of `LegendNode` class in order to return a list of doubles instead of a list of integers.
  * add `columnHeights` property to `LegendNode` class.
  * improve the defaults management for scales.
+ * add `JsPluginHelper` class in order to use CHART.JS registry feature to manage plugins.
 
 License
 -------

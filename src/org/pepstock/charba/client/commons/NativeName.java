@@ -39,7 +39,7 @@ public final class NativeName {
 	 * Constant to bind java script function with name <b>{@value FUNCTION}</b>.
 	 */
 	public static final String FUNCTION = "Function";
-	
+
 	/**
 	 * Constant to bind java script object as CallbackProxy with name <b>{@value JS_CALLBACK_PROXY}</b>, (internal of Charba).
 	 */

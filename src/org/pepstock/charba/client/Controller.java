@@ -123,4 +123,22 @@ public interface Controller {
 	 */
 	void update(ControllerContext context, IsChart chart, String mode);
 
+	/**
+	 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 */
+	void linkScales(ControllerContext context, IsChart chart);
+
+	/**
+	 * Called by the main chart controller when an update is triggered<br>
+	 * The default implementation handles the number of data points changing and creating elements appropriately.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 */
+	void buildOrUpdateElements(ControllerContext context, IsChart chart);
+
 }

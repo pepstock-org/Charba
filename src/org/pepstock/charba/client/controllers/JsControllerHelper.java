@@ -32,70 +32,21 @@ final class JsControllerHelper {
 	// static instance for singleton
 	private static final JsControllerHelper INSTANCE = new JsControllerHelper();
 	// java script definition of controller controller:
-	private static final String CONTROLLER_TEMPLATE = "function Charba{0}() {"+
-			"Chart.controllers.{1}.apply(this, arguments);"+
-			"}"+
-			"Charba{0}.prototype = Object.create(Chart.controllers.{1}.prototype);"+
-			"Charba{0}.prototype.constructor = Charba{0};"+
-			"Charba{0}.prototype.checkAndGetWrapper = function(property){"+
-			"var delegated = CharbaJsControllerHelper.wrappers.{0};"+
-			"if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){"+
-			"return delegated;"+
-			"}"+
-			"return null;"+
-			"};"+
-			"Charba{0}.prototype.initialize = function() {"+
-			"var delegated = this.checkAndGetWrapper('initialize');"+
-			"if (delegated !== null){"+
-			"delegated.initialize.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.initialize.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.prototype.addElements = function() {"+
-			"var delegated = this.checkAndGetWrapper('addElements');"+
-			"if (delegated !== null){"+
-			"delegated.addElements.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.addElements.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.prototype.draw = function() {"+
-			"var delegated = this.checkAndGetWrapper('draw');"+
-			"if (delegated !== null){"+
-			"delegated.draw.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.draw.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.prototype.removeHoverStyle = function() {"+
-			"var delegated = this.checkAndGetWrapper('removeHoverStyle');"+
-			"if (delegated !== null){"+
-			"delegated.removeHoverStyle.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.prototype.setHoverStyle = function() {"+
-			"var delegated = this.checkAndGetWrapper('setHoverStyle');"+
-			"if (delegated !== null){"+
-			"delegated.setHoverStyle.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.prototype.update = function() {"+
-			"var delegated = this.checkAndGetWrapper('update');"+
-			"if (delegated !== null){"+
-			"delegated.update.apply(this, arguments);"+
-			"} else {"+
-			"Chart.controllers.{1}.prototype.update.apply(this, arguments);"+
-			"}"+
-			"};"+
-			"Charba{0}.id = '{0}';"+
-			"Charba{0}.defaults = Chart.defaults.{1};"+
-			"Chart.registry.addControllers([Charba{0}]);";
-	
+	private static final String CONTROLLER_TEMPLATE = "function Charba{0}() {" + "Chart.controllers.{1}.apply(this, arguments);" + "}" + "Charba{0}.prototype = Object.create(Chart.controllers.{1}.prototype);"
+			+ "Charba{0}.prototype.constructor = Charba{0};" + "Charba{0}.prototype.checkAndGetWrapper = function(property){" + "var delegated = CharbaJsControllerHelper.wrappers.{0};"
+			+ "if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){" + "return delegated;" + "}" + "return null;" + "};" + "Charba{0}.prototype.initialize = function() {"
+			+ "var delegated = this.checkAndGetWrapper('initialize');" + "if (delegated !== null){" + "delegated.initialize.apply(this, arguments);" + "} else {" + "Chart.controllers.{1}.prototype.initialize.apply(this, arguments);" + "}" + "};"
+			+ "Charba{0}.prototype.addElements = function() {" + "var delegated = this.checkAndGetWrapper('addElements');" + "if (delegated !== null){" + "delegated.addElements.apply(this, arguments);" + "} else {"
+			+ "Chart.controllers.{1}.prototype.addElements.apply(this, arguments);" + "}" + "};" + "Charba{0}.prototype.draw = function() {" + "var delegated = this.checkAndGetWrapper('draw');" + "if (delegated !== null){"
+			+ "delegated.draw.apply(this, arguments);" + "} else {" + "Chart.controllers.{1}.prototype.draw.apply(this, arguments);" + "}" + "};" + "Charba{0}.prototype.removeHoverStyle = function() {"
+			+ "var delegated = this.checkAndGetWrapper('removeHoverStyle');" + "if (delegated !== null){" + "delegated.removeHoverStyle.apply(this, arguments);" + "} else {" + "Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);"
+			+ "}" + "};" + "Charba{0}.prototype.setHoverStyle = function() {" + "var delegated = this.checkAndGetWrapper('setHoverStyle');" + "if (delegated !== null){" + "delegated.setHoverStyle.apply(this, arguments);" + "} else {"
+			+ "Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);" + "}" + "};" + "Charba{0}.prototype.update = function() {" + "var delegated = this.checkAndGetWrapper('update');" + "if (delegated !== null){"
+			+ "delegated.update.apply(this, arguments);" + "} else {" + "Chart.controllers.{1}.prototype.update.apply(this, arguments);" + "}" + "};" + "Charba{0}.prototype.linkScales = function() {"
+			+ "var delegated = this.checkAndGetWrapper('linkScales');" + "if (delegated !== null){" + "delegated.linkScales.apply(this, arguments);" + "} else {" + "Chart.controllers.{1}.prototype.linkScales.apply(this, arguments);" + "}" + "};"
+			+ "Charba{0}.prototype.buildOrUpdateElements = function() {" + "var delegated = this.checkAndGetWrapper('buildOrUpdateElements');" + "if (delegated !== null){" + "delegated.buildOrUpdateElements.apply(this, arguments);" + "} else {"
+			+ "Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this, arguments);" + "}" + "};" + "Charba{0}.id = '{0}';" + "Charba{0}.defaults = Chart.defaults.{1};" + "Chart.registry.addControllers([Charba{0}]);";
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -120,8 +71,7 @@ final class JsControllerHelper {
 	}
 
 	/**
-	 * FIXME to be removed
-	 * Register the controller which does not extend any existing one.
+	 * FIXME to be removed Register the controller which does not extend any existing one.
 	 * 
 	 * @param controllerType controller type
 	 * @param instance controller java script instance
@@ -213,6 +163,26 @@ final class JsControllerHelper {
 	 */
 	void update(ChartType chartType, ControllerContext context, String mode) {
 		NativeJsControllerHelper.update(chartType.value(), context, mode);
+	}
+
+	/**
+	 * Invokes the default <code>linkScales</code> method.
+	 * 
+	 * @param chartType extended chart type
+	 * @param context context of controller
+	 */
+	void linkScales(ChartType chartType, ControllerContext context) {
+		NativeJsControllerHelper.linkScales(chartType.value(), context);
+	}
+
+	/**
+	 * Invokes the default <code>buildOrUpdateElements</code> method.
+	 * 
+	 * @param chartType extended chart type
+	 * @param context context of controller
+	 */
+	void buildOrUpdateElements(ChartType chartType, ControllerContext context) {
+		NativeJsControllerHelper.buildOrUpdateElements(chartType.value(), context);
 	}
 
 }

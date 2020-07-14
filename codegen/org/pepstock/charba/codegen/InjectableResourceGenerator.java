@@ -63,7 +63,7 @@ public class InjectableResourceGenerator {
 	// java class file extension
 	private static final String JAVA_EXTENSION = ".java";
 	// file where the properties of this code generator are stored
-	private static final File PROPERTIES_FILE = new File("./codegen/org/pepstock/charba/codegen/JavaScriptFiles.properties");
+	private static final File PROPERTIES_FILE = new File("./codegen/org/pepstock/charba/codegen/InjectableResourceGenerator.properties");
 	// file where the java class template is stored
 	private static final File TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/InjectableResource.template");
 	// threshold of amount of chars for any string array item

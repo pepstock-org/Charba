@@ -207,7 +207,6 @@
 	  
 	 @param controllerType controller type
 	 @param context context of controller
-	 @param ease if specified, this number represents how far to transition elements.
     */
     CharbaJsControllerHelper.draw = function(controllerType, context) {
     	Chart.controllers[controllerType].prototype.draw.call(context);
@@ -245,6 +244,24 @@
     */
     CharbaJsControllerHelper.update = function(controllerType, context, mode) {
     	Chart.controllers[controllerType].prototype.update.call(context, mode);
+    }
+    /*
+	 Invokes the default "linkScales" method.
+	  
+	 @param controllerType controller type
+	 @param context context of controller
+    */
+    CharbaJsControllerHelper.linkScales = function(controllerType, context) {
+    	Chart.controllers[controllerType].prototype.linkScales.call(context);
+    }
+    /*
+	 Invokes the default "buildOrUpdateElements" method.
+	  
+	 @param controllerType controller type
+	 @param context context of controller
+    */
+    CharbaJsControllerHelper.buildOrUpdateElements = function(controllerType, context) {
+    	Chart.controllers[controllerType].prototype.buildOrUpdateElements.call(context);
     }
     /*
 		JSWindowHelper is an object with a set of static methods used as utility

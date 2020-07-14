@@ -78,6 +78,26 @@ Charba{0}.prototype.update = function() {
 		Chart.controllers.{1}.prototype.update.apply(this, arguments);
 	}		
 };
+// Ensures that the dataset represented by this controller is linked to a scale. 
+// Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale
+Charba{0}.prototype.linkScales = function() {
+	var delegated = this.checkAndGetWrapper('linkScales');
+	if (delegated !== null){
+		delegated.linkScales.apply(this, arguments);
+	} else {
+		Chart.controllers.{1}.prototype.linkScales.apply(this, arguments);
+	}		
+};
+// Called by the main chart controller when an update is triggered.
+// The default implementation handles the number of data points changing and creating elements appropriately.
+Charba{0}.prototype.buildOrUpdateElements = function() {
+	var delegated = this.checkAndGetWrapper('buildOrUpdateElements');
+	if (delegated !== null){
+		delegated.buildOrUpdateElements.apply(this, arguments);
+	} else {
+		Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this, arguments);
+	}		
+};
 // --------------------
 // Register to CHART.JS
 // --------------------

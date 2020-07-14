@@ -142,6 +142,40 @@ final class WrapperController extends NativeObjectContainer {
 		void call(ControllerContext context, String mode);
 	}
 
+	/**
+	 * Java script FUNCTION callback called to catch the chart link scales.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyLinkScalesCallback {
+
+		/**
+		 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+		 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 */
+		void call(ControllerContext context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart build or update elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBuildOrUpdateElementsCallback {
+
+		/**
+		 * Called by the main chart controller when an update is triggered<br>
+		 * The default implementation handles the number of data points changing and creating elements appropriately.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 */
+		void call(ControllerContext context);
+	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -157,6 +191,10 @@ final class WrapperController extends NativeObjectContainer {
 	private final CallbackProxy<ProxySetHoverStyleCallback> setHoverStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the update function
 	private final CallbackProxy<ProxyUpdateCallback> updateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the linkScales function
+	private final CallbackProxy<ProxyLinkScalesCallback> linkScalesCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the buildOrUpdateElements function
+	private final CallbackProxy<ProxyBuildOrUpdateElementsCallback> buildOrUpdateElements = JsHelper.get().newCallbackProxy();
 
 	// user implementation of controller
 	private final Controller delegation;
@@ -172,7 +210,9 @@ final class WrapperController extends NativeObjectContainer {
 		DRAW("draw"),
 		REMOVE_HOVER_STYLE("removeHoverStyle"),
 		SET_HOVER_STYLE("setHoverStyle"),
-		UPDATE("update");
+		UPDATE("update"),
+		LINK_SCALES("linkScales"),
+		BUILD_OR_UPDATE_ELEMENTS("buildOrUpdateElements");
 
 		// name value of property
 		private final String value;
@@ -229,6 +269,10 @@ final class WrapperController extends NativeObjectContainer {
 		setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
 		updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
+		// invoke user method implementation
+		linkScalesCallbackProxy.setCallback((context) -> onLinkScales(context, context.getChart()));
+		// invoke user method implementation
+		buildOrUpdateElements.setCallback((context) -> onBuildOrUpdateElements(context, context.getChart()));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
@@ -236,6 +280,8 @@ final class WrapperController extends NativeObjectContainer {
 		setValue(Property.REMOVE_HOVER_STYLE, removeHoverStyleCallbackProxy.getProxy());
 		setValue(Property.SET_HOVER_STYLE, setHoverStyleCallbackProxy.getProxy());
 		setValue(Property.UPDATE, updateCallbackProxy.getProxy());
+		setValue(Property.LINK_SCALES, linkScalesCallbackProxy.getProxy());
+		setValue(Property.BUILD_OR_UPDATE_ELEMENTS, buildOrUpdateElements.getProxy());
 	}
 
 	/**
@@ -339,6 +385,34 @@ final class WrapperController extends NativeObjectContainer {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.update(context, chart, reset);
+		}
+	}
+
+	/**
+	 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart chart instance
+	 */
+	void onLinkScales(ControllerContext context, IsChart chart) {
+		// if consistent, calls controller
+		if (Controller.isConsistent(delegation, context, chart)) {
+			delegation.linkScales(context, chart);
+		}
+	}
+
+	/**
+	 * Called by the main chart controller when an update is triggered<br>
+	 * The default implementation handles the number of data points changing and creating elements appropriately.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart chart instance
+	 */
+	void onBuildOrUpdateElements(ControllerContext context, IsChart chart) {
+		// if consistent, calls controller
+		if (Controller.isConsistent(delegation, context, chart)) {
+			delegation.buildOrUpdateElements(context, chart);
 		}
 	}
 

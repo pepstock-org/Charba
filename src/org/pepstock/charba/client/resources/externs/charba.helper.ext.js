@@ -137,6 +137,18 @@ CharbaJsControllerHelper.setHoverStyle = function(chartType, context, element, d
  */
 CharbaJsControllerHelper.update = function(chartType, context, mode) {};
 /**
+ * @param {string} chartType 
+ * @param {Object} context 
+ * @return {undefined}
+ */
+CharbaJsControllerHelper.linkScales = function(chartType, context) {};
+/**
+ * @param {string} chartType 
+ * @param {Object} context 
+ * @return {undefined}
+ */
+CharbaJsControllerHelper.buildOrUpdateElements = function(chartType, context) {};
+/**
  * @constructor
  * @return {CharbaJsWindowHelper}
  */	
