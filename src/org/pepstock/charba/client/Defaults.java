@@ -487,7 +487,7 @@ public final class Defaults {
 		/**
 		 * Returns the scale defaults by axis type.
 		 * 
-		 * @param type
+		 * @param type the type of scale 
 		 * @return the scale defaults by axis type
 		 */
 		NativeObject getScale(AxisType type) {

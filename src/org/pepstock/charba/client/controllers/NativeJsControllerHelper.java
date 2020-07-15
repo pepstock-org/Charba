@@ -62,7 +62,6 @@ final class NativeJsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param datasetIndex dataset index
 	 */
 	@JsMethod
 	static native void initialize(String chartType, ControllerContext context);

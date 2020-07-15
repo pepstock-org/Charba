@@ -13,11 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.controllers;
+
 /**
- * Contains the code generators to create the {@link org.pepstock.charba.client.resources.AbstractInjectableResource} for all java script files that Charba is using and the java
- * script controller template.
+ * Contains the content of javascript controller template.<br>
+ * It will be filled with controller and chart types and execute. 
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.codegen;
+final class ControllerTemplate {
+
+	// encoded javascript content of controller template
+	static final String CONTENT = ${javaScriptContent};
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	private ControllerTemplate() {
+	}
+
+}

@@ -2,20 +2,20 @@
 // Controller class creation
 // --------------------------
 // Constructor
-function Charba{0}() {
-  Chart.controllers.{1}.apply(this, arguments);
+function Charba_ControllerType() {
+  Chart.controllers._ChartType.apply(this, arguments);
 }
 // Copies the extended controller prototype
-Charba{0}.prototype = Object.create(Chart.controllers.{1}.prototype);
+Charba_ControllerType.prototype = Object.create(Chart.controllers._ChartType.prototype);
 // Defines the constructor
-Charba{0}.prototype.constructor = Charba{0};
+Charba_ControllerType.prototype.constructor = Charba_ControllerType;
 
 // --------------------
 // Internal methods
 // --------------------
 // gets the wrappers y controller type or null if not defined
-Charba{0}.prototype.checkAndGetWrapper = function(property){
-	var delegated = CharbaJsControllerHelper.wrappers.{0};
+Charba_ControllerType.prototype.checkAndGetWrapper = function(property){
+	var delegated = CharbaJsControllerHelper.wrappers._ControllerType;
 	if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){
 		return delegated;
 	}
@@ -25,85 +25,85 @@ Charba{0}.prototype.checkAndGetWrapper = function(property){
 // Overrided methods
 // --------------------
 // Initializes the controller
-Charba{0}.prototype.initialize = function() {
+Charba_ControllerType.prototype.initialize = function() {
 	var delegated = this.checkAndGetWrapper('initialize');
 	if (delegated !== null){
 		delegated.initialize.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.initialize.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.initialize.apply(this, arguments);
 	}		
 };
 // Create elements for each piece of data in the dataset. Store elements in an array on the dataset as dataset.metaData
-Charba{0}.prototype.addElements = function() {
+Charba_ControllerType.prototype.addElements = function() {
 	var delegated = this.checkAndGetWrapper('addElements');
 	if (delegated !== null){
 		delegated.addElements.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.addElements.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.addElements.apply(this, arguments);
 	}		
 };
 // Draw the representation of the dataset
-Charba{0}.prototype.draw = function() {
+Charba_ControllerType.prototype.draw = function() {
 	var delegated = this.checkAndGetWrapper('draw');
 	if (delegated !== null){
 		delegated.draw.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.draw.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.draw.apply(this, arguments);
 	}			
 };
 // Remove hover styling from the given element
-Charba{0}.prototype.removeHoverStyle = function() {
+Charba_ControllerType.prototype.removeHoverStyle = function() {
 	var delegated = this.checkAndGetWrapper('removeHoverStyle');
 	if (delegated !== null){
 		delegated.removeHoverStyle.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.removeHoverStyle.apply(this, arguments);
 	}			
 };
 // Add hover styling to the given element
-Charba{0}.prototype.setHoverStyle = function() {
+Charba_ControllerType.prototype.setHoverStyle = function() {
 	var delegated = this.checkAndGetWrapper('setHoverStyle');
 	if (delegated !== null){
 		delegated.setHoverStyle.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.setHoverStyle.apply(this, arguments);
 	}		
 };
 // Update the elements in response to new data
-Charba{0}.prototype.update = function() {
+Charba_ControllerType.prototype.update = function() {
 	var delegated = this.checkAndGetWrapper('update');
 	if (delegated !== null){
 		delegated.update.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.update.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.update.apply(this, arguments);
 	}		
 };
 // Ensures that the dataset represented by this controller is linked to a scale. 
 // Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale
-Charba{0}.prototype.linkScales = function() {
+Charba_ControllerType.prototype.linkScales = function() {
 	var delegated = this.checkAndGetWrapper('linkScales');
 	if (delegated !== null){
 		delegated.linkScales.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.linkScales.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.linkScales.apply(this, arguments);
 	}		
 };
 // Called by the main chart controller when an update is triggered.
 // The default implementation handles the number of data points changing and creating elements appropriately.
-Charba{0}.prototype.buildOrUpdateElements = function() {
+Charba_ControllerType.prototype.buildOrUpdateElements = function() {
 	var delegated = this.checkAndGetWrapper('buildOrUpdateElements');
 	if (delegated !== null){
 		delegated.buildOrUpdateElements.apply(this, arguments);
 	} else {
-		Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this, arguments);
+		Chart.controllers._ChartType.prototype.buildOrUpdateElements.apply(this, arguments);
 	}		
 };
 // --------------------
 // Register to CHART.JS
 // --------------------
 // sets the controller id
-Charba{0}.id = '{0}'; 
+Charba_ControllerType.id = '_ControllerType'; 
 // copies the default options of extended chart type
-Charba{0}.defaults = Chart.defaults.{1}; 
+Charba_ControllerType.defaults = Chart.defaults._ChartType; 
 // registers into CHART.JS
-Chart.registry.addControllers([Charba{0}]);
+Chart.registry.addControllers([Charba_ControllerType]);

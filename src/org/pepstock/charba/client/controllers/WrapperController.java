@@ -381,10 +381,10 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chart chart chart instance
 	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void onUpdate(ControllerContext context, IsChart chart, String reset) {
+	void onUpdate(ControllerContext context, IsChart chart, String mode) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.update(context, chart, reset);
+			delegation.update(context, chart, mode);
 		}
 	}
 

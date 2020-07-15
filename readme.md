@@ -280,6 +280,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `columnHeights` property to `LegendNode` class.
  * improve the defaults management for scales.
  * add `JsPluginHelper` class in order to use CHART.JS registry feature to manage plugins.
+ * create a controller template code generator and add a specific target into `build.xml`.
 
 License
 -------

@@ -60,7 +60,6 @@
 	<!-- 
 		CHART.JS 
 	-->
-	<!--property name="javascript.chartjs.minify.file" value="chart.bundle.min.js" /-->
 	<property name="javascript.chartjs.minify.file" value="chart.min.js" />
 
 	<!-- 
@@ -77,6 +76,15 @@
 	<property name="javascript.chartjs.moment.minify.file" value="chartjs-adapter-moment.min.js" />
 	<property name="javascript.moment.minify.file" value="moment.min.js" />
 	<property name="javascript.luxon.minify.file" value="luxon.min.js" />
+
+	<!-- 
+		CHARBA controller template 
+	-->
+	<!--property name="javascript.chartjs.minify.file" value="chart.bundle.min.js" /-->
+	<property name="javascript.controller.template.dir" value="${codegen.dir}/org/pepstock/charba/codegen" />
+	<property name="javascript.controller.template.file" value="ExtendedController.template" />
+	<property name="javascript.controller.template.path" value="${javascript.controller.template.dir}/${javascript.controller.template.file}" />
+	<property name="javascript.controller.template.temp.path" value="${temp.dir}/${javascript.controller.template.file}" />
 
 	<!-- 
 		JAVA compiler options 
@@ -509,7 +517,7 @@
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
     -->
-	<target name="codeGenerator" depends="init, ivyRetrieveRuntime">
+	<target name="codeGeneratorInjectableResources" depends="init, ivyRetrieveRuntime">
 		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<classpath>
 				<path refid="ivyPath-runtime" />
@@ -544,6 +552,34 @@
 		  </classpath>
 		</java>
 		<echo>Created CHARBA injectable resources</echo>
+	</target>
+
+	<!--
+        CHARBA - Code generator to wrap the java script file for controller template into java class
+    -->
+	<target name="codeGeneratorControllerTemplate" depends="init, ivyRetrieveRuntime">
+		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile"/>
+			</classpath>
+		</javac>
+		<!-- minify CHARBA Helper-->
+		<echo>Minify Controller template from file "${javascript.controller.template.path}" to "${javascript.controller.template.temp.path}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.controller.template.temp.path}" forceRecompile="true">
+			<sources dir="${javascript.controller.template.dir}">
+				<file name="${javascript.controller.template.file}" />
+			</sources>
+		</closure-compiler>
+		<!-- invokes code generator -->
+		<echo>Creating CHARBA controller template...</echo>
+		<java classname="org.pepstock.charba.codegen.ControllerTemplateGenerator">
+		  <arg value="${javascript.controller.template.temp.path}"/>
+		  <classpath>
+		    <pathelement location="${classes.dir}"/>
+		  </classpath>
+		</java>
+		<echo>Created CHARBA controller template</echo>
 	</target>
 
 	<!-- 
