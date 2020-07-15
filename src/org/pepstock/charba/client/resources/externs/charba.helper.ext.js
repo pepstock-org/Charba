@@ -82,17 +82,11 @@ CharbaJsPluginHelper.getAll = function() {};
 function CharbaJsControllerHelper() {}
 /**
  * @param {string} controllerType 
- * @param {Object} object
- * @return {undefined}
- */
-CharbaJsControllerHelper.register = function(controllerType, object) {};
-/**
- * @param {string} controllerType 
  * @param {string} chartType 
  * @param {Object} object
  * @return {undefined}
  */
-CharbaJsControllerHelper.extend = function(controllerType, chartType, object) {};
+CharbaJsControllerHelper.register = function(controllerType, chartType, object) {};
 /**
  * @param {string} chartType 
  * @param {Object} context 

@@ -21,26 +21,15 @@ import org.pepstock.charba.client.Type;
 
 /**
  * Represent the type of new controller. Must be created for every controller implementation.<br>
- * It can be created extending an existing chart type or new type.
+ * It can be created ONLY extending an existing chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ControllerType implements Type {
 	// type of chart
 	private final String type;
-	// type of scale
-	private final ScaleType scaleType;
 	// type of extended chart
-	private final ChartType chartType;
-
-	/**
-	 * Creates new chart type with scale type {@link ScaleType#MULTI} as default.
-	 * 
-	 * @param type new chart type as string.
-	 */
-	public ControllerType(String type) {
-		this(type, ScaleType.MULTI);
-	}
+	private final Type chartType;
 
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
@@ -49,28 +38,7 @@ public final class ControllerType implements Type {
 	 * @param type new chart type as string.
 	 * @param chartType existing chart type, as extension.
 	 */
-	public ControllerType(String type, ChartType chartType) {
-		this(type, chartType, null);
-	}
-
-	/**
-	 * Creates new chart type with a specific scale type.
-	 * 
-	 * @param type new chart type as string.
-	 * @param scaleType scale type of new chart.
-	 */
-	public ControllerType(String type, ScaleType scaleType) {
-		this(type, null, scaleType);
-	}
-
-	/**
-	 * Internal constructor which creates new chart.
-	 * 
-	 * @param type new chart type as string.
-	 * @param chartType existing chart type, as extension or <code>null</code> if new chart does not extend an existing chart.
-	 * @param scaleType scale type of new chart.
-	 */
-	private ControllerType(String type, ChartType chartType, ScaleType scaleType) {
+	public ControllerType(String type, Type chartType) {
 		// checks type if consistent
 		if (type == null) {
 			throw new IllegalArgumentException("Type is null");
@@ -84,14 +52,10 @@ public final class ControllerType implements Type {
 				throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
 			}
 		}
-		// checks chart and scale type if are consistent
-		if (chartType == null && scaleType == null) {
-			throw new IllegalArgumentException("Chart type and scale types are null");
-		}
+		// checks chart type if is consistent
+		Type.checkIfValid(chartType);
 		this.type = type;
 		this.chartType = chartType;
-		// if scale type is null, takes the scale type of chart type
-		this.scaleType = scaleType == null ? chartType.scaleType() : scaleType;
 	}
 
 	/*
@@ -111,25 +75,16 @@ public final class ControllerType implements Type {
 	 */
 	@Override
 	public ScaleType scaleType() {
-		return scaleType;
+		return chartType.scaleType();
 	}
 
 	/**
-	 * Returns the extended chart type of controller, otherwise <code>null</code>.
+	 * Returns the extended chart type of controller.
 	 * 
-	 * @return the extended chart type of controller, otherwise <code>null</code>
+	 * @return the extended chart type of controller
 	 */
-	public ChartType getChartType() {
+	public Type getChartType() {
 		return chartType;
-	}
-
-	/**
-	 * Returns <code>true</code> if this controller is extending an existing chart.
-	 * 
-	 * @return <code>true</code> if this controller is extending an existing chart, otherwise <code>false</code>.
-	 */
-	public boolean isExtended() {
-		return Type.isValid(chartType);
 	}
 
 	/*

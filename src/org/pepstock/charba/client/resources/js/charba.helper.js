@@ -156,24 +156,13 @@
 	*/
     function CharbaJsControllerHelper() {}
     /*
-     Register the controller which does not extend any existing one.
-	  
-	 @param controllerType controller type
-	 @param instance controller java script instance
-    */
-    CharbaJsControllerHelper.register = function(controllerType, instance) {
-    	// FIXME to be removed
-    	Chart.controllers[controllerType] = Chart.DatasetController.extend(instance);
-    }
-    /*
 	 Extends an existing chart with a controller implementation.
 	  
 	 @param controllerType controller type
 	 @param chartType type of extended chart
 	 @param instance controller java script instance    
     */
-    CharbaJsControllerHelper.extend = function(controllerType, chartType, instance) {
-    	console.log("type ", controllerType, chartType, instance);
+    CharbaJsControllerHelper.register = function(controllerType, chartType, instance) {
     	if (typeof CharbaJsControllerHelper.wrappers === 'undefined'){ 
 			Object.defineProperty(CharbaJsControllerHelper, 'wrappers', {
 				value: {},

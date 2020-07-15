@@ -225,7 +225,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
  * rename `CartesianAxisType` class into `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
  * remove `MarginsItem`, `AxisMarginsItem` and `AxisMinSizeItem` classes because they are not visible in CHART.JS anymore.
- * remove `setAxis` methods from `Scale` and `Axis` classes because it must be set when an axis is built. 
+ * remove `setAxis` methods from `Scale` and `Axis` classes because it must be set when an axis is built.
+ * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
+ * rename `extend` method of `Controllers` class to `register`.
  
 ### Features
 

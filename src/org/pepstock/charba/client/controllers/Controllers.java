@@ -59,7 +59,7 @@ public final class Controllers {
 	 * @param controller controller instance
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
 	 */
-	public boolean extend(Controller controller) {
+	public boolean register(Controller controller) {
 		// checks the consistency of controller
 		// and creates a java script object, wrapper of the controller
 		WrapperController wController = check(controller);
@@ -67,16 +67,9 @@ public final class Controllers {
 		if (wController != null) {
 			// gets the controller type
 			ControllerType type = controller.getType();
-			// if not null, the controller extends an existing chart
-			if (type.isExtended()) {
-				// extends an existing chart
-				JsControllerHelper.get().extend(type, type.getChartType(), wController.nativeObject());
-				return true;
-			} else {
-				// if here, the controller is new TYPE (no extend)
-				JsControllerHelper.get().register(type, wController.nativeObject());
-				return true;
-			}
+			// extends an existing chart
+			JsControllerHelper.get().register(type, wController.nativeObject());
+			return true;
 		}
 		// controller already exists
 		return false;

@@ -76,7 +76,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 		// checks if already registered
 		if (!Defaults.get().getControllers().isRegistered(type.value())) {
 			// if not, adds a controller
-			Defaults.get().getControllers().extend(new BaseMeterController(type));
+			Defaults.get().getControllers().register(new BaseMeterController(type));
 		}
 		// calls super chart options creations
 		return super.createChartOptions();

@@ -39,15 +39,6 @@ final class NativeJsControllerHelper {
 	}
 
 	/**
-	 * Register the controller which does not extend any existing one.
-	 * 
-	 * @param controllerType controller type
-	 * @param object controller java script instance
-	 */
-	@JsMethod
-	static native void register(String controllerType, NativeObject object);
-
-	/**
 	 * Extends an existing chart with a controller implementation.
 	 * 
 	 * @param controllerType controller type
@@ -55,7 +46,7 @@ final class NativeJsControllerHelper {
 	 * @param object controller java script instance
 	 */
 	@JsMethod
-	static native void extend(String controllerType, String chartType, NativeObject object);
+	static native void register(String controllerType, String chartType, NativeObject object);
 
 	/**
 	 * Invokes the default <code>initialize</code> method.

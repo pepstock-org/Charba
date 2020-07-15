@@ -35,9 +35,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void initialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().initialize(getType().getChartType(), context);
+			JsControllerHelper.get().initialize(getType(), context);
 		}
 	}
 
@@ -49,9 +49,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void addElements(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().addElements(getType().getChartType(), context);
+			JsControllerHelper.get().addElements(getType(), context);
 		}
 	}
 
@@ -63,9 +63,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().draw(getType().getChartType(), context);
+			JsControllerHelper.get().draw(getType(), context);
 		}
 	}
 
@@ -78,9 +78,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
+		if (Controller.isConsistent(this, context, chart) && element != null) {
 			// invokes default
-			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.nativeObject(), datasetIndex, index);
+			JsControllerHelper.get().removeHoverStyle(getType(), context, element.nativeObject(), datasetIndex, index);
 		}
 	}
 
@@ -93,9 +93,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended() && element != null) {
+		if (Controller.isConsistent(this, context, chart) && element != null) {
 			// invokes default
-			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.nativeObject(), datasetIndex, index);
+			JsControllerHelper.get().setHoverStyle(getType(), context, element.nativeObject(), datasetIndex, index);
 		}
 	}
 
@@ -107,9 +107,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void update(ControllerContext context, IsChart chart, String mode) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().update(getType().getChartType(), context, mode);
+			JsControllerHelper.get().update(getType(), context, mode);
 		}
 	}
 
@@ -121,9 +121,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void linkScales(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().linkScales(getType().getChartType(), context);
+			JsControllerHelper.get().linkScales(getType(), context);
 		}
 	}
 
@@ -135,9 +135,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void buildOrUpdateElements(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && getType().isExtended()) {
+		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().buildOrUpdateElements(getType().getChartType(), context);
+			JsControllerHelper.get().buildOrUpdateElements(getType(), context);
 		}
 	}
 
