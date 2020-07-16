@@ -120,18 +120,6 @@ public interface Key {
 		// then returns default
 		return defaultKey;
 	}
-	
-	/**
-	 * Returns <code>true</code> if the passed value is an item of an enumeration.
-	 * 
-	 * @param enumValues enumeration values of keys
-	 * @param value value to search into key
-	 * @param <T> type of key
-	 * @return <code>true</code> if the passed value is an item of an enumeration
-	 */
-	static <T extends Key> boolean isKey(T[] enumValues, String value) {
-		return getKeyByValue(enumValues, value) != null;
-	}
 
 	/**
 	 * Compares the two specified key values.

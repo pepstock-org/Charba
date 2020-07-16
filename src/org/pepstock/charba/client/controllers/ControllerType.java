@@ -18,6 +18,7 @@ package org.pepstock.charba.client.controllers;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 
 /**
  * Represent the type of new controller. Must be created for every controller implementation.<br>
@@ -43,14 +44,11 @@ public final class ControllerType implements Type {
 		if (type == null) {
 			throw new IllegalArgumentException("Type is null");
 		}
-		// scans all defualt chart type
+		// checks if the controller type is already defained for a default chart type
 		// because a controller type can non called as a default one
-		for (ChartType defaultChartType : ChartType.values()) {
-			// checks if the type is equals of any chart type
-			if (defaultChartType.value().equalsIgnoreCase(type)) {
-				// if equals exception
-				throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
-			}
+		if (Key.hasKeyByValue(ChartType.values(), type)) {
+			// if equals exception
+			throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
 		}
 		// checks chart type if is consistent
 		Type.checkIfValid(chartType);

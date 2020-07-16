@@ -78,7 +78,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	public void setEnabled(String pluginId, boolean enabled) {
 		// checks if is a default plugin
 		// if default plugin does nothing
-		if (!Key.isKey(DefaultPlugin.values(), pluginId)) {
+		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
 			setValue(PluginIdChecker.key(pluginId), enabled);
 			// checks if the node is already added to parent
 			checkAndAddToParent();
