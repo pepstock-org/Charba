@@ -49,8 +49,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY = "Plugin id '{0}' is not equals to plugin id '{1}'of factory";
 
 	/**
-	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
-	 * No default values for this element.
+	 * Creates the object with the parent, the key of this element, defaults and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
@@ -58,7 +57,6 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param nativeObject native object to map java script properties
 	 */
 	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
-		// no default values for this element
 		super(options, childKey, defaultValues, nativeObject);
 	}
 
@@ -78,19 +76,13 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
-		setValue(PluginIdChecker.key(pluginId), enabled);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets if a default CHART.JS plugin must be enabled or not.
-	 * 
-	 * @param plugin default CHART.JS plugin instance.
-	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
-	 */
-	public void setEnabled(DefaultPlugin plugin, boolean enabled) {
-		setEnabled(plugin.value(), enabled);
+		// checks if is a default plugin
+		// if default plugin does nothing
+		if (!Key.isKey(DefaultPlugin.values(), pluginId)) {
+			setValue(PluginIdChecker.key(pluginId), enabled);
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
 	}
 
 	/**
@@ -135,16 +127,6 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		// if here, the property can exist or not.
 		// therefore is not disabled
 		return false;
-	}
-
-	/**
-	 * Returns if a default CHART.JS plugin is enabled or not, forced directly by global plugin manager
-	 * 
-	 * @param plugin a default CHART.JS plugin.
-	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
-	 */
-	public boolean isForcedlyDisabled(DefaultPlugin plugin) {
-		return isForcedlyDisabled(plugin.value());
 	}
 
 	/**

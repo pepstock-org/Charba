@@ -25,7 +25,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Internal plugin, set by data object before a chart is initializing.<br>
@@ -100,26 +99,6 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			}
 		}
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
-	 */
-	@Override
-	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
-		Window.getConsole().log("Begin", overridePreviousUpdate);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onEndDrawing(IsChart chart) {
-		Window.getConsole().log("End");
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -161,10 +140,10 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
+	public boolean onBeforeDatasetsDraw(IsChart chart) {
 		// checks if chart is consistent
 		// the before update is already passed for pattern that
 		// means first execution

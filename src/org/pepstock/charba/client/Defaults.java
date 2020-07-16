@@ -31,6 +31,7 @@ import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
@@ -85,10 +86,27 @@ public final class Defaults {
 		ResourcesType.getClientBundle().inject();
 		// gets default from Chart
 		NativeObject defaults = Chart.getDefaults();
-		// creates global options wrapping the global property of CHART
-		this.options = new GlobalOptions(defaults);
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(defaults);
+		// --------------------
+		// the defaults of plugins provided by CHART.JS (legend, title and tooltips)
+		// set own default options into defaults.plugin and not longer to the default node.
+		// then it reads the default plugins and copies (reference of object)
+		// to the options nodes
+		// --------------------
+		// creates an internal map for plugin node
+		InternalPlugin internalPlugin = new InternalPlugin(wrapperDefaults.getPlugins());
+		// retrieves plugin default options
+		NativeObject titleOptions = internalPlugin.getOptions(DefaultPlugin.TITLE);
+		NativeObject legendOptions = internalPlugin.getOptions(DefaultPlugin.LEGEND);
+		NativeObject tooltipsOptions = internalPlugin.getOptions(DefaultPlugin.TOOLTIP);
+		// copies the native object on original nodes
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.TITLE, titleOptions);
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.LEGEND, legendOptions);
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.TOOLTIP, tooltipsOptions);
+		// --------------------
+		// creates global options wrapping the global property of CHART
+		this.options = new GlobalOptions(defaults);
 		// creates global scale wrapping the scale property of CHART
 		this.scale = new GlobalScale(wrapperDefaults.getScale());
 		// creates global scales wrapping the scales property of CHART
@@ -373,6 +391,7 @@ public final class Defaults {
 		 */
 		private enum Property implements Key
 		{
+			PLUGINS("plugins"),
 			SCALE("scale"),
 			SCALES("scales");
 
@@ -415,7 +434,6 @@ public final class Defaults {
 		 */
 		NativeObject getScale() {
 			return getValue(Property.SCALE);
-
 		}
 
 		/**
@@ -425,7 +443,19 @@ public final class Defaults {
 		 */
 		NativeObject getScales() {
 			return getValue(Property.SCALES);
-
+		}
+		
+		/**
+		 * Returns the PLUGINS global options of chart as native object.
+		 * 
+		 * @return the PLUGINS global options
+		 */
+		NativeObject getPlugins() {
+			return getValue(Property.PLUGINS);
+		}
+		
+		void setPluginDefaultIntoOptions(DefaultPlugin plugin, NativeObject options) {
+			setValue(plugin.getPropertyName(), options);
 		}
 
 		/**
@@ -487,7 +517,7 @@ public final class Defaults {
 		/**
 		 * Returns the scale defaults by axis type.
 		 * 
-		 * @param type the type of scale 
+		 * @param type the type of scale
 		 * @return the scale defaults by axis type
 		 */
 		NativeObject getScale(AxisType type) {
@@ -546,6 +576,26 @@ public final class Defaults {
 		public void onAfterInit(IsChart chart, Chart nativeChart) {
 			// stores native object
 			Charts.addNative(nativeChart);
+		}
+
+	}
+
+	/**
+	 * Configures the default title which defines text to draw at the top of the chart.<br>
+	 * It extends teh chart options for title because the global options for TITLE plugin are <code>defaults.plugin.title</code>.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class InternalPlugin extends NativeObjectContainer {
+
+		InternalPlugin(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		NativeObject getOptions(DefaultPlugin plugin) {
+			return getValue(plugin);
+
 		}
 
 	}

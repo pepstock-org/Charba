@@ -209,6 +209,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * redesign of `TooltipModel` class in according with new Chart.js model.
    * remove `ScaleDistribution` enumeration. Use new scale `CartesianTimeSeriesAxis`, introduced in its place.
    * remove `ease` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw`, `onAfterDatasetsDraw`, `onBeforeDatasetDraw` and `onBeforeDatasetDraw` methods of `Plugin` interface because is not passed by CHART.JS anymore.
+   * remove `hidden` attribute from `LegendItem` and `LegendLabelItem` classes because not supported anymore. Use new `isHidden(chart)` method of `LegendItem` class.
    * change `Controller` interface in order to be align with new interface implemented in new CHART.JS.
  * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
@@ -228,6 +229,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setAxis` methods from `Scale` and `Axis` classes because it must be set when an axis is built.
  * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
  * rename `extend` method of `Controllers` class to `register`.
+ * remove `setEnabled` method for `DefaultPlugin` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
  
 ### Features
 

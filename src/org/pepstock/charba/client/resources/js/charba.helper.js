@@ -282,7 +282,7 @@
     */
     CharbaJsPositionerHelper.register = function(name, module) {
     	if (module != null && typeof module === 'function'){
-    	    const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+    	    const tooltipPlugin = Chart.registry.getPlugin('tooltip');
             tooltipPlugin.positioners[name] = module;
     	}
     }
@@ -292,7 +292,7 @@
 	 @param name name of new position to set into tooltip config
     */
     CharbaJsPositionerHelper.unregister = function(name) {
-   	    const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+   	    const tooltipPlugin = Chart.registry.getPlugin('tooltip');
     	if (tooltipPlugin.positioners[name] != 'undefined'){
  		    delete tooltipPlugin.positioners[name];
     	}
@@ -307,7 +307,7 @@
 	 @return the point calculated by positioner or <code>null</code> if positioner does not exist
     */
     CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
-        const tooltipPlugin = Chart.plugins.getAll().find(p => p.id === 'tooltip');
+        const tooltipPlugin = Chart.registry.getPlugin('tooltip');
     	if (tooltipPlugin.positioners[name]  != 'undefined'){
     		return tooltipPlugin.positioners[name].apply(context, Array.of(elements, eventPoint));
     	}

@@ -270,16 +270,15 @@ final class WrapperPlugin extends NativeObjectContainer {
 	interface ProxyBeforeDrawCallback {
 
 		/**
-		 * Called before drawing 'chart' at every animation frame specified by the given easing value.<br>
+		 * Called before drawing 'chart' at every animation frame.<br>
 		 * If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
-		 * @param easing The current animation value, between 0.0 and 1.0.
 		 * @param options plugin options set by user into chart options.
 		 * @return <code>false</code> to cancel the chart drawing.
 		 */
-		boolean call(CallbackFunctionContext context, Chart chart, double easing, NativeObject options);
+		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
 	}
 
 	/**
@@ -291,15 +290,14 @@ final class WrapperPlugin extends NativeObjectContainer {
 	interface ProxyAfterDrawCallback {
 
 		/**
-		 * Called after the 'chart' has been drawn for the specific easing value.<br>
+		 * Called after the 'chart' has been drawn.<br>
 		 * Note that this hook will not be called if the drawing has been previously cancelled.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
-		 * @param easing The current animation value, between 0.0 and 1.0.
 		 * @param options plugin options set by user into chart options.
 		 */
-		void call(CallbackFunctionContext context, Chart chart, double easing, NativeObject options);
+		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
 	}
 
 	/**
@@ -316,11 +314,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
-		 * @param easing The current animation value, between 0.0 and 1.0.
 		 * @param options plugin options set by user into chart options.
 		 * @return <code>false</code> to cancel the chart datasets drawing.
 		 */
-		boolean call(CallbackFunctionContext context, Chart chart, double easing, NativeObject options);
+		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
 	}
 
 	/**
@@ -332,14 +329,14 @@ final class WrapperPlugin extends NativeObjectContainer {
 	interface ProxyAfterDatasetsDrawCallback {
 
 		/**
-		 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
+		 * Called after the 'chart' datasets have been drawn.<br>
+		 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
-		 * @param easing The current animation value, between 0.0 and 1.0.
 		 * @param options plugin options set by user into chart options.
 		 */
-		void call(CallbackFunctionContext context, Chart chart, double easing, NativeObject options);
+		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
 	}
 
 	/**
@@ -454,7 +451,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	interface ProxyAfterEventCallback {
 
 		/**
-		 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
+		 * Called after the 'event' has been consumed.<br>
+		 * Note that this hook will not be called if the 'event' has been previously discarded.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
@@ -657,11 +655,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetUpdate(chart.getChart(), new DatasetPluginItem(item)));
 		// invoke user method implementation
-		afterDatasetsDrawCallbackProxy.setCallback((context, chart, easing, options) -> onAfterDatasetsDraw(chart.getChart(), easing));
+		afterDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
 		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsUpdate(chart.getChart()));
 		// invoke user method implementation
-		afterDrawCallbackProxy.setCallback((context, chart, easing, options) -> onAfterDraw(chart.getChart(), easing));
+		afterDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDraw(chart.getChart()));
 		// invoke user method implementation
 		afterEventCallbackProxy.setCallback((context, chart, item, options) -> onAfterEvent(chart.getChart(), new EventPluginItem(item)));
 		// invoke user method implementation
@@ -679,11 +677,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetUpdate(chart.getChart(), new DatasetPluginItem(item)));
 		// invoke user method implementation
-		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, easing, options) -> onBeforeDatasetsDraw(chart.getChart(), easing));
+		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
 		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsUpdate(chart.getChart()));
 		// invoke user method implementation
-		beforeDrawCallbackProxy.setCallback((context, chart, easing, options) -> onBeforeDraw(chart.getChart(), easing));
+		beforeDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
 		beforeEventCallbackProxy.setCallback((context, chart, item, options) -> onBeforeEvent(chart.getChart(), new EventPluginItem(item)));
 		// invoke user method implementation
@@ -824,7 +822,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	// ----------------------------
 
 	/**
-	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
+	 * Called before updating 'chart'.<br>
+	 * If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart update.
@@ -844,7 +843,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
+	 * Called after 'chart' has been updated and before rendering.<br>
+	 * Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -856,7 +856,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
+	 * Called before laying out 'chart'.<br>
+	 * If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart layout.
@@ -871,7 +872,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been previously cancelled.
+	 * Called after the 'chart' has been layed out.<br>
+	 * Note that this hook will not be called if the layout update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -883,7 +885,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
+	 * Called before updating the 'chart' datasets.<br>
+	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the datasets update.
@@ -898,7 +901,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets have been updated.<br>
+	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -910,8 +914,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is
-	 * triggered.
+	 * Called before updating the 'chart' dataset at the given 'args.index'.<br>
+	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
 	 * @param item dataset item.
@@ -927,7 +931,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' has been updated.<br>
+	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
 	 * @param item dataset item.
@@ -944,13 +949,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 	// ----------------------------
 
 	/**
-	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
+	 * Called before rendering 'chart'.<br>
+	 * If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	boolean onBeforeRender(IsChart chart) {
-		// FIXME https://github.com/chartjs/Chart.js/blob/40871b0062637adf2245ba0d6afcbb81f1d4c55b/src/core/core.controller.js#L1091
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the before render, checking result for plugin status
@@ -960,7 +965,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the rendering has been previously cancelled.
+	 * Called after the 'chart' has been fully rendered (and animation completed).<br>
+	 * Note that this hook will not be called if the rendering has been previously cancelled.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -982,61 +988,60 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns <code>false</code>, the frame drawing is cancelled until
-	 * another 'render' is triggered.
+	 * Called before drawing 'chart' at every animation frame.<br>
+	 * If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart chart instance
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	boolean onBeforeDraw(IsChart chart, double easing) {
+	boolean onBeforeDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeDraw(chart, easing));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDraw(chart));
 		}
 		return true;
 	}
 
 	/**
-	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the drawing has been previously cancelled.
+	 * Called after the 'chart' has been drawn.<br>
+	 * Note that this hook will not be called if the drawing has been previously cancelled.
 	 * 
 	 * @param chart chart instance
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDraw(IsChart chart, double easing) {
+	void onAfterDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterDraw(chart, easing);
+			delegation.onAfterDraw(chart);
 		}
 	}
 
 	/**
-	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'chart' datasets.<br>
+	 * If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart chart instance
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
+	boolean onBeforeDatasetsDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsDraw(chart, easing));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsDraw(chart));
 		}
 		return true;
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
+	 * Called after the 'chart' datasets have been drawn.<br>
+	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart chart instance
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDatasetsDraw(IsChart chart, double easing) {
+	void onAfterDatasetsDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterDatasetsDraw(chart, easing);
+			delegation.onAfterDatasetsDraw(chart);
 		}
 	}
 
@@ -1186,8 +1191,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 
 	/**
 	 * Returns the returned boolean value of "before" methods of plugin.<br>
-	 * It checks if returning <code>false</code> and then stopping the chart drawing, the counter must be decremented in order to be always aligned with overriding parameter
-	 * of {@link Plugin#onBeginDrawing(IsChart, boolean)}.
+	 * It checks if returning <code>false</code> and then stopping the chart drawing, the counter must be decremented in order to be always aligned with overriding parameter of
+	 * {@link Plugin#onBeginDrawing(IsChart, boolean)}.
 	 * 
 	 * @param chart chart instance where the plugin has been applied
 	 * @param returnedValue the returned boolean value of "before" method of plugin

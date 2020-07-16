@@ -178,39 +178,39 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeDraw(IsChart chart, double easing) {
+	public boolean onBeforeDraw(IsChart chart) {
 		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterDraw(IsChart chart, double easing) {
+	public void onAfterDraw(IsChart chart) {
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
+	public boolean onBeforeDatasetsDraw(IsChart chart) {
 		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterDatasetsDraw(IsChart chart, double easing) {
+	public void onAfterDatasetsDraw(IsChart chart) {
 	}
 
 	/*

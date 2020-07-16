@@ -190,10 +190,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeDraw(IsChart chart, double easing) {
+	public boolean onBeforeDraw(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// gets options
@@ -234,12 +234,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterDraw(IsChart chart, double easing) {
+	public void onEndDrawing(IsChart chart) {
 		// checks if chart is consistent
-		if (IsChart.isValid(chart) && easing == 1D) {
+		if (IsChart.isValid(chart)) {
 			// when the draw is completed
 			// remove the options from cache in order to reload it
 			// when chart is re drawing for whatever reason.

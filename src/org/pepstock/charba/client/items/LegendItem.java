@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -50,7 +51,6 @@ public class LegendItem extends NativeObjectContainer {
 		INDEX("index"),
 		TEXT("text"),
 		FILL_STYLE("fillStyle"),
-		HIDDEN("hidden"),
 		LINE_CAP("lineCap"),
 		LINE_DASH("lineDash"),
 		LINE_DASH_OFFSET("lineDashOffset"),
@@ -98,6 +98,26 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	LegendItem(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/**
+	 * Returns <code>true</code> if this item represents a hidden dataset.<br>
+	 * Label will be rendered with a strike-through effect
+	 * 
+	 * @param chart chart instance to check if dataset or data are visible
+	 * @return <code>true</code> if this item represents a hidden dataset.<br>
+	 *         Label will be rendered with a strike-through effect.<br>
+	 *         Default is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public final boolean isHidden(IsChart chart) {
+		// checks if chart is consistent
+		if (IsChart.isValid(chart)) {
+			// gets if is hidden depending on dataset or data index
+			return getDatasetIndex() != UndefinedValues.INTEGER ? !chart.isDatasetVisible(getDatasetIndex()) : !chart.isDataVisible(getIndex());
+		}
+		// if here, chart is not consistent
+		// returns always false
+		return false;
 	}
 
 	/**
@@ -272,16 +292,6 @@ public class LegendItem extends NativeObjectContainer {
 		}
 		// if here, is not a color then returns null
 		return null;
-	}
-
-	/**
-	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
-	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
-	 *         Default is {@link UndefinedValues#BOOLEAN}.
-	 */
-	public final boolean isHidden() {
-		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
 	/**

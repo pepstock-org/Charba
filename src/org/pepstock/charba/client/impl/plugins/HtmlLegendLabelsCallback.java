@@ -306,7 +306,7 @@ final class HtmlLegendLabelsCallback {
 			label.getStyle().setDirection(TextDirection.LEFT_TO_RIGHT.value());
 		}
 		// checks if item is hidden
-		if (item.isHidden()) {
+		if (item.isHidden(chart)) {
 			// if hidden, apply a specific text decoration
 			label.getStyle().setTextDecoration(TextDecoration.LINE_THROUGH);
 		}

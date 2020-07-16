@@ -268,15 +268,6 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
-	 * 
-	 * @param hidden true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
-	 */
-	public void setHidden(boolean hidden) {
-		setValue(LegendItem.Property.HIDDEN, hidden);
-	}
-
-	/**
 	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param style how the end points of every box border are drawn.

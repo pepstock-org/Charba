@@ -35,7 +35,6 @@ import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
-import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.LegendLabelItem;
@@ -73,10 +72,6 @@ public final class HtmlLegend extends AbstractPlugin {
 	private final Set<String> pluginAddedLegendStatus = new HashSet<>();
 	// cache to store DIV element which contains legend for each chart
 	private final Map<String, Div> pluginDivElements = new HashMap<>();
-	// cache to store easing during drawing for each chart
-	// this cache is needed in order to recreate the legend when a chart update
-	// is invoked during a previous update
-	private final Map<String, Double> pluginEasingStatus = new HashMap<>();
 	// cache to store the original value of legend in order to
 	// manage the change of the legend display after chart creation
 	private final Map<String, Boolean> pluginLegendDisplayStatus = new HashMap<>();
@@ -154,12 +149,21 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart) {
+	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
 		// checks if argument is consistent
 		if (mustBeDisplay(chart)) {
+			// checks if reloading during previous drawing
+			// if the previous stored easing is greater than the current one her
+			// means that the is chart is updating without waiting for ending
+			// the previous update
+			if (overridePreviousUpdate) {
+				// removes the item
+				// in order to after draw to create the legend
+				pluginAddedLegendStatus.remove(chart.getId());
+			}
 			// gets the legend
 			Legend legend = chart.getOptions().getLegend();
 			// creates legend DIV element reference
@@ -196,39 +200,15 @@ public final class HtmlLegend extends AbstractPlugin {
 				legendElement.getStyle().setWidth(Unit.PCT.format(100));
 			}
 		}
-		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
-	public boolean onBeforeDraw(IsChart chart, double easing) {
-		// checks if argument is consistent
-		// checks if reloading during previous drawing
-		// if the previous stored easing is greater than the current one her
-		// means that the is chart is updating without waiting for ending
-		// the previous update
-		
-		// FIXME https://github.com/chartjs/Chart.js/issues/7549
-		
-		if (mustBeDisplay(chart) && pluginEasingStatus.put(chart.getId(), easing) > easing) {
-			// removes the item
-			// in order to after draw to create the legend
-			pluginAddedLegendStatus.remove(chart.getId());
-		}
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart, double)
-	 */
-	@Override
-	public void onAfterDraw(IsChart chart, double easing) {
+	public void onAfterDraw(IsChart chart) {
 		// checks if argument is consistent
 		if (mustBeDisplay(chart)) {
 			// checks if the legend must be created
@@ -251,15 +231,21 @@ public final class HtmlLegend extends AbstractPlugin {
 				// in order do not add the inner html every easing
 				pluginAddedLegendStatus.add(chart.getId());
 			}
-			// if end of drawing,
-			// removes charts from set
-			if (easing == 1D) {
-				// removes chart for items
-				// in order to add next cycle
-				pluginAddedLegendStatus.remove(chart.getId());
-				// sets easing to zero
-				pluginEasingStatus.put(chart.getId(), 0D);
-			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onEndDrawing(IsChart chart) {
+		// checks if argument is consistent
+		if (mustBeDisplay(chart)) {
+			// removes chart for items
+			// in order to add next cycle
+			pluginAddedLegendStatus.remove(chart.getId());
 		}
 	}
 
@@ -322,12 +308,9 @@ public final class HtmlLegend extends AbstractPlugin {
 			// stored the legend display value because is missing
 			pluginLegendDisplayStatus.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
 		}
-		boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
-		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
+		if (chart.getOptions().getLegend().isDisplay() || cachedValue) {
 			// disable legend
 			chart.getOptions().getLegend().setDisplay(false);
-			// sets easing to zero
-			pluginEasingStatus.put(chart.getId(), 0D);
 			// creates options instance
 		} else {
 			// resets all status items if there are
@@ -378,8 +361,6 @@ public final class HtmlLegend extends AbstractPlugin {
 		pluginAddedLegendStatus.remove(chart.getId());
 		// removes the chart legend labels items
 		pluginLegendLabelsItems.remove(chart.getId());
-		// removes the chart from easing status
-		pluginEasingStatus.remove(chart.getId());
 		// removes cached point style from tile factory
 		// if there are
 		HtmlLegendItem htmlLegendItem = new HtmlLegendItem(chart);

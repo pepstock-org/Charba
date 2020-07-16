@@ -158,39 +158,35 @@ public interface Plugin {
 	void onAfterRender(IsChart chart);
 
 	/**
-	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns <code>false</code>, the frame drawing is cancelled until
+	 * Called before drawing 'chart' at every animation frame. If any plugin returns <code>false</code>, the frame drawing is cancelled until
 	 * another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	boolean onBeforeDraw(IsChart chart, double easing);
+	boolean onBeforeDraw(IsChart chart);
 
 	/**
-	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the drawing has been previously cancelled.
+	 * Called after the 'chart' has been drawn. Note that this hook will not be called if the drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDraw(IsChart chart, double easing);
+	void onAfterDraw(IsChart chart);
 
 	/**
 	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetsDraw(IsChart chart, double easing);
+	boolean onBeforeDatasetsDraw(IsChart chart);
 
 	/**
 	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDatasetsDraw(IsChart chart, double easing);
+	void onAfterDatasetsDraw(IsChart chart);
 
 	/**
 	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any plugin returns <code>false</code>, the datasets drawing

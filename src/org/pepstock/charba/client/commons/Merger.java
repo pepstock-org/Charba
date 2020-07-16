@@ -196,8 +196,7 @@ public final class Merger {
 		}
 		// merges chart options (maybe already updated by scales)
 		// and the global ones
-		NativeObject r = mergeNativeObjects(chartOptions, globalOptions);
-		return r;
+		return mergeNativeObjects(chartOptions, globalOptions);
 	}
 
 	/**
