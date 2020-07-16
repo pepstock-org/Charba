@@ -34,6 +34,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
@@ -132,6 +134,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final CallbackProxy<ProxyChartEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the click function for title element
+	private final CallbackProxy<EventListenerCallback> titleClickCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover function  for axis element
+	private final CallbackProxy<EventListenerCallback> axisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	private final Animation animation;
 
@@ -196,8 +202,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			ChartEventContext eventContext = new ChartEventContext(event);
 			// gets the native event
 			BaseNativeEvent nativeEvent = eventContext.getNativeEvent();
-			// handle click event
-			handleClickEvent(nativeEvent);
+			// handle click event for dataset
+			handleDatasetSelection(nativeEvent);
 			// fires the click event on the chart
 			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
@@ -214,6 +220,13 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// fires the resize event on chart
 			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(size)));
 		});
+		// ---------------------------------------------------
+		// -- SET CALLBACKS for title and axis click event ---
+		// ---------------------------------------------------
+		// fires the event
+		titleClickCallbackProxy.setCallback((context, event) -> handleTitleSelection(event));
+		// fires the event
+		axisClickCallbackProxy.setCallback((context, event) -> handleScaleSelection(event));
 	}
 
 	/**
@@ -493,11 +506,21 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			}
 			// check if a title click handler has been added
 			if (event.isRecognize(TitleClickEvent.TYPE)) {
+				// checks if is the first one in order to add the listeners to the canvas
+				if (onTitleClickHandlers == 0) {
+					// adds listener
+					getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, titleClickCallbackProxy.getProxy());
+				}
 				// increments handlers of title click
 				onTitleClickHandlers++;
 			}
 			// check if a axis click handler has been added
 			if (event.isRecognize(AxisClickEvent.TYPE)) {
+				// checks if is the first one in order to add the listeners to the canvas
+				if (onAxisClickHandlers == 0) {
+					// adds listener
+					getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, axisClickCallbackProxy.getProxy());
+				}
 				// increments handlers of axis click
 				onAxisClickHandlers++;
 			}
@@ -545,11 +568,21 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			if (event.isRecognize(TitleClickEvent.TYPE)) {
 				// decrements handlers of title click
 				onTitleClickHandlers--;
+				// checks if no handlers are defined
+				if (onTitleClickHandlers == 0) {
+					// removes listener
+					getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, titleClickCallbackProxy.getProxy());
+				}
 			}
 			// check if a axis click handler has been removed
 			if (event.isRecognize(AxisClickEvent.TYPE)) {
 				// decrements handlers of axis click
 				onAxisClickHandlers--;
+				// checks if no handlers are defined
+				if (onAxisClickHandlers == 0) {
+					// removes listener
+					getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, axisClickCallbackProxy.getProxy());
+				}
 			}
 		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -582,63 +615,31 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Manage click event on chart.
-	 * 
-	 * @param event event generated on chart
-	 */
-	private void handleClickEvent(BaseNativeEvent event) {
-		// try to manage click of dataset
-		if (handleDatasetSelection(event)) {
-			// if done, returns to caller
-			return;
-		}
-		// if here, dataset is not manage
-		// try to manage click on title
-		if (handleTitleSelection(event)) {
-			// if done, returns to caller
-			return;
-		}
-		// if here, dataset and title are not manage
-		// try to manage click on axis
-		handleScaleSelection(event);
-	}
-
-	/**
 	 * Check if the click event on chart and manage it fire a CHARBA dataset selection event.
 	 * 
 	 * @param event event generated on chart
-	 * @return <code>true</code> if the event on chart has been managed as dataset selection, otherwise <code>false</code>.
 	 */
-	private boolean handleDatasetSelection(BaseNativeEvent event) {
+	private void handleDatasetSelection(BaseNativeEvent event) {
 		// gets the dataset items by event
 		DatasetReferenceItem item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
 		if (item != null && hasDatasetSelectionHandlers()) {
 			// fires the event for dataset selection
 			getChart().fireEvent(new DatasetSelectionEvent(event, item));
-			// return that the event has been fired
-			return true;
 		}
-		// if here, the event is not managed yet
-		return false;
 	}
 
 	/**
 	 * Check if the click event on chart and manage it fire a CHARBA title selection event.
 	 * 
 	 * @param event event generated on chart
-	 * @return <code>true</code> if the event on chart has been managed as title selection, otherwise <code>false</code>.
 	 */
-	private boolean handleTitleSelection(BaseNativeEvent event) {
+	private void handleTitleSelection(BaseNativeEvent event) {
 		// checks if title has been selected and there is any handler
 		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
 			// fires the click event on the chart title
 			getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
-			// return that the event has been fired
-			return true;
 		}
-		// if here, the event is not managed yet
-		return false;
 	}
 
 	/**
@@ -647,8 +648,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 */
 	private void handleScaleSelection(BaseNativeEvent event) {
-		// checks if there is any handler and the chart has got scales
-		if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
+		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
+		if (hasAxisClickHandlers() && !getChart().getNode().getChartArea().isInside(event) && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
 			// gets the scales
 			ScalesNode scales = getChart().getNode().getScales();
 			// checks if event is inside a scale box
