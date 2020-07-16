@@ -100,9 +100,9 @@ public class ControllerTemplateGenerator {
 			String javaScriptTemplateFileAsString = args[0];
 			// creates the file
 			javaScriptTemplateFile = new File(javaScriptTemplateFileAsString);
-			LOGGER.info("Use controller template: "+javaScriptTemplateFileAsString);
+			LOGGER.info("Use controller template: " + javaScriptTemplateFileAsString);
 		} else {
-			LOGGER.info("No controller template has been passed. Use the default: "+DEFAULT_JAVASCRIPT_TEMPLATE_FILE);
+			LOGGER.info("No controller template has been passed. Use the default: " + DEFAULT_JAVASCRIPT_TEMPLATE_FILE);
 			// sets teh default controller template file
 			javaScriptTemplateFile = DEFAULT_JAVASCRIPT_TEMPLATE_FILE;
 		}
