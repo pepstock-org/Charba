@@ -28,6 +28,7 @@ import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -61,7 +62,7 @@ public final class GlobalPlugins {
 	 */
 	public boolean register(Plugin plugin) {
 		// checks if plugin is consistent
-		if (plugin != null) {
+		if (plugin != null && !Key.hasKeyByValue(DefaultPlugin.values(), plugin.getId())) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
 			// checks if ID is already registered
@@ -88,8 +89,8 @@ public final class GlobalPlugins {
 	public boolean unregister(String pluginId) {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
-		// checks if ID is already registered on custom one
-		if (!pluginIds.containsKey(pluginId)) {
+		// checks if ID is already registered on custom one or as default one
+		if (!pluginIds.containsKey(pluginId) || Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
 			return false;
 		}
 		// scans ids
@@ -133,24 +134,27 @@ public final class GlobalPlugins {
 	public void setEnabledAllCharts(String pluginId, boolean enable) {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
-		// gets all global registered plugin
-		Set<String> currentIds = getIds();
-		// scans all
-		for (String id : currentIds) {
-			// if already registered plugin id is the
-			// same of the argument
-			if (id.equalsIgnoreCase(pluginId)) {
-				// if the argument is to enable
-				if (enable) {
-					// removes the plugin id to the cache to maintain
-					// plugin id to disable to the charts
-					pluginsToBeDisabled.remove(pluginId);
-				} else {
-					// adds to the set and it will disable to all charts
-					pluginsToBeDisabled.add(pluginId);
+		// checks if the plugin is a default one
+		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
+			// gets all global registered plugin
+			Set<String> currentIds = getIds();
+			// scans all
+			for (String id : currentIds) {
+				// if already registered plugin id is the
+				// same of the argument
+				if (id.equalsIgnoreCase(pluginId)) {
+					// if the argument is to enable
+					if (enable) {
+						// removes the plugin id to the cache to maintain
+						// plugin id to disable to the charts
+						pluginsToBeDisabled.remove(pluginId);
+					} else {
+						// adds to the set and it will disable to all charts
+						pluginsToBeDisabled.add(pluginId);
+					}
+					// finish!
+					return;
 				}
-				// finish!
-				return;
 			}
 		}
 	}
