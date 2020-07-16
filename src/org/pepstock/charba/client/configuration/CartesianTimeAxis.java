@@ -103,7 +103,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public CartesianTimeAxis(IsChart chart, IsScaleId id, AxisKind kind) {
 		this(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
 	 * 

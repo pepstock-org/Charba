@@ -208,7 +208,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		// stores it
 		setValue(Property.X_SCALE_ID, scaleId);
 	}
-	
+
 	/**
 	 * Returns the ID of the X scale to bind onto.
 	 * 

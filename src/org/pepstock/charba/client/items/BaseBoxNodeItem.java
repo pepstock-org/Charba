@@ -85,7 +85,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	public final boolean isActive() {
 		return getValue(Property.ACTIVE, UndefinedValues.BOOLEAN);
 	}
-	
+
 	/**
 	 * Returns the full width in pixel.
 	 * 

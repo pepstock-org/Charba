@@ -65,9 +65,7 @@ public final class DatasetReferenceItem extends NativeObjectContainer {
 
 	// dataset item element instance
 	private final DatasetItem element;
-	
-	
-	
+
 	/**
 	 * Creates the item reference using a a scriptale context and a dataset item.
 	 * 

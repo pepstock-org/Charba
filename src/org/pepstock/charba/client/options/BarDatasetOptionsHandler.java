@@ -34,7 +34,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	private static final double MINIMUM_PERCENTAGE = 0D;
 	// max value of percentage
 	private static final double MAXIMUM_PERCENTAGE = 1D;
-	
+
 	// default value
 	private final IsDefaultDatasets defaultValues;
 
@@ -203,7 +203,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	public int getMinBarLength() {
 		return getValue(Property.MIN_BAR_LENGTH, defaultValues.getMinBarLength());
 	}
-	
+
 	/**
 	 * Any double between 0.0d and 1.0d (inclusive) is valid.
 	 * 
@@ -213,7 +213,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 */
 	private double checkAndGetPercentage(double percentage, Property property) {
 		if (percentage < MINIMUM_PERCENTAGE || percentage > MAXIMUM_PERCENTAGE) {
-			throw new IllegalArgumentException(property.value+" argument (" + percentage + ") is not within bounds (0D-1D)");
+			throw new IllegalArgumentException(property.value + " argument (" + percentage + ") is not within bounds (0D-1D)");
 		}
 		// if here the value is correct
 		return percentage;

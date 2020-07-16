@@ -46,7 +46,7 @@ public enum AxisType implements Key
 	/**
 	 * The time series scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.
 	 */
-	TIMESERIES("timeseries", DefaultScaleId.X),	
+	TIMESERIES("timeseries", DefaultScaleId.X),
 	/**
 	 * Radial axes are used specifically for the radar and polar area chart types.<br>
 	 * These axes overlay the chart area, rather than being positioned on one of the edges.<br>

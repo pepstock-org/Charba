@@ -136,7 +136,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the click function for title element
 	private final CallbackProxy<EventListenerCallback> titleClickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover function  for axis element
+	// callback proxy to invoke the hover function for axis element
 	private final CallbackProxy<EventListenerCallback> axisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	private final Animation animation;

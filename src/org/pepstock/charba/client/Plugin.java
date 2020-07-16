@@ -48,7 +48,7 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 */
 	void onConfigure(IsChart chart);
-	
+
 	/**
 	 * Called before every drawing cycle, coming from initialization, updating or rendering of chart.
 	 * 
@@ -56,7 +56,7 @@ public interface Plugin {
 	 * @param overridePreviousUpdate if <code>true</code> the drawing was already running.
 	 */
 	void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate);
-	
+
 	/**
 	 * Called after every drawing cycle, coming from initialization, updating or rendering of chart.
 	 * 
@@ -158,8 +158,7 @@ public interface Plugin {
 	void onAfterRender(IsChart chart);
 
 	/**
-	 * Called before drawing 'chart' at every animation frame. If any plugin returns <code>false</code>, the frame drawing is cancelled until
-	 * another 'render' is triggered.
+	 * Called before drawing 'chart' at every animation frame. If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart drawing.
@@ -248,7 +247,7 @@ public interface Plugin {
 	 * @param size The new canvas display size (eq. canvas.style width and height).
 	 */
 	void onResize(IsChart chart, SizeItem size);
-	
+
 	/**
 	 * Called during chart reset.
 	 * 

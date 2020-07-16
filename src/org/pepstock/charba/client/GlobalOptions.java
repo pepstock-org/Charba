@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.Options;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
-	
+
 	// instance to store the global options as default
 	private final IsDefaultScaledOptions defaultOptions;
 
@@ -53,7 +53,7 @@ public final class GlobalOptions extends Options {
 	public Font getFont() {
 		return super.getDefaultsFont();
 	}
-	
+
 	/**
 	 * Returns the global options as default scaled options.
 	 * 

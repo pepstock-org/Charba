@@ -36,9 +36,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public final class ScaleScriptableContext extends AbstractScriptableContext {
 
 	private static final ScaleTickItemFactory FACTORY = new ScaleTickItemFactory();
-	
+
 	private final ScaleItem scale;
-	
+
 	private final ScaleTickItem tick;
 
 	/**

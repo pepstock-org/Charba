@@ -115,7 +115,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
-	
+
 	/**
 	 * Returns the list of columns heights.
 	 * 

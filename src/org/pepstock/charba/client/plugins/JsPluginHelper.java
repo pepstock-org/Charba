@@ -29,7 +29,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 final class JsPluginHelper {
 	// static instance for singleton
 	private static final JsPluginHelper INSTANCE = new JsPluginHelper();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -52,7 +52,6 @@ final class JsPluginHelper {
 	static JsPluginHelper get() {
 		return INSTANCE;
 	}
-
 
 	/**
 	 * Register new plugin.

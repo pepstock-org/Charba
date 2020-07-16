@@ -60,7 +60,7 @@ public final class ScriptableUtils {
 	// ------------------------------------
 	// --- OPTIONS callbacks management
 	// ------------------------------------
-	
+
 	/**
 	 * Returns the enumeration value as value of the property by invoking a callback which is typed to a key.
 	 * 
@@ -194,7 +194,7 @@ public final class ScriptableUtils {
 		}
 		return checkedResult;
 	}
-	
+
 	// ------------------------------------
 	// --- SCALES callbacks management
 	// ------------------------------------

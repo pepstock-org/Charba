@@ -41,7 +41,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 */
 	public ScalesNode(NativeObject nativeObject) {
 		super(nativeObject);
-		// redefines hashcode in order do not have 
+		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
 	}

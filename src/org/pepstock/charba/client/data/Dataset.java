@@ -210,7 +210,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues) {
 		// FIXME default whenit's not the options of chart
-		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Key.checkAndGetIfValid(type)): defaultValues;
+		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Key.checkAndGetIfValid(type)) : defaultValues;
 		// stores the type
 		this.type = type;
 		// stores the type
@@ -685,7 +685,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	public String getLabel() {
 		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Sets how to clip relative to chartArea.<br>
 	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
@@ -751,7 +751,6 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// if there is otherwise an empyt object
 		return new Clip(getValue(Property.CLIP));
 	}
-
 
 	/**
 	 * Returns <code>true</code> if dataset must use only data points otherwise <code>false</code>.<br>

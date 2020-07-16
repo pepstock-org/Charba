@@ -22,7 +22,7 @@ import org.pepstock.charba.client.Defaults;
  *
  * @author Andrea "Stock" Stocchero
  */
-interface HasLineOptions extends HasShowLines{
+interface HasLineOptions extends HasShowLines {
 
 	/**
 	 * If false, NaN data causes a break in the line.

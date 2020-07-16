@@ -75,7 +75,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 		// the return the default
 		return DefaultsBuilder.get().getScale();
 	}
-	
+
 	/**
 	 * Uses the default scale id to retrieve the scale by id.
 	 * 
@@ -94,7 +94,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 		}
 		return searchByAxisKind(kind);
 	}
-	
+
 	/**
 	 * Uses the axis kind to retrieve the scale by id.
 	 * 

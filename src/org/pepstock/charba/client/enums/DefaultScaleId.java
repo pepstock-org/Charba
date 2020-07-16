@@ -35,25 +35,25 @@ public enum DefaultScaleId implements IsScaleId
 	/**
 	 * Default scale id for Y cartesian axis.
 	 */
-	Y("y",AxisKind.Y),
+	Y("y", AxisKind.Y),
 	/**
 	 * Default scale id for radial linear axis.
 	 */
-	R("r",AxisKind.R),
+	R("r", AxisKind.R),
 	/**
 	 * Default scale id for chart with a single axis.
 	 */
 	UNKNOWN("_charbaunknown", null);
-	
+
 	/**
 	 * Default scale id for X scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
 	 */
-	public static final String DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS = "_index_"; 
+	public static final String DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS = "_index_";
 
 	/**
 	 * Default scale id for Y scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
 	 */
-	public static final String DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS = "_value_"; 
+	public static final String DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS = "_value_";
 
 	// name value of property
 	private final String value;
@@ -118,12 +118,12 @@ public enum DefaultScaleId implements IsScaleId
 	public boolean is(IsScaleId scaleId) {
 		return is(Key.checkAndGetIfValid(scaleId).value());
 	}
-	
+
 	/**
 	 * Returns the default scale id instance by axis kind, otherwise will return <code>null</code> if not found.
 	 * 
 	 * @param kind axis kind to use to get the related default scale id
-	 * @param defaultValue default axis id to use if it's not matching 
+	 * @param defaultValue default axis id to use if it's not matching
 	 * @return the default scale id instance, otherwise will return <code>null</code> if not found
 	 */
 	public static DefaultScaleId getByAxisKind(AxisKind kind, DefaultScaleId defaultValue) {
@@ -176,7 +176,7 @@ public enum DefaultScaleId implements IsScaleId
 		if (DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS.equals(scaleId)) {
 			// returns x
 			return AxisKind.X;
-		} else 	if (DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS.equals(scaleId)) {
+		} else if (DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS.equals(scaleId)) {
 			// returns x
 			return AxisKind.Y;
 		}

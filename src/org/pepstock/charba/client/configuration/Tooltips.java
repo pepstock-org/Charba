@@ -888,7 +888,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 				return value;
 			}
 		}
-		
+
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
@@ -897,7 +897,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		TooltipContext(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		TooltipModel getModel() {
 			// checks if model is inside the context
 			if (ObjectType.OBJECT.equals(type(Property.TOOLTIP))) {

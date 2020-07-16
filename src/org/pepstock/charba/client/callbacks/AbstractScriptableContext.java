@@ -58,7 +58,7 @@ abstract class AbstractScriptableContext extends NativeObjectContainer {
 			return value;
 		}
 	}
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 

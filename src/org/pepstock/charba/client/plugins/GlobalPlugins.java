@@ -207,7 +207,7 @@ public final class GlobalPlugins {
 		InternalPlugins(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		/**
 		 * Returns the list of plugin ids.
 		 * 

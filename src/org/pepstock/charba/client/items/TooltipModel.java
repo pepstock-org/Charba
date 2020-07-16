@@ -39,7 +39,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
-	{		
+	{
 		DATA_POINTS("dataPoints"),
 		X_ALIGN("xAlign"),
 		Y_ALIGN("yAlign"),
@@ -57,7 +57,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		LABEL_COLORS("labelColors"),
 		LABEL_TEXT_COLORS("labelTextColors"),
 		OPACITY("opacity");
-		
+
 		// name value of property
 		private final String value;
 

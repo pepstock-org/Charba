@@ -64,7 +64,7 @@ public final class TooltipItem extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	// reference to data point
 	private final TooltipDataPoint dataPoint;
 
@@ -87,16 +87,15 @@ public final class TooltipItem extends NativeObjectContainer {
 	public String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Returns the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()}.
 	 * 
-	 * @return the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()} 
+	 * @return the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()}
 	 */
 	public TooltipDataPoint getDataPoint() {
 		return dataPoint;
 	}
-
 
 	/**
 	 * Returns the formatted value for the tooltip.

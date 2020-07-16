@@ -42,7 +42,7 @@ public final class Labels extends AbstractElement {
 	 */
 	Labels() {
 		super(null);
-		// redefines hashcode in order do not have 
+		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
 	}

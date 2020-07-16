@@ -108,7 +108,6 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	public final double getLeft() {
 		return getValue(Property.LEFT, UndefinedValues.DOUBLE);
 	}
-	
 
 	/**
 	 * Returns the width in pixel.
@@ -127,7 +126,6 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	public final double getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
 	}
-	
 
 	/**
 	 * Returns <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>.

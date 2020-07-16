@@ -89,7 +89,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	public final double getValue() {
 		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.DOUBLE);
 	}
-	
+
 	/**
 	 * Returns the value of the tick as string.
 	 * 
@@ -98,7 +98,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	public final String getValueAsString() {
 		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Returns the date of the tick.
 	 * 
@@ -107,7 +107,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	public Date getValueAsDate() {
 		return getValue(Property.VALUE, (Date) null);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if is the major tick, otherwise {@link UndefinedValues#BOOLEAN}.
 	 * 

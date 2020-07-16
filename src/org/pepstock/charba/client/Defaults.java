@@ -444,7 +444,7 @@ public final class Defaults {
 		NativeObject getScales() {
 			return getValue(Property.SCALES);
 		}
-		
+
 		/**
 		 * Returns the PLUGINS global options of chart as native object.
 		 * 
@@ -453,7 +453,7 @@ public final class Defaults {
 		NativeObject getPlugins() {
 			return getValue(Property.PLUGINS);
 		}
-		
+
 		void setPluginDefaultIntoOptions(DefaultPlugin plugin, NativeObject options) {
 			setValue(plugin.getPropertyName(), options);
 		}

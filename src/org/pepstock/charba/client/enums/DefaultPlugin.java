@@ -76,5 +76,5 @@ public enum DefaultPlugin implements Key
 	public Key getPropertyName() {
 		return propertyName;
 	}
-	
+
 }

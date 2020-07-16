@@ -66,7 +66,9 @@ public class HorizontalBarDataset extends BarDataset {
 		super.setIndexAxis(IndexAxis.Y);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.BarDataset#setIndexAxis(org.pepstock.charba.client.enums.IndexAxis)
 	 */
 	@Override
