@@ -231,6 +231,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `extend` method of `Controllers` class to `register`.
  * remove `setEnabled` method for `DefaultPlugin` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
+ * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones into `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
  
 ### Features
 
@@ -258,6 +259,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
    * add `clip` property to all datasets types.
    * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
+   * add `dataPoint` property to `TooltipItem` class. 
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

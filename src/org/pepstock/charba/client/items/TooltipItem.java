@@ -36,9 +36,10 @@ public final class TooltipItem extends NativeObjectContainer {
 	private enum Property implements Key
 	{
 		LABEL("label"),
-		VALUE("value"),
+		DATA_POINT("dataPoint"),
+		FORMATTED_VALUE("formattedValue"),
 		DATASET_INDEX("datasetIndex"),
-		INDEX("index");
+		DATA_INDEX("dataIndex");
 
 		// name value of property
 		private final String value;
@@ -63,6 +64,9 @@ public final class TooltipItem extends NativeObjectContainer {
 		}
 
 	}
+	
+	// reference to data point
+	private final TooltipDataPoint dataPoint;
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
@@ -71,6 +75,8 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	public TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// stores teh data point
+		this.dataPoint = new TooltipDataPoint(getValue(Property.DATA_POINT));
 	}
 
 	/**
@@ -81,14 +87,24 @@ public final class TooltipItem extends NativeObjectContainer {
 	public String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
+	
+	/**
+	 * Returns the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()}.
+	 * 
+	 * @return the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()} 
+	 */
+	public TooltipDataPoint getDataPoint() {
+		return dataPoint;
+	}
+
 
 	/**
-	 * Returns the value for the tooltip.
+	 * Returns the formatted value for the tooltip.
 	 * 
-	 * @return the value for the tooltip. Default is {@link UndefinedValues#STRING}.
+	 * @return the formatted value for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
-	public String getValue() {
-		return getValue(Property.VALUE, UndefinedValues.STRING);
+	public String getFormattedValue() {
+		return getValue(Property.FORMATTED_VALUE, UndefinedValues.STRING);
 	}
 
 	/**
@@ -105,8 +121,8 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	public int getDataIndex() {
+		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
