@@ -230,6 +230,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
  * rename `extend` method of `Controllers` class to `register`.
  * remove `setEnabled` method for `DefaultPlugin` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
+ * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
  
 ### Features
 

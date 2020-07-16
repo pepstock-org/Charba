@@ -179,28 +179,6 @@ public final class DataPoint extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets T value, is the date for time series.
-	 * 
-	 * @param t T value.
-	 * @deprecated use {@link DataPoint#setX(Date)} instead.
-	 */
-	@Deprecated
-	public void setT(Date t) {
-		setX(t);
-	}
-
-	/**
-	 * Returns T value, is the date for time series.
-	 * 
-	 * @return T value or <code>null</code> if is not set.
-	 * @deprecated use {@link DataPoint#getXAsDate()} instead.
-	 */
-	@Deprecated
-	public Date getT() {
-		return getXAsDate();
-	}
-
-	/**
 	 * Sets a custom field to data point.
 	 * 
 	 * @param key key of java script object to set.
