@@ -35,7 +35,8 @@ public interface Type extends Key {
 	}
 
 	/**
-	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}.
+	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param type type to be checked
 	 */
@@ -43,6 +44,22 @@ public interface Type extends Key {
 		if (!isValid(type)) {
 			throw new IllegalArgumentException("Type is null or not consistent");
 		}
+	}
+
+	/**
+	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.
+	 * 
+	 * @param type type to be checked
+	 * @param <T> type of chart type
+	 * @return the same key passed as argument
+	 */
+	static <T extends Type> T checkAndGetIfValid(T type) {
+		// checks if key is consistent
+		checkIfValid(type);
+		// if here, is consistent
+		// then returns the argument
+		return type;
 	}
 
 	/**
