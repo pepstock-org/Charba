@@ -25,12 +25,44 @@ package org.pepstock.charba.client.controllers;
 final class ControllerTemplate {
 
 	// encoded javascript content of controller template
-	static final String CONTENT = ${javaScriptContent};
+	private static final String[] CONTENT = {
+		${javaScriptContent}
+	};
+
+	// singleton instance
+	// MUST create AFTER the static constants
+	private static final ControllerTemplate INSTANCE = new ControllerTemplate();
+	
+	// creates builder to store the template a single row
+	private final StringBuilder builder = new StringBuilder();
 	
 	/**
 	 * To avoid any instantiation
 	 */
 	private ControllerTemplate() {
+		// scans the array
+		for (String line : CONTENT) {
+			// appending the strings into a builder
+			builder.append(line);
+		}
+	}
+	
+	/**
+	 * Singleton method to get static instance.
+	 * 
+	 * @return defaults instance
+	 */
+	static ControllerTemplate get(){
+		return INSTANCE;
+	}
+	
+	/**
+	 * Returns the controller template a single row.
+	 * 
+	 * @return the controller template a single row
+	 */
+	 String getTemplate(){
+		return builder.toString();
 	}
 
 }

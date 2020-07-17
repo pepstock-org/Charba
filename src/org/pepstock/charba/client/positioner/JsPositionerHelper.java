@@ -92,7 +92,7 @@ final class JsPositionerHelper {
 			return new Point(pointAsObject);
 		}
 		// if here, the object is not consistent
-		// then return an empty point
-		return new Point();
+		// then return null
+		return null;
 	}
 }

@@ -49,8 +49,8 @@ public class ControllerTemplateGenerator {
 	private static final int CHARS_PER_ARRAY_ITEM = 1000;
 	// defines the line separator
 	private static final byte LINE_SEPARATOR = '\n';
-	// defines the plus
-	private static final String PLUS_STRING = "+";
+	// defines the comma
+	private static final String COMMA_STRING = ",";
 	// defines the line separator as string
 	private static final String LINE_SEPARATOR_STRING = "\n";
 	// defines the tab indent as string
@@ -115,7 +115,7 @@ public class ControllerTemplateGenerator {
 		changedTemplate = changedTemplate.replaceAll(CONTROLLER_TYPE_VARIABLE, CONTROLLER_TYPE_PLACEHOLDER);
 		// escapes the java script content in order to be able to assign it
 		// to a java string
-		StringBuilder builder = escapeJavaScriptContent(changedTemplate.toString().getBytes());
+		StringBuilder builder = escapeJavaScriptContent(changedTemplate.getBytes(UTF8));
 		// reads the template of java template
 		StringBuilder templateJavaSource = readTemplate(JAVA_TEMPLATE_FILE);
 		String templateJavaInstance = templateJavaSource.toString();
@@ -216,7 +216,7 @@ public class ControllerTemplateGenerator {
 				// if here, there is a line separator into java script
 				// but it's not at the end of the file
 				// then creates an array item string
-				builder.append(QUOTE_STRING).append(PLUS_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
+				builder.append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
 				// resets the counter
 				charCounter = 0;
 			} else if (b != LINE_SEPARATOR) {
@@ -236,7 +236,7 @@ public class ControllerTemplateGenerator {
 			} else if (charCounter > CHARS_PER_ARRAY_ITEM) {
 				// if here, the current amount of chars is greater than fixed
 				// then creates an array item string
-				builder.append(QUOTE_STRING).append(PLUS_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
+				builder.append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
 				// resets the counter
 				charCounter = 0;
 			}

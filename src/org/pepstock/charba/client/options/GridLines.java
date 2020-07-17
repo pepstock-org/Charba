@@ -171,8 +171,8 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	public String getBorderColorAsString() {
 		// gets the color sets
 		List<String> colors = getColorsAsString();
-		// checks if list of colors are consistent
-		if (colors != null && !colors.isEmpty()) {
+		// checks if list of colors is consistent
+		if (!colors.isEmpty()) {
 			return getValue(Property.BORDER_COLOR, colors.get(0));
 		}
 		// if here, the colors are not consistent

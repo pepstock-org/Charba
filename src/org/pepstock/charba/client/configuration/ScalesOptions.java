@@ -77,7 +77,7 @@ abstract class ScalesOptions extends ConfigurationOptions {
 		// gets all axes
 		List<Axis> xAxes = scales.getAxes();
 		// checks if consistent
-		if (xAxes != null && !xAxes.isEmpty()) {
+		if (!xAxes.isEmpty()) {
 			// scans all axes
 			for (Axis axis : xAxes) {
 				// checks if charba ID is the same of argument

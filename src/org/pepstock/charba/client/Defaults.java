@@ -159,7 +159,7 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (!scaleOptions.containsKey(axisType.value())) {
 			// if not, creates and stores new options by axis type
-			InternalDefaultScale storedScale = new InternalDefaultScale(axisType, scales.getScale(axisType));
+			InternalDefaultScale storedScale = new InternalDefaultScale(axisType, getScale(), scales.getScale(axisType));
 			scaleOptions.put(axisType.value(), storedScale);
 		}
 		// returns the existing options
@@ -533,18 +533,19 @@ public final class Defaults {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class InternalDefaultScale extends Scale {
+	private static class InternalDefaultScale extends Scale {
 
 		/**
 		 * Creates the object only with aixs type and native object.<br>
 		 * This is used when the default scale is read by {@link Defaults#getScale(AxisType)}.
 		 * 
 		 * @param type scale type
+		 * @param scale global scale reference
 		 * @param nativeObject native object to store properties.
 		 */
-		InternalDefaultScale(AxisType type, NativeObject nativeObject) {
+		InternalDefaultScale(AxisType type, GlobalScale scale, NativeObject nativeObject) {
 			// uses the global scale as default
-			super(type, getScale(), nativeObject);
+			super(type, scale, nativeObject);
 		}
 
 	}
@@ -587,12 +588,23 @@ public final class Defaults {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class InternalPlugin extends NativeObjectContainer {
+	private static class InternalPlugin extends NativeObjectContainer {
 
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
 		InternalPlugin(NativeObject nativeObject) {
 			super(nativeObject);
 		}
 
+		/**
+		 * Returns the options of plugin.
+		 * 
+		 * @param plugin plugin id to use to get hte options.
+		 * @return the options of plugin or <code>null</code> if does not exist
+		 */
 		NativeObject getOptions(DefaultPlugin plugin) {
 			return getValue(plugin);
 

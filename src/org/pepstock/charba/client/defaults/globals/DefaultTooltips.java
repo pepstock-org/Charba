@@ -73,78 +73,12 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 	private static final boolean DEFAULT_RTL = false;
 
-	private final DefaultFont titleFont = new DefaultFont() {
+	private final DefaultFont titleFont = new InternalTitleFont();
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
-		 */
-		@Override
-		public String getColorAsString() {
-			return DEFAULT_TITLE_FONT_COLOR;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
-		 */
-		@Override
-		public FontStyle getStyle() {
-			return FontStyle.BOLD;
-		}
-
-	};
-
-	private final DefaultFont bodyFont = new DefaultFont() {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
-		 */
-		@Override
-		public String getColorAsString() {
-			return DEFAULT_BODY_FONT_COLOR;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
-		 */
-		@Override
-		public FontStyle getStyle() {
-			return FontStyle.NORMAL;
-		}
-
-	};
-
-	private final DefaultFont footerFont = new DefaultFont() {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
-		 */
-		@Override
-		public String getColorAsString() {
-			return DEFAULT_FOOTER_FONT_COLOR;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
-		 */
-		@Override
-		public FontStyle getStyle() {
-			return FontStyle.BOLD;
-		}
-
-	};
-
+	private final DefaultFont bodyFont = new InternalBodyFont();
+	
+	private final DefaultFont footerFont = new InternalFooterFont();
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -440,6 +374,96 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public int getBoxHeight() {
 		return bodyFont.getSize();
+	}
+
+	/**
+	 * Internal class extending {@link DefaultFont} to override some defaults for title.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalTitleFont extends DefaultFont {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_TITLE_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.BOLD;
+		}
+
+	}
+
+	/**
+	 * Internal class extending {@link DefaultFont} to override some defaults for body.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalBodyFont extends DefaultFont {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_BODY_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.NORMAL;
+		}
+
+	}
+
+	/**
+	 * Internal class extending {@link DefaultFont} to override some defaults for footer.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalFooterFont extends DefaultFont {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getColorAsString()
+		 */
+		@Override
+		public String getColorAsString() {
+			return DEFAULT_FOOTER_FONT_COLOR;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.BOLD;
+		}
+
 	}
 
 }
