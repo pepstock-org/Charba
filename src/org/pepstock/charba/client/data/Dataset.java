@@ -210,8 +210,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param defaultValues default options
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues) {
-		// FIXME default whenit's not the options of chart
-		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Key.checkAndGetIfValid(type)) : defaultValues;
+		// FIXME default when it's not the options of chart
+		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
 		// stores the type
 		this.type = type;
 		// stores the type

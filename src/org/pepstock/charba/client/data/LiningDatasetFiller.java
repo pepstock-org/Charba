@@ -23,9 +23,9 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.options.Filler;
 
 /**
  * Manages the FILL property of options for lining datasets, implementing the FILL callback for scriptable options.
@@ -51,7 +51,7 @@ final class LiningDatasetFiller extends Filler {
 	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
 	LiningDatasetFiller(NativeObject nativeObject, IsFill defaultValue) {
-		super(nativeObject, defaultValue);
+		super(new DataEnvelop<NativeObject>(nativeObject), defaultValue);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

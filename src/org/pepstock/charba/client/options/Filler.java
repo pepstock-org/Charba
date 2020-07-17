@@ -13,11 +13,18 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.enums;
+package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.data.DataEnvelop;
+import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
+import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.FillingMode;
+import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 
 /**
  * Manages the FILL property of options in order to use the same logic between line datasets and options/configuration.
@@ -62,6 +69,17 @@ public class Filler extends NativeObjectContainer {
 		}
 
 	}
+	
+	/**
+	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
+	 * This is called from <code>data</code> package.
+	 * 
+	 * @param envelop envelop of native object where FILL property must be managed
+	 * @param defaultValue default value of FILL to use when the property does not exist
+	 */
+	public Filler(DataEnvelop<NativeObject> envelop, IsFill defaultValue) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValue);
+	}
 
 	/**
 	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
@@ -70,7 +88,7 @@ public class Filler extends NativeObjectContainer {
 	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
 	// FIXME envelop
-	public Filler(NativeObject nativeObject, IsFill defaultValue) {
+	Filler(NativeObject nativeObject, IsFill defaultValue) {
 		super(nativeObject);
 		// checks default value instance
 		if (!IsFill.isValid(defaultValue)) {

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.options.Filler;
 
 /**
  * Defines a configuration element which is managing the FILL property.<br>
