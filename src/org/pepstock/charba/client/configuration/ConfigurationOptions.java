@@ -134,10 +134,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final CallbackProxy<ProxyChartEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the click function for title element
-	private final CallbackProxy<EventListenerCallback> titleClickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover function for axis element
-	private final CallbackProxy<EventListenerCallback> axisClickCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the click function for title and/or axis element
+	private final CallbackProxy<EventListenerCallback> titleAndAxisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	private final Animation animation;
 
@@ -220,13 +218,11 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// fires the resize event on chart
 			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(size)));
 		});
-		// ---------------------------------------------------
-		// -- SET CALLBACKS for title and axis click event ---
-		// ---------------------------------------------------
+		// --------------------------------------------------
+		// -- SET CALLBACK for title and axis click event ---
+		// --------------------------------------------------
 		// fires the event
-		titleClickCallbackProxy.setCallback((context, event) -> handleTitleSelection(event));
-		// fires the event
-		axisClickCallbackProxy.setCallback((context, event) -> handleScaleSelection(event));
+		titleAndAxisClickCallbackProxy.setCallback((context, event) -> handleClickEventOnElements(event));
 	}
 
 	/**
@@ -507,20 +503,14 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// check if a title click handler has been added
 			if (event.isRecognize(TitleClickEvent.TYPE)) {
 				// checks if is the first one in order to add the listeners to the canvas
-				if (onTitleClickHandlers == 0) {
-					// adds listener
-					getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, titleClickCallbackProxy.getProxy());
-				}
+				checkAndManageCanvasListeners(true);
 				// increments handlers of title click
 				onTitleClickHandlers++;
 			}
 			// check if a axis click handler has been added
 			if (event.isRecognize(AxisClickEvent.TYPE)) {
 				// checks if is the first one in order to add the listeners to the canvas
-				if (onAxisClickHandlers == 0) {
-					// adds listener
-					getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, axisClickCallbackProxy.getProxy());
-				}
+				checkAndManageCanvasListeners(true);
 				// increments handlers of axis click
 				onAxisClickHandlers++;
 			}
@@ -569,20 +559,14 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				// decrements handlers of title click
 				onTitleClickHandlers--;
 				// checks if no handlers are defined
-				if (onTitleClickHandlers == 0) {
-					// removes listener
-					getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, titleClickCallbackProxy.getProxy());
-				}
+				checkAndManageCanvasListeners(false);
 			}
 			// check if a axis click handler has been removed
 			if (event.isRecognize(AxisClickEvent.TYPE)) {
 				// decrements handlers of axis click
 				onAxisClickHandlers--;
 				// checks if no handlers are defined
-				if (onAxisClickHandlers == 0) {
-					// removes listener
-					getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, axisClickCallbackProxy.getProxy());
-				}
+				checkAndManageCanvasListeners(false);
 			}
 		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -599,6 +583,28 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			if (onResizeHandlers == 0) {
 				// removes the java script object
 				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, null);
+			}
+		}
+	}
+
+	/**
+	 * Checks and manage the canvas event listeners for title and axes click events.<br>
+	 * If the argument is <code>true</code>, it will add the event listener if is the first adding, otherwise it will remove the listener if is the last handler.
+	 * 
+	 * @param isAdding if <code>true</code>, the handlers are added.
+	 */
+	private void checkAndManageCanvasListeners(boolean isAdding) {
+		// gets teh amount of handlers already added
+		int amountOfHandlers = onAxisClickHandlers + onTitleClickHandlers;
+		// checks if totamount is 0 in order to apply teh action on canvas
+		if (amountOfHandlers == 0) {
+			// checks if must be add
+			if (isAdding) {
+				// adds listener
+				getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, titleAndAxisClickCallbackProxy.getProxy());
+			} else {
+				// removes listener
+				getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, titleAndAxisClickCallbackProxy.getProxy());
 			}
 		}
 	}
@@ -630,16 +636,36 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Check if the click event on chart and manage it fire a CHARBA title selection event.
+	 * Check if the click event on title or axis of chart and manage it firing the event.
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleTitleSelection(BaseNativeEvent event) {
+	private void handleClickEventOnElements(BaseNativeEvent event) {
+		// checks if the event is not title
+		if (handleTitleSelection(event)) {
+			// if here, is not consumed by title element
+			// then try on scale
+			handleScaleSelection(event);
+		}
+	}
+
+	/**
+	 * Check if the click event on chart and manage it fire a CHARBA title selection event.
+	 * 
+	 * @param event event generated on chart
+	 * @return <code>true</code> if the event is not consumed for title element
+	 */
+	private boolean handleTitleSelection(BaseNativeEvent event) {
 		// checks if title has been selected and there is any handler
 		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
 			// fires the click event on the chart title
 			getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
+			// if here, the click is on title
+			return false;
 		}
+		// if here the even is not consumed
+		// then it can be consumed for axis.
+		return true;
 	}
 
 	/**
