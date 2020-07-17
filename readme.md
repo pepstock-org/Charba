@@ -139,6 +139,8 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.8/charba.fbp) project to looking offline for bugs.
+
 Going to next release
 ---------------------
 
@@ -289,6 +291,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the defaults management for scales.
  * add `JsPluginHelper` class in order to use CHART.JS registry feature to manage plugins.
  * create a controller template code generator and add a specific target into `build.xml`.
+ * reintroduce the Findbugs project in order to check the bugs on project.
 
 License
 -------
