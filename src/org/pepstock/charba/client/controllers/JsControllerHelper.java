@@ -62,7 +62,7 @@ final class JsControllerHelper {
 	 */
 	void register(ControllerType controllerType, NativeObject instance) {
 		// uses the controller template applying hte chart and controller types
-		String javaScript = Utilities.applyTemplate(ControllerTemplate.CONTENT, controllerType.value(), controllerType.getChartType().value());
+		String javaScript = Utilities.applyTemplate(ControllerTemplate.get().getTemplate(), controllerType.value(), controllerType.getChartType().value());
 		// creates a function with teh template
 		NativeFunction function = new NativeFunction(javaScript);
 		// executes the function
