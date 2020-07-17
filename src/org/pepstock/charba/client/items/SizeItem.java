@@ -64,6 +64,7 @@ public class SizeItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public SizeItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}

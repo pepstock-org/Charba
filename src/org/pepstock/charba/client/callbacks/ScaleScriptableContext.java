@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
 import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
@@ -76,10 +78,10 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param nativeObject native object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
-	public ScaleScriptableContext(NativeObject nativeObject) {
-		super(nativeObject);
+	public ScaleScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// stores scale and ticks
 		this.scale = new ScaleItem(getValue(Property.SCALE));
 		this.tick = FACTORY.create(getValue(Property.TICK));

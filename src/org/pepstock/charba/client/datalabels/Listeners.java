@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.enums.Event;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
@@ -63,9 +64,9 @@ public final class Listeners extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new ScriptableContext(context)));
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new ScriptableContext(context)));
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new ScriptableContext(context)));
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new ScriptableContext(new DataLabelsEnvelop<NativeObject>(context))));
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new ScriptableContext(new DataLabelsEnvelop<NativeObject>(context))));
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new ScriptableContext(new DataLabelsEnvelop<NativeObject>(context))));
 	}
 
 	/**

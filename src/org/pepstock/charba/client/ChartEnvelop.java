@@ -13,39 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.configuration;
+package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.commons.Envelop;
 
 /**
- * This object is a container of hidden scale id.<br>
+ * This object is a container of hidden object.<br>
  * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
  * 
+ * @param <T> type of envelop content.
  */
-public final class ScaleIdEnvelop {
-
-	// instance of enveloped scale id
-	private IsScaleId scaleId = null;
+public final class ChartEnvelop<T> extends Envelop<T>{
 
 	/**
-	 * Create the object with the scale id instance.<br>
-	 * Protected to avoid any instantiation.
-	 * 
-	 * @param scaleId scale id to put as content of envelop
+	 * To avoid any instantiation
 	 */
-	ScaleIdEnvelop(IsScaleId scaleId) {
-		this.scaleId = scaleId;
-	}
-
-	/**
-	 * Returns the content of envelop.
-	 * 
-	 * @return the content of envelop
-	 */
-	public IsScaleId getContent() {
-		return scaleId;
+	ChartEnvelop() {
+		// do nothing
 	}
 
 }

@@ -198,7 +198,7 @@ public final class Defaults {
 	 */
 	ChartOptions getChartOptions(Type type) {
 		// creates an envelop for options
-		Envelop<NativeObject> envelop = new Envelop<>();
+		ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
 		// load the envelop
 		Merger.get().load(type, envelop);
 		// returns a default option with all configuration
@@ -470,11 +470,11 @@ public final class Defaults {
 			// checks if has got scales
 			if (!ScaleType.NONE.equals(type.scaleType())) {
 				// creates an envelop for options
-				Envelop<ChartOptions> envelopOptions = new Envelop<>();
+				ChartEnvelop<ChartOptions> envelopOptions = new ChartEnvelop<>();
 				// stores a temporary chart options
 				envelopOptions.setContent(createChartOptions(type, DefaultsBuilder.get().getScaledOptions()));
 				// creates an envelop for native object of options
-				Envelop<NativeObject> envelop = new Envelop<>();
+				ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
 				// load the envelop
 				Merger.get().load(type, envelopOptions, envelop);
 				// creates defaults

@@ -30,6 +30,7 @@ public final class TitleNode extends BaseBoxNodeItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TitleNode(NativeObject nativeObject) {
 		super(nativeObject);
 	}

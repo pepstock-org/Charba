@@ -76,10 +76,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Creates the object with an empty native object.
 	 */
 	public DataPoint() {
-		super();
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
+		this(null);
 	}
 
 	/**

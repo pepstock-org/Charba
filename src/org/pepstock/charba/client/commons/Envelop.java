@@ -13,27 +13,40 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.items;
-
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.options.ScaledOptions;
+package org.pepstock.charba.client.commons;
 
 /**
- * Wrapper of options node of CHART.JS.
+ * This object is a container of hidden object.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @param <T> type of envelop content.
  */
-public final class OptionsNode extends ScaledOptions {
+public abstract class Envelop<T> extends ImmutableEnvelop<T>{
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
-	 * 
-	 * @param defaultValues default provider instance.
-	 * @param nativeObject native java script object which contains all properties.
+	 * Create an envelop with a <code>null</code> content.
 	 */
-	// FIXME envelop?
-	public OptionsNode(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
+	protected Envelop() {
+		this(null);
 	}
+
+	/**
+	 * Create an envelop with the content passed as argument.
+	 * 
+	 * @param content content to set as initial value
+	 */
+	protected Envelop(T content) {
+		super(content);
+	}
+
+	/**
+	 * Stores the content of envelop.
+	 * 
+	 * @param content the content of envelop to store
+	 */
+	public final void setContent(T content) {
+		super.setContentInternally(content);
+	}
+
 }

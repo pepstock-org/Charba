@@ -79,6 +79,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public LegendNode(NativeObject nativeObject) {
 		super(nativeObject);
 	}

@@ -39,6 +39,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public ScalesNode(NativeObject nativeObject) {
 		super(nativeObject);
 		// redefines hashcode in order do not have

@@ -117,6 +117,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public ScaleItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores scale id

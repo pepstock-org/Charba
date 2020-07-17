@@ -406,7 +406,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		// checks if options are consistent
 		if (getOptions() != null) {
 			// creates an envelop for options
-			Envelop<NativeObject> envelop = new Envelop<>();
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
 			// load the envelop
 			getOptions().loadOptions(envelop);
 			// FIXME checks

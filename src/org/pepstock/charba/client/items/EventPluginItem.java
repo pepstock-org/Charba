@@ -70,6 +70,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public EventPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}

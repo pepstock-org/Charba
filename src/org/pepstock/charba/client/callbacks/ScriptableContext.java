@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.DataEnvelop;
+import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -66,13 +69,31 @@ public final class ScriptableContext extends AbstractScriptableContext {
 			return value;
 		}
 	}
+	
+	/**
+	 * Creates the object with native object instance to be wrapped, called by <code>data</code> package.
+	 * 
+	 * @param envelop envelop of native object instance to be wrapped.
+	 */
+	public ScriptableContext(DataEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
+	/**
+	 * Creates the object with native object instance to be wrapped, called by <code>datalabels</code> package.
+	 * 
+	 * @param envelop envelop of native object instance to be wrapped.
+	 */
+	public ScriptableContext(DataLabelsEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	public ScriptableContext(NativeObject nativeObject) {
+	private ScriptableContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

@@ -66,6 +66,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TooltipPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// creates sub element

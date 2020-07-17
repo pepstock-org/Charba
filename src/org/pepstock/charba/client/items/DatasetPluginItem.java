@@ -67,6 +67,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public DatasetPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if meta data are present

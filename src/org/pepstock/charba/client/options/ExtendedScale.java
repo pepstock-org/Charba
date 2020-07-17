@@ -18,8 +18,9 @@ package org.pepstock.charba.client.options;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.configuration.ScaleIdEnvelop;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
@@ -78,13 +79,10 @@ public final class ExtendedScale extends Scale {
 	 * @param kind kind of axis
 	 * @param defaultValues default provider.
 	 */
-	public ExtendedScale(ScaleIdEnvelop envelop, AxisType type, AxisKind kind, IsDefaultScale defaultValues) {
+	public ExtendedScale(ConfigurationEnvelop<IsScaleId> envelop, AxisType type, AxisKind kind, IsDefaultScale defaultValues) {
 		super(type, defaultValues);
 		// checks if envelop is consistent
-		if (envelop == null || envelop.getContent() == null) {
-			// exception
-			throw new IllegalArgumentException("Envelop argument is not consistent");
-		}
+		IsEnvelop.checkIfValid(envelop);
 		// sets kind if consistent
 		setAxis(Key.checkAndGetIfValid(kind));
 		// sets id

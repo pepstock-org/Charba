@@ -45,6 +45,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -226,17 +227,17 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), borderWidthCallback, getDefaultBorderWidth()).intValue());
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
-		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(context), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
-		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(context), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
+		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/**

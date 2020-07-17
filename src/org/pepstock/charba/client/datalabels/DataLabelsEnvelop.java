@@ -13,44 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
+package org.pepstock.charba.client.datalabels;
+
+import org.pepstock.charba.client.commons.ImmutableEnvelop;
 
 /**
- * This object is a container of hidden object.<br>
+ * This object is a container of hidden object to pass to other packages.<br>
  * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
- * 
  * @param <T> type of envelop content.
+ * 
  */
-public final class Envelop<T> {
-
-	// instance of enveloped content
-	private T content = null;
+public final class DataLabelsEnvelop<T> extends ImmutableEnvelop<T>{
 
 	/**
-	 * To avoid any instantiation
-	 */
-	Envelop() {
-		// do nothing
-	}
-
-	/**
-	 * Returns the content of envelop.
+	 * Create an envelop with the content passed as argument.
 	 * 
-	 * @return the content of envelop
+	 * @param content content to set as initial value
 	 */
-	public T getContent() {
-		return content;
-	}
-
-	/**
-	 * Stores the content of envelop.
-	 * 
-	 * @param content the content of envelop to store
-	 */
-	public void setContent(T content) {
-		this.content = content;
+	DataLabelsEnvelop(T content) {
+		super(content);
 	}
 
 }

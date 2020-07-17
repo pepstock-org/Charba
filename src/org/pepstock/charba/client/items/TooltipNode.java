@@ -33,6 +33,7 @@ public final class TooltipNode {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TooltipNode(NativeObject nativeObject) {
 		// creates sub element
 		model = new TooltipModel(nativeObject);

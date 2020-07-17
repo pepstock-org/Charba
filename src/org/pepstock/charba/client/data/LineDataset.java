@@ -30,6 +30,7 @@ import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
@@ -129,7 +130,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new ScriptableContext(context)));
+		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new ScriptableContext(new DataEnvelop<NativeObject>(context))));
 	}
 
 	/**

@@ -94,6 +94,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	protected DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// sets the dataset item options

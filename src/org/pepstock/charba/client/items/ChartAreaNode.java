@@ -31,6 +31,7 @@ public final class ChartAreaNode extends BaseBoxItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public ChartAreaNode(NativeObject nativeObject) {
 		super(nativeObject);
 	}

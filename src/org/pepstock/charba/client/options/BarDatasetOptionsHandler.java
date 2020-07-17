@@ -79,6 +79,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param nativeObject native object where bar options properties must be managed
 	 * @param defaultValues default value of options properties to use when the properties do not exist
 	 */
+	// FIXME envelop?
 	public BarDatasetOptionsHandler(NativeObject nativeObject, IsDefaultDatasets defaultValues) {
 		super(nativeObject);
 		// checks default value instance

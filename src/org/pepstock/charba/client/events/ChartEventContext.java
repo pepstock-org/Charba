@@ -107,6 +107,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
+	// FIXME envelop?
 	public ChartEventContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}

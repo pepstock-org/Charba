@@ -69,6 +69,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TooltipBodyItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}

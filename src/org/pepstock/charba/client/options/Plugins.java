@@ -21,9 +21,11 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -76,9 +78,36 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
+		setEnabled(pluginId, enabled, false);
+	}
+
+	/**
+	 * Sets if a default CHART.JS plugin must be enabled or not.<br>
+	 * Callable only for chart configuration scope (no global or other).
+	 * 
+	 * @param envelop default CHART.JS plugin instance.
+	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
+	 */
+	public void setEnabled(ConfigurationEnvelop<DefaultPlugin> envelop, boolean enabled) {
+		// checks if envelop is valid
+		if (IsEnvelop.isValid(envelop)) {
+			setEnabled(envelop.getContent().value(), enabled, true);
+		}
+	}
+
+	/**
+	 * Sets if a global plugin must be enabled or not.<br>
+	 * If <code>overrideDefaultPlugin</code>, passed as argument, is <code>true</code> that means this is called by configuration and it can enabled or disabled default plugins.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param enabled <code>false</code> disable a global plugin.
+	 * @param overrideDefaultPlugin if <code>true</code> means this is called by configuration and it can enable or disable default plugins.
+	 */
+	private void setEnabled(String pluginId, boolean enabled, boolean overrideDefaultPlugin) {
 		// checks if is a default plugin
 		// if default plugin does nothing
-		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
+		// but if override plugin is set, means that is done by configuration then allowed
+		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId) || overrideDefaultPlugin) {
 			setValue(PluginIdChecker.key(pluginId), enabled);
 			// checks if the node is already added to parent
 			checkAndAddToParent();

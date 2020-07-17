@@ -73,6 +73,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores teh data point

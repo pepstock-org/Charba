@@ -94,6 +94,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public TooltipModel(NativeObject nativeObject) {
 		super(nativeObject);
 	}

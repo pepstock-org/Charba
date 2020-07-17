@@ -35,6 +35,7 @@ import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
+import org.pepstock.charba.client.enums.DefaultPlugin;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendOptionsFactory.HtmlLegendBuilderDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.LegendLabelItem;
@@ -308,7 +309,8 @@ public final class HtmlLegend extends AbstractPlugin {
 			// stored the legend display value because is missing
 			pluginLegendDisplayStatus.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
 		}
-		if (chart.getOptions().getLegend().isDisplay() || cachedValue) {
+		boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
+		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND)) {
 			// disable legend
 			chart.getOptions().getLegend().setDisplay(false);
 			// creates options instance

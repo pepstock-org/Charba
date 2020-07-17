@@ -35,6 +35,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public AxisItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}

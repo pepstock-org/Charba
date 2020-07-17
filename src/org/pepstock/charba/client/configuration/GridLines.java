@@ -26,6 +26,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -91,9 +92,11 @@ public class GridLines extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(context), colorCallback, getAxis().getScale().getGrideLines().getColorAsString(), false));
+		colorCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), colorCallback, getAxis().getScale().getGrideLines().getColorAsString(), false));
 		// gets value calling callback
-		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(context), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
+		lineWidthCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
 	}
 
 	/**

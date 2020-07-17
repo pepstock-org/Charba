@@ -97,6 +97,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
+	// FIXME envelop?
 	public DatasetMetaItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores controller

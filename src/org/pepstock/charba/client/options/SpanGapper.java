@@ -70,6 +70,7 @@ public class SpanGapper extends NativeObjectContainer {
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
 	 */
+	// FIXME envelop?
 	public SpanGapper(NativeObject nativeObject, IsDefaultOptions defaultValues) {
 		super(nativeObject);
 		// checks default value instance
