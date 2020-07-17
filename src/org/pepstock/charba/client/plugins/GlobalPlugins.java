@@ -61,8 +61,8 @@ public final class GlobalPlugins {
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
 	 */
 	public boolean register(Plugin plugin) {
-		// checks if plugin is consistent
-		if (plugin != null && !Key.hasKeyByValue(DefaultPlugin.values(), plugin.getId())) {
+		// checks if plugin is consistent and not a default plugin
+		if (plugin != null && !DefaultPlugin.is(plugin.getId())) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
 			// checks if ID is already registered
@@ -90,7 +90,7 @@ public final class GlobalPlugins {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one or as default one
-		if (!pluginIds.containsKey(pluginId) || Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
+		if (!pluginIds.containsKey(pluginId) || DefaultPlugin.is(pluginId)) {
 			return false;
 		}
 		// scans ids
@@ -135,7 +135,7 @@ public final class GlobalPlugins {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if the plugin is a default one
-		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId)) {
+		if (!DefaultPlugin.is(pluginId)) {
 			// gets all global registered plugin
 			Set<String> currentIds = getIds();
 			// scans all

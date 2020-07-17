@@ -107,7 +107,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		// checks if is a default plugin
 		// if default plugin does nothing
 		// but if override plugin is set, means that is done by configuration then allowed
-		if (!Key.hasKeyByValue(DefaultPlugin.values(), pluginId) || overrideDefaultPlugin) {
+		if (!DefaultPlugin.is(pluginId) || overrideDefaultPlugin) {
 			setValue(PluginIdChecker.key(pluginId), enabled);
 			// checks if the node is already added to parent
 			checkAndAddToParent();
@@ -190,8 +190,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(T options) {
-		// checks if options is consistent
-		if (options != null) {
+		// checks if options is consistent and not a default plugin
+		if (options != null && !DefaultPlugin.is(options.getPluginId())) {
 			// checks plugin ids
 			Key pluginIdKey = PluginIdChecker.key(options.getPluginId());
 			// stores configuration
@@ -223,6 +223,11 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				}
 				// stores the pluginId
 				pluginId = option.getPluginId();
+				// checks if it is a default plugin
+				if (DefaultPlugin.is(pluginId)){
+					// if yes, skips everything and then returns
+					return;
+				}
 			}
 			// creates plugin ids
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
@@ -249,7 +254,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (options == null && hasOptions(pluginId)) {
 			// removes configuration if exists
 			remove(pluginIdKey);
-		} else {
+		} else if (!DefaultPlugin.is(pluginId)){
+			// if here is not a default plugin
 			// checks plugin
 			checkPluginIdConsistency(pluginIdKey, options);
 			// stores configuration
@@ -275,7 +281,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (options == null && hasOptions(pluginId)) {
 			// removes configuration if exists
 			remove(pluginIdKey);
-		} else if (options != null) {
+		} else if (options != null && !DefaultPlugin.is(pluginId)) {
 			// scans all options to check if the options have got the same plugin id
 			for (AbstractPluginOptions option : options) {
 				// checks plugin
@@ -298,12 +304,18 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	public boolean hasOptions(String pluginId) {
 		// creates the key to avoid many calls to plugin checker
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// gets the type of property
-		ObjectType type = type(pluginIdKey);
-		// if boolean, there is not any options, therefore false
-		// otherwise checks if there is the key. If there is and is NOT boolean
-		// means that an options has been added.
-		return !ObjectType.BOOLEAN.equals(type) && has(pluginIdKey);
+		// checks if is default plugins
+		if (!DefaultPlugin.is(pluginId)) {
+			// gets the type of property
+			ObjectType type = type(pluginIdKey);
+			// if boolean, there is not any options, therefore false
+			// otherwise checks if there is the key. If there is and is NOT boolean
+			// means that an options has been added.
+			return !ObjectType.BOOLEAN.equals(type) && has(pluginIdKey);
+		}
+		// if here is default
+		// return always false
+		return false;
 	}
 
 	/**
@@ -314,7 +326,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 */
 	@Override
 	public ObjectType getOptionsType(String pluginId) {
-		return type(PluginIdChecker.key(pluginId));
+		// if argument is a default plugin id, returns always undefined
+		return DefaultPlugin.is(pluginId) ? ObjectType.UNDEFINED : type(PluginIdChecker.key(pluginId));
 	}
 
 	/**
@@ -328,8 +341,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
 	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
+		// checks if factory is consistent and not a default plugin
+		if (factory != null && !DefaultPlugin.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
 			// gets the type of property
@@ -360,8 +373,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
+		// checks if factory is consistent and not a default plugin
+		if (factory != null && !DefaultPlugin.is(pluginId)) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// checks plugin
@@ -390,8 +403,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return the plugin options as list or empty list if not exist.
 	 */
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
+		// checks if factory is consistent and not a default plugin
+		if (factory != null && !DefaultPlugin.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
 			// gets the type of property
@@ -426,8 +439,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 */
 	@Override
 	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
+		// checks if factory is consistent and not a default plugin
+		if (factory != null && !DefaultPlugin.is(pluginId)) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// checks plugin

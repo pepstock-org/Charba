@@ -26,7 +26,6 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.DefaultPlugin;
 
 /**
@@ -50,7 +49,7 @@ public final class Plugins implements ConfigurationElement {
 	public void add(Plugin plugin) {
 		// checks if plugin is consistent
 		// and the plugin id is not a default one
-		if (plugin != null && !Key.hasKeyByValue(DefaultPlugin.values(), plugin.getId())) {
+		if (plugin != null && !DefaultPlugin.is(plugin.getId())) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
 			// checks if the plugin is already loaded
@@ -91,19 +90,19 @@ public final class Plugins implements ConfigurationElement {
 	 * Removes a plugin from the chart.<br>
 	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
-	 * @param id plugin id to remove.
+	 * @param pluginId plugin id to remove.
 	 */
-	public void remove(String id) {
+	public void remove(String pluginId) {
 		// checks if plugin is consistent
 		// and the plugin id is not a default one
-		if (id != null && !Key.hasKeyByValue(DefaultPlugin.values(), id)) {
+		if (pluginId != null && !DefaultPlugin.is(pluginId)) {
 			// scans all plugins
 			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
 			while (iter.hasNext()) {
 				// gets wrapper
 				WrapperPlugin plugin = iter.next();
 				// if has got the same id
-				if (plugin.getId().equalsIgnoreCase(id)) {
+				if (plugin.getId().equalsIgnoreCase(pluginId)) {
 					// removes it
 					iter.remove();
 				}
