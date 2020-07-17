@@ -259,7 +259,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
    * add `clip` property to all datasets types.
    * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
-   * add `dataPoint` property to `TooltipItem` class. 
+   * add `dataPoint` property to `TooltipItem` class.
+   * enable the feature to manage floating bars on `time` or `timeseries` axes and bar charts adding to `DataPoint` class the possibility to add a `FloatingData` object as `Y` value.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

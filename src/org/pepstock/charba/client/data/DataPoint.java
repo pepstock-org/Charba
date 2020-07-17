@@ -20,6 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -76,6 +77,9 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	public DataPoint() {
 		super();
+		// redefines hashcode in order do not have
+		// the property $H for hashcode
+		super.redefineHashcode();
 	}
 
 	/**
@@ -85,6 +89,22 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	DataPoint(NativeObject nativeObject) {
 		super(nativeObject);
+		// redefines hashcode in order do not have
+		// the property $H for hashcode
+		super.redefineHashcode();
+	}
+
+	// -------------
+	// X
+	// -------------
+
+	/**
+	 * Returns the object type of data stored as X.
+	 * 
+	 * @return the object type of data stored as X
+	 */
+	public ObjectType getXObjectType() {
+		return type(Property.X);
 	}
 
 	/**
@@ -102,7 +122,13 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return X value as double
 	 */
 	public double getX() {
-		return getValue(Property.X, DEFAULT_X);
+		// checks if the stored data is a number
+		if (ObjectType.NUMBER.equals(getXObjectType())) {
+			return getValue(Property.X, DEFAULT_X);
+		}
+		// if here the data is missing or a string
+		// then returns the default
+		return DEFAULT_X;
 	}
 
 	/**
@@ -120,7 +146,13 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return X value as date for time series or <code>null</code> if is not set
 	 */
 	public Date getXAsDate() {
-		return getValue(Property.X, (Date) null);
+		// checks if the stored data is a number
+		if (ObjectType.NUMBER.equals(getXObjectType())) {
+			return getValue(Property.X, (Date) null);
+		}
+		// if here the data is missing or a string
+		// then returns the default
+		return (Date) null;
 	}
 
 	/**
@@ -138,7 +170,26 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return X value as string or {@link UndefinedValues#STRING} if is not set
 	 */
 	public String getXAsString() {
-		return getValue(Property.X, UndefinedValues.STRING);
+		// checks if the stored data is a string
+		if (ObjectType.STRING.equals(getXObjectType())) {
+			return getValue(Property.X, UndefinedValues.STRING);
+		}
+		// if here the data is missing or a number
+		// then returns the default
+		return UndefinedValues.STRING;
+	}
+
+	// -------------
+	// Y
+	// -------------
+
+	/**
+	 * Returns the object type of data stored as Y.
+	 * 
+	 * @return the object type of data stored as Y
+	 */
+	public ObjectType getYObjectType() {
+		return type(Property.Y);
 	}
 
 	/**
@@ -156,8 +207,42 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return Y value.
 	 */
 	public double getY() {
-		return getValue(Property.Y, DEFAULT_Y);
+		// checks if the stored data is a number
+		if (ObjectType.NUMBER.equals(getYObjectType())) {
+			return getValue(Property.Y, DEFAULT_Y);
+		}
+		// if here the data is missing or an array
+		// then returns the default
+		return DEFAULT_Y;
 	}
+
+	/**
+	 * Sets Y value.
+	 * 
+	 * @param y Y value.
+	 */
+	public void setY(FloatingData y) {
+		setValue(Property.Y, y);
+	}
+
+	/**
+	 * Returns Y value.
+	 * 
+	 * @return Y value.
+	 */
+	public FloatingData getYAsFloatingData() {
+		// checks if the stored data is a array
+		if (ObjectType.ARRAY.equals(getYObjectType())) {
+			return new FloatingData(getArrayValue(Property.Y));
+		}
+		// if here the data is missing or not a number
+		// then returns an empty data
+		return new FloatingData();
+	}
+
+	// -------------
+	// R
+	// -------------
 
 	/**
 	 * Sets the bubble radius in pixels (not scaled).<br>
