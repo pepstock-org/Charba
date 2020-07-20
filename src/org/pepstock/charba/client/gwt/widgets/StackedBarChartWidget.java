@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.StackedBarChart;
 import org.pepstock.charba.client.configuration.StackedOptions;
 import org.pepstock.charba.client.data.StackedBarDataset;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.StackedBarDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StackedBarChartWidget extends AbstractChartWidget<StackedBarChart> {
+public class StackedBarChartWidget extends AbstractChartWidget<StackedBarChart> implements IsDatasetCreator<StackedBarDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,12 +57,13 @@ public class StackedBarChartWidget extends AbstractChartWidget<StackedBarChart> 
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public StackedBarDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public StackedBarDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 }

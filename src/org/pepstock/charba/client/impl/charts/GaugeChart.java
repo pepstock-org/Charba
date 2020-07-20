@@ -57,10 +57,11 @@ public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.AbstractChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public GaugeDataset newDataset() {
+	public GaugeDataset newDataset(boolean hidden) {
+		// hidden is ignored because a meter chart has got only 1 dataset
 		return newDataset(MeterDataset.DEFAULT_MAXIMUM_VALUE);
 	}
 

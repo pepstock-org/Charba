@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.PolarAreaChart;
 import org.pepstock.charba.client.configuration.PolarAreaOptions;
 import org.pepstock.charba.client.data.PolarAreaDataset;
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.data.PolarAreaDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaChartWidget extends AbstractChartWidget<PolarAreaChart> {
+public class PolarAreaChartWidget extends AbstractChartWidget<PolarAreaChart> implements IsDatasetCreator<PolarAreaDataset> {
 
 	/**
 	 * Builds the object.
@@ -55,13 +56,14 @@ public class PolarAreaChartWidget extends AbstractChartWidget<PolarAreaChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public PolarAreaDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public PolarAreaDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

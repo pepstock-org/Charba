@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.charts.MeterDataset;
 import org.pepstock.charba.client.impl.charts.MeterOptions;
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.impl.charts.MeterOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class MeterChartWidget extends AbstractChartWidget<MeterChart> {
+public final class MeterChartWidget extends AbstractChartWidget<MeterChart> implements IsDatasetCreator<MeterDataset> {
 
 	/**
 	 * Builds the object.
@@ -43,13 +44,14 @@ public final class MeterChartWidget extends AbstractChartWidget<MeterChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public MeterDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public MeterDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 	/**

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.GaugeDataset;
 import org.pepstock.charba.client.impl.charts.GaugeOptions;
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.impl.charts.GaugeOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class GaugeChartWidget extends AbstractChartWidget<GaugeChart> {
+public final class GaugeChartWidget extends AbstractChartWidget<GaugeChart> implements IsDatasetCreator<GaugeDataset> {
 
 	/**
 	 * Builds the object.
@@ -43,13 +44,14 @@ public final class GaugeChartWidget extends AbstractChartWidget<GaugeChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public GaugeDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public GaugeDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 	/**

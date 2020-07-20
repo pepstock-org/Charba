@@ -57,10 +57,11 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.AbstractChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public MeterDataset newDataset() {
+	public MeterDataset newDataset(boolean hidden) {
+		// hidden is ignored because a meter chart has got only 1 dataset
 		return newDataset(DEFAULT_MAX);
 	}
 

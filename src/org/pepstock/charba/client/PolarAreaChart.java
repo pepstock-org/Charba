@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.PolarAreaDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaChart extends AbstractChart<PolarAreaDataset> {
+public class PolarAreaChart extends AbstractChart implements IsDatasetCreator<PolarAreaDataset> {
 
 	private final PolarAreaOptions options;
 
@@ -61,11 +61,11 @@ public class PolarAreaChart extends AbstractChart<PolarAreaDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public PolarAreaDataset newDataset() {
-		return new PolarAreaDataset(getDefaultChartOptions());
+	public PolarAreaDataset newDataset(boolean hidden) {
+		return new PolarAreaDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

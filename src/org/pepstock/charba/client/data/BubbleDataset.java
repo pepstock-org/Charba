@@ -114,7 +114,17 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * It uses the global options has default.
 	 */
 	public BubbleDataset() {
-		this(ChartType.BUBBLE);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public BubbleDataset(boolean hidden) {
+		this(ChartType.BUBBLE, hidden);
 	}
 
 	/**
@@ -123,16 +133,27 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * @param defaultValues default options
 	 */
 	public BubbleDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.BUBBLE, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public BubbleDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.BUBBLE, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected BubbleDataset(Type type) {
-		this(type, null);
+	protected BubbleDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -140,9 +161,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected BubbleDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected BubbleDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
 		// -------------------------------

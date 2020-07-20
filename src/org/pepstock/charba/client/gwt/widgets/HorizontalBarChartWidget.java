@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.HorizontalBarChart;
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.data.HorizontalBarDataset;
 
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.HorizontalBarDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarChart> {
+public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarChart> implements IsDatasetCreator<HorizontalBarDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,12 +57,14 @@ public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarC
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public HorizontalBarDataset newDataset() {
-		return new HorizontalBarDataset(getDefaultChartOptions());
+	@Override
+	public HorizontalBarDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
+
 }

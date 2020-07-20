@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScatterChart extends AbstractChart<ScatterDataset> {
+public class ScatterChart extends AbstractChart implements IsDatasetCreator<ScatterDataset> {
 
 	private final ScatterOptions options;
 
@@ -62,11 +62,11 @@ public class ScatterChart extends AbstractChart<ScatterDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public ScatterDataset newDataset() {
-		return new ScatterDataset(getDefaultChartOptions());
+	public ScatterDataset newDataset(boolean hidden) {
+		return new ScatterDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

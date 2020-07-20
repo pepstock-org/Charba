@@ -24,7 +24,7 @@ import org.pepstock.charba.client.data.DoughnutDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DoughnutChart extends AbstractChart<DoughnutDataset> {
+public class DoughnutChart extends AbstractChart implements IsDatasetCreator<DoughnutDataset> {
 
 	private final DoughnutOptions options;
 
@@ -60,11 +60,11 @@ public class DoughnutChart extends AbstractChart<DoughnutDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public DoughnutDataset newDataset() {
-		return new DoughnutDataset(getDefaultChartOptions());
+	public DoughnutDataset newDataset(boolean hidden) {
+		return new DoughnutDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

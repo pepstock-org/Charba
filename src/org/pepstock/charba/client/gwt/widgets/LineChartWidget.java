@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.LineChart;
 import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.LineDataset;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.LineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineChartWidget extends AbstractChartWidget<LineChart> {
+public class LineChartWidget extends AbstractChartWidget<LineChart> implements IsDatasetCreator<LineDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,13 +57,14 @@ public class LineChartWidget extends AbstractChartWidget<LineChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public LineDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public LineDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

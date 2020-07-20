@@ -66,7 +66,17 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * It uses the global options has default.
 	 */
 	public PieDataset() {
-		this(ChartType.PIE);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public PieDataset(boolean hidden) {
+		this(ChartType.PIE, hidden);
 	}
 
 	/**
@@ -75,16 +85,27 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param defaultValues default options
 	 */
 	public PieDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.PIE, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public PieDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.PIE, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected PieDataset(Type type) {
-		this(type, null);
+	protected PieDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -92,9 +113,10 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected PieDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected PieDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// creates border aligner instance
 		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
 	}

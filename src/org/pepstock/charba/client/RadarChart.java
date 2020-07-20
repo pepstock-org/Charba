@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.RadarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarChart extends AbstractChart<RadarDataset> {
+public class RadarChart extends AbstractChart implements IsDatasetCreator<RadarDataset> {
 
 	private final RadarOptions options;
 
@@ -61,11 +61,11 @@ public class RadarChart extends AbstractChart<RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public RadarDataset newDataset() {
-		return new RadarDataset(getDefaultChartOptions());
+	public RadarDataset newDataset(boolean hidden) {
+		return new RadarDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

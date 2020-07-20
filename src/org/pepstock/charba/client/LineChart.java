@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.LineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineChart extends AbstractChart<LineDataset> {
+public class LineChart extends AbstractChart implements IsDatasetCreator<LineDataset> {
 
 	private final LineOptions options;
 
@@ -62,11 +62,11 @@ public class LineChart extends AbstractChart<LineDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public LineDataset newDataset() {
-		return new LineDataset(getDefaultChartOptions());
+	public LineDataset newDataset(boolean hidden) {
+		return new LineDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

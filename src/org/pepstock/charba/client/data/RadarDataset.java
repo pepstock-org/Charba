@@ -31,7 +31,17 @@ public class RadarDataset extends LiningDataset {
 	 * It uses the global options has default.
 	 */
 	public RadarDataset() {
-		this(ChartType.RADAR);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public RadarDataset(boolean hidden) {
+		this(ChartType.RADAR, hidden);
 	}
 
 	/**
@@ -40,17 +50,27 @@ public class RadarDataset extends LiningDataset {
 	 * @param defaultValues default options
 	 */
 	public RadarDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.RADAR, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public RadarDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.RADAR, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
-	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected RadarDataset(Type type) {
-		this(type, null);
+	protected RadarDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -58,9 +78,10 @@ public class RadarDataset extends LiningDataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected RadarDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected RadarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 	}
 
 }

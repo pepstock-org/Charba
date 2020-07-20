@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.StackedAreaDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedAreaChart extends AbstractChart<StackedAreaDataset> {
+public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<StackedAreaDataset> {
 
 	private final StackedOptions options;
 
@@ -61,11 +61,11 @@ public class StackedAreaChart extends AbstractChart<StackedAreaDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public StackedAreaDataset newDataset() {
-		return new StackedAreaDataset(getDefaultChartOptions());
+	public StackedAreaDataset newDataset(boolean hidden) {
+		return new StackedAreaDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.BarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarChart extends AbstractChart<BarDataset> {
+public class BarChart extends AbstractChart implements IsDatasetCreator<BarDataset> {
 
 	private final BarOptions options;
 
@@ -61,11 +61,11 @@ public class BarChart extends AbstractChart<BarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public BarDataset newDataset() {
-		return new BarDataset(getDefaultChartOptions());
+	public BarDataset newDataset(boolean hidden) {
+		return new BarDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

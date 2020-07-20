@@ -64,10 +64,9 @@ import org.pepstock.charba.client.utils.Utilities;
  * It contains Chart.js initialization.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @param <D> Dataset type for the specific chart
+ * 
  */
-public abstract class AbstractChart<D extends Dataset> extends HandlerManager implements IsChart, MutationHandler {
+public abstract class AbstractChart extends HandlerManager implements IsChart, MutationHandler {
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -228,13 +227,6 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 	public final Type getType() {
 		return type;
 	}
-
-	/**
-	 * Creates a new dataset related to chart type.
-	 * 
-	 * @return a new dataset related to chart type.
-	 */
-	public abstract D newDataset();
 
 	/**
 	 * Returns the native object related to CHART.JS implementation.

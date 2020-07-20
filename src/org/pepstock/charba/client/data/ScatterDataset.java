@@ -33,11 +33,20 @@ public final class ScatterDataset extends LineDataset {
 
 	/**
 	 * Creates a dataset.<br>
-	 * It uses the global options has default.<br>
-	 * Builds the object setting fixed properties
+	 * It uses the global options has default.
 	 */
 	public ScatterDataset() {
-		this(ChartType.SCATTER);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public ScatterDataset(boolean hidden) {
+		this(ChartType.SCATTER, hidden);
 	}
 
 	/**
@@ -46,16 +55,27 @@ public final class ScatterDataset extends LineDataset {
 	 * @param defaultValues default options
 	 */
 	public ScatterDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.SCATTER, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public ScatterDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.SCATTER, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected ScatterDataset(Type type) {
-		super(type, null);
+	protected ScatterDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -63,9 +83,10 @@ public final class ScatterDataset extends LineDataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected ScatterDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected ScatterDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// scatter is always no fill
 		super.setFill(Fill.FALSE);
 		// scatter has never show lines

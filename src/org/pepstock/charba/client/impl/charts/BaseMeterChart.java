@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
 
@@ -28,7 +29,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
  *
  * @param <D> Dataset type for the specific chart, extends MeterDataset
  */
-abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
+abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart implements IsDatasetCreator<D> {
 
 	/**
 	 * Default of maximum value of data into a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.

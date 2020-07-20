@@ -235,6 +235,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
  * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones into `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
  * change the return value of `getTooltip` method of `TooltipPluginItem` class, returning now a `TooltipModel` object instead of `TooltipNode`.
+ * reduce visibility of `setHidden` method of `Dataset` class and add hidden argument to `Dataset` constructor in order to set the initial visibility. To change the dataset visibility, use the `setDatasetVisibility` chart method.  
   
 ### Features
 
@@ -272,6 +273,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `getAxis(scaleId, axisKind)` method from `IsDefaultScale`s interface in order to get the default scale and remove `getXAxis` and `getYAxis` methods.
  * add `onBeginDrawing` and `onEndDrawing` methods to `Plugin` interface in order to invoke the plugin once before starting and after ending any drawing.
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
+ * add `newDataset(boolean)` methods for all charts (by new `IsDatasetCreator` interface) in order to get new dataset with the initial visibility status.
  
 ### Development
 
@@ -294,6 +296,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * create a controller template code generator and add a specific target into `build.xml`.
  * reintroduce the `Findbugs` project in order to check the bugs on project.
  * reduce the visibility of objects which must get a javascript native object as argument on constructor, using an envelop. This reduces the possibility to map a native object with a wrong wrapper.
+ * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
 
 License
 -------

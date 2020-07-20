@@ -47,10 +47,11 @@ public class HorizontalBarChart extends BarChart {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.BarChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public HorizontalBarDataset newDataset() {
-		return new HorizontalBarDataset(getDefaultChartOptions());
+	public HorizontalBarDataset newDataset(boolean hidden) {
+		return new HorizontalBarDataset(getDefaultChartOptions(), hidden);
 	}
+
 }

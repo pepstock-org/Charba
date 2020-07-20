@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.DoughnutChart;
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.configuration.DoughnutOptions;
 import org.pepstock.charba.client.data.DoughnutDataset;
 
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.data.DoughnutDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DoughnutChartWidget extends AbstractChartWidget<DoughnutChart> {
+public class DoughnutChartWidget extends AbstractChartWidget<DoughnutChart> implements IsDatasetCreator<DoughnutDataset> {
 
 	/**
 	 * Builds the object.
@@ -54,13 +55,14 @@ public class DoughnutChartWidget extends AbstractChartWidget<DoughnutChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public DoughnutDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public DoughnutDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

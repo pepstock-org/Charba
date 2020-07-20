@@ -97,7 +97,17 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public LineDataset() {
-		this(ChartType.LINE);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public LineDataset(boolean hidden) {
+		this(ChartType.LINE, hidden);
 	}
 
 	/**
@@ -106,16 +116,27 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param defaultValues default options
 	 */
 	public LineDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.LINE, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public LineDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.LINE, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected LineDataset(Type type) {
-		this(type, null);
+	protected LineDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -123,9 +144,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected LineDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected LineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

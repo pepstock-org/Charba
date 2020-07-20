@@ -112,7 +112,17 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * It uses the global options has default.
 	 */
 	public BarDataset() {
-		this(ChartType.BAR);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public BarDataset(boolean hidden) {
+		this(ChartType.BAR, hidden);
 	}
 
 	/**
@@ -121,16 +131,27 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param defaultValues default options
 	 */
 	public BarDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.BAR, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public BarDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.BAR, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected BarDataset(Type type) {
-		this(type, null);
+	protected BarDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -138,9 +159,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected BarDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected BarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// sets new orderer and options handler
 		this.orderer = new Orderer(getNativeObject());
 		this.barOptionsHandler = new BarDatasetOptionsHandler(new DataEnvelop<>(getNativeObject(), true), getDefaultValues().getDatasets());

@@ -64,7 +64,17 @@ public class StackedAreaDataset extends LineDataset {
 	 * It uses the global options has default.
 	 */
 	public StackedAreaDataset() {
-		this((IsDefaultOptions) null);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public StackedAreaDataset(boolean hidden) {
+		this((IsDefaultOptions) null, hidden);
 	}
 
 	/**
@@ -73,16 +83,27 @@ public class StackedAreaDataset extends LineDataset {
 	 * @param defaultValues default options
 	 */
 	public StackedAreaDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public StackedAreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		super(defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedAreaDataset(Type type) {
-		this(type, null);
+	protected StackedAreaDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -90,9 +111,10 @@ public class StackedAreaDataset extends LineDataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 	}
 
 	/**

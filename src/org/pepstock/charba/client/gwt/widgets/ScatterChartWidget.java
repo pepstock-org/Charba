@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.ScatterChart;
 import org.pepstock.charba.client.configuration.ScatterOptions;
 import org.pepstock.charba.client.data.ScatterDataset;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScatterChartWidget extends AbstractChartWidget<ScatterChart> {
+public class ScatterChartWidget extends AbstractChartWidget<ScatterChart> implements IsDatasetCreator<ScatterDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,13 +57,14 @@ public class ScatterChartWidget extends AbstractChartWidget<ScatterChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public ScatterDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public ScatterDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

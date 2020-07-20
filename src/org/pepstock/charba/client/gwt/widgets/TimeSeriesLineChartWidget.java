@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.TimeSeriesLineChart;
 import org.pepstock.charba.client.configuration.TimeSeriesLineOptions;
 import org.pepstock.charba.client.data.TimeSeriesLineDataset;
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.data.TimeSeriesLineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesLineChartWidget extends AbstractChartWidget<TimeSeriesLineChart> {
+public class TimeSeriesLineChartWidget extends AbstractChartWidget<TimeSeriesLineChart> implements IsDatasetCreator<TimeSeriesLineDataset> {
 
 	/**
 	 * Builds the object.
@@ -55,13 +56,14 @@ public class TimeSeriesLineChartWidget extends AbstractChartWidget<TimeSeriesLin
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public TimeSeriesLineDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public TimeSeriesLineDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

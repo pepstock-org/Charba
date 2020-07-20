@@ -72,7 +72,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			AbstractChart abstractChart = (AbstractChart) chart;
 			// gets div element
 			Div element = abstractChart.getChartElement();
 			// right - the x coordinate of the ending point of the widget
@@ -106,7 +106,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			AbstractChart abstractChart = (AbstractChart) chart;
 			// gets div element
 			Div element = abstractChart.getChartElement();
 			// these are the coordinates of center of widget
@@ -135,7 +135,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 		// checks if chart is abstract one
 		if (IsChart.isAbstractChart(chart)) {
 			// gets simple panel
-			AbstractChart<?> abstractChart = (AbstractChart<?>) chart;
+			AbstractChart abstractChart = (AbstractChart) chart;
 			// gets div element
 			Div element = abstractChart.getChartElement();
 			// radius - if max value between width and height, divided by 2

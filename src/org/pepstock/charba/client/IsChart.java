@@ -119,7 +119,7 @@ public interface IsChart {
 	 * @return <code>true</code> if chart passed as argument is an abstract chart instance
 	 */
 	static boolean isAbstractChart(IsChart chart) {
-		return (chart instanceof AbstractChart<?>);
+		return (chart instanceof AbstractChart);
 	}
 
 	/**

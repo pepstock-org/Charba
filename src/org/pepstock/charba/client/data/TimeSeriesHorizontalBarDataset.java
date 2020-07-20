@@ -37,7 +37,17 @@ public class TimeSeriesHorizontalBarDataset extends HorizontalBarDataset impleme
 	 * It uses the global options has default.
 	 */
 	public TimeSeriesHorizontalBarDataset() {
-		this((IsDefaultOptions) null);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public TimeSeriesHorizontalBarDataset(boolean hidden) {
+		this((IsDefaultOptions) null, hidden);
 	}
 
 	/**
@@ -46,7 +56,17 @@ public class TimeSeriesHorizontalBarDataset extends HorizontalBarDataset impleme
 	 * @param defaultValues default options
 	 */
 	public TimeSeriesHorizontalBarDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public TimeSeriesHorizontalBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		super(defaultValues, hidden);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
 	}
@@ -55,9 +75,10 @@ public class TimeSeriesHorizontalBarDataset extends HorizontalBarDataset impleme
 	 * Creates the dataset using a default and chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden
 	 */
-	protected TimeSeriesHorizontalBarDataset(Type type) {
-		this(type, null);
+	protected TimeSeriesHorizontalBarDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -65,9 +86,10 @@ public class TimeSeriesHorizontalBarDataset extends HorizontalBarDataset impleme
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected TimeSeriesHorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected TimeSeriesHorizontalBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
 	}

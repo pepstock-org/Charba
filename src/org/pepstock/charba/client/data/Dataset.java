@@ -100,7 +100,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
-	private static final boolean DEFAULT_HIDDEN = false;
+	protected static final boolean DEFAULT_HIDDEN = false;
 	// factory to create data points
 	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create time series items
@@ -209,15 +209,20 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected Dataset(Type type, IsDefaultOptions defaultValues) {
+	protected Dataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		// FIXME default when it's not the options of chart
-		// FIXME hidden could be a param for constructo because specify to hide the dataset since beginning
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
 		// stores the type
 		this.type = type;
 		// stores the type
 		setValue(InternalProperty.TYPE, type);
+		// checks and stores visibility
+		if (hidden) {
+			// stores visibility
+			setHidden(hidden);
+		}
 		// stores the id based on a counter
 		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
@@ -653,7 +658,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * 
 	 * @param hidden if the dataset will appear or not.
 	 */
-	public void setHidden(boolean hidden) {
+	protected final void setHidden(boolean hidden) {
 		// checks if is hidden
 		if (hidden) {
 			// then sets it
@@ -666,11 +671,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns if the dataset will appear or not.
+	 * Returns if the dataset at first drawing will appear or not.
 	 * 
-	 * @return if the dataset will appear or not. Default is <code>false</code>
+	 * @return if the dataset at first drawing will appear or not. Default is <code>false</code>
 	 */
-	public boolean isHidden() {
+	public final boolean isHidden() {
 		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);
 	}
 

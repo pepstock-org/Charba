@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.PieChart;
 import org.pepstock.charba.client.configuration.PieOptions;
 import org.pepstock.charba.client.data.PieDataset;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.PieDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PieChartWidget extends AbstractChartWidget<PieChart> {
+public class PieChartWidget extends AbstractChartWidget<PieChart> implements IsDatasetCreator<PieDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,13 +57,14 @@ public class PieChartWidget extends AbstractChartWidget<PieChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public PieDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public PieDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

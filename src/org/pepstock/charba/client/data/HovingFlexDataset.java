@@ -49,9 +49,10 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	HovingFlexDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	HovingFlexDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 	}
 
 	/**

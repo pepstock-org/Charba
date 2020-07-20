@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.BubbleChart;
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.configuration.BubbleOptions;
 import org.pepstock.charba.client.data.BubbleDataset;
 
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.data.BubbleDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleChartWidget extends AbstractChartWidget<BubbleChart> {
+public class BubbleChartWidget extends AbstractChartWidget<BubbleChart> implements IsDatasetCreator<BubbleDataset> {
 
 	/**
 	 * Builds the object.
@@ -56,13 +57,14 @@ public class BubbleChartWidget extends AbstractChartWidget<BubbleChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public BubbleDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public BubbleDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

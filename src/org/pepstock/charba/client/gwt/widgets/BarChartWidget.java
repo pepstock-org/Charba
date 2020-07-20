@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.BarChart;
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.data.BarDataset;
 
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.data.BarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarChartWidget extends AbstractChartWidget<BarChart> {
+public class BarChartWidget extends AbstractChartWidget<BarChart> implements IsDatasetCreator<BarDataset> {
 
 	/**
 	 * Builds the object.
@@ -55,13 +56,14 @@ public class BarChartWidget extends AbstractChartWidget<BarChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public BarDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public BarDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

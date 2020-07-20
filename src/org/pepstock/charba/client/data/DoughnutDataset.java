@@ -32,7 +32,17 @@ public class DoughnutDataset extends PieDataset {
 	 * It uses the global options has default.
 	 */
 	public DoughnutDataset() {
-		this(ChartType.DOUGHNUT);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public DoughnutDataset(boolean hidden) {
+		this(ChartType.DOUGHNUT, hidden);
 	}
 
 	/**
@@ -41,16 +51,27 @@ public class DoughnutDataset extends PieDataset {
 	 * @param defaultValues default options
 	 */
 	public DoughnutDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.DOUGHNUT, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public DoughnutDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.DOUGHNUT, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected DoughnutDataset(Type type) {
-		this(type, null);
+	protected DoughnutDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -58,8 +79,9 @@ public class DoughnutDataset extends PieDataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected DoughnutDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected DoughnutDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 	}
 }

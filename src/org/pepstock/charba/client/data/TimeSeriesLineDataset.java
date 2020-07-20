@@ -37,7 +37,17 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	 * It uses the global options has default.
 	 */
 	public TimeSeriesLineDataset() {
-		this((IsDefaultOptions) null);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public TimeSeriesLineDataset(boolean hidden) {
+		this((IsDefaultOptions) null, hidden);
 	}
 
 	/**
@@ -46,16 +56,27 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	 * @param defaultValues default options
 	 */
 	public TimeSeriesLineDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public TimeSeriesLineDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		super(defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using a default and chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected TimeSeriesLineDataset(Type type) {
-		this(type, null);
+	protected TimeSeriesLineDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -63,9 +84,10 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected TimeSeriesLineDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected TimeSeriesLineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 	}
 
 	/*

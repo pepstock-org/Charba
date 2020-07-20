@@ -34,7 +34,17 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 	 * It uses the global options has default.
 	 */
 	public PolarAreaDataset() {
-		this(ChartType.POLAR_AREA);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public PolarAreaDataset(boolean hidden) {
+		this(ChartType.POLAR_AREA, hidden);
 	}
 
 	/**
@@ -43,16 +53,27 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 	 * @param defaultValues default options
 	 */
 	public PolarAreaDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.POLAR_AREA, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public PolarAreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.POLAR_AREA, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected PolarAreaDataset(Type type) {
-		this(type, null);
+	protected PolarAreaDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -60,9 +81,10 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected PolarAreaDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected PolarAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// creates border aligner instance
 		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
 	}

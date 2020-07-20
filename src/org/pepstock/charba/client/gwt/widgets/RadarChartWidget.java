@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.gwt.widgets;
 
+import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.RadarChart;
 import org.pepstock.charba.client.configuration.RadarOptions;
 import org.pepstock.charba.client.data.RadarDataset;
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.data.RadarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarChartWidget extends AbstractChartWidget<RadarChart> {
+public class RadarChartWidget extends AbstractChartWidget<RadarChart> implements IsDatasetCreator<RadarDataset> {
 
 	/**
 	 * Builds the object.
@@ -55,13 +56,14 @@ public class RadarChartWidget extends AbstractChartWidget<RadarChart> {
 		return getChart().getOptions();
 	}
 
-	/**
-	 * Creates a new dataset related to chart type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a new dataset related to chart type.
+	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
-	public RadarDataset newDataset() {
-		return getChart().newDataset();
+	@Override
+	public RadarDataset newDataset(boolean hidden) {
+		return getChart().newDataset(hidden);
 	}
 
 }

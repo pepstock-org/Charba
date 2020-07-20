@@ -223,9 +223,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	LiningDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());

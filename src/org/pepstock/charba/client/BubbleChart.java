@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.BubbleDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleChart extends AbstractChart<BubbleDataset> {
+public class BubbleChart extends AbstractChart implements IsDatasetCreator<BubbleDataset> {
 
 	private final BubbleOptions options;
 
@@ -62,11 +62,11 @@ public class BubbleChart extends AbstractChart<BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public BubbleDataset newDataset() {
-		return new BubbleDataset(getDefaultChartOptions());
+	public BubbleDataset newDataset(boolean hidden) {
+		return new BubbleDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

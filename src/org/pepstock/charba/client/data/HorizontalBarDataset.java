@@ -33,7 +33,17 @@ public class HorizontalBarDataset extends BarDataset {
 	 * It uses the global options has default.
 	 */
 	public HorizontalBarDataset() {
-		this(ChartType.BAR);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public HorizontalBarDataset(boolean hidden) {
+		this(ChartType.BAR, hidden);
 	}
 
 	/**
@@ -42,16 +52,27 @@ public class HorizontalBarDataset extends BarDataset {
 	 * @param defaultValues default options
 	 */
 	public HorizontalBarDataset(IsDefaultOptions defaultValues) {
-		this(ChartType.BAR, defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public HorizontalBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.BAR, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden
 	 */
-	protected HorizontalBarDataset(Type type) {
-		this(type, null);
+	protected HorizontalBarDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -59,9 +80,10 @@ public class HorizontalBarDataset extends BarDataset {
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected HorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected HorizontalBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// always y being an horizontal dataset
 		super.setIndexAxis(IndexAxis.Y);
 	}

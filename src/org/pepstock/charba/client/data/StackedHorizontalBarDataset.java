@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -31,11 +30,21 @@ public class StackedHorizontalBarDataset extends HorizontalBarDataset implements
 	private final BarStacker barStacker;
 
 	/**
-	 * Creates a dataset, for {@link ChartType#BAR}.<br>
+	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
 	public StackedHorizontalBarDataset() {
-		this((IsDefaultOptions) null);
+		this(Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 * 
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public StackedHorizontalBarDataset(boolean hidden) {
+		this((IsDefaultOptions) null, hidden);
 	}
 
 	/**
@@ -44,7 +53,17 @@ public class StackedHorizontalBarDataset extends HorizontalBarDataset implements
 	 * @param defaultValues default options
 	 */
 	public StackedHorizontalBarDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(defaultValues, Dataset.DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 */
+	public StackedHorizontalBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		super(defaultValues, hidden);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
 	}
@@ -53,9 +72,10 @@ public class StackedHorizontalBarDataset extends HorizontalBarDataset implements
 	 * Creates the dataset using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedHorizontalBarDataset(Type type) {
-		this(type, null);
+	protected StackedHorizontalBarDataset(Type type, boolean hidden) {
+		this(type, null, hidden);
 	}
 
 	/**
@@ -63,9 +83,10 @@ public class StackedHorizontalBarDataset extends HorizontalBarDataset implements
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedHorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+	protected StackedHorizontalBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(type, defaultValues, hidden);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
 	}

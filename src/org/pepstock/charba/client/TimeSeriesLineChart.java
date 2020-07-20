@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.TimeSeriesLineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesLineChart extends AbstractChart<TimeSeriesLineDataset> {
+public class TimeSeriesLineChart extends AbstractChart implements IsDatasetCreator<TimeSeriesLineDataset> {
 
 	private final TimeSeriesLineOptions options;
 
@@ -61,11 +61,11 @@ public class TimeSeriesLineChart extends AbstractChart<TimeSeriesLineDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public TimeSeriesLineDataset newDataset() {
-		return new TimeSeriesLineDataset(getDefaultChartOptions());
+	public TimeSeriesLineDataset newDataset(boolean hidden) {
+		return new TimeSeriesLineDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

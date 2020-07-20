@@ -105,7 +105,7 @@ public class MeterDataset extends Dataset {
 	 * @param defaultValues default options
 	 */
 	protected MeterDataset(ControllerType type, double max, IsDefaultOptions defaultValues) {
-		super(type, defaultValues);
+		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
 		// sets the max value between the max and minimum value
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
@@ -242,20 +242,9 @@ public class MeterDataset extends Dataset {
 	/**
 	 * Forces hiding the dataset because there are more than 1 datasets into chart
 	 */
-	void hide() {
+	final void hide() {
 		// the dataset is hidden
 		super.setHidden(true);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setHidden(boolean)
-	 */
-	@Override
-	public final void setHidden(boolean hidden) {
-		// the dataset can not be hidden
-		super.setHidden(false);
 	}
 
 	/**

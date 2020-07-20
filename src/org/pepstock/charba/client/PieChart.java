@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.PieDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PieChart extends AbstractChart<PieDataset> {
+public class PieChart extends AbstractChart implements IsDatasetCreator<PieDataset> {
 
 	private final PieOptions options;
 
@@ -62,11 +62,11 @@ public class PieChart extends AbstractChart<PieDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public PieDataset newDataset() {
-		return new PieDataset(getDefaultChartOptions());
+	public PieDataset newDataset(boolean hidden) {
+		return new PieDataset(getDefaultChartOptions(), hidden);
 	}
 
 }
