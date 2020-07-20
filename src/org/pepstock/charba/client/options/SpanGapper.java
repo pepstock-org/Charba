@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -65,13 +67,22 @@ public class SpanGapper extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates a span gapper with the envelop of the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
+	 * 
+	 * @param envelop envelop of the native object where SPANGAPS property must be managed
+	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
+	 */
+	public SpanGapper(DataEnvelop<NativeObject> envelop, IsDefaultOptions defaultValues) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValues);
+	}
+
+	/**
 	 * Creates a span gapper with the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
 	 */
-	// FIXME envelop?
-	public SpanGapper(NativeObject nativeObject, IsDefaultOptions defaultValues) {
+	SpanGapper(NativeObject nativeObject, IsDefaultOptions defaultValues) {
 		super(nativeObject);
 		// checks default value instance
 		if (defaultValues == null) {

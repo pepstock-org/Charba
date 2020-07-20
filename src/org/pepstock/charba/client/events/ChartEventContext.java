@@ -17,10 +17,12 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -103,13 +105,12 @@ public final class ChartEventContext extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object with native object instance to be wrapped.
+	 * Creates the object with envelop envelop with the native object instance to be wrapped.
 	 * 
-	 * @param nativeObject native object instance to be wrapped.
+	 * @param envelop envelop with the native object instance to be wrapped.
 	 */
-	// FIXME envelop?
-	public ChartEventContext(NativeObject nativeObject) {
-		super(nativeObject);
+	public ChartEventContext(ConfigurationEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

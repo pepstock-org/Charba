@@ -71,7 +71,7 @@ public final class StyleElement extends DatasetItem {
 	 * @param nativeObject CHART.JS java script object
 	 */
 	StyleElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(new ControllersEnvelop<>(nativeObject, true));
 		// checks and set the X scale if exists
 		if (has(Property.X_SCALE)) {
 			xScale = new InternalScaleItem(getValue(Property.X_SCALE));
@@ -126,7 +126,7 @@ public final class StyleElement extends DatasetItem {
 		 * @param nativeObject CHART.JS java script object
 		 */
 		InternalScaleItem(NativeObject nativeObject) {
-			super(nativeObject);
+			super(new ControllersEnvelop<>(nativeObject, true));
 		}
 
 	}

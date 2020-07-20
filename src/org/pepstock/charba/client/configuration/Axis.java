@@ -518,7 +518,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisUpdateCallback != null) {
 			// then it is called
-			axisUpdateCallback.onBeforeUpdate(this, new AxisItem(item));
+			axisUpdateCallback.onBeforeUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -531,7 +531,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisDimensionsCallback != null) {
 			// then it is called
-			axisDimensionsCallback.onBeforeSetDimensions(this, new AxisItem(item));
+			axisDimensionsCallback.onBeforeSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -544,7 +544,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisDimensionsCallback != null) {
 			// then it is called
-			axisDimensionsCallback.onAfterSetDimensions(this, new AxisItem(item));
+			axisDimensionsCallback.onAfterSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -557,7 +557,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisDataLimitsCallback != null) {
 			// then it is called
-			axisDataLimitsCallback.onBeforeDataLimits(this, new AxisItem(item));
+			axisDataLimitsCallback.onBeforeDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -570,7 +570,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisDataLimitsCallback != null) {
 			// then it is called
-			axisDataLimitsCallback.onAfterDataLimits(this, new AxisItem(item));
+			axisDataLimitsCallback.onAfterDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -583,7 +583,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisTickToLabelConversionCallback != null) {
 			// then it is called
-			axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(this, new AxisItem(item));
+			axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -596,7 +596,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisTickToLabelConversionCallback != null) {
 			// then it is called
-			axisTickToLabelConversionCallback.onAfterTickToLabelConversion(this, new AxisItem(item));
+			axisTickToLabelConversionCallback.onAfterTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -609,7 +609,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisCalculateTickRotationCallback != null) {
 			// then it is called
-			axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(this, new AxisItem(item));
+			axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -622,7 +622,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisCalculateTickRotationCallback != null) {
 			// then it is called
-			axisCalculateTickRotationCallback.onAfterCalculateTickRotation(this, new AxisItem(item));
+			axisCalculateTickRotationCallback.onAfterCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -635,7 +635,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisFitCallback != null) {
 			// then it is called
-			axisFitCallback.onBeforeFit(this, new AxisItem(item));
+			axisFitCallback.onBeforeFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -648,7 +648,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisFitCallback != null) {
 			// then it is called
-			axisFitCallback.onAfterFit(this, new AxisItem(item));
+			axisFitCallback.onAfterFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -661,7 +661,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if user callback is consistent
 		if (axisUpdateCallback != null) {
 			// then it is called
-			axisUpdateCallback.onAfterUpdate(this, new AxisItem(item));
+			axisUpdateCallback.onAfterUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 

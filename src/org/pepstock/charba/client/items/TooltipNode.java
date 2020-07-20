@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -26,17 +28,17 @@ import org.pepstock.charba.client.commons.NativeObject;
  */
 public final class TooltipNode {
 
+	// the node and model are the same but it is mantianed for compatibility
 	private final TooltipModel model;
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using envelop with the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public TooltipNode(NativeObject nativeObject) {
+	public TooltipNode(ChartEnvelop<NativeObject> envelop) {
 		// creates sub element
-		model = new TooltipModel(nativeObject);
+		model = new TooltipModel(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.controllers;
 
 /**
  * Contains the content of javascript controller template.<br>
- * It will be filled with controller and chart types and execute. 
+ * It will be filled with controller and chart types and execute.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -25,26 +25,24 @@ package org.pepstock.charba.client.controllers;
 final class ControllerTemplate {
 
 	// encoded javascript content of controller template
-	private static final String[] CONTENT = {
-		"function Charba{0}(){Chart.controllers.{1}.apply(this,arguments)}Charba{0}.prototype=Object.create(Chart.controllers.{1}.prototype);Charba{0}.prototype.constructor=Charba{0};",
-		"Charba{0}.prototype.checkAndGetWrapper=function $Charba{0}$$checkAndGetWrapper$($property$$){var $delegated$$=CharbaJsControllerHelper.wrappers.{0};return\"undefined\"!==typeof $delegated$$&&\"function\"===typeof $delegated$$[$property$$]?$delegated$$:null};",
-		"Charba{0}.prototype.initialize=function $Charba{0}$$initialize$(){var $delegated$$=this.checkAndGetWrapper(\"initialize\");null!==$delegated$$?$delegated$$.initialize.apply(this,arguments):Chart.controllers.{1}.prototype.initialize.apply(this,arguments)};",
-		"Charba{0}.prototype.addElements=function $Charba{0}$$addElements$(){var $delegated$$=this.checkAndGetWrapper(\"addElements\");null!==$delegated$$?$delegated$$.addElements.apply(this,arguments):Chart.controllers.{1}.prototype.addElements.apply(this,arguments)};",
-		"Charba{0}.prototype.draw=function $Charba{0}$$draw$(){var $delegated$$=this.checkAndGetWrapper(\"draw\");null!==$delegated$$?$delegated$$.draw.apply(this,arguments):Chart.controllers.{1}.prototype.draw.apply(this,arguments)};",
-		"Charba{0}.prototype.removeHoverStyle=function $Charba{0}$$removeHoverStyle$(){var $delegated$$=this.checkAndGetWrapper(\"removeHoverStyle\");null!==$delegated$$?$delegated$$.removeHoverStyle.apply(this,arguments):Chart.controllers.{1}.prototype.removeHoverStyle.apply(this,arguments)};",
-		"Charba{0}.prototype.setHoverStyle=function $Charba{0}$$setHoverStyle$(){var $delegated$$=this.checkAndGetWrapper(\"setHoverStyle\");null!==$delegated$$?$delegated$$.setHoverStyle.apply(this,arguments):Chart.controllers.{1}.prototype.setHoverStyle.apply(this,arguments)};",
-		"Charba{0}.prototype.update=function $Charba{0}$$update$(){var $delegated$$=this.checkAndGetWrapper(\"update\");null!==$delegated$$?$delegated$$.update.apply(this,arguments):Chart.controllers.{1}.prototype.update.apply(this,arguments)};",
-		"Charba{0}.prototype.linkScales=function $Charba{0}$$linkScales$(){var $delegated$$=this.checkAndGetWrapper(\"linkScales\");null!==$delegated$$?$delegated$$.linkScales.apply(this,arguments):Chart.controllers.{1}.prototype.linkScales.apply(this,arguments)};",
-		"Charba{0}.prototype.buildOrUpdateElements=function $Charba{0}$$buildOrUpdateElements$(){var $delegated$$=this.checkAndGetWrapper(\"buildOrUpdateElements\");null!==$delegated$$?$delegated$$.buildOrUpdateElements.apply(this,arguments):Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this,arguments)};Charba{0}.id=\"{0}\";Charba{0}.defaults=Chart.defaults.{1};Chart.registry.addControllers([Charba{0}]);"
-	};
+	private static final String[] CONTENT = { "function Charba{0}(){Chart.controllers.{1}.apply(this,arguments)}Charba{0}.prototype=Object.create(Chart.controllers.{1}.prototype);Charba{0}.prototype.constructor=Charba{0};",
+			"Charba{0}.prototype.checkAndGetWrapper=function $Charba{0}$$checkAndGetWrapper$($property$$){var $delegated$$=CharbaJsControllerHelper.wrappers.{0};return\"undefined\"!==typeof $delegated$$&&\"function\"===typeof $delegated$$[$property$$]?$delegated$$:null};",
+			"Charba{0}.prototype.initialize=function $Charba{0}$$initialize$(){var $delegated$$=this.checkAndGetWrapper(\"initialize\");null!==$delegated$$?$delegated$$.initialize.apply(this,arguments):Chart.controllers.{1}.prototype.initialize.apply(this,arguments)};",
+			"Charba{0}.prototype.addElements=function $Charba{0}$$addElements$(){var $delegated$$=this.checkAndGetWrapper(\"addElements\");null!==$delegated$$?$delegated$$.addElements.apply(this,arguments):Chart.controllers.{1}.prototype.addElements.apply(this,arguments)};",
+			"Charba{0}.prototype.draw=function $Charba{0}$$draw$(){var $delegated$$=this.checkAndGetWrapper(\"draw\");null!==$delegated$$?$delegated$$.draw.apply(this,arguments):Chart.controllers.{1}.prototype.draw.apply(this,arguments)};",
+			"Charba{0}.prototype.removeHoverStyle=function $Charba{0}$$removeHoverStyle$(){var $delegated$$=this.checkAndGetWrapper(\"removeHoverStyle\");null!==$delegated$$?$delegated$$.removeHoverStyle.apply(this,arguments):Chart.controllers.{1}.prototype.removeHoverStyle.apply(this,arguments)};",
+			"Charba{0}.prototype.setHoverStyle=function $Charba{0}$$setHoverStyle$(){var $delegated$$=this.checkAndGetWrapper(\"setHoverStyle\");null!==$delegated$$?$delegated$$.setHoverStyle.apply(this,arguments):Chart.controllers.{1}.prototype.setHoverStyle.apply(this,arguments)};",
+			"Charba{0}.prototype.update=function $Charba{0}$$update$(){var $delegated$$=this.checkAndGetWrapper(\"update\");null!==$delegated$$?$delegated$$.update.apply(this,arguments):Chart.controllers.{1}.prototype.update.apply(this,arguments)};",
+			"Charba{0}.prototype.linkScales=function $Charba{0}$$linkScales$(){var $delegated$$=this.checkAndGetWrapper(\"linkScales\");null!==$delegated$$?$delegated$$.linkScales.apply(this,arguments):Chart.controllers.{1}.prototype.linkScales.apply(this,arguments)};",
+			"Charba{0}.prototype.buildOrUpdateElements=function $Charba{0}$$buildOrUpdateElements$(){var $delegated$$=this.checkAndGetWrapper(\"buildOrUpdateElements\");null!==$delegated$$?$delegated$$.buildOrUpdateElements.apply(this,arguments):Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this,arguments)};Charba{0}.id=\"{0}\";Charba{0}.defaults=Chart.defaults.{1};Chart.registry.addControllers([Charba{0}]);" };
 
 	// singleton instance
 	// MUST create AFTER the static constants
 	private static final ControllerTemplate INSTANCE = new ControllerTemplate();
-	
+
 	// creates builder to store the template a single row
 	private final StringBuilder builder = new StringBuilder();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -55,22 +53,22 @@ final class ControllerTemplate {
 			builder.append(line);
 		}
 	}
-	
+
 	/**
 	 * Singleton method to get static instance.
 	 * 
 	 * @return defaults instance
 	 */
-	static ControllerTemplate get(){
+	static ControllerTemplate get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns the controller template a single row.
 	 * 
 	 * @return the controller template a single row
 	 */
-	 String getTemplate(){
+	String getTemplate() {
 		return builder.toString();
 	}
 

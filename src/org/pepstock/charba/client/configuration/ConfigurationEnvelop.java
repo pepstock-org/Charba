@@ -36,4 +36,14 @@ public final class ConfigurationEnvelop<T> extends ImmutableEnvelop<T> {
 		super(content);
 	}
 
+	/**
+	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
+	 * 
+	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	ConfigurationEnvelop(T content, boolean nullable) {
+		super(content, nullable);
+	}
+
 }

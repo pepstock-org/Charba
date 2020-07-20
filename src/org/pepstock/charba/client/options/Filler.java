@@ -69,7 +69,7 @@ public class Filler extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	/**
 	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
 	 * This is called from <code>data</code> package.
@@ -87,7 +87,6 @@ public class Filler extends NativeObjectContainer {
 	 * @param nativeObject native object where FILL property must be managed
 	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
-	// FIXME envelop
 	Filler(NativeObject nativeObject, IsFill defaultValue) {
 		super(nativeObject);
 		// checks default value instance

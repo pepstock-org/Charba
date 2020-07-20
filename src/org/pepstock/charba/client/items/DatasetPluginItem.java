@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
  * This is a wrapper of java script object which represents a dataset.<br>
@@ -63,13 +65,12 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	private final DatasetMetaItem meta;
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using anenvelop of the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public DatasetPluginItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public DatasetPluginItem(PluginsEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// checks if meta data are present
 		// creating it or setting an empty object
 		meta = has(Property.META) ? new DatasetMetaItem(getValue(Property.META)) : new DatasetMetaItem();

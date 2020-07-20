@@ -443,7 +443,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
+			String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			// checks if result is consistent
 			return result != null ? result : Constants.EMPTY_STRING;
 		}
@@ -461,7 +461,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
+			String result = labelCallback.onLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			// checks if result is consistent
 			return result != null ? result : Constants.EMPTY_STRING;
 		}
@@ -479,7 +479,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
+			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			// checks if result is consistent
 			return result != null ? result.getObject() : defaultLabelColor.getObject();
 		}
@@ -497,7 +497,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
+			IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			// checks if result is consistent
 			return IsColor.isConsistent(result) ? result.toRGBA() : getConfiguration().getTooltips().getBodyFont().getColorAsString();
 		}
@@ -515,7 +515,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
+			String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			// checks if result is consistent
 			return result != null ? result : Constants.EMPTY_STRING;
 		}

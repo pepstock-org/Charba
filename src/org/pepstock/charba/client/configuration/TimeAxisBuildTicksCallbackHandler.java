@@ -98,7 +98,7 @@ final class TimeAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCall
 	private void onAfterBuildTicksCallback(NativeObject item, ArrayObject tickItems) {
 		// if user callback is consistent
 		if (getCallback() != null) {
-			AxisItem mItem = new AxisItem(item);
+			AxisItem mItem = new AxisItem(new ConfigurationEnvelop<>(item, true));
 			// then it is called
 			getCallback().onAfterBuildTicks(getAxis(), mItem, ticks.getTickHandler().getTickItems(tickItems));
 		}

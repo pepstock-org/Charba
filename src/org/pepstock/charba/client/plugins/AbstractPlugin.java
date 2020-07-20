@@ -28,8 +28,6 @@ import org.pepstock.charba.client.items.TooltipPluginItem;
  * The only method not implemented is <code>getId</code> which must implemented.<br>
  * All <code>onBefore*</code> cancellable methods return <code>true</code>.
  * 
- * FIXME https://github.com/chartjs/Chart.js/issues/7549
- * 
  * @author Andrea "Stock" Stocchero
  *
  */

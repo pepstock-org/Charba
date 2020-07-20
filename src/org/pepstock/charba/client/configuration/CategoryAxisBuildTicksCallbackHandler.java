@@ -95,7 +95,7 @@ final class CategoryAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicks
 	private void onAfterBuildTicksCallback(NativeObject item, ArrayString tickItems) {
 		// if user callback is consistent
 		if (getCallback() != null) {
-			AxisItem mItem = new AxisItem(item);
+			AxisItem mItem = new AxisItem(new ConfigurationEnvelop<>(item, true));
 			// then it is called
 			getCallback().onAfterBuildTicks(getAxis(), mItem, ArrayListHelper.unmodifiableList(tickItems));
 		}

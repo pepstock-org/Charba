@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.ScaledOptions;
@@ -27,13 +29,12 @@ import org.pepstock.charba.client.options.ScaledOptions;
 public final class OptionsNode extends ScaledOptions {
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using anenvelop with the native java script object which contains all properties.
 	 * 
 	 * @param defaultValues default provider instance.
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public OptionsNode(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
+	public OptionsNode(IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
+		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 }

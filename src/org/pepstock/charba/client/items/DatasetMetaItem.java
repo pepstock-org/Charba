@@ -17,11 +17,13 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -86,10 +88,19 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	private final DatasetItemController datasetItemController;
 
 	/**
+	 * Creates the item using an envelop with the native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop with the native java script object which contains all properties.
+	 */
+	public DatasetMetaItem(ChartEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
 	 * To avoid any user creation but provides an empty object
 	 */
 	DatasetMetaItem() {
-		this(null);
+		this((NativeObject) null);
 	}
 
 	/**
@@ -97,8 +108,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public DatasetMetaItem(NativeObject nativeObject) {
+	DatasetMetaItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores controller
 		datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
@@ -148,15 +158,6 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	public boolean isHidden() {
 		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
-
-	/**
-	 * FIXME Sets if the dataset must be hidden.
-	 * 
-	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
-	 */
-	// public void setHidden(boolean hidden) {
-	// setValue(Property.HIDDEN, hidden);
-	// }
 
 	/**
 	 * Returns the dataset index.

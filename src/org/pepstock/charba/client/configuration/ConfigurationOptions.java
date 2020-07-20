@@ -20,9 +20,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
-import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
@@ -197,7 +197,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -------------------------------
 		clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
-			ChartEventContext eventContext = new ChartEventContext(event);
+			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// gets the native event
 			BaseNativeEvent nativeEvent = eventContext.getNativeEvent();
 			// handle click event for dataset
@@ -208,7 +208,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// fires the hover hover on the chart
 		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
-			ChartEventContext eventContext = new ChartEventContext(event);
+			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
 			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
@@ -216,7 +216,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(nativeChart);
 			// fires the resize event on chart
-			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(size)));
+			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(new ConfigurationEnvelop<NativeObject>(size, true))));
 		});
 		// --------------------------------------------------
 		// -- SET CALLBACK for title and axis click event ---

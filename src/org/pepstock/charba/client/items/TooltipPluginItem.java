@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
  * Contains all info for every item of tooltip.<br>
@@ -59,18 +61,18 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 
 	}
 
-	private final TooltipNode node;
+	// model instance
+	private final TooltipModel node;
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public TooltipPluginItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public TooltipPluginItem(PluginsEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// creates sub element
-		node = new TooltipNode(getValue(Property.TOOLTIP));
+		node = new TooltipModel(getValue(Property.TOOLTIP));
 	}
 
 	/**
@@ -78,7 +80,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 * 
 	 * @return the tooltip model.
 	 */
-	public TooltipNode getTooltip() {
+	public TooltipModel getTooltip() {
 		return node;
 	}
 }

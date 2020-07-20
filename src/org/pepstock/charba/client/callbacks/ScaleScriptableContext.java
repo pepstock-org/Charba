@@ -76,14 +76,14 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	}
 
 	/**
-	 * Creates the object with native object instance to be wrapped.
+	 * Creates the object with an envelop of the native object instance to be wrapped.
 	 * 
 	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public ScaleScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// stores scale and ticks
-		this.scale = new ScaleItem(getValue(Property.SCALE));
+		this.scale = new ScaleItem(new CallbacksEnvelop<>(getValue(Property.SCALE), true));
 		this.tick = FACTORY.create(getValue(Property.TICK));
 	}
 

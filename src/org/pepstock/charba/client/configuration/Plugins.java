@@ -64,7 +64,7 @@ public class Plugins {
 	public void setEnabled(String pluginId, boolean enabled) {
 		extendedOptions.getPlugins().setEnabled(pluginId, enabled);
 	}
-	
+
 	/**
 	 * Sets if a default CHART.JS plugin must be enabled or not.
 	 * 
@@ -99,7 +99,6 @@ public class Plugins {
 	public boolean isForcedlyDisabled(String pluginId) {
 		return extendedOptions.getPlugins().isForcedlyDisabled(pluginId);
 	}
-	
 
 	/**
 	 * Returns if a default CHART.JS plugin is enabled or not, forced directly by global plugin manager

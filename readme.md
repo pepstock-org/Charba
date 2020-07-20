@@ -234,7 +234,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setEnabled` method for `DefaultPlugin` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
  * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones into `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
- 
+ * change the return value of `getTooltip` method of `TooltipPluginItem` class, returning now a `TooltipModel` object instead of `TooltipNode`.
+  
 ### Features
 
  * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
@@ -291,7 +292,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the defaults management for scales.
  * add `JsPluginHelper` class in order to use CHART.JS registry feature to manage plugins.
  * create a controller template code generator and add a specific target into `build.xml`.
- * reintroduce the Findbugs project in order to check the bugs on project.
+ * reintroduce the `Findbugs` project in order to check the bugs on project.
+ * reduce the visibility of objects which must get a javascript native object as argument on constructor, using an envelop. This reduces the possibility to map a native object with a wrong wrapper.
 
 License
 -------

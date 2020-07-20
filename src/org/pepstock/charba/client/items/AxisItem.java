@@ -18,7 +18,9 @@ package org.pepstock.charba.client.items;
 import java.util.Date;
 
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -31,13 +33,12 @@ import org.pepstock.charba.client.enums.Position;
 public final class AxisItem extends ScaleItem {
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop of native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop of native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public AxisItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public AxisItem(ConfigurationEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

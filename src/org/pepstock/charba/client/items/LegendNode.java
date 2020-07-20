@@ -17,9 +17,11 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.LegendHitBoxItem.LegendHitBoxItemFactory;
@@ -75,13 +77,12 @@ public final class LegendNode extends BaseBoxNodeItem {
 	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop with the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public LegendNode(NativeObject nativeObject) {
-		super(nativeObject);
+	public LegendNode(ChartEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

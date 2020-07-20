@@ -28,6 +28,7 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	/**
 	 * Name of chart type <b>{@value TYPE}</b> for meter
 	 */
+	// FIXME change to charbameter
 	public static final String TYPE = "meter";
 	// static reference to controller type
 	static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT);

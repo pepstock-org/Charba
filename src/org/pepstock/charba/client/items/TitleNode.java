@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -26,13 +28,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 public final class TitleNode extends BaseBoxNodeItem {
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using envelop with the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public TitleNode(NativeObject nativeObject) {
-		super(nativeObject);
+	public TitleNode(ChartEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 }

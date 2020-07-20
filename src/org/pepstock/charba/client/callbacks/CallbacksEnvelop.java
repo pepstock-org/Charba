@@ -13,52 +13,37 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
+package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.ImmutableEnvelop;
 
 /**
- * This object is a container of hidden object.<br>
+ * This object is a container of hidden object to pass to other packages.<br>
  * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
- * 
  * @param <T> type of envelop content.
+ * 
  */
-public final class ChartEnvelop<T> extends Envelop<T> {
-
-	/**
-	 * Create an envelop with a <code>null</code> content.
-	 */
-	ChartEnvelop() {
-	}
-
-	/**
-	 * Create an envelop with a <code>null</code> content and a flag to set if the content can be nullable.
-	 * 
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
-	 */
-	ChartEnvelop(boolean nullable) {
-		super(nullable);
-	}
+public final class CallbacksEnvelop<T> extends ImmutableEnvelop<T> {
 
 	/**
 	 * Create an envelop with the content passed as argument.
 	 * 
 	 * @param content content to set as initial value
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
 	 */
-	ChartEnvelop(T content, boolean nullable) {
-		super(content, nullable);
+	CallbacksEnvelop(T content) {
+		this(content, false);
 	}
 
 	/**
 	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
 	 * 
 	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
 	 */
-	ChartEnvelop(T content) {
-		super(content);
+	CallbacksEnvelop(T content, boolean nullable) {
+		super(content, nullable);
 	}
 
 }

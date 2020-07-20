@@ -212,6 +212,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues) {
 		// FIXME default when it's not the options of chart
+		// FIXME hidden could be a param for constructo because specify to hide the dataset since beginning
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
 		// stores the type
 		this.type = type;
@@ -228,15 +229,18 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		backgroundColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
 		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
-		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		hoverBackgroundColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}

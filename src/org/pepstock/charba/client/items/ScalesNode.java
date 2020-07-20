@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -35,13 +37,12 @@ import org.pepstock.charba.client.options.IsScaleId;
 public final class ScalesNode extends NativeObjectContainer {
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop with the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public ScalesNode(NativeObject nativeObject) {
-		super(nativeObject);
+	public ScalesNode(ChartEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();

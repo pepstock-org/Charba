@@ -143,7 +143,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		super(type, defaultValues);
 		// sets new orderer and options handler
 		this.orderer = new Orderer(getNativeObject());
-		this.barOptionsHandler = new BarDatasetOptionsHandler(getNativeObject(), getDefaultValues().getDatasets());
+		this.barOptionsHandler = new BarDatasetOptionsHandler(new DataEnvelop<>(getNativeObject(), true), getDefaultValues().getDatasets());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

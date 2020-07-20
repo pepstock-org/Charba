@@ -16,10 +16,12 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.controllers.ControllersEnvelop;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -90,12 +92,22 @@ public class DatasetItem extends NativeObjectContainer {
 	private final DatasetItemOptions options;
 
 	/**
+	 * Creates the item using an envelop of the native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
+	 */
+	protected DatasetItem(ControllersEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		// sets the dataset item options
+		options = new DatasetItemOptions(getValue(Property.OPTIONS));
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	protected DatasetItem(NativeObject nativeObject) {
+	DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// sets the dataset item options
 		options = new DatasetItemOptions(getValue(Property.OPTIONS));

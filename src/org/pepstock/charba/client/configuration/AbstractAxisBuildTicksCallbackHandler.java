@@ -125,7 +125,7 @@ abstract class AbstractAxisBuildTicksCallbackHandler<C extends BaseAxisBuildTick
 		// if user callback is consistent
 		if (callback != null) {
 			// then it is called
-			callback.onBeforeBuildTicks(getAxis(), new AxisItem(item));
+			callback.onBeforeBuildTicks(getAxis(), new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 }

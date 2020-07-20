@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 
 /**
  * Contains all info for every item of tooltip.<br>
@@ -69,14 +71,22 @@ public final class TooltipItem extends NativeObjectContainer {
 	private final TooltipDataPoint dataPoint;
 
 	/**
+	 * Creates the item using an envelop of native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public TooltipItem(ConfigurationEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public TooltipItem(NativeObject nativeObject) {
+	TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// stores teh data point
+		// stores the data point
 		this.dataPoint = new TooltipDataPoint(getValue(Property.DATA_POINT));
 	}
 

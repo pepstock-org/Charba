@@ -651,9 +651,9 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// invoke user method implementation
-		afterDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetDraw(chart.getChart(), new DatasetPluginItem(item)));
+		afterDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetDraw(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
-		afterDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetUpdate(chart.getChart(), new DatasetPluginItem(item)));
+		afterDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetUpdate(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		afterDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
@@ -661,7 +661,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDraw(chart.getChart()));
 		// invoke user method implementation
-		afterEventCallbackProxy.setCallback((context, chart, item, options) -> onAfterEvent(chart.getChart(), new EventPluginItem(item)));
+		afterEventCallbackProxy.setCallback((context, chart, item, options) -> onAfterEvent(chart.getChart(), new EventPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		afterInitCallbackProxy.setCallback((context, chart, options) -> onAfterInit(chart.getChart(), chart));
 		// invoke user method implementation
@@ -669,13 +669,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterRenderCallbackProxy.setCallback((context, chart, options) -> onAfterRender(chart.getChart()));
 		// invoke user method implementation
-		afterTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterTooltipDraw(chart.getChart(), new TooltipPluginItem(item)));
+		afterTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		afterUpdateCallbackProxy.setCallback((context, chart, options) -> onAfterUpdate(chart.getChart()));
 		// invoke user method implementation
-		beforeDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetDraw(chart.getChart(), new DatasetPluginItem(item)));
+		beforeDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetDraw(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
-		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetUpdate(chart.getChart(), new DatasetPluginItem(item)));
+		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetUpdate(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
@@ -683,7 +683,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		beforeDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
-		beforeEventCallbackProxy.setCallback((context, chart, item, options) -> onBeforeEvent(chart.getChart(), new EventPluginItem(item)));
+		beforeEventCallbackProxy.setCallback((context, chart, item, options) -> onBeforeEvent(chart.getChart(), new EventPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		beforeInitCallbackProxy.setCallback((context, chart, options) -> onBeforeInit(chart.getChart()));
 		// invoke user method implementation
@@ -691,13 +691,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		beforeRenderCallbackProxy.setCallback((context, chart, options) -> onBeforeRender(chart.getChart()));
 		// invoke user method implementation
-		beforeTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeTooltipDraw(chart.getChart(), new TooltipPluginItem(item)));
+		beforeTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<NativeObject>(item, true))));
 		// invoke user method implementation
 		beforeUpdateCallbackProxy.setCallback((context, chart, options) -> onBeforeUpdate(chart.getChart()));
 		// invoke user method implementation
 		destroyCallbackProxy.setCallback((context, chart, options) -> onDestroy(chart.getChart()));
 		// invoke user method implementation
-		resizeCallbackProxy.setCallback((context, chart, size, options) -> onResize(chart.getChart(), new SizeItem(size)));
+		resizeCallbackProxy.setCallback((context, chart, size, options) -> onResize(chart.getChart(), new SizeItem(new PluginsEnvelop<NativeObject>(size, true))));
 		// invoke user method implementation
 		resetCallbackProxy.setCallback((context, chart, options) -> onReset(chart.getChart()));
 		// ------------------------------------

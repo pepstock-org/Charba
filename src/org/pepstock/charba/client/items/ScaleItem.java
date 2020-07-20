@@ -20,17 +20,20 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.RadialAxis;
+import org.pepstock.charba.client.controllers.ControllersEnvelop;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
@@ -113,12 +116,29 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
+	 * Creates the item using an envelop (from <code>controllers</code> package) of native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public ScaleItem(ControllersEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * Creates the item using an envelop (from <code>callbacks</code> package) of native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public ScaleItem(CallbacksEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public ScaleItem(NativeObject nativeObject) {
+	ScaleItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores scale id
 		this.scaleId = null;
@@ -147,7 +167,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the unique id of scale. Default or if does not exist is Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getCharbaId() {
-		// FIXME to be checked
 		// the unique id is under options object of scale item
 		// checks if there is
 		if (has(Property.OPTIONS)) {

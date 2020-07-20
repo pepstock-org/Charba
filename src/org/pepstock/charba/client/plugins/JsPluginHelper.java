@@ -85,7 +85,6 @@ final class JsPluginHelper {
 	 * @return all registered plugins as object
 	 */
 	NativeObject getAll() {
-		// FIXME
 		return NativeJsPluginHelper.getAll();
 	}
 }

@@ -56,7 +56,6 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * @param defaultValues the defaults values for the plugin options
 	 * @return a plugin options instance
 	 */
-	// FIXME envelop?
 	public abstract T create(NativeObject nativeObject, IsDefaultPlugins defaultValues);
 
 	/**

@@ -224,7 +224,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				// stores the pluginId
 				pluginId = option.getPluginId();
 				// checks if it is a default plugin
-				if (DefaultPlugin.is(pluginId)){
+				if (DefaultPlugin.is(pluginId)) {
 					// if yes, skips everything and then returns
 					return;
 				}
@@ -254,7 +254,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (options == null && hasOptions(pluginId)) {
 			// removes configuration if exists
 			remove(pluginIdKey);
-		} else if (!DefaultPlugin.is(pluginId)){
+		} else if (!DefaultPlugin.is(pluginId)) {
 			// if here is not a default plugin
 			// checks plugin
 			checkPluginIdConsistency(pluginIdKey, options);

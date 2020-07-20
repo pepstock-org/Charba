@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
 
@@ -74,13 +76,22 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates an bar options handler with an envelop of the native object where properties must be managed and the default value to use when the property does not exist.
+	 * 
+	 * @param envelop envelop of native object where bar options properties must be managed
+	 * @param defaultValues default value of options properties to use when the properties do not exist
+	 */
+	public BarDatasetOptionsHandler(DataEnvelop<NativeObject> envelop, IsDefaultDatasets defaultValues) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValues);
+	}
+
+	/**
 	 * Creates an bar options handler with the native object where properties must be managed and the default value to use when the property does not exist.
 	 * 
 	 * @param nativeObject native object where bar options properties must be managed
 	 * @param defaultValues default value of options properties to use when the properties do not exist
 	 */
-	// FIXME envelop?
-	public BarDatasetOptionsHandler(NativeObject nativeObject, IsDefaultDatasets defaultValues) {
+	BarDatasetOptionsHandler(NativeObject nativeObject, IsDefaultDatasets defaultValues) {
 		super(nativeObject);
 		// checks default value instance
 		if (defaultValues == null) {

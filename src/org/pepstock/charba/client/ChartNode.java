@@ -63,12 +63,12 @@ public final class ChartNode {
 		// gets the defaults for options
 		IsDefaultScaledOptions defaultValues = initialized ? chart.getChart().getDefaultChartOptions() : DefaultsBuilder.get().getScaledOptions();
 		// creates all sub elements
-		options = new OptionsNode(defaultValues, initialized ? chart.getOptions() : null);
-		legend = new LegendNode(initialized ? chart.getLegend() : null);
-		scales = new ScalesNode(initialized ? chart.getScales() : null);
-		chartArea = new ChartAreaNode(initialized ? chart.getChartArea() : null);
-		title = new TitleNode(initialized ? chart.getTitleBlock() : null);
-		tooltip = new TooltipNode(initialized ? chart.getTooltip() : null);
+		options = new OptionsNode(defaultValues, new ChartEnvelop<>(initialized ? chart.getOptions() : null, true));
+		legend = new LegendNode(new ChartEnvelop<>(initialized ? chart.getLegend() : null, true));
+		scales = new ScalesNode(new ChartEnvelop<>(initialized ? chart.getScales() : null, true));
+		chartArea = new ChartAreaNode(new ChartEnvelop<>(initialized ? chart.getChartArea() : null, true));
+		title = new TitleNode(new ChartEnvelop<>(initialized ? chart.getTitleBlock() : null, true));
+		tooltip = new TooltipNode(new ChartEnvelop<>(initialized ? chart.getTooltip() : null, true));
 	}
 
 	/**

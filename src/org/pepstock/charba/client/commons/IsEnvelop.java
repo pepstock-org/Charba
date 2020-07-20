@@ -31,7 +31,7 @@ public interface IsEnvelop {
 	 * @return <code>true</code> if envelop passed as argument is not <code>null</code> and its content is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsEnvelop envelop) {
-		return envelop != null && envelop.hasContent();
+		return envelop != null && (envelop.hasContent() || envelop.isNullable());
 	}
 
 	/**
@@ -68,5 +68,12 @@ public interface IsEnvelop {
 	 * @return <code>true</code> if the content of envelop is not <code>null</code>
 	 */
 	boolean hasContent();
+
+	/**
+	 * Returns <code>true</code> if the content of envelop can be <code>null</code>.
+	 * 
+	 * @return <code>true</code> if the content of envelop can be <code>null</code>
+	 */
+	boolean isNullable();
 
 }

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ImmutableEnvelop;
  * @param <T> type of envelop content.
  * 
  */
-public final class DataEnvelop<T> extends ImmutableEnvelop<T>{
+public final class DataEnvelop<T> extends ImmutableEnvelop<T> {
 
 	/**
 	 * Create an envelop with the content passed as argument.
@@ -33,7 +33,17 @@ public final class DataEnvelop<T> extends ImmutableEnvelop<T>{
 	 * @param content content to set as initial value
 	 */
 	DataEnvelop(T content) {
-		super(content);
+		this(content, false);
+	}
+
+	/**
+	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
+	 * 
+	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	DataEnvelop(T content, boolean nullable) {
+		super(content, nullable);
 	}
 
 }

@@ -105,11 +105,11 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(event), FACTORY.create(item))));
+		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
 		// fires the event
-		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(event), FACTORY.create(item))));
+		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
 		// fires the event
-		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(event), FACTORY.create(item))));
+		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
 	}
 
 	/**

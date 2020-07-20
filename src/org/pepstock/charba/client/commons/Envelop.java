@@ -22,7 +22,7 @@ package org.pepstock.charba.client.commons;
  * 
  * @param <T> type of envelop content.
  */
-public abstract class Envelop<T> extends ImmutableEnvelop<T>{
+public abstract class Envelop<T> extends ImmutableEnvelop<T> {
 
 	/**
 	 * Create an envelop with a <code>null</code> content.
@@ -32,12 +32,31 @@ public abstract class Envelop<T> extends ImmutableEnvelop<T>{
 	}
 
 	/**
+	 * Create an envelop with a <code>null</code> content and a flag to set if the content can be nullable.
+	 * 
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	protected Envelop(boolean nullable) {
+		this(null, nullable);
+	}
+
+	/**
 	 * Create an envelop with the content passed as argument.
 	 * 
 	 * @param content content to set as initial value
 	 */
 	protected Envelop(T content) {
-		super(content);
+		this(content, false);
+	}
+
+	/**
+	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
+	 * 
+	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	protected Envelop(T content, boolean nullable) {
+		super(content, nullable);
 	}
 
 	/**

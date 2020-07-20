@@ -714,7 +714,7 @@ public abstract class AbstractChart<D extends Dataset> extends HandlerManager im
 		// checks consistency of chart and datasets
 		if (instance != null && isValidDatasetIndex(index)) {
 			// returns the array
-			return new DatasetMetaItem(instance.getDatasetMeta(index));
+			return new DatasetMetaItem(new ChartEnvelop<>(instance.getDatasetMeta(index), true));
 		}
 		// returns null
 		return null;

@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
  * This is a wrapper of java script object which represents a event.<br>
@@ -66,13 +68,12 @@ public final class EventPluginItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public EventPluginItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public EventPluginItem(PluginsEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

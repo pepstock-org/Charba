@@ -15,9 +15,12 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
+import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
  * This item contains the new size of the chart after it has been resized.<br>
@@ -60,12 +63,29 @@ public class SizeItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates the item using an envelop (from <code>plugins</code> package) of native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public SizeItem(PluginsEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * Creates the item using an envelop (from <code>configuration</code> package) of native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public SizeItem(ConfigurationEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public SizeItem(NativeObject nativeObject) {
+	SizeItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

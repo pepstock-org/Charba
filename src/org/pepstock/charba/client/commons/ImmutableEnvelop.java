@@ -26,6 +26,8 @@ public abstract class ImmutableEnvelop<T> implements IsEnvelop {
 
 	// instance of enveloped content
 	private T content = null;
+	// flag to know if it can be nullable
+	private final boolean nullable;
 
 	/**
 	 * Create an envelop with the content passed as argument.
@@ -33,7 +35,18 @@ public abstract class ImmutableEnvelop<T> implements IsEnvelop {
 	 * @param content content to set as initial value
 	 */
 	protected ImmutableEnvelop(T content) {
+		this(content, false);
+	}
+
+	/**
+	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
+	 * 
+	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	protected ImmutableEnvelop(T content, boolean nullable) {
 		this.content = content;
+		this.nullable = nullable;
 	}
 
 	/**
@@ -62,6 +75,16 @@ public abstract class ImmutableEnvelop<T> implements IsEnvelop {
 	@Override
 	public final boolean hasContent() {
 		return this.content != null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.IsEnvelop#isNullable()
+	 */
+	@Override
+	public final boolean isNullable() {
+		return nullable;
 	}
 
 }

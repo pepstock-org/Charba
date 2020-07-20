@@ -197,7 +197,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (itemSortCallback != null) {
 				// calls callback
-				return itemSortCallback.onItemSort(getChart(), new TooltipItem(item1), new TooltipItem(item2));
+				return itemSortCallback.onItemSort(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item1, true)), new TooltipItem(new ConfigurationEnvelop<>(item2, true)));
 			}
 			// default is 0 - equals
 			return 0;
@@ -206,7 +206,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
-				return filterCallback.onFilter(getChart(), new TooltipItem(item));
+				return filterCallback.onFilter(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
 			}
 			// default is true
 			return true;
@@ -901,7 +901,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		TooltipModel getModel() {
 			// checks if model is inside the context
 			if (ObjectType.OBJECT.equals(type(Property.TOOLTIP))) {
-				return new TooltipModel(getValue(Property.TOOLTIP));
+				return new TooltipModel(new ConfigurationEnvelop<>(getValue(Property.TOOLTIP), true));
 			}
 			// if here the context is not consistent
 			// returns null

@@ -20,9 +20,11 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.TooltipBodyItem.TooltipBodyItemFactory;
 import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
 import org.pepstock.charba.client.items.TooltipLabelColor.TooltipLabelColorFactory;
@@ -90,12 +92,20 @@ public final class TooltipModel extends NativeObjectContainer {
 	private final TooltipLabelColorFactory tooltipLabelColorFactory = new TooltipLabelColorFactory();
 
 	/**
+	 * Creates the item using envelop with the native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop with the native java script object which contains all properties.
+	 */
+	public TooltipModel(ConfigurationEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	// FIXME envelop?
-	public TooltipModel(NativeObject nativeObject) {
+	TooltipModel(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
