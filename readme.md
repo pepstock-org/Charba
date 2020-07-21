@@ -297,6 +297,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * reintroduce the `Findbugs` project in order to check the bugs on project.
  * reduce the visibility of objects which must get a javascript native object as argument on constructor, using an envelop. This reduces the possibility to map a native object with a wrong wrapper.
  * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
+ * rename the controller id for `Meter` and `Gauge` charts adding `charba` prefix in order to avoid overlapping with possible other controllers with `meter` and `gauge` ids.
 
 License
 -------
