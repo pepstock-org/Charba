@@ -20,6 +20,8 @@ import java.util.List;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollection;
+import org.pepstock.charba.client.enums.DefaultAnimationMode;
+import org.pepstock.charba.client.enums.DefaultAnimationProperty;
 
 /**
  * Represents the collection to set to configure animation.
@@ -45,7 +47,7 @@ public interface IsAnimationCollection extends Key {
 			}
 		}
 		// if here, is not a default one
-		// then creates new animation mode
+		// then creates new animation collection
 		return new StandardAnimationCollection(collection, type);
 	}
 
@@ -69,7 +71,7 @@ public interface IsAnimationCollection extends Key {
 				if (result == null) {
 					// creates the collection to return
 					result = create(collection, property.type());
-				} else if (!result.type().equals(property.type())){
+				} else if (!result.type().equals(property.type())) {
 					// checks if they have got the same type
 					throw new IllegalArgumentException("Animation collection properties do not have the same type");
 				}
@@ -82,7 +84,7 @@ public interface IsAnimationCollection extends Key {
 		// then throw an exception
 		throw new IllegalArgumentException("Animation collection properties are not consistent");
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 * 
@@ -90,7 +92,7 @@ public interface IsAnimationCollection extends Key {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationCollection collection) {
-		return Key.isValid(collection) && Key.isValid(collection.type());
+		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection, DefaultAnimationMode.values(), DefaultAnimationProperty.values());
 	}
 
 	/**
@@ -104,10 +106,10 @@ public interface IsAnimationCollection extends Key {
 			throw new IllegalArgumentException("Animation collection is null or not consistent");
 		}
 	}
-	
+
 	/**
 	 * Checks if collection passed as argument is not <code>null</code> and its value is not <code>null</code> as well.<br>
-	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the argument.
 	 * 
 	 * @param collection collection to be checked
 	 * @return the same collection passed as argument

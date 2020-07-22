@@ -111,9 +111,10 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 		// you can not override the property type
 		// because included into collection object
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @return
 	 */
 	public void setProperties(IsAnimationProperty... properties) {
@@ -128,6 +129,7 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 
 	/**
 	 * FIXME
+	 * 
 	 * @return
 	 */
 	public void setProperties(List<IsAnimationProperty> properties) {
@@ -142,6 +144,7 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 
 	/**
 	 * FIXME
+	 * 
 	 * @return
 	 */
 	public List<IsAnimationProperty> getProperties() {

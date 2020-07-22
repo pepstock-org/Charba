@@ -25,8 +25,8 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationPropertyElement extends AbstractAnimationElement<IsAnimationProperty>{
-	
+public final class AnimationPropertyElement extends AbstractAnimationElement<IsAnimationProperty> {
+
 	/**
 	 * Creates an animation options to configure a specific property.
 	 * 
@@ -61,5 +61,5 @@ public final class AnimationPropertyElement extends AbstractAnimationElement<IsA
 		// stores the type
 		setType(property.type());
 	}
-	
+
 }

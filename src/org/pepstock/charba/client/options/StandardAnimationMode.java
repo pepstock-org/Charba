@@ -29,7 +29,9 @@ public final class StandardAnimationMode extends AbstractStandardKey implements 
 	 * @param value value of key as String
 	 */
 	StandardAnimationMode(String value) {
-		super(value, true);
+		super(value);
+		// checks if consistent
+		IsAnimationMode.checkIfValid(this);
 	}
 
 }

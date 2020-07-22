@@ -34,7 +34,7 @@ public final class StandardAnimationProperty extends AbstractStandardKey impleme
 	 * @param type type of the property
 	 */
 	StandardAnimationProperty(String value, AnimationType type) {
-		super(value, false);
+		super(value);
 		// stores values
 		this.type = type;
 		// checks if argument is consistent

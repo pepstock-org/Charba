@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -26,20 +25,20 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationModeElement extends AbstractAnimationElement<IsAnimationMode> implements IsDefaultAnimationModeElement{
+public final class AnimationModeElement extends AbstractAnimationElement<IsAnimationMode> implements IsDefaultAnimationModeElement {
 
 	// default values
 	private final IsDefaultAnimationModeElement defaultValues;
-	
+
 	/**
 	 * Creates an animation ptions to configure a specific mode.
 	 * 
 	 * @param mode mode instance used to get for animation options
 	 */
 	public AnimationModeElement(IsAnimationMode mode) {
-		this(mode, DefaultsBuilder.get().getOptions().getAnimation().getMode(Key.checkAndGetIfValid(mode)));
+		this(mode, DefaultsBuilder.get().getOptions().getAnimation().getMode(IsAnimationMode.checkAndGetIfValid(mode)));
 	}
-	
+
 	/**
 	 * Creates an animation ptions to configure a specific mode.
 	 * 
@@ -61,11 +60,11 @@ public final class AnimationModeElement extends AbstractAnimationElement<IsAnima
 	AnimationModeElement(AbstractNode parent, IsAnimationMode mode, IsDefaultAnimationModeElement defaultValues, NativeObject nativeObject) {
 		super(parent, mode, defaultValues, nativeObject);
 		// checks if mode is valid
-		Key.checkIfValid(mode);
+		IsAnimationMode.checkIfValid(mode);
 		// stores defaults
 		this.defaultValues = defaultValues;
 	}
-	
+
 	/**
 	 * Sets the animation options set for a specific property.
 	 * 
@@ -91,7 +90,7 @@ public final class AnimationModeElement extends AbstractAnimationElement<IsAnima
 		// then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Sets the animation options set for a specific collection.
 	 * 

@@ -39,7 +39,7 @@ public final class StandardAnimationCollection extends AbstractStandardKey imple
 	 * @param type type of the properties
 	 */
 	StandardAnimationCollection(String value, AnimationType type) {
-		super(value, false);
+		super(value);
 		// stores type
 		this.type = type;
 		// checks if consistent

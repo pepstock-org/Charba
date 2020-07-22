@@ -20,10 +20,10 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 
 /**
- * FIXME It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
- * <br>
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes. <br>
  * This is the <code>animation</code> options structure:<br>
  * <br>
+ * 
  * <pre>
  * animation
  *   !
@@ -35,7 +35,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
  *          !
  *          +--- animation property
  *          !
- *          +--- animation collection 
+ *          +--- animation collection
  * </pre>
  * 
  * @author Andrea "Stock" Stocchero
@@ -46,7 +46,7 @@ public final class Animation extends AbstractAnimation implements IsDefaultAnima
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		ANIMATE_ROTATE("animateRotate"),
 		ANIMATE_SCALE("animateScale");
@@ -106,7 +106,7 @@ public final class Animation extends AbstractAnimation implements IsDefaultAnima
 	/**
 	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
+	 * @return if <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	@Override
 	public boolean isAnimateRotate() {
@@ -154,14 +154,14 @@ public final class Animation extends AbstractAnimation implements IsDefaultAnima
 	@Override
 	public AnimationModeElement getMode(IsAnimationMode mode) {
 		// checks if mode is consistent
-		if (Key.isValid(mode)) {
+		if (IsAnimationMode.isValid(mode)) {
 			return new AnimationModeElement(this, mode, defaultValues.getMode(mode), getValue(mode));
 		}
 		// if here, the mode is not valid
 		// then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Sets the animation options set for a specific property.
 	 * 
@@ -189,7 +189,7 @@ public final class Animation extends AbstractAnimation implements IsDefaultAnima
 		// then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Sets the animation options set for a specific collection.
 	 * 

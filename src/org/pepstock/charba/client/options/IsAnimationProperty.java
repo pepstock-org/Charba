@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
+import org.pepstock.charba.client.enums.DefaultAnimationCollection;
+import org.pepstock.charba.client.enums.DefaultAnimationMode;
 import org.pepstock.charba.client.enums.DefaultAnimationProperty;
 
 /**
@@ -42,8 +44,9 @@ public interface IsAnimationProperty extends Key {
 		// if here, is not a default one
 		// then creates new animation property
 		return new StandardAnimationProperty(property, type);
+
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 * 
@@ -51,7 +54,7 @@ public interface IsAnimationProperty extends Key {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationProperty property) {
-		return Key.isValid(property) && Key.isValid(property.type());
+		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property, DefaultAnimationCollection.values(), DefaultAnimationMode.values());
 	}
 
 	/**
@@ -65,7 +68,7 @@ public interface IsAnimationProperty extends Key {
 			throw new IllegalArgumentException("Animation property is null or not consistent");
 		}
 	}
-	
+
 	/**
 	 * Checks if property passed as argument is not <code>null</code> and its value is not <code>null</code> as well.<br>
 	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.
@@ -81,12 +84,11 @@ public interface IsAnimationProperty extends Key {
 		return property;
 	}
 
-
 	/**
 	 * Returns the animation type related to the property.
 	 * 
 	 * @return the animation type related to the property
 	 */
 	AnimationType type();
-	
+
 }

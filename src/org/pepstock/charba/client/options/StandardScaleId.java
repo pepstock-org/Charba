@@ -29,7 +29,7 @@ public final class StandardScaleId extends AbstractStandardKey implements IsScal
 	 * @param value value of key as String
 	 */
 	StandardScaleId(String value) {
-		super(value, false);
+		super(value);
 		// checks if argument is consistent
 		IsScaleId.checkIfValid(this);
 	}

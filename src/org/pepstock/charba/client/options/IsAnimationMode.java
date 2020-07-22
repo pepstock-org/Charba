@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.DefaultAnimationCollection;
 import org.pepstock.charba.client.enums.DefaultAnimationMode;
+import org.pepstock.charba.client.enums.DefaultAnimationProperty;
 
 /**
  * Represents the mode to set to configure animation.
@@ -45,4 +47,40 @@ public interface IsAnimationMode extends Key {
 		return new StandardAnimationMode(mode);
 	}
 
+	/**
+	 * Returns <code>true</code> if type passed as argument is not <code>null</code>.
+	 * 
+	 * @param mode animation mode to be checked
+	 * @return <code>true</code> if type passed as argument is not <code>null</code>
+	 */
+	static boolean isValid(IsAnimationMode mode) {
+		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode, DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
+	}
+
+	/**
+	 * Checks if type passed as argument is not <code>null</code>.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param mode animation mode to be checked
+	 */
+	static void checkIfValid(IsAnimationMode mode) {
+		if (!isValid(mode)) {
+			throw new IllegalArgumentException("Animation mode is null or not consistent");
+		}
+	}
+
+	/**
+	 * Checks if mode passed as argument is not <code>null</code>.<br>
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the argument.
+	 * 
+	 * @param mode mode to be checked
+	 * @return the same mode passed as argument
+	 */
+	static IsAnimationMode checkAndGetIfValid(IsAnimationMode mode) {
+		// checks if collection is consistent
+		checkIfValid(mode);
+		// if here, is consistent
+		// then returns the argument
+		return mode;
+	}
 }

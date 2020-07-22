@@ -35,7 +35,7 @@ abstract class AbstractAnimationElement<T extends Key> extends AbstractAnimation
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		TYPE("type"),
 		FROM("from");

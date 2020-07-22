@@ -66,7 +66,7 @@ abstract class AbstractNode extends NativeObjectContainer {
 	protected final AbstractNode getParentNode() {
 		return parent;
 	}
-	
+
 	/**
 	 * Adds a proxy function to a model at the specific key.
 	 * 

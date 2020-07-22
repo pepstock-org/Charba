@@ -31,7 +31,7 @@ abstract class AbstractAnimation extends AbstractNode implements IsDefaultBaseAn
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		DURATION("duration"),
 		EASING("easing"),

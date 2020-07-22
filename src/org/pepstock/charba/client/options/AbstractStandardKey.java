@@ -31,16 +31,15 @@ abstract class AbstractStandardKey implements Key {
 	 * Builds the object with the custom key value as string
 	 * 
 	 * @param value value of key as String
-	 * @param toCheck if <code>true</code> it checks if the key is valid, otherwise no. 
+	 * @param toCheck if <code>true</code> it checks if the key is valid, otherwise no.
 	 */
-	AbstractStandardKey(String value, boolean toCheck) {
+	AbstractStandardKey(String value) {
 		// stores value
 		this.value = value;
-		// checks if must be check
-		if (toCheck) {
-			// checks if argument is consistent
-			Key.checkIfValid(this);
-		}
+		// pay attention
+		// it does not perform any check
+		// because it must be done on original constructor of the object
+		// which extends this class
 	}
 
 	/*
