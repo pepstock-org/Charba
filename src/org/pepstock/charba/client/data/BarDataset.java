@@ -291,6 +291,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(BarBorderWidth borderWidth) {
+		// FIXME must be indexable
 		// stores value
 		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
@@ -339,6 +340,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param borderskip the edge to skip drawing the border for.
 	 */
+	// FIXME must be indexable
 	public void setBorderSkipped(BorderSkipped borderskip) {
 		// resets callbacks
 		setBorderSkipped((BorderSkippedCallback) null);

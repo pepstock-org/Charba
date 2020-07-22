@@ -60,6 +60,7 @@ public final class JsWindowHelper {
 	 * 
 	 */
 	public void enableResizeOnBeforePrint() {
+		// FIXME do by jsinterop
 		// checks if already set
 		if (!enableResizeOnBeforePrint) {
 			// if not, set the resizing function

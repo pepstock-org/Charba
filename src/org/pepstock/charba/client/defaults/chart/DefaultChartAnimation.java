@@ -17,8 +17,11 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.enums.InterpolatorType;
+import org.pepstock.charba.client.options.IsAnimationCollection;
+import org.pepstock.charba.client.options.IsAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationProperty;
 
 /**
  * Defaults for animation option element, based on chart type.
@@ -29,10 +32,6 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 
 	private final IsDefaultAnimation animation;
 
-	private final DefaultChartAnimationActive animationActive;
-
-	private final DefaultChartAnimationResize animationResize;
-
 	/**
 	 * Creates the object by animation option element instance.
 	 * 
@@ -40,28 +39,6 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 */
 	public DefaultChartAnimation(IsDefaultAnimation animation) {
 		this.animation = animation;
-		this.animationActive = new DefaultChartAnimationActive(animation.getActive());
-		this.animationResize = new DefaultChartAnimationResize(animation.getResize());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getActive()
-	 */
-	@Override
-	public IsDefaultAnimationElement getActive() {
-		return animationActive;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getResize()
-	 */
-	@Override
-	public IsDefaultAnimationElement getResize() {
-		return animationResize;
 	}
 
 	/*
@@ -137,31 +114,34 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getType()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationMode)
 	 */
 	@Override
-	public InterpolatorType getType() {
-		return animation.getType();
+	public IsDefaultAnimationModeElement getMode(IsAnimationMode mode) {
+		// FIXME must be wrapped
+		return animation.getMode(mode);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFrom()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
-	public double getFrom() {
-		return animation.getFrom();
+	public IsDefaultAnimationElement getProperty(IsAnimationProperty property) {
+		// FIXME must be wrapped
+		return animation.getProperty(property);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getFromAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
-	public String getFromAsString() {
-		return animation.getFromAsString();
+	public IsDefaultAnimationElement getCollection(IsAnimationCollection collection) {
+		// FIXME must be wrapped
+		return animation.getCollection(collection);
 	}
 
 }

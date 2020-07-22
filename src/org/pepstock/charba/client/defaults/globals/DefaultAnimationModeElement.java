@@ -15,11 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
 import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationMode;
 import org.pepstock.charba.client.options.IsAnimationProperty;
 
 /**
@@ -27,74 +25,35 @@ import org.pepstock.charba.client.options.IsAnimationProperty;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultAnimation extends AbstractDefaultAnimation implements IsDefaultAnimation {
-
-	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
-
-	private static final boolean DEFAULT_ANIMATE_SCALE = false;
+public final class DefaultAnimationModeElement extends DefaultAnimationElement implements IsDefaultAnimationModeElement {
 
 	private static final DefaultAnimationElement DEFAULT_ANIMATION_ELEMENT = new DefaultAnimationElement();
-
-	private static final DefaultAnimationModeElement DEFAULT_ANIMATION_MODE_ELEMENT = new DefaultAnimationModeElement();
 
 	/**
 	 * To avoid any instantiation
 	 */
 
-	DefaultAnimation() {
+	DefaultAnimationModeElement() {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.animation.IsDefaultAnimation#isAnimateRotate()
-	 */
-	@Override
-	public boolean isAnimateRotate() {
-		return DEFAULT_ANIMATE_ROTATE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.animation.IsDefaultAnimation#isAnimateScale()
-	 */
-	@Override
-	public boolean isAnimateScale() {
-		return DEFAULT_ANIMATE_SCALE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationMode)
-	 */
-	@Override
-	public IsDefaultAnimationModeElement getMode(IsAnimationMode mode) {
-		// FIXME
-		return DEFAULT_ANIMATION_MODE_ELEMENT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
 	public IsDefaultAnimationElement getProperty(IsAnimationProperty property) {
-		// FIXME
 		return DEFAULT_ANIMATION_ELEMENT;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
 	public IsDefaultAnimationElement getCollection(IsAnimationCollection collection) {
-		// FIXME
 		return DEFAULT_ANIMATION_ELEMENT;
 	}
 

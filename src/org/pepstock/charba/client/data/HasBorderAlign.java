@@ -39,6 +39,7 @@ interface HasBorderAlign {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	default void setBorderAlign(BorderAlign align) {
+		// FIXME must be indexable
 		// checks if border aligner is consistent
 		if (getBorderAligner() != null) {
 			getBorderAligner().setBorderAlign(align);

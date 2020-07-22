@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum InterpolatorType implements Key
+public enum AnimationType implements Key
 {
 	/**
 	 * Uses a number to interpolate animation.
@@ -33,9 +33,13 @@ public enum InterpolatorType implements Key
 	 */
 	COLOR("color"),
 	/**
+	 * Uses a color to interpolate animation.
+	 */
+	BOOLEAN("boolean"),
+	/**
 	 * The interpolator type is unknown (default)
 	 */
-	UNKNOWN("color");
+	UNKNOWN("unknown");
 
 	// name value of property
 	private final String value;
@@ -45,7 +49,7 @@ public enum InterpolatorType implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private InterpolatorType(String value) {
+	private AnimationType(String value) {
 		this.value = value;
 	}
 

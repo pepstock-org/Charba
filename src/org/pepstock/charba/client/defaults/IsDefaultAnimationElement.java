@@ -15,18 +15,40 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.AnimationType;
+
 /**
- * Interface to define animation active object defaults.
+ * Interface to define animation sub elements defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationElement {
+public interface IsDefaultAnimationElement extends IsDefaultBaseAnimation{
 
 	/**
-	 * Returns the number of milliseconds an animation takes.
+	 * Returns the type of <code>from</code> property and determines the interpolator used.
 	 * 
-	 * @return the number of milliseconds an animation takes.
+	 * @return the type of <code>from</code> property and determines the interpolator used.
 	 */
-	int getDuration();
+	AnimationType getType();
 
+	/**
+	 * Returns the start value for the animation as number.
+	 * 
+	 * @return the start value for the animation as number.
+	 */
+	double getFrom();
+	
+	/**
+	 * Returns the start value for the animation as boolean.
+	 * 
+	 * @return the start value for the animation as boolean.
+	 */
+	boolean getFromAsBoolean();
+
+	/**
+	 * Returns the start value for the animation as color string.
+	 * 
+	 * @return the start value for the animation as color string.
+	 */
+	String getFromAsString();
 }

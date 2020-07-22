@@ -13,27 +13,23 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
-
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+package org.pepstock.charba.client.options;
 
 /**
- * CHART.JS default values for ANIMATION RESIZE element.
+ * This is a standard implementation of an animation mode
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public final class DefaultAnimationResize implements IsDefaultAnimationElement {
+public final class StandardAnimationMode extends AbstractStandardKey implements IsAnimationMode {
 
-	private static final int DEFAULT_DURATION = 0;
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Builds the object with the animation mode value as string
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationElement#getDuration()
+	 * @param value value of key as String
 	 */
-	@Override
-	public int getDuration() {
-		return DEFAULT_DURATION;
+	StandardAnimationMode(String value) {
+		super(value, true);
 	}
 
 }

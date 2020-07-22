@@ -15,23 +15,40 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.enums.AnimationType;
+
 /**
- * This is a standard implementation of a scale id
+ * This is a standard implementation of an animation property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardScaleId extends AbstractStandardKey implements IsScaleId {
+public final class StandardAnimationProperty extends AbstractStandardKey implements IsAnimationProperty {
+
+	private final AnimationType type;
 
 	/**
-	 * Builds the object with the scale id value as string
+	 * Builds the object with the property value as string and its type.
 	 * 
 	 * @param value value of key as String
+	 * @param type type of the property
 	 */
-	StandardScaleId(String value) {
+	StandardAnimationProperty(String value, AnimationType type) {
 		super(value, false);
+		// stores values
+		this.type = type;
 		// checks if argument is consistent
-		IsScaleId.checkIfValid(this);
+		IsAnimationProperty.checkIfValid(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimationProperty#type()
+	 */
+	@Override
+	public AnimationType type() {
+		return type;
 	}
 
 }

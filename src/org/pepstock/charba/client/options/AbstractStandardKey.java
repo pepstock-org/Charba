@@ -13,36 +13,44 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.chart;
+package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defaults for animation resize option element, based on chart type.
+ * This is an abstract standard implementation of a custom key.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public final class DefaultChartAnimationResize implements IsDefaultAnimationElement {
+abstract class AbstractStandardKey implements Key {
 
-	private final IsDefaultAnimationElement animationResize;
+	private final String value;
 
 	/**
-	 * Creates the object by animation resize option element instance.
+	 * Builds the object with the custom key value as string
 	 * 
-	 * @param animationResize animation resize option element instance.
+	 * @param value value of key as String
+	 * @param toCheck if <code>true</code> it checks if the key is valid, otherwise no. 
 	 */
-	DefaultChartAnimationResize(IsDefaultAnimationElement animationResize) {
-		this.animationResize = animationResize;
+	AbstractStandardKey(String value, boolean toCheck) {
+		// stores value
+		this.value = value;
+		// checks if must be check
+		if (toCheck) {
+			// checks if argument is consistent
+			Key.checkIfValid(this);
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationElement#getDuration()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public int getDuration() {
-		return animationResize.getDuration();
+	public final String value() {
+		return value;
 	}
 
 }

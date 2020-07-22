@@ -44,7 +44,8 @@ public interface Key {
 	}
 
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}.
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param key key to be checked
 	 */
@@ -55,8 +56,8 @@ public interface Key {
 	}
 
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a {@link IllegalArgumentException}, otherwise it
-	 * returns the key.
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.
 	 * 
 	 * @param key key to be checked
 	 * @param <T> type of key

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -64,6 +65,24 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 */
 	protected final AbstractNode getParentNode() {
 		return parent;
+	}
+	
+	/**
+	 * Adds a proxy function to a model at the specific key.
+	 * 
+	 * @param model element where adding the function proxy
+	 * @param key property name to use to add the function proxy
+	 * @param proxy the function proxy instance to add
+	 */
+	final void setInternalCallbackToModel(AbstractNode model, Key key, CallbackProxy.Proxy proxy) {
+		// checks if model is consistent
+		if (model == null) {
+			// if not exception
+			throw new IllegalArgumentException("Options model arguments is null");
+		}
+		model.setValue(key, proxy);
+		// checks if the node is already added to parent
+		model.checkAndAddToParent();
 	}
 
 	/**

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -25,14 +24,19 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.enums.InterpolatorType;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.items.AnimationObject;
+import org.pepstock.charba.client.options.AnimationCollectionElement;
+import org.pepstock.charba.client.options.AnimationModeElement;
+import org.pepstock.charba.client.options.AnimationPropertyElement;
 import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.IsAnimationCollection;
+import org.pepstock.charba.client.options.IsAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationProperty;
 
 import jsinterop.annotations.JsFunction;
 
@@ -78,10 +82,6 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	// amount of handlers
 	private int onProgressHandlers = 0;
 
-	private final AnimationActive active;
-
-	private final AnimationResize resize;
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -122,9 +122,6 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 */
 	Animation(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
-		// stores inner elements
-		this.active = new AnimationActive(chart, options);
-		this.resize = new AnimationResize(chart, options);
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// -------------------------------
@@ -148,24 +145,6 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 				onProgress(animationObject.getAnimationItem());
 			}
 		});
-	}
-
-	/**
-	 * Returns the animation element to get the duration in milliseconds it takes to animate hover style changes.
-	 * 
-	 * @return the animation element to get the duration in milliseconds it takes to animate hover style changes
-	 */
-	public AnimationActive getActive() {
-		return active;
-	}
-
-	/**
-	 * Returns the animation element to get the duration in milliseconds it takes to animate to new size after a resize event.
-	 * 
-	 * @return the animation element to get the duration in milliseconds it takes to animate to new size after a resize event
-	 */
-	public AnimationResize getResize() {
-		return resize;
 	}
 
 	/**
@@ -295,75 +274,60 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	}
 
 	/**
-	 * Sets the type of <code>from</code> property and determines the interpolator used.
+	 * Sets the animation options set for a specific mode.
 	 * 
-	 * @param type the type of <code>from</code> property and determines the interpolator used.
+	 * @param animationElement the animation options set for a specific mode
 	 */
-	public void setType(InterpolatorType type) {
-		getConfiguration().getAnimation().setType(type);
+	public void setMode(AnimationModeElement animationElement) {
+		getConfiguration().getAnimation().setMode(animationElement);
 	}
 
 	/**
-	 * Returns the type of <code>from</code> property and determines the interpolator used.
+	 * Returns the animation options set for a specific mode.
 	 * 
-	 * @return the type of <code>from</code> property and determines the interpolator used.
+	 * @param mode mode instance used to get for animation options
+	 * @return the animation options set for a specific mode.
 	 */
-	public InterpolatorType getType() {
-		return getConfiguration().getAnimation().getType();
+	public AnimationModeElement getMode(IsAnimationMode mode) {
+		return getConfiguration().getAnimation().getMode(mode);
+	}
+	
+	/**
+	 * Sets the animation options set for a specific property.
+	 * 
+	 * @param animationElement the animation options set for a specific property
+	 */
+	public void setProperty(AnimationPropertyElement animationElement) {
+		getConfiguration().getAnimation().setProperty(animationElement);
 	}
 
 	/**
-	 * Sets the start value for the animation as number.
+	 * Returns the animation options set for a specific property.
 	 * 
-	 * @param from the start value for the animation as number.
+	 * @param property property instance used to get for animation options
+	 * @return the animation options set for a specific property.
 	 */
-	public void setFrom(double from) {
-		getConfiguration().getAnimation().setFrom(from);
+	public AnimationPropertyElement getProperty(IsAnimationProperty property) {
+		return getConfiguration().getAnimation().getProperty(property);
+	}
+	
+	/**
+	 * Sets the animation options set for a specific collection.
+	 * 
+	 * @param animationElement the animation options set for a specific collection
+	 */
+	public void setCollection(AnimationCollectionElement animationElement) {
+		getConfiguration().getAnimation().setCollection(animationElement);
 	}
 
 	/**
-	 * Sets the start value for the animation as color string.
+	 * Returns the animation options set for a specific collection.
 	 * 
-	 * @param from the start value for the animation as color string.
+	 * @param collection collection instance used to get for animation options
+	 * @return the animation options set for a specific collection
 	 */
-	public void setFrom(String from) {
-		getConfiguration().getAnimation().setFrom(from);
-	}
-
-	/**
-	 * Sets the start value for the animation as color.
-	 * 
-	 * @param from the start value for the animation as color.
-	 */
-	public void setFrom(IsColor from) {
-		getConfiguration().getAnimation().setFrom(from);
-	}
-
-	/**
-	 * Returns the start value for the animation as number.
-	 * 
-	 * @return the start value for the animation as number.
-	 */
-	public double getFrom() {
-		return getConfiguration().getAnimation().getFrom();
-	}
-
-	/**
-	 * Returns the start value for the animation as color string.
-	 * 
-	 * @return the start value for the animation as color string.
-	 */
-	public String getFromAsString() {
-		return getConfiguration().getAnimation().getFromAsString();
-	}
-
-	/**
-	 * Returns the start value for the animation as color.
-	 * 
-	 * @return the start value for the animation as color.
-	 */
-	public IsColor getFromAsColor() {
-		return getConfiguration().getAnimation().getFromAsColor();
+	public AnimationCollectionElement getCollection(IsAnimationCollection collection) {
+		return getConfiguration().getAnimation().getCollection(collection);
 	}
 
 	/*
