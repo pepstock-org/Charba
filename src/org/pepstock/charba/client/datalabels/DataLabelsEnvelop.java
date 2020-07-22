@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ImmutableEnvelop;
  * @param <T> type of envelop content.
  * 
  */
-public final class DataLabelsEnvelop<T> extends ImmutableEnvelop<T>{
+public final class DataLabelsEnvelop<T> extends ImmutableEnvelop<T> {
 
 	/**
 	 * Create an envelop with the content passed as argument.
