@@ -13,42 +13,37 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.commons.Key;
+import java.util.Collections;
+import java.util.List;
+
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
+import org.pepstock.charba.client.options.IsAnimationProperty;
 
 /**
- * This is an abstract standard implementation of a custom key.
+ * CHART.JS default values for ANIMATION element.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-abstract class AbstractStandardKey implements Key {
-
-	private final String value;
+public class DefaultAnimationCollectionElement extends AbstractDefaultAnimation implements IsDefaultAnimationCollectionElement {
 
 	/**
-	 * Builds the object with the custom key value as string
-	 * 
-	 * @param value value of key as String
+	 * To avoid any instantiation
 	 */
-	AbstractStandardKey(String value) {
-		// stores value
-		this.value = value;
-		// pay attention
-		// it does not perform any check
-		// because it must be done on original constructor of the object
-		// which extends this class
+
+	DefaultAnimationCollectionElement() {
+		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement#getProperties()
 	 */
 	@Override
-	public final String value() {
-		return value;
+	public List<IsAnimationProperty> getProperties() {
+		return Collections.emptyList();
 	}
 
 }

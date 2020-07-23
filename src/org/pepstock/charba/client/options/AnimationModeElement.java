@@ -25,11 +25,11 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationModeElement extends AbstractAnimationElement<IsAnimationMode> implements IsDefaultAnimationModeElement {
+public final class AnimationModeElement extends AbstractAnimationElementContainer<IsAnimationMode, IsDefaultAnimationModeElement> implements IsDefaultAnimationModeElement {
 
-	// default values
-	private final IsDefaultAnimationModeElement defaultValues;
-
+	// stores the key
+	
+	
 	/**
 	 * Creates an animation ptions to configure a specific mode.
 	 * 
@@ -61,60 +61,6 @@ public final class AnimationModeElement extends AbstractAnimationElement<IsAnima
 		super(parent, mode, defaultValues, nativeObject);
 		// checks if mode is valid
 		IsAnimationMode.checkIfValid(mode);
-		// stores defaults
-		this.defaultValues = defaultValues;
-	}
-
-	/**
-	 * Sets the animation options set for a specific property.
-	 * 
-	 * @param animationElement the animation options set for a specific property
-	 */
-	public void setProperty(AnimationPropertyElement animationElement) {
-		setSubElement(animationElement);
-	}
-
-	/**
-	 * Returns the animation options set for a specific property.
-	 * 
-	 * @param property property instance used to get for animation options
-	 * @return the animation options set for a specific property.
-	 */
-	@Override
-	public AnimationPropertyElement getProperty(IsAnimationProperty property) {
-		// checks if property is consistent
-		if (IsAnimationProperty.isValid(property)) {
-			return new AnimationPropertyElement(this, property, defaultValues.getProperty(property), getValue(property));
-		}
-		// if here, the property is not valid
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Sets the animation options set for a specific collection.
-	 * 
-	 * @param animationElement the animation options set for a specific collection
-	 */
-	public void setCollection(AnimationCollectionElement animationElement) {
-		setSubElement(animationElement);
-	}
-
-	/**
-	 * Returns the animation options set for a specific collection.
-	 * 
-	 * @param collection collection instance used to get for animation options
-	 * @return the animation options set for a specific collection.
-	 */
-	@Override
-	public AnimationCollectionElement getCollection(IsAnimationCollection collection) {
-		// checks if collection is consistent
-		if (IsAnimationCollection.isValid(collection)) {
-			return new AnimationCollectionElement(this, collection, defaultValues.getCollection(collection), getValue(collection));
-		}
-		// if here, the collection is not valid
-		// then returns null
-		return null;
 	}
 
 }

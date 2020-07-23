@@ -101,12 +101,12 @@ public enum DefaultAnimationProperty implements IsAnimationProperty
 	 * @return <code>true</code> if the argument is equals to a default animation property
 	 */
 	public static boolean is(IsAnimationProperty property) {
-		// checks if property is value
+		// checks if property is valid
 		if (IsAnimationProperty.isValid(property)) {
 			// invokes the checking
 			return is(property.value());
 		}
-		// if here the argument is null
+		// if here the argument is not consistent
 		// then always false
 		return false;
 	}

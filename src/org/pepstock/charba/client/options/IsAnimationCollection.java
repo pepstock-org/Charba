@@ -92,7 +92,7 @@ public interface IsAnimationCollection extends Key {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationCollection collection) {
-		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection, DefaultAnimationMode.values(), DefaultAnimationProperty.values());
+		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationMode.values(), DefaultAnimationProperty.values());
 	}
 
 	/**
@@ -103,7 +103,13 @@ public interface IsAnimationCollection extends Key {
 	 */
 	static void checkIfValid(IsAnimationCollection collection) {
 		if (!isValid(collection)) {
-			throw new IllegalArgumentException("Animation collection is null or not consistent");
+			// sets checking value
+			boolean hasWrongName = collection != null && !AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationMode.values(), DefaultAnimationProperty.values());
+			// gets the exception message
+			// additional check to throw the right exception message
+			String exceptionMessage = hasWrongName ? "Invalid animation collection name, '"+collection.value()+"' because is reserved" : "Animation collection is null or not consistent";
+			// throws exception
+			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
 

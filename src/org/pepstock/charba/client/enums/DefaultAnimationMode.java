@@ -76,12 +76,12 @@ public enum DefaultAnimationMode implements IsAnimationMode
 	 * @return <code>true</code> if the argument is equals to a default animation mode
 	 */
 	public static boolean is(IsAnimationMode mode) {
-		// checks if property is value
+		// checks if mode is valid
 		if (Key.isValid(mode)) {
 			// invokes the checking
 			return is(mode.value());
 		}
-		// if here the argument is null
+		// if here the argument is not consistent
 		// then always false
 		return false;
 	}

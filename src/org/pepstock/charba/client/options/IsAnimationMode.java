@@ -54,7 +54,7 @@ public interface IsAnimationMode extends Key {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code>
 	 */
 	static boolean isValid(IsAnimationMode mode) {
-		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode, DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
+		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
 	}
 
 	/**
@@ -65,7 +65,13 @@ public interface IsAnimationMode extends Key {
 	 */
 	static void checkIfValid(IsAnimationMode mode) {
 		if (!isValid(mode)) {
-			throw new IllegalArgumentException("Animation mode is null or not consistent");
+			// sets checking value
+			boolean hasWrongName = mode != null && !AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
+			// gets the exception message
+			// additional check to throw the right exception message
+			String exceptionMessage = hasWrongName ? "Invalid animation mode name, '"+mode.value()+"' because is reserved" : "Animation mode is null or not consistent";
+			// throws exception
+			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
 

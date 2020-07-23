@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.defaults;
 
 /**
- * Interface to define animation for mode element defaults.
+ * Interface to define animation for property element defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationModeElement extends IsDefaultAnimationElementContainer {
+public interface IsDefaultAnimationPropertyElement extends IsDefaultBaseAnimation{
 
 }

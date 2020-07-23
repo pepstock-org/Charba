@@ -16,8 +16,9 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
 import org.pepstock.charba.client.options.IsAnimationCollection;
 import org.pepstock.charba.client.options.IsAnimationMode;
 import org.pepstock.charba.client.options.IsAnimationProperty;
@@ -33,7 +34,9 @@ public final class DefaultAnimation extends AbstractDefaultAnimation implements 
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
 
-	private static final DefaultAnimationElement DEFAULT_ANIMATION_ELEMENT = new DefaultAnimationElement();
+	private static final DefaultAnimationPropertyElement DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationPropertyElement();
+
+	private static final DefaultAnimationCollectionElement DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollectionElement();
 
 	private static final DefaultAnimationModeElement DEFAULT_ANIMATION_MODE_ELEMENT = new DefaultAnimationModeElement();
 
@@ -82,9 +85,8 @@ public final class DefaultAnimation extends AbstractDefaultAnimation implements 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
-	public IsDefaultAnimationElement getProperty(IsAnimationProperty property) {
-		// FIXME
-		return DEFAULT_ANIMATION_ELEMENT;
+	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
+		return DEFAULT_ANIMATION_PROPERTY_ELEMENT;
 	}
 
 	/*
@@ -93,9 +95,9 @@ public final class DefaultAnimation extends AbstractDefaultAnimation implements 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
-	public IsDefaultAnimationElement getCollection(IsAnimationCollection collection) {
+	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
 		// FIXME
-		return DEFAULT_ANIMATION_ELEMENT;
+		return DEFAULT_ANIMATION_COLLECTION_ELEMENT;
 	}
 
 }

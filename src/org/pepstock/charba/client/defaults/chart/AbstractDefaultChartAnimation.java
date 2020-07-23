@@ -13,40 +13,42 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * CHART.JS default values for ANIMATION element.
+ * Defaults for base animation option element.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of default interface of wrapped object
  */
-abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
-
-	private static final int DEFAULT_DURATION = 1000;
-
-	private static final boolean DEFAULT_DEBUG = false;
-
-	private static final int DEFAULT_DELAY = UndefinedValues.INTEGER;
-
-	private static final boolean DEFAULT_LOOP = false;
-
-	private static final double DEFAULT_FROM = UndefinedValues.DOUBLE;
-
-	private static final boolean DEFAULT_FROM_AS_BOOLEAN = UndefinedValues.BOOLEAN;
-
-	private static final String DEFAULT_FROM_AS_STRING = UndefinedValues.STRING;
+abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> implements IsDefaultBaseAnimation {
+	
+	private final T animation;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object wrapping a base animation instance.
+	 * 
+	 * @param animation a base animation instance to wrap
 	 */
-
-	AbstractDefaultAnimation() {
-		// do nothing
+	AbstractDefaultChartAnimation(T animation) {
+		// checks if the argument is consiste
+		if (animation == null) {
+			throw new IllegalArgumentException("The animation wrapped object is null");
+		}
+		// stores reference
+		this.animation = animation;
+	}
+	
+	/**
+	 * Returns the defaults instance to be wrapped.
+	 * @return the defaults instance to be wrapped
+	 */
+	final T getDefaults() {
+		return animation;
 	}
 
 	/*
@@ -56,7 +58,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 */
 	@Override
 	public Easing getEasing() {
-		return Easing.EASE_OUT_QUART;
+		return animation.getEasing();
 	}
 
 	/*
@@ -66,7 +68,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 */
 	@Override
 	public int getDuration() {
-		return DEFAULT_DURATION;
+		return animation.getDuration();
 	}
 
 	/*
@@ -76,7 +78,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 */
 	@Override
 	public boolean isDebug() {
-		return DEFAULT_DEBUG;
+		return animation.isDebug();
 	}
 
 	/*
@@ -86,7 +88,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 */
 	@Override
 	public int getDelay() {
-		return DEFAULT_DELAY;
+		return animation.getDelay();
 	}
 
 	/*
@@ -96,7 +98,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 */
 	@Override
 	public boolean isLoop() {
-		return DEFAULT_LOOP;
+		return animation.isLoop();
 	}
 	
 	/*
@@ -105,8 +107,8 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getType()
 	 */
 	@Override
-	public AnimationType getType() {
-		return AnimationType.UNKNOWN;
+	public final AnimationType getType() {
+		return animation.getType();
 	}
 
 	/*
@@ -115,18 +117,8 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getFrom()
 	 */
 	@Override
-	public double getFrom() {
-		return DEFAULT_FROM;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getFromAsBoolean()
-	 */
-	@Override
-	public boolean getFromAsBoolean() {
-		return DEFAULT_FROM_AS_BOOLEAN;
+	public final double getFrom() {
+		return animation.getFrom();
 	}
 
 	/*
@@ -135,9 +127,18 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getFromAsString()
 	 */
 	@Override
-	public String getFromAsString() {
-		return DEFAULT_FROM_AS_STRING;
+	public final String getFromAsString() {
+		return animation.getFromAsString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimationElement#getFromAsBoolean()
+	 */
+	@Override
+	public final boolean getFromAsBoolean() {
+		return animation.getFromAsBoolean();
+	}
 
 }

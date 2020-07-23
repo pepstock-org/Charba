@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationPropertyElement extends AbstractAnimationElement<IsAnimationProperty> {
+public final class AnimationPropertyElement extends AbstractAnimationElement<IsAnimationProperty, IsDefaultAnimationPropertyElement> implements IsDefaultAnimationPropertyElement{
 
 	/**
 	 * Creates an animation options to configure a specific property.
@@ -42,8 +42,10 @@ public final class AnimationPropertyElement extends AbstractAnimationElement<IsA
 	 * @param property property instance used to get for animation options
 	 * @param defaultValues default provider
 	 */
-	public AnimationPropertyElement(IsAnimationProperty property, IsDefaultAnimationElement defaultValues) {
+	public AnimationPropertyElement(IsAnimationProperty property, IsDefaultAnimationPropertyElement defaultValues) {
 		this(null, property, defaultValues, null);
+		// stores the type
+		setType(property.type());
 	}
 
 	/**
@@ -54,12 +56,10 @@ public final class AnimationPropertyElement extends AbstractAnimationElement<IsA
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationPropertyElement(AbstractNode parent, IsAnimationProperty property, IsDefaultAnimationElement defaultValues, NativeObject nativeObject) {
+	AnimationPropertyElement(AbstractNode parent, IsAnimationProperty property, IsDefaultAnimationPropertyElement defaultValues, NativeObject nativeObject) {
 		super(parent, property, defaultValues, nativeObject);
 		// checks if property is valid
 		IsAnimationProperty.checkIfValid(property);
-		// stores the type
-		setType(property.type());
 	}
 
 }

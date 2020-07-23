@@ -50,20 +50,19 @@ final class AnimationElementChecker {
 	static AnimationElementChecker get() {
 		return INSTANCE;
 	}
-
+	
 	/**
 	 * Returns <code>true</code> if the mode name is not overriding the name of other properties of animation options.
 	 * 
-	 * @param mode mode instance to be checked.
+	 * @param value value of the property instance to be checked.
 	 * @param defaultProperties1 list of default animation elements
 	 * @param defaultProperties2 list of default animation elements
-	 * @param <T> type of key
 	 * @return <code>true</code> if the mode name is not overriding the name of other properties of animation options
 	 */
-	<T extends Key> boolean isValid(T property, Key[] defaultProperties1, Key[] defaultProperties2) {
+	boolean isValid(String value, Key[] defaultProperties1, Key[] defaultProperties2) {
 		// checks if key is valid and
 		// checks if the key matches with options and default
-		return Key.isValid(property) && !Key.hasKeyByValue(reservedKeys.toArray(new Key[0]), property.value()) && !Key.hasKeyByValue(defaultProperties1, property.value()) && !Key.hasKeyByValue(defaultProperties2, property.value());
+		return !Key.hasKeyByValue(reservedKeys.toArray(new Key[0]), value) && !Key.hasKeyByValue(defaultProperties1, value) && !Key.hasKeyByValue(defaultProperties2, value);
 	}
 
 }

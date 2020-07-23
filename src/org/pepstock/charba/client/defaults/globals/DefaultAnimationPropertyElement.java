@@ -13,13 +13,23 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.defaults.globals;
+
+import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
 
 /**
- * Interface to define animation for mode element defaults.
+ * CHART.JS default values for ANIMATION element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationModeElement extends IsDefaultAnimationElementContainer {
+public class DefaultAnimationPropertyElement extends AbstractDefaultAnimation implements IsDefaultAnimationPropertyElement {
+
+	/**
+	 * To avoid any instantiation
+	 */
+
+	DefaultAnimationPropertyElement() {
+		// do nothing
+	}
 
 }

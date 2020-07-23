@@ -15,16 +15,14 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.options.IsAnimationCollection;
 import org.pepstock.charba.client.options.IsAnimationMode;
-import org.pepstock.charba.client.options.IsAnimationProperty;
 
 /**
  * Interface to define animation object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimation extends IsDefaultBaseAnimation {
+public interface IsDefaultAnimation extends IsDefaultAnimationElementContainer {
 
 	/**
 	 * If true, the chart will animate in with a rotation animation.
@@ -48,19 +46,4 @@ public interface IsDefaultAnimation extends IsDefaultBaseAnimation {
 	 */
 	IsDefaultAnimationModeElement getMode(IsAnimationMode mode);
 
-	/**
-	 * Returns the animation options set for a specific property.
-	 * 
-	 * @param property property instance used to search for animation options
-	 * @return the animation options set for a specific property.
-	 */
-	IsDefaultAnimationElement getProperty(IsAnimationProperty property);
-	
-	/**
-	 * Returns the animation options set for a specific collection.
-	 * 
-	 * @param collection collection instance used to search for animation options
-	 * @return the animation options set for a specific collection.
-	 */
-	IsDefaultAnimationElement getCollection(IsAnimationCollection collection);
 }

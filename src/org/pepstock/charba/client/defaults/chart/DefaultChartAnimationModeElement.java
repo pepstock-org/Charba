@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
@@ -22,22 +22,19 @@ import org.pepstock.charba.client.options.IsAnimationCollection;
 import org.pepstock.charba.client.options.IsAnimationProperty;
 
 /**
- * CHART.JS default values for ANIMATION element.
+ * Defaults for property animation option element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultAnimationModeElement extends AbstractDefaultAnimation implements IsDefaultAnimationModeElement {
-
-	private static final DefaultAnimationPropertyElement DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationPropertyElement();
-
-	private static final DefaultAnimationCollectionElement DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollectionElement();
+public class DefaultChartAnimationModeElement extends AbstractDefaultChartAnimation<IsDefaultAnimationModeElement> implements IsDefaultAnimationModeElement {
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object wrapping a base animation instance.
+	 * 
+	 * @param animation a base animation instance to wrap
 	 */
-
-	DefaultAnimationModeElement() {
-		// do nothing
+	DefaultChartAnimationModeElement(IsDefaultAnimationModeElement animation) {
+		super(animation);
 	}
 
 	/*
@@ -47,7 +44,7 @@ public class DefaultAnimationModeElement extends AbstractDefaultAnimation implem
 	 */
 	@Override
 	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
-		return DEFAULT_ANIMATION_PROPERTY_ELEMENT;
+		return getDefaults().getProperty(property);
 	}
 
 	/*
@@ -57,7 +54,7 @@ public class DefaultAnimationModeElement extends AbstractDefaultAnimation implem
 	 */
 	@Override
 	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
-		return DEFAULT_ANIMATION_COLLECTION_ELEMENT;
+		return getDefaults().getCollection(collection);
 	}
 
 }

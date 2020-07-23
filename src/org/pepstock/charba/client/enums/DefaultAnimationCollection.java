@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.IsAnimationCollection;
 import org.pepstock.charba.client.options.IsAnimationProperty;
 
@@ -92,6 +93,33 @@ public enum DefaultAnimationCollection implements IsAnimationCollection
 	@Override
 	public List<IsAnimationProperty> properties() {
 		return Collections.unmodifiableList(properties);
+	}
+	
+	/**
+	 * Returns <code>true</code> if the argument is equals to a default animation collection.
+	 * 
+	 * @param collection the animation collection to check
+	 * @return <code>true</code> if the argument is equals to a default animation collection
+	 */
+	public static boolean is(IsAnimationCollection collection) {
+		// checks if collection is valid
+		if (Key.isValid(collection)) {
+			// invokes the checking
+			return is(collection.value());
+		}
+		// if here the argument is not consistent
+		// then always false
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the argument is equals to a default animation collection.
+	 * 
+	 * @param collection the animation collection to check
+	 * @return <code>true</code> if the argument is equals to a default animation collection
+	 */
+	private static boolean is(String collection) {
+		return Key.hasKeyByValue(values(), collection);		
 	}
 
 }

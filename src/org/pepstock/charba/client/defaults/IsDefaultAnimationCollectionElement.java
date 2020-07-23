@@ -15,11 +15,22 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import java.util.List;
+
+import org.pepstock.charba.client.options.IsAnimationProperty;
+
 /**
- * Interface to define animation for mode element defaults.
+ * Interface to define animation for collection element defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationModeElement extends IsDefaultAnimationElementContainer {
+public interface IsDefaultAnimationCollectionElement extends IsDefaultBaseAnimation{
 
+	/**
+	 * Returns the properties defined into the animation collection.
+	 * 
+	 * @return the properties defined into the animation collection
+	 */
+	List<IsAnimationProperty> getProperties();
+	
 }

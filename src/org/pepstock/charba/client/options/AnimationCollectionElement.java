@@ -21,7 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationProperty;
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationProperty;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationCollectionElement extends AbstractAnimationElement<IsAnimationCollection> {
+public final class AnimationCollectionElement extends AbstractAnimationElement<IsAnimationCollection, IsDefaultAnimationCollectionElement> implements IsDefaultAnimationCollectionElement{
 
 	/**
 	 * Name of properties of native object.
@@ -80,9 +80,12 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * @param collection collection instance used to get for animation options
 	 * @param defaultValues default provider
 	 */
-	public AnimationCollectionElement(IsAnimationCollection collection, IsDefaultAnimationElement defaultValues) {
+	public AnimationCollectionElement(IsAnimationCollection collection, IsDefaultAnimationCollectionElement defaultValues) {
 		this(null, collection, defaultValues, null);
-
+		// stores the type
+		super.setType(collection.type());
+		// stores the properties
+		setProperties(collection.properties());
 	}
 
 	/**
@@ -93,12 +96,10 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationCollectionElement(AbstractNode parent, IsAnimationCollection collection, IsDefaultAnimationElement defaultValues, NativeObject nativeObject) {
+	AnimationCollectionElement(AbstractNode parent, IsAnimationCollection collection, IsDefaultAnimationCollectionElement defaultValues, NativeObject nativeObject) {
 		super(parent, collection, defaultValues, nativeObject);
 		// checks collection is valid
 		IsAnimationCollection.checkIfValid(collection);
-		// stores the type
-		super.setType(collection.type());
 	}
 
 	/*
@@ -113,9 +114,9 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	}
 
 	/**
-	 * FIXME
+	 * Sets the properties to be defined into the animation collection.
 	 * 
-	 * @return
+	 * @param properties the properties to be defined into the animation collection
 	 */
 	public void setProperties(IsAnimationProperty... properties) {
 		// checks if argument is consistent
@@ -127,10 +128,11 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 		}
 	}
 
+
 	/**
-	 * FIXME
+	 * Sets the properties to be defined into the animation collection.
 	 * 
-	 * @return
+	 * @param properties the properties to be defined into the animation collection
 	 */
 	public void setProperties(List<IsAnimationProperty> properties) {
 		// checks if argument is consistent
@@ -143,10 +145,11 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	}
 
 	/**
-	 * FIXME
+	 * Returns the properties defined into the animation collection.
 	 * 
-	 * @return
+	 * @return the properties defined into the animation collection
 	 */
+	@Override
 	public List<IsAnimationProperty> getProperties() {
 		// gets result list
 		List<IsAnimationProperty> result = new LinkedList<>();

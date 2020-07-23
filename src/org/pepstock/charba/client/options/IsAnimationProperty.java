@@ -54,7 +54,7 @@ public interface IsAnimationProperty extends Key {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationProperty property) {
-		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property, DefaultAnimationCollection.values(), DefaultAnimationMode.values());
+		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollection.values(), DefaultAnimationMode.values());
 	}
 
 	/**
@@ -65,7 +65,13 @@ public interface IsAnimationProperty extends Key {
 	 */
 	static void checkIfValid(IsAnimationProperty property) {
 		if (!isValid(property)) {
-			throw new IllegalArgumentException("Animation property is null or not consistent");
+			// sets checking value
+			boolean hasWrongName = property != null && !AnimationElementChecker.get().isValid(property.value(),  DefaultAnimationCollection.values(), DefaultAnimationMode.values());
+			// gets the exception message
+			// additional check to throw the right exception message
+			String exceptionMessage = hasWrongName ? "Invalid animation property name, '"+property.value()+"' because is reserved" : "Animation property is null or not consistent";
+			// throws exception
+			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
 

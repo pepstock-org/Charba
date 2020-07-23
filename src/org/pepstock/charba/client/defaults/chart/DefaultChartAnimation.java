@@ -16,9 +16,9 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
-import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
 import org.pepstock.charba.client.options.IsAnimationCollection;
 import org.pepstock.charba.client.options.IsAnimationMode;
 import org.pepstock.charba.client.options.IsAnimationProperty;
@@ -28,9 +28,7 @@ import org.pepstock.charba.client.options.IsAnimationProperty;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartAnimation implements IsDefaultAnimation {
-
-	private final IsDefaultAnimation animation;
+public final class DefaultChartAnimation extends AbstractDefaultChartAnimation<IsDefaultAnimation> implements IsDefaultAnimation {
 
 	/**
 	 * Creates the object by animation option element instance.
@@ -38,27 +36,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 * @param animation animation option element instance.
 	 */
 	public DefaultChartAnimation(IsDefaultAnimation animation) {
-		this.animation = animation;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getEasing()
-	 */
-	@Override
-	public Easing getEasing() {
-		return animation.getEasing();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDuration()
-	 */
-	@Override
-	public int getDuration() {
-		return animation.getDuration();
+		super(animation);
 	}
 
 	/*
@@ -68,7 +46,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 */
 	@Override
 	public boolean isAnimateRotate() {
-		return animation.isAnimateRotate();
+		return getDefaults().isAnimateRotate();
 	}
 
 	/*
@@ -78,37 +56,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 */
 	@Override
 	public boolean isAnimateScale() {
-		return animation.isAnimateScale();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isDebug()
-	 */
-	@Override
-	public boolean isDebug() {
-		return animation.isDebug();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDelay()
-	 */
-	@Override
-	public int getDelay() {
-		return animation.getDelay();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isLoop()
-	 */
-	@Override
-	public boolean isLoop() {
-		return animation.isLoop();
+		return getDefaults().isAnimateScale();
 	}
 
 	/*
@@ -118,8 +66,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 */
 	@Override
 	public IsDefaultAnimationModeElement getMode(IsAnimationMode mode) {
-		// FIXME must be wrapped
-		return animation.getMode(mode);
+		return getDefaults().getMode(mode);
 	}
 
 	/*
@@ -128,9 +75,8 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
-	public IsDefaultAnimationElement getProperty(IsAnimationProperty property) {
-		// FIXME must be wrapped
-		return animation.getProperty(property);
+	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
+		return getDefaults().getProperty(property);
 	}
 
 	/*
@@ -139,9 +85,8 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
-	public IsDefaultAnimationElement getCollection(IsAnimationCollection collection) {
-		// FIXME must be wrapped
-		return animation.getCollection(collection);
+	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
+		return getDefaults().getCollection(collection);
 	}
 
 }
