@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.AnimationType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationProperty extends AbstractStandardKey implements IsAnimationProperty {
+public final class StandardAnimationProperty extends AbstractStandardKey implements IsAnimationPropertyKey {
 
 	private final AnimationType type;
 
@@ -38,7 +38,7 @@ public final class StandardAnimationProperty extends AbstractStandardKey impleme
 		// stores values
 		this.type = type;
 		// checks if argument is consistent
-		IsAnimationProperty.checkIfValid(this);
+		IsAnimationPropertyKey.checkIfValid(this);
 	}
 
 	/*

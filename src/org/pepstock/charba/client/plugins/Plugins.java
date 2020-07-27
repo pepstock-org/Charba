@@ -26,7 +26,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 
 /**
  * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart configuration.
@@ -49,7 +49,7 @@ public final class Plugins implements ConfigurationElement {
 	public void add(Plugin plugin) {
 		// checks if plugin is consistent
 		// and the plugin id is not a default one
-		if (plugin != null && !DefaultPlugin.is(plugin.getId())) {
+		if (plugin != null && !DefaultPluginId.is(plugin.getId())) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
 			// checks if the plugin is already loaded
@@ -95,7 +95,7 @@ public final class Plugins implements ConfigurationElement {
 	public void remove(String pluginId) {
 		// checks if plugin is consistent
 		// and the plugin id is not a default one
-		if (pluginId != null && !DefaultPlugin.is(pluginId)) {
+		if (pluginId != null && !DefaultPluginId.is(pluginId)) {
 			// scans all plugins
 			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
 			while (iter.hasNext()) {

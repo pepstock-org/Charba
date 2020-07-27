@@ -31,7 +31,7 @@ import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
@@ -97,13 +97,13 @@ public final class Defaults {
 		// creates an internal map for plugin node
 		InternalPlugin internalPlugin = new InternalPlugin(wrapperDefaults.getPlugins());
 		// retrieves plugin default options
-		NativeObject titleOptions = internalPlugin.getOptions(DefaultPlugin.TITLE);
-		NativeObject legendOptions = internalPlugin.getOptions(DefaultPlugin.LEGEND);
-		NativeObject tooltipsOptions = internalPlugin.getOptions(DefaultPlugin.TOOLTIP);
+		NativeObject titleOptions = internalPlugin.getOptions(DefaultPluginId.TITLE);
+		NativeObject legendOptions = internalPlugin.getOptions(DefaultPluginId.LEGEND);
+		NativeObject tooltipsOptions = internalPlugin.getOptions(DefaultPluginId.TOOLTIP);
 		// copies the native object on original nodes
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.TITLE, titleOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.LEGEND, legendOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPlugin.TOOLTIP, tooltipsOptions);
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TITLE, titleOptions);
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.LEGEND, legendOptions);
+		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TOOLTIP, tooltipsOptions);
 		// --------------------
 		// creates global options wrapping the global property of CHART
 		this.options = new GlobalOptions(defaults);
@@ -454,7 +454,7 @@ public final class Defaults {
 			return getValue(Property.PLUGINS);
 		}
 
-		void setPluginDefaultIntoOptions(DefaultPlugin plugin, NativeObject options) {
+		void setPluginDefaultIntoOptions(DefaultPluginId plugin, NativeObject options) {
 			setValue(plugin.getPropertyName(), options);
 		}
 
@@ -605,7 +605,7 @@ public final class Defaults {
 		 * @param plugin plugin id to use to get hte options.
 		 * @return the options of plugin or <code>null</code> if does not exist
 		 */
-		NativeObject getOptions(DefaultPlugin plugin) {
+		NativeObject getOptions(DefaultPluginId plugin) {
 			return getValue(plugin);
 
 		}

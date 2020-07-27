@@ -35,11 +35,7 @@ public enum AnimationType implements Key
 	/**
 	 * Uses a color to interpolate animation.
 	 */
-	BOOLEAN("boolean"),
-	/**
-	 * The interpolator type is unknown (default)
-	 */
-	UNKNOWN("unknown");
+	BOOLEAN("boolean");
 
 	// name value of property
 	private final String value;

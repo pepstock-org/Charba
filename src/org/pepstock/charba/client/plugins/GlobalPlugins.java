@@ -28,7 +28,7 @@ import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -62,7 +62,7 @@ public final class GlobalPlugins {
 	 */
 	public boolean register(Plugin plugin) {
 		// checks if plugin is consistent and not a default plugin
-		if (plugin != null && !DefaultPlugin.is(plugin.getId())) {
+		if (plugin != null && !DefaultPluginId.is(plugin.getId())) {
 			// checks the plugin id
 			PluginIdChecker.check(plugin.getId());
 			// checks if ID is already registered
@@ -90,7 +90,7 @@ public final class GlobalPlugins {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one or as default one
-		if (!pluginIds.containsKey(pluginId) || DefaultPlugin.is(pluginId)) {
+		if (!pluginIds.containsKey(pluginId) || DefaultPluginId.is(pluginId)) {
 			return false;
 		}
 		// scans ids
@@ -135,7 +135,7 @@ public final class GlobalPlugins {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if the plugin is a default one
-		if (!DefaultPlugin.is(pluginId)) {
+		if (!DefaultPluginId.is(pluginId)) {
 			// gets all global registered plugin
 			Set<String> currentIds = getIds();
 			// scans all

@@ -30,13 +30,13 @@ import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.items.AnimationObject;
-import org.pepstock.charba.client.options.AnimationCollectionElement;
-import org.pepstock.charba.client.options.AnimationModeElement;
-import org.pepstock.charba.client.options.AnimationPropertyElement;
+import org.pepstock.charba.client.options.AnimationCollection;
+import org.pepstock.charba.client.options.AnimationMode;
+import org.pepstock.charba.client.options.AnimationProperty;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationMode;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 import jsinterop.annotations.JsFunction;
 
@@ -278,7 +278,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 * 
 	 * @param animationElement the animation options set for a specific mode
 	 */
-	public void setMode(AnimationModeElement animationElement) {
+	public void setMode(AnimationMode animationElement) {
 		getConfiguration().getAnimation().setMode(animationElement);
 	}
 
@@ -288,46 +288,124 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 * @param mode mode instance used to get for animation options
 	 * @return the animation options set for a specific mode.
 	 */
-	public AnimationModeElement getMode(IsAnimationMode mode) {
+	public AnimationMode getMode(IsAnimationModeKey mode) {
 		return getConfiguration().getAnimation().getMode(mode);
 	}
-	
+
 	/**
-	 * Sets the animation options set for a specific property.
+	 * Sets an animation property instance to animation options.
 	 * 
-	 * @param animationElement the animation options set for a specific property
+	 * @param animationElement animation property instance to add
 	 */
-	public void setProperty(AnimationPropertyElement animationElement) {
+	public void setProperty(AnimationProperty animationElement) {
 		getConfiguration().getAnimation().setProperty(animationElement);
 	}
 
 	/**
-	 * Returns the animation options set for a specific property.
+	 * Enables or disables an animation property instance into animation options.
+	 * 
+	 * @param property property instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation property
+	 */
+	public void setPropertyEnabled(IsAnimationPropertyKey property, boolean enabled) {
+		getConfiguration().getAnimation().setPropertyEnabled(property, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if the animation property is enabled, otherwise <code>false</code>.
+	 * 
+	 * @param property property instance used to check into animation options
+	 * @return <code>true</code> if the animation property is enabled, otherwise <code>false</code>
+	 */
+	public boolean isPropertyEnabled(IsAnimationPropertyKey property) {
+		return getConfiguration().getAnimation().isPropertyEnabled(property);
+	}
+
+	/**
+	 * Returns <code>true</code> if an animation property instance is stored into the animation options.
+	 * 
+	 * @param property property instance used to check into animation options
+	 * @return <code>true</code> if an animation property instance is stored into the animation options
+	 */
+	public boolean hasProperty(IsAnimationPropertyKey property) {
+		return getConfiguration().getAnimation().hasProperty(property);
+	}
+
+	/**
+	 * Returns an animation property instance if stored into the animation options.
 	 * 
 	 * @param property property instance used to get for animation options
-	 * @return the animation options set for a specific property.
+	 * @return an animation property instance or <code>null</code> if does not exists
 	 */
-	public AnimationPropertyElement getProperty(IsAnimationProperty property) {
+	public AnimationProperty getProperty(IsAnimationPropertyKey property) {
 		return getConfiguration().getAnimation().getProperty(property);
 	}
-	
+
 	/**
-	 * Sets the animation options set for a specific collection.
+	 * Removes an animation property previously added.
 	 * 
-	 * @param animationElement the animation options set for a specific collection
+	 * @param property property instance used to remove from animation options
 	 */
-	public void setCollection(AnimationCollectionElement animationElement) {
+	public void removeProperty(IsAnimationPropertyKey property) {
+		getConfiguration().getAnimation().removeProperty(property);
+	}
+
+	/**
+	 * Sets an animation collection instance to animation options.
+	 * 
+	 * @param animationElement animation collection instance to add
+	 */
+	public void setCollection(AnimationCollection animationElement) {
 		getConfiguration().getAnimation().setCollection(animationElement);
 	}
 
 	/**
-	 * Returns the animation options set for a specific collection.
+	 * Enables or disables an animation collection instance into animation options.
+	 * 
+	 * @param collection collection instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation collection
+	 */
+	public void setCollectionEnabled(IsAnimationCollectionKey collection, boolean enabled) {
+		getConfiguration().getAnimation().setCollectionEnabled(collection, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
+	 * 
+	 * @param collection collection instance used to check into animation options
+	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
+	 */
+	public boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
+		return getConfiguration().getAnimation().isCollectionEnabled(collection);
+	}
+
+	/**
+	 * Returns <code>true</code> if an animation collection instance is stored into the animation options.
+	 * 
+	 * @param collection collection instance used to check into animation options
+	 * @return <code>true</code> if an animation collection instance is stored into the animation options
+	 */
+	public boolean hasCollection(IsAnimationCollectionKey collection) {
+		return getConfiguration().getAnimation().hasCollection(collection);
+	}
+
+	/**
+	 * Returns an animation collection instance if stored into the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
-	 * @return the animation options set for a specific collection
+	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
-	public AnimationCollectionElement getCollection(IsAnimationCollection collection) {
+	public AnimationCollection getCollection(IsAnimationCollectionKey collection) {
 		return getConfiguration().getAnimation().getCollection(collection);
+	}
+
+	/**
+	 * Removes an animation collection previously added.
+	 * 
+	 * @param collection collection instance used to remove from animation options
+	 */
+	public void removeCollection(IsAnimationCollectionKey collection) {
+		getConfiguration().getAnimation().removeCollection(collection);
 	}
 
 	/*

@@ -26,11 +26,11 @@ import org.pepstock.charba.client.enums.AnimationType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationCollection extends AbstractStandardKey implements IsAnimationCollection {
+public final class StandardAnimationCollection extends AbstractStandardKey implements IsAnimationCollectionKey {
 
 	private final AnimationType type;
 
-	private final List<IsAnimationProperty> properties = new LinkedList<>();
+	private final List<IsAnimationPropertyKey> properties = new LinkedList<>();
 
 	/**
 	 * Builds the object with the collection value as string
@@ -43,7 +43,7 @@ public final class StandardAnimationCollection extends AbstractStandardKey imple
 		// stores type
 		this.type = type;
 		// checks if consistent
-		IsAnimationCollection.checkIfValid(this);
+		IsAnimationCollectionKey.checkIfValid(this);
 	}
 
 	/*
@@ -62,7 +62,7 @@ public final class StandardAnimationCollection extends AbstractStandardKey imple
 	 * @see org.pepstock.charba.client.options.IsAnimationCollection#properties()
 	 */
 	@Override
-	public List<IsAnimationProperty> properties() {
+	public List<IsAnimationPropertyKey> properties() {
 		return properties;
 	}
 

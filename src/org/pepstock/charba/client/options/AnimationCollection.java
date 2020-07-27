@@ -21,18 +21,18 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.enums.DefaultAnimationProperty;
+import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
- * FIXME It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
- * 
+ * Defines the animation options for a collections for multiple properties, identified by properties list. 
+ *  
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationCollectionElement extends AbstractAnimationElement<IsAnimationCollection, IsDefaultAnimationCollectionElement> implements IsDefaultAnimationCollectionElement{
+public final class AnimationCollection extends AbstractAnimationProperty<IsAnimationCollectionKey, IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
 
 	/**
 	 * Name of properties of native object.
@@ -70,8 +70,8 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 */
-	public AnimationCollectionElement(IsAnimationCollection collection) {
-		this(collection, DefaultsBuilder.get().getOptions().getAnimation().getCollection(IsAnimationCollection.checkAndGetIfValid(collection)));
+	public AnimationCollection(IsAnimationCollectionKey collection) {
+		this(collection, DefaultsBuilder.get().getOptions().getAnimation().getCollection(IsAnimationCollectionKey.checkAndGetIfValid(collection)));
 	}
 
 	/**
@@ -80,7 +80,7 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * @param collection collection instance used to get for animation options
 	 * @param defaultValues default provider
 	 */
-	public AnimationCollectionElement(IsAnimationCollection collection, IsDefaultAnimationCollectionElement defaultValues) {
+	public AnimationCollection(IsAnimationCollectionKey collection, IsDefaultAnimationCollection defaultValues) {
 		this(null, collection, defaultValues, null);
 		// stores the type
 		super.setType(collection.type());
@@ -96,10 +96,10 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationCollectionElement(AbstractNode parent, IsAnimationCollection collection, IsDefaultAnimationCollectionElement defaultValues, NativeObject nativeObject) {
+	AnimationCollection(AbstractNode parent, IsAnimationCollectionKey collection, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject) {
 		super(parent, collection, defaultValues, nativeObject);
 		// checks collection is valid
-		IsAnimationCollection.checkIfValid(collection);
+		IsAnimationCollectionKey.checkIfValid(collection);
 	}
 
 	/*
@@ -118,7 +118,7 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * 
 	 * @param properties the properties to be defined into the animation collection
 	 */
-	public void setProperties(IsAnimationProperty... properties) {
+	public void setProperties(IsAnimationPropertyKey... properties) {
 		// checks if argument is consistent
 		if (properties != null && properties.length > 0) {
 			// loads the array from list
@@ -128,17 +128,16 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 		}
 	}
 
-
 	/**
 	 * Sets the properties to be defined into the animation collection.
 	 * 
 	 * @param properties the properties to be defined into the animation collection
 	 */
-	public void setProperties(List<IsAnimationProperty> properties) {
+	public void setProperties(List<IsAnimationPropertyKey> properties) {
 		// checks if argument is consistent
 		if (properties != null && !properties.isEmpty()) {
 			// loads the array from list
-			ArrayString array = ArrayString.fromOrEmpty(properties.toArray(new IsAnimationProperty[0]));
+			ArrayString array = ArrayString.fromOrEmpty(properties.toArray(new IsAnimationPropertyKey[0]));
 			// stores the properties
 			setArrayValue(Property.PROPERTIES, array);
 		}
@@ -150,9 +149,9 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 	 * @return the properties defined into the animation collection
 	 */
 	@Override
-	public List<IsAnimationProperty> getProperties() {
+	public List<IsAnimationPropertyKey> getProperties() {
 		// gets result list
-		List<IsAnimationProperty> result = new LinkedList<>();
+		List<IsAnimationPropertyKey> result = new LinkedList<>();
 		// gets array
 		ArrayString array = getArrayValue(Property.PROPERTIES);
 		// checks if array is consistent
@@ -162,12 +161,12 @@ public final class AnimationCollectionElement extends AbstractAnimationElement<I
 				// stores the property name
 				String property = array.get(i);
 				// checks if default on
-				if (DefaultAnimationProperty.is(property)) {
+				if (DefaultAnimationPropertyKey.is(property)) {
 					// adds default property
-					result.add(Key.getKeyByValue(DefaultAnimationProperty.values(), property));
+					result.add(Key.getKeyByValue(DefaultAnimationPropertyKey.values(), property));
 				} else {
 					// adds new property
-					result.add(IsAnimationProperty.create(property, getType()));
+					result.add(IsAnimationPropertyKey.create(property, getType()));
 				}
 			}
 		}

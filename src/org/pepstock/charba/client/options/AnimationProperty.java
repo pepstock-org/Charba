@@ -16,24 +16,24 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
- * FIXME It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * Defines the animation options for a single property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationPropertyElement extends AbstractAnimationElement<IsAnimationProperty, IsDefaultAnimationPropertyElement> implements IsDefaultAnimationPropertyElement{
+public final class AnimationProperty extends AbstractAnimationProperty<IsAnimationPropertyKey, IsDefaultAnimationProperty> {
 
 	/**
 	 * Creates an animation options to configure a specific property.
 	 * 
 	 * @param property property instance used to get for animation options
 	 */
-	public AnimationPropertyElement(IsAnimationProperty property) {
-		this(property, DefaultsBuilder.get().getOptions().getAnimation().getProperty(IsAnimationProperty.checkAndGetIfValid(property)));
+	public AnimationProperty(IsAnimationPropertyKey property) {
+		this(property, DefaultsBuilder.get().getOptions().getAnimation().getProperty(IsAnimationPropertyKey.checkAndGetIfValid(property)));
 	}
 
 	/**
@@ -42,7 +42,7 @@ public final class AnimationPropertyElement extends AbstractAnimationElement<IsA
 	 * @param property property instance used to get for animation options
 	 * @param defaultValues default provider
 	 */
-	public AnimationPropertyElement(IsAnimationProperty property, IsDefaultAnimationPropertyElement defaultValues) {
+	public AnimationProperty(IsAnimationPropertyKey property, IsDefaultAnimationProperty defaultValues) {
 		this(null, property, defaultValues, null);
 		// stores the type
 		setType(property.type());
@@ -56,10 +56,10 @@ public final class AnimationPropertyElement extends AbstractAnimationElement<IsA
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationPropertyElement(AbstractNode parent, IsAnimationProperty property, IsDefaultAnimationPropertyElement defaultValues, NativeObject nativeObject) {
+	AnimationProperty(AbstractNode parent, IsAnimationPropertyKey property, IsDefaultAnimationProperty defaultValues, NativeObject nativeObject) {
 		super(parent, property, defaultValues, nativeObject);
 		// checks if property is valid
-		IsAnimationProperty.checkIfValid(property);
+		IsAnimationPropertyKey.checkIfValid(property);
 	}
 
 }

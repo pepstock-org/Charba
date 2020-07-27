@@ -16,16 +16,16 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.DefaultAnimationCollection;
-import org.pepstock.charba.client.enums.DefaultAnimationMode;
-import org.pepstock.charba.client.enums.DefaultAnimationProperty;
+import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
  * Represents the mode to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationMode extends Key {
+public interface IsAnimationModeKey extends Key {
 
 	/**
 	 * Returns a animation mode instance by its string value.
@@ -33,9 +33,9 @@ public interface IsAnimationMode extends Key {
 	 * @param mode string value to use
 	 * @return new mode instance
 	 */
-	static IsAnimationMode create(String mode) {
+	static IsAnimationModeKey create(String mode) {
 		// checks if mode as argument is a default one
-		for (DefaultAnimationMode defMode : DefaultAnimationMode.values()) {
+		for (DefaultAnimationModeKey defMode : DefaultAnimationModeKey.values()) {
 			// checks if mode is equals to default
 			if (defMode.value().equals(mode)) {
 				// if equals, returns the default mode
@@ -53,8 +53,8 @@ public interface IsAnimationMode extends Key {
 	 * @param mode animation mode to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code>
 	 */
-	static boolean isValid(IsAnimationMode mode) {
-		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
+	static boolean isValid(IsAnimationModeKey mode) {
+		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationPropertyKey.values());
 	}
 
 	/**
@@ -63,13 +63,13 @@ public interface IsAnimationMode extends Key {
 	 * 
 	 * @param mode animation mode to be checked
 	 */
-	static void checkIfValid(IsAnimationMode mode) {
+	static void checkIfValid(IsAnimationModeKey mode) {
 		if (!isValid(mode)) {
 			// sets checking value
-			boolean hasWrongName = mode != null && !AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollection.values(), DefaultAnimationProperty.values());
+			boolean hasWrongName = mode != null && !AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationPropertyKey.values());
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation mode name, '"+mode.value()+"' because is reserved" : "Animation mode is null or not consistent";
+			String exceptionMessage = hasWrongName ? "Invalid animation mode name, '" + mode.value() + "' because is reserved" : "Animation mode is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}
@@ -82,7 +82,7 @@ public interface IsAnimationMode extends Key {
 	 * @param mode mode to be checked
 	 * @return the same mode passed as argument
 	 */
-	static IsAnimationMode checkAndGetIfValid(IsAnimationMode mode) {
+	static IsAnimationModeKey checkAndGetIfValid(IsAnimationModeKey mode) {
 		// checks if collection is consistent
 		checkIfValid(mode);
 		// if here, is consistent

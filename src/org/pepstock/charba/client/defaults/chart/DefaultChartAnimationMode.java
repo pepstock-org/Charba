@@ -15,45 +15,46 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
+import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
  * Defaults for property animation option element.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of default interface of wrapped object
  */
-public class DefaultChartAnimationModeElement extends AbstractDefaultChartAnimation<IsDefaultAnimationModeElement> implements IsDefaultAnimationModeElement {
+public class DefaultChartAnimationMode<T extends IsDefaultAnimationMode> extends AbstractDefaultChartAnimation<T> implements IsDefaultAnimationMode {
 
 	/**
 	 * Creates the object wrapping a base animation instance.
 	 * 
 	 * @param animation a base animation instance to wrap
 	 */
-	DefaultChartAnimationModeElement(IsDefaultAnimationModeElement animation) {
+	DefaultChartAnimationMode(T animation) {
 		super(animation);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
-	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
+	public IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property) {
 		return getDefaults().getProperty(property);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
-	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
+	public IsDefaultAnimationCollection getCollection(IsAnimationCollectionKey collection) {
 		return getDefaults().getCollection(collection);
 	}
 

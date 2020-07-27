@@ -15,28 +15,27 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
+import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
- * CHART.JS default values for ANIMATION element.
+ * CHART.JS default values for animation mode.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultAnimationModeElement extends AbstractDefaultAnimation implements IsDefaultAnimationModeElement {
+public class DefaultAnimationMode extends AbstractDefaultAnimation implements IsDefaultAnimationMode {
 
-	private static final DefaultAnimationPropertyElement DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationPropertyElement();
+	private static final DefaultAnimationProperty DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationProperty();
 
-	private static final DefaultAnimationCollectionElement DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollectionElement();
+	private static final DefaultAnimationCollection DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollection();
 
 	/**
 	 * To avoid any instantiation
 	 */
-
-	DefaultAnimationModeElement() {
+	DefaultAnimationMode() {
 		// do nothing
 	}
 
@@ -46,7 +45,7 @@ public class DefaultAnimationModeElement extends AbstractDefaultAnimation implem
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
-	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
+	public IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property) {
 		return DEFAULT_ANIMATION_PROPERTY_ELEMENT;
 	}
 
@@ -56,7 +55,7 @@ public class DefaultAnimationModeElement extends AbstractDefaultAnimation implem
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
 	 */
 	@Override
-	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
+	public IsDefaultAnimationCollection getCollection(IsAnimationCollectionKey collection) {
 		return DEFAULT_ANIMATION_COLLECTION_ELEMENT;
 	}
 

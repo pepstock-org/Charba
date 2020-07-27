@@ -20,31 +20,31 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
  * Cores animation collections names provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationCollection implements IsAnimationCollection
+public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 {
 	/**
-	 * Defines the default animation collection for colors. 
+	 * Defines the default animation collection for colors.
 	 */
-	COLORS("colors", DefaultAnimationProperty.BACKGROUND_COLOR, DefaultAnimationProperty.BORDER_COLOR),
+	COLORS("colors", DefaultAnimationPropertyKey.BACKGROUND_COLOR, DefaultAnimationPropertyKey.BORDER_COLOR),
 	/**
-	 * Defines the default animation collection for numbers. 
+	 * Defines the default animation collection for numbers.
 	 */
-	NUMBERS("numbers", DefaultAnimationProperty.X, DefaultAnimationProperty.Y, DefaultAnimationProperty.BORDER_WIDTH, DefaultAnimationProperty.RADIUS, DefaultAnimationProperty.TENSION);
+	NUMBERS("numbers", DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, DefaultAnimationPropertyKey.BORDER_WIDTH, DefaultAnimationPropertyKey.RADIUS, DefaultAnimationPropertyKey.TENSION);
 
 	// name value of property
 	private final String value;
 	// animation type
 	private final AnimationType type;
 	// animation properties
-	private final List<IsAnimationProperty> properties = new LinkedList<>();
+	private final List<IsAnimationPropertyKey> properties = new LinkedList<>();
 
 	/**
 	 * Creates with the property value to use into native object.
@@ -52,10 +52,10 @@ public enum DefaultAnimationCollection implements IsAnimationCollection
 	 * @param value value of property name
 	 * @param properties array of properties to use as default
 	 */
-	private DefaultAnimationCollection(String value, IsAnimationProperty... properties) {
+	private DefaultAnimationCollectionKey(String value, IsAnimationPropertyKey... properties) {
 		this.value = value;
 		// scans all properties
-		for (IsAnimationProperty property : properties) {
+		for (IsAnimationPropertyKey property : properties) {
 			// adds to list
 			this.properties.add(property);
 		}
@@ -91,17 +91,17 @@ public enum DefaultAnimationCollection implements IsAnimationCollection
 	 * @see org.pepstock.charba.client.options.IsAnimationCollection#properties()
 	 */
 	@Override
-	public List<IsAnimationProperty> properties() {
+	public List<IsAnimationPropertyKey> properties() {
 		return Collections.unmodifiableList(properties);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default animation collection.
 	 * 
 	 * @param collection the animation collection to check
 	 * @return <code>true</code> if the argument is equals to a default animation collection
 	 */
-	public static boolean is(IsAnimationCollection collection) {
+	public static boolean is(IsAnimationCollectionKey collection) {
 		// checks if collection is valid
 		if (Key.isValid(collection)) {
 			// invokes the checking
@@ -119,7 +119,7 @@ public enum DefaultAnimationCollection implements IsAnimationCollection
 	 * @return <code>true</code> if the argument is equals to a default animation collection
 	 */
 	private static boolean is(String collection) {
-		return Key.hasKeyByValue(values(), collection);		
+		return Key.hasKeyByValue(values(), collection);
 	}
 
 }

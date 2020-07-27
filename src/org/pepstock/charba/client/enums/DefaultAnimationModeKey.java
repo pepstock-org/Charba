@@ -17,14 +17,14 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * Cores animation modes provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationMode implements IsAnimationMode
+public enum DefaultAnimationModeKey implements IsAnimationModeKey
 {
 	/**
 	 * Uses to configure the animation when an element is hovering.
@@ -55,7 +55,7 @@ public enum DefaultAnimationMode implements IsAnimationMode
 	 * 
 	 * @param value value of property name
 	 */
-	private DefaultAnimationMode(String value) {
+	private DefaultAnimationModeKey(String value) {
 		this.value = value;
 	}
 
@@ -68,14 +68,14 @@ public enum DefaultAnimationMode implements IsAnimationMode
 	public String value() {
 		return value;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default animation mode.
 	 * 
 	 * @param mode the animation mode to check
 	 * @return <code>true</code> if the argument is equals to a default animation mode
 	 */
-	public static boolean is(IsAnimationMode mode) {
+	public static boolean is(IsAnimationModeKey mode) {
 		// checks if mode is valid
 		if (Key.isValid(mode)) {
 			// invokes the checking
@@ -93,7 +93,7 @@ public enum DefaultAnimationMode implements IsAnimationMode
 	 * @return <code>true</code> if the argument is equals to a default animation mode
 	 */
 	public static boolean is(String mode) {
-		return Key.hasKeyByValue(values(), mode);		
+		return Key.hasKeyByValue(values(), mode);
 	}
 
 }

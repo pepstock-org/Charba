@@ -24,7 +24,7 @@ import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
@@ -210,7 +210,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	private boolean hasLegendSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if legend display is activated or legend plugin is activated
-		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPlugin.LEGEND);
+		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPluginId.LEGEND);
 		// checks if legend is in scope
 		// and the cursor is over the legend element
 		if (isLegendEnabled && isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {

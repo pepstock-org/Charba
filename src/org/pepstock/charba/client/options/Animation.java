@@ -41,7 +41,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends AbstractAnimationElementContainer<Key, IsDefaultAnimation> implements IsDefaultAnimation {
+public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> implements IsDefaultAnimation {
 
 	/**
 	 * Name of properties of native object.
@@ -77,7 +77,7 @@ public final class Animation extends AbstractAnimationElementContainer<Key, IsDe
 
 	// default values
 	private final IsDefaultAnimation defaultValues;
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -139,10 +139,12 @@ public final class Animation extends AbstractAnimationElementContainer<Key, IsDe
 	 * 
 	 * @param animationElement the animation options set for a specific mode
 	 */
-	public void setMode(AnimationModeElement animationElement) {
-		setSubElement(animationElement);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+	public void setMode(AnimationMode animationElement) {
+		// adds and checks if added
+		if (setSubElement(animationElement)) {
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
 	}
 
 	/**
@@ -152,10 +154,10 @@ public final class Animation extends AbstractAnimationElementContainer<Key, IsDe
 	 * @return the animation options set for a specific mode.
 	 */
 	@Override
-	public AnimationModeElement getMode(IsAnimationMode mode) {
+	public AnimationMode getMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
-		if (IsAnimationMode.isValid(mode)) {
-			return new AnimationModeElement(this, mode, defaultValues.getMode(mode), getValue(mode));
+		if (IsAnimationModeKey.isValid(mode)) {
+			return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));
 		}
 		// if here, the mode is not valid
 		// then returns null

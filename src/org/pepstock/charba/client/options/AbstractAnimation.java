@@ -15,22 +15,20 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
-import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
  * Is the base animation options with common properties for every animation configuration.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of key
  * @param <D> type of default values
+ * 
  */
-abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends AbstractNode implements IsDefaultBaseAnimation {
+abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation> extends AbstractNode implements IsDefaultBaseAnimation {
 
 	/**
 	 * Name of properties of native object.
@@ -41,9 +39,7 @@ abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends Abstr
 		EASING("easing"),
 		DEBUG("debug"),
 		DELAY("delay"),
-		LOOP("loop"),
-		TYPE("type"),
-		FROM("from");
+		LOOP("loop");
 
 		// name value of property
 		private final String value;
@@ -69,6 +65,8 @@ abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends Abstr
 
 	}
 
+	// key value
+	private final T key;
 	// default values
 	private final D defaultValues;
 
@@ -80,11 +78,13 @@ abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends Abstr
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractAnimation(AbstractNode parent, Key childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractAnimation(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
+		// stores the key locally to maintain the type
+		this.key = Key.checkAndGetIfValid(childKey);
 		// checks if default value is consistent
 		if (defaultValues == null) {
 			// if not, exception
@@ -93,7 +93,16 @@ abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends Abstr
 		// stores defaults values
 		this.defaultValues = defaultValues;
 	}
-	
+
+	/**
+	 * Returns the key used for animation element.
+	 * 
+	 * @return the key used for animation element
+	 */
+	public final T getKey() {
+		return key;
+	}
+
 	/**
 	 * Returns the default values.
 	 * 
@@ -206,142 +215,6 @@ abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends Abstr
 	@Override
 	public boolean isLoop() {
 		return getValue(Property.LOOP, defaultValues.isLoop());
-	}
-	
-	/**
-	 * Sets the type of <code>from</code> property and determines the interpolator used.
-	 * 
-	 * @param type the type of <code>from</code> property and determines the interpolator used.
-	 */
-	public void setType(AnimationType type) {
-		setValue(Property.TYPE, type);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the type of <code>from</code> property and determines the interpolator used.
-	 * 
-	 * @return the type of <code>from</code> property and determines the interpolator used.
-	 */
-	@Override
-	public AnimationType getType() {
-		return getValue(Property.TYPE, AnimationType.values(), defaultValues.getType());
-	}
-
-	/**
-	 * Sets the start value for the animation as number.
-	 * 
-	 * @param from the start value for the animation as number.
-	 */
-	public void setFrom(boolean from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets the start value for the animation as number.
-	 * 
-	 * @param from the start value for the animation as number.
-	 */
-	public void setFrom(double from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets the start value for the animation as color string.
-	 * 
-	 * @param from the start value for the animation as color string.
-	 */
-	public void setFrom(String from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets the start value for the animation as color.
-	 * 
-	 * @param from the start value for the animation as color.
-	 */
-	public void setFrom(IsColor from) {
-		setFrom(IsColor.checkAndGetValue(from));
-	}
-
-	/**
-	 * Returns the start value for the animation as number.
-	 * 
-	 * @return the start value for the animation as number.
-	 */
-	@Override
-	public double getFrom() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
-		// checks if the value is stored as the type
-		if (ObjectType.NUMBER.equals(propertyType)) {
-			return getValue(Property.FROM, defaultValues.getFrom());
-		}
-		// if here, the type is not consistent
-		// then returns the default value
-		return defaultValues.getFrom();
-	}
-
-	/**
-	 * Returns the start value for the animation as number.
-	 * 
-	 * @return the start value for the animation as number.
-	 */
-	@Override
-	public boolean getFromAsBoolean() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
-		// checks if the value is stored as the type
-		if (ObjectType.BOOLEAN.equals(propertyType)) {
-			return getValue(Property.FROM, defaultValues.getFromAsBoolean());
-		}
-		// if here, the type is not consistent
-		// then returns the default value
-		return defaultValues.getFromAsBoolean();
-	}
-
-	/**
-	 * Returns the start value for the animation as color string.
-	 * 
-	 * @return the start value for the animation as color string.
-	 */
-	@Override
-	public String getFromAsString() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
-		// checks if the value is stored as the type
-		if (ObjectType.STRING.equals(propertyType)) {
-			return getValue(Property.FROM, defaultValues.getFromAsString());
-		}
-		// if here, the type is not consistent
-		// then returns the default value
-		return defaultValues.getFromAsString();
-	}
-
-	/**
-	 * Returns the start value for the animation as color.
-	 * 
-	 * @return the start value for the animation as color.
-	 */
-	public IsColor getFromAsColor() {
-		// gets value as string
-		String fromAsString = getFromAsString();
-		// checks if consistent
-		if (fromAsString != null) {
-			// creates and returns the color
-			return ColorBuilder.parse(fromAsString);
-		}
-		// if here
-		// no from as string
-		// then returns null
-		return null;
 	}
 
 	/**

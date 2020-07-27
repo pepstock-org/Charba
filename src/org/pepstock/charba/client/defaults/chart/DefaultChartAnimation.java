@@ -16,19 +16,15 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationMode;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * Defaults for animation option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartAnimation extends AbstractDefaultChartAnimation<IsDefaultAnimation> implements IsDefaultAnimation {
+public final class DefaultChartAnimation extends DefaultChartAnimationMode<IsDefaultAnimation> implements IsDefaultAnimation {
 
 	/**
 	 * Creates the object by animation option element instance.
@@ -65,28 +61,8 @@ public final class DefaultChartAnimation extends AbstractDefaultChartAnimation<I
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationMode)
 	 */
 	@Override
-	public IsDefaultAnimationModeElement getMode(IsAnimationMode mode) {
+	public IsDefaultAnimationMode getMode(IsAnimationModeKey mode) {
 		return getDefaults().getMode(mode);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
-	 */
-	@Override
-	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
-		return getDefaults().getProperty(property);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
-	 */
-	@Override
-	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
-		return getDefaults().getCollection(collection);
 	}
 
 }

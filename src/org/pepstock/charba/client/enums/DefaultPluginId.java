@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum DefaultPlugin implements Key
+public enum DefaultPluginId implements Key
 {
 	/**
 	 * CHART.JS plugin to manage the legend.
@@ -53,7 +53,7 @@ public enum DefaultPlugin implements Key
 	 * @param value value of property name
 	 * @param propertyName name of the property used inside the options for plugin defaults.
 	 */
-	private DefaultPlugin(String value, String propertyName) {
+	private DefaultPluginId(String value, String propertyName) {
 		this.value = value;
 		this.propertyName = propertyName == null ? this : Key.create(propertyName);
 	}
@@ -79,7 +79,7 @@ public enum DefaultPlugin implements Key
 
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default plugin id.<br>
-	 * The {@link DefaultPlugin#FILLER} is not considered a default plugin because does not have a specific namespace into options.
+	 * The {@link DefaultPluginId#FILLER} is not considered a default plugin because does not have a specific namespace into options.
 	 * 
 	 * @param pluginId the plugin id to check
 	 * @return <code>true</code> if the argument is equals to a default plugin id
@@ -97,14 +97,14 @@ public enum DefaultPlugin implements Key
 
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default plugin id.<br>
-	 * The {@link DefaultPlugin#FILLER} is not considered a default plugin because does not have a specific namespace into options.
+	 * The {@link DefaultPluginId#FILLER} is not considered a default plugin because does not have a specific namespace into options.
 	 * 
 	 * @param pluginId the plugin id to check
 	 * @return <code>true</code> if the argument is equals to a default plugin id
 	 */
 	public static boolean is(String pluginId) {
 		// filler is not considered a default plugin because does not have element into options for configuration
-		return !DefaultPlugin.FILLER.value.equalsIgnoreCase(pluginId) && Key.hasKeyByValue(values(), pluginId);		
+		return !DefaultPluginId.FILLER.value.equalsIgnoreCase(pluginId) && Key.hasKeyByValue(values(), pluginId);
 	}
 
 }

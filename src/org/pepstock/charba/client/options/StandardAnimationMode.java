@@ -21,7 +21,7 @@ package org.pepstock.charba.client.options;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationMode extends AbstractStandardKey implements IsAnimationMode {
+public final class StandardAnimationMode extends AbstractStandardKey implements IsAnimationModeKey {
 
 	/**
 	 * Builds the object with the animation mode value as string
@@ -31,7 +31,7 @@ public final class StandardAnimationMode extends AbstractStandardKey implements 
 	StandardAnimationMode(String value) {
 		super(value);
 		// checks if consistent
-		IsAnimationMode.checkIfValid(this);
+		IsAnimationModeKey.checkIfValid(this);
 	}
 
 }

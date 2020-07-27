@@ -16,14 +16,14 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
  * Cores animation properties, to use to animate, provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationProperty implements IsAnimationProperty
+public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 {
 	/**
 	 * Uses to <b>x</b> property to animate the element.
@@ -60,7 +60,7 @@ public enum DefaultAnimationProperty implements IsAnimationProperty
 
 	// name value of property
 	private final String value;
-	// animation type 
+	// animation type
 	private final AnimationType type;
 
 	/**
@@ -69,7 +69,7 @@ public enum DefaultAnimationProperty implements IsAnimationProperty
 	 * @param value value of property name
 	 * @param type animation type related to the property
 	 */
-	private DefaultAnimationProperty(String value, AnimationType type) {
+	private DefaultAnimationPropertyKey(String value, AnimationType type) {
 		this.value = value;
 		this.type = type;
 	}
@@ -93,16 +93,16 @@ public enum DefaultAnimationProperty implements IsAnimationProperty
 	public AnimationType type() {
 		return type;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default animation property.
 	 * 
 	 * @param property the animation property to check
 	 * @return <code>true</code> if the argument is equals to a default animation property
 	 */
-	public static boolean is(IsAnimationProperty property) {
+	public static boolean is(IsAnimationPropertyKey property) {
 		// checks if property is valid
-		if (IsAnimationProperty.isValid(property)) {
+		if (IsAnimationPropertyKey.isValid(property)) {
 			// invokes the checking
 			return is(property.value());
 		}
@@ -118,7 +118,7 @@ public enum DefaultAnimationProperty implements IsAnimationProperty
 	 * @return <code>true</code> if the argument is equals to a default animation property
 	 */
 	public static boolean is(String property) {
-		return Key.hasKeyByValue(values(), property);		
+		return Key.hasKeyByValue(values(), property);
 	}
 
 }

@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
-import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -35,7 +34,7 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 	 * @param animation a base animation instance to wrap
 	 */
 	AbstractDefaultChartAnimation(T animation) {
-		// checks if the argument is consiste
+		// checks if the argument is consistent
 		if (animation == null) {
 			throw new IllegalArgumentException("The animation wrapped object is null");
 		}
@@ -101,44 +100,4 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 		return animation.isLoop();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getType()
-	 */
-	@Override
-	public final AnimationType getType() {
-		return animation.getType();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getFrom()
-	 */
-	@Override
-	public final double getFrom() {
-		return animation.getFrom();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getFromAsString()
-	 */
-	@Override
-	public final String getFromAsString() {
-		return animation.getFromAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimationElement#getFromAsBoolean()
-	 */
-	@Override
-	public final boolean getFromAsBoolean() {
-		return animation.getFromAsBoolean();
-	}
-
 }

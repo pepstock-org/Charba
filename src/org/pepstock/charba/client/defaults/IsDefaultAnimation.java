@@ -15,20 +15,21 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.options.IsAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * Interface to define animation object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimation extends IsDefaultAnimationElementContainer {
+public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
 	 * @return If true, the chart will animate in with a rotation animation.
 	 */
+	// FIXME check
 	boolean isAnimateRotate();
 
 	/**
@@ -36,6 +37,7 @@ public interface IsDefaultAnimation extends IsDefaultAnimationElementContainer {
 	 * 
 	 * @return If true, will animate scaling the chart from the center outwards.
 	 */
+	// FIXME check
 	boolean isAnimateScale();
 
 	/**
@@ -44,6 +46,6 @@ public interface IsDefaultAnimation extends IsDefaultAnimationElementContainer {
 	 * @param mode mode instance used to search for animation options
 	 * @return the animation options set for a specific mode.
 	 */
-	IsDefaultAnimationModeElement getMode(IsAnimationMode mode);
+	IsDefaultAnimationMode getMode(IsAnimationModeKey mode);
 
 }

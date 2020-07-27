@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsAnimationSubElement {
+interface IsAnimationElement {
 
 	/**
 	 * Returns the key used for animation element.

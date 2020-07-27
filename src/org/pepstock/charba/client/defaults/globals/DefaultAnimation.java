@@ -16,29 +16,21 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationCollectionElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
-import org.pepstock.charba.client.options.IsAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationMode;
-import org.pepstock.charba.client.options.IsAnimationProperty;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * CHART.JS default values for ANIMATION element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultAnimation extends AbstractDefaultAnimation implements IsDefaultAnimation {
+public final class DefaultAnimation extends DefaultAnimationMode implements IsDefaultAnimation {
 
 	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
 
-	private static final DefaultAnimationPropertyElement DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationPropertyElement();
-
-	private static final DefaultAnimationCollectionElement DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollectionElement();
-
-	private static final DefaultAnimationModeElement DEFAULT_ANIMATION_MODE_ELEMENT = new DefaultAnimationModeElement();
+	private static final DefaultAnimationMode DEFAULT_ANIMATION_MODE_ELEMENT = new DefaultAnimationMode();
 
 	/**
 	 * To avoid any instantiation
@@ -74,30 +66,9 @@ public final class DefaultAnimation extends AbstractDefaultAnimation implements 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationMode)
 	 */
 	@Override
-	public IsDefaultAnimationModeElement getMode(IsAnimationMode mode) {
-		// FIXME
+	public IsDefaultAnimationMode getMode(IsAnimationModeKey mode) {
+		// FIXME checks if make sense to add real default https://github.com/chartjs/Chart.js/blob/2b40e04a4bc638abc4477e5bd813a7614b166bf9/src/core/core.animations.js#L9
 		return DEFAULT_ANIMATION_MODE_ELEMENT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
-	 */
-	@Override
-	public IsDefaultAnimationPropertyElement getProperty(IsAnimationProperty property) {
-		return DEFAULT_ANIMATION_PROPERTY_ELEMENT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
-	 */
-	@Override
-	public IsDefaultAnimationCollectionElement getCollection(IsAnimationCollection collection) {
-		// FIXME
-		return DEFAULT_ANIMATION_COLLECTION_ELEMENT;
 	}
 
 }

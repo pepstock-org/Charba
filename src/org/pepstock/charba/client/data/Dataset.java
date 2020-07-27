@@ -52,7 +52,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -1003,7 +1003,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(T options) {
 		// checks if options is consistent and not a default plugin
-		if (options != null && !DefaultPlugin.is(options.getPluginId())) {
+		if (options != null && !DefaultPluginId.is(options.getPluginId())) {
 			// checks plugin ids
 			Key pluginIdKey = PluginIdChecker.key(options.getPluginId());
 			// stores configuration
@@ -1022,9 +1022,9 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	public final <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
 		// checks is a default plugin
-		if (!DefaultPlugin.is(pluginId)) {
+		if (!DefaultPluginId.is(pluginId)) {
 			// if null, removes the configuration
-			if (options == null && !DefaultPlugin.is(pluginId)) {
+			if (options == null && !DefaultPluginId.is(pluginId)) {
 				// removes configuration if exists
 				remove(PluginIdChecker.key(pluginId));
 			} else {
@@ -1042,7 +1042,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	public final boolean hasOptions(String pluginId) {
 		// checks if exists and is not a default plugin
-		return has(PluginIdChecker.key(pluginId)) && !DefaultPlugin.is(pluginId);
+		return has(PluginIdChecker.key(pluginId)) && !DefaultPluginId.is(pluginId);
 	}
 
 	/**
@@ -1056,7 +1056,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	public final <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory argument is consistent and not a default plugin
-		if (factory != null && !DefaultPlugin.is(pluginId)) {
+		if (factory != null && !DefaultPluginId.is(pluginId)) {
 			// creates the options by the factory
 			return factory.create(getValue(PluginIdChecker.key(pluginId)), defaultValues.getPlugins());
 		}
@@ -1076,7 +1076,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent and not a default plugin
-		if (factory != null && !DefaultPlugin.is(factory.getPluginId())) {
+		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the object using the defaults options
 			return factory.create(getValue(PluginIdChecker.key(factory.getPluginId())), defaultValues.getPlugins());
 		}

@@ -16,36 +16,33 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
- * FIXME It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * Defines the animation options to apply for a specific update mode.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationModeElement extends AbstractAnimationElementContainer<IsAnimationMode, IsDefaultAnimationModeElement> implements IsDefaultAnimationModeElement {
+public final class AnimationMode extends AbstractAnimationMode<IsAnimationModeKey, IsDefaultAnimationMode> implements IsAnimationElement {
 
-	// stores the key
-	
-	
 	/**
-	 * Creates an animation ptions to configure a specific mode.
+	 * Creates an animation options to configure a specific mode.
 	 * 
 	 * @param mode mode instance used to get for animation options
 	 */
-	public AnimationModeElement(IsAnimationMode mode) {
-		this(mode, DefaultsBuilder.get().getOptions().getAnimation().getMode(IsAnimationMode.checkAndGetIfValid(mode)));
+	public AnimationMode(IsAnimationModeKey mode) {
+		this(mode, DefaultsBuilder.get().getOptions().getAnimation().getMode(IsAnimationModeKey.checkAndGetIfValid(mode)));
 	}
 
 	/**
-	 * Creates an animation ptions to configure a specific mode.
+	 * Creates an animation options to configure a specific mode.
 	 * 
 	 * @param mode mode instance used to get for animation options
 	 * @param defaultValues default provider
 	 */
-	public AnimationModeElement(IsAnimationMode mode, IsDefaultAnimationModeElement defaultValues) {
+	public AnimationMode(IsAnimationModeKey mode, IsDefaultAnimationMode defaultValues) {
 		this(null, mode, defaultValues, null);
 	}
 
@@ -57,10 +54,10 @@ public final class AnimationModeElement extends AbstractAnimationElementContaine
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationModeElement(AbstractNode parent, IsAnimationMode mode, IsDefaultAnimationModeElement defaultValues, NativeObject nativeObject) {
+	AnimationMode(AbstractNode parent, IsAnimationModeKey mode, IsDefaultAnimationMode defaultValues, NativeObject nativeObject) {
 		super(parent, mode, defaultValues, nativeObject);
 		// checks if mode is valid
-		IsAnimationMode.checkIfValid(mode);
+		IsAnimationModeKey.checkIfValid(mode);
 	}
 
 }

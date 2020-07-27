@@ -19,16 +19,16 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.enums.DefaultAnimationCollection;
-import org.pepstock.charba.client.enums.DefaultAnimationMode;
-import org.pepstock.charba.client.enums.DefaultAnimationProperty;
+import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
  * Represents the collection to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationCollection extends Key {
+public interface IsAnimationCollectionKey extends Key {
 
 	/**
 	 * Returns a animation collection instance by its string value.
@@ -37,9 +37,9 @@ public interface IsAnimationCollection extends Key {
 	 * @param type type of the properties
 	 * @return new collection instance
 	 */
-	static IsAnimationCollection create(String collection, AnimationType type) {
+	static IsAnimationCollectionKey create(String collection, AnimationType type) {
 		// checks if mode as argument is a default one
-		for (DefaultAnimationCollection defCollection : DefaultAnimationCollection.values()) {
+		for (DefaultAnimationCollectionKey defCollection : DefaultAnimationCollectionKey.values()) {
 			// checks if mode is equals to default
 			if (defCollection.value().equals(collection)) {
 				// if equals, returns the default mode
@@ -58,15 +58,15 @@ public interface IsAnimationCollection extends Key {
 	 * @param properties initial collection of properties
 	 * @return new collection instance
 	 */
-	static IsAnimationCollection create(String collection, IsAnimationProperty... properties) {
+	static IsAnimationCollectionKey create(String collection, IsAnimationPropertyKey... properties) {
 		// checks if properties are consistent
 		if (properties != null && properties.length > 0) {
 			// get result reference
-			IsAnimationCollection result = null;
+			IsAnimationCollectionKey result = null;
 			// scans all properties
-			for (IsAnimationProperty property : properties) {
+			for (IsAnimationPropertyKey property : properties) {
 				// checks the consistency of property
-				IsAnimationProperty.checkIfValid(property);
+				IsAnimationPropertyKey.checkIfValid(property);
 				// checks if is the first property
 				if (result == null) {
 					// creates the collection to return
@@ -91,8 +91,8 @@ public interface IsAnimationCollection extends Key {
 	 * @param collection animation collection to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
-	static boolean isValid(IsAnimationCollection collection) {
-		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationMode.values(), DefaultAnimationProperty.values());
+	static boolean isValid(IsAnimationCollectionKey collection) {
+		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationModeKey.values(), DefaultAnimationPropertyKey.values());
 	}
 
 	/**
@@ -101,13 +101,13 @@ public interface IsAnimationCollection extends Key {
 	 * 
 	 * @param collection animation collection to be checked
 	 */
-	static void checkIfValid(IsAnimationCollection collection) {
+	static void checkIfValid(IsAnimationCollectionKey collection) {
 		if (!isValid(collection)) {
 			// sets checking value
-			boolean hasWrongName = collection != null && !AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationMode.values(), DefaultAnimationProperty.values());
+			boolean hasWrongName = collection != null && !AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationModeKey.values(), DefaultAnimationPropertyKey.values());
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation collection name, '"+collection.value()+"' because is reserved" : "Animation collection is null or not consistent";
+			String exceptionMessage = hasWrongName ? "Invalid animation collection name, '" + collection.value() + "' because is reserved" : "Animation collection is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}
@@ -120,7 +120,7 @@ public interface IsAnimationCollection extends Key {
 	 * @param collection collection to be checked
 	 * @return the same collection passed as argument
 	 */
-	static IsAnimationCollection checkAndGetIfValid(IsAnimationCollection collection) {
+	static IsAnimationCollectionKey checkAndGetIfValid(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		checkIfValid(collection);
 		// if here, is consistent
@@ -140,6 +140,6 @@ public interface IsAnimationCollection extends Key {
 	 * 
 	 * @return the animation properties related to the collection
 	 */
-	List<IsAnimationProperty> properties();
+	List<IsAnimationPropertyKey> properties();
 
 }

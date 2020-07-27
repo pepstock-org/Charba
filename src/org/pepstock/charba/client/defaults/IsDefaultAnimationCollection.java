@@ -13,24 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.chart;
+package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimationPropertyElement;
+import java.util.List;
+
+import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
- * Defaults for property animation option element.
+ * Interface to define animation for collection element defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultChartAnimationPropertyElement extends AbstractDefaultChartAnimation<IsDefaultAnimationPropertyElement> implements IsDefaultAnimationPropertyElement {
+public interface IsDefaultAnimationCollection extends IsDefaultAnimationProperty{
 
 	/**
-	 * Creates the object wrapping a base animation instance.
+	 * Returns the properties defined into the animation collection.
 	 * 
-	 * @param animation a base animation instance to wrap
+	 * @return the properties defined into the animation collection
 	 */
-	DefaultChartAnimationPropertyElement(IsDefaultAnimationPropertyElement animation) {
-		super(animation);
-	}
-
+	List<IsAnimationPropertyKey> getProperties();
+	
 }

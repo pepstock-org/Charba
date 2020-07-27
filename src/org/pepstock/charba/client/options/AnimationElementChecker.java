@@ -36,9 +36,8 @@ final class AnimationElementChecker {
 	 * To avoid any instantiation
 	 */
 	private AnimationElementChecker() {
-		// loads all teh keys used for animation options
+		// loads all keys used for animation options
 		reservedKeys.addAll(Arrays.asList(AbstractAnimation.Property.values()));
-		reservedKeys.addAll(Arrays.asList(AbstractAnimationElement.Property.values()));
 		reservedKeys.addAll(Arrays.asList(Animation.Property.values()));
 	}
 
@@ -50,7 +49,7 @@ final class AnimationElementChecker {
 	static AnimationElementChecker get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the mode name is not overriding the name of other properties of animation options.
 	 * 

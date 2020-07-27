@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -60,32 +59,4 @@ public interface IsDefaultBaseAnimation {
 	 */
 	boolean isLoop();
 	
-	/**
-	 * Returns the type of <code>from</code> property and determines the interpolator used.
-	 * 
-	 * @return the type of <code>from</code> property and determines the interpolator used.
-	 */
-	AnimationType getType();
-
-	/**
-	 * Returns the start value for the animation as number.
-	 * 
-	 * @return the start value for the animation as number.
-	 */
-	double getFrom();
-	
-	/**
-	 * Returns the start value for the animation as boolean.
-	 * 
-	 * @return the start value for the animation as boolean.
-	 */
-	boolean getFromAsBoolean();
-
-	/**
-	 * Returns the start value for the animation as color string.
-	 * 
-	 * @return the start value for the animation as color string.
-	 */
-	String getFromAsString();
-
 }

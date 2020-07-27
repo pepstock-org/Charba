@@ -265,6 +265,11 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
    * add `dataPoint` property to `TooltipItem` class.
    * enable the feature to manage floating bars on `time` or `timeseries` axes and bar charts adding to `DataPoint` class the possibility to add a `FloatingData` object as `Y` value.
+   * implement new animation options and configuration for new engine:
+     * add new animation entities (property, collection of properties, mode) 
+     * add `delay` property to animation options.
+     * add `debug` property to animation options.
+     * add `loop` property to animation options.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

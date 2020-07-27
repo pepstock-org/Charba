@@ -17,16 +17,16 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.enums.DefaultAnimationCollection;
-import org.pepstock.charba.client.enums.DefaultAnimationMode;
-import org.pepstock.charba.client.enums.DefaultAnimationProperty;
+import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
  * Represents the mode to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationProperty extends Key {
+public interface IsAnimationPropertyKey extends Key {
 
 	/**
 	 * Returns a animation property instance by its string value.
@@ -35,11 +35,11 @@ public interface IsAnimationProperty extends Key {
 	 * @param type type related to the typeof property
 	 * @return new property instance
 	 */
-	static IsAnimationProperty create(String property, AnimationType type) {
+	static IsAnimationPropertyKey create(String property, AnimationType type) {
 		// checks if property as argument is a default one
-		if (DefaultAnimationProperty.is(property)) {
+		if (DefaultAnimationPropertyKey.is(property)) {
 			// returns the value
-			return Key.getKeyByValue(DefaultAnimationProperty.values(), property);
+			return Key.getKeyByValue(DefaultAnimationPropertyKey.values(), property);
 		}
 		// if here, is not a default one
 		// then creates new animation property
@@ -53,8 +53,8 @@ public interface IsAnimationProperty extends Key {
 	 * @param property animation property to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
-	static boolean isValid(IsAnimationProperty property) {
-		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollection.values(), DefaultAnimationMode.values());
+	static boolean isValid(IsAnimationPropertyKey property) {
+		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationModeKey.values());
 	}
 
 	/**
@@ -63,13 +63,13 @@ public interface IsAnimationProperty extends Key {
 	 * 
 	 * @param property animation property to be checked
 	 */
-	static void checkIfValid(IsAnimationProperty property) {
+	static void checkIfValid(IsAnimationPropertyKey property) {
 		if (!isValid(property)) {
 			// sets checking value
-			boolean hasWrongName = property != null && !AnimationElementChecker.get().isValid(property.value(),  DefaultAnimationCollection.values(), DefaultAnimationMode.values());
+			boolean hasWrongName = property != null && !AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationModeKey.values());
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation property name, '"+property.value()+"' because is reserved" : "Animation property is null or not consistent";
+			String exceptionMessage = hasWrongName ? "Invalid animation property name, '" + property.value() + "' because is reserved" : "Animation property is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}
@@ -82,7 +82,7 @@ public interface IsAnimationProperty extends Key {
 	 * @param property property to be checked
 	 * @return the same property passed as argument
 	 */
-	static IsAnimationProperty checkAndGetIfValid(IsAnimationProperty property) {
+	static IsAnimationPropertyKey checkAndGetIfValid(IsAnimationPropertyKey property) {
 		// checks if property is consistent
 		checkIfValid(property);
 		// if here, is consistent

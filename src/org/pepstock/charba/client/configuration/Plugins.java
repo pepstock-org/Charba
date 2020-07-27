@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.enums.DefaultPlugin;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -71,11 +71,11 @@ public class Plugins {
 	 * @param plugin default CHART.JS plugin instance.
 	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
 	 */
-	public void setEnabled(DefaultPlugin plugin, boolean enabled) {
+	public void setEnabled(DefaultPluginId plugin, boolean enabled) {
 		// checks if plugin is consistent
 		if (Key.isValid(plugin)) {
 			// creates the envelop
-			ConfigurationEnvelop<DefaultPlugin> envelop = new ConfigurationEnvelop<>(plugin);
+			ConfigurationEnvelop<DefaultPluginId> envelop = new ConfigurationEnvelop<>(plugin);
 			extendedOptions.getPlugins().setEnabled(envelop, enabled);
 		}
 	}
@@ -106,7 +106,7 @@ public class Plugins {
 	 * @param plugin a default CHART.JS plugin.
 	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
 	 */
-	public boolean isForcedlyDisabled(DefaultPlugin plugin) {
+	public boolean isForcedlyDisabled(DefaultPluginId plugin) {
 		// checks if default plugin is consistent
 		if (Key.isValid(plugin)) {
 			return isForcedlyDisabled(plugin.value());
