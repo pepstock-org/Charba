@@ -137,7 +137,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	// callback proxy to invoke the click function for title and/or axis element
 	private final CallbackProxy<EventListenerCallback> titleAndAxisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final Animation animation;
+	private final ConfigurationAnimation animation;
 
 	private final Legend legend;
 
@@ -181,7 +181,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
-		animation = new Animation(chart, getConfiguration());
+		animation = new ConfigurationAnimation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
 		legend = new Legend(chart, getConfiguration());
 		title = new Title(getConfiguration());
@@ -246,7 +246,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @return the animation
 	 */
-	public Animation getAnimation() {
+	public ConfigurationAnimation getAnimation() {
 		return animation;
 	}
 

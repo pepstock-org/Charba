@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.AnimationType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationProperty extends IsDefaultBaseAnimation{
+public interface IsDefaultAnimationProperty extends IsDefaultBaseAnimation {
 
 	/**
 	 * Returns the type of <code>from</code> property and determines the interpolator used.
@@ -37,7 +37,7 @@ public interface IsDefaultAnimationProperty extends IsDefaultBaseAnimation{
 	 * @return the start value for the animation as number.
 	 */
 	double getFrom();
-	
+
 	/**
 	 * Returns the start value for the animation as boolean.
 	 * 
@@ -51,14 +51,14 @@ public interface IsDefaultAnimationProperty extends IsDefaultBaseAnimation{
 	 * @return the start value for the animation as color string.
 	 */
 	String getFromAsString();
-	
+
 	/**
 	 * Returns the end value for the animation as number.
 	 * 
 	 * @return the end value for the animation as number.
 	 */
 	double getTo();
-	
+
 	/**
 	 * Returns the end value for the animation as boolean.
 	 * 
@@ -72,6 +72,5 @@ public interface IsDefaultAnimationProperty extends IsDefaultBaseAnimation{
 	 * @return the end value for the animation as color string.
 	 */
 	String getToAsString();
-
 
 }

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -30,6 +31,8 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultTooltips implements IsDefaultTooltips {
+
+	private final IsDefaultAnimation animation = new DefaultAnimation();
 
 	private static final boolean DEFAULT_ENABLED = true;
 
@@ -76,14 +79,24 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private final DefaultFont titleFont = new InternalTitleFont();
 
 	private final DefaultFont bodyFont = new InternalBodyFont();
-	
+
 	private final DefaultFont footerFont = new InternalFooterFont();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
 	DefaultTooltips() {
 		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getAnimation()
+	 */
+	@Override
+	public IsDefaultAnimation getAnimation() {
+		return animation;
 	}
 
 	/*

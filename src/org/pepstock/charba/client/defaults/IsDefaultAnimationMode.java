@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultAnimationMode extends IsDefaultBaseAnimation {
-	
+
 	/**
 	 * Returns an animation property instance if stored into the animation options.
 	 * 
@@ -32,7 +32,7 @@ public interface IsDefaultAnimationMode extends IsDefaultBaseAnimation {
 	 * @return an animation property instance or <code>null</code> if does not exists
 	 */
 	IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property);
-	
+
 	/**
 	 * Returns an animation collection instance if stored into the animation options.
 	 * 

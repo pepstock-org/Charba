@@ -219,6 +219,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `getTimeTickItems` method from `ScaleItem` class, use `getTickItems`.
    * change `onCallback` method signature of `TimeTickCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.  
    * change `onAfterBuildTicks` method signature of `TimeAxisBuildTicksCallback` class in order to get a list of `ScaleTickItem` instead of `TimeTickItem`.
+   * remove `getEasing` method from `AnimationItem` class because is not provided anymore by new animation engine.
  * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
  * change `getXScaleID` and `getXScaleID` methods into `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -231,7 +232,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setAxis` methods from `Scale` and `Axis` classes because it must be set when an axis is built.
  * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
  * rename `extend` method of `Controllers` class to `register`.
- * remove `setEnabled` method for `DefaultPlugin` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
+ * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
  * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones into `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
  * change the return value of `getTooltip` method of `TooltipPluginItem` class, returning now a `TooltipModel` object instead of `TooltipNode`.
@@ -270,6 +271,8 @@ Here you can find the list of enhancements and updates available on `master` bra
      * add `delay` property to animation options.
      * add `debug` property to animation options.
      * add `loop` property to animation options.
+     * add `animation` options and configuration to datasets.
+     * add `animation` options and configuration to tooltips.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

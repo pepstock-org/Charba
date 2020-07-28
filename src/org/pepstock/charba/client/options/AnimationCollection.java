@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -27,8 +28,8 @@ import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
- * Defines the animation options for a collections for multiple properties, identified by properties list. 
- *  
+ * Defines the animation options for a collections for multiple properties, identified by properties list.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

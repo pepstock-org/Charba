@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @param <T> type of default interface of wrapped object
  */
 abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> implements IsDefaultBaseAnimation {
-	
+
 	private final T animation;
 
 	/**
@@ -41,9 +41,10 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 		// stores reference
 		this.animation = animation;
 	}
-	
+
 	/**
 	 * Returns the defaults instance to be wrapped.
+	 * 
 	 * @return the defaults instance to be wrapped
 	 */
 	final T getDefaults() {
@@ -99,5 +100,5 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 	public boolean isLoop() {
 		return animation.isLoop();
 	}
-	
+
 }

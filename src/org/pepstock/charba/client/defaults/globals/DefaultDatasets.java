@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
 /**
@@ -23,6 +24,8 @@ import org.pepstock.charba.client.defaults.IsDefaultDatasets;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultDatasets implements IsDefaultDatasets {
+
+	private final IsDefaultAnimation animation = new DefaultAnimation();
 
 	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
@@ -59,6 +62,16 @@ public final class DefaultDatasets implements IsDefaultDatasets {
 	 */
 	DefaultDatasets() {
 		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getAnimation()
+	 */
+	@Override
+	public IsDefaultAnimation getAnimation() {
+		return animation;
 	}
 
 	/*

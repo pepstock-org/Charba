@@ -126,7 +126,9 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	// user callbacks implementation for filtering tooltip items
 	private TooltipFilterCallback filterCallback = null;
 
-	// sub element of tooltip
+	// animation sub element of tooltip
+	private final Animation animation;
+	// callbacks sub element of tooltip
 	private final TooltipsCallbacks callbacks;
 	// title font instance
 	private final Font titleFont;
@@ -178,6 +180,8 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		super(chart, options);
 		// sets callbacks sub element
 		callbacks = new TooltipsCallbacks(chart, options);
+		animation = new Animation(chart, options);
+		// gets the fonts subelements
 		titleFont = new Font(options.getTooltips().getTitleFont());
 		bodyFont = new Font(options.getTooltips().getBodyFont());
 		footerFont = new Font(options.getTooltips().getFooterFont());
@@ -214,9 +218,20 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * @return the callbacks
+	 * Returns the animation element.
+	 * 
+	 * @return the animation
 	 */
-	public TooltipsCallbacks getCallbacks() {
+	public final Animation getAnimation() {
+		return animation;
+	}
+
+	/**
+	 * Returns the object where all tooltips callbacks are stored.
+	 * 
+	 * @return the object where all tooltips callbacks are stored
+	 */
+	public final TooltipsCallbacks getCallbacks() {
 		return callbacks;
 	}
 

@@ -34,6 +34,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	{
 		// FIXME interface is needed do not duplicate code with the bar dataset
 		// lining datasets
+		ANIMATION("animation"),
 		SHOW_LINE("showLine");
 
 		// name value of property
@@ -60,6 +61,8 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 
 	}
 
+	// Animation sub elements
+	private final Animation animation;
 	// bar options handler instance
 	private final BarDatasetOptionsHandler barOptionsHandler;
 
@@ -75,6 +78,18 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 		super(options, childKey, defaultValues, nativeObject);
 		// creates the properties handlers
 		this.barOptionsHandler = new BarDatasetOptionsHandler(getNativeObject(), getDefaultValues());
+		// gets all sub elements
+		this.animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getAnimation()
+	 */
+	@Override
+	public Animation getAnimation() {
+		return animation;
 	}
 
 	/*

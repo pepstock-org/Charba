@@ -36,6 +36,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -46,7 +47,6 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -65,7 +65,7 @@ import org.pepstock.charba.client.utils.JSON;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends NativeObjectContainer implements HasDataset {
+public abstract class Dataset extends AbstractNode implements HasDataset {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -123,6 +123,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private final IsDefaultOptions defaultValues;
 	// chart type related to dataset
 	private final Type type;
+	// animation object
+	private final DatasetAnimation animation;
 	// internal comparator to sort time series items
 	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
@@ -169,6 +171,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	enum InternalProperty implements Key
 	{
 		LABEL("label"),
+		ANIMATION("animation"),
 		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
@@ -212,8 +215,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		super(null);
 		// FIXME default when it's not the options of chart
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
+		// loads animation
+		this.animation = new DatasetAnimation(this, defaultValues.getAnimation(), getValue(InternalProperty.ANIMATION));
 		// stores the type
 		this.type = type;
 		// stores the type
@@ -248,6 +254,15 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
+	}
+
+	/**
+	 * Returns the animation element.
+	 * 
+	 * @return the animation
+	 */
+	public DatasetAnimation getAnimation() {
+		return animation;
 	}
 
 	/**

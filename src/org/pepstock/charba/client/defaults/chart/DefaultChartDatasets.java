@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
 /**
@@ -33,6 +34,16 @@ public final class DefaultChartDatasets implements IsDefaultDatasets {
 	 */
 	public DefaultChartDatasets(IsDefaultDatasets datasets) {
 		this.datasets = datasets;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getAnimation()
+	 */
+	@Override
+	public IsDefaultAnimation getAnimation() {
+		return datasets.getAnimation();
 	}
 
 	/*

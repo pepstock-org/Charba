@@ -27,6 +27,13 @@ import org.pepstock.charba.client.enums.TextAlign;
 public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 
 	/**
+	 * Returns the animation defaults.
+	 * 
+	 * @return the animation defaults.
+	 */
+	IsDefaultAnimation getAnimation();
+
+	/**
 	 * Returns if tooltips are enabled.
 	 * 
 	 * @return if tooltips are enabled.

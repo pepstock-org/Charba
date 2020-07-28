@@ -58,5 +58,5 @@ public interface IsDefaultBaseAnimation {
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
 	boolean isLoop();
-	
+
 }

@@ -34,10 +34,12 @@ import org.pepstock.charba.client.positioner.Positioner;
  */
 public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection {
 
+	// Animation sub element
+	private final Animation animation;
+	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
-
+	// Text direction sub element
 	private final TextDirectioner textDirectioner;
-
 	// instance of font for title
 	private final Font titleFont;
 	// instance of font for body
@@ -50,6 +52,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	private enum Property implements Key
 	{
+		ANIMATION("animation"),
 		CALLBACKS("callbacks"),
 		// simple properties
 		ENABLED("enabled"),
@@ -112,14 +115,26 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-		// gets sub element
+		// gets sub elements
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, defaultValues, getValue(Property.CALLBACKS));
+		this.animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
+		// gets fonts definition
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text directioner
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getAnimation()
+	 */
+	@Override
+	public Animation getAnimation() {
+		return animation;
 	}
 
 	/*

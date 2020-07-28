@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationCollection extends IsDefaultAnimationProperty{
+public interface IsDefaultAnimationCollection extends IsDefaultAnimationProperty {
 
 	/**
 	 * Returns the properties defined into the animation collection.
@@ -32,5 +32,5 @@ public interface IsDefaultAnimationCollection extends IsDefaultAnimationProperty
 	 * @return the properties defined into the animation collection
 	 */
 	List<IsAnimationPropertyKey> getProperties();
-	
+
 }

@@ -13,12 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
-
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+package org.pepstock.charba.client.commons;
 
 /**
  * Base class for all options noides, which will wraps a native object and manages the relations about parent and children elements.
@@ -26,11 +21,21 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * 
  */
-abstract class AbstractNode extends NativeObjectContainer {
+public abstract class AbstractNode extends NativeObjectContainer {
 
 	private final AbstractNode parent;
 
 	private final Key childKey;
+
+	/**
+	 * Creates the object with native object to map java script properties.<br>
+	 * This is used for the root of tree composed by native objects.
+	 * 
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractNode(NativeObject nativeObject) {
+		this(null, null, nativeObject);
+	}
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -39,7 +44,7 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractNode(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+	protected AbstractNode(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores arguments
 		this.childKey = childKey;
@@ -74,7 +79,7 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 * @param key property name to use to add the function proxy
 	 * @param proxy the function proxy instance to add
 	 */
-	final void setInternalCallbackToModel(AbstractNode model, Key key, CallbackProxy.Proxy proxy) {
+	protected final void setInternalCallbackToModel(AbstractNode model, Key key, CallbackProxy.Proxy proxy) {
 		// checks if model is consistent
 		if (model == null) {
 			// if not exception
@@ -89,7 +94,7 @@ abstract class AbstractNode extends NativeObjectContainer {
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
 	 */
-	protected final void checkAndAddToParent() {
+	public final void checkAndAddToParent() {
 		// checks if we are at root element
 		// or if the parent hasn't got the key
 		if (parent != null && !parent.has(childKey)) {

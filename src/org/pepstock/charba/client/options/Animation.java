@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 
 /**
@@ -41,7 +44,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> implements IsDefaultAnimation {
+public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> implements IsDefaultAnimation {
 
 	/**
 	 * Name of properties of native object.
@@ -72,11 +75,23 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 		public String value() {
 			return value;
 		}
-
 	}
 
 	// default values
 	private final IsDefaultAnimation defaultValues;
+
+	/**
+	 * Creates the object with the parent, the key of this element, default values and an envelop with native object to map java script properties. Called from <code>data</code>
+	 * package in order to get an animation for a dataset.
+	 * 
+	 * @param parent parent node of the chart options.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param envelop envelop with a native object to map java script properties
+	 */
+	protected Animation(AbstractNode parent, Key childKey, IsDefaultAnimation defaultValues, DataEnvelop<NativeObject> envelop) {
+		this(parent, childKey, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -97,7 +112,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * 
 	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
-	public void setAnimateRotate(boolean animateRotate) {
+	public final void setAnimateRotate(boolean animateRotate) {
 		setValue(Property.ANIMATE_ROTATE, animateRotate);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -109,7 +124,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * @return if <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	@Override
-	public boolean isAnimateRotate() {
+	public final boolean isAnimateRotate() {
 		return getValue(Property.ANIMATE_ROTATE, defaultValues.isAnimateRotate());
 	}
 
@@ -118,7 +133,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * 
 	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
-	public void setAnimateScale(boolean animateScale) {
+	public final void setAnimateScale(boolean animateScale) {
 		setValue(Property.ANIMATE_SCALE, animateScale);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -130,7 +145,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	@Override
-	public boolean isAnimateScale() {
+	public final boolean isAnimateScale() {
 		return getValue(Property.ANIMATE_SCALE, defaultValues.isAnimateScale());
 	}
 
@@ -139,7 +154,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * 
 	 * @param animationElement the animation options set for a specific mode
 	 */
-	public void setMode(AnimationMode animationElement) {
+	public final void setMode(AnimationMode animationElement) {
 		// adds and checks if added
 		if (setSubElement(animationElement)) {
 			// checks if the node is already added to parent
@@ -154,7 +169,7 @@ public final class Animation extends AbstractAnimationMode<Key, IsDefaultAnimati
 	 * @return the animation options set for a specific mode.
 	 */
 	@Override
-	public AnimationMode getMode(IsAnimationModeKey mode) {
+	public final AnimationMode getMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
 		if (IsAnimationModeKey.isValid(mode)) {
 			return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));

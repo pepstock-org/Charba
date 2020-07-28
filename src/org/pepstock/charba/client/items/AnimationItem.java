@@ -18,7 +18,6 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.enums.Easing;
 
 /**
  * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
@@ -33,9 +32,9 @@ public final class AnimationItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
+		CHART("chart"), // FIXME https://www.chartjs.org/docs/master/configuration/animations#animation-callbacks
 		CURRENT_STEP("currentStep"),
-		NUM_STEPS("numSteps"),
-		EASING("easing");
+		NUM_STEPS("numSteps");
 
 		// name value of property
 		private final String value;
@@ -88,12 +87,4 @@ public final class AnimationItem extends NativeObjectContainer {
 		return getValue(Property.NUM_STEPS, UndefinedValues.DOUBLE);
 	}
 
-	/**
-	 * Returns the animation easing to use.
-	 * 
-	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}
-	 */
-	public Easing getEasing() {
-		return getValue(Property.EASING, Easing.values(), Easing.EASE_OUT_QUART);
-	}
 }
