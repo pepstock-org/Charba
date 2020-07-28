@@ -48,6 +48,24 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	public final Animation getAnimation() {
 		return animation;
 	}
+	
+	/**
+	 * Enables or disables the animation.
+	 * 
+	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
+	 */
+	public void setAnimationEnabled(boolean enabled) {
+		getConfiguration().setAnimationEnabled(enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
+	 */
+	public boolean isAnimationEnabled() {
+		return getConfiguration().isAnimationEnabled();
+	}
 
 	/**
 	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.

@@ -54,6 +54,9 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.Animation;
+import org.pepstock.charba.client.options.AnimationContainer;
+import org.pepstock.charba.client.options.HasAnimation;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
@@ -65,7 +68,7 @@ import org.pepstock.charba.client.utils.JSON;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends AbstractNode implements HasDataset {
+public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimation {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -123,8 +126,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset {
 	private final IsDefaultOptions defaultValues;
 	// chart type related to dataset
 	private final Type type;
-	// animation object
-	private final DatasetAnimation animation;
+	// animation container
+	private final AnimationContainer animationContainer;
 	// internal comparator to sort time series items
 	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
@@ -171,7 +174,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset {
 	enum InternalProperty implements Key
 	{
 		LABEL("label"),
-		ANIMATION("animation"),
 		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
@@ -218,8 +220,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset {
 		super(null);
 		// FIXME default when it's not the options of chart
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
-		// loads animation
-		this.animation = new DatasetAnimation(this, defaultValues.getAnimation(), getValue(InternalProperty.ANIMATION));
+		// sets animation container
+		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), new DataEnvelop<>(getNativeObject()));
 		// stores the type
 		this.type = type;
 		// stores the type
@@ -261,8 +263,18 @@ public abstract class Dataset extends AbstractNode implements HasDataset {
 	 * 
 	 * @return the animation
 	 */
-	public DatasetAnimation getAnimation() {
-		return animation;
+	public Animation getAnimation() {
+		return animationContainer.getAnimation();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasAnimation#getAnimationContainer()
+	 */
+	@Override
+	public final AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**

@@ -45,7 +45,11 @@ public enum DefaultAnimationModeKey implements IsAnimationModeKey
 	/**
 	 * Uses to configure the animation when a dataset is shown using legend or {@link IsChart#show(int)}.
 	 */
-	SHOW("show");
+	SHOW("show"),
+	/**
+	 * Uses to configure the animation to ignore the animation.
+	 */
+	NONE("none");
 
 	// name value of property
 	private final String value;

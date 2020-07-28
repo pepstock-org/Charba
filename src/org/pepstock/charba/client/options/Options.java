@@ -34,11 +34,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps {
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimation {
 
 	// all sub elements
-	private final Animation animation;
-
 	private final Legend legend;
 
 	private final Hover hover;
@@ -67,7 +65,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		HOVER("hover"),
 		ELEMENTS("elements"),
 		LAYOUT("layout"),
-		ANIMATION("animation"),
 		TOOLTIPS("tooltips"),
 		LEGEND("legend"),
 		TITLE("title"),
@@ -117,6 +114,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	// span gapper instance
 	private final SpanGapper spanGapper;
+	// animation container
+	private final AnimationContainer animationContainer;
 
 	/**
 	 * Creates the object only with default provider. This is used as the root element.<br>
@@ -137,7 +136,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	protected Options(IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets all sub elements
-		this.animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
 		this.legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
 		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
 		this.hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
@@ -149,6 +147,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
 		// sets span gapper
 		this.spanGapper = new SpanGapper(getNativeObject(), getDefaultValues());
+		// sets animation container
+		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 	}
 
 	/**
@@ -178,7 +178,17 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	@Override
 	public Animation getAnimation() {
-		return animation;
+		return animationContainer.getAnimation();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasAnimation#getAnimationContainer()
+	 */
+	@Override
+	public final AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**

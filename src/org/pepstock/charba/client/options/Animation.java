@@ -21,12 +21,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes. <br>
@@ -92,19 +91,6 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	private final Set<String> animationDisabledModes = new HashSet<>();
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and an envelop with native object to map java script properties. Called from <code>data</code>
-	 * package in order to get an animation for a dataset.
-	 * 
-	 * @param parent parent node of the chart options.
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
-	 * @param envelop envelop with a native object to map java script properties
-	 */
-	protected Animation(AbstractNode parent, Key childKey, IsDefaultAnimation defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(parent, childKey, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param parent parent node of the chart options.
@@ -168,10 +154,19 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	public final void setMode(AnimationMode animationElement) {
 		// adds and checks if added
 		if (setSubElement(animationElement)) {
-			// stores the object into the cache
-			animationModes.put(animationElement.getKey().value(), animationElement);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			// checks if is using the default "none"
+			// the checking has been done after adding
+			// in order to be sure that argument is consistent
+			if (Key.equals(animationElement.getKey(), DefaultAnimationModeKey.NONE)){
+				// removes the property previously added
+				remove(DefaultAnimationModeKey.NONE);
+			} else {
+				// if here the mode is not "none" 
+				// stores the object into the cache
+				animationModes.put(animationElement.getKey().value(), animationElement);
+				// checks if the node is already added to parent
+				checkAndAddToParent();
+			}
 		}
 	}
 
@@ -183,7 +178,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
 		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode)) {
+		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
 			// checks if is enabling
 			if (enabled) {
 				// checks if cached
@@ -216,7 +211,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final boolean isModeEnabled(IsAnimationModeKey mode) {
 		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode)) {
+		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
 			// checks if a custom mode, previously added, is enabled
 			if (animationModes.containsKey(mode.value()) && ObjectType.OBJECT.equals(type(mode))) {
 				// returns that is enabled
@@ -241,7 +236,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final boolean hasMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode)) {
+		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
 			// checks if is cached
 			if (animationModes.containsKey(mode.value())) {
 				// returns because it is in the cached
@@ -264,7 +259,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	@Override
 	public final AnimationMode getMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode)) {
+		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
 			// checks if is cached
 			if (animationModes.containsKey(mode.value())) {
 				// returns because it is in the cached
@@ -287,7 +282,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final void removeMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent and if the mode has been previously added
-		if (IsAnimationModeKey.isValid(mode) && animationModes.containsKey(mode.value())) {
+		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE) && animationModes.containsKey(mode.value())) {
 			// remove from object
 			remove(mode);
 			// removes from cache

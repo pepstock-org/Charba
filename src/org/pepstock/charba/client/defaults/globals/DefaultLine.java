@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  */
 public final class DefaultLine extends AbstractDefaultOptionsElement implements IsDefaultLine {
 
-	// default line tension
+	// default line tension FIXME check the defaults
 	private static final float DEFAULT_TENSION = 0.4F;
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;

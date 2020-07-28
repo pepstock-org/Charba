@@ -32,10 +32,8 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection {
+public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation {
 
-	// Animation sub element
-	private final Animation animation;
 	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
 	// Text direction sub element
@@ -52,7 +50,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	private enum Property implements Key
 	{
-		ANIMATION("animation"),
 		CALLBACKS("callbacks"),
 		// simple properties
 		ENABLED("enabled"),
@@ -104,6 +101,9 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		}
 
 	}
+	
+	// animation container
+	private final AnimationContainer animationContainer;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -117,24 +117,34 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, defaultValues, getValue(Property.CALLBACKS));
-		this.animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
 		// gets fonts definition
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text directioner
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
+		// sets animation container
+		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
+	}
 
+	/**
+	 * Returns the animation element.
+	 * 
+	 * @return the animation
+	 */
+	@Override
+	public Animation getAnimation() {
+		return animationContainer.getAnimation();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getAnimation()
+	 * @see org.pepstock.charba.client.options.HasAnimation#getAnimationContainer()
 	 */
 	@Override
-	public Animation getAnimation() {
-		return animation;
+	public final AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/*

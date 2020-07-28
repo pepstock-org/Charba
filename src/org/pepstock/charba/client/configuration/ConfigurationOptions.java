@@ -320,6 +320,24 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @return the axis or <code>null</code> if not axis.
 	 */
 	abstract Axis getAxisById(int id);
+	
+	/**
+	 * Enables or disables the animation.
+	 * 
+	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
+	 */
+	public void setAnimationEnabled(boolean enabled) {
+		getConfiguration().setAnimationEnabled(enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
+	 */
+	public boolean isAnimationEnabled() {
+		return getConfiguration().isAnimationEnabled();
+	}
 
 	/**
 	 * Sets the browser events that the chart should listen to for tooltips and hovering.

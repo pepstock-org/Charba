@@ -26,7 +26,6 @@ import org.pepstock.charba.client.configuration.Layout;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.Tooltips;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
@@ -85,7 +84,6 @@ public class MeterOptions extends AbstractPieOptions {
 		// disables legend, title and tooltips.
 		super.getTitle().setDisplay(false);
 		super.getTooltips().setEnabled(false);
-		super.getAnimation().getMode(DefaultAnimationModeKey.ACTIVE).setDuration(0);
 		// creates a wrapper for legend
 		legend = new LegendWrapper(super.getLegend());
 		legend.setDisplay(false);

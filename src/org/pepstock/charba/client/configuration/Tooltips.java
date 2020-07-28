@@ -225,6 +225,24 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	public final Animation getAnimation() {
 		return animation;
 	}
+	
+	/**
+	 * Enables or disables the animation.
+	 * 
+	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
+	 */
+	public void setAnimationEnabled(boolean enabled) {
+		getConfiguration().setAnimationEnabled(enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
+	 */
+	public boolean isAnimationEnabled() {
+		return getConfiguration().isAnimationEnabled();
+	}
 
 	/**
 	 * Returns the object where all tooltips callbacks are stored.

@@ -273,6 +273,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * add `loop` property to animation options.
      * add `animation` options and configuration to datasets.
      * add `animation` options and configuration to tooltips.
+     * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers into configuration, options and datasets.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

@@ -30,7 +30,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class SpanGapper extends NativeObjectContainer {
+public final class SpanGapper extends NativeObjectContainer {
 
 	// default value
 	private final IsDefaultOptions defaultValues;
@@ -96,7 +96,7 @@ public class SpanGapper extends NativeObjectContainer {
 	 * 
 	 * @return the default value of options to use when the property does not exist
 	 */
-	protected final IsDefaultOptions getDefaultValues() {
+	protected IsDefaultOptions getDefaultValues() {
 		return defaultValues;
 	}
 
