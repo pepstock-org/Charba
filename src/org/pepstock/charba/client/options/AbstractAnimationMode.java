@@ -63,7 +63,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 		 * @see org.pepstock.charba.client.commons.Key#value()
 		 */
 		@Override
-		public String value() {
+		public final String value() {
 			return value;
 		}
 
@@ -102,7 +102,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * 
 	 * @param animationElement animation property instance to add
 	 */
-	public void setProperty(AnimationProperty animationElement) {
+	public final void setProperty(AnimationProperty animationElement) {
 		// adds and checks if added
 		if (setSubElement(animationElement)) {
 			// stores the object into the cache
@@ -118,7 +118,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param property property instance used to check into animation options
 	 * @param enabled if <code>true</code> it enables an animation property
 	 */
-	public void setPropertyEnabled(IsAnimationPropertyKey property, boolean enabled) {
+	public final void setPropertyEnabled(IsAnimationPropertyKey property, boolean enabled) {
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if is enabling
@@ -151,10 +151,10 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param property property instance used to check into animation options
 	 * @return <code>true</code> if the animation property is enabled, otherwise <code>false</code>
 	 */
-	public boolean isPropertyEnabled(IsAnimationPropertyKey property) {
+	public final boolean isPropertyEnabled(IsAnimationPropertyKey property) {
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
-			// checks if a custom property, previously added) is enabled
+			// checks if a custom property, previously added, is enabled
 			if (animationProperties.containsKey(property.value()) && ObjectType.OBJECT.equals(type(property))) {
 				// returns that is enabled
 				return true;
@@ -176,7 +176,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param property property instance used to check into animation options
 	 * @return <code>true</code> if an animation property instance is stored into the animation options
 	 */
-	public boolean hasProperty(IsAnimationPropertyKey property) {
+	public final boolean hasProperty(IsAnimationPropertyKey property) {
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if is cached
@@ -199,16 +199,18 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @return an animation property instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationProperty getProperty(IsAnimationPropertyKey property) {
+	public final AnimationProperty getProperty(IsAnimationPropertyKey property) {
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if is cached
 			if (animationProperties.containsKey(property.value())) {
 				// returns because it is in the cached
 				return animationProperties.get(property.value());
+			} else if (has(property)) {
+				// if here, the property is stored into object
+				// gets from the native object
+				return new AnimationProperty(this, property, getDefaultValues().getProperty(property), getValue(property));
 			}
-			// gets from the native object
-			return new AnimationProperty(this, property, getDefaultValues().getProperty(property), getValue(property));
 		}
 		// if here, the property is not valid
 		// then returns null
@@ -220,9 +222,9 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * 
 	 * @param property property instance used to remove from animation options
 	 */
-	public void removeProperty(IsAnimationPropertyKey property) {
-		// checks if property is consistent
-		if (IsAnimationPropertyKey.isValid(property)) {
+	public final void removeProperty(IsAnimationPropertyKey property) {
+		// checks if property is consistent and if the property has been previously added
+		if (IsAnimationPropertyKey.isValid(property) && animationProperties.containsKey(property.value())) {
 			// remove from object
 			remove(property);
 			// removes from cache
@@ -235,7 +237,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * 
 	 * @param animationElement animation collection instance to add
 	 */
-	public void setCollection(AnimationCollection animationElement) {
+	public final void setCollection(AnimationCollection animationElement) {
 		// checks if the sub element has been added
 		if (setSubElement(animationElement)) {
 			// manages the disabling of current collection
@@ -283,7 +285,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param collection collection instance used to check into animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
-	public void setCollectionEnabled(IsAnimationCollectionKey collection, boolean enabled) {
+	public final void setCollectionEnabled(IsAnimationCollectionKey collection, boolean enabled) {
 		// checks if collection is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// checks if is enabling
@@ -309,7 +311,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				// checks if equals to current defaults
 				if (Key.equals(collection, current)) {
 					// sets the default collection
-					// because if ere it means that teh current
+					// because if ere it means that the current
 					// collection has been disabled
 					IsAnimationCollectionKey defaultToSet = AnimationType.COLOR.equals(collection.type()) ? DefaultAnimationCollectionKey.COLORS : DefaultAnimationCollectionKey.NUMBERS;
 					// resets the default
@@ -335,7 +337,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param collection collection instance used to check into animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
-	public boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
+	public final boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		return IsAnimationCollectionKey.isValid(collection) && Key.equals(collection, getCurrentCollectionKey(collection));
 	}
@@ -346,7 +348,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param collection collection instance used to check into animation options
 	 * @return <code>true</code> if an animation collection instance is stored into the animation options
 	 */
-	public boolean hasCollection(IsAnimationCollectionKey collection) {
+	public final boolean hasCollection(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// checks if is cached
@@ -369,16 +371,18 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationCollection getCollection(IsAnimationCollectionKey collection) {
+	public final AnimationCollection getCollection(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// checks if is cached
 			if (animationCollections.containsKey(collection.value())) {
 				// returns because it is in the cached
 				return animationCollections.get(collection.value());
+			} else if (has(collection)) {
+				// if here, the collection is stored into object
+				// gets from the native object
+				return new AnimationCollection(this, collection, getDefaultValues().getCollection(collection), getValue(collection));
 			}
-			// gets from the native object
-			return new AnimationCollection(this, collection, getDefaultValues().getCollection(collection), getValue(collection));
 		}
 		// if here, the collection is not valid
 		// then returns null
@@ -390,9 +394,9 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
-	public void removeCollection(IsAnimationCollectionKey collection) {
-		// checks if collection is consistent
-		if (IsAnimationCollectionKey.isValid(collection)) {
+	public final void removeCollection(IsAnimationCollectionKey collection) {
+		// checks if collection is consistent and if the collection has been previously added
+		if (IsAnimationCollectionKey.isValid(collection) && animationCollections.containsKey(collection.value())) {
 			// gets the current collection
 			Key current = getCurrentCollectionKey(collection);
 			// checks if equals to current defaults

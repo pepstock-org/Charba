@@ -118,7 +118,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * 
 	 * @param easing animation easing.
 	 */
-	public void setEasing(Easing easing) {
+	public final void setEasing(Easing easing) {
 		setValue(Property.EASING, easing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -130,7 +130,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @return animation easing.
 	 */
 	@Override
-	public Easing getEasing() {
+	public final Easing getEasing() {
 		return getValue(Property.EASING, Easing.values(), defaultValues.getEasing());
 	}
 
@@ -139,7 +139,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * 
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
-	public void setDuration(int milliseconds) {
+	public final void setDuration(int milliseconds) {
 		setValue(Property.DURATION, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -151,7 +151,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @return the number of milliseconds an animation takes.
 	 */
 	@Override
-	public int getDuration() {
+	public final int getDuration() {
 		return getValue(Property.DURATION, defaultValues.getDuration());
 	}
 
@@ -160,7 +160,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * 
 	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
 	 */
-	public void setDebug(boolean debug) {
+	public final void setDebug(boolean debug) {
 		setValue(Property.DEBUG, debug);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -172,7 +172,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
 	 */
 	@Override
-	public boolean isDebug() {
+	public final boolean isDebug() {
 		return getValue(Property.DEBUG, defaultValues.isDebug());
 	}
 
@@ -181,7 +181,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * 
 	 * @param delay the delay before starting the animations
 	 */
-	public void setDelay(int delay) {
+	public final void setDelay(int delay) {
 		setValue(Property.DELAY, delay);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -193,7 +193,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @return the delay before starting the animations
 	 */
 	@Override
-	public int getDelay() {
+	public final int getDelay() {
 		return getValue(Property.DELAY, defaultValues.getDelay());
 	}
 
@@ -202,7 +202,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * 
 	 * @param loop <code>true</code> if loops the animations endlessly.
 	 */
-	public void setLoop(boolean loop) {
+	public final void setLoop(boolean loop) {
 		setValue(Property.LOOP, loop);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -214,7 +214,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
 	@Override
-	public boolean isLoop() {
+	public final boolean isLoop() {
 		return getValue(Property.LOOP, defaultValues.isLoop());
 	}
 

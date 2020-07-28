@@ -13,13 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
@@ -27,24 +25,15 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultAnimationCollection extends DefaultAnimationProperty implements IsDefaultAnimationCollection {
-
-	private final IsAnimationCollectionKey collection;
+public final class DefaultChartAnimationCollection extends AbstractDefaultChartAnimationProperty<IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
 
 	/**
-	 * To avoid any instantiation
-	 */
-	DefaultAnimationCollection() {
-		this.collection = null;
-	}
-
-	/**
-	 * Creates a default animation collection wrapping the {@link IsAnimationCollectionKey}.
+	 * Creates a default animation collection.
 	 * 
 	 * @param collection a default animation collection to wrap
 	 */
-	DefaultAnimationCollection(IsAnimationCollectionKey collection) {
-		this.collection = IsAnimationCollectionKey.checkAndGetIfValid(collection);
+	DefaultChartAnimationCollection(IsDefaultAnimationCollection collection) {
+		super(collection);
 	}
 
 	/*
@@ -54,7 +43,7 @@ public class DefaultAnimationCollection extends DefaultAnimationProperty impleme
 	 */
 	@Override
 	public List<IsAnimationPropertyKey> getProperties() {
-		return collection != null ? collection.properties() : Collections.emptyList();
+		return getDefaults().getProperties();
 	}
 
 }

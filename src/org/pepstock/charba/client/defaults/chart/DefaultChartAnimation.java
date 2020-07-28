@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
+import org.pepstock.charba.client.defaults.globals.DefaultAnimation;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
@@ -58,11 +59,20 @@ public final class DefaultChartAnimation extends DefaultChartAnimationMode<IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationMode)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
 	public IsDefaultAnimationMode getMode(IsAnimationModeKey mode) {
-		return getDefaults().getMode(mode);
+		// gets from defaults
+		IsDefaultAnimationMode storedMode = getDefaults().getMode(mode);
+		// checks if mode is consistent
+		if (storedMode != null) {
+			// returns a default chart animation mode wrapping the mode
+			// from chart
+			return new DefaultChartAnimationMode<IsDefaultAnimationMode>(storedMode);
+		}
+		// if here, the stored collection is not consistent
+		return DefaultAnimation.DEFAULT_ANIMATION_MODE;
 	}
 
 }

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
+import org.pepstock.charba.client.defaults.globals.DefaultAnimationMode;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
@@ -41,21 +42,39 @@ public class DefaultChartAnimationMode<T extends IsDefaultAnimationMode> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getProperty(org.pepstock.charba.client.options.IsAnimationPropertyKey)
 	 */
 	@Override
 	public IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property) {
-		return getDefaults().getProperty(property);
+		// gets from defaults
+		IsDefaultAnimationProperty storedProperty = getDefaults().getProperty(property);
+		// checks if property is consistent
+		if (storedProperty != null) {
+			// returns a default chart animation property wrapping the property
+			// from chart
+			return new DefaultChartAnimationProperty(storedProperty);
+		}
+		// if here, the stored property is not consistent
+		return DefaultAnimationMode.DEFAULT_ANIMATION_PROPERTY;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getCollection(org.pepstock.charba.client.options.IsAnimationCollection)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getCollection(org.pepstock.charba.client.options.IsAnimationCollectionKey)
 	 */
 	@Override
 	public IsDefaultAnimationCollection getCollection(IsAnimationCollectionKey collection) {
-		return getDefaults().getCollection(collection);
+		// gets from defaults
+		IsDefaultAnimationCollection storedCollection = getDefaults().getCollection(collection);
+		// checks if collection is consistent
+		if (storedCollection != null) {
+			// returns a default chart animation collection wrapping the collection
+			// from chart
+			return new DefaultChartAnimationCollection(storedCollection);
+		}
+		// if here, the stored collection is not consistent
+		return DefaultAnimationMode.DEFAULT_ANIMATION_COLLECTION;
 	}
 
 }

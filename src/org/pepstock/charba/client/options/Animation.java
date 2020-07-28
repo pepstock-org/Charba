@@ -15,10 +15,16 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 
@@ -79,6 +85,11 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 
 	// default values
 	private final IsDefaultAnimation defaultValues;
+	// map to store the custom of animation modes
+	// K = mode name, V = animation mode instance
+	private final Map<String, AnimationMode> animationModes = new HashMap<>();
+	// set to store the modes which have been disabled
+	private final Set<String> animationDisabledModes = new HashSet<>();
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and an envelop with native object to map java script properties. Called from <code>data</code>
@@ -150,33 +161,138 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	}
 
 	/**
-	 * Sets the animation options set for a specific mode.
+	 * Sets an animation mode instance to animation options.
 	 * 
-	 * @param animationElement the animation options set for a specific mode
+	 * @param animationElement the animation mode instance to add
 	 */
 	public final void setMode(AnimationMode animationElement) {
 		// adds and checks if added
 		if (setSubElement(animationElement)) {
+			// stores the object into the cache
+			animationModes.put(animationElement.getKey().value(), animationElement);
 			// checks if the node is already added to parent
 			checkAndAddToParent();
 		}
 	}
 
 	/**
-	 * Returns the animation options set for a specific mode.
+	 * Enables or disables an animation mode instance into animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation mode
+	 */
+	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
+		// checks if mode is consistent
+		if (IsAnimationModeKey.isValid(mode)) {
+			// checks if is enabling
+			if (enabled) {
+				// checks if cached
+				if (animationModes.containsKey(mode.value())) {
+					// stores the object
+					setValue(mode, animationModes.get(mode.value()).nativeObject());
+				} else if (ObjectType.BOOLEAN.equals(type(mode))) {
+					// if here is not cached
+					// then it must be removed in order to enable the default
+					// the type of mode should be boolean because
+					// set to false previously
+					removeIfExists(mode);
+				}
+				// removes from disabled modes
+				animationDisabledModes.remove(mode.value());
+			} else {
+				// sets the mode to false
+				setValue(mode, false);
+				// adds to the disabled modes
+				animationDisabledModes.add(mode.value());
+			}
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @return <code>true</code> if the animation mode is enabled, otherwise <code>false</code>
+	 */
+	public final boolean isModeEnabled(IsAnimationModeKey mode) {
+		// checks if mode is consistent
+		if (IsAnimationModeKey.isValid(mode)) {
+			// checks if a custom mode, previously added, is enabled
+			if (animationModes.containsKey(mode.value()) && ObjectType.OBJECT.equals(type(mode))) {
+				// returns that is enabled
+				return true;
+			}
+			// if here, it could be the case
+			// that a default mode has been enabled or disabled
+			// and the native object is not stored here but on defaults
+			// then it checks only if is not in the disabled mode
+			return !animationDisabledModes.contains(mode.value());
+		}
+		// if here, the mode is not valid
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @return <code>true</code> if an animation mode instance is stored into the animation options
+	 */
+	public final boolean hasMode(IsAnimationModeKey mode) {
+		// checks if mode is consistent
+		if (IsAnimationModeKey.isValid(mode)) {
+			// checks if is cached
+			if (animationModes.containsKey(mode.value())) {
+				// returns because it is in the cached
+				return true;
+			}
+			// checks on the native object
+			return ObjectType.OBJECT.equals(type(mode));
+		}
+		// if here, the mode is not valid
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * Returns an animation mode instance if stored into the animation options.
 	 * 
 	 * @param mode mode instance used to get for animation options
-	 * @return the animation options set for a specific mode.
+	 * @return an animation mode instance or <code>null</code> if does not exists
 	 */
 	@Override
 	public final AnimationMode getMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
 		if (IsAnimationModeKey.isValid(mode)) {
-			return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));
+			// checks if is cached
+			if (animationModes.containsKey(mode.value())) {
+				// returns because it is in the cached
+				return animationModes.get(mode.value());
+			} else if (has(mode)) {
+				// if here, the mode is stored into object
+				// gets from the native object
+				return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));
+			}
 		}
 		// if here, the mode is not valid
 		// then returns null
 		return null;
+	}
+
+	/**
+	 * Removes an animation mode previously added.
+	 * 
+	 * @param mode mode instance used to remove from animation options
+	 */
+	public final void removeMode(IsAnimationModeKey mode) {
+		// checks if mode is consistent and if the mode has been previously added
+		if (IsAnimationModeKey.isValid(mode) && animationModes.containsKey(mode.value())) {
+			// remove from object
+			remove(mode);
+			// removes from cache
+			animationModes.remove(mode.value());
+		}
 	}
 
 }

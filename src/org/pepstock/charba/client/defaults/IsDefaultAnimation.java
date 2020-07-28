@@ -29,7 +29,6 @@ public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 	 * 
 	 * @return If true, the chart will animate in with a rotation animation.
 	 */
-	// FIXME check
 	boolean isAnimateRotate();
 
 	/**
@@ -37,7 +36,6 @@ public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 	 * 
 	 * @return If true, will animate scaling the chart from the center outwards.
 	 */
-	// FIXME check
 	boolean isAnimateScale();
 
 	/**

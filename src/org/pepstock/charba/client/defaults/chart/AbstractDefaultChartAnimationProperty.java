@@ -13,48 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
  * CHART.JS default values for animation property.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of default interface of wrapped object
+ * 
  */
-public class DefaultAnimationProperty extends AbstractDefaultAnimation implements IsDefaultAnimationProperty {
-
-	private static final double DEFAULT_FROM = UndefinedValues.DOUBLE;
-
-	private static final boolean DEFAULT_FROM_AS_BOOLEAN = UndefinedValues.BOOLEAN;
-
-	private static final String DEFAULT_FROM_AS_STRING = UndefinedValues.STRING;
-
-	private static final double DEFAULT_TO = UndefinedValues.DOUBLE;
-
-	private static final boolean DEFAULT_TO_AS_BOOLEAN = UndefinedValues.BOOLEAN;
-
-	private static final String DEFAULT_TO_AS_STRING = UndefinedValues.STRING;
-
-	private final IsAnimationPropertyKey property;
+abstract class AbstractDefaultChartAnimationProperty<T extends IsDefaultAnimationProperty> extends AbstractDefaultChartAnimation<T> implements IsDefaultAnimationProperty {
 
 	/**
-	 * To avoid any instantiation
-	 */
-	DefaultAnimationProperty() {
-		this.property = null;
-	}
-
-	/**
-	 * Creates a default animation property wrapping the {@link IsAnimationPropertyKey}.
+	 * Creates a default animation property.
 	 * 
 	 * @param property a default animation property to wrap
 	 */
-	DefaultAnimationProperty(IsAnimationPropertyKey property) {
-		this.property = IsAnimationPropertyKey.checkAndGetIfValid(property);
+	AbstractDefaultChartAnimationProperty(T property) {
+		super(property);
 	}
 
 	/*
@@ -64,7 +43,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public AnimationType getType() {
-		return property != null ? property.type() : AnimationType.NUMBER;
+		return getDefaults().getType();
 	}
 
 	/*
@@ -74,7 +53,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public double getFrom() {
-		return DEFAULT_FROM;
+		return getDefaults().getFrom();
 	}
 
 	/*
@@ -84,7 +63,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public boolean getFromAsBoolean() {
-		return DEFAULT_FROM_AS_BOOLEAN;
+		return getDefaults().getFromAsBoolean();
 	}
 
 	/*
@@ -94,7 +73,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public String getFromAsString() {
-		return DEFAULT_FROM_AS_STRING;
+		return getDefaults().getFromAsString();
 	}
 
 	/*
@@ -104,7 +83,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public double getTo() {
-		return DEFAULT_TO;
+		return getDefaults().getTo();
 	}
 
 	/*
@@ -114,7 +93,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public boolean getToAsBoolean() {
-		return DEFAULT_TO_AS_BOOLEAN;
+		return getDefaults().getToAsBoolean();
 	}
 
 	/*
@@ -124,7 +103,7 @@ public class DefaultAnimationProperty extends AbstractDefaultAnimation implement
 	 */
 	@Override
 	public String getToAsString() {
-		return DEFAULT_TO_AS_STRING;
+		return getDefaults().getToAsString();
 	}
 
 }

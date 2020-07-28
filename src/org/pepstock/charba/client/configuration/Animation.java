@@ -169,25 +169,6 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the animation options set for a specific mode.
-	 * 
-	 * @param animationElement the animation options set for a specific mode
-	 */
-	public void setMode(AnimationMode animationElement) {
-		getConfiguration().getAnimation().setMode(animationElement);
-	}
-
-	/**
-	 * Returns the animation options set for a specific mode.
-	 * 
-	 * @param mode mode instance used to get for animation options
-	 * @return the animation options set for a specific mode.
-	 */
-	public AnimationMode getMode(IsAnimationModeKey mode) {
-		return getConfiguration().getAnimation().getMode(mode);
-	}
-
-	/**
 	 * Sets an animation property instance to animation options.
 	 * 
 	 * @param animationElement animation property instance to add
@@ -302,4 +283,63 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> {
 	public void removeCollection(IsAnimationCollectionKey collection) {
 		getConfiguration().getAnimation().removeCollection(collection);
 	}
+
+	/**
+	 * Sets the animation options set for a specific mode.
+	 * 
+	 * @param animationElement the animation options set for a specific mode
+	 */
+	public void setMode(AnimationMode animationElement) {
+		getConfiguration().getAnimation().setMode(animationElement);
+	}
+
+	/**
+	 * Enables or disables an animation mode instance into animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation mode
+	 */
+	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
+		getConfiguration().getAnimation().setModeEnabled(mode, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @return <code>true</code> if the animation mode is enabled, otherwise <code>false</code>
+	 */
+	public final boolean isModeEnabled(IsAnimationModeKey mode) {
+		return getConfiguration().getAnimation().isModeEnabled(mode);
+	}
+
+	/**
+	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @return <code>true</code> if an animation mode instance is stored into the animation options
+	 */
+	public final boolean hasMode(IsAnimationModeKey mode) {
+		return getConfiguration().getAnimation().hasMode(mode);
+	}
+
+	/**
+	 * Returns an animation mode instance if stored into the animation options.
+	 * 
+	 * @param mode mode instance used to get for animation options
+	 * @return an animation mode instance or <code>null</code> if does not exists
+	 */
+	public AnimationMode getMode(IsAnimationModeKey mode) {
+		return getConfiguration().getAnimation().getMode(mode);
+	}
+
+	/**
+	 * Removes an animation mode previously added.
+	 * 
+	 * @param mode mode instance used to remove from animation options
+	 */
+	public final void removeMode(IsAnimationModeKey mode) {
+		getConfiguration().getAnimation().removeMode(mode);
+	}
+
 }

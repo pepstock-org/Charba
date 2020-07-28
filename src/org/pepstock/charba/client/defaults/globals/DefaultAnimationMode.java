@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
@@ -28,15 +30,40 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  */
 public class DefaultAnimationMode extends AbstractDefaultAnimation implements IsDefaultAnimationMode {
 
-	private static final DefaultAnimationProperty DEFAULT_ANIMATION_PROPERTY_ELEMENT = new DefaultAnimationProperty();
+	/**
+	 * Default animation property element. 
+	 */
+	public static final IsDefaultAnimationProperty DEFAULT_ANIMATION_PROPERTY = new DefaultAnimationProperty();
+	/**
+	 * Default animation collection element. 
+	 */
+	public static final IsDefaultAnimationCollection DEFAULT_ANIMATION_COLLECTION = new DefaultAnimationCollection();
 
-	private static final DefaultAnimationCollection DEFAULT_ANIMATION_COLLECTION_ELEMENT = new DefaultAnimationCollection();
+	private final IsAnimationModeKey mode;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	DefaultAnimationMode() {
-		// do nothing
+		this.mode = null;
+	}
+
+	/**
+	 * Creates a default animation mode wrapping the {@link IsAnimationModeKey}.
+	 * 
+	 * @param mode a default animation mode to wrap
+	 */
+	DefaultAnimationMode(IsAnimationModeKey mode) {
+		this.mode = Key.checkAndGetIfValid(mode);
+	}
+
+	/**
+	 * Returns the mode instance.
+	 * 
+	 * @return the mode instance
+	 */
+	final IsAnimationModeKey getMode() {
+		return mode;
 	}
 
 	/*
@@ -46,7 +73,7 @@ public class DefaultAnimationMode extends AbstractDefaultAnimation implements Is
 	 */
 	@Override
 	public IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property) {
-		return DEFAULT_ANIMATION_PROPERTY_ELEMENT;
+		return DEFAULT_ANIMATION_PROPERTY;
 	}
 
 	/*
@@ -56,7 +83,7 @@ public class DefaultAnimationMode extends AbstractDefaultAnimation implements Is
 	 */
 	@Override
 	public IsDefaultAnimationCollection getCollection(IsAnimationCollectionKey collection) {
-		return DEFAULT_ANIMATION_COLLECTION_ELEMENT;
+		return DEFAULT_ANIMATION_COLLECTION;
 	}
 
 }
