@@ -22,7 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartAnimationProperty extends AbstractDefaultChartAnimationProperty<IsDefaultAnimationProperty> implements IsDefaultAnimationProperty {
+public final class DefaultChartAnimationProperty extends AbstractDefaultChartAnimationProperty<IsDefaultAnimationProperty> {
 
 	/**
 	 * Creates a default animation property.
