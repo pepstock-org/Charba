@@ -32,6 +32,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
 
 /**
@@ -313,6 +314,17 @@ public interface IsChart {
 	 * A config object can be provided with additional configuration for the update process.<br>
 	 * This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
+	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
+	 */
+	void update(IsAnimationModeKey mode);
+
+	/**
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.<br>
+	 * A config object can be provided with additional configuration for the update process.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * 
 	 * @param config a config object can be provided with additional configuration for the update process
 	 */
 	void update(UpdateConfiguration config);
@@ -321,6 +333,17 @@ public interface IsChart {
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	void reconfigure();
+	
+	/**
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.<br>
+	 * A animation mode key can be provided for the update process using a specific animation configuration.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * 
+	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
+	 */
+	void reconfigure(IsAnimationModeKey mode);
 
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
@@ -336,14 +359,6 @@ public interface IsChart {
 	 * Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	void render();
-
-	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A config object can be provided with
-	 * additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param config a config object can be provided with additional configuration for the render process
-	 */
-	void render(UpdateConfiguration config);
 
 	/**
 	 * Looks for the dataset that matches the current index and returns that metadata.

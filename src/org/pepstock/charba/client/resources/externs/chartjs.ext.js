@@ -13,15 +13,14 @@ function Chart(context, configuration) {}
  */
 Chart.prototype.resize = function() {};
 /**
- * @param {Object=} configuration
+ * @param {string=} configuration
  * @return {undefined}
  */
 Chart.prototype.update = function(configuration) {};
 /**
- * @param {Object=} configuration
  * @return {undefined}
  */
-Chart.prototype.render = function(configuration) {};
+Chart.prototype.render = function() {};
 /**
  * @return {undefined}
  */

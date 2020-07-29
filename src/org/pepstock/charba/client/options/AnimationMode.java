@@ -15,7 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.UpdateConfiguration;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -45,6 +49,19 @@ public final class AnimationMode extends AbstractAnimationMode<IsAnimationModeKe
 	 */
 	public AnimationMode(IsAnimationModeKey mode, IsDefaultAnimationMode defaultValues) {
 		this(null, mode, defaultValues, null);
+	}
+	
+	/**
+	 * Creates an animation options to configure a specific mode.<br>
+	 * This constructor is used by {@link UpdateConfiguration} in order to get an animation mode to pass to {@link IsChart#update()}.<br>
+	 * Called from <code>main</code> package
+	 * 
+	 * @param mode mode instance used to get for animation options
+	 * @param defaultValues default provider
+	 * @param envelop the envelop for options as native options
+	 */
+	public AnimationMode(IsAnimationModeKey mode, IsDefaultAnimationMode defaultValues, ChartEnvelop<NativeObject> envelop) {
+		this(null, mode, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

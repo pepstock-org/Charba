@@ -16,6 +16,8 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.options.AnimationCollection;
+import org.pepstock.charba.client.options.AnimationProperty;
 
 /**
  * Comfortable object to create {@link UpdateConfiguration} item.
@@ -66,13 +68,57 @@ public final class UpdateConfigurationBuilder {
 	}
 
 	/**
-	 * If <code>true</code>, the animation can be interrupted by other animations.
+	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
 	 * 
-	 * @param intersect if <code>true</code>, the animation can be interrupted by other animations.
+	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
 	 * @return builder instance
 	 */
-	public UpdateConfigurationBuilder setLazy(boolean intersect) {
-		configuration.setLazy(intersect);
+	public UpdateConfigurationBuilder setDebug(boolean debug) {
+		configuration.setDebug(debug);
+		return this;
+	}
+
+	/**
+	 * Sets the delay before starting the animations.
+	 * 
+	 * @param delay the delay before starting the animations
+	 * @return builder instance
+	 */
+	public UpdateConfigurationBuilder setDelay(int delay) {
+		configuration.setDelay(delay);
+		return this;
+	}
+
+	/**
+	 * If set to <code>true</code>, loops the animations endlessly.
+	 * 
+	 * @param loop <code>true</code> if loops the animations endlessly.
+	 * @return builder instance
+	 */
+	public UpdateConfigurationBuilder setLoop(boolean loop) {
+		configuration.setLoop(loop);
+		return this;
+	}
+
+	/**
+	 * Sets an animation property instance to animation options.
+	 * 
+	 * @param animationElement animation property instance to add
+	 * @return builder instance
+	 */
+	public UpdateConfigurationBuilder setProperty(AnimationProperty animationElement) {
+		configuration.setProperty(animationElement);
+		return this;
+	}
+
+	/**
+	 * Sets an animation collection instance to animation options.
+	 * 
+	 * @param animationElement animation collection instance to add
+	 * @return builder instance
+	 */
+	public UpdateConfigurationBuilder setCollection(AnimationCollection animationElement) {
+		configuration.setCollection(animationElement);
 		return this;
 	}
 

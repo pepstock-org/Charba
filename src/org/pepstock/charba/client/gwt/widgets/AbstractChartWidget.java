@@ -33,6 +33,7 @@ import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.dom.client.Element;
@@ -325,6 +326,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#update(org.pepstock.charba.client.options.IsAnimationModeKey)
+	 */
+	@Override
+	public final void update(IsAnimationModeKey mode) {
+		chart.update(mode);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#update(org.pepstock.charba.client.UpdateConfiguration)
 	 */
 	@Override
@@ -345,6 +356,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.options.IsAnimationModeKey)
+	 */
+	@Override
+	public void reconfigure(IsAnimationModeKey mode) {
+		chart.reconfigure(mode);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.UpdateConfiguration)
 	 */
 	@Override
@@ -360,16 +381,6 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public final void render() {
 		chart.render();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#render(org.pepstock.charba.client.UpdateConfiguration)
-	 */
-	@Override
-	public final void render(UpdateConfiguration config) {
-		chart.render(config);
 	}
 
 	/*

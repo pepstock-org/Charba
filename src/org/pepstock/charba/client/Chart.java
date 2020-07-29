@@ -86,29 +86,22 @@ public final class Chart {
 	native void update();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart. A config
-	 * object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some different
-	 * animation is desired.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.<br>
+	 * A animation mode key can be provided for the update process using a specific animation configuration.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
-	 * @param config a config object can be provided with additional configuration for the update process
+	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@JsMethod
-	native void update(NativeObject config);
+	native void update(String mode);
 
 	/**
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	@JsMethod
 	native void render();
-
-	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case. A config object can be provided with
-	 * additional configuration for the render process. This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param config a config object can be provided with additional configuration for the render process
-	 */
-	@JsMethod
-	native void render(NativeObject config);
 
 	/**
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
