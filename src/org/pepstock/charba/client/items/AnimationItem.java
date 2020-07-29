@@ -15,12 +15,16 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 
 /**
- * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
+ * The <code>onProgress</code> and <code>onComplete</code> events are useful for synchronizing an external draw to the chart animation.<br>
  * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
@@ -32,7 +36,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		CHART("chart"), // FIXME https://www.chartjs.org/docs/master/configuration/animations#animation-callbacks
+		CHART("chart"), 
 		CURRENT_STEP("currentStep"),
 		NUM_STEPS("numSteps");
 
@@ -61,12 +65,28 @@ public final class AnimationItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the item using an envelop with native java script object which contains all properties.<br>
+	 * It is called from <code>configuration</code> package.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with native java script object which contains all properties.
 	 */
-	AnimationItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public AnimationItem(ConfigurationEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
+	/**
+	 * Returns the CHARBA chart instance.
+	 * 
+	 * @return the CHARBA chart instance
+	 */
+	public IsChart getChart() {
+		// checks if chart is inside the context
+		if (ObjectType.OBJECT.equals(type(Property.CHART))) {
+			return getNativeChart(Property.CHART).getChart();
+		}
+		// if here the context is not consistent
+		// returns null
+		return null;
 	}
 
 	/**

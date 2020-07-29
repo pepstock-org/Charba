@@ -28,7 +28,6 @@ import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-import org.pepstock.charba.client.items.AnimationObject;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -123,19 +122,19 @@ public class ConfigurationAnimation extends Animation implements IsEventProvider
 		completeCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
-				// creates animation object
-				AnimationObject animationObject = new AnimationObject(nativeObject);
+				// creates animation item
+				AnimationItem animationItem = new AnimationItem(new ConfigurationEnvelop<>(nativeObject));
 				// invokes the custom callback
-				onComplete(animationObject.getAnimationItem());
+				onComplete(animationItem);
 			}
 		});
 		progressCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
-				// creates animation object
-				AnimationObject animationObject = new AnimationObject(nativeObject);
+				// creates animation item
+				AnimationItem animationItem = new AnimationItem(new ConfigurationEnvelop<>(nativeObject));
 				// invokes the custom callback
-				onProgress(animationObject.getAnimationItem());
+				onProgress(animationItem);
 			}
 		});
 	}
