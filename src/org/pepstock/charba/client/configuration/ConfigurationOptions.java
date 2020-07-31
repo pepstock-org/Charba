@@ -181,6 +181,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
+		// FIXME activate the callback to get the animation configuration		
 		animation = new ConfigurationAnimation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
 		legend = new Legend(chart, getConfiguration());
