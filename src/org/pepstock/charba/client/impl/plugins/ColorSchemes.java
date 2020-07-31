@@ -291,14 +291,10 @@ public final class ColorSchemes extends AbstractPlugin {
 			// for rendering
 			List<IsColor> colorsList = Arrays.asList(color.alpha(options.getBackgroundColorAlpha()));
 			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colorsList, options.isReverse(), options.getBackgroundColorAlpha()));
-			//hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
-			
 			// checks if border has been requested
 			if (ColorSchemesUtil.get().getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
 				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colorsList, options.isReverse(), Color.DEFAULT_ALPHA));
-				
-				//hovingDataset.setBorderColor(color);
 			}
 		}
 	}
@@ -321,7 +317,6 @@ public final class ColorSchemes extends AbstractPlugin {
 		liningDataset.setPointHoverBorderColor(color);
 		// sets point hover background colors, applying the transparency
 		liningDataset.setPointHoverBackgroundColor(backgroundColor);
-
 	}
 
 	/**
