@@ -29,19 +29,19 @@ import org.pepstock.charba.client.enums.JoinStyle;
  */
 public final class DefaultLine extends AbstractDefaultOptionsElement implements IsDefaultLine {
 
-	// default line tension FIXME check the defaults
-	private static final float DEFAULT_TENSION = 0.4F;
+	// default line tension
+	private static final double DEFAULT_TENSION = 0D;
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
 	// default border width
 	private static final int DEFAULT_BORDER_WIDTH = 3;
-	// default line tension
+	// default border color
 	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
-
+	// default border dash offset
 	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
-
+	// default cap bezier points
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
-
+	// default stepped
 	private static final boolean DEFAULT_STEPPED = false;
 
 	/**
