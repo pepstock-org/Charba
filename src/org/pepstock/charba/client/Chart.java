@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.ArrayChart;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeName;
@@ -52,6 +53,14 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native NativeHelpers getHelpers();
+
+	/**
+	 * Returns the <code>instances</code> property by native object.
+	 * 
+	 * @return the <code>instances</code> property by native object.
+	 */
+	@JsProperty
+	public static native ArrayChart getInstances();
 
 	/**
 	 * Builds CHART object at CHART.JS level.<br>

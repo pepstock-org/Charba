@@ -248,6 +248,11 @@ public final class ColorSchemes extends AbstractPlugin {
 				// if yes, apply the color (passed as list but it's only 1) to borders properties
 				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), Color.DEFAULT_ALPHA));
 			}
+			// checks if border has been requested
+			if (!hovingDataset.getBorderWidth().isEmpty()) {
+				// if yes, apply the color (passed as list but it's only 1) to borders properties
+				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), Color.DEFAULT_ALPHA));
+			}
 		} else {
 			// sets background colors, applying the transparency
 			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
@@ -282,12 +287,18 @@ public final class ColorSchemes extends AbstractPlugin {
 			// if here is at dataset level
 			// every dataset has got own color
 			// sets background colors, applying the transparency
-
-			hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
+			// uses anyway an indexable value in order to avoid errors on CHART.JS
+			// for rendering
+			List<IsColor> colorsList = Arrays.asList(color.alpha(options.getBackgroundColorAlpha()));
+			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colorsList, options.isReverse(), options.getBackgroundColorAlpha()));
+			//hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
+			
 			// checks if border has been requested
 			if (ColorSchemesUtil.get().getMaxBorderWidth(hovingDataset) > 0) {
 				// if yes, apply the colors to borders properties
-				hovingDataset.setBorderColor(color);
+				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colorsList, options.isReverse(), Color.DEFAULT_ALPHA));
+				
+				//hovingDataset.setBorderColor(color);
 			}
 		}
 	}

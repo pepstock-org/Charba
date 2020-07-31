@@ -144,15 +144,6 @@ CharbaJsControllerHelper.linkScales = function(chartType, context) {};
 CharbaJsControllerHelper.buildOrUpdateElements = function(chartType, context) {};
 /**
  * @constructor
- * @return {CharbaJsWindowHelper}
- */	
-function CharbaJsWindowHelper() {}	
-/**
- * @return {undefined}
- */
-CharbaJsWindowHelper.enableResizeOnBeforePrint;
-/**
- * @constructor
  * @return {CharbaJsPositionerHelper}
  */	
 function CharbaJsPositionerHelper() {}	

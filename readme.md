@@ -238,6 +238,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the return value of `getTooltip` method of `TooltipPluginItem` class, returning now a `TooltipModel` object instead of `TooltipNode`.
  * reduce visibility of `setHidden` method of `Dataset` class and add hidden argument to `Dataset` constructor in order to set the initial visibility. To change the dataset visibility, use the `setDatasetVisibility` chart method.
  * remove `render(UpdateConfiguration)` method has been removed because it is not available anymore on CHART.JS.
+ * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
   
 ### Features
 
@@ -309,6 +310,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * reduce the visibility of objects which must get a javascript native object as argument on constructor, using an envelop. This reduces the possibility to map a native object with a wrong wrapper.
  * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
  * rename the controller id for `Meter` and `Gauge` charts adding `charba` prefix in order to avoid overlapping with possible other controllers with `meter` and `gauge` ids.
+ * `Window.enableResizeOnBeforePrint()` method has been fully implemented by JSINTEROP.
 
 License
 -------

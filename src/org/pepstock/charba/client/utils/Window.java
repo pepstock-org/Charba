@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.utils.WindowHelper.OnBeforePrintCallback;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -44,6 +46,14 @@ public final class Window {
 	@JsProperty(name = "undefined")
 	static native Object undefined();
 
+	/**
+	 * Sets the <code>onbeforeprint</code> callback.
+	 * 
+	 * @param callback the callback to be set
+	 */
+	@JsProperty(name = "onbeforeprint")
+	static native void onBeforePrint(OnBeforePrintCallback callback);
+	
 	/**
 	 * Returns the Console object
 	 *
@@ -116,5 +126,15 @@ public final class Window {
 	 * @return A String, representing the base-64 encoded string
 	 */
 	public static native String btoa(String str);
+	
+	/**
+	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts to need to resize. However, the resize won't happen
+	 * automatically. To support resizing charts when printing, one needs to hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
+	 * 
+	 */
+	@JsOverlay
+	public static void enableResizeOnBeforePrint() {
+		WindowHelper.get().enableResizeOnBeforePrint();
+	}
 
 }

@@ -32,7 +32,6 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	private enum Property implements Key
 	{
-		// FIXME interface is needed do not duplicate code with the bar dataset
 		// lining datasets
 		SHOW_LINE("showLine");
 

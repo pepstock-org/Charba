@@ -153,6 +153,10 @@ Chart.defaults;
  */
 Chart.helpers;
 /**
+ * @type {Array}
+ */
+Chart.instances;
+/**
  * @constructor
  * @return {CharbaChartHelpers}
  */

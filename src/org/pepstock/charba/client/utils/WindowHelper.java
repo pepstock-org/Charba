@@ -15,34 +15,49 @@
 */
 package org.pepstock.charba.client.utils;
 
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.ArrayChart;
+
+import jsinterop.annotations.JsFunction;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on <code>window</code> java script
- * object.
+ * This is a singleton with some utilities to act on <code>window</code> java script object.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JsWindowHelper {
+final class WindowHelper {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback to set to <code>onbeforeprint</code> Window object property.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface OnBeforePrintCallback {
+
+		/**
+		 * Method of function to be called on before print.
+		 * 
+		 * @param event event object
+		 */
+		void call(Object event);
+	}
+
 	// static instance for singleton
-	private static final JsWindowHelper INSTANCE = new JsWindowHelper();
+	private static final WindowHelper INSTANCE = new WindowHelper();
 
 	private boolean enableResizeOnBeforePrint = false;
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private JsWindowHelper() {
-		// to be sure that CHART.JS java script object is injected
-		// some methods are calling CHART.JS for this reason is mandatory
-		// to include also chart.js
-		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
-		// to be sure that CHARBA java script object is injected
-		// invoking the JsHelper
-		JsHelper.get();
+	private WindowHelper() {
 	}
 
 	/**
@@ -50,7 +65,7 @@ public final class JsWindowHelper {
 	 * 
 	 * @return helper instance.
 	 */
-	public static JsWindowHelper get() {
+	static WindowHelper get() {
 		return INSTANCE;
 	}
 
@@ -59,14 +74,34 @@ public final class JsWindowHelper {
 	 * automatically. To support resizing charts when printing, one needs to hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
 	 * 
 	 */
-	public void enableResizeOnBeforePrint() {
-		// FIXME do by jsinterop
+	void enableResizeOnBeforePrint() {
 		// checks if already set
 		if (!enableResizeOnBeforePrint) {
 			// if not, set the resizing function
-			NativeJsWindowHelper.enableResizeOnBeforePrint();
+			Window.onBeforePrint((event) -> onResize());
 			// sets the flag
 			enableResizeOnBeforePrint = true;
+		}
+	}
+
+	/**
+	 * Resizes all active chart instances before printing.s
+	 */
+	private void onResize() {
+		// gets current instances
+		ArrayChart charts = Chart.getInstances();
+		// checks if array is consistent
+		if (charts != null) {
+			// scans charts
+			for (int i = 0; i < charts.length(); i++) {
+				// gets CHARBA chart
+				IsChart charbaChart = charts.get(i).getChart();
+				// checks if consistent
+				if (IsChart.isValid(charbaChart)) {
+					// invokes resize
+					charbaChart.resize();
+				}
+			}
 		}
 	}
 

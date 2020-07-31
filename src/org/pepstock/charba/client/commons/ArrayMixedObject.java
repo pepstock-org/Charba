@@ -27,7 +27,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayMixedObject extends Array {
-
+	
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element.
 	 * 
