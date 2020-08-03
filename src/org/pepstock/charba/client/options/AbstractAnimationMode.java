@@ -25,8 +25,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationMode;
-import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
 
 /**
  * Abstract options to define the animation for a specific update mode or for the main animation options.
@@ -37,38 +35,6 @@ import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
  */
 abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimationMode> extends AbstractAnimation<T, D> implements IsDefaultAnimationMode {
 
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		CHARBA_CURRENT_NUMBERS_COLLECTION("_charbaCurrentNumbersCollection"),
-		CHARBA_CURRENT_COLORS_COLLECTION("_charbaCurrentColorsCollection");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public final String value() {
-			return value;
-		}
-
-	}
-
 	// map to store the custom of animation collections
 	// K = collection name, V = animation collection instance
 	private final Map<String, AnimationCollection> animationCollections = new HashMap<>();
@@ -77,10 +43,6 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	private final Map<String, AnimationProperty> animationProperties = new HashMap<>();
 	// set to store the properties which have been disabled
 	private final Set<String> animationDisabledProperties = new HashSet<>();
-	// current numbers collection
-	private Key currentNumbersCollection = null;
-	// current colors collection
-	private Key currentColorsCollection = null;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -92,9 +54,6 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 */
 	AbstractAnimationMode(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
-		// gets current collections if there are
-		currentColorsCollection = Key.create(getValue(Property.CHARBA_CURRENT_COLORS_COLLECTION, DefaultAnimationCollectionKey.COLORS.value()));
-		currentNumbersCollection = Key.create(getValue(Property.CHARBA_CURRENT_NUMBERS_COLLECTION, DefaultAnimationCollectionKey.NUMBERS.value()));
 	}
 
 	/**
@@ -240,42 +199,10 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	public final void setCollection(AnimationCollection animationElement) {
 		// checks if the sub element has been added
 		if (setSubElement(animationElement)) {
-			// manages the disabling of current collection
-			manageCollection(animationElement);
 			// stores the collection into cached
 			animationCollections.put(animationElement.getKey().value(), animationElement);
 			// checks if the node is already added to parent
 			checkAndAddToParent();
-		}
-	}
-
-	/**
-	 * Manages the animation collection in order to set the current collection depending on collection type.
-	 * 
-	 * @param animationElement animation collection instance to check
-	 */
-	private void manageCollection(AnimationCollection animationElement) {
-		// checks if equals to the current
-		if (animationElement != null && IsAnimationCollectionKey.isValid(animationElement.getKey())) {
-			// manages
-			manageCollection(animationElement.getKey());
-		}
-	}
-
-	/**
-	 * Manages the animation collection in order to set the current collection depending on collection type.
-	 * 
-	 * @param collection collection instance used to check into animation options
-	 */
-	private void manageCollection(IsAnimationCollectionKey collection) {
-		// gets the current collection set previously
-		Key current = getCurrentCollectionKey(collection);
-		// checks if equals to the current
-		if (!Key.equals(collection, current)) {
-			// disable the current one
-			setValue(current, false);
-			// stores the current
-			setCurrentCollectionKey(collection);
 		}
 	}
 
@@ -301,32 +228,9 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 					// set to false previously
 					removeIfExists(collection);
 				}
-				// gets the current collection
-				manageCollection(collection);
 			} else {
 				// sets the collection to false
 				setValue(collection, false);
-				// gets the current collection
-				Key current = getCurrentCollectionKey(collection);
-				// checks if equals to current defaults
-				if (Key.equals(collection, current)) {
-					// sets the default collection
-					// because if ere it means that the current
-					// collection has been disabled
-					IsAnimationCollectionKey defaultToSet = AnimationType.COLOR.equals(collection.type()) ? DefaultAnimationCollectionKey.COLORS : DefaultAnimationCollectionKey.NUMBERS;
-					// resets the default
-					setCurrentCollectionKey(defaultToSet);
-					// checks if it has been changed from default
-					if (animationCollections.containsKey(defaultToSet.value())) {
-						// stores the changed object of defaults
-						setValue(defaultToSet, animationCollections.get(defaultToSet.value()).nativeObject());
-					} else {
-						// removes the key
-						// because the default is set
-						// on default object
-						removeIfExists(defaultToSet);
-					}
-				}
 			}
 		}
 	}
@@ -339,7 +243,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 */
 	public final boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
-		return IsAnimationCollectionKey.isValid(collection) && Key.equals(collection, getCurrentCollectionKey(collection));
+		return IsAnimationCollectionKey.isValid(collection) && !ObjectType.BOOLEAN.equals(type(collection));
 	}
 
 	/**
@@ -397,62 +301,10 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	public final void removeCollection(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent and if the collection has been previously added
 		if (IsAnimationCollectionKey.isValid(collection) && animationCollections.containsKey(collection.value())) {
-			// gets the current collection
-			Key current = getCurrentCollectionKey(collection);
-			// checks if equals to current defaults
-			if (!Key.equals(collection, current)) {
-				// resets the default
-				setCurrentCollectionKey(AnimationType.COLOR.equals(collection.type()) ? DefaultAnimationCollectionKey.COLORS : DefaultAnimationCollectionKey.NUMBERS);
-			}
 			// remove from object
 			remove(collection);
 			// removes from cache
 			animationCollections.remove(collection.value());
-		}
-	}
-
-	/**
-	 * Returns the current animation collection, collection depending on collection type.
-	 * 
-	 * @param collection collection instance used to get for animation options
-	 * @return the current animation collection
-	 */
-	private Key getCurrentCollectionKey(IsAnimationCollectionKey collection) {
-		// checks if is a numbers or colors
-		if (DefaultAnimationCollectionKey.COLORS.type().equals(collection.type())) {
-			return currentColorsCollection;
-		} else if (DefaultAnimationCollectionKey.NUMBERS.type().equals(collection.type())) {
-			return currentNumbersCollection;
-		}
-		// if here, there is a boolean animation type
-		// not supported yet
-		throw new IllegalArgumentException("Unable to manage '" + collection.type() + "' animation type for collection '" + collection.value() + "'");
-	}
-
-	/**
-	 * Sets the current animation collection, collection depending on collection type.
-	 * 
-	 * @param collection collection instance to set as current collection
-	 */
-	private void setCurrentCollectionKey(IsAnimationCollectionKey collection) {
-		// sets the property to use to store current
-		Key currentProperty = null;
-		// checks if is a numbers or colors
-		if (DefaultAnimationCollectionKey.COLORS.type().equals(collection.type())) {
-			currentColorsCollection = collection;
-			currentProperty = Property.CHARBA_CURRENT_COLORS_COLLECTION;
-		} else if (DefaultAnimationCollectionKey.NUMBERS.type().equals(collection.type())) {
-			currentColorsCollection = collection;
-			currentProperty = Property.CHARBA_CURRENT_NUMBERS_COLLECTION;
-		}
-		// checks if current property is consistent
-		if (Key.isValid(currentProperty)) {
-			// stores values
-			setValue(currentProperty, collection.value());
-		} else {
-			// if here, there is a boolean animation type
-			// not supported yet
-			throw new IllegalArgumentException("Unable to manage '" + collection.type() + "' animation type for collection '" + collection.value() + "'");
 		}
 	}
 

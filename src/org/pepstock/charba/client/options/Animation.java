@@ -16,9 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
@@ -87,8 +85,6 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	// map to store the custom of animation modes
 	// K = mode name, V = animation mode instance
 	private final Map<String, AnimationMode> animationModes = new HashMap<>();
-	// set to store the modes which have been disabled
-	private final Set<String> animationDisabledModes = new HashSet<>();
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -171,59 +167,20 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	}
 
 	/**
-	 * Enables or disables an animation mode instance into animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation mode
-	 */
-	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
-		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
-			// checks if is enabling
-			if (enabled) {
-				// checks if cached
-				if (animationModes.containsKey(mode.value())) {
-					// stores the object
-					setValue(mode, animationModes.get(mode.value()).nativeObject());
-				} else if (ObjectType.BOOLEAN.equals(type(mode))) {
-					// if here is not cached
-					// then it must be removed in order to enable the default
-					// the type of mode should be boolean because
-					// set to false previously
-					removeIfExists(mode);
-				}
-				// removes from disabled modes
-				animationDisabledModes.remove(mode.value());
-			} else {
-				// sets the mode to false
-				setValue(mode, false);
-				// adds to the disabled modes
-				animationDisabledModes.add(mode.value());
-			}
-		}
-	}
-
-	/**
 	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
 	 * 
 	 * @param mode mode instance used to check into animation options
 	 * @return <code>true</code> if the animation mode is enabled, otherwise <code>false</code>
 	 */
 	public final boolean isModeEnabled(IsAnimationModeKey mode) {
-		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
-			// checks if a custom mode, previously added, is enabled
-			if (animationModes.containsKey(mode.value()) && ObjectType.OBJECT.equals(type(mode))) {
-				// returns that is enabled
-				return true;
-			}
-			// if here, it could be the case
-			// that a default mode has been enabled or disabled
-			// and the native object is not stored here but on defaults
-			// then it checks only if is not in the disabled mode
-			return !animationDisabledModes.contains(mode.value());
+		// checks if mode is consistent, not equals to none and has got the cached element
+		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE) && hasMode(mode)) {
+			// gets the mode element
+			AnimationMode modeElement = getMode(mode);
+			// checks if the duration is not equals to 0
+			return modeElement.getDuration() > 0;
 		}
-		// if here, the mode is not valid
+		// if here, the mode is not valid or not stored
 		// then returns false
 		return false;
 	}

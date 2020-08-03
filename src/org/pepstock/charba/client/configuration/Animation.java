@@ -294,16 +294,6 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Enables or disables an animation mode instance into animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation mode
-	 */
-	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
-		getConfiguration().getAnimation().setModeEnabled(mode, enabled);
-	}
-
-	/**
 	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
 	 * 
 	 * @param mode mode instance used to check into animation options
