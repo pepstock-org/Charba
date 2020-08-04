@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
+import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -43,7 +44,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
+public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions, TooltipsAnimationCallback> {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -142,6 +143,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	private enum Property implements Key
 	{
+		ANIMATION("animation"),
 		CUSTOM("custom"),
 		ITEM_SORT("itemSort"),
 		FILTER("filter");
@@ -217,6 +219,26 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		});
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#createAnimationOptions()
+	 */
+	@Override
+	protected final TooltipsAnimationOptions createAnimationOptions() {
+		return new TooltipsAnimationOptions(getConfiguration().getTooltips().getAnimation());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#getDefaultAnimationOptions()
+	 */
+	@Override
+	protected final TooltipsAnimationOptions getDefaultAnimationOptions() {
+		return getConfiguration().getTooltips().createAnimationOptions();
+	}
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -224,24 +246,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public final Animation getAnimation() {
 		return animation;
-	}
-	
-	/**
-	 * Enables or disables the animation.
-	 * 
-	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
-	 */
-	public void setAnimationEnabled(boolean enabled) {
-		getConfiguration().setAnimationEnabled(enabled);
-	}
-
-	/**
-	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
-	 * 
-	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
-	 */
-	public boolean isAnimationEnabled() {
-		return getConfiguration().isAnimationEnabled();
 	}
 
 	/**

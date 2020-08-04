@@ -127,4 +127,14 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 		setInternalCallbackToModel(model, key, proxy);
 	}
 
+	/**
+	 * Resets a callback previously set overriding it with a options node at the specific key.
+	 * 
+	 * @param model element where resetting the callback
+	 * @param key property name to use to reset the callback
+	 * @param options the object to store overriding the callback
+	 */
+	protected final void resetCallbackToModel(AbstractNode model, Key key, AbstractNode options) {
+		resetInternalCallbackToModel(model, key, options);
+	}
 }

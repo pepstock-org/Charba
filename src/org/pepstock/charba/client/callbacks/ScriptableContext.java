@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -68,6 +69,15 @@ public final class ScriptableContext extends AbstractScriptableContext {
 		public String value() {
 			return value;
 		}
+	}
+
+	/**
+	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
+	 * 
+	 * @param envelop envelop of native object instance to be wrapped.
+	 */
+	public ScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

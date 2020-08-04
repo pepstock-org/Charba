@@ -100,6 +100,8 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedScales getScales() {
 		return scales;
 	}
+	
+	// FIXME Envelop?
 
 	/**
 	 * This method adds new event function proxy to the element, as property of native java script object.
@@ -117,9 +119,29 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
 	 */
-	// FIXME check if still used
 	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(this, property, proxy);
+	}
+
+	/**
+	 * This method adds new callback function proxy to the element, as property of native java script object.
+	 * 
+	 * @param property property name.
+	 * @param options function proxy to activate.
+	 */
+	public void resetCallback(Key property, Animation options) {
+		resetCallbackToModel(this, property, options);
+	}
+
+	/**
+	 * Adds a callback proxy function to animation element instance.
+	 * 
+	 * @param animation animation element instance.
+	 * @param property property name.
+	 * @param proxy function proxy to activate.
+	 */
+	public void setCallback(Animation animation, Key property, CallbackProxy.Proxy proxy) {
+		setCallbackToModel(animation, property, proxy);
 	}
 
 	/**

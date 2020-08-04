@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Helpers;
+import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.TooltipsAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
@@ -125,6 +128,18 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
+	}
+	
+	/**
+	 * Creates an animations options to use into chart tooltips animation callback.
+	 * 
+	 * @return an animations options to use into chart tooltips animation callback
+	 * @see TooltipsAnimationCallback
+	 */
+	public final TooltipsAnimationOptions createAnimationOptions() {
+		// clones the current animation options and
+		// creates and returns a configuration animation		
+		return new TooltipsAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 
 	/**

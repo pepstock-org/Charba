@@ -26,6 +26,7 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -76,7 +77,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, IsEventProvider {
+public abstract class ConfigurationOptions extends AnimationOptionsContainer<ConfigurationAnimationOptions, ConfigurationAnimationCallback> implements ConfigurationElement, IsEventProvider {
 
 	// list of click event handler types
 	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
@@ -181,7 +182,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
-		// FIXME activate the callback to get the animation configuration		
 		animation = new ConfigurationAnimation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
 		legend = new Legend(chart, getConfiguration());
@@ -217,7 +217,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(nativeChart);
 			// fires the resize event on chart
-			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(new ConfigurationEnvelop<NativeObject>(size, true))));
+			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(new ConfigurationEnvelop<>(size, true))));
 		});
 		// --------------------------------------------------
 		// -- SET CALLBACK for title and axis click event ---
@@ -240,6 +240,26 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public final void loadOptions(ChartEnvelop<NativeObject> envelop) {
 		Merger.get().load(getChart(), getConfiguration(), envelop);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#createAnimationOptions()
+	 */
+	@Override
+	protected final ConfigurationAnimationOptions createAnimationOptions() {
+		return new ConfigurationAnimationOptions(getConfiguration().getAnimation());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#getDefaultAnimationOptions()
+	 */
+	@Override
+	protected final ConfigurationAnimationOptions getDefaultAnimationOptions() {
+		return getConfiguration().createAnimationOptions();
 	}
 
 	/**
@@ -321,24 +341,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @return the axis or <code>null</code> if not axis.
 	 */
 	abstract Axis getAxisById(int id);
-	
-	/**
-	 * Enables or disables the animation.
-	 * 
-	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
-	 */
-	public void setAnimationEnabled(boolean enabled) {
-		getConfiguration().setAnimationEnabled(enabled);
-	}
-
-	/**
-	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
-	 * 
-	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
-	 */
-	public boolean isAnimationEnabled() {
-		return getConfiguration().isAnimationEnabled();
-	}
 
 	/**
 	 * Sets the browser events that the chart should listen to for tooltips and hovering.
