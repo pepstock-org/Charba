@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.callbacks.DatasetAnimationCallback;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
@@ -22,7 +23,7 @@ import org.pepstock.charba.client.options.AbstractAnimationOptions;
 import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
- * FIXME
+ * Animation options to use at chart dataset level, to be used into {@link DatasetAnimationCallback}.
  * 
  * @author Andrea "Stock" Stocchero
  *

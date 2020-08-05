@@ -320,7 +320,6 @@ public final class DateAdapter {
 	 * @param unit the time unit instance
 	 * @return the start of unit for the given date
 	 */
-	// FIXME isoWeek
 	public Date startOf(Date time, TimeUnit unit) {
 		// checks if argument is consistent
 		if (time != null) {
@@ -339,6 +338,7 @@ public final class DateAdapter {
 	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
 	 * @return the start by weekday for the given date
 	 */
+	// FIXME isoWeek https://github.com/chartjs/chartjs-adapter-luxon/issues/22
 	public Date startOf(long time, int weekday) {
 		// checks if arguments are consistent
 		if (time >= 0 && weekday >= 0 && weekday <= 7) {

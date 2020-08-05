@@ -15,12 +15,13 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.AnimationCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.options.AbstractAnimationOptions;
 
 /**
- * FIXME
+ * Base class for configuration animation options, to be used into {@link AnimationCallback}.
  * 
  * @author Andrea "Stock" Stocchero
  *

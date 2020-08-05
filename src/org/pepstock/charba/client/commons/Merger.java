@@ -111,7 +111,6 @@ public final class Merger {
 			NativeObject defaults = get(chart.getType(), Defaults.get().getOptions(chart.getType()));
 			// clones native object to avoid to changes the sources
 			NativeObject chartOptions = Helpers.get().clone(options.getNativeObject());
-			// FIXME check whole creation
 			// merges the current chart options with the global and chart type ones
 			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
 			// loads whole options into envelop

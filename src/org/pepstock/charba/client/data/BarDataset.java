@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleArray;
 import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -336,14 +338,72 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
+	 * Sets the edges to skip drawing the border for.
+	 * 
+	 * @param borderskips array of the edges to skip drawing the border for.
+	 */
+	// FIXME must be indexable
+	public void setBorderSkipped(BorderSkipped... borderskips) {
+		// resets callbacks
+		setBorderSkipped((BorderSkippedCallback) null);
+		// checks if the argument is consistent
+		if (borderskips != null && borderskips.length > 0) {
+			if (borderskips.length == 1) {
+				// stores as single value
+				setSingleBorderSkipped(borderskips[0]);
+			} else {
+				// stores as array of values
+				setMultiBorderSkipped(borderskips);
+			}
+		} else {
+			// otherwise remove the key
+			removeIfExists(Property.BORDER_SKIPPED);
+		}
+	}
+
+	/**
+	 * Sets the edges to skip drawing the border for.
+	 * 
+	 * @param borderskips list of the edges to skip drawing the border for.
+	 */
+	public void setBorderSkipped(List<BorderSkipped> borderskips) {
+		// checks if list is consistent
+		if (borderskips != null && !borderskips.isEmpty()) {
+			// invokes the other methods with the array
+			setBorderSkipped(borderskips.toArray(new BorderSkipped[0]));
+		}
+	}
+	
+	/**
+	 * Sets the edges to skip drawing the border for.
+	 * 
+	 * @param borderskips array of the edges to skip drawing the border for.
+	 */
+	private void setMultiBorderSkipped(BorderSkipped... borderskips) {
+		// creates a mixed array
+		ArrayMixedObject array = new ArrayMixedObject();
+		// scans all value
+		for (BorderSkipped borderskip : borderskips) {
+			// checks if setting a false value
+			if (BorderSkipped.FALSE.equals(borderskip)) {
+				// stores boolean value
+				array.push(false);
+			} else {
+				// otherwise stores the key value
+				array.push(borderskip.value());
+			}
+		}
+		// stores into native object
+		setArrayValue(Property.BORDER_SKIPPED, array);
+	}
+
+	
+	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param borderskip the edge to skip drawing the border for.
 	 */
-	// FIXME must be indexable
-	public void setBorderSkipped(BorderSkipped borderskip) {
-		// resets callbacks
-		setBorderSkipped((BorderSkippedCallback) null);
+	private void setSingleBorderSkipped(BorderSkipped borderskip) {
 		// checks if setting a false value
 		if (BorderSkipped.FALSE.equals(borderskip)) {
 			// stores boolean value
@@ -355,24 +415,42 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the edge to skip drawing the border for.
+	 * Returns the edges to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for.
+	 * @return the edges to skip drawing the border for.
 	 */
-	public BorderSkipped getBorderSkipped() {
+	public List<BorderSkipped> getBorderSkipped() {
 		// gets object type
 		ObjectType type = type(Property.BORDER_SKIPPED);
 		// checks if 'false' has been set
 		if (ObjectType.BOOLEAN.equals(type)) {
 			// returns is false
-			return BorderSkipped.FALSE;
+			return Arrays.asList(BorderSkipped.FALSE);
 		} else if (ObjectType.FUNCTION.equals(type)) {
 			// checks if a callback has been set
 			// returns defaults
-			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
+			return Arrays.asList(getDefaultValues().getElements().getRectangle().getBorderSkipped());
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// gets list instance for result
+			List<BorderSkipped> result = new LinkedList<>();
+			// gets and scans the array
+			ArrayMixedObject array = getArrayValue(Property.BORDER_SKIPPED);
+			// scans the array
+			for (int i=0; i<array.length(); i++) {
+				// gets item
+				Object value = array.get(i);
+				// checks if it is a boolean
+				if (value instanceof Boolean) {
+					result.add(BorderSkipped.FALSE);
+				} else if (value instanceof String){
+					// checks if it is a string
+					result.add(Key.getKeyByValue(BorderSkipped.values(), (String)value, getDefaultValues().getElements().getRectangle().getBorderSkipped()));
+				}
+			}
+			return result;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped());
+		return Arrays.asList(getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped()));
 	}
 
 	/**

@@ -226,7 +226,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	protected Dataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(null);
-		// FIXME default when it's not the options of chart
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), new DataEnvelop<>(getNativeObject()));

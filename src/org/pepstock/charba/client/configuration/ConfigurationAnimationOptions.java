@@ -15,13 +15,14 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
- * FIXME
+ * Animation options to use at chart configuration level, to be used into {@link ConfigurationAnimationCallback}.
  * 
  * @author Andrea "Stock" Stocchero
  *
