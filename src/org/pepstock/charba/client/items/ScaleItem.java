@@ -404,4 +404,112 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// invokes the parent implementation
 		return super.getPosition().value();
 	}
+
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	public final double getDecimalForPixel(double pixel) {
+		return JsItemsHelper.get().getDecimalForPixel(this, pixel);
+	}
+
+	/**
+	 * Utility for getting the pixel location of a percentage of scale.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param decimal number value to use
+	 * @return the pixel location of a percentage of scale
+	 */
+	public final double getPixelForDecimal(double decimal) {
+		return JsItemsHelper.get().getPixelForDecimal(this, decimal);
+	}
+
+	/**
+	 * Returns the location of the tick at the given index.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param index tick index to use
+	 * @return the location of the tick at the given index
+	 */
+	public final double getPixelForTick(double index) {
+		return JsItemsHelper.get().getPixelForTick(this, index);
+	}
+
+	/**
+	 * Used to get the label to display in the tooltip for the given value.
+	 * 
+	 * @param value value of the data
+	 * @return the label to display in the tooltip for the given value
+	 */
+	public final String getLabelForValue(double value) {
+		return JsItemsHelper.get().getLabelForValue(this, value);
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data
+	 * @return the location of the given data point
+	 */
+	public final double getPixelForValue(double value) {
+		return getPixelForValue(value, Double.NaN);
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * Value can either be an index or a numerical value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	public final double getPixelForValue(double value, double index) {
+		return JsItemsHelper.get().getPixelForValue(this, value, index);
+	}
+
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	public final double getValueForPixel(double pixel) {
+		return JsItemsHelper.get().getValueForPixel(this, pixel);
+	}
+
+	/**
+	 * Returns the minimum chart value.
+	 * 
+	 * @return the minimum chart value
+	 */
+	public final double getBaseValue() {
+		return JsItemsHelper.get().getBaseValue(this);
+	}
+
+	/**
+	 * Returns the pixel for the minimum chart value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @return the pixel for the minimum chart value
+	 */
+	public final double getBasePixel() {
+		return JsItemsHelper.get().getBasePixel(this);
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject nativeObject() {
+		return super.getNativeObject();
+	}
 }

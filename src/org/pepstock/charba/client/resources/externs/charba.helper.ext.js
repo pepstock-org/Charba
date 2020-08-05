@@ -229,6 +229,53 @@ CharbaJsItemsHelper.isCanvasGradient = function(object, key) {};
  */
 CharbaJsItemsHelper.nativeEvent = function(event, key) {};
 /**
+ * @param {Object} object 
+ * @param {number} pixel 
+ * @return {number}
+ */    
+CharbaJsItemsHelper.getDecimalForPixel = function(object, pixel);
+/**
+ * @param {Object} object 
+ * @param {number} decimal 
+ * @return {number}
+ */    
+CharbaJsItemsHelper.getPixelForDecimal = function(object, decimal);
+/**
+ * @param {Object} object 
+ * @param {number} index 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getPixelForTick = function(object, index);
+/**
+ * @param {Object} object 
+ * @param {number} value 
+ * @return {string}
+ */
+CharbaJsItemsHelper.getLabelForValue = function(object, value);
+/**
+ * @param {Object} object 
+ * @param {number} value 
+ * @param {number} index 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getPixelForValue = function(object, value, index);
+/**
+ * @param {Object} object 
+ * @param {number} pixel 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getValueForPixel = function(object, pixel);
+/**
+ * @param {Object} object 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getBaseValue = function(object);
+/**
+ * @param {Object} object 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getBasePixel = function(object);   
+/**
  * @constructor
  * @return {CharbaJsDateAdapterHelper}
  */	

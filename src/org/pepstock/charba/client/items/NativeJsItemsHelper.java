@@ -66,4 +66,83 @@ final class NativeJsItemsHelper {
 	 */
 	static native BaseNativeEvent nativeEvent(NativeObject event, String key);
 
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	static native double getDecimalForPixel(NativeObject scale, double pixel);
+
+	/**
+	 * Utility for getting the pixel location of a percentage of scale.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param decimal number value to use
+	 * @return the pixel location of a percentage of scale
+	 */
+	static native double getPixelForDecimal(NativeObject scale, double decimal);
+
+	/**
+	 * Returns the location of the tick at the given index.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param index tick index to use
+	 * @return the location of the tick at the given index
+	 */
+	static native double getPixelForTick(NativeObject scale, double index);
+
+	/**
+	 * Used to get the label to display in the tooltip for the given value.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value value of the data
+	 * @return the label to display in the tooltip for the given value
+	 */
+	static native String getLabelForValue(NativeObject scale, double value);
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * Value can either be an index or a numerical value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value value of the data
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	static native double getPixelForValue(NativeObject scale, double value, double index);
+
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	static native double getValueForPixel(NativeObject scale, double pixel);
+
+	/**
+	 * Returns the minimum chart value
+	 * 
+	 * @param scale scale native object instance
+	 * @return the minimum chart value
+	 */
+	static native double getBaseValue(NativeObject scale);
+
+	/**
+	 * Returns the pixel for the minimum chart value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @return the pixel for the minimum chart value
+	 */
+	static native double getBasePixel(NativeObject scale);
 }

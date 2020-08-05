@@ -391,7 +391,92 @@
     */
     CharbaJsItemsHelper.nativeEvent = function(obj, key) {
     	return obj[key];
+    }    
+    /*
+	 Used to get the data value from a given pixel. This is the inverse of getPixelForValue
+     The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @param pixel pixel value
+	 @return the data value from a given pixel
+    */
+    CharbaJsItemsHelper.getDecimalForPixel = function(obj, pixel) {
+    	return obj.getDecimalForPixel(pixel);
+    }  
+    /*
+	 Utility for getting the pixel location of a percentage of scale
+     The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @param decimal number value to use
+	 @return the pixel location of a percentage of scale
+    */
+    CharbaJsItemsHelper.getPixelForDecimal = function(obj, decimal) {
+    	return obj.getPixelForDecimal(decimal);
     }
+    /*
+	 Returns the location of the tick at the given index
+   	 The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @param index tick index to use
+	 @return the location of the tick at the given index
+    */
+    CharbaJsItemsHelper.getPixelForTick = function(obj, index) {
+    	return obj.getPixelForTick(index);
+    }   
+    /*
+	 Used to get the label to display in the tooltip for the given value
+	  
+	 @param obj scale native object instance
+	 @param value value of the data
+	 @return the label to display in the tooltip for the given value
+    */
+    CharbaJsItemsHelper.getLabelForValue = function(obj, value) {
+    	return obj.getLabelForValue(value);
+    }
+    /*
+     Returns the location of the given data point. Value can either be an index or a numerical value
+     The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @param value value of the data
+	 @param index index of the data
+	 @return the location of the given data point
+    */
+    CharbaJsItemsHelper.getPixelForValue = function(obj, value, index) {
+    	return obj.getPixelForValue(value, index);
+    }
+    /*
+     Used to get the data value from a given pixel. This is the inverse of getPixelForValue
+     The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @param pixel pixel value
+	 @return the data value from a given pixel
+    */
+    CharbaJsItemsHelper.getValueForPixel = function(obj, pixel) {
+    	return obj.getValueForPixel(pixel);
+    }
+    /*
+     Returns the minimum chart value
+	  
+	 @param obj scale native object instance
+	 @return the minimum chart value
+    */
+    CharbaJsItemsHelper.getBaseValue = function(obj) {
+    	return obj.getBaseValue();
+    }    
+    /*
+     Returns the pixel for the minimum chart value
+     The coordinate (0, 0) is at the upper-left corner of the canvas
+	  
+	 @param obj scale native object instance
+	 @return the pixel for the minimum chart value
+    */
+    CharbaJsItemsHelper.getBasePixel = function(obj) {
+    	return obj.getBasePixel();
+    }    
     
     /*
 		JsDateAdapterHelper is an object to create a CHART.JS date adapter  

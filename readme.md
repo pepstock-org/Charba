@@ -289,6 +289,16 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `onBeginDrawing` and `onEndDrawing` methods to `Plugin` interface in order to invoke the plugin once before starting and after ending any drawing.
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
  * add `newDataset(boolean)` methods for all charts (by new `IsDatasetCreator` interface) in order to get new dataset with the initial visibility status.
+ * add the following methods to `ScaleItem` class in order to improve the interaction with scale elements:
+   * `getDecimalForPixel`
+   * `getPixelForDecimal` 
+   * `getPixelForTick`
+   * `getLabelForValue`
+   * `getPixelForValue`
+   * `getPixelForValue`
+   * `getValueForPixel`
+   * `getBaseValue`
+   * `getBasePixel`
  
 ### Development
 

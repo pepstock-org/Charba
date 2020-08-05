@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -96,6 +97,142 @@ final class JsItemsHelper {
 		}
 		// if here, arguments not consistent
 		return null;
+	}
+
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	double getDecimalForPixel(ScaleItem scale, double pixel) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getDecimalForPixel(scale.nativeObject(), pixel);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Utility for getting the pixel location of a percentage of scale.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param decimal number value to use
+	 * @return the pixel location of a percentage of scale
+	 */
+	double getPixelForDecimal(ScaleItem scale, double decimal) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getPixelForDecimal(scale.nativeObject(), decimal);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns the location of the tick at the given index.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param index tick index to use
+	 * @return the location of the tick at the given index
+	 */
+	double getPixelForTick(ScaleItem scale, double index) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getPixelForTick(scale.nativeObject(), index);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Used to get the label to display in the tooltip for the given value.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value value of the data
+	 * @return the label to display in the tooltip for the given value
+	 */
+	String getLabelForValue(ScaleItem scale, double value) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getLabelForValue(scale.nativeObject(), value);
+		}
+		// if here, scale item not consistent
+		return Constants.EMPTY_STRING;
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * Value can either be an index or a numerical value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value value of the data
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	double getPixelForValue(ScaleItem scale, double value, double index) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getPixelForValue(scale.nativeObject(), value, index);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Used to get the data value from a given pixel.<br>
+	 * This is the inverse of getPixelForValue.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @param pixel pixel value
+	 * @return the data value from a given pixel
+	 */
+	double getValueForPixel(ScaleItem scale, double pixel) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getValueForPixel(scale.nativeObject(), pixel);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns the minimum chart value.
+	 * 
+	 * @param scale scale native object instance
+	 * @return the minimum chart value
+	 */
+	double getBaseValue(ScaleItem scale) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getBaseValue(scale.nativeObject());
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns the pixel for the minimum chart value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param scale scale native object instance
+	 * @return the pixel for the minimum chart value
+	 */
+	double getBasePixel(ScaleItem scale) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getBasePixel(scale.nativeObject());
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
 	}
 
 }
