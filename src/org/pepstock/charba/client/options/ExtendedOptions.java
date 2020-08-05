@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
@@ -46,8 +47,8 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param chart chart instance
 	 * @param defaultValues default provider.
 	 */
-	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
-		this(chart, defaultValues, null);
+	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ConfigurationEnvelop<NativeObject> envelop) {
+		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -58,7 +59,18 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param envelop the envelop for options as native options
 	 */
 	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
-		super(defaultValues, IsEnvelop.isValid(envelop) ? envelop.getContent() : null);
+		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
+	/**
+	 * Creates an options with default provider. The native object is created empty.
+	 * 
+	 * @param chart chart instance
+	 * @param defaultValues default provider
+	 * @param envelop the envelop for options as native options
+	 */
+	ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
+		super(defaultValues, nativeObject);
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
 		// stores chart instance
@@ -100,8 +112,6 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedScales getScales() {
 		return scales;
 	}
-
-	// FIXME Envelop?
 
 	/**
 	 * This method adds new event function proxy to the element, as property of native java script object.

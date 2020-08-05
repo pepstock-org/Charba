@@ -178,7 +178,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	 */
 	ConfigurationOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// uses the extended option internally (no override)
-		super(chart, new ExtendedOptions(chart, defaultValues));
+		super(chart, new ExtendedOptions(chart, defaultValues, new ConfigurationEnvelop<>(null, true)));
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
