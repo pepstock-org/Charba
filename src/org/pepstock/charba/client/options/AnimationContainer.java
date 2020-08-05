@@ -33,7 +33,7 @@ public final class AnimationContainer extends AbstractNode {
 
 	// animation instance
 	private final Animation animation;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -90,7 +90,7 @@ public final class AnimationContainer extends AbstractNode {
 		// gets all sub elements
 		this.animation = new Animation(this, Property.ANIMATION, defaultValues, getValue(Property.ANIMATION));
 	}
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -106,7 +106,7 @@ public final class AnimationContainer extends AbstractNode {
 	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
 	 */
 	void setAnimationEnabled(boolean enabled) {
-		// checks if disabling 
+		// checks if disabling
 		if (!enabled) {
 			setValue(Property.ANIMATION, false);
 		} else {
@@ -123,5 +123,5 @@ public final class AnimationContainer extends AbstractNode {
 	boolean isAnimationEnabled() {
 		return !ObjectType.BOOLEAN.equals(type(Property.ANIMATION));
 	}
-	
+
 }

@@ -31,11 +31,11 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 public class DefaultAnimationMode extends AbstractDefaultAnimation implements IsDefaultAnimationMode {
 
 	/**
-	 * Default animation property element. 
+	 * Default animation property element.
 	 */
 	public static final IsDefaultAnimationProperty DEFAULT_ANIMATION_PROPERTY = new DefaultAnimationProperty();
 	/**
-	 * Default animation collection element. 
+	 * Default animation collection element.
 	 */
 	public static final IsDefaultAnimationCollection DEFAULT_ANIMATION_COLLECTION = new DefaultAnimationCollection();
 

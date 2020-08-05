@@ -15,13 +15,13 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
+import org.pepstock.charba.client.data.DatasetAnimationOptions;
 
 /**
- * Defines the callback to implement in order to return an animation options at runtime, at configuration level.
+ * Defines the callback to implement in order to return an animation options at runtime, at dataset level.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface ConfigurationAnimationCallback extends AnimationCallback<ConfigurationAnimationOptions> {
+public interface DatasetAnimationCallback extends AnimationCallback<DatasetAnimationOptions> {
 
 }

@@ -21,6 +21,7 @@ import org.pepstock.charba.client.options.AbstractAnimationOptions;
 
 /**
  * FIXME
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

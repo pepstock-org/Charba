@@ -22,11 +22,12 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
  * FIXME
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class TooltipsAnimationOptions extends AbstractConfigurationAnimationOptions {
-	
+
 	/**
 	 * Creates an animation to use for chart configuration when the animation is created by a callback, using a clone of another animation object.
 	 * 
@@ -43,7 +44,7 @@ public final class TooltipsAnimationOptions extends AbstractConfigurationAnimati
 	 * @param defaultValues default provider
 	 */
 	TooltipsAnimationOptions(IsDefaultAnimation defaultValues) {
-		this(defaultValues, (NativeObject)null);
+		this(defaultValues, (NativeObject) null);
 	}
 
 	/**

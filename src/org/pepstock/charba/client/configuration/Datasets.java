@@ -48,7 +48,7 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	public final Animation getAnimation() {
 		return animation;
 	}
-	
+
 	/**
 	 * Enables or disables the animation.
 	 * 

@@ -30,7 +30,7 @@ public interface HasAnimation {
 	 * @return an animation container instance
 	 */
 	AnimationContainer getAnimationContainer();
-	
+
 	/**
 	 * Enables or disables the animation.
 	 * 

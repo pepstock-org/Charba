@@ -333,7 +333,7 @@ public interface IsChart {
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
 	 */
 	void reconfigure();
-	
+
 	/**
 	 * Triggers an update of the chart.<br>
 	 * This can be safely called after updating the data object.<br>

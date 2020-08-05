@@ -36,7 +36,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		CHART("chart"), 
+		CHART("chart"),
 		CURRENT_STEP("currentStep"),
 		NUM_STEPS("numSteps");
 
@@ -73,7 +73,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	public AnimationItem(ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
-	
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 

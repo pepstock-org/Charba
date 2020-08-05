@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Helpers;
+import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.DatasetAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
 /**
@@ -79,7 +82,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 	}
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -98,6 +101,18 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	@Override
 	public final AnimationContainer getAnimationContainer() {
 		return animationContainer;
+	}
+
+	/**
+	 * Creates an animations options to use into chart dataset animation callback.
+	 * 
+	 * @return an animations options to use into chart dataset animation callback
+	 * @see TooltipsAnimationCallback
+	 */
+	public final DatasetAnimationOptions createAnimationOptions() {
+		// clones the current animation options and
+		// creates and returns a configuration animation
+		return new DatasetAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 
 	/*

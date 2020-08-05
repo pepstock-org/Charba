@@ -173,7 +173,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public final SpanGapper getSpanGapper() {
 		return spanGapper;
 	}
-	
+
 	/**
 	 * Creates an animations options to use into chart configuration animation callback.
 	 * 
@@ -182,7 +182,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public final ConfigurationAnimationOptions createAnimationOptions() {
 		// clones the current animation options and
-		// creates and returns a configuration animation		
+		// creates and returns a configuration animation
 		return new ConfigurationAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 

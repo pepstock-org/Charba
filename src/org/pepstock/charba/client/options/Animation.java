@@ -153,11 +153,11 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 			// checks if is using the default "none"
 			// the checking has been done after adding
 			// in order to be sure that argument is consistent
-			if (Key.equals(animationElement.getKey(), DefaultAnimationModeKey.NONE)){
+			if (Key.equals(animationElement.getKey(), DefaultAnimationModeKey.NONE)) {
 				// removes the property previously added
 				remove(DefaultAnimationModeKey.NONE);
 			} else {
-				// if here the mode is not "none" 
+				// if here the mode is not "none"
 				// stores the object into the cache
 				animationModes.put(animationElement.getKey().value(), animationElement);
 				// checks if the node is already added to parent
@@ -174,7 +174,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final boolean isModeEnabled(IsAnimationModeKey mode) {
 		// checks if mode is consistent, not equals to none and has got the cached element
-		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE) && hasMode(mode)) {
+		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE) && hasMode(mode)) {
 			// gets the mode element
 			AnimationMode modeElement = getMode(mode);
 			// checks if the duration is not equals to 0
@@ -239,7 +239,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 */
 	public final void removeMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent and if the mode has been previously added
-		if (IsAnimationModeKey.isValid(mode)  && !Key.equals(mode, DefaultAnimationModeKey.NONE) && animationModes.containsKey(mode.value())) {
+		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE) && animationModes.containsKey(mode.value())) {
 			// remove from object
 			remove(mode);
 			// removes from cache

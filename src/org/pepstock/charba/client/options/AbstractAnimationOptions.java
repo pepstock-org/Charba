@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class AbstractAnimationOptions extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -71,7 +71,7 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 	protected AbstractAnimationOptions(IsDefaultAnimation defaultValues) {
 		this(defaultValues, null);
 	}
-	
+
 	/**
 	 * Creates an animation to use for chart configuration when the animation is created by a callback, using a clone of another animation object.
 	 * 

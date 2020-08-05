@@ -20,7 +20,7 @@ import org.pepstock.charba.client.options.AbstractAnimationOptions;
 
 /**
  * Defines the callback to implement in order to return an animation options at runtime.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of animation options
  */
@@ -31,7 +31,7 @@ public interface AnimationCallback<T extends AbstractAnimationOptions> {
 	 * 
 	 * @param chart chart instance
 	 * @param context context instance
-	 * @param animationOptions empty object already prepared, ready  to be configured
+	 * @param animationOptions empty object already prepared, ready to be configured
 	 * @return an animation options used to configure the chart
 	 */
 	T invoke(IsChart chart, ScriptableContext context, T animationOptions);

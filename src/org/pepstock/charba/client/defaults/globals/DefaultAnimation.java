@@ -39,7 +39,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 public final class DefaultAnimation extends DefaultAnimationMode implements IsDefaultAnimation {
 
 	/**
-	 * Default animation mode element. 
+	 * Default animation mode element.
 	 */
 	public static final IsDefaultAnimationMode DEFAULT_ANIMATION_MODE = new DefaultAnimationMode();
 

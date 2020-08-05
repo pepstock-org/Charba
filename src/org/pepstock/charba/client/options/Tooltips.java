@@ -104,7 +104,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		}
 
 	}
-	
+
 	// animation container
 	private final AnimationContainer animationContainer;
 
@@ -129,7 +129,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 	}
-	
+
 	/**
 	 * Creates an animations options to use into chart tooltips animation callback.
 	 * 
@@ -138,7 +138,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	public final TooltipsAnimationOptions createAnimationOptions() {
 		// clones the current animation options and
-		// creates and returns a configuration animation		
+		// creates and returns a configuration animation
 		return new TooltipsAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 

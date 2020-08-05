@@ -276,7 +276,10 @@ Here you can find the list of enhancements and updates available on `master` bra
      * add `animation` options and configuration to datasets.
      * add `animation` options and configuration to tooltips.
      * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers into configuration, options and datasets.
-   * add `update(IsAnimationModeKey)` and `reconfigure(IsAnimationModeKey)` methods to `IsChart` interface in order to update the chart by an animaton mode.    
+   * add `update(IsAnimationModeKey)` and `reconfigure(IsAnimationModeKey)` methods to `IsChart` interface in order to update the chart by an animation mode.
+   * add `ConfigurationAnimationCallback` interface in order to create the animation configuration at runtime at chart configuration.
+   * add `TooltipsAnimationCallback` interface in order to create the animation configuration at runtime at tooltips configuration.
+   * add `DatasetAnimationCallback` interface in order to create the animation configuration at runtime at dataset configuration.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

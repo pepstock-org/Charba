@@ -100,7 +100,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedScales getScales() {
 		return scales;
 	}
-	
+
 	// FIXME Envelop?
 
 	/**

@@ -50,7 +50,7 @@ public final class AnimationMode extends AbstractAnimationMode<IsAnimationModeKe
 	public AnimationMode(IsAnimationModeKey mode, IsDefaultAnimationMode defaultValues) {
 		this(null, mode, defaultValues, null);
 	}
-	
+
 	/**
 	 * Creates an animation options to configure a specific mode.<br>
 	 * This constructor is used by {@link UpdateConfiguration} in order to get an animation mode to pass to {@link IsChart#update()}.<br>

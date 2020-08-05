@@ -13,11 +13,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.configuration;
+package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.options.AbstractAnimationOptions;
 import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ConfigurationAnimationOptions extends AbstractConfigurationAnimationOptions {
+public final class DatasetAnimationOptions extends AbstractAnimationOptions {
 
 	/**
 	 * Creates an animation to use for chart configuration when the animation is created by a callback, using a clone of another animation object.
@@ -34,7 +35,7 @@ public final class ConfigurationAnimationOptions extends AbstractConfigurationAn
 	 * @param defaultValues default provider
 	 * @param envelop envelop which contains a native object to map java script properties
 	 */
-	public ConfigurationAnimationOptions(IsDefaultAnimation defaultValues, OptionsEnvelop<NativeObject> envelop) {
+	public DatasetAnimationOptions(IsDefaultAnimation defaultValues, OptionsEnvelop<NativeObject> envelop) {
 		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -43,7 +44,7 @@ public final class ConfigurationAnimationOptions extends AbstractConfigurationAn
 	 * 
 	 * @param defaultValues default provider
 	 */
-	ConfigurationAnimationOptions(IsDefaultAnimation defaultValues) {
+	DatasetAnimationOptions(IsDefaultAnimation defaultValues) {
 		this(defaultValues, (NativeObject) null);
 	}
 
@@ -53,8 +54,17 @@ public final class ConfigurationAnimationOptions extends AbstractConfigurationAn
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ConfigurationAnimationOptions(IsDefaultAnimation defaultValues, NativeObject nativeObject) {
+	DatasetAnimationOptions(IsDefaultAnimation defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject nativeObject() {
+		return super.getNativeObject();
 	}
 
 }

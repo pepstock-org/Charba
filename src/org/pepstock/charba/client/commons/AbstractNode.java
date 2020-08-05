@@ -89,7 +89,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Reset the value previously set to a callback at the specific key.
 	 * 

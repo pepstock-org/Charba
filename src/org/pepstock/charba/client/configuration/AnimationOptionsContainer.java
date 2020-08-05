@@ -151,12 +151,11 @@ abstract class AnimationOptionsContainer<T extends AbstractConfigurationAnimatio
 	 * @return new animation options to pass to the callback
 	 */
 	protected abstract T getDefaultAnimationOptions();
-	
+
 	/**
-	 * Returns a native object as font or padding when the callback has been activated.
+	 * Returns a native object as animation options when the callback has been activated.
 	 * 
 	 * @param context native object as context
-	 * @param callback callback to invoke
 	 * @return a native object as animation
 	 */
 	private NativeObject onAnimationCallback(ScriptableContext context) {

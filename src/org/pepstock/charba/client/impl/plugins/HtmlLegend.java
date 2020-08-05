@@ -49,6 +49,8 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  */
 public final class HtmlLegend extends AbstractPlugin {
 
+	// FIXME check the label if null
+
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
 	 */

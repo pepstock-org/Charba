@@ -414,7 +414,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.<br>Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.<br>
+	 *         Default is <code>true</code>.
 	 */
 	@Override
 	public final boolean isDrawOnAttach() {
@@ -438,8 +439,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.<br>Default is
-	 *         <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.<br>
+	 *         Default is <code>true</code>.
 	 */
 	@Override
 	public final boolean isDestroyOnDetach() {
@@ -490,8 +491,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Use this to destroy any chart instances that are created.<br>This will clean up any references stored to the chart object within Chart.js, along with any associated event
-	 * listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created.<br>
+	 * This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
 	@Override
 	public final void destroy() {
@@ -548,7 +549,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Reset the chart to it's state before the initial animation.<br>A new animation can then be triggered using update.
+	 * Reset the chart to it's state before the initial animation.<br>
+	 * A new animation can then be triggered using update.
 	 */
 	@Override
 	public final void reset() {
@@ -576,8 +578,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Use this to manually resize the canvas element.<br>This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
-	 * canvas nodes container element.
+	 * Use this to manually resize the canvas element.<br>
+	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
 	 */
 	@Override
 	public final void resize() {
@@ -591,7 +593,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Triggers an update of the chart.<br>This can be safely called after updating the data object.<br>This will update all scales, legends, and then re-render the chart.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.
 	 */
 	@Override
 	public final void update() {
@@ -678,9 +682,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Triggers an update of the chart.<br>This can be safely called after updating the data object.<br>This will update the options, mutating the options property in place.<br>A
-	 * configuration object can be provided with additional configuration for the update process.<br>This is useful when update is manually called inside an event handler and some
-	 * different animation is desired.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.<br>
+	 * A configuration object can be provided with additional configuration for the update process.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -729,7 +735,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Triggers a redraw of all chart elements.<br>Note, this does not update elements for new data.<br>Use <code>.update()</code> in that case.
+	 * Triggers a redraw of all chart elements.<br>
+	 * Note, this does not update elements for new data.<br>
+	 * Use <code>.update()</code> in that case.
 	 */
 	@Override
 	public final void render() {

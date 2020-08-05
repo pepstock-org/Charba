@@ -19,7 +19,7 @@ import org.pepstock.charba.client.configuration.TooltipsAnimationOptions;
 
 /**
  * Defines the callback to implement in order to return an animation options at runtime, at tooltips level.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  */
 public interface TooltipsAnimationCallback extends AnimationCallback<TooltipsAnimationOptions> {
