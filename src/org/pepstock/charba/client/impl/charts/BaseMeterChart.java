@@ -21,6 +21,9 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.options.AnimationMode;
 
 /**
  * This is an abstract meter chart, inherited by a meter and gauge charts.
@@ -36,6 +39,9 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	public static final double DEFAULT_MAX = 100D;
 
+	// animation mode active configuration
+	private final AnimationMode disabledActiveMode = new AnimationMode(DefaultAnimationModeKey.ACTIVE);
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
@@ -44,6 +50,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	BaseMeterChart(Type type) {
 		super(type);
+		// disables the animation mode
+		this.disabledActiveMode.setDuration(0);
 	}
 
 	/**
@@ -81,6 +89,28 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		}
 		// calls super chart options creations
 		return super.createChartOptions();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#applyConfiguration()
+	 */
+	@Override
+	protected final void applyConfiguration() {
+		// disables legend
+		getOptions().getLegend().setDisplay(false);
+		// disables tooltips
+		getOptions().getTooltips().setEnabled(false);
+		// disables tooltips custom callback
+		getOptions().getTooltips().setCustomCallback(null);
+		// disables animation active
+		getOptions().getAnimation().setMode(disabledActiveMode);
+		// scans all datasets
+		for (Dataset dataset : getData().getDatasets()) {
+			// disable animation mode active
+			dataset.getAnimation().setMode(disabledActiveMode);
+		}
 	}
 
 }

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -78,11 +77,11 @@ abstract class AnimationOptionsContainer<T extends AbstractConfigurationAnimatio
 	 * Builds the object storing the chart instance and defaults options.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options
+	 * @param configuration configuration instance
 	 */
-	AnimationOptionsContainer(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	AnimationOptionsContainer(IsChart chart, ExtendedOptions configuration) {
 		// uses the extended option internally (no override)
-		super(chart, new ExtendedOptions(chart, defaultValues));
+		super(chart, configuration);
 		// invokes callback
 		animationCallbackProxy.setCallback((contextFunction, context) -> onAnimationCallback(new ScriptableContext(new ConfigurationEnvelop<>(context))));
 	}

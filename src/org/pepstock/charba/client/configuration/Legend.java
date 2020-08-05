@@ -113,15 +113,6 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	}
 
 	/**
-	 * Creates a legend object wrapping an existing one.
-	 * 
-	 * @param wrappedLegend legend instance to wrap
-	 */
-	protected Legend(Legend wrappedLegend) {
-		this(wrappedLegend.getChart(), wrappedLegend.getConfiguration());
-	}
-
-	/**
 	 * Returns the legend labels element.
 	 * 
 	 * @return the labels

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
- * Specific options for GAUGE chart. This chart doesn't allow any legend, hover, layout and tooltips components.
+ * Specific options for GAUGE chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -21,15 +21,11 @@ import org.pepstock.charba.client.callbacks.ValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
-import org.pepstock.charba.client.configuration.Hover;
-import org.pepstock.charba.client.configuration.Layout;
-import org.pepstock.charba.client.configuration.Legend;
-import org.pepstock.charba.client.configuration.Tooltips;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
+ * Specific options for METER chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -45,9 +41,6 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Default color of display, <b>rgb(128, 128, 128)</b>
 	 */
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
-
-	// exception message
-	private static final String INVALID_CALL = "The invoked component is not available for meter or gauge charts.";
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 
@@ -71,8 +64,6 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private ValueCallback valueCallback = null;
 
-	private final LegendWrapper legend;
-
 	/**
 	 * Builds the object storing the chart instance and defaults.
 	 * 
@@ -81,12 +72,9 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public MeterOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
-		// disables legend, title and tooltips.
-		super.getTitle().setDisplay(false);
-		super.getTooltips().setEnabled(false);
-		// creates a wrapper for legend
-		legend = new LegendWrapper(super.getLegend());
-		legend.setDisplay(false);
+		// disables legend and tooltips.
+		getLegend().setDisplay(false);
+		getTooltips().setEnabled(false);
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
@@ -124,46 +112,6 @@ public class MeterOptions extends AbstractPieOptions {
 	public final void setCircumference(double circumference) {
 		// ignore the passed value.
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
-	}
-
-	/**
-	 * Returns nothing but throws an exception because not available.
-	 * 
-	 * @return nothing because will throw an exception
-	 */
-	@Override
-	public final Hover getHover() {
-		throw new UnsupportedOperationException(INVALID_CALL);
-	}
-
-	/**
-	 * Returns nothing but throws an exception because not available.
-	 * 
-	 * @return nothing because will throw an exception
-	 */
-	@Override
-	public final Layout getLayout() {
-		throw new UnsupportedOperationException(INVALID_CALL);
-	}
-
-	/**
-	 * Returns a legend wrapper where is not possible to display it.
-	 * 
-	 * @return a legend wrapper where is not possible to display it
-	 */
-	@Override
-	public final Legend getLegend() {
-		return legend;
-	}
-
-	/**
-	 * Returns nothing but throws an exception because not available.
-	 * 
-	 * @return nothing because will throw an exception
-	 */
-	@Override
-	public final Tooltips getTooltips() {
-		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/**
@@ -293,35 +241,4 @@ public class MeterOptions extends AbstractPieOptions {
 		this.valueCallback = valueCallback;
 	}
 
-	/**
-	 * Internal implementation of legend which wraps the original one.<br>
-	 * With this legend implementation you can not set true to display it.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class LegendWrapper extends Legend {
-
-		/**
-		 * Creates a legend object wrapping an existing one.
-		 * 
-		 * @param delegated legend instance to wrap
-		 */
-		LegendWrapper(Legend delegated) {
-			super(delegated);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.configuration.Legend#setDisplay(boolean)
-		 */
-		@Override
-		public void setDisplay(boolean display) {
-			// ignore the passed value because
-			// the legend must not display
-			super.setDisplay(false);
-		}
-
-	}
 }

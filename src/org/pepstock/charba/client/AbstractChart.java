@@ -673,9 +673,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void reconfigure(IsAnimationModeKey mode) {
-		// checks and performs pre reconfiguration
+		// checks and performs pre-reconfiguration
 		if (performPreReconfiguration()) {
-			// if here, pre reconfiguration has been done
+			// if here, pre-reconfiguration has been done
 			// update chart
 			update(mode);
 		}
@@ -692,17 +692,24 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void reconfigure(UpdateConfiguration configuration) {
-		// checks and performs pre reconfiguration
+		// checks and performs pre-reconfiguration
 		if (performPreReconfiguration()) {
-			// if here, pre reconfiguration has been done
+			// if here, pre-reconfiguration has been done
 			// update chart
 			update(configuration);
 		}
 	}
 
+	/**
+	 * Prepares the chart options with the configuration ones before updating the chart, in order that new or updated options will be used by chart.
+	 * 
+	 * @return <code>true</code> if the pre-configuration has been applied, otherwise <code>false</code>
+	 */
 	private boolean performPreReconfiguration() {
 		// checks if chart is created and consistent
 		if (chart != null && IsChart.isConsistent(this)) {
+			// invokes the apply configuration
+			applyConfiguration();
 			// fires that chart is configuring
 			Charts.fireBeforeConfigure(this);
 			// updates option passed by configuration element
@@ -726,7 +733,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			plugins.onChartConfigure(tempConfiguration, this);
 			// fires that chart has been configured
 			Charts.fireAfterConfigure(this);
-			// prereconfiguration is done
+			// pre-reconfiguration is done
 			return true;
 		}
 		// if here, chart not valid
@@ -970,6 +977,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void draw() {
 		// checks if canvas is supported and the chart is consistent
 		if (isCanvasSupported && IsChart.isConsistent(this)) {
+			// invokes the apply configuration
+			applyConfiguration();
 			// fires that chart is configuring
 			Charts.fireBeforeConfigure(this);
 			// calls plugins for onConfigure method
@@ -1004,6 +1013,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
+	}
+	
+	/**
+	 * Called before any drawing or reconfiguration in order that the chart which implements it can override options 
+	 */
+	protected void applyConfiguration() {
+		// do nothing
 	}
 
 	/**
