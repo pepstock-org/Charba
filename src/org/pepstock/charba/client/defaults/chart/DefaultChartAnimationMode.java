@@ -42,6 +42,16 @@ public class DefaultChartAnimationMode<T extends IsDefaultAnimationMode> extends
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#hasProperty(org.pepstock.charba.client.options.IsAnimationPropertyKey)
+	 */
+	@Override
+	public boolean hasProperty(IsAnimationPropertyKey property) {
+		return getDefaults().hasProperty(property);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#getProperty(org.pepstock.charba.client.options.IsAnimationPropertyKey)
 	 */
 	@Override
@@ -56,6 +66,16 @@ public class DefaultChartAnimationMode<T extends IsDefaultAnimationMode> extends
 		}
 		// if here, the stored property is not consistent
 		return DefaultAnimationMode.DEFAULT_ANIMATION_PROPERTY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#hasCollection(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 */
+	@Override
+	public boolean hasCollection(IsAnimationCollectionKey collection) {
+		return getDefaults().hasCollection(collection);
 	}
 
 	/*

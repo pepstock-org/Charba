@@ -69,11 +69,29 @@ public class DefaultAnimationMode extends AbstractDefaultAnimation implements Is
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#hasProperty(org.pepstock.charba.client.options.IsAnimationPropertyKey)
+	 */
+	@Override
+	public boolean hasProperty(IsAnimationPropertyKey property) {
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationModeElement#getProperty(org.pepstock.charba.client.options.IsAnimationProperty)
 	 */
 	@Override
 	public IsDefaultAnimationProperty getProperty(IsAnimationPropertyKey property) {
 		return DEFAULT_ANIMATION_PROPERTY;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationMode#hasCollection(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 */
+	@Override
+	public boolean hasCollection(IsAnimationCollectionKey collection) {
+		return false;
 	}
 
 	/*

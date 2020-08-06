@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -59,6 +61,11 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 
 	private static final IsDefaultAnimationMode HIDE_DEFAULT_ANIMATION_MODE = new ShowAndHideDefaultAnimationMode(false);
 
+	private static final List<DefaultAnimationModeKey> DEFAULT_ANIMATION_MODE_KEYS = Arrays.asList(DefaultAnimationModeKey.ACTIVE, DefaultAnimationModeKey.RESIZE, DefaultAnimationModeKey.SHOW, DefaultAnimationModeKey.HIDE);
+
+	private static final List<DefaultAnimationCollectionKey> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, DefaultAnimationCollectionKey.COLORS);
+
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -87,6 +94,27 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 		return DEFAULT_ANIMATE_SCALE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.globals.DefaultAnimationMode#hasCollection(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 */
+	@Override
+	public boolean hasCollection(IsAnimationCollectionKey collection) {
+		// checks if collection is valid
+		if (IsAnimationCollectionKey.isValid(collection)) {
+			// scans all defaults
+			for (DefaultAnimationCollectionKey defaultCollection : DEFAULT_ANIMATION_COLLECTION_KEYS) {
+				// checks if equals
+				if (defaultCollection.equals(collection)) {
+					// equals then exist
+					return true;
+				}
+			}
+
+		}
+		// if here, collection not valid or not a default
+		return super.hasCollection(collection);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -106,6 +134,28 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 		}
 		// if here, collection not valid or not a default
 		return super.getCollection(collection);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#hasMode(org.pepstock.charba.client.options.IsAnimationModeKey)
+	 */
+	@Override
+	public boolean hasMode(IsAnimationModeKey mode) {
+		// checks if mode is valid and is default one
+		if (IsAnimationModeKey.isValid(mode)) {
+			// scans all defaults
+			for (DefaultAnimationModeKey defaultMode : DEFAULT_ANIMATION_MODE_KEYS) {
+				// checks if equals
+				if (defaultMode.equals(mode)) {
+					// equals then exist
+					return true;
+				}
+			}
+		}
+		// if here, it's not a default one
+		return false;
 	}
 
 	/*

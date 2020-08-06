@@ -165,6 +165,28 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 			}
 		}
 	}
+	
+	/**
+	 * Enables or disables an animation mode instance into animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation collection
+	 */
+	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
+		// checks if collection is consistent
+		if (IsAnimationModeKey.isValid(mode) && hasMode(mode)) {
+			// gets mode options
+			AnimationMode modeOptions = getMode(mode);
+			// checks if is enabling and consistent
+			if (enabled && modeOptions != null && modeOptions.getDuration() == 0) {
+				// sets duration to 0
+				animationModes.get(mode.value()).setDuration(getDefaultValues().getDuration());
+			} else if (!enabled && modeOptions != null && modeOptions.getDuration() > 0) {
+				// sets duration to 0
+				animationModes.get(mode.value()).setDuration(0);
+			}
+		}
+	}
 
 	/**
 	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
@@ -191,16 +213,17 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * @param mode mode instance used to check into animation options
 	 * @return <code>true</code> if an animation mode instance is stored into the animation options
 	 */
+	@Override
 	public final boolean hasMode(IsAnimationModeKey mode) {
 		// checks if mode is consistent
 		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
-			// checks if is cached
-			if (animationModes.containsKey(mode.value())) {
+			// checks if is cached or stores as objects
+			if (animationModes.containsKey(mode.value()) || ObjectType.OBJECT.equals(type(mode))) {
 				// returns because it is in the cached
 				return true;
 			}
-			// checks on the native object
-			return ObjectType.OBJECT.equals(type(mode));
+			// checks on on defaults
+			return getDefaultValues().hasMode(mode);
 		}
 		// if here, the mode is not valid
 		// then returns false
@@ -221,7 +244,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 			if (animationModes.containsKey(mode.value())) {
 				// returns because it is in the cached
 				return animationModes.get(mode.value());
-			} else if (has(mode)) {
+			} else if (hasMode(mode)) {
 				// if here, the mode is stored into object
 				// gets from the native object
 				return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));

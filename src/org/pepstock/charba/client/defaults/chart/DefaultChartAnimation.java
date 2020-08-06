@@ -59,6 +59,16 @@ public final class DefaultChartAnimation extends DefaultChartAnimationMode<IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#hasMode(org.pepstock.charba.client.options.IsAnimationModeKey)
+	 */
+	@Override
+	public boolean hasMode(IsAnimationModeKey mode) {
+		return getDefaults().hasMode(mode);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getMode(org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override

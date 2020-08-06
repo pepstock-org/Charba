@@ -114,7 +114,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if a custom property, previously added, is enabled
-			if (animationProperties.containsKey(property.value()) && ObjectType.OBJECT.equals(type(property))) {
+			if (animationProperties.containsKey(property.value()) || ObjectType.OBJECT.equals(type(property))) {
 				// returns that is enabled
 				return true;
 			}
@@ -135,16 +135,17 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param property property instance used to check into animation options
 	 * @return <code>true</code> if an animation property instance is stored into the animation options
 	 */
+	@Override
 	public final boolean hasProperty(IsAnimationPropertyKey property) {
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
-			// checks if is cached
-			if (animationProperties.containsKey(property.value())) {
-				// returns because it is in the cached
+			// checks if is cached or if stored
+			if (animationProperties.containsKey(property.value()) || ObjectType.OBJECT.equals(type(property))) {
+				// returns because it is in the cached or stored
 				return true;
 			}
-			// checks on the native object
-			return ObjectType.OBJECT.equals(type(property));
+			// checks on defaults
+			return getDefaultValues().hasProperty(property);
 		}
 		// if here, the property is not valid
 		// then returns false
@@ -252,15 +253,16 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 * @param collection collection instance used to check into animation options
 	 * @return <code>true</code> if an animation collection instance is stored into the animation options
 	 */
+	@Override
 	public final boolean hasCollection(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// checks if is cached
-			if (animationCollections.containsKey(collection.value())) {
+			if (animationCollections.containsKey(collection.value()) || ObjectType.OBJECT.equals(type(collection))) {
 				// returns because it is in the cached
 				return true;
 			}
-			return ObjectType.OBJECT.equals(type(collection));
+			return getDefaultValues().hasCollection(collection);
 		}
 		// if here, the collection is not valid
 		// then returns false

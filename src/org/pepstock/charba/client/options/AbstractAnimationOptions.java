@@ -218,6 +218,16 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 	public final void setMode(AnimationMode animationElement) {
 		animation.setMode(animationElement);
 	}
+	
+	/**
+	 * Enables or disables an animation mode instance into animation options.
+	 * 
+	 * @param mode mode instance used to check into animation options
+	 * @param enabled if <code>true</code> it enables an animation collection
+	 */
+	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
+		animation.setModeEnabled(mode, enabled);
+	}
 
 	/**
 	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
