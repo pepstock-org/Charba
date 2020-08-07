@@ -517,7 +517,7 @@
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
     -->
-	<target name="codeGeneratorInjectableResources" depends="init, ivyRetrieveRuntime">
+	<target name="codeGenerator-InjectableResources" depends="init, ivyRetrieveRuntime">
 		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<classpath>
 				<path refid="ivyPath-runtime" />
@@ -557,7 +557,7 @@
 	<!--
         CHARBA - Code generator to wrap the java script file for controller template into java class
     -->
-	<target name="codeGeneratorControllerTemplate" depends="init, ivyRetrieveRuntime">
+	<target name="codeGenerator-ControllerTemplate" depends="init, ivyRetrieveRuntime">
 		<javac srcdir="${codegen.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<classpath>
 				<path refid="ivyPath-runtime" />
