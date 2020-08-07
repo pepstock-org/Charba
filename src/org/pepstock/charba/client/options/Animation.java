@@ -180,10 +180,10 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 			// checks if is enabling and consistent
 			if (enabled && modeOptions != null && modeOptions.getDuration() == 0) {
 				// sets duration to 0
-				animationModes.get(mode.value()).setDuration(getDefaultValues().getDuration());
+				modeOptions.setDuration(getDefaultValues().getDuration());
 			} else if (!enabled && modeOptions != null && modeOptions.getDuration() > 0) {
 				// sets duration to 0
-				animationModes.get(mode.value()).setDuration(0);
+				modeOptions.setDuration(0);
 			}
 		}
 	}

@@ -18,7 +18,8 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -30,8 +31,10 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  */
 public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendOptions> {
 
-	// maps with all legend text callback for chart
-	private static final Map<Integer, HtmlLegendTextCallback> LEGEND_TEXT_CALLBACKS = new HashMap<>();
+	// maps with all legend item callback for chart
+	private static final Map<Integer, HtmlLegendItemCallback> LEGEND_ITEM_CALLBACKS = new HashMap<>();
+	// maps with all legend title callback for chart
+	private static final Map<Integer, HtmlLegendTitleCallback> LEGEND_TITLE_CALLBACKS = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
@@ -61,29 +64,51 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 		}
 		// gets charba id
 		int charbaId = options.getCharbaId();
-		// checks if there is any callback stored into cahce
-		if (LEGEND_TEXT_CALLBACKS.containsKey(charbaId)) {
+		// checks if there is any callback stored into cache
+		if (LEGEND_ITEM_CALLBACKS.containsKey(charbaId)) {
 			// sets callback
-			options.internalSetLegendTextCallback(LEGEND_TEXT_CALLBACKS.get(charbaId));
+			options.internalSetLegendItemCallback(LEGEND_ITEM_CALLBACKS.get(charbaId));
+		}
+		// checks if there is any callback stored into cache
+		if (LEGEND_TITLE_CALLBACKS.containsKey(charbaId)) {
+			// sets callback
+			options.internalSetLegendTitleCallback(LEGEND_TITLE_CALLBACKS.get(charbaId));
 		}
 		return options;
 	}
 
 	/**
-	 * Internal methods to store the legend text callback
+	 * Internal methods to store the legend item callback
 	 * 
 	 * @param optionsId identifier for legend callback
 	 * @param callback legend callback instance
 	 */
-	void store(int optionsId, HtmlLegendTextCallback callback) {
+	void store(int optionsId, HtmlLegendItemCallback callback) {
 		// checks if legend callback is consistent
 		if (callback != null) {
-			LEGEND_TEXT_CALLBACKS.put(optionsId, callback);
+			LEGEND_ITEM_CALLBACKS.put(optionsId, callback);
 		} else {
-			// if here the callback is not consistent then it reomves it
-			LEGEND_TEXT_CALLBACKS.remove(optionsId);
+			// if here the callback is not consistent then removes it
+			LEGEND_ITEM_CALLBACKS.remove(optionsId);
 		}
 	}
+	
+	/**
+	 * Internal methods to store the legend title callback
+	 * 
+	 * @param optionsId identifier for legend callback
+	 * @param callback legend callback instance
+	 */
+	void store(int optionsId, HtmlLegendTitleCallback callback) {
+		// checks if legend callback is consistent
+		if (callback != null) {
+			LEGEND_TITLE_CALLBACKS.put(optionsId, callback);
+		} else {
+			// if here the callback is not consistent then removes it
+			LEGEND_TITLE_CALLBACKS.remove(optionsId);
+		}
+	}
+
 
 	/**
 	 * Internal factory to create options from default global option for the plugin
@@ -114,9 +139,14 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 				// gets charba id
 				int charbaId = options.getCharbaId();
 				// checks if there is any callback
-				if (LEGEND_TEXT_CALLBACKS.containsKey(charbaId)) {
+				if (LEGEND_ITEM_CALLBACKS.containsKey(charbaId)) {
 					// sets callback
-					options.setLegendTextCallback(LEGEND_TEXT_CALLBACKS.get(charbaId));
+					options.setLegendTextCallback(LEGEND_ITEM_CALLBACKS.get(charbaId));
+				}
+				// checks if there is any callback stored into cache
+				if (LEGEND_TITLE_CALLBACKS.containsKey(charbaId)) {
+					// sets callback
+					options.setLegendTitleCallback(LEGEND_TITLE_CALLBACKS.get(charbaId));
 				}
 				return options;
 			}

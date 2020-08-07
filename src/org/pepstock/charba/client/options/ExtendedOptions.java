@@ -42,17 +42,18 @@ public final class ExtendedOptions extends ScaledOptions {
 	private final ExtendedScales scales;
 
 	/**
-	 * Creates an options with default provider. The native object is created empty.
+	 * Creates an options with default provider.
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues default provider.
+	 * @param envelop the envelop for options as native options
 	 */
 	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ConfigurationEnvelop<NativeObject> envelop) {
 		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates an options with default provider. The native object is created empty.
+	 * Creates an options with default provider.
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues default provider
@@ -67,7 +68,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues default provider
-	 * @param envelop the envelop for options as native options
+	 * @param nativeObject options as native object
 	 */
 	ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);

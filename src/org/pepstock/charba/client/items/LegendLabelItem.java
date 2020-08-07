@@ -28,12 +28,9 @@ import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.dom.safehtml.SafeHtml;
-import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 
 /**
  * This object is created by callbacks and returned to CHART.JS as native object to configure the legend.
@@ -41,10 +38,10 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegend;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendLabelItem extends LegendItem {
+public final class LegendLabelItem extends LegendItem implements HasLegendText {
 
-	// this field is managed only by HTML legend builder plugin
-	private boolean htmlText = false;
+//	// this field is managed only by HTML legend builder plugin
+//	private boolean htmlText = false;
 
 	private Pattern fillStylePattern = null;
 
@@ -53,6 +50,9 @@ public final class LegendLabelItem extends LegendItem {
 	private Pattern strokeStylePattern = null;
 
 	private Gradient strokeStyleGradient = null;
+
+	// legend texter instance
+	private final LegendTexter legendtexter;
 
 	/**
 	 * Standard constructor which wraps a new native java script object.
@@ -68,6 +68,18 @@ public final class LegendLabelItem extends LegendItem {
 	 */
 	LegendLabelItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// creates the legend texter
+		this.legendtexter = new LegendTexter(getNativeObject());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 */
+	@Override
+	public LegendTexter getLegendTexter() {
+		return legendtexter;
 	}
 
 	/**
@@ -88,78 +100,79 @@ public final class LegendLabelItem extends LegendItem {
 		setValue(LegendItem.Property.INDEX, index);
 	}
 
-	/**
-	 * Sets the label that will be displayed.
-	 * 
-	 * @param text the label that will be displayed
-	 */
-	public void setText(String text) {
-		setValue(LegendItem.Property.TEXT, text);
-	}
-
-	/**
-	 * Sets the label that will be displayed, as HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
-	 * 
-	 * @param text the label that will be displayed, as HTML
-	 */
-	public void setText(SafeHtml text) {
-		// checks if argument is consistent
-		if (text != null) {
-			// not null then stores the HTML
-			setText(text.asString());
-			// and set the flag
-			htmlText = true;
-		} else {
-			// null then resets the property
-			remove(LegendItem.Property.TEXT);
-			// and set the flag
-			htmlText = false;
-		}
-	}
-
-	/**
-	 * Returns <code>true</code> if the text of legend item is HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
-	 * 
-	 * @return <code>true</code> if the text of legend item is HTML
-	 */
-	public boolean isHtmlText() {
-		return htmlText;
-	}
-
-	/**
-	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
-	 * 
-	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
-	 */
-	public SafeHtml getTextAsHtml() {
-		// checks if the text as HTML
-		if (htmlText) {
-			// gets text
-			String html = super.getText();
-			// if html text is consistent
-			if (html != null) {
-				// creates safe html builder
-				// creates and returns a safe html
-				return SafeHtmlBuilder.create().appendHtmlConstant(html).toSafeHtml();
-			}
-		}
-		// if here the text has not been stored as HTML
-		// or text is missing
-		return null;
-	}
-
-	/**
-	 * Sets <code>true</code> if the text of legend item is HTML.<br>
-	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
-	 * 
-	 * @param htmlText <code>true</code> if the text of legend item is HTML
-	 */
-	public void setHtmlText(boolean htmlText) {
-		this.htmlText = htmlText;
-	}
+	// FIXME
+//	/**
+//	 * Sets the label that will be displayed.
+//	 * 
+//	 * @param text the label that will be displayed
+//	 */
+//	public void setText(String text) {
+//		setValue(LegendItem.Property.TEXT, text);
+//	}
+//
+//	/**
+//	 * Sets the label that will be displayed, as HTML.<br>
+//	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+//	 * 
+//	 * @param text the label that will be displayed, as HTML
+//	 */
+//	public void setText(SafeHtml text) {
+//		// checks if argument is consistent
+//		if (text != null) {
+//			// not null then stores the HTML
+//			setText(text.asString());
+//			// and set the flag
+//			htmlText = true;
+//		} else {
+//			// null then resets the property
+//			remove(LegendItem.Property.TEXT);
+//			// and set the flag
+//			htmlText = false;
+//		}
+//	}
+//
+//	/**
+//	 * Returns <code>true</code> if the text of legend item is HTML.<br>
+//	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+//	 * 
+//	 * @return <code>true</code> if the text of legend item is HTML
+//	 */
+//	public boolean isHtmlText() {
+//		return htmlText;
+//	}
+//
+//	/**
+//	 * Returns the label that will be displayed, as HTML.<br>
+//	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+//	 * 
+//	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
+//	 */
+//	public SafeHtml getTextAsHtml() {
+//		// checks if the text as HTML
+//		if (htmlText) {
+//			// gets text
+//			String html = super.getText();
+//			// if html text is consistent
+//			if (html != null) {
+//				// creates safe html builder
+//				// creates and returns a safe html
+//				return SafeHtmlBuilder.create().appendHtmlConstant(html).toSafeHtml();
+//			}
+//		}
+//		// if here the text has not been stored as HTML
+//		// or text is missing
+//		return null;
+//	}
+//
+//	/**
+//	 * Sets <code>true</code> if the text of legend item is HTML.<br>
+//	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+//	 * 
+//	 * @param htmlText <code>true</code> if the text of legend item is HTML
+//	 */
+//	public void setHtmlText(boolean htmlText) {
+//		this.htmlText = htmlText;
+//	}
 
 	/**
 	 * Sets the fill style of the legend box as color.

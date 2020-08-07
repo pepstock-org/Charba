@@ -152,7 +152,7 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return list of the stroke width of the dataset item in pixels. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, UndefinedValues.INTEGER);
+		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
 	}
 
 	/**
@@ -162,7 +162,7 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, UndefinedValues.DOUBLE);
+		return getValue(Property.BAR_PERCENTAGE, Defaults.get().getGlobal().getDatasets().getBarPercentage());
 	}
 
 	/**
@@ -171,7 +171,7 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, UndefinedValues.DOUBLE);
+		return getValue(Property.CATEGORY_PERCENTAGE, Defaults.get().getGlobal().getDatasets().getCategoryPercentage());
 	}
 
 	/**
@@ -180,7 +180,6 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getRadius() {
-		// FIXME default
 		return getValue(Property.RADIUS, Defaults.get().getGlobal().getElements().getPoint().getRadius());
 	}
 

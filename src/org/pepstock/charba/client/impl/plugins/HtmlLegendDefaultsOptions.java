@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -30,8 +31,10 @@ final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 
 	// defaults options instance
 	static final HtmlLegendDefaultsOptions DEFAULTS_INSTANCE = new HtmlLegendDefaultsOptions();
+	// legend item callback instance
+	private HtmlLegendItemCallback legendItemCallback = null;
 	// legend text callback instance
-	private HtmlLegendTextCallback legendTextCallback = null;
+	private HtmlLegendTitleCallback legendTitleCallback = null;
 
 	/**
 	 * Builds the object with an empty java script object and uses the constants as default.
@@ -88,10 +91,10 @@ final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 	/**
 	 * Sets the callback which can be implemented to change the text of legend for a specific item, as HTML.
 	 * 
-	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
+	 * @param legendItemCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	void setLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
-		this.legendTextCallback = legendTextCallback;
+	void setLegendTextCallback(HtmlLegendItemCallback legendItemCallback) {
+		this.legendItemCallback = legendItemCallback;
 	}
 
 	/**
@@ -99,7 +102,25 @@ final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	HtmlLegendTextCallback getLegendTextCallback() {
-		return legendTextCallback;
+	HtmlLegendItemCallback getLegendTextCallback() {
+		return legendItemCallback;
+	}
+	
+	/**
+	 * Sets the callback which can be implemented to change the text of legend' title, as HTML.
+	 * 
+	 * @param legendTitleCallback the callback which can be implemented to change the text of legend' title, as HTML
+	 */
+	void setLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
+		this.legendTitleCallback = legendTitleCallback;
+	}
+
+	/**
+	 * Returns the callback which can be implemented to change the text of legend' title, as HTML.
+	 * 
+	 * @return the callback which can be implemented to change the text of legend' title, as HTML
+	 */
+	HtmlLegendTitleCallback getLegendTitleCallback() {
+		return legendTitleCallback;
 	}
 }

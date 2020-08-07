@@ -15,27 +15,15 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.dom.safehtml.SafeHtml;
+import org.pepstock.charba.client.configuration.LegendTitle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
-import org.pepstock.charba.client.items.LegendItem;
 
 /**
- * This callback can be implemented to change the text of legend for a specific item, as HTML.<br>
+ * This callback can be implemented to change the text of legend's title, as HTML.<br>
  * This callback is used ONLY by {@link HtmlLegend} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface HtmlLegendTextCallback {
-
-	/**
-	 * Returns a text of legend for a specific item, as HTML
-	 * 
-	 * @param chart chart instance
-	 * @param item legend item which represents the text to create
-	 * @param currentText current text provided by legend labels callback.
-	 * @return HTML legend representation as SafeHTML
-	 */
-	SafeHtml generateLegendText(IsChart chart, LegendItem item, String currentText);
+public interface HtmlLegendTitleCallback extends HtmlLegendCallback<LegendTitle>{
 
 }

@@ -18,14 +18,15 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.HasLegendText;
+import org.pepstock.charba.client.items.LegendTexter;
 
 /**
  * This is the title configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitle> implements IsDefaultLegendTitle {
+public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitle> implements IsDefaultLegendTitle, HasLegendText {
 
 	/**
 	 * Name of properties of native object.
@@ -34,8 +35,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	{
 		DISPLAY("display"),
 		FONT("font"),
-		PADDING("padding"),
-		TEXT("text");
+		PADDING("padding");
 
 		// name value of property
 		private final String value;
@@ -63,6 +63,8 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 
 	// instance of font
 	private final Font font;
+	// legend texter instance
+	private final LegendTexter legendtexter;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -74,7 +76,9 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	 */
 	LegendTitle(Legend legend, Key childKey, IsDefaultLegendTitle defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		// creates the legend texter
+		this.legendtexter = new LegendTexter(new OptionsEnvelop<NativeObject>(getNativeObject()), legend);
 	}
 
 	/**
@@ -85,6 +89,16 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	@Override
 	public Font getFont() {
 		return font;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 */
+	@Override
+	public LegendTexter getLegendTexter() {
+		return legendtexter;
 	}
 
 	/**
@@ -127,27 +141,6 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
-	}
-
-	/**
-	 * Sets the title text to display.
-	 * 
-	 * @param text the title text to display.
-	 */
-	public void setText(String text) {
-		// stores the array
-		setValue(Property.TEXT, text);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the title text to display.
-	 * 
-	 * @return the title text to display
-	 */
-	public String getText() {
-		return getValue(Property.TEXT, UndefinedValues.STRING);
 	}
 
 }

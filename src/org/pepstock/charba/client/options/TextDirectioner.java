@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -31,8 +32,8 @@ final class TextDirectioner extends NativeObjectContainer {
 
 	// default text direction values
 	private final IsDefaultTextDirectioner defaultValues;
-	// model which contains the fonter
-	private final AbstractModel<?, ?> model;
+	// model which contains the directioner
+	private final AbstractNode model;
 
 	/**
 	 * Name of properties of native object.
@@ -65,7 +66,7 @@ final class TextDirectioner extends NativeObjectContainer {
 		}
 
 	}
-
+	
 	/**
 	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
@@ -73,7 +74,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @param model model which contains the text directioner.
 	 * @param defaultValues default value of text direction to use when the properties do not exist
 	 */
-	TextDirectioner(NativeObject nativeObject, AbstractModel<?, ?> model, IsDefaultTextDirectioner defaultValues) {
+	TextDirectioner(NativeObject nativeObject, AbstractNode model, IsDefaultTextDirectioner defaultValues) {
 		super(nativeObject);
 		// checks if model is consistent
 		if (model == null) {

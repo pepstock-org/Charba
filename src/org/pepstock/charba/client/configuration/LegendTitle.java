@@ -16,6 +16,11 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.dom.safehtml.SafeHtml;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
+import org.pepstock.charba.client.items.HasLegendText;
+import org.pepstock.charba.client.items.LegendTexter;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -24,7 +29,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendTitle extends ConfigurationContainer<ExtendedOptions> {
+public class LegendTitle extends ConfigurationContainer<ExtendedOptions> implements HasLegendText {
 
 	// font instance
 	private final Font font;
@@ -38,7 +43,17 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> {
 	LegendTitle(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 		// get embedded elements
-		this.font = new Font(options.getLegend().getLabels().getFont());
+		this.font = new Font(options.getLegend().getTitle().getFont());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 */
+	@Override
+	public LegendTexter getLegendTexter() {
+		return getConfiguration().getLegend().getTitle().getLegendTexter();
 	}
 
 	/**
@@ -91,6 +106,7 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @param text the title text to display.
 	 */
+	@Override
 	public void setText(String text) {
 		getConfiguration().getLegend().getTitle().setText(text);
 	}
@@ -100,7 +116,52 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @return the title text to display
 	 */
+	@Override
 	public String getText() {
 		return getConfiguration().getLegend().getTitle().getText();
+	}
+
+	/**
+	 * Sets the text that will be displayed, as HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * 
+	 * @param text the text that will be displayed, as HTML
+	 */
+	@Override
+	public void setText(SafeHtml text) {
+		getConfiguration().getLegend().getTitle().setText(text);
+	}
+
+	/**
+	 * Returns the text that will be displayed, as HTML.<br>
+	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * 
+	 * @return the text that will be displayed, as HTML.
+	 */
+	@Override
+	public SafeHtml getTextAsHtml() {
+		return getConfiguration().getLegend().getTitle().getTextAsHtml();
+	}
+
+	/**
+	 * Returns <code>true</code> if the text of legend's title is HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * 
+	 * @return <code>true</code> if the text of legend's title is HTML
+	 */
+	@Override
+	public boolean isHtmlText() {
+		return getConfiguration().getLegend().getTitle().isHtmlText();
+	}
+
+	/**
+	 * Sets <code>true</code> if the text of legend's titleis HTML.<br>
+	 * This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * 
+	 * @param htmlText <code>true</code> if the text of legend's title is HTML
+	 */
+	@Override
+	public void setHtmlText(boolean htmlText) {
+		getConfiguration().getLegend().getTitle().setHtmlText(htmlText);
 	}
 }

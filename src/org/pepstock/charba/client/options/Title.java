@@ -85,7 +85,7 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	 */
 	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
 
 	/**

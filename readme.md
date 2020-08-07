@@ -239,6 +239,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * reduce visibility of `setHidden` method of `Dataset` class and add hidden argument to `Dataset` constructor in order to set the initial visibility. To change the dataset visibility, use the `setDatasetVisibility` chart method.
  * remove `render(UpdateConfiguration)` method has been removed because it is not available anymore on CHART.JS.
  * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
+ * rename `HtmlLegendTextCallback` class into `HtmlLegendItemCallback`.
   
 ### Features
 
@@ -300,6 +301,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `getValueForPixel`
    * `getBaseValue`
    * `getBasePixel`
+ * manage new legend title into `HtmlLegend` plugin.
+   * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
+   * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
  
 ### Development
 
@@ -325,6 +329,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
  * rename the controller id for `Meter` and `Gauge` charts adding `charba` prefix in order to avoid overlapping with possible other controllers with `meter` and `gauge` ids.
  * `Window.enableResizeOnBeforePrint()` method has been fully implemented by JSINTEROP.
+ * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way. 
 
 License
 -------

@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
@@ -42,14 +44,11 @@ import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
- * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.<br>
- * It uses the {@link HtmlLegendLabelsCallback} to generated HTML legend.
+ * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class HtmlLegend extends AbstractPlugin {
-
-	// FIXME check the label if null
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -65,8 +64,8 @@ public final class HtmlLegend extends AbstractPlugin {
 	private static final HtmlLegend INSTANCE = new HtmlLegend();
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
-	// static callback to generate legend into HTML
-	private static final HtmlLegendLabelsCallback CALLBACK = new HtmlLegendLabelsCallback();
+	// static instance to generate legend into HTML
+	private static final HtmlLegendGenerator GENERATOR = new HtmlLegendGenerator();
 	// cache to store options in order do not load every time the options
 	private final Map<String, HtmlLegendOptions> pluginOptions = new HashMap<>();
 	// cache to store legend items managed by chart
@@ -220,8 +219,8 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
 				// gets div element
 				Div legendElement = pluginDivElements.get(chart.getId());
-				// invokes the legend callback to have the HTML of legend
-				SafeHtml html = CALLBACK.generateLegend(chart);
+				// invokes the legend generator to have the HTML of legend
+				SafeHtml html = GENERATOR.generateLegend(chart);
 				// removes all children of div element
 				legendElement.removeAllChildren();
 				// sets as inner HTML
@@ -278,7 +277,8 @@ public final class HtmlLegend extends AbstractPlugin {
 			}
 			// if here, the old options is no longer used
 			// then it removes the legend callback from cache
-			FACTORY.store(oldOptions.getCharbaId(), null);
+			FACTORY.store(oldOptions.getCharbaId(), (HtmlLegendItemCallback)null);
+			FACTORY.store(oldOptions.getCharbaId(), (HtmlLegendTitleCallback)null);
 		}
 	}
 

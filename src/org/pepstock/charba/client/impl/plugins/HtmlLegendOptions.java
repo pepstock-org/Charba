@@ -18,7 +18,8 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.HtmlLegendTextCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
+import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.enums.CursorType;
@@ -84,8 +85,10 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
 	private HtmlLegendDefaultsOptions defaultsOptions;
-	// legend text callback instance
-	private HtmlLegendTextCallback legendTextCallback = null;
+	// legend item callback instance
+	private HtmlLegendItemCallback legendItemCallback = null;
+	// legend title callback instance
+	private HtmlLegendTitleCallback legendTitleCallback = null;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -179,8 +182,8 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	public HtmlLegendTextCallback getLegendTextCallback() {
-		return legendTextCallback != null ? legendTextCallback : defaultsOptions.getLegendTextCallback();
+	public HtmlLegendItemCallback getLegendItemCallback() {
+		return legendItemCallback != null ? legendItemCallback : defaultsOptions.getLegendTextCallback();
 	}
 
 	/**
@@ -188,8 +191,8 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	public void setLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
-		internalSetLegendTextCallback(legendTextCallback);
+	public void setLegendItemCallback(HtmlLegendItemCallback legendTextCallback) {
+		internalSetLegendItemCallback(legendTextCallback);
 		// stores legend callback into factory as cache
 		HtmlLegend.FACTORY.store(getCharbaId(), legendTextCallback);
 	}
@@ -199,10 +202,40 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
-	void internalSetLegendTextCallback(HtmlLegendTextCallback legendTextCallback) {
-		this.legendTextCallback = legendTextCallback;
+	void internalSetLegendItemCallback(HtmlLegendItemCallback legendTextCallback) {
+		this.legendItemCallback = legendTextCallback;
 	}
 
+	/**
+	 * Returns the callback which can be implemented to change the text of legend's title, as HTML.
+	 * 
+	 * @return the callback which can be implemented to change the text of legend's title, as HTML
+	 */
+	public HtmlLegendTitleCallback getLegendTitleCallback() {
+		return legendTitleCallback != null ? legendTitleCallback : defaultsOptions.getLegendTitleCallback();
+	}
+
+	/**
+	 * Sets the callback which can be implemented to change the text of legend's title, as HTML.
+	 * 
+	 * @param legendTitleCallback the callback which can be implemented to change the text of legend's title, as HTML
+	 */
+	public void setLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
+		internalSetLegendTitleCallback(legendTitleCallback);
+		// stores legend callback into factory as cache
+		HtmlLegend.FACTORY.store(getCharbaId(), legendTitleCallback);
+	}
+
+	/**
+	 * Sets the callback which can be implemented to change the text of legend's title, as HTML.
+	 * 
+	 * @param legendTitleCallback the callback which can be implemented to change the text of legend's title, as HTML
+	 */
+	void internalSetLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
+		this.legendTitleCallback = legendTitleCallback;
+	}
+
+	
 	/**
 	 * Sets the maximum amount of columns of legend.
 	 * 

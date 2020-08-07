@@ -39,9 +39,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	public static final double DEFAULT_MAX = 100D;
 
-	// animation mode active configuration
-	private final AnimationMode disabledActiveMode = new AnimationMode(DefaultAnimationModeKey.ACTIVE);
-
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.
@@ -50,8 +47,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	BaseMeterChart(Type type) {
 		super(type);
-		// disables the animation mode
-		this.disabledActiveMode.setDuration(0);
 	}
 
 	/**
@@ -104,6 +99,12 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		getOptions().getTooltips().setEnabled(false);
 		// disables tooltips custom callback
 		getOptions().getTooltips().setCustomCallback(null);
+		// creates a new mode evry time
+		// because once it has been added to the options
+		// it could be changed by user
+		AnimationMode disabledActiveMode = new AnimationMode(DefaultAnimationModeKey.ACTIVE);
+		// disables the animation mode
+		disabledActiveMode.setDuration(0);
 		// disables animation active
 		getOptions().getAnimation().setMode(disabledActiveMode);
 		// scans all datasets
