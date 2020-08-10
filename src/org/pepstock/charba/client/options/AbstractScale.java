@@ -26,6 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Scales are an integral part of a chart.<br>
@@ -88,7 +89,10 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		ANGLE_LINES("angleLines"),
 		POINT_LABELS("pointLabels"),
 		REVERSE("reverse"),
-		STACKED("stacked");
+		STACKED("stacked"),
+		// internal property for min and max index in order to store as integer
+		CHARBA_MIN_INDEX("_charbaMinIndex"),
+		CHARBA_MAX_INDEX("_charbaMaxIndex");
 
 		// name value of property
 		private final String value;
@@ -261,7 +265,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return If defined, this will override the data minimum.
 	 */
 	public Date getMinAsDate() {
-		return getValue(Property.MIN, (Date) null);
+		return getValueForMultipleKeyTypes(Property.MIN, (Date) null);
 	}
 
 	/**
@@ -302,7 +306,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return if defined, this will override the data maximum.
 	 */
 	public Date getMaxAsDate() {
-		return getValue(Property.MAX, (Date) null);
+		return getValueForMultipleKeyTypes(Property.MAX, (Date) null);
 	}
 
 	/**
@@ -344,6 +348,83 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public String getMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
 	}
+	
+	/**
+	 * Sets the minimum item at passed index to display.
+	 * 
+	 * @param min The minimum item at passed index  to display
+	 */
+	public void setMinIndex(int min) {
+		setIndex(Property.MIN, Property.CHARBA_MIN_INDEX, min);
+	}
+	
+	/**
+	 * Returns the minimum item at passed index to display
+	 * 
+	 * @return The minimum item at passed index to display
+	 */
+	public int getMinIndex() {
+		return getIndex(Property.MIN, Property.CHARBA_MIN_INDEX);
+	}
+	
+	/**
+	 * Sets the maximum item at passed index to display.
+	 * 
+	 * @param max the maximum item at passed index to display.
+	 */
+	public void setMaxIndex(int max) {
+		setIndex(Property.MAX, Property.CHARBA_MAX_INDEX, max);
+	}
+
+	/**
+	 * Returns the maximum item at passed index to display.
+	 * 
+	 * @return the maximum item at passed index to display.
+	 */
+	public int getMaxIndex() {
+		return getIndex(Property.MAX, Property.CHARBA_MAX_INDEX);
+	}
+	
+	/**
+	 * Sets the minimum item at passed index to display.
+	 * 
+	 * @param index index to stored
+	 * @param property CHART.JS property to store the index
+	 * @param charbaProperty CHARBA property to store the index
+	 */
+	private void setIndex(Property property, Property charbaProperty, int index) {
+		// checks if index is consistent
+		if (index >= 0) {
+			setValue(property, index);
+			setValue(charbaProperty, index);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		}
+	}
+	
+	/**
+	 * Checks and returns the index related to the passed properties as arguments.
+	 * 
+	 * @param property CHART.JS property to store the index
+	 * @param charbaProperty CHARBA property to store the index
+	 * @return the index stored or {@link UndefinedValues#INTEGER} if the 2 properties contain 2 different values.
+	 */
+	private int getIndex(Property property, Property charbaProperty) {
+		// gets charba index
+		int charbaIndex = getValue(charbaProperty, UndefinedValues.INTEGER);
+		// gets value
+		int index = getValue(property, UndefinedValues.INTEGER);
+		// checks if the 2 values are the same
+		if (charbaIndex == index) {
+			// equals then returns the index
+			return charbaIndex;
+		}
+		// if here the charba index is not
+		// equals to the index stored in the value
+		// that means that the value has been changed by another method
+		return UndefinedValues.INTEGER;
+	}
+
 
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
