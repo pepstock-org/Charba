@@ -141,7 +141,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	/**
 	 * Name of common properties of native object related to a dataset.
 	 */
-	protected enum Property implements Key
+	protected enum CommonProperty implements Key
 	{
 		CLIP("clip"),
 		BACKGROUND_COLOR("backgroundColor"),
@@ -159,7 +159,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		 * 
 		 * @param value value of property name
 		 */
-		private Property(String value) {
+		private CommonProperty(String value) {
 			this.value = value;
 		}
 
@@ -250,17 +250,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -------------------------------
 		// gets value calling callback
 		backgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), backgroundColorCallback, Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), backgroundColorCallback, CommonProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderColorCallback, Property.BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderColorCallback, CommonProperty.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
 		hoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBackgroundColorCallback, Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBackgroundColorCallback, CommonProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
 		hoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderColorCallback, CommonProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 		// invokes callback
@@ -503,12 +503,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (backgroundColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(Property.BACKGROUND_COLOR);
+			resetBeingCallback(CommonProperty.BACKGROUND_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(Property.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
+			setValue(CommonProperty.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.BACKGROUND_COLOR);
+			remove(CommonProperty.BACKGROUND_COLOR);
 		}
 	}
 
@@ -532,12 +532,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (borderColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(Property.BORDER_COLOR);
+			resetBeingCallback(CommonProperty.BORDER_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_COLOR, borderColorCallbackProxy.getProxy());
+			setValue(CommonProperty.BORDER_COLOR, borderColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_COLOR);
+			remove(CommonProperty.BORDER_COLOR);
 		}
 	}
 
@@ -561,10 +561,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (borderWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
+			setValue(CommonProperty.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_WIDTH);
+			remove(CommonProperty.BORDER_WIDTH);
 		}
 	}
 
@@ -588,12 +588,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (hoverBackgroundColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(Property.HOVER_BACKGROUND_COLOR);
+			resetBeingCallback(CommonProperty.HOVER_BACKGROUND_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BACKGROUND_COLOR, hoverBackgroundColorCallbackProxy.getProxy());
+			setValue(CommonProperty.HOVER_BACKGROUND_COLOR, hoverBackgroundColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BACKGROUND_COLOR);
+			remove(CommonProperty.HOVER_BACKGROUND_COLOR);
 		}
 	}
 
@@ -617,12 +617,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (hoverBorderColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(Property.HOVER_BORDER_COLOR);
+			resetBeingCallback(CommonProperty.HOVER_BORDER_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BORDER_COLOR, hoverBorderColorCallbackProxy.getProxy());
+			setValue(CommonProperty.HOVER_BORDER_COLOR, hoverBorderColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BORDER_COLOR);
+			remove(CommonProperty.HOVER_BORDER_COLOR);
 		}
 	}
 
@@ -646,10 +646,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (hoverBorderWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BORDER_WIDTH, hoverBorderWidthCallbackProxy.getProxy());
+			setValue(CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BORDER_WIDTH);
+			remove(CommonProperty.HOVER_BORDER_WIDTH);
 		}
 	}
 
@@ -784,7 +784,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public void setClip(double clip) {
 		// sets value
-		setValue(Property.CLIP, clip);
+		setValue(CommonProperty.CLIP, clip);
 	}
 
 	/**
@@ -795,7 +795,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public void setClip(Clip clip) {
 		// sets value
-		setValue(Property.CLIP, clip);
+		setValue(CommonProperty.CLIP, clip);
 	}
 
 	/**
@@ -808,7 +808,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public double getClip() {
 		// gets the type stored
-		ObjectType type = type(Property.CLIP);
+		ObjectType type = type(CommonProperty.CLIP);
 		// checks if previously was set to a clip object
 		// therefore NaN
 		if (ObjectType.OBJECT.equals(type)) {
@@ -816,7 +816,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return UndefinedValues.DOUBLE;
 		}
 		// gets value as number
-		return getValue(Property.CLIP, Defaults.get().getGlobal().getElements().getLine().getBorderWidth() / 2D);
+		return getValue(CommonProperty.CLIP, Defaults.get().getGlobal().getElements().getLine().getBorderWidth() / 2D);
 	}
 
 	/**
@@ -829,7 +829,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public Clip getClipAsObject() {
 		// gets the type stored
-		ObjectType type = type(Property.CLIP);
+		ObjectType type = type(CommonProperty.CLIP);
 		// checks if previously was set to a number
 		// therefore new object with the same values
 		if (ObjectType.NUMBER.equals(type)) {
@@ -839,7 +839,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		}
 		// creates new value with previous item
 		// if there is otherwise an empyt object
-		return new Clip(getValue(Property.CLIP));
+		return new Clip(getValue(CommonProperty.CLIP));
 	}
 
 	/**

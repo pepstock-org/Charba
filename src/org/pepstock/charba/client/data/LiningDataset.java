@@ -365,9 +365,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setValue(Dataset.Property.BACKGROUND_COLOR, backgroundColor);
+		setValue(Dataset.CommonProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes the flag because default is string color
-		resetBeingColors(Dataset.Property.BACKGROUND_COLOR);
+		resetBeingColors(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -379,9 +379,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getPatternsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
-		resetBeingPatterns(Dataset.Property.BACKGROUND_COLOR);
+		resetBeingPatterns(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -393,9 +393,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
-		resetBeingGradients(Dataset.Property.BACKGROUND_COLOR);
+		resetBeingGradients(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -407,9 +407,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+		if (hasColors(Dataset.CommonProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.Property.BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
+			return getValue(Dataset.CommonProperty.BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
@@ -438,8 +438,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if the property is not a pattern (therefore a color or gradient)
-		if (hasPatterns(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
-			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
+		if (hasPatterns(Dataset.CommonProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.CommonProperty.BACKGROUND_COLOR);
 			// returns color as pattern
 			return patterns.get(0);
 		} else {
@@ -459,8 +459,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
-			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
+		if (hasGradients(Dataset.CommonProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.CommonProperty.BACKGROUND_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
 		} else {
@@ -489,9 +489,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setValue(Dataset.Property.BORDER_COLOR, borderColor);
+		setValue(Dataset.CommonProperty.BORDER_COLOR, borderColor);
 		// removes the flag because default is string color
-		resetBeingColors(Dataset.Property.BORDER_COLOR);
+		resetBeingColors(Dataset.CommonProperty.BORDER_COLOR);
 	}
 
 	/**
@@ -503,9 +503,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
 		// removes the property
-		resetBeingGradients(Dataset.Property.BORDER_COLOR);
+		resetBeingGradients(Dataset.CommonProperty.BORDER_COLOR);
 	}
 
 	/**
@@ -517,9 +517,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public String getBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
+		if (hasColors(Dataset.CommonProperty.BORDER_COLOR) && getBorderColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.Property.BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
+			return getValue(Dataset.CommonProperty.BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
@@ -548,8 +548,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Gradient getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
-			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.BORDER_COLOR);
+		if (hasGradients(Dataset.CommonProperty.BORDER_COLOR) && getBorderColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.CommonProperty.BORDER_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
 		} else {
@@ -569,7 +569,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBorderWidth((BorderWidthCallback) null);
 		// stores value
-		setValue(Dataset.Property.BORDER_WIDTH, borderWidth);
+		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -580,7 +580,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public int getBorderWidth() {
 		// checks if a callback has been set for this property
 		if (getBorderWidthCallback() == null) {
-			return getValue(Dataset.Property.BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+			return getValue(Dataset.CommonProperty.BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -749,9 +749,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setValue(Dataset.Property.HOVER_BACKGROUND_COLOR, color);
+		setValue(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, color);
 		// removes the flag because default is string color
-		resetBeingColors(Dataset.Property.HOVER_BACKGROUND_COLOR);
+		resetBeingColors(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -763,9 +763,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern));
+		getPatternsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern));
 		// removes the property
-		resetBeingPatterns(Dataset.Property.HOVER_BACKGROUND_COLOR);
+		resetBeingPatterns(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -777,9 +777,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient));
 		// removes previous configuration to other containers
-		resetBeingGradients(Dataset.Property.HOVER_BACKGROUND_COLOR);
+		resetBeingGradients(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -789,9 +789,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public String getHoverBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+		if (hasColors(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.Property.HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
+			return getValue(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
@@ -816,8 +816,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Pattern getHoverBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color or gradient)
-		if (hasPatterns(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
-			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.Property.HOVER_BACKGROUND_COLOR);
+		if (hasPatterns(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 			// returns color as pattern
 			return patterns.get(0);
 		} else {
@@ -835,8 +835,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Gradient getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Dataset.Property.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
-			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.HOVER_BACKGROUND_COLOR);
+		if (hasGradients(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
 		} else {
@@ -866,9 +866,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBorderColor((BorderColorCallback) null);
 		// stores value
-		setValue(Dataset.Property.HOVER_BORDER_COLOR, color);
+		setValue(Dataset.CommonProperty.HOVER_BORDER_COLOR, color);
 		// removes previous configuration to other containers
-		resetBeingColors(Dataset.Property.HOVER_BORDER_COLOR);
+		resetBeingColors(Dataset.CommonProperty.HOVER_BORDER_COLOR);
 	}
 
 	/**
@@ -880,9 +880,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.Property.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient));
 		// removes previous configuration to other containers
-		resetBeingGradients(Dataset.Property.HOVER_BORDER_COLOR);
+		resetBeingGradients(Dataset.CommonProperty.HOVER_BORDER_COLOR);
 	}
 
 	/**
@@ -892,9 +892,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public String getHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
+		if (hasColors(Dataset.CommonProperty.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.Property.HOVER_BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
+			return getValue(Dataset.CommonProperty.HOVER_BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
@@ -919,8 +919,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public Gradient getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
-		if (hasGradients(Dataset.Property.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
-			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.HOVER_BORDER_COLOR);
+		if (hasGradients(Dataset.CommonProperty.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.CommonProperty.HOVER_BORDER_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
 		} else {
@@ -940,7 +940,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBorderWidth((BorderWidthCallback) null);
 		// stores value
-		setValue(Dataset.Property.HOVER_BORDER_WIDTH, width);
+		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, width);
 	}
 
 	/**
@@ -951,7 +951,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public int getHoverBorderWidth() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderWidthCallback() == null) {
-			return getValue(Dataset.Property.HOVER_BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+			return getValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
 		}
 		// if here, the property is a callback
 		// then returns the default
@@ -2237,7 +2237,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
-		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key)) {
+		if (Key.equals(Dataset.CommonProperty.BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, key)) {
 			// gets the first element
 			CanvasPatternItem pattern = canvasPatternsList.get(0);
 			// creates pattern and stores it
@@ -2253,7 +2253,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
-		if (Key.equals(Dataset.Property.BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.BORDER_COLOR, key) || Key.equals(Dataset.Property.HOVER_BACKGROUND_COLOR, key) || Key.equals(Dataset.Property.HOVER_BORDER_COLOR, key)) {
+		if (Key.equals(Dataset.CommonProperty.BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.BORDER_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BORDER_COLOR, key)) {
 			// gets the first element
 			CanvasGradientItem gradient = canvasGradientsList.get(0);
 			// creates gradient and stores it

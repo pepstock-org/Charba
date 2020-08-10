@@ -113,12 +113,12 @@ public class MeterDataset extends Dataset {
 		this.max = Math.max(max, MINIMUM_VALUE);
 		// sets default dataset values
 		// removing borders
-		setArrayValue(Dataset.Property.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
-		setArrayValue(Dataset.Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
 		// sets the color of datasets.
-		setArrayValue(Dataset.Property.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
+		setArrayValue(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disable hover back ground color
-		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
+		setArrayValue(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disables animation active mode
 		getAnimation().setModeEnabled(DefaultAnimationModeKey.ACTIVE, false);
 	}
@@ -142,8 +142,8 @@ public class MeterDataset extends Dataset {
 		// creates array reference
 		ArrayString array = ArrayString.fromOrEmpty(valueToSet, getEmptyColorAsString());
 		// stores value
-		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
-		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.CommonProperty.BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, array);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class MeterDataset extends Dataset {
 	 */
 	public String getColorAsString() {
 		// returns list of colors
-		ArrayString array = getArrayValue(Dataset.Property.BACKGROUND_COLOR);
+		ArrayString array = getArrayValue(Dataset.CommonProperty.BACKGROUND_COLOR);
 		// returns color as string
 		return array.get(0);
 	}
@@ -185,8 +185,8 @@ public class MeterDataset extends Dataset {
 		String valueToSet = emptyValueColor != null ? emptyValueColor : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING;
 		ArrayString array = ArrayString.fromOrEmpty(getColorAsString(), valueToSet);
 		// stores value
-		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
-		setArrayValue(Dataset.Property.HOVER_BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.CommonProperty.BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, array);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class MeterDataset extends Dataset {
 	 */
 	public String getEmptyColorAsString() {
 		// returns list of colors
-		ArrayString array = getArrayValue(Dataset.Property.BACKGROUND_COLOR);
+		ArrayString array = getArrayValue(Dataset.CommonProperty.BACKGROUND_COLOR);
 		// checks if the array is consistent
 		if (array != null) {
 			// returns color as string

@@ -366,7 +366,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				}
 			}
 			// retrieves the object
-			return retrieveGradient(dataset, legendItem, Dataset.Property.BACKGROUND_COLOR);
+			return retrieveGradient(dataset, legendItem, Dataset.CommonProperty.BACKGROUND_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -403,7 +403,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				}
 			}
 			// retrieves the object
-			return retrieveGradient(dataset, legendItem, Dataset.Property.BORDER_COLOR);
+			return retrieveGradient(dataset, legendItem, Dataset.CommonProperty.BORDER_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -440,7 +440,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				}
 			}
 			// retrieves the object
-			return retrievePattern(dataset, legendItem, Dataset.Property.BACKGROUND_COLOR);
+			return retrievePattern(dataset, legendItem, Dataset.CommonProperty.BACKGROUND_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
@@ -477,7 +477,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				}
 			}
 			// retrieves the object
-			return retrievePattern(dataset, legendItem, Dataset.Property.BORDER_COLOR);
+			return retrievePattern(dataset, legendItem, Dataset.CommonProperty.BORDER_COLOR);
 		}
 		// if here, dataset non consistent
 		// then returns null
