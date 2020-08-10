@@ -31,6 +31,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
  * 
+ * FIXME BorderDashOffset is scriptable
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

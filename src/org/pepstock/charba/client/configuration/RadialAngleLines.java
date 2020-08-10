@@ -25,6 +25,9 @@ import org.pepstock.charba.client.colors.IsColor;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * FIXME color, lineWidth, borderDash, borderDashOffset are scriptable
+ * The borderDash setting only accepts a static value or a function. Passing an array of arrays is not supported.
+ *
  */
 public class RadialAngleLines extends AxisContainer {
 

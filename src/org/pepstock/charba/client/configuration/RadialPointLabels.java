@@ -28,6 +28,8 @@ import jsinterop.annotations.JsFunction;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * FIXME font is scriptable
  *
  */
 public class RadialPointLabels extends AxisContainer {

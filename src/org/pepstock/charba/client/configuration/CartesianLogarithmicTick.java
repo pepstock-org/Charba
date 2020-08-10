@@ -21,6 +21,8 @@ import org.pepstock.charba.client.callbacks.TickCallback;
  * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
  * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
  * 
+ * FIXME format property is missing : https://www.chartjs.org/docs/master/axes/cartesian/linear#tick-configuration-options
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

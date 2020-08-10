@@ -22,6 +22,8 @@ import org.pepstock.charba.client.options.Ticks;
  * Specific tick with minimum and maximum sub ticks.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * FIXME Font is scriptable
  *
  */
 abstract class Tick extends AxisContainer {
