@@ -15,9 +15,21 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.List;
+
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.OffsetCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayIntegerList;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -27,12 +39,27 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  */
 public class PieDataset extends HovingDataset implements HasBorderAlign {
 
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// border offset callback instance
+	private OffsetCallback offsetCallback = null;
+	// hover offset callback instance
+	private OffsetCallback hoverOffsetCallback = null;
+
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		WEIGHT("weight");
+		WEIGHT("weight"),
+		OFFSET("offset"),
+		HOVER_OFFSET("hoverOffset");
 
 		// name value of property
 		private final String value;
@@ -119,6 +146,14 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		super(type, defaultValues, hidden);
 		// creates border aligner instance
 		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		// gets value calling callback
+		hoverOffsetCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<NativeObject>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
 	}
 
 	/*
@@ -150,4 +185,111 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	public double getWeight() {
 		return getValue(Property.WEIGHT, getDefaultValues().getElements().getArc().getWeight());
 	}
+
+	/**
+	 * Sets the arc offset (in pixels).
+	 * 
+	 * @param offset the arc offset
+	 */
+	public void setOffset(int... offset) {
+		setValueOrArray(Property.OFFSET, offset);
+	}
+
+	/**
+	 * Returns the arc offset (in pixels).
+	 * 
+	 * @return the arc offset
+	 */
+	public List<Integer> getOffset() {
+		// checks if the callback has not been
+		if (getOffsetCallback() == null) {
+			// returns the array
+			ArrayInteger array = getValueOrArray(Property.OFFSET, getDefaultValues().getElements().getArc().getOffset());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayIntegerList();
+	}
+
+	/**
+	 * Sets the arc offset (in pixels), when dataset if hovered.
+	 * 
+	 * @param offset the arc offset, when dataset if hovered
+	 */
+	public void setHoverOffset(int... offset) {
+		setValueOrArray(Property.HOVER_OFFSET, offset);
+	}
+
+	/**
+	 * Returns the arc offset (in pixels), when dataset if hovered.
+	 * 
+	 * @return the arc offset, when dataset if hovered
+	 */
+	public List<Integer> getHoverOffset() {
+		// checks if the callback has not been
+		if (getHoverOffsetCallback() == null) {
+			// returns the array
+			ArrayInteger array = getValueOrArray(Property.HOVER_OFFSET, getDefaultValues().getElements().getArc().getOffset());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayIntegerList();
+	}
+
+	/**
+	 * Returns the offset callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the offset callback, if set, otherwise <code>null</code>.
+	 */
+	public OffsetCallback getOffsetCallback() {
+		return offsetCallback;
+	}
+
+	/**
+	 * Sets the offset callback.
+	 * 
+	 * @param offsetCallback the offset callback.
+	 */
+	public void setOffsetCallback(OffsetCallback offsetCallback) {
+		// sets the callback
+		this.offsetCallback = offsetCallback;
+		// checks if callback is consistent
+		if (offsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.OFFSET, offsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.OFFSET);
+		}
+	}
+
+	/**
+	 * Returns the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
+	 */
+	public OffsetCallback getHoverOffsetCallback() {
+		return offsetCallback;
+	}
+
+	/**
+	 * Sets the offset callback, when dataset is hovered.
+	 * 
+	 * @param offsetCallback the offset callback, when dataset is hovered.
+	 */
+	public void setHoverOffsetCallback(OffsetCallback offsetCallback) {
+		// sets the callback
+		this.hoverOffsetCallback = offsetCallback;
+		// checks if callback is consistent
+		if (offsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_OFFSET, hoverOffsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_OFFSET);
+		}
+	}
+
 }

@@ -89,4 +89,22 @@ public class Arc extends AbstractConfigurationElement {
 	public double getAngle() {
 		return getOptions().getElements().getArc().getAngle();
 	}
+	
+	/**
+	 * Sets the arc offset (in pixels).
+	 * 
+	 * @param offset the arc offset
+	 */
+	public void setOffset(int offset) {
+		getOptions().getElements().getArc().setOffset(offset);
+	}
+
+	/**
+	 * Returns the arc offset (in pixels).
+	 * 
+	 * @return the arc offset
+	 */
+	public int getOffset() {
+		return getOptions().getElements().getArc().getOffset();
+	}
 }

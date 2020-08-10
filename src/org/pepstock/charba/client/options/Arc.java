@@ -35,7 +35,8 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	{
 		BORDER_ALIGN("borderAlign"),
 		WEIGHT("weight"),
-		ANGLE("angle");
+		ANGLE("angle"),
+		OFFSET("offset");
 
 		// name value of property
 		private final String value;
@@ -136,5 +137,26 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	@Override
 	public double getAngle() {
 		return getValue(Property.ANGLE, getDefaultValues().getAngle());
+	}
+	
+	/**
+	 * Sets the arc offset (in pixels).
+	 * 
+	 * @param offset the arc offset
+	 */
+	public void setOffset(int offset) {
+		setValue(Property.OFFSET, offset);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the arc offset (in pixels).
+	 * 
+	 * @return the arc offset
+	 */
+	@Override
+	public int getOffset() {
+		return getValue(Property.OFFSET, getDefaultValues().getOffset());
 	}
 }

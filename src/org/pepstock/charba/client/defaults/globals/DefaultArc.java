@@ -34,6 +34,8 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 
 	private static final double DEFAULT_WEIGHT = 1D;
 
+	private static final int DEFAULT_OFFSET = 0;
+
 	/**
 	 * Creates a default arc
 	 */
@@ -69,6 +71,16 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	@Override
 	public double getAngle() {
 		return UndefinedValues.DOUBLE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getOffset()
+	 */
+	@Override
+	public int getOffset() {
+		return DEFAULT_OFFSET;
 	}
 
 }
