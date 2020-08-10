@@ -70,7 +70,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		TICKS("ticks"),
 		// cartesian
 		LABELS("labels"),
-		PADDING("padding"),
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID_LINES("gridLines"),
@@ -627,28 +626,4 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		return result;
 	}
 
-	/**
-	 * Padding between the tick label and the axis.<br>
-	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
-	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
-	 * 
-	 * @param padding padding between the tick label and the axis
-	 */
-	public final void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Padding between the tick label and the axis.<br>
-	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
-	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
-	 * 
-	 * @return padding between the tick label and the axis
-	 */
-	@Override
-	public final int getPadding() {
-		return getValue(Property.PADDING, getDefaultValues().getPadding());
-	}
 }

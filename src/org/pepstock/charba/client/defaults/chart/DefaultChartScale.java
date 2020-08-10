@@ -278,14 +278,4 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.isReverse();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getPadding()
-	 */
-	@Override
-	public int getPadding() {
-		return scale.getPadding();
-	}
-
 }

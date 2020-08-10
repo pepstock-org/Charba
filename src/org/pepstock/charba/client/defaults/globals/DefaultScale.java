@@ -38,8 +38,6 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final double DEFAULT_WEIGHT = 0D;
 
-	private static final int DEFAULT_PADDING = 0;
-
 	private static final boolean DEFAULT_STACKED = false;
 
 	private static final boolean DEFAULT_BEGIN_AT_ZERO = true;
@@ -283,16 +281,6 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public boolean isReverse() {
 		return DEFAULT_REVERSE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getPadding()
-	 */
-	@Override
-	public int getPadding() {
-		return DEFAULT_PADDING;
 	}
 
 }

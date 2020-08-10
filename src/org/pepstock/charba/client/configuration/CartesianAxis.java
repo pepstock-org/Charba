@@ -151,28 +151,5 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public Position getPosition() {
 		return getScale().getPosition();
-	}
-	
-	/**
-	 * Padding between the tick label and the axis.<br>
-	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
-	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
-	 * 
-	 * @param padding padding between the tick label and the axis
-	 */
-	public final void setPadding(int padding) {
-		getScale().setPadding(padding);
-	}
-
-	/**
-	 * Padding between the tick label and the axis.<br>
-	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
-	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
-	 * 
-	 * @return padding between the tick label and the axis
-	 */
-	public final int getPadding() {
-		return getScale().getPadding();
-	}
-	
+	}	
 }

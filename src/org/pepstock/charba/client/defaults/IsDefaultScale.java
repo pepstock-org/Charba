@@ -158,14 +158,5 @@ public interface IsDefaultScale {
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	ScaleBounds getBounds();
-	
-	/**
-	 * Padding between the tick label and the axis.<br>
-	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
-	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
-	 * 
-	 * @return padding between the tick label and the axis
-	 */
-	int getPadding();
 
 }
