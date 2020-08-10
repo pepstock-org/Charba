@@ -24,7 +24,9 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
  * Contains the labels of the chart.<br>
@@ -47,6 +49,19 @@ public final class Labels {
 	}
 
 	/**
+	 * Loads the java script array into an envelop.<br>
+	 * This is callable only from <code>options</code> package.
+	 * 
+	 * @param envelop passed empty, which will contain an native array.
+	 */
+	public void loadtArray(OptionsEnvelop<ArrayMixedObject> envelop) {
+		// checks envelop
+		IsEnvelop.checkIfValid(envelop);
+		// loads the envelop with the array
+		envelop.setContent(getArray());
+	}
+
+	/**
 	 * Returns the java script array.
 	 * 
 	 * @return the java script array.
@@ -62,6 +77,17 @@ public final class Labels {
 	 */
 	public static Labels build() {
 		return new Labels(new ArrayMixedObject());
+	}
+
+	/**
+	 * Loads the labels form a native array.<br>
+	 * This is callable only from <code>options</code> package.
+	 * 
+	 * @param envelop contains an native array.
+	 * @return a labels instance
+	 */
+	public static Labels load(OptionsEnvelop<ArrayMixedObject> envelop) {
+		return new Labels(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

@@ -17,9 +17,11 @@ package org.pepstock.charba.client.options;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
@@ -67,6 +69,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		WEIGHT("weight"),
 		TICKS("ticks"),
 		// cartesian
+		LABELS("labels"),
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID_LINES("gridLines"),
@@ -557,5 +560,69 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final ScaleBounds getBounds() {
 		return getValue(Property.BOUNDS, ScaleBounds.values(), getDefaultValues().getBounds());
 	}
+	
+	/**
+	 * Sets the labels of the data.
+	 * 
+	 * @param labels array of labels
+	 */
+	public void setLabels(String... labels) {
+		// creates a label object
+		Labels internalLabels = Labels.build();
+		// loads
+		internalLabels.load(labels);
+		// sets labels
+		setLabels(internalLabels);
+	}
 
+	/**
+	 * Sets the labels of the data.
+	 * 
+	 * @param labels labels object to manage also multi-line labels
+	 */
+	public void setLabels(Labels labels) {
+		// checks if argument is consistent
+		if (labels != null && !labels.isEmpty()) {
+			// creates envelop to get hte array
+			OptionsEnvelop<ArrayMixedObject> envelop = new OptionsEnvelop<>(true);
+			// loads the array of labels
+			labels.loadtArray(envelop);
+			setArrayValue(Property.LABELS, envelop.getContent());
+		}
+	}
+
+	/**
+	 * Returns the labels.
+	 * 
+	 * @return the labels
+	 */
+	public Labels getLabels() {
+		return getLabels(false);
+	}
+
+	/**
+	 * Returns the labels for axes.
+	 * 
+	 * @param binding if <code>true</code> binds the new labels into container
+	 * @return the labels for axes
+	 */
+	public Labels getLabels(boolean binding) {
+		// checks if there is the property
+		if (has(Property.LABELS)) {
+			// gets array
+			ArrayMixedObject array = getArrayValue(Property.LABELS);
+			// returns labels
+			return Labels.load(new OptionsEnvelop<>(array));
+		}
+		// if here, no array stored
+		// object to return
+		Labels result = Labels.build();
+		// checks if binding new array
+		if (binding) {
+			// stores array
+			setLabels(result);
+		}
+		// returns labels
+		return result;
+	}
 }

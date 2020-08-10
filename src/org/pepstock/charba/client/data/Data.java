@@ -108,7 +108,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public void setLabels(Labels labels) {
 		// checks if argument is consistent
-		if (labels != null && !labels.getArray().isEmpty()) {
+		if (labels != null && !labels.isEmpty()) {
 			setArrayValue(Property.LABELS, labels.getArray());
 		}
 	}
