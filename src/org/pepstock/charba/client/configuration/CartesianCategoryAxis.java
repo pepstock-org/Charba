@@ -122,6 +122,24 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public String getMin() {
 		return getScale().getMinAsString();
 	}
+	
+	/**
+	 * Returns the minimum item at passed index to display
+	 * 
+	 * @return The minimum item at passed index to display
+	 */
+	public double getMinIndex() {
+		return getScale().getMin();
+	}
+	
+	/**
+	 * Sets the minimum item at passed index to display.
+	 * 
+	 * @param min The minimum item at passed index  to display
+	 */
+	public void setMinIndex(double min) {
+		getScale().setMin(min);
+	}
 
 	/**
 	 * Sets the maximum item to display.
@@ -140,5 +158,24 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public String getMax() {
 		return getScale().getMaxAsString();
 	}
+	
+	/**
+	 * Sets the maximum item at passed index to display.
+	 * 
+	 * @param max the maximum item at passed index to display.
+	 */
+	public void setMaxIndex(double max) {
+		getScale().setMax(max);
+	}
+
+	/**
+	 * Returns the maximum item at passed index to display.
+	 * 
+	 * @return the maximum item at passed index to display.
+	 */
+	public double getMaxIndex() {
+		return getScale().getMax();
+	}
+	
 
 }
