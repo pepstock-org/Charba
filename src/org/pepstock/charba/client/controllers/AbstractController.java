@@ -17,6 +17,7 @@ package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * Abstract implementation of a controller. If the chart type is implemented without returning a <code>null</code>, every method will invoke the default implementation of parent
@@ -102,14 +103,15 @@ public abstract class AbstractController implements Controller {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart, java.lang.String)
+	 * @see org.pepstock.charba.client.Controller#update(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public void update(ControllerContext context, IsChart chart, String mode) {
+	public void update(ControllerContext context, IsChart chart, IsAnimationModeKey mode) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().update(getType(), context, mode);
+			JsControllerHelper.get().update(getType(), context, IsAnimationModeKey.isValid(mode) ? mode.value() : null);
 		}
 	}
 

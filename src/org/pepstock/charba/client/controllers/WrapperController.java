@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 import jsinterop.annotations.JsFunction;
 
@@ -384,7 +385,13 @@ final class WrapperController extends NativeObjectContainer {
 	void onUpdate(ControllerContext context, IsChart chart, String mode) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.update(context, chart, mode);
+			// checks if update mode is consistent
+			if (mode == null || mode.length() == 0) {
+				delegation.update(context, chart, null);
+			} else {
+				// otherwise creates a mode by the string
+				delegation.update(context, chart, IsAnimationModeKey.create(mode));
+			}
 		}
 	}
 
