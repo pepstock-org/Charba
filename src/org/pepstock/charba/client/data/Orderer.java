@@ -76,7 +76,7 @@ public final class Orderer extends NativeObjectContainer {
 	 * 
 	 * @param order the drawing order of dataset.
 	 */
-	public void setOrder(int order) {
+	void setOrder(int order) {
 		// then sets it
 		setValue(Property.ORDER, order);
 	}
@@ -87,7 +87,7 @@ public final class Orderer extends NativeObjectContainer {
 	 * 
 	 * @return the drawing order of dataset
 	 */
-	public int getOrder() {
+	int getOrder() {
 		return getValue(Property.ORDER, DEFAULT_ORDER);
 	}
 }

@@ -73,7 +73,7 @@ public final class BarStacker extends NativeObjectContainer {
 	 * 
 	 * @param stackGroup name of stack group.
 	 */
-	public void setStackGroup(String stackGroup) {
+	void setStackGroup(String stackGroup) {
 		setValue(Property.STACK, stackGroup);
 	}
 
@@ -82,7 +82,7 @@ public final class BarStacker extends NativeObjectContainer {
 	 * 
 	 * @return the name of stack group.
 	 */
-	public String getStackGroup() {
+	String getStackGroup() {
 		return getValue(Property.STACK, UndefinedValues.STRING);
 	}
 }

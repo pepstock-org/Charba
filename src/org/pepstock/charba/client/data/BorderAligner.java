@@ -99,7 +99,7 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @param align the property to set the border alignment on chart datasets
 	 */
-	public void setBorderAlign(BorderAlign align) {
+	void setBorderAlign(BorderAlign align) {
 		setValue(Property.BORDER_ALIGN, align);
 	}
 
@@ -108,7 +108,7 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @return the property to set the border alignment on chart datasets.
 	 */
-	public BorderAlign getBorderAlign() {
+	BorderAlign getBorderAlign() {
 		if (ObjectType.FUNCTION.equals(type(Property.BORDER_ALIGN))) {
 			// checks if a callback has been set
 			// returns defaults
@@ -123,7 +123,7 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @return the border align callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderAlignCallback getBorderAlignCallback() {
+	BorderAlignCallback getBorderAlignCallback() {
 		return borderAlignCallback;
 	}
 
@@ -132,7 +132,7 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @param borderAlignCallback the border align callback to set
 	 */
-	public void setBorderAlign(BorderAlignCallback borderAlignCallback) {
+	void setBorderAlign(BorderAlignCallback borderAlignCallback) {
 		// sets the callback
 		this.borderAlignCallback = borderAlignCallback;
 		// checks if callback is consistent
