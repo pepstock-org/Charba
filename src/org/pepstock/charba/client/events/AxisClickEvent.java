@@ -52,6 +52,8 @@ public final class AxisClickEvent extends AbstractEvent {
 		this.item = item;
 		this.axis = axis;
 	}
+	
+	// FIXME add the value from scale using the event
 
 	/**
 	 * Returns the scale item related to the click

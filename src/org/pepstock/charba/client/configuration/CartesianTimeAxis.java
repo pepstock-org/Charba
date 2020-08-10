@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.TimeAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
@@ -35,8 +34,6 @@ import org.pepstock.charba.client.options.IsScaleId;
 public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 
 	private final CartesianTimeTick ticks;
-
-	private final TimeAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	private final Time time;
 
@@ -120,8 +117,6 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 		this.ticks = new CartesianTimeTick(this);
 		// creates the adapters object
 		this.adapters = new Adapters(this);
-		// create build ticks callback handler
-		this.buildTicksCallbackHandler = new TimeAxisBuildTicksCallbackHandler(this);
 	}
 
 	/*
@@ -204,24 +199,6 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 */
 	public Date getMin() {
 		return getScale().getMinAsDate();
-	}
-
-	/**
-	 * Returns the user callback that runs before/after ticks are created.
-	 * 
-	 * @return the axisBuildTicksCallback
-	 */
-	public TimeAxisBuildTicksCallback getAxisBuildTicksCallback() {
-		return buildTicksCallbackHandler.getCallback();
-	}
-
-	/**
-	 * Sets the user callback that runs before/after ticks are created.
-	 * 
-	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
-	 */
-	public void setAxisBuildTicksCallback(TimeAxisBuildTicksCallback axisBuildTicksCallback) {
-		buildTicksCallbackHandler.setCallback(axisBuildTicksCallback);
 	}
 
 }

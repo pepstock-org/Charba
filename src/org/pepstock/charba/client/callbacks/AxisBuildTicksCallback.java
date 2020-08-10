@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import java.util.List;
-
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.items.AxisItem;
 
@@ -25,15 +23,22 @@ import org.pepstock.charba.client.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AxisBuildTicksCallback extends BaseAxisBuildTicksCallback {
+public interface AxisBuildTicksCallback {
 
+	/**
+	 * Callback that runs before ticks are created.
+	 * 
+	 * @param axis axis instance where this callback as been defined
+	 * @param item axis item instance
+	 */
+	void onBeforeBuildTicks(Axis axis, AxisItem item);
+	
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @param ticks list of created ticks
 	 */
-	void onAfterBuildTicks(Axis axis, AxisItem item, List<Double> ticks);
+	void onAfterBuildTicks(Axis axis, AxisItem item);
 
 }

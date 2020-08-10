@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
@@ -32,8 +31,6 @@ import org.pepstock.charba.client.options.IsScaleId;
 public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> implements IsNumericAxis {
 
 	private final CartesianLogarithmicTick ticks;
-
-	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
@@ -97,8 +94,6 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 		super(chart, id, AxisType.LOGARITHMIC, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
-		// create build ticks callback handler
-		this.buildTicksCallbackHandler = new LinearAxisBuildTicksCallbackHandler(this);
 	}
 
 	/*
@@ -119,24 +114,6 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	@Override
 	public Axis getAxisElement() {
 		return this;
-	}
-
-	/**
-	 * Returns the user callback that runs before/after ticks are created.
-	 * 
-	 * @return the axisBuildTicksCallback
-	 */
-	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
-		return buildTicksCallbackHandler.getCallback();
-	}
-
-	/**
-	 * Sets the user callback that runs before/after ticks are created.
-	 * 
-	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
-	 */
-	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
-		buildTicksCallbackHandler.setCallback(axisBuildTicksCallback);
 	}
 
 }

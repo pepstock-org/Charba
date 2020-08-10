@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
 import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
@@ -101,6 +102,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final CallbackProxy<ProxyAxisCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after update function
 	private final CallbackProxy<ProxyAxisCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the before build tricks function
+	private final CallbackProxy<ProxyAxisCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the after build tricks function
+	private final CallbackProxy<ProxyAxisCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -117,6 +122,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
 	// user callbacks implementation for update
 	private AxisUpdateCallback axisUpdateCallback = null;
+	// user callback implementation for building ticks
+	private AxisBuildTicksCallback axisBuildTicksCallback = null;
 	// stores axis type
 	private final AxisType storeType;
 
@@ -198,6 +205,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeFitCallbackProxy.setCallback((context, item) -> onBeforeFitCallback(item));
 		afterFitCallbackProxy.setCallback((context, item) -> onAfterFitCallback(item));
 		afterUpdateCallbackProxy.setCallback((context, item) -> onAfterUpdateCallback(item));
+		beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
+		afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
 	}
 
 	/**
@@ -481,6 +490,35 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
+	 * Returns the user callback that runs before/after of the ticks building.
+	 * 
+	 * @return the user callback that runs before/after of the ticks building
+	 */
+	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
+		return axisBuildTicksCallback;
+	}
+
+	/**
+	 * Sets the user callback that runs before/after of the ticks building.
+	 * 
+	 * @param axisUpdateCallback the user callback that runs before/after of the ticks building
+	 */
+	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
+		// sets the callback
+		this.axisBuildTicksCallback = axisBuildTicksCallback;
+		// checks if callback is consistent
+		if (axisBuildTicksCallback != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, beforeBuildTicksCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, afterBuildTicksCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, null);
+			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, null);
+		}
+	}
+	
+	/**
 	 * Returns the user callback that runs before/after of the update process.
 	 * 
 	 * @return the user callback that runs before/after of the update process
@@ -662,6 +700,32 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		if (axisUpdateCallback != null) {
 			// then it is called
 			axisUpdateCallback.onAfterUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+		}
+	}
+	
+	/**
+	 * Invokes BUILD TICKS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeBuildTicksCallback(NativeObject item) {
+		// if user callback is consistent
+		if (getAxisBuildTicksCallback() != null) {
+			// then it is called
+			getAxisBuildTicksCallback().onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+		}
+	}
+	
+	/**
+	 * Invokes BUILD TICKS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterBuildTicksCallback(NativeObject item) {
+		// if user callback is consistent
+		if (getAxisBuildTicksCallback() != null) {
+			// then it is called
+			getAxisBuildTicksCallback().onAfterBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 

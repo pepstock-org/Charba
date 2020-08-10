@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.CategoryAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
@@ -31,8 +30,6 @@ import org.pepstock.charba.client.options.IsScaleId;
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
 
 	private final CartesianCategoryTick ticks;
-
-	private final CategoryAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -96,8 +93,6 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		super(chart, id, AxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
-		// create build ticks callback handler
-		this.buildTicksCallbackHandler = new CategoryAxisBuildTicksCallbackHandler(this);
 	}
 
 	/*
@@ -144,24 +139,6 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 */
 	public String getMax() {
 		return getScale().getMaxAsString();
-	}
-
-	/**
-	 * Returns the user callback that runs before/after ticks are created.
-	 * 
-	 * @return the axisBuildTicksCallback
-	 */
-	public CategoryAxisBuildTicksCallback getAxisBuildTicksCallback() {
-		return buildTicksCallbackHandler.getCallback();
-	}
-
-	/**
-	 * Sets the user callback that runs before/after ticks are created.
-	 * 
-	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
-	 */
-	public void setAxisBuildTicksCallback(CategoryAxisBuildTicksCallback axisBuildTicksCallback) {
-		buildTicksCallbackHandler.setCallback(axisBuildTicksCallback);
 	}
 
 }
