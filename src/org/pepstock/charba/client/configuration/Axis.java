@@ -501,7 +501,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after of the ticks building.
 	 * 
-	 * @param axisUpdateCallback the user callback that runs before/after of the ticks building
+	 * @param axisBuildTicksCallback the user callback that runs before/after of the ticks building
 	 */
 	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
 		// sets the callback
