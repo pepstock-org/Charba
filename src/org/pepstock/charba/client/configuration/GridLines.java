@@ -17,11 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.LineWidthCallback;
+import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
@@ -54,7 +53,7 @@ public class GridLines extends AxisContainer {
 	// hover border color callback instance
 	private LineWidthCallback lineWidthCallback = null;
 	// border dashoffset callback instance
-	private BorderDashOffsetCallback borderDashOffsetCallback = null;
+	private ScaleBorderDashOffsetCallback borderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -107,7 +106,7 @@ public class GridLines extends AxisContainer {
 				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
 		// gets value calling callback
 		borderDashOffsetCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), borderDashOffsetCallback, getAxis().getScale().getGrideLines().getBorderDashOffset()).intValue());
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), borderDashOffsetCallback, getAxis().getScale().getGrideLines().getBorderDashOffset()).intValue());
 
 	}
 
@@ -459,7 +458,7 @@ public class GridLines extends AxisContainer {
 	 * 
 	 * @return the border dash offset callback instance
 	 */
-	public BorderDashOffsetCallback getBorderDashOffsetCallback() {
+	public ScaleBorderDashOffsetCallback getBorderDashOffsetCallback() {
 		return borderDashOffsetCallback;
 	}
 
@@ -468,7 +467,7 @@ public class GridLines extends AxisContainer {
 	 * 
 	 * @param borderDashOffsetCallback the border dash offset callback instance
 	 */
-	public void setBorderDashOffsetCallback(BorderDashOffsetCallback borderDashOffsetCallback) {
+	public void setBorderDashOffsetCallback(ScaleBorderDashOffsetCallback borderDashOffsetCallback) {
 		// stores callback
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
 		// checks if consistent
