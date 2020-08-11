@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.ImmutableEnvelop;
 
 /**
  * This object is a container of hidden object to pass to other packages.<br>
@@ -25,23 +25,8 @@ import org.pepstock.charba.client.commons.Envelop;
  * @param <T> type of envelop content.
  * 
  */
-public final class OptionsEnvelop<T> extends Envelop<T> {
+public final class OptionsEnvelop<T> extends ImmutableEnvelop<T> {
 	
-	/**
-	 * Create an envelop with a <code>null</code> content.
-	 */
-	OptionsEnvelop() {
-	}
-
-	/**
-	 * Create an envelop with a <code>null</code> content and a flag to set if the content can be nullable.
-	 * 
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
-	 */
-	OptionsEnvelop(boolean nullable) {
-		super(nullable);
-	}
-
 	/**
 	 * Create an envelop with the content passed as argument.
 	 * 

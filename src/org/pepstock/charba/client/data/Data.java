@@ -39,14 +39,13 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Data extends NativeObjectContainer implements ConfigurationElement {
+public final class Data extends NativeObjectContainer implements ConfigurationElement, HasLabels {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		LABELS("labels"),
 		DATASETS("datasets"),
 		X_LABELS("xLabels"), // TO BE CHECK if needed
 		Y_LABELS("yLabels"); // TO BE CHECK if needed
@@ -77,6 +76,8 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	// maintains the list of datasets because needs to preserve the dataset type
 	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
+	// instance of labels option manager
+	private final Labeller labeller;
 	// flag to disable canvas object handler
 	private boolean canvasObjectHandling = true;
 
@@ -85,67 +86,18 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public Data() {
 		// nothing
+		// creates the labels option manager
+		this.labeller = new Labeller(getNativeObject());
 	}
 
-	/**
-	 * Sets the labels of the data.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param labels array of labels
+	 * @see org.pepstock.charba.client.data.HasLabels#getLabeller()
 	 */
-	public void setLabels(String... labels) {
-		// creates a label object
-		Labels internalLabels = Labels.build();
-		// loads
-		internalLabels.load(labels);
-		// sets labels
-		setLabels(internalLabels);
-	}
-
-	/**
-	 * Sets the labels of the data.
-	 * 
-	 * @param labels labels object to manage also multi-line labels
-	 */
-	public void setLabels(Labels labels) {
-		// checks if argument is consistent
-		if (labels != null && !labels.isEmpty()) {
-			setArrayValue(Property.LABELS, labels.getArray());
-		}
-	}
-
-	/**
-	 * Returns the labels.
-	 * 
-	 * @return the labels
-	 */
-	public Labels getLabels() {
-		return getLabels(false);
-	}
-
-	/**
-	 * Returns the labels for axes.
-	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
-	 * @return the labels for axes
-	 */
-	public Labels getLabels(boolean binding) {
-		// checks if there is the property
-		if (has(Property.LABELS)) {
-			// gets array
-			ArrayMixedObject array = getArrayValue(Property.LABELS);
-			// returns labels
-			return Labels.load(array);
-		}
-		// if here, no array stored
-		// object to return
-		Labels result = Labels.build();
-		// checks if binding new array
-		if (binding) {
-			// stores array
-			setLabels(result);
-		}
-		// returns labels
-		return result;
+	@Override
+	public Labeller getLabeller() {
+		return labeller;
 	}
 
 	/**

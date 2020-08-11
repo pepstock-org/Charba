@@ -17,10 +17,11 @@ package org.pepstock.charba.client.options;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.HasLabels;
+import org.pepstock.charba.client.data.Labeller;
 import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.Display;
@@ -43,7 +44,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {
+public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale, HasLabels {
 
 	// adds sub elements
 	private final GridLines gridLines;
@@ -60,6 +61,9 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 
 	private final Adapters adapters;
 
+	// instance of labels option manager
+	private final Labeller labeller;
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -70,7 +74,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		WEIGHT("weight"),
 		TICKS("ticks"),
 		// cartesian
-		LABELS("labels"),
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID_LINES("gridLines"),
@@ -134,6 +137,18 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
 		time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
 		adapters = new Adapters(this, Property.ADAPTERS, getDefaultValues().getAdapters(), getValue(Property.ADAPTERS));
+		// creates labels option manager
+		this.labeller = new Labeller(new OptionsEnvelop<>(getNativeObject()));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasLabels#getLabeller()
+	 */
+	@Override
+	public Labeller getLabeller() {
+		return labeller;
 	}
 
 	/**
@@ -348,16 +363,16 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public String getMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
 	}
-	
+
 	/**
 	 * Sets the minimum item at passed index to display.
 	 * 
-	 * @param min The minimum item at passed index  to display
+	 * @param min The minimum item at passed index to display
 	 */
 	public void setMinIndex(int min) {
 		setIndex(Property.MIN, Property.CHARBA_MIN_INDEX, min);
 	}
-	
+
 	/**
 	 * Returns the minimum item at passed index to display
 	 * 
@@ -366,7 +381,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public int getMinIndex() {
 		return getIndex(Property.MIN, Property.CHARBA_MIN_INDEX);
 	}
-	
+
 	/**
 	 * Sets the maximum item at passed index to display.
 	 * 
@@ -384,7 +399,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public int getMaxIndex() {
 		return getIndex(Property.MAX, Property.CHARBA_MAX_INDEX);
 	}
-	
+
 	/**
 	 * Sets the minimum item at passed index to display.
 	 * 
@@ -401,7 +416,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 			checkAndAddToParent();
 		}
 	}
-	
+
 	/**
 	 * Checks and returns the index related to the passed properties as arguments.
 	 * 
@@ -424,7 +439,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// that means that the value has been changed by another method
 		return UndefinedValues.INTEGER;
 	}
-
 
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
@@ -647,13 +661,12 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param labels array of labels
 	 */
+	@Override
 	public void setLabels(String... labels) {
 		// creates a label object
-		Labels internalLabels = Labels.build();
-		// loads
-		internalLabels.load(labels);
-		// sets labels
-		setLabels(internalLabels);
+		HasLabels.super.setLabels(labels);
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 	/**
@@ -661,50 +674,12 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param labels labels object to manage also multi-line labels
 	 */
+	@Override
 	public void setLabels(Labels labels) {
-		// checks if argument is consistent
-		if (labels != null && !labels.isEmpty()) {
-			// creates envelop to get hte array
-			OptionsEnvelop<ArrayMixedObject> envelop = new OptionsEnvelop<>(true);
-			// loads the array of labels
-			labels.loadtArray(envelop);
-			setArrayValue(Property.LABELS, envelop.getContent());
-		}
-	}
-
-	/**
-	 * Returns the labels.
-	 * 
-	 * @return the labels
-	 */
-	public Labels getLabels() {
-		return getLabels(false);
-	}
-
-	/**
-	 * Returns the labels for axes.
-	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
-	 * @return the labels for axes
-	 */
-	public Labels getLabels(boolean binding) {
-		// checks if there is the property
-		if (has(Property.LABELS)) {
-			// gets array
-			ArrayMixedObject array = getArrayValue(Property.LABELS);
-			// returns labels
-			return Labels.load(new OptionsEnvelop<>(array));
-		}
-		// if here, no array stored
-		// object to return
-		Labels result = Labels.build();
-		// checks if binding new array
-		if (binding) {
-			// stores array
-			setLabels(result);
-		}
-		// returns labels
-		return result;
+		// creates a label object
+		HasLabels.super.setLabels(labels);
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 }
