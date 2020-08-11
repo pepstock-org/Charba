@@ -17,9 +17,11 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.LineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
@@ -30,8 +32,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
- * 
- * FIXME BorderDashOffset is scriptable
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -45,11 +45,16 @@ public class GridLines extends AxisContainer {
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the line width function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+
 
 	// hover background color callback instance
 	private ColorCallback colorCallback = null;
 	// hover border color callback instance
 	private LineWidthCallback lineWidthCallback = null;
+	// border dashoffset callback instance
+	private BorderDashOffsetCallback borderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -57,7 +62,8 @@ public class GridLines extends AxisContainer {
 	private enum Property implements Key
 	{
 		COLOR("color"),
-		LINE_WIDTH("lineWidth");
+		LINE_WIDTH("lineWidth"),
+		BORDER_DASH_OFFSET("borderDashOffset");
 
 		// name value of property
 		private final String value;
@@ -99,6 +105,10 @@ public class GridLines extends AxisContainer {
 		// gets value calling callback
 		lineWidthCallbackProxy.setCallback(
 				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), lineWidthCallback, getAxis().getScale().getGrideLines().getLineWidth()).intValue());
+		// gets value calling callback
+		borderDashOffsetCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), borderDashOffsetCallback, getAxis().getScale().getGrideLines().getBorderDashOffset()).intValue());
+
 	}
 
 	/**
@@ -441,6 +451,33 @@ public class GridLines extends AxisContainer {
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.LINE_WIDTH, null);
+		}
+	}
+	
+	/**
+	 * Returns the border dash offset callback instance.
+	 * 
+	 * @return the border dash offset callback instance
+	 */
+	public BorderDashOffsetCallback getBorderDashOffsetCallback() {
+		return borderDashOffsetCallback;
+	}
+
+	/**
+	 * Sets the border dash offset callback instance.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback instance
+	 */
+	public void setBorderDashOffsetCallback(BorderDashOffsetCallback borderDashOffsetCallback) {
+		// stores callback
+		this.borderDashOffsetCallback = borderDashOffsetCallback;
+		// checks if consistent
+		if (borderDashOffsetCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.BORDER_DASH_OFFSET, null);
 		}
 	}
 

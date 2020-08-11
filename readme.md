@@ -286,6 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `offset` and `hoverOffset` properties to `PieDataset` and `DoughnutDataset` classes.
    * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.
    * add `labels` property to `CartesianCategoryAxis` class.
+   * add `borderDashOffset` property scriptable by callback to `Gridlines` class. 
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
