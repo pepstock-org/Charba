@@ -73,7 +73,7 @@ public interface HasLabels {
 	default Labels getLabels(boolean binding) {
 		// checks if labeller is consistent
 		if (getLabeller() != null) {
-			getLabeller().getLabels(binding);
+			return getLabeller().getLabels(binding);
 		}
 		// if here, labels option manager is  ot consistent
 		// then returns an empty labels
