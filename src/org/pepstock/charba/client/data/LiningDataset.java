@@ -57,12 +57,12 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.HasFill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Filler;
+import org.pepstock.charba.client.options.HasFill;
 import org.pepstock.charba.client.options.HasSpanGaps;
 import org.pepstock.charba.client.options.SpanGapper;
 

@@ -107,7 +107,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data.<br>
 	 *            If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
-	public void setSpanGaps(boolean spanGaps) {
+	void setSpanGaps(boolean spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
@@ -116,7 +116,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 * 
 	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
 	 */
-	public void setSpanGaps(double spanGaps) {
+	void setSpanGaps(double spanGaps) {
 		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
@@ -127,7 +127,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 * @return <code>true</code> if lines will be drawn between points with no or null data.<br>
 	 *         If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
-	public boolean isSpanGaps() {
+	boolean isSpanGaps() {
 		// checks the type of stored value
 		if (ObjectType.NUMBER.equals(type(Property.SPAN_GAPS))) {
 			// if the there is a number, span gaps is activated
@@ -141,7 +141,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 * 
 	 * @return the value of the data if lines will be drawn between points with no or null data
 	 */
-	public double getSpanGaps() {
+	double getSpanGaps() {
 		return getValue(Property.SPAN_GAPS, UndefinedValues.DOUBLE);
 	}
 }

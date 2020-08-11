@@ -333,7 +333,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
  * rename the controller id for `Meter` and `Gauge` charts adding `charba` prefix in order to avoid overlapping with possible other controllers with `meter` and `gauge` ids.
  * `Window.enableResizeOnBeforePrint()` method has been fully implemented by JSINTEROP.
- * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way. 
+ * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way.
+ * reduce visibility of property handler classes leveraging on the interface.
 
 License
 -------

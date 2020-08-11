@@ -13,10 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.enums;
+package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.options.Filler;
+import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.IsFill;
 
 /**
  * Defines a configuration element which is managing the FILL property.<br>

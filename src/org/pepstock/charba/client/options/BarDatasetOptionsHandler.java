@@ -115,7 +115,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
 	 *            each other.
 	 */
-	public void setBarPercentage(double barPercentage) {
+	void setBarPercentage(double barPercentage) {
 		setValue(Property.BAR_PERCENTAGE, checkAndGetPercentage(barPercentage, Property.BAR_PERCENTAGE));
 	}
 
@@ -125,7 +125,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
-	public double getBarPercentage() {
+	double getBarPercentage() {
 		return getValue(Property.BAR_PERCENTAGE, defaultValues.getBarPercentage());
 	}
 
@@ -134,7 +134,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
 	 */
-	public void setCategoryPercentage(double categoryPercentage) {
+	void setCategoryPercentage(double categoryPercentage) {
 		setValue(Property.CATEGORY_PERCENTAGE, checkAndGetPercentage(categoryPercentage, Property.CATEGORY_PERCENTAGE));
 	}
 
@@ -143,7 +143,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
-	public double getCategoryPercentage() {
+	double getCategoryPercentage() {
 		return getValue(Property.CATEGORY_PERCENTAGE, defaultValues.getCategoryPercentage());
 	}
 
@@ -154,7 +154,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.
 	 *            Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
-	public void setBarThickness(int barThickness) {
+	void setBarThickness(int barThickness) {
 		// checks if FLEX value has been set
 		if (DefaultDatasets.FLEX_BAR_THICKNESS == barThickness) {
 			// flex must be set
@@ -171,7 +171,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
 	 *         bars are sized using barPercentage and categoryPercentage.
 	 */
-	public int getBarThickness() {
+	int getBarThickness() {
 		// checks if flex has been set
 		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
 			return DefaultDatasets.FLEX_BAR_THICKNESS;
@@ -185,7 +185,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @param maxBarThickness the maximum bar thickness.
 	 */
-	public void setMaxBarThickness(int maxBarThickness) {
+	void setMaxBarThickness(int maxBarThickness) {
 		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
 	}
 
@@ -194,7 +194,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @return the maximum bar thickness.
 	 */
-	public int getMaxBarThickness() {
+	int getMaxBarThickness() {
 		return getValue(Property.MAX_BAR_THICKNESS, defaultValues.getMaxBarThickness());
 	}
 
@@ -203,7 +203,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @param minBarLength a minimum length in pixels.
 	 */
-	public void setMinBarLength(int minBarLength) {
+	void setMinBarLength(int minBarLength) {
 		setValue(Property.MIN_BAR_LENGTH, minBarLength);
 	}
 
@@ -212,7 +212,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * 
 	 * @return a minimum length in pixels.
 	 */
-	public int getMinBarLength() {
+	int getMinBarLength() {
 		return getValue(Property.MIN_BAR_LENGTH, defaultValues.getMinBarLength());
 	}
 

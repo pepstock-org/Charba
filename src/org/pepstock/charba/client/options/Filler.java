@@ -110,7 +110,7 @@ public class Filler extends NativeObjectContainer {
 	 * 
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
-	public void setFill(boolean fill) {
+	protected void setFill(boolean fill) {
 		setValue(Property.FILL, fill);
 		// stores the filling mode
 		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
@@ -121,7 +121,7 @@ public class Filler extends NativeObjectContainer {
 	 * 
 	 * @param index absolute dataset index of the chart.
 	 */
-	public void setFill(int index) {
+	void setFill(int index) {
 		setFill(Fill.getFill(index));
 	}
 
@@ -130,7 +130,7 @@ public class Filler extends NativeObjectContainer {
 	 * 
 	 * @param index relative dataset index of the chart.
 	 */
-	public void setFill(String index) {
+	void setFill(String index) {
 		setFill(Fill.getFill(index));
 	}
 
@@ -139,7 +139,7 @@ public class Filler extends NativeObjectContainer {
 	 * 
 	 * @param fill how to fill the area under the line.
 	 */
-	public void setFill(IsFill fill) {
+	protected void setFill(IsFill fill) {
 		// checks if argument is consistent
 		if (IsFill.isValid(fill)) {
 			// checks if is no fill
@@ -172,7 +172,7 @@ public class Filler extends NativeObjectContainer {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
-	public IsFill getFill() {
+	protected IsFill getFill() {
 		// checks if there is the property
 		if (has(Property.CHARBA_FILLING_MODE)) {
 			// gets the filling mode
