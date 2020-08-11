@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
@@ -109,38 +110,16 @@ public final class ExtendedScale extends Scale {
 	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(this, property, proxy);
 	}
-
+	
 	/**
-	 * Adds a callback proxy function to ticks element instance.
-	 * 
-	 * @param ticks ticks element instance.
-	 * @param property property name.
-	 * @param proxy function proxy to activate.
-	 */
-	public void setCallback(Ticks ticks, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(ticks, property, proxy);
-	}
-
-	/**
-	 * Adds a callback proxy function to point labels element instance.
+	 * Adds a callback proxy function to a element node instance.
 	 *
-	 * @param pointLabels point labels element instance.
+	 * @param node element node instance.
 	 * @param property property name.
 	 * @param proxy function proxy to activate.
 	 */
-	public void setCallback(PointLabels pointLabels, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(pointLabels, property, proxy);
-	}
-
-	/**
-	 * Adds a callback proxy function to gridlines element instance.
-	 *
-	 * @param gridLInes gridlines element instance.
-	 * @param property property name.
-	 * @param proxy function proxy to activate.
-	 */
-	public void setCallback(GridLines gridLInes, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(gridLInes, property, proxy);
+	public void setCallback(AbstractNode node, Key property, CallbackProxy.Proxy proxy) {
+		setCallbackToModel(node, property, proxy);
 	}
 
 }

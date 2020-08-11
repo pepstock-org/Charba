@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> implements IsDefaultAngleLines {
+public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> implements IsDefaultAngleLines {
 
 	/**
 	 * Name of properties of native object.

@@ -16,17 +16,31 @@
 package org.pepstock.charba.client.defaults;
 
 /**
- * Interface to define angle lines defaults.
+ * Interface to define scale lines defaults.<br>
+ * THis is used by {@link IsDefaultAngleLines} and {@link IsDefaultGridLines}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAngleLines extends IsDefaultScaleLines{
+public interface IsDefaultScaleLines {
 
 	/**
-	 * If true, angle lines are shown
+	 * Returns the color of lines.
 	 * 
-	 * @return if true, angle lines are shown.
+	 * @return color of lines.
 	 */
-	boolean isDisplay();
+	String getColorAsString();
 
+	/**
+	 * Returns the width of lines.
+	 * 
+	 * @return width of lines.
+	 */
+	int getLineWidth();
+
+	/**
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return Offset for line dashes.
+	 */
+	int getBorderDashOffset();
 }

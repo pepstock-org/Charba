@@ -23,6 +23,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * FIXME backdropColor, showLabelBackdrop are scriptable
  */
 public class RadialLinearTick extends Tick implements IsLinearTick {
 

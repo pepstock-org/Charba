@@ -17,7 +17,16 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScaleBorderDashCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Array;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 
 /**
  * It is used to configure angled lines that radiate from the center of the chart to the point labels.<br>
@@ -25,19 +34,59 @@ import org.pepstock.charba.client.colors.IsColor;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * FIXME color, lineWidth, borderDash, borderDashOffset are scriptable
- * The borderDash setting only accepts a static value or a function. Passing an array of arrays is not supported.
- *
  */
-public class RadialAngleLines extends AxisContainer {
+public class RadialAngleLines extends AbstractScaleLines {
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the border dash function
+	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	// border dashoffset callback instance
+	private ScaleBorderDashCallback borderDashCallback = null;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		BORDER_DASH("borderDash");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+	
 	/**
 	 * Builds the object storing the axis which this angle lines belongs to.
 	 * 
 	 * @param axis axis which this angle lines belongs to.
 	 */
 	RadialAngleLines(Axis axis) {
-		super(axis);
+		super(axis, axis.getScale().getAngleLines(), axis.getScale().getAngleLines());
+		// gets value calling callback
+		// gets value calling callback
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashCallback));
 	}
 
 	/**
@@ -146,6 +195,47 @@ public class RadialAngleLines extends AxisContainer {
 	 */
 	public int getBorderDashOffset() {
 		return getAxis().getScale().getAngleLines().getBorderDashOffset();
+	}
+	
+	/**
+	 * Returns the border dash callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border dash callback when element is hovered, if set, otherwise <code>null</code>.
+	 */
+	public ScaleBorderDashCallback getBorderDashCallback() {
+		return borderDashCallback;
+	}
+
+	/**
+	 * Sets the border dash callback when element is hovered.
+	 * 
+	 * @param borderDashCallback the border dash callback when element is hovered.
+	 */
+	public void setBorderDash(ScaleBorderDashCallback borderDashCallback) {
+		// sets the callback
+		this.borderDashCallback = borderDashCallback;
+		// checks if callback is consistent
+		if (borderDashCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, borderDashCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, null);
+		}
+	}
+	
+	/**
+	 * Returns an array of integer when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param borderDashCallback border dash callback instance
+	 * @return an array of integer
+	 */
+	private Array onBorderDash(ScaleScriptableContext context, ScaleBorderDashCallback borderDashCallback) {
+		// gets value
+		List<Integer> result = ScriptableUtils.getOptionValue(getAxis(), context, borderDashCallback);
+		// default result
+		return ArrayInteger.fromOrEmpty(result);
 	}
 
 }

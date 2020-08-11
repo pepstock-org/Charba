@@ -13,20 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.callbacks;
+
+import java.util.List;
 
 /**
- * Interface to define angle lines defaults.
+ * Callback interface to set <code>borderDash</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
  */
-public interface IsDefaultAngleLines extends IsDefaultScaleLines{
-
-	/**
-	 * If true, angle lines are shown
-	 * 
-	 * @return if true, angle lines are shown.
-	 */
-	boolean isDisplay();
+public interface ScaleBorderDashCallback extends ScaleScriptable<List<Integer>> {
 
 }

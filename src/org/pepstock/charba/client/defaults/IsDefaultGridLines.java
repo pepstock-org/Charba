@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultGridLines {
+public interface IsDefaultGridLines extends IsDefaultScaleLines {
 
 	/**
 	 * If false, do not display grid lines for this axis.
@@ -28,27 +28,6 @@ public interface IsDefaultGridLines {
 	 * @return If false, do not display grid lines for this axis.
 	 */
 	boolean isDisplay();
-
-	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
-	 * 
-	 * @return the list of colors of the grid lines.
-	 */
-	String getColorAsString();
-
-	/**
-	 * Returns the line dash pattern offset or "phase".
-	 * 
-	 * @return Offset for line dashes.
-	 */
-	int getBorderDashOffset();
-
-	/**
-	 * Returns the stroke widths of grid lines.
-	 * 
-	 * @return lineWidth stroke widths of grid lines.
-	 */
-	int getLineWidth();
 
 	/**
 	 * If true, draw border at the edge between the axis and the chart area.

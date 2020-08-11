@@ -35,7 +35,7 @@ import org.pepstock.charba.client.defaults.IsDefaultGridLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> implements IsDefaultGridLines {
+public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> implements IsDefaultGridLines {
 
 	/**
 	 * Name of properties of native object.

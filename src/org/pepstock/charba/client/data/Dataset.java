@@ -288,7 +288,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// because the previous method put the animation object if enabling
 		if (enabled && animationCallback != null) {
 			// sets again the callback
-			setAnimationCallback(animationCallback);
+			setAnimation(animationCallback);
 		}
 	}
 
@@ -316,7 +316,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param animationCallback the animation callback, used to create the animation options at runtime
 	 */
-	public void setAnimationCallback(DatasetAnimationCallback animationCallback) {
+	public void setAnimation(DatasetAnimationCallback animationCallback) {
 		// sets the callback
 		this.animationCallback = animationCallback;
 		// checks if callback is consistent

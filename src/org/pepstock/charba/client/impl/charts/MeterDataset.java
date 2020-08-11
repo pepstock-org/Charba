@@ -257,7 +257,7 @@ public class MeterDataset extends Dataset {
 	 * @param animationCallback ignored because will throw an exception
 	 */
 	@Override
-	public void setAnimationCallback(DatasetAnimationCallback animationCallback) {
+	public void setAnimation(DatasetAnimationCallback animationCallback) {
 		throw new UnsupportedOperationException("The animation callback is not allowed by a meter or gauge chart.");
 	}
 

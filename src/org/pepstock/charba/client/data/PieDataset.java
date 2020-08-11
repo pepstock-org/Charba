@@ -252,7 +252,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param offsetCallback the offset callback.
 	 */
-	public void setOffsetCallback(OffsetCallback offsetCallback) {
+	public void setOffset(OffsetCallback offsetCallback) {
 		// sets the callback
 		this.offsetCallback = offsetCallback;
 		// checks if callback is consistent
@@ -279,7 +279,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param offsetCallback the offset callback, when dataset is hovered.
 	 */
-	public void setHoverOffsetCallback(OffsetCallback offsetCallback) {
+	public void setHoverOffset(OffsetCallback offsetCallback) {
 		// sets the callback
 		this.hoverOffsetCallback = offsetCallback;
 		// checks if callback is consistent
