@@ -34,9 +34,11 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.RadialAxis;
 import org.pepstock.charba.client.controllers.ControllersEnvelop;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 import org.pepstock.charba.client.options.IsScaleId;
 
@@ -403,6 +405,50 @@ public class ScaleItem extends BaseBoxNodeItem {
 		}
 		// invokes the parent implementation
 		return super.getPosition().value();
+	}
+	
+	/**
+	 * Returns the value on the axis related to a event position.
+	 *  
+	 * @param event event instance used to get the value from the scale 
+	 * @return the value on the axis related to a event position
+	 */
+	public final ScaleValueItem getValueAtEvent(BaseNativeEvent event) {
+		// checks if argument is consistent
+		if (event != null){
+			// gets the pixel used for searching
+			// if the scale is horizontal then it uses layer X
+			// otherwise Y
+			double pixel = AxisKind.X.equals(getAxis()) ? event.getLayerX() : event.getLayerY();
+			// gets the value on the axis at that pixel
+			double value = getValueForPixel(pixel);
+			// gets also the label of the value
+			String label = getLabelForValue(value);
+			// creates result instance
+			ScaleValueItem result;
+			// checks the data type of scale
+			// in order to create the object with the right type of value
+			if (ScaleDataType.NUMBER.equals(getType().getDataType())) {
+				// if here, is a double
+				result = new ScaleValueItem(value, label);
+			} else if (ScaleDataType.DATE.equals(getType().getDataType())) {
+				// if here, is a date
+				// creates the date object
+				Date dateValue = Double.isNaN(value) ? (Date)null : new Date((long)value);
+				result = new ScaleValueItem(dateValue, label);
+			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
+				// if here, is a string
+				// uses only label
+				result = new ScaleValueItem(label, label);
+			} else {
+				// if here, the type is not recognize
+				// than sets the result to null;
+				result = null;
+			}
+			return result;
+		}
+		// if here, event is not consistent
+		return null;
 	}
 
 	/**

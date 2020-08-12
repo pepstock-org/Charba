@@ -310,6 +310,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * manage new legend title into `HtmlLegend` plugin.
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
+ * add the selected value of the scale by the click event into the `AxisClickEvent` class.  
  
 ### Development
 

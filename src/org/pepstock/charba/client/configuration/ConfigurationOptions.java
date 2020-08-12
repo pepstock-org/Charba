@@ -714,7 +714,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 					axis = getAxisById(charbaIdOfScale);
 				}
 				// fires the click event on the chart scale
-				getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
+				getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis, scaleItem.getValueAtEvent(event)));
 			}
 		}
 	}

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.events;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.items.ScaleValueItem;
 
 /**
  * Event which is fired when the user clicks on the axis of the chart.
@@ -34,6 +35,8 @@ public final class AxisClickEvent extends AbstractEvent {
 	private final ScaleItem item;
 	// axis selected by clicking
 	private final Axis axis;
+	// value selected on axis
+	private final ScaleValueItem value;
 
 	/**
 	 * Creates the event with axis related to the click
@@ -41,8 +44,9 @@ public final class AxisClickEvent extends AbstractEvent {
 	 * @param nativeEvent native event of this custom event
 	 * @param item scale item related to the click
 	 * @param axis axis configuration instance
+	 * @param value value instance selected on axis
 	 */
-	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
+	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis, ScaleValueItem value) {
 		super(nativeEvent, TYPE);
 		// checks if item is consistent
 		if (item == null) {
@@ -51,9 +55,8 @@ public final class AxisClickEvent extends AbstractEvent {
 		// stores arguments
 		this.item = item;
 		this.axis = axis;
+		this.value = value;
 	}
-	
-	// FIXME add the value from scale using the event
 
 	/**
 	 * Returns the scale item related to the click
@@ -71,6 +74,15 @@ public final class AxisClickEvent extends AbstractEvent {
 	 */
 	public Axis getAxis() {
 		return axis;
+	}
+
+	/**
+	 * Returns the scale value related to the click, or <code>null</code> if not consistent.
+	 * 
+	 * @return the scale value related to the click, or <code>null</code> if not consistent
+	 */
+	public ScaleValueItem getValue() {
+		return value;
 	}
 
 	/*

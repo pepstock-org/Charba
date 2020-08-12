@@ -75,7 +75,9 @@ abstract class ScalesOptions extends ConfigurationOptions {
 	@Override
 	Axis getAxisById(int id) {
 		// gets all axes
-		List<Axis> xAxes = scales.getAxes();
+		// uses the get scale method instead of simple reference
+		// because the scale object can be overrided
+		List<Axis> xAxes = getScales().getAxes();
 		// checks if consistent
 		if (!xAxes.isEmpty()) {
 			// scans all axes
