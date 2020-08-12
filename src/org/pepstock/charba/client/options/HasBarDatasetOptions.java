@@ -40,7 +40,7 @@ public interface HasBarDatasetOptions {
 	 */
 	default void setBarPercentage(double barPercentage) {
 		// checks if handler is consistent
-		if (getDatasetOptionsHandler() != null) {
+		if (getDatasetOptionsHandler() != null  && barPercentage >=0D && barPercentage <=1D) {
 			getDatasetOptionsHandler().setBarPercentage(barPercentage);
 		}
 	}
@@ -68,7 +68,7 @@ public interface HasBarDatasetOptions {
 	 */
 	default void setCategoryPercentage(double categoryPercentage) {
 		// checks if handler is consistent
-		if (getDatasetOptionsHandler() != null) {
+		if (getDatasetOptionsHandler() != null && categoryPercentage >=0D && categoryPercentage <=1D) {
 			getDatasetOptionsHandler().setCategoryPercentage(categoryPercentage);
 		}
 	}

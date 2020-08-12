@@ -255,10 +255,11 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
    * add `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
    * add `ScaleLineWidthCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
-   * add `ScaleColorCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `color` property at runtime.
+   * add `ScaleColorCallback` interface to use into a `GridLines`, `RadialAngleLines` or `RadialLinearTick` configuration in order to set `color` and `backdropColor` property at runtime.
    * add `ScaleBorderDashOffsetCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
    * add `ScaleBorderDashCallback` interface to use into a `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
    * add `ScaleFontCallback` interface to use into a `RadialPointLabels` or `Tick` configuration in order to set `font` property at runtime.
+   * add `ScaleShowLabelBackdropCallback` interface to use into a `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
    * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
    * add `align` property to `Title` options and configuration classes.

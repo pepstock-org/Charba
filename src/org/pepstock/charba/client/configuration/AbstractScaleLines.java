@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
-import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -46,10 +46,9 @@ abstract class AbstractScaleLines extends AxisContainer {
 	// callback proxy to invoke the border dash offset function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
-
-	// hover background color callback instance
+	// color callback instance
 	private ScaleColorCallback colorCallback = null;
-	// hover border color callback instance
+	// hover line width callback instance
 	private ScaleLineWidthCallback lineWidthCallback = null;
 	// border dashoffset callback instance
 	private ScaleBorderDashOffsetCallback borderDashOffsetCallback = null;

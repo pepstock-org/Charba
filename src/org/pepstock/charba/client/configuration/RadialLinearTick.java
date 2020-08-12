@@ -15,21 +15,75 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleShowLabelBackdropCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * This object is used to map defined radial axis as linear.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * FIXME backdropColor, showLabelBackdrop are scriptable
  */
 public class RadialLinearTick extends Tick implements IsLinearTick {
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the backdrop color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backdropColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the show label backdrop function
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> showLabelBackdropCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// backdrop color callback instance
+	private ScaleColorCallback backdropColorCallback = null;
+	// show label backdrop callback instance
+	private ScaleShowLabelBackdropCallback showLabelBackdropCallback = null;
 
 	// handler for callback for category axis
 	private final LinearTickHandler<RadialLinearTick> tickHandler;
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		BACKDROP_COLOR("backdropColor"),
+		SHOW_LABEL_BACKDROP("showLabelBackdrop");
+		
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	
 	/**
 	 * Builds the object storing the axis which this tick belongs to.
 	 * 
@@ -39,6 +93,15 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		super(axis);
 		// creates handler
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		backdropColorCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
+		// gets value calling callback
+		showLabelBackdropCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
 
 	/**
@@ -47,6 +110,9 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(IsColor backdropColor) {
+		// reset callbacks
+		setBackdropColor((ScaleColorCallback)null);
+		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
 
@@ -56,6 +122,9 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(String backdropColor) {
+		// reset callbacks
+		setBackdropColor((ScaleColorCallback)null);
+		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
 
@@ -119,6 +188,9 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * @param showLabelBackdrop if true, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
+		// reset callbacks
+		setShowLabelBackdrop((ScaleShowLabelBackdropCallback)null);
+		// stores values
 		getConfiguration().setShowLabelBackdrop(showLabelBackdrop);
 	}
 
@@ -148,5 +220,60 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public void setCallback(TickCallback callback) {
 		tickHandler.setCallback(callback);
 	}
+	
+	/**
+	 * Returns the backdrop color callback instance.
+	 * 
+	 * @return the backdrop color callback instance
+	 */
+	public ScaleColorCallback getBackdropColorCallback() {
+		return backdropColorCallback;
+	}
+
+	/**
+	 * Sets the backdrop color callback instance.
+	 * 
+	 * @param backdropColorCallback the backdrop color callback instance
+	 */
+	public void setBackdropColor(ScaleColorCallback backdropColorCallback) {
+		// stores callback
+		this.backdropColorCallback = backdropColorCallback;
+		// checks if consistent
+		if (backdropColorCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, null);
+		}
+	}
+	
+	/**
+	 * Returns the show label backdrop callback instance.
+	 * 
+	 * @return the show label backdrop callback instance
+	 */
+	public ScaleShowLabelBackdropCallback getShowLabelBackdrop() {
+		return showLabelBackdropCallback;
+	}
+
+	/**
+	 * Sets the show label backdrop callback instance.
+	 * 
+	 * @param showLabelBackdropCallback the show label backdrop callback instance
+	 */
+	public void setShowLabelBackdrop(ScaleShowLabelBackdropCallback showLabelBackdropCallback) {
+		// stores callback
+		this.showLabelBackdropCallback = showLabelBackdropCallback;
+		// checks if consistent
+		if (showLabelBackdropCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, null);
+		}
+	}
+
 
 }

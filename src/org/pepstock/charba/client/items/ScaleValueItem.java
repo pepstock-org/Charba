@@ -133,15 +133,4 @@ public final class ScaleValueItem {
 		return label;
 	}
 
-	// FIXME
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ScaleValueItem [value=" + value + ", valueAsDate=" + valueAsDate + ", valueAsString=" + valueAsString + ", dataType=" + dataType + ", label=" + label + "]";
-	}
-	
-	
-
 }

@@ -156,7 +156,6 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	@Override
 	public void setCategoryPercentage(double categoryPercentage) {
-		// FIXME checks if between 0 and 1
 		HasBarDatasetOptions.super.setCategoryPercentage(categoryPercentage);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
