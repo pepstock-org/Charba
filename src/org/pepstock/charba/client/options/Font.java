@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.FontOptions;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
@@ -352,6 +354,27 @@ public final class Font extends AbstractNode implements IsFont {
 	@Override
 	public IsColor getStrokeStyle() {
 		return ColorBuilder.parse(getStrokeStyleAsString());
+	}
+
+	/**
+	 * Creates a font options instance cloning the values of the current font.
+	 * 
+	 * @return a font options instance filled with the values of the current font
+	 */
+	public FontOptions createOptions() {
+		// clones the native object of current font
+		NativeObject clonedNativeObject = Helpers.get().clone(nativeObject());
+		// creates a new font options by cloned native object
+		return new FontOptions(this, new OptionsEnvelop<>(clonedNativeObject));
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return getNativeObject();
 	}
 
 }

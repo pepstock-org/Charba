@@ -15,18 +15,28 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.ScaleFontCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.Ticks;
 
 /**
  * Specific tick with minimum and maximum sub ticks.
  * 
  * @author Andrea "Stock" Stocchero
- * 
- * FIXME Font is scriptable
- *
  */
 abstract class Tick extends AxisContainer {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the font function
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// the axis instance, owner of this tick
 	private final Ticks configuration;
@@ -35,12 +45,15 @@ abstract class Tick extends AxisContainer {
 
 	// font instance
 	private final Font font;
+	// font callback instance
+	private ScaleFontCallback fontCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
+		FONT("font"),
 		CALLBACK("callback");
 
 		// name value of property
@@ -79,6 +92,11 @@ abstract class Tick extends AxisContainer {
 		// creates sub element, min and max
 		major = new Major(axis, axis.getScale().getTicks());
 		font = new Font(axis.getConfiguration().getTicks().getFont());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
 	}
 
 	/**
@@ -100,12 +118,16 @@ abstract class Tick extends AxisContainer {
 	}
 
 	/**
-	 * Returns the font element.
+	 * Returns the font element.<br>
+	 * <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>.
 	 * 
-	 * @return the font
+	 * @return the font element.<br>
+	 *         <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>
 	 */
 	public Font getFont() {
-		return font;
+		// checks if font is scriptable
+		// otherwise returns null
+		return getFontCallback() == null ? font : null;
 	}
 
 	/**
@@ -164,6 +186,52 @@ abstract class Tick extends AxisContainer {
 	 */
 	public int getPadding() {
 		return getConfiguration().getPadding();
+	}
+
+	/**
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
+	 */
+	public ScaleFontCallback getFontCallback() {
+		return fontCallback;
+	}
+
+	/**
+	 * Sets the the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	public void setFont(ScaleFontCallback fontCallback) {
+		// sets the callback
+		this.fontCallback = fontCallback;
+		// checks if callback is consistent
+		if (fontCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getConfiguration(), Property.FONT, fontCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getConfiguration(), Property.FONT, null);
+		}
+	}
+
+	/**
+	 * Returns a native object as font when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @return a native object as font
+	 */
+	private NativeObject onFont(ScaleScriptableContext context, ScaleFontCallback callback) {
+		// gets value
+		FontOptions result = ScriptableUtils.getOptionValue(getAxis(), context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		}
+		// default result
+		return getConfiguration().getFont().createOptions().nativeObject();
 	}
 
 }

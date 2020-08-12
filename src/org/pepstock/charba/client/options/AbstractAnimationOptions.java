@@ -22,8 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
- * Object can be provided with additional configuration for the update process.<br>
- * This is useful when update is manually called inside an event handler and some different animation is desired.
+ * Object can be provided with additional configuration by callbacks to define animation options at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -60,7 +59,7 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 
 	}
 
-	// delegated animation mode
+	// delegated animation 
 	private final Animation animation;
 
 	/**

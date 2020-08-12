@@ -17,9 +17,14 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
+import org.pepstock.charba.client.callbacks.ScaleFontCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsFunction;
 
@@ -28,8 +33,6 @@ import jsinterop.annotations.JsFunction;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
- * 
- * FIXME font is scriptable
  *
  */
 public class RadialPointLabels extends AxisContainer {
@@ -63,18 +66,26 @@ public class RadialPointLabels extends AxisContainer {
 
 	// callback proxy to invoke the point labels function
 	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font function
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callbacks implementation for point labels
 	private RadialPointLabelCallback callback = null;
+	// font callback instance
+	private ScaleFontCallback fontCallback = null;
 
+	// font instance
+	private final Font font;
+	
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		FONT("font"),
 		CALLBACK("callback");
 
 		// name value of property
@@ -101,9 +112,6 @@ public class RadialPointLabels extends AxisContainer {
 
 	}
 
-	// font instance
-	private final Font font;
-
 	/**
 	 * Builds the object storing the axis which this point labels belongs to.
 	 * 
@@ -125,15 +133,21 @@ public class RadialPointLabels extends AxisContainer {
 			// returns passed item
 			return item;
 		});
+		// gets value calling callback
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
 	}
 
 	/**
-	 * Returns the font element.
+	 * Returns the font element.<br>
+	 * <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>.
 	 * 
-	 * @return the font
+	 * @return the font element.<br>
+	 *         <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>
 	 */
 	public Font getFont() {
-		return font;
+		// checks if font is scriptable
+		// otherwise returns null
+		return getFontCallback() == null ? font : null;
 	}
 
 	/**
@@ -179,6 +193,52 @@ public class RadialPointLabels extends AxisContainer {
 			// otherwise sets null which removes the properties from java script object
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, null);
 		}
+	}
+	
+	/**
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
+	 */
+	public ScaleFontCallback getFontCallback() {
+		return fontCallback;
+	}
+
+	/**
+	 * Sets the the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	public void setFont(ScaleFontCallback fontCallback) {
+		// sets the callback
+		this.fontCallback = fontCallback;
+		// checks if callback is consistent
+		if (fontCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, fontCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, null);
+		}
+	}
+	
+	/**
+	 * Returns a native object as font when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @return a native object as font
+	 */
+	private NativeObject onFont(ScaleScriptableContext context, ScaleFontCallback callback) {
+		// gets value
+		FontOptions result = ScriptableUtils.getOptionValue(getAxis(), context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		}
+		// default result
+		return getAxis().getScale().getPointLabels().getFont().createOptions().nativeObject();
 	}
 
 }
