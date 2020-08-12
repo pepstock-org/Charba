@@ -17,6 +17,9 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
+import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
@@ -64,35 +67,45 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * If true, gridlines are circular (on radar chart only).
+	 * If true, grid lines are circular (on radar chart only).
 	 * 
-	 * @return If true, gridlines are circular (on radar chart only).
+	 * @return If true, grid lines are circular (on radar chart only).
 	 */
 	public boolean isCircular() {
 		return getAxis().getScale().getGrideLines().isCircular();
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * @param color The color of the grid lines.<br>
+	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		// FIXME checks callback
+		// reset callback if there is
+		setColor((ScaleColorCallback) null);
+		// stores value
 		getAxis().getScale().getGrideLines().setColor(color);
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * @param color The color of the grid lines.<br>
+	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
+		// reset callback if there is
+		setColor((ScaleColorCallback) null);
+		// stores value
 		getAxis().getScale().getGrideLines().setColor(color);
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -101,7 +114,8 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -110,54 +124,66 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @param color if set, used as the color of the border line.<br>
+	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(IsColor color) {
 		getAxis().getScale().getGrideLines().setBorderColor(color);
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @param color if set, used as the color of the border line.<br>
+	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(String color) {
 		getAxis().getScale().getGrideLines().setBorderColor(color);
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @return if set, used as the color of the border line.<br>
+	 *         If unset, the first color option is resolved and used.
 	 */
 	public String getBorderColorAsString() {
 		return getAxis().getScale().getGrideLines().getBorderColorAsString();
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @return if set, used as the color of the border line.<br>
+	 *         If unset, the first color option is resolved and used.
 	 */
 	public IsColor getBorderColor() {
 		return getAxis().getScale().getGrideLines().getBorderColor();
 	}
 
 	/**
-	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * If set, used as the width of the border line.<br>
+	 * If unset, the first lineWidth option is resolved and used.
 	 * 
-	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * @param borderWidth if set, used as the width of the border line.<br>
+	 *            If unset, the first lineWidth option is resolved and used.
 	 */
 	public void setBorderWidth(int borderWidth) {
 		getAxis().getScale().getGrideLines().setBorderWidth(borderWidth);
 	}
 
 	/**
-	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * If set, used as the width of the border line.<br>
+	 * If unset, the first lineWidth option is resolved and used.
 	 * 
-	 * @return if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
+	 * @return if set, used as the width of the border line.<br>
+	 *         If unset, the first lineWidth option is resolved and used.
 	 */
 	public int getBorderWidth() {
 		return getAxis().getScale().getGrideLines().getBorderWidth();
@@ -187,6 +213,9 @@ public class GridLines extends AbstractScaleLines {
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
+		// reset callback if there is
+		setBorderDashOffset((ScaleBorderDashOffsetCallback) null);
+		// stores value
 		getAxis().getScale().getGrideLines().setBorderDashOffset(borderDashOffset);
 	}
 
@@ -205,6 +234,9 @@ public class GridLines extends AbstractScaleLines {
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	public void setLineWidth(int... lineWidth) {
+		// reset callback if there is
+		setLineWidth((ScaleLineWidthCallback) null);
+		// stores value
 		getAxis().getScale().getGrideLines().setLineWidth(lineWidth);
 	}
 
@@ -236,19 +268,22 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines.<br>
+	 * This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @param drawOnChartArea If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are
-	 *            drawn.
+	 * @param drawOnChartArea If true, draw lines on the chart area inside the axis lines.<br>
+	 *            This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		getAxis().getScale().getGrideLines().setDrawOnChartArea(drawOnChartArea);
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines.<br>
+	 * This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * @return If true, draw lines on the chart area inside the axis lines.<br>
+	 *         This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getAxis().getScale().getGrideLines().isDrawOnChartArea();
@@ -291,7 +326,8 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If true, grid lines will be shifted to be between labels.<br>
+	 * This is set to true in the bar chart by default.
 	 * 
 	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
 	 */
@@ -300,7 +336,8 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If true, grid lines will be shifted to be between labels.<br>
+	 * This is set to true in the bar chart by default.
 	 * 
 	 * @return If true, grid lines will be shifted to be between labels.
 	 */
@@ -309,18 +346,22 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Sets z-index of grid line layer.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @param z z-index of grid line layer.<br>
+	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		getAxis().getScale().getGrideLines().setZ(z);
 	}
 
 	/**
-	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Returns z-index of grid line layer.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @return z-index of grid line layer.<br>
+	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
 		return getAxis().getScale().getGrideLines().getZ();

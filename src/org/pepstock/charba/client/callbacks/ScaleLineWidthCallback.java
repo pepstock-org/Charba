@@ -15,19 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-
 /**
- * Callback interface to set <code>color</code> property at runtime to scale instance.
+ * Callback interface to set <code>linerWidth</code> property at runtime to scale instance.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @see IsColor
- * @see Gradient
- * @see CanvasGradientItem
  */
-public interface ColorCallback extends ScaleScriptable<Object> {
+public interface ScaleLineWidthCallback extends ScaleScriptable<Integer> {
 
 }

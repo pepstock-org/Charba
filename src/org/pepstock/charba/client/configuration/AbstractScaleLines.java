@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.LineWidthCallback;
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -48,9 +48,9 @@ abstract class AbstractScaleLines extends AxisContainer {
 
 
 	// hover background color callback instance
-	private ColorCallback colorCallback = null;
+	private ScaleColorCallback colorCallback = null;
 	// hover border color callback instance
-	private LineWidthCallback lineWidthCallback = null;
+	private ScaleLineWidthCallback lineWidthCallback = null;
 	// border dashoffset callback instance
 	private ScaleBorderDashOffsetCallback borderDashOffsetCallback = null;
 	
@@ -127,7 +127,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @return the color callback instance
 	 */
-	public ColorCallback getColorCallback() {
+	public ScaleColorCallback getColorCallback() {
 		return colorCallback;
 	}
 
@@ -136,7 +136,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback instance
 	 */
-	public void setColor(ColorCallback colorCallback) {
+	public void setColor(ScaleColorCallback colorCallback) {
 		// stores callback
 		this.colorCallback = colorCallback;
 		// checks if consistent
@@ -154,7 +154,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @return the line width callback instance
 	 */
-	public LineWidthCallback getLineWidthCallback() {
+	public ScaleLineWidthCallback getLineWidthCallback() {
 		return lineWidthCallback;
 	}
 
@@ -163,7 +163,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @param lineWidthCallback the line width callback instance.
 	 */
-	public void setLineWidth(LineWidthCallback lineWidthCallback) {
+	public void setLineWidth(ScaleLineWidthCallback lineWidthCallback) {
 		// stores callback
 		this.lineWidthCallback = lineWidthCallback;
 		// checks if consistent

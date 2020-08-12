@@ -254,8 +254,10 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
    * add `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
    * add `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
-   * add `LineWidthCallback` interface to use into a `GridLines` options in order to set `lineWidth` property at runtime.
-   * add `ColorCallback` interface to use into a `GridLines` options in order to set `color` property at runtime.
+   * add `ScaleLineWidthCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
+   * add `ScaleColorCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `color` property at runtime.
+   * add `ScaleBorderDashOffset` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
+   * add `ScaleBorderDash` interface to use into a `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
    * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
    * add `align` property to `Title` options and configuration classes.
@@ -286,8 +288,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `offset` and `hoverOffset` properties to `PieDataset` and `DoughnutDataset` classes.
    * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.
    * add `labels` property to `CartesianCategoryAxis` class.
-   * add `borderDashOffset` property scriptable by callback to `Gridlines` class. 
-   * add `color`, `lineWidth`, `borderDash` and `borderDashOffset` properties scriptable by callback to `RadialAngleLines` class. 
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

@@ -17,7 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleBorderDashCallback;
+import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -113,6 +116,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param color color of angled lines.
 	 */
 	public void setColor(IsColor color) {
+		// reset callback if there is
+		setColor((ScaleColorCallback)null);
+		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
 
@@ -122,6 +128,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param color color of angled lines.
 	 */
 	public void setColor(String color) {
+		// reset callback if there is
+		setColor((ScaleColorCallback)null);
+		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
 
@@ -149,6 +158,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param lineWidth width of angled lines.
 	 */
 	public void setLineWidth(int lineWidth) {
+		// reset callback if there is
+		setLineWidth((ScaleLineWidthCallback)null);
+		// stores value
 		getAxis().getScale().getAngleLines().setLineWidth(lineWidth);
 	}
 
@@ -167,6 +179,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
+		// reset callback if there is
+		setBorderDash((ScaleBorderDashCallback)null);
+		// stores value
 		getAxis().getScale().getAngleLines().setBorderDash(borderDash);
 	}
 
@@ -185,6 +200,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
+		// reset callback if there is
+		setBorderDashOffset((ScaleBorderDashOffsetCallback)null);
+		// stores value
 		getAxis().getScale().getAngleLines().setBorderDashOffset(borderDashOffset);
 	}
 
