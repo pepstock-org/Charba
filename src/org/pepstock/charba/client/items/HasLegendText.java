@@ -17,9 +17,11 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
+import org.pepstock.charba.client.options.LegendTitle;
 
 /**
- * FIXME
+ * Interface to map object whoch contains a text to show inside a legend element.<br>
+ * Used by {@link LegendItem} and {@link LegendTitle}.
  *
  * @author Andrea "Stock" Stocchero
  */
