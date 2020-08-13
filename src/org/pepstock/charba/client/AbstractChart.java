@@ -112,6 +112,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final DatasetReferenceItemFactory datasetReferenceItemFactory = new DatasetReferenceItemFactory();
 	// cursor defined when chart is created
 	private final CursorType initialCursor;
+	// initial options of chart
+	// used for reconfiguring
+	private NativeObject initialOptions = null;
 
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
@@ -720,12 +723,10 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			tempConfiguration.setOptions(this, internalOptions);
 			// clones the current chart config
 			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
+			// clones the initial chart options
+			NativeObject clonedInitialOptions = Helpers.get().clone(initialOptions);
 			// merges config options and whole defaults
-			// ----------------------------------------
-			// pay attention that if the options has been removed
-			// that's not currently reflected here
-			// ----------------------------------------
-			Helpers.get().mergeIf(clonedOptions, chart.getOptions());
+			Helpers.get().mergeIf(clonedOptions, clonedInitialOptions);
 			// replace the options
 			chart.setOptions(clonedOptions);
 			// calls plugins for onConfigure method
@@ -1010,6 +1011,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
+			// clones and stores the original options
+			this.initialOptions = Helpers.get().clone(chart.getOptions());
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
