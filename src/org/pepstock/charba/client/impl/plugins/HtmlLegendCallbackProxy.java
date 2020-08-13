@@ -82,7 +82,7 @@ final class HtmlLegendCallbackProxy {
 		// adds to the element all event listeners
 		element.addEventListener(BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
 		element.addEventListener(BaseEventTypes.MOUSE_MOVE, hoverCallbackProxy.getProxy());
-		element.addEventListener(BaseEventTypes.MOUSE_OUT, leaveCallbackProxy.getProxy());
+		element.addEventListener(BaseEventTypes.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
 	}
 
 	/**
@@ -94,7 +94,7 @@ final class HtmlLegendCallbackProxy {
 		// removes to the element all event listeners
 		element.removeEventListener(BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
 		element.removeEventListener(BaseEventTypes.MOUSE_MOVE, hoverCallbackProxy.getProxy());
-		element.removeEventListener(BaseEventTypes.MOUSE_OUT, leaveCallbackProxy.getProxy());
+		element.removeEventListener(BaseEventTypes.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
 	}
 
 	/**
@@ -178,13 +178,13 @@ final class HtmlLegendCallbackProxy {
 		// and there is native chart stored into cache (must be)
 		if (selectedItem != null && Charts.hasNative(chart)) {
 			// checks if is a click event
-			if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
+			if (BaseEventTypes.CLICK.equalsIgnoreCase(event.getType())) {
 				// invokes on click event
 				onClick(chart, selectedItem, event);
-			} else if (Event.MOUSEMOVE.value().equalsIgnoreCase(event.getType())) {
+			} else if (BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(event.getType())) {
 				// invokes on hover event
 				onHover(chart, selectedItem, event);
-			} else if (Event.MOUSEOUT.value().equalsIgnoreCase(event.getType())) {
+			} else if (BaseEventTypes.MOUSE_LEAVE.equalsIgnoreCase(event.getType())) {
 				// invokes on leave event
 				onLeave(chart, selectedItem, event);
 			}

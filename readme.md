@@ -241,6 +241,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `render(UpdateConfiguration)` method has been removed because it is not available anymore on CHART.JS.
  * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
  * rename `HtmlLegendTextCallback` class into `HtmlLegendItemCallback`.
+ * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
   
 ### Features
 
@@ -340,6 +341,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * `Window.enableResizeOnBeforePrint()` method has been fully implemented by JSINTEROP.
  * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way.
  * reduce visibility of property handler classes leveraging on the interface.
+ * improve the logic of `DatasetsItemsSelector` plugin in order to leverage on new capabilities of scale item to retrieve the selected data instead of the index.
 
 License
 -------

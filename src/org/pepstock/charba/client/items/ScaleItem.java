@@ -408,10 +408,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 	
 	/**
-	 * Returns the value on the axis related to a event position.
+	 * Returns the value on the axis related to an event position.
 	 *  
 	 * @param event event instance used to get the value from the scale 
-	 * @return the value on the axis related to a event position
+	 * @return the value on the axis related to an event position
 	 */
 	public final ScaleValueItem getValueAtEvent(BaseNativeEvent event) {
 		// checks if argument is consistent
@@ -419,9 +419,25 @@ public class ScaleItem extends BaseBoxNodeItem {
 			// gets the pixel used for searching
 			// if the scale is horizontal then it uses layer X
 			// otherwise Y
-			double pixel = AxisKind.X.equals(getAxis()) ? event.getLayerX() : event.getLayerY();
+			double position = AxisKind.X.equals(getAxis()) ? event.getLayerX() : event.getLayerY();
+			// creates and returns the value
+			return getValueAtPixel(position);
+		}
+		// if here, event is not consistent
+		return null;
+	}
+	
+	/**
+	 * Returns the value on the axis related to a position, passed as pixels.
+	 *  
+	 * @param position position in pixel used to get the value from the scale 
+	 * @return the value on the axis related to a position, passed as pixels
+	 */
+	public final ScaleValueItem getValueAtPixel(double position) {
+		// checks if argument is consistent
+		if (!Double.isNaN(position)){
 			// gets the value on the axis at that pixel
-			double value = getValueForPixel(pixel);
+			double value = getValueForPixel(position);
 			// gets also the label of the value
 			String label = getLabelForValue(value);
 			// creates result instance
@@ -450,7 +466,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// if here, event is not consistent
 		return null;
 	}
-
+	
 	/**
 	 * Used to get the data value from a given pixel.<br>
 	 * This is the inverse of getPixelForValue.<br>

@@ -18,12 +18,9 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -33,7 +30,6 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.Weight;
@@ -42,7 +38,6 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
-import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -62,6 +57,8 @@ final class SelectionHandler {
 	private final CallbackProxy<EventListenerCallback> mouseMoveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<EventListenerCallback> mouseUpCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the leave function
+	private final CallbackProxy<EventListenerCallback> mouseLeaveCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// chart instance
 	private final IsChart chart;
@@ -70,15 +67,12 @@ final class SelectionHandler {
 	// current selection area
 	private final SelectionArea area = new SelectionArea();
 	// current selection dataset items
-	private final SelectionDatasetItems items = new SelectionDatasetItems();
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
 	private SelectionStatus status = SelectionStatus.READY;
 	// copy of chart canvas as image to apply when is drwaing into canvas
 	private Img snapshot = null;
-	// amount of datasets items
-	private int datasetsItemsCount = 0;
 	// previous chart area
 	private String previousChartAreaAsString = null;
 	// previous data URL chart as png
@@ -110,6 +104,8 @@ final class SelectionHandler {
 		mouseMoveCallbackProxy.setCallback((context, event) -> onMouseMove(event));
 		// fires the event
 		mouseUpCallbackProxy.setCallback((context, event) -> onMouseUp(event));
+		// fires the event
+		mouseLeaveCallbackProxy.setCallback((context, event) -> onMouseLeave(event));
 		// gets selection item
 		ClearSelection clearSelection = options.getClearSelection();
 		// checks if display is required
@@ -162,6 +158,7 @@ final class SelectionHandler {
 		// adds to the canvas all event listeners
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
 	}
 
@@ -172,6 +169,7 @@ final class SelectionHandler {
 		// adds to the canvas all event listeners
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
 	}
 
@@ -186,7 +184,7 @@ final class SelectionHandler {
 		event.preventDefault();
 		// if the mouse down event points
 		// are in chart area and has got datasets items
-		if (hasMinimumDatasetsItems() && isEventInChartArea(event)) {
+		if (isEventInChartArea(event)) {
 			// sets cursor
 			chart.getCanvas().getStyle().setCursorType(CursorType.CROSSHAIR);
 			// then start selection with X coordinate
@@ -200,19 +198,19 @@ final class SelectionHandler {
 	 * @param event canvas mouse event.
 	 */
 	void onMouseMove(BaseNativeEvent event) {
+		// if the mouse move event points
+		// are out of chart area
+		if (!isEventInChartArea(event)) {
+			// figures out as an end of selection
+			onMouseUp(event);
+			return;
+		}
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
 		// if the status of is in selecting
 		// means that mouse down is already done
 		if (getStatus().equals(SelectionStatus.SELECTING)) {
-			// if the mouse move event points
-			// are out of chart area
-			if (!isEventInChartArea(event)) {
-				// figures out as an end of selection
-				endSelection(event);
-				return;
-			}
 			// updates the selection into canvas
 			updateSelection(event.getX(), false);
 		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.SELECTED)) {
@@ -233,6 +231,17 @@ final class SelectionHandler {
 			cursorOverClearSelection = null;
 		}
 	}
+	
+	/**
+	 * Manages the mouse leave event on canvas.
+	 * 
+	 * @param event canvas mouse event.
+	 */
+	void onMouseLeave(BaseNativeEvent event) {
+		// if here the cursor went out of the canvas
+		// the same of mouse up
+		onMouseUp(event);
+	}
 
 	/**
 	 * Manages the mouse up event on canvas.
@@ -252,6 +261,8 @@ final class SelectionHandler {
 			preventClickEvent = true;
 			// sets the cursor
 			chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
+			// updates the selection into canvas
+			updateSelection(event.getX(), false);
 			endSelection(event);
 		}
 	}
@@ -316,47 +327,6 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Returns the calculated dataset items count.
-	 * 
-	 * @return the datasetsItemsCount
-	 */
-	int getDatasetsItemsCount() {
-		return datasetsItemsCount;
-	}
-
-	/**
-	 * Sets the calculated dataset items count.
-	 * 
-	 * @param datasetsItemsCount the datasetsItemsCount to set
-	 */
-	void setDatasetsItemsCount(int datasetsItemsCount) {
-		this.datasetsItemsCount = datasetsItemsCount;
-	}
-
-	/**
-	 * Returns the minimum amount of datasets, selectable based on chart type.
-	 * 
-	 * @return the minimum amount of datasets
-	 */
-	boolean hasMinimumDatasetsItems() {
-		// gets chart AREA
-		ChartNode node = chart.getNode();
-		// gets the scale element of chart
-		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
-		// if chart is line or axis time is equals to 2
-		// else if bar chart is equals to 1
-		int minimDatasetsItemsCount;
-		if (ChartType.LINE.equals(chart.getBaseType())) {
-			minimDatasetsItemsCount = 2;
-		} else {
-			minimDatasetsItemsCount = isTimeAxis(scaleItem) ? 2 : 1;
-		}
-		// returns checking the value with amount of datasets items
-		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
-	}
-
-	/**
 	 * Start selection on canvas by the starting X coordinate.<br>
 	 * Can be invokes by mouse down or refresh of chart (like resizing).
 	 * 
@@ -398,38 +368,14 @@ final class SelectionHandler {
 		ChartAreaNode chartArea = node.getChartArea();
 		// checks if X coordinate is inside of
 		// chart area
-		updateTrack(x, chartArea);
-		// gets the scale element of chart
-		SelectionTicks selectionTicks = calculateAreaItemCount(node);
-		// calculates the amount of sections into chart based on
-		// amount of dataset items
-		int areaCount = selectionTicks.getCount();
-		// gets the left of chart area as starting point
-		double scaleTickX = selectionTicks.getX();
-		// calculates the section size for every dataset item
-		double scaleTickLength = selectionTicks.getWidth();
-		// scans all sections
-		for (int i = 0; i <= areaCount; i++) {
-			// calculates the Y coordinate of section
-			// adding to starting point the section size (always DOUBLE)
-			double scaleTickY = scaleTickX + scaleTickLength;
-			// checks if the X coordinate of track is inside of section
-			if (track.getStart() >= scaleTickX && track.getStart() <= scaleTickY) {
-				// sets the start dataset item index
-				items.setStart(i);
-				// sets the left part of selection area
-				area.setLeft(scaleTickX);
-			}
-			// checks if the Y coordinate of track is inside of section
-			if (track.getEnd() >= scaleTickX && track.getStart() <= scaleTickY) {
-				// sets the end dataset item index
-				items.setEnd(i);
-				// sets the right part of selection area, max must be right of chart area
-				area.setRight(Math.min(scaleTickY, chartArea.getRight()));
-			}
-			// increments the starting point of section
-			scaleTickX = scaleTickX + scaleTickLength;
-		}
+		// if less then area, used left as current track point
+		// if great then area, used right as current track point
+		// otherwise use X coordinate passed as current point
+		track.setCurrent(Math.min(Math.max(x, chartArea.getLeft()), chartArea.getRight()));
+		// sets the left part of selection area
+		area.setLeft(track.getStart());
+		// sets the right part of selection area, max must be right of chart area
+		area.setRight(track.getEnd());
 		// sets the selecting color into canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
@@ -450,21 +396,27 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Apply the broder to selection area if required.
+	 * Apply the border to selection area if required.
 	 * 
 	 * @param ctx rendering interface used to draw on a canvas
 	 */
 	private void applyAreaBorder(Context2dItem ctx) {
-		// borders
+		// checks if border width is consistent
 		if (options.getBorderWidth() > 0) {
+			// sets border width to context
 			ctx.setLineWidth(options.getBorderWidth());
+			// gets the border dash configuration
 			List<Integer> borderDash = options.getBorderDash();
-			// sets the selecting color into canvas
+			// sets the border color into canvas
 			ctx.setStrokeColor(options.getBorderColorAsString());
+			// if borer dash is consistent...
 			if (!borderDash.isEmpty()) {
+				// .. then sets teh border dash
 				ctx.setLineDash(options.getBorderDash());
 			}
+			// sets the border dasn offset
 			ctx.setLineDashOffset(options.getBorderDashOffset());
+			// draws the border of selected area
 			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
 	}
@@ -491,27 +443,6 @@ final class SelectionHandler {
 			}
 			// draws a scaled image setting width and height
 			ctx.drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-		}
-	}
-
-	/**
-	 * Checks if event is in chart area, updating the track.
-	 * 
-	 * @param x new X coordinate.
-	 * @param chartArea the area item of chart
-	 */
-	private void updateTrack(double x, ChartAreaNode chartArea) {
-		// checks if X coordinate is inside of
-		// chart area
-		if (x < chartArea.getLeft()) {
-			// if less then area, used left as current track point
-			track.setCurrent(chartArea.getLeft());
-		} else if (x > chartArea.getRight()) {
-			// if great then area, used right as current track point
-			track.setCurrent(chartArea.getRight());
-		} else {
-			// otherwise use X coordinate passed as current point
-			track.setCurrent(x);
 		}
 	}
 
@@ -543,22 +474,11 @@ final class SelectionHandler {
 			// gets the scale element of chart
 			// using the X axis id of plugin options
 			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
-			// checks the type of chart and scale
-			// LINE and axis TIME must be added by 1 end of datasets
-			if (ChartType.LINE.equals(chart.getBaseType())) {
-				// fires the event that dataset items selection
-				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
-			} else if (ChartType.BAR.equals(chart.getBaseType())) {
-				// checks if there is an offset
-				boolean barOffset = getOffset();
-				if (isTimeAxis(scaleItem) && !barOffset) {
-					// fires the event that dataset items selection
-					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
-				} else {
-					// fires the event that dataset items selection
-					chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
-				}
-			}
+			// stores the values of selected area from scale
+			track.setStartValue(scaleItem.getValueForPixel(area.getLeft()));
+			track.setEndValue(scaleItem.getValueForPixel(area.getRight()));
+			// fires the event that scale items selection
+			chart.fireEvent(new DatasetRangeSelectionEvent(event, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
 		}
 	}
 
@@ -566,34 +486,57 @@ final class SelectionHandler {
 	 * Recalculates the selection area and track and draws the area when a chart is updated or resized.
 	 */
 	void refresh() {
-		// gets chart AREA
+		// gets chart node
 		ChartNode node = chart.getNode();
+		ChartAreaNode chartArea = node.getChartArea();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
-		SelectionTicks selectionTicks = calculateAreaItemCount(node);
-		// calculates the amount of sections into chart based on
-		// amount of dataset items
-		int areaCount = selectionTicks.getCount();
-		// gets the left of chart area as starting point
-		double scaleTickX = selectionTicks.getX();
-		// calculates the section size for every dataset item
-		double scaleTickLength = selectionTicks.getWidth();
-		// scans all sections
-		for (int i = 0; i <= areaCount; i++) {
-			// when the section index is equals of start of dataset item index
-			if (items.getStart() == i) {
-				// this is new start selection point
-				startSelection((int) Math.ceil(scaleTickX));
-			}
-			// when the section index is equals of end of dataset item index
-			if (items.getEnd() == i) {
-				double middle = scaleTickX + scaleTickLength / 2;
-				// this is new end selection point
-				updateSelection((int) middle, true);
-			}
-			// increments the starting point of section
-			scaleTickX = scaleTickX + scaleTickLength;
+		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
+		// gets START pixels by value
+		double startPixel = scaleItem.getPixelForValue(track.getStartValue());
+		// checks if the selection area is still consistent
+		if (startPixel > chartArea.getRight()) {
+			// does not refresh anything
+			return;
 		}
+		// gets END pixels by value
+		double endPixel = scaleItem.getPixelForValue(track.getEndValue());
+		// checks if the selection area is still consistent
+		if (endPixel > chartArea.getRight()) {
+			// changes the track accordingly
+			track.setCurrent(chartArea.getRight());
+			track.setEndValue(scaleItem.getValueForPixel(track.getEnd()));
+			// reset end pixel
+			endPixel = chartArea.getRight();
+		}
+		// workaround for category scale
+		// when only 1 label has been selected
+		if (AxisType.CATEGORY.equals(scaleItem.getType()) && track.getStartValue() == track.getEndValue()) {
+			// gets a reference of next value
+			// if start value is 0 it will use teh value 1 to get the pixels gap
+			// otherwise it will use the previous value
+			double nextValueIndex = (track.getStartValue() == 0D) ? 1D : track.getStartValue() - 1;
+			// gets the pixel by value
+			double nextEndPixel = scaleItem.getPixelForValue(nextValueIndex);
+			// if the pixel is consistent
+			if (!Double.isNaN(nextEndPixel)) {
+				// calculates the gap
+				// if start value equals to 0 (first) then uses values from 0 to 1 
+				// if start value greater than 0 (no first) then uses values from current value minus 1
+				double gap = (track.getStartValue() == 0D) ? (nextEndPixel - startPixel) / 2D : (startPixel - nextEndPixel) / 2D;
+				// increments the start and end points
+				startPixel = startPixel - gap;
+				endPixel = endPixel + gap;
+			} else {
+				// if here the pixel of the other value is not consistent
+				// then uses the whole area
+				startPixel = chartArea.getLeft();
+				endPixel = chartArea.getRight();
+			}
+		}
+		// this is new start selection point
+		startSelection((int) Math.ceil(startPixel));
+		updateSelection((int) endPixel, true);
 		// when here, the area has been draw
 		// then complete the selection
 		endSelection(DOMBuilder.get().createChangeEvent(), skipNextFireEvent);
@@ -1076,82 +1019,6 @@ final class SelectionHandler {
 		boolean isX = event.getX() >= areaInstance.getLeft() && event.getX() <= areaInstance.getRight();
 		boolean isY = event.getY() >= areaInstance.getTop() && event.getY() <= areaInstance.getBottom();
 		return isX && isY;
-	}
-
-	/**
-	 * Calculates the selection ticks with amount of ticks, the starting point and width between ticks.
-	 * 
-	 * @param node chart node instance
-	 * @return a selection ticks with amount of ticks, the starting point and width between ticks
-	 */
-	private SelectionTicks calculateAreaItemCount(ChartNode node) {
-		// gets chart area
-		ChartAreaNode chartArea = node.getChartArea();
-		// creates result
-		final SelectionTicks selectionTicks = new SelectionTicks();
-		// gets the scale element of chart
-		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
-		// calculates the amount of sections into chart based on
-		// amount of dataset items
-		// in case of time axis, it must be reduce by1 because the dataset items
-		// are always located in line with tick
-		if (ChartType.LINE.equals(chart.getBaseType())) {
-			selectionTicks.setCount(getDatasetsItemsCount() - 1);
-		} else {
-			// calculates the offset parameter
-			boolean barOffset = getOffset();
-			// then calculated the amount of ticks
-			selectionTicks.setCount(isTimeAxis(scaleItem) && !barOffset ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount());
-		}
-		// gets the left of chart area as starting point
-		selectionTicks.setX(chartArea.getLeft());
-		// calculates the section size for every dataset item
-		// PAY attention to use DOUBLE because there is a problem
-		// if rounds the values (does not select exactly the right section)
-		selectionTicks.setWidth((double) scaleItem.getWidth() / (double) selectionTicks.getCount());
-		return selectionTicks;
-	}
-
-	/**
-	 * Checks and returns the offset for BAR chart.<br>
-	 * Based on offset parameter of axis, the bars are drawn in different way and the the total amount of ticks could be different.
-	 * 
-	 * @return <code>true</code> if an offset has been set otherwise <code>false</code>.
-	 */
-	private boolean getOffset() {
-		// default offset
-		boolean offset = false;
-		// checks if is a BAR chart
-		if (ChartType.BAR.equals(chart.getBaseType()) && chart.getOptions() instanceof BarOptions) {
-			// gets all scales
-			List<Scale> scales = chart.getNode().getOptions().getScales().getAxes();
-			// checks if any scale has been configured
-			if (!scales.isEmpty()) {
-				// scans configured scales
-				for (Scale scale : scales) {
-					// checks if is the right scale
-					// used for selection by ID
-					// and is is a X scale
-					if (AxisKind.X.equals(scale.getAxis()) && Key.equals(options.getXAxisID(), scale.getId())) {
-						// gets the offset
-						offset = scale.isOffset();
-					}
-				}
-			}
-		}
-		// returns offset
-		return offset;
-	}
-
-	/**
-	 * Returns <code>true</code> if the scale type is {@link AxisType#TIME} or {@link AxisType#TIMESERIES}.
-	 * 
-	 * @param scaleItem scale item instance to check
-	 * @return <code>true</code> if the scale type is {@link AxisType#TIME} or {@link AxisType#TIMESERIES}
-	 */
-	private boolean isTimeAxis(ScaleItem scaleItem) {
-		return scaleItem != null && (AxisType.TIME.equals(scaleItem.getType()) || AxisType.TIMESERIES.equals(scaleItem.getType()));
 	}
 
 }

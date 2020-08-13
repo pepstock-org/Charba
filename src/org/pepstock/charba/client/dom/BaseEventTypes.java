@@ -50,6 +50,10 @@ public final class BaseEventTypes {
 	/**
 	 * Mouse event {@value} type.
 	 */
+	public static final String MOUSE_LEAVE = "mouseleave";
+	/**
+	 * Mouse event {@value} type.
+	 */
 	public static final String MOUSE_OVER = "mouseover";
 	/**
 	 * Mouse event {@value} type.

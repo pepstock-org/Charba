@@ -28,6 +28,10 @@ final class SelectionTrack {
 
 	private double end = Double.NaN;
 
+	private double startValue = Double.NaN;
+
+	private double endValue = Double.NaN;
+
 	/**
 	 * Creates the object storing the original X point of mouse down.
 	 * 
@@ -64,6 +68,42 @@ final class SelectionTrack {
 	 */
 	double getEnd() {
 		return end;
+	}
+
+	/**
+	 * Sets the start value retrieved from scale
+	 * 
+	 * @param startValue the start value retrieved from scale
+	 */
+	void setStartValue(double startValue) {
+		this.startValue = startValue;
+	}
+
+	/**
+	 * Returns the start value on scale
+	 * 
+	 * @return the start value
+	 */
+	double getStartValue() {
+		return startValue;
+	}
+
+	/**
+	 * Sets the end value retrieved from scale
+	 * 
+	 * @param endValue the end value retrieved from scale
+	 */
+	void setEndValue(double endValue) {
+		this.endValue = endValue;
+	}
+
+	/**
+	 * Returns the ending value on scale
+	 * 
+	 * @return the end value
+	 */
+	double getEndValue() {
+		return endValue;
 	}
 
 	/**
