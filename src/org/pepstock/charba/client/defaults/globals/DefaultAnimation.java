@@ -65,7 +65,6 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 
 	private static final List<DefaultAnimationCollectionKey> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, DefaultAnimationCollectionKey.COLORS);
 
-	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -94,7 +93,9 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 		return DEFAULT_ANIMATE_SCALE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.globals.DefaultAnimationMode#hasCollection(org.pepstock.charba.client.options.IsAnimationCollectionKey)
 	 */
 	@Override

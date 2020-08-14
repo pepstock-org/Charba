@@ -29,10 +29,12 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextAlign;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
+import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -50,10 +52,15 @@ final class BaseMeterController extends AbstractController {
 	private static final double PADDING = 4D;
 	// max percentage
 	private static final double MAX_PERCENTAGE = 100D;
-	// SQRT of 2 to calculate the sqare inside the doughnut
+	// min animation duration to apply the animation labels
+	private static final double MINIMUM_ANIMATION_DURATION = 100D;
+	// SQRT of 2 to calculate the square inside the doughnut
 	private static final double SQRT_2 = Math.sqrt(2);
 	// controller type
 	private final ControllerType type;
+	// flag to know if the draw has been invoked by an update
+	// instead of animation when hovered
+	private boolean fromUpdate = false;
 
 	/**
 	 * Creates the controller using the type passed as argument.
@@ -121,34 +128,88 @@ final class BaseMeterController extends AbstractController {
 		if (Controller.isConsistent(this, context, chart)) {
 			// draw the doughnut chart
 			super.draw(context, chart);
-			// gets the list of datasets
-			List<Dataset> datasets = chart.getData().getDatasets();
-			// checks if not empty
-			if (!datasets.isEmpty()) {
-				// gets chart item
-				ChartNode item = context.getNode();
-				// gets dataset index 0
-				MeterDataset dataset = (MeterDataset) datasets.get(0);
-				// checks if meter chart
-				if (chart instanceof MeterChart) {
-					MeterChart meterChart = (MeterChart) chart;
-					MeterOptions options = meterChart.getOptions();
-					// let's draw the value inside the doughnut
-					// FIXME ease value
-					execute(chart, item, dataset, options, 1D);
-				} else if (chart instanceof GaugeChart) {
-					// checks if meter chart
-					GaugeChart gaugeChart = (GaugeChart) chart;
-					GaugeOptions options = gaugeChart.getOptions();
-					// let's draw the value inside the doughnut
-					// FIXME ease value
-					execute(chart, item, dataset, options, 1D);
-				}
+			// gets chart node
+			ChartNode node = context.getNode();
+			// checks if the animation is enabled
+			// if not, draws labels with easing 1
+			if (!isAnimationConsistetForDrawingByEasing(chart) || !fromUpdate) {
+				// draws labels
+				drawLabels(chart, node, 1D);
 			}
 		} else {
 			// if here, arguments are not consistent
 			// exception
 			throw new IllegalArgumentException("Draw method arguments are not consistent");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.controllers.AbstractController#update(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.options.IsAnimationModeKey)
+	 */
+	@Override
+	public void update(ControllerContext context, IsChart chart, IsAnimationModeKey mode) {
+		// sets the flag
+		// needed into draw to know if the labels must be drawn or not
+		// if resize, do not invoke the animation
+		fromUpdate = DefaultAnimationModeKey.RESIZE.equals(mode) ? false : true;
+		// update the doughnut chart
+		super.update(context, chart, mode);
+	}
+
+	/**
+	 * Returns <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of teh animation options.
+	 * 
+	 * @param chart chart instance to check
+	 * @return <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of teh animation options
+	 */
+	boolean isAnimationConsistetForDrawingByEasing(IsChart chart) {
+		// checks if naimation and its duration at configuration level are enabled.
+		boolean isAnimated = chart.getOptions().isAnimationEnabled() && chart.getOptions().getAnimation().getDuration() >= MINIMUM_ANIMATION_DURATION;
+		// checks if there is any dataset
+		if (!chart.getData().getDatasets().isEmpty()) {
+			// gets the dataset (should be only 1
+			Dataset dataset = chart.getData().getDatasets().get(0);
+			// checks the dataset animation
+			isAnimated = isAnimated && dataset.isAnimationEnabled() && dataset.getAnimation().getDuration() >= MINIMUM_ANIMATION_DURATION;
+		}
+		return isAnimated;
+	}
+
+	/**
+	 * Draws the labels in the center of doughnut chart.
+	 * 
+	 * @param chart chart instance
+	 * @param node native chart as chart node
+	 * @param easing a value between 0 and 1 which indicates the animation progress
+	 */
+	void drawLabels(IsChart chart, ChartNode node, double easing) {
+		// gets the list of datasets
+		List<Dataset> datasets = chart.getData().getDatasets();
+		// checks if not empty
+		if (!datasets.isEmpty()) {
+			// gets dataset index 0
+			MeterDataset dataset = (MeterDataset) datasets.get(0);
+			// checks if meter chart
+			if (chart instanceof MeterChart) {
+				MeterChart meterChart = (MeterChart) chart;
+				MeterOptions options = meterChart.getOptions();
+				// let's draw the value inside the doughnut
+				execute(chart, node, dataset, options, easing);
+			} else if (chart instanceof GaugeChart) {
+				// checks if meter chart
+				GaugeChart gaugeChart = (GaugeChart) chart;
+				GaugeOptions options = gaugeChart.getOptions();
+				// let's draw the value inside the doughnut
+				execute(chart, node, dataset, options, easing);
+			}
+		}
+		// checks if it must disable the update
+		if (easing == 1D) {
+			// reset flag from update
+			fromUpdate = false;
 		}
 	}
 
@@ -195,6 +256,8 @@ final class BaseMeterController extends AbstractController {
 		final String label = dataset.getLabel();
 		// saves context
 		ctx.save();
+		// clear the previous label
+		ctx.clearRect(centerX - (sideOfSquare / 2D), centerY - (sideOfSquare / 2D), sideOfSquare, sideOfSquare);
 		// calculates the font size
 		int fontSize = calculateFontSize(ctx, sideOfSquare, maxValueToShow, style, fontFamily);
 		// sets color to canvas

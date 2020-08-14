@@ -84,6 +84,15 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the animation options.
+	 * 
+	 * @return the animation options
+	 */
+	protected final Animation getAnimation() {
+		return animation;
+	}
+
+	/**
 	 * Sets the animation easing.
 	 * 
 	 * @param easing animation easing.

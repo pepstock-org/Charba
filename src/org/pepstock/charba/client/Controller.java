@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.StyleElement;
@@ -37,7 +38,13 @@ public interface Controller {
 	 * @return <code>true</code> if all arguments are consistent
 	 */
 	static boolean isConsistent(Controller controller, ControllerContext context, IsChart chart) {
-		return isValid(controller) && IsChart.isValid(chart) && context != null;
+		// checks if
+		// controller is valid
+		// chart is valid
+		// type of chart is a controller
+		// type of chart is equals to the controller type
+		// the context is consistent
+		return isValid(controller) && IsChart.isValid(chart) && chart.getType() instanceof ControllerType && Key.equals(chart.getType(), controller.getType()) && context != null;
 	}
 
 	/**

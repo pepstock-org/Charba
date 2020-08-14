@@ -25,16 +25,16 @@ import org.pepstock.charba.client.options.IsAnimationModeKey;
 public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 
 	/**
-	 * If true, the chart will animate in with a rotation animation.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation.
+	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	boolean isAnimateRotate();
 
 	/**
-	 * If true, will animate scaling the chart from the center outwards.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards.
+	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	boolean isAnimateScale();
 	

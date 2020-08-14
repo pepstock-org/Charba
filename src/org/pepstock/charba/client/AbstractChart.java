@@ -368,7 +368,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * 
 	 * @return the chart options based on type of chart.
 	 */
-	protected ChartOptions createChartOptions() {
+	private ChartOptions createChartOptions() {
 		return Defaults.get().getChartOptions(getType());
 	}
 

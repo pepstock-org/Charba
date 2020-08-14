@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.Controller;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -137,6 +138,38 @@ public final class Controllers {
 			Controller controller = controllersInstances.get(type);
 			// returns controller type
 			return controller.getType();
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns the controller by name as {@link ControllerType}.
+	 * 
+	 * @param type controller as {@link ControllerType}.
+	 * @return the controller if exists or <code>null</code> if does not exist.
+	 */
+	public Controller getController(ControllerType type) {
+		// checks if argument is consistent
+		// checks in the map of controller
+		if (Type.isValid(type)) {
+			// gets and returns controller
+			return getController(type.value());
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns the controller by name as string.
+	 * 
+	 * @param type controller as string.
+	 * @return the controller if exists or <code>null</code> if does not exist.
+	 */
+	public Controller getController(String type) {
+		// checks if argument is consistent
+		// checks in the map of controller
+		if (type != null && controllersInstances.containsKey(type)) {
+			// gets and returns controller
+			return controllersInstances.get(type);
 		}
 		return null;
 	}

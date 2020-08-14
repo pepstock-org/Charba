@@ -578,7 +578,6 @@ public final class Defaults {
 			// stores native object
 			Charts.addNative(nativeChart);
 		}
-
 	}
 
 	/**
