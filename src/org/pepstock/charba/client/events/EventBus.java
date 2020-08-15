@@ -51,7 +51,7 @@ final class EventBus {
 		// checks if handler is consistent
 		if (handler == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Evenmt handler is null");
+			throw new IllegalArgumentException("Event handler is null");
 		}
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
@@ -75,7 +75,7 @@ final class EventBus {
 		// checks if handler is consistent
 		if (handler == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Evenmt handler is null");
+			throw new IllegalArgumentException("Event handler is null");
 		}
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
