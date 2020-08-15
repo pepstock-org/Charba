@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.ScaleDataType;
@@ -34,7 +35,7 @@ public final class ScaleValueItem {
 	// this is the double representation
 	private final double value;
 	// this is the date representation
-	private final Date valueAsDate;
+	private final ImmutableDate valueAsDate;
 	// this is the string representation
 	private final String valueAsString;
 	// datta type instance
@@ -64,7 +65,7 @@ public final class ScaleValueItem {
 	 * @param value value on the scale
 	 * @param label string representation of the value, showed on the scale
 	 */
-	ScaleValueItem(Date value, String label) {
+	ScaleValueItem(ImmutableDate value, String label) {
 		// checks if not null
 		this.value = value != null ? value.getTime() : UndefinedValues.DOUBLE;
 		this.valueAsDate = value;

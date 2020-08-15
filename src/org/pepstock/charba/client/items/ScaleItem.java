@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -450,7 +451,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			} else if (ScaleDataType.DATE.equals(getType().getDataType())) {
 				// if here, is a date
 				// creates the date object
-				Date dateValue = Double.isNaN(value) ? (Date)null : new Date((long)value);
+				ImmutableDate dateValue = Double.isNaN(value) ? (ImmutableDate)null : new ImmutableDate((long)value);
 				result = new ScaleValueItem(dateValue, label);
 			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
 				// if here, is a string

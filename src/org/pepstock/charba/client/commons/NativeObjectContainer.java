@@ -527,7 +527,7 @@ public abstract class NativeObjectContainer {
 			// checks if value is consistent
 			if (descriptor != null && !Double.isNaN(descriptor.getValue()) && descriptor.getValue() > 0D) {
 				// creates and returns a date
-				return new Date((long) descriptor.getValue());
+				return new ImmutableDate((long) descriptor.getValue());
 			}
 		}
 		// if here the value is not consistent for a date
@@ -1342,7 +1342,7 @@ public abstract class NativeObjectContainer {
 		// checks if number value is consistent with a date
 		if (!Double.isNaN(value) && value > 0D) {
 			// creates and returns a date
-			return new Date((long) value);
+			return new ImmutableDate((long) value);
 		}
 		// the property is not a string
 		// then returns undefined value

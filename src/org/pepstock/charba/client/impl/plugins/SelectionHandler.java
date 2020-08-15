@@ -511,7 +511,7 @@ final class SelectionHandler {
 		}
 		// workaround for category scale
 		// when only 1 label has been selected
-		if (AxisType.CATEGORY.equals(scaleItem.getType()) && track.getStartValue() == track.getEndValue()) {
+		if (AxisType.CATEGORY.equals(scaleItem.getType()) && Double.compare(track.getStartValue(), track.getEndValue()) == 0) {
 			// gets a reference of next value
 			// if start value is 0 it will use teh value 1 to get the pixels gap
 			// otherwise it will use the previous value

@@ -149,7 +149,7 @@ public final class DataPoint extends NativeObjectContainer {
 		}
 		// if here the data is missing or a string
 		// then returns the default
-		return (Date) null;
+		return null;
 	}
 
 	/**
