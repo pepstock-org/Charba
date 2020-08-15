@@ -175,6 +175,13 @@ final class BaseMeterController extends AbstractController {
 			// checks the dataset animation
 			isAnimated = isAnimated && dataset.isAnimationEnabled() && dataset.getAnimation().getDuration() >= MINIMUM_ANIMATION_DURATION;
 		}
+		// checks if options are meter ones
+		if (chart.getOptions() instanceof MeterOptions) {
+			// casts to meter options
+			MeterOptions meterOptions = (MeterOptions)chart.getOptions();
+			// checks the animated display options
+			isAnimated = isAnimated && meterOptions.isAnimatedDisplay();
+		}
 		return isAnimated;
 	}
 

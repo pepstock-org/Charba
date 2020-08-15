@@ -23,6 +23,11 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.events.AnimationCompleteEvent;
+import org.pepstock.charba.client.events.AnimationCompleteEventHandler;
+import org.pepstock.charba.client.events.AnimationProgressEvent;
+import org.pepstock.charba.client.events.AnimationProgressEventHandler;
+import org.pepstock.charba.client.events.HandlerRegistration;
 
 /**
  * Specific options for METER chart.
@@ -63,6 +68,12 @@ public class MeterOptions extends AbstractPieOptions {
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
 
 	private ValueCallback valueCallback = null;
+
+	// creates internal animation handler
+	private final InternalAnimationEventHandler eventHandler = new InternalAnimationEventHandler();
+	// registration handlers instance
+	private HandlerRegistration onProgressHandlerRegistration = null;
+	private HandlerRegistration onCompleteHandlerRegistration = null;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -220,7 +231,24 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param animatedDisplay the animatedDisplay to set, <code>true</code> if animated, otherwise <code>false</code>
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
-		this.animatedDisplay = animatedDisplay;
+		// checks if equals to previous value
+		if (this.animatedDisplay != animatedDisplay) {
+			// stores the value
+			this.animatedDisplay = animatedDisplay;
+			// checks if handlers of animation has been added
+			if (animatedDisplay && onProgressHandlerRegistration == null && onCompleteHandlerRegistration == null) {
+				// adds animations handlers to chart
+				onProgressHandlerRegistration = getChart().addHandler(eventHandler, AnimationProgressEvent.TYPE);
+				onCompleteHandlerRegistration = getChart().addHandler(eventHandler, AnimationCompleteEvent.TYPE);
+			} else if (!animatedDisplay && onProgressHandlerRegistration != null && onCompleteHandlerRegistration != null) {
+				// removes animations handlers from chart
+				onProgressHandlerRegistration.removeHandler();
+				onCompleteHandlerRegistration.removeHandler();
+				// resets handler registration
+				onProgressHandlerRegistration = null;
+				onCompleteHandlerRegistration = null;
+			}
+		}
 	}
 
 	/**
@@ -239,6 +267,73 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setValueCallback(ValueCallback valueCallback) {
 		this.valueCallback = valueCallback;
+	}
+
+	/**
+	 * Animation handlers (progress and complete) in order to animate the labels drawing on meter or gauge charts.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class InternalAnimationEventHandler implements AnimationProgressEventHandler, AnimationCompleteEventHandler {
+
+		// modulo to check if the labels must be draw or not
+		private static final double MODULO = 5D;
+		// counter to use to check if draws the label
+		private int counter = 0;
+		// stores the easing value
+		private double easingValue = 0D;
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.events.AnimationProgressEventHandler#onProgress(org.pepstock.charba.client.events.AnimationProgressEvent)
+		 */
+		@Override
+		public void onProgress(AnimationProgressEvent event) {
+			// checks if labels must be drawn base on how many drawing has been done
+			if (counter % MODULO == 0) {
+				// calculates the easing value
+				easingValue = event.getItem().getCurrentStep() / event.getItem().getNumSteps();
+			}
+			// draws labels
+			drawLabelsByController(easingValue);
+			// increments counter
+			counter++;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.events.AnimationCompleteEventHandler#onComplete(org.pepstock.charba.client.events.AnimationCompleteEvent)
+		 */
+		@Override
+		public void onComplete(AnimationCompleteEvent event) {
+			// draws labels
+			drawLabelsByController(1D);
+			// resets counter and easing value
+			counter = 0;
+			easingValue = 0D;
+		}
+
+		/**
+		 * Draws the labels on chart by controller instance.
+		 * 
+		 * @param easing easing value used to animate the labels drawing if required.
+		 */
+		private void drawLabelsByController(double easing) {
+			// checks chart instance
+			if (getChart() instanceof BaseMeterChart) {
+				// gets base meter chart instance
+				BaseMeterChart<?> meterChart = (BaseMeterChart<?>)getChart();
+				// checks if animation is consistent for the controller
+				if (meterChart.getController() != null && meterChart.getController().isAnimationConsistetForDrawingByEasing(meterChart)) {
+					// invokes the draw labels on controller
+					meterChart.getController().drawLabels(meterChart, meterChart.getNode(), easing);
+				}
+			}
+		}
+
 	}
 
 }

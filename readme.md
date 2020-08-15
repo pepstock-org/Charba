@@ -342,6 +342,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way.
  * reduce visibility of property handler classes leveraging on the interface.
  * improve the logic of `DatasetsItemsSelector` plugin in order to leverage on new capabilities of scale item to retrieve the selected data instead of the index.
+ * implement `ImmutableDate` class to use to return the date value stored into chart configuration and to callbacks.
+ * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
 
 License
 -------

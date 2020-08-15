@@ -23,10 +23,6 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
-import org.pepstock.charba.client.events.AnimationCompleteEvent;
-import org.pepstock.charba.client.events.AnimationCompleteEventHandler;
-import org.pepstock.charba.client.events.AnimationProgressEvent;
-import org.pepstock.charba.client.events.AnimationProgressEventHandler;
 import org.pepstock.charba.client.options.AnimationMode;
 
 /**
@@ -42,10 +38,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 * Default of maximum value of data into a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
 	 */
 	public static final double DEFAULT_MAX = 100D;
-	// creates internal animation handler
-	private final InternalAnimationEventHandler eventHandler = new InternalAnimationEventHandler();
-	// flag is the handlers has been set
-	private boolean handlersadded = false;
 	// controller instance
 	private BaseMeterController meterController = null;
 
@@ -74,6 +66,15 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	abstract ControllerType getControllerType();
 
+	/**
+	 * Returns the controller instance or <code>null</code> if chart not initialized.
+	 * 
+	 * @return the controller instance
+	 */
+	final BaseMeterController getController() {
+		return meterController;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,18 +93,18 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			meterController = new BaseMeterController(type);
 			// if not, adds a controller
 			Defaults.get().getControllers().register(meterController);
-		} else if (meterController == null){
+		} else if (meterController == null) {
 			// if here the controller is registered
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
 			// checks if controller is a base meter controller
 			if (controllerInstance instanceof BaseMeterController) {
 				// casts to meter controller
-				meterController = (BaseMeterController)controllerInstance;
+				meterController = (BaseMeterController) controllerInstance;
 			} else {
 				// if here is not a meter controller
 				// then exception
-				throw new IllegalArgumentException("Controller stored for "+getControllerType().value()+" is not a "+BaseMeterController.class.getName());
+				throw new IllegalArgumentException("Controller stored for " + getControllerType().value() + " is not a " + BaseMeterController.class.getName());
 			}
 		}
 		// disables legend
@@ -112,14 +113,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		getOptions().getTooltips().setEnabled(false);
 		// disables tooltips custom callback
 		getOptions().getTooltips().setCustomCallback(null);
-		// checks if handlers of animation has been added
-		if (!handlersadded) {
-			// adds animations handlers to chart
-			addHandler(eventHandler, AnimationProgressEvent.TYPE);
-			addHandler(eventHandler, AnimationCompleteEvent.TYPE);
-			// changes flag
-			handlersadded = true;
-		}
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
@@ -134,67 +127,4 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			dataset.getAnimation().setMode(disabledActiveMode);
 		}
 	}
-
-	/**
-	 * Animation handlers (progress and complete) in order to animate the labels drawing on meter or gauge charts. 
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private class InternalAnimationEventHandler implements AnimationProgressEventHandler, AnimationCompleteEventHandler {
-
-		// modulo to check if the labels must be draw or not
-		private static final double MODULO = 5D;
-		// counter to use to check if draws the label
-		private int counter = 0;
-		// stores the easing value
-		private double easingValue = 0D;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.events.AnimationProgressEventHandler#onProgress(org.pepstock.charba.client.events.AnimationProgressEvent)
-		 */
-		@Override
-		public void onProgress(AnimationProgressEvent event) {
-			// checks if labels must be drawn base on how many drawing has been done
-			if (counter % MODULO == 0) {
-				// calculates the easing value
-				easingValue = event.getItem().getCurrentStep() / event.getItem().getNumSteps();
-			}
-			// draws labels
-			drawLabelsByController(easingValue);
-			// increments counter
-			counter++;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.events.AnimationCompleteEventHandler#onComplete(org.pepstock.charba.client.events.AnimationCompleteEvent)
-		 */
-		@Override
-		public void onComplete(AnimationCompleteEvent event) {
-			// draws labels
-			drawLabelsByController(1D);
-			// resets counter and easing value
-			counter = 0;
-			easingValue = 0D;
-		}
-
-		/**
-		 * Draws the labels on chart by controller instance.
-		 * 
-		 * @param easing easing value used to animate the labels drawing if required.
-		 */
-		private void drawLabelsByController(double easing) {
-			// checks if animation is consistent for the controller
-			if (meterController.isAnimationConsistetForDrawingByEasing(BaseMeterChart.this)) {
-				// invokes the draw labels on controller
-				meterController.drawLabels(BaseMeterChart.this, getNode(), easing);
-			}
-		}
-
-	}
-
 }
