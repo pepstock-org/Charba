@@ -189,7 +189,6 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the style of the dataset item.
 	 */
 	public List<PointStyle> getPointStyle() {
-		// FIXME default
 		// checks if the property is an array
 		if (ObjectType.ARRAY.equals(type(Property.POINT_STYLE))) {
 			// if array, maps into array
@@ -208,7 +207,6 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the hit radius.
 	 */
 	public double getHitRadius() {
-		// FIXME default
 		return getValue(Property.HIT_RADIUS, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
 	}
 
@@ -218,7 +216,6 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the hover radius.
 	 */
 	public double getHoverRadius() {
-		// FIXME default
 		return getValue(Property.HOVER_RADIUS, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
 	}
 
@@ -228,7 +225,6 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * @return the hover radius.
 	 */
 	public double getHoverBorderWidth() {
-		// FIXME default
 		return getValue(Property.HOVER_BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getHoverBorderWidth());
 	}
 
