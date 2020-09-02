@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  * It is applied to all sides of the scale label object of axes (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * FIXME to remove and maintain only Padding?
  */
 public final class ScaleLabelPadding extends AbstractPadding<ScaleLabel> {
 
