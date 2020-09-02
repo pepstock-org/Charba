@@ -121,10 +121,22 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		disabledActiveMode.setDuration(0);
 		// disables animation active
 		getOptions().getAnimation().setMode(disabledActiveMode);
+		// creates a new mode every time
+		// because once it has been added to the options
+		// it could be changed by user
+		AnimationMode disabledResizeMode = new AnimationMode(DefaultAnimationModeKey.RESIZE);
+		// disables the animation mode
+		disabledResizeMode.setDuration(0);
+		// disables animation resize
+		getOptions().getAnimation().setMode(disabledResizeMode);
 		// scans all datasets
 		for (Dataset dataset : getData().getDatasets()) {
-			// disable animation mode active
+			// disables animation mode active
 			dataset.getAnimation().setMode(disabledActiveMode);
+			// disables animation mode resize
+			dataset.getAnimation().setMode(disabledResizeMode);
+			// disables the animation callback at dataset level
+			dataset.setAnimation(null);
 		}
 	}
 }
