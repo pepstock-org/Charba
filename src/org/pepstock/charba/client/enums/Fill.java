@@ -37,6 +37,10 @@ public enum Fill implements IsFill
 	 */
 	ORIGIN("origin", FillingMode.PREDEFINED),
 	/**
+	 * Fill the area from stacked value below.
+	 */
+	STACK("stack", FillingMode.PREDEFINED),
+	/**
 	 * Does not fill any area
 	 */
 	FALSE("false", FillingMode.PREDEFINED);
