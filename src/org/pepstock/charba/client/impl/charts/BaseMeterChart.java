@@ -135,8 +135,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			dataset.getAnimation().setMode(disabledActiveMode);
 			// disables animation mode resize
 			dataset.getAnimation().setMode(disabledResizeMode);
-			// disables the animation callback at dataset level
-			dataset.setAnimation(null);
 		}
 	}
 }
