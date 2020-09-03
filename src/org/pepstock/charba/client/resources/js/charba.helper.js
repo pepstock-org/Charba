@@ -132,7 +132,7 @@
 	 @param instance plugin java script instance
     */
     CharbaJsPluginHelper.register = function(instance) {
-    	Chart.registry.addPlugins([instance]);
+    	Chart.register(instance);
     }
     /*
      Unregisters an existing plugin.
