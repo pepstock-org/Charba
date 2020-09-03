@@ -52,10 +52,10 @@
     this.options = Object.assign({
       position: 'default',
       precision: 0,
-      fontSize: chartOptions.defaultFontSize,
-      fontColor: chartOptions.defaultFontColor,
-      fontStyle: chartOptions.defaultFontStyle,
-      fontFamily: chartOptions.defaultFontFamily,
+      fontSize: chartOptions.font.size,
+      fontColor: chartOptions.font.color,
+      fontStyle: chartOptions.font.style,
+      fontFamily: chartOptions.font.family,
       shadowOffsetX: 3,
       shadowOffsetY: 3,
       shadowColor: 'rgba(0,0,0,0.3)',
@@ -185,7 +185,7 @@
   Label.prototype.shouldRenderToElement = function (meta, element) {
     return !meta.hidden && !element.hidden && (
       this.options.showZero ||
-      this.chart.config.type === 'polarArea' ? element._view.outerRadius !== 0 : element._view.circumference !== 0
+      this.chart.config.type === 'polarArea' ? element.outerRadius !== 0 : element.circumference !== 0
     );
   };
 
@@ -198,7 +198,7 @@
         percentage: this.getPercentage(dataset, element, index),
         dataset: dataset,
         index: index,
-        datasetIndex: element._datasetIndex,
+        datasetIndex: this.chart.data.datasets.indexOf(dataset),
 		chart: this.chart
       });
     } else {
@@ -236,7 +236,7 @@
         backgroundColor: dataset.backgroundColor[index],
         dataset: dataset,
         index: index,
-        datasetIndex: element._datasetIndex,
+        datasetIndex: this.chart.data.datasets.indexOf(dataset),
 		chart: this.chart
       });
     } else if (typeof fontColor !== 'string') {
@@ -267,7 +267,7 @@
       }
       percentage = dataset.data[index] / this.barTotal[index] * 100;
     } else {
-      percentage = element._view.circumference / this.chart.config.options.circumference * 100;
+      percentage = element.circumference / this.chart.config.options.circumference * 100;
     }
     percentage = parseFloat(percentage.toFixed(this.options.precision));
     if (!this.options.showActualPercentages) {
@@ -298,21 +298,20 @@
   Label.prototype.getBaseRenderInfo = function (element, label) {
     if (this.options.position === 'outside' || this.options.position === 'border') {
       var renderInfo, rangeFromCentre,
-        view = element._view,
-        centreAngle = view.startAngle + (view.endAngle - view.startAngle) / 2,
-        innerRadius = view.outerRadius / 2;
+        centreAngle = element.startAngle + (element.endAngle - element.startAngle) / 2,
+        innerRadius = element.outerRadius / 2;
       if (this.options.position === 'border') {
-        rangeFromCentre = (view.outerRadius - innerRadius) / 2 + innerRadius;
+        rangeFromCentre = (element.outerRadius - innerRadius) / 2 + innerRadius;
       } else if (this.options.position === 'outside') {
-        rangeFromCentre = (view.outerRadius - innerRadius) + innerRadius + this.options.textMargin;
+        rangeFromCentre = (element.outerRadius - innerRadius) + innerRadius + this.options.textMargin;
       }
       renderInfo = {
-        x: view.x + (Math.cos(centreAngle) * rangeFromCentre),
-        y: view.y + (Math.sin(centreAngle) * rangeFromCentre)
+        x: element.x + (Math.cos(centreAngle) * rangeFromCentre),
+        y: element.y + (Math.sin(centreAngle) * rangeFromCentre)
       };
       if (this.options.position === 'outside') {
         var offset = this.options.textMargin + this.measureLabel(label).width / 2;
-        renderInfo.x += renderInfo.x < view.x ? -offset : offset;
+        renderInfo.x += renderInfo.x < element.x ? -offset : offset;
       }
       return renderInfo;
     } else {
@@ -321,15 +320,15 @@
   };
 
   Label.prototype.getArcRenderInfo = function (element, label) {
-    var radius, view = element._view;
+    var radius = element.radius;
     if (this.options.position === 'outside') {
-      radius = view.outerRadius + this.options.fontSize + this.options.textMargin;
+      radius = element.outerRadius + this.options.fontSize + this.options.textMargin;
     } else if (this.options.position === 'border') {
-      radius = (view.outerRadius / 2 + view.outerRadius) / 2;
+      radius = (element.outerRadius / 2 + element.outerRadius) / 2;
     } else {
-      radius = (view.innerRadius + view.outerRadius) / 2;
+      radius = (element.innerRadius + element.outerRadius) / 2;
     }
-    var startAngle = view.startAngle, endAngle = view.endAngle;
+    var startAngle = element.startAngle, endAngle = element.endAngle;
     var totalAngle = endAngle - startAngle;
     startAngle += Math.PI / 2;
     endAngle += Math.PI / 2;
@@ -340,7 +339,7 @@
       startAngle: startAngle,
       endAngle: endAngle,
       totalAngle: totalAngle,
-      view: view
+      view: element
     }
   };
 
@@ -434,12 +433,13 @@
     return image;
   };
 
-  Chart.plugins.register({
+  const plugin = {
     id: 'labels',
-    beforeDatasetsUpdate: function (chart, optionParams) {
+    beforeDatasetsUpdate: function (chart) {
       if (!SUPPORTED_TYPES[chart.config.type]) {
         return;
       }
+	  const optionParams = chart.options.plugins.labels;
       var options = optionParams;
       if (!Array.isArray(optionParams)) {
         options = [optionParams];
@@ -491,5 +491,7 @@
         label.render();
       });
     }
-  });
+  };
+
+  Chart.register(plugin);
 })();
