@@ -97,7 +97,7 @@ Chart.prototype.hide = function(datasetIndex) {};
 Chart.prototype.show = function(datasetIndex) {};
 /**
  * @param {Object} event
- * @return {Object}
+ * @return {Array}
  */
 Chart.prototype.getDatasetAtEvent = function(event) {};
 /**
