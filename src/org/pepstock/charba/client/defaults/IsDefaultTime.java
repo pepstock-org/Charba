@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -25,11 +26,11 @@ import org.pepstock.charba.client.enums.TimeUnit;
 public interface IsDefaultTime {
 
 	/**
-	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * Returns the ISO day of the week with 0 being Sunday and 6 being Saturday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @return ISO day of the week with 0 being Sunday and 6 being Saturday
 	 */
-	boolean isIsoWeekday();
+	IsoWeekDay getIsoWeekday();
 
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
@@ -39,9 +40,9 @@ public interface IsDefaultTime {
 	TimeUnit getRound();
 
 	/**
-	 * The moment js format string to use for the tooltip.
+	 * The date format string to use for the tooltip.
 	 * 
-	 * @return The moment js format string to use for the tooltip.
+	 * @return date format string to use for the tooltip.
 	 */
 	String getTooltipFormat();
 

@@ -20,6 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -335,15 +336,14 @@ public final class DateAdapter {
 	 * Returns the start by weekday for the given timestamp.
 	 * 
 	 * @param time the input timestamp
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
+	 * @param weekday the ISO day of the week (only needed if parameter "unit" is isoWeek).
 	 * @return the start by weekday for the given date
 	 */
-	// FIXME isoWeek https://github.com/chartjs/chartjs-adapter-luxon/issues/22
-	public Date startOf(long time, int weekday) {
+	public Date startOf(long time, IsoWeekDay weekday) {
 		// checks if arguments are consistent
-		if (time >= 0 && weekday >= 0 && weekday <= 7) {
+		if (time >= 0 && weekday != null) {
 			// invoke the date adapter to get the date start of by time unit
-			double value = nativeAdapter.startOf(time, ISO_WEEK_UNIT, weekday);
+			double value = nativeAdapter.startOf(time, ISO_WEEK_UNIT, weekday.value());
 			// creates and returns new date
 			return new Date((long) value);
 		}
@@ -356,10 +356,10 @@ public final class DateAdapter {
 	 * Returns the start by weekday for the given date.
 	 * 
 	 * @param time the input date
-	 * @param weekday the ISO day of the week with 1 being Monday and 7 being Sunday (only needed if parameter "unit" is isoWeek).
+	 * @param weekday the ISO day of the week (only needed if parameter "unit" is isoWeek).
 	 * @return the start by weekday for the given date
 	 */
-	public Date startOf(Date time, int weekday) {
+	public Date startOf(Date time, IsoWeekDay weekday) {
 		// checks if argument is consistent
 		if (time != null) {
 			// invoke the date adapter to get the date start of by time unit

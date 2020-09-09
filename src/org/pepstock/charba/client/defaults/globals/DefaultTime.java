@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -24,8 +25,6 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  */
 public class DefaultTime implements IsDefaultTime {
-
-	private static final boolean DEFAULT_ISO_WEEKDAY = true;
 
 	private static final double DEFAULT_STEP_SIZE = 1D;
 
@@ -39,11 +38,11 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#isIsoWeekday()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getIsoWeekday()
 	 */
 	@Override
-	public boolean isIsoWeekday() {
-		return DEFAULT_ISO_WEEKDAY;
+	public IsoWeekDay getIsoWeekday() {
+		return IsoWeekDay.SUNDAY;
 	}
 
 	/*

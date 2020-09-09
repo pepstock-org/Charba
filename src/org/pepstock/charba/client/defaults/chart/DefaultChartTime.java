@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.options.Time;
 
@@ -40,11 +41,11 @@ public final class DefaultChartTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#isIsoWeekday()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getIsoWeekday()
 	 */
 	@Override
-	public boolean isIsoWeekday() {
-		return time.isIsoWeekday();
+	public IsoWeekDay getIsoWeekday() {
+		return time.getIsoWeekday();
 	}
 
 	/*

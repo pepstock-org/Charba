@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -93,24 +94,34 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * Sets the ISO day of the week.
 	 * 
-	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @param isoWeekday ISO day of the week
 	 */
-	public void setIsoWeekday(boolean isoWeekday) {
-		setValue(Property.ISO_WEEKDAY, isoWeekday);
+	public void setIsoWeekday(IsoWeekDay isoWeekday) {
+		// checks if argument consistent
+		if (isoWeekday != null) {
+			setValue(Property.ISO_WEEKDAY, isoWeekday.value());
+		} else {
+			// if here argument not consistent
+			// then removes the key
+			removeIfExists(Property.ISO_WEEKDAY);
+		}
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * Returns the ISO day of the week with 0 being Sunday and 6 being Saturday.
 	 * 
-	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @return ISO day of the week with 0 being Sunday and 6 being Saturday
 	 */
 	@Override
-	public boolean isIsoWeekday() {
-		return getValue(Property.ISO_WEEKDAY, getDefaultValues().isIsoWeekday());
+	public IsoWeekDay getIsoWeekday() {
+		// gets week day as number
+		int isoWeekday = getValue(Property.ISO_WEEKDAY, IsoWeekDay.SUNDAY.value());
+		// searches the value into the enumeration
+		return IsoWeekDay.getIsoWeekDayByValue(isoWeekday);
 	}
 
 	/**

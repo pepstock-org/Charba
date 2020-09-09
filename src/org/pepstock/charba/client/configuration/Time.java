@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -48,21 +49,21 @@ public class Time extends AxisContainer {
 	}
 
 	/**
-	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * Sets the ISO day of the week.
 	 * 
-	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @param isoWeekday ISO day of the week
 	 */
-	public void setIsoWeekday(boolean isoWeekday) {
+	public void setIsoWeekday(IsoWeekDay isoWeekday) {
 		getAxis().getScale().getTime().setIsoWeekday(isoWeekday);
 	}
 
 	/**
-	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * Returns the ISO day of the week with 0 being Sunday and 6 being Saturday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @return ISO day of the week with 0 being Sunday and 6 being Saturday
 	 */
-	public boolean isIsoWeekday() {
-		return getAxis().getScale().getTime().isIsoWeekday();
+	public IsoWeekDay getIsoWeekday() {
+		return getAxis().getScale().getTime().getIsoWeekday();
 	}
 
 	/**
