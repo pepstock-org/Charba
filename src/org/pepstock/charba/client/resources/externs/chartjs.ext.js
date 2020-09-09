@@ -172,25 +172,6 @@ CharbaChartHelpers.prototype.mergeIf = function(target, source){};
  * @return {Object}
  */
 CharbaChartHelpers.prototype.clone = function(source){};
-/** FIXME
- * @constructor
- * @return {CharbaChartRegistry}
- */
-function CharbaChartRegistry() {}
-/**
- * @param {Array} plugins
- * @return {undefined}
- */
-CharbaChartRegistry.prototype.addPlugins = function(plugins){};
-/**
- * @param {Array} plugins
- * @return {undefined}
- */
-CharbaChartRegistry.prototype.remove = function(plugins){};
-/**
- * @type {Object}
- */
-CharbaChartRegistry.prototype.plugins;
 /**
  * @constructor
  * @return {CharbaChartAdaptersDate}
