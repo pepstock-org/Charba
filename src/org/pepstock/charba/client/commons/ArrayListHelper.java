@@ -272,7 +272,7 @@ public final class ArrayListHelper {
 	 * @param <E> type of native double array container
 	 * @return the instance of native double array containers list
 	 */
-	public static <E extends NativeArrayContainer<ArrayDouble>> List<E> unmodifiableListt(ArrayDoubleArray array, NativeArrayContainerFactory<ArrayDouble, E> factory) {
+	public static <E extends NativeArrayContainer<ArrayDouble>> List<E> unmodifiableList(ArrayDoubleArray array, NativeArrayContainerFactory<ArrayDouble, E> factory) {
 		return Collections.unmodifiableList(list(array, factory));
 	}
 
