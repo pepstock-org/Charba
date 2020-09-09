@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
 import org.pepstock.charba.client.enums.BorderAlign;
@@ -38,8 +41,19 @@ interface HasBorderAlign {
 	 * 
 	 * @param align the property to set the border alignment on chart datasets
 	 */
-	default void setBorderAlign(BorderAlign align) {
-		// FIXME must be indexable
+	default void setBorderAlign(BorderAlign... align) {
+		// checks if border aligner is consistent
+		if (getBorderAligner() != null) {
+			getBorderAligner().setBorderAlign(align);
+		}
+	}
+	
+	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	default void setBorderAlign(List<BorderAlign> align) {
 		// checks if border aligner is consistent
 		if (getBorderAligner() != null) {
 			getBorderAligner().setBorderAlign(align);
@@ -51,14 +65,14 @@ interface HasBorderAlign {
 	 * 
 	 * @return the property to set the border alignment on chart datasets.
 	 */
-	default BorderAlign getBorderAlign() {
+	default List<BorderAlign> getBorderAlign() {
 		// checks if border aligner is consistent
 		if (getBorderAligner() != null) {
 			return getBorderAligner().getBorderAlign();
 		}
 		// if here, border aligner is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getElements().getArc().getBorderAlign();
+		return Arrays.asList(Defaults.get().getGlobal().getElements().getArc().getBorderAlign());
 	}
 
 	/**

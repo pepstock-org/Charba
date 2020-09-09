@@ -15,10 +15,15 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -99,8 +104,29 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @param align the property to set the border alignment on chart datasets
 	 */
-	void setBorderAlign(BorderAlign align) {
-		setValue(Property.BORDER_ALIGN, align);
+	void setBorderAlign(BorderAlign... align) {
+		// resets callbacks
+		setBorderAlign((BorderAlignCallback)null);
+		// stores data
+		setValueOrArray(Property.BORDER_ALIGN, align);
+	}
+	
+	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	void setBorderAlign(List<BorderAlign> align) {
+		// checks if list is consistent
+		if (align != null && !align.isEmpty()) {
+			// invokes the other methods with the array
+			setBorderAlign(align.toArray(new BorderAlign[0]));
+		} else {
+			// resets callbacks
+			setBorderAlign((BorderAlignCallback)null);
+			// removes key
+			removeIfExists(Property.BORDER_ALIGN);
+		}
 	}
 
 	/**
@@ -108,14 +134,24 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * 
 	 * @return the property to set the border alignment on chart datasets.
 	 */
-	BorderAlign getBorderAlign() {
-		if (ObjectType.FUNCTION.equals(type(Property.BORDER_ALIGN))) {
-			// checks if a callback has been set
-			// returns defaults
-			return defaultValues.getElements().getArc().getBorderAlign();
+	List<BorderAlign> getBorderAlign() {
+		// gets defaults
+		BorderAlign defaultAlign = defaultValues.getElements().getArc().getBorderAlign();
+		// gets object type
+		ObjectType type = type(Property.BORDER_ALIGN);
+		// checks if 'false' has been set
+		if (ObjectType.STRING.equals(type)) {
+			// returns is false
+			return Arrays.asList(Key.getKeyByValue(BorderAlign.values(), getValue(Property.BORDER_ALIGN, defaultAlign.value())));
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// gets the array
+			ArrayString array = getArrayValue(Property.BORDER_ALIGN);
+			// returns the array as list of items
+			return ArrayListHelper.list(BorderAlign.values(), array);
 		}
-		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_ALIGN, BorderAlign.values(), defaultValues.getElements().getArc().getBorderAlign());
+		// checks if a callback has been set
+		// returns defaults
+		return Arrays.asList(defaultAlign);
 	}
 
 	/**

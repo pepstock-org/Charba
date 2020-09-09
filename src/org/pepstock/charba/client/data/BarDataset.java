@@ -342,7 +342,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param borderskips array of the edges to skip drawing the border for.
 	 */
-	// FIXME must be indexable
 	public void setBorderSkipped(BorderSkipped... borderskips) {
 		// resets callbacks
 		setBorderSkipped((BorderSkippedCallback) null);

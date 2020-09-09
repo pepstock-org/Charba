@@ -293,6 +293,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.
    * add `labels` property to `CartesianCategoryAxis` class.
    * add `stack` item to `Fill` enumeration.
+   * change `borderAlign` property for `PieDataset`, `PolarAreaDataset` and `DoughnutDataset` in order to be set as indexable.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
