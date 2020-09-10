@@ -620,6 +620,30 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineObjectProperty(key.value(), value.getNativeObject());
 		}
 	}
+	
+	/**
+	 * Sets a value (array or native object container) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a native object container.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values native object containers to be set
+	 */
+	protected final void setValueOrArray(Key key, NativeObjectContainer... values) {
+		// checks if values are consistent
+		if (values != null) {
+			// checks if there is only 1 element
+			if (values.length == 1) {
+				// if 1 element, sets the object
+				setValue(key, values[0]);
+			} else {
+				// if more than 1 element, sets the array
+				setArrayValue(key, ArrayObject.fromOrEmpty(values));
+			}
+		} else {
+			// if not consistent, remove the property
+			removeIfExists(key);
+		}
+	}
 
 	/**
 	 * Sets a value (Array from a container list) into embedded JavaScript object at specific property.
@@ -642,6 +666,8 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.value(), container.getArray());
 		}
 	}
+	
+	//FIXME
 
 	// ------------------------------------------
 	// --- NATIVE ARRAY CONTAINERS
@@ -760,7 +786,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or image) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (array or image) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a image.
 	 * 
 	 * @param key key of the property of JavaScript object.
