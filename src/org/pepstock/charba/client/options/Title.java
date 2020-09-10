@@ -43,7 +43,6 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 		DISPLAY("display"),
 		FONT("font"),
 		POSITION("position"),
-		// FIXME Padding by object top: x, bottom: x
 		PADDING("padding"),
 		FULL_WIDTH("fullWidth"),
 		TEXT("text");
