@@ -148,12 +148,15 @@ final class ColorSchemesUtil {
 			// but BAR dataset can have BarBorderWidth object to set the border width
 			BarDataset barDataset = (BarDataset) hovingDataset;
 			// gets border width object
-			BarBorderWidth borderWidth = barDataset.getBorderWidthAsItem();
-			// calculates the max comparing all dimensions
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getTop());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getBottom());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getLeft());
-			maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getRight());
+			List<BarBorderWidth> borderWidthObjects = barDataset.getBorderWidthAsObjects();
+			// scans all border widths
+			for (BarBorderWidth borderWidth : borderWidthObjects) {
+				// calculates the max comparing all dimensions
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getTop());
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getBottom());
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getLeft());
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getRight());
+			}
 		}
 		return maxBorderWidth;
 	}
