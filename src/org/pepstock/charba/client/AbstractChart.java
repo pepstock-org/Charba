@@ -586,8 +586,6 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void resize() {
-		// FIXME resize(silent: boolean, width: number, height: number): void;
-		// https://github.com/sgratzl/Chart.js/blob/16792647bc2d3c7a25c242df4dbfd269c0545e61/types/core/index.d.ts#L260
 		// checks if chart is created
 		if (chart != null) {
 			// resize!
