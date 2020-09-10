@@ -19,7 +19,6 @@ import org.pepstock.charba.client.enums.DefaultDateAdapter;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
- * FIXME https://github.com/stockiNail/chartjs-adapter-date-fns#locale-support-via-scale-options
  * Date adapter module for DATE-FNS.<br>
  * <b><a href="https://date-fns.org/">date-fns</a></b> provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates.
  * 

@@ -620,7 +620,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineObjectProperty(key.value(), value.getNativeObject());
 		}
 	}
-	
+
 	/**
 	 * Sets a value (array or native object container) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a native object container.
@@ -666,8 +666,6 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.value(), container.getArray());
 		}
 	}
-	
-	//FIXME
 
 	// ------------------------------------------
 	// --- NATIVE ARRAY CONTAINERS

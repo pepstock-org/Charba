@@ -21,10 +21,7 @@ import org.pepstock.charba.client.Defaults;
  * Common methods for linear scale tick is use to chart numerical data.<br>
  * Can be used for linear cartesian and radial ticks.
  * 
- * FIXME format property is missing : https://www.chartjs.org/docs/master/axes/cartesian/linear#tick-configuration-options
- * 
  * @author Andrea "Stock" Stocchero
- *
  */
 public interface IsLinearTick {
 

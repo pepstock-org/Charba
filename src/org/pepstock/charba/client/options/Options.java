@@ -35,8 +35,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
 /**
  * Base object which maps chart options.
  * 
- * FIXME https://www.chartjs.org/docs/master/general/data-structures#object
- * 
  * @author Andrea "Stock" Stocchero
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimation {

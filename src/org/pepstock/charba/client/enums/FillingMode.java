@@ -29,7 +29,6 @@ import org.pepstock.charba.client.commons.Key;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
- * FIXME https://www.chartjs.org/docs/master/charts/area#filling-modes
  */
 public enum FillingMode implements Key
 {
