@@ -488,7 +488,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public final BackgroundColorCallback getBackgroundColorCallback() {
+	public BackgroundColorCallback getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -497,7 +497,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public final void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
+	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -517,7 +517,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public final BorderColorCallback getBorderColorCallback() {
+	public BorderColorCallback getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -526,7 +526,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public final void setBorderColor(BorderColorCallback borderColorCallback) {
+	public void setBorderColor(BorderColorCallback borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -546,7 +546,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
-	public final BorderWidthCallback getBorderWidthCallback() {
+	public BorderWidthCallback getBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
@@ -555,7 +555,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public final void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if callback is consistent
@@ -573,7 +573,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public final BackgroundColorCallback getHoverBackgroundColorCallback() {
+	public BackgroundColorCallback getHoverBackgroundColorCallback() {
 		return hoverBackgroundColorCallback;
 	}
 
@@ -582,7 +582,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBackgroundColorCallback the hover background color callback.
 	 */
-	public final void setHoverBackgroundColor(BackgroundColorCallback hoverBackgroundColorCallback) {
+	public void setHoverBackgroundColor(BackgroundColorCallback hoverBackgroundColorCallback) {
 		// sets the callback
 		this.hoverBackgroundColorCallback = hoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -602,7 +602,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public final BorderColorCallback getHoverBorderColorCallback() {
+	public BorderColorCallback getHoverBorderColorCallback() {
 		return hoverBorderColorCallback;
 	}
 
@@ -611,7 +611,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderColorCallback the hover border color callback.
 	 */
-	public final void setHoverBorderColor(BorderColorCallback hoverBorderColorCallback) {
+	public void setHoverBorderColor(BorderColorCallback hoverBorderColorCallback) {
 		// sets the callback
 		this.hoverBorderColorCallback = hoverBorderColorCallback;
 		// checks if callback is consistent
@@ -631,7 +631,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public final BorderWidthCallback getHoverBorderWidthCallback() {
+	public BorderWidthCallback getHoverBorderWidthCallback() {
 		return hoverBorderWidthCallback;
 	}
 
@@ -640,7 +640,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	public final void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
 		// sets the callback
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if callback is consistent
