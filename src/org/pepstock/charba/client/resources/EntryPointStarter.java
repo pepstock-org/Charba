@@ -28,16 +28,14 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * <pre>
  * GWT.runAsync(new RunAsyncCallback() {
- * 
  * 	&#64;Override
  * 	public void onFailure(Throwable throwable) {
- * 		Window.alert("Code download failed");
+ * 		Window.alert("Code injection failed");
  * 	}
  * 
  * 	&#64;Override
  * 	public void onSuccess() {
  * 		EntryPointStarter.run(DeferredResources.INSTANCE, new Runnable() {
- * 
  * 			&#64;Override
  * 			public void run() {
  * 				// CHARBA charts and api...
