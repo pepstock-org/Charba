@@ -20,7 +20,7 @@ import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin LABEL of LINE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -85,14 +85,14 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	private DefaultsOptions defaultsOptions;
 
 	/**
-	 * Creates new {@link AnnotationPlugin#ID} plugin options.
+	 * Creates new {@link Annotation#ID} plugin options.
 	 */
 	public AnnotationOptions() {
 		this((DefaultsOptions) null);
 	}
 
 	/**
-	 * Creates new {@link AnnotationPlugin#ID} plugin options, relating to chart instance for default.
+	 * Creates new {@link Annotation#ID} plugin options, relating to chart instance for default.
 	 * 
 	 * @param chart chart instance related to the plugin options
 	 */
@@ -101,7 +101,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Creates new {@link AnnotationPlugin#ID} plugin options.
+	 * Creates new {@link Annotation#ID} plugin options.
 	 * 
 	 * @param defaultsOptions default options stored into defaults global
 	 */

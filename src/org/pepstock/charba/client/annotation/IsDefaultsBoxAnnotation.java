@@ -22,7 +22,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin BOX annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *

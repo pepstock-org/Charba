@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
+import org.pepstock.charba.client.annotation.Annotation;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
