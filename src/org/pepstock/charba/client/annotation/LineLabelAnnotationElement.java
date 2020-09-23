@@ -199,7 +199,7 @@ final class LineLabelAnnotationElement {
 			String ctxFont = Utilities.toCSSFontProperty(label.getFontStyle(), Weight.NORMAL, label.getFontSize(), label.getFontFamily());
 			ctx.setFont(ctxFont);
 
-			double textWidth = Double.NaN;
+			final double textWidth;
 			final double textHeight = label.getFontSize();
 			// checks if there is only 1 element
 			if (content.size() == 1) {
