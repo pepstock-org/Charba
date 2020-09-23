@@ -615,9 +615,9 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	 * @param isAdding if <code>true</code>, the handlers are added.
 	 */
 	private void checkAndManageCanvasListeners(boolean isAdding) {
-		// gets teh amount of handlers already added
+		// gets the amount of handlers already added
 		int amountOfHandlers = onAxisClickHandlers + onTitleClickHandlers;
-		// checks if totamount is 0 in order to apply teh action on canvas
+		// checks if total amount is 0 in order to apply the action on canvas
 		if (amountOfHandlers == 0) {
 			// checks if must be add
 			if (isAdding) {

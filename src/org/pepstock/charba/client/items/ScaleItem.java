@@ -519,6 +519,58 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @param value value of the data
 	 * @return the location of the given data point
 	 */
+	public final double getPixelForStringValue(String value) {
+		return getPixelForStringValue(value, Double.NaN);
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data as string
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	public final double getPixelForStringValue(String value, double index) {
+		return JsItemsHelper.get().getPixelForStringValue(this, value, index);
+	}
+	
+	/**
+	 * Returns the location of the given data point.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data
+	 * @return the location of the given data point
+	 */
+	public final double getPixelForDateValue(Date value) {
+		return getPixelForDateValue(value, Double.NaN);
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * Value can either be an index or a numerical value.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data as date
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	public final double getPixelForDateValue(Date value, double index) {
+		// checks if date argument is consistent
+		if (value != null) {
+				return JsItemsHelper.get().getPixelForValue(this, value.getTime(), index);
+		}
+		// if here the argument is not consistent
+		return UndefinedValues.DOUBLE; 
+	}
+
+	/**
+	 * Returns the location of the given data point.<br>
+	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
+	 * 
+	 * @param value value of the data
+	 * @return the location of the given data point
+	 */
 	public final double getPixelForValue(double value) {
 		return getPixelForValue(value, Double.NaN);
 	}

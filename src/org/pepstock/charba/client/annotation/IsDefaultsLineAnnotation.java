@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.annotation.enums.LineMode;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -51,15 +50,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	@Override
 	default int getBorderWidth() {
 		return LineAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
-	/**
-	 * Returns the orientation (horizontal or vertical) of the line.
-	 * 
-	 * @return the orientation (horizontal or vertical) of the line
-	 */
-	default LineMode getMode() {
-		return LineAnnotation.DEFAULT_MODE;
 	}
 
 	/**

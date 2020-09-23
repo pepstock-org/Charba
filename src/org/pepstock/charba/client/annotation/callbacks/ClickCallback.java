@@ -17,11 +17,11 @@ package org.pepstock.charba.client.annotation.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
-import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.annotation.Annotation;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once click is fired.
+ * Callback interface of {@link Annotation#ID} plugin that is called once mouse click is performed on annotation element.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 public interface ClickCallback {
 
 	/**
-	 * Method called once click is fired.
+	 * Method called once mouse click is performed on annotation element.
 	 * 
 	 * @param chart chart instance
 	 * @param event native event generated on annotation

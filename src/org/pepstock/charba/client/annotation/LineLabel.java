@@ -447,7 +447,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param content the text to display in label as multi-line values
 	 */
 	public void setContent(List<String> content) {
-		setContent(content.toArray(new String[0]));
+		// checks if argument is consistent
+		if (content != null) {
+			setContent(content.toArray(new String[0]));
+		} else {
+			// if here the argument is not consistent
+			// then removes key
+			removeIfExists(Property.CONTENT);
+		}
 	}
 
 	/**

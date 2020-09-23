@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.AnnotationType;
-import org.pepstock.charba.client.annotation.enums.LineMode;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -58,16 +57,10 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	public static final int DEFAULT_BORDER_WIDTH = 2;
 
 	/**
-	 * Default line annotation mode, <b>{@link LineMode#VERTICAL}</b>.
-	 */
-	public static final LineMode DEFAULT_MODE = LineMode.VERTICAL;
-
-	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		MODE("mode"),
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
@@ -115,7 +108,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LineAnnotation(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
@@ -205,25 +198,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	@Override
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, IsDefaultsLineAnnotation.super.getBorderDashOffset());
-	}
-
-	/**
-	 * Sets the orientation (horizontal or vertical) of the line.
-	 * 
-	 * @param mode the orientation (horizontal or vertical) of the line
-	 */
-	public void setMode(LineMode mode) {
-		setValue(Property.MODE, mode);
-	}
-
-	/**
-	 * Returns the orientation (horizontal or vertical) of the line.
-	 * 
-	 * @return the orientation (horizontal or vertical) of the line
-	 */
-	@Override
-	public LineMode getMode() {
-		return getValue(Property.MODE, LineMode.values(), IsDefaultsLineAnnotation.super.getMode());
 	}
 
 	/**

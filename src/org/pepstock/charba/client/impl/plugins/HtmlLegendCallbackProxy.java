@@ -31,7 +31,6 @@ import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.TableCell;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
@@ -74,7 +73,7 @@ final class HtmlLegendCallbackProxy {
 	}
 
 	/**
-	 * Adds {@link Event#CLICK}, {@link Event#MOUSEMOVE} and {@link Event#MOUSEOUT} events to HTML legend element.
+	 * Adds {@link BaseEventTypes#CLICK}, {@link BaseEventTypes#MOUSE_MOVE} and {@link BaseEventTypes#MOUSE_LEAVE} events to HTML legend element.
 	 * 
 	 * @param element HTML legend element on which to add events listeners
 	 */
@@ -86,7 +85,7 @@ final class HtmlLegendCallbackProxy {
 	}
 
 	/**
-	 * Removes {@link Event#CLICK}, {@link Event#MOUSEMOVE} and {@link Event#MOUSEOUT} events from HTML legend element.
+	 * Removes {@link BaseEventTypes#CLICK}, {@link BaseEventTypes#MOUSE_MOVE} and {@link BaseEventTypes#MOUSE_LEAVE} events from HTML legend element.
 	 * 
 	 * @param element HTML legend element on which to remove events listeners
 	 */

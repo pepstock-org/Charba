@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -49,7 +49,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @param nativeObject native object which maps global options.
 	 */
 	DefaultsOptions(NativeObject nativeObject) {
-		super(AnnotationPlugin.ID, nativeObject);
+		super(Annotation.ID, nativeObject);
 	}
 
 	/**

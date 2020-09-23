@@ -889,7 +889,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	}
 
 	/**
-	 * Internal class to map the custom callback function argument, which is an object with the chart instance and teh tooltip model.
+	 * Internal class to map the custom callback function argument, which is an object with the chart instance and the tooltip model.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *

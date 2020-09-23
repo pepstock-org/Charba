@@ -528,7 +528,7 @@ public final class Defaults {
 
 	/**
 	 * Internal typed scale which is used to read the default scale by type.<br>
-	 * It has been implemented in order to store teh axis type, mandatory for whatever operation with a scale.
+	 * It has been implemented in order to store the axis type, mandatory for whatever operation with a scale.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -582,7 +582,7 @@ public final class Defaults {
 
 	/**
 	 * Configures the default title which defines text to draw at the top of the chart.<br>
-	 * It extends teh chart options for title because the global options for TITLE plugin are <code>defaults.plugin.title</code>.
+	 * It extends the chart options for title because the global options for TITLE plugin are <code>defaults.plugin.title</code>.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -601,7 +601,7 @@ public final class Defaults {
 		/**
 		 * Returns the options of plugin.
 		 * 
-		 * @param plugin plugin id to use to get hte options.
+		 * @param plugin plugin id to use to get the options.
 		 * @return the options of plugin or <code>null</code> if does not exist
 		 */
 		NativeObject getOptions(DefaultPluginId plugin) {

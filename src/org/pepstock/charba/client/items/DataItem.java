@@ -54,7 +54,7 @@ public final class DataItem {
 			this.valueAsString = String.valueOf(value);
 			this.dataType = DataType.NUMBERS;
 		} else if (object instanceof ArrayDouble) {
-			// sets floating data, getting hte array double and set nan to value
+			// sets floating data, getting the array double and set nan to value
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = BarDataset.FLOATING_BAR_DATA_FACTORY.create((ArrayDouble) object);
 			this.valueAsString = valueAsFloatingData.toString();

@@ -367,6 +367,7 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
+	 * Internal class to wrap an animation callback in order to override {@link DefaultAnimationModeKey#ACTIVE} and {@link DefaultAnimationModeKey#RESIZE} configuration.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -376,14 +377,18 @@ public class MeterOptions extends AbstractPieOptions {
 		private ConfigurationAnimationCallback delegated = null;
 
 		/**
-		 * @return the delegated
+		 * Returns the delegated callback instance to wrap, if exists.
+		 * 
+		 * @return the delegated callback instance to wrap, if exists
 		 */
 		private ConfigurationAnimationCallback getDelegated() {
 			return delegated;
 		}
 
 		/**
-		 * @param delegated the delegated to set
+		 * Sets the delegated callback instance to wrap.
+		 * 
+		 * @param delegated the delegated callback instance to wrap
 		 */
 		private void setDelegated(ConfigurationAnimationCallback delegated) {
 			this.delegated = delegated;
@@ -399,7 +404,7 @@ public class MeterOptions extends AbstractPieOptions {
 		public ConfigurationAnimationOptions invoke(IsChart chart, ScriptableContext context, ConfigurationAnimationOptions animationOptions) {
 			// checks if delegated is consistent
 			if (delegated != null) {
-				// invokes delegated callback 
+				// invokes delegated callback
 				ConfigurationAnimationOptions options = delegated.invoke(chart, context, animationOptions);
 				// checks if options are consistent
 				if (options != null) {

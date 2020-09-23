@@ -17,24 +17,24 @@ package org.pepstock.charba.client.annotation.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
-import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.annotation.Annotation;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once mouseenter is fired.
+ * Callback interface of {@link Annotation#ID} plugin that is called once mouse is leaving the annotation element.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface MouseEnterCallback {
+public interface LeaveCallback {
 
 	/**
-	 * Method called once mouseenter is fired.
+	 * Method called once mouse is leaving the annotation element.
 	 * 
 	 * @param chart chart instance
 	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
-	void onMouseEnter(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
+	void onLeave(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
 
 }

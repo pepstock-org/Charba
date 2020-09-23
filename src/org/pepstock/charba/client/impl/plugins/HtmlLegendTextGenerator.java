@@ -26,7 +26,7 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.items.HasLegendText;
 
 /**
- * Builds the DIV html element which contains a text. It's used to show teh title and all single legend items.
+ * Builds the DIV html element which contains a text. It's used to show the title and all single legend items.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of legend element which contains the text

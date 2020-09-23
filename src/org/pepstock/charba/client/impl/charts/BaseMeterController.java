@@ -160,10 +160,10 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Returns <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of teh animation options.
+	 * Returns <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of the animation options.
 	 * 
 	 * @param chart chart instance to check
-	 * @return <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of teh animation options
+	 * @return <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of the animation options
 	 */
 	boolean isAnimationConsistetForDrawingByEasing(IsChart chart) {
 		// checks if naimation and its duration at configuration level are enabled.

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (from chart) related to {@link AnnotationPlugin#ID} plugin.
+ * Factory to get the options (from chart) related to {@link Annotation#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -34,7 +34,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances when the charts will be destroy.
 	 */
 	AnnotationOptionsFactory() {
-		super(AnnotationPlugin.ID);
+		super(Annotation.ID);
 	}
 
 	/*
@@ -57,7 +57,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, AnnotationPlugin.DEFAULTS_FACTORY);
+			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, Annotation.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new AnnotationOptions(defaultsOptions);
 		}
@@ -95,7 +95,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		 * To avoid any instantiation.
 		 */
 		AnnotationDefaultsOptionsFactory() {
-			super(AnnotationPlugin.ID);
+			super(Annotation.ID);
 		}
 
 		/*

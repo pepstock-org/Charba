@@ -43,10 +43,6 @@ public enum ResourceName implements Key
 	 */
 	CHARBA_HELPER("charbaHelper", false, "org.pepstock.charba.client.commons.JsHelperResource"),
 	/**
-	 * Script element id for CHART.JS ANNOTATION plugin.
-	 */
-	ANNOTATION_PLUGIN("annotation", false, "org.pepstock.charba.client.annotation.AnnotationPluginResource"),
-	/**
 	 * Script element id for CHART.JS DATALABELS plugin.
 	 */
 	DATALABELS_PLUGIN("datalabels", false, "org.pepstock.charba.client.datalabels.DataLabelsPluginResource"),

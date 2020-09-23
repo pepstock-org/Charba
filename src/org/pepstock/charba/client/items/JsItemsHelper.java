@@ -166,6 +166,23 @@ final class JsItemsHelper {
 		// if here, scale item not consistent
 		return Constants.EMPTY_STRING;
 	}
+	
+	/**
+	 * Returns the location of the given data point as string.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value value of the data as string
+	 * @param index index of the data
+	 * @return the location of the given data point
+	 */
+	double getPixelForStringValue(ScaleItem scale, String value, double index) {
+		// checks if scale and value are consistent
+		if (scale != null && value != null) {
+			return NativeJsItemsHelper.getPixelForStringValue(scale.nativeObject(), value, index);
+		}
+		// if here, scale item not consistent
+		return UndefinedValues.DOUBLE;
+	}
 
 	/**
 	 * Returns the location of the given data point.<br>

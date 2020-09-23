@@ -260,7 +260,7 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 		/**
 		 * Creates a default animation mode wrapping the {@link DefaultAnimationModeKey#SHOW} or {@link DefaultAnimationModeKey#HIDE}.
 		 * 
-		 * @param show if <code>true</code>, initializes teh object for {@link DefaultAnimationModeKey#SHOW} mode, otherwise for {@link DefaultAnimationModeKey#HIDE}
+		 * @param show if <code>true</code>, initializes the object for {@link DefaultAnimationModeKey#SHOW} mode, otherwise for {@link DefaultAnimationModeKey#HIDE}
 		 */
 		ShowAndHideDefaultAnimationMode(boolean show) {
 			super(show ? DefaultAnimationModeKey.SHOW : DefaultAnimationModeKey.HIDE);
@@ -344,7 +344,7 @@ public final class DefaultAnimation extends DefaultAnimationMode implements IsDe
 		/**
 		 * Creates a default animation property wrapping the {@link DefaultAnimationPropertyKey#VISIBLE}.
 		 * 
-		 * @param show if <code>true</code>, initializes teh object for {@link DefaultAnimationModeKey#SHOW} mode, otherwise for {@link DefaultAnimationModeKey#HIDE}
+		 * @param show if <code>true</code>, initializes the object for {@link DefaultAnimationModeKey#SHOW} mode, otherwise for {@link DefaultAnimationModeKey#HIDE}
 		 */
 		ShowAndHideDefaultAnimationProperty(boolean show) {
 			super(DefaultAnimationPropertyKey.VISIBLE);

@@ -119,8 +119,6 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Clears the selection on the chart. With this method, it don't fire any clear event if not selected into plugin options.
 	 * 
 	 * @param chart chart instance to clear the selection
-	 * @see DatasetsItemsSelectorOptions#isFireEventOnClearSelection()
-	 * @see DatasetsItemsSelectorOptions#setFireEventOnClearSelection(boolean)
 	 */
 	public void clearSelection(IsChart chart) {
 		// flag with default to false
@@ -380,10 +378,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if all datasets of bar chart have got teh {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar.
+	 * Returns <code>true</code> if all datasets of bar chart have got the {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar.
 	 * 
 	 * @param chart chart instance
-	 * @return <code>true</code> if all datasets of bar chart have got teh {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar
+	 * @return <code>true</code> if all datasets of bar chart have got the {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar
 	 */
 	private boolean checkBarDatasets(IsChart chart) {
 		// scans all datasets to check if they are set as horizontal

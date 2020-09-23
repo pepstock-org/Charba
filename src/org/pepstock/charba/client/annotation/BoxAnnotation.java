@@ -115,7 +115,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param chart chart instance related to the plugin options
 	 */
 	public BoxAnnotation(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
 	}
 
 	/**

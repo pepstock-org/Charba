@@ -436,6 +436,18 @@
     	return obj.getLabelForValue(value);
     }
     /*
+     Returns the location of the given data point as string.
+	  
+	 @param obj scale native object instance
+	 @param value value of the data as string
+	 @param index index of the data
+	 @return the location of the given data point
+    */
+    CharbaJsItemsHelper.getPixelForStringValue = function(obj, value, index) {
+    	return obj.getPixelForValue(value, index);
+    }
+    
+    /*
      Returns the location of the given data point. Value can either be an index or a numerical value
      The coordinate (0, 0) is at the upper-left corner of the canvas
 	  

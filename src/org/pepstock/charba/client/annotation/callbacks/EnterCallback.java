@@ -17,24 +17,23 @@ package org.pepstock.charba.client.annotation.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
-import org.pepstock.charba.client.annotation.AnnotationPlugin;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once contextmenu is fired.
+ * Callback interface of {@link Annotation#ID} plugin that is called once mouse is entering on annotation element.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ContextMenuCallback {
+public interface EnterCallback {
 
 	/**
-	 * Method called once contextmenu is fired.
+	 * Method called once mouse is entering on annotation element.
 	 * 
 	 * @param chart chart instance
 	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
-	void onContextMenu(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
+	void onEnter(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
 
 }

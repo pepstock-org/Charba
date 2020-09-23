@@ -254,6 +254,13 @@ CharbaJsItemsHelper.getPixelForTick = function(object, index) {};
 CharbaJsItemsHelper.getLabelForValue = function(object, value) {};
 /**
  * @param {Object} object 
+ * @param {string} value 
+ * @param {number} index 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getPixelForStringValue = function(object, value, index) {};
+/**
+ * @param {Object} object 
  * @param {number} value 
  * @param {number} index 
  * @return {number}

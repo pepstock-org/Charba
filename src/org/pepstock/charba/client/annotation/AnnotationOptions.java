@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin options where to set all configuration items needed to the plugin.
+ * This is the {@link Annotation#ID} plugin options where to set all configuration items needed to the plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -97,7 +97,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public AnnotationOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
@@ -107,11 +107,11 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 */
 	AnnotationOptions(DefaultsOptions defaultsOptions) {
 		// creates an empty native object
-		super(AnnotationPlugin.ID, AnnotationPlugin.FACTORY, false);
+		super(Annotation.ID, Annotation.FACTORY, false);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(AnnotationPlugin.DEFAULTS_FACTORY);
+			this.defaultsOptions = loadGlobalsPluginOptions(Annotation.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
 			this.defaultsOptions = defaultsOptions;
@@ -125,6 +125,14 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 */
 	public void setDrawTime(DrawTime drawTime) {
 		setValue(Property.DRAW_TIME, drawTime);
+	}
+	
+	/**
+	 * FIXME
+	 * @return
+	 */
+	boolean hasDrawTime() {
+		return has(Property.DRAW_TIME);
 	}
 
 	/**
