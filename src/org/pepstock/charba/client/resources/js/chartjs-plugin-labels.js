@@ -320,7 +320,7 @@
   };
 
   Label.prototype.getArcRenderInfo = function (element, label) {
-    var radius = element.radius;
+    var radius;
     if (this.options.position === 'outside') {
       radius = element.outerRadius + this.options.fontSize + this.options.textMargin;
     } else if (this.options.position === 'border') {
