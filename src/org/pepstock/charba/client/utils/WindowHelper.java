@@ -78,7 +78,7 @@ final class WindowHelper {
 		// checks if already set
 		if (!enableResizeOnBeforePrint) {
 			// if not, set the resizing function
-			Window.onBeforePrint((event) -> onResize());
+			Window.onBeforePrint(event -> onResize());
 			// sets the flag
 			enableResizeOnBeforePrint = true;
 		}
