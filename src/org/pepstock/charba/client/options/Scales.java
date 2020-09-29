@@ -34,15 +34,6 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  */
 public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
 
-	// /**
-	// * Creates a scales object by defaults values. This method is creating the root element of scales.
-	// *
-	// * @param defaultValues default values of scales
-	// */
-	// public Scales(IsDefaultScales defaultValues) {
-	// this(null, null, defaultValues, null);
-	// }
-
 	/**
 	 * Creates the scales object as child of the option object.
 	 * 
@@ -54,77 +45,6 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-
-	// /**
-	// * Sets all axes of chart.
-	// *
-	// * @param scales array of axes.
-	// */
-	// public void setAxes(Scale... scales) {
-	// // clears the object from previous scales
-	// if (!empty()) {
-	// // removes all keys
-	// for (Key key : keys()) {
-	// // checks if the property is related to an object
-	// // otherwise is not a scale
-	// if (ObjectType.OBJECT.equals(type(key))) {
-	// // remove key
-	// remove(key);
-	// }
-	// }
-	// }
-	// // checks if the arguments are consistent
-	// if (scales != null && scales.length > 0) {
-	// // sets a index
-	// int index = 0;
-	// // checks if is
-	// // scans passed scales
-	// for (Scale scale : scales) {
-	// // checks if not null
-	// if (scale != null) {
-	// // get the axis type and default id
-	// AxisType type = scale.getType();
-	// // checks if type is consistent
-	// // it MUST
-	// Key.checkIfValid(type);
-	// // gets id as key
-	// IsScaleId id = checkAndGetScaleId(scale);
-	// // checks for radial
-	// // must be the first one
-	// // and must have only 1 scale being a radial
-	// if (AxisType.RADIAL_LINEAR.equals(type) && (index > 0 || scales.length != 1)) {
-	// throw new IllegalArgumentException("A radial linear scale can not be added to a scales with other scales");
-	// }
-	// // stores scale
-	// setValue(id, scale);
-	// // increments only if added
-	// index++;
-	// }
-	// }
-	// // checks if all parents are attached
-	// checkAndAddToParent();
-	// }
-	// }
-	//
-	// private IsScaleId checkAndGetScaleId(Scale scale) {
-	// // gets id as key
-	// IsScaleId id = scale.getId();
-	// // checks if scale id of scale is consistent
-	// // used for cartesian, it must not be set to unknown
-	// if (DefaultScaleId.UNKNOWN.is(id)) {
-	// // stores default id as id
-	// id = scale.getType().getDefaultScaleId();
-	// // override the id
-	// scale.setId(id);
-	// }
-	// // checks if the id is already into object
-	// // that means there are 2 or more scales to add
-	// // with the same id
-	// if (has(id)) {
-	// throw new IllegalArgumentException("A scale with id " + id.value() + " has been already added");
-	// }
-	// return id;
-	// }
 
 	/**
 	 * Returns <code>true</code> if the scale with the id passed as argument exists.

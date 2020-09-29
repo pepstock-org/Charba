@@ -327,7 +327,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 			return has(subElement.getKey());
 		}
 		// if here, argument not consistent
-		// then returns false;
+		// then returns false
 		return false;
 	}
 

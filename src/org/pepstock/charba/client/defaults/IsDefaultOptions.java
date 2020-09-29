@@ -92,13 +92,6 @@ public interface IsDefaultOptions {
 	 */
 	boolean isResponsive();
 
-	// /**
-	// * Returns the duration in milliseconds it takes to animate to new size after a resize event.
-	// *
-	// * @return the duration in milliseconds it takes to animate to new size after a resize event.
-	// */
-	// int getResponsiveAnimationDuration();
-
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
@@ -122,47 +115,12 @@ public interface IsDefaultOptions {
 	 */
 	double getDevicePixelRatio();
 
-	// /**
-	// * Returns the height of an individual line of text.
-	// *
-	// * @return the height of an individual line of text.
-	// */
-	// double getLineHeight();
-
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
 	 * @return color to use into chart.
 	 */
 	String getColorAsString();
-
-	// /**
-	// * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	// *
-	// * @return font color to use into chart.
-	// */
-	// String getFontColorAsString();
-
-	// /**
-	// * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
-	// *
-	// * @return Font size into chart.
-	// */
-	// int getFontSize();
-	//
-	// /**
-	// * Returns the font style to use in the chart, on all objects, if not override by the specific configuration.
-	// *
-	// * @return Font style into chart.
-	// */
-	// FontStyle getFontStyle();
-	//
-	// /**
-	// * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	// *
-	// * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
-	// */
-	// String getFontFamily();
 
 	/**
 	 * If false, the lines between points are not drawn.

@@ -40,9 +40,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  */
 public final class LegendLabelItem extends LegendItem implements HasLegendText {
 
-//	// this field is managed only by HTML legend builder plugin
-//	private boolean htmlText = false;
-
 	private Pattern fillStylePattern = null;
 
 	private Gradient fillStyleGradient = null;

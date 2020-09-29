@@ -392,7 +392,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				BarDataset barDataset = (BarDataset) dataset;
 				// checks if is horizontal
 				if (IndexAxis.Y.equals(barDataset.getIndexAxis())) {
-					// is horizontal, then return false;
+					// the base axis of dataset is horizontal
+					// therefore returns false
 					return false;
 				}
 

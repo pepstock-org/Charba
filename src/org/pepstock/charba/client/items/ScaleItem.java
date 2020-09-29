@@ -459,7 +459,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 				result = new ScaleValueItem(label, label);
 			} else {
 				// if here, the type is not recognize
-				// than sets the result to null;
+				// then resets the result
 				result = null;
 			}
 			return result;

@@ -187,20 +187,6 @@ public final class ChartNode {
 	public String toJSON() {
 		return JSON.stringifyWithReplacer(chart, 3);
 	}
-	//
-	// /**
-	// * Checks 2 booleans and returns the no-null one.
-	// *
-	// * @param value original value
-	// * @param defaultValue default value
-	// * @return returns the no-null one.
-	// */
-	// private boolean check(boolean value, boolean defaultValue) {
-	// // transforms the value into string because a boolean can not be null
-	// String stringValue = String.valueOf(value);
-	// // by java script, if value is null, to string you have "undefined"
-	// return ObjectType.UNDEFINED.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
-	// }
 
 	/**
 	 * Checks 2 integers and returns the no-null one.

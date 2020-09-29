@@ -252,7 +252,7 @@ final class WrapperController extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		initializeCallbackProxy.setCallback((context) -> {
+		initializeCallbackProxy.setCallback(context -> {
 			// checks if context and native chart are consistent
 			// checks if chart is consistent
 			if (context != null && context.getNativeChart() != null && IsChart.isValid(context.getChart())) {
