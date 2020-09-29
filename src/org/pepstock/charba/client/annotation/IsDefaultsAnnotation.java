@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link Annotation#ID} plugin annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin annotation DEFAULTS options interface.
  * 
  * @author Andrea "Stock" Stocchero
  *

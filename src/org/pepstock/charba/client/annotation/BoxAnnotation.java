@@ -162,7 +162,6 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param backgroundColor the color of the background of annotation
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 

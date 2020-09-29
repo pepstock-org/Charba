@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Implements a LABEL to apply on a LINE annotation.
+ * Implements a <b>LABEL</b> to apply on a LINE annotation.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -103,6 +103,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final double DEFAULT_ROTATION = 0D;
 
 	/**
+	 * Default line label auto rotation, <b>{@value DEFAULT_AUTO_ROTATION}</b>.
+	 */
+	public static final boolean DEFAULT_AUTO_ROTATION = true;
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
@@ -120,6 +125,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		X_ADJUST("xAdjust"),
 		Y_ADJUST("yAdjust"),
 		CONTENT("content"),
+		AUTO_ROTATION("autoRotation"),
 		ROTATION("rotation");
 
 		// name value of property
@@ -428,6 +434,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	public void setRotation(double rotation) {
 		setValue(Property.ROTATION, rotation);
+		// checks if setting rotation
+		if (!Double.isNaN(rotation)) {
+			// then resets the rotation value
+			setAutoRotation(false);
+		}
 	}
 
 	/**
@@ -438,6 +449,30 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	@Override
 	public double getRotation() {
 		return getValue(Property.ROTATION, IsDefaultsLineLabel.super.getRotation());
+	}
+
+	/**
+	 * Sets <code>true</code> whether the rotation of label must calculates automatically.
+	 * 
+	 * @param autoRotation <code>true</code> whether the rotation of label must calculates automatically
+	 */
+	public void setAutoRotation(boolean autoRotation) {
+		setValue(Property.AUTO_ROTATION, autoRotation);
+		// checks if setting rotation
+		if (autoRotation) {
+			// then resets and sets default
+			setValue(Property.ROTATION, DEFAULT_ROTATION);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> whether the rotation of label must calculates automatically.
+	 * 
+	 * @return <code>true</code> whether the rotation of label must calculates automatically
+	 */
+	@Override
+	public boolean isAutoRotation() {
+		return getValue(Property.AUTO_ROTATION, IsDefaultsLineLabel.super.isAutoRotation());
 	}
 
 	/**

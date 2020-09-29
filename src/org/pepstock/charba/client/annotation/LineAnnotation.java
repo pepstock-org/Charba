@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * Implements a LINE annotation which draws a line into a chart.<br>
+ * Implements a <b>LINE</b> annotation which draws a line into a chart.<br>
  * Vertical or horizontal lines are supported.
  * 
  * @author Andrea "Stock" Stocchero
@@ -140,7 +140,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		// returns color as string
 		return getValue(AbstractAnnotation.Property.BORDER_COLOR, IsDefaultsLineAnnotation.super.getBorderColorAsString());
 	}
 

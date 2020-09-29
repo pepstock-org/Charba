@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * This is the {@link Annotation#ID} plugin LINE annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin <b>LINE</b> annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -64,7 +64,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	/**
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	default List<Integer> getBorderDash() {
 		return Collections.emptyList();
@@ -73,7 +73,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset or "phase"
 	 */
 	default int getBorderDashOffset() {
 		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();

@@ -113,7 +113,6 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 			}
 			return DefaultsOptions.DEFAULTS_INSTANCE;
 		}
-
 	}
 
 }

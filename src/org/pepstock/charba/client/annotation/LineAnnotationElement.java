@@ -28,16 +28,17 @@ import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.positioner.Point;
-import org.pepstock.charba.client.utils.Window;
 
 /**
- * FIXME
+ * Internal class created for each line annotation options configured from the plugin.<br>
+ * It uses the line annotation option to calculate the area to be drawn.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotation> {
 
+	// linear equation of the line
 	private final LineFunction lineFunction;
 
 	private final LineLabelAnnotationElement linelabel;
@@ -46,45 +47,57 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 
 	private final Point endingPoint = new Point();
 
+	private boolean isEndValueMissing = false;
+
 	/**
 	 * Creates an annotation element by an annotation configuration.
 	 * 
 	 * @param chart chart instance
 	 * @param configuration annotation configuration element
 	 */
-	LineAnnotationElement(IsChart chart, LineAnnotation annotation) {
-		super(chart, annotation);
-		// creates line function instance
+	LineAnnotationElement(IsChart chart, LineAnnotation configuration) {
+		super(chart, configuration);
+		// creates line label annotation element
 		linelabel = new LineLabelAnnotationElement(this);
-		// creates line function instance
+		// creates linear equation of the line
 		lineFunction = new LineFunction(this);
 	}
 
 	/**
-	 * FIXME
+	 * Returns the starting point of the line.
 	 * 
-	 * @return the startingPoint
+	 * @return the starting point of the line
 	 */
 	Point getStartingPoint() {
 		return startingPoint;
 	}
 
 	/**
-	 * FIXME
+	 * Returns the ending point of the line.
 	 * 
-	 * @return the endingPoint
+	 * @return the ending point of the line
 	 */
 	Point getEndingPoint() {
 		return endingPoint;
 	}
 
 	/**
-	 * FIXME 
+	 * Returns the linear equation which represents the line.
 	 * 
-	 * @return the lineFunction
+	 * @return the linear equation which represents the line
 	 */
 	LineFunction getLineFunction() {
 		return lineFunction;
+	}
+
+	/**
+	 * Returns <code>true</code> if end value has been set.<br>
+	 * This is used when the auto rotation of label has been performed.
+	 * 
+	 * @return <code>true</code> if end value has been set
+	 */
+	boolean isEndValueMissing() {
+		return isEndValueMissing;
 	}
 
 	/*
@@ -94,14 +107,17 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	 */
 	@Override
 	void configureElement(ChartAreaNode area, Map<String, ScaleItem> scalesMap) {
-		// checks if scale nodes contains the scale id for X
+		// checks if scale nodes contains the configured scale id
 		if (scalesMap.containsKey(getConfiguration().getScaleID().value())) {
+			// gets the scale
 			ScaleItem scale = scalesMap.get(getConfiguration().getScaleID().value());
+			// configures teh line annotation element
 			configureScale(area, scale);
-			// configures line function
+			// configures linear equation for the line
+			// must be run after the element configuration
 			lineFunction.configure();
 			// configures line label element
-			linelabel.configure();
+			linelabel.configure(scale);
 		}
 	}
 
@@ -123,58 +139,105 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	 */
 	@Override
 	void drawElement(ChartAreaNode area, Context2dItem ctx) {
+		// sets the width and color of the line
 		ctx.setLineWidth(getConfiguration().getBorderWidth());
 		ctx.setStrokeColor(getConfiguration().getBorderColorAsString());
-
+		// gets the line dash
 		List<Integer> borderDash = getConfiguration().getBorderDash();
+		// if border dash is set (not empty)
 		if (!borderDash.isEmpty()) {
+			// sets the line dash for line
 			ctx.setLineDash(borderDash);
+			// sets the line dash offset
 			ctx.setLineDashOffset(getConfiguration().getBorderDashOffset());
 		}
-
-		// Draw
+		// starts drawing the line
 		ctx.beginPath();
 		ctx.moveTo(startingPoint.getX(), startingPoint.getY());
 		ctx.lineTo(endingPoint.getX(), endingPoint.getY());
 		ctx.stroke();
-
-		// ---------------
-		// LABEL
-		// ---------------
-		linelabel.draw();
+		// draws the line label
+		linelabel.draw(area, ctx);
 	}
 
 	/**
-	 * FIXME
+	 * Configures the line annotation element calculating starting and ending points of the line to draw.<br>
+	 * It uses the scale in order to get the positions of the values passed by line annotation options.
 	 * 
-	 * @param area
-	 * @param scale
-	 * @param scaleLimit
-	 * @param isXScale
+	 * @param area chart area instance
+	 * @param scale scale instance to use to configure
 	 */
 	private void configureScale(ChartAreaNode area, ScaleItem scale) {
+		// creates start and end references
 		double start = UndefinedValues.DOUBLE;
 		double end = UndefinedValues.DOUBLE;
+		// checks the data type managed by the selected scale
 		if (ScaleDataType.STRING.equals(scale.getType().getDataType())) {
+			// --------------
+			// CATEGORY scale
+			// manages String
+			// --------------
+			// gets the start value configured for annotation
 			final String startString = getConfiguration().getValueAsString();
+			// checks if start value is consistent
+			if (startString == null) {
+				// does nothing and this annotation is not showed
+				return;
+			}
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
 			final String endString = getConfiguration().getEndValueAsString() != null ? getConfiguration().getEndValueAsString() : startString;
+			// stores if has end value
+			isEndValueMissing = endString.equals(startString);
+			// gets the position in pixel on chart area for the start value
 			start = getValuePositionFromString(startString, scale, Double.NaN);
+			// gets the position in pixel on chart area for the end value
 			end = getValuePositionFromString(endString, scale, start);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
+			// ------------------------
+			// TIME or TIMESERIES scales
+			// manage Date
+			// ------------------------
+			// gets the start value configured for annotation
 			final Date startDate = getConfiguration().getValueAsDate();
+			// checks if start value is consistent
+			if (startDate == null) {
+				// does nothing and this annotation is not showed
+				return;
+			}
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
 			final Date endDate = getConfiguration().getEndValueAsDate() != null ? getConfiguration().getEndValueAsDate() : startDate;
+			// stores if has end value
+			isEndValueMissing = endDate.equals(startDate);
+			// gets the position in pixel on chart area for the start value
 			start = getValuePositionFromDate(startDate, scale, Double.NaN);
+			// gets the position in pixel on chart area for the end value
 			end = getValuePositionFromDate(endDate, scale, start);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
+			// ----------------------------
+			// LINEAR or LOGARITHMIC scales
+			// manage Date
+			// ----------------------------
+			// gets the start value configured for annotation
 			final double startDouble = getConfiguration().getValueAsDouble();
+			// checks if start value is consistent
+			if (Double.isNaN(startDouble)) {
+				// does nothing and this annotation is not showed
+				return;
+			}
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
 			final double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
+			// stores if has end value
+			isEndValueMissing = endDouble == startDouble;
+			// gets the position in pixel on chart area for the start value
 			start = getValuePosition(startDouble, scale, Double.NaN);
+			// gets the position in pixel on chart area for the end value
 			end = getValuePosition(endDouble, scale, start);
-			
-			// FIXME log
-			Window.getConsole().log("start", startDouble,"end",endDouble);
-			Window.getConsole().log("start", start,"end",end);
 		}
+		// calculates the start and end
+		// based on the axis kind of scale.
 		if (AxisKind.Y.equals(scale.getAxis())) {
 			// always horizontal annotation line
 			// if scale is vertical
@@ -205,31 +268,42 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	boolean isInside(BaseNativeEvent event) {
 		return lineFunction.intersects(event.getLayerX(), event.getLayerY(), getConfiguration().getBorderWidth()) || linelabel.isInside(event);
 	}
-	
+
 	/**
-	 * FIXME
+	 * Defines the linear equation of the line.<br>
+	 * The equation of any straight line, called a linear equation, can be written as:<br>
+	 * <br>
+	 * <b>y = mx + b</b><br>
+	 * <br>
+	 * where <b>m</b> is the slope of the line and <b>b</b> is the y-intercept.<br>
+	 * The y-intercept of this line is the value of y at the point where the line crosses the y axis.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	static final class LineFunction {
 
+		// annotation line element
 		private final LineAnnotationElement annotationElement;
-
+		// the slope of the line
 		private double m = UndefinedValues.DOUBLE;
-
+		// y-intercept
 		private double b = UndefinedValues.DOUBLE;
 
 		/**
-		 * FIXME
+		 * Creates the object storing the line annotation element which belongs to.
 		 * 
-		 * @param element
+		 * @param annotationElement line annotation element which wraps the function.
 		 */
 		private LineFunction(LineAnnotationElement annotationElement) {
 			this.annotationElement = annotationElement;
 		}
 
+		/**
+		 * Calculates the slope of the line and y-intercept using the line annotation element configuration.
+		 */
 		private void configure() {
+			// gets the starting points of the line annotation element
 			final Point lineStartingPoint = annotationElement.getStartingPoint();
 			final Point lineEndingPoint = annotationElement.getEndingPoint();
 			// Describe the line in slope-intercept form (y = mx + b).
@@ -240,34 +314,60 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		}
 
 		/**
-		 * @return the m
+		 * Returns the slope of the line of linear equation.
+		 * 
+		 * @return the slope of the line of linear equation
 		 */
 		double getM() {
 			return m;
 		}
 
 		/**
-		 * @return the b
+		 * Returns the y-intercept of linear equation.
+		 * 
+		 * @return the y-intercept of linear equation
 		 */
 		double getB() {
 			return b;
 		}
 
+		/**
+		 * Returns a X value applying the linear equation.
+		 * 
+		 * @param y Y value to use to get the X value
+		 * @return position related to Y value
+		 */
 		double getX(double y) {
 			final Point lineStartingPoint = annotationElement.getStartingPoint();
-			// Coordinates are relative to the origin of the canvas
 			return m * (y - lineStartingPoint.getY()) + b;
 		}
 
+		/**
+		 * Returns a T value applying the linear equation.
+		 * 
+		 * @param x X value to use to get the Y value
+		 * @return position related to X value
+		 */
 		double getY(double x) {
 			final Point lineStartingPoint = annotationElement.getStartingPoint();
 			return ((x - b) / m) + lineStartingPoint.getY();
 		}
 
+		/**
+		 * Returns <code>true</code> if the coordinates (x and y) are over the straight line.
+		 * 
+		 * @param x coordinate X instance
+		 * @param y coordinate Y instance
+		 * @param epsilon width of straight line
+		 * @return <code>true</code> if the coordinates (x and y) are over the straight line
+		 */
 		private boolean intersects(double x, double y, double epsilon) {
+			// checks arguments
 			epsilon = Double.isNaN(epsilon) ? 0.001 : epsilon;
+			// gets x and y value of equation using the passed coordinates.
 			double dy = this.getY(x);
 			double dx = this.getX(y);
+			// checks if the coordinates are over the line
 			return (!Double.isFinite(dy) || Math.abs(y - dy) < epsilon) && (!Double.isFinite(dx) || Math.abs(x - dx) < epsilon);
 		}
 	}

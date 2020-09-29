@@ -28,6 +28,9 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
+ * The plugin draws lines and boxes on the chart area.<br>
+ * It works with line, bar, scatter and bubble charts that use linear, logarithmic, time, or category scales.<br>
+ * It will not work on any chart that does not have exactly two axes, including pie, radar, and polar area charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -47,7 +50,7 @@ public final class Annotation extends AbstractPlugin {
 	private static final Annotation INSTANCE = new Annotation();
 	// cache to store options in order do not load every time the options
 	private final Map<String, AnnotationOptions> pluginOptions = new HashMap<>();
-	// map to maintain the box elements for every chart
+	// map to maintain the annotation elements for every chart
 	private final Map<String, List<AbstractAnnotationElement<?>>> annotationElements = new HashMap<>();
 
 	/**
@@ -83,17 +86,19 @@ public final class Annotation extends AbstractPlugin {
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		// checks if chart is consistent and the plugin has been invoked for an accepted chart
 		if (mustBeActivated(chart)) {
-			// option instance
+			// options instance
 			AnnotationOptions pOptions = null;
 			// loads chart options for the chart
 			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
+			// checks if the plugin has been configured
 			if (options.getPlugins().hasOptions(ID)) {
+				// if here, is configured and loads teh configuration
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
+				// if here, there is not any configuration
+				// then it uses teh default
 				pOptions = new AnnotationOptions(DefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores the options into cache
@@ -110,7 +115,6 @@ public final class Annotation extends AbstractPlugin {
 			for (AbstractAnnotation annotation : pOptions.getAnnotations()) {
 				// sets default draw time
 				annotation.setDefaultDrawTime(defaultDrawTime);
-				// FIXME checks if annonation is enable
 				// checks and loads annotation elements
 				if (annotation instanceof BoxAnnotation) {
 					// casts to box annotation
@@ -134,12 +138,16 @@ public final class Annotation extends AbstractPlugin {
 	 */
 	@Override
 	public void onAfterLayout(IsChart chart) {
-		// checks if chart is consistent
+		// the configuration of annotation elements must be performed after the scales are configured into CHARTJS.
+		// This is the reason why the annotation elements are configured into after layout methods of plugin.
+		// checks if chart is consistent and the plugin has been invoked for an accepted chart
+		// and the plugin configuration and annotation elements are already loaded
 		if (mustBeActivated(chart) && pluginOptions.containsKey(chart.getId()) && annotationElements.containsKey(chart.getId())) {
-			// gets elements
+			// gets the annotation elements
 			List<AbstractAnnotationElement<?>> listOfElements = annotationElements.get(chart.getId());
 			// scans all elements
 			for (AbstractAnnotationElement<?> element : listOfElements) {
+				// configures all elements
 				element.configure();
 			}
 		}
@@ -153,6 +161,7 @@ public final class Annotation extends AbstractPlugin {
 	@Override
 	public boolean onBeforeDatasetsDraw(IsChart chart) {
 		draw(chart, DrawTime.BEFORE_DATASETS_DRAW);
+		// must be always true to continue drawing
 		return true;
 	}
 
@@ -183,31 +192,35 @@ public final class Annotation extends AbstractPlugin {
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+		// checks if chart is consistent and the plugin has been invoked for an accepted chart
 		if (mustBeActivated(chart)) {
 			// removes options
 			pluginOptions.remove(chart.getId());
-			// removes options
+			// removes all annotation elements
 			cleanAnnotationElements(chart);
 		}
 	}
 
 	/**
-	 * FIXME
+	 * Draws all annotation elements on the canvas.
 	 * 
-	 * @param chart
-	 * @param drawTime
+	 * @param chart chart instance
+	 * @param drawTime the draw time is used to get all annotation elements configured to be drawn in that draw time
 	 */
 	private void draw(IsChart chart, DrawTime drawTime) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart) && pluginOptions.containsKey(chart.getId())) {
-			// gets elements
+		// checks if chart is consistent and the plugin has been invoked for an accepted chart
+		// and the plugin configuration and annotation elements are already loaded
+		if (mustBeActivated(chart) && pluginOptions.containsKey(chart.getId()) && annotationElements.containsKey(chart.getId())) {
+			// gets all annotation elements
 			List<AbstractAnnotationElement<?>> listOfElements = annotationElements.get(chart.getId());
 			// scans all elements
 			for (AbstractAnnotationElement<?> element : listOfElements) {
-				// get options
+				// gets the configuration of element
 				AbstractAnnotation configuration = element.getConfiguration();
+				// checks if the annotation element is well configure and ready to be drawn and
+				// the the draw time of the configuration is the same of the plugin.
 				if (element.isConsistent() && drawTime.equals(configuration.getDrawTime())) {
+					// draws annotation element
 					element.draw();
 				}
 			}

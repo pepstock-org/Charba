@@ -20,7 +20,7 @@ import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * This is the {@link Annotation#ID} plugin LABEL of LINE annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin <b>LABEL of LINE</b> annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -135,6 +135,15 @@ interface IsDefaultsLineLabel {
 	 */
 	default int getYAdjust() {
 		return LineLabel.DEFAULT_Y_ADJUST;
+	}
+
+	/**
+	 * Returns the rotation of label in degrees.
+	 * 
+	 * @return the rotation of label in degrees
+	 */
+	default boolean isAutoRotation() {
+		return LineLabel.DEFAULT_AUTO_ROTATION;
 	}
 
 	/**

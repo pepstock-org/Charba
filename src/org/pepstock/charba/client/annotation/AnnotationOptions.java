@@ -19,10 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.annotation.enums.Event;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
@@ -33,11 +30,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
  *
  */
 public final class AnnotationOptions extends AbstractPluginCachedOptions {
-
-	/**
-	 * Default double click speed in milliseconds, <b>{@value DEFAULT_DOUBLE_CLICK_SPEED}</b>.
-	 */
-	public static final int DEFAULT_DOUBLE_CLICK_SPEED = 350;
 
 	/**
 	 * Default draw time, <b>{@link DrawTime#AFTER_DATASETS_DRAW}</b>.
@@ -53,8 +45,6 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	enum Property implements Key
 	{
 		DRAW_TIME("drawTime"),
-		EVENTS("events"),
-		DOUBLE_CLICK_SPEED("dblClickSpeed"),
 		ANNOTATIONS("annotations");
 
 		// name value of property
@@ -126,10 +116,11 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	public void setDrawTime(DrawTime drawTime) {
 		setValue(Property.DRAW_TIME, drawTime);
 	}
-	
+
 	/**
-	 * FIXME
-	 * @return
+	 * Returns <code>true</code> if the draw time has previously set.
+	 * 
+	 * @return <code>true</code> if the draw time has previously set
 	 */
 	boolean hasDrawTime() {
 		return has(Property.DRAW_TIME);
@@ -145,56 +136,9 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
-	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
-	 * 
-	 * @param speed the double-click speed in milliseconds
-	 */
-	public void setDoubleClickSpeed(int speed) {
-		setValue(Property.DOUBLE_CLICK_SPEED, speed);
-	}
-
-	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.<br>
-	 * When listening for both {@link Event#CLICK} and {@link Event#DOUBLE_CLICK}, click events will be delayed by this amount.
-	 * 
-	 * @return the double-click speed in milliseconds
-	 */
-	public int getDoubleClickSpeed() {
-		return getValue(Property.DOUBLE_CLICK_SPEED, defaultsOptions.getDoubleClickSpeed());
-	}
-
-	/**
-	 * Sets the browser events to enable on each annotation.
-	 * 
-	 * @param events the browser events to enable on each annotation.
-	 */
-	public void setEvents(Event... events) {
-		// sets the array of events
-		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
-	}
-
-	/**
-	 * Returns the browser events to enable on each annotation.
-	 * 
-	 * @return the browser events to enable on each annotation
-	 */
-	public List<Event> getEvents() {
-		// gets array for events
-		ArrayString array = getArrayValue(Property.EVENTS);
-		// if the arrays is consistent...
-		if (array != null && !array.isEmpty()) {
-			// ...then returns as list of events
-			return ArrayListHelper.list(Event.values(), array);
-		}
-		// ... otherwise returns the default
-		return defaultsOptions.getEvents();
-	}
-
-	/**
 	 * Sets a set of annotations for plugin. If argument is <code>null</code>, removes all annotations.
 	 * 
-	 * @param annotations set of anotation. If <code>null</code>, removes all annotations
+	 * @param annotations set of annotations. If <code>null</code>, removes all annotations
 	 */
 	public void setAnnotations(AbstractAnnotation... annotations) {
 		// clear buffer

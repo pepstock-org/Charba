@@ -27,13 +27,15 @@ import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * FIXME
+ * Internal class created for each box annotation options configured from the plugin.<br>
+ * It uses the box annotation option to calculate the area to be drawn.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation> {
 
+	// area limits
 	private double left = UndefinedValues.DOUBLE;
 
 	private double top = UndefinedValues.DOUBLE;
@@ -48,8 +50,8 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param chart chart instance
 	 * @param configuration annotation configuration element
 	 */
-	BoxAnnotationElement(IsChart chart, BoxAnnotation annotation) {
-		super(chart, annotation);
+	BoxAnnotationElement(IsChart chart, BoxAnnotation configuration) {
+		super(chart, configuration);
 	}
 
 	/*
@@ -59,19 +61,29 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 */
 	@Override
 	void configureElement(ChartAreaNode area, Map<String, ScaleItem> scalesMap) {
-		// stores the model info
+		// stores the chart area size as default
 		left = area.getLeft();
 		right = area.getRight();
 		top = area.getTop();
 		bottom = area.getBottom();
+		// --------------
+		// SCALE X
+		// --------------
 		// checks if scale nodes contains the scale id for X
 		if (scalesMap.containsKey(getConfiguration().getXScaleID().value())) {
+			// gets scale X
 			ScaleItem xScale = scalesMap.get(getConfiguration().getXScaleID().value());
+			// configures the annotation element by the scale instance
 			configureScale(area, xScale, true);
 		}
+		// --------------
+		// SCALE Y
+		// --------------
 		// checks if scale nodes contains the scale id for Y
 		if (scalesMap.containsKey(getConfiguration().getYScaleID().value())) {
+			// gets scale Y
 			ScaleItem yScale = scalesMap.get(getConfiguration().getYScaleID().value());
+			// configures the annotation element by the scale instance
 			configureScale(area, yScale, false);
 		}
 	}
@@ -94,10 +106,12 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 */
 	@Override
 	void drawElement(ChartAreaNode area, Context2dItem ctx) {
+		// sets the line width and color of the rectangle border
 		ctx.setLineWidth(getConfiguration().getBorderWidth());
 		ctx.setStrokeColor(getConfiguration().getBorderColorAsString());
+		// sets the color of the rectangle
 		ctx.setFillColor(getConfiguration().getBackgroundColorAsString());
-		// Draw
+		// Draws the rectangle
 		double width = right - left;
 		double height = bottom - top;
 		ctx.fillRect(left, top, width, height);
@@ -126,37 +140,66 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	}
 
 	/**
+	 * Configures the box annotation element calculating left, top, right and bottom points of the rectangle to draw.<br>
+	 * It uses the scale in order to get the positions of the values passed by box annotation options.
 	 * 
-	 * @param area
-	 * @param scale
-	 * @param scaleLimit
-	 * @param isXScale
+	 * @param area chart area instance
+	 * @param scale scale instance to use to configure
+	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 */
 	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale) {
+		// creates minimum and maximum references
 		double min = UndefinedValues.DOUBLE;
 		double max = UndefinedValues.DOUBLE;
+		// gets the minimum and maximum limit of chart area
+		// based on if is configuring a X scale
 		final double minLimit = isXScale ? area.getLeft() : area.getBottom();
 		final double maxLimit = isXScale ? area.getRight() : area.getTop();
+		// checks the data type managed by the selected scale
 		if (ScaleDataType.STRING.equals(scale.getType().getDataType())) {
+			// --------------
+			// CATEGORY scale
+			// manages String
+			// --------------
+			// gets the minimum and maximum value configured for annotation
 			final String minString = isXScale ? getConfiguration().getXMinAsString() : getConfiguration().getYMinAsString();
 			final String maxString = isXScale ? getConfiguration().getXMaxAsString() : getConfiguration().getYMaxAsString();
+			// gets the position in pixel on chart area for the minimum value
 			min = getValuePositionFromString(minString, scale, minLimit);
+			// gets the position in pixel on chart area for the maximum value
 			max = getValuePositionFromString(maxString, scale, maxLimit);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
+			// ------------------------
+			// TIME or TIMESERIES scales
+			// manage Date
+			// ------------------------
+			// gets the minimum and maximum value configured for annotation
 			final Date minDate = isXScale ? getConfiguration().getXMinAsDate() : getConfiguration().getYMinAsDate();
 			final Date maxDate = isXScale ? getConfiguration().getXMaxAsDate() : getConfiguration().getYMaxAsDate();
 			min = getValuePositionFromDate(minDate, scale, minLimit);
 			max = getValuePositionFromDate(maxDate, scale, maxLimit);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
+			// ----------------------------
+			// LINEAR or LOGARITHMIC scales
+			// manage Date
+			// ----------------------------
+			// gets the minimum and maximum value configured for annotation
 			final double minDouble = isXScale ? getConfiguration().getXMinAsDouble() : getConfiguration().getYMinAsDouble();
 			final double maxDouble = isXScale ? getConfiguration().getXMaxAsDouble() : getConfiguration().getYMaxAsDouble();
+			// gets the position in pixel on chart area for the minimum value
 			min = getValuePosition(minDouble, scale, minLimit);
+			// gets the position in pixel on chart area for the maximum value
 			max = getValuePosition(maxDouble, scale, maxLimit);
 		}
+		// checks if is asking for configuration against a scale X
 		if (isXScale) {
+			// if X scale
+			// sets left and right
 			left = Math.min(min, max);
 			right = Math.max(min, max);
 		} else {
+			// if Y scale
+			// sets top and bottom
 			top = Math.min(min, max);
 			bottom = Math.max(min, max);
 		}

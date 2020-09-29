@@ -247,7 +247,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   
 ### Features
 
- * **import last CHART.JS version,** [3.0.0.alpha](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-alpha).
+ * **import last CHART.JS version,** [development available version, more than 3.0.0-beta](https://www.chartjs.org/dist/master/chart.min.js) on September 29th, 2020.
    * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
    * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
@@ -323,6 +323,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * does not implement all event listeners previously implemented into [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave callbacks are implemented.
    * remove `mode` property from annotation line options because new plugin is using the `axis` property of scales for line orientation.
    * remove `doubleClickSpeed` property from annotation options because double click event is not supported anymore.
+   * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
+   * add `autoRotation` property to annotation line label options in order to enable the automatic calculation of label rotation.
  
 ### Development
 
