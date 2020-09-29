@@ -50,6 +50,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param date the day of the month value between 1-31.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -61,6 +62,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param hours the hour value.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -72,6 +74,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param minutes the value of the minutes.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -83,6 +86,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param month the month value between 0-11.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -94,6 +98,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param seconds the seconds value.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -105,6 +110,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param time the number of milliseconds.
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
@@ -116,6 +122,7 @@ public final class ImmutableDate extends Date {
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}f.
 	 * 
 	 * @param year the year value
+	 * @deprecated As of JDK version 1.1.
 	 */
 	@Deprecated
 	@Override
