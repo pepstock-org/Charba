@@ -106,7 +106,7 @@ public final class Clip extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>false</code> if the clip left has been.
+	 * Returns <code>false</code> if the clip left has been set.
 	 * 
 	 * @return <code>false</code> if the clip left has been set
 	 */
@@ -142,7 +142,7 @@ public final class Clip extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>false</code> if the clip right has been.
+	 * Returns <code>false</code> if the clip right has been set.
 	 * 
 	 * @return <code>false</code> if the clip right has been set
 	 */
@@ -178,7 +178,7 @@ public final class Clip extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>false</code> if the clip top has been.
+	 * Returns <code>false</code> if the clip top has been set.
 	 * 
 	 * @return <code>false</code> if the clip top has been set
 	 */
@@ -214,7 +214,7 @@ public final class Clip extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>false</code> if the clip bottom has been.
+	 * Returns <code>false</code> if the clip bottom has been set.
 	 * 
 	 * @return <code>false</code> if the clip bottom has been set
 	 */
