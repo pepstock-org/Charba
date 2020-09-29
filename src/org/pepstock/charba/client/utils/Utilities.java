@@ -85,13 +85,13 @@ public final class Utilities {
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
-	private static final String REGEXP_FONT_STYLE_PATTERN = "\\{0\\}";
+	private static final String REGEXP_FONT_STYLE_PATTERN = "{0}";
 	// string format of font size
-	private static final String REGEXP_FONT_WEIGHT_PATTERN = "\\{1\\}";
+	private static final String REGEXP_FONT_WEIGHT_PATTERN = "{1}";
 	// string format of font size
-	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{2\\}";
+	private static final String REGEXP_FONT_SIZE_PATTERN = "{2}";
 	// string format of font family
-	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{3\\}";
+	private static final String REGEXP_FONT_FAMILY_PATTERN = "{3}";
 	// canvas element to draw
 	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
 	// internal comparator to sort colors by own offset
