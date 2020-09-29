@@ -29,7 +29,7 @@ import org.pepstock.charba.client.options.IsFont;
 public final class Font implements IsFont {
 
 	// font options element
-	private final IsFont font;
+	private final IsFont innerFont;
 
 	/**
 	 * Builds the object storing the font options.
@@ -42,7 +42,7 @@ public final class Font implements IsFont {
 			throw new IllegalArgumentException("Font argument is null");
 		}
 		// stores font container
-		this.font = font;
+		this.innerFont = font;
 	}
 
 	/**
@@ -52,7 +52,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setColor(IsColor color) {
-		font.setColor(color);
+		innerFont.setColor(color);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setColor(String color) {
-		font.setColor(color);
+		innerFont.setColor(color);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getColorAsString() {
-		return font.getColorAsString();
+		return innerFont.getColorAsString();
 	}
 
 	/**
@@ -92,7 +92,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setSize(int size) {
-		font.setSize(size);
+		innerFont.setSize(size);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public int getSize() {
-		return font.getSize();
+		return innerFont.getSize();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setStyle(FontStyle style) {
-		font.setStyle(style);
+		innerFont.setStyle(style);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public FontStyle getStyle() {
-		return font.getStyle();
+		return innerFont.getStyle();
 	}
 
 	/**
@@ -132,7 +132,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setFamily(String family) {
-		font.setFamily(family);
+		innerFont.setFamily(family);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getFamily() {
-		return font.getFamily();
+		return innerFont.getFamily();
 	}
 
 	/**
@@ -152,7 +152,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setWeight(Weight weight) {
-		font.setWeight(weight);
+		innerFont.setWeight(weight);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public Weight getWeight() {
-		return font.getWeight();
+		return innerFont.getWeight();
 	}
 
 	/**
@@ -172,7 +172,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(double lineHeight) {
-		font.setLineHeight(lineHeight);
+		innerFont.setLineHeight(lineHeight);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(String lineHeight) {
-		font.setLineHeight(lineHeight);
+		innerFont.setLineHeight(lineHeight);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public double getLineHeight() {
-		return font.getLineHeight();
+		return innerFont.getLineHeight();
 	}
 
 	/**
@@ -202,7 +202,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getLineHeightAsString() {
-		return font.getLineHeightAsString();
+		return innerFont.getLineHeightAsString();
 	}
 
 	/**
@@ -213,7 +213,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setLineWidth(int lineWidth) {
-		font.setLineWidth(lineWidth);
+		innerFont.setLineWidth(lineWidth);
 
 	}
 
@@ -225,7 +225,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public int getLineWidth() {
-		return font.getLineWidth();
+		return innerFont.getLineWidth();
 	}
 
 	/**
@@ -236,7 +236,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setStrokeStyle(IsColor strokeStyle) {
-		font.setStrokeStyle(strokeStyle);
+		innerFont.setStrokeStyle(strokeStyle);
 	}
 
 	/**
@@ -247,7 +247,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setStrokeStyle(String strokeStyle) {
-		font.setStrokeStyle(strokeStyle);
+		innerFont.setStrokeStyle(strokeStyle);
 	}
 
 	/**
@@ -258,7 +258,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getStrokeStyleAsString() {
-		return font.getStrokeStyleAsString();
+		return innerFont.getStrokeStyleAsString();
 	}
 
 	/**
