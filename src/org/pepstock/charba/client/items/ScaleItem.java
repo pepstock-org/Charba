@@ -451,7 +451,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			} else if (ScaleDataType.DATE.equals(getType().getDataType())) {
 				// if here, is a date
 				// creates the date object
-				ImmutableDate dateValue = Double.isNaN(value) ? (ImmutableDate)null : new ImmutableDate((long)value);
+				ImmutableDate dateValue = Double.isNaN(value) ? null : new ImmutableDate((long)value);
 				result = new ScaleValueItem(dateValue, label);
 			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
 				// if here, is a string
