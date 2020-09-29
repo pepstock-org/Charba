@@ -123,7 +123,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the adjustment along x-axis (left-right) of label
 	 */
-	default int getXAdjust() {
+	default double getXAdjust() {
 		return LineLabel.DEFAULT_X_ADJUST;
 	}
 
@@ -133,7 +133,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the adjustment along y-axis (top-bottom) of label
 	 */
-	default int getYAdjust() {
+	default double getYAdjust() {
 		return LineLabel.DEFAULT_Y_ADJUST;
 	}
 

@@ -68,9 +68,6 @@ public final class Utilities {
 	 * <li>{@link GradientType#RADIAL}:
 	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</a><br>
 	 * </ul>
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
 	 */
 	private static final String GRADIENT_TEMPLATE = "{0}({1},{2})";
 
@@ -83,9 +80,6 @@ public final class Utilities {
 	 * See the following link how CSS pattern has been created:<br>
 	 * <br>
 	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a> <br>
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
 	 */
 	private static final String PATTERN_TEMPLATE = "url({0}) {1}";
 	// string format of font CSS style

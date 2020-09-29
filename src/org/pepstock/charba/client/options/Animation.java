@@ -199,8 +199,11 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE) && hasMode(mode)) {
 			// gets the mode element
 			AnimationMode modeElement = getMode(mode);
-			// checks if the duration is not equals to 0
-			return modeElement.getDuration() > 0;
+			// checks if element is consistent
+			if (modeElement != null) {
+				// checks if the duration is not equals to 0
+				return modeElement.getDuration() > 0;
+			}
 		}
 		// if here, the mode is not valid or not stored
 		// then returns false

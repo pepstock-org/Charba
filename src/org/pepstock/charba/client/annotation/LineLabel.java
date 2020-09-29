@@ -90,12 +90,12 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	/**
 	 * Default line label X adjust, <b>{@value DEFAULT_X_ADJUST}</b>.
 	 */
-	public static final int DEFAULT_X_ADJUST = 0;
+	public static final double DEFAULT_X_ADJUST = 0D;
 
 	/**
 	 * Default line label Y adjust, <b>{@value DEFAULT_Y_ADJUST}</b>.
 	 */
-	public static final int DEFAULT_Y_ADJUST = 0;
+	public static final double DEFAULT_Y_ADJUST = 0D;
 
 	/**
 	 * Default line label rotation, <b>{@value DEFAULT_ROTATION}</b>.
@@ -391,7 +391,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param xAdjust the adjustment along x-axis (left-right) of label
 	 */
-	public void setXAdjust(int xAdjust) {
+	public void setXAdjust(double xAdjust) {
 		setValue(Property.X_ADJUST, xAdjust);
 	}
 
@@ -402,7 +402,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the adjustment along x-axis (left-right) of label
 	 */
 	@Override
-	public int getXAdjust() {
+	public double getXAdjust() {
 		return getValue(Property.X_ADJUST, IsDefaultsLineLabel.super.getXAdjust());
 	}
 
@@ -412,7 +412,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param yAdjust the adjustment along y-axis (top-bottom) of label
 	 */
-	public void setYAdjust(int yAdjust) {
+	public void setYAdjust(double yAdjust) {
 		setValue(Property.Y_ADJUST, yAdjust);
 	}
 
@@ -423,7 +423,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the adjustment along y-axis (top-bottom) of label
 	 */
 	@Override
-	public int getYAdjust() {
+	public double getYAdjust() {
 		return getValue(Property.Y_ADJUST, IsDefaultsLineLabel.super.getYAdjust());
 	}
 

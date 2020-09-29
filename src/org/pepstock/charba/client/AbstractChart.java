@@ -616,8 +616,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void update(IsAnimationModeKey mode) {
 		// checks if chart is created
 		if (chart != null) {
-			// if mode is valid..
-			if (IsAnimationModeKey.isValid(mode)) {
+			// if mode is valid.. added check to null to avoid issue from code analysis
+			if (mode != null && IsAnimationModeKey.isValid(mode)) {
 				// then calls the update with animation mode
 				chart.update(mode.value());
 			} else {

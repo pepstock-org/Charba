@@ -271,19 +271,19 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @return the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
 	 */
 	public OffsetCallback getHoverOffsetCallback() {
-		return offsetCallback;
+		return hoverOffsetCallback;
 	}
 
 	/**
 	 * Sets the offset callback, when dataset is hovered.
 	 * 
-	 * @param offsetCallback the offset callback, when dataset is hovered.
+	 * @param hoverOffsetCallback the offset callback, when dataset is hovered.
 	 */
-	public void setHoverOffset(OffsetCallback offsetCallback) {
+	public void setHoverOffset(OffsetCallback hoverOffsetCallback) {
 		// sets the callback
-		this.hoverOffsetCallback = offsetCallback;
+		this.hoverOffsetCallback = hoverOffsetCallback;
 		// checks if callback is consistent
-		if (offsetCallback != null) {
+		if (hoverOffsetCallback != null) {
 			// adds the callback proxy function to java script object
 			setValue(Property.HOVER_OFFSET, hoverOffsetCallbackProxy.getProxy());
 		} else {

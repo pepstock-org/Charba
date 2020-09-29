@@ -183,6 +183,11 @@ public final class ScriptableUtils {
 	 * @return a value of property as color
 	 */
 	public static Object handleCallbackResultAsColor(ScriptableContext context, Object result, String defaultValue, boolean hasPattern) {
+		// checks if context is consistent
+		if (context == null) {
+			// exception!
+			throw new IllegalArgumentException("Context argument is null");
+		}
 		// invokes common handler
 		Object checkedResult = doHandleCallbackResultAsColor(context, result, defaultValue, hasPattern);
 		// checks if is a gradient

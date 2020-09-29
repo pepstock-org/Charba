@@ -100,7 +100,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	 * Returns a drawing context on the canvas, or <code>null</code> if the context ID is not supported.<br>
 	 * A drawing context lets you draw on the canvas.
 	 * 
-	 * @param contextId context id. Only {@value Canvas#CONTEXT_2D} is used.
+	 * @param contextId context id. Only context <b>"2d"</b> is used.
 	 * @return a drawing context on the canvas
 	 */
 	@JsMethod
