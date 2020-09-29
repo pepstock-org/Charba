@@ -61,6 +61,18 @@ public final class ExtendedScales extends Scales {
 				}
 			}
 		}
+		// sets axes internally
+		// to reduce complexity of this method
+		setInternalAxes(scales);
+	}
+	
+	/**
+	 * Sets all axes of chart.<br>
+	 * Implemented to reduce the complexity of <b>setAxes</b> public method.
+	 * 
+	 * @param scales array of axes.
+	 */
+	private void setInternalAxes(Scale... scales) {
 		// checks if the arguments are consistent
 		if (scales != null && scales.length > 0) {
 			// sets a index
@@ -94,6 +106,12 @@ public final class ExtendedScales extends Scales {
 		}
 	}
 
+	/**
+	 * Checks and returns a scale id, retrieved from a scale instance.
+	 * 
+	 * @param scale scale instance to use for checking and getting
+	 * @return a scale id, retrieved from a scale instance
+	 */
 	private IsScaleId checkAndGetScaleId(Scale scale) {
 		// gets id as key
 		IsScaleId id = scale.getId();
