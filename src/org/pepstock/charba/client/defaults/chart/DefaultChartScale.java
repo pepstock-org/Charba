@@ -148,26 +148,6 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.isStacked();
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.pepstock.charba.client.defaults.IsDefaultScale#getType()
-	// */
-	// @Override
-	// public AxisType getType() {
-	// return scale.getType();
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.pepstock.charba.client.defaults.IsDefaultScale#getAxis()
-	// */
-	// @Override
-	// public CartesianAxisType getAxis() {
-	// return scale.getAxis();
-	// }
-
 	/*
 	 * (non-Javadoc)
 	 * 
