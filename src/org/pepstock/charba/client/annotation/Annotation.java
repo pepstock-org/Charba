@@ -249,7 +249,7 @@ public final class Annotation extends AbstractPlugin {
 			// removes options
 			List<AbstractAnnotationElement<?>> oldListOfElements = annotationElements.remove(chart.getId());
 			// scans all old elements to destroy them
-			oldListOfElements.forEach(element -> element.destroy());
+			oldListOfElements.forEach(AbstractAnnotationElement::destroy);
 		}
 	}
 }
