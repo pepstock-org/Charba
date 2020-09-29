@@ -332,13 +332,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// gets the global option for the chart.
 		IsDefaultScaledOptions options = getChart().getDefaultChartOptions();
 		// if is a a chart with scales
-		if (!ScaleType.NONE.equals(getChart().getType().scaleType())) {
-			// checks if axis kind is consistent
-			if (Key.isValid(kind)) {
-				// creates reference for scale
-				// returns default scale reference
-				return options.getScales().getAxis(scaleId, kind);
-			}
+		if (!ScaleType.NONE.equals(getChart().getType().scaleType()) && Key.isValid(kind)) {
+			// creates reference for scale
+			// returns default scale reference
+			return options.getScales().getAxis(scaleId, kind);
 		}
 		// returns default scale
 		return Defaults.get().getScale(this.storeType);

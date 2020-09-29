@@ -212,27 +212,25 @@ public final class HtmlLegend extends AbstractPlugin {
 	@Override
 	public void onAfterDraw(IsChart chart) {
 		// checks if argument is consistent
-		if (mustBeDisplay(chart)) {
-			// checks if the legend must be created
-			// the legend will be created if there is the legend element
-			// and the chart is is NOT in the set
-			if (pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
-				// gets div element
-				Div legendElement = pluginDivElements.get(chart.getId());
-				// invokes the legend generator to have the HTML of legend
-				SafeHtml html = GENERATOR.generateLegend(chart);
-				// removes all children of div element
-				legendElement.removeAllChildren();
-				// sets as inner HTML
-				legendElement.setInnerHTML(html.asString());
-				// removes all listeners
-				removeListeners(chart, legendElement);
-				// adds the event listeners to element
-				addListeners(chart, legendElement);
-				// adds into set
-				// in order do not add the inner html every easing
-				pluginAddedLegendStatus.add(chart.getId());
-			}
+		// and checks if the legend must be created
+		// the legend will be created if there is the legend element
+		// and the chart is is NOT in the set
+		if (mustBeDisplay(chart) && pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
+			// gets div element
+			Div legendElement = pluginDivElements.get(chart.getId());
+			// invokes the legend generator to have the HTML of legend
+			SafeHtml html = GENERATOR.generateLegend(chart);
+			// removes all children of div element
+			legendElement.removeAllChildren();
+			// sets as inner HTML
+			legendElement.setInnerHTML(html.asString());
+			// removes all listeners
+			removeListeners(chart, legendElement);
+			// adds the event listeners to element
+			addListeners(chart, legendElement);
+			// adds into set
+			// in order do not add the inner html every easing
+			pluginAddedLegendStatus.add(chart.getId());
 		}
 	}
 
