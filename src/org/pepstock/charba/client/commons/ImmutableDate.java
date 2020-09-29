@@ -48,15 +48,6 @@ public final class ImmutableDate extends Date {
 
 	/**
 	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
-	 */
-	@Deprecated
-	@Override
-	public Object clone() {
-		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
-	}
-
-	/**
-	 * As an ImmutableDate is immutable, this method throws an {@link UnsupportedOperationException}.
 	 * 
 	 * @param date the day of the month value between 1-31.
 	 */
