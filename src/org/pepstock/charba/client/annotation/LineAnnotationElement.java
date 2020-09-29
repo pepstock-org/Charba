@@ -230,7 +230,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			// if not exists, uses the starting value as end one
 			final double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
 			// stores if has end value
-			isEndValueMissing = endDouble == startDouble;
+			isEndValueMissing = Double.isNaN(getConfiguration().getEndValueAsDouble());
 			// gets the position in pixel on chart area for the start value
 			start = getValuePosition(startDouble, scale, Double.NaN);
 			// gets the position in pixel on chart area for the end value
