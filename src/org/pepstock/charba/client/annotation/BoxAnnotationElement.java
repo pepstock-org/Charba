@@ -44,6 +44,8 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 
 	private double bottom = UndefinedValues.DOUBLE;
 
+	private final MinMaxCointainer minMaxContainer = new MinMaxCointainer();
+
 	/**
 	 * Creates an annotation element by an annotation configuration.
 	 * 
@@ -148,9 +150,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 */
 	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale) {
-		// creates minimum and maximum references
-		double min = UndefinedValues.DOUBLE;
-		double max = UndefinedValues.DOUBLE;
+		// resets minimum and maximum references
+		minMaxContainer.setMinimum(UndefinedValues.DOUBLE);
+		minMaxContainer.setMaximum(UndefinedValues.DOUBLE);
 		// gets the minimum and maximum limit of chart area
 		// based on if is configuring a X scale
 		final double minLimit = isXScale ? area.getLeft() : area.getBottom();
@@ -161,48 +163,150 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// CATEGORY scale
 			// manages String
 			// --------------
-			// gets the minimum and maximum value configured for annotation
-			final String minString = isXScale ? getConfiguration().getXMinAsString() : getConfiguration().getYMinAsString();
-			final String maxString = isXScale ? getConfiguration().getXMaxAsString() : getConfiguration().getYMaxAsString();
-			// gets the position in pixel on chart area for the minimum value
-			min = getValuePositionFromString(minString, scale, minLimit);
-			// gets the position in pixel on chart area for the maximum value
-			max = getValuePositionFromString(maxString, scale, maxLimit);
+			// gets the minimum and maximum pixel value
+			retrieveMinMaxFromScaleForString(scale, isXScale, minLimit, maxLimit);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
 			// ------------------------
 			// TIME or TIMESERIES scales
 			// manage Date
 			// ------------------------
 			// gets the minimum and maximum value configured for annotation
-			final Date minDate = isXScale ? getConfiguration().getXMinAsDate() : getConfiguration().getYMinAsDate();
-			final Date maxDate = isXScale ? getConfiguration().getXMaxAsDate() : getConfiguration().getYMaxAsDate();
-			min = getValuePositionFromDate(minDate, scale, minLimit);
-			max = getValuePositionFromDate(maxDate, scale, maxLimit);
+			retrieveMinMaxFromScaleForDate(scale, isXScale, minLimit, maxLimit);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
 			// ----------------------------
 			// LINEAR or LOGARITHMIC scales
-			// manage Date
+			// manage Double
 			// ----------------------------
-			// gets the minimum and maximum value configured for annotation
-			final double minDouble = isXScale ? getConfiguration().getXMinAsDouble() : getConfiguration().getYMinAsDouble();
-			final double maxDouble = isXScale ? getConfiguration().getXMaxAsDouble() : getConfiguration().getYMaxAsDouble();
-			// gets the position in pixel on chart area for the minimum value
-			min = getValuePosition(minDouble, scale, minLimit);
-			// gets the position in pixel on chart area for the maximum value
-			max = getValuePosition(maxDouble, scale, maxLimit);
+			retrieveMinMaxFromScaleForDouble(scale, isXScale, minLimit, maxLimit);
 		}
 		// checks if is asking for configuration against a scale X
 		if (isXScale) {
 			// if X scale
 			// sets left and right
-			left = Math.min(min, max);
-			right = Math.max(min, max);
+			left = Math.min(minMaxContainer.getMinimum(), minMaxContainer.getMaximum());
+			right = Math.max(minMaxContainer.getMinimum(), minMaxContainer.getMaximum());
 		} else {
 			// if Y scale
 			// sets top and bottom
-			top = Math.min(min, max);
-			bottom = Math.max(min, max);
+			top = Math.min(minMaxContainer.getMinimum(), minMaxContainer.getMaximum());
+			bottom = Math.max(minMaxContainer.getMinimum(), minMaxContainer.getMaximum());
 		}
+	}
+
+	/**
+	 * Retrieves the minimum and maximum values from the scale, category one, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
+	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
+	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 */
+	private void retrieveMinMaxFromScaleForString(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+		// --------------
+		// CATEGORY scale
+		// manages String
+		// --------------
+		// gets the minimum and maximum value configured for annotation
+		final String minString = isXScale ? getConfiguration().getXMinAsString() : getConfiguration().getYMinAsString();
+		final String maxString = isXScale ? getConfiguration().getXMaxAsString() : getConfiguration().getYMaxAsString();
+		// gets the position in pixel on chart area for the minimum value
+		minMaxContainer.setMinimum(getValuePositionFromString(minString, scale, minLimit));
+		// gets the position in pixel on chart area for the maximum value
+		minMaxContainer.setMaximum(getValuePositionFromString(maxString, scale, maxLimit));
+	}
+
+	/**
+	 * Retrieves the minimum and maximum values from the scale, time and time-series ones, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
+	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
+	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 */
+	private void retrieveMinMaxFromScaleForDate(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+		// ------------------------
+		// TIME or TIMESERIES scales
+		// manage Date
+		// ------------------------
+		// gets the minimum and maximum value configured for annotation
+		final Date minDate = isXScale ? getConfiguration().getXMinAsDate() : getConfiguration().getYMinAsDate();
+		final Date maxDate = isXScale ? getConfiguration().getXMaxAsDate() : getConfiguration().getYMaxAsDate();
+		// gets the position in pixel on chart area for the minimum value
+		minMaxContainer.setMinimum(getValuePositionFromDate(minDate, scale, minLimit));
+		// gets the position in pixel on chart area for the maximum value
+		minMaxContainer.setMaximum(getValuePositionFromDate(maxDate, scale, maxLimit));
+	}
+
+	/**
+	 * Retrieves the minimum and maximum values from the scale, linear and logarithmic ones, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
+	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
+	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 */
+	private void retrieveMinMaxFromScaleForDouble(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+		// ----------------------------
+		// LINEAR or LOGARITHMIC scales
+		// manage Double
+		// ----------------------------
+		// gets the minimum and maximum value configured for annotation
+		final double minDouble = isXScale ? getConfiguration().getXMinAsDouble() : getConfiguration().getYMinAsDouble();
+		final double maxDouble = isXScale ? getConfiguration().getXMaxAsDouble() : getConfiguration().getYMaxAsDouble();
+		// gets the position in pixel on chart area for the minimum value
+		minMaxContainer.setMinimum(getValuePosition(minDouble, scale, minLimit));
+		// gets the position in pixel on chart area for the maximum value
+		minMaxContainer.setMaximum(getValuePosition(maxDouble, scale, maxLimit));
+	}
+
+	/**
+	 * Internal class to wrap minimum and maximum pixel values.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class MinMaxCointainer {
+
+		private double minimum = Double.NaN;
+
+		private double maximum = Double.NaN;
+
+		/**
+		 * Returns the minimum value.
+		 * 
+		 * @return the minimum value
+		 */
+		double getMinimum() {
+			return minimum;
+		}
+
+		/**
+		 * Sets the minimum value.
+		 * 
+		 * @param minimum the minimum value
+		 */
+		void setMinimum(double minimum) {
+			this.minimum = minimum;
+		}
+
+		/**
+		 * Returns the maximum value.
+		 * 
+		 * @return the maximum value
+		 */
+		double getMaximum() {
+			return maximum;
+		}
+
+		/**
+		 * Sets the maximum value.
+		 * 
+		 * @param maximum the maximum value
+		 */
+		void setMaximum(double maximum) {
+			this.maximum = maximum;
+		}
+
 	}
 
 }

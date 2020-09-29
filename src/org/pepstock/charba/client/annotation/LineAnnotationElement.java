@@ -48,6 +48,8 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	private final Point endingPoint = new Point();
 
 	private boolean isEndValueMissing = false;
+	
+	private final StartEndCointainer startEndCointainer = new StartEndCointainer();
 
 	/**
 	 * Creates an annotation element by an annotation configuration.
@@ -168,73 +170,31 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	 * @param scale scale instance to use to configure
 	 */
 	private void configureScale(ChartAreaNode area, ScaleItem scale) {
-		// creates start and end references
-		double start = UndefinedValues.DOUBLE;
-		double end = UndefinedValues.DOUBLE;
+		// resets start and end references
+		startEndCointainer.setStart(UndefinedValues.DOUBLE);
+		startEndCointainer.setEnd(UndefinedValues.DOUBLE);
 		// checks the data type managed by the selected scale
 		if (ScaleDataType.STRING.equals(scale.getType().getDataType())) {
 			// --------------
 			// CATEGORY scale
 			// manages String
 			// --------------
-			// gets the start value configured for annotation
-			final String startString = getConfiguration().getValueAsString();
-			// checks if start value is consistent
-			if (startString == null) {
-				// does nothing and this annotation is not showed
-				return;
-			}
-			// gets the end value configured for annotation
-			// if not exists, uses the starting value as end one
-			final String endString = getConfiguration().getEndValueAsString() != null ? getConfiguration().getEndValueAsString() : startString;
-			// stores if has end value
-			isEndValueMissing = endString.equals(startString);
-			// gets the position in pixel on chart area for the start value
-			start = getValuePositionFromString(startString, scale, Double.NaN);
-			// gets the position in pixel on chart area for the end value
-			end = getValuePositionFromString(endString, scale, start);
+			// gets the start and end value configured for annotation
+			retrieveStartEndFromScaleForString(scale);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
 			// ------------------------
 			// TIME or TIMESERIES scales
 			// manage Date
 			// ------------------------
-			// gets the start value configured for annotation
-			final Date startDate = getConfiguration().getValueAsDate();
-			// checks if start value is consistent
-			if (startDate == null) {
-				// does nothing and this annotation is not showed
-				return;
-			}
-			// gets the end value configured for annotation
-			// if not exists, uses the starting value as end one
-			final Date endDate = getConfiguration().getEndValueAsDate() != null ? getConfiguration().getEndValueAsDate() : startDate;
-			// stores if has end value
-			isEndValueMissing = endDate.equals(startDate);
-			// gets the position in pixel on chart area for the start value
-			start = getValuePositionFromDate(startDate, scale, Double.NaN);
-			// gets the position in pixel on chart area for the end value
-			end = getValuePositionFromDate(endDate, scale, start);
+			// gets the start and end value configured for annotation
+			retrieveStartEndFromScaleForDate(scale);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
 			// ----------------------------
 			// LINEAR or LOGARITHMIC scales
 			// manage Date
 			// ----------------------------
-			// gets the start value configured for annotation
-			final double startDouble = getConfiguration().getValueAsDouble();
-			// checks if start value is consistent
-			if (Double.isNaN(startDouble)) {
-				// does nothing and this annotation is not showed
-				return;
-			}
-			// gets the end value configured for annotation
-			// if not exists, uses the starting value as end one
-			final double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
-			// stores if has end value
-			isEndValueMissing = Double.isNaN(getConfiguration().getEndValueAsDouble());
-			// gets the position in pixel on chart area for the start value
-			start = getValuePosition(startDouble, scale, Double.NaN);
-			// gets the position in pixel on chart area for the end value
-			end = getValuePosition(endDouble, scale, start);
+			// gets the start and end value configured for annotation
+			retrieveStartEndFromScaleForDouble(scale);
 		}
 		// calculates the start and end
 		// based on the axis kind of scale.
@@ -243,20 +203,104 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			// if scale is vertical
 			// starting point
 			startingPoint.setX(area.getLeft());
-			startingPoint.setY(start);
+			startingPoint.setY(startEndCointainer.getStart());
 			// end point
 			endingPoint.setX(area.getRight());
-			endingPoint.setY(end);
+			endingPoint.setY(startEndCointainer.getEnd());
 		} else if (AxisKind.X.equals(scale.getAxis())) {
 			// always vertical annotation line
 			// if scale is horizontal
 			// starting point
-			startingPoint.setX(start);
+			startingPoint.setX(startEndCointainer.getStart());
 			startingPoint.setY(area.getTop());
 			// end point
-			endingPoint.setX(end);
+			endingPoint.setX(startEndCointainer.getEnd());
 			endingPoint.setY(area.getBottom());
 		}
+	}
+	
+	/**
+	 * Retrieves the start and end values from the scale, category one, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 */
+	private void retrieveStartEndFromScaleForString(ScaleItem scale) {
+		// --------------
+		// CATEGORY scale
+		// manages String
+		// --------------
+		// gets the start value configured for annotation
+		final String startString = getConfiguration().getValueAsString();
+		// checks if start value is consistent
+		if (startString == null) {
+			// does nothing and this annotation is not showed
+			return;
+		}
+		// gets the end value configured for annotation
+		// if not exists, uses the starting value as end one
+		final String endString = getConfiguration().getEndValueAsString() != null ? getConfiguration().getEndValueAsString() : startString;
+		// stores if has end value
+		isEndValueMissing = endString.equals(startString);
+		// gets the position in pixel on chart area for the start value
+		startEndCointainer.setStart(getValuePositionFromString(startString, scale, Double.NaN));
+		// gets the position in pixel on chart area for the end value
+		startEndCointainer.setEnd(getValuePositionFromString(endString, scale, startEndCointainer.getStart()));
+	}
+
+	/**
+	 * Retrieves the start and end values from the scale, time and time-series ones, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 */
+	private void retrieveStartEndFromScaleForDate(ScaleItem scale) {
+		// ------------------------
+		// TIME or TIMESERIES scales
+		// manage Date
+		// ------------------------
+		// gets the start value configured for annotation
+		final Date startDate = getConfiguration().getValueAsDate();
+		// checks if start value is consistent
+		if (startDate == null) {
+			// does nothing and this annotation is not showed
+			return;
+		}
+		// gets the end value configured for annotation
+		// if not exists, uses the starting value as end one
+		final Date endDate = getConfiguration().getEndValueAsDate() != null ? getConfiguration().getEndValueAsDate() : startDate;
+		// stores if has end value
+		isEndValueMissing = endDate.equals(startDate);
+		// gets the position in pixel on chart area for the start value
+		startEndCointainer.setStart(getValuePositionFromDate(startDate, scale, Double.NaN));
+		// gets the position in pixel on chart area for the end value
+		startEndCointainer.setEnd(getValuePositionFromDate(endDate, scale, startEndCointainer.getStart()));
+	}
+
+	/**
+	 * Retrieves the start and end values from the scale, linear and logarithmic ones, in pixel.
+	 * 
+	 * @param scale scale instance to use to configure
+	 */
+	private void retrieveStartEndFromScaleForDouble(ScaleItem scale) {
+		// ----------------------------
+		// LINEAR or LOGARITHMIC scales
+		// manage Double
+		// ----------------------------
+		// gets the minimum and maximum value configured for annotation
+		final double startDouble = getConfiguration().getValueAsDouble();
+		// checks if start value is consistent
+		if (Double.isNaN(startDouble)) {
+			// does nothing and this annotation is not showed
+			return;
+		}
+		// gets the end value configured for annotation
+		// if not exists, uses the starting value as end one
+		final double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
+		// stores if has end value
+		isEndValueMissing = Double.isNaN(getConfiguration().getEndValueAsDouble());
+		// gets the position in pixel on chart area for the start value
+		startEndCointainer.setStart(getValuePosition(startDouble, scale, Double.NaN));
+		// gets the position in pixel on chart area for the end value
+		startEndCointainer.setEnd(getValuePosition(endDouble, scale, startEndCointainer.getStart()));
 	}
 
 	/*
@@ -370,6 +414,56 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			// checks if the coordinates are over the line
 			return (!Double.isFinite(dy) || Math.abs(y - dy) < epsilon) && (!Double.isFinite(dx) || Math.abs(x - dx) < epsilon);
 		}
+	}
+	
+	/**
+	 * Internal class to wrap start and end pixel values.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class StartEndCointainer {
+
+		private double start = Double.NaN;
+
+		private double end = Double.NaN;
+
+		/**
+		 * Returns the start value.
+		 * 
+		 * @return the start value
+		 */
+		double getStart() {
+			return start;
+		}
+
+		/**
+		 * Sets the start value.
+		 * 
+		 * @param start the start value
+		 */
+		void setStart(double start) {
+			this.start = start;
+		}
+
+		/**
+		 * Returns the end value.
+		 * 
+		 * @return the end value
+		 */
+		double getEnd() {
+			return end;
+		}
+
+		/**
+		 * Sets the end value.
+		 * 
+		 * @param end the end value
+		 */
+		void setEnd(double end) {
+			this.end = end;
+		}
+
 	}
 
 }
