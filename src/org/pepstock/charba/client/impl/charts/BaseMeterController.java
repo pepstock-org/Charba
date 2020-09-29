@@ -154,7 +154,7 @@ final class BaseMeterController extends AbstractController {
 		// sets the flag
 		// needed into draw to know if the labels must be drawn or not
 		// if resize, do not invoke the animation
-		fromUpdate = DefaultAnimationModeKey.RESIZE.equals(mode) ? false : true;
+		fromUpdate = !DefaultAnimationModeKey.RESIZE.equals(mode);
 		// update the doughnut chart
 		super.update(context, chart, mode);
 	}
