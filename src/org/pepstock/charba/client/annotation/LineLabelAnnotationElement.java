@@ -283,11 +283,11 @@ final class LineLabelAnnotationElement {
 		} else if (AxisKind.X.equals(scale.getAxis())) {
 			// if here, the scale is HORIZONTAL
 			// then the line and label will be VERTICAL
-			calculateLabelPositionForHorizontalScale(result, lineStartingPoint, lineEndingPoint, scale, width, height);
+			calculateLabelPositionForHorizontalScale(result, lineStartingPoint, lineEndingPoint, width, height);
 		} else if (AxisKind.Y.equals(scale.getAxis())) {
 			// if here, the scale is VERTICAL
 			// then the line and label will be HORIZONTAL
-			calculateLabelPositionForVerticalScale(result, lineStartingPoint, lineEndingPoint, scale, width, height);
+			calculateLabelPositionForVerticalScale(result, lineStartingPoint, lineEndingPoint, width, height);
 		}
 		return result;
 	}
@@ -335,11 +335,10 @@ final class LineLabelAnnotationElement {
 	 * @param result the point instance to be updated with new coordinates
 	 * @param lineStartingPoint the starting point instance of the line
 	 * @param lineEndingPoint the ending point instance of the line
-	 * @param scale scale instance, configured to be used by annotation element
 	 * @param width width of label
 	 * @param height height of label
 	 */
-	private void calculateLabelPositionForHorizontalScale(Point result, Point lineStartingPoint, Point lineEndingPoint, ScaleItem scale, double width, double height) {
+	private void calculateLabelPositionForHorizontalScale(Point result, Point lineStartingPoint, Point lineEndingPoint, double width, double height) {
 		// checks if the label has been required to be to top
 		if (LineLabelPosition.TOP.equals(label.getPosition())) {
 			// gets the filler part on top
@@ -373,11 +372,10 @@ final class LineLabelAnnotationElement {
 	 * @param result the point instance to be updated with new coordinates
 	 * @param lineStartingPoint the starting point instance of the line
 	 * @param lineEndingPoint the ending point instance of the line
-	 * @param scale scale instance, configured to be used by annotation element
 	 * @param width width of label
 	 * @param height height of label
 	 */
-	private void calculateLabelPositionForVerticalScale(Point result, Point lineStartingPoint, Point lineEndingPoint, ScaleItem scale, double width, double height) {
+	private void calculateLabelPositionForVerticalScale(Point result, Point lineStartingPoint, Point lineEndingPoint, double width, double height) {
 		// checks if the label has been required to be to left
 		if (LineLabelPosition.LEFT.equals(label.getPosition())) {
 			// gets the filler part on left
