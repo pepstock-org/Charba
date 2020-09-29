@@ -100,7 +100,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public List<Axis> getAxes() {
 		// sets reference
-		List<Axis> result = storedAxes.isEmpty() ? Collections.emptyList() : new LinkedList<Axis>(storedAxes.values());
+		List<Axis> result = storedAxes.isEmpty() ? Collections.emptyList() : new LinkedList<>(storedAxes.values());
 		// returns the unmodifiable list
 		return Collections.unmodifiableList(result);
 	}

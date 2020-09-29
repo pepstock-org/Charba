@@ -189,7 +189,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.storeType = Key.checkAndGetIfValid(type);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(new ConfigurationEnvelop<IsScaleId>(id), type, kind, getDefaultScale(id, kind)));
+		setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(id), type, kind, getDefaultScale(id, kind)));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

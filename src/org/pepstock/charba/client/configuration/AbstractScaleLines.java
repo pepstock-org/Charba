@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLines;
 
 /**
@@ -112,13 +111,13 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// -------------------------------
 		// gets value calling callback
 		colorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), colorCallback, defaultValues.getColorAsString(), false));
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback, defaultValues.getColorAsString(), false));
 		// gets value calling callback
 		lineWidthCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
 		// gets value calling callback
 		borderDashOffsetCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).intValue());
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).intValue());
 	}
 
 	/**

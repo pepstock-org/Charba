@@ -96,7 +96,7 @@ public final class BorderAligner extends NativeObjectContainer {
 		// -------------------------------
 		// gets value and calls the callback
 		borderAlignCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataEnvelop<NativeObject>(context)), borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataEnvelop<>(context)), borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**

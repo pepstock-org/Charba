@@ -25,7 +25,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * This object is used to map defined radial axis as linear.
@@ -98,10 +97,10 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// -------------------------------
 		// gets value calling callback
 		backdropColorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
 		// gets value calling callback
 		showLabelBackdropCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<NativeObject>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
 
 	/**

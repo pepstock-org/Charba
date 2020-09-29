@@ -78,7 +78,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 		super(legend, childKey, defaultValues, nativeObject);
 		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		// creates the legend texter
-		this.legendtexter = new LegendTexter(new OptionsEnvelop<NativeObject>(getNativeObject()), legend);
+		this.legendtexter = new LegendTexter(new OptionsEnvelop<>(getNativeObject()), legend);
 	}
 
 	/**

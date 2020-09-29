@@ -51,12 +51,12 @@ final class LiningDatasetFiller extends Filler {
 	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
 	LiningDatasetFiller(NativeObject nativeObject, IsFill defaultValue) {
-		super(new DataEnvelop<NativeObject>(nativeObject), defaultValue);
+		super(new DataEnvelop<>(nativeObject), defaultValue);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(new DataEnvelop<NativeObject>(context))));
+		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(new DataEnvelop<>(context))));
 	}
 
 	/*
