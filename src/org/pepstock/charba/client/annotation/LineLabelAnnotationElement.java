@@ -78,10 +78,10 @@ final class LineLabelAnnotationElement {
 	 */
 	void configure(ScaleItem scale) {
 		// gets the label content
-		List<String> content = label.getContent();
+		List<String> labelContent = label.getContent();
 		// checks if the label must be drawn
 		// and if content is consistent
-		if (label.isEnabled() && !content.isEmpty()) {
+		if (label.isEnabled() && !labelContent.isEmpty()) {
 			// gets context 2d, needed to calculate
 			// the height and width of label
 			// based on the font
@@ -94,10 +94,10 @@ final class LineLabelAnnotationElement {
 			final double textWidth;
 			final double textHeight = label.getFontSize();
 			// checks if there is only 1 element
-			if (content.size() == 1) {
+			if (labelContent.size() == 1) {
 				// the label content is a simple row
 				// gets text metrics by context 2d by the label content
-				TextMetricsItem metrics = ctx.measureText(content.get(0));
+				TextMetricsItem metrics = ctx.measureText(labelContent.get(0));
 				// in order to get the width of the content
 				textWidth = metrics.getWidth();
 				// calculates the height adding padding
@@ -106,13 +106,13 @@ final class LineLabelAnnotationElement {
 				// the label content is multiple rows
 				// calculates the longest element of content of label
 				// to get the max width of label
-				String longestLabelContent = Collections.max(content, COMPARATOR);
+				String longestLabelContent = Collections.max(labelContent, COMPARATOR);
 				// gets text metrics by context 2d by the longest content of label
 				TextMetricsItem metrics = ctx.measureText(longestLabelContent);
 				// in order to get the width of the content
 				textWidth = metrics.getWidth();
 				// calculates the height adding padding also between every rows of content
-				labelHeight = (textHeight * content.size()) + (label.getYPadding() * 2) + (label.getYPadding() * (content.size() - 1));
+				labelHeight = (textHeight * labelContent.size()) + (label.getYPadding() * 2) + (label.getYPadding() * (labelContent.size() - 1));
 			}
 			// calculate label position
 			Point position = calculateLabelPosition(scale, textWidth, textHeight);
