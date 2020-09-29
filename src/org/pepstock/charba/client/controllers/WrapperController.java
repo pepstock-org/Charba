@@ -263,7 +263,7 @@ final class WrapperController extends NativeObjectContainer {
 		// invoke user method implementation
 		addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
 		// invoke user method implementation
-		drawCallbackProxy.setCallback((context) -> onDraw(context, context.getChart()));
+		drawCallbackProxy.setCallback(context -> onDraw(context, context.getChart()));
 		// invoke user method implementation
 		removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
@@ -271,9 +271,9 @@ final class WrapperController extends NativeObjectContainer {
 		// invoke user method implementation
 		updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
 		// invoke user method implementation
-		linkScalesCallbackProxy.setCallback((context) -> onLinkScales(context, context.getChart()));
+		linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
 		// invoke user method implementation
-		buildOrUpdateElements.setCallback((context) -> onBuildOrUpdateElements(context, context.getChart()));
+		buildOrUpdateElements.setCallback(context -> onBuildOrUpdateElements(context, context.getChart()));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
