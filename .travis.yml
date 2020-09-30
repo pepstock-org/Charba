@@ -27,8 +27,8 @@ cache:
    - $HOME/.ant
 # specify the JDKs 
 jdk:
-   - openjdk8
-#   - oraclejdk8
+   - openjdk11
+#   - openjdk8
 # specify the branches to build from
 branches:
    only:
@@ -38,7 +38,9 @@ branches:
 # BUILD phase
 #
 # download Ivy, if needed
-before_install: ant init
+before_install: 
+   - ant init
+   - nvm install "12"
 # added this statement to avoid to download
 # maven dependencies
 install: /bin/true
