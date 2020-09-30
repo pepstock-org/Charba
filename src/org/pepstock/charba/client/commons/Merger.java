@@ -89,6 +89,21 @@ public final class Merger {
 	}
 
 	/**
+	 * Merges the chart options, built after the chart initialization on the chart configuration in order that the configuration can contain all values, also the defaults.
+	 * 
+	 * @param options chart options configuration
+	 * @param envelop the envelop for options as native options
+	 */
+	public void load(NativeObjectContainer options, ChartEnvelop<NativeObject> envelop) {
+		// checks if envelop is consistent
+		if (IsEnvelop.isValid(envelop)) {
+			// clones native object of native chart options
+			// on chart configuration
+			mergeNativeObjects(options.getNativeObject(), envelop.getContent());
+		}
+	}
+
+	/**
 	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global options (by chart.defaults.global) and chart options.<br>
 	 * The chain of priority is:<br>
 	 * <ul>
