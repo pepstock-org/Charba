@@ -19,7 +19,6 @@
     "chartjs-adapter-date-fns": "1.0.0",
     "chartjs-plugin-datalabels": "0.7.0",
     "chartjs-plugin-zoom": "0.7.5",
-    "hammerjs": "2.0.8",
-    "chartjs-plugin-annotation": "v0.5.7"
+    "hammerjs": "2.0.8"
   }
 }
