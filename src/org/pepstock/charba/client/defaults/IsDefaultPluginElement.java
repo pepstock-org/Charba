@@ -15,32 +15,36 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.DefaultPluginId;
+import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.Position;
+
 /**
- * Interface to define title object defaults.
+ * Interface to define the common properties of chart element related to default plugins, {@link DefaultPluginId#TITLE} and {@link DefaultPluginId#LEGEND}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultPluginElement{
+public interface IsDefaultPluginElement {
 
 	/**
-	 * Returns the font defaults.
+	 * Returns if the element is shown.
 	 * 
-	 * @return the font defaults.
+	 * @return if the element is shown.
 	 */
-	IsDefaultFont getFont();
+	boolean isDisplay();
 
 	/**
-	 * Returns the padding to apply around labels. Only top and bottom are implemented.
+	 * Returns the position of element.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented.
+	 * @return the position of element.
 	 */
-	int getPadding();
+	Position getPosition();
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns the alignment of the element.
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return alignment of the element.
 	 */
-	boolean isFullWidth();
+	ElementAlign getAlign();
 
 }

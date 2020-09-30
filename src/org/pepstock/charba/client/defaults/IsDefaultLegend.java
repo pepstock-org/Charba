@@ -15,15 +15,12 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.Position;
-
 /**
  * Interface to define legends object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLegend extends IsDefaultTextDirectioner {
+public interface IsDefaultLegend extends IsDefaultTextDirectioner, IsDefaultPluginElement {
 
 	/**
 	 * Returns the labels object defaults.
@@ -40,13 +37,6 @@ public interface IsDefaultLegend extends IsDefaultTextDirectioner {
 	IsDefaultLegendTitle getTitle();
 
 	/**
-	 * Returns <code>true</code> if the legend is shown.
-	 * 
-	 * @return <code>true</code> if the legend is shown.
-	 */
-	boolean isDisplay();
-
-	/**
 	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
 	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
@@ -59,19 +49,5 @@ public interface IsDefaultLegend extends IsDefaultTextDirectioner {
 	 * @return legend will show datasets in reverse order.
 	 */
 	boolean isReverse();
-
-	/**
-	 * Returns the position of the legend.
-	 * 
-	 * @return position of the legend.
-	 */
-	Position getPosition();
-
-	/**
-	 * Returns the alignment of the legend.
-	 * 
-	 * @return alignment of the legend.
-	 */
-	ElementAlign getAlign();
 
 }

@@ -18,8 +18,6 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
-import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.Position;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -27,7 +25,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
+public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
 
 	private final LegendLabels labels;
 
@@ -43,9 +41,6 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 		LABELS("labels"),
 		TITLE("title"),
 		// simple properties
-		DISPLAY("display"),
-		POSITION("position"),
-		ALIGN("align"),
 		FULL_WIDTH("fullWidth"),
 		REVERSE("reverse"),
 		RTL("rtl"),
@@ -120,69 +115,6 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	@Override
 	public LegendTitle getTitle() {
 		return title;
-	}
-
-	/**
-	 * Sets if the legend is shown.
-	 * 
-	 * @param display if the legend is shown.
-	 */
-	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns if the legend is shown.
-	 * 
-	 * @return <code>true</code> if the legend is shown.
-	 */
-	@Override
-	public boolean isDisplay() {
-		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/**
-	 * Sets the position of the legend.
-	 * 
-	 * @param position Position of the legend.
-	 */
-	public void setPosition(Position position) {
-		setValue(Property.POSITION, position);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the position of the legend.
-	 * 
-	 * @return position of the legend.
-	 */
-	@Override
-	public Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
-	}
-
-	/**
-	 * Sets the alignment of the legend.
-	 * 
-	 * @param alignment alignment of the legend.
-	 */
-	public void setAlign(ElementAlign alignment) {
-		setValue(Property.ALIGN, alignment);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the alignment of the legend.
-	 * 
-	 * @return alignment of the legend.
-	 */
-	@Override
-	public ElementAlign getAlign() {
-		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
 	}
 
 	/**

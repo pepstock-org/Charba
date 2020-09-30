@@ -22,8 +22,6 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -32,17 +30,14 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractModel<Options, IsDefaultTitle> implements IsDefaultTitle {
+public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> implements IsDefaultTitle {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		ALIGN("align"),
-		DISPLAY("display"),
 		FONT("font"),
-		POSITION("position"),
 		PADDING("padding"),
 		FULL_WIDTH("fullWidth"),
 		TEXT("text");
@@ -95,69 +90,6 @@ public final class Title extends AbstractModel<Options, IsDefaultTitle> implemen
 	@Override
 	public Font getFont() {
 		return font;
-	}
-
-	/**
-	 * Sets <code>true</code> if the title is shown.
-	 * 
-	 * @param display if <code>true</code> the title is shown.
-	 */
-	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns <code>true</code> if the title is shown.
-	 * 
-	 * @return if <code>true</code> the title is shown.
-	 */
-	@Override
-	public boolean isDisplay() {
-		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/**
-	 * Sets the position of title.
-	 * 
-	 * @param position the position of title.
-	 */
-	public void setPosition(Position position) {
-		setValue(Property.POSITION, position);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the position of title.
-	 * 
-	 * @return the position of title.
-	 */
-	@Override
-	public Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
-	}
-
-	/**
-	 * Sets the alignment of the title.
-	 * 
-	 * @param alignment alignment of the title.
-	 */
-	public void setAlign(ElementAlign alignment) {
-		setValue(Property.ALIGN, alignment);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the alignment of the title.
-	 * 
-	 * @return alignment of the title.
-	 */
-	@Override
-	public ElementAlign getAlign() {
-		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
 	}
 
 	/**
