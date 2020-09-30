@@ -35,7 +35,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation {
+public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
 
 	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
@@ -47,6 +47,8 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	private final Font bodyFont;
 	// instance of font for footer
 	private final Font footerFont;
+	// instance of boxer
+	private final Boxer boxer;
 
 	/**
 	 * Name of properties of native object.
@@ -76,8 +78,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		CORNER_RADIUS("cornerRadius"),
 		MULTI_KEY_BACKGROUND("multiKeyBackground"),
 		DISPLAY_COLORS("displayColors"),
-		BOX_WIDTH("boxWidth"),
-		BOX_HEIGHT("boxHeight"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth");
 
@@ -128,6 +128,18 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
+		// creates the boxer
+		this.boxer = new Boxer(getNativeObject(), this, defaultValues);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasBox#getBoxer()
+	 */
+	@Override
+	public Boxer getBoxer() {
+		return boxer;
 	}
 
 	/**
@@ -724,48 +736,6 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
-	}
-
-	/**
-	 * Sets the width of of the colored box if displayColors is <code>true</code>..
-	 * 
-	 * @param boxWidth width of colored box.
-	 */
-	public void setBoxWidth(int boxWidth) {
-		setValue(Property.BOX_WIDTH, boxWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the width of the colored box if displayColors is <code>true</code>..
-	 * 
-	 * @return width of colored box.
-	 */
-	@Override
-	public int getBoxWidth() {
-		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
-	}
-
-	/**
-	 * Sets the height of the colored box if displayColors is <code>true</code>..
-	 * 
-	 * @param boxHeight width of colored box.
-	 */
-	public void setBoxHeight(int boxHeight) {
-		setValue(Property.BOX_HEIGHT, boxHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the height of the colored box if displayColors is <code>true</code>..
-	 * 
-	 * @return height of colored box.
-	 */
-	@Override
-	public int getBoxHeight() {
-		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
 	}
 
 }

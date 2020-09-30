@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels {
+public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasBox {
 
 	/**
 	 * Name of properties of native object.
@@ -32,8 +32,6 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	private enum Property implements Key
 	{
 		FONT("font"),
-		BOX_WIDTH("boxWidth"),
-		BOX_HEIGHT("boxHeight"),
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
 
@@ -63,6 +61,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 
 	// instance of font
 	private final Font font;
+	// instance of boxer
+	private final Boxer boxer;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -74,7 +74,19 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	LegendLabels(Legend legend, Key childKey, IsDefaultLegendLabels defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		// creates the boxer
+		this.boxer = new Boxer(getNativeObject(), this, defaultValues);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasBox#getBoxer()
+	 */
+	@Override
+	public Boxer getBoxer() {
+		return boxer;
 	}
 
 	/**
@@ -106,48 +118,6 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	@Override
 	public boolean isUsePointStyle() {
 		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());
-	}
-
-	/**
-	 * Sets the width of colored box.
-	 * 
-	 * @param boxWidth width of colored box.
-	 */
-	public void setBoxWidth(int boxWidth) {
-		setValue(Property.BOX_WIDTH, boxWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the width of colored box.
-	 * 
-	 * @return width of colored box.
-	 */
-	@Override
-	public int getBoxWidth() {
-		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
-	}
-
-	/**
-	 * Sets the height of colored box.
-	 * 
-	 * @param boxHeight width of colored box.
-	 */
-	public void setBoxHeight(int boxHeight) {
-		setValue(Property.BOX_HEIGHT, boxHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the height of colored box.
-	 * 
-	 * @return height of colored box.
-	 */
-	@Override
-	public int getBoxHeight() {
-		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
 	}
 
 	/**

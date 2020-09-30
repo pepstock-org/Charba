@@ -16,32 +16,25 @@
 package org.pepstock.charba.client.defaults;
 
 /**
- * Interface to define legend labels object defaults.
+ * Interface to define box dimension of options elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendLabels extends IsDefaultBoxer{
+public interface IsDefaultBoxer {
 
 	/**
-	 * Returns the font defaults.
+	 * Returns the width of colored box.
 	 * 
-	 * @return the font defaults.
+	 * @return width of colored box.
 	 */
-	IsDefaultFont getFont();
+	int getBoxWidth();
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * Returns the height of colored box.
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @return height of colored box.
 	 */
-	boolean isUsePointStyle();
-
-	/**
-	 * Returns the padding to apply around labels. Only top and bottom are implemented.
-	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented.
-	 */
-	int getPadding();
+	int getBoxHeight();
 
 }
