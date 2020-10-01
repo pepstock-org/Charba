@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.PropertyKey;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsScaleId extends Key {
+public interface IsScaleId extends PropertyKey {
 
 	/**
 	 * Returns a key instance by its string value.
@@ -52,7 +52,7 @@ public interface IsScaleId extends Key {
 	 * @return <code>true</code> if scale id passed as argument is not <code>null</code> and its value could be a valid scale id.
 	 */
 	static boolean isValid(String id) {
-		return ScaleIdChecker.isValid(id);
+		return PropertyKey.isValid(id);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public interface IsScaleId extends Key {
 	 * @return <code>true</code> if scale id passed as argument is not <code>null</code> and its value is not <code>null</code> as well and could be a valid scale id.
 	 */
 	static boolean isValid(IsScaleId id) {
-		return Key.isValid(id) && isValid(id.value());
+		return PropertyKey.isValid(id);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public interface IsScaleId extends Key {
 	 * @param id scale id to be checked
 	 */
 	static void checkIfValid(IsScaleId id) {
-		ScaleIdChecker.check(id);
+		PropertyKey.checkIfValid(id);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public interface IsScaleId extends Key {
 	 * @param id scale id as string to be checked
 	 */
 	static void checkIfValid(String id) {
-		ScaleIdChecker.check(id);
+		PropertyKey.checkIfValid(id);
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 */
 	public boolean hasAxis(IsScaleId scaleId) {
 		// checks if the scale id is consistent
-		ScaleIdChecker.check(scaleId);
+		IsScaleId.checkIfValid(scaleId);
 		// checks if the scale id exist
 		return has(scaleId);
 	}
@@ -87,7 +87,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 */
 	public Scale getAxis(IsScaleId scaleId) {
 		// checks if the scale id is consistent
-		ScaleIdChecker.check(scaleId);
+		IsScaleId.checkIfValid(scaleId);
 		// checks if the scale id exist
 		if (has(scaleId)) {
 			// gets and creates the scale

@@ -13,18 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.utils.RegExp;
 
 /**
- * This utility checks if the scale ID is acceptable or not.
+ * This utility checks if the property key is acceptable or not.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class ScaleIdChecker {
+final class PropertyKeyChecker {
 
 	// regexp to check if there is an uppercase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
@@ -32,78 +30,78 @@ final class ScaleIdChecker {
 	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
 	// regexp pattern to have only letters and number
 	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_-]+$";
-	// regxp objetc to perform check
+	// regxp object to perform check
 	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private ScaleIdChecker() {
+	private PropertyKeyChecker() {
 		// do nothing
 	}
 
 	/**
-	 * Returns <code>true</code> if the scale is compliant with the constraints of scale id.<br>
+	 * Returns <code>true</code> if the passed id is compliant with the constraints of property key.<br>
 	 * A scale id <br>
 	 * <ul>
 	 * <li>can not contain any non-URL-safe characters
 	 * <li>cannot contain upper case letters
 	 * </ul>
 	 * 
-	 * @param id scale id to be checked.
-	 * @return <code>true</code> if the scale is compliant with the constraints of scale id
+	 * @param id property key to be checked.
+	 * @return <code>true</code> if the passed id is compliant with the constraints of property key
 	 */
 	static boolean isValid(String id) {
 		return (id != null && REGEXP_HAS_UPPERCASE.exec(id) == null && REGEXP_ID.exec(id) != null);
 	}
 
 	/**
-	 * Checks if the scale is compliant with the constraints of scale id.<br>
+	 * Checks if the passed id is compliant with the constraints of property key.<br>
 	 * A scale id <br>
 	 * <ul>
 	 * <li>can not contain any non-URL-safe characters
 	 * <li>cannot contain upper case letters
 	 * </ul>
 	 * 
-	 * @param id scale id to be checked.
+	 * @param id property key to be checked.
 	 */
 	static void check(String id) {
 		// checks if is null
 		if (id == null) {
-			throw new IllegalArgumentException("Scale id can not be null");
+			throw new IllegalArgumentException("Property key can not be null");
 		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
 			// checks if contains upper case letters
-			throw new IllegalArgumentException(buildMessage(id, "Scale id can not contain uppercase letters "));
+			throw new IllegalArgumentException(buildMessage(id, "Property key can not contain uppercase letters "));
 		} else if (REGEXP_ID.exec(id) == null) {
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, "Scale id can not contain any invalid characters "));
+			throw new IllegalArgumentException(buildMessage(id, "Property key can not contain any invalid characters "));
 		}
 	}
 
 	/**
-	 * Checks if the scale is compliant with the constraints of scale id.<br>
+	 * Checks if the passed id is compliant with the constraints of property key.<br>
 	 * A scale id <br>
 	 * <ul>
 	 * <li>can not contain any non-URL-safe characters
 	 * <li>cannot contain upper case letters
 	 * </ul>
 	 * 
-	 * @param id scale id to be checked.
+	 * @param id property key to be checked.
 	 */
-	static void check(IsScaleId id) {
+	static void check(PropertyKey id) {
 		check(Key.checkAndGetIfValid(id).value());
 	}
 
 	/**
 	 * Creates the message for the exception.
 	 * 
-	 * @param scaleId scale id
+	 * @param propertyKey property key instance
 	 * @param message message
 	 * @return message for exception
 	 */
-	private static String buildMessage(String scaleId, String message) {
+	private static String buildMessage(String propertyKey, String message) {
 		StringBuilder sb = new StringBuilder(message);
-		sb.append(Constants.OPEN_SQUARE_BRACKET).append(scaleId).append(Constants.CLOSE_SQUARE_BRACKET);
+		sb.append(Constants.OPEN_SQUARE_BRACKET).append(propertyKey).append(Constants.CLOSE_SQUARE_BRACKET);
 		return sb.toString();
 	}
 

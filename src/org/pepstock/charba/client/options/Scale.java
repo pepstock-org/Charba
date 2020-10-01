@@ -126,7 +126,7 @@ public class Scale extends AbstractScale {
 	 */
 	final void setId(IsScaleId id) {
 		// checks if key is consistent
-		ScaleIdChecker.check(id);
+		IsScaleId.checkIfValid(id);
 		// if the scale id is UNKNWON (set by Charba)
 		// does not store
 		// this is for radial axis where id must miss
