@@ -87,13 +87,13 @@ public enum Id implements Key
 	}
 
 	/**
-	 * Returns the property value from java script object, when the ID is stored as integer
+	 * Returns the property value from java script object, when it is stored as integer.
 	 * 
 	 * @param key the key to search inside the object
 	 * @param nativeObject java script object
 	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
 	 */
-	public static int get(Key key, NativeObject nativeObject) {
+	public static int getIntegerProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
 			// gets descriptor
@@ -103,5 +103,24 @@ public enum Id implements Key
 		}
 		// property doesn't exist
 		return UndefinedValues.INTEGER;
+	}
+	
+	/**
+	 * Returns the property value from java script object, when the ID is stored as string.
+	 * 
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link UndefinedValues#STRING} if not exist
+	 */
+	public static String getStringProperty(Key key, NativeObject nativeObject) {
+		// checks if arguments are consistent and property exists
+		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
+			// gets descriptor
+			NativeStringDescriptor descriptor = nativeObject.getStringProperty(key.value());
+			// if descriptor is consistent, return value
+			return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
+		}
+		// property doesn't exist
+		return UndefinedValues.STRING;
 	}
 }

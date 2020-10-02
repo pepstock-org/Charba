@@ -15,13 +15,43 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.callbacks.ClickCallback;
+import org.pepstock.charba.client.annotation.callbacks.EnterCallback;
+import org.pepstock.charba.client.annotation.callbacks.LeaveCallback;
+import org.pepstock.charba.client.annotation.enums.DrawTime;
+
 /**
- * This is the {@link Annotation#ID} plugin annotation DEFAULTS options interface.
+ * This is the {@link Annotation#ID} plugin annotation DEFAULTS options interface in order to map the common attributes for all annotations.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultsAnnotation {
+
+	/**
+	 * Returns the type of annotation.
+	 * 
+	 * @return the type of annotation
+	 */
+	AnnotationType getType();
+
+	/**
+	 * Returns <code>true</code> whether the annotation is enabled and should be displayed.
+	 * 
+	 * @return <code>true</code> whether the annotation is enabled and should be displayed
+	 */
+	default boolean isEnabled() {
+		return AbstractAnnotation.DEFAULT_ENABLED;
+	}
+
+	/**
+	 * Returns the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the draw time which defines when the annotations are drawn
+	 */
+	default DrawTime getDrawTime() {
+		return AnnotationOptions.DEFAULT_DRAW_TIME;
+	}
 
 	/**
 	 * Returns the color of the border of annotation.
@@ -37,4 +67,30 @@ interface IsDefaultsAnnotation {
 	 */
 	int getBorderWidth();
 
+	/**
+	 * Returns the callback called when a mouse event is occurring, entering on annotation element.
+	 * 
+	 * @return the callback called when a mouse event is occurring, entering on annotation element
+	 */
+	default EnterCallback getEnterCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called when a mouse event is occurring, leaving the annotation element.
+	 * 
+	 * @return the callback called when a mouse event is occurring, leaving the annotation element
+	 */
+	default LeaveCallback getLeaveCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called when a mouse event is occurring, clicking on the annotation element.
+	 * 
+	 * @return the callback called when a mouse event is occurring, clicking on the annotation element
+	 */
+	default ClickCallback getClickCallback() {
+		return null;
+	}
 }

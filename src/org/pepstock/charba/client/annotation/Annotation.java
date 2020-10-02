@@ -20,11 +20,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
@@ -52,6 +55,8 @@ public final class Annotation extends AbstractPlugin {
 	private final Map<String, AnnotationOptions> pluginOptions = new HashMap<>();
 	// map to maintain the annotation elements for every chart
 	private final Map<String, List<AbstractAnnotationElement<?>>> annotationElements = new HashMap<>();
+	// map to maintain all annotation instances, acts as a cache
+	private final Map<Integer, AbstractAnnotation> annotationInstancesCache = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -94,12 +99,12 @@ public final class Annotation extends AbstractPlugin {
 			IsDefaultScaledOptions options = chart.getWholeOptions();
 			// checks if the plugin has been configured
 			if (options.getPlugins().hasOptions(ID)) {
-				// if here, is configured and loads teh configuration
+				// if here, is configured and loads the configuration
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
 				// if here, there is not any configuration
 				// then it uses teh default
-				pOptions = new AnnotationOptions(DefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new AnnotationOptions(AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores the options into cache
 			pluginOptions.put(chart.getId(), pOptions);
@@ -113,19 +118,22 @@ public final class Annotation extends AbstractPlugin {
 			final DrawTime defaultDrawTime = pOptions.hasDrawTime() ? pOptions.getDrawTime() : null;
 			// scans loading the draw time
 			for (AbstractAnnotation annotation : pOptions.getAnnotations()) {
-				// sets default draw time
-				annotation.setDefaultDrawTime(defaultDrawTime);
-				// checks and loads annotation elements
-				if (annotation instanceof BoxAnnotation) {
-					// casts to box annotation
-					BoxAnnotation boxAnnotation = (BoxAnnotation) annotation;
-					// adds new box annotation element
-					listOfElements.add(new BoxAnnotationElement(chart, boxAnnotation));
-				} else if (annotation instanceof LineAnnotation) {
-					// casts to line annotation
-					LineAnnotation lineAnnotation = (LineAnnotation) annotation;
-					// adds new line annotation element
-					listOfElements.add(new LineAnnotationElement(chart, lineAnnotation));
+				// checks if annotation is enabled
+				if (annotation.isEnabled()) {
+					// sets default draw time
+					annotation.setDefaultDrawTime(defaultDrawTime);
+					// checks and loads annotation elements
+					if (annotation instanceof BoxAnnotation) {
+						// casts to box annotation
+						BoxAnnotation boxAnnotation = (BoxAnnotation) annotation;
+						// adds new box annotation element
+						listOfElements.add(new BoxAnnotationElement(chart, boxAnnotation));
+					} else if (annotation instanceof LineAnnotation) {
+						// casts to line annotation
+						LineAnnotation lineAnnotation = (LineAnnotation) annotation;
+						// adds new line annotation element
+						listOfElements.add(new LineAnnotationElement(chart, lineAnnotation));
+					}
 				}
 			}
 		}
@@ -251,5 +259,89 @@ public final class Annotation extends AbstractPlugin {
 			// scans all old elements to destroy them
 			oldListOfElements.forEach(AbstractAnnotationElement::destroy);
 		}
+	}
+
+	/**
+	 * Adds an annotation configuration into the cache.
+	 * 
+	 * @param annotation annotation configuration instance to store into the cache
+	 */
+	void addAnnotation(AbstractAnnotation annotation) {
+		// checks if annotation argument is consistent
+		if (annotation != null && annotation.getAnnotationId() != UndefinedValues.INTEGER) {
+			// stores the annotation configuration
+			annotationInstancesCache.put(annotation.getAnnotationId(), annotation);
+		}
+	}
+
+	/**
+	 * Retrieves a cached annotation configuration item, previously stored.
+	 * 
+	 * @param annotationId annotation id to use to get the annotation configuration item
+	 * @return a cached annotation configuration item or <code>null</code> if not exist
+	 */
+	AbstractAnnotation getAnnotation(int annotationId) {
+		return annotationInstancesCache.get(annotationId);
+	}
+
+	/**
+	 * Retrieves the annotation configuration instance from chart, by an annotation id, in order to get it as default of another annotation object.
+	 * 
+	 * @param type annotation type of the default annotation object
+	 * @param id annotation id to use to get the annotation object
+	 * @param chart chart instance to search the annotation object
+	 * @return the annotation configuration related to the id passed as argument
+	 */
+	IsDefaultsAnnotation getDefaultsAnnotationOptionsByChart(AnnotationType type, IsAnnotationId id, IsChart chart) {
+		// checks annotation type
+		// if not exception
+		Key.checkIfValid(type);
+		// checks if annotation type is consistent
+		if (IsChart.isConsistent(chart) && IsAnnotationId.isValid(id)) {
+			// gets result, inspecting the chart options
+			return inspectChartToGetAnnotation(type, id, chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY));
+		}
+		// ig here, the chart is not consistent
+		// then returns the default for the annotation type
+		return type.getDefaultsValues();
+	}
+
+	/**
+	 * Retrieves the annotation configuration instance from globals, by an annotation id, in order to get it as default of another annotation object.
+	 * 
+	 * @param type annotation type of the default annotation object
+	 * @param id annotation id to use to get the annotation object
+	 * @return the annotation configuration related to the id passed as argument
+	 */
+	IsDefaultsAnnotation getDefaultsAnnotationOptionsByGlobal(AnnotationType type, IsAnnotationId id) {
+		// checks annotation type
+		// if not exception
+		Key.checkIfValid(type);
+		// gets result, inspecting the global options
+		return inspectChartToGetAnnotation(type, id, Defaults.get().getGlobal().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY));
+	}
+
+	/**
+	 * Retrieves the annotation configuration instance, inspecting an annotation options, in order to get it as default of another annotation object.
+	 * 
+	 * @param type annotation type of the default annotation object
+	 * @param id annotation id to use to get the annotation object
+	 * @param options annotation options instance to inspect in order to retrieve the annotation object
+	 * @return the annotation configuration related to the id passed as argument
+	 */
+	private IsDefaultsAnnotation inspectChartToGetAnnotation(AnnotationType type, IsAnnotationId id, AnnotationOptions options) {
+		// checks if annotation id and options are consistent
+		if (IsAnnotationId.isValid(id) && options != null && options.hasAnnotation(id)) {
+			// stores the result
+			IsDefaultsAnnotation result = options.getAnnotation(id);
+			// checks if the result type and type passed as argument
+			// must be the same otherwise the default will be return
+			if (type.equals(result.getType())) {
+				return result;
+			}
+		}
+		// if here, something is not consistent
+		// then returns the defaults
+		return type.getDefaultsValues();
 	}
 }

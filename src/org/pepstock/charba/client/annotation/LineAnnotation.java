@@ -19,27 +19,23 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.enums.AnnotationType;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implements a <b>LINE</b> annotation which draws a line into a chart.<br>
- * Vertical or horizontal lines are supported.
+ * Vertical, horizontal or inclined lines are supported.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation {
-
-	/**
-	 * Default line annotation ID, <b>{@value DEFAULT_ID}</b>.
-	 */
-	public static final String DEFAULT_ID = "a-line-1";
 
 	/**
 	 * Default line annotation border color, <b>rgb(54, 162, 235)</b>.
@@ -92,36 +88,106 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 
 	}
 
+	// defaults options
+	private final IsDefaultsLineAnnotation defaultValues;
 	// lable for line instance
 	private final LineLabel label;
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
+	 * The annotation id is calculated automatically.
+	 * 
+	 * @see AnnotationType#createId()
 	 */
 	public LineAnnotation() {
-		this((DefaultsOptions) null);
+		this(AnnotationType.LINE.createId(), AnnotationType.LINE.getDefaultsValues());
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, relating to chart instance for default.
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
 	 * 
+	 * @param id annotation id to apply to the object, as string
+	 */
+	public LineAnnotation(String id) {
+		this(IsAnnotationId.create(id));
+	}
+
+	/**
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
+	 * 
+	 * @param id annotation id to apply to the object
+	 */
+	public LineAnnotation(IsAnnotationId id) {
+		this(id, Annotation.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LINE, id));
+	}
+
+	/**
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
+	 * this object.
+	 * 
+	 * @param id annotation id to apply to the object, as string
 	 * @param chart chart instance related to the plugin options
 	 */
-	public LineAnnotation(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
+	public LineAnnotation(String id, IsChart chart) {
+		this(IsAnnotationId.create(id), chart);
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
+	 * this object.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param id annotation id to apply to the object
+	 * @param chart chart instance related to the plugin options
 	 */
-	private LineAnnotation(DefaultsOptions defaultsOptions) {
-		super(AnnotationType.LINE, defaultsOptions);
+	public LineAnnotation(IsAnnotationId id, IsChart chart) {
+		this(id, Annotation.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LINE, id, chart));
+	}
+
+	/**
+	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the native object and defaults passed as argument.
+	 * 
+	 * @param id annotation id to apply to the object
+	 * @param defaultValues default options instance
+	 */
+	private LineAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultsOptions) {
+		// if id is not consistent, new one is created
+		// if defaults is not consistent, the defaults defined for this annotation type is used
+		super(AnnotationType.LINE, id == null ? AnnotationType.LINE.createId() : id, defaultsOptions == null ? AnnotationType.LINE.getDefaultsValues() : defaultsOptions);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
+		}
 		// creates a line label
 		label = new LineLabel();
 		// stores into annotation
 		setValue(Property.LABEL, label);
+	}
+
+	/**
+	 * Creates the object wrapping an existing native object.<br>
+	 * <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * 
+	 * @param nativeObject native object to wrap
+	 * @param defaultValues default options instance
+	 */
+	LineAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
+		super(nativeObject, defaultValues);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
+		}
+		// creates a line label
+		label = new LineLabel(getValue(Property.LABEL));
 	}
 
 	/**
@@ -140,7 +206,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		return getValue(AbstractAnnotation.Property.BORDER_COLOR, IsDefaultsLineAnnotation.super.getBorderColorAsString());
+		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
 	}
 
 	/**
@@ -150,7 +216,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public int getBorderWidth() {
-		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, IsDefaultsLineAnnotation.super.getBorderWidth());
+		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
 	}
 
 	/**
@@ -159,7 +225,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
@@ -172,11 +237,13 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	public List<Integer> getBorderDash() {
 		// checks if there is the property
 		if (has(Property.BORDER_DASH)) {
+			// gets the array
 			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+			// and transforms to a list
 			return ArrayListHelper.list(array);
 		}
-		// if here, the property i smissing
-		return IsDefaultsLineAnnotation.super.getBorderDash();
+		// if here, the property is missing
+		return defaultValues.getBorderDash();
 	}
 
 	/**
@@ -185,7 +252,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -196,7 +262,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public int getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, IsDefaultsLineAnnotation.super.getBorderDashOffset());
+		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
 
 	/**
@@ -230,7 +296,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public IsScaleId getScaleID() {
-		return getValue(Property.SCALE_ID, IsDefaultsLineAnnotation.super.getScaleID());
+		return getValue(Property.SCALE_ID, defaultValues.getScaleID());
 	}
 
 	/**
@@ -267,7 +333,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getValueAsString() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsString());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsString());
 	}
 
 	/**
@@ -277,7 +343,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDouble());
 	}
 
 	/**
@@ -287,7 +353,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDate());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDate());
 	}
 
 	/**
@@ -324,7 +390,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getEndValueAsString() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsString());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsString());
 	}
 
 	/**
@@ -334,7 +400,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getEndValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDouble());
 	}
 
 	/**
@@ -344,7 +410,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getEndValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDate());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
 	}
 
 }

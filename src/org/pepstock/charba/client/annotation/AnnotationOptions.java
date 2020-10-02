@@ -19,9 +19,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * This is the {@link Annotation#ID} plugin options where to set all configuration items needed to the plugin.
@@ -29,15 +29,12 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationOptions extends AbstractPluginCachedOptions {
+public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions {
 
 	/**
 	 * Default draw time, <b>{@link DrawTime#AFTER_DATASETS_DRAW}</b>.
 	 */
 	public static final DrawTime DEFAULT_DRAW_TIME = DrawTime.AFTER_DATASETS_DRAW;
-
-	// maintains the list of annotations because needs to preserve the annotation type
-	private final ArrayObjectContainerList<AbstractAnnotation> currentAnnotations = new ArrayObjectContainerList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -72,13 +69,15 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	}
 
 	// defaults global options instance
-	private DefaultsOptions defaultsOptions;
+	private final IsDefaultsAnnotationOptions defaultsOptions;
+	// annotations object, stored by key
+	private final AnnotationMap annotationsMap;
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.
 	 */
 	public AnnotationOptions() {
-		this((DefaultsOptions) null);
+		this((AnnotationDefaultsOptions) null);
 	}
 
 	/**
@@ -87,7 +86,7 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public AnnotationOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
 	}
 
 	/**
@@ -95,9 +94,20 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	AnnotationOptions(DefaultsOptions defaultsOptions) {
+	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions) {
 		// creates an empty native object
-		super(Annotation.ID, Annotation.FACTORY, false);
+		this(null, defaultsOptions);
+	}
+
+	/**
+	 * Creates new {@link Annotation#ID} plugin options.<br>
+	 * <b<PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration
+	 * 
+	 * @param nativeObject native object loaded from configuration
+	 * @param defaultsOptions default options stored into defaults global
+	 */
+	AnnotationOptions(NativeObject nativeObject, IsDefaultsAnnotationOptions defaultsOptions) {
+		super(Annotation.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
@@ -105,6 +115,18 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 		} else {
 			// stores default options
 			this.defaultsOptions = defaultsOptions;
+		}
+		// checks if annotations exists
+		if (has(Property.ANNOTATIONS)) {
+			// if here, the options has been created from a native object
+			// then it must use a NO cached annotations map
+			this.annotationsMap = new AnnotationMap(getValue(Property.ANNOTATIONS));
+		} else {
+			// if here, the options has been created from scratch
+			// then it must use a cached annotations map
+			this.annotationsMap = new AnnotationCachedMap();
+			// stores into java script object as well
+			setValue(Property.ANNOTATIONS, annotationsMap);
 		}
 	}
 
@@ -131,8 +153,57 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
+	@Override
 	public DrawTime getDrawTime() {
 		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultsOptions.getDrawTime());
+	}
+
+	/**
+	 * Returns <code>true</code> if the annotation with the id passed as argument exists.
+	 * 
+	 * @param id annotation id to check
+	 * @return <code>true</code> if the annotation with the id passed as argument exists
+	 */
+	public boolean hasAnnotation(String id) {
+		return hasAnnotation(IsAnnotationId.create(id));
+	}
+
+	/**
+	 * Returns <code>true</code> if the annotation with the id passed as argument exists.
+	 * 
+	 * @param id annotation id to check
+	 * @return <code>true</code> if the annotation with the id passed as argument exists
+	 */
+	@Override
+	public boolean hasAnnotation(IsAnnotationId id) {
+		return annotationsMap.hasAnnotation(id) || defaultsOptions.hasAnnotation(id);
+	}
+
+	/**
+	 * Removes the annotation by the id passed as argument, if exists.
+	 * 
+	 * @param id annotation id to check
+	 */
+	public void removeAnnotation(String id) {
+		removeAnnotation(IsAnnotationId.create(id));
+	}
+
+	/**
+	 * Removes the annotation by the id passed as argument, if exists.
+	 * 
+	 * @param id annotation id to check
+	 */
+	public void removeAnnotation(IsAnnotationId id) {
+		annotationsMap.removeAnnotation(id);
+	}
+
+	/**
+	 * Adds an annotations for plugin.
+	 * 
+	 * @param annotations set of annotations.
+	 */
+	public void addAnnotations(AbstractAnnotation... annotations) {
+		annotationsMap.addAnnotations(annotations);
 	}
 
 	/**
@@ -141,44 +212,49 @@ public final class AnnotationOptions extends AbstractPluginCachedOptions {
 	 * @param annotations set of annotations. If <code>null</code>, removes all annotations
 	 */
 	public void setAnnotations(AbstractAnnotation... annotations) {
-		// clear buffer
-		this.currentAnnotations.clear();
-		// checks if arguments is consistent
-		if (annotations != null) {
-			// adds all annotations
-			this.currentAnnotations.addAll(annotations);
-			// sets annotations to native object
-			setArrayValue(Property.ANNOTATIONS, this.currentAnnotations);
-		} else {
-			// removes the existing property
-			removeIfExists(Property.ANNOTATIONS);
-		}
+		annotationsMap.setAnnotations(annotations);
 	}
 
 	/**
-	 * Returns the list of annotations.
+	 * Returns the collection of annotations.
 	 * 
-	 * @return the list of annotations
+	 * @return the collection of annotations
 	 */
+	@Override
 	public List<AbstractAnnotation> getAnnotations() {
-		return getAnnotations(false);
+		return annotationsMap.getAnnotations();
 	}
 
 	/**
-	 * Returns the list of annotations.
+	 * Returns the annotation with the id passed as argument or <code>null</code> if not exist.
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return the list of annotations
+	 * @param id annotation id to use to retrieve the annotation
+	 * @return the annotation or <code>null</code> if not exist
 	 */
-	public List<AbstractAnnotation> getAnnotations(boolean binding) {
-		// there is not the property and the binding is requested
-		// then adds array to container
-		if (!has(Property.ANNOTATIONS) && binding) {
-			// sets annotations to native object
-			setArrayValue(Property.ANNOTATIONS, this.currentAnnotations);
+	public AbstractAnnotation getAnnotation(String id) {
+		return getAnnotation(IsAnnotationId.create(id));
+	}
+
+	/**
+	 * Returns the annotation with the id passed as argument or <code>null</code> if not exist.
+	 * 
+	 * @param id annotation id to check
+	 * @return the annotation with the id passed as argument or <code>null</code> if not exist
+	 */
+	@Override
+	public AbstractAnnotation getAnnotation(IsAnnotationId id) {
+		// gets annotation instance
+		AbstractAnnotation result = annotationsMap.getAnnotation(id);
+		// if annotation is consistent
+		if (result == null) {
+			// not present in this object
+			// searches on the default
+			return defaultsOptions.getAnnotation(id);
+
 		}
-		// returns annotations
-		return this.currentAnnotations;
+		// if here, the annotation was found
+		// in this object then returns it
+		return result;
 	}
 
 }

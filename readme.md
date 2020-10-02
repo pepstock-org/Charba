@@ -222,8 +222,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `getEasing` method from `AnimationItem` class because is not provided anymore by new animation engine.
    * remove the list of ticks as argument from `AxisBuildTicksCallback` class.
    * change `isoWeekday` property of `Time` options and configuration class does not store a `boolean` anymore but new `IsoWeekDay` enumeration with all days of week.
- * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
- * change `getXScaleID` and `getXScaleID` methods into `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -325,6 +323,12 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `doubleClickSpeed` property from annotation options because double click event is not supported anymore.
    * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
    * add `autoRotation` property to annotation line label options in order to enable the automatic calculation of label rotation.
+   * remove `name` property from annotation options because is not needed anymore. Use `id` property instead.
+   * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
+   * change `getXScaleID` and `getXScaleID` methods into `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
+   * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
+   * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
+   * add `enabled` property to annotation line and box options in order to enable and disable the drawing of the annotation.
  
 ### Development
 

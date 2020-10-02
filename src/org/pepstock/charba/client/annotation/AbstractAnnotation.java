@@ -15,17 +15,18 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.IsChart;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.pepstock.charba.client.annotation.callbacks.ClickCallback;
 import org.pepstock.charba.client.annotation.callbacks.EnterCallback;
 import org.pepstock.charba.client.annotation.callbacks.LeaveCallback;
-import org.pepstock.charba.client.annotation.enums.AnnotationType;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Base class to define an annotation into {@link Annotation#ID} plugin.<br>
@@ -34,22 +35,30 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractAnnotation extends AbstractPluginOptions implements IsDefaultsAnnotation {
+public abstract class AbstractAnnotation extends NativeObjectContainer implements IsDefaultsAnnotation {
+
+	/**
+	 * Default line label enabled, <b>{@value DEFAULT_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_ENABLED = true;
+
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
+	static final String INVALID_DEFAULTS_VALUES_CLASS = "Defaults options are not invalid because not a {0} annotaion defaults";
 
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
+		ENABLED("enabled"),
 		TYPE("type"),
 		ID("id"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
-		// internal property to set name instead of id
-		// because the plugin does not reload the options if they have got an id
-		// therefore another property must be set to identify better the annotation and
-		// the id must be reset every reconfiguration
-		CHARBA_NAME("_charbaName");
+		// internal property to set an unique id for cahing
+		CHARBA_ANNOTATION_ID("_charbaAnnotationId");
 
 		// name value of property
 		private final String value;
@@ -76,16 +85,14 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 
 	}
 
-	// type of annotation
-	private final AnnotationType type;
-	// callback instance to handle mouseover event for entering on annotation
+	// callback instance to handle mouse over event for entering on annotation
 	private EnterCallback enterCallback = null;
-	// callback instance to handle mouseleave and mouseover event for leaving on annotation
+	// callback instance to handle mouse leave and mouse over event for leaving on annotation
 	private LeaveCallback leaveCallback = null;
 	// callback instance to handle click event for clicking on annotation
 	private ClickCallback clickCallback = null;
 	// defaults options
-	private final DefaultsOptions defaultsOptions;
+	private final IsDefaultsAnnotation defaultValues;
 	// draw time instance set at plugin startup
 	private DrawTime defaultDrawTime = null;
 
@@ -93,30 +100,67 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * Creates the object with the type of annotation to handle.
 	 * 
 	 * @param type annotation type
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param id annotation id
+	 * @param defaultValues default options instance
 	 */
-	AbstractAnnotation(AnnotationType type, DefaultsOptions defaultsOptions) {
-		super(Annotation.ID);
+	AbstractAnnotation(AnnotationType type, IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+		this(null, defaultValues);
+		// checks if is is consistent
+		IsAnnotationId.checkIfValid(id);
 		// checks if type is consistent
 		Key.checkIfValid(type);
+		// stores id
+		setValue(Property.ID, id);
 		// stores type
-		this.type = type;
 		setValue(Property.TYPE, type);
-		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
-			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(Annotation.DEFAULTS_FACTORY);
-		} else {
-			// stores default options
-			this.defaultsOptions = defaultsOptions;
-		}
+		// stores the internal id for caching
+		setValue(Property.CHARBA_ANNOTATION_ID, COUNTER.getAndIncrement());
+		// cached it
+		Annotation.get().addAnnotation(this);
 	}
 
 	/**
-	 * Removes the ID property form annotation in order that the options can be reloaded by plugin when the chart will be reconfigured, by {@link IsChart#reconfigure()}.
+	 * Creates the object wrapping an existing native object. <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * 
+	 * @param nativeObject native object to wrap
+	 * @param defaultValues default options instance
 	 */
-	void resetAnnotationId() {
-		removeIfExists(Property.ID);
+	AbstractAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
+		super(nativeObject);
+		// checks if default value is consistent
+		if (defaultValues == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Default values argument is null");
+		}
+		// stores default options
+		this.defaultValues = defaultValues;
+	}
+
+	/**
+	 * Returns the defaults values for this object.
+	 * 
+	 * @return the defaults values for this object
+	 */
+	final IsDefaultsAnnotation getDefaultsValues() {
+		return defaultValues;
+	}
+
+	/**
+	 * Returns the id of annotation for caching (internal).
+	 * 
+	 * @return the id of annotation for caching (internal)
+	 */
+	final int getAnnotationId() {
+		return getValue(Property.CHARBA_ANNOTATION_ID, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the id of annotation.
+	 * 
+	 * @return the id of annotation
+	 */
+	public final IsAnnotationId getId() {
+		return IsAnnotationId.create(getValue(Property.ID, UndefinedValues.STRING));
 	}
 
 	/**
@@ -124,26 +168,28 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the type of annotation
 	 */
+	@Override
 	public final AnnotationType getType() {
-		return type;
+		return getValue(Property.TYPE, AnnotationType.values(), defaultValues.getType());
 	}
 
 	/**
-	 * Sets the name of annotation.
+	 * Sets <code>true</code> whether the label is enabled and should be displayed.
 	 * 
-	 * @param name the name of annotation
+	 * @param enabled <code>true</code> whether the label is enabled and should be displayed
 	 */
-	public final void setName(String name) {
-		setValue(Property.CHARBA_NAME, name);
+	public final void setEnabled(boolean enabled) {
+		setValue(Property.ENABLED, enabled);
 	}
 
 	/**
-	 * Returns the name of annotation.
+	 * Returns <code>true</code> whether the annotation is enabled and should be displayed.
 	 * 
-	 * @return the name of annotation
+	 * @return <code>true</code> whether the annotation is enabled and should be displayed
 	 */
-	public final String getName() {
-		return getValue(Property.CHARBA_NAME, UndefinedValues.STRING);
+	@Override
+	public final boolean isEnabled() {
+		return getValue(Property.ENABLED, defaultValues.isEnabled());
 	}
 
 	/**
@@ -169,8 +215,9 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
 	 */
+	@Override
 	public final DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultDrawTime != null ? defaultDrawTime : defaultsOptions.getDrawTime());
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultDrawTime != null ? defaultDrawTime : defaultValues.getDrawTime());
 	}
 
 	/**
@@ -214,7 +261,14 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a mouse event is occurring, entering on annotation element
 	 */
+	@Override
 	public final EnterCallback getEnterCallback() {
+		// checks if is consistent
+		// what has been set against this instance
+		if (enterCallback == null) {
+			// if not set here, checks on the defaults
+			return defaultValues.getEnterCallback();
+		}
 		return enterCallback;
 	}
 
@@ -232,7 +286,14 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a mouse event is occurring, leaving the annotation element
 	 */
+	@Override
 	public final LeaveCallback getLeaveCallback() {
+		// checks if is consistent
+		// what has been set against this instance
+		if (leaveCallback == null) {
+			// if not set here, checks on the defaults
+			return defaultValues.getLeaveCallback();
+		}
 		return leaveCallback;
 	}
 
@@ -250,7 +311,14 @@ public abstract class AbstractAnnotation extends AbstractPluginOptions implement
 	 * 
 	 * @return the callback called when a mouse event is occurring, clicking on the annotation element
 	 */
+	@Override
 	public final ClickCallback getClickCallback() {
+		// checks if is consistent
+		// what has been set against this instance
+		if (clickCallback == null) {
+			// if not set here, checks on the defaults
+			return defaultValues.getClickCallback();
+		}
 		return clickCallback;
 	}
 

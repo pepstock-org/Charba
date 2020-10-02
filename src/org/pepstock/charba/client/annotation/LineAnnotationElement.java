@@ -48,7 +48,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	private final Point endingPoint = new Point();
 
 	private boolean isEndValueMissing = false;
-	
+
 	private final StartEndCointainer startEndCointainer = new StartEndCointainer();
 
 	/**
@@ -218,7 +218,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			endingPoint.setY(area.getBottom());
 		}
 	}
-	
+
 	/**
 	 * Retrieves the start and end values from the scale, category one, in pixel.
 	 * 
@@ -415,7 +415,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			return (!Double.isFinite(dy) || Math.abs(y - dy) < epsilon) && (!Double.isFinite(dx) || Math.abs(x - dx) < epsilon);
 		}
 	}
-	
+
 	/**
 	 * Internal class to wrap start and end pixel values.
 	 * 

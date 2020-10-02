@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -27,7 +24,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsFactory<AnnotationOptions> {
+public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory<AnnotationOptions> {
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link Annotation#FACTORY}.<br>
@@ -45,43 +42,18 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	 */
 	@Override
 	public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-		// gets the options checking if cached
-		AbstractPluginOptions options = getOptions(nativeObject);
-		// checks if consistent and the right class
-		if (options instanceof AnnotationOptions) {
-			// cast and returns it
-			return (AnnotationOptions) options;
-		}
-		// creates the options by the native object and the defaults
-		// and ignores the native object passed into method
-		// checks if defaults options are consistent
+		// gets the reference for defaults
+		final IsDefaultsAnnotationOptions defaultsOptions;
+		// checks if defaults argument is consistent
 		if (defaultValues != null) {
-			// defaults global options instance
-			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, Annotation.DEFAULTS_FACTORY);
-			// creates the options by the native object and the defaults
-			return new AnnotationOptions(defaultsOptions);
+			// uses the defaults global options instance
+			defaultsOptions = loadGlobalsPluginOptions(defaultValues, Annotation.DEFAULTS_FACTORY);
+		} else {
+			// uses the predefined defaults
+			defaultsOptions = AnnotationDefaultsOptions.DEFAULTS_INSTANCE;
 		}
 		// creates the options by the native object and the defaults
-		return new AnnotationOptions(DefaultsOptions.DEFAULTS_INSTANCE);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory#onBeforeConfigure(org.pepstock.charba.client. IsChart)
-	 */
-	@Override
-	public void onBeforeConfigure(IsChart chart) {
-		// checks if chart is consistent
-		if (IsChart.isConsistent(chart) && chart.getOptions().getPlugins().hasOptions(getPluginId())) {
-			// gets the plugin options from chart options, if there
-			AnnotationOptions options = chart.getOptions().getPlugins().getOptions(getPluginId(), this);
-			// reset id for all annotations
-			options.getAnnotations().forEach(AbstractAnnotation::resetAnnotationId);
-		}
-		// invokes super implementation
-		super.onBeforeConfigure(chart);
+		return new AnnotationOptions(nativeObject, defaultsOptions != null ? defaultsOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
 	}
 
 	/**
@@ -89,7 +61,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class AnnotationDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DefaultsOptions> {
+	static class AnnotationDefaultsOptionsFactory extends AbstractPluginOptionsFactory<AnnotationOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -105,13 +77,8 @@ public final class AnnotationOptionsFactory extends AbstractPluginCachedOptionsF
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new DefaultsOptions(nativeObject);
-			}
-			return DefaultsOptions.DEFAULTS_INSTANCE;
+		public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			return new AnnotationOptions(nativeObject, AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
 		}
 	}
 

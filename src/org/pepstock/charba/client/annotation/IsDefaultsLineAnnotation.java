@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * This is the {@link Annotation#ID} plugin <b>LINE</b> annotation DEFAULTS options.
+ * This is the {@link Annotation#ID} plugin <b>LINE</b> annotation DEFAULTS options interface.
  * 
  * @author Andrea "Stock" Stocchero
  *

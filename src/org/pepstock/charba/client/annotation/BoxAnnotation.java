@@ -18,15 +18,16 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.enums.AnnotationType;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a BOX annotation which draws a box into a chart.<br>
+ * Implements a <b>BOX</b> annotation which draws a box into a chart.<br>
  * If one of the axes is not specified, the box will take the entire chart dimension.<br>
  * The 4 coordinates, xMin, xMax, yMin, yMax are optional. If not specified, the box is expanded out to the edges.
  * 
@@ -34,11 +35,6 @@ import org.pepstock.charba.client.options.IsScaleId;
  *
  */
 public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation {
-
-	/**
-	 * Default box annotation ID, <b>{@value DEFAULT_ID}</b>.
-	 */
-	public static final String DEFAULT_ID = "a-box-1";
 
 	/**
 	 * Default box annotation background color, <b>rgb(102, 102, 102)</b>.
@@ -102,29 +98,98 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 
 	}
 
+	// defaults options
+	private final IsDefaultsBoxAnnotation defaultValues;
+
 	/**
-	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.<br>
+	 * The annotation id is calculated automatically.
+	 * 
+	 * @see AnnotationType#createId()
 	 */
 	public BoxAnnotation() {
-		this((DefaultsOptions) null);
+		this(AnnotationType.BOX.createId(), AnnotationType.BOX.getDefaultsValues());
 	}
 
 	/**
-	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, relating to chart instance for default.
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
 	 * 
+	 * @param id annotation id to apply to the object, as string
+	 */
+	public BoxAnnotation(String id) {
+		this(IsAnnotationId.create(id));
+	}
+
+	/**
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
+	 * 
+	 * @param id annotation id to apply to the object
+	 */
+	public BoxAnnotation(IsAnnotationId id) {
+		this(id, Annotation.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.BOX, id));
+	}
+
+	/**
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
+	 * this object.
+	 * 
+	 * @param id annotation id to apply to the object, as string
 	 * @param chart chart instance related to the plugin options
 	 */
-	public BoxAnnotation(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.DEFAULTS_FACTORY) : null);
+	public BoxAnnotation(String id, IsChart chart) {
+		this(IsAnnotationId.create(id), chart);
 	}
 
 	/**
-	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
+	 * this object.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param id annotation id to apply to the object
+	 * @param chart chart instance related to the plugin options
 	 */
-	BoxAnnotation(DefaultsOptions defaultsOptions) {
-		super(AnnotationType.BOX, defaultsOptions);
+	public BoxAnnotation(IsAnnotationId id, IsChart chart) {
+		this(id, Annotation.get().getDefaultsAnnotationOptionsByChart(AnnotationType.BOX, id, chart));
+	}
+
+	/**
+	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance, using the native object and defaults passed as argument.
+	 * 
+	 * @param id annotation id to apply to the object
+	 * @param defaultValues default options instance
+	 */
+	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultsOptions) {
+		// if id is not consistent, new one is created
+		// if defaults is not consistent, the defaults defined for this annotation type is used
+		super(AnnotationType.BOX, id == null ? AnnotationType.BOX.createId() : id, defaultsOptions == null ? AnnotationType.BOX.getDefaultsValues() : defaultsOptions);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		}
+	}
+
+	/**
+	 * Creates the object wrapping an existing native object.<br>
+	 * <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * 
+	 * @param nativeObject native object to wrap
+	 * @param defaultValues default options instance
+	 */
+	BoxAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
+		super(nativeObject, defaultValues);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		}
 	}
 
 	/**
@@ -134,7 +199,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		return getValue(AbstractAnnotation.Property.BORDER_COLOR, IsDefaultsBoxAnnotation.super.getBorderColorAsString());
+		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
 	}
 
 	/**
@@ -144,7 +209,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public int getBorderWidth() {
-		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, IsDefaultsBoxAnnotation.super.getBorderWidth());
+		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
 	}
 
 	/**
@@ -172,7 +237,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, IsDefaultsBoxAnnotation.super.getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
 	}
 
 	/**
@@ -215,7 +280,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public IsScaleId getXScaleID() {
-		return getValue(Property.X_SCALE_ID, IsDefaultsBoxAnnotation.super.getXScaleID());
+		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
 	}
 
 	/**
@@ -252,7 +317,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getXMaxAsString() {
-		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsString());
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsString());
 	}
 
 	/**
@@ -262,7 +327,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public double getXMaxAsDouble() {
-		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsDouble());
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsDouble());
 	}
 
 	/**
@@ -272,7 +337,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public Date getXMaxAsDate() {
-		return getValueForMultipleKeyTypes(Property.X_MAX, IsDefaultsBoxAnnotation.super.getXMaxAsDate());
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsDate());
 	}
 
 	/**
@@ -309,7 +374,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getXMinAsString() {
-		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsString());
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsString());
 	}
 
 	/**
@@ -319,7 +384,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public double getXMinAsDouble() {
-		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsDouble());
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsDouble());
 	}
 
 	/**
@@ -329,7 +394,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public Date getXMinAsDate() {
-		return getValueForMultipleKeyTypes(Property.X_MIN, IsDefaultsBoxAnnotation.super.getXMinAsDate());
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsDate());
 	}
 
 	/**
@@ -363,7 +428,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public IsScaleId getYScaleID() {
-		return getValue(Property.Y_SCALE_ID, IsDefaultsBoxAnnotation.super.getYScaleID());
+		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
 	}
 
 	/**
@@ -400,7 +465,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getYMaxAsString() {
-		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsString());
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsString());
 	}
 
 	/**
@@ -410,7 +475,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public double getYMaxAsDouble() {
-		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsDouble());
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsDouble());
 	}
 
 	/**
@@ -420,7 +485,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public Date getYMaxAsDate() {
-		return getValueForMultipleKeyTypes(Property.Y_MAX, IsDefaultsBoxAnnotation.super.getYMaxAsDate());
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsDate());
 	}
 
 	/**
@@ -457,7 +522,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public String getYMinAsString() {
-		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsString());
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsString());
 	}
 
 	/**
@@ -467,7 +532,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public double getYMinAsDouble() {
-		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsDouble());
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDouble());
 	}
 
 	/**
@@ -477,7 +542,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	@Override
 	public Date getYMinAsDate() {
-		return getValueForMultipleKeyTypes(Property.Y_MIN, IsDefaultsBoxAnnotation.super.getYMinAsDate());
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDate());
 	}
 
 }

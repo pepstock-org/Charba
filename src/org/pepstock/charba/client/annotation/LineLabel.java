@@ -25,6 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -152,11 +153,22 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	}
 
+	// FIXME default is missing
+
 	/**
 	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
 	 */
 	LineLabel() {
-		super();
+		this(null);
+	}
+
+	/**
+	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
+	 * 
+	 * @param nativeObject native object to wrap, with all properties of a label
+	 */
+	LineLabel(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -484,6 +496,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public void setContent(List<String> content) {
 		// checks if argument is consistent
 		if (content != null) {
+			// stores it
 			setContent(content.toArray(new String[0]));
 		} else {
 			// if here the argument is not consistent

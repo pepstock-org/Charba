@@ -13,30 +13,26 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation.enums;
-
-import org.pepstock.charba.client.commons.Key;
+package org.pepstock.charba.client.annotation;
 
 /**
- * Defines the type of annotation.
+ * This is a standard implementation of a annotation configuration object ID for {@link Annotation#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum AnnotationType implements Key
-{
-	LINE("line"),
-	BOX("box");
+public final class StandardAnnotationId implements IsAnnotationId {
 
-	// name value of property
+	// value instance
 	private final String value;
 
 	/**
-	 * Creates an annotation type property value to use into native object.
+	 * Builds the object with the key value as string
 	 * 
-	 * @param value value of annotation type property name
+	 * @param value value of key as String
 	 */
-	private AnnotationType(String value) {
+	StandardAnnotationId(String value) {
+		// stores value
 		this.value = value;
 	}
 
