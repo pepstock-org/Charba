@@ -359,6 +359,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the logic of `DatasetsItemsSelector` plugin in order to leverage on new capabilities of scale item to retrieve the selected data instead of the index.
  * implement `ImmutableDate` class to use to return the date value stored into chart configuration and to callbacks.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
+ * change `Travis` configuration in order to use `JDK11` to compile the project and install `NodeJs12` in order to be compliant with new restrictions of `SonarCloud`.That means that Charba is compilable also on `JDK11` but it will be release on `JDK8` in order to be consumed by applications which are still using `JDK8`.
 
 License
 -------
