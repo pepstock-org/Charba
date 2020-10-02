@@ -103,37 +103,48 @@ public final class Annotation extends AbstractPlugin {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
 				// if here, there is not any configuration
-				// then it uses teh default
+				// then it uses the default
 				pOptions = new AnnotationOptions(AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores the options into cache
 			pluginOptions.put(chart.getId(), pOptions);
-			// cleans the elements previously loaded
-			cleanAnnotationElements(chart);
-			// creates new container for element
-			List<AbstractAnnotationElement<?>> listOfElements = new LinkedList<>();
-			// stores the containers
-			annotationElements.put(chart.getId(), listOfElements);
-			// checks if the root of options has got draw time property
-			final DrawTime defaultDrawTime = pOptions.hasDrawTime() ? pOptions.getDrawTime() : null;
-			// scans loading the draw time
-			for (AbstractAnnotation annotation : pOptions.getAnnotations()) {
-				// checks if annotation is enabled
-				if (annotation.isEnabled()) {
-					// sets default draw time
-					annotation.setDefaultDrawTime(defaultDrawTime);
-					// checks and loads annotation elements
-					if (annotation instanceof BoxAnnotation) {
-						// casts to box annotation
-						BoxAnnotation boxAnnotation = (BoxAnnotation) annotation;
-						// adds new box annotation element
-						listOfElements.add(new BoxAnnotationElement(chart, boxAnnotation));
-					} else if (annotation instanceof LineAnnotation) {
-						// casts to line annotation
-						LineAnnotation lineAnnotation = (LineAnnotation) annotation;
-						// adds new line annotation element
-						listOfElements.add(new LineAnnotationElement(chart, lineAnnotation));
-					}
+			// loads creating all annotation elements
+			loadAnnotationElements(chart, pOptions);
+		}
+	}
+
+	/**
+	 * Creates and loads the annotation elements reading the configuration from annotation options.
+	 * 
+	 * @param chart chart instance to use for creating elements
+	 * @param pOptions annotation options retrieved from chart options.
+	 */
+	private void loadAnnotationElements(IsChart chart, AnnotationOptions pOptions) {
+		// cleans the elements previously loaded
+		cleanAnnotationElements(chart);
+		// creates new container for element
+		List<AbstractAnnotationElement<?>> listOfElements = new LinkedList<>();
+		// stores the containers
+		annotationElements.put(chart.getId(), listOfElements);
+		// checks if the root of options has got draw time property
+		final DrawTime defaultDrawTime = pOptions.hasDrawTime() ? pOptions.getDrawTime() : null;
+		// scans loading the draw time
+		for (AbstractAnnotation annotation : pOptions.getAnnotations()) {
+			// checks if annotation is enabled
+			if (annotation.isEnabled()) {
+				// sets default draw time
+				annotation.setDefaultDrawTime(defaultDrawTime);
+				// checks and loads annotation elements
+				if (annotation instanceof BoxAnnotation) {
+					// casts to box annotation
+					BoxAnnotation boxAnnotation = (BoxAnnotation) annotation;
+					// adds new box annotation element
+					listOfElements.add(new BoxAnnotationElement(chart, boxAnnotation));
+				} else if (annotation instanceof LineAnnotation) {
+					// casts to line annotation
+					LineAnnotation lineAnnotation = (LineAnnotation) annotation;
+					// adds new line annotation element
+					listOfElements.add(new LineAnnotationElement(chart, lineAnnotation));
 				}
 			}
 		}
