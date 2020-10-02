@@ -113,7 +113,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		if (scalesMap.containsKey(getConfiguration().getScaleID().value())) {
 			// gets the scale
 			ScaleItem scale = scalesMap.get(getConfiguration().getScaleID().value());
-			// configures teh line annotation element
+			// configures the line annotation element
 			configureScale(area, scale);
 			// configures linear equation for the line
 			// must be run after the element configuration

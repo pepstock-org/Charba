@@ -103,7 +103,7 @@ public class ControllerTemplateGenerator {
 			LOGGER.info("Use controller template: " + javaScriptTemplateFileAsString);
 		} else {
 			LOGGER.info("No controller template has been passed. Use the default: " + DEFAULT_JAVASCRIPT_TEMPLATE_FILE);
-			// sets teh default controller template file
+			// sets the default controller template file
 			javaScriptTemplateFile = DEFAULT_JAVASCRIPT_TEMPLATE_FILE;
 		}
 		// reads the template of javascript template

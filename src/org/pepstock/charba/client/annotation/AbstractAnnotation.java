@@ -38,7 +38,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public abstract class AbstractAnnotation extends NativeObjectContainer implements IsDefaultsAnnotation {
 
 	/**
-	 * Default line label enabled, <b>{@value DEFAULT_ENABLED}</b>.
+	 * Default annotation drawing enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
 	public static final boolean DEFAULT_ENABLED = true;
 
