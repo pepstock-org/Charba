@@ -153,8 +153,6 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	}
 
-	// FIXME default is missing
-
 	/**
 	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
 	 */

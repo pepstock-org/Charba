@@ -194,10 +194,8 @@ class AnnotationMap extends NativeObjectContainer {
 		// -----------------------
 		// checks which type is in order to create the right annotation instance
 		if (AnnotationType.BOX.equals(type) && defaultOptions instanceof BoxAnnotation) {
-			// FIXME checks if is null
 			return new BoxAnnotation(nativeObject, (BoxAnnotation) defaultOptions);
 		} else if (AnnotationType.LINE.equals(type) && defaultOptions instanceof LineAnnotation) {
-			// FIXME checks if is null
 			return new LineAnnotation(nativeObject, (LineAnnotation) defaultOptions);
 		}
 		// if here, the type is not consistent
