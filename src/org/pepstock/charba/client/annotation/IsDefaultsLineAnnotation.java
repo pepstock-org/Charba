@@ -51,6 +51,13 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	default int getBorderWidth() {
 		return LineAnnotation.DEFAULT_BORDER_WIDTH;
 	}
+	
+	/**
+	 * Returns the label on the line.
+	 * 
+	 * @return the label on the line
+	 */
+	IsDefaultsLineLabel getLabel();
 
 	/**
 	 * Returns the ID of the scale to bind onto.

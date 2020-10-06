@@ -164,7 +164,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		}
 		// creates a line label
-		label = new LineLabel();
+		label = new LineLabel(defaultValues.getLabel());
 		// stores into annotation
 		setValue(Property.LABEL, label);
 	}
@@ -187,7 +187,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		}
 		// creates a line label
-		label = new LineLabel(getValue(Property.LABEL));
+		label = new LineLabel(getValue(Property.LABEL), this.defaultValues.getLabel());
 	}
 
 	/**
@@ -195,6 +195,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @return the label on the line
 	 */
+	@Override
 	public LineLabel getLabel() {
 		return label;
 	}

@@ -153,20 +153,33 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	}
 
+	// defaults options
+	private final IsDefaultsLineLabel defaultValues;
+
 	/**
 	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
+	 * 
+	 * @param defaultValues default options instance
 	 */
-	LineLabel() {
-		this(null);
+	LineLabel(IsDefaultsLineLabel defaultValues) {
+		this(null, defaultValues);
 	}
 
 	/**
 	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
 	 * 
 	 * @param nativeObject native object to wrap, with all properties of a label
+	 * @param defaultValues default options instance
 	 */
-	LineLabel(NativeObject nativeObject) {
+	LineLabel(NativeObject nativeObject, IsDefaultsLineLabel defaultValues) {
 		super(nativeObject);
+		// checks if default value is consistent
+		if (defaultValues == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Default values argument is null");
+		}
+		// stores default options
+		this.defaultValues = defaultValues;
 	}
 
 	/**
@@ -185,7 +198,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public boolean isEnabled() {
-		return getValue(Property.ENABLED, IsDefaultsLineLabel.super.isEnabled());
+		return getValue(Property.ENABLED, defaultValues.isEnabled());
 	}
 
 	/**
@@ -213,7 +226,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, IsDefaultsLineLabel.super.getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
 	}
 
 	/**
@@ -241,7 +254,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, IsDefaultsLineLabel.super.getFontSize());
+		return getValue(Property.FONT_SIZE, defaultValues.getFontSize());
 	}
 
 	/**
@@ -260,7 +273,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.values(), IsDefaultsLineLabel.super.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultValues.getFontStyle());
 	}
 
 	/**
@@ -288,7 +301,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, IsDefaultsLineLabel.super.getFontColorAsString());
+		return getValue(Property.FONT_COLOR, defaultValues.getFontColorAsString());
 	}
 
 	/**
@@ -316,7 +329,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, IsDefaultsLineLabel.super.getFontFamily());
+		return getValue(Property.FONT_FAMILY, defaultValues.getFontFamily());
 	}
 
 	/**
@@ -335,7 +348,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public int getXPadding() {
-		return getValue(Property.X_PADDING, IsDefaultsLineLabel.super.getXPadding());
+		return getValue(Property.X_PADDING, defaultValues.getXPadding());
 	}
 
 	/**
@@ -354,7 +367,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public int getYPadding() {
-		return getValue(Property.Y_PADDING, IsDefaultsLineLabel.super.getYPadding());
+		return getValue(Property.Y_PADDING, defaultValues.getYPadding());
 	}
 
 	/**
@@ -373,7 +386,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public double getCornerRadius() {
-		return getValue(Property.CORNER_RADIUS, IsDefaultsLineLabel.super.getCornerRadius());
+		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
 	}
 
 	/**
@@ -392,7 +405,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public LineLabelPosition getPosition() {
-		return getValue(Property.POSITION, LineLabelPosition.values(), IsDefaultsLineLabel.super.getPosition());
+		return getValue(Property.POSITION, LineLabelPosition.values(), defaultValues.getPosition());
 	}
 
 	/**
@@ -413,7 +426,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public double getXAdjust() {
-		return getValue(Property.X_ADJUST, IsDefaultsLineLabel.super.getXAdjust());
+		return getValue(Property.X_ADJUST, defaultValues.getXAdjust());
 	}
 
 	/**
@@ -434,7 +447,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public double getYAdjust() {
-		return getValue(Property.Y_ADJUST, IsDefaultsLineLabel.super.getYAdjust());
+		return getValue(Property.Y_ADJUST, defaultValues.getYAdjust());
 	}
 
 	/**
@@ -458,7 +471,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public double getRotation() {
-		return getValue(Property.ROTATION, IsDefaultsLineLabel.super.getRotation());
+		return getValue(Property.ROTATION, defaultValues.getRotation());
 	}
 
 	/**
@@ -482,7 +495,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public boolean isAutoRotation() {
-		return getValue(Property.AUTO_ROTATION, IsDefaultsLineLabel.super.isAutoRotation());
+		return getValue(Property.AUTO_ROTATION, defaultValues.isAutoRotation());
 	}
 
 	/**
