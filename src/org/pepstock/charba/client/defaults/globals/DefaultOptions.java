@@ -40,9 +40,9 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
 
-	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
+	private static final double DEFAULT_ROTATION = 0D;
 
-	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
+	private static final double DEFAULT_CIRCUMFERENCE = 360D;
 
 	private static final double DEFAULT_START_ANGLE = 0;
 
