@@ -34,6 +34,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_SHOW_LINES = true;
 
+	private static final boolean DEFAULT_SKIP_NULL = false;
+
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
@@ -183,6 +185,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public boolean isDestroyOnDetach() {
 		return DEFAULT_DESTROY_ON_DETACH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isSkipNull()
+	 */
+	@Override
+	public boolean isSkipNull() {
+		return DEFAULT_SKIP_NULL;
 	}
 
 }

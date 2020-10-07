@@ -83,6 +83,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		EVENTS("events"),
 		// specific for chart type
 		SHOW_LINES("showLines"),
+		SKIP_NULL("skipNull"),
 		CUTOUT_PERCENTAGE("cutoutPercentage"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
@@ -488,6 +489,25 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public boolean isShowLines() {
 		return getValue(Property.SHOW_LINES, getDefaultValues().isShowLines());
+	}
+	
+	/**
+	 * If <code>true</code>, null or undefined values will not be drawn.
+	 * 
+	 * @param skipNull if <code>true</code>, null or undefined values will not be drawn
+	 */
+	public void setSkipNull(boolean skipNull) {
+		setValue(Property.SKIP_NULL, skipNull);
+	}
+	
+	/**
+	 * If <code>true</code>, null or undefined values will not be drawn.
+	 * 
+	 * @return If <code>true</code>, null or undefined values will not be drawn
+	 */
+	@Override
+	public boolean isSkipNull() {
+		return getValue(Property.SKIP_NULL, getDefaultValues().isSkipNull());
 	}
 
 	/**

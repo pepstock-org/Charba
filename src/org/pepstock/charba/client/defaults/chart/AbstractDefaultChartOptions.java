@@ -168,4 +168,14 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 		return options.isDestroyOnDetach();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isSkipNull()
+	 */
+	@Override
+	public final boolean isSkipNull() {
+		return options.isSkipNull();
+	}
+
 }

@@ -130,6 +130,13 @@ public interface IsDefaultOptions {
 	boolean isShowLines();
 
 	/**
+	 * If true, null or undefined values will not be drawn.
+	 * 
+	 * @return If true, null or undefined values will not be drawn.
+	 */
+	boolean isSkipNull();
+
+	/**
 	 * If false, NaN data causes a break in the line.
 	 * 
 	 * @return If false, NaN data causes a break in the line.

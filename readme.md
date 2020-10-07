@@ -295,6 +295,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `borderAlign` property for `PieDataset`, `PolarAreaDataset` and `DoughnutDataset` in order to be set as indexable.
    * change `borderWidth` property for `BarDataset` in order to be set as indexable when set as an object.
    * add `maxWidth` and `maxHeight` properties to `Legend` options and configuration.
+   * add `skipNull` property to `BarOptions` configuration.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

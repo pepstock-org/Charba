@@ -35,4 +35,22 @@ public class BarOptions extends ScalesOptions {
 		super(chart, defaultValues);
 	}
 
+	/**
+	 * If <code>true</code>, null or undefined values will not be drawn.
+	 * 
+	 * @param skipNull if <code>true</code>, null or undefined values will not be drawn
+	 */
+	public void setSkipNull(boolean skipNull) {
+		getConfiguration().setSkipNull(skipNull);
+	}
+
+	/**
+	 * If <code>true</code>, null or undefined values will not be drawn.
+	 * 
+	 * @return If <code>true</code>, null or undefined values will not be drawn
+	 */
+	public boolean isSkipNull() {
+		return getConfiguration().isSkipNull();
+	}
+
 }
