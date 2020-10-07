@@ -41,7 +41,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	// linear equation of the line
 	private final LineFunction lineFunction;
 
-	private final LineLabelAnnotationElement linelabel;
+	private final LineLabelElement linelabel;
 
 	private final Point startingPoint = new Point();
 
@@ -60,7 +60,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	LineAnnotationElement(IsChart chart, LineAnnotation configuration) {
 		super(chart, configuration);
 		// creates line label annotation element
-		linelabel = new LineLabelAnnotationElement(this);
+		linelabel = new LineLabelElement(this);
 		// creates linear equation of the line
 		lineFunction = new LineFunction(this);
 	}
@@ -194,7 +194,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			// manage Date
 			// ----------------------------
 			// gets the start and end value configured for annotation
-			retrieveStartEndFromScaleForDouble(scale);
+			retrieveStartEndFromScaleForDouble(area, scale);
 		}
 		// calculates the start and end
 		// based on the axis kind of scale.
@@ -280,13 +280,13 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	 * 
 	 * @param scale scale instance to use to configure
 	 */
-	private void retrieveStartEndFromScaleForDouble(ScaleItem scale) {
+	private void retrieveStartEndFromScaleForDouble(ChartAreaNode area, ScaleItem scale) {
 		// ----------------------------
 		// LINEAR or LOGARITHMIC scales
 		// manage Double
 		// ----------------------------
 		// gets the minimum and maximum value configured for annotation
-		final double startDouble = getConfiguration().getValueAsDouble();
+		double startDouble = getConfiguration().getValueAsDouble();
 		// checks if start value is consistent
 		if (Double.isNaN(startDouble)) {
 			// does nothing and this annotation is not showed
@@ -294,7 +294,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		}
 		// gets the end value configured for annotation
 		// if not exists, uses the starting value as end one
-		final double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
+		double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
 		// stores if has end value
 		isEndValueMissing = Double.isNaN(getConfiguration().getEndValueAsDouble());
 		// gets the position in pixel on chart area for the start value

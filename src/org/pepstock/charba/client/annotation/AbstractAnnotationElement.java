@@ -285,7 +285,7 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 		// then returns the default position
 		return defaultPosition;
 	}
-
+	
 	/**
 	 * Adds {@link BaseEventTypes#CLICK}, {@link BaseEventTypes#MOUSE_MOVE} and {@link BaseEventTypes#MOUSE_LEAVE} events to chart canvas element.
 	 */

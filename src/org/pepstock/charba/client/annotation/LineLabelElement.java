@@ -40,7 +40,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class LineLabelAnnotationElement {
+final class LineLabelElement {
 
 	// internal comparator to sort colors by own offset
 	private static final Comparator<String> COMPARATOR = (String o1, String o2) -> o1.compareTo(o2);
@@ -64,7 +64,7 @@ final class LineLabelAnnotationElement {
 	 * 
 	 * @param annotationElement annotation configuration element
 	 */
-	LineLabelAnnotationElement(LineAnnotationElement annotationElement) {
+	LineLabelElement(LineAnnotationElement annotationElement) {
 		this.annotationElement = annotationElement;
 		// stores label and content
 		this.label = annotationElement.getConfiguration().getLabel();
