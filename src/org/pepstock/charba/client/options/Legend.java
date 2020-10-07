@@ -41,6 +41,8 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		LABELS("labels"),
 		TITLE("title"),
 		// simple properties
+		MAX_WIDTH("maxWidth"),
+		MAX_HEIGHT("maxWidth"),
 		FULL_WIDTH("fullWidth"),
 		REVERSE("reverse"),
 		RTL("rtl"),
@@ -115,6 +117,48 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	@Override
 	public LegendTitle getTitle() {
 		return title;
+	}
+
+	/**
+	 * Sets the maximum width of the legend, in pixels.
+	 * 
+	 * @param maxWidth the maximum width of the legend, in pixels
+	 */
+	public void setMaxWidth(int maxWidth) {
+		setValue(Property.MAX_WIDTH, maxWidth);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the maximum width of the legend, in pixels.
+	 * 
+	 * @return the maximum width of the legend, in pixels
+	 */
+	@Override
+	public int getMaxWidth() {
+		return getValue(Property.MAX_WIDTH, getDefaultValues().getMaxWidth());
+	}
+
+	/**
+	 * Sets the maximum height of the legend, in pixels.
+	 * 
+	 * @param maxHeight the maximum height of the legend, in pixels
+	 */
+	public void setMaxHeight(int maxHeight) {
+		setValue(Property.MAX_HEIGHT, maxHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the maximum width of the legend, in pixels.
+	 * 
+	 * @return the maximum width of the legend, in pixels
+	 */
+	@Override
+	public int getMaxHeight() {
+		return getValue(Property.MAX_HEIGHT, getDefaultValues().getMaxWidth());
 	}
 
 	/**

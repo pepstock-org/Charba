@@ -21,6 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for LEGEND element.
@@ -36,6 +37,10 @@ public final class DefaultLegend implements IsDefaultLegend {
 	private static final boolean DEFAULT_REVERSE = false;
 
 	private static final boolean DEFAULT_RTL = false;
+
+	private static final int DEFAULT_MAX_WIDTH = UndefinedValues.INTEGER;
+
+	private static final int DEFAULT_MAX_HEIGHT = UndefinedValues.INTEGER;
 
 	private final DefaultLegendLabels legendLabels = new DefaultLegendLabels();
 
@@ -136,6 +141,26 @@ public final class DefaultLegend implements IsDefaultLegend {
 	@Override
 	public TextDirection getTextDirection() {
 		return TextDirection.LEFT_TO_RIGHT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getMaxWidth()
+	 */
+	@Override
+	public int getMaxWidth() {
+		return DEFAULT_MAX_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getMaxHeight()
+	 */
+	@Override
+	public int getMaxHeight() {
+		return DEFAULT_MAX_HEIGHT;
 	}
 
 }

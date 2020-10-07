@@ -352,4 +352,40 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	public TextDirection getTextDirection() {
 		return getConfiguration().getLegend().getTextDirection();
 	}
+
+	/**
+	 * Sets the maximum width of the legend, in pixels.
+	 * 
+	 * @param maxWidth the maximum width of the legend, in pixels
+	 */
+	public void setMaxWidth(int maxWidth) {
+		getConfiguration().getLegend().setMaxWidth(maxWidth);
+	}
+
+	/**
+	 * Returns the maximum width of the legend, in pixels.
+	 * 
+	 * @return the maximum width of the legend, in pixels
+	 */
+	public int getMaxWidth() {
+		return getConfiguration().getLegend().getMaxWidth();
+	}
+
+	/**
+	 * Sets the maximum height of the legend, in pixels.
+	 * 
+	 * @param maxHeight the maximum height of the legend, in pixels
+	 */
+	public void setMaxHeight(int maxHeight) {
+		getConfiguration().getLegend().setMaxHeight(maxHeight);
+	}
+
+	/**
+	 * Returns the maximum width of the legend, in pixels.
+	 * 
+	 * @return the maximum width of the legend, in pixels
+	 */
+	public int getMaxHeight() {
+		return getConfiguration().getLegend().getMaxWidth();
+	}
 }

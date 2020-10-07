@@ -137,4 +137,24 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return legend.getTextDirection();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getMaxWidth()
+	 */
+	@Override
+	public int getMaxWidth() {
+		return legend.getMaxWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getMaxHeight()
+	 */
+	@Override
+	public int getMaxHeight() {
+		return legend.getMaxHeight();
+	}
+
 }
