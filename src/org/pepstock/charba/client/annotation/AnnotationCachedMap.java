@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Object which stores all annotations by their ID into {@link Annotation#ID} plugin, using a cached to store it.<br>
- * <b<PAY ATTENTION</b>: this class is invoked ONLY for configuration.
+ * <b>PAY ATTENTION</b>: this class is invoked ONLY for configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,10 +33,8 @@ final class AnnotationCachedMap extends AnnotationMap {
 	private final Map<String, AbstractAnnotation> annotationsCache = new HashMap<>();
 
 	/**
-	 * Creates an empty object creating the cache for the annotations.<br>
-	 * <b<PAY ATTENTION</b>: this constructor is used ONLY for configuration
-	 * 
-	 * @param nativeObject native object loaded from configuration
+	 * Creates an empty object with the cache for the annotations.<br>
+	 * <b>PAY ATTENTION</b>: this constructor is used ONLY for configuration.
 	 */
 	AnnotationCachedMap() {
 		super();

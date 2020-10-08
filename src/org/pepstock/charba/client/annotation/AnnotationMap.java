@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Object which stores all annotations by their ID into {@link Annotation#ID} plugin.<br>
- * <b<PAY ATTENTION</b>: this class is invoked from plugin before starting drawing and NOT for configuration.
+ * <b>PAY ATTENTION</b>: this class is invoked from plugin before starting drawing and NOT for configuration.
  * 
  * 
  * @author Andrea "Stock" Stocchero
@@ -44,7 +44,7 @@ class AnnotationMap extends NativeObjectContainer {
 
 	/**
 	 * Creates the object using the instance of native object, passed as argument.<br>
-	 * <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration
+	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
 	 * @param nativeObject native object loaded from configuration
 	 */

@@ -101,7 +101,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.<br>
-	 * <b<PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration
+	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
 	 * @param nativeObject native object loaded from configuration
 	 * @param defaultsOptions default options stored into defaults global

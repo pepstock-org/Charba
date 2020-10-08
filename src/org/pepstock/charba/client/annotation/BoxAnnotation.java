@@ -159,10 +159,10 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultsOptions) {
+	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		// if id is not consistent, new one is created
 		// if defaults is not consistent, the defaults defined for this annotation type is used
-		super(AnnotationType.BOX, id == null ? AnnotationType.BOX.createId() : id, defaultsOptions == null ? AnnotationType.BOX.getDefaultsValues() : defaultsOptions);
+		super(AnnotationType.BOX, id == null ? AnnotationType.BOX.createId() : id, defaultValues == null ? AnnotationType.BOX.getDefaultsValues() : defaultValues);
 		// checks if default are of the right class
 		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
 			// casts and stores it
@@ -175,7 +175,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 
 	/**
 	 * Creates the object wrapping an existing native object.<br>
-	 * <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
 	 * @param nativeObject native object to wrap
 	 * @param defaultValues default options instance
