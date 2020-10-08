@@ -54,9 +54,9 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 
-	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
+	private static final double DEFAULT_CIRCUMFERENCE = 360;
 
-	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
+	private static final double DEFAULT_ROTATION = 0;
 
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
