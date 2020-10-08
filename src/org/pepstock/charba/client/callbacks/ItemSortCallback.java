@@ -15,13 +15,24 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.items.TooltipItem;
+import org.pepstock.charba.client.IsChart;
 
 /**
- * Allows sorting of tooltip items.
+ * Allows sorting of items, for tooltip or legend.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of item to be sorted
  */
-public interface TooltipItemSortCallback extends ItemSortCallback<TooltipItem> {
+interface ItemSortCallback<T> {
+
+	/**
+	 * Allows sorting of items, for tooltip or legend
+	 * 
+	 * @param chart chart instance
+	 * @param item1 the first object to be compared.
+	 * @param item2 the second object to be compared.
+	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+	 */
+	int onItemSort(IsChart chart, T item1, T item2);
 
 }

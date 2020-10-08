@@ -297,6 +297,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `maxWidth` and `maxHeight` properties to `Legend` options and configuration.
    * add `skipNull` property to `BarOptions` configuration.
    * change `circumference` and `rotation` properties on `PieChart` and `DoughnutChart` options in order to set the value in degrees instead of radians.
+   * add `sort` callback (by `LegendItemSortCallback` class) to the `LegendLabels` configuration in order to sort the legend items. 
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -363,6 +364,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * implement `ImmutableDate` class to use to return the date value stored into chart configuration and to callbacks.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
  * change `Travis` configuration in order to use `JDK11` to compile the project and install `NodeJs12` in order to be compliant with new restrictions of `SonarCloud`.That means that Charba is compilable also on `JDK11` but it will be release on `JDK8` in order to be consumed by applications which are still using `JDK8`.
+ * create `ItemSortCallback` interface in order to be extended by legend and tooltip callback interfaces.
 
 License
 -------

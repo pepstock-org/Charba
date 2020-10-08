@@ -15,13 +15,13 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.items.TooltipItem;
+import org.pepstock.charba.client.items.LegendItem;
 
 /**
- * Allows sorting of tooltip items.
+ * Allows sorting of legend items.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface TooltipItemSortCallback extends ItemSortCallback<TooltipItem> {
+public interface LegendItemSortCallback extends ItemSortCallback<LegendItem> {
 
 }

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
+import org.pepstock.charba.client.callbacks.LegendItemSortCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -78,9 +79,31 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item legend item to check.
+		 * @param chart chart instance.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(CallbackFunctionContext context, NativeObject item);
+		boolean call(CallbackFunctionContext context, NativeObject item, Chart chart);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to allow sorting of legend items.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyItemSortCallback {
+
+		/**
+		 * Method of function to be called to allow sorting of legend items.
+		 * 
+		 * @param context context context value of <code>this</code> to the execution context of function.
+		 * @param item1 the first object to be compared.
+		 * @param item2 the second object to be compared.
+		 * @param chart chart instance.
+		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+		 */
+		int call(CallbackFunctionContext context, NativeObject item1, NativeObject item2, Chart chart);
 	}
 
 	// ---------------------------
@@ -90,6 +113,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the filter function
 	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the item sort function
+	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -98,6 +123,9 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private LegendFilterCallback filterCallback = null;
 	// user callbacks implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
+	// user callbacks implementation for item sort legend
+	private LegendItemSortCallback itemSortCallback = null;
+
 	// empty result
 	private static final LegendLabelItem[] EMPTY_RESULT = new LegendLabelItem[0];
 	// font instance
@@ -109,6 +137,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private enum Property implements Key
 	{
 		GENERATE_LABELS("generateLabels"),
+		SORT("sort"),
 		FILTER("filter");
 
 		// name value of property
@@ -148,7 +177,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		filterCallbackProxy.setCallback((context, item) -> {
+		filterCallbackProxy.setCallback((context, item, nativeChart) -> {
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
@@ -156,7 +185,15 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			}
 			return true;
 		});
-
+		itemSortCallbackProxy.setCallback((context, item1, item2, nativeChart) -> {
+			// checks if callback is consistent
+			if (itemSortCallback != null) {
+				// calls callback
+				return itemSortCallback.onItemSort(getChart(), Legend.FACTORY.create(item1), Legend.FACTORY.create(item2));
+			}
+			// default is 0 - equals
+			return 0;
+		});
 		labelsCallbackProxy.setCallback((context, nativeChart) -> {
 			// checks if callback is consistent
 			if (labelsCallback != null) {
@@ -253,18 +290,18 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Returns the user filter callback.
+	 * Returns the user filter callback instance.
 	 * 
-	 * @return the filterCallback
+	 * @return the user filter callback instance
 	 */
 	public LegendFilterCallback getFilterCallback() {
 		return filterCallback;
 	}
 
 	/**
-	 * Sets the user filter callback.
+	 * Sets the user filter callback instance.
 	 * 
-	 * @param filterCallback the filterCallback to set
+	 * @param filterCallback the user filter callback instance
 	 */
 	public void setFilterCallback(LegendFilterCallback filterCallback) {
 		// sets the callback
@@ -280,18 +317,18 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Returns the user callback to generate labels.
+	 * Returns the user callback instance to generate labels.
 	 * 
-	 * @return the labelsCallback
+	 * @return the user callback instance to generate labels
 	 */
 	public LegendLabelsCallback getLabelsCallback() {
 		return labelsCallback;
 	}
 
 	/**
-	 * Sets the user callback to generate labels.
+	 * Sets the user callback instance to generate labels.
 	 * 
-	 * @param labelsCallback the labelsCallback to set
+	 * @param labelsCallback the user callback instance to generate labels
 	 */
 	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
 		// sets the callback
@@ -303,6 +340,33 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, null);
+		}
+	}
+
+	/**
+	 * Returns the user item sort callback instance.
+	 * 
+	 * @return the user item sort callback instance
+	 */
+	public LegendItemSortCallback getItemSortCallback() {
+		return itemSortCallback;
+	}
+
+	/**
+	 * Sets the user item sort callback instance.
+	 * 
+	 * @param itemSortCallback the user item sort callback instance
+	 */
+	public void setItemSortCallback(LegendItemSortCallback itemSortCallback) {
+		// sets the callback
+		this.itemSortCallback = itemSortCallback;
+		// checks if callback is consistent
+		if (itemSortCallback != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, itemSortCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, null);
 		}
 	}
 }

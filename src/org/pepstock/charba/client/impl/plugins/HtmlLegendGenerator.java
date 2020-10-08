@@ -128,7 +128,9 @@ final class HtmlLegendGenerator {
 		// gets max columns for legend
 		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend
-		Legend legend = chart.getOptions().getLegend();
+		final Legend legend = chart.getOptions().getLegend();
+		// gets legend and legend labels instances
+		final LegendLabels legendLabels = legend.getLabels();
 		// creates table as result
 		final Table table = DOMBuilder.get().createTableElement();
 		// resets padding and spacing
@@ -143,7 +145,8 @@ final class HtmlLegendGenerator {
 			// checks if legend must be created in reverse mode
 			if (legend.isReverse()) {
 				Collections.sort(legendItems, REVERSE_COMPARATOR);
-			} else {
+			} else if (legendLabels.getItemSortCallback() == null) {
+				// invokes the standard sort if ONLY there is not any sort callback
 				Collections.sort(legendItems, COMPARATOR);
 			}
 			// sets index to check when to have more lines
@@ -240,15 +243,20 @@ final class HtmlLegendGenerator {
 	 * @return list of legend items to render
 	 */
 	private List<LegendLabelItem> extractLegendItems(IsChart chart) {
+		// checks if chart is consistent
+		final IsChart internalChart = IsChart.checkAndGetIfConsistent(chart);
 		// result list
 		final List<LegendLabelItem> result = new LinkedList<>();
 		// gets legend and legend labels instances
-		Legend legend = chart.getOptions().getLegend();
-		LegendLabels legendLabels = legend.getLabels();
+		final Legend legend = chart.getOptions().getLegend();
+		final LegendLabels legendLabels = legend.getLabels();
 		// temporary list of legend items
 		List<LegendLabelItem> legendItems;
 		// default list of legend items
 		List<LegendLabelItem> defaultLegendItems = Defaults.get().generateLabels(chart);
+		// ---------------
+		// Labels callback
+		// ---------------
 		// checks if there is a configured legend labels callback
 		if (legendLabels.getLabelsCallback() != null) {
 			// if here, there is a generate legend labels callback
@@ -260,6 +268,9 @@ final class HtmlLegendGenerator {
 		}
 		// stores the legend items
 		HtmlLegend.get().getPluginLegendLabelsItems().put(chart.getId(), legendItems);
+		// ---------------
+		// Filter callback
+		// ---------------
 		// checks if there is a filter legend callback
 		if (legendLabels.getFilterCallback() != null) {
 			// if here, the filter callback is invoked
@@ -276,6 +287,16 @@ final class HtmlLegendGenerator {
 			// and adds all legend items retrieved previously
 			result.addAll(legendItems);
 		}
+		// ---------------
+		// Sort callback
+		// ---------------
+		// checks if there is a sort legend callback
+		if (legendLabels.getItemSortCallback() != null) {
+			Comparator<LegendItem> sortComparator = (LegendItem o1, LegendItem o2) -> legendLabels.getItemSortCallback().onItemSort(internalChart, o1, o2);
+			// sorts the labels using the legend configuration
+			Collections.sort(result, sortComparator);
+		}
+		// then returns the sorted result
 		return result;
 	}
 
@@ -619,5 +640,4 @@ final class HtmlLegendGenerator {
 			}
 		}
 	}
-
 }

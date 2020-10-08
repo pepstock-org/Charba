@@ -194,7 +194,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 			// manage Date
 			// ----------------------------
 			// gets the start and end value configured for annotation
-			retrieveStartEndFromScaleForDouble(area, scale);
+			retrieveStartEndFromScaleForDouble(scale);
 		}
 		// calculates the start and end
 		// based on the axis kind of scale.
@@ -280,7 +280,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 	 * 
 	 * @param scale scale instance to use to configure
 	 */
-	private void retrieveStartEndFromScaleForDouble(ChartAreaNode area, ScaleItem scale) {
+	private void retrieveStartEndFromScaleForDouble(ScaleItem scale) {
 		// ----------------------------
 		// LINEAR or LOGARITHMIC scales
 		// manage Double

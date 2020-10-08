@@ -151,10 +151,10 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private LineAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultsOptions) {
+	private LineAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		// if id is not consistent, new one is created
 		// if defaults is not consistent, the defaults defined for this annotation type is used
-		super(AnnotationType.LINE, id == null ? AnnotationType.LINE.createId() : id, defaultsOptions == null ? AnnotationType.LINE.getDefaultsValues() : defaultsOptions);
+		super(AnnotationType.LINE, id == null ? AnnotationType.LINE.createId() : id, defaultValues == null ? AnnotationType.LINE.getDefaultsValues() : defaultValues);
 		// checks if default are of the right class
 		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
 			// casts and stores it
@@ -164,14 +164,14 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		}
 		// creates a line label
-		label = new LineLabel(defaultValues.getLabel());
+		label = new LineLabel(this.defaultValues.getLabel());
 		// stores into annotation
 		setValue(Property.LABEL, label);
 	}
 
 	/**
 	 * Creates the object wrapping an existing native object.<br>
-	 * <b<PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
 	 * @param nativeObject native object to wrap
 	 * @param defaultValues default options instance

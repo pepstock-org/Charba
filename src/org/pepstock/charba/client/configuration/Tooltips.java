@@ -807,18 +807,18 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	}
 
 	/**
-	 * Returns the user custom callback.
+	 * Returns the user custom callback instance.
 	 * 
-	 * @return the customCallback
+	 * @return the user custom callback instance
 	 */
 	public TooltipCustomCallback getCustomCallback() {
 		return customCallback;
 	}
 
 	/**
-	 * Sets the user custom callback.
+	 * Sets the user custom callback instance.
 	 * 
-	 * @param customCallback the customCallback to set
+	 * @param customCallback the user custom callback instance
 	 */
 	public void setCustomCallback(TooltipCustomCallback customCallback) {
 		// sets the callback
@@ -834,18 +834,18 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	}
 
 	/**
-	 * Returns the user item sort callback.
+	 * Returns the user item sort callback instance.
 	 * 
-	 * @return the itemSortCallback
+	 * @return the user item sort callback instance
 	 */
 	public TooltipItemSortCallback getItemSortCallback() {
 		return itemSortCallback;
 	}
 
 	/**
-	 * Sets the user item sort callback.
+	 * Sets the user item sort callback instance.
 	 * 
-	 * @param itemSortCallback the itemSortCallback to set
+	 * @param itemSortCallback the user item sort callback instance
 	 */
 	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
 		// sets the callback
@@ -858,22 +858,21 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.ITEM_SORT, null);
 		}
-
 	}
 
 	/**
-	 * Returns the user filter callback.
+	 * Returns the user filter callback instance.
 	 * 
-	 * @return the filterCallback
+	 * @return the user filter callback instance
 	 */
 	public TooltipFilterCallback getFilterCallback() {
 		return filterCallback;
 	}
 
 	/**
-	 * Sets the user filter callback.
+	 * Sets the user filter callback instance.
 	 * 
-	 * @param filterCallback the filterCallback to set
+	 * @param filterCallback the user filter callback instance
 	 */
 	public void setFilterCallback(TooltipFilterCallback filterCallback) {
 		// sets the callback
