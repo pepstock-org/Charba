@@ -63,7 +63,7 @@ public abstract class AbstractDeferredResources extends AbstractResources implem
 	 * 
 	 * @param module module of date adapter and library.
 	 */
-	public AbstractDeferredResources(AbstractModule module) {
+	protected AbstractDeferredResources(AbstractModule module) {
 		super(module);
 	}
 

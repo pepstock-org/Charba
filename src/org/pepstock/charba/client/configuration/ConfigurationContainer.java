@@ -44,7 +44,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 * @param chart chart instance
 	 * @param configuration options instance to store the configuration of chart.
 	 */
-	public ConfigurationContainer(IsChart chart, T configuration) {
+	protected ConfigurationContainer(IsChart chart, T configuration) {
 		super(chart);
 		// checks if configuration is consistent
 		if (configuration == null) {

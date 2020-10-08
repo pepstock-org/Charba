@@ -35,7 +35,7 @@ abstract class TimeSeriesOptions extends ScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of stacked chart
 	 */
-	public TimeSeriesOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	protected TimeSeriesOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for time series

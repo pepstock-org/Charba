@@ -33,7 +33,7 @@ abstract class AbstractShape extends ShapeDrawer implements IsShape {
 	 * 
 	 * @param shapeName the name of shape
 	 */
-	public AbstractShape(String shapeName) {
+	protected AbstractShape(String shapeName) {
 		// checks if name of shape is consistent
 		if (shapeName == null) {
 			// if not, exception

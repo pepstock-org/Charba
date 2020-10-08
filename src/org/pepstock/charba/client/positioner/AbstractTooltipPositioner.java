@@ -33,7 +33,7 @@ public abstract class AbstractTooltipPositioner implements TooltipPositioner {
 	 * 
 	 * @param name of tooltip position.
 	 */
-	public AbstractTooltipPositioner(String name) {
+	protected AbstractTooltipPositioner(String name) {
 		this.name = new CustomTooltipPosition(name);
 	}
 

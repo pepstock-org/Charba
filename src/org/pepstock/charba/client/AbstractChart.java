@@ -119,7 +119,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * 
 	 * @param type the type of chart
 	 */
-	public AbstractChart(Type type) {
+	protected AbstractChart(Type type) {
 		// checks if type is consistent
 		Type.checkIfValid(type);
 		// stores type

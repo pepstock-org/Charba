@@ -35,7 +35,7 @@ abstract class AbstractHandlerEvent extends Event {
 	 * 
 	 * @param handlerType the type of new handler.
 	 */
-	public AbstractHandlerEvent(EventType handlerType) {
+	protected AbstractHandlerEvent(EventType handlerType) {
 		// checks if argument is consistent
 		Key.checkIfValid(handlerType);
 		this.handlerType = handlerType;
