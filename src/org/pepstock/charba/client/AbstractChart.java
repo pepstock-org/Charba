@@ -84,7 +84,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-	// chart ID using GWT unique id
+	// chart ID using generateid unique id
 	private final String id = DOMBuilder.get().createUniqueId();
 	// stores the type of chart
 	private final Type type;
@@ -535,9 +535,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Will clear the chart canvas.<br>
-	 * Used extensively internally between animation frames.<br>
-	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT <code>Panel</code> one.
+	 * Will clear the chart canvas.
 	 */
 	@Override
 	public final void clear() {

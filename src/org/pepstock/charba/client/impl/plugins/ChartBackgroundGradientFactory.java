@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.elements.Div;
 /**
  * Utility used by CHART {@link ChartBackgroundColor#ID} PLUGIN.<br>
  * Utility class which creates a canvas gradient java script object using a Charba gradient.<br>
- * A Charba gradient describes how a GWT canvas gradient must be created.
+ * A Charba gradient describes how a DOM canvas gradient must be created.
  * 
  * @author Andrea "Stock" Stocchero
  * 

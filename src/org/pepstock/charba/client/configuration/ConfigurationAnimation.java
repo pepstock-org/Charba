@@ -200,7 +200,7 @@ public class ConfigurationAnimation extends Animation implements IsEventProvider
 	 * @param item animation item info.
 	 */
 	private void onProgress(AnimationItem item) {
-		// creates a native event by GWT (change)
+		// creates a native event by DOM (change)
 		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationProgressEvent(event, item));
@@ -212,7 +212,7 @@ public class ConfigurationAnimation extends Animation implements IsEventProvider
 	 * @param item animation item info.
 	 */
 	private void onComplete(AnimationItem item) {
-		// creates a native event by GWT (change)
+		// creates a native event by DOM (change)
 		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationCompleteEvent(event, item));

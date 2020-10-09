@@ -27,7 +27,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
- * A Charba gradient or pattern describes how a GWT canvas gradient or pattern must be created.
+ * A Charba gradient or pattern describes how a  canvas gradient or pattern must be created.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -54,11 +54,11 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a GWT canvas pattern java script object using a Charba pattern and a chart instance which must provide a canvas instance and its context.
+	 * Creates a canvas pattern java script object using a Charba pattern and a chart instance which must provide a canvas instance and its context.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param pattern pattern instance created at configuration level
-	 * @return a GWT canvas pattern
+	 * @return a canvas pattern
 	 */
 	public final CanvasPatternItem createPattern(IsChart chart, Pattern pattern) {
 		// checks if arguments are consistent
@@ -126,13 +126,13 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a GWT canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas instance and its context.
+	 * Creates a  canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas instance and its context.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex dataset index
 	 * @param index index of gradient related to index of dataset item of whole dataset
-	 * @return a GWT canvas gradient
+	 * @return a  canvas gradient
 	 */
 	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if arguments are consistent
@@ -189,7 +189,7 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
-	 * @return a GWT linear canvas gradient
+	 * @return a  linear canvas gradient
 	 */
 	private CanvasGradientItem createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
@@ -275,8 +275,8 @@ public abstract class CanvasObjectFactory {
 			// then exception
 			throw new IllegalArgumentException("Gradient orientation is wrong [" + gradient.getOrientation() + "]");
 		}
-		// returns GWT canvas gradient
-		// by GWT context 2d method
+		// returns  canvas gradient
+		// by  context 2d method
 		return context.createLinearGradient(x0, y0, x1, y1);
 	}
 
@@ -287,7 +287,7 @@ public abstract class CanvasObjectFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex dataset index
 	 * @param index index of gradient related to index of dataset item of whole dataset
-	 * @return a GWT radial canvas gradient
+	 * @return a  radial canvas gradient
 	 */
 	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
@@ -348,8 +348,8 @@ public abstract class CanvasObjectFactory {
 			// then exception
 			throw new IllegalArgumentException("Gradient orientation is wrong [" + gradient.getOrientation() + "]");
 		}
-		// returns GWT canvas gradient
-		// by GWT context 2d method
+		// returns  canvas gradient
+		// by context 2d method
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
 

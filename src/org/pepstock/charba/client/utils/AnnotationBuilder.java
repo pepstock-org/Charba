@@ -67,10 +67,10 @@ public final class AnnotationBuilder {
 	}
 
 	/**
-	 * Creates an image to apply to canvas with the HTML content (passed as GWT element) and width and height of the resulted image. Drawing the image on canvas, you could get the
+	 * Creates an image to apply to canvas with the HTML content (passed as DOM element) and width and height of the resulted image. Drawing the image on canvas, you could get the
 	 * java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some invalid characters, not allowed into xHTML.
 	 * 
-	 * @param htmlXmlContent GWT element which represents the XML content to show
+	 * @param htmlXmlContent DOM element which represents the XML content to show
 	 * @param width width of image to be created
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas

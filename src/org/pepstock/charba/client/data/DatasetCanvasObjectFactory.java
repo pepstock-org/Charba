@@ -33,7 +33,7 @@ import org.pepstock.charba.client.items.DatasetMetaItem;
 
 /**
  * Utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
- * A Charba gradient or pattern describes how a GWT canvas gradient or pattern must be created.
+ * A Charba gradient or pattern describes how a canvas gradient or pattern must be created.
  * 
  * @author Andrea "Stock" Stocchero
  * 
