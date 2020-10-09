@@ -39,7 +39,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * <li>the border width
  * <li>the border dash
  * <li>the border dash offset
- * <li>if firing event on clear selection
+ * <li>"clear" options
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero

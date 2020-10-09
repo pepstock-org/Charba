@@ -88,7 +88,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	/**
 	 * Sets the cursor type when the cursor is over the dataset item.
 	 * 
-	 * @param cursor cursor type
+	 * @param cursor cursor type when the cursor is over the dataset item
 	 */
 	public final void setCursorPointer(CursorType cursor) {
 		// checks if cursor is consistent
@@ -100,7 +100,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	/**
 	 * Returns the cursor type when the cursor is over the dataset item.
 	 * 
-	 * @return cursor type
+	 * @return cursor type when the cursor is over the dataset item
 	 */
 	public final CursorType getCursorPointer() {
 		return getValue(Property.CURSOR_POINTER, CursorType.values(), getCurrentCursor());

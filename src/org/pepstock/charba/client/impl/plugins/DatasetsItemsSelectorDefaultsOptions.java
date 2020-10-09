@@ -31,8 +31,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * <li>the border color
  * <li>the border width
  * <li>the border dash
- * <li>if firing event on clear selection
- * <li>clear defaults
+ * <li>"clear" options
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
