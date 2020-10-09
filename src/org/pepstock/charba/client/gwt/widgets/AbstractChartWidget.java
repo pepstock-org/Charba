@@ -96,6 +96,26 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#getHandlerCount(org.pepstock.charba.client.events.EventType)
+	 */
+	@Override
+	public int getHandlerCount(EventType type) {
+		return chart.getHandlerCount(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#isEventHandled(org.pepstock.charba.client.events.EventType)
+	 */
+	@Override
+	public boolean isEventHandled(EventType type) {
+		return chart.isEventHandled(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getChartElement()
 	 */
 	@Override

@@ -138,6 +138,22 @@ public interface IsChart {
 	 * @param event the event to fire
 	 */
 	void fireEvent(Event event);
+	
+	/**
+	 * Returns the amount of handlers for a specific event type.
+	 * 
+	 * @param type event type to use to get the amount of handlers
+	 * @return the amount of handlers for a specific event type
+	 */
+	int getHandlerCount(EventType type);
+
+	/**
+	 * Returns <code>true</code> if there is any event handler for event type passed as argument.
+	 * 
+	 * @param type event type to check
+	 * @return <code>true</code> if there is any event handler for event type passed as argument
+	 */
+	boolean isEventHandled(EventType type);
 
 	/**
 	 * Gets a handle to the object's underlying DOM element.
