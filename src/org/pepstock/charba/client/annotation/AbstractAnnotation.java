@@ -23,6 +23,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -54,6 +55,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		ID("id"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
+		HOVER_CURSOR("hoverCursor"),
 		// internal property to set an unique id for cahing
 		CHARBA_ANNOTATION_ID("_charbaAnnotationId");
 
@@ -245,6 +247,39 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	public final void setBorderWidth(int borderWidth) {
 		setValue(Property.BORDER_WIDTH, borderWidth);
+	}
+
+	/**
+	 * Sets the cursor type when the cursor is over the annotation.
+	 * 
+	 * @param cursor cursor type when the cursor is over the annotation
+	 */
+	public final void setHoverCursor(CursorType cursor) {
+		// checks if cursor is consistent
+		if (cursor != null) {
+			setValue(Property.HOVER_CURSOR, cursor.name());
+		} else {
+			// removes key because the argument is null
+			remove(Property.HOVER_CURSOR);
+		}
+	}
+
+	/**
+	 * Returns the cursor type when the cursor is over the annotation.
+	 * 
+	 * @return cursor type when the cursor is over the annotation
+	 */
+	@Override
+	public final CursorType getHoverCursor() {
+		// checks if cursor has been set
+		if (has(Property.HOVER_CURSOR)) {
+			// retrieves the cursor
+			// pay attention that default cursor is passed as default
+			// but it's not used because the property exist
+			return getValue(Property.HOVER_CURSOR, CursorType.values(), CursorType.DEFAULT);
+		}
+		// if here, returns the default
+		return defaultValues.getHoverCursor();
 	}
 
 }

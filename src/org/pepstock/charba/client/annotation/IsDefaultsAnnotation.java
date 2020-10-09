@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.dom.enums.CursorType;
 
 /**
  * This is the {@link Annotation#ID} plugin annotation DEFAULTS options interface in order to map the common attributes for all annotations.
@@ -63,5 +64,14 @@ interface IsDefaultsAnnotation {
 	 * @return the width of the border in pixels.
 	 */
 	int getBorderWidth();
+
+	/**
+	 * Returns the cursor type when the cursor is over the annotation.
+	 * 
+	 * @return cursor type when the cursor is over the annotation
+	 */
+	default CursorType getHoverCursor() {
+		return null;
+	}
 
 }
