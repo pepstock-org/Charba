@@ -47,9 +47,9 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 
 	private final Point endingPoint = new Point();
 
-	private boolean isEndValueMissing = false;
-
 	private final StartEndCointainer startEndCointainer = new StartEndCointainer();
+
+	private boolean isEndValueMissing = false;
 
 	/**
 	 * Creates an annotation element by an annotation configuration.

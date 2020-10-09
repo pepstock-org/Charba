@@ -25,6 +25,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -57,6 +59,10 @@ public final class Annotation extends AbstractPlugin {
 	private final Map<String, List<AbstractAnnotationElement<?>>> annotationElements = new HashMap<>();
 	// map to maintain all annotation instances, acts as a cache
 	private final Map<Integer, AbstractAnnotation> annotationInstancesCache = new HashMap<>();
+	// pattern factory
+	private final Pattern.PatternFactory patternFactory = new Pattern.PatternFactory();
+	// gradient factory
+	private final Gradient.GradientFactory gradientFactory = new Gradient.GradientFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -72,6 +78,24 @@ public final class Annotation extends AbstractPlugin {
 	 */
 	public static Annotation get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Returns the pattern factory instance of plugin.
+	 * 
+	 * @return the pattern factory instance of plugin
+	 */
+	Pattern.PatternFactory getPatternFactory() {
+		return patternFactory;
+	}
+
+	/**
+	 * Returns the gradient factory instance of plugin.
+	 * 
+	 * @return the gradient factory instance of plugin
+	 */
+	Gradient.GradientFactory getGradientFactory() {
+		return gradientFactory;
 	}
 
 	/*

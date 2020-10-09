@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -30,38 +31,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
-
-	/**
-	 * Value of the stored color type into native object.
-	 */
-	enum ColorType implements Key
-	{
-		COLOR("color"),
-		PATTERN("pattern"),
-		GRADIENT("gradient");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private ColorType(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-	}
 
 	/**
 	 * Name of properties of native object.
@@ -145,44 +114,51 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	/**
 	 * Returns the type of background color has been set.
 	 * 
-	 * @return the type of background color has been set. Default is {@link ColorType#COLOR}.
+	 * @return the type of background color has been set.<br>
+	 *         Default is {@link ColorType#COLOR}.
 	 */
 	ColorType getColorType() {
 		return getValue(Property.COLOR_TYPE, ColorType.values(), defaultsOptions.getColorType());
 	}
 
 	/**
-	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * Returns the background color.<br>
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 * 
-	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * @return the background color.<br>
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if color has been set
 		if (ColorType.COLOR.equals(getColorType())) {
 			return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
 		}
-		// otherwise returns null
-		return null;
+		// otherwise returns defaults
+		return defaultsOptions.getBackgroundColorAsString();
 	}
 
 	/**
-	 * Returns the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * Returns the background color.<br>
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 * 
-	 * @return the background color. If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * @return the background color.<br>
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 */
 	public IsColor getBackgroundColor() {
 		// checks if color has been set
 		if (ColorType.COLOR.equals(getColorType())) {
 			return ColorBuilder.parse(getBackgroundColorAsString());
 		}
-		// otherwise returns null
-		return null;
+		// otherwise returns defaults
+		return ColorBuilder.parse(defaultsOptions.getBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns the background gradient. If it has been set a color or pattern, returns <code>null</code>.
+	 * Returns the background gradient. <br>
+	 * If it has been set a color or pattern, returns <code>null</code>.
 	 * 
-	 * @return the background gradient. If it has been set a color or pattern, returns <code>null</code>
+	 * @return the background gradient. <br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
 	 */
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if gradient has been set
@@ -201,9 +177,11 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the background pattern. If it has been set a color or gradient, returns <code>null</code>.
+	 * Returns the background pattern.<br>
+	 * If it has been set a color or gradient, returns <code>null</code>.
 	 * 
-	 * @return the background pattern. If it has been set a color or pattern, returns <code>null</code>
+	 * @return the background pattern. <br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
 	 */
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if pattern has been set

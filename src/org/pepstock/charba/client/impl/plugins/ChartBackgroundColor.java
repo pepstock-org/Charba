@@ -28,6 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -202,19 +203,19 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			Context2dItem ctx = chart.getCanvas().getContext2d();
 			// save context
 			ctx.save();
-			if (ChartBackgroundColorOptions.ColorType.COLOR.equals(bgOptions.getColorType())) {
+			if (ColorType.COLOR.equals(bgOptions.getColorType())) {
 				// set fill canvas color
 				ctx.setFillColor(bgOptions.getBackgroundColorAsString());
 				// sets back ground to chart HTML element
 				applyBackgroundColorToChartElement(chart, bgOptions.getBackgroundColorAsString());
-			} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
+			} else if (ColorType.PATTERN.equals(bgOptions.getColorType())) {
 				// creates the pattern
 				CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 				// set fill canvas pattern
 				ctx.setFillPattern(canvasPattern);
 				// sets back ground to chart HTML element
 				applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
-			} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+			} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 				// creates the gradient
 				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
 				// set fill canvas color
@@ -261,7 +262,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			// gets options
 			ChartBackgroundColorOptions bgOptions = getOptions(chart);
 			// if gradient has been set
-			if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+			if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 				// Due to gradients are created based on dimension of
 				// canvas or chart area, every time a resize is occurring
 				// gradients must be recreated

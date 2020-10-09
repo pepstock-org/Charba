@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptions.ColorType;
+import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**

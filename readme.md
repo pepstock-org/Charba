@@ -335,6 +335,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
    * add `enabled` property to annotation line and box options in order to enable and disable the drawing of the annotation.
    * add `hoverCursor` property to line and box annotation options in order to change the cursor when mouse hovers the annotation.
+   * add `Pattern` and `Gradient` as possible `backgroundColor` property in `BoxAnnotation` options.   
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
    * remove `fireEventOnClearSelection` properties has been removed from DatasetsItemsSelectorOptions class because an clear selection event will fire only if there is a event handler. 
  

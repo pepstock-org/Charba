@@ -20,9 +20,12 @@ import java.util.Date;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -72,9 +75,9 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		Y_SCALE_ID("yScaleID"),
 		Y_MIN("yMin"),
 		Y_MAX("yMax"),
-		BACKGROUND_COLOR("backgroundColor");
+		BACKGROUND_COLOR("backgroundColor"),
+		BACKGROUND_COLOR_TYPE("backgroundColorType");
 
-		// name value of property
 		private final String value;
 
 		/**
@@ -213,40 +216,152 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	}
 
 	/**
-	 * Sets the color of the background of annotation.
+	 * Returns the type of background color has been set.
 	 * 
-	 * @param backgroundColor the color of the background of annotation
+	 * @return the type of background color has been set. Default is {@link ColorType#COLOR}.
 	 */
-	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
-	}
-
-	/**
-	 * Sets the color of the background of annotation.
-	 * 
-	 * @param backgroundColor the color of the background of annotation
-	 */
-	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+	ColorType getBackgroundColorType() {
+		return getValue(Property.BACKGROUND_COLOR_TYPE, ColorType.values(), ColorType.COLOR);
 	}
 
 	/**
 	 * Returns the color of the background of annotation.
 	 * 
-	 * @return the color of the background of annotation
+	 * @return the color of the background of annotation.
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
+		// checks if color has been set
+		if (ColorType.COLOR.equals(getBackgroundColorType())) {
+			return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
+		}
+		// otherwise returns defaults
+		return defaultValues.getBackgroundColorAsString();
 	}
 
 	/**
 	 * Returns the color of the background of annotation.
 	 * 
-	 * @return the color of the background of annotation
+	 * @return the color of the background of annotation.
 	 */
 	public IsColor getBackgroundColor() {
-		return ColorBuilder.parse(getBackgroundColorAsString());
+		// checks if color has been set
+		if (ColorType.COLOR.equals(getBackgroundColorType())) {
+			return ColorBuilder.parse(getBackgroundColorAsString());
+		}
+		// otherwise returns defaults
+		return ColorBuilder.parse(defaultValues.getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the canvas gradient of the background of annotation.<br>
+	 * If it has been set a color or pattern, returns <code>null</code>.
+	 * 
+	 * @return the canvas gradient of the background of annotation.<br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
+	 */
+	@Override
+	public Gradient getBackgroundColorAsGradient() {
+		// checks if gradient has been set
+		if (ColorType.GRADIENT.equals(getBackgroundColorType())) {
+			// checks if the gradient has been set into this object or into defaults
+			if (has(Property.BACKGROUND_COLOR)) {
+				// if here, the gradient has been set into this options
+				return Annotation.get().getGradientFactory().create(getValue(Property.BACKGROUND_COLOR));
+			} else {
+				// if here, the gradient has been set into defaults options
+				return defaultValues.getBackgroundColorAsGradient();
+			}
+		}
+		// otherwise returns null
+		return null;
+	}
+
+	/**
+	 * Returns the canvas pattern of the background of annotation.<br>
+	 * If it has been set a color or gradient, returns <code>null</code>.
+	 * 
+	 * @return the canvas pattern of the background of annotation.<br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
+	 */
+	@Override
+	public Pattern getBackgroundColorAsPattern() {
+		// checks if pattern has been set
+		if (ColorType.PATTERN.equals(getBackgroundColorType())) {
+			// checks if the pattern has been set into this object or into defaults
+			if (has(Property.BACKGROUND_COLOR)) {
+				// if here, the pattern has been set into this options
+				return Annotation.get().getPatternFactory().create(getValue(Property.BACKGROUND_COLOR));
+			} else {
+				// if here, the pattern has been set into defaults options
+				return defaultValues.getBackgroundColorAsPattern();
+			}
+		}
+		// otherwise returns null
+		return null;
+	}
+
+	/**
+	 * Sets the background color.
+	 * 
+	 * @param color the background color.
+	 */
+	public void setBackgroundColor(String color) {
+		setValue(Property.BACKGROUND_COLOR, color);
+		// checks if color is consistent
+		if (color != null) {
+			// sets the color type
+			setValue(Property.BACKGROUND_COLOR_TYPE, ColorType.COLOR);
+		} else {
+			// if here, the color is not consistent
+			// removes type
+			remove(Property.BACKGROUND_COLOR_TYPE);
+		}
+	}
+
+	/**
+	 * Sets the background color.
+	 * 
+	 * @param color the background color.
+	 */
+	public void setBackgroundColor(IsColor color) {
+		setBackgroundColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the background gradient.
+	 * 
+	 * @param gradient the background gradient.
+	 */
+	public void setBackgroundColor(Gradient gradient) {
+		setValue(Property.BACKGROUND_COLOR, gradient);
+		// checks if argument is consistent
+		if (gradient != null) {
+			// sets the color type
+			setValue(Property.BACKGROUND_COLOR_TYPE, ColorType.GRADIENT);
+		} else {
+			// if here, the gradient is not consistent
+			// removes type
+			remove(Property.BACKGROUND_COLOR_TYPE);
+		}
+	}
+
+	/**
+	 * Sets the background pattern.
+	 * 
+	 * @param pattern the background pattern.
+	 */
+	public void setBackgroundColor(Pattern pattern) {
+		setValue(Property.BACKGROUND_COLOR, pattern);
+		// checks if argument is consistent
+		if (pattern != null) {
+			// sets the color type
+			setValue(Property.BACKGROUND_COLOR_TYPE, ColorType.PATTERN);
+		} else {
+			// if here, the pattern is not consistent
+			// removes type
+			remove(Property.BACKGROUND_COLOR_TYPE);
+		}
 	}
 
 	/**

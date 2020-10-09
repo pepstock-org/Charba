@@ -17,6 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -56,6 +58,24 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation {
 	 */
 	default String getBackgroundColorAsString() {
 		return BoxAnnotation.DEFAULT_BACKGROUND_COLOR_AS_STRING;
+	}
+
+	/**
+	 * Returns the background gradient.
+	 * 
+	 * @return the background gradient.
+	 */
+	default Gradient getBackgroundColorAsGradient() {
+		return null;
+	}
+
+	/**
+	 * Returns the background pattern.
+	 * 
+	 * @return the background pattern.
+	 */
+	default Pattern getBackgroundColorAsPattern() {
+		return null;
 	}
 
 	/**

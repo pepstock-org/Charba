@@ -19,12 +19,20 @@ import java.util.Date;
 import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.Area;
+import org.pepstock.charba.client.colors.CanvasObjectFactory;
+import org.pepstock.charba.client.colors.Center;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.Radius;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Internal class created for each box annotation options configured from the plugin.<br>
@@ -35,6 +43,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation> {
 
+	private final MinMaxCointainer minMaxContainer = new MinMaxCointainer();
+
+	private final BoxAnnotationCanvasObjectFactory canvasObjectFactory;
+
 	// area limits
 	private double left = UndefinedValues.DOUBLE;
 
@@ -44,8 +56,6 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 
 	private double bottom = UndefinedValues.DOUBLE;
 
-	private final MinMaxCointainer minMaxContainer = new MinMaxCointainer();
-
 	/**
 	 * Creates an annotation element by an annotation configuration.
 	 * 
@@ -54,8 +64,65 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 */
 	BoxAnnotationElement(IsChart chart, BoxAnnotation configuration) {
 		super(chart, configuration);
+		// creates the canvas object factory
+		this.canvasObjectFactory = new BoxAnnotationCanvasObjectFactory(this);
 	}
 
+	/**
+	 * Returns the left position of the annotation.
+	 * 
+	 * @return the left position of the annotation
+	 */
+	double getLeft() {
+		return left;
+	}
+
+	/**
+	 * Returns the top position of the annotation.
+	 * 
+	 * @return the top position of the annotation
+	 */
+	double getTop() {
+		return top;
+	}
+
+	/**
+	 * Returns the right position of the annotation.
+	 * 
+	 * @return the right position of the annotation
+	 */
+	double getRight() {
+		return right;
+	}
+
+	/**
+	 * Returns the bottom position of the annotation.
+	 * 
+	 * @return the bottom position of the annotation
+	 */
+	double getBottom() {
+		return bottom;
+	}
+
+	/**
+	 * Returns the width of the annotation.
+	 * 
+	 * @return the width of the annotation
+	 */
+	double getWidth() {
+		return right - left;
+	}
+
+	/**
+	 * Returns the height of the annotation.
+	 * 
+	 * @return the height of the annotation
+	 */
+	double getHeight() {
+		return bottom - top;
+	}
+
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -111,11 +178,29 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// sets the line width and color of the rectangle border
 		ctx.setLineWidth(getConfiguration().getBorderWidth());
 		ctx.setStrokeColor(getConfiguration().getBorderColorAsString());
-		// sets the color of the rectangle
-		ctx.setFillColor(getConfiguration().getBackgroundColorAsString());
+		// gets color type of background
+		ColorType backgroundColorType = getConfiguration().getBackgroundColorType();
+		// check type of background color
+		if (ColorType.GRADIENT.equals(backgroundColorType)) {
+			// GRADIENT
+			// gets gradient
+			Gradient gradient = getConfiguration().getBackgroundColorAsGradient();
+			// sets the gradient of the rectangle
+			ctx.setFillGradient(canvasObjectFactory.createGradient(getChart(), gradient, UndefinedValues.INTEGER, UndefinedValues.INTEGER));
+		} else if (ColorType.PATTERN.equals(backgroundColorType)) {
+			// PATTERN
+			// gets pattern
+			Pattern pattern = getConfiguration().getBackgroundColorAsPattern();
+			// sets the pattern of the rectangle
+			ctx.setFillPattern(canvasObjectFactory.createPattern(getChart(), pattern));
+		} else {
+			// COLOR
+			// sets the color of the rectangle
+			ctx.setFillColor(getConfiguration().getBackgroundColorAsString());
+		}
 		// Draws the rectangle
-		double width = right - left;
-		double height = bottom - top;
+		double width = getWidth();
+		double height = getHeight();
 		ctx.fillRect(left, top, width, height);
 		ctx.strokeRect(left, top, width, height);
 	}
@@ -305,6 +390,77 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		 */
 		void setMaximum(double maximum) {
 			this.maximum = maximum;
+		}
+
+	}
+
+	/**
+	 * FIXME
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class BoxAnnotationCanvasObjectFactory extends CanvasObjectFactory {
+
+		private final BoxAnnotationElement annotationElement;
+
+		private BoxAnnotationCanvasObjectFactory(BoxAnnotationElement annotationElement) {
+			this.annotationElement = annotationElement;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getArea(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient)
+		 */
+		@Override
+		protected Area getArea(IsChart chart, Gradient gradient) {
+			// IGNORE THE SCOPE of gradient
+			final Area area = new Area();
+			// stores the coordinates
+			area.setTop(annotationElement.getTop());
+			area.setLeft(annotationElement.getLeft());
+			area.setRight(annotationElement.getRight());
+			area.setBottom(annotationElement.getBottom());
+			// returns area
+			return area;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+		 */
+		@Override
+		protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+			// calculates X
+			final double x = annotationElement.getLeft() + (annotationElement.getWidth() / 2D);
+			final double y = annotationElement.getTop() + (annotationElement.getHeight() / 2D);
+			// IGNORE THE SCOPE of gradient
+			final Center center = new Center();
+			// the center of box has the following coordinates:
+			// X - the right minus left, divided by 2
+			// Y - the bottom minus top, divided by 2
+			center.setX(x);
+			center.setY(y);
+			Window.getConsole().log(center.toString());
+			// returns center
+			return center;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+		 */
+		@Override
+		protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+			// by default is the center of chart box
+			final Radius radius = new Radius();
+			radius.setInner(0);
+			// the outer is max between width and height, divided by 2
+			radius.setOuter(Math.max(annotationElement.getWidth(), annotationElement.getHeight()) / 2D);
+			// returns radius
+			return radius;
 		}
 
 	}

@@ -90,7 +90,7 @@ public abstract class CanvasObjectFactory {
 		Context2dItem context = canvas.getContext2d();
 		// creates the pattern
 		CanvasPatternItem result = context.createPattern(pattern.getImage(), pattern.getRepetition());
-		// checks if rsult is consistent
+		// checks if result is consistent
 		// to avoid to add a pattern not consistent
 		if (result != null) {
 			// stores canvas pattern into cache
