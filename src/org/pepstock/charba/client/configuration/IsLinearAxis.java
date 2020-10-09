@@ -27,32 +27,6 @@ import org.pepstock.charba.client.Defaults;
 public interface IsLinearAxis extends IsNumericAxis {
 
 	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @param beginAtZero if true, scale will include 0 if it is not already included.
-	 */
-	default void setBeginAtZero(boolean beginAtZero) {
-		// checks if axis is consistent
-		if (getAxisElement() != null) {
-			getAxisElement().getScale().setBeginAtZero(beginAtZero);
-		}
-	}
-
-	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @return if true, scale will include 0 if it is not already included.
-	 */
-	default boolean isBeginAtZero() {
-		// checks if axis is consistent
-		if (getAxisElement() != null) {
-			return getAxisElement().getScale().isBeginAtZero();
-		}
-		// if here, axis is not consistent
-		return Defaults.get().getScale().isBeginAtZero();
-	}
-
-	/**
 	 * Sets the adjustment used when calculating the maximum data value.
 	 * 
 	 * @param suggestedMax adjustment used when calculating the maximum data value.

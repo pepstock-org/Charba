@@ -31,6 +31,32 @@ public interface IsNumericAxis {
 	 * @return the axis
 	 */
 	Axis getAxisElement();
+	
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @param beginAtZero if true, scale will include 0 if it is not already included.
+	 */
+	default void setBeginAtZero(boolean beginAtZero) {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			getAxisElement().getScale().setBeginAtZero(beginAtZero);
+		}
+	}
+
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @return if true, scale will include 0 if it is not already included.
+	 */
+	default boolean isBeginAtZero() {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			return getAxisElement().getScale().isBeginAtZero();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().isBeginAtZero();
+	}
 
 	/**
 	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
