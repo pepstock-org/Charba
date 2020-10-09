@@ -17,9 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.annotation.callbacks.ClickCallback;
-import org.pepstock.charba.client.annotation.callbacks.EnterCallback;
-import org.pepstock.charba.client.annotation.callbacks.LeaveCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -45,7 +42,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
-	static final String INVALID_DEFAULTS_VALUES_CLASS = "Defaults options are not invalid because not a {0} annotaion defaults";
+	static final String INVALID_DEFAULTS_VALUES_CLASS = "Defaults options are not invalid because is not a {0} annotaion defaults";
 
 	/**
 	 * Name of properties of native object.
@@ -85,12 +82,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 
 	}
 
-	// callback instance to handle mouse over event for entering on annotation
-	private EnterCallback enterCallback = null;
-	// callback instance to handle mouse leave and mouse over event for leaving on annotation
-	private LeaveCallback leaveCallback = null;
-	// callback instance to handle click event for clicking on annotation
-	private ClickCallback clickCallback = null;
 	// defaults options
 	private final IsDefaultsAnnotation defaultValues;
 	// draw time instance set at plugin startup
@@ -254,82 +245,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	public final void setBorderWidth(int borderWidth) {
 		setValue(Property.BORDER_WIDTH, borderWidth);
-	}
-
-	/**
-	 * Returns the callback called when a mouse event is occurring, entering on annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, entering on annotation element
-	 */
-	@Override
-	public final EnterCallback getEnterCallback() {
-		// checks if is consistent
-		// what has been set against this instance
-		if (enterCallback == null) {
-			// if not set here, checks on the defaults
-			return defaultValues.getEnterCallback();
-		}
-		return enterCallback;
-	}
-
-	/**
-	 * Sets the callback called when a mouse event is occurring, entering on annotation element.
-	 * 
-	 * @param leaveCallback the callback called when a mouse event is occurring, entering on annotation element
-	 */
-	public final void setEnterCallback(EnterCallback leaveCallback) {
-		this.enterCallback = leaveCallback;
-	}
-
-	/**
-	 * Returns the callback called when a mouse event is occurring, leaving the annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, leaving the annotation element
-	 */
-	@Override
-	public final LeaveCallback getLeaveCallback() {
-		// checks if is consistent
-		// what has been set against this instance
-		if (leaveCallback == null) {
-			// if not set here, checks on the defaults
-			return defaultValues.getLeaveCallback();
-		}
-		return leaveCallback;
-	}
-
-	/**
-	 * Sets the callback called when a mouse event is occurring, leaving the annotation element.
-	 * 
-	 * @param leaveCallback the callback called when a mouse event is occurring, leaving the annotation element
-	 */
-	public final void setLeaveCallback(LeaveCallback leaveCallback) {
-		this.leaveCallback = leaveCallback;
-	}
-
-	/**
-	 * Returns the callback called when a mouse event is occurring, clicking on the annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, clicking on the annotation element
-	 */
-	@Override
-	public final ClickCallback getClickCallback() {
-		// checks if is consistent
-		// what has been set against this instance
-		if (clickCallback == null) {
-			// if not set here, checks on the defaults
-			return defaultValues.getClickCallback();
-		}
-		return clickCallback;
-	}
-
-	/**
-	 * Sets the callback called when a mouse event is occurring, clicking on the annotation element.
-	 * 
-	 * @param clickCallback the callback called when a mouse event is occurring, clicking on the annotation element
-	 */
-	public final void setClickCallback(ClickCallback clickCallback) {
-		// sets click callback
-		this.clickCallback = clickCallback;
 	}
 
 }

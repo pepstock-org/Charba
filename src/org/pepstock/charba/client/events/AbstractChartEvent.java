@@ -37,7 +37,7 @@ abstract class AbstractChartEvent extends AbstractEvent {
 	 * @param type type of event
 	 * @param key options key where default function is stored
 	 */
-	protected AbstractChartEvent(ChartEventContext eventContext, EventType type, Key key) {
+	AbstractChartEvent(ChartEventContext eventContext, EventType type, Key key) {
 		super(eventContext != null ? eventContext.getNativeEvent() : null, type);
 		// checks if arguments are consistent
 		if (eventContext == null || eventContext.getNativeChart() == null) {

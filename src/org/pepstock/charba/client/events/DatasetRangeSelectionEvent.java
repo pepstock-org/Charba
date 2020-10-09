@@ -58,8 +58,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	}
 
 	/**
-	 * Returns the starting value of selected scale.<br>
-	 * If <code>null</code>, the event is related to a clear of selection area.
+	 * Returns the starting value of selected scale.
 	 * 
 	 * @return the starting value of selected scale
 	 */
@@ -68,8 +67,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	}
 
 	/**
-	 * Returns the ending value of selected scale.<br>
-	 * If <code>null</code>, the event is related to a clear of selection area.
+	 * Returns the ending value of selected scale.
 	 * 
 	 * @return the ending value of selected scale
 	 */

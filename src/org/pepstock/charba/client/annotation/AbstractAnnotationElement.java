@@ -20,9 +20,6 @@ import java.util.Map;
 
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.callbacks.ClickCallback;
-import org.pepstock.charba.client.annotation.callbacks.EnterCallback;
-import org.pepstock.charba.client.annotation.callbacks.LeaveCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -31,6 +28,9 @@ import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.events.AnnotationClickEvent;
+import org.pepstock.charba.client.events.AnnotationEnterEvent;
+import org.pepstock.charba.client.events.AnnotationLeaveEvent;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
@@ -59,11 +59,11 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 
 	private final IsChart chart;
 
-	private final ClickCallback clickCallback;
+	private final boolean hasClickEventHandler;
 
-	private final EnterCallback enterCallback;
+	private final boolean hasEnterEventHandler;
 
-	private final LeaveCallback leaveCallback;
+	private final boolean hasLeaveEventHandler;
 
 	private boolean isHovered = false;
 
@@ -76,10 +76,10 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 	AbstractAnnotationElement(IsChart chart, T configuration) {
 		this.chart = chart;
 		this.configuration = configuration;
-		// stores callbacks instances
-		this.clickCallback = configuration.getClickCallback();
-		this.enterCallback = configuration.getEnterCallback();
-		this.leaveCallback = configuration.getLeaveCallback();
+		// stores if has got any annotation event handler
+		this.hasClickEventHandler = chart.isEventHandled(AnnotationClickEvent.TYPE);
+		this.hasEnterEventHandler = chart.isEventHandled(AnnotationEnterEvent.TYPE);
+		this.hasLeaveEventHandler = chart.isEventHandled(AnnotationLeaveEvent.TYPE);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -291,9 +291,9 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 	 */
 	private void addListeners() {
 		// adds to the element all event listeners
-		checkAndAddListener(clickCallback, BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
-		checkAndAddListener(enterCallback, BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
-		checkAndAddListener(leaveCallback, BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
+		checkAndAddListener(hasClickEventHandler, BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
+		checkAndAddListener(hasEnterEventHandler, BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		checkAndAddListener(hasLeaveEventHandler, BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
 	}
 
 	/**
@@ -303,9 +303,9 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 	 * @param eventType type of the event in order to add the right listener
 	 * @param proxy callback proxy instance which will be invoked to call the callback
 	 */
-	private void checkAndAddListener(Object callback, String eventType, Proxy proxy) {
+	private void checkAndAddListener(boolean hasEventHandler, String eventType, Proxy proxy) {
 		// checks if callback has been set
-		if (callback != null) {
+		if (hasEventHandler) {
 			// gets canvas
 			Canvas canvas = getChart().getCanvas();
 			// adds event listener
@@ -334,9 +334,9 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 	private void onClick(BaseNativeEvent event) {
 		// checks if is the callback is consistent and
 		// if the event is on the annotation element
-		if (clickCallback != null && isInside(event)) {
-			// invokes on click event
-			clickCallback.onClick(getChart(), event, getConfiguration());
+		if (hasClickEventHandler && isInside(event)) {
+			// fires click event
+			chart.fireEvent(new AnnotationClickEvent(event, getConfiguration()));
 		}
 	}
 
@@ -349,19 +349,19 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 		// checks if element is already hovered and
 		// if is the callback is consistent and
 		// if the event is not on the annotation element
-		if (isHovered && leaveCallback != null && !isInside(event)) {
+		if (isHovered && hasLeaveEventHandler && !isInside(event)) {
 			// is leaving, then sets the flag
 			isHovered = false;
-			// invokes on leave callback
-			leaveCallback.onLeave(getChart(), event, getConfiguration());
-		} else if (!isHovered && enterCallback != null && isInside(event)) {
+			// fires leave event
+			chart.fireEvent(new AnnotationLeaveEvent(event, getConfiguration()));
+		} else if (!isHovered && hasEnterEventHandler && isInside(event)) {
 			// checks if element is not hovered and
 			// if is the callback is consistent and
 			// if the event is on the annotation element
 			// is entering, then sets the flag
 			isHovered = true;
-			// invokes on enter callback
-			enterCallback.onEnter(getChart(), event, getConfiguration());
+			// fires enter event
+			chart.fireEvent(new AnnotationEnterEvent(event, getConfiguration()));
 		}
 	}
 
@@ -375,12 +375,12 @@ abstract class AbstractAnnotationElement<T extends AbstractAnnotation> {
 	private void onMouseLeave(BaseNativeEvent event) {
 		// checks if element is already hovered and
 		// if is the callback is consistent
-		if (isHovered && leaveCallback != null) {
+		if (isHovered && hasLeaveEventHandler) {
 			// if here the mouse is leaving the canvas
 			// is leaving, then sets the flag
 			isHovered = false;
-			// invokes on leave callback
-			leaveCallback.onLeave(getChart(), event, getConfiguration());
+			// fires leave event
+			chart.fireEvent(new AnnotationLeaveEvent(event, getConfiguration()));
 		}
 	}
 

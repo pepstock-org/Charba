@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.annotation.callbacks.ClickCallback;
-import org.pepstock.charba.client.annotation.callbacks.EnterCallback;
-import org.pepstock.charba.client.annotation.callbacks.LeaveCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 
 /**
@@ -67,30 +64,4 @@ interface IsDefaultsAnnotation {
 	 */
 	int getBorderWidth();
 
-	/**
-	 * Returns the callback called when a mouse event is occurring, entering on annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, entering on annotation element
-	 */
-	default EnterCallback getEnterCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called when a mouse event is occurring, leaving the annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, leaving the annotation element
-	 */
-	default LeaveCallback getLeaveCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called when a mouse event is occurring, clicking on the annotation element.
-	 * 
-	 * @return the callback called when a mouse event is occurring, clicking on the annotation element
-	 */
-	default ClickCallback getClickCallback() {
-		return null;
-	}
 }

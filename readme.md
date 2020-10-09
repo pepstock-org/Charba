@@ -298,6 +298,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `skipNull` property to `BarOptions` configuration.
    * change `circumference` and `rotation` properties on `PieChart` and `DoughnutChart` options in order to set the value in degrees instead of radians.
    * add `sort` callback (by `LegendItemSortCallback` class) to the `LegendLabels` configuration in order to sort the legend items. 
+   * add `beginAtZero` property to `CartesianLogarithmicAxis` class.   
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -322,7 +323,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
  * add the selected value of the scale by the click event into the `AxisClickEvent` class.
  * add **new Charba annotation plugin**, completely in Java,  in order to replace [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained.
-   * does not implement all event listeners previously implemented into [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave callbacks are implemented.
+   * does not implement all event callbacks previously implemented into [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave events are implemented and not by callbacks but by event handlers.
    * remove `mode` property from annotation line options because new plugin is using the `axis` property of scales for line orientation.
    * remove `doubleClickSpeed` property from annotation options because double click event is not supported anymore.
    * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
