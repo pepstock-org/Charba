@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
-import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
+import org.pepstock.charba.client.events.DatasetRangeClearSelectionEvent;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
@@ -124,11 +124,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// flag with default to false
 		boolean fireEvent = false;
 		// checks chart is consistent and for handler
-		if (IsChart.isValid(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
-			// gets selection handler
-			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+		if (IsChart.isValid(chart)) {
 			// checks into options if fire event has been set
-			fireEvent = handler.getOptions().isFireEventOnClearSelection();
+			fireEvent = chart.isEventHandled(DatasetRangeClearSelectionEvent.TYPE);
 		}
 		// invoke reset using fire event of options or false by default
 		clearSelection(chart, fireEvent);
@@ -164,7 +162,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
-			chart.fireEvent(new DatasetRangeSelectionEvent(DOMBuilder.get().createChangeEvent()));
+			chart.fireEvent(new DatasetRangeClearSelectionEvent(DOMBuilder.get().createChangeEvent()));
 		}
 		// updates the chart only if the selection was done
 		if (mustBeUpdated) {

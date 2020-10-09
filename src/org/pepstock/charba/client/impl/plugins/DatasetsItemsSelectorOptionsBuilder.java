@@ -161,17 +161,6 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	}
 
 	/**
-	 * Sets <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>.
-	 * 
-	 * @param fireEvent <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
-	 * @return builder instance
-	 */
-	public DatasetsItemsSelectorOptionsBuilder setFireEventOnClearSelection(boolean fireEvent) {
-		options.setFireEventOnClearSelection(fireEvent);
-		return this;
-	}
-
-	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
 	 * @param display <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>

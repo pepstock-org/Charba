@@ -125,13 +125,4 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_COLOR, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
-	/**
-	 * Returns <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>.
-	 * 
-	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
-	 */
-	boolean isFireEventOnClearSelection() {
-		return getValue(DatasetsItemsSelectorOptions.Property.FIRE_EVENT_ON_CLEAR_SELECTION, DatasetsItemsSelectorOptions.DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
-	}
-
 }

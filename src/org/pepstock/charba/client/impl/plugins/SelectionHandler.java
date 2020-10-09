@@ -468,7 +468,7 @@ final class SelectionHandler {
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
 		// and if an area has been selected
-		if (!skipNextFireEvent && track != null && track.isValid()) {
+		if (!skipNextFireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
 			// gets chart node
 			ChartNode node = chart.getNode();
 			// gets the scale element of chart

@@ -37,15 +37,6 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	private final ScaleValueItem to;
 
 	/**
-	 * Creates the event when the clear of current selection has been requested.
-	 * 
-	 * @param nativeEvent native event of this custom event
-	 */
-	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent) {
-		this(nativeEvent, null, null);
-	}
-
-	/**
 	 * Creates the event with start and end values of selected scale
 	 * 
 	 * @param nativeEvent native event of this custom event
@@ -54,6 +45,14 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	 */
 	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent, ScaleValueItem from, ScaleValueItem to) {
 		super(nativeEvent, TYPE);
+		// checks if arguments are consistent
+		if (from == null) {
+			throw new IllegalArgumentException("From scale value argument is null");
+		}
+		if (to == null) {
+			throw new IllegalArgumentException("To scale value argument is null");
+		}
+		// stores arguments
 		this.from = from;
 		this.to = to;
 	}
@@ -76,15 +75,6 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	 */
 	public ScaleValueItem getTo() {
 		return to;
-	}
-
-	/**
-	 * Returns <code>true</code> if the event is related to a clear selection.
-	 * 
-	 * @return <code>true</code> if the event is related to a clear selection
-	 */
-	public boolean isClearSelection() {
-		return from == null && to == null;
 	}
 
 	/*

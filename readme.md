@@ -333,6 +333,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
    * add `enabled` property to annotation line and box options in order to enable and disable the drawing of the annotation.
+ * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
+   * remove `fireEventOnClearSelection` properties has been removed from DatasetsItemsSelectorOptions class because an clear selection event will fire only if there is a event handler. 
  
 ### Development
 
