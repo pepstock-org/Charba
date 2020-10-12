@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * The pattern builder is the entry point to create a canvas pattern.<br>
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.dom.enums.Repetition;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PatternBuilder extends CanvasObject {
+public final class PatternBuilder {
 	
 	// pattern instance to build
 	private final Pattern pattern;
@@ -107,6 +108,12 @@ public final class PatternBuilder extends CanvasObject {
 	 * @return a pattern instance, built by the builder.
 	 */
 	public Pattern build() {
+		// generates id
+		pattern.generateId();
+		
+		// FIXME
+		Window.getConsole().log("pattern", pattern.toJSON());
+		
 		// returns the instance
 		return pattern;
 	}

@@ -16,12 +16,14 @@
 package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Entity to apply a canvas pattern into a dataset as background.<br>
@@ -125,15 +127,13 @@ public final class Pattern extends CanvasObject {
 	 */
 	Pattern(NativeObject nativeObject) {
 		super(nativeObject);
-		// checks if the pattern is build by a image or canvas pattern
+		// checks if the pattern is built by a image or canvas pattern
 		if (has(Property.CHARBA_PATTERN_IMG)) {
 			// checks if image is consistent
 			checkNativeObject(Property.CHARBA_PATTERN_IMG, ObjectType.OBJECT);
 		} else {
-			// checks if image is consistent
+			// checks if pattern is consistent
 			checkNativeObject(Property.CHARBA_PATTERN_CANVAS, ObjectType.OBJECT);
-			// checks if repetition is consistent
-			checkNativeObject(Property.CHARBA_PATTERN_REPETITION, ObjectType.STRING);
 		}
 		// checks if repetition is consistent
 		checkNativeObject(Property.CHARBA_PATTERN_REPETITION, ObjectType.STRING);
@@ -186,6 +186,75 @@ public final class Pattern extends CanvasObject {
 	 */
 	public CanvasPatternItem getCanvasPattern() {
 		return getValue(Property.CHARBA_PATTERN_CANVAS, DEFAULT_CANVAS_PATTERN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hasId()) ? 0 : getId().hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// checks if is the same object
+		if (this == obj) {
+			return true;
+		}
+		// checks if argument is null
+		if (obj == null) {
+			return false;
+		}
+		// checks if the class is the same
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		// casts to a pattern
+		Pattern other = (Pattern) obj;
+		// checks if there is an id
+		if (hasId()) {
+			// checks with other id
+			return getId().equals(other.getId());
+		}
+		// if here, the this does not have the id
+		// then if the other is has id is NOT equals
+		// otherwise they are equals because both are null
+		return !other.hasId();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.CanvasObject#generateUniqueId()
+	 */
+	@Override
+	String generateUniqueId() {
+		StringBuilder sb = new StringBuilder();
+		// checks if the pattern is built by a image or canvas pattern
+		if (has(Property.CHARBA_PATTERN_IMG)) {
+			// uses the image class name ang image hashcode
+			sb.append(Img.class.getName()).append(Constants.MINUS);
+			sb.append(getImage().hashCode()).append(Constants.MINUS);
+		} else {
+			// uses the pattern class name ang image hashcode
+			sb.append(CanvasPatternItem.class.getName()).append(Constants.MINUS);
+			sb.append(getCanvasPattern().hashCode()).append(Constants.MINUS);
+		}
+		sb.append(getValue(Property.CHARBA_PATTERN_REPETITION, UndefinedValues.STRING)).append(Constants.MINUS);
+		sb.append(getValue(Property.CHARBA_PATTERN_WIDTH, UndefinedValues.INTEGER)).append(Constants.MINUS);
+		sb.append(getValue(Property.CHARBA_PATTERN_HEIGHT, UndefinedValues.INTEGER));
+		return sb.toString();
 	}
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * The gradient builder is the entry point to create a canvas gradient.<br>
@@ -106,7 +107,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorsStartStop(IsColor start, IsColor stop) {
-		gradient.addColorsStartStop(IsColor.checkAndGetValue(start), IsColor.checkAndGetValue(stop));
+		gradient.addColorsStartStop(start, stop);
 		return this;
 	}
 
@@ -118,9 +119,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorsStartStop(String start, String stop) {
-		gradient.clearColors();
-		gradient.addColorStop(GradientColor.DEFAULT_OFFSET_START, start);
-		gradient.addColorStop(GradientColor.DEFAULT_OFFSET_STOP, stop);
+		gradient.addColorsStartStop(start, stop);
 		return this;
 	}
 
@@ -132,7 +131,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(double offset, IsColor color) {
-		gradient.addColorStop(offset, IsColor.checkAndGetValue(color));
+		gradient.addColorStop(offset, color);
 		return this;
 	}
 
@@ -144,7 +143,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(double offset, String color) {
-		gradient.addColorStop(new GradientColor(offset, color));
+		gradient.addColorStop(offset, color);
 		return this;
 	}
 
@@ -155,11 +154,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(GradientColor color) {
-		// checks if argument is consistent
-		if (color != null) {
-			// if consistent, adds color
-			gradient.addColorStop(color);
-		}
+		gradient.addColorStop(color);
 		return this;
 	}
 
@@ -176,6 +171,12 @@ public final class GradientBuilder {
 		}
 		// sorts the colors by their offset
 		gradient.sortColors();
+		// generates id
+		gradient.generateId();
+		
+		// FIXME
+		Window.getConsole().log("gradient", gradient.toJSON());
+		
 		// returns the instance
 		return gradient;
 	}

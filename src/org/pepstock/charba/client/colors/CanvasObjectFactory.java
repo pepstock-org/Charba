@@ -40,11 +40,11 @@ public abstract class CanvasObjectFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
-	private final Map<String, Map<Integer, CanvasGradientItem>> gradientsCache = new HashMap<>();
+	private final Map<String, Map<String, CanvasGradientItem>> gradientsCache = new HashMap<>();
 
 	// cache for canvas patterns already created
 	// K = chart id, K = pattern id, V = canvas pattern
-	private final Map<String, Map<Integer, CanvasPatternItem>> patternCache = new HashMap<>();
+	private final Map<String, Map<String, CanvasPatternItem>> patternCache = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -64,7 +64,7 @@ public abstract class CanvasObjectFactory {
 		// checks if arguments are consistent
 		checkArgumentsConsistency(chart, pattern);
 		// map instance
-		final Map<Integer, CanvasPatternItem> patternsMap;
+		final Map<String, CanvasPatternItem> patternsMap;
 		// checks if the pattern is already created
 		if (patternCache.containsKey(chart.getId())) {
 			patternsMap = patternCache.get(chart.getId());
@@ -138,7 +138,7 @@ public abstract class CanvasObjectFactory {
 		// checks if arguments are consistent
 		checkArgumentsConsistency(chart, gradient);
 		// checks if the gradient is already created
-		final Map<Integer, CanvasGradientItem> gradientsMap;
+		final Map<String, CanvasGradientItem> gradientsMap;
 		// checks if the gradient is already created
 		if (gradientsCache.containsKey(chart.getId())) {
 			gradientsMap = gradientsCache.get(chart.getId());

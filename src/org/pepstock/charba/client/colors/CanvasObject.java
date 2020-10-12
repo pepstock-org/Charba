@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.colors;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -36,8 +34,6 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	static final String MISSING_PROPERTY = "The mandatory '{0}' is missing";
 	// exception message when a property is not defined with the correct type
 	static final String WRONG_PROPERTY_TYPE = "The type of '{0}' property is invalid";
-	// internal counter
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -75,10 +71,6 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 */
 	CanvasObject() {
 		super();
-		// increments the id
-		// unique for every canvas object
-		// stores the ID
-		setValue(Property.CHARBA_OBJECT_ID, COUNTER.getAndIncrement());
 	}
 
 	/**
@@ -89,7 +81,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	CanvasObject(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if native object is consistent for a canvas object
-		checkNativeObject(Property.CHARBA_OBJECT_ID, ObjectType.NUMBER);
+		checkNativeObject(Property.CHARBA_OBJECT_ID, ObjectType.STRING);
 	}
 	
 	/**
@@ -99,7 +91,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 * @param property key which represents the object property
 	 * @param type the type to be compared with the existing one
 	 */
-	void checkNativeObject(Key property, ObjectType type) {
+	final void checkNativeObject(Key property, ObjectType type) {
 		// checks if value is consistent
 		Key.checkIfValid(property);
 		// checks if native object is consistent for a canvas object
@@ -117,12 +109,58 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the unique canvas id.
+	 * Sets the unique canvas object id.
 	 * 
-	 * @return the unique canvas id.
+	 * @param id the unique canvas object id.
 	 */
-	public final int getId() {
-		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.INTEGER);
+	private void setId(String id) {
+		setValue(Property.CHARBA_OBJECT_ID, id);
 	}
+	
+	/**
+	 * Returns <code>true</code> if the unique canvas object id exists.
+	 * 
+	 * @return <code>true</code> if the unique canvas object id exists
+	 */
+	boolean hasId() {
+		return has(Property.CHARBA_OBJECT_ID);
+	}
+
+	/**
+	 * Returns the unique canvas object id.
+	 * 
+	 * @return the unique canvas object id.
+	 */
+	public final String getId() {
+		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.STRING);
+	}
+
+	/**
+	 * Checks and generates new id based on the extended object.
+	 */
+	final void generateId() {
+		// checks id is already stored
+		if (!has(Property.CHARBA_OBJECT_ID)) {
+			// asked of unique id
+			String id = generateUniqueId();
+			// checks if id is consistent
+			if (id != null && id.trim().length() > 0) {
+				// if consistent, stores the id
+				setId(id);
+			} else {
+				// if here, the id is not consistent
+				// then exception
+				throw new IllegalArgumentException("Unable to generate a consistent unique id");
+			}
+		}
+	}
+	
+	/**
+	 * Creates an unique id for the canvas object.
+	 * 
+	 * @return an unique id for the canvas object
+	 */
+	abstract String generateUniqueId();
+
 
 }

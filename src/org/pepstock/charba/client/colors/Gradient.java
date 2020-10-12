@@ -23,9 +23,11 @@ import org.pepstock.charba.client.colors.GradientColor.GradientColorFactory;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * A gradient is an image consisting of a progressive transition between two or more colors.<br>
@@ -264,18 +266,72 @@ public final class Gradient extends CanvasObject {
 	}
 
 	/**
-	 * Clears all colors.
-	 */
-	void clearColors() {
-		colors.clear();
-	}
-
-	/**
 	 * Sorts all colors by thier offset.
 	 */
 	void sortColors() {
 		// sorts the color in order to have the list from less to greater
 		Collections.sort(colors, COMPARATOR);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hasId()) ? 0 : getId().hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// checks if is the same object
+		if (this == obj) {
+			return true;
+		}
+		// checks if argument is null
+		if (obj == null) {
+			return false;
+		}
+		// checks if the class is the same
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		// casts to a gradient
+		Gradient other = (Gradient) obj;
+		// checks if there is an id
+		if (hasId()) {
+			// checks with other id
+			return getId().equals(other.getId());
+		}
+		// if here, the this does not have the id
+		// then if the other is has id is NOT equals
+		// otherwise they are equals because both are null
+		return !other.hasId();
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.CanvasObject#generateUniqueId()
+	 */
+	@Override
+	String generateUniqueId() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getValue(Property.CHARBA_GRADIENT_TYPE, UndefinedValues.STRING)).append(Constants.MINUS);
+		sb.append(getValue(Property.CHARBA_GRADIENT_ORIENTATION, UndefinedValues.STRING)).append(Constants.MINUS);
+		sb.append(getValue(Property.CHARBA_GRADIENT_SCOPE, UndefinedValues.STRING)).append(Constants.MINUS);
+		sb.append(colors.toString());
+		return sb.toString();
 	}
 
 	/**
