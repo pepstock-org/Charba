@@ -32,7 +32,6 @@ import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Internal class created for each box annotation options configured from the plugin.<br>
@@ -395,7 +394,8 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	}
 
 	/**
-	 * FIXME
+	 * Internal canvas objects factory to create gradient and pattern fo box annotation.
+	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
@@ -403,6 +403,11 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 
 		private final BoxAnnotationElement annotationElement;
 
+		/**
+		 * Creates the canvas objects factory by the box annotation element.
+		 * 
+		 * @param annotationElement box annotation element instance
+		 */
 		private BoxAnnotationCanvasObjectFactory(BoxAnnotationElement annotationElement) {
 			this.annotationElement = annotationElement;
 		}
@@ -442,7 +447,6 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// Y - the bottom minus top, divided by 2
 			center.setX(x);
 			center.setY(y);
-			Window.getConsole().log(center.toString());
 			// returns center
 			return center;
 		}
