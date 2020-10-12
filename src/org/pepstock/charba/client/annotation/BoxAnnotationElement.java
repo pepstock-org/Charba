@@ -225,6 +225,16 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.annotation.AbstractAnnotationElement#destroyElement()
+	 */
+	@Override
+	void destroyElement() {
+		// clean the canvas objects
+		// previously loaded
+		canvasObjectFactory.clear(getChart());
+	}
+
 	/**
 	 * Configures the box annotation element calculating left, top, right and bottom points of the rectangle to draw.<br>
 	 * It uses the scale in order to get the positions of the values passed by box annotation options.

@@ -40,11 +40,11 @@ public abstract class CanvasObjectFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
-	private static final Map<String, Map<Integer, CanvasGradientItem>> GRADIENTS = new HashMap<>();
+	private final Map<String, Map<Integer, CanvasGradientItem>> gradientsCache = new HashMap<>();
 
 	// cache for canvas patterns already created
 	// K = chart id, K = pattern id, V = canvas pattern
-	private static final Map<String, Map<Integer, CanvasPatternItem>> PATTERNS = new HashMap<>();
+	private final Map<String, Map<Integer, CanvasPatternItem>> patternCache = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -66,8 +66,8 @@ public abstract class CanvasObjectFactory {
 		// map instance
 		final Map<Integer, CanvasPatternItem> patternsMap;
 		// checks if the pattern is already created
-		if (PATTERNS.containsKey(chart.getId())) {
-			patternsMap = PATTERNS.get(chart.getId());
+		if (patternCache.containsKey(chart.getId())) {
+			patternsMap = patternCache.get(chart.getId());
 			if (patternsMap.containsKey(pattern.getId())) {
 				// returns the existing canvas pattern
 				return patternsMap.get(pattern.getId());
@@ -76,7 +76,7 @@ public abstract class CanvasObjectFactory {
 			// new chart!
 			// creates the cache for the chart
 			patternsMap = new HashMap<>();
-			PATTERNS.put(chart.getId(), patternsMap);
+			patternCache.put(chart.getId(), patternsMap);
 		}
 		// checks if canvas pattern already loaded
 		if (pattern.getCanvasPattern() != null) {
@@ -108,7 +108,7 @@ public abstract class CanvasObjectFactory {
 	public final void resetGradients(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
-			GRADIENTS.remove(chart.getId());
+			gradientsCache.remove(chart.getId());
 		}
 	}
 
@@ -120,8 +120,8 @@ public abstract class CanvasObjectFactory {
 	public final void clear(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
-			PATTERNS.remove(chart.getId());
-			GRADIENTS.remove(chart.getId());
+			patternCache.remove(chart.getId());
+			gradientsCache.remove(chart.getId());
 		}
 	}
 
@@ -140,8 +140,8 @@ public abstract class CanvasObjectFactory {
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradientItem> gradientsMap;
 		// checks if the gradient is already created
-		if (GRADIENTS.containsKey(chart.getId())) {
-			gradientsMap = GRADIENTS.get(chart.getId());
+		if (gradientsCache.containsKey(chart.getId())) {
+			gradientsMap = gradientsCache.get(chart.getId());
 			if (gradientsMap.containsKey(gradient.getId())) {
 				// returns the existing canvas gradient
 				return gradientsMap.get(gradient.getId());
@@ -150,7 +150,7 @@ public abstract class CanvasObjectFactory {
 			// new chart!
 			// creates the cache for the chart
 			gradientsMap = new HashMap<>();
-			GRADIENTS.put(chart.getId(), gradientsMap);
+			gradientsCache.put(chart.getId(), gradientsMap);
 		}
 		// checks if chart is initialized
 		if (chart.isInitialized() || Charts.hasNative(chart.getId())) {
