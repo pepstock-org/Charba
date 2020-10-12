@@ -21,8 +21,10 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ColorType;
@@ -267,7 +269,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 			// checks if the gradient has been set into this object or into defaults
 			if (has(Property.BACKGROUND_COLOR)) {
 				// if here, the gradient has been set into this options
-				return Annotation.get().getGradientFactory().create(getValue(Property.BACKGROUND_COLOR));
+				return GradientBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the gradient has been set into defaults options
 				return defaultValues.getBackgroundColorAsGradient();
@@ -291,7 +293,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 			// checks if the pattern has been set into this object or into defaults
 			if (has(Property.BACKGROUND_COLOR)) {
 				// if here, the pattern has been set into this options
-				return Annotation.get().getPatternFactory().create(getValue(Property.BACKGROUND_COLOR));
+				return PatternBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the pattern has been set into defaults options
 				return defaultValues.getBackgroundColorAsPattern();

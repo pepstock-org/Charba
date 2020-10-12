@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -186,7 +187,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern() {
-		return new Pattern(createTile());
+		return PatternBuilder.create(createTile()).build();
 	}
 
 	/**
@@ -196,7 +197,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape) {
-		return new Pattern(createTile(shape));
+		return PatternBuilder.create(createTile(shape)).build();
 	}
 
 	/**
@@ -207,7 +208,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, IsColor backgroundColor) {
-		return new Pattern(createTile(shape, backgroundColor));
+		return PatternBuilder.create(createTile(shape, backgroundColor)).build();
 	}
 
 	/**
@@ -218,7 +219,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, String backgroundColor) {
-		return new Pattern(createTile(shape, backgroundColor));
+		return PatternBuilder.create(createTile(shape, backgroundColor)).build();
 	}
 
 	/**
@@ -230,7 +231,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor));
+		return PatternBuilder.create(createTile(shape, backgroundColor, shapeColor)).build();
 	}
 
 	/**
@@ -242,7 +243,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor));
+		return PatternBuilder.create(createTile(shape, backgroundColor, shapeColor)).build();
 	}
 
 	/**
@@ -255,7 +256,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size), size);
+		return PatternBuilder.create(createTile(shape, backgroundColor, shapeColor, size), size).build();
 	}
 
 	/**
@@ -268,7 +269,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size), size);
+		return PatternBuilder.create(createTile(shape, backgroundColor, shapeColor, size), size).build();
 	}
 
 	// -----------------------------------------
@@ -282,7 +283,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style) {
-		return new Pattern(createTile(PointStyleShape.get(style)));
+		return PatternBuilder.create(createTile(PointStyleShape.get(style))).build();
 	}
 
 	/**
@@ -293,7 +294,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, IsColor backgroundColor) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor));
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor)).build();
 	}
 
 	/**
@@ -304,7 +305,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, String backgroundColor) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor));
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor)).build();
 	}
 
 	/**
@@ -316,7 +317,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, String backgroundColor, String shapeColor) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor));
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor, shapeColor)).build();
 	}
 
 	/**
@@ -328,7 +329,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, IsColor backgroundColor, IsColor shapeColor) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor));
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor, shapeColor)).build();
 	}
 
 	/**
@@ -341,7 +342,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, String backgroundColor, String shapeColor, int size) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size);
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size).build();
 	}
 
 	/**
@@ -354,7 +355,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(PointStyle style, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return new Pattern(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size);
+		return PatternBuilder.create(createTile(PointStyleShape.get(style), backgroundColor, shapeColor, size), size).build();
 	}
 
 	// -----------------------------------------

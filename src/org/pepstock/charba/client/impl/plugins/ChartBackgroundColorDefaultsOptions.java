@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -73,7 +75,7 @@ final class ChartBackgroundColorDefaultsOptions extends AbstractPluginOptions {
 	Gradient getBackgroundColorAsGradient() {
 		// checks if gradient has been set
 		if (ColorType.GRADIENT.equals(getColorType())) {
-			return ChartBackgroundColor.GRADIENT_FACTORY.create(getValue(ChartBackgroundColorOptions.Property.BACKGROUND_COLOR));
+			return GradientBuilder.build(getValue(ChartBackgroundColorOptions.Property.BACKGROUND_COLOR));
 		}
 		// otherwise returns null
 		return null;
@@ -87,7 +89,7 @@ final class ChartBackgroundColorDefaultsOptions extends AbstractPluginOptions {
 	Pattern getBackgroundColorAsPattern() {
 		// checks if pattern has been set
 		if (ColorType.PATTERN.equals(getColorType())) {
-			return ChartBackgroundColor.PATTERN_FACTORY.create(getValue(ChartBackgroundColorOptions.Property.BACKGROUND_COLOR));
+			return PatternBuilder.build(getValue(ChartBackgroundColorOptions.Property.BACKGROUND_COLOR));
 		}
 		// otherwise returns null
 		return null;

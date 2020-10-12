@@ -58,10 +58,6 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.WHITE.toRGBA();
 	// defaults options factory instance
 	static final ChartBackgroundColorDefaultsOptionsFactory DEFAULTS_FACTORY = new ChartBackgroundColorDefaultsOptionsFactory();
-	// pattern factory
-	static final Pattern.PatternFactory PATTERN_FACTORY = new Pattern.PatternFactory();
-	// gradient factory
-	static final Gradient.GradientFactory GRADIENT_FACTORY = new Gradient.GradientFactory();
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 	// color instance

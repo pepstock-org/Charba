@@ -18,8 +18,10 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ColorType;
@@ -166,7 +168,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			// checks if the gradient has been set into this object or into defaults
 			if (has(Property.BACKGROUND_COLOR)) {
 				// if here, the gradient has been set into this options
-				return ChartBackgroundColor.GRADIENT_FACTORY.create(getValue(Property.BACKGROUND_COLOR));
+				return GradientBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the gradient has been set into defaults options
 				return defaultsOptions.getBackgroundColorAsGradient();
@@ -189,7 +191,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			// checks if the pattern has been set into this object or into defaults
 			if (has(Property.BACKGROUND_COLOR)) {
 				// if here, the pattern has been set into this options
-				return ChartBackgroundColor.PATTERN_FACTORY.create(getValue(Property.BACKGROUND_COLOR));
+				return PatternBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the pattern has been set into defaults options
 				return defaultsOptions.getBackgroundColorAsPattern();

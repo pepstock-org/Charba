@@ -20,7 +20,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Base object for pattern and gradient instances, based on canvas element.
@@ -30,6 +32,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public abstract class CanvasObject extends NativeObjectContainer {
 
+	// exception message when a property is missing
+	static final String MISSING_PROPERTY = "The mandatory '{0}' is missing";
+	// exception message when a property is not defined with the correct type
+	static final String WRONG_PROPERTY_TYPE = "The type of '{0}' property is invalid";
 	// internal counter
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
@@ -82,6 +88,32 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 */
 	CanvasObject(NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if native object is consistent for a canvas object
+		checkNativeObject(Property.CHARBA_OBJECT_ID, ObjectType.NUMBER);
+	}
+	
+	/**
+	 * Checks if a property exists and if its type is equals to the object type passed as argument.<br>
+	 * If not, an {@link IllegalArgumentException} will throw.
+	 * 
+	 * @param property key which represents the object property
+	 * @param type the type to be compared with the existing one
+	 */
+	void checkNativeObject(Key property, ObjectType type) {
+		// checks if value is consistent
+		Key.checkIfValid(property);
+		// checks if native object is consistent for a canvas object
+		if (!has(property)) {
+			// without the id, is not consistent
+			// exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(MISSING_PROPERTY, property.value()));
+		}
+		// checks if has got the correct type
+		if (!isType(property, type)) {
+			// without the mandatory is not consistent
+			// exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(WRONG_PROPERTY_TYPE, property.value()));
+		}
 	}
 
 	/**

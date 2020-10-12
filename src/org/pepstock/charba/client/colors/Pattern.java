@@ -18,7 +18,7 @@ package org.pepstock.charba.client.colors;
 import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
@@ -72,22 +72,12 @@ public final class Pattern extends CanvasObject {
 	}
 
 	/**
-	 * Creates the object using an image to use in the pattern.<br>
-	 * The repetition used is repeat.
-	 * 
-	 * @param image image to use as pattern
-	 */
-	public Pattern(Img image) {
-		this(image, Repetition.REPEAT);
-	}
-
-	/**
 	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
 	 * 
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
 	 */
-	public Pattern(Img image, Repetition repetition) {
+	Pattern(Img image, Repetition repetition) {
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
@@ -104,34 +94,13 @@ public final class Pattern extends CanvasObject {
 
 	/**
 	 * Creates the object using an already created canvas pattern.<br>
-	 * The dimension of canvas pattern image will be the default {@link TilesFactoryDefaults#DEFAULT_SIZE}. This is mainly used by tiles.
-	 * 
-	 * @param canvasPattern canvas pattern instance
-	 */
-	public Pattern(CanvasPatternItem canvasPattern) {
-		this(canvasPattern, TilesFactoryDefaults.DEFAULT_SIZE, TilesFactoryDefaults.DEFAULT_SIZE);
-	}
-
-	/**
-	 * Creates the object using an already created canvas pattern.<br>
-	 * The dimension of canvas pattern image is unique then the image of pattern is a square. This is mainly used by tiles.
-	 * 
-	 * @param canvasPattern canvas pattern instance
-	 * @param squareSize size of image applied to canvasPattern to be a square
-	 */
-	public Pattern(CanvasPatternItem canvasPattern, int squareSize) {
-		this(canvasPattern, squareSize, squareSize);
-	}
-
-	/**
-	 * Creates the object using an already created canvas pattern.<br>
 	 * This is mainly used by tiles.
 	 * 
 	 * @param canvasPattern canvas pattern instance
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 */
-	public Pattern(CanvasPatternItem canvasPattern, int width, int height) {
+	Pattern(CanvasPatternItem canvasPattern, int width, int height) {
 		// checks if canvas pattern is not consistent
 		if (canvasPattern != null) {
 			// creates pattern
@@ -156,6 +125,22 @@ public final class Pattern extends CanvasObject {
 	 */
 	Pattern(NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if the pattern is build by a image or canvas pattern
+		if (has(Property.CHARBA_PATTERN_IMG)) {
+			// checks if image is consistent
+			checkNativeObject(Property.CHARBA_PATTERN_IMG, ObjectType.OBJECT);
+		} else {
+			// checks if image is consistent
+			checkNativeObject(Property.CHARBA_PATTERN_CANVAS, ObjectType.OBJECT);
+			// checks if repetition is consistent
+			checkNativeObject(Property.CHARBA_PATTERN_REPETITION, ObjectType.STRING);
+		}
+		// checks if repetition is consistent
+		checkNativeObject(Property.CHARBA_PATTERN_REPETITION, ObjectType.STRING);
+		// checks if width is consistent
+		checkNativeObject(Property.CHARBA_PATTERN_WIDTH, ObjectType.NUMBER);
+		// checks if height is consistent
+		checkNativeObject(Property.CHARBA_PATTERN_HEIGHT, ObjectType.NUMBER);
 	}
 
 	/**
@@ -201,24 +186,6 @@ public final class Pattern extends CanvasObject {
 	 */
 	public CanvasPatternItem getCanvasPattern() {
 		return getValue(Property.CHARBA_PATTERN_CANVAS, DEFAULT_CANVAS_PATTERN);
-	}
-
-	/**
-	 * Inner class to create pattern by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	public static final class PatternFactory implements NativeObjectContainerFactory<Pattern> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public Pattern create(NativeObject nativeObject) {
-			return new Pattern(nativeObject);
-		}
 	}
 
 }

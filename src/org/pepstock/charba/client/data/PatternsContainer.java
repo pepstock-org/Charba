@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.colors.Pattern.PatternFactory;
+import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -27,10 +28,17 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PatternsContainer extends AbstractContainer<Pattern> {
+final class PatternsContainer extends AbstractContainer<Pattern> implements NativeObjectContainerFactory<Pattern> {
 
-	// factory to creates pattern form native object
-	private final PatternFactory factory = new PatternFactory();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+	 */
+	@Override
+	public Pattern create(NativeObject nativeObject) {
+		return PatternBuilder.build(nativeObject);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -39,7 +47,7 @@ final class PatternsContainer extends AbstractContainer<Pattern> {
 	 */
 	@Override
 	NativeObjectContainerFactory<Pattern> getFactory() {
-		return factory;
+		return this;
 	}
 
 }

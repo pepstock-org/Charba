@@ -167,6 +167,23 @@ public abstract class NativeObjectContainer {
 		// if not consistent, returns undefined
 		return Key.isValid(key) ? JsHelper.get().typeOf(nativeObject, key.value()) : ObjectType.UNDEFINED;
 	}
+	
+	/**
+	 * Returns <code>true</code> if the type of the property is equals to object type passed as argument.
+	 * 
+	 * @param key name of the java script property.
+	 * @param type type to check against the type of the property.
+	 * @return the java script type of the property.
+	 */
+	protected final boolean isType(Key key, ObjectType type) {
+		// checks arguments if consistent
+		if (type != null) {
+			// gets the property type and checks against the argument
+			return type.equals(type(key));
+		}
+		// if not consistent, returns false
+		return false;
+	}
 
 	/**
 	 * Removes an element (by key) from the embedded JavaScript object if exists.

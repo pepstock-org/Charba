@@ -2387,21 +2387,21 @@ public enum UiGradient
 	 * @return new gradient based on color of UiGradient list
 	 */
 	public Gradient createGradient(GradientType type, GradientOrientation orientation, GradientScope scope) {
-		// checks if array of colors preloaded is consistent
+		// checks if array of colors previously loaded is consistent
 		if (colors == null || colors.length < 2) {
 			// if not, exception
 			throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
 		}
-		// creates a gradient
-		Gradient gradient = new Gradient(type, orientation, scope);
+		// creates a gradient builder
+		GradientBuilder builder = GradientBuilder.create(type, orientation, scope);
 		// sets the max length to use on after calculation
 		// because the first and last colors have got
 		// offset 0D and 1D.
 		int maxLength = colors.length - 1;
 		// adds the first color
-		gradient.addColorStop(0D, colors[0]);
+		builder.addColorStop(0D, colors[0]);
 		// checks if there is more then 2 colors
-		// becuase the first and last are added
+		// because the first and last are added
 		// out of cycle
 		if (colors.length > 2) {
 			// calculates the increment of offset
@@ -2415,12 +2415,13 @@ public enum UiGradient
 				// calculates the color offset
 				offset += increment;
 				// adds colors to gradient
-				gradient.addColorStop(offset, colors[i]);
+				builder.addColorStop(offset, colors[i]);
 			}
 		}
 		// adds the last color
-		gradient.addColorStop(1D, colors[maxLength]);
-		return gradient;
+		builder.addColorStop(1D, colors[maxLength]);
+		// creates a gradient and returns it
+		return builder.build();
 	}
 
 }
