@@ -156,6 +156,18 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	}
 	
 	/**
+	 * Calculates the <code>hashCode</code> for all extension of this class because it is based on the unique id.
+	 * 
+	 * @return the <code>hashCode</code> for all extension of this class because it is based on the unique id
+	 */
+	final int commonHashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hasId()) ? 0 : getId().hashCode());
+		return result;
+	} 
+	
+	/**
 	 * Creates an unique id for the canvas object.
 	 * 
 	 * @return an unique id for the canvas object
