@@ -37,7 +37,7 @@ branches:
 #
 # BUILD phase
 #
-# download Ivy, if needed
+# download Ivy, if needed and required NodeJs 12 (for Sonar)
 before_install: 
    - ant init
    - nvm install "12"
