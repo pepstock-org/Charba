@@ -95,6 +95,7 @@
 	<property name="javac.target" value="1.8" />
 	<property name="javac.includeantruntime" value="false" />
 	<property name="javac.nowarn" value="true" />
+	<property name="javadoc.source" value="8" />
 	
 	<!--
 		IVY targets for getting build dependencies and Travis CI needed libraries
@@ -306,7 +307,7 @@
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
 		<!-- exclude from java doc all classes where GWT is used and all files not JAVA -->
-		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8" source="${javadoc.source}"
 			windowtitle="${charba.description}">
 			<fileset dir="${src.dir}">
 				<include name="org/pepstock/**" />
@@ -341,7 +342,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
-		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8"
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8" source="${javadoc.source}"
 			windowtitle="${charba.description}">
 			<classpath>
 				<path refid="ivyPath-compile" />
