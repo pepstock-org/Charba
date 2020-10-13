@@ -38,7 +38,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		CHARBA_OBJECT_ID("_charbaObjectID");
 
@@ -67,10 +67,19 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates an empty canvas object.
+	 * Creates a canvas object setting the id passed as argument.
+	 * 
+	 * @param id unique id, as string, of the object
 	 */
-	CanvasObject() {
+	CanvasObject(String id) {
 		super();
+		// checks if id is consistent
+		if (id == null) {
+			// exception
+			throw new IllegalArgumentException("Id argument is null");
+		}
+		// stores the id
+		setId(id);
 	}
 
 	/**
@@ -122,7 +131,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if the unique canvas object id exists
 	 */
-	boolean hasId() {
+	private boolean hasId() {
 		return has(Property.CHARBA_OBJECT_ID);
 	}
 
@@ -135,26 +144,6 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.STRING);
 	}
 
-	/**
-	 * Checks and generates new id based on the extended object.
-	 */
-	final void generateId() {
-		// checks id is already stored
-		if (!has(Property.CHARBA_OBJECT_ID)) {
-			// asked of unique id
-			String id = generateUniqueId();
-			// checks if id is consistent
-			if (id != null && id.trim().length() > 0) {
-				// if consistent, stores the id
-				setId(id);
-			} else {
-				// if here, the id is not consistent
-				// then exception
-				throw new IllegalArgumentException("Unable to generate a consistent unique id");
-			}
-		}
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -199,13 +188,5 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// otherwise they are equals because both are null
 		return !other.hasId();
 	}
-	
-	/**
-	 * Creates an unique id for the canvas object.
-	 * 
-	 * @return an unique id for the canvas object
-	 */
-	abstract String generateUniqueId();
-
 
 }

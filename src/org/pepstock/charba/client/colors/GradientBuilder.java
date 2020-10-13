@@ -15,8 +15,16 @@
 */
 package org.pepstock.charba.client.colors;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.utils.Window;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * The gradient builder is the entry point to create a canvas gradient.<br>
@@ -31,18 +39,29 @@ import org.pepstock.charba.client.utils.Window;
  */
 public final class GradientBuilder {
 	
-	// exception message when a property is missing
-	private static final String MISSING_COLORS = "The gradient does not have any stop color";
-	// gradient instance to build
-	private final Gradient gradient;
-
+	// cache for the gradients created in order to build only when needed
+	// K = canvas object id, V = gradient instance
+	private static final Map<String, Gradient> GRADIENT = new HashMap<>();
+	// gradient type instance
+	private final GradientType type;
+	// gradient orientation instance
+	private final GradientOrientation orientation;
+	// gradient scope instance
+	private final GradientScope scope;
+	// contains the gradient colors
+	private final List<GradientColor> colors = new LinkedList<>();
+	
 	/**
-	 * Creates the builder, wrapping a gradient object.
+	 * Creates a gradient by a type, an orientation and a scope.
 	 * 
-	 * @param gradient gradient instance to wrap
+	 * @param type gradient type
+	 * @param orientation orientation of gradient
+	 * @param scope scope of gradient
 	 */
-	private GradientBuilder(Gradient gradient) {
-		this.gradient = gradient;
+	private GradientBuilder(GradientType type, GradientOrientation orientation, GradientScope scope) {
+		this.type = type;
+		this.orientation = orientation;
+		this.scope = scope;
 	}
 
 	/**
@@ -95,7 +114,23 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public static GradientBuilder create(GradientType type, GradientOrientation orientation, GradientScope scope) {
-		return new GradientBuilder(new Gradient(type, orientation, scope));
+		// checks if type is consistent
+		if (type == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Gradient type argument is null");
+		}
+		// checks if orientation is consistent
+		if (orientation == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Gradient orientation argument is null");
+		}
+		// checks if scope is consistent
+		if (scope == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Gradient scope argument is null");
+		}
+		// creates the builder
+		return new GradientBuilder(type, orientation, scope);
 	}
 
 	/**
@@ -106,8 +141,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorsStartStop(IsColor start, IsColor stop) {
-		gradient.addColorsStartStop(start, stop);
-		return this;
+		return addColorsStartStop(IsColor.checkAndGetValue(start), IsColor.checkAndGetValue(stop));
 	}
 
 	/**
@@ -118,8 +152,8 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorsStartStop(String start, String stop) {
-		gradient.addColorsStartStop(start, stop);
-		return this;
+		colors.clear();
+		return addColorStop(GradientColor.DEFAULT_OFFSET_START, start).addColorStop(GradientColor.DEFAULT_OFFSET_STOP, stop);
 	}
 
 	/**
@@ -130,8 +164,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(double offset, IsColor color) {
-		gradient.addColorStop(offset, color);
-		return this;
+		return addColorStop(offset, IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -142,8 +175,7 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(double offset, String color) {
-		gradient.addColorStop(offset, color);
-		return this;
+		return addColorStop(new GradientColor(offset, color));
 	}
 
 	/**
@@ -153,7 +185,11 @@ public final class GradientBuilder {
 	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorStop(GradientColor color) {
-		gradient.addColorStop(color);
+		// checks if argument is consistent
+		if (color != null) {
+			// if consistent, adds color
+			colors.add(color);
+		}
 		return this;
 	}
 
@@ -164,20 +200,25 @@ public final class GradientBuilder {
 	 */
 	public Gradient build() {
 		// checks if there is any color
-		if (!gradient.hasColors()) {
+		if (colors.isEmpty()) {
 			// no color, exception
-			throw new IllegalArgumentException(MISSING_COLORS);
+			throw new IllegalArgumentException(Gradient.MISSING_COLORS);
 		}
-		// sorts the colors by their offset
-		gradient.sortColors();
+		// sorts the color in order to have the list from less to greater
+		Collections.sort(colors, Gradient.COMPARATOR);
 		// generates id
-		gradient.generateId();
-		
-		// FIXME
-		Window.getConsole().log("gradient", gradient.toJSON());
-		
+		String id = generateId();
+		// checks if gradient is cached
+		if (GRADIENT.containsKey(id)) {
+			// returns the cached object
+			return GRADIENT.get(id);
+		}
+		// gets gradient reference
+		Gradient result = new Gradient(id, type, orientation, scope, colors);
+		// stores the object into the cache
+		GRADIENT.put(id, result);
 		// returns the instance
-		return gradient;
+		return result;
 	}
 	
 	/**
@@ -187,15 +228,50 @@ public final class GradientBuilder {
 	 * @return a gradient instance, built by the builder.
 	 */
 	public static Gradient build(NativeObject nativeObject) {
-		// creates the object with native one
-		Gradient gradient = new Gradient(nativeObject);
-		// checks if there is any color
-		if (!gradient.hasColors()) {
-			// no color, exception
-			throw new IllegalArgumentException(MISSING_COLORS);
+		// checks if argument is consistent
+		if (nativeObject != null) {
+			// extracts the id from object
+			String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
+			if (id == null) {
+				// without the id, is not consistent
+				// exception!
+				throw new IllegalArgumentException(Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
+			}
+			// checks if gradient is cached
+			if (GRADIENT.containsKey(id)) {
+				// returns the cached object
+				return GRADIENT.get(id);
+			}
+			// creates new gradient
+			Gradient result = new Gradient(nativeObject);
+			// stores the object into the cache
+			GRADIENT.put(id, result);
+			// returns the instance
+			return result;
+		} else {
+			// if here, argument is null
+			// then exception
+			throw new IllegalArgumentException("Native object argument is null");
 		}
-		// if here, gradient is consistent
-		return gradient;
+	}
+	
+	/**
+	 * Creates an unique id for the canvas object.<br>
+	 * <br>
+	 * <code>[type]-[orientation]-[scope]-[list of colors]</code>
+	 * <br>
+	 * 
+	 * @return an unique id for the canvas object
+	 */
+	private String generateId() {
+		// creates a builder
+		StringBuilder sb = new StringBuilder();
+		sb.append(type).append(Constants.MINUS);
+		sb.append(orientation).append(Constants.MINUS);
+		sb.append(scope).append(Constants.MINUS);
+		sb.append(colors.toString());
+		// returns it
+		return sb.toString();
 	}
 
 }

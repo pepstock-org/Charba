@@ -23,11 +23,9 @@ import org.pepstock.charba.client.colors.GradientColor.GradientColorFactory;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * A gradient is an image consisting of a progressive transition between two or more colors.<br>
@@ -42,7 +40,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public final class Gradient extends CanvasObject {
 
 	// internal comparator to sort colors by own offset
-	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
+	static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
+	// exception message when a property is missing
+	static final String MISSING_COLORS = "The gradient does not have any stop color";
 	// contains the gradient colors
 	private final ArrayObjectContainerList<GradientColor> colors;
 	// factory to creates color by native object
@@ -95,14 +95,16 @@ public final class Gradient extends CanvasObject {
 	}
 
 	/**
-	 * Creates a gradient by a type, an orientation and a scope.
+	 * Creates a gradient by a type, an orientation, a scope and the whole list of stop colors.
 	 * 
+	 * @param id unique id, as string, of the object
 	 * @param type gradient type
 	 * @param orientation orientation of gradient
 	 * @param scope scope of gradient
+	 * @param colors list of stop colors of the gradient
 	 */
-	Gradient(GradientType type, GradientOrientation orientation, GradientScope scope) {
-		super();
+	Gradient(String id, GradientType type, GradientOrientation orientation, GradientScope scope, List<GradientColor> colors) {
+		super(id);
 		// checks if type is consistent
 		if (type == null) {
 			// then throws an exception
@@ -118,8 +120,15 @@ public final class Gradient extends CanvasObject {
 			// then throws an exception
 			throw new IllegalArgumentException("Gradient scope argument is null");
 		}
-		// creates color list
-		colors = new ArrayObjectContainerList<>();
+		// checks if colors is consistent
+		if (colors == null || colors.isEmpty()) {
+			// then throws an exception
+			throw new IllegalArgumentException("Gradient colors argument is null or empty");
+		}
+		// creates new color list
+		this.colors = new ArrayObjectContainerList<>();
+		// stores the colors passed as argument
+		this.colors.addAll(colors);
 		// stores gradient type
 		setValue(Property.CHARBA_GRADIENT_TYPE, type);
 		// checks if orientation is aligned with type
@@ -136,7 +145,7 @@ public final class Gradient extends CanvasObject {
 		// stores scope
 		setValue(Property.CHARBA_GRADIENT_SCOPE, scope);
 		// stores the color list
-		setArrayValue(Property.CHARBA_GRADIENT_COLORS, colors);
+		setArrayValue(Property.CHARBA_GRADIENT_COLORS, this.colors);
 	}
 
 	/**
@@ -155,13 +164,12 @@ public final class Gradient extends CanvasObject {
 		}
 		// gets array of color
 		ArrayObject array = getArrayValue(Property.CHARBA_GRADIENT_COLORS);
-		// if null
-		if (array == null) {
-			// creates an empty list
-			colors = new ArrayObjectContainerList<>();
-		} else {
-			// otherwise creates a list using the native object
-			colors = ArrayListHelper.list(array, factory);
+		// creates a list using the native object
+		this.colors = ArrayListHelper.list(array, factory);
+		// checks if there is any color
+		if (colors.isEmpty()) {
+			// no color, exception
+			throw new IllegalArgumentException(MISSING_COLORS);
 		}
 	}
 
@@ -193,84 +201,12 @@ public final class Gradient extends CanvasObject {
 	}
 
 	/**
-	 * Sets the start and stop color of gradient, when the gradient will have only 2 colors.
-	 * 
-	 * @param start starting color, with offset 0
-	 * @param stop stopping color, with offset 1
-	 */
-	public void addColorsStartStop(IsColor start, IsColor stop) {
-		addColorsStartStop(IsColor.checkAndGetValue(start), IsColor.checkAndGetValue(stop));
-	}
-
-	/**
 	 * Returns the unmodifiable list of stopping colors.
 	 * 
 	 * @return the unmodifiable list of stopping colors.
 	 */
 	public List<GradientColor> getColors() {
 		return Collections.unmodifiableList(colors);
-	}
-
-	/**
-	 * Sets the start and stop color of gradient, when the gradient will have only 2 colors.
-	 * 
-	 * @param start starting color, with offset 0
-	 * @param stop stopping color, with offset 1
-	 */
-	void addColorsStartStop(String start, String stop) {
-		colors.clear();
-		addColorStop(GradientColor.DEFAULT_OFFSET_START, start);
-		addColorStop(GradientColor.DEFAULT_OFFSET_STOP, stop);
-	}
-
-	/**
-	 * Adds a stopping color with its offset
-	 * 
-	 * @param offset offset of color
-	 * @param color color instance
-	 */
-	void addColorStop(double offset, IsColor color) {
-		addColorStop(offset, IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Adds a stopping color with its offset
-	 * 
-	 * @param offset offset of color
-	 * @param color color instance
-	 */
-	void addColorStop(double offset, String color) {
-		addColorStop(new GradientColor(offset, color));
-	}
-
-	/**
-	 * Adds a stopping color with its offset
-	 * 
-	 * @param color color instance
-	 */
-	void addColorStop(GradientColor color) {
-		// checks if argument is consistent
-		if (color != null) {
-			// if consistent, adds color
-			colors.add(color);
-		}
-	}
-
-	/**
-	 * Returns <code>true</code> if at least a color has been stored.
-	 * 
-	 * @return <code>true</code> if at least a color has been stored
-	 */
-	boolean hasColors() {
-		return !colors.isEmpty();
-	}
-
-	/**
-	 * Sorts all colors by thier offset.
-	 */
-	void sortColors() {
-		// sorts the color in order to have the list from less to greater
-		Collections.sort(colors, COMPARATOR);
 	}
 
 	/*
@@ -291,21 +227,6 @@ public final class Gradient extends CanvasObject {
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObject#generateUniqueId()
-	 */
-	@Override
-	String generateUniqueId() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getValue(Property.CHARBA_GRADIENT_TYPE, UndefinedValues.STRING)).append(Constants.MINUS);
-		sb.append(getValue(Property.CHARBA_GRADIENT_ORIENTATION, UndefinedValues.STRING)).append(Constants.MINUS);
-		sb.append(getValue(Property.CHARBA_GRADIENT_SCOPE, UndefinedValues.STRING)).append(Constants.MINUS);
-		sb.append(colors.toString());
-		return sb.toString();
 	}
 
 	/**

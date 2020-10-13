@@ -16,14 +16,12 @@
 package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Entity to apply a canvas pattern into a dataset as background.<br>
@@ -76,16 +74,20 @@ public final class Pattern extends CanvasObject {
 	/**
 	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
 	 * 
+	 * @param id unique id, as string, of the object
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
+	 * @param width width of image
+	 * @param height height of image
 	 */
-	Pattern(Img image, Repetition repetition) {
+	Pattern(String id, Img image, Repetition repetition, int width, int height) {
+		super(id);
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
 			setValue(Property.CHARBA_PATTERN_IMG, image);
-			setValue(Property.CHARBA_PATTERN_WIDTH, image.getWidth());
-			setValue(Property.CHARBA_PATTERN_HEIGHT, image.getHeight());
+			setValue(Property.CHARBA_PATTERN_WIDTH, width);
+			setValue(Property.CHARBA_PATTERN_HEIGHT, height);
 			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Repetition.REPEAT : repetition);
 		} else {
 			// if here, image is null
@@ -95,14 +97,15 @@ public final class Pattern extends CanvasObject {
 	}
 
 	/**
-	 * Creates the object using an already created canvas pattern.<br>
-	 * This is mainly used by tiles.
+	 * Creates the object using an already created canvas pattern.
 	 * 
+	 * @param id unique id, as string, of the object
 	 * @param canvasPattern canvas pattern instance
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 */
-	Pattern(CanvasPatternItem canvasPattern, int width, int height) {
+	Pattern(String id, CanvasPatternItem canvasPattern, int width, int height) {
+		super(id);
 		// checks if canvas pattern is not consistent
 		if (canvasPattern != null) {
 			// creates pattern
@@ -206,30 +209,6 @@ public final class Pattern extends CanvasObject {
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObject#generateUniqueId()
-	 */
-	@Override
-	String generateUniqueId() {
-		StringBuilder sb = new StringBuilder();
-		// checks if the pattern is built by a image or canvas pattern
-		if (has(Property.CHARBA_PATTERN_IMG)) {
-			// uses the image class name ang image hashcode
-			sb.append(Img.class.getName()).append(Constants.MINUS);
-			sb.append(getImage().hashCode()).append(Constants.MINUS);
-		} else {
-			// uses the pattern class name ang image hashcode
-			sb.append(CanvasPatternItem.class.getName()).append(Constants.MINUS);
-			sb.append(getCanvasPattern().hashCode()).append(Constants.MINUS);
-		}
-		sb.append(getValue(Property.CHARBA_PATTERN_REPETITION, UndefinedValues.STRING)).append(Constants.MINUS);
-		sb.append(getValue(Property.CHARBA_PATTERN_WIDTH, UndefinedValues.INTEGER)).append(Constants.MINUS);
-		sb.append(getValue(Property.CHARBA_PATTERN_HEIGHT, UndefinedValues.INTEGER));
-		return sb.toString();
 	}
 
 }
