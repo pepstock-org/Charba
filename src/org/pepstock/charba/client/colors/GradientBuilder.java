@@ -104,7 +104,6 @@ public final class GradientBuilder {
 	 * @param start starting color, with offset 0
 	 * @param stop stopping color, with offset 1
 	 * @return gradient builder instance
-	 * @return gradient builder instance
 	 */
 	public GradientBuilder addColorsStartStop(IsColor start, IsColor stop) {
 		gradient.addColorsStartStop(start, stop);

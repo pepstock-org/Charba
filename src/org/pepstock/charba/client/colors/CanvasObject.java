@@ -155,17 +155,50 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		}
 	}
 	
-	/**
-	 * Calculates the <code>hashCode</code> for all extension of this class because it is based on the unique id.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the <code>hashCode</code> for all extension of this class because it is based on the unique id
+	 * @see java.lang.Object#hashCode()
 	 */
-	final int commonHashCode() {
+	@Override
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((hasId()) ? 0 : getId().hashCode());
 		return result;
-	} 
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// checks if is the same object
+		if (this == obj) {
+			return true;
+		}
+		// checks if argument is null
+		if (obj == null) {
+			return false;
+		}
+		// checks if the class is the same
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		// casts to a gradient
+		CanvasObject other = (CanvasObject) obj;
+		// checks if there is an id
+		if (hasId()) {
+			// checks with other id
+			return getId().equals(other.getId());
+		}
+		// if here, the this does not have the id
+		// then if the other is has id is NOT equals
+		// otherwise they are equals because both are null
+		return !other.hasId();
+	}
 	
 	/**
 	 * Creates an unique id for the canvas object.

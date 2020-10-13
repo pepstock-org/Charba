@@ -191,11 +191,11 @@ public final class Pattern extends CanvasObject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#hashCode()
+	 * @see org.pepstock.charba.client.colors.CanvasObject#hashCode()
 	 */
 	@Override
 	public int hashCode() {
-		return commonHashCode();
+		return super.hashCode();
 	}
 
 	/*
@@ -205,29 +205,7 @@ public final class Pattern extends CanvasObject {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		// checks if is the same object
-		if (this == obj) {
-			return true;
-		}
-		// checks if argument is null
-		if (obj == null) {
-			return false;
-		}
-		// checks if the class is the same
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		// casts to a pattern
-		Pattern other = (Pattern) obj;
-		// checks if there is an id
-		if (hasId()) {
-			// checks with other id
-			return getId().equals(other.getId());
-		}
-		// if here, the this does not have the id
-		// then if the other is has id is NOT equals
-		// otherwise they are equals because both are null
-		return !other.hasId();
+		return super.equals(obj);
 	}
 
 	/*
