@@ -164,11 +164,8 @@ public final class Annotation extends AbstractPlugin {
 		if (mustBeActivated(chart) && pluginOptions.containsKey(chart.getId()) && annotationElements.containsKey(chart.getId())) {
 			// gets the annotation elements
 			List<AbstractAnnotationElement<?>> listOfElements = annotationElements.get(chart.getId());
-			// scans all elements
-			for (AbstractAnnotationElement<?> element : listOfElements) {
-				// configures all elements
-				element.configure();
-			}
+			// scans all old elements to configure them
+			listOfElements.forEach(AbstractAnnotationElement::configure);
 		}
 	}
 

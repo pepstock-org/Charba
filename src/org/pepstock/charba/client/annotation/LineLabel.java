@@ -59,12 +59,12 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final FontStyle DEFAULT_FONT_STYLE = FontStyle.BOLD;
 
 	/**
-	 * Default line label font color, <b>white</b>.
+	 * Default line label font color, <b>{@link HtmlColor#WHITE}</b>.
 	 */
 	public static final IsColor DEFAULT_FONT_COLOR = HtmlColor.WHITE;
 
 	/**
-	 * Default line label font color as string, <b>white</b>.
+	 * Default line label font color as string, <b>rgb(255, 255, 255)</b>.
 	 */
 	public static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_FONT_COLOR.toRGB();
 

@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -92,6 +93,10 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	private final IsDefaultsLineAnnotation defaultValues;
 	// lable for line instance
 	private final LineLabel label;
+	// value callback instance
+	private AnnotationValueCallback valueCallback;
+	// end value callback instance
+	private AnnotationValueCallback endValueCallback;
 
 	/**
 	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -307,6 +312,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(String value) {
 		setValue(Property.VALUE, value);
+		// resets callback
+		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -316,6 +323,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(double value) {
 		setValue(Property.VALUE, value);
+		// resets callback
+		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -325,6 +334,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(Date value) {
 		setValue(Property.VALUE, value);
+		// resets callback
+		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -364,6 +375,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(String endValue) {
 		setValue(Property.END_VALUE, endValue);
+		// resets callback
+		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -373,6 +386,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(double endValue) {
 		setValue(Property.END_VALUE, endValue);
+		// resets callback
+		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -382,6 +397,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(Date endValue) {
 		setValue(Property.END_VALUE, endValue);
+		// resets callback
+		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -412,6 +429,66 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	@Override
 	public Date getEndValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
+	}
+
+	/**
+	 * Returns the data value callback to calculate start value of line.
+	 * 
+	 * @return the data value callback to calculate start value of line
+	 */
+	@Override
+	public AnnotationValueCallback getValueCallback() {
+		// checks if not consistent
+		if (valueCallback == null) {
+			// then checks from default
+			return defaultValues.getValueCallback();
+		}
+		return valueCallback;
+	}
+
+	/**
+	 * Sets the data value callback to calculate start value of line.
+	 * 
+	 * @param valueCallback the data value callback to calculate start value of line
+	 */
+	public void setValue(AnnotationValueCallback valueCallback) {
+		// stores callback
+		this.valueCallback = valueCallback;
+		// checks if callback is consistent
+		if (valueCallback != null) {
+			// resets the value configuration
+			remove(Property.VALUE);
+		}
+	}
+
+	/**
+	 * Returns the data value callback to calculate end value of line.
+	 * 
+	 * @return the data value callback to calculate end value of line
+	 */
+	@Override
+	public AnnotationValueCallback getEndValueCallback() {
+		// checks if not consistent
+		if (endValueCallback == null) {
+			// then checks from default
+			return defaultValues.getEndValueCallback();
+		}
+		return endValueCallback;
+	}
+
+	/**
+	 * Sets the data value callback to calculate end value of line.
+	 * 
+	 * @param endValueCallback the data value callback to calculate end value of line
+	 */
+	public void setEndValue(AnnotationValueCallback endValueCallback) {
+		// stores callback
+		this.endValueCallback = endValueCallback;
+		// checks if callback is consistent
+		if (endValueCallback != null) {
+			// resets the value configuration
+			remove(Property.END_VALUE);
+		}
 	}
 
 }

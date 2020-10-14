@@ -21,7 +21,7 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.HasLegendText;
 
 /**
- * This callback is the base intefrace for HTML legend callbacks to change the text of legend for a specific item or legend's title, as HTML.<br>
+ * This callback is the base interface for HTML legend callbacks to change the text of legend for a specific item or legend's title, as HTML.<br>
  * This callback is used ONLY by {@link HtmlLegend} plugin.
  * 
  * @author Andrea "Stock" Stocchero

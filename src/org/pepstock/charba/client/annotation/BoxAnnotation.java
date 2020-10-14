@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -105,6 +106,14 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
+	// X minimum callback instance
+	private AnnotationValueCallback xMinCallback;
+	// X maximum value callback instance
+	private AnnotationValueCallback xMaxCallback;
+	// Y minimum callback instance
+	private AnnotationValueCallback yMinCallback;
+	// Y maximum value callback instance
+	private AnnotationValueCallback yMaxCallback;
 
 	/**
 	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -407,6 +416,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMax(String max) {
 		setValue(Property.X_MAX, max);
+		// resets callback
+		setXMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -416,6 +427,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMax(double max) {
 		setValue(Property.X_MAX, max);
+		// resets callback
+		setXMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -425,6 +438,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMax(Date max) {
 		setValue(Property.X_MAX, max);
+		// resets callback
+		setXMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -464,6 +479,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMin(String min) {
 		setValue(Property.X_MIN, min);
+		// resets callback
+		setXMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -473,6 +490,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMin(double min) {
 		setValue(Property.X_MIN, min);
+		// resets callback
+		setXMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -482,6 +501,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setXMin(Date min) {
 		setValue(Property.X_MIN, min);
+		// resets callback
+		setXMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -555,6 +576,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMax(String max) {
 		setValue(Property.Y_MAX, max);
+		// resets callback
+		setYMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -564,6 +587,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMax(double max) {
 		setValue(Property.Y_MAX, max);
+		// resets callback
+		setYMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -573,6 +598,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMax(Date max) {
 		setValue(Property.Y_MAX, max);
+		// resets callback
+		setYMax((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -612,6 +639,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMin(String min) {
 		setValue(Property.Y_MIN, min);
+		// resets callback
+		setYMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -621,6 +650,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMin(double min) {
 		setValue(Property.Y_MIN, min);
+		// resets callback
+		setYMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -630,6 +661,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public void setYMin(Date min) {
 		setValue(Property.Y_MIN, min);
+		// resets callback
+		setYMin((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -660,6 +693,124 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	@Override
 	public Date getYMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDate());
+	}
+
+	/**
+	 * Returns the data value callback to calculate minimum value of box on X scale.
+	 * 
+	 * @return the data value callback to calculate minimum value of box on X scale
+	 */
+	@Override
+	public AnnotationValueCallback getXMinCallback() {
+		// checks if not consistent
+		if (xMinCallback == null) {
+			// then checks from default
+			return defaultValues.getXMinCallback();
+		}
+		return xMinCallback;
+	}
+
+	/**
+	 * @param xMinCallback the xMinCallback to set
+	 */
+	public void setXMin(AnnotationValueCallback xMinCallback) {
+		// stores callback
+		this.xMinCallback = xMinCallback;
+		// checks if callback is consistent
+		if (xMinCallback != null) {
+			// resets the value configuration
+			remove(Property.X_MIN);
+		}
+	}
+
+	/**
+	 * Returns the data value callback to calculate maximum value of box on X scale.
+	 * 
+	 * @return the data value callback to calculate maximum value of box on X scale
+	 */
+	@Override
+	public AnnotationValueCallback getXMaxCallback() {
+		// checks if not consistent
+		if (xMaxCallback == null) {
+			// then checks from default
+			return defaultValues.getXMaxCallback();
+		}
+		return xMaxCallback;
+	}
+
+	/**
+	 * Sets the data value callback to calculate maximum value of box on X scale.
+	 * 
+	 * @param xMaxCallback the data value callback to calculate maximum value of box on X scale
+	 */
+	public void setXMax(AnnotationValueCallback xMaxCallback) {
+		// stores callback
+		this.xMaxCallback = xMaxCallback;
+		// checks if callback is consistent
+		if (xMaxCallback != null) {
+			// resets the value configuration
+			remove(Property.X_MAX);
+		}
+	}
+
+	/**
+	 * Returns the data value callback to calculate minimum value of box on Y scale.
+	 * 
+	 * @return the data value callback to calculate minimum value of box on Y scale
+	 */
+	@Override
+	public AnnotationValueCallback getYMinCallback() {
+		// checks if not consistent
+		if (yMinCallback == null) {
+			// then checks from default
+			return defaultValues.getYMinCallback();
+		}
+		return yMinCallback;
+	}
+
+	/**
+	 * Sets the data value callback to calculate minimum value of box on Y scale.
+	 * 
+	 * @param yMinCallback the data value callback to calculate minimum value of box on Y scale
+	 */
+	public void setYMin(AnnotationValueCallback yMinCallback) {
+		// stores callback
+		this.yMinCallback = yMinCallback;
+		// checks if callback is consistent
+		if (yMinCallback != null) {
+			// resets the value configuration
+			remove(Property.Y_MIN);
+		}	
+	}
+
+	/**
+	 * Returns the data value callback to calculate maximum value of box on Y scale.
+	 * 
+	 * @return the data value callback to calculate maximum value of box on Y scale
+	 */
+	@Override
+	public AnnotationValueCallback getYMaxCallback() {
+		// checks if not consistent
+		if (yMaxCallback == null) {
+			// then checks from default
+			return defaultValues.getYMaxCallback();
+		}
+		return yMaxCallback;
+	}
+
+	/**
+	 * Sets the data value callback to calculate maximum value of box on Y scale.
+	 * 
+	 * @param yMaxCallback the data value callback to calculate maximum value of box on Y scale
+	 */
+	public void setYMax(AnnotationValueCallback yMaxCallback) {
+		// stores callback
+		this.yMaxCallback = yMaxCallback;
+		// checks if callback is consistent
+		if (yMaxCallback != null) {
+			// resets the value configuration
+			remove(Property.Y_MAX);
+		}		
 	}
 
 }

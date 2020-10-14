@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -112,6 +113,15 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	default Date getValueAsDate() {
 		return null;
 	}
+	
+	/**
+	 * Returns the data value callback to calculate start value of line.
+	 * 
+	 * @return the data value callback to calculate start value of line
+	 */
+	default AnnotationValueCallback getValueCallback() {
+		return null;
+	}
 
 	/**
 	 * Returns the data value at which the line draw should end.
@@ -137,6 +147,15 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 * @return the data value at which the line draw should end
 	 */
 	default Date getEndValueAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the data value callback to calculate end value of line.
+	 * 
+	 * @return the data value callback to calculate end value of line
+	 */
+	default AnnotationValueCallback getEndValueCallback() {
 		return null;
 	}
 

@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.colors.Area;
 import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.Center;
@@ -42,7 +43,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation> {
 
-	private final MinMaxCointainer minMaxContainer = new MinMaxCointainer();
+	private final MinMaxContainer minMaxContainer = new MinMaxContainer();
 
 	private final BoxAnnotationCanvasObjectFactory canvasObjectFactory;
 
@@ -121,7 +122,6 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		return bottom - top;
 	}
 
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -225,7 +225,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.annotation.AbstractAnnotationElement#destroyElement()
 	 */
 	@Override
@@ -300,9 +302,53 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// CATEGORY scale
 		// manages String
 		// --------------
-		// gets the minimum and maximum value configured for annotation
-		final String minString = isXScale ? getConfiguration().getXMinAsString() : getConfiguration().getYMinAsString();
-		final String maxString = isXScale ? getConfiguration().getXMaxAsString() : getConfiguration().getYMaxAsString();
+		// gets the callbacks configured for annotation
+		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
+		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
+		// -------
+		// MIN
+		// -------
+		final String minString;
+		// checks if there is any value callback
+		if (minCallBack != null) {
+			// invokes the callback
+			Object result = minCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result != null) {
+				// stores the result as string
+				minString = result.toString();
+			} else {
+				// if here, the result is null
+				// then undefined
+				minString = UndefinedValues.STRING;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			minString = isXScale ? getConfiguration().getXMinAsString() : getConfiguration().getYMinAsString();
+		}
+		// -------
+		// MAX
+		// -------
+		final String maxString;
+		// checks if there is any value callback
+		if (maxCallBack != null) {
+			// invokes the callback
+			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result != null) {
+				// stores the result as string
+				maxString = result.toString();
+			} else {
+				// if here, the result is null
+				// then undefined
+				maxString = UndefinedValues.STRING;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			maxString = isXScale ? getConfiguration().getXMaxAsString() : getConfiguration().getYMaxAsString();
+		}
 		// gets the position in pixel on chart area for the minimum value
 		minMaxContainer.setMinimum(getValuePositionFromString(minString, scale, minLimit));
 		// gets the position in pixel on chart area for the maximum value
@@ -322,9 +368,54 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// TIME or TIMESERIES scales
 		// manage Date
 		// ------------------------
-		// gets the minimum and maximum value configured for annotation
-		final Date minDate = isXScale ? getConfiguration().getXMinAsDate() : getConfiguration().getYMinAsDate();
-		final Date maxDate = isXScale ? getConfiguration().getXMaxAsDate() : getConfiguration().getYMaxAsDate();
+		// gets the callbacks configured for annotation
+		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
+		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
+		// -------
+		// MIN
+		// -------
+		final Date minDate;
+		// checks if there is any value callback
+		if (minCallBack != null) {
+			// invokes the callback
+			Object result = minCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Date) {
+				// stores the result as date
+				minDate = (Date) result;
+			} else {
+				// if here, the result is null
+				// then null
+				minDate = null;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			minDate = isXScale ? getConfiguration().getXMinAsDate() : getConfiguration().getYMinAsDate();
+		}
+		// -------
+		// MAX
+		// -------
+		// gets the end value configured for annotation
+		final Date maxDate;
+		// checks if there is any value callback
+		if (maxCallBack != null) {
+			// invokes the callback
+			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Date) {
+				// stores the result as date
+				maxDate = (Date) result;
+			} else {
+				// if here, the result is null
+				// then undefined
+				maxDate = null;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			maxDate = isXScale ? getConfiguration().getXMaxAsDate() : getConfiguration().getYMaxAsDate();
+		}
 		// gets the position in pixel on chart area for the minimum value
 		minMaxContainer.setMinimum(getValuePositionFromDate(minDate, scale, minLimit));
 		// gets the position in pixel on chart area for the maximum value
@@ -344,9 +435,58 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// LINEAR or LOGARITHMIC scales
 		// manage Double
 		// ----------------------------
-		// gets the minimum and maximum value configured for annotation
-		final double minDouble = isXScale ? getConfiguration().getXMinAsDouble() : getConfiguration().getYMinAsDouble();
-		final double maxDouble = isXScale ? getConfiguration().getXMaxAsDouble() : getConfiguration().getYMaxAsDouble();
+		// gets the callbacks configured for annotation
+		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
+		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
+		// -------
+		// MIN
+		// -------
+		final double minDouble;
+		// checks if there is any value callback
+		if (minCallBack != null) {
+			// invokes the callback
+			Object result = minCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Number) {
+				// casts to a number
+				Number tempResult = (Number)result;
+				// stores the result as number
+				minDouble = tempResult.doubleValue();
+			} else {
+				// if here, the result is null
+				// then null
+				minDouble = UndefinedValues.DOUBLE;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			minDouble = isXScale ? getConfiguration().getXMinAsDouble() : getConfiguration().getYMinAsDouble();
+		}
+		// -------
+		// MAX
+		// -------
+		final double maxDouble;
+		// checks if there is any value callback
+		if (maxCallBack != null) {
+			// invokes the callback
+			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Number) {
+				// stores the result as double
+				// casts to a number
+				Number tempResult = (Number)result;
+				// stores the result as number
+				maxDouble = tempResult.doubleValue();
+			} else {
+				// if here, the result is null
+				// then undefined
+				maxDouble = UndefinedValues.DOUBLE;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			maxDouble = isXScale ? getConfiguration().getXMaxAsDouble() : getConfiguration().getYMaxAsDouble();
+		}
 		// gets the position in pixel on chart area for the minimum value
 		minMaxContainer.setMinimum(getValuePosition(minDouble, scale, minLimit));
 		// gets the position in pixel on chart area for the maximum value
@@ -359,7 +499,7 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static final class MinMaxCointainer {
+	private static final class MinMaxContainer {
 
 		private double minimum = Double.NaN;
 

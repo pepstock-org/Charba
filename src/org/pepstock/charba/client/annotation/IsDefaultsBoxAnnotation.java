@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -201,6 +202,42 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation {
 	 * @return the bottom edge of the box
 	 */
 	default Date getYMinAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the data value callback to calculate minimum value of box on X scale.
+	 * 
+	 * @return the data value callback to calculate minimum value of box on X scale
+	 */
+	default AnnotationValueCallback getXMinCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the data value callback to calculate maximum value of box on X scale.
+	 * 
+	 * @return the data value callback to calculate maximum value of box on X scale
+	 */
+	default AnnotationValueCallback getXMaxCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the data value callback to calculate minimum value of box on Y scale.
+	 * 
+	 * @return the data value callback to calculate minimum value of box on Y scale
+	 */
+	default AnnotationValueCallback getYMinCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the data value callback to calculate maximum value of box on Y scale.
+	 * 
+	 * @return the data value callback to calculate maximum value of box on Y scale
+	 */
+	default AnnotationValueCallback getYMaxCallback() {
 		return null;
 	}
 

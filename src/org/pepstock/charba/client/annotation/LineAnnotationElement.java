@@ -63,6 +63,7 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		linelabel = new LineLabelElement(this);
 		// creates linear equation of the line
 		lineFunction = new LineFunction(this);
+		// extracts value and end value
 	}
 
 	/**
@@ -230,15 +231,52 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		// manages String
 		// --------------
 		// gets the start value configured for annotation
-		final String startString = getConfiguration().getValueAsString();
+		final String startString;
+		// checks if there is any value callback
+		if (getConfiguration().getValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result != null) {
+				// stores the result as string
+				startString = result.toString();
+			} else {
+				// if here, the result is null
+				// then return
+				return;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			startString = getConfiguration().getValueAsString();
+		}
 		// checks if start value is consistent
 		if (startString == null) {
 			// does nothing and this annotation is not showed
 			return;
 		}
 		// gets the end value configured for annotation
-		// if not exists, uses the starting value as end one
-		final String endString = getConfiguration().getEndValueAsString() != null ? getConfiguration().getEndValueAsString() : startString;
+		final String endString;
+		// checks if there is any value callback
+		if (getConfiguration().getEndValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getEndValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result != null) {
+				// stores the result as string
+				endString = result.toString();
+			} else {
+				// if here, the result is null
+				// then sets the same value of the start
+				endString = startString;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
+			endString = getConfiguration().getEndValueAsString() != null ? getConfiguration().getEndValueAsString() : startString;
+		}
 		// stores if has end value
 		isEndValueMissing = endString.equals(startString);
 		// gets the position in pixel on chart area for the start value
@@ -258,15 +296,52 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		// manage Date
 		// ------------------------
 		// gets the start value configured for annotation
-		final Date startDate = getConfiguration().getValueAsDate();
+		final Date startDate;
+		// checks if there is any value callback
+		if (getConfiguration().getValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Date) {
+				// stores the result as date
+				startDate = (Date) result;
+			} else {
+				// if here, the result is null
+				// then return
+				return;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			startDate = getConfiguration().getValueAsDate();
+		}
 		// checks if start value is consistent
 		if (startDate == null) {
 			// does nothing and this annotation is not showed
 			return;
 		}
 		// gets the end value configured for annotation
-		// if not exists, uses the starting value as end one
-		final Date endDate = getConfiguration().getEndValueAsDate() != null ? getConfiguration().getEndValueAsDate() : startDate;
+		final Date endDate;
+		// checks if there is any value callback
+		if (getConfiguration().getEndValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getEndValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Date) {
+				// stores the result as date
+				endDate = (Date) result;
+			} else {
+				// if here, the result is null
+				// then sets the same value of the start
+				endDate = startDate;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
+			endDate = getConfiguration().getEndValueAsDate() != null ? getConfiguration().getEndValueAsDate() : startDate;
+		}
 		// stores if has end value
 		isEndValueMissing = endDate.equals(startDate);
 		// gets the position in pixel on chart area for the start value
@@ -285,16 +360,58 @@ final class LineAnnotationElement extends AbstractAnnotationElement<LineAnnotati
 		// LINEAR or LOGARITHMIC scales
 		// manage Double
 		// ----------------------------
-		// gets the minimum and maximum value configured for annotation
-		double startDouble = getConfiguration().getValueAsDouble();
+		// gets the start value configured for annotation
+		final double startDouble;
+		// checks if there is any value callback
+		if (getConfiguration().getValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Number) {
+				// casts to a number
+				Number tempResult = (Number) result;
+				// stores the result as double
+				startDouble = tempResult.doubleValue();
+			} else {
+				// if here, the result is null
+				// then return
+				return;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			startDouble = getConfiguration().getValueAsDouble();
+		}
 		// checks if start value is consistent
 		if (Double.isNaN(startDouble)) {
 			// does nothing and this annotation is not showed
 			return;
 		}
 		// gets the end value configured for annotation
-		// if not exists, uses the starting value as end one
-		double endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
+		final double endDouble;
+		// checks if there is any value callback
+		if (getConfiguration().getEndValueCallback() != null) {
+			// invokes the callback
+			Object result = getConfiguration().getEndValueCallback().compute(getChart(), getConfiguration());
+			// checks if the result of callback is consistent
+			if (result instanceof Number) {
+				// casts to a number
+				Number tempResult = (Number) result;
+				// stores the result as double
+				endDouble = tempResult.doubleValue();
+			} else {
+				// if here, the result is null
+				// then sets the same value of the start
+				endDouble = startDouble;
+			}
+		} else {
+			// if here, there is not callback
+			// then reads the value from configuration
+			// gets the end value configured for annotation
+			// if not exists, uses the starting value as end one
+			endDouble = !Double.isNaN(getConfiguration().getEndValueAsDouble()) ? getConfiguration().getEndValueAsDouble() : startDouble;
+		}
+
 		// stores if has end value
 		isEndValueMissing = Double.isNaN(getConfiguration().getEndValueAsDouble());
 		// gets the position in pixel on chart area for the start value
