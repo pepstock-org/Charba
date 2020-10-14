@@ -56,6 +56,7 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 
 	private double bottom = UndefinedValues.DOUBLE;
 
+
 	/**
 	 * Creates an annotation element by an annotation configuration.
 	 * 
@@ -142,7 +143,7 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// gets scale X
 			ScaleItem xScale = scalesMap.get(getConfiguration().getXScaleID().value());
 			// configures the annotation element by the scale instance
-			configureScale(area, xScale, true);
+			configureScale(area, xScale, true, getConfiguration().getXMinCallback(), getConfiguration().getXMaxCallback());
 		}
 		// --------------
 		// SCALE Y
@@ -152,7 +153,7 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// gets scale Y
 			ScaleItem yScale = scalesMap.get(getConfiguration().getYScaleID().value());
 			// configures the annotation element by the scale instance
-			configureScale(area, yScale, false);
+			configureScale(area, yScale, false, getConfiguration().getYMinCallback(), getConfiguration().getYMaxCallback());
 		}
 	}
 
@@ -244,8 +245,10 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param area chart area instance
 	 * @param scale scale instance to use to configure
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
+	 * @param minCallBack the value callback to calculate the minimum value 
+	 * @param maxCallBack the value callback to calculate the maximum value 
 	 */
-	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale) {
+	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
 		// resets minimum and maximum references
 		minMaxContainer.setMinimum(UndefinedValues.DOUBLE);
 		minMaxContainer.setMaximum(UndefinedValues.DOUBLE);
@@ -260,20 +263,20 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// manages String
 			// --------------
 			// gets the minimum and maximum pixel value
-			retrieveMinMaxFromScaleForString(scale, isXScale, minLimit, maxLimit);
+			retrieveMinMaxFromScaleForString(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
 			// ------------------------
 			// TIME or TIMESERIES scales
 			// manage Date
 			// ------------------------
 			// gets the minimum and maximum value configured for annotation
-			retrieveMinMaxFromScaleForDate(scale, isXScale, minLimit, maxLimit);
+			retrieveMinMaxFromScaleForDate(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
 			// ----------------------------
 			// LINEAR or LOGARITHMIC scales
 			// manage Double
 			// ----------------------------
-			retrieveMinMaxFromScaleForDouble(scale, isXScale, minLimit, maxLimit);
+			retrieveMinMaxFromScaleForDouble(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
 		}
 		// checks if is asking for configuration against a scale X
 		if (isXScale) {
@@ -296,15 +299,14 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 * @param minCallBack the value callback to calculate the minimum value 
+	 * @param maxCallBack the value callback to calculate the maximum value 
 	 */
-	private void retrieveMinMaxFromScaleForString(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+	private void retrieveMinMaxFromScaleForString(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
 		// --------------
 		// CATEGORY scale
 		// manages String
 		// --------------
-		// gets the callbacks configured for annotation
-		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
-		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
 		// -------
 		// MIN
 		// -------
@@ -362,15 +364,14 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 * @param minCallBack the value callback to calculate the minimum value 
+	 * @param maxCallBack the value callback to calculate the maximum value 
 	 */
-	private void retrieveMinMaxFromScaleForDate(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+	private void retrieveMinMaxFromScaleForDate(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
 		// ------------------------
 		// TIME or TIMESERIES scales
 		// manage Date
 		// ------------------------
-		// gets the callbacks configured for annotation
-		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
-		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
 		// -------
 		// MIN
 		// -------
@@ -430,14 +431,11 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
 	 */
-	private void retrieveMinMaxFromScaleForDouble(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit) {
+	private void retrieveMinMaxFromScaleForDouble(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
 		// ----------------------------
 		// LINEAR or LOGARITHMIC scales
 		// manage Double
 		// ----------------------------
-		// gets the callbacks configured for annotation
-		final AnnotationValueCallback minCallBack = isXScale ? getConfiguration().getXMinCallback() : getConfiguration().getYMinCallback();
-		final AnnotationValueCallback maxCallBack = isXScale ? getConfiguration().getXMaxCallback() : getConfiguration().getYMaxCallback();
 		// -------
 		// MIN
 		// -------
