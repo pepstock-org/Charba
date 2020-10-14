@@ -344,9 +344,9 @@ final class BaseMeterController extends AbstractController {
 	 */
 	private String getFormattedValue(IsChart chart, MeterOptions options, double value, double easing) {
 		// checks if options has got a callback
-		if (options.getValueCallback() != null) {
+		if (options.getFormatCallback() != null) {
 			// invokes callback
-			String result = options.getValueCallback().onFormat(chart, value, easing);
+			String result = options.getFormatCallback().onFormat(chart, value, easing);
 			// checks if result is consistent
 			if (result != null) {
 				// return this value

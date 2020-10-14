@@ -243,6 +243,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
  * remove [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained. New Charba annotation plugin has been developed, completely in Java, with the same capabilities.
  * reduces the visibility of `Gradient` and `Pattern` class constructors in order to use new `GradientBuilder` and `PatternBuilder` classes. This change avoids inconsistent gradient and pattern objects, improving some capabilities of them (like the `equals` and `hashCode` methods in case they will be needed).
+ * rename `ValueCallback` into `MeterFormatCallback` class.
+   * rename `setValueCallback` and `getValueCallback` of `MeterOptions` class into `setFormatCallback` and `getFormatCallback`. 
   
 ### Features
 

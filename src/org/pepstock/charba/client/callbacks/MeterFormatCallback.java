@@ -24,7 +24,7 @@ import org.pepstock.charba.client.impl.charts.MeterChart;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface ValueCallback {
+public interface MeterFormatCallback {
 
 	/**
 	 * Changes the value to show inside of {@link MeterChart} or {@link GaugeChart}.

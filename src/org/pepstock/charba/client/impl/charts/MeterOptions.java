@@ -18,8 +18,8 @@ package org.pepstock.charba.client.impl.charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
+import org.pepstock.charba.client.callbacks.MeterFormatCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
-import org.pepstock.charba.client.callbacks.ValueCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
@@ -72,7 +72,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
 
-	private ValueCallback valueCallback = null;
+	private MeterFormatCallback formatCallback = null;
 
 	// creates internal animation handler
 	private final InternalAnimationEventHandler eventHandler = new InternalAnimationEventHandler();
@@ -286,17 +286,17 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @return the callback to customize the value string into chart
 	 */
-	public final ValueCallback getValueCallback() {
-		return valueCallback;
+	public final MeterFormatCallback getFormatCallback() {
+		return formatCallback;
 	}
 
 	/**
 	 * Sets the callback to customize the value string into chart.
 	 * 
-	 * @param valueCallback the callback to customize the value string into chart
+	 * @param formatCallback the callback to customize the value string into chart
 	 */
-	public final void setValueCallback(ValueCallback valueCallback) {
-		this.valueCallback = valueCallback;
+	public final void setFormatCallback(MeterFormatCallback formatCallback) {
+		this.formatCallback = formatCallback;
 	}
 
 	/**
