@@ -15,8 +15,12 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -53,6 +57,14 @@ public final class RegExpResult extends Array {
 	 */
 	@JsProperty(name = "input")
 	public final native String input();
+	
+	/**
+	 * Returns the object to refer to certain token by string that a regular expression matches.
+	 * 
+	 * @return the object to refer to certain token by string that a regular expression matches.
+	 */
+	@JsProperty
+	native NativeObject getGroups();
 
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the element.
@@ -154,5 +166,27 @@ public final class RegExpResult extends Array {
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
 	native String pop();
+	
+	/**
+	 * Returns the object to refer to certain token by string that a regular expression matches.
+	 * 
+	 * @param factory native container factory in order to map the result of regular expression execution
+	 * @param <T> type of native object container
+	 * @return the object to refer to certain token by string that a regular expression matches
+	 */
+	@JsOverlay
+	public <T extends NativeObjectContainer> T groups(NativeObjectContainerFactory<T> factory){
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the object by the factory
+			// the original groups is cloned
+			// because it doesn't contain the object prototype
+			// needed to get properties by a native object container
+			return factory.create(Helpers.get().clone(getGroups()));
+		}
+		// if here factory is not consistent
+		// then returns null
+		return null;
+	}
 
 }
