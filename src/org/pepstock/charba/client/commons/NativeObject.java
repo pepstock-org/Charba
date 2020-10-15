@@ -71,12 +71,32 @@ public final class NativeObject {
 	static native ArrayString keys(NativeObject source);
 
 	/**
+	 * Copies all enumerable own properties from one or more source objects to a target object.<br>
+	 * It returns the target object.
+	 * 
+	 * @param target the object what to apply the sources’ properties to, which is returned after it is modified.
+	 * @param source array of objects containing the properties you want to apply.
+	 * @return the target object.
+	 */
+	static native NativeObject assign(NativeObject target, NativeObject... source);
+
+	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.
 	 * 
 	 * @param key the string name of the property to test.
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
 	native boolean hasOwnProperty(String key);
+	
+	/**
+	 * Copies all enumerable own properties from this object to new target object.
+	 * 
+	 * @return a clone instance of the object.
+	 */
+	@JsOverlay
+	public NativeObject cloneTo() {
+		return NativeObject.assign(new NativeObject(), this);
+	}	
 
 	/**
 	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.
