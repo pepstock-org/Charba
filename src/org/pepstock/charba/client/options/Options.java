@@ -30,6 +30,8 @@ import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.CLocaleBuilder;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -57,6 +59,41 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Font font;
 
 	private final Datasets datasets;
+	
+	/**
+	 * Name of properties of native object.<br>
+	 * Properties common with which extends this class.
+	 */
+	protected enum CommonProperty implements Key
+	{
+		/**
+		 * Property key to manage locale option.
+		 */
+		LOCALE("locale");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private CommonProperty(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
 
 	/**
 	 * Name of properties of native object.
@@ -297,9 +334,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Sets the browser events that the chart should listen to for tooltips and hovering.
+	 * Sets the browser events that the chart should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to for tooltips and hovering.
+	 * @param events the browser events that the chart should listen to.
 	 */
 	public void setEvents(Event... events) {
 		// sets the array of events
@@ -307,15 +344,48 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to for tooltips and hovering.
+	 * Returns the browser events that the chart should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to for tooltips and hovering.
+	 * @return the browser events that the chart should listen to.
 	 */
+	@Override
 	public List<Event> getEvents() {
+		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
-		return ArrayListHelper.list(Event.values(), array);
+		// if teh array is not consistent returns the default
+		return array != null ? ArrayListHelper.list(Event.values(), array) : getDefaultValues().getEvents();
 	}
 
+	/**
+	 * Sets the locale instance for internationalization.
+	 * 
+	 * @param locale the locale instance
+	 */
+	public void setLocale(CLocale locale) {
+		// check if locale is consistent
+		if (locale != null) {
+			setValue(CommonProperty.LOCALE, locale.getIdentifier());
+		}
+	}
+
+	/**
+	 * Returns the locale instance for internationalization.
+	 * 
+	 * @return the locale instance
+	 */
+	@Override
+	public CLocale getLocale() {
+		// gets value as string
+		String localeIdentifier = getValue(CommonProperty.LOCALE, UndefinedValues.STRING);
+		// checks if consistent
+		if (localeIdentifier != null) {
+			return CLocaleBuilder.build(localeIdentifier);
+		}
+		// if here the value is not consistent
+		// returns default
+		return getDefaultValues().getLocale();
+	}
+	
 	/**
 	 * Sets the resizing of the chart canvas when its container does.
 	 * 

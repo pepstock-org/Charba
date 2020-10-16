@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.intl;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -231,8 +232,16 @@ public final class CLocale {
 	public static void setDefault(CLocale locale) {
 		// checks if locale argument is consistent
 		if (locale != null) {
+			// checks if the current default locale is equals to the chart default locale
+			// if equals, the default will be kept aligned
+			boolean mustKeepAlignChartDefault = defaultLocale.equals(Defaults.get().getGlobal().getLocale());
 			// stores the default locale
 			defaultLocale = locale;
+			// checks if it must set on chart default global
+			if (mustKeepAlignChartDefault) {
+				// sets the default to the defaults chart
+				Defaults.get().getGlobal().setLocale(defaultLocale);
+			}
 		}
 	}
 

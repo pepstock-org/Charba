@@ -50,6 +50,7 @@ import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
+import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
 import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 import org.pepstock.charba.client.items.ScaleItem;
@@ -352,21 +353,39 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	abstract Axis getAxisById(int id);
 
 	/**
-	 * Sets the browser events that the chart should listen to for tooltips and hovering.
+	 * Sets the browser events that the chart should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to for tooltips and hovering.
+	 * @param events the browser events that the chart should listen to.
 	 */
 	public void setEvents(Event... events) {
 		getConfiguration().setEvents(events);
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to for tooltips and hovering.
+	 * Returns the browser events that the chart should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to for tooltips and hovering.
+	 * @return the browser events that the chart should listen to.
 	 */
 	public List<Event> getEvents() {
 		return getConfiguration().getEvents();
+	}
+	
+	/**
+	 * Sets the locale instance for internationalization.
+	 * 
+	 * @param locale the locale instance
+	 */
+	public void setLocale(CLocale locale) {
+		getConfiguration().setLocale(locale);
+	}
+
+	/**
+	 * Returns the locale instance for internationalization.
+	 * 
+	 * @return the locale instance
+	 */
+	public CLocale getLocale() {
+		return getConfiguration().getLocale();
 	}
 
 	/**

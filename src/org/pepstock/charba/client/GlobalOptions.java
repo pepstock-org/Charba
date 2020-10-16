@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.options.Font;
 import org.pepstock.charba.client.options.Options;
 
@@ -28,7 +29,7 @@ import org.pepstock.charba.client.options.Options;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
-
+	
 	// instance to store the global options as default
 	private final IsDefaultScaledOptions defaultOptions;
 
@@ -42,6 +43,11 @@ public final class GlobalOptions extends Options {
 		super(DefaultsBuilder.get().getOptions(), nativeObject);
 		// stores default
 		this.defaultOptions = new DefaultGlobalOptions(this);
+		// checks if has got the locale
+		if (!has(Options.CommonProperty.LOCALE)){
+			// sets locale getting for locale instance
+			setLocale(CLocale.getDefault());
+		}
 	}
 
 	/**

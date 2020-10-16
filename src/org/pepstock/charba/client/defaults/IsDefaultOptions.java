@@ -15,6 +15,11 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import java.util.List;
+
+import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.intl.CLocale;
+
 /**
  * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
  * 
@@ -84,6 +89,20 @@ public interface IsDefaultOptions {
 	 * @return the plugins defaults.
 	 */
 	IsDefaultDatasets getDatasets();
+	
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	List<Event> getEvents();
+
+	/**
+	 * Returns the locale instance for internationalization.
+	 * 
+	 * @return the locale instance
+	 */
+	CLocale getLocale();
 
 	/**
 	 * Returns the resizing of the chart canvas when its container does.

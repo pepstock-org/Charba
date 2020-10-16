@@ -301,7 +301,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `skipNull` property to `BarOptions` configuration.
    * change `circumference` and `rotation` properties on `PieChart` and `DoughnutChart` options in order to set the value in degrees instead of radians.
    * add `sort` callback (by `LegendItemSortCallback` class) to the `LegendLabels` configuration in order to sort the legend items. 
-   * add `beginAtZero` property to `CartesianLogarithmicAxis` class.   
+   * add `beginAtZero` property to `CartesianLogarithmicAxis` class.
+   * add `locale` property to options and configuration.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -343,6 +344,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
    * remove `fireEventOnClearSelection` properties has been removed from DatasetsItemsSelectorOptions class because an clear selection event will fire only if there is a event handler. 
  * import **Datalabels plugin** from a [pepstock-org/chartjs-plugin-datalabels](https://github.com/pepstock-org/chartjs-plugin-datalabels) fork where the plugin has been changed in order to work with CHART.JS 3. This is a temporary solution waiting for the upgrade of the original plugin by the community.
+ * implement **INTL NUmberFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+   * implement `CLocale` class to manage locale objects.
   
 ### Development
 

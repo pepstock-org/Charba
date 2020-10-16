@@ -15,6 +15,12 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -50,11 +56,33 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
 
+	private static final List<Event> DEFAULT_EVENTS = Collections.unmodifiableList(Arrays.asList(Event.values()));
+
 	/**
 	 * To avoid any instantiation
 	 */
 	DefaultOptions() {
 		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
+	 */
+	@Override
+	public List<Event> getEvents() {
+		return DEFAULT_EVENTS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLocale()
+	 */
+	@Override
+	public CLocale getLocale() {
+		return CLocale.getDefault();
 	}
 
 	/*

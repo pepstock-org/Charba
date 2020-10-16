@@ -15,8 +15,12 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
+import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.intl.CLocale;
 
 /**
  * Abstract defaults for options element, based on chart type. THIS IS MUST BE EXTENDED AS ROOT OF ALL ELEMENTS CHART DEFAULTS.
@@ -36,6 +40,26 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 		super(defaultOptions);
 		// stores defaults
 		this.options = defaultOptions;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
+	 */
+	@Override
+	public List<Event> getEvents() {
+		return options.getEvents();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLocale()
+	 */
+	@Override
+	public CLocale getLocale() {
+		return options.getLocale();
 	}
 
 	/*
