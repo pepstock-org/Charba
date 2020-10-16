@@ -86,10 +86,7 @@ public final class Font extends AbstractNode implements IsFont {
 	Font(AbstractNode parent, Key childKey, IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
-		}
+		checkDefaultValuesArgument(defaultValues);
 		// stores defaults values
 		this.defaultValues = defaultValues;
 	}

@@ -253,6 +253,16 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM touch with name <b>{@value DOM_TOUCH}</b>.
 	 */
 	public static final String DOM_TOUCH = "Touch";
+	
+	/**
+	 * Constant to bind java script object name space for localization, <b>{@value INTL}</b>.
+	 */
+	public static final String INTL = "Intl";
+	
+	/**
+	 * Constant to bind java script object number formatter for localization, <b>{@value NUMBER_FORMAT}</b>.
+	 */
+	public static final String NUMBER_FORMAT = "NumberFormat";
 
 	/**
 	 * To avoid any instantiation

@@ -245,10 +245,10 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param area chart area instance
 	 * @param scale scale instance to use to configure
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
-	 * @param minCallBack the value callback to calculate the minimum value 
-	 * @param maxCallBack the value callback to calculate the maximum value 
+	 * @param minCallback the value callback to calculate the minimum value 
+	 * @param maxCallback the value callback to calculate the maximum value 
 	 */
-	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
+	private void configureScale(ChartAreaNode area, ScaleItem scale, boolean isXScale, AnnotationValueCallback minCallback, AnnotationValueCallback maxCallback) {
 		// resets minimum and maximum references
 		minMaxContainer.setMinimum(UndefinedValues.DOUBLE);
 		minMaxContainer.setMaximum(UndefinedValues.DOUBLE);
@@ -263,20 +263,20 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 			// manages String
 			// --------------
 			// gets the minimum and maximum pixel value
-			retrieveMinMaxFromScaleForString(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
+			retrieveMinMaxFromScaleForString(scale, isXScale, minLimit, maxLimit, minCallback, maxCallback);
 		} else if (ScaleDataType.DATE.equals(scale.getType().getDataType())) {
 			// ------------------------
 			// TIME or TIMESERIES scales
 			// manage Date
 			// ------------------------
 			// gets the minimum and maximum value configured for annotation
-			retrieveMinMaxFromScaleForDate(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
+			retrieveMinMaxFromScaleForDate(scale, isXScale, minLimit, maxLimit, minCallback, maxCallback);
 		} else if (ScaleDataType.NUMBER.equals(scale.getType().getDataType())) {
 			// ----------------------------
 			// LINEAR or LOGARITHMIC scales
 			// manage Double
 			// ----------------------------
-			retrieveMinMaxFromScaleForDouble(scale, isXScale, minLimit, maxLimit, minCallBack, maxCallBack);
+			retrieveMinMaxFromScaleForDouble(scale, isXScale, minLimit, maxLimit, minCallback, maxCallback);
 		}
 		// checks if is asking for configuration against a scale X
 		if (isXScale) {
@@ -299,10 +299,10 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
-	 * @param minCallBack the value callback to calculate the minimum value 
-	 * @param maxCallBack the value callback to calculate the maximum value 
+	 * @param minCallback the value callback to calculate the minimum value 
+	 * @param maxCallback the value callback to calculate the maximum value 
 	 */
-	private void retrieveMinMaxFromScaleForString(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
+	private void retrieveMinMaxFromScaleForString(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallback, AnnotationValueCallback maxCallback) {
 		// --------------
 		// CATEGORY scale
 		// manages String
@@ -312,9 +312,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// -------
 		final String minString;
 		// checks if there is any value callback
-		if (minCallBack != null) {
+		if (minCallback != null) {
 			// invokes the callback
-			Object result = minCallBack.compute(getChart(), getConfiguration());
+			Object result = minCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result != null) {
 				// stores the result as string
@@ -334,9 +334,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// -------
 		final String maxString;
 		// checks if there is any value callback
-		if (maxCallBack != null) {
+		if (maxCallback != null) {
 			// invokes the callback
-			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			Object result = maxCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result != null) {
 				// stores the result as string
@@ -364,10 +364,10 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
-	 * @param minCallBack the value callback to calculate the minimum value 
-	 * @param maxCallBack the value callback to calculate the maximum value 
+	 * @param minCallback the value callback to calculate the minimum value 
+	 * @param maxCallback the value callback to calculate the maximum value 
 	 */
-	private void retrieveMinMaxFromScaleForDate(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
+	private void retrieveMinMaxFromScaleForDate(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallback, AnnotationValueCallback maxCallback) {
 		// ------------------------
 		// TIME or TIMESERIES scales
 		// manage Date
@@ -377,9 +377,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// -------
 		final Date minDate;
 		// checks if there is any value callback
-		if (minCallBack != null) {
+		if (minCallback != null) {
 			// invokes the callback
-			Object result = minCallBack.compute(getChart(), getConfiguration());
+			Object result = minCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result instanceof Date) {
 				// stores the result as date
@@ -400,9 +400,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// gets the end value configured for annotation
 		final Date maxDate;
 		// checks if there is any value callback
-		if (maxCallBack != null) {
+		if (maxCallback != null) {
 			// invokes the callback
-			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			Object result = maxCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result instanceof Date) {
 				// stores the result as date
@@ -430,8 +430,10 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 * @param isXScale if <code>true</code>, the configuration of element must take care that is for scale X
 	 * @param minLimit limit value to set in case the minimum value calculation is not consistent
 	 * @param maxLimit limit value to set in case the maximum value calculation is not consistent
+	 * @param minCallback value callback set to calculate the minimum value
+	 * @param maxCallback value callback set to calculate the maximum value
 	 */
-	private void retrieveMinMaxFromScaleForDouble(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallBack, AnnotationValueCallback maxCallBack) {
+	private void retrieveMinMaxFromScaleForDouble(ScaleItem scale, boolean isXScale, double minLimit, double maxLimit, AnnotationValueCallback minCallback, AnnotationValueCallback maxCallback) {
 		// ----------------------------
 		// LINEAR or LOGARITHMIC scales
 		// manage Double
@@ -441,9 +443,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// -------
 		final double minDouble;
 		// checks if there is any value callback
-		if (minCallBack != null) {
+		if (minCallback != null) {
 			// invokes the callback
-			Object result = minCallBack.compute(getChart(), getConfiguration());
+			Object result = minCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result instanceof Number) {
 				// casts to a number
@@ -465,9 +467,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		// -------
 		final double maxDouble;
 		// checks if there is any value callback
-		if (maxCallBack != null) {
+		if (maxCallback != null) {
 			// invokes the callback
-			Object result = maxCallBack.compute(getChart(), getConfiguration());
+			Object result = maxCallback.compute(getChart(), getConfiguration());
 			// checks if the result of callback is consistent
 			if (result instanceof Number) {
 				// stores the result as double

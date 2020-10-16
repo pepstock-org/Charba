@@ -300,7 +300,7 @@ public enum Region implements IsLocaleItem
 	/**
 	 * International key, to use for localization, for <b>Curaçao</b> region.
 	 */
-	CURAÇAO("CW", "Curaçao"),
+	CURACAO("CW", "Curaçao"),
 
 	/**
 	 * International key, to use for localization, for <b>Cyprus</b> region.

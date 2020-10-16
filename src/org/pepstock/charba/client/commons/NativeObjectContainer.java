@@ -25,6 +25,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.JSON;
 
@@ -57,6 +58,20 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- COMMONS
 	// ------------------------------------------
+
+	/**
+	 * Checks if the argument, which is assuming is a default values instance, is consistent.<br>
+	 * If not, throws {@link IllegalArgumentException}.
+	 * 
+	 * @param defaultValues default values instance to check 
+	 */
+	protected final void checkDefaultValuesArgument(Object defaultValues) {
+		// checks if default value is consistent
+		if (defaultValues == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Default values argument is null");
+		}
+	}
 
 	/**
 	 * Returns the native object instance.
@@ -167,7 +182,7 @@ public abstract class NativeObjectContainer {
 		// if not consistent, returns undefined
 		return Key.isValid(key) ? JsHelper.get().typeOf(nativeObject, key.value()) : ObjectType.UNDEFINED;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the type of the property is equals to object type passed as argument.
 	 * 
@@ -1121,12 +1136,17 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// checks consistency of default value
-		Key.checkIfValid(defaultValue);
-		// gets the string value
-		String value = getValue(key, defaultValue.value());
-		// gets the key by value
-		return Key.getKeyByValue(enumValues, value, defaultValue);
+		// checks the default consistency
+		if (Key.isValid(defaultValue)) {
+			// gets the string value
+			String value = getValue(key, defaultValue.value());
+			// gets the key by value
+			return Key.getKeyByValue(enumValues, value, defaultValue);
+		} else {
+			// if here, the default not consistent
+			// gets the key by value by null as default
+			return Key.getKeyByValue(enumValues, getValue(key, UndefinedValues.STRING));
+		}
 	}
 
 	/**

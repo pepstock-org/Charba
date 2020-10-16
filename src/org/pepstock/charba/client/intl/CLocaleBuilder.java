@@ -345,6 +345,7 @@ public final class CLocaleBuilder {
 		 * 
 		 * @param property property key of native object to look for
 		 * @param enumeration the items of the enumeration
+		 * @param <T> type of property, extending key
 		 * @return the item of enumeration which matches with the string value.
 		 */
 		private <T extends Key> T checkAndGet(Property property, T[] enumeration) {

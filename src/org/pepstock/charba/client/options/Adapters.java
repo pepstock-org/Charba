@@ -98,6 +98,7 @@ public final class Adapters extends AbstractModel<AbstractScale, IsDefaultAdapte
 	 */
 	@Override
 	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
+		// FIXME that's wrong. we must have an OptionsContainerFactory
 		// checks if factory is consistent
 		if (factory != null) {
 			// checks if there is any date adapter options

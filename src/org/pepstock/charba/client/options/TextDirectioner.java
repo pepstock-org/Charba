@@ -82,10 +82,7 @@ final class TextDirectioner extends NativeObjectContainer {
 			throw new IllegalArgumentException("Options model argument is null");
 		}
 		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
-		}
+		checkDefaultValuesArgument(defaultValues);
 		this.model = model;
 		this.defaultValues = defaultValues;
 	}

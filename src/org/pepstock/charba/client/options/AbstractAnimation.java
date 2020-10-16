@@ -87,10 +87,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 		// stores the key locally to maintain the type
 		this.key = Key.checkAndGetIfValid(childKey);
 		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
-		}
+		checkDefaultValuesArgument(defaultValues);
 		// stores defaults values
 		this.defaultValues = defaultValues;
 	}

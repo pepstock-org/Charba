@@ -121,10 +121,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	AbstractAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(nativeObject);
 		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
-		}
+		checkDefaultValuesArgument(defaultValues);
 		// stores default options
 		this.defaultValues = defaultValues;
 	}

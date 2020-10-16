@@ -43,46 +43,43 @@ public final class CLocale {
 	 * Useful constant for {@link Region#FRANCE}.
 	 */
 	public static final CLocale FRANCE = CLocaleBuilder.create(Language.FRENCH).setRegion(Region.FRANCE).build();
-
 	/**
 	 * Useful constant for {@link Region#GERMANY}.
 	 */
 	public static final CLocale GERMANY = CLocaleBuilder.create(Language.GERMAN).setRegion(Region.GERMANY).build();
-
 	/**
 	 * Useful constant for {@link Region#ITALY}.
 	 */
 	public static final CLocale ITALY = CLocaleBuilder.create(Language.ITALIAN).setRegion(Region.ITALY).build();
-
 	/**
 	 * Useful constant for {@link Region#JAPAN}.
 	 */
 	public static final CLocale JAPAN = CLocaleBuilder.create(Language.JAPANESE).setRegion(Region.JAPAN).build();
-
 	/**
 	 * Useful constant for {@link Region#CHINA}.
 	 */
 	public static final CLocale CHINA = CLocaleBuilder.create(Language.CHINESE).setRegion(Region.CHINA).build();
-
 	/**
 	 * Useful constant for {@link Region#UNITED_KINGDOM}.
 	 */
 	public static final CLocale UK = CLocaleBuilder.create(Language.ENGLISH).setRegion(Region.UNITED_KINGDOM).build();
-
 	/**
 	 * Useful constant for {@link Region#UNITED_STATES}.
 	 */
 	public static final CLocale US = CLocaleBuilder.create(Language.ENGLISH).setRegion(Region.UNITED_STATES).build();
-
 	/**
 	 * Useful constant for {@link Region#CANADA}.
 	 */
 	public static final CLocale CANADA = CLocaleBuilder.create(Language.ENGLISH).setRegion(Region.CANADA).build();
-
 	/**
 	 * Useful constant for {@link Region#CANADA}, for {@link Language#FRENCH}.
 	 */
 	public static final CLocale CANADA_FRENCH = CLocaleBuilder.create(Language.FRENCH).setRegion(Region.CANADA).build();
+	/**
+	 * Useful constant for {@link Region#RUSSIA}.
+	 */
+	public static final CLocale RUSSIA = CLocaleBuilder.create(Language.RUSSIAN).setRegion(Region.RUSSIA).build();
+
 	// reference for default locale
 	private static CLocale defaultLocale = US;
 

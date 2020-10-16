@@ -91,6 +91,7 @@ public interface Key {
 	 * @param <T> type of key
 	 * @return the found key by value or <code>null</code>
 	 */
+	// FIXME check who is using
 	static <T extends Key> T getKeyByValue(T[] enumValues, String value) {
 		return getKeyByValue(enumValues, value, null);
 	}
