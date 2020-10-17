@@ -135,7 +135,6 @@ class BaseFormatOptions<D extends IsDefaultBaseFormatOptions> extends NativeObje
 	@Override
 	public final NumberingSystem getNumberingSystem() {
 		return getValue(Property.NUMBERING_SYSTEM, NumberingSystem.values(), defaultValues.getNumberingSystem());
-		//return Key.getKeyByValue(NumberingSystem.values(), getValue(Property.NUMBERING_SYSTEM, UndefinedValues.STRING));
 	}
 
 	/**
