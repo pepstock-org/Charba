@@ -202,7 +202,7 @@ public enum Currency implements IsLocaleItem
 	/**
 	 * International key, to use for localization, for <b>Comorian Franc </b> currency.
 	 */
-	 COMORIAN_FRANC_("KMF", "Comorian Franc ", 0),
+	 COMORIAN_FRANC("KMF", "Comorian Franc ", 0),
 
 	/**
 	 * International key, to use for localization, for <b>Congolese Franc</b> currency.

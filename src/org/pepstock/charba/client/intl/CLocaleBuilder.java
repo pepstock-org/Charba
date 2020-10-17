@@ -319,7 +319,7 @@ public final class CLocaleBuilder {
 		 * @return the script
 		 */
 		private Script getScript() {
-			return checkAndGet(Property.SCRIPT, Script.values());
+			return getValue(Property.SCRIPT, Script.values(), null);
 		}
 
 		/**
@@ -328,7 +328,7 @@ public final class CLocaleBuilder {
 		 * @return the region
 		 */
 		private Region getRegion() {
-			return checkAndGet(Property.REGION, Region.values());
+			return getValue(Property.REGION, Region.values(), null);
 		}
 
 		/**
@@ -338,27 +338,6 @@ public final class CLocaleBuilder {
 		 */
 		private String getVariantAndExtension() {
 			return getValue(Property.VARIANT_AND_EXTENSION, UndefinedValues.STRING);
-		}
-
-		/**
-		 * Checks the type of the property and then returns the right enumeration item if it matches with the string value of native object.
-		 * 
-		 * @param property property key of native object to look for
-		 * @param enumeration the items of the enumeration
-		 * @param <T> type of property, extending key
-		 * @return the item of enumeration which matches with the string value.
-		 */
-		private <T extends Key> T checkAndGet(Property property, T[] enumeration) {
-			// checks if the property is there
-			if (isType(property, ObjectType.STRING)) {
-				// gets the value if there is
-				String value = getValue(property, UndefinedValues.STRING);
-				// gets and returns the item from enumeration
-				return Key.getKeyByValue(enumeration, value);
-			}
-			// if here, the item is not consistent
-			// then return null
-			return null;
 		}
 
 	}

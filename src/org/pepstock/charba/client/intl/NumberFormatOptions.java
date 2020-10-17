@@ -36,9 +36,18 @@ import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * The object configures a number formatter.<br>
- * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">MDN</a> for more details.
- * 
- * FIXME add information about is not available on IE
+ * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">MDN</a> for more details.<br>
+ * <br>
+ * <b style="font-size: 16px">PAY ATTENTION</b><br>
+ * The following methods are not supported on Internet Explorer and Safari.<br>
+ * <ul>
+ * <li> {@link NumberFormatOptions#setCompactDisplay(CompactDisplay)} and {@link NumberFormatOptions#getCompactDisplay()}
+ * <li> {@link NumberFormatOptions#setCurrencySign(CurrencySign)} and {@link NumberFormatOptions#getCurrencySign()}
+ * <li> {@link NumberFormatOptions#setNotation(Notation)} and {@link NumberFormatOptions#getNotation()}
+ * <li> {@link NumberFormatOptions#setSignDisplay(SignDisplay)} and {@link NumberFormatOptions#getSignDisplay()}
+ * <li> {@link NumberFormatOptions#setUnitsOfMeasure(List)}, {@link NumberFormatOptions#setUnitsOfMeasure(MeasureUnit...)} and {@link NumberFormatOptions#getUnitsOfMeasure()}
+ * <li> {@link NumberFormatOptions#setUnitOfMeasureDisplay(MeasureUnitDisplay)} and {@link NumberFormatOptions#getUnitOfMeasureDisplay()}
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -96,9 +105,19 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * Creates new number format options object.
 	 */
 	public NumberFormatOptions() {
-		this(null, DefaultNumberFormatOptions.INSTANCE);
+		this(null);
 	}
 
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
+	NumberFormatOptions(NativeObject nativeObject) {
+		this(nativeObject, DefaultNumberFormatOptions.INSTANCE);
+	}
+
+	
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -110,8 +129,11 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Set the compact display when {@link Notation#COMPACT} is set.
-	 * 
+	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.	 
+	 *  
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
 	public void setCompactDisplay(CompactDisplay display) {
@@ -119,7 +141,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Returns the compact display when {@link Notation#COMPACT} is set.
+	 * Returns the compact display when {@link Notation#COMPACT} is set.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.	 
 	 * 
 	 * @return the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -144,7 +169,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 */
 	@Override
 	public Currency getCurrency() {
-		return Key.getKeyByValue(Currency.values(), getValue(Property.CURRENCY, getDefaultValues().getCurrency()));
+		return getValue(Property.CURRENCY, Currency.values(), getDefaultValues().getCurrency());
 	}
 
 	/**
@@ -168,7 +193,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 
 	/**
 	 * In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign.<br>
-	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".
+	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.	 
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -178,7 +206,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 
 	/**
 	 * In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign.<br>
-	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".
+	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.	 
 	 * 
 	 * @return the currency format to use on formatting
 	 */
@@ -188,7 +219,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Sets the formatting that should be displayed for the number.
+	 * Sets the formatting that should be displayed for the number.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.	 
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -197,7 +231,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Returns the formatting that should be displayed for the number.
+	 * Returns the formatting that should be displayed for the number.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return the formatting that should be displayed for the number
 	 */
@@ -207,7 +244,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Sets when to display the sign for the number.
+	 * Sets when to display the sign for the number.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -216,7 +256,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Returns when to display the sign for the number.
+	 * Returns when to display the sign for the number.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return when to display the sign for the number
 	 */
@@ -230,7 +273,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * 
 	 * @param style the formatting style to use
 	 */
-	public void setStyle(SignDisplay style) {
+	public void setStyle(Style style) {
 		setValue(Property.STYLE, style);
 	}
 
@@ -246,7 +289,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.
+	 * If more that 1 unit has been passed, a compound unit has been created.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -256,7 +302,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.
+	 * If more that 1 unit has been passed, a compound unit has been created.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -273,7 +322,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Returns an unmodifiable list of units to use in unit formatting.
+	 * Returns an unmodifiable list of units to use in unit formatting.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return an unmodifiable list of unit to use in unit formatting
 	 */
@@ -337,7 +389,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Sets the unit formatting style to use in unit formatting.
+	 * Sets the unit formatting style to use in unit formatting.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */
@@ -346,7 +401,10 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * Returns the unit formatting style to use in unit formatting.
+	 * Returns the unit formatting style to use in unit formatting.<br>
+	 * <br>
+	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return the unit formatting style to use in unit formatting
 	 */

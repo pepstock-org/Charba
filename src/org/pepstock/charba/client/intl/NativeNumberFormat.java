@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.intl;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -66,5 +67,14 @@ final class NativeNumberFormat {
 	 * @return new object with properties reflecting the locale and number formatting options computed during initialization of this object
 	 */
 	native NativeObject resolvedOptions();
+	
+	/**
+	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
+	 * It is useful for custom formatting of number strings. 
+	 * 
+	 * @param value number to format
+	 * @return an array of objects containing the formatted number in parts.
+	 */
+	native ArrayObject formatToParts(double value);
 
 }
