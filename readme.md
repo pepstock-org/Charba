@@ -381,6 +381,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove static cache for canvas patterns and gradients creation, going to a cache for each canvas object factory in order that every factory must manage own objects.
  * add `groups` method to `RegExpResult` in order to get the object to refer to certain token by string that a regular expression matches.
  * add `cloneTo` method to `NativeObject` in order to clone the object using the `Object.assign` native method.
+ * add `equals` and `hashCode` methods to standard keys implementation into `options` package.
 
 License
 -------

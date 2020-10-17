@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationCollectionKey extends Key {
+public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 
 	/**
 	 * Returns a animation collection instance by its string value.
@@ -127,13 +127,6 @@ public interface IsAnimationCollectionKey extends Key {
 		// then returns the argument
 		return collection;
 	}
-
-	/**
-	 * Returns the animation type related to the collection.
-	 * 
-	 * @return the animation type related to the collection
-	 */
-	AnimationType type();
 
 	/**
 	 * Returns the animation properties related to the collection.

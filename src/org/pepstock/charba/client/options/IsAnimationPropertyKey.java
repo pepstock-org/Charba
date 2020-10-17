@@ -22,11 +22,11 @@ import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
- * Represents the mode to set to configure animation.
+ * Represents the property id to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationPropertyKey extends Key {
+public interface IsAnimationPropertyKey extends IsTypedAnimationKey {
 
 	/**
 	 * Returns a animation property instance by its string value.
@@ -89,12 +89,5 @@ public interface IsAnimationPropertyKey extends Key {
 		// then returns the argument
 		return property;
 	}
-
-	/**
-	 * Returns the animation type related to the property.
-	 * 
-	 * @return the animation type related to the property
-	 */
-	AnimationType type();
 
 }

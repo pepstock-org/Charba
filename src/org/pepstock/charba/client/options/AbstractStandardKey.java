@@ -51,4 +51,42 @@ abstract class AbstractStandardKey implements Key {
 		return value;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// checks if is the same object
+		if (this == obj) {
+			return true;
+		}
+		// checks if argument is null
+		if (obj == null) {
+			return false;
+		}
+		// checks if the class is the same
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		// casts to a standard key
+		AbstractStandardKey other = (AbstractStandardKey) obj;
+		// checks if keys are equals
+		return Key.equals(this, other);
+	}
+
 }

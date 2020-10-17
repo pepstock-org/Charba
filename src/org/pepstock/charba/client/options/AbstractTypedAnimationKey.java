@@ -15,23 +15,39 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AnimationType;
+
 /**
- * This is a standard implementation of an animation mode
+ * This is the template for animation ids with animation type as part of the object.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationMode extends AbstractStandardKey implements IsAnimationModeKey {
+abstract class AbstractTypedAnimationKey extends AbstractStandardKey implements IsTypedAnimationKey {
+
+	private final AnimationType type;
 
 	/**
-	 * Builds the object with the animation mode value as string
+	 * Builds the object with the property value as string and its type.
 	 * 
 	 * @param value value of key as String
+	 * @param type type of the property
 	 */
-	StandardAnimationMode(String value) {
+	AbstractTypedAnimationKey(String value, AnimationType type) {
 		super(value);
-		// checks if consistent
-		IsAnimationModeKey.checkIfValid(this);
+		// stores values
+		this.type = type;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimationProperty#type()
+	 */
+	@Override
+	public final AnimationType type() {
+		return type;
 	}
 
 	/*
@@ -41,7 +57,7 @@ public final class StandardAnimationMode extends AbstractStandardKey implements 
 	 */
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		return super.hashCode() + ((type == null) ? 0 : type.hashCode());
 	}
 
 	/*
@@ -51,7 +67,16 @@ public final class StandardAnimationMode extends AbstractStandardKey implements 
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		return super.equals(obj);
+		// checks if value of key is equals
+		if (super.equals(obj)) {
+			// casts to animation collection
+			AbstractTypedAnimationKey other = (AbstractTypedAnimationKey) obj;
+			// compares keys
+			return Key.equals(type, other.type);
+		}
+		// if here the super equals returned false
+		// then is not equals
+		return false;
 	}
 
 }

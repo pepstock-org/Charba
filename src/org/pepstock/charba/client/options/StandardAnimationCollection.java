@@ -26,9 +26,7 @@ import org.pepstock.charba.client.enums.AnimationType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationCollection extends AbstractStandardKey implements IsAnimationCollectionKey {
-
-	private final AnimationType type;
+public final class StandardAnimationCollection extends AbstractTypedAnimationKey implements IsAnimationCollectionKey {
 
 	private final List<IsAnimationPropertyKey> properties = new LinkedList<>();
 
@@ -39,21 +37,9 @@ public final class StandardAnimationCollection extends AbstractStandardKey imple
 	 * @param type type of the properties
 	 */
 	StandardAnimationCollection(String value, AnimationType type) {
-		super(value);
-		// stores type
-		this.type = type;
+		super(value, type);
 		// checks if consistent
 		IsAnimationCollectionKey.checkIfValid(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsAnimationCollection#type()
-	 */
-	@Override
-	public AnimationType type() {
-		return type;
 	}
 
 	/*
@@ -64,6 +50,26 @@ public final class StandardAnimationCollection extends AbstractStandardKey imple
 	@Override
 	public List<IsAnimationPropertyKey> properties() {
 		return properties;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractTypedAnimationKey#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractTypedAnimationKey#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 
 }
