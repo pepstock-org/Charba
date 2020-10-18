@@ -25,6 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
  * This object is used to map defined radial axis as linear.
@@ -49,6 +50,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 
 	// handler for callback for category axis
 	private final LinearTickHandler<RadialLinearTick> tickHandler;
+	// number formatting manager
+	private final NumberFormatter numberFormatter;
 
 	/**
 	 * Name of properties of native object.
@@ -90,8 +93,9 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	RadialLinearTick(Axis axis) {
 		super(axis);
-		// creates handler
+		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		this.numberFormatter = new NumberFormatter(getConfiguration().getNumberFormat());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -101,6 +105,16 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// gets value calling callback
 		showLabelBackdropCallbackProxy.setCallback(
 				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsNumericTick#getNumberFormat()
+	 */
+	@Override
+	public IsNumberFormat getNumberFormat() {
+		return numberFormatter;
 	}
 
 	/**

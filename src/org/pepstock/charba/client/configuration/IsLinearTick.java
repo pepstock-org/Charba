@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsLinearTick {
+public interface IsLinearTick extends IsNumericTick{
 
 	/**
 	 * Returns the axis instance.

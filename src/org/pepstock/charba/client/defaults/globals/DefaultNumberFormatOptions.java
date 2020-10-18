@@ -34,7 +34,7 @@ import org.pepstock.charba.client.intl.enums.Style;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultNumberFormatOptions extends DefaultBaseFormatOptions implements IsDefaultNumberFormatOptions {
+public final class DefaultNumberFormatOptions extends DefaultBaseFormatOptions implements IsDefaultNumberFormatOptions {
 
 	public static final IsDefaultNumberFormatOptions INSTANCE = new DefaultNumberFormatOptions();
 

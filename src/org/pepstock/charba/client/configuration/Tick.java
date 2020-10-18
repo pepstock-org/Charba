@@ -37,12 +37,10 @@ abstract class Tick extends AxisContainer {
 	// ---------------------------
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
-
 	// the axis instance, owner of this tick
 	private final Ticks configuration;
-
+	// major tick instance
 	private final Major major;
-
 	// font instance
 	private final Font font;
 	// font callback instance
@@ -89,9 +87,9 @@ abstract class Tick extends AxisContainer {
 		super(axis);
 		// stores the options element
 		this.configuration = axis.getScale().getTicks();
-		// creates sub element, min and max
-		major = new Major(axis, axis.getScale().getTicks());
-		font = new Font(axis.getConfiguration().getTicks().getFont());
+		// creates sub element
+		this.major = new Major(axis, axis.getScale().getTicks());
+		this.font = new Font(axis.getConfiguration().getTicks().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

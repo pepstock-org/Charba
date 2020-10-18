@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.TickCallback;
+import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
  * The linear scale is use to chart numerical data.<br>
@@ -29,6 +30,8 @@ public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
 
 	// handler for callback for category axis
 	private final LinearTickHandler<CartesianLinearTick> tickHandler;
+	// number formatting manager
+	private final NumberFormatter numberFormatter;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -37,8 +40,19 @@ public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
 	 */
 	CartesianLinearTick(Axis axis) {
 		super(axis);
-		// creates handler
+		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		this.numberFormatter = new NumberFormatter(getConfiguration().getNumberFormat());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsNumericTick#getNumberFormat()
+	 */
+	@Override
+	public IsNumberFormat getNumberFormat() {
+		return numberFormatter;
 	}
 
 	/**

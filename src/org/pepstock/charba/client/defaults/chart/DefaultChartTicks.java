@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
+import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.options.Ticks;
@@ -57,6 +58,16 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public IsDefaultMajor getMajor() {
 		return ticks.getMajor();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getNumberFormat()
+	 */
+	@Override
+	public IsDefaultNumberFormatOptions getNumberFormat() {
+		return ticks.getNumberFormat();
 	}
 
 	/*

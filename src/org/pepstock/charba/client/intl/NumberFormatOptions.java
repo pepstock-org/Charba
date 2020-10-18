@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultNumberFormatOptions;
 import org.pepstock.charba.client.intl.enums.CompactDisplay;
@@ -41,18 +42,20 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * <b style="font-size: 16px">PAY ATTENTION</b><br>
  * The following methods are not supported on Internet Explorer and Safari.<br>
  * <ul>
- * <li> {@link NumberFormatOptions#setCompactDisplay(CompactDisplay)} and {@link NumberFormatOptions#getCompactDisplay()}
- * <li> {@link NumberFormatOptions#setCurrencySign(CurrencySign)} and {@link NumberFormatOptions#getCurrencySign()}
- * <li> {@link NumberFormatOptions#setNotation(Notation)} and {@link NumberFormatOptions#getNotation()}
- * <li> {@link NumberFormatOptions#setSignDisplay(SignDisplay)} and {@link NumberFormatOptions#getSignDisplay()}
- * <li> {@link NumberFormatOptions#setUnitsOfMeasure(List)}, {@link NumberFormatOptions#setUnitsOfMeasure(MeasureUnit...)} and {@link NumberFormatOptions#getUnitsOfMeasure()}
- * <li> {@link NumberFormatOptions#setUnitOfMeasureDisplay(MeasureUnitDisplay)} and {@link NumberFormatOptions#getUnitOfMeasureDisplay()}
+ * <li>{@link NumberFormatOptions#setCompactDisplay(CompactDisplay)} and {@link NumberFormatOptions#getCompactDisplay()}
+ * <li>{@link NumberFormatOptions#setCurrencySign(CurrencySign)} and {@link NumberFormatOptions#getCurrencySign()}
+ * <li>{@link NumberFormatOptions#setNotation(Notation)} and {@link NumberFormatOptions#getNotation()}
+ * <li>{@link NumberFormatOptions#setSignDisplay(SignDisplay)} and {@link NumberFormatOptions#getSignDisplay()}
+ * <li>{@link NumberFormatOptions#setUnitsOfMeasure(List)}, {@link NumberFormatOptions#setUnitsOfMeasure(MeasureUnit...)} and {@link NumberFormatOptions#getUnitsOfMeasure()}
+ * <li>{@link NumberFormatOptions#setUnitOfMeasureDisplay(MeasureUnitDisplay)} and {@link NumberFormatOptions#getUnitOfMeasureDisplay()}
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumberFormatOptions> implements IsDefaultNumberFormatOptions {
 
+	// factory instance
+	public static final NumberFormatOptionsFactory FACTORY = new NumberFormatOptionsFactory();
 	// Pairs of simple units can be concatenated with "-per-" to make a compound unit.
 	private static final String COMPOUND_UNIT_SEPARATOR = "-per-";
 
@@ -117,7 +120,6 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		this(nativeObject, DefaultNumberFormatOptions.INSTANCE);
 	}
 
-	
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -132,8 +134,8 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.	 
-	 *  
+	 * This method is not supported on Internet Explorer and Safari.
+	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
 	public void setCompactDisplay(CompactDisplay display) {
@@ -144,7 +146,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * Returns the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.	 
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -196,7 +198,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.	 
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -209,7 +211,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.	 
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @return the currency format to use on formatting
 	 */
@@ -222,7 +224,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * Sets the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.	 
+	 * This method is not supported on Internet Explorer and Safari.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -560,6 +562,44 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	@Override
 	public int getMaximumSignificantDigits() {
 		return getValue(Property.MAXIMUM_SIGNIFICANT_DIGITS, getDefaultValues().getMaximumSignificantDigits());
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public static final class NumberFormatOptionsFactory implements NativeObjectContainerFactory<NumberFormatOptions> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private NumberFormatOptionsFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public NumberFormatOptions create(NativeObject nativeObject) {
+			return create(nativeObject, null);
+		}
+
+		/**
+		 * FIXME
+		 * 
+		 * @param nativeObject
+		 * @param defaultValues
+		 * @return
+		 */
+		public NumberFormatOptions create(NativeObject nativeObject, IsDefaultNumberFormatOptions defaultValues) {
+			return new NumberFormatOptions(nativeObject, defaultValues == null ? DefaultNumberFormatOptions.INSTANCE : defaultValues);
+		}
+
 	}
 
 }

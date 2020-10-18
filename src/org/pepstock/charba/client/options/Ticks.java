@@ -35,9 +35,12 @@ import org.pepstock.charba.client.enums.TickSource;
  */
 public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> implements IsDefaultTicks {
 
+	// instance of major
 	private final Major major;
 	// instance of font
 	private final Font font;
+	// instance of number format
+	private final TicksNumberFormat numberFormat;
 
 	/**
 	 * Name of properties of native object.
@@ -60,6 +63,8 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		SAMPLE_SIZE("sampleSize"),
 		// category cartesian
 		LABELS("labels"),
+		// common linear 
+		FORMAT("format"),
 		// linear cartesian
 		MAX_TICKS_LIMIT("maxTicksLimit"),
 		PRECISION("precision"),
@@ -107,8 +112,9 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	Ticks(AbstractScale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
-		major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		this.major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
+		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		this.numberFormat = new TicksNumberFormat(this, Property.FORMAT, getDefaultValues().getNumberFormat(), getValue(Property.FORMAT));
 	}
 
 	/**
@@ -129,6 +135,16 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public Major getMajor() {
 		return major;
+	}
+	
+	/**
+	 * Returns the number formatting options.
+	 * 
+	 * @return the number formatting options
+	 */
+	@Override
+	public TicksNumberFormat getNumberFormat() {
+		return numberFormat;
 	}
 
 	/**

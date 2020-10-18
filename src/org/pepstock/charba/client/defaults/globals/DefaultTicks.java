@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
+import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -89,6 +90,16 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public IsDefaultMajor getMajor() {
 		return major;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getNumberFormat()
+	 */
+	@Override
+	public IsDefaultNumberFormatOptions getNumberFormat() {
+		return DefaultNumberFormatOptions.INSTANCE;
 	}
 
 	/*

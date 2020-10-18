@@ -37,6 +37,13 @@ public interface IsDefaultTicks {
 	 * @return the major tick defaults.
 	 */
 	IsDefaultMajor getMajor();
+	
+	/**
+	 * Returns the number formatting options.
+	 * 
+	 * @return the number formatting options
+	 */
+	IsDefaultNumberFormatOptions getNumberFormat();
 
 	/**
 	 * If true, show tick marks

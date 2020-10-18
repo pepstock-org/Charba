@@ -31,7 +31,7 @@ public interface IsNumericAxis {
 	 * @return the axis
 	 */
 	Axis getAxisElement();
-	
+
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
