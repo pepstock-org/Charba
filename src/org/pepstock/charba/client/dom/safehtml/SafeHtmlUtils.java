@@ -34,8 +34,7 @@ final class SafeHtmlUtils {
 	 */
 	private enum CharacterToEscape
 	{
-
-		AMPERSAND("&", "&amp;"),
+		AMPERSAND(Constants.AMPERSAND, "&amp;"),
 		GREATER_THAN(Constants.GT, "&gt;"),
 		LESS_THANT(Constants.LT, "&lt;"),
 		SINGLE_QUOTE("\'", "&#39;"),

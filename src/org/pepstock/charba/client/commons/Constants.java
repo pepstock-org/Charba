@@ -99,6 +99,11 @@ public final class Constants {
 	public static final String GT = ">";
 
 	/**
+	 * Constants for AMPERSAND, <b>{@value}</b>.
+	 */
+	public static final String AMPERSAND = "&";
+
+	/**
 	 * To avoid any instantiation
 	 */
 	private Constants() {
