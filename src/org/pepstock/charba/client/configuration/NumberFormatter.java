@@ -32,16 +32,23 @@ import org.pepstock.charba.client.intl.enums.Style;
 import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
- * FIXME
+ * Manages a {@link NumberFormatOptions} in order to set and get all number format options.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class NumberFormatter implements IsNumberFormat{
 	
+	// number format options instance to wrap.
 	private final IsNumberFormat isNumberFormat;
 
-	NumberFormatter(IsNumberFormat hasNumberFormat) {
-		this.isNumberFormat = hasNumberFormat;
+	/**
+	 * Creates the number formatter wrapping a number format options.
+	 * 
+	 * @param isNumberFormat number format options instance to wrap
+	 */
+	NumberFormatter(IsNumberFormat isNumberFormat) {
+		this.isNumberFormat = isNumberFormat;
 	}
 
 	/**

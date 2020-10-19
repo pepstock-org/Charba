@@ -565,7 +565,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	/**
-	 * FIXME
+	 * Creates a number format options by a native object and a default values instance.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -590,11 +590,11 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		}
 
 		/**
-		 * FIXME
+		 * Creates a number format options by a native object and a default values instance.
 		 * 
-		 * @param nativeObject
-		 * @param defaultValues
-		 * @return
+		 * @param nativeObject native object instance to be wrapped.
+		 * @param defaultValues default values for the options
+		 * @return a number format  options instance
 		 */
 		public NumberFormatOptions create(NativeObject nativeObject, IsDefaultNumberFormatOptions defaultValues) {
 			return new NumberFormatOptions(nativeObject, defaultValues == null ? DefaultNumberFormatOptions.INSTANCE : defaultValues);
