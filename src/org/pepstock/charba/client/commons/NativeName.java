@@ -235,6 +235,11 @@ public final class NativeName {
 	public static final String DOM_EVENT = "Event";
 
 	/**
+	 * Constant to bind java script object as DOM location with name <b>{@value DOM_LOCATION}</b>.
+	 */
+	public static final String DOM_LOCATION = "Location";
+
+	/**
 	 * Constant to bind java script object as DOM canvas gradient with name <b>{@value DOM_CANVAS_GRADIENT}</b>.
 	 */
 	public static final String DOM_CANVAS_GRADIENT = "CanvasGradient";

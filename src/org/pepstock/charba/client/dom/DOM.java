@@ -44,4 +44,12 @@ public final class DOM {
 	@JsProperty
 	public static native BaseHtmlDocument getDocument();
 
+	/**
+	 * Returns a {@link BaseLocation} object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL.
+	 * 
+	 * @return  a {@link BaseLocation} object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL
+	 */
+	@JsProperty
+	public static native BaseLocation getLocation();
+
 }
