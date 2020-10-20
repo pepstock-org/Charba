@@ -89,7 +89,7 @@ public final class Img extends BaseHtmlElement implements IsCastable {
 	/**
 	 * Sets the value that reflects the width attribute, indicating the rendered width of the image in CSS pixels.
 	 *
-	 * @param width the value that reflects the width attributet
+	 * @param width the value that reflects the width attribute
 	 */
 	@JsProperty
 	public native void setWidth(int width);

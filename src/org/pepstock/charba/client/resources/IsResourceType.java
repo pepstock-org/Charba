@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Base empty interface to define a resource type to load mandatory CHARBA reosurces.
+ * Base empty interface to define a resource type to load mandatory CHARBA resources.
  * 
  * @author Andrea "Stock" Stocchero
  *
