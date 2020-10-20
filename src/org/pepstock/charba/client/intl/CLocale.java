@@ -342,7 +342,7 @@ public final class CLocale {
 				// gets content
 				String content = meta.getContent();
 				// checks if is the meta looked for
-				if (name != null && content != null && GWT_PROPERTY_KEY.equalsIgnoreCase(name) && content.startsWith(LOCALE_QUERY_STRING_PARAM_KEY + Constants.EQUALS)) {
+				if (name != null && content != null && GWT_PROPERTY_KEY.equalsIgnoreCase(name) && content.startsWith(LOCALE_QUERY_STRING_PARAM_KEY + Constants.EQ)) {
 					// if here the property has been found
 					// adds 1 because there is also the equals
 					return content.substring(LOCALE_QUERY_STRING_PARAM_KEY.length() + 1);

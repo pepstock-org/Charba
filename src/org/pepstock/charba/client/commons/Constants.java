@@ -91,7 +91,7 @@ public final class Constants {
 	/**
 	 * Constants for EQUALS, <b>{@value}</b>.
 	 */
-	public static final String EQUALS = "=";
+	public static final String EQ = "=";
 
 	/**
 	 * Constants for LESS THAN, <b>{@value}</b>.

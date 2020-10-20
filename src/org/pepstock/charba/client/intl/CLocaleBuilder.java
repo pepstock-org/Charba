@@ -368,11 +368,8 @@ public final class CLocaleBuilder {
 				return false;
 			}
 			// checks script, if exists it must be a recognized script
-			if (isType(Property.SCRIPT, ObjectType.STRING) && !Key.hasKeyByValue(Script.values(), getValue(Property.SCRIPT, UndefinedValues.STRING))) {
-				return false;
-			}
-			// if here, the result is consistent
-			return true;
+			// it's the last check that is true is true all method
+			return !(isType(Property.SCRIPT, ObjectType.STRING) && !Key.hasKeyByValue(Script.values(), getValue(Property.SCRIPT, UndefinedValues.STRING)));
 		}
 
 	}

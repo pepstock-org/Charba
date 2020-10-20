@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.TickCallback;
-import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
  * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
@@ -25,12 +24,10 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianLogarithmicTick extends CartesianTick implements IsNumericTick{
+public class CartesianLogarithmicTick extends CartesianNumericTick {
 
 	// handler for callback for category axis
 	private final LinearTickHandler<CartesianLogarithmicTick> tickHandler;
-	// number formatting manager
-	private final NumberFormatter numberFormatter;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -41,19 +38,8 @@ public class CartesianLogarithmicTick extends CartesianTick implements IsNumeric
 		super(axis);
 		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);		
-		this.numberFormatter = new NumberFormatter(getConfiguration().getNumberFormat());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.IsNumericTick#getNumberFormat()
-	 */
-	@Override
-	public IsNumberFormat getNumberFormat() {
-		return numberFormatter;
-	}
-	
 	/**
 	 * Returns the user callback instance.
 	 * 
