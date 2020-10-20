@@ -200,6 +200,11 @@ public final class NativeName {
 	public static final String DOM_HTML_IMAGE_ELEMENT = "HTMLImageElement";
 
 	/**
+	 * Constant to bind java script object as DOM HTML meta element with name <b>{@value DOM_HTML_META_ELEMENT}</b>.
+	 */
+	public static final String DOM_HTML_META_ELEMENT = "HTMLMetaElement";
+
+	/**
 	 * Constant to bind java script object as DOM HTML style element with name <b>{@value DOM_HTML_STYLE_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_STYLE_ELEMENT = "HTMLStyleElement";
@@ -238,6 +243,11 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM location with name <b>{@value DOM_LOCATION}</b>.
 	 */
 	public static final String DOM_LOCATION = "Location";
+	
+	/**
+	 * Constant to bind java script object as DOM navigator with name <b>{@value DOM_NAVIGATOR}</b>.
+	 */
+	public static final String DOM_NAVIGATOR = "Navigator";
 
 	/**
 	 * Constant to bind java script object as DOM canvas gradient with name <b>{@value DOM_CANVAS_GRADIENT}</b>.

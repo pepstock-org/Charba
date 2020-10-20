@@ -128,31 +128,58 @@ public final class CLocaleBuilder {
 	 * @return a locale instance.
 	 */
 	public static CLocale build(String localeIdentifier) {
-		// checks if argument is consistent
-		if (localeIdentifier != null && localeIdentifier.trim().length() > 0) {
-			RegExpResult result = REGEXP_LOCALE.exec(localeIdentifier);
-			// checks if the locale string was parsed correctly
-			if (result != null) {
-				// gets the group with all token
-				LocaleRegExpGroups groups = result.groups(FACTORY);
-				// checks if the groups is consistent
-				if (groups != null) {
-					// gets the references
-					// from groups
-					Language language = groups.getLanguage();
-					Script script = groups.getScript();
-					Region region = groups.getRegion();
-					String variantAndExtension = groups.getVariantAndExtension();
-					// creates the identifier
-					String identifier = createLocaleIdentifier(language, script, region, variantAndExtension);
-					// creates and returns the locale
-					return createLocale(identifier, language, script, region, variantAndExtension);
-				}
-			}
+		LocaleRegExpGroups groups = applyRegExp(localeIdentifier);
+		// checks if the groups is consistent
+		if (groups != null && groups.isConsistent()) {
+			// gets the references
+			// from groups
+			Language language = groups.getLanguage();
+			Script script = groups.getScript();
+			Region region = groups.getRegion();
+			String variantAndExtension = groups.getVariantAndExtension();
+			// creates the identifier
+			String identifier = createLocaleIdentifier(language, script, region, variantAndExtension);
+			// creates and returns the locale
+			return createLocale(identifier, language, script, region, variantAndExtension);
 		}
 		// if here the locale argument passed as argument
-		// if not consistent
+		// is not consistent
 		throw new IllegalArgumentException("Locale argument is not consistent");
+	}
+
+	/**
+	 * Returns an instance of locale created from the fields set on this builder.
+	 * 
+	 * @param localeIdentifier locale identifier to parse to get a locale.
+	 * @return a locale instance.
+	 */
+	public static boolean isValid(String localeIdentifier) {
+		LocaleRegExpGroups groups = applyRegExp(localeIdentifier);
+		// checks if the groups is consistent
+		return groups != null && groups.isConsistent();
+	}
+
+	/**
+	 * Parses the locale identifier by the regular expression.<br>
+	 * Returns <code>null</code> if the argument is not consistent as locale.
+	 * 
+	 * @param localeIdentifier locale identifier to parse to get a locale.
+	 * @return groups object, result of regular expression execution
+	 */
+	private static LocaleRegExpGroups applyRegExp(String localeIdentifier) {
+		// checks if argument is consistent
+		if (localeIdentifier != null && localeIdentifier.trim().length() > 0) {
+			RegExpResult result = REGEXP_LOCALE.exec(localeIdentifier.trim());
+			// checks if the locale string was parsed correctly
+			if (result != null) {
+				// gets and returns the group with all token
+				return result.groups(FACTORY);
+			}
+		}
+		// if here, the argument is not consistent or
+		// not parsed by regexp
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -281,8 +308,6 @@ public final class CLocaleBuilder {
 			}
 		}
 
-		private final Language language;
-
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
@@ -290,18 +315,6 @@ public final class CLocaleBuilder {
 		 */
 		private LocaleRegExpGroups(NativeObject nativeObject) {
 			super(nativeObject);
-			// checks if the mandatory language property is there
-			if (!isType(Property.LANGUAGE, ObjectType.STRING)) {
-				throw new IllegalArgumentException("Language was not recognized from regular expression");
-			}
-			// gets the language if there is
-			String value = getValue(Property.LANGUAGE, UndefinedValues.STRING);
-			// get the item from enumeration
-			this.language = Language.getByCode(value);
-			// checks if the mandatory language property is consistent
-			if (this.language == null) {
-				throw new IllegalArgumentException("Language '" + value + "' is invalid");
-			}
 		}
 
 		/**
@@ -310,7 +323,7 @@ public final class CLocaleBuilder {
 		 * @return the language
 		 */
 		private Language getLanguage() {
-			return language;
+			return Language.getByCode(getValue(Property.LANGUAGE, UndefinedValues.STRING));
 		}
 
 		/**
@@ -338,6 +351,28 @@ public final class CLocaleBuilder {
 		 */
 		private String getVariantAndExtension() {
 			return getValue(Property.VARIANT_AND_EXTENSION, UndefinedValues.STRING);
+		}
+
+		/**
+		 * Returns <code>true</code> if the groups received by regular expression is consistent.
+		 * 
+		 * @return <code>true</code> if the groups received by regular expression is consistent
+		 */
+		private boolean isConsistent() {
+			// checks if the mandatory language property is there
+			if (!isType(Property.LANGUAGE, ObjectType.STRING) || Language.getByCode(getValue(Property.LANGUAGE, UndefinedValues.STRING)) == null) {
+				return false;
+			}
+			// checks region, if exists it must be a recognized region
+			if (isType(Property.REGION, ObjectType.STRING) && !Key.hasKeyByValue(Region.values(), getValue(Property.REGION, UndefinedValues.STRING))) {
+				return false;
+			}
+			// checks script, if exists it must be a recognized script
+			if (isType(Property.SCRIPT, ObjectType.STRING) && !Key.hasKeyByValue(Script.values(), getValue(Property.SCRIPT, UndefinedValues.STRING))) {
+				return false;
+			}
+			// if here, the result is consistent
+			return true;
 		}
 
 	}

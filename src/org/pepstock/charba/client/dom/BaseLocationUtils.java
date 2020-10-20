@@ -40,14 +40,14 @@ final class BaseLocationUtils {
 	private static final Map<String, List<String>> QUERY_STRING_PARAMETERS_MAP = new HashMap<>();
 	// static instance of cached query string
 	private static String queryString = Constants.EMPTY_STRING;
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
 	BaseLocationUtils() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Gets the URL parameter of the specified name.<br>
 	 * Note that if multiple parameters have been specified with the same name, the last one will be returned.
@@ -93,6 +93,8 @@ final class BaseLocationUtils {
 
 	/**
 	 * Checks the consistency of parameters map and loads it if not yet done or if URL query string is change.
+	 * 
+	 * @param location location DOM item with URL page definition
 	 */
 	private static void checkAndLoadParametersMap(BaseLocation location) {
 		// gets the current string
@@ -109,15 +111,15 @@ final class BaseLocationUtils {
 
 	/**
 	 * Builds an unmodifiable map that contains all parameters, parsed from query string.
-	 *
-	 * @return an unmodifiable map that contains all parameters, parsed from query string
+	 * 
+	 * @param queryString the query string of URL of document
 	 */
 	private static void loadParametersMap(String queryString) {
 		// clears the map of parameters
 		QUERY_STRING_PARAMETERS_MAP.clear();
 		// creates the reference of regular expression result
 		RegExpResult regExpResult;
-		// starts cycle applying the regexp till no result 
+		// starts cycle applying the regexp till no result
 		while ((regExpResult = REGEXP_QUERY_STRING.exec(queryString)) != null) {
 			// checks if value is correctly parsed
 			// 0 = whole token, 1 = key, 2 = equals plus value, 3 = value

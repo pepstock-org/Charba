@@ -89,6 +89,11 @@ public final class Constants {
 	public static final String MINUS = "-";
 
 	/**
+	 * Constants for EQUALS, <b>{@value}</b>.
+	 */
+	public static final String EQUALS = "=";
+
+	/**
 	 * Constants for LESS THAN, <b>{@value}</b>.
 	 */
 	public static final String LT = "<";

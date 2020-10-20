@@ -52,4 +52,11 @@ public final class DOM {
 	@JsProperty
 	public static native BaseLocation getLocation();
 
+	/**
+	 * Returns a {@link BaseNavigator} object, which represents the state and the identity of the user agent.
+	 * 
+	 * @return  a {@link BaseNavigator} object, which  represents the state and the identity of the user agent
+	 */
+	@JsProperty
+	public static native BaseNavigator getNavigator();
 }
