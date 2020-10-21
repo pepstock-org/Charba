@@ -38,15 +38,6 @@ import jsinterop.annotations.JsType;
 final class NativeDateAdapter {
 
 	/**
-	 * Returns a boolean indicating whether the object has the specified property as its own property.
-	 * 
-	 * @param key the string name of the property to test.
-	 * @return boolean indicating whether or not the object has the specified property as own property.
-	 */
-	@JsMethod
-	native boolean hasOwnProperty(String key);
-
-	/**
 	 * Returns the id of adapter.
 	 * 
 	 * @return the id of adapter

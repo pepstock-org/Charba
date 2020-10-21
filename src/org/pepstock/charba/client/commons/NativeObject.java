@@ -110,11 +110,7 @@ public final class NativeObject {
 	boolean hasProperty(String key) {
 		// checks if argument is consistent
 		if (key != null) {
-//			// checks all keys
-//			ArrayString keys = NativeObject.keys(this);
-//			// if index greater than 0, the key exists
-//			return keys.indexOf(key) >= 0;
-			return NativeObject.getOwnPropertyDescriptor(this, key) != null;
+			return JsHelper.get().has(this, key);
 		}
 		// if here, argument is not consistent
 		return false;

@@ -396,6 +396,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `unicode`
  * add `BaseLocation` and `BaseNavigator` native object classes to get the location and navigator from `DOM`.
  * add `Meta` native object class to map a `<meta>` element from `DOM` document.
+ * add `boolean has(Object,String)` method to `JsHelper` class in order to check if a property (by its key) belongs to an object or not. THis is done because CHART.JS merges objects without `prototype`, for security reason.
 
 License
 -------

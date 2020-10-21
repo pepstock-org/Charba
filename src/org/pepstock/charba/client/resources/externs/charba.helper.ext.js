@@ -21,6 +21,12 @@ CharbaCallbackProxy.prototype.callback;
 function CharbaJsHelper() {}
 /**
  * @param {*} object
+ * @param {string} key 
+ * @return {boolean}
+ */
+CharbaJsHelper.has = function(object, key) {};
+/**
+ * @param {*} object
  * @return {string}
  */
 CharbaJsHelper.typeOf = function(object) {};

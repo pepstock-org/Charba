@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.utils;
 
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -179,10 +178,7 @@ public final class RegExpResult extends Array {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the object by the factory
-			// the original groups is cloned
-			// because it doesn't contain the object prototype
-			// needed to get properties by a native object container
-			return factory.create(Helpers.get().clone(getGroups()));
+			return factory.create(getGroups());
 		}
 		// if here factory is not consistent
 		// then returns null

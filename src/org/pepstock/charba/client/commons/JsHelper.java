@@ -49,6 +49,23 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
+	
+	/**
+	 * Returns a boolean indicating whether the object has the specified property as its own property.
+	 * 
+	 * @param object the object on which to search the property.
+	 * @param key the string name of the property to test.
+	 * @return boolean indicating whether or not the object has the specified property as own property.
+	 */
+	public boolean has(Object object, String key) {
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			// checks if the java script object has got the property by key
+			return NativeJsHelper.has(object, key);
+		}
+		// if here the arguments are not consistent
+		return false;
+	}
 
 	/**
 	 * Returns the java script object type of object.
