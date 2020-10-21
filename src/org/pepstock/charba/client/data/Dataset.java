@@ -1190,7 +1190,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks consistency of key and if there is any gradient stored in cache
 		if (Key.isValid(property) && !callbackGradientsContainer.isEmpty()) {
 			// creates the key used to store the gradient
-			String key = createCallbackGradienttKey(property, datasetIndex, index);
+			String key = createCallbackCanvasObjectKey(property, datasetIndex, index);
 			// access to cache to get the gradient by key
 			return callbackGradientsContainer.get(key);
 		}
@@ -1210,7 +1210,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks consistency of key and if there is any pattern stored in cache
 		if (Key.isValid(property) && !callbackPatternsContainer.isEmpty()) {
 			// creates the key used to store the pattern
-			String key = createCallbackGradienttKey(property, datasetIndex, index);
+			String key = createCallbackCanvasObjectKey(property, datasetIndex, index);
 			// access to cache to get the pattern by key
 			return callbackPatternsContainer.get(key);
 		}
@@ -1236,11 +1236,11 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			// calls callback
 			Object result = callback.invoke(chart, context);
 			if (result instanceof Gradient) {
-				String key = createCallbackGradienttKey(property, context.getDatasetIndex(), context.getIndex());
+				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getIndex());
 				Gradient gradient = (Gradient) result;
 				callbackGradientsContainer.put(key, gradient);
 			} else if (result instanceof Pattern) {
-				String key = createCallbackGradienttKey(property, context.getDatasetIndex(), context.getIndex());
+				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getIndex());
 				Pattern pattern = (Pattern) result;
 				callbackPatternsContainer.put(key, pattern);
 			}
@@ -1259,7 +1259,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @param index data index
 	 * @return the key to use to store canvas object into cache
 	 */
-	private String createCallbackGradienttKey(Key property, int datasetIndex, int index) {
+	private String createCallbackCanvasObjectKey(Key property, int datasetIndex, int index) {
 		// checks if property is consistent
 		Key.checkIfValid(property);
 		// creates a builder
