@@ -154,24 +154,31 @@ public final class Chart {
 	native String generateLegend();
 
 	/**
-	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
-	 * If there are multiple items within range, only the first is returned.
-	 * 
-	 * @param event event of chart.
-	 * @return single element at the event position, as array of native object.
-	 */
-	@JsMethod
-	native ArrayObject getElementAtEvent(BaseNativeEvent event);
-
-	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
 	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
 	 * @param event event of chart.
-	 * @return all elements at the same data index, as array of native object.
+	 * @param mode interaction mode to use
+	 * @param options interaction options which is an object as following:<br>
+	 *            <code>
+	 * interface IInteractionOptions {
+	 *   axis?: string;
+	 *   intersect?: boolean;
+	 *   }
+	 * </code>
+	 * @param useFinalPosition if <code>true</code>, defines the interpolation to get the elements that will be in the event position when current animations are completed.<br>
+	 *            When <code>false</code>, elements are considered at their current position.
+	 * @return all elements at the same data index, as array of native object.<br> It is an object as following:<br>
+	 *            <code>
+	 * interface InteractionItem {
+	 *   element: Element;
+	 *   datasetIndex: number;
+	 *   index: number;
+	 *   }
+	 * </code>
 	 */
 	@JsMethod
-	native ArrayObject getElementsAtEvent(BaseNativeEvent event);
+	native ArrayObject getElementsAtEventForMode(BaseNativeEvent event, String mode, NativeObject options, boolean useFinalPosition);
 
 	/**
 	 * Looks for the dataset that matches the current index and returns that metadata.
@@ -198,15 +205,6 @@ public final class Chart {
 	 */
 	@JsMethod
 	native int getVisibleDatasetCount();
-
-	/**
-	 * Gets the dataset of the chart, selected by event.
-	 * 
-	 * @param event event of get the dataset.
-	 * @return dataset meta data items.
-	 */
-	@JsMethod
-	native ArrayObject getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Sets the visibility for a given dataset.<br>

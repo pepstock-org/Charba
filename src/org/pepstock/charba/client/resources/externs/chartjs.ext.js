@@ -47,14 +47,12 @@ Chart.prototype.toBase64Image = function() {};
 Chart.prototype.generateLegend = function() {};
 /**
  * @param {Object} event
+ * @param {string} mode 
+ * @param {Object} options 
+ * @param {boolean} useFinalPosition 
  * @return {Array}
  */
-Chart.prototype.getElementAtEvent = function(event) {};
-/**
- * @param {Object} event
- * @return {Array}
- */
-Chart.prototype.getElementsAtEvent = function(event) {};
+Chart.prototype.getElementsAtEventForMode = function(event, mode, options, boolean useFinalPosition) {};
 /**
  * @param {number} index
  * @return {Object}
@@ -95,11 +93,6 @@ Chart.prototype.hide = function(datasetIndex) {};
  * @return {undefined}
  */
 Chart.prototype.show = function(datasetIndex) {};
-/**
- * @param {Object} event
- * @return {Array}
- */
-Chart.prototype.getDatasetAtEvent = function(event) {};
 /**
  * @type {number}
  */

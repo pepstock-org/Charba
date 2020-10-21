@@ -23,7 +23,9 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.BarDataset;
@@ -44,6 +46,8 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
 import org.pepstock.charba.client.events.EventHandler;
@@ -82,6 +86,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private static final int DEFAULT_HEIGHT = 100;
 	// suffix label for canvas element id
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
+	// creates a static reference for a interaction options for getElementsAtEventForMode method
+	private static final InternalInterationModeObject INTERACTION_MODE = new InternalInterationModeObject(true);
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 	// chart ID using generateid unique id
@@ -777,7 +783,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
 			// gets datasets
-			ArrayObject array = instance.getDatasetAtEvent(event);
+			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.DATASET.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
 		}
@@ -929,7 +935,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
 			// gets element
-			ArrayObject result = instance.getElementAtEvent(event);
+			ArrayObject result = instance.getElementsAtEventForMode(event, InteractionMode.NEAREST.value(), INTERACTION_MODE.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
 				return datasetReferenceItemFactory.create(result.get(0));
 			}
@@ -952,7 +958,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
 			// gets elements
-			ArrayObject array = instance.getElementsAtEvent(event);
+			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.INDEX.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
 		}
@@ -1073,6 +1079,105 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private boolean isInRange(List<?> data, int index) {
 		// checks and returns if valid
 		return data != null && !data.isEmpty() && index < data.size() && index >= 0;
+	}
+	
+	/**
+	 * Internal native object container which is mapping the interaction options needed to invoke {@link Chart#getElementsAtEventForMode(BaseNativeEvent, String, NativeObject, boolean)}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	static final class InternalInterationModeObject extends NativeObjectContainer {
+		
+		/**
+		 * Name of properties of native object.
+		 */
+		private enum Property implements Key
+		{
+			AXIS("axis"),
+			INTERSECT("intersect");
+
+			// name value of property
+			private final String value;
+
+			/**
+			 * Creates with the property value to use into native object.
+			 * 
+			 * @param value value of property name
+			 */
+			private Property(String value) {
+				this.value = value;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.commons.Key#value()
+			 */
+			@Override
+			public String value() {
+				return value;
+			}
+
+		}
+
+		/**
+		 * Creates the object with a native object instance, setting the intersect passed as argument.
+		 * 
+		 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart
+		 */
+		private InternalInterationModeObject(boolean intersect) {
+			super();
+			// sets the intersect
+			setValue(Property.INTERSECT, intersect);
+		}
+
+		/**
+		 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
+		 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
+		 * 
+		 * @param axis define which directions are used in calculating distances.
+		 */
+		void setAxis(InteractionAxis axis) {
+			setValue(Property.AXIS, axis);
+		}
+
+		/**
+		 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+		 * 
+		 * @return define which directions are used in calculating distances.
+		 */
+		InteractionAxis getAxis() {
+			return getValue(Property.AXIS, InteractionAxis.values(), InteractionAxis.X);
+		}
+		
+		/**
+		 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+		 * 
+		 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+		 */
+		final void setIntersect(boolean intersect) {
+			setValue(Property.INTERSECT, intersect);
+		}
+
+		/**
+		 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+		 * 
+		 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+		 */
+		final boolean isIntersect() {
+			return getValue(Property.INTERSECT, true);
+		}
+		
+		/**
+		 * Returns the native object instance.
+		 * 
+		 * @return the native object instance.
+		 */
+		private NativeObject nativeObject() {
+			return getNativeObject();
+		}
+		
 	}
 
 }
