@@ -33,7 +33,6 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -119,35 +118,21 @@ final class BaseMeterController extends AbstractController {
 	@Override
 	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart)) {
-			// checks if the index is 0 because
-			// only the dataset 0 contains my value
-			if (context.getIndex() == 0) {
-				// draw the doughnut chart
-				super.draw(context, chart);
-				// gets chart node
-				ChartNode node = context.getNode();
-				// draws labels
-				drawLabels(chart, node);
-				// closes here
-				return;
-			}
+		// checks if the index is 0 because
+		// only the dataset 0 contains my value
+		if (Controller.isConsistent(this, context, chart) && context.getIndex() == 0) {
+			// draw the doughnut chart
+			super.draw(context, chart);
+			// gets chart node
+			ChartNode node = context.getNode();
+			// draws labels
+			drawLabels(chart, node);
+			// closes here
+			return;
 		}
 		// if here, arguments are not consistent
 		// exception
 		throw new IllegalArgumentException("Draw method arguments are not consistent");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#update(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.options.IsAnimationModeKey)
-	 */
-	@Override
-	public void update(ControllerContext context, IsChart chart, IsAnimationModeKey mode) {
-		// update the doughnut chart
-		super.update(context, chart, mode);
 	}
 
 	/**
