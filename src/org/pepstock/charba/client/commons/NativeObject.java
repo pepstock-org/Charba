@@ -79,14 +79,6 @@ public final class NativeObject {
 	 * @return the target object.
 	 */
 	static native NativeObject assign(NativeObject target, NativeObject... source);
-
-	/**
-	 * Returns a boolean indicating whether the object has the specified property as its own property.
-	 * 
-	 * @param key the string name of the property to test.
-	 * @return boolean indicating whether or not the object has the specified property as own property.
-	 */
-	native boolean hasOwnProperty(String key);
 	
 	/**
 	 * Copies all enumerable own properties from this object to new target object.
@@ -118,7 +110,11 @@ public final class NativeObject {
 	boolean hasProperty(String key) {
 		// checks if argument is consistent
 		if (key != null) {
-			return hasOwnProperty(key);
+//			// checks all keys
+//			ArrayString keys = NativeObject.keys(this);
+//			// if index greater than 0, the key exists
+//			return keys.indexOf(key) >= 0;
+			return NativeObject.getOwnPropertyDescriptor(this, key) != null;
 		}
 		// if here, argument is not consistent
 		return false;
@@ -149,7 +145,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -167,7 +163,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -185,7 +181,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -203,7 +199,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -221,7 +217,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -239,7 +235,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -257,7 +253,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -275,7 +271,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -293,7 +289,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -311,7 +307,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -329,7 +325,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -348,7 +344,7 @@ public final class NativeObject {
 		// sets attributes of descriptor to true
 		resetPropertyDescriptor(descriptor);
 		// defines the property
-		defineProperty(this, key, descriptor);
+		NativeObject.defineProperty(this, key, descriptor);
 	}
 
 	/**
@@ -362,7 +358,7 @@ public final class NativeObject {
 		// checks if the property is present
 		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
+			return NativeObject.getOwnPropertyDescriptor(this, key);
 		}
 		// if here, property does not exist
 		return null;
@@ -402,7 +398,7 @@ public final class NativeObject {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
+			return NativeObject.getOwnPropertyDescriptor(this, key);
 		}
 		// if here, property does not exist
 		return null;
@@ -419,7 +415,7 @@ public final class NativeObject {
 		// checks if the property is present
 		if (ObjectType.STRING.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
+			return NativeObject.getOwnPropertyDescriptor(this, key);
 		}
 		// if here, property does not exist
 		return null;
@@ -503,7 +499,7 @@ public final class NativeObject {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
+			return NativeObject.getOwnPropertyDescriptor(this, key);
 		}
 		// if here, property does not exist
 		return null;
@@ -521,7 +517,7 @@ public final class NativeObject {
 		// checks if the property is present
 		if (ObjectType.ARRAY.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
+			return NativeObject.getOwnPropertyDescriptor(this, key);
 		}
 		// if here, property does not exist
 		return null;
