@@ -29,7 +29,6 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextAlign;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.ChartAreaNode;
@@ -52,15 +51,10 @@ final class BaseMeterController extends AbstractController {
 	private static final double PADDING = 4D;
 	// max percentage
 	private static final double MAX_PERCENTAGE = 100D;
-	// min animation duration to apply the animation labels
-	private static final double MINIMUM_ANIMATION_DURATION = 100D;
 	// SQRT of 2 to calculate the square inside the doughnut
 	private static final double SQRT_2 = Math.sqrt(2);
 	// controller type
 	private final ControllerType type;
-	// flag to know if the draw has been invoked by an update
-	// instead of animation when hovered
-	private boolean fromUpdate = false;
 
 	/**
 	 * Creates the controller using the type passed as argument.
@@ -126,21 +120,22 @@ final class BaseMeterController extends AbstractController {
 	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
-			// draw the doughnut chart
-			super.draw(context, chart);
-			// gets chart node
-			ChartNode node = context.getNode();
-			// checks if the animation is enabled
-			// if not, draws labels with easing 1
-			if (!isAnimationConsistetForDrawingByEasing(chart) || !fromUpdate) {
+			// checks if the index is 0 because
+			// only the dataset 0 contains my value
+			if (context.getIndex() == 0) {
+				// draw the doughnut chart
+				super.draw(context, chart);
+				// gets chart node
+				ChartNode node = context.getNode();
 				// draws labels
-				drawLabels(chart, node, 1D);
+				drawLabels(chart, node);
+				// closes here
+				return;
 			}
-		} else {
-			// if here, arguments are not consistent
-			// exception
-			throw new IllegalArgumentException("Draw method arguments are not consistent");
 		}
+		// if here, arguments are not consistent
+		// exception
+		throw new IllegalArgumentException("Draw method arguments are not consistent");
 	}
 
 	/*
@@ -151,38 +146,8 @@ final class BaseMeterController extends AbstractController {
 	 */
 	@Override
 	public void update(ControllerContext context, IsChart chart, IsAnimationModeKey mode) {
-		// sets the flag
-		// needed into draw to know if the labels must be drawn or not
-		// if resize, do not invoke the animation
-		fromUpdate = !DefaultAnimationModeKey.RESIZE.equals(mode);
 		// update the doughnut chart
 		super.update(context, chart, mode);
-	}
-
-	/**
-	 * Returns <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of the animation options.
-	 * 
-	 * @param chart chart instance to check
-	 * @return <code>true</code> if the animation configuration on chart and dataset are enabled, checking also the duration of the animation options
-	 */
-	boolean isAnimationConsistetForDrawingByEasing(IsChart chart) {
-		// checks if naimation and its duration at configuration level are enabled.
-		boolean isAnimated = chart.getOptions().isAnimationEnabled() && chart.getOptions().getAnimation().getDuration() >= MINIMUM_ANIMATION_DURATION;
-		// checks if there is any dataset
-		if (!chart.getData().getDatasets().isEmpty()) {
-			// gets the dataset (should be only 1
-			Dataset dataset = chart.getData().getDatasets().get(0);
-			// checks the dataset animation
-			isAnimated = isAnimated && dataset.isAnimationEnabled() && dataset.getAnimation().getDuration() >= MINIMUM_ANIMATION_DURATION;
-		}
-		// checks if options are meter ones
-		if (chart.getOptions() instanceof MeterOptions) {
-			// casts to meter options
-			MeterOptions meterOptions = (MeterOptions)chart.getOptions();
-			// checks the animated display options
-			isAnimated = isAnimated && meterOptions.isAnimatedDisplay();
-		}
-		return isAnimated;
 	}
 
 	/**
@@ -190,9 +155,8 @@ final class BaseMeterController extends AbstractController {
 	 * 
 	 * @param chart chart instance
 	 * @param node native chart as chart node
-	 * @param easing a value between 0 and 1 which indicates the animation progress
 	 */
-	void drawLabels(IsChart chart, ChartNode node, double easing) {
+	void drawLabels(IsChart chart, ChartNode node) {
 		// gets the list of datasets
 		List<Dataset> datasets = chart.getData().getDatasets();
 		// checks if not empty
@@ -204,20 +168,45 @@ final class BaseMeterController extends AbstractController {
 				MeterChart meterChart = (MeterChart) chart;
 				MeterOptions options = meterChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(chart, node, dataset, options, easing);
+				execute(chart, node, dataset, options, calculateEase(meterChart, options, dataset));
 			} else if (chart instanceof GaugeChart) {
 				// checks if meter chart
 				GaugeChart gaugeChart = (GaugeChart) chart;
 				GaugeOptions options = gaugeChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(chart, node, dataset, options, easing);
+				execute(chart, node, dataset, options, calculateEase(gaugeChart, options, dataset));
 			}
 		}
-		// checks if it must disable the update
-		if (easing == 1D) {
-			// reset flag from update
-			fromUpdate = false;
+	}
+
+	/**
+	 * Calculates the easing based on circumference of the dataset element.
+	 * 
+	 * @param chart chart instance to use for calculation
+	 * @param options the chart options
+	 * @param dataset meter dataset to get the ratio between value and maximum
+	 * @return easing of drawing (between 0 and 1) for animation
+	 */
+	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
+		// checks if animation is required
+		if (options.isAnimatedDisplay()) {
+			// calculate the max circumference for the dataset
+			// transforming the value in degrees
+			// in order to compare with circumference of the element
+			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
+			// gets the meta dataset of dataset 0
+			DatasetMetaItem item = chart.getDatasetMeta(0);
+			// calculates the circumference in degree of element
+			double elemCircumference = item.getDatasets().get(0).getCircumference() * 180 / Math.PI;
+			// calculate the dividend
+			double dividend = Math.min(maxCircumference, elemCircumference);
+			double divider = Math.max(maxCircumference, elemCircumference);
+			// returns easing
+			return Math.min(dividend / divider, 1D);
 		}
+		// if here, no animation is requested
+		// then returns no easing
+		return 1D;
 	}
 
 	/**

@@ -31,6 +31,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -79,6 +80,8 @@ public class MeterDataset extends Dataset {
 	private final double max;
 
 	private double value = MINIMUM_VALUE;
+
+	private double valueMaximumRatio = UndefinedValues.DOUBLE;
 
 	/**
 	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
@@ -234,13 +237,24 @@ public class MeterDataset extends Dataset {
 	}
 
 	/**
+	 * Returns the ratio between value and maximum.
+	 * 
+	 * @return the ratio between value and maximum
+	 */
+	final double getValueMaximumRatio() {
+		return valueMaximumRatio;
+	}
+
+	/**
 	 * @param value the value to set
 	 */
 	public void setValue(double value) {
-		// checks the value is greater than minimum and less than maximum
-		this.value = Math.max(Math.min(max, value), MINIMUM_VALUE);
+		// checks the value is Nan and greater than minimum and less than maximum
+		this.value = Double.isNaN(value) ? 0D : Math.max(Math.min(max, value), MINIMUM_VALUE);
 		// sets the data
 		super.setData(this.value, Math.max(MINIMUM_VALUE, max - value));
+		// stores the ratio between value and max
+		this.valueMaximumRatio = Math.abs(value / Math.max(Math.abs(max), 1));
 	}
 
 	/**

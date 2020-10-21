@@ -17,22 +17,12 @@ package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
 import org.pepstock.charba.client.callbacks.MeterFormatCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
-import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.events.AnimationCompleteEvent;
-import org.pepstock.charba.client.events.AnimationCompleteEventHandler;
-import org.pepstock.charba.client.events.AnimationProgressEvent;
-import org.pepstock.charba.client.events.AnimationProgressEventHandler;
-import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.options.AnimationMode;
 
 /**
  * Specific options for METER chart.
@@ -73,14 +63,6 @@ public class MeterOptions extends AbstractPieOptions {
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
 
 	private MeterFormatCallback formatCallback = null;
-
-	// creates internal animation handler
-	private final InternalAnimationEventHandler eventHandler = new InternalAnimationEventHandler();
-	// instances of animation callback wrapper
-	private final InternalConfigurationAnimationCallbackWrapper animationCallbackWrapper = new InternalConfigurationAnimationCallbackWrapper();
-	// registration handlers instance
-	private HandlerRegistration onProgressHandlerRegistration = null;
-	private HandlerRegistration onCompleteHandlerRegistration = null;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -238,49 +220,8 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param animatedDisplay the animatedDisplay to set, <code>true</code> if animated, otherwise <code>false</code>
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
-		// checks if equals to previous value
-		if (this.animatedDisplay != animatedDisplay) {
-			// stores the value
-			this.animatedDisplay = animatedDisplay;
-			// checks if handlers of animation has been added
-			if (animatedDisplay && onProgressHandlerRegistration == null && onCompleteHandlerRegistration == null) {
-				// adds animations handlers to chart
-				onProgressHandlerRegistration = getChart().addHandler(eventHandler, AnimationProgressEvent.TYPE);
-				onCompleteHandlerRegistration = getChart().addHandler(eventHandler, AnimationCompleteEvent.TYPE);
-			} else if (!animatedDisplay && onProgressHandlerRegistration != null && onCompleteHandlerRegistration != null) {
-				// removes animations handlers from chart
-				onProgressHandlerRegistration.removeHandler();
-				onCompleteHandlerRegistration.removeHandler();
-				// resets handler registration
-				onProgressHandlerRegistration = null;
-				onCompleteHandlerRegistration = null;
-			}
-		}
+		this.animatedDisplay = animatedDisplay;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#getAnimationCallback()
-	 */
-	@Override
-	public ConfigurationAnimationCallback getAnimationCallback() {
-		return animationCallbackWrapper.getDelegated();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#setAnimationCallback(org.pepstock.charba.client.callbacks.AnimationCallback)
-	 */
-	@Override
-	public void setAnimationCallback(ConfigurationAnimationCallback animationCallback) {
-		// stores the animation callback into wrapper
-		animationCallbackWrapper.setDelegated(animationCallback);
-		// stores the callabck into object ONLY if delegated is consistent
-		super.setAnimationCallback(animationCallback == null ? null : animationCallbackWrapper);
-	}
-
 	/**
 	 * Returns the callback to customize the value string into chart.
 	 * 
@@ -297,140 +238,6 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setFormatCallback(MeterFormatCallback formatCallback) {
 		this.formatCallback = formatCallback;
-	}
-
-	/**
-	 * Animation handlers (progress and complete) in order to animate the labels drawing on meter or gauge charts.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private class InternalAnimationEventHandler implements AnimationProgressEventHandler, AnimationCompleteEventHandler {
-
-		// modulo to check if the labels must be draw or not
-		private static final double MODULO = 5D;
-		// counter to use to check if draws the label
-		private int counter = 0;
-		// stores the easing value
-		private double easingValue = 0D;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.events.AnimationProgressEventHandler#onProgress(org.pepstock.charba.client.events.AnimationProgressEvent)
-		 */
-		@Override
-		public void onProgress(AnimationProgressEvent event) {
-			// checks if labels must be drawn base on how many drawing has been done
-			if (counter % MODULO == 0) {
-				// calculates the easing value
-				easingValue = event.getItem().getCurrentStep() / event.getItem().getNumSteps();
-			}
-			// draws labels
-			drawLabelsByController(easingValue);
-			// increments counter
-			counter++;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.events.AnimationCompleteEventHandler#onComplete(org.pepstock.charba.client.events.AnimationCompleteEvent)
-		 */
-		@Override
-		public void onComplete(AnimationCompleteEvent event) {
-			// draws labels
-			drawLabelsByController(1D);
-			// resets counter and easing value
-			counter = 0;
-			easingValue = 0D;
-		}
-
-		/**
-		 * Draws the labels on chart by controller instance.
-		 * 
-		 * @param easing easing value used to animate the labels drawing if required.
-		 */
-		private void drawLabelsByController(double easing) {
-			// checks chart instance
-			if (getChart() instanceof BaseMeterChart) {
-				// gets base meter chart instance
-				BaseMeterChart<?> meterChart = (BaseMeterChart<?>) getChart();
-				// checks if animation is consistent for the controller
-				if (meterChart.getController() != null && meterChart.getController().isAnimationConsistetForDrawingByEasing(meterChart)) {
-					// invokes the draw labels on controller
-					meterChart.getController().drawLabels(meterChart, meterChart.getNode(), easing);
-				}
-			}
-		}
-
-	}
-
-	/**
-	 * Internal class to wrap an animation callback in order to override {@link DefaultAnimationModeKey#ACTIVE} and {@link DefaultAnimationModeKey#RESIZE} configuration.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalConfigurationAnimationCallbackWrapper implements ConfigurationAnimationCallback {
-
-		private ConfigurationAnimationCallback delegated = null;
-
-		/**
-		 * Returns the delegated callback instance to wrap, if exists.
-		 * 
-		 * @return the delegated callback instance to wrap, if exists
-		 */
-		private ConfigurationAnimationCallback getDelegated() {
-			return delegated;
-		}
-
-		/**
-		 * Sets the delegated callback instance to wrap.
-		 * 
-		 * @param delegated the delegated callback instance to wrap
-		 */
-		private void setDelegated(ConfigurationAnimationCallback delegated) {
-			this.delegated = delegated;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.callbacks.AnimationCallback#invoke(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext,
-		 * org.pepstock.charba.client.options.AbstractAnimationOptions)
-		 */
-		@Override
-		public ConfigurationAnimationOptions invoke(IsChart chart, ScriptableContext context, ConfigurationAnimationOptions animationOptions) {
-			// checks if delegated is consistent
-			if (delegated != null) {
-				// invokes delegated callback
-				ConfigurationAnimationOptions options = delegated.invoke(chart, context, animationOptions);
-				// checks if options are consistent
-				if (options != null) {
-					// creates a new mode every time
-					// because once it has been added to the options
-					// it could be changed by user
-					AnimationMode disabledActiveMode = new AnimationMode(DefaultAnimationModeKey.ACTIVE);
-					// disables the animation mode
-					disabledActiveMode.setDuration(0);
-					// disables animation active
-					options.setMode(disabledActiveMode);
-					// creates a new mode every time
-					// because once it has been added to the options
-					// it could be changed by user
-					AnimationMode disabledResizeMode = new AnimationMode(DefaultAnimationModeKey.RESIZE);
-					// disables the animation mode
-					disabledResizeMode.setDuration(0);
-					// disables animation resize
-					options.setMode(disabledResizeMode);
-					// returns the changed options
-					return options;
-				}
-			}
-			return null;
-		}
-
 	}
 
 }
