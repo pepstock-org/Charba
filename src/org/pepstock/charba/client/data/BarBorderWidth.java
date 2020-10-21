@@ -32,7 +32,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * Creates the object with an empty native object instance.
 	 */
 	public BarBorderWidth() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -42,6 +42,9 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 */
 	BarBorderWidth(NativeObject nativeObject) {
 		super(nativeObject);
+		// redefines hashcode in order do not have
+		// the property $H for hashcode
+		super.redefineHashcode();
 	}
 
 	/**
