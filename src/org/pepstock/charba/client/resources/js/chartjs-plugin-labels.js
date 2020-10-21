@@ -267,9 +267,11 @@
       }
       percentage = dataset.data[index] / this.barTotal[index] * 100;
     } else {
-      percentage = element.circumference / this.chart.config.options.circumference * 100;
+      var degree = element.circumference * 180 / Math.PI;	
+      percentage = degree / this.chart.config.options.circumference * 100;
     }
     percentage = parseFloat(percentage.toFixed(this.options.precision));
+    
     if (!this.options.showActualPercentages) {
       if (this.chart.config.type === 'bar') {
         this.totalPercentage = this.barTotalPercentage[index] || 0;
