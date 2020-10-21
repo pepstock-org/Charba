@@ -69,14 +69,6 @@ public final class NativeObject {
 	static native ArrayString keys(NativeObject source);
 
 	/**
-	 * Returns a boolean indicating whether the object has the specified property as its own property.
-	 * 
-	 * @param key the string name of the property to test.
-	 * @return boolean indicating whether or not the object has the specified property as own property.
-	 */
-	native boolean hasOwnProperty(String key);
-
-	/**
 	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.
 	 * 
 	 * @return list of strings that represent all the enumerable properties of the given object.
@@ -96,7 +88,7 @@ public final class NativeObject {
 	boolean hasProperty(String key) {
 		// checks if argument is consistent
 		if (key != null) {
-			return hasOwnProperty(key);
+			return keys(this).indexOf(key) >= 0;
 		}
 		// if here, argument is not consistent
 		return false;

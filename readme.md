@@ -28,9 +28,9 @@ Since version **3**, **Charba** has got an own DOM tree manager which allows to 
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.2/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.3/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.2/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/3.3/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -44,7 +44,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file into `dist` folder, ready to be included into your project.
 
-[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/3.2/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/3.3/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -59,26 +59,26 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>3.2</version>
+    <version>3.3</version>
     <!-- for GWT -->
-    <version>3.2-gwt</version>
+    <version>3.3-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="3.2"/>
+<dependency org="org.pepstock" name="charba" rev="3.3"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="3.2-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="3.3-gwt"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '3.2'
+compile group: 'org.pepstock', name: 'charba', version: '3.3'
 
-compile group: 'org.pepstock', name: 'charba', version: '3.2-gwt'
+compile group: 'org.pepstock', name: 'charba', version: '3.3-gwt'
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration into your GWT project module configuration:
@@ -117,7 +117,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/3.2/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/3.3/index.html).
 
 Showcase
 --------
