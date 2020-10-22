@@ -44,10 +44,10 @@ public interface IsDefaultElements {
 	IsDefaultPoint getPoint();
 
 	/**
-	 * Returns RECTANGLE object defaults.
+	 * Returns BAR object defaults.
 	 * 
-	 * @return RECTANGLE object defaults.
+	 * @return BAR object defaults.
 	 */
-	IsDefaultRectangle getRectangle();
+	IsDefaultBar getBar();
 
 }

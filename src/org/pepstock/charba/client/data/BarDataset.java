@@ -480,7 +480,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		} else if (ObjectType.FUNCTION.equals(type)) {
 			// checks if a callback has been set
 			// returns defaults
-			return Arrays.asList(getDefaultValues().getElements().getRectangle().getBorderSkipped());
+			return Arrays.asList(getDefaultValues().getElements().getBar().getBorderSkipped());
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// gets list instance for result
 			List<BorderSkipped> result = new LinkedList<>();
@@ -495,13 +495,13 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 					result.add(BorderSkipped.FALSE);
 				} else if (value instanceof String){
 					// checks if it is a string
-					result.add(Key.getKeyByValue(BorderSkipped.values(), (String)value, getDefaultValues().getElements().getRectangle().getBorderSkipped()));
+					result.add(Key.getKeyByValue(BorderSkipped.values(), (String)value, getDefaultValues().getElements().getBar().getBorderSkipped()));
 				}
 			}
 			return result;
 		}
 		// otherwise returns the enum value as string
-		return Arrays.asList(getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getRectangle().getBorderSkipped()));
+		return Arrays.asList(getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getElements().getBar().getBorderSkipped()));
 	}
 
 	/**
@@ -623,7 +623,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	protected String getDefaultBackgroundColorAsString() {
-		return getDefaultValues().getElements().getRectangle().getBackgroundColorAsString();
+		return getDefaultValues().getElements().getBar().getBackgroundColorAsString();
 	}
 
 	/*
@@ -633,7 +633,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	protected String getDefaultBorderColorAsString() {
-		return getDefaultValues().getElements().getRectangle().getBorderColorAsString();
+		return getDefaultValues().getElements().getBar().getBorderColorAsString();
 	}
 
 	/*
@@ -643,7 +643,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return getDefaultValues().getElements().getRectangle().getBorderWidth();
+		return getDefaultValues().getElements().getBar().getBorderWidth();
 	}
 
 	/**
@@ -655,7 +655,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private Object onBorderSkipped(ScriptableContext context) {
 		// gets value
 		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
-		BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
+		BorderSkipped result = value == null ? getDefaultValues().getElements().getBar().getBorderSkipped() : value;
 		// checks if is boolean
 		if (BorderSkipped.FALSE.equals(result)) {
 			return false;

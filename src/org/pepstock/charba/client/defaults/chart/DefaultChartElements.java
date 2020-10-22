@@ -31,7 +31,7 @@ public final class DefaultChartElements extends DefaultElements {
 	 * @param elements elements option element instance.
 	 */
 	public DefaultChartElements(IsDefaultElements elements) {
-		super(new DefaultChartArc(elements.getArc()), new DefaultChartLine(elements.getLine()), new DefaultChartPoint(elements.getPoint()), new DefaultChartRectangle(elements.getRectangle()));
+		super(new DefaultChartArc(elements.getArc()), new DefaultChartLine(elements.getLine()), new DefaultChartPoint(elements.getPoint()), new DefaultChartBar(elements.getBar()));
 	}
 
 }

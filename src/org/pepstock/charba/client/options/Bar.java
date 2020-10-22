@@ -18,15 +18,15 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
+import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
- * Rectangle elements are used to represent the bars in a bar chart.
+ * Bar elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Rectangle extends AbstractElement<IsDefaultRectangle> implements IsDefaultRectangle {
+public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 
 	/**
 	 * Name of properties of native object.
@@ -67,7 +67,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Rectangle(Elements elements, Key childKey, IsDefaultRectangle defaultValues, NativeObject nativeObject) {
+	Bar(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
 

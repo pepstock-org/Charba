@@ -15,15 +15,15 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
+import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
- * CHART.JS default values for RECTANGLE element.
+ * CHART.JS default values for BAR element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultRectangle extends AbstractDefaultOptionsElement implements IsDefaultRectangle {
+public final class DefaultBar extends AbstractDefaultOptionsElement implements IsDefaultBar {
 
 	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
 
@@ -34,18 +34,17 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultRectangle() {
+	DefaultBar() {
 		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.elements.rectangle.IsDefaultRectangle#getBorderSkipped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBorderSkipped()
 	 */
 	@Override
 	public BorderSkipped getBorderSkipped() {
 		return BorderSkipped.START;
 	}
-
 }

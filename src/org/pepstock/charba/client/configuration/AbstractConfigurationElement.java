@@ -21,7 +21,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
+ * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero

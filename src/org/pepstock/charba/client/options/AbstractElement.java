@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
+ * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero

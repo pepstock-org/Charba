@@ -19,19 +19,19 @@ import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * Rectangle elements are used to represent the bars in a bar chart.
+ * Bar elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Rectangle extends AbstractConfigurationElement {
+public class Bar extends AbstractConfigurationElement {
 
 	/**
-	 * Builds the object with options, root and setting the rectangle element.
+	 * Builds the object with options, root and setting the bar element.
 	 * 
 	 * @param options options instance
 	 */
-	Rectangle(ExtendedOptions options) {
-		super(options, options.getElements().getRectangle());
+	Bar(ExtendedOptions options) {
+		super(options, options.getElements().getBar());
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Rectangle extends AbstractConfigurationElement {
 	 * @param borderSkipped to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
 	 */
 	public void setBorderSkipped(boolean borderSkipped) {
-		getOptions().getElements().getRectangle().setBorderSkipped(borderSkipped);
+		getOptions().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class Rectangle extends AbstractConfigurationElement {
 	 * @param borderSkipped the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(BorderSkipped borderSkipped) {
-		getOptions().getElements().getRectangle().setBorderSkipped(borderSkipped);
+		getOptions().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Rectangle extends AbstractConfigurationElement {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public BorderSkipped getBorderSkipped() {
-		return getOptions().getElements().getRectangle().getBorderSkipped();
+		return getOptions().getElements().getBar().getBorderSkipped();
 	}
 
 }

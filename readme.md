@@ -222,6 +222,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `getEasing` method from `AnimationItem` class because is not provided anymore by new animation engine.
    * remove the list of ticks as argument from `AxisBuildTicksCallback` class.
    * change `isoWeekday` property of `Time` options and configuration class does not store a `boolean` anymore but new `IsoWeekDay` enumeration with all days of week.
+   * rename `Rectangle` options and configuration in `Bar`, inside the `Elements` node of the options and configuration.
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.

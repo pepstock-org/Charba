@@ -15,25 +15,25 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
+import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
- * Defaults for rectangle option element, based on chart type.
+ * Defaults for bar option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartRectangle implements IsDefaultRectangle {
+public final class DefaultChartBar implements IsDefaultBar {
 
-	private final IsDefaultRectangle rectangle;
+	private final IsDefaultBar bar;
 
 	/**
-	 * Creates the object by rectangle option element instance.
+	 * Creates the object by bar option element instance.
 	 * 
-	 * @param rectangle rectangle option element instance.
+	 * @param bar bar option element instance.
 	 */
-	DefaultChartRectangle(IsDefaultRectangle rectangle) {
-		this.rectangle = rectangle;
+	DefaultChartBar(IsDefaultBar bar) {
+		this.bar = bar;
 	}
 
 	/*
@@ -43,7 +43,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return rectangle.getBackgroundColorAsString();
+		return bar.getBackgroundColorAsString();
 	}
 
 	/*
@@ -53,7 +53,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 */
 	@Override
 	public int getBorderWidth() {
-		return rectangle.getBorderWidth();
+		return bar.getBorderWidth();
 	}
 
 	/*
@@ -63,17 +63,17 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		return rectangle.getBorderColorAsString();
+		return bar.getBorderColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultRectangle#getBorderSkipped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBorderSkipped()
 	 */
 	@Override
 	public BorderSkipped getBorderSkipped() {
-		return rectangle.getBorderSkipped();
+		return bar.getBorderSkipped();
 	}
 
 }

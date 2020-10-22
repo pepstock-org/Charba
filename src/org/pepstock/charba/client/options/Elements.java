@@ -20,7 +20,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options apply to the configuration attached to a dataset.
+ * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
+ * When set, these options apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,7 +34,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 
 	private final Point point;
 
-	private final Rectangle rectangle;
+	private final Bar bar;
 
 	/**
 	 * Name of properties of native object.
@@ -42,7 +43,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	{
 		POINT("point"),
 		LINE("line"),
-		RECTANGLE("rectangle"),
+		BAR("bar"),
 		ARC("arc");
 
 		// name value of property
@@ -83,13 +84,13 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 		arc = new Arc(this, Property.ARC, defaultValues.getArc(), getValue(Property.ARC));
 		line = new Line(this, Property.LINE, defaultValues.getLine(), getValue(Property.LINE));
 		point = new Point(this, Property.POINT, defaultValues.getPoint(), getValue(Property.POINT));
-		rectangle = new Rectangle(this, Property.RECTANGLE, defaultValues.getRectangle(), getValue(Property.RECTANGLE));
+		bar = new Bar(this, Property.BAR, defaultValues.getBar(), getValue(Property.BAR));
 	}
 
 	/**
 	 * Returns the arc element.
 	 * 
-	 * @return the arc
+	 * @return the arc element
 	 */
 	@Override
 	public Arc getArc() {
@@ -99,7 +100,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	/**
 	 * Returns the line element.
 	 * 
-	 * @return the line
+	 * @return the line element
 	 */
 	@Override
 	public Line getLine() {
@@ -109,7 +110,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	/**
 	 * Returns the point element.
 	 * 
-	 * @return the point
+	 * @return the point element
 	 */
 	@Override
 	public Point getPoint() {
@@ -117,13 +118,13 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	}
 
 	/**
-	 * Returns the rectangle element.
+	 * Returns the bar element.
 	 * 
-	 * @return the rectangle
+	 * @return the bar element
 	 */
 	@Override
-	public Rectangle getRectangle() {
-		return rectangle;
+	public Bar getBar() {
+		return bar;
 	}
 
 }

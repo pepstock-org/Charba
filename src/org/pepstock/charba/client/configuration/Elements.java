@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
+ * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
  * When set, these options apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
@@ -33,7 +33,7 @@ public class Elements {
 
 	private final Arc arc;
 
-	private final Rectangle rectangle;
+	private final Bar bar;
 
 	/**
 	 * Builds the object storing the default root options.
@@ -42,16 +42,16 @@ public class Elements {
 	 */
 	Elements(ExtendedOptions options) {
 		// creates the sub-options objects
-		point = new Point(options);
-		line = new Line(options);
-		arc = new Arc(options);
-		rectangle = new Rectangle(options);
+		this.point = new Point(options);
+		this.line = new Line(options);
+		this.arc = new Arc(options);
+		this.bar = new Bar(options);
 	}
 
 	/**
 	 * Returns the point element.
 	 * 
-	 * @return the point
+	 * @return the point element
 	 */
 	public Point getPoint() {
 		return point;
@@ -60,7 +60,7 @@ public class Elements {
 	/**
 	 * Returns the line element.
 	 * 
-	 * @return the line
+	 * @return the line element
 	 */
 	public Line getLine() {
 		return line;
@@ -69,19 +69,19 @@ public class Elements {
 	/**
 	 * Returns the arc element.
 	 * 
-	 * @return the arc
+	 * @return the arc element
 	 */
 	public Arc getArc() {
 		return arc;
 	}
 
 	/**
-	 * Returns the rectangle element.
+	 * Returns the bar element.
 	 * 
-	 * @return the rectangle
+	 * @return the bar
 	 */
-	public Rectangle getRectangle() {
-		return rectangle;
+	public Bar getBar() {
+		return bar;
 	}
 
 }

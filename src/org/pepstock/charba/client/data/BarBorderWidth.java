@@ -74,7 +74,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * @return the border width left in pixel.
 	 */
 	public int getLeft() {
-		return getValue(Position.LEFT, Defaults.get().getGlobal().getElements().getRectangle().getBorderWidth());
+		return getValue(Position.LEFT, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
 	}
 
 	/**
@@ -92,7 +92,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * @return the border width right in pixel.
 	 */
 	public int getRight() {
-		return getValue(Position.RIGHT, Defaults.get().getGlobal().getElements().getRectangle().getBorderWidth());
+		return getValue(Position.RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * @return the border width top in pixel.
 	 */
 	public int getTop() {
-		return getValue(Position.TOP, Defaults.get().getGlobal().getElements().getRectangle().getBorderWidth());
+		return getValue(Position.TOP, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
 	}
 
 	/**
@@ -128,6 +128,6 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * @return the border width bottom in pixel.
 	 */
 	public int getBottom() {
-		return getValue(Position.BOTTOM, Defaults.get().getGlobal().getElements().getRectangle().getBorderWidth());
+		return getValue(Position.BOTTOM, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
 	}
 }

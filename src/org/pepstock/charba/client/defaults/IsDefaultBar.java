@@ -18,11 +18,11 @@ package org.pepstock.charba.client.defaults;
 import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
- * Interface to define rectangle object defaults.
+ * Interface to define bar object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultRectangle extends IsDefaultOptionsElement {
+public interface IsDefaultBar extends IsDefaultOptionsElement {
 
 	/**
 	 * Returns the edge to skip drawing the border for.

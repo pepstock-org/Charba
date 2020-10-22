@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
+import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
 
 /**
  * CHART.JS default values for ELEMENTS element.
@@ -34,13 +34,13 @@ public class DefaultElements implements IsDefaultElements {
 
 	private final IsDefaultPoint point;
 
-	private final IsDefaultRectangle rectangle;
+	private final IsDefaultBar bar;
 
 	/**
 	 * Creates the object using inner default elements.
 	 */
 	DefaultElements() {
-		this(new DefaultArc(), new DefaultLine(), new DefaultPoint(), new DefaultRectangle());
+		this(new DefaultArc(), new DefaultLine(), new DefaultPoint(), new DefaultBar());
 	}
 
 	/**
@@ -49,14 +49,14 @@ public class DefaultElements implements IsDefaultElements {
 	 * @param arc arc element instance
 	 * @param line line element instance
 	 * @param point point element instance
-	 * @param rectangle rectangle element instance
+	 * @param bar bar element instance
 	 */
-	protected DefaultElements(IsDefaultArc arc, IsDefaultLine line, IsDefaultPoint point, IsDefaultRectangle rectangle) {
+	protected DefaultElements(IsDefaultArc arc, IsDefaultLine line, IsDefaultPoint point, IsDefaultBar bar) {
 		super();
 		this.arc = arc;
 		this.line = line;
 		this.point = point;
-		this.rectangle = rectangle;
+		this.bar = bar;
 	}
 
 	/*
@@ -92,11 +92,11 @@ public class DefaultElements implements IsDefaultElements {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getRectangle()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getBar()
 	 */
 	@Override
-	public final IsDefaultRectangle getRectangle() {
-		return rectangle;
+	public final IsDefaultBar getBar() {
+		return bar;
 	}
 
 }
