@@ -25,9 +25,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
-import org.pepstock.charba.client.items.TooltipBodyItem.TooltipBodyItemFactory;
-import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
-import org.pepstock.charba.client.items.TooltipLabelColor.TooltipLabelColorFactory;
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip custom callback.<br>
@@ -84,13 +81,6 @@ public final class TooltipModel extends NativeObjectContainer {
 
 	}
 
-	// instance of tooltip items factory
-	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
-	// instance of tooltip body items factory
-	private final TooltipBodyItemFactory tooltipBodyItemFactory = new TooltipBodyItemFactory();
-	// instance of tooltip label color factory
-	private final TooltipLabelColorFactory tooltipLabelColorFactory = new TooltipLabelColorFactory();
-
 	/**
 	 * Creates the item using envelop with the native java script object which contains all properties.
 	 * 
@@ -118,7 +108,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.DATA_POINTS);
 		// returns as list
-		return ArrayListHelper.unmodifiableList(array, tooltipItemFactory);
+		return ArrayListHelper.unmodifiableList(array, TooltipItem.FACTORY);
 	}
 
 	/**
@@ -202,7 +192,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.BODY);
 		// returns as list
-		return ArrayListHelper.unmodifiableList(array, tooltipBodyItemFactory);
+		return ArrayListHelper.unmodifiableList(array, TooltipBodyItem.FACTORY);
 	}
 
 	/**
@@ -262,7 +252,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.LABEL_COLORS);
 		// returns as list
-		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
+		return ArrayListHelper.unmodifiableList(array, TooltipLabelColor.FACTORY);
 	}
 
 	/**
@@ -274,7 +264,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.LABEL_TEXT_COLORS);
 		// returns as list
-		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
+		return ArrayListHelper.unmodifiableList(array, TooltipLabelColor.FACTORY);
 	}
 
 	/**

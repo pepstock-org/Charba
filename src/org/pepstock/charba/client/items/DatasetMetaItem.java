@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -82,9 +81,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 
 	}
 
-	// instance of dataset items factory.
-	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
-	// instance of controoler
+	// instance of controller
 	private final DatasetItemController datasetItemController;
 
 	/**
@@ -220,7 +217,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 */
 	public List<DatasetItem> getDatasets() {
 		ArrayObject array = getArrayValue(Property.DATA);
-		return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
+		return ArrayListHelper.unmodifiableList(array, DatasetItem.FACTORY);
 	}
 
 }

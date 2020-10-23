@@ -29,6 +29,11 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class ScaleTickItem extends NativeObjectContainer {
+	
+	/**
+	 * Public factory to create a scale tick item from a native object.
+	 */
+	public static final ScaleTickItemFactory FACTORY = new ScaleTickItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -122,7 +127,14 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class ScaleTickItemFactory implements NativeObjectContainerFactory<ScaleTickItem> {
+	public static class ScaleTickItemFactory implements NativeObjectContainerFactory<ScaleTickItem> {
+		
+		/**
+		 * To avoid any instatiation
+		 */
+		private ScaleTickItemFactory() {
+			// do nothing
+		}
 
 		/*
 		 * (non-Javadoc)

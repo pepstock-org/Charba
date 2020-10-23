@@ -41,6 +41,11 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  */
 public class LegendItem extends NativeObjectContainer {
+	
+	/**
+	 * Public factory to create a legend item from a native object.
+	 */
+	public static final LegendItemFactory FACTORY = new LegendItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -406,7 +411,14 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
+	public static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
+		
+		/**
+		 * To avoid any instatiation
+		 */
+		private LegendItemFactory() {
+			// do nothing
+		}
 
 		/*
 		 * (non-Javadoc)

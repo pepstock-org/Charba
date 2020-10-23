@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
+// FIXME
 public interface DateAdaptersOptionsFactory<T extends DateAdapterOptions> extends NativeObjectContainerFactory<T> {
 
 }

@@ -28,17 +28,10 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class GradientsContainer extends AbstractContainer<Gradient> implements NativeObjectContainerFactory<Gradient> {
+final class GradientsContainer extends AbstractContainer<Gradient> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
-	 */
-	@Override
-	public Gradient create(NativeObject nativeObject) {
-		return GradientBuilder.build(nativeObject);
-	}
+	// static instance for the gradient factory
+	private static final GradientContainerFactory FACTORY = new GradientContainerFactory();
 
 	/*
 	 * (non-Javadoc)
@@ -47,7 +40,26 @@ final class GradientsContainer extends AbstractContainer<Gradient> implements Na
 	 */
 	@Override
 	NativeObjectContainerFactory<Gradient> getFactory() {
-		return this;
+		return FACTORY;
+	}
+
+	/**
+	 * Factory to create a gradients objects from a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class GradientContainerFactory implements NativeObjectContainerFactory<Gradient> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
+		 */
+		@Override
+		public Gradient create(NativeObject nativeObject) {
+			return GradientBuilder.build(nativeObject);
+		}
+
 	}
 
 }

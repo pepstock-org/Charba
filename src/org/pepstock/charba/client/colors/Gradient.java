@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.pepstock.charba.client.colors.GradientColor.GradientColorFactory;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
@@ -45,8 +44,6 @@ public final class Gradient extends CanvasObject {
 	static final String MISSING_COLORS = "The gradient does not have any stop color";
 	// contains the gradient colors
 	private final ArrayObjectContainerList<GradientColor> colors;
-	// factory to creates color by native object
-	private final GradientColorFactory factory = new GradientColorFactory();
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -165,7 +162,7 @@ public final class Gradient extends CanvasObject {
 		// gets array of color
 		ArrayObject array = getArrayValue(Property.CHARBA_GRADIENT_COLORS);
 		// creates a list using the native object
-		this.colors = ArrayListHelper.list(array, factory);
+		this.colors = ArrayListHelper.list(array, GradientColor.FACTORY);
 		// checks if there is any color
 		if (colors.isEmpty()) {
 			// no color, exception

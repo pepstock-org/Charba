@@ -54,7 +54,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumberFormatOptions> implements IsDefaultNumberFormatOptions {
 
-	// factory instance
+	/**
+	 * Public factory to create a number format options from a native object.
+	 */
 	public static final NumberFormatOptionsFactory FACTORY = new NumberFormatOptionsFactory();
 	// Pairs of simple units can be concatenated with "-per-" to make a compound unit.
 	private static final String COMPOUND_UNIT_SEPARATOR = "-per-";
@@ -570,7 +572,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	public static final class NumberFormatOptionsFactory implements NativeObjectContainerFactory<NumberFormatOptions> {
+	public static class NumberFormatOptionsFactory implements NativeObjectContainerFactory<NumberFormatOptions> {
 
 		/**
 		 * To avoid any instantiation

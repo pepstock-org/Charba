@@ -40,7 +40,6 @@ import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleDataType;
-import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -50,8 +49,6 @@ import org.pepstock.charba.client.options.IsScaleId;
  * @author Andrea "Stock" Stocchero
  */
 public class ScaleItem extends BaseBoxNodeItem {
-
-	private static final ScaleTickItemFactory ITEM_FACTORY = new ScaleTickItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -281,7 +278,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.TICKS);
 		// returns list
-		return ArrayListHelper.unmodifiableList(array, ITEM_FACTORY);
+		return ArrayListHelper.unmodifiableList(array, ScaleTickItem.FACTORY);
 	}
 
 	/**

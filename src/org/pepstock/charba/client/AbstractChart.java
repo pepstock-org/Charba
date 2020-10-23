@@ -56,7 +56,6 @@ import org.pepstock.charba.client.events.HandlerManager;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
@@ -114,8 +113,6 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final ChartOptions options;
 	// merged options as default options
 	private final IsDefaultScaledOptions defaultChartOptions;
-	// instance of dataset reference items factory.
-	private final DatasetReferenceItemFactory datasetReferenceItemFactory = new DatasetReferenceItemFactory();
 	// cursor defined when chart is created
 	private final CursorType initialCursor;
 
@@ -785,7 +782,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets datasets
 			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.DATASET.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
+			return ArrayListHelper.unmodifiableList(array, DatasetReferenceItem.FACTORY);
 		}
 		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();
@@ -937,7 +934,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets element
 			ArrayObject result = instance.getElementsAtEventForMode(event, InteractionMode.NEAREST.value(), INTERACTION_MODE.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
-				return datasetReferenceItemFactory.create(result.get(0));
+				return DatasetReferenceItem.FACTORY.create(result.get(0));
 			}
 		}
 		// if here, inconsistent result
@@ -960,7 +957,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets elements
 			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.INDEX.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, datasetReferenceItemFactory);
+			return ArrayListHelper.unmodifiableList(array, DatasetReferenceItem.FACTORY);
 		}
 		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();

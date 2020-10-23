@@ -52,7 +52,6 @@ import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
@@ -168,9 +167,6 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	// amount of resize event handlers
 	private int onAxisClickHandlers = 0;
 
-	// factory to transform a native object into a dataset reference item
-	private final DatasetReferenceItemFactory datasetItemFactory = new DatasetReferenceItemFactory();
-
 	/**
 	 * Builds the object storing the chart instance and defaults options.
 	 * 
@@ -205,14 +201,14 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 			// handle click event for dataset
 			handleDatasetSelection(nativeEvent);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReferenceItem.FACTORY)));
 		});
 		// fires the hover hover on the chart
 		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
-			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReferenceItem.FACTORY)));
 		});
 		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
 			// creates a event context

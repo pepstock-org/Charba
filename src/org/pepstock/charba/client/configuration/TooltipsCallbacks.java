@@ -33,7 +33,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -49,8 +48,6 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 
 	// default label color
 	public final TooltipLabelColor defaultLabelColor = new TooltipLabelColor();
-	// factory to create tooltip items
-	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -363,7 +360,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -379,7 +376,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -395,7 +392,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -411,7 +408,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -427,7 +424,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -533,7 +530,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -549,7 +546,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());
@@ -565,7 +562,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory)));
+			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Collections.emptyList());

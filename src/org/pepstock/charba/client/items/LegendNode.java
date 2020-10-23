@@ -24,8 +24,6 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.items.LegendHitBoxItem.LegendHitBoxItemFactory;
-import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
 
 /**
  * Wrapper of legend node of CHART.JS.<br>
@@ -70,11 +68,6 @@ public final class LegendNode extends BaseBoxNodeItem {
 		}
 
 	}
-
-	// factory to create legend items for array container list
-	private final LegendItemFactory legendItemFactory = new LegendItemFactory();
-	// factory to create legend hit box items for array container list
-	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
 
 	/**
 	 * Creates the item using an envelop with the native java script object which contains all properties.
@@ -139,7 +132,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.LEGEND_HIT_BOXES);
 		// returns list
-		return ArrayListHelper.unmodifiableList(array, legendHitBoxItemFactory);
+		return ArrayListHelper.unmodifiableList(array, LegendHitBoxItem.FACTORY);
 	}
 
 	/**
@@ -151,6 +144,6 @@ public final class LegendNode extends BaseBoxNodeItem {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.LEGEND_ITEMS);
 		// returns list
-		return ArrayListHelper.unmodifiableList(array, legendItemFactory);
+		return ArrayListHelper.unmodifiableList(array, LegendItem.FACTORY);
 	}
 }

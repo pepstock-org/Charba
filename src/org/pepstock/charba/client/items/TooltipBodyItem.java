@@ -30,6 +30,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class TooltipBodyItem extends NativeObjectContainer {
+	
+	// static factory to create a tooltip body item from a native object.
+	static final TooltipBodyItemFactory FACTORY = new TooltipBodyItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -114,7 +117,14 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem> {
+	static class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem> {
+		
+		/**
+		 * To avoid any instatiation
+		 */
+		private TooltipBodyItemFactory() {
+			// do nothing
+		}
 
 		/*
 		 * (non-Javadoc)

@@ -37,6 +37,8 @@ public final class GradientColor extends NativeObjectContainer {
 	 * Offset 1 defined as default stop.
 	 */
 	public static final double DEFAULT_OFFSET_STOP = 1D;
+	// factory to creates color by native object
+	static final GradientColorFactory FACTORY = new GradientColorFactory();
 	// default offset is the start one
 	private static final double DEFAULT_OFFSET = DEFAULT_OFFSET_START;
 
@@ -147,7 +149,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class GradientColorFactory implements NativeObjectContainerFactory<GradientColor> {
+	private static class GradientColorFactory implements NativeObjectContainerFactory<GradientColor> {
 
 		/*
 		 * (non-Javadoc)

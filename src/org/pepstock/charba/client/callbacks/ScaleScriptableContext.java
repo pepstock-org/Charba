@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
-import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -36,8 +35,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class ScaleScriptableContext extends AbstractScriptableContext {
-
-	private static final ScaleTickItemFactory FACTORY = new ScaleTickItemFactory();
 
 	private final ScaleItem scale;
 
@@ -84,7 +81,7 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// stores scale and ticks
 		this.scale = new ScaleItem(new CallbacksEnvelop<>(getValue(Property.SCALE), true));
-		this.tick = FACTORY.create(getValue(Property.TICK));
+		this.tick = ScaleTickItem.FACTORY.create(getValue(Property.TICK));
 	}
 
 	/**

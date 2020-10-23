@@ -30,7 +30,7 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
-import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
+import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -76,8 +76,6 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	private final CallbackProxy<ProxyLegendEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
-	// legend item factory
-	static final LegendItemFactory FACTORY = new LegendItemFactory();
 	// sub elements of legend
 	private final LegendLabels labels;
 	private final LegendTitle title;
@@ -105,11 +103,11 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
+		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 		// fires the event
-		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
+		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 		// fires the event
-		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), FACTORY.create(item))));
+		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 	}
 
 	/**

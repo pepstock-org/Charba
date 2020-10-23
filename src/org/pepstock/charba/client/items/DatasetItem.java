@@ -32,6 +32,9 @@ import org.pepstock.charba.client.controllers.ControllersEnvelop;
  * @author Andrea "Stock" Stocchero
  */
 public class DatasetItem extends NativeObjectContainer {
+	
+	// static instance for the dataset item factory
+	static final DatasetItemFactory FACTORY = new DatasetItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -280,7 +283,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
+	private static class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
 
 		/*
 		 * (non-Javadoc)

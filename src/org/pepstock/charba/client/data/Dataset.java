@@ -48,6 +48,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -1304,5 +1305,42 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
+	
+	/**
+	 * Factory to create a data point from a native object, used for array container lists.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class DataPointFactory implements NativeObjectContainerFactory<DataPoint> {
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
+		 */
+		@Override
+		public DataPoint create(NativeObject nativeObject) {
+			return new DataPoint(nativeObject);
+		}
+
+	}
+	
+	/**
+	 * Factory to create a time series item from a native object, used for array container lists.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class TimeSeriesItemFactory implements NativeObjectContainerFactory<TimeSeriesItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
+		 */
+		@Override
+		public TimeSeriesItem create(NativeObject nativeObject) {
+			return new TimeSeriesItem(nativeObject);
+		}
+
+	}
 }

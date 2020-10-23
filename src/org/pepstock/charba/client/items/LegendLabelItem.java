@@ -39,6 +39,11 @@ import org.pepstock.charba.client.enums.PointStyle;
  *
  */
 public final class LegendLabelItem extends LegendItem implements HasLegendText {
+	
+	/**
+	 * Public factory to create a legend labels item from a native object.
+	 */
+	public static final LegendLabelItemFactory FACTORY = new LegendLabelItemFactory();
 
 	private Pattern fillStylePattern = null;
 
@@ -389,8 +394,15 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class LegendLabelItemFactory implements NativeObjectContainerFactory<LegendLabelItem> {
+	public static class LegendLabelItemFactory implements NativeObjectContainerFactory<LegendLabelItem> {
 
+		/**
+		 * To avoid any instatiation
+		 */
+		private LegendLabelItemFactory() {
+			// do nothing
+		}
+		
 		/*
 		 * (non-Javadoc)
 		 * 

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -37,8 +36,6 @@ import org.pepstock.charba.client.resources.ResourcesType;
 final class JsCallbacksHelper {
 	// static instance for singleton
 	private static final JsCallbacksHelper INSTANCE = new JsCallbacksHelper();
-	// factory to create legend item
-	private final LegendLabelItemFactory factory = new LegendLabelItemFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -72,7 +69,7 @@ final class JsCallbacksHelper {
 	 */
 	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
 		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.nativeObject());
-		return ArrayListHelper.unmodifiableList(array, factory);
+		return ArrayListHelper.unmodifiableList(array, LegendLabelItem.FACTORY);
 	}
 
 	/**

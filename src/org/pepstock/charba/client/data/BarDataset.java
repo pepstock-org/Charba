@@ -55,8 +55,11 @@ import org.pepstock.charba.client.options.IsScaleId;
  * @author Andrea "Stock" Stocchero
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder, HasBarDatasetOptions {
+
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
+	// bar border width factory
+	private static final BarBorderWidthFactory BORDER_WIDTH_FACTORY = new BarBorderWidthFactory();
 
 	/**
 	 * Floating bars data factory to create {@link FloatingData}s.
@@ -68,9 +71,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	// ---------------------------
 	// callback proxy to invoke the border skipped function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
-	
-	// bar border width factory
-	private final BarBorderWidthFactory borderWidthFactory = new BarBorderWidthFactory();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -334,7 +334,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if borer width has been set by an object
 		if (ObjectType.OBJECT.equals(type)) {
 			// returns the array
-			return Arrays.asList(borderWidthFactory.create(getValue(Dataset.CommonProperty.BORDER_WIDTH)));
+			return Arrays.asList(BORDER_WIDTH_FACTORY.create(getValue(Dataset.CommonProperty.BORDER_WIDTH)));
 		} else if (ObjectType.NUMBER.equals(type)) { 
 			// checks if borer width has been set by an object
 			// if here, is not a bar border width object
@@ -352,7 +352,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 				// checks if borer width has been set by an array
 				ArrayObject array = getArrayValue(Dataset.CommonProperty.BORDER_WIDTH);
 				// returns the list
-				return ArrayListHelper.list(array, borderWidthFactory);
+				return ArrayListHelper.list(array, BORDER_WIDTH_FACTORY);
 			} else if (BorderWidthType.INTEGERS.equals(borderWidthType)) {
 				// returns the array
 				ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
@@ -670,7 +670,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static final class BarBorderWidthFactory implements NativeObjectContainerFactory<BarBorderWidth> {
+	private static class BarBorderWidthFactory implements NativeObjectContainerFactory<BarBorderWidth> {
 
 		/*
 		 * (non-Javadoc)

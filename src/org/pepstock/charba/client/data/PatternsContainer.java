@@ -28,17 +28,10 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PatternsContainer extends AbstractContainer<Pattern> implements NativeObjectContainerFactory<Pattern> {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
-	 */
-	@Override
-	public Pattern create(NativeObject nativeObject) {
-		return PatternBuilder.build(nativeObject);
-	}
+final class PatternsContainer extends AbstractContainer<Pattern> {
+	
+	// static instance for the patter factory
+	private static final PatternContainerFactory FACTORY = new PatternContainerFactory();
 
 	/*
 	 * (non-Javadoc)
@@ -47,7 +40,26 @@ final class PatternsContainer extends AbstractContainer<Pattern> implements Nati
 	 */
 	@Override
 	NativeObjectContainerFactory<Pattern> getFactory() {
-		return this;
+		return FACTORY;
+	}	
+
+	/**
+	 * Factory to create a pattern objects from a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class PatternContainerFactory implements NativeObjectContainerFactory<Pattern> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
+		 */
+		@Override
+		public Pattern create(NativeObject nativeObject) {
+			return PatternBuilder.build(nativeObject);
+		}
+
 	}
 
 }

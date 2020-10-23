@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.items.DatasetReferenceItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem.DatasetReferenceItemFactory;
 
 import jsinterop.annotations.JsFunction;
 
@@ -75,8 +74,6 @@ public final class Positioner {
 
 	// all custom positioners
 	private final Map<String, TooltipPositioner> positioners = new HashMap<>();
-	// dataset reference items factory
-	private final DatasetReferenceItemFactory factory = new DatasetReferenceItemFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -189,7 +186,7 @@ public final class Positioner {
 				// gets the custom implementation
 				TooltipPositioner positioner = positioners.get(position.value());
 				// list of dataset items
-				List<DatasetReferenceItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
+				List<DatasetReferenceItem> items = ArrayListHelper.unmodifiableList(datasetItems, DatasetReferenceItem.FACTORY);
 				// and invokes it
 				Point result = positioner.computePosition(chart, items, internalPoint);
 				// checks if the result is consistent

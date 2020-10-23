@@ -27,7 +27,6 @@ import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.items.ScaleTickItem;
-import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
 
 import jsinterop.annotations.JsFunction;
 
@@ -71,8 +70,6 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	// ---------------------------
 	// callback proxy to invoke the tick function
 	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// factory of scale tick items
-	private final ScaleTickItemFactory factory = new ScaleTickItemFactory();
 
 	/**
 	 * Builds the object storing the axis instance and options element, based on different kind of axis.
@@ -107,7 +104,7 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	 * @return a list of time tick items
 	 */
 	final List<ScaleTickItem> getTickItems(ArrayObject values) {
-		return ArrayListHelper.unmodifiableList(values, factory);
+		return ArrayListHelper.unmodifiableList(values, ScaleTickItem.FACTORY);
 	}
 
 	/*

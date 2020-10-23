@@ -181,7 +181,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
-				return filterCallback.onFilter(getChart(), Legend.FACTORY.create(item));
+				return filterCallback.onFilter(getChart(), LegendLabelItem.FACTORY.create(item));
 			}
 			return true;
 		});
@@ -189,7 +189,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (itemSortCallback != null) {
 				// calls callback
-				return itemSortCallback.onItemSort(getChart(), Legend.FACTORY.create(item1), Legend.FACTORY.create(item2));
+				return itemSortCallback.onItemSort(getChart(), LegendLabelItem.FACTORY.create(item1), LegendLabelItem.FACTORY.create(item2));
 			}
 			// default is 0 - equals
 			return 0;
