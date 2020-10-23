@@ -289,7 +289,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the base axis for the dataset
 	 */
 	public IndexAxis getIndexAxis() {
-		return getValue(Property.INDEX_AXIS, IndexAxis.values(), IndexAxis.X);
+		return getValue(Property.INDEX_AXIS, IndexAxis.values(), getDefaultValues().getIndexAxis());
 	}
 
 	/**

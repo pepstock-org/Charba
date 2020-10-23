@@ -30,6 +30,7 @@ import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.CLocaleBuilder;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -125,6 +126,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
 		START_ANGLE("startAngle"),
+		INDEX_AXIS("indexAxis"),
 		// internal key to store draw and destroy chart options
 		CHARBA_DRAW_ON_ATTACH("_charbaDrawOnAttach"),
 		CHARBA_DESTROY_ON_DETACH("_charbaDestroyOnDetach");
@@ -654,6 +656,25 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
+	}
+	
+	/**
+	 * Sets the base axis for the dataset. Use {@link IndexAxis#Y} for horizontal bar.
+	 * 
+	 * @param indexAxis the base axis for the dataset
+	 */
+	public void setIndexAxis(IndexAxis indexAxis) {
+		setValue(Property.INDEX_AXIS, indexAxis);
+	}
+
+	/**
+	 * Returns the base axis for the dataset, only for bar options.
+	 * 
+	 * @return the base axis for the dataset, only for bar options
+	 */
+	@Override
+	public IndexAxis getIndexAxis() {
+		return getValue(Property.INDEX_AXIS, IndexAxis.values(), getDefaultValues().getIndexAxis());
 	}
 
 	/*

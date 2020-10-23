@@ -20,11 +20,11 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
- * Specific options for BAR chart. It contains all properties for this kind of chart.
+ * Specific options for HORIZONTAL BAR chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarOptions extends ScalesOptions {
+public class HorizontalBarOptions extends BarOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -32,44 +32,21 @@ public class BarOptions extends ScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
 	 */
-	public BarOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	public HorizontalBarOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
+		// always y being an horizontal dataset
+		super.setIndexAxis(IndexAxis.Y);
 	}
 
-	/**
-	 * Sets the base axis for the dataset. Use {@link IndexAxis#Y} for horizontal bar.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param indexAxis the base axis for the dataset
+	 * @see org.pepstock.charba.client.configuration.BarOptions#setIndexAxis(org.pepstock.charba.client.enums.IndexAxis)
 	 */
+	@Override
 	public void setIndexAxis(IndexAxis indexAxis) {
-		getConfiguration().setIndexAxis(indexAxis);
-	}
-
-	/**
-	 * Returns the base axis for the dataset.
-	 * 
-	 * @return the base axis for the dataset
-	 */
-	public IndexAxis getIndexAxis() {
-		return getConfiguration().getIndexAxis();
-	}
-
-	/**
-	 * If <code>true</code>, null or undefined values will not be drawn.
-	 * 
-	 * @param skipNull if <code>true</code>, null or undefined values will not be drawn
-	 */
-	public void setSkipNull(boolean skipNull) {
-		getConfiguration().setSkipNull(skipNull);
-	}
-
-	/**
-	 * If <code>true</code>, null or undefined values will not be drawn.
-	 * 
-	 * @return If <code>true</code>, null or undefined values will not be drawn
-	 */
-	public boolean isSkipNull() {
-		return getConfiguration().isSkipNull();
+		// always y being an horizontal dataset
+		super.setIndexAxis(IndexAxis.Y);
 	}
 
 }

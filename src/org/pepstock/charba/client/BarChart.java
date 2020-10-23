@@ -43,9 +43,20 @@ public class BarChart extends AbstractChart implements IsDatasetCreator<BarDatas
 	 * @param extendedType type of chart
 	 */
 	protected BarChart(Type extendedType) {
+		this(extendedType, false);
+	}
+	
+	/**
+	 * Builds the chart.<br>
+	 * This is must be extended for controller which are based on this type of chart.
+	 * 
+	 * @param extendedType type of chart
+	 * @param doNotCreateOptions if <code>true</code>, it ignores the creation of the bar options because the extended class will create own options.
+	 */
+	protected BarChart(Type extendedType, boolean doNotCreateOptions) {
 		super(extendedType);
-		// creates the options
-		options = new BarOptions(this, getDefaultChartOptions());
+		// creates the options checking it must create or not
+		this.options = doNotCreateOptions ? null : new BarOptions(this, getDefaultChartOptions());
 	}
 
 	/*

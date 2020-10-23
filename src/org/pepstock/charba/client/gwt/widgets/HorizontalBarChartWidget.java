@@ -17,7 +17,7 @@ package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.HorizontalBarChart;
 import org.pepstock.charba.client.IsDatasetCreator;
-import org.pepstock.charba.client.configuration.BarOptions;
+import org.pepstock.charba.client.configuration.HorizontalBarOptions;
 import org.pepstock.charba.client.data.HorizontalBarDataset;
 
 /**
@@ -53,7 +53,7 @@ public class HorizontalBarChartWidget extends AbstractChartWidget<HorizontalBarC
 	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
-	public BarOptions getOptions() {
+	public HorizontalBarOptions getOptions() {
 		return getChart().getOptions();
 	}
 

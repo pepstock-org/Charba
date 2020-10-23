@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.HorizontalBarOptions;
 import org.pepstock.charba.client.data.HorizontalBarDataset;
 
 /**
@@ -26,6 +27,8 @@ import org.pepstock.charba.client.data.HorizontalBarDataset;
  *
  */
 public class HorizontalBarChart extends BarChart {
+
+	private final HorizontalBarOptions options;
 
 	/**
 	 * Builds the object.
@@ -41,7 +44,19 @@ public class HorizontalBarChart extends BarChart {
 	 * @param extendedType type of chart
 	 */
 	protected HorizontalBarChart(Type extendedType) {
-		super(extendedType);
+		super(extendedType, true);
+		// creates the options
+		this.options = new HorizontalBarOptions(this, getDefaultChartOptions());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.BarChart#getOptions()
+	 */
+	@Override
+	public HorizontalBarOptions getOptions() {
+		return options;
 	}
 
 	/*

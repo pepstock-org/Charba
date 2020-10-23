@@ -275,7 +275,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `width` and `height` options into `ChartAreaNode` class
    * add `onReset` method to `Plugin` interface in order to enable to catch when a chart is resetting.
    * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
-   * add `indexAxis` property to `BarDataset` class in order to manage the horizontal bars.
+   * add `indexAxis` property to `BarDataset` and `BarOptions` classes in order to manage the horizontal bars.
    * add `clip` property to all datasets types.
    * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
    * add `dataPoint` property to `TooltipItem` class.

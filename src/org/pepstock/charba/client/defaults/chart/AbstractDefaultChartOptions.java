@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 
 /**
@@ -200,6 +201,16 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	@Override
 	public final boolean isSkipNull() {
 		return options.isSkipNull();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getIndexAxis()
+	 */
+	@Override
+	public final IndexAxis getIndexAxis() {
+		return options.getIndexAxis();
 	}
 
 }

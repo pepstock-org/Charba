@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 
 /**
@@ -189,6 +190,13 @@ public interface IsDefaultOptions {
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
+	
+	/**
+	 * Returns the base axis for the dataset, only for bar options.
+	 * 
+	 * @return the base axis for the dataset, only for bar options
+	 */
+	IndexAxis getIndexAxis();
 
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
