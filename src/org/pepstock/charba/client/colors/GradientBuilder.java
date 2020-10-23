@@ -38,7 +38,7 @@ import org.pepstock.charba.client.utils.Utilities;
  *
  */
 public final class GradientBuilder {
-	
+
 	// cache for the gradients created in order to build only when needed
 	// K = canvas object id, V = gradient instance
 	private static final Map<String, Gradient> GRADIENT = new HashMap<>();
@@ -50,7 +50,7 @@ public final class GradientBuilder {
 	private final GradientScope scope;
 	// contains the gradient colors
 	private final List<GradientColor> colors = new LinkedList<>();
-	
+
 	/**
 	 * Creates a gradient by a type, an orientation and a scope.
 	 * 
@@ -192,6 +192,58 @@ public final class GradientBuilder {
 		}
 		return this;
 	}
+	
+	/**
+	 * Sets an array of colors to the gradient.
+	 * 
+	 * @param colors colors array to set
+	 * @return gradient builder instance
+	 */
+	public GradientBuilder setColors(IsColor... colors) {
+		// checks if argument is consistent
+		if (colors != null && colors.length > 0) {
+			// checks if array of colors previously loaded is consistent
+			if (colors.length < 2) {
+				// if not, exception
+				throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
+			}
+			// removes all previous colors
+			this.colors.clear();
+			// gets index of last calculated color
+			int lastCalculatedColorIndex = colors.length - 1;
+			// calculates the increment of offset, and then due to 0 and 1 are already assigned
+			// the increment is 1 divided by size of list - 1
+			double offsetIncrement = GradientColor.DEFAULT_OFFSET_STOP / lastCalculatedColorIndex;
+			// amount of offset, starting from 0
+			double offset = 0D;
+			// scans colors from 1 to last calculated index
+			for (int i = 0; i < lastCalculatedColorIndex; i++) {
+				// color at index 0 is color at offset 0
+				addColorStop(offset, colors[i]);
+				// increments offset
+				offset += offsetIncrement;
+			}
+			// adds last color with offset 1
+			addColorStop(GradientColor.DEFAULT_OFFSET_STOP, colors[lastCalculatedColorIndex]);
+		}
+		return this;
+	}
+
+
+	/**
+	 * Sets the list of colors.
+	 * 
+	 * @param colors colors list to set
+	 * @return gradient builder instance
+	 */
+	public GradientBuilder setColors(List<IsColor> colors) {
+		// checks if argument is consistent
+		if (colors != null && !colors.isEmpty()) {
+			// invokes the set colors by array
+			return setColors(colors.toArray(new IsColor[0]));
+		}
+		return this;
+	}
 
 	/**
 	 * Builds and returns a gradient instance.
@@ -220,7 +272,7 @@ public final class GradientBuilder {
 		// returns the instance
 		return result;
 	}
-	
+
 	/**
 	 * Creates a gradient, previously stored into a native java script object.
 	 *
@@ -254,12 +306,11 @@ public final class GradientBuilder {
 			throw new IllegalArgumentException("Native object argument is null");
 		}
 	}
-	
+
 	/**
 	 * Creates an unique id for the canvas object.<br>
 	 * <br>
-	 * <code>[type]-[orientation]-[scope]-[list of colors]</code>
-	 * <br>
+	 * <code>[type]-[orientation]-[scope]-[list of colors]</code> <br>
 	 * 
 	 * @return an unique id for the canvas object
 	 */

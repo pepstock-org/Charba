@@ -16,14 +16,7 @@
 package org.pepstock.charba.client.impl.plugins.enums;
 
 import java.util.Arrays;
-import java.util.List;
 
-import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.GradientBuilder;
-import org.pepstock.charba.client.colors.GradientColor;
-import org.pepstock.charba.client.colors.GradientOrientation;
-import org.pepstock.charba.client.colors.GradientScope;
-import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.impl.plugins.ColorScheme;
@@ -275,85 +268,6 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 	@Override
 	public ColorScheme getScheme() {
 		return scheme;
-	}
-
-	/**
-	 * Creates a LINEAR gradient, with <code>topDown</code> orientation and <code>chart</code> scope.
-	 * 
-	 * @return new gradient based on color scheme
-	 */
-	public Gradient createGradient() {
-		return createGradient(GradientType.LINEAR);
-	}
-
-	/**
-	 * Creates a gradient by a type, with <code>chart</code> scope.
-	 * 
-	 * @param type gradient type
-	 * @return new gradient based on color scheme
-	 */
-	public Gradient createGradient(GradientType type) {
-		return createGradient(type, GradientOrientation.getDefaultByType(type));
-	}
-
-	/**
-	 * Creates a gradient by a type and an orientation, with <code>chart</code> scope.
-	 * 
-	 * @param type gradient type
-	 * @param orientation orientation of gradient
-	 * @return new gradient based on color scheme
-	 */
-	public Gradient createGradient(GradientType type, GradientOrientation orientation) {
-		return createGradient(type, orientation, GradientScope.CHART);
-	}
-
-	/**
-	 * Creates a gradient by a type and a scope.
-	 * 
-	 * @param type gradient type
-	 * @param scope scope of gradient
-	 * @return new gradient based on color scheme
-	 */
-	public Gradient createGradient(GradientType type, GradientScope scope) {
-		return createGradient(type, GradientOrientation.getDefaultByType(type), scope);
-	}
-
-	/**
-	 * Creates a gradient by a type, an orientation and a scope.
-	 * 
-	 * @param type gradient type
-	 * @param orientation orientation of gradient
-	 * @param scope scope of gradient
-	 * @return new gradient based on color scheme
-	 */
-	public Gradient createGradient(GradientType type, GradientOrientation orientation, GradientScope scope) {
-		// gets the list of colors
-		List<IsColor> colors = scheme.getColors();
-		// checks if array of colors previously loaded is consistent
-		if (colors.size() < 2) {
-			// if not, exception
-			throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
-		}
-		// creates a gradient builder
-		GradientBuilder builder = GradientBuilder.create(type, orientation, scope);
-		// gets index of last calculated color
-		int lastCalculatedColorIndex = colors.size() - 1;
-		// calculates the increment of offset, and then due to 0 and 1 are already assigned
-		// the increment is 1 divided by size of list - 1
-		double offsetIncrement = GradientColor.DEFAULT_OFFSET_STOP / lastCalculatedColorIndex;
-		// amount of offset, starting from 0
-		double offset = 0D;
-		// scans colors from 1 to last calculated index
-		for (int i = 0; i < lastCalculatedColorIndex; i++) {
-			// color at index 0 is color at offset 0
-			builder.addColorStop(offset, colors.get(i));
-			// increments offset
-			offset += offsetIncrement;
-		}
-		// adds last color with offset 1
-		builder.addColorStop(GradientColor.DEFAULT_OFFSET_STOP, colors.get(lastCalculatedColorIndex));
-		// creates a gradient and returns it
-		return builder.build();
 	}
 
 }
