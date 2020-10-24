@@ -39,6 +39,9 @@ public final class Injector {
 
 	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
+	// chart set of injected script elements
+	private static final String SCRIPT_ELEMENT_CHARTSET = "UTF-8";
+	
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
 
@@ -58,6 +61,8 @@ public final class Injector {
 		if (resource != null) {
 			// creates a script element
 			Script scriptElement = DOMBuilder.get().createScriptElement();
+			// sets chart set
+			scriptElement.setCharset(SCRIPT_ELEMENT_CHARTSET);
 			// injects it into SCRIPT element
 			ensureInjected(resource, scriptElement);
 		}
