@@ -26,7 +26,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LuxonDeferredResources extends AbstractDeferredResources {
+public class LuxonDeferredResources extends AbstractDeferredResources {
 
 	/**
 	 * Client bundle to reference LUXON as date time library.<br>
@@ -69,7 +69,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 	/**
 	 * To avoid any instantiation
 	 */
-	private LuxonDeferredResources() {
+	LuxonDeferredResources() {
 		super(LuxonModule.get());
 	}
 
@@ -79,7 +79,7 @@ public final class LuxonDeferredResources extends AbstractDeferredResources {
 	 * @see org.pepstock.charba.client.gwt.AbstractDeferredResources#getDeferredAdapterResources()
 	 */
 	@Override
-	protected DeferredDateAdapterResources getDeferredAdapterResources() {
+	protected final DeferredDateAdapterResources getDeferredAdapterResources() {
 		return LuxonDeferredResourcesClientBundle.INSTANCE;
 	}
 

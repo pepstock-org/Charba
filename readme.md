@@ -351,6 +351,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * implement `CLocale` class to manage locale objects.
    * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.
    * add `LocaleHelper` utility class into `gwt` package in order to get a **Charba** locale `CLocale` instance from a GWT `LocaleInfo`.
+ * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.  
   
 ### Development
 

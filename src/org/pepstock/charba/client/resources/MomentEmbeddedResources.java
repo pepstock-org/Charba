@@ -15,29 +15,29 @@
 */
 package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.adapters.LuxonModule;
+import org.pepstock.charba.client.adapters.MomentModule;
 
 /**
- * Java script resources container to reference LUXON as date time library (synchronous mode).
+ * Java script resources container to reference MOMENT as date time library (synchronous mode).
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LuxonEmbeddedResources extends AbstractEmbeddedResources {
+public final class MomentEmbeddedResources extends AbstractEmbeddedResources {
 
 	/**
-	 * Static reference to LUXON resources.
+	 * Static reference to MOMENT resources.
 	 */
-	public static final LuxonEmbeddedResources INSTANCE = new LuxonEmbeddedResources();
+	public static final MomentEmbeddedResources INSTANCE = new MomentEmbeddedResources();
 	// date adapter java script wrapper
-	private final LuxonAdapterResource dateAdapter = new LuxonAdapterResource();
+	private final MomentAdapterResource dateAdapter = new MomentAdapterResource();
 	// date library java script wrapper
-	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
+	private final MomentLibraryResource dateLibrary = new MomentLibraryResource();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	LuxonEmbeddedResources() {
-		super(LuxonModule.get());
+	private MomentEmbeddedResources() {
+		super(MomentModule.get());
 	}
 
 	/*
@@ -46,7 +46,7 @@ public class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeLibrary()
 	 */
 	@Override
-	public final AbstractInjectableResource datetimeLibrary() {
+	public AbstractInjectableResource datetimeLibrary() {
 		return dateLibrary;
 	}
 
@@ -56,7 +56,7 @@ public class LuxonEmbeddedResources extends AbstractEmbeddedResources {
 	 * @see org.pepstock.charba.client.resources.DateAdpaterResources#datetimeAdapter()
 	 */
 	@Override
-	public final AbstractInjectableResource datetimeAdapter() {
+	public AbstractInjectableResource datetimeAdapter() {
 		return dateAdapter;
 	}
 

@@ -17,6 +17,9 @@ package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.CLocaleBuilder;
+import org.pepstock.charba.client.intl.enums.NumberingSystem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -25,6 +28,12 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class LuxonOptions extends DateAdapterOptions {
+
+	/**
+	 * Date adapter options factory for LUXON option.<br>
+	 * It should be use to get stored LUXON options from global, chart options and configurations.
+	 */
+	public static final LuxonOptionsFactory FACTORY = new LuxonOptionsFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -97,33 +106,13 @@ public final class LuxonOptions extends DateAdapterOptions {
 	}
 
 	/**
-	 * Sets if LUXON should apply the zone as fixed-offset one.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/zones.html">here</a> the details about time zone in LUXON.
-	 * 
-	 * @param zone if LUXON should apply the zone as fixed-offset one
-	 */
-	public void setZone(boolean zone) {
-		setValue(Property.SET_ZONE, zone);
-	}
-
-	/**
-	 * Returns if LUXON should apply the zone as fixed-offset one.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/zones.html">here</a> the details about time zone in LUXON.
-	 * 
-	 * @return if LUXON should apply the zone as fixed-offset one
-	 */
-	public boolean isZone() {
-		return getValue(Property.SET_ZONE, false);
-	}
-
-	/**
 	 * Sets the locale that LUXON must use by the date adapter.<br>
 	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
 	 * 
 	 * @param locale the time zone that LUXON must use by the date adapter
 	 */
-	public void setLocale(String locale) {
-		setValue(Property.LOCALE, locale);
+	public void setLocale(CLocale locale) {
+		setValue(Property.LOCALE, locale == null ? null : locale.getIdentifier());
 	}
 
 	/**
@@ -132,8 +121,12 @@ public final class LuxonOptions extends DateAdapterOptions {
 	 * 
 	 * @return the locale that LUXON must use by the date adapter
 	 */
-	public String getLocale() {
-		return getValue(Property.LOCALE, UndefinedValues.STRING);
+	public CLocale getLocale() {
+		// gets the value stored as string
+		// FIXME serve il default
+		String value = getValue(Property.LOCALE, UndefinedValues.STRING);
+		// checks if consistent
+		return CLocaleBuilder.build(value);
 	}
 
 	/**
@@ -162,7 +155,7 @@ public final class LuxonOptions extends DateAdapterOptions {
 	 * 
 	 * @param numberingSystem the name of numbering systems that LUXON must use by the date adapter
 	 */
-	public void setNumberingSystem(String numberingSystem) {
+	public void setNumberingSystem(NumberingSystem numberingSystem) {
 		setValue(Property.NUMBERING_SYSTEM, numberingSystem);
 	}
 
@@ -172,7 +165,35 @@ public final class LuxonOptions extends DateAdapterOptions {
 	 * 
 	 * @return the name of numbering systems that LUXON must use by the date adapter
 	 */
-	public String getNumberingSystem() {
-		return getValue(Property.NUMBERING_SYSTEM, UndefinedValues.STRING);
+	public NumberingSystem getNumberingSystem() {
+		// FIXME serve il default
+		return getValue(Property.NUMBERING_SYSTEM, NumberingSystem.values(), NumberingSystem.LATN);
+	}
+
+	/**
+	 * Date adapter options factory for LUXON option.<br>
+	 * It should be use to get stored LUXON options from global, chart options and configurations.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	public static class LuxonOptionsFactory implements DateAdaptersOptionsFactory<LuxonOptions> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private LuxonOptionsFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public LuxonOptions create(NativeObject nativeObject) {
+			return new LuxonOptions(nativeObject);
+		}
+
 	}
 }

@@ -15,54 +15,16 @@
 */
 package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.adapters.MomentModule;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ExternalTextResource;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * Client bundle to reference MOMENT as date time library (asynchronous mode).
+ * Client bundle to reference LUXON as date time library (asynchronous mode).
+ * The same of {@link LuxonDeferredResources}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DeferredResources extends AbstractDeferredResources {
+public final class DeferredResources extends LuxonDeferredResources {
 
 	/**
-	 * Client bundle to reference MOMENT as date time library.<br>
-	 * It defines the MOMENT date time library and its CHART.JS adapter (always loaded in synchronous mode).
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	interface DeferredResourcesClientBundle extends DeferredDateAdapterResources {
-
-		/**
-		 * Static reference to resources java script source code.
-		 */
-		static final DeferredResourcesClientBundle INSTANCE = GWT.create(DeferredResourcesClientBundle.class);
-
-		/**
-		 * Contains text representation of date-time MOMENT java script library code.
-		 * 
-		 * @return date-time MOMENT java script library code in asynchronous mode
-		 */
-		@Override
-		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "moment.min.js")
-		ExternalTextResource datetimeLibrary();
-
-		/**
-		 * Contains text representation of CHART.JS adapter code form MOMENT.
-		 * 
-		 * @return chart.js date adapter code for MOMENT in synchronous mode
-		 */
-		@Override
-		@Source(AbstractDeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-moment.min.js")
-		TextResource datetimeAdapter();
-
-	}
-
-	/**
-	 * Static reference to MOMENT resources.
+	 * Static reference to LUXON resources.
 	 */
 	public static final DeferredResources INSTANCE = new DeferredResources();
 
@@ -70,17 +32,8 @@ public final class DeferredResources extends AbstractDeferredResources {
 	 * To avoid any instantiation
 	 */
 	private DeferredResources() {
-		super(MomentModule.get());
+		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.gwt.AbstractDeferredResources#getDeferredAdapterResources()
-	 */
-	@Override
-	protected DeferredDateAdapterResources getDeferredAdapterResources() {
-		return DeferredResourcesClientBundle.INSTANCE;
-	}
 
 }
