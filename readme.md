@@ -246,7 +246,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * reduces the visibility of `Gradient` and `Pattern` class constructors in order to use new `GradientBuilder` and `PatternBuilder` classes. This change avoids inconsistent gradient and pattern objects, improving some capabilities of them (like the `equals` and `hashCode` methods in case they will be needed).
    * adds `setColors` methods (getting a list or an array of `IsColor`) to `GradientBuilder` in order to enable the gradient creation to the `ColorScheme` instances. 
  * rename `ValueCallback` into `MeterFormatCallback` class.
-   * rename `setValueCallback` and `getValueCallback` of `MeterOptions` class into `setFormatCallback` and `getFormatCallback`. 
+   * rename `setValueCallback` and `getValueCallback` of `MeterOptions` class into `setFormatCallback` and `getFormatCallback`.
+ * change the type for some properties of LuxonOptions class:
+   * `locale` is now a `CLocale` object instead of a string.
+   * `numberingSystem` is now a `NumberingSystem` object instead of a string.
   
 ### Features
 
