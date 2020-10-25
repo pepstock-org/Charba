@@ -15,16 +15,15 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.adapters.DateAdapterOptions;
-import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
+import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 
 /**
  * CHART.JS default values for ADPATERS element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultAdapters implements IsDefaultAdapters {
+public final class DefaultAdapters implements IsDefaultAdapters {
 
 	/**
 	 * To avoid any instantiation
@@ -36,17 +35,11 @@ public class DefaultAdapters implements IsDefaultAdapters {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate(org.pepstock.charba.client.adapters. DateAdaptersOptionsFactory)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate()
 	 */
 	@Override
-	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// creates a empty options
-			return factory.create();
-		}
-		// if here factory is not consistent
-		return null;
+	public IsDefaultDateAdapterOptions getDate() {
+		return DefaultDateAdapterOptions.INSTANCE;
 	}
 
 }

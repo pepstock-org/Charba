@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.adapters.DateAdapterOptions;
-import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
+import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.options.Adapters;
 
 /**
@@ -27,25 +26,26 @@ import org.pepstock.charba.client.options.Adapters;
  */
 public final class DefaultChartAdapters implements IsDefaultAdapters {
 
-	private final Adapters adapters;
+	private final DefaultChartDateAdapterOptions dateAdapterOptions;
 
 	/**
-	 * Creates the object by time option element instance.
+	 * Creates the object by adapter option element instance.
 	 * 
 	 * @param adapters adapters option element instance.
 	 */
 	DefaultChartAdapters(Adapters adapters) {
-		this.adapters = adapters;
+		// gets and stores the date adapter options
+		this.dateAdapterOptions = new DefaultChartDateAdapterOptions(adapters.getDate());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate(org.pepstock.charba.client.adapters. DateAdaptersOptionsFactory)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAdapters#getDate()
 	 */
 	@Override
-	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
-		return adapters.getDate(factory);
+	public IsDefaultDateAdapterOptions getDate() {
+		return dateAdapterOptions;
 	}
 
 }

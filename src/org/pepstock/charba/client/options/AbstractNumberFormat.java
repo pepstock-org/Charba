@@ -34,7 +34,7 @@ import org.pepstock.charba.client.intl.enums.SignDisplay;
 import org.pepstock.charba.client.intl.enums.Style;
 
 /**
- * This is abstract numebr format object element of the chart options.<br>
+ * This is abstract number format object element of the chart options.<br>
  * 
  * @author Andrea "Stock" Stocchero
  * @see NumberFormatOptions

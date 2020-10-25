@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DefaultsFormatsOverrider extends NativeObjectContainer {
+final class DefaultsFormatsOverrider extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -37,6 +37,26 @@ public final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	DefaultsFormatsOverrider(NativeObject nativeObject) {
 		super(nativeObject);
 	}
+	
+	/**
+	 * Invokes after the initialization of date adapter in order to override default formats if needed.
+	 * 
+	 * @param overrider native object wrapper of default formats of adapater
+	 */
+	void override() {
+		// invokes to override default
+		// sets all default values
+		setFormat(DateAdapterFormats.Property.DATETIME, "MMM d, yyyy, h:mm:ss a");
+		setFormat(TimeUnit.MILLISECOND, "h:mm:ss.SSS a");
+		setFormat(TimeUnit.SECOND, "h:mm:ss a");
+		setFormat(TimeUnit.MINUTE, "h:mm a");
+		setFormat(TimeUnit.HOUR, "ha");
+		setFormat(TimeUnit.DAY, "MMM d");
+		setFormat(TimeUnit.WEEK, "W yyyy");
+		setFormat(TimeUnit.MONTH, "MMM yyyy");
+		setFormat(TimeUnit.QUARTER, "'Q'q - yyyy");
+		setFormat(TimeUnit.YEAR, "yyyy");
+	}
 
 	/**
 	 * Sets the format by {@link TimeUnit}, overriding what is provided by adapter.
@@ -44,7 +64,7 @@ public final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	 * @param unit time unit to use to set the default
 	 * @param format the format to set
 	 */
-	public void setFormat(Key unit, String format) {
+	void setFormat(Key unit, String format) {
 		// check if time unit is consistent and there is into the object
 		if (Key.isValid(unit) && format != null) {
 			setValue(unit, format);

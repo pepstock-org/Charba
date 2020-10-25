@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.adapters.DateAdapterOptions;
-import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 
 /**
- * The following adapters element is used to configure a date adapter, injecting to support time series into CAHRT.JS.
+ * The following adapters element is used to configure a date adapter, injecting to support time series into CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -59,58 +57,32 @@ public final class Adapters extends AbstractModel<AbstractScale, IsDefaultAdapte
 
 	}
 
+	private final ScaleDateAdapter dateOptions;
+
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
 	 * This element does not have any default values.
 	 * 
-	 * @param time scale element as parent of this node.
+	 * @param scale scale element as parent of this node.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Adapters(AbstractScale time, Key childKey, IsDefaultAdapters defaultValues, NativeObject nativeObject) {
+	Adapters(AbstractScale scale, Key childKey, IsDefaultAdapters defaultValues, NativeObject nativeObject) {
 		// no default values
-		super(time, childKey, defaultValues, nativeObject);
+		super(scale, childKey, defaultValues, nativeObject);
+		// gets and stores the options
+		this.dateOptions = new ScaleDateAdapter(this, Property.DATE, getDefaultValues().getDate(), getValue(Property.DATE));
 	}
 
 	/**
-	 * Sets the date adapters options.
+	 * Returns the date adapter options.
 	 * 
-	 * @param options date adapters options used to configure the adapter
-	 * @param <T> type of date adapters options to store
-	 */
-	public <T extends DateAdapterOptions> void setDate(T options) {
-		// stores configuration
-		setValue(Property.DATE, options);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the date adapter options, if exist.<br>
-	 * It uses a factory instance to create a date adapter options.<br>
-	 * If factory argument is not consistent, <code>null</code> is returned.
-	 * 
-	 * @param factory factory instance to create a date adapter options
-	 * @param <T> type of date adapter options to return
-	 * @return date adapter options used to configure the date adapter or an empty object if not exist.<br>
-	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 * @return date adapter options used to configure the date adapter
 	 */
 	@Override
-	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// checks if there is any date adapter options
-			if (has(Property.DATE)) {
-				// creates and returns the object
-				return factory.create(getValue(Property.DATE));
-			} else {
-				// goes to default value to get the value
-				return getDefaultValues().getDate(factory);
-			}
-		}
-		// if here factory is not consistent
-		return null;
+	public ScaleDateAdapter getDate() {
+		return dateOptions;
 	}
 
 }

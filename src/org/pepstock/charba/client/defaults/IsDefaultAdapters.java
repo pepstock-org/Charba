@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.adapters.DateAdapterOptions;
-import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
-
 /**
  * Interface to define adapter options defaults.
  * 
@@ -26,14 +23,9 @@ import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
 public interface IsDefaultAdapters {
 
 	/**
-	 * Returns the date adapter options, if exist.<br>
-	 * It uses a factory instance to create a date adapter options.<br>
-	 * If factory argument is not consistent, <code>null</code> is returned.
+	 * Returns the date adapter options.
 	 * 
-	 * @param factory factory instance to create a date adapter options
-	 * @param <T> type of date adapter options to return
-	 * @return date adapter options used to configure the date adapter or an empty object if not exist.<br>
-	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 * @return date adapter options used to configure the date adapter
 	 */
-	<T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory);
+	IsDefaultDateAdapterOptions getDate();
 }

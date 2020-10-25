@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.adapters.AbstractModule;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
@@ -52,16 +51,9 @@ public final class ResourcesType {
 		// checks if is extending a correct abstract resource
 		if (resources instanceof IsResourceType) {
 			// checks if the resources type is already set and is different from the argument
-			if (ResourcesType.resources != null) {
-				if (!resources.getClass().equals(ResourcesType.resources.getClass())) {
-					// exception
-					throw new IllegalArgumentException("Resources type is already set and can not be changed");
-				}
-				// checks if the resources type is already set and is different from the argument
-				if (!ResourcesType.resources.getModule().equals(resources.getModule())) {
-					// exception
-					throw new IllegalArgumentException("Resources type is already set the module '" + ResourcesType.resources.getModule().getId() + "' and can not be changed");
-				}
+			if (ResourcesType.resources != null && !resources.getClass().equals(ResourcesType.resources.getClass())) {
+				// exception
+				throw new IllegalArgumentException("Resources type is already set and can not be changed");
 			}
 			// stores the instance
 			ResourcesType.resources = resources;
@@ -91,22 +83,4 @@ public final class ResourcesType {
 		return ResourcesType.resources;
 	}
 
-	/**
-	 * Returns <code>true</code> if the date adapter module is the same of the injected one.
-	 * 
-	 * @param module the date adapter module to check
-	 * @return <code>true</code> if the module is the same of the injected one
-	 */
-	public static boolean equalsTo(AbstractModule module) {
-		return getClientBundle().getModule().equals(module);
-	}
-
-	/**
-	 * Returns the date adapter module id.
-	 * 
-	 * @return the date adapter module id
-	 */
-	public static String getModuleId() {
-		return getClientBundle().getModule().getId();
-	}
 }

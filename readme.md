@@ -250,6 +250,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the type for some properties of LuxonOptions class:
    * `locale` is now a `CLocale` object instead of a string.
    * `numberingSystem` is now a `NumberingSystem` object instead of a string.
+ * remove the usage of `Moment` as date library because it does not use the web internationalization.
+ * remove the usage of `Date-fns` as date library because it does not use the web internationalization.
   
 ### Features
 

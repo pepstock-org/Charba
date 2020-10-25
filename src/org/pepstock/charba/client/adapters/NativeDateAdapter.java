@@ -19,7 +19,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.resources.ResourcesType;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -126,12 +125,12 @@ final class NativeDateAdapter {
 		// checks if undefined
 		if (isUndefined(DateAdapter.ID_PROPERTY)) {
 			// if yes, returns the ID got form injected resources
-			return ResourcesType.getModuleId();
+			return DateAdapterModule.ID;
 		}
 		// gets the id from native object
 		String id = internalId();
 		// returns the value of object check if consistent
-		return id != null ? id : ResourcesType.getModuleId();
+		return id != null ? id : DateAdapterModule.ID;
 	}
 
 	/**

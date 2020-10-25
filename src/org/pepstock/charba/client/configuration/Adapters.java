@@ -15,15 +15,14 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.adapters.DateAdapterOptions;
-import org.pepstock.charba.client.adapters.DateAdaptersOptionsFactory;
-
 /**
  * The following adapters element is used to configure a date adapter, injecting to support time series into CAHRT.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class Adapters extends AxisContainer {
+	
+	private final ScaleDateAdapter dateAdapterOptions;
 
 	/**
 	 * Builds the object storing the axis which this adapters belongs to.
@@ -32,30 +31,17 @@ public final class Adapters extends AxisContainer {
 	 */
 	Adapters(Axis axis) {
 		super(axis);
+		// creates the date adapter options object
+		this.dateAdapterOptions = new ScaleDateAdapter(axis);
 	}
 
 	/**
-	 * Sets the date adapters options.
+	 * Returns the date adapter options.
 	 * 
-	 * @param options date adapters options used to configure the adapter
-	 * @param <T> type of date adapters options to store
+	 * @return date adapter options used to configure the date adapter
 	 */
-	public <T extends DateAdapterOptions> void setDate(T options) {
-		getAxis().getScale().getAdapters().setDate(options);
-	}
-
-	/**
-	 * Returns the date adapter options, if exist.<br>
-	 * It uses a factory instance to create a date adapter options.<br>
-	 * If factory argument is not consistent, <code>null</code> is returned.
-	 * 
-	 * @param factory factory instance to create a date adapter options
-	 * @param <T> type of date adapter options to return
-	 * @return date adapter options used to configure the date adapter or an empty object if not exist.<br>
-	 *         If factory argument is not consistent, <code>null</code> is returned.
-	 */
-	public <T extends DateAdapterOptions> T getDate(DateAdaptersOptionsFactory<T> factory) {
-		return getAxis().getScale().getAdapters().getDate(factory);
+	public ScaleDateAdapter getDate() {
+		return dateAdapterOptions;
 	}
 
 }

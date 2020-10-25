@@ -17,6 +17,7 @@ package org.pepstock.charba.client.adapters;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -53,14 +54,18 @@ public final class DateAdapter {
 	}
 
 	/**
-	 * Creates a date adapter using the options passed as argument.<br>
-	 * At the moment ONLY LUXON is enabled to using options to act on dates actions.
+	 * Creates a date adapter using the options passed as argument.
 	 * 
 	 * @param options date adapter options
 	 */
 	public DateAdapter(DateAdapterOptions options) {
 		// checks if argument is consistent
 		this.options = options != null ? options : new DateAdapterOptions();
+		// checks if options has got the locale
+		if (!this.options.hasLocale()) {
+			// if not, it sets the locale from defaults
+			this.options.setLocale(Defaults.get().getGlobal().getLocale());
+		}
 		// creates a native date adapter
 		this.nativeAdapter = JsDateAdapterHelper.get().create(this.options);
 		// stores the ID
@@ -102,26 +107,6 @@ public final class DateAdapter {
 	 */
 	public DateAdapterOptions getOptions() {
 		return options;
-	}
-
-	/**
-	 * Returns the options used to configure the date adapter, using a factory to have the same object.<br>
-	 * If the factory instance is <code>null</code>, returns <code>null</code>.
-	 * 
-	 * @param factory factory instance to create date adapter options
-	 * @param <T> type of date adapter options
-	 * @return the options used to configure the date adapter, using a factory
-	 */
-	public <T extends DateAdapterOptions> T getOptions(DateAdaptersOptionsFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// invokes the factory to wrap the native object
-			// which are representing the option
-			return factory.create(options.nativeObject());
-		}
-		// if here, the factory is not consistent
-		// then return null.
-		return null;
 	}
 
 	/**

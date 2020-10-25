@@ -15,42 +15,18 @@
 */
 package org.pepstock.charba.client.resources;
 
-import org.pepstock.charba.client.adapters.AbstractModule;
-
 /**
- * Base class to extend in order to have java script injection, needed to CHARBA, where CHART.JS and date library.<br>
- * Every instance must have a module related to date adapter and library.
+ * Base class to extend in order to have java script injection, needed to CHARBA, where CHART.JS and date library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class AbstractResources {
 
-	// date adapter library module instance
-	private final AbstractModule module;
-
 	/**
-	 * Creates a resource object by passed module, which represents the date adapter and library, as argument.
-	 * 
-	 * @param module module of date adapter and library.
+	 * Creates a resource object which represents the date adapter and library.
 	 */
-	AbstractResources(AbstractModule module) {
-		// checks if module is consistent
-		if (module == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Module is null");
-		}
-		// stores module
-		this.module = module;
-	}
-
-	/**
-	 * Returns the date adapter module.
-	 * 
-	 * @return the date adapter module
-	 */
-	public final AbstractModule getModule() {
-		return module;
+	AbstractResources() {
 	}
 
 	/**
