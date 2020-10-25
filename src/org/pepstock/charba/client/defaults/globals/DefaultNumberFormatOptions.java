@@ -36,6 +36,9 @@ import org.pepstock.charba.client.intl.enums.Style;
  */
 public final class DefaultNumberFormatOptions extends DefaultBaseFormatOptions implements IsDefaultNumberFormatOptions {
 
+	/**
+	 * Immutable instance with the number format defaults.
+	 */
 	public static final IsDefaultNumberFormatOptions INSTANCE = new DefaultNumberFormatOptions();
 
 	private static final boolean DEFAULT_USE_GROUPING = true;

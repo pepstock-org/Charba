@@ -24,7 +24,7 @@ import org.pepstock.charba.client.adapters.DateAdapterModule;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EmbeddedResources extends AbstractResources implements IsResourceType {
+public final class EmbeddedResources implements ResourcesContainer, IsResourceType {
 
 	/**
 	 * Static reference to LUXON resources.

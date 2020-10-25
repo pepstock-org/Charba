@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 public final class ResourcesType {
 
 	// static instance of resources to be loaded
-	private static AbstractResources resources = null;
+	private static ResourcesContainer resources = null;
 
 	/**
 	 * To avoid any instantiation
@@ -42,7 +42,7 @@ public final class ResourcesType {
 	 * 
 	 * @param resources the resources type to use to inject java script code
 	 */
-	public static void setClientBundle(AbstractResources resources) {
+	public static void setClientBundle(ResourcesContainer resources) {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
@@ -63,7 +63,7 @@ public final class ResourcesType {
 			JsHelper.get();
 		} else {
 			// exception
-			throw new IllegalArgumentException("Resources type is not correct. Must extend AbstractEmbeddedResources or AbstractDeferredResources classes");
+			throw new IllegalArgumentException("Resources type is not correct. Must be an EmbeddedResources or DeferredResources instance");
 		}
 	}
 
@@ -73,7 +73,7 @@ public final class ResourcesType {
 	 * 
 	 * @return the resources type to use to inject java script code
 	 */
-	public static AbstractResources getClientBundle() {
+	public static ResourcesContainer getClientBundle() {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception

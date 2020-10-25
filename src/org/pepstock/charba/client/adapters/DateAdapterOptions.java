@@ -121,13 +121,12 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 		// gets the value stored as string
 		String value = getValue(Property.LOCALE, defaultLocale == null ? UndefinedValues.STRING : defaultLocale.getIdentifier());
 		// checks if value is consistent
-		if (value != null) {
-			// if default is null or 
-			// the identifier is not equals to value
-			if (defaultLocale == null || !defaultLocale.getIdentifier().equalsIgnoreCase(value)) {
-				// creates the locale
-				return CLocaleBuilder.build(value);
-			}
+		// if default is null or 
+		// the identifier is not equals to value
+		if (value != null && (defaultLocale == null || !defaultLocale.getIdentifier().equalsIgnoreCase(value))) {
+			// creates the locale
+			return CLocaleBuilder.build(value);
+
 		}
 		// if here, returns the default value
 		// which can be null as well

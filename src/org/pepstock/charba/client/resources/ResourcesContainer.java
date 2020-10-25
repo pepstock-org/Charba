@@ -16,22 +16,16 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Base class to extend in order to have java script injection, needed to CHARBA, where CHART.JS and date library.
+ * Maps the mandatory methods of classes to have java script injection, needed to CHARBA, where CHART.JS and date library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractResources {
-
-	/**
-	 * Creates a resource object which represents the date adapter and library.
-	 */
-	AbstractResources() {
-	}
+public interface ResourcesContainer {
 
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
 	 */
-	public abstract void inject();
+	void inject();
 
 }

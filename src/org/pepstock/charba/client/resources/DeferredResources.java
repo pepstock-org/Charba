@@ -28,7 +28,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DeferredResources extends AbstractResources implements IsResourceType {
+public final class DeferredResources implements ResourcesContainer, IsResourceType {
 
 	/**
 	 * Static reference to LUXON resources.

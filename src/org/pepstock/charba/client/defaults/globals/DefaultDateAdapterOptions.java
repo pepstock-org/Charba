@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
@@ -26,10 +27,10 @@ import org.pepstock.charba.client.intl.enums.NumberingSystem;
  */
 public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOptions {
 	
+	/**
+	 * Immutable instance with the date adapter options defaults.
+	 */
 	public static final IsDefaultDateAdapterOptions INSTANCE = new DefaultDateAdapterOptions();
-
-	// FIXME
-	private static final CLocale DEFAULT_LOCALE = null;
 
 	private static final String DEFAULT_ZONE = null;
 
@@ -51,7 +52,7 @@ public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOpti
 	 */
 	@Override
 	public CLocale getLocale() {
-		return DEFAULT_LOCALE;
+		return Defaults.get().getGlobal().getLocale();
 	}
 
 	/*
