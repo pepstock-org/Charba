@@ -40,8 +40,6 @@ final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	
 	/**
 	 * Invokes after the initialization of date adapter in order to override default formats if needed.
-	 * 
-	 * @param overrider native object wrapper of default formats of adapater
 	 */
 	void override() {
 		// invokes to override default
