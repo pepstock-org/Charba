@@ -40,9 +40,9 @@ public final class ScaleDateAdapter extends AxisContainer {
 	}
 	
 	/**
-	 * Creates a {@link DateAdapter} using the options of this object.
+	 * Creates a {@link DateAdapter} using a clone of this object as options for the date adapter instance.
 	 * 
-	 * @return a {@link DateAdapter} using the options of this object
+	 * @return a {@link DateAdapter} using a clone of this object as options for the date adapter instance
 	 */
 	public DateAdapter create() {
 		return getAxis().getScale().getAdapters().getDate().create();

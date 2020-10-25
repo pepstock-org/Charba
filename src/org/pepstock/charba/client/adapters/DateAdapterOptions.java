@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.adapters;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -202,6 +203,18 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	 */
 	public NumberingSystem getNumberingSystem() {
 		return getValue(Property.NUMBERING_SYSTEM, NumberingSystem.values(), defaultValues.getNumberingSystem());
+	}
+	
+	/**
+	 * Creates a {@link DateAdapter} using a clone of this object as options for the date adapter instance.
+	 * 
+	 * @return a {@link DateAdapter} using a clone of this object as options for the date adapter instance
+	 */
+	public DateAdapter create() {
+		// clones the current native object
+		NativeObject clone = Helpers.get().clone(getNativeObject());
+		// creates a date adapter with new options with clone object
+		return new DateAdapter(new DateAdapterOptions(clone, defaultValues));
 	}
 
 	/**
