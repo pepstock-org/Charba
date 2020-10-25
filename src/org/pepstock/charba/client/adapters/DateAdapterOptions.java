@@ -24,7 +24,9 @@ import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultDateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.CLocaleBuilder;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -148,7 +150,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	 * 
 	 * @param zone the zone that LUXON must use by the date adapter
 	 */
-	public void setZone(String zone) {
+	public void setZone(TimeZone zone) {
 		setValue(Property.ZONE, zone);
 	}
 
@@ -158,8 +160,8 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	 * 
 	 * @return the zone that LUXON must use by the date adapter
 	 */
-	public String getZone() {
-		return getValue(Property.ZONE, defaultValues.getZone());
+	public TimeZone getZone() {
+		return getValue(Property.ZONE, TimeZone.values(), defaultValues.getZone());
 	}
 
 	/**
@@ -168,7 +170,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	public void setOutputCalendar(String outputCalendar) {
+	public void setOutputCalendar(Calendar outputCalendar) {
 		setValue(Property.OUTPUT_CALENDAR, outputCalendar);
 	}
 
@@ -178,8 +180,8 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	public String getOutputCalendar() {
-		return getValue(Property.OUTPUT_CALENDAR, defaultValues.getOutputCalendar());
+	public Calendar getOutputCalendar() {
+		return getValue(Property.OUTPUT_CALENDAR, Calendar.values(), defaultValues.getOutputCalendar());
 	}
 
 	/**

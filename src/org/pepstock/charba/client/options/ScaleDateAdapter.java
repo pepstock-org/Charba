@@ -21,7 +21,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 
 /**
  * This is abstract date adapter object element of the chart options.<br>
@@ -85,7 +87,7 @@ public final class ScaleDateAdapter extends AbstractModel<Adapters, IsDefaultDat
 	 * 
 	 * @param zone the zone that LUXON must use by the date adapter
 	 */
-	public void setZone(String zone) {
+	public void setZone(TimeZone zone) {
 		dateAdapterOptions.setZone(zone);
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -98,7 +100,7 @@ public final class ScaleDateAdapter extends AbstractModel<Adapters, IsDefaultDat
 	 * @return the zone that LUXON must use by the date adapter
 	 */
 	@Override
-	public String getZone() {
+	public TimeZone getZone() {
 		return dateAdapterOptions.getZone();
 	}
 
@@ -108,7 +110,7 @@ public final class ScaleDateAdapter extends AbstractModel<Adapters, IsDefaultDat
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	public void setOutputCalendar(String outputCalendar) {
+	public void setOutputCalendar(Calendar outputCalendar) {
 		dateAdapterOptions.setOutputCalendar(outputCalendar);
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -121,7 +123,7 @@ public final class ScaleDateAdapter extends AbstractModel<Adapters, IsDefaultDat
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */
 	@Override
-	public String getOutputCalendar() {
+	public Calendar getOutputCalendar() {
 		return dateAdapterOptions.getOutputCalendar();
 	}
 

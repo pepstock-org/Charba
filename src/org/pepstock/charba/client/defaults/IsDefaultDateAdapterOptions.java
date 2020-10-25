@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 
 /**
  * Interface to define date adapter options defaults.
@@ -39,7 +41,7 @@ public interface IsDefaultDateAdapterOptions {
 	 * 
 	 * @return the zone that LUXON must use by the date adapter
 	 */
-	String getZone();
+	TimeZone getZone();
 
 	/**
 	 * Returns the name of calendaring systems that LUXON must use by the date adapter.<br>
@@ -47,7 +49,7 @@ public interface IsDefaultDateAdapterOptions {
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	String getOutputCalendar();
+	Calendar getOutputCalendar();
 
 	/**
 	 * Returns the name of numbering systems that LUXON must use by the date adapter.<br>

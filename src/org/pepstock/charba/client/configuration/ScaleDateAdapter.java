@@ -18,7 +18,9 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.adapters.DateAdapter;
 import org.pepstock.charba.client.adapters.DateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 
 /**
  * This is abstract date adapter object element of the chart options.<br>
@@ -72,7 +74,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	 * 
 	 * @param zone the zone that LUXON must use by the date adapter
 	 */
-	public void setZone(String zone) {
+	public void setZone(TimeZone zone) {
 		getAxis().getScale().getAdapters().getDate().setZone(zone);
 	}
 
@@ -82,7 +84,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	 * 
 	 * @return the zone that LUXON must use by the date adapter
 	 */
-	public String getZone() {
+	public TimeZone getZone() {
 		return getAxis().getScale().getAdapters().getDate().getZone();
 	}
 
@@ -92,7 +94,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	public void setOutputCalendar(String outputCalendar) {
+	public void setOutputCalendar(Calendar outputCalendar) {
 		getAxis().getScale().getAdapters().getDate().setOutputCalendar(outputCalendar);
 	}
 
@@ -102,7 +104,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */
-	public String getOutputCalendar() {
+	public Calendar getOutputCalendar() {
 		return getAxis().getScale().getAdapters().getDate().getOutputCalendar();
 	}
 

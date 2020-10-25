@@ -17,7 +17,9 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 
 /**
  * Defaults for date adapters option element, based on chart type.
@@ -53,7 +55,7 @@ public final class DefaultChartDateAdapterOptions implements IsDefaultDateAdapte
 	 * @see org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions#getZone()
 	 */
 	@Override
-	public String getZone() {
+	public TimeZone getZone() {
 		return dateAdpaterOptions.getZone();
 	}
 
@@ -63,7 +65,7 @@ public final class DefaultChartDateAdapterOptions implements IsDefaultDateAdapte
 	 * @see org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions#getOutputCalendar()
 	 */
 	@Override
-	public String getOutputCalendar() {
+	public Calendar getOutputCalendar() {
 		return dateAdpaterOptions.getOutputCalendar();
 	}
 

@@ -15,10 +15,11 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
+import org.pepstock.charba.client.intl.enums.TimeZone;
 
 /**
  * CHART.JS default values for DATE ADPATER options element.
@@ -26,18 +27,20 @@ import org.pepstock.charba.client.intl.enums.NumberingSystem;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOptions {
-	
+
 	/**
 	 * Immutable instance with the date adapter options defaults.
 	 */
 	public static final IsDefaultDateAdapterOptions INSTANCE = new DefaultDateAdapterOptions();
 
-	private static final String DEFAULT_ZONE = null;
+	private static final CLocale DEFAULT_LOCALE = null;
 
-	private static final String DEFAULT_OUTPUT_CALENDAR = null;
+	private static final TimeZone DEFAULT_ZONE = null;
+
+	private static final Calendar DEFAULT_OUTPUT_CALENDAR = null;
 
 	private static final NumberingSystem DEFAULT_NUMBERING_SYSTEM = null;
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -52,7 +55,7 @@ public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOpti
 	 */
 	@Override
 	public CLocale getLocale() {
-		return Defaults.get().getGlobal().getLocale();
+		return DEFAULT_LOCALE;
 	}
 
 	/*
@@ -61,7 +64,7 @@ public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOpti
 	 * @see org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions#getZone()
 	 */
 	@Override
-	public String getZone() {
+	public TimeZone getZone() {
 		return DEFAULT_ZONE;
 	}
 
@@ -71,7 +74,7 @@ public final class DefaultDateAdapterOptions implements IsDefaultDateAdapterOpti
 	 * @see org.pepstock.charba.client.defaults.IsDefaultDateAdapterOptions#getOutputCalendar()
 	 */
 	@Override
-	public String getOutputCalendar() {
+	public Calendar getOutputCalendar() {
 		return DEFAULT_OUTPUT_CALENDAR;
 	}
 
