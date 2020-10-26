@@ -37,7 +37,7 @@ public final class DateAdapterModule {
 	private boolean injected = false;
 
 	/**
-	 * to avoid any instantiation
+	 * To avoid any instantiation
 	 */
 	private DateAdapterModule() {
 		// do nothing

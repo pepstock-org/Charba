@@ -27,7 +27,9 @@ import org.pepstock.charba.client.commons.JsHelper;
 public final class ResourcesType {
 
 	// static instance of resources to be loaded
-	private static ResourcesContainer resources = null;
+	private static AbstractResources resources = null;
+	// flag to know if the resource has been inject
+	private static boolean injected = false;
 
 	/**
 	 * To avoid any instantiation
@@ -42,7 +44,7 @@ public final class ResourcesType {
 	 * 
 	 * @param resources the resources type to use to inject java script code
 	 */
-	public static void setClientBundle(ResourcesContainer resources) {
+	public static void setClientBundle(AbstractResources resources) {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
@@ -50,10 +52,10 @@ public final class ResourcesType {
 		}
 		// checks if is extending a correct abstract resource
 		if (resources instanceof IsResourceType) {
-			// checks if the resources type is already set and is different from the argument
-			if (ResourcesType.resources != null && !resources.getClass().equals(ResourcesType.resources.getClass())) {
+			// checks if the resources type is already loaded
+			if (isInjected()) {
 				// exception
-				throw new IllegalArgumentException("Resources type is already set and can not be changed");
+				throw new IllegalArgumentException("Resources type is already loaded and can not be changed");
 			}
 			// stores the instance
 			ResourcesType.resources = resources;
@@ -73,7 +75,7 @@ public final class ResourcesType {
 	 * 
 	 * @return the resources type to use to inject java script code
 	 */
-	public static ResourcesContainer getClientBundle() {
+	public static AbstractResources getClientBundle() {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception
@@ -81,6 +83,24 @@ public final class ResourcesType {
 		}
 		// returns the instance
 		return ResourcesType.resources;
+	}
+
+	/**
+	 * Returns <code>true</code> if the resource has been injected.
+	 * 
+	 * @return <code>true</code> if the resource has been injected
+	 */
+	static boolean isInjected() {
+		return injected;
+	}
+
+	/**
+	 * Sets <code>true</code> if the resource has been injected.
+	 * 
+	 * @param injected <code>true</code> if the resource has been injected
+	 */
+	static void setInjected(boolean injected) {
+		ResourcesType.injected = injected;
 	}
 
 }

@@ -19,13 +19,16 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Enumerates the constants names to use as element id for scripts, mandatory to CHARBA to work properly.<br>
- * This resource names can not be used for any custom injectable resource.
+ * This resource names can not be used for any custom injectable resource.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum ResourceName implements Key
 {
+	// -------------------
+    // PAY ATTENTION: it uses the class name as STRING to e able to manage the deferred resources and code splitting of GWT	
+	// -------------------
 	/**
 	 * Script element id for CHART.JS source code.
 	 */
@@ -33,11 +36,11 @@ public enum ResourceName implements Key
 	/**
 	 * Script element id for CHART.JS date time adapter.
 	 */
-	DATE_TIME_ADAPTER("datetimeAdapter", true, null),
+	DATE_TIME_ADAPTER("datetimeAdapter", false, "org.pepstock.charba.client.resources.LuxonAdapterResource"),
 	/**
 	 * Script element id for CHART.JS date time library.
 	 */
-	DATE_TIME_LIBRARY("datetimeLibrary", true, null),
+	DATE_TIME_LIBRARY("datetimeLibrary", true, "org.pepstock.charba.client.resources.LuxonLibraryResource"),
 	/**
 	 * Script element id for CHARBA helper.
 	 */
@@ -88,7 +91,7 @@ public enum ResourceName implements Key
 	public String value() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns <code>true</code> if the resource can be override by user.
 	 * 

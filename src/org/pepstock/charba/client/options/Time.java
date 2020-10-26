@@ -270,9 +270,9 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	}
 
 	/**
-	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 * 
-	 * @param parser defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @param parser defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	public void setParser(String parser) {
 		setValue(Property.PARSER, parser);
@@ -281,9 +281,9 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	}
 
 	/**
-	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 * 
-	 * @return defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @return defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	@Override
 	public String getParser() {

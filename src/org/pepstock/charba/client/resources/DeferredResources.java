@@ -18,9 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.adapters.DateAdapterModule;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ExternalTextResource;
-import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to reference LUXON as date time library (asynchronous mode).<br>
@@ -28,24 +26,30 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DeferredResources implements ResourcesContainer, IsResourceType {
+public final class DeferredResources extends AbstractResources implements IsResourceType {
 
 	/**
-	 * Static reference to LUXON resources.
+	 * Static reference to LUXON resources which is injecting the LUXON library.
 	 */
-	public static final DeferredResources INSTANCE = new DeferredResources();
+	public static final DeferredResources INSTANCE = new DeferredResources(true);
+	/**
+	 * Static reference to LUXON resources which is NOT injecting the LUXON library, because LUXON date library could be used in other libraries and to avoid to inject the library
+	 * more than once.
+	 */
+	public static final DeferredResources INSTANCE_WITHOUT_DATE_LIBRARY = new DeferredResources(false);
+
 	/**
 	 * Path into the project where the java script resources are stored, <b>{@value}</b>.
 	 */
-	private static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
-	
+	static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
+
 	/**
 	 * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
 	 * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code splitting is implemented.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	interface DeferredResourcesResource extends ClientBundle {
+	interface DeferredResourcesResource extends DeferredResourcesBundle {
 
 		/**
 		 * Static reference to resources java script source code.
@@ -53,45 +57,57 @@ public final class DeferredResources implements ResourcesContainer, IsResourceTy
 		static final DeferredResourcesResource INSTANCE = GWT.create(DeferredResourcesResource.class);
 
 		/**
-		 * Contains text representation of native chart.js code.
+		 * Contains text representation of date-time LUXON java script library code.
 		 * 
-		 * @return chart.js code in asynchronous mode
+		 * @return date-time LUXON java script library code in asynchronous mode
 		 */
-		@Source(DeferredResources.JAVASCRIPT_RESOURCES_PATH + "chart.min.js")
-		ExternalTextResource chartJs();
+		@Override
+		@Source(DeferredResources.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
+		ExternalTextResource datetimeLibrary();
+
+	}
+
+	/**
+	 * Client bundle to reference CHART.JS, always needed to CHARBA, without loading the LUXON library, because it can be injected from other libraries.<br>
+	 * This resources type will load the CHART.JS module in asynchronous mode in order to optimize the performance when GWT code splitting is implemented.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	interface DeferredResourcesWithoutLibraryResource extends DeferredResourcesBundle {
+
+		/**
+		 * Static reference to resources java script source code.
+		 */
+		static final DeferredResourcesWithoutLibraryResource INSTANCE = GWT.create(DeferredResourcesWithoutLibraryResource.class);
 
 		/**
 		 * Contains text representation of date-time LUXON java script library code.
 		 * 
 		 * @return date-time LUXON java script library code in asynchronous mode
 		 */
-		@Source(DeferredResources.JAVASCRIPT_RESOURCES_PATH + "luxon.min.js")
+		@Override
+		@Source(DeferredResources.JAVASCRIPT_RESOURCES_PATH + "charba.empty.js")
 		ExternalTextResource datetimeLibrary();
-
-		/**
-		 * Contains text representation of CHART.JS adapter code form LUXON.
-		 * 
-		 * @return chart.js date adapter code for LUXON in synchronous mode
-		 */
-		@Source(DeferredResources.JAVASCRIPT_RESOURCES_PATH + "chartjs-adapter-luxon.min.js")
-		TextResource datetimeAdapter();
 
 	}
 
 	/**
-	 * To avoid any instantiation
+	 * Creates a resource object by a flag.<br>
+	 * Of passed argument is <code>true</code>, it must inject the LUXON date library.
+	 * 
+	 * @param injectDateLibrary <code>true</code> if it must inject the LUXON date library
 	 */
-	private DeferredResources() {
-		super();
+	private DeferredResources(boolean injectDateLibrary) {
+		super(injectDateLibrary);
 	}
-	
+
 	/**
 	 * Returns the CHART.JS client bundle with java script definition.
 	 * 
 	 * @return the date adapter client bundle with java script definition
 	 */
-	final DeferredResourcesResource getDeferredResourcesResource() {
-		return DeferredResourcesResource.INSTANCE;
+	final DeferredResourcesBundle getDeferredResourcesResource() {
+		return mustInjectDateLibrary() ? DeferredResourcesResource.INSTANCE : DeferredResourcesWithoutLibraryResource.INSTANCE;
 	}
 
 	/**
@@ -110,8 +126,10 @@ public final class DeferredResources implements ResourcesContainer, IsResourceTy
 	 * Notify the module that the injection has been completed.
 	 */
 	final void injected() {
-		// checks if module is already injected
-		if (!DateAdapterModule.get().isInjected()) {
+		// checks if resource and module have been already injected
+		if (!DateAdapterModule.get().isInjected() && !ResourcesType.isInjected()) {
+			// sets flags it has loaded
+			ResourcesType.setInjected(true);
 			// notify to module that has been injected
 			DateAdapterModule.get().injectionComplete(DateAdapterInjectionComplete.get());
 		}

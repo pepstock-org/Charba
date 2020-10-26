@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.adapters.DateAdapterModule;
 
 import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
@@ -75,11 +74,9 @@ public final class EntryPointStarter {
 		// sets deferred resources
 		ResourcesType.setClientBundle(resources);
 		// checks if is already injected
-		if (!DateAdapterModule.get().isInjected()) {
+		if (!ResourcesType.isInjected()) {
 			// starts loading the CHART.JS
 			loadChartJS(resources, runnable);
-			// notify for injection
-			resources.injected();
 		} else {
 			// if here the resources have been already injected
 			// then invokes the runnable
@@ -169,6 +166,8 @@ public final class EntryPointStarter {
 					AbstractInjectableResource injectorAdapterItem = new InternalInjectableTextResource(ResourceName.DATE_TIME_ADAPTER, resources.getDeferredResourcesResource().datetimeAdapter());
 					// injects also the date time adapter, always sync
 					Injector.ensureInjected(injectorAdapterItem);
+					// notify for injection
+					resources.injected();
 					// loads date-time adapter library
 					// executes the entry point
 					runnable.run();

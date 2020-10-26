@@ -24,12 +24,17 @@ import org.pepstock.charba.client.adapters.DateAdapterModule;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EmbeddedResources implements ResourcesContainer, IsResourceType {
+public final class EmbeddedResources extends AbstractResources implements IsResourceType {
 
 	/**
-	 * Static reference to LUXON resources.
+	 * Static reference to LUXON resources which is injecting the LUXON library.
 	 */
-	public static final EmbeddedResources INSTANCE = new EmbeddedResources();
+	public static final EmbeddedResources INSTANCE = new EmbeddedResources(true);
+	/**
+	 * Static reference to LUXON resources which is NOT injecting the LUXON library, because LUXON date library could be used in other libraries and to avoid to inject the library
+	 * more than once.
+	 */
+	public static final EmbeddedResources INSTANCE_WITHOUT_DATE_LIBRARY = new EmbeddedResources(false);
 	// chart js source code
 	private static final ChartJsResource CHARTJS = new ChartJsResource();
 	// date adapter java script wrapper
@@ -38,10 +43,13 @@ public final class EmbeddedResources implements ResourcesContainer, IsResourceTy
 	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
 
 	/**
-	 * To avoid any instantiation
+	 * Creates a resource object by a flag.<br>
+	 * Of passed argument is <code>true</code>, it must inject the LUXON date library.
+	 * 
+	 * @param injectDateLibrary <code>true</code> if it must inject the LUXON date library
 	 */
-	private EmbeddedResources() {
-		super();
+	private EmbeddedResources(boolean injectDateLibrary) {
+		super(injectDateLibrary);
 	}
 	
 	/**
@@ -49,14 +57,22 @@ public final class EmbeddedResources implements ResourcesContainer, IsResourceTy
 	 */
 	@Override
 	public void inject() {
-		// checks if module has been already injected
-		if (!DateAdapterModule.get().isInjected()) {
+		// checks if resource and module have been already injected
+		if (!DateAdapterModule.get().isInjected() && !ResourcesType.isInjected()) {
 			// inject Chart.js if not already loaded
 			ensureInjected(CHARTJS);
-			// to be sure that date time library has been injected
-			ensureInjected(checkAndGetDateTimeResourceName(dateLibrary, ResourceName.DATE_TIME_LIBRARY));
+			// checks if the library must be loaded
+			if (mustInjectDateLibrary()) {
+				// to be sure that date time library has been injected
+				ensureInjected(checkAndGetDateTimeResourceName(dateLibrary, ResourceName.DATE_TIME_LIBRARY));
+			} else {
+				// to be sure that date time library has been injected
+				ensureInjected(checkAndGetDateTimeResourceName(new EmptyResource(ResourceName.DATE_TIME_LIBRARY), ResourceName.DATE_TIME_LIBRARY));
+			}
 			// to be sure that date time chart.js adapter has been injected
 			ensureInjected(checkAndGetDateTimeResourceName(dateAdapter, ResourceName.DATE_TIME_ADAPTER));
+			// sets flags it has loaded
+			ResourcesType.setInjected(true);
 			// notify to module that has been injected
 			DateAdapterModule.get().injectionComplete(DateAdapterInjectionComplete.get());
 		}

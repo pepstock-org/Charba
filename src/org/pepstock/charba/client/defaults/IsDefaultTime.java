@@ -68,9 +68,9 @@ public interface IsDefaultTime {
 	TimeUnit getMinUnit();
 
 	/**
-	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 * 
-	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @return Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	String getParser();
 }

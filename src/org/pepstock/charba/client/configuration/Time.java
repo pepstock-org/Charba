@@ -94,18 +94,18 @@ public class Time extends AxisContainer {
 	}
 
 	/**
-	 * The moment js format string to use for the tooltip.
+	 * The LUXON format string to use for the tooltip.
 	 * 
-	 * @param tooltipFormat The moment js format string to use for the tooltip.
+	 * @param tooltipFormat The LUXON format string to use for the tooltip.
 	 */
 	public void setTooltipFormat(String tooltipFormat) {
 		getAxis().getScale().getTime().setTooltipFormat(tooltipFormat);
 	}
 
 	/**
-	 * The moment js format string to use for the tooltip.
+	 * The LUXON format string to use for the tooltip.
 	 * 
-	 * @return The moment js format string to use for the tooltip.
+	 * @return The LUXON format string to use for the tooltip.
 	 */
 	public String getTooltipFormat() {
 		return getAxis().getScale().getTime().getTooltipFormat();
@@ -175,18 +175,18 @@ public class Time extends AxisContainer {
 	}
 
 	/**
-	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 * 
-	 * @param parser Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @param parser Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	public void setParser(String parser) {
 		getAxis().getScale().getTime().setParser(parser);
 	}
 
 	/**
-	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 * 
-	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @return Defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	public String getParser() {
 		return getAxis().getScale().getTime().getParser();
