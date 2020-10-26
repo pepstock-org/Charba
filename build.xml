@@ -312,6 +312,7 @@
 				<exclude name="**/*.xml" />
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredResourcesBundle.java"/>
 				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
 				<exclude name="org/pepstock/charba/client/resources/InternalInjectableTextResource.java"/>
 				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource.java"/>
@@ -362,6 +363,7 @@
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
+				<exclude name="org/pepstock/charba/client/resources/DeferredResourcesBundle.java"/>
 				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
 				<exclude name="org/pepstock/charba/client/resources/InternalInjectableTextResource.java"/>
 				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource.java"/>
