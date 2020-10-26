@@ -357,7 +357,6 @@ Here you can find the list of enhancements and updates available on `master` bra
  * implement **INTL NumberFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
    * implement `CLocale` class to manage locale objects.
    * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.
-   * add `LocaleHelper` utility class into `gwt` package in order to get a **Charba** locale `CLocale` instance from a GWT `LocaleInfo`.
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
   
