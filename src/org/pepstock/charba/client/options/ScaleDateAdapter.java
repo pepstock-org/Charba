@@ -33,6 +33,7 @@ import org.pepstock.charba.client.intl.enums.TimeZone;
  */
 public final class ScaleDateAdapter extends AbstractModel<Adapters, IsDefaultDateAdapterOptions> implements IsDefaultDateAdapterOptions {
 
+	// date adapter options instance
 	private final DateAdapterOptions dateAdapterOptions;
 
 	/**

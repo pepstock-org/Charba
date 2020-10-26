@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.intl;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseElement;
@@ -99,6 +100,8 @@ public final class CLocale {
 
 	// reference for default locale
 	private static CLocale defaultLocale = null;
+	// flag to know if the default must be kept align with the defaults
+	private static boolean mustKeepDefaultsAligned = false;
 
 	private final String identifier;
 
@@ -241,6 +244,30 @@ public final class CLocale {
 	}
 
 	/**
+	 * Returns <code>true</code> if the default locale must kept aligned with the {@link GlobalOptions#setLocale(CLocale)}.
+	 * 
+	 * @return <code>true</code> if the default locale must kept aligned with the {@link GlobalOptions#setLocale(CLocale)}
+	 */
+	public static boolean mustKeepDefaultsAligned() {
+		return mustKeepDefaultsAligned;
+	}
+
+	/**
+	 * Sets <code>true</code> if the default locale must kept aligned with the {@link GlobalOptions#setLocale(CLocale)}.
+	 * 
+	 * @param keptAlignedWithDefaults <code>true</code> if the default locale must kept aligned with the {@link GlobalOptions#setLocale(CLocale)}
+	 */
+	public static void setMustKeepDefaultsAligned(boolean keptAlignedWithDefaults) {
+		// checks if current flag is to align the defaults
+		if (!CLocale.mustKeepDefaultsAligned && keptAlignedWithDefaults) {
+			// sets the default to the defaults chart
+			Defaults.get().getGlobal().setLocale(defaultLocale);
+		}
+		// stores the value
+		CLocale.mustKeepDefaultsAligned = keptAlignedWithDefaults;
+	}
+
+	/**
 	 * Sets the current value of the default locale for this instance.
 	 *
 	 * @param locale the default locale for this instance
@@ -248,13 +275,10 @@ public final class CLocale {
 	public static void setDefault(CLocale locale) {
 		// checks if locale argument is consistent
 		if (locale != null) {
-			// checks if the current default locale is equals to the chart default locale
-			// if equals, the default will be kept aligned
-			boolean mustKeepAlignChartDefault = Defaults.get().getGlobal().getLocale().equals(defaultLocale);
 			// stores the default locale
 			setDefaultInternally(locale);
 			// checks if it must set on chart default global
-			if (mustKeepAlignChartDefault) {
+			if (mustKeepDefaultsAligned()) {
 				// sets the default to the defaults chart
 				Defaults.get().getGlobal().setLocale(defaultLocale);
 			}
@@ -315,7 +339,7 @@ public final class CLocale {
 		// checks if locale argument is consistent
 		if (locale != null) {
 			// stores the default locale
-			defaultLocale = locale;
+			CLocale.defaultLocale = locale;
 		}
 	}
 

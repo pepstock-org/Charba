@@ -367,6 +367,10 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// check if locale is consistent
 		if (locale != null) {
 			setValue(CommonProperty.LOCALE, locale.getIdentifier());
+		} else {
+			// if null, it use the default locale
+			// sets locale defaults
+			setValue(CommonProperty.LOCALE, CLocale.getDefault().getIdentifier());
 		}
 	}
 
