@@ -40,9 +40,12 @@ import org.pepstock.charba.client.events.IsLegendEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
+import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
+import org.pepstock.charba.client.items.OptionsNode;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -577,6 +580,50 @@ public final class Defaults {
 		public void onAfterInit(IsChart chart, Chart nativeChart) {
 			// stores native object
 			Charts.addNative(nativeChart);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public boolean onBeforeUpdate(IsChart chart) {
+			// checks if chart is consistent and has got cartesian axes
+			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType())) {
+				// gets options node
+				OptionsNode options = chart.getNode().getOptions();
+				// gets locale from chart
+				CLocale locale = options.getLocale();
+				// checks if locale is consistent
+				if (locale != null) {
+					// applies locale to time and time series scales
+					applyLocaleToTimeScales(chart.getNode().getOptions().getScales(), locale);
+				}
+			}
+			return true;
+		}
+
+		/**
+		 * Applies the locale, taken from chart options, to all time or time series scales if the locale is not set.
+		 * 
+		 * @param scales list of scales to scan
+		 * @param locale teh chart options locale to apply
+		 */
+		private void applyLocaleToTimeScales(Scales scales, CLocale locale) {
+			// scans all scales, searching for time or times series ones
+			for (Scale scale : scales.getAxes()) {
+				// checks if is time or time series
+				if (AxisType.TIME.equals(scale.getType()) || AxisType.TIMESERIES.equals(scale.getType())) {
+					// gets the locale from date adapter options
+					CLocale dateAdapterOptionsLocale = scale.getAdapters().getDate().getLocale();
+					// if the locale is not set
+					if (dateAdapterOptionsLocale == null) {
+						// applies the locale of the chart
+						scale.getAdapters().getDate().setLocale(locale);
+					}
+				}
+			}
 		}
 	}
 

@@ -339,7 +339,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final ChartNode getNode() {
-		return new ChartNode(Charts.getNative(id));
+		return new ChartNode(lookForConsistentInstance());
 	}
 
 	/**
@@ -1004,14 +1004,14 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
 			// clones and merges over the original options of configuration
-		    internalOptions.mergeOptions(new ChartEnvelop<>(Helpers.get().clone(chart.getOptions())));
+			internalOptions.mergeOptions(new ChartEnvelop<>(Helpers.get().clone(chart.getOptions())));
 			// notify after init
 			Charts.fireAfterInit(this);
 		}
 	}
-	
+
 	/**
-	 * Called before any drawing or reconfiguration in order that the chart which implements it can override options 
+	 * Called before any drawing or reconfiguration in order that the chart which implements it can override options
 	 */
 	protected void applyConfiguration() {
 		// do nothing
@@ -1077,15 +1077,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks and returns if valid
 		return data != null && !data.isEmpty() && index < data.size() && index >= 0;
 	}
-	
+
 	/**
-	 * Internal native object container which is mapping the interaction options needed to invoke {@link Chart#getElementsAtEventForMode(BaseNativeEvent, String, NativeObject, boolean)}.
+	 * Internal native object container which is mapping the interaction options needed to invoke
+	 * {@link Chart#getElementsAtEventForMode(BaseNativeEvent, String, NativeObject, boolean)}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	static final class InternalInterationModeObject extends NativeObjectContainer {
-		
+
 		/**
 		 * Name of properties of native object.
 		 */
@@ -1147,7 +1148,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		InteractionAxis getAxis() {
 			return getValue(Property.AXIS, InteractionAxis.values(), InteractionAxis.X);
 		}
-		
+
 		/**
 		 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 		 * 
@@ -1165,7 +1166,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		final boolean isIntersect() {
 			return getValue(Property.INTERSECT, true);
 		}
-		
+
 		/**
 		 * Returns the native object instance.
 		 * 
@@ -1174,7 +1175,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		private NativeObject nativeObject() {
 			return super.getNativeObject();
 		}
-		
+
 	}
 
 }
