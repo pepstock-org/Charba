@@ -116,11 +116,11 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLine()
 	 */
 	@Override
-	public final boolean isShowLines() {
-		return options.isShowLines();
+	public final boolean isShowLine() {
+		return options.isShowLine();
 	}
 
 	/*

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleOptions extends ScalesOptions implements HasShowLines {
+public class BubbleOptions extends ScalesOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -33,16 +33,6 @@ public class BubbleOptions extends ScalesOptions implements HasShowLines {
 	 */
 	public BubbleOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.HasShowLines#getOptions()
-	 */
-	@Override
-	public ConfigurationOptions getOptions() {
-		return this;
 	}
 
 }

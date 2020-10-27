@@ -120,7 +120,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
 		EVENTS("events"),
 		// specific for chart type
-		SHOW_LINES("showLines"),
+		SHOW_LINE("showLine"),
 		SKIP_NULL("skipNull"),
 		CUTOUT_PERCENTAGE("cutoutPercentage"),
 		ROTATION("rotation"),
@@ -553,8 +553,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * 
 	 * @param showLine if <code>false</code>, the lines between points are not drawn.
 	 */
-	public void setShowLines(boolean showLine) {
-		setValue(Property.SHOW_LINES, showLine);
+	public void setShowLine(boolean showLine) {
+		setValue(Property.SHOW_LINE, showLine);
 	}
 
 	/**
@@ -563,8 +563,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return if <code>false</code>, the lines between points are not drawn..
 	 */
 	@Override
-	public boolean isShowLines() {
-		return getValue(Property.SHOW_LINES, getDefaultValues().isShowLines());
+	public boolean isShowLine() {
+		return getValue(Property.SHOW_LINE, getDefaultValues().isShowLine());
 	}
 	
 	/**

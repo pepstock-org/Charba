@@ -22,7 +22,40 @@ import org.pepstock.charba.client.Defaults;
  *
  * @author Andrea "Stock" Stocchero
  */
-interface HasLineOptions extends HasShowLines {
+interface HasLineOptions {
+	
+	/**
+	 * Returns a options which will implements show lines and span gaps.
+	 * 
+	 * @return a options instance
+	 */
+	ConfigurationOptions getOptions();
+
+	/**
+	 * If <code>false</code>, the lines between points are not drawn.
+	 * 
+	 * @param showLine if <code>false</code>, the lines between points are not drawn.
+	 */
+	default void setShowLine(boolean showLine) {
+		// checks if options is consistent
+		if (getOptions() != null) {
+			getOptions().getConfiguration().setShowLine(showLine);
+		}
+	}
+
+	/**
+	 * If <code>false</code>, the lines between points are not drawn.
+	 * 
+	 * @return if <code>false</code>, the lines between points are not drawn.
+	 */
+	default boolean isShowLine() {
+		// checks if options is consistent
+		if (getOptions() != null) {
+			return getOptions().getConfiguration().isShowLine();
+		}
+		// if here, options is not consistent
+		return Defaults.get().getGlobal().isShowLine();
+	}
 
 	/**
 	 * If false, NaN data causes a break in the line.

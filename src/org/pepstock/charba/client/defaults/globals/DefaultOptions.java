@@ -39,7 +39,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
-	private static final boolean DEFAULT_SHOW_LINES = true;
+	private static final boolean DEFAULT_SHOW_LINE = true;
 
 	private static final boolean DEFAULT_SKIP_NULL = false;
 
@@ -139,11 +139,11 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#isShowLines()
+	 * @see org.pepstock.charba.client.options.DefaultOptions#isShowLine()
 	 */
 	@Override
-	public boolean isShowLines() {
-		return DEFAULT_SHOW_LINES;
+	public boolean isShowLine() {
+		return DEFAULT_SHOW_LINE;
 	}
 
 	/*

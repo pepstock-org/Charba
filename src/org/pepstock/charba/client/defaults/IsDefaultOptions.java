@@ -147,7 +147,7 @@ public interface IsDefaultOptions {
 	 * 
 	 * @return If false, the lines between points are not drawn.
 	 */
-	boolean isShowLines();
+	boolean isShowLine();
 
 	/**
 	 * If true, null or undefined values will not be drawn.
