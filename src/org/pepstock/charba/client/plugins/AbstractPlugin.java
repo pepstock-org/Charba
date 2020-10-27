@@ -22,6 +22,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * Implements a plugin interface to help who will create a plugin do not create all methods.<br>
@@ -81,20 +82,20 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart) {
+	public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
 		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public void onAfterUpdate(IsChart chart) {
+	public void onAfterUpdate(IsChart chart, IsAnimationModeKey mode) {
 	}
 
 	/*
@@ -119,20 +120,20 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public boolean onBeforeDatasetsUpdate(IsChart chart) {
+	public boolean onBeforeDatasetsUpdate(IsChart chart, IsAnimationModeKey mode) {
 		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public void onAfterDatasetsUpdate(IsChart chart) {
+	public void onAfterDatasetsUpdate(IsChart chart, IsAnimationModeKey mode) {
 	}
 
 	/*

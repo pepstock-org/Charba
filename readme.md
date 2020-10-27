@@ -213,7 +213,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `ease` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw`, `onAfterDatasetsDraw`, `onBeforeDatasetDraw` and `onBeforeDatasetDraw` methods of `Plugin` interface because is not passed by CHART.JS anymore.
    * remove `hidden` attribute from `LegendItem` and `LegendLabelItem` classes because not supported anymore. Use new `isHidden(chart)` method of `LegendItem` class.
    * change `Controller` interface in order to be align with new interface implemented in new CHART.JS.
- * remove `TimeTickItem` class, use `ScaleTickItem` class.
+   * remove `TimeTickItem` class, use `ScaleTickItem` class.
    * add `getValueAsDate()` method to `ScaleTickItem` class in order to get the tick value as `Date`.
    * rename `getValueAsDouble` method of `ScaleTickItem` class to `getValue`.
    * remove `getTimeTickItems` method from `ScaleItem` class, use `getTickItems`.
@@ -224,6 +224,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `isoWeekday` property of `Time` options and configuration class does not store a `boolean` anymore but new `IsoWeekDay` enumeration with all days of week.
    * rename `Rectangle` options and configuration in `Bar`, inside the `Elements` node of the options and configuration.
    * rename `showLines` property to `showLine` property for line and radar chart options and configuration.
+   * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.

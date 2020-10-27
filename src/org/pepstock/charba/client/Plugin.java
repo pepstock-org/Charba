@@ -19,6 +19,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
  * This interface is defining the extension hook for Chart.JS plugin implementation (both for <i>inline</i> and <i>global</i> plugins).<br>
@@ -83,16 +84,18 @@ public interface Plugin {
 	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
+	 * @param mode the update mode, it could be <code>null</code>.
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(IsChart chart);
+	boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode);
 
 	/**
 	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
+	 * @param mode the update mode, it could be <code>null</code>.
 	 */
-	void onAfterUpdate(IsChart chart);
+	void onAfterUpdate(IsChart chart, IsAnimationModeKey mode);
 
 	/**
 	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
@@ -113,16 +116,18 @@ public interface Plugin {
 	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
+	 * @param mode the update mode, it could be <code>null</code>.
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(IsChart chart);
+	boolean onBeforeDatasetsUpdate(IsChart chart, IsAnimationModeKey mode);
 
 	/**
 	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
+	 * @param mode the update mode, it could be <code>null</code>.
 	 */
-	void onAfterDatasetsUpdate(IsChart chart);
+	void onAfterDatasetsUpdate(IsChart chart, IsAnimationModeKey mode);
 
 	/**
 	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is

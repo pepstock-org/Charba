@@ -44,6 +44,7 @@ import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -585,10 +586,10 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 		 */
 		@Override
-		public boolean onBeforeUpdate(IsChart chart) {
+		public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
 			// checks if chart is consistent and has got cartesian axes
 			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType())) {
 				// gets options node

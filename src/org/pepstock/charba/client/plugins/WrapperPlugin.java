@@ -24,6 +24,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -32,6 +33,7 @@ import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.EventPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 import jsinterop.annotations.JsFunction;
 
@@ -79,10 +81,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
+		 * @param args the call arguments.
 		 * @param options plugin options set by user into chart options.
 		 * @return <code>false</code> to cancel the chart update.
 		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
+		boolean call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
 
 	/**
@@ -98,9 +101,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
+		 * @param args the call arguments.
 		 * @param options plugin options set by user into chart options.
 		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
+		void call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
 
 	/**
@@ -156,10 +160,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
+		 * @param args the call arguments.
 		 * @param options plugin options set by user into chart options.
 		 * @return <code>false</code> to cancel the datasets update.
 		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
+		boolean call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
 
 	/**
@@ -176,9 +181,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart The chart instance.
+		 * @param args the call arguments.
 		 * @param options plugin options set by user into chart options.
 		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
+		void call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
 
 	/**
@@ -631,6 +637,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 	// callback proxy to invoke the reset function
 	private final CallbackProxy<ProxyResetCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	// constants property needed to get the update mode from args calls
+	// of before/after methods
+	private static final Key MODE_PROPERTY = Key.create("mode");
+
 	// user plugin implementation
 	private final Plugin delegation;
 	// cache to store true during drawing for each chart
@@ -657,7 +667,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
-		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsUpdate(chart.getChart()));
+		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
 		// invoke user method implementation
 		afterDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDraw(chart.getChart()));
 		// invoke user method implementation
@@ -671,7 +681,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<>(item, true))));
 		// invoke user method implementation
-		afterUpdateCallbackProxy.setCallback((context, chart, options) -> onAfterUpdate(chart.getChart()));
+		afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
 		// invoke user method implementation
 		beforeDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetDraw(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<>(item, true))));
 		// invoke user method implementation
@@ -679,7 +689,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
-		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsUpdate(chart.getChart()));
+		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
 		// invoke user method implementation
 		beforeDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
@@ -693,7 +703,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		beforeTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<>(item, true))));
 		// invoke user method implementation
-		beforeUpdateCallbackProxy.setCallback((context, chart, options) -> onBeforeUpdate(chart.getChart()));
+		beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
 		// invoke user method implementation
 		destroyCallbackProxy.setCallback((context, chart, options) -> onDestroy(chart.getChart()));
 		// invoke user method implementation
@@ -826,9 +836,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
+	 * @param update update mode
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(IsChart chart) {
+	boolean onBeforeUpdate(IsChart chart, String update) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// gets the counter
@@ -837,7 +848,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 			// if after increment the value is greater than1 means that this is the only current update
 			delegation.onBeginDrawing(chart, counter.incrementAndGet() > 1);
 			// invokes the before update, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeUpdate(chart));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null));
 		}
 		return true;
 	}
@@ -847,11 +858,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
+	 * @param update the update mode
 	 */
-	void onAfterUpdate(IsChart chart) {
+	void onAfterUpdate(IsChart chart, String update) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterUpdate(chart);
+			delegation.onAfterUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null);
 		}
 	}
 
@@ -889,13 +901,14 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
+	 * @param update update mode
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(IsChart chart) {
+	boolean onBeforeDatasetsUpdate(IsChart chart, String update) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsUpdate(chart));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null));
 		}
 		return true;
 	}
@@ -905,11 +918,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
+	 * @param update update mode
 	 */
-	void onAfterDatasetsUpdate(IsChart chart) {
+	void onAfterDatasetsUpdate(IsChart chart, String update) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterDatasetsUpdate(chart);
+			delegation.onAfterDatasetsUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null);
 		}
 	}
 

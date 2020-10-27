@@ -22,6 +22,7 @@ import java.util.Map;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.items.SizeItem;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
@@ -99,10 +100,10 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart) {
+	public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// gets data
@@ -234,9 +235,9 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		}
 		return updated;
 	}
-	
+
 	/**
-	 * Applies the gradients which have been created or changed. 
+	 * Applies the gradients which have been created or changed.
 	 * 
 	 * @param chart the chart instance.
 	 * @param datasets list of datasets of chart
