@@ -33,7 +33,8 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 	 */
 	private enum Property implements Key
 	{
-		BORDER_SKIPPED("borderSkipped");
+		BORDER_SKIPPED("borderSkipped"),
+		BORDER_RADIUS("borderRadius");
 
 		// name value of property
 		private final String value;
@@ -117,6 +118,25 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getBorderSkipped());
+	}
+
+	/**
+	 * Sets the bar border radius (in pixels).
+	 * 
+	 * @param borderRadius the bar border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValue(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the bar border radius (in pixels).
+	 * 
+	 * @return the bar border radius (in pixels).
+	 */
+	@Override
+	public int getBorderRadius() {
+		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
 	}
 
 }

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -26,13 +26,22 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BarBorderWidth extends NativeObjectContainer {
+public final class BarBorderWidth extends AbstractBarBorderItem {
 
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
 	public BarBorderWidth() {
-		this(null);
+		this(DefaultsBuilder.get().getOptions().getElements().getBar().getBorderRadius());
+	}
+
+	/**
+	 * Creates the object using the argument to set the border width size to all corners of the rectangle.
+	 * 
+	 * @param borderWidth border width size to apply to all dimensions.
+	 */
+	public BarBorderWidth(int borderRadius) {
+		super(borderRadius);
 	}
 
 	/**
@@ -42,9 +51,6 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 */
 	BarBorderWidth(NativeObject nativeObject) {
 		super(nativeObject);
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 	}
 
 	/**
@@ -52,6 +58,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 * 
 	 * @param borderWidth border width size to apply to all dimensions.
 	 */
+	@Override
 	public void set(int borderWidth) {
 		setTop(borderWidth);
 		setBottom(borderWidth);
@@ -129,5 +136,14 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	 */
 	public int getBottom() {
 		return getValue(Position.BOTTOM, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return super.getNativeObject();
 	}
 }

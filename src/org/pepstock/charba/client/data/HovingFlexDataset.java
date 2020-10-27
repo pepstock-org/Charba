@@ -46,11 +46,12 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 public abstract class HovingFlexDataset extends Dataset {
 
 	/**
-	 * Name of properties of native object.
+	 * Name of properties of native object, shared into the package.
 	 */
 	enum Property implements Key
 	{
-		CHARBA_BORDER_WIDTH_TYPE("_charbaBorderWidthType");
+		CHARBA_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
+		CHARBA_HOVER_BORDER_WIDTH_TYPE("_charbaHoverBorderWidthType");
 
 		// name value of property
 		private final String value;
@@ -77,9 +78,9 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Internal enumeration to map the possible types of border width property when store as array.
+	 * Internal enumeration to map the possible types of border width and/or radius property when store as array.
 	 */
-	enum BorderWidthType implements Key
+	enum BorderWidthAndRadiusType implements Key
 	{
 		INTEGERS("integers"),
 		OBJECTS("objects"),
@@ -93,7 +94,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		 * 
 		 * @param value value of property name
 		 */
-		private BorderWidthType(String value) {
+		private BorderWidthAndRadiusType(String value) {
 			this.value = value;
 		}
 
@@ -389,7 +390,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		setWidths(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 		// stores the type depending on if the the property exist
 		// if property does not exist means that the argument of this method is null
-		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, has(Dataset.CommonProperty.BORDER_WIDTH) ? BorderWidthType.INTEGERS : BorderWidthType.UNKNOWN);
+		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, has(Dataset.CommonProperty.BORDER_WIDTH) ? BorderWidthAndRadiusType.INTEGERS : BorderWidthAndRadiusType.UNKNOWN);
 	}
 
 	/**
@@ -401,10 +402,10 @@ public abstract class HovingFlexDataset extends Dataset {
 		// gets object type
 		ObjectType type = type(Dataset.CommonProperty.BORDER_WIDTH);
 		// gets border width type
-		BorderWidthType borderWidthType = getValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthType.values(), BorderWidthType.UNKNOWN);
+		BorderWidthAndRadiusType borderWidthType = getValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthAndRadiusType.values(), BorderWidthAndRadiusType.UNKNOWN);
 		// checks if the callback has not been set and is not an object (border width object
 		// set by bar dataset) and if the array as stored as integers
-		if (!ObjectType.FUNCTION.equals(type) && !ObjectType.OBJECT.equals(type) && BorderWidthType.INTEGERS.equals(borderWidthType)) {
+		if (!ObjectType.FUNCTION.equals(type) && !ObjectType.OBJECT.equals(type) && BorderWidthAndRadiusType.INTEGERS.equals(borderWidthType)) {
 			// returns the array
 			ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
 			return ArrayListHelper.list(array);
@@ -424,7 +425,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// invokes super to store callback
 		super.setBorderWidth(borderWidthCallback);
 		// resets the flag about border with type
-		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthType.UNKNOWN);
+		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthAndRadiusType.UNKNOWN);
 	}
 
 	/**

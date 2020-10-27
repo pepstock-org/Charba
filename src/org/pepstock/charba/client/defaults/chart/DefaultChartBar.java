@@ -76,4 +76,14 @@ public final class DefaultChartBar implements IsDefaultBar {
 		return bar.getBorderSkipped();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return bar.getBorderRadius();
+	}
+
 }

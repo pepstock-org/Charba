@@ -61,4 +61,22 @@ public class Bar extends AbstractConfigurationElement {
 		return getOptions().getElements().getBar().getBorderSkipped();
 	}
 
+	/**
+	 * Sets the bar border radius (in pixels).
+	 * 
+	 * @param borderRadius the bar border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		getOptions().getElements().getBar().setBorderRadius(borderRadius);
+	}
+
+	/**
+	 * Returns the bar border radius (in pixels).
+	 * 
+	 * @return the bar border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		return getOptions().getElements().getBar().getBorderRadius();
+	}
+
 }

@@ -29,6 +29,8 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
+	private static final int DEFAULT_BORDER_RADIUS = 0;
+
 	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
 
 	/**
@@ -47,4 +49,15 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	public BorderSkipped getBorderSkipped() {
 		return BorderSkipped.START;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return DEFAULT_BORDER_RADIUS;
+	}
+
 }

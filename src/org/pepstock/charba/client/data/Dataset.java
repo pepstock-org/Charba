@@ -97,14 +97,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private BorderColorCallback hoverBorderColorCallback = null;
 	// hover borderWidth callback instance
 	private BorderWidthCallback hoverBorderWidthCallback = null;
-
 	// background color callback instance
 	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
 	private BorderColorCallback borderColorCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
-
 	// animation callback
 	private DatasetAnimationCallback animationCallback = null;
 
@@ -250,8 +248,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), backgroundColorCallback, CommonProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), backgroundColorCallback, CommonProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
 		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), borderColorCallback, CommonProperty.BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
@@ -260,8 +257,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		hoverBackgroundColorCallbackProxy
 				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CommonProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CommonProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CommonProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 		// invokes callback
@@ -1305,7 +1301,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
-	
+
 	/**
 	 * Factory to create a data point from a native object, used for array container lists.
 	 * 
@@ -1324,7 +1320,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		}
 
 	}
-	
+
 	/**
 	 * Factory to create a time series item from a native object, used for array container lists.
 	 * 

@@ -31,4 +31,11 @@ public interface IsDefaultBar extends IsDefaultOptionsElement {
 	 */
 	BorderSkipped getBorderSkipped();
 
+	/**
+	 * Returns the bar border radius (in pixels).
+	 * 
+	 * @return the bar border radius (in pixels).
+	 */
+	int getBorderRadius();
+
 }
