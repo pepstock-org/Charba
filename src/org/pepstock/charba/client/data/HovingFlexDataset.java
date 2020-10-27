@@ -20,20 +20,17 @@ import java.util.List;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayIntegerList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -44,71 +41,6 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class HovingFlexDataset extends Dataset {
-
-	/**
-	 * Name of properties of native object, shared into the package.
-	 */
-	enum Property implements Key
-	{
-		CHARBA_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
-		CHARBA_HOVER_BORDER_WIDTH_TYPE("_charbaHoverBorderWidthType");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
-	 * Internal enumeration to map the possible types of border width and/or radius property when store as array.
-	 */
-	enum BorderWidthAndRadiusType implements Key
-	{
-		INTEGERS("integers"),
-		OBJECTS("objects"),
-		UNKNOWN("unknown");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private BorderWidthAndRadiusType(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	/**
 	 * Creates the dataset using a default and chart type related to the dataset.
@@ -388,9 +320,6 @@ public abstract class HovingFlexDataset extends Dataset {
 	public void setBorderWidth(int... borderWidth) {
 		// stores value
 		setWidths(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
-		// stores the type depending on if the the property exist
-		// if property does not exist means that the argument of this method is null
-		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, has(Dataset.CommonProperty.BORDER_WIDTH) ? BorderWidthAndRadiusType.INTEGERS : BorderWidthAndRadiusType.UNKNOWN);
 	}
 
 	/**
@@ -399,33 +328,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
 	 */
 	public List<Integer> getBorderWidth() {
-		// gets object type
-		ObjectType type = type(Dataset.CommonProperty.BORDER_WIDTH);
-		// gets border width type
-		BorderWidthAndRadiusType borderWidthType = getValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthAndRadiusType.values(), BorderWidthAndRadiusType.UNKNOWN);
-		// checks if the callback has not been set and is not an object (border width object
-		// set by bar dataset) and if the array as stored as integers
-		if (!ObjectType.FUNCTION.equals(type) && !ObjectType.OBJECT.equals(type) && BorderWidthAndRadiusType.INTEGERS.equals(borderWidthType)) {
-			// returns the array
-			ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return new ArrayIntegerList();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setBorderWidth(org.pepstock.charba.client.callbacks.BorderWidthCallback)
-	 */
-	@Override
-	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
-		// invokes super to store callback
-		super.setBorderWidth(borderWidthCallback);
-		// resets the flag about border with type
-		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderWidthAndRadiusType.UNKNOWN);
+		ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
