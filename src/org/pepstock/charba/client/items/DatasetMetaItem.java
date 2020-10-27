@@ -55,12 +55,13 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		ORDER("order"),
 		TYPE("type"),
 		VISIBLE("visible"),
+		// axis id
 		Y_AXIS_ID("yAxisID"),
 		X_AXIS_ID("xAxisID"),
 		R_AXIS_ID("rAxisID"),
 		V_AXIS_ID("vAxisID"),
 		I_AXIS_ID("iAxisID"),
-		// FIXME
+		// scales
 		Y_SCALE("yScale"),
 		X_SCALE("xScale"),
 		R_SCALE("rScale"),
