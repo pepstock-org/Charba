@@ -899,6 +899,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param propertyType property to use to store the type
 	 * @param factory factory to crate the border item objects
 	 * @param defaultValue default value for this border item.
+	 * @param <T> type of border item object
 	 * @return the list of bar border item size (in pixels).
 	 */
 	private <T extends AbstractBarBorderItem> List<T> getBorderItemAsObjects(Key property, Key propertyType, NativeObjectContainerFactory<T> factory, int defaultValue) {

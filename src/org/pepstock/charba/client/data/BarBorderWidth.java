@@ -40,8 +40,8 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * 
 	 * @param borderWidth border width size to apply to all dimensions.
 	 */
-	public BarBorderWidth(int borderRadius) {
-		super(borderRadius);
+	public BarBorderWidth(int borderWidth) {
+		super(borderWidth);
 	}
 
 	/**
