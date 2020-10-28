@@ -87,7 +87,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-
 	// callback proxy to invoke the animation callback function
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> animationCallbackProxy = JsHelper.get().newCallbackProxy();
 
@@ -543,7 +542,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderWidthCallback getBorderWidthCallback() {
+	final BorderWidthCallback getInternalBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
@@ -552,7 +551,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+	final void setInternalBorderWidth(BorderWidthCallback borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if callback is consistent
@@ -628,7 +627,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderWidthCallback getHoverBorderWidthCallback() {
+	final BorderWidthCallback getInternalHoverBorderWidthCallback() {
 		return hoverBorderWidthCallback;
 	}
 
@@ -637,7 +636,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+	final void setInternalHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
 		// sets the callback
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if callback is consistent

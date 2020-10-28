@@ -15,21 +15,20 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayGradient;
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayIntegerList;
-import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayPattern;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -106,6 +105,24 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	ArrayInteger getWidths(Key key, int defaultvalue) {
 		return getArrayValue(key);
 	}
+	
+	/**
+	 * Returns the border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getBorderWidthCallback() {
+		return getInternalBorderWidthCallback();
+	}
+
+	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+		setInternalBorderWidth(borderWidthCallback);
+	}	
 
 	/**
 	 * Sets the fill color of the arcs when hovered
@@ -170,7 +187,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
-			return new ArrayStringList();
+			return Collections.emptyList();
 		}
 		// calls super
 		return super.getHoverBackgroundColorAsString();
@@ -187,7 +204,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 		// calls super
 		return super.getHoverBackgroundColorAsPatterns();
@@ -205,7 +222,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 		// calls super
 		return super.getHoverBackgroundColorAsGradient();
@@ -261,7 +278,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		if (getHoverBorderColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
-			return new ArrayStringList();
+			return Collections.emptyList();
 		}
 		// calls super
 		return super.getHoverBorderColorAsString();
@@ -278,7 +295,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		if (getHoverBorderColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 		// calls super
 		return super.getHoverBorderColorAsGradient();
@@ -298,7 +315,25 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayIntegerList();
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getHoverBorderWidthCallback() {
+		return getInternalHoverBorderWidthCallback();
+	}
+
+	/**
+	 * Sets the hover border width callback.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback to set
+	 */
+	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 
 	/*

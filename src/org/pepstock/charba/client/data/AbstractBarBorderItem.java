@@ -56,4 +56,13 @@ abstract class AbstractBarBorderItem extends NativeObjectContainer {
 	 */
 	public abstract void set(int size);
 
+	
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject nativeObject() {
+		return super.getNativeObject();
+	}
 }

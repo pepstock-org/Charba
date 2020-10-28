@@ -138,12 +138,4 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 		return getValue(Position.BOTTOM, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
 	}
 
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
-	}
 }

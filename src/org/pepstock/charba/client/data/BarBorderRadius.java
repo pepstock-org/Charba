@@ -171,14 +171,5 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	public int getBottomRight() {
 		return getValue(Property.BOTTOM_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
-	
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
-	}
 
 }

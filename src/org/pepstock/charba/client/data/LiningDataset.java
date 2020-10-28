@@ -585,6 +585,24 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// then returns the default
 		return getDefaultValues().getElements().getLine().getBorderWidth();
 	}
+	
+	/**
+	 * Returns the border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getBorderWidthCallback() {
+		return getInternalBorderWidthCallback();
+	}
+
+	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+		setInternalBorderWidth(borderWidthCallback);
+	}
 
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
@@ -955,6 +973,24 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// if here, the property is a callback
 		// then returns the default
 		return getDefaultValues().getElements().getLine().getBorderWidth();
+	}
+	
+	/**
+	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getHoverBorderWidthCallback() {
+		return getInternalHoverBorderWidthCallback();
+	}
+
+	/**
+	 * Sets the hover border width callback.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback to set
+	 */
+	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 
 	/**

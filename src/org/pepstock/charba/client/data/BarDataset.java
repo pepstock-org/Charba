@@ -22,9 +22,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.BarBorderWidthCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -36,6 +37,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -66,6 +68,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private static final BarBorderWidthFactory BORDER_WIDTH_FACTORY = new BarBorderWidthFactory();
 	// bar border radius factory
 	private static final BarBorderRadiusFactory BORDER_RADIUS_FACTORY = new BarBorderRadiusFactory();
+	// border radius array constant for set border radius from a list
+	private static final BarBorderRadius[] BORDER_RADIUS_EMPTY_ARRAY = new BarBorderRadius[0];
+	// border width array constant for set border width from a list
+	private static final BarBorderWidth[] BORDER_WIDTH_EMPTY_ARRAY = new BarBorderWidth[0];
 
 	/**
 	 * Floating bars data factory to create {@link FloatingData}s.
@@ -78,12 +84,20 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	// callback proxy to invoke the border skipped function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border width function
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
 	// border skipped callback instance
 	private BorderRadiusCallback borderRadiusCallback = null;
+	// hover borderWidth callback instance
+	private BarBorderWidthCallback hoverBorderWidthCallback = null;
+	// borderWidth callback instance
+	private BarBorderWidthCallback borderWidthCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -194,7 +208,12 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new ScriptableContext(new DataEnvelop<>(context))));
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderRadius(new ScriptableContext(new DataEnvelop<>(context))));
+		// gets value calling callback
+		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderRadiusCallback, BORDER_RADIUS_FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+		// gets value calling callback
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, BORDER_WIDTH_FACTORY, getDefaultBorderWidth()));
+		// gets value calling callback
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BORDER_WIDTH_FACTORY, getDefaultBorderWidth()));
 	}
 
 	/*
@@ -216,6 +235,40 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public BarDatasetOptionsHandler getDatasetOptionsHandler() {
 		return barOptionsHandler;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultBackgroundColorAsString() {
+		return getDefaultValues().getElements().getBar().getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultBorderColorAsString() {
+		return getDefaultValues().getElements().getBar().getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return getDefaultValues().getElements().getBar().getBorderWidth();
+	}
+
+	// -----------------
+	// PROPERTIES
+	// -----------------
 
 	/**
 	 * Returns the label for the dataset which appears in the legend and tooltips.
@@ -317,7 +370,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public void setBorderWidth(int... borderWidth) {
-		setBorderItem(Dataset.CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
+		setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
 	/**
@@ -326,7 +379,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(BarBorderWidth... borderWidth) {
-		setBorderItem(Dataset.CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
+		setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
 	/**
@@ -335,15 +388,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(List<BarBorderWidth> borderWidth) {
-		// checks if list is consistent
-		if (borderWidth != null && !borderWidth.isEmpty()) {
-			setBorderWidth(borderWidth.toArray(new BarBorderWidth[0]));
-		} else {
-			// removes key
-			removeIfExists(Dataset.CommonProperty.BORDER_WIDTH);
-			// resets the type of border item
-			setValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderItemType.UNKNOWN);
-		}
+		setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth, BORDER_WIDTH_EMPTY_ARRAY);
 	}
 
 	/**
@@ -353,7 +398,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public List<Integer> getBorderWidth() {
-		return getBorderItem(Dataset.CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, getDefaultBorderWidth());
+		return getBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, getDefaultBorderWidth());
 	}
 
 	/**
@@ -362,22 +407,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
 	 */
 	public List<BarBorderWidth> getBorderWidthAsObjects() {
-		return getBorderItemAsObjects(Dataset.CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
+		return getBorderItemAsObjects(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setBorderWidth(org.pepstock.charba.client.callbacks.BorderWidthCallback)
-	 */
-	@Override
-	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
-		// invokes super to store callback
-		super.setBorderWidth(borderWidthCallback);
-		// resets the flag about border with type
-		setValue(Property.CHARBA_BORDER_WIDTH_TYPE, BorderItemType.UNKNOWN);
-	}
-
+	
 	/**
 	 * Sets the stroke width of the elements when hovered.
 	 * 
@@ -385,7 +417,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public void setHoverBorderWidth(int... borderWidth) {
-		setBorderItem(Dataset.CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
+		setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
 	/**
@@ -394,7 +426,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels, when hovered
 	 */
 	public void setHoverBorderWidth(BarBorderWidth... borderWidth) {
-		setBorderItem(Dataset.CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
+		setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
 	/**
@@ -403,15 +435,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels, when hovered
 	 */
 	public void setHoverBorderWidth(List<BarBorderWidth> borderWidth) {
-		// checks if list is consistent
-		if (borderWidth != null && !borderWidth.isEmpty()) {
-			setBorderWidth(borderWidth.toArray(new BarBorderWidth[0]));
-		} else {
-			// removes key
-			removeIfExists(Dataset.CommonProperty.HOVER_BORDER_WIDTH);
-			// resets the type of border item
-			setValue(Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BorderItemType.UNKNOWN);
-		}
+		setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth, BORDER_WIDTH_EMPTY_ARRAY);
 	}
 
 	/**
@@ -421,7 +445,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public List<Integer> getHoverBorderWidth() {
-		return getBorderItem(Dataset.CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, getDefaultBorderWidth());
+		return getBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, getDefaultBorderWidth());
 	}
 
 	/**
@@ -430,21 +454,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return list of the stroke width of the bar in pixels, when hovered
 	 */
 	public List<BarBorderWidth> getHoverBorderWidthAsObjects() {
-		return getBorderItemAsObjects(Dataset.CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
+		return getBorderItemAsObjects(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setHoverBorderWidth(org.pepstock.charba.client.callbacks.BorderWidthCallback)
-	 */
-	@Override
-	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
-		super.setHoverBorderWidth(hoverBorderWidthCallback);
-		// resets the flag about border with type
-		setValue(Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BorderItemType.UNKNOWN);
-	}
-
+	
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
@@ -597,15 +609,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderRadius Sets the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(List<BarBorderRadius> borderRadius) {
-		// checks if list is consistent
-		if (borderRadius != null && !borderRadius.isEmpty()) {
-			setBorderRadius(borderRadius.toArray(new BarBorderRadius[0]));
-		} else {
-			// removes key
-			removeIfExists(Property.BORDER_RADIUS);
-			// resets the type of border item
-			setValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.UNKNOWN);
-		}
+		setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
 
 	/**
@@ -652,15 +656,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderRadius Sets the bar border radius (in pixels), when hovered.
 	 */
 	public void setHoverBorderRadius(List<BarBorderRadius> borderRadius) {
-		// checks if list is consistent
-		if (borderRadius != null && !borderRadius.isEmpty()) {
-			setHoverBorderRadius(borderRadius.toArray(new BarBorderRadius[0]));
-		} else {
-			// removes key
-			removeIfExists(Property.HOVER_BORDER_RADIUS);
-			// resets the type of border item
-			setValue(Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, BorderItemType.UNKNOWN);
-		}
+		setBorderItem(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
 
 	/**
@@ -765,6 +761,52 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets data type checking if the key exists
 		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
+	
+	// -----------------
+	// CALLBACKS
+	// -----------------
+	
+	/**
+	 * Returns the border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BarBorderWidthCallback getBorderWidthCallback() {
+		return borderWidthCallback;
+	}
+
+	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public void setBorderWidth(BarBorderWidthCallback borderWidthCallback) {
+		// sets the callback
+		this.borderWidthCallback = borderWidthCallback;
+		// checks if callback is consistent
+		setBorderItemCallback(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BarBorderWidthCallback getHoverBorderWidthCallback() {
+		return hoverBorderWidthCallback;
+	}
+
+	/**
+	 * Sets the hover border width callback.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback to set
+	 */
+	public void setHoverBorderWidth(BarBorderWidthCallback hoverBorderWidthCallback) {
+		// sets the callback
+		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
+		// checks if callback is consistent
+		setBorderItemCallback(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, hoverBorderWidthCallback, hoverBorderWidthCallbackProxy.getProxy());
+	}
 
 	/**
 	 * Returns the border skipped callback, if set, otherwise <code>null</code>.
@@ -784,13 +826,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets the callback
 		this.borderSkippedCallback = borderSkippedCallback;
 		// checks if callback is consistent
-		if (borderSkippedCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_SKIPPED, borderSkippedCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_SKIPPED);
-		}
+		setBorderItemCallback(Property.BORDER_SKIPPED, borderSkippedCallback, borderSkippedCallbackProxy.getProxy());
 	}
 
 	/**
@@ -811,46 +847,12 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
-		if (borderRadiusCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_RADIUS, borderRadiusCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_RADIUS);
-		}
-		// resets the flag about border with type
-		setValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.UNKNOWN);
+		setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
-	 */
-	@Override
-	protected String getDefaultBackgroundColorAsString() {
-		return getDefaultValues().getElements().getBar().getBackgroundColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
-	 */
-	@Override
-	protected String getDefaultBorderColorAsString() {
-		return getDefaultValues().getElements().getBar().getBorderColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
-	 */
-	@Override
-	protected int getDefaultBorderWidth() {
-		return getDefaultValues().getElements().getBar().getBorderWidth();
-	}
+	
+	// ----------------------
+	// METHODS for JSFunction
+	// ----------------------
 
 	/**
 	 * Returns an object (boolean or {@link BorderSkipped}) when the callback has been activated.
@@ -872,68 +874,97 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns an object (integer or {@link BarBorderRadius}) when the callback has been activated.
+	 * Returns an object (integer or {@link AbstractBarBorderItem}) when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @return a object property value, as integer or {@link BarBorderRadius}
+	 * @param borderItemCallback the border item callback to invoke
+	 * @param factory factory to crate the border item objects
+	 * @param defaultValue default value for this border item.
+	 * @param <T> type of border item object
+	 * @return a object property value, as integer or {@link AbstractBarBorderItem}
 	 */
-	private Object onBorderRadius(ScriptableContext context) {
+	private <T extends AbstractBarBorderItem> NativeObject onBorderItem(ScriptableContext context, Scriptable<Object> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, borderRadiusCallback);
+		Object value = ScriptableUtils.getOptionValue(context, borderItemCallback);
 		// checks the type of result
-		if (value instanceof BarBorderRadius) {
+		if (value instanceof AbstractBarBorderItem) {
 			// casts to object
-			BarBorderRadius result = (BarBorderRadius) value;
+			AbstractBarBorderItem result = (AbstractBarBorderItem) value;
 			// returns the native object
 			return result.nativeObject();
 		} else if (value instanceof Integer) {
 			// casts to integer
 			Integer intValue = (Integer) value;
-			// creates a border radius object
-			BarBorderRadius result = new BarBorderRadius(intValue);
+			// creates a border item object
+			T result = factory.create();
+			// sets value
+			result.set(intValue);
 			// returns the native object
 			return result.nativeObject();
 		}
-		// creates a border radius object
-		BarBorderRadius result = new BarBorderRadius(getDefaultValues().getElements().getBar().getBorderRadius());
+		// creates a border item object
+		T result = factory.create();
+		// sets value
+		result.set(defaultValue);
 		// if here, the value of callback is not consistent
 		// returns the default value
 		return result.nativeObject();
 	}
 
 	// ---------------------
-	// COMMON METHODS
+	// COMMON BORDER ITEM METHODS
 	// ---------------------
 
 	/**
-	 * Sets the bar border size (in pixels).
+	 * Sets the bar border size by an array of integers.
 	 * 
 	 * @param property property to use to store the values
 	 * @param propertyType property to use to store the type
-	 * @param size the bar border size (in pixels), when hovered.
+	 * @param array the bar border array of integers.
 	 */
-	private void setBorderItem(Key property, Key propertyType, int... size) {
+	private void setBorderItem(Key property, Key propertyType, int... array) {
 		// stores value
-		setValueOrArray(property, size);
+		setValueOrArray(property, array);
 		// stores the type depending on if the the property exist
 		// if property does not exist means that the argument of this method is null
 		setValue(propertyType, has(property) ? BorderItemType.INTEGERS : BorderItemType.UNKNOWN);
 	}
 
 	/**
-	 * Sets the bar border item size (in pixels).
+	 * Sets the bar border item size by an array of objects.
 	 * 
 	 * @param property property to use to store the values
 	 * @param propertyType property to use to store the type
-	 * @param size the bar border item size (in pixels).
+	 * @param array the bar border item array of objects
 	 * @param <T> type of border item object
 	 */
-	private <T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, T[] size) {
+	private <T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, T[] array) {
 		// stores value
-		setValueOrArray(property, size);
+		setValueOrArray(property, array);
 		// stores the type depending on if the the property exist
 		// if property does not exist means that the argument of this method is null
 		setValue(propertyType, has(property) ? BorderItemType.OBJECTS : BorderItemType.UNKNOWN);
+	}
+	
+	/**
+	 * Sets the bar border item size by a list of objects.
+	 * 
+	 * @param property property to use to store the values
+	 * @param propertyType property to use to store the type
+	 * @param list the bar border item list.
+	 * @param array array with length 0 in order to get all list elements into an array
+	 * @param <T> type of border item object
+	 */
+	private <T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, List<T> list, T[] array) {
+		// checks if list is consistent
+		if (list != null && !list.isEmpty()) {
+			setBorderItem(property, propertyType, list.toArray(array));
+		} else {
+			// removes key
+			removeIfExists(property);
+			// resets the type of border item
+			setValue(propertyType, BorderItemType.UNKNOWN);
+		}
 	}
 
 	/**
@@ -1016,6 +1047,41 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		}
 		// returns an empty list
 		return Collections.emptyList();
+	}
+
+	/**
+	 * Sets the border item callback.
+	 * 
+	 * @param property property to use to store the values
+	 * @param borderItemCallback the border item callback to set
+	 * @param proxy claback proxy to set
+	 */
+	private void setBorderItemCallback(Key property, Object borderItemCallback, Proxy proxy) {
+		setBorderItemCallback(property, null, borderItemCallback, proxy);
+	}
+
+	/**
+	 * Sets the border item callback.
+	 * 
+	 * @param property property to use to store the values
+	 * @param propertyType property to use to store the type
+	 * @param borderItemCallback the border item callback to set
+	 * @param proxy claback proxy to set
+	 */
+	private void setBorderItemCallback(Key property, Key propertyType, Object borderItemCallback, Proxy proxy) {
+		// checks if callback is consistent
+		if (borderItemCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(property, proxy);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(property);
+		}
+		// checks if property type is valid
+		if (Key.isValid(propertyType)) {
+			// resets the flag about border with type
+			setValue(propertyType, BorderItemType.UNKNOWN);
+		}
 	}
 
 	/**
