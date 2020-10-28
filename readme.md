@@ -256,6 +256,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `outputCalendar` is now a `Calendar` object instead of a string.
  * remove the usage of `Moment` as date library because it does not use the web internationalization.
  * remove the usage of `Date-fns` as date library because it does not use the web internationalization.
+ * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks into `BarDataset` class.
   
 ### Features
 
