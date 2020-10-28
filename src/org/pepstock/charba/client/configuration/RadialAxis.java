@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class RadialAxis extends Axis implements IsLinearAxis {
+public class RadialAxis extends Axis implements IsNumericAxis {
 
 	// sub elements of axis
 	private final GridLines grideLines;

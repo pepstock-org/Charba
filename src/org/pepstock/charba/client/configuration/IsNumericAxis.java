@@ -109,5 +109,57 @@ public interface IsNumericAxis {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().getMax();
 	}
+	
+	/**
+	 * Sets the adjustment used when calculating the maximum data value.
+	 * 
+	 * @param suggestedMax adjustment used when calculating the maximum data value.
+	 */
+	default void setSuggestedMax(double suggestedMax) {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			getAxisElement().getScale().setSuggestedMax(suggestedMax);
+		}
+	}
+
+	/**
+	 * Returns the adjustment used when calculating the maximum data value.
+	 * 
+	 * @return adjustment used when calculating the maximum data value.
+	 */
+	default double getSuggestedMax() {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			return getAxisElement().getScale().getSuggestedMax();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getSuggestedMax();
+	}
+
+	/**
+	 * Sets the adjustment used when calculating the minimum data value.
+	 * 
+	 * @param suggestedMin adjustment used when calculating the minimum data value.
+	 */
+	default void setSuggestedMin(double suggestedMin) {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			getAxisElement().getScale().setSuggestedMin(suggestedMin);
+		}
+	}
+
+	/**
+	 * Returns the adjustment used when calculating the minimum data value.
+	 * 
+	 * @return adjustment used when calculating the minimum data value.
+	 */
+	default double getSuggestedMin() {
+		// checks if axis is consistent
+		if (getAxisElement() != null) {
+			return getAxisElement().getScale().getSuggestedMin();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getSuggestedMin();
+	}
 
 }
