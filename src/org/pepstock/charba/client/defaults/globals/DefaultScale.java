@@ -23,8 +23,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 
 /**
@@ -189,8 +189,8 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getPosition()
 	 */
 	@Override
-	public Position getPosition() {
-		return Position.TOP;
+	public AxisPosition getPosition() {
+		return AxisPosition.TOP;
 	}
 
 	/*

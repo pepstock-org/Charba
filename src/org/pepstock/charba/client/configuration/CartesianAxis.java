@@ -17,9 +17,9 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -136,20 +136,45 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
+	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
 	 * @param position position of axis
 	 */
-	public void setPosition(Position position) {
+	public void setPosition(AxisPosition position) {
 		getScale().setPosition(position);
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
+	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
 	 * @return position of axis.
 	 */
-	public Position getPosition() {
+	public AxisPosition getPosition() {
 		return getScale().getPosition();
-	}	
+	}
+	/**
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
+	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * 
+	 * @param position position of axis with respect to a data value
+	 */
+	public void setPosition(double position) {
+		getScale().setPosition(position);
+	}
+	
+	/**
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
+	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * 
+	 * @return position of axis with respect to a data value
+	 */
+	public double getPositionAsValue() {
+		return getScale().getPositionAsValue();
+	}
 }

@@ -24,8 +24,8 @@ import org.pepstock.charba.client.data.HasLabels;
 import org.pepstock.charba.client.data.Labeller;
 import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -615,24 +615,66 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
+	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
 	 * @param position position of axis
 	 */
-	public final void setPosition(Position position) {
+	public final void setPosition(AxisPosition position) {
 		setValue(Property.POSITION, position);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
+	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * 
+	 * @param position position of axis with respect to a data value
+	 */
+	public final void setPosition(double position) {
+		setValue(Property.POSITION, position);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
+	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
 	 * @return position of axis.
 	 */
 	@Override
-	public final Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), getDefaultValues().getPosition());
+	public final AxisPosition getPosition() {
+		// checks if property is a string then it is a position
+		// checks if not a number in order to leverage on default
+		if (!isType(Property.POSITION, ObjectType.NUMBER)) {
+			return getValue(Property.POSITION, AxisPosition.values(), getDefaultValues().getPosition());
+		}
+		// if here, the position is a number
+		// therefore returns the default
+		return getDefaultValues().getPosition();
+	}
+	
+	/**
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
+	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * 
+	 * @return position of axis with respect to a data value
+	 */
+	public final double getPositionAsValue() {
+		// checks if property is a string then it is a position
+		// checks if not a number in order to leverage on default
+		if (isType(Property.POSITION, ObjectType.NUMBER)) {
+			return getValue(Property.POSITION, UndefinedValues.DOUBLE);
+		}
+		// if here, the position is a number
+		// therefore returns the default
+		return UndefinedValues.DOUBLE;
 	}
 
 	/**

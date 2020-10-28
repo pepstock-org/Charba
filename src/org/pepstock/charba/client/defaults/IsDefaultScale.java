@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 
 /**
@@ -146,11 +146,13 @@ public interface IsDefaultScale {
 	boolean isOffset();
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
+	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
+	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
+	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
 	 * @return position of axis.
 	 */
-	Position getPosition();
+	AxisPosition getPosition();
 
 	/**
 	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
