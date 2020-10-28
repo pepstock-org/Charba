@@ -19,6 +19,8 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
+import org.pepstock.charba.client.enums.CrossAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.options.Ticks;
 
@@ -248,6 +250,26 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public int getSampleSize() {
 		return ticks.getSampleSize();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getAlign()
+	 */
+	@Override
+	public ElementAlign getAlign() {
+		return ticks.getAlign();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getCrossAlign()
+	 */
+	@Override
+	public CrossAlign getCrossAlign() {
+		return ticks.getCrossAlign();
 	}
 
 }

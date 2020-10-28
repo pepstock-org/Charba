@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.CrossAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -176,5 +178,19 @@ public interface IsDefaultTicks {
 	 * @return the number of ticks to examine when deciding how many labels will fit.
 	 */
 	int getSampleSize();
+	
+	/**
+	 * Returns the tick alignment along the axis.
+	 * 
+	 * @return the tick alignment along the axis
+	 */
+	ElementAlign getAlign();
+	
+	/**
+	 * Returns the tick alignment perpendicular to the axis.
+	 * 
+	 * @return the tick alignment perpendicular to the axis
+	 */
+	CrossAlign getCrossAlign();
 
 }

@@ -318,7 +318,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `locale` property to options and configuration.
    * add `format` property to all numeric ticks (cartesian linear and log, radial linear) in order to apply the number formatting by [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat), leveraging on **Charba INTL NumberFormat** implementation.
    * add `borderRadius` and `hoverBorderRadius` properties to `BarDataset` class.
-   * add `suggestedMin` and `suggestedMax` properties to cartesian logarithmic axes
+   * add `suggestedMin` and `suggestedMax` properties to cartesian logarithmic axes.
+   * add `align` and `crossAlign` properties to cartesian ticks.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

@@ -20,6 +20,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
+import org.pepstock.charba.client.enums.CrossAlign;
+import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -52,12 +54,14 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		// cartesian
 		AUTO_SKIP("autoSkip"),
 		AUTO_SKIP_PADDING("autoSkipPadding"),
+		ALIGN("align"),
+		CROSS_ALIGN("crossAlign"),
 		LABEL_OFFSET("labelOffset"),
 		MAX_ROTATION("maxRotation"),
 		MIN_ROTATION("minRotation"),
 		MIRROR("mirror"),
 		SAMPLE_SIZE("sampleSize"),
-		// common linear 
+		// common linear
 		FORMAT("format"),
 		// linear cartesian
 		MAX_TICKS_LIMIT("maxTicksLimit"),
@@ -130,7 +134,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public Major getMajor() {
 		return major;
 	}
-	
+
 	/**
 	 * Returns the number formatting options.
 	 * 
@@ -549,4 +553,47 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public int getSampleSize() {
 		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getSampleSize());
 	}
+
+	/**
+	 * Sets the tick alignment along the axis.
+	 * 
+	 * @param align the tick alignment along the axis
+	 */
+	public void setAlign(ElementAlign align) {
+		setValue(Property.ALIGN, align);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the tick alignment along the axis.
+	 * 
+	 * @return the tick alignment along the axis
+	 */
+	@Override
+	public ElementAlign getAlign() {
+		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
+	}
+	
+	/**
+	 * Sets the tick alignment perpendicular to the axis.
+	 * 
+	 * @param crossAlign the tick alignment perpendicular to the axis
+	 */
+	public void setCrossAlign(CrossAlign crossAlign) {
+		setValue(Property.CROSS_ALIGN, crossAlign);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the tick alignment perpendicular to the axis.
+	 * 
+	 * @return the tick alignment perpendicular to the axis
+	 */
+	@Override
+	public CrossAlign getCrossAlign() {
+		return getValue(Property.CROSS_ALIGN, CrossAlign.values(), getDefaultValues().getCrossAlign());
+	}
+
 }
