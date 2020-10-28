@@ -172,6 +172,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * move `suggestedMin` property from ticks to axis/scale.
    * move `min` property from time object to axis/scale.
    * move `max` property from time object to axis/scale.
+   * move `labels` property from tick (cartesian category) object to axis/scale.
    * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
    * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
    * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.

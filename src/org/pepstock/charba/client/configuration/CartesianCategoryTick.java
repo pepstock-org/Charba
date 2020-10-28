@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.List;
-
 import org.pepstock.charba.client.callbacks.CategoryTickCallback;
 
 /**
@@ -39,33 +37,6 @@ public class CartesianCategoryTick extends CartesianTick {
 		super(axis);
 		// creates handler
 		this.tickHandler = new CategoryTickHandler(axis, this);
-	}
-
-	/**
-	 * Sets an array of labels to display.
-	 * 
-	 * @param labels An array of labels to display.
-	 */
-	public void setLabels(String... labels) {
-		getConfiguration().setLabels(labels);
-	}
-
-	/**
-	 * Sets an array of labels to display.
-	 * 
-	 * @param labels An array of labels to display.
-	 */
-	public void setLabels(List<String> labels) {
-		getConfiguration().setLabels(labels);
-	}
-
-	/**
-	 * Returns the array of labels to display.
-	 * 
-	 * @return the array of labels to display.
-	 */
-	public List<String> getLabels() {
-		return getConfiguration().getLabels();
 	}
 
 	/**

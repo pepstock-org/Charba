@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.List;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
@@ -61,8 +57,6 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		MIN_ROTATION("minRotation"),
 		MIRROR("mirror"),
 		SAMPLE_SIZE("sampleSize"),
-		// category cartesian
-		LABELS("labels"),
 		// common linear 
 		FORMAT("format"),
 		// linear cartesian
@@ -464,38 +458,6 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.SHOW_LABEL_BACKDROP, getDefaultValues().isShowLabelBackdrop());
-	}
-
-	/**
-	 * Sets an array of labels to display.
-	 * 
-	 * @param labels An array of labels to display.
-	 */
-	public void setLabels(String... labels) {
-		setArrayValue(Property.LABELS, ArrayString.fromOrNull(labels));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets an array of labels to display.
-	 * 
-	 * @param labels A list of labels to display.
-	 */
-	public void setLabels(List<String> labels) {
-		setArrayValue(Property.LABELS, ArrayString.fromOrNull(labels));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the array of labels to display.
-	 * 
-	 * @return the array of labels to display.
-	 */
-	public List<String> getLabels() {
-		ArrayString array = getArrayValue(Property.LABELS);
-		return ArrayListHelper.list(array);
 	}
 
 	/**

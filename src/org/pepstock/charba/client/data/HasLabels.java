@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.List;
+
 /**
  * Manages the LABELS properties for datasets and options which this property is required.
  * 
@@ -43,6 +45,20 @@ public interface HasLabels {
 		setLabels(internalLabels);
 	}
 
+	/**
+	 * Sets the labels of the data.
+	 * 
+	 * @param labels list of labels
+	 */
+	default void setLabels(List<String> labels) {
+		// creates a label object
+		Labels internalLabels = Labels.build();
+		// loads
+		internalLabels.load(labels);
+		// sets labels
+		setLabels(internalLabels);
+	}
+	
 	/**
 	 * Sets the labels of the data.
 	 * 

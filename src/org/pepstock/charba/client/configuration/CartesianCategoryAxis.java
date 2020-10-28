@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -103,6 +106,52 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	@Override
 	public CartesianCategoryTick getTicks() {
 		return ticks;
+	}
+	
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels An array of labels to display.
+	 */
+	public void setLabels(String... labels) {
+		getConfiguration().setLabels(labels);
+	}
+
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels An array of labels to display.
+	 */
+	public void setLabels(List<String> labels) {
+		getConfiguration().setLabels(labels);
+	}
+	
+	/**
+	 * Sets the labels of the data.
+	 * 
+	 * @param labels labels object to manage also multi-line labels
+	 */
+	public void setLabels(Labels labels) {
+		getConfiguration().setLabels(labels);
+	}
+	
+	/**
+	 * Returns the labels.
+	 * 
+	 * @return the labels
+	 */
+	public Labels getLabels() {
+		return getConfiguration().getLabels();
+	}
+	
+	/**
+	 * Returns the labels for axes.
+	 * 
+	 * @param binding if <code>true</code> binds the new labels into container
+	 * @return the labels for axes
+	 */
+	public Labels getLabels(boolean binding) {
+		return getConfiguration().getLabels(binding);
 	}
 
 	/**
