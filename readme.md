@@ -320,6 +320,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `borderRadius` and `hoverBorderRadius` properties to `BarDataset` class.
    * add `suggestedMin` and `suggestedMax` properties to cartesian logarithmic axes.
    * add `align` and `crossAlign` properties to cartesian ticks.
+   * add the `center` axes position and the position of the axis with respect to a data value.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
