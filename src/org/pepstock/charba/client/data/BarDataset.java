@@ -711,7 +711,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			return result;
 		}
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**

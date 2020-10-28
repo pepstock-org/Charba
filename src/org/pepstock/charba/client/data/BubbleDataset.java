@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -26,8 +28,6 @@ import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayDoubleList;
-import org.pepstock.charba.client.commons.ArrayEnumList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -229,8 +229,8 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			return ArrayListHelper.list(PointStyle.values(), array);
 		}
 		// if here, is a callback
-		// then returns an empty list
-		return new ArrayEnumList<>(PointStyle.values());
+		// then returns a list with all values
+		return Arrays.asList(PointStyle.values());
 	}
 
 	/**
@@ -259,7 +259,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -288,7 +288,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -317,7 +317,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -346,7 +346,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**

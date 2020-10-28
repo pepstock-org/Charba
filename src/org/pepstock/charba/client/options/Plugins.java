@@ -425,7 +425,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			}
 		}
 		// if here returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -463,7 +463,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			}
 		}
 		// if here returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**

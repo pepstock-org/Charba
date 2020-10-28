@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -243,9 +243,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 			// loads the array
 			ArrayString array = getArrayValue(Property.COLOR);
 			return ArrayListHelper.list(array);
-		} else {
-			return new LinkedList<>();
 		}
+		// if here, the properties is not consistent
+		// then returns an empty list
+		return Collections.emptyList();
 	}
 
 	/**

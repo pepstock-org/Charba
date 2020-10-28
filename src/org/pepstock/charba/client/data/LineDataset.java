@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -388,7 +388,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			return result;
 		}
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**

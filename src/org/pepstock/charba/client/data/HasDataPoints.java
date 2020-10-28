@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.DataType;
@@ -74,7 +74,7 @@ public interface HasDataPoints extends HasDataset {
 		}
 		// if here, dataset is not consistent
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 }

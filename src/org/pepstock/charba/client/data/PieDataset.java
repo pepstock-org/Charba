@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -24,7 +25,6 @@ import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayIntegerList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -208,7 +208,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**

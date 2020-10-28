@@ -923,7 +923,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return result;
 		}
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -952,7 +952,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return result;
 		}
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1003,7 +1003,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return result;
 		}
 		// returns an empty list
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	/**

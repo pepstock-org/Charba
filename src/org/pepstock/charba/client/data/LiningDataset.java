@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Type;
@@ -38,14 +39,10 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayImage;
-import org.pepstock.charba.client.commons.ArrayImageList;
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayIntegerList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
@@ -629,7 +626,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, the property is a callback
 		// then returns the default
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1022,7 +1019,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, the property is a callback
 		// then returns the default
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1195,7 +1192,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 	}
 
@@ -1282,7 +1279,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 	}
 
@@ -1312,7 +1309,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1341,7 +1338,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1426,7 +1423,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 	}
 
@@ -1512,7 +1509,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<>();
+			return Collections.emptyList();
 		}
 	}
 
@@ -1542,7 +1539,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayIntegerList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1571,7 +1568,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1600,7 +1597,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1660,7 +1657,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, means the point style as stored as strings
-			return new ArrayImageList();
+			return Collections.emptyList();
 		}
 	}
 
@@ -1690,7 +1687,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayDoubleList();
+		return Collections.emptyList();
 	}
 
 	/**
