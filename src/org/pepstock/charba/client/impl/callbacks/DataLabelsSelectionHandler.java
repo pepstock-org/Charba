@@ -25,9 +25,9 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
+import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetReference;
 
 /**
  * {@link DataLabelsPlugin#ID} event callbacks to invoke dataset selection handlers if there were defined.<br>
@@ -95,14 +95,14 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 		// checks if there is any selection handler and
 		// chart is initialized
 		if (IsChart.isValid(chart) && context != null && !dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
-			// gets meta item
-			DatasetMetaItem metaItem = chart.getDatasetMeta(context.getDatasetIndex());
+			// gets dataset item
+			DatasetItem datasetItem = chart.getDatasetItem(context.getDatasetIndex());
 			// checks if consistent with next operations
-			if (metaItem != null && !metaItem.getDatasets().isEmpty()) {
-				// gets dataset item
-				DatasetItem item = metaItem.getDatasets().get(context.getIndex());
+			if (datasetItem != null && !datasetItem.getElements().isEmpty()) {
+				// gets dataset element
+				DatasetElement item = datasetItem.getElements().get(context.getIndex());
 				// creates the dataset reference item
-				DatasetReferenceItem referenceItem = new DatasetReferenceItem(context, item);
+				DatasetReference referenceItem = new DatasetReference(context, item);
 				// creates the event
 				// setting as native event new change event
 				DatasetSelectionEvent event = new DatasetSelectionEvent(DOMBuilder.get().createChangeEvent(), chart, referenceItem);

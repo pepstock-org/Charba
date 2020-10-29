@@ -65,7 +65,7 @@ final class WrapperController extends NativeObjectContainer {
 
 		/**
 		 * Create elements for each piece of data in the dataset.<br>
-		 * Store elements in an array on the dataset as dataset.metaData.
+		 * Store elements in an array on the dataset.
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 */
@@ -355,7 +355,7 @@ final class WrapperController extends NativeObjectContainer {
 	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.removeHoverStyle(context, chart, new StyleElement(object), datasetIndex, index);
+			delegation.removeHoverStyle(context, chart, new ControllerDatasetElement(object), datasetIndex, index);
 		}
 	}
 
@@ -371,7 +371,7 @@ final class WrapperController extends NativeObjectContainer {
 	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.setHoverStyle(context, chart, new StyleElement(object), datasetIndex, index);
+			delegation.setHoverStyle(context, chart, new ControllerDatasetElement(object), datasetIndex, index);
 		}
 	}
 

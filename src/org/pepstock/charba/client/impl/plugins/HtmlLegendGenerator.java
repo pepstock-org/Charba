@@ -48,9 +48,9 @@ import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.TextDirection;
+import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetItemOptions;
-import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -424,7 +424,7 @@ final class HtmlLegendGenerator {
 			// calculated a radius, predefined by size
 			double radius = (size - 2) / 2D;
 			// here is searching for radius set to dataset level
-			DatasetItemOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
+			DatasetElementOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
 			// checks if dataset item is consistent
 			if (datasetViewItem != null) {
 				// if dataset item is found
@@ -463,37 +463,37 @@ final class HtmlLegendGenerator {
 	}
 
 	/**
-	 * Returns a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
+	 * Returns a dataset element options instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 * 
 	 * @param chart chart instance
 	 * @param item legend item to use as dataset locator
-	 * @return a dataset meta data instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
+	 * @return a dataset element options instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
 	 */
-	private DatasetItemOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
-		// prepares the meta item instance
-		DatasetMetaItem datasetMetaItem = null;
+	private DatasetElementOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
+		// prepares the dataset item instance
+		DatasetItem datasetItem = null;
 		// item index set to 0 for dataset index locator
 		int itemIndex = 0;
 		// based on the legend item location
 		if (item.getDatasetIndex() != UndefinedValues.INTEGER) {
 			// retrieves the dataset set item by dataset index
-			datasetMetaItem = chart.getDatasetMeta(item.getDatasetIndex());
+			datasetItem = chart.getDatasetItem(item.getDatasetIndex());
 		} else if (item.getIndex() != UndefinedValues.INTEGER) {
 			// if here is looking for data index then it uses
 			// the first dataset
-			datasetMetaItem = chart.getDatasetMeta(0);
+			datasetItem = chart.getDatasetItem(0);
 			// and gets the dataset index to use
 			itemIndex = item.getIndex();
 		}
 		// checks if the searching of dataset item is consistent
 		// with the locator
-		if (datasetMetaItem != null && datasetMetaItem.getDatasets().size() > itemIndex) {
-			// gets dataset item by calculated index
-			DatasetItem datasetItem = datasetMetaItem.getDatasets().get(itemIndex);
+		if (datasetItem != null && datasetItem.getElements().size() > itemIndex) {
+			// gets dataset element by calculated index
+			DatasetElement datasetElement = datasetItem.getElements().get(itemIndex);
 			// checks if consistent
-			if (datasetItem != null) {
-				// returns the meta data view
-				return datasetItem.getOptions();
+			if (datasetElement != null) {
+				// returns the options of element
+				return datasetElement.getOptions();
 			}
 		}
 		// if here, the locator is not able to get the right dataset item

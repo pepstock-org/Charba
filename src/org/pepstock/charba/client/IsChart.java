@@ -29,8 +29,8 @@ import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
@@ -377,20 +377,20 @@ public interface IsChart {
 	void render();
 
 	/**
-	 * Looks for the dataset that matches the current index and returns that metadata.
+	 * Looks for the dataset that matches the current index and returns.
 	 * 
 	 * @param index dataset index
-	 * @return dataset meta data item.
+	 * @return dataset item.
 	 */
-	DatasetMetaItem getDatasetMeta(int index);
+	DatasetItem getDatasetItem(int index);
 
 	/**
-	 * Looks for the dataset that matches the event and returns that metadata.
+	 * Looks for the dataset that matches the event.
 	 * 
 	 * @param event event of chart.
-	 * @return dataset meta data item.
+	 * @return dataset item.
 	 */
-	List<DatasetReferenceItem> getDatasetAtEvent(BaseNativeEvent event);
+	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
@@ -459,7 +459,7 @@ public interface IsChart {
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
-	DatasetReferenceItem getElementAtEvent(BaseNativeEvent event);
+	DatasetReference getElementAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -468,7 +468,7 @@ public interface IsChart {
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetReferenceItem> getElementsAtEvent(BaseNativeEvent event);
+	List<DatasetReference> getElementsAtEvent(BaseNativeEvent event);
 
 	/**
 	 * Draws the chart

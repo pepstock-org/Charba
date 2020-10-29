@@ -17,7 +17,7 @@ package org.pepstock.charba.client.events;
 
 import java.util.List;
 
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetReference;
 
 /**
  * Interface which maps a chart event, an event generated from CHART.JS.
@@ -32,6 +32,6 @@ public interface IsChartEvent extends IsCommonChartEvent {
 	 * 
 	 * @return a list of items with dataset references related to the event
 	 */
-	List<DatasetReferenceItem> getItems();
+	List<DatasetReference> getItems();
 
 }

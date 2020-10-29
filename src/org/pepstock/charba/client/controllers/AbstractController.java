@@ -74,10 +74,10 @@ public abstract class AbstractController implements Controller {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.StyleElement, int, int)
+	 * org.pepstock.charba.client.controllers.ControllerDatasetElement, int, int)
 	 */
 	@Override
-	public void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
+	public void removeHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && element != null) {
 			// invokes default
@@ -89,10 +89,10 @@ public abstract class AbstractController implements Controller {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.StyleElement, int, int)
+	 * org.pepstock.charba.client.controllers.ControllerDatasetElement, int, int)
 	 */
 	@Override
-	public void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index) {
+	public void setHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart) && element != null) {
 			// invokes default

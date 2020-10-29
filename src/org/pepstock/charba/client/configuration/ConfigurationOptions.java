@@ -51,7 +51,7 @@ import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.intl.CLocale;
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
@@ -201,14 +201,14 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 			// handle click event for dataset
 			handleDatasetSelection(nativeEvent);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReferenceItem.FACTORY)));
+			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
 		// fires the hover hover on the chart
 		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
-			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReferenceItem.FACTORY)));
+			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
 		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
 			// creates a event context
@@ -663,7 +663,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	 */
 	private void handleDatasetSelection(BaseNativeEvent event) {
 		// gets the dataset items by event
-		DatasetReferenceItem item = getChart().getElementAtEvent(event);
+		DatasetReference item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
 		if (item != null && hasDatasetSelectionHandlers()) {
 			// fires the event for dataset selection

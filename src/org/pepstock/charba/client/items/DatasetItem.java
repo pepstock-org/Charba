@@ -15,57 +15,59 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.List;
+
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.controllers.ControllersEnvelop;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.enums.IndexAxis;
+import org.pepstock.charba.client.options.IsScaleId;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
- * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset.<br>
- * This object has been created and passed to event handler or callbacks to apply own logic.
+ * Created and passed by CHART.JS and provide dataset information.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DatasetItem extends NativeObjectContainer {
-	
-	// static instance for the dataset item factory
-	static final DatasetItemFactory FACTORY = new DatasetItemFactory();
+public final class DatasetItem extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		// for all chart types
-		ACTIVE("active"),
-		X("x"),
-		Y("y"),
-		OPTIONS("options"),
-		// for bar chart
-		BASE("base"),
-		HEIGHT("height"),
-		HORIZONTAL("horizontal"),
-		WIDTH("width"),
-		// doughnut, pie, polar area
-		CIRCUMFERENCE("circumference"),
-		END_ANGLE("endAngle"),
-		INNER_RADIUS("innerRadius"),
-		OUTER_RADIUS("outerRadius"),
-		START_ANGLE("startAngle"),
-		// bubble, line, radar
-		SKIP("skip"),
-		// line
-		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
-		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
-		CONTROL_POINT_NEXT_X("controlPointNextX"),
-		CONTROL_POINT_NEXT_Y("controlPointNextY"),
-		// radar
-		ANGLE("angle");
+		CONTROLLER("controller"),
+		DATA("data"),
+		HIDDEN("hidden"),
+		INDEX("index"),
+		INDEX_AXIS("indexAxis"),
+		LABEL("label"),
+		ORDER("order"),
+		TYPE("type"),
+		VISIBLE("visible"),
+		// axis id
+		Y_AXIS_ID("yAxisID"),
+		X_AXIS_ID("xAxisID"),
+		R_AXIS_ID("rAxisID"),
+		V_AXIS_ID("vAxisID"),
+		I_AXIS_ID("iAxisID"),
+		// scales
+		Y_SCALE("yScale"),
+		X_SCALE("xScale"),
+		R_SCALE("rScale"),
+		V_SCALE("vScale"),
+		I_SCALE("iScale"),
+		// doughnut, pie
+		TOTAL("total");
 
 		// name value of property
 		private final String value;
@@ -91,18 +93,23 @@ public class DatasetItem extends NativeObjectContainer {
 
 	}
 
-	// dataset item options instance
-	private final DatasetItemOptions options;
+	// instance of controller
+	private final DatasetItemController datasetItemController;
 
 	/**
-	 * Creates the item using an envelop of the native java script object which contains all properties.
+	 * Creates the item using an envelop with the native java script object which contains all properties.
 	 * 
-	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
+	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	protected DatasetItem(ControllersEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// sets the dataset item options
-		options = new DatasetItemOptions(getValue(Property.OPTIONS));
+	public DatasetItem(ChartEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * To avoid any user creation but provides an empty object
+	 */
+	DatasetItem() {
+		this((NativeObject) null);
 	}
 
 	/**
@@ -112,188 +119,214 @@ public class DatasetItem extends NativeObjectContainer {
 	 */
 	DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// sets the dataset item options
-		options = new DatasetItemOptions(getValue(Property.OPTIONS));
+		// stores controller
+		datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
 	}
 
 	/**
-	 * Returns the dataset item options.
-	 *
-	 * @return the dataset item options.
-	 */
-	public final DatasetItemOptions getOptions() {
-		return options;
-	}
-
-	/**
-	 * Returns if is an horizontal view.
+	 * Returns the dataset controller.
 	 * 
-	 * @return <code>true</code> if is an horizontal view. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return the dataset controller
 	 */
-	public final boolean isHorizontal() {
-		return getValue(Property.HORIZONTAL, UndefinedValues.BOOLEAN);
+	public DatasetItemController getController() {
+		return datasetItemController;
 	}
 
 	/**
-	 * Returns the base value of dataset.
+	 * Returns the type of dataset.
 	 * 
-	 * @return the base value of dataset. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the type of dataset. If not set or invalid, the default is {@link ChartType#BAR}.
 	 */
-	public final double getBase() {
-		return getValue(Property.BASE, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the X location of dataset item in pixel.
-	 * 
-	 * @return the X location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getX() {
-		return getValue(Property.X, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the Y location of dataset item in pixel.
-	 * 
-	 * @return the Y location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getY() {
-		return getValue(Property.Y, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the width of dataset item in pixel.
-	 * 
-	 * @return the width of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the height of dataset item in pixel.
-	 * 
-	 * @return the height of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns <code>true</code> if skipped.
-	 * 
-	 * @return <code>true</code> if skipped. Default is {@link UndefinedValues#BOOLEAN}.
-	 */
-	public final boolean isSkipped() {
-		return getValue(Property.SKIP, UndefinedValues.BOOLEAN);
-	}
-
-	/**
-	 * Returns the previous X control point of dataset item in pixel.
-	 * 
-	 * @return the previous X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getControlPointPreviousX() {
-		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the previous Y control point of dataset item in pixel.
-	 * 
-	 * @return the previous Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getControlPointPreviousY() {
-		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the next X control point of dataset item in pixel.
-	 * 
-	 * @return the next X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getControlPointNextX() {
-		return getValue(Property.CONTROL_POINT_NEXT_X, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the next Y control point of dataset item in pixel.
-	 * 
-	 * @return the next Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getControlPointNextY() {
-		return getValue(Property.CONTROL_POINT_NEXT_Y, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the angle of dataset item.
-	 * 
-	 * @return the angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getAngle() {
-		return getValue(Property.ANGLE, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the start angle of dataset item.
-	 * 
-	 * @return the start angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public final double getStartAngle() {
-		return getValue(Property.START_ANGLE, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the end angle of dataset item.
-	 * 
-	 * @return the end angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public double getEndAngle() {
-		return getValue(Property.END_ANGLE, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the circumference of dataset item.
-	 * 
-	 * @return the circumference of dataset item.
-	 */
-	public double getCircumference() {
-		return getValue(Property.CIRCUMFERENCE, Defaults.get().getGlobal().getCircumference());
-	}
-
-	/**
-	 * Returns the outer radius of dataset item in pixel.
-	 * 
-	 * @return the outer radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public double getOuterRadius() {
-		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the inner radius of dataset item in pixel.
-	 * 
-	 * @return the inner radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
-	 */
-	public double getInnerRadius() {
-		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Inner class to create dataset item by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public DatasetItem create(NativeObject nativeObject) {
-			return new DatasetItem(nativeObject);
+	public Type getType() {
+		// gets string value from java script object
+		String value = getValue(Property.TYPE, ChartType.BAR.value());
+		// checks if consistent with out of the box chart types
+		Type type = Key.getKeyByValue(ChartType.values(), value);
+		// if not, creates new type being a controller.
+		if (type == null) {
+			// gets type from controllers
+			type = Defaults.get().getControllers().getTypeByString(value);
 		}
+		return type == null ? ChartType.BAR : type;
+	}
+
+	/**
+	 * Returns if the dataset is visible.
+	 * 
+	 * @return <code>true</code> if the dataset is visible, otherwise is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isVisible() {
+		return getValue(Property.VISIBLE, UndefinedValues.BOOLEAN);
+	}
+
+	/**
+	 * Returns if the dataset is hidden.
+	 * 
+	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isHidden() {
+		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
+	}
+
+	/**
+	 * Returns the dataset index.
+	 * 
+	 * @return the dataset index. Default is {@link UndefinedValues#INTEGER}.
+	 */
+	public int getIndex() {
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	}
+	
+	/**
+	 * Returns the dataset index axis.
+	 * 
+	 * @return the dataset index axis or <code>null</code> if not found.
+	 */
+	public IndexAxis getIndexAxis() {
+		return getValue(Property.INDEX_AXIS, IndexAxis.values(), null);
+	}
+
+	/**
+	 * Returns the dataset order.
+	 * 
+	 * @return the dataset order. Default is {@link UndefinedValues#INTEGER}.
+	 */
+	public int getOrder() {
+		return getValue(Property.ORDER, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the dataset label.
+	 * 
+	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
+	 */
+	public String getLabel() {
+		return getValue(Property.LABEL, UndefinedValues.STRING);
+	}
+
+	/**
+	 * Returns the Y axis ID.
+	 * 
+	 * @return the Y axis ID. Default is {@link DefaultScaleId#Y}.
+	 */
+	public IsScaleId getYAxisID() {
+		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
+	}
+	
+	/**
+	 * Returns the Y scale item or <code>null</code> if not exists.
+	 * 
+	 * @return the Y scale item or <code>null</code> if not exists
+	 */
+	public ScaleItem getYScale() {
+		return retrieveScale(Property.Y_SCALE);
+	}
+
+	/**
+	 * Returns the X axis ID.
+	 * 
+	 * @return the X axis ID. Default is {@link DefaultScaleId#X}.
+	 */
+	public IsScaleId getXAxisID() {
+		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
+	}
+
+	/**
+	 * Returns the X scale item or <code>null</code> if not exists.
+	 * 
+	 * @return the X scale item or <code>null</code> if not exists
+	 */
+	public ScaleItem getXScale() {
+		return retrieveScale(Property.X_SCALE);
+	}
+
+	/**
+	 * Returns the R axis ID.
+	 * 
+	 * @return the R axis ID. Default is {@link DefaultScaleId#R}.
+	 */
+	public IsScaleId getRAxisID() {
+		return getValue(Property.R_AXIS_ID, DefaultScaleId.R);
+	}
+	
+	/**
+	 * Returns the R scale item or <code>null</code> if not exists.
+	 * 
+	 * @return the R scale item or <code>null</code> if not exists
+	 */
+	public ScaleItem getRScale() {
+		return retrieveScale(Property.R_SCALE);
+	}
+	
+	/**
+	 * Returns the V axis ID.
+	 * 
+	 * @return the V axis ID. Default is {@link DefaultScaleId#Y}.
+	 */
+	public IsScaleId getVAxisID() {
+		return getValue(Property.V_AXIS_ID, DefaultScaleId.Y);
+	}
+	
+	/**
+	 * Returns the V scale item or <code>null</code> if not exists.
+	 * 
+	 * @return the V scale item or <code>null</code> if not exists
+	 */
+	public ScaleItem getVScale() {
+		return retrieveScale(Property.V_SCALE);
+	}
+	
+	/**
+	 * Returns the I axis ID.
+	 * 
+	 * @return the I axis ID. Default is {@link DefaultScaleId#X}.
+	 */
+	public IsScaleId getIAxisID() {
+		return getValue(Property.I_AXIS_ID, DefaultScaleId.X);
+	}
+	
+	/**
+	 * Returns the I scale item or <code>null</code> if not exists.
+	 * 
+	 * @return the I scale item or <code>null</code> if not exists
+	 */
+	public ScaleItem getIScale() {
+		return retrieveScale(Property.I_SCALE);
+	}
+
+	/**
+	 * Returns the dataset total value of data.
+	 * 
+	 * @return the dataset total value of data. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public double getTotal() {
+		return getValue(Property.TOTAL, UndefinedValues.DOUBLE);
+	}
+
+	/**
+	 * Returns a list of dataset elements.
+	 * 
+	 * @return a list of dataset elements.
+	 */
+	public List<DatasetElement> getElements() {
+		ArrayObject array = getArrayValue(Property.DATA);
+		return ArrayListHelper.unmodifiableList(array, DatasetElement.FACTORY);
+	}
+	
+	/**
+	 * Returns the scale item from a specific property.
+	 * 
+	 * @param key object property to use
+	 * @return a scael item or <code>null</code> if not found
+	 */
+	private ScaleItem retrieveScale(Property key) {
+		// checks if the property is consistent
+		if (Key.isValid(key) && isType(key, ObjectType.OBJECT)) {
+			// creates the scale item
+			return new ScaleItem(getValue(key));
+		}
+		// if here, the key or teh value is not consistent
+		return null;
 	}
 
 }

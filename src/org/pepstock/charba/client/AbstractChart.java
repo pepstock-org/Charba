@@ -54,8 +54,8 @@ import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerManager;
 import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
@@ -754,19 +754,19 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Looks for the dataset that matches the current index and returns that metadata.
+	 * Looks for the dataset that matches the current index.
 	 * 
 	 * @param index dataset index
-	 * @return dataset meta data item or <code>null</code> if the index is out of range of datasets count.
+	 * @return dataset item or <code>null</code> if the index is out of range of datasets count.
 	 */
 	@Override
-	public final DatasetMetaItem getDatasetMeta(int index) {
+	public final DatasetItem getDatasetItem(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
 		if (instance != null && isValidDatasetIndex(index)) {
 			// returns the array
-			return new DatasetMetaItem(new ChartEnvelop<>(instance.getDatasetMeta(index), true));
+			return new DatasetItem(new ChartEnvelop<>(instance.getDatasetMeta(index), true));
 		}
 		// returns null
 		return null;
@@ -779,7 +779,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return dataset items references list or or an empty list.
 	 */
 	@Override
-	public final List<DatasetReferenceItem> getDatasetAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -787,7 +787,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets datasets
 			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.DATASET.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, DatasetReferenceItem.FACTORY);
+			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
 		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();
@@ -931,7 +931,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetReferenceItem getElementAtEvent(BaseNativeEvent event) {
+	public final DatasetReference getElementAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -939,7 +939,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets element
 			ArrayObject result = instance.getElementsAtEventForMode(event, InteractionMode.NEAREST.value(), INTERACTION_MODE.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
-				return DatasetReferenceItem.FACTORY.create(result.get(0));
+				return DatasetReference.FACTORY.create(result.get(0));
 			}
 		}
 		// if here, inconsistent result
@@ -954,7 +954,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetReferenceItem> getElementsAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
@@ -962,7 +962,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets elements
 			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.INDEX.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, DatasetReferenceItem.FACTORY);
+			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
 		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();

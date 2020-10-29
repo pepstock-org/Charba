@@ -61,19 +61,19 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 
 	}
 
-	// meta data reference
-	private final DatasetMetaItem meta;
+	// dataset item instance
+	private final DatasetItem datasetItem;
 
 	/**
-	 * Creates the item using anenvelop of the native java script object which contains all properties.
+	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
 	public DatasetPluginItem(PluginsEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// checks if meta data are present
+		// checks if data item is present
 		// creating it or setting an empty object
-		meta = has(Property.META) ? new DatasetMetaItem(getValue(Property.META)) : new DatasetMetaItem();
+		datasetItem = has(Property.META) ? new DatasetItem(getValue(Property.META)) : new DatasetItem();
 	}
 
 	/**
@@ -86,11 +86,11 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the dataset meta data item.
+	 * Returns the dataset item.
 	 * 
-	 * @return the dataset meta data item.
+	 * @return the dataset item.
 	 */
-	public DatasetMetaItem getMeta() {
-		return meta;
+	public DatasetItem getDatasetItem() {
+		return datasetItem;
 	}
 }

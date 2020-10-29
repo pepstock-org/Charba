@@ -162,7 +162,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `steppedLine` from the dataset options to `stepped`.
    * rename `tension` from the dataset option to `lineTension`.
    * rename `defaultColor` from `Defaults` global options to `color`. 
-   * change structure of `DatasetMetaItem`.
+   * change structure of dataset elements.
    * rename `SteppedLine` enumeration to `Stepped`.
    * move `beginAtZero` property from ticks to axis/scale.
    * move `min` property from ticks to axis/scale.
@@ -258,6 +258,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove the usage of `Moment` as date library because it does not use the web internationalization.
  * remove the usage of `Date-fns` as date library because it does not use the web internationalization.
  * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks into `BarDataset` class.
+ * rename `getDatasetMeta(int)` method to `getDatasetItem(int)` into the `IsChart` interface.
+ * rename `getDatasets()` method to `getElements()` into the `DatasetItem` class.
+ * rename `getMeta()` method to `getDatasetItem()` into the `DatasetPluginItem` class. 
   
 ### Features
 

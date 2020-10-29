@@ -31,8 +31,8 @@ import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
-import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.DatasetReferenceItem;
+import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
 
@@ -406,11 +406,11 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#getDatasetMeta(int)
+	 * @see org.pepstock.charba.client.IsChart#getDatasetItem(int)
 	 */
 	@Override
-	public final DatasetMetaItem getDatasetMeta(int index) {
-		return chart.getDatasetMeta(index);
+	public final DatasetItem getDatasetItem(int index) {
+		return chart.getDatasetItem(index);
 	}
 
 	/*
@@ -419,7 +419,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#getDatasetAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public final List<DatasetReferenceItem> getDatasetAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
 		return chart.getDatasetAtEvent(event);
 	}
 
@@ -499,7 +499,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#getElementAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public final DatasetReferenceItem getElementAtEvent(BaseNativeEvent event) {
+	public final DatasetReference getElementAtEvent(BaseNativeEvent event) {
 		return chart.getElementAtEvent(event);
 	}
 
@@ -509,7 +509,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#getElementsAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
-	public final List<DatasetReferenceItem> getElementsAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event) {
 		return chart.getElementsAtEvent(event);
 	}
 

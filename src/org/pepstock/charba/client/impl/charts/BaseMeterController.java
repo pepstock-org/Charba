@@ -32,7 +32,7 @@ import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.ChartAreaNode;
-import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -179,10 +179,10 @@ final class BaseMeterController extends AbstractController {
 			// transforming the value in degrees
 			// in order to compare with circumference of the element
 			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
-			// gets the meta dataset of dataset 0
-			DatasetMetaItem item = chart.getDatasetMeta(0);
+			// gets the dataset item of dataset 0
+			DatasetItem item = chart.getDatasetItem(0);
 			// calculates the circumference in degree of element
-			double elemCircumference = item.getDatasets().get(0).getCircumference() * 180 / Math.PI;
+			double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
 			// calculate the dividend
 			double dividend = Math.min(maxCircumference, elemCircumference);
 			double divider = Math.max(maxCircumference, elemCircumference);
@@ -206,7 +206,7 @@ final class BaseMeterController extends AbstractController {
 	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
 		// gets dataset item at index 0
 		// it can not be null
-		DatasetMetaItem datasetMetaItem = chart.getDatasetMeta(0);
+		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
 		// calculate the side of the square where to draw the value
 		final int sideOfSquare = (int) ((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d

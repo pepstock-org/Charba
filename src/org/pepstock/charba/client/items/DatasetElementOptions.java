@@ -39,7 +39,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetItemOptions extends NativeObjectContainer {
+public final class DatasetElementOptions extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -91,7 +91,7 @@ public final class DatasetItemOptions extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	DatasetItemOptions(NativeObject nativeObject) {
+	DatasetElementOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

@@ -181,10 +181,10 @@ public final class Chart {
 	native ArrayObject getElementsAtEventForMode(BaseNativeEvent event, String mode, NativeObject options, boolean useFinalPosition);
 
 	/**
-	 * Looks for the dataset that matches the current index and returns that metadata.
+	 * Looks for the dataset that matches the current index.
 	 * 
 	 * @param index dataset index
-	 * @return dataset meta data item, as native object
+	 * @return dataset item, as native object
 	 */
 	@JsMethod
 	native NativeObject getDatasetMeta(int index);

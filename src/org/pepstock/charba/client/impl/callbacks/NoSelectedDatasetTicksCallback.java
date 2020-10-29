@@ -21,7 +21,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -80,17 +80,17 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 			boolean allHidden = false;
 			// gets datasets
 			List<Dataset> dss = chart.getData().getDatasets();
-			// scans them by for cycle to have the index for retrieving
-			// the dataset metadata
+			// scans them to have the index for retrieving
+			// the visibility
 			for (int i = 0; i < dss.size(); i++) {
-				// gets metadata to know if is hidden
-				DatasetMetaItem metadata = chart.getDatasetMeta(i);
-				// checks if metadata is null.
+				// gets dataset item to know if is hidden
+				DatasetItem datasetItem = chart.getDatasetItem(i);
+				// checks if item is null.
 				// it happens when the chart is drawing for the first time
 				// but at the first time 1 dataset is always visible
-				if (metadata != null) {
+				if (datasetItem != null) {
 					// OR on dataset visibility
-					allHidden = allHidden || metadata.isHidden();
+					allHidden = allHidden || datasetItem.isHidden();
 				}
 			}
 			// if all datasets are hidden

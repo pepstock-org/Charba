@@ -22,8 +22,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendClickEventHandler;
+import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -76,8 +76,8 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	private boolean checkByDatasetIndex(IsChart chart, int datasetIndex) {
 		// gets all datasets
 		List<Dataset> dss = chart.getData().getDatasets();
-		// scans them by for cycle to have the index for retrieving
-		// the dataset metadata
+		// scans them to have the index for retrieving
+		// the visibility
 		for (int i = 0; i < dss.size(); i++) {
 			// if visible return can be hidden
 			// ignoring the dataset index related to event
@@ -99,14 +99,14 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	private boolean checkByIndex(IsChart chart, int index) {
 		// gets all datasets
 		List<Dataset> dss = chart.getData().getDatasets();
-		// scans them by for cycle to have the index for retrieving
-		// the dataset metadata
+		// scans them to have the index for retrieving
+		// the visibility
 		for (int i = 0; i < dss.size(); i++) {
 			if (chart.isDatasetVisible(i)) {
-				// gets metadata
-				DatasetMetaItem metadataItem = chart.getDatasetMeta(i);
+				// gets dataset item
+				DatasetItem datasetItem = chart.getDatasetItem(i);
 				// gets all items
-				List<DatasetItem> items = metadataItem.getDatasets();
+				List<DatasetElement> items = datasetItem.getElements();
 				// scans all items by index
 				for (int k = 0; k < items.size(); k++) {
 					// if visible return can be hidden

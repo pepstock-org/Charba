@@ -18,7 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.controllers.StyleElement;
+import org.pepstock.charba.client.controllers.ControllerDatasetElement;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
@@ -109,7 +109,7 @@ public interface Controller {
 	 * @param datasetIndex dataset index
 	 * @param index data index
 	 */
-	void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index);
+	void removeHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index);
 
 	/**
 	 * Add hover styling to the given element.
@@ -120,7 +120,7 @@ public interface Controller {
 	 * @param datasetIndex dataset index
 	 * @param index data index
 	 */
-	void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element, int datasetIndex, int index);
+	void setHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index);
 
 	/**
 	 * Update the elements in response to new data.

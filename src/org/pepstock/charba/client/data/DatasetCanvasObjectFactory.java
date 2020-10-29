@@ -28,8 +28,8 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetMetaItem;
 
 /**
  * Utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
@@ -142,15 +142,15 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// gets chart area
 		ChartAreaNode chartArea = node.getChartArea();
 		// gets dataset item at index 0
-		DatasetMetaItem datasetMetaItem = chart.getDatasetMeta(datasetIndex);
+		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
 		// depending of scope (canvas or chart area)
 		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
 			// CANVAS
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (datasetMetaItem != null && !Double.isNaN(datasetMetaItem.getController().getInnerRadius()) && !Double.isNaN(datasetMetaItem.getController().getOuterRadius())) {
+			if (datasetItem != null && !Double.isNaN(datasetItem.getController().getInnerRadius()) && !Double.isNaN(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetMetaItem, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
 			} else {
 				// gets canvas
 				Canvas canvas = chart.getCanvas();
@@ -163,9 +163,9 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (datasetMetaItem != null && !Double.isNaN(datasetMetaItem.getController().getInnerRadius()) && !Double.isNaN(datasetMetaItem.getController().getOuterRadius())) {
+			if (datasetItem != null && !Double.isNaN(datasetItem.getController().getInnerRadius()) && !Double.isNaN(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetMetaItem, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
 			} else {
 				// by default is the center of chart area
 				radius.setInner(0);
@@ -187,12 +187,12 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * @param index data index
 	 * @param radius radius instance to be updated
 	 */
-	private void manageRadiusByChartNode(IsChart chart, DatasetMetaItem node, int datasetIndex, int index, Radius radius) {
-		// gets meta data
-		DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
+	private void manageRadiusByChartNode(IsChart chart, DatasetItem node, int datasetIndex, int index, Radius radius) {
+		// gets dataset item
+		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
 		// checks if datasetIndex is consistent
-		if (metaItem != null && index < metaItem.getDatasets().size() && index >= 0) {
-			DatasetItem item = metaItem.getDatasets().get(index);
+		if (datasetItem != null && index < datasetItem.getElements().size() && index >= 0) {
+			DatasetElement item = datasetItem.getElements().get(index);
 			// checks if chart is circular or not
 			if (!Double.isNaN(item.getInnerRadius()) && !Double.isNaN(item.getOuterRadius())) {
 				// uses the inner radius
