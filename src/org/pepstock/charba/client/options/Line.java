@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
-import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
@@ -86,7 +85,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates filler instance
-		filler = new Filler(getNativeObject(), getDefaultValues().getFill());
+		this.filler = new Filler(this, getDefaultValues().getFill(), getNativeObject());
 	}
 
 	/*
@@ -105,9 +104,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param tension the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public void setTension(double tension) {
-		setValue(Property.TENSION, tension);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TENSION, tension);
 	}
 
 	/**
@@ -126,9 +123,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_CAP_STYLE, borderCapStyle);
 	}
 
 	/**
@@ -148,9 +143,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setArrayValueAndAddToParent(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -169,9 +162,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
 	/**
@@ -192,9 +183,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderJoinStyle there are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_JOIN_STYLE, borderJoinStyle);
 	}
 
 	/**
@@ -215,9 +204,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param capBezierPoints <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
-		setValue(Property.CAP_BEZIER_POINTS, capBezierPoints);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CAP_BEZIER_POINTS, capBezierPoints);
 	}
 
 	/**
@@ -248,9 +235,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
-		setValue(Property.CUBIC_INTERPOLATION_MODE, mode);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CUBIC_INTERPOLATION_MODE, mode);
 	}
 
 	/**
@@ -264,51 +249,12 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets how to fill the area under the line.
-	 *
-	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
-	 */
-	@Override
-	public void setFill(boolean fill) {
-		// calls the default method into interface
-		HasFill.super.setFill(fill);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets how to fill the area under the line.
-	 *
-	 * @param fill how to fill the area under the line.
-	 */
-	@Override
-	public void setFill(IsFill fill) {
-		// calls the default method into interface
-		HasFill.super.setFill(fill);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns how to fill the area under the line.
-	 *
-	 * @return how to fill the area under the line.
-	 */
-	@Override
-	public IsFill getFill() {
-		// calls the default method into interface
-		return HasFill.super.getFill();
-	}
-
-	/**
 	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
 	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public void setStepped(boolean stepped) {
-		setValue(Property.STEPPED, stepped);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STEPPED, stepped);
 	}
 
 	/**

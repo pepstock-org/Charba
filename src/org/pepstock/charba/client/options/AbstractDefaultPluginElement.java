@@ -81,9 +81,7 @@ abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> ex
 	 * @param display if <code>true</code> the element is shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -102,9 +100,7 @@ abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> ex
 	 * @param position the position of element.
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.POSITION, position);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**
@@ -123,9 +119,7 @@ abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> ex
 	 * @param alignment alignment of the element.
 	 */
 	public void setAlign(ElementAlign alignment) {
-		setValue(Property.ALIGN, alignment);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ALIGN, alignment);
 	}
 
 	/**

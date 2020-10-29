@@ -86,7 +86,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		this.labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
 		this.title = new LegendTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		// creates text directioner
-		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
+		this.textDirectioner = new TextDirectioner(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -125,9 +125,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param maxWidth the maximum width of the legend, in pixels
 	 */
 	public void setMaxWidth(int maxWidth) {
-		setValue(Property.MAX_WIDTH, maxWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX_WIDTH, maxWidth);
 	}
 
 	/**
@@ -146,9 +144,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param maxHeight the maximum height of the legend, in pixels
 	 */
 	public void setMaxHeight(int maxHeight) {
-		setValue(Property.MAX_HEIGHT, maxHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX_HEIGHT, maxHeight);
 	}
 
 	/**
@@ -167,9 +163,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		setValue(Property.FULL_WIDTH, fullWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FULL_WIDTH, fullWidth);
 	}
 
 	/**
@@ -188,9 +182,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param reverse legend will show datasets in reverse order.
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.REVERSE, reverse);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.REVERSE, reverse);
 	}
 
 	/**

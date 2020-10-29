@@ -82,9 +82,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public final void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setArrayValueAndAddToParent(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -103,9 +101,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public final void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
 	/**

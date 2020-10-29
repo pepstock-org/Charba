@@ -58,9 +58,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * @param padding the padding left in pixel.
 	 */
 	public final void setLeft(int padding) {
-		setValue(Position.LEFT, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Position.LEFT, padding);
 	}
 
 	/**
@@ -79,9 +77,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * @param padding the padding right in pixel.
 	 */
 	public final void setRight(int padding) {
-		setValue(Position.RIGHT, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Position.RIGHT, padding);
 	}
 
 	/**
@@ -100,9 +96,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * @param padding the padding top in pixel.
 	 */
 	public final void setTop(int padding) {
-		setValue(Position.TOP, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Position.TOP, padding);
 	}
 
 	/**
@@ -121,9 +115,7 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 * @param padding the padding bottom in pixel.
 	 */
 	public final void setBottom(int padding) {
-		setValue(Position.BOTTOM, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Position.BOTTOM, padding);
 	}
 
 	/**

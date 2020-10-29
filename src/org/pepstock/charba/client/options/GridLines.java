@@ -107,9 +107,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param display If <code>false</code>, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -128,9 +126,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param circular If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
 	public void setCircular(boolean circular) {
-		setValue(Property.CIRCULAR, circular);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CIRCULAR, circular);
 	}
 
 	/**
@@ -158,9 +154,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(String color) {
-		setValue(Property.BORDER_COLOR, color);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_COLOR, color);
 	}
 
 	/**
@@ -195,9 +189,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		setValueOrArray(Property.COLOR, color);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueOrArrayAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
@@ -206,9 +198,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
-		setValueOrArray(Property.COLOR, color);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueOrArrayAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
@@ -264,9 +254,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Property.BORDER_WIDTH, borderWidth);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -284,9 +272,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	public void setLineWidth(int... lineWidth) {
-		setValueOrArray(Property.LINE_WIDTH, lineWidth);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueOrArrayAndAddToParent(Property.LINE_WIDTH, lineWidth);
 	}
 
 	/**
@@ -316,9 +302,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param drawBorder If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	public void setDrawBorder(boolean drawBorder) {
-		setValue(Property.DRAW_BORDER, drawBorder);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DRAW_BORDER, drawBorder);
 	}
 
 	/**
@@ -338,9 +322,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 *            grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
-		setValue(Property.DRAW_ON_CHART_AREA, drawOnChartArea);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DRAW_ON_CHART_AREA, drawOnChartArea);
 	}
 
 	/**
@@ -360,9 +342,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param drawTicks If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public void setDrawTicks(boolean drawTicks) {
-		setValue(Property.DRAW_TICKS, drawTicks);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DRAW_TICKS, drawTicks);
 	}
 
 	/**
@@ -381,9 +361,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param tickMarkLength Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public void setTickMarkLength(int tickMarkLength) {
-		setValue(Property.TICK_MARK_LENGTH, tickMarkLength);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TICK_MARK_LENGTH, tickMarkLength);
 	}
 
 	/**
@@ -402,9 +380,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
-		setValue(Property.OFFSET_GRID_LINES, offsetGridLines);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.OFFSET_GRID_LINES, offsetGridLines);
 	}
 
 	/**
@@ -423,9 +399,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
-		setValue(Property.Z, z);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.Z, z);
 	}
 
 	/**

@@ -91,9 +91,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param backgroundColor the background color.
 	 */
 	public final void setBackgroundColor(String backgroundColor) {
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
@@ -120,9 +118,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderWidth the border width.
 	 */
 	public final void setBorderWidth(int borderWidth) {
-		setValue(Property.BORDER_WIDTH, borderWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -149,9 +145,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderColor the border color.
 	 */
 	public final void setBorderColor(String borderColor) {
-		setValue(Property.BORDER_COLOR, borderColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**

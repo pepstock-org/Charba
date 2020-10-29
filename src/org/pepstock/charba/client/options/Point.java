@@ -75,7 +75,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates point styler
-		this.pointStyler = new PointStyler(getNativeObject(), elements, defaultValues);
+		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -94,9 +94,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
-		setValue(Property.RADIUS, radius);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.RADIUS, radius);
 	}
 
 	/**
@@ -115,9 +113,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double hitRadius) {
-		setValue(Property.HIT_RADIUS, hitRadius);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.HIT_RADIUS, hitRadius);
 	}
 
 	/**
@@ -136,9 +132,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double hoverRadius) {
-		setValue(Property.HOVER_RADIUS, hoverRadius);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.HOVER_RADIUS, hoverRadius);
 	}
 
 	/**
@@ -157,9 +151,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hoverBorderWidth the border width of point when hovered.
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
-		setValue(Property.HOVER_BORDER_WIDTH, hoverBorderWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.HOVER_BORDER_WIDTH, hoverBorderWidth);
 	}
 
 	/**
@@ -178,9 +170,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param rotation the point rotation (in degrees).
 	 */
 	public void setRotation(double rotation) {
-		setValue(Property.ROTATION, rotation);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ROTATION, rotation);
 	}
 
 	/**

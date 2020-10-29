@@ -78,9 +78,9 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		super(legend, childKey, defaultValues, nativeObject);
 		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		// creates the boxer
-		this.boxer = new Boxer(getNativeObject(), this, defaultValues);
+		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
 		// creates point styler
-		this.pointStyler = new PointStyler(getNativeObject(), this, defaultValues);
+		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -119,9 +119,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * @param usePointStyle if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
-		setValue(Property.USE_POINT_STYLE, usePointStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.USE_POINT_STYLE, usePointStyle);
 	}
 
 	/**
@@ -140,9 +138,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PADDING, padding);
 	}
 
 	/**

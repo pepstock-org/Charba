@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -47,16 +48,17 @@ final class LiningDatasetFiller extends Filler {
 	/**
 	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
+	 * @param parent model which contains the filler.
+	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param nativeObject native object where FILL property must be managed
-	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
-	LiningDatasetFiller(NativeObject nativeObject, IsFill defaultValue) {
-		super(new DataEnvelop<>(nativeObject), defaultValue);
+	LiningDatasetFiller(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, new DataEnvelop<>(nativeObject));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(new DataEnvelop<>(context))));
+		this.fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(new DataEnvelop<>(context))));
 	}
 
 	/*
@@ -98,7 +100,7 @@ final class LiningDatasetFiller extends Filler {
 		}
 		// if here, the property is a callback
 		// then returns the default
-		return getDefaultValue();
+		return getDefaultValues();
 	}
 
 	/**
@@ -164,7 +166,7 @@ final class LiningDatasetFiller extends Filler {
 		}
 		// if here, result is null
 		// then returns default
-		return transformFill(getDefaultValue());
+		return transformFill(getDefaultValues());
 	}
 
 	/**

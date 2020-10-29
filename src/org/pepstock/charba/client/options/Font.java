@@ -1,5 +1,5 @@
 /**
-    Copyright 2017 Andrea "Stock" Stocchero
+setValueAndAddToParent(    Copyright 2017 Andrea "Stock" Stocchero
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -108,9 +108,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setColor(String color) {
-		setValue(Property.COLOR, color);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
@@ -140,9 +138,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setSize(int size) {
-		setValue(Property.SIZE, size);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SIZE, size);
 	}
 
 	/**
@@ -162,9 +158,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setStyle(FontStyle style) {
-		setValue(Property.STYLE, style);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STYLE, style);
 	}
 
 	/**
@@ -184,9 +178,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setFamily(String family) {
-		setValue(Property.FAMILY, family);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FAMILY, family);
 	}
 
 	/**
@@ -206,9 +198,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setWeight(Weight weight) {
-		setValue(Property.WEIGHT, weight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -228,9 +218,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LINE_HEIGHT, lineHeight);
 	}
 
 	/**
@@ -240,9 +228,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LINE_HEIGHT, lineHeight);
 	}
 
 	/**
@@ -291,9 +277,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setLineWidth(int lineWidth) {
-		setValue(Property.LINE_WIDTH, lineWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LINE_WIDTH, lineWidth);
 	}
 
 	/**
@@ -326,9 +310,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setStrokeStyle(String strokeStyle) {
-		setValue(Property.STROKE_STYLE, strokeStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STROKE_STYLE, strokeStyle);
 	}
 
 	/**

@@ -64,7 +64,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	// instance of font
 	private final Font font;
 	// legend texter instance
-	private final LegendTexter legendtexter;
+	private final LegendTexter legendTexter;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -78,7 +78,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 		super(legend, childKey, defaultValues, nativeObject);
 		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		// creates the legend texter
-		this.legendtexter = new LegendTexter(new OptionsEnvelop<>(getNativeObject()), legend);
+		this.legendTexter = new LegendTexter(this, new OptionsEnvelop<>(getNativeObject()));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	 */
 	@Override
 	public LegendTexter getLegendTexter() {
-		return legendtexter;
+		return legendTexter;
 	}
 
 	/**
@@ -107,9 +107,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	 * @param display if <code>true</code> the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -128,9 +126,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	 * @param padding padding to apply around title.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PADDING, padding);
 	}
 
 	/**

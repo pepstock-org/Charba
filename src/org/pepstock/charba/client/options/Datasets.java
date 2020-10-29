@@ -78,7 +78,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	Datasets(Options options, Key childKey, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// creates the properties handlers
-		this.barOptionsHandler = new BarDatasetOptionsHandler(getNativeObject(), getDefaultValues());
+		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 	}
@@ -126,128 +126,12 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	}
 
 	/**
-	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
-	 * 
-	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
-	 *            each other.
-	 */
-	@Override
-	public void setBarPercentage(double barPercentage) {
-		HasBarDatasetOptions.super.setBarPercentage(barPercentage);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
-	 * other.
-	 * 
-	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
-	 */
-	@Override
-	public double getBarPercentage() {
-		return HasBarDatasetOptions.super.getBarPercentage();
-	}
-
-	/**
-	 * Sets the percent (0-1) of the available width each category should be within the sample width.
-	 * 
-	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
-	 */
-	@Override
-	public void setCategoryPercentage(double categoryPercentage) {
-		HasBarDatasetOptions.super.setCategoryPercentage(categoryPercentage);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the percent (0-1) of the available width each category should be within the sample width.
-	 * 
-	 * @return the percent (0-1) of the available width each category should be within the sample width.
-	 */
-	@Override
-	public double getCategoryPercentage() {
-		return HasBarDatasetOptions.super.getCategoryPercentage();
-	}
-
-	/**
-	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths are
-	 * calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 * 
-	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.
-	 *            Then, the bars are sized using barPercentage and categoryPercentage.
-	 */
-	@Override
-	public void setBarThickness(int barThickness) {
-		HasBarDatasetOptions.super.setBarThickness(barThickness);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths
-	 * are calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 * 
-	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
-	 *         bars are sized using barPercentage and categoryPercentage.
-	 */
-	@Override
-	public int getBarThickness() {
-		return HasBarDatasetOptions.super.getBarThickness();
-	}
-
-	/**
-	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this
-	 * 
-	 * @param maxBarThickness the maximum bar thickness.
-	 */
-	@Override
-	public void setMaxBarThickness(int maxBarThickness) {
-		HasBarDatasetOptions.super.setMaxBarThickness(maxBarThickness);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the maximum bar thickness.
-	 * 
-	 * @return the maximum bar thickness.
-	 */
-	@Override
-	public int getMaxBarThickness() {
-		return HasBarDatasetOptions.super.getMaxBarThickness();
-	}
-
-	/**
-	 * Set this to ensure that bars have a minimum length in pixels.
-	 * 
-	 * @param minBarLength a minimum length in pixels.
-	 */
-	@Override
-	public void setMinBarLength(int minBarLength) {
-		HasBarDatasetOptions.super.setMinBarLength(minBarLength);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns a minimum length in pixels.
-	 * 
-	 * @return a minimum length in pixels.
-	 */
-	@Override
-	public int getMinBarLength() {
-		return HasBarDatasetOptions.super.getMinBarLength();
-	}
-
-	/**
 	 * Sets if the line is not drawn for this dataset.
 	 * 
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public void setShowLine(boolean showLine) {
-		setValue(Property.SHOW_LINE, showLine);
+		setValueAndAddToParent(Property.SHOW_LINE, showLine);
 	}
 
 	/**

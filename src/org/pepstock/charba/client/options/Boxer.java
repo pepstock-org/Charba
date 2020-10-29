@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultBoxer;
 
 /**
@@ -27,12 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBoxer;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class Boxer extends NativeObjectContainer {
-
-	// default boxer dimension values
-	private final IsDefaultBoxer defaultValues;
-	// model which contains the boxer
-	private final AbstractNode model;
+final class Boxer extends PropertyHandler<IsDefaultBoxer> {
 
 	/**
 	 * Name of properties of native object.
@@ -69,21 +64,12 @@ final class Boxer extends NativeObjectContainer {
 	/**
 	 * Creates a boxer with the native object where box dimension properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param nativeObject native object where boxer properties must be managed
-	 * @param model model which contains the boxer.
+	 * @param parent model which contains the boxer.
 	 * @param defaultValues default value of box dimension to use when the properties do not exist
+	 * @param nativeObject native object where boxer properties must be managed
 	 */
-	Boxer(NativeObject nativeObject, AbstractNode model, IsDefaultBoxer defaultValues) {
-		super(nativeObject);
-		// checks if model is consistent
-		if (model == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Options model argument is null");
-		}
-		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
-		this.model = model;
-		this.defaultValues = defaultValues;
+	Boxer(AbstractNode parent, IsDefaultBoxer defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/**
@@ -92,9 +78,7 @@ final class Boxer extends NativeObjectContainer {
 	 * @param boxWidth width of colored box.
 	 */
 	void setBoxWidth(int boxWidth) {
-		setValue(Property.BOX_WIDTH, boxWidth);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.BOX_WIDTH, boxWidth);
 	}
 
 	/**
@@ -103,7 +87,7 @@ final class Boxer extends NativeObjectContainer {
 	 * @return width of colored box.
 	 */
 	int getBoxWidth() {
-		return getValue(Property.BOX_WIDTH, defaultValues.getBoxWidth());
+		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
 	}
 
 	/**
@@ -112,9 +96,7 @@ final class Boxer extends NativeObjectContainer {
 	 * @param boxHeight width of colored box.
 	 */
 	void setBoxHeight(int boxHeight) {
-		setValue(Property.BOX_HEIGHT, boxHeight);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.BOX_HEIGHT, boxHeight);
 	}
 
 	/**
@@ -123,6 +105,6 @@ final class Boxer extends NativeObjectContainer {
 	 * @return height of colored box.
 	 */
 	int getBoxHeight() {
-		return getValue(Property.BOX_HEIGHT, defaultValues.getBoxHeight());
+		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
 	}
 }

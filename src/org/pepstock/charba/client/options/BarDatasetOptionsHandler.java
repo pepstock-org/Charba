@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
@@ -30,15 +31,12 @@ import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class BarDatasetOptionsHandler extends NativeObjectContainer {
+public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDatasets> {
 
 	// min value of percentage
 	private static final double MINIMUM_PERCENTAGE = 0D;
 	// max value of percentage
 	private static final double MAXIMUM_PERCENTAGE = 1D;
-
-	// default value
-	private final IsDefaultDatasets defaultValues;
 
 	/**
 	 * Name of properties of native object.
@@ -78,35 +76,23 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	/**
 	 * Creates an bar options handler with an envelop of the native object where properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param envelop envelop of native object where bar options properties must be managed
+	 * @param parent model which contains the options handler.
 	 * @param defaultValues default value of options properties to use when the properties do not exist
+	 * @param envelop envelop of native object where bar options properties must be managed
 	 */
-	public BarDatasetOptionsHandler(DataEnvelop<NativeObject> envelop, IsDefaultDatasets defaultValues) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValues);
+	public BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, DataEnvelop<NativeObject> envelop) {
+		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
 	 * Creates an bar options handler with the native object where properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param nativeObject native object where bar options properties must be managed
+	 * @param parent model which contains the options handler.
 	 * @param defaultValues default value of options properties to use when the properties do not exist
+	 * @param nativeObject native object where bar options properties must be managed
 	 */
-	BarDatasetOptionsHandler(NativeObject nativeObject, IsDefaultDatasets defaultValues) {
-		super(nativeObject);
-		// checks default value instance
-		if (defaultValues == null) {
-			throw new IllegalArgumentException("Default value argument is null");
-		}
-		this.defaultValues = defaultValues;
-	}
-
-	/**
-	 * Returns the default value of options to use when the property does not exist.
-	 * 
-	 * @return the default value of options to use when the property does not exist
-	 */
-	protected final IsDefaultDatasets getDefaultValues() {
-		return defaultValues;
+	BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/**
@@ -116,7 +102,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 *            each other.
 	 */
 	void setBarPercentage(double barPercentage) {
-		setValue(Property.BAR_PERCENTAGE, checkAndGetPercentage(barPercentage, Property.BAR_PERCENTAGE));
+		setValueAndAddToParent(Property.BAR_PERCENTAGE, checkAndGetPercentage(barPercentage, Property.BAR_PERCENTAGE));
 	}
 
 	/**
@@ -126,7 +112,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, defaultValues.getBarPercentage());
+		return getValue(Property.BAR_PERCENTAGE, getDefaultValues().getBarPercentage());
 	}
 
 	/**
@@ -135,7 +121,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
 	 */
 	void setCategoryPercentage(double categoryPercentage) {
-		setValue(Property.CATEGORY_PERCENTAGE, checkAndGetPercentage(categoryPercentage, Property.CATEGORY_PERCENTAGE));
+		setValueAndAddToParent(Property.CATEGORY_PERCENTAGE, checkAndGetPercentage(categoryPercentage, Property.CATEGORY_PERCENTAGE));
 	}
 
 	/**
@@ -144,7 +130,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, defaultValues.getCategoryPercentage());
+		return getValue(Property.CATEGORY_PERCENTAGE, getDefaultValues().getCategoryPercentage());
 	}
 
 	/**
@@ -158,9 +144,9 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 		// checks if FLEX value has been set
 		if (DefaultDatasets.FLEX_BAR_THICKNESS == barThickness) {
 			// flex must be set
-			setValue(Property.BAR_THICKNESS, DefaultDatasets.FLEX_BAR_THICKNESS_VALUE);
+			setValueAndAddToParent(Property.BAR_THICKNESS, DefaultDatasets.FLEX_BAR_THICKNESS_VALUE);
 		} else {
-			setValue(Property.BAR_THICKNESS, barThickness);
+			setValueAndAddToParent(Property.BAR_THICKNESS, barThickness);
 		}
 	}
 
@@ -177,7 +163,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 			return DefaultDatasets.FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex
-		return getValue(Property.BAR_THICKNESS, defaultValues.getBarThickness());
+		return getValue(Property.BAR_THICKNESS, getDefaultValues().getBarThickness());
 	}
 
 	/**
@@ -186,7 +172,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param maxBarThickness the maximum bar thickness.
 	 */
 	void setMaxBarThickness(int maxBarThickness) {
-		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
+		setValueAndAddToParent(Property.MAX_BAR_THICKNESS, maxBarThickness);
 	}
 
 	/**
@@ -195,7 +181,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @return the maximum bar thickness.
 	 */
 	int getMaxBarThickness() {
-		return getValue(Property.MAX_BAR_THICKNESS, defaultValues.getMaxBarThickness());
+		return getValue(Property.MAX_BAR_THICKNESS, getDefaultValues().getMaxBarThickness());
 	}
 
 	/**
@@ -204,7 +190,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @param minBarLength a minimum length in pixels.
 	 */
 	void setMinBarLength(int minBarLength) {
-		setValue(Property.MIN_BAR_LENGTH, minBarLength);
+		setValueAndAddToParent(Property.MIN_BAR_LENGTH, minBarLength);
 	}
 
 	/**
@@ -213,7 +199,7 @@ public class BarDatasetOptionsHandler extends NativeObjectContainer {
 	 * @return a minimum length in pixels.
 	 */
 	int getMinBarLength() {
-		return getValue(Property.MIN_BAR_LENGTH, defaultValues.getMinBarLength());
+		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
 	}
 
 	/**

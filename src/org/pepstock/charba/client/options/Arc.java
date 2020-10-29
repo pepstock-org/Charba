@@ -80,9 +80,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	public void setBorderAlign(BorderAlign align) {
-		setValue(Property.BORDER_ALIGN, align);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_ALIGN, align);
 	}
 
 	/**
@@ -102,9 +100,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param weight the relative thickness of the dataset
 	 */
 	public void setWeight(double weight) {
-		setValue(Property.WEIGHT, weight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -124,9 +120,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param angle the arc angle to cover
 	 */
 	public void setAngle(double angle) {
-		setValue(Property.ANGLE, angle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ANGLE, angle);
 	}
 
 	/**
@@ -145,9 +139,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param offset the arc offset
 	 */
 	public void setOffset(int offset) {
-		setValue(Property.OFFSET, offset);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.OFFSET, offset);
 	}
 
 	/**

@@ -125,7 +125,7 @@ public final class AnimationCollection extends AbstractAnimationProperty<IsAnima
 			// loads the array from list
 			ArrayString array = ArrayString.fromOrEmpty(properties);
 			// stores the properties
-			setArrayValue(Property.PROPERTIES, array);
+			setArrayValueAndAddToParent(Property.PROPERTIES, array);
 		}
 	}
 
@@ -140,7 +140,7 @@ public final class AnimationCollection extends AbstractAnimationProperty<IsAnima
 			// loads the array from list
 			ArrayString array = ArrayString.fromOrEmpty(properties.toArray(new IsAnimationPropertyKey[0]));
 			// stores the properties
-			setArrayValue(Property.PROPERTIES, array);
+			setArrayValueAndAddToParent(Property.PROPERTIES, array);
 		}
 	}
 

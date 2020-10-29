@@ -108,9 +108,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		// if default plugin does nothing
 		// but if override plugin is set, means that is done by configuration then allowed
 		if (!DefaultPluginId.is(pluginId) || overrideDefaultPlugin) {
-			setValue(PluginIdChecker.key(pluginId), enabled);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setValueAndAddToParent(PluginIdChecker.key(pluginId), enabled);
 		}
 	}
 
@@ -195,9 +193,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks plugin ids
 			Key pluginIdKey = PluginIdChecker.key(options.getPluginId());
 			// stores configuration
-			setValue(pluginIdKey, options);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setValueAndAddToParent(pluginIdKey, options);
 		}
 	}
 
@@ -232,9 +228,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// creates plugin ids
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// stores configuration
-			setArrayValue(pluginIdKey, ArrayObject.fromOrNull(options));
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setArrayValueAndAddToParent(pluginIdKey, ArrayObject.fromOrNull(options));
 		}
 	}
 
@@ -259,9 +253,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks plugin
 			checkPluginIdConsistency(pluginIdKey, options);
 			// stores configuration
-			setValue(pluginIdKey, options);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setValueAndAddToParent(pluginIdKey, options);
 		}
 	}
 
@@ -288,9 +280,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				checkPluginIdConsistency(pluginIdKey, option);
 			}
 			// stores configuration
-			setArrayValue(pluginIdKey, ArrayObject.fromOrNull(options));
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setArrayValueAndAddToParent(pluginIdKey, ArrayObject.fromOrNull(options));
 		}
 	}
 

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
@@ -31,12 +31,10 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendTexter extends NativeObjectContainer {
+public final class LegendTexter extends PropertyHandler<Boolean> {
 
 	// default of html text
 	static final boolean DEFAULT_HTML_TEXT = false;
-	// model which contains the legend texter
-	private final AbstractNode model;
 
 	/**
 	 * Name of properties of native object.
@@ -74,15 +72,11 @@ public final class LegendTexter extends NativeObjectContainer {
 	/**
 	 * Creates a legend texter with the envelop of the native object where TEXT property must be managed.
 	 * 
+	 * @param parent model which contains the legend texter.
 	 * @param envelop envelop of the native object where TEXT property must be managed
-	 * @param model model which contains the legend texter.
 	 */
-	public LegendTexter(OptionsEnvelop<NativeObject> envelop, AbstractNode model) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), model);
-		// checks if model is consistent
-		if (model == null) {
-			throw new IllegalArgumentException("Model argument is null");
-		}
+	public LegendTexter(AbstractNode parent, OptionsEnvelop<NativeObject> envelop) {
+		this(parent, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -91,20 +85,17 @@ public final class LegendTexter extends NativeObjectContainer {
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 */
 	LegendTexter(NativeObject nativeObject) {
-		this(nativeObject, null);
+		this(null, nativeObject);
 	}
-
 	
 	/**
 	 * Creates a legend texter with the native object where TEXT property must be managed.
 	 * 
+	 * @param parent model which contains the legend texter.
 	 * @param nativeObject native object where SPANGAPS property must be managed
-	 * @param model model which contains the legend texter.
 	 */
-	private LegendTexter(NativeObject nativeObject, AbstractNode model) {
-		super(nativeObject);
-		// stores model
-		this.model = model;
+	private LegendTexter(AbstractNode parent, NativeObject nativeObject) {
+		super(parent, DEFAULT_HTML_TEXT, nativeObject);
 	}
 
 	/**
@@ -113,9 +104,7 @@ public final class LegendTexter extends NativeObjectContainer {
 	 * @param text the label that will be displayed
 	 */
 	void setText(String text) {
-		setValue(Property.TEXT, text);
-		// checks and adds to parent if model is consistent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TEXT, text);
 	}
 
 	/**
@@ -188,20 +177,7 @@ public final class LegendTexter extends NativeObjectContainer {
 	 * @param htmlText <code>true</code> if the text of legend item is HTML
 	 */
 	void setHtmlText(boolean htmlText) {
-		setValue(Property.CHARBA_HTML_TEXT, htmlText);
-		// checks and adds to parent if model is consistent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CHARBA_HTML_TEXT, htmlText);
 	}
 
-	/**
-	 * Called recursively when a property has been set in the item.<br>
-	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
-	 */
-	private void checkAndAddToParent() {
-		// checks if model is consistent
-		if (model != null) {
-			// checks if the node is already added to parent
-			model.checkAndAddToParent();
-		}
-	}
 }

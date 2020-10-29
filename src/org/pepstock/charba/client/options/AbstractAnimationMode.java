@@ -85,7 +85,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				// checks if cached
 				if (animationProperties.containsKey(property.value())) {
 					// stores the object
-					setValue(property, animationProperties.get(property.value()).nativeObject());
+					setValueAndAddToParent(property, animationProperties.get(property.value()).nativeObject());
 				} else if (ObjectType.BOOLEAN.equals(type(property))) {
 					// if here is not cached
 					// then it must be removed in order to enable the default
@@ -97,7 +97,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				animationDisabledProperties.remove(property.value());
 			} else {
 				// sets the property to false
-				setValue(property, false);
+				setValueAndAddToParent(property, false);
 				// adds to the disabled properties
 				animationDisabledProperties.add(property.value());
 			}
@@ -221,7 +221,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				// checks if cached
 				if (animationCollections.containsKey(collection.value())) {
 					// stores the object
-					setValue(collection, animationCollections.get(collection.value()).nativeObject());
+					setValueAndAddToParent(collection, animationCollections.get(collection.value()).nativeObject());
 				} else if (ObjectType.BOOLEAN.equals(type(collection))) {
 					// if here is not cached
 					// then it must be removed in order to enable the default
@@ -231,7 +231,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				}
 			} else {
 				// sets the collection to false
-				setValue(collection, false);
+				setValueAndAddToParent(collection, false);
 			}
 		}
 	}
@@ -322,7 +322,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 			// cats to sub element
 			IsAnimationElement subElement = (IsAnimationElement) animationElement;
 			// stores the element
-			setValue(subElement.getKey(), animationElement.nativeObject());
+			setValueAndAddToParent(subElement.getKey(), animationElement.nativeObject());
 			// checks and returns if there is the value
 			return has(subElement.getKey());
 		}

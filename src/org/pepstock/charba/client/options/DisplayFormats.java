@@ -52,9 +52,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	 * @param format display format
 	 */
 	public void setDisplayFormat(TimeUnit unit, String format) {
-		setValue(unit, format);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(unit, format);
 	}
 
 	/**

@@ -99,9 +99,7 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	 * @param axis define which directions are used in calculating distances.
 	 */
 	public void setAxis(InteractionAxis axis) {
-		setValue(Property.AXIS, axis);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.AXIS, axis);
 	}
 
 	/**

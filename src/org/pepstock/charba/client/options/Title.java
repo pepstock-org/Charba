@@ -98,9 +98,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PADDING, padding);
 	}
 
 	/**
@@ -119,9 +117,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		setValue(Property.FULL_WIDTH, fullWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FULL_WIDTH, fullWidth);
 	}
 
 	/**
@@ -140,10 +136,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
-		// stores the array
-		setValueOrArray(Property.TEXT, text);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueOrArrayAndAddToParent(Property.TEXT, text);
 	}
 
 	/**

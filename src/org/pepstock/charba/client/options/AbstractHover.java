@@ -91,9 +91,7 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	 * @param mode which elements appear in the tooltip.
 	 */
 	public final void setMode(InteractionMode mode) {
-		setValue(Property.MODE, mode);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MODE, mode);
 	}
 
 	/**
@@ -111,9 +109,7 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public final void setIntersect(boolean intersect) {
-		setValue(Property.INTERSECT, intersect);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.INTERSECT, intersect);
 	}
 
 	/**

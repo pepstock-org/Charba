@@ -110,9 +110,7 @@ public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @param display if <code>true</code>, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -131,9 +129,7 @@ public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @param labelString the text for the scale string.
 	 */
 	public void setLabelString(String labelString) {
-		setValue(Property.LABEL_STRING, labelString);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LABEL_STRING, labelString);
 	}
 
 	/**
@@ -152,9 +148,7 @@ public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @param align the alignment of the axis title
 	 */
 	public void setAlign(ScaleLabelAlign align) {
-		setValue(Property.ALIGN, align);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ALIGN, align);
 	}
 
 	/**

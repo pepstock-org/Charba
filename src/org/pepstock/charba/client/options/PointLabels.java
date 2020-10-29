@@ -92,9 +92,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 * @param display if <code>true</code>, labels are shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**

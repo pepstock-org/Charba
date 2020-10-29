@@ -189,7 +189,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
 		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
 		// sets span gapper
-		this.spanGapper = new SpanGapper(getNativeObject(), getDefaultValues());
+		this.spanGapper = new SpanGapper(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 	}

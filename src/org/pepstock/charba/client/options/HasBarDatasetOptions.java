@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
 
 /**
  * Defines a BAR dataset properties of options in order to use the same logic between datasets and options/configuration.
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasBarDatasetOptions {
+public interface HasBarDatasetOptions extends IsDefaultBarDatasets{
 
 	/**
 	 * Returns the instance of bar dataset options handler.
@@ -51,6 +52,7 @@ public interface HasBarDatasetOptions {
 	 * 
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
+	@Override
 	default double getBarPercentage() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
@@ -78,6 +80,7 @@ public interface HasBarDatasetOptions {
 	 * 
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
+	@Override
 	default double getCategoryPercentage() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
@@ -109,6 +112,7 @@ public interface HasBarDatasetOptions {
 	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
 	 *         bars are sized using barPercentage and categoryPercentage.
 	 */
+	@Override
 	default int getBarThickness() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
@@ -136,6 +140,7 @@ public interface HasBarDatasetOptions {
 	 * 
 	 * @return the maximum bar thickness.
 	 */
+	@Override
 	default int getMaxBarThickness() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
@@ -163,6 +168,7 @@ public interface HasBarDatasetOptions {
 	 * 
 	 * @return a minimum length in pixels.
 	 */
+	@Override
 	default int getMinBarLength() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {

@@ -101,14 +101,12 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	public void setIsoWeekday(IsoWeekDay isoWeekday) {
 		// checks if argument consistent
 		if (isoWeekday != null) {
-			setValue(Property.ISO_WEEKDAY, isoWeekday.value());
+			setValueAndAddToParent(Property.ISO_WEEKDAY, isoWeekday.value());
 		} else {
 			// if here argument not consistent
 			// then removes the key
 			removeIfExists(Property.ISO_WEEKDAY);
 		}
-		// checks if all parents are attached
-		checkAndAddToParent();
 	}
 
 	/**
@@ -143,9 +141,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param round if defined, this will override the data minimum.
 	 */
 	public void setRound(TimeUnit round) {
-		setValue(Property.ROUND, round);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ROUND, round);
 	}
 
 	/**
@@ -171,9 +167,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param tooltipFormat format string to use for the tooltip.
 	 */
 	public void setTooltipFormat(String tooltipFormat) {
-		setValue(Property.TOOLTIP_FORMAT, tooltipFormat);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TOOLTIP_FORMAT, tooltipFormat);
 	}
 
 	/**
@@ -205,9 +199,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param unit if defined, will force the unit to be a certain type.
 	 */
 	public void setUnit(TimeUnit unit) {
-		setValue(Property.UNIT, unit);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.UNIT, unit);
 	}
 
 	/**
@@ -233,9 +225,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param stepSize number of units between grid lines.
 	 */
 	public void setStepSize(double stepSize) {
-		setValue(Property.STEP_SIZE, stepSize);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STEP_SIZE, stepSize);
 	}
 
 	/**
@@ -254,9 +244,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param unit minimum display format to be used for a time unit.
 	 */
 	public void setMinUnit(TimeUnit unit) {
-		setValue(Property.MIN_UNIT, unit);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIN_UNIT, unit);
 	}
 
 	/**
@@ -275,9 +263,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param parser defined as a string, it is interpreted as a custom format to be used by LUXON to parse the date.
 	 */
 	public void setParser(String parser) {
-		setValue(Property.PARSER, parser);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PARSER, parser);
 	}
 
 	/**

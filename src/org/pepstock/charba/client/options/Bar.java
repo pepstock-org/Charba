@@ -82,7 +82,7 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
+			setValueAndAddToParent(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
 		}
 	}
 
@@ -95,13 +95,11 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 		// checks if setting a false value
 		if (BorderSkipped.FALSE.equals(position)) {
 			// stores boolean value
-			setValue(Property.BORDER_SKIPPED, false);
+			setValueAndAddToParent(Property.BORDER_SKIPPED, false);
 		} else {
 			// otherwise stores the key value
-			setValue(Property.BORDER_SKIPPED, position);
+			setValueAndAddToParent(Property.BORDER_SKIPPED, position);
 		}
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
@@ -126,7 +124,7 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(int borderRadius) {
-		setValue(Property.BORDER_RADIUS, borderRadius);
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
 	}
 
 	/**

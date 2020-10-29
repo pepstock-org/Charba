@@ -87,9 +87,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param type the type of <code>from</code> property and determines the interpolator used.
 	 */
 	public void setType(AnimationType type) {
-		setValue(Property.TYPE, type);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TYPE, type);
 	}
 
 	/**
@@ -108,9 +106,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param from the start end for the animation as number.
 	 */
 	public void setFrom(boolean from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FROM, from);
 	}
 
 	/**
@@ -119,9 +115,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param from the start value for the animation as number.
 	 */
 	public void setFrom(double from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FROM, from);
 	}
 
 	/**
@@ -130,9 +124,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param from the start value for the animation as color string.
 	 */
 	public void setFrom(String from) {
-		setValue(Property.FROM, from);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FROM, from);
 	}
 
 	/**
@@ -223,9 +215,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param to the end value for the animation as number.
 	 */
 	public void setTo(boolean to) {
-		setValue(Property.TO, to);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TO, to);
 	}
 
 	/**
@@ -234,9 +224,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param to the end value for the animation as number.
 	 */
 	public void setTo(double to) {
-		setValue(Property.TO, to);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TO, to);
 	}
 
 	/**
@@ -245,9 +233,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param to the end value for the animation as color string.
 	 */
 	public void setTo(String to) {
-		setValue(Property.TO, to);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TO, to);
 	}
 
 	/**

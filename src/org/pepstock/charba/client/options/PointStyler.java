@@ -18,8 +18,8 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultPointStyler;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -31,12 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PointStyler extends NativeObjectContainer {
-
-	// default point style values
-	private final IsDefaultPointStyler defaultValues;
-	// model which contains the boxer
-	private final AbstractNode model;
+final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
 
 	/**
 	 * Name of properties of native object.
@@ -72,21 +67,12 @@ final class PointStyler extends NativeObjectContainer {
 	/**
 	 * Creates a point styler with the native object where POINTSTYLE property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param nativeObject native object where point styler properties must be managed
-	 * @param model model which contains the point styler.
+	 * @param parent model which contains the point styler.
 	 * @param defaultValues default value of point style to use when the properties do not exist
+	 * @param nativeObject native object where point styler properties must be managed
 	 */
-	PointStyler(NativeObject nativeObject, AbstractNode model, IsDefaultPointStyler defaultValues) {
-		super(nativeObject);
-		// checks if model is consistent
-		if (model == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Options model argument is null");
-		}
-		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
-		this.model = model;
-		this.defaultValues = defaultValues;
+	PointStyler(AbstractNode parent, IsDefaultPointStyler defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/**
@@ -95,9 +81,7 @@ final class PointStyler extends NativeObjectContainer {
 	 * @param pointStyle array of the style of the point.
 	 */
 	void setPointStyle(PointStyle pointStyle) {
-		setValue(Property.POINT_STYLE, pointStyle);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
 
 	/**
@@ -109,11 +93,11 @@ final class PointStyler extends NativeObjectContainer {
 	PointStyle getPointStyle() {
 		// checks if image as point style has been used
 		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
-			return getValue(Property.POINT_STYLE, PointStyle.values(), defaultValues.getPointStyle());
+			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
 		}
 		// if here, means the point style as stored as images
 		// then returns the default
-		return defaultValues.getPointStyle();
+		return getDefaultValues().getPointStyle();
 	}
 
 	/**
@@ -122,9 +106,7 @@ final class PointStyler extends NativeObjectContainer {
 	 * @param pointStyle image element of the style of the point as image.
 	 */
 	void setPointStyle(Img pointStyle) {
-		setValue(Property.POINT_STYLE, pointStyle);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
 
 	/**

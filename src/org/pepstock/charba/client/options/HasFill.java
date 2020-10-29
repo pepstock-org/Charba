@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFiller;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.enums.IsFill;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasFill {
+public interface HasFill extends IsDefaultFiller {
 
 	/**
 	 * Returns a filler instance to use into default methods of this interface.
@@ -88,6 +89,7 @@ public interface HasFill {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
+	@Override
 	default IsFill getFill() {
 		// checks if filler is consistent
 		if (getFiller() != null) {

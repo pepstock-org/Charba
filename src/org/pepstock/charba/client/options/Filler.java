@@ -15,10 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.Fill;
@@ -32,10 +33,7 @@ import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Filler extends NativeObjectContainer {
-
-	// default value
-	private final IsFill defaultValue;
+public class Filler extends PropertyHandler<IsFill> {
 
 	/**
 	 * Name of properties of native object.
@@ -74,35 +72,27 @@ public class Filler extends NativeObjectContainer {
 	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
 	 * This is called from <code>data</code> package.
 	 * 
+	 * @param parent model which contains the filler.
+	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param envelop envelop of native object where FILL property must be managed
-	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
-	public Filler(DataEnvelop<NativeObject> envelop, IsFill defaultValue) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValue);
+	protected Filler(AbstractNode parent, IsFill defaultValues, DataEnvelop<NativeObject> envelop) {
+		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
 	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
+	 * @param parent model which contains the filler.
+	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param nativeObject native object where FILL property must be managed
-	 * @param defaultValue default value of FILL to use when the property does not exist
 	 */
-	Filler(NativeObject nativeObject, IsFill defaultValue) {
-		super(nativeObject);
+	Filler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 		// checks default value instance
-		if (!IsFill.isValid(defaultValue)) {
+		if (!IsFill.isValid(getDefaultValues())) {
 			throw new IllegalArgumentException("Default fill argument is null or not consistent");
 		}
-		this.defaultValue = defaultValue;
-	}
-
-	/**
-	 * Returns the default value of FILL to use when the property does not exist.
-	 * 
-	 * @return the default value of FILL to use when the property does not exist
-	 */
-	protected final IsFill getDefaultValue() {
-		return defaultValue;
 	}
 
 	/**
@@ -111,7 +101,7 @@ public class Filler extends NativeObjectContainer {
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	protected void setFill(boolean fill) {
-		setValue(Property.FILL, fill);
+		setValueAndAddToParent(Property.FILL, fill);
 		// stores the filling mode
 		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 	}
@@ -145,22 +135,22 @@ public class Filler extends NativeObjectContainer {
 			// checks if is no fill
 			if (Fill.FALSE.equals(fill)) {
 				// sets the boolean value instead of string one
-				setValue(Property.FILL, false);
+				setValueAndAddToParent(Property.FILL, false);
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 			} else if (Fill.isPredefined(fill)) {
 				// sets value
-				setValue(Property.FILL, fill);
+				setValueAndAddToParent(Property.FILL, fill);
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
 			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
 				// sets value
-				setValue(Property.FILL, fill.getValueAsInt());
+				setValueAndAddToParent(Property.FILL, fill.getValueAsInt());
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
 			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
 				// sets value
-				setValue(Property.FILL, fill.getValue());
+				setValueAndAddToParent(Property.FILL, fill.getValue());
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
 			}
@@ -186,7 +176,7 @@ public class Filler extends NativeObjectContainer {
 				// gets the fill value, using null as default
 				IsFill fill = getValue(Property.FILL, Fill.values(), null);
 				// if null, returns the default one
-				return fill == null ? defaultValue : fill;
+				return fill == null ? getDefaultValues() : fill;
 			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {
 				// the default here is 0 because the property must be set
 				// setting 0, an exception will be thrown
@@ -198,6 +188,6 @@ public class Filler extends NativeObjectContainer {
 			}
 		}
 		// returns the default
-		return defaultValue;
+		return getDefaultValues();
 	}
 }

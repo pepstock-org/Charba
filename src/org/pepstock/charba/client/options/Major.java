@@ -76,9 +76,7 @@ public final class Major extends AbstractModel<Ticks, IsDefaultMajor> implements
 	 * @param enabled if <code>true</code>, major tick options are used to show major ticks
 	 */
 	public void setEnabled(boolean enabled) {
-		setValue(Property.ENABLED, enabled);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ENABLED, enabled);
 	}
 
 	/**

@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -30,10 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SpanGapper extends NativeObjectContainer {
-
-	// default value
-	private final IsDefaultOptions defaultValues;
+public final class SpanGapper extends PropertyHandler<IsDefaultOptions> {
 
 	/**
 	 * Name of properties of native object.
@@ -69,35 +67,23 @@ public final class SpanGapper extends NativeObjectContainer {
 	/**
 	 * Creates a span gapper with the envelop of the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param envelop envelop of the native object where SPANGAPS property must be managed
+	 * @param parent model which contains the span gapper.
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
+	 * @param envelop envelop of the native object where SPANGAPS property must be managed
 	 */
-	public SpanGapper(DataEnvelop<NativeObject> envelop, IsDefaultOptions defaultValues) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), defaultValues);
+	public SpanGapper(AbstractNode parent, IsDefaultOptions defaultValues, DataEnvelop<NativeObject> envelop) {
+		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
 	 * Creates a span gapper with the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param nativeObject native object where SPANGAPS property must be managed
+	 * @param parent model which contains the span gapper.
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
+	 * @param nativeObject native object where SPANGAPS property must be managed
 	 */
-	SpanGapper(NativeObject nativeObject, IsDefaultOptions defaultValues) {
-		super(nativeObject);
-		// checks default value instance
-		if (defaultValues == null) {
-			throw new IllegalArgumentException("Default value argument is null");
-		}
-		this.defaultValues = defaultValues;
-	}
-
-	/**
-	 * Returns the default value of options to use when the property does not exist.
-	 * 
-	 * @return the default value of options to use when the property does not exist
-	 */
-	protected IsDefaultOptions getDefaultValues() {
-		return defaultValues;
+	SpanGapper(AbstractNode parent, IsDefaultOptions defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/**
@@ -108,7 +94,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 *            If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
 	void setSpanGaps(boolean spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
+		setValueAndAddToParent(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
@@ -117,7 +103,7 @@ public final class SpanGapper extends NativeObjectContainer {
 	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
 	 */
 	void setSpanGaps(double spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
+		setValueAndAddToParent(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**

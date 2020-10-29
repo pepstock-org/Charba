@@ -119,17 +119,17 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub elements
-		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, defaultValues, getValue(Property.CALLBACKS));
+		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, getDefaultValues(), getValue(Property.CALLBACKS));
 		// gets fonts definition
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text directioner
-		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
+		this.textDirectioner = new TextDirectioner(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 		// creates the boxer
-		this.boxer = new Boxer(getNativeObject(), this, defaultValues);
+		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
 	}
 	
 	/*
@@ -219,9 +219,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param enabled <code>true</code> if tooltips are enabled.
 	 */
 	public void setEnabled(boolean enabled) {
-		setValue(Property.ENABLED, enabled);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ENABLED, enabled);
 	}
 
 	/**
@@ -247,9 +245,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 			throw new IllegalArgumentException("The tooltip position '" + position + "' is not consistent");
 		}
 		// stores values
-		setValue(Property.POSITION, position);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**
@@ -291,9 +287,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param backgroundColor background color of the tooltip.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
@@ -331,9 +325,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param align title alignment.
 	 */
 	public void setTitleAlign(TextAlign align) {
-		setValue(Property.TITLE_ALIGN, align);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TITLE_ALIGN, align);
 	}
 
 	/**
@@ -352,9 +344,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param titleSpacing spacing to add to top and bottom of each title line.
 	 */
 	public void setTitleSpacing(int titleSpacing) {
-		setValue(Property.TITLE_SPACING, titleSpacing);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TITLE_SPACING, titleSpacing);
 	}
 
 	/**
@@ -373,9 +363,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param titleMarginBottom margin to add on bottom of title section.
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
-		setValue(Property.TITLE_MARGIN_BOTTOM, titleMarginBottom);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TITLE_MARGIN_BOTTOM, titleMarginBottom);
 	}
 
 	/**
@@ -404,9 +392,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param align body alignment.
 	 */
 	public void setBodyAlign(TextAlign align) {
-		setValue(Property.BODY_ALIGN, align);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BODY_ALIGN, align);
 	}
 
 	/**
@@ -425,9 +411,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
 	 */
 	public void setBodySpacing(int bodySpacing) {
-		setValue(Property.BODY_SPACING, bodySpacing);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BODY_SPACING, bodySpacing);
 	}
 
 	/**
@@ -456,9 +440,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param align footer alignment.
 	 */
 	public void setFooterAlign(TextAlign align) {
-		setValue(Property.FOOTER_ALIGN, align);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FOOTER_ALIGN, align);
 	}
 
 	/**
@@ -477,9 +459,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param footerSpacing spacing to add to top and bottom of each footer line.
 	 */
 	public void setFooterSpacing(int footerSpacing) {
-		setValue(Property.FOOTER_SPACING, footerSpacing);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FOOTER_SPACING, footerSpacing);
 	}
 
 	/**
@@ -498,9 +478,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param footerMarginTop margin to add before drawing the footer.
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
-		setValue(Property.FOOTER_MARGIN_TOP, footerMarginTop);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.FOOTER_MARGIN_TOP, footerMarginTop);
 	}
 
 	/**
@@ -519,9 +497,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param xPadding padding to add on left and right of tooltip.
 	 */
 	public void setXPadding(int xPadding) {
-		setValue(Property.X_PADDING, xPadding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.X_PADDING, xPadding);
 	}
 
 	/**
@@ -540,9 +516,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param yPadding padding to add on top and bottom of tooltip.
 	 */
 	public void setYPadding(int yPadding) {
-		setValue(Property.Y_PADDING, yPadding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.Y_PADDING, yPadding);
 	}
 
 	/**
@@ -561,9 +535,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param caretPadding extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public void setCaretPadding(int caretPadding) {
-		setValue(Property.CARET_PADDING, caretPadding);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CARET_PADDING, caretPadding);
 	}
 
 	/**
@@ -582,9 +554,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param caretSize size, in pixels, of the tooltip arrow.
 	 */
 	public void setCaretSize(int caretSize) {
-		setValue(Property.CARET_SIZE, caretSize);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CARET_SIZE, caretSize);
 	}
 
 	/**
@@ -603,9 +573,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param cornerRadius radius of tooltip corner curves.
 	 */
 	public void setCornerRadius(int cornerRadius) {
-		setValue(Property.CORNER_RADIUS, cornerRadius);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadius);
 	}
 
 	/**
@@ -633,9 +601,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
-		setValue(Property.MULTI_KEY_BACKGROUND, multiKeyBackground);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MULTI_KEY_BACKGROUND, multiKeyBackground);
 	}
 
 	/**
@@ -663,9 +629,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param displayColors if <code>true</code>, color boxes are shown in the tooltip.
 	 */
 	public void setDisplayColors(boolean displayColors) {
-		setValue(Property.DISPLAY_COLORS, displayColors);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY_COLORS, displayColors);
 	}
 
 	/**
@@ -693,9 +657,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param borderColor color of the border.
 	 */
 	public void setBorderColor(String borderColor) {
-		setValue(Property.BORDER_COLOR, borderColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**
@@ -723,9 +685,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param borderWidth size of the border.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Property.BORDER_WIDTH, borderWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**

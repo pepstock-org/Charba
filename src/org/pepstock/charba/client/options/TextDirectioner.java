@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultTextDirectioner;
 import org.pepstock.charba.client.enums.TextDirection;
 
@@ -28,12 +28,7 @@ import org.pepstock.charba.client.enums.TextDirection;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class TextDirectioner extends NativeObjectContainer {
-
-	// default text direction values
-	private final IsDefaultTextDirectioner defaultValues;
-	// model which contains the directioner
-	private final AbstractNode model;
+final class TextDirectioner extends PropertyHandler<IsDefaultTextDirectioner> {
 
 	/**
 	 * Name of properties of native object.
@@ -70,21 +65,12 @@ final class TextDirectioner extends NativeObjectContainer {
 	/**
 	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param nativeObject native object where text direction properties must be managed
-	 * @param model model which contains the text directioner.
+	 * @param parent model which contains the text directioner.
 	 * @param defaultValues default value of text direction to use when the properties do not exist
+	 * @param nativeObject native object where text direction properties must be managed
 	 */
-	TextDirectioner(NativeObject nativeObject, AbstractNode model, IsDefaultTextDirectioner defaultValues) {
-		super(nativeObject);
-		// checks if model is consistent
-		if (model == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Options model argument is null");
-		}
-		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
-		this.model = model;
-		this.defaultValues = defaultValues;
+	TextDirectioner(AbstractNode parent, IsDefaultTextDirectioner defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/**
@@ -93,9 +79,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @param rtl <code>true</code> for rendering the tooltips from right to left
 	 */
 	void setRtl(boolean rtl) {
-		setValue(Property.RTL, rtl);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.RTL, rtl);
 	}
 
 	/**
@@ -104,7 +88,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @return <code>true</code> for rendering the tooltips from right to left.
 	 */
 	boolean isRtl() {
-		return getValue(Property.RTL, defaultValues.isRtl());
+		return getValue(Property.RTL, getDefaultValues().isRtl());
 	}
 
 	/**
@@ -113,9 +97,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @param textDirection the text direction of the tooltips.
 	 */
 	void setTextDirection(TextDirection textDirection) {
-		setValue(Property.TEXT_DIRECTION, textDirection);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setValueAndAddToParent(Property.TEXT_DIRECTION, textDirection);
 	}
 
 	/**
@@ -124,7 +106,7 @@ final class TextDirectioner extends NativeObjectContainer {
 	 * @return the text direction of the tooltips.
 	 */
 	TextDirection getTextDirection() {
-		return getValue(Property.TEXT_DIRECTION, TextDirection.values(), defaultValues.getTextDirection());
+		return getValue(Property.TEXT_DIRECTION, TextDirection.values(), getDefaultValues().getTextDirection());
 	}
 
 }

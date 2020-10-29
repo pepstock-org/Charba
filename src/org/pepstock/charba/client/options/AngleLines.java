@@ -80,9 +80,7 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	 * @param display if <code>true</code>, angle lines are shown
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -110,9 +108,7 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	 * @param color color of angled lines.
 	 */
 	public void setColor(String color) {
-		setValue(Property.COLOR, color);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
@@ -140,9 +136,7 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	 * @param lineWidth width of angled lines.
 	 */
 	public void setLineWidth(int lineWidth) {
-		setValue(Property.LINE_WIDTH, lineWidth);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LINE_WIDTH, lineWidth);
 	}
 
 	/**

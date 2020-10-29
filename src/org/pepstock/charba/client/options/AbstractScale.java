@@ -227,9 +227,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
-		setValue(Property.BEGIN_AT_ZERO, beginAtZero);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BEGIN_AT_ZERO, beginAtZero);
 	}
 
 	/**
@@ -248,9 +246,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(double min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIN, min);
 	}
 
 	/**
@@ -269,9 +265,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param min If defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIN, min);
 	}
 
 	/**
@@ -289,9 +283,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(double max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX, max);
 	}
 
 	/**
@@ -310,9 +302,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param max if defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX, max);
 	}
 
 	/**
@@ -330,9 +320,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(String min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIN, min);
 	}
 
 	/**
@@ -350,9 +338,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(String max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX, max);
 	}
 
 	/**
@@ -410,10 +396,8 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	private void setIndex(Property property, Property charbaProperty, int index) {
 		// checks if index is consistent
 		if (index >= 0) {
-			setValue(property, index);
-			setValue(charbaProperty, index);
-			// checks if all parents are attached
-			checkAndAddToParent();
+			setValueAndAddToParent(property, index);
+			setValueAndAddToParent(charbaProperty, index);
 		}
 	}
 
@@ -446,9 +430,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
 	public void setSuggestedMax(double suggestedMax) {
-		setValue(Property.SUGGESTED_MAX, suggestedMax);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SUGGESTED_MAX, suggestedMax);
 	}
 
 	/**
@@ -467,9 +449,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
 	public void setSuggestedMin(double suggestedMin) {
-		setValue(Property.SUGGESTED_MIN, suggestedMin);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SUGGESTED_MIN, suggestedMin);
 	}
 
 	/**
@@ -488,9 +468,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.REVERSE, reverse);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.REVERSE, reverse);
 	}
 
 	/**
@@ -509,9 +487,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param stacked if the axis are stacked or not.
 	 */
 	public final void setStacked(boolean stacked) {
-		setValue(Property.STACKED, stacked);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STACKED, stacked);
 	}
 
 	/**
@@ -530,9 +506,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param weight weight of axis
 	 */
 	public final void setWeight(double weight) {
-		setValue(Property.WEIGHT, weight);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -551,9 +525,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param display if <code>true</code>, shows the axes.
 	 */
 	public final void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -565,9 +537,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final void setDisplay(Display display) {
 		// checks if is setting auto
 		if (Display.AUTO.equals(display)) {
-			setValue(Property.DISPLAY, display);
-			// checks if all parents are attached
-			checkAndAddToParent();
+			setValueAndAddToParent(Property.DISPLAY, display);
 		} else {
 			// otherwise transforms into a boolean
 			setDisplay(Display.TRUE.equals(display));
@@ -599,9 +569,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param offset extra space of axis
 	 */
 	public final void setOffset(boolean offset) {
-		setValue(Property.OFFSET, offset);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.OFFSET, offset);
 	}
 
 	/**
@@ -622,9 +590,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param position position of axis
 	 */
 	public final void setPosition(AxisPosition position) {
-		setValue(Property.POSITION, position);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**
@@ -635,9 +601,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param position position of axis with respect to a data value
 	 */
 	public final void setPosition(double position) {
-		setValue(Property.POSITION, position);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**
@@ -683,9 +647,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	public final void setBounds(ScaleBounds bounds) {
-		setValue(Property.BOUNDS, bounds);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BOUNDS, bounds);
 	}
 
 	/**

@@ -108,10 +108,10 @@ public final class AnimationContainer extends AbstractNode {
 	void setAnimationEnabled(boolean enabled) {
 		// checks if disabling
 		if (!enabled) {
-			setValue(Property.ANIMATION, false);
+			setValueAndAddToParent(Property.ANIMATION, false);
 		} else {
 			// if here is enabling
-			setValue(Property.ANIMATION, animation.nativeObject());
+			setValueAndAddToParent(Property.ANIMATION, animation.nativeObject());
 		}
 	}
 

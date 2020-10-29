@@ -15,6 +15,15 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.Date;
+
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
+
 /**
  * Base class for all options noides, which will wraps a native object and manages the relations about parent and children elements.
  * 
@@ -71,6 +80,342 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	protected final AbstractNode getParentNode() {
 		return parent;
 	}
+	
+	/**
+	 * Sets a value (int) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, int value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array or integer) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a integer.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values values of integers to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, int... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (double) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, double value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array or double) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a double.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values values of doubles to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, double... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (boolean) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, boolean value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (string) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, String value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array or string) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a string.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values values of strings to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, String... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (date) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, Date value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeObject value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by object container.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeObjectContainer value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (array or native object container) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a native object container.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values native object containers to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, NativeObjectContainer... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array from a container list) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param container container of array
+	 */
+	protected final void setArrayValueAndAddToParent(Key key, ArrayObjectContainerList<?> container) {
+		setArrayValue(key, container);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by array container.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeArrayContainer<?> value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array from a double array container list) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param container container of array of doubles
+	 */
+	protected final void setArrayValueAndAddToParent(Key key, ArrayDoubleArrayList<?> container) {
+		setArrayValue(key, container);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, CallbackProxy.Proxy value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (image) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, Img value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (array or image) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a image.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values images to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, Img... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (gradient) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, CanvasGradientItem value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a gradient.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values gradients to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, CanvasGradientItem... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (pattern) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, CanvasPatternItem value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (Array or pattern) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a pattern.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values patterns to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, CanvasPatternItem... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (EnumValue) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @param <T> type of key
+	 */
+	protected final <T extends Key> void setValueAndAddToParent(Key key, T value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a string.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values value of keys to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, Key... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (Array) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @param <T> type of array
+	 */
+	protected final <T extends Array> void setArrayValueAndAddToParent(Key key, T value) {
+		setArrayValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (Array or string by colors) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a string.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values values of colors to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, IsColor... values) {
+		setValueOrArray(key, values);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (chart) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, Chart value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (event) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, BaseNativeEvent value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
 
 	/**
 	 * Adds a proxy function to a model at the specific key.
@@ -85,9 +430,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 			// if not exception
 			throw new IllegalArgumentException("Options model arguments is null");
 		}
-		model.setValue(key, proxy);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		model.setValueAndAddToParent(key, proxy);
 	}
 
 	/**
@@ -103,16 +446,14 @@ public abstract class AbstractNode extends NativeObjectContainer {
 			// if not exception
 			throw new IllegalArgumentException("Options model arguments is null");
 		}
-		model.setValue(key, options);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		model.setValueAndAddToParent(key, options);
 	}
 
 	/**
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
 	 */
-	public final void checkAndAddToParent() {
+	protected final void checkAndAddToParent() {
 		// checks if we are at root element
 		// or if the parent hasn't got the key
 		if (parent != null && !parent.has(childKey)) {

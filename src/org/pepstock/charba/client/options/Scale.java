@@ -132,9 +132,7 @@ public class Scale extends AbstractScale {
 		// this is for radial axis where id must miss
 		if (!DefaultScaleId.UNKNOWN.is(id.value())) {
 			// stores id
-			setValue(Property.ID, id);
-			// checks if all parents are attached
-			checkAndAddToParent();
+			setValueAndAddToParent(Property.ID, id);
 		}
 	}
 
@@ -155,9 +153,7 @@ public class Scale extends AbstractScale {
 	 * @param type type of axis
 	 */
 	private void setType(AxisType type) {
-		setValue(Property.TYPE, type);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.TYPE, type);
 	}
 
 	/**
@@ -196,9 +192,7 @@ public class Scale extends AbstractScale {
 			// sets to the argument
 			typeToStore = kind;
 		}
-		setValue(Property.AXIS, typeToStore);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.AXIS, typeToStore);
 	}
 
 	/**

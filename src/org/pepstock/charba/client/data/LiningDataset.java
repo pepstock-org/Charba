@@ -223,11 +223,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
+		filler = new LiningDatasetFiller(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
 		// sets span gapper
-		this.spanGapper = new SpanGapper(new DataEnvelop<>(getNativeObject(), true), getDefaultValues());
+		this.spanGapper = new SpanGapper(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

@@ -116,9 +116,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param easing animation easing.
 	 */
 	public final void setEasing(Easing easing) {
-		setValue(Property.EASING, easing);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.EASING, easing);
 	}
 
 	/**
@@ -137,9 +135,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public final void setDuration(int milliseconds) {
-		setValue(Property.DURATION, milliseconds);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DURATION, milliseconds);
 	}
 
 	/**
@@ -158,9 +154,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
 	 */
 	public final void setDebug(boolean debug) {
-		setValue(Property.DEBUG, debug);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DEBUG, debug);
 	}
 
 	/**
@@ -179,9 +173,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param delay the delay before starting the animations
 	 */
 	public final void setDelay(int delay) {
-		setValue(Property.DELAY, delay);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DELAY, delay);
 	}
 
 	/**
@@ -200,9 +192,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param loop <code>true</code> if loops the animations endlessly.
 	 */
 	public final void setLoop(boolean loop) {
-		setValue(Property.LOOP, loop);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LOOP, loop);
 	}
 
 	/**

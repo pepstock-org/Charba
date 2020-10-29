@@ -106,9 +106,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public final void setAnimateRotate(boolean animateRotate) {
-		setValue(Property.ANIMATE_ROTATE, animateRotate);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ANIMATE_ROTATE, animateRotate);
 	}
 
 	/**
@@ -127,9 +125,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public final void setAnimateScale(boolean animateScale) {
-		setValue(Property.ANIMATE_SCALE, animateScale);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ANIMATE_SCALE, animateScale);
 	}
 
 	/**

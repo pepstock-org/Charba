@@ -151,9 +151,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param display if <code>true</code>, show tick marks.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -172,9 +170,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
-		setValue(Property.AUTO_SKIP, autoSkip);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.AUTO_SKIP, autoSkip);
 	}
 
 	/**
@@ -193,9 +189,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
-		setValue(Property.AUTO_SKIP_PADDING, autoSkipPadding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.AUTO_SKIP_PADDING, autoSkipPadding);
 	}
 
 	/**
@@ -215,9 +209,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param labelOffset the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
-		setValue(Property.LABEL_OFFSET, labelOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.LABEL_OFFSET, labelOffset);
 	}
 
 	/**
@@ -238,9 +230,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 *            scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
-		setValue(Property.MAX_ROTATION, maxRotation);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX_ROTATION, maxRotation);
 	}
 
 	/**
@@ -259,9 +249,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
-		setValue(Property.MIN_ROTATION, minRotation);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIN_ROTATION, minRotation);
 	}
 
 	/**
@@ -280,9 +268,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
-		setValue(Property.MIRROR, mirror);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MIRROR, mirror);
 	}
 
 	/**
@@ -303,9 +289,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 *            applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PADDING, padding);
 	}
 
 	/**
@@ -326,9 +310,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
-		setValue(Property.MAX_TICKS_LIMIT, maxTicksLimit);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.MAX_TICKS_LIMIT, maxTicksLimit);
 	}
 
 	/**
@@ -347,9 +329,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	public void setStepSize(double stepSize) {
-		setValue(Property.STEP_SIZE, stepSize);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.STEP_SIZE, stepSize);
 	}
 
 	/**
@@ -377,9 +357,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(String backdropColor) {
-		setValue(Property.BACKDROP_COLOR, backdropColor);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BACKDROP_COLOR, backdropColor);
 	}
 
 	/**
@@ -407,9 +385,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param backdropPaddingX horizontal padding of label backdrop.
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
-		setValue(Property.BACKDROP_PADDING_X, backdropPaddingX);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BACKDROP_PADDING_X, backdropPaddingX);
 	}
 
 	/**
@@ -428,9 +404,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param backdropPaddingY vertical padding of label backdrop.
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
-		setValue(Property.BACKDROP_PADDING_Y, backdropPaddingY);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.BACKDROP_PADDING_Y, backdropPaddingY);
 	}
 
 	/**
@@ -449,9 +423,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param showLabelBackdrop if <code>true</code>, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
-		setValue(Property.SHOW_LABEL_BACKDROP, showLabelBackdrop);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SHOW_LABEL_BACKDROP, showLabelBackdrop);
 	}
 
 	/**
@@ -470,9 +442,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param source property controls the ticks generation.
 	 */
 	public void setSource(TickSource source) {
-		setValue(Property.SOURCE, source);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SOURCE, source);
 	}
 
 	/**
@@ -491,9 +461,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public void setPrecision(int precision) {
-		setValue(Property.PRECISION, precision);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.PRECISION, precision);
 	}
 
 	/**
@@ -514,9 +482,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
-		setValue(Property.Z, z);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.Z, z);
 	}
 
 	/**
@@ -538,9 +504,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param sampleSize the number of ticks to examine when deciding how many labels will fit.
 	 */
 	public void setSampleSize(int sampleSize) {
-		setValue(Property.SAMPLE_SIZE, sampleSize);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.SAMPLE_SIZE, sampleSize);
 	}
 
 	/**
@@ -560,9 +524,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param align the tick alignment along the axis
 	 */
 	public void setAlign(ElementAlign align) {
-		setValue(Property.ALIGN, align);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.ALIGN, align);
 	}
 
 	/**
@@ -581,9 +543,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param crossAlign the tick alignment perpendicular to the axis
 	 */
 	public void setCrossAlign(CrossAlign crossAlign) {
-		setValue(Property.CROSS_ALIGN, crossAlign);
-		// checks if all parents are attached
-		checkAndAddToParent();
+		setValueAndAddToParent(Property.CROSS_ALIGN, crossAlign);
 	}
 
 	/**
