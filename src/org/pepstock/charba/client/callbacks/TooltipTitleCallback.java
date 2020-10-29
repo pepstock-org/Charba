@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
@@ -31,30 +32,36 @@ import org.pepstock.charba.client.items.TooltipItem;
 public interface TooltipTitleCallback {
 
 	/**
-	 * Returns the text to render before the title.
+	 * Returns the text to render before the title.<br>If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items);
+	default List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items){
+		return Collections.emptyList();
+	}
 
 	/**
-	 * Returns text to render as the title of the tooltip.
+	 * Returns text to render as the title of the tooltip.<br>If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onTitle(IsChart chart, List<TooltipItem> items);
+	default List<String> onTitle(IsChart chart, List<TooltipItem> items){
+		return Collections.emptyList();
+	}
 
 	/**
-	 * Returns text to render after the title.
+	 * Returns text to render after the title.<br>If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onAfterTitle(IsChart chart, List<TooltipItem> items);
+	default List<String> onAfterTitle(IsChart chart, List<TooltipItem> items){
+		return Collections.emptyList();
+	}
 
 }

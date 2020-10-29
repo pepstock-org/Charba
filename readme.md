@@ -371,6 +371,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
+ * add `default` to the tooltip callbacks interface methods.
   
 ### Development
 
@@ -421,7 +422,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `boolean has(Object,String)` method to `JsHelper` class in order to check if a property (by its key) belongs to an object or not. THis is done because CHART.JS merges objects without `prototype`, for security reason.
  * improve the visibility and reuse of the native object factories in order to have only 1 static instance from the object which must be created.
  * add `NativeConfiguration` native JSType class to get the `config` from chart instance and used to update the configuration at runtime.
- * improve the management of properties used cross classes or packages.  
+ * improve the management of properties used cross classes or packages. 
 
 License
 -------

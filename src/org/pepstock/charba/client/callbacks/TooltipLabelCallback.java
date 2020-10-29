@@ -17,6 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 
@@ -30,48 +31,62 @@ import org.pepstock.charba.client.items.TooltipLabelColor;
 public interface TooltipLabelCallback {
 
 	/**
-	 * Returns text to render before an individual label. This will be called for each item in the tooltip.
+	 * Returns text to render before an individual label.<br>
+	 * This will be called for each item in the tooltip.<br>
+	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
+	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
 	 */
-	String onBeforeLabel(IsChart chart, TooltipItem item);
+	default String onBeforeLabel(IsChart chart, TooltipItem item) {
+		return Constants.EMPTY_STRING;
+	}
 
 	/**
-	 * Returns text to render for an individual item in the tooltip.
+	 * Returns text to render for an individual item in the tooltip.<br>
+	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
+	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
 	 */
-	String onLabel(IsChart chart, TooltipItem item);
+	default String onLabel(IsChart chart, TooltipItem item) {
+		return Constants.EMPTY_STRING;
+	}
 
 	/**
-	 * Returns the colors to render for the tooltip item.
+	 * Returns the colors to render for the tooltip item.<br>
+	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label color to be applied. If returns <code>null</code>, it will be ignored.
+	 * @return label color to be applied.
 	 */
 	TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item);
 
 	/**
-	 * Returns the colors for the text of the label for the tooltip item.
+	 * Returns the colors for the text of the label for the tooltip item.<br>
+	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label text color to be applied. If returns <code>null</code>, it will be ignored.
+	 * @return label text color to be applied. Default is <code>null</code>.
 	 */
-	IsColor onLabelTextColor(IsChart chart, TooltipItem item);
+	default IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
+		return null;
+	}
 
 	/**
-	 * Returns text to render after an individual label.
+	 * Returns text to render after an individual label.<br>
+	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
+	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
 	 */
-	String onAfterLabel(IsChart chart, TooltipItem item);
+	default String onAfterLabel(IsChart chart, TooltipItem item) {
+		return Constants.EMPTY_STRING;
+	}
 
 }

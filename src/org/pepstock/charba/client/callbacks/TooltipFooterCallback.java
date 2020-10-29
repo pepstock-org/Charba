@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
@@ -31,30 +32,39 @@ import org.pepstock.charba.client.items.TooltipItem;
 public interface TooltipFooterCallback {
 
 	/**
-	 * Returns text to render before the footer section.
+	 * Returns text to render before the footer section.<br>
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items);
+	default List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
+	}
 
 	/**
-	 * Returns text to render as the footer of the tooltip.
+	 * Returns text to render as the footer of the tooltip.<br>
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onFooter(IsChart chart, List<TooltipItem> items);
+	default List<String> onFooter(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
+	}
 
 	/**
-	 * Text to render after the footer section.
+	 * Text to render after the footer section.<br>
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. If returns <code>null</code> or empty list, it will be ignored.
+	 * @return a list of labels to apply to the title. Default is an empty list.
 	 */
-	List<String> onAfterFooter(IsChart chart, List<TooltipItem> items);
+	default List<String> onAfterFooter(IsChart chart, List<TooltipItem> items) {
+		return Collections.emptyList();
+	}
 
 }
