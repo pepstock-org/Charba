@@ -364,7 +364,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the point style is defined as image
 	 */
 	public final boolean isPointStyleAsImage() {
-		return !ObjectType.STRING.equals(type(Property.POINT_STYLE));
+		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
 	}
 
 	/**
@@ -376,10 +376,9 @@ public class LegendItem extends NativeObjectContainer {
 		// checks if is an point style and not an image
 		if (!isPointStyleAsImage()) {
 			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
-		} else {
-			// returns the default
-			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 		}
+		// if here, the point style is undefined or an image
+		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 	}
 
 	/**
@@ -391,10 +390,9 @@ public class LegendItem extends NativeObjectContainer {
 		// checks if is an point style and not an image
 		if (isPointStyleAsImage()) {
 			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
-		} else {
-			// returns null because is a string
-			return UndefinedValues.IMAGE_ELEMENT;
 		}
+		// returns null because is a string
+		return UndefinedValues.IMAGE_ELEMENT;
 	}
 
 	/**

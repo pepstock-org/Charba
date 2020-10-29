@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasBox {
+public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasBox, HasPointStyle {
 
 	/**
 	 * Name of properties of native object.
@@ -63,6 +63,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	private final Font font;
 	// instance of boxer
 	private final Boxer boxer;
+	// instance of style of points manager
+	private final PointStyler pointStyler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -77,6 +79,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		// creates the boxer
 		this.boxer = new Boxer(getNativeObject(), this, defaultValues);
+		// creates point styler
+		this.pointStyler = new PointStyler(getNativeObject(), this, defaultValues);
 	}
 
 	/*
@@ -87,6 +91,16 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	@Override
 	public Boxer getBoxer() {
 		return boxer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyler()
+	 */
+	@Override
+	public PointStyler getPointStyler() {
+		return pointStyler;
 	}
 
 	/**

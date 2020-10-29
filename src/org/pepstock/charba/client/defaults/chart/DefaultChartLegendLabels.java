@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.enums.PointStyle;
 
 /**
  * Defaults for legend labels option element, based on chart type.
@@ -54,6 +55,16 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	@Override
 	public boolean isUsePointStyle() {
 		return labels.isUsePointStyle();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
+	 */
+	@Override
+	public PointStyle getPointStyle() {
+		return labels.getPointStyle();
 	}
 
 	/*

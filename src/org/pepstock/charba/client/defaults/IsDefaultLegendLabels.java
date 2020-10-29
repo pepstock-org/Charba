@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendLabels extends IsDefaultBoxer{
+public interface IsDefaultLegendLabels extends IsDefaultBoxer, IsDefaultPointStyler{
 
 	/**
 	 * Returns the font defaults.

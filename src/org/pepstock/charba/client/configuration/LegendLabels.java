@@ -29,6 +29,8 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -233,6 +235,44 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public boolean isUsePointStyle() {
 		return getConfiguration().getLegend().getLabels().isUsePointStyle();
+	}
+
+	/**
+	 * Sets the style of the legend, overriding point style from dataset.<br>
+	 * Only applies if {@link LegendLabels#setUsePointStyle(boolean)} is set to <code>true</code>.
+	 * 
+	 * @param pointStyle the style of the legend, overriding point style from dataset.
+	 */
+	public void setPointStyle(PointStyle pointStyle) {
+		getConfiguration().getLegend().getLabels().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Sets the style of the legend, overriding point style from dataset, as image.<br>
+	 * Only applies if {@link LegendLabels#setUsePointStyle(boolean)} is set to <code>true</code>.
+	 * 
+	 * @param pointStyle the style of the legend, overriding point style from dataset.
+	 */
+	public void setPointStyle(Img pointStyle) {
+		getConfiguration().getLegend().getLabels().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Returns the style of the legend.
+	 * 
+	 * @return the style of the legend.
+	 */
+	public PointStyle getPointStyle() {
+		return getConfiguration().getLegend().getLabels().getPointStyle();
+	}
+
+	/**
+	 * Returns the style of the legend as image.
+	 * 
+	 * @return the style of the legend as image.
+	 */
+	public Img getPointStyleAsImage() {
+		return getConfiguration().getLegend().getLabels().getPointStyleAsImage();
 	}
 
 	/**

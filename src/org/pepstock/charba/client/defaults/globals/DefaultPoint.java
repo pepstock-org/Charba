@@ -61,7 +61,7 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getPointStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
 	 */
 	@Override
 	public PointStyle getPointStyle() {

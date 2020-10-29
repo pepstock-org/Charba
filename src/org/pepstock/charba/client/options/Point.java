@@ -18,16 +18,13 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
-import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint {
+public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint, HasPointStyle {
 
 	/**
 	 * Name of properties of native object.
@@ -35,13 +32,10 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	private enum Property implements Key
 	{
 		RADIUS("radius"),
-		POINT_STYLE("pointStyle"),
 		HIT_RADIUS("hitRadius"),
 		HOVER_RADIUS("hoverRadius"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth"),
-		ROTATION("rotation"),
-		// internal key to store if point style is an image or not
-		CHARBA_POINT_STYLE("_charbaPointStyle");
+		ROTATION("rotation");
 
 		// name value of property
 		private final String value;
@@ -67,6 +61,9 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 
 	}
 
+	// instance of style of points manager
+	private final PointStyler pointStyler;
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -77,6 +74,18 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
+		// creates point styler
+		this.pointStyler = new PointStyler(getNativeObject(), elements, defaultValues);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyler()
+	 */
+	@Override
+	public PointStyler getPointStyler() {
+		return pointStyler;
 	}
 
 	/**
@@ -98,71 +107,6 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	@Override
 	public double getRadius() {
 		return getValue(Property.RADIUS, getDefaultValues().getRadius());
-	}
-
-	/**
-	 * Sets the style of the point.
-	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(PointStyle pointStyle) {
-		setValue(Property.POINT_STYLE, pointStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-		// remove if exist flag
-		removeIfExists(Property.CHARBA_POINT_STYLE);
-	}
-
-	/**
-	 * Returns the style of the point.
-	 * 
-	 * @return the style of the point or <code>null</code> if point style is set as image
-	 */
-	@Override
-	public PointStyle getPointStyle() {
-		// checks if image as point style has been used
-		if (!getValue(Property.CHARBA_POINT_STYLE, false)) {
-			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
-		} else {
-			// if here, means the point style as stored as images
-			return null;
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image element of the style of the point as image.
-	 */
-	public void setPointStyle(Img pointStyle) {
-		setValue(Property.POINT_STYLE, pointStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-		// checks if there is the property
-		if (has(Property.POINT_STYLE)) {
-			// sets flags
-			setValue(Property.CHARBA_POINT_STYLE, true);
-		} else {
-			// image not set
-			// remove point style
-			removeIfExists(Property.CHARBA_POINT_STYLE);
-		}
-	}
-
-	/**
-	 * Returns the style of the point as image. If property is missing or not an image, returns <code>null</code>.
-	 * 
-	 * @return image of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
-	 */
-	public Img getPointStyleAsImage() {
-		// checks if image as point style has been used
-		if (getValue(Property.CHARBA_POINT_STYLE, false)) {
-			// gets value
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
-		} else {
-			// if here, means the point style as stored as strings
-			return null;
-		}
 	}
 
 	/**

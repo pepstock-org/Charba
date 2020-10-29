@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.PointStyle;
-
 /**
  * Interface to define point object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPoint extends IsDefaultOptionsElement {
+public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointStyler {
 
 	/**
 	 * Returns the radius of the point when hovered.
@@ -30,13 +28,6 @@ public interface IsDefaultPoint extends IsDefaultOptionsElement {
 	 * @return list of the radius of the point when hovered.
 	 */
 	double getRadius();
-
-	/**
-	 * Returns the style of the point.
-	 * 
-	 * @return the style of the point.
-	 */
-	PointStyle getPointStyle();
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
