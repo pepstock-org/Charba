@@ -719,8 +719,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			tempConfiguration.setOptions(this, internalOptions);
 			// clones the current chart config
 			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
+			// gets native configuration
+			NativeConfiguration config = chart.getConfig();
+			// applies the new options
+			// gets the updated options
+			NativeObject wholeOptions = config.updateAndGetConfiguration(clonedOptions);
 			// replace the options
-			chart.setOptions(clonedOptions);
+			chart.setOptions(wholeOptions);
 			// calls plugins for onConfigure method
 			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
 			plugins.onChartConfigure(tempConfiguration, this);
@@ -1003,8 +1008,6 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
-			// clones and merges over the original options of configuration
-			internalOptions.mergeOptions(new ChartEnvelop<>(Helpers.get().clone(chart.getOptions())));
 			// notify after init
 			Charts.fireAfterInit(this);
 		}

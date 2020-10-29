@@ -77,7 +77,7 @@ public final class ExtendedOptions extends ScaledOptions {
 		// stores chart instance
 		this.chart = chart;
 		// gets scales sub elements
-		scales = new ExtendedScales(this, ScaledOptions.Property.SCALES, defaultValues.getScales(), getValue(ScaledOptions.Property.SCALES));
+		this.scales = new ExtendedScales(this, ScaledOptions.Property.SCALES, defaultValues.getScales(), getValue(ScaledOptions.Property.SCALES));
 	}
 
 	/**

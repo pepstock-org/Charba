@@ -78,7 +78,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	protected ScaledOptions(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets scales sub elements
-		scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
+		this.scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
 	}
 
 	/*

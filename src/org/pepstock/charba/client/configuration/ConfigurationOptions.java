@@ -238,15 +238,6 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	public final void loadOptions(ChartEnvelop<NativeObject> envelop) {
 		Merger.get().load(getChart(), getConfiguration(), envelop);
 	}
-	
-	/**
-	 * Merges the chart options, built after the chart initialization on the chart configuration in order that the configuration can contain all values, also the defaults.
-	 * 
-	 * @param envelop the envelop for options as native options
-	 */
-	public final void mergeOptions(ChartEnvelop<NativeObject> envelop) {
-		Merger.get().load(getConfiguration(), envelop);
-	}
 
 	/*
 	 * (non-Javadoc)

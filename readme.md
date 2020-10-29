@@ -416,6 +416,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `Meta` native object class to map a `<meta>` element from `DOM` document.
  * add `boolean has(Object,String)` method to `JsHelper` class in order to check if a property (by its key) belongs to an object or not. THis is done because CHART.JS merges objects without `prototype`, for security reason.
  * improve the visibility and reuse of the native object factories in order to have only 1 static instance from the object which must be created.
+ * add `NativeConfiguration` native JSType class to get the `config` from chart instance and used to update the configuration at runtime. 
 
 License
 -------
