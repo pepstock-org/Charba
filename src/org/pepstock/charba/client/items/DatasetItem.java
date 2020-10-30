@@ -259,38 +259,38 @@ public final class DatasetItem extends NativeObjectContainer {
 	}
 	
 	/**
-	 * Returns the V axis ID.
+	 * Returns the value axis ID.
 	 * 
-	 * @return the V axis ID. Default is {@link DefaultScaleId#Y}.
+	 * @return the value axis ID. Default is {@link DefaultScaleId#Y}.
 	 */
-	public IsScaleId getVAxisID() {
+	public IsScaleId getValueAxisID() {
 		return getValue(Property.V_AXIS_ID, DefaultScaleId.Y);
 	}
 	
 	/**
-	 * Returns the V scale item or <code>null</code> if not exists.
+	 * Returns the value scale item or <code>null</code> if not exists.
 	 * 
-	 * @return the V scale item or <code>null</code> if not exists
+	 * @return the calue scale item or <code>null</code> if not exists
 	 */
-	public ScaleItem getVScale() {
+	public ScaleItem getValueScale() {
 		return retrieveScale(Property.V_SCALE);
 	}
 	
 	/**
-	 * Returns the I axis ID.
+	 * Returns the index axis ID.
 	 * 
-	 * @return the I axis ID. Default is {@link DefaultScaleId#X}.
+	 * @return the index axis ID. Default is {@link DefaultScaleId#X}.
 	 */
-	public IsScaleId getIAxisID() {
+	public IsScaleId getIndexAxisID() {
 		return getValue(Property.I_AXIS_ID, DefaultScaleId.X);
 	}
 	
 	/**
-	 * Returns the I scale item or <code>null</code> if not exists.
+	 * Returns the index scale item or <code>null</code> if not exists.
 	 * 
-	 * @return the I scale item or <code>null</code> if not exists
+	 * @return the index scale item or <code>null</code> if not exists
 	 */
-	public ScaleItem getIScale() {
+	public ScaleItem getIndexScale() {
 		return retrieveScale(Property.I_SCALE);
 	}
 
