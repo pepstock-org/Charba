@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 
@@ -37,10 +37,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
+	 * @return label to be applied. 
 	 */
 	default String onBeforeLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsBeforeLabel(chart, item);
 	}
 
 	/**
@@ -49,10 +49,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
+	 * @return label to be applied.
 	 */
 	default String onLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsLabel(chart, item);
 	}
 
 	/**
@@ -63,7 +63,9 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label color to be applied.
 	 */
-	TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item);
+	default TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item) {
+		return Defaults.get().invokeTooltipsLabelColor(chart, item);
+	}
 
 	/**
 	 * Returns the colors for the text of the label for the tooltip item.<br>
@@ -71,10 +73,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label text color to be applied. Default is <code>null</code>.
+	 * @return label text color to be applied.
 	 */
 	default IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
-		return null;
+		return Defaults.get().invokeTooltipsLabelTextColor(chart, item);
 	}
 
 	/**
@@ -83,10 +85,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. Default is an empty string, {@link Constants#EMPTY_STRING}.
+	 * @return label to be applied. 
 	 */
 	default String onAfterLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsAfterLabel(chart, item);
 	}
 
 }

@@ -15,12 +15,10 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 
 /**
  * Contains all info for every item of tooltip.<br>
@@ -30,7 +28,7 @@ import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipItem extends NativeObjectContainer {
+public class TooltipItem extends NativeObjectContainer {
 	
 	/**
 	 * Public factory to create a tooltip item from a native object.
@@ -46,7 +44,8 @@ public final class TooltipItem extends NativeObjectContainer {
 		DATA_POINT("dataPoint"),
 		FORMATTED_VALUE("formattedValue"),
 		DATASET_INDEX("datasetIndex"),
-		DATA_INDEX("dataIndex");
+		DATA_INDEX("dataIndex"),
+		ELEMENT("element");
 
 		// name value of property
 		private final String value;
@@ -76,15 +75,6 @@ public final class TooltipItem extends NativeObjectContainer {
 	private final TooltipDataPoint dataPoint;
 
 	/**
-	 * Creates the item using an envelop of native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of native java script object which contains all properties.
-	 */
-	public TooltipItem(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
@@ -100,7 +90,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the label for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
-	public String getLabel() {
+	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
@@ -109,7 +99,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()}
 	 */
-	public TooltipDataPoint getDataPoint() {
+	public final TooltipDataPoint getDataPoint() {
 		return dataPoint;
 	}
 
@@ -118,7 +108,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the formatted value for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
-	public String getFormattedValue() {
+	public final String getFormattedValue() {
 		return getValue(Property.FORMATTED_VALUE, UndefinedValues.STRING);
 	}
 
@@ -127,7 +117,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	public int getDatasetIndex() {
+	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
@@ -136,10 +126,19 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * 
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
-	public int getDataIndex() {
+	public final int getDataIndex() {
 		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
+	/**
+	 * Returns the dataset element (point, arc, bar, etc.) for this tooltip item.
+	 * 
+	 * @return the dataset element (point, arc, bar, etc.) for this tooltip item.
+	 */
+	public final DatasetElement getElement() {
+		return new DatasetElement(getValue(Property.ELEMENT));
+	}
+	
 	/**
 	 * Inner class to create tooltip item by a native object.
 	 * 

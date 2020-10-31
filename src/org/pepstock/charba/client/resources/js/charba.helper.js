@@ -353,6 +353,50 @@
     	}
     }
     /*
+	 Returns true if tooltip structure is consistent in order to invoke a callback.
+	  
+	 @param key property key of the callback to invoke
+	 @return true if tooltip structure is consistent in order to invoke a callback
+	*/
+	CharbaJsCallbacksHelper.isTooltipCallbacksConsistent = function(key) {
+		return Chart.defaults.plugins.tooltip === 'object' && typeof Chart.defaults.plugins.tooltip.callbacks === 'object' && 
+			typeof Chart.defaults.plugins.tooltip.callbacks[key] === 'function';	
+	}
+    /*
+	 Invokes the default tooltip callback for title, body and footer.
+	  
+	 @param tooltipModel tooltip model to use as this on calling
+	 @param items array of tooltip items
+	 @param key property key of the callback to invoke
+	 @return an array of string
+	*/
+	CharbaJsCallbacksHelper.invokeDefaultTooltipsForElement = function(tooltipModel, items, key) {
+   		var result = Chart.defaults.plugins.tooltip.callbacks[key].call(tooltipModel, items);
+   		return typeof result === 'string' ? [result] : result;
+	}
+    /*
+	 Invokes the default tooltip callback for beforeLabel, label and afterLabel.
+	  
+	 @param tooltipModel tooltip model to use as this on calling
+	 @param item tooltip item instance
+	 @param key property key of the callback to invoke
+	 @return an array of string
+	*/
+	CharbaJsCallbacksHelper.invokeDefaultTooltipsForLabel = function(tooltipModel, item, key) {
+   		return Chart.defaults.plugins.tooltip.callbacks[key].call(tooltipModel, items);
+	}
+    /*
+	 Invokes the default tooltip callback for labelColor and labelPointStyle.
+	  
+	 @param tooltipModel tooltip model to use as this on calling
+	 @param item tooltip item instance
+	 @param key property key of the callback to invoke
+	 @return the label object instance
+	*/
+	CharbaJsCallbacksHelper.invokeDefaultTooltipsForLabelObject = function(tooltipModel, item, key) {
+   		return Chart.defaults.plugins.tooltip.callbacks[key].call(tooltipModel, item);
+	}
+    /*
 		JsZoomHelpers is an object with a set of static methods used as utility
 		and needed when ZOOM plugin has been activated.   
 	*/

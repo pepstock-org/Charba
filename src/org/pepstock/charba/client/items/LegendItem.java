@@ -17,12 +17,14 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -126,12 +128,12 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the item using another legend item which contains all properties.
+	 * Creates the item using another legend item (passed by envelop) which contains all properties.
 	 * 
-	 * @param item legend item which contains all properties.
+	 * @param envelop envelop which contains legend item which contains all properties.
 	 */
-	public LegendItem(LegendItem item) {
-		this(item.getNativeObject());
+	public LegendItem(ChartEnvelop<LegendItem> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
 	}
 
 	/**

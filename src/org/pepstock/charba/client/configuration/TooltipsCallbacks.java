@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.Collections;
+import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
@@ -28,7 +29,6 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -45,9 +45,6 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
-
-	// default label color
-	public final TooltipLabelColor defaultLabelColor = new TooltipLabelColor();
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -153,9 +150,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	private TooltipFooterCallback footerCallback = null;
 
 	/**
-	 * Name of properties of native object.
+	 * Enumerates the property keys of the possible callbacks.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
 	 */
-	private enum Property implements Key
+	public enum CallbackProperty implements Key
 	{
 		BEFORE_TITLE("beforeTitle"),
 		TITLE("title"),
@@ -166,6 +166,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		LABEL("label"),
 		LABEL_COLOR("labelColor"),
 		LABEL_TEXT_COLOR("labelTextColor"),
+		LABEL_POINT_STYLE("labelPointStyle"), // FIXME missing
 		AFTER_LABEL("afterLabel"),
 		BEFORE_FOOTER("beforeFooter"),
 		FOOTER("footer"),
@@ -179,7 +180,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		 * 
 		 * @param value value of property name
 		 */
-		private Property(String value) {
+		private CallbackProperty(String value) {
 			this.value = value;
 		}
 
@@ -203,9 +204,6 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	TooltipsCallbacks(IsChart chart, ExtendedOptions configuration) {
 		super(chart, configuration);
-		// sets the colors getting from tooltip
-		defaultLabelColor.setBackgroundColor(configuration.getTooltips().getBackgroundColor());
-		defaultLabelColor.setBorderColor(configuration.getTooltips().getBorderColor());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -244,14 +242,14 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_TITLE, beforeTitleCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.TITLE, titleCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_TITLE, afterTitleCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_TITLE, beforeTitleCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.TITLE, titleCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_TITLE, afterTitleCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_TITLE, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.TITLE, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_TITLE, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_TITLE, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.TITLE, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_TITLE, null);
 		}
 	}
 
@@ -275,12 +273,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_BODY, beforeBodyCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_BODY, afterBodyCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_BODY, beforeBodyCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_BODY, afterBodyCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_BODY, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_BODY, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_BODY, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_BODY, null);
 		}
 	}
 
@@ -304,18 +302,18 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_LABEL, beforeLabelCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL, labelCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_COLOR, labelColorCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_TEXT_COLOR, labelTextColorCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_LABEL, afterLabelCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_LABEL, beforeLabelCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL, labelCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL_COLOR, labelColorCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL_TEXT_COLOR, labelTextColorCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_LABEL, afterLabelCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_LABEL, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_COLOR, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_TEXT_COLOR, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_LABEL, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_LABEL, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL_COLOR, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.LABEL_TEXT_COLOR, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_LABEL, null);
 		}
 	}
 
@@ -339,14 +337,14 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_FOOTER, beforeFooterCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.FOOTER, footerCallbackProxy.getProxy());
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, afterFooterCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_FOOTER, beforeFooterCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.FOOTER, footerCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_FOOTER, afterFooterCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_FOOTER, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.FOOTER, null);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.BEFORE_FOOTER, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.FOOTER, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), CallbackProperty.AFTER_FOOTER, null);
 		}
 	}
 
@@ -357,13 +355,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeTitleCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeTitle(getChart(), tooltipItems));
 	}
 
 	/**
@@ -373,13 +373,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onTitleCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsTitle(getChart(), tooltipItems));
 	}
 
 	/**
@@ -389,13 +391,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterTitleCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterTitle(getChart(), tooltipItems));
 	}
 
 	/**
@@ -405,13 +409,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeBodyCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeBody(getChart(), tooltipItems));
 	}
 
 	/**
@@ -421,13 +427,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterBodyCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterBody(getChart(), tooltipItems));
 	}
 
 	/**
@@ -437,15 +445,19 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return label to apply to tooltip item
 	 */
 	private String onBeforeLabelCallback(NativeObject item) {
+		// creates tooltips item
+		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+			String result = labelCallback.onBeforeLabel(getChart(), tooltipItem);
 			// checks if result is consistent
-			return result != null ? result : Constants.EMPTY_STRING;
+			if (result != null) {
+				return result;
+			}
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsBeforeLabel(getChart(), tooltipItem);
 	}
 
 	/**
@@ -455,15 +467,19 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return label to apply to tooltip item
 	 */
 	private String onLabelCallback(NativeObject item) {
+		// gets the items
+		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+			String result = labelCallback.onLabel(getChart(), tooltipItem);
 			// checks if result is consistent
-			return result != null ? result : Constants.EMPTY_STRING;
+			if (result != null) {
+				return result;
+			}
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsLabel(getChart(), tooltipItem);
 	}
 
 	/**
@@ -473,15 +489,21 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return label color object to apply to tooltip item
 	 */
 	private NativeObject onLabelColorCallback(NativeObject item) {
+		// gets the items
+		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), tooltipItem);
 			// checks if result is consistent
-			return result != null ? result.getObject() : defaultLabelColor.getObject();
+			if (result != null) {
+				return result.getObject();
+			}
 		}
+		// gets default label color
+		TooltipLabelColor color = Defaults.get().invokeTooltipsLabelColor(getChart(), tooltipItem);
 		// default result
-		return defaultLabelColor.getObject();
+		return color != null ? color.getObject() : null;
 	}
 
 	/**
@@ -491,15 +513,20 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return text label color object to apply to tooltip item
 	 */
 	private String onLabelTextColorCallback(NativeObject item) {
+		// creates tooltips item
+		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+			IsColor result = labelCallback.onLabelTextColor(getChart(), tooltipItem);
 			// checks if result is consistent
-			return IsColor.isConsistent(result) ? result.toRGBA() : getConfiguration().getTooltips().getBodyFont().getColorAsString();
+			if (IsColor.isConsistent(result)) {
+				return result.toRGBA();
+			}
 		}
+		IsColor color = Defaults.get().invokeTooltipsLabelTextColor(getChart(), tooltipItem);
 		// default result
-		return getConfiguration().getTooltips().getBodyFont().getColorAsString();
+		return IsColor.isConsistent(color) ? color.toRGBA() : getConfiguration().getTooltips().getBodyFont().getColorAsString();
 	}
 
 	/**
@@ -509,15 +536,19 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return label to apply to tooltip item
 	 */
 	private String onAfterLabelCallback(NativeObject item) {
+		// creates tooltips item
+		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
 		// checks if callback is consistent
 		if (labelCallback != null) {
 			// invokes callback
-			String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+			String result = labelCallback.onAfterLabel(getChart(), tooltipItem);
 			// checks if result is consistent
-			return result != null ? result : Constants.EMPTY_STRING;
+			if (result != null) {
+				return result;
+			}
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsAfterLabel(getChart(), tooltipItem);
 	}
 
 	/**
@@ -527,13 +558,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeFooterCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeFooter(getChart(), tooltipItems));
 	}
 
 	/**
@@ -543,13 +576,15 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onFooterCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsFooter(getChart(), tooltipItems));
 	}
 
 	/**
@@ -559,12 +594,14 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterFooterCallback(ArrayObject items) {
+		// creates tooltips items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY)));
+			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), tooltipItems));
 		}
 		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterFooter(getChart(), tooltipItems));
 	}
 }

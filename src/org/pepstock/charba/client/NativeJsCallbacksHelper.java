@@ -16,6 +16,7 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -39,6 +40,10 @@ final class NativeJsCallbacksHelper {
 		// do nothing
 	}
 
+	// -----------------
+	// LEGEND callback
+	// -----------------
+
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 
@@ -47,6 +52,10 @@ final class NativeJsCallbacksHelper {
 	 * @return an array of legend labels.
 	 */
 	static native ArrayObject generateDefaultLabels(Chart chart, NativeObject options);
+	
+	// -----------------
+	// EVENTS callback
+	// -----------------
 
 	/**
 	 * Invokes the legend event callbacks, provided out of the box by CHART.JS.
@@ -69,5 +78,50 @@ final class NativeJsCallbacksHelper {
 	 * @param items array of datasets native objects
 	 */
 	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeObject event, ArrayObject items);
+	
+	// -----------------
+	// TOOLTIPS callback
+	// -----------------
+	
+	// FIXME to add to externs
+
+	/**
+	 * Invokes the default tooltip callback for <code>title, body and footer</code>.
+	 *  
+	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param items array of tooltip items
+	 * @param key property key of the callback to invoke
+	 * @return an array of string to put into tooltip
+	 */
+	static native ArrayString invokeDefaultTooltipsForElement(NativeObject tooltipModel, ArrayObject items, String key);
+
+	/**
+	 * Invokes the default tooltip callback for <code>beforeLabel, label and afterLabel, labelTextColor</code>.
+	 *  
+	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param items tooltip item instance
+	 * @param key property key of the callback to invoke
+	 * @return an array of string to put before the label
+	 */
+	static native String invokeDefaultTooltipsForLabel(NativeObject tooltipModel, NativeObject item, String key);
+
+	/**
+	 * Invokes the default tooltip callback for <code>labelColor and labelPointStyle</code>.
+	 * 
+	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param item tooltip item instance
+	 * @param key property key of the callback to invoke
+	 * @return the label object instance
+	 */
+	static native NativeObject invokeDefaultTooltipsForLabelObject(NativeObject tooltipModel, NativeObject item, String key);
+	
+	/**
+	 * Returns <code>true</code> if teh default tooltip callbacks node is consistent in order to invoke a callback.
+	 * 
+	 * @param key property key of the callback to invoke
+	 * @return <code>true</code> if teh default tooltip callbacks node is consistent in order to invoke a callback.
+	 */
+	static native boolean isTooltipCallbacksConsistent(String key);
+
 
 }

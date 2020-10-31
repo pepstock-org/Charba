@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -63,7 +64,7 @@ public abstract class NativeObjectContainer {
 	 * Checks if the argument, which is assuming is a default values instance, is consistent.<br>
 	 * If not, throws {@link IllegalArgumentException}.
 	 * 
-	 * @param defaultValues default values instance to check 
+	 * @param defaultValues default values instance to check
 	 */
 	protected final void checkDefaultValuesArgument(Object defaultValues) {
 		// checks if default value is consistent
@@ -80,6 +81,22 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final NativeObject getNativeObject() {
 		return nativeObject;
+	}
+
+	/**
+	 * Returns the native object instance inside an envelop.<br>
+	 * It can be called only from <code>org.pepstock.charba.client</code> package.
+	 * 
+	 * @param envelop envelop instance which will contain the native object
+	 * @return the envelop, passed as argument, loaded with the native object
+	 */
+	public final ChartEnvelop<NativeObject> loadNativeObject(ChartEnvelop<NativeObject> envelop) {
+		// checks if envelop is consistent
+		IsEnvelop.checkAndGetIfValid(envelop);
+		// load native object to envelop
+		envelop.setContent(nativeObject);
+		// returns the envelop passed as argument
+		return envelop;
 	}
 
 	/**

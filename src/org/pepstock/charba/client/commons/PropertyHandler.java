@@ -33,8 +33,8 @@ import org.pepstock.charba.client.dom.elements.Img;
  */
 public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	
-	// special instance to use when the parent, passed by constructor is not consistent
-	private static final DefaultAbstractNode DEFAULT_ABSTRACT_NODE = new DefaultAbstractNode();
+	// fake instance to use when the parent, passed by constructor is not consistent
+	private static final DefaultAbstractNode FAKE_ABSTRACT_NODE = new DefaultAbstractNode();
 	// default values
 	private final D defaultValues;
 	// parent which this object belongs to
@@ -52,7 +52,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if default value is consistent
 		checkDefaultValuesArgument(defaultValues);
 		// stores values
-		this.parent = parent != null ? parent : DEFAULT_ABSTRACT_NODE;
+		this.parent = parent != null ? parent : FAKE_ABSTRACT_NODE;
 		this.defaultValues = defaultValues;
 	}
 

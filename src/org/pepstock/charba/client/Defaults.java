@@ -21,12 +21,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.TooltipsCallbacks;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -41,9 +46,10 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.intl.CLocale;
-import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
+import org.pepstock.charba.client.items.TooltipItem;
+import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
@@ -345,40 +351,126 @@ public final class Defaults {
 			if (IsChart.isValid(chart) && chart.isInitialized()) {
 				// gets event context
 				ChartEventContext eventContext = event.getContext();
-				// creates a wrapper
-				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
+				// creates an envelop to load the native object
+				ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), wrapper.internalNativeObject());
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
 			}
 		}
 	}
 
+	public List<String> invokeTooltipsBeforeTitle(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_TITLE);
+	}
+
+	public List<String> invokeTooltipsTitle(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.TITLE);
+	}
+
+	public List<String> invokeTooltipsAfterTitle(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_TITLE);
+	}
+
+	public List<String> invokeTooltipsBeforeBody(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_BODY);
+	}
+
+	public List<String> invokeTooltipsAfterBody(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_BODY);
+	}
+
+	public String invokeTooltipsBeforeLabel(IsChart chart, TooltipItem item) {
+		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.BEFORE_LABEL);
+	}
+
+	public String invokeTooltipsLabel(IsChart chart, TooltipItem item) {
+		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.LABEL);
+	}
+
+	public String invokeTooltipsAfterLabel(IsChart chart, TooltipItem item) {
+		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.AFTER_LABEL);
+	}
+
+	public List<String> invokeTooltipsBeforeFooter(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_FOOTER);
+	}
+
+	public List<String> invokeTooltipsFooter(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.FOOTER);
+	}
+
+	public List<String> invokeTooltipsAfterFooter(IsChart chart, List<TooltipItem> items) {
+		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_FOOTER);
+	}
+
+	public TooltipLabelColor invokeTooltipsLabelColor(IsChart chart, TooltipItem item) {
+		return invokeDefaultTooltipsForLabelObject(chart, item, TooltipsCallbacks.CallbackProperty.LABEL_COLOR, TooltipLabelColor.FACTORY);
+	}
+
+	public IsColor invokeTooltipsLabelTextColor(IsChart chart, TooltipItem item) {
+		// gets color
+		String color = invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.LABEL_TEXT_COLOR);
+		// transform into a color object
+		return ColorBuilder.parse(color);
+	}
+	
+	private List<String> invokeDefaultTooltipsForElement(IsChart chart, List<TooltipItem> items, TooltipsCallbacks.CallbackProperty key) {
+		// checks if argument are consistent
+		if (checkTooltipsCallbackInvocationArguments(chart, items)) {
+			// gets the native chart
+			Chart nativeChart = Charts.getNative(chart);
+			// invokes the callbacks
+			return JsCallbacksHelper.get().invokeDefaultTooltipsForElement(nativeChart, ArrayObject.fromOrEmpty(items), key);
+			
+		}
+		// if here, wrong arguments
+		return Collections.emptyList();
+	}
+	
+	private String invokeDefaultTooltipsForLabel(IsChart chart, TooltipItem item, TooltipsCallbacks.CallbackProperty key) {
+		// checks if argument are consistent
+		if (checkTooltipsCallbackInvocationArguments(chart, item)) {
+			// gets the native chart
+			Chart nativeChart = Charts.getNative(chart);
+			// creates an envelop to load the native object
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
+			// invokes the callbacks
+			return JsCallbacksHelper.get().invokeDefaultTooltipsForLabel(nativeChart, item.loadNativeObject(envelop).getContent(), key);
+			
+		}
+		// if here, wrong arguments
+		return Constants.EMPTY_STRING;
+	}
+
+	private <T extends NativeObjectContainer> T invokeDefaultTooltipsForLabelObject(IsChart chart, TooltipItem item, TooltipsCallbacks.CallbackProperty key, NativeObjectContainerFactory<T> factory) {
+		// checks if argument are consistent
+		if (factory != null && checkTooltipsCallbackInvocationArguments(chart, item)) {
+			// gets the native chart
+			Chart nativeChart = Charts.getNative(chart);
+			// creates an envelop to load the native object
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
+			// invokes the callbacks
+			NativeObject nativeObject = JsCallbacksHelper.get().invokeDefaultTooltipsForLabelObject(nativeChart, item.loadNativeObject(envelop).getContent(), key);
+			// retunrs hte object container
+			return factory.create(nativeObject);
+		}
+		// if here, wrong arguments
+		return null;
+	}
+
+	
+	
 	/**
-	 * Wrapper of {@link LegendItem} in order to get the native object.
+	 * Returns <code>true</code> if all arguments are consistent.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @param chart chart instance
+	 * @param item tooltip item(s) to send to callback
+	 * @param key the callback property key
+	 * @return <code>true</code> if all arguments are consistent
 	 */
-	private static class WrapperLegendItem extends LegendItem {
-
-		/**
-		 * Creates a legend item wrapping an existing legend item.
-		 * 
-		 * @param item legend item to wrap.
-		 */
-		WrapperLegendItem(LegendItem item) {
-			super(item);
-		}
-
-		/**
-		 * Returns the native object instance.
-		 * 
-		 * @return the native object instance.
-		 */
-		final NativeObject internalNativeObject() {
-			return super.getNativeObject();
-		}
-
+	private boolean checkTooltipsCallbackInvocationArguments(IsChart chart, Object item) {
+		// checks the arguments
+		return IsChart.isConsistent(chart) && chart.isInitialized() && item != null;
 	}
 
 	/**

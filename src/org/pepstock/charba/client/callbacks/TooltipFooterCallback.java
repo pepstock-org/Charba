@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
@@ -37,10 +37,10 @@ public interface TooltipFooterCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. Default is an empty list.
+	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items) {
-		return Collections.emptyList();
+		return Defaults.get().invokeTooltipsBeforeFooter(chart, items);
 	}
 
 	/**
@@ -49,10 +49,10 @@ public interface TooltipFooterCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. Default is an empty list.
+	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onFooter(IsChart chart, List<TooltipItem> items) {
-		return Collections.emptyList();
+		return Defaults.get().invokeTooltipsFooter(chart, items);
 	}
 
 	/**
@@ -61,10 +61,10 @@ public interface TooltipFooterCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return a list of labels to apply to the title. Default is an empty list.
+	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onAfterFooter(IsChart chart, List<TooltipItem> items) {
-		return Collections.emptyList();
+		return Defaults.get().invokeTooltipsAfterFooter(chart, items);
 	}
 
 }

@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Merger;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
@@ -88,6 +90,17 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 */
 	public final String toJSON() {
 		return configuration.toJSON();
+	}
+	
+	/**
+	 * Returns the native object instance inside an envelop.<br>
+	 * It can be called only from <code>org.pepstock.charba.client</code> package.
+	 * 
+	 * @param envelop envelop instance which will contain the native object
+	 * @return the envelop, passed as argument, loaded with the native object
+	 */
+	public final ChartEnvelop<NativeObject> loadNativeObject(ChartEnvelop<NativeObject> envelop) {
+		return getConfiguration().loadNativeObject(envelop);
 	}
 
 }

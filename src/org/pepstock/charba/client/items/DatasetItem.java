@@ -268,9 +268,11 @@ public final class DatasetItem extends NativeObjectContainer {
 	}
 	
 	/**
-	 * Returns the value scale item or <code>null</code> if not exists.
+	 * Returns the value scale item or <code>null</code> if not exists.<br>
+	 * If {@link IndexAxis} = {@link IndexAxis#Y} then iScale === yScale and vScale === xScale.<br>
+	 * For radar, iScale === vScale === rScale.
 	 * 
-	 * @return the calue scale item or <code>null</code> if not exists
+	 * @return the value scale item or <code>null</code> if not exists
 	 */
 	public ScaleItem getValueScale() {
 		return retrieveScale(Property.V_SCALE);
@@ -278,7 +280,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	
 	/**
 	 * Returns the index axis ID.
-	 * 
+	 *  
 	 * @return the index axis ID. Default is {@link DefaultScaleId#X}.
 	 */
 	public IsScaleId getIndexAxisID() {
@@ -286,7 +288,9 @@ public final class DatasetItem extends NativeObjectContainer {
 	}
 	
 	/**
-	 * Returns the index scale item or <code>null</code> if not exists.
+	 * Returns the index scale item or <code>null</code> if not exists.<br>
+	 * If {@link IndexAxis} = {@link IndexAxis#Y} then iScale === yScale and vScale === xScale.<br>
+	 * For radar, iScale === vScale === rScale.
 	 * 
 	 * @return the index scale item or <code>null</code> if not exists
 	 */

@@ -203,7 +203,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 			// checks if callback is consistent
 			if (itemSortCallback != null) {
 				// calls callback
-				return itemSortCallback.onItemSort(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item1, true)), new TooltipItem(new ConfigurationEnvelop<>(item2, true)));
+				return itemSortCallback.onItemSort(getChart(), TooltipItem.FACTORY.create(item1), TooltipItem.FACTORY.create(item2));
 			}
 			// default is 0 - equals
 			return 0;
@@ -212,7 +212,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
-				return filterCallback.onFilter(getChart(), new TooltipItem(new ConfigurationEnvelop<>(item, true)));
+				return filterCallback.onFilter(getChart(), TooltipItem.FACTORY.create(item));
 			}
 			// default is true
 			return true;

@@ -60,6 +60,7 @@ public abstract class AbstractChartsLifecycleListener implements ChartsLifecycle
 	 */
 	@Override
 	public void onAfterConfigure(IsChart chart) {
+		// do nothing
 	}
 
 	/*

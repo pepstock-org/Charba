@@ -31,8 +31,10 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  */
 public final class TooltipLabelColor extends NativeObjectContainer {
 	
-	// static factory to create a dataset item from a native object.
-	static final TooltipLabelColorFactory FACTORY = new TooltipLabelColorFactory();
+	/**
+	 * Tooltip color factory to create label color objects.
+	 */
+	public static final TooltipLabelColorFactory FACTORY = new TooltipLabelColorFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -168,7 +170,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
+	public static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
 		
 		/**
 		 * To avoid any instatiation
