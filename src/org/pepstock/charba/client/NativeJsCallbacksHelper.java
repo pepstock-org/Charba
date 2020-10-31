@@ -82,8 +82,6 @@ final class NativeJsCallbacksHelper {
 	// -----------------
 	// TOOLTIPS callback
 	// -----------------
-	
-	// FIXME to add to externs
 
 	/**
 	 * Invokes the default tooltip callback for <code>title, body and footer</code>.
@@ -99,7 +97,7 @@ final class NativeJsCallbacksHelper {
 	 * Invokes the default tooltip callback for <code>beforeLabel, label and afterLabel, labelTextColor</code>.
 	 *  
 	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
-	 * @param items tooltip item instance
+	 * @param item tooltip item instance
 	 * @param key property key of the callback to invoke
 	 * @return an array of string to put before the label
 	 */

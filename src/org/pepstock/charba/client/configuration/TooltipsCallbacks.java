@@ -360,7 +360,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onBeforeTitle(getChart(), tooltipItems));
+			List<String> result = titleCallback.onBeforeTitle(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeTitle(getChart(), tooltipItems));
@@ -378,7 +382,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onTitle(getChart(), tooltipItems));
+			List<String> result = titleCallback.onTitle(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsTitle(getChart(), tooltipItems));
@@ -396,7 +404,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(titleCallback.onAfterTitle(getChart(), tooltipItems));
+			List<String> result = titleCallback.onAfterTitle(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterTitle(getChart(), tooltipItems));
@@ -414,7 +426,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onBeforeBody(getChart(), tooltipItems));
+			List<String> result = bodyCallback.onBeforeBody(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeBody(getChart(), tooltipItems));
@@ -432,7 +448,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (bodyCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(bodyCallback.onAfterBody(getChart(), tooltipItems));
+			List<String> result = bodyCallback.onAfterBody(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterBody(getChart(), tooltipItems));
@@ -563,7 +583,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onBeforeFooter(getChart(), tooltipItems));
+			List<String> result = footerCallback.onBeforeFooter(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsBeforeFooter(getChart(), tooltipItems));
@@ -581,7 +605,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onFooter(getChart(), tooltipItems));
+			List<String> result = footerCallback.onFooter(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsFooter(getChart(), tooltipItems));
@@ -599,7 +627,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (footerCallback != null) {
 			// invokes callback
-			return ArrayString.fromOrEmpty(footerCallback.onAfterFooter(getChart(), tooltipItems));
+			List<String> result = footerCallback.onAfterFooter(getChart(), tooltipItems);
+			// checks if result is consistent
+			if (result != null) {
+				return ArrayString.fromOrEmpty(result);
+			}
 		}
 		// default result
 		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsAfterFooter(getChart(), tooltipItems));

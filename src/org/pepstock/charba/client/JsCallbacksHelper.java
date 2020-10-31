@@ -113,7 +113,7 @@ final class JsCallbacksHelper {
 	/**
 	 * Invokes the default tooltip callback for <code>title, body and footer</code>.
 	 *  
-	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param chart chart instance to use to get the tooltip node
 	 * @param items list of tooltip items
 	 * @param key property key of the callback to invoke
 	 * @return a list of string to put into tooltip
@@ -131,10 +131,10 @@ final class JsCallbacksHelper {
 	/**
 	 * Invokes the default tooltip callback for <code>beforeLabel, label and afterLabel</code>.
 	 * 
-	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param chart chart instance to use to get the tooltip node
 	 * @param item tooltip items instance
 	 * @param key property key of the callback to invoke
-	 * @return a list of string to put into tooltip
+	 * @return string to put into tooltip
 	 */
 	String invokeDefaultTooltipsForLabel(Chart chart, NativeObject item, TooltipsCallbacks.CallbackProperty key){
 		// checks if arguments are consistent
@@ -148,7 +148,7 @@ final class JsCallbacksHelper {
 	/**
 	 * Invokes the default tooltip callback for <code>labelColor and labelPointStyle</code>.
 	 * 
-	 * @param tooltipModel tooltip model to use as <code>this</code> on calling
+	 * @param chart chart instance to use to get the tooltip node
 	 * @param item tooltip item instance
 	 * @param key property key of the callback to invoke
 	 * @return the label object instance
