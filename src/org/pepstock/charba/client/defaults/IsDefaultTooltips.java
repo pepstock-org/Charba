@@ -208,5 +208,12 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner, IsDefaultBo
 	 * @return size of the border.
 	 */
 	int getBorderWidth();
+	
+	/**
+	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * 
+	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight)
+	 */
+	boolean isUsePointStyle();
 
 }

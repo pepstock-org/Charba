@@ -225,6 +225,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `isoWeekday` property of `Time` options and configuration class does not store a `boolean` anymore but new `IsoWeekDay` enumeration with all days of week.
    * rename `Rectangle` options and configuration in `Bar`, inside the `Elements` node of the options and configuration.
    * rename `showLines` property to `showLine` property for line and radar chart options and configuration.
+   * add `usePointStyle` property to `Tooltips` class for options and configuration.
    * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -325,6 +326,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `align` and `crossAlign` properties to cartesian ticks.
    * add the `center` axes position and the position of the axis with respect to a data value.
    * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
+   * add `onLabelPointStyle` method to `TooltipLabelCallback` interface and `TooltipLabelPointStyle` class in order to manage the point style into tooltip.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -371,7 +373,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
- * add `default` to the tooltip callbacks interface methods.
   
 ### Development
 

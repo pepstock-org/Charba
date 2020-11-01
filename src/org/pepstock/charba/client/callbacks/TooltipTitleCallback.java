@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
@@ -39,7 +39,7 @@ public interface TooltipTitleCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onBeforeTitle(IsChart chart, List<TooltipItem> items){
-		return Defaults.get().invokeTooltipsBeforeTitle(chart, items);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -50,7 +50,7 @@ public interface TooltipTitleCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onTitle(IsChart chart, List<TooltipItem> items){
-		return Defaults.get().invokeTooltipsTitle(chart, items);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public interface TooltipTitleCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onAfterTitle(IsChart chart, List<TooltipItem> items){
-		return Defaults.get().invokeTooltipsAfterTitle(chart, items);
+		return Collections.emptyList();
 	}
 
 }

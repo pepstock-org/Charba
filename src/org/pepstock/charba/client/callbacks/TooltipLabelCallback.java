@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
+import org.pepstock.charba.client.items.TooltipLabelPointStyle;
 
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
@@ -37,10 +38,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. 
+	 * @return label to be applied.
 	 */
 	default String onBeforeLabel(IsChart chart, TooltipItem item) {
-		return Defaults.get().invokeTooltipsBeforeLabel(chart, item);
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -52,7 +53,7 @@ public interface TooltipLabelCallback {
 	 * @return label to be applied.
 	 */
 	default String onLabel(IsChart chart, TooltipItem item) {
-		return Defaults.get().invokeTooltipsLabel(chart, item);
+		return Constants.EMPTY_STRING;
 	}
 
 	/**
@@ -64,7 +65,19 @@ public interface TooltipLabelCallback {
 	 * @return label color to be applied.
 	 */
 	default TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item) {
-		return Defaults.get().invokeTooltipsLabelColor(chart, item);
+		return null;
+	}
+
+	/**
+	 * Returns the point style to use instead of color boxes if <code>usePointStyle</code> is true.<br>
+	 * Default implementation uses the point style from the dataset points.
+	 * 
+	 * @param chart chart instance
+	 * @param item tooltip item
+	 * @return point style to be applied.
+	 */
+	default TooltipLabelPointStyle onLabelPointStyle(IsChart chart, TooltipItem item) {
+		return null;
 	}
 
 	/**
@@ -76,7 +89,7 @@ public interface TooltipLabelCallback {
 	 * @return label text color to be applied.
 	 */
 	default IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
-		return Defaults.get().invokeTooltipsLabelTextColor(chart, item);
+		return chart.getOptions().getTooltips().getBodyFont().getColor();
 	}
 
 	/**
@@ -85,10 +98,10 @@ public interface TooltipLabelCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied. 
+	 * @return label to be applied.
 	 */
 	default String onAfterLabel(IsChart chart, TooltipItem item) {
-		return Defaults.get().invokeTooltipsAfterLabel(chart, item);
+		return Constants.EMPTY_STRING;
 	}
 
 }

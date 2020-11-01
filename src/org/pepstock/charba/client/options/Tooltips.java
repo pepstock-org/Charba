@@ -79,7 +79,8 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		MULTI_KEY_BACKGROUND("multiKeyBackground"),
 		DISPLAY_COLORS("displayColors"),
 		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth");
+		BORDER_WIDTH("borderWidth"),
+		USE_POINT_STYLE("usePointStyle");
 
 		// name value of property
 		private final String value;
@@ -131,7 +132,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		// creates the boxer
 		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -698,4 +699,24 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}
 
+	/**
+	 * Sets if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * 
+	 * @param usePointStyle <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between
+	 *            boxWidth and boxHeight)
+	 */
+	public void setUsePointStyle(boolean usePointStyle) {
+		setValueAndAddToParent(Property.USE_POINT_STYLE, usePointStyle);
+	}
+
+	/**
+	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * 
+	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and
+	 *         boxHeight)
+	 */
+	@Override
+	public boolean isUsePointStyle() {
+		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());
+	}
 }

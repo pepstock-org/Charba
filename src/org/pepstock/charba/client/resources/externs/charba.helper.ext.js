@@ -202,32 +202,6 @@ CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart,
  */
 CharbaJsCallbacksHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {};
 /**
- * @param {Object} tooltipModel 
- * @param {Array} items 
- * @param {string} key 
- * @return {Array}
- */
-CharbaJsCallbacksHelper.invokeDefaultTooltipsForElement = function(tooltipModel, items, key){};
-/**
- * @param {Object} tooltipModel 
- * @param {Object} item 
- * @param {string} key 
- * @return {string}
- */
-CharbaJsCallbacksHelper.invokeDefaultTooltipsForLabel = function(tooltipModel, item, key){};
-/**
- * @param {Object} tooltipModel 
- * @param {Object} item 
- * @param {string} key 
- * @return {Object}
- */
-CharbaJsCallbacksHelper.invokeDefaultTooltipsForLabelObject = function(tooltipModel, item, key){};
-/**
- * @param {string} key 
- * @return {boolean}
- */
-CharbaJsCallbacksHelper.isTooltipCallbacksConsistent = function(key){};
-/**
  * @constructor
  * @return {CharbaJsZoomHelper}
  */	

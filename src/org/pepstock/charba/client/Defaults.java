@@ -21,17 +21,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.configuration.TooltipsCallbacks;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -48,8 +43,6 @@ import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
-import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
@@ -357,238 +350,6 @@ public final class Defaults {
 				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
 			}
 		}
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>beforeTitle</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsBeforeTitle(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_TITLE);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>tilte</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsTitle(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.TITLE);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>afterTitle</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsAfterTitle(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_TITLE);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>beforeBody</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsBeforeBody(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_BODY);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>afterBody</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsAfterBody(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_BODY);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>beforeLabel</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item instance
-	 * @return string row to add
-	 */
-	public String invokeTooltipsBeforeLabel(IsChart chart, TooltipItem item) {
-		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.BEFORE_LABEL);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>label</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item instance
-	 * @return string row to add
-	 */
-	public String invokeTooltipsLabel(IsChart chart, TooltipItem item) {
-		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.LABEL);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>afterLabel</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item instance
-	 * @return string row to add
-	 */
-	public String invokeTooltipsAfterLabel(IsChart chart, TooltipItem item) {
-		return invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.AFTER_LABEL);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>beforeFooter</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsBeforeFooter(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.BEFORE_FOOTER);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>footer</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsFooter(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.FOOTER);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>afterFooter</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @return a list of string with all rows to add
-	 */
-	public List<String> invokeTooltipsAfterFooter(IsChart chart, List<TooltipItem> items) {
-		return invokeDefaultTooltipsForElement(chart, items, TooltipsCallbacks.CallbackProperty.AFTER_FOOTER);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>labelColor</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item instance
-	 * @return label color (background and border) to apply to label
-	 */
-	public TooltipLabelColor invokeTooltipsLabelColor(IsChart chart, TooltipItem item) {
-		return invokeDefaultTooltipsForLabelObject(chart, item, TooltipsCallbacks.CallbackProperty.LABEL_COLOR, TooltipLabelColor.FACTORY);
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>textColor</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item instance
-	 * @return label text color to apply to label
-	 */
-	public IsColor invokeTooltipsLabelTextColor(IsChart chart, TooltipItem item) {
-		// gets color
-		String color = invokeDefaultTooltipsForLabel(chart, item, TooltipsCallbacks.CallbackProperty.LABEL_TEXT_COLOR);
-		// checks if consistent
-		if (color != null) {
-			return ColorBuilder.parse(color);
-		}
-		// transform into a color object
-		return chart.getOptions().getTooltips().getBodyFont().getColor();
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>title, body and footer</code> and all theri before/after.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of tooltip items instance
-	 * @param key property key of the callback to invoke
-	 * @return a list of string to put into tooltip
-	 */
-	private List<String> invokeDefaultTooltipsForElement(IsChart chart, List<TooltipItem> items, TooltipsCallbacks.CallbackProperty key) {
-		// checks if argument are consistent
-		if (checkTooltipsCallbackInvocationArguments(chart, items)) {
-			// gets the native chart
-			Chart nativeChart = Charts.getNative(chart);
-			// invokes the callbacks
-			return JsCallbacksHelper.get().invokeDefaultTooltipsForElement(nativeChart, ArrayObject.fromOrEmpty(items), key);
-
-		}
-		// if here, wrong arguments
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>beforeLabel, label and afterLabel</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip items instance
-	 * @param key property key of the callback to invoke
-	 * @return string instance to put into tooltip
-	 */
-	private String invokeDefaultTooltipsForLabel(IsChart chart, TooltipItem item, TooltipsCallbacks.CallbackProperty key) {
-		// checks if argument are consistent
-		if (checkTooltipsCallbackInvocationArguments(chart, item)) {
-			// gets the native chart
-			Chart nativeChart = Charts.getNative(chart);
-			// creates an envelop to load the native object
-			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
-			// invokes the callbacks
-			return JsCallbacksHelper.get().invokeDefaultTooltipsForLabel(nativeChart, item.loadNativeObject(envelop).getContent(), key);
-
-		}
-		// if here, wrong arguments
-		return Constants.EMPTY_STRING;
-	}
-
-	/**
-	 * Invokes the default tooltip callback for <code>labelColor, labelPointStyle</code>.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip items instance
-	 * @param key property key of the callback to invoke
-	 * @param factory the factory instance to crate the object
-	 * @param <T> type of native object to create
-	 * @return a label object instance
-	 */
-	private <T extends NativeObjectContainer> T invokeDefaultTooltipsForLabelObject(IsChart chart, TooltipItem item, TooltipsCallbacks.CallbackProperty key, NativeObjectContainerFactory<T> factory) {
-		// checks if argument are consistent
-		if (factory != null && checkTooltipsCallbackInvocationArguments(chart, item)) {
-			// gets the native chart
-			Chart nativeChart = Charts.getNative(chart);
-			// creates an envelop to load the native object
-			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
-			// invokes the callbacks
-			NativeObject nativeObject = JsCallbacksHelper.get().invokeDefaultTooltipsForLabelObject(nativeChart, item.loadNativeObject(envelop).getContent(), key);
-			// retunrs hte object container
-			return factory.create(nativeObject);
-		}
-		// if here, wrong arguments
-		return null;
-	}
-
-	/**
-	 * Returns <code>true</code> if all arguments are consistent.
-	 * 
-	 * @param chart chart instance
-	 * @param item tooltip item(s) to send to callback
-	 * @return <code>true</code> if all arguments are consistent
-	 */
-	private boolean checkTooltipsCallbackInvocationArguments(IsChart chart, Object item) {
-		// checks the arguments
-		return IsChart.isConsistent(chart) && chart.isInitialized() && item != null;
 	}
 
 	/**

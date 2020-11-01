@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
@@ -40,7 +40,7 @@ public interface TooltipBodyCallback {
 	 * @return a list of labels to apply to the body.
 	 */
 	default List<String> onBeforeBody(IsChart chart, List<TooltipItem> items) {
-		return Defaults.get().invokeTooltipsBeforeBody(chart, items);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public interface TooltipBodyCallback {
 	 * @return a list of labels to apply to the body.
 	 */
 	default List<String> onAfterBody(IsChart chart, List<TooltipItem> items){
-		return Defaults.get().invokeTooltipsAfterBody(chart, items);
+		return Collections.emptyList();
 	}
 
 }

@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
@@ -40,7 +40,7 @@ public interface TooltipFooterCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onBeforeFooter(IsChart chart, List<TooltipItem> items) {
-		return Defaults.get().invokeTooltipsBeforeFooter(chart, items);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public interface TooltipFooterCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onFooter(IsChart chart, List<TooltipItem> items) {
-		return Defaults.get().invokeTooltipsFooter(chart, items);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public interface TooltipFooterCallback {
 	 * @return a list of labels to apply to the title.
 	 */
 	default List<String> onAfterFooter(IsChart chart, List<TooltipItem> items) {
-		return Defaults.get().invokeTooltipsAfterFooter(chart, items);
+		return Collections.emptyList();
 	}
 
 }

@@ -341,4 +341,14 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 		return tooltips.getBoxHeight();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isUsePointStyle()
+	 */
+	@Override
+	public boolean isUsePointStyle() {
+		return tooltips.isUsePointStyle();
+	}
+
 }

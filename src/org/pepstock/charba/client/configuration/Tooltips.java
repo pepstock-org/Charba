@@ -807,6 +807,26 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	}
 
 	/**
+	 * Sets if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * 
+	 * @param usePointStyle <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between
+	 *            boxWidth and boxHeight)
+	 */
+	public void setUsePointStyle(boolean usePointStyle) {
+		getConfiguration().getTooltips().setUsePointStyle(usePointStyle);
+	}
+
+	/**
+	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * 
+	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and
+	 *         boxHeight)
+	 */
+	public boolean isUsePointStyle() {
+		return getConfiguration().getTooltips().isUsePointStyle();
+	}
+
+	/**
 	 * Returns the user custom callback instance.
 	 * 
 	 * @return the user custom callback instance
