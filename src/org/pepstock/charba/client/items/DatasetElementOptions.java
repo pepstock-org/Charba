@@ -142,7 +142,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return list of the stroke width of the dataset item in pixels.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth()); // FIXME COULD BE an object
+		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
 	}
 
 	/**
@@ -240,7 +240,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the bar border radius (in pixels).
 	 */
 	public int getBorderRadius() {
-		return getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius()); // FIXME COULD BE an object
+		return getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
 
 	/**

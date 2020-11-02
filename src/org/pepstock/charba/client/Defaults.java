@@ -409,7 +409,7 @@ public final class Defaults {
 			// gets the dataset
 			Dataset dataset = chart.getData().retrieveDataset(item);
 			// creates the string to return with dataset label
-			StringBuilder label = new StringBuilder(dataset.getLabel() == UndefinedValues.STRING ? Constants.EMPTY_STRING : dataset.getLabel());
+			StringBuilder label = new StringBuilder(dataset.getLabel() == null ? Constants.EMPTY_STRING : dataset.getLabel());
 			// if the label has been added
 			if (label.length() > 0) {
 				// adds colon and a blank
