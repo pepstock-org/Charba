@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
@@ -381,14 +382,16 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onTitleCallback(ArrayObject items) {
+		// reads tooltip items
+		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
 		// checks if callback is consistent
 		if (titleCallback != null) {
 			// invokes callback
-			List<String> result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY));
+			List<String> result = titleCallback.onTitle(getChart(), tooltipItems);
 			return ArrayString.fromOrEmpty(result);
 		}
 		// default result
-		return EMPTY_ARRAY_STRING;
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsCallbackOnTitle(getChart(), tooltipItems));
 	}
 
 	/**
@@ -483,7 +486,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsCallbackOnLabel(getChart(), tooltipItem);
 	}
 
 	/**
@@ -503,6 +506,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			if (result != null) {
 				return result.getObject();
 			}
+		}
+		// instances to return
+		TooltipLabelColor defaultColor = Defaults.get().invokeTooltipsCallbackOnLabelColor(getChart(), tooltipItem);
+		// checks if instance is consistent
+		if (defaultColor != null) {
+			return defaultColor.getObject();
 		}
 		// default result
 		return DEFAULT_LABEL_COLOR.getObject();
@@ -525,6 +534,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			if (result != null) {
 				return result.getObject();
 			}
+		}
+		// instances to return
+		TooltipLabelPointStyle defaultPointSTyle = Defaults.get().invokeTooltipsCallbackOnLabelPointStyle(getChart(), tooltipItem);
+		// checks if instance is consistent
+		if (defaultPointSTyle != null) {
+			return defaultPointSTyle.getObject();
 		}
 		// default result
 		return DEFAULT_LABEL_POINT_STYLE.getObject();

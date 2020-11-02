@@ -120,7 +120,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores controller
-		datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
+		this.datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	public int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the dataset index axis.
 	 * 
@@ -212,7 +212,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	public IsScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
-	
+
 	/**
 	 * Returns the Y scale item or <code>null</code> if not exists.
 	 * 
@@ -248,7 +248,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	public IsScaleId getRAxisID() {
 		return getValue(Property.R_AXIS_ID, DefaultScaleId.R);
 	}
-	
+
 	/**
 	 * Returns the R scale item or <code>null</code> if not exists.
 	 * 
@@ -257,7 +257,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	public ScaleItem getRScale() {
 		return retrieveScale(Property.R_SCALE);
 	}
-	
+
 	/**
 	 * Returns the value axis ID.
 	 * 
@@ -266,7 +266,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	public IsScaleId getValueAxisID() {
 		return getValue(Property.V_AXIS_ID, DefaultScaleId.Y);
 	}
-	
+
 	/**
 	 * Returns the value scale item or <code>null</code> if not exists.<br>
 	 * If {@link IndexAxis} = {@link IndexAxis#Y} then iScale === yScale and vScale === xScale.<br>
@@ -277,16 +277,16 @@ public final class DatasetItem extends NativeObjectContainer {
 	public ScaleItem getValueScale() {
 		return retrieveScale(Property.V_SCALE);
 	}
-	
+
 	/**
 	 * Returns the index axis ID.
-	 *  
+	 * 
 	 * @return the index axis ID. Default is {@link DefaultScaleId#X}.
 	 */
 	public IsScaleId getIndexAxisID() {
 		return getValue(Property.I_AXIS_ID, DefaultScaleId.X);
 	}
-	
+
 	/**
 	 * Returns the index scale item or <code>null</code> if not exists.<br>
 	 * If {@link IndexAxis} = {@link IndexAxis#Y} then iScale === yScale and vScale === xScale.<br>
@@ -316,7 +316,7 @@ public final class DatasetItem extends NativeObjectContainer {
 		ArrayObject array = getArrayValue(Property.DATA);
 		return ArrayListHelper.unmodifiableList(array, DatasetElement.FACTORY);
 	}
-	
+
 	/**
 	 * Returns the scale item from a specific property.
 	 * 

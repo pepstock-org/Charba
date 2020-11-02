@@ -72,6 +72,15 @@ public class Point extends AbstractConfigurationElement {
 	}
 
 	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	public boolean isPointStyleAsImage() {
+		return getOptions().getElements().getPoint().isPointStyleAsImage();
+	}
+
+	/**
 	 * Returns the style of the point.
 	 * 
 	 * @return the style of the point.

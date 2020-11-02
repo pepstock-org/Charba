@@ -499,7 +499,16 @@
     CharbaJsItemsHelper.getBasePixel = function(obj) {
     	return obj.getBasePixel();
     }    
-    
+    /*
+	 Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
+	  
+	 @param controller controller instance
+	 @param dataIndex index of data
+	 @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
+	 */
+	CharbaJsItemsHelper.getDatasetControllerStyle = function(controller, dataIndex) {
+		return controller.getStyle(dataIndex);
+	}
     /*
 		JsDateAdapterHelper is an object to create a CHART.JS date adapter  
 	*/

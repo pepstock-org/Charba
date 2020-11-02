@@ -108,6 +108,15 @@ final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
 	void setPointStyle(Img pointStyle) {
 		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
+	
+	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	boolean isPointStyleAsImage() {
+		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
+	}
 
 	/**
 	 * Returns the style of the point as image.<br>
@@ -117,7 +126,6 @@ final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
 	 *         If property is missing or not a image, returns <code>null</code>.
 	 */
 	Img getPointStyleAsImage() {
-		// checks if image as point style has been used
 		// checks if image as point style has been used
 		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
 			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);

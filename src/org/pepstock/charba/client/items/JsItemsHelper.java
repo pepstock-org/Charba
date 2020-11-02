@@ -166,7 +166,7 @@ final class JsItemsHelper {
 		// if here, scale item not consistent
 		return Constants.EMPTY_STRING;
 	}
-	
+
 	/**
 	 * Returns the location of the given data point as string.
 	 * 
@@ -250,6 +250,23 @@ final class JsItemsHelper {
 		}
 		// if here, scale item not consistent
 		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
+	 * 
+	 * @param controller controller instance
+	 * @param dataIndex index of data
+	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
+	 */
+	NativeObject getDatasetControllerStyle(NativeObject controller, int dataIndex) {
+		// checks if controller is consistent and data index greater than 0
+		if (controller != null && dataIndex >= 0) {
+			return NativeJsItemsHelper.getDatasetControllerStyle(controller, dataIndex);
+		}
+		// if here, the arguments are not consistent
+		// then returns null
+		return null;
 	}
 
 }

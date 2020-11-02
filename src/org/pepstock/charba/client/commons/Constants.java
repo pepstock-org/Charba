@@ -49,6 +49,11 @@ public final class Constants {
 	public static final String COMMA = ",";
 
 	/**
+	 * Constant for COLON, <b>{@value}</b>.
+	 */
+	public static final String COLON = ":";
+
+	/**
 	 * Constant for PERCENT, <b>{@value}</b>.
 	 */
 	public static final String PERCENT = "%";

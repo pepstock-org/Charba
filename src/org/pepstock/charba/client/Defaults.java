@@ -16,18 +16,22 @@
 package org.pepstock.charba.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
@@ -41,8 +45,14 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.items.DatasetElementOptions;
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
+import org.pepstock.charba.client.items.TooltipItem;
+import org.pepstock.charba.client.items.TooltipLabelColor;
+import org.pepstock.charba.client.items.TooltipLabelPointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
@@ -350,6 +360,150 @@ public final class Defaults {
 				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
 			}
 		}
+	}
+
+	// -------------------
+	// TOOLTIPS
+	// -------------------
+
+	/**
+	 * Returns teh default text to render as the title of the tooltip.
+	 * 
+	 * @param chart chart instance
+	 * @param items list of all tooltip items
+	 * @return a list of labels to apply to the title.
+	 */
+	public List<String> invokeTooltipsCallbackOnTitle(IsChart chart, List<TooltipItem> items) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && !items.isEmpty()) {
+			// gets the first tooltip item
+			TooltipItem item = items.get(0);
+			// if the tooltip item has got the label
+			if (item.getLabel() != null) {
+				// returns the item label
+				return Collections.unmodifiableList(Arrays.asList(item.getLabel()));
+			}
+			// gets the stored labels from data
+			Labels labels = chart.getData().getLabels();
+			// checks if labels and data index are consistent
+			if (!labels.isEmpty() && item.getDataIndex() < labels.size()) {
+				// if yes, returns the labels at data index
+				return labels.getStrings(item.getDataIndex());
+			}
+		}
+		// if here, the arguments or the labels are not consistent
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the default text to render for an individual item in the tooltip.
+	 * 
+	 * @param chart chart instance
+	 * @param item tooltip item
+	 * @return label to be applied.
+	 */
+	public String invokeTooltipsCallbackOnLabel(IsChart chart, TooltipItem item) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && item != null) {
+			// gets the dataset
+			Dataset dataset = chart.getData().retrieveDataset(item);
+			// creates the string to return with dataset label
+			StringBuilder label = new StringBuilder(dataset.getLabel() == UndefinedValues.STRING ? Constants.EMPTY_STRING : dataset.getLabel());
+			// if the label has been added
+			if (label.length() > 0) {
+				// adds colon and a blank
+				label.append(Constants.COLON).append(Constants.BLANK);
+				// checks if the value of tooltip is consistent
+				if (item.getFormattedValue() != null) {
+					// appends the value
+					label.append(item.getFormattedValue());
+				}
+			}
+			return label.toString();
+		}
+		// if here, the arguments or the labels are not consistent
+		// then returns an empty string
+		return Constants.EMPTY_STRING;
+	}
+
+	/**
+	 * Returns the default colors to render for the tooltip item.
+	 * 
+	 * @param chart chart instance
+	 * @param item tooltip item
+	 * @return label color to be applied or <code>null</code> if arguments are not consistent
+	 */
+	public TooltipLabelColor invokeTooltipsCallbackOnLabelColor(IsChart chart, TooltipItem item) {
+		// gets the style options of controller
+		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
+		// checks if style is consistent
+		if (style != null) {
+			// creates an empty label color
+			TooltipLabelColor result = new TooltipLabelColor();
+			// sets colors and returns
+			result.setBackgroundColor(style.getBackgroundColorAsString());
+			result.setBorderColor(style.getBorderColorAsString());
+			return result;
+		}
+		// if here, the arguments or the labels are not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the default point style to render for the tooltip item.
+	 * 
+	 * @param chart chart instance
+	 * @param item tooltip item
+	 * @return point style to be applied or <code>null</code> if arguments are not consistent
+	 */
+	public TooltipLabelPointStyle invokeTooltipsCallbackOnLabelPointStyle(IsChart chart, TooltipItem item) {
+		// gets the style options of controller
+		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
+		// checks if style is consistent
+		if (style != null) {
+			// creates an empty label point style
+			TooltipLabelPointStyle result = new TooltipLabelPointStyle();
+			// checks if point style is an image
+			if (result.isPointStyleAsImage()) {
+				// stores as img
+				result.setPointStyle(style.getPointStyleAsImage());
+			} else {
+				// stores as point sytle
+				result.setPointStyle(style.getPointStyle());
+			}
+			// sets rotation
+			result.setRotation(style.getRotation());
+			return result;
+		}
+		// if here, the arguments or the labels are not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
+	 * 
+	 * @param chart chart instance
+	 * @param item tooltip item
+	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified or <code>null</code> if arguments are not
+	 *         consistent
+	 */
+	private DatasetElementOptions retrieveDatasetElementOptions(IsChart chart, TooltipItem item) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && item != null && item.getDatasetIndex() != UndefinedValues.INTEGER) {
+			// gets the dataset item at index
+			DatasetItem datasetItem = chart.getDatasetItem(item.getDatasetIndex());
+			// checks if consistent
+			if (datasetItem != null) {
+				// gets the style options of controller
+				return datasetItem.getController().getStyle(item.getDataIndex());
+			}
+		}
+		// if here, the arguments or the labels are not consistent
+		// then returns null
+		return null;
 	}
 
 	/**

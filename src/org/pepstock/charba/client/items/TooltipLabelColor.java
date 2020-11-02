@@ -173,7 +173,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
 		
 		/**
-		 * To avoid any instatiation
+		 * To avoid any instantiation
 		 */
 		private TooltipLabelColorFactory() {
 			// do nothing

@@ -258,6 +258,15 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	public boolean isPointStyleAsImage() {
+		return getConfiguration().getLegend().getLabels().isPointStyleAsImage();
+	}
+
+	/**
 	 * Returns the style of the legend.
 	 * 
 	 * @return the style of the legend.

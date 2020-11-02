@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for POINT element.
@@ -40,6 +42,10 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
 
 	private static final double DEFAULT_ROTATION = 0D;
+	
+	private static final boolean DEFAULT_POINT_STYLE_AS_IMG = false;
+
+	private static final Img DEFAULT_POINT_STYLE_IMG = UndefinedValues.IMAGE_ELEMENT;
 
 	/**
 	 * To avoid any instantiation
@@ -107,5 +113,26 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 	public double getRotation() {
 		return DEFAULT_ROTATION;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 */
+	@Override
+	public boolean isPointStyleAsImage() {
+		return DEFAULT_POINT_STYLE_AS_IMG;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
+	 */
+	@Override
+	public Img getPointStyleAsImage() {
+		return DEFAULT_POINT_STYLE_IMG;
+	}
+	
 
 }

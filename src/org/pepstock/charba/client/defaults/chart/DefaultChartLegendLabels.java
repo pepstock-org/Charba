@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -96,4 +97,25 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	public int getPadding() {
 		return labels.getPadding();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 */
+	@Override
+	public boolean isPointStyleAsImage() {
+		return labels.isPointStyleAsImage();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
+	 */
+	@Override
+	public Img getPointStyleAsImage() {
+		return labels.getPointStyleAsImage();
+	}
+
 }

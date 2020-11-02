@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -125,4 +126,25 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 	public double getRotation() {
 		return point.getRotation();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 */
+	@Override
+	public boolean isPointStyleAsImage() {
+		return point.isPointStyleAsImage();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
+	 */
+	@Override
+	public Img getPointStyleAsImage() {
+		return point.getPointStyleAsImage();
+	}
+
 }

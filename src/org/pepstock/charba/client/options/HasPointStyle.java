@@ -75,7 +75,24 @@ interface HasPointStyle extends IsDefaultPointStyler{
 			getPointStyler().setPointStyle(pointStyle);
 		}
 	}
-
+	
+	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	@Override
+	default boolean isPointStyleAsImage() {
+		// checks if point styler is consistent
+		if (getPointStyler() != null) {
+			return getPointStyler().isPointStyleAsImage();
+		}
+		// if here, point styler is not consistent
+		// uses the default false
+		return false;
+	}
+	
+	
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.
@@ -83,6 +100,7 @@ interface HasPointStyle extends IsDefaultPointStyler{
 	 * @return image of the style of the point as image.<br>
 	 *         If property is missing or not a image, returns <code>null</code>.
 	 */
+	@Override
 	default Img getPointStyleAsImage() {
 		// checks if point styler is consistent
 		if (getPointStyler() != null) {

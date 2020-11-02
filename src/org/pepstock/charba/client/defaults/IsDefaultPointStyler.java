@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -31,6 +32,22 @@ public interface IsDefaultPointStyler {
 	 * @return the style of the point.
 	 */
 	PointStyle getPointStyle();
+	
+	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	boolean isPointStyleAsImage();
+	
+	/**
+	 * Returns the style of the point as image.<br>
+	 * If property is missing or not an image, returns <code>null</code>.
+	 * 
+	 * @return image of the style of the point as image.<br>
+	 *         If property is missing or not a image, returns <code>null</code>.
+	 */
+	Img getPointStyleAsImage();
 
 
 }

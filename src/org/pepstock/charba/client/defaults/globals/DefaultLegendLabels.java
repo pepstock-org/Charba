@@ -17,7 +17,9 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for LEGENDLABELS element.
@@ -31,6 +33,10 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	private static final int DEFAULT_BOX_WIDTH = 40;
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
+
+	private static final boolean DEFAULT_POINT_STYLE_AS_IMG = false;
+
+	private static final Img DEFAULT_POINT_STYLE_IMG = UndefinedValues.IMAGE_ELEMENT;
 
 	private final DefaultFont font = new DefaultFont();
 
@@ -60,7 +66,7 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	public boolean isUsePointStyle() {
 		return DEFAULT_USE_POINT_STYLE;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -100,5 +106,25 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	public int getPadding() {
 		return DEFAULT_PADDING;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 */
+	@Override
+	public boolean isPointStyleAsImage() {
+		return DEFAULT_POINT_STYLE_AS_IMG;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
+	 */
+	@Override
+	public Img getPointStyleAsImage() {
+		return DEFAULT_POINT_STYLE_IMG;
+	}
+
 }

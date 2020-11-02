@@ -289,6 +289,12 @@ CharbaJsItemsHelper.getBaseValue = function(object) {};
  */
 CharbaJsItemsHelper.getBasePixel = function(object) {};
 /**
+ * @param {Object} controller 
+ * @param {number} dataIndex 
+ * @return {Object}
+ */
+CharbaJsItemsHelper.getDatasetControllerStyle  = function(controller, dataIndex) {};
+/**
  * @constructor
  * @return {CharbaJsDateAdapterHelper}
  */	

@@ -19,6 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -30,7 +32,7 @@ import org.pepstock.charba.client.enums.PointStyle;
 public final class TooltipLabelPointStyle extends NativeObjectContainer {
 
 	/**
-	 * Tooltip color factory to create label color objects.
+	 * Tooltip point style factory to create label point style objects.
 	 */
 	public static final TooltipLabelPointStyleFactory FACTORY = new TooltipLabelPointStyleFactory();
 
@@ -85,11 +87,42 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point or <code>null</code> if point style is set as image
+	 * @return the style of the point
 	 */
-
 	public PointStyle getPointStyle() {
-		return getValue(Property.POINT_STYLE, PointStyle.values(), PointStyle.CIRCLE);
+		// checks if image as point style has been used
+		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
+			return getValue(Property.POINT_STYLE, PointStyle.values(), PointStyle.CIRCLE);
+		}
+		// if here, means the point style as stored as images
+		// then returns the default
+		return PointStyle.CIRCLE;
+	}
+
+	/**
+	 * Returns the style of the point as image.<br>
+	 * If property is missing or not an image, returns <code>null</code>.
+	 * 
+	 * @return image of the style of the point as image.<br>
+	 *         If property is missing or not a image, returns <code>null</code>.
+	 */
+	public Img getPointStyleAsImage() {
+		// checks if image as point style has been used
+		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
+			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+		}
+		// if here, means the point style as stored as strings
+		// returns undefined
+		return UndefinedValues.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	public boolean isPointStyleAsImage() {
+		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
 	}
 
 	/**
@@ -98,6 +131,15 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	 * @param pointStyle style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image element of the style of the point as image.
+	 */
+	public void setPointStyle(Img pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
 
@@ -129,14 +171,14 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	}
 
 	/**
-	 * Inner class to create tooltip label color by a native object.
+	 * Inner class to create tooltip label point style by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class TooltipLabelPointStyleFactory implements NativeObjectContainerFactory<TooltipLabelPointStyle> {
 
 		/**
-		 * To avoid any instatiation
+		 * To avoid any instantiation
 		 */
 		private TooltipLabelPointStyleFactory() {
 			// do nothing

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Constants;
@@ -53,7 +54,7 @@ public interface TooltipLabelCallback {
 	 * @return label to be applied.
 	 */
 	default String onLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+		return Defaults.get().invokeTooltipsCallbackOnLabel(chart, item);
 	}
 
 	/**
@@ -65,7 +66,7 @@ public interface TooltipLabelCallback {
 	 * @return label color to be applied.
 	 */
 	default TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item) {
-		return null;
+		return Defaults.get().invokeTooltipsCallbackOnLabelColor(chart, item);
 	}
 
 	/**
@@ -77,7 +78,7 @@ public interface TooltipLabelCallback {
 	 * @return point style to be applied.
 	 */
 	default TooltipLabelPointStyle onLabelPointStyle(IsChart chart, TooltipItem item) {
-		return null;
+		return Defaults.get().invokeTooltipsCallbackOnLabelPointStyle(chart, item);
 	}
 
 	/**

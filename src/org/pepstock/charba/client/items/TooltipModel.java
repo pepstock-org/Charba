@@ -54,6 +54,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		TITLE("title"),
 		FOOTER("footer"),
 		LABEL_COLORS("labelColors"),
+		LABEL_POINT_STYLES("labelPointStyles"),
 		LABEL_TEXT_COLORS("labelTextColors"),
 		OPACITY("opacity");
 
@@ -253,6 +254,18 @@ public final class TooltipModel extends NativeObjectContainer {
 		ArrayObject array = getArrayValue(Property.LABEL_COLORS);
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, TooltipLabelColor.FACTORY);
+	}
+
+	/**
+	 * Returns the list of labels point styles of tooltip.
+	 * 
+	 * @return the list of labels point styles of tooltip.
+	 */
+	public List<TooltipLabelPointStyle> getLabelPointStyles() {
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.LABEL_POINT_STYLES);
+		// returns as list
+		return ArrayListHelper.unmodifiableList(array, TooltipLabelPointStyle.FACTORY);
 	}
 
 	/**

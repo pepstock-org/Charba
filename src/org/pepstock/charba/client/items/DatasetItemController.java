@@ -117,4 +117,15 @@ public final class DatasetItemController extends NativeObjectContainer {
 	public double getOffsetY() {
 		return getValue(Property.OFFSET_Y, UndefinedValues.DOUBLE);
 	}
+
+	/**
+	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
+	 * 
+	 * @param dataIndex index of data
+	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
+	 */
+	public DatasetElementOptions getStyle(int dataIndex) {
+		return new DatasetElementOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
+	}
+
 }
