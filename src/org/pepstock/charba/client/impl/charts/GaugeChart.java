@@ -29,8 +29,10 @@ public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 	 * Name of chart type <b>{@value TYPE}</b> for gauge
 	 */
 	public static final String TYPE = "charbagauge";
-	// static reference to controller type
-	static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT);
+	/**
+	 * METER controller type
+	 */
+	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT, BaseMeterController.PROVIDER);
 	// chart options
 	private final GaugeOptions options;
 

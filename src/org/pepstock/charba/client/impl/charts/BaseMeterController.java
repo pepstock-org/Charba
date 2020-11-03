@@ -23,6 +23,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
+import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
@@ -42,6 +43,8 @@ import org.pepstock.charba.client.utils.Utilities;
  */
 final class BaseMeterController extends AbstractController {
 
+	// static reference of controller provider for meter charts
+	static final ControllerProvider PROVIDER = new BaseMeterControllerProvier();
 	// default font increment
 	private static final int FONT_SIZE_INCREMENT = 4;
 	// minimum font size
@@ -60,7 +63,7 @@ final class BaseMeterController extends AbstractController {
 	 * 
 	 * @param type controller type, could be meter or gauge.
 	 */
-	BaseMeterController(ControllerType type) {
+	private BaseMeterController(ControllerType type) {
 		this.type = type;
 	}
 
@@ -329,6 +332,26 @@ final class BaseMeterController extends AbstractController {
 		}
 		// if here, it sues the precision set into options
 		return Utilities.applyPrecision(value, options.getPrecision());
+	}
+
+	/**
+	 * Inner class which is implementing a {@link ControllerProvider} to create a base meter controller.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class BaseMeterControllerProvier implements ControllerProvider {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.controllers.ControllerProvider#provide(org.pepstock.charba.client.controllers.ControllerType)
+		 */
+		@Override
+		public Controller provide(ControllerType controllerType) {
+			return new BaseMeterController(controllerType);
+		}
+
 	}
 
 }

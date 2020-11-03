@@ -261,7 +261,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks into `BarDataset` class.
  * rename `getDatasetMeta(int)` method to `getDatasetItem(int)` into the `IsChart` interface.
  * rename `getDatasets()` method to `getElements()` into the `DatasetItem` class.
- * rename `getMeta()` method to `getDatasetItem()` into the `DatasetPluginItem` class. 
+ * rename `getMeta()` method to `getDatasetItem()` into the `DatasetPluginItem` class.
+ * change the constructor signature of `ControllerType` class adding a mandatory argument of `ControllerProvider` instance which can provide the instance of controller to register.
+   * add an optional argument (boolean) in order to decide if the base default options of the chart which is being extended must be cloned or not. 
+   * reduce the visibility of `register` method of `Controller` class   
   
 ### Features
 

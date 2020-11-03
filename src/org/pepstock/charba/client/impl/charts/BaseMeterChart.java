@@ -87,13 +87,10 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		// gets the controller type
 		// could be gauge or meter
 		ControllerType type = getControllerType();
-		// checks if already registered
-		if (!Defaults.get().getControllers().isRegistered(type.value())) {
-			// creates and store the controller
-			meterController = new BaseMeterController(type);
-			// if not, adds a controller
-			Defaults.get().getControllers().register(meterController);
-		} else if (meterController == null) {
+		// registers the controller
+		// if not register
+		// checks for meter controller
+		if (type.register() && meterController == null) {
 			// if here the controller is registered
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);

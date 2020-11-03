@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Controller;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
@@ -31,6 +33,10 @@ public final class ControllerType implements Type {
 	private final String type;
 	// type of extended chart
 	private final Type chartType;
+	// if the default options of base type must be cloned
+	private final boolean cloneDefaults;
+	// controller provider instance
+	private final ControllerProvider provider;
 
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
@@ -38,22 +44,42 @@ public final class ControllerType implements Type {
 	 * 
 	 * @param type new chart type as string.
 	 * @param chartType existing chart type, as extension.
+	 * @param provider controller provider instance to use for controller registering
 	 */
-	public ControllerType(String type, Type chartType) {
+	public ControllerType(String type, Type chartType, ControllerProvider provider) {
+		this(type, chartType, provider, true);
+	}
+
+	/**
+	 * Creates new chart type based on existing chart type, as extension.<br>
+	 * Scale type is the existing chart one.
+	 * 
+	 * @param type new chart type as string.
+	 * @param chartType existing chart type, as extension.
+	 * @param provider controller provider instance to use for controller registering
+	 * @param cloneDefaults if <code>true</code>, clones the default options of base chart type.
+	 */
+	public ControllerType(String type, Type chartType, ControllerProvider provider, boolean cloneDefaults) {
 		// checks type if consistent
 		if (type == null) {
 			throw new IllegalArgumentException("Type is null");
 		}
-		// checks if the controller type is already defained for a default chart type
+		// checks if the controller type is already defined for a default chart type
 		// because a controller type can non called as a default one
 		if (Key.hasKeyByValue(ChartType.values(), type)) {
 			// if equals exception
 			throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
 		}
+		// checks if controller provider instance is consistent
+		if (provider == null) {
+			throw new IllegalArgumentException("Controller provider is null");
+		}
 		// checks chart type if is consistent
 		Type.checkIfValid(chartType);
 		this.type = type;
 		this.chartType = chartType;
+		this.provider = provider;
+		this.cloneDefaults = cloneDefaults;
 	}
 
 	/*
@@ -85,6 +111,36 @@ public final class ControllerType implements Type {
 		return chartType;
 	}
 
+	/**
+	 * Returns <code>true</code> if it clones the default options of base chart type.
+	 * 
+	 * @return <code>true</code> if it clones the default options of base chart type
+	 */
+	public boolean isCloneDefaults() {
+		return cloneDefaults;
+	}
+
+	/**
+	 * Registers the controller if it is not already registered.
+	 * 
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
+	 */
+	public boolean register() {
+		// checks if already register
+		if (!Defaults.get().getControllers().isRegistered(type)) {
+			// invokes the controller provider
+			Controller controller = provider.provide(this);
+			// checks if controller is consistent
+			// checks if the controller type of controller is equals to this
+			if (controller != null && this.equals(controller.getType()) && Key.equals(chartType, controller.getType().getChartType())) {
+				// if not, adds a controller
+				return Defaults.get().getControllers().register(controller);
+			}
+		}
+		// if here, already registered
+		return false;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -110,9 +166,7 @@ public final class ControllerType implements Type {
 			// casts
 			Type objType = (Type) obj;
 			// checks if there are consistent
-			if (objType.value() != null && type != null) {
-				return type.equals(objType.value());
-			}
+			return Key.equals(this, objType);
 		}
 		return false;
 	}

@@ -29,6 +29,7 @@ import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.Labels;
@@ -232,6 +233,13 @@ public final class Defaults {
 		Type.checkIfValid(type);
 		// checks if the options have already stored
 		if (!chartOptions.containsKey(type.value())) {
+			// checks if is a controller
+			if (type instanceof ControllerType) {
+				// cats to controller type
+				ControllerType controllerType = (ControllerType)type;
+				// registers if not register
+				controllerType.register();
+			}
 			// if not, creates and stores new options by chart type
 			chartOptions.put(type.value(), wrapperDefaults.chart(type));
 		}

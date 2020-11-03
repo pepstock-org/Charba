@@ -71,12 +71,18 @@ public class ControllerTemplateGenerator {
 	// defines the pattern to apply on replace all on the java class template
 	// for chart type content
 	private static final String CHART_TYPE_VARIABLE = Pattern.quote("_ChartType");
+	// defines the pattern to apply on replace all on the java class template
+	// for the clone default flag
+	private static final String CONTROLLER_CLONE_DEFAULTS_VARIABLE = Pattern.quote("_ControllerCloneDefaults");
 	// defines the place holder to apply on replace all on the java class template
 	// for controller type content
 	private static final String CONTROLLER_TYPE_PLACEHOLDER = Matcher.quoteReplacement("{0}");
 	// defines the place holder to apply on replace all on the java class template
 	// for chart type content
 	private static final String CHART_TYPE_PLACEHOLDER = Matcher.quoteReplacement("{1}");
+	// defines the place holder to apply on replace all on the java class template
+	// for the clone default flag
+	private static final String CONTROLLER_CLONE_DEFAULTS_PLACEHOLDER = Matcher.quoteReplacement("{2}");
 
 	// defines the pattern to apply on replace all on the java class template
 	// for java script file content
@@ -113,6 +119,8 @@ public class ControllerTemplateGenerator {
 		String changedTemplate = templateJsInstance.replaceAll(CHART_TYPE_VARIABLE, CHART_TYPE_PLACEHOLDER);
 		// replaces the controller into template
 		changedTemplate = changedTemplate.replaceAll(CONTROLLER_TYPE_VARIABLE, CONTROLLER_TYPE_PLACEHOLDER);
+		// replaces the controller clone defaults flag into template
+		changedTemplate = changedTemplate.replaceAll(CONTROLLER_CLONE_DEFAULTS_VARIABLE, CONTROLLER_CLONE_DEFAULTS_PLACEHOLDER);
 		// escapes the java script content in order to be able to assign it
 		// to a java string
 		StringBuilder builder = escapeJavaScriptContent(changedTemplate.getBytes(UTF8));

@@ -9,7 +9,8 @@ function Charba_ControllerType() {
 Charba_ControllerType.prototype = Object.create(Chart.controllers._ChartType.prototype);
 // Defines the constructor
 Charba_ControllerType.prototype.constructor = Charba_ControllerType;
-
+// Defines the flag to clone the defaults
+Charba_ControllerType.cloneDefaults = _ControllerCloneDefaults;
 // --------------------
 // Internal methods
 // --------------------
@@ -104,6 +105,7 @@ Charba_ControllerType.prototype.buildOrUpdateElements = function() {
 // sets the controller id
 Charba_ControllerType.id = '_ControllerType'; 
 // copies the default options of extended chart type
-Charba_ControllerType.defaults = Chart.defaults.controllers._ChartType; 
+// check if it must be cloned
+Charba_ControllerType.defaults = Charba_ControllerType.cloneDefaults ? Object.assign({}, Chart.defaults.controllers._ChartType) : Chart.defaults.controllers._ChartType; 
 // registers into CHART.JS
 Chart.register(Charba_ControllerType);

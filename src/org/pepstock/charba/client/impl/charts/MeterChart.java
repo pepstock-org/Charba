@@ -29,8 +29,10 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	 * Name of chart type <b>{@value TYPE}</b> for meter
 	 */
 	public static final String TYPE = "charbameter";
-	// static reference to controller type
-	static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT);
+	/**
+	 * METER controller type
+	 */
+	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT, BaseMeterController.PROVIDER);
 	// chart options
 	private final MeterOptions options;
 

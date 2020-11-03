@@ -60,7 +60,7 @@ public final class Controllers {
 	 * @param controller controller instance
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
 	 */
-	public boolean register(Controller controller) {
+	boolean register(Controller controller) {
 		// checks the consistency of controller
 		// and creates a java script object, wrapper of the controller
 		WrapperController wController = check(controller);
