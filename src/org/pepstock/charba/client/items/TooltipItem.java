@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.callbacks.AbstractScriptableContext;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TooltipItem extends NativeObjectContainer {
+public class TooltipItem extends AbstractScriptableContext {
 	
 	/**
 	 * Public factory to create a tooltip item from a native object.

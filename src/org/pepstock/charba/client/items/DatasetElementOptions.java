@@ -19,13 +19,19 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.BorderAlign;
@@ -119,36 +125,127 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the fill color of the dataset item.
+	 * Returns <code>true</code> if the background color is defined as color.
+	 * 
+	 * @return <code>true</code> if the background color is defined as color
+	 */
+	public boolean isBackgroundColorAsColor() {
+		return ObjectType.STRING.equals(type(Property.BACKGROUND_COLOR));
+	}
+
+	/**
+	 * Returns <code>true</code> if the background color is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the background color is defined as gradient
+	 */
+	public boolean isBackgroundColorAsGradient() {
+		return JsItemsHelper.get().isCanvasGradient(this.getNativeObject(), Property.BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns <code>true</code> if the background color is defined as canvas pattern.
+	 * 
+	 * @return <code>true</code> if the background color is defined as canvas pattern
+	 */
+	public boolean isBackgroundColorAsPattern() {
+		return JsItemsHelper.get().isCanvasPattern(this.getNativeObject(), Property.BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns the background color of the dataset item.
 	 *
-	 * @return list of the fill color of the dataset item.
+	 * @return the background color of the dataset item.
 	 */
 	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getColorAsString());
 	}
 
 	/**
-	 * Returns the fill color of the dataset item.
+	 * Returns the background color of the dataset item.
 	 *
-	 * @return list of the fill color of the dataset item.
+	 * @return the background color of the dataset item.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns the stroke width of the dataset item in pixels.
+	 * Returns the background color as gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a gradient
+	 */
+	public Gradient getBackgroundColorAsGradient() {
+		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the background color as canvas gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a canvas gradient
+	 */
+	public CanvasGradientItem getBackgroundColorAsCanvasGradient() {
+		// checks if the background color has been set as gradient
+		if (isBackgroundColorAsGradient()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the background color as pattern.
+	 * 
+	 * @return the background color or <code>null</code> if is not a pattern
+	 */
+	public Pattern getBackgroundColorAsPattern() {
+		return PatternBuilder.retrieve(getBackgroundColorAsCanvasPattern());
+	}
+
+	/**
+	 * Returns the background color as canvas pattern.
+	 * 
+	 * @return the background color or <code>null</code> if is not a canvas pattern
+	 */
+	public CanvasPatternItem getBackgroundColorAsCanvasPattern() {
+		// checks if the background color has been set as pattern
+		if (isBackgroundColorAsPattern()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasPatternItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the border width of the dataset item in pixels.
 	 *
-	 * @return list of the stroke width of the dataset item in pixels.
+	 * @return the border width of the dataset item in pixels.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
 	}
 
 	/**
+	 * Returns <code>true</code> if the border color is defined as color.
+	 * 
+	 * @return <code>true</code> if the border color is defined as color
+	 */
+	public boolean isBorderColorAsColor() {
+		return ObjectType.STRING.equals(type(Property.BORDER_COLOR));
+	}
+
+	/**
+	 * Returns <code>true</code> if the border color is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the border color is defined as gradient
+	 */
+	public boolean isBorderColorAsGradient() {
+		return JsItemsHelper.get().isCanvasGradient(this.getNativeObject(), Property.BORDER_COLOR);
+	}
+
+	/**
 	 * Returns the color of the dataset item border
 	 *
-	 * @return list of the color of the dataset item border.
+	 * @return the color of the dataset item border.
 	 */
 	public String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getColorAsString());
@@ -157,10 +254,33 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	/**
 	 * Returns the color of the dataset item border
 	 *
-	 * @return list of the color of the dataset item border
+	 * @return the color of the dataset item border
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the border color as gradient.
+	 * 
+	 * @return the border color or <code>null</code> if is not a gradient
+	 */
+	public Gradient getBorderColorAsGradient() {
+		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the border color as canvas gradient.
+	 * 
+	 * @return the border color or <code>null</code> if is not a canvas gradient
+	 */
+	public CanvasGradientItem getBorderColorAsCanvasGradient() {
+		// checks if the border color has been set as gradient
+		if (isBackgroundColorAsGradient()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
 	}
 
 	/**
@@ -192,8 +312,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
+	 * Returns the relative thickness of the dataset.
 	 * 
 	 * @return the relative thickness of the dataset
 	 */
@@ -253,8 +372,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * Returns how the end points of every line are drawn.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -273,9 +391,9 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
@@ -283,8 +401,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * end points and control points are exactly at the same position, are skipped).
 	 * 
 	 * @return there are three possible values for this property: round, bevel and miter.
 	 */
@@ -304,7 +421,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
 		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), Defaults.get().getGlobal().getElements().getLine().getCubicInterpolationMode());
@@ -345,9 +462,9 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the radius of the point when hovered.
+	 * Returns the radius of the point.
 	 * 
-	 * @return list of the radius of the point when hovered.
+	 * @return the radius of the point
 	 */
 	public double getRadius() {
 		return getValue(Property.RADIUS, Defaults.get().getGlobal().getElements().getPoint().getRadius());
@@ -397,7 +514,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	public boolean isPointStyleAsImage() {
 		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
 	}
-	
+
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.
@@ -414,7 +531,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// returns undefined
 		return UndefinedValues.IMAGE_ELEMENT;
 	}
-	
+
 	/**
 	 * Returns the style of the point.
 	 * 
@@ -428,6 +545,77 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, means the point style as stored as images
 		// then returns the default
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
+	}
+	
+	/**
+	 * Create new {@link TooltipLabelPointStyle} filling it with point style and rotation of dataset element.
+	 * 
+	 * @return new {@link TooltipLabelPointStyle} filling it with point style and rotation of dataset element
+	 */
+	public TooltipLabelPointStyle createTooltipLabelPointStyle() {
+		// creates an empty label point style
+		TooltipLabelPointStyle result = new TooltipLabelPointStyle();
+		// checks if point style is an image
+		if (isPointStyleAsImage()) {
+			// stores as img
+			result.setPointStyle(getPointStyleAsImage());
+		} else {
+			// stores as point sytle
+			result.setPointStyle(getPointStyle());
+		}
+		// sets rotation
+		result.setRotation(getRotation());
+		return result;
+	}
+
+	/**
+	 * Create new {@link TooltipLabelColor} filling it with background and border color of dataset element.
+	 * 
+	 * @return new {@link TooltipLabelColor} filling it with background and border color of dataset element
+	 */
+	public TooltipLabelColor createTooltipLabelColor() {
+		// creates an empty label color
+		TooltipLabelColor result = new TooltipLabelColor();
+		// loads background color
+		loadBackgroundColor(result);
+		// loads background color
+		loadBorderColor(result);
+		return result;
+	}
+
+	/**
+	 * Loads the background color into the {@link TooltipLabelColor} instance.
+	 * 
+	 * @param labelColor {@link TooltipLabelColor} instance to be filled
+	 */
+	private void loadBackgroundColor(TooltipLabelColor labelColor) {
+		// checks the type of background color
+		if (isBackgroundColorAsPattern()) {
+			// --- PATTERN
+			labelColor.setBackgroundColor(getBackgroundColorAsCanvasPattern());
+		} else if (isBackgroundColorAsGradient()) {
+			// --- GRADIENT
+			labelColor.setBackgroundColor(getBackgroundColorAsCanvasGradient());
+		} else {
+			// --- COLOR
+			labelColor.setBackgroundColor(getBackgroundColorAsString());
+		}
+	}
+
+	/**
+	 * Loads the border color into the {@link TooltipLabelColor} instance.
+	 * 
+	 * @param labelColor {@link TooltipLabelColor} instance to be filled
+	 */
+	private void loadBorderColor(TooltipLabelColor labelColor) {
+		// checks the type of border color
+		if (isBorderColorAsGradient()) {
+			// --- GRADIENT
+			labelColor.setBorderColor(getBorderColorAsCanvasGradient());
+		} else {
+			// --- COLOR
+			labelColor.setBorderColor(getBorderColorAsString());
+		}
 	}
 
 }

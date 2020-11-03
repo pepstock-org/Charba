@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractScriptableContext extends NativeObjectContainer {
+public abstract class AbstractScriptableContext extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -64,7 +64,7 @@ abstract class AbstractScriptableContext extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractScriptableContext(NativeObject nativeObject) {
+	protected AbstractScriptableContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

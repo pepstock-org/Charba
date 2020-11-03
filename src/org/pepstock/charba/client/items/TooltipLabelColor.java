@@ -17,11 +17,19 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * This object contains the color info when a label into tooltip.<br>
@@ -30,7 +38,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class TooltipLabelColor extends NativeObjectContainer {
-	
+
 	/**
 	 * Tooltip color factory to create label color objects.
 	 */
@@ -85,21 +93,110 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets background color as string
+	 * Sets the background color of the tooltip item as string.
 	 * 
-	 * @param backgroundColor background color
+	 * @param backgroundColor the background color of the tooltip item
 	 */
-	public void setBackgroundColor(String backgroundColor) {
+	void setBackgroundColor(String backgroundColor) {
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
-	 * Sets background color
+	 * Sets the background color of the tooltip item.
 	 * 
-	 * @param backgroundColor background color
+	 * @param backgroundColor the background color of the tooltip item
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
 		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the background color of the tooltip item as canvas pattern.
+	 * 
+	 * @param pattern the background color of the tooltip item as canvas pattern
+	 */
+	void setBackgroundColor(CanvasPatternItem pattern) {
+		setValue(Property.BACKGROUND_COLOR, pattern);
+	}
+
+	/**
+	 * Sets the background color of the tooltip item as pattern
+	 * 
+	 * @param tooltipItem tooltip item related to this label
+	 * @param pattern the background color of the tooltip item as pattern
+	 */
+	public void setBackgroundColor(TooltipItem tooltipItem, Pattern pattern) {
+		// checks if pattern is consistent
+		if (pattern != null) {
+			// checks if pattern has been built by canvas pattern
+			if (pattern.getCanvasPattern() != null) {
+				// stores as canvas pattern
+				setBackgroundColor(pattern.getCanvasPattern());
+			} else {
+				// be aware that if chart is null, an exception will be throw
+				setBackgroundColor(DatasetCanvasObjectFactory.get().createPattern(tooltipItem.getChart(), pattern));
+			}
+		} else {
+			// resets the property
+			remove(Property.BACKGROUND_COLOR);
+		}
+	}
+
+	/**
+	 * Sets the background color of the tooltip item as canvas gradient.
+	 * 
+	 * @param gradient the background color of the tooltip item as canvas gradient
+	 */
+	void setBackgroundColor(CanvasGradientItem gradient) {
+		setValue(Property.BACKGROUND_COLOR, gradient);
+	}
+
+	/**
+	 * Sets the background color of the tooltip item as gradient.
+	 * 
+	 * @param tooltipItem tooltip item related to this label
+	 * @param gradient the background color of the tooltip item as gradient
+	 */
+	public void setBackgroundColor(TooltipItem tooltipItem, Gradient gradient) {
+		// checks if pattern is consistent
+		if (gradient != null && tooltipItem != null) {
+			// calculated the maximum values
+			// to avoid undefined values
+			int datasetIndex = Math.max(0, tooltipItem.getDatasetIndex());
+			int index = Math.max(0, tooltipItem.getDataIndex());
+			// be aware that if chart is null, an exception will be throw
+			setBackgroundColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex, index));
+		} else {
+			// resets the property
+			remove(Property.BACKGROUND_COLOR);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the background color of the tooltip item is defined as color.
+	 * 
+	 * @return <code>true</code> if the background color of the tooltip item is defined as color
+	 */
+	public boolean isBackgroundColorAsColor() {
+		return ObjectType.STRING.equals(type(Property.BACKGROUND_COLOR));
+	}
+
+	/**
+	 * Returns <code>true</code> if the background color of the tooltip item is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the background color of the tooltip item is defined as gradient
+	 */
+	public boolean isBackgroundColorAsGradient() {
+		return JsItemsHelper.get().isCanvasGradient(this.getObject(), Property.BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns <code>true</code> if the background color of the tooltip item is defined as canvas pattern.
+	 * 
+	 * @return <code>true</code> if the background color of the tooltip item is defined as canvas pattern
+	 */
+	public boolean isBackgroundColorAsPattern() {
+		return JsItemsHelper.get().isCanvasPattern(this.getObject(), Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -107,7 +204,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @return the background color of the label.
 	 */
-	public String getBackgroundColorAsString() {
+	private String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
@@ -121,11 +218,57 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the background color as gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a gradient
+	 */
+	public Gradient getBackgroundColorAsGradient() {
+		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the background color as canvas gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a canvas gradient
+	 */
+	public CanvasGradientItem getBackgroundColorAsCanvasGradient() {
+		// checks if the background color has been set as color
+		if (isBackgroundColorAsGradient()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the background color as pattern.
+	 * 
+	 * @return the background color or <code>null</code> if is not a pattern
+	 */
+	public final Pattern getBackgroundColorAsPattern() {
+		return PatternBuilder.retrieve(getBackgroundColorAsCanvasPattern());
+	}
+
+	/**
+	 * Returns the background color as canvas pattern.
+	 * 
+	 * @return the background color or <code>null</code> if is not a canvas pattern
+	 */
+	public final CanvasPatternItem getBackgroundColorAsCanvasPattern() {
+		// checks if the the background color has been set as color
+		if (isBackgroundColorAsPattern()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasPatternItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+	
+	/**
 	 * Sets border color as string
 	 * 
 	 * @param borderColor border color
 	 */
-	public void setBorderColor(String borderColor) {
+	void setBorderColor(String borderColor) {
 		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
@@ -137,13 +280,43 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public void setBorderColor(IsColor borderColor) {
 		setBorderColor(IsColor.checkAndGetValue(borderColor));
 	}
+	
+	/**
+	 * Sets the border color of the tooltip item as canvas gradient.
+	 * 
+	 * @param gradient the border color of the tooltip item as canvas gradient
+	 */
+	void setBorderColor(CanvasGradientItem gradient) {
+		setValue(Property.BORDER_COLOR, gradient);
+	}
+
+	/**
+	 * Sets the border color of the tooltip item as gradient.
+	 * 
+	 * @param tooltipItem tooltip item related to this label
+	 * @param gradient the border color of the tooltip item as gradient
+	 */
+	public void setBorderColor(TooltipItem tooltipItem, Gradient gradient) {
+		// checks if pattern is consistent
+		if (gradient != null && tooltipItem != null) {
+			// calculated the maximum values
+			// to avoid undefined values
+			int datasetIndex = Math.max(0, tooltipItem.getDatasetIndex());
+			int index = Math.max(0, tooltipItem.getDataIndex());
+			// be aware that if chart is null, an exception will be throw
+			setBorderColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex, index));
+		} else {
+			// resets the property
+			remove(Property.BORDER_COLOR);
+		}
+	}
 
 	/**
 	 * Returns the border color of the label.
 	 * 
 	 * @return the border color of the label.
 	 */
-	public String getBorderColorAsString() {
+	private String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
 
@@ -156,6 +329,29 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
+	/**
+	 * Returns the border color as gradient.
+	 * 
+	 * @return the border color or <code>null</code> if is not a gradient
+	 */
+	public Gradient getBorderColorAsGradient() {
+		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the border color as canvas gradient.
+	 * 
+	 * @return the border color or <code>null</code> if is not a canvas gradient
+	 */
+	public CanvasGradientItem getBorderColorAsCanvasGradient() {
+		// checks if the border color has been set as color
+		if (isBackgroundColorAsGradient()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+	
 	/**
 	 * Wraps the protected method to get the java script object in order to consume it.
 	 * 
@@ -171,7 +367,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
-		
+
 		/**
 		 * To avoid any instantiation
 		 */

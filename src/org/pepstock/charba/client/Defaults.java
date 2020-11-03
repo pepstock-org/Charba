@@ -439,12 +439,8 @@ public final class Defaults {
 		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
 		// checks if style is consistent
 		if (style != null) {
-			// creates an empty label color
-			TooltipLabelColor result = new TooltipLabelColor();
-			// sets colors and returns
-			result.setBackgroundColor(style.getBackgroundColorAsString());
-			result.setBorderColor(style.getBorderColorAsString());
-			return result;
+			// creates new tooltip label color
+			return style.createTooltipLabelColor();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null
@@ -463,19 +459,8 @@ public final class Defaults {
 		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
 		// checks if style is consistent
 		if (style != null) {
-			// creates an empty label point style
-			TooltipLabelPointStyle result = new TooltipLabelPointStyle();
-			// checks if point style is an image
-			if (result.isPointStyleAsImage()) {
-				// stores as img
-				result.setPointStyle(style.getPointStyleAsImage());
-			} else {
-				// stores as point sytle
-				result.setPointStyle(style.getPointStyle());
-			}
-			// sets rotation
-			result.setRotation(style.getRotation());
-			return result;
+			// creates new tooltip label point style
+			return style.createTooltipLabelPointStyle();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null

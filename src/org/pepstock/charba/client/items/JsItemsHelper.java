@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -54,14 +55,14 @@ final class JsItemsHelper {
 	/**
 	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
 	 * 
-	 * @param object the legend item on which to check the property.
+	 * @param object the legend or tooltip item native object on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return <code>true</code> if the property into native object is a {@link CanvasPatternItem}
 	 */
-	boolean isCanvasPattern(LegendItem object, String key) {
+	boolean isCanvasPattern(NativeObject object, Key key) {
 		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsItemsHelper.isCanvasPattern(object.nativeObject(), key);
+		if (object != null && Key.isValid(key)) {
+			return NativeJsItemsHelper.isCanvasPattern(object, key.value());
 		}
 		// if here, arguments not consistent
 		return false;
@@ -70,14 +71,14 @@ final class JsItemsHelper {
 	/**
 	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradientItem}.
 	 * 
-	 * @param object the legend item on which to check the property.
+	 * @param object the legend or tooltip item native object on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
 	 */
-	boolean isCanvasGradient(LegendItem object, String key) {
+	boolean isCanvasGradient(NativeObject object, Key key) {
 		// checks consistency of arguments
-		if (object != null && key != null) {
-			return NativeJsItemsHelper.isCanvasGradient(object.nativeObject(), key);
+		if (object != null && Key.isValid(key)) {
+			return NativeJsItemsHelper.isCanvasGradient(object, key.value());
 		}
 		// if here, arguments not consistent
 		return false;
