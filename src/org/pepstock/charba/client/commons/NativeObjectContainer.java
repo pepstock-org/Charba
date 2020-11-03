@@ -1381,7 +1381,7 @@ public abstract class NativeObjectContainer {
 	protected final String getValueForMultipleKeyTypes(Key key, String defaultsValue) {
 		// checks if key is consistent
 		// and if is a string
-		if (Key.isValid(key) && ObjectType.STRING.equals(type(key))) {
+		if (isType(key, ObjectType.STRING)) {
 			return getValue(key, defaultsValue);
 		}
 		// the property is not a string
@@ -1399,7 +1399,7 @@ public abstract class NativeObjectContainer {
 	protected final double getValueForMultipleKeyTypes(Key key, double defaultsValue) {
 		// checks if key is consistent
 		// and if is a number
-		if (Key.isValid(key) && ObjectType.NUMBER.equals(type(key))) {
+		if (isType(key, ObjectType.NUMBER)) {
 			return getValue(key, defaultsValue);
 		}
 		// the property is not a number

@@ -121,7 +121,7 @@ public final class AnimationContainer extends AbstractNode {
 	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
 	 */
 	boolean isAnimationEnabled() {
-		return !ObjectType.BOOLEAN.equals(type(Property.ANIMATION));
+		return !isType(Property.ANIMATION, ObjectType.BOOLEAN);
 	}
 
 }

@@ -53,7 +53,7 @@ final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 	 */
 	boolean isDrag() {
 		// checks if the drag has been set by a drag object
-		if (ObjectType.OBJECT.equals(type(Zoom.Property.DRAG))) {
+		if (isType(Zoom.Property.DRAG, ObjectType.OBJECT)) {
 			// if there is object, the n drag is enabled
 			return true;
 		}
@@ -68,7 +68,7 @@ final class DefaultsZoom extends AbstractDefaultsConfigurationItem {
 	 */
 	DefaultsDrag getDrag() {
 		// checks if the drag has been set by a drag object
-		if (ObjectType.OBJECT.equals(type(Zoom.Property.DRAG))) {
+		if (isType(Zoom.Property.DRAG, ObjectType.OBJECT)) {
 			// returns the default object getting the native one
 			// from configuration
 			return new DefaultsDrag(getValue(Property.DRAG));

@@ -115,7 +115,7 @@ public final class SpanGapper extends PropertyHandler<IsDefaultOptions> {
 	 */
 	boolean isSpanGaps() {
 		// checks the type of stored value
-		if (ObjectType.NUMBER.equals(type(Property.SPAN_GAPS))) {
+		if (isType(Property.SPAN_GAPS, ObjectType.NUMBER)) {
 			// if the there is a number, span gaps is activated
 			return true;
 		}

@@ -956,7 +956,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 
 		TooltipModel getModel() {
 			// checks if model is inside the context
-			if (ObjectType.OBJECT.equals(type(Property.TOOLTIP))) {
+			if (isType(Property.TOOLTIP, ObjectType.OBJECT)) {
 				return new TooltipModel(new ConfigurationEnvelop<>(getValue(Property.TOOLTIP), true));
 			}
 			// if here the context is not consistent

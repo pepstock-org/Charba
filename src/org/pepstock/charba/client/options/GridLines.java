@@ -209,7 +209,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	@Override
 	public String getColorAsString() {
 		// checks if the stored value is a string
-		if (ObjectType.STRING.equals(type(Property.COLOR)) || !has(Property.COLOR)) {
+		if (isType(Property.COLOR, ObjectType.STRING) || !has(Property.COLOR)) {
 			// returns a string
 			return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 		} else {
@@ -224,11 +224,13 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getColorsAsString() {
+		// gets object type
+		ObjectType type = type(Property.COLOR);
 		// checks if the stored value is a string
-		if (ObjectType.STRING.equals(type(Property.COLOR)) || !has(Property.COLOR)) {
+		if (ObjectType.STRING.equals(type) || !has(Property.COLOR)) {
 			// adds the string value
 			return Arrays.asList(getValue(Property.COLOR, getDefaultValues().getColorAsString()));
-		} else if (ObjectType.ARRAY.equals(type(Property.COLOR))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if array
 			// loads the array
 			ArrayString array = getArrayValue(Property.COLOR);

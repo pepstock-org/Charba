@@ -217,7 +217,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 		// checks if mode is consistent
 		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
 			// checks if is cached or stores as objects
-			if (animationModes.containsKey(mode.value()) || ObjectType.OBJECT.equals(type(mode))) {
+			if (animationModes.containsKey(mode.value()) || isType(mode, ObjectType.OBJECT)) {
 				// returns because it is in the cached
 				return true;
 			}

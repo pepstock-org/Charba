@@ -81,7 +81,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 */
 	public IsChart getChart() {
 		// checks if chart is inside the context
-		if (ObjectType.OBJECT.equals(type(Property.CHART))) {
+		if (isType(Property.CHART, ObjectType.OBJECT)) {
 			return getNativeChart(Property.CHART).getChart();
 		}
 		// if here the context is not consistent

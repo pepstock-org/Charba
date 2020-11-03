@@ -145,7 +145,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	 */
 	public boolean isDrag() {
 		// checks if the drag has been set by a drag object
-		if (ObjectType.OBJECT.equals(type(Property.DRAG))) {
+		if (isType(Property.DRAG, ObjectType.OBJECT)) {
 			// if there is object, the n drag is enabled
 			return true;
 		}
@@ -160,7 +160,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	 */
 	public Drag getDrag() {
 		// checks if the drag has been set by a drag object
-		if (ObjectType.OBJECT.equals(type(Property.DRAG))) {
+		if (isType(Property.DRAG, ObjectType.OBJECT)) {
 			// returns the default object getting the native one
 			// from configuration
 			return new Drag(getValue(Property.DRAG), defaultsOptions.getDrag());

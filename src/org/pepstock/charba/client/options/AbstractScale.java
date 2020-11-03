@@ -553,7 +553,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final Display getDisplay() {
 		// checks if is boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.DISPLAY))) {
+		if (isType(Property.DISPLAY, ObjectType.BOOLEAN)) {
 			// gets value
 			boolean value = getValue(Property.DISPLAY, true);
 			// returns value

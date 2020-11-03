@@ -173,7 +173,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the fill style is defined as color
 	 */
 	public final boolean isFillStyleAsColor() {
-		return ObjectType.STRING.equals(type(Property.FILL_STYLE));
+		return isType(Property.FILL_STYLE, ObjectType.STRING);
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the stroke style is defined as color
 	 */
 	public final boolean isStrokeStyleAsColor() {
-		return ObjectType.STRING.equals(type(Property.STROKE_STYLE));
+		return isType(Property.STROKE_STYLE, ObjectType.STRING);
 	}
 
 	/**

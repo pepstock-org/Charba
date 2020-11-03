@@ -134,7 +134,7 @@ class AnnotationMap extends NativeObjectContainer {
 		for (Key key : keys()) {
 			// checks if the type of the stored object
 			// is an object
-			if (ObjectType.OBJECT.equals(type(key))) {
+			if (isType(key, ObjectType.OBJECT)) {
 				// gets and creates the annotation
 				AbstractAnnotation annotation = getAndCreateAnnotation(key);
 				// if the annotation reference is consistent
@@ -159,7 +159,7 @@ class AnnotationMap extends NativeObjectContainer {
 		// checks if the annotation id is consistent
 		IsAnnotationId.checkIfValid(id);
 		// checks if the annotation id exist
-		if (hasAnnotation(id) && ObjectType.OBJECT.equals(type(id))) {
+		if (hasAnnotation(id) && isType(id, ObjectType.OBJECT)) {
 			// gets from the cache
 			return getAndCreateAnnotation(id);
 		}

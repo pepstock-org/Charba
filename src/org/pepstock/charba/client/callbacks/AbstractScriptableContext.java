@@ -75,7 +75,7 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer {
 	 */
 	public final IsChart getChart() {
 		// checks if chart is inside the context
-		if (ObjectType.OBJECT.equals(type(Property.CHART))) {
+		if (isType(Property.CHART, ObjectType.OBJECT)) {
 			return getNativeChart(Property.CHART).getChart();
 		}
 		// if here the context is not consistent

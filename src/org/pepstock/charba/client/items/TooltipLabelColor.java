@@ -178,7 +178,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return <code>true</code> if the background color of the tooltip item is defined as color
 	 */
 	public boolean isBackgroundColorAsColor() {
-		return ObjectType.STRING.equals(type(Property.BACKGROUND_COLOR));
+		return isType(Property.BACKGROUND_COLOR, ObjectType.STRING);
 	}
 
 	/**
@@ -269,7 +269,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return <code>true</code> if the border color of the tooltip item is defined as color
 	 */
 	public boolean isBorderColorAsColor() {
-		return ObjectType.STRING.equals(type(Property.BORDER_COLOR));
+		return isType(Property.BORDER_COLOR, ObjectType.STRING);
 	}
 
 	/**

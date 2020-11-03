@@ -55,7 +55,7 @@ public final class ExtendedScales extends Scales {
 			for (Key key : keys()) {
 				// checks if the property is related to an object
 				// otherwise is not a scale
-				if (ObjectType.OBJECT.equals(type(key))) {
+				if (isType(key, ObjectType.OBJECT)) {
 					// remove key
 					remove(key);
 				}

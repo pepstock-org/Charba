@@ -323,7 +323,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public Stepped getStepped() {
 		// checks if value of stepped line is a boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.STEPPED))) {
+		if (isType(Property.STEPPED, ObjectType.BOOLEAN)) {
 			return Stepped.FALSE;
 		} else {
 			// otherwise returns the stepped

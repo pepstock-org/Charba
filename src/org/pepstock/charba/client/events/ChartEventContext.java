@@ -120,7 +120,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 */
 	public Chart getNativeChart() {
 		// checks if chart is inside the context
-		if (ObjectType.OBJECT.equals(type(Property.CHART))) {
+		if (isType(Property.CHART, ObjectType.OBJECT)) {
 			return getNativeChart(Property.CHART);
 		}
 		// if here the context is not consistent
@@ -152,7 +152,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 */
 	public BaseNativeEvent getNativeEvent() {
 		// checks if native event is inside the context
-		if (ObjectType.OBJECT.equals(type(Property.NATIVE))) {
+		if (isType(Property.NATIVE, ObjectType.OBJECT)) {
 			return getNativeEvent(Property.NATIVE);
 		}
 		// if here the native event is not consistent

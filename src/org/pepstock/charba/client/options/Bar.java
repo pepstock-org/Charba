@@ -110,7 +110,7 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar {
 	@Override
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
+		if (isType(Property.BORDER_SKIPPED, ObjectType.BOOLEAN)) {
 			// returns is false
 			return BorderSkipped.FALSE;
 		}

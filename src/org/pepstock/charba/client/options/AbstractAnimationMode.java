@@ -86,7 +86,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				if (animationProperties.containsKey(property.value())) {
 					// stores the object
 					setValueAndAddToParent(property, animationProperties.get(property.value()).nativeObject());
-				} else if (ObjectType.BOOLEAN.equals(type(property))) {
+				} else if (isType(property, ObjectType.BOOLEAN)) {
 					// if here is not cached
 					// then it must be removed in order to enable the default
 					// the type of property should be boolean because
@@ -114,7 +114,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if a custom property, previously added, is enabled
-			if (animationProperties.containsKey(property.value()) || ObjectType.OBJECT.equals(type(property))) {
+			if (animationProperties.containsKey(property.value()) || isType(property, ObjectType.OBJECT)) {
 				// returns that is enabled
 				return true;
 			}
@@ -140,7 +140,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 		// checks if property is consistent
 		if (IsAnimationPropertyKey.isValid(property)) {
 			// checks if is cached or if stored
-			if (animationProperties.containsKey(property.value()) || ObjectType.OBJECT.equals(type(property))) {
+			if (animationProperties.containsKey(property.value()) || isType(property, ObjectType.OBJECT)) {
 				// returns because it is in the cached or stored
 				return true;
 			}
@@ -222,7 +222,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 				if (animationCollections.containsKey(collection.value())) {
 					// stores the object
 					setValueAndAddToParent(collection, animationCollections.get(collection.value()).nativeObject());
-				} else if (ObjectType.BOOLEAN.equals(type(collection))) {
+				} else if (isType(collection, ObjectType.BOOLEAN)) {
 					// if here is not cached
 					// then it must be removed in order to enable the default
 					// the type of collection should be boolean because
@@ -244,7 +244,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 	 */
 	public final boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
-		return IsAnimationCollectionKey.isValid(collection) && !ObjectType.BOOLEAN.equals(type(collection));
+		return IsAnimationCollectionKey.isValid(collection) && !isType(collection, ObjectType.BOOLEAN);
 	}
 
 	/**
@@ -258,7 +258,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 		// checks if collection is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// checks if is cached
-			if (animationCollections.containsKey(collection.value()) || ObjectType.OBJECT.equals(type(collection))) {
+			if (animationCollections.containsKey(collection.value()) || isType(collection, ObjectType.OBJECT)) {
 				// returns because it is in the cached
 				return true;
 			}

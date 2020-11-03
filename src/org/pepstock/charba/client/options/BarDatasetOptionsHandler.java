@@ -159,7 +159,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	int getBarThickness() {
 		// checks if flex has been set
-		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
+		if (isType(Property.BAR_THICKNESS, ObjectType.STRING)) {
 			return DefaultDatasets.FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex
