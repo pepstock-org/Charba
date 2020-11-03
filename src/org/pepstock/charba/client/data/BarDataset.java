@@ -64,10 +64,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
-	// bar border width factory
-	private static final BarBorderWidthFactory BORDER_WIDTH_FACTORY = new BarBorderWidthFactory();
-	// bar border radius factory
-	private static final BarBorderRadiusFactory BORDER_RADIUS_FACTORY = new BarBorderRadiusFactory();
 	// border radius array constant for set border radius from a list
 	private static final BarBorderRadius[] BORDER_RADIUS_EMPTY_ARRAY = new BarBorderRadius[0];
 	// border width array constant for set border width from a list
@@ -209,11 +205,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new ScriptableContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderRadiusCallback, BORDER_RADIUS_FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// gets value calling callback
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, BORDER_WIDTH_FACTORY, getDefaultBorderWidth()));
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
-		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BORDER_WIDTH_FACTORY, getDefaultBorderWidth()));
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 	}
 
 	/*
@@ -407,7 +403,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
 	 */
 	public List<BarBorderWidth> getBorderWidthAsObjects() {
-		return getBorderItemAsObjects(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
+		return getBorderItemAsObjects(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BarBorderWidth.FACTORY, getDefaultBorderWidth());
 	}
 	
 	/**
@@ -454,7 +450,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return list of the stroke width of the bar in pixels, when hovered
 	 */
 	public List<BarBorderWidth> getHoverBorderWidthAsObjects() {
-		return getBorderItemAsObjects(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BORDER_WIDTH_FACTORY, getDefaultBorderWidth());
+		return getBorderItemAsObjects(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BarBorderWidth.FACTORY, getDefaultBorderWidth());
 	}
 	
 	/**
@@ -629,7 +625,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the list of bar border radius (in pixels). If a callback or an array have been set, returns an empty object
 	 */
 	public List<BarBorderRadius> getBorderRadiusAsObjects() {
-		return getBorderItemAsObjects(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, BORDER_RADIUS_FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
+		return getBorderItemAsObjects(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
 	}
 
 	/**
@@ -674,7 +670,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the list of bar border radius (in pixels), when hovered.
 	 */
 	public List<BarBorderRadius> getHoverBorderRadiusAsObjects() {
-		return getBorderItemAsObjects(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, BORDER_RADIUS_FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
+		return getBorderItemAsObjects(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
 	}
 
 	/**
@@ -1082,44 +1078,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			// resets the flag about border with type
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
-	}
-
-	/**
-	 * Inner class to create bar border width object by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class BarBorderWidthFactory implements NativeObjectContainerFactory<BarBorderWidth> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public BarBorderWidth create(NativeObject nativeObject) {
-			return new BarBorderWidth(nativeObject);
-		}
-
-	}
-
-	/**
-	 * Inner class to create bar border radius object by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class BarBorderRadiusFactory implements NativeObjectContainerFactory<BarBorderRadius> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public BarBorderRadius create(NativeObject nativeObject) {
-			return new BarBorderRadius(nativeObject);
-		}
-
 	}
 
 }

@@ -15,8 +15,14 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Position;
 
@@ -27,6 +33,14 @@ import org.pepstock.charba.client.enums.Position;
  *
  */
 public final class BarBorderWidth extends AbstractBarBorderItem {
+
+	/**
+	 * Public factory to create a border width object from a native object.
+	 */
+	public static final BarBorderWidthFactory FACTORY = new BarBorderWidthFactory();
+
+	// constants with a list of the managed keys
+	private static final List<Key> KEYS = Collections.unmodifiableList(Arrays.asList(Position.values()));
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -51,6 +65,16 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 */
 	BarBorderWidth(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.AbstractBarBorderItem#getKeys()
+	 */
+	@Override
+	List<Key> getKeys() {
+		return KEYS;
 	}
 
 	/**
@@ -136,6 +160,32 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 */
 	public int getBottom() {
 		return getValue(Position.BOTTOM, Defaults.get().getGlobal().getElements().getBar().getBorderWidth());
+	}
+
+	/**
+	 * Inner class to create bar border width object by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	public static class BarBorderWidthFactory implements NativeObjectContainerFactory<BarBorderWidth> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private BarBorderWidthFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 */
+		@Override
+		public BarBorderWidth create(NativeObject nativeObject) {
+			return new BarBorderWidth(nativeObject);
+		}
+
 	}
 
 }

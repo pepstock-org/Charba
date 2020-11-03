@@ -30,6 +30,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.BarBorderRadius;
+import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -130,7 +132,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return <code>true</code> if the background color is defined as color
 	 */
 	public boolean isBackgroundColorAsColor() {
-		return ObjectType.STRING.equals(type(Property.BACKGROUND_COLOR));
+		return isType(Property.BACKGROUND_COLOR, ObjectType.STRING);
 	}
 
 	/**
@@ -214,6 +216,15 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
+	
+	/**
+	 * Returns <code>true</code> if the border width is defined as {@link BarBorderWidth}.
+	 * 
+	 * @return <code>true</code> if the border width is defined as {@link BarBorderWidth}
+	 */
+	public boolean isBorderWidthAsObject() {
+		return isType(Property.BORDER_WIDTH, ObjectType.OBJECT);
+	}
 
 	/**
 	 * Returns the border width of the dataset item in pixels.
@@ -221,7 +232,30 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the border width of the dataset item in pixels.
 	 */
 	public int getBorderWidth() {
+		// checks if border width is an object
+		if (isBorderWidthAsObject()) {
+			// gets the border width object
+			// then returns the average
+			return BarBorderWidth.FACTORY.create(getValue(Property.BORDER_WIDTH)).average();
+		}
+		// if here, the border width is a number or missing
 		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
+	}
+	
+	/**
+	 * Returns the border width of the dataset item in pixels as {@link BarBorderWidth}.
+	 *
+	 * @return the border width of the dataset item in pixels as {@link BarBorderWidth}.
+	 */
+	public BarBorderWidth getBorderWidthAsObject() {
+		// checks if border width is an object
+		if (isBorderWidthAsObject()) {
+			// gets the border width object
+			return BarBorderWidth.FACTORY.create(getValue(Property.BORDER_WIDTH));
+		}
+		// if here, the border width is a number or missing
+		// then returns a new object with same value
+		return new BarBorderWidth(getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth()));
 	}
 
 	/**
@@ -230,7 +264,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return <code>true</code> if the border color is defined as color
 	 */
 	public boolean isBorderColorAsColor() {
-		return ObjectType.STRING.equals(type(Property.BORDER_COLOR));
+		return isType(Property.BORDER_COLOR, ObjectType.STRING);
 	}
 
 	/**
@@ -345,12 +379,21 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
+		if (isType(Property.BORDER_SKIPPED, ObjectType.BOOLEAN)) {
 			// returns is false
 			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), Defaults.get().getGlobal().getElements().getBar().getBorderSkipped());
+	}
+	
+	/**
+	 * Returns <code>true</code> if the border width is defined as {@link BarBorderRadius}.
+	 * 
+	 * @return <code>true</code> if the border width is defined as {@link BarBorderRadius}
+	 */
+	public boolean isBorderRadiusAsObject() {
+		return isType(Property.BORDER_RADIUS, ObjectType.OBJECT);
 	}
 
 	/**
@@ -359,7 +402,30 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the bar border radius (in pixels).
 	 */
 	public int getBorderRadius() {
+		// checks if border radius is an object
+		if (isBorderRadiusAsObject()) {
+			// gets the border radius object
+			// then returns the average
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS)).average();
+		}
+		// if here, the border radius is a number or missing
 		return getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
+	}
+	
+	/**
+	 * Returns the border radius of the dataset item in pixels as {@link BarBorderRadius}.
+	 *
+	 * @return the border radius of the dataset item in pixels as {@link BarBorderRadius}.
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if border radius is an object
+		if (isBorderRadiusAsObject()) {
+			// gets the border radius object
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		}
+		// if here, the border radius is a number or missing
+		// then returns a new object with same value
+		return new BarBorderRadius(getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius()));
 	}
 
 	/**

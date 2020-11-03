@@ -147,7 +147,7 @@ public class TooltipItem extends AbstractScriptableContext {
 	public static class TooltipItemFactory implements NativeObjectContainerFactory<TooltipItem> {
 		
 		/**
-		 * To avoid any instatiation
+		 * To avoid any instantiation
 		 */
 		private TooltipItemFactory() {
 			// do nothing

@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
@@ -50,13 +54,80 @@ abstract class AbstractBarBorderItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the list of keys managed by object.
+	 * 
+	 * @return the list of keys managed by object
+	 */
+	abstract List<Key> getKeys();
+
+	/**
 	 * Sets the border size to all dimensions.
 	 * 
 	 * @param size the border size to all dimensions.
 	 */
 	public abstract void set(int size);
 
-	
+	/**
+	 * Returns <code>true</code> if all values of object are equals.
+	 * 
+	 * @return <code>true</code> if all values of object are equals
+	 */
+	public final boolean areValuesEquals() {
+		// gets the keys managed object
+		List<Key> keys = getKeys();
+		// checks if keys are consistent
+		if (keys != null && !keys.isEmpty()) {
+			// creates value reference to check
+			int preValue = Integer.MIN_VALUE;
+			// scans the keys
+			for (Key key : keys) {
+				// gets the key value
+				int value = getValue(key, 0);
+				// checks if is the first cycle
+				if (preValue == Integer.MIN_VALUE) {
+					// stores value
+					preValue = value;
+				} else if (preValue != value) {
+					// if the stored value is not equals to the value
+					// then the values are not all equals
+					return false;
+				}
+			}
+		}
+		// if here, all values are equals
+		// or the keys are not consistent
+		return true;
+	}
+
+	/**
+	 * Returns the average value of all values managed by object.
+	 * 
+	 * @return the average value of all values managed by object
+	 */
+	public final int average() {
+		// creates the reference
+		int result = 0;
+		// gets the keys managed object
+		List<Key> keys = getKeys();
+		// checks if keys are consistent
+		if (keys != null && !keys.isEmpty()) {
+			// gets the count of items
+			final int count = keys.size();
+			// creates the sum reference
+			int sum = 0;
+			// scans the keys
+			for (Key key : keys) {
+				// gets the key avlue and sum it
+				sum += getValue(key, 0);
+			}
+			// creates a big decimal with average...
+			BigDecimal average = new BigDecimal(sum / count);
+			// ... then gets the integer value
+			result = average.intValue();
+		}
+		return result;
+	}
+
 	/**
 	 * Returns the native object instance.
 	 * 
