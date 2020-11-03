@@ -276,8 +276,8 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 */
 	public CanvasGradientItem getBorderColorAsCanvasGradient() {
 		// checks if the border color has been set as gradient
-		if (isBackgroundColorAsGradient()) {
-			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		if (isBorderColorAsGradient()) {
+			return getValue(Property.BORDER_COLOR, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;

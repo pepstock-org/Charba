@@ -264,6 +264,25 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 	
 	/**
+	 * Returns <code>true</code> if the border color of the tooltip item is defined as color.
+	 * 
+	 * @return <code>true</code> if the border color of the tooltip item is defined as color
+	 */
+	public boolean isBorderColorAsColor() {
+		return ObjectType.STRING.equals(type(Property.BORDER_COLOR));
+	}
+
+	/**
+	 * Returns <code>true</code> if the border color of the tooltip item is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the border color of the tooltip item is defined as gradient
+	 */
+	public boolean isBorderColorAsGradient() {
+		return JsItemsHelper.get().isCanvasGradient(this.getObject(), Property.BORDER_COLOR);
+	}
+
+	
+	/**
 	 * Sets border color as string
 	 * 
 	 * @param borderColor border color
@@ -345,8 +364,8 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 */
 	public CanvasGradientItem getBorderColorAsCanvasGradient() {
 		// checks if the border color has been set as color
-		if (isBackgroundColorAsGradient()) {
-			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
+		if (isBorderColorAsGradient()) {
+			return getValue(Property.BORDER_COLOR, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
