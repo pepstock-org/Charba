@@ -49,10 +49,9 @@ public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFiller{
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter.
+	 * end points and control points are exactly at the same position, are skipped).
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter.
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	JoinStyle getBorderJoinStyle();
 

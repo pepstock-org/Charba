@@ -403,7 +403,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
 	 * end points and control points are exactly at the same position, are skipped).
 	 * 
-	 * @return there are three possible values for this property: round, bevel and miter.
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());

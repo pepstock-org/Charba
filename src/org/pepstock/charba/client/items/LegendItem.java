@@ -337,7 +337,7 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * Returns how the end points of every box border are drawn. 
 	 * 
 	 * @return how the end points of every box border are drawn.
 	 */
@@ -358,9 +358,9 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the box border dash pattern offset or "phase".
+	 * Returns the box border dash pattern offset.
 	 * 
-	 * @return the box border dash pattern offset or "phase".
+	 * @return the box border dash pattern offset.
 	 */
 	public final int getLineDashOffset() {
 		return getValue(Property.LINE_DASH_OFFSET, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
@@ -368,10 +368,9 @@ public class LegendItem extends NativeObjectContainer {
 
 	/**
 	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end points
-	 * and control points are exactly at the same position, are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter.
+	 * and control points are exactly at the same position, are skipped).
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter.
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public final JoinStyle getLineJoin() {
 		return getValue(Property.LINE_JOIN, JoinStyle.values(), Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());

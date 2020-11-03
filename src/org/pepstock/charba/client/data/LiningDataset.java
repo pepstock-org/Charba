@@ -630,9 +630,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
-	 * @param borderDashOffset the line dash pattern offset or "phase".
+	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		// resets callback
@@ -642,9 +642,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	public int getBorderDashOffset() {
 		// checks if a callback has been set for this property
@@ -657,8 +657,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn.<br>
-	 * There are three possible values for this property and those are: butt, round and square.
+	 * Sets how the end points of every line are drawn.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -670,8 +669,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -687,10 +685,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
-	 * points and control points are exactly at the same position, are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * points and control points are exactly at the same position, are skipped).
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		// resets callback
@@ -701,10 +698,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * end points and control points are exactly at the same position, are skipped).
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter.
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		// checks if a callback has been set for this property
