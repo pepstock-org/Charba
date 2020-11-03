@@ -521,6 +521,7 @@ public final class Defaults {
 		private enum Property implements Key
 		{
 			PLUGINS("plugins"),
+			CONTROLLERS("controllers"),
 			SCALE("scale"),
 			SCALES("scales");
 
@@ -582,6 +583,15 @@ public final class Defaults {
 		NativeObject getPlugins() {
 			return getValue(Property.PLUGINS);
 		}
+		
+		/**
+		 * Returns the CONTROLLERS global options of chart as native object.
+		 * 
+		 * @return the CONTROLLERS global options
+		 */
+		InternalControllers getControllers() {
+			return new InternalControllers(getValue(Property.CONTROLLERS));
+		}
 
 		void setPluginDefaultIntoOptions(DefaultPluginId plugin, NativeObject options) {
 			setValue(plugin.getPropertyName(), options);
@@ -617,18 +627,46 @@ public final class Defaults {
 		}
 
 		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultsOptions) {
-			// checks if the property is present
-			if (ObjectType.OBJECT.equals(type(type))) {
-				// creates a chart options using global a default scaled as default
-				return new ChartOptions(type, getValue(type), defaultsOptions);
-			} else {
-				// if here, the chart type is not defined (could be a controller)
-				// therefore returns an empty options
-				return new ChartOptions(type, null, defaultsOptions);
-			}
+			// creates a chart options using global a default scaled as default
+			return new ChartOptions(type, getControllers().getChartOptions(type), defaultsOptions);
 		}
 	}
+	
+	private static class InternalControllers extends NativeObjectContainer {
+		
+		/**
+		 * Creates the item using a native java script object which contains all properties.
+		 * 
+		 * @param nativeObject native java script object which contains all properties.
+		 */
+		InternalControllers(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
+		/**
+		 * Returns the chart options defaults by chart type.
+		 * 
+		 * @param type the type of chart
+		 * @return the chart options defaults by chart type
+		 */
+		NativeObject getChartOptions(Type type) {
+			// checks if type is present
+			if (isType(type, ObjectType.OBJECT)) { 
+				// checks if chart type is consistent
+				return getValue(Key.checkAndGetIfValid(type));
+			}
+			// if here, the type doesn't exist
+			return null;
+		}
+		
+	}
 
+	/**
+	 * Internal class for default scales
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
 	private static class InternalDefaultScales extends NativeObjectContainer {
 
 		/**

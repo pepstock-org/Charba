@@ -104,6 +104,6 @@ Charba_ControllerType.prototype.buildOrUpdateElements = function() {
 // sets the controller id
 Charba_ControllerType.id = '_ControllerType'; 
 // copies the default options of extended chart type
-Charba_ControllerType.defaults = Chart.defaults._ChartType; 
+Charba_ControllerType.defaults = Chart.defaults.controllers._ChartType; 
 // registers into CHART.JS
 Chart.register(Charba_ControllerType);
