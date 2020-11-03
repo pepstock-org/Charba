@@ -18,8 +18,6 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code> or <code>pointHoverBackgroundColor</code> property
@@ -30,8 +28,6 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
  * @see IsColor
  * @see Pattern
  * @see Gradient
- * @see CanvasPatternItem
- * @see CanvasGradientItem
  */
 public interface BackgroundColorCallback extends Scriptable<Object> {
 

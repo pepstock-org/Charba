@@ -93,6 +93,8 @@ public abstract class CanvasObjectFactory {
 		// checks if result is consistent
 		// to avoid to add a pattern not consistent
 		if (result != null) {
+			// stores the canvas id
+			pattern.store(result);
 			// stores canvas pattern into cache
 			patternsMap.put(pattern.getId(), result);
 		}
@@ -166,6 +168,8 @@ public abstract class CanvasObjectFactory {
 			}
 			// checks if result is consistent
 			if (result != null) {
+				// stores id
+				gradient.store(result);
 				// scans all colors to add to gradient
 				for (GradientColor color : gradient.getColors()) {
 					// adds colors using offset and color

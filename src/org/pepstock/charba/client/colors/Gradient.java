@@ -290,7 +290,7 @@ public final class Gradient extends CanvasObject {
 		// creates and return color
 		return new Color(r, g, b, a);
 	}
-
+	
 	/**
 	 * Performs the conversion for the sRGB color space and converts it to a linear sRGB value.
 	 * 
@@ -312,5 +312,5 @@ public final class Gradient extends CanvasObject {
 		// IEC 61966-2-1:1999
 		return srgb <= 0.04045D ? srgb / 12.92D : (double) Math.pow((srgb + 0.055D) / 1.055D, 2.4D);
 	}
-
+	
 }

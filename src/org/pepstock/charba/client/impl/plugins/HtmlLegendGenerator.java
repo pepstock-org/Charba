@@ -515,7 +515,7 @@ final class HtmlLegendGenerator {
 		if (item.isFillStyleAsColor()) {
 			// if here, apply the fill color as background color
 			color.getStyle().setBackgroundColor(item.getFillStyle().toRGBA());
-		} else if (item.isFillStyleAsCanvasPattern()) {
+		} else if (item.isFillStyleAsPattern()) {
 			// gets the pattern by legend item
 			Pattern pattern = item.getFillStyleAsPattern();
 			// checks if not consistent
@@ -532,7 +532,7 @@ final class HtmlLegendGenerator {
 				// if here, apply the fill color as background color
 				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
 			}
-		} else if (item.isFillStyleAsCanvasGradient()) {
+		} else if (item.isFillStyleAsGradient()) {
 			// gets the gradient by legend item
 			Gradient gradient = item.getFillStyleAsGradient();
 			// checks if not consistent
@@ -603,7 +603,7 @@ final class HtmlLegendGenerator {
 		// to apply to the border
 		if (item.isStrokeStyleAsColor()) {
 			color.getStyle().setBorderColor(item.getStrokeStyle().toRGBA());
-		} else if (item.isStrokeStyleAsCanvasPattern()) {
+		} else if (item.isStrokeStyleAsPattern()) {
 			// gets the pattern by legend item
 			Pattern pattern = item.getStrokeStyleAsPattern();
 			// checks if not consistent
@@ -620,7 +620,7 @@ final class HtmlLegendGenerator {
 				// if here, remove border
 				color.getStyle().setBorderWidth(Unit.PX.format(0));
 			}
-		} else if (item.isStrokeStyleAsCanvasGradient()) {
+		} else if (item.isStrokeStyleAsGradient()) {
 			// gets the gradient by legend item
 			Gradient gradient = item.getStrokeStyleAsGradient();
 			// checks if not consistent

@@ -20,8 +20,6 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textStrokeColor</code> property at runtime, using the chart instance and the plugin context.<br>
@@ -33,8 +31,6 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
  * @see IsColor
  * @see Pattern
  * @see Gradient
- * @see CanvasPatternItem
- * @see CanvasGradientItem
  */
 public interface TextStrokeColorCallback extends Scriptable<Object> {
 

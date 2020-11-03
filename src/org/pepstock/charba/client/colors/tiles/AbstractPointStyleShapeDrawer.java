@@ -141,10 +141,10 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		if (legendItem.isFillStyleAsColor()) {
 			// applies the fill color
 			context.setStrokeColor(legendItem.getFillStyle());
-		} else if (legendItem.isFillStyleAsCanvasPattern()) {
+		} else if (legendItem.isFillStyleAsPattern()) {
 			// applies the fill pattern
 			context.setStrokePattern(legendItem.getFillStyleAsCanvasPattern());
-		} else if (legendItem.isFillStyleAsCanvasGradient()) {
+		} else if (legendItem.isFillStyleAsGradient()) {
 			// applies the fill gradient
 			context.setStrokeGradient(legendItem.getFillStyleAsCanvasGradient());
 		}
@@ -171,10 +171,10 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		if (legendItem.isFillStyleAsColor()) {
 			// applies the fill color
 			context.setFillColor(legendItem.getFillStyle());
-		} else if (legendItem.isFillStyleAsCanvasPattern()) {
+		} else if (legendItem.isFillStyleAsPattern()) {
 			// applies the fill pattern
 			context.setFillPattern(legendItem.getFillStyleAsCanvasPattern());
-		} else if (legendItem.isFillStyleAsCanvasGradient()) {
+		} else if (legendItem.isFillStyleAsGradient()) {
 			// applies the fill gradient
 			context.setFillGradient(legendItem.getFillStyleAsCanvasGradient());
 		}

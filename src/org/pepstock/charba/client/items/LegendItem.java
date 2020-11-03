@@ -21,7 +21,11 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.IsEnvelop;
@@ -177,7 +181,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if the fill style is defined as gradient
 	 */
-	public final boolean isFillStyleAsCanvasGradient() {
+	public final boolean isFillStyleAsGradient() {
 		return JsItemsHelper.get().isCanvasGradient(this, Property.FILL_STYLE.value());
 	}
 
@@ -186,7 +190,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if the fill style is defined as canvas pattern
 	 */
-	public final boolean isFillStyleAsCanvasPattern() {
+	public final boolean isFillStyleAsPattern() {
 		return JsItemsHelper.get().isCanvasPattern(this, Property.FILL_STYLE.value());
 	}
 
@@ -211,11 +215,30 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final CanvasGradientItem getFillStyleAsCanvasGradient() {
 		// checks if the fill style has been set as color
-		if (isFillStyleAsCanvasGradient()) {
+		if (isFillStyleAsGradient()) {
 			return getValue(Property.FILL_STYLE, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
+	}
+	
+	/**
+	 * Returns the fill style of the legend box as gradient.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a gradient
+	 */
+	public final Gradient getFillStyleAsGradient() {
+		return GradientBuilder.retrieve(getFillStyleAsCanvasGradient());
+	}
+
+
+	/**
+	 * Returns the fill style of the legend box as pattern.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a pattern
+	 */
+	public final Pattern getFillStyleAsPattern() {
+		return PatternBuilder.retrieve(getFillStyleAsCanvasPattern());
 	}
 
 	/**
@@ -225,7 +248,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final CanvasPatternItem getFillStyleAsCanvasPattern() {
 		// checks if the fill style has been set as color
-		if (isFillStyleAsCanvasPattern()) {
+		if (isFillStyleAsPattern()) {
 			return getValue(Property.FILL_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
@@ -246,7 +269,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if the stroke style is defined as gradient
 	 */
-	public final boolean isStrokeStyleAsCanvasGradient() {
+	public final boolean isStrokeStyleAsGradient() {
 		return JsItemsHelper.get().isCanvasGradient(this, Property.STROKE_STYLE.value());
 	}
 
@@ -255,7 +278,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if the stroke style is defined as gradient
 	 */
-	public final boolean isStrokeStyleAsCanvasPattern() {
+	public final boolean isStrokeStyleAsPattern() {
 		return JsItemsHelper.get().isCanvasPattern(this, Property.STROKE_STYLE.value());
 	}
 
@@ -274,14 +297,37 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the stroke style of the legend box as canvas gradient.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a canvas gradient
+	 */
+	public final CanvasGradientItem getStrokeStyleAsCanvasGradient() {
+		// checks if the stroke style has been set as color
+		if (isStrokeStyleAsGradient()) {
+			return getValue(Property.STROKE_STYLE, (CanvasGradientItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+	
+	/**
 	 * Returns the stroke style of the legend box as gradient.
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
 	 */
-	public final CanvasGradientItem getStrokeStyleAsCanvasGradient() {
+	public final Gradient getStrokeStyleAsGradient() {
+		return GradientBuilder.retrieve(getStrokeStyleAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the stroke style of the legend box as canvas pattern.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a canvas pattern
+	 */
+	public final CanvasPatternItem getStrokeStyleAsCanvasPattern() {
 		// checks if the stroke style has been set as color
-		if (isStrokeStyleAsCanvasGradient()) {
-			return getValue(Property.STROKE_STYLE, (CanvasGradientItem) null);
+		if (isStrokeStyleAsPattern()) {
+			return getValue(Property.STROKE_STYLE, (CanvasPatternItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
@@ -292,13 +338,8 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
 	 */
-	public final CanvasPatternItem getStrokeStyleAsCanvasPattern() {
-		// checks if the stroke style has been set as color
-		if (isStrokeStyleAsCanvasPattern()) {
-			return getValue(Property.STROKE_STYLE, (CanvasPatternItem) null);
-		}
-		// if here, is not a color then returns null
-		return null;
+	public final Pattern getStrokeStyleAsPattern() {
+		return PatternBuilder.retrieve(getStrokeStyleAsCanvasPattern());
 	}
 
 	/**

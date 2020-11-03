@@ -24,6 +24,7 @@ import java.util.Map;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -41,7 +42,7 @@ public final class GradientBuilder {
 
 	// cache for the gradients created in order to build only when needed
 	// K = canvas object id, V = gradient instance
-	private static final Map<String, Gradient> GRADIENT = new HashMap<>();
+	private static final Map<String, Gradient> GRADIENTS = new HashMap<>();
 	// gradient type instance
 	private final GradientType type;
 	// gradient orientation instance
@@ -192,7 +193,7 @@ public final class GradientBuilder {
 		}
 		return this;
 	}
-	
+
 	/**
 	 * Sets an array of colors to the gradient.
 	 * 
@@ -229,7 +230,6 @@ public final class GradientBuilder {
 		return this;
 	}
 
-
 	/**
 	 * Sets the list of colors.
 	 * 
@@ -261,14 +261,14 @@ public final class GradientBuilder {
 		// generates id
 		String id = generateId();
 		// checks if gradient is cached
-		if (GRADIENT.containsKey(id)) {
+		if (GRADIENTS.containsKey(id)) {
 			// returns the cached object
-			return GRADIENT.get(id);
+			return GRADIENTS.get(id);
 		}
 		// gets gradient reference
 		Gradient result = new Gradient(id, type, orientation, scope, colors);
 		// stores the object into the cache
-		GRADIENT.put(id, result);
+		GRADIENTS.put(id, result);
 		// returns the instance
 		return result;
 	}
@@ -290,14 +290,14 @@ public final class GradientBuilder {
 				throw new IllegalArgumentException(Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
 			}
 			// checks if gradient is cached
-			if (GRADIENT.containsKey(id)) {
+			if (GRADIENTS.containsKey(id)) {
 				// returns the cached object
-				return GRADIENT.get(id);
+				return GRADIENTS.get(id);
 			}
 			// creates new gradient
 			Gradient result = new Gradient(nativeObject);
 			// stores the object into the cache
-			GRADIENT.put(id, result);
+			GRADIENTS.put(id, result);
 			// returns the instance
 			return result;
 		} else {
@@ -305,6 +305,32 @@ public final class GradientBuilder {
 			// then exception
 			throw new IllegalArgumentException("Native object argument is null");
 		}
+	}
+
+	/**
+	 * Retrieves a cached pattern by a {@link CanvasGradientItem} instance.<br>
+	 * If the pattern doesn't exist, returns <code>null</code>.
+	 * 
+	 * @param canvasGradient the canvas gradient to use for searching
+	 * @return a cached pattern by a {@link CanvasGradientItem} instance.<br>
+	 *         If the pattern doesn't exist, returns <code>null</code>
+	 */
+	public static Gradient retrieve(CanvasGradientItem canvasGradient) {
+		// checks if argument is consistent
+		if (canvasGradient != null) {
+			// casts to native object
+			// extracts the id from object
+			String id = Id.get((NativeObject) canvasGradient.as());
+			// checks if gradient is cached and id is consistent
+			if (id != null && GRADIENTS.containsKey(id)) {
+				// returns the cached object
+				return GRADIENTS.get(id);
+			}
+		}
+		// if here, the argument is not consistent or
+		// the id is not found
+		// then returns null
+		return null;
 	}
 
 	/**

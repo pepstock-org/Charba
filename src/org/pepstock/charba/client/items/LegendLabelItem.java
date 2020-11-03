@@ -45,14 +45,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 */
 	public static final LegendLabelItemFactory FACTORY = new LegendLabelItemFactory();
 
-	private Pattern fillStylePattern = null;
-
-	private Gradient fillStyleGradient = null;
-
-	private Pattern strokeStylePattern = null;
-
-	private Gradient strokeStyleGradient = null;
-
 	// legend texter instance
 	private final LegendTexter legendtexter;
 
@@ -125,7 +117,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * 
 	 * @param pattern the fill style of the legend box as canvas pattern
 	 */
-	public void setFillStyle(CanvasPatternItem pattern) {
+	private void setFillStyle(CanvasPatternItem pattern) {
 		setValue(LegendItem.Property.FILL_STYLE, pattern);
 	}
 
@@ -136,10 +128,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param pattern the fill style of the legend box as pattern
 	 */
 	public void setFillStyle(IsChart chart, Pattern pattern) {
-		// stores the reference
-		this.fillStylePattern = pattern;
-		// resets gradient
-		this.fillStyleGradient = null;
 		// checks if pattern is consistent
 		if (pattern != null) {
 			// checks if pattern has been built by canvas pattern
@@ -157,20 +145,11 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	}
 
 	/**
-	 * Returns the fill style of the legend box as pattern.
-	 * 
-	 * @return the fill style of the legend box or <code>null</code> if is not a pattern
-	 */
-	public Pattern getFillStyleAsPattern() {
-		return fillStylePattern;
-	}
-
-	/**
 	 * Sets the fill style of the legend box as canvas gradient.
 	 * 
 	 * @param gradient the fill style of the legend box as canvas gradient
 	 */
-	public void setFillStyle(CanvasGradientItem gradient) {
+	private void setFillStyle(CanvasGradientItem gradient) {
 		setValue(LegendItem.Property.FILL_STYLE, gradient);
 	}
 
@@ -181,14 +160,10 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param gradient the fill style of the legend box as gradient
 	 */
 	public void setFillStyle(IsChart chart, Gradient gradient) {
-		// stores the reference
-		this.fillStyleGradient = gradient;
-		// resets the pattern
-		this.fillStylePattern = null;
 		// checks if pattern is consistent
 		if (gradient != null) {
 			// calculated the maximum values
-			// to oavoid undefined values
+			// to avoid undefined values
 			int datasetIndex = Math.max(0, getDatasetIndex());
 			int index = Math.max(0, getIndex());
 			// be aware that if chart is null, an exception will be throw
@@ -197,15 +172,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 			// resets the property
 			remove(LegendItem.Property.FILL_STYLE);
 		}
-	}
-
-	/**
-	 * Returns the fill style of the legend box as gradient.
-	 * 
-	 * @return the fill style of the legend box or <code>null</code> if is not a gradient
-	 */
-	public Gradient getFillStyleAsGradient() {
-		return fillStyleGradient;
 	}
 
 	/**
@@ -290,10 +256,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param pattern the stroke style of the legend box as pattern
 	 */
 	public void setStrokeStyle(IsChart chart, Pattern pattern) {
-		// stores the reference
-		this.strokeStylePattern = pattern;
-		// resets gradient
-		this.strokeStyleGradient = null;
 		// checks if pattern is consistent
 		if (pattern != null) {
 			// checks if pattern has been built by canvas pattern
@@ -308,15 +270,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 			// resets the property
 			remove(LegendItem.Property.STROKE_STYLE);
 		}
-	}
-
-	/**
-	 * Returns the stroke style of the legend box as pattern.
-	 * 
-	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
-	 */
-	public Pattern getStrokeStyleAsPattern() {
-		return strokeStylePattern;
 	}
 
 	/**
@@ -335,10 +288,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param gradient the stroke style of the legend box as gradient
 	 */
 	public void setStrokeStyle(IsChart chart, Gradient gradient) {
-		// stores the reference
-		this.strokeStyleGradient = gradient;
-		// resets the pattern
-		this.strokeStylePattern = null;
 		// checks if pattern is consistent
 		if (gradient != null) {
 			// calculated the maximum values
@@ -351,15 +300,6 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 			// resets the property
 			remove(LegendItem.Property.STROKE_STYLE);
 		}
-	}
-
-	/**
-	 * Returns the stroke style of the legend box as gradient.
-	 * 
-	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
-	 */
-	public Gradient getStrokeStyleAsGradient() {
-		return strokeStyleGradient;
 	}
 
 	/**

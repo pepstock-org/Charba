@@ -15,10 +15,14 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.IsCastable;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -92,7 +96,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// checks if native object is consistent for a canvas object
 		checkNativeObject(Property.CHARBA_OBJECT_ID, ObjectType.STRING);
 	}
-	
+
 	/**
 	 * Checks if a property exists and if its type is equals to the object type passed as argument.<br>
 	 * If not, an {@link IllegalArgumentException} will throw.
@@ -125,7 +129,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	private void setId(String id) {
 		setValue(Property.CHARBA_OBJECT_ID, id);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the unique canvas object id exists.
 	 * 
@@ -144,6 +148,21 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.STRING);
 	}
 
+	/**
+	 * Stores the canvas object id to {@link CanvasGradientItem} or {@link CanvasPatternItem}.
+	 * 
+	 * @param canvasObject {@link CanvasGradientItem} or {@link CanvasPatternItem} instance to update
+	 */
+	final void store(IsCastable canvasObject) {
+		// checks if argument is consistent
+		if (canvasObject != null) {
+			// cast to a native object in order to add a property
+			InternalGradient internal = new InternalGradient(canvasObject.as());
+			// sets id
+			internal.setId(getId());
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -156,7 +175,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		result = prime * result + ((hasId()) ? 0 : getId().hashCode());
 		return result;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -187,6 +206,46 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// then if the other is has id is NOT equals
 		// otherwise they are equals because both are null
 		return !other.hasId();
+	}
+
+	/**
+	 * Internal class which is mapping a {@link CanvasGradientItem} or {@link CanvasPatternItem}, casted to a {@link NativeObject}, in order to add the canvas object id.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalGradient extends NativeObjectContainer {
+
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
+		InternalGradient(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		/**
+		 * Returns <code>true</code> if the {@link Id#CHARBA_ID} is stored.
+		 * 
+		 * @return <code>true</code> if the {@link Id#CHARBA_ID} is stored
+		 */
+		boolean hasId() {
+			return has(Id.CHARBA_ID);
+		}
+
+		/**
+		 * Sets the canvas object id to {@link CanvasGradientItem} or {@link CanvasPatternItem}.
+		 * 
+		 * @param id the canvas objetc id to set.
+		 */
+		void setId(String id) {
+			// sets the id ONLY is not already done
+			if (!hasId()) {
+				// stores the ID
+				setValue(Id.CHARBA_ID, id);
+			}
+		}
 	}
 
 }

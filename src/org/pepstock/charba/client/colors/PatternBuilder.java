@@ -227,6 +227,32 @@ public final class PatternBuilder {
 	}
 
 	/**
+	 * Retrieves a cached pattern by a {@link CanvasPatternItem} instance.<br>
+	 * If the pattern doesn't exist, returns <code>null</code>.
+	 * 
+	 * @param canvasPattern the canvas pattern to use for searching
+	 * @return a cached pattern by a {@link CanvasPatternItem} instance.<br>
+	 *         If the pattern doesn't exist, returns <code>null</code>
+	 */
+	public static Pattern retrieve(CanvasPatternItem canvasPattern) {
+		// checks if argument is consistent
+		if (canvasPattern != null) {
+			// casts to native object
+			// extracts the id from object
+			String id = Id.get((NativeObject) canvasPattern.as());
+			// checks if pattern is cached and id is consistent
+			if (id != null && PATTERNS.containsKey(id)) {
+				// returns the cached object
+				return PATTERNS.get(id);
+			}
+		}
+		// if here, the argument is not consistent or
+		// the id is not found
+		// then returns null
+		return null;
+	}
+
+	/**
 	 * Creates an unique id for the canvas object.<br>
 	 * For pattern created by a {@link Img}, the format is the following: <br>
 	 * <br>

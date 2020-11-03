@@ -22,7 +22,6 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
@@ -361,7 +360,7 @@ public final class ScriptableUtils {
 				// is pattern instance
 				Pattern pattern = (Pattern) result;
 				return DatasetCanvasObjectFactory.get().createPattern(chart, pattern);
-			} else if (result instanceof CanvasGradientItem || result instanceof Gradient) {
+			} else if (result instanceof Gradient) {
 				// is canvas gradient or charba gradient instance
 				return result;
 			} else if (result instanceof CanvasPatternItem && hasPattern) {

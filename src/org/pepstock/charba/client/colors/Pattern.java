@@ -116,6 +116,8 @@ public final class Pattern extends CanvasObject {
 			// stores size checks the max value
 			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
 			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
+			// stores the id into pattern
+			store(canvasPattern);
 		} else {
 			// if here, image is null
 			// then exception
