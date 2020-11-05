@@ -31,8 +31,6 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
 /**
  * This dataset is managing some common properties related to background and border colors where every property can be set as a single value or an array.
@@ -144,7 +142,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getPatternsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingPatterns(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
@@ -158,7 +156,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
@@ -259,7 +257,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor), getDefaultBorderColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CommonProperty.BORDER_COLOR);
 	}
@@ -364,7 +362,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors));
+		getPatternsContainer().setObjects(CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultBackgroundColorAsString());
 		// removes the property
 		resetBeingPatterns(CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -376,7 +374,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors));
+		getGradientsContainer().setObjects(CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -469,7 +467,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(CommonProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(colors));
+		getGradientsContainer().setObjects(CommonProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(colors), getDefaultBorderColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(CommonProperty.HOVER_BORDER_COLOR);
 	}
@@ -544,26 +542,6 @@ public abstract class HovingFlexDataset extends Dataset {
 		// if here, there is a callback
 		// then returns an empty list
 		return Collections.emptyList();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
-		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPatternItem[0]));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
-		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradientItem[0]));
 	}
 
 }

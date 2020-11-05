@@ -49,8 +49,6 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.IsFill;
@@ -375,7 +373,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getPatternsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
 		resetBeingPatterns(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
@@ -389,7 +387,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
 		resetBeingGradients(Dataset.CommonProperty.BACKGROUND_COLOR);
 	}
@@ -499,7 +497,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor), getDefaultValues().getElements().getLine().getBorderColorAsString());
 		// removes the property
 		resetBeingGradients(Dataset.CommonProperty.BORDER_COLOR);
 	}
@@ -773,7 +771,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern));
+		getPatternsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
 		resetBeingPatterns(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -787,7 +785,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -890,7 +888,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient));
+		getGradientsContainer().setObjects(Dataset.CommonProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBorderColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CommonProperty.HOVER_BORDER_COLOR);
 	}
@@ -1142,7 +1140,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// reset callback
 		setPointBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.POINT_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointBackgroundColor));
+		getGradientsContainer().setObjects(Property.POINT_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointBackgroundColor), getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		// removes the property
 		resetBeingGradients(Property.POINT_BACKGROUND_COLOR);
 	}
@@ -1229,7 +1227,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// reset callback
 		setPointBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.POINT_BORDER_COLOR, ArrayObject.fromOrNull(pointBorderColor));
+		getGradientsContainer().setObjects(Property.POINT_BORDER_COLOR, ArrayObject.fromOrNull(pointBorderColor), getDefaultValues().getElements().getPoint().getBorderColorAsString());
 		// removes the property
 		resetBeingGradients(Property.POINT_BORDER_COLOR);
 	}
@@ -1374,7 +1372,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setPointHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.POINT_HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointHoverBackgroundColor));
+		getGradientsContainer().setObjects(Property.POINT_HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointHoverBackgroundColor), getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		// removes the property
 		resetBeingGradients(Property.POINT_HOVER_BACKGROUND_COLOR);
 	}
@@ -1460,7 +1458,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setPointHoverBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.POINT_HOVER_BORDER_COLOR, ArrayObject.fromOrNull(pointHoverBorderColor));
+		getGradientsContainer().setObjects(Property.POINT_HOVER_BORDER_COLOR, ArrayObject.fromOrNull(pointHoverBorderColor), getDefaultValues().getElements().getPoint().getBorderColorAsString());
 		// removes the property
 		resetBeingGradients(Property.POINT_HOVER_BORDER_COLOR);
 	}
@@ -2255,41 +2253,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	protected int getDefaultBorderWidth() {
 		return getDefaultValues().getElements().getLine().getBorderWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
-		// checks if background color (ONLY one which can be used with patterns)
-		if (Key.equals(Dataset.CommonProperty.BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, key)) {
-			// gets the first element
-			CanvasPatternItem pattern = canvasPatternsList.get(0);
-			// creates pattern and stores it
-			setValue(key, pattern);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
-		// checks if background or border colors which must be set with single value
-		if (Key.equals(Dataset.CommonProperty.BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.BORDER_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BACKGROUND_COLOR, key) || Key.equals(Dataset.CommonProperty.HOVER_BORDER_COLOR, key)) {
-			// gets the first element
-			CanvasGradientItem gradient = canvasGradientsList.get(0);
-			// creates gradient and stores it
-			setValue(key, gradient);
-		} else {
-			// stores the array
-			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradientItem[0]));
-		}
 	}
 
 	/**

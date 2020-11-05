@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientBuilder;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
@@ -32,6 +33,15 @@ final class GradientsContainer extends AbstractContainer<Gradient> {
 
 	// static instance for the gradient factory
 	private static final GradientContainerFactory FACTORY = new GradientContainerFactory();
+	
+	/**
+	 * Creates the object by an empty native java script object and stores the dataset instance it belongs to.
+	 * 
+	 * @param dataset the dataset instance it belongs to
+	 */
+	GradientsContainer(Dataset dataset) {
+		super(dataset);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -41,6 +51,16 @@ final class GradientsContainer extends AbstractContainer<Gradient> {
 	@Override
 	NativeObjectContainerFactory<Gradient> getFactory() {
 		return FACTORY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.AbstractContainer#createCallback(org.pepstock.charba.client.commons.Key)
+	 */
+	@Override
+	AbstractCanvasObjectCallback<Gradient> createCallback(Key property) {
+		return new DatasetGrandientCallback(this, property);
 	}
 
 	/**

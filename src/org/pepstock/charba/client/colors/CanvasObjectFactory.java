@@ -20,6 +20,8 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -27,7 +29,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
- * A Charba gradient or pattern describes how a  canvas gradient or pattern must be created.
+ * A Charba gradient or pattern describes how a canvas gradient or pattern must be created.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -41,16 +43,29 @@ public abstract class CanvasObjectFactory {
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
 	private final Map<String, Map<String, CanvasGradientItem>> gradientsCache = new HashMap<>();
-
 	// cache for canvas patterns already created
 	// K = chart id, K = pattern id, V = canvas pattern
 	private final Map<String, Map<String, CanvasPatternItem>> patternCache = new HashMap<>();
 
+	// scope instance
+	private final Key scope;
+
 	/**
-	 * To avoid any instantiation
+	 * Creates the object using the scope of this factory.
+	 * 
+	 * @param scope scope of this factory
 	 */
-	protected CanvasObjectFactory() {
-		// do nothing
+	protected CanvasObjectFactory(Key scope) {
+		this.scope = Key.checkAndGetIfValid(scope);
+	}
+
+	/**
+	 * Returns the scope of this factory.
+	 * 
+	 * @return the scope of this factory
+	 */
+	public final Key getScope() {
+		return scope;
 	}
 
 	/**
@@ -128,25 +143,27 @@ public abstract class CanvasObjectFactory {
 	}
 
 	/**
-	 * Creates a  canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas instance and its context.
+	 * Creates a canvas gradient java script object using a Charba gradient and a chart instance which must provide a canvas instance and its context.
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex dataset index
 	 * @param index index of gradient related to index of dataset item of whole dataset
-	 * @return a  canvas gradient
+	 * @return a canvas gradient
 	 */
 	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if arguments are consistent
 		checkArgumentsConsistency(chart, gradient);
 		// checks if the gradient is already created
 		final Map<String, CanvasGradientItem> gradientsMap;
+		// creates the unique id
+		String uniqueId = createGradientUniqueId(gradient);
 		// checks if the gradient is already created
 		if (gradientsCache.containsKey(chart.getId())) {
 			gradientsMap = gradientsCache.get(chart.getId());
-			if (gradientsMap.containsKey(gradient.getId())) {
+			if (gradientsMap.containsKey(uniqueId)) {
 				// returns the existing canvas gradient
-				return gradientsMap.get(gradient.getId());
+				return gradientsMap.get(uniqueId);
 			}
 		} else {
 			// new chart!
@@ -176,7 +193,7 @@ public abstract class CanvasObjectFactory {
 					result.addColorStop(color.getOffset(), color.getColorAsString());
 				}
 				// stores canvas gradient into cache
-				gradientsMap.put(gradient.getId(), result);
+				gradientsMap.put(uniqueId, result);
 			}
 			// returns result
 			return result;
@@ -193,7 +210,7 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
-	 * @return a  linear canvas gradient
+	 * @return a linear canvas gradient
 	 */
 	private CanvasGradientItem createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
@@ -279,8 +296,8 @@ public abstract class CanvasObjectFactory {
 			// then exception
 			throw new IllegalArgumentException("Gradient orientation is wrong [" + gradient.getOrientation() + "]");
 		}
-		// returns  canvas gradient
-		// by  context 2d method
+		// returns canvas gradient
+		// by context 2d method
 		return context.createLinearGradient(x0, y0, x1, y1);
 	}
 
@@ -291,7 +308,7 @@ public abstract class CanvasObjectFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex dataset index
 	 * @param index index of gradient related to index of dataset item of whole dataset
-	 * @return a  radial canvas gradient
+	 * @return a radial canvas gradient
 	 */
 	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
@@ -352,7 +369,7 @@ public abstract class CanvasObjectFactory {
 			// then exception
 			throw new IllegalArgumentException("Gradient orientation is wrong [" + gradient.getOrientation() + "]");
 		}
-		// returns  canvas gradient
+		// returns canvas gradient
 		// by context 2d method
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
@@ -363,7 +380,7 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance
 	 * @param canvasObject cnavas object (patter or gradient) instance
 	 */
-	private void checkArgumentsConsistency(IsChart chart, Object canvasObject) {
+	private void checkArgumentsConsistency(IsChart chart, CanvasObject canvasObject) {
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
 		// checks if canvas object is consistent
@@ -373,6 +390,19 @@ public abstract class CanvasObjectFactory {
 			// then throws an exception
 			throw new IllegalArgumentException("CanvasObject argument is null");
 		}
+	}
+
+	/**
+	 * Creates the unique id for gradient using the scope.<br>
+	 * This is important in order to use the dame gradient from different scope having different {@link CanvasGradientItem}.
+	 * 
+	 * @param gradient gradient instance to use
+	 * @return the unique id for gradient using the scope
+	 */
+	private String createGradientUniqueId(Gradient gradient) {
+		StringBuilder sb = new StringBuilder(gradient.getId());
+		// adds the scope and returns it
+		return sb.append(Constants.MINUS).append(getScope().value()).toString();
 	}
 
 	/**

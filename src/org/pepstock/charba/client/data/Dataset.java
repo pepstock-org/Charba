@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -51,7 +50,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
@@ -118,9 +116,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	// exception string message for setting ore getting data
 	static final String TIME_SERIES_DATA_USAGE_MESSAGE = "setData and getData methods are not invokable by a time series chart";
 	// patterns container
-	private final PatternsContainer patternsContainer = new PatternsContainer();
+	private final PatternsContainer patternsContainer;
 	// gradients container
-	private final GradientsContainer gradientsContainer = new GradientsContainer();
+	private final GradientsContainer gradientsContainer;
 	// cache for gradients created by callbacks
 	// K = key + dataset locator, V = gradient
 	private final Map<String, Gradient> callbackGradientsContainer = new HashMap<>();
@@ -236,6 +234,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			// stores visibility
 			setHidden(hidden);
 		}
+		// patterns container
+		this.patternsContainer = new PatternsContainer(this);
+		// gradients container
+		this.gradientsContainer = new GradientsContainer(this);
 		// stores the id based on a counter
 		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
@@ -422,6 +424,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		removeIfExists(key);
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
+		// here must be stored!!
+		setValue(key, getPatternsContainer().getCallbackProxy(key));
 	}
 
 	/**
@@ -434,6 +438,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		removeIfExists(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
+		// here must be stored!!
+		setValue(key, getGradientsContainer().getCallbackProxy(key));
 	}
 
 	/**
@@ -448,35 +454,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		getPatternsContainer().removeObjects(key);
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
-	}
-
-	/**
-	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas therefore must be created by a chart.<br>
-	 * This is called by {@link CanvasObjectHandler}.
-	 * 
-	 * @param chart chart instance
-	 * @see CanvasObjectHandler
-	 */
-	final void applyPatterns(IsChart chart) {
-		// checks if there is any pattern
-		if (!getPatternsContainer().isEmpty()) {
-			// gets all keys of pattern containers.
-			// the key is the CHART.JS dataset property to set
-			for (Key key : getPatternsContainer().getKeys()) {
-				// gets list of all patterns
-				List<Pattern> patterns = getPatternsContainer().getObjects(key);
-				// creates the list of canvas pattern
-				final List<CanvasPatternItem> canvasPatternsList = new LinkedList<>();
-				// scans the patterns
-				for (Pattern pattern : patterns) {
-					// creates the canvas pattern and adds into list
-					canvasPatternsList.add(DatasetCanvasObjectFactory.get().createPattern(chart, pattern));
-				}
-				// asks to dataset implementation to set the property
-				// applying the logic it wants
-				applyPattern(key, canvasPatternsList);
-			}
-		}
 	}
 
 	/**
@@ -678,55 +655,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}
-
-	/**
-	 * Stores the canvas patterns into dataset object by property name passed as key.
-	 * 
-	 * @param key key property name to use to store canvas patterns into dataset object.
-	 * @param canvasPatternsList list of canvas patterns
-	 */
-	protected abstract void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList);
-
-	/**
-	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas therefore must be created by a chart.<br>
-	 * This is called by {@link CanvasObjectHandler}.
-	 * 
-	 * @param chart chart instance
-	 * @param datasetIndex dataset index related to dataset to be checked
-	 * @see CanvasObjectHandler
-	 */
-	final void applyGradients(IsChart chart, int datasetIndex) {
-		// checks if there is any gradient to be created
-		if (!getGradientsContainer().isEmpty()) {
-			// scans all key of all created gradients
-			for (Key key : getGradientsContainer().getKeys()) {
-				// gets all gradients for the key
-				List<Gradient> gradients = getGradientsContainer().getObjects(key);
-				// creates a temporary list of gradients
-				List<CanvasGradientItem> canvasGradientsList = new LinkedList<>();
-				// sets internal dataset index
-				int index = 0;
-				// scans all gradients
-				for (Gradient gradient : gradients) {
-					// creates gradient and adds to the temporary list
-					canvasGradientsList.add(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
-					// increments the index
-					index++;
-				}
-				// asks to dataset implementation to set the property
-				// applying the logic it wants
-				applyGradient(key, canvasGradientsList);
-			}
-		}
-	}
-
-	/**
-	 * Stores the canvas gradients into dataset object by property name passed as key.
-	 * 
-	 * @param key key property name to use to store canvas gradients into dataset object.
-	 * @param canvasGradientsList list of canvas gradients
-	 */
-	protected abstract void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList);
 
 	/**
 	 * Sets if the dataset will appear or not.

@@ -24,12 +24,9 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
-import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -295,23 +292,4 @@ public class MeterDataset extends Dataset {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected final void applyPattern(Key key, List<CanvasPatternItem> canvasPatternsList) {
-		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
-	 */
-	@Override
-	protected final void applyGradient(Key key, List<CanvasGradientItem> canvasGradientsList) {
-		// do nothing
-	}
 }

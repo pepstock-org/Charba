@@ -430,6 +430,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `NativeConfiguration` native JSType class to get the `config` from chart instance and used to update the configuration at runtime.
  * improve the management of properties used cross classes or packages.
  * improve the tooltip callbacks management providing the right defaults.
+ * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
 
 License
 -------

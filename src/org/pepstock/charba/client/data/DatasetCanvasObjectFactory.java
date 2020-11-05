@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientScope;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.Radius;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -51,7 +52,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * To avoid any instantiation
 	 */
 	private DatasetCanvasObjectFactory() {
-		// do nothing
+		super(Key.create("dataset"));
 	}
 
 	/**
@@ -168,7 +169,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
 			} else {
 				// by default is the center of chart area
-				radius.setInner(0);
+				radius.setInner(0D);
 				// radius - if min value between the difference between right and left and the difference between bottom and
 				// top,
 				// divided by 2

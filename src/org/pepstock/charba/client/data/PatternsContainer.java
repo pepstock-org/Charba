@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
@@ -29,9 +30,18 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  *
  */
 final class PatternsContainer extends AbstractContainer<Pattern> {
-	
+
 	// static instance for the patter factory
 	private static final PatternContainerFactory FACTORY = new PatternContainerFactory();
+
+	/**
+	 * Creates the object by an empty native java script object and stores the dataset instance it belongs to.
+	 * 
+	 * @param dataset the dataset instance it belongs to
+	 */
+	PatternsContainer(Dataset dataset) {
+		super(dataset);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -41,7 +51,17 @@ final class PatternsContainer extends AbstractContainer<Pattern> {
 	@Override
 	NativeObjectContainerFactory<Pattern> getFactory() {
 		return FACTORY;
-	}	
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.AbstractContainer#createCallback(org.pepstock.charba.client.commons.Key)
+	 */
+	@Override
+	AbstractCanvasObjectCallback<Pattern> createCallback(Key property) {
+		return new DatasetPatternCallback(this, property);
+	}
 
 	/**
 	 * Factory to create a pattern objects from a native object.

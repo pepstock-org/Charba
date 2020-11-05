@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
@@ -463,7 +464,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns a dataset instance by tooltip item locator, dataset index and index.
 	 * 
-	 * @param tooltipItem legend item instance to get the dataset related to.
+	 * @param tooltipItem tooltip item instance to get the dataset related to.
 	 * @return a dataset instance or <code>null</code> if not found by tooltip item
 	 */
 	public final Dataset retrieveDataset(TooltipItem tooltipItem) {
@@ -472,6 +473,24 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// and the dataset index is less than size of datasets
 		if (tooltipItem != null && tooltipItem.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
 			return getDatasets().get(tooltipItem.getDatasetIndex());
+		}
+		// if here, tooltip item is not consistent
+		// or the locator of tooltip item is not able to locate any dataset
+		return null;
+	}
+
+	/**
+	 * Returns a dataset instance by scriptable context, dataset index and index.
+	 * 
+	 * @param context legend item instance to get the dataset related to.
+	 * @return a dataset instance by scriptable context item or <code>null</code> if not found by scriptable context
+	 */
+	public final Dataset retrieveDataset(ScriptableContext context) {
+		// checks if scriptable context is consistent
+		// and if dataset index is the locator
+		// and the dataset index is less than size of datasets
+		if (context != null && context.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > context.getDatasetIndex()) {
+			return getDatasets().get(context.getDatasetIndex());
 		}
 		// if here, tooltip item is not consistent
 		// or the locator of tooltip item is not able to locate any dataset

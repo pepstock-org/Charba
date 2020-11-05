@@ -26,6 +26,7 @@ import org.pepstock.charba.client.colors.Center;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.Radius;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.ColorType;
@@ -550,6 +551,9 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 	 *
 	 */
 	private static class BoxAnnotationCanvasObjectFactory extends CanvasObjectFactory {
+		
+		// scope of the factory
+		private static final Key SCOPE = Key.create(Annotation.ID);
 
 		private final BoxAnnotationElement annotationElement;
 
@@ -559,6 +563,7 @@ final class BoxAnnotationElement extends AbstractAnnotationElement<BoxAnnotation
 		 * @param annotationElement box annotation element instance
 		 */
 		private BoxAnnotationCanvasObjectFactory(BoxAnnotationElement annotationElement) {
+			super(SCOPE);
 			this.annotationElement = annotationElement;
 		}
 

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.Center;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Radius;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 
@@ -42,7 +43,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 * To avoid any instantiation
 	 */
 	private ChartBackgroundGradientFactory() {
-		// do nothing
+		super(Key.create(ChartBackgroundColor.ID));
 	}
 
 	/**

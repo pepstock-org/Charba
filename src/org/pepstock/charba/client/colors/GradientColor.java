@@ -144,6 +144,16 @@ public final class GradientColor extends NativeObjectContainer {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GradientColor [offset=" + getOffset() + ", color=" + getColorAsString() + "]";
+	}
+
 	/**
 	 * Inner class to create pattern by a native object.
 	 * 
