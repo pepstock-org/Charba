@@ -35,11 +35,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class ScaleScriptableContext extends AbstractScriptableContext {
-
-	private final ScaleItem scale;
-
-	private final ScaleTickItem tick;
-
+	
 	/**
 	 * Name of properties of native object.
 	 */
@@ -72,6 +68,10 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 		}
 	}
 
+	private ScaleItem scale = null;
+
+	private ScaleTickItem tick = null;
+
 	/**
 	 * Creates the object with an envelop of the native object instance to be wrapped.
 	 * 
@@ -79,18 +79,20 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	 */
 	public ScaleScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// stores scale and ticks
-		this.scale = new ScaleItem(new CallbacksEnvelop<>(getValue(Property.SCALE), true));
-		this.tick = ScaleTickItem.FACTORY.create(getValue(Property.TICK));
 	}
 
 	/**
-	 * Returns the index of the data inside the dataset.
+	 * Returns the index of the tick.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the index of the tick.
 	 */
 	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+		// checks if the property exists
+		if (exist(Property.INDEX)) {
+			return getContext().getIndex();
+		}
+		// if here, context does not contain this property
+		return UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -99,6 +101,17 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	 * @return the scale instance which contains the element to configure
 	 */
 	public ScaleItem getScale() {
+		// checks is scale object is already created
+		if (scale == null) {
+			// checks if the property exists
+			if (exist(Property.SCALE)) {
+				// stores scale 
+				this.scale = new ScaleItem(new CallbacksEnvelop<>(getContext().getScale(), true));
+			} else {
+				// stores an empty scale 
+				this.scale = new ScaleItem(new CallbacksEnvelop<>(null, true));
+			}
+		}
 		return scale;
 	}
 
@@ -108,6 +121,17 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	 * @return the tick item instance which contains data to be consumed configuring the element
 	 */
 	public ScaleTickItem getTick() {
+		// checks is tick object is already created
+		if (tick == null) {
+			// checks if the property exists
+			if (exist(Property.TICK)) {
+				// stores tick
+				this.tick = ScaleTickItem.FACTORY.create(getContext().getTick());
+			} else {
+				// stores an empty tick
+				this.tick = ScaleTickItem.FACTORY.create();
+			}
+		}
 		return tick;
 	}
 

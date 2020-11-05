@@ -257,3 +257,48 @@ CharbaControllerContext.prototype.index;
  * @type {Array}
  */
 CharbaControllerContext.prototype._data;
+/**
+ * @constructor
+ * @return {CharbaScriptableOptionsContext}
+ */
+function CharbaScriptableOptionsContext() {}
+/**
+ * @type {Chart}
+ */
+CharbaScriptableOptionsContext.prototype.chart;
+/**
+ * @type {boolean}
+ */
+CharbaScriptableOptionsContext.prototype.active;
+/**
+ * @type {number}
+ */
+CharbaScriptableOptionsContext.prototype.datasetIndex;
+/**
+ * @type {number}
+ */
+CharbaScriptableOptionsContext.prototype.dataIndex;
+/**
+ * @type {Object}
+ */
+CharbaScriptableOptionsContext.prototype.dataPoint;
+/**
+ * @type {Object}
+ */
+CharbaScriptableOptionsContext.prototype.element;
+/**
+ * @type {Object}
+ */
+CharbaScriptableOptionsContext.prototype.scale;
+/**
+ * @type {Object}
+ */
+CharbaScriptableOptionsContext.prototype.tick;
+/**
+ * @type {number}
+ */
+CharbaScriptableOptionsContext.prototype.index;
+/**
+ * @type {Object}
+ */
+CharbaScriptableOptionsContext.prototype.options;

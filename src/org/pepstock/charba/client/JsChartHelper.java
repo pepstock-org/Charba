@@ -33,14 +33,14 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class JsCallbacksHelper {
+final class JsChartHelper {
 	// static instance for singleton
-	private static final JsCallbacksHelper INSTANCE = new JsCallbacksHelper();
+	private static final JsChartHelper INSTANCE = new JsChartHelper();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private JsCallbacksHelper() {
+	private JsChartHelper() {
 		// to be sure that CHART.JS java script object is injected
 		// some methods are calling CHART.JS for this reason is mandatory
 		// to include also chart.js
@@ -56,7 +56,7 @@ final class JsCallbacksHelper {
 	 * 
 	 * @return helper instance.
 	 */
-	static JsCallbacksHelper get() {
+	static JsChartHelper get() {
 		return INSTANCE;
 	}
 
@@ -68,7 +68,7 @@ final class JsCallbacksHelper {
 	 * @return an unmodifiable list of legend labels or an empty list if chart is not initialized.
 	 */
 	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
-		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.nativeObject());
+		ArrayObject array = NativeJsChartHelper.generateDefaultLabels(chart, options.nativeObject());
 		return ArrayListHelper.unmodifiableList(array, LegendLabelItem.FACTORY);
 	}
 
@@ -85,7 +85,7 @@ final class JsCallbacksHelper {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes legend event callback
-			NativeJsCallbacksHelper.invokeDefaultLegendEvent(options.nativeObject(), key.value(), context, event, item);
+			NativeJsChartHelper.invokeDefaultLegendEvent(options.nativeObject(), key.value(), context, event, item);
 		}
 	}
 
@@ -102,7 +102,7 @@ final class JsCallbacksHelper {
 		// checks if key is consistent
 		if (Key.isValid(key)) {
 			// invokes chart event callback
-			NativeJsCallbacksHelper.invokeDefaultChartEvent(options.nativeObject(), key.value(), context, event, items);
+			NativeJsChartHelper.invokeDefaultChartEvent(options.nativeObject(), key.value(), context, event, items);
 		}
 	}
 

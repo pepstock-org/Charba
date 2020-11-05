@@ -100,7 +100,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 			// checks if consistent with next operations
 			if (datasetItem != null && !datasetItem.getElements().isEmpty()) {
 				// gets dataset element
-				DatasetElement item = datasetItem.getElements().get(context.getIndex());
+				DatasetElement item = datasetItem.getElements().get(context.getDataIndex());
 				// creates the dataset reference item
 				DatasetReference referenceItem = new DatasetReference(context, item);
 				// creates the event

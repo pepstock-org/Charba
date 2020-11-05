@@ -15,17 +15,19 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Used inside of a {@link TooltipItem}, it wraps the parsed data values for the given tooltip item.
+ * It wraps the parsed data values for the given item point.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipDataPoint extends NativeObjectContainer {
+public final class DatasetPoint extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -58,13 +60,22 @@ public final class TooltipDataPoint extends NativeObjectContainer {
 		}
 
 	}
+	
+	/**
+	 * Creates the object with a native object passed as argument.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public DatasetPoint(CallbacksEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
 
 	/**
 	 * Creates the object with a native object passed as argument.
 	 * 
 	 * @param nativeObject native object which maps a data point
 	 */
-	TooltipDataPoint(NativeObject nativeObject) {
+	DatasetPoint(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

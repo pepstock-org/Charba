@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -93,6 +94,15 @@ public class DatasetElement extends NativeObjectContainer {
 
 	// dataset item options instance
 	private final DatasetElementOptions options;
+	
+	/**
+	 * Creates the object with a native object passed as argument.
+	 * 
+	 * @param envelop envelop of native java script object which contains all properties.
+	 */
+	public DatasetElement(CallbacksEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
@@ -100,9 +110,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
 	 */
 	protected DatasetElement(ControllersEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// sets the dataset item options
-		options = new DatasetElementOptions(getValue(Property.OPTIONS));
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

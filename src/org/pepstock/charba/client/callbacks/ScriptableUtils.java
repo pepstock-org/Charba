@@ -194,7 +194,7 @@ public final class ScriptableUtils {
 			// is gradient instance
 			Gradient gradient = (Gradient) result;
 			// then it must be translated into a canvas gradient
-			return DatasetCanvasObjectFactory.get().createGradient(context.getChart(), gradient, context.getDatasetIndex(), context.getIndex());
+			return DatasetCanvasObjectFactory.get().createGradient(context.getChart(), gradient, context.getDatasetIndex(), context.getDataIndex());
 		}
 		return checkedResult;
 	}

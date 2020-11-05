@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.callbacks.AbstractScriptableContext;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Contains all info for every item of tooltip.<br>
@@ -28,7 +30,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TooltipItem extends AbstractScriptableContext {
+public class TooltipItem extends NativeObjectContainer {
 	
 	/**
 	 * Public factory to create a tooltip item from a native object.
@@ -40,6 +42,7 @@ public class TooltipItem extends AbstractScriptableContext {
 	 */
 	private enum Property implements Key
 	{
+		CHART("chart"),
 		LABEL("label"),
 		DATA_POINT("dataPoint"),
 		FORMATTED_VALUE("formattedValue"),
@@ -72,7 +75,7 @@ public class TooltipItem extends AbstractScriptableContext {
 	}
 
 	// reference to data point
-	private final TooltipDataPoint dataPoint;
+	private final DatasetPoint dataPoint;
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
@@ -82,7 +85,22 @@ public class TooltipItem extends AbstractScriptableContext {
 	TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores the data point
-		this.dataPoint = new TooltipDataPoint(getValue(Property.DATA_POINT));
+		this.dataPoint = new DatasetPoint(getValue(Property.DATA_POINT));
+	}
+	
+	/**
+	 * Returns the CHARBA chart instance.
+	 * 
+	 * @return the CHARBA chart instance
+	 */
+	public final IsChart getChart() {
+		// checks if chart is inside the context
+		if (isType(Property.CHART, ObjectType.OBJECT)) {
+			return getNativeChart(Property.CHART).getChart();
+		}
+		// if here the context is not consistent
+		// returns null
+		return null;
 	}
 
 	/**
@@ -99,7 +117,7 @@ public class TooltipItem extends AbstractScriptableContext {
 	 * 
 	 * @return the parsed data values for the given {@link TooltipItem#getDatasetIndex()} and {@link TooltipItem#getDataIndex()}
 	 */
-	public final TooltipDataPoint getDataPoint() {
+	public final DatasetPoint getDataPoint() {
 		return dataPoint;
 	}
 

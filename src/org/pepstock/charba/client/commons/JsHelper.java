@@ -57,6 +57,23 @@ public final class JsHelper {
 	 * @param key the string name of the property to test.
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
+	public boolean exist(Object object, Key key) {
+		// checks consistency of arguments
+		if (object != null && Key.isValid(key)) {
+			// checks if the java script object has got the property by key
+			return NativeJsHelper.exist(object, key.value());
+		}
+		// if here the arguments are not consistent
+		return false;
+	}
+	
+	/**
+	 * Returns a boolean indicating whether the object has the specified property as its own property.
+	 * 
+	 * @param object the object on which to search the property.
+	 * @param key the string name of the property to test.
+	 * @return boolean indicating whether or not the object has the specified property as own property.
+	 */
 	public boolean has(Object object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {

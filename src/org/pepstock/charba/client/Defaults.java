@@ -257,7 +257,7 @@ public final class Defaults {
 		// checks if argument is consistent
 		if (chart != null && IsChart.isValid(chart.getChart())) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(chart, getChartOptions(chart.getChart().getType()));
+			return JsChartHelper.get().generateDefaultLabels(chart, getChartOptions(chart.getChart().getType()));
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -274,7 +274,7 @@ public final class Defaults {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart) && Charts.hasNative(chart)) {
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultLabels(Charts.getNative(chart), getChartOptions(chart.getType()));
+			return JsChartHelper.get().generateDefaultLabels(Charts.getNative(chart), getChartOptions(chart.getType()));
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
@@ -316,7 +316,7 @@ public final class Defaults {
 				// gets array object
 				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), array);
+				JsChartHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), array);
 			}
 		}
 	}
@@ -365,7 +365,7 @@ public final class Defaults {
 				// creates an envelop to load the native object
 				ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
 				// invokes the onclick legend out of the box
-				JsCallbacksHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
+				JsChartHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
 			}
 		}
 	}

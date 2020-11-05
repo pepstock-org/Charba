@@ -91,7 +91,7 @@ public final class DatasetReference extends NativeObjectContainer {
 		}
 		// stores dataset and data index by content
 		setValue(Property.DATASET_INDEX, context.getDatasetIndex());
-		setValue(Property.INDEX, context.getIndex());
+		setValue(Property.INDEX, context.getDataIndex());
 		// stores dataset item
 		setValue(Property.ELEMENT, item);
 		// sets the dataset item element

@@ -31,12 +31,22 @@
     /*
 	 Returns a boolean indicating whether the object has the specified property as its own property.
 	  
+	 @param obj the object on which to search the property.
+	 @param key the string name of the property to test.
+	 @return boolean indicating whether or not the object has the specified property as own property.
+	*/
+	CharbaJsHelper.exist = function(obj, key){
+		return key in obj;
+	}
+    /*
+	 Returns a boolean indicating whether the object has the specified property as its own property.
+	  
 	 @param object the object on which to search the property.
 	 @param key the string name of the property to test.
 	 @return boolean indicating whether or not the object has the specified property as own property.
 	*/
-	CharbaJsHelper.has = function(object, key){
-		return Object.prototype.hasOwnProperty.call(object, key);
+	CharbaJsHelper.has = function(obj, key){
+		return Object.prototype.hasOwnProperty.call(obj, key);
 	}
     /*
 	 Returns the java script object type of the object.
@@ -310,7 +320,7 @@
 		JSCallbacksHelper is an object with a set of static methods used as utility
 		and needed to act on CHART.JS default callbacks.   
 	*/
-    function CharbaJsCallbacksHelper() {}
+    function CharbaJsChartHelper() {}
     /*
      Invokes the default generate labels callbacks from CHART.JS.
 
@@ -318,7 +328,7 @@
 	 @param options chart options where generate legend callback is stored
 	 @return an array of labels
     */
-    CharbaJsCallbacksHelper.generateDefaultLabels = function(chart, options) {
+    CharbaJsChartHelper.generateDefaultLabels = function(chart, options) {
     	if (options != null && typeof options.legend === 'object' && typeof options.legend.labels === 'object' && typeof options.legend.labels.generateLabels === 'function'){
     		return options.legend.labels.generateLabels.call(chart, chart);
      	}
@@ -333,7 +343,7 @@
 	 @param event native event from user interface
 	 @param item legend item native  
     */
-    CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {
+    CharbaJsChartHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {
     	if (options != null && typeof options.legend === 'object' && typeof options.legend[key] === 'function'){
     		options.legend[key].call(chart, event, item, chart.legend);
     	}
@@ -347,7 +357,7 @@
 	 @param event native event from user interface
 	 @param items array of datasets native objects  
     */
-    CharbaJsCallbacksHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {
+    CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {
     	if (options != null && typeof options[key] === 'function'){
     		options[key].call(chart, event, items, chart);
     	}
@@ -521,4 +531,18 @@
     */
     CharbaJsDateAdapterHelper.create = function(options) {
 		return new Chart._adapters._date(options);
-    } 
+    }
+    /*
+		CharbaJsCallbacksHelper is an object to wrap native object into native scriptable context  
+	*/
+    function CharbaJsCallbacksHelper() {} 
+    /*
+	 Returns a native context from a native object.
+	  
+	 @param obj native objetc to wrap.
+	 @return a native context instance
+    */    
+    CharbaJsCallbacksHelper.wrap = function(obj){
+		return obj;
+	}
+    

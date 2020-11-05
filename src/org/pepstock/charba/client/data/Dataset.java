@@ -1232,11 +1232,11 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			// calls callback
 			Object result = callback.invoke(chart, context);
 			if (result instanceof Gradient) {
-				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getIndex());
+				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getDataIndex());
 				Gradient gradient = (Gradient) result;
 				callbackGradientsContainer.put(key, gradient);
 			} else if (result instanceof Pattern) {
-				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getIndex());
+				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getDataIndex());
 				Pattern pattern = (Pattern) result;
 				callbackPatternsContainer.put(key, pattern);
 			}

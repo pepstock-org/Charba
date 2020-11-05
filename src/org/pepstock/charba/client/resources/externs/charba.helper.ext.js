@@ -24,6 +24,12 @@ function CharbaJsHelper() {}
  * @param {string} key 
  * @return {boolean}
  */
+CharbaJsHelper.exist = function(object, key) {};
+/**
+ * @param {*} object
+ * @param {string} key 
+ * @return {boolean}
+ */
 CharbaJsHelper.has = function(object, key) {};
 /**
  * @param {*} object
@@ -174,15 +180,15 @@ CharbaJsPositionerHelper.unregister = function(name) {};
 CharbaJsPositionerHelper.invoke = function(name, context, datasetItems, eventPoint) {};
 /**
  * @constructor
- * @return {CharbaJsCallbacksHelper}
+ * @return {CharbaJsChartHelper}
  */	
-function CharbaJsCallbacksHelper() {}	  
+function CharbaJsChartHelper() {}	  
 /**
  * @param {Chart} chart 
  * @param {Object} options 
  * @return {Array}
  */
-CharbaJsCallbacksHelper.generateDefaultLabels = function(chart, options) {};
+CharbaJsChartHelper.generateDefaultLabels = function(chart, options) {};
 /**
  * @param {Object} options 
  * @param {string} key 
@@ -191,7 +197,7 @@ CharbaJsCallbacksHelper.generateDefaultLabels = function(chart, options) {};
  * @param {Object} item 
  * @return {undefined}
  */
-CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {};
+CharbaJsChartHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {};
 /**
  * @param {Object} options 
  * @param {string} key 
@@ -200,7 +206,7 @@ CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart,
  * @param {Array} items 
  * @return {undefined}
  */
-CharbaJsCallbacksHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {};
+CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {};
 /**
  * @constructor
  * @return {CharbaJsZoomHelper}
@@ -304,3 +310,13 @@ function CharbaJsDateAdapterHelper() {}
  * @return {CharbaChartAdaptersDate}
  */
 CharbaJsDateAdapterHelper.create = function(object) {};
+/**
+ * @constructor
+ * @return {CharbaJsCallbacksHelper}
+ */	
+function CharbaJsCallbacksHelper() {}
+/**
+ * @param {Object} object 
+ * @return {CharbaScriptableOptionsContext}
+ */
+CharbaJsCallbacksHelper.wrap = function(object) {};

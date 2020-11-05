@@ -29,13 +29,13 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.JS_CALLBACKS_HELPER, namespace = JsPackage.GLOBAL)
-final class NativeJsCallbacksHelper {
+@JsType(isNative = true, name = NativeName.JS_CHART_HELPER, namespace = JsPackage.GLOBAL)
+final class NativeJsChartHelper {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private NativeJsCallbacksHelper() {
+	private NativeJsChartHelper() {
 		// do nothing
 	}
 

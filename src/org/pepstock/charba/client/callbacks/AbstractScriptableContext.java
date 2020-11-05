@@ -16,10 +16,9 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Abstract implementation to map the context used as argument on options, datasets and scales callback.<br>
@@ -27,8 +26,8 @@ import org.pepstock.charba.client.commons.ObjectType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractScriptableContext extends NativeObjectContainer {
-
+public abstract class AbstractScriptableContext {
+	
 	/**
 	 * Name of properties of native object.
 	 */
@@ -59,13 +58,37 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer {
 		}
 	}
 
+	// instance of native context
+	private final NativeContext context;
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	protected AbstractScriptableContext(NativeObject nativeObject) {
-		super(nativeObject);
+		// checks if object is consistent
+		if (nativeObject == null) {
+			throw new IllegalArgumentException("Native context argument is null");
+		}
+		// casts the native object to the context
+		// this is because the context passed by CHART.JS
+		// is using inheritance on prototypes
+		this.context = JsCallbacksHelper.get().wrap(nativeObject);
+		// the chart must be there
+		if (!exist(Property.CHART)) {
+			// if not, exception
+			throw new IllegalArgumentException("Unable to retrieve the chart instance and the context does not seem to be consistent");
+		}
+	}
+
+	/**
+	 * Returns the native context of the scriptable option.
+	 * 
+	 * @return the native context of the scriptable option
+	 */
+	final NativeContext getContext() {
+		return context;
 	}
 
 	/**
@@ -74,13 +97,17 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer {
 	 * @return the CHARBA chart instance
 	 */
 	public final IsChart getChart() {
-		// checks if chart is inside the context
-		if (isType(Property.CHART, ObjectType.OBJECT)) {
-			return getNativeChart(Property.CHART).getChart();
-		}
-		// if here the context is not consistent
-		// returns null
-		return null;
+		return context.getChart().getChart();
+	}
+
+	/**
+	 * Returns a boolean indicating whether the context has the specified property as its own property.
+	 * 
+	 * @param key the string name of the property to test.
+	 * @return boolean indicating whether or not the context has the specified property as own property.
+	 */
+	final boolean exist(Key key) {
+		return JsHelper.get().exist(context, key);
 	}
 
 }

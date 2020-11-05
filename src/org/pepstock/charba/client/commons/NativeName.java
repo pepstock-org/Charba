@@ -76,6 +76,11 @@ public final class NativeName {
 	public static final String JS_POSITIONER_HELPER = "CharbaJsPositionerHelper";
 
 	/**
+	 * Constant to bind java script object as JsChartsHelper with name <b>{@value JS_CHART_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_CHART_HELPER = "CharbaJsChartHelper";
+
+	/**
 	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JS_CALLBACKS_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
@@ -122,6 +127,11 @@ public final class NativeName {
 	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
 	 */
 	public static final String CHART_CONTROLLER_CONTEXT = "CharbaControllerContext";
+	
+	/**
+	 * Constant to bind java script object as chart scriptable options context with name <b>{@value CHART_SCRIPTABLE_OPTIONS_CONTEXT}</b>, (internal of Charba).
+	 */
+	public static final String CHART_SCRIPTABLE_OPTIONS_CONTEXT = "CharbaScriptableOptionsContext";
 
 	/**
 	 * Constant to bind java script object as window with name <b>{@value WINDOW}</b>.

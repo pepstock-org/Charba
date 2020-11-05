@@ -109,7 +109,7 @@ public final class Percentage {
 				// and then cast it
 				HasDataPoints hasDataPoints = (HasDataPoints) ds;
 				// gets the data points at data index
-				DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
+				DataPoint point = hasDataPoints.getDataPoints().get(context.getDataIndex());
 				// adds the Y value to the total
 				total = total + Math.abs(point.getY());
 			} else if (DataType.ARRAYS.equals(ds.getDataType()) && ds instanceof BarDataset) {
@@ -117,13 +117,13 @@ public final class Percentage {
 				// and then cast it
 				BarDataset barDataset = (BarDataset) ds;
 				// gets the floating data
-				FloatingData data = barDataset.getFloatingData().get(context.getIndex());
+				FloatingData data = barDataset.getFloatingData().get(context.getDataIndex());
 				// adds the absolute differences between start and end
 				total = total + data.getAbsValue();
 			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 				// if here, the dataset has got data as doubles
 				// then it get the double at data index
-				double data = ds.getData().get(context.getIndex());
+				double data = ds.getData().get(context.getDataIndex());
 				// adds it to total
 				total = total + Math.abs(data);
 			}

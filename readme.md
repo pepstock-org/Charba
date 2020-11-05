@@ -227,6 +227,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `showLines` property to `showLine` property for line and radar chart options and configuration.
    * add `usePointStyle` property to `Tooltips` class for options and configuration.
    * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
+   * change the structure of scriptable options context.
+     * remove `getIndex` method from `ScriptableContext` class, use getDataIndex instead.
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
