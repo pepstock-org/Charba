@@ -17,9 +17,9 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Utility to manage the patterns inside the configuration item of dataset, setting to the specific properties of the elements.<br>
@@ -56,11 +56,11 @@ final class PatternsContainer extends AbstractContainer<Pattern> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.AbstractContainer#createCallback(org.pepstock.charba.client.commons.Key)
+	 * @see org.pepstock.charba.client.data.AbstractContainer#createCallback(org.pepstock.charba.client.data.Dataset.CanvasObjectKey)
 	 */
 	@Override
-	AbstractCanvasObjectCallback<Pattern> createCallback(Key property) {
-		return new DatasetPatternCallback(this, property);
+	AbstractCanvasObjectCallback<Pattern> createCallback(CanvasObjectKey key) {
+		return new DatasetPatternCallback(this, key);
 	}
 
 	/**

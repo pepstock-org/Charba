@@ -33,7 +33,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 public final class ScriptableUtils {
 
 	/**
-	 * To avoid any instantiatiopn
+	 * To avoid any instantiation
 	 */
 	private ScriptableUtils() {
 		// do nothing

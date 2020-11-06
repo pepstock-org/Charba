@@ -137,14 +137,58 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	/**
 	 * Name of common properties of native object related to a dataset.
 	 */
+	protected enum CanvasObjectProperty implements CanvasObjectKey
+	{
+		BACKGROUND_COLOR("backgroundColor", true),
+		BORDER_COLOR("borderColor", false),
+		HOVER_BACKGROUND_COLOR("hoverBackgroundColor", true),
+		HOVER_BORDER_COLOR("hoverBorderColor", false);
+
+		// name value of property
+		private final String value;
+		// flag for managing patterns
+		private final boolean hasPattern;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 * @param hasPattern <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them
+		 */
+		private CanvasObjectProperty(String value, boolean hasPattern) {
+			this.value = value;
+			this.hasPattern = hasPattern;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.data.Dataset.CanvasObjectKey#hasPattern()
+		 */
+		@Override
+		public boolean hasPattern() {
+			return hasPattern;
+		}
+
+	}
+
+	/**
+	 * Name of common properties of native object related to a dataset.
+	 */
 	protected enum CommonProperty implements Key
 	{
 		CLIP("clip"),
-		BACKGROUND_COLOR("backgroundColor"),
-		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
-		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
-		HOVER_BORDER_COLOR("hoverBorderColor"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth");
 
 		// name value of property
@@ -249,16 +293,16 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), backgroundColorCallback, CommonProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), backgroundColorCallback, CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), borderColorCallback, CommonProperty.BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), borderColorCallback, CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
 		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
 		hoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CommonProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString(), true));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CommonProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString(), false));
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
 		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 		// invokes callback
@@ -425,7 +469,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 		// here must be stored!!
-		setValue(key, getPatternsContainer().getCallbackProxy(key));
+		setValue(key, getPatternsContainer().getProxy(key));
 	}
 
 	/**
@@ -439,7 +483,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
 		// here must be stored!!
-		setValue(key, getGradientsContainer().getCallbackProxy(key));
+		setValue(key, getGradientsContainer().getProxy(key));
 	}
 
 	/**
@@ -476,12 +520,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (backgroundColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(CommonProperty.BACKGROUND_COLOR);
+			resetBeingCallback(CanvasObjectProperty.BACKGROUND_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(CommonProperty.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
+			setValue(CanvasObjectProperty.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(CommonProperty.BACKGROUND_COLOR);
+			remove(CanvasObjectProperty.BACKGROUND_COLOR);
 		}
 	}
 
@@ -505,12 +549,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (borderColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(CommonProperty.BORDER_COLOR);
+			resetBeingCallback(CanvasObjectProperty.BORDER_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(CommonProperty.BORDER_COLOR, borderColorCallbackProxy.getProxy());
+			setValue(CanvasObjectProperty.BORDER_COLOR, borderColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(CommonProperty.BORDER_COLOR);
+			remove(CanvasObjectProperty.BORDER_COLOR);
 		}
 	}
 
@@ -561,12 +605,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (hoverBackgroundColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(CommonProperty.HOVER_BACKGROUND_COLOR);
+			resetBeingCallback(CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(CommonProperty.HOVER_BACKGROUND_COLOR, hoverBackgroundColorCallbackProxy.getProxy());
+			setValue(CanvasObjectProperty.HOVER_BACKGROUND_COLOR, hoverBackgroundColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(CommonProperty.HOVER_BACKGROUND_COLOR);
+			remove(CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 		}
 	}
 
@@ -590,12 +634,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if callback is consistent
 		if (hoverBorderColorCallback != null) {
 			// resets previous setting
-			resetBeingCallback(CommonProperty.HOVER_BORDER_COLOR);
+			resetBeingCallback(CanvasObjectProperty.HOVER_BORDER_COLOR);
 			// adds the callback proxy function to java script object
-			setValue(CommonProperty.HOVER_BORDER_COLOR, hoverBorderColorCallbackProxy.getProxy());
+			setValue(CanvasObjectProperty.HOVER_BORDER_COLOR, hoverBorderColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(CommonProperty.HOVER_BORDER_COLOR);
+			remove(CanvasObjectProperty.HOVER_BORDER_COLOR);
 		}
 	}
 
@@ -1149,10 +1193,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @param callback callback to invoke
 	 * @param property property of dataset used to store the color
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
-	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
-	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, Key property, String defaultValue, boolean hasPattern) {
+	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, CanvasObjectKey property, String defaultValue) {
 		// checks if the context and chart are correct
 		if (context != null && IsChart.isValid(context.getChart())) {
 			// gets chart instance
@@ -1168,7 +1211,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 				Pattern pattern = (Pattern) result;
 				callbackPatternsContainer.put(key, pattern);
 			}
-			return ScriptableUtils.handleCallbackResultAsColor(context, result, defaultValue, hasPattern);
+			return ScriptableUtils.handleCallbackResultAsColor(context, result, defaultValue, property.hasPattern());
 		}
 		// if here, chart, callback or result of callback are not consistent
 		return defaultValue;
@@ -1227,6 +1270,23 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
+	}
+
+	/**
+	 * Interface to map color property which can or can not manage {@link Pattern} or {@link CanvasPatternItem}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	interface CanvasObjectKey extends Key {
+
+		/**
+		 * Returns <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
+		 * 
+		 * @return <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them
+		 */
+		boolean hasPattern();
+
 	}
 
 	/**

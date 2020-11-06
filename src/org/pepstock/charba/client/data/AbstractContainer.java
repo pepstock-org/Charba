@@ -33,6 +33,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Common utility to manage inside the configuration items, the canvas objects (pattern or gradient), set to the specific properties of the elements.<br>
@@ -96,23 +97,24 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	 * @return the factory needed to creates canvas objects
 	 */
 	abstract NativeObjectContainerFactory<T> getFactory();
-	
+
 	/**
-	 * FIXME
-	 * @param property
-	 * @return
+	 * Creates a callback to manage the canvas object.<br>
+	 * This is delegated to the implementation of container.
+	 * 
+	 * @param key the property related to the canvas object to set into dataset
+	 * @return a callback to manage the canvas object
 	 */
-	abstract AbstractCanvasObjectCallback<T> createCallback(Key property);
+	abstract AbstractCanvasObjectCallback<T> createCallback(CanvasObjectKey key);
 
 	/**
 	 * Stores and array of canvas object into native java script object.
 	 * 
 	 * @param key property name to use to stored it.
 	 * @param objects array of canvas object
-	 * @param defaultValue FIXME
+	 * @param defaultValue default value for the dataset property, being a color, always as string
 	 */
-	final void setObjects(Key key, ArrayObject objects, String defaultValue) {
-		// checks key
+	final void setObjects(CanvasObjectKey key, ArrayObject objects, String defaultValue) {
 		// checks if the value is consistent
 		if (objects != null) {
 			// stores the array
@@ -189,30 +191,32 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	final List<Key> getKeys() {
 		return Collections.unmodifiableList(keys());
 	}
-	
+
 	/**
-	 * FIXME
-	 * @param key
-	 * @return
+	 * Returns the function <code>proxy</code> implemented into additional java script source, created for the specific key.
+	 * 
+	 * @param key the property related to the canvas object to set into dataset
+	 * @return the proxy function <code>proxy</code> implemented into additional java script source
 	 */
-	final CallbackProxy.Proxy getCallbackProxy(Key key) {
+	final CallbackProxy.Proxy getProxy(Key key) {
 		// checks key consistency and
 		// checks if wrapper has been stored
 		if (callbackWrappers.containsKey(Key.checkAndGetIfValid(key).value())) {
 			// returns the callback proxy
-			return callbackWrappers.get(key.value()).getCallbackProxy().getProxy();
+			return callbackWrappers.get(key.value()).getProxy();
 		}
 		// if here, the callback wrapper does not exist, returns null
 		return null;
 	}
-	
+
 	/**
-	 * FIXME
+	 * Internal class to wrap the dataset callack to manage a key of a dataset.
+	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	private static final class CallbackWrapper {
-		
+
 		// ---------------------------
 		// -- CALLBACKS PROXIES ---
 		// ---------------------------
@@ -221,16 +225,21 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		// dataset instance
 		private final Dataset dataset;
 		// property instance
-		private final Key property;
+		private final CanvasObjectKey property;
 		// callback instance
 		private final Scriptable<Object> callback;
 		// default color
 		private final String defaultValue;
-		
+
 		/**
-		 * FIXME
+		 * Creates the object, getting all arguments n order to manage the dataset callback.
+		 * 
+		 * @param dataset dataset instance where the callback must be stored
+		 * @param property the property related to the canvas object to set into dataset
+		 * @param callback dataset callback instance to manage the color
+		 * @param defaultValue default value for the dataset property, being a color, always as string
 		 */
-		private CallbackWrapper(Dataset dataset, Key property, Scriptable<Object> callback, String defaultValue) {
+		private CallbackWrapper(Dataset dataset, CanvasObjectKey property, Scriptable<Object> callback, String defaultValue) {
 			this.dataset = dataset;
 			this.property = property;
 			this.callback = callback;
@@ -239,46 +248,54 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// gets value calling callback
-			// FIXME has Pattern always a true is not correct
-			callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), getCallback(), getProperty(), getDefaultValue(), true));
+			callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), getCallback(), getProperty(), getDefaultValue()));
 		}
 
 		/**
-		 * @return the callbackProxy
+		 * Returns the function <code>proxy</code> implemented into additional java script source, created for the specific key.
+		 * 
+		 * @return the function <code>proxy</code> implemented into additional java script source, created for the specific key
 		 */
-		CallbackProxy<ScriptableFunctions.ProxyObjectCallback> getCallbackProxy() {
-			return callbackProxy;
+		CallbackProxy.Proxy getProxy() {
+			return callbackProxy.getProxy();
 		}
 
 		/**
-		 * @return the dataset
+		 * Returns the dataset instance where the callback must be stored.
+		 * 
+		 * @return the dataset instance where the callback must be stored
 		 */
 		private Dataset getDataset() {
 			return dataset;
 		}
 
 		/**
-		 * @return the property
+		 * Returns the property related to the canvas object to set into dataset.
+		 * 
+		 * @return the property related to the canvas object to set into dataset
 		 */
-		private Key getProperty() {
+		private CanvasObjectKey getProperty() {
 			return property;
 		}
 
 		/**
-		 * @return the callback
+		 * Returns the dataset callback instance to manage the color.
+		 * 
+		 * @return the dataset callback instance to manage the color
 		 */
 		private Scriptable<Object> getCallback() {
 			return callback;
 		}
 
 		/**
-		 * @return the defaultValue
+		 * Returns the default value for the dataset property, being a color.
+		 * 
+		 * @return default value for the dataset property, being a color
 		 */
 		private String getDefaultValue() {
 			return defaultValue;
 		}
-		
-		
+
 	}
 
 }

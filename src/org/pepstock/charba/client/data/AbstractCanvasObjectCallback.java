@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
@@ -23,11 +22,14 @@ import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
- * FIXME
+ * Callback to set a {@link CanvasObject} as background color.<br>
+ * This is used and set into dataset when a canvas object is set for a background color. 
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of canvas object
  *
  */
 abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements BackgroundColorCallback {
@@ -36,16 +38,16 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 	private final Key property;
 	// canvas object container instance
 	private final AbstractContainer<T> container;
-	// cache values of objects
-	private List<T> objects = Collections.emptyList();
-	// flag for first execution
-	private boolean firstExecution = true;
+	// cache values of canvas objects
+	private List<T> objects = null;
 
 	/**
-	 * FIXME
-	 * @param property
+	 * Creates the callback using the container of canvas object and the property related to the canvas object to set into dataset.
+	 * 
+	 * @param container container of canvas object instance.
+	 * @param property the property related to the canvas object to set into dataset
 	 */
-	AbstractCanvasObjectCallback(AbstractContainer<T> container, Key property) {
+	AbstractCanvasObjectCallback(AbstractContainer<T> container, CanvasObjectKey property) {
 		this.property = Key.checkAndGetIfValid(property);
 		this.container = container;
 	}
@@ -65,7 +67,11 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 			// checks if dataset and the canvas object container are consistent
 			if (dataset != null && !container.isEmpty() && container.hasObjects(property)) {
 				// checks and gets all objects for the key
-				checkAndSetObjects();
+				// checks if container is changed
+				if (objects == null || container.isChanged()) {
+					// reloads the objects list
+					objects = container.getObjects(property);
+				}
 				// checks if data index is consistent
 				if (context.getDataIndex() >= 0) {
 					// get the module for object index
@@ -78,16 +84,9 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 				return objects.get(0);
 			}
 		}
+		// if here, arguments are not consistent
+		// datasets without any canvas objects
 		return null;
-	}
-	
-	private void checkAndSetObjects() {
-		//checks if container is changed
-		if (container.isChanged() || firstExecution) {
-			objects = container.getObjects(property);
-			// sets first execution flag
-			firstExecution = false;
-		}
 	}
 
 }

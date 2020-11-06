@@ -45,7 +45,7 @@ public final class CallbackProxy<T> {
 	}
 
 	/**
-	 * Gets the function <code>proxy</code> implemented into additional java script source.
+	 * Returns the function <code>proxy</code> implemented into additional java script source.
 	 * 
 	 * @return the proxy function <code>proxy</code> implemented into additional java script source.
 	 */
