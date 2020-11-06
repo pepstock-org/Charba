@@ -80,7 +80,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns <code>true</code> if the element is active.
 	 * 
-	 * @return <code>true</code> if the element is active. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if the element is active.
 	 */
 	public final boolean isActive() {
 		return getValue(Property.ACTIVE, UndefinedValues.BOOLEAN);
@@ -89,7 +89,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the full width in pixel.
 	 * 
-	 * @return the full width in pixel. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return the full width in pixel.
 	 */
 	public final boolean isFullWidth() {
 		return getValue(Property.FULL_WIDTH, UndefinedValues.BOOLEAN);
@@ -98,7 +98,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the position of node.
 	 * 
-	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
+	 * @return the position of node.
 	 */
 	public final Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), Position.TOP);
@@ -107,7 +107,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the weight.
 	 * 
-	 * @return the weight. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the weight.
 	 */
 	public final double getWeight() {
 		return getValue(Property.WEIGHT, UndefinedValues.DOUBLE);
@@ -116,7 +116,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the max width in pixel.
 	 * 
-	 * @return the max width in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the max width in pixel.
 	 */
 	public final double getMaxWidth() {
 		return getValue(Property.MAX_WIDTH, UndefinedValues.DOUBLE);
@@ -125,7 +125,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the max height in pixel.
 	 * 
-	 * @return the max height in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the max height in pixel.
 	 */
 	public final double getMaxHeight() {
 		return getValue(Property.MAX_HEIGHT, UndefinedValues.DOUBLE);
@@ -134,7 +134,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding top in pixel.
 	 */
 	public final int getPaddingTop() {
 		return getValue(Property.PADDING_TOP, UndefinedValues.INTEGER);
@@ -143,7 +143,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding right in pixel.
 	 */
 	public final int getPaddingRight() {
 		return getValue(Property.PADDING_RIGHT, UndefinedValues.INTEGER);
@@ -152,7 +152,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding bottom in pixel.
 	 */
 	public final int getPaddingBottom() {
 		return getValue(Property.PADDING_BOTTOM, UndefinedValues.INTEGER);
@@ -161,7 +161,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the padding left in pixel.
 	 */
 	public final int getPaddingLeft() {
 		return getValue(Property.PADDING_LEFT, UndefinedValues.INTEGER);

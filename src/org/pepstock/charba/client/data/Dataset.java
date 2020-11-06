@@ -720,7 +720,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	/**
 	 * Returns if the dataset at first drawing will appear or not.
 	 * 
-	 * @return if the dataset at first drawing will appear or not. Default is <code>false</code>
+	 * @return if the dataset at first drawing will appear or not.
 	 */
 	public final boolean isHidden() {
 		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);

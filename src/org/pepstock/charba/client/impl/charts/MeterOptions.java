@@ -208,7 +208,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * Returns if the display will be shown based on the animation of chart.
 	 * 
-	 * @return the animatedDisplay, <code>true</code> if animated, otherwise <code>false</code>. Default is <code>false</code>.
+	 * @return the animatedDisplay, <code>true</code> if animated, otherwise <code>false</code>
 	 */
 	public final boolean isAnimatedDisplay() {
 		return animatedDisplay;

@@ -88,7 +88,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns X value of event.
 	 * 
-	 * @return X value of event. Default is {@link UndefinedValues#INTEGER}.
+	 * @return X value of event.
 	 */
 	public int getX() {
 		return getValue(Property.X, UndefinedValues.INTEGER);
@@ -97,7 +97,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns Y value of event.
 	 * 
-	 * @return Y value of event. Default is {@link UndefinedValues#INTEGER}.
+	 * @return Y value of event.
 	 */
 	public int getY() {
 		return getValue(Property.Y, UndefinedValues.INTEGER);
@@ -106,7 +106,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns the event type a string.
 	 * 
-	 * @return the event type a string. Default is {@link UndefinedValues#STRING}.
+	 * @return the event type a string.
 	 */
 	public String getType() {
 		return getValue(Property.TYPE, UndefinedValues.STRING);

@@ -163,7 +163,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	/**
 	 * Returns the X location of event in pixel.
 	 * 
-	 * @return the X location of event in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the X location of event in pixel.
 	 */
 	public double getX() {
 		return getValue(Property.X, UndefinedValues.DOUBLE);
@@ -172,7 +172,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of event in pixel.
 	 * 
-	 * @return the Y location of event in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the Y location of event in pixel.
 	 */
 	public double getY() {
 		return getValue(Property.Y, UndefinedValues.DOUBLE);

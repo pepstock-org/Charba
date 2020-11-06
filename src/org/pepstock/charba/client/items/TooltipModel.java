@@ -115,7 +115,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X align location.
 	 * 
-	 * @return the X align location. Default is {@link UndefinedValues#STRING}.
+	 * @return the X align location.
 	 */
 	public String getXAlign() {
 		return getValue(Property.X_ALIGN, UndefinedValues.STRING);
@@ -124,7 +124,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y align location.
 	 * 
-	 * @return the Y align location. Default is {@link UndefinedValues#STRING}.
+	 * @return the Y align location.
 	 */
 	public String getYAlign() {
 		return getValue(Property.Y_ALIGN, UndefinedValues.STRING);
@@ -133,7 +133,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of tooltip.
 	 * 
-	 * @return the X location of tooltip. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the X location of tooltip.
 	 */
 	public int getX() {
 		return getValue(Property.X, UndefinedValues.INTEGER);
@@ -142,7 +142,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of tooltip.
 	 * 
-	 * @return the Y location of tooltip. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the Y location of tooltip.
 	 */
 	public int getY() {
 		return getValue(Property.Y, UndefinedValues.INTEGER);
@@ -151,7 +151,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the width of tooltip.
 	 * 
-	 * @return the width of tooltip. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the width of tooltip.
 	 */
 	public int getWidth() {
 		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
@@ -160,7 +160,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the height of tooltip.
 	 * 
-	 * @return the height of tooltip. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the height of tooltip.
 	 */
 	public int getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
@@ -169,7 +169,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of the tooltip arrow.
 	 * 
-	 * @return the X location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the X location of the tooltip arrow.
 	 */
 	public int getCaretX() {
 		return getValue(Property.CARET_X, UndefinedValues.INTEGER);
@@ -178,7 +178,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of the tooltip arrow.
 	 * 
-	 * @return the Y location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the Y location of the tooltip arrow.
 	 */
 	public int getCaretY() {
 		return getValue(Property.CARET_Y, UndefinedValues.INTEGER);
@@ -283,7 +283,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the opacity of tooltip.
 	 * 
-	 * @return the opacity of tooltip. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the opacity of tooltip.
 	 */
 	public double getOpacity() {
 		return getValue(Property.OPACITY, UndefinedValues.DOUBLE);

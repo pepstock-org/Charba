@@ -381,7 +381,7 @@ public final class Utilities {
 	 * Returns the cursor currently set into chart.
 	 * 
 	 * @param chart chart instance
-	 * @return the cursor currently set into chart. Default is {@link CursorType#DEFAULT}.
+	 * @return the cursor currently set into chart.
 	 */
 	public static CursorType getCursorOfChart(IsChart chart) {
 		// checks if argument is consistent

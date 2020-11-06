@@ -17,10 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.ScaleColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleBorderDashCallback;
 import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -195,7 +195,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
@@ -207,7 +207,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
 	 * @return Offset for line dashes.
 	 */

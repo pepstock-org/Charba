@@ -96,7 +96,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
@@ -105,7 +105,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
 	 * @return Offset for line dashes.
 	 */

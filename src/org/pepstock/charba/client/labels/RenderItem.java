@@ -118,7 +118,7 @@ public class RenderItem extends NativeObjectContainer {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset.
 	 */
 
 	public final int getIndex() {
@@ -128,7 +128,7 @@ public class RenderItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the data inside the dataset.
 	 * 
-	 * @return the dataset index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the data inside the dataset.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
@@ -137,7 +137,7 @@ public class RenderItem extends NativeObjectContainer {
 	/**
 	 * Returns the label for the dataset.
 	 * 
-	 * @return the label for the dataset. Default is {@link UndefinedValues#STRING}.
+	 * @return the label for the dataset.
 	 */
 	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
@@ -146,7 +146,7 @@ public class RenderItem extends NativeObjectContainer {
 	/**
 	 * Returns the percentage for the dataset.
 	 * 
-	 * @return the percentage for the dataset. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the percentage for the dataset.
 	 */
 	public final double getPercentage() {
 		return getValue(Property.PERCENTAGE, UndefinedValues.DOUBLE);

@@ -136,7 +136,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns if is an horizontal view.
 	 * 
-	 * @return <code>true</code> if is an horizontal view. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if is an horizontal view.
 	 */
 	public final boolean isHorizontal() {
 		return getValue(Property.HORIZONTAL, UndefinedValues.BOOLEAN);
@@ -145,7 +145,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the base value of dataset.
 	 * 
-	 * @return the base value of dataset. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the base value of dataset.
 	 */
 	public final double getBase() {
 		return getValue(Property.BASE, UndefinedValues.DOUBLE);
@@ -154,7 +154,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the X location of dataset item in pixel.
 	 * 
-	 * @return the X location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the X location of dataset item in pixel.
 	 */
 	public final double getX() {
 		return getValue(Property.X, UndefinedValues.DOUBLE);
@@ -163,7 +163,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of dataset item in pixel.
 	 * 
-	 * @return the Y location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the Y location of dataset item in pixel.
 	 */
 	public final double getY() {
 		return getValue(Property.Y, UndefinedValues.DOUBLE);
@@ -172,7 +172,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the width of dataset item in pixel.
 	 * 
-	 * @return the width of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the width of dataset item in pixel.
 	 */
 	public final double getWidth() {
 		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
@@ -181,7 +181,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the height of dataset item in pixel.
 	 * 
-	 * @return the height of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the height of dataset item in pixel.
 	 */
 	public final double getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
@@ -190,7 +190,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns <code>true</code> if skipped.
 	 * 
-	 * @return <code>true</code> if skipped. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if skipped.
 	 */
 	public final boolean isSkipped() {
 		return getValue(Property.SKIP, UndefinedValues.BOOLEAN);
@@ -199,7 +199,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the previous X control point of dataset item in pixel.
 	 * 
-	 * @return the previous X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the previous X control point of dataset item in pixel.
 	 */
 	public final double getControlPointPreviousX() {
 		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
@@ -208,7 +208,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the previous Y control point of dataset item in pixel.
 	 * 
-	 * @return the previous Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the previous Y control point of dataset item in pixel.
 	 */
 	public final double getControlPointPreviousY() {
 		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, UndefinedValues.DOUBLE);
@@ -217,7 +217,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the next X control point of dataset item in pixel.
 	 * 
-	 * @return the next X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the next X control point of dataset item in pixel.
 	 */
 	public final double getControlPointNextX() {
 		return getValue(Property.CONTROL_POINT_NEXT_X, UndefinedValues.DOUBLE);
@@ -226,7 +226,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the next Y control point of dataset item in pixel.
 	 * 
-	 * @return the next Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the next Y control point of dataset item in pixel.
 	 */
 	public final double getControlPointNextY() {
 		return getValue(Property.CONTROL_POINT_NEXT_Y, UndefinedValues.DOUBLE);
@@ -235,7 +235,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the angle of dataset item.
 	 * 
-	 * @return the angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the angle of dataset item.
 	 */
 	public final double getAngle() {
 		return getValue(Property.ANGLE, UndefinedValues.DOUBLE);
@@ -244,7 +244,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the start angle of dataset item.
 	 * 
-	 * @return the start angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the start angle of dataset item.
 	 */
 	public final double getStartAngle() {
 		return getValue(Property.START_ANGLE, UndefinedValues.DOUBLE);
@@ -253,7 +253,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the end angle of dataset item.
 	 * 
-	 * @return the end angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the end angle of dataset item.
 	 */
 	public double getEndAngle() {
 		return getValue(Property.END_ANGLE, UndefinedValues.DOUBLE);
@@ -271,7 +271,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the outer radius of dataset item in pixel.
 	 * 
-	 * @return the outer radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the outer radius of dataset item in pixel.
 	 */
 	public double getOuterRadius() {
 		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
@@ -280,7 +280,7 @@ public class DatasetElement extends NativeObjectContainer {
 	/**
 	 * Returns the inner radius of dataset item in pixel.
 	 * 
-	 * @return the inner radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the inner radius of dataset item in pixel.
 	 */
 	public double getInnerRadius() {
 		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);

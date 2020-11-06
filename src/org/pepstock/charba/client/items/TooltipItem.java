@@ -106,7 +106,7 @@ public class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the label for the tooltip.
 	 * 
-	 * @return the label for the tooltip. Default is {@link UndefinedValues#STRING}.
+	 * @return the label for the tooltip.
 	 */
 	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
@@ -124,7 +124,7 @@ public class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the formatted value for the tooltip.
 	 * 
-	 * @return the formatted value for the tooltip. Default is {@link UndefinedValues#STRING}.
+	 * @return the formatted value for the tooltip.
 	 */
 	public final String getFormattedValue() {
 		return getValue(Property.FORMATTED_VALUE, UndefinedValues.STRING);
@@ -133,7 +133,7 @@ public class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
@@ -142,7 +142,7 @@ public class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset.
 	 */
 	public final int getDataIndex() {
 		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);

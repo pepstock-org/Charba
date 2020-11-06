@@ -253,18 +253,18 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
-	 * @param borderDashOffset the line dash pattern offset or "phase".
+	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	@Override
 	public int getBorderDashOffset() {

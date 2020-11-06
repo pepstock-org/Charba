@@ -171,7 +171,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index.
 	 * 
-	 * @return the dataset index. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index.
 	 */
 	public int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
@@ -189,7 +189,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset order.
 	 * 
-	 * @return the dataset order. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset order. 
 	 */
 	public int getOrder() {
 		return getValue(Property.ORDER, UndefinedValues.INTEGER);
@@ -198,7 +198,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset label.
 	 * 
-	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
+	 * @return the dataset label. 
 	 */
 	public String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
@@ -207,7 +207,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the Y axis ID.
 	 * 
-	 * @return the Y axis ID. Default is {@link DefaultScaleId#Y}.
+	 * @return the Y axis ID.
 	 */
 	public IsScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
@@ -225,7 +225,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the X axis ID.
 	 * 
-	 * @return the X axis ID. Default is {@link DefaultScaleId#X}.
+	 * @return the X axis ID. 
 	 */
 	public IsScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
@@ -243,7 +243,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the R axis ID.
 	 * 
-	 * @return the R axis ID. Default is {@link DefaultScaleId#R}.
+	 * @return the R axis ID. 
 	 */
 	public IsScaleId getRAxisID() {
 		return getValue(Property.R_AXIS_ID, DefaultScaleId.R);
@@ -261,7 +261,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the value axis ID.
 	 * 
-	 * @return the value axis ID. Default is {@link DefaultScaleId#Y}.
+	 * @return the value axis ID. 
 	 */
 	public IsScaleId getValueAxisID() {
 		return getValue(Property.V_AXIS_ID, DefaultScaleId.Y);
@@ -281,7 +281,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the index axis ID.
 	 * 
-	 * @return the index axis ID. Default is {@link DefaultScaleId#X}.
+	 * @return the index axis ID. 
 	 */
 	public IsScaleId getIndexAxisID() {
 		return getValue(Property.I_AXIS_ID, DefaultScaleId.X);
@@ -301,7 +301,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset total value of data.
 	 * 
-	 * @return the dataset total value of data. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the dataset total value of data. 
 	 */
 	public double getTotal() {
 		return getValue(Property.TOTAL, UndefinedValues.DOUBLE);

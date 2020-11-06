@@ -76,7 +76,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the top of chart area.
 	 * 
-	 * @return the top of chart area. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the top of chart area.
 	 */
 	public final double getTop() {
 		return getValue(Property.TOP, UndefinedValues.DOUBLE);
@@ -85,7 +85,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the right of chart area.
 	 * 
-	 * @return the right of chart area. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the right of chart area.
 	 */
 	public final double getRight() {
 		return getValue(Property.RIGHT, UndefinedValues.DOUBLE);
@@ -94,7 +94,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the bottom of chart area.
 	 * 
-	 * @return the bottom of chart area. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the bottom of chart area.
 	 */
 	public final double getBottom() {
 		return getValue(Property.BOTTOM, UndefinedValues.DOUBLE);
@@ -103,7 +103,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the left of chart area.
 	 * 
-	 * @return the left of chart area. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the left of chart area.
 	 */
 	public final double getLeft() {
 		return getValue(Property.LEFT, UndefinedValues.DOUBLE);
@@ -112,7 +112,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the width in pixel.
 	 * 
-	 * @return the width in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the width in pixel.
 	 */
 	public final double getWidth() {
 		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
@@ -121,7 +121,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the height in pixel.
 	 * 
-	 * @return the height in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the height in pixel.
 	 */
 	public final double getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);

@@ -79,9 +79,9 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase"
+	 * @return the line dash pattern offset
 	 */
 	default int getBorderDashOffset() {
 		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();

@@ -76,7 +76,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index.
 	 * 
-	 * @return the dataset index. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index.
 	 */
 	public int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
@@ -85,7 +85,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the outer radius of dataset item in pixel.
 	 * 
-	 * @return the outer radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the outer radius of dataset item in pixel.
 	 */
 	public double getOuterRadius() {
 		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
@@ -94,7 +94,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the inner radius of dataset item in pixel.
 	 * 
-	 * @return the inner radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the inner radius of dataset item in pixel. 
 	 */
 	public double getInnerRadius() {
 		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
@@ -103,7 +103,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the offset X.
 	 * 
-	 * @return the offset X. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the offset X.
 	 */
 	public double getOffsetX() {
 		return getValue(Property.OFFSET_X, UndefinedValues.DOUBLE);
@@ -112,7 +112,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the offset Y.
 	 * 
-	 * @return the offset Y. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the offset Y.
 	 */
 	public double getOffsetY() {
 		return getValue(Property.OFFSET_Y, UndefinedValues.DOUBLE);

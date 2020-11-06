@@ -71,7 +71,7 @@ public final class FontColorItem extends RenderItem {
 	/**
 	 * Returns the fill color
 	 * 
-	 * @return the fill color. Default is {@link HtmlColor#WHITE}.
+	 * @return the fill color.
 	 */
 	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, HtmlColor.WHITE.toRGBA());
@@ -80,7 +80,7 @@ public final class FontColorItem extends RenderItem {
 	/**
 	 * Returns the fill color under the line.
 	 * 
-	 * @return the fill color under the line. Default is {@link HtmlColor#WHITE}.
+	 * @return the fill color under the line.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());

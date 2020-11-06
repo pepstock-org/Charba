@@ -116,8 +116,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	/**
 	 * Returns the type of background color has been set.
 	 * 
-	 * @return the type of background color has been set.<br>
-	 *         Default is {@link ColorType#COLOR}.
+	 * @return the type of background color has been set.
 	 */
 	ColorType getColorType() {
 		return getValue(Property.COLOR_TYPE, ColorType.values(), defaultsOptions.getColorType());

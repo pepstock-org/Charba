@@ -1061,9 +1061,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase", when element is hovered.
+	 * Sets the line dash pattern offset, when element is hovered.
 	 * 
-	 * @param borderDashOffset the line dash pattern offset or "phase", when element is hovered
+	 * @param borderDashOffset the line dash pattern offset, when element is hovered
 	 */
 	public void setHoverBorderDashOffset(int borderDashOffset) {
 		// resets callback
@@ -1073,9 +1073,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase", when element is hovered.
+	 * Returns the line dash pattern offset, when element is hovered.
 	 * 
-	 * @return the line dash pattern offset or "phase", when element is hovered
+	 * @return the line dash pattern offset, when element is hovered
 	 */
 	public int getHoverBorderDashOffset() {
 		// checks if a callback has been set for this property
@@ -1088,8 +1088,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn, when element is hovered.<br>
-	 * There are three possible values for this property and those are: butt, round and square.
+	 * Sets how the end points of every line are drawn, when element is hovered.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn, when element is hovered
 	 */
@@ -1101,8 +1100,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn, when element is hovered.<br>
-	 * There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn, when element is hovered.
 	 * 
 	 * @return how the end points of every line are drawn, when element is hovered
 	 */

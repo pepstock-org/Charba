@@ -229,7 +229,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	/**
 	 * Returns the type of background color has been set.
 	 * 
-	 * @return the type of background color has been set. Default is {@link ColorType#COLOR}.
+	 * @return the type of background color has been set.
 	 */
 	ColorType getBackgroundColorType() {
 		return getValue(Property.BACKGROUND_COLOR_TYPE, ColorType.values(), ColorType.COLOR);

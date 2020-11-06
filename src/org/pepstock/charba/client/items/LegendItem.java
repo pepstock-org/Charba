@@ -117,8 +117,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance to check if dataset or data are visible
 	 * @return <code>true</code> if this item represents a hidden dataset.<br>
-	 *         Label will be rendered with a strike-through effect.<br>
-	 *         Default is {@link UndefinedValues#BOOLEAN}.
+	 *         Label will be rendered with a strike-through effect.
 	 */
 	public final boolean isHidden(IsChart chart) {
 		// checks if chart is consistent
@@ -143,7 +142,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
@@ -152,7 +151,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart (for POLAR and PIE charts).
 	 */
 	public final int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
@@ -161,7 +160,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is {@link UndefinedValues#STRING}.
+	 * @return the label that will be displayed.
 	 */
 	public final String getText() {
 		return getValue(Property.TEXT, UndefinedValues.STRING);

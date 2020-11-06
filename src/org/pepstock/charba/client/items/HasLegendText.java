@@ -78,7 +78,7 @@ public interface HasLegendText {
 	 * Returns the label that will be displayed, as HTML.<br>
 	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
-	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
+	 * @return the label that will be displayed, as HTML.
 	 */
 	default SafeHtml getTextAsHtml() {
 		// checks if legend texter is consistent

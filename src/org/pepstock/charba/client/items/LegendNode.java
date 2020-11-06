@@ -81,7 +81,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	/**
 	 * Returns if it is in doughnut mode.
 	 * 
-	 * @return <code>true</code> it is in doughnut mode. Default is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> it is in doughnut mode.
 	 */
 	public boolean isDoughnutMode() {
 		return getValue(Property.DOUGHNUT_MODE, UndefinedValues.BOOLEAN);

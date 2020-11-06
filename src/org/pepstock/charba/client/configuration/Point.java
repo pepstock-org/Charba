@@ -47,7 +47,7 @@ public class Point extends AbstractConfigurationElement {
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return list of the radius of the point when hovered.
+	 * @return the radius of the point when hovered.
 	 */
 	public double getRadius() {
 		return getOptions().getElements().getPoint().getRadius();

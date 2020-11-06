@@ -164,7 +164,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the unique id of scale.
 	 * 
-	 * @return the unique id of scale. Default or if does not exist is Default is {@link UndefinedValues#INTEGER}.
+	 * @return the unique id of scale.
 	 */
 	public final int getCharbaId() {
 		// the unique id is under options object of scale item
@@ -195,7 +195,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the type of scale
 	 * 
-	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#CATEGORY}.
+	 * @return the type of scale.
 	 */
 	public final AxisType getType() {
 		return getValue(Property.TYPE, AxisType.values(), AxisType.CATEGORY);
@@ -204,7 +204,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale.
 	 * 
-	 * @return the max value of scale. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the max value of scale.
 	 */
 	public final double getMax() {
 		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.DOUBLE);
@@ -213,7 +213,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the minimum value of scale.
 	 * 
-	 * @return the minimum value of scale. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the minimum value of scale.
 	 */
 	public final double getMin() {
 		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.DOUBLE);
@@ -222,7 +222,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale.
 	 * 
-	 * @return the max value of scale. Default is {@link UndefinedValues#STRING}.
+	 * @return the max value of scale.
 	 */
 	public final String getMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.STRING);
@@ -231,7 +231,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the minimum value of scale.
 	 * 
-	 * @return the minimum value of scale. Default is {@link UndefinedValues#STRING}.
+	 * @return the minimum value of scale.
 	 */
 	public final String getMinAsString() {
 		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.STRING);
@@ -284,7 +284,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the label rotation ratio.
 	 * 
-	 * @return the label rotation ratio. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the label rotation ratio.
 	 */
 	public final double getLabelRotation() {
 		return getValue(Property.LABEL_ROTATION, UndefinedValues.DOUBLE);
@@ -293,7 +293,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the start value of scale.
 	 * 
-	 * @return the start value of scale. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the start value of scale.
 	 */
 	public final double getStart() {
 		return getValue(Property.START, UndefinedValues.DOUBLE);
@@ -302,7 +302,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the end value of scale.
 	 * 
-	 * @return the end value of scale. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the end value of scale.
 	 */
 	public final double getEnd() {
 		return getValue(Property.END, UndefinedValues.DOUBLE);
@@ -311,7 +311,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the X center of scale.
 	 * 
-	 * @return the X center of scale. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the X center of scale.
 	 */
 	public final int getXCenter() {
 		return getValue(Property.X_CENTER, UndefinedValues.INTEGER);
@@ -320,7 +320,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the Y center of scale.
 	 * 
-	 * @return the Y center of scale. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the Y center of scale.
 	 */
 	public final int getYCenter() {
 		return getValue(Property.Y_CENTER, UndefinedValues.INTEGER);
@@ -329,7 +329,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the drawing area dimension of scale.
 	 * 
-	 * @return the drawing area dimension of scale. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the drawing area dimension of scale.
 	 */
 	public final int getDrawingArea() {
 		return getValue(Property.DRAWING_AREA, UndefinedValues.INTEGER);
@@ -391,7 +391,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item, not mapped into {@link Position} enumeration, like for
 	 * {@link RadialAxis}.
 	 * 
-	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
+	 * @return the position of node.
 	 */
 	public final String getPositionAsString() {
 		// gets the value of native object

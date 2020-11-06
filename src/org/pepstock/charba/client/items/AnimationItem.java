@@ -92,7 +92,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the current animation frame number.
 	 * 
-	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the current animation frame number.
 	 */
 	public double getCurrentStep() {
 		return getValue(Property.CURRENT_STEP, UndefinedValues.DOUBLE);
@@ -101,7 +101,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the total number of animation frames.
 	 * 
-	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the total number of animation frames.
 	 */
 	public double getNumSteps() {
 		return getValue(Property.NUM_STEPS, UndefinedValues.DOUBLE);

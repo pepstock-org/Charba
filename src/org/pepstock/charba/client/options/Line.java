@@ -118,7 +118,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * Sets how the end points of every line are drawn.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -127,8 +127,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * Returns how the end points of every line are drawn.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -157,18 +156,18 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
-	 * @param borderDashOffset the line dash pattern offset or "phase".
+	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	@Override
 	public int getBorderDashOffset() {
@@ -239,7 +238,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	@Override
 	public CubicInterpolationMode getCubicInterpolationMode() {

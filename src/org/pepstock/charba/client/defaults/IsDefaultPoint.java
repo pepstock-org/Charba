@@ -25,7 +25,7 @@ public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointS
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return list of the radius of the point when hovered.
+	 * @return the radius of the point when hovered.
 	 */
 	double getRadius();
 

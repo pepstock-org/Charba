@@ -131,7 +131,7 @@ public final class LegendTexter extends PropertyHandler<Boolean> {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is {@link UndefinedValues#STRING}.
+	 * @return the label that will be displayed.
 	 */
 	String getText() {
 		return getValue(Property.TEXT, UndefinedValues.STRING);
@@ -151,7 +151,7 @@ public final class LegendTexter extends PropertyHandler<Boolean> {
 	 * Returns the label that will be displayed, as HTML.<br>
 	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
-	 * @return the label that will be displayed, as HTML. Default is <code>null</code>.
+	 * @return the label that will be displayed, as HTML.
 	 */
 	SafeHtml getTextAsHtml() {
 		// checks if the text as HTML

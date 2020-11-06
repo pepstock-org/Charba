@@ -274,7 +274,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Returns a custom field value from data point.
 	 * 
 	 * @param key key of java script object to get.
-	 * @return custom field value from data point. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return custom field value from data point.
 	 */
 	public double getAttribute(Key key) {
 		return getValue(key, UndefinedValues.DOUBLE);

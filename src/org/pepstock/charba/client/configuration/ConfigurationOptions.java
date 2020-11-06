@@ -454,7 +454,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 */
 	public boolean isDrawOnAttach() {
 		return getConfiguration().isDrawOnAttach();
@@ -472,8 +472,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	/**
 	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>. Default is
-	 *         <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 */
 	public boolean isDestroyOnDetach() {
 		return getConfiguration().isDestroyOnDetach();

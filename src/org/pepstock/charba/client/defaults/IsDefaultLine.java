@@ -34,16 +34,16 @@ public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFiller{
 	double getTension();
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * Returns how the end points of every line are drawn.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
 	CapStyle getBorderCapStyle();
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	int getBorderDashOffset();
 

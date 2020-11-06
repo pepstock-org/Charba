@@ -38,7 +38,7 @@ public interface IsDefaultScaleLines {
 	int getLineWidth();
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
 	 * @return Offset for line dashes.
 	 */

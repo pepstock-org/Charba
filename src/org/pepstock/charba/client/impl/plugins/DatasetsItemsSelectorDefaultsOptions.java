@@ -98,9 +98,9 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset.
 	 */
 	int getBorderDashOffset() {
 		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_WIDTH, DatasetsItemsSelectorOptions.DEFAULT_BORDER_DASH_OFFSET);

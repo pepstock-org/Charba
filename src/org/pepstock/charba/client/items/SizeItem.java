@@ -92,7 +92,7 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the width of the chart item in pixel.
 	 * 
-	 * @return the width of the chart item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the width of the chart item in pixel.
 	 */
 	public final double getWidth() {
 		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
@@ -101,7 +101,7 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the height of the chart item in pixel.
 	 * 
-	 * @return the height of the chart item in pixel. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the height of the chart item in pixel.
 	 */
 	public final double getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);

@@ -17,9 +17,9 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
-import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
@@ -208,7 +208,7 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase".
+	 * Sets the line dash pattern offset.
 	 * 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
@@ -220,7 +220,7 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase".
+	 * Returns the line dash pattern offset.
 	 * 
 	 * @return Offset for line dashes.
 	 */

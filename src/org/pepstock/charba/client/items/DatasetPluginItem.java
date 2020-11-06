@@ -79,7 +79,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset.
 	 */
 	public int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);

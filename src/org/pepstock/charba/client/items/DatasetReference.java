@@ -121,7 +121,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	/**
 	 * Returns the dataset item index.
 	 * 
-	 * @return the dataset item index. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset item index.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
@@ -130,7 +130,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	/**
 	 * Returns the dataset item data index.
 	 * 
-	 * @return the dataset item data index. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the dataset item data index.
 	 */
 	public final int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);

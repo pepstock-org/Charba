@@ -137,7 +137,7 @@ public final class ChartNode {
 	/**
 	 * Returns the CHART JS chart ID.
 	 * 
-	 * @return the CHART JS chart ID. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the CHART JS chart ID.
 	 */
 	public int getId() {
 		return initialized ? check(chart.getId(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -146,7 +146,7 @@ public final class ChartNode {
 	/**
 	 * Returns the width in pixel.
 	 * 
-	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the width in pixel.
 	 */
 	public int getWidth() {
 		return initialized ? check(chart.getWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -155,7 +155,7 @@ public final class ChartNode {
 	/**
 	 * Returns the height in pixel.
 	 * 
-	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the height in pixel.
 	 */
 	public int getHeight() {
 		return initialized ? check(chart.getHeight(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -164,7 +164,7 @@ public final class ChartNode {
 	/**
 	 * Returns the aspect ratio.
 	 * 
-	 * @return the aspect ratio. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
 		return initialized ? check(chart.getAspectRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -173,7 +173,7 @@ public final class ChartNode {
 	/**
 	 * Returns the current device pixel ratio.
 	 * 
-	 * @return the current device pixel ratio. Default is {@link UndefinedValues#DOUBLE}.
+	 * @return the current device pixel ratio.
 	 */
 	public double getCurrentDevicePixelRatio() {
 		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;

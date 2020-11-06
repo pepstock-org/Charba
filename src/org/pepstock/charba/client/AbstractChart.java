@@ -417,8 +417,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.<br>
-	 *         Default is <code>true</code>.
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 */
 	@Override
 	public final boolean isDrawOnAttach() {
@@ -442,8 +441,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.<br>
-	 *         Default is <code>true</code>.
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the detach from DIV element, otherwise <code>false</code>.
 	 */
 	@Override
 	public final boolean isDestroyOnDetach() {

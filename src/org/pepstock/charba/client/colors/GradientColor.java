@@ -109,7 +109,7 @@ public final class GradientColor extends NativeObjectContainer {
 	/**
 	 * Returns the defined offset for stopping gradient color.
 	 * 
-	 * @return the defined offset for stopping gradient color. Default is 0.
+	 * @return the defined offset for stopping gradient color.
 	 */
 	public double getOffset() {
 		return getValue(Property.CHARBA_GRADIENT_COLOR_OFFSET, DEFAULT_OFFSET);

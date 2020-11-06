@@ -58,8 +58,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
-	 * 
+	 * Sets how the end points of every line are drawn. 
+	 *  
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
@@ -67,8 +67,7 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set
-	 * to butt.
+	 * Returns how the end points of every line are drawn.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -174,7 +173,7 @@ public class Line extends AbstractConfigurationElement {
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
 		return getOptions().getElements().getLine().getCubicInterpolationMode();
