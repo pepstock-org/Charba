@@ -72,16 +72,6 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates new plugin options with plugin ID, creating new native options.
-	 * 
-	 * @param pluginId plugin ID
-	 */
-	protected AbstractPluginOptions(String pluginId) {
-		// creates an empty native object
-		this(pluginId, null);
-	}
-
-	/**
 	 * Creates new plugin options with plugin ID, using a native object instance.
 	 * 
 	 * @param pluginId plugin ID

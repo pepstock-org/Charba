@@ -75,7 +75,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * @param pluginId plugin ID
 	 */
 	AbstractCursorPointerOptions(String pluginId) {
-		super(pluginId);
+		this(pluginId, null);
 	}
 
 	/**

@@ -17,7 +17,8 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * This is the {@link ZoomPlugin#ID} plugin options where to set all the configuration needed to the plugin.
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomOptions extends AbstractPluginCachedOptions {
+public final class ZoomOptions extends AbstractPluginOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -70,7 +71,11 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 */
 	public ZoomOptions() {
-		this((DefaultsOptions) null);
+		this((DefaultsOptions) null, null);
+		// stores inner elements
+		setValue(Property.PAN, pan);
+		setValue(Property.ZOOM, zoom);
+
 	}
 
 	/**
@@ -79,17 +84,21 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public ZoomOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY) : null, null);
+		// stores inner elements
+		setValue(Property.PAN, pan);
+		setValue(Property.ZOOM, zoom);
 	}
 
 	/**
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 * 
 	 * @param defaultsOptions default options stored into defaults global
+	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	ZoomOptions(DefaultsOptions defaultsOptions) {
+	ZoomOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject ) {
 		// creates an empty native object
-		super(ZoomPlugin.ID, ZoomPlugin.FACTORY, false);
+		super(ZoomPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
@@ -102,9 +111,6 @@ public final class ZoomOptions extends AbstractPluginCachedOptions {
 		pan = new Pan(this.defaultsOptions.getPan());
 		// sets inner elements
 		zoom = new Zoom(this.defaultsOptions.getZoom());
-		// stores inner elements
-		setValue(Property.PAN, pan);
-		setValue(Property.ZOOM, zoom);
 	}
 
 	/**

@@ -17,8 +17,6 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -26,7 +24,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory<ZoomOptions> {
+public final class ZoomOptionsFactory extends AbstractPluginOptionsFactory<ZoomOptions> {
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link ZoomPlugin#FACTORY}.<br>
@@ -44,24 +42,15 @@ public final class ZoomOptionsFactory extends AbstractPluginCachedOptionsFactory
 	 */
 	@Override
 	public ZoomOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-		// gets the options checking if cached
-		AbstractPluginOptions options = getOptions(nativeObject);
-		// checks if consistent and the right class
-		if (options instanceof ZoomOptions) {
-			// cast and returns it
-			return (ZoomOptions) options;
-		}
-		// creates the options by the native object and the defaults
-		// and ignores the native object passed into method
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, ZoomPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ZoomOptions(defaultsOptions);
+			return new ZoomOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ZoomOptions(DefaultsOptions.DEFAULTS_INSTANCE);
+		return new ZoomOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**

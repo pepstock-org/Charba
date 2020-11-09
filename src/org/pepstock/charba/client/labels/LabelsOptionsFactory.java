@@ -17,8 +17,6 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -26,7 +24,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsOptionsFactory extends AbstractPluginCachedOptionsFactory<LabelsOptions> {
+public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<LabelsOptions> {
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link LabelsPlugin#FACTORY}.<br>
@@ -44,24 +42,15 @@ public final class LabelsOptionsFactory extends AbstractPluginCachedOptionsFacto
 	 */
 	@Override
 	public LabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-		// gets the options checking if cached
-		AbstractPluginOptions options = getOptions(nativeObject);
-		// checks if consistent and the right class
-		if (options instanceof LabelsOptions) {
-			// cast and returns it
-			return (LabelsOptions) options;
-		}
-		// creates the options by the native object and the defaults
-		// and ignores the native object passed into method
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new LabelsOptions(defaultsOptions);
+			return new LabelsOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE);
+		return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**

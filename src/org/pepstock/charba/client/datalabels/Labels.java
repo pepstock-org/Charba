@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Base object to map multi labels options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
@@ -52,7 +52,8 @@ public final class Labels extends AbstractElement {
 	 * 
 	 * @return a collection with all stored data labels options
 	 */
-	Collection<AbstractPluginCachedOptions> getAllOptions() {
+	// FIXME checks where used
+	Collection<AbstractPluginOptions> getAllOptions() {
 		return Collections.unmodifiableCollection(storedOptions.values());
 	}
 

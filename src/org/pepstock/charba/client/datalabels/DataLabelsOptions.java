@@ -57,7 +57,7 @@ import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.DataItem;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -69,7 +69,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends AbstractPluginCachedOptions {
+public final class DataLabelsOptions extends AbstractPluginOptions {
 
 	// -------------------------------------------
 	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
@@ -334,7 +334,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// creates the object registering it
 		// this constructor is used by user to set options for plugin
 		// both default global or chart one.
-		this(false, (DefaultsOptions) null);
+		this((DefaultsOptions) null, null);
+		// stores inner elements
+		setValue(Property.PADDING, padding);
+		setValue(Property.FONT, font);
+		setValue(Property.LISTENERS, listeners);
+		setValue(Property.LABELS, labels);
 	}
 
 	/**
@@ -346,40 +351,23 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// creates the object registering it
 		// this constructor is used by user to set options for plugin
 		// both default global or chart one.
-		this(false, chart);
-	}
-
-	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin options, relating to chart instance for default.
-	 * 
-	 * @param deferredRegistration if <code>true</code> the options is not registered
-	 * @param chart chart instance related to the plugin options
-	 */
-	DataLabelsOptions(boolean deferredRegistration, IsChart chart) {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(deferredRegistration, IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DataLabelsPlugin.ID, DataLabelsPlugin.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DataLabelsPlugin.ID, DataLabelsPlugin.DEFAULTS_FACTORY) : null, null);
+		// stores inner elements
+		setValue(Property.PADDING, padding);
+		setValue(Property.FONT, font);
+		setValue(Property.LISTENERS, listeners);
+		setValue(Property.LABELS, labels);
 	}
 
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
 	 * @param defaultsOptions default options stored into defaults global
+	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	DataLabelsOptions(DefaultsOptions defaultsOptions) {
-		this(false, defaultsOptions);
-	}
-
-	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
-	 * 
-	 * @param deferredRegistration if <code>true</code> the options is not registered
-	 * @param defaultsOptions default options stored into defaults global
-	 */
-	DataLabelsOptions(boolean deferredRegistration, DefaultsOptions defaultsOptions) {
+	DataLabelsOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
-		super(DataLabelsPlugin.ID, DataLabelsPlugin.FACTORY, deferredRegistration);
+		super(DataLabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
@@ -393,11 +381,6 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		font = new Font(this.defaultsOptions.getFont());
 		listeners = new Listeners();
 		labels = new Labels();
-		// stores inner elements
-		setValue(Property.PADDING, padding);
-		setValue(Property.FONT, font);
-		setValue(Property.LISTENERS, listeners);
-		setValue(Property.LABELS, labels);
 		// sets unique id
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -445,20 +428,14 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), paddingCallback));
 	}
 
-	/**
-	 * Registers the options to the factory to manage the cache of options.
-	 */
-	void registerOptions() {
-		super.register();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptions#getInnerOptions()
-	 */
-	@Override
-	protected Collection<AbstractPluginCachedOptions> getInnerOptions() {
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptions#getInnerOptions()
+	// */
+	// @Override
+	// FIXME checks where used
+	protected Collection<AbstractPluginOptions> getInnerOptions() {
 		return labels.getAllOptions();
 	}
 

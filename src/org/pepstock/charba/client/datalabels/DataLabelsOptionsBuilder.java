@@ -69,7 +69,7 @@ public final class DataLabelsOptionsBuilder {
 		// creates the options with deferred registration
 		// because it will be register only when the build method
 		// will be invoked
-		options = new DataLabelsOptions(true, chart);
+		options = new DataLabelsOptions(chart);
 	}
 
 	/**
@@ -97,8 +97,6 @@ public final class DataLabelsOptionsBuilder {
 	 * @return a configured labels options.
 	 */
 	public DataLabelsOptions build() {
-		// registers the options to the factory
-		options.registerOptions();
 		// returns options
 		return options;
 	}

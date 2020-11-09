@@ -267,6 +267,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the constructor signature of `ControllerType` class adding a mandatory argument of `ControllerProvider` instance which can provide the instance of controller to register.
    * add an optional argument (boolean) in order to decide if the base default options of the chart which is being extended must be cloned or not. 
    * reduce the visibility of `register` method of `Controller` class   
+ * remove `AbstractPluginCachedOptions` and `AbstractPluginCachedOptionsFactory` classes. Use instead callbacks cache.  
   
 ### Features
 

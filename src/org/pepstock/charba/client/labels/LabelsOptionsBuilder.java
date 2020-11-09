@@ -44,7 +44,7 @@ public final class LabelsOptionsBuilder {
 		// creates the options with deferred registration
 		// because it will be register only when the build method
 		// will be invoked
-		options = new LabelsOptions(true, chart);
+		options = new LabelsOptions(chart);
 	}
 
 	/**
@@ -72,8 +72,6 @@ public final class LabelsOptionsBuilder {
 	 * @return a configured labels options.
 	 */
 	public LabelsOptions build() {
-		// registers the options to the factory
-		options.registerOptions();
 		// returns options
 		return options;
 	}

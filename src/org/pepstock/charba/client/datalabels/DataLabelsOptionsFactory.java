@@ -17,8 +17,6 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
-import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -26,7 +24,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsFactory<DataLabelsOptions> {
+public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory<DataLabelsOptions> {
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link DataLabelsPlugin#FACTORY}.<br>
@@ -44,24 +42,15 @@ public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsF
 	 */
 	@Override
 	public DataLabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-		// gets the options checking if cached
-		AbstractPluginOptions options = getOptions(nativeObject);
-		// checks if consistent and the right class
-		if (options instanceof DataLabelsOptions) {
-			// cast and returns it
-			return (DataLabelsOptions) options;
-		}
-		// creates the options by the native object and the defaults
-		// and ignores the native object passed into method
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, DataLabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new DataLabelsOptions(defaultsOptions);
+			return new DataLabelsOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new DataLabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE);
+		return new DataLabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
