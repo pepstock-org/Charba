@@ -82,7 +82,7 @@ public interface IsChart {
 	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
 	 * 
 	 * @param chart chart to be checked
-	 * @return the chart instance passed as argumet
+	 * @return the chart instance passed as argument
 	 */
 	static IsChart checkAndGetIfConsistent(IsChart chart) {
 		// checks if chart is consistent
@@ -111,6 +111,20 @@ public interface IsChart {
 		if (!isValid(chart)) {
 			throw new IllegalArgumentException("Chart is null or not consistent");
 		}
+	}
+	
+	/**
+	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
+	 * 
+	 * @param chart chart to be checked
+	 * @return the chart instance passed as argument
+	 */
+	static IsChart checkAndGetIfValid(IsChart chart) {
+		// checks if chart is consistent
+		checkIfValid(chart);
+		// if here is consistent then return it
+		return chart;
 	}
 
 	/**

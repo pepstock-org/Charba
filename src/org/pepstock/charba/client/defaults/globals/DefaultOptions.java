@@ -31,6 +31,11 @@ import org.pepstock.charba.client.utils.Window;
  */
 public class DefaultOptions extends AbstractDefaultOptions {
 
+	/**
+	 * Default options scope for defaults options.
+	 */
+	public static final String SCOPE = "<defaults>";
+	
 	static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
@@ -84,6 +89,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public CLocale getLocale() {
 		return CLocale.getDefault();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getScope()
+	 */
+	@Override
+	public String getScope() {
+		return SCOPE;
 	}
 
 	/*

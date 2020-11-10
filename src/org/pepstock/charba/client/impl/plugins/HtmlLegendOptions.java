@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of {@link HtmlLegend#ID} plugin.<br>
@@ -95,7 +96,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public HtmlLegendOptions() {
-		this(null, null);
+		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
 	}
 
 	/**
@@ -105,26 +106,28 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @param chart chart type to use to get the default values by chart
 	 */
 	public HtmlLegendOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);
+		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
 	 * Builds the object with the default global ones
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultsOptions) {
-		this(null, defaultsOptions);
+	HtmlLegendOptions(String scope, HtmlLegendDefaultsOptions defaultsOptions) {
+		this(scope, defaultsOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options and the default global ones
 	 * 
+	 * @param scope scope of the options
 	 * @param nativeObject native object into options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(NativeObject nativeObject, HtmlLegendDefaultsOptions defaultsOptions) {
-		super(HtmlLegend.ID, nativeObject);
+	HtmlLegendOptions(String scope, HtmlLegendDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+		super(HtmlLegend.ID, scope, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

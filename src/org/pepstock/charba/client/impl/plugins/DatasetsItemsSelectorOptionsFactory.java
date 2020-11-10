@@ -36,20 +36,20 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public DatasetsItemsSelectorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+	public DatasetsItemsSelectorOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
+			return new DatasetsItemsSelectorOptions(scope, defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new DatasetsItemsSelectorOptions(nativeObject, DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE);
+		return new DatasetsItemsSelectorOptions(scope, DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -69,15 +69,15 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			if (nativeObject != null) {
 				// creates the default global option by native object
-				return new DatasetsItemsSelectorDefaultsOptions(nativeObject);
+				return new DatasetsItemsSelectorDefaultsOptions(scope, nativeObject);
 			}
 			return DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE;
 		}

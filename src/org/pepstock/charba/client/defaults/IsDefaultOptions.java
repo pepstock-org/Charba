@@ -104,6 +104,13 @@ public interface IsDefaultOptions {
 	 * @return the locale instance
 	 */
 	CLocale getLocale();
+	
+	/**
+	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
+	 * 
+	 * @return the scope of the dataset
+	 */
+	String getScope();
 
 	/**
 	 * Returns the resizing of the chart canvas when its container does.

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
+import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 
 /**
  * Factory to get the plugin options (form chart, from datasets or from default global ones) related to the plugin.
@@ -53,10 +54,11 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * Creates a plugin options by a native object which is containing the options values and its defaults.
 	 * 
 	 * @param nativeObject native object which is containing the options
+	 * @param scope scope of the options
 	 * @param defaultValues the defaults values for the plugin options
 	 * @return a plugin options instance
 	 */
-	public abstract T create(NativeObject nativeObject, IsDefaultPlugins defaultValues);
+	public abstract T create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues);
 
 	/**
 	 * Loads the default plugin options from defaults.<br>
@@ -77,7 +79,7 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				return factory.create(null, defaultsPlugins);
+				return factory.create(null, DefaultOptions.SCOPE, defaultsPlugins);
 			}
 		}
 		// if here the factory is not consistent

@@ -46,21 +46,21 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public HtmlLegendOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+	public HtmlLegendOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 		HtmlLegendOptions options = null;
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			HtmlLegendDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, HtmlLegend.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			options = new HtmlLegendOptions(nativeObject, defaultsOptions);
+			options = new HtmlLegendOptions(scope, defaultsOptions, nativeObject);
 		} else {
 			// creates the options by the native object and the defaults
-			options = new HtmlLegendOptions(nativeObject, HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
+			options = new HtmlLegendOptions(scope, HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 		}
 		// gets charba id
 		int charbaId = options.getCharbaId();
@@ -92,7 +92,7 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 			LEGEND_ITEM_CALLBACKS.remove(optionsId);
 		}
 	}
-	
+
 	/**
 	 * Internal methods to store the legend title callback
 	 * 
@@ -108,7 +108,6 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 			LEGEND_TITLE_CALLBACKS.remove(optionsId);
 		}
 	}
-
 
 	/**
 	 * Internal factory to create options from default global option for the plugin
@@ -127,15 +126,15 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public HtmlLegendDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		public HtmlLegendDefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			if (nativeObject != null) {
 				// creates the default global option by native object
-				HtmlLegendDefaultsOptions options = new HtmlLegendDefaultsOptions(nativeObject);
+				HtmlLegendDefaultsOptions options = new HtmlLegendDefaultsOptions(scope, nativeObject);
 				// gets charba id
 				int charbaId = options.getCharbaId();
 				// checks if there is any callback

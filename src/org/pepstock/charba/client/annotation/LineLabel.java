@@ -174,9 +174,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	LineLabel(NativeObject nativeObject, IsDefaultsLineLabel defaultValues) {
 		super(nativeObject);
 		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
 		// stores default options
-		this.defaultValues = defaultValues;
+		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 	}
 
 	/**

@@ -100,7 +100,7 @@ public final class ZoomPlugin {
 	 */
 	public static void resetZoom(IsChart chart) {
 		// check if chart is consistent and zoom plugin is acitvated
-		if (IsChart.isConsistent(chart) && Charts.hasNative(chart) && !chart.getOptions().getPlugins().isForcedlyDisabled(ID)) {
+		if (IsChart.isConsistent(chart) && Charts.hasNative(chart) && chart.getOptions().getPlugins().isEnabled(ID)) {
 			// gets native chart instance
 			Chart nativeChart = Charts.getNative(chart);
 			// resets zoom

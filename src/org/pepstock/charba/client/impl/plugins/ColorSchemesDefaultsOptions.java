@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -33,16 +34,17 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
 	private ColorSchemesDefaultsOptions() {
-		this(null);
+		this(DefaultsBuilder.get().getOptions().getScope(), null);
 	}
 
 	/**
 	 * Creates the object wrapping the default global options if there are.
 	 * 
+	 * @param scope scope of the options
 	 * @param nativeObject native object which maps default global options.
 	 */
-	ColorSchemesDefaultsOptions(NativeObject nativeObject) {
-		super(ColorSchemes.ID, nativeObject);
+	ColorSchemesDefaultsOptions(String scope, NativeObject nativeObject) {
+		super(ColorSchemes.ID, scope, nativeObject);
 	}
 
 	/**

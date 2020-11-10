@@ -50,10 +50,9 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	protected PropertyHandler(AbstractNode parent, D defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
 		// stores values
+		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		this.parent = parent != null ? parent : FAKE_ABSTRACT_NODE;
-		this.defaultValues = defaultValues;
 	}
 
 	/**

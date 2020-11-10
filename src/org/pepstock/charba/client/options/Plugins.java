@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
@@ -78,7 +77,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
-		setEnabled(pluginId, enabled, false);
+		setEnabled(PluginIdChecker.key(pluginId), enabled, false);
 	}
 
 	/**
@@ -91,7 +90,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	public void setEnabled(ConfigurationEnvelop<DefaultPluginId> envelop, boolean enabled) {
 		// checks if envelop is valid
 		if (IsEnvelop.isValid(envelop)) {
-			setEnabled(envelop.getContent().value(), enabled, true);
+			setEnabled(envelop.getContent(), enabled, true);
 		}
 	}
 
@@ -103,57 +102,64 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param enabled <code>false</code> disable a global plugin.
 	 * @param overrideDefaultPlugin if <code>true</code> means this is called by configuration and it can enable or disable default plugins.
 	 */
-	private void setEnabled(String pluginId, boolean enabled, boolean overrideDefaultPlugin) {
+	private void setEnabled(Key pluginId, boolean enabled, boolean overrideDefaultPlugin) {
 		// checks if is a default plugin
 		// if default plugin does nothing
 		// but if override plugin is set, means that is done by configuration then allowed
 		if (!DefaultPluginId.is(pluginId) || overrideDefaultPlugin) {
-			setValueAndAddToParent(PluginIdChecker.key(pluginId), enabled);
+			// stores ONLY if enabled is false
+			if (!enabled) {
+				// stores false
+				setValueAndAddToParent(pluginId, false);
+			} else if (DefaultPluginId.is(pluginId)){
+				// if here, a default plugin is managing
+				// then removes the key
+				removeIfExists(pluginId);
+			} else if (!isType(pluginId, ObjectType.OBJECT)){
+				// if here, is not a default plugin and
+				// then sets an empty object to enable the plugin
+				setEmptyValue(pluginId);
+			}
 		}
 	}
-
+	
 	/**
-	 * Returns if a global plugin is enabled or not.
+	 * Returns if a plugin is enabled or not.
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 */
-	@Override
-	public boolean isEnabled(String pluginId) {
-		// creates the key to avoid many calls to plugin checker
-		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// gets the type of property
-		ObjectType type = type(pluginIdKey);
-		// if boolean, checks if enable
-		if (ObjectType.BOOLEAN.equals(type)) {
-			// if the property is not found, checks if the plugin was enable to all charts.
-			return getValue(pluginIdKey, Defaults.get().getPlugins().isEnabledAllCharts(pluginId));
-		}
-		// if here, the property can exist or not.
-		// if exist, means that the options have been added
-		// and then it enables the plugin
-		return has(pluginIdKey);
+	public boolean isEnabled(DefaultPluginId pluginId) {
+		return isEnabledByKey(pluginId);
 	}
 
 	/**
-	 * Returns if a global plugin is enabled or not, forced directly by global plugin manager
+	 * Returns if a plugin is enabled or not.
 	 * 
 	 * @param pluginId plugin id.
-	 * @return <code>true</code> if a global plugin is not enabled otherwise <code>false</code>.
+	 * @return <code>false</code> if a plugin is not enabled otherwise <code>true</code>.
 	 */
-	public boolean isForcedlyDisabled(String pluginId) {
-		// creates the key to avoid many calls to plugin checker
-		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// gets the type of property
-		ObjectType type = type(pluginIdKey);
+	@Override
+	public boolean isEnabled(String pluginId) {
+		return isEnabledByKey(PluginIdChecker.key(pluginId));
+	}
+	
+	/**
+	 * Returns if a plugin is enabled or not.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
+	 */
+	private boolean isEnabledByKey(Key pluginId) {
 		// if boolean, checks if enable
-		if (ObjectType.BOOLEAN.equals(type)) {
+		if (isType(pluginId, ObjectType.BOOLEAN)) {
 			// if the property is not found, checks if the plugin was enable to all charts.
-			return !getValue(pluginIdKey, true);
+			return getValue(pluginId, getDefaultValues().isEnabled(pluginId.value()));
 		}
-		// if here, the property can exist or not.
-		// therefore is not disabled
-		return false;
+		// if here, the property is not a boolean,
+		// boolean is set ONLY if the plugin is disabled,
+		// therefore here is enabled
+		return has(pluginId) || getDefaultValues().isEnabled(pluginId.value());
 	}
 
 	/**
@@ -204,6 +210,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param options list of plugin options used to configure the plugin.
 	 * @param <T> type of plugin options to store
 	 */
+	// FIXME
 	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
 		// checks if options are consistent and not empty
 		if (options != null && !options.isEmpty()) {
@@ -340,10 +347,10 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
-				return factory.create(getValue(pluginIdKey), getDefaultValues());
+				return factory.create(getValue(pluginIdKey), getParent().getScope(), getDefaultValues());
 			} else {
 				// if here returns an empty object
-				return factory.create(null, getDefaultValues());
+				return factory.create(null, getParent().getScope(), getDefaultValues());
 			}
 		}
 		// if here factory is not consistent
@@ -374,10 +381,10 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
-				return factory.create(getValue(pluginIdKey), getDefaultValues());
+				return factory.create(getValue(pluginIdKey), getParent().getScope(), getDefaultValues());
 			} else {
 				// if here returns an empty object
-				return factory.create(null, getDefaultValues());
+				return factory.create(null, getParent().getScope(), getDefaultValues());
 			}
 		}
 		// if here factory is not consistent
@@ -409,7 +416,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				for (int i = 0; i < array.length(); i++) {
 					// creates the object using the defaults options
 					// and adds to result list
-					result.add(factory.create(array.get(i), getDefaultValues()));
+					result.add(factory.create(array.get(i), getParent().getScope(), getDefaultValues()));
 				}
 				return result;
 			}
@@ -447,7 +454,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				for (int i = 0; i < array.length(); i++) {
 					// creates the object using the defaults options
 					// and adds to result list
-					result.add(factory.create(array.get(i), getDefaultValues()));
+					result.add(factory.create(array.get(i), getParent().getScope(), getDefaultValues()));
 				}
 				return result;
 			}

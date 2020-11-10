@@ -29,12 +29,13 @@ import org.pepstock.charba.client.options.ScaledOptions;
 public final class OptionsNode extends ScaledOptions {
 
 	/**
-	 * Creates the item using anenvelop with the native java script object which contains all properties.
+	 * Creates the item using an envelop with the native java script object which contains all properties.
 	 * 
+	 * @param chartId scope of the options, in this case the chart id.
 	 * @param defaultValues default provider instance.
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
-	public OptionsNode(IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
-		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public OptionsNode(String chartId, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
+		super(chartId, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 }

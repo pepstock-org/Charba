@@ -26,8 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  */
 public abstract class ScaledOptions extends Options implements IsDefaultScaledOptions {
 
-	private final Scales scales;
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -58,25 +56,29 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 		}
 
 	}
+	
+	private final Scales scales;
 
 	/**
 	 * Creates the object only with default provider. This is used as the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultValues default provider instance.
 	 */
-	protected ScaledOptions(IsDefaultScaledOptions defaultValues) {
-		this(defaultValues, null);
+	protected ScaledOptions(String scope, IsDefaultScaledOptions defaultValues) {
+		this(scope, defaultValues, null);
 	}
 
 	/**
 	 * Creates the object only with default provider and native object. This is used as the root element.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultValues default provider instance.
 	 * @param nativeObject native object to store properties.
 	 */
-	protected ScaledOptions(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
+	protected ScaledOptions(String scope, IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
+		super(scope, defaultValues, nativeObject);
 		// gets scales sub elements
 		this.scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
 	}

@@ -70,6 +70,8 @@ import org.pepstock.charba.client.utils.JSON;
  */
 public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimation {
 
+	// constant for options scope
+	static final String OPTIONS_SCOPE = "<dataset>";
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -129,6 +131,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final IsDefaultOptions defaultValues;
 	// chart type related to dataset
 	private final Type type;
+	// scope instance
+	private final String scope;
 	// animation container
 	private final AnimationContainer animationContainer;
 	// internal comparator to sort time series items
@@ -289,6 +293,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
 		setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		// creates scope, checking form default
+		this.scope = defaultValues == null ? createScope(getId()) : this.defaultValues.getScope();
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -378,6 +384,15 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public final int getId() {
 		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
+	}
+	
+	/**
+	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
+	 * 
+	 * @return the scope of the dataset
+	 */
+	public final String getScope() {
+		return scope;
 	}
 
 	/**
@@ -1105,7 +1120,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if factory argument is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(pluginId)) {
 			// creates the options by the factory
-			return factory.create(getValue(PluginIdChecker.key(pluginId)), defaultValues.getPlugins());
+			return factory.create(getValue(PluginIdChecker.key(pluginId)), getScope(), defaultValues.getPlugins());
 		}
 		// if here, factory is not consistent
 		return null;
@@ -1125,7 +1140,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if factory is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the object using the defaults options
-			return factory.create(getValue(PluginIdChecker.key(factory.getPluginId())), defaultValues.getPlugins());
+			return factory.create(getValue(PluginIdChecker.key(factory.getPluginId())), getScope(), defaultValues.getPlugins());
 		}
 		// if here factory is not consistent
 		return null;
@@ -1271,7 +1286,26 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
-
+	
+	/**
+	 * Creates a key for the dataset options.<br>
+	 * The format is the following:<br>
+	 * <br>
+	 * <code>&lt;dataset-[datasetId]&gt;</code><br>
+	 * <br>
+	 * where dataset id if is the id of the dataset.
+	 * 
+	 * @param id the id of dataset
+	 * @return a key for the dataet options
+	 */
+	private static final String createScope(int id) {
+		// creates a string builder
+		StringBuilder sb = new StringBuilder("<dataset-");
+		// formats teh key and returns it
+		return sb.append(id).append(Constants.GT).toString();
+	}
+	
+	
 	/**
 	 * Interface to map color property which can or can not manage {@link Pattern} or {@link CanvasPatternItem}.
 	 * 

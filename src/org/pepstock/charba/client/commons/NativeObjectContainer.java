@@ -65,13 +65,17 @@ public abstract class NativeObjectContainer {
 	 * If not, throws {@link IllegalArgumentException}.
 	 * 
 	 * @param defaultValues default values instance to check
+	 * @param <T> type of default argument
+	 * @return the same instance passed as argument
 	 */
-	protected final void checkDefaultValuesArgument(Object defaultValues) {
+	protected final <T> T checkDefaultValuesArgument(T defaultValues) {
 		// checks if default value is consistent
 		if (defaultValues == null) {
 			// if not, exception
 			throw new IllegalArgumentException("Default values argument is null");
 		}
+		// returns the value
+		return defaultValues;
 	}
 
 	/**
@@ -643,6 +647,20 @@ public abstract class NativeObjectContainer {
 			// sets value
 			nativeObject.defineObjectProperty(key.value(), value);
 		}
+	}
+	
+	/**
+	 * Sets a value (an empty JavaScript Object) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 */
+	protected final void setEmptyValue(Key key) {
+		// checks if the key is consistent
+		// if not, exception
+		Key.checkIfValid(key);
+		// if here, key is consistent
+		// sets value
+		nativeObject.defineObjectProperty(key.value(), new NativeObject());
 	}
 
 	// ------------------------------------------

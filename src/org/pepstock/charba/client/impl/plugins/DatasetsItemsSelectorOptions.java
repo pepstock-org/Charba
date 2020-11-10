@@ -123,7 +123,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public DatasetsItemsSelectorOptions() {
-		this(null, null);
+		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
 	}
 
 	/**
@@ -133,28 +133,30 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public DatasetsItemsSelectorOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DatasetsItemsSelector.ID, DatasetsItemsSelector.DEFAULTS_FACTORY) : null);
+		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DatasetsItemsSelector.ID, DatasetsItemsSelector.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultsOptions default options, which must be stored into default global.
 	 */
-	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
-		this(null, defaultsOptions);
+	DatasetsItemsSelectorOptions(String scope, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
+		this(scope, defaultsOptions, null);
 	}
 
 	/**
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
+	 * @param scope scope of the options
+	 * @param defaultsOptions default options, which must be stored into default global.
 	 * @param nativeObject configuration of plugin.
-	 * @param defaultsOptions default options, which must be stored into default global.
 	 */
-	DatasetsItemsSelectorOptions(NativeObject nativeObject, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
-		super(DatasetsItemsSelector.ID, nativeObject);
+	DatasetsItemsSelectorOptions(String scope, DatasetsItemsSelectorDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+		super(DatasetsItemsSelector.ID, scope, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

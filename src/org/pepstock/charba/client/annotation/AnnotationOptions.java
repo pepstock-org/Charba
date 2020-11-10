@@ -77,7 +77,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * Creates new {@link Annotation#ID} plugin options.
 	 */
 	public AnnotationOptions() {
-		this((AnnotationDefaultsOptions) null);
+		this(AbstractPluginOptions.OPTIONS_SCOPE, null);
 	}
 
 	/**
@@ -86,28 +86,30 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param chart chart instance related to the plugin options
 	 */
 	public AnnotationOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
+		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
 	}
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions) {
+	AnnotationOptions(String scope, IsDefaultsAnnotationOptions defaultsOptions) {
 		// creates an empty native object
-		this(null, defaultsOptions);
+		this(scope, defaultsOptions, null);
 	}
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.<br>
 	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
-	 * @param nativeObject native object loaded from configuration
+	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
+	 * @param nativeObject native object loaded from configuration
 	 */
-	AnnotationOptions(NativeObject nativeObject, IsDefaultsAnnotationOptions defaultsOptions) {
-		super(Annotation.ID, nativeObject);
+	AnnotationOptions(String scope, IsDefaultsAnnotationOptions defaultsOptions, NativeObject nativeObject) {
+		super(Annotation.ID, scope, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

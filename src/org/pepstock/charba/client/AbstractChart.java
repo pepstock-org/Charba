@@ -62,6 +62,7 @@ import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Base class of all charts.<br>
@@ -339,7 +340,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final ChartNode getNode() {
-		return new ChartNode(lookForConsistentInstance());
+		return new ChartNode(getId(), lookForConsistentInstance());
 	}
 
 	/**
@@ -717,11 +718,22 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			tempConfiguration.setOptions(this, internalOptions);
 			// clones the current chart config
 			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
+			
+			Window.getConsole().log("options", clonedOptions);
+			
 			// gets native configuration
 			NativeConfiguration config = chart.getConfig();
+			
+			Window.getConsole().log("config options", config.getOptions());
+
+			
 			// applies the new options
 			// gets the updated options
 			NativeObject wholeOptions = config.updateAndGetConfiguration(clonedOptions);
+
+			Window.getConsole().log("whole options", wholeOptions);
+
+			
 			// replace the options
 			chart.setOptions(wholeOptions);
 			// calls plugins for onConfigure method

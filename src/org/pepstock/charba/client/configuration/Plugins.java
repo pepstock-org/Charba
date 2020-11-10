@@ -56,20 +56,20 @@ public class Plugins {
 	}
 
 	/**
-	 * Sets if a global plugin must be enabled or not.
+	 * Sets if a plugin must be enabled or not.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param enabled <code>false</code> disable a global plugin.
+	 * @param enabled <code>false</code> disable a plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
 		extendedOptions.getPlugins().setEnabled(pluginId, enabled);
 	}
 
 	/**
-	 * Sets if a default CHART.JS plugin must be enabled or not.
+	 * Sets if a default plugin must be enabled or not.
 	 * 
-	 * @param plugin default CHART.JS plugin instance.
-	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
+	 * @param plugin default plugin instance.
+	 * @param enabled <code>false</code> disable a default plugin.
 	 */
 	public void setEnabled(DefaultPluginId plugin, boolean enabled) {
 		// checks if plugin is consistent
@@ -81,39 +81,23 @@ public class Plugins {
 	}
 
 	/**
-	 * Returns if a global plugin is enabled or not.
+	 * Returns if a plugin is enabled or not.
 	 * 
 	 * @param pluginId plugin id.
-	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
+	 * @return <code>false</code> if a plugin is not enabled otherwise <code>true</code>.
 	 */
 	public boolean isEnabled(String pluginId) {
 		return extendedOptions.getPlugins().isEnabled(pluginId);
 	}
 
 	/**
-	 * Returns if a global plugin is enabled or not, forced directly by global plugin manager
+	 * Returns if a default plugin is enabled or not.
 	 * 
-	 * @param pluginId plugin id.
-	 * @return <code>true</code> if a global plugin is not enabled otherwise <code>false</code>.
+	 * @param pluginId default plugin id.
+	 * @return <code>false</code> if a default plugin is not enabled otherwise <code>true</code>.
 	 */
-	public boolean isForcedlyDisabled(String pluginId) {
-		return extendedOptions.getPlugins().isForcedlyDisabled(pluginId);
-	}
-
-	/**
-	 * Returns if a default CHART.JS plugin is enabled or not, forced directly by global plugin manager
-	 * 
-	 * @param plugin a default CHART.JS plugin.
-	 * @return <code>true</code> if a default CHART.JS plugin is not enabled otherwise <code>false</code>.
-	 */
-	public boolean isForcedlyDisabled(DefaultPluginId plugin) {
-		// checks if default plugin is consistent
-		if (Key.isValid(plugin)) {
-			return isForcedlyDisabled(plugin.value());
-		}
-		// if here, argument is not consistent
-		// then returns false
-		return false;
+	public boolean isEnabled(DefaultPluginId pluginId) {
+		return extendedOptions.getPlugins().isEnabled(pluginId);
 	}
 
 	/**

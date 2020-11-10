@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.ScaledOptions;
 import org.pepstock.charba.client.options.Scales;
@@ -42,9 +44,9 @@ public final class ChartOptions extends ScaledOptions {
 	 */
 	ChartOptions(Type type, NativeObject nativeObject, IsDefaultScaledOptions defaultsOptions) {
 		// the default of chart default ones are the CHART.JS one
-		super(defaultsOptions, nativeObject);
 		// checks consistency of type
-		Type.checkIfValid(type);
+		super(createScope(type), defaultsOptions, nativeObject);
+		// stores type
 		this.type = type;
 	}
 
@@ -80,6 +82,24 @@ public final class ChartOptions extends ScaledOptions {
 	 */
 	NativeObject nativeObject() {
 		return super.getNativeObject();
+	}
+	
+	/**
+	 * Creates a key for the chart options.<br>
+	 * The format is the following:<br>
+	 * <br>
+	 * <code>&lt;chart-[chartType]&gt;</code><br>
+	 * <br>
+	 * where chart type is the type of the chart, see {@link ChartType} or {@link ControllerType}.
+	 * 
+	 * @param type the type of the chart
+	 * @return a key for the chart options
+	 */
+	private static final String createScope(Type type) {
+		// creates a string builder
+		StringBuilder sb = new StringBuilder("<chart-");
+		// formats teh key and returns it
+		return sb.append(Type.checkAndGetIfValid(type).value()).append(Constants.GT).toString();
 	}
 
 }

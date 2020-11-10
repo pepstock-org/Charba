@@ -104,7 +104,7 @@ public final class Annotation extends AbstractPlugin {
 			} else {
 				// if here, there is not any configuration
 				// then it uses the default
-				pOptions = new AnnotationOptions(AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new AnnotationOptions(chart.getId(), AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores the options into cache
 			pluginOptions.put(chart.getId(), pOptions);

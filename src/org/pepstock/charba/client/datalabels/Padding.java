@@ -41,16 +41,7 @@ public final class Padding extends AbstractElement {
 	 * Creates new padding element, using the default values options.
 	 */
 	public Padding() {
-		this(DefaultsOptions.DEFAULTS_INSTANCE.getPadding());
-	}
-
-	/**
-	 * Creates new padding element, using the default values options.
-	 * 
-	 * @param defaultsOptions default PADDING options to returns the default when required.
-	 */
-	Padding(DefaultsPadding defaultsOptions) {
-		this(null, defaultsOptions);
+		this(DefaultsOptions.DEFAULTS_INSTANCE.getPadding(), null);
 	}
 
 	/**
@@ -59,9 +50,11 @@ public final class Padding extends AbstractElement {
 	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default PADDING options to returns the default when required.
 	 */
-	Padding(NativeObject nativeObject, DefaultsPadding defaultsOptions) {
+	Padding(DefaultsPadding defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		// checks if default value is consistent
+		// stores default
+		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
 	}
 
 	/**

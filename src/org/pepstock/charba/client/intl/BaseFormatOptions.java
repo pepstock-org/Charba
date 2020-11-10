@@ -87,9 +87,8 @@ class BaseFormatOptions<D extends IsDefaultBaseFormatOptions> extends NativeObje
 	protected BaseFormatOptions(NativeObject nativeObject, D defaultValues) {
 		super(nativeObject);
 		// checks if default value is consistent
-		checkDefaultValuesArgument(defaultValues);
 		// stores default
-		this.defaultValues = defaultValues;
+		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 	}
 
 	/**

@@ -40,6 +40,7 @@ public final class ControllerContext {
 	 * To avoid any instantiation
 	 */
 	ControllerContext() {
+		// do nothing
 	}
 
 	/**
@@ -89,7 +90,12 @@ public final class ControllerContext {
 	 */
 	@JsOverlay
 	public final ChartNode getNode() {
-		return new ChartNode(getNativeChart());
+		// gets native chart
+		Chart nativeChart = getNativeChart();
+		// gets chart
+		IsChart chart = nativeChart.getChart();
+		// creates and returns a char node
+		return new ChartNode(chart.getId(), nativeChart);
 	}
 
 }

@@ -36,20 +36,20 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public ChartPointerOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+	public ChartPointerOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			ChartPointerDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, ChartPointer.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ChartPointerOptions(nativeObject, defaultsOptions);
+			return new ChartPointerOptions(scope, defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ChartPointerOptions(nativeObject, ChartPointerDefaultsOptions.DEFAULTS_INSTANCE);
+		return new ChartPointerOptions(scope, ChartPointerDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -69,15 +69,15 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ChartPointerDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		public ChartPointerDefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			if (nativeObject != null) {
 				// creates the default global option by native object
-				return new ChartPointerDefaultsOptions(nativeObject);
+				return new ChartPointerDefaultsOptions(scope, nativeObject);
 			}
 			return ChartPointerDefaultsOptions.DEFAULTS_INSTANCE;
 		}

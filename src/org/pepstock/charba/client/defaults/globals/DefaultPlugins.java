@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -29,8 +30,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultPlugins implements IsDefaultPlugins {
-
-	private static final boolean DEFAULT_ENABLED = false;
 
 	private static final boolean DEFAULT_HAS_OPTIONS = false;
 
@@ -48,7 +47,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	 */
 	@Override
 	public boolean isEnabled(String pluginId) {
-		return DEFAULT_ENABLED;
+		return Defaults.get().getPlugins().isEnabledAllCharts(pluginId);
 	}
 
 	/*
@@ -81,7 +80,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates a empty options
-			return factory.create(null, null);
+			return factory.create(null, DefaultOptions.SCOPE, null);
 		}
 		// if here factory is not consistent
 		return null;

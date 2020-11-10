@@ -52,10 +52,11 @@ public final class ChartNode {
 
 	/**
 	 * Creates the object wrapping a CHART instance.
-	 *
+	 * 
+	 * @param chartId scope of the options, in this case the chart id.
 	 * @param chart CHART.JS CHART instance
 	 */
-	public ChartNode(Chart chart) {
+	public ChartNode(String chartId, Chart chart) {
 		// stores native chart instance
 		this.chart = chart;
 		// sets if is initialized checking the CHART instance
@@ -63,7 +64,7 @@ public final class ChartNode {
 		// gets the defaults for options
 		IsDefaultScaledOptions defaultValues = initialized ? chart.getChart().getDefaultChartOptions() : DefaultsBuilder.get().getScaledOptions();
 		// creates all sub elements
-		options = new OptionsNode(defaultValues, new ChartEnvelop<>(initialized ? chart.getOptions() : null, true));
+		options = new OptionsNode(chartId, defaultValues, new ChartEnvelop<>(initialized ? chart.getOptions() : null, true));
 		legend = new LegendNode(new ChartEnvelop<>(initialized ? chart.getLegend() : null, true));
 		scales = new ScalesNode(new ChartEnvelop<>(initialized ? chart.getScales() : null, true));
 		chartArea = new ChartAreaNode(new ChartEnvelop<>(initialized ? chart.getChartArea() : null, true));

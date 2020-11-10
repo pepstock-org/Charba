@@ -36,20 +36,20 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public ColorSchemesOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+	public ColorSchemesOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
 			ColorSchemesDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, ColorSchemes.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ColorSchemesOptions(nativeObject, defaultsOptions);
+			return new ColorSchemesOptions(scope, defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ColorSchemesOptions(nativeObject, ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE);
+		return new ColorSchemesOptions(scope, ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -69,15 +69,15 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ColorSchemesDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		public ColorSchemesDefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			if (nativeObject != null) {
 				// creates the default global option by native object
-				return new ColorSchemesDefaultsOptions(nativeObject);
+				return new ColorSchemesDefaultsOptions(scope, nativeObject);
 			}
 			return ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE;
 		}

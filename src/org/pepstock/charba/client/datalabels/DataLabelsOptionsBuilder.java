@@ -69,7 +69,7 @@ public final class DataLabelsOptionsBuilder {
 		// creates the options with deferred registration
 		// because it will be register only when the build method
 		// will be invoked
-		options = new DataLabelsOptions(chart);
+		this.options = IsChart.isValid(chart) ? new DataLabelsOptions(chart) : new DataLabelsOptions();
 	}
 
 	/**

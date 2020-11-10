@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.options.Font;
@@ -32,6 +33,7 @@ public final class GlobalOptions extends Options {
 	
 	// instance to store the global options as default
 	private final IsDefaultScaledOptions defaultOptions;
+	
 
 	/**
 	 * Creates the object with the native object which maps the java script object chart.defaults.global.
@@ -40,7 +42,7 @@ public final class GlobalOptions extends Options {
 	 */
 	GlobalOptions(NativeObject nativeObject) {
 		// uses the CHART.JS default options as default one
-		super(DefaultsBuilder.get().getOptions(), nativeObject);
+		super(DefaultOptions.SCOPE, DefaultsBuilder.get().getOptions(), nativeObject);
 		// stores default
 		this.defaultOptions = new DefaultGlobalOptions(this);
 		// checks if has got the locale

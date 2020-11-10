@@ -229,7 +229,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new DatasetsItemsSelectorOptions(chart.getId(), DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// checks if chart has got already an handler
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {

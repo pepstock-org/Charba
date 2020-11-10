@@ -129,7 +129,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new HtmlLegendOptions(HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new HtmlLegendOptions(chart.getId(), HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			pluginOptions.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
@@ -310,7 +310,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			pluginLegendDisplayStatus.put(chart.getId(), chart.getOptions().getLegend().isDisplay());
 		}
 		boolean mustBeChecked = chart.getOptions().getLegend().isDisplay() || cachedValue;
-		if (mustBeChecked && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPluginId.LEGEND)) {
+		if (mustBeChecked && chart.getOptions().getPlugins().isEnabled(DefaultPluginId.LEGEND)) {
 			// disable legend
 			chart.getOptions().getLegend().setDisplay(false);
 			// creates options instance

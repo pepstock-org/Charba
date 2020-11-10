@@ -97,7 +97,7 @@ public final class ChartPointer extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new ChartPointerOptions(ChartPointerDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new ChartPointerOptions(chart.getId(), ChartPointerDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			// stores option on the cache
 			pluginOptions.put(chart.getId(), pOptions);
@@ -211,7 +211,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 */
 	private boolean hasLegendSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
 		// checks if legend display is activated or legend plugin is activated
-		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && !chart.getOptions().getPlugins().isForcedlyDisabled(DefaultPluginId.LEGEND);
+		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && chart.getOptions().getPlugins().isEnabled(DefaultPluginId.LEGEND);
 		// checks if legend is in scope
 		// and the cursor is over the legend element
 		if (isLegendEnabled && isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {

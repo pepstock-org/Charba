@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -40,16 +41,17 @@ final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 	 * Builds the object with an empty java script object and uses the constants as default.
 	 */
 	private HtmlLegendDefaultsOptions() {
-		this(null);
+		this(DefaultsBuilder.get().getOptions().getScope(), null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
-	 * @param nativeObject native object into options
+	 * @param scope scope of the options
+	 * @param nativeObject native object which maps default global options.
 	 */
-	HtmlLegendDefaultsOptions(NativeObject nativeObject) {
-		super(HtmlLegend.ID, nativeObject);
+	HtmlLegendDefaultsOptions(String scope, NativeObject nativeObject) {
+		super(HtmlLegend.ID, scope, nativeObject);
 	}
 
 	/**

@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -44,29 +45,30 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
 	private DefaultsOptions() {
-		this(null);
+		this(DefaultsBuilder.get().getOptions().getScope(), null);
 	}
 
 	/**
 	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin properties.
 	 * 
+	 * @param scope scope of the options
 	 * @param nativeObject native object which maps default global options.
 	 */
-	DefaultsOptions(NativeObject nativeObject) {
-		super(DataLabelsPlugin.ID, nativeObject);
+	DefaultsOptions(String scope, NativeObject nativeObject) {
+		super(DataLabelsPlugin.ID, scope, nativeObject);
 		// reads default padding options from main object
-		padding = new DefaultsPadding(getValue(DataLabelsOptions.Property.PADDING));
+		padding = new DefaultsPadding(getValue(LabelItem.Property.PADDING));
 		// reads default font options from main object
-		font = new DefaultsFont(getValue(DataLabelsOptions.Property.FONT));
+		font = new DefaultsFont(getValue(LabelItem.Property.FONT));
 		// checks if padding is stored
-		if (!has(DataLabelsOptions.Property.PADDING)) {
+		if (!has(LabelItem.Property.PADDING)) {
 			// sets the native object inside this object
-			setValue(DataLabelsOptions.Property.PADDING, padding);
+			setValue(LabelItem.Property.PADDING, padding);
 		}
 		// checks if padding is stored
-		if (!has(DataLabelsOptions.Property.FONT)) {
+		if (!has(LabelItem.Property.FONT)) {
 			// sets the native object inside this object
-			setValue(DataLabelsOptions.Property.FONT, font);
+			setValue(LabelItem.Property.FONT, font);
 		}
 	}
 
@@ -94,7 +96,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	Align getAlign() {
-		return getValue(DataLabelsOptions.Property.ALIGN, Align.values(), DataLabelsOptions.DEFAULT_ALIGN);
+		return getValue(LabelItem.Property.ALIGN, Align.values(), DataLabelsOptions.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -103,7 +105,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	Anchor getAnchor() {
-		return getValue(DataLabelsOptions.Property.ANCHOR, Anchor.values(), DataLabelsOptions.DEFAULT_ANCHOR);
+		return getValue(LabelItem.Property.ANCHOR, Anchor.values(), DataLabelsOptions.DEFAULT_ANCHOR);
 	}
 
 	/**
@@ -112,7 +114,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the background color as string. If <code>null</code>, it uses the background color of dataset.
 	 */
 	String getBackgroundColorAsString() {
-		return getValue(DataLabelsOptions.Property.BACKGROUND_COLOR, DataLabelsOptions.DEFAULT_BACKGROUND_COLOR);
+		return getValue(LabelItem.Property.BACKGROUND_COLOR, DataLabelsOptions.DEFAULT_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -121,7 +123,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the border color as string. If <code>null</code>, it uses the border color of dataset.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DataLabelsOptions.Property.BORDER_COLOR, DataLabelsOptions.DEFAULT_BORDER_COLOR);
+		return getValue(LabelItem.Property.BORDER_COLOR, DataLabelsOptions.DEFAULT_BORDER_COLOR);
 	}
 
 	/**
@@ -130,7 +132,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the border radius.
 	 */
 	double getBorderRadius() {
-		return getValue(DataLabelsOptions.Property.BORDER_RADIUS, DataLabelsOptions.DEFAULT_BORDER_RADIUS);
+		return getValue(LabelItem.Property.BORDER_RADIUS, DataLabelsOptions.DEFAULT_BORDER_RADIUS);
 	}
 
 	/**
@@ -139,7 +141,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the border width.
 	 */
 	int getBorderWidth() {
-		return getValue(DataLabelsOptions.Property.BORDER_WIDTH, DataLabelsOptions.DEFAULT_BORDER_WIDTH);
+		return getValue(LabelItem.Property.BORDER_WIDTH, DataLabelsOptions.DEFAULT_BORDER_WIDTH);
 	}
 
 	/**
@@ -148,7 +150,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	boolean isClamp() {
-		return getValue(DataLabelsOptions.Property.CLAMP, DataLabelsOptions.DEFAULT_CLAMP);
+		return getValue(LabelItem.Property.CLAMP, DataLabelsOptions.DEFAULT_CLAMP);
 	}
 
 	/**
@@ -157,7 +159,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	boolean isClip() {
-		return getValue(DataLabelsOptions.Property.CLIP, DataLabelsOptions.DEFAULT_CLIP);
+		return getValue(LabelItem.Property.CLIP, DataLabelsOptions.DEFAULT_CLIP);
 	}
 
 	/**
@@ -166,7 +168,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the color as string.
 	 */
 	String getColorAsString() {
-		return getValue(DataLabelsOptions.Property.COLOR, Defaults.get().getGlobal().getFont().getColorAsString());
+		return getValue(LabelItem.Property.COLOR, Defaults.get().getGlobal().getFont().getColorAsString());
 	}
 
 	/**
@@ -176,15 +178,15 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 */
 	Display getDisplay() {
 		// gets object type
-		ObjectType type = type(DataLabelsOptions.Property.DISPLAY);
+		ObjectType type = type(LabelItem.Property.DISPLAY);
 		// if boolean
 		if (ObjectType.BOOLEAN.equals(type)) {
 			// gets value and compare with enum value
-			boolean value = getValue(DataLabelsOptions.Property.DISPLAY, true);
+			boolean value = getValue(LabelItem.Property.DISPLAY, true);
 			return value ? Display.TRUE : Display.FALSE;
 		} else if (ObjectType.STRING.equals(type)) {
 			// if string
-			return getValue(DataLabelsOptions.Property.DISPLAY, Display.values(), DataLabelsOptions.DEFAULT_DISPLAY);
+			return getValue(LabelItem.Property.DISPLAY, Display.values(), DataLabelsOptions.DEFAULT_DISPLAY);
 		}
 		return DataLabelsOptions.DEFAULT_DISPLAY;
 	}
@@ -197,7 +199,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 *         label is moved in the opposite direction.
 	 */
 	double getOffset() {
-		return getValue(DataLabelsOptions.Property.OFFSET, DataLabelsOptions.DEFAULT_OFFSET);
+		return getValue(LabelItem.Property.OFFSET, DataLabelsOptions.DEFAULT_OFFSET);
 	}
 
 	/**
@@ -206,7 +208,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the opacity.
 	 */
 	double getOpacity() {
-		return getValue(DataLabelsOptions.Property.OPACITY, DataLabelsOptions.DEFAULT_OPACITY);
+		return getValue(LabelItem.Property.OPACITY, DataLabelsOptions.DEFAULT_OPACITY);
 	}
 
 	/**
@@ -215,7 +217,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	double getRotation() {
-		return getValue(DataLabelsOptions.Property.ROTATION, DataLabelsOptions.DEFAULT_ROTATION);
+		return getValue(LabelItem.Property.ROTATION, DataLabelsOptions.DEFAULT_ROTATION);
 	}
 
 	/**
@@ -224,7 +226,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.values(), DataLabelsOptions.DEFAULT_TEXT_ALIGN);
+		return getValue(LabelItem.Property.TEXT_ALIGN, TextAlign.values(), DataLabelsOptions.DEFAULT_TEXT_ALIGN);
 	}
 
 	/**
@@ -233,7 +235,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text stroke color as string.
 	 */
 	String getTextStrokeColorAsString() {
-		return getValue(DataLabelsOptions.Property.TEXT_STROKE_COLOR, getColorAsString());
+		return getValue(LabelItem.Property.TEXT_STROKE_COLOR, getColorAsString());
 	}
 
 	/**
@@ -242,7 +244,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text stroke width.
 	 */
 	int getTextStrokeWidth() {
-		return getValue(DataLabelsOptions.Property.TEXT_STROKE_WIDTH, DataLabelsOptions.DEFAULT_TEXT_STROKE_WIDTH);
+		return getValue(LabelItem.Property.TEXT_STROKE_WIDTH, DataLabelsOptions.DEFAULT_TEXT_STROKE_WIDTH);
 	}
 
 	/**
@@ -251,7 +253,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text shadow blur.
 	 */
 	double getTextShadowBlur() {
-		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_BLUR, DataLabelsOptions.DEFAULT_TEXT_SHADOW_BLUR);
+		return getValue(LabelItem.Property.TEXT_SHADOW_BLUR, DataLabelsOptions.DEFAULT_TEXT_SHADOW_BLUR);
 	}
 
 	/**
@@ -260,7 +262,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @return the text shadow color as string.
 	 */
 	String getTextShadowColorAsString() {
-		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_COLOR, getColorAsString());
+		return getValue(LabelItem.Property.TEXT_SHADOW_COLOR, getColorAsString());
 	}
 
 }

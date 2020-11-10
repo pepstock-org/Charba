@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
+import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
@@ -37,11 +38,11 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+	public AnnotationOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
 		// gets the reference for defaults
 		final IsDefaultsAnnotationOptions defaultsOptions;
 		// checks if defaults argument is consistent
@@ -53,7 +54,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 			defaultsOptions = AnnotationDefaultsOptions.DEFAULTS_INSTANCE;
 		}
 		// creates the options by the native object and the defaults
-		return new AnnotationOptions(nativeObject, defaultsOptions != null ? defaultsOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
+		return new AnnotationOptions(scope, defaultsOptions != null ? defaultsOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -73,12 +74,12 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons. NativeObject,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			return new AnnotationOptions(nativeObject, AnnotationDefaultsOptions.DEFAULTS_INSTANCE);
+		public AnnotationOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
+			return new AnnotationOptions(DefaultOptions.SCOPE, AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 		}
 	}
 

@@ -42,25 +42,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimation {
 
-	// all sub elements
-	private final Legend legend;
-
-	private final Hover hover;
-
-	private final Layout layout;
-
-	private final Elements elements;
-
-	private final Title title;
-
-	private final Tooltips tooltips;
-
-	private final Plugins plugins;
-
-	private final Font font;
-
-	private final Datasets datasets;
-	
 	/**
 	 * Name of properties of native object.<br>
 	 * Properties common with which extends this class.
@@ -154,6 +135,27 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		}
 
 	}
+	
+	// all sub elements
+	private final Legend legend;
+
+	private final Hover hover;
+
+	private final Layout layout;
+
+	private final Elements elements;
+
+	private final Title title;
+
+	private final Tooltips tooltips;
+
+	private final Plugins plugins;
+
+	private final Font font;
+
+	private final Datasets datasets;
+	
+	private final String scope;
 
 	// span gapper instance
 	private final SpanGapper spanGapper;
@@ -164,20 +166,27 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * Creates the object only with default provider. This is used as the root element.<br>
 	 * New native java script object is created and it's empty.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultValues default provider instance.
 	 */
-	protected Options(IsDefaultOptions defaultValues) {
-		this(defaultValues, null);
+	protected Options(String scope, IsDefaultOptions defaultValues) {
+		this(scope, defaultValues, null);
 	}
 
 	/**
 	 * Creates the object only with default provider and native object. This is used as the root element.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultValues default provider instance.
 	 * @param nativeObject native object to store properties.
 	 */
-	protected Options(IsDefaultOptions defaultValues, NativeObject nativeObject) {
+	protected Options(String scope, IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
+		// checks if scope is consistent
+		if (scope == null) {
+			throw new IllegalArgumentException("Scope argument is not consistent");
+		}
+		this.scope = scope;
 		// gets all sub elements
 		this.legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
 		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
@@ -212,6 +221,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final SpanGapper getSpanGapper() {
 		return spanGapper;
+	}
+
+	/**
+	 * Returns the scope of the options, which is the options are used for defaults, chart defaults or chart.
+	 * 
+	 * @return the scope of the options
+	 */
+	@Override
+	public final String getScope() {
+		return scope;
 	}
 
 	/**

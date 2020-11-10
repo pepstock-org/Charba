@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptions.Property;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -47,16 +48,17 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	 * Builds the object using an empty java script object of options.
 	 */
 	private DatasetsItemsSelectorDefaultsOptions() {
-		this(null);
+		this(DefaultsBuilder.get().getOptions().getScope(), null);
 	}
 
 	/**
 	 * Builds the object using the java script object of options, set by user.
 	 * 
+	 * @param scope scope of the options
 	 * @param nativeObject configuration of plugin.
 	 */
-	DatasetsItemsSelectorDefaultsOptions(NativeObject nativeObject) {
-		super(DatasetsItemsSelector.ID, nativeObject);
+	DatasetsItemsSelectorDefaultsOptions(String scope, NativeObject nativeObject) {
+		super(DatasetsItemsSelector.ID, scope, nativeObject);
 		// reads default clear selection options from main object
 		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION));
 	}

@@ -23,6 +23,7 @@ import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Comfortable object to create {@link LabelsPlugin#ID} plugin options by a builder.
@@ -44,7 +45,12 @@ public final class LabelsOptionsBuilder {
 		// creates the options with deferred registration
 		// because it will be register only when the build method
 		// will be invoked
-		options = new LabelsOptions(chart);
+		
+		// FIXME
+		Window.getConsole().log("chart", chart, IsChart.isValid(chart));
+		
+		
+		this.options = IsChart.isValid(chart) ? new LabelsOptions(chart) : new LabelsOptions();
 	}
 
 	/**

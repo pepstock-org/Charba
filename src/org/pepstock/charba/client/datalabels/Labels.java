@@ -15,14 +15,11 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * Base object to map multi labels options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
@@ -33,60 +30,25 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class Labels extends AbstractElement {
-
-	// maps all data labels options set as label options
-	private final Map<String, DataLabelsOptions> storedOptions = new HashMap<>();
+	
+	private final LabelItem parent;
+	
+	private final DefaultsOptions defaultValues;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param parent parent instance of labels
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Labels() {
-		super(null);
+	Labels(LabelItem parent, NativeObject nativeObject) {
+		super(nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
-	}
-
-	/**
-	 * Returns a collection with all stored data labels options.
-	 * 
-	 * @return a collection with all stored data labels options
-	 */
-	// FIXME checks where used
-	Collection<AbstractPluginOptions> getAllOptions() {
-		return Collections.unmodifiableCollection(storedOptions.values());
-	}
-
-	/**
-	 * Sets new data labels options with a specific key.
-	 * 
-	 * @param key key of the options
-	 * @param options options instance
-	 */
-	public void setLabel(String key, DataLabelsOptions options) {
-		setLabel(Key.create(key), options);
-	}
-
-	/**
-	 * Sets new data labels options with a specific key.
-	 * 
-	 * @param key key of the options
-	 * @param options options instance
-	 */
-	public void setLabel(Key key, DataLabelsOptions options) {
-		// checks consistency of key
-		Key.checkIfValid(key);
-		// stores options
-		setValue(key, options);
-		// checks if options are consistent
-		if (options != null) {
-			// adds to map
-			storedOptions.put(key.value(), options);
-		} else if (storedOptions.containsKey(key.value())) {
-			// if here, options are not consistent
-			// then removes from map
-			storedOptions.remove(key.value());
-		}
+		// stores parent
+		this.parent = parent;
+		this.defaultValues = parent.asDefault();
 	}
 
 	/**
@@ -95,7 +57,7 @@ public final class Labels extends AbstractElement {
 	 * @param key key of the options
 	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
-	public DataLabelsOptions getLabel(String key) {
+	public LabelItem getLabel(String key) {
 		return getLabel(Key.create(key));
 	}
 
@@ -105,11 +67,21 @@ public final class Labels extends AbstractElement {
 	 * @param key key of the options
 	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
-	public DataLabelsOptions getLabel(Key key) {
+	public LabelItem getLabel(Key key) {
 		// checks consistency of key
-		Key.checkIfValid(key);
-		// returns the stored options if there is
-		return storedOptions.get(key.value());
+		Key labelKey = Key.checkAndGetIfValid(key);
+		// checks if exists
+		if (has(labelKey)) {
+			// gets and returns the label item
+			return new LabelItem(parent.getScope(), defaultValues, getValue(labelKey));
+		} else {
+			// creates new item
+			LabelItem item = new LabelItem(parent.getScope(), defaultValues, null);
+			// stores the item
+			setValue(labelKey, item);
+			// checks 
+			return item;
+		}
 	}
 
 	/**
@@ -129,11 +101,29 @@ public final class Labels extends AbstractElement {
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
 	public boolean hasLabel(Key key) {
-		// checks consistency of key
-		Key.checkIfValid(key);
-		// checks if there is into object and into map
-		return has(key) && storedOptions.containsKey(key.value());
+		return has(Key.checkAndGetIfValid(key));
 	}
+	
+	/**
+	 * Removes an existing label for specific key.
+	 * 
+	 * @param key key of the options
+	 */
+	public void removeLabel(String key) {
+		removeLabel(Key.create(key));
+	}
+
+	/**
+	 * Removes an existing label for specific key.
+	 * 
+	 * @param key key of the options
+	 */
+	public void removeLabel(Key key) {
+		// checks consistency of key
+		// and then removes the label
+		removeIfExists(Key.checkAndGetIfValid(key));
+	}
+
 
 	/**
 	 * Returns the list of all keys related to stored options.

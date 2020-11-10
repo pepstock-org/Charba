@@ -73,7 +73,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public ChartBackgroundColorOptions() {
-		this(null, null);
+		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
 	}
 
 	/**
@@ -83,26 +83,28 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public ChartBackgroundColorOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartBackgroundColor.ID, ChartBackgroundColor.DEFAULTS_FACTORY) : null);
+		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartBackgroundColor.ID, ChartBackgroundColor.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
 	 * Builds new object with default options.
 	 * 
+	 * @param scope scope of the options
 	 * @param defaultsOptions defaults options to use to get values
 	 */
-	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultsOptions) {
-		this(null, defaultsOptions);
+	ChartBackgroundColorOptions(String scope, ChartBackgroundColorDefaultsOptions defaultsOptions) {
+		this(scope, defaultsOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
-	 * @param nativeObject native object into options
+	 * @param scope scope of the options
 	 * @param defaultsOptions plugin default options
+	 * @param nativeObject native object into options
 	 */
-	ChartBackgroundColorOptions(NativeObject nativeObject, ChartBackgroundColorDefaultsOptions defaultsOptions) {
-		super(ChartBackgroundColor.ID, nativeObject);
+	ChartBackgroundColorOptions(String scope, ChartBackgroundColorDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+		super(ChartBackgroundColor.ID, scope, nativeObject);
 		// checks if there is any default options
 		if (defaultsOptions == null) {
 			// loads global options

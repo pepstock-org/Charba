@@ -83,16 +83,7 @@ public final class Font extends AbstractElement {
 	 * Creates new font element, using the default values options.
 	 */
 	public Font() {
-		this(DefaultsOptions.DEFAULTS_INSTANCE.getFont());
-	}
-
-	/**
-	 * Creates new font element, using the default values options.
-	 * 
-	 * @param defaultsOptions default FONT options to returns the default when required.
-	 */
-	Font(DefaultsFont defaultsOptions) {
-		this(null, defaultsOptions);
+		this(DefaultsOptions.DEFAULTS_INSTANCE.getFont(), null);
 	}
 
 	/**
@@ -101,7 +92,7 @@ public final class Font extends AbstractElement {
 	 * @param nativeObject stored font values into native object to read.
 	 * @param defaultsOptions default FONT options to returns the default when required.
 	 */
-	Font(NativeObject nativeObject, DefaultsFont defaultsOptions) {
+	Font(DefaultsFont defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}
