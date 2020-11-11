@@ -67,7 +67,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLabelsOptions {
+public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLabelsItem {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -140,7 +140,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// formatter callback instance
-	//private FormatterCallback formatterCallback = null;
+	// private FormatterCallback formatterCallback = null;
 	private static final CallbackPropertyHandler<FormatterCallback> FORMATTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FORMATTER);
 	// background color callback instance
 	private BackgroundColorCallback backgroundColorCallback = null;
@@ -183,7 +183,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	// padding callback instance
 	private PaddingCallback paddingCallback = null;
 	// defaults global options instance
-	private IsDefaultsDataLabelsOptions defaultsOptions;
+	private final IsDefaultsDataLabelsItem defaultsOptions;
 	// listener inner element
 	private final Listeners listeners;
 	// padding inner element
@@ -249,7 +249,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param defaultsOptions default options instance
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelItem(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
+	LabelItem(IsDefaultsDataLabelsItem defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
@@ -273,7 +273,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 			// stores font
 			setValue(Property.FONT, font);
 		}
-		this.listeners = new Listeners(this, this.defaultsOptions.getListeners() ,getValue(Property.LISTENERS)); 
+		this.listeners = new Listeners(this, this.defaultsOptions.getListeners(), getValue(Property.LISTENERS));
 		// checks it has got the element
 		if (!has(Property.LISTENERS)) {
 			// stores listeners
@@ -325,7 +325,16 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 		// gets value calling callback
 		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), paddingCallback));
 	}
-	
+
+	/**
+	 * Returns the default options of the label.
+	 * 
+	 * @return the default options of the label
+	 */
+	final IsDefaultsDataLabelsItem getDefaultsOptions() {
+		return defaultsOptions;
+	}
+
 	/**
 	 * Returns the padding element.
 	 * 
@@ -933,16 +942,16 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param formatterCallback the formatter callback to set
 	 */
 	public final void setFormatter(FormatterCallback formatterCallback) {
-//		// sets the callback
-//		this.formatterCallback = formatterCallback;
-//		// checks if callback is consistent
-//		if (formatterCallback != null) {
-//			// adds the callback proxy function to java script object
-//			setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
-//		} else {
-//			// otherwise sets null which removes the properties from java script object
-//			remove(Property.FORMATTER);
-//		}
+		// // sets the callback
+		// this.formatterCallback = formatterCallback;
+		// // checks if callback is consistent
+		// if (formatterCallback != null) {
+		// // adds the callback proxy function to java script object
+		// setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
+		// } else {
+		// // otherwise sets null which removes the properties from java script object
+		// remove(Property.FORMATTER);
+		// }
 		FORMATTER_PROPERTY_HANDLER.setCallback(this, getId(), formatterCallback, formatterCallbackProxy.getProxy());
 	}
 
@@ -1470,5 +1479,5 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 		// default result
 		return getFont().nativeObject();
 	}
-	
+
 }

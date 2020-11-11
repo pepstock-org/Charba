@@ -37,7 +37,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
 	// static counter. Starts from min value of integer
-	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// plugin id
 	private final String pluginId;
 
@@ -89,7 +89,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			// sets unique id
 			StringBuilder sb = new StringBuilder(pluginId);
 			// needed for scoping of callbacks
-			setValue(Property.CHARBA_OPTIONS_ID, sb.append(Constants.MINUS).append(COUNTER.incrementAndGet()).toString());
+			setValue(Property.CHARBA_OPTIONS_ID, sb.append(Constants.MINUS).append(COUNTER.getAndIncrement()).toString());
 		}
 	}
 

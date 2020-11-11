@@ -32,6 +32,8 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	private final DefaultsFont font = new DefaultsFont();
 	// default font options
 	private final DefaultsListeners listeners = new DefaultsListeners();
+	// default font options
+	private final DefaultsLabels labels = new DefaultsLabels();
 
 	/**
 	 * To avoid any instantiation
@@ -68,6 +70,16 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	@Override
 	public IsDefaultsListeners getListeners() {
 		return listeners;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.datalabels.IsDefaultsDataLabelsOptions#getLabels()
+	 */
+	@Override
+	public IsDefaultsLabels getLabels() {
+		return labels;
 	}
 
 }

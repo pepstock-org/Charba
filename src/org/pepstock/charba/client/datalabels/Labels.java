@@ -29,9 +29,11 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Labels extends AbstractElement {
+public final class Labels extends AbstractElement implements IsDefaultsLabels {
 	
-	private final IsDefaultsDataLabelsOptions defaultsOptions;
+	private final IsDefaultsDataLabelsOptions parent;
+
+	private final IsDefaultsLabels defaultsOptions;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -39,11 +41,14 @@ public final class Labels extends AbstractElement {
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Labels(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
+	Labels(IsDefaultsDataLabelsOptions parent, IsDefaultsLabels defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
+		// checks if default parent is consistent
+		// stores parent
+		this.parent = checkDefaultValuesArgument(parent);
 		// checks if default value is consistent
 		// stores default
 		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
@@ -71,10 +76,10 @@ public final class Labels extends AbstractElement {
 		// checks if exists
 		if (has(labelKey)) {
 			// gets and returns the label item
-			return new LabelItem(defaultsOptions, getValue(labelKey));
+			return new LabelItem(parent, getValue(labelKey));
 		} else {
 			// creates new item
-			LabelItem item = new LabelItem(defaultsOptions, null);
+			LabelItem item = new LabelItem(parent, null);
 			// stores the item
 			setValue(labelKey, item);
 			// checks 
@@ -98,17 +103,18 @@ public final class Labels extends AbstractElement {
 	 * @param key key of the options
 	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
+	@Override
 	public LabelItem getLabel(Key key) {
 		// checks consistency of key
 		Key labelKey = Key.checkAndGetIfValid(key);
 		// checks if exists
 		if (has(labelKey)) {
 			// gets and returns the label item
-			return new LabelItem(defaultsOptions, getValue(labelKey));
+			return new LabelItem(parent, getValue(labelKey));
 		}
 		// if here, the label for the passed key
-		// does not exist
-		return null;
+		// does not exist and check to default
+		return defaultsOptions.getLabel(labelKey);
 	}
 
 	/**
@@ -127,8 +133,9 @@ public final class Labels extends AbstractElement {
 	 * @param key key of the options
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
+	@Override
 	public boolean hasLabel(Key key) {
-		return has(Key.checkAndGetIfValid(key));
+		return has(Key.checkAndGetIfValid(key)) || defaultsOptions.hasLabel(key);
 	}
 	
 	/**
@@ -150,7 +157,6 @@ public final class Labels extends AbstractElement {
 		// and then removes the label
 		removeIfExists(Key.checkAndGetIfValid(key));
 	}
-
 
 	/**
 	 * Returns the list of all keys related to stored options.

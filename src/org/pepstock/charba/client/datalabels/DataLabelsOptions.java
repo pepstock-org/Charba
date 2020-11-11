@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends LabelItem {
+public final class DataLabelsOptions extends LabelItem implements IsDefaultsDataLabelsOptions{
 
 	// -------------------------------------------
 	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
@@ -170,12 +170,23 @@ public final class DataLabelsOptions extends LabelItem {
 	DataLabelsOptions(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(defaultsOptions, nativeObject);
-		// creates and stores labels
-		this.labels = new Labels(this, getValue(Property.LABELS));
-		// checks it has got the element
-		if (!has(Property.LABELS)) {
-			// stores labels
-			setValue(Property.LABELS, labels);
+		// gets default
+		IsDefaultsDataLabelsItem defaultValue = getDefaultsOptions();
+		// checks instance of defaults options if has got the right type
+		if (defaultValue instanceof IsDefaultsDataLabelsOptions) {
+			// casts to the right type
+			IsDefaultsDataLabelsOptions values = (IsDefaultsDataLabelsOptions)defaultValue;
+			// creates and stores labels
+			this.labels = new Labels(this, values.getLabels(), getValue(Property.LABELS));
+			// checks it has got the element
+			if (!has(Property.LABELS)) {
+				// stores labels
+				setValue(Property.LABELS, labels);
+			}
+		} else {
+			// if here, the default does not have the same class
+			// which is needed for this object
+			throw new IllegalArgumentException("The default instance is not correct type, "+defaultValue.getClass().getName());
 		}
 	}	
 	
@@ -184,6 +195,7 @@ public final class DataLabelsOptions extends LabelItem {
 	 * 
 	 * @return the labels element.
 	 */
+	@Override
 	public Labels getLabels() {
 		return labels;
 	}

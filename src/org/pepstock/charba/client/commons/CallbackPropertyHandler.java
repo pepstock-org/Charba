@@ -22,22 +22,24 @@ import java.util.Set;
 
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * FIXME
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class CallbackPropertyHandler<T> {
-	
+
 	private static final String HASHCODE_PROPERTY_SuFFIX = "CharbaCallbackKey";
 
 	private final Key property;
-	
+
 	private final Key hashCodeProperty;
-	
+
 	private final Map<String, CallbackWrapper<T>> wrappers = new HashMap<>();
-	
+
 	public CallbackPropertyHandler(Key property) {
 		this.property = Key.checkAndGetIfValid(property);
 		// creates the hash code string
@@ -46,15 +48,15 @@ public final class CallbackPropertyHandler<T> {
 		// creates the key to use to store the key of callback
 		this.hashCodeProperty = Key.create(sb.toString());
 	}
-	
+
 	/**
 	 * Returns the property to manage
+	 * 
 	 * @return the property
 	 */
 	public Key getProperty() {
 		return property;
 	}
-
 
 	/**
 	 * @return the hashCodeProperty
@@ -62,7 +64,7 @@ public final class CallbackPropertyHandler<T> {
 	public Key getHashCodeProperty() {
 		return hashCodeProperty;
 	}
-	
+
 	/**
 	 * 
 	 * @param container
@@ -104,7 +106,7 @@ public final class CallbackPropertyHandler<T> {
 	public T getCallback(NativeObjectContainer container, String scope) {
 		return getCallback(container, scope, null);
 	}
-	
+
 	public T getCallback(NativeObjectContainer container, String scope, T defaultValue) {
 		// checks if scope and container are consistent
 		if (container != null && container.has(hashCodeProperty)) {
@@ -114,6 +116,11 @@ public final class CallbackPropertyHandler<T> {
 			CallbackWrapper<T> wrapper = wrappers.get(value);
 			// checks if scope is sotres
 			if (wrapper != null && wrapper.getScopes().contains(scope)) {
+
+				// FIXME
+				Window.getConsole().log("container", container);
+				Window.getConsole().log("wrapper", wrapper.toString());
+
 				// returns if the wrapper exists
 				return wrapper.getInstance();
 			}
@@ -123,7 +130,7 @@ public final class CallbackPropertyHandler<T> {
 		// then returns default value
 		return defaultValue;
 	}
-	
+
 	/**
 	 * 
 	 * @param key
@@ -149,7 +156,7 @@ public final class CallbackPropertyHandler<T> {
 	 */
 	private void removeScopeFromCallback(String key, String scope) {
 		// checks key is consistent and has been stored
-		if (key != null  && wrappers.containsKey(key)) {
+		if (key != null && wrappers.containsKey(key)) {
 			// gets the wrappers
 			CallbackWrapper<T> wrapper = wrappers.get(key);
 			// removes scope from wrapper
@@ -161,7 +168,7 @@ public final class CallbackPropertyHandler<T> {
 			}
 		}
 	}
-	
+
 	private String createKey(Object callback) {
 		// checks if callback is consistent
 		if (callback != null) {
@@ -170,13 +177,20 @@ public final class CallbackPropertyHandler<T> {
 		}
 		return Constants.EMPTY_STRING;
 	}
-	
+
+	/**
+	 * FIXME
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 * @param <T>
+	 */
 	private static final class CallbackWrapper<T> {
-		
+
 		private final T instance;
-		
+
 		private final Set<String> scopes = new HashSet<>();
-		
+
 		private CallbackWrapper(T instance) {
 			this.instance = instance;
 		}
@@ -194,7 +208,17 @@ public final class CallbackPropertyHandler<T> {
 		private Set<String> getScopes() {
 			return scopes;
 		}
-		
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "CallbackWrapper [instance=" + instance.hashCode() + ", scopes=" + scopes + "]";
+		}
+
 	}
-	
+
 }
