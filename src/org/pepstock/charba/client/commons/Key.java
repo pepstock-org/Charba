@@ -40,7 +40,7 @@ public interface Key {
 	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well.
 	 */
 	static boolean isValid(Key key) {
-		return key != null && key.value() != null;
+		return key != null && key.value() != null && key.value().trim().length() > 0;
 	}
 
 	/**
