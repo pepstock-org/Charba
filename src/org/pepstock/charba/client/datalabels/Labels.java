@@ -38,6 +38,7 @@ public final class Labels extends AbstractElement implements IsDefaultsLabels {
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param parent parent node where this object is belonging to
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object instance to be wrapped.
 	 */

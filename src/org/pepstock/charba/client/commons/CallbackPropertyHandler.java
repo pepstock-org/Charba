@@ -22,25 +22,34 @@ import java.util.Set;
 
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Window;
 
 /**
- * FIXME
+ * It is managing property where can set a callback.<br>
+ * It uses a cache in order to be able to use the callbacks even if defined at default or chart options level, both for chart or plugin options.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of callback
  *
  */
-public final class CallbackPropertyHandler<T> {
+public class CallbackPropertyHandler<T> {
 
+	// hash code property prefix.
 	private static final String HASHCODE_PROPERTY_SuFFIX = "CharbaCallbackKey";
-
+	// property key to manage and where storing the function callback proxy
 	private final Key property;
-
+	// property key used to store the class name plus hash code, as key of callback instance into cache
 	private final Key hashCodeProperty;
-
+	// caches with the callback instance
+	// K = unique key (className-hashCode), V = callback wrapper
 	private final Map<String, CallbackWrapper<T>> wrappers = new HashMap<>();
 
+	/**
+	 * Creates the object storing the property key to manage.
+	 * 
+	 * @param property the property key to manage
+	 */
 	public CallbackPropertyHandler(Key property) {
+		// checks the key consistency
 		this.property = Key.checkAndGetIfValid(property);
 		// creates the hash code string
 		StringBuilder sb = new StringBuilder();
@@ -50,27 +59,30 @@ public final class CallbackPropertyHandler<T> {
 	}
 
 	/**
-	 * Returns the property to manage
+	 * Returns the property key to manage
 	 * 
-	 * @return the property
+	 * @return the property key to manage
 	 */
-	public Key getProperty() {
+	public final Key getProperty() {
 		return property;
 	}
 
 	/**
-	 * @return the hashCodeProperty
+	 * Returns the property key used to store the class name plus hash code, as key of callback instance into cache.
+	 * 
+	 * @return the property key used to store the class name plus hash code, as key of callback instance into cache
 	 */
-	public Key getHashCodeProperty() {
+	public final Key getHashCodeProperty() {
 		return hashCodeProperty;
 	}
 
 	/**
+	 * Stores the callback into the cache, storing the proxy function and the hash code property key (unique id of callback) into native object.
 	 * 
-	 * @param container
-	 * @param scope
-	 * @param callback
-	 * @param proxy
+	 * @param container container instance of native object to use to store the properties
+	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
+	 * @param callback the java callback instance to cache
+	 * @param proxy the proxy java script function to store into native object
 	 */
 	public void setCallback(NativeObjectContainer container, String scope, T callback, Proxy proxy) {
 		// checks if scope and container are consistent
@@ -91,7 +103,7 @@ public final class CallbackPropertyHandler<T> {
 				// creates new key
 				String key = createKey(callback);
 				// checks if key is consistent
-				if (!Constants.EMPTY_STRING.equalsIgnoreCase(key)) {
+				if (key != null) {
 					// adds or updates the existing wrapper
 					updateOrAddScopeFromCallback(key, callback, scope);
 					// stores the hash code property
@@ -103,24 +115,32 @@ public final class CallbackPropertyHandler<T> {
 		}
 	}
 
-	public T getCallback(NativeObjectContainer container, String scope) {
-		return getCallback(container, scope, null);
+	/**
+	 * Returns the callback stored into native object or <code>null</code> if not exists.
+	 * 
+	 * @param container container instance of native object to use to get the unique key to retrieve the callback from cache
+	 * @return the callback stored into native object or <code>null</code> if not exists
+	 */
+	public T getCallback(NativeObjectContainer container) {
+		return getCallback(container, null);
 	}
 
-	public T getCallback(NativeObjectContainer container, String scope, T defaultValue) {
+	/**
+	 * Returns the callback stored into native object or the default value passed as argument, if not exists.
+	 * 
+	 * @param container container instance of native object to use to get the unique key to retrieve the callback from cache
+	 * @param defaultValue default value to return if the callback does not exist
+	 * @return the callback stored into native object or the default value passed as argument, if not exists
+	 */
+	public T getCallback(NativeObjectContainer container, T defaultValue) {
 		// checks if scope and container are consistent
 		if (container != null && container.has(hashCodeProperty)) {
 			// gets hash code property if exists
 			String value = container.getValue(hashCodeProperty, UndefinedValues.STRING);
 			// gets the wrappers
 			CallbackWrapper<T> wrapper = wrappers.get(value);
-			// checks if scope is sotres
-			if (wrapper != null && wrapper.getScopes().contains(scope)) {
-
-				// FIXME
-				Window.getConsole().log("container", container);
-				Window.getConsole().log("wrapper", wrapper.toString());
-
+			// checks if wrapper is consistent
+			if (wrapper != null) {
 				// returns if the wrapper exists
 				return wrapper.getInstance();
 			}
@@ -132,9 +152,11 @@ public final class CallbackPropertyHandler<T> {
 	}
 
 	/**
+	 * Updates or/and add the wrapper, with the callback instance, adding the scope.
 	 * 
-	 * @param key
-	 * @param scope
+	 * @param key property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @param callback the java callback instance to cache
+	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 	 */
 	private void updateOrAddScopeFromCallback(String key, T callback, String scope) {
 		// checks key has been stored
@@ -150,9 +172,10 @@ public final class CallbackPropertyHandler<T> {
 	}
 
 	/**
+	 * Removes an existing scope from callback wrapper.
 	 * 
-	 * @param key
-	 * @param scope
+	 * @param key property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 	 */
 	private void removeScopeFromCallback(String key, String scope) {
 		// checks key is consistent and has been stored
@@ -169,41 +192,62 @@ public final class CallbackPropertyHandler<T> {
 		}
 	}
 
+	/**
+	 * Creates the property key used to store the class name plus hash code, as key of callback instance into cache.<br>
+	 * <br>
+	 * <code>[callbackClassName]-[callbackHashCode]</code> <br>
+	 * 
+	 * @param callback the java callback instance to cache
+	 * @return property key used to store the class name plus hash code, as key of callback instance into cache
+	 */
 	private String createKey(Object callback) {
 		// checks if callback is consistent
 		if (callback != null) {
-			StringBuilder sb = new StringBuilder();
-			return sb.append(callback.getClass()).append(Constants.MINUS).append(callback.hashCode()).toString();
+			// creates the unique key for callback
+			StringBuilder sb = new StringBuilder(callback.getClass().getName());
+			return sb.append(Constants.MINUS).append(callback.hashCode()).toString();
 		}
-		return Constants.EMPTY_STRING;
+		// if callback is not consistent, returns null
+		return null;
 	}
 
 	/**
-	 * FIXME
+	 * Internal class to wrap the java callback instance and its scopes.<br>
+	 * This is the value type of the map.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 *
-	 * @param <T>
+	 * @param <T> type of callback
+	 * 
 	 */
 	private static final class CallbackWrapper<T> {
 
+		// callback instance
 		private final T instance;
-
+		// set with all scopes where the callback is defined
 		private final Set<String> scopes = new HashSet<>();
 
+		/**
+		 * Creates the wrapper with the java callback instance.
+		 * 
+		 * @param instance the java callback instance
+		 */
 		private CallbackWrapper(T instance) {
 			this.instance = instance;
 		}
 
 		/**
-		 * @return the instance
+		 * Returns the java callback instance.
+		 * 
+		 * @return the java callback instance
 		 */
 		private T getInstance() {
 			return instance;
 		}
 
 		/**
-		 * @return the scopes
+		 * Returns the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets.
+		 * 
+		 * @return the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 		 */
 		private Set<String> getScopes() {
 			return scopes;

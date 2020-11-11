@@ -210,7 +210,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param options list of plugin options used to configure the plugin.
 	 * @param <T> type of plugin options to store
 	 */
-	// FIXME
+	// FIXME to be removed
 	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
 		// checks if options are consistent and not empty
 		if (options != null && !options.isEmpty()) {

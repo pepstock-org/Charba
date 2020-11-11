@@ -115,7 +115,6 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
 	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions) {

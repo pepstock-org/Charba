@@ -140,20 +140,19 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// formatter callback instance
-	// private FormatterCallback formatterCallback = null;
 	private static final CallbackPropertyHandler<FormatterCallback> FORMATTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FORMATTER);
 	// background color callback instance
-	private BackgroundColorCallback backgroundColorCallback = null;
+	private static final CallbackPropertyHandler<BackgroundColorCallback> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
 	// border color callback instance
-	private BorderColorCallback borderColorCallback = null;
+	private static final CallbackPropertyHandler<BorderColorCallback> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
 	// color callback instance
-	private ColorCallback colorCallback = null;
+	private static final CallbackPropertyHandler<ColorCallback> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 	// align callback instance
-	private AlignCallback alignCallback = null;
+	private static final CallbackPropertyHandler<AlignCallback> ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ALIGN);
 	// anchor callback instance
-	private AnchorCallback anchorCallback = null;
+	private static final CallbackPropertyHandler<AnchorCallback> ANCHOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ANCHOR);
 	// borderRadius callback instance
-	private RadiusCallback borderRadiusCallback = null;
+	private static final CallbackPropertyHandler<RadiusCallback> BORDER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_RADIUS);
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
 	// clamp callback instance
@@ -285,17 +284,17 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 		// -------------------------------
 		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new ScriptableContext(new DataLabelsEnvelop<>(context)), value));
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), backgroundColorCallback, getBackgroundColorAsString()));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), borderColorCallback, getBorderColorAsString()));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), colorCallback, getColorAsString()));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 		// gets value calling callback
-		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), alignCallback, getAlign()).value());
+		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), ALIGN_PROPERTY_HANDLER.getCallback(this), getAlign()).value());
 		// gets value calling callback
-		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), anchorCallback, getAnchor()).value());
+		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), ANCHOR_PROPERTY_HANDLER.getCallback(this), getAnchor()).value());
 		// gets value calling callback
-		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), borderRadiusCallback, getBorderRadius()).doubleValue());
+		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
 		// gets value calling callback
 		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), borderWidthCallback, getBorderWidth()).intValue());
 		// gets value calling callback
@@ -852,7 +851,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
 	public final BackgroundColorCallback getBackgroundColorCallback() {
-		return backgroundColorCallback;
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -861,16 +860,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param backgroundColorCallback the background color callback.
 	 */
 	public final void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
-		// sets the callback
-		this.backgroundColorCallback = backgroundColorCallback;
-		// checks if callback is consistent
-		if (backgroundColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BACKGROUND_COLOR);
-		}
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -879,7 +869,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
 	public final BorderColorCallback getBorderColorCallback() {
-		return borderColorCallback;
+		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -888,16 +878,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param borderColorCallback the border color callback.
 	 */
 	public final void setBorderColor(BorderColorCallback borderColorCallback) {
-		// sets the callback
-		this.borderColorCallback = borderColorCallback;
-		// checks if callback is consistent
-		if (borderColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_COLOR, borderColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_COLOR);
-		}
+		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), borderColorCallback, borderColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -906,7 +887,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
 	public final ColorCallback getColorCallback() {
-		return colorCallback;
+		return COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -915,16 +896,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param colorCallback the color callback.
 	 */
 	public final void setColor(ColorCallback colorCallback) {
-		// sets the callback
-		this.colorCallback = colorCallback;
-		// checks if callback is consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.COLOR, colorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.COLOR);
-		}
+		COLOR_PROPERTY_HANDLER.setCallback(this, getId(), colorCallback, colorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -933,7 +905,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the formatter callback, if set, otherwise <code>null</code>.
 	 */
 	public final FormatterCallback getFormatterCallback() {
-		return FORMATTER_PROPERTY_HANDLER.getCallback(this, getId());
+		return FORMATTER_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -942,16 +914,6 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param formatterCallback the formatter callback to set
 	 */
 	public final void setFormatter(FormatterCallback formatterCallback) {
-		// // sets the callback
-		// this.formatterCallback = formatterCallback;
-		// // checks if callback is consistent
-		// if (formatterCallback != null) {
-		// // adds the callback proxy function to java script object
-		// setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
-		// } else {
-		// // otherwise sets null which removes the properties from java script object
-		// remove(Property.FORMATTER);
-		// }
 		FORMATTER_PROPERTY_HANDLER.setCallback(this, getId(), formatterCallback, formatterCallbackProxy.getProxy());
 	}
 
@@ -961,7 +923,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the align callback, if set, otherwise <code>null</code>.
 	 */
 	public final AlignCallback getAlignCallback() {
-		return alignCallback;
+		return ALIGN_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -970,16 +932,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param alignCallback the align callback to set
 	 */
 	public final void setAlign(AlignCallback alignCallback) {
-		// sets the callback
-		this.alignCallback = alignCallback;
-		// checks if callback is consistent
-		if (alignCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.ALIGN, alignCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.ALIGN);
-		}
+		ALIGN_PROPERTY_HANDLER.setCallback(this, getId(), alignCallback, alignCallbackProxy.getProxy());
 	}
 
 	/**
@@ -988,7 +941,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the anchor callback, if set, otherwise <code>null</code>.
 	 */
 	public final AnchorCallback getAnchorCallback() {
-		return anchorCallback;
+		return ANCHOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -997,16 +950,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param anchorCallback the anchor callback to set
 	 */
 	public final void setAnchor(AnchorCallback anchorCallback) {
-		// sets the callback
-		this.anchorCallback = anchorCallback;
-		// checks if callback is consistent
-		if (anchorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.ANCHOR, anchorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.ANCHOR);
-		}
+		ANCHOR_PROPERTY_HANDLER.setCallback(this, getId(), anchorCallback, anchorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1015,7 +959,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
 	public final RadiusCallback getBorderRadiusCallback() {
-		return borderRadiusCallback;
+		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
 	}
 
 	/**
@@ -1024,16 +968,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param borderRadiusCallback the border radius callback to set
 	 */
 	public final void setBorderRadius(RadiusCallback borderRadiusCallback) {
-		// sets the callback
-		this.borderRadiusCallback = borderRadiusCallback;
-		// checks if callback is consistent
-		if (borderRadiusCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_RADIUS, borderRadiusCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_RADIUS);
-		}
+		BORDER_RADIUS_PROPERTY_HANDLER.setCallback(this, getId(), borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1423,7 +1358,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 */
 	private String onFormatter(ScriptableContext context, Object value) {
 		// gets callback
-		FormatterCallback formatterCallback = FORMATTER_PROPERTY_HANDLER.getCallback(this, getId());
+		FormatterCallback formatterCallback = FORMATTER_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 		// checks if the handler is set

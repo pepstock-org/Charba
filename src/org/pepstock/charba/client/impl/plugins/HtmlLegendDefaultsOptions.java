@@ -46,7 +46,6 @@ final class HtmlLegendDefaultsOptions extends AbstractPluginOptions {
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
-	 * @param scope scope of the options
 	 * @param nativeObject native object which maps default global options.
 	 */
 	HtmlLegendDefaultsOptions(NativeObject nativeObject) {

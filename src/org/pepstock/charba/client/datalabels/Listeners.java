@@ -91,7 +91,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public ClickEventHandler getClickEventHandler() {
-		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getClickEventHandler());
+		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClickEventHandler());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public EnterEventHandler getEnterEventHandler() {
-		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getEnterEventHandler());
+		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getEnterEventHandler());
 
 	}
 
@@ -130,7 +130,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public LeaveEventHandler getLeaveEventHandler() {
-		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getLeaveEventHandler());
+		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getLeaveEventHandler());
 	}
 
 	/**
@@ -150,7 +150,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	private boolean onClick(ScriptableContext context) {
 		// gets callback
-		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
+		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
 		// checks if the handler is set
@@ -170,7 +170,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	private boolean onEnter(ScriptableContext context) {
 		// gets callback
-		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
+		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
 		// checks if the handler is set
@@ -190,7 +190,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 */
 	private boolean onLeave(ScriptableContext context) {
 		// gets callback
-		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
+		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
 		// checks if the handler is set
