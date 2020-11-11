@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of {@link ChartPointer#ID} plugin.<br>
@@ -78,7 +77,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * The global plugin options is used, if exists, as defaults values.
 	 */
 	public ChartPointerOptions() {
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
+		this(null, null);
 	}
 
 	/**
@@ -88,28 +87,26 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public ChartPointerOptions(IsChart chart) {
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartPointer.ID, ChartPointer.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ChartPointer.ID, ChartPointer.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(String scope, ChartPointerDefaultsOptions defaultsOptions) {
-		this(scope, defaultsOptions, null);
+	ChartPointerOptions(ChartPointerDefaultsOptions defaultsOptions) {
+		this(defaultsOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options and the default global ones
 	 * 
-	 * @param scope scope of the options
 	 * @param nativeObject native object into options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(String scope, ChartPointerDefaultsOptions defaultsOptions, NativeObject nativeObject) {
-		super(ChartPointer.ID, scope, nativeObject);
+	ChartPointerOptions(ChartPointerDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+		super(ChartPointer.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

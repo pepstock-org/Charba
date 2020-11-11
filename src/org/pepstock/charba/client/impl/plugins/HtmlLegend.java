@@ -129,7 +129,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new HtmlLegendOptions(chart.getId(), HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new HtmlLegendOptions(HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
 			}
 			pluginOptions.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());

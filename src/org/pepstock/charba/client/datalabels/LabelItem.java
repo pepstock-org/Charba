@@ -28,6 +28,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -60,15 +61,13 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import jsinterop.annotations.JsFunction;
 
 /**
- * FIXME
- * This is the {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the plugin.<br>
- * The options could be set by simply the value or by setting a callback.<br>
- * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.<br>
+ * This is the base for {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the a label.<br>
+ * The options could be set by simply the value or by setting a callback.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions {
+public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLabelsOptions {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -141,7 +140,8 @@ public class LabelItem extends AbstractPluginOptions {
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// formatter callback instance
-	private FormatterCallback formatterCallback = null;
+	//private FormatterCallback formatterCallback = null;
+	private static final CallbackPropertyHandler<FormatterCallback> FORMATTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FORMATTER);
 	// background color callback instance
 	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
@@ -182,9 +182,8 @@ public class LabelItem extends AbstractPluginOptions {
 	private FontCallback fontCallback = null;
 	// padding callback instance
 	private PaddingCallback paddingCallback = null;
-
 	// defaults global options instance
-	private DefaultsOptions defaultsOptions;
+	private IsDefaultsDataLabelsOptions defaultsOptions;
 	// listener inner element
 	private final Listeners listeners;
 	// padding inner element
@@ -247,13 +246,12 @@ public class LabelItem extends AbstractPluginOptions {
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
-	 * @param scope scope of the options
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultsOptions default options instance
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelItem(String scope, DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	LabelItem(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
-		super(DataLabelsPlugin.ID, scope, nativeObject);
+		super(DataLabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
@@ -275,7 +273,7 @@ public class LabelItem extends AbstractPluginOptions {
 			// stores font
 			setValue(Property.FONT, font);
 		}
-		this.listeners = new Listeners(this, getValue(Property.LISTENERS)); // FIXME DEFAULT
+		this.listeners = new Listeners(this, this.defaultsOptions.getListeners() ,getValue(Property.LISTENERS)); 
 		// checks it has got the element
 		if (!has(Property.LISTENERS)) {
 			// stores listeners
@@ -329,19 +327,11 @@ public class LabelItem extends AbstractPluginOptions {
 	}
 	
 	/**
-	 * Creates a default options starting from this options.
-	 * 
-	 * @return  a default options starting from this options
-	 */
-	DefaultsOptions asDefault() {
-		return new DefaultsOptions(getScope(), getNativeObject());
-	}
-
-	/**
 	 * Returns the padding element.
 	 * 
 	 * @return the padding element.
 	 */
+	@Override
 	public final Padding getPadding() {
 		return padding;
 	}
@@ -351,6 +341,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the font element.
 	 */
+	@Override
 	public final Font getFont() {
 		return font;
 	}
@@ -360,6 +351,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the listeners element.
 	 */
+	@Override
 	public final Listeners getListeners() {
 		return listeners;
 	}
@@ -392,6 +384,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
+	@Override
 	public final Align getAlign() {
 		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
 	}
@@ -410,6 +403,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
+	@Override
 	public final Anchor getAnchor() {
 		return getValue(Property.ANCHOR, Anchor.values(), defaultsOptions.getAnchor());
 	}
@@ -437,6 +431,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the background color as string.
 	 */
+	@Override
 	public final String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
 	}
@@ -474,6 +469,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the border color as string.
 	 */
+	@Override
 	public final String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
 	}
@@ -502,6 +498,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the border radius.
 	 */
+	@Override
 	public final double getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, defaultsOptions.getBorderRadius());
 	}
@@ -520,6 +517,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the border width.
 	 */
+	@Override
 	public final int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
 	}
@@ -538,6 +536,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
+	@Override
 	public final boolean isClamp() {
 		return getValue(Property.CLAMP, defaultsOptions.isClamp());
 	}
@@ -556,6 +555,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
+	@Override
 	public final boolean isClip() {
 		return getValue(Property.CLIP, defaultsOptions.isClip());
 	}
@@ -583,6 +583,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the color as string.
 	 */
+	@Override
 	public final String getColorAsString() {
 		return getValue(Property.COLOR, defaultsOptions.getColorAsString());
 	}
@@ -626,6 +627,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the visibility of labels.
 	 */
+	@Override
 	public final Display getDisplay() {
 		// gets the type of display property
 		ObjectType type = type(Property.DISPLAY);
@@ -661,6 +663,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
 	 *         label is moved in the opposite direction.
 	 */
+	@Override
 	public final double getOffset() {
 		return getValue(Property.OFFSET, defaultsOptions.getOffset());
 	}
@@ -679,6 +682,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the opacity.
 	 */
+	@Override
 	public final double getOpacity() {
 		return getValue(Property.OPACITY, defaultsOptions.getOpacity());
 	}
@@ -697,6 +701,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
+	@Override
 	public final double getRotation() {
 		return getValue(Property.ROTATION, defaultsOptions.getRotation());
 	}
@@ -715,6 +720,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the text alignment being used when drawing the label text.
 	 */
+	@Override
 	public final TextAlign getTextAlign() {
 		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultsOptions.getTextAlign());
 	}
@@ -742,6 +748,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the text stroke color as string.
 	 */
+	@Override
 	public final String getTextStrokeColorAsString() {
 		return getValue(Property.TEXT_STROKE_COLOR, defaultsOptions.getTextStrokeColorAsString());
 	}
@@ -769,6 +776,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the text stroke width.
 	 */
+	@Override
 	public final int getTextStrokeWidth() {
 		return getValue(Property.TEXT_STROKE_WIDTH, defaultsOptions.getTextStrokeWidth());
 	}
@@ -787,6 +795,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow blur.
 	 */
+	@Override
 	public final double getTextShadowBlur() {
 		return getValue(Property.TEXT_SHADOW_BLUR, defaultsOptions.getTextShadowBlur());
 	}
@@ -814,6 +823,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow color as string.
 	 */
+	@Override
 	public final String getTextShadowColorAsString() {
 		return getValue(Property.TEXT_SHADOW_COLOR, defaultsOptions.getTextShadowColorAsString());
 	}
@@ -914,7 +924,7 @@ public class LabelItem extends AbstractPluginOptions {
 	 * @return the formatter callback, if set, otherwise <code>null</code>.
 	 */
 	public final FormatterCallback getFormatterCallback() {
-		return formatterCallback;
+		return FORMATTER_PROPERTY_HANDLER.getCallback(this, getId());
 	}
 
 	/**
@@ -923,16 +933,17 @@ public class LabelItem extends AbstractPluginOptions {
 	 * @param formatterCallback the formatter callback to set
 	 */
 	public final void setFormatter(FormatterCallback formatterCallback) {
-		// sets the callback
-		this.formatterCallback = formatterCallback;
-		// checks if callback is consistent
-		if (formatterCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.FORMATTER);
-		}
+//		// sets the callback
+//		this.formatterCallback = formatterCallback;
+//		// checks if callback is consistent
+//		if (formatterCallback != null) {
+//			// adds the callback proxy function to java script object
+//			setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
+//		} else {
+//			// otherwise sets null which removes the properties from java script object
+//			remove(Property.FORMATTER);
+//		}
+		FORMATTER_PROPERTY_HANDLER.setCallback(this, getId(), formatterCallback, formatterCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1402,6 +1413,8 @@ public class LabelItem extends AbstractPluginOptions {
 	 * @return a string as formatted value
 	 */
 	private String onFormatter(ScriptableContext context, Object value) {
+		// gets callback
+		FormatterCallback formatterCallback = FORMATTER_PROPERTY_HANDLER.getCallback(this, getId());
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 		// checks if the handler is set

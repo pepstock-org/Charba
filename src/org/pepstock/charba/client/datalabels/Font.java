@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  * @see FontCallback
  */
-public final class Font extends AbstractElement {
+public final class Font extends AbstractElement implements IsDefaultsFont {
 
 	/**
 	 * Default font weight, {@link Weight#NORMAL}.
@@ -42,7 +42,7 @@ public final class Font extends AbstractElement {
 	public static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	// defaults global options instance
-	private DefaultsFont defaultsOptions;
+	private IsDefaultsFont defaultsOptions;
 
 	/**
 	 * Name of properties of native object.
@@ -92,9 +92,11 @@ public final class Font extends AbstractElement {
 	 * @param nativeObject stored font values into native object to read.
 	 * @param defaultsOptions default FONT options to returns the default when required.
 	 */
-	Font(DefaultsFont defaultsOptions, NativeObject nativeObject) {
+	Font(IsDefaultsFont defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		// checks if default value is consistent
+		// stores default
+		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
 	}
 
 	/**
@@ -111,8 +113,9 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the font size.
 	 */
+	@Override
 	public int getSize() {
-		return getValue(Property.SIZE, defaultsOptions.getFontSize());
+		return getValue(Property.SIZE, defaultsOptions.getSize());
 	}
 
 	/**
@@ -129,8 +132,9 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
+	@Override
 	public FontStyle getStyle() {
-		return getValue(Property.STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
+		return getValue(Property.STYLE, FontStyle.values(), defaultsOptions.getStyle());
 	}
 
 	/**
@@ -147,8 +151,9 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return Font family, follows CSS font-family options.
 	 */
+	@Override
 	public String getFamily() {
-		return getValue(Property.FAMILY, defaultsOptions.getFontFamily());
+		return getValue(Property.FAMILY, defaultsOptions.getFamily());
 	}
 
 	/**
@@ -165,6 +170,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
+	@Override
 	public Weight getWeight() {
 		return getValue(Property.WEIGHT, Weight.values(), defaultsOptions.getWeight());
 	}
@@ -192,6 +198,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the height of an individual line of text.
 	 */
+	@Override
 	public double getLineHeight() {
 		// creates default
 		double defaultValue = defaultsOptions.getLineHeight();

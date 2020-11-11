@@ -16,18 +16,18 @@
 package org.pepstock.charba.client.datalabels;
 
 /**
- * {@link DataLabelsPlugin#ID} plugin default options for FONT element.<br>
- * It contains all default values for FONT.
+ * {@link DataLabelsPlugin#ID} plugin default options for LISTENERS element.<br>
+ * It contains all default values for LISTENERS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsFont implements IsDefaultsFont {
-
+final class DefaultsListeners implements IsDefaultsListeners {
+	
 	/**
-	 * To avoid any instantiation
+	 * Creates the empty object
 	 */
-	DefaultsFont() {
-		// do nothing
+	DefaultsListeners() {
 	}
+
 }

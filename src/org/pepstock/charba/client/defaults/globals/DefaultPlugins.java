@@ -80,7 +80,7 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates a empty options
-			return factory.create(null, DefaultOptions.SCOPE, null);
+			return factory.create(null, null);
 		}
 		// if here factory is not consistent
 		return null;

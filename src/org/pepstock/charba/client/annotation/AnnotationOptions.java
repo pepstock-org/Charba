@@ -77,7 +77,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * Creates new {@link Annotation#ID} plugin options.
 	 */
 	public AnnotationOptions() {
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null);
+		this(null, null);
 	}
 
 	/**
@@ -86,30 +86,28 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param chart chart instance related to the plugin options
 	 */
 	public AnnotationOptions(IsChart chart) {
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
 	}
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.
 	 * 
-	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	AnnotationOptions(String scope, IsDefaultsAnnotationOptions defaultsOptions) {
+	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions) {
 		// creates an empty native object
-		this(scope, defaultsOptions, null);
+		this(defaultsOptions, null);
 	}
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.<br>
 	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
-	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object loaded from configuration
 	 */
-	AnnotationOptions(String scope, IsDefaultsAnnotationOptions defaultsOptions, NativeObject nativeObject) {
-		super(Annotation.ID, scope, nativeObject);
+	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions, NativeObject nativeObject) {
+		super(Annotation.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

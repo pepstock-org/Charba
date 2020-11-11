@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -39,7 +38,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
 	private DefaultsOptions() {
-		this(DefaultsBuilder.get().getOptions().getScope(), null);
+		this(null);
 	}
 
 	/**
@@ -48,8 +47,8 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @param scope scope of the options 
 	 * @param nativeObject native object which maps default global options.
 	 */
-	DefaultsOptions(String scope, NativeObject nativeObject) {
-		super(ZoomPlugin.ID, scope, nativeObject);
+	DefaultsOptions(NativeObject nativeObject) {
+		super(ZoomPlugin.ID, nativeObject);
 		// reads default pan options from main object
 		pan = new DefaultsPan(getValue(ZoomOptions.Property.PAN));
 		// reads default zoom options from main object

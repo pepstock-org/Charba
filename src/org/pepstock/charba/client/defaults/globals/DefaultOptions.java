@@ -34,7 +34,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	/**
 	 * Default options scope for defaults options.
 	 */
-	public static final String SCOPE = "<defaults>";
+	public static final String SCOPE = "defaults";
 	
 	static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 

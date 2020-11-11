@@ -21,6 +21,7 @@ import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -35,16 +36,10 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
-	/**
-	 * Default scope, needed to understand when the cached callbacks properties must be reset.
-	 */
-	public static final String OPTIONS_SCOPE = "pluginOptions";
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
 	// plugin id
 	private final String pluginId;
-	// scope for callbacks
-	private final String scope;
 
 	/**
 	 * Name of properties of native object.
@@ -81,25 +76,20 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * Creates new plugin options with plugin ID, using a native object instance.
 	 * 
 	 * @param pluginId plugin ID
-	 * @param scope scope of the options
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	protected AbstractPluginOptions(String pluginId, String scope, NativeObject nativeObject) {
+	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks plugin id
 		PluginIdChecker.check(pluginId);
 		// stores plugin id
 		this.pluginId = pluginId;
-		// checks if scope is consistent
-		if (scope == null) {
-			throw new IllegalArgumentException("Scope argument is not consistent");
-		}
-		this.scope = scope;
 		// checks if the ID is already set
 		if (!has(Property.CHARBA_OPTIONS_ID)) {
 			// sets unique id
-			// needed for caching the instances
-			setValue(Property.CHARBA_OPTIONS_ID, COUNTER.incrementAndGet());
+			StringBuilder sb = new StringBuilder(pluginId);
+			// needed for scoping of callbacks
+			setValue(Property.CHARBA_OPTIONS_ID, sb.append(Constants.MINUS).append(COUNTER.incrementAndGet()).toString());
 		}
 	}
 
@@ -108,17 +98,8 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * 
 	 * @return the unique ID of the options.
 	 */
-	public final int getId() {
-		return getValue(Property.CHARBA_OPTIONS_ID, UndefinedValues.INTEGER);
-	}
-	
-	/**
-	 * Returns the scope of the options, which is the options are used for defaults, chart defaults or chart.
-	 * 
-	 * @return the scope of the options
-	 */
-	public final String getScope() {
-		return scope;
+	public final String getId() {
+		return getValue(Property.CHARBA_OPTIONS_ID, UndefinedValues.STRING);
 	}
 
 	/**
@@ -147,7 +128,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				return factory.create(null, OPTIONS_SCOPE, null);
+				return factory.create(null, null);
 			}
 		}
 		// if here the factory is not consistent

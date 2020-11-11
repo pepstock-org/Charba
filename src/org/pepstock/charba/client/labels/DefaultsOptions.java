@@ -17,7 +17,6 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
@@ -37,7 +36,7 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
 	private DefaultsOptions() {
-		this(DefaultsBuilder.get().getOptions().getScope(), null);
+		this(null);
 	}
 
 	/**
@@ -46,8 +45,8 @@ final class DefaultsOptions extends AbstractPluginOptions {
 	 * @param scope scope of the options
 	 * @param nativeObject native object which maps default global options.
 	 */
-	DefaultsOptions(String scope, NativeObject nativeObject) {
-		super(LabelsPlugin.ID, scope, nativeObject);
+	DefaultsOptions(NativeObject nativeObject) {
+		super(LabelsPlugin.ID, nativeObject);
 	}
 
 	/**

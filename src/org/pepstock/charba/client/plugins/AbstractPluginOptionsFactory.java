@@ -17,7 +17,6 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
-import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 
 /**
  * Factory to get the plugin options (form chart, from datasets or from default global ones) related to the plugin.
@@ -54,11 +53,10 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * Creates a plugin options by a native object which is containing the options values and its defaults.
 	 * 
 	 * @param nativeObject native object which is containing the options
-	 * @param scope scope of the options
 	 * @param defaultValues the defaults values for the plugin options
 	 * @return a plugin options instance
 	 */
-	public abstract T create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues);
+	public abstract T create(NativeObject nativeObject, IsDefaultPlugins defaultValues);
 
 	/**
 	 * Loads the default plugin options from defaults.<br>
@@ -69,7 +67,7 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * @param <G> type of native object container
 	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns <code>null</code>.
 	 */
-	protected final <G extends AbstractPluginOptions> G loadGlobalsPluginOptions(IsDefaultPlugins defaultsPlugins, AbstractPluginOptionsFactory<G> factory) {
+	protected final <G extends AbstractPluginOptions> G loadDefaultsPluginOptions(IsDefaultPlugins defaultsPlugins, AbstractPluginOptionsFactory<G> factory) {
 		// checks if factory and defaults options are consistent
 		if (factory != null && defaultsPlugins != null) {
 			// checks if the default global options has been added for the plugin
@@ -79,7 +77,7 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				return factory.create(null, DefaultOptions.SCOPE, defaultsPlugins);
+				return factory.create(null, defaultsPlugins);
 			}
 		}
 		// if here the factory is not consistent

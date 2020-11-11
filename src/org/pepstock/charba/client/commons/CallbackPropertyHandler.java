@@ -22,7 +22,6 @@ import java.util.Set;
 
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * FIXME
@@ -63,7 +62,14 @@ public final class CallbackPropertyHandler<T> {
 	public Key getHashCodeProperty() {
 		return hashCodeProperty;
 	}
-
+	
+	/**
+	 * 
+	 * @param container
+	 * @param scope
+	 * @param callback
+	 * @param proxy
+	 */
 	public void setCallback(NativeObjectContainer container, String scope, T callback, Proxy proxy) {
 		// checks if scope and container are consistent
 		if (scope != null && container != null) {
@@ -71,7 +77,7 @@ public final class CallbackPropertyHandler<T> {
 			String value = container.getValue(hashCodeProperty, UndefinedValues.STRING);
 			// checks if hash code property already exists
 			// because it could be already defined with another callback
-			if (value != null && scope != null) {
+			if (value != null) {
 				// removes the scope
 				removeScopeFromCallback(value, scope);
 				// removes the properties
@@ -94,10 +100,12 @@ public final class CallbackPropertyHandler<T> {
 			}
 		}
 	}
-	
+
 	public T getCallback(NativeObjectContainer container, String scope) {
-		
-		Window.getConsole().log("wrappers", wrappers.toString());
+		return getCallback(container, scope, null);
+	}
+	
+	public T getCallback(NativeObjectContainer container, String scope, T defaultValue) {
 		// checks if scope and container are consistent
 		if (container != null && container.has(hashCodeProperty)) {
 			// gets hash code property if exists
@@ -112,8 +120,8 @@ public final class CallbackPropertyHandler<T> {
 		}
 		// if here, arguments are not consistent
 		// or the callbacks is not stored
-		// then returns null
-		return null;
+		// then returns default value
+		return defaultValue;
 	}
 	
 	/**

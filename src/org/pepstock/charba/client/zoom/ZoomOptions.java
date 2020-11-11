@@ -71,7 +71,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 */
 	public ZoomOptions() {
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
+		this(null, null);
 		// stores inner elements
 		setValue(Property.PAN, pan);
 		setValue(Property.ZOOM, zoom);
@@ -84,7 +84,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public ZoomOptions(IsChart chart) {
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY) : null, null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY) : null, null);
 		// stores inner elements
 		setValue(Property.PAN, pan);
 		setValue(Property.ZOOM, zoom);
@@ -94,12 +94,11 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 * 
 	 * @param defaultsOptions default options stored into defaults global
-	 * @param scope scope of the options
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	ZoomOptions(String scope, DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ZoomOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
-		super(ZoomPlugin.ID, scope, nativeObject);
+		super(ZoomPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

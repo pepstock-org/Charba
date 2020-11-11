@@ -63,21 +63,19 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * Creates new plugin options with plugin ID, using a native object instance.
 	 * 
 	 * @param pluginId plugin ID
-	 * @param scope scope of the options
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	AbstractCursorPointerOptions(String pluginId, String scope, NativeObject nativeObject) {
-		super(pluginId, scope, nativeObject);
+	AbstractCursorPointerOptions(String pluginId, NativeObject nativeObject) {
+		super(pluginId, nativeObject);
 	}
 
 	/**
 	 * Creates new plugin options with plugin ID, creating new native options.
 	 * 
 	 * @param pluginId plugin ID
-	 * @param scope scope of the options
 	 */
-	AbstractCursorPointerOptions(String pluginId, String scope) {
-		this(pluginId, scope, null);
+	AbstractCursorPointerOptions(String pluginId) {
+		this(pluginId, null);
 	}
 
 	/**

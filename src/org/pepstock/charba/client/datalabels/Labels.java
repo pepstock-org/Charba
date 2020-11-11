@@ -31,24 +31,55 @@ import org.pepstock.charba.client.commons.NativeObject;
  */
 public final class Labels extends AbstractElement {
 	
-	private final LabelItem parent;
-	
-	private final DefaultsOptions defaultValues;
+	private final IsDefaultsDataLabelsOptions defaultsOptions;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param parent parent instance of labels
+	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Labels(LabelItem parent, NativeObject nativeObject) {
+	Labels(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
 		super.redefineHashcode();
-		// stores parent
-		this.parent = parent;
-		this.defaultValues = parent.asDefault();
+		// checks if default value is consistent
+		// stores default
+		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
+	}
+	
+	/**
+	 * Returns new options for specific key.
+	 * 
+	 * @param key key of the options
+	 * @return the new option for that key
+	 */
+	public LabelItem createLabel(String key) {
+		return createLabel(Key.create(key));
+	}
+	
+	/**
+	 * Returns new options for specific key.
+	 * 
+	 * @param key key of the options
+	 * @return the new option for that key
+	 */
+	public LabelItem createLabel(Key key) {
+		// checks consistency of key
+		Key labelKey = Key.checkAndGetIfValid(key);
+		// checks if exists
+		if (has(labelKey)) {
+			// gets and returns the label item
+			return new LabelItem(defaultsOptions, getValue(labelKey));
+		} else {
+			// creates new item
+			LabelItem item = new LabelItem(defaultsOptions, null);
+			// stores the item
+			setValue(labelKey, item);
+			// checks 
+			return item;
+		}
 	}
 
 	/**
@@ -73,15 +104,11 @@ public final class Labels extends AbstractElement {
 		// checks if exists
 		if (has(labelKey)) {
 			// gets and returns the label item
-			return new LabelItem(parent.getScope(), defaultValues, getValue(labelKey));
-		} else {
-			// creates new item
-			LabelItem item = new LabelItem(parent.getScope(), defaultValues, null);
-			// stores the item
-			setValue(labelKey, item);
-			// checks 
-			return item;
+			return new LabelItem(defaultsOptions, getValue(labelKey));
 		}
+		// if here, the label for the passed key
+		// does not exist
+		return null;
 	}
 
 	/**

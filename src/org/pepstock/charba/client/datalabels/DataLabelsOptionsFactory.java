@@ -37,20 +37,20 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public DataLabelsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
+	public DataLabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, DataLabelsPlugin.DEFAULTS_FACTORY);
+			DataLabelsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, DataLabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new DataLabelsOptions(scope, defaultsOptions, nativeObject);
+			return new DataLabelsOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new DataLabelsOptions(scope, DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new DataLabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class DataLabelsDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DefaultsOptions> {
+	static class DataLabelsDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DataLabelsOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -70,17 +70,13 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new DefaultsOptions(scope, nativeObject);
-			}
-			return DefaultsOptions.DEFAULTS_INSTANCE;
+		public DataLabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			// creates the default global option by native object
+			return new DataLabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 		}
 
 	}

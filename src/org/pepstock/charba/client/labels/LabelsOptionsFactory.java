@@ -37,20 +37,20 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
-	public LabelsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
+	public LabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
+			DefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new LabelsOptions(scope, defaultsOptions, nativeObject);
+			return new LabelsOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new LabelsOptions(scope, DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**
@@ -70,15 +70,15 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, java.lang.String,
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DefaultsOptions create(NativeObject nativeObject, String scope, IsDefaultPlugins defaultValues) {
+		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			if (nativeObject != null) {
 				// creates the default global option by native object
-				return new DefaultsOptions(scope, nativeObject);
+				return new DefaultsOptions(nativeObject);
 			}
 			return DefaultsOptions.DEFAULTS_INSTANCE;
 		}

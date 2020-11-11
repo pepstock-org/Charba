@@ -22,7 +22,6 @@ import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * This is the {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the plugin.<br>
@@ -150,10 +149,7 @@ public final class DataLabelsOptions extends LabelItem {
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 */
 	public DataLabelsOptions() {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
+		this(null, null);
 	}
 
 	/**
@@ -162,22 +158,18 @@ public final class DataLabelsOptions extends LabelItem {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public DataLabelsOptions(IsChart chart) {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DataLabelsPlugin.ID, DataLabelsPlugin.DEFAULTS_FACTORY) : null, null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(DataLabelsPlugin.ID, DataLabelsPlugin.DEFAULTS_FACTORY) : null, null);
 	}
 
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
-	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	DataLabelsOptions(String scope, DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	DataLabelsOptions(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
-		super(scope, defaultsOptions, nativeObject);
+		super(defaultsOptions, nativeObject);
 		// creates and stores labels
 		this.labels = new Labels(this, getValue(Property.LABELS));
 		// checks it has got the element

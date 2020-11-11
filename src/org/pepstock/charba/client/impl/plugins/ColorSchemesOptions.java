@@ -99,7 +99,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	public ColorSchemesOptions() {
 		// creates an empty object
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
+		this(null, null);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public ColorSchemesOptions(IsChart chart) {
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.DEFAULTS_FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.DEFAULTS_FACTORY) : null);
 	}
 
 	/**
@@ -118,19 +118,18 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param scope scope of the options
 	 * @param defaultsOptions default options stored into defaults global
 	 */
-	ColorSchemesOptions(String scope, ColorSchemesDefaultsOptions defaultsOptions) {
-		this(scope, defaultsOptions, null);
+	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions) {
+		this(defaultsOptions, null);
 	}
 
 	/**
 	 * Builds the object using a native object.
 	 * 
-	 * @param scope scope of the options
 	 * @param nativeObject native object which contains the properties
 	 * @param defaultsOptions plugin default options
 	 */
-	ColorSchemesOptions(String scope, ColorSchemesDefaultsOptions defaultsOptions, NativeObject nativeObject) {
-		super(ColorSchemes.ID, scope, nativeObject);
+	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+		super(ColorSchemes.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options

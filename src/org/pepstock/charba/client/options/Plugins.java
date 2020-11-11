@@ -347,10 +347,10 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
-				return factory.create(getValue(pluginIdKey), getParent().getScope(), getDefaultValues());
+				return factory.create(getValue(pluginIdKey), getDefaultValues());
 			} else {
 				// if here returns an empty object
-				return factory.create(null, getParent().getScope(), getDefaultValues());
+				return factory.create(null, getDefaultValues());
 			}
 		}
 		// if here factory is not consistent
@@ -381,10 +381,10 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			// checks if object
 			if (ObjectType.OBJECT.equals(type)) {
 				// creates the object using the defaults options
-				return factory.create(getValue(pluginIdKey), getParent().getScope(), getDefaultValues());
+				return factory.create(getValue(pluginIdKey), getDefaultValues());
 			} else {
 				// if here returns an empty object
-				return factory.create(null, getParent().getScope(), getDefaultValues());
+				return factory.create(null, getDefaultValues());
 			}
 		}
 		// if here factory is not consistent
@@ -416,7 +416,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				for (int i = 0; i < array.length(); i++) {
 					// creates the object using the defaults options
 					// and adds to result list
-					result.add(factory.create(array.get(i), getParent().getScope(), getDefaultValues()));
+					result.add(factory.create(array.get(i), getDefaultValues()));
 				}
 				return result;
 			}
@@ -454,7 +454,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 				for (int i = 0; i < array.length(); i++) {
 					// creates the object using the defaults options
 					// and adds to result list
-					result.add(factory.create(array.get(i), getParent().getScope(), getDefaultValues()));
+					result.add(factory.create(array.get(i), getDefaultValues()));
 				}
 				return result;
 			}

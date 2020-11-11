@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @see PaddingCallback
  */
-public final class Padding extends AbstractElement {
+public final class Padding extends AbstractElement implements IsDefaultsPadding{
 
 	/**
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
@@ -35,7 +35,7 @@ public final class Padding extends AbstractElement {
 	public static final int DEFAULT_PADDING = 4;
 
 	// defaults global options instance
-	private DefaultsPadding defaultsOptions;
+	private IsDefaultsPadding defaultsOptions;
 
 	/**
 	 * Creates new padding element, using the default values options.
@@ -50,7 +50,7 @@ public final class Padding extends AbstractElement {
 	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default PADDING options to returns the default when required.
 	 */
-	Padding(DefaultsPadding defaultsOptions, NativeObject nativeObject) {
+	Padding(IsDefaultsPadding defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if default value is consistent
 		// stores default
@@ -83,6 +83,7 @@ public final class Padding extends AbstractElement {
 	 * 
 	 * @return the padding left in pixel.
 	 */
+	@Override
 	public int getLeft() {
 		return getValue(Position.LEFT, defaultsOptions.getLeft());
 	}
@@ -101,6 +102,7 @@ public final class Padding extends AbstractElement {
 	 * 
 	 * @return the padding right in pixel.
 	 */
+	@Override
 	public int getRight() {
 		return getValue(Position.RIGHT, defaultsOptions.getRight());
 	}
@@ -119,6 +121,7 @@ public final class Padding extends AbstractElement {
 	 * 
 	 * @return the padding top in pixel.
 	 */
+	@Override
 	public int getTop() {
 		return getValue(Position.TOP, defaultsOptions.getTop());
 	}
@@ -137,6 +140,7 @@ public final class Padding extends AbstractElement {
 	 * 
 	 * @return the padding bottom in pixel.
 	 */
+	@Override
 	public int getBottom() {
 		return getValue(Position.BOTTOM, defaultsOptions.getBottom());
 	}

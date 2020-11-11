@@ -39,7 +39,7 @@ import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Listeners extends NativeObjectContainer {
+public final class Listeners extends NativeObjectContainer implements IsDefaultsListeners {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -52,26 +52,30 @@ public final class Listeners extends NativeObjectContainer {
 	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// CLICK event handler instance
-//  private ClickEventHandler clickEventHandler = null;
-	private static final CallbackPropertyHandler<ClickEventHandler> CLICK_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.CLICK);
+	static final CallbackPropertyHandler<ClickEventHandler> CLICK_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.CLICK);
 	// ENTER event handler instance
-//	private EnterEventHandler enterEventHandler = null;
-	private static final CallbackPropertyHandler<EnterEventHandler> ENTER_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.ENTER);
+	static final CallbackPropertyHandler<EnterEventHandler> ENTER_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.ENTER);
 	// LEAVE event handler instance
-//	private LeaveEventHandler leaveEventHandler = null;
-	private static final CallbackPropertyHandler<LeaveEventHandler> LEAVE_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.LEAVE);
+	static final CallbackPropertyHandler<LeaveEventHandler> LEAVE_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.LEAVE);
 	// parent instance
 	private final LabelItem parent;
+	// parent instance
+	private final IsDefaultsListeners defaultsOptions;
 	
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param parent data labels options instance, parent of this node
+	 * @param defaultsOptions default options instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Listeners(LabelItem parent, NativeObject nativeObject) {
+	Listeners(LabelItem parent, IsDefaultsListeners defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores parent
 		this.parent = parent;
+		// checks if default value is consistent
+		// stores default
+		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -85,9 +89,9 @@ public final class Listeners extends NativeObjectContainer {
 	 * 
 	 * @return the click event handler instance or <code>null</code> if not set.
 	 */
+	@Override
 	public ClickEventHandler getClickEventHandler() {
-//		return clickEventHandler;
-		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getClickEventHandler());
 	}
 
 	/**
@@ -96,17 +100,7 @@ public final class Listeners extends NativeObjectContainer {
 	 * @param clickEventHandler the click event handler to set
 	 */
 	public void setClickEventHandler(ClickEventHandler clickEventHandler) {
-//		// sets the handler
-//		this.clickEventHandler = clickEventHandler;
-//		// checks if handler is consistent
-//		if (clickEventHandler != null) {
-//			// adds the callback proxy function to java script object
-//			setValue(Event.CLICK, clickEventCallbackProxy.getProxy());
-//		} else {
-//			// otherwise sets null which removes the properties from java script object
-//			remove(Event.CLICK);
-//		}
-		CLICK_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getScope(), clickEventHandler, clickEventCallbackProxy.getProxy());
+		CLICK_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), clickEventHandler, clickEventCallbackProxy.getProxy());
 	}
 
 	/**
@@ -114,9 +108,9 @@ public final class Listeners extends NativeObjectContainer {
 	 * 
 	 * @return the ENTER event handler instance or <code>null</code> if not set.
 	 */
+	@Override
 	public EnterEventHandler getEnterEventHandler() {
-//		return enterEventHandler;
-		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getEnterEventHandler());
 
 	}
 
@@ -126,17 +120,7 @@ public final class Listeners extends NativeObjectContainer {
 	 * @param enterEventHandler the enter event handler to set
 	 */
 	public void setEnterEventHandler(EnterEventHandler enterEventHandler) {
-//		// sets the handler
-//		this.enterEventHandler = enterEventHandler;
-//		// checks if handler is consistent
-//		if (enterEventHandler != null) {
-//			// adds the callback proxy function to java script object
-//			setValue(Event.ENTER, enterEventCallbackProxy.getProxy());
-//		} else {
-//			// otherwise sets null which removes the properties from java script object
-//			remove(Event.ENTER);
-//		}
-		ENTER_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getScope(), enterEventHandler, enterEventCallbackProxy.getProxy());
+		ENTER_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), enterEventHandler, enterEventCallbackProxy.getProxy());
 	}
 
 	/**
@@ -144,9 +128,9 @@ public final class Listeners extends NativeObjectContainer {
 	 * 
 	 * @return the LEAVE event handler instance or <code>null</code> if not set.
 	 */
+	@Override
 	public LeaveEventHandler getLeaveEventHandler() {
-//		return leaveEventHandler;
-		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId(), defaultsOptions.getLeaveEventHandler());
 	}
 
 	/**
@@ -155,17 +139,7 @@ public final class Listeners extends NativeObjectContainer {
 	 * @param leaveEventHandler the leave event handler to set
 	 */
 	public void setLeaveEventHandler(LeaveEventHandler leaveEventHandler) {
-//		// sets the handler
-//		this.leaveEventHandler = leaveEventHandler;
-//		// checks if handler is consistent
-//		if (leaveEventHandler != null) {
-//			// adds the callback proxy function to java script object
-//			setValue(Event.LEAVE, leaveEventCallbackProxy.getProxy());
-//		} else {
-//			// otherwise sets null which removes the properties from java script object
-//			remove(Event.LEAVE);
-//		}
-		LEAVE_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getScope(), leaveEventHandler, leaveEventCallbackProxy.getProxy());
+		LEAVE_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), leaveEventHandler, leaveEventCallbackProxy.getProxy());
 	}
 
 	/**
@@ -176,7 +150,7 @@ public final class Listeners extends NativeObjectContainer {
 	 */
 	private boolean onClick(ScriptableContext context) {
 		// gets callback
-		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
 		// checks if the handler is set
@@ -196,7 +170,7 @@ public final class Listeners extends NativeObjectContainer {
 	 */
 	private boolean onEnter(ScriptableContext context) {
 		// gets callback
-		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
 		// checks if the handler is set
@@ -216,7 +190,7 @@ public final class Listeners extends NativeObjectContainer {
 	 */
 	private boolean onLeave(ScriptableContext context) {
 		// gets callback
-		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getScope());
+		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, parent.getId());
 		// gets chart instance
 		IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
 		// checks if the handler is set

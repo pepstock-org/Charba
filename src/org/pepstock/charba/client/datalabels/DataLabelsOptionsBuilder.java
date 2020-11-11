@@ -66,10 +66,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param chart chart instance related to the plugin options
 	 */
 	private DataLabelsOptionsBuilder(IsChart chart) {
-		// creates the options with deferred registration
-		// because it will be register only when the build method
-		// will be invoked
-		this.options = IsChart.isValid(chart) ? new DataLabelsOptions(chart) : new DataLabelsOptions();
+		this.options = new DataLabelsOptions(chart);
 	}
 
 	/**

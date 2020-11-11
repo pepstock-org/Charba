@@ -225,10 +225,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 */
 	public LabelsOptions() {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(AbstractPluginOptions.OPTIONS_SCOPE, null, null);
+		this(null, null);
 	}
 
 	/**
@@ -237,22 +234,18 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LabelsOptions(IsChart chart) {
-		// creates the object registering it
-		// this constructor is used by user to set options for plugin
-		// both default global or chart one.
-		this(IsChart.checkAndGetIfValid(chart).getId(), IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(LabelsPlugin.ID, LabelsPlugin.DEFAULTS_FACTORY) : null, null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(LabelsPlugin.ID, LabelsPlugin.DEFAULTS_FACTORY) : null, null);
 	}
 
 	/**
 	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 * 
-	 * @param scope scope of the options 
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelsOptions(String scope, DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	LabelsOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty object
-		super(LabelsPlugin.ID, scope, nativeObject);
+		super(LabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// reads the default default global options
