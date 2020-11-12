@@ -101,14 +101,14 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 			this.defaultsOptions = defaultsOptions;
 		}
 		// sets inner elements
-		this.pan = new Pan(this.defaultsOptions.getPan(), getValue(Property.PAN));
+		this.pan = new Pan(this, this.defaultsOptions.getPan(), getValue(Property.PAN));
 		// checks it has got the element
 		if (!has(Property.PAN)) {
 			// stores pan
 			setValue(Property.PAN, pan);
 		}
 		// sets inner elements
-		this.zoom = new Zoom(this.defaultsOptions.getZoom(), getValue(Property.ZOOM));
+		this.zoom = new Zoom(this, this.defaultsOptions.getZoom(), getValue(Property.ZOOM));
 		// checks it has got the element
 		if (!has(Property.ZOOM)) {
 			// stores zoom

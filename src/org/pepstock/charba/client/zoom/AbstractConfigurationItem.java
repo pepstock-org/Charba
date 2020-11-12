@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -81,6 +82,9 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	// callback proxy to invoke the COMPLETE function
 	private final CallbackProxy<ProxyHandlerCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	// mode callback
+	private static final CallbackPropertyHandler<ModeCallback> MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MODE);
+	
 	/**
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
@@ -125,27 +129,26 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 
 	}
 
+	// parent instance
+	private final ZoomOptions parent;
 	// default options
 	private final T defaultsOptions;
 	// minimum range
 	private final Range rangeMin;
 	// maximum range
 	private final Range rangeMax;
-	// mode callback
-	private ModeCallback modeCallback;
-	// progress callback
-	private ProgressCallback progressCallback;
-	// complete callback
-	private CompleteCallback completeCallback;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param parent zoom options, parent of this node
 	 * @param defaultsOptions default options of element
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractConfigurationItem(T defaultsOptions, NativeObject nativeObject) {
+	AbstractConfigurationItem(ZoomOptions parent, T defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
+		// stores parent
+		this.parent = parent;
 		// checks if defaults options is consistent
 		// stores defaults options
 		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
@@ -187,18 +190,18 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	}
 
 	/**
-	 * Returns the property name to use to set the progress handler.
+	 * Returns the callback property handler for progress event.
 	 * 
-	 * @return the property name to use to set the progress handler
+	 * @return the callback property handler for progress event
 	 */
-	abstract Key getProgressKey();
-
+	abstract CallbackPropertyHandler<ProgressCallback> getProgessPropertyHandler();
+	
 	/**
-	 * Returns the property name to use to set the complete handler.
+	 * Returns the callback property handler for complete event.
 	 * 
-	 * @return the property name to use to set the complete handler
+	 * @return the callback property handler for complete event
 	 */
-	abstract Key getCompleteKey();
+	abstract CallbackPropertyHandler<CompleteCallback> getCompletePropertyHandler();
 
 	/**
 	 * Sets <code>true</code> to enable element (panning or zooming).
@@ -253,8 +256,9 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * 
 	 * @return the element (panning or zooming) directions callback
 	 */
+	@Override
 	public final ModeCallback getModeCallback() {
-		return modeCallback;
+		return MODE_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getModeCallback());
 	}
 
 	/**
@@ -263,16 +267,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @param modeCallback the element (panning or zooming) directions callback
 	 */
 	public final void setMode(ModeCallback modeCallback) {
-		// sets the callback
-		this.modeCallback = modeCallback;
-		// checks if callback is consistent
-		if (modeCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.MODE, modeCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.MODE);
-		}
+		MODE_PROPERTY_HANDLER.setCallback(this, parent.getId(), modeCallback, modeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -300,8 +295,9 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * 
 	 * @return the callback called while the user is zooming or panning
 	 */
+	@Override
 	public final ProgressCallback getProgressCallback() {
-		return progressCallback;
+		return getProgessPropertyHandler().getCallback(this, defaultsOptions.getProgressCallback());
 	}
 
 	/**
@@ -310,20 +306,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @param progressCallback the callback called while the user is zooming or panning
 	 */
 	public final void setProgressCallback(ProgressCallback progressCallback) {
-		// gets the key to use for progress callback
-		Key key = getProgressKey();
-		// checks if key is consistent
-		Key.checkIfValid(key);
-		// sets the callback
-		this.progressCallback = progressCallback;
-		// checks if callback is consistent
-		if (progressCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(key, progressCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(key);
-		}
+		getProgessPropertyHandler().setCallback(this, parent.getId(), progressCallback, progressCallbackProxy.getProxy());
 	}
 
 	/**
@@ -331,8 +314,9 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * 
 	 * @return the callback called once zooming or panning is completed
 	 */
+	@Override
 	public final CompleteCallback getCompleteCallback() {
-		return completeCallback;
+		return getCompletePropertyHandler().getCallback(this, defaultsOptions.getCompleteCallback());
 	}
 
 	/**
@@ -341,20 +325,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @param completeCallback the callback called once zooming or panning is completed
 	 */
 	public final void setCompleteCallback(CompleteCallback completeCallback) {
-		// gets the key to use for complete callback
-		Key key = getCompleteKey();
-		// checks if key is consistent
-		Key.checkIfValid(key);
-		// sets the callback
-		this.completeCallback = completeCallback;
-		// checks if callback is consistent
-		if (completeCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(key, completeCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(key);
-		}
+		getCompletePropertyHandler().setCallback(this, parent.getId(), completeCallback, completeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -364,6 +335,8 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @return a string mode (direction) value.
 	 */
 	private String onMode(Context context) {
+		// gets callback
+		ModeCallback modeCallback = MODE_PROPERTY_HANDLER.getCallback(this);
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(modeCallback, context)) {
 			// invokes callback
@@ -385,6 +358,8 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @param context wrapper of native chart instance.
 	 */
 	private void onProgress(Context context) {
+		// gets callback
+		ProgressCallback progressCallback = getProgessPropertyHandler().getCallback(this);
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(progressCallback, context)) {
 			// invokes callback
@@ -398,6 +373,8 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultsConfiguratio
 	 * @param context wrapper of native chart instance.
 	 */
 	private void onComplete(Context context) {
+		// gets callback
+		CompleteCallback completeCallback = getCompletePropertyHandler().getCallback(this);
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(completeCallback, context)) {
 			// invokes callback

@@ -16,6 +16,9 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
+import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
+import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 
 /**
  * Interface used by pan and zoom object in order to enable to provide the defaults values of properties.
@@ -41,6 +44,33 @@ interface IsDefaultsConfigurationItem {
 	 */
 	default InteractionAxis getMode() {
 		return AbstractConfigurationItem.DEFAULT_MODE;
+	}
+	
+	/**
+	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.
+	 * 
+	 * @return the element (panning or zooming) directions callback
+	 */
+	default ModeCallback getModeCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called while the user is zooming or panning.
+	 * 
+	 * @return the callback called while the user is zooming or panning
+	 */
+	default ProgressCallback getProgressCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called once zooming or panning is completed.
+	 * 
+	 * @return the callback called once zooming or panning is completed
+	 */
+	default CompleteCallback getCompleteCallback() {
+		return null;
 	}
 
 	/**

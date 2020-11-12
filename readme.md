@@ -432,6 +432,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the management of properties used cross classes or packages.
  * improve the tooltip callbacks management providing the right defaults.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
+ * improve `DataLabels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
+ * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
 
 License
 -------

@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.zoom;
 
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
+import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 
 /**
  * Base object to map pan options for {@link ZoomPlugin#ID} plugin configuration.<br>
@@ -25,6 +28,11 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  */
 public final class Pan extends AbstractConfigurationItem<IsDefaultsPan> implements IsDefaultsPan {
+
+	// progress callback
+	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
+	// complete callback
+	private static final CallbackPropertyHandler<CompleteCallback> COMPLETE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETE);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -73,31 +81,32 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultsPan> implemen
 	/**
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
+	 * @param parent zoom options, parent of this node
 	 * @param defaultsOptions default PAN options to returns the default when required.
 	 * @param nativeObject stored padding values into native object to read.
 	 */
-	Pan(IsDefaultsPan defaultsOptions, NativeObject nativeObject) {
-		super(defaultsOptions, nativeObject);
+	Pan(ZoomOptions parent, IsDefaultsPan defaultsOptions, NativeObject nativeObject) {
+		super(parent, defaultsOptions, nativeObject);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.zoom.AbstractElement#getProgressKey()
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getProgessPropertyHandler()
 	 */
 	@Override
-	Key getProgressKey() {
-		return Property.ON_PAN;
+	CallbackPropertyHandler<ProgressCallback> getProgessPropertyHandler() {
+		return PROGRESS_PROPERTY_HANDLER;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.zoom.AbstractElement#getCompleteKey()
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getCompletePropertyHandler()
 	 */
 	@Override
-	Key getCompleteKey() {
-		return Property.ON_PAN_COMPLETE;
+	CallbackPropertyHandler<CompleteCallback> getCompletePropertyHandler() {
+		return COMPLETE_PROPERTY_HANDLER;
 	}
 
 	/**

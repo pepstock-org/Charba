@@ -52,11 +52,11 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// CLICK event handler instance
-	static final CallbackPropertyHandler<ClickEventHandler> CLICK_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.CLICK);
+	private static final CallbackPropertyHandler<ClickEventHandler> CLICK_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.CLICK);
 	// ENTER event handler instance
-	static final CallbackPropertyHandler<EnterEventHandler> ENTER_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.ENTER);
+	private static final CallbackPropertyHandler<EnterEventHandler> ENTER_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.ENTER);
 	// LEAVE event handler instance
-	static final CallbackPropertyHandler<LeaveEventHandler> LEAVE_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.LEAVE);
+	private static final CallbackPropertyHandler<LeaveEventHandler> LEAVE_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.LEAVE);
 	// parent instance
 	private final LabelItem parent;
 	// parent instance
