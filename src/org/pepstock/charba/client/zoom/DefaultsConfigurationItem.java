@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * FIMXE {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
- * It contains all default values for PAN.
+ * {@link ZoomPlugin#ID} plugin default options for the abstract element used by pan and zoom options.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for ZOOM element.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface for ZOOM element.<br>
  * It contains all default values for ZOOM.
  * 
  * @author Andrea "Stock" Stocchero

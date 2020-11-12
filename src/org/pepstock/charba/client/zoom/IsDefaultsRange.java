@@ -20,8 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * FIXME
- * {@link ZoomPlugin#ID} plugin default options for RANGE (min and max) elements.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface for RANGE (min and max) elements.<br>
  * It contains all default values for RANGE.
  * 
  * @author Andrea "Stock" Stocchero

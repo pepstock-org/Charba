@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * FIXME
- * {@link ZoomPlugin#ID} plugin default options for DRAG element, in order to style the drag area.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface for DRAG element, in order to style the drag area.<br>
  * It contains all default values for DRAG.
  * 
  * @author Andrea "Stock" Stocchero

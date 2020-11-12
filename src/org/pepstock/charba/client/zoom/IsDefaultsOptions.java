@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * FIXME
- * {@link ZoomPlugin#ID} plugin default options.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface.<br>
  * It contains all default values, PAN and ZOOM.
  * 
  * @author Andrea "Stock" Stocchero
