@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Drag extends NativeObjectContainer {
+public final class Drag extends NativeObjectContainer implements IsDefaultsDrag {
 
 	/**
 	 * Default background color, <b>{@value DEFAULT_BACKGROUND_COLOR}</b>.
@@ -84,14 +84,14 @@ public final class Drag extends NativeObjectContainer {
 	}
 
 	// defaults global drag options instance
-	private DefaultsDrag defaultsOptions;
+	private IsDefaultsDrag defaultsOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
 	 * @param defaultsOptions default DRAG options to returns the default when required.
 	 */
-	Drag(DefaultsDrag defaultsOptions) {
+	Drag(IsDefaultsDrag defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
@@ -101,7 +101,7 @@ public final class Drag extends NativeObjectContainer {
 	 * @param nativeObject stored range values into native object to read.
 	 * @param defaultsOptions default DRAG options to returns the default when required.
 	 */
-	Drag(NativeObject nativeObject, DefaultsDrag defaultsOptions) {
+	Drag(NativeObject nativeObject, IsDefaultsDrag defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}
@@ -130,6 +130,7 @@ public final class Drag extends NativeObjectContainer {
 	 * 
 	 * @return the fill color during dragging
 	 */
+	@Override
 	public String getBackgroundColorAsString() {
 		// returns color as string
 		return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
@@ -168,6 +169,7 @@ public final class Drag extends NativeObjectContainer {
 	 * 
 	 * @return the color of the border during dragging
 	 */
+	@Override
 	public String getBorderColorAsString() {
 		// returns color as string
 		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
@@ -197,6 +199,7 @@ public final class Drag extends NativeObjectContainer {
 	 * 
 	 * @return the width of the border in pixels.
 	 */
+	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
 	}
@@ -215,6 +218,7 @@ public final class Drag extends NativeObjectContainer {
 	 * 
 	 * @return the number of milliseconds an animation takes.
 	 */
+	@Override
 	public int getAnimationDuration() {
 		return getValue(Property.ANIMATION_DURATION, defaultsOptions.getAnimationDuration());
 	}

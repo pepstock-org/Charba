@@ -30,7 +30,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Range extends NativeObjectContainer {
+public final class Range extends NativeObjectContainer implements IsDefaultsRange {
 
 	/**
 	 * Name of properties of native object.
@@ -65,24 +65,24 @@ public final class Range extends NativeObjectContainer {
 	}
 
 	// defaults global options instance
-	private DefaultsRange defaultsOptions;
+	private IsDefaultsRange defaultsOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
 	 * @param defaultsOptions default RANGE options to returns the default when required.
 	 */
-	Range(DefaultsRange defaultsOptions) {
-		this(null, defaultsOptions);
+	Range(IsDefaultsRange defaultsOptions) {
+		this(defaultsOptions, null);
 	}
 
 	/**
 	 * Creates new range element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored range values into native object to read.
 	 * @param defaultsOptions default RANGE options to returns the default when required.
+	 * @param nativeObject stored range values into native object to read.
 	 */
-	Range(NativeObject nativeObject, DefaultsRange defaultsOptions) {
+	Range(IsDefaultsRange defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}
@@ -137,6 +137,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the X value of range as string
 	 */
+	@Override
 	public String getX() {
 		// checks if the value has been set as string
 		if (ObjectType.STRING.equals(getTypeForX())) {
@@ -151,6 +152,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the X value of range as double
 	 */
+	@Override
 	public double getXAsDouble() {
 		// checks if the value has been set as double
 		if (ObjectType.NUMBER.equals(getTypeForX())) {
@@ -165,6 +167,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the X value of range as date
 	 */
+	@Override
 	public Date getXAsDate() {
 		// checks if the value has been set as date
 		if (ObjectType.NUMBER.equals(getTypeForX())) {
@@ -206,6 +209,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the Y value of range as double
 	 */
+	@Override
 	public double getY() {
 		// checks if the value has been set as double
 		if (ObjectType.NUMBER.equals(getTypeForY())) {
@@ -220,6 +224,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the Y value of range as string
 	 */
+	@Override
 	public String getYAsString() {
 		// checks if the value has been set as string
 		if (ObjectType.STRING.equals(getTypeForY())) {
@@ -234,6 +239,7 @@ public final class Range extends NativeObjectContainer {
 	 * 
 	 * @return the Y value of range as date
 	 */
+	@Override
 	public Date getYAsDate() {
 		// checks if the value has been set as date
 		if (ObjectType.NUMBER.equals(getTypeForY())) {

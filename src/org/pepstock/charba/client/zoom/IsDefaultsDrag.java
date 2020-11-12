@@ -16,20 +16,48 @@
 package org.pepstock.charba.client.zoom;
 
 /**
+ * FIXME
  * {@link ZoomPlugin#ID} plugin default options for DRAG element, in order to style the drag area.<br>
  * It contains all default values for DRAG.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsDrag implements IsDefaultsDrag {
-
-	static final DefaultsDrag INSTANCE = new DefaultsDrag();
+interface IsDefaultsDrag {
 
 	/**
-	 * Creates an empty object.
+	 * Returns the fill color during dragging.
+	 * 
+	 * @return the fill color during dragging
 	 */
-	private DefaultsDrag() {
-		// do nothing
+	default String getBackgroundColorAsString() {
+		return Drag.DEFAULT_BACKGROUND_COLOR;
+	}
+
+	/**
+	 * Returns the color of the border during dragging.
+	 * 
+	 * @return the color of the border during dragging
+	 */
+	default String getBorderColorAsString() {
+		return Drag.DEFAULT_BORDER_COLOR;
+	}
+
+	/**
+	 * Returns the width of the border in pixels.
+	 * 
+	 * @return the width of the border in pixels.
+	 */
+	default int getBorderWidth() {
+		return Drag.DEFAULT_BORDER_WIDTH;
+	}
+
+	/**
+	 * Returns the number of milliseconds an animation takes.
+	 * 
+	 * @return the number of milliseconds an animation takes.
+	 */
+	default int getAnimationDuration() {
+		return Drag.DEFAULT_ANIMATION_DURATION;
 	}
 }

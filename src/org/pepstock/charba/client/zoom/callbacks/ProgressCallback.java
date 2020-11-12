@@ -33,5 +33,5 @@ public interface ProgressCallback {
 	 * @param chart chart instance
 	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
 	 */
-	void onProgress(IsChart chart, AbstractConfigurationItem configurationItem);
+	void onProgress(IsChart chart, AbstractConfigurationItem<?> configurationItem);
 }

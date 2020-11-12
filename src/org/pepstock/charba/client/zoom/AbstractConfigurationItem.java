@@ -32,9 +32,9 @@ import jsinterop.annotations.JsFunction;
  * Abstract element used by pan and zoom object in order to enable to provide the configuration of {@link ZoomPlugin#ID}.
  * 
  * @author Andrea "Stock" Stocchero
- * 
+ * @param <T> type of default
  */
-public abstract class AbstractConfigurationItem extends NativeObjectContainer {
+public abstract class AbstractConfigurationItem<T extends IsDefaultsConfigurationItem> extends NativeObjectContainer implements IsDefaultsConfigurationItem {
 
 	/**
 	 * Java script FUNCTION callback called to provide the mode (direction) of element.
@@ -126,7 +126,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	}
 
 	// default options
-	private final AbstractDefaultsConfigurationItem defaultsOptions;
+	private final T defaultsOptions;
 	// minimum range
 	private final Range rangeMin;
 	// maximum range
@@ -141,22 +141,18 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param nativeObject native object instance to be wrapped.
 	 * @param defaultsOptions default options of element
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractConfigurationItem(NativeObject nativeObject, AbstractDefaultsConfigurationItem defaultsOptions) {
+	AbstractConfigurationItem(T defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if defaults options is consistent
-		if (defaultsOptions == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Defaults options argument is null");
-		}
 		// stores defaults options
-		this.defaultsOptions = defaultsOptions;
+		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
 		// checks if range min are already present
 		if (has(Property.RANGE_MIN)) {
 			// gets range min
-			this.rangeMin = new Range(getValue(Property.RANGE_MIN), defaultsOptions.getRangeMin());
+			this.rangeMin = new Range(defaultsOptions.getRangeMin(), getValue(Property.RANGE_MIN));
 		} else {
 			// gets range min
 			this.rangeMin = new Range(defaultsOptions.getRangeMin());
@@ -166,7 +162,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		// checks if range max are already present
 		if (has(Property.RANGE_MAX)) {
 			// gets range max
-			this.rangeMax = new Range(getValue(Property.RANGE_MAX), defaultsOptions.getRangeMax());
+			this.rangeMax = new Range(defaultsOptions.getRangeMax(), getValue(Property.RANGE_MAX));
 		} else {
 			// gets range max
 			this.rangeMax = new Range(defaultsOptions.getRangeMax());
@@ -179,6 +175,15 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new Context(context)));
 		progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new Context(context)));
 		completeCallbackProxy.setCallback((contextFunction, context) -> onComplete(new Context(context)));
+	}
+
+	/**
+	 * Returns the default options instance.
+	 * 
+	 * @return the default options instance
+	 */
+	final T getDefaultsOptions() {
+		return defaultsOptions;
 	}
 
 	/**
@@ -209,6 +214,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> to enable element (panning or zooming)
 	 */
+	@Override
 	public final boolean isEnabled() {
 		return getValue(Property.ENABLED, defaultsOptions.isEnabled());
 	}
@@ -230,6 +236,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * 
 	 * @return the element (panning or zooming) directions
 	 */
+	@Override
 	public final InteractionAxis getMode() {
 		// checks if callback has been activated
 		if (getModeCallback() == null) {
@@ -273,6 +280,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * 
 	 * @return the minimum element (panning or zooming) range depending on scale type
 	 */
+	@Override
 	public final Range getRangeMin() {
 		return rangeMin;
 	}
@@ -282,6 +290,7 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer {
 	 * 
 	 * @return the maximum element (panning or zooming) range depending on scale type
 	 */
+	@Override
 	public final Range getRangeMax() {
 		return rangeMax;
 	}

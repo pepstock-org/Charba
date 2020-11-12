@@ -13,26 +13,30 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom.callbacks;
-
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
+package org.pepstock.charba.client.zoom;
 
 /**
- * Callback interface of {@link ZoomPlugin#ID} plugin that is called once zooming or panning is completed.
+ * FIXME
+ * {@link ZoomPlugin#ID} plugin default options.<br>
+ * It contains all default values, PAN and ZOOM.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface CompleteCallback {
+interface IsDefaultsOptions {
 
 	/**
-	 * Method called once zooming or panning is completed.
+	 * Returns the pan element.
 	 * 
-	 * @param chart chart instance
-	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
+	 * @return the pan element.
 	 */
-	void onComplete(IsChart chart, AbstractConfigurationItem<?> configurationItem);
+	IsDefaultsPan getPan();
+
+	/**
+	 * Returns the zoom element.
+	 * 
+	 * @return the zoom element.
+	 */
+	IsDefaultsZoom getZoom();
 
 }

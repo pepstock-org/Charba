@@ -26,7 +26,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomOptions extends AbstractPluginOptions {
+public final class ZoomOptions extends AbstractPluginOptions implements IsDefaultsOptions{
 
 	/**
 	 * Name of properties of native object.
@@ -61,7 +61,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	}
 
 	// defaults global options instance
-	private DefaultsOptions defaultsOptions;
+	private IsDefaultsOptions defaultsOptions;
 	// pan inner element
 	private final Pan pan;
 	// zoom inner element
@@ -72,10 +72,6 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 */
 	public ZoomOptions() {
 		this(null, null);
-		// stores inner elements
-		setValue(Property.PAN, pan);
-		setValue(Property.ZOOM, zoom);
-
 	}
 
 	/**
@@ -85,9 +81,6 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 */
 	public ZoomOptions(IsChart chart) {
 		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY) : null, null);
-		// stores inner elements
-		setValue(Property.PAN, pan);
-		setValue(Property.ZOOM, zoom);
 	}
 
 	/**
@@ -96,7 +89,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	ZoomOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ZoomOptions(IsDefaultsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(ZoomPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
@@ -108,9 +101,19 @@ public final class ZoomOptions extends AbstractPluginOptions {
 			this.defaultsOptions = defaultsOptions;
 		}
 		// sets inner elements
-		pan = new Pan(this.defaultsOptions.getPan());
+		this.pan = new Pan(this.defaultsOptions.getPan(), getValue(Property.PAN));
+		// checks it has got the element
+		if (!has(Property.PAN)) {
+			// stores pan
+			setValue(Property.PAN, pan);
+		}
 		// sets inner elements
-		zoom = new Zoom(this.defaultsOptions.getZoom());
+		this.zoom = new Zoom(this.defaultsOptions.getZoom(), getValue(Property.ZOOM));
+		// checks it has got the element
+		if (!has(Property.ZOOM)) {
+			// stores zoom
+			setValue(Property.ZOOM, zoom);
+		}
 	}
 
 	/**
@@ -118,6 +121,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the pan element.
 	 */
+	@Override
 	public Pan getPan() {
 		return pan;
 	}
@@ -127,6 +131,7 @@ public final class ZoomOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the zoom element.
 	 */
+	@Override
 	public Zoom getZoom() {
 		return zoom;
 	}

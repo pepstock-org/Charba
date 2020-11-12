@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Zoom extends AbstractConfigurationItem {
+public final class Zoom extends AbstractConfigurationItem<IsDefaultsZoom> implements IsDefaultsZoom {
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -77,27 +77,14 @@ public final class Zoom extends AbstractConfigurationItem {
 
 	}
 
-	// default options instance
-	private final DefaultsZoom defaultsOptions;
-
-	/**
-	 * Creates new padding element, using the default values options.
-	 * 
-	 * @param defaultsOptions default ZOOM options to returns the default when required.
-	 */
-	Zoom(DefaultsZoom defaultsOptions) {
-		this(null, defaultsOptions);
-	}
-
 	/**
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
 	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default ZOOM options to returns the default when required.
 	 */
-	Zoom(NativeObject nativeObject, DefaultsZoom defaultsOptions) {
-		super(nativeObject, defaultsOptions);
-		this.defaultsOptions = defaultsOptions;
+	Zoom(IsDefaultsZoom defaultsOptions, NativeObject nativeObject) {
+		super(defaultsOptions, nativeObject);
 	}
 
 	/*
@@ -143,6 +130,7 @@ public final class Zoom extends AbstractConfigurationItem {
 	 * 
 	 * @return <code>true</code> to enable drag-to-zoom behavior
 	 */
+	@Override
 	public boolean isDrag() {
 		// checks if the drag has been set by a drag object
 		if (isType(Property.DRAG, ObjectType.OBJECT)) {
@@ -150,7 +138,7 @@ public final class Zoom extends AbstractConfigurationItem {
 			return true;
 		}
 		// returns the drag enabled boolean property
-		return getValue(Property.DRAG, defaultsOptions.isDrag());
+		return getValue(Property.DRAG, getDefaultsOptions().isDrag());
 	}
 
 	/**
@@ -158,12 +146,13 @@ public final class Zoom extends AbstractConfigurationItem {
 	 * 
 	 * @return the customized drag-to-zoom effect or <code>null</code> is not set
 	 */
+	@Override
 	public Drag getDrag() {
 		// checks if the drag has been set by a drag object
 		if (isType(Property.DRAG, ObjectType.OBJECT)) {
 			// returns the default object getting the native one
 			// from configuration
-			return new Drag(getValue(Property.DRAG), defaultsOptions.getDrag());
+			return new Drag(getValue(Property.DRAG), getDefaultsOptions().getDrag());
 		}
 		// if here,the drag is not set or boolean
 		// then returns the default drag object
@@ -190,8 +179,9 @@ public final class Zoom extends AbstractConfigurationItem {
 	 * 
 	 * @return the speed of element via mouse wheel
 	 */
+	@Override
 	public double getSpeed() {
-		return getValue(Property.SPEED, defaultsOptions.getSpeed());
+		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
 	}
 
 	/**
@@ -208,8 +198,9 @@ public final class Zoom extends AbstractConfigurationItem {
 	 * 
 	 * @return the minimal zoom level before actually applying zoom, on category scale
 	 */
+	@Override
 	public double getSensitivity() {
-		return getValue(Property.SENSITIVITY, defaultsOptions.getSensitivity());
+		return getValue(Property.SENSITIVITY, getDefaultsOptions().getSensitivity());
 	}
 
 }

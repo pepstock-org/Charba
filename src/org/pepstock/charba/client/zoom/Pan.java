@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Pan extends AbstractConfigurationItem {
+public final class Pan extends AbstractConfigurationItem<IsDefaultsPan> implements IsDefaultsPan {
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -70,27 +70,14 @@ public final class Pan extends AbstractConfigurationItem {
 
 	}
 
-	// default options instance
-	private final DefaultsPan defaultsOptions;
-
-	/**
-	 * Creates new padding element, using the default values options.
-	 * 
-	 * @param defaultsOptions default PAN options to returns the default when required.
-	 */
-	Pan(DefaultsPan defaultsOptions) {
-		this(null, defaultsOptions);
-	}
-
 	/**
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default PAN options to returns the default when required.
+	 * @param nativeObject stored padding values into native object to read.
 	 */
-	Pan(NativeObject nativeObject, DefaultsPan defaultsOptions) {
-		super(nativeObject, defaultsOptions);
-		this.defaultsOptions = defaultsOptions;
+	Pan(IsDefaultsPan defaultsOptions, NativeObject nativeObject) {
+		super(defaultsOptions, nativeObject);
 	}
 
 	/*
@@ -127,8 +114,9 @@ public final class Pan extends AbstractConfigurationItem {
 	 * 
 	 * @return the minimal pan distance required before actually applying pan
 	 */
+	@Override
 	public double getThreshold() {
-		return getValue(Pan.Property.THRESHOLD, defaultsOptions.getThreshold());
+		return getValue(Pan.Property.THRESHOLD, getDefaultsOptions().getThreshold());
 	}
 
 	/**
@@ -145,8 +133,9 @@ public final class Pan extends AbstractConfigurationItem {
 	 * 
 	 * @return the threshold factor before applying pan, on category scale
 	 */
+	@Override
 	public final double getSpeed() {
-		return getValue(Property.SPEED, defaultsOptions.getSpeed());
+		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
 	}
 
 }

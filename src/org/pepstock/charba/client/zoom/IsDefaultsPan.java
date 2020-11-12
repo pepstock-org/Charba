@@ -16,27 +16,31 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for ZOOM element.<br>
- * It contains all default values for ZOOM.
+ * FIXME
+ * {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
+ * It contains all default values for PAN.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsZoom extends DefaultsConfigurationItem implements IsDefaultsZoom {
-	
+interface IsDefaultsPan extends IsDefaultsConfigurationItem {
+
 	/**
-	 * Creates an empty object.
+	 * Returns the minimal pan distance required before actually applying pan.
+	 * 
+	 * @return the minimal pan distance required before actually applying pan
 	 */
-	DefaultsZoom() {
-		// do nothing
+	default double getThreshold() {
+		return Pan.DEFAULT_THRESHOLD;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsZoom#getDrag()
+	/**
+	 * Returns the threshold factor before applying pan, on category scale.
+	 * 
+	 * @return the threshold factor before applying pan, on category scale
 	 */
-	@Override
-	public IsDefaultsDrag getDrag() {
-		return DefaultsDrag.INSTANCE;
+	default double getSpeed() {
+		return Pan.DEFAULT_SPEED;
 	}
-	
+
 }

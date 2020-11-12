@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.commons.NativeObject;
-
 /**
  * {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
  * It contains all default values for PAN.
@@ -24,33 +22,13 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsPan extends AbstractDefaultsConfigurationItem {
-
+final class DefaultsPan extends DefaultsConfigurationItem implements IsDefaultsPan {
+	
 	/**
-	 * Creates the object with native object instance to be wrapped.
-	 * 
-	 * @param nativeObject native object instance to be wrapped
+	 * Creates an empty object.
 	 */
-	DefaultsPan(NativeObject nativeObject) {
-		super(nativeObject);
-	}
-
-	/**
-	 * Returns the minimal pan distance required before actually applying pan.
-	 * 
-	 * @return the minimal pan distance required before actually applying pan
-	 */
-	double getThreshold() {
-		return getValue(Pan.Property.THRESHOLD, Pan.DEFAULT_THRESHOLD);
-	}
-
-	/**
-	 * Returns the threshold factor before applying pan, on category scale.
-	 * 
-	 * @return the threshold factor before applying pan, on category scale
-	 */
-	double getSpeed() {
-		return getValue(Pan.Property.SPEED, Pan.DEFAULT_SPEED);
+	DefaultsPan() {
+		// do nothing
 	}
 
 }

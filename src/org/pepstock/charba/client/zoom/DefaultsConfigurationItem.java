@@ -16,27 +16,41 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for ZOOM element.<br>
- * It contains all default values for ZOOM.
+ * FIMXE {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
+ * It contains all default values for PAN.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsZoom extends DefaultsConfigurationItem implements IsDefaultsZoom {
-	
+abstract class DefaultsConfigurationItem implements IsDefaultsConfigurationItem {
+
+	private final DefaultsRange range = new DefaultsRange();
+
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultsZoom() {
+	DefaultsConfigurationItem() {
 		// do nothing
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsZoom#getDrag()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.IsDefaultsConfigurationItem#getRangeMin()
 	 */
 	@Override
-	public IsDefaultsDrag getDrag() {
-		return DefaultsDrag.INSTANCE;
+	public final IsDefaultsRange getRangeMin() {
+		return range;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.IsDefaultsConfigurationItem#getRangeMax()
+	 */
+	@Override
+	public final IsDefaultsRange getRangeMax() {
+		return range;
+	}
+
 }

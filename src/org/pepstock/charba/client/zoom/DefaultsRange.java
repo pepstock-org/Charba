@@ -15,12 +15,6 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import java.util.Date;
-
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.UndefinedValues;
-
 /**
  * {@link ZoomPlugin#ID} plugin default options for RANGE (min and max) elements.<br>
  * It contains all default values for RANGE.
@@ -28,75 +22,13 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsRange extends NativeObjectContainer {
+final class DefaultsRange implements IsDefaultsRange{
 
 	/**
-	 * Creates the object with an empty native object instance.
+	 * Creates an empty object.
 	 */
 	DefaultsRange() {
-		super();
+		// do nothing
 	}
 
-	/**
-	 * Creates the object with native object instance to be wrapped.
-	 * 
-	 * @param nativeObject native object instance to be wrapped
-	 */
-	DefaultsRange(NativeObject nativeObject) {
-		super(nativeObject);
-	}
-
-	/**
-	 * Returns the X value of range as string.
-	 * 
-	 * @return the X value of range as string
-	 */
-	String getX() {
-		return getValue(Range.Property.X, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the X value of range as double.
-	 * 
-	 * @return the X value of range as double
-	 */
-	double getXAsDouble() {
-		return getValue(Range.Property.X, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the X value of range as date.
-	 * 
-	 * @return the X value of range as date
-	 */
-	Date getXAsDate() {
-		return getValue(Range.Property.X, (Date) null);
-	}
-
-	/**
-	 * Returns the Y value of range as double.
-	 * 
-	 * @return the Y value of range as double
-	 */
-	double getY() {
-		return getValue(Range.Property.Y, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the Y value of range as string.
-	 * 
-	 * @return the Y value of range as string
-	 */
-	String getYAsString() {
-		return getValue(Range.Property.Y, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the Y value of range as date.
-	 * 
-	 * @return the Y value of range as date
-	 */
-	Date getYAsDate() {
-		return getValue(Range.Property.Y, (Date) null);
-	}
 }
