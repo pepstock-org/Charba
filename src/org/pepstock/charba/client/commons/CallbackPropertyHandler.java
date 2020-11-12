@@ -34,7 +34,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public class CallbackPropertyHandler<T> {
 
 	// hash code property prefix.
-	private static final String HASHCODE_PROPERTY_SuFFIX = "CharbaCallbackKey";
+	private static final String HASHCODE_PROPERTY_SUFFIX = "CharbaCallbackKey";
 	// property key to manage and where storing the function callback proxy
 	private final Key property;
 	// property key used to store the class name plus hash code, as key of callback instance into cache
@@ -53,7 +53,7 @@ public class CallbackPropertyHandler<T> {
 		this.property = Key.checkAndGetIfValid(property);
 		// creates the hash code string
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.property.value()).append(HASHCODE_PROPERTY_SuFFIX);
+		sb.append(this.property.value()).append(HASHCODE_PROPERTY_SUFFIX);
 		// creates the key to use to store the key of callback
 		this.hashCodeProperty = Key.create(sb.toString());
 	}

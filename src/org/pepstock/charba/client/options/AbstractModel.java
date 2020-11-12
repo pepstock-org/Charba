@@ -79,7 +79,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 	AbstractModel(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// checks if default value is consistent
-		this.defaultValues = checkDefaultValuesArgument(defaultValues);;
+		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		this.parent = parent;
 	}
 
