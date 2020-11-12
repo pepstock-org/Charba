@@ -23,7 +23,9 @@ package org.pepstock.charba.client.zoom;
  */
 abstract class DefaultsConfigurationItem implements IsDefaultsConfigurationItem {
 
-	private final DefaultsRange range = new DefaultsRange();
+	private final DefaultsRange rangeMin = new DefaultsRange();
+	
+	private final DefaultsRange rangeMax = new DefaultsRange();
 
 	/**
 	 * Creates an empty object.
@@ -39,7 +41,7 @@ abstract class DefaultsConfigurationItem implements IsDefaultsConfigurationItem 
 	 */
 	@Override
 	public final IsDefaultsRange getRangeMin() {
-		return range;
+		return rangeMin;
 	}
 
 	/*
@@ -49,7 +51,7 @@ abstract class DefaultsConfigurationItem implements IsDefaultsConfigurationItem 
 	 */
 	@Override
 	public final IsDefaultsRange getRangeMax() {
-		return range;
+		return rangeMax;
 	}
 
 }

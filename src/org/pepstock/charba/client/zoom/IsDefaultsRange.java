@@ -79,6 +79,6 @@ interface IsDefaultsRange {
 	 * @return the Y value of range as date
 	 */
 	default Date getYAsDate() {
-		return (Date) null;
+		return null;
 	}
 }
