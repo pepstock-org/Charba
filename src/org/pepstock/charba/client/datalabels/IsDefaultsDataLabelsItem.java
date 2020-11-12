@@ -16,15 +16,34 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
+import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
+import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
+import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
+import org.pepstock.charba.client.datalabels.callbacks.ColorCallback;
+import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
+import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
+import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
+import org.pepstock.charba.client.datalabels.callbacks.OffsetCallback;
+import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
+import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
+import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
+import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
+import org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback;
+import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
+import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.enums.Display;
 
 /**
- * FIXME
- * This is the base for {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the a label.<br>
- * The options could be set by simply the value or by setting a callback.
+ * This is the base interface to map {@link DataLabelsPlugin#ID} plugin options, for a single label.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -214,6 +233,195 @@ interface IsDefaultsDataLabelsItem {
 	 */
 	default String getTextShadowColorAsString() {
 		return getColorAsString();
+	}
+	
+	/**
+	 * Returns the background color callback.
+	 * 
+	 * @return the background color callback.
+	 */
+	default BackgroundColorCallback getBackgroundColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the border color callback.
+	 * 
+	 * @return the border color callback.
+	 */
+	default BorderColorCallback getBorderColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the color callback.
+	 * 
+	 * @return the color callback.
+	 */
+	default ColorCallback getColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the formatter callback.
+	 * 
+	 * @return the formatter callback.
+	 */
+	default FormatterCallback getFormatterCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the align callback.
+	 * 
+	 * @return the align callback.
+	 */
+	default AlignCallback getAlignCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the anchor callback.
+	 * 
+	 * @return the anchor callback.
+	 */
+	default AnchorCallback getAnchorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the border radius callback.
+	 * 
+	 * @return the border radius callback.
+	 */
+	default RadiusCallback getBorderRadiusCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the border width callback.
+	 * 
+	 * @return the border width callback.
+	 */
+	default BorderWidthCallback getBorderWidthCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the clamp callback.
+	 * 
+	 * @return the clamp callback.
+	 */
+	default ClampCallback getClampCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the clip callback.
+	 * 
+	 * @return the clip callback.
+	 */
+	default ClipCallback getClipCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the display callback.
+	 * 
+	 * @return the display callback.
+	 */
+	default DisplayCallback getDisplayCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the offset callback.
+	 * 
+	 * @return the offset callback.
+	 */
+	default OffsetCallback getOffsetCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the opacity callback.
+	 * 
+	 * @return the opacity callback.
+	 */
+	default OpacityCallback getOpacityCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the rotation callback.
+	 * 
+	 * @return the rotation callback.
+	 */
+	default RotationCallback getRotationCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the text align callback.
+	 * 
+	 * @return the text align callback.
+	 */
+	default TextAlignCallback getTextAlignCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the text stroke color callback.
+	 * 
+	 * @return the text stroke color callback.
+	 */
+	default TextStrokeColorCallback getTextStrokeColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the text stroke width callback.
+	 * 
+	 * @return the text stroke width callback.
+	 */
+	default TextStrokeWidthCallback getTextStrokeWidthCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the text shadow blur callback.
+	 * 
+	 * @return the text shadow blur callback.
+	 */
+	default TextShadowBlurCallback getTextShadowBlurCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the text shadow color callback.
+	 * 
+	 * @return the text shadow color callback.
+	 */
+	default TextShadowColorCallback getTextShadowColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the font callback.
+	 * 
+	 * @return the font callback.
+	 */
+	default FontCallback getFontCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the padding callback.
+	 * 
+	 * @return the padding callback.
+	 */
+	default PaddingCallback getPaddingCallback() {
+		return null;
 	}
 
 }

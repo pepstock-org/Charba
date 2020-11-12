@@ -24,8 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 /**
  * Base object to map multi labels options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
  * It's possible to define multiple labels for each data element using the this object.<br>
- * It is an object where each property represents a new label, the key being the label key and the value being the options specific to each label.<br>
- * These options are merged on top of the options defined at the chart and dataset levels.
+ * It is an object where each property represents a new label, the key being the label key and the value being the options specific to each label.
  * 
  * @author Andrea "Stock" Stocchero
  */

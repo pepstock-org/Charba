@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 /**
- * FIXME This is the base for {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the a label.<br>
- * The options could be set by simply the value or by setting a callback.
+ * This is the base interface to map {@link DataLabelsPlugin#ID} plugin options, as also container of multiple labels.
  * 
  * @author Andrea "Stock" Stocchero
  *

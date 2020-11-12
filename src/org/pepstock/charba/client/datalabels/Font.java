@@ -31,16 +31,6 @@ import org.pepstock.charba.client.enums.Weight;
  */
 public final class Font extends AbstractElement implements IsDefaultsFont {
 
-	/**
-	 * Default font weight, {@link Weight#NORMAL}.
-	 */
-	public static final Weight DEFAULT_WEIGHT = Weight.NORMAL;
-
-	/**
-	 * Default line height, <b>{@value DEFAULT_LINE_HEIGHT}</b>.
-	 */
-	public static final double DEFAULT_LINE_HEIGHT = 1.2D;
-
 	// defaults global options instance
 	private IsDefaultsFont defaultsOptions;
 

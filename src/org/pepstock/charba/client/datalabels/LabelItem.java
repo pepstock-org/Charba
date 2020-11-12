@@ -154,33 +154,34 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	// borderRadius callback instance
 	private static final CallbackPropertyHandler<RadiusCallback> BORDER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_RADIUS);
 	// borderWidth callback instance
-	private BorderWidthCallback borderWidthCallback = null;
+	private static final CallbackPropertyHandler<BorderWidthCallback> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
 	// clamp callback instance
-	private ClampCallback clampCallback = null;
+	private static final CallbackPropertyHandler<ClampCallback> CLAMP_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLAMP);
 	// clip callback instance
-	private ClipCallback clipCallback = null;
+	private static final CallbackPropertyHandler<ClipCallback> CLIP_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLIP);
 	// display callback instance
-	private DisplayCallback displayCallback = null;
+	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// offset callback instance
-	private OffsetCallback offsetCallback = null;
+	private static final CallbackPropertyHandler<OffsetCallback> OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OFFSET);
 	// opacity callback instance
-	private OpacityCallback opacityCallback = null;
+	private static final CallbackPropertyHandler<OpacityCallback> OPACITY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OPACITY);
 	// rotation callback instance
-	private RotationCallback rotationCallback = null;
+	private static final CallbackPropertyHandler<RotationCallback> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// text align callback instance
-	private TextAlignCallback textAlignCallback = null;
+	private static final CallbackPropertyHandler<TextAlignCallback> TEXT_ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_ALIGN);
 	// text stroke color callback instance
-	private TextStrokeColorCallback textStrokeColorCallback = null;
+	private static final CallbackPropertyHandler<TextStrokeColorCallback> TEXT_STROKE_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_COLOR);
 	// text stroke width callback instance
-	private TextStrokeWidthCallback textStrokeWidthCallback = null;
+	private static final CallbackPropertyHandler<TextStrokeWidthCallback> TEXT_STROKE_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_WIDTH);
 	// text shadow blur callback instance
-	private TextShadowBlurCallback textShadowBlurCallback = null;
+	private static final CallbackPropertyHandler<TextShadowBlurCallback> TEXT_SHADOW_BLUR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_BLUR);
 	// text shadow color callback instance
-	private TextShadowColorCallback textShadowColorCallback = null;
+	private static final CallbackPropertyHandler<TextShadowColorCallback> TEXT_SHADOW_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_COLOR);
 	// font callback instance
-	private FontCallback fontCallback = null;
+	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// padding callback instance
-	private PaddingCallback paddingCallback = null;
+	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
+	
 	// defaults global options instance
 	private final IsDefaultsDataLabelsItem defaultsOptions;
 	// listener inner element
@@ -296,33 +297,33 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 		// gets value calling callback
 		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
 		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), borderWidthCallback, getBorderWidth()).intValue());
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), getBorderWidth()).intValue());
 		// gets value calling callback
-		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), clampCallback, isClamp()).booleanValue());
+		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), CLAMP_PROPERTY_HANDLER.getCallback(this), isClamp()).booleanValue());
 		// gets value calling callback
-		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), clipCallback, isClip()).booleanValue());
+		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), CLIP_PROPERTY_HANDLER.getCallback(this), isClip()).booleanValue());
 		// gets value calling callback
 		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new ScriptableContext(new DataLabelsEnvelop<>(context))));
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), offsetCallback, getOffset()).doubleValue());
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).doubleValue());
 		// gets value calling callback
-		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), opacityCallback, getOpacity()).doubleValue());
+		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
 		// gets value calling callback
-		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), rotationCallback, getRotation()).doubleValue());
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), ROTATION_PROPERTY_HANDLER.getCallback(this), getRotation()).doubleValue());
 		// gets value calling callback
-		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), textAlignCallback, getTextAlign()).value());
+		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
 		// gets value calling callback
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), textStrokeColorCallback, getTextStrokeColorAsString()));
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
 		// gets value calling callback
-		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), textStrokeWidthCallback, getTextStrokeWidth()).intValue());
+		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
 		// gets value calling callback
-		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), textShadowBlurCallback, getTextShadowBlur()).doubleValue());
+		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
 		// gets value calling callback
-		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), textShadowColorCallback, getTextShadowColorAsString()));
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), fontCallback));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
-		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), paddingCallback));
+		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), PADDING_PROPERTY_HANDLER.getCallback(this)));
 	}
 
 	/**
@@ -850,8 +851,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final BackgroundColorCallback getBackgroundColorCallback() {
-		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBackgroundColorCallback());
 	}
 
 	/**
@@ -868,8 +870,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final BorderColorCallback getBorderColorCallback() {
-		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderColorCallback());
 	}
 
 	/**
@@ -886,8 +889,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final ColorCallback getColorCallback() {
-		return COLOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getColorCallback());
 	}
 
 	/**
@@ -904,8 +908,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the formatter callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final FormatterCallback getFormatterCallback() {
-		return FORMATTER_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return FORMATTER_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFormatterCallback());
 	}
 
 	/**
@@ -922,8 +927,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the align callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final AlignCallback getAlignCallback() {
-		return ALIGN_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return ALIGN_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getAlignCallback());
 	}
 
 	/**
@@ -940,8 +946,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the anchor callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final AnchorCallback getAnchorCallback() {
-		return ANCHOR_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return ANCHOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getAnchorCallback());
 	}
 
 	/**
@@ -958,8 +965,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final RadiusCallback getBorderRadiusCallback() {
-		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this); //FIXME defaults
+		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderRadiusCallback());
 	}
 
 	/**
@@ -976,8 +984,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final BorderWidthCallback getBorderWidthCallback() {
-		return borderWidthCallback;
+		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderWidthCallback());
 	}
 
 	/**
@@ -986,16 +995,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param borderWidthCallback the border width callback to set
 	 */
 	public final void setBorderWidth(BorderWidthCallback borderWidthCallback) {
-		// sets the callback
-		this.borderWidthCallback = borderWidthCallback;
-		// checks if callback is consistent
-		if (borderWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_WIDTH);
-		}
+		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, getId(), borderWidthCallback, borderWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1003,8 +1003,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the clamp callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final ClampCallback getClampCallback() {
-		return clampCallback;
+		return CLAMP_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClampCallback());
 	}
 
 	/**
@@ -1013,16 +1014,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param clampCallback the clamp callback to set
 	 */
 	public final void setClamp(ClampCallback clampCallback) {
-		// sets the callback
-		this.clampCallback = clampCallback;
-		// checks if callback is consistent
-		if (clampCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.CLAMP, clampCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.CLAMP);
-		}
+		CLAMP_PROPERTY_HANDLER.setCallback(this, getId(), clampCallback, clampCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1030,8 +1022,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the clip callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final ClipCallback getClipCallback() {
-		return clipCallback;
+		return CLIP_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClipCallback());
 	}
 
 	/**
@@ -1040,16 +1033,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param clipCallback the clip callback to set
 	 */
 	public final void setClip(ClipCallback clipCallback) {
-		// sets the callback
-		this.clipCallback = clipCallback;
-		// checks if callback is consistent
-		if (clipCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.CLIP, clipCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.CLIP);
-		}
+		CLIP_PROPERTY_HANDLER.setCallback(this, getId(), clipCallback, clipCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1057,8 +1041,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the display callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final DisplayCallback getDisplayCallback() {
-		return displayCallback;
+		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getDisplayCallback());
 	}
 
 	/**
@@ -1067,16 +1052,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param displayCallback the display callback to set
 	 */
 	public final void setDisplay(DisplayCallback displayCallback) {
-		// sets the callback
-		this.displayCallback = displayCallback;
-		// checks if callback is consistent
-		if (displayCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.DISPLAY, displayCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.DISPLAY);
-		}
+		DISPLAY_PROPERTY_HANDLER.setCallback(this, getId(), displayCallback, displayCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1084,8 +1060,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the offset callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final OffsetCallback getOffsetCallback() {
-		return offsetCallback;
+		return OFFSET_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getOffsetCallback());
 	}
 
 	/**
@@ -1094,16 +1071,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param offsetCallback the offset callback to set
 	 */
 	public final void setOffset(OffsetCallback offsetCallback) {
-		// sets the callback
-		this.offsetCallback = offsetCallback;
-		// checks if callback is consistent
-		if (offsetCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.OFFSET, offsetCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.OFFSET);
-		}
+		OFFSET_PROPERTY_HANDLER.setCallback(this, getId(), offsetCallback, offsetCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1111,8 +1079,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the opacity callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final OpacityCallback getOpacityCallback() {
-		return opacityCallback;
+		return OPACITY_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getOpacityCallback());
 	}
 
 	/**
@@ -1121,16 +1090,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param opacityCallback the opacity callback to set
 	 */
 	public final void setOpacity(OpacityCallback opacityCallback) {
-		// sets the callback
-		this.opacityCallback = opacityCallback;
-		// checks if callback is consistent
-		if (opacityCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.OPACITY, opacityCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.OPACITY);
-		}
+		OPACITY_PROPERTY_HANDLER.setCallback(this, getId(), opacityCallback, opacityCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1138,8 +1098,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the rotation callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final RotationCallback getRotationCallback() {
-		return rotationCallback;
+		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getRotationCallback());
 	}
 
 	/**
@@ -1148,16 +1109,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param rotationCallback the rotation callback to set
 	 */
 	public final void setRotation(RotationCallback rotationCallback) {
-		// sets the callback
-		this.rotationCallback = rotationCallback;
-		// checks if callback is consistent
-		if (rotationCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.ROTATION, rotationCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.ROTATION);
-		}
+		ROTATION_PROPERTY_HANDLER.setCallback(this, getId(), rotationCallback, rotationCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1165,8 +1117,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the text align callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final TextAlignCallback getTextAlignCallback() {
-		return textAlignCallback;
+		return TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextAlignCallback());
 	}
 
 	/**
@@ -1175,16 +1128,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param textAlignCallback the text align callback to set
 	 */
 	public final void setTextAlign(TextAlignCallback textAlignCallback) {
-		// sets the callback
-		this.textAlignCallback = textAlignCallback;
-		// checks if callback is consistent
-		if (textAlignCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.TEXT_ALIGN, textAlignCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.TEXT_ALIGN);
-		}
+		TEXT_ALIGN_PROPERTY_HANDLER.setCallback(this, getId(), textAlignCallback, textAlignCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1192,8 +1136,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final TextStrokeColorCallback getTextStrokeColorCallback() {
-		return textStrokeColorCallback;
+		return TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextStrokeColorCallback());
 	}
 
 	/**
@@ -1202,16 +1147,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
 	public final void setTextStrokeColor(TextStrokeColorCallback textStrokeColorCallback) {
-		// sets the callback
-		this.textStrokeColorCallback = textStrokeColorCallback;
-		// checks if callback is consistent
-		if (textStrokeColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.TEXT_STROKE_COLOR, textStrokeColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.TEXT_STROKE_COLOR);
-		}
+		TEXT_STROKE_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1219,8 +1155,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the text stroke width callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final TextStrokeWidthCallback getTextStrokeWidthCallback() {
-		return textStrokeWidthCallback;
+		return TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextStrokeWidthCallback());
 	}
 
 	/**
@@ -1229,16 +1166,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
 	public final void setTextStrokeWidth(TextStrokeWidthCallback textStrokeWidthCallback) {
-		// sets the callback
-		this.textStrokeWidthCallback = textStrokeWidthCallback;
-		// checks if callback is consistent
-		if (textStrokeWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidthCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.TEXT_STROKE_WIDTH);
-		}
+		TEXT_STROKE_WIDTH_PROPERTY_HANDLER.setCallback(this, getId(), textStrokeWidthCallback, textStrokeWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1246,8 +1174,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the text shadow blur callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final TextShadowBlurCallback getTextShadowBlurCallback() {
-		return textShadowBlurCallback;
+		return TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextShadowBlurCallback());
 	}
 
 	/**
@@ -1256,16 +1185,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param textShadowBlurCallback the text shadow blur callback to set
 	 */
 	public final void setTextShadowBlur(TextShadowBlurCallback textShadowBlurCallback) {
-		// sets the callback
-		this.textShadowBlurCallback = textShadowBlurCallback;
-		// checks if callback is consistent
-		if (textShadowBlurCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.TEXT_SHADOW_BLUR, textShadowBlurCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.TEXT_SHADOW_BLUR);
-		}
+		TEXT_SHADOW_BLUR_PROPERTY_HANDLER.setCallback(this, getId(), textShadowBlurCallback, textShadowBlurCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1273,8 +1193,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the text shadow color callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final TextShadowColorCallback getTextShadowColorCallback() {
-		return textShadowColorCallback;
+		return TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextShadowColorCallback());
 	}
 
 	/**
@@ -1283,16 +1204,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 */
 	public final void setTextShadowColor(TextShadowColorCallback textShadowColorCallback) {
-		// sets the callback
-		this.textShadowColorCallback = textShadowColorCallback;
-		// checks if callback is consistent
-		if (textShadowColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.TEXT_SHADOW_COLOR, textShadowColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.TEXT_SHADOW_COLOR);
-		}
+		TEXT_SHADOW_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), textShadowColorCallback, textShadowColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1300,8 +1212,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final FontCallback getFontCallback() {
-		return fontCallback;
+		return FONT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFontCallback());
 	}
 
 	/**
@@ -1310,16 +1223,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param fontCallback the font callback to set
 	 */
 	public final void setFont(FontCallback fontCallback) {
-		// sets the callback
-		this.fontCallback = fontCallback;
-		// checks if callback is consistent
-		if (fontCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.FONT, fontCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.FONT);
-		}
+		FONT_PROPERTY_HANDLER.setCallback(this, getId(), fontCallback, fontCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1327,8 +1231,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public final PaddingCallback getPaddingCallback() {
-		return paddingCallback;
+		return PADDING_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getPaddingCallback());
 	}
 
 	/**
@@ -1337,16 +1242,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param paddingCallback the padding callback to set
 	 */
 	public final void setPadding(PaddingCallback paddingCallback) {
-		// sets the callback
-		this.paddingCallback = paddingCallback;
-		// checks if callback is consistent
-		if (paddingCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.PADDING, paddingCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.PADDING);
-		}
+		PADDING_PROPERTY_HANDLER.setCallback(this, getId(), paddingCallback, paddingCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1382,7 +1278,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 */
 	private Object onDisplay(ScriptableContext context) {
 		// gets value
-		Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
+		Display value = ScriptableUtils.getOptionValueAsString(context, DISPLAY_PROPERTY_HANDLER.getCallback(this));
 		Display result = value == null ? getDisplay() : value;
 		// checks if is boolean
 		// checks if it must return a boolean or string

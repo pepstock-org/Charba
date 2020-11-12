@@ -16,8 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 /**
- * FIXME
- * {@link DataLabelsPlugin#ID} plugin default options for PADDING element.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options interface for PADDING element.<br>
  * It contains all default values for PADDING.
  * 
  * @author Andrea "Stock" Stocchero

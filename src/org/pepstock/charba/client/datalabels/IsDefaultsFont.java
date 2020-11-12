@@ -20,8 +20,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
- * FIXME
- * {@link DataLabelsPlugin#ID} plugin default options for FONT element.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options interface for FONT element.<br>
  * It contains all default values for FONT.
  * 
  * @author Andrea "Stock" Stocchero
@@ -62,8 +61,7 @@ interface IsDefaultsFont {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	default Weight getWeight() {
-		// FIXME checks the real default
-		return Font.DEFAULT_WEIGHT;
+		return Defaults.get().getGlobal().getFont().getWeight();
 	}
 
 	/**
@@ -72,8 +70,7 @@ interface IsDefaultsFont {
 	 * @return the line height.
 	 */
 	default double getLineHeight() {
-		// FIXME checks the real default
-		return Font.DEFAULT_LINE_HEIGHT;
+		return Defaults.get().getGlobal().getFont().getLineHeight();
 	}
 
 }
