@@ -229,11 +229,9 @@ public final class Clip extends NativeObjectContainer {
 	 * @return <code>true</code> if clip is enable for passed position
 	 */
 	private boolean isInternalValue(Position position) {
-		// gets the type stored
-		ObjectType type = type(position);
 		// checks if previously was set to a number
 		// therefore true
-		if (ObjectType.NUMBER.equals(type)) {
+		if (isType(position, ObjectType.NUMBER)) {
 			// if number returns true
 			return true;
 		}
@@ -249,11 +247,9 @@ public final class Clip extends NativeObjectContainer {
 	 * @return the value of clip for passed position or {@link UndefinedValues#DOUBLE} if is disable
 	 */
 	private double getInternalValue(Position position) {
-		// gets the type stored
-		ObjectType type = type(position);
 		// checks if previously was set to a boolean
 		// therefore false
-		if (ObjectType.BOOLEAN.equals(type)) {
+		if (isType(position, ObjectType.BOOLEAN)) {
 			// if boolean returns NaN
 			return UndefinedValues.DOUBLE;
 		}

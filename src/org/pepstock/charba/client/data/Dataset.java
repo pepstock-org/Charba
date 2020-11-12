@@ -788,11 +788,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
 	 */
 	public double getClip() {
-		// gets the type stored
-		ObjectType clipType = type(CommonProperty.CLIP);
 		// checks if previously was set to a clip object
 		// therefore NaN
-		if (ObjectType.OBJECT.equals(clipType)) {
+		if (isType(CommonProperty.CLIP, ObjectType.OBJECT)) {
 			// if object returns NaN
 			return UndefinedValues.DOUBLE;
 		}
@@ -809,11 +807,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 *         If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 */
 	public Clip getClipAsObject() {
-		// gets the type stored
-		ObjectType clipType = type(CommonProperty.CLIP);
 		// checks if previously was set to a number
 		// therefore new object with the same values
-		if (ObjectType.NUMBER.equals(clipType)) {
+		if (isType(CommonProperty.CLIP, ObjectType.NUMBER)) {
 			// new object
 			// with the same value
 			return new Clip(getClip());

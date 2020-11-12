@@ -143,10 +143,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public double getFrom() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
 		// checks if the value is stored as the type
-		if (ObjectType.NUMBER.equals(propertyType)) {
+		if (isType(Property.FROM, ObjectType.NUMBER)) {
 			return getValue(Property.FROM, getDefaultValues().getFrom());
 		}
 		// if here, the type is not consistent
@@ -161,10 +159,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public boolean getFromAsBoolean() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
 		// checks if the value is stored as the type
-		if (ObjectType.BOOLEAN.equals(propertyType)) {
+		if (isType(Property.FROM, ObjectType.BOOLEAN)) {
 			return getValue(Property.FROM, getDefaultValues().getFromAsBoolean());
 		}
 		// if here, the type is not consistent
@@ -179,10 +175,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public String getFromAsString() {
-		// gets type of property
-		ObjectType propertyType = type(Property.FROM);
 		// checks if the value is stored as the type
-		if (ObjectType.STRING.equals(propertyType)) {
+		if (isType(Property.FROM, ObjectType.STRING)) {
 			return getValue(Property.FROM, getDefaultValues().getFromAsString());
 		}
 		// if here, the type is not consistent
@@ -252,10 +246,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public double getTo() {
-		// gets type of property
-		ObjectType propertyType = type(Property.TO);
 		// checks if the value is stored as the type
-		if (ObjectType.NUMBER.equals(propertyType)) {
+		if (isType(Property.TO, ObjectType.NUMBER)) {
 			return getValue(Property.TO, getDefaultValues().getTo());
 		}
 		// if here, the type is not consistent
@@ -270,10 +262,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public boolean getToAsBoolean() {
-		// gets type of property
-		ObjectType propertyType = type(Property.TO);
 		// checks if the value is stored as the type
-		if (ObjectType.BOOLEAN.equals(propertyType)) {
+		if (isType(Property.TO, ObjectType.BOOLEAN)) {
 			return getValue(Property.TO, getDefaultValues().getToAsBoolean());
 		}
 		// if here, the type is not consistent
@@ -288,10 +278,8 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	@Override
 	public String getToAsString() {
-		// gets type of property
-		ObjectType propertyType = type(Property.TO);
 		// checks if the value is stored as the type
-		if (ObjectType.STRING.equals(propertyType)) {
+		if (isType(Property.TO, ObjectType.STRING)) {
 			return getValue(Property.TO, getDefaultValues().getToAsString());
 		}
 		// if here, the type is not consistent

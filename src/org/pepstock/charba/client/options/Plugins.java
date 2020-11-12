@@ -302,12 +302,10 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
 		// checks if is default plugins
 		if (!DefaultPluginId.is(pluginId)) {
-			// gets the type of property
-			ObjectType type = type(pluginIdKey);
 			// if boolean, there is not any options, therefore false
 			// otherwise checks if there is the key. If there is and is NOT boolean
 			// means that an options has been added.
-			return !ObjectType.BOOLEAN.equals(type) && has(pluginIdKey);
+			return !isType(pluginIdKey, ObjectType.BOOLEAN) && has(pluginIdKey);
 		}
 		// if here is default
 		// return always false
@@ -341,10 +339,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
-			// gets the type of property
-			ObjectType type = type(pluginIdKey);
 			// checks if object
-			if (ObjectType.OBJECT.equals(type)) {
+			if (isType(pluginIdKey, ObjectType.OBJECT)) {
 				// creates the object using the defaults options
 				return factory.create(getValue(pluginIdKey), getDefaultValues());
 			} else {
@@ -375,10 +371,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// checks plugin
 			checkPluginIdConsistency(pluginIdKey, factory);
-			// gets the type of property
-			ObjectType type = type(pluginIdKey);
 			// checks if object
-			if (ObjectType.OBJECT.equals(type)) {
+			if (isType(pluginIdKey, ObjectType.OBJECT)) {
 				// creates the object using the defaults options
 				return factory.create(getValue(pluginIdKey), getDefaultValues());
 			} else {
@@ -403,10 +397,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
 			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
-			// gets the type of property
-			ObjectType type = type(pluginIdKey);
 			// checks if array
-			if (ObjectType.ARRAY.equals(type)) {
+			if (isType(pluginIdKey, ObjectType.ARRAY)) {
 				// gets the array from native object
 				ArrayObject array = getArrayValue(pluginIdKey);
 				// creates the result
@@ -441,10 +433,8 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			Key pluginIdKey = PluginIdChecker.key(pluginId);
 			// checks plugin
 			checkPluginIdConsistency(pluginIdKey, factory);
-			// gets the type of property
-			ObjectType type = type(pluginIdKey);
 			// checks if array
-			if (ObjectType.ARRAY.equals(type)) {
+			if (isType(pluginIdKey, ObjectType.ARRAY)) {
 				// gets the array from native object
 				ArrayObject array = getArrayValue(pluginIdKey);
 				// creates the result
