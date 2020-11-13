@@ -456,7 +456,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	protected final void checkAndAddToParent() {
 		// checks if we are at root element
 		// or if the parent hasn't got the key
-		if (parent != null && !parent.has(childKey)) {
+		if (parent != null && Key.isValid(childKey) && !parent.has(childKey)) {
 			// sets the java script of this element into parent
 			parent.setValue(childKey, getNativeObject());
 			// recursively call to parent of parent

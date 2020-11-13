@@ -23,6 +23,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -44,7 +45,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsOptions extends AbstractPluginOptions {
+public final class LabelsOptions extends AbstractPluginOptions implements IsDefaultsOptions{
 
 	/**
 	 * Default rendering (what data must be showed), {@link Render#VALUE}.
@@ -165,18 +166,18 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	private final CallbackProxy<ProxyRenderCallback> renderCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font color function
 	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// render (string) callback instance
-	private RenderCallback renderCallback = null;
+	// render callback instance
+	private static final CallbackPropertyHandler<RenderCallback> RENDER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RENDER);
 	// font color callback instance
-	private FontColorCallback fontColorCallback = null;
+	private static final CallbackPropertyHandler<FontColorCallback> FONT_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT_COLOR);
 
 	// defaults global options instance
-	private DefaultsOptions defaultsOptions;
+	private IsDefaultsOptions defaultsOptions;
 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		RENDER("render"),
 		PRECISION("precision"),
@@ -243,7 +244,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelsOptions(DefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	LabelsOptions(IsDefaultsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(LabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
@@ -275,6 +276,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return what data must be showed.
 	 */
+	@Override
 	public Render getRender() {
 		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
 	}
@@ -293,6 +295,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the precision for percentage.
 	 */
+	@Override
 	public int getPrecision() {
 		return getValue(Property.PRECISION, defaultsOptions.getPrecision());
 	}
@@ -311,6 +314,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return whether or not labels of value 0 are displayed.
 	 */
+	@Override
 	public boolean isShowZero() {
 		return getValue(Property.SHOW_ZERO, defaultsOptions.isShowZero());
 	}
@@ -329,6 +333,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the font size.
 	 */
+	@Override
 	public int getFontSize() {
 		return getValue(Property.FONT_SIZE, defaultsOptions.getFontSize());
 	}
@@ -356,6 +361,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the font color.
 	 */
+	@Override
 	public String getFontColorAsString() {
 		return getValue(Property.FONT_COLOR, defaultsOptions.getFontColorAsString());
 	}
@@ -383,6 +389,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the font style.
 	 */
+	@Override
 	public FontStyle getFontStyle() {
 		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultsOptions.getFontStyle());
 	}
@@ -401,6 +408,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the font family.
 	 */
+	@Override
 	public String getFontFamily() {
 		return getValue(Property.FONT_FAMILY, defaultsOptions.getFontFamily());
 	}
@@ -419,6 +427,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return <code>true</code> if draws text shadows under labels.
 	 */
+	@Override
 	public boolean isTextShadow() {
 		return getValue(Property.TEXT_SHADOW, defaultsOptions.isTextShadow());
 	}
@@ -437,6 +446,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow intensity.
 	 */
+	@Override
 	public int getShadowBlur() {
 		return getValue(Property.SHADOW_BLUR, defaultsOptions.getShadowBlur());
 	}
@@ -455,6 +465,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow X offset.
 	 */
+	@Override
 	public int getShadowOffsetX() {
 		return getValue(Property.SHADOW_OFFSET_X, defaultsOptions.getShadowOffsetX());
 	}
@@ -473,6 +484,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow Y offset.
 	 */
+	@Override
 	public int getShadowOffsetY() {
 		return getValue(Property.SHADOW_OFFSET_Y, defaultsOptions.getShadowOffsetY());
 	}
@@ -500,6 +512,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the text shadow color as string.
 	 */
+	@Override
 	public String getShadowColorAsString() {
 		return getValue(Property.SHADOW_COLOR, defaultsOptions.getShadowColorAsString());
 	}
@@ -527,6 +540,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return <code>true</code> if draws label in arc.
 	 */
+	@Override
 	public boolean isArc() {
 		return getValue(Property.ARC, defaultsOptions.isArc());
 	}
@@ -545,6 +559,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the position to draw label.
 	 */
+	@Override
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
 	}
@@ -563,6 +578,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return <code>true</code>if draws label even it's overlap.
 	 */
+	@Override
 	public boolean isOverlap() {
 		return getValue(Property.OVERLAP, defaultsOptions.isOverlap());
 	}
@@ -581,6 +597,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 */
+	@Override
 	public boolean isShowActualPercentages() {
 		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultsOptions.isShowActualPercentages());
 	}
@@ -599,6 +616,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the padding when position is {@link Position#OUTSIDE}.
 	 */
+	@Override
 	public int getOutsidePadding() {
 		return getValue(Property.OUTSIDE_PADDING, defaultsOptions.getOutsidePadding());
 	}
@@ -617,6 +635,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
+	@Override
 	public int getTextMargin() {
 		return getValue(Property.TEXT_MARGIN, defaultsOptions.getTextMargin());
 	}
@@ -647,8 +666,9 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the render callback, if set, otherwise <code>null</code>
 	 */
+	@Override
 	public RenderCallback getRenderCallback() {
-		return renderCallback;
+		return RENDER_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getRenderCallback());
 	}
 
 	/**
@@ -657,16 +677,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @param renderCallback the render callback to set
 	 */
 	public void setRender(RenderCallback renderCallback) {
-		// sets the callback
-		this.renderCallback = renderCallback;
-		// checks if callback is consistent
-		if (renderCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(LabelsOptions.Property.RENDER, renderCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(LabelsOptions.Property.RENDER);
-		}
+		RENDER_PROPERTY_HANDLER.setCallback(this, getId(), renderCallback, renderCallbackProxy.getProxy());
 	}
 
 	/**
@@ -674,8 +685,9 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
+	@Override
 	public FontColorCallback getFontColorCallback() {
-		return fontColorCallback;
+		return FONT_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFontColorCallback());
 	}
 
 	/**
@@ -684,16 +696,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @param fontColorCallback the font color callback.
 	 */
 	public void setFontColor(FontColorCallback fontColorCallback) {
-		// sets the callback
-		this.fontColorCallback = fontColorCallback;
-		// checks if callback is consistent
-		if (fontColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(LabelsOptions.Property.FONT_COLOR, fontColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(LabelsOptions.Property.FONT_COLOR);
-		}
+		FONT_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), fontColorCallback, fontColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -703,6 +706,8 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @return image or string for rendering.
 	 */
 	private Object onRenderCallback(RenderItem item) {
+		// gets callback
+		RenderCallback renderCallback = RENDER_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = item.getChart();
 		// checks if the callback is set
@@ -729,6 +734,8 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @return string as color representation.
 	 */
 	private String onFontColorCallback(FontColorItem item) {
+		// gets callback
+		FontColorCallback fontColorCallback = FONT_COLOR_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
 		IsChart chart = item.getChart();
 		// checks if the callback is set

@@ -37,7 +37,7 @@ public final class Font extends AbstractElement implements IsDefaultsFont {
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		SIZE("size"),
 		STYLE("style"),

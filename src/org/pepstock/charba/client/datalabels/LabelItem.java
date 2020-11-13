@@ -194,7 +194,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		ALIGN("align"),
 		ANCHOR("anchor"),

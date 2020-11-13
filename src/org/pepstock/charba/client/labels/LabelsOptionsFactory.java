@@ -45,7 +45,7 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
+			LabelsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new LabelsOptions(defaultsOptions, nativeObject);
 		}
@@ -58,7 +58,7 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class LabelsDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DefaultsOptions> {
+	static class LabelsDefaultsOptionsFactory extends AbstractPluginOptionsFactory<LabelsOptions> {
 
 		/**
 		 * To avoid any instantiation
@@ -74,13 +74,10 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+		public LabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new DefaultsOptions(nativeObject);
-			}
-			return DefaultsOptions.DEFAULTS_INSTANCE;
+			// creates the options by the native object and the defaults
+			return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 		}
 
 	}
