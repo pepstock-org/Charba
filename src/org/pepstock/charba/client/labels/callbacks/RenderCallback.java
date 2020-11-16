@@ -17,8 +17,8 @@ package org.pepstock.charba.client.labels.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.labels.Context;
 import org.pepstock.charba.client.labels.LabelsPlugin;
-import org.pepstock.charba.client.labels.RenderItem;
 
 /**
  * Callback interface of {@link LabelsPlugin#ID} plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
@@ -33,9 +33,9 @@ public interface RenderCallback {
 	 * Called to provide the item to be rendered as string or as image at runtime, using the arguments.
 	 * 
 	 * @param chart chart instance
-	 * @param item render item, passed by plugin
+	 * @param context callback context, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	Object invoke(IsChart chart, RenderItem item);
+	Object invoke(IsChart chart, Context context);
 
 }

@@ -26,11 +26,11 @@ import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is called.
+ * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the callback function is called.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RenderItem extends NativeObjectContainer {
+public final class Context extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -39,7 +39,7 @@ public class RenderItem extends NativeObjectContainer {
 	{
 		CHART("chart"),
 		DATASET_INDEX("datasetIndex"),
-		INDEX("index"),
+		DATA_INDEX("dataIndex"),
 		LABEL("label"),
 		VALUE("value"),
 		PERCENTAGE("percentage");
@@ -75,7 +75,7 @@ public class RenderItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	RenderItem(NativeObject nativeObject) {
+	Context(NativeObject nativeObject) {
 		super(nativeObject);
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
@@ -121,8 +121,8 @@ public class RenderItem extends NativeObjectContainer {
 	 * @return the index of the data inside the dataset.
 	 */
 
-	public final int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	public final int getDataIndex() {
+		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**

@@ -15,20 +15,32 @@
 */
 package org.pepstock.charba.client.labels;
 
-/**
- * It implements default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
- * 
- * @author Andrea "Stock" Stocchero
- */
-final class DefaultsOptions implements IsDefaultsOptions {
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.options.AbstractFontOptions;
 
-	// defaults options instance
-	static final DefaultsOptions INSTANCE = new DefaultsOptions();
+/**
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public class Font extends AbstractFontOptions {
+
+	public Font() {
+		super(Defaults.get().getGlobal().getFont());
+	}
+
+	Font(IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(defaultValues, nativeObject);
+	}
 
 	/**
-	 * Creates an empty default options.
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
 	 */
-	private DefaultsOptions() {
-		// do nothing
+	final NativeObject nativeObject() {
+		return getObject();
 	}
+
 }

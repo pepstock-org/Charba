@@ -16,19 +16,34 @@
 package org.pepstock.charba.client.labels;
 
 /**
- * It implements default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
+ * This is a standard implementation of a label configuration object ID for {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-final class DefaultsOptions implements IsDefaultsOptions {
+public final class StandardLabelId implements IsLabelId {
 
-	// defaults options instance
-	static final DefaultsOptions INSTANCE = new DefaultsOptions();
+	// value instance
+	private final String value;
 
 	/**
-	 * Creates an empty default options.
+	 * Builds the object with the key value as string
+	 * 
+	 * @param value value of key as String
 	 */
-	private DefaultsOptions() {
-		// do nothing
+	StandardLabelId(String value) {
+		// stores value
+		this.value = value;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

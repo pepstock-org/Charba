@@ -1,5 +1,5 @@
 /**
- * [chartjs-plugin-labels]{@link https://github.com/emn178/chartjs-plugin-labels}
+ * Starting poit is [chartjs-plugin-labels]{@link https://github.com/emn178/chartjs-plugin-labels}
  *
  * @version 1.1.0
  * @author Chen, Yi-Cyuan [emn178@gmail.com]
@@ -14,31 +14,11 @@
     return;
   }
 
-  if (typeof Object.assign != 'function') {
-    Object.assign = function (target, varArgs) {
-      if (target == null) {
-        throw new TypeError('Cannot convert undefined or null to object');
-      }
-      var to = Object(target);
-      for (var index = 1; index < arguments.length; index++) {
-        var nextSource = arguments[index];
-        if (nextSource != null) {
-          for (var nextKey in nextSource) {
-            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-              to[nextKey] = nextSource[nextKey];
-            }
-          }
-        }
-      }
-      return to;
-    };
-  }
-
-  var SUPPORTED_TYPES = {};
+  const SUPPORTED_TYPES = {};
   ['pie', 'doughnut', 'polarArea', 'bar'].forEach(function (t) {
     SUPPORTED_TYPES[t] = true;
   });
-
+  
   function Label() {
     this.renderToDataset = this.renderToDataset.bind(this);
   }
@@ -48,14 +28,12 @@
     this.ctx = chart.ctx;
     this.args = {};
     this.barTotal = {};
-    var chartOptions = chart.config.options;
-    this.options = Object.assign({
+    this.font = {};
+    
+    this.options = Chart.helpers.mergeIf(options, {
       position: 'default',
       precision: 0,
-      fontSize: chartOptions.font.size,
-      fontColor: chartOptions.font.color,
-      fontStyle: chartOptions.font.style,
-      fontFamily: chartOptions.font.family,
+      font: Chart.helpers.clone(chart.options.font),
       shadowOffsetX: 3,
       shadowOffsetY: 3,
       shadowColor: 'rgba(0,0,0,0.3)',
@@ -64,7 +42,8 @@
       outsidePadding: 2,
       textMargin: 2,
       overlap: true
-    }, options);
+    });
+
     if (chart.config.type === 'bar') {
       this.options.position = 'default';
       this.options.arc = false;
@@ -97,14 +76,17 @@
     }
     var ctx = this.ctx;
     ctx.save();
-    ctx.font = Chart.helpers.fontString(this.options.fontSize, this.options.fontStyle, this.options.fontFamily);
+
+	this.font = typeof this.options.font === 'function' ? this.getFont(dataset, element, index) : this.options.font;
+    ctx.font = Chart.helpers.toFontString(this.font);
     var renderInfo = this.getRenderInfo(element, label);
     if (!this.drawable(element, label, renderInfo)) {
       ctx.restore();
       return;
     }
+
     ctx.beginPath();
-    ctx.fillStyle = this.getFontColor(dataset, element, index);
+    ctx.fillStyle = this.font.color;
     this.renderLabel(label, renderInfo);
     ctx.restore();
   };
@@ -131,7 +113,7 @@
 
       var lines = label.split('\n');
       for (var i = 0; i < lines.length; i++) {
-        var y = position.y - this.options.fontSize / 2 * lines.length + this.options.fontSize * i;
+        var y = position.y - this.font.size / 2 * lines.length + this.font.size * i;
         ctx.fillText(lines[i], position.x, y);
       }
       ctx.restore();
@@ -148,29 +130,29 @@
       ctx.textAlign = 'left';
       var lines = label.split('\n'), max = 0, widths = [], offset = 0;
       if (this.options.position === 'border') {
-        offset = (lines.length - 1) * this.options.fontSize / 2;
+        offset = (lines.length - 1) * this.font.size / 2;
       }
       for (var j = 0; j < lines.length; ++j) {
-        var mertrics = ctx.measureText(lines[j]);
-        if (mertrics.width > max) {
-          max = mertrics.width;
+        var metrics = ctx.measureText(lines[j]);
+        if (metrics.width > max) {
+          max = metrics.width;
         }
-        widths.push(mertrics.width);
+        widths.push(metrics.width);
       }
       for (var k = 0; k < lines.length; ++k) {
         var line = lines[k];
-        var y = (lines.length - 1 - k) * -this.options.fontSize + offset;
+        var y = (lines.length - 1 - k) * -this.font.size + offset;
         ctx.save();
         var padding = (max - widths[k]) / 2;
         ctx.rotate(padding / radius);
         for (var i = 0; i < line.length; i++) {
           var char = line.charAt(i);
-          mertrics = ctx.measureText(char);
+          metrics = ctx.measureText(char);
           ctx.save();
           ctx.translate(0, -1 * radius);
           ctx.fillText(char, 0, y);
           ctx.restore();
-          ctx.rotate(mertrics.width / radius);
+          ctx.rotate(metrics.width / radius);
         }
         ctx.restore();
       }
@@ -197,7 +179,7 @@
         value: dataset.data[index],
         percentage: this.getPercentage(dataset, element, index),
         dataset: dataset,
-        index: index,
+        dataIndex: index,
         datasetIndex: this.chart.data.datasets.indexOf(dataset),
 		chart: this.chart
       });
@@ -226,23 +208,17 @@
     return label;
   };
 
-  Label.prototype.getFontColor = function (dataset, element, index) {
-    var fontColor = this.options.fontColor;
-    if (typeof fontColor === 'function') {
-      fontColor = fontColor({
+  Label.prototype.getFont = function (dataset, element, index) {
+  	const result = this.options.font({
         label: this.chart.config.data.labels[index],
         value: dataset.data[index],
         percentage: this.getPercentage(dataset, element, index),
-        backgroundColor: dataset.backgroundColor[index],
         dataset: dataset,
-        index: index,
+        dataIndex: index,
         datasetIndex: this.chart.data.datasets.indexOf(dataset),
 		chart: this.chart
       });
-    } else if (typeof fontColor !== 'string') {
-      fontColor = fontColor[index] || this.chart.config.options.defaultFontColor;
-    }
-    return fontColor;
+    return Chart.helpers.mergeIf(!result ? {} : result, this.chart.options.font);
   };
 
   Label.prototype.getPercentage = function (dataset, element, index) {
@@ -268,7 +244,7 @@
       percentage = dataset.data[index] / this.barTotal[index] * 100;
     } else {
       var degree = element.circumference * 180 / Math.PI;	
-      percentage = degree / this.chart.config.options.circumference * 100;
+      percentage = degree / this.chart.options.circumference * 100;
     }
     percentage = parseFloat(percentage.toFixed(this.options.precision));
     
@@ -324,7 +300,7 @@
   Label.prototype.getArcRenderInfo = function (element, label) {
     var radius;
     if (this.options.position === 'outside') {
-      radius = element.outerRadius + this.options.fontSize + this.options.textMargin;
+      radius = element.outerRadius + this.font.size + this.options.textMargin;
     } else if (this.options.position === 'border') {
       radius = (element.outerRadius / 2 + element.outerRadius) / 2;
     } else {
@@ -334,8 +310,8 @@
     var totalAngle = endAngle - startAngle;
     startAngle += Math.PI / 2;
     endAngle += Math.PI / 2;
-    var mertrics = this.measureLabel(label);
-    startAngle += (endAngle - (mertrics.width / radius + startAngle)) / 2;
+    var metrics = this.measureLabel(label);
+    startAngle += (endAngle - (metrics.width / radius + startAngle)) / 2;
     return {
       radius: radius,
       startAngle: startAngle,
@@ -357,15 +333,15 @@
     } else if (this.options.arc) {
       return renderInfo.endAngle - renderInfo.startAngle <= renderInfo.totalAngle;
     } else {
-      var mertrics = this.measureLabel(label),
-        left = renderInfo.x - mertrics.width / 2,
-        right = renderInfo.x + mertrics.width / 2,
-        top = renderInfo.y - mertrics.height / 2,
-        bottom = renderInfo.y + mertrics.height / 2;
+      var metrics = this.measureLabel(label),
+        left = renderInfo.x - metrics.width / 2,
+        right = renderInfo.x + metrics.width / 2,
+        top = renderInfo.y - metrics.height / 2,
+        bottom = renderInfo.y + metrics.height / 2;
       if (this.options.position === 'outside') {
         return this.outsideInRange(left, right, top, bottom);
       } else {
-        return element.inRange(left, top) && element.inRange(left, bottom) &&
+		return element.inRange(left, top) && element.inRange(left, bottom) &&
           element.inRange(right, top) && element.inRange(right, bottom);
       }
     }
@@ -423,7 +399,7 @@
           width = result.width;
         }
       }
-      return { width: width, height: this.options.fontSize * lines.length };
+      return { width: width, height: this.font.size * lines.length };
     }
   };
 
@@ -437,15 +413,17 @@
 
   const plugin = {
     id: 'labels',
-    beforeDatasetsUpdate: function (chart) {
-      if (!SUPPORTED_TYPES[chart.config.type]) {
+    beforeDatasetsUpdate: function (chart, args, optionsParam) {
+      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
         return;
       }
-	  const optionParams = chart.options.plugins.labels;
-      var options = optionParams;
-      if (!Array.isArray(optionParams)) {
-        options = [optionParams];
-      }
+	  const options = new Array();
+	  Object.keys(optionsParam).forEach(key => {
+		const value = optionsParam[key];
+		if (typeof value === 'object') {
+			options.push(value);
+		}
+	  });
       var count = options.length;
       if (!chart._labels || count !== chart._labels.length) {
         chart._labels = options.map(function () {
@@ -458,7 +436,7 @@
         label.setup(chart, options[i]);
         if (label.options.position === 'outside') {
           someOutside = true;
-          var padding = label.options.fontSize * 1.5 + label.options.outsidePadding;
+          var padding = (typeof label.options.font === 'object' ? label.options.font.size * 1.5 : chart.options.font.size) + label.options.outsidePadding;
           if (padding > maxPadding) {
             maxPadding = padding;
           }
@@ -469,8 +447,8 @@
         chart.chartArea.bottom -= maxPadding;
       }
     },
-    afterDatasetUpdate: function (chart, args, options) {
-      if (!SUPPORTED_TYPES[chart.config.type]) {
+    afterDatasetUpdate: function (chart, args) {
+      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {
@@ -478,7 +456,7 @@
       });
     },
     beforeDraw: function (chart) {
-      if (!SUPPORTED_TYPES[chart.config.type]) {
+      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {
@@ -486,7 +464,7 @@
       });
     },
     afterDatasetsDraw: function (chart) {
-      if (!SUPPORTED_TYPES[chart.config.type]) {
+      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {

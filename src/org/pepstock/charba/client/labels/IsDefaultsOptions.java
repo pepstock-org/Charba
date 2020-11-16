@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
-import org.pepstock.charba.client.labels.callbacks.RenderCallback;
-import org.pepstock.charba.client.labels.enums.Position;
-import org.pepstock.charba.client.labels.enums.Render;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Maps the default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
@@ -30,182 +26,31 @@ import org.pepstock.charba.client.labels.enums.Render;
 interface IsDefaultsOptions {
 
 	/**
-	 * Returns what data must be showed.
+	 * Returns <code>true</code> if the label with the id passed as argument exists.
 	 * 
-	 * @return what data must be showed.
+	 * @param id label id to check
+	 * @return <code>true</code> if the label with the id passed as argument exists
 	 */
-	default Render getRender() {
-		return LabelsOptions.DEFAULT_RENDER;
+	default boolean hasLabel(IsLabelId id) {
+		return false;
 	}
 
 	/**
-	 * Returns the precision for percentage.
+	 * Returns the list of labels.
 	 * 
-	 * @return the precision for percentage.
+	 * @return the list of labels
 	 */
-	default int getPrecision() {
-		return LabelsOptions.DEFAULT_PRECISION;
+	default List<Label> getLabels() {
+		return Collections.emptyList();
 	}
 
 	/**
-	 * Returns whether or not labels of value 0 are displayed.
+	 * Returns the label with the id passed as argument or <code>null</code> if not exist.
 	 * 
-	 * @return whether or not labels of value 0 are displayed.
+	 * @param id label id to use to retrieve the annotation
+	 * @return the label or <code>null</code> if not exist
 	 */
-	default boolean isShowZero() {
-		return LabelsOptions.DEFAULT_SHOW_ZERO;
-	}
-
-	/**
-	 * Returns the the font size.
-	 * 
-	 * @return the font size..
-	 */
-	default int getFontSize() {
-		return Defaults.get().getGlobal().getFont().getSize();
-	}
-
-	/**
-	 * Returns the the font color as string.
-	 * 
-	 * @return the font color.
-	 */
-	default String getFontColorAsString() {
-		return Defaults.get().getGlobal().getFont().getColorAsString();
-	}
-
-	/**
-	 * Returns the font style.
-	 * 
-	 * @return the font style.
-	 */
-	default FontStyle getFontStyle() {
-		return  Defaults.get().getGlobal().getFont().getStyle();
-	}
-
-	/**
-	 * Returns the font family.
-	 * 
-	 * @return the font family.
-	 */
-	default String getFontFamily() {
-		return  Defaults.get().getGlobal().getFont().getFamily();
-	}
-
-	/**
-	 * Returns if draws text shadows under labels.
-	 * 
-	 * @return <code>true</code> if draws text shadows under labels.
-	 */
-	default boolean isTextShadow() {
-		return  LabelsOptions.DEFAULT_TEXT_SHADOW;
-	}
-
-	/**
-	 * Returns the text shadow intensity.
-	 * 
-	 * @return the text shadow intensity.
-	 */
-	default int getShadowBlur() {
-		return  LabelsOptions.DEFAULT_SHADOW_BLUR;
-	}
-
-	/**
-	 * Returns the text shadow X offset.
-	 * 
-	 * @return the text shadow X offset.
-	 */
-	default int getShadowOffsetX() {
-		return  LabelsOptions.DEFAULT_SHADOW_OFFSET_X;
-	}
-
-	/**
-	 * Returns the text shadow Y offset.
-	 * 
-	 * @return the text shadow Y offset.
-	 */
-	default int getShadowOffsetY() {
-		return LabelsOptions.DEFAULT_SHADOW_OFFSET_Y;
-	}
-
-	/**
-	 * Returns the text shadow color as string.
-	 * 
-	 * @return the text shadow color as string.
-	 */
-	default String getShadowColorAsString() {
-		return LabelsOptions.DEFAULT_SHADOW_COLOR;
-	}
-
-	/**
-	 * Returns if draws label in arc.
-	 * 
-	 * @return <code>true</code> if draws label in arc.
-	 */
-	default boolean isArc() {
-		return LabelsOptions.DEFAULT_ARC;
-	}
-
-	/**
-	 * Returns the position to draw label.
-	 * 
-	 * @return the position to draw label.
-	 */
-	default Position getPosition() {
-		return LabelsOptions.DEFAULT_POSITION;
-	}
-
-	/**
-	 * Returns if draws label even it's overlap.
-	 * 
-	 * @return <code>true</code>if draws label even it's overlap.
-	 */
-	default boolean isOverlap() {
-		return LabelsOptions.DEFAULT_OVERLAP;
-	}
-
-	/**
-	 * Returns if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
-	 * 
-	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
-	 */
-	default boolean isShowActualPercentages() {
-		return LabelsOptions.DEFAULT_SHOW_ACTUAL_PERCENTAGES;
-	}
-
-	/**
-	 * Returns the padding when position is {@link Position#OUTSIDE}.
-	 * 
-	 * @return the padding when position is {@link Position#OUTSIDE}.
-	 */
-	default int getOutsidePadding() {
-		return LabelsOptions.DEFAULT_OUTSIDE_PADDING;
-	}
-
-	/**
-	 * Returns the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
-	 * 
-	 * @return the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
-	 */
-	default int getTextMargin() {
-		return LabelsOptions.DEFAULT_TEXT_MARGIN;
-	}
-	
-	/**
-	 * Returns the render callback.
-	 * 
-	 * @return the render callback
-	 */
-	default RenderCallback getRenderCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the font color callback.
-	 * 
-	 * @return the font color callback
-	 */
-	default FontColorCallback getFontColorCallback() {
+	default Label getLabel(IsLabelId id) {
 		return null;
 	}
 }

@@ -15,62 +15,72 @@
 * @return builder instance */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
+import org.pepstock.charba.client.labels.callbacks.FontCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
 
 /**
- * Comfortable object to create {@link LabelsPlugin#ID} plugin options by a builder.
+ * Comfortable object to create {@link LabelsPlugin#ID} plugin LABEL options by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsOptionsBuilder {
+public final class LabelBuilder {
 
-	// plugin options instance
-	private final LabelsOptions options;
+	// plugin label options instance
+	private final Label label;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates a label by the id passed as argument.
 	 * 
-	 * @param chart chart instance for this options. It could be <code>null</code>.
+	 * @param labelId id to use for new label.
 	 */
-	private LabelsOptionsBuilder(IsChart chart) {
-		this.options = new LabelsOptions(chart);
+	LabelBuilder(IsLabelId labelId) {
+		// creates new label by its id
+		this.label = new Label(labelId);
 	}
 
 	/**
-	 * Returns new builder instance.
+	 * Returns new builder instance, using default id, {@link Label#DEFAULT_ID}.
 	 * 
 	 * @return new builder instance
 	 */
-	public static LabelsOptionsBuilder create() {
-		return create(null);
+	public static LabelBuilder create() {
+		return create(Label.DEFAULT_ID);
 	}
 
 	/**
-	 * Returns new builder instance using the chart global options.
+	 * Returns new builder instance using the id passed as argument as label id.
 	 * 
-	 * @param chart chart instance related to the plugin options
+	 * @param labelId id to apply to new label.
 	 * @return new builder instance
 	 */
-	public static LabelsOptionsBuilder create(IsChart chart) {
-		return new LabelsOptionsBuilder(chart);
+	public static LabelBuilder create(String labelId) {
+		return create(IsLabelId.create(labelId));
 	}
 
 	/**
-	 * Returns a configured labels options.
+	 * Returns new builder instance using the id passed as argument as label id.
 	 * 
-	 * @return a configured labels options.
+	 * @param labelId id to apply to new label.
+	 * @return new builder instance
 	 */
-	public LabelsOptions build() {
+	public static LabelBuilder create(IsLabelId labelId) {
+		return new LabelBuilder(labelId);
+	}
+
+	/**
+	 * Returns a configured label.
+	 * 
+	 * @return a configured label.
+	 */
+	public Label build() {
 		// returns options
-		return options;
+		return label;
 	}
 
 	/**
@@ -79,8 +89,8 @@ public final class LabelsOptionsBuilder {
 	 * @param render what data must be showed.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setRender(Render render) {
-		options.setRender(render);
+	public LabelBuilder setRender(Render render) {
+		label.setRender(render);
 		return this;
 	}
 
@@ -90,8 +100,8 @@ public final class LabelsOptionsBuilder {
 	 * @param precision the precision for percentage
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setPrecision(int precision) {
-		options.setPrecision(precision);
+	public LabelBuilder setPrecision(int precision) {
+		label.setPrecision(precision);
 		return this;
 	}
 
@@ -101,8 +111,8 @@ public final class LabelsOptionsBuilder {
 	 * @param showZero whether or not labels of value 0 are displayed.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShowZero(boolean showZero) {
-		options.setShowZero(showZero);
+	public LabelBuilder setShowZero(boolean showZero) {
+		label.setShowZero(showZero);
 		return this;
 	}
 
@@ -112,8 +122,8 @@ public final class LabelsOptionsBuilder {
 	 * @param size the font size.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontSize(int size) {
-		options.setFontSize(size);
+	public LabelBuilder setFontSize(int size) {
+		label.getFont().setSize(size);
 		return this;
 
 	}
@@ -124,8 +134,8 @@ public final class LabelsOptionsBuilder {
 	 * @param color the font color as color.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontColor(IsColor color) {
-		options.setFontColor(color);
+	public LabelBuilder setFontColor(IsColor color) {
+		label.getFont().setColor(color);
 		return this;
 	}
 
@@ -135,8 +145,8 @@ public final class LabelsOptionsBuilder {
 	 * @param color the font color as string.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontColor(String color) {
-		options.setFontColor(color);
+	public LabelBuilder setFontColor(String color) {
+		label.getFont().setColor(color);
 		return this;
 	}
 
@@ -146,8 +156,8 @@ public final class LabelsOptionsBuilder {
 	 * @param fontStyle the font style.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontStyle(FontStyle fontStyle) {
-		options.setFontStyle(fontStyle);
+	public LabelBuilder setFontStyle(FontStyle fontStyle) {
+		label.getFont().setStyle(fontStyle);
 		return this;
 	}
 
@@ -157,8 +167,8 @@ public final class LabelsOptionsBuilder {
 	 * @param fontFamily the font family
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontFamily(String fontFamily) {
-		options.setFontFamily(fontFamily);
+	public LabelBuilder setFontFamily(String fontFamily) {
+		label.getFont().setFamily(fontFamily);
 		return this;
 	}
 
@@ -168,8 +178,8 @@ public final class LabelsOptionsBuilder {
 	 * @param textShadow <code>true</code> if draws text shadows under labels.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setTextShadow(boolean textShadow) {
-		options.setTextShadow(textShadow);
+	public LabelBuilder setTextShadow(boolean textShadow) {
+		label.setTextShadow(textShadow);
 		return this;
 	}
 
@@ -179,8 +189,8 @@ public final class LabelsOptionsBuilder {
 	 * @param shadowBlur the text shadow intensity.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShadowBlur(int shadowBlur) {
-		options.setShadowBlur(shadowBlur);
+	public LabelBuilder setShadowBlur(int shadowBlur) {
+		label.setShadowBlur(shadowBlur);
 		return this;
 	}
 
@@ -190,8 +200,8 @@ public final class LabelsOptionsBuilder {
 	 * @param shadowOffsetX the text shadow X offset.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShadowOffsetX(int shadowOffsetX) {
-		options.setShadowOffsetX(shadowOffsetX);
+	public LabelBuilder setShadowOffsetX(int shadowOffsetX) {
+		label.setShadowOffsetX(shadowOffsetX);
 		return this;
 	}
 
@@ -201,8 +211,8 @@ public final class LabelsOptionsBuilder {
 	 * @param shadowOffsetY the text shadow Y offset.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShadowOffsetY(int shadowOffsetY) {
-		options.setShadowOffsetY(shadowOffsetY);
+	public LabelBuilder setShadowOffsetY(int shadowOffsetY) {
+		label.setShadowOffsetY(shadowOffsetY);
 		return this;
 	}
 
@@ -212,8 +222,8 @@ public final class LabelsOptionsBuilder {
 	 * @param shadowColor the text shadow color as color.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShadowColor(IsColor shadowColor) {
-		options.setShadowColor(shadowColor);
+	public LabelBuilder setShadowColor(IsColor shadowColor) {
+		label.setShadowColor(shadowColor);
 		return this;
 	}
 
@@ -223,8 +233,8 @@ public final class LabelsOptionsBuilder {
 	 * @param shadowColor the text shadow color as string.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShadowColor(String shadowColor) {
-		options.setShadowColor(shadowColor);
+	public LabelBuilder setShadowColor(String shadowColor) {
+		label.setShadowColor(shadowColor);
 		return this;
 	}
 
@@ -234,8 +244,8 @@ public final class LabelsOptionsBuilder {
 	 * @param arc if draws label in arc.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setArc(boolean arc) {
-		options.setArc(arc);
+	public LabelBuilder setArc(boolean arc) {
+		label.setArc(arc);
 		return this;
 	}
 
@@ -245,8 +255,8 @@ public final class LabelsOptionsBuilder {
 	 * @param position the position to draw label.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setPosition(Position position) {
-		options.setPosition(position);
+	public LabelBuilder setPosition(Position position) {
+		label.setPosition(position);
 		return this;
 	}
 
@@ -256,8 +266,8 @@ public final class LabelsOptionsBuilder {
 	 * @param overlap if draws label even it's overlap.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setOverlap(boolean overlap) {
-		options.setOverlap(overlap);
+	public LabelBuilder setOverlap(boolean overlap) {
+		label.setOverlap(overlap);
 		return this;
 	}
 
@@ -267,8 +277,8 @@ public final class LabelsOptionsBuilder {
 	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setShowActualPercentages(boolean showActualPercentages) {
-		options.setShowActualPercentages(showActualPercentages);
+	public LabelBuilder setShowActualPercentages(boolean showActualPercentages) {
+		label.setShowActualPercentages(showActualPercentages);
 		return this;
 	}
 
@@ -278,8 +288,8 @@ public final class LabelsOptionsBuilder {
 	 * @param outsidePadding the padding when position is {@link Position#OUTSIDE}.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setOutsidePadding(int outsidePadding) {
-		options.setOutsidePadding(outsidePadding);
+	public LabelBuilder setOutsidePadding(int outsidePadding) {
+		label.setOutsidePadding(outsidePadding);
 		return this;
 	}
 
@@ -289,8 +299,8 @@ public final class LabelsOptionsBuilder {
 	 * @param textMargin the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setTextMargin(int textMargin) {
-		options.setTextMargin(textMargin);
+	public LabelBuilder setTextMargin(int textMargin) {
+		label.setTextMargin(textMargin);
 		return this;
 	}
 
@@ -300,8 +310,8 @@ public final class LabelsOptionsBuilder {
 	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setImages(Img... images) {
-		options.setImages(images);
+	public LabelBuilder setImages(Img... images) {
+		label.setImages(images);
 		return this;
 	}
 
@@ -311,8 +321,8 @@ public final class LabelsOptionsBuilder {
 	 * @param renderCallback the render callback to set
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setRender(RenderCallback renderCallback) {
-		options.setRender(renderCallback);
+	public LabelBuilder setRender(RenderCallback renderCallback) {
+		label.setRender(renderCallback);
 		return this;
 	}
 
@@ -322,8 +332,8 @@ public final class LabelsOptionsBuilder {
 	 * @param fontColorCallback the font color callback.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontColor(FontColorCallback fontColorCallback) {
-		options.setFontColor(fontColorCallback);
+	public LabelBuilder setFont(FontCallback fontColorCallback) {
+		label.setFont(fontColorCallback);
 		return this;
 	}
 

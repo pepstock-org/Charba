@@ -50,7 +50,7 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 			return new LabelsOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new LabelsOptions(DefaultsOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		public LabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 			// check if native object is consistent
 			// creates the options by the native object and the defaults
-			return new LabelsOptions(DefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+			return new LabelsOptions(DefaultsOptions.INSTANCE, nativeObject);
 		}
 
 	}

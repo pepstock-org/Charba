@@ -24,12 +24,8 @@ import org.pepstock.charba.client.utils.RegExp;
  */
 final class PropertyKeyChecker {
 
-	// regexp to check if there is an uppercase
-	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
-	// regex instance for font style
-	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
 	// regexp pattern to have only letters and number
-	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_-]+$";
+	private static final String REGEXP_ID_PATTERN = "^[a-zA-Z0-9_-]+$";
 	// regxp object to perform check
 	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
@@ -52,7 +48,7 @@ final class PropertyKeyChecker {
 	 * @return <code>true</code> if the passed id is compliant with the constraints of property key
 	 */
 	static boolean isValid(String id) {
-		return (id != null && REGEXP_HAS_UPPERCASE.exec(id) == null && REGEXP_ID.exec(id) != null);
+		return (id != null && REGEXP_ID.exec(id) != null);
 	}
 
 	/**
@@ -69,9 +65,6 @@ final class PropertyKeyChecker {
 		// checks if is null
 		if (id == null) {
 			throw new IllegalArgumentException("Property key can not be null");
-		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
-			// checks if contains upper case letters
-			throw new IllegalArgumentException(buildMessage(id, "Property key can not contain uppercase letters "));
 		} else if (REGEXP_ID.exec(id) == null) {
 			// checks if is not safe URL
 			throw new IllegalArgumentException(buildMessage(id, "Property key can not contain any invalid characters "));

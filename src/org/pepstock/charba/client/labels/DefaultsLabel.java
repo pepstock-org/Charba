@@ -20,15 +20,15 @@ package org.pepstock.charba.client.labels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DefaultsOptions implements IsDefaultsOptions {
+final class DefaultsLabel implements IsDefaultsLabel {
 
 	// defaults options instance
-	static final DefaultsOptions INSTANCE = new DefaultsOptions();
+	static final DefaultsLabel INSTANCE = new DefaultsLabel();
 
 	/**
-	 * Creates an empty default options.
+	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
-	private DefaultsOptions() {
+	private DefaultsLabel() {
 		// do nothing
 	}
 }

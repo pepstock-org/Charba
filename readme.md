@@ -267,7 +267,11 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the constructor signature of `ControllerType` class adding a mandatory argument of `ControllerProvider` instance which can provide the instance of controller to register.
    * add an optional argument (boolean) in order to decide if the base default options of the chart which is being extended must be cloned or not. 
    * reduce the visibility of `register` method of `Controller` class   
- * remove `AbstractPluginCachedOptions` and `AbstractPluginCachedOptionsFactory` classes. Use instead callbacks cache.  
+ * remove `AbstractPluginCachedOptions` and `AbstractPluginCachedOptionsFactory` classes. Use instead callbacks cache.
+ * change `LabelsPlugin` in order to :
+   * use `font` object instead of the single properties.
+   * remove `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font and not only color.
+   * pass a `Context` object instance as argument to the callback instead of `RenderItem` and `FontColorItem` ones.
   
 ### Features
 
@@ -433,6 +437,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the tooltip callbacks management providing the right defaults.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
  * improve `DataLabels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
+ * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
 
 License
