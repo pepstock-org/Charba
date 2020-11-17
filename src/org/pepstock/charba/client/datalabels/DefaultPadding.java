@@ -16,47 +16,19 @@
 package org.pepstock.charba.client.datalabels;
 
 /**
- * {@link DataLabelsPlugin#ID} plugin default options interface for PADDING element.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options for PADDING element.<br>
  * It contains all default values for PADDING.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPadding {
+final class DefaultPadding implements IsDefaultPadding {
 
 	/**
-	 * Returns the padding left in pixel.
-	 * 
-	 * @return the padding left in pixel.
+	 * To avoid any instantiation
 	 */
-	default int getLeft() {
-		return Padding.DEFAULT_PADDING;
+	DefaultPadding() {
+		// do nothing
 	}
 
-	/**
-	 * Returns the padding right in pixel.
-	 * 
-	 * @return the padding right in pixel.
-	 */
-	default int getRight() {
-		return Padding.DEFAULT_PADDING;
-	}
-
-	/**
-	 * Returns the padding top in pixel.
-	 * 
-	 * @return the padding top in pixel.
-	 */
-	default int getTop() {
-		return Padding.DEFAULT_PADDING;
-	}
-
-	/**
-	 * Returns the padding bottom in pixel.
-	 * 
-	 * @return the padding bottom in pixel.
-	 */
-	default int getBottom() {
-		return Padding.DEFAULT_PADDING;
-	}
 }

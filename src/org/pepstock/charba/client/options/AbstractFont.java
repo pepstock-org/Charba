@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Weight;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractFontOptions extends NativeObjectContainer implements IsFont {
+public abstract class AbstractFont extends NativeObjectContainer implements IsFont {
 
 	/**
 	 * Name of properties of native object.
@@ -68,7 +68,7 @@ public abstract class AbstractFontOptions extends NativeObjectContainer implemen
 	 * 
 	 * @param defaultValues default provider
 	 */
-	protected AbstractFontOptions(IsDefaultFont defaultValues) {
+	protected AbstractFont(IsDefaultFont defaultValues) {
 		this(defaultValues, null);
 	}
 
@@ -78,7 +78,7 @@ public abstract class AbstractFontOptions extends NativeObjectContainer implemen
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	protected AbstractFontOptions(IsDefaultFont defaultValues, NativeObject nativeObject) {
+	protected AbstractFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
 		// creates a animation to wrap
 		this.font = new Font(null, Property.FONT, defaultValues, getNativeObject());

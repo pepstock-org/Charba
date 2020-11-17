@@ -27,7 +27,7 @@ import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Pan extends AbstractConfigurationItem<IsDefaultsPan> implements IsDefaultsPan {
+public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implements IsDefaultPan {
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
@@ -85,7 +85,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultsPan> implemen
 	 * @param defaultsOptions default PAN options to returns the default when required.
 	 * @param nativeObject stored padding values into native object to read.
 	 */
-	Pan(ZoomOptions parent, IsDefaultsPan defaultsOptions, NativeObject nativeObject) {
+	Pan(ZoomOptions parent, IsDefaultPan defaultsOptions, NativeObject nativeObject) {
 		super(parent, defaultsOptions, nativeObject);
 	}
 

@@ -23,7 +23,7 @@ import java.util.List;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsDefaultsOptions {
+interface IsDefaultOptions {
 
 	/**
 	 * Returns <code>true</code> if the label with the id passed as argument exists.

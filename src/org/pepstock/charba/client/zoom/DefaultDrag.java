@@ -16,19 +16,20 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for RANGE (min and max) elements.<br>
- * It contains all default values for RANGE.
+ * {@link ZoomPlugin#ID} plugin default options for DRAG element, in order to style the drag area.<br>
+ * It contains all default values for DRAG.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsRange implements IsDefaultsRange{
+final class DefaultDrag implements IsDefaultDrag {
+
+	static final DefaultDrag INSTANCE = new DefaultDrag();
 
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultsRange() {
+	private DefaultDrag() {
 		// do nothing
 	}
-
 }

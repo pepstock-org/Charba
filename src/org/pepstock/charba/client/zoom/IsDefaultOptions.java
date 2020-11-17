@@ -16,46 +16,26 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface.<br>
  * It contains all default values, PAN and ZOOM.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsOptions implements IsDefaultsOptions {
-
-	// defaults options instance
-	static final DefaultsOptions INSTANCE = new DefaultsOptions();
-	// default pan options
-	private final DefaultsPan pan = new DefaultsPan();
-	// default Zoom options
-	private final DefaultsZoom zoom = new DefaultsZoom();
+interface IsDefaultOptions {
 
 	/**
-	 * Creates an empty options.
-	 */
-	private DefaultsOptions() {
-		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * Returns the pan element.
 	 * 
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsOptions#getPan()
+	 * @return the pan element.
 	 */
-	@Override
-	public DefaultsPan getPan() {
-		return pan;
-	}
+	IsDefaultPan getPan();
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the zoom element.
 	 * 
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsOptions#getZoom()
+	 * @return the zoom element.
 	 */
-	@Override
-	public DefaultsZoom getZoom() {
-		return zoom;
-	}
+	IsDefaultZoom getZoom();
 
 }

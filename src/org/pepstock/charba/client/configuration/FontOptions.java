@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.options.AbstractFontOptions;
+import org.pepstock.charba.client.options.AbstractFont;
 import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class FontOptions extends AbstractFontOptions {
+public final class FontOptions extends AbstractFont {
 
 	/**
 	 * Creates an empty font to use for chart configuration with global defaults.

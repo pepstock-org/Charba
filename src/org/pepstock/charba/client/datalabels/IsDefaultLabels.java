@@ -15,19 +15,33 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.commons.Key;
+
 /**
- * {@link DataLabelsPlugin#ID} plugin default options for LISTENERS element.<br>
- * It contains all default values for LISTENERS.
+ * Maps the methods for LABELS elements to get defaults value.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-final class DefaultsListeners implements IsDefaultsListeners {
-	
+interface IsDefaultLabels {	
+
 	/**
-	 * Creates the empty object
+	 * Returns the stored options for specific key.
+	 * 
+	 * @param key key of the options
+	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
-	DefaultsListeners() {
+	default LabelItem getLabel(Key key) {
+		return null;
+	}
+
+	/**
+	 * Returns <code>true</code> if there is a stored options for specific key.
+	 * 
+	 * @param key key of the options
+	 * @return <code>true</code> if there is a stored options for specific key
+	 */
+	default boolean hasLabel(Key key) {
+		return false;
 	}
 
 }

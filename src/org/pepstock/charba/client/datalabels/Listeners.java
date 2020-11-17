@@ -39,7 +39,7 @@ import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Listeners extends NativeObjectContainer implements IsDefaultsListeners {
+public final class Listeners extends NativeObjectContainer implements IsDefaultListeners {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -60,7 +60,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	// parent instance
 	private final LabelItem parent;
 	// parent instance
-	private final IsDefaultsListeners defaultsOptions;
+	private final IsDefaultListeners defaultsOptions;
 	
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -69,7 +69,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaults
 	 * @param defaultsOptions default options instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Listeners(LabelItem parent, IsDefaultsListeners defaultsOptions, NativeObject nativeObject) {
+	Listeners(LabelItem parent, IsDefaultListeners defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores parent
 		this.parent = parent;

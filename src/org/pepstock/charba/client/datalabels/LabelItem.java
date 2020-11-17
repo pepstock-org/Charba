@@ -67,7 +67,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLabelsItem {
+public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -183,7 +183,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 	
 	// defaults global options instance
-	private final IsDefaultsDataLabelsItem defaultsOptions;
+	private final IsDefaultDataLabelsItem defaultsOptions;
 	// listener inner element
 	private final Listeners listeners;
 	// padding inner element
@@ -249,7 +249,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * @param defaultsOptions default options instance
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelItem(IsDefaultsDataLabelsItem defaultsOptions, NativeObject nativeObject) {
+	LabelItem(IsDefaultDataLabelsItem defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
@@ -279,7 +279,6 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 			// stores listeners
 			setValue(Property.LISTENERS, listeners);
 		}
-		// sets unique id
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -323,7 +322,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
-		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), PADDING_PROPERTY_HANDLER.getCallback(this)));
+		paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), PADDING_PROPERTY_HANDLER.getCallback(this)));
 	}
 
 	/**
@@ -331,7 +330,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 	 * 
 	 * @return the default options of the label
 	 */
-	final IsDefaultsDataLabelsItem getDefaultsOptions() {
+	final IsDefaultDataLabelsItem getDefaultsOptions() {
 		return defaultsOptions;
 	}
 
@@ -1290,18 +1289,36 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultsDataLa
 			return Display.TRUE.equals(result);
 		}
 	}
-
+	
 	/**
-	 * Returns a native object as font or padding when the callback has been activated.
+	 * Returns a native object as padding when the callback has been activated.
 	 * 
 	 * @param context native object as context
 	 * @param callback callback to invoke
-	 * @param <T> type of callback result
-	 * @return a native object as font or padding
+	 * @return a native object as padding
 	 */
-	private <T extends AbstractElement> NativeObject onFontOrPadding(ScriptableContext context, Scriptable<T> callback) {
+	private NativeObject onPadding(ScriptableContext context, Scriptable<Padding> callback) {
 		// gets value
-		T result = ScriptableUtils.getOptionValue(context, callback);
+		Padding result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		}
+		// default result
+		return getPadding().nativeObject();
+	}
+
+	/**
+	 * Returns a native object as font when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @return a native object as font
+	 */
+	private NativeObject onFontOrPadding(ScriptableContext context, Scriptable<Font> callback) {
+		// gets value
+		Font result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result

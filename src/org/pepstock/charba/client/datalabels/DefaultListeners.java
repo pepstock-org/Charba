@@ -13,22 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom;
+package org.pepstock.charba.client.datalabels;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
- * It contains all default values for PAN.
+ * {@link DataLabelsPlugin#ID} plugin default options for LISTENERS element.<br>
+ * It contains all default values for LISTENERS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsPan extends DefaultsConfigurationItem implements IsDefaultsPan {
+final class DefaultListeners implements IsDefaultListeners {
 	
 	/**
-	 * Creates an empty object.
+	 * Creates the empty object
 	 */
-	DefaultsPan() {
-		// do nothing
+	DefaultListeners() {
 	}
 
 }

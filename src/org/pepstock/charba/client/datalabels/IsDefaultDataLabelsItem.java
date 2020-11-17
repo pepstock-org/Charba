@@ -40,6 +40,7 @@ import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.Display;
 
 /**
@@ -48,28 +49,28 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsDataLabelsItem {
+interface IsDefaultDataLabelsItem {
 	
 	/**
 	 * Returns the font element.
 	 * 
 	 * @return the font element.
 	 */
-	IsDefaultsFont getFont();
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns the padding element.
 	 * 
 	 * @return the padding element.
 	 */
-	IsDefaultsPadding getPadding();
+	IsDefaultPadding getPadding();
 	
 	/**
 	 * Returns the listeners element.
 	 * 
 	 * @return the listeners element.
 	 */
-	IsDefaultsListeners getListeners();
+	IsDefaultListeners getListeners();
 
 	/**
 	 * Returns the position of the label relative to the anchor point position and orientation.

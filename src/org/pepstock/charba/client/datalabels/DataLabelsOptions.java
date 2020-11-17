@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends LabelItem implements IsDefaultsDataLabelsOptions{
+public final class DataLabelsOptions extends LabelItem implements IsDefaultDataLabelsOptions{
 
 	// -------------------------------------------
 	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
@@ -167,15 +167,15 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultsData
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	DataLabelsOptions(IsDefaultsDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
+	DataLabelsOptions(IsDefaultDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(defaultsOptions, nativeObject);
 		// gets default
-		IsDefaultsDataLabelsItem defaultValue = getDefaultsOptions();
+		IsDefaultDataLabelsItem defaultValue = getDefaultsOptions();
 		// checks instance of defaults options if has got the right type
-		if (defaultValue instanceof IsDefaultsDataLabelsOptions) {
+		if (defaultValue instanceof IsDefaultDataLabelsOptions) {
 			// casts to the right type
-			IsDefaultsDataLabelsOptions values = (IsDefaultsDataLabelsOptions)defaultValue;
+			IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions)defaultValue;
 			// creates and stores labels
 			this.labels = new Labels(this, values.getLabels(), getValue(Property.LABELS));
 			// checks it has got the element

@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsZoom extends IsDefaultsConfigurationItem {
+interface IsDefaultZoom extends IsDefaultConfigurationItem {
 
 	/**
 	 * Returns the minimal zoom level before actually applying zoom, on category scale.
@@ -47,7 +47,7 @@ interface IsDefaultsZoom extends IsDefaultsConfigurationItem {
 	 * 
 	 * @return the customized drag-to-zoom effect
 	 */
-	IsDefaultsDrag getDrag();
+	IsDefaultDrag getDrag();
 
 	/**
 	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).

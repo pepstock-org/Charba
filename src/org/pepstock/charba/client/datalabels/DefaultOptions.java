@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
+
 /**
  * {@link DataLabelsPlugin#ID} plugin default options.<br>
  * It contains all default values.
@@ -22,23 +25,21 @@ package org.pepstock.charba.client.datalabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
+final class DefaultOptions implements IsDefaultDataLabelsOptions {
 
 	// defaults options instance
-	static final DefaultsOptions DEFAULTS_INSTANCE = new DefaultsOptions();
+	static final DefaultOptions DEFAULTS_INSTANCE = new DefaultOptions();
 	// default padding options
-	private final DefaultsPadding padding = new DefaultsPadding();
+	private final DefaultPadding padding = new DefaultPadding();
 	// default font options
-	private final DefaultsFont font = new DefaultsFont();
+	private final DefaultListeners listeners = new DefaultListeners();
 	// default font options
-	private final DefaultsListeners listeners = new DefaultsListeners();
-	// default font options
-	private final DefaultsLabels labels = new DefaultsLabels();
+	private final DefaultLabels labels = new DefaultLabels();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private DefaultsOptions() {
+	private DefaultOptions() {
 		// do nothing
 	}
 
@@ -48,8 +49,8 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	 * @see org.pepstock.charba.client.datalabels.IsDefaultsDataLabelsOptions#getFont()
 	 */
 	@Override
-	public IsDefaultsFont getFont() {
-		return font;
+	public IsDefaultFont getFont() {
+		return Defaults.get().getGlobal().getFont();
 	}
 
 	/*
@@ -58,7 +59,7 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	 * @see org.pepstock.charba.client.datalabels.IsDefaultsDataLabelsOptions#getPadding()
 	 */
 	@Override
-	public IsDefaultsPadding getPadding() {
+	public IsDefaultPadding getPadding() {
 		return padding;
 	}
 
@@ -68,7 +69,7 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	 * @see org.pepstock.charba.client.datalabels.IsDefaultsDataLabelsOptions#getListeners()
 	 */
 	@Override
-	public IsDefaultsListeners getListeners() {
+	public IsDefaultListeners getListeners() {
 		return listeners;
 	}
 
@@ -78,7 +79,7 @@ final class DefaultsOptions implements IsDefaultsDataLabelsOptions {
 	 * @see org.pepstock.charba.client.datalabels.IsDefaultsDataLabelsOptions#getLabels()
 	 */
 	@Override
-	public IsDefaultsLabels getLabels() {
+	public IsDefaultLabels getLabels() {
 		return labels;
 	}
 

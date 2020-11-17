@@ -30,7 +30,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Range extends NativeObjectContainer implements IsDefaultsRange {
+public final class Range extends NativeObjectContainer implements IsDefaultRange {
 
 	/**
 	 * Name of properties of native object.
@@ -65,14 +65,14 @@ public final class Range extends NativeObjectContainer implements IsDefaultsRang
 	}
 
 	// defaults global options instance
-	private IsDefaultsRange defaultsOptions;
+	private IsDefaultRange defaultsOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
 	 * @param defaultsOptions default RANGE options to returns the default when required.
 	 */
-	Range(IsDefaultsRange defaultsOptions) {
+	Range(IsDefaultRange defaultsOptions) {
 		this(defaultsOptions, null);
 	}
 
@@ -82,7 +82,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultsRang
 	 * @param defaultsOptions default RANGE options to returns the default when required.
 	 * @param nativeObject stored range values into native object to read.
 	 */
-	Range(IsDefaultsRange defaultsOptions, NativeObject nativeObject) {
+	Range(IsDefaultRange defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}

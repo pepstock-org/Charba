@@ -50,7 +50,7 @@ public final class ZoomOptionsFactory extends AbstractPluginOptionsFactory<ZoomO
 			return new ZoomOptions(defaultsOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ZoomOptions(DefaultsOptions.INSTANCE, nativeObject);
+		return new ZoomOptions(DefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public final class ZoomOptionsFactory extends AbstractPluginOptionsFactory<ZoomO
 		 */
 		@Override
 		public ZoomOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			return new ZoomOptions(DefaultsOptions.INSTANCE, nativeObject);
+			return new ZoomOptions(DefaultOptions.INSTANCE, nativeObject);
 		}
 
 	}

@@ -45,7 +45,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Label extends NativeObjectContainer implements IsDefaultsLabel {
+public final class Label extends NativeObjectContainer implements IsDefaultLabel {
 
 	/**
 	 * Default label id, <b>charbaDefaultLabelId</b>.
@@ -177,7 +177,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultsLabe
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 
 	// defaults options instance
-	private final IsDefaultsLabel defaultsOptions;
+	private final IsDefaultLabel defaultsOptions;
 	// font instance
 	private final Font font;
 
@@ -249,7 +249,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultsLabe
 	 * @param id id to apply to new label.
 	 */
 	public Label(IsLabelId id) {
-		this(id, DefaultsLabel.INSTANCE, null);
+		this(id, DefaultLabel.INSTANCE, null);
 	}
 
 	/**
@@ -259,7 +259,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultsLabe
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	Label(IsLabelId id, IsDefaultsLabel defaultsOptions, NativeObject nativeObject) {
+	Label(IsLabelId id, IsDefaultLabel defaultsOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(nativeObject);
 		// checks id
@@ -269,7 +269,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultsLabe
 		// checks if defaults options are consistent
 		if (defaultsOptions == null) {
 			// get the default default global options
-			this.defaultsOptions = DefaultsLabel.INSTANCE;
+			this.defaultsOptions = DefaultLabel.INSTANCE;
 		} else {
 			// stores default options
 			this.defaultsOptions = defaultsOptions;

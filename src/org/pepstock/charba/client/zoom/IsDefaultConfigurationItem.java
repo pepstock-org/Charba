@@ -26,7 +26,7 @@ import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
  * @author Andrea "Stock" Stocchero
  * 
  */
-interface IsDefaultsConfigurationItem {
+interface IsDefaultConfigurationItem {
 
 	/**
 	 * Returns <code>true</code> to enable element (panning or zooming).
@@ -78,13 +78,13 @@ interface IsDefaultsConfigurationItem {
 	 * 
 	 * @return the minimum element (panning or zooming) range depending on scale type
 	 */
-	IsDefaultsRange getRangeMin();
+	IsDefaultRange getRangeMin();
 
 	/**
 	 * Returns the maximum element (panning or zooming) range depending on scale type.
 	 * 
 	 * @return the maximum element (panning or zooming) range depending on scale type
 	 */
-	IsDefaultsRange getRangeMax();
+	IsDefaultRange getRangeMax();
 
 }

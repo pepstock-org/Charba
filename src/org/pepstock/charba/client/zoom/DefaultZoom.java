@@ -22,12 +22,12 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsZoom extends DefaultsConfigurationItem implements IsDefaultsZoom {
+final class DefaultZoom extends DefaultConfigurationItem implements IsDefaultZoom {
 	
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultsZoom() {
+	DefaultZoom() {
 		// do nothing
 	}
 
@@ -35,8 +35,8 @@ final class DefaultsZoom extends DefaultsConfigurationItem implements IsDefaults
 	 * @see org.pepstock.charba.client.zoom.IsDefaultsZoom#getDrag()
 	 */
 	@Override
-	public IsDefaultsDrag getDrag() {
-		return DefaultsDrag.INSTANCE;
+	public IsDefaultDrag getDrag() {
+		return DefaultDrag.INSTANCE;
 	}
 	
 }

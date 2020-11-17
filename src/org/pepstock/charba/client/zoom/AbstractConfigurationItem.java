@@ -35,7 +35,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of default
  */
-public abstract class AbstractConfigurationItem<T extends IsDefaultsConfigurationItem> extends NativeObjectContainer implements IsDefaultsConfigurationItem {
+public abstract class AbstractConfigurationItem<T extends IsDefaultConfigurationItem> extends NativeObjectContainer implements IsDefaultConfigurationItem {
 
 	/**
 	 * Java script FUNCTION callback called to provide the mode (direction) of element.

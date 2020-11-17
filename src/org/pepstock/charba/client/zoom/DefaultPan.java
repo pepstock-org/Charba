@@ -16,20 +16,19 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for DRAG element, in order to style the drag area.<br>
- * It contains all default values for DRAG.
+ * {@link ZoomPlugin#ID} plugin default options for PAN element.<br>
+ * It contains all default values for PAN.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultsDrag implements IsDefaultsDrag {
-
-	static final DefaultsDrag INSTANCE = new DefaultsDrag();
-
+final class DefaultPan extends DefaultConfigurationItem implements IsDefaultPan {
+	
 	/**
 	 * Creates an empty object.
 	 */
-	private DefaultsDrag() {
+	DefaultPan() {
 		// do nothing
 	}
+
 }

@@ -13,29 +13,22 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom;
+package org.pepstock.charba.client.labels;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface.<br>
- * It contains all default values, PAN and ZOOM.
+ * It implements default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-interface IsDefaultsOptions {
+final class DefaultLabel implements IsDefaultLabel {
+
+	// defaults options instance
+	static final DefaultLabel INSTANCE = new DefaultLabel();
 
 	/**
-	 * Returns the pan element.
-	 * 
-	 * @return the pan element.
+	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
-	IsDefaultsPan getPan();
-
-	/**
-	 * Returns the zoom element.
-	 * 
-	 * @return the zoom element.
-	 */
-	IsDefaultsZoom getZoom();
-
+	private DefaultLabel() {
+		// do nothing
+	}
 }

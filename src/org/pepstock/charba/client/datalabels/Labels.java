@@ -28,11 +28,11 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Labels extends AbstractElement implements IsDefaultsLabels {
+public final class Labels extends AbstractElement implements IsDefaultLabels {
 	
-	private final IsDefaultsDataLabelsOptions parent;
+	private final IsDefaultDataLabelsOptions parent;
 
-	private final IsDefaultsLabels defaultsOptions;
+	private final IsDefaultLabels defaultsOptions;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -41,7 +41,7 @@ public final class Labels extends AbstractElement implements IsDefaultsLabels {
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Labels(IsDefaultsDataLabelsOptions parent, IsDefaultsLabels defaultsOptions, NativeObject nativeObject) {
+	Labels(IsDefaultDataLabelsOptions parent, IsDefaultLabels defaultsOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode

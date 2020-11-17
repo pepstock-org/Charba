@@ -26,7 +26,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomOptions extends AbstractPluginOptions implements IsDefaultsOptions{
+public final class ZoomOptions extends AbstractPluginOptions implements IsDefaultOptions{
 
 	/**
 	 * Name of properties of native object.
@@ -61,7 +61,7 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	}
 
 	// defaults global options instance
-	private IsDefaultsOptions defaultsOptions;
+	private IsDefaultOptions defaultsOptions;
 	// pan inner element
 	private final Pan pan;
 	// zoom inner element
@@ -89,7 +89,7 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	ZoomOptions(IsDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ZoomOptions(IsDefaultOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(ZoomPlugin.ID, nativeObject);
 		// checks if defaults options are consistent

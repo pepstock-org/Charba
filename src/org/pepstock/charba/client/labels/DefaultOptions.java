@@ -1,7 +1,7 @@
 /**
     Copyright 2017 Andrea "Stock" Stocchero
 
-    Licensed under the Apache License, Version 2.0 (the "License";
+    Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
@@ -13,21 +13,22 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels;
+package org.pepstock.charba.client.labels;
 
 /**
- * This is the base interface to map {@link DataLabelsPlugin#ID} plugin options, as also container of multiple labels.
+ * It implements default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-interface IsDefaultsDataLabelsOptions extends IsDefaultsDataLabelsItem {
-	
+final class DefaultOptions implements IsDefaultOptions {
+
+	// defaults options instance
+	static final DefaultOptions INSTANCE = new DefaultOptions();
+
 	/**
-	 * Returns the labels element.
-	 * 
-	 * @return the labels element.
+	 * Creates an empty default options.
 	 */
-	IsDefaultsLabels getLabels();
-	
+	private DefaultOptions() {
+		// do nothing
+	}
 }

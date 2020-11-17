@@ -27,7 +27,7 @@ import org.pepstock.charba.client.labels.enums.Render;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsDefaultsLabel {
+interface IsDefaultLabel {
 
 	/**
 	 * Returns what data must be showed.

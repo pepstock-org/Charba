@@ -16,42 +16,19 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for the abstract element used by pan and zoom options.
+ * {@link ZoomPlugin#ID} plugin default options for RANGE (min and max) elements.<br>
+ * It contains all default values for RANGE.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class DefaultsConfigurationItem implements IsDefaultsConfigurationItem {
-
-	private final DefaultsRange rangeMin = new DefaultsRange();
-	
-	private final DefaultsRange rangeMax = new DefaultsRange();
+final class DefaultRange implements IsDefaultRange{
 
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultsConfigurationItem() {
+	DefaultRange() {
 		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsConfigurationItem#getRangeMin()
-	 */
-	@Override
-	public final IsDefaultsRange getRangeMin() {
-		return rangeMin;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.zoom.IsDefaultsConfigurationItem#getRangeMax()
-	 */
-	@Override
-	public final IsDefaultsRange getRangeMax() {
-		return rangeMax;
 	}
 
 }

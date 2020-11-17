@@ -13,33 +13,22 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom;
+package org.pepstock.charba.client.datalabels;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for PAN element.<br>
- * It contains all default values for PAN.
+ * {@link DataLabelsPlugin#ID} plugin default options for LABELS element.<br>
+ * It contains all default values for LABELS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPan extends IsDefaultsConfigurationItem {
+final class DefaultLabels implements IsDefaultLabels {
 
 	/**
-	 * Returns the minimal pan distance required before actually applying pan.
-	 * 
-	 * @return the minimal pan distance required before actually applying pan
+	 * To avoid any instantiation
 	 */
-	default double getThreshold() {
-		return Pan.DEFAULT_THRESHOLD;
-	}
-
-	/**
-	 * Returns the threshold factor before applying pan, on category scale.
-	 * 
-	 * @return the threshold factor before applying pan, on category scale
-	 */
-	default double getSpeed() {
-		return Pan.DEFAULT_SPEED;
+	DefaultLabels() {
+		// do nothing
 	}
 
 }

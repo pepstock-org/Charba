@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsDrag {
+interface IsDefaultDrag {
 
 	/**
 	 * Returns the fill color during dragging.

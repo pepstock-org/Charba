@@ -32,10 +32,10 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsOptions extends AbstractPluginOptions implements IsDefaultsOptions {
+public final class LabelsOptions extends AbstractPluginOptions implements IsDefaultOptions {
 
 	// defaults global options instance
-	private IsDefaultsOptions defaultsOptions;
+	private IsDefaultOptions defaultsOptions;
 
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
@@ -59,7 +59,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @param defaultsOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelsOptions(IsDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	LabelsOptions(IsDefaultOptions defaultsOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(LabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent

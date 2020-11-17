@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Drag extends NativeObjectContainer implements IsDefaultsDrag {
+public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 
 	/**
 	 * Default background color, <b>{@value DEFAULT_BACKGROUND_COLOR}</b>.
@@ -84,14 +84,14 @@ public final class Drag extends NativeObjectContainer implements IsDefaultsDrag 
 	}
 
 	// defaults global drag options instance
-	private IsDefaultsDrag defaultsOptions;
+	private IsDefaultDrag defaultsOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
 	 * @param defaultsOptions default DRAG options to returns the default when required.
 	 */
-	Drag(IsDefaultsDrag defaultsOptions) {
+	Drag(IsDefaultDrag defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
@@ -101,7 +101,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultsDrag 
 	 * @param nativeObject stored range values into native object to read.
 	 * @param defaultsOptions default DRAG options to returns the default when required.
 	 */
-	Drag(NativeObject nativeObject, IsDefaultsDrag defaultsOptions) {
+	Drag(NativeObject nativeObject, IsDefaultDrag defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Zoom extends AbstractConfigurationItem<IsDefaultsZoom> implements IsDefaultsZoom {
+public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> implements IsDefaultZoom {
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM);
@@ -92,7 +92,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultsZoom> implem
 	 * @param nativeObject stored padding values into native object to read.
 	 * @param defaultsOptions default ZOOM options to returns the default when required.
 	 */
-	Zoom(ZoomOptions parent, IsDefaultsZoom defaultsOptions, NativeObject nativeObject) {
+	Zoom(ZoomOptions parent, IsDefaultZoom defaultsOptions, NativeObject nativeObject) {
 		super(parent, defaultsOptions, nativeObject);
 	}
 

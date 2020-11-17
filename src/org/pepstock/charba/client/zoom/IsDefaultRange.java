@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsRange {
+interface IsDefaultRange {
 
 	/**
 	 * Returns the X value of range as string.
