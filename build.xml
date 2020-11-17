@@ -584,7 +584,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.chartjs.minify.file}" />
 		</delete>
-		<get src="https://cdn.jsdelivr.net/npm/chart.js@${depver.chartjs}/dist/Chart.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
+		<get src="https://cdn.jsdelivr.net/npm/chart.js@${depver.chartjs}/dist/chart.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
 	</target>
 
 	<target name="retrieveLatestChartJS">
