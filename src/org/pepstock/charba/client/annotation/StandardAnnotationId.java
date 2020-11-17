@@ -21,7 +21,7 @@ package org.pepstock.charba.client.annotation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnnotationId implements IsAnnotationId {
+final class StandardAnnotationId implements IsAnnotationId {
 
 	// value instance
 	private final String value;

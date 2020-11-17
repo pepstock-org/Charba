@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.commons.Key;
-
 /**
  * Maps the methods for LABELS elements to get defaults value.
  * 
@@ -30,7 +28,7 @@ interface IsDefaultLabels {
 	 * @param key key of the options
 	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
-	default LabelItem getLabel(Key key) {
+	default LabelItem getLabel(IsDataLabelId key) {
 		return null;
 	}
 
@@ -40,7 +38,7 @@ interface IsDefaultLabels {
 	 * @param key key of the options
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
-	default boolean hasLabel(Key key) {
+	default boolean hasLabel(IsDataLabelId key) {
 		return false;
 	}
 

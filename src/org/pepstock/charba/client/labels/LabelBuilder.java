@@ -31,58 +31,41 @@ import org.pepstock.charba.client.labels.enums.Render;
  */
 public final class LabelBuilder {
 
+	// options builder instance
+	// parent of this builder
+	private LabelsOptionsBuilder builder;
 	// plugin label options instance
 	private final Label label;
 
 	/**
-	 * Creates a label by the id passed as argument.
+	 * Creates a label builder with the parent and the label to wrap.
 	 * 
-	 * @param labelId id to use for new label.
+	 * @param builder label plugin options builder instance
+	 * @param label label instance to wrap.
 	 */
-	LabelBuilder(IsLabelId labelId) {
-		// creates new label by its id
-		this.label = new Label(labelId);
+	LabelBuilder(LabelsOptionsBuilder builder, Label label) {
+		this.builder = builder;
+		this.label = label;
 	}
 
 	/**
-	 * Returns new builder instance, using default id, {@link Label#DEFAULT_ID}.
+	 * Sets the {@link LabelsPlugin#ID} label builder.
 	 * 
-	 * @return new builder instance
+	 * @param builder the {@link LabelsPlugin#ID} label builder
 	 */
-	public static LabelBuilder create() {
-		return create(Label.DEFAULT_ID);
+	void setOptionsBuilder(LabelsOptionsBuilder builder) {
+		this.builder = builder;
 	}
 
 	/**
-	 * Returns new builder instance using the id passed as argument as label id.
+	 * Returns the {@link LabelsPlugin#ID} label builder.
 	 * 
-	 * @param labelId id to apply to new label.
-	 * @return new builder instance
+	 * @return the {@link LabelsPlugin#ID} label builder
 	 */
-	public static LabelBuilder create(String labelId) {
-		return create(IsLabelId.create(labelId));
+	public LabelsOptionsBuilder getOptionsBuilder() {
+		return builder;
 	}
-
-	/**
-	 * Returns new builder instance using the id passed as argument as label id.
-	 * 
-	 * @param labelId id to apply to new label.
-	 * @return new builder instance
-	 */
-	public static LabelBuilder create(IsLabelId labelId) {
-		return new LabelBuilder(labelId);
-	}
-
-	/**
-	 * Returns a configured label.
-	 * 
-	 * @return a configured label.
-	 */
-	public Label build() {
-		// returns options
-		return label;
-	}
-
+	
 	/**
 	 * Sets what data must be showed.
 	 * 

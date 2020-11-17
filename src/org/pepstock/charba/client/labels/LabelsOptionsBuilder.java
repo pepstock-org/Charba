@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 * @return builder instance */
-package org.pepstock.charba.client.datalabels;
+package org.pepstock.charba.client.labels;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,26 +21,27 @@ import java.util.Map;
 import org.pepstock.charba.client.IsChart;
 
 /**
- * Comfortable object to create {@link DataLabelsPlugin#ID} plugin options by a builder.
+ * Comfortable object to create {@link LabelsPlugin#ID} plugin options by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOptions> {
+public final class LabelsOptionsBuilder {
 	
 	// maps with all labels builders
-	// K = label item id, V = label item builder
-	private final Map<String, LabelItemBuilder> labelItemBuilders = new HashMap<>();
+	// K = label id, V = label builder
+	private final Map<String, LabelBuilder> labelBuilders = new HashMap<>();
+	// plugin options instance
+	private LabelsOptions options;
+	
 
 	/**
 	 * To avoid any instantiation
 	 * 
 	 * @param chart chart instance related to the plugin options
 	 */
-	private DataLabelsOptionsBuilder(IsChart chart) {
-		super(new DataLabelsOptions(chart));
-		// stores itself as builder
-		setOptionsBuilder(this);
+	private LabelsOptionsBuilder(IsChart chart) {
+		this.options = new LabelsOptions(chart);
 	}
 
 	/**
@@ -48,7 +49,7 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * 
 	 * @return new builder instance
 	 */
-	public static DataLabelsOptionsBuilder create() {
+	public static LabelsOptionsBuilder create() {
 		return create(null);
 	}
 
@@ -58,8 +59,8 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @param chart chart instance related to the plugin options
 	 * @return new builder instance
 	 */
-	public static DataLabelsOptionsBuilder create(IsChart chart) {
-		return new DataLabelsOptionsBuilder(chart);
+	public static LabelsOptionsBuilder create(IsChart chart) {
+		return new LabelsOptionsBuilder(chart);
 	}
 
 	/**
@@ -67,36 +68,36 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * 
 	 * @return a configured labels options.
 	 */
-	public DataLabelsOptions build() {
+	public LabelsOptions build() {
 		// returns options
-		return getLabel();
+		return options;
 	}
 
 	/**
 	 * Returns new options builder for new label identified by id.
 	 * 
-	 * @param id id of the new label item
+	 * @param id id of the new label 
 	 * @return new options builder for new label identified by id
 	 */
-	public LabelItemBuilder createLabel(String id) {
-		return createLabel(IsDataLabelId.create(id));
+	public LabelBuilder createLabel(String id) {
+		return createLabel(IsLabelId.create(id));
 	}
 	
 	/**
 	 * Returns new options builder for new label identified by id.
 	 * 
-	 * @param id id of the new label item
+	 * @param id id of the new label 
 	 * @return new options builder for new label identified by id
 	 */
-	public LabelItemBuilder createLabel(IsDataLabelId id) {
+	public LabelBuilder createLabel(IsLabelId id) {
 		// checks if id is consistent
-		IsDataLabelId.checkIfValid(id);
+		IsLabelId.checkIfValid(id);
 		// creates new label and new labels builder
-		LabelItemBuilder builder = new LabelItemBuilder(getLabel().getLabels().createLabel(id));
+		LabelBuilder builder = new LabelBuilder(this, options.createLabel(id));
 		// stores the options builder
 		builder.setOptionsBuilder(this);
 		// stores into map
-		labelItemBuilders.put(id.value(), builder);
+		labelBuilders.put(id.value(), builder);
 		// returns the builder
 		return builder;
 	}
@@ -107,8 +108,8 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @param id id of the options
 	 * @return the options builder for label identified by id
 	 */
-	public LabelItemBuilder getLabel(String id) {
-		return getLabel(IsDataLabelId.create(id));
+	public LabelBuilder getLabel(String id) {
+		return getLabel(IsLabelId.create(id));
 	}
 
 	/**
@@ -117,15 +118,15 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @param id id of the options
 	 * @return the options builder for label identified by id
 	 */
-	public LabelItemBuilder getLabel(IsDataLabelId id) {
+	public LabelBuilder getLabel(IsLabelId id) {
 		// checks if id is consistent
-		IsDataLabelId.checkIfValid(id);
+		IsLabelId.checkIfValid(id);
 		// checks if labels does not exist
-		if (labelItemBuilders.containsKey(id.value())) {
+		if (labelBuilders.containsKey(id.value())) {
 			// it creates new one
 			return createLabel(id);
 		}
 		// returns labels builder
-		return labelItemBuilders.get(id.value());
+		return labelBuilders.get(id.value());
 	}
 }

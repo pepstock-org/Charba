@@ -17,7 +17,6 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptions.Property;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -78,7 +77,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
 	 *         If not specified, this defaults to the ID of the first found x axis.
 	 */
 	IsScaleId getXAxisID() {
-		return getValue(Property.X_AXIS_ID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
+		return getValue(DatasetsItemsSelectorOptions.Property.X_AXIS_ID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
 	}
 
 	/**

@@ -125,7 +125,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 		// checks if the label id is consistent
 		IsLabelId.checkIfValid(id);
 		// checks if the label id exist
-		return has(id) || defaultOptions.hasLabel(id);
+		return isType(id, ObjectType.OBJECT) || defaultOptions.hasLabel(id);
 	}
 
 	/**
@@ -145,48 +145,11 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	public void removeLabel(IsLabelId id) {
 		// checks if the label id is consistent
 		IsLabelId.checkIfValid(id);
-		// removes from java script object if the label id exist
-		removeIfExists(id);
-	}
-
-	/**
-	 * Adds an labels for plugin.
-	 * 
-	 * @param labels set of labels to stores.
-	 */
-	public void addLabels(Label... labels) {
-		// checks if array argument is consistent
-		if (labels != null && labels.length > 0) {
-			// scans all arguments
-			for (Label label : labels) {
-				// adds label
-				IsLabelId id = label.getId();
-				// stores into java script object
-				setValue(id, label);
-			}
-		}
-	}
-
-	/**
-	 * Sets a set of labels for plugin. If argument is <code>null</code>, removes all labels.
-	 * 
-	 * @param labels set of labels. If <code>null</code>, removes all labels
-	 */
-	public void setLabels(Label... labels) {
-		// clear existing object
-		clear();
-		// adds label
-		addLabels(labels);
-	}
-
-	/**
-	 * Clears all stored labels.
-	 */
-	void clear() {
-		// scan all keys
-		for (Key key : keys()) {
-			// removes existing label
-			remove(key);
+		// checks if is an object
+		// if is a string, the property is the ID
+		if (isType(id, ObjectType.OBJECT)) {
+			// removes from java script object if the label id exist
+			removeIfExists(id);
 		}
 	}
 

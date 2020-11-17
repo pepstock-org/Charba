@@ -55,107 +55,111 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	}
 	
 	/**
-	 * Returns new options for specific key.
+	 * Returns new options for specific id.
 	 * 
-	 * @param key key of the options
-	 * @return the new option for that key
+	 * @param id id of the options
+	 * @return the new option for that id
 	 */
-	public LabelItem createLabel(String key) {
-		return createLabel(Key.create(key));
+	public LabelItem createLabel(String id) {
+		return createLabel(IsDataLabelId.create(id));
 	}
 	
 	/**
-	 * Returns new options for specific key.
+	 * Returns new options for specific id.
 	 * 
-	 * @param key key of the options
-	 * @return the new option for that key
+	 * @param id id of the options
+	 * @return the new option for that id
 	 */
-	public LabelItem createLabel(Key key) {
+	public LabelItem createLabel(IsDataLabelId id) {
 		// checks consistency of key
-		Key labelKey = Key.checkAndGetIfValid(key);
+		IsDataLabelId.checkIfValid(id);
 		// checks if exists
-		if (has(labelKey)) {
+		if (has(id)) {
 			// gets and returns the label item
-			return new LabelItem(parent, getValue(labelKey));
+			return new LabelItem(parent, getValue(id));
 		} else {
 			// creates new item
 			LabelItem item = new LabelItem(parent, null);
 			// stores the item
-			setValue(labelKey, item);
+			setValue(id, item);
 			// checks 
 			return item;
 		}
 	}
 
 	/**
-	 * Returns the stored options for specific key.
+	 * Returns the stored options for specific id.
 	 * 
-	 * @param key key of the options
-	 * @return the stored option or <code>null</code> if no options are stored for that key
+	 * @param id id of the options
+	 * @return the stored option or <code>null</code> if no options are stored for that id
 	 */
-	public LabelItem getLabel(String key) {
-		return getLabel(Key.create(key));
+	public LabelItem getLabel(String id) {
+		return getLabel(IsDataLabelId.create(id));
 	}
 
 	/**
-	 * Returns the stored options for specific key.
+	 * Returns the stored options for specific id.
 	 * 
-	 * @param key key of the options
-	 * @return the stored option or <code>null</code> if no options are stored for that key
+	 * @param id id of the options
+	 * @return the stored option or <code>null</code> if no options are stored for that id
 	 */
 	@Override
-	public LabelItem getLabel(Key key) {
+	public LabelItem getLabel(IsDataLabelId id) {
 		// checks consistency of key
-		Key labelKey = Key.checkAndGetIfValid(key);
+		IsDataLabelId.checkIfValid(id);
 		// checks if exists
-		if (has(labelKey)) {
+		if (has(id)) {
 			// gets and returns the label item
-			return new LabelItem(parent, getValue(labelKey));
+			return new LabelItem(parent, getValue(id));
 		}
 		// if here, the label for the passed key
 		// does not exist and check to default
-		return defaultOptions.getLabel(labelKey);
+		return defaultOptions.getLabel(id);
 	}
 
 	/**
-	 * Returns <code>true</code> if there is a stored options for specific key.
+	 * Returns <code>true</code> if there is a stored options for specific id.
 	 * 
-	 * @param key key of the options
-	 * @return <code>true</code> if there is a stored options for specific key
+	 * @param id id of the options
+	 * @return <code>true</code> if there is a stored options for specific id
 	 */
-	public boolean hasLabel(String key) {
-		return hasLabel(Key.create(key));
+	public boolean hasLabel(String id) {
+		return hasLabel(IsDataLabelId.create(id));
 	}
 
 	/**
 	 * Returns <code>true</code> if there is a stored options for specific key.
 	 * 
-	 * @param key key of the options
+	 * @param id key of the options
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
 	@Override
-	public boolean hasLabel(Key key) {
-		return has(Key.checkAndGetIfValid(key)) || defaultOptions.hasLabel(key);
+	public boolean hasLabel(IsDataLabelId id) {
+		// checks if the label id is consistent
+		IsDataLabelId.checkIfValid(id);
+		// checks if the label id exist
+		return has(id) || defaultOptions.hasLabel(id);
 	}
 	
 	/**
-	 * Removes an existing label for specific key.
+	 * Removes an existing label for specific id.
 	 * 
-	 * @param key key of the options
+	 * @param id id of the options
 	 */
-	public void removeLabel(String key) {
-		removeLabel(Key.create(key));
+	public void removeLabel(String id) {
+		removeLabel(IsDataLabelId.create(id));
 	}
 
 	/**
-	 * Removes an existing label for specific key.
+	 * Removes an existing label for specific id.
 	 * 
-	 * @param key key of the options
+	 * @param id key of the options
 	 */
-	public void removeLabel(Key key) {
-		// checks consistency of key
+	public void removeLabel(IsDataLabelId id) {
+		// checks if the label id is consistent
+		IsDataLabelId.checkIfValid(id);
 		// and then removes the label
-		removeIfExists(Key.checkAndGetIfValid(key));
+		removeIfExists(id);
 	}
 
 	/**

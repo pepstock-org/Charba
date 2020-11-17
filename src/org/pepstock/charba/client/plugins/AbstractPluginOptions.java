@@ -44,7 +44,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	protected enum Property implements Key
 	{
 		// internal property to set unique id
 		CHARBA_OPTIONS_ID("_charbaOptionsId");

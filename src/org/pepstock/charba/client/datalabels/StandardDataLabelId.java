@@ -13,15 +13,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.labels;
+package org.pepstock.charba.client.datalabels;
 
 /**
- * This is a standard implementation of a label configuration object ID for {@link LabelsPlugin#ID} plugin.
+ * This is a standard implementation of a label configuration object ID for {@link DataLabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class StandardLabelId implements IsLabelId {
+final class StandardDataLabelId implements IsDataLabelId {
 
 	// value instance
 	private final String value;
@@ -31,7 +31,7 @@ final class StandardLabelId implements IsLabelId {
 	 * 
 	 * @param value value of key as String
 	 */
-	StandardLabelId(String value) {
+	StandardDataLabelId(String value) {
 		// stores value
 		this.value = value;
 	}
