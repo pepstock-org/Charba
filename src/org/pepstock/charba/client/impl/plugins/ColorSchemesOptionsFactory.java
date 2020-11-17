@@ -41,9 +41,9 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ColorSchemesDefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, ColorSchemes.DEFAULTS_FACTORY);
+			ColorSchemesDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ColorSchemes.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ColorSchemesOptions(defaultsOptions, nativeObject);
+			return new ColorSchemesOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new ColorSchemesOptions(ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);

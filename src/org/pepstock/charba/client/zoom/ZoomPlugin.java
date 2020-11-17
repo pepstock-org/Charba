@@ -118,9 +118,9 @@ public final class ZoomPlugin {
 		// checks if chart is consistent and if has got any options
 		if (IsChart.isConsistent(chart) && chart.getDefaultChartOptions().getPlugins().hasOptions(ZoomPlugin.ID)) {
 			// loads the plugin options from default options of chart
-			IsDefaultOptions defaultsValues = chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY);
+			IsDefaultOptions defaultValues = chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY);
 			// creates a drag object by the default
-			return createDrag(defaultsValues);
+			return createDrag(defaultValues);
 		}
 		// creates a drag object with standard defaults
 		return createDrag(DefaultOptions.INSTANCE);
@@ -135,9 +135,9 @@ public final class ZoomPlugin {
 		// checks if the default global options has been added for the plugin
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
 			// reads the default default global options
-			IsDefaultOptions defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
+			IsDefaultOptions defaultOptions = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
 			// creates a drag object by the default
-			return createDrag(defaultsOptions);
+			return createDrag(defaultOptions);
 		}
 		// creates a drag object with standard defaults
 		return createDrag(DefaultOptions.INSTANCE);

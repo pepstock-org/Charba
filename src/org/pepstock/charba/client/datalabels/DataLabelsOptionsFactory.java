@@ -45,9 +45,9 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DataLabelsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, DataLabelsPlugin.DEFAULTS_FACTORY);
+			DataLabelsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, DataLabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new DataLabelsOptions(defaultsOptions, nativeObject);
+			return new DataLabelsOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new DataLabelsOptions(DefaultOptions.DEFAULTS_INSTANCE, nativeObject);

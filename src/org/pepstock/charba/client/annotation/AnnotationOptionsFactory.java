@@ -43,17 +43,17 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 	@Override
 	public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// gets the reference for defaults
-		final IsDefaultsAnnotationOptions defaultsOptions;
+		final IsDefaultsAnnotationOptions defaultOptions;
 		// checks if defaults argument is consistent
 		if (defaultValues != null) {
 			// uses the defaults global options instance
-			defaultsOptions = loadDefaultsPluginOptions(defaultValues, Annotation.DEFAULTS_FACTORY);
+			defaultOptions = loadDefaultsPluginOptions(defaultValues, Annotation.DEFAULTS_FACTORY);
 		} else {
 			// uses the predefined defaults
-			defaultsOptions = AnnotationDefaultsOptions.DEFAULTS_INSTANCE;
+			defaultOptions = AnnotationDefaultsOptions.DEFAULTS_INSTANCE;
 		}
 		// creates the options by the native object and the defaults
-		return new AnnotationOptions(defaultsOptions != null ? defaultsOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new AnnotationOptions(defaultOptions != null ? defaultOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
 	}
 
 	/**

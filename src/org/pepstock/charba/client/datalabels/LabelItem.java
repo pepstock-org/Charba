@@ -183,7 +183,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 	
 	// defaults global options instance
-	private final IsDefaultDataLabelsItem defaultsOptions;
+	private final IsDefaultDataLabelsItem defaultOptions;
 	// listener inner element
 	private final Listeners listeners;
 	// padding inner element
@@ -246,34 +246,34 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
-	 * @param defaultsOptions default options instance
+	 * @param defaultOptions default options instance
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelItem(IsDefaultDataLabelsItem defaultsOptions, NativeObject nativeObject) {
+	LabelItem(IsDefaultDataLabelsItem defaultOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(DataLabelsPlugin.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(DataLabelsPlugin.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// sets inner elements
-		this.padding = new Padding(this.defaultsOptions.getPadding(), getValue(Property.PADDING));
+		this.padding = new Padding(this.defaultOptions.getPadding(), getValue(Property.PADDING));
 		// checks it has got the element
 		if (!has(Property.PADDING)) {
 			// stores padding
 			setValue(Property.PADDING, padding);
 		}
-		this.font = new Font(this.defaultsOptions.getFont(), getValue(Property.FONT));
+		this.font = new Font(this.defaultOptions.getFont(), getValue(Property.FONT));
 		// checks it has got the element
 		if (!has(Property.FONT)) {
 			// stores font
 			setValue(Property.FONT, font);
 		}
-		this.listeners = new Listeners(this, this.defaultsOptions.getListeners(), getValue(Property.LISTENERS));
+		this.listeners = new Listeners(this, this.defaultOptions.getListeners(), getValue(Property.LISTENERS));
 		// checks it has got the element
 		if (!has(Property.LISTENERS)) {
 			// stores listeners
@@ -331,7 +331,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the default options of the label
 	 */
 	final IsDefaultDataLabelsItem getDefaultsOptions() {
-		return defaultsOptions;
+		return defaultOptions;
 	}
 
 	/**
@@ -394,7 +394,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final Align getAlign() {
-		return getValue(Property.ALIGN, Align.values(), defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.values(), defaultOptions.getAlign());
 	}
 
 	/**
@@ -413,7 +413,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final Anchor getAnchor() {
-		return getValue(Property.ANCHOR, Anchor.values(), defaultsOptions.getAnchor());
+		return getValue(Property.ANCHOR, Anchor.values(), defaultOptions.getAnchor());
 	}
 
 	/**
@@ -441,7 +441,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, defaultOptions.getBackgroundColorAsString());
 	}
 
 	/**
@@ -479,7 +479,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final String getBorderColorAsString() {
-		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
 	}
 
 	/**
@@ -508,7 +508,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final double getBorderRadius() {
-		return getValue(Property.BORDER_RADIUS, defaultsOptions.getBorderRadius());
+		return getValue(Property.BORDER_RADIUS, defaultOptions.getBorderRadius());
 	}
 
 	/**
@@ -527,7 +527,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
 
 	/**
@@ -546,7 +546,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final boolean isClamp() {
-		return getValue(Property.CLAMP, defaultsOptions.isClamp());
+		return getValue(Property.CLAMP, defaultOptions.isClamp());
 	}
 
 	/**
@@ -565,7 +565,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final boolean isClip() {
-		return getValue(Property.CLIP, defaultsOptions.isClip());
+		return getValue(Property.CLIP, defaultOptions.isClip());
 	}
 
 	/**
@@ -593,7 +593,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final String getColorAsString() {
-		return getValue(Property.COLOR, defaultsOptions.getColorAsString());
+		return getValue(Property.COLOR, defaultOptions.getColorAsString());
 	}
 
 	/**
@@ -647,10 +647,10 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		} else if (ObjectType.STRING.equals(type)) {
 			// checks if is a string
 			// returns as string
-			return getValue(Property.DISPLAY, Display.values(), defaultsOptions.getDisplay());
+			return getValue(Property.DISPLAY, Display.values(), defaultOptions.getDisplay());
 		}
 		// if here returns defautl value
-		return defaultsOptions.getDisplay();
+		return defaultOptions.getDisplay();
 	}
 
 	/**
@@ -673,7 +673,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final double getOffset() {
-		return getValue(Property.OFFSET, defaultsOptions.getOffset());
+		return getValue(Property.OFFSET, defaultOptions.getOffset());
 	}
 
 	/**
@@ -692,7 +692,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final double getOpacity() {
-		return getValue(Property.OPACITY, defaultsOptions.getOpacity());
+		return getValue(Property.OPACITY, defaultOptions.getOpacity());
 	}
 
 	/**
@@ -711,7 +711,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final double getRotation() {
-		return getValue(Property.ROTATION, defaultsOptions.getRotation());
+		return getValue(Property.ROTATION, defaultOptions.getRotation());
 	}
 
 	/**
@@ -730,7 +730,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextAlign getTextAlign() {
-		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultsOptions.getTextAlign());
+		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultOptions.getTextAlign());
 	}
 
 	/**
@@ -758,7 +758,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final String getTextStrokeColorAsString() {
-		return getValue(Property.TEXT_STROKE_COLOR, defaultsOptions.getTextStrokeColorAsString());
+		return getValue(Property.TEXT_STROKE_COLOR, defaultOptions.getTextStrokeColorAsString());
 	}
 
 	/**
@@ -786,7 +786,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final int getTextStrokeWidth() {
-		return getValue(Property.TEXT_STROKE_WIDTH, defaultsOptions.getTextStrokeWidth());
+		return getValue(Property.TEXT_STROKE_WIDTH, defaultOptions.getTextStrokeWidth());
 	}
 
 	/**
@@ -805,7 +805,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final double getTextShadowBlur() {
-		return getValue(Property.TEXT_SHADOW_BLUR, defaultsOptions.getTextShadowBlur());
+		return getValue(Property.TEXT_SHADOW_BLUR, defaultOptions.getTextShadowBlur());
 	}
 
 	/**
@@ -833,7 +833,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final String getTextShadowColorAsString() {
-		return getValue(Property.TEXT_SHADOW_COLOR, defaultsOptions.getTextShadowColorAsString());
+		return getValue(Property.TEXT_SHADOW_COLOR, defaultOptions.getTextShadowColorAsString());
 	}
 
 	/**
@@ -852,7 +852,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final BackgroundColorCallback getBackgroundColorCallback() {
-		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBackgroundColorCallback());
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBackgroundColorCallback());
 	}
 
 	/**
@@ -871,7 +871,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final BorderColorCallback getBorderColorCallback() {
-		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderColorCallback());
+		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderColorCallback());
 	}
 
 	/**
@@ -890,7 +890,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final ColorCallback getColorCallback() {
-		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getColorCallback());
+		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getColorCallback());
 	}
 
 	/**
@@ -909,7 +909,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final FormatterCallback getFormatterCallback() {
-		return FORMATTER_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFormatterCallback());
+		return FORMATTER_PROPERTY_HANDLER.getCallback(this, defaultOptions.getFormatterCallback());
 	}
 
 	/**
@@ -928,7 +928,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final AlignCallback getAlignCallback() {
-		return ALIGN_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getAlignCallback());
+		return ALIGN_PROPERTY_HANDLER.getCallback(this, defaultOptions.getAlignCallback());
 	}
 
 	/**
@@ -947,7 +947,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final AnchorCallback getAnchorCallback() {
-		return ANCHOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getAnchorCallback());
+		return ANCHOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getAnchorCallback());
 	}
 
 	/**
@@ -966,7 +966,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final RadiusCallback getBorderRadiusCallback() {
-		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderRadiusCallback());
+		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderRadiusCallback());
 	}
 
 	/**
@@ -985,7 +985,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final BorderWidthCallback getBorderWidthCallback() {
-		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getBorderWidthCallback());
+		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderWidthCallback());
 	}
 
 	/**
@@ -1004,7 +1004,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final ClampCallback getClampCallback() {
-		return CLAMP_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClampCallback());
+		return CLAMP_PROPERTY_HANDLER.getCallback(this, defaultOptions.getClampCallback());
 	}
 
 	/**
@@ -1023,7 +1023,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final ClipCallback getClipCallback() {
-		return CLIP_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClipCallback());
+		return CLIP_PROPERTY_HANDLER.getCallback(this, defaultOptions.getClipCallback());
 	}
 
 	/**
@@ -1042,7 +1042,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final DisplayCallback getDisplayCallback() {
-		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getDisplayCallback());
+		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultOptions.getDisplayCallback());
 	}
 
 	/**
@@ -1061,7 +1061,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final OffsetCallback getOffsetCallback() {
-		return OFFSET_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getOffsetCallback());
+		return OFFSET_PROPERTY_HANDLER.getCallback(this, defaultOptions.getOffsetCallback());
 	}
 
 	/**
@@ -1080,7 +1080,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final OpacityCallback getOpacityCallback() {
-		return OPACITY_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getOpacityCallback());
+		return OPACITY_PROPERTY_HANDLER.getCallback(this, defaultOptions.getOpacityCallback());
 	}
 
 	/**
@@ -1099,7 +1099,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final RotationCallback getRotationCallback() {
-		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getRotationCallback());
+		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultOptions.getRotationCallback());
 	}
 
 	/**
@@ -1118,7 +1118,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextAlignCallback getTextAlignCallback() {
-		return TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextAlignCallback());
+		return TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextAlignCallback());
 	}
 
 	/**
@@ -1137,7 +1137,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextStrokeColorCallback getTextStrokeColorCallback() {
-		return TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextStrokeColorCallback());
+		return TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextStrokeColorCallback());
 	}
 
 	/**
@@ -1156,7 +1156,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextStrokeWidthCallback getTextStrokeWidthCallback() {
-		return TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextStrokeWidthCallback());
+		return TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextStrokeWidthCallback());
 	}
 
 	/**
@@ -1175,7 +1175,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextShadowBlurCallback getTextShadowBlurCallback() {
-		return TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextShadowBlurCallback());
+		return TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextShadowBlurCallback());
 	}
 
 	/**
@@ -1194,7 +1194,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final TextShadowColorCallback getTextShadowColorCallback() {
-		return TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getTextShadowColorCallback());
+		return TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextShadowColorCallback());
 	}
 
 	/**
@@ -1213,7 +1213,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final FontCallback getFontCallback() {
-		return FONT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFontCallback());
+		return FONT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getFontCallback());
 	}
 
 	/**
@@ -1232,7 +1232,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	@Override
 	public final PaddingCallback getPaddingCallback() {
-		return PADDING_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getPaddingCallback());
+		return PADDING_PROPERTY_HANDLER.getCallback(this, defaultOptions.getPaddingCallback());
 	}
 
 	/**

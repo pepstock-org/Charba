@@ -82,11 +82,11 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
 	 * @param parent zoom options, parent of this node
-	 * @param defaultsOptions default PAN options to returns the default when required.
+	 * @param defaultOptions default PAN options to returns the default when required.
 	 * @param nativeObject stored padding values into native object to read.
 	 */
-	Pan(ZoomOptions parent, IsDefaultPan defaultsOptions, NativeObject nativeObject) {
-		super(parent, defaultsOptions, nativeObject);
+	Pan(ZoomOptions parent, IsDefaultPan defaultOptions, NativeObject nativeObject) {
+		super(parent, defaultOptions, nativeObject);
 	}
 
 	/*

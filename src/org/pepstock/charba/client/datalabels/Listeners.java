@@ -60,22 +60,22 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	// parent instance
 	private final LabelItem parent;
 	// parent instance
-	private final IsDefaultListeners defaultsOptions;
+	private final IsDefaultListeners defaultOptions;
 	
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param parent data labels options instance, parent of this node
-	 * @param defaultsOptions default options instance
+	 * @param defaultOptions default options instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Listeners(LabelItem parent, IsDefaultListeners defaultsOptions, NativeObject nativeObject) {
+	Listeners(LabelItem parent, IsDefaultListeners defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores parent
 		this.parent = parent;
 		// checks if default value is consistent
 		// stores default
-		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -91,7 +91,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	@Override
 	public ClickEventHandler getClickEventHandler() {
-		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getClickEventHandler());
+		return CLICK_EVENT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getClickEventHandler());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	@Override
 	public EnterEventHandler getEnterEventHandler() {
-		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getEnterEventHandler());
+		return ENTER_EVENT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getEnterEventHandler());
 
 	}
 
@@ -130,7 +130,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	@Override
 	public LeaveEventHandler getLeaveEventHandler() {
-		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getLeaveEventHandler());
+		return LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getLeaveEventHandler());
 	}
 
 	/**

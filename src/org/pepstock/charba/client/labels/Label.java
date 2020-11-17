@@ -177,7 +177,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 
 	// defaults options instance
-	private final IsDefaultLabel defaultsOptions;
+	private final IsDefaultLabel defaultOptions;
 	// font instance
 	private final Font font;
 
@@ -256,10 +256,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 * 
 	 * @param id id to apply to new label
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	Label(IsLabelId id, IsDefaultLabel defaultsOptions, NativeObject nativeObject) {
+	Label(IsLabelId id, IsDefaultLabel defaultOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(nativeObject);
 		// checks id
@@ -267,15 +267,15 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// stores the ID
 		setValue(Property.ID, id);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// get the default default global options
-			this.defaultsOptions = DefaultLabel.INSTANCE;
+			this.defaultOptions = DefaultLabel.INSTANCE;
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// gets font
-		this.font = new Font(this.defaultsOptions.getFont(), getValue(Property.FONT));
+		this.font = new Font(this.defaultOptions.getFont(), getValue(Property.FONT));
 		// checks if is already added
 		if (!has(Property.FONT)) {
 			// stores the font
@@ -323,7 +323,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public Render getRender() {
-		return getValue(Property.RENDER, Render.values(), defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.values(), defaultOptions.getRender());
 	}
 
 	/**
@@ -342,7 +342,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getPrecision() {
-		return getValue(Property.PRECISION, defaultsOptions.getPrecision());
+		return getValue(Property.PRECISION, defaultOptions.getPrecision());
 	}
 
 	/**
@@ -361,7 +361,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public boolean isShowZero() {
-		return getValue(Property.SHOW_ZERO, defaultsOptions.isShowZero());
+		return getValue(Property.SHOW_ZERO, defaultOptions.isShowZero());
 	}
 
 	/**
@@ -380,7 +380,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public boolean isTextShadow() {
-		return getValue(Property.TEXT_SHADOW, defaultsOptions.isTextShadow());
+		return getValue(Property.TEXT_SHADOW, defaultOptions.isTextShadow());
 	}
 
 	/**
@@ -399,7 +399,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getShadowBlur() {
-		return getValue(Property.SHADOW_BLUR, defaultsOptions.getShadowBlur());
+		return getValue(Property.SHADOW_BLUR, defaultOptions.getShadowBlur());
 	}
 
 	/**
@@ -418,7 +418,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getShadowOffsetX() {
-		return getValue(Property.SHADOW_OFFSET_X, defaultsOptions.getShadowOffsetX());
+		return getValue(Property.SHADOW_OFFSET_X, defaultOptions.getShadowOffsetX());
 	}
 
 	/**
@@ -437,7 +437,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getShadowOffsetY() {
-		return getValue(Property.SHADOW_OFFSET_Y, defaultsOptions.getShadowOffsetY());
+		return getValue(Property.SHADOW_OFFSET_Y, defaultOptions.getShadowOffsetY());
 	}
 
 	/**
@@ -465,7 +465,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public String getShadowColorAsString() {
-		return getValue(Property.SHADOW_COLOR, defaultsOptions.getShadowColorAsString());
+		return getValue(Property.SHADOW_COLOR, defaultOptions.getShadowColorAsString());
 	}
 
 	/**
@@ -493,7 +493,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public boolean isArc() {
-		return getValue(Property.ARC, defaultsOptions.isArc());
+		return getValue(Property.ARC, defaultOptions.isArc());
 	}
 
 	/**
@@ -512,7 +512,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.values(), defaultOptions.getPosition());
 	}
 
 	/**
@@ -531,7 +531,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public boolean isOverlap() {
-		return getValue(Property.OVERLAP, defaultsOptions.isOverlap());
+		return getValue(Property.OVERLAP, defaultOptions.isOverlap());
 	}
 
 	/**
@@ -550,7 +550,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public boolean isShowActualPercentages() {
-		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultsOptions.isShowActualPercentages());
+		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultOptions.isShowActualPercentages());
 	}
 
 	/**
@@ -569,7 +569,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getOutsidePadding() {
-		return getValue(Property.OUTSIDE_PADDING, defaultsOptions.getOutsidePadding());
+		return getValue(Property.OUTSIDE_PADDING, defaultOptions.getOutsidePadding());
 	}
 
 	/**
@@ -588,7 +588,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public int getTextMargin() {
-		return getValue(Property.TEXT_MARGIN, defaultsOptions.getTextMargin());
+		return getValue(Property.TEXT_MARGIN, defaultOptions.getTextMargin());
 	}
 
 	/**
@@ -619,7 +619,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public RenderCallback getRenderCallback() {
-		return RENDER_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getRenderCallback());
+		return RENDER_PROPERTY_HANDLER.getCallback(this, defaultOptions.getRenderCallback());
 	}
 
 	/**
@@ -638,7 +638,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public FontCallback getFontCallback() {
-		return FONT_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getFontCallback());
+		return FONT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getFontCallback());
 	}
 
 	/**

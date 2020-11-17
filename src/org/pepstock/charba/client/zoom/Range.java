@@ -65,26 +65,26 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	}
 
 	// defaults global options instance
-	private IsDefaultRange defaultsOptions;
+	private IsDefaultRange defaultOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
-	 * @param defaultsOptions default RANGE options to returns the default when required.
+	 * @param defaultOptions default RANGE options to returns the default when required.
 	 */
-	Range(IsDefaultRange defaultsOptions) {
-		this(defaultsOptions, null);
+	Range(IsDefaultRange defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Creates new range element, using stored native object instance and the default values options.
 	 * 
-	 * @param defaultsOptions default RANGE options to returns the default when required.
+	 * @param defaultOptions default RANGE options to returns the default when required.
 	 * @param nativeObject stored range values into native object to read.
 	 */
-	Range(IsDefaultRange defaultsOptions, NativeObject nativeObject) {
+	Range(IsDefaultRange defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		this.defaultOptions = defaultOptions;
 	}
 
 	/**
@@ -141,7 +141,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public String getX() {
 		// checks if the value has been set as string
 		if (ObjectType.STRING.equals(getTypeForX())) {
-			return getValue(Range.Property.X, defaultsOptions.getX());
+			return getValue(Range.Property.X, defaultOptions.getX());
 		}
 		// if here, the value is not a string then returns undefined
 		return UndefinedValues.STRING;
@@ -156,7 +156,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public double getXAsDouble() {
 		// checks if the value has been set as double
 		if (ObjectType.NUMBER.equals(getTypeForX())) {
-			return getValue(Range.Property.X, defaultsOptions.getXAsDouble());
+			return getValue(Range.Property.X, defaultOptions.getXAsDouble());
 		}
 		// if here, the value is not a double then returns undefined
 		return UndefinedValues.DOUBLE;
@@ -171,7 +171,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public Date getXAsDate() {
 		// checks if the value has been set as date
 		if (ObjectType.NUMBER.equals(getTypeForX())) {
-			return getValue(Range.Property.X, defaultsOptions.getXAsDate());
+			return getValue(Range.Property.X, defaultOptions.getXAsDate());
 		}
 		// if here, the value is not a date then returns null
 		return null;
@@ -213,7 +213,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public double getY() {
 		// checks if the value has been set as double
 		if (ObjectType.NUMBER.equals(getTypeForY())) {
-			return getValue(Range.Property.Y, defaultsOptions.getY());
+			return getValue(Range.Property.Y, defaultOptions.getY());
 		}
 		// if here, the value is not a double then returns undefined
 		return UndefinedValues.DOUBLE;
@@ -228,7 +228,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public String getYAsString() {
 		// checks if the value has been set as string
 		if (ObjectType.STRING.equals(getTypeForY())) {
-			return getValue(Range.Property.Y, defaultsOptions.getYAsString());
+			return getValue(Range.Property.Y, defaultOptions.getYAsString());
 		}
 		// if here, the value is not a stirng then returns undefined
 		return UndefinedValues.STRING;
@@ -243,7 +243,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	public Date getYAsDate() {
 		// checks if the value has been set as date
 		if (ObjectType.NUMBER.equals(getTypeForY())) {
-			return getValue(Range.Property.Y, defaultsOptions.getYAsDate());
+			return getValue(Range.Property.Y, defaultOptions.getYAsDate());
 		}
 		// if here, the value is not a date then returns null
 		return null;

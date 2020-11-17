@@ -77,7 +77,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
 	// defaults global options instance
-	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
+	private DatasetsItemsSelectorDefaultsOptions defaultOptions;
 	// clear selection item
 	private final ClearSelection clearSelection;
 
@@ -140,31 +140,31 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
-	 * @param defaultsOptions default options, which must be stored into default global.
+	 * @param defaultOptions default options, which must be stored into default global.
 	 */
-	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
-		this(defaultsOptions, null);
+	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
-	 * @param defaultsOptions default options, which must be stored into default global.
+	 * @param defaultOptions default options, which must be stored into default global.
 	 * @param nativeObject configuration of plugin.
 	 */
-	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultOptions, NativeObject nativeObject) {
 		super(DatasetsItemsSelector.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(DatasetsItemsSelector.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// sets inner elements
-		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), this.defaultsOptions.getClearSelection());
+		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), this.defaultOptions.getClearSelection());
 		// checks if clear selection is not already stored
 		if (!has(Property.CLEAR_SELECTION)) {
 			// if here clear selection is not stored
@@ -212,7 +212,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public IsScaleId getXAxisID() {
-		return getValue(Property.X_AXIS_ID, defaultsOptions.getXAxisID());
+		return getValue(Property.X_AXIS_ID, defaultOptions.getXAxisID());
 	}
 
 	/**
@@ -221,7 +221,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the color.
 	 */
 	public String getColorAsString() {
-		return getValue(Property.COLOR, defaultsOptions.getColorAsString());
+		return getValue(Property.COLOR, defaultOptions.getColorAsString());
 	}
 
 	/**
@@ -286,7 +286,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the line dash pattern offset.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, defaultsOptions.getBorderDashOffset());
+		return getValue(Property.BORDER_DASH_OFFSET, defaultOptions.getBorderDashOffset());
 	}
 
 	/**
@@ -304,7 +304,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return list of the border width of the selection.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
 
 	/**
@@ -313,7 +313,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the color.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
 	}
 
 	/**

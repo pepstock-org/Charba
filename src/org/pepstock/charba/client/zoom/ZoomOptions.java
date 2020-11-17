@@ -61,7 +61,7 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	}
 
 	// defaults global options instance
-	private IsDefaultOptions defaultsOptions;
+	private IsDefaultOptions defaultOptions;
 	// pan inner element
 	private final Pan pan;
 	// zoom inner element
@@ -86,29 +86,29 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	/**
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	ZoomOptions(IsDefaultOptions defaultsOptions, NativeObject nativeObject) {
+	ZoomOptions(IsDefaultOptions defaultOptions, NativeObject nativeObject) {
 		// creates an empty native object
 		super(ZoomPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(ZoomPlugin.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(ZoomPlugin.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// sets inner elements
-		this.pan = new Pan(this, this.defaultsOptions.getPan(), getValue(Property.PAN));
+		this.pan = new Pan(this, this.defaultOptions.getPan(), getValue(Property.PAN));
 		// checks it has got the element
 		if (!has(Property.PAN)) {
 			// stores pan
 			setValue(Property.PAN, pan);
 		}
 		// sets inner elements
-		this.zoom = new Zoom(this, this.defaultsOptions.getZoom(), getValue(Property.ZOOM));
+		this.zoom = new Zoom(this, this.defaultOptions.getZoom(), getValue(Property.ZOOM));
 		// checks it has got the element
 		if (!has(Property.ZOOM)) {
 			// stores zoom

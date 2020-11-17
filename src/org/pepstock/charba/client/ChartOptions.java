@@ -39,12 +39,12 @@ public final class ChartOptions extends ScaledOptions {
 	 * 
 	 * @param type chart type
 	 * @param nativeObject native java script object which contains all properties.
-	 * @param defaultsOptions default options to apply to chart options
+	 * @param defaultOptions default options to apply to chart options
 	 */
-	ChartOptions(Type type, NativeObject nativeObject, IsDefaultScaledOptions defaultsOptions) {
+	ChartOptions(Type type, NativeObject nativeObject, IsDefaultScaledOptions defaultOptions) {
 		// the default of chart default ones are the CHART.JS one
 		// checks consistency of type
-		super(createScope(type), defaultsOptions, nativeObject);
+		super(createScope(type), defaultOptions, nativeObject);
 		// stores type
 		this.type = type;
 	}

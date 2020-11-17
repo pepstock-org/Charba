@@ -55,9 +55,9 @@ public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			HtmlLegendDefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, HtmlLegend.DEFAULTS_FACTORY);
+			HtmlLegendDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, HtmlLegend.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			options = new HtmlLegendOptions(defaultsOptions, nativeObject);
+			options = new HtmlLegendOptions(defaultOptions, nativeObject);
 		} else {
 			// creates the options by the native object and the defaults
 			options = new HtmlLegendOptions(HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);

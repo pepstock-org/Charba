@@ -69,7 +69,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	}
 
 	// defaults global options instance
-	private final IsDefaultsAnnotationOptions defaultsOptions;
+	private final IsDefaultsAnnotationOptions defaultOptions;
 	// annotations object, stored by key
 	private final AnnotationMap annotationsMap;
 
@@ -92,29 +92,29 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions) {
+	AnnotationOptions(IsDefaultsAnnotationOptions defaultOptions) {
 		// creates an empty native object
-		this(defaultsOptions, null);
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Creates new {@link Annotation#ID} plugin options.<br>
 	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object loaded from configuration
 	 */
-	AnnotationOptions(IsDefaultsAnnotationOptions defaultsOptions, NativeObject nativeObject) {
+	AnnotationOptions(IsDefaultsAnnotationOptions defaultOptions, NativeObject nativeObject) {
 		super(Annotation.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(Annotation.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(Annotation.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// checks if annotations exists
 		if (has(Property.ANNOTATIONS)) {
@@ -155,7 +155,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 */
 	@Override
 	public DrawTime getDrawTime() {
-		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultsOptions.getDrawTime());
+		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultOptions.getDrawTime());
 	}
 
 	/**
@@ -176,7 +176,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 */
 	@Override
 	public boolean hasAnnotation(IsAnnotationId id) {
-		return annotationsMap.hasAnnotation(id) || defaultsOptions.hasAnnotation(id);
+		return annotationsMap.hasAnnotation(id) || defaultOptions.hasAnnotation(id);
 	}
 
 	/**
@@ -249,7 +249,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		if (result == null) {
 			// not present in this object
 			// searches on the default
-			return defaultsOptions.getAnnotation(id);
+			return defaultOptions.getAnnotation(id);
 
 		}
 		// if here, the annotation was found

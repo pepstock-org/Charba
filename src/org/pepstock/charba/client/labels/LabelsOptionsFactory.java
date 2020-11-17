@@ -45,9 +45,9 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			LabelsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
+			LabelsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, LabelsPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new LabelsOptions(defaultsOptions, nativeObject);
+			return new LabelsOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new LabelsOptions(DefaultOptions.INSTANCE, nativeObject);

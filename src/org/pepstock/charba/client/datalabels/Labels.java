@@ -32,16 +32,16 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	
 	private final IsDefaultDataLabelsOptions parent;
 
-	private final IsDefaultLabels defaultsOptions;
+	private final IsDefaultLabels defaultOptions;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param parent parent node where this object is belonging to
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Labels(IsDefaultDataLabelsOptions parent, IsDefaultLabels defaultsOptions, NativeObject nativeObject) {
+	Labels(IsDefaultDataLabelsOptions parent, IsDefaultLabels defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// redefines hashcode in order do not have
 		// the property $H for hashcode
@@ -51,7 +51,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 		this.parent = checkDefaultValuesArgument(parent);
 		// checks if default value is consistent
 		// stores default
-		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 		}
 		// if here, the label for the passed key
 		// does not exist and check to default
-		return defaultsOptions.getLabel(labelKey);
+		return defaultOptions.getLabel(labelKey);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 */
 	@Override
 	public boolean hasLabel(Key key) {
-		return has(Key.checkAndGetIfValid(key)) || defaultsOptions.hasLabel(key);
+		return has(Key.checkAndGetIfValid(key)) || defaultOptions.hasLabel(key);
 	}
 	
 	/**

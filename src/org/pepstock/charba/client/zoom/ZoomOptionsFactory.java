@@ -45,9 +45,9 @@ public final class ZoomOptionsFactory extends AbstractPluginOptionsFactory<ZoomO
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ZoomOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, ZoomPlugin.DEFAULTS_FACTORY);
+			ZoomOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ZoomPlugin.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ZoomOptions(defaultsOptions, nativeObject);
+			return new ZoomOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new ZoomOptions(DefaultOptions.INSTANCE, nativeObject);

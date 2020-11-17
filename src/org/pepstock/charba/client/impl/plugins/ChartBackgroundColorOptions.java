@@ -66,7 +66,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	}
 
 	// defaults options instance
-	private final ChartBackgroundColorDefaultsOptions defaultsOptions;
+	private final ChartBackgroundColorDefaultsOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -89,27 +89,27 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	/**
 	 * Builds new object with default options.
 	 * 
-	 * @param defaultsOptions defaults options to use to get values
+	 * @param defaultOptions defaults options to use to get values
 	 */
-	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultsOptions) {
-		this(defaultsOptions, null);
+	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
-	 * @param defaultsOptions plugin default options
+	 * @param defaultOptions plugin default options
 	 * @param nativeObject native object into options
 	 */
-	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartBackgroundColor.ID, nativeObject);
 		// checks if there is any default options
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// loads global options
-			this.defaultsOptions = loadGlobalsPluginOptions(ChartBackgroundColor.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(ChartBackgroundColor.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 	}
 
@@ -119,7 +119,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @return the type of background color has been set.
 	 */
 	ColorType getColorType() {
-		return getValue(Property.COLOR_TYPE, ColorType.values(), defaultsOptions.getColorType());
+		return getValue(Property.COLOR_TYPE, ColorType.values(), defaultOptions.getColorType());
 	}
 
 	/**
@@ -132,10 +132,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	public String getBackgroundColorAsString() {
 		// checks if color has been set
 		if (ColorType.COLOR.equals(getColorType())) {
-			return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
+			return getValue(Property.BACKGROUND_COLOR, defaultOptions.getBackgroundColorAsString());
 		}
 		// otherwise returns defaults
-		return defaultsOptions.getBackgroundColorAsString();
+		return defaultOptions.getBackgroundColorAsString();
 	}
 
 	/**
@@ -151,7 +151,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 			return ColorBuilder.parse(getBackgroundColorAsString());
 		}
 		// otherwise returns defaults
-		return ColorBuilder.parse(defaultsOptions.getBackgroundColorAsString());
+		return ColorBuilder.parse(defaultOptions.getBackgroundColorAsString());
 	}
 
 	/**
@@ -170,7 +170,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 				return GradientBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the gradient has been set into defaults options
-				return defaultsOptions.getBackgroundColorAsGradient();
+				return defaultOptions.getBackgroundColorAsGradient();
 			}
 		}
 		// otherwise returns null
@@ -193,7 +193,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 				return PatternBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
 				// if here, the pattern has been set into defaults options
-				return defaultsOptions.getBackgroundColorAsPattern();
+				return defaultOptions.getBackgroundColorAsPattern();
 			}
 		}
 		// otherwise returns null

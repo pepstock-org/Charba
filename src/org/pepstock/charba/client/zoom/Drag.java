@@ -84,26 +84,26 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	}
 
 	// defaults global drag options instance
-	private IsDefaultDrag defaultsOptions;
+	private IsDefaultDrag defaultOptions;
 
 	/**
 	 * Creates new range element, using the default values options.
 	 * 
-	 * @param defaultsOptions default DRAG options to returns the default when required.
+	 * @param defaultOptions default DRAG options to returns the default when required.
 	 */
-	Drag(IsDefaultDrag defaultsOptions) {
-		this(null, defaultsOptions);
+	Drag(IsDefaultDrag defaultOptions) {
+		this(null, defaultOptions);
 	}
 
 	/**
 	 * Creates new range element, using stored native object instance and the default values options.
 	 * 
 	 * @param nativeObject stored range values into native object to read.
-	 * @param defaultsOptions default DRAG options to returns the default when required.
+	 * @param defaultOptions default DRAG options to returns the default when required.
 	 */
-	Drag(NativeObject nativeObject, IsDefaultDrag defaultsOptions) {
+	Drag(NativeObject nativeObject, IsDefaultDrag defaultOptions) {
 		super(nativeObject);
-		this.defaultsOptions = defaultsOptions;
+		this.defaultOptions = defaultOptions;
 	}
 
 	/**
@@ -133,7 +133,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	@Override
 	public String getBackgroundColorAsString() {
 		// returns color as string
-		return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, defaultOptions.getBackgroundColorAsString());
 	}
 
 	/**
@@ -172,7 +172,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	@Override
 	public String getBorderColorAsString() {
 		// returns color as string
-		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
 	}
 
 	/**
@@ -201,7 +201,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 */
 	@Override
 	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
 
 	/**
@@ -220,7 +220,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 */
 	@Override
 	public int getAnimationDuration() {
-		return getValue(Property.ANIMATION_DURATION, defaultsOptions.getAnimationDuration());
+		return getValue(Property.ANIMATION_DURATION, defaultOptions.getAnimationDuration());
 	}
 
 }

@@ -35,7 +35,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	public static final int DEFAULT_PADDING = 4;
 
 	// defaults global options instance
-	private IsDefaultPadding defaultsOptions;
+	private IsDefaultPadding defaultOptions;
 
 	/**
 	 * Creates new padding element, using the default values options.
@@ -48,13 +48,13 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
 	 * @param nativeObject stored padding values into native object to read.
-	 * @param defaultsOptions default PADDING options to returns the default when required.
+	 * @param defaultOptions default PADDING options to returns the default when required.
 	 */
-	Padding(IsDefaultPadding defaultsOptions, NativeObject nativeObject) {
+	Padding(IsDefaultPadding defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if default value is consistent
 		// stores default
-		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 */
 	@Override
 	public int getLeft() {
-		return getValue(Position.LEFT, defaultsOptions.getLeft());
+		return getValue(Position.LEFT, defaultOptions.getLeft());
 	}
 
 	/**
@@ -104,7 +104,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 */
 	@Override
 	public int getRight() {
-		return getValue(Position.RIGHT, defaultsOptions.getRight());
+		return getValue(Position.RIGHT, defaultOptions.getRight());
 	}
 
 	/**
@@ -123,7 +123,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 */
 	@Override
 	public int getTop() {
-		return getValue(Position.TOP, defaultsOptions.getTop());
+		return getValue(Position.TOP, defaultOptions.getTop());
 	}
 
 	/**
@@ -142,6 +142,6 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 */
 	@Override
 	public int getBottom() {
-		return getValue(Position.BOTTOM, defaultsOptions.getBottom());
+		return getValue(Position.BOTTOM, defaultOptions.getBottom());
 	}
 }

@@ -44,9 +44,9 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
+			DatasetsItemsSelectorDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new DatasetsItemsSelectorOptions(defaultsOptions, nativeObject);
+			return new DatasetsItemsSelectorOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);

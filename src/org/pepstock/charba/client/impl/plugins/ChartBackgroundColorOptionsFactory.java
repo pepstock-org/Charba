@@ -44,9 +44,9 @@ public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOpti
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ChartBackgroundColorDefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, ChartBackgroundColor.DEFAULTS_FACTORY);
+			ChartBackgroundColorDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartBackgroundColor.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ChartBackgroundColorOptions(defaultsOptions, nativeObject);
+			return new ChartBackgroundColorOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);

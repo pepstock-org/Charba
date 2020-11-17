@@ -35,7 +35,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 public final class LabelsOptions extends AbstractPluginOptions implements IsDefaultOptions {
 
 	// defaults global options instance
-	private IsDefaultOptions defaultsOptions;
+	private IsDefaultOptions defaultOptions;
 
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
@@ -56,19 +56,19 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	/**
 	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	LabelsOptions(IsDefaultOptions defaultsOptions, NativeObject nativeObject) {
+	LabelsOptions(IsDefaultOptions defaultOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(LabelsPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(LabelsPlugin.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(LabelsPlugin.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 	}
 
@@ -94,7 +94,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 		// checks if already exists
 		if (!has(id)) {
 			// creates new label
-			Label label = new Label(id, defaultsOptions.getLabel(id), null);
+			Label label = new Label(id, defaultOptions.getLabel(id), null);
 			// stores the label
 			setValue(id, label);
 			// returns label
@@ -125,7 +125,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 		// checks if the label id is consistent
 		IsLabelId.checkIfValid(id);
 		// checks if the label id exist
-		return has(id) || defaultsOptions.hasLabel(id);
+		return has(id) || defaultOptions.hasLabel(id);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 				// gets label id
 				IsLabelId id = IsLabelId.create(key.value());
 				// gets and creates the label
-				Label label = new Label(id, defaultsOptions.getLabel(id), getValue(key));
+				Label label = new Label(id, defaultOptions.getLabel(id), getValue(key));
 				// adds to result
 				result.add(label);
 			}
@@ -240,11 +240,11 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 		// checks if the label id exist
 		if (hasLabel(id) && isType(id, ObjectType.OBJECT)) {
 			// gets from the cache
-			return new Label(id, defaultsOptions.getLabel(id), getValue(id));
+			return new Label(id, defaultOptions.getLabel(id), getValue(id));
 		}
 		// if here, the label id does not exist
 		// then returns null
-		return defaultsOptions.getLabel(id);
+		return defaultOptions.getLabel(id);
 	}
 
 }

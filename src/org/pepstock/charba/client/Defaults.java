@@ -619,9 +619,9 @@ public final class Defaults {
 			}
 		}
 
-		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultsOptions) {
+		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultOptions) {
 			// creates a chart options using global a default scaled as default
-			return new ChartOptions(type, getControllers().getChartOptions(type), defaultsOptions);
+			return new ChartOptions(type, getControllers().getChartOptions(type), defaultOptions);
 		}
 	}
 	

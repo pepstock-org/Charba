@@ -70,7 +70,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	}
 
 	// defaults global options instance
-	private ChartPointerDefaultsOptions defaultsOptions;
+	private ChartPointerDefaultsOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -93,27 +93,27 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(ChartPointerDefaultsOptions defaultsOptions) {
-		this(defaultsOptions, null);
+	ChartPointerOptions(ChartPointerDefaultsOptions defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options and the default global ones
 	 * 
 	 * @param nativeObject native object into options
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(ChartPointerDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ChartPointerOptions(ChartPointerDefaultsOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartPointer.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(ChartPointer.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(ChartPointer.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 	}
 
@@ -124,7 +124,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 */
 	@Override
 	final String getCursorPointerAsString() {
-		return defaultsOptions.getCursorPointerAsString();
+		return defaultOptions.getCursorPointerAsString();
 	}
 
 	/**
@@ -151,7 +151,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 		}
 		// if here, there is not any property
 		// returns defaults elements
-		return defaultsOptions.getElements();
+		return defaultOptions.getElements();
 	}
 
 }

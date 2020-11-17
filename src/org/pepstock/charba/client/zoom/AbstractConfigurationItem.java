@@ -132,7 +132,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	// parent instance
 	private final ZoomOptions parent;
 	// default options
-	private final T defaultsOptions;
+	private final T defaultOptions;
 	// minimum range
 	private final Range rangeMin;
 	// maximum range
@@ -142,33 +142,33 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param parent zoom options, parent of this node
-	 * @param defaultsOptions default options of element
+	 * @param defaultOptions default options of element
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractConfigurationItem(ZoomOptions parent, T defaultsOptions, NativeObject nativeObject) {
+	AbstractConfigurationItem(ZoomOptions parent, T defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores parent
 		this.parent = parent;
 		// checks if defaults options is consistent
 		// stores defaults options
-		this.defaultsOptions = checkDefaultValuesArgument(defaultsOptions);
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// checks if range min are already present
 		if (has(Property.RANGE_MIN)) {
 			// gets range min
-			this.rangeMin = new Range(defaultsOptions.getRangeMin(), getValue(Property.RANGE_MIN));
+			this.rangeMin = new Range(defaultOptions.getRangeMin(), getValue(Property.RANGE_MIN));
 		} else {
 			// gets range min
-			this.rangeMin = new Range(defaultsOptions.getRangeMin());
+			this.rangeMin = new Range(defaultOptions.getRangeMin());
 			// stores new range
 			setValue(Property.RANGE_MIN, rangeMin);
 		}
 		// checks if range max are already present
 		if (has(Property.RANGE_MAX)) {
 			// gets range max
-			this.rangeMax = new Range(defaultsOptions.getRangeMax(), getValue(Property.RANGE_MAX));
+			this.rangeMax = new Range(defaultOptions.getRangeMax(), getValue(Property.RANGE_MAX));
 		} else {
 			// gets range max
-			this.rangeMax = new Range(defaultsOptions.getRangeMax());
+			this.rangeMax = new Range(defaultOptions.getRangeMax());
 			// stores new range
 			setValue(Property.RANGE_MAX, rangeMax);
 		}
@@ -186,7 +186,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @return the default options instance
 	 */
 	final T getDefaultsOptions() {
-		return defaultsOptions;
+		return defaultOptions;
 	}
 
 	/**
@@ -219,7 +219,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final boolean isEnabled() {
-		return getValue(Property.ENABLED, defaultsOptions.isEnabled());
+		return getValue(Property.ENABLED, defaultOptions.isEnabled());
 	}
 
 	/**
@@ -244,11 +244,11 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if callback has been activated
 		if (getModeCallback() == null) {
 			// no callback
-			return getValue(Property.MODE, InteractionAxis.values(), defaultsOptions.getMode());
+			return getValue(Property.MODE, InteractionAxis.values(), defaultOptions.getMode());
 		}
 		// if here, mode callback has been activated
 		// then returns the default
-		return defaultsOptions.getMode();
+		return defaultOptions.getMode();
 	}
 
 	/**
@@ -258,7 +258,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final ModeCallback getModeCallback() {
-		return MODE_PROPERTY_HANDLER.getCallback(this, defaultsOptions.getModeCallback());
+		return MODE_PROPERTY_HANDLER.getCallback(this, defaultOptions.getModeCallback());
 	}
 
 	/**
@@ -297,7 +297,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final ProgressCallback getProgressCallback() {
-		return getProgessPropertyHandler().getCallback(this, defaultsOptions.getProgressCallback());
+		return getProgessPropertyHandler().getCallback(this, defaultOptions.getProgressCallback());
 	}
 
 	/**
@@ -316,7 +316,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final CompleteCallback getCompleteCallback() {
-		return getCompletePropertyHandler().getCallback(this, defaultsOptions.getCompleteCallback());
+		return getCompletePropertyHandler().getCallback(this, defaultOptions.getCompleteCallback());
 	}
 
 	/**
@@ -349,7 +349,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		}
 		// defaults mode if here
 		// because some entities is not consistent
-		return defaultsOptions.getMode().value();
+		return defaultOptions.getMode().value();
 	}
 
 	/**

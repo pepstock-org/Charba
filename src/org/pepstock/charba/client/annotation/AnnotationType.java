@@ -42,17 +42,17 @@ public enum AnnotationType implements Key
 	// internal counter to create id
 	private final AtomicInteger counter = new AtomicInteger(0);
 	// default of annotation
-	private final IsDefaultsAnnotation defaultsValues;
+	private final IsDefaultsAnnotation defaultValues;
 
 	/**
 	 * Creates an annotation type property value to use into native object.
 	 * 
 	 * @param value value of annotation type property name
-	 * @param defaultsValues default options for the specific annotation type
+	 * @param defaultValues default options for the specific annotation type
 	 */
-	private AnnotationType(String value, IsDefaultsAnnotation defaultsValues) {
+	private AnnotationType(String value, IsDefaultsAnnotation defaultValues) {
 		this.value = value;
-		this.defaultsValues = defaultsValues;
+		this.defaultValues = defaultValues;
 	}
 
 	/*
@@ -71,7 +71,7 @@ public enum AnnotationType implements Key
 	 * @return the default options for the specific annotation type
 	 */
 	IsDefaultsAnnotation getDefaultsValues() {
-		return defaultsValues;
+		return defaultValues;
 	}
 
 	/**

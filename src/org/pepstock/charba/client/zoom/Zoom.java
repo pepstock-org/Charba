@@ -90,10 +90,10 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * 
 	 * @param parent zoom options, parent of this node
 	 * @param nativeObject stored padding values into native object to read.
-	 * @param defaultsOptions default ZOOM options to returns the default when required.
+	 * @param defaultOptions default ZOOM options to returns the default when required.
 	 */
-	Zoom(ZoomOptions parent, IsDefaultZoom defaultsOptions, NativeObject nativeObject) {
-		super(parent, defaultsOptions, nativeObject);
+	Zoom(ZoomOptions parent, IsDefaultZoom defaultOptions, NativeObject nativeObject) {
+		super(parent, defaultOptions, nativeObject);
 	}
 
 	/*

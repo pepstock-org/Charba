@@ -84,7 +84,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	// from html legened item factory
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// defaults global options instance
-	private HtmlLegendDefaultsOptions defaultsOptions;
+	private HtmlLegendDefaultsOptions defaultOptions;
 	// legend item callback instance
 	private HtmlLegendItemCallback legendItemCallback = null;
 	// legend title callback instance
@@ -111,27 +111,27 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultsOptions) {
-		this(defaultsOptions, null);
+	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Builds the object with a java script object stored into options and the default global ones
 	 * 
 	 * @param nativeObject native object into options
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultOptions, NativeObject nativeObject) {
 		super(HtmlLegend.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(HtmlLegend.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(HtmlLegend.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 		// checks if CHARBA ID is not already stored
 		if (!has(Property.CHARBA_ID)) {
@@ -156,7 +156,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 */
 	@Override
 	final String getCursorPointerAsString() {
-		return defaultsOptions.getCursorPointerAsString();
+		return defaultOptions.getCursorPointerAsString();
 	}
 
 	/**
@@ -174,7 +174,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @return <code>true</code> if the legend is shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.DISPLAY, defaultsOptions.isDisplay());
+		return getValue(Property.DISPLAY, defaultOptions.isDisplay());
 	}
 
 	/**
@@ -183,7 +183,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
 	public HtmlLegendItemCallback getLegendItemCallback() {
-		return legendItemCallback != null ? legendItemCallback : defaultsOptions.getLegendTextCallback();
+		return legendItemCallback != null ? legendItemCallback : defaultOptions.getLegendTextCallback();
 	}
 
 	/**
@@ -212,7 +212,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @return the callback which can be implemented to change the text of legend's title, as HTML
 	 */
 	public HtmlLegendTitleCallback getLegendTitleCallback() {
-		return legendTitleCallback != null ? legendTitleCallback : defaultsOptions.getLegendTitleCallback();
+		return legendTitleCallback != null ? legendTitleCallback : defaultOptions.getLegendTitleCallback();
 	}
 
 	/**
@@ -252,7 +252,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @return he maximum amount of columns of legend
 	 */
 	public int getMaximumLegendColumns() {
-		return getValue(Property.MAXIMUM_LEGEND_COLUMNS, defaultsOptions.getMaximumLegendColumns());
+		return getValue(Property.MAXIMUM_LEGEND_COLUMNS, defaultOptions.getMaximumLegendColumns());
 	}
 
 }

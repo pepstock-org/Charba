@@ -42,9 +42,9 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ChartPointerDefaultsOptions defaultsOptions = loadDefaultsPluginOptions(defaultValues, ChartPointer.DEFAULTS_FACTORY);
+			ChartPointerDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartPointer.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
-			return new ChartPointerOptions(defaultsOptions, nativeObject);
+			return new ChartPointerOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
 		return new ChartPointerOptions(ChartPointerDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);

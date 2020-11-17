@@ -91,7 +91,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	}
 
 	// defaults global options instance
-	private ColorSchemesDefaultsOptions defaultsOptions;
+	private ColorSchemesDefaultsOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -115,27 +115,27 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 */
-	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions) {
-		this(defaultsOptions, null);
+	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultOptions) {
+		this(defaultOptions, null);
 	}
 
 	/**
 	 * Builds the object using a native object.
 	 * 
 	 * @param nativeObject native object which contains the properties
-	 * @param defaultsOptions plugin default options
+	 * @param defaultOptions plugin default options
 	 */
-	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultsOptions, NativeObject nativeObject) {
+	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultOptions, NativeObject nativeObject) {
 		super(ColorSchemes.ID, nativeObject);
 		// checks if defaults options are consistent
-		if (defaultsOptions == null) {
+		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultsOptions = loadGlobalsPluginOptions(ColorSchemes.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(ColorSchemes.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
-			this.defaultsOptions = defaultsOptions;
+			this.defaultOptions = defaultOptions;
 		}
 	}
 
@@ -154,7 +154,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	public SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), defaultsOptions.getSchemeScope());
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), defaultOptions.getSchemeScope());
 	}
 
 	/**
@@ -189,8 +189,8 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	public ColorScheme getScheme() {
 		// gets the category and name from object
-		String category = getValue(Property.SCHEME_CATEGORY, defaultsOptions.getSchemeCategory());
-		String name = getValue(Property.SCHEME_NAME, defaultsOptions.getSchemeName());
+		String category = getValue(Property.SCHEME_CATEGORY, defaultOptions.getSchemeCategory());
+		String name = getValue(Property.SCHEME_NAME, defaultOptions.getSchemeName());
 		// all color scheme are stored into cache when the "set" is called
 		// therefore here the scheme MUST be in cache
 		return ColorSchemesUtil.get().getColorScheme(category, name);
@@ -213,7 +213,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the transparency value for the background color
 	 */
 	public double getBackgroundColorAlpha() {
-		return getValue(Property.BACKGROUND_COLOR_ALPHA, defaultsOptions.getBackgroundColorAlpha());
+		return getValue(Property.BACKGROUND_COLOR_ALPHA, defaultOptions.getBackgroundColorAlpha());
 	}
 
 	/**
@@ -231,7 +231,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
 	public boolean isReverse() {
-		return getValue(Property.REVERSE, defaultsOptions.isReverse());
+		return getValue(Property.REVERSE, defaultOptions.isReverse());
 	}
 
 }

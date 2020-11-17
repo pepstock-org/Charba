@@ -164,12 +164,12 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
-	 * @param defaultsOptions default options stored into defaults global
+	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	DataLabelsOptions(IsDefaultDataLabelsOptions defaultsOptions, NativeObject nativeObject) {
+	DataLabelsOptions(IsDefaultDataLabelsOptions defaultOptions, NativeObject nativeObject) {
 		// creates an empty native object
-		super(defaultsOptions, nativeObject);
+		super(defaultOptions, nativeObject);
 		// gets default
 		IsDefaultDataLabelsItem defaultValue = getDefaultsOptions();
 		// checks instance of defaults options if has got the right type
