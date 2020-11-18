@@ -44,12 +44,12 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			DatasetsItemsSelectorDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
+			DatasetsItemsSelectorOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, DatasetsItemsSelector.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new DatasetsItemsSelectorOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class DatasetsItemsSelectorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorDefaultsOptions> {
+	static class DatasetsItemsSelectorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -73,13 +73,8 @@ public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOpt
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new DatasetsItemsSelectorDefaultsOptions(nativeObject);
-			}
-			return DatasetsItemsSelectorDefaultsOptions.DEFAULTS_INSTANCE;
+		public DatasetsItemsSelectorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			return new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultOptions.INSTANCE, nativeObject);
 		}
 
 	}

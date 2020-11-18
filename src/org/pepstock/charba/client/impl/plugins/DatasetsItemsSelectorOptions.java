@@ -44,7 +44,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
+public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions implements IsDatasetsItemsSelectorDefaultOptions{
 
 	/**
 	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.
@@ -77,7 +77,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
 	// defaults global options instance
-	private DatasetsItemsSelectorDefaultsOptions defaultOptions;
+	private IsDatasetsItemsSelectorDefaultOptions defaultOptions;
 	// clear selection item
 	private final ClearSelection clearSelection;
 
@@ -142,7 +142,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @param defaultOptions default options, which must be stored into default global.
 	 */
-	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultOptions) {
+	DatasetsItemsSelectorOptions(IsDatasetsItemsSelectorDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
@@ -153,7 +153,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param defaultOptions default options, which must be stored into default global.
 	 * @param nativeObject configuration of plugin.
 	 */
-	DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultsOptions defaultOptions, NativeObject nativeObject) {
+	DatasetsItemsSelectorOptions(IsDatasetsItemsSelectorDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(DatasetsItemsSelector.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
@@ -178,6 +178,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the clear selection element
 	 */
+	@Override
 	public ClearSelection getClearSelection() {
 		return clearSelection;
 	}
@@ -211,6 +212,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
+	@Override
 	public IsScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, defaultOptions.getXAxisID());
 	}
@@ -220,6 +222,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the color.
 	 */
+	@Override
 	public String getColorAsString() {
 		return getValue(Property.COLOR, defaultOptions.getColorAsString());
 	}
@@ -265,6 +268,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the line dash pattern used when stroking lines.
 	 */
+	@Override
 	public List<Integer> getBorderDash() {
 		// gets array instance
 		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
@@ -285,6 +289,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the line dash pattern offset.
 	 */
+	@Override
 	public int getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultOptions.getBorderDashOffset());
 	}
@@ -303,6 +308,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return list of the border width of the selection.
 	 */
+	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
@@ -312,6 +318,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the color.
 	 */
+	@Override
 	public String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
 	}

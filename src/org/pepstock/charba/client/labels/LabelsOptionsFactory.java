@@ -75,8 +75,6 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		 */
 		@Override
 		public LabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			// creates the options by the native object and the defaults
 			return new LabelsOptions(DefaultOptions.INSTANCE, nativeObject);
 		}
 

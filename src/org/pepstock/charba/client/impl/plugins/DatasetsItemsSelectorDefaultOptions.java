@@ -15,114 +15,34 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.options.IsScaleId;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
-
 /**
  * Configuration options of DEFAULT GLOBAL options of {@link DatasetsItemsSelector#ID} plugin.<br>
- * This is used to set the defaults to chart options for the plugin.<br>
- * It is managing:<br>
- * <ul>
- * <li>the X axis ID
- * <li>the selection color
- * <li>the border color
- * <li>the border width
- * <li>the border dash
- * <li>"clear" options
- * </ul>
+ * This is used to set the defaults to chart options for the plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DatasetsItemsSelectorDefaultsOptions extends AbstractPluginOptions {
-
+final class DatasetsItemsSelectorDefaultOptions implements IsDatasetsItemsSelectorDefaultOptions {
+	
 	// defaults options instance
-	static final DatasetsItemsSelectorDefaultsOptions DEFAULTS_INSTANCE = new DatasetsItemsSelectorDefaultsOptions();
-	// default clear selection options
-	private final DatasetsItemsSelectorDefaultsClearSelection clearSelection;
+	static final DatasetsItemsSelectorDefaultOptions INSTANCE = new DatasetsItemsSelectorDefaultOptions();
+	// clear options default instance
+	private final DatasetsItemsSelectorDefaultClearSelection clearSelection = new DatasetsItemsSelectorDefaultClearSelection();
 
 	/**
-	 * Builds the object using an empty java script object of options.
+	 * To avoid any instantiation
 	 */
-	private DatasetsItemsSelectorDefaultsOptions() {
-		this(null);
+	private DatasetsItemsSelectorDefaultOptions() {
+		// do nothing
 	}
 
-	/**
-	 * Builds the object using the java script object of options, set by user.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param nativeObject configuration of plugin.
+	 * @see org.pepstock.charba.client.impl.plugins.IsDatasetsItemsSelectorDefaultOptions#getClearSelection()
 	 */
-	DatasetsItemsSelectorDefaultsOptions(NativeObject nativeObject) {
-		super(DatasetsItemsSelector.ID, nativeObject);
-		// reads default clear selection options from main object
-		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION));
-	}
-
-	/**
-	 * Returns the clear selection item.
-	 * 
-	 * @return the clear selection item
-	 */
-	DatasetsItemsSelectorDefaultsClearSelection getClearSelection() {
+	@Override
+	public IsDatasetsItemsSelectorDefaultClearSelection getClearSelection() {
 		return clearSelection;
-	}
-
-	/**
-	 * Returns the ID of the x axis to plot this dataset on.<br>
-	 * If not specified, this defaults to the ID of the first found x axis.
-	 * 
-	 * @return the ID of the x axis to plot this dataset on.<br>
-	 *         If not specified, this defaults to the ID of the first found x axis.
-	 */
-	IsScaleId getXAxisID() {
-		return getValue(DatasetsItemsSelectorOptions.Property.X_AXIS_ID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
-	}
-
-	/**
-	 * Returns the color.
-	 * 
-	 * @return the color.
-	 */
-	String getColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.COLOR, DatasetsItemsSelectorOptions.DEFAULT_COLOR.toRGBA());
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines.
-	 */
-	ArrayInteger getBorderDash() {
-		return getArrayValue(DatasetsItemsSelectorOptions.Property.BORDER_DASH);
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset.
-	 */
-	int getBorderDashOffset() {
-		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_WIDTH, DatasetsItemsSelectorOptions.DEFAULT_BORDER_DASH_OFFSET);
-	}
-
-	/**
-	 * Returns the border width of the selection.
-	 * 
-	 * @return list of the border width of the selection.
-	 */
-	int getBorderWidth() {
-		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_WIDTH, DatasetsItemsSelectorOptions.DEFAULT_BORDER_WIDTH);
-	}
-
-	/**
-	 * Returns the color.
-	 * 
-	 * @return the color.
-	 */
-	String getBorderColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_COLOR, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
 }
