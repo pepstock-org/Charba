@@ -2,13 +2,11 @@
 // Controller class creation
 // --------------------------
 // Constructor
-function Charba_ControllerType() {
-  Chart.controllers._ChartType.apply(this, arguments);
+class Charba_ControllerType extends Chart.controllers._ChartType {
+	constructor(...args) {
+		super(...args);
+	}
 }
-// Copies the extended controller prototype
-Charba_ControllerType.prototype = Object.create(Chart.controllers._ChartType.prototype);
-// Defines the constructor
-Charba_ControllerType.prototype.constructor = Charba_ControllerType;
 // Defines the flag to clone the defaults
 Charba_ControllerType.cloneDefaults = _ControllerCloneDefaults;
 // --------------------

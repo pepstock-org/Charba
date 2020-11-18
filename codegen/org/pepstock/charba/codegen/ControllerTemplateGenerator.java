@@ -47,12 +47,16 @@ public class ControllerTemplateGenerator {
 	private static final File JAVA_TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/ExtendedControllerClass.template");
 	// threshold of amount of chars for any string array item
 	private static final int CHARS_PER_ARRAY_ITEM = 1000;
+	// defines the comma
+	private static final String COMMENT_PREFIX = "//";
 	// defines the line separator
 	private static final byte LINE_SEPARATOR = '\n';
 	// defines the comma
 	private static final String COMMA_STRING = ",";
 	// defines the line separator as string
 	private static final String LINE_SEPARATOR_STRING = "\n";
+	// defines the line separator for code as string
+	private static final String LINE_SEPARATOR_STRING_FOR_CODE = "\\n";
 	// defines the tab indent as string
 	private static final String TAB_INDENT_STRING = "\t\t";
 	// defines the quote as string
@@ -150,8 +154,13 @@ public class ControllerTemplateGenerator {
 			StringBuilder templateSource = new StringBuilder();
 			// reads the content of template file
 			while (scanner.hasNextLine()) {
-				// adds to builder, adding always a line separator at the end
-				templateSource.append(scanner.nextLine()).append(LINE_SEPARATOR_STRING);
+				// reads the line
+				String line = scanner.nextLine().trim();
+				// checks if comment, if yes, it is removed
+				if (!line.startsWith(COMMENT_PREFIX)) {
+					// adds to builder, adding always a line separator at the end
+					templateSource.append(line).append(LINE_SEPARATOR_STRING);
+				}
 			}
 			// returns the template as string builder
 			return templateSource;
@@ -224,7 +233,7 @@ public class ControllerTemplateGenerator {
 				// if here, there is a line separator into java script
 				// but it's not at the end of the file
 				// then creates an array item string
-				builder.append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
+				builder.append(LINE_SEPARATOR_STRING_FOR_CODE).append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
 				// resets the counter
 				charCounter = 0;
 			} else if (b != LINE_SEPARATOR) {
@@ -240,11 +249,11 @@ public class ControllerTemplateGenerator {
 			// checks if is at the end of byte scanning
 			if (bufferSize == 0) {
 				// if yes, adds the quote to close the string
-				builder.append(QUOTE_STRING);
+				builder.append(LINE_SEPARATOR_STRING_FOR_CODE).append(QUOTE_STRING);
 			} else if (charCounter > CHARS_PER_ARRAY_ITEM) {
 				// if here, the current amount of chars is greater than fixed
 				// then creates an array item string
-				builder.append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
+				builder.append(LINE_SEPARATOR_STRING_FOR_CODE).append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
 				// resets the counter
 				charCounter = 0;
 			}

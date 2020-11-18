@@ -19,7 +19,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage CHART.JS controllers.<br>
@@ -64,11 +63,6 @@ final class JsControllerHelper {
 	void register(ControllerType controllerType, NativeObject instance) {
 		// uses the controller template applying the chart and controller types
 		String javaScript = Utilities.applyTemplate(ControllerTemplate.get().getTemplate(), controllerType.value(), controllerType.getChartType().value(), controllerType.isCloneDefaults());
-		
-		Window.getConsole().log("---------");
-		Window.getConsole().log(javaScript);
-		Window.getConsole().log("---------");
-		
 		// creates a function with the template
 		NativeFunction function = new NativeFunction(javaScript);
 		// executes the function
