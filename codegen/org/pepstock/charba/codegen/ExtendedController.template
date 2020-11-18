@@ -6,7 +6,7 @@ class Charba_ControllerType extends Chart.controllers._ChartType {
 	constructor(...args) {
 		super(...args);
 	}
-}
+};
 // Defines the flag to clone the defaults
 Charba_ControllerType.cloneDefaults = _ControllerCloneDefaults;
 // --------------------

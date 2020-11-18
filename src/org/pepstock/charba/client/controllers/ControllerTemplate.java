@@ -16,126 +16,56 @@ limitations under the License.
 package org.pepstock.charba.client.controllers;
 
 /**
-* Contains the content of javascript controller template.<br>
-* It will be filled with controller and chart types and execute.
-*
-* @author Andrea "Stock" Stocchero
-*
-*/
+ * Contains the content of javascript controller template.<br>
+ * It will be filled with controller and chart types and execute.
+ *
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 final class ControllerTemplate {
 
-private static final String[] CONTENT = {
-"class Charba{0} extends Chart.controllers.{1} {\n",
-		"constructor(...args) {\n",
-		"super(...args);\n",
-		"}\n",
-		"}\n",
-		"Charba{0}.cloneDefaults = {2};\n",
-		"Charba{0}.prototype.checkAndGetWrapper = function(property){\n",
-		"var delegated = CharbaJsControllerHelper.wrappers.{0};\n",
-		"if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){\n",
-		"return delegated;\n",
-		"}\n",
-		"return null;\n",
-		"};\n",
-		"Charba{0}.prototype.initialize = function() {\n",
-		"var delegated = this.checkAndGetWrapper('initialize');\n",
-		"if (delegated !== null){\n",
-		"delegated.initialize.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.initialize.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.addElements = function() {\n",
-		"var delegated = this.checkAndGetWrapper('addElements');\n",
-		"if (delegated !== null){\n",
-		"delegated.addElements.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.addElements.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.draw = function() {\n",
-		"var delegated = this.checkAndGetWrapper('draw');\n",
-		"if (delegated !== null){\n",
-		"delegated.draw.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.draw.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.removeHoverStyle = function() {\n",
-		"var delegated = this.checkAndGetWrapper('removeHoverStyle');\n",
-		"if (delegated !== null){\n",
-		"delegated.removeHoverStyle.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.setHoverStyle = function() {\n",
-		"var delegated = this.checkAndGetWrapper('setHoverStyle');\n",
-		"if (delegated !== null){\n",
-		"delegated.setHoverStyle.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.update = function() {\n",
-		"var delegated = this.checkAndGetWrapper('update');\n",
-		"if (delegated !== null){\n",
-		"delegated.update.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.update.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.linkScales = function() {\n",
-		"var delegated = this.checkAndGetWrapper('linkScales');\n",
-		"if (delegated !== null){\n",
-		"delegated.linkScales.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.linkScales.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.prototype.buildOrUpdateElements = function() {\n",
-		"var delegated = this.checkAndGetWrapper('buildOrUpdateElements');\n",
-		"if (delegated !== null){\n",
-		"delegated.buildOrUpdateElements.apply(this, arguments);\n",
-		"} else {\n",
-		"Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this, arguments);\n",
-		"}\n",
-		"};\n",
-		"Charba{0}.id = '{0}';\n",
-		"Charba{0}.defaults = Charba{0}.cloneDefaults ? Object.assign({}, Chart.defaults.controllers.{1}) : Chart.defaults.controllers.{1};\n",
-		"Chart.register(Charba{0});\n"
-};
+	private static final String[] CONTENT = { 
+			"class Charba{0} extends Chart.controllers.{1} {\n", "constructor(...args) {\n", "super(...args);\n", "}\n", "};\n", "Charba{0}.cloneDefaults = {2};\n",
+			"Charba{0}.prototype.checkAndGetWrapper = function(property){var delegated = CharbaJsControllerHelper.wrappers.{0};if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){return delegated;}return null;};\n",
+			"Charba{0}.prototype.initialize = function() {var delegated = this.checkAndGetWrapper('initialize');if (delegated !== null){delegated.initialize.apply(this, arguments);} else {Chart.controllers.{1}.prototype.initialize.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.addElements = function() {var delegated = this.checkAndGetWrapper('addElements');if (delegated !== null){delegated.addElements.apply(this, arguments);} else {Chart.controllers.{1}.prototype.addElements.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.draw = function() {var delegated = this.checkAndGetWrapper('draw');if (delegated !== null){delegated.draw.apply(this, arguments);} else {Chart.controllers.{1}.prototype.draw.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.removeHoverStyle = function() {var delegated = this.checkAndGetWrapper('removeHoverStyle');if (delegated !== null){delegated.removeHoverStyle.apply(this, arguments);} else {Chart.controllers.{1}.prototype.removeHoverStyle.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.setHoverStyle = function() {var delegated = this.checkAndGetWrapper('setHoverStyle');if (delegated !== null){delegated.setHoverStyle.apply(this, arguments);} else {Chart.controllers.{1}.prototype.setHoverStyle.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.update = function() {var delegated = this.checkAndGetWrapper('update');if (delegated !== null){delegated.update.apply(this, arguments);} else {Chart.controllers.{1}.prototype.update.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.linkScales = function() {var delegated = this.checkAndGetWrapper('linkScales');if (delegated !== null){delegated.linkScales.apply(this, arguments);} else {Chart.controllers.{1}.prototype.linkScales.apply(this, arguments);}};\n",
+			"Charba{0}.prototype.buildOrUpdateElements = function() {var delegated = this.checkAndGetWrapper('buildOrUpdateElements');if (delegated !== null){delegated.buildOrUpdateElements.apply(this, arguments);} else {Chart.controllers.{1}.prototype.buildOrUpdateElements.apply(this, arguments);}};\n",
+			"Charba{0}.id = '{0}';\n", "Charba{0}.defaults = Charba{0}.cloneDefaults ? Object.assign({}, Chart.defaults.controllers.{1}) : Chart.defaults.controllers.{1};\n", "Chart.register(Charba{0});\n" };
 
-private static final ControllerTemplate INSTANCE = new ControllerTemplate();
+	private static final ControllerTemplate INSTANCE = new ControllerTemplate();
 
-private final StringBuilder builder = new StringBuilder();
+	private final StringBuilder builder = new StringBuilder();
 
-/**
-* To avoid any instantiation
-*/
-private ControllerTemplate() {
-for (String line : CONTENT) {
-builder.append(line);
-}
-}
+	/**
+	 * To avoid any instantiation
+	 */
+	private ControllerTemplate() {
+		for (String line : CONTENT) {
+			builder.append(line);
+		}
+	}
 
-/**
-* Singleton method to get static instance.
-*
-* @return defaults instance
-*/
-static ControllerTemplate get(){
-return INSTANCE;
-}
+	/**
+	 * Singleton method to get static instance.
+	 *
+	 * @return defaults instance
+	 */
+	static ControllerTemplate get() {
+		return INSTANCE;
+	}
 
-/**
-* Returns the controller template a single row.
-*
-* @return the controller template a single row
-*/
-String getTemplate(){
-return builder.toString();
-}
+	/**
+	 * Returns the controller template a single row.
+	 *
+	 * @return the controller template a single row
+	 */
+	String getTemplate() {
+		return builder.toString();
+	}
 
 }

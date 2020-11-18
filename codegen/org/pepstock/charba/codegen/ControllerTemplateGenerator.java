@@ -69,6 +69,10 @@ public class ControllerTemplateGenerator {
 	private static final byte QUOTE = '"';
 	// defines the replacement for quote
 	private static final String QUOTE_REPLACEMENT = "\\\"";
+	// defines the code when a javascript method is started
+	private static final String METHOD_START = "Charba_ControllerType.prototype.";
+	// defines the code when a javascript method is ended
+	private static final String METHOD_END = "};";
 	// defines the pattern to apply on replace all on the java class template
 	// for controller type content
 	private static final String CONTROLLER_TYPE_VARIABLE = Pattern.quote("_ControllerType");
@@ -146,6 +150,7 @@ public class ControllerTemplateGenerator {
 	 * @throws FileNotFoundException occurs if the template file not exists
 	 */
 	private static StringBuilder readTemplate(File template) throws FileNotFoundException {
+		boolean flagInMethod = false;
 		// creates a scanner to read the template
 		Scanner scanner = null;
 		try {
@@ -156,10 +161,24 @@ public class ControllerTemplateGenerator {
 			while (scanner.hasNextLine()) {
 				// reads the line
 				String line = scanner.nextLine().trim();
+				// checks if is a method
+				if (line.startsWith(METHOD_START) && !flagInMethod) {
+					// sets the flag
+					flagInMethod = true;
+				} else if (line.startsWith(METHOD_END) && flagInMethod) {
+					// sets the flag
+					flagInMethod = false;
+				}
 				// checks if comment, if yes, it is removed
 				if (!line.startsWith(COMMENT_PREFIX)) {
-					// adds to builder, adding always a line separator at the end
-					templateSource.append(line).append(LINE_SEPARATOR_STRING);
+					// adds to builder
+					templateSource.append(line);
+					// checks if it has to add the CR
+					// only for methods
+					if (!flagInMethod) {
+						// adds a line separator at the end
+						templateSource.append(LINE_SEPARATOR_STRING);
+					}
 				}
 			}
 			// returns the template as string builder

@@ -115,16 +115,6 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 		}
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.pepstock.charba.client.impl.plugins.AbstractCursorPointerOptions#getCursorPointerAsString()
-	// */
-	// @Override
-	// final String getCursorPointerAsString() {
-	// return defaultOptions.getCursorPointerAsString();
-	// }
-
 	/**
 	 * Sets the chart elements in scope to {@link ChartPointer#ID} plugin.
 	 * 
