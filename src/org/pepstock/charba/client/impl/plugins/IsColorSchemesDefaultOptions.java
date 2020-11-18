@@ -15,43 +15,22 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * It wraps default global options if there are and provides all default values for {@link ColorSchemes#ID} plugin.
+ * Maps the default global options for {@link ColorSchemes#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
-
-	// defaults options instance
-	static final ColorSchemesDefaultsOptions DEFAULTS_INSTANCE = new ColorSchemesDefaultsOptions();
-
-	/**
-	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
-	 */
-	private ColorSchemesDefaultsOptions() {
-		this(null);
-	}
-
-	/**
-	 * Creates the object wrapping the default global options if there are.
-	 * 
-	 * @param nativeObject native object which maps default global options.
-	 */
-	ColorSchemesDefaultsOptions(NativeObject nativeObject) {
-		super(ColorSchemes.ID, nativeObject);
-	}
+interface IsColorSchemesDefaultOptions {
 
 	/**
 	 * Returns the color scheme category.
 	 * 
 	 * @return the color scheme category
 	 */
-	String getSchemeCategory() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_CATEGORY, ColorSchemesOptions.DEFAULT_SCHEME.category());
+	default String getSchemeCategory() {
+		return ColorSchemesOptions.DEFAULT_SCHEME.category();
 	}
 
 	/**
@@ -59,8 +38,8 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the color scheme name
 	 */
-	String getSchemeName() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_NAME, ColorSchemesOptions.DEFAULT_SCHEME.value());
+	default String getSchemeName() {
+		return ColorSchemesOptions.DEFAULT_SCHEME.value();
 	}
 
 	/**
@@ -68,8 +47,8 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
-	SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
+	default SchemeScope getSchemeScope() {
+		return ColorSchemesOptions.DEFAULT_SCHEME_SCOPE;
 	}
 
 	/**
@@ -77,8 +56,8 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the transparency value for the background color
 	 */
-	double getBackgroundColorAlpha() {
-		return getValue(ColorSchemesOptions.Property.BACKGROUND_COLOR_ALPHA, ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA);
+	default double getBackgroundColorAlpha() {
+		return ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA;
 	}
 
 	/**
@@ -86,8 +65,8 @@ final class ColorSchemesDefaultsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
-	boolean isReverse() {
-		return getValue(ColorSchemesOptions.Property.REVERSE, ColorSchemesOptions.DEFAULT_REVERSE);
+	default boolean isReverse() {
+		return ColorSchemesOptions.DEFAULT_REVERSE;
 	}
 
 }

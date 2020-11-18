@@ -22,7 +22,7 @@ package org.pepstock.charba.client.impl.plugins;
  * @author Andrea "Stock" Stocchero
  */
 final class DatasetsItemsSelectorDefaultOptions implements IsDatasetsItemsSelectorDefaultOptions {
-	
+
 	// defaults options instance
 	static final DatasetsItemsSelectorDefaultOptions INSTANCE = new DatasetsItemsSelectorDefaultOptions();
 	// clear options default instance

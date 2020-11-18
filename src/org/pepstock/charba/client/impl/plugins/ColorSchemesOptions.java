@@ -29,7 +29,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ColorSchemesOptions extends AbstractPluginOptions {
+public final class ColorSchemesOptions extends AbstractPluginOptions implements IsColorSchemesDefaultOptions {
 
 	/**
 	 * Default color scheme, {@link BrewerScheme#PAIRED12}.
@@ -91,7 +91,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	}
 
 	// defaults global options instance
-	private ColorSchemesDefaultsOptions defaultOptions;
+	private IsColorSchemesDefaultOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -117,7 +117,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 */
-	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultOptions) {
+	ColorSchemesOptions(IsColorSchemesDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
@@ -127,7 +127,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param nativeObject native object which contains the properties
 	 * @param defaultOptions plugin default options
 	 */
-	ColorSchemesOptions(ColorSchemesDefaultsOptions defaultOptions, NativeObject nativeObject) {
+	ColorSchemesOptions(IsColorSchemesDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(ColorSchemes.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
@@ -153,6 +153,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
+	@Override
 	public SchemeScope getSchemeScope() {
 		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.values(), defaultOptions.getSchemeScope());
 	}
@@ -212,6 +213,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the transparency value for the background color
 	 */
+	@Override
 	public double getBackgroundColorAlpha() {
 		return getValue(Property.BACKGROUND_COLOR_ALPHA, defaultOptions.getBackgroundColorAlpha());
 	}
@@ -230,6 +232,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * 
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
+	@Override
 	public boolean isReverse() {
 		return getValue(Property.REVERSE, defaultOptions.isReverse());
 	}

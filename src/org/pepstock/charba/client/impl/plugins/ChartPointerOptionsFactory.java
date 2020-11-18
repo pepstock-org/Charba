@@ -33,21 +33,23 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 		super(ChartPointer.ID);
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ChartPointerDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartPointer.DEFAULTS_FACTORY);
+			ChartPointerOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartPointer.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new ChartPointerOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ChartPointerOptions(ChartPointerDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -55,7 +57,7 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class ChartPointerDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ChartPointerDefaultsOptions> {
+	static class ChartPointerDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ChartPointerOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -64,17 +66,15 @@ public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFacto
 			super(ChartPointer.ID);
 		}
 
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ChartPointerDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new ChartPointerDefaultsOptions(nativeObject);
-			}
-			return ChartPointerDefaultsOptions.DEFAULTS_INSTANCE;
+		public ChartPointerOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			return new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE, nativeObject);
 		}
 
 	}

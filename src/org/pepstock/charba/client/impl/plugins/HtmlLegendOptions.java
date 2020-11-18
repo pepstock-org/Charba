@@ -15,15 +15,15 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Configuration options of {@link HtmlLegend#ID} plugin.<br>
@@ -31,12 +31,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
+public final class HtmlLegendOptions extends AbstractCursorPointerOptions implements IsHtmlLegendDefaultOptions {
 
-	/**
-	 * Default cursor type when the cursor is over the legend, {@link CursorType#POINTER}.
-	 */
-	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
 	/**
 	 * Default maximum legends columns to show.
 	 */
@@ -53,8 +49,9 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	{
 		MAXIMUM_LEGEND_COLUMNS("maxLegendColumns"),
 		DISPLAY("display"),
-		// internal key to store a unique id
-		CHARBA_ID("_charbaId");
+		// internal property to set the callbacks
+		CHARBA_ITEM_CALLBACK("legendItem"),
+		CHARBA_TITLE_CALLBACK("legendTitle");
 
 		// name value of property
 		private final String value;
@@ -80,15 +77,18 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 
 	}
 
-	// internal count needed to remove callbacks instance from cache
-	// from html legened item factory
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	// callback proxy to invoke the render function
+	private final CallbackProxy<ProxyBooleanCallback> itemCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font function
+	private final CallbackProxy<ProxyBooleanCallback> titleCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// progress callback
+	private static final CallbackPropertyHandler<HtmlLegendItemCallback> ITEM_CALLBACK = new CallbackPropertyHandler<>(Property.CHARBA_ITEM_CALLBACK);
+	// complete callback
+	private static final CallbackPropertyHandler<HtmlLegendTitleCallback> TITLE_CALLBACK = new CallbackPropertyHandler<>(Property.CHARBA_TITLE_CALLBACK);
+
 	// defaults global options instance
-	private HtmlLegendDefaultsOptions defaultOptions;
-	// legend item callback instance
-	private HtmlLegendItemCallback legendItemCallback = null;
-	// legend title callback instance
-	private HtmlLegendTitleCallback legendTitleCallback = null;
+	private IsHtmlLegendDefaultOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -113,7 +113,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultOptions) {
+	HtmlLegendOptions(IsHtmlLegendDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
@@ -123,7 +123,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @param nativeObject native object into options
 	 * @param defaultOptions default options stored into defaults global
 	 */
-	HtmlLegendOptions(HtmlLegendDefaultsOptions defaultOptions, NativeObject nativeObject) {
+	HtmlLegendOptions(IsHtmlLegendDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(HtmlLegend.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
@@ -133,30 +133,6 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 			// stores default options
 			this.defaultOptions = defaultOptions;
 		}
-		// checks if CHARBA ID is not already stored
-		if (!has(Property.CHARBA_ID)) {
-			// stores the id based on a counter
-			setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
-		}
-	}
-
-	/**
-	 * Returns the chart id in order to retrieve the legend text callback for the options.
-	 * 
-	 * @return identifier of the options or {@link UndefinedValues#INTEGER} if does not exist
-	 */
-	int getCharbaId() {
-		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.impl.plugins.AbstractCursorPointerOptions#getCursorPointerAsString()
-	 */
-	@Override
-	final String getCursorPointerAsString() {
-		return defaultOptions.getCursorPointerAsString();
 	}
 
 	/**
@@ -173,6 +149,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return <code>true</code> if the legend is shown.
 	 */
+	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, defaultOptions.isDisplay());
 	}
@@ -183,7 +160,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @return the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
 	public HtmlLegendItemCallback getLegendItemCallback() {
-		return legendItemCallback != null ? legendItemCallback : defaultOptions.getLegendTextCallback();
+		return ITEM_CALLBACK.getCallback(this, defaultOptions.getLegendTextCallback());
 	}
 
 	/**
@@ -192,18 +169,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
 	 */
 	public void setLegendItemCallback(HtmlLegendItemCallback legendTextCallback) {
-		internalSetLegendItemCallback(legendTextCallback);
-		// stores legend callback into factory as cache
-		HtmlLegend.FACTORY.store(getCharbaId(), legendTextCallback);
-	}
-
-	/**
-	 * Sets the callback which can be implemented to change the text of legend for a specific item, as HTML.
-	 * 
-	 * @param legendTextCallback the callback which can be implemented to change the text of legend for a specific item, as HTML
-	 */
-	void internalSetLegendItemCallback(HtmlLegendItemCallback legendTextCallback) {
-		this.legendItemCallback = legendTextCallback;
+		ITEM_CALLBACK.setCallback(this, getId(), legendTextCallback, itemCallbackProxy.getProxy());
 	}
 
 	/**
@@ -211,8 +177,9 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return the callback which can be implemented to change the text of legend's title, as HTML
 	 */
+	@Override
 	public HtmlLegendTitleCallback getLegendTitleCallback() {
-		return legendTitleCallback != null ? legendTitleCallback : defaultOptions.getLegendTitleCallback();
+		return TITLE_CALLBACK.getCallback(this, defaultOptions.getLegendTitleCallback());
 	}
 
 	/**
@@ -221,21 +188,9 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * @param legendTitleCallback the callback which can be implemented to change the text of legend's title, as HTML
 	 */
 	public void setLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
-		internalSetLegendTitleCallback(legendTitleCallback);
-		// stores legend callback into factory as cache
-		HtmlLegend.FACTORY.store(getCharbaId(), legendTitleCallback);
+		TITLE_CALLBACK.setCallback(this, getId(), legendTitleCallback, titleCallbackProxy.getProxy());
 	}
 
-	/**
-	 * Sets the callback which can be implemented to change the text of legend's title, as HTML.
-	 * 
-	 * @param legendTitleCallback the callback which can be implemented to change the text of legend's title, as HTML
-	 */
-	void internalSetLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
-		this.legendTitleCallback = legendTitleCallback;
-	}
-
-	
 	/**
 	 * Sets the maximum amount of columns of legend.
 	 * 
@@ -251,6 +206,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return he maximum amount of columns of legend
 	 */
+	@Override
 	public int getMaximumLegendColumns() {
 		return getValue(Property.MAXIMUM_LEGEND_COLUMNS, defaultOptions.getMaximumLegendColumns());
 	}

@@ -231,7 +231,7 @@ final class SelectionHandler {
 			cursorOverClearSelection = null;
 		}
 	}
-	
+
 	/**
 	 * Manages the mouse leave event on canvas.
 	 * 
@@ -521,7 +521,7 @@ final class SelectionHandler {
 			// if the pixel is consistent
 			if (!Double.isNaN(nextEndPixel)) {
 				// calculates the gap
-				// if start value equals to 0 (first) then uses values from 0 to 1 
+				// if start value equals to 0 (first) then uses values from 0 to 1
 				// if start value greater than 0 (no first) then uses values from current value minus 1
 				double gap = (track.getStartValue() == 0D) ? (nextEndPixel - startPixel) / 2D : (startPixel - nextEndPixel) / 2D;
 				// increments the start and end points

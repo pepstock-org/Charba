@@ -44,7 +44,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions implements IsDatasetsItemsSelectorDefaultOptions{
+public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions implements IsDatasetsItemsSelectorDefaultOptions {
 
 	/**
 	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.

@@ -25,7 +25,12 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
+abstract class AbstractCursorPointerOptions extends AbstractPluginOptions implements IsDefaultCursorPointerOptions {
+
+	/**
+	 * Default cursor type when the cursor is over, {@link CursorType#POINTER}.
+	 */
+	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
 
 	/**
 	 * Name of properties of native object.
@@ -79,13 +84,6 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Returns the default cursor pointer as string to use when a property is missing.
-	 * 
-	 * @return the default cursor pointer as string to use when a property is missing
-	 */
-	abstract String getCursorPointerAsString();
-
-	/**
 	 * Sets the cursor type when the cursor is over the dataset item.
 	 * 
 	 * @param cursor cursor type when the cursor is over the dataset item
@@ -102,6 +100,7 @@ abstract class AbstractCursorPointerOptions extends AbstractPluginOptions {
 	 * 
 	 * @return cursor type when the cursor is over the dataset item
 	 */
+	@Override
 	public final CursorType getCursorPointer() {
 		return getValue(Property.CURSOR_POINTER, CursorType.values(), getCurrentCursor());
 	}

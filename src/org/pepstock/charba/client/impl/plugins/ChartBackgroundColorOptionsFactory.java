@@ -44,12 +44,12 @@ public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOpti
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ChartBackgroundColorDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartBackgroundColor.DEFAULTS_FACTORY);
+			ChartBackgroundColorOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ChartBackgroundColor.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new ChartBackgroundColorOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new ChartBackgroundColorOptions(ChartBackgroundColorDefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOpti
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class ChartBackgroundColorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ChartBackgroundColorDefaultsOptions> {
+	static final class ChartBackgroundColorDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ChartBackgroundColorOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -73,11 +73,8 @@ public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOpti
 		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ChartBackgroundColorDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			if (nativeObject != null) {
-				return new ChartBackgroundColorDefaultsOptions(nativeObject);
-			}
-			return ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE;
+		public ChartBackgroundColorOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			return new ChartBackgroundColorOptions(ChartBackgroundColorDefaultOptions.INSTANCE, nativeObject);
 		}
 	}
 

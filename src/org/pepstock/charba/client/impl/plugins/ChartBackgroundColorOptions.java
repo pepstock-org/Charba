@@ -32,7 +32,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
+public final class ChartBackgroundColorOptions extends AbstractPluginOptions implements IsChartBackgroundColorDefaultOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -66,7 +66,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	}
 
 	// defaults options instance
-	private final ChartBackgroundColorDefaultsOptions defaultOptions;
+	private final IsChartBackgroundColorDefaultOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -91,7 +91,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * 
 	 * @param defaultOptions defaults options to use to get values
 	 */
-	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultOptions) {
+	ChartBackgroundColorOptions(IsChartBackgroundColorDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
@@ -101,7 +101,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @param defaultOptions plugin default options
 	 * @param nativeObject native object into options
 	 */
-	ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions defaultOptions, NativeObject nativeObject) {
+	ChartBackgroundColorOptions(IsChartBackgroundColorDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartBackgroundColor.ID, nativeObject);
 		// checks if there is any default options
 		if (defaultOptions == null) {
@@ -118,7 +118,8 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the type of background color has been set.
 	 */
-	ColorType getColorType() {
+	@Override
+	public ColorType getColorType() {
 		return getValue(Property.COLOR_TYPE, ColorType.values(), defaultOptions.getColorType());
 	}
 
@@ -129,6 +130,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @return the background color.<br>
 	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
 	 */
+	@Override
 	public String getBackgroundColorAsString() {
 		// checks if color has been set
 		if (ColorType.COLOR.equals(getColorType())) {
@@ -161,6 +163,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @return the background gradient. <br>
 	 *         If it has been set a color or pattern, returns <code>null</code>
 	 */
+	@Override
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if gradient has been set
 		if (ColorType.GRADIENT.equals(getColorType())) {
@@ -184,6 +187,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions {
 	 * @return the background pattern. <br>
 	 *         If it has been set a color or pattern, returns <code>null</code>
 	 */
+	@Override
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if pattern has been set
 		if (ColorType.PATTERN.equals(getColorType())) {

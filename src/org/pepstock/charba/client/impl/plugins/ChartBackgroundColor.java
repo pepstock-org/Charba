@@ -310,7 +310,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			bgOptions = options.getPlugins().getOptions(ID, FACTORY);
 		} else {
 			// no options, creates new one with global/defaults values
-			bgOptions = new ChartBackgroundColorOptions(ChartBackgroundColorDefaultsOptions.DEFAULTS_INSTANCE);
+			bgOptions = new ChartBackgroundColorOptions(ChartBackgroundColorDefaultOptions.INSTANCE);
 			// if configured with a color
 			if (color != null) {
 				bgOptions.setBackgroundColor(color);

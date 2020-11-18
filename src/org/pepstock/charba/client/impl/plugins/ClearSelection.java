@@ -32,7 +32,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ClearSelection extends NativeObjectContainer implements IsDatasetsItemsSelectorDefaultClearSelection{
+public final class ClearSelection extends NativeObjectContainer implements IsDatasetsItemsSelectorDefaultClearSelection {
 
 	// clear selection image into URL base 64
 	private static final String CLEAR_SELECTION_18 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";

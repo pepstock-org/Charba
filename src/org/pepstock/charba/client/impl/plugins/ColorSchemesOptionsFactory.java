@@ -33,20 +33,23 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 		super(ColorSchemes.ID);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+	 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 	 */
 	@Override
 	public ColorSchemesOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 		// checks if defaults options are consistent
 		if (defaultValues != null) {
 			// defaults global options instance
-			ColorSchemesDefaultsOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ColorSchemes.DEFAULTS_FACTORY);
+			ColorSchemesOptions defaultOptions = loadDefaultsPluginOptions(defaultValues, ColorSchemes.DEFAULTS_FACTORY);
 			// creates the options by the native object and the defaults
 			return new ColorSchemesOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new ColorSchemesOptions(ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new ColorSchemesOptions(ColorSchemesDefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -54,7 +57,7 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static class ColorSchemesDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ColorSchemesDefaultsOptions> {
+	static class ColorSchemesDefaultsOptionsFactory extends AbstractPluginOptionsFactory<ColorSchemesOptions> {
 
 		/**
 		 * To avoid any instantiation.
@@ -63,17 +66,15 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 			super(ColorSchemes.ID);
 		}
 
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.defaults.IsDefaultPlugins)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory#create(org.pepstock.charba.client.commons.NativeObject,
+		 * org.pepstock.charba.client.defaults.IsDefaultPlugins)
 		 */
 		@Override
-		public ColorSchemesDefaultsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			// check if native object is consistent
-			if (nativeObject != null) {
-				// creates the default global option by native object
-				return new ColorSchemesDefaultsOptions(nativeObject);
-			}
-			return ColorSchemesDefaultsOptions.DEFAULTS_INSTANCE;
+		public ColorSchemesOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
+			return new ColorSchemesOptions(ColorSchemesDefaultOptions.INSTANCE, nativeObject);
 		}
 
 	}

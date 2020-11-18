@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
@@ -22,7 +23,6 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
 /**
@@ -31,12 +31,10 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartPointerOptions extends AbstractCursorPointerOptions {
+public final class ChartPointerOptions extends AbstractCursorPointerOptions implements IsChartPointerDefaultOptions {
 
-	/**
-	 * Default cursor type when the cursor is over the dataset item, {@link CursorType#POINTER}.
-	 */
-	public static final CursorType DEFAULT_CURSOR_POINTER = CursorType.POINTER;
+	// default list for elements
+	static final List<PointerElement> DEFAULTS_ELEMENTS = Arrays.asList(PointerElement.values());
 
 	/**
 	 * Name of properties of native object.
@@ -70,7 +68,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	}
 
 	// defaults global options instance
-	private ChartPointerDefaultsOptions defaultOptions;
+	private IsChartPointerDefaultOptions defaultOptions;
 
 	/**
 	 * Builds the object with new java script object setting the default value of plugin.<br>
@@ -95,7 +93,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(ChartPointerDefaultsOptions defaultOptions) {
+	ChartPointerOptions(IsChartPointerDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
@@ -105,7 +103,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * @param nativeObject native object into options
 	 * @param defaultOptions default options stored into defaults global
 	 */
-	ChartPointerOptions(ChartPointerDefaultsOptions defaultOptions, NativeObject nativeObject) {
+	ChartPointerOptions(IsChartPointerDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartPointer.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
@@ -117,15 +115,15 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.impl.plugins.AbstractCursorPointerOptions#getCursorPointerAsString()
-	 */
-	@Override
-	final String getCursorPointerAsString() {
-		return defaultOptions.getCursorPointerAsString();
-	}
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see org.pepstock.charba.client.impl.plugins.AbstractCursorPointerOptions#getCursorPointerAsString()
+	// */
+	// @Override
+	// final String getCursorPointerAsString() {
+	// return defaultOptions.getCursorPointerAsString();
+	// }
 
 	/**
 	 * Sets the chart elements in scope to {@link ChartPointer#ID} plugin.
@@ -142,6 +140,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions {
 	 * 
 	 * @return the chart elements in scope to {@link ChartPointer#ID} plugin
 	 */
+	@Override
 	public List<PointerElement> getElements() {
 		// checks if there is the property
 		if (has(Property.ELEMENTS)) {

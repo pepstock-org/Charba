@@ -21,7 +21,7 @@ package org.pepstock.charba.client.impl.plugins;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DatasetsItemsSelectorDefaultClearSelection implements IsDatasetsItemsSelectorDefaultClearSelection  {
+final class DatasetsItemsSelectorDefaultClearSelection implements IsDatasetsItemsSelectorDefaultClearSelection {
 
 	/**
 	 * Creates an empty object.

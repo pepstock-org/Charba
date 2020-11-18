@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
-import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
@@ -129,7 +127,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			if (options.getPlugins().hasOptions(ID)) {
 				pOptions = options.getPlugins().getOptions(ID, FACTORY);
 			} else {
-				pOptions = new HtmlLegendOptions(HtmlLegendDefaultsOptions.DEFAULTS_INSTANCE);
+				pOptions = new HtmlLegendOptions(HtmlLegendDefaultOptions.INSTANCE);
 			}
 			pluginOptions.put(chart.getId(), pOptions);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
@@ -265,18 +263,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			// removes callback proxies
 			pluginCallbackProxies.remove(chart.getId());
 			// removes the chart from options
-			HtmlLegendOptions oldOptions = pluginOptions.remove(chart.getId());
-			// scans all options to see if the options is used in another chart
-			for (HtmlLegendOptions options : pluginOptions.values()) {
-				// checks if the option si s equals to old one
-				if (options.getCharbaId() == oldOptions.getCharbaId()) {
-					return;
-				}
-			}
-			// if here, the old options is no longer used
-			// then it removes the legend callback from cache
-			FACTORY.store(oldOptions.getCharbaId(), (HtmlLegendItemCallback)null);
-			FACTORY.store(oldOptions.getCharbaId(), (HtmlLegendTitleCallback)null);
+			pluginOptions.remove(chart.getId());
 		}
 	}
 
