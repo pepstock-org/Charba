@@ -1,0 +1,25 @@
+
+name: Build
+
+on:
+   push:
+      branches:
+         - cuc
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
+      
+      steps:
+         - name: Checkout
+           uses: actions/checkout@v2
+         - name: Setup JDK
+           uses: actions/setup-java@v1
+           with:
+             java-version: '11'
+         - name: Ant init
+           run: ant init
+         - name: Ant build
+           run: ant buildAll
+         - name: Print artifacts
+           run: ls -R ./dist
