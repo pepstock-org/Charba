@@ -1,25 +1,34 @@
+# **************************************
+# * Charba GitHub Actions build script *
+# * Copyright © 2020 pepstock.org      *
+# **************************************
 
+# workflow name
 name: Build
 
+# runs only on push events on branch master
 on:
    push:
       branches:
          - master
 
+# workflow environment and steps
 jobs:
    build:
       runs-on: ubuntu-latest
       
       steps:
+         # checkout the repository content
          - name: Checkout
            uses: actions/checkout@v2
+         # setup a Java JDK
          - name: Setup JDK
            uses: actions/setup-java@v1
            with:
              java-version: '11'
-         - name: Ant init
-           run: ant init
+         # run the ant build
          - name: Ant build
            run: ant buildAll
+         # print out the artifacts list
          - name: Print artifacts
            run: ls -R ./dist
