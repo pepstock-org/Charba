@@ -17,45 +17,23 @@ package org.pepstock.charba.client.intl;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
-import org.pepstock.charba.client.intl.enums.CompactDisplay;
-import org.pepstock.charba.client.intl.enums.Currency;
-import org.pepstock.charba.client.intl.enums.CurrencyDisplay;
-import org.pepstock.charba.client.intl.enums.CurrencySign;
-import org.pepstock.charba.client.intl.enums.LocaleMatcher;
-import org.pepstock.charba.client.intl.enums.MeasureUnit;
-import org.pepstock.charba.client.intl.enums.MeasureUnitDisplay;
-import org.pepstock.charba.client.intl.enums.Notation;
-import org.pepstock.charba.client.intl.enums.NumberingSystem;
-import org.pepstock.charba.client.intl.enums.SignDisplay;
-import org.pepstock.charba.client.intl.enums.Style;
 
 /**
  * The object is a constructor for objects that enable language sensitive number formatting.<br>
- * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN</a> for more details.<br>
- * <br>
- * <b style="font-size: 16px">PAY ATTENTION</b><br>
- * {@link NumberFormat#formatToParts(double)} is not supported on Internet Explorer.
+ * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN</a> for more details.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class NumberFormat {
-	// empty options constants
-	private static final NativeObject EMPTY_OPTIONS = new NumberFormatOptions().nativeObject();
-	// format parts factory instance
-	private static final FormatPartsFactory FACTORY = new FormatPartsFactory();
-	// locale instance
-	private final CLocale locale;
-	// native number format instance
-	private final NativeNumberFormat nativeNumberFormat;
-	// resolver instance instance
-	// at the beginning is not set but it will be only once
-	private IsDefaultNumberFormatOptions resolvedOptions = null;
+public final class NumberFormat extends AbstractFormat<NumberFormatWrapper, NumberFormatOptions, Double, IsDefaultNumberFormatOptions> {
+	
+	/**
+	 * Creates object that enable language sensitive number formatting, using the defualt locale.
+	 */
+	public NumberFormat() {
+		this(CLocale.getDefault());
+	}
 
 	/**
 	 * Creates object that enable language sensitive number formatting, using the locale options.
@@ -73,30 +51,7 @@ public final class NumberFormat {
 	 * @param options options to configure the number format
 	 */
 	public NumberFormat(CLocale locale, NumberFormatOptions options) {
-		// checks if locale is consistent
-		if (locale == null) {
-			throw new IllegalArgumentException("Locale argument is null");
-		}
-		// stores locale
-		this.locale = locale;
-		// checks if the locale is supported
-		ArrayString supportedLocales = NativeNumberFormat.supportedLocalesOf(ArrayString.fromOrEmpty(locale.getIdentifier()), BaseFormatOptions.LOOKUP.nativeObject());
-		// checks if is supported
-		if (supportedLocales.length() == 0) {
-			// if not, exception
-			throw new IllegalArgumentException("Locale '" + locale.getIdentifier() + "' is not supported");
-		}
-		// create the native number format
-		this.nativeNumberFormat = new NativeNumberFormat(locale.getIdentifier(), options != null ? options.nativeObject() : EMPTY_OPTIONS);
-	}
-
-	/**
-	 * Returns the locale which has initialized the number format.
-	 * 
-	 * @return the locale which has initialized the number format
-	 */
-	public CLocale getLocale() {
-		return locale;
+		super(locale, options);
 	}
 
 	/**
@@ -105,26 +60,8 @@ public final class NumberFormat {
 	 * @param value the number to format
 	 * @return the number into a string according to the locale and formatting options
 	 */
-	public String format(double value) {
-		return nativeNumberFormat.format(value);
-	}
-
-	/**
-	 * Returns a new object with properties reflecting the locale and number formatting options computed during initialization of this object.
-	 * 
-	 * @return new object with properties reflecting the locale and number formatting options computed during initialization of this object
-	 */
-	public IsDefaultNumberFormatOptions resolvedOptions() {
-		// checks if already called
-		if (resolvedOptions == null) {
-			// creates a number format options by the native object
-			// returned by resolved option
-			NumberFormatOptions formatOptions = new NumberFormatOptions(nativeNumberFormat.resolvedOptions());
-			// creates the resolved options
-			resolvedOptions = new ResolvedOptions(formatOptions);
-		}
-		// returns the resolved options
-		return resolvedOptions;
+	public final String format(double value) {
+		return super.format(value);
 	}
 
 	/**
@@ -137,223 +74,28 @@ public final class NumberFormat {
 	 * @param value number to format
 	 * @return an array of objects containing the formatted number in parts.
 	 */
-	public List<FormatPart> formatToParts(double value) {
-		// gets array of object
-		ArrayObject array = nativeNumberFormat.formatToParts(value);
-		// and transforms it in a list
-		return ArrayListHelper.unmodifiableList(array, FACTORY);
+	public final List<FormatPart> formatToParts(double value) {
+		return super.formatToParts(value);
 	}
 
-	/**
-	 * Internal format part factory in order to be used when {@link NumberFormat#formatToParts(double)} is invoked.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @see org.pepstock.charba.client.intl.AbstractFormat#supportedLocalesOf(org.pepstock.charba.client.intl.CLocale)
 	 */
-	private static class FormatPartsFactory implements NativeObjectContainerFactory<FormatPart> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
-		 */
-		@Override
-		public FormatPart create(NativeObject nativeObject) {
-			return new FormatPart(nativeObject);
-		}
-
+	@Override
+	ArrayString supportedLocalesOf(CLocale locale) {
+		return NativeNumberFormat.supportedLocalesOf(ArrayString.fromOrEmpty(locale.getIdentifier()), BaseFormatOptions.LOOKUP.nativeObject());
 	}
 
-	/**
-	 * Wrapper of a number format options in order to be consumed by its interface, when the resolve options methods has been invoked.<br>
-	 * Wrapper is need in order to return only the interface with "get" methods.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @see org.pepstock.charba.client.intl.AbstractFormat#createFormat(org.pepstock.charba.client.intl.CLocale, java.lang.Object)
 	 */
-	private static class ResolvedOptions implements IsDefaultNumberFormatOptions {
-		// format options instance
-		private final NumberFormatOptions delegated;
-
-		/**
-		 * Creates the resolved options wrapping a normal number format options.
-		 * 
-		 * @param delegated number format options to o wrap
-		 */
-		private ResolvedOptions(NumberFormatOptions delegated) {
-			this.delegated = delegated;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultBaseFormatOptions#getLocaleMatcher()
-		 */
-		@Override
-		public LocaleMatcher getLocaleMatcher() {
-			return delegated.getLocaleMatcher();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultBaseFormatOptions#getNumberingSystem()
-		 */
-		@Override
-		public NumberingSystem getNumberingSystem() {
-			return delegated.getNumberingSystem();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getCompactDisplay()
-		 */
-		@Override
-		public CompactDisplay getCompactDisplay() {
-			return delegated.getCompactDisplay();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getCurrency()
-		 */
-		@Override
-		public Currency getCurrency() {
-			return delegated.getCurrency();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getCurrencyDisplay()
-		 */
-		@Override
-		public CurrencyDisplay getCurrencyDisplay() {
-			return delegated.getCurrencyDisplay();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getCurrencySign()
-		 */
-		@Override
-		public CurrencySign getCurrencySign() {
-			return delegated.getCurrencySign();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getNotation()
-		 */
-		@Override
-		public Notation getNotation() {
-			return delegated.getNotation();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getSignDisplay()
-		 */
-		@Override
-		public SignDisplay getSignDisplay() {
-			return delegated.getSignDisplay();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getStyle()
-		 */
-		@Override
-		public Style getStyle() {
-			return delegated.getStyle();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getUnitsOfMeasure()
-		 */
-		@Override
-		public List<MeasureUnit> getUnitsOfMeasure() {
-			return delegated.getUnitsOfMeasure();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getUnitOfMeasureDisplay()
-		 */
-		@Override
-		public MeasureUnitDisplay getUnitOfMeasureDisplay() {
-			return delegated.getUnitOfMeasureDisplay();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#isUseGrouping()
-		 */
-		@Override
-		public boolean isUseGrouping() {
-			return delegated.isUseGrouping();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getMinimumIntegerDigits()
-		 */
-		@Override
-		public int getMinimumIntegerDigits() {
-			return delegated.getMinimumIntegerDigits();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getMinimumFractionDigits()
-		 */
-		@Override
-		public int getMinimumFractionDigits() {
-			return delegated.getMinimumFractionDigits();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getMaximumFractionDigits()
-		 */
-		@Override
-		public int getMaximumFractionDigits() {
-			return delegated.getMaximumFractionDigits();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getMinimumSignificantDigits()
-		 */
-		@Override
-		public int getMinimumSignificantDigits() {
-			return delegated.getMinimumSignificantDigits();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions#getMaximumSignificantDigits()
-		 */
-		@Override
-		public int getMaximumSignificantDigits() {
-			return delegated.getMaximumSignificantDigits();
-		}
-
+	@Override
+	NumberFormatWrapper createFormat(CLocale locale, NumberFormatOptions options) {
+		return new NumberFormatWrapper(locale, options);
 	}
 
 }

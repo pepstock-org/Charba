@@ -97,7 +97,9 @@ public final class CLocale {
 	 * DOM element id for meta element where to set the GWT property
 	 */
 	private static final String GWT_PROPERTY_KEY = "gwt:property";
-
+	
+	// locale key constant to retrieve the default locale from platform
+	private static final Key LOCALE_KEY = Key.create(LOCALE_QUERY_STRING_PARAM_KEY);
 	// reference for default locale
 	private static CLocale defaultLocale = null;
 	// flag to know if the default must be kept align with the defaults
@@ -296,10 +298,10 @@ public final class CLocale {
 			CLocale tempLocale;
 			// extracts locale parameter from query string
 			String localeFromQueryString = DOM.getLocation().getParameter(LOCALE_QUERY_STRING_PARAM_KEY);
-			// extracts locale parameter from navigator
-			String localeFromNavigator = DOM.getNavigator().getLanguage();
 			// extracts locale parameter from meta elements
 			String localeFromMetaElements = getLocaleFromMetaElement();
+			// extracts locale parameter from platform
+			String localeFromPlatform = NativeNumberFormat.getDefaultLocale(LOCALE_KEY);
 			// ---------------------
 			// CHECK QUERY STRING
 			// ---------------------
@@ -313,12 +315,12 @@ public final class CLocale {
 				// ---------------------
 				// builds and store the locale
 				tempLocale = CLocaleBuilder.build(localeFromMetaElements);
-			} else if (CLocaleBuilder.isValid(localeFromNavigator)) {
+			} else if (CLocaleBuilder.isValid(localeFromPlatform)) {
 				// ---------------------
-				// CHECK NAVIGATOR language
+				// CHECK Platform LOCALE
 				// ---------------------
 				// builds and store the locale
-				tempLocale = CLocaleBuilder.build(localeFromNavigator);
+				tempLocale = CLocaleBuilder.build(localeFromPlatform);
 			} else {
 				// if here, sets the static default as "us"
 				tempLocale = US;

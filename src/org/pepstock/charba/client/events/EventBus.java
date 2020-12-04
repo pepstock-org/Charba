@@ -204,7 +204,7 @@ final class EventBus {
 	 * Performs all deferred actions, if there are.
 	 */
 	private void handleDeferredHandlerActions() {
-		// checks if thre is any deferred actions
+		// checks if there is any deferred actions
 		if (!deferredHandlerActions.isEmpty()) {
 			// gets iterator
 			Iterator<Runnable> iterator = deferredHandlerActions.iterator();
