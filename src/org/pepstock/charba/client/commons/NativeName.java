@@ -294,6 +294,16 @@ public final class NativeName {
 	public static final String NUMBER_FORMAT = "NumberFormat";
 
 	/**
+	 * Constant to bind java script object date formatter for localization, <b>{@value DATETIME_FORMAT}</b>.
+	 */
+	public static final String DATETIME_FORMAT = "DateTimeFormat";
+
+	/**
+	 * Constant to bind java script object date formatter for localization, <b>{@value DATETIME_FORMAT}</b>.
+	 */
+	public static final String DATE = "Date";
+
+	/**
 	 * To avoid any instantiation
 	 */
 	private NativeName() {

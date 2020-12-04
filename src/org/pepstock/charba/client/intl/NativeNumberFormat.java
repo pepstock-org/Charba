@@ -17,9 +17,12 @@ package org.pepstock.charba.client.intl;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
 
 /**
@@ -30,6 +33,14 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.NUMBER_FORMAT, namespace = NativeName.INTL)
 final class NativeNumberFormat {
+
+	/**
+	 * Creates object that enables language sensitive number formatting, with default.<br>
+	 * Used only internally to retrieve the locale default of the platform.
+	 */
+	private NativeNumberFormat() {
+		// must be empty
+	}
 
 	/**
 	 * Creates object that enables language sensitive number formatting.
@@ -67,14 +78,30 @@ final class NativeNumberFormat {
 	 * @return new object with properties reflecting the locale and number formatting options computed during initialization of this object
 	 */
 	native NativeObject resolvedOptions();
-	
+
 	/**
 	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
-	 * It is useful for custom formatting of number strings. 
+	 * It is useful for custom formatting of number strings.
 	 * 
 	 * @param value number to format
 	 * @return an array of objects containing the formatted number in parts.
 	 */
 	native ArrayObject formatToParts(double value);
+
+	/**
+	 * Returns the default locale, set into the platform.
+	 * 
+	 * @param key key of resolved options to get the locale, usually is "locale".
+	 * @return the default locale, set into the platform
+	 */
+	@JsOverlay
+	static String getDefaultLocale(Key key) {
+		// creates a number format
+		NativeNumberFormat format = new NativeNumberFormat();
+		// gets resolved options
+		NativeObject options = format.resolvedOptions();
+		// retrieves and returns the locale as string
+		return Id.getStringProperty(key, options);
+	}
 
 }
