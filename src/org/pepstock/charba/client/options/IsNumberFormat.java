@@ -56,7 +56,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -81,7 +81,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -91,7 +91,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * Sets the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -101,7 +101,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * Sets when to display the sign for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -119,7 +119,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -130,7 +130,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -140,7 +140,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
 	 * Sets the unit formatting style to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */

@@ -26,10 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * The object is a constructor for objects that enable language sensitive formatting.<br>
- * <br>
- * <b style="font-size: 16px">PAY ATTENTION</b><br>
- * {@link AbstractFormat#formatToParts(java.lang.Object)} is not supported on Internet Explorer.
+ * The object is a constructor for objects that enable language sensitive formatting.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <F> type of formatter
@@ -133,10 +130,7 @@ abstract class AbstractFormat<F extends AbtsractFormatWrapper<?, T, R>, O, T, R>
 
 	/**
 	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
-	 * It is useful for custom formatting of value strings.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer.
+	 * It is useful for custom formatting of value strings.
 	 * 
 	 * @param value value to format
 	 * @return an array of objects containing the formatted value in parts.
