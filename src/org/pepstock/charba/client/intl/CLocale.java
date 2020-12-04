@@ -41,7 +41,7 @@ import org.pepstock.charba.client.dom.elements.Meta;
  * <br>
  * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">MDN page</a> for more details.<br>
  * <b style="font-size: 16px">LOCALE auto recognition</b><br>
- * The <code>locale</code> client property can be specified using either a meta tag, as part of the query string in the host page’s URL ot from navigator language.<br>
+ * The <code>locale</code> client property can be specified using either a meta tag, as part of the query string in the host page’s URL or from default platform locale.<br>
  * If all cases are specified, the query string takes precedence, then meta data and finally the navigator language.
  * 
  * @author Andrea "Stock" Stocchero
