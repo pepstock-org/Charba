@@ -54,7 +54,7 @@ abstract class AbstractFormat<F extends AbtsractFormatWrapper<?, T, R>, O, T, R>
 	 * @param locale a locale instance
 	 * @param options options to configure the format
 	 */
-	public AbstractFormat(CLocale locale, O options) {
+	AbstractFormat(CLocale locale, O options) {
 		// checks if locale is consistent
 		if (locale == null) {
 			throw new IllegalArgumentException("Locale argument is null");
