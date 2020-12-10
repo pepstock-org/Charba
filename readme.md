@@ -230,6 +230,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
    * change the structure of scriptable options context.
      * remove `getIndex` method from `ScriptableContext` class, use getDataIndex instead.
+     * add type of the context.
    * change `fill` default option for `Line` element from `Fill.ORIGIN` to `Fill.FALSE`.  
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.

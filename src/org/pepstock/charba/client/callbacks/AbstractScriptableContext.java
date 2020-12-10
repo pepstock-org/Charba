@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ContextType;
 
 /**
  * Abstract implementation to map the context used as argument on options, datasets and scales callback.<br>
@@ -33,7 +34,8 @@ public abstract class AbstractScriptableContext {
 	 */
 	private enum Property implements Key
 	{
-		CHART("chart");
+		CHART("chart"),
+		TYPE("type");
 
 		// name value of property
 		private final String value;
@@ -98,6 +100,20 @@ public abstract class AbstractScriptableContext {
 	 */
 	public final IsChart getChart() {
 		return context.getChart().getChart();
+	}
+	
+	/**
+	 * Returns the type of the context.
+	 * 
+	 * @return the type of the context
+	 */
+	public ContextType getType() {
+		// checks if the property exists
+		if (exist(Property.TYPE)) {
+			return Key.getKeyByValue(ContextType.values(), context.getType(), ContextType.UNKNOWN);
+		}
+		// if here, context does not contain this property
+		return ContextType.UNKNOWN;
 	}
 
 	/**
