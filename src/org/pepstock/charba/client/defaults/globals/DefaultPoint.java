@@ -29,11 +29,11 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 
 	private static final double DEFAULT_RADIUS = 3D;
 
-	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
+	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_BACKGROUND_COLOR;
 
 	private static final int DEFAULT_BORDER_WIDTH = 1;
 
-	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
+	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_BORDER_COLOR;
 
 	private static final double DEFAULT_HIT_RADIUS = 1D;
 

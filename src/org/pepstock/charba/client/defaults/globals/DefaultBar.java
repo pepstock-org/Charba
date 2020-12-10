@@ -25,13 +25,13 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  */
 public final class DefaultBar extends AbstractDefaultOptionsElement implements IsDefaultBar {
 
-	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_COLOR;
+	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_BACKGROUND_COLOR;
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
 	private static final int DEFAULT_BORDER_RADIUS = 0;
 
-	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_COLOR;
+	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_BORDER_COLOR;
 
 	/**
 	 * To avoid any instantiation

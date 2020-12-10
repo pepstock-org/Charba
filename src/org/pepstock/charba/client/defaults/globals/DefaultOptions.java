@@ -35,8 +35,12 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	 * Default options scope for defaults options.
 	 */
 	public static final String SCOPE = "defaults";
-	
-	static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
+
+	static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
+
+	static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
+
+	private static final String DEFAULT_COLOR = "#666";
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
@@ -149,6 +153,26 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public String getColorAsString() {
 		return DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getBackgroundColorAsString()
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return DEFAULT_BACKGROUND_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getBorderColorAsString()
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return DEFAULT_BORDER_COLOR;
 	}
 
 	/*

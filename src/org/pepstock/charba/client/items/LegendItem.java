@@ -199,7 +199,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the fill style of the legend box or <code>null</code> if is not a color
 	 */
 	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(getValue(Property.FILL_STYLE, Defaults.get().getGlobal().getColorAsString()));
+		return ColorBuilder.parse(getValue(Property.FILL_STYLE, Defaults.get().getGlobal().getBackgroundColorAsString()));
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class LegendItem extends NativeObjectContainer {
 	public final IsColor getStrokeStyle() {
 		// checks if the stroke style has been set as color
 		if (isStrokeStyleAsColor()) {
-			return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getColorAsString()));
+			return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getBorderColorAsString()));
 		}
 		// if here, is not a color then returns null
 		return null;

@@ -530,7 +530,7 @@ final class HtmlLegendGenerator {
 				color.getStyle().setBackground(patternAsCss);
 			} else {
 				// if here, apply the fill color as background color
-				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getBackgroundColorAsString());
 			}
 		} else if (item.isFillStyleAsGradient()) {
 			// gets the gradient by legend item
@@ -552,7 +552,7 @@ final class HtmlLegendGenerator {
 				color.getStyle().setBackgroundSize(size);
 			} else {
 				// if here, apply the fill color as background color
-				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getColorAsString());
+				color.getStyle().setBackgroundColor(Defaults.get().getGlobal().getBackgroundColorAsString());
 			}
 		}
 	}

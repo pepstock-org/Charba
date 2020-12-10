@@ -126,6 +126,26 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getBackgroundColorAsString()
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return options.getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getBorderColorAsString()
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return options.getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLine()
 	 */
 	@Override

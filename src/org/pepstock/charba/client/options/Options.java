@@ -94,6 +94,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		DATASETS("datasets"),
 		// global options
 		COLOR("color"),
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
 		// simple properties
 		RESPONSIVE("responsive"),
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
@@ -532,19 +534,19 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param defaultColor color to use into chart.
+	 * @param color color to use into chart.
 	 */
-	public void setColor(IsColor defaultColor) {
-		setColor(IsColor.checkAndGetValue(defaultColor));
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param defaultColor color to use into chart.
+	 * @param color color to use into chart.
 	 */
-	public void setColor(String defaultColor) {
-		setValue(Property.COLOR, defaultColor);
+	public void setColor(String color) {
+		setValue(Property.COLOR, color);
 	}
 
 	/**
@@ -566,6 +568,80 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		return ColorBuilder.parse(getColorAsString());
 	}
 
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use into chart.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use into chart.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		setValue(Property.COLOR, backgroundColor);
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use into chart.
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use into chart.
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+	
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use into chart.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use into chart.
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.COLOR, borderColor);
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use into chart.
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use into chart.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+	
 	/**
 	 * If <code>false</code>, the lines between points are not drawn.
 	 * 

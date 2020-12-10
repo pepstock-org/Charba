@@ -55,7 +55,7 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	 */
 	@Override
 	public String getColorAsString() {
-		return Defaults.get().getGlobal().getColorAsString();
+		return Defaults.get().getGlobal().getBorderColorAsString();
 	}
 
 	/*
