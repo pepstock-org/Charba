@@ -36,7 +36,6 @@ import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
@@ -102,22 +101,6 @@ public final class Defaults {
 		NativeObject defaults = Chart.getDefaults();
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(defaults);
-		// --------------------
-		// the defaults of plugins provided by CHART.JS (legend, title and tooltips)
-		// set own default options into defaults.plugin and not longer to the default node.
-		// then it reads the default plugins and copies (reference of object)
-		// to the options nodes
-		// --------------------
-		// creates an internal map for plugin node
-		InternalPlugin internalPlugin = new InternalPlugin(wrapperDefaults.getPlugins());
-		// retrieves plugin default options
-		NativeObject titleOptions = internalPlugin.getOptions(DefaultPluginId.TITLE);
-		NativeObject legendOptions = internalPlugin.getOptions(DefaultPluginId.LEGEND);
-		NativeObject tooltipsOptions = internalPlugin.getOptions(DefaultPluginId.TOOLTIP);
-		// copies the native object on original nodes
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TITLE, titleOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.LEGEND, legendOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TOOLTIP, tooltipsOptions);
 		// --------------------
 		// creates global options wrapping the global property of CHART
 		this.options = new GlobalOptions(defaults);
@@ -567,15 +550,6 @@ public final class Defaults {
 		NativeObject getScales() {
 			return getValue(Property.SCALES);
 		}
-
-		/**
-		 * Returns the PLUGINS global options of chart as native object.
-		 * 
-		 * @return the PLUGINS global options
-		 */
-		NativeObject getPlugins() {
-			return getValue(Property.PLUGINS);
-		}
 		
 		/**
 		 * Returns the CONTROLLERS global options of chart as native object.
@@ -584,10 +558,6 @@ public final class Defaults {
 		 */
 		InternalControllers getControllers() {
 			return new InternalControllers(getValue(Property.CONTROLLERS));
-		}
-
-		void setPluginDefaultIntoOptions(DefaultPluginId plugin, NativeObject options) {
-			setValue(plugin.getPropertyName(), options);
 		}
 
 		/**
@@ -782,37 +752,6 @@ public final class Defaults {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Configures the default title which defines text to draw at the top of the chart.<br>
-	 * It extends the chart options for title because the global options for TITLE plugin are <code>defaults.plugin.title</code>.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalPlugin extends NativeObjectContainer {
-
-		/**
-		 * Creates the object with native object instance to be wrapped.
-		 * 
-		 * @param nativeObject native object instance to be wrapped.
-		 */
-		InternalPlugin(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the options of plugin.
-		 * 
-		 * @param plugin plugin id to use to get the options.
-		 * @return the options of plugin or <code>null</code> if does not exist
-		 */
-		NativeObject getOptions(DefaultPluginId plugin) {
-			return getValue(plugin);
-
-		}
-
 	}
 
 }

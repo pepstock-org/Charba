@@ -35,7 +35,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
+public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
 
 	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
@@ -112,12 +112,12 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param options options of the chart.
+	 * @param options plugins options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
+	Tooltips(Plugins options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, getDefaultValues(), getValue(Property.CALLBACKS));

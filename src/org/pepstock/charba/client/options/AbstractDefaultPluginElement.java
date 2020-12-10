@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of defaults
  */
-abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> extends AbstractModel<Options, T> implements IsDefaultPluginElement{
+abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> extends AbstractModel<Plugins, T> implements IsDefaultPluginElement{
 
 	/**
 	 * Name of properties of native object.
@@ -66,12 +66,12 @@ abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> ex
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param options options of the chart.
+	 * @param options plugins options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractDefaultPluginElement(Options options, Key childKey, T defaultValues, NativeObject nativeObject) {
+	AbstractDefaultPluginElement(Plugins options, Key childKey, T defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 

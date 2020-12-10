@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefaultHover {
+public final class Hover extends AbstractHover<Options, IsDefaultHover> implements IsDefaultHover {
 
 	/**
 	 * Name of properties of native object.

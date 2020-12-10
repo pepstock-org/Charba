@@ -60,6 +60,16 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
+	
+	/**
+	 * Returns the options for default plugin.
+	 * 
+	 * @param plugin default plugin id
+	 * @return the options for default plugin
+	 */
+	NativeObject getDefaultPluginOptions(DefaultPluginId plugin) {
+		return getValue(plugin);
+	}
 
 	/**
 	 * Returns the unmodifiable list of registered plugin ids.
