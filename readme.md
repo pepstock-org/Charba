@@ -149,6 +149,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * changes by new **CHART.JS version**:
+   * **Drop Internet Explorer 11 support**.
    * remove `isAnimating` method from `ChartNode` class.
    * remove `getBorderWidth` method from `ChartNode` class.
    * remove `getOuterRadius` method from `ChartNode` class.
