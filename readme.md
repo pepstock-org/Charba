@@ -275,7 +275,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   
 ### Features
 
- * **import last CHART.JS version,** [development available version, more than 3.0.0-beta](https://www.chartjs.org/dist/master/chart.min.js) on September 29th, 2020.
+ * **import last CHART.JS version,** [version 3.0.0-beta7](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-beta.7) on December 10th, 2020.
    * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
    * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
