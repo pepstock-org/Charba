@@ -42,6 +42,14 @@ final class NativeContext {
 	native Chart getChart();
 
 	/**
+	 * Returns the type of context.
+	 * 
+	 * @return the type of context
+	 */
+	@JsProperty
+	native String getType();
+	
+	/**
 	 * Returns true if element is active (hovered).
 	 * 
 	 * @return true if element is active (hovered)
@@ -96,6 +104,7 @@ final class NativeContext {
 	 */
 	@JsProperty
 	native NativeObject getTick();
+	
 	/**
 	 * Returns the index of the tick.
 	 * 

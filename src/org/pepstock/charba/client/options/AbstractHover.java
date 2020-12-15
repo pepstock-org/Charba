@@ -23,9 +23,11 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * Definitions about how elements appear, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @param <D> defaults provider class
  * @param <D> defaults provider class
  */
-abstract class AbstractHover<D> extends AbstractModel<Options, D> {
+abstract class AbstractHover<P extends AbstractModel<?, ?>, D> extends AbstractModel<P, D> {
 
 	/**
 	 * Name of properties of native object.
@@ -62,12 +64,12 @@ abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param options options of the chart.
+	 * @param options parent options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractHover(Options options, Key childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractHover(P options, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 

@@ -36,7 +36,6 @@ import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
@@ -50,11 +49,11 @@ import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -102,22 +101,6 @@ public final class Defaults {
 		NativeObject defaults = Chart.getDefaults();
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(defaults);
-		// --------------------
-		// the defaults of plugins provided by CHART.JS (legend, title and tooltips)
-		// set own default options into defaults.plugin and not longer to the default node.
-		// then it reads the default plugins and copies (reference of object)
-		// to the options nodes
-		// --------------------
-		// creates an internal map for plugin node
-		InternalPlugin internalPlugin = new InternalPlugin(wrapperDefaults.getPlugins());
-		// retrieves plugin default options
-		NativeObject titleOptions = internalPlugin.getOptions(DefaultPluginId.TITLE);
-		NativeObject legendOptions = internalPlugin.getOptions(DefaultPluginId.LEGEND);
-		NativeObject tooltipsOptions = internalPlugin.getOptions(DefaultPluginId.TOOLTIP);
-		// copies the native object on original nodes
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TITLE, titleOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.LEGEND, legendOptions);
-		wrapperDefaults.setPluginDefaultIntoOptions(DefaultPluginId.TOOLTIP, tooltipsOptions);
 		// --------------------
 		// creates global options wrapping the global property of CHART
 		this.options = new GlobalOptions(defaults);
@@ -236,7 +219,7 @@ public final class Defaults {
 			// checks if is a controller
 			if (type instanceof ControllerType) {
 				// cats to controller type
-				ControllerType controllerType = (ControllerType)type;
+				ControllerType controllerType = (ControllerType) type;
 				// registers if not register
 				controllerType.register();
 			}
@@ -569,25 +552,12 @@ public final class Defaults {
 		}
 
 		/**
-		 * Returns the PLUGINS global options of chart as native object.
-		 * 
-		 * @return the PLUGINS global options
-		 */
-		NativeObject getPlugins() {
-			return getValue(Property.PLUGINS);
-		}
-		
-		/**
 		 * Returns the CONTROLLERS global options of chart as native object.
 		 * 
 		 * @return the CONTROLLERS global options
 		 */
 		InternalControllers getControllers() {
 			return new InternalControllers(getValue(Property.CONTROLLERS));
-		}
-
-		void setPluginDefaultIntoOptions(DefaultPluginId plugin, NativeObject options) {
-			setValue(plugin.getPropertyName(), options);
 		}
 
 		/**
@@ -624,9 +594,9 @@ public final class Defaults {
 			return new ChartOptions(type, getControllers().getChartOptions(type), defaultOptions);
 		}
 	}
-	
+
 	private static class InternalControllers extends NativeObjectContainer {
-		
+
 		/**
 		 * Creates the item using a native java script object which contains all properties.
 		 * 
@@ -635,7 +605,7 @@ public final class Defaults {
 		InternalControllers(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		/**
 		 * Returns the chart options defaults by chart type.
 		 * 
@@ -644,14 +614,14 @@ public final class Defaults {
 		 */
 		NativeObject getChartOptions(Type type) {
 			// checks if type is present
-			if (isType(type, ObjectType.OBJECT)) { 
+			if (isType(type, ObjectType.OBJECT)) {
 				// checks if chart type is consistent
 				return getValue(Key.checkAndGetIfValid(type));
 			}
 			// if here, the type doesn't exist
 			return null;
 		}
-		
+
 	}
 
 	/**
@@ -742,10 +712,10 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 		 */
 		@Override
-		public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
+		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 			// checks if chart is consistent and has got cartesian axes
 			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType())) {
 				// gets options node
@@ -782,37 +752,6 @@ public final class Defaults {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Configures the default title which defines text to draw at the top of the chart.<br>
-	 * It extends the chart options for title because the global options for TITLE plugin are <code>defaults.plugin.title</code>.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalPlugin extends NativeObjectContainer {
-
-		/**
-		 * Creates the object with native object instance to be wrapped.
-		 * 
-		 * @param nativeObject native object instance to be wrapped.
-		 */
-		InternalPlugin(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the options of plugin.
-		 * 
-		 * @param plugin plugin id to use to get the options.
-		 * @return the options of plugin or <code>null</code> if does not exist
-		 */
-		NativeObject getOptions(DefaultPluginId plugin) {
-			return getValue(plugin);
-
-		}
-
 	}
 
 }

@@ -235,12 +235,6 @@ CharbaJsItemsHelper.isCanvasPattern = function(object, key) {};
  */
 CharbaJsItemsHelper.isCanvasGradient = function(object, key) {};
 /**
- * @param {Object} event 
- * @param {string} key 
- * @return {Object}
- */
-CharbaJsItemsHelper.nativeEvent = function(event, key) {};
-/**
  * @param {Object} object 
  * @param {number} pixel 
  * @return {number}

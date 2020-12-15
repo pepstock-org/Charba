@@ -149,6 +149,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * changes by new **CHART.JS version**:
+   * **Drop Internet Explorer 11 support**.
    * remove `isAnimating` method from `ChartNode` class.
    * remove `getBorderWidth` method from `ChartNode` class.
    * remove `getOuterRadius` method from `ChartNode` class.
@@ -229,6 +230,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
    * change the structure of scriptable options context.
      * remove `getIndex` method from `ScriptableContext` class, use getDataIndex instead.
+     * add type of the context.
+   * change `fill` default option for `Line` element from `Fill.ORIGIN` to `Fill.FALSE`.
+   * change the signatures of `Plugin` interface in order to manage new arguments of functions.
  * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -275,7 +279,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   
 ### Features
 
- * **import last CHART.JS version,** [development available version, more than 3.0.0-beta](https://www.chartjs.org/dist/master/chart.min.js) on September 29th, 2020.
+ * **import last CHART.JS version,** [version 3.0.0-beta7](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-beta.7) on December 10th, 2020.
    * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
    * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
@@ -337,6 +341,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add the `center` axes position and the position of the axis with respect to a data value.
    * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
    * add `onLabelPointStyle` method to `TooltipLabelCallback` interface and `TooltipLabelPointStyle` class in order to manage the point style into tooltip.
+   * add `backgroundColor` and `borderColor` default options.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -380,7 +385,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import **Datalabels plugin** from a [pepstock-org/chartjs-plugin-datalabels](https://github.com/pepstock-org/chartjs-plugin-datalabels) fork where the plugin has been changed in order to work with CHART.JS 3. This is a temporary solution waiting for the upgrade of the original plugin by the community.
  * implement **INTL NumberFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
    * implement `CLocale` class to manage locale objects.
-   * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.
+   * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.  
  * implement **INTL DateTimeFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
@@ -442,6 +447,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
+ * use new location for legend, title and tooltips options, into `plugins` options node.
 
 License
 -------

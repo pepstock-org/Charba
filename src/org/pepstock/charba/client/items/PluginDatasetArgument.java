@@ -15,27 +15,25 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
- * Contains all info for every item of tooltip.<br>
- * Created and passed by CHART.JS.<br>
- * It uses into the PLUGINS.
+ * This is a wrapper of java script object which represents a dataset.<br>
+ * This object is used in the plugins methods of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TooltipPluginItem extends NativeObjectContainer {
+public final class PluginDatasetArgument extends PluginUpdateArgument {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		TOOLTIP("tooltip");
+		INDEX("index"),
+		META("meta");
 
 		// name value of property
 		private final String value;
@@ -61,26 +59,36 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 
 	}
 
-	// model instance
-	private final TooltipModel node;
+	// dataset item instance
+	private final DatasetItem datasetItem;
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public TooltipPluginItem(PluginsEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// creates sub element
-		node = new TooltipModel(getValue(Property.TOOLTIP));
+	public PluginDatasetArgument(PluginsEnvelop<NativeObject> envelop) {
+		super(envelop);
+		// checks if data item is present
+		// creating it or setting an empty object
+		datasetItem = has(Property.META) ? new DatasetItem(getValue(Property.META)) : new DatasetItem();
 	}
 
 	/**
-	 * Returns the tooltip model.
+	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the tooltip model.
+	 * @return the index of the data inside the dataset.
 	 */
-	public TooltipModel getTooltip() {
-		return node;
+	public int getIndex() {
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the dataset item.
+	 * 
+	 * @return the dataset item.
+	 */
+	public DatasetItem getDatasetItem() {
+		return datasetItem;
 	}
 }

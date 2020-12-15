@@ -19,29 +19,23 @@ import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
- * This is a wrapper of java script object which represents a event.<br>
+ * This is a wrapper of java script object which the argument passed to plugin function.<br>
  * This object is used in the plugins methods of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EventPluginItem extends NativeObjectContainer {
-
-	// "native" is a keyword of Java therefore
-	// it can not add the key into enum.
-	private static final String NATIVE_KEY = "native";
+public class PluginUpdateArgument extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		TYPE("type"),
-		X("x"),
-		Y("y");
+		MODE("mode");
 
 		// name value of property
 		private final String value;
@@ -66,49 +60,25 @@ public final class EventPluginItem extends NativeObjectContainer {
 		}
 
 	}
-
+	
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public EventPluginItem(PluginsEnvelop<NativeObject> envelop) {
+	public PluginUpdateArgument(PluginsEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Returns the native event into the CHART.JS event.
+	 * Returns the update mode.
 	 * 
-	 * @return the native event into the CHART.JS event or <code>null</code> if doen't not exist.
+	 * @return the update mode.
 	 */
-	public BaseNativeEvent getEvent() {
-		return JsItemsHelper.get().nativeEvent(getNativeObject(), NATIVE_KEY);
-	}
-
-	/**
-	 * Returns X value of event.
-	 * 
-	 * @return X value of event.
-	 */
-	public int getX() {
-		return getValue(Property.X, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns Y value of event.
-	 * 
-	 * @return Y value of event.
-	 */
-	public int getY() {
-		return getValue(Property.Y, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the event type a string.
-	 * 
-	 * @return the event type a string.
-	 */
-	public String getType() {
-		return getValue(Property.TYPE, UndefinedValues.STRING);
+	public final IsAnimationModeKey getMode() {
+		// gets string value
+		String mode = getValue(Property.MODE, UndefinedValues.STRING);
+		// returns the update mode is consistent
+		return mode != null ? IsAnimationModeKey.create(mode) : null;
 	}
 }

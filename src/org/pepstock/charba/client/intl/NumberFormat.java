@@ -66,10 +66,7 @@ public final class NumberFormat extends AbstractFormat<NumberFormatWrapper, Numb
 
 	/**
 	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
-	 * It is useful for custom formatting of number strings.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer.
+	 * It is useful for custom formatting of number strings.
 	 * 
 	 * @param value number to format
 	 * @return an array of objects containing the formatted number in parts.

@@ -72,12 +72,12 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param options options of the chart.
+	 * @param options plugins options of the chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
+	Title(Plugins options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}

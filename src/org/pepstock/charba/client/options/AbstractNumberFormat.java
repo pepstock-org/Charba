@@ -105,7 +105,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -120,7 +120,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Returns the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -178,7 +178,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -194,7 +194,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the currency format to use on formatting
 	 */
@@ -207,7 +207,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Sets the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -222,7 +222,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Returns the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the formatting that should be displayed for the number
 	 */
@@ -235,7 +235,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Sets when to display the sign for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -250,7 +250,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Returns when to display the sign for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return when to display the sign for the number
 	 */
@@ -286,7 +286,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -302,7 +302,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -317,7 +317,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Returns an unmodifiable list of units to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return an unmodifiable list of unit to use in unit formatting
 	 */
@@ -330,7 +330,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Sets the unit formatting style to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */
@@ -345,7 +345,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	 * Returns the unit formatting style to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the unit formatting style to use in unit formatting
 	 */

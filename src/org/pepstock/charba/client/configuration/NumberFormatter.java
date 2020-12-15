@@ -95,7 +95,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -108,7 +108,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Returns the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -162,7 +162,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -176,7 +176,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the currency format to use on formatting
 	 */
@@ -189,7 +189,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Sets the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -202,7 +202,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Returns the formatting that should be displayed for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the formatting that should be displayed for the number
 	 */
@@ -215,7 +215,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Sets when to display the sign for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -228,7 +228,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Returns when to display the sign for the number.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return when to display the sign for the number
 	 */
@@ -262,7 +262,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -276,7 +276,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * If more that 1 unit has been passed, a compound unit has been created.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -289,7 +289,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Returns an unmodifiable list of units to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return an unmodifiable list of unit to use in unit formatting
 	 */
@@ -302,7 +302,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Sets the unit formatting style to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */
@@ -315,7 +315,7 @@ final class NumberFormatter implements IsNumberFormat{
 	 * Returns the unit formatting style to use in unit formatting.<br>
 	 * <br>
 	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer and Safari.
+	 * This method is not supported on Safari.
 	 * 
 	 * @return the unit formatting style to use in unit formatting
 	 */

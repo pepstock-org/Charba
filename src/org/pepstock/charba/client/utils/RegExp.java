@@ -59,13 +59,6 @@ public final class RegExp {
 	 * <br>
 	 * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
 	 * 
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * The following method is not supported on Internet Explorer.<br>
-	 * <ul>
-	 * <li>{@link RegExp#isSticky()}
-	 * </ul>
-	 * 
 	 * @param pattern the text of the regular expression.<br>
 	 *            Patterns can include special characters so they can match a wider range of values than would a literal string.
 	 * @param flags If specified, flags is a string that contains the flags to add.<br>
@@ -153,10 +146,6 @@ public final class RegExp {
 	/**
 	 * Returns <code>true</code> whether or not the search is sticky (searches in strings only from the index indicated by the last index property of this regular expression).<br>
 	 * It is a read-only property of an individual regular expression instance.
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Internet Explorer.
-	 * <br>
 	 * 
 	 * @return <code>true</code> whether or not the search is sticky (searches in strings only from the index indicated by the last index property of this regular expression)
 	 */

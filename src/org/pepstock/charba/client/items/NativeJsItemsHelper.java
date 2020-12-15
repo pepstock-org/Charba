@@ -17,7 +17,6 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
@@ -56,15 +55,6 @@ final class NativeJsItemsHelper {
 	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
 	 */
 	static native boolean isCanvasGradient(Object object, String key);
-
-	/**
-	 * Returns a chart native event from CHART.JS event.
-	 * 
-	 * @param event CHART.JS event
-	 * @param key key of java script object
-	 * @return a chart native event
-	 */
-	static native BaseNativeEvent nativeEvent(NativeObject event, String key);
 
 	/**
 	 * Used to get the data value from a given pixel.<br>

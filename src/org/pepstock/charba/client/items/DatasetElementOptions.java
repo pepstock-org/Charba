@@ -159,7 +159,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the background color of the dataset item.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getBackgroundColorAsString());
 	}
 
 	/**
@@ -282,7 +282,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the color of the dataset item border.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getColorAsString());
+		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getBorderColorAsString());
 	}
 
 	/**

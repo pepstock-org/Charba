@@ -28,34 +28,30 @@ public enum DefaultPluginId implements Key
 	/**
 	 * CHART.JS plugin to manage the legend.
 	 */
-	LEGEND("legend", null),
+	LEGEND("legend"),
 	/**
 	 * CHART.JS plugin to manage color filling on the chart.
 	 */
-	FILLER("filler", null),
+	FILLER("filler"),
 	/**
 	 * CHART.JS plugin to manage the title.
 	 */
-	TITLE("title", null),
+	TITLE("title"),
 	/**
 	 * CHART.JS plugin to manage the tooltips.
 	 */
-	TOOLTIP("tooltip", "tooltips");
+	TOOLTIP("tooltip");
 
 	// name value of property
 	private final String value;
-	// name value of property for options
-	private final Key propertyName;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
-	 * @param propertyName name of the property used inside the options for plugin defaults.
 	 */
-	private DefaultPluginId(String value, String propertyName) {
+	private DefaultPluginId(String value) {
 		this.value = value;
-		this.propertyName = propertyName == null ? this : Key.create(propertyName);
 	}
 
 	/*
@@ -66,15 +62,6 @@ public enum DefaultPluginId implements Key
 	@Override
 	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the name of the property used inside the options for plugin defaults.
-	 * 
-	 * @return the name of the property used inside the options for plugin defaults
-	 */
-	public Key getPropertyName() {
-		return propertyName;
 	}
 
 	/**

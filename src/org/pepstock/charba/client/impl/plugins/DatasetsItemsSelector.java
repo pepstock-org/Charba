@@ -33,6 +33,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
+import org.pepstock.charba.client.items.PluginEventArgument;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
@@ -318,15 +319,15 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
 	 */
 	@Override
-	public boolean onBeforeEvent(IsChart chart, BaseNativeEvent event) {
+	public boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+			// gets native event
+			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// manages event

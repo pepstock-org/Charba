@@ -29,6 +29,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
@@ -87,13 +88,12 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		HOVER("hover"),
 		ELEMENTS("elements"),
 		LAYOUT("layout"),
-		TOOLTIPS("tooltips"),
-		LEGEND("legend"),
-		TITLE("title"),
 		PLUGINS("plugins"),
 		DATASETS("datasets"),
 		// global options
 		COLOR("color"),
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
 		// simple properties
 		RESPONSIVE("responsive"),
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
@@ -188,12 +188,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		}
 		this.scope = scope;
 		// gets all sub elements
-		this.legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
 		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
 		this.hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
 		this.layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
-		this.title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
-		this.tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
 		this.plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
 		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
@@ -201,6 +198,15 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.spanGapper = new SpanGapper(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
+		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
+		// set own default options into defaults.plugin and not longer to the default node.
+		// then it reads the default plugins and copies (reference of object)
+		// to the options nodes
+		// --------------------
+		// loads default plugins
+		this.legend = new Legend(plugins, DefaultPluginId.LEGEND, getDefaultValues().getLegend(), plugins.getDefaultPluginOptions(DefaultPluginId.LEGEND));
+		this.title = new Title(plugins, DefaultPluginId.TITLE, getDefaultValues().getTitle(), plugins.getDefaultPluginOptions(DefaultPluginId.TITLE));
+		this.tooltips = new Tooltips(plugins, DefaultPluginId.TOOLTIP, getDefaultValues().getTooltips(), plugins.getDefaultPluginOptions(DefaultPluginId.TOOLTIP));
 	}
 
 	/**
@@ -532,19 +538,19 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param defaultColor color to use into chart.
+	 * @param color color to use into chart.
 	 */
-	public void setColor(IsColor defaultColor) {
-		setColor(IsColor.checkAndGetValue(defaultColor));
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param defaultColor color to use into chart.
+	 * @param color color to use into chart.
 	 */
-	public void setColor(String defaultColor) {
-		setValue(Property.COLOR, defaultColor);
+	public void setColor(String color) {
+		setValue(Property.COLOR, color);
 	}
 
 	/**
@@ -566,6 +572,80 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		return ColorBuilder.parse(getColorAsString());
 	}
 
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use into chart.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use into chart.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		setValue(Property.COLOR, backgroundColor);
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use into chart.
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use into chart.
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+	
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use into chart.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use into chart.
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.COLOR, borderColor);
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use into chart.
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use into chart.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+	
 	/**
 	 * If <code>false</code>, the lines between points are not drawn.
 	 * 

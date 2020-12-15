@@ -329,8 +329,8 @@
 	 @return an array of labels
     */
     CharbaJsChartHelper.generateDefaultLabels = function(chart, options) {
-    	if (options != null && typeof options.legend === 'object' && typeof options.legend.labels === 'object' && typeof options.legend.labels.generateLabels === 'function'){
-    		return options.legend.labels.generateLabels.call(chart, chart);
+    	if (options != null && typeof options.plugins === 'object' && typeof options.plugins.legend === 'object' && typeof options.plugins.legend.labels === 'object' && typeof options.plugins.legend.labels.generateLabels === 'function'){
+    		return options.plugins.legend.labels.generateLabels.call(chart, chart);
      	}
     	return null;
     }
@@ -344,8 +344,8 @@
 	 @param item legend item native  
     */
     CharbaJsChartHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {
-    	if (options != null && typeof options.legend === 'object' && typeof options.legend[key] === 'function'){
-    		options.legend[key].call(chart, event, item, chart.legend);
+    	if (options != null && typeof options.plugins === 'object' && typeof options.plugins.legend === 'object' && typeof options.plugins.legend[key] === 'function'){
+    		options.plugins.legend[key].call(chart, event, item, chart.legend);
     	}
     }
     /*
@@ -402,16 +402,6 @@
     CharbaJsItemsHelper.isCanvasGradient = function(obj, key) {
    		return obj[key] instanceof CanvasGradient;
     } 
-    /*
-	 Returns a chart native event from CHART.JS event.
-	  
-	 @param obj native event instance
-	 @param key key of java script object
-	 @return a chart native event
-    */
-    CharbaJsItemsHelper.nativeEvent = function(obj, key) {
-    	return obj[key];
-    }    
     /*
 	 Used to get the data value from a given pixel. This is the inverse of getPixelForValue
      The coordinate (0, 0) is at the upper-left corner of the canvas

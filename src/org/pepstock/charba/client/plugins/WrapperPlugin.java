@@ -24,16 +24,15 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.DatasetPluginItem;
-import org.pepstock.charba.client.items.EventPluginItem;
-import org.pepstock.charba.client.items.SizeItem;
-import org.pepstock.charba.client.items.TooltipPluginItem;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.items.PluginDatasetArgument;
+import org.pepstock.charba.client.items.PluginEventArgument;
+import org.pepstock.charba.client.items.PluginResizeArgument;
+import org.pepstock.charba.client.items.PluginTooltipArgument;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 
 import jsinterop.annotations.JsFunction;
 
@@ -50,477 +49,42 @@ final class WrapperPlugin extends NativeObjectContainer {
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
 	/**
-	 * Java script FUNCTION callback called before and after initialization.
+	 * Java script FUNCTION callback called without providing any value.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyInitCallback {
+	interface ProxyWithoutReturnValueCallback {
 
 		/**
-		 * Called after 'chart' has been initialized and before and after the first update.
+		 * Called without providing any value.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before chart rendering.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeUpdateCallback {
-
-		/**
-		 * Called before updating 'chart'.<br>
-		 * If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param args the call arguments.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart update.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after chart rendering.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterUpdateCallback {
-
-		/**
-		 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param args the call arguments.
+		 * @param chart the chart instance.
+		 * @param args argument object
 		 * @param options plugin options set by user into chart options.
 		 */
 		void call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
 
 	/**
-	 * Java script FUNCTION callback called before laying out 'chart'.
+	 * Java script FUNCTION callback called with return value.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyBeforeLayoutCallback {
+	interface ProxyWithReturnValueCallback {
 
 		/**
-		 * Called before laying out 'chart'.<br>
-		 * If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
+		 * Called with return value.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart layout.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after laying out 'chart'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterLayoutCallback {
-
-		/**
-		 * Called after the 'chart' has been layed out.<br>
-		 * Note that this hook will not be called if the layout update has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before updating the 'chart' datasets.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDatasetsUpdateCallback {
-
-		/**
-		 * Called before updating the 'chart' datasets.<br>
-		 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param args the call arguments.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the datasets update.
+		 * @param chart the chart instance
+		 * @param args the call arguments
+		 * @param options plugin options set by user into chart options
+		 * @return <code>false</code> to cancel the chart operations
 		 */
 		boolean call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after updating the 'chart' datasets.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDatasetsUpdateCallback {
-
-		/**
-		 * Called after the 'chart' datasets have been updated.<br>
-		 * Note that this hook will not be called if the datasets update has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param args the call arguments.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before updating the 'chart' dataset at the given 'args.index'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDatasetUpdateCallback {
-
-		/**
-		 * Called before updating the 'chart' dataset at the given 'args.index'.<br>
-		 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart datasets drawing.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after updating the 'chart' dataset at the given 'args.index'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDatasetUpdateCallback {
-
-		/**
-		 * Called after the 'chart' datasets at the given 'args.index' has been updated.<br>
-		 * Note that this hook will not be called if the datasets update has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before rendering 'chart'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeRenderCallback {
-
-		/**
-		 * Called before rendering 'chart'.<br>
-		 * If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart rendering.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after rendering 'chart'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterRenderCallback {
-
-		/**
-		 * Called after the 'chart' has been fully rendered (and animation completed).<br>
-		 * Note that this hook will not be called if the rendering has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before drawing 'chart'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDrawCallback {
-
-		/**
-		 * Called before drawing 'chart' at every animation frame.<br>
-		 * If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart drawing.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after drawing 'chart'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDrawCallback {
-
-		/**
-		 * Called after the 'chart' has been drawn.<br>
-		 * Note that this hook will not be called if the drawing has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before drawing 'chart' datasets.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDatasetsDrawCallback {
-
-		/**
-		 * Called before drawing the 'chart' datasets.<br>
-		 * If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart datasets drawing.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after drawing 'chart' datasets.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDatasetsDrawCallback {
-
-		/**
-		 * Called after the 'chart' datasets have been drawn.<br>
-		 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before drawing 'chart' dataset at the given 'args.index'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDatasetDrawCallback {
-
-		/**
-		 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order).<br>
-		 * If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart datasets drawing.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after drawing 'chart' dataset at the given 'args.index'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDatasetDrawCallback {
-
-		/**
-		 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).<br>
-		 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject item, Object options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before drawing the 'tooltip'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeTooltipDrawCallback {
-
-		/**
-		 * Called before drawing the 'tooltip'.<br>
-		 * If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to cancel the chart tooltip drawing.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after drawing the 'tooltip'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterTooltipDrawCallback {
-
-		/**
-		 * Called after drawing the 'tooltip'.<br>
-		 * Note that this hook will not be called if the tooltip drawing has been previously cancelled.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called before processing the specified 'event'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeEventCallback {
-
-		/**
-		 * Called before processing the specified 'event'.<br>
-		 * If any plugin returns <code>false</code>, the event will be discarded.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 * @return <code>false</code> to discard the event.
-		 */
-		boolean call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after processing the specified 'event'.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterEventCallback {
-
-		/**
-		 * Called after the 'event' has been consumed.<br>
-		 * Note that this hook will not be called if the 'event' has been previously discarded.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param item native item instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject item, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after the chart as been resized.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyResizeCallback {
-
-		/**
-		 * Called after the chart as been resized.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param size The new canvas display size (eq. canvas.style width and height).
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject size, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called during chart reset.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyResetCallback {
-
-		/**
-		 * Called during chart reset.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called after the chart as been resized.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyDestroyCallback {
-
-		/**
-		 * Called after the chart as been destroyed.
-		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param chart The chart instance.
-		 * @param options plugin options set by user into chart options.
-		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject options);
 	}
 
 	// ---------------------------
@@ -584,62 +148,100 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	// ---------------------------
-	// -- CALLBACKS PROXIES ---
+	// -- CALLBACKS PROXIES 
 	// ---------------------------
-	// callback proxy to invoke the afterDatasetDraw function
-	private final CallbackProxy<ProxyAfterDatasetDrawCallback> afterDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetUpdate function
-	private final CallbackProxy<ProxyAfterDatasetUpdateCallback> afterDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetsDraw function
-	private final CallbackProxy<ProxyAfterDatasetsDrawCallback> afterDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetsUpdate function
-	private final CallbackProxy<ProxyAfterDatasetsUpdateCallback> afterDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDraw function
-	private final CallbackProxy<ProxyAfterDrawCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterEvent function
-	private final CallbackProxy<ProxyAfterEventCallback> afterEventCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterInit function
-	private final CallbackProxy<ProxyInitCallback> afterInitCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterLayout function
-	private final CallbackProxy<ProxyAfterLayoutCallback> afterLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterRender function
-	private final CallbackProxy<ProxyAfterRenderCallback> afterRenderCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterTooltipDraw function
-	private final CallbackProxy<ProxyAfterTooltipDrawCallback> afterTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterUpdate function
-	private final CallbackProxy<ProxyAfterUpdateCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeDatasetDraw function
-	private final CallbackProxy<ProxyBeforeDatasetDrawCallback> beforeDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeDatasetUpdate function
-	private final CallbackProxy<ProxyBeforeDatasetUpdateCallback> beforeDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeDatasetsDraw function
-	private final CallbackProxy<ProxyBeforeDatasetsDrawCallback> beforeDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeDatasetsUpdate function
-	private final CallbackProxy<ProxyBeforeDatasetsUpdateCallback> beforeDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeDraw function
-	private final CallbackProxy<ProxyBeforeDrawCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeEvent function
-	private final CallbackProxy<ProxyBeforeEventCallback> beforeEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- INIT 
+	// ---------------------------
 	// callback proxy to invoke the beforeInit function
-	private final CallbackProxy<ProxyInitCallback> beforeInitCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeLayout function
-	private final CallbackProxy<ProxyBeforeLayoutCallback> beforeLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeRender function
-	private final CallbackProxy<ProxyBeforeRenderCallback> beforeRenderCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the beforeTooltipDraw function
-	private final CallbackProxy<ProxyBeforeTooltipDrawCallback> beforeTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeInitCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterInit function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterInitCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- UPDATE 
+	// ---------------------------
 	// callback proxy to invoke the beforeUpdate function
-	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the destroy function
-	private final CallbackProxy<ProxyDestroyCallback> destroyCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the resize function
-	private final CallbackProxy<ProxyResizeCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterUpdate function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DATASETS UPDATE 
+	// ---------------------------
+	// callback proxy to invoke the beforeDatasetsUpdate function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDatasetsUpdate function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DATASET UPDATE 
+	// ---------------------------
+	// callback proxy to invoke the beforeDatasetUpdate function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDatasetUpdate function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- LAYOUT 
+	// ---------------------------
+	// callback proxy to invoke the beforeLayout function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterLayout function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- RENDER 
+	// ---------------------------
+	// callback proxy to invoke the beforeRender function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeRenderCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterRender function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterRenderCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DRAW 
+	// ---------------------------
+	// callback proxy to invoke the beforeDraw function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDraw function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DATASETS DRAW 
+	// ---------------------------
+	// callback proxy to invoke the beforeDatasetsDraw function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDatasetsDraw function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DATASET DRAW 
+	// ---------------------------	
+	// callback proxy to invoke the beforeDatasetDraw function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDatasetDraw function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- EVENT 
+	// ---------------------------	
+	// callback proxy to invoke the beforeEvent function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterEvent function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- TOOLTIP 
+	// ---------------------------	
+	// callback proxy to invoke the beforeTooltipDraw function
+	private final CallbackProxy<ProxyWithReturnValueCallback> beforeTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterTooltipDraw function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- RESET 
+	// ---------------------------	
 	// callback proxy to invoke the reset function
-	private final CallbackProxy<ProxyResetCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// constants property needed to get the update mode from args calls
-	// of before/after methods
-	private static final Key MODE_PROPERTY = Key.create("mode");
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- RESIZE 
+	// ---------------------------	
+	// callback proxy to invoke the resize function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- DESTROY 
+	// ---------------------------		
+	// callback proxy to invoke the destroy function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> destroyCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// user plugin implementation
 	private final Plugin delegation;
@@ -660,56 +262,98 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
+		// ---------------------------
+		// -- INIT 
+		// ---------------------------
 		// invoke user method implementation
-		afterDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetDraw(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<>(item, true))));
+		beforeInitCallbackProxy.setCallback((context, chart, args, options) -> onBeforeInit(chart.getChart()));
 		// invoke user method implementation
-		afterDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onAfterDatasetUpdate(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<>(item, true))));
+		afterInitCallbackProxy.setCallback((context, chart, args, options) -> onAfterInit(chart.getChart(), chart));
+		// ---------------------------
+		// -- UPDATE 
+		// ---------------------------
 		// invoke user method implementation
-		afterDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDatasetsDraw(chart.getChart()));
+		afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
+		beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- DATASETS UPDATE 
+		// ---------------------------
 		// invoke user method implementation
-		afterDrawCallbackProxy.setCallback((context, chart, options) -> onAfterDraw(chart.getChart()));
+		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterEventCallbackProxy.setCallback((context, chart, item, options) -> onAfterEvent(chart.getChart(), new EventPluginItem(new PluginsEnvelop<>(item, true))));
+		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- DATASET UPDATE 
+		// ---------------------------
 		// invoke user method implementation
-		afterInitCallbackProxy.setCallback((context, chart, options) -> onAfterInit(chart.getChart(), chart));
+		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterLayoutCallbackProxy.setCallback((context, chart, options) -> onAfterLayout(chart.getChart()));
+		afterDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- LAYOUT 
+		// ---------------------------
 		// invoke user method implementation
-		afterRenderCallbackProxy.setCallback((context, chart, options) -> onAfterRender(chart.getChart()));
+		beforeLayoutCallbackProxy.setCallback((context, chart, args, options) -> onBeforeLayout(chart.getChart()));
 		// invoke user method implementation
-		afterTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onAfterTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<>(item, true))));
+		afterLayoutCallbackProxy.setCallback((context, chart, args, options) -> onAfterLayout(chart.getChart()));
+		// ---------------------------
+		// -- RENDER 
+		// ---------------------------
 		// invoke user method implementation
-		afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
+		beforeRenderCallbackProxy.setCallback((context, chart, args, options) -> onBeforeRender(chart.getChart()));
 		// invoke user method implementation
-		beforeDatasetDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetDraw(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<>(item, true))));
+		afterRenderCallbackProxy.setCallback((context, chart, args, options) -> onAfterRender(chart.getChart()));
+		// ---------------------------
+		// -- DRAW 
+		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, item, options) -> onBeforeDatasetUpdate(chart.getChart(), new DatasetPluginItem(new PluginsEnvelop<>(item, true))));
+		beforeDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
-		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDatasetsDraw(chart.getChart()));
+		afterDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDraw(chart.getChart()));
+		// ---------------------------
+		// -- DATASETS DRAW 
+		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
+		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
-		beforeDrawCallbackProxy.setCallback((context, chart, options) -> onBeforeDraw(chart.getChart()));
+		afterDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsDraw(chart.getChart()));
+		// ---------------------------
+		// -- DATASET DRAW 
+		// ---------------------------	
 		// invoke user method implementation
-		beforeEventCallbackProxy.setCallback((context, chart, item, options) -> onBeforeEvent(chart.getChart(), new EventPluginItem(new PluginsEnvelop<>(item, true))));
+		beforeDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		beforeInitCallbackProxy.setCallback((context, chart, options) -> onBeforeInit(chart.getChart()));
+		afterDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- EVENT 
+		// ---------------------------	
 		// invoke user method implementation
-		beforeLayoutCallbackProxy.setCallback((context, chart, options) -> onBeforeLayout(chart.getChart()));
+		beforeEventCallbackProxy.setCallback((context, chart, args, options) -> onBeforeEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		beforeRenderCallbackProxy.setCallback((context, chart, options) -> onBeforeRender(chart.getChart()));
+		afterEventCallbackProxy.setCallback((context, chart, args, options) -> onAfterEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- TOOLTIP 
+		// ---------------------------	
 		// invoke user method implementation
-		beforeTooltipDrawCallbackProxy.setCallback((context, chart, item, options) -> onBeforeTooltipDraw(chart.getChart(), new TooltipPluginItem(new PluginsEnvelop<>(item, true))));
+		beforeTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), Id.getStringProperty(MODE_PROPERTY, args)));
+		afterTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- RESET 
+		// ---------------------------	
 		// invoke user method implementation
-		destroyCallbackProxy.setCallback((context, chart, options) -> onDestroy(chart.getChart()));
+		resetCallbackProxy.setCallback((context, chart, args, options) -> onReset(chart.getChart()));
+		// ---------------------------
+		// -- RESIZE 
+		// ---------------------------	
 		// invoke user method implementation
-		resizeCallbackProxy.setCallback((context, chart, size, options) -> onResize(chart.getChart(), new SizeItem(new PluginsEnvelop<>(size, true))));
+		resizeCallbackProxy.setCallback((context, chart, args, options) -> onResize(chart.getChart(), new PluginResizeArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- DESTROY 
+		// ---------------------------		
 		// invoke user method implementation
-		resetCallbackProxy.setCallback((context, chart, options) -> onReset(chart.getChart()));
+		destroyCallbackProxy.setCallback((context, chart, args, options) -> onDestroy(chart.getChart()));
 		// ------------------------------------
 		// -- SET ALL FUNCTIONS into object ---
 		// ------------------------------------
@@ -836,10 +480,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
-	 * @param update update mode
+	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(IsChart chart, String update) {
+	boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// gets the counter
@@ -848,7 +492,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 			// if after increment the value is greater than1 means that this is the only current update
 			delegation.onBeginDrawing(chart, counter.incrementAndGet() > 1);
 			// invokes the before update, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeUpdate(chart, argument));
 		}
 		return true;
 	}
@@ -858,12 +502,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
-	 * @param update the update mode
+	 * @param argument the argument passed for update
 	 */
-	void onAfterUpdate(IsChart chart, String update) {
+	void onAfterUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null);
+			delegation.onAfterUpdate(chart, argument);
 		}
 	}
 
@@ -901,14 +545,14 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart chart instance
-	 * @param update update mode
+	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(IsChart chart, String update) {
+	boolean onBeforeDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
-			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null));
+			return checkAndGetBeforeContinue(chart, delegation.onBeforeDatasetsUpdate(chart, argument));
 		}
 		return true;
 	}
@@ -918,12 +562,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart chart instance
-	 * @param update update mode
+	 * @param argument the argument passed for update
 	 */
-	void onAfterDatasetsUpdate(IsChart chart, String update) {
+	void onAfterDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onAfterDatasetsUpdate(chart, update != null ? IsAnimationModeKey.create(update) : null);
+			delegation.onAfterDatasetsUpdate(chart, argument);
 		}
 	}
 
@@ -935,7 +579,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item) {
+	boolean onBeforeDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -951,7 +595,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item dataset item.
 	 */
-	void onAfterDatasetUpdate(IsChart chart, DatasetPluginItem item) {
+	void onAfterDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetUpdate(chart, item);
@@ -1067,7 +711,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item dataset item instance
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item) {
+	boolean onBeforeDatasetDraw(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -1083,7 +727,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item dataset item instance
 	 */
-	void onAfterDatasetDraw(IsChart chart, DatasetPluginItem item) {
+	void onAfterDatasetDraw(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetDraw(chart, item);
@@ -1101,7 +745,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item tooltip item instance
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	boolean onBeforeTooltipDraw(IsChart chart, TooltipPluginItem item) {
+	boolean onBeforeTooltipDraw(IsChart chart, PluginTooltipArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeTooltipDraw(chart, item);
@@ -1115,7 +759,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item tooltip item instance
 	 */
-	void onAfterTooltipDraw(IsChart chart, TooltipPluginItem item) {
+	void onAfterTooltipDraw(IsChart chart, PluginTooltipArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterTooltipDraw(chart, item);
@@ -1130,13 +774,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
 	 * @param chart chart instance
-	 * @param item event item instance
+	 * @param argument argument of event callback
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(IsChart chart, EventPluginItem item) {
-		// if consistent, both chart and event, calls plugin
-		if (IsChart.isValid(chart) && item.getEvent() != null) {
-			return delegation.onBeforeEvent(chart, item.getEvent());
+	boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			return delegation.onBeforeEvent(chart, argument);
 		}
 		return true;
 	}
@@ -1145,12 +789,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
 	 * 
 	 * @param chart chart instance
-	 * @param item event item instance
+	 * @param argument argument of event callback
 	 */
-	void onAfterEvent(IsChart chart, EventPluginItem item) {
-		// if consistent, both chart and event, calls plugin
-		if (IsChart.isValid(chart) && item.getEvent() != null) {
-			delegation.onAfterEvent(chart, item.getEvent());
+	void onAfterEvent(IsChart chart, PluginEventArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onAfterEvent(chart, argument);
 		}
 	}
 
@@ -1162,12 +806,12 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * Called after the chart as been resized.
 	 * 
 	 * @param chart chart instance
-	 * @param item The new canvas display size (eq. canvas.style width and height).
+	 * @param argument argument of method which contains the new canvas display size (eq. canvas.style width and height).
 	 */
-	void onResize(IsChart chart, SizeItem item) {
+	void onResize(IsChart chart, PluginResizeArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			delegation.onResize(chart, item);
+			delegation.onResize(chart, argument);
 		}
 	}
 

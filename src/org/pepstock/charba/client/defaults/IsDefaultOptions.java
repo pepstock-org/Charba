@@ -148,6 +148,20 @@ public interface IsDefaultOptions {
 	 * @return color to use into chart.
 	 */
 	String getColorAsString();
+	
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use into chart.
+	 */
+	String getBackgroundColorAsString();
+	
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use into chart.
+	 */
+	String getBorderColorAsString();
 
 	/**
 	 * If false, the lines between points are not drawn.

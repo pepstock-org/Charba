@@ -19,23 +19,23 @@ import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
+import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
- * This item contains the new size of the chart after it has been resized.<br>
- * This object has been created ONLY when a resize event occurs.
+ * Contains all info for every item of tooltip.<br>
+ * Created and passed by CHART.JS.<br>
+ * It uses into the PLUGINS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class SizeItem extends NativeObjectContainer {
+public final class PluginTooltipArgument extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		WIDTH("width"),
-		HEIGHT("height");
+		TOOLTIP("tooltip");
 
 		// name value of property
 		private final String value;
@@ -61,40 +61,26 @@ public class SizeItem extends NativeObjectContainer {
 
 	}
 
+	// model instance
+	private final TooltipModel node;
+
 	/**
-	 * Creates the item using an envelop (from <code>configuration</code> package) of native java script object which contains all properties.
+	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
-	 * @param envelop envelop of native java script object which contains all properties.
+	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public SizeItem(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public PluginTooltipArgument(PluginsEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		// creates sub element
+		node = new TooltipModel(getValue(Property.TOOLTIP));
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Returns the tooltip model.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @return the tooltip model.
 	 */
-	SizeItem(NativeObject nativeObject) {
-		super(nativeObject);
+	public TooltipModel getTooltip() {
+		return node;
 	}
-
-	/**
-	 * Returns the width of the chart item in pixel.
-	 * 
-	 * @return the width of the chart item in pixel.
-	 */
-	public final double getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
-	}
-
-	/**
-	 * Returns the height of the chart item in pixel.
-	 * 
-	 * @return the height of the chart item in pixel.
-	 */
-	public final double getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
-	}
-
 }

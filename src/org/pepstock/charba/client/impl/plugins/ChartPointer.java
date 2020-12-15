@@ -28,7 +28,8 @@ import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.items.PluginEventArgument;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
@@ -83,10 +84,10 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
+	public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// creates options instance
@@ -110,12 +111,14 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
 	 */
 	@Override
-	public void onAfterEvent(IsChart chart, BaseNativeEvent event) {
+	public void onAfterEvent(IsChart chart, PluginEventArgument argument) {
 		// checks if chart is consistent and options of plugin has been stored
 		if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
+			// gets base native event
+			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
 			// gets options instance
 			ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
 			// gets the scope
