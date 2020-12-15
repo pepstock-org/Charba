@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.items.DatasetPluginItem;
-import org.pepstock.charba.client.items.SizeItem;
-import org.pepstock.charba.client.items.TooltipPluginItem;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.items.PluginDatasetArgument;
+import org.pepstock.charba.client.items.PluginEventArgument;
+import org.pepstock.charba.client.items.PluginResizeArgument;
+import org.pepstock.charba.client.items.PluginTooltipArgument;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 
 /**
  * This interface is defining the extension hook for Chart.JS plugin implementation (both for <i>inline</i> and <i>global</i> plugins).<br>
@@ -84,18 +84,18 @@ public interface Plugin {
 	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
-	 * @param mode the update mode, it could be <code>null</code>.
+	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode);
+	boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument);
 
 	/**
 	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
-	 * @param mode the update mode, it could be <code>null</code>.
+	 * @param argument the argument passed for update
 	 */
-	void onAfterUpdate(IsChart chart, IsAnimationModeKey mode);
+	void onAfterUpdate(IsChart chart, PluginUpdateArgument argument);
 
 	/**
 	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
@@ -116,18 +116,18 @@ public interface Plugin {
 	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
-	 * @param mode the update mode, it could be <code>null</code>.
+	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(IsChart chart, IsAnimationModeKey mode);
+	boolean onBeforeDatasetsUpdate(IsChart chart, PluginUpdateArgument argument);
 
 	/**
 	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
-	 * @param mode the update mode, it could be <code>null</code>.
+	 * @param argument the argument passed for update
 	 */
-	void onAfterDatasetsUpdate(IsChart chart, IsAnimationModeKey mode);
+	void onAfterDatasetsUpdate(IsChart chart, PluginUpdateArgument argument);
 
 	/**
 	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is
@@ -137,7 +137,7 @@ public interface Plugin {
 	 * @param item the dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item);
+	boolean onBeforeDatasetUpdate(IsChart chart, PluginDatasetArgument item);
 
 	/**
 	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
@@ -145,7 +145,7 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
 	 */
-	void onAfterDatasetUpdate(IsChart chart, DatasetPluginItem item);
+	void onAfterDatasetUpdate(IsChart chart, PluginDatasetArgument item);
 
 	/**
 	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
@@ -200,7 +200,7 @@ public interface Plugin {
 	 * @param item the dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item);
+	boolean onBeforeDatasetDraw(IsChart chart, PluginDatasetArgument item);
 
 	/**
 	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order). Note that this hook will not be called if the datasets
@@ -209,7 +209,7 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
 	 */
-	void onAfterDatasetDraw(IsChart chart, DatasetPluginItem item);
+	void onAfterDatasetDraw(IsChart chart, PluginDatasetArgument item);
 
 	/**
 	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
@@ -218,7 +218,7 @@ public interface Plugin {
 	 * @param item The tooltip instance.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	boolean onBeforeTooltipDraw(IsChart chart, TooltipPluginItem item);
+	boolean onBeforeTooltipDraw(IsChart chart, PluginTooltipArgument item);
 
 	/**
 	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously cancelled.
@@ -226,32 +226,32 @@ public interface Plugin {
 	 * @param chart the chart instance.
 	 * @param item The tooltip instance.
 	 */
-	void onAfterTooltipDraw(IsChart chart, TooltipPluginItem item);
+	void onAfterTooltipDraw(IsChart chart, PluginTooltipArgument item);
 
 	/**
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
 	 * @param chart the chart instance.
-	 * @param event The event object.
+	 * @param argument instance which contains event context
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(IsChart chart, BaseNativeEvent event);
+	boolean onBeforeEvent(IsChart chart, PluginEventArgument argument);
 
 	/**
 	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
 	 * 
 	 * @param chart the chart instance.
-	 * @param event The event object.
+	 * @param argument instance which contains event context
 	 */
-	void onAfterEvent(IsChart chart, BaseNativeEvent event);
+	void onAfterEvent(IsChart chart, PluginEventArgument argument);
 
 	/**
 	 * Called after the chart as been resized.
 	 * 
 	 * @param chart the chart instance.
-	 * @param size The new canvas display size (eq. canvas.style width and height).
+	 * @param argument argument of method which contains the new canvas display size (eq. canvas.style width and height).
 	 */
-	void onResize(IsChart chart, SizeItem size);
+	void onResize(IsChart chart, PluginResizeArgument argument);
 
 	/**
 	 * Called during chart reset.

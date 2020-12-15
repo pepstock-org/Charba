@@ -30,7 +30,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
-import org.pepstock.charba.client.items.SizeItem;
+import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.utils.Utilities;
@@ -245,14 +245,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			OPTIONS.remove(chart.getId());
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.SizeItem)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
-	public void onResize(IsChart chart, SizeItem size) {
+	public void onResize(IsChart chart, PluginResizeArgument argument) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// gets options

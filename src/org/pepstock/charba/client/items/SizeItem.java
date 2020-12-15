@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
-import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
  * This item contains the new size of the chart after it has been resized.<br>
@@ -60,15 +59,6 @@ public class SizeItem extends NativeObjectContainer {
 			return value;
 		}
 
-	}
-
-	/**
-	 * Creates the item using an envelop (from <code>plugins</code> package) of native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of native java script object which contains all properties.
-	 */
-	public SizeItem(PluginsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

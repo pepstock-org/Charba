@@ -28,7 +28,7 @@ import org.pepstock.charba.client.plugins.PluginsEnvelop;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TooltipPluginItem extends NativeObjectContainer {
+public final class PluginTooltipArgument extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -69,7 +69,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public TooltipPluginItem(PluginsEnvelop<NativeObject> envelop) {
+	public PluginTooltipArgument(PluginsEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// creates sub element
 		node = new TooltipModel(getValue(Property.TOOLTIP));

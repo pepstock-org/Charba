@@ -19,7 +19,6 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 
@@ -82,22 +81,6 @@ final class JsItemsHelper {
 		}
 		// if here, arguments not consistent
 		return false;
-	}
-
-	/**
-	 * Returns a chart native event from CHART.JS event.
-	 * 
-	 * @param event CHART.JS event
-	 * @param key key of java script object
-	 * @return a chart native event
-	 */
-	BaseNativeEvent nativeEvent(NativeObject event, String key) {
-		// checks consistency of arguments
-		if (event != null && key != null) {
-			return NativeJsItemsHelper.nativeEvent(event, key);
-		}
-		// if here, arguments not consistent
-		return null;
 	}
 
 	/**

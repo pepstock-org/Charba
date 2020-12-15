@@ -49,11 +49,11 @@ import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.OptionsNode;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -219,7 +219,7 @@ public final class Defaults {
 			// checks if is a controller
 			if (type instanceof ControllerType) {
 				// cats to controller type
-				ControllerType controllerType = (ControllerType)type;
+				ControllerType controllerType = (ControllerType) type;
 				// registers if not register
 				controllerType.register();
 			}
@@ -550,7 +550,7 @@ public final class Defaults {
 		NativeObject getScales() {
 			return getValue(Property.SCALES);
 		}
-		
+
 		/**
 		 * Returns the CONTROLLERS global options of chart as native object.
 		 * 
@@ -594,9 +594,9 @@ public final class Defaults {
 			return new ChartOptions(type, getControllers().getChartOptions(type), defaultOptions);
 		}
 	}
-	
+
 	private static class InternalControllers extends NativeObjectContainer {
-		
+
 		/**
 		 * Creates the item using a native java script object which contains all properties.
 		 * 
@@ -605,7 +605,7 @@ public final class Defaults {
 		InternalControllers(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		/**
 		 * Returns the chart options defaults by chart type.
 		 * 
@@ -614,14 +614,14 @@ public final class Defaults {
 		 */
 		NativeObject getChartOptions(Type type) {
 			// checks if type is present
-			if (isType(type, ObjectType.OBJECT)) { 
+			if (isType(type, ObjectType.OBJECT)) {
 				// checks if chart type is consistent
 				return getValue(Key.checkAndGetIfValid(type));
 			}
 			// if here, the type doesn't exist
 			return null;
 		}
-		
+
 	}
 
 	/**
@@ -712,10 +712,10 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 		 */
 		@Override
-		public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
+		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 			// checks if chart is consistent and has got cartesian axes
 			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType())) {
 				// gets options node

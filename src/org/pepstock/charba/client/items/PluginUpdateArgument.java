@@ -15,25 +15,27 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
- * This is a wrapper of java script object which represents a dataset.<br>
+ * This is a wrapper of java script object which the argument passed to plugin function.<br>
  * This object is used in the plugins methods of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class PluginDatasetArgument extends PluginUpdateArgument {
+public class PluginUpdateArgument extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		INDEX("index"),
-		META("meta");
+		MODE("mode");
 
 		// name value of property
 		private final String value;
@@ -58,37 +60,25 @@ public final class PluginDatasetArgument extends PluginUpdateArgument {
 		}
 
 	}
-
-	// dataset item instance
-	private final DatasetItem datasetItem;
-
+	
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public PluginDatasetArgument(PluginsEnvelop<NativeObject> envelop) {
-		super(envelop);
-		// checks if data item is present
-		// creating it or setting an empty object
-		datasetItem = has(Property.META) ? new DatasetItem(getValue(Property.META)) : new DatasetItem();
+	public PluginUpdateArgument(PluginsEnvelop<NativeObject> envelop) {
+		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Returns the index of the data inside the dataset.
+	 * Returns the update mode.
 	 * 
-	 * @return the index of the data inside the dataset.
+	 * @return the update mode.
 	 */
-	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the dataset item.
-	 * 
-	 * @return the dataset item.
-	 */
-	public DatasetItem getDatasetItem() {
-		return datasetItem;
+	public final IsAnimationModeKey getMode() {
+		// gets string value
+		String mode = getValue(Property.MODE, UndefinedValues.STRING);
+		// returns the update mode is consistent
+		return mode != null ? IsAnimationModeKey.create(mode) : null;
 	}
 }

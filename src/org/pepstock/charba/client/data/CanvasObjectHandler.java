@@ -18,7 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.items.SizeItem;
+import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
@@ -62,7 +62,9 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		return ID;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
@@ -87,10 +89,10 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.SizeItem)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
-	public void onResize(IsChart chart, SizeItem size) {
+	public void onResize(IsChart chart, PluginResizeArgument argument) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// Due to gradients are created based on dimension of

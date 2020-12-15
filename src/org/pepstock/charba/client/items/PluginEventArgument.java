@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
@@ -28,20 +29,15 @@ import org.pepstock.charba.client.plugins.PluginsEnvelop;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EventPluginItem extends NativeObjectContainer {
-
-	// "native" is a keyword of Java therefore
-	// it can not add the key into enum.
-	private static final String NATIVE_KEY = "native";
+public final class PluginEventArgument extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		TYPE("type"),
-		X("x"),
-		Y("y");
+		EVENT("event"),
+		REPLAY("replay");
 
 		// name value of property
 		private final String value;
@@ -66,49 +62,37 @@ public final class EventPluginItem extends NativeObjectContainer {
 		}
 
 	}
+	
+	// instance of event context
+	private final ChartEventContext eventContext;
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
-	public EventPluginItem(PluginsEnvelop<NativeObject> envelop) {
+	public PluginEventArgument(PluginsEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		// gets and stores teh event context
+		this.eventContext = new ChartEventContext(new ItemsEnvelop<>(getValue(Property.EVENT), true));
 	}
 
 	/**
-	 * Returns the native event into the CHART.JS event.
+	 * Returns the event context into the CHART.JS event.
 	 * 
 	 * @return the native event into the CHART.JS event or <code>null</code> if doen't not exist.
 	 */
-	public BaseNativeEvent getEvent() {
-		return JsItemsHelper.get().nativeEvent(getNativeObject(), NATIVE_KEY);
+	public ChartEventContext getEventContext() {
+		return eventContext;
 	}
 
 	/**
-	 * Returns X value of event.
+	 * Returns <code>true</code> if this event is replayed from {@link IsChart#update()}.
 	 * 
-	 * @return X value of event.
+	 * @return <code>true</code> if this event is replayed from {@link IsChart#update()}
 	 */
-	public int getX() {
-		return getValue(Property.X, UndefinedValues.INTEGER);
+	public boolean isReplay() {
+		return getValue(Property.REPLAY, UndefinedValues.BOOLEAN);
 	}
 
-	/**
-	 * Returns Y value of event.
-	 * 
-	 * @return Y value of event.
-	 */
-	public int getY() {
-		return getValue(Property.Y, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the event type a string.
-	 * 
-	 * @return the event type a string.
-	 */
-	public String getType() {
-		return getValue(Property.TYPE, UndefinedValues.STRING);
-	}
 }

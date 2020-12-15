@@ -37,7 +37,7 @@ import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.items.PluginUpdateArgument;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
@@ -122,10 +122,10 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.options.IsAnimationModeKey)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart, IsAnimationModeKey mode) {
+	public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
 		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
