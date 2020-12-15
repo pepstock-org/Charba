@@ -131,17 +131,10 @@ final class EventBus {
 	 * @param type the vent type related to the handler
 	 */
 	private void doAddNow(EventHandler handler, EventType type) {
-		// checks if there is not already any handler for that type
-		if (!handlers.containsKey(type)) {
-			// creates new list
-			List<EventHandler> newList = new LinkedList<>();
-			// stores the list for event type
-			handlers.put(type, newList);
-		}
-		// gets the stored list of handlers
-		List<EventHandler> list = handlers.get(type);
-		// stores the handler
-		list.add(handler);
+		//checks if there is not already any handler for that type
+		// creating new list if needed
+		// and stores the handler
+		handlers.computeIfAbsent(type, key -> new LinkedList<>()).add(handler); 
 	}
 
 	/**
