@@ -160,15 +160,9 @@ public class CallbackPropertyHandler<T> {
 	 */
 	private void updateOrAddScopeFromCallback(String key, T callback, String scope) {
 		// checks key has been stored
-		if (!wrappers.containsKey(key)) {
-			CallbackWrapper<T> newWrapper = new CallbackWrapper<>(callback);
-			// stores wrappers
-			wrappers.put(key, newWrapper);
-		}
-		// gets the wrappers
-		CallbackWrapper<T> wrapper = wrappers.get(key);
+		// creating new wrapper
 		// stores the scope
-		wrapper.getScopes().add(scope);
+		wrappers.computeIfAbsent(key, mapKey -> new CallbackWrapper<>(callback)).getScopes().add(scope);
 	}
 
 	/**
