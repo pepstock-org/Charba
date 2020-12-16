@@ -70,7 +70,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private ColorSchemes() {
-		// do nothing
+		super(ID);
 	}
 
 	/**
@@ -85,17 +85,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
-	 */
-	@Override
-	public String getId() {
-		return ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -122,7 +112,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 	 */
 	@Override
 	public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
@@ -150,7 +140,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {

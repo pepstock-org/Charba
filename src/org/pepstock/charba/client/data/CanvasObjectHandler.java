@@ -40,7 +40,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private CanvasObjectHandler() {
-		// do nothing
+		super(ID);
 	}
 
 	/**
@@ -55,17 +55,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
-	 */
-	@Override
-	public String getId() {
-		return ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -89,7 +79,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
 	public void onResize(IsChart chart, PluginResizeArgument argument) {
@@ -114,7 +104,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {

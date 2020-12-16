@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.PluginDatasetArgument;
 import org.pepstock.charba.client.items.PluginEventArgument;
 import org.pepstock.charba.client.items.PluginResizeArgument;
+import org.pepstock.charba.client.items.PluginScaleArgument;
 import org.pepstock.charba.client.items.PluginTooltipArgument;
 import org.pepstock.charba.client.items.PluginUpdateArgument;
 
@@ -97,31 +98,90 @@ final class WrapperPlugin extends NativeObjectContainer {
 	private enum Property implements Key
 	{
 		ID("id"),
-		AFTER_DATASET_DRAW("afterDatasetDraw"),
-		AFTER_DATASET_UPDATE("afterDatasetUpdate"),
-		AFTER_DATASETS_DRAW("afterDatasetsDraw"),
-		AFTER_DATASETS_UPDATE("afterDatasetsUpdate"),
-		AFTER_DRAW("afterDraw"),
-		AFTER_EVENT("afterEvent"),
-		AFTER_INIT("afterInit"),
-		AFTER_LAYOUT("afterLayout"),
-		AFTER_RENDER("afterRender"),
-		AFTER_TOOLTIP_DRAW("afterTooltipDraw"),
-		AFTER_UPDATE("afterUpdate"),
-		BEFORE_DATASET_DRAW("beforeDatasetDraw"),
-		BEFORE_DATASET_UPDATE("beforeDatasetUpdate"),
-		BEFORE_DATASETS_DRAW("beforeDatasetsDraw"),
-		BEFORE_DATASETS_UPDATE("beforeDatasetsUpdate"),
-		BEFORE_DRAW("beforeDraw"),
-		BEFORE_EVENT("beforeEvent"),
+		// ---------------------------
+		// -- INIT
+		// ---------------------------
 		BEFORE_INIT("beforeInit"),
-		BEFORE_LAYOUT("beforeLayout"),
-		BEFORE_RENDER("beforeRender"),
-		BEFORE_TOOLTIP_DRAW("beforeTooltipDraw"),
+		AFTER_INIT("afterInit"),
+		// ---------------------------
+		// -- UPDATE
+		// ---------------------------
 		BEFORE_UPDATE("beforeUpdate"),
-		DESTROY("destroy"),
+		AFTER_UPDATE("afterUpdate"),
+		// ---------------------------
+		// -- DATASETS UPDATE
+		// ---------------------------
+		BEFORE_DATASETS_UPDATE("beforeDatasetsUpdate"),
+		AFTER_DATASETS_UPDATE("afterDatasetsUpdate"),
+		// ---------------------------
+		// -- DATASET UPDATE
+		// ---------------------------
+		BEFORE_DATASET_UPDATE("beforeDatasetUpdate"),
+		AFTER_DATASET_UPDATE("afterDatasetUpdate"),
+		// ---------------------------
+		// -- LAYOUT
+		// ---------------------------
+		BEFORE_LAYOUT("beforeLayout"),
+		AFTER_LAYOUT("afterLayout"),
+		// ---------------------------
+		// -- RENDER
+		// ---------------------------
+		BEFORE_RENDER("beforeRender"),
+		AFTER_RENDER("afterRender"),
+		// ---------------------------
+		// -- DRAW
+		// ---------------------------
+		BEFORE_DRAW("beforeDraw"),
+		AFTER_DRAW("afterDraw"),
+		// ---------------------------
+		// -- DATASETS DRAW
+		// ---------------------------
+		BEFORE_DATASETS_DRAW("beforeDatasetsDraw"),
+		AFTER_DATASETS_DRAW("afterDatasetsDraw"),
+		// ---------------------------
+		// -- DATASET DRAW
+		// ---------------------------
+		BEFORE_DATASET_DRAW("beforeDatasetDraw"),
+		AFTER_DATASET_DRAW("afterDatasetDraw"),
+		// ---------------------------
+		// -- EVENT
+		// ---------------------------
+		BEFORE_EVENT("beforeEvent"),
+		AFTER_EVENT("afterEvent"),
+		// ---------------------------
+		// -- TOOLTIP
+		// ---------------------------
+		BEFORE_TOOLTIP_DRAW("beforeTooltipDraw"),
+		AFTER_TOOLTIP_DRAW("afterTooltipDraw"),
+		// ---------------------------
+		// -- RESET
+		// ---------------------------
 		RESET("reset"),
-		RESIZE("resize");
+		// ---------------------------
+		// -- RESIZE
+		// ---------------------------
+		RESIZE("resize"),
+		// ---------------------------
+		// -- DESTROY
+		// ---------------------------
+		DESTROY("destroy"),
+		// ---------------------------
+		// -- SCALES DATA LIMITS
+		// ---------------------------
+		BEFORE_DATA_LIMITS("beforeDataLimits"),
+		AFTER_DATA_LIMITS("afterDataLimits"),
+		// ---------------------------
+		// -- SCALES BUILD TICKS
+		// ---------------------------
+		BEFORE_BUILD_TICKS("beforeBuildTicks"),
+		AFTER_BUILD_TICKS("afterBuildTicks"),
+		// ---------------------------
+		// -- PLUGIN LIFECYCLE
+		// ---------------------------
+		INSTALL("install"),
+		START("start"),
+		STOP("stop"),
+		UNINSTALL("uninstall");
 
 		// name value of property
 		private final String value;
@@ -148,100 +208,125 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	// ---------------------------
-	// -- CALLBACKS PROXIES 
+	// -- CALLBACKS PROXIES
 	// ---------------------------
 	// ---------------------------
-	// -- INIT 
+	// -- INIT
 	// ---------------------------
 	// callback proxy to invoke the beforeInit function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeInitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterInit function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterInitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- UPDATE 
+	// -- UPDATE
 	// ---------------------------
 	// callback proxy to invoke the beforeUpdate function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterUpdate function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DATASETS UPDATE 
+	// -- DATASETS UPDATE
 	// ---------------------------
 	// callback proxy to invoke the beforeDatasetsUpdate function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDatasetsUpdate function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DATASET UPDATE 
+	// -- DATASET UPDATE
 	// ---------------------------
 	// callback proxy to invoke the beforeDatasetUpdate function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDatasetUpdate function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- LAYOUT 
+	// -- LAYOUT
 	// ---------------------------
 	// callback proxy to invoke the beforeLayout function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterLayout function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- RENDER 
+	// -- RENDER
 	// ---------------------------
 	// callback proxy to invoke the beforeRender function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeRenderCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterRender function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterRenderCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DRAW 
+	// -- DRAW
 	// ---------------------------
 	// callback proxy to invoke the beforeDraw function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDraw function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DATASETS DRAW 
+	// -- DATASETS DRAW
 	// ---------------------------
 	// callback proxy to invoke the beforeDatasetsDraw function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDatasetsDraw function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DATASET DRAW 
-	// ---------------------------	
+	// -- DATASET DRAW
+	// ---------------------------
 	// callback proxy to invoke the beforeDatasetDraw function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDatasetDraw function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- EVENT 
-	// ---------------------------	
+	// -- EVENT
+	// ---------------------------
 	// callback proxy to invoke the beforeEvent function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterEvent function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- TOOLTIP 
-	// ---------------------------	
+	// -- TOOLTIP
+	// ---------------------------
 	// callback proxy to invoke the beforeTooltipDraw function
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterTooltipDraw function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- RESET 
-	// ---------------------------	
+	// -- RESET
+	// ---------------------------
 	// callback proxy to invoke the reset function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- RESIZE 
-	// ---------------------------	
+	// -- RESIZE
+	// ---------------------------
 	// callback proxy to invoke the resize function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
-	// -- DESTROY 
-	// ---------------------------		
+	// -- DESTROY
+	// ---------------------------
 	// callback proxy to invoke the destroy function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> destroyCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- SCALES DATA LIMITS
+	// ---------------------------
+	// callback proxy to invoke the beforeDataLimits function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterDataLimits function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- SCALES BUILD TICKS
+	// ---------------------------
+	// callback proxy to invoke the beforeBuildTicks function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the afterBuildTicks function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- PLUGIN LIFECYCLE
+	// ---------------------------
+	// callback proxy to invoke the install function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> installCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the start function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> startCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stop function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> stopCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the uninstall function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> uninstallCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// user plugin implementation
 	private final Plugin delegation;
@@ -263,100 +348,129 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// ---------------------------
-		// -- INIT 
+		// -- INIT
 		// ---------------------------
 		// invoke user method implementation
 		beforeInitCallbackProxy.setCallback((context, chart, args, options) -> onBeforeInit(chart.getChart()));
 		// invoke user method implementation
 		afterInitCallbackProxy.setCallback((context, chart, args, options) -> onAfterInit(chart.getChart(), chart));
 		// ---------------------------
-		// -- UPDATE 
+		// -- UPDATE
 		// ---------------------------
 		// invoke user method implementation
 		afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- DATASETS UPDATE 
+		// -- DATASETS UPDATE
 		// ---------------------------
 		// invoke user method implementation
 		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- DATASET UPDATE 
+		// -- DATASET UPDATE
 		// ---------------------------
 		// invoke user method implementation
 		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- LAYOUT 
+		// -- LAYOUT
 		// ---------------------------
 		// invoke user method implementation
 		beforeLayoutCallbackProxy.setCallback((context, chart, args, options) -> onBeforeLayout(chart.getChart()));
 		// invoke user method implementation
 		afterLayoutCallbackProxy.setCallback((context, chart, args, options) -> onAfterLayout(chart.getChart()));
 		// ---------------------------
-		// -- RENDER 
+		// -- RENDER
 		// ---------------------------
 		// invoke user method implementation
 		beforeRenderCallbackProxy.setCallback((context, chart, args, options) -> onBeforeRender(chart.getChart()));
 		// invoke user method implementation
 		afterRenderCallbackProxy.setCallback((context, chart, args, options) -> onAfterRender(chart.getChart()));
 		// ---------------------------
-		// -- DRAW 
+		// -- DRAW
 		// ---------------------------
 		// invoke user method implementation
 		beforeDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
 		afterDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDraw(chart.getChart()));
 		// ---------------------------
-		// -- DATASETS DRAW 
+		// -- DATASETS DRAW
 		// ---------------------------
 		// invoke user method implementation
 		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
 		afterDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsDraw(chart.getChart()));
 		// ---------------------------
-		// -- DATASET DRAW 
-		// ---------------------------	
+		// -- DATASET DRAW
+		// ---------------------------
 		// invoke user method implementation
 		beforeDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- EVENT 
-		// ---------------------------	
+		// -- EVENT
+		// ---------------------------
 		// invoke user method implementation
 		beforeEventCallbackProxy.setCallback((context, chart, args, options) -> onBeforeEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterEventCallbackProxy.setCallback((context, chart, args, options) -> onAfterEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- TOOLTIP 
-		// ---------------------------	
+		// -- TOOLTIP
+		// ---------------------------
 		// invoke user method implementation
 		beforeTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- RESET 
-		// ---------------------------	
+		// -- RESET
+		// ---------------------------
 		// invoke user method implementation
 		resetCallbackProxy.setCallback((context, chart, args, options) -> onReset(chart.getChart()));
 		// ---------------------------
-		// -- RESIZE 
-		// ---------------------------	
+		// -- RESIZE
+		// ---------------------------
 		// invoke user method implementation
 		resizeCallbackProxy.setCallback((context, chart, args, options) -> onResize(chart.getChart(), new PluginResizeArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
-		// -- DESTROY 
-		// ---------------------------		
+		// -- DESTROY
+		// ---------------------------
 		// invoke user method implementation
 		destroyCallbackProxy.setCallback((context, chart, args, options) -> onDestroy(chart.getChart()));
+		// ---------------------------
+		// -- PLUGIN LIFECYCLE
+		// ---------------------------
+		// invoke user method implementation
+		installCallbackProxy.setCallback((context, chart, args, options) -> onInstall(chart.getChart()));
+		// invoke user method implementation
+		startCallbackProxy.setCallback((context, chart, args, options) -> onStart(chart.getChart()));
+		// invoke user method implementation
+		stopCallbackProxy.setCallback((context, chart, args, options) -> onStop(chart.getChart()));
+		// invoke user method implementation
+		uninstallCallbackProxy.setCallback((context, chart, args, options) -> onUninstall(chart.getChart()));
+		// ---------------------------
+		// -- SCALES DATA LIMITS
+		// ---------------------------
+		// invoke user method implementation
+		beforeDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		// invoke user method implementation
+		afterDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onAfterDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- SCALES BUILD TICKS
+		// ---------------------------
+		// invoke user method implementation
+		beforeBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onBeforeBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		// invoke user method implementation
+		afterBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onAfterBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// ------------------------------------
 		// -- SET ALL FUNCTIONS into object ---
 		// ------------------------------------
+		// sets proxy instance into afterDataLimits property
+		setValue(Property.AFTER_DATA_LIMITS, afterDataLimitsCallbackProxy.getProxy());
+		// sets proxy instance into afterBuildTicks property
+		setValue(Property.AFTER_BUILD_TICKS, afterBuildTicksCallbackProxy.getProxy());
 		// sets proxy instance into afterDatasetDraw property
 		setValue(Property.AFTER_DATASET_DRAW, afterDatasetDrawCallbackProxy.getProxy());
 		// sets proxy instance into afterDatasetUpdate property
@@ -379,6 +493,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		setValue(Property.AFTER_TOOLTIP_DRAW, afterTooltipDrawCallbackProxy.getProxy());
 		// sets proxy instance into afterUpdate property
 		setValue(Property.AFTER_UPDATE, afterUpdateCallbackProxy.getProxy());
+		// sets proxy instance into beforeDataLimits property
+		setValue(Property.BEFORE_DATA_LIMITS, beforeDataLimitsCallbackProxy.getProxy());
+		// sets proxy instance into beforeBuildTicks property
+		setValue(Property.BEFORE_BUILD_TICKS, beforeBuildTicksCallbackProxy.getProxy());
 		// sets proxy instance into beforeDatasetDraw property
 		setValue(Property.BEFORE_DATASET_DRAW, beforeDatasetDrawCallbackProxy.getProxy());
 		// sets proxy instance into beforeDatasetUpdate property
@@ -407,6 +525,14 @@ final class WrapperPlugin extends NativeObjectContainer {
 		setValue(Property.RESIZE, resizeCallbackProxy.getProxy());
 		// sets proxy instance into reset property
 		setValue(Property.RESET, resetCallbackProxy.getProxy());
+		// sets proxy instance into install property
+		setValue(Property.INSTALL, installCallbackProxy.getProxy());
+		// sets proxy instance into start property
+		setValue(Property.START, startCallbackProxy.getProxy());
+		// sets proxy instance into stop property
+		setValue(Property.STOP, stopCallbackProxy.getProxy());
+		// sets proxy instance into uninstall property
+		setValue(Property.UNINSTALL, uninstallCallbackProxy.getProxy());
 	}
 
 	/**
@@ -844,6 +970,134 @@ final class WrapperPlugin extends NativeObjectContainer {
 			drawingStatus.remove(chart.getId());
 			// invokes the destroy of plugin
 			delegation.onDestroy(chart);
+		}
+	}
+
+	// ---------------------------
+	// -- PLUGIN LIFECYCLE
+	// ---------------------------
+
+	/**
+	 * Called when plugin is installed for this chart instance.<br>
+	 * This hook is also invoked for disabled plugins (options equals to false).
+	 * 
+	 * @param chart chart instance
+	 */
+	void onInstall(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// invokes the install of plugin
+			delegation.onInstall(chart);
+		}
+	}
+
+	/**
+	 * Called when a plugin is starting.<br>
+	 * This happens when chart is created or plugin is enabled.
+	 * 
+	 * @param chart chart instance
+	 */
+	void onStart(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// invokes the start of plugin
+			delegation.onStart(chart);
+		}
+	}
+
+	/**
+	 * Called when a plugin stopping.<br>
+	 * This happens when chart is destroyed or plugin is disabled.
+	 * 
+	 * @param chart chart instance
+	 */
+	void onStop(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// invokes the stop of plugin
+			delegation.onDestroy(chart);
+		}
+	}
+
+	// ---------------------------
+	// -- SCALES DATA LIMITS
+	// ---------------------------
+
+	/**
+	 * Called before scale data limits are calculated.<br>
+	 * This hook is called separately for each scale in the chart.
+	 * 
+	 * @param chart the chart instance.
+	 * @param argument argument of method which contains the scale instance.
+	 */
+	void onBeforeDataLimits(IsChart chart, PluginScaleArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onBeforeDataLimits(chart, argument);
+		}
+	}
+
+	/**
+	 * Called after scale data limits are calculated.<br>
+	 * This hook is called separately for each scale in the chart.
+	 * 
+	 * @param chart the chart instance.
+	 * @param argument argument of method which contains the scale instance.
+	 */
+	void onAfterDataLimits(IsChart chart, PluginScaleArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onAfterDataLimits(chart, argument);
+		}
+	}
+
+	// ---------------------------
+	// -- SCALES BUILD TICKS
+	// ---------------------------
+
+	/**
+	 * Called before scale builds its ticks.<br>
+	 * This hook is called separately for each scale in the chart.
+	 * 
+	 * @param chart the chart instance.
+	 * @param argument argument of method which contains the scale instance.
+	 */
+	void onBeforeBuildTicks(IsChart chart, PluginScaleArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onBeforeBuildTicks(chart, argument);
+		}
+	}
+
+	/**
+	 * Called after scale has build its ticks.<br>
+	 * This hook is called separately for each scale in the chart.
+	 * 
+	 * @param chart the chart instance.
+	 * @param argument argument of method which contains the scale instance.
+	 */
+	void onAfterBuildTicks(IsChart chart, PluginScaleArgument argument) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			delegation.onAfterBuildTicks(chart, argument);
+		}
+	}
+
+	// ---------------------------
+	// -- COMMON
+	// ---------------------------
+
+	/**
+	 * Called after chart is destroyed on all plugins that were installed for that chart.<br>
+	 * This hook is also invoked for disabled plugins (options equals to false).
+	 * 
+	 * @param chart chart instance
+	 */
+	void onUninstall(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// invokes the unistall of plugin
+			delegation.onUninstall(chart);
 		}
 	}
 

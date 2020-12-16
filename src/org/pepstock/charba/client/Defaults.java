@@ -589,12 +589,26 @@ public final class Defaults {
 			}
 		}
 
+		/**
+		 * Returns an options instance, to use as default options, based of type of chart.
+		 * 
+		 * @param type chart type
+		 * @param defaultOptions defaults scaled options instance
+		 * @return default options
+		 */
 		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultOptions) {
 			// creates a chart options using global a default scaled as default
 			return new ChartOptions(type, getControllers().getChartOptions(type), defaultOptions);
 		}
 	}
 
+	/**
+	 * It wraps the CONTROLLERS object of CHART.JS chart instance.<br>
+	 * It returns the chart options.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
 	private static class InternalControllers extends NativeObjectContainer {
 
 		/**
@@ -625,7 +639,7 @@ public final class Defaults {
 	}
 
 	/**
-	 * Internal class for default scales
+	 * Internal class for default scales.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -688,20 +702,17 @@ public final class Defaults {
 	 */
 	private static class NativeChartHandler extends AbstractPlugin {
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.Plugin#getId()
+		/**
+		 * Creates the plugin, using {@link Defaults#ID}.
 		 */
-		@Override
-		public String getId() {
-			return ID;
+		private NativeChartHandler() {
+			super(ID);
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
+		 * @see org.pepstock.charba.client.Plugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
 		 */
 		@Override
 		public void onAfterInit(IsChart chart, Chart nativeChart) {
@@ -712,7 +723,7 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
+		 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
 		 */
 		@Override
 		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {

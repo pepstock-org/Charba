@@ -89,6 +89,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param color background default color for all charts.
 	 */
 	public ChartBackgroundColor(String color) {
+		super(ID);
 		// sets default color if null
 		this.color = (color != null) ? color : DEFAULT_BACKGROUND_COLOR;
 		// sets null other kind of background
@@ -102,6 +103,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param gradient background default gradient for all charts.
 	 */
 	public ChartBackgroundColor(Gradient gradient) {
+		super(ID);
 		// checks if gradient is consistent
 		if (gradient == null) {
 			// if null, exception!
@@ -120,6 +122,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param pattern background default pattern for all charts.
 	 */
 	public ChartBackgroundColor(Pattern pattern) {
+		super(ID);
 		// checks if pattern is consistent
 		if (pattern == null) {
 			// if null, exception!
@@ -177,17 +180,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
-	 */
-	@Override
-	public String getId() {
-		return ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public boolean onBeforeDraw(IsChart chart) {
@@ -231,7 +224,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onEndDrawing(IsChart chart) {
@@ -245,9 +238,11 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			OPTIONS.remove(chart.getId());
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
 	public void onResize(IsChart chart, PluginResizeArgument argument) {
@@ -270,7 +265,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {

@@ -276,6 +276,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * use `font` object instead of the single properties.
    * remove `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font and not only color.
    * pass a `Context` object instance as argument to the callback instead of `RenderItem` and `FontColorItem` ones.
+ * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
   
 ### Features
 
@@ -342,6 +343,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
    * add `onLabelPointStyle` method to `TooltipLabelCallback` interface and `TooltipLabelPointStyle` class in order to manage the point style into tooltip.
    * add `backgroundColor` and `borderColor` default options.
+   * add new hooks to `Plugin` interface:
+     * `onInstall`, `onStart`, `onStop`, `onUninstall` to manage plugin life-cycle.
+     * `onBeforeDataLimits`, `onAfterDataLimits`, `onBeforeBuildTicks`, `onAfterBuildTicks` to manage scale setup.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
@@ -389,6 +393,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * implement **INTL DateTimeFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
+ * change all methods of `Plugin` interface becoming all default ones.
   
 ### Development
 

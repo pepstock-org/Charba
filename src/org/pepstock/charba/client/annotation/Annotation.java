@@ -62,7 +62,7 @@ public final class Annotation extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private Annotation() {
-		// do nothing
+		super(ID);
 	}
 
 	/**
@@ -77,17 +77,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
-	 */
-	@Override
-	public String getId() {
-		return ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -153,7 +143,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterLayout(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterLayout(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onAfterLayout(IsChart chart) {
@@ -172,7 +162,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(IsChart chart) {
@@ -184,7 +174,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onAfterDraw(IsChart chart) {
@@ -194,7 +184,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDatasetsDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onAfterDatasetsDraw(IsChart chart) {
@@ -204,7 +194,7 @@ public final class Annotation extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {

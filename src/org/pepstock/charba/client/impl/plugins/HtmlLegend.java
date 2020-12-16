@@ -82,7 +82,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private HtmlLegend() {
-		// do nothing
+		super(ID);
 	}
 
 	/**
@@ -97,17 +97,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
-	 */
-	@Override
-	public String getId() {
-		return ID;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -149,7 +139,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
+	 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override
 	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
@@ -205,7 +195,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
 	public void onAfterDraw(IsChart chart) {
@@ -235,7 +225,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onEndDrawing(IsChart chart) {
@@ -250,7 +240,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onDestroy(IsChart chart) {
