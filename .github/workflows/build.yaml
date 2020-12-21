@@ -22,7 +22,7 @@ jobs:
          - name: Checkout
            uses: actions/checkout@v2
            with:
-             # Disabling shallow clone
+             # Disabling shallow clone 
              fetch-depth: 0
          # setup a Java JDK
          - name: Setup JDK
