@@ -68,11 +68,4 @@ public interface IsFont extends IsDefaultFont {
 	 */
 	void setLineHeight(String lineHeight);
 
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	String getLineHeightAsString();
-
 }

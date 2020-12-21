@@ -32,13 +32,14 @@ public class DefaultFont implements IsDefaultFont {
 
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
+	private static final String DEFAULT_LINE_HEIGHT_STRING = String.valueOf(DEFAULT_LINE_HEIGHT);
+
 	/**
 	 * To avoid any instantiation
 	 */
 	DefaultFont() {
 		// do nothing
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -88,6 +89,16 @@ public class DefaultFont implements IsDefaultFont {
 	@Override
 	public double getLineHeight() {
 		return DEFAULT_LINE_HEIGHT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getLineHeightAsString()
+	 */
+	@Override
+	public String getLineHeightAsString() {
+		return DEFAULT_LINE_HEIGHT_STRING;
 	}
 
 }
