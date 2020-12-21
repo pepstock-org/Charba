@@ -25,8 +25,9 @@ jobs:
            with:
              # Disabling shallow clone 
              fetch-depth: 0
+         # removes pom.xml because Sonar will fail forcing to use Maven    
          - name: Remove pom
-           run: pwd    
+           run: rm -f pom.xml    
          # setup a Java JDK
          - name: Setup JDK
            uses: actions/setup-java@v1
