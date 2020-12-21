@@ -17,6 +17,7 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.labels.callbacks.ColorCallback;
 import org.pepstock.charba.client.labels.callbacks.FontCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -55,6 +56,16 @@ interface IsDefaultLabel {
 	default boolean isShowZero() {
 		return Label.DEFAULT_SHOW_ZERO;
 	}
+	
+	/**
+	 * Returns the the font color.
+	 * 
+	 * @return the font color.
+	 */
+	default String getColorAsString() {
+		return Defaults.get().getGlobal().getColorAsString();
+	}
+
 
 	/**
 	 * Returns the the font object.
@@ -179,6 +190,15 @@ interface IsDefaultLabel {
 	 * @return the font callback
 	 */
 	default FontCallback getFontCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the font color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font color callback, if set, otherwise <code>null</code>
+	 */
+	default ColorCallback getColorCallback() {
 		return null;
 	}
 }

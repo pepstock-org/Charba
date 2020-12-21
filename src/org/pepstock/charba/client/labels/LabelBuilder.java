@@ -117,8 +117,8 @@ public final class LabelBuilder {
 	 * @param color the font color as color.
 	 * @return builder instance
 	 */
-	public LabelBuilder setFontColor(IsColor color) {
-		label.getFont().setColor(color);
+	public LabelBuilder setColor(IsColor color) {
+		label.setColor(color);
 		return this;
 	}
 
@@ -128,8 +128,8 @@ public final class LabelBuilder {
 	 * @param color the font color as string.
 	 * @return builder instance
 	 */
-	public LabelBuilder setFontColor(String color) {
-		label.getFont().setColor(color);
+	public LabelBuilder setColor(String color) {
+		label.setColor(color);
 		return this;
 	}
 

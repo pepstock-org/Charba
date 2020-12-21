@@ -33,6 +33,7 @@
     this.options = Chart.helpers.mergeIf(options, {
       position: 'default',
       precision: 0,
+      color: Chart.defaults.color,
       font: Chart.helpers.clone(chart.options.font),
       shadowOffsetX: 3,
       shadowOffsetY: 3,
@@ -86,7 +87,8 @@
     }
 
     ctx.beginPath();
-    ctx.fillStyle = this.font.color;
+	this.color = typeof this.options.color === 'function' ? this.getFontColor(dataset, element, index) : this.options.color;
+    ctx.fillStyle = this.color;
     this.renderLabel(label, renderInfo);
     ctx.restore();
   };
@@ -219,6 +221,19 @@
 		chart: this.chart
       });
     return Chart.helpers.mergeIf(!result ? {} : result, this.chart.options.font);
+  };
+  
+  Label.prototype.getFontColor = function (dataset, element, index) {
+  	const result = this.options.color({
+        label: this.chart.config.data.labels[index],
+        value: dataset.data[index],
+        percentage: this.getPercentage(dataset, element, index),
+        dataset: dataset,
+        dataIndex: index,
+        datasetIndex: this.chart.data.datasets.indexOf(dataset),
+		chart: this.chart
+      });
+    return !result ? Chart.defaults.color : result;
   };
 
   Label.prototype.getPercentage = function (dataset, element, index) {

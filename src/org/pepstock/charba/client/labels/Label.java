@@ -32,6 +32,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.labels.callbacks.ColorCallback;
 import org.pepstock.charba.client.labels.callbacks.FontCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -163,6 +164,25 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		 */
 		NativeObject call(CallbackFunctionContext context, NativeObject item);
 	}
+	
+	/**
+	 * Java script FUNCTION callback called to get the font color of render into chat.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyFontColorCallback {
+
+		/**
+		 * Method of function to be called to get the font color of render into chat.
+		 * 
+		 * @param context context value of <code>this</code> to the execution context of function.
+		 * @param item native object as callback context.
+		 * @return the font color.
+		 */
+		String call(CallbackFunctionContext context, NativeObject item);
+	}
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -171,10 +191,14 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	private final CallbackProxy<ProxyRenderCallback> renderCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font color function
+	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render callback instance
 	private static final CallbackPropertyHandler<RenderCallback> RENDER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RENDER);
 	// font callback instance
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
+	// font color callback instance
+	private static final CallbackPropertyHandler<ColorCallback> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 
 	// defaults options instance
 	private final IsDefaultLabel defaultOptions;
@@ -190,6 +214,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		RENDER("render"),
 		PRECISION("precision"),
 		SHOW_ZERO("showZero"),
+		COLOR("color"),
 		FONT("font"),
 		TEXT_SHADOW("textShadow"),
 		SHADOW_BLUR("shadowBlur"),
@@ -286,6 +311,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new Context(item)));
 		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new Context(item)));
+		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(new Context(item)));
 	}
 
 	/**
@@ -305,6 +331,43 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	@Override
 	public Font getFont() {
 		return font;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		setValue(Property.COLOR, color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	@Override
+	public String getColorAsString() {
+		return getValue(Property.COLOR, defaultOptions.getColorAsString());
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -632,9 +695,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	}
 
 	/**
-	 * Returns the font color callback, if set, otherwise <code>null</code>.
+	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
-	 * @return the font color callback, if set, otherwise <code>null</code>
+	 * @return the font callback, if set, otherwise <code>null</code>
 	 */
 	@Override
 	public FontCallback getFontCallback() {
@@ -644,7 +707,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	/**
 	 * Sets the font callback.
 	 * 
-	 * @param fontCallback the font color callback.
+	 * @param fontCallback the font callback.
 	 */
 	public void setFont(FontCallback fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), fontCallback, fontCallbackProxy.getProxy());
@@ -655,6 +718,26 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 			// stores the font
 			setValue(Property.FONT, font);
 		}
+	}
+	
+
+	/**
+	 * Returns the font color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font color callback, if set, otherwise <code>null</code>
+	 */
+	@Override
+	public ColorCallback getColorCallback() {
+		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getColorCallback());
+	}
+
+	/**
+	 * Sets the font color callback.
+	 * 
+	 * @param colorCallback the font color callback.
+	 */
+	public void setColor(ColorCallback colorCallback) {
+		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, fontColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -710,6 +793,40 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		}
 		// defaults returns null
 		// and plugin will apply the default chart font
+		return null;
+	}
+	
+	/**
+	 * Invokes the COLOR callback.
+	 * 
+	 * @param context native object with callback context
+	 * @return the font color instance
+	 */
+	private String onFontColorCallback(Context context) {
+		// gets callback
+		ColorCallback fontColorCallback = COLOR_PROPERTY_HANDLER.getCallback(this);
+		// gets chart instance
+		IsChart chart = context.getChart();
+		// checks if the callback is set
+		if (IsChart.isValid(chart) && fontColorCallback != null) {
+			// calls callback
+			Object result = fontColorCallback.invoke(chart, context);
+			// checks result
+			if (result instanceof IsColor) {
+				// is color instance
+				IsColor color = (IsColor) result;
+				// checks if the color is consistent
+				if (IsColor.isConsistent(color)) {
+					// then returns RGBA representation
+					return color.toRGBA();
+				}
+			} else if (result instanceof String) {
+				// is string instance
+				return (String)result;
+			}
+		}
+		// defaults returns null
+		// and plugin will apply the default chart font color
 		return null;
 	}
 
