@@ -52,15 +52,6 @@ public final class DefaultTitle implements IsDefaultTitle {
 		return font;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorAsString()
-	 */
-	@Override
-	public String getColorAsString() {
-		return DefaultOptions.DEFAULT_COLOR;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -112,4 +103,13 @@ public final class DefaultTitle implements IsDefaultTitle {
 		return ElementAlign.CENTER;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
 }
