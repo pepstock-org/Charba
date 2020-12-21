@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
  */
 public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 
-	private final IsDefaultLegendTitle title;
+	private final IsDefaultLegendTitle legendTitle;
 
 	/**
 	 * Creates the object by legend title option element instance.
@@ -33,7 +33,7 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	 * @param title legend title option element instance.
 	 */
 	DefaultChartLegendTitle(IsDefaultLegendTitle title) {
-		this.title = title;
+		this.legendTitle = title;
 	}
 
 	/*
@@ -43,7 +43,7 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	 */
 	@Override
 	public IsDefaultFont getFont() {
-		return title.getFont();
+		return legendTitle.getFont();
 	}
 
 	/*
@@ -53,7 +53,7 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	 */
 	@Override
 	public String getColorAsString() {
-		return title.getColorAsString();
+		return legendTitle.getColorAsString();
 	}
 
 	/*
@@ -63,7 +63,7 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	 */
 	@Override
 	public boolean isDisplay() {
-		return title.isDisplay();
+		return legendTitle.isDisplay();
 	}
 
 	/*
@@ -73,7 +73,7 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	 */
 	@Override
 	public int getPadding() {
-		return title.getPadding();
+		return legendTitle.getPadding();
 	}
 
 }
