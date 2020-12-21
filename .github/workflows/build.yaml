@@ -11,6 +11,7 @@ on:
    push:
       branches:
          - master
+         - chartjs3.0.0
 
 # workflow environment and steps
 jobs:
@@ -24,6 +25,8 @@ jobs:
            with:
              # Disabling shallow clone 
              fetch-depth: 0
+         - name: Remove pom
+           run: pwd    
          # setup a Java JDK
          - name: Setup JDK
            uses: actions/setup-java@v1
