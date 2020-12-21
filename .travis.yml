@@ -48,7 +48,7 @@ install: /bin/true
 script: 
    - git fetch --unshallow
    - ant buildAll
-   # - sonar-scanner
+   - sonar-scanner
 # list the content of Ivy cache dir AFTER
 after_script: ls -R ~/.ant 
 #
