@@ -11,7 +11,6 @@ on:
    push:
       branches:
          - master
-         - chartjs3.0.0
 
 # workflow environment and steps
 jobs:
@@ -42,11 +41,11 @@ jobs:
          - name: Build
            run: ant buildAll
          # run the sonar scan
-         #- name: SonarCloud Scan
-         #  uses: sonarsource/sonarcloud-github-action@master
-         #  env:
-         #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         - name: SonarCloud Scan
+           uses: sonarsource/sonarcloud-github-action@master
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
          # print out the artifacts list
          - name: Print artifacts
            run: ls -R ./dist
