@@ -21,6 +21,13 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultTitle extends IsDefaultPluginElement{
+	
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	String getColorAsString();
 
 	/**
 	 * Returns the font defaults.

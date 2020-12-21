@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.HasLegendText;
@@ -63,6 +65,42 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> impleme
 	 */
 	public Font getFont() {
 		return font;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		getConfiguration().getLegend().getTitle().setColor(color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	public String getColorAsString() {
+		return getConfiguration().getLegend().getTitle().getColorAsString();
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

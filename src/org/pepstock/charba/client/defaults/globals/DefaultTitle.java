@@ -55,6 +55,16 @@ public final class DefaultTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isDisplay()
 	 */
 	@Override

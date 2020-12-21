@@ -226,7 +226,7 @@ final class HtmlLegendGenerator {
 			titleCell.appendChild(titleText);
 			// styling the cell with mandatory values
 			titleText.getStyle().setFont(Utilities.toCSSFontProperty(title.getFont()));
-			titleText.getStyle().setColor(title.getFont().getColor().toRGBA());
+			titleText.getStyle().setColor(title.getColor().toRGBA());
 			// checks text direction
 			if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
 				titleText.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());
@@ -380,7 +380,7 @@ final class HtmlLegendGenerator {
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
 		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFont()));
-		label.getStyle().setColor(legendLabels.getFont().getColor().toRGBA());
+		label.getStyle().setColor(legendLabels.getColor().toRGBA());
 		// checks text direction
 		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
 			label.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());

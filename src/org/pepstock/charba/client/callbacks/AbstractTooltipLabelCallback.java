@@ -69,11 +69,11 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	public IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
-			return chart.getOptions().getTooltips().getBodyFont().getColor();
+			return chart.getOptions().getTooltips().getBodyColor();
 		}
 		// if here, chart is not consistent
 		// then return the default font color
-		return Defaults.get().getGlobal().getFont().getColor();
+		return Defaults.get().getGlobal().getColor();
 	}
 
 	/*

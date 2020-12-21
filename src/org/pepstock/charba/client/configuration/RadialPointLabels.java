@@ -21,6 +21,8 @@ import org.pepstock.charba.client.callbacks.ScaleFontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -148,6 +150,42 @@ public class RadialPointLabels extends AxisContainer {
 		// checks if font is scriptable
 		// otherwise returns null
 		return getFontCallback() == null ? font : null;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		getAxis().getScale().getPointLabels().setColor(color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	public String getColorAsString() {
+		return getAxis().getScale().getPointLabels().getColorAsString();
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

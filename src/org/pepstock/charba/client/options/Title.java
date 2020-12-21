@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
@@ -37,6 +39,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	 */
 	private enum Property implements Key
 	{
+		COLOR("color"),
 		FONT("font"),
 		PADDING("padding"),
 		FULL_WIDTH("fullWidth"),
@@ -90,6 +93,43 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	@Override
 	public Font getFont() {
 		return font;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		setValueAndAddToParent(Property.COLOR, color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	@Override
+	public String getColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

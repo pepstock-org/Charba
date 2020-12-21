@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
@@ -31,6 +33,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	private enum Property implements Key
 	{
+		COLOR("color"),
 		FONT("font"),
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
@@ -112,7 +115,44 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	public Font getFont() {
 		return font;
 	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
 
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		setValueAndAddToParent(Property.COLOR, color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	@Override
+	public String getColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
+	}
+	
 	/**
 	 * Sets if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 * 

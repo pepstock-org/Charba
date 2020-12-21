@@ -564,7 +564,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return getConfiguration().getTooltips().getBodyFont().getColorAsString();
+		return getConfiguration().getTooltips().getBodyColorAsString();
 	}
 
 	/**

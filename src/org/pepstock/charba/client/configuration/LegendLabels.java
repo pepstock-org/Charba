@@ -24,6 +24,8 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendItemSortCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -217,6 +219,42 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public Font getFont() {
 		return font;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		getConfiguration().getLegend().getLabels().setColor(color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	public String getColorAsString() {
+		return getConfiguration().getLegend().getLabels().getColorAsString();
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

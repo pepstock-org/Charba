@@ -46,6 +46,13 @@ public interface IsDefaultTicks {
 	 * @return the number formatting options
 	 */
 	IsDefaultNumberFormatOptions getNumberFormat();
+	
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	String getColorAsString();
 
 	/**
 	 * If true, show tick marks

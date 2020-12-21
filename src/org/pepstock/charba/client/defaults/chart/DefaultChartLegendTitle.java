@@ -49,6 +49,16 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return title.getColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#isDisplay()
 	 */
 	@Override

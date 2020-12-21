@@ -60,13 +60,16 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 		ENABLED("enabled"),
 		POSITION("position"),
 		BACKGROUND_COLOR("backgroundColor"),
+		TITLE_COLOR("titleColor"),
 		TITLE_FONT("titleFont"),
 		TITLE_ALIGN("titleAlign"),
 		TITLE_SPACING("titleSpacing"),
 		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
+		BODY_COLOR("bodyColor"),
 		BODY_FONT("bodyFont"),
 		BODY_SPACING("bodySpacing"),
 		BODY_ALIGN("bodyAlign"),
+		FOOTER_COLOR("footerColor"),
 		FOOTER_FONT("footerFont"),
 		FOOTER_SPACING("footerSpacing"),
 		FOOTER_MARGIN_TOP("footerMarginTop"),
@@ -319,6 +322,43 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	public Font getTitleFont() {
 		return titleFont;
 	}
+	
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param color title font color.
+	 */
+	public void setTitleColor(IsColor color) {
+		setTitleColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param color title font color.
+	 */
+	public void setTitleColor(String color) {
+		setValueAndAddToParent(Property.TITLE_COLOR, color);
+	}
+
+	/**
+	 * Returns the title font color as string.
+	 * 
+	 * @return title font color as string
+	 */
+	@Override
+	public String getTitleColorAsString() {
+		return getValue(Property.TITLE_COLOR, getDefaultValues().getTitleColorAsString());
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color
+	 */
+	public IsColor getTitleColor() {
+		return ColorBuilder.parse(getTitleColorAsString());
+	}
 
 	/**
 	 * Sets the title alignment.
@@ -386,6 +426,43 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	public Font getBodyFont() {
 		return bodyFont;
 	}
+	
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param color body font color.
+	 */
+	public void setBodyColor(IsColor color) {
+		setBodyColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param color body font color.
+	 */
+	public void setBodyColor(String color) {
+		setValueAndAddToParent(Property.BODY_COLOR, color);
+	}
+
+	/**
+	 * Returns the body font color as string.
+	 * 
+	 * @return body font color as string
+	 */
+	@Override
+	public String getBodyColorAsString() {
+		return getValue(Property.BODY_COLOR, getDefaultValues().getBodyColorAsString());
+	}
+
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color
+	 */
+	public IsColor getBodyColor() {
+		return ColorBuilder.parse(getBodyColorAsString());
+	}
 
 	/**
 	 * Sets the body alignment.
@@ -433,6 +510,43 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	@Override
 	public Font getFooterFont() {
 		return footerFont;
+	}
+	
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param color footer font color.
+	 */
+	public void setFooterColor(IsColor color) {
+		setFooterColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param color footer font color.
+	 */
+	public void setFooterColor(String color) {
+		setValueAndAddToParent(Property.FOOTER_COLOR, color);
+	}
+
+	/**
+	 * Returns the footer font color as string.
+	 * 
+	 * @return footer font color as string
+	 */
+	@Override
+	public String getFooterColorAsString() {
+		return getValue(Property.FOOTER_COLOR, getDefaultValues().getFooterColorAsString());
+	}
+
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color
+	 */
+	public IsColor getFooterColor() {
+		return ColorBuilder.parse(getFooterColorAsString());
 	}
 
 	/**

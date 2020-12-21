@@ -87,16 +87,6 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getColorAsString()
-	 */
-	@Override
-	public String getColorAsString() {
-		return font.getColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getSize()
 	 */
 	@Override
@@ -142,36 +132,6 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	@Override
 	public double getLineHeight() {
 		return font.getLineHeight();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getLineWidth()
-	 */
-	@Override
-	public int getLineWidth() {
-		return font.getLineWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getStrokeStyleAsString()
-	 */
-	@Override
-	public String getStrokeStyleAsString() {
-		return font.getStrokeStyleAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsFont#setColor(java.lang.String)
-	 */
-	@Override
-	public void setColor(String color) {
-		font.setColor(color);
 	}
 
 	/*
@@ -242,26 +202,6 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	@Override
 	public String getLineHeightAsString() {
 		return font.getLineHeightAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsFont#setLineWidth(int)
-	 */
-	@Override
-	public void setLineWidth(int lineWidth) {
-		font.setLineWidth(lineWidth);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsFont#setStrokeStyle(java.lang.String)
-	 */
-	@Override
-	public void setStrokeStyle(String strokeStyle) {
-		font.setStrokeStyle(strokeStyle);
 	}
 
 	/**

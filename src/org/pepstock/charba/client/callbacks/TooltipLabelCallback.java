@@ -90,7 +90,7 @@ public interface TooltipLabelCallback {
 	 * @return label text color to be applied.
 	 */
 	default IsColor onLabelTextColor(IsChart chart, TooltipItem item) {
-		return chart.getOptions().getTooltips().getBodyFont().getColor();
+		return chart.getOptions().getTooltips().getBodyColor();
 	}
 
 	/**

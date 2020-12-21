@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
@@ -27,31 +25,6 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsFont extends IsDefaultFont {
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	default void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	void setColor(String color);
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	default IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
-	}
 
 	/**
 	 * Sets the font size.
@@ -101,41 +74,5 @@ public interface IsFont extends IsDefaultFont {
 	 * @return the height of an individual line of text.
 	 */
 	String getLineHeightAsString();
-
-	/**
-	 * Sets the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param lineWidth the stroke width around the text
-	 */
-	void setLineWidth(int lineWidth);
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	default void setStrokeStyle(IsColor strokeStyle) {
-		setStrokeStyle(IsColor.checkAndGetValue(strokeStyle));
-	}
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	void setStrokeStyle(String strokeStyle);
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	default IsColor getStrokeStyle() {
-		return ColorBuilder.parse(getStrokeStyleAsString());
-	}
 
 }

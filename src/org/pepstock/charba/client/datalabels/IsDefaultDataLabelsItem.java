@@ -150,7 +150,7 @@ interface IsDefaultDataLabelsItem {
 	 * @return the color as string.
 	 */
 	default String getColorAsString() {
-		return Defaults.get().getGlobal().getFont().getColorAsString();
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/**

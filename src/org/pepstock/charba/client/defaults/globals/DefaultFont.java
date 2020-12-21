@@ -28,15 +28,9 @@ public class DefaultFont implements IsDefaultFont {
 
 	private static final int DEFAULT_FONT_SIZE = 12;
 
-	private static final String DEFAULT_FONT_COLOR = "#666";
-
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
-
-	private static final String DEFAULT_STROKE_STYLE = "rgba(255, 255, 255, 0)";
-
-	private static final int DEFAULT_LINE_WIDTH = 0;
 
 	/**
 	 * To avoid any instantiation
@@ -45,15 +39,6 @@ public class DefaultFont implements IsDefaultFont {
 		// do nothing
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getColorAsString()
-	 */
-	@Override
-	public String getColorAsString() {
-		return DEFAULT_FONT_COLOR;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -103,26 +88,6 @@ public class DefaultFont implements IsDefaultFont {
 	@Override
 	public double getLineHeight() {
 		return DEFAULT_LINE_HEIGHT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getLineWidth()
-	 */
-	@Override
-	public int getLineWidth() {
-		return DEFAULT_LINE_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getStrokeStyleAsString()
-	 */
-	@Override
-	public String getStrokeStyleAsString() {
-		return DEFAULT_STROKE_STYLE;
 	}
 
 }

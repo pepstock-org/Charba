@@ -46,6 +46,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	private enum Property implements Key
 	{
 		// commons
+		COLOR("color"),
 		DISPLAY("display"),
 		FONT("font"),
 		MAJOR("major"),
@@ -143,6 +144,43 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public TicksNumberFormat getNumberFormat() {
 		return numberFormat;
+	}
+	
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the font color.
+	 * 
+	 * @param color font color.
+	 */
+	public void setColor(String color) {
+		setValueAndAddToParent(Property.COLOR, color);
+	}
+
+	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	@Override
+	public String getColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
+	}
+
+	/**
+	 * Returns the font color.
+	 * 
+	 * @return font color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

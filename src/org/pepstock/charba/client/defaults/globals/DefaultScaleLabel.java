@@ -66,6 +66,16 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#isDisplay()
 	 */
 	@Override

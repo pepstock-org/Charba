@@ -18,25 +18,24 @@ package org.pepstock.charba.client.labels.callbacks;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.labels.Context;
-import org.pepstock.charba.client.labels.Font;
 import org.pepstock.charba.client.labels.LabelsPlugin;
 
 /**
- * Callback interface of {@link LabelsPlugin#ID} plugin to change font at runtime, using the arguments.
+ * Callback interface of {@link LabelsPlugin#ID} plugin to change font color at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  * @see IsColor
  */
-public interface FontCallback {
+public interface ColorCallback {
 
 	/**
-	 * Called to change font at runtime, using the arguments.
+	 * Called to change font color at runtime, using the arguments.
 	 * 
 	 * @param chart chart instance
 	 * @param context callback context, passed by plugin
-	 * @return a font instance
+	 * @return a font color instance
 	 */
-	Font invoke(IsChart chart, Context context);
+	Object invoke(IsChart chart, Context context);
 
 }

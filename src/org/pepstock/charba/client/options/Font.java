@@ -16,8 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Helpers;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -42,15 +40,11 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	private enum Property implements Key
 	{
-		COLOR("color"),
 		FAMILY("family"),
 		SIZE("size"),
 		STYLE("style"),
 		WEIGHT("weight"),
-		LINE_HEIGHT("lineHeight"),
-		LINE_WIDTH("lineWidth"),
-		STROKE_STYLE("strokeStyle");
-
+		LINE_HEIGHT("lineHeight");
 		// name value of property
 		private final String value;
 
@@ -88,46 +82,6 @@ public final class Font extends AbstractNode implements IsFont {
 		// checks if default value is consistent
 		// stores defaults values
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	@Override
-	public void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	@Override
-	public void setColor(String color) {
-		setValueAndAddToParent(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	@Override
-	public String getColorAsString() {
-		return getValue(Property.COLOR, defaultValues.getColorAsString());
-	}
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	@Override
-	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -266,72 +220,6 @@ public final class Font extends AbstractNode implements IsFont {
 		// if here, is not a number
 		// then returns the default
 		return defaultValue;
-	}
-
-	/**
-	 * Sets the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param lineWidth the stroke width around the text
-	 */
-	@Override
-	public void setLineWidth(int lineWidth) {
-		setValueAndAddToParent(Property.LINE_WIDTH, lineWidth);
-	}
-
-	/**
-	 * Returns the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the stroke width around the text
-	 */
-	@Override
-	public int getLineWidth() {
-		return getValue(Property.LINE_WIDTH, defaultValues.getLineWidth());
-	}
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	@Override
-	public void setStrokeStyle(IsColor strokeStyle) {
-		setColor(IsColor.checkAndGetValue(strokeStyle));
-	}
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	@Override
-	public void setStrokeStyle(String strokeStyle) {
-		setValueAndAddToParent(Property.STROKE_STYLE, strokeStyle);
-	}
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	@Override
-	public String getStrokeStyleAsString() {
-		return getValue(Property.STROKE_STYLE, defaultValues.getStrokeStyleAsString());
-	}
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	@Override
-	public IsColor getStrokeStyle() {
-		return ColorBuilder.parse(getStrokeStyleAsString());
 	}
 
 	/**

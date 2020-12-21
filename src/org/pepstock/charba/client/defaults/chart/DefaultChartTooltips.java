@@ -114,6 +114,16 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleColorAsString()
+	 */
+	@Override
+	public String getTitleColorAsString() {
+		return tooltips.getTitleColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleAlign()
 	 */
 	@Override
@@ -154,6 +164,16 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyColorAsString()
+	 */
+	@Override
+	public String getBodyColorAsString() {
+		return tooltips.getBodyColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyAlign()
 	 */
 	@Override
@@ -179,6 +199,16 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public IsDefaultFont getFooterFont() {
 		return tooltips.getFooterFont();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterColorAsString()
+	 */
+	@Override
+	public String getFooterColorAsString() {
+		return tooltips.getFooterColorAsString();
 	}
 
 	/*

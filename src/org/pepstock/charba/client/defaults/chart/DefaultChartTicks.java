@@ -75,6 +75,16 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return ticks.getColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isDisplay()
 	 */
 	@Override

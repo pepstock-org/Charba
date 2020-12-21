@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.options.IsFont;
@@ -43,46 +41,6 @@ public final class Font implements IsFont {
 		}
 		// stores font container
 		this.innerFont = font;
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	@Override
-	public void setColor(IsColor color) {
-		innerFont.setColor(color);
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	@Override
-	public void setColor(String color) {
-		innerFont.setColor(color);
-	}
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	@Override
-	public String getColorAsString() {
-		return innerFont.getColorAsString();
-	}
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	@Override
-	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -204,72 +162,4 @@ public final class Font implements IsFont {
 	public String getLineHeightAsString() {
 		return innerFont.getLineHeightAsString();
 	}
-
-	/**
-	 * Sets the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param lineWidth the stroke width around the text
-	 */
-	@Override
-	public void setLineWidth(int lineWidth) {
-		innerFont.setLineWidth(lineWidth);
-
-	}
-
-	/**
-	 * Returns the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the stroke width around the text
-	 */
-	@Override
-	public int getLineWidth() {
-		return innerFont.getLineWidth();
-	}
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	@Override
-	public void setStrokeStyle(IsColor strokeStyle) {
-		innerFont.setStrokeStyle(strokeStyle);
-	}
-
-	/**
-	 * Sets the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @param strokeStyle the color of the stroke around the text
-	 */
-	@Override
-	public void setStrokeStyle(String strokeStyle) {
-		innerFont.setStrokeStyle(strokeStyle);
-	}
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	@Override
-	public String getStrokeStyleAsString() {
-		return innerFont.getStrokeStyleAsString();
-	}
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	@Override
-	public IsColor getStrokeStyle() {
-		return ColorBuilder.parse(getStrokeStyleAsString());
-	}
-
 }

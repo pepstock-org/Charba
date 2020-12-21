@@ -177,7 +177,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
    * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
    * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
-   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following options classes, because new `Font` implementation must be used:
+   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` and add `color` property (to set font color) to the following options classes, because new `Font` implementation must be used:
       * `Options`
       * `LegendLabels`
       * `Title`
@@ -185,7 +185,7 @@ Here you can find the list of enhancements and updates available on `master` bra
       * `PointLabels`
       * `ScaleLabel`
       * `Ticks`
-   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` from the following configuration classes, because new `Font` implementation must be used:
+   * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` and add `color` property (to set font color) to the following configuration classes, because new `Font` implementation must be used:
       * `LegendLabels`
       * `Title`
       * `Tooltips`
@@ -193,7 +193,7 @@ Here you can find the list of enhancements and updates available on `master` bra
       * `CartesianScaleLabel`
       * `Ticks`
    * change `toFont` method to `Utilities` class in order to get the weight of the font.
-   * remove `DefaultFontItem` class, use `DefaultFont`. 
+   * remove `DefaultFontItem` class, use `DefaultFont`.
    * remove the following classes because the ticks implementation is updated:
        * `TickMinor`, `IsDefaultMinorTick`, `AbstractTick`, `IsDefaultBaseTick`, `DefaultTickItem`, `DefaultMinorTickItem`, `BaseTickMinor` and `BaseTick`
    * remove `getMinor` method from `IsDefaultTicks` interface and then from `DefaultTicks` and `DefaultChartTicks` classes.
@@ -273,8 +273,10 @@ Here you can find the list of enhancements and updates available on `master` bra
    * reduce the visibility of `register` method of `Controller` class   
  * remove `AbstractPluginCachedOptions` and `AbstractPluginCachedOptionsFactory` classes. Use instead callbacks cache.
  * change `LabelsPlugin` in order to :
+   * add new `color` property for the font color, in order to be aligned with CHART.JS 3 implementation.
+   * change `FontColorCallback` in favor of `ColorCallback` where you can decide the font color.
    * use `font` object instead of the single properties.
-   * remove `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font and not only color.
+   * add `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font.
    * pass a `Context` object instance as argument to the callback instead of `RenderItem` and `FontColorItem` ones.
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
   

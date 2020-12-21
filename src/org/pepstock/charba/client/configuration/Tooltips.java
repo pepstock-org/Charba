@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
 import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -373,6 +374,42 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getTitleFont() {
 		return titleFont;
 	}
+	
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param color title font color.
+	 */
+	public void setTitleColor(IsColor color) {
+		getConfiguration().getTooltips().setTitleColor(color);
+	}
+
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param color title font color.
+	 */
+	public void setTitleColor(String color) {
+		getConfiguration().getTooltips().setTitleColor(color);
+	}
+
+	/**
+	 * Returns the title font color as string.
+	 * 
+	 * @return title font color as string
+	 */
+	public String getTitleColorAsString() {
+		return getConfiguration().getTooltips().getTitleColorAsString();
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color
+	 */
+	public IsColor getTitleColor() {
+		return ColorBuilder.parse(getTitleColorAsString());
+	}
 
 	/**
 	 * Sets the title alignment.
@@ -436,6 +473,42 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getBodyFont() {
 		return bodyFont;
 	}
+	
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param color body font color.
+	 */
+	public void setBodyColor(IsColor color) {
+		getConfiguration().getTooltips().setBodyColor(color);
+	}
+
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param color body font color.
+	 */
+	public void setBodyColor(String color) {
+		getConfiguration().getTooltips().setBodyColor(color);
+	}
+
+	/**
+	 * Returns the body font color as string.
+	 * 
+	 * @return body font color as string
+	 */
+	public String getBodyColorAsString() {
+		return getConfiguration().getTooltips().getBodyColorAsString();
+	}
+
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color
+	 */
+	public IsColor getBodyColor() {
+		return ColorBuilder.parse(getBodyColorAsString());
+	}
 
 	/**
 	 * Sets the body alignment.
@@ -481,6 +554,43 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getFooterFont() {
 		return footerFont;
 	}
+	
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param color footer font color.
+	 */
+	public void setFooterColor(IsColor color) {
+		getConfiguration().getTooltips().setFooterColor(color);
+	}
+
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param color footer font color.
+	 */
+	public void setFooterColor(String color) {
+		getConfiguration().getTooltips().setFooterColor(color);
+	}
+
+	/**
+	 * Returns the footer font color as string.
+	 * 
+	 * @return footer font color as string
+	 */
+	public String getFooterColorAsString() {
+		return getConfiguration().getTooltips().getFooterColorAsString();
+	}
+
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color
+	 */
+	public IsColor getFooterColor() {
+		return ColorBuilder.parse(getFooterColorAsString());
+	}
+
 
 	/**
 	 * Sets the footer alignment.

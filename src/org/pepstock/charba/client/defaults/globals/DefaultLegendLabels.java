@@ -50,6 +50,16 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getFont()
 	 */
 	@Override

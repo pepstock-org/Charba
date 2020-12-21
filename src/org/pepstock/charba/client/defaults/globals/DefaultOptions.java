@@ -40,7 +40,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
-	private static final String DEFAULT_COLOR = "#666";
+	static final String DEFAULT_COLOR = "#666";
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 

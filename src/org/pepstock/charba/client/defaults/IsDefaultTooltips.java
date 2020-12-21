@@ -74,6 +74,13 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner, IsDefaultBo
 	 * @return the title font.
 	 */
 	IsDefaultFont getTitleFont();
+	
+	/**
+	 * Returns the title font color as string.
+	 * 
+	 * @return title font color as string
+	 */
+	String getTitleColorAsString();
 
 	/**
 	 * Returns the title alignment.
@@ -102,6 +109,13 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner, IsDefaultBo
 	 * @return body line font.
 	 */
 	IsDefaultFont getBodyFont();
+	
+	/**
+	 * Returns the body font color as string.
+	 * 
+	 * @return body font color as string
+	 */
+	String getBodyColorAsString();
 
 	/**
 	 * Returns the body alignment.
@@ -123,6 +137,13 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectioner, IsDefaultBo
 	 * @return footer font.
 	 */
 	IsDefaultFont getFooterFont();
+	
+	/**
+	 * Returns the footer font color as string.
+	 * 
+	 * @return footer font color as string
+	 */
+	String getFooterColorAsString();
 
 	/**
 	 * Returns the footer alignment.

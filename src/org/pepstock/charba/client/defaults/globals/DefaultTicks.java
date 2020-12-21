@@ -107,6 +107,16 @@ public class DefaultTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isDisplay()
 	 */
 	@Override
@@ -294,7 +304,9 @@ public class DefaultTicks implements IsDefaultTicks {
 		return ElementAlign.CENTER;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getCrossAlign()
 	 */
 	@Override

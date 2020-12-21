@@ -51,6 +51,16 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return DefaultOptions.DEFAULT_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#getPadding()
 	 */
 	@Override

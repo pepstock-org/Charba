@@ -41,6 +41,16 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return labels.getColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getFont()
 	 */
 	@Override

@@ -50,6 +50,16 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return pointLabels.getColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isDisplay()
 	 */
 	@Override

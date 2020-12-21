@@ -26,13 +26,6 @@ import org.pepstock.charba.client.enums.Weight;
 public interface IsDefaultFont {
 
 	/**
-	 * Returns the font color
-	 * 
-	 * @return Font color
-	 */
-	String getColorAsString();
-
-	/**
 	 * Returns the font size.
 	 * 
 	 * @return the font size.
@@ -67,19 +60,4 @@ public interface IsDefaultFont {
 	 */
 	double getLineHeight();
 
-	/**
-	 * Returns the stroke width around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the stroke width around the text
-	 */
-	int getLineWidth();
-
-	/**
-	 * Returns the color of the stroke around the text.<br>
-	 * Currently only supported by ticks.
-	 * 
-	 * @return the color of the stroke around the text
-	 */
-	String getStrokeStyleAsString();
 }

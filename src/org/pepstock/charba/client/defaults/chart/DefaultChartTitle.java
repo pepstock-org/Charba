@@ -47,6 +47,16 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	public IsDefaultFont getFont() {
 		return title.getFont();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return title.getColorAsString();
+	}
 
 	/*
 	 * (non-Javadoc)

@@ -24,6 +24,13 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultLegendTitle {
 
 	/**
+	 * Returns the font color as string.
+	 * 
+	 * @return font color as string
+	 */
+	String getColorAsString();
+	
+	/**
 	 * Returns the font defaults.
 	 * 
 	 * @return the font defaults.
