@@ -21,13 +21,21 @@ jobs:
          # checkout the repository content
          - name: Checkout
            uses: actions/checkout@v2
+           with:
+             # Disabling shallow clone
+             fetch-depth: 0
          # setup a Java JDK
          - name: Setup JDK
            uses: actions/setup-java@v1
            with:
              java-version: '11'
+         # setup a Java JDK
+         - name: Setup Node.js
+           uses: actions/setup-node@v2    
+           with:
+             node-version: '12'         
          # run the ant build
-         - name: Ant build
+         - name: Build
            run: ant buildAll
          # print out the artifacts list
          - name: Print artifacts
