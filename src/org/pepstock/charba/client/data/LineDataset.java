@@ -284,7 +284,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 
 	/**
 	 * Sets if the line is shown as a stepped line.<br>
-	 * If the stepped value is set to anything other than false, lineTension will be ignored.
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
 	 * @param line if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
@@ -301,7 +301,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 
 	/**
 	 * Sets if the line is shown as a stepped line.<br>
-	 * If the stepped value is set to anything other than false, lineTension will be ignored.
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
 	 * @param line if the line is shown as a stepped line.
 	 */

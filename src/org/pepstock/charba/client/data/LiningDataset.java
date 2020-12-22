@@ -215,7 +215,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		HOVER_BORDER_DASH_OFFSET("hoverBorderDashOffset"),
 		HOVER_BORDER_CAP_STYLE("hoverBorderCapStyle"),
 		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
-		LINE_TENSION("lineTension"),
+		TENSION("tension"),
 		POINT_BORDER_WIDTH("pointBorderWidth"),
 		POINT_RADIUS("pointRadius"),
 		POINT_STYLE("pointStyle"),
@@ -768,10 +768,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/**
 	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
 	 * 
-	 * @param lineTension curve tension of the line
+	 * @param tension curve tension of the line
 	 */
-	public void setLineTension(double lineTension) {
-		setValue(Property.LINE_TENSION, lineTension);
+	public void setTension(double tension) {
+		setValue(Property.TENSION, tension);
 	}
 
 	/**
@@ -779,8 +779,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return curve tension of the line.
 	 */
-	public double getLineTension() {
-		return getValue(Property.LINE_TENSION, getDefaultValues().getElements().getLine().getTension());
+	public double getTension() {
+		return getValue(Property.TENSION, getDefaultValues().getElements().getLine().getTension());
 	}
 
 	/**
