@@ -46,7 +46,8 @@ before_install:
 install: /bin/true
 # run the ant main target
 script: 
-   - git fetch --unshallow
+    - ls
+#   - git fetch --unshallow
 #   - ant buildAll
 #   - sonar-scanner
 # list the content of Ivy cache dir AFTER

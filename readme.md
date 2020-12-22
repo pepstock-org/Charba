@@ -456,6 +456,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * use new location for legend, title and tooltips options, into `plugins` options node.
+ * enable CI into GitHub Action, disabling Travis.
 
 License
 -------
