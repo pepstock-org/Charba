@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.callbacks.ScaleFontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
@@ -70,6 +71,8 @@ public class RadialPointLabels extends AxisContainer {
 	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the color function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -78,6 +81,8 @@ public class RadialPointLabels extends AxisContainer {
 	private RadialPointLabelCallback callback = null;
 	// font callback instance
 	private ScaleFontCallback fontCallback = null;
+	// color callback instance
+	private ColorCallback colorCallback = null;
 
 	// font instance
 	private final Font font;
@@ -87,6 +92,7 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	private enum Property implements Key
 	{
+		COLOR("color"),
 		FONT("font"),
 		CALLBACK("callback");
 
@@ -137,6 +143,8 @@ public class RadialPointLabels extends AxisContainer {
 		});
 		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
+		// gets value calling callback
+		colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback));
 	}
 
 	/**
@@ -261,6 +269,33 @@ public class RadialPointLabels extends AxisContainer {
 	}
 	
 	/**
+	 * Returns the color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the color callback, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback getColorCallback() {
+		return colorCallback;
+	}
+
+	/**
+	 * Sets the the color callback.
+	 * 
+	 * @param colorCallback the color callback to set
+	 */
+	public void setColor(ColorCallback colorCallback) {
+		// sets the callback
+		this.colorCallback = colorCallback;
+		// checks if callback is consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, colorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, null);
+		}
+	}
+	
+	/**
 	 * Returns a native object as font when the callback has been activated.
 	 * 
 	 * @param context native object as context
@@ -277,6 +312,27 @@ public class RadialPointLabels extends AxisContainer {
 		}
 		// default result
 		return getAxis().getScale().getPointLabels().getFont().createOptions().nativeObject();
+	}
+	
+	/**
+	 * Returns a string as color when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @return a string as color
+	 */
+	private String onColor(ScaleScriptableContext context, ColorCallback callback) {
+		// gets default color
+		String defaultColor = getAxis().getConfiguration().getPointLabels().getColorAsString();
+		// gets value
+		Object result = ScriptableUtils.getOptionValueAsColor(getAxis(), context, callback, defaultColor, false);
+		// checks if result is a string
+		if (result instanceof String) {
+			// returns result
+			return (String)result;
+		}
+		// default result
+		return defaultColor;
 	}
 
 }

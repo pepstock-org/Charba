@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleFontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -39,6 +40,9 @@ abstract class Tick extends AxisContainer {
 	// ---------------------------
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the color function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+
 	// the axis instance, owner of this tick
 	private final Ticks configuration;
 	// major tick instance
@@ -47,12 +51,15 @@ abstract class Tick extends AxisContainer {
 	private final Font font;
 	// font callback instance
 	private ScaleFontCallback fontCallback = null;
+	// color callback instance
+	private ColorCallback colorCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
+		COLOR("color"),
 		FONT("font"),
 		CALLBACK("callback");
 
@@ -97,6 +104,8 @@ abstract class Tick extends AxisContainer {
 		// -------------------------------
 		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
+		// gets value calling callback
+		colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback));
 	}
 
 	/**
@@ -232,6 +241,33 @@ abstract class Tick extends AxisContainer {
 	public ScaleFontCallback getFontCallback() {
 		return fontCallback;
 	}
+	
+	/**
+	 * Returns the color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the color callback, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback getColorCallback() {
+		return colorCallback;
+	}
+
+	/**
+	 * Sets the the color callback.
+	 * 
+	 * @param colorCallback the color callback to set
+	 */
+	public void setColor(ColorCallback colorCallback) {
+		// sets the callback
+		this.colorCallback = colorCallback;
+		// checks if callback is consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getConfiguration(), Property.COLOR, colorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getConfiguration(), Property.COLOR, null);
+		}
+	}
 
 	/**
 	 * Sets the the font callback.
@@ -268,6 +304,27 @@ abstract class Tick extends AxisContainer {
 		}
 		// default result
 		return getConfiguration().getFont().createOptions().nativeObject();
+	}
+	
+	/**
+	 * Returns a string as color when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @return a string as color
+	 */
+	private String onColor(ScaleScriptableContext context, ColorCallback callback) {
+		// gets default color
+		String defaultColor = getAxis().getConfiguration().getTicks().getColorAsString();
+		// gets value
+		Object result = ScriptableUtils.getOptionValueAsColor(getAxis(), context, callback, defaultColor, false);
+		// checks if result is a string
+		if (result instanceof String) {
+			// returns result
+			return (String)result;
+		}
+		// default result
+		return defaultColor;
 	}
 
 }
