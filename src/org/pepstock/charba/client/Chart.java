@@ -82,14 +82,26 @@ public final class Chart {
 	native void register(NativeObject plugin);
 
 	/**
-	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the
-	 * canvas nodes container element.
+	 * Use this to manually resize the canvas element.<br>
+	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
 	 */
 	@JsMethod
 	native void resize();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
+	 * Use this to manually resize the canvas element.<br>
+	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
+	 * 
+	 * @param width width size of resize
+	 * @param height height size of resize
+	 */
+	@JsMethod
+	native void resize(int width, int height);
+
+	/**
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.
 	 */
 	@JsMethod
 	native void update();
@@ -107,32 +119,36 @@ public final class Chart {
 	native void update(String mode);
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in that case.
+	 * Triggers a redraw of all chart elements.<br>
+	 * Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	@JsMethod
 	native void render();
 
 	/**
-	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event
-	 * listeners attached by Chart.js.
+	 * Use this to destroy any chart instances that are created.<br>
+	 * This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
 	@JsMethod
 	native void destroy();
 
 	/**
-	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call <code>.render()</code> to re-animate.
+	 * Use this to stop any current animation loop. <br>
+	 * This will pause the chart during any current animation frame. Call <code>.render()</code> to re-animate.
 	 */
 	@JsMethod
 	native void stop();
 
 	/**
-	 * Will clear the chart canvas. Used extensively internally between animation frames.
+	 * Will clear the chart canvas.<br>
+	 * Used extensively internally between animation frames.
 	 */
 	@JsMethod
 	native void clear();
 
 	/**
-	 * Reset the chart to it's state before the initial animation. A new animation can then be triggered using update.
+	 * Reset the chart to it's state before the initial animation.<br>
+	 * A new animation can then be triggered using update.
 	 */
 	@JsMethod
 	native void reset();
@@ -146,7 +162,7 @@ public final class Chart {
 	native String toBase64Image();
 
 	/**
-	 * Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
+	 * Returns an HTML string of a legend for that chart.<br> The legend is generated from the legendCallback in the options.
 	 * 
 	 * @return the HTML legend.
 	 */
@@ -168,8 +184,9 @@ public final class Chart {
 	 * </code>
 	 * @param useFinalPosition if <code>true</code>, defines the interpolation to get the elements that will be in the event position when current animations are completed.<br>
 	 *            When <code>false</code>, elements are considered at their current position.
-	 * @return all elements at the same data index, as array of native object.<br> It is an object as following:<br>
-	 *            <code>
+	 * @return all elements at the same data index, as array of native object.<br>
+	 *         It is an object as following:<br>
+	 *         <code>
 	 * interface InteractionItem {
 	 *   element: Element;
 	 *   datasetIndex: number;

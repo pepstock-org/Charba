@@ -336,6 +336,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#resize(int, int)
+	 */
+	@Override
+	public void resize(int width, int height) {
+		chart.resize(width, height);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#update()
 	 */
 	@Override

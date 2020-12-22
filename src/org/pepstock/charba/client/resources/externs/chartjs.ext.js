@@ -9,9 +9,11 @@
  */
 function Chart(context, configuration) {}
 /**
+ * @param {number} width
+ * @param {number} height
  * @return {undefined}
  */
-Chart.prototype.resize = function() {};
+Chart.prototype.resize = function(width, height) {};
 /**
  * @param {string=} configuration
  * @return {undefined}
@@ -52,7 +54,7 @@ Chart.prototype.generateLegend = function() {};
  * @param {boolean} useFinalPosition 
  * @return {Array}
  */
-Chart.prototype.getElementsAtEventForMode = function(event, mode, options, boolean useFinalPosition) {};
+Chart.prototype.getElementsAtEventForMode = function(event, mode, options, useFinalPosition) {};
 /**
  * @param {number} index
  * @return {Object}

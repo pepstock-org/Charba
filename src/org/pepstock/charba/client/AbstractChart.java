@@ -590,6 +590,22 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
+	 * Use this to manually resize the canvas element.<br>
+	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
+	 * 
+	 * @param width width size of resize
+	 * @param height height size of resize
+	 */
+	@Override
+	public final void resize(int width, int height) {
+		// checks if chart is created
+		if (chart != null) {
+			// resize!
+			chart.resize(width, height);
+		}
+	}
+
+	/**
 	 * Triggers an update of the chart.<br>
 	 * This can be safely called after updating the data object.<br>
 	 * This will update all scales, legends, and then re-render the chart.

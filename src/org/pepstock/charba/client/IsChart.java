@@ -330,6 +330,15 @@ public interface IsChart {
 	 * canvas nodes container element.
 	 */
 	void resize();
+	
+	/**
+	 * Use this to manually resize the canvas element.<br>
+	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
+	 * 
+	 * @param width width size of resize
+	 * @param height height size of resize
+	 */
+	void resize(int width, int height);
 
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
