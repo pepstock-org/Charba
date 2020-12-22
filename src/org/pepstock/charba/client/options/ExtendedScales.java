@@ -65,7 +65,7 @@ public final class ExtendedScales extends Scales {
 		// to reduce complexity of this method
 		setInternalAxes(scales);
 	}
-	
+
 	/**
 	 * Sets all axes of chart.<br>
 	 * Implemented to reduce the complexity of <b>setAxes</b> public method.

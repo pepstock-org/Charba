@@ -20,22 +20,8 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPointLabels {
+public interface IsDefaultPointLabels extends IsDefaultFontContainer{
 	
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	String getColorAsString();
-
-	/**
-	 * Returns the font defaults.
-	 * 
-	 * @return the font defaults.
-	 */
-	IsDefaultFont getFont();
-
 	/**
 	 * Returns if the title is shown.
 	 * 

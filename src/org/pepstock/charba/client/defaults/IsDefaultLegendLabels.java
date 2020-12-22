@@ -21,21 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendLabels extends IsDefaultBoxer, IsDefaultPointStyler{
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	String getColorAsString();
-	
-	/**
-	 * Returns the font defaults.
-	 * 
-	 * @return the font defaults.
-	 */
-	IsDefaultFont getFont();
+public interface IsDefaultLegendLabels extends IsDefaultBoxer, IsDefaultPointStyler, IsDefaultFontContainer{
 
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).

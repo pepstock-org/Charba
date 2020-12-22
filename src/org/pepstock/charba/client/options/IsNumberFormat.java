@@ -36,8 +36,8 @@ import org.pepstock.charba.client.intl.enums.Style;
  * @author Andrea "Stock" Stocchero
  * @see AbstractNumberFormat
  */
-public interface IsNumberFormat extends IsDefaultNumberFormatOptions{
-	
+public interface IsNumberFormat extends IsDefaultNumberFormatOptions {
+
 	/**
 	 * Sets the locale matching algorithm to use.
 	 * 

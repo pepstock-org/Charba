@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasBarDatasetOptions extends IsDefaultBarDatasets{
+public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 
 	/**
 	 * Returns the instance of bar dataset options handler.
@@ -41,7 +41,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets{
 	 */
 	default void setBarPercentage(double barPercentage) {
 		// checks if handler is consistent
-		if (getDatasetOptionsHandler() != null  && barPercentage >=0D && barPercentage <=1D) {
+		if (getDatasetOptionsHandler() != null && barPercentage >= 0D && barPercentage <= 1D) {
 			getDatasetOptionsHandler().setBarPercentage(barPercentage);
 		}
 	}
@@ -70,7 +70,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets{
 	 */
 	default void setCategoryPercentage(double categoryPercentage) {
 		// checks if handler is consistent
-		if (getDatasetOptionsHandler() != null && categoryPercentage >=0D && categoryPercentage <=1D) {
+		if (getDatasetOptionsHandler() != null && categoryPercentage >= 0D && categoryPercentage <= 1D) {
 			getDatasetOptionsHandler().setCategoryPercentage(categoryPercentage);
 		}
 	}

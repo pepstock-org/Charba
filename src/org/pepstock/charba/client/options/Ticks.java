@@ -31,12 +31,12 @@ import org.pepstock.charba.client.enums.TickSource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> implements IsDefaultTicks {
+public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> implements IsDefaultTicks, HasFont {
 
 	// instance of major
 	private final Major major;
-	// instance of font
-	private final Font font;
+	// instance of font container
+	private final FontContainer fontContainer;
 	// instance of number format
 	private final TicksNumberFormat numberFormat;
 
@@ -46,9 +46,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	private enum Property implements Key
 	{
 		// commons
-		COLOR("color"),
 		DISPLAY("display"),
-		FONT("font"),
 		MAJOR("major"),
 		PADDING("padding"),
 		Z("z"),
@@ -112,18 +110,19 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		this.major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
-		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		this.numberFormat = new TicksNumberFormat(this, Property.FORMAT, getDefaultValues().getNumberFormat(), getValue(Property.FORMAT));
+		// creates font container
+		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
 
-	/**
-	 * Returns the font element.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the font
+	 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
 	 */
 	@Override
-	public Font getFont() {
-		return font;
+	public FontContainer getFontContainer() {
+		return fontContainer;
 	}
 
 	/**
@@ -144,43 +143,6 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public TicksNumberFormat getNumberFormat() {
 		return numberFormat;
-	}
-	
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(String color) {
-		setValueAndAddToParent(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	@Override
-	public String getColorAsString() {
-		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
-	}
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -574,7 +536,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public ElementAlign getAlign() {
 		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
 	}
-	
+
 	/**
 	 * Sets the tick alignment perpendicular to the axis.
 	 * 

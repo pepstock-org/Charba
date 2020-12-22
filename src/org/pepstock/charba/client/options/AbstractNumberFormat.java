@@ -40,7 +40,7 @@ import org.pepstock.charba.client.intl.enums.Style;
  * @see NumberFormatOptions
  */
 abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends AbstractModel<P, IsDefaultNumberFormatOptions> implements IsNumberFormat {
-	
+
 	private final NumberFormatOptions numberFormatOptions;
 
 	/**
@@ -56,7 +56,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 		// creates the number format option
 		this.numberFormatOptions = NumberFormatOptions.FACTORY.create(getNativeObject(), getDefaultValues());
 	}
-	
+
 	/**
 	 * Sets the locale matching algorithm to use.
 	 * 
@@ -100,7 +100,7 @@ abstract class AbstractNumberFormat<P extends AbstractModel<?, ?>> extends Abstr
 	public final NumberingSystem getNumberingSystem() {
 		return numberFormatOptions.getNumberingSystem();
 	}
-	
+
 	/**
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>

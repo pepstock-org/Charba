@@ -132,7 +132,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	public double getAngle() {
 		return getValue(Property.ANGLE, getDefaultValues().getAngle());
 	}
-	
+
 	/**
 	 * Sets the arc offset (in pixels).
 	 * 

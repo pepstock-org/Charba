@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBoxer;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasBox extends IsDefaultBoxer{
+interface HasBox extends IsDefaultBoxer {
 
 	/**
 	 * Returns a boxer instance to use into default methods of this interface.

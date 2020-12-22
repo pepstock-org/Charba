@@ -322,7 +322,7 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	public Font getTitleFont() {
 		return titleFont;
 	}
-	
+
 	/**
 	 * Sets the title font color.
 	 * 
@@ -426,7 +426,7 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	public Font getBodyFont() {
 		return bodyFont;
 	}
-	
+
 	/**
 	 * Sets the body font color.
 	 * 
@@ -511,7 +511,7 @@ public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> im
 	public Font getFooterFont() {
 		return footerFont;
 	}
-	
+
 	/**
 	 * Sets the footer font color.
 	 * 

@@ -108,7 +108,7 @@ final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
 	void setPointStyle(Img pointStyle) {
 		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the point style is set by an {@link Img}.
 	 * 

@@ -135,7 +135,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		}
 
 	}
-	
+
 	// all sub elements
 	private final Legend legend;
 
@@ -154,7 +154,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Font font;
 
 	private final Datasets datasets;
-	
+
 	private final String scope;
 
 	// span gapper instance
@@ -416,7 +416,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// returns default
 		return getDefaultValues().getLocale();
 	}
-	
+
 	/**
 	 * Sets the resizing of the chart canvas when its container does.
 	 * 
@@ -608,7 +608,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
@@ -645,7 +645,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
-	
+
 	/**
 	 * If <code>false</code>, the lines between points are not drawn.
 	 * 
@@ -664,7 +664,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public boolean isShowLine() {
 		return getValue(Property.SHOW_LINE, getDefaultValues().isShowLine());
 	}
-	
+
 	/**
 	 * If <code>true</code>, null or undefined values will not be drawn.
 	 * 
@@ -673,7 +673,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public void setSkipNull(boolean skipNull) {
 		setValue(Property.SKIP_NULL, skipNull);
 	}
-	
+
 	/**
 	 * If <code>true</code>, null or undefined values will not be drawn.
 	 * 
@@ -759,7 +759,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}
-	
+
 	/**
 	 * Sets the base axis for the dataset. Use {@link IndexAxis#Y} for horizontal bar.
 	 * 

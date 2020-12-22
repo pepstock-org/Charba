@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasPointStyle extends IsDefaultPointStyler{
+interface HasPointStyle extends IsDefaultPointStyler {
 
 	/**
 	 * Returns a point styler instance to use into default methods of this interface.
@@ -75,7 +75,7 @@ interface HasPointStyle extends IsDefaultPointStyler{
 			getPointStyler().setPointStyle(pointStyle);
 		}
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the point style is set by an {@link Img}.
 	 * 
@@ -91,8 +91,7 @@ interface HasPointStyle extends IsDefaultPointStyler{
 		// uses the default false
 		return false;
 	}
-	
-	
+
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.

@@ -62,7 +62,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
 		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
-	
+
 	/**
 	 * Creates an options with default provider. The native object is created empty.
 	 * 

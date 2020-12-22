@@ -61,7 +61,7 @@ final class TextDirectioner extends PropertyHandler<IsDefaultTextDirectioner> {
 		}
 
 	}
-	
+
 	/**
 	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 

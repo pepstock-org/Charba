@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of defaults
  */
-abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> extends AbstractModel<Plugins, T> implements IsDefaultPluginElement{
+abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> extends AbstractModel<Plugins, T> implements IsDefaultPluginElement {
 
 	/**
 	 * Name of properties of native object.

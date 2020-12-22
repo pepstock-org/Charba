@@ -15,41 +15,26 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
-
 /**
- * Interface to define scale label object defaults.
+ * Interface to define font container of options elements.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public interface IsDefaultScaleLabel extends IsDefaultFontContainer {
+public interface IsDefaultFontContainer {
 
 	/**
-	 * Returns the padding defaults.
+	 * Returns the font element.
 	 * 
-	 * @return the padding defaults.
+	 * @return the font
 	 */
-	IsDefaultPadding getPadding();
+	IsDefaultFont getFont();
 
 	/**
-	 * Returns if the title is shown.
+	 * Returns the font color as string.
 	 * 
-	 * @return if the title is shown.
+	 * @return font color as string
 	 */
-	boolean isDisplay();
-
-	/**
-	 * Returns the text for the scale string.
-	 * 
-	 * @return The text for the scale string.
-	 */
-	String getLabelString();
-
-	/**
-	 * Returns the alignment of the axis title.
-	 * 
-	 * @return the alignment of the axis title.
-	 */
-	ScaleLabelAlign getAlign();
+	String getColorAsString();
 
 }

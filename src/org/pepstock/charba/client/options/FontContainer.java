@@ -19,23 +19,22 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
-import org.pepstock.charba.client.defaults.IsDefaultBoxer;
+import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
 
 /**
- * Base object to map the box dimension options.
+ * This is the labels configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-final class Boxer extends PropertyHandler<IsDefaultBoxer> {
+final class FontContainer extends PropertyHandler<IsDefaultFontContainer> {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		BOX_WIDTH("boxWidth"),
-		BOX_HEIGHT("boxHeight");
+		COLOR("color"),
+		FONT("font");
 
 		// name value of property
 		private final String value;
@@ -61,50 +60,46 @@ final class Boxer extends PropertyHandler<IsDefaultBoxer> {
 
 	}
 
+	// instance of font
+	private final Font font;
+
 	/**
-	 * Creates a boxer with the native object where box dimension properties must be managed and the default value to use when the property does not exist.
+	 * Creates a font container with the native object where font properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the boxer.
-	 * @param defaultValues default value of box dimension to use when the properties do not exist
-	 * @param nativeObject native object where boxer properties must be managed
+	 * @param parent model which contains the font.
+	 * @param defaultValues default value of font and color to use when the properties do not exist
+	 * @param nativeObject native object where font properties must be managed
 	 */
-	Boxer(AbstractNode parent, IsDefaultBoxer defaultValues, NativeObject nativeObject) {
+	protected FontContainer(AbstractNode parent, IsDefaultFontContainer defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
+		this.font = new Font(parent, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 	}
 
 	/**
-	 * Sets the width of colored box.
+	 * Returns the font element.
 	 * 
-	 * @param boxWidth width of colored box.
+	 * @return the font
 	 */
-	void setBoxWidth(int boxWidth) {
-		setValueAndAddToParent(Property.BOX_WIDTH, boxWidth);
+	Font getFont() {
+		return font;
 	}
 
 	/**
-	 * Returns the width of colored box.
+	 * Sets the font color.
 	 * 
-	 * @return width of colored box.
+	 * @param color font color.
 	 */
-	int getBoxWidth() {
-		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
+	void setColor(String color) {
+		setValueAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
-	 * Sets the height of colored box.
+	 * Returns the font color as string.
 	 * 
-	 * @param boxHeight width of colored box.
+	 * @return font color as string
 	 */
-	void setBoxHeight(int boxHeight) {
-		setValueAndAddToParent(Property.BOX_HEIGHT, boxHeight);
+	String getColorAsString() {
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 	}
 
-	/**
-	 * Returns the height of colored box.
-	 * 
-	 * @return height of colored box.
-	 */
-	int getBoxHeight() {
-		return getValue(Property.BOX_HEIGHT, getDefaultValues().getBoxHeight());
-	}
 }

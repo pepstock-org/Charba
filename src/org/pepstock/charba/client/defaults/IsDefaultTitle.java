@@ -20,22 +20,8 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultPluginElement{
+public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontContainer{
 	
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	String getColorAsString();
-
-	/**
-	 * Returns the font defaults.
-	 * 
-	 * @return the font defaults.
-	 */
-	IsDefaultFont getFont();
-
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 

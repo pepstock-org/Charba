@@ -161,7 +161,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 			}
 		}
 	}
-	
+
 	/**
 	 * Enables or disables an animation mode instance into animation options.
 	 * 

@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -28,15 +26,13 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPointLabels> implements IsDefaultPointLabels {
+public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPointLabels> implements IsDefaultPointLabels, HasFont {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		COLOR("color"),
-		FONT("font"),
 		DISPLAY("display");
 
 		// name value of property
@@ -63,8 +59,8 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 
 	}
 
-	// instance of font
-	private final Font font;
+	// instance of font container
+	private final FontContainer fontContainer;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -76,54 +72,18 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 */
 	PointLabels(AbstractScale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
-		font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
+		// creates font container
+		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
 
-	/**
-	 * Returns the font element.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the font
+	 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
 	 */
 	@Override
-	public Font getFont() {
-		return font;
-	}
-	
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(String color) {
-		setValueAndAddToParent(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	@Override
-	public String getColorAsString() {
-		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
-	}
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
+	public FontContainer getFontContainer() {
+		return fontContainer;
 	}
 
 	/**

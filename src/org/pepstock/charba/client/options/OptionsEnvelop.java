@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.ImmutableEnvelop;
  * 
  */
 public final class OptionsEnvelop<T> extends ImmutableEnvelop<T> {
-	
+
 	/**
 	 * Create an envelop with the content passed as argument.
 	 * 

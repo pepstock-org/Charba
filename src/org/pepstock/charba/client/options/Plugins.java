@@ -60,7 +60,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	Plugins(Options options, Key childKey, IsDefaultPlugins defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Returns the options for default plugin.
 	 * 
@@ -121,18 +121,18 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 			if (!enabled) {
 				// stores false
 				setValueAndAddToParent(pluginId, false);
-			} else if (DefaultPluginId.is(pluginId)){
+			} else if (DefaultPluginId.is(pluginId)) {
 				// if here, a default plugin is managing
 				// then removes the key
 				removeIfExists(pluginId);
-			} else if (!isType(pluginId, ObjectType.OBJECT)){
+			} else if (!isType(pluginId, ObjectType.OBJECT)) {
 				// if here, is not a default plugin and
 				// then sets an empty object to enable the plugin
 				setEmptyValue(pluginId);
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns if a plugin is enabled or not.
 	 * 
@@ -153,7 +153,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	public boolean isEnabled(String pluginId) {
 		return isEnabledByKey(PluginIdChecker.key(pluginId));
 	}
-	
+
 	/**
 	 * Returns if a plugin is enabled or not.
 	 * 

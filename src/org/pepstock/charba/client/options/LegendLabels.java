@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
@@ -26,15 +24,13 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasBox, HasPointStyle {
+public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels, HasBox, HasPointStyle, HasFont {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		COLOR("color"),
-		FONT("font"),
 		PADDING("padding"),
 		USE_POINT_STYLE("usePointStyle");
 
@@ -62,8 +58,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 
 	}
 
-	// instance of font
-	private final Font font;
+	// instance of font container
+	private final FontContainer fontContainer;
 	// instance of boxer
 	private final Boxer boxer;
 	// instance of style of points manager
@@ -79,11 +75,12 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	LegendLabels(Legend legend, Key childKey, IsDefaultLegendLabels defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
-		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		// creates the boxer
 		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
 		// creates point styler
 		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
+		// creates font container
+		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -106,53 +103,16 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		return pointStyler;
 	}
 
-	/**
-	 * Returns the font element.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the font
+	 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
 	 */
 	@Override
-	public Font getFont() {
-		return font;
-	}
-	
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
+	public FontContainer getFontContainer() {
+		return fontContainer;
 	}
 
-	/**
-	 * Sets the font color.
-	 * 
-	 * @param color font color.
-	 */
-	public void setColor(String color) {
-		setValueAndAddToParent(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	@Override
-	public String getColorAsString() {
-		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
-	}
-
-	/**
-	 * Returns the font color.
-	 * 
-	 * @return font color
-	 */
-	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
-	}
-	
 	/**
 	 * Sets if label style will match corresponding point style (size is based on font size, boxWidth is not used in this case).
 	 * 

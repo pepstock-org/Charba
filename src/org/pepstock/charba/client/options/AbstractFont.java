@@ -212,5 +212,5 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	protected final NativeObject getObject() {
 		return font.nativeObject();
 	}
-	
+
 }

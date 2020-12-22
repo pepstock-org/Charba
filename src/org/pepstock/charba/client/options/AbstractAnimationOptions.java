@@ -59,7 +59,7 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 
 	}
 
-	// delegated animation 
+	// delegated animation
 	private final Animation animation;
 
 	/**
@@ -226,7 +226,7 @@ public abstract class AbstractAnimationOptions extends NativeObjectContainer {
 	public final void setMode(AnimationMode animationElement) {
 		animation.setMode(animationElement);
 	}
-	
+
 	/**
 	 * Enables or disables an animation mode instance into animation options.
 	 * 

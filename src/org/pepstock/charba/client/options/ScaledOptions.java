@@ -56,7 +56,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 		}
 
 	}
-	
+
 	private final Scales scales;
 
 	/**

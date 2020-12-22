@@ -24,14 +24,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTicks {
-
-	/**
-	 * Returns the font defaults.
-	 * 
-	 * @return the font defaults.
-	 */
-	IsDefaultFont getFont();
+public interface IsDefaultTicks extends IsDefaultFontContainer{
 
 	/**
 	 * Returns the major tick defaults.
@@ -47,13 +40,6 @@ public interface IsDefaultTicks {
 	 */
 	IsDefaultNumberFormatOptions getNumberFormat();
 	
-	/**
-	 * Returns the font color as string.
-	 * 
-	 * @return font color as string
-	 */
-	String getColorAsString();
-
 	/**
 	 * If true, show tick marks
 	 * 

@@ -622,7 +622,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// therefore returns the default
 		return getDefaultValues().getPosition();
 	}
-	
+
 	/**
 	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
 	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>

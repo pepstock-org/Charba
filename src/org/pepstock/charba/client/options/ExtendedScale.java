@@ -110,7 +110,7 @@ public final class ExtendedScale extends Scale {
 	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
 		setCallbackToModel(this, property, proxy);
 	}
-	
+
 	/**
 	 * Adds a callback proxy function to a element node instance.
 	 *

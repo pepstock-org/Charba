@@ -21,7 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.intl.NumberFormatOptions;
 
 /**
- * It applies the number formatting  to the ticks of all linear scales.
+ * It applies the number formatting to the ticks of all linear scales.
  * 
  * @author Andrea "Stock" Stocchero
  * @see NumberFormatOptions
