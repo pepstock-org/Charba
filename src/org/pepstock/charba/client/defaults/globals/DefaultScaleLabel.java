@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
@@ -34,7 +35,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 
 	private final DefaultScaleLabelPadding padding = new DefaultScaleLabelPadding();
 
-	private final DefaultFont font = new DefaultFont();
+	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
 	 * To avoid any instantiation
@@ -70,7 +71,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DefaultOptions.DEFAULT_COLOR;
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/*

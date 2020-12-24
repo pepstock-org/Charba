@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -38,7 +39,7 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private static final Img DEFAULT_POINT_STYLE_IMG = UndefinedValues.IMAGE_ELEMENT;
 
-	private final DefaultFont font = new DefaultFont();
+	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
 	 * To avoid any instantiation
@@ -54,7 +55,7 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DefaultOptions.DEFAULT_COLOR;
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/*

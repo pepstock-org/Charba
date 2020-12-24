@@ -13,32 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
- * CHART.JS default values for font items.
+ * Defaults for font option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DefaultFont implements IsDefaultFont {
+public final class DefaultChartFont implements IsDefaultFont {
 
-	private static final int DEFAULT_FONT_SIZE = 12;
-
-	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
-
-	private static final String DEFAULT_LINE_HEIGHT_STRING = String.valueOf(DEFAULT_LINE_HEIGHT);
+	private final IsDefaultFont font;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object by font option element instance.
+	 * 
+	 * @param font option element instance.
 	 */
-	DefaultFont() {
-		// do nothing
+	public DefaultChartFont(IsDefaultFont font) {
+		this.font = font;
 	}
 
 	/*
@@ -48,7 +44,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public int getSize() {
-		return DEFAULT_FONT_SIZE;
+		return font.getSize();
 	}
 
 	/*
@@ -58,7 +54,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public FontStyle getStyle() {
-		return FontStyle.NORMAL;
+		return font.getStyle();
 	}
 
 	/*
@@ -68,7 +64,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public String getFamily() {
-		return DEFAULT_FONT_FAMILY;
+		return font.getFamily();
 	}
 
 	/*
@@ -78,7 +74,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public Weight getWeight() {
-		return Weight.NORMAL;
+		return font.getWeight();
 	}
 
 	/*
@@ -88,7 +84,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public double getLineHeight() {
-		return DEFAULT_LINE_HEIGHT;
+		return font.getLineHeight();
 	}
 
 	/*
@@ -98,7 +94,7 @@ final class DefaultFont implements IsDefaultFont {
 	 */
 	@Override
 	public String getLineHeightAsString() {
-		return DEFAULT_LINE_HEIGHT_STRING;
+		return font.getLineHeightAsString();
 	}
 
 }

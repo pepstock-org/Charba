@@ -26,8 +26,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public final class DefaultArc extends AbstractDefaultOptionsElement implements IsDefaultArc {
 
-	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_BACKGROUND_COLOR;
-
 	private static final int DEFAULT_BORDER_WIDTH = 2;
 
 	private static final String DEFAULT_BORDER_COLOR = "#fff";
@@ -40,7 +38,7 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	 * Creates a default arc
 	 */
 	DefaultArc() {
-		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
+		super(DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 
 	/*

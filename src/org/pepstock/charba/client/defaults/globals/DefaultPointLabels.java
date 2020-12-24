@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 
@@ -27,7 +28,7 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
-	private final DefaultFont font = new DefaultFont();
+	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
 	 * To avoid any instantiation
@@ -53,7 +54,7 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DefaultOptions.DEFAULT_COLOR;
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/*

@@ -31,12 +31,8 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 
 	// default line tension
 	private static final double DEFAULT_TENSION = 0D;
-	// default background color
-	private static final String DEFAULT_BACKGROUND_COLOR = DefaultOptions.DEFAULT_BACKGROUND_COLOR;
 	// default border width
 	private static final int DEFAULT_BORDER_WIDTH = 3;
-	// default border color
-	private static final String DEFAULT_BORDER_COLOR = DefaultOptions.DEFAULT_BORDER_COLOR;
 	// default border dash offset
 	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
 	// default cap bezier points
@@ -48,7 +44,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 * To avoid any instantiation
 	 */
 	DefaultLine() {
-		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
+		super(DEFAULT_BORDER_WIDTH);
 	}
 
 	/*

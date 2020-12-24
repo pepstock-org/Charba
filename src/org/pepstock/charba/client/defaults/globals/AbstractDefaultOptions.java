@@ -29,6 +29,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.chart.DefaultChartAnimation;
 import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
 import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
+import org.pepstock.charba.client.defaults.chart.DefaultChartFont;
 import org.pepstock.charba.client.defaults.chart.DefaultChartHover;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLayout;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLegend;
@@ -61,7 +62,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultDatasets datasets;
 
-	private final IsDefaultFont font = new DefaultFont();
+	private final IsDefaultFont font;
 
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
@@ -78,6 +79,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.tooltips = new DefaultTooltips();
 		this.plugins = new DefaultPlugins();
 		this.datasets = new DefaultDatasets();
+		this.font = new DefaultFont();
 	}
 
 	/**
@@ -100,6 +102,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.tooltips = new DefaultChartTooltips(options.getTooltips());
 		this.plugins = new DefaultChartPlugins(options.getPlugins());
 		this.datasets = new DefaultChartDatasets(options.getDatasets());
+		this.font = new DefaultChartFont(new DefaultRoutedFont());
 	}
 
 	/**

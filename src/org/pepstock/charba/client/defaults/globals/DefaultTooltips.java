@@ -78,11 +78,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
 
-	private final DefaultFont titleFont = new InternalTitleFont();
+	private final DefaultRoutedFont titleFont = new InternalTitleFont();
 
-	private final DefaultFont bodyFont = new InternalBodyFont();
+	private final DefaultRoutedFont bodyFont = new InternalBodyFont();
 
-	private final DefaultFont footerFont = new InternalFooterFont();
+	private final DefaultRoutedFont footerFont = new InternalFooterFont();
 
 	/**
 	 * To avoid any instantiation
@@ -437,7 +437,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class InternalTitleFont extends DefaultFont {
+	private static class InternalTitleFont extends DefaultRoutedFont {
 
 		/*
 		 * (non-Javadoc)
@@ -457,7 +457,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class InternalBodyFont extends DefaultFont {
+	private static class InternalBodyFont extends DefaultRoutedFont {
 
 		/*
 		 * (non-Javadoc)
@@ -477,7 +477,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class InternalFooterFont extends DefaultFont {
+	private static class InternalFooterFont extends DefaultRoutedFont {
 
 		/*
 		 * (non-Javadoc)

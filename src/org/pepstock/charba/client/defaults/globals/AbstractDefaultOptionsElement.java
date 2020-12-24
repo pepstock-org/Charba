@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 
 /**
@@ -24,21 +26,28 @@ import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
  */
 abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement {
 
-	private final String backgroundColor;
-
 	private final String borderColor;
 
 	private final int borderWidth;
+	
+	/**
+	 * Creates the object using the values passed as arguments.<br>
+	 * Background and border colors will be taken from {@link GlobalOptions#getBackgroundColorAsString()} and {@link GlobalOptions#getBorderColorAsString()}.
+	 * 
+	 * @param borderWidth border width of element
+	 */
+	AbstractDefaultOptionsElement(int borderWidth) {
+		this(null, borderWidth);
+	}
 
 	/**
-	 * Creates the object using the values passed as arguments.
+	 * Creates the object using the values passed as arguments.<br>
+	 * Background color will be taken from {@link GlobalOptions#getBackgroundColorAsString()}.
 	 * 
-	 * @param backgroundColor background color of element
 	 * @param borderColor border color of element
-	 * @param borderWidth vorder width of element
+	 * @param borderWidth order width of element
 	 */
-	AbstractDefaultOptionsElement(String backgroundColor, String borderColor, int borderWidth) {
-		this.backgroundColor = backgroundColor;
+	AbstractDefaultOptionsElement(String borderColor, int borderWidth) {
 		this.borderColor = borderColor;
 		this.borderWidth = borderWidth;
 	}
@@ -50,7 +59,7 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	 */
 	@Override
 	public final String getBackgroundColorAsString() {
-		return backgroundColor;
+		return Defaults.get().getGlobal().getBackgroundColorAsString();
 	}
 
 	/*
@@ -70,7 +79,7 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	 */
 	@Override
 	public final String getBorderColorAsString() {
-		return borderColor;
+		return borderColor != null ? borderColor : Defaults.get().getGlobal().getBorderColorAsString();
 	}
 
 }

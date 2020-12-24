@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 
@@ -29,7 +30,7 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
-	private final DefaultFont font = new DefaultFont();
+	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
 	 * To avoid any instantiation
@@ -55,7 +56,7 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DefaultOptions.DEFAULT_COLOR;
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/*
