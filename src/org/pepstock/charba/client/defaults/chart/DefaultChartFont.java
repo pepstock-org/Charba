@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.Weight;
  */
 public final class DefaultChartFont implements IsDefaultFont {
 
-	private final IsDefaultFont font;
+	private final IsDefaultFont delegatedFont;
 
 	/**
 	 * Creates the object by font option element instance.
@@ -34,7 +34,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 * @param font option element instance.
 	 */
 	public DefaultChartFont(IsDefaultFont font) {
-		this.font = font;
+		this.delegatedFont = font;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public int getSize() {
-		return font.getSize();
+		return delegatedFont.getSize();
 	}
 
 	/*
@@ -54,7 +54,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public FontStyle getStyle() {
-		return font.getStyle();
+		return delegatedFont.getStyle();
 	}
 
 	/*
@@ -64,7 +64,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public String getFamily() {
-		return font.getFamily();
+		return delegatedFont.getFamily();
 	}
 
 	/*
@@ -74,7 +74,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public Weight getWeight() {
-		return font.getWeight();
+		return delegatedFont.getWeight();
 	}
 
 	/*
@@ -84,7 +84,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public double getLineHeight() {
-		return font.getLineHeight();
+		return delegatedFont.getLineHeight();
 	}
 
 	/*
@@ -94,7 +94,7 @@ public final class DefaultChartFont implements IsDefaultFont {
 	 */
 	@Override
 	public String getLineHeightAsString() {
-		return font.getLineHeightAsString();
+		return delegatedFont.getLineHeightAsString();
 	}
 
 }
