@@ -1,51 +1,67 @@
-# **************************************
-# * Charba GitHub Actions build script *
-# * Copyright © 2020 pepstock.org      *
-# **************************************
-
-# workflow name
+# --------------------------------------
+# Charba GitHub Actions build script 
+# Copyright © 2020 pepstock.org      
+# --------------------------------------
+# Workflow name
+# --------------------------------------
 name: Build
-
-# runs only on push events on branch master
+# --------------------------------------
+# Runs only on push events on branch 'master'
+# --------------------------------------
 on:
    push:
       branches:
          - master
-
-# workflow environment and steps
+# --------------------------------------
+# Workflow environment and steps
+# --------------------------------------
 jobs:
    build:
       runs-on: ubuntu-latest
       
       steps:
-         # checkout the repository content
+         # --------------------------------------
+         # Checkout the repository content
+         # --------------------------------------
          - name: Checkout
            uses: actions/checkout@v2
            with:
              # Disabling shallow clone 
              fetch-depth: 0
-         # removes pom.xml because Sonar will fail forcing to use Maven    
+         # --------------------------------------
+         # Remove 'pom.xml' otherwise Sonar will fail forcing to use Maven   
+         # --------------------------------------
          - name: Remove pom
            run: rm -f pom.xml    
-         # setup a Java JDK
+         # --------------------------------------
+         # Setup Java JDK
+         # --------------------------------------
          - name: Setup JDK
            uses: actions/setup-java@v1
            with:
              java-version: '11'
-         # setup a Java JDK
+         # --------------------------------------
+         # Setup Node.js (for Sonar)
+         # --------------------------------------
          - name: Setup Node.js
            uses: actions/setup-node@v2    
            with:
              node-version: '12'         
-         # run the ant build
+         # --------------------------------------
+         # Run the build of project by ANT
+         # --------------------------------------
          - name: Build
            run: ant buildAll
-         # run the sonar scan
+         # --------------------------------------
+         # Run the Sonar scan
+         # --------------------------------------
          - name: SonarCloud Scan
            uses: sonarsource/sonarcloud-github-action@master
            env:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-         # print out the artifacts list
+         # --------------------------------------
+         # Print out the artifacts list
+         # --------------------------------------
          - name: Print artifacts
            run: ls -R ./dist
