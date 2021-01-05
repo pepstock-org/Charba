@@ -55,7 +55,7 @@ public interface IsDefaultGridLines extends IsDefaultScaleLines {
 	 * 
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
-	int getTickMarkLength();
+	int getTickLength();
 
 	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.

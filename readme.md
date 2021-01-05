@@ -36,13 +36,13 @@ The first distribution is a **Charba** file without any GWT dependency (but work
 
 To build the project, execute `buildBinary` target.
 
-It creates a `charba-[version.release].jar` file into `dist` folder, ready to be included into your project.
+It creates a `charba-[version.release].jar` file in `dist` folder, ready to be included in your project.
 
 The second distribution is a **Charba** file with a hard GWT dependency which contains charts widgets and code splitting capabilities.
 
 To build the project, execute `buildBinaryGwt` target.
 
-It creates a `charba-[version.release]-gwt.jar` file into `dist` folder, ready to be included into your project.
+It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
 [![Charba](https://github.com/pepstock-org/Charba/wiki/images/charba_jar_trend.png)](https://github.com/pepstock-org/Charba-Showcase/blob/3.3/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
@@ -81,7 +81,7 @@ compile group: 'org.pepstock', name: 'charba', version: '3.3'
 compile group: 'org.pepstock', name: 'charba', version: '3.3-gwt'
 ```
 
-To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration into your GWT project module configuration:
+To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
 
 ```xml
 ...
@@ -115,7 +115,7 @@ Since **Charba** version **3.1**, this is NOT needed anymore.
 Documentation
 -------------
 
-All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
+All **Charba** documentation will be maintained in [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
 API JavaDoc is published [here](http://www.pepstock.org/Charba/3.3/index.html).
 
@@ -135,7 +135,7 @@ The samples are going to reflect what CHART.JS samples are showing [here](http:/
 Continuous integration and quality gate
 ---------------------------------------
 
-**Charba** is continuously built at every commit and merge into `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
+**Charba** is continuously built at every commit and merge in `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
@@ -205,7 +205,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
    * change the chart events constructor using `ChartEventContext` which contains the chart and the native event.
    * remove `generateLegend` method from `Defaults` class and from `IsChart` class because the prototype is not available anymore.
-   * remove `LegendCallback` interface and its usage into `ConfigurationOptions` class because the prototype is not available anymore.
+   * remove `LegendCallback` interface and its usage from `ConfigurationOptions` class because the prototype is not available anymore.
    * remove `easing` properties from `DatasetPluginItem` and `TooltipPluginItem` classes because it is not provided anymore.
    * remove `HORIZONTAL_BAR` item of `ChartType` enumeration because the horizontal bar is not a chart type anymore.
    * remove `updateScale` method from `Defaults` because is not available anymore. Use `getScale(AxisType type)` instead.
@@ -233,30 +233,31 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `fill` default option for `Line` element from `Fill.ORIGIN` to `Fill.FALSE`.
    * change the signatures of `Plugin` interface in order to manage new arguments of functions.
    * rename `lineTension` property to `tension` in `LiningDataset` class.
- * change `getXAxisID` and `getXAxisID` methods into `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
- * change `getXAxisID` and `getXAxisID` methods into `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
- * change `getXAxisID` method into `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
+   * rename `tickMarkLength` property to `tickLength` in `GridLines` configuration and options classes.
+ * change `getXAxisID` and `getXAxisID` methods in `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
+ * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
+ * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
  * remove `Event.TOUCHEND` item
- * rename `LegendAlign` class into `ElementAlign` in order to be able to use for `Title` options and configuration classes.
- * rename `CartesianAxisType` class into `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
+ * rename `LegendAlign` class to `ElementAlign` in order to be able to use for `Title` options and configuration classes.
+ * rename `CartesianAxisType` class to `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
  * remove `MarginsItem`, `AxisMarginsItem` and `AxisMinSizeItem` classes because they are not visible in CHART.JS anymore.
  * remove `setAxis` methods from `Scale` and `Axis` classes because it must be set when an axis is built.
  * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
  * rename `extend` method of `Controllers` class to `register`.
- * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title into legend and title options, and `setEnabled` method for tooltips into tooltips options.
+ * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title in legend and title options, and `setEnabled` method for tooltips in tooltips options.
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
- * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones into `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
+ * rename `getValue` and `getIndex` methods to `getFormattedValue` and `getDataIndex` ones in `TooltipItem` class in order to be aligned with new CHART.JS tooltip item interface. 
  * change the return value of `getTooltip` method of `TooltipPluginItem` class, returning now a `TooltipModel` object instead of `TooltipNode`.
  * reduce visibility of `setHidden` method of `Dataset` class and add hidden argument to `Dataset` constructor in order to set the initial visibility. To change the dataset visibility, use the `setDatasetVisibility` chart method.
  * remove `render(UpdateConfiguration)` method has been removed because it is not available anymore on CHART.JS.
  * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
- * rename `HtmlLegendTextCallback` class into `HtmlLegendItemCallback`.
+ * rename `HtmlLegendTextCallback` class to `HtmlLegendItemCallback`.
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
  * remove [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained. New Charba annotation plugin has been developed, completely in Java, with the same capabilities.
  * reduces the visibility of `Gradient` and `Pattern` class constructors in order to use new `GradientBuilder` and `PatternBuilder` classes. This change avoids inconsistent gradient and pattern objects, improving some capabilities of them (like the `equals` and `hashCode` methods in case they will be needed).
    * adds `setColors` methods (getting a list or an array of `IsColor`) to `GradientBuilder` in order to enable the gradient creation to the `ColorScheme` instances. 
- * rename `ValueCallback` into `MeterFormatCallback` class.
-   * rename `setValueCallback` and `getValueCallback` of `MeterOptions` class into `setFormatCallback` and `getFormatCallback`.
+ * rename `ValueCallback` to `MeterFormatCallback` class.
+   * rename `setValueCallback` and `getValueCallback` of `MeterOptions` class to `setFormatCallback` and `getFormatCallback`.
  * change the type for some properties of LuxonOptions class:
    * `locale` is now a `CLocale` object instead of a string.
    * `numberingSystem` is now a `NumberingSystem` object instead of a string.
@@ -264,10 +265,10 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `outputCalendar` is now a `Calendar` object instead of a string.
  * remove the usage of `Moment` as date library because it does not use the web internationalization.
  * remove the usage of `Date-fns` as date library because it does not use the web internationalization.
- * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks into `BarDataset` class.
- * rename `getDatasetMeta(int)` method to `getDatasetItem(int)` into the `IsChart` interface.
- * rename `getDatasets()` method to `getElements()` into the `DatasetItem` class.
- * rename `getMeta()` method to `getDatasetItem()` into the `DatasetPluginItem` class.
+ * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks in `BarDataset` class.
+ * rename `getDatasetMeta(int)` method to `getDatasetItem(int)` in the `IsChart` interface.
+ * rename `getDatasets()` method to `getElements()` in the `DatasetItem` class.
+ * rename `getMeta()` method to `getDatasetItem()` in the `DatasetPluginItem` class.
  * change the constructor signature of `ControllerType` class adding a mandatory argument of `ControllerProvider` instance which can provide the instance of controller to register.
    * add an optional argument (boolean) in order to decide if the base default options of the chart which is being extended must be cloned or not. 
    * reduce the visibility of `register` method of `Controller` class   
@@ -293,19 +294,19 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.
    * add `align` property to `ScaleLabel` options and `CartesianScaleLabel` configuration classes.
    * add `borderColor` and `borderWidth` properties to `GridLines` options and configuration classes.
-   * add `ScaleLineWidthCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
-   * add `ScaleColorCallback` interface to use into a `GridLines`, `RadialAngleLines` or `RadialLinearTick` configuration in order to set `color` and `backdropColor` property at runtime.
-   * add `ScaleBorderDashOffsetCallback` interface to use into a `GridLines` or `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
-   * add `ScaleBorderDashCallback` interface to use into a `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
-   * add `ScaleFontCallback` interface to use into a `RadialPointLabels` or `Tick` configuration in order to set `font` property at runtime.
-   * add `ScaleShowLabelBackdropCallback` interface to use into a `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
+   * add `ScaleLineWidthCallback` interface to `GridLines` or `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
+   * add `ScaleColorCallback` interface to `GridLines`, `RadialAngleLines` or `RadialLinearTick` configuration in order to set `color` and `backdropColor` property at runtime.
+   * add `ScaleBorderDashOffsetCallback` interface to `GridLines` or `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
+   * add `ScaleBorderDashCallback` interface to `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
+   * add `ScaleFontCallback` interface to `RadialPointLabels` or `Tick` configuration in order to set `font` property at runtime.
+   * add `ScaleShowLabelBackdropCallback` interface to `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
    * add `boxHeight` property to `LegendLabels` options and configuration classes.
    * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
    * add `align` property to `Title` options and configuration classes.
    * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
    * add `Datasets` class in order to manage datasets options and configuration classes.
    * add `START` and `END` items to `BorderSkipped` enumeration
-   * add `width` and `height` options into `ChartAreaNode` class
+   * add `width` and `height` options to `ChartAreaNode` class
    * add `onReset` method to `Plugin` interface in order to enable to catch when a chart is resetting.
    * add `spanGaps` number property (double) to `LiningDataset` class in order to manage the value where there are some gaps.
    * add `indexAxis` property to `BarDataset` and `BarOptions` classes in order to manage the horizontal bars.
@@ -320,12 +321,12 @@ Here you can find the list of enhancements and updates available on `master` bra
      * add `loop` property to animation options.
      * add `animation` options and configuration to datasets.
      * add `animation` options and configuration to tooltips.
-     * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers into configuration, options and datasets.
+     * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and datasets.
    * add `update(IsAnimationModeKey)` and `reconfigure(IsAnimationModeKey)` methods to `IsChart` interface in order to update the chart by an animation mode.
    * add `ConfigurationAnimationCallback` interface in order to create the animation configuration at runtime at chart configuration.
    * add `TooltipsAnimationCallback` interface in order to create the animation configuration at runtime at tooltips configuration.
    * add `DatasetAnimationCallback` interface in order to create the animation configuration at runtime at dataset configuration.
-   * change `borderSkipped` property into `BarDataset` class in order to manage it as indexable options.
+   * change `borderSkipped` property in `BarDataset` class in order to manage it as indexable options.
    * add `offset` and `hoverOffset` properties to `PieDataset` and `DoughnutDataset` classes.
    * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.
    * add `labels` property to `CartesianCategoryAxis` class.
@@ -344,7 +345,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `align` and `crossAlign` properties to cartesian ticks.
    * add the `center` axes position and the position of the axis with respect to a data value.
    * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
-   * add `onLabelPointStyle` method to `TooltipLabelCallback` interface and `TooltipLabelPointStyle` class in order to manage the point style into tooltip.
+   * add `onLabelPointStyle` method to `TooltipLabelCallback` interface and `TooltipLabelPointStyle` class in order to manage the point style in tooltip.
    * add `backgroundColor` and `borderColor` default options.
    * add new hooks to `Plugin` interface:
      * `onInstall`, `onStart`, `onStop`, `onUninstall` to manage plugin life-cycle.
@@ -369,19 +370,19 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `getValueForPixel`
    * `getBaseValue`
    * `getBasePixel`
- * manage new legend title into `HtmlLegend` plugin.
+ * manage new legend title in `HtmlLegend` plugin.
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
- * add the selected value of the scale by the click event into the `AxisClickEvent` class.
+ * add the selected value of the scale by the click event to the `AxisClickEvent` class.
  * add **new Charba annotation plugin**, completely in Java,  in order to replace [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained.
-   * does not implement all event callbacks previously implemented into [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave events are implemented and not by callbacks but by event handlers.
+   * does not implement all event callbacks previously implemented in [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave events are implemented and not by callbacks but by event handlers.
    * remove `mode` property from annotation line options because new plugin is using the `axis` property of scales for line orientation.
    * remove `doubleClickSpeed` property from annotation options because double click event is not supported anymore.
    * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
    * add `autoRotation` property to annotation line label options in order to enable the automatic calculation of label rotation.
    * remove `name` property from annotation options because is not needed anymore. Use `id` property instead.
-   * change `getScaleID` method into `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
-   * change `getXScaleID` and `getXScaleID` methods into `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
+   * change `getScaleID` method in `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
+   * change `getXScaleID` and `getXScaleID` methods in `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
    * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
    * add `enabled` property to annotation line and box options in order to enable and disable the drawing of the annotation.
@@ -411,13 +412,13 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `SingleScaleOptions` class because the radial linear axis is managed like the cartesian ones.
  * rename `MultiScalesOptions` class to `ScalesOptions`.
  * remove `getAxis` method from `IsDefaultScale` interface because the axis kind does not any default and, when not set, depends on scale id.
- * move `width` and `height` options into `BaseBoxitem` class.
+ * move `width` and `height` options to `BaseBoxitem` class.
  * change all properties of `BaseBoxItem`, `SizeItem`, `LegendHitBoxItem` classes from `int` to `double`.
  * change `getLineWidths` and `getColumnWidths` methods of `LegendNode` class in order to return a list of doubles instead of a list of integers.
  * add `columnHeights` property to `LegendNode` class.
  * improve the defaults management for scales.
  * add `JsPluginHelper` class in order to use CHART.JS registry feature to manage plugins.
- * create a controller template code generator and add a specific target into `build.xml`.
+ * create a controller template code generator and add a specific target in `build.xml`.
  * reintroduce the `Findbugs` project in order to check the bugs on project.
  * reduce the visibility of objects which must get a javascript native object as argument on constructor, using an envelop. This reduces the possibility to map a native object with a wrong wrapper.
  * remove `D` dataset type from `AbstractChart` class by `IsDatasetCreator` interface.
@@ -426,14 +427,14 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way.
  * reduce visibility of property handler classes leveraging on the interface.
  * improve the logic of `DatasetsItemsSelector` plugin in order to leverage on new capabilities of scale item to retrieve the selected data instead of the index.
- * implement `ImmutableDate` class to use to return the date value stored into chart configuration and to callbacks.
+ * implement `ImmutableDate` class to use to return the date value stored to chart configuration and to callbacks.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
  * change `Travis` configuration in order to use `JDK11` to compile the project and install `NodeJs12` in order to be compliant with new restrictions of `SonarCloud`.That means that Charba is compilable also on `JDK11` but it will be release on `JDK8` in order to be consumed by applications which are still using `JDK8`.
  * create `ItemSortCallback` interface in order to be extended by legend and tooltip callback interfaces.
  * remove static cache for canvas patterns and gradients creation, going to a cache for each canvas object factory in order that every factory must manage own objects.
  * add `groups` method to `RegExpResult` in order to get the object to refer to certain token by string that a regular expression matches.
  * add `cloneTo` method to `NativeObject` in order to clone the object using the `Object.assign` native method.
- * add `equals` and `hashCode` methods to standard keys implementation into `options` package.
+ * add `equals` and `hashCode` methods to standard keys implementation in `options` package.
  * add the following properties to `RegExp` class;
    * `lastIndex` (static)
    * `dotAll`
@@ -456,8 +457,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
- * use new location for legend, title and tooltips options, into `plugins` options node.
- * enable CI into GitHub Action, disabling Travis.
+ * use new location for legend, title and tooltips options, in `plugins` options node.
+ * enable CI by GitHub Action, disabling Travis.
  * fix font and color fallbacks to the defaults values.
 
 License

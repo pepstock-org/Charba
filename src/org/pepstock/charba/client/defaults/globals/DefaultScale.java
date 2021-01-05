@@ -200,7 +200,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public ScaleBounds getBounds() {
-		return ScaleBounds.DATA;
+		return ScaleBounds.TICKS;
 	}
 
 	/*

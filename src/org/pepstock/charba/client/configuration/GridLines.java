@@ -310,10 +310,10 @@ public class GridLines extends AbstractScaleLines {
 	/**
 	 * Sets the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @param tickMarkLength Length in pixels that the grid lines will draw into the axis area.
+	 * @param tickLength Length in pixels that the grid lines will draw into the axis area.
 	 */
-	public void setTickMarkLength(int tickMarkLength) {
-		getAxis().getScale().getGrideLines().setTickMarkLength(tickMarkLength);
+	public void setTickLength(int tickLength) {
+		getAxis().getScale().getGrideLines().setTickLength(tickLength);
 	}
 
 	/**
@@ -321,8 +321,8 @@ public class GridLines extends AbstractScaleLines {
 	 * 
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
-	public int getTickMarkLength() {
-		return getAxis().getScale().getGrideLines().getTickMarkLength();
+	public int getTickLength() {
+		return getAxis().getScale().getGrideLines().getTickLength();
 	}
 
 	/**

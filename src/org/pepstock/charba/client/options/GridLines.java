@@ -52,7 +52,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 		DRAW_TICKS("drawTicks"),
 		LINE_WIDTH("lineWidth"),
 		OFFSET_GRID_LINES("offsetGridLines"),
-		TICK_MARK_LENGTH("tickMarkLength"),
+		TICK_LENGTH("tickLength"),
 		Z("z");
 
 		// name value of property
@@ -360,10 +360,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	/**
 	 * Sets the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @param tickMarkLength Length in pixels that the grid lines will draw into the axis area.
+	 * @param tickLength Length in pixels that the grid lines will draw into the axis area.
 	 */
-	public void setTickMarkLength(int tickMarkLength) {
-		setValueAndAddToParent(Property.TICK_MARK_LENGTH, tickMarkLength);
+	public void setTickLength(int tickLength) {
+		setValueAndAddToParent(Property.TICK_LENGTH, tickLength);
 	}
 
 	/**
@@ -372,8 +372,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	@Override
-	public int getTickMarkLength() {
-		return getValue(Property.TICK_MARK_LENGTH, getDefaultValues().getTickMarkLength());
+	public int getTickLength() {
+		return getValue(Property.TICK_LENGTH, getDefaultValues().getTickLength());
 	}
 
 	/**

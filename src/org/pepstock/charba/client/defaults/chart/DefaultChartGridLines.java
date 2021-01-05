@@ -109,11 +109,11 @@ public final class DefaultChartGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickMarkLength()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickLength()
 	 */
 	@Override
-	public int getTickMarkLength() {
-		return gridLines.getTickMarkLength();
+	public int getTickLength() {
+		return gridLines.getTickLength();
 	}
 
 	/*

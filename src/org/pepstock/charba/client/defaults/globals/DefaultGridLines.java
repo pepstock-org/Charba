@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultGridLines;
 
 /**
@@ -25,9 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultGridLines;
 public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final boolean DEFAULT_DISPLAY = true;
-
-	// FIXME
-	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 
@@ -71,7 +69,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	 */
 	@Override
 	public String getColorAsString() {
-		return DEFAULT_COLOR;
+		return Defaults.get().getGlobal().getBorderColorAsString();
 	}
 
 	/*
@@ -127,10 +125,10 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickMarkLength()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickLength()
 	 */
 	@Override
-	public int getTickMarkLength() {
+	public int getTickLength() {
 		return DEFAULT_TICK_MARK_LENGTH;
 	}
 
