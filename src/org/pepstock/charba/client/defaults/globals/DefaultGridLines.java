@@ -26,9 +26,10 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
+	// FIXME
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
 
@@ -79,7 +80,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
 	}
 

@@ -45,7 +45,7 @@ public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFiller{
 	 * 
 	 * @return the line dash pattern offset.
 	 */
-	int getBorderDashOffset();
+	double getBorderDashOffset();
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified

@@ -62,7 +62,7 @@ public final class DefaultChartGridLines implements IsDefaultGridLines {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return gridLines.getBorderDashOffset();
 	}
 

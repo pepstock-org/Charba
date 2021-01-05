@@ -199,7 +199,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		// reset callback if there is
 		setBorderDashOffset((ScaleBorderDashOffsetCallback)null);
 		// stores value
@@ -211,7 +211,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * 
 	 * @return Offset for line dashes.
 	 */
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getAxis().getScale().getAngleLines().getBorderDashOffset();
 	}
 	

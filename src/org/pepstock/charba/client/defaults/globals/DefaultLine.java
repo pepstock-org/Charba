@@ -34,7 +34,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	// default border width
 	private static final int DEFAULT_BORDER_WIDTH = 3;
 	// default border dash offset
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 	// default cap bezier points
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
 	// default stepped
@@ -73,7 +73,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
 	}
 

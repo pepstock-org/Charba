@@ -198,7 +198,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * 
 	 * @param lineDashOffset the box border dash pattern offset.
 	 */
-	public void setLineDashOffset(int lineDashOffset) {
+	public void setLineDashOffset(double lineDashOffset) {
 		setValue(LegendItem.Property.LINE_DASH_OFFSET, lineDashOffset);
 	}
 

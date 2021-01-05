@@ -160,7 +160,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -170,7 +170,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return the line dash pattern offset.
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
 

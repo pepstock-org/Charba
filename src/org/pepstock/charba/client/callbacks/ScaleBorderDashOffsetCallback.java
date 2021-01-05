@@ -21,6 +21,6 @@ package org.pepstock.charba.client.callbacks;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface ScaleBorderDashOffsetCallback extends ScaleScriptable<Integer> {
+public interface ScaleBorderDashOffsetCallback extends ScaleScriptable<Double> {
 
 }

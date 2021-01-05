@@ -207,7 +207,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `generateLegend` method from `Defaults` class and from `IsChart` class because the prototype is not available anymore.
    * remove `LegendCallback` interface and its usage into `ConfigurationOptions` class because the prototype is not available anymore.
    * remove `easing` properties from `DatasetPluginItem` and `TooltipPluginItem` classes because it is not provided anymore.
-   * remove `easing` argument from `onBeforeDraw`, `onAfterDraw`, `onBeforeDatasetsDraw` and `onAfterDatasetsDraw` methods of `Plugin` interface because it is not provided anymore.
    * remove `HORIZONTAL_BAR` item of `ChartType` enumeration because the horizontal bar is not a chart type anymore.
    * remove `updateScale` method from `Defaults` because is not available anymore. Use `getScale(AxisType type)` instead.
    * redesign of `TooltipModel` class in according with new Chart.js model.
@@ -280,6 +279,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font.
    * pass a `Context` object instance as argument to the callback instead of `RenderItem` and `FontColorItem` ones.
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
+ * change `borderDashOffset` option from int to double in all classes where referenced. 
   
 ### Features
 

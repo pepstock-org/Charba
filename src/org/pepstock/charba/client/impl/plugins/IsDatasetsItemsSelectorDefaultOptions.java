@@ -68,7 +68,7 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 * 
 	 * @return the line dash pattern offset.
 	 */
-	default int getBorderDashOffset() {
+	default double getBorderDashOffset() {
 		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_DASH_OFFSET;
 	}
 

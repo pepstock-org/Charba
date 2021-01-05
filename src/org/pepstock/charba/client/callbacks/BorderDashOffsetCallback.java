@@ -21,6 +21,6 @@ package org.pepstock.charba.client.callbacks;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface BorderDashOffsetCallback extends Scriptable<Integer> {
+public interface BorderDashOffsetCallback extends Scriptable<Double> {
 
 }

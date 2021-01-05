@@ -29,7 +29,7 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
 
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 
 	/**
 	 * To avoid any instantiation
@@ -74,7 +74,7 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
 	}
 

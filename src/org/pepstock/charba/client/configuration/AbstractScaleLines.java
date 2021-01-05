@@ -43,7 +43,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	// callback proxy to invoke the line width function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// color callback instance
 	private ScaleColorCallback colorCallback = null;
@@ -117,7 +117,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
 		// gets value calling callback
 		borderDashOffsetCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).intValue());
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
 	}
 
 	/**

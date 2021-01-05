@@ -72,7 +72,7 @@ public final class DefaultChartAngleLines implements IsDefaultAngleLines {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return angleLines.getBorderDashOffset();
 	}
 

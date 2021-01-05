@@ -81,7 +81,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	// callback proxy to invoke the border dash function
 	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border joinstyle function
 	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border capstyle function
@@ -89,7 +89,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	// callback proxy to invoke the hover border dash function
 	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> hoverBorderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hoverBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border joinstyle function
 	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point background color function
@@ -311,7 +311,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), borderDashCallback));
 		// gets value calling callback
 		borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
 		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), borderJoinStyleCallback));
 		// gets value calling callback
@@ -320,7 +320,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashCallback));
 		// gets value calling callback
 		hoverBorderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
 		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderJoinStyleCallback));
 	}
@@ -676,7 +676,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		// resets callback
 		setBorderDashOffset((BorderDashOffsetCallback) null);
 		// stores value
@@ -688,7 +688,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the line dash pattern offset.
 	 */
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		// checks if a callback has been set for this property
 		if (getBorderDashOffsetCallback() == null) {
 			return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getElements().getLine().getBorderDashOffset());
@@ -1065,7 +1065,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashOffset the line dash pattern offset, when element is hovered
 	 */
-	public void setHoverBorderDashOffset(int borderDashOffset) {
+	public void setHoverBorderDashOffset(double borderDashOffset) {
 		// resets callback
 		setHoverBorderDashOffset((BorderDashOffsetCallback) null);
 		// stores value
@@ -1077,7 +1077,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the line dash pattern offset, when element is hovered
 	 */
-	public int getHoverBorderDashOffset() {
+	public double getHoverBorderDashOffset() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderDashOffsetCallback() == null) {
 			return getValue(Property.HOVER_BORDER_DASH_OFFSET, getDefaultValues().getElements().getLine().getBorderDashOffset());

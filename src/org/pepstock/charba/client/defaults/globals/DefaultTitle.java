@@ -19,6 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -34,7 +35,7 @@ public final class DefaultTitle implements IsDefaultTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
-	private final DefaultRoutedFont font = new DefaultRoutedFont();
+	private final DefaultRoutedFont font = new InternalTitleFont();
 
 	/**
 	 * To avoid any instantiation
@@ -112,5 +113,25 @@ public final class DefaultTitle implements IsDefaultTitle {
 	@Override
 	public String getColorAsString() {
 		return Defaults.get().getGlobal().getColorAsString();
+	}
+	
+	/**
+	 * Internal class extending {@link DefaultFont} to override some defaults for title.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalTitleFont extends DefaultRoutedFont {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return FontStyle.BOLD;
+		}
+
 	}
 }

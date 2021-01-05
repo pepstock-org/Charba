@@ -257,7 +257,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -267,7 +267,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @return the line dash pattern offset.
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
 

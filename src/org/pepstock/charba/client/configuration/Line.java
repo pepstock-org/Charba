@@ -98,7 +98,7 @@ public class Line extends AbstractConfigurationElement {
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		getOptions().getElements().getLine().setBorderDashOffset(borderDashOffset);
 	}
 
@@ -107,7 +107,7 @@ public class Line extends AbstractConfigurationElement {
 	 * 
 	 * @return the line dash pattern offset
 	 */
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getOptions().getElements().getLine().getBorderDashOffset();
 	}
 

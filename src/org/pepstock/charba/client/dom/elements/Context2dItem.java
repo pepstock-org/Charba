@@ -241,7 +241,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @return the line dash offset, or "phase."
 	 */
 	@JsProperty
-	public native int getLineDashOffset();
+	public native double getLineDashOffset();
 
 	/**
 	 * Sets the line dash offset, or "phase.".<br>
@@ -250,7 +250,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * @param lineDashOffset the line dash offset, or "phase."
 	 */
 	@JsProperty
-	public native void setLineDashOffset(int lineDashOffset);
+	public native void setLineDashOffset(double lineDashOffset);
 
 	/**
 	 * Returns the type of corners where two lines meet.

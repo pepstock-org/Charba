@@ -361,7 +361,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the box border dash pattern offset.
 	 */
-	public final int getLineDashOffset() {
+	public final double getLineDashOffset() {
 		return getValue(Property.LINE_DASH_OFFSET, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 

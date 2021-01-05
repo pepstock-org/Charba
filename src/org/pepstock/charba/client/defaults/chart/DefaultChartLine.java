@@ -95,7 +95,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getBorderDashOffset()
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return line.getBorderDashOffset();
 	}
 

@@ -83,7 +83,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 * 
 	 * @return the line dash pattern offset
 	 */
-	default int getBorderDashOffset() {
+	default double getBorderDashOffset() {
 		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();
 	}
 

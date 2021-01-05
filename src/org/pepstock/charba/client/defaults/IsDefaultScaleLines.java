@@ -42,5 +42,5 @@ public interface IsDefaultScaleLines {
 	 * 
 	 * @return Offset for line dashes.
 	 */
-	int getBorderDashOffset();
+	double getBorderDashOffset();
 }

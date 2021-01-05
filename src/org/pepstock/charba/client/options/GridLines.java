@@ -97,7 +97,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
 	 */
 	@Override
-	int getDefaultBorderDashOffset() {
+	double getDefaultBorderDashOffset() {
 		return getDefaultValues().getBorderDashOffset();
 	}
 

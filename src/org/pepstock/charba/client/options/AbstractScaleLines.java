@@ -100,7 +100,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
-	public final void setBorderDashOffset(int borderDashOffset) {
+	public final void setBorderDashOffset(double borderDashOffset) {
 		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -109,7 +109,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * 
 	 * @return Offset for line dashes.
 	 */
-	public final int getBorderDashOffset() {
+	public final double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, getDefaultBorderDashOffset());
 	}
 
@@ -118,6 +118,6 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * 
 	 * @return the default value for border dash offset.
 	 */
-	abstract int getDefaultBorderDashOffset();
+	abstract double getDefaultBorderDashOffset();
 
 }

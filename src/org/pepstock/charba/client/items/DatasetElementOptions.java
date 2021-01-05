@@ -461,7 +461,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * 
 	 * @return the line dash pattern offset.
 	 */
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 

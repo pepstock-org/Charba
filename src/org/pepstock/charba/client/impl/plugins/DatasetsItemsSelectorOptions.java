@@ -69,7 +69,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	/**
 	 * Default border dash offset of selection area, <b>{@value DEFAULT_BORDER_DASH_OFFSET}</b>.
 	 */
-	public static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+	public static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 
 	/**
 	 * Default border color for area, {@link GwtMaterialColor#GREY_DARKEN_2}.
@@ -280,7 +280,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(int borderDashOffset) {
+	public void setBorderDashOffset(double borderDashOffset) {
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -290,7 +290,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * @return the line dash pattern offset.
 	 */
 	@Override
-	public int getBorderDashOffset() {
+	public double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultOptions.getBorderDashOffset());
 	}
 
