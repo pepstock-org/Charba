@@ -186,4 +186,18 @@ public interface IsDefaultTicks extends IsDefaultFontContainer{
 	 */
 	CrossAlign getCrossAlign();
 
+	/**
+	 * Returns the text stroke color as string.
+	 * 
+	 * @return the text stroke color as string.
+	 */
+	String getTextStrokeColorAsString();
+	
+	/**
+	 * Returns the text stroke width.
+	 * 
+	 * @return the text stroke width.
+	 */
+	int getTextStrokeWidth();
+
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
@@ -63,6 +64,10 @@ public class DefaultTicks implements IsDefaultTicks {
 	private static final int DEFAULT_PRECISION = 0;
 
 	private static final int DEFAULT_Z = 0;
+
+	private static final String DEFAULT_TEXT_STROKE_COLOR = HtmlColor.TRANSPARENT.toRGBA();
+
+	private static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
 	private final DefaultMajor major = new DefaultMajor();
 
@@ -313,6 +318,26 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public CrossAlign getCrossAlign() {
 		return CrossAlign.NEAR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getTextStrokeColorAsString()
+	 */
+	@Override
+	public String getTextStrokeColorAsString() {
+		return DEFAULT_TEXT_STROKE_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getTextStrokeWidth()
+	 */
+	@Override
+	public int getTextStrokeWidth() {
+		return DEFAULT_TEXT_STROKE_WIDTH;
 	}
 
 }

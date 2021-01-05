@@ -49,6 +49,8 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		DISPLAY("display"),
 		MAJOR("major"),
 		PADDING("padding"),
+		TEXT_STROKE_COLOR("textStrokeColor"),
+		TEXT_STROKE_WIDTH("textStrokeWidth"),
 		Z("z"),
 		// cartesian
 		AUTO_SKIP("autoSkip"),
@@ -554,6 +556,62 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public CrossAlign getCrossAlign() {
 		return getValue(Property.CROSS_ALIGN, CrossAlign.values(), getDefaultValues().getCrossAlign());
+	}
+	
+	/**
+	 * Sets the text stroke color.
+	 * 
+	 * @param color the text stroke color
+	 */
+	public final void setTextStrokeColor(IsColor color) {
+		setTextStrokeColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the text stroke color.
+	 * 
+	 * @param color the text stroke color.
+	 */
+	public final void setTextStrokeColor(String color) {
+		setValue(Property.TEXT_STROKE_COLOR, color);
+	}
+
+	/**
+	 * Returns the text stroke color as string.
+	 * 
+	 * @return the text stroke color as string.
+	 */
+	@Override
+	public final String getTextStrokeColorAsString() {
+		return getValue(Property.TEXT_STROKE_COLOR, getDefaultValues().getTextStrokeColorAsString());
+	}
+
+	/**
+	 * Returns the text stroke color.
+	 * 
+	 * @return the text stroke color.
+	 */
+	public final IsColor getTextStrokeColor() {
+		return ColorBuilder.parse(getTextStrokeColorAsString());
+	}
+
+	/**
+	 * Sets the text stroke width.
+	 * 
+	 * @param textStrokeWidth the text stroke width.
+	 */
+	public final void setTextStrokeWidth(int textStrokeWidth) {
+		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidth);
+	}
+
+	/**
+	 * Returns the text stroke width.
+	 * 
+	 * @return the text stroke width.
+	 */
+	@Override
+	public final int getTextStrokeWidth() {
+		return getValue(Property.TEXT_STROKE_WIDTH, getDefaultValues().getTextStrokeWidth());
 	}
 
 }

@@ -282,4 +282,24 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getCrossAlign();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getTextStrokeColorAsString()
+	 */
+	@Override
+	public String getTextStrokeColorAsString() {
+		return ticks.getTextStrokeColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getTextStrokeWidth()
+	 */
+	@Override
+	public int getTextStrokeWidth() {
+		return ticks.getTextStrokeWidth();
+	}
+
 }

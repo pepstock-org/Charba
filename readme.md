@@ -350,7 +350,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add new hooks to `Plugin` interface:
      * `onInstall`, `onStart`, `onStop`, `onUninstall` to manage plugin life-cycle.
      * `onBeforeDataLimits`, `onAfterDataLimits`, `onBeforeBuildTicks`, `onAfterBuildTicks` to manage scale setup.
-   * add `resize(width height)` method to `IsChart` interface.   
+   * add `resize(width height)` method to `IsChart` interface.
+   * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
