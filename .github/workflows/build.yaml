@@ -12,7 +12,6 @@ on:
    push:
       branches:
          - master
-         - chartjs3.0.0
 # 
 # Workflow environment and steps
 # 
