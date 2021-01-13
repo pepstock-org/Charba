@@ -50,7 +50,6 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	{
 		ZONE("zone"),
 		LOCALE("locale"),
-		SET_ZONE("setZone"),
 		OUTPUT_CALENDAR("outputCalendar"),
 		NUMBERING_SYSTEM("numberingSystem");
 
