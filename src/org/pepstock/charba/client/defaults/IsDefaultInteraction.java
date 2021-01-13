@@ -19,11 +19,11 @@ import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Interface to define hover object defaults.
+ * Interface to define interaction object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultHover {
+public interface IsDefaultInteraction {
 
 	/**
 	 * Returns which elements appear in the tooltip.

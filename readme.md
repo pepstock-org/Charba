@@ -352,6 +352,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * `onBeforeDataLimits`, `onAfterDataLimits`, `onBeforeBuildTicks`, `onAfterBuildTicks` to manage scale setup.
    * add `resize(width height)` method to `IsChart` interface.
    * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options.
+   * add `Interaction` class in order to manage datasets options and configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

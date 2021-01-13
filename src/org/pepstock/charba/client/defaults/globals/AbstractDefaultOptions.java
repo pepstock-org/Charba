@@ -19,7 +19,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
+import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -31,6 +31,7 @@ import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
 import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
 import org.pepstock.charba.client.defaults.chart.DefaultChartFont;
 import org.pepstock.charba.client.defaults.chart.DefaultChartHover;
+import org.pepstock.charba.client.defaults.chart.DefaultChartInteraction;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLayout;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLegend;
 import org.pepstock.charba.client.defaults.chart.DefaultChartPlugins;
@@ -46,7 +47,9 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultAnimation animation;
 
-	private final IsDefaultHover hover;
+	private final IsDefaultInteraction hover;
+
+	private final IsDefaultInteraction interaction;
 
 	private final IsDefaultElements elements;
 
@@ -72,6 +75,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		// using defaults
 		this.animation = new DefaultAnimation();
 		this.hover = new DefaultHover();
+		this.interaction = new DefaultInteraction();
 		this.elements = new DefaultElements();
 		this.layout = new DefaultLayout();
 		this.title = new DefaultTitle();
@@ -95,6 +99,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		// stores all inner elements
 		this.animation = new DefaultChartAnimation(options.getAnimation());
 		this.hover = new DefaultChartHover(options.getHover());
+		this.interaction = new DefaultChartInteraction(options.getInteraction());
 		this.elements = new DefaultChartElements(options.getElements());
 		this.layout = new DefaultChartLayout(options.getLayout());
 		this.title = new DefaultChartTitle(options.getTitle());
@@ -151,8 +156,18 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getHover()
 	 */
 	@Override
-	public final IsDefaultHover getHover() {
+	public final IsDefaultInteraction getHover() {
 		return hover;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getInteraction()
+	 */
+	@Override
+	public IsDefaultInteraction getInteraction() {
+		return interaction;
 	}
 
 	/*

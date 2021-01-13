@@ -15,54 +15,18 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
-
 /**
  * CHART.JS default values for HOVER element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultHover implements IsDefaultHover {
-
-	private static final boolean DEFAULT_INTERSECT = true;
+public final class DefaultHover extends DefaultInteraction {
 
 	/**
 	 * To avoid any instantiation
 	 */
 	DefaultHover() {
 		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#getMode()
-	 */
-	@Override
-	public InteractionMode getMode() {
-		return InteractionMode.NEAREST;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#isIntersect()
-	 */
-	@Override
-	public boolean isIntersect() {
-		return DEFAULT_INTERSECT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#getAxis()
-	 */
-	@Override
-	public InteractionAxis getAxis() {
-		return InteractionAxis.X;
 	}
 
 }

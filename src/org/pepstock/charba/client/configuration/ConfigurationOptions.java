@@ -148,6 +148,8 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 
 	private final Hover hover;
 
+	private final Interaction interaction;
+
 	private final Layout layout;
 
 	private final Elements elements;
@@ -185,6 +187,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 		title = new Title(getConfiguration());
 		layout = new Layout(getConfiguration());
 		hover = new Hover(getConfiguration());
+		interaction = new Interaction(getConfiguration());
 		plugins = new Plugins(getConfiguration());
 		tooltips = new Tooltips(chart, getConfiguration());
 		// sets charba ID
@@ -278,6 +281,15 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	}
 
 	/**
+	 * Returns the interaction element.
+	 * 
+	 * @return the interaction
+	 */
+	public Interaction getInteraction() {
+		return interaction;
+	}
+
+	/**
 	 * Returns the layout element.
 	 * 
 	 * @return the layout
@@ -356,7 +368,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	public List<Event> getEvents() {
 		return getConfiguration().getEvents();
 	}
-	
+
 	/**
 	 * Sets the locale instance for internationalization.
 	 * 

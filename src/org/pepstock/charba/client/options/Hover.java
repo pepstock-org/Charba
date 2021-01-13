@@ -17,9 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 
 /**
  * Definitions about how elements appear in the tooltip, hovering the chart.
@@ -27,38 +25,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends AbstractHover<Options, IsDefaultHover> implements IsDefaultHover {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		AXIS("axis");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
+public final class Hover extends Interaction {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -68,48 +35,8 @@ public final class Hover extends AbstractHover<Options, IsDefaultHover> implemen
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
+	Hover(Options options, Key childKey, IsDefaultInteraction defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
-	 */
-	@Override
-	InteractionMode getDefaultMode() {
-		return getDefaultValues().getMode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#isDefaultIntersect()
-	 */
-	@Override
-	boolean isDefaultIntersect() {
-		return getDefaultValues().isIntersect();
-	}
-
-	/**
-	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
-	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
-	 * 
-	 * @param axis define which directions are used in calculating distances.
-	 */
-	public void setAxis(InteractionAxis axis) {
-		setValueAndAddToParent(Property.AXIS, axis);
-	}
-
-	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
-	 * 
-	 * @return define which directions are used in calculating distances.
-	 */
-	@Override
-	public InteractionAxis getAxis() {
-		return getValue(Property.AXIS, InteractionAxis.values(), getDefaultValues().getAxis());
 	}
 
 }

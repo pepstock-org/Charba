@@ -85,6 +85,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	{
 		// object properties
 		FONT("font"),
+		INTERACTION("interaction"),
 		HOVER("hover"),
 		ELEMENTS("elements"),
 		LAYOUT("layout"),
@@ -141,6 +142,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final Hover hover;
 
+	private final Interaction interaction;
+
 	private final Layout layout;
 
 	private final Elements elements;
@@ -190,6 +193,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// gets all sub elements
 		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
 		this.hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
+		this.interaction = new Interaction(this, Property.INTERACTION, getDefaultValues().getInteraction(), getValue(Property.INTERACTION));
 		this.layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
 		this.plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
@@ -291,6 +295,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		return hover;
 	}
 
+	/**
+	 * Returns the interaction element.
+	 * 
+	 * @return the interaction
+	 */
+	@Override
+	public final Interaction getInteraction() {
+		return interaction;
+	}
+	
 	/**
 	 * Returns the layout element.
 	 * 

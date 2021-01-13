@@ -15,56 +15,22 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 
 /**
  * Defaults for hover option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartHover implements IsDefaultHover {
-
-	private final IsDefaultHover hover;
+public final class DefaultChartHover extends DefaultChartInteraction {
 
 	/**
 	 * Creates the object by hover option element instance.
 	 * 
 	 * @param hover hover option element instance.
 	 */
-	public DefaultChartHover(IsDefaultHover hover) {
-		this.hover = hover;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getMode()
-	 */
-	@Override
-	public InteractionMode getMode() {
-		return hover.getMode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#isIntersect()
-	 */
-	@Override
-	public boolean isIntersect() {
-		return hover.isIntersect();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAxis()
-	 */
-	@Override
-	public InteractionAxis getAxis() {
-		return hover.getAxis();
+	public DefaultChartHover(IsDefaultInteraction hover) {
+		super(hover);
 	}
 
 }

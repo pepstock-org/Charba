@@ -40,7 +40,14 @@ public interface IsDefaultOptions {
 	 * 
 	 * @return the hover defaults.
 	 */
-	IsDefaultHover getHover();
+	IsDefaultInteraction getHover();
+	
+	/**
+	 * Returns the interaction defaults.
+	 * 
+	 * @return the interaction defaults.
+	 */
+	IsDefaultInteraction getInteraction();
 
 	/**
 	 * Returns the title defaults.

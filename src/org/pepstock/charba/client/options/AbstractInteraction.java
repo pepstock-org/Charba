@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @param <D> defaults provider class
  * @param <D> defaults provider class
  */
-abstract class AbstractHover<P extends AbstractModel<?, ?>, D> extends AbstractModel<P, D> {
+abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends AbstractModel<P, D> {
 
 	/**
 	 * Name of properties of native object.
@@ -69,7 +69,7 @@ abstract class AbstractHover<P extends AbstractModel<?, ?>, D> extends AbstractM
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractHover(P options, Key childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractInteraction(P options, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 

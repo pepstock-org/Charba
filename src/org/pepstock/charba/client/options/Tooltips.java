@@ -35,7 +35,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractHover<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
+public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
 
 	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
