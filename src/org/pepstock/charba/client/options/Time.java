@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
- * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
+ * The time configuration is used to configure how time and time series axes must configure the tick marks.
  * 
  * @author Andrea "Stock" Stocchero
  *
