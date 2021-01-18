@@ -104,7 +104,14 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 *         If not set, defaults to the value axis base value
 	 */
 	void setBase(double base) {
-		setValueAndAddToParent(Property.BASE, base);
+		// checks if is consistent value
+		if (!Double.isNaN(base)) {
+			setValueAndAddToParent(Property.BASE, base);
+		} else {
+			// if here the user wants to set the default then
+			// removes the property
+			removeIfExists(Property.BASE);
+		}
 	}
 
 	/**
