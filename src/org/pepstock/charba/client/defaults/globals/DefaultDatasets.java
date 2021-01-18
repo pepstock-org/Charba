@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for DATASETS element.
@@ -55,6 +56,8 @@ public final class DefaultDatasets implements IsDefaultDatasets {
 
 	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
 
+	private static final double DEFAULT_BASE = UndefinedValues.DOUBLE;
+
 	private static final boolean DEFAULT_SHOW_LINE = true;
 
 	/**
@@ -72,6 +75,16 @@ public final class DefaultDatasets implements IsDefaultDatasets {
 	@Override
 	public IsDefaultAnimation getAnimation() {
 		return animation;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#getBase()
+	 */
+	@Override
+	public double getBase() {
+		return DEFAULT_BASE;
 	}
 
 	/*

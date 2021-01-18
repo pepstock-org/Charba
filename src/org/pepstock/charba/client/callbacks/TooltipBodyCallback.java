@@ -44,13 +44,14 @@ public interface TooltipBodyCallback {
 	}
 
 	/**
-	 * Returns text to render after the body section.<br>If returns <code>null</code> or empty list, it will be ignored.
+	 * Returns text to render after the body section.<br>
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltips items
 	 * @return a list of labels to apply to the body.
 	 */
-	default List<String> onAfterBody(IsChart chart, List<TooltipItem> items){
+	default List<String> onAfterBody(IsChart chart, List<TooltipItem> items) {
 		return Collections.emptyList();
 	}
 

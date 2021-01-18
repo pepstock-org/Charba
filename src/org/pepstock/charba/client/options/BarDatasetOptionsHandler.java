@@ -43,6 +43,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	protected enum Property implements Key
 	{
+		BASE("base"),
 		BAR_PERCENTAGE("barPercentage"),
 		CATEGORY_PERCENTAGE("categoryPercentage"),
 		BAR_THICKNESS("barThickness"),
@@ -93,6 +94,28 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
+	}
+
+	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	void setBase(double base) {
+		setValueAndAddToParent(Property.BASE, base);
+	}
+
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	double getBase() {
+		return getValue(Property.BASE, getDefaultValues().getBase());
 	}
 
 	/**

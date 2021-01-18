@@ -49,6 +49,16 @@ public final class DefaultChartDatasets implements IsDefaultDatasets {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#getBase()
+	 */
+	@Override
+	public double getBase() {
+		return datasets.getBase();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getBarPercentage()
 	 */
 	@Override

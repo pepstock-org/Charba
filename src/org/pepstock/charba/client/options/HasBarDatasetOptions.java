@@ -25,13 +25,45 @@ import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
  *
  */
 public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
-
+	
 	/**
 	 * Returns the instance of bar dataset options handler.
 	 * 
 	 * @return the instance of bar dataset options handler
 	 */
 	BarDatasetOptionsHandler getDatasetOptionsHandler();
+	
+	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	default void setBase(double base) {
+		// checks if handler is consistent
+		if (getDatasetOptionsHandler() != null) {
+			getDatasetOptionsHandler().setBase(base);
+		}
+	}
+
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	@Override
+	default double getBase() {
+		// checks if handler is consistent
+		if (getDatasetOptionsHandler() != null) {
+			return getDatasetOptionsHandler().getBase();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return Defaults.get().getGlobal().getDatasets().getBase();
+	}
 
 	/**
 	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.

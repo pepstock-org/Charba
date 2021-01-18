@@ -358,7 +358,7 @@ public final class Defaults {
 	// -------------------
 
 	/**
-	 * Returns teh default text to render as the title of the tooltip.
+	 * Returns the default text to render as the title of the tooltip.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
