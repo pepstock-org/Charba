@@ -15,13 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
@@ -51,8 +47,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 		DATASET_INDEX("datasetIndex"),
 		DATA_INDEX("dataIndex"),
 		DATA_POINT("dataPoint"),
-		ELEMENT("element"),
-		OPTIONS("options");
+		ELEMENT("element");
 
 		// name value of property
 		private final String value;
@@ -198,56 +193,6 @@ public final class ScriptableContext extends AbstractScriptableContext {
 			}
 		}
 		return element;
-	}
-
-	/**
-	 * Sets the additional options.
-	 * 
-	 * @param options additional options instance.
-	 * @param <T> type of public object container to store
-	 */
-	public <T extends NativeObjectContainer> void setOptions(T options) {
-		// if null, removes the configuration
-		if (options != null) {
-			// passes thru an array to get the native object
-			ArrayObject array = ArrayObject.fromOrEmpty(options);
-			// checks if empty
-			if (!array.isEmpty()) {
-				// and stores configuration
-				getContext().setOptions(array.get(0));
-			}
-		}
-	}
-
-	/**
-	 * Checks if there is any options.
-	 * 
-	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
-	 */
-	public boolean hasOptions() {
-		return JsHelper.get().exist(getContext(), Property.OPTIONS);
-	}
-
-	/**
-	 * Returns the options, if exist. It uses a factory instance to create a public object container.
-	 * 
-	 * @param factory factory instance to create a public object container.
-	 * @param <T> type of public object container to return
-	 * @return java script object used to map the options or an empty object if not exist.
-	 */
-	public <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// checks if there is a options
-			if (hasOptions()) {
-				// creates and returns the object
-				return factory.create(getContext().getOptions());
-			}
-			// if here, returns an empty object
-			return factory.create();
-		}
-		// if here, argument is not consistent
-		return null;
 	}
 
 }

@@ -16,9 +16,12 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.enums.ContextType;
 
 /**
@@ -35,7 +38,8 @@ public abstract class AbstractScriptableContext {
 	private enum Property implements Key
 	{
 		CHART("chart"),
-		TYPE("type");
+		TYPE("type"),
+		OPTIONS("options");
 
 		// name value of property
 		private final String value;
@@ -107,13 +111,63 @@ public abstract class AbstractScriptableContext {
 	 * 
 	 * @return the type of the context
 	 */
-	public ContextType getType() {
+	public final ContextType getType() {
 		// checks if the property exists
 		if (exist(Property.TYPE)) {
 			return Key.getKeyByValue(ContextType.values(), context.getType(), ContextType.UNKNOWN);
 		}
 		// if here, context does not contain this property
 		return ContextType.UNKNOWN;
+	}
+	
+	/**
+	 * Sets the additional options.
+	 * 
+	 * @param options additional options instance.
+	 * @param <T> type of public object container to store
+	 */
+	public final <T extends NativeObjectContainer> void setOptions(T options) {
+		// if null, removes the configuration
+		if (options != null) {
+			// passes thru an array to get the native object
+			ArrayObject array = ArrayObject.fromOrEmpty(options);
+			// checks if empty
+			if (!array.isEmpty()) {
+				// and stores configuration
+				getContext().setOptions(array.get(0));
+			}
+		}
+	}
+
+	/**
+	 * Checks if there is any options.
+	 * 
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 */
+	public final boolean hasOptions() {
+		return JsHelper.get().exist(getContext(), Property.OPTIONS);
+	}
+
+	/**
+	 * Returns the options, if exist. It uses a factory instance to create a public object container.
+	 * 
+	 * @param factory factory instance to create a public object container.
+	 * @param <T> type of public object container to return
+	 * @return java script object used to map the options or an empty object if not exist.
+	 */
+	public final <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// checks if there is a options
+			if (hasOptions()) {
+				// creates and returns the object
+				return factory.create(getContext().getOptions());
+			}
+			// if here, returns an empty object
+			return factory.create();
+		}
+		// if here, argument is not consistent
+		return null;
 	}
 
 	/**

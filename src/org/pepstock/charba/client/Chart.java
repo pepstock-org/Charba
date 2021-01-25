@@ -162,14 +162,6 @@ public final class Chart {
 	native String toBase64Image();
 
 	/**
-	 * Returns an HTML string of a legend for that chart.<br> The legend is generated from the legendCallback in the options.
-	 * 
-	 * @return the HTML legend.
-	 */
-	@JsMethod
-	native String generateLegend();
-
-	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
 	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
@@ -191,7 +183,7 @@ public final class Chart {
 	 *   element: Element;
 	 *   datasetIndex: number;
 	 *   index: number;
-	 *   }
+	 * }
 	 * </code>
 	 */
 	@JsMethod

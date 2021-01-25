@@ -112,7 +112,7 @@ public interface IsChart {
 			throw new IllegalArgumentException("Chart is null or not consistent");
 		}
 	}
-	
+
 	/**
 	 * Check if chart passed as argument is not <code>null</code> and its id is not <code>null</code> as well.<br>
 	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
@@ -152,7 +152,7 @@ public interface IsChart {
 	 * @param event the event to fire
 	 */
 	void fireEvent(Event event);
-	
+
 	/**
 	 * Returns the amount of handlers for a specific event type.
 	 * 
@@ -330,7 +330,7 @@ public interface IsChart {
 	 * canvas nodes container element.
 	 */
 	void resize();
-	
+
 	/**
 	 * Use this to manually resize the canvas element.<br>
 	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
@@ -341,7 +341,9 @@ public interface IsChart {
 	void resize(int width, int height);
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales, legends, and then re-render the chart.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.
 	 */
 	void update();
 
@@ -368,7 +370,9 @@ public interface IsChart {
 	void update(UpdateConfiguration config);
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.
 	 */
 	void reconfigure();
 
@@ -384,9 +388,11 @@ public interface IsChart {
 	void reconfigure(IsAnimationModeKey mode);
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options, mutating the options property in place. A
-	 * configuration object can be provided with additional configuration for the update process. This is useful when update is manually called inside an event handler and some
-	 * different animation is desired.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.<br>
+	 * A configuration object can be provided with additional configuration for the update process.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param config a configuration object can be provided with additional configuration for the update process
 	 */
