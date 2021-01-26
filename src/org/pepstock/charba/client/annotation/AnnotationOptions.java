@@ -24,12 +24,17 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * This is the {@link Annotation#ID} plugin options where to set all configuration items needed to the plugin.
+ * This is the {@link AnnotationPlugin#ID} plugin options where to set all configuration items needed to the plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions {
+
+	/**
+	 * Default double click speed in milliseconds, <b>{@value DEFAULT_DOUBLE_CLICK_SPEED}</b>.
+	 */
+	public static final int DEFAULT_DOUBLE_CLICK_SPEED = 350;
 
 	/**
 	 * Default draw time, <b>{@link DrawTime#AFTER_DATASETS_DRAW}</b>.
@@ -42,6 +47,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	enum Property implements Key
 	{
 		DRAW_TIME("drawTime"),
+		DOUBLE_CLICK_SPEED("dblClickSpeed"),
 		ANNOTATIONS("annotations");
 
 		// name value of property
@@ -74,23 +80,23 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	private final AnnotationMap annotationsMap;
 
 	/**
-	 * Creates new {@link Annotation#ID} plugin options.
+	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 */
 	public AnnotationOptions() {
 		this(null, null);
 	}
 
 	/**
-	 * Creates new {@link Annotation#ID} plugin options, relating to chart instance for default.
+	 * Creates new {@link AnnotationPlugin#ID} plugin options, relating to chart instance for default.
 	 * 
 	 * @param chart chart instance related to the plugin options
 	 */
 	public AnnotationOptions(IsChart chart) {
-		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(Annotation.ID, Annotation.FACTORY) : null);
+		this(IsChart.isConsistent(chart) ? chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.DEFAULTS_FACTORY) : null, null);
 	}
 
 	/**
-	 * Creates new {@link Annotation#ID} plugin options.
+	 * Creates new {@link AnnotationHelper#ID} plugin options.
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 */
@@ -100,18 +106,18 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	}
 
 	/**
-	 * Creates new {@link Annotation#ID} plugin options.<br>
+	 * Creates new {@link AnnotationHelper#ID} plugin options.<br>
 	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object loaded from configuration
 	 */
 	AnnotationOptions(IsDefaultsAnnotationOptions defaultOptions, NativeObject nativeObject) {
-		super(Annotation.ID, nativeObject);
+		super(AnnotationPlugin.ID, nativeObject);
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
 			// reads the default default global options
-			this.defaultOptions = loadGlobalsPluginOptions(Annotation.DEFAULTS_FACTORY);
+			this.defaultOptions = loadGlobalsPluginOptions(AnnotationPlugin.DEFAULTS_FACTORY);
 		} else {
 			// stores default options
 			this.defaultOptions = defaultOptions;
@@ -136,16 +142,11 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param drawTime the draw time which defines when the annotations are drawn
 	 */
 	public void setDrawTime(DrawTime drawTime) {
+		// stores value
 		setValue(Property.DRAW_TIME, drawTime);
-	}
-
-	/**
-	 * Returns <code>true</code> if the draw time has previously set.
-	 * 
-	 * @return <code>true</code> if the draw time has previously set
-	 */
-	boolean hasDrawTime() {
-		return has(Property.DRAW_TIME);
+		// checks if it must change the draw time default
+		// in all inner annotations
+		annotationsMap.resetDrawTime(drawTime);
 	}
 
 	/**
@@ -156,6 +157,25 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	@Override
 	public DrawTime getDrawTime() {
 		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultOptions.getDrawTime());
+	}
+
+	/**
+	 * Sets the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
+	 * 
+	 * @param speed the double-click speed in milliseconds
+	 */
+	public void setDoubleClickSpeed(int speed) {
+		setValue(Property.DOUBLE_CLICK_SPEED, speed);
+	}
+
+	/**
+	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
+	 * 
+	 * @return the double-click speed in milliseconds
+	 */
+	@Override
+	public int getDoubleClickSpeed() {
+		return getValue(Property.DOUBLE_CLICK_SPEED, defaultOptions.getDoubleClickSpeed());
 	}
 
 	/**
@@ -203,7 +223,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param annotations set of annotations.
 	 */
 	public void addAnnotations(AbstractAnnotation... annotations) {
-		annotationsMap.addAnnotations(annotations);
+		annotationsMap.addAnnotations(getDrawTime(), annotations);
 	}
 
 	/**
@@ -212,7 +232,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param annotations set of annotations. If <code>null</code>, removes all annotations
 	 */
 	public void setAnnotations(AbstractAnnotation... annotations) {
-		annotationsMap.setAnnotations(annotations);
+		annotationsMap.setAnnotations(getDrawTime(), annotations);
 	}
 
 	/**

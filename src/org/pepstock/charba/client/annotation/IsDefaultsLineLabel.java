@@ -15,17 +15,23 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 
 /**
- * This is the {@link Annotation#ID} plugin <b>LABEL of LINE</b> annotation DEFAULTS options interface.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultsLineLabel {
+
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font element.
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns <code>true</code> whether the label is enabled and should be displayed.
@@ -46,39 +52,12 @@ interface IsDefaultsLineLabel {
 	}
 
 	/**
-	 * Returns the font size of text.
-	 * 
-	 * @return the font size of text
-	 */
-	default int getFontSize() {
-		return Defaults.get().getGlobal().getFont().getSize();
-	}
-
-	/**
-	 * Returns the font style of text.
-	 * 
-	 * @return the font style of text
-	 */
-	default FontStyle getFontStyle() {
-		return LineLabel.DEFAULT_FONT_STYLE;
-	}
-
-	/**
 	 * Returns the font color of text as string.
 	 * 
 	 * @return the font color of text
 	 */
-	default String getFontColorAsString() {
+	default String getColorAsString() {
 		return LineLabel.DEFAULT_FONT_COLOR_AS_STRING;
-	}
-
-	/**
-	 * Returns the font family of text.
-	 * 
-	 * @return the font family of text
-	 */
-	default String getFontFamily() {
-		return Defaults.get().getGlobal().getFont().getFamily();
 	}
 
 	/**
@@ -142,17 +121,17 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the rotation of label in degrees
 	 */
-	default boolean isAutoRotation() {
-		return LineLabel.DEFAULT_AUTO_ROTATION;
+	default double getRotation() {
+		return LineLabel.DEFAULT_ROTATION;
 	}
 
 	/**
-	 * Returns the rotation of label in degrees.
+	 * Returns <code>true</code> whether the rotation of label must calculates automatically.
 	 * 
-	 * @return the rotation of label in degrees
+	 * @return <code>true</code> whether the rotation of label must calculates automatically
 	 */
-	default double getRotation() {
-		return LineLabel.DEFAULT_ROTATION;
+	default boolean isAutoRotation() {
+		return false;
 	}
 
 }

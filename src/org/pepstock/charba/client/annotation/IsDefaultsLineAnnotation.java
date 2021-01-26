@@ -20,28 +20,17 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * This is the {@link Annotation#ID} plugin <b>LINE</b> annotation DEFAULTS options interface.
+ * This is the {@link AnnotationHelper#ID} plugin <b>LINE</b> annotation DEFAULTS options interface.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderColorAsString()
-	 */
-	@Override
-	default String getBorderColorAsString() {
-		return LineAnnotation.DEFAULT_BORDER_COLOR_AS_STRING;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -52,7 +41,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	default int getBorderWidth() {
 		return LineAnnotation.DEFAULT_BORDER_WIDTH;
 	}
-	
+
 	/**
 	 * Returns the label on the line.
 	 * 
@@ -113,15 +102,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	default Date getValueAsDate() {
 		return null;
 	}
-	
-	/**
-	 * Returns the data value callback to calculate start value of line.
-	 * 
-	 * @return the data value callback to calculate start value of line
-	 */
-	default AnnotationValueCallback getValueCallback() {
-		return null;
-	}
 
 	/**
 	 * Returns the data value at which the line draw should end.
@@ -149,14 +129,4 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	default Date getEndValueAsDate() {
 		return null;
 	}
-
-	/**
-	 * Returns the data value callback to calculate end value of line.
-	 * 
-	 * @return the data value callback to calculate end value of line
-	 */
-	default AnnotationValueCallback getEndValueCallback() {
-		return null;
-	}
-
 }

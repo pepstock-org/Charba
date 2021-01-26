@@ -21,12 +21,21 @@ import java.util.List;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 
 /**
- * This is the {@link Annotation#ID} plugin DEFAULTS options interface, in order to define the attributes of main annotations options.
+ * This is the {@link AnnotationHelper#ID} plugin DEFAULTS options interface, in order to define the attributes of main annotations options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultsAnnotationOptions {
+
+	/**
+	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
+	 * 
+	 * @return the double-click speed in milliseconds
+	 */
+	default int getDoubleClickSpeed() {
+		return AnnotationOptions.DEFAULT_DOUBLE_CLICK_SPEED;
+	}
 
 	/**
 	 * Returns the draw time which defines when the annotations are drawn.

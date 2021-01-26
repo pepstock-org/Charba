@@ -25,25 +25,17 @@ import org.pepstock.charba.client.commons.Key;
 public enum LineLabelPosition implements Key
 {
 	/**
-	 * The center property sets the center of line label its normal position.
+	 * The "center" property sets the line label at center of line. Default.
 	 */
 	CENTER("center"),
 	/**
-	 * The top property sets the top edge of line label its normal position.
+	 * The "start" property sets the line label at starting of line.
 	 */
-	TOP("top"),
+	START("start"),
 	/**
-	 * the left property sets the left edge of line label to its normal position.
+	 * The "end" property sets the line label at ending of line.
 	 */
-	LEFT("left"),
-	/**
-	 * the bottom property sets the bottom edge of line label its normal position.
-	 */
-	BOTTOM("bottom"),
-	/**
-	 * the right property sets the right edge of line label to its normal position.
-	 */
-	RIGHT("right");
+	END("end");
 
 	// name value of property
 	private final String value;

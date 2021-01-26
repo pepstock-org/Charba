@@ -15,39 +15,32 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.defaults.IsDefaultFont;
-
 /**
- * This is the {@link AnnotationHelper#ID} plugin LABEL of LINE annotation DEFAULTS options.
+ * This is the {@link AnnotationHelper#ID} plugin ELLIPSE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class LineLabelDefaultsOptions implements IsDefaultsLineLabel {
+final class EllipseAnnotationDefaultsOptions implements IsDefaultsEllipseAnnotation {
 
 	// defaults options instance
-	static final LineLabelDefaultsOptions INSTANCE = new LineLabelDefaultsOptions();
-
-	private Font font;
+	static final EllipseAnnotationDefaultsOptions INSTANCE = new EllipseAnnotationDefaultsOptions();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private LineLabelDefaultsOptions() {
-		this.font = new Font();
-		// stores style
-		this.font.setStyle(LineLabel.DEFAULT_FONT_STYLE);
-
+	private EllipseAnnotationDefaultsOptions() {
+		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineLabel#getFont()
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
 	 */
 	@Override
-	public IsDefaultFont getFont() {
-		return font;
+	public AnnotationType getType() {
+		return AnnotationType.ELLIPSE;
 	}
 
 }

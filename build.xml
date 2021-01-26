@@ -52,8 +52,7 @@
 	<property name="javascript.dist.dir" value="${classes.dir}/${javascript.package}" />
 
 	<!-- 
-		LABELS CHART.JS plugin - waiting for approval of pull request
-		https://github.com/emn178/chartjs-plugin-labels/pull/88 
+		LABELS CHART.JS plugin
 	-->
 	<property name="javascript.labels.file" value="chartjs-plugin-labels.js" />
 	<property name="javascript.labels.minify.file" value="chartjs-plugin-labels.min.js" />
@@ -77,7 +76,6 @@
 	<!-- 
 		CHARBA controller template 
 	-->
-	<!--property name="javascript.chartjs.minify.file" value="chart.bundle.min.js" /-->
 	<property name="javascript.controller.template.dir" value="${codegen.dir}/org/pepstock/charba/codegen" />
 	<property name="javascript.controller.template.file" value="ExtendedController.template" />
 	<property name="javascript.controller.template.path" value="${javascript.controller.template.dir}/${javascript.controller.template.file}" />

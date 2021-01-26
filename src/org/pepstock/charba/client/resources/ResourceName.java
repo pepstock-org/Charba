@@ -60,7 +60,11 @@ public enum ResourceName implements Key
 	/**
 	 * Script element id for CHART.JS LABELS plugin.
 	 */
-	LABELS_PLUGIN("labels", false, "org.pepstock.charba.client.labels.LabelsPluginResource");
+	LABELS_PLUGIN("labels", false, "org.pepstock.charba.client.labels.LabelsPluginResource"),
+	/**
+	 * Script element id for CHART.JS ANNOTATION plugin.
+	 */
+	ANNOTATION_PLUGIN("annotation", false, "org.pepstock.charba.client.annotation.AnnotationPluginResource");
 
 	// name value of property
 	private final String value;

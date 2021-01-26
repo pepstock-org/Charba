@@ -19,9 +19,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.AnnotationValueCallback;
-import org.pepstock.charba.client.colors.Color;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -30,23 +27,13 @@ import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a <b>LINE</b> annotation which draws a line into a chart.<br>
- * Vertical, horizontal or inclined lines are supported.
+ * Implements a LINE annotation which draws a line into a chart.<br>
+ * Vertical or horizontal lines are supported.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation {
-
-	/**
-	 * Default line annotation border color, <b>rgb(54, 162, 235)</b>.
-	 */
-	public static final IsColor DEFAULT_BORDER_COLOR = new Color(54, 162, 235);
-
-	/**
-	 * Default line annotation border color as string, <b>rgb(54, 162, 235)</b>.
-	 */
-	public static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGB();
 
 	/**
 	 * Default line annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -61,6 +48,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
+		// FIXME missing x and y for finite line
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		LABEL("label");
@@ -93,10 +81,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	private final IsDefaultsLineAnnotation defaultValues;
 	// lable for line instance
 	private final LineLabel label;
-	// value callback instance
-	private AnnotationValueCallback valueCallback;
-	// end value callback instance
-	private AnnotationValueCallback endValueCallback;
 
 	/**
 	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -123,7 +107,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param id annotation id to apply to the object
 	 */
 	public LineAnnotation(IsAnnotationId id) {
-		this(id, Annotation.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LINE, id));
+		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LINE, id));
 	}
 
 	/**
@@ -147,7 +131,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LineAnnotation(IsAnnotationId id, IsChart chart) {
-		this(id, Annotation.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LINE, id, chart));
+		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LINE, id, chart));
 	}
 
 	/**
@@ -203,26 +187,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	@Override
 	public LineLabel getLabel() {
 		return label;
-	}
-
-	/**
-	 * Returns the color of the border of annotation.
-	 * 
-	 * @return the color of the border of annotation
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
-	}
-
-	/**
-	 * Returns the width of the border in pixels.
-	 * 
-	 * @return the width of the border in pixels.
-	 */
-	@Override
-	public int getBorderWidth() {
-		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
 	}
 
 	/**
@@ -302,7 +266,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public IsScaleId getScaleID() {
-		return getValue(Property.SCALE_ID, defaultValues.getScaleID());
+		return getValue(Property.SCALE_ID, IsDefaultsLineAnnotation.super.getScaleID());
 	}
 
 	/**
@@ -312,8 +276,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(String value) {
 		setValue(Property.VALUE, value);
-		// resets callback
-		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -323,8 +285,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(double value) {
 		setValue(Property.VALUE, value);
-		// resets callback
-		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -334,8 +294,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setValue(Date value) {
 		setValue(Property.VALUE, value);
-		// resets callback
-		setValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -345,7 +303,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getValueAsString() {
-		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsString());
+		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsString());
 	}
 
 	/**
@@ -355,7 +313,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDouble());
 	}
 
 	/**
@@ -365,7 +323,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDate());
+		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDate());
 	}
 
 	/**
@@ -375,8 +333,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(String endValue) {
 		setValue(Property.END_VALUE, endValue);
-		// resets callback
-		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -386,8 +342,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(double endValue) {
 		setValue(Property.END_VALUE, endValue);
-		// resets callback
-		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -397,8 +351,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	public void setEndValue(Date endValue) {
 		setValue(Property.END_VALUE, endValue);
-		// resets callback
-		setEndValue((AnnotationValueCallback) null);
 	}
 
 	/**
@@ -408,7 +360,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getEndValueAsString() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsString());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsString());
 	}
 
 	/**
@@ -418,7 +370,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getEndValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDouble());
 	}
 
 	/**
@@ -428,67 +380,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getEndValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
-	}
-
-	/**
-	 * Returns the data value callback to calculate start value of line.
-	 * 
-	 * @return the data value callback to calculate start value of line
-	 */
-	@Override
-	public AnnotationValueCallback getValueCallback() {
-		// checks if not consistent
-		if (valueCallback == null) {
-			// then checks from default
-			return defaultValues.getValueCallback();
-		}
-		return valueCallback;
-	}
-
-	/**
-	 * Sets the data value callback to calculate start value of line.
-	 * 
-	 * @param valueCallback the data value callback to calculate start value of line
-	 */
-	public void setValue(AnnotationValueCallback valueCallback) {
-		// stores callback
-		this.valueCallback = valueCallback;
-		// checks if callback is consistent
-		if (valueCallback != null) {
-			// resets the value configuration
-			remove(Property.VALUE);
-		}
-	}
-
-	/**
-	 * Returns the data value callback to calculate end value of line.
-	 * 
-	 * @return the data value callback to calculate end value of line
-	 */
-	@Override
-	public AnnotationValueCallback getEndValueCallback() {
-		// checks if not consistent
-		if (endValueCallback == null) {
-			// then checks from default
-			return defaultValues.getEndValueCallback();
-		}
-		return endValueCallback;
-	}
-
-	/**
-	 * Sets the data value callback to calculate end value of line.
-	 * 
-	 * @param endValueCallback the data value callback to calculate end value of line
-	 */
-	public void setEndValue(AnnotationValueCallback endValueCallback) {
-		// stores callback
-		this.endValueCallback = endValueCallback;
-		// checks if callback is consistent
-		if (endValueCallback != null) {
-			// resets the value configuration
-			remove(Property.END_VALUE);
-		}
+		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDate());
 	}
 
 }

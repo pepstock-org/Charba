@@ -16,31 +16,11 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin BOX annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin ELLIPSE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class BoxAnnotationDefaultsOptions implements IsDefaultsBoxAnnotation {
-
-	// defaults options instance
-	static final BoxAnnotationDefaultsOptions INSTANCE = new BoxAnnotationDefaultsOptions();
-
-	/**
-	 * To avoid any instantiation
-	 */
-	private BoxAnnotationDefaultsOptions() {
-		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	public AnnotationType getType() {
-		return AnnotationType.BOX;
-	}
+interface IsDefaultsEllipseAnnotation extends IsDefaultsAbstractBoxAnnotation {
 
 }

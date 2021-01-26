@@ -19,14 +19,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.utils.Window;
 
 /**
- * Object which stores all annotations by their ID into {@link Annotation#ID} plugin.<br>
+ * Object which stores all annotations by their ID into {@link AnnotationHelper#ID} plugin.<br>
  * <b>PAY ATTENTION</b>: this class is invoked from plugin before starting drawing and NOT for configuration.
  * 
  * 
@@ -43,8 +45,7 @@ class AnnotationMap extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object using the instance of native object, passed as argument.<br>
-	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * Creates the object using the instance of native object, passed as argument.
 	 * 
 	 * @param nativeObject native object loaded from configuration
 	 */
@@ -52,6 +53,22 @@ class AnnotationMap extends NativeObjectContainer {
 		super(nativeObject);
 		// redefines hashcode
 		super.redefineHashcode();
+	}
+
+	/**
+	 * The draw time has been changed and then it changes all inner annotations.
+	 * 
+	 * @param drawTime draw time instance of parent
+	 */
+	void resetDrawTime(DrawTime drawTime) {
+		// checks if there is any annotation
+		if (!empty()) {
+			// scans all annotations
+			for (AbstractAnnotation annotation : getAnnotations()) {
+				// sets default
+				annotation.setDefaultDrawTime(drawTime);
+			}
+		}
 	}
 
 	/**
@@ -82,13 +99,16 @@ class AnnotationMap extends NativeObjectContainer {
 	/**
 	 * Adds an annotations for plugin.
 	 * 
+	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.
 	 */
-	void addAnnotations(AbstractAnnotation... annotations) {
+	void addAnnotations(DrawTime drawTime, AbstractAnnotation... annotations) {
 		// checks if array argument is consistent
 		if (annotations != null && annotations.length > 0) {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
+				// sets default
+				annotation.setDefaultDrawTime(drawTime);
 				// adds annotation
 				IsAnnotationId id = annotation.getId();
 				// stores into java script object
@@ -101,14 +121,15 @@ class AnnotationMap extends NativeObjectContainer {
 	 * Sets a set of annotations for plugin.<br>
 	 * If argument is <code>null</code>, removes all annotations.
 	 * 
+	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.<br>
 	 *            If <code>null</code>, removes all annotations
 	 */
-	void setAnnotations(AbstractAnnotation... annotations) {
+	void setAnnotations(DrawTime drawTime, AbstractAnnotation... annotations) {
 		// clear existing object
 		clear();
 		// adds annotation
-		addAnnotations(annotations);
+		addAnnotations(drawTime, annotations);
 	}
 
 	/**
@@ -184,19 +205,30 @@ class AnnotationMap extends NativeObjectContainer {
 		String typeAsString = Id.getStringProperty(AbstractAnnotation.Property.TYPE, nativeObject);
 		// gets the type as annotation type enumeration
 		AnnotationType type = Key.getKeyByValue(AnnotationType.values(), typeAsString);
+
+		Window.getConsole().log("TYPE -->", type);
+
 		// -----------------------
 		// for annotation defaults
 		// -----------------------
 		// extracts the internal annotation id
 		int annotationId = Id.getIntegerProperty(AbstractAnnotation.Property.CHARBA_ANNOTATION_ID, nativeObject);
+
+		Window.getConsole().log("ID -->", annotationId);
+
 		// searches for cached annotation by its internal id
-		AbstractAnnotation defaultOptions = Annotation.get().getAnnotation(annotationId);
+		AbstractAnnotation defaultOptions = AnnotationHelper.get().getAnnotation(annotationId);
+
+		Window.getConsole().log("CLASS -->", defaultOptions.getClass().getName());
+
 		// -----------------------
 		// checks which type is in order to create the right annotation instance
 		if (AnnotationType.BOX.equals(type) && defaultOptions instanceof BoxAnnotation) {
 			return new BoxAnnotation(nativeObject, (BoxAnnotation) defaultOptions);
 		} else if (AnnotationType.LINE.equals(type) && defaultOptions instanceof LineAnnotation) {
 			return new LineAnnotation(nativeObject, (LineAnnotation) defaultOptions);
+		} else if (AnnotationType.ELLIPSE.equals(type) && defaultOptions instanceof EllipseAnnotation) {
+			return new EllipseAnnotation(nativeObject, (EllipseAnnotation) defaultOptions);
 		}
 		// if here, the type is not consistent
 		// then returns null

@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.dom.enums.CursorType;
 
 /**
- * This is the {@link Annotation#ID} plugin annotation DEFAULTS options interface in order to map the common attributes for all annotations.
+ * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -38,8 +38,8 @@ interface IsDefaultsAnnotation {
 	 * 
 	 * @return <code>true</code> whether the annotation is enabled and should be displayed
 	 */
-	default boolean isEnabled() {
-		return AbstractAnnotation.DEFAULT_ENABLED;
+	default boolean isDisplay() {
+		return AbstractAnnotation.DEFAULT_DISPLAY;
 	}
 
 	/**
@@ -56,7 +56,9 @@ interface IsDefaultsAnnotation {
 	 * 
 	 * @return the color of the border of annotation
 	 */
-	String getBorderColorAsString();
+	default String getBorderColorAsString() {
+		return Defaults.get().getGlobal().getBorderColorAsString();
+	}
 
 	/**
 	 * Returns the width of the border in pixels.
@@ -64,14 +66,5 @@ interface IsDefaultsAnnotation {
 	 * @return the width of the border in pixels.
 	 */
 	int getBorderWidth();
-
-	/**
-	 * Returns the cursor type when the cursor is over the annotation.
-	 * 
-	 * @return cursor type when the cursor is over the annotation
-	 */
-	default CursorType getHoverCursor() {
-		return null;
-	}
 
 }

@@ -26,9 +26,10 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum DrawTime implements Key
 {
+	BEFORE_DRAW("beforeDraw"),
 	AFTER_DRAW("afterDraw"),
-	AFTER_DATASETS_DRAW("afterDatasetsDraw"),
-	BEFORE_DATASETS_DRAW("beforeDatasetsDraw");
+	BEFORE_DATASETS_DRAW("beforeDatasetsDraw"),
+	AFTER_DATASETS_DRAW("afterDatasetsDraw");
 
 	// name value of property
 	private final String value;

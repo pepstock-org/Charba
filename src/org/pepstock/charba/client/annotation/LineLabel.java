@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -59,14 +60,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final FontStyle DEFAULT_FONT_STYLE = FontStyle.BOLD;
 
 	/**
-	 * Default line label font color, <b>{@link HtmlColor#WHITE}</b>.
+	 * Default line label text color, <b>{@link HtmlColor#WHITE}</b>.
 	 */
-	public static final IsColor DEFAULT_FONT_COLOR = HtmlColor.WHITE;
+	public static final IsColor DEFAULT_COLOR = HtmlColor.WHITE;
 
 	/**
 	 * Default line label font color as string, <b>rgb(255, 255, 255)</b>.
 	 */
-	public static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_FONT_COLOR.toRGB();
+	public static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_COLOR.toRGB();
 
 	/**
 	 * Default line label X padding, <b>{@value DEFAULT_X_PADDING}</b>.
@@ -103,10 +104,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	public static final double DEFAULT_ROTATION = 0D;
 
-	/**
-	 * Default line label auto rotation, <b>{@value DEFAULT_AUTO_ROTATION}</b>.
-	 */
-	public static final boolean DEFAULT_AUTO_ROTATION = true;
+	// auto rotation
+	private static final String AUTO_ROTATION = "auto";
 
 	/**
 	 * Name of properties of native object.
@@ -115,10 +114,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	{
 		ENABLED("enabled"),
 		BACKGROUND_COLOR("backgroundColor"),
-		FONT_SIZE("fontSize"),
-		FONT_STYLE("fontStyle"),
-		FONT_COLOR("fontColor"),
-		FONT_FAMILY("fontFamily"),
+		FONT("font"),
+		COLOR("color"),
 		X_PADDING("xPadding"),
 		Y_PADDING("yPadding"),
 		CORNER_RADIUS("cornerRadius"),
@@ -126,7 +123,6 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		X_ADJUST("xAdjust"),
 		Y_ADJUST("yAdjust"),
 		CONTENT("content"),
-		AUTO_ROTATION("autoRotation"),
 		ROTATION("rotation");
 
 		// name value of property
@@ -155,6 +151,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 
 	// defaults options
 	private final IsDefaultsLineLabel defaultValues;
+	// font instance
+	private final Font font;
 
 	/**
 	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
@@ -176,6 +174,18 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
+		// gets font
+		this.font = new Font(defaultValues.getFont(), getValue(Property.FONT));
+	}
+
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font element.
+	 */
+	@Override
+	public Font getFont() {
+		return font;
 	}
 
 	/**
@@ -235,97 +245,40 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 
 	/**
-	 * Sets the font size of text.
+	 * Sets the color of text.
 	 * 
-	 * @param fontSize the font size of text
+	 * @param fontColor the color of text
 	 */
-	public void setFontSize(int fontSize) {
-		setValue(Property.FONT_SIZE, fontSize);
+	public void setColor(IsColor fontColor) {
+		setColor(IsColor.checkAndGetValue(fontColor));
 	}
 
 	/**
-	 * Returns the font size of text.
+	 * Sets the color of text as string.
 	 * 
-	 * @return the font size of text
+	 * @param fontColor the color of text
+	 */
+	public void setColor(String fontColor) {
+		setValue(Property.COLOR, fontColor);
+	}
+
+	/**
+	 * Returns the color of text as string.
+	 * 
+	 * @return the color of text
 	 */
 	@Override
-	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, defaultValues.getFontSize());
+	public String getColorAsString() {
+		return getValue(Property.COLOR, defaultValues.getColorAsString());
 	}
 
 	/**
-	 * Sets the font style of text.
+	 * Returns the color of text.
 	 * 
-	 * @param fontStyle the font style of text
+	 * @return the color of text
 	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.FONT_STYLE, fontStyle);
-	}
-
-	/**
-	 * Returns the font style of text.
-	 * 
-	 * @return the font style of text
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultValues.getFontStyle());
-	}
-
-	/**
-	 * Sets the font color of text.
-	 * 
-	 * @param fontColor the font color of text
-	 */
-	public void setFontColor(IsColor fontColor) {
-		setFontColor(IsColor.checkAndGetValue(fontColor));
-	}
-
-	/**
-	 * Sets the font color of text as string.
-	 * 
-	 * @param fontColor the font color of text
-	 */
-	public void setFontColor(String fontColor) {
-		setValue(Property.FONT_COLOR, fontColor);
-	}
-
-	/**
-	 * Returns the font color of text as string.
-	 * 
-	 * @return the font color of text
-	 */
-	@Override
-	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, defaultValues.getFontColorAsString());
-	}
-
-	/**
-	 * Returns the font color of text.
-	 * 
-	 * @return the font color of text
-	 */
-	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
-	}
-
-	/**
-	 * Sets the font family of text.
-	 * 
-	 * @param fontFamily the font family of text
-	 */
-	public void setFontFamily(String fontFamily) {
-		setValue(Property.FONT_FAMILY, fontFamily);
-	}
-
-	/**
-	 * Returns the font family of text.
-	 * 
-	 * @return the font family of text
-	 */
-	@Override
-	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, defaultValues.getFontFamily());
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -453,11 +406,6 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	public void setRotation(double rotation) {
 		setValue(Property.ROTATION, rotation);
-		// checks if setting rotation
-		if (!Double.isNaN(rotation)) {
-			// then resets the rotation value
-			setAutoRotation(false);
-		}
 	}
 
 	/**
@@ -476,11 +424,12 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param autoRotation <code>true</code> whether the rotation of label must calculates automatically
 	 */
 	public void setAutoRotation(boolean autoRotation) {
-		setValue(Property.AUTO_ROTATION, autoRotation);
-		// checks if setting rotation
+		// checks is enabling
 		if (autoRotation) {
-			// then resets and sets default
-			setValue(Property.ROTATION, DEFAULT_ROTATION);
+			setValue(Property.ROTATION, AUTO_ROTATION);
+		} else {
+			// otherwise removes the key
+			removeIfExists(Property.ROTATION);
 		}
 	}
 
@@ -491,7 +440,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	@Override
 	public boolean isAutoRotation() {
-		return getValue(Property.AUTO_ROTATION, defaultValues.isAutoRotation());
+		return isType(Property.ROTATION, ObjectType.STRING);
 	}
 
 	/**

@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defines the type of an annotation.
+ * Defines the type of annotation.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -35,7 +35,11 @@ public enum AnnotationType implements Key
 	/**
 	 * Defines a <b>BOX</b> annotation which draws a box into a chart.
 	 */
-	BOX("box", BoxAnnotationDefaultsOptions.INSTANCE);
+	BOX("box", BoxAnnotationDefaultsOptions.INSTANCE),
+	/**
+	 * Defines a <b>ELLIPSE</b> annotation which draws an ellipse into a chart.
+	 */
+	ELLIPSE("ellipse", EllipseAnnotationDefaultsOptions.INSTANCE);
 
 	// name value of property
 	private final String value;
