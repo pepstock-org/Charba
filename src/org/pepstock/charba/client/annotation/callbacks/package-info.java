@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the {@link org.pepstock.charba.client.annotation.AnnotationPlugin#ID} plugin callback interfaces to catch events.
+ * Contains the {@link AnnotationPlugin#ID} plugin callback interfaces to catch events.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains all callback interfaces to implement for the {@link AnnotationPlugin#ID} plugin.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all enumerations to configure the {@link org.pepstock.charba.client.annotation.AnnotationHelper#ID} plugin.
+ * Contains all enumerations to configure the {@link AnnotationPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
