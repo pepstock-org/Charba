@@ -17,6 +17,10 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.annotation.listeners.ClickCallback;
+import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
+import org.pepstock.charba.client.annotation.listeners.EnterCallback;
+import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options.
@@ -66,5 +70,41 @@ interface IsDefaultsAnnotation {
 	 * @return the width of the border in pixels.
 	 */
 	int getBorderWidth();
+	
+	/**
+	 * Returns the callback called when a "enter" event is occurring.
+	 * 
+	 * @return the callback called when a "enter" event is occurring
+	 */
+	default EnterCallback getEnterCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called when a "leave" event is occurring.
+	 * 
+	 * @return the callback called when a "leave" event is occurring
+	 */
+	default LeaveCallback getLeaveCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called when a "click" event is occurring.
+	 * 
+	 * @return the callback called when a "click" event is occurring
+	 */
+	default ClickCallback getClickCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called when a "dblclick" event is occurring.
+	 * 
+	 * @return the callback called when a "dblclick" event is occurring
+	 */
+	default DoubleClickCallback getDoubleClickCallback() {
+		return null;
+	}
 
 }

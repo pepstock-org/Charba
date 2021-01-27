@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Object which stores all annotations by their ID into {@link AnnotationHelper#ID} plugin.<br>
@@ -205,22 +204,13 @@ class AnnotationMap extends NativeObjectContainer {
 		String typeAsString = Id.getStringProperty(AbstractAnnotation.Property.TYPE, nativeObject);
 		// gets the type as annotation type enumeration
 		AnnotationType type = Key.getKeyByValue(AnnotationType.values(), typeAsString);
-
-		Window.getConsole().log("TYPE -->", type);
-
 		// -----------------------
 		// for annotation defaults
 		// -----------------------
 		// extracts the internal annotation id
 		int annotationId = Id.getIntegerProperty(AbstractAnnotation.Property.CHARBA_ANNOTATION_ID, nativeObject);
-
-		Window.getConsole().log("ID -->", annotationId);
-
 		// searches for cached annotation by its internal id
 		AbstractAnnotation defaultOptions = AnnotationHelper.get().getAnnotation(annotationId);
-
-		Window.getConsole().log("CLASS -->", defaultOptions.getClass().getName());
-
 		// -----------------------
 		// checks which type is in order to create the right annotation instance
 		if (AnnotationType.BOX.equals(type) && defaultOptions instanceof BoxAnnotation) {

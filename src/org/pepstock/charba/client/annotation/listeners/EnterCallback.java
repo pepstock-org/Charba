@@ -18,7 +18,6 @@ package org.pepstock.charba.client.annotation.listeners;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once enter is fired.
@@ -35,6 +34,6 @@ public interface EnterCallback {
 	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
-	void onEnter(IsChart chart, BaseNativeEvent event, AbstractAnnotation annotation);
+	void onEnter(IsChart chart, AbstractAnnotation annotation);
 
 }
