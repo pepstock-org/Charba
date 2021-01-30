@@ -32,7 +32,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractBoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation {
+abstract class AbstractBoxAnnotation extends AbstractAnnotation implements IsDefaultsAbstractBoxAnnotation {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
