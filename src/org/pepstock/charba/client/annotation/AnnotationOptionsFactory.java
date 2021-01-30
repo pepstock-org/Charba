@@ -20,7 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (from chart) related to {@link AnnotationHelper#ID} plugin.
+ * Factory to get the options (from chart) related to {@link AnnotationPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

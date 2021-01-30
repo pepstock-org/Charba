@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.PropertyKey;
 
 /**
- * Represents the annotation id of a annotation configuration object into {@link AnnotationHelper#ID} plugin.
+ * Represents the annotation id of a annotation configuration object into {@link AnnotationPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

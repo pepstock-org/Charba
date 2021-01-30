@@ -13,10 +13,34 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.annotation;
+
 /**
- * Contains all callback interfaces to implement for the {@link org.pepstock.charba.client.annotation.AnnotationPlugin#ID} plugin.
+ * This is the {@link AnnotationHelper#ID} plugin POINT annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.annotation.listeners;
+final class PointAnnotationDefaultsOptions implements IsDefaultsPointAnnotation {
+
+	// defaults options instance
+	static final PointAnnotationDefaultsOptions INSTANCE = new PointAnnotationDefaultsOptions();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private PointAnnotationDefaultsOptions() {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
+	 */
+	@Override
+	public AnnotationType getType() {
+		return AnnotationType.POINT;
+	}
+
+}

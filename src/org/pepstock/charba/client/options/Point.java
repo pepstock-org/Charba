@@ -98,9 +98,9 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	}
 
 	/**
-	 * Returns the radius of the point when hovered.
+	 * Returns the radius of the point.
 	 * 
-	 * @return the radius of the point when hovered.
+	 * @return the radius of the point.
 	 */
 	@Override
 	public double getRadius() {

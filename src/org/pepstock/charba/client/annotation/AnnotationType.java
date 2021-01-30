@@ -39,7 +39,11 @@ public enum AnnotationType implements Key
 	/**
 	 * Defines a <b>ELLIPSE</b> annotation which draws an ellipse into a chart.
 	 */
-	ELLIPSE("ellipse", EllipseAnnotationDefaultsOptions.INSTANCE);
+	ELLIPSE("ellipse", EllipseAnnotationDefaultsOptions.INSTANCE),
+	/**
+	 * Defines a <b>POINT</b> annotation which draws a point into a chart.
+	 */
+	POINT("point", PointAnnotationDefaultsOptions.INSTANCE);
 
 	// name value of property
 	private final String value;

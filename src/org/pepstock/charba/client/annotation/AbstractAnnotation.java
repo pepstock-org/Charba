@@ -183,6 +183,8 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	AbstractAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(nativeObject);
+		// redefine hash code
+		super.redefineHashcode();
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);

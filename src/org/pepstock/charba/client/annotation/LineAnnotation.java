@@ -266,7 +266,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public IsScaleId getScaleID() {
-		return getValue(Property.SCALE_ID, IsDefaultsLineAnnotation.super.getScaleID());
+		return getValue(Property.SCALE_ID, defaultValues.getScaleID());
 	}
 
 	/**
@@ -303,7 +303,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getValueAsString() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsString());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsString());
 	}
 
 	/**
@@ -313,7 +313,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDouble());
 	}
 
 	/**
@@ -323,7 +323,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.VALUE, IsDefaultsLineAnnotation.super.getValueAsDate());
+		return getValueForMultipleKeyTypes(Property.VALUE, defaultValues.getValueAsDate());
 	}
 
 	/**
@@ -360,7 +360,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public String getEndValueAsString() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsString());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsString());
 	}
 
 	/**
@@ -370,7 +370,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public double getEndValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDouble());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDouble());
 	}
 
 	/**
@@ -380,7 +380,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	@Override
 	public Date getEndValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.END_VALUE, IsDefaultsLineAnnotation.super.getEndValueAsDate());
+		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
 	}
 
 }

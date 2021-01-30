@@ -20,7 +20,7 @@ import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once dblclick is fired.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once double click is fired.
  * 
  * @author Andrea "Stock" Stocchero
  *
