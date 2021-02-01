@@ -253,7 +253,6 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
  * rename `HtmlLegendTextCallback` class to `HtmlLegendItemCallback`.
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
- * remove [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained. New Charba annotation plugin has been developed, completely in Java, with the same capabilities.
  * reduces the visibility of `Gradient` and `Pattern` class constructors in order to use new `GradientBuilder` and `PatternBuilder` classes. This change avoids inconsistent gradient and pattern objects, improving some capabilities of them (like the `equals` and `hashCode` methods in case they will be needed).
    * adds `setColors` methods (getting a list or an array of `IsColor`) to `GradientBuilder` in order to enable the gradient creation to the `ColorScheme` instances. 
  * rename `ValueCallback` to `MeterFormatCallback` class.
@@ -377,10 +376,11 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
  * add the selected value of the scale by the click event to the `AxisClickEvent` class.
- * add **new Charba annotation plugin**, completely in Java,  in order to replace [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation) because it's unmaintained.
-   * does not implement all event callbacks previously implemented in [chartjs/chartjs-plugin-annotation](https://github.com/chartjs/chartjs-plugin-annotation), only click, enter and leave events are implemented and not by callbacks but by event handlers.
+ * import the master of **new Chart.js annotation plugin**, on February 1st, 2021. 
+   * implement only click, dblclick, enter and leave events.
+   * add `ellipse` and `point` annotation types.
+   * add `display` property to all annotations in order to enable or disable the display of annotation.
    * remove `mode` property from annotation line options because new plugin is using the `axis` property of scales for line orientation.
-   * remove `doubleClickSpeed` property from annotation options because double click event is not supported anymore.
    * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
    * add `autoRotation` property to annotation line label options in order to enable the automatic calculation of label rotation.
    * remove `name` property from annotation options because is not needed anymore. Use `id` property instead.
@@ -388,10 +388,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `getXScaleID` and `getXScaleID` methods in `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
    * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
-   * add `enabled` property to annotation line and box options in order to enable and disable the drawing of the annotation.
-   * add `hoverCursor` property to line and box annotation options in order to change the cursor when mouse hovers the annotation.
-   * add `Pattern` and `Gradient` as possible `backgroundColor` property in `BoxAnnotation` options. 
-   * add `AnnotationValueCallback` interface in order to configure Line and box annotation options to calculate the values to draw the annotation at runtime.  
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
    * remove `fireEventOnClearSelection` properties has been removed from DatasetsItemsSelectorOptions class because an clear selection event will fire only if there is a event handler. 
  * import **Datalabels plugin** from a [pepstock-org/chartjs-plugin-datalabels](https://github.com/pepstock-org/chartjs-plugin-datalabels) fork where the plugin has been changed in order to work with CHART.JS 3. This is a temporary solution waiting for the upgrade of the original plugin by the community.
@@ -455,6 +451,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the management of properties used cross classes or packages.
  * improve the tooltip callbacks management providing the right defaults.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
+ * improve `Annotation` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `DataLabels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `DataLabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.

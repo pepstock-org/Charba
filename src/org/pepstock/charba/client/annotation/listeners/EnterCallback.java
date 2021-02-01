@@ -31,7 +31,6 @@ public interface EnterCallback {
 	 * Method called once enter is fired.
 	 * 
 	 * @param chart chart instance
-	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
 	void onEnter(IsChart chart, AbstractAnnotation annotation);

@@ -31,7 +31,6 @@ public interface LeaveCallback {
 	 * Method called once leave is fired.
 	 * 
 	 * @param chart chart instance
-	 * @param event native event generated on annotation
 	 * @param annotation annotation instance where event has been performed
 	 */
 	void onLeave(IsChart chart, AbstractAnnotation annotation);

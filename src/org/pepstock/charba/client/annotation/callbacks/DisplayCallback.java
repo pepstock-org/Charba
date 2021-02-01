@@ -13,26 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation.listeners;
+package org.pepstock.charba.client.annotation.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once double click is fired.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>display</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DoubleClickCallback {
+public interface DisplayCallback {
 
 	/**
-	 * Method called once dblclick is fired.
+	 * Method called to set <code>display</code> property at runtime.
 	 * 
 	 * @param chart chart instance
-	 * @param annotation annotation instance where event has been performed
+	 * @param annotation annotation instance where the option must be set
+	 * @return <code>true</code> if the annotation must be shown, otherwise <code>false</code>
 	 */
-	void onDoubleClick(IsChart chart, AbstractAnnotation annotation);
+	boolean invoke(IsChart chart, AbstractAnnotation annotation);
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
@@ -107,4 +108,12 @@ interface IsDefaultsAnnotation {
 		return null;
 	}
 
+	/**
+	 * Returns the callback called to set the display options.
+	 * 
+	 * @return the callback called to set the display options
+	 */
+	default DisplayCallback getDisplayCallback() {
+		return null;
+	}
 }
