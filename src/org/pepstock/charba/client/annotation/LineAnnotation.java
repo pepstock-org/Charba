@@ -48,7 +48,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
-		// FIXME missing x and y for finite line
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		LABEL("label");
