@@ -47,7 +47,7 @@ interface IsDefaultsAbstractBoxAnnotation extends IsDefaultsAnnotation {
 	 */
 	@Override
 	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
+		return AbstractBoxAnnotation.DEFAULT_BORDER_WIDTH;
 	}
 
 	/**
