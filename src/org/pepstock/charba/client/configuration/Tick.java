@@ -212,18 +212,22 @@ abstract class Tick extends AxisContainer {
 	}
 
 	/**
-	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		getConfiguration().setZ(z);
 	}
 
 	/**
-	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
 		return getConfiguration().getZ();
@@ -358,7 +362,7 @@ abstract class Tick extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getConfiguration(), Property.COLOR, null);
 		}
 	}
-	
+
 	/**
 	 * Sets the text stroke color callback.
 	 * 

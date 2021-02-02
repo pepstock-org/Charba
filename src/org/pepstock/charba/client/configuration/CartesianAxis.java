@@ -127,7 +127,8 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area. This is set to <code>true</code> in the bar chart by default.
+	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.<br>
+	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @return extra space of axis.
 	 */
@@ -156,6 +157,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public AxisPosition getPosition() {
 		return getScale().getPosition();
 	}
+
 	/**
 	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
 	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
@@ -166,7 +168,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public void setPosition(double position) {
 		getScale().setPosition(position);
 	}
-	
+
 	/**
 	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
 	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>

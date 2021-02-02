@@ -144,27 +144,33 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @param color if set, used as the color of the border line.<br>
+	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(IsColor color) {
 		setBorderColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @param color if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @param color if set, used as the color of the border line.<br>
+	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(String color) {
 		setValueAndAddToParent(Property.BORDER_COLOR, color);
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @return if set, used as the color of the border line.<br>
+	 *         If unset, the first color option is resolved and used.
 	 */
 	public String getBorderColorAsString() {
 		// checks if exist
@@ -182,9 +188,11 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
 	 * 
-	 * @return if set, used as the color of the border line. If unset, the first color option is resolved and used.
+	 * @return if set, used as the color of the border line.<br>
+	 *         If unset, the first color option is resolved and used.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
@@ -194,7 +202,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * Sets the color of the grid lines.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * @param color The color of the grid lines.<br>
+	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
 		setValueOrArrayAndAddToParent(Property.COLOR, color);
@@ -290,9 +299,11 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns the stroke width of grid lines. The first element if set as array.
+	 * Returns the stroke width of grid lines.<br>
+	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines. The first element if set as array.
+	 * @return stroke width of grid lines.<br>
+	 *         The first element if set as array.
 	 */
 	@Override
 	public int getLineWidth() {
@@ -389,7 +400,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels.<br>
+	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
@@ -398,7 +410,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels.<br>
+	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
@@ -408,19 +421,22 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Sets z-index of gridline layer.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @param z z-index of gridline layer.<br>
+	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		setValueAndAddToParent(Property.Z, z);
 	}
 
 	/**
-	 * Returns z-index of gridline layer.<br>
+	 * Returns z-index of grid line layer.<br>
 	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @return z-index of grid line layer.<br>
+	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	@Override
 	public int getZ() {
@@ -554,7 +570,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * Returns the width of the tick mark in pixels.<br>
 	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines. The first element if set as array.
+	 * @return stroke width of grid lines.<br>
+	 *         The first element if set as array.
 	 */
 	@Override
 	public int getTickWidth() {
