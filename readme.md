@@ -283,7 +283,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   
 ### Features
 
- * **import last CHART.JS version,** [version 3.0.0-beta7](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-beta.7) on December 10th, 2020.
+ * **import last CHART.JS version,** [version 3.0.0-beta10](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-beta.10) on February 2nd, 2021.
    * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
    * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
    * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
@@ -350,9 +350,13 @@ Here you can find the list of enhancements and updates available on `master` bra
      * `onInstall`, `onStart`, `onStop`, `onUninstall` to manage plugin life-cycle.
      * `onBeforeDataLimits`, `onAfterDataLimits`, `onBeforeBuildTicks`, `onAfterBuildTicks` to manage scale setup.
    * add `resize(width height)` method to `IsChart` interface.
-   * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options.
+   * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options classes.
    * add `Interaction` class in order to manage datasets options and configuration classes.
-   * add `base` property to `BarDataset` configuration and to `Datasets` configuration and options.
+   * add `base` property to `BarDataset` configuration and to `Datasets` configuration and options classes.
+   * add `tickBorderDash` property to `GridLines` configuration and options classes.
+   * add `tickBorderDashOffset` property to `GridLines` configuration and options classes.
+   * add `tickColor` property to `GridLines` configuration and options classes.
+   * add `tickWidth` property to `GridLines` configuration and options classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
