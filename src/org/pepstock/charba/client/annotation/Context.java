@@ -15,49 +15,15 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.callbacks.AbstractScriptableContext;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * The callback or handler context wrapper, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class Context extends NativeObjectContainer {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		CHART("chart");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
+final class Context extends AbstractScriptableContext {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -68,20 +34,4 @@ final class Context extends NativeObjectContainer {
 		super(nativeObject);
 	}
 
-	/**
-	 * Returns the CHARBA chart instance.
-	 * 
-	 * @return the CHARBA chart instance
-	 */
-	IsChart getChart() {
-		// gets native chart
-		Chart nativeChart = getNativeChart(Property.CHART);
-		// checks if native chart is present
-		if (nativeChart != null) {
-			// returns is chart instance
-			return nativeChart.getChart();
-		}
-		// if here, the native chart is not consistent
-		return null;
-	}
 }
