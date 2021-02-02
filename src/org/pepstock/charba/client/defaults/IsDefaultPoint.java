@@ -23,9 +23,9 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointStyler {
 
 	/**
-	 * Returns the radius of the point when hovered.
+	 * Returns the radius of the point.
 	 * 
-	 * @return the radius of the point when hovered.
+	 * @return the radius of the point
 	 */
 	double getRadius();
 

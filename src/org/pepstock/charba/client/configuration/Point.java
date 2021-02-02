@@ -36,7 +36,8 @@ public class Point extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets the radius of the point shape. If set to 0(the point is not rendered.
+	 * Sets the radius of the point shape.<br>
+	 * If set to 0, the point is not rendered.
 	 * 
 	 * @param radius array of the radius of the point shape.
 	 */
@@ -45,9 +46,9 @@ public class Point extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns the radius of the point when hovered.
+	 * Returns the radius of the point.
 	 * 
-	 * @return the radius of the point when hovered.
+	 * @return the radius of the point.
 	 */
 	public double getRadius() {
 		return getOptions().getElements().getPoint().getRadius();

@@ -1608,7 +1608,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
+	 * Sets the radius of the point shape.<br>
+	 * If set to 0, the point is not rendered.
 	 * 
 	 * @param pointRadius array of the radius of the point shape.
 	 */
