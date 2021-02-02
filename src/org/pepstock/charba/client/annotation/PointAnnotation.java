@@ -231,39 +231,6 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 
-	/**
-	 * Sets the ID of the X scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the X scale to bind onto
-	 */
-	public void setXScaleID(String scaleId) {
-		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Sets the ID of the X scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the X scale to bind onto
-	 */
-	public void setXScaleID(IsScaleId scaleId) {
-		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Returns the ID of the X scale to bind onto.
-	 * 
-	 * @return the ID of the X scale to bind onto
-	 */
-	@Override
-	public IsScaleId getXScaleID() {
-		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
-	}
 	
 	/**
 	 * Sets the ID of the Y scale to bind onto.
@@ -297,6 +264,40 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	@Override
 	public IsScaleId getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
+	}
+	
+	/**
+	 * Sets the ID of the X scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the X scale to bind onto
+	 */
+	public void setXScaleID(String scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Sets the ID of the X scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the X scale to bind onto
+	 */
+	public void setXScaleID(IsScaleId scaleId) {
+		// checks if scale id is valid
+		IsScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Returns the ID of the X scale to bind onto.
+	 * 
+	 * @return the ID of the X scale to bind onto
+	 */
+	@Override
+	public IsScaleId getXScaleID() {
+		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
 	}
 
 	/**
