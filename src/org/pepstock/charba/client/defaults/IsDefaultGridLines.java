@@ -78,4 +78,27 @@ public interface IsDefaultGridLines extends IsDefaultScaleLines {
 	 */
 	int getZ();
 
+	/**
+	 * Returns the offset for the line dash of the tick mark.
+	 * 
+	 * @return the offset for the line dash of the tick mark
+	 */
+	double getTickBorderDashOffset();
+
+	/**
+	 * Returns the color of the tick line.
+	 * 
+	 * @return the color of the tick line.
+	 */
+	public String getTickColorAsString();
+
+	/**
+	 * Returns the width of the tick mark in pixels.<br>
+	 * The first element if set as array.
+	 * 
+	 * @return stroke width of grid lines.<br>
+	 *         The first element if set as array.
+	 */
+	int getTickWidth();
+
 }

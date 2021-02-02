@@ -47,11 +47,11 @@ abstract class AbstractScaleLines extends AxisContainer {
 
 	// color callback instance
 	private ScaleColorCallback colorCallback = null;
-	// hover line width callback instance
+	// line width callback instance
 	private ScaleLineWidthCallback lineWidthCallback = null;
 	// border dashoffset callback instance
 	private ScaleBorderDashOffsetCallback borderDashOffsetCallback = null;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -84,10 +84,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		}
 
 	}
-	
+
 	// instance of abstract node where to store the callbacks
 	private final AbstractNode node;
-	
+
 	/**
 	 * Builds the object storing the axis which this scale lines belongs to.
 	 * 
@@ -110,14 +110,12 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		colorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback, defaultValues.getColorAsString(), false));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback, defaultValues.getColorAsString(), false));
 		// gets value calling callback
-		lineWidthCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
+		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
 		// gets value calling callback
-		borderDashOffsetCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
+		borderDashOffsetCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
 	}
 
 	/**
@@ -173,7 +171,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 			getAxis().getConfiguration().setCallback(node, Property.LINE_WIDTH, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the border dash offset callback instance.
 	 * 

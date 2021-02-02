@@ -162,4 +162,34 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 		return DEFAULT_Z;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickBorderDashOffset()
+	 */
+	@Override
+	public double getTickBorderDashOffset() {
+		return getBorderDashOffset();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickColorAsString()
+	 */
+	@Override
+	public String getTickColorAsString() {
+		return getColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickWidth()
+	 */
+	@Override
+	public int getTickWidth() {
+		return getLineWidth();
+	}
+
 }

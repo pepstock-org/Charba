@@ -20,7 +20,13 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.ScaleBorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScaleColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleLineWidthCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -30,6 +36,55 @@ import org.pepstock.charba.client.colors.IsColor;
  */
 public class GridLines extends AbstractScaleLines {
 
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the tick color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> tickColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the tick width function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> tickWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the tick border dash offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> tickBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// color callback instance
+	private ScaleColorCallback tickColorCallback = null;
+	// tick line width callback instance
+	private ScaleLineWidthCallback tickWidthCallback = null;
+	// tick border dashoffset callback instance
+	private ScaleBorderDashOffsetCallback tickBorderDashOffsetCallback = null;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		TICK_BORDER_DASH_OFFSET("tickBorderDashOffset"),
+		TICK_COLOR("tickColor"),
+		TICK_WIDTH("tickWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	/**
 	 * Builds the object storing the axis which this grid lines belongs to.
 	 * 
@@ -37,6 +92,18 @@ public class GridLines extends AbstractScaleLines {
 	 */
 	GridLines(Axis axis) {
 		super(axis, axis.getScale().getGrideLines(), axis.getScale().getGrideLines());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		tickColorCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getScale().getGrideLines().getTickColorAsString(), false));
+		// gets value calling callback
+		tickWidthCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getScale().getGrideLines().getTickWidth()).intValue());
+		// gets value calling callback
+		tickBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils
+				.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getScale().getGrideLines().getTickBorderDashOffset()).doubleValue());
 	}
 
 	/**
@@ -365,5 +432,209 @@ public class GridLines extends AbstractScaleLines {
 	 */
 	public int getZ() {
 		return getAxis().getScale().getGrideLines().getZ();
+	}
+
+	/**
+	 * Sets the length and spacing of the tick mark line.
+	 * 
+	 * @param tickBorderDash the length and spacing of the tick mark line.
+	 */
+	public void setTickBorderDash(int tickBorderDash) {
+		getAxis().getScale().getGrideLines().setTickBorderDash(tickBorderDash);
+	}
+
+	/**
+	 * Returns the length and spacing of the tick mark line.
+	 * 
+	 * @return the length and spacing of the tick mark line.
+	 */
+	public List<Integer> getTickBorderDash() {
+		return getAxis().getScale().getGrideLines().getTickBorderDash();
+	}
+
+	/**
+	 * Sets the offset for the line dash of the tick mark.
+	 * 
+	 * @param tickBorderDashOffset the offset for the line dash of the tick mark
+	 */
+	public void setTickBorderDashOffset(double tickBorderDashOffset) {
+		// reset callback if there is
+		setTickBorderDashOffset((ScaleBorderDashOffsetCallback) null);
+		// stores value
+		getAxis().getScale().getGrideLines().setTickBorderDashOffset(tickBorderDashOffset);
+	}
+
+	/**
+	 * Returns the offset for the line dash of the tick mark.
+	 * 
+	 * @return the offset for the line dash of the tick mark
+	 */
+	public double getTickBorderDashOffset() {
+		return getAxis().getScale().getGrideLines().getTickBorderDashOffset();
+	}
+
+	/**
+	 * Sets the color of the tick line.
+	 * 
+	 * @param color the color of the tick line.
+	 */
+	public void setTickColor(IsColor... color) {
+		// reset callback if there is
+		setTickColor((ScaleColorCallback) null);
+		// stores value
+		getAxis().getScale().getGrideLines().setTickColor(color);
+	}
+
+	/**
+	 * Sets the color of the tick line.
+	 * 
+	 * @param color the color of the tick line.
+	 */
+	public void setTickColor(String... color) {
+		// reset callback if there is
+		setTickColor((ScaleColorCallback) null);
+		// stores value
+		getAxis().getScale().getGrideLines().setTickColor(color);
+	}
+
+	/**
+	 * Returns the color of the tick line.
+	 * 
+	 * @return the color of the tick line.
+	 */
+	public String getTickColorAsString() {
+		return getAxis().getScale().getGrideLines().getTickColorAsString();
+	}
+
+	/**
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines.
+	 */
+	public List<String> getTickColorsAsString() {
+		return getAxis().getScale().getGrideLines().getTickColorsAsString();
+	}
+
+	/**
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines.
+	 */
+	public List<IsColor> getTickColor() {
+		return getAxis().getScale().getGrideLines().getTickColor();
+	}
+
+	/**
+	 * Sets the width of the tick marks in pixels.
+	 * 
+	 * @param tickWidth the width of the tick mark in pixels
+	 */
+	public void setTickWidth(int... tickWidth) {
+		// reset callback if there is
+		setTickWidth((ScaleLineWidthCallback) null);
+		// stores value
+		getAxis().getScale().getGrideLines().setTickWidth(tickWidth);
+	}
+
+	/**
+	 * Returns the width of the tick mark in pixels.<br>
+	 * The first element if set as array.
+	 * 
+	 * @return stroke width of grid lines. The first element if set as array.
+	 */
+	public int getTickWidth() {
+		return getAxis().getScale().getGrideLines().getTickWidth();
+	}
+
+	/**
+	 * Returns the width of the tick marks in pixels.
+	 * 
+	 * @return stroke widths of grid lines.
+	 */
+	public List<Integer> getTicksWidth() {
+		return getAxis().getScale().getGrideLines().getTicksWidth();
+	}
+
+	/**
+	 * Returns the tick color callback instance.
+	 * 
+	 * @return the tick color callback instance
+	 */
+	public ScaleColorCallback getTickColorCallback() {
+		return tickColorCallback;
+	}
+
+	/**
+	 * Sets the tick color callback instance.
+	 * 
+	 * @param tickColorCallback the tick color callback instance
+	 */
+	public void setTickColor(ScaleColorCallback tickColorCallback) {
+		// stores callback
+		this.tickColorCallback = tickColorCallback;
+		// checks if consistent
+		if (tickColorCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_COLOR, tickColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_COLOR, null);
+		}
+	}
+
+	/**
+	 * Returns the tick width callback instance.
+	 * 
+	 * @return the tick width callback instance
+	 */
+	public ScaleLineWidthCallback getTickWidthCallback() {
+		return tickWidthCallback;
+	}
+
+	/**
+	 * Sets the tick width callback instance.
+	 * 
+	 * @param tickWidthCallback the tick width callback instance.
+	 */
+	public void setTickWidth(ScaleLineWidthCallback tickWidthCallback) {
+		// stores callback
+		this.tickWidthCallback = tickWidthCallback;
+		// checks if consistent
+		if (tickWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_WIDTH, tickWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_WIDTH, null);
+		}
+	}
+
+	/**
+	 * Returns the tick border dash offset callback instance.
+	 * 
+	 * @return the tick border dash offset callback instance
+	 */
+	public ScaleBorderDashOffsetCallback getTickBorderDashOffsetCallback() {
+		return tickBorderDashOffsetCallback;
+	}
+
+	/**
+	 * Sets the tick border dash offset callback instance.
+	 * 
+	 * @param tickBorderDashOffsetCallback the tick border dash offset callback instance
+	 */
+	public void setTickBorderDashOffset(ScaleBorderDashOffsetCallback tickBorderDashOffsetCallback) {
+		// stores callback
+		this.tickBorderDashOffsetCallback = tickBorderDashOffsetCallback;
+		// checks if consistent
+		if (tickBorderDashOffsetCallback != null) {
+			// adds the callback proxy function to java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_BORDER_DASH_OFFSET, null);
+		}
 	}
 }

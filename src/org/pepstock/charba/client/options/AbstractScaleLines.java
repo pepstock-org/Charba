@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultScaleLines;
 
 /**
  * Abstract configuration defines border options for axis lines elements.
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @param <D> defaults provider class
  *
  */
-abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
+abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> implements IsDefaultScaleLines {
 
 	/**
 	 * Name of properties of native object.
@@ -109,6 +110,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> {
 	 * 
 	 * @return Offset for line dashes.
 	 */
+	@Override
 	public final double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, getDefaultBorderDashOffset());
 	}

@@ -53,6 +53,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 		LINE_WIDTH("lineWidth"),
 		OFFSET_GRID_LINES("offsetGridLines"),
 		TICK_LENGTH("tickLength"),
+		TICK_BORDER_DASH("tickBorderDash"),
+		TICK_BORDER_DASH_OFFSET("tickBorderDashOffset"),
+		TICK_COLOR("tickColor"),
+		TICK_WIDTH("tickWidth"),
 		Z("z");
 
 		// name value of property
@@ -187,7 +191,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * Sets the color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
@@ -196,16 +201,18 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * Sets the color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * @param color The color of the grid lines.<br>
+	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
 		setValueOrArrayAndAddToParent(Property.COLOR, color);
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * Returns the color of the grid lines, if not specified as an array.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -222,7 +229,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * Returns the colors of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -245,7 +253,8 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * Returns the colors of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
 	 * @return the list of colors of the grid lines.
 	 */
@@ -408,13 +417,159 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Returns z-index of gridline layer.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
 	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	@Override
 	public int getZ() {
 		return getValue(Property.Z, getDefaultValues().getZ());
+	}
+
+	/**
+	 * Sets the length and spacing of the tick mark line.
+	 * 
+	 * @param tickBorderDash the length and spacing of the tick mark line.
+	 */
+	public void setTickBorderDash(int tickBorderDash) {
+		setArrayValueAndAddToParent(Property.TICK_BORDER_DASH, ArrayInteger.fromOrNull(tickBorderDash));
+	}
+
+	/**
+	 * Returns the length and spacing of the tick mark line.
+	 * 
+	 * @return the length and spacing of the tick mark line.
+	 */
+	public List<Integer> getTickBorderDash() {
+		// checks if the property is stored
+		if (has(Property.TICK_BORDER_DASH)) {
+			// then reads the array
+			ArrayInteger array = getArrayValue(Property.TICK_BORDER_DASH);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is missing
+		// then returns the default
+		return getBorderDash();
+	}
+
+	/**
+	 * Sets the offset for the line dash of the tick mark.
+	 * 
+	 * @param tickBorderDashOffset the offset for the line dash of the tick mark
+	 */
+	public final void setTickBorderDashOffset(double tickBorderDashOffset) {
+		setValueAndAddToParent(Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffset);
+	}
+
+	/**
+	 * Returns the offset for the line dash of the tick mark.
+	 * 
+	 * @return the offset for the line dash of the tick mark
+	 */
+	@Override
+	public final double getTickBorderDashOffset() {
+		return getValue(Property.TICK_BORDER_DASH_OFFSET, getDefaultBorderDashOffset());
+	}
+
+	/**
+	 * Sets the color of the tick line.
+	 * 
+	 * @param color the color of the tick line.
+	 */
+	public void setTickColor(IsColor... color) {
+		setValueOrArrayAndAddToParent(Property.TICK_COLOR, color);
+	}
+
+	/**
+	 * Sets the color of the tick line.
+	 * 
+	 * @param color the color of the tick line.
+	 */
+	public void setTickColor(String... color) {
+		setValueOrArrayAndAddToParent(Property.TICK_COLOR, color);
+	}
+
+	/**
+	 * Returns the color of the tick line.
+	 * 
+	 * @return the color of the tick line.
+	 */
+	@Override
+	public String getTickColorAsString() {
+		// checks if the stored value is a string
+		if (isType(Property.TICK_COLOR, ObjectType.STRING) || !has(Property.TICK_COLOR)) {
+			// returns a string
+			return getValue(Property.TICK_COLOR, getDefaultValues().getTickColorAsString());
+		} else {
+			// returns the default
+			return getDefaultValues().getTickColorAsString();
+		}
+	}
+
+	/**
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines.
+	 */
+	public List<String> getTickColorsAsString() {
+		// gets object type
+		ObjectType type = type(Property.TICK_COLOR);
+		// checks if the stored value is a string
+		if (ObjectType.STRING.equals(type) || !has(Property.TICK_COLOR)) {
+			// adds the string value
+			return Arrays.asList(getValue(Property.TICK_COLOR, getDefaultValues().getTickColorAsString()));
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// if array
+			// loads the array
+			ArrayString array = getArrayValue(Property.TICK_COLOR);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the properties is not consistent
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * The color of the grid lines.<br>
+	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines.
+	 */
+	public List<IsColor> getTickColor() {
+		return ColorBuilder.parse(getTickColorsAsString());
+	}
+
+	/**
+	 * Sets the width of the tick marks in pixels.
+	 * 
+	 * @param tickWidth the width of the tick mark in pixels
+	 */
+	public void setTickWidth(int... tickWidth) {
+		setValueOrArrayAndAddToParent(Property.TICK_WIDTH, tickWidth);
+	}
+
+	/**
+	 * Returns the width of the tick mark in pixels.<br>
+	 * The first element if set as array.
+	 * 
+	 * @return stroke width of grid lines. The first element if set as array.
+	 */
+	@Override
+	public int getTickWidth() {
+		ArrayInteger array = getValueOrArray(Property.TICK_WIDTH, getDefaultValues().getTickWidth());
+		return array.isEmpty() ? getDefaultValues().getTickWidth() : array.get(0);
+	}
+
+	/**
+	 * Returns the width of the tick marks in pixels.
+	 * 
+	 * @return stroke widths of grid lines.
+	 */
+	public List<Integer> getTicksWidth() {
+		ArrayInteger array = getValueOrArray(Property.TICK_WIDTH, getDefaultValues().getTickWidth());
+		return ArrayListHelper.list(array);
 	}
 
 }
