@@ -160,5 +160,12 @@ public interface IsDefaultScale {
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	ScaleBounds getBounds();
+	
+	/**
+	 * Returns whether to animate scaling the chart from the center.
+	 * 
+	 * @return whether to animate scaling the chart from the center.
+	 */
+	boolean isAnimate();
 
 }

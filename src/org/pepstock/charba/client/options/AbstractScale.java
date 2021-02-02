@@ -89,6 +89,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		BOUNDS("bounds"),
 		TIME("time"),
 		// radial linear
+		ANIMATE("animate"),
 		ANGLE_LINES("angleLines"),
 		POINT_LABELS("pointLabels"),
 		REVERSE("reverse"),
@@ -147,7 +148,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @see org.pepstock.charba.client.data.HasLabels#getLabeller()
 	 */
 	@Override
-	public Labeller getLabeller() {
+	public final Labeller getLabeller() {
 		return labeller;
 	}
 
@@ -226,7 +227,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
 	 */
-	public void setBeginAtZero(boolean beginAtZero) {
+	public final void setBeginAtZero(boolean beginAtZero) {
 		setValueAndAddToParent(Property.BEGIN_AT_ZERO, beginAtZero);
 	}
 
@@ -236,7 +237,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	@Override
-	public boolean isBeginAtZero() {
+	public final boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
 	}
 
@@ -245,7 +246,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(double min) {
+	public final void setMin(double min) {
 		setValueAndAddToParent(Property.MIN, min);
 	}
 
@@ -255,7 +256,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	@Override
-	public double getMin() {
+	public final double getMin() {
 		return getValueForMultipleKeyTypes(Property.MIN, getDefaultValues().getMin());
 	}
 
@@ -264,7 +265,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param min If defined, this will override the data minimum.
 	 */
-	public void setMin(Date min) {
+	public final void setMin(Date min) {
 		setValueAndAddToParent(Property.MIN, min);
 	}
 
@@ -273,7 +274,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return If defined, this will override the data minimum.
 	 */
-	public Date getMinAsDate() {
+	public final Date getMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.MIN, (Date) null);
 	}
 
@@ -282,7 +283,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
-	public void setMax(double max) {
+	public final void setMax(double max) {
 		setValueAndAddToParent(Property.MAX, max);
 	}
 
@@ -292,7 +293,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	@Override
-	public double getMax() {
+	public final double getMax() {
 		return getValueForMultipleKeyTypes(Property.MAX, getDefaultValues().getMax());
 	}
 
@@ -301,7 +302,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param max if defined, this will override the data maximum.
 	 */
-	public void setMax(Date max) {
+	public final void setMax(Date max) {
 		setValueAndAddToParent(Property.MAX, max);
 	}
 
@@ -310,7 +311,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return if defined, this will override the data maximum.
 	 */
-	public Date getMaxAsDate() {
+	public final Date getMaxAsDate() {
 		return getValueForMultipleKeyTypes(Property.MAX, (Date) null);
 	}
 
@@ -319,7 +320,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(String min) {
+	public final void setMin(String min) {
 		setValueAndAddToParent(Property.MIN, min);
 	}
 
@@ -328,7 +329,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public String getMinAsString() {
+	public final String getMinAsString() {
 		return getValueForMultipleKeyTypes(Property.MIN, String.valueOf(getDefaultValues().getMin()));
 	}
 
@@ -337,7 +338,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
-	public void setMax(String max) {
+	public final void setMax(String max) {
 		setValueAndAddToParent(Property.MAX, max);
 	}
 
@@ -346,7 +347,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
-	public String getMaxAsString() {
+	public final String getMaxAsString() {
 		return getValueForMultipleKeyTypes(Property.MAX, String.valueOf(getDefaultValues().getMax()));
 	}
 
@@ -355,7 +356,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param min The minimum item at passed index to display
 	 */
-	public void setMinIndex(int min) {
+	public final void setMinIndex(int min) {
 		setIndex(Property.MIN, Property.CHARBA_MIN_INDEX, min);
 	}
 
@@ -364,7 +365,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return The minimum item at passed index to display
 	 */
-	public int getMinIndex() {
+	public final int getMinIndex() {
 		return getIndex(Property.MIN, Property.CHARBA_MIN_INDEX);
 	}
 
@@ -373,7 +374,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param max the maximum item at passed index to display.
 	 */
-	public void setMaxIndex(int max) {
+	public final void setMaxIndex(int max) {
 		setIndex(Property.MAX, Property.CHARBA_MAX_INDEX, max);
 	}
 
@@ -382,7 +383,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @return the maximum item at passed index to display.
 	 */
-	public int getMaxIndex() {
+	public final int getMaxIndex() {
 		return getIndex(Property.MAX, Property.CHARBA_MAX_INDEX);
 	}
 
@@ -429,7 +430,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
-	public void setSuggestedMax(double suggestedMax) {
+	public final void setSuggestedMax(double suggestedMax) {
 		setValueAndAddToParent(Property.SUGGESTED_MAX, suggestedMax);
 	}
 
@@ -439,7 +440,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	@Override
-	public double getSuggestedMax() {
+	public final double getSuggestedMax() {
 		return getValue(Property.SUGGESTED_MAX, getDefaultValues().getSuggestedMax());
 	}
 
@@ -448,7 +449,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
-	public void setSuggestedMin(double suggestedMin) {
+	public final void setSuggestedMin(double suggestedMin) {
 		setValueAndAddToParent(Property.SUGGESTED_MIN, suggestedMin);
 	}
 
@@ -458,7 +459,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	@Override
-	public double getSuggestedMin() {
+	public final double getSuggestedMin() {
 		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
 	}
 
@@ -467,7 +468,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param reverse reverses order of tick labels.
 	 */
-	public void setReverse(boolean reverse) {
+	public final void setReverse(boolean reverse) {
 		setValueAndAddToParent(Property.REVERSE, reverse);
 	}
 
@@ -477,7 +478,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return if <code>true</code> reverses order of tick labels.
 	 */
 	@Override
-	public boolean isReverse() {
+	public final boolean isReverse() {
 		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
 
@@ -666,7 +667,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param labels array of labels
 	 */
 	@Override
-	public void setLabels(String... labels) {
+	public final void setLabels(String... labels) {
 		// creates a label object
 		HasLabels.super.setLabels(labels);
 		// checks if all parents are attached
@@ -679,11 +680,30 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	@Override
-	public void setLabels(Labels labels) {
+	public final void setLabels(Labels labels) {
 		// creates a label object
 		HasLabels.super.setLabels(labels);
 		// checks if all parents are attached
 		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets whether to animate scaling the chart from the center.
+	 * 
+	 * @param animate whether to animate scaling the chart from the center.
+	 */
+	public final void setAnimate(boolean animate) {
+		setValueAndAddToParent(Property.ANIMATE, animate);
+	}
+
+	/**
+	 * Returns whether to animate scaling the chart from the center.
+	 * 
+	 * @return whether to animate scaling the chart from the center.
+	 */
+	@Override
+	public final boolean isAnimate() {
+		return getValue(Property.ANIMATE, getDefaultValues().isAnimate());
 	}
 
 }

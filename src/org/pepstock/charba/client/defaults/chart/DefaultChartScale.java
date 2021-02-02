@@ -258,4 +258,14 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.isReverse();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isAnimate()
+	 */
+	@Override
+	public boolean isAnimate() {
+		return scale.isAnimate();
+	}
+
 }

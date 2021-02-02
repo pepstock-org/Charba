@@ -100,4 +100,22 @@ public class RadialAxis extends Axis implements IsNumericAxis {
 		return pointLabels;
 	}
 
+	/**
+	 * Sets whether to animate scaling the chart from the center.
+	 * 
+	 * @param animate whether to animate scaling the chart from the center.
+	 */
+	public void setAnimate(boolean animate) {
+		getConfiguration().setAnimate(animate);
+	}
+
+	/**
+	 * Returns whether to animate scaling the chart from the center.
+	 * 
+	 * @return whether to animate scaling the chart from the center.
+	 */
+	public boolean isAnimate() {
+		return getConfiguration().isAnimate();
+	}
+
 }

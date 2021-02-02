@@ -34,6 +34,8 @@ import org.pepstock.charba.client.enums.ScaleBounds;
  */
 public final class DefaultScale implements IsDefaultScale {
 
+	private static final boolean DEFAULT_ANIMATE = true;
+
 	private static final boolean DEFAULT_OFFSET = false;
 
 	private static final double DEFAULT_WEIGHT = 0D;
@@ -261,6 +263,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public boolean isReverse() {
 		return DEFAULT_REVERSE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isAnimate()
+	 */
+	@Override
+	public boolean isAnimate() {
+		return DEFAULT_ANIMATE;
 	}
 
 }
