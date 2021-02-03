@@ -106,8 +106,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	}
 
 	/**
-	 * Creates new {@link AnnotationHelper#ID} plugin options.<br>
-	 * <b>PAY ATTENTION</b>: this method is invoked from plugin before starting drawing and NOT for configuration.
+	 * Creates new {@link AnnotationHelper#ID} plugin options.
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object loaded from configuration
@@ -121,6 +120,17 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		} else {
 			// stores default options
 			this.defaultOptions = defaultOptions;
+		}
+		// checks if properties exist
+		// pay attention that this shouldn't be needed but
+		// for a strange reason seems the configuration of plugin are not merged
+		if (!has(Property.DRAW_TIME)) {
+			// stores default
+			setValue(Property.DRAW_TIME, this.defaultOptions.getDrawTime());
+		}
+		if (!has(Property.DOUBLE_CLICK_SPEED)) {
+			// stores default
+			setValue(Property.DOUBLE_CLICK_SPEED, this.defaultOptions.getDoubleClickSpeed());
 		}
 		// checks if annotations exists
 		if (has(Property.ANNOTATIONS)) {
