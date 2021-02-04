@@ -16,12 +16,10 @@
 package org.pepstock.charba.client.options;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.GlobalOptions;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -44,8 +42,6 @@ import org.pepstock.charba.client.utils.Utilities;
  */
 public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
 
-	// exception message when the plugin id is not the same in all options passed as list
-	private static final String INVALID_ID_NOT_EQUALS_IN_ALL_OPTIONS = "Plugin id '{0}' is not equals into all options '{1}'";
 	// exception message when the plugin id is not the same of options passed as argument
 	private static final String INVALID_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options";
 	// exception message when the plugin id is not the same of factory passed as argument
@@ -226,42 +222,6 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	}
 
 	/**
-	 * Sets the plugin options as list.<br>
-	 * If the list is empty, it does nothing
-	 * 
-	 * @param options list of plugin options used to configure the plugin.
-	 * @param <T> type of plugin options to store
-	 */
-	@Deprecated
-	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
-		// checks if options are consistent and not empty
-		if (options != null && !options.isEmpty()) {
-			// creates a reference of plugin id
-			String pluginId = null;
-			// scans all options to check if the options have got the same plugin id
-			for (AbstractPluginOptions option : options) {
-				// checks plugin id
-				if (pluginId != null && !pluginId.equals(option.getPluginId())) {
-					// if here, the plugin ID is not equals into all options
-					// then exception
-					throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_ID_NOT_EQUALS_IN_ALL_OPTIONS, pluginId, option.getPluginId()));
-				}
-				// stores the pluginId
-				pluginId = option.getPluginId();
-				// checks if it is a default plugin
-				if (DefaultPluginId.is(pluginId)) {
-					// if yes, skips everything and then returns
-					return;
-				}
-			}
-			// creates plugin ids
-			Key pluginIdKey = PluginIdChecker.key(pluginId);
-			// stores configuration
-			setArrayValueAndAddToParent(pluginIdKey, ArrayObject.fromOrNull(options));
-		}
-	}
-
-	/**
 	 * Sets the plugin options.<br>
 	 * If passed options is <code>null</code>, the configuration of plugin will be removed.
 	 * 
@@ -283,34 +243,6 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 			checkPluginIdConsistency(pluginIdKey, options);
 			// stores configuration
 			setValueAndAddToParent(pluginIdKey, options);
-		}
-	}
-
-	/**
-	 * Sets the plugin options as list.<br>
-	 * If passed options is <code>null</code>, the configuration of plugin will be removed.
-	 * 
-	 * @param pluginId plugin id.
-	 * @param options list of plugin options used to configure the plugin.<br>
-	 *            Pass <code>null</code> to remove the configuration if exist.
-	 * @param <T> type of plugin options to store
-	 */
-	@Deprecated
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
-		// checks plugin ids
-		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// if null and there is an options, removes the configuration
-		if (options == null && hasOptions(pluginId)) {
-			// removes configuration if exists
-			remove(pluginIdKey);
-		} else if (options != null && !DefaultPluginId.is(pluginId)) {
-			// scans all options to check if the options have got the same plugin id
-			for (AbstractPluginOptions option : options) {
-				// checks plugin
-				checkPluginIdConsistency(pluginIdKey, option);
-			}
-			// stores configuration
-			setArrayValueAndAddToParent(pluginIdKey, ArrayObject.fromOrNull(options));
 		}
 	}
 
@@ -406,74 +338,6 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 		}
 		// if here factory is not consistent
 		return null;
-	}
-
-	/**
-	 * Returns the plugin options as list, if exist.<br>
-	 * It uses a factory instance to create a plugin options.
-	 * 
-	 * @param factory factory instance to create a plugin options.
-	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list or empty list if not exist.
-	 */
-	public final <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent and not a default plugin
-		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
-			// creates the key to avoid many calls to plugin checker
-			Key pluginIdKey = PluginIdChecker.key(factory.getPluginId());
-			// checks if array
-			if (isType(pluginIdKey, ObjectType.ARRAY)) {
-				// gets the array from native object
-				ArrayObject array = getArrayValue(pluginIdKey);
-				// creates the result
-				List<T> result = new LinkedList<>();
-				// scans all native object from array
-				for (int i = 0; i < array.length(); i++) {
-					// creates the object using the defaults options
-					// and adds to result list
-					result.add(factory.create(array.get(i), getDefaultValues()));
-				}
-				return result;
-			}
-		}
-		// if here returns an empty list
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the plugin options as list, if exist.<br>
-	 * It uses a factory instance to create a plugin options.
-	 * 
-	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a plugin options.
-	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list or empty list if not exist.
-	 */
-	@Override
-	public final <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		// checks if factory is consistent and not a default plugin
-		if (factory != null && !DefaultPluginId.is(pluginId)) {
-			// creates the key to avoid many calls to plugin checker
-			Key pluginIdKey = PluginIdChecker.key(pluginId);
-			// checks plugin
-			checkPluginIdConsistency(pluginIdKey, factory);
-			// checks if array
-			if (isType(pluginIdKey, ObjectType.ARRAY)) {
-				// gets the array from native object
-				ArrayObject array = getArrayValue(pluginIdKey);
-				// creates the result
-				List<T> result = new LinkedList<>();
-				// scans all native object from array
-				for (int i = 0; i < array.length(); i++) {
-					// creates the object using the defaults options
-					// and adds to result list
-					result.add(factory.create(array.get(i), getDefaultValues()));
-				}
-				return result;
-			}
-		}
-		// if here returns an empty list
-		return Collections.emptyList();
 	}
 
 	/**

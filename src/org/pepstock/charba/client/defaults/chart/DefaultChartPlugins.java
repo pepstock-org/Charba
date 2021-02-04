@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.List;
-
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -78,16 +76,6 @@ public final class DefaultChartPlugins implements IsDefaultPlugins {
 	@Override
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		return plugins.getOptions(pluginId, factory);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsAsList(java.lang.String, org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
-	 */
-	@Override
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		return plugins.getOptionsAsList(pluginId, factory);
 	}
 
 }

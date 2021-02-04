@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
-
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -63,13 +61,4 @@ public interface IsDefaultPlugins {
 	 */
 	<T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory);
 
-	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
-	 * 
-	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a native object container.
-	 * @param <T> type of native object container to return
-	 * @return the plugin options as list of object containers or empty list if not exist.
-	 */
-	<T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory);
 }

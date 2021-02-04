@@ -130,17 +130,6 @@ public class Plugins {
 	}
 
 	/**
-	 * Sets the plugin options as list.<br>
-	 * If the list is empty, it does nothing
-	 * 
-	 * @param options list of plugin options used to configure the plugin.
-	 * @param <T> type of plugin options to store
-	 */
-	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
-		extendedOptions.getPlugins().setOptions(options);
-	}
-
-	/**
 	 * Sets the plugin options.<br>
 	 * If passed options is null, the configuration of plugin will be removed.
 	 * 
@@ -150,19 +139,6 @@ public class Plugins {
 	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
-		extendedOptions.getPlugins().setOptions(pluginId, options);
-	}
-
-	/**
-	 * Sets the plugin options as list.<br>
-	 * If passed options is null, the configuration of plugin will be removed.
-	 * 
-	 * @param pluginId plugin id.
-	 * @param options list of plugin options used to configure the plugin.<br>
-	 *            Pass <code>null</code> to remove the configuration if exist.
-	 * @param <T> type of pugin options to store
-	 */
-	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
 		extendedOptions.getPlugins().setOptions(pluginId, options);
 	}
 
@@ -212,31 +188,6 @@ public class Plugins {
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// returns the configuration by plugin id.
 		return extendedOptions.getPlugins().getOptions(pluginId, factory);
-	}
-
-	/**
-	 * Returns the plugin options as list, if exist.<br>
-	 * It uses a factory instance to create a plugin options.
-	 * 
-	 * @param factory factory instance to create a plugin options.
-	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list or empty list if not exist.
-	 */
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
-		return extendedOptions.getPlugins().getOptionsAsList(factory);
-	}
-
-	/**
-	 * Returns the plugin options as list, if exist.<br>
-	 * It uses a factory instance to create a plugin options.
-	 * 
-	 * @param pluginId plugin id.
-	 * @param factory factory instance to create a plugin options.
-	 * @param <T> type of plugin options to return
-	 * @return the plugin options as list or empty list if not exist.
-	 */
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		return extendedOptions.getPlugins().getOptionsAsList(pluginId, factory);
 	}
 
 }

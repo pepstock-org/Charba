@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
@@ -84,16 +81,6 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 		}
 		// if here factory is not consistent
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsAsList(java.lang.String, org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory)
-	 */
-	@Override
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
-		return Collections.emptyList();
 	}
 
 }
