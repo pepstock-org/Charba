@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -43,12 +45,43 @@ public final class DataLabelsPlugin {
 	static final DataLabelsDefaultsOptionsFactory DEFAULTS_FACTORY = new DataLabelsDefaultsOptionsFactory();
 	// injectable resource for plugin
 	private static final DataLabelsPluginResource RESOURCE = new DataLabelsPluginResource();
+	// singleton instance
+	private static final DataLabelsPlugin INSTANCE = new DataLabelsPlugin();
+	// original defaults
+	private DataLabelsOptions defaults = null;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private DataLabelsPlugin() {
 		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance.
+	 * 
+	 * @return the singleton instance
+	 */
+	static DataLabelsPlugin get() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Returns the original defaults of plugin.
+	 * 
+	 * @return the original defaults of plugin
+	 */
+	DataLabelsOptions getDefaults() {
+		return defaults;
+	}
+
+	/**
+	 * Sets the original defaults of plugin.
+	 * 
+	 * @param defaults the original defaults of plugin
+	 */
+	void setDefaults(DataLabelsOptions defaults) {
+		this.defaults = defaults;
 	}
 
 	/**
@@ -70,6 +103,26 @@ public final class DataLabelsPlugin {
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
+		// ------------------------------------
+		// RETRIEVE defaults set by plugin OOTB
+		// ------------------------------------
+		DataLabelsOptions defaults;
+		// checks if there is an options
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
+			// gets the original defaults
+			DataLabelsOptions originalDefaults = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
+			// clones the native object
+			// in order to preserve this defaults
+			NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
+			// creates the defaults
+			defaults = new DataLabelsOptions(DefaultOptions.INSTANCE, objectDefaults);
+		} else {
+			// no defaults has been set
+			// then a completely empty object as default
+			defaults = new DataLabelsOptions();
+		}
+		// stores the defaults
+		DataLabelsPlugin.get().setDefaults(defaults);
 	}
 
 }

@@ -181,7 +181,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// padding callback instance
 	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
-	
+
 	// defaults global options instance
 	private final IsDefaultDataLabelsItem defaultOptions;
 	// listener inner element
@@ -284,7 +284,8 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// -------------------------------
 		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new ScriptableContext(new DataLabelsEnvelop<>(context)), value));
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
+		backgroundColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
 		// gets value calling callback
 		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
 		// gets value calling callback
@@ -312,17 +313,29 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// gets value calling callback
 		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
 		// gets value calling callback
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
+		textStrokeColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
 		// gets value calling callback
 		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
 		// gets value calling callback
 		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
 		// gets value calling callback
-		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
+		textShadowColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScriptableContext(new DataLabelsEnvelop<>(context)), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
 		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
 		paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new ScriptableContext(new DataLabelsEnvelop<>(context)), PADDING_PROPERTY_HANDLER.getCallback(this)));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
+	 */
+	@Override
+	public void applyingDefaults() {
+		// do nothing
 	}
 
 	/**
@@ -1289,7 +1302,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			return Display.TRUE.equals(result);
 		}
 	}
-	
+
 	/**
 	 * Returns a native object as padding when the callback has been activated.
 	 * 

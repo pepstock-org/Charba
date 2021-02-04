@@ -135,6 +135,13 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		// then returns null
 		return null;
 	}
+	
+	/**
+	 * This is invoked before storing the plugins options as default.
+	 */
+	public void applyingDefaults() {
+		// do nothing
+	}
 
 	/**
 	 * Stores this options into default global plugins options.

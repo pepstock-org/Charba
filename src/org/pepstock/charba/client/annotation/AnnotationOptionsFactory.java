@@ -50,10 +50,10 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 			defaultOptions = loadDefaultsPluginOptions(defaultValues, AnnotationPlugin.DEFAULTS_FACTORY);
 		} else {
 			// uses the predefined defaults
-			defaultOptions = AnnotationDefaultsOptions.DEFAULTS_INSTANCE;
+			defaultOptions = DefaultOptions.INSTANCE;
 		}
 		// creates the options by the native object and the defaults
-		return new AnnotationOptions(defaultOptions != null ? defaultOptions : AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new AnnotationOptions(defaultOptions != null ? defaultOptions : DefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public final class AnnotationOptionsFactory extends AbstractPluginOptionsFactory
 		 */
 		@Override
 		public AnnotationOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
-			return new AnnotationOptions(AnnotationDefaultsOptions.DEFAULTS_INSTANCE, nativeObject);
+			return new AnnotationOptions(DefaultOptions.INSTANCE, nativeObject);
 		}
 	}
 

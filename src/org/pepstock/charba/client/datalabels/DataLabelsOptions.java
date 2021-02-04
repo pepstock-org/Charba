@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -31,7 +32,7 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends LabelItem implements IsDefaultDataLabelsOptions{
+public final class DataLabelsOptions extends LabelItem implements IsDefaultDataLabelsOptions {
 
 	// -------------------------------------------
 	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
@@ -175,7 +176,7 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 		// checks instance of defaults options if has got the right type
 		if (defaultValue instanceof IsDefaultDataLabelsOptions) {
 			// casts to the right type
-			IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions)defaultValue;
+			IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions) defaultValue;
 			// creates and stores labels
 			this.labels = new Labels(this, values.getLabels(), getValue(Property.LABELS));
 			// checks it has got the element
@@ -186,10 +187,23 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 		} else {
 			// if here, the default does not have the same class
 			// which is needed for this object
-			throw new IllegalArgumentException("The default instance is not correct type, "+defaultValue.getClass().getName());
+			throw new IllegalArgumentException("The default instance is not correct type, " + defaultValue.getClass().getName());
 		}
-	}	
-	
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
+	 */
+	@Override
+	public void applyingDefaults() {
+		// gets defaults
+		DataLabelsOptions defaults = DataLabelsPlugin.get().getDefaults();
+		// merges the original defaults on this object
+		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
+	}
+
 	/**
 	 * Returns the labels element.
 	 * 
@@ -199,5 +213,14 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	public Labels getLabels() {
 		return labels;
 	}
-	
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return super.getNativeObject();
+	}
+
 }

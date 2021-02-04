@@ -50,7 +50,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 			return new DataLabelsOptions(defaultOptions, nativeObject);
 		}
 		// creates the options by the native object and the defaults
-		return new DataLabelsOptions(DefaultOptions.DEFAULTS_INSTANCE, nativeObject);
+		return new DataLabelsOptions(DefaultOptions.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 		@Override
 		public DataLabelsOptions create(NativeObject nativeObject, IsDefaultPlugins defaultValues) {
 			// creates the default global option by native object
-			return new DataLabelsOptions(DefaultOptions.DEFAULTS_INSTANCE, nativeObject);
+			return new DataLabelsOptions(DefaultOptions.INSTANCE, nativeObject);
 		}
 
 	}

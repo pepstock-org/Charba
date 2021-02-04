@@ -15,32 +15,39 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.defaults.IsDefaultFont;
+
 /**
- * This is the {@link AnnotationHelper#ID} plugin POINT annotation DEFAULTS options.
+ * This is the {@link AnnotationHelper#ID} plugin LABEL of LINE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PointAnnotationDefaultsOptions implements IsDefaultsPointAnnotation {
+final class DefaultLineLabel implements IsDefaultsLineLabel {
 
 	// defaults options instance
-	static final PointAnnotationDefaultsOptions INSTANCE = new PointAnnotationDefaultsOptions();
+	static final DefaultLineLabel INSTANCE = new DefaultLineLabel();
+
+	private Font font;
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private PointAnnotationDefaultsOptions() {
-		// do nothing
+	private DefaultLineLabel() {
+		this.font = new Font();
+		// stores style
+		this.font.setStyle(LineLabel.DEFAULT_FONT_STYLE);
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineLabel#getFont()
 	 */
 	@Override
-	public AnnotationType getType() {
-		return AnnotationType.POINT;
+	public IsDefaultFont getFont() {
+		return font;
 	}
 
 }

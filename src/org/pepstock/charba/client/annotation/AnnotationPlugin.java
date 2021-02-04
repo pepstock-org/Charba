@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -45,12 +47,43 @@ public final class AnnotationPlugin {
 	static final AnnotationDefaultsOptionsFactory DEFAULTS_FACTORY = new AnnotationDefaultsOptionsFactory();
 	// injectable resource for plugin
 	private static final AnnotationPluginResource RESOURCE = new AnnotationPluginResource();
+	// singleton instance
+	private static final AnnotationPlugin INSTANCE = new AnnotationPlugin();
+	// original defaults
+	private AnnotationOptions defaults = null;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private AnnotationPlugin() {
 		// do nothing
+	}
+
+	/**
+	 * Returns the singleton instance.
+	 * 
+	 * @return the singleton instance
+	 */
+	static AnnotationPlugin get() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Returns the original defaults of plugin.
+	 * 
+	 * @return the original defaults of plugin
+	 */
+	AnnotationOptions getDefaults() {
+		return defaults;
+	}
+
+	/**
+	 * Sets the original defaults of plugin.
+	 * 
+	 * @param defaults the original defaults of plugin
+	 */
+	void setDefaults(AnnotationOptions defaults) {
+		this.defaults = defaults;
 	}
 
 	/**
@@ -72,6 +105,26 @@ public final class AnnotationPlugin {
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
+		// ------------------------------------
+		// RETRIEVE defaults set by plugin OOTB
+		// ------------------------------------
+		AnnotationOptions defaults;
+		// checks if there is an options
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
+			// gets the original defaults
+			AnnotationOptions originalDefaults = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
+			// clones the native object
+			// in order to preserve this defaults
+			NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
+			// creates the defaults
+			defaults = new AnnotationOptions(DefaultOptions.INSTANCE, objectDefaults);
+		} else {
+			// no defaults has been set
+			// then a completely empty object as default
+			defaults = new AnnotationOptions();
+		}
+		// stores the defaults
+		AnnotationPlugin.get().setDefaults(defaults);
 	}
 
 }

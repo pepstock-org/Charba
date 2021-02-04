@@ -23,6 +23,8 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.options.Font;
 import org.pepstock.charba.client.options.Options;
+import org.pepstock.charba.client.options.Plugins;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Default global options (maps the java script object chart.defaults.global).
@@ -30,10 +32,11 @@ import org.pepstock.charba.client.options.Options;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
-	
+
 	// instance to store the global options as default
 	private final IsDefaultScaledOptions defaultOptions;
-	
+	// plugins wrapper needed to maintain the original plugins defaults
+	private final GlobalPlugins plugins;
 
 	/**
 	 * Creates the object with the native object which maps the java script object chart.defaults.global.
@@ -46,10 +49,12 @@ public final class GlobalOptions extends Options {
 		// stores default
 		this.defaultOptions = new DefaultGlobalOptions(this);
 		// checks if has got the locale
-		if (!has(Options.CommonProperty.LOCALE)){
+		if (!has(Options.CommonProperty.LOCALE)) {
 			// sets locale getting for locale instance
 			setLocale(CLocale.getDefault());
 		}
+		// stores the plugins wrapper
+		this.plugins = new GlobalPlugins(new ChartEnvelop<>(super.getPlugins()));
 	}
 
 	/**
@@ -69,6 +74,67 @@ public final class GlobalOptions extends Options {
 	 */
 	public IsDefaultScaledOptions asDefault() {
 		return defaultOptions;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.Options#getPlugins()
+	 */
+	@Override
+	public Plugins getPlugins() {
+		return plugins;
+	}
+
+	/**
+	 * Extends the options element to configure plugins in order to request to the plugin by its options to merge the original defaults, otherwise the defaults of plugin will be
+	 * lost.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class GlobalPlugins extends Plugins {
+
+		/**
+		 * Creates the object getting the original instance of {@link Plugins}} in the {@link Options}, in order to override the <b>setOptions</b> method to force the merge.
+		 * 
+		 * @param envelop envelop which is containing the plugins element
+		 */
+		private GlobalPlugins(ChartEnvelop<Plugins> envelop) {
+			super(envelop);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.Plugins#setOptions(org.pepstock.charba.client.plugins.AbstractPluginOptions)
+		 */
+		@Override
+		public <T extends AbstractPluginOptions> void setOptions(T options) {
+			// checks if argument is consistent
+			if (options != null) {
+				// informs the options that they are being stored as defaults
+				options.applyingDefaults();
+				// stores the data
+				super.setOptions(options);
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.Plugins#setOptions(java.lang.String, org.pepstock.charba.client.plugins.AbstractPluginOptions)
+		 */
+		@Override
+		public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
+			// checks if argument is consistent
+			if (options != null) {
+				// informs the options that they are being stored as defaults
+				options.applyingDefaults();
+				// stores the data
+				super.setOptions(pluginId, options);
+			}
+		}
 	}
 
 }

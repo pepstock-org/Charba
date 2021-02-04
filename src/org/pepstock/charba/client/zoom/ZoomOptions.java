@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.zoom;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomOptions extends AbstractPluginOptions implements IsDefaultOptions{
+public final class ZoomOptions extends AbstractPluginOptions implements IsDefaultOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -116,6 +117,19 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
+	 */
+	@Override
+	public void applyingDefaults() {
+		// gets defaults
+		ZoomOptions defaults = ZoomPlugin.get().getDefaults();
+		// merges the original defaults on this object
+		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
+	}
+
 	/**
 	 * Returns the pan element.
 	 * 
@@ -134,6 +148,15 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	@Override
 	public Zoom getZoom() {
 		return zoom;
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return super.getNativeObject();
 	}
 
 }

@@ -88,8 +88,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		INTERACTION("interaction"),
 		HOVER("hover"),
 		ELEMENTS("elements"),
-		LAYOUT("layout"),
 		PLUGINS("plugins"),
+		LAYOUT("layout"),
 		DATASETS("datasets"),
 		// global options
 		COLOR("color"),
@@ -351,7 +351,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the plugins
 	 */
 	@Override
-	public final Plugins getPlugins() {
+	public Plugins getPlugins() {
 		return plugins;
 	}
 

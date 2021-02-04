@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @see PaddingCallback
  */
-public final class Padding extends AbstractElement implements IsDefaultPadding{
+public final class Padding extends AbstractElement implements IsDefaultPadding {
 
 	/**
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
@@ -41,7 +41,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding{
 	 * Creates new padding element, using the default values options.
 	 */
 	public Padding() {
-		this(DefaultOptions.DEFAULTS_INSTANCE.getPadding(), null);
+		this(DefaultOptions.INSTANCE.getPadding(), null);
 	}
 
 	/**

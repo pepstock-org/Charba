@@ -16,21 +16,41 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin DEFAULTS for main options.
+ * This is the {@link AnnotationHelper#ID} plugin LINE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class AnnotationDefaultsOptions implements IsDefaultsAnnotationOptions {
+final class DefaultLine implements IsDefaultsLineAnnotation {
 
 	// defaults options instance
-	static final AnnotationDefaultsOptions DEFAULTS_INSTANCE = new AnnotationDefaultsOptions();
+	static final DefaultLine INSTANCE = new DefaultLine();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private AnnotationDefaultsOptions() {
+	private DefaultLine() {
 		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
+	 */
+	@Override
+	public AnnotationType getType() {
+		return AnnotationType.LINE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineAnnotation#getLabel()
+	 */
+	@Override
+	public IsDefaultsLineLabel getLabel() {
+		return DefaultLineLabel.INSTANCE;
 	}
 
 }

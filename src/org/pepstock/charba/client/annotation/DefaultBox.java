@@ -21,15 +21,15 @@ package org.pepstock.charba.client.annotation;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class BoxAnnotationDefaultsOptions implements IsDefaultsBoxAnnotation {
+final class DefaultBox implements IsDefaultsBoxAnnotation {
 
 	// defaults options instance
-	static final BoxAnnotationDefaultsOptions INSTANCE = new BoxAnnotationDefaultsOptions();
+	static final DefaultBox INSTANCE = new DefaultBox();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private BoxAnnotationDefaultsOptions() {
+	private DefaultBox() {
 		// do nothing
 	}
 

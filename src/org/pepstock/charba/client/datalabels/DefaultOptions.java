@@ -28,7 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 final class DefaultOptions implements IsDefaultDataLabelsOptions {
 
 	// defaults options instance
-	static final DefaultOptions DEFAULTS_INSTANCE = new DefaultOptions();
+	static final DefaultOptions INSTANCE = new DefaultOptions();
 	// default padding options
 	private final DefaultPadding padding = new DefaultPadding();
 	// default font options

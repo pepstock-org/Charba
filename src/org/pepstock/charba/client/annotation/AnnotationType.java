@@ -31,19 +31,19 @@ public enum AnnotationType implements Key
 	/**
 	 * Defines a <b>LINE</b> annotation which draws a line into a chart.
 	 */
-	LINE("line", LineAnnotationDefaultsOptions.INSTANCE),
+	LINE("line", DefaultLine.INSTANCE),
 	/**
 	 * Defines a <b>BOX</b> annotation which draws a box into a chart.
 	 */
-	BOX("box", BoxAnnotationDefaultsOptions.INSTANCE),
+	BOX("box", DefaultBox.INSTANCE),
 	/**
 	 * Defines a <b>ELLIPSE</b> annotation which draws an ellipse into a chart.
 	 */
-	ELLIPSE("ellipse", EllipseAnnotationDefaultsOptions.INSTANCE),
+	ELLIPSE("ellipse", DefaultEllipse.INSTANCE),
 	/**
 	 * Defines a <b>POINT</b> annotation which draws a point into a chart.
 	 */
-	POINT("point", PointAnnotationDefaultsOptions.INSTANCE);
+	POINT("point", DefaultPoint.INSTANCE);
 
 	// name value of property
 	private final String value;

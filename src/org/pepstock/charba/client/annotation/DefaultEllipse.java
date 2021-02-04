@@ -21,15 +21,15 @@ package org.pepstock.charba.client.annotation;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class EllipseAnnotationDefaultsOptions implements IsDefaultsEllipseAnnotation {
+final class DefaultEllipse implements IsDefaultsEllipseAnnotation {
 
 	// defaults options instance
-	static final EllipseAnnotationDefaultsOptions INSTANCE = new EllipseAnnotationDefaultsOptions();
+	static final DefaultEllipse INSTANCE = new DefaultEllipse();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private EllipseAnnotationDefaultsOptions() {
+	private DefaultEllipse() {
 		// do nothing
 	}
 

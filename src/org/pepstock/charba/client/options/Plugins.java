@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
@@ -40,7 +42,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
+public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements IsDefaultPlugins {
 
 	// exception message when the plugin id is not the same in all options passed as list
 	private static final String INVALID_ID_NOT_EQUALS_IN_ALL_OPTIONS = "Plugin id '{0}' is not equals into all options '{1}'";
@@ -48,6 +50,16 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	private static final String INVALID_ID_NOT_EQUALS_IN_OPTIONS = "Plugin id '{0}' is not equals to plugin id '{1}'of options";
 	// exception message when the plugin id is not the same of factory passed as argument
 	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY = "Plugin id '{0}' is not equals to plugin id '{1}'of factory";
+
+	/**
+	 * Creates the object wrapping another plugin.<br>This constructor is used ONLY from {@link GlobalOptions}.
+	 * 
+	 * @param envelop envelop passed by chart package in oredr to wrap another plugin.
+	 */
+	protected Plugins(ChartEnvelop<Plugins> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent().getParent(), IsEnvelop.checkAndGetIfValid(envelop).getContent().getChildKey(), IsEnvelop.checkAndGetIfValid(envelop).getContent().getDefaultValues(),
+				IsEnvelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
+	}
 
 	/**
 	 * Creates the object with the parent, the key of this element, defaults and native object to map java script properties.
@@ -76,7 +88,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * 
 	 * @return the unmodifiable list of registered plugin ids
 	 */
-	public List<Key> getAllIds() {
+	public final List<Key> getAllIds() {
 		return Collections.unmodifiableList(keys());
 	}
 
@@ -86,7 +98,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
-	public void setEnabled(String pluginId, boolean enabled) {
+	public final void setEnabled(String pluginId, boolean enabled) {
 		setEnabled(PluginIdChecker.key(pluginId), enabled, false);
 	}
 
@@ -97,7 +109,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param envelop default CHART.JS plugin instance.
 	 * @param enabled <code>false</code> disable a default CHART.JS plugin.
 	 */
-	public void setEnabled(ConfigurationEnvelop<DefaultPluginId> envelop, boolean enabled) {
+	public final void setEnabled(ConfigurationEnvelop<DefaultPluginId> envelop, boolean enabled) {
 		// checks if envelop is valid
 		if (IsEnvelop.isValid(envelop)) {
 			setEnabled(envelop.getContent(), enabled, true);
@@ -112,7 +124,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param enabled <code>false</code> disable a global plugin.
 	 * @param overrideDefaultPlugin if <code>true</code> means this is called by configuration and it can enable or disable default plugins.
 	 */
-	private void setEnabled(Key pluginId, boolean enabled, boolean overrideDefaultPlugin) {
+	private final void setEnabled(Key pluginId, boolean enabled, boolean overrideDefaultPlugin) {
 		// checks if is a default plugin
 		// if default plugin does nothing
 		// but if override plugin is set, means that is done by configuration then allowed
@@ -139,7 +151,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 */
-	public boolean isEnabled(DefaultPluginId pluginId) {
+	public final boolean isEnabled(DefaultPluginId pluginId) {
 		return isEnabledByKey(pluginId);
 	}
 
@@ -150,7 +162,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return <code>false</code> if a plugin is not enabled otherwise <code>true</code>.
 	 */
 	@Override
-	public boolean isEnabled(String pluginId) {
+	public final boolean isEnabled(String pluginId) {
 		return isEnabledByKey(PluginIdChecker.key(pluginId));
 	}
 
@@ -178,7 +190,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
 	 */
-	public boolean hasEnabled(String pluginId) {
+	public final boolean hasEnabled(String pluginId) {
 		return has(PluginIdChecker.key(pluginId));
 	}
 
@@ -187,7 +199,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * 
 	 * @param pluginId plugin id.
 	 */
-	public void removeOptions(String pluginId) {
+	public final void removeOptions(String pluginId) {
 		// checks if there is a stored plugin options
 		if (hasOptions(pluginId)) {
 			// checks plugin ids
@@ -220,6 +232,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param options list of plugin options used to configure the plugin.
 	 * @param <T> type of plugin options to store
 	 */
+	@Deprecated
 	public <T extends AbstractPluginOptions> void setOptions(List<T> options) {
 		// checks if options are consistent and not empty
 		if (options != null && !options.isEmpty()) {
@@ -282,6 +295,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 *            Pass <code>null</code> to remove the configuration if exist.
 	 * @param <T> type of plugin options to store
 	 */
+	@Deprecated
 	public <T extends AbstractPluginOptions> void setOptions(String pluginId, List<T> options) {
 		// checks plugin ids
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
@@ -307,7 +321,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean hasOptions(String pluginId) {
+	public final boolean hasOptions(String pluginId) {
 		// creates the key to avoid many calls to plugin checker
 		Key pluginIdKey = PluginIdChecker.key(pluginId);
 		// checks if is default plugins
@@ -329,7 +343,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return the options type
 	 */
 	@Override
-	public ObjectType getOptionsType(String pluginId) {
+	public final ObjectType getOptionsType(String pluginId) {
 		// if argument is a default plugin id, returns always undefined
 		return DefaultPluginId.is(pluginId) ? ObjectType.UNDEFINED : type(PluginIdChecker.key(pluginId));
 	}
@@ -344,7 +358,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return plugin options used to configure the plugin or an empty object if not exist.<br>
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
-	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
+	public final <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
@@ -374,7 +388,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
 	@Override
-	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+	public final <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(pluginId)) {
 			// creates the key to avoid many calls to plugin checker
@@ -402,7 +416,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @param <T> type of plugin options to return
 	 * @return the plugin options as list or empty list if not exist.
 	 */
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
+	public final <T extends AbstractPluginOptions> List<T> getOptionsAsList(AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(factory.getPluginId())) {
 			// creates the key to avoid many calls to plugin checker
@@ -436,7 +450,7 @@ public final class Plugins extends AbstractModel<Options, IsDefaultPlugins> impl
 	 * @return the plugin options as list or empty list if not exist.
 	 */
 	@Override
-	public <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
+	public final <T extends AbstractPluginOptions> List<T> getOptionsAsList(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// checks if factory is consistent and not a default plugin
 		if (factory != null && !DefaultPluginId.is(pluginId)) {
 			// creates the key to avoid many calls to plugin checker

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
@@ -121,17 +122,6 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// stores default options
 			this.defaultOptions = defaultOptions;
 		}
-		// checks if properties exist
-		// pay attention that this shouldn't be needed but
-		// for a strange reason seems the configuration of plugin are not merged
-		if (!has(Property.DRAW_TIME)) {
-			// stores default
-			setValue(Property.DRAW_TIME, this.defaultOptions.getDrawTime());
-		}
-		if (!has(Property.DOUBLE_CLICK_SPEED)) {
-			// stores default
-			setValue(Property.DOUBLE_CLICK_SPEED, this.defaultOptions.getDoubleClickSpeed());
-		}
 		// checks if annotations exists
 		if (has(Property.ANNOTATIONS)) {
 			// if here, the options has been created from a native object
@@ -144,6 +134,19 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// stores into java script object as well
 			setValue(Property.ANNOTATIONS, annotationsMap);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
+	 */
+	@Override
+	public void applyingDefaults() {
+		// gets defaults
+		AnnotationOptions defaults = AnnotationPlugin.get().getDefaults();
+		// merges the original defaults on this object
+		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
 	}
 
 	/**
@@ -287,4 +290,12 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		return result;
 	}
 
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return super.getNativeObject();
+	}
 }
