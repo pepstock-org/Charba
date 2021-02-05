@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin LABEL of LINE annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *

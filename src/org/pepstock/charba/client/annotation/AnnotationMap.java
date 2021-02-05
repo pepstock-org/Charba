@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 
 /**
- * Object which stores all annotations by their ID into {@link AnnotationHelper#ID} plugin.<br>
+ * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin.<br>
  * <b>PAY ATTENTION</b>: this class is invoked from plugin before starting drawing and NOT for configuration.
  * 
  * 

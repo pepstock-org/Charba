@@ -97,7 +97,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	}
 
 	/**
-	 * Creates new {@link AnnotationHelper#ID} plugin options.
+	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 */
@@ -107,7 +107,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	}
 
 	/**
-	 * Creates new {@link AnnotationHelper#ID} plugin options.
+	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 * 
 	 * @param defaultOptions default options stored into defaults global
 	 * @param nativeObject native object loaded from configuration

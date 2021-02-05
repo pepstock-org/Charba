@@ -21,7 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin DEFAULTS options interface, in order to define the attributes of main annotations options.
+ * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS options interface, in order to define the attributes of main annotations options.
  * 
  * @author Andrea "Stock" Stocchero
  *

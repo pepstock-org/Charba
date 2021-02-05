@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin POINT annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin POINT annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *

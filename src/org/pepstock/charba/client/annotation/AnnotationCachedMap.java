@@ -22,7 +22,7 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Object which stores all annotations by their ID into {@link AnnotationHelper#ID} plugin, using a cached to store it.<br>
+ * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin, using a cached to store it.<br>
  * <b>PAY ATTENTION</b>: this class is invoked ONLY for configuration.
  * 
  * @author Andrea "Stock" Stocchero

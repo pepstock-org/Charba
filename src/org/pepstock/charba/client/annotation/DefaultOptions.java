@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationHelper#ID} plugin DEFAULTS for main options.
+ * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS for main options.
  * 
  * @author Andrea "Stock" Stocchero
  *

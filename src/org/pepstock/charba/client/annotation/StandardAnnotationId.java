@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is a standard implementation of a annotation configuration object ID for {@link AnnotationHelper#ID} plugin.
+ * This is a standard implementation of a annotation configuration object ID for {@link AnnotationPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
