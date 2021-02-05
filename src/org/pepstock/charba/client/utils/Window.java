@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.utils.WindowHelper.OnBeforePrintCallback;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -31,6 +32,24 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.WINDOW)
 public final class Window {
 
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called for <code>setTimeout</code> method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface TimeoutCallback {
+
+		/**
+		 * Method of function to be called for <code>setTimeout</code> method.
+		 */
+		void call();
+	}
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -53,6 +72,25 @@ public final class Window {
 	 */
 	@JsProperty(name = "onbeforeprint")
 	static native void onBeforePrint(OnBeforePrintCallback callback);
+
+	/**
+	 * Sets a timer which executes a function or specified piece of code once the timer expires.
+	 * 
+	 * @param function a function to be executed after the timer expires.
+	 * @param delay the time, in milliseconds (thousandths of a second), the timer should wait before the specified function or code is executed.<br>
+	 *            If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+	 * @return the returned timer identifier is a positive integer value which identifies the timer created by the call.<br>
+	 *         This value can be passed to {@link Window#clearTimeout(int)} to cancel the timeout.
+	 */
+	static native int setTimeout(TimeoutCallback function, int delay);
+
+	/**
+	 * Cancels a timeout previously established by calling {@link Window#setTimeout(TimeoutCallback, int)} method.
+	 * 
+	 * @param timeoutID the identifier of the timeout you want to cancel.<br>
+	 *            This ID was returned by the corresponding call to {@link Window#setTimeout(TimeoutCallback, int)} method.
+	 */
+	static native void clearTimeout(int timeoutID);
 
 	/**
 	 * Returns the Console object
