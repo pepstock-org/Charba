@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
@@ -100,6 +101,11 @@ public final class NativeName {
 	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when {@link ZoomPlugin} is activated.
 	 */
 	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
+
+	/**
+	 * Constant to bind java script object as JsDataLabelsHelper with name <b>{@value JS_DATALABELS_HELPER}</b>, (internal of Charba), when {@link DataLabelsPlugin} is activated.
+	 */
+	public static final String JS_DATALABELS_HELPER = "CharbaJsDataLabelsHelper";
 
 	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).

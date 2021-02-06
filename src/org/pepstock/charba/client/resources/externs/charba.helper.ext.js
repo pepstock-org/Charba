@@ -219,6 +219,15 @@ function CharbaJsZoomHelper() {}
 CharbaJsZoomHelper.resetZoom = function(chart) {};
 /**
  * @constructor
+ * @return {CharbaJsDataLabelsHelper}
+ */	
+function CharbaJsDataLabelsHelper() {}	    
+/**
+ * @return {undefined}
+ */
+CharbaJsDataLabelsHelper.register = function() {};
+/**
+ * @constructor
  * @return {CharbaJsItemsHelper}
  */	
 function CharbaJsItemsHelper() {}

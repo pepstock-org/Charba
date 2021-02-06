@@ -378,6 +378,17 @@
     	}
     }
     /*
+		JsDatalabelsHelpers is an object with a set of static methods used as utility
+		and needed when DATALABELS plugin has been activated.   
+	*/
+    function CharbaJsDataLabelsHelper() {} 
+    /*
+	 Registers the DATALABELS plugin globally to CHARTS.js
+    */
+    CharbaJsDataLabelsHelper.register = function() {
+    	Chart.register(ChartDataLabels);         
+    }
+    /*
 		JsItemsHelpers is an object with a set of static methods used as utility
 		and needed to act with CHARBA items.   
 	*/
