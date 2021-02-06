@@ -135,7 +135,7 @@ The samples are going to reflect what CHART.JS samples are showing [here](http:/
 Continuous integration and quality gate
 ---------------------------------------
 
-**Charba** is continuously built at every commit and merge in `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
+**Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
