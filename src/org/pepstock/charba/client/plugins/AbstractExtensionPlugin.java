@@ -86,7 +86,7 @@ public abstract class AbstractExtensionPlugin<T extends AbstractPluginOptions> {
 			// ------------------------------------
 			// RETRIEVE defaults set by plugin OOTB
 			// ------------------------------------
-			T defaults;
+			T globalDefaults;
 			// checks if there is an options
 			if (Defaults.get().getGlobal().getPlugins().hasOptions(factory.getPluginId())) {
 				// gets the original defaults
@@ -95,14 +95,14 @@ public abstract class AbstractExtensionPlugin<T extends AbstractPluginOptions> {
 				// in order to preserve this defaults
 				NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
 				// creates the defaults
-				defaults = factory.create(objectDefaults, null);
+				globalDefaults = factory.create(objectDefaults, null);
 			} else {
 				// no defaults has been set
 				// then a completely empty object as default
-				defaults = factory.create(null, null);
+				globalDefaults = factory.create(null, null);
 			}
 			// stores the defaults
-			this.defaults = defaults;
+			this.defaults = globalDefaults;
 		}
 	}
 

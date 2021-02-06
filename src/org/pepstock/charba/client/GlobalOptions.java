@@ -95,7 +95,7 @@ public final class GlobalOptions extends Options {
 	 */
 	private static final class GlobalPlugins extends Plugins {
 		
-		private ChartEnvelop<String> envelop = new ChartEnvelop<String>(DefaultOptions.SCOPE);
+		private ChartEnvelop<String> envelop = new ChartEnvelop<>(DefaultOptions.SCOPE);
 
 		/**
 		 * Creates the object getting the original instance of {@link Plugins}} in the {@link Options}, in order to override the <b>setOptions</b> method to force the merge.
