@@ -94,6 +94,8 @@ public final class GlobalOptions extends Options {
 	 *
 	 */
 	private static final class GlobalPlugins extends Plugins {
+		
+		private ChartEnvelop<String> envelop = new ChartEnvelop<String>(DefaultOptions.SCOPE);
 
 		/**
 		 * Creates the object getting the original instance of {@link Plugins}} in the {@link Options}, in order to override the <b>setOptions</b> method to force the merge.
@@ -114,7 +116,7 @@ public final class GlobalOptions extends Options {
 			// checks if argument is consistent
 			if (options != null) {
 				// informs the options that they are being stored as defaults
-				options.applyingDefaults();
+				options.applyingDefaults(envelop);
 				// stores the data
 				super.setOptions(options);
 			}
@@ -130,7 +132,7 @@ public final class GlobalOptions extends Options {
 			// checks if argument is consistent
 			if (options != null) {
 				// informs the options that they are being stored as defaults
-				options.applyingDefaults();
+				options.applyingDefaults(envelop);
 				// stores the data
 				super.setOptions(pluginId, options);
 			}

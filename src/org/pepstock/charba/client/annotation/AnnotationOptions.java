@@ -17,7 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
@@ -142,11 +141,8 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
 	 */
 	@Override
-	public void applyingDefaults() {
-		// gets defaults
-		AnnotationOptions defaults = AnnotationPlugin.get().getDefaults();
-		// merges the original defaults on this object
-		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
+	protected void applyingDefaults() {
+		AnnotationPlugin.get().mergeDefaults(this);
 	}
 
 	/**
@@ -288,14 +284,5 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		// if here, the annotation was found
 		// in this object then returns it
 		return result;
-	}
-
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
 	}
 }

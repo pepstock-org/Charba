@@ -334,7 +334,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
 	 */
 	@Override
-	public void applyingDefaults() {
+	protected void applyingDefaults() {
 		// do nothing
 	}
 

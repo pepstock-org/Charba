@@ -16,10 +16,9 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
-import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -32,7 +31,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationPlugin {
+public final class AnnotationPlugin extends AbstractExtensionPlugin<AnnotationOptions> {
 
 	/**
 	 * Plugin ID <b>"annotation"</b>.
@@ -49,8 +48,6 @@ public final class AnnotationPlugin {
 	private static final AnnotationPluginResource RESOURCE = new AnnotationPluginResource();
 	// singleton instance
 	private static final AnnotationPlugin INSTANCE = new AnnotationPlugin();
-	// original defaults
-	private AnnotationOptions defaults = null;
 
 	/**
 	 * To avoid any instantiation
@@ -69,21 +66,12 @@ public final class AnnotationPlugin {
 	}
 
 	/**
-	 * Returns the original defaults of plugin.
+	 * Merges the original defaults of plugin to the options of plugin.
 	 * 
-	 * @return the original defaults of plugin
+	 * @param options the options of plugin where to apply the defaults
 	 */
-	AnnotationOptions getDefaults() {
-		return defaults;
-	}
-
-	/**
-	 * Sets the original defaults of plugin.
-	 * 
-	 * @param defaults the original defaults of plugin
-	 */
-	void setDefaults(AnnotationOptions defaults) {
-		this.defaults = defaults;
+	void mergeDefaults(AnnotationOptions options) {
+		super.applyingDefaults(options);
 	}
 
 	/**
@@ -105,26 +93,8 @@ public final class AnnotationPlugin {
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
-		// ------------------------------------
-		// RETRIEVE defaults set by plugin OOTB
-		// ------------------------------------
-		AnnotationOptions defaults;
-		// checks if there is an options
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
-			// gets the original defaults
-			AnnotationOptions originalDefaults = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
-			// clones the native object
-			// in order to preserve this defaults
-			NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
-			// creates the defaults
-			defaults = new AnnotationOptions(DefaultOptions.INSTANCE, objectDefaults);
-		} else {
-			// no defaults has been set
-			// then a completely empty object as default
-			defaults = new AnnotationOptions();
-		}
-		// stores the defaults
-		AnnotationPlugin.get().setDefaults(defaults);
+		// loads defaults
+		AnnotationPlugin.get().loadDefaults(DEFAULTS_FACTORY);
 	}
 
 }

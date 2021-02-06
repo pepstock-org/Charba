@@ -17,11 +17,14 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -135,11 +138,25 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		// then returns null
 		return null;
 	}
-	
+
+	/**
+	 * This is invoked before storing the plugins options as default.<br>
+	 * This is called set the options of plugin are stored as default, see {@link GlobalOptions#getPlugins()}.
+	 * 
+	 * @param envelop envelop needed to ensure that this public method can be called only by {@link GlobalOptions}
+	 */
+	public final void applyingDefaults(ChartEnvelop<String> envelop) {
+		// checks if envelop id consistent
+		if (IsEnvelop.isValid(envelop)) {
+			// invokes the apply default method of the options.
+			applyingDefaults();
+		}
+	}
+
 	/**
 	 * This is invoked before storing the plugins options as default.
 	 */
-	public void applyingDefaults() {
+	protected void applyingDefaults() {
 		// do nothing
 	}
 
@@ -190,6 +207,15 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 			// stores itself into dataset
 			dataset.setOptions(this);
 		}
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return super.getNativeObject();
 	}
 
 }

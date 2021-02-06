@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -194,14 +193,11 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
+	 * @see org.pepstock.charba.client.datalabels.LabelItem#applyingDefaults()
 	 */
 	@Override
-	public void applyingDefaults() {
-		// gets defaults
-		DataLabelsOptions defaults = DataLabelsPlugin.get().getDefaults();
-		// merges the original defaults on this object
-		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
+	protected void applyingDefaults() {
+		DataLabelsPlugin.get().mergeDefaults(this);
 	}
 
 	/**
@@ -212,15 +208,6 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	@Override
 	public Labels getLabels() {
 		return labels;
-	}
-
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
 	}
 
 }

@@ -18,10 +18,9 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFactory;
@@ -34,7 +33,7 @@ import org.pepstock.charba.client.zoom.ZoomOptionsFactory.ZoomDefaultsOptionsFac
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomPlugin {
+public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 
 	/**
 	 * Plugin ID <b>"zoom"</b>.
@@ -53,8 +52,6 @@ public final class ZoomPlugin {
 	private static final ZoomPluginHammerResource RESOURCE_HAMMER = new ZoomPluginHammerResource();
 	// singleton instance
 	private static final ZoomPlugin INSTANCE = new ZoomPlugin();
-	// original defaults
-	private ZoomOptions defaults = null;
 
 	/**
 	 * To avoid any instantiation
@@ -62,7 +59,7 @@ public final class ZoomPlugin {
 	private ZoomPlugin() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance.
 	 * 
@@ -73,21 +70,12 @@ public final class ZoomPlugin {
 	}
 
 	/**
-	 * Returns the original defaults of plugin.
+	 * Merges the original defaults of plugin to the options of plugin.
 	 * 
-	 * @return the original defaults of plugin
+	 * @param options the options of plugin where to apply the defaults
 	 */
-	ZoomOptions getDefaults() {
-		return defaults;
-	}
-
-	/**
-	 * Sets the original defaults of plugin.
-	 * 
-	 * @param defaults the original defaults of plugin
-	 */
-	void setDefaults(ZoomOptions defaults) {
-		this.defaults = defaults;
+	void mergeDefaults(ZoomOptions options) {
+		super.applyingDefaults(options);
 	}
 
 	/**
@@ -124,26 +112,8 @@ public final class ZoomPlugin {
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
-		// ------------------------------------
-		// RETRIEVE defaults set by plugin OOTB
-		// ------------------------------------
-		ZoomOptions defaults;
-		// checks if there is an options
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
-			// gets the original defaults
-			ZoomOptions originalDefaults = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
-			// clones the native object
-			// in order to preserve this defaults
-			NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
-			// creates the defaults
-			defaults = new ZoomOptions(DefaultOptions.INSTANCE, objectDefaults);
-		} else {
-			// no defaults has been set
-			// then a completely empty object as default
-			defaults = new ZoomOptions();
-		}
-		// stores the defaults
-		ZoomPlugin.get().setDefaults(defaults);
+		// loads defaults
+		ZoomPlugin.get().loadDefaults(DEFAULTS_FACTORY);
 	}
 
 	/**

@@ -16,10 +16,9 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
+import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsPlugin {
+public final class DataLabelsPlugin extends AbstractExtensionPlugin<DataLabelsOptions> {
 
 	/**
 	 * Plugin ID <b>"datalabels"</b>.
@@ -47,10 +46,6 @@ public final class DataLabelsPlugin {
 	private static final DataLabelsPluginResource RESOURCE = new DataLabelsPluginResource();
 	// singleton instance
 	private static final DataLabelsPlugin INSTANCE = new DataLabelsPlugin();
-	// original defaults
-	private DataLabelsOptions defaults = null;
-	// flag is the plugins has been registered
-	private boolean registered = false;
 
 	/**
 	 * To avoid any instantiation
@@ -69,39 +64,12 @@ public final class DataLabelsPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if the plugin has been already registered.
+	 * Merges the original defaults of plugin to the options of plugin.
 	 * 
-	 * @return <code>true</code> if the plugin has been already registered
+	 * @param options the options of plugin where to apply the defaults
 	 */
-	private boolean isRegistered() {
-		return registered;
-	}
-
-	/**
-	 * Sets <code>true</code> if the plugin has been already registered.
-	 * 
-	 * @param registered <code>true</code> if the plugin has been already registered
-	 */
-	private void setRegistered(boolean registered) {
-		this.registered = registered;
-	}
-
-	/**
-	 * Returns the original defaults of plugin.
-	 * 
-	 * @return the original defaults of plugin
-	 */
-	DataLabelsOptions getDefaults() {
-		return defaults;
-	}
-
-	/**
-	 * Sets the original defaults of plugin.
-	 * 
-	 * @param defaults the original defaults of plugin
-	 */
-	void setDefaults(DataLabelsOptions defaults) {
-		this.defaults = defaults;
+	void mergeDefaults(DataLabelsOptions options) {
+		super.applyingDefaults(options);
 	}
 
 	/**
@@ -123,33 +91,15 @@ public final class DataLabelsPlugin {
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
+		// stored the current status
+		boolean isRegistered = DataLabelsPlugin.get().isRegistered();
+		// loads defaults
+		DataLabelsPlugin.get().loadDefaults(DEFAULTS_FACTORY);
 		// checks if plugin has been registered
-		if (!DataLabelsPlugin.get().isRegistered()) {
+		if (!isRegistered) {
 			// registers the plugin
 			// because this plugin does not have the auto registration anymore
 			JsDataLabelsHelper.get().register();
-			// sets the flag
-			DataLabelsPlugin.get().setRegistered(true);
-			// ------------------------------------
-			// RETRIEVE defaults set by plugin OOTB
-			// ------------------------------------
-			DataLabelsOptions defaults;
-			// checks if there is an options
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
-				// gets the original defaults
-				DataLabelsOptions originalDefaults = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
-				// clones the native object
-				// in order to preserve this defaults
-				NativeObject objectDefaults = Helpers.get().clone(originalDefaults.nativeObject());
-				// creates the defaults
-				defaults = new DataLabelsOptions(DefaultOptions.INSTANCE, objectDefaults);
-			} else {
-				// no defaults has been set
-				// then a completely empty object as default
-				defaults = new DataLabelsOptions();
-			}
-			// stores the defaults
-			DataLabelsPlugin.get().setDefaults(defaults);
 		}
 	}
 

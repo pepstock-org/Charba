@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -123,11 +122,8 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#applyingDefaults()
 	 */
 	@Override
-	public void applyingDefaults() {
-		// gets defaults
-		ZoomOptions defaults = ZoomPlugin.get().getDefaults();
-		// merges the original defaults on this object
-		Helpers.get().mergeIf(getNativeObject(), defaults.getNativeObject());
+	protected void applyingDefaults() {
+		ZoomPlugin.get().mergeDefaults(this);
 	}
 
 	/**
@@ -148,15 +144,6 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	@Override
 	public Zoom getZoom() {
 		return zoom;
-	}
-
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
 	}
 
 }
