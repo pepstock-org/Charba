@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
@@ -41,14 +40,6 @@ public interface IsDefaultPlugins {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	boolean hasOptions(String pluginId);
-
-	/**
-	 * Returns the options type.
-	 * 
-	 * @param pluginId plugin id.
-	 * @return the options type
-	 */
-	ObjectType getOptionsType(String pluginId);
 
 	/**
 	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.<br>

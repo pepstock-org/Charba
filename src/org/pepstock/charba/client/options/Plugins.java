@@ -269,18 +269,6 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	}
 
 	/**
-	 * Returns the options type.
-	 * 
-	 * @param pluginId plugin id.
-	 * @return the options type
-	 */
-	@Override
-	public final ObjectType getOptionsType(String pluginId) {
-		// if argument is a default plugin id, returns always undefined
-		return DefaultPluginId.is(pluginId) ? ObjectType.UNDEFINED : type(PluginIdChecker.key(pluginId));
-	}
-
-	/**
 	 * Returns the plugin options, if exist.<br>
 	 * It uses a factory instance to create a plugin options.<br>
 	 * If factory argument is not consistent, <code>null</code> is returned.

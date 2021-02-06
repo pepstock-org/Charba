@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -150,16 +149,6 @@ public class Plugins {
 	 */
 	public boolean hasOptions(String pluginId) {
 		return extendedOptions.getPlugins().hasOptions(pluginId);
-	}
-
-	/**
-	 * Returns the options type.
-	 * 
-	 * @param pluginId plugin id.
-	 * @return the options type
-	 */
-	public ObjectType getOptionsType(String pluginId) {
-		return extendedOptions.getPlugins().getOptionsType(pluginId);
 	}
 
 	/**

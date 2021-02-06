@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -56,16 +55,6 @@ public final class DefaultChartPlugins implements IsDefaultPlugins {
 	@Override
 	public boolean hasOptions(String pluginId) {
 		return plugins.hasOptions(pluginId);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsType(java.lang.String)
-	 */
-	@Override
-	public ObjectType getOptionsType(String pluginId) {
-		return plugins.getOptionsType(pluginId);
 	}
 
 	/*

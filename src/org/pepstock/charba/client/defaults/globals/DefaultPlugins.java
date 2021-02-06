@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
@@ -55,16 +54,6 @@ public final class DefaultPlugins implements IsDefaultPlugins {
 	@Override
 	public boolean hasOptions(String pluginId) {
 		return DEFAULT_HAS_OPTIONS;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPlugins#getOptionsType(java.lang.String)
-	 */
-	@Override
-	public ObjectType getOptionsType(String pluginId) {
-		return ObjectType.UNDEFINED;
 	}
 
 	/*
