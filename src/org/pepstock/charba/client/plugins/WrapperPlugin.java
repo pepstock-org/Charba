@@ -119,6 +119,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		BEFORE_DATASET_UPDATE("beforeDatasetUpdate"),
 		AFTER_DATASET_UPDATE("afterDatasetUpdate"),
 		// ---------------------------
+		// -- ELEMENTS UPDATE
+		// ---------------------------
+		BEFORE_ELEMENTS_UPDATE("beforeElementsUpdate"),
+		// ---------------------------
 		// -- LAYOUT
 		// ---------------------------
 		BEFORE_LAYOUT("beforeLayout"),
@@ -238,6 +242,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the afterDatasetUpdate function
 	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	// ---------------------------
+	// -- ELEMENTS UPDATE
+	// ---------------------------
+	// callback proxy to invoke the beforeElementsUpdate function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeElementsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
 	// -- LAYOUT
 	// ---------------------------
@@ -375,6 +384,11 @@ final class WrapperPlugin extends NativeObjectContainer {
 		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
 		afterDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		// ---------------------------
+		// -- ELEMENTS UPDATE
+		// ---------------------------
+		// invoke user method implementation
+		beforeElementsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeElementsUpdate(chart.getChart()));
 		// ---------------------------
 		// -- LAYOUT
 		// ---------------------------
@@ -634,6 +648,19 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterUpdate(chart, argument);
+		}
+	}
+	
+	/**
+	 * Called during the update process, before any chart elements have been created.
+	 * 
+	 * @param chart chart instance
+	 */
+	void onBeforeElementsUpdate(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// invokes the reset of plugin
+			delegation.onBeforeElementsUpdate(chart);
 		}
 	}
 

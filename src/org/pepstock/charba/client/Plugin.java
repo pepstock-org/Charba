@@ -87,7 +87,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
+	 * Called before updating 'chart'.<br>
+	 * If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument the argument passed for update
@@ -98,7 +99,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update has been previously cancelled.
+	 * Called after 'chart' has been updated and before rendering.<br>
+	 * Note that this hook will not be called if the chart update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument the argument passed for update
@@ -107,7 +109,16 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
+	 * Called during the update process, before any chart elements have been created.
+	 * 
+	 * @param chart the chart instance.
+	 */
+	default void onBeforeElementsUpdate(IsChart chart) {
+	}
+
+	/**
+	 * Called before laying out 'chart'.<br>
+	 * If any plugin returns <code>false</code>, the layout update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart layout.
@@ -117,7 +128,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been previously cancelled.
+	 * Called after the 'chart' has been layed out.<br>
+	 * Note that this hook will not be called if the layout update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
@@ -125,7 +137,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
+	 * Called before updating the 'chart' datasets.<br>
+	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument the argument passed for update
@@ -136,7 +149,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets have been updated.<br>
+	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument the argument passed for update
@@ -145,8 +159,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is
-	 * triggered.
+	 * Called before updating the 'chart' dataset at the given 'args.index'.<br>
+	 * If any plugin returns <code>false</code>, the datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -157,7 +171,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if the datasets update has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' has been updated.<br>
+	 * Note that this hook will not be called if the datasets update has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -166,7 +181,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
+	 * Called before rendering 'chart'. <br>
+	 * If any plugin returns <code>false</code>, the rendering is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart rendering.
@@ -176,7 +192,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the rendering has been previously cancelled.
+	 * Called after the 'chart' has been fully rendered (and animation completed).<br>
+	 * Note that this hook will not be called if the rendering has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
@@ -184,7 +201,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before drawing 'chart' at every animation frame. If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing 'chart' at every animation frame.<br>
+	 * If any plugin returns <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart drawing.
@@ -194,7 +212,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' has been drawn. Note that this hook will not be called if the drawing has been previously cancelled.
+	 * Called after the 'chart' has been drawn.<br>
+	 * Note that this hook will not be called if the drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
@@ -202,7 +221,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'chart' datasets. <br>
+	 * If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
@@ -212,7 +232,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has been previously cancelled.
+	 * Called after the 'chart' datasets have been drawn.<br>
+	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 */
@@ -220,8 +241,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any plugin returns <code>false</code>, the datasets drawing
-	 * is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order).<br>
+	 * If any plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -232,8 +253,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order). Note that this hook will not be called if the datasets
-	 * drawing has been previously cancelled.
+	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).<br>
+	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item the dataset item.
@@ -242,7 +263,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
+	 * Called before drawing the 'tooltip'.<br>
+	 * If any plugin returns <code>false</code>, the tooltip drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item The tooltip instance.
@@ -253,7 +275,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously cancelled.
+	 * Called after drawing the 'tooltip'.<br>
+	 * Note that this hook will not be called if the tooltip drawing has been previously cancelled.
 	 * 
 	 * @param chart the chart instance.
 	 * @param item The tooltip instance.
@@ -262,7 +285,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
+	 * Called before processing the specified 'event'.<br>
+	 * If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument instance which contains event context
@@ -273,7 +297,8 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously discarded.
+	 * Called after the 'event' has been consumed.<br>
+	 * Note that this hook will not be called if the 'event' has been previously discarded.
 	 * 
 	 * @param chart the chart instance.
 	 * @param argument instance which contains event context
