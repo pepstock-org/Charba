@@ -131,12 +131,39 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 				setValueAndAddToParent(pluginId, false);
 			} else if (DefaultPluginId.is(pluginId)) {
 				// if here, a default plugin is managing
-				// then removes the key
-				removeIfExists(pluginId);
+				// it should add again the previous configuration
+				reEnableDefaultPlugin(Key.getKeyByValue(DefaultPluginId.values(), pluginId.value()));
 			} else if (!isType(pluginId, ObjectType.OBJECT)) {
 				// if here, is not a default plugin and
 				// then sets an empty object to enable the plugin
 				setEmptyValue(pluginId);
+			}
+		}
+	}
+	
+	/**
+	 * Invoked to re-apply the default plugin configuration when the plugin was disable.
+	 * 
+	 * @param pluginId default plugin id
+	 */
+	private void reEnableDefaultPlugin(DefaultPluginId pluginId) {
+		// checks if the property is a boolean
+		// because it means it has been disable previously
+		if (isType(pluginId, ObjectType.BOOLEAN)) {
+			// checks which type of default plugin
+			// in order to store the configuration object of the plugin
+			if (DefaultPluginId.LEGEND.equals(pluginId)) {
+				// re-apply the legend to plugin
+				setValue(pluginId, getParent().getLegend());
+			} else if (DefaultPluginId.TITLE.equals(pluginId)) {
+				// re-apply the title to plugin
+				setValue(pluginId, getParent().getTitle());
+			} else if (DefaultPluginId.TOOLTIP.equals(pluginId)) {
+				// re-apply the tolltip to plugin
+				setValue(pluginId, getParent().getTooltips());
+			} else {
+				// removes key it exist
+				removeIfExists(pluginId);
 			}
 		}
 	}
