@@ -16,11 +16,8 @@
 package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
-import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -48,8 +45,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
-		BORDER_DASH("borderDash"),
-		BORDER_DASH_OFFSET("borderDashOffset"),
 		LABEL("label");
 
 		// name value of property
@@ -186,52 +181,6 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	@Override
 	public LineLabel getLabel() {
 		return label;
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	@Override
-	public List<Integer> getBorderDash() {
-		// checks if there is the property
-		if (has(Property.BORDER_DASH)) {
-			// gets the array
-			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-			// and transforms to a list
-			return ArrayListHelper.list(array);
-		}
-		// if here, the property is missing
-		return defaultValues.getBorderDash();
-	}
-
-	/**
-	 * Sets the line dash pattern offset.
-	 * 
-	 * @param borderDashOffset the line dash pattern offset.
-	 */
-	public void setBorderDashOffset(double borderDashOffset) {
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset.
-	 */
-	@Override
-	public double getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
 
 	/**

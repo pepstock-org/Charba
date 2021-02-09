@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -71,7 +74,25 @@ interface IsDefaultsAnnotation {
 	 * @return the width of the border in pixels.
 	 */
 	int getBorderWidth();
-	
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern
+	 */
+	default List<Integer> getBorderDash() {
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the line dash pattern offset.
+	 * 
+	 * @return the line dash pattern offset
+	 */
+	default double getBorderDashOffset() {
+		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();
+	}
+
 	/**
 	 * Returns the callback called when a "enter" event is occurring.
 	 * 
@@ -80,7 +101,7 @@ interface IsDefaultsAnnotation {
 	default EnterCallback getEnterCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called when a "leave" event is occurring.
 	 * 
@@ -98,7 +119,7 @@ interface IsDefaultsAnnotation {
 	default ClickCallback getClickCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called when a "dblclick" event is occurring.
 	 * 

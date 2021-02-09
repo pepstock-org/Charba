@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -56,24 +53,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 */
 	default IsScaleId getScaleID() {
 		return DefaultScaleId.Y;
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern
-	 */
-	default List<Integer> getBorderDash() {
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset
-	 */
-	default double getBorderDashOffset() {
-		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();
 	}
 
 	/**

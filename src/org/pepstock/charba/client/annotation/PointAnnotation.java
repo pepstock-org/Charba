@@ -172,7 +172,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		}
 	}
-	
+
 	/**
 	 * Sets the radius of the point shape.<br>
 	 * If set to 0, the point is not rendered.
@@ -192,7 +192,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public double getRadius() {
 		return getValue(Property.RADIUS, defaultValues.getRadius());
 	}
-	
+
 	/**
 	 * Sets the color of the background of annotation.
 	 * 
@@ -231,8 +231,6 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
-
-	
 	/**
 	 * Sets the ID of the Y scale to bind onto.
 	 * 
@@ -266,7 +264,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public IsScaleId getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
 	}
-	
+
 	/**
 	 * Sets the ID of the X scale to bind onto.
 	 * 

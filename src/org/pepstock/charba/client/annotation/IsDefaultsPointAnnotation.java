@@ -39,7 +39,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation {
 	default int getBorderWidth() {
 		return PointAnnotation.DEFAULT_BORDER_WIDTH;
 	}
-	
+
 	/**
 	 * Returns the color of the background of annotation.
 	 * 

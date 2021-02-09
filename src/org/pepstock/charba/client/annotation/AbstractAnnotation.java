@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
@@ -27,6 +28,8 @@ import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -73,7 +76,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		 */
 		void call(CallbackFunctionContext functionContext, NativeObject context);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback called to provide the display options for the annotation.
 	 * 
@@ -102,11 +105,13 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		DISPLAY("display"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset"),
 		// events properties
 		ENTER("enter"),
 		LEAVE("leave"),
 		CLICK("click"),
-		DOUBLE_CLICK("dblclick"), 
+		DOUBLE_CLICK("dblclick"),
 		// internal property to set an unique id for caching
 		CHARBA_ANNOTATION_ID("_charbaAnnotationId");
 
@@ -334,7 +339,53 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	public final void setBorderWidth(int borderWidth) {
 		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
-	
+
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	public void setBorderDash(int... borderDash) {
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	@Override
+	public List<Integer> getBorderDash() {
+		// checks if there is the property
+		if (has(Property.BORDER_DASH)) {
+			// gets the array
+			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+			// and transforms to a list
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is missing
+		return defaultValues.getBorderDash();
+	}
+
+	/**
+	 * Sets the line dash pattern offset.
+	 * 
+	 * @param borderDashOffset the line dash pattern offset.
+	 */
+	public void setBorderDashOffset(double borderDashOffset) {
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
+	}
+
+	/**
+	 * Returns the line dash pattern offset.
+	 * 
+	 * @return the line dash pattern offset.
+	 */
+	@Override
+	public double getBorderDashOffset() {
+		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
+	}
+
 	/**
 	 * Returns the callback called to set the display option at runtime.
 	 * 
