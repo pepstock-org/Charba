@@ -397,7 +397,6 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
    * remove `fireEventOnClearSelection` properties has been removed from DatasetsItemsSelectorOptions class because an clear selection event will fire only if there is a event handler. 
- * import **Datalabels plugin** from a [pepstock-org/chartjs-plugin-datalabels](https://github.com/pepstock-org/chartjs-plugin-datalabels) fork where the plugin has been changed in order to work with CHART.JS 3. This is a temporary solution waiting for the upgrade of the original plugin by the community.
  * implement **INTL NumberFormat** of [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
    * implement `CLocale` class to manage locale objects.
    * implement the retrieving of locale from query string, `<meta>` element (as GWT is doing) or from navigator instance.  

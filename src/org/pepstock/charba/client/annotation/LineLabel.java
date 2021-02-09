@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -112,18 +114,20 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	private enum Property implements Key
 	{
-		ENABLED("enabled"),
 		BACKGROUND_COLOR("backgroundColor"),
-		FONT("font"),
 		COLOR("color"),
+		CONTENT("content"),
+		CORNER_RADIUS("cornerRadius"),
+		ENABLED("enabled"),
+		HEIGHT("height"),
+		WIDTH("width"),
+		FONT("font"),
+		POSITION("position"),
+		ROTATION("rotation"),
 		X_PADDING("xPadding"),
 		Y_PADDING("yPadding"),
-		CORNER_RADIUS("cornerRadius"),
-		POSITION("position"),
 		X_ADJUST("xAdjust"),
-		Y_ADJUST("yAdjust"),
-		CONTENT("content"),
-		ROTATION("rotation");
+		Y_ADJUST("yAdjust");
 
 		// name value of property
 		private final String value;
@@ -472,15 +476,154 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 
 	/**
+	 * Sets the image to display in label.
+	 * 
+	 * @param content the image to display in label
+	 */
+	public void setContent(Img content) {
+		setValue(Property.CONTENT, content);
+	}
+
+	/**
+	 * Returns <code>true</code> if the content is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the content is set by an {@link Img}
+	 */
+	boolean isContentAsImage() {
+		return isType(Property.CONTENT, ObjectType.OBJECT);
+	}
+
+	/**
 	 * Returns the text to display in label as list.
 	 * 
 	 * @return the text to display in label as list
 	 */
 	public List<String> getContent() {
-		// reads as array
-		// and returns it
-		ArrayString array = getValueOrArray(Property.CONTENT, UndefinedValues.STRING);
-		return ArrayListHelper.list(array);
+		// checks if the context is a string
+		if (!isContentAsImage()) {
+			// reads as array
+			// and returns it
+			ArrayString array = getValueOrArray(Property.CONTENT, UndefinedValues.STRING);
+			return ArrayListHelper.list(array);
+		}
+		// if here the content is an image
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the text to display in label as list.
+	 * 
+	 * @return the text to display in label as list
+	 */
+	public Img getContentAsImage() {
+		// checks if the context is a image
+		if (isContentAsImage()) {
+			return getValue(Property.CONTENT, UndefinedValues.IMAGE_ELEMENT);
+		}
+		// if here, the content is not an image
+		// then returns the undefined image
+		return UndefinedValues.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Sets the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @param height the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	public void setHeight(int height) {
+		setValue(Property.HEIGHT, height);
+	}
+
+	/**
+	 * Sets the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @param heightPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	public void setHeight(String heightPercentage) {
+		setValue(Property.HEIGHT, heightPercentage);
+	}
+
+	/**
+	 * Returns the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	@Override
+	public int getHeight() {
+		// checks if the property is set as a number
+		if (isType(Property.HEIGHT, ObjectType.NUMBER)) {
+			return getValue(Property.HEIGHT, defaultValues.getHeight());
+		}
+		// if here is not a number then
+		// returns the default
+		return defaultValues.getHeight();
+	}
+
+	/**
+	 * Returns the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	@Override
+	public String getHeightAsString() {
+		// checks if the property is set as a string
+		if (isType(Property.HEIGHT, ObjectType.STRING)) {
+			return getValue(Property.HEIGHT, defaultValues.getHeightAsString());
+		}
+		// if here is not a string then
+		// returns the default
+		return defaultValues.getHeightAsString();
+	}
+
+	/**
+	 * Sets the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @param width the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	public void setWidth(int width) {
+		setValue(Property.WIDTH, width);
+	}
+
+	/**
+	 * Sets the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @param widthPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	public void setWidth(String widthPercentage) {
+		setValue(Property.WIDTH, widthPercentage);
+	}
+
+	/**
+	 * Returns the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	@Override
+	public int getWidth() {
+		// checks if the property is set as a number
+		if (isType(Property.WIDTH, ObjectType.NUMBER)) {
+			return getValue(Property.WIDTH, defaultValues.getWidth());
+		}
+		// if here is not a number then
+		// returns the default
+		return defaultValues.getWidth();
+	}
+
+	/**
+	 * Returns the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	@Override
+	public String getWidthAsString() {
+		// checks if the property is set as a string
+		if (isType(Property.WIDTH, ObjectType.STRING)) {
+			return getValue(Property.WIDTH, defaultValues.getWidthAsString());
+		}
+		// if here is not a string then
+		// returns the default
+		return defaultValues.getWidthAsString();
 	}
 
 }

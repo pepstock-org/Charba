@@ -17,6 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -134,4 +136,39 @@ interface IsDefaultsLineLabel {
 		return false;
 	}
 
+	/**
+	 * Returns the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	default int getHeight() {
+		return UndefinedValues.INTEGER;
+	}
+
+	/**
+	 * Returns the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	default String getHeightAsString() {
+		return null;
+	}
+
+	/**
+	 * Returns the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
+	 * 
+	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
+	 */
+	default int getWidth() {
+		return UndefinedValues.INTEGER;
+	}
+
+	/**
+	 * Returns the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	default String getWidthAsString() {
+		return null;
+	}
 }
