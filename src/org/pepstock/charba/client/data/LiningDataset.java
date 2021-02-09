@@ -275,54 +275,54 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBackgroundColorCallback, InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
+		this.pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBackgroundColorCallback, InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
 				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBorderColorCallback, InternalCanvasObjectProperty.POINT_BORDER_COLOR,
+		this.pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBorderColorCallback, InternalCanvasObjectProperty.POINT_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// gets value calling callback
-		pointBorderWidthCallbackProxy
+		this.pointBorderWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
+		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
 				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
-		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
+		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// gets value calling callback
-		pointHoverBorderWidthCallbackProxy
+		this.pointHoverBorderWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		this.pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// gets value calling callback
-		pointHitRadiusCallbackProxy
+		this.pointHitRadiusCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// gets value calling callback
-		pointHoverRadiusCallbackProxy
+		this.pointHoverRadiusCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// gets value calling callback
-		pointRotationCallbackProxy
+		this.pointRotationCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), borderCapStyleCallback));
+		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), borderCapStyleCallback));
 		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), borderDashCallback));
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), borderDashCallback));
 		// gets value calling callback
-		borderDashOffsetCallbackProxy
+		this.borderDashOffsetCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
-		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), borderJoinStyleCallback));
+		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), borderJoinStyleCallback));
 		// gets value calling callback
-		hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderCapStyleCallback));
+		this.hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderCapStyleCallback));
 		// gets value calling callback
-		hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashCallback));
+		this.hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashCallback));
 		// gets value calling callback
-		hoverBorderDashOffsetCallbackProxy
+		this.hoverBorderDashOffsetCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
-		hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderJoinStyleCallback));
+		this.hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderJoinStyleCallback));
 	}
 
 	/*

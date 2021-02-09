@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -78,5 +80,51 @@ public class Bar extends AbstractConfigurationElement {
 	public int getBorderRadius() {
 		return getOptions().getElements().getBar().getBorderRadius();
 	}
+	
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(PointStyle pointStyle) {
+		getOptions().getElements().getBar().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as image .
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(Img pointStyle) {
+		getOptions().getElements().getBar().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * 
+	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 */
+	public boolean isPointStyleAsImage() {
+		return getOptions().getElements().getBar().isPointStyleAsImage();
+	}
+
+	/**
+	 * Returns the style of the point.
+	 * 
+	 * @return the style of the point.
+	 */
+	public PointStyle getPointStyle() {
+		return getOptions().getElements().getBar().getPointStyle();
+	}
+
+	/**
+	 * Returns the style of the point as image.
+	 * 
+	 * @return the style of the point as image.
+	 */
+	public Img getPointStyleAsImage() {
+		return getOptions().getElements().getBar().getPointStyleAsImage();
+	}
+
 
 }

@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.enums.PointStyle;
 
 /**
  * CHART.JS default values for BAR element.
@@ -54,6 +56,30 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	@Override
 	public int getBorderRadius() {
 		return DEFAULT_BORDER_RADIUS;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
+	 */
+	@Override
+	public PointStyle getPointStyle() {
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 */
+	@Override
+	public boolean isPointStyleAsImage() {
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
+	 */
+	@Override
+	public Img getPointStyleAsImage() {
+		return null;
 	}
 
 }

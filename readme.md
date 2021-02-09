@@ -360,6 +360,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `tickWidth` property to `GridLines` configuration and options classes.
    * add `animate` property to `RadialAxis` configuration and `Scale` options classes.
    * add `onBeforeElementsUpdate` method to the `Plugin` interface.
+   * add `pointStyle` property to `Bar` element configuration and options classes.
+   * add `pointStyle` property to `BarDataset` class.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

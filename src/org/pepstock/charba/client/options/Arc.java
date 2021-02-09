@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
+public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 
 	/**
 	 * Name of properties of native object.

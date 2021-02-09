@@ -795,7 +795,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return UndefinedValues.DOUBLE;
 		}
 		// gets value as number
-		return getValue(CommonProperty.CLIP, Defaults.get().getGlobal().getElements().getLine().getBorderWidth() / 2D);
+		return getValue(CommonProperty.CLIP, UndefinedValues.DOUBLE);
 	}
 
 	/**

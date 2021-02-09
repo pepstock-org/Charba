@@ -25,6 +25,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BarBorderWidthCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -45,11 +46,13 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderItemType;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.BarDatasetOptionsHandler;
 import org.pepstock.charba.client.options.HasBarDatasetOptions;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -85,6 +88,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -94,6 +99,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private BarBorderWidthCallback hoverBorderWidthCallback = null;
 	// borderWidth callback instance
 	private BarBorderWidthCallback borderWidthCallback = null;
+	// point style callback instance
+	private PointStyleCallback pointStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -106,6 +113,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		BORDER_RADIUS("borderRadius"),
 		HOVER_BORDER_RADIUS("hoverBorderRadius"),
 		INDEX_AXIS("indexAxis"),
+		POINT_STYLE("pointStyle"),
 		// internal to map the border radius type
 		CHARBA_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
 		CHARBA_HOVER_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
@@ -210,6 +218,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
 		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		// gets value calling callback
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
 	}
 
 	/*
@@ -758,6 +768,60 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 	
+	/**
+	 * Sets the style of the point for legend.
+	 * 
+	 * @param pointStyle the style of the point for legend.
+	 */
+	public void setPointStyle(PointStyle pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback)null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Returns the style of the point for legend.
+	 * 
+	 * @return the style of the point for legend.
+	 */
+	public PointStyle getPointStyle() {
+		// checks if string as point style has been used
+		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
+			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getElements().getBar().getPointStyle());
+		}
+		// if here, the point style is set as image
+		// then returns the default
+		return getDefaultValues().getElements().getBar().getPointStyle();
+	}
+
+	/**
+	 * Sets the style of the point for legend as image.
+	 * 
+	 * @param pointStyle the style of the point for legend as image.
+	 */
+	public void setPointStyle(Img pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback)null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Returns the style of the point for legend as image.
+	 * 
+	 * @return the style of the point for legend as image.
+	 */
+	public Img getPointStyleAsImage() {
+		// checks if image as point style has been used
+		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
+			return getValue(Property.POINT_STYLE, getDefaultValues().getElements().getBar().getPointStyleAsImage());
+		}
+		// if here, the point style is set as string
+		// then returns the default
+		return getDefaultValues().getElements().getBar().getPointStyleAsImage();
+	}
+	
 	// -----------------
 	// CALLBACKS
 	// -----------------
@@ -844,6 +908,33 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
 		setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	public PointStyleCallback getPointStyleCallback() {
+		return pointStyleCallback;
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+		// sets the callback
+		this.pointStyleCallback = pointStyleCallback;
+		// checks if callback is consistent
+		if (pointStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.POINT_STYLE, pointStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.POINT_STYLE);
+		}
 	}
 	
 	// ----------------------
@@ -1078,6 +1169,28 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			// resets the flag about border with type
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
+	}
+	
+	/**
+	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link PointStyle} or {@link Img}
+	 */
+	private Object onPointStyle(ScriptableContext context) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+		// checks result
+		if (result instanceof PointStyle) {
+			// is point style instance
+			PointStyle style = (PointStyle) result;
+			return style.value();
+		} else if (result instanceof Img) {
+			// is image element instance
+			return result;
+		}
+		// default result
+		return getDefaultValues().getElements().getBar().getPointStyle().value();
 	}
 
 }

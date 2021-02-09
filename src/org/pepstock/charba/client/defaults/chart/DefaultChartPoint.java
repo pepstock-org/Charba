@@ -80,7 +80,7 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPoint#getPointStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
 	 */
 	@Override
 	public PointStyle getPointStyle() {
