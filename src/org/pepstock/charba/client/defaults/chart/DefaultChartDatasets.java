@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
@@ -52,7 +54,7 @@ public final class DefaultChartDatasets implements IsDefaultDatasets {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#getBase()
 	 */
 	@Override
-	public double getBase() {
+	public List<Double> getBase() {
 		return datasets.getBase();
 	}
 

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
 
@@ -40,7 +42,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 	 * @param base base value for the bar in data units along the value axis.<br>
 	 *         If not set, defaults to the value axis base value
 	 */
-	default void setBase(double base) {
+	default void setBase(double... base) {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
 			getDatasetOptionsHandler().setBase(base);
@@ -55,7 +57,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 	 *         If not set, defaults to the value axis base value
 	 */
 	@Override
-	default double getBase() {
+	default List<Double> getBase() {
 		// checks if handler is consistent
 		if (getDatasetOptionsHandler() != null) {
 			return getDatasetOptionsHandler().getBase();

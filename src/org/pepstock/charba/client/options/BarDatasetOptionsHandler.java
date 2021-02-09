@@ -15,7 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -24,6 +28,7 @@ import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Manages the BAR dataset properties of options in order to use the same logic between datasets and options/configuration.
@@ -103,15 +108,8 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 * @param base base value for the bar in data units along the value axis.<br>
 	 *         If not set, defaults to the value axis base value
 	 */
-	void setBase(double base) {
-		// checks if is consistent value
-		if (!Double.isNaN(base)) {
-			setValueAndAddToParent(Property.BASE, base);
-		} else {
-			// if here the user wants to set the default then
-			// removes the property
-			removeIfExists(Property.BASE);
-		}
+	void setBase(double... base) {
+		setValueOrArrayAndAddToParent(Property.BASE, base);
 	}
 
 	/**
@@ -121,8 +119,9 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 * @return base value for the bar in data units along the value axis.<br>
 	 *         If not set, defaults to the value axis base value
 	 */
-	double getBase() {
-		return getValue(Property.BASE, getDefaultValues().getBase());
+	List<Double> getBase() {
+		ArrayDouble array = getValueOrArray(Property.BASE, UndefinedValues.DOUBLE);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
