@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.IsScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
+interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 
 	/*
 	 * (non-Javadoc)

@@ -22,8 +22,7 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin, using a cached to store it.<br>
- * <b>PAY ATTENTION</b>: this class is invoked ONLY for configuration.
+ * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin, using a cached to store it.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,8 +33,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 	private final Map<String, AbstractAnnotation> annotationsCache = new HashMap<>();
 
 	/**
-	 * Creates an empty object with the cache for the annotations.<br>
-	 * <b>PAY ATTENTION</b>: this constructor is used ONLY for configuration.
+	 * Creates an empty object with the cache for the annotations.
 	 */
 	AnnotationCachedMap() {
 		super();

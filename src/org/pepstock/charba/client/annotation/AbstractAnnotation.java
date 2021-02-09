@@ -206,7 +206,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Creates the object wrapping an existing native object. <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * Creates the object wrapping an existing native object.
 	 * 
 	 * @param nativeObject native object to wrap
 	 * @param defaultValues default options instance

@@ -30,7 +30,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation {
+public final class LineAnnotation extends AbstractXYAnnotation implements IsDefaultsLineAnnotation {
 
 	/**
 	 * Default line annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -153,14 +153,13 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	}
 
 	/**
-	 * Creates the object wrapping an existing native object.<br>
-	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * Creates the object wrapping an existing native object.
 	 * 
 	 * @param nativeObject native object to wrap
 	 * @param defaultValues default options instance
 	 */
 	LineAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
-		super(nativeObject, defaultValues);
+		super(AnnotationType.LINE, nativeObject, defaultValues);
 		// checks if default are of the right class
 		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
 			// casts and stores it

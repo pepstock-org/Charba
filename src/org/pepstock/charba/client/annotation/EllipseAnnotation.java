@@ -91,8 +91,7 @@ public final class EllipseAnnotation extends AbstractBoxAnnotation implements Is
 	}
 
 	/**
-	 * Creates the object wrapping an existing native object.<br>
-	 * <b>PAY ATTENTION</b>: this constructor is invoked from plugin before starting drawing and NOT for configuration.
+	 * Creates the object wrapping an existing native object.
 	 * 
 	 * @param nativeObject native object to wrap
 	 * @param defaultValues default options instance
