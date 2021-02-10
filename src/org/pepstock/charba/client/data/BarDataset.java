@@ -23,6 +23,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BarBorderWidthCallback;
+import org.pepstock.charba.client.callbacks.BaseCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
@@ -53,6 +54,7 @@ import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.BarDatasetOptionsHandler;
 import org.pepstock.charba.client.options.HasBarDatasetOptions;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -90,6 +92,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -101,12 +105,15 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private BarBorderWidthCallback borderWidthCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
+	// base callback instance
+	private BaseCallback baseCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		BASE("base"),
 		X_AXIS_ID("xAxisID"),
 		Y_AXIS_ID("yAxisID"),
 		BORDER_SKIPPED("borderSkipped"),
@@ -220,6 +227,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
 		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
+		// gets value calling callback
+		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), baseCallback, UndefinedValues.DOUBLE).doubleValue());
 	}
 
 	/*
@@ -275,6 +284,40 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	// -----------------
 	// PROPERTIES
 	// -----------------
+
+	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *            If not set, defaults to the value axis base value
+	 */
+	public void setBase(double... base) {
+		// resets callback if exist
+		setBase((BaseCallback) null);
+		// stores values
+		setValueOrArrayAndAddToParent(Property.BASE, base);
+	}
+
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	public List<Double> getBase() {
+		// checks if there is the callback
+		if (!isType(Property.BASE, ObjectType.FUNCTION) && getBaseCallback() == null) {
+			// is not a function therefore
+			// the property is an array or number
+			ArrayDouble array = getValueOrArray(Property.BASE, UndefinedValues.DOUBLE);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is missing
+		// then returns an empty list
+		return Collections.emptyList();
+	}
 
 	/**
 	 * Returns the label for the dataset which appears in the legend and tooltips.
@@ -934,6 +977,33 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_STYLE);
+		}
+	}
+
+	/**
+	 * Returns the base callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the base callback, if set, otherwise <code>null</code>.
+	 */
+	public BaseCallback getBaseCallback() {
+		return baseCallback;
+	}
+
+	/**
+	 * Sets the base callback.
+	 * 
+	 * @param baseCallback the base callback.
+	 */
+	public void setBase(BaseCallback baseCallback) {
+		// sets the callback
+		this.baseCallback = baseCallback;
+		// checks if callback is consistent
+		if (baseCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BASE, baseCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BASE);
 		}
 	}
 

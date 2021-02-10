@@ -15,11 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.List;
-
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -28,7 +24,6 @@ import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Manages the BAR dataset properties of options in order to use the same logic between datasets and options/configuration.
@@ -48,7 +43,6 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	protected enum Property implements Key
 	{
-		BASE("base"),
 		BAR_PERCENTAGE("barPercentage"),
 		CATEGORY_PERCENTAGE("categoryPercentage"),
 		BAR_THICKNESS("barThickness"),
@@ -99,29 +93,6 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
-	}
-
-	/**
-	 * Sets the base value for the bar in data units along the value axis.<br>
-	 * If not set, defaults to the value axis base value.
-	 * 
-	 * @param base base value for the bar in data units along the value axis.<br>
-	 *            If not set, defaults to the value axis base value
-	 */
-	void setBase(double... base) {
-		setValueOrArrayAndAddToParent(Property.BASE, base);
-	}
-
-	/**
-	 * Returns the base value for the bar in data units along the value axis.<br>
-	 * If not set, defaults to the value axis base value.
-	 * 
-	 * @return base value for the bar in data units along the value axis.<br>
-	 *         If not set, defaults to the value axis base value
-	 */
-	List<Double> getBase() {
-		ArrayDouble array = getValueOrArray(Property.BASE, UndefinedValues.DOUBLE);
-		return ArrayListHelper.list(array);
 	}
 
 	/**

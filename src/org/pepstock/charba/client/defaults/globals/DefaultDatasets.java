@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
@@ -75,16 +72,6 @@ public final class DefaultDatasets implements IsDefaultDatasets {
 	@Override
 	public IsDefaultAnimation getAnimation() {
 		return animation;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#getBase()
-	 */
-	@Override
-	public List<Double> getBase() {
-		return Collections.emptyList();
 	}
 
 	/*

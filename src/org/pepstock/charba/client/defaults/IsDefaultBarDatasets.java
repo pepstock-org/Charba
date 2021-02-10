@@ -15,23 +15,12 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
-
 /**
  * Interface to define BAR datasets object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultBarDatasets {
-
-	/**
-	 * Returns the list of the base values for the bar in data units along the value axis.<br>
-	 * If not set, defaults to the value axis base value.
-	 * 
-	 * @return list of base values for the bar in data units along the value axis.<br>
-	 *         If not set, defaults to the value axis base value
-	 */
-	List<Double> getBase();
 
 	/**
 	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
