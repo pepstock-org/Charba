@@ -25,11 +25,11 @@ import java.util.List;
 public interface HasLabels {
 
 	/**
-	 * Returns an labels option manager instance.
+	 * Returns an labels option handler instance.
 	 * 
-	 * @return an labels option manager instance
+	 * @return an labels option handler instance
 	 */
-	Labeller getLabeller();
+	LabelsHandler getLabelsHandler();
 
 	/**
 	 * Sets the labels of the data.
@@ -65,9 +65,9 @@ public interface HasLabels {
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	default void setLabels(Labels labels) {
-		// checks if labeller is consistent
-		if (getLabeller() != null) {
-			getLabeller().setLabels(labels);
+		// checks if labels handler is consistent
+		if (getLabelsHandler() != null) {
+			getLabelsHandler().setLabels(labels);
 		}
 	}
 
@@ -87,11 +87,11 @@ public interface HasLabels {
 	 * @return the labels for axes
 	 */
 	default Labels getLabels(boolean binding) {
-		// checks if labeller is consistent
-		if (getLabeller() != null) {
-			return getLabeller().getLabels(binding);
+		// checks if labels handler is consistent
+		if (getLabelsHandler() != null) {
+			return getLabelsHandler().getLabels(binding);
 		}
-		// if here, labels option manager is  ot consistent
+		// if here, labels option manager is not consistent
 		// then returns an empty labels
 		return Labels.build();
 	}

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Labeller extends NativeObjectContainer {
+public final class LabelsHandler extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -66,7 +66,7 @@ public final class Labeller extends NativeObjectContainer {
 	 * 
 	 * @param envelop passed empty, which will contain an native array.
 	 */
-	public Labeller(OptionsEnvelop<NativeObject> envelop) {
+	public LabelsHandler(OptionsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -75,7 +75,7 @@ public final class Labeller extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object to update with options
 	 */
-	Labeller(NativeObject nativeObject) {
+	LabelsHandler(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

@@ -77,8 +77,8 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	// maintains the list of datasets because needs to preserve the dataset type
 	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
-	// instance of labels option manager
-	private final Labeller labeller;
+	// instance of labels option handler
+	private final LabelsHandler labelsHandler;
 	// flag to disable canvas object handler
 	private boolean canvasObjectHandling = true;
 
@@ -88,17 +88,17 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	public Data() {
 		// nothing
 		// creates the labels option manager
-		this.labeller = new Labeller(getNativeObject());
+		this.labelsHandler = new LabelsHandler(getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasLabels#getLabeller()
+	 * @see org.pepstock.charba.client.data.HasLabels#getLabelsHandler()
 	 */
 	@Override
-	public Labeller getLabeller() {
-		return labeller;
+	public LabelsHandler getLabelsHandler() {
+		return labelsHandler;
 	}
 
 	/**

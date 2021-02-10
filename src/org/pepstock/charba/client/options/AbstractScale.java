@@ -21,8 +21,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.HasLabels;
-import org.pepstock.charba.client.data.Labeller;
 import org.pepstock.charba.client.data.Labels;
+import org.pepstock.charba.client.data.LabelsHandler;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
@@ -61,8 +61,8 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 
 	private final Adapters adapters;
 
-	// instance of labels option manager
-	private final Labeller labeller;
+	// instance of labels option handler
+	private final LabelsHandler labelsHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -139,17 +139,17 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		this.time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
 		this.adapters = new Adapters(this, Property.ADAPTERS, getDefaultValues().getAdapters(), getValue(Property.ADAPTERS));
 		// creates labels option manager
-		this.labeller = new Labeller(new OptionsEnvelop<>(getNativeObject()));
+		this.labelsHandler = new LabelsHandler(new OptionsEnvelop<>(getNativeObject()));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasLabels#getLabeller()
+	 * @see org.pepstock.charba.client.data.HasLabels#getLabelsHandler()
 	 */
 	@Override
-	public final Labeller getLabeller() {
-		return labeller;
+	public final LabelsHandler getLabelsHandler() {
+		return labelsHandler;
 	}
 
 	/**
