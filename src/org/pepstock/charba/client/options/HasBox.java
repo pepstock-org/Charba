@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.defaults.IsDefaultBoxer;
+import org.pepstock.charba.client.defaults.IsDefaultBoxHandler;
 
 /**
  * Interface to map the text direction options.
@@ -24,14 +24,14 @@ import org.pepstock.charba.client.defaults.IsDefaultBoxer;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasBox extends IsDefaultBoxer {
+interface HasBox extends IsDefaultBoxHandler {
 
 	/**
-	 * Returns a boxer instance to use into default methods of this interface.
+	 * Returns a box handler instance to use into default methods of this interface.
 	 * 
-	 * @return a boxer instance
+	 * @return a box handler instance
 	 */
-	Boxer getBoxer();
+	BoxHandler getBoxHandler();
 
 	/**
 	 * Sets the width of colored box.
@@ -39,9 +39,9 @@ interface HasBox extends IsDefaultBoxer {
 	 * @param boxWidth width of colored box.
 	 */
 	default void setBoxWidth(int boxWidth) {
-		// checks if boxer is consistent
-		if (getBoxer() != null) {
-			getBoxer().setBoxWidth(boxWidth);
+		// checks if box handler is consistent
+		if (getBoxHandler() != null) {
+			getBoxHandler().setBoxWidth(boxWidth);
 		}
 	}
 
@@ -52,11 +52,11 @@ interface HasBox extends IsDefaultBoxer {
 	 */
 	@Override
 	default int getBoxWidth() {
-		// checks if boxer is consistent
-		if (getBoxer() != null) {
-			return getBoxer().getBoxWidth();
+		// checks if box handler is consistent
+		if (getBoxHandler() != null) {
+			return getBoxHandler().getBoxWidth();
 		}
-		// if here, boxer is not consistent
+		// if here, box handler is not consistent
 		// uses the default of tooltips
 		return Defaults.get().getGlobal().getTooltips().getBoxWidth();
 	}
@@ -67,9 +67,9 @@ interface HasBox extends IsDefaultBoxer {
 	 * @param boxHeight width of colored box.
 	 */
 	default void setBoxHeight(int boxHeight) {
-		// checks if boxer is consistent
-		if (getBoxer() != null) {
-			getBoxer().setBoxHeight(boxHeight);
+		// checks if box handler is consistent
+		if (getBoxHandler() != null) {
+			getBoxHandler().setBoxHeight(boxHeight);
 		}
 	}
 
@@ -80,11 +80,11 @@ interface HasBox extends IsDefaultBoxer {
 	 */
 	@Override
 	default int getBoxHeight() {
-		// checks if boxer is consistent
-		if (getBoxer() != null) {
-			return getBoxer().getBoxHeight();
+		// checks if box handler is consistent
+		if (getBoxHandler() != null) {
+			return getBoxHandler().getBoxHeight();
 		}
-		// if here, boxer is not consistent
+		// if here, box handler is not consistent
 		// uses the default of tooltips
 		return Defaults.get().getGlobal().getTooltips().getBoxHeight();
 	}

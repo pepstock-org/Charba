@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
-import org.pepstock.charba.client.defaults.IsDefaultBoxer;
+import org.pepstock.charba.client.defaults.IsDefaultBoxHandler;
 
 /**
  * Base object to map the box dimension options.
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBoxer;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class Boxer extends PropertyHandler<IsDefaultBoxer> {
+final class BoxHandler extends PropertyHandler<IsDefaultBoxHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -62,13 +62,13 @@ final class Boxer extends PropertyHandler<IsDefaultBoxer> {
 	}
 
 	/**
-	 * Creates a boxer with the native object where box dimension properties must be managed and the default value to use when the property does not exist.
+	 * Creates a box handler with the native object where box dimension properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the boxer.
+	 * @param parent model which contains the box handler.
 	 * @param defaultValues default value of box dimension to use when the properties do not exist
-	 * @param nativeObject native object where boxer properties must be managed
+	 * @param nativeObject native object where box handler properties must be managed
 	 */
-	Boxer(AbstractNode parent, IsDefaultBoxer defaultValues, NativeObject nativeObject) {
+	BoxHandler(AbstractNode parent, IsDefaultBoxHandler defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 

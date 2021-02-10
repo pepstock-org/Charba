@@ -60,8 +60,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 
 	// instance of font container
 	private final FontContainer fontContainer;
-	// instance of boxer
-	private final Boxer boxer;
+	// instance of box handler
+	private final BoxHandler boxHandler;
 	// instance of style of points manager
 	private final PointStyler pointStyler;
 
@@ -75,8 +75,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	LegendLabels(Legend legend, Key childKey, IsDefaultLegendLabels defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
-		// creates the boxer
-		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
+		// creates the box handler
+		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
 		// creates point styler
 		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
 		// creates font container
@@ -86,11 +86,11 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasBox#getBoxer()
+	 * @see org.pepstock.charba.client.options.HasBox#getBoxHandler()
 	 */
 	@Override
-	public Boxer getBoxer() {
-		return boxer;
+	public BoxHandler getBoxHandler() {
+		return boxHandler;
 	}
 
 	/*

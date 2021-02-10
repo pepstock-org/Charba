@@ -47,8 +47,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	private final Font bodyFont;
 	// instance of font for footer
 	private final Font footerFont;
-	// instance of boxer
-	private final Boxer boxer;
+	// instance of box handler
+	private final BoxHandler boxHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -132,18 +132,18 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		this.textDirectioner = new TextDirectioner(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
-		// creates the boxer
-		this.boxer = new Boxer(this, getDefaultValues(), getNativeObject());
+		// creates the box handler
+		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasBox#getBoxer()
+	 * @see org.pepstock.charba.client.options.HasBox#getBoxHandler()
 	 */
 	@Override
-	public Boxer getBoxer() {
-		return boxer;
+	public BoxHandler getBoxHandler() {
+		return boxHandler;
 	}
 
 	/**

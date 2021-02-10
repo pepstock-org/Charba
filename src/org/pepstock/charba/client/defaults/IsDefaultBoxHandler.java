@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultBoxer {
+public interface IsDefaultBoxHandler {
 
 	/**
 	 * Returns the width of colored box.
