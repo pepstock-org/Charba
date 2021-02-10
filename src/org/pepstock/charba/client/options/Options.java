@@ -160,8 +160,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final String scope;
 
-	// span gapper instance
-	private final SpanGapper spanGapper;
+	// span gap handler instance
+	private final SpanGapHandler spanGapHandler;
 	// animation container
 	private final AnimationContainer animationContainer;
 
@@ -198,8 +198,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
 		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
 		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
-		// sets span gapper
-		this.spanGapper = new SpanGapper(this, getDefaultValues(), getNativeObject());
+		// sets span gap handler
+		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
@@ -226,11 +226,11 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapper()
+	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapHandler()
 	 */
 	@Override
-	public final SpanGapper getSpanGapper() {
-		return spanGapper;
+	public final SpanGapHandler getSpanGapHandler() {
+		return spanGapHandler;
 	}
 
 	/**
@@ -800,7 +800,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	@Override
 	public boolean isSpanGaps() {
-		return spanGapper.isSpanGaps();
+		return spanGapHandler.isSpanGaps();
 	}
 
 }

@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SpanGapper extends PropertyHandler<IsDefaultOptions> {
+public final class SpanGapHandler extends PropertyHandler<IsDefaultOptions> {
 
 	/**
 	 * Name of properties of native object.
@@ -65,24 +65,24 @@ public final class SpanGapper extends PropertyHandler<IsDefaultOptions> {
 	}
 
 	/**
-	 * Creates a span gapper with the envelop of the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
+	 * Creates a span gap handler with the envelop of the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the span gapper.
+	 * @param parent model which contains the span gap handler.
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
 	 * @param envelop envelop of the native object where SPANGAPS property must be managed
 	 */
-	public SpanGapper(AbstractNode parent, IsDefaultOptions defaultValues, DataEnvelop<NativeObject> envelop) {
+	public SpanGapHandler(AbstractNode parent, IsDefaultOptions defaultValues, DataEnvelop<NativeObject> envelop) {
 		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates a span gapper with the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
+	 * Creates a span gap handler with the native object where SPANGAPS property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the span gapper.
+	 * @param parent model which contains the span gap handler.
 	 * @param defaultValues default value of SPANGAPS to use when the property does not exist
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 */
-	SpanGapper(AbstractNode parent, IsDefaultOptions defaultValues, NativeObject nativeObject) {
+	SpanGapHandler(AbstractNode parent, IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 

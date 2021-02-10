@@ -59,7 +59,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
 import org.pepstock.charba.client.options.HasSpanGaps;
-import org.pepstock.charba.client.options.SpanGapper;
+import org.pepstock.charba.client.options.SpanGapHandler;
 
 /**
  * The chart allows a number of properties to be specified for each dataset.<br>
@@ -255,7 +255,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	// instance or orderer
 	private final Orderer orderer;
 	// span gapper instance
-	private final SpanGapper spanGapper;
+	private final SpanGapHandler spanGapper;
 
 	/**
 	 * Creates the dataset using a default and chart type related to the dataset.
@@ -270,7 +270,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
 		// sets span gapper
-		this.spanGapper = new SpanGapper(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
+		this.spanGapper = new SpanGapHandler(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -351,7 +351,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapper()
 	 */
 	@Override
-	public SpanGapper getSpanGapper() {
+	public SpanGapHandler getSpanGapHandler() {
 		return spanGapper;
 	}
 

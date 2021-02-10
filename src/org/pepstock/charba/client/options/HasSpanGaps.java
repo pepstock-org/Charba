@@ -28,11 +28,11 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public interface HasSpanGaps {
 
 	/**
-	 * Returns a span gapper instance to use into default methods of this interface.
+	 * Returns a span gap handler instance to use into default methods of this interface.
 	 * 
-	 * @return a span gapper instance
+	 * @return a span gap handler instance
 	 */
-	SpanGapper getSpanGapper();
+	SpanGapHandler getSpanGapHandler();
 
 	/**
 	 * Sets if lines will be drawn between points with no or null data.<br>
@@ -42,9 +42,9 @@ public interface HasSpanGaps {
 	 *            If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
 	default void setSpanGaps(boolean spanGaps) {
-		// checks if gapper is consistent
-		if (getSpanGapper() != null) {
-			getSpanGapper().setSpanGaps(spanGaps);
+		// checks if gap handler is consistent
+		if (getSpanGapHandler() != null) {
+			getSpanGapHandler().setSpanGaps(spanGaps);
 		}
 	}
 
@@ -54,9 +54,9 @@ public interface HasSpanGaps {
 	 * @param spanGaps the value of the data if lines will be drawn between points with no or null data
 	 */
 	default void setSpanGaps(double spanGaps) {
-		// checks if gapper is consistent
-		if (getSpanGapper() != null) {
-			getSpanGapper().setSpanGaps(spanGaps);
+		// checks if gap handler is consistent
+		if (getSpanGapHandler() != null) {
+			getSpanGapHandler().setSpanGaps(spanGaps);
 		}
 	}
 
@@ -68,9 +68,9 @@ public interface HasSpanGaps {
 	 *         If <code>false</code>, points with {@link Double#NaN} data will create a break in the line
 	 */
 	default boolean isSpanGaps() {
-		// checks if gapper is consistent
-		if (getSpanGapper() != null) {
-			return getSpanGapper().isSpanGaps();
+		// checks if gap handler is consistent
+		if (getSpanGapHandler() != null) {
+			return getSpanGapHandler().isSpanGaps();
 		}
 		return DefaultsBuilder.get().getOptions().isSpanGaps();
 	}
@@ -81,9 +81,9 @@ public interface HasSpanGaps {
 	 * @return the value of the data if lines will be drawn between points with no or null data
 	 */
 	default double getSpanGaps() {
-		// checks if gapper is consistent
-		if (getSpanGapper() != null) {
-			return getSpanGapper().getSpanGaps();
+		// checks if gap handler is consistent
+		if (getSpanGapHandler() != null) {
+			return getSpanGapHandler().getSpanGaps();
 		}
 		return UndefinedValues.DOUBLE;
 	}
