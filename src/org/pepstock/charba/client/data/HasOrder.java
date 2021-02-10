@@ -23,11 +23,11 @@ package org.pepstock.charba.client.data;
 interface HasOrder {
 
 	/**
-	 * Returns an order option manager instance.
+	 * Returns an order option handler instance.
 	 * 
-	 * @return an order option manager instance
+	 * @return an order option handler instance
 	 */
-	Orderer getOrderer();
+	OrderHandler getOrderHandler();
 
 	/**
 	 * Sets the drawing order of dataset.<br>
@@ -36,9 +36,9 @@ interface HasOrder {
 	 * @param order the drawing order of dataset.
 	 */
 	default void setOrder(int order) {
-		// checks if orderer is consistent
-		if (getOrderer() != null) {
-			getOrderer().setOrder(order);
+		// checks if order handler is consistent
+		if (getOrderHandler() != null) {
+			getOrderHandler().setOrder(order);
 		}
 	}
 
@@ -49,13 +49,13 @@ interface HasOrder {
 	 * @return the drawing order of dataset
 	 */
 	default int getOrder() {
-		// checks if orderer is consistent
-		if (getOrderer() != null) {
-			return getOrderer().getOrder();
+		// checks if order handler is consistent
+		if (getOrderHandler() != null) {
+			return getOrderHandler().getOrder();
 		}
-		// if here, orderer is not consistent
+		// if here, order handler is not consistent
 		// then returns the default
-		return Orderer.DEFAULT_ORDER;
+		return OrderHandler.DEFAULT_ORDER;
 	}
 
 }

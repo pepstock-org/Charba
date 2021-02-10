@@ -144,8 +144,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 
 	}
 
-	// instance or orderer
-	private final Orderer orderer;
+	// instance or order handler
+	private final OrderHandler orderHandler;
 	// bar options handler instance
 	private final BarDatasetOptionsHandler barOptionsHandler;
 
@@ -205,8 +205,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	protected BarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// sets new orderer and options handler
-		this.orderer = new Orderer(getNativeObject());
+		// sets new order handler and options handler
+		this.orderHandler = new OrderHandler(getNativeObject());
 		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues().getDatasets(), new DataEnvelop<>(getNativeObject(), true));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -225,11 +225,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public Orderer getOrderer() {
-		return orderer;
+	public OrderHandler getOrderHandler() {
+		return orderHandler;
 	}
 
 	/*

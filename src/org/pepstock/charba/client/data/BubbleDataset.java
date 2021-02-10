@@ -105,8 +105,8 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 
 	}
 
-	// instance or orderer
-	private final Orderer orderer;
+	// instance or order handler
+	private final OrderHandler orderHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -164,8 +164,8 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	protected BubbleDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// sets new orderer
-		orderer = new Orderer(getNativeObject());
+		// sets new order handler
+		orderHandler = new OrderHandler(getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -194,11 +194,11 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public Orderer getOrderer() {
-		return orderer;
+	public OrderHandler getOrderHandler() {
+		return orderHandler;
 	}
 
 	/**

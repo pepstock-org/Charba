@@ -38,7 +38,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BorderAlignHandler extends NativeObjectContainer {
+final class BorderAlignHandler extends NativeObjectContainer {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

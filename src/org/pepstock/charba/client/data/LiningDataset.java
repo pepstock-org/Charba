@@ -252,10 +252,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	// instance of fill handler
 	private final LiningDatasetFillHandler fillHandler;
-	// instance or orderer
-	private final Orderer orderer;
-	// span gapper instance
-	private final SpanGapHandler spanGapper;
+	// instance or order handler
+	private final OrderHandler orderHandler;
+	// span gap handler instance
+	private final SpanGapHandler spanGapHandler;
 
 	/**
 	 * Creates the dataset using a default and chart type related to the dataset.
@@ -267,10 +267,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
 		fillHandler = new LiningDatasetFillHandler(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
-		// sets new orderer
-		orderer = new Orderer(getNativeObject());
-		// sets span gapper
-		this.spanGapper = new SpanGapHandler(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
+		// sets new order handler
+		orderHandler = new OrderHandler(getNativeObject());
+		// sets span gap handler
+		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -338,21 +338,21 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public Orderer getOrderer() {
-		return orderer;
+	public OrderHandler getOrderHandler() {
+		return orderHandler;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapper()
+	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapHandler()
 	 */
 	@Override
 	public SpanGapHandler getSpanGapHandler() {
-		return spanGapper;
+		return spanGapHandler;
 	}
 
 	/*

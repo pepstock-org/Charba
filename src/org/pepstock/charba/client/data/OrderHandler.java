@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  */
 
-public final class Orderer extends NativeObjectContainer {
+final class OrderHandler extends NativeObjectContainer {
 
 	// default for order property
 	static final int DEFAULT_ORDER = 0;
@@ -66,7 +66,7 @@ public final class Orderer extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object to update with options
 	 */
-	Orderer(NativeObject nativeObject) {
+	OrderHandler(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
