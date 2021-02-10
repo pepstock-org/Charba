@@ -30,11 +30,11 @@ import org.pepstock.charba.client.enums.BorderAlign;
 interface HasBorderAlign {
 
 	/**
-	 * Returns a border align manager instance.
+	 * Returns a border align handler instance.
 	 * 
-	 * @return a border align manager instance
+	 * @return a border align handler instance
 	 */
-	BorderAligner getBorderAligner();
+	BorderAlignHandler getBorderAlignHandler();
 
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
@@ -42,9 +42,9 @@ interface HasBorderAlign {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	default void setBorderAlign(BorderAlign... align) {
-		// checks if border aligner is consistent
-		if (getBorderAligner() != null) {
-			getBorderAligner().setBorderAlign(align);
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			getBorderAlignHandler().setBorderAlign(align);
 		}
 	}
 	
@@ -54,9 +54,9 @@ interface HasBorderAlign {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	default void setBorderAlign(List<BorderAlign> align) {
-		// checks if border aligner is consistent
-		if (getBorderAligner() != null) {
-			getBorderAligner().setBorderAlign(align);
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			getBorderAlignHandler().setBorderAlign(align);
 		}
 	}
 
@@ -66,11 +66,11 @@ interface HasBorderAlign {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	default List<BorderAlign> getBorderAlign() {
-		// checks if border aligner is consistent
-		if (getBorderAligner() != null) {
-			return getBorderAligner().getBorderAlign();
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			return getBorderAlignHandler().getBorderAlign();
 		}
-		// if here, border aligner is not consistent
+		// if here, border align handler is not consistent
 		// then returns the default
 		return Arrays.asList(Defaults.get().getGlobal().getElements().getArc().getBorderAlign());
 	}
@@ -81,11 +81,11 @@ interface HasBorderAlign {
 	 * @return the border align callback, if set, otherwise <code>null</code>.
 	 */
 	default BorderAlignCallback getBorderAlignCallback() {
-		// checks if border aligner is consistent
-		if (getBorderAligner() != null) {
-			return getBorderAligner().getBorderAlignCallback();
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			return getBorderAlignHandler().getBorderAlignCallback();
 		}
-		// if here, border aligner is not consistent
+		// if here, border align handler is not consistent
 		// then returns null
 		return null;
 	}
@@ -96,9 +96,9 @@ interface HasBorderAlign {
 	 * @param borderAlignCallback the border align callback to set
 	 */
 	default void setBorderAlign(BorderAlignCallback borderAlignCallback) {
-		// checks if border aligner is consistent
-		if (getBorderAligner() != null) {
-			getBorderAligner().setBorderAlign(borderAlignCallback);
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			getBorderAlignHandler().setBorderAlign(borderAlignCallback);
 		}
 	}
 }

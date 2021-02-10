@@ -26,8 +26,8 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  */
 public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 
-	// instance of border aligner
-	private final BorderAligner borderAligner;
+	// instance of border align handler
+	private final BorderAlignHandler borderAlignHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -85,17 +85,17 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 	 */
 	protected PolarAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// creates border aligner instance
-		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
+		// creates border align handler instance
+		this.borderAlignHandler = new BorderAlignHandler(getNativeObject(), getDefaultValues());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAligner()
+	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAlignHandler()
 	 */
 	@Override
-	public final BorderAligner getBorderAligner() {
-		return borderAligner;
+	public final BorderAlignHandler getBorderAlignHandler() {
+		return borderAlignHandler;
 	}
 }

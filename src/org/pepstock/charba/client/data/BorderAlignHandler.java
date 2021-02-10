@@ -38,7 +38,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BorderAligner extends NativeObjectContainer {
+public final class BorderAlignHandler extends NativeObjectContainer {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -88,7 +88,7 @@ public final class BorderAligner extends NativeObjectContainer {
 	 * @param nativeObject native object to update with options
 	 * @param defaultValues default options
 	 */
-	BorderAligner(NativeObject nativeObject, IsDefaultOptions defaultValues) {
+	BorderAlignHandler(NativeObject nativeObject, IsDefaultOptions defaultValues) {
 		super(nativeObject);
 		this.defaultValues = defaultValues;
 		// -------------------------------

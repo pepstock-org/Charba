@@ -84,8 +84,8 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 
 	}
 
-	// instance of border aligner
-	private final BorderAligner borderAligner;
+	// instance of border align handler
+	private final BorderAlignHandler borderAlignHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -143,8 +143,8 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 */
 	protected PieDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// creates border aligner instance
-		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
+		// creates border align handler instance
+		this.borderAlignHandler = new BorderAlignHandler(getNativeObject(), getDefaultValues());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -158,11 +158,11 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAligner()
+	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAlignHandler()
 	 */
 	@Override
-	public final BorderAligner getBorderAligner() {
-		return borderAligner;
+	public final BorderAlignHandler getBorderAlignHandler() {
+		return borderAlignHandler;
 	}
 
 	/**
