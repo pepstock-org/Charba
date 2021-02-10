@@ -514,7 +514,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the user callback that runs before/after of the update process.
 	 * 
@@ -699,7 +699,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			axisUpdateCallback.onAfterUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
-	
+
 	/**
 	 * Invokes BUILD TICKS axis callback.
 	 * 
@@ -712,7 +712,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getAxisBuildTicksCallback().onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
-	
+
 	/**
 	 * Invokes BUILD TICKS axis callback.
 	 * 

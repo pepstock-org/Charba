@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-// 
+//
 @JsType(isNative = true, name = NativeName.CHART_SCRIPTABLE_OPTIONS_CONTEXT, namespace = JsPackage.GLOBAL)
 final class NativeContext {
 
@@ -48,7 +48,7 @@ final class NativeContext {
 	 */
 	@JsProperty
 	native String getType();
-	
+
 	/**
 	 * Returns true if element is active (hovered).
 	 * 
@@ -64,7 +64,7 @@ final class NativeContext {
 	 */
 	@JsProperty
 	native int getDatasetIndex();
-	
+
 	/**
 	 * Returns the index of the current data.
 	 * 
@@ -104,7 +104,7 @@ final class NativeContext {
 	 */
 	@JsProperty
 	native NativeObject getTick();
-	
+
 	/**
 	 * Returns the index of the tick.
 	 * 

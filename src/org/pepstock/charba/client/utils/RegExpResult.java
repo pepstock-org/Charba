@@ -56,7 +56,7 @@ public final class RegExpResult extends Array {
 	 */
 	@JsProperty(name = "input")
 	public final native String input();
-	
+
 	/**
 	 * Returns the object to refer to certain token by string that a regular expression matches.
 	 * 
@@ -165,7 +165,7 @@ public final class RegExpResult extends Array {
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
 	native String pop();
-	
+
 	/**
 	 * Returns the object to refer to certain token by string that a regular expression matches.
 	 * 
@@ -174,7 +174,7 @@ public final class RegExpResult extends Array {
 	 * @return the object to refer to certain token by string that a regular expression matches
 	 */
 	@JsOverlay
-	public <T extends NativeObjectContainer> T groups(NativeObjectContainerFactory<T> factory){
+	public <T extends NativeObjectContainer> T groups(NativeObjectContainerFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// creates the object by the factory

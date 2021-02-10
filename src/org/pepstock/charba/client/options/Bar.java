@@ -59,7 +59,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 		}
 
 	}
-	
+
 	// instance of style of points handler
 	private final PointStyleHandler pointStyleHandler;
 
@@ -76,7 +76,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 		// creates point style handler
 		this.pointStyleHandler = new PointStyleHandler(this, getDefaultValues(), getNativeObject());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

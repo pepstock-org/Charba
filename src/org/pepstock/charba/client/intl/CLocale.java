@@ -97,7 +97,7 @@ public final class CLocale {
 	 * DOM element id for meta element where to set the GWT property
 	 */
 	private static final String GWT_PROPERTY_KEY = "gwt:property";
-	
+
 	// locale key constant to retrieve the default locale from platform
 	private static final Key LOCALE_KEY = Key.create(LOCALE_QUERY_STRING_PARAM_KEY);
 	// reference for default locale

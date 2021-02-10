@@ -32,7 +32,7 @@ public interface AxisBuildTicksCallback {
 	 * @param item axis item instance
 	 */
 	void onBeforeBuildTicks(Axis axis, AxisItem item);
-	
+
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
 	 * 

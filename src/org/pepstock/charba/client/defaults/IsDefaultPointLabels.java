@@ -20,8 +20,8 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPointLabels extends IsDefaultFontContainer{
-	
+public interface IsDefaultPointLabels extends IsDefaultFontContainer {
+
 	/**
 	 * Returns if the title is shown.
 	 * 

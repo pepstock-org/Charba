@@ -49,7 +49,7 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.
 	 * 
@@ -66,7 +66,7 @@ public final class JsHelper {
 		// if here the arguments are not consistent
 		return false;
 	}
-	
+
 	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.
 	 * 

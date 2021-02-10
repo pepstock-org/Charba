@@ -27,13 +27,12 @@ import org.pepstock.charba.client.IsChart;
  *
  */
 public final class LabelsOptionsBuilder {
-	
+
 	// maps with all labels builders
 	// K = label id, V = label builder
 	private final Map<String, LabelBuilder> labelBuilders = new HashMap<>();
 	// plugin options instance
 	private LabelsOptions options;
-	
 
 	/**
 	 * To avoid any instantiation
@@ -76,17 +75,17 @@ public final class LabelsOptionsBuilder {
 	/**
 	 * Returns new options builder for new label identified by id.
 	 * 
-	 * @param id id of the new label 
+	 * @param id id of the new label
 	 * @return new options builder for new label identified by id
 	 */
 	public LabelBuilder createLabel(String id) {
 		return createLabel(IsLabelId.create(id));
 	}
-	
+
 	/**
 	 * Returns new options builder for new label identified by id.
 	 * 
-	 * @param id id of the new label 
+	 * @param id id of the new label
 	 * @return new options builder for new label identified by id
 	 */
 	public LabelBuilder createLabel(IsLabelId id) {

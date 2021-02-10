@@ -28,67 +28,67 @@ public enum Calendar implements Key
 	/**
 	 * International key, to use for localization, for <b>buddhist</b> calendar.
 	 */
-	 BUDDHIST("buddhist"),
+	BUDDHIST("buddhist"),
 
 	/**
 	 * International key, to use for localization, for <b>chinese</b> calendar.
 	 */
-	 CHINESE("chinese"),
+	CHINESE("chinese"),
 
 	/**
 	 * International key, to use for localization, for <b>coptic</b> calendar.
 	 */
-	 COPTIC("coptic"),
+	COPTIC("coptic"),
 
 	/**
 	 * International key, to use for localization, for <b>ethiopia</b> calendar.
 	 */
-	 ETHIOPIA("ethiopia"),
+	ETHIOPIA("ethiopia"),
 
 	/**
 	 * International key, to use for localization, for <b>ethiopic</b> calendar.
 	 */
-	 ETHIOPIC("ethiopic"),
+	ETHIOPIC("ethiopic"),
 
 	/**
 	 * International key, to use for localization, for <b>gregory</b> calendar.
 	 */
-	 GREGORY("gregory"),
+	GREGORY("gregory"),
 
 	/**
 	 * International key, to use for localization, for <b>hebrew</b> calendar.
 	 */
-	 HEBREW("hebrew"),
+	HEBREW("hebrew"),
 
 	/**
 	 * International key, to use for localization, for <b>indian</b> calendar.
 	 */
-	 INDIAN("indian"),
+	INDIAN("indian"),
 
 	/**
 	 * International key, to use for localization, for <b>islamic</b> calendar.
 	 */
-	 ISLAMIC("islamic"),
+	ISLAMIC("islamic"),
 
 	/**
 	 * International key, to use for localization, for <b>iso8601</b> calendar.
 	 */
-	 ISO8601("iso8601"),
+	ISO8601("iso8601"),
 
 	/**
 	 * International key, to use for localization, for <b>japanese</b> calendar.
 	 */
-	 JAPANESE("japanese"),
+	JAPANESE("japanese"),
 
 	/**
 	 * International key, to use for localization, for <b>persian</b> calendar.
 	 */
-	 PERSIAN("persian"),
+	PERSIAN("persian"),
 
 	/**
 	 * International key, to use for localization, for <b>roc</b> calendar.
 	 */
-	 ROC("roc");
+	ROC("roc");
 
 	// name value of property
 	private final String value;

@@ -164,7 +164,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		 */
 		NativeObject call(CallbackFunctionContext context, NativeObject item);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback called to get the font color of render into chat.<br>
 	 * Must be an interface with only 1 method.
@@ -332,7 +332,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 
@@ -719,7 +719,6 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 			setValue(Property.FONT, font);
 		}
 	}
-	
 
 	/**
 	 * Returns the font color callback, if set, otherwise <code>null</code>.
@@ -795,7 +794,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// and plugin will apply the default chart font
 		return null;
 	}
-	
+
 	/**
 	 * Invokes the COLOR callback.
 	 * 
@@ -822,7 +821,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 				}
 			} else if (result instanceof String) {
 				// is string instance
-				return (String)result;
+				return (String) result;
 			}
 		}
 		// defaults returns null

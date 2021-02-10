@@ -58,7 +58,7 @@ public interface HasLabels {
 		// sets labels
 		setLabels(internalLabels);
 	}
-	
+
 	/**
 	 * Sets the labels of the data.
 	 * 

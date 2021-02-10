@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.HasLegendText;
  * This callback is used ONLY by {@link HtmlLegend} plugin.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of legend element which contains the text 
+ * @param <T> type of legend element which contains the text
  */
 public interface HtmlLegendCallback<T extends HasLegendText> {
 

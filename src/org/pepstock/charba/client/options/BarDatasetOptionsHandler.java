@@ -106,7 +106,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 * If not set, defaults to the value axis base value.
 	 * 
 	 * @param base base value for the bar in data units along the value axis.<br>
-	 *         If not set, defaults to the value axis base value
+	 *            If not set, defaults to the value axis base value
 	 */
 	void setBase(double... base) {
 		setValueOrArrayAndAddToParent(Property.BASE, base);

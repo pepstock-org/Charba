@@ -557,7 +557,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public CrossAlign getCrossAlign() {
 		return getValue(Property.CROSS_ALIGN, CrossAlign.values(), getDefaultValues().getCrossAlign());
 	}
-	
+
 	/**
 	 * Sets the text stroke color.
 	 * 

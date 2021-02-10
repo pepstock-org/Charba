@@ -39,7 +39,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  *
  */
 public final class LegendLabelItem extends LegendItem implements HasLegendText {
-	
+
 	/**
 	 * Public factory to create a legend labels item from a native object.
 	 */
@@ -342,7 +342,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 		private LegendLabelItemFactory() {
 			// do nothing
 		}
-		
+
 		/*
 		 * (non-Javadoc)
 		 * 

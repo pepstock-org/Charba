@@ -79,7 +79,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	final T getLabel() {
 		return label;
 	}
-	
+
 	/**
 	 * Sets the {@link DataLabelsPlugin#ID} label builder.
 	 * 

@@ -22,12 +22,12 @@ package org.pepstock.charba.client.datalabels;
  *
  */
 interface IsDefaultDataLabelsOptions extends IsDefaultDataLabelsItem {
-	
+
 	/**
 	 * Returns the labels element.
 	 * 
 	 * @return the labels element.
 	 */
 	IsDefaultLabels getLabels();
-	
+
 }

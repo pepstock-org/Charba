@@ -34,7 +34,8 @@ import jsinterop.annotations.JsType;
 final class NativeDate {
 
 	/**
-	 *Creates a JavaScript Date instance that represents a single moment in time in a platform-independent format.Date objects contain a Number that represents milliseconds since 1 January 1970 UTC.
+	 * Creates a JavaScript Date instance that represents a single moment in time in a platform-independent format.Date objects contain a Number that represents milliseconds since
+	 * 1 January 1970 UTC.
 	 * 
 	 * @param value a Number that represents milliseconds since 1 January 1970 UTC
 	 */
@@ -53,7 +54,7 @@ final class NativeDate {
 		// checks if date is consistent
 		if (date != null) {
 			// creates new date
-			return new NativeDate((double)date.getTime());
+			return new NativeDate((double) date.getTime());
 		}
 		// if here, the argument is not consistent
 		// then exception

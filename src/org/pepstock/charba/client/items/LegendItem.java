@@ -47,7 +47,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  */
 public class LegendItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Public factory to create a legend item from a native object.
 	 */
@@ -224,7 +224,7 @@ public class LegendItem extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns the fill style of the legend box as pattern.
 	 * 
@@ -302,7 +302,7 @@ public class LegendItem extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns the stroke style of the legend box as gradient.
 	 * 
@@ -336,7 +336,7 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns how the end points of every box border are drawn. 
+	 * Returns how the end points of every box border are drawn.
 	 * 
 	 * @return how the end points of every box border are drawn.
 	 */
@@ -445,7 +445,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
-		
+
 		/**
 		 * To avoid any instatiation
 		 */

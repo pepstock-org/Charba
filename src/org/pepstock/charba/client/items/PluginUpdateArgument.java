@@ -60,7 +60,7 @@ public class PluginUpdateArgument extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 

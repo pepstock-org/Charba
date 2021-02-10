@@ -374,7 +374,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getTitleFont() {
 		return titleFont;
 	}
-	
+
 	/**
 	 * Sets the title font color.
 	 * 
@@ -473,7 +473,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getBodyFont() {
 		return bodyFont;
 	}
-	
+
 	/**
 	 * Sets the body font color.
 	 * 
@@ -554,7 +554,7 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public Font getFooterFont() {
 		return footerFont;
 	}
-	
+
 	/**
 	 * Sets the footer font color.
 	 * 
@@ -590,7 +590,6 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	public IsColor getFooterColor() {
 		return ColorBuilder.parse(getFooterColorAsString());
 	}
-
 
 	/**
 	 * Sets the footer alignment.

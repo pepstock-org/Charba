@@ -38,7 +38,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	ScaleDateAdapter(Axis axis) {
 		super(axis);
 	}
-	
+
 	/**
 	 * Creates a {@link DateAdapter} using a clone of this object as options for the date adapter instance.
 	 * 
@@ -47,7 +47,7 @@ public final class ScaleDateAdapter extends AxisContainer {
 	public DateAdapter create() {
 		return getAxis().getScale().getAdapters().getDate().create();
 	}
-	
+
 	/**
 	 * Sets the locale that LUXON must use by the date adapter.<br>
 	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.

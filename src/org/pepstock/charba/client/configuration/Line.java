@@ -58,8 +58,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. 
-	 *  
+	 * Sets how the end points of every line are drawn.
+	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
@@ -125,7 +125,7 @@ public class Line extends AbstractConfigurationElement {
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
 	 * end points and control points are exactly at the same position, are skipped).
 	 * 
-	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getOptions().getElements().getLine().getBorderJoinStyle();

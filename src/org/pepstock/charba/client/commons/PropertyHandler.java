@@ -32,7 +32,7 @@ import org.pepstock.charba.client.dom.elements.Img;
  * @param <D> defaults interface type
  */
 public abstract class PropertyHandler<D> extends NativeObjectContainer {
-	
+
 	// fake instance to use when the parent, passed by constructor is not consistent
 	private static final DefaultAbstractNode FAKE_ABSTRACT_NODE = new DefaultAbstractNode();
 	// default values
@@ -72,7 +72,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	protected final AbstractNode getParent() {
 		return parent;
 	}
-	
+
 	/**
 	 * Sets a value (int) into embedded JavaScript object at specific property.
 	 * 
@@ -84,7 +84,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array or integer) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a integer.
@@ -97,7 +97,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (double) into embedded JavaScript object at specific property.
 	 * 
@@ -109,7 +109,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array or double) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a double.
@@ -122,7 +122,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (boolean) into embedded JavaScript object at specific property.
 	 * 
@@ -134,7 +134,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (string) into embedded JavaScript object at specific property.
 	 * 
@@ -146,7 +146,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array or string) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
@@ -159,7 +159,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (date) into embedded JavaScript object at specific property.
 	 * 
@@ -171,7 +171,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
 	 * 
@@ -183,7 +183,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by object container.
 	 * 
@@ -195,7 +195,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (array or native object container) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a native object container.
@@ -208,7 +208,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array from a container list) into embedded JavaScript object at specific property.
 	 * 
@@ -220,7 +220,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by array container.
 	 * 
@@ -232,7 +232,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array from a double array container list) into embedded JavaScript object at specific property.
 	 * 
@@ -244,7 +244,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
 	 * 
@@ -256,7 +256,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (image) into embedded JavaScript object at specific property.
 	 * 
@@ -268,7 +268,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (array or image) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a image.
@@ -281,7 +281,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (gradient) into embedded JavaScript object at specific property.
 	 * 
@@ -293,7 +293,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
@@ -306,7 +306,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (pattern) into embedded JavaScript object at specific property.
 	 * 
@@ -331,7 +331,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (EnumValue) into embedded JavaScript object at specific property.
 	 * 
@@ -344,7 +344,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
@@ -383,7 +383,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (chart) into embedded JavaScript object at specific property.
 	 * 
@@ -395,7 +395,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (event) into embedded JavaScript object at specific property.
 	 * 
@@ -407,7 +407,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * This is a special implementation of an {@link AbstractNode} when the passed one n the constructor is not consistent.<br>
 	 * It does nothing, only needed for check parent belonging.
@@ -423,7 +423,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		private DefaultAbstractNode() {
 			super(null);
 		}
-		
+
 	}
 
 }

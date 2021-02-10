@@ -104,7 +104,7 @@ public enum Id implements Key
 		// property doesn't exist
 		return UndefinedValues.INTEGER;
 	}
-	
+
 	/**
 	 * Returns the property value from java script object, when the ID is stored as string.
 	 * 

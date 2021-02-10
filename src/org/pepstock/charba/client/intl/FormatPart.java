@@ -37,7 +37,7 @@ public final class FormatPart extends NativeObjectContainer {
 	{
 		TYPE("type"),
 		VALUE("value");
-		
+
 		// name value of property
 		private final String value;
 

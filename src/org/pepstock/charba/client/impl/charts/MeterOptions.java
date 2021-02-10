@@ -222,6 +222,7 @@ public class MeterOptions extends AbstractPieOptions {
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
 		this.animatedDisplay = animatedDisplay;
 	}
+
 	/**
 	 * Returns the callback to customize the value string into chart.
 	 * 

@@ -304,7 +304,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public final Interaction getInteraction() {
 		return interaction;
 	}
-	
+
 	/**
 	 * Returns the layout element.
 	 * 

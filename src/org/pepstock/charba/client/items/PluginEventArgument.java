@@ -62,7 +62,7 @@ public final class PluginEventArgument extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	// instance of event context
 	private final ChartEventContext eventContext;
 

@@ -41,7 +41,7 @@ public enum MeasureUnitDisplay implements Key
 	 * Short representation of unit of measure without spaces (e.g., 16l).
 	 */
 	NARROW("narrow");
-	
+
 	// name value of property
 	private final String value;
 

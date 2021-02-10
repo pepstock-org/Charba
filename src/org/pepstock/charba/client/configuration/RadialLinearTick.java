@@ -34,7 +34,7 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  *
  */
 public class RadialLinearTick extends Tick implements IsLinearTick {
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -60,7 +60,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	{
 		BACKDROP_COLOR("backdropColor"),
 		SHOW_LABEL_BACKDROP("showLabelBackdrop");
-		
+
 		// name value of property
 		private final String value;
 
@@ -85,7 +85,6 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 
 	}
 
-	
 	/**
 	 * Builds the object storing the axis which this tick belongs to.
 	 * 
@@ -100,13 +99,13 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		backdropColorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
+		backdropColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
 		// gets value calling callback
-		showLabelBackdropCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+		showLabelBackdropCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -124,7 +123,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setBackdropColor(IsColor backdropColor) {
 		// reset callbacks
-		setBackdropColor((ScaleColorCallback)null);
+		setBackdropColor((ScaleColorCallback) null);
 		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
@@ -136,7 +135,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setBackdropColor(String backdropColor) {
 		// reset callbacks
-		setBackdropColor((ScaleColorCallback)null);
+		setBackdropColor((ScaleColorCallback) null);
 		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
@@ -202,7 +201,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
 		// reset callbacks
-		setShowLabelBackdrop((ScaleShowLabelBackdropCallback)null);
+		setShowLabelBackdrop((ScaleShowLabelBackdropCallback) null);
 		// stores values
 		getConfiguration().setShowLabelBackdrop(showLabelBackdrop);
 	}
@@ -233,7 +232,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public void setCallback(TickCallback callback) {
 		tickHandler.setCallback(callback);
 	}
-	
+
 	/**
 	 * Returns the backdrop color callback instance.
 	 * 
@@ -260,7 +259,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the show label backdrop callback instance.
 	 * 
@@ -287,6 +286,5 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, null);
 		}
 	}
-
 
 }

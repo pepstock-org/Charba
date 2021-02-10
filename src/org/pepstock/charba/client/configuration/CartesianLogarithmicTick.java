@@ -37,7 +37,7 @@ public class CartesianLogarithmicTick extends CartesianNumericTick {
 	CartesianLogarithmicTick(Axis axis) {
 		super(axis);
 		// creates handler and number format
-		this.tickHandler = new LinearTickHandler<>(axis, this);		
+		this.tickHandler = new LinearTickHandler<>(axis, this);
 	}
 
 	/**

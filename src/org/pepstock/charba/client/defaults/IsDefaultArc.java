@@ -45,7 +45,7 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * @return the arc angle to cover
 	 */
 	double getAngle();
-	
+
 	/**
 	 * Returns the arc offset (in pixels).
 	 * 

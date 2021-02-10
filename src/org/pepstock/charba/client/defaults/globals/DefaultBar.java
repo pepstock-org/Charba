@@ -58,7 +58,9 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 		return DEFAULT_BORDER_RADIUS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
 	 */
 	@Override
@@ -66,7 +68,9 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
 	 */
 	@Override
@@ -74,7 +78,9 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
 	 */
 	@Override

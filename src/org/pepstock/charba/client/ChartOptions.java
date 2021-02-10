@@ -82,7 +82,7 @@ public final class ChartOptions extends ScaledOptions {
 	NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
-	
+
 	/**
 	 * Creates a key for the chart options.<br>
 	 * The format is the following:<br>

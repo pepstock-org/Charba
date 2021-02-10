@@ -87,7 +87,7 @@ public final class Constants {
 	 * Constants for UNDERSCORE, <b>{@value}</b>.
 	 */
 	public static final String UNDERSCORE = "_";
-	
+
 	/**
 	 * Constants for MINUS, <b>{@value}</b>.
 	 */

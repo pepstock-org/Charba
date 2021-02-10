@@ -93,39 +93,39 @@ public enum FormatPartType implements Key
 	/**
 	 * The string used for the hour, for example "3" or "03".
 	 */
-	HOUR("hour"),  
+	HOUR("hour"),
 	/**
 	 * The string used for the minute, for example "00".
 	 */
-	MINUTE("minute"),  
+	MINUTE("minute"),
 	/**
 	 * The string used for the month, for example "12".
 	 */
-	MONTH("month"),  
+	MONTH("month"),
 	/**
 	 * The string used for the related 4-digit Gregorian year, in the event that the calendar's representation would be a yearName instead of a year, for example "2019".
 	 */
-	RELATED_YEAR("relatedYear"),  
+	RELATED_YEAR("relatedYear"),
 	/**
 	 * The string used for the second, for example "07" or "42".
 	 */
-	SECOND("second"),  
+	SECOND("second"),
 	/**
 	 * The string used for the name of the time zone, for example "UTC".
 	 */
-	TIME_ZONE_NAME("timeZoneName"),  
+	TIME_ZONE_NAME("timeZoneName"),
 	/**
 	 * The string used for the weekday, for example "M", "Monday", or "Montag".
 	 */
-	WEEK_DAY("weekday"),  
+	WEEK_DAY("weekday"),
 	/**
 	 * The string used for the year, for example "2012" or "96".
 	 */
-	YEAR("year"),  
+	YEAR("year"),
 	/**
 	 * The string used for the yearName in relevant contexts, for example "geng-zi"
 	 */
-	YEAR_NAME("yearName"),      
+	YEAR_NAME("yearName"),
 	/**
 	 * Unknown token.<br>
 	 * This is an add-on of <b>Charba</b> implementation.

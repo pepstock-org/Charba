@@ -37,7 +37,7 @@ final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	DefaultsFormatsOverrider(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Invokes after the initialization of date adapter in order to override default formats if needed.
 	 */

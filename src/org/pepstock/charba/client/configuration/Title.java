@@ -58,7 +58,7 @@ public class Title {
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 

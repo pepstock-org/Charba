@@ -109,7 +109,7 @@ public interface IsNumericAxis {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().getMax();
 	}
-	
+
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
 	 * 

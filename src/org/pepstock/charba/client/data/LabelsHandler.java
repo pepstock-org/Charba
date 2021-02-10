@@ -59,7 +59,7 @@ public final class LabelsHandler extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the utility using dataset native object.<br>
 	 * This is callable only from <code>options</code> package.

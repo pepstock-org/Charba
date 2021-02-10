@@ -51,7 +51,7 @@ final class NativeJsChartHelper {
 	 * @return an array of legend labels.
 	 */
 	static native ArrayObject generateDefaultLabels(Chart chart, NativeObject options);
-	
+
 	// -----------------
 	// EVENTS callback
 	// -----------------
@@ -77,5 +77,5 @@ final class NativeJsChartHelper {
 	 * @param items array of datasets native objects
 	 */
 	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeObject event, ArrayObject items);
-	
+
 }

@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAngleLines extends IsDefaultScaleLines{
+public interface IsDefaultAngleLines extends IsDefaultScaleLines {
 
 	/**
 	 * If true, angle lines are shown

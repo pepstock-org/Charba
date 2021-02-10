@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetReference extends NativeObjectContainer {
-	
+
 	/**
 	 * Public factory to create a dataset item from a native object.
 	 */
@@ -142,7 +142,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class DatasetReferenceItemFactory implements NativeObjectContainerFactory<DatasetReference> {
-		
+
 		/**
 		 * To avoid any instatiation
 		 */

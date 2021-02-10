@@ -31,15 +31,18 @@ import org.pepstock.charba.client.configuration.RadialAxis;
 public enum ScaleDataType
 {
 	/**
-	 * The data property is set as a double.<br>Used by {@link CartesianLinearAxis},{@link CartesianLogarithmicAxis} and {@link RadialAxis}.
+	 * The data property is set as a double.<br>
+	 * Used by {@link CartesianLinearAxis},{@link CartesianLogarithmicAxis} and {@link RadialAxis}.
 	 */
 	NUMBER,
 	/**
-	 * The data property is set as a date.<br>Used by {@link CartesianTimeAxis} and {@link CartesianTimeSeriesAxis}.
+	 * The data property is set as a date.<br>
+	 * Used by {@link CartesianTimeAxis} and {@link CartesianTimeSeriesAxis}.
 	 */
 	DATE,
 	/**
-	 * The data property is set as a string.<br>Used by {@link CartesianCategoryAxis}.
+	 * The data property is set as a string.<br>
+	 * Used by {@link CartesianCategoryAxis}.
 	 */
 	STRING;
 

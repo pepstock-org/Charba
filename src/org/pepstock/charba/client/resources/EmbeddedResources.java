@@ -51,7 +51,7 @@ public final class EmbeddedResources extends AbstractResources implements IsReso
 	private EmbeddedResources(boolean injectDateLibrary) {
 		super(injectDateLibrary);
 	}
-	
+
 	/**
 	 * Injects CHART.JS, date adapter and library if not already injected.
 	 */

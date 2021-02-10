@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  */
 public final class Labels extends AbstractElement implements IsDefaultLabels {
-	
+
 	private final IsDefaultDataLabelsOptions parent;
 
 	private final IsDefaultLabels defaultOptions;
@@ -53,7 +53,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 		// stores default
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 	}
-	
+
 	/**
 	 * Returns new options for specific id.
 	 * 
@@ -63,7 +63,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	public LabelItem createLabel(String id) {
 		return createLabel(IsDataLabelId.create(id));
 	}
-	
+
 	/**
 	 * Returns new options for specific id.
 	 * 
@@ -82,7 +82,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 			LabelItem item = new LabelItem(parent, null);
 			// stores the item
 			setValue(id, item);
-			// checks 
+			// checks
 			return item;
 		}
 	}
@@ -140,7 +140,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 		// checks if the label id exist
 		return has(id) || defaultOptions.hasLabel(id);
 	}
-	
+
 	/**
 	 * Removes an existing label for specific id.
 	 * 

@@ -21,7 +21,7 @@ package org.pepstock.charba.client.datalabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelItemBuilder extends AbstractBuilder<LabelItem>{
+public final class LabelItemBuilder extends AbstractBuilder<LabelItem> {
 
 	/**
 	 * Creates a label item builder with the instance to wrap.

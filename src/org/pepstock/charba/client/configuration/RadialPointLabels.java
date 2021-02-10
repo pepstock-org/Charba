@@ -86,7 +86,7 @@ public class RadialPointLabels extends AxisContainer {
 
 	// font instance
 	private final Font font;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -159,7 +159,7 @@ public class RadialPointLabels extends AxisContainer {
 		// otherwise returns null
 		return getFontCallback() == null ? font : null;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 
@@ -240,7 +240,7 @@ public class RadialPointLabels extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
@@ -267,7 +267,7 @@ public class RadialPointLabels extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -294,7 +294,7 @@ public class RadialPointLabels extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, null);
 		}
 	}
-	
+
 	/**
 	 * Returns a native object as font when the callback has been activated.
 	 * 
@@ -313,7 +313,7 @@ public class RadialPointLabels extends AxisContainer {
 		// default result
 		return getAxis().getScale().getPointLabels().getFont().createOptions().nativeObject();
 	}
-	
+
 	/**
 	 * Returns a string as color when the callback has been activated.
 	 * 
@@ -329,7 +329,7 @@ public class RadialPointLabels extends AxisContainer {
 		// checks if result is a string
 		if (result instanceof String) {
 			// returns result
-			return (String)result;
+			return (String) result;
 		}
 		// default result
 		return defaultColor;

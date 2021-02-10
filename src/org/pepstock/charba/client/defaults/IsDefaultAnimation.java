@@ -37,7 +37,7 @@ public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	boolean isAnimateScale();
-	
+
 	/**
 	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
 	 * 

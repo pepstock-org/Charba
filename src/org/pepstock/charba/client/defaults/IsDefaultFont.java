@@ -59,7 +59,7 @@ public interface IsDefaultFont {
 	 * @return the height of an individual line of text.
 	 */
 	double getLineHeight();
-	
+
 	/**
 	 * Returns the height of an individual line of text as string.
 	 * 

@@ -60,7 +60,7 @@ public enum AxisType implements Key
 
 	// default scale id
 	private final DefaultScaleId defaultScaleId;
-	
+
 	// data type of scale
 	private final ScaleDataType dataType;
 

@@ -24,12 +24,12 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Interface to map the locale item in order to get the name and search the items against the name instead of the value.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsLocaleItem extends Key{
-	
+public interface IsLocaleItem extends Key {
+
 	/**
 	 * Returns an unmodifiable list of items which are matching with the name passed as argument.
 	 * 
@@ -61,7 +61,7 @@ public interface IsLocaleItem extends Key{
 		// returns an unmodifiable list
 		return Collections.unmodifiableList(result);
 	}
-	
+
 	/**
 	 * Returns the name of the locale item.
 	 * 

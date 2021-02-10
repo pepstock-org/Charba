@@ -141,14 +141,14 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	private final CallbackProxy<ProxyTooltipsCallback> footerCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after footer function
 	private final CallbackProxy<ProxyTooltipsCallback> afterFooterCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// constant for an empty array string
-	private static final ArrayString EMPTY_ARRAY_STRING =ArrayString.fromOrEmpty(Collections.emptyList());
+	private static final ArrayString EMPTY_ARRAY_STRING = ArrayString.fromOrEmpty(Collections.emptyList());
 	// gets default label color
 	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
 	// gets default label color
 	private static final TooltipLabelPointStyle DEFAULT_LABEL_POINT_STYLE = new TooltipLabelPointStyle();
-	
+
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
@@ -516,7 +516,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// default result
 		return DEFAULT_LABEL_COLOR.getObject();
 	}
-	
+
 	/**
 	 * Manage the LABEL callback invocation
 	 * 

@@ -20,7 +20,7 @@ package org.pepstock.charba.client.datalabels;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsDefaultLabels {	
+interface IsDefaultLabels {
 
 	/**
 	 * Returns the stored options for specific key.

@@ -650,7 +650,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 			delegation.onAfterUpdate(chart, argument);
 		}
 	}
-	
+
 	/**
 	 * Called during the update process, before any chart elements have been created.
 	 * 

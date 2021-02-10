@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum SignDisplay implements Key
 {
-	
+
 	/**
 	 * To sign display for negative numbers only.
 	 */

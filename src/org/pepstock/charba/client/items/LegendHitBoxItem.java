@@ -26,10 +26,9 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  */
 public final class LegendHitBoxItem extends SizeItem {
-	
+
 	// static instance for the legend item hit box factory
 	static final LegendHitBoxItemFactory FACTORY = new LegendHitBoxItemFactory();
-
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.

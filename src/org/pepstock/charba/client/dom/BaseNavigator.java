@@ -46,7 +46,6 @@ public final class BaseNavigator {
 	@JsProperty
 	public final native String getLanguage();
 
-
 	/**
 	 * Returns the user agent string for the current browser.<br>
 	 * Browser identification based on detecting the user agent string is unreliable and is not recommended, as the user agent string is user configurable.

@@ -40,7 +40,7 @@ class BaseFormatOptions<D extends IsDefaultBaseFormatOptions> extends NativeObje
 	{
 		NUMBERING_SYSTEM("numberingSystem"),
 		LOCALE_MACTHER("localeMatcher");
-		
+
 		// name value of property
 		private final String value;
 

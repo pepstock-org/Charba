@@ -34,7 +34,7 @@ public final class DateTimeFormat extends AbstractFormat<DateTimeFormatWrapper, 
 	public DateTimeFormat() {
 		this(CLocale.getDefault());
 	}
-	
+
 	/**
 	 * Creates object that enable language sensitive date time formatting, using the locale options.
 	 * 

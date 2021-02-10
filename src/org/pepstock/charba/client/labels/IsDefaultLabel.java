@@ -56,7 +56,7 @@ interface IsDefaultLabel {
 	default boolean isShowZero() {
 		return Label.DEFAULT_SHOW_ZERO;
 	}
-	
+
 	/**
 	 * Returns the the font color.
 	 * 
@@ -65,7 +65,6 @@ interface IsDefaultLabel {
 	default String getColorAsString() {
 		return Defaults.get().getGlobal().getColorAsString();
 	}
-
 
 	/**
 	 * Returns the the font object.
@@ -192,7 +191,7 @@ interface IsDefaultLabel {
 	default FontCallback getFontCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the font color callback, if set, otherwise <code>null</code>.
 	 * 

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class NumberFormat extends AbstractFormat<NumberFormatWrapper, NumberFormatOptions, Double, IsDefaultNumberFormatOptions> {
-	
+
 	/**
 	 * Creates object that enable language sensitive number formatting, using the defualt locale.
 	 */

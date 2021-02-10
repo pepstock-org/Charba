@@ -76,7 +76,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	// default values instance
 	private final IsDefaultDateAdapterOptions defaultValues;
 
@@ -122,7 +122,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 		// gets the value stored as string
 		String value = getValue(Property.LOCALE, defaultLocale == null ? UndefinedValues.STRING : defaultLocale.getIdentifier());
 		// checks if value is consistent
-		// if default is null or 
+		// if default is null or
 		// the identifier is not equals to value
 		if (value != null && (defaultLocale == null || !defaultLocale.getIdentifier().equalsIgnoreCase(value))) {
 			// creates the locale
@@ -202,7 +202,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 	public NumberingSystem getNumberingSystem() {
 		return getValue(Property.NUMBERING_SYSTEM, NumberingSystem.values(), defaultValues.getNumberingSystem());
 	}
-	
+
 	/**
 	 * Creates a {@link DateAdapter} using a clone of this object as options for the date adapter instance.
 	 * 
@@ -229,7 +229,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 		private DateAdaptersOptionsFactory() {
 			// do nothing
 		}
-		
+
 		/*
 		 * (non-Javadoc)
 		 * 

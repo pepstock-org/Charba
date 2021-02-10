@@ -49,7 +49,7 @@ public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaul
 	 * @return legend will show datasets in reverse order.
 	 */
 	boolean isReverse();
-	
+
 	/**
 	 * Returns the maximum width of the legend, in pixels.
 	 * 

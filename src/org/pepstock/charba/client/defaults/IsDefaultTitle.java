@@ -20,8 +20,8 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontContainer{
-	
+public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontContainer {
+
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 

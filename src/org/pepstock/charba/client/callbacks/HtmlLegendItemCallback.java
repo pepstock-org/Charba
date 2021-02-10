@@ -24,6 +24,6 @@ import org.pepstock.charba.client.items.LegendLabelItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface HtmlLegendItemCallback extends HtmlLegendCallback<LegendLabelItem>{
+public interface HtmlLegendItemCallback extends HtmlLegendCallback<LegendLabelItem> {
 
 }

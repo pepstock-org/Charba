@@ -84,7 +84,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 
 	// mode callback
 	private static final CallbackPropertyHandler<ModeCallback> MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MODE);
-	
+
 	/**
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
@@ -195,7 +195,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @return the callback property handler for progress event
 	 */
 	abstract CallbackPropertyHandler<ProgressCallback> getProgessPropertyHandler();
-	
+
 	/**
 	 * Returns the callback property handler for complete event.
 	 * 

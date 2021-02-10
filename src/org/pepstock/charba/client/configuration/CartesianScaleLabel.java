@@ -52,7 +52,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 

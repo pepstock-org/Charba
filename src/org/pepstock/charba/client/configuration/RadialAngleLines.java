@@ -39,7 +39,7 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public class RadialAngleLines extends AbstractScaleLines {
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -79,7 +79,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 		}
 
 	}
-	
+
 	/**
 	 * Builds the object storing the axis which this angle lines belongs to.
 	 * 
@@ -117,7 +117,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setColor(IsColor color) {
 		// reset callback if there is
-		setColor((ScaleColorCallback)null);
+		setColor((ScaleColorCallback) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
@@ -129,7 +129,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setColor(String color) {
 		// reset callback if there is
-		setColor((ScaleColorCallback)null);
+		setColor((ScaleColorCallback) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
@@ -159,7 +159,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setLineWidth(int lineWidth) {
 		// reset callback if there is
-		setLineWidth((ScaleLineWidthCallback)null);
+		setLineWidth((ScaleLineWidthCallback) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setLineWidth(lineWidth);
 	}
@@ -180,7 +180,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setBorderDash(int... borderDash) {
 		// reset callback if there is
-		setBorderDash((ScaleBorderDashCallback)null);
+		setBorderDash((ScaleBorderDashCallback) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setBorderDash(borderDash);
 	}
@@ -201,7 +201,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
 		// reset callback if there is
-		setBorderDashOffset((ScaleBorderDashOffsetCallback)null);
+		setBorderDashOffset((ScaleBorderDashOffsetCallback) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setBorderDashOffset(borderDashOffset);
 	}
@@ -214,7 +214,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	public double getBorderDashOffset() {
 		return getAxis().getScale().getAngleLines().getBorderDashOffset();
 	}
-	
+
 	/**
 	 * Returns the border dash callback when element is hovered, if set, otherwise <code>null</code>.
 	 * 
@@ -241,7 +241,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, null);
 		}
 	}
-	
+
 	/**
 	 * Returns an array of integer when the callback has been activated.
 	 * 

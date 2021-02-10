@@ -54,7 +54,6 @@ public final class DefaultTitle implements IsDefaultTitle {
 		return font;
 	}
 
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -114,7 +113,7 @@ public final class DefaultTitle implements IsDefaultTitle {
 	public String getColorAsString() {
 		return Defaults.get().getGlobal().getColorAsString();
 	}
-	
+
 	/**
 	 * Internal class extending {@link DefaultFont} to override some defaults for title.
 	 * 

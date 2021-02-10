@@ -61,7 +61,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	private final LabelItem parent;
 	// parent instance
 	private final IsDefaultListeners defaultOptions;
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -83,7 +83,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new ScriptableContext(new DataLabelsEnvelop<>(context))));
 		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new ScriptableContext(new DataLabelsEnvelop<>(context))));
 	}
-	
+
 	/**
 	 * Returns the CLICK event (the mouse's primary button is pressed and released on a label) handler.
 	 * 

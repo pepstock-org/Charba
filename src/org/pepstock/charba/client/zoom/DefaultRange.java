@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultRange implements IsDefaultRange{
+final class DefaultRange implements IsDefaultRange {
 
 	/**
 	 * Creates an empty object.

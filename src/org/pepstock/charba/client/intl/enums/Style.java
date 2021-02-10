@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 /**
  * Enumerated the options in order to set the formatting style to use.<br>
  * The default is "decimal".
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

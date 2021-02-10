@@ -38,7 +38,7 @@ public final class BaseEventTypes {
 	/**
 	 * Mouse event {@value} type.
 	 */
-	public static final String DBL_CLICK = "dblclick";	
+	public static final String DBL_CLICK = "dblclick";
 	/**
 	 * Mouse event {@value} type.
 	 */

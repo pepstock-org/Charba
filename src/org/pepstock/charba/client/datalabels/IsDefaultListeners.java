@@ -30,7 +30,7 @@ import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
  *
  */
 interface IsDefaultListeners {
-	
+
 	/**
 	 * Returns the CLICK event (the mouse's primary button is pressed and released on a label) handler.
 	 * 

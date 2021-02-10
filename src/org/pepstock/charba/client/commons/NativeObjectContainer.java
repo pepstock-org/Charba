@@ -648,7 +648,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineObjectProperty(key.value(), value);
 		}
 	}
-	
+
 	/**
 	 * Sets a value (an empty JavaScript Object) into embedded JavaScript object at specific property.
 	 * 

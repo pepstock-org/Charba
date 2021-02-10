@@ -60,7 +60,7 @@ public final class DatasetPoint extends NativeObjectContainer {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the object with a native object passed as argument.
 	 * 

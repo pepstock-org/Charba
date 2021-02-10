@@ -404,16 +404,16 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// invokes the parent implementation
 		return super.getPosition().value();
 	}
-	
+
 	/**
 	 * Returns the value on the axis related to an event position.
-	 *  
-	 * @param event event instance used to get the value from the scale 
+	 * 
+	 * @param event event instance used to get the value from the scale
 	 * @return the value on the axis related to an event position
 	 */
 	public final ScaleValueItem getValueAtEvent(BaseNativeEvent event) {
 		// checks if argument is consistent
-		if (event != null){
+		if (event != null) {
 			// gets the pixel used for searching
 			// if the scale is horizontal then it uses layer X
 			// otherwise Y
@@ -424,16 +424,16 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// if here, event is not consistent
 		return null;
 	}
-	
+
 	/**
 	 * Returns the value on the axis related to a position, passed as pixels.
-	 *  
-	 * @param position position in pixel used to get the value from the scale 
+	 * 
+	 * @param position position in pixel used to get the value from the scale
 	 * @return the value on the axis related to a position, passed as pixels
 	 */
 	public final ScaleValueItem getValueAtPixel(double position) {
 		// checks if argument is consistent
-		if (!Double.isNaN(position)){
+		if (!Double.isNaN(position)) {
 			// gets the value on the axis at that pixel
 			double value = getValueForPixel(position);
 			// gets also the label of the value
@@ -448,7 +448,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			} else if (ScaleDataType.DATE.equals(getType().getDataType())) {
 				// if here, is a date
 				// creates the date object
-				ImmutableDate dateValue = Double.isNaN(value) ? null : new ImmutableDate((long)value);
+				ImmutableDate dateValue = Double.isNaN(value) ? null : new ImmutableDate((long) value);
 				result = new ScaleValueItem(dateValue, label);
 			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
 				// if here, is a string
@@ -464,7 +464,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// if here, event is not consistent
 		return null;
 	}
-	
+
 	/**
 	 * Used to get the data value from a given pixel.<br>
 	 * This is the inverse of getPixelForValue.<br>
@@ -531,7 +531,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final double getPixelForStringValue(String value, double index) {
 		return JsItemsHelper.get().getPixelForStringValue(this, value, index);
 	}
-	
+
 	/**
 	 * Returns the location of the given data point.<br>
 	 * The coordinate (0, 0) is at the upper-left corner of the canvas.
@@ -555,10 +555,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final double getPixelForDateValue(Date value, double index) {
 		// checks if date argument is consistent
 		if (value != null) {
-				return JsItemsHelper.get().getPixelForValue(this, value.getTime(), index);
+			return JsItemsHelper.get().getPixelForValue(this, value.getTime(), index);
 		}
 		// if here the argument is not consistent
-		return UndefinedValues.DOUBLE; 
+		return UndefinedValues.DOUBLE;
 	}
 
 	/**

@@ -216,7 +216,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the border width is defined as {@link BarBorderWidth}.
 	 * 
@@ -241,7 +241,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, the border width is a number or missing
 		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
 	}
-	
+
 	/**
 	 * Returns the border width of the dataset item in pixels as {@link BarBorderWidth}.
 	 *
@@ -386,7 +386,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), Defaults.get().getGlobal().getElements().getBar().getBorderSkipped());
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the border width is defined as {@link BarBorderRadius}.
 	 * 
@@ -411,7 +411,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, the border radius is a number or missing
 		return getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
-	
+
 	/**
 	 * Returns the border radius of the dataset item in pixels as {@link BarBorderRadius}.
 	 *
@@ -612,7 +612,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// then returns the default
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 	}
-	
+
 	/**
 	 * Create new {@link TooltipLabelPointStyle} filling it with point style and rotation of dataset element.
 	 * 

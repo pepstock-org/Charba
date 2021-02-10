@@ -241,7 +241,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public BarDatasetOptionsHandler getDatasetOptionsHandler() {
 		return barOptionsHandler;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -415,7 +415,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public List<BarBorderWidth> getBorderWidthAsObjects() {
 		return getBorderItemAsObjects(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BarBorderWidth.FACTORY, getDefaultBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the stroke width of the elements when hovered.
 	 * 
@@ -462,7 +462,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public List<BarBorderWidth> getHoverBorderWidthAsObjects() {
 		return getBorderItemAsObjects(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, BarBorderWidth.FACTORY, getDefaultBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
@@ -767,7 +767,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets data type checking if the key exists
 		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
-	
+
 	/**
 	 * Sets the style of the point for legend.
 	 * 
@@ -775,7 +775,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// reset callback
-		setPointStyle((PointStyleCallback)null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
@@ -802,7 +802,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// reset callback
-		setPointStyle((PointStyleCallback)null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
@@ -821,11 +821,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// then returns the default
 		return getDefaultValues().getElements().getBar().getPointStyleAsImage();
 	}
-	
+
 	// -----------------
 	// CALLBACKS
 	// -----------------
-	
+
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -846,7 +846,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if callback is consistent
 		setBorderItemCallback(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidthCallback, borderWidthCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -936,7 +936,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			remove(Property.POINT_STYLE);
 		}
 	}
-	
+
 	// ----------------------
 	// METHODS for JSFunction
 	// ----------------------
@@ -1032,7 +1032,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// if property does not exist means that the argument of this method is null
 		setValue(propertyType, has(property) ? BorderItemType.OBJECTS : BorderItemType.UNKNOWN);
 	}
-	
+
 	/**
 	 * Sets the bar border item size by a list of objects.
 	 * 
@@ -1170,7 +1170,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
 	}
-	
+
 	/**
 	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
 	 * 

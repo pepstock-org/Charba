@@ -50,7 +50,7 @@ import org.pepstock.charba.client.enums.Display;
  *
  */
 interface IsDefaultDataLabelsItem {
-	
+
 	/**
 	 * Returns the font element.
 	 * 
@@ -64,7 +64,7 @@ interface IsDefaultDataLabelsItem {
 	 * @return the padding element.
 	 */
 	IsDefaultPadding getPadding();
-	
+
 	/**
 	 * Returns the listeners element.
 	 * 
@@ -235,7 +235,7 @@ interface IsDefaultDataLabelsItem {
 	default String getTextShadowColorAsString() {
 		return getColorAsString();
 	}
-	
+
 	/**
 	 * Returns the background color callback.
 	 * 

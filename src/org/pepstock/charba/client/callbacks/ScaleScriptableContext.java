@@ -35,7 +35,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class ScaleScriptableContext extends AbstractScriptableContext {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -105,10 +105,10 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 		if (scale == null) {
 			// checks if the property exists
 			if (exist(Property.SCALE)) {
-				// stores scale 
+				// stores scale
 				this.scale = new ScaleItem(new CallbacksEnvelop<>(getContext().getScale(), true));
 			} else {
-				// stores an empty scale 
+				// stores an empty scale
 				this.scale = new ScaleItem(new CallbacksEnvelop<>(null, true));
 			}
 		}

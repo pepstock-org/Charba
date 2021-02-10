@@ -47,7 +47,7 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	public IsDefaultFont getFont() {
 		return title.getFont();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

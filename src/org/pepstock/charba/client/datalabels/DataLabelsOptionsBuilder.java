@@ -27,7 +27,7 @@ import org.pepstock.charba.client.IsChart;
  *
  */
 public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOptions> {
-	
+
 	// maps with all labels builders
 	// K = label item id, V = label item builder
 	private final Map<String, LabelItemBuilder> labelItemBuilders = new HashMap<>();
@@ -81,7 +81,7 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	public LabelItemBuilder createLabel(String id) {
 		return createLabel(IsDataLabelId.create(id));
 	}
-	
+
 	/**
 	 * Returns new options builder for new label identified by id.
 	 * 

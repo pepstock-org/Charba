@@ -24,8 +24,7 @@ package org.pepstock.charba.client.controllers;
  */
 final class ControllerTemplate {
 
-	private static final String[] CONTENT = { 
-			"class Charba{0} extends Chart.controllers.{1} {\n", "constructor(...args) {\n", "super(...args);\n", "}\n", "};\n", "Charba{0}.cloneDefaults = {2};\n",
+	private static final String[] CONTENT = { "class Charba{0} extends Chart.controllers.{1} {\n", "constructor(...args) {\n", "super(...args);\n", "}\n", "};\n", "Charba{0}.cloneDefaults = {2};\n",
 			"Charba{0}.prototype.checkAndGetWrapper = function(property){var delegated = CharbaJsControllerHelper.wrappers.{0};if (typeof delegated !== 'undefined' && typeof delegated[property] === 'function'){return delegated;}return null;};\n",
 			"Charba{0}.prototype.initialize = function() {var delegated = this.checkAndGetWrapper('initialize');if (delegated !== null){delegated.initialize.apply(this, arguments);} else {Chart.controllers.{1}.prototype.initialize.apply(this, arguments);}};\n",
 			"Charba{0}.prototype.addElements = function() {var delegated = this.checkAndGetWrapper('addElements');if (delegated !== null){delegated.addElements.apply(this, arguments);} else {Chart.controllers.{1}.prototype.addElements.apply(this, arguments);}};\n",

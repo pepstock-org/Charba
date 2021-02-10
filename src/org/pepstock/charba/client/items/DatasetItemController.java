@@ -94,7 +94,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the inner radius of dataset item in pixel.
 	 * 
-	 * @return the inner radius of dataset item in pixel. 
+	 * @return the inner radius of dataset item in pixel.
 	 */
 	public double getInnerRadius() {
 		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);

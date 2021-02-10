@@ -41,7 +41,7 @@ public interface IsDefaultOptions {
 	 * @return the hover defaults.
 	 */
 	IsDefaultInteraction getHover();
-	
+
 	/**
 	 * Returns the interaction defaults.
 	 * 
@@ -97,7 +97,7 @@ public interface IsDefaultOptions {
 	 * @return the plugins defaults.
 	 */
 	IsDefaultDatasets getDatasets();
-	
+
 	/**
 	 * Returns the browser events that the chart should listen to.
 	 * 
@@ -111,7 +111,7 @@ public interface IsDefaultOptions {
 	 * @return the locale instance
 	 */
 	CLocale getLocale();
-	
+
 	/**
 	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
 	 * 
@@ -155,14 +155,14 @@ public interface IsDefaultOptions {
 	 * @return color to use into chart.
 	 */
 	String getColorAsString();
-	
+
 	/**
 	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
 	 * @return background color to use into chart.
 	 */
 	String getBackgroundColorAsString();
-	
+
 	/**
 	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
@@ -218,7 +218,7 @@ public interface IsDefaultOptions {
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
-	
+
 	/**
 	 * Returns the base axis for the dataset, only for bar options.
 	 * 
@@ -229,7 +229,7 @@ public interface IsDefaultOptions {
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
-	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>. 
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 */
 	boolean isDrawOnAttach();
 

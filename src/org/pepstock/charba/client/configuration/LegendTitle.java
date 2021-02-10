@@ -66,7 +66,7 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> impleme
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 

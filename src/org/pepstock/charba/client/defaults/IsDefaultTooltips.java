@@ -74,7 +74,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return the title font.
 	 */
 	IsDefaultFont getTitleFont();
-	
+
 	/**
 	 * Returns the title font color as string.
 	 * 
@@ -109,7 +109,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return body line font.
 	 */
 	IsDefaultFont getBodyFont();
-	
+
 	/**
 	 * Returns the body font color as string.
 	 * 
@@ -137,7 +137,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return footer font.
 	 */
 	IsDefaultFont getFooterFont();
-	
+
 	/**
 	 * Returns the footer font color as string.
 	 * 
@@ -229,11 +229,12 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return size of the border.
 	 */
 	int getBorderWidth();
-	
+
 	/**
 	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
 	 * 
-	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight)
+	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and
+	 *         boxHeight)
 	 */
 	boolean isUsePointStyle();
 

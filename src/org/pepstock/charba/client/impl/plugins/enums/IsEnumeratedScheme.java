@@ -87,7 +87,7 @@ interface IsEnumeratedScheme extends ColorScheme {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * Creates a LINEAR gradient, with <code>topDown</code> orientation and <code>chart</code> scope.
 	 * 
@@ -145,6 +145,5 @@ interface IsEnumeratedScheme extends ColorScheme {
 		// creates a gradient and returns it
 		return builder.build();
 	}
-
 
 }

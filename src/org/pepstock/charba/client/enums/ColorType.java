@@ -32,8 +32,9 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum ColorType implements Key {
-	
+public enum ColorType implements Key
+{
+
 	/**
 	 * If the color property is stored by a string or {@link IsColor}.
 	 */

@@ -32,7 +32,8 @@ import org.pepstock.charba.client.intl.DateTimeFormatOptions;
  * <li>hour, minute
  * </ul>
  * Implementations may support other subsets, and requests will be negotiated against all available subset-representation combinations to find the best match.<br>
- * Two algorithms are available for this negotiation and selected by the {@link DateTimeFormatOptions#setFormatMatcher(org.pepstock.charba.client.intl.enums.FormatMatcher)} property.
+ * Two algorithms are available for this negotiation and selected by the {@link DateTimeFormatOptions#setFormatMatcher(org.pepstock.charba.client.intl.enums.FormatMatcher)}
+ * property.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -40,8 +41,7 @@ import org.pepstock.charba.client.intl.DateTimeFormatOptions;
 public enum FormatMatcher implements Key
 {
 	/**
-	 * Basic algorithm to get the format.
-	 * See <a href="http://www.ecma-international.org/ecma-402/1.0/#BasicFormatMatcher">Ecma specification</a> for more details.
+	 * Basic algorithm to get the format. See <a href="http://www.ecma-international.org/ecma-402/1.0/#BasicFormatMatcher">Ecma specification</a> for more details.
 	 */
 	BASIC("basic"),
 	/**

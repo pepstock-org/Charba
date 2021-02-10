@@ -33,7 +33,7 @@ public enum NumberItemStyle implements Key
 	 * 2 digits setting for item (e.g., 01).
 	 */
 	TWO_DIGITS("2-digit");
-	
+
 	// name value of property
 	private final String value;
 

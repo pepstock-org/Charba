@@ -165,7 +165,7 @@ abstract class CartesianTick extends Tick {
 	public int getSampleSize() {
 		return getConfiguration().getSampleSize();
 	}
-	
+
 	/**
 	 * Sets the tick alignment along the axis.
 	 * 
@@ -183,7 +183,7 @@ abstract class CartesianTick extends Tick {
 	public ElementAlign getAlign() {
 		return getConfiguration().getAlign();
 	}
-	
+
 	/**
 	 * Sets the tick alignment perpendicular to the axis.
 	 * 

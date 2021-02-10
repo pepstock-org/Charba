@@ -383,7 +383,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	public final int getId() {
 		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
 	 * 
@@ -1280,7 +1280,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
-	
+
 	/**
 	 * Creates a key for the dataset options.<br>
 	 * The format is the following:<br>
@@ -1298,8 +1298,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// formats teh key and returns it
 		return sb.append(id).toString();
 	}
-	
-	
+
 	/**
 	 * Interface to map color property which can or can not manage {@link Pattern} or {@link CanvasPatternItem}.
 	 * 

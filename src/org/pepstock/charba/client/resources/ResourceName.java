@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.Key;
 public enum ResourceName implements Key
 {
 	// -------------------
-    // PAY ATTENTION: it uses the class name as STRING to e able to manage the deferred resources and code splitting of GWT	
+	// PAY ATTENTION: it uses the class name as STRING to e able to manage the deferred resources and code splitting of GWT
 	// -------------------
 	/**
 	 * Script element id for CHART.JS source code.
@@ -95,7 +95,7 @@ public enum ResourceName implements Key
 	public String value() {
 		return value;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the resource can be override by user.
 	 * 

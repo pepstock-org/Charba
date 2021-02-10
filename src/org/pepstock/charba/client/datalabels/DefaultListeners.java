@@ -23,7 +23,7 @@ package org.pepstock.charba.client.datalabels;
  *
  */
 final class DefaultListeners implements IsDefaultListeners {
-	
+
 	/**
 	 * Creates the empty object
 	 */

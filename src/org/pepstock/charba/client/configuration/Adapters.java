@@ -21,7 +21,7 @@ package org.pepstock.charba.client.configuration;
  * @author Andrea "Stock" Stocchero
  */
 public final class Adapters extends AxisContainer {
-	
+
 	private final ScaleDateAdapter dateAdapterOptions;
 
 	/**

@@ -27,20 +27,20 @@ import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
  *
  */
 public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
-	
+
 	/**
 	 * Returns the instance of bar dataset options handler.
 	 * 
 	 * @return the instance of bar dataset options handler
 	 */
 	BarDatasetOptionsHandler getDatasetOptionsHandler();
-	
+
 	/**
 	 * Sets the base value for the bar in data units along the value axis.<br>
 	 * If not set, defaults to the value axis base value.
 	 * 
 	 * @param base base value for the bar in data units along the value axis.<br>
-	 *         If not set, defaults to the value axis base value
+	 *            If not set, defaults to the value axis base value
 	 */
 	default void setBase(double... base) {
 		// checks if handler is consistent

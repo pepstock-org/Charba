@@ -74,7 +74,7 @@ public enum IsoWeekDay
 	public int value() {
 		return value;
 	}
-	
+
 	/**
 	 * Returns a ISO week day item by the passed value.
 	 * 

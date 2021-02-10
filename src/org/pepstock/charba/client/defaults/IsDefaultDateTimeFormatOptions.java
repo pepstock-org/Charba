@@ -46,6 +46,7 @@ public interface IsDefaultDateTimeFormatOptions extends IsDefaultBaseFormatOptio
 	 * @return the time formatting style
 	 */
 	DateTimeStyle getTimeStyle();
+
 	/**
 	 * Returns the calendar to use.
 	 * 
@@ -146,6 +147,7 @@ public interface IsDefaultDateTimeFormatOptions extends IsDefaultBaseFormatOptio
 
 	/**
 	 * Returns the representation of the time zone name.
+	 * 
 	 * @return the representation of the time zone name
 	 */
 	TimeZoneName getTimeZoneName();

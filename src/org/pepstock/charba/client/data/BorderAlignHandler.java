@@ -95,8 +95,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value and calls the callback
-		borderAlignCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataEnvelop<>(context)), borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
+		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new ScriptableContext(new DataEnvelop<>(context)), borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**
@@ -106,11 +105,11 @@ final class BorderAlignHandler extends NativeObjectContainer {
 	 */
 	void setBorderAlign(BorderAlign... align) {
 		// resets callbacks
-		setBorderAlign((BorderAlignCallback)null);
+		setBorderAlign((BorderAlignCallback) null);
 		// stores data
 		setValueOrArray(Property.BORDER_ALIGN, align);
 	}
-	
+
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
 	 * 
@@ -123,7 +122,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 			setBorderAlign(align.toArray(new BorderAlign[0]));
 		} else {
 			// resets callbacks
-			setBorderAlign((BorderAlignCallback)null);
+			setBorderAlign((BorderAlignCallback) null);
 			// removes key
 			removeIfExists(Property.BORDER_ALIGN);
 		}

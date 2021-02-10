@@ -45,7 +45,7 @@ public class BarChart extends AbstractChart implements IsDatasetCreator<BarDatas
 	protected BarChart(Type extendedType) {
 		this(extendedType, false);
 	}
-	
+
 	/**
 	 * Builds the chart.<br>
 	 * This is must be extended for controller which are based on this type of chart.

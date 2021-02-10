@@ -29,7 +29,7 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	private final String borderColor;
 
 	private final int borderWidth;
-	
+
 	/**
 	 * Creates the object using the values passed as arguments.<br>
 	 * Background and border colors will be taken from {@link GlobalOptions#getBackgroundColorAsString()} and {@link GlobalOptions#getBorderColorAsString()}.

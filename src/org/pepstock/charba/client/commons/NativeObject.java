@@ -79,7 +79,7 @@ public final class NativeObject {
 	 * @return the target object.
 	 */
 	static native NativeObject assign(NativeObject target, NativeObject... source);
-	
+
 	/**
 	 * Copies all enumerable own properties from this object to new target object.
 	 * 
@@ -88,7 +88,7 @@ public final class NativeObject {
 	@JsOverlay
 	public NativeObject cloneTo() {
 		return NativeObject.assign(new NativeObject(), this);
-	}	
+	}
 
 	/**
 	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTicks extends IsDefaultFontContainer{
+public interface IsDefaultTicks extends IsDefaultFontContainer {
 
 	/**
 	 * Returns the major tick defaults.
@@ -32,14 +32,14 @@ public interface IsDefaultTicks extends IsDefaultFontContainer{
 	 * @return the major tick defaults.
 	 */
 	IsDefaultMajor getMajor();
-	
+
 	/**
 	 * Returns the number formatting options.
 	 * 
 	 * @return the number formatting options
 	 */
 	IsDefaultNumberFormatOptions getNumberFormat();
-	
+
 	/**
 	 * If true, show tick marks
 	 * 
@@ -171,14 +171,14 @@ public interface IsDefaultTicks extends IsDefaultFontContainer{
 	 * @return the number of ticks to examine when deciding how many labels will fit.
 	 */
 	int getSampleSize();
-	
+
 	/**
 	 * Returns the tick alignment along the axis.
 	 * 
 	 * @return the tick alignment along the axis
 	 */
 	ElementAlign getAlign();
-	
+
 	/**
 	 * Returns the tick alignment perpendicular to the axis.
 	 * 
@@ -192,7 +192,7 @@ public interface IsDefaultTicks extends IsDefaultFontContainer{
 	 * @return the text stroke color as string.
 	 */
 	String getTextStrokeColorAsString();
-	
+
 	/**
 	 * Returns the text stroke width.
 	 * 

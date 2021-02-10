@@ -145,7 +145,7 @@ final class NativeJsItemsHelper {
 	 * @return the pixel for the minimum chart value
 	 */
 	static native double getBasePixel(NativeObject scale);
-	
+
 	/**
 	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
 	 * 

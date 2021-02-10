@@ -31,7 +31,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  *
  */
 public class TooltipItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Public factory to create a tooltip item from a native object.
 	 */
@@ -87,7 +87,7 @@ public class TooltipItem extends NativeObjectContainer {
 		// stores the data point
 		this.dataPoint = new DatasetPoint(getValue(Property.DATA_POINT));
 	}
-	
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
@@ -156,14 +156,14 @@ public class TooltipItem extends NativeObjectContainer {
 	public final DatasetElement getElement() {
 		return new DatasetElement(getValue(Property.ELEMENT));
 	}
-	
+
 	/**
 	 * Inner class to create tooltip item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class TooltipItemFactory implements NativeObjectContainerFactory<TooltipItem> {
-		
+
 		/**
 		 * To avoid any instantiation
 		 */

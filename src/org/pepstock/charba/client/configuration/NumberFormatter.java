@@ -37,8 +37,8 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class NumberFormatter implements IsNumberFormat{
-	
+final class NumberFormatter implements IsNumberFormat {
+
 	// number format options instance to wrap.
 	private final IsNumberFormat isNumberFormat;
 
@@ -90,7 +90,7 @@ final class NumberFormatter implements IsNumberFormat{
 	public NumberingSystem getNumberingSystem() {
 		return isNumberFormat.getNumberingSystem();
 	}
-	
+
 	/**
 	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
 	 * <br>

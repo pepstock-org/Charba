@@ -65,7 +65,7 @@ public final class LabelBuilder {
 	public LabelsOptionsBuilder getOptionsBuilder() {
 		return builder;
 	}
-	
+
 	/**
 	 * Sets what data must be showed.
 	 * 

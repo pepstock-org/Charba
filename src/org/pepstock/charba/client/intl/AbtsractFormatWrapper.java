@@ -30,7 +30,7 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 
 	// native format instance
 	private final N nativeFormat;
-	
+
 	/**
 	 * Creates object that enables language sensitive number formatting, using the native format instance.
 	 * 
@@ -44,7 +44,7 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 		// stores the native format
 		this.nativeFormat = nativeFormat;
 	}
-	
+
 	/**
 	 * Returns the native format instance.
 	 * 
@@ -53,7 +53,7 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 	final N getNativeFormat() {
 		return nativeFormat;
 	}
-	
+
 	/**
 	 * Formats a value according to the locale and formatting options of this object.
 	 * 
@@ -68,10 +68,10 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 	 * @return new object with properties reflecting the locale and value formatting options computed during initialization of this object
 	 */
 	abstract R resolvedOptions();
-	
+
 	/**
 	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
-	 * It is useful for custom formatting of value strings. 
+	 * It is useful for custom formatting of value strings.
 	 * 
 	 * @param value value to format
 	 * @return an array of objects containing the formatted value in parts.

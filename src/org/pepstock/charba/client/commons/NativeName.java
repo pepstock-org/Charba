@@ -133,7 +133,7 @@ public final class NativeName {
 	 * Note that this is NOT the real namespace of the object but needed to be J2CL compliant.
 	 */
 	public static final String CHART_CONTROLLER_CONTEXT = "CharbaControllerContext";
-	
+
 	/**
 	 * Constant to bind java script object as chart scriptable options context with name <b>{@value CHART_SCRIPTABLE_OPTIONS_CONTEXT}</b>, (internal of Charba).
 	 */
@@ -263,7 +263,7 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM location with name <b>{@value DOM_LOCATION}</b>.
 	 */
 	public static final String DOM_LOCATION = "Location";
-	
+
 	/**
 	 * Constant to bind java script object as DOM navigator with name <b>{@value DOM_NAVIGATOR}</b>.
 	 */
@@ -288,12 +288,12 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM touch with name <b>{@value DOM_TOUCH}</b>.
 	 */
 	public static final String DOM_TOUCH = "Touch";
-	
+
 	/**
 	 * Constant to bind java script object name space for localization, <b>{@value INTL}</b>.
 	 */
 	public static final String INTL = "Intl";
-	
+
 	/**
 	 * Constant to bind java script object number formatter for localization, <b>{@value NUMBER_FORMAT}</b>.
 	 */

@@ -48,7 +48,7 @@ public final class FontOptions extends AbstractFont {
 
 	/**
 	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.<br>
-	 * This is called by <code>options</code> packages. 
+	 * This is called by <code>options</code> packages.
 	 * 
 	 * @param defaultValues default provider
 	 * @param envelop envelop with native object to map java script properties

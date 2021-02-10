@@ -220,7 +220,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Sets the font color.
 	 * 

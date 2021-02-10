@@ -101,7 +101,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	ArrayInteger getWidths(Key key, int defaultvalue) {
 		return getArrayValue(key);
 	}
-	
+
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -118,7 +118,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 */
 	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
 		setInternalBorderWidth(borderWidthCallback);
-	}	
+	}
 
 	/**
 	 * Sets the fill color of the arcs when hovered

@@ -141,7 +141,7 @@ public final class Controllers {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the controller by name as {@link ControllerType}.
 	 * 
@@ -157,7 +157,7 @@ public final class Controllers {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the controller by name as string.
 	 * 

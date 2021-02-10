@@ -80,7 +80,7 @@ public class Bar extends AbstractConfigurationElement {
 	public int getBorderRadius() {
 		return getOptions().getElements().getBar().getBorderRadius();
 	}
-	
+
 	/**
 	 * Sets the style of the point.
 	 * 
@@ -125,6 +125,5 @@ public class Bar extends AbstractConfigurationElement {
 	public Img getPointStyleAsImage() {
 		return getOptions().getElements().getBar().getPointStyleAsImage();
 	}
-
 
 }

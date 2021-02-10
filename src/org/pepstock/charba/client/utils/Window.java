@@ -49,7 +49,7 @@ public final class Window {
 		 */
 		void call();
 	}
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

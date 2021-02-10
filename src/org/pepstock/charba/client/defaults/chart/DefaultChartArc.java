@@ -96,7 +96,9 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getAngle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getOffset()
 	 */
 	@Override

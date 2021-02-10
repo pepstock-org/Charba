@@ -41,7 +41,7 @@ public final class Injector {
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// chart set of injected script elements
 	private static final String SCRIPT_ELEMENT_CHARTSET = "UTF-8";
-	
+
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
 

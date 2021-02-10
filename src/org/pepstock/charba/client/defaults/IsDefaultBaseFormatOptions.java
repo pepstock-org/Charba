@@ -31,12 +31,12 @@ public interface IsDefaultBaseFormatOptions {
 	 * @return the locale matching algorithm to use
 	 */
 	LocaleMatcher getLocaleMatcher();
-	
+
 	/**
 	 * Returns the numbering system to use.
 	 * 
 	 * @return the numbering system to use
 	 */
 	NumberingSystem getNumberingSystem();
-	
+
 }

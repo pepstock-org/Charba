@@ -87,7 +87,7 @@ public final class LegendTextHandler extends PropertyHandler<Boolean> {
 	LegendTextHandler(NativeObject nativeObject) {
 		this(null, nativeObject);
 	}
-	
+
 	/**
 	 * Creates a legend text handler with the native object where TEXT property must be managed.
 	 * 

@@ -45,7 +45,7 @@ interface IsDefaultConfigurationItem {
 	default InteractionAxis getMode() {
 		return AbstractConfigurationItem.DEFAULT_MODE;
 	}
-	
+
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.
 	 * 

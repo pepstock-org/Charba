@@ -47,7 +47,7 @@ interface HasBorderAlign {
 			getBorderAlignHandler().setBorderAlign(align);
 		}
 	}
-	
+
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
 	 * 

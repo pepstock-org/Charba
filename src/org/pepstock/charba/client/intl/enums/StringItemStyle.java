@@ -18,7 +18,7 @@ package org.pepstock.charba.client.intl.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the possible value to set the representation of the era, day periods, weekday. 
+ * Enumerates the possible value to set the representation of the era, day periods, weekday.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -35,7 +35,7 @@ public enum StringItemStyle implements Key
 	 */
 	LONG("long"),
 	/**
-	 * Short setting for era  (e.g., AD), for weekday (e.g., Thu).
+	 * Short setting for era (e.g., AD), for weekday (e.g., Thu).
 	 */
 	SHORT("short");
 

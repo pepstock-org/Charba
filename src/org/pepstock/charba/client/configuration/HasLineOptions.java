@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  */
 interface HasLineOptions {
-	
+
 	/**
 	 * Returns a options which will implements show lines and span gaps.
 	 * 

@@ -91,7 +91,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	public final String toJSON() {
 		return configuration.toJSON();
 	}
-	
+
 	/**
 	 * Returns the native object instance inside an envelop.<br>
 	 * It can be called only from <code>org.pepstock.charba.client</code> package.

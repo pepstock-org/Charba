@@ -47,7 +47,7 @@ public final class DOM {
 	/**
 	 * Returns a {@link BaseLocation} object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL.
 	 * 
-	 * @return  a {@link BaseLocation} object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL
+	 * @return a {@link BaseLocation} object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL
 	 */
 	@JsProperty
 	public static native BaseLocation getLocation();
@@ -55,7 +55,7 @@ public final class DOM {
 	/**
 	 * Returns a {@link BaseNavigator} object, which represents the state and the identity of the user agent.
 	 * 
-	 * @return  a {@link BaseNavigator} object, which  represents the state and the identity of the user agent
+	 * @return a {@link BaseNavigator} object, which represents the state and the identity of the user agent
 	 */
 	@JsProperty
 	public static native BaseNavigator getNavigator();

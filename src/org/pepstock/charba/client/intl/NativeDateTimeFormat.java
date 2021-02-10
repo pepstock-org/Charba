@@ -68,10 +68,10 @@ final class NativeDateTimeFormat {
 	 * @return new object with properties reflecting the locale and date time formatting options computed during initialization of this object
 	 */
 	native NativeObject resolvedOptions();
-	
+
 	/**
 	 * Returns an array of objects containing the locale-specific tokens from which it possible to build custom strings while preserving the locale-specific parts.<br>
-	 * It is useful for custom formatting of date time strings. 
+	 * It is useful for custom formatting of date time strings.
 	 * 
 	 * @param value date to format
 	 * @return an array of objects containing the formatted date time in parts.

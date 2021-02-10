@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.ContextType;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class AbstractScriptableContext {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -105,7 +105,7 @@ public abstract class AbstractScriptableContext {
 	public final IsChart getChart() {
 		return context.getChart().getChart();
 	}
-	
+
 	/**
 	 * Returns the type of the context.
 	 * 
@@ -119,7 +119,7 @@ public abstract class AbstractScriptableContext {
 		// if here, context does not contain this property
 		return ContextType.UNKNOWN;
 	}
-	
+
 	/**
 	 * Sets the additional options.
 	 * 

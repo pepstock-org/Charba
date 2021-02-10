@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendTitle extends IsDefaultFontContainer{
+public interface IsDefaultLegendTitle extends IsDefaultFontContainer {
 
 	/**
 	 * Returns <code>true</code> if the legend title is shown.

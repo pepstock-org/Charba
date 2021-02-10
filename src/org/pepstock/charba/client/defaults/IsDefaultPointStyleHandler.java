@@ -35,7 +35,7 @@ public interface IsDefaultPointStyleHandler {
 	default PointStyle getPointStyle() {
 		return PointStyle.CIRCLE;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the point style is set by an {@link Img}.
 	 * 
@@ -44,7 +44,7 @@ public interface IsDefaultPointStyleHandler {
 	default boolean isPointStyleAsImage() {
 		return false;
 	}
-	
+
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.
@@ -55,6 +55,5 @@ public interface IsDefaultPointStyleHandler {
 	default Img getPointStyleAsImage() {
 		return UndefinedValues.IMAGE_ELEMENT;
 	}
-
 
 }

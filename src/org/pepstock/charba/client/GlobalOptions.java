@@ -94,7 +94,7 @@ public final class GlobalOptions extends Options {
 	 *
 	 */
 	private static final class GlobalPlugins extends Plugins {
-		
+
 		private ChartEnvelop<String> envelop = new ChartEnvelop<>(DefaultOptions.SCOPE);
 
 		/**

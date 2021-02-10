@@ -48,7 +48,8 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	private static final String INVALID_ID_NOT_EQUALS_IN_FACTORY = "Plugin id '{0}' is not equals to plugin id '{1}'of factory";
 
 	/**
-	 * Creates the object wrapping another plugin.<br>This constructor is used ONLY from {@link GlobalOptions}.
+	 * Creates the object wrapping another plugin.<br>
+	 * This constructor is used ONLY from {@link GlobalOptions}.
 	 * 
 	 * @param envelop envelop passed by chart package in oredr to wrap another plugin.
 	 */
@@ -140,7 +141,7 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 			}
 		}
 	}
-	
+
 	/**
 	 * Invoked to re-apply the default plugin configuration when the plugin was disable.
 	 * 

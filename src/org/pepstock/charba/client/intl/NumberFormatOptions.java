@@ -596,7 +596,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		 * 
 		 * @param nativeObject native object instance to be wrapped.
 		 * @param defaultValues default values for the options
-		 * @return a number format  options instance
+		 * @return a number format options instance
 		 */
 		public NumberFormatOptions create(NativeObject nativeObject, IsDefaultNumberFormatOptions defaultValues) {
 			return new NumberFormatOptions(nativeObject, defaultValues == null ? DefaultNumberFormatOptions.INSTANCE : defaultValues);

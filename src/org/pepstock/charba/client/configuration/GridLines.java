@@ -542,7 +542,8 @@ public class GridLines extends AbstractScaleLines {
 	 * Returns the width of the tick mark in pixels.<br>
 	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines.<br>The first element if set as array.
+	 * @return stroke width of grid lines.<br>
+	 *         The first element if set as array.
 	 */
 	public int getTickWidth() {
 		return getAxis().getScale().getGrideLines().getTickWidth();
