@@ -62,8 +62,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	private final FontContainer fontContainer;
 	// instance of box handler
 	private final BoxHandler boxHandler;
-	// instance of style of points manager
-	private final PointStyler pointStyler;
+	// instance of style of points handler
+	private final PointStyleHandler pointStyleHandler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -77,8 +77,8 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		super(legend, childKey, defaultValues, nativeObject);
 		// creates the box handler
 		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
-		// creates point styler
-		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
+		// creates point style handler
+		this.pointStyleHandler = new PointStyleHandler(this, getDefaultValues(), getNativeObject());
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
@@ -96,11 +96,11 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyler()
+	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyleHandler()
 	 */
 	@Override
-	public PointStyler getPointStyler() {
-		return pointStyler;
+	public PointStyleHandler getPointStyleHandler() {
+		return pointStyleHandler;
 	}
 
 	/*

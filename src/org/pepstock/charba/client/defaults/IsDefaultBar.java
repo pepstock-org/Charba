@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointStyler {
+public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointStyleHandler {
 
 	/**
 	 * Returns the edge to skip drawing the border for.

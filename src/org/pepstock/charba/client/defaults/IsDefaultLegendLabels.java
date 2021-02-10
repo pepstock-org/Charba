@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPointStyler, IsDefaultFontContainer{
+public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPointStyleHandler, IsDefaultFontContainer{
 
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).

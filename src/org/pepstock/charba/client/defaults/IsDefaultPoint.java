@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointStyler {
+public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointStyleHandler {
 
 	/**
 	 * Returns the radius of the point.

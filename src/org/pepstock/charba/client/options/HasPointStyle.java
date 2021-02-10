@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.defaults.IsDefaultPointStyler;
+import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -27,14 +27,14 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasPointStyle extends IsDefaultPointStyler {
+interface HasPointStyle extends IsDefaultPointStyleHandler {
 
 	/**
-	 * Returns a point styler instance to use into default methods of this interface.
+	 * Returns a point style handler instance to use into default methods of this interface.
 	 * 
-	 * @return a point styler instance
+	 * @return a point style handler instance
 	 */
-	PointStyler getPointStyler();
+	PointStyleHandler getPointStyleHandler();
 
 	/**
 	 * Sets the style of the point.
@@ -42,9 +42,9 @@ interface HasPointStyle extends IsDefaultPointStyler {
 	 * @param pointStyle array of the style of the point.
 	 */
 	default void setPointStyle(PointStyle pointStyle) {
-		// checks if point styler is consistent
-		if (getPointStyler() != null) {
-			getPointStyler().setPointStyle(pointStyle);
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			getPointStyleHandler().setPointStyle(pointStyle);
 		}
 	}
 
@@ -55,11 +55,11 @@ interface HasPointStyle extends IsDefaultPointStyler {
 	 */
 	@Override
 	default PointStyle getPointStyle() {
-		// checks if point styler is consistent
-		if (getPointStyler() != null) {
-			return getPointStyler().getPointStyle();
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			return getPointStyleHandler().getPointStyle();
 		}
-		// if here, point styler is not consistent
+		// if here, point style handler is not consistent
 		// uses the default of point
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 	}
@@ -70,9 +70,9 @@ interface HasPointStyle extends IsDefaultPointStyler {
 	 * @param pointStyle image element of the style of the point as image.
 	 */
 	default void setPointStyle(Img pointStyle) {
-		// checks if point styler is consistent
-		if (getPointStyler() != null) {
-			getPointStyler().setPointStyle(pointStyle);
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			getPointStyleHandler().setPointStyle(pointStyle);
 		}
 	}
 
@@ -83,11 +83,11 @@ interface HasPointStyle extends IsDefaultPointStyler {
 	 */
 	@Override
 	default boolean isPointStyleAsImage() {
-		// checks if point styler is consistent
-		if (getPointStyler() != null) {
-			return getPointStyler().isPointStyleAsImage();
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			return getPointStyleHandler().isPointStyleAsImage();
 		}
-		// if here, point styler is not consistent
+		// if here, point style handler is not consistent
 		// uses the default false
 		return false;
 	}
@@ -101,11 +101,11 @@ interface HasPointStyle extends IsDefaultPointStyler {
 	 */
 	@Override
 	default Img getPointStyleAsImage() {
-		// checks if point styler is consistent
-		if (getPointStyler() != null) {
-			return getPointStyler().getPointStyleAsImage();
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			return getPointStyleHandler().getPointStyleAsImage();
 		}
-		// if here, point styler is not consistent
+		// if here, point style handler is not consistent
 		// uses undefined
 		return UndefinedValues.IMAGE_ELEMENT;
 	}

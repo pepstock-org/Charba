@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
-import org.pepstock.charba.client.defaults.IsDefaultPointStyler;
+import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
+final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -65,13 +65,13 @@ final class PointStyler extends PropertyHandler<IsDefaultPointStyler> {
 	}
 
 	/**
-	 * Creates a point styler with the native object where POINTSTYLE property must be managed and the default value to use when the property does not exist.
+	 * Creates a point style handler with the native object where POINTSTYLE property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the point styler.
+	 * @param parent model which contains the point style handler.
 	 * @param defaultValues default value of point style to use when the properties do not exist
-	 * @param nativeObject native object where point styler properties must be managed
+	 * @param nativeObject native object where point style handler properties must be managed
 	 */
-	PointStyler(AbstractNode parent, IsDefaultPointStyler defaultValues, NativeObject nativeObject) {
+	PointStyleHandler(AbstractNode parent, IsDefaultPointStyleHandler defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 

@@ -62,7 +62,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	}
 
 	// instance of style of points manager
-	private final PointStyler pointStyler;
+	private final PointStyleHandler pointStyleHandler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -74,18 +74,18 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
-		// creates point styler
-		this.pointStyler = new PointStyler(this, getDefaultValues(), getNativeObject());
+		// creates point style handler
+		this.pointStyleHandler = new PointStyleHandler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyler()
+	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyleHandler()
 	 */
 	@Override
-	public PointStyler getPointStyler() {
-		return pointStyler;
+	public PointStyleHandler getPointStyleHandler() {
+		return pointStyleHandler;
 	}
 
 	/**

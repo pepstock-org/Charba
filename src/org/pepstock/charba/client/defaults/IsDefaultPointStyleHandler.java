@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsDefaultPointStyler {
+public interface IsDefaultPointStyleHandler {
 
 	/**
 	 * Returns the style of the point.
