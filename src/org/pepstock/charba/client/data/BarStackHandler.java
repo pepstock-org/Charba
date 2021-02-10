@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 
-public final class BarStacker extends NativeObjectContainer {
+public final class BarStackHandler extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -64,7 +64,7 @@ public final class BarStacker extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object to update with options
 	 */
-	BarStacker(NativeObject nativeObject) {
+	BarStackHandler(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

@@ -24,10 +24,10 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedBarDataset extends BarDataset implements HasBarStacker {
+public class StackedBarDataset extends BarDataset implements HasBarStackHandler {
 
-	// bar stacker instance
-	private final BarStacker barStacker;
+	// bar stack handler instance
+	private final BarStackHandler barStackHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -64,8 +64,8 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 */
 	public StackedBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
 		super(defaultValues, hidden);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
+		// creates bar stack handler instance
+		this.barStackHandler = new BarStackHandler(getNativeObject());
 	}
 
 	/**
@@ -87,18 +87,18 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 */
 	protected StackedBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
+		// creates bar stack handler instance
+		this.barStackHandler = new BarStackHandler(getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBarStacker#getBarStacker()
+	 * @see org.pepstock.charba.client.data.HasBarStackHandler#getBarStackHandler()
 	 */
 	@Override
-	public final BarStacker getBarStacker() {
-		return barStacker;
+	public final BarStackHandler getBarStackHandler() {
+		return barStackHandler;
 	}
 
 }

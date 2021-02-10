@@ -27,13 +27,13 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStacker {
+public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStackHandler {
 
 	// exception string message for setting ore getting data
 	static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart";
 
-	// bar stacker instance
-	private final BarStacker barStacker;
+	// bar stack handler instance
+	private final BarStackHandler barStackHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -70,8 +70,8 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	public TimeSeriesBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
 		super(defaultValues, hidden);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
+		// creates bar stack handler instance
+		this.barStackHandler = new BarStackHandler(getNativeObject());
 	}
 
 	/**
@@ -93,18 +93,18 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	protected TimeSeriesBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
+		// creates bar stack handler instance
+		this.barStackHandler = new BarStackHandler(getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBarStacker#getBarStacker()
+	 * @see org.pepstock.charba.client.data.HasBarStackHandler#getBarStackHandler()
 	 */
 	@Override
-	public final BarStacker getBarStacker() {
-		return barStacker;
+	public final BarStackHandler getBarStackHandler() {
+		return barStackHandler;
 	}
 
 	/*

@@ -22,14 +22,14 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface HasBarStacker {
+interface HasBarStackHandler {
 
 	/**
-	 * Returns an stack option manager instance.
+	 * Returns an stack option handler instance.
 	 * 
-	 * @return an stack option manager instance
+	 * @return an stack option handler instance
 	 */
-	BarStacker getBarStacker();
+	BarStackHandler getBarStackHandler();
 
 	/**
 	 * Sets the name of stack group.
@@ -37,9 +37,9 @@ interface HasBarStacker {
 	 * @param stackGroup name of stack group.
 	 */
 	default void setStackGroup(String stackGroup) {
-		// checks if bar stacker is consistent
-		if (getBarStacker() != null) {
-			getBarStacker().setStackGroup(stackGroup);
+		// checks if bar stack handler is consistent
+		if (getBarStackHandler() != null) {
+			getBarStackHandler().setStackGroup(stackGroup);
 		}
 	}
 
@@ -49,11 +49,11 @@ interface HasBarStacker {
 	 * @return the name of stack group.
 	 */
 	default String getStackGroup() {
-		// checks if bar stacker is consistent
-		if (getBarStacker() != null) {
-			return getBarStacker().getStackGroup();
+		// checks if bar stack handler is consistent
+		if (getBarStackHandler() != null) {
+			return getBarStackHandler().getStackGroup();
 		}
-		// if here, bar stacker is not consistent
+		// if here, bar stack handler is not consistent
 		// then returns the default
 		return UndefinedValues.STRING;
 	}
