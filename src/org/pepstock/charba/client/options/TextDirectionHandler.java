@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
-import org.pepstock.charba.client.defaults.IsDefaultTextDirectioner;
+import org.pepstock.charba.client.defaults.IsDefaultTextDirectionHandler;
 import org.pepstock.charba.client.enums.TextDirection;
 
 /**
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.TextDirection;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class TextDirectioner extends PropertyHandler<IsDefaultTextDirectioner> {
+final class TextDirectionHandler extends PropertyHandler<IsDefaultTextDirectionHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -63,13 +63,13 @@ final class TextDirectioner extends PropertyHandler<IsDefaultTextDirectioner> {
 	}
 
 	/**
-	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
+	 * Creates a text direction handler with the native object where FONTs properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the text directioner.
+	 * @param parent model which contains the text direction handler.
 	 * @param defaultValues default value of text direction to use when the properties do not exist
 	 * @param nativeObject native object where text direction properties must be managed
 	 */
-	TextDirectioner(AbstractNode parent, IsDefaultTextDirectioner defaultValues, NativeObject nativeObject) {
+	TextDirectionHandler(AbstractNode parent, IsDefaultTextDirectionHandler defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 

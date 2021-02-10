@@ -31,7 +31,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 
 	private final LegendTitle title;
 
-	private final TextDirectioner textDirectioner;
+	private final TextDirectionHandler textDirectionHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -85,18 +85,18 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		// gets sub element
 		this.labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
 		this.title = new LegendTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
-		// creates text directioner
-		this.textDirectioner = new TextDirectioner(this, getDefaultValues(), getNativeObject());
+		// creates text direction handler
+		this.textDirectionHandler = new TextDirectionHandler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasTextDirection#getTextDirectioner()
+	 * @see org.pepstock.charba.client.options.HasTextDirection#getTextDirectionHandler()
 	 */
 	@Override
-	public TextDirectioner getTextDirectioner() {
-		return textDirectioner;
+	public TextDirectionHandler getTextDirectionHandler() {
+		return textDirectionHandler;
 	}
 
 	/**

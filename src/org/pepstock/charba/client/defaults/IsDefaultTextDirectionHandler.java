@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.TextDirection;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTextDirectioner {
+public interface IsDefaultTextDirectionHandler {
 
 	/**
 	 * Returns <code>true</code> for rendering the object from right to left.

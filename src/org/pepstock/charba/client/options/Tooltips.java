@@ -40,7 +40,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	// Callbacks sub element
 	private final TooltipsCallbacks callbacks;
 	// Text direction sub element
-	private final TextDirectioner textDirectioner;
+	private final TextDirectionHandler textDirectionHandler;
 	// instance of font for title
 	private final Font titleFont;
 	// instance of font for body
@@ -128,8 +128,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
-		// creates text directioner
-		this.textDirectioner = new TextDirectioner(this, getDefaultValues(), getNativeObject());
+		// creates text direction handler
+		this.textDirectionHandler = new TextDirectionHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 		// creates the box handler
@@ -181,11 +181,11 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.HasTextDirection#getTextDirectioner()
+	 * @see org.pepstock.charba.client.options.HasTextDirection#getTextDirectionHandler()
 	 */
 	@Override
-	public TextDirectioner getTextDirectioner() {
-		return textDirectioner;
+	public TextDirectionHandler getTextDirectionHandler() {
+		return textDirectionHandler;
 	}
 
 	/**

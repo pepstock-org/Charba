@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.defaults.IsDefaultTextDirectioner;
+import org.pepstock.charba.client.defaults.IsDefaultTextDirectionHandler;
 import org.pepstock.charba.client.enums.TextDirection;
 
 /**
@@ -25,14 +25,14 @@ import org.pepstock.charba.client.enums.TextDirection;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasTextDirection extends IsDefaultTextDirectioner {
+interface HasTextDirection extends IsDefaultTextDirectionHandler {
 
 	/**
-	 * Returns a text directioner instance to use into default methods of this interface.
+	 * Returns a text direction handler instance to use into default methods of this interface.
 	 * 
-	 * @return a text directioner instance
+	 * @return a text direction handler instance
 	 */
-	TextDirectioner getTextDirectioner();
+	TextDirectionHandler getTextDirectionHandler();
 
 	/**
 	 * Sets <code>true</code> for rendering the tooltips from right to left.
@@ -40,24 +40,24 @@ interface HasTextDirection extends IsDefaultTextDirectioner {
 	 * @param rtl <code>true</code> for rendering the tooltips from right to left
 	 */
 	default void setRtl(boolean rtl) {
-		// // checks if text directioner is consistent
-		if (getTextDirectioner() != null) {
-			getTextDirectioner().setRtl(rtl);
+		// // checks if text direction handler is consistent
+		if (getTextDirectionHandler() != null) {
+			getTextDirectionHandler().setRtl(rtl);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTextDirectioner#isRtl()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTextDirectionHandler#isRtl()
 	 */
 	@Override
 	default boolean isRtl() {
-		// checks if text directioner is consistent
-		if (getTextDirectioner() != null) {
-			return getTextDirectioner().isRtl();
+		// checks if text direction handler is consistent
+		if (getTextDirectionHandler() != null) {
+			return getTextDirectionHandler().isRtl();
 		}
-		// if here, text directioner is not consistent
+		// if here, text direction handler is not consistent
 		return Defaults.get().getGlobal().getLegend().isRtl();
 	}
 
@@ -67,24 +67,24 @@ interface HasTextDirection extends IsDefaultTextDirectioner {
 	 * @param textDirection the text direction of the tooltips.
 	 */
 	default void setTextDirection(TextDirection textDirection) {
-		// // checks if text directioner is consistent
-		if (getTextDirectioner() != null) {
-			getTextDirectioner().setTextDirection(textDirection);
+		// // checks if text direction handler is consistent
+		if (getTextDirectionHandler() != null) {
+			getTextDirectionHandler().setTextDirection(textDirection);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTextDirectioner#getTextDirection()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTextDirectionHandler#getTextDirection()
 	 */
 	@Override
 	default TextDirection getTextDirection() {
-		// checks if text directioner is consistent
-		if (getTextDirectioner() != null) {
-			return getTextDirectioner().getTextDirection();
+		// checks if text direction handler is consistent
+		if (getTextDirectionHandler() != null) {
+			return getTextDirectionHandler().getTextDirection();
 		}
-		// if here, text directioner is not consistent
+		// if here, text direction handler is not consistent
 		return Defaults.get().getGlobal().getLegend().getTextDirection();
 	}
 }

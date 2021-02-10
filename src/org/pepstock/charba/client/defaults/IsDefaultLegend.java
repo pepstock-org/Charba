@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLegend extends IsDefaultTextDirectioner, IsDefaultPluginElement {
+public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaultPluginElement {
 
 	/**
 	 * Returns the labels object defaults.
