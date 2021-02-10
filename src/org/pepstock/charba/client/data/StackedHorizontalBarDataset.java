@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedHorizontalBarDataset extends HorizontalBarDataset implements HasBarStackHandler {
+public class StackedHorizontalBarDataset extends HorizontalBarDataset implements HasBarStackGroup {
 
 	// bar stack handler instance
 	private final BarStackHandler barStackHandler;
@@ -94,7 +94,7 @@ public class StackedHorizontalBarDataset extends HorizontalBarDataset implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBarStackHandler#getBarStackHandler()
+	 * @see org.pepstock.charba.client.data.HasBarStackGroup#getBarStackHandler()
 	 */
 	@Override
 	public final BarStackHandler getBarStackHandler() {

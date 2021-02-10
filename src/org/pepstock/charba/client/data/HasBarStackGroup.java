@@ -22,7 +22,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface HasBarStackHandler {
+interface HasBarStackGroup {
 
 	/**
 	 * Returns an stack option handler instance.

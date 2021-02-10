@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStackHandler {
+public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStackGroup {
 
 	// exception string message for setting ore getting data
 	static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart";
@@ -100,7 +100,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasBarStackHandler#getBarStackHandler()
+	 * @see org.pepstock.charba.client.data.HasBarStackGroup#getBarStackHandler()
 	 */
 	@Override
 	public final BarStackHandler getBarStackHandler() {
