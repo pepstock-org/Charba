@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.IsFill;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultFiller {
+public interface IsDefaultFillHandler {
 
 	/**
 	 * Returns how to fill the area under the line.

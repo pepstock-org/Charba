@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFiller{
+public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFillHandler{
 
 	/**
 	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).

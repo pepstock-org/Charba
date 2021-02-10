@@ -71,8 +71,8 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 
 	}
 
-	// instance of filler
-	private final Filler filler;
+	// instance of fill handler
+	private final FillHandler fillHandler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -84,18 +84,18 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
-		// creates filler instance
-		this.filler = new Filler(this, getDefaultValues().getFill(), getNativeObject());
+		// creates fill handler instance
+		this.fillHandler = new FillHandler(this, getDefaultValues().getFill(), getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.IsFillable#getFiller()
+	 * @see org.pepstock.charba.client.options.HasFill#getFillHandler()
 	 */
 	@Override
-	public Filler getFiller() {
-		return filler;
+	public FillHandler getFillHandler() {
+		return fillHandler;
 	}
 
 	/**

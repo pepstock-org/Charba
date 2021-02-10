@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
-import org.pepstock.charba.client.options.Filler;
+import org.pepstock.charba.client.options.FillHandler;
 
 /**
  * Manages the FILL property of options for lining datasets, implementing the FILL callback for scriptable options.
@@ -34,7 +34,7 @@ import org.pepstock.charba.client.options.Filler;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class LiningDatasetFiller extends Filler {
+final class LiningDatasetFillHandler extends FillHandler {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -46,13 +46,13 @@ final class LiningDatasetFiller extends Filler {
 	private FillCallback fillCallback = null;
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
+	 * Creates a fill handler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the filler.
+	 * @param parent model which contains the fill handler.
 	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param nativeObject native object where FILL property must be managed
 	 */
-	LiningDatasetFiller(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
+	LiningDatasetFillHandler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, new DataEnvelop<>(nativeObject));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -64,7 +64,7 @@ final class LiningDatasetFiller extends Filler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.Filler#setFill(boolean)
+	 * @see org.pepstock.charba.client.options.FillHandler#setFill(boolean)
 	 */
 	@Override
 	public void setFill(boolean fill) {
@@ -77,7 +77,7 @@ final class LiningDatasetFiller extends Filler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.Filler#setFill(org.pepstock.charba.client.enums.IsFill)
+	 * @see org.pepstock.charba.client.options.FillHandler#setFill(org.pepstock.charba.client.enums.IsFill)
 	 */
 	@Override
 	public void setFill(IsFill fill) {
@@ -90,7 +90,7 @@ final class LiningDatasetFiller extends Filler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.Filler#getFill()
+	 * @see org.pepstock.charba.client.options.FillHandler#getFill()
 	 */
 	@Override
 	public IsFill getFill() {
@@ -123,13 +123,13 @@ final class LiningDatasetFiller extends Filler {
 		// checks if callback is consistent
 		if (fillCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Filler.Property.FILL, fillCallbackProxy.getProxy());
+			setValue(FillHandler.Property.FILL, fillCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Filler.Property.FILL);
+			remove(FillHandler.Property.FILL);
 		}
 		// remove if exist flag
-		removeIfExists(Filler.Property.CHARBA_FILLING_MODE);
+		removeIfExists(FillHandler.Property.CHARBA_FILLING_MODE);
 	}
 
 	/**

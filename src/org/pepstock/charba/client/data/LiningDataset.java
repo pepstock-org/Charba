@@ -56,7 +56,7 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.Filler;
+import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
 import org.pepstock.charba.client.options.HasSpanGaps;
 import org.pepstock.charba.client.options.SpanGapper;
@@ -250,8 +250,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	}
 
-	// instance of filler
-	private final LiningDatasetFiller filler;
+	// instance of fill handler
+	private final LiningDatasetFillHandler fillHandler;
 	// instance or orderer
 	private final Orderer orderer;
 	// span gapper instance
@@ -266,7 +266,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		filler = new LiningDatasetFiller(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
+		fillHandler = new LiningDatasetFillHandler(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
 		// sets span gapper
@@ -284,8 +284,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.pointBorderWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
-				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback,
+				InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
 		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
@@ -328,11 +328,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.IsFillable#getFiller()
+	 * @see org.pepstock.charba.client.options.HasFill#getFillHandler()
 	 */
 	@Override
-	public final Filler getFiller() {
-		return filler;
+	public FillHandler getFillHandler() {
+		return fillHandler;
 	}
 
 	/*
@@ -2256,7 +2256,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @return the fill callback, if set, otherwise <code>null</code>.
 	 */
 	public FillCallback getFillCallback() {
-		return filler.getFillCallback();
+		return fillHandler.getFillCallback();
 	}
 
 	/**
@@ -2265,7 +2265,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param fillCallback the fill callback.
 	 */
 	public void setFill(FillCallback fillCallback) {
-		filler.setFill(fillCallback);
+		fillHandler.setFill(fillCallback);
 	}
 
 	/*

@@ -33,7 +33,7 @@ import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Filler extends PropertyHandler<IsFill> {
+public class FillHandler extends PropertyHandler<IsFill> {
 
 	/**
 	 * Name of properties of native object.
@@ -69,25 +69,25 @@ public class Filler extends PropertyHandler<IsFill> {
 	}
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
+	 * Creates a fill handler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
 	 * This is called from <code>data</code> package.
 	 * 
-	 * @param parent model which contains the filler.
+	 * @param parent model which contains the fill handler.
 	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param envelop envelop of native object where FILL property must be managed
 	 */
-	protected Filler(AbstractNode parent, IsFill defaultValues, DataEnvelop<NativeObject> envelop) {
+	protected FillHandler(AbstractNode parent, IsFill defaultValues, DataEnvelop<NativeObject> envelop) {
 		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates a filler with the native object where FILL property must be managed and the default value to use when the property does not exist.
+	 * Creates a fill handler with the native object where FILL property must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the filler.
+	 * @param parent model which contains the fill handler.
 	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param nativeObject native object where FILL property must be managed
 	 */
-	Filler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
+	FillHandler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 		// checks default value instance
 		if (!IsFill.isValid(getDefaultValues())) {

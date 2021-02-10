@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.defaults.IsDefaultFiller;
+import org.pepstock.charba.client.defaults.IsDefaultFillHandler;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 
@@ -27,14 +27,14 @@ import org.pepstock.charba.client.enums.IsFill;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasFill extends IsDefaultFiller {
+public interface HasFill extends IsDefaultFillHandler {
 
 	/**
-	 * Returns a filler instance to use into default methods of this interface.
+	 * Returns a fill handler instance to use into default methods of this interface.
 	 * 
-	 * @return a filler instance
+	 * @return a fill handler instance
 	 */
-	Filler getFiller();
+	FillHandler getFillHandler();
 
 	/**
 	 * Sets how to fill the area under the line.
@@ -42,9 +42,9 @@ public interface HasFill extends IsDefaultFiller {
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	default void setFill(boolean fill) {
-		// checks if filler is consistent
-		if (getFiller() != null) {
-			getFiller().setFill(fill);
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			getFillHandler().setFill(fill);
 		}
 	}
 
@@ -54,8 +54,8 @@ public interface HasFill extends IsDefaultFiller {
 	 * @param index absolute dataset index of the chart.
 	 */
 	default void setFill(int index) {
-		// checks if filler is consistent
-		if (getFiller() != null) {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
 			setFill(Fill.getFill(index));
 		}
 	}
@@ -66,8 +66,8 @@ public interface HasFill extends IsDefaultFiller {
 	 * @param index relative dataset index of the chart.
 	 */
 	default void setFill(String index) {
-		// checks if filler is consistent
-		if (getFiller() != null) {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
 			setFill(Fill.getFill(index));
 		}
 	}
@@ -78,9 +78,9 @@ public interface HasFill extends IsDefaultFiller {
 	 * @param fill how to fill the area under the line.
 	 */
 	default void setFill(IsFill fill) {
-		// checks if filler is consistent
-		if (getFiller() != null) {
-			getFiller().setFill(fill);
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			getFillHandler().setFill(fill);
 		}
 	}
 
@@ -91,11 +91,11 @@ public interface HasFill extends IsDefaultFiller {
 	 */
 	@Override
 	default IsFill getFill() {
-		// checks if filler is consistent
-		if (getFiller() != null) {
-			return getFiller().getFill();
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			return getFillHandler().getFill();
 		}
-		// if here, filler is not consistent and then
+		// if here, fill handler is not consistent and then
 		// returns the default value
 		return Defaults.get().getGlobal().getElements().getLine().getFill();
 	}
