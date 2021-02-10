@@ -21,7 +21,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.HasLegendText;
-import org.pepstock.charba.client.items.LegendTexter;
+import org.pepstock.charba.client.items.LegendTextHandler;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -51,11 +51,11 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTextHandler()
 	 */
 	@Override
-	public LegendTexter getLegendTexter() {
-		return getConfiguration().getLegend().getTitle().getLegendTexter();
+	public LegendTextHandler getLegendTextHandler() {
+		return getConfiguration().getLegend().getTitle().getLegendTextHandler();
 	}
 
 	/**

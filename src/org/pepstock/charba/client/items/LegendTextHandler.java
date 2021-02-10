@@ -31,7 +31,7 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendTexter extends PropertyHandler<Boolean> {
+public final class LegendTextHandler extends PropertyHandler<Boolean> {
 
 	// default of html text
 	static final boolean DEFAULT_HTML_TEXT = false;
@@ -70,31 +70,31 @@ public final class LegendTexter extends PropertyHandler<Boolean> {
 	}
 
 	/**
-	 * Creates a legend texter with the envelop of the native object where TEXT property must be managed.
+	 * Creates a legend text handler with the envelop of the native object where TEXT property must be managed.
 	 * 
-	 * @param parent model which contains the legend texter.
+	 * @param parent model which contains the legend text handler.
 	 * @param envelop envelop of the native object where TEXT property must be managed
 	 */
-	public LegendTexter(AbstractNode parent, OptionsEnvelop<NativeObject> envelop) {
+	public LegendTextHandler(AbstractNode parent, OptionsEnvelop<NativeObject> envelop) {
 		this(parent, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates a legend texter with the native object where TEXT property must be managed.
+	 * Creates a legend text handler with the native object where TEXT property must be managed.
 	 * 
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 */
-	LegendTexter(NativeObject nativeObject) {
+	LegendTextHandler(NativeObject nativeObject) {
 		this(null, nativeObject);
 	}
 	
 	/**
-	 * Creates a legend texter with the native object where TEXT property must be managed.
+	 * Creates a legend text handler with the native object where TEXT property must be managed.
 	 * 
-	 * @param parent model which contains the legend texter.
+	 * @param parent model which contains the legend text handler.
 	 * @param nativeObject native object where SPANGAPS property must be managed
 	 */
-	private LegendTexter(AbstractNode parent, NativeObject nativeObject) {
+	private LegendTextHandler(AbstractNode parent, NativeObject nativeObject) {
 		super(parent, DEFAULT_HTML_TEXT, nativeObject);
 	}
 

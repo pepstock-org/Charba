@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.items.HasLegendText;
-import org.pepstock.charba.client.items.LegendTexter;
+import org.pepstock.charba.client.items.LegendTextHandler;
 
 /**
  * This is the title configuration of the legend.
@@ -62,8 +62,8 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 
 	// instance of font container
 	private final FontContainer fontContainer;
-	// legend texter instance
-	private final LegendTexter legendTexter;
+	// legend text handler instance
+	private final LegendTextHandler legendTextHandler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -77,8 +77,8 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 		super(legend, childKey, defaultValues, nativeObject);
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
-		// creates the legend texter
-		this.legendTexter = new LegendTexter(this, new OptionsEnvelop<>(getNativeObject()));
+		// creates the legend text handler
+		this.legendTextHandler = new LegendTextHandler(this, new OptionsEnvelop<>(getNativeObject()));
 	}
 
 	/*
@@ -94,11 +94,11 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTextHandler()
 	 */
 	@Override
-	public LegendTexter getLegendTexter() {
-		return legendTexter;
+	public LegendTextHandler getLegendTextHandler() {
+		return legendTextHandler;
 	}
 
 	/**

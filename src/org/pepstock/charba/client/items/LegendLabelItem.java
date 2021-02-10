@@ -45,8 +45,8 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 */
 	public static final LegendLabelItemFactory FACTORY = new LegendLabelItemFactory();
 
-	// legend texter instance
-	private final LegendTexter legendtexter;
+	// legend text handler instance
+	private final LegendTextHandler legendTextHandler;
 
 	/**
 	 * Standard constructor which wraps a new native java script object.
@@ -62,18 +62,18 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 */
 	LegendLabelItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// creates the legend texter
-		this.legendtexter = new LegendTexter(getNativeObject());
+		// creates the legend text handler
+		this.legendTextHandler = new LegendTextHandler(getNativeObject());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTexter()
+	 * @see org.pepstock.charba.client.items.HasLegendText#getLegendTextHandler()
 	 */
 	@Override
-	public LegendTexter getLegendTexter() {
-		return legendtexter;
+	public LegendTextHandler getLegendTextHandler() {
+		return legendTextHandler;
 	}
 
 	/**

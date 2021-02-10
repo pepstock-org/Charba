@@ -20,7 +20,7 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.options.LegendTitle;
 
 /**
- * Interface to map object whoch contains a text to show inside a legend element.<br>
+ * Interface to map object which contains a text to show inside a legend element.<br>
  * Used by {@link LegendItem} and {@link LegendTitle}.
  *
  * @author Andrea "Stock" Stocchero
@@ -28,11 +28,11 @@ import org.pepstock.charba.client.options.LegendTitle;
 public interface HasLegendText {
 
 	/**
-	 * Returns a legend texter instance to use into default methods of this interface.
+	 * Returns a legend text handler instance to use into default methods of this interface.
 	 * 
-	 * @return a legend texter instance
+	 * @return a legend text handler instance
 	 */
-	LegendTexter getLegendTexter();
+	LegendTextHandler getLegendTextHandler();
 
 	/**
 	 * Returns the text that will be displayed
@@ -40,11 +40,11 @@ public interface HasLegendText {
 	 * @return the text that will be displayed.
 	 */
 	default String getText() {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			return getLegendTexter().getText();
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			return getLegendTextHandler().getText();
 		}
-		// if here, legend texter not consistent
+		// if here, legend text handler not consistent
 		// returns undefined
 		return UndefinedValues.STRING;
 	}
@@ -55,9 +55,9 @@ public interface HasLegendText {
 	 * @param text the text that will be displayed
 	 */
 	default void setText(String text) {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			getLegendTexter().setText(text);
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			getLegendTextHandler().setText(text);
 		}
 	}
 
@@ -68,9 +68,9 @@ public interface HasLegendText {
 	 * @param text the label that will be displayed, as HTML
 	 */
 	default void setText(SafeHtml text) {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			getLegendTexter().setText(text);
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			getLegendTextHandler().setText(text);
 		}
 	}
 
@@ -81,11 +81,11 @@ public interface HasLegendText {
 	 * @return the label that will be displayed, as HTML.
 	 */
 	default SafeHtml getTextAsHtml() {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			return getLegendTexter().getTextAsHtml();
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			return getLegendTextHandler().getTextAsHtml();
 		}
-		// if here, legend texter not consistent
+		// if here, legend text handler not consistent
 		// returns default
 		return null;
 	}
@@ -97,13 +97,13 @@ public interface HasLegendText {
 	 * @return <code>true</code> if the text of legend item is HTML
 	 */
 	default boolean isHtmlText() {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			return getLegendTexter().isHtmlText();
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			return getLegendTextHandler().isHtmlText();
 		}
-		// if here, legend texter not consistent
+		// if here, legend text handler not consistent
 		// returns default
-		return LegendTexter.DEFAULT_HTML_TEXT;
+		return LegendTextHandler.DEFAULT_HTML_TEXT;
 	}
 
 	/**
@@ -113,9 +113,9 @@ public interface HasLegendText {
 	 * @param htmlText <code>true</code> if the text of legend item is HTML
 	 */
 	default void setHtmlText(boolean htmlText) {
-		// checks if legend texter is consistent
-		if (getLegendTexter() != null) {
-			getLegendTexter().setHtmlText(htmlText);
+		// checks if legend text handler is consistent
+		if (getLegendTextHandler() != null) {
+			getLegendTextHandler().setHtmlText(htmlText);
 		}
 	}
 
