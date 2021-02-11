@@ -48,7 +48,13 @@ public final class Charba {
 	 * @param loadDateTimeLibrary if <code>false</code>, the date time library is not injected
 	 */
 	public static void enable(boolean loadDateTimeLibrary) {
-		ResourcesType.setResources(loadDateTimeLibrary ? EmbeddedResources.INSTANCE : EmbeddedResources.INSTANCE_WITHOUT_DATE_LIBRARY);
+		// checks if resources is not already injected
+		if (!ResourcesType.isInjected()) {
+			// creates an envelop
+			ChartEnvelop<EmbeddedResources> envelop = new ChartEnvelop<>(loadDateTimeLibrary ? EmbeddedResources.INSTANCE : EmbeddedResources.INSTANCE_WITHOUT_DATE_LIBRARY);
+			// then sets resource
+			ResourcesType.setResources(envelop);
+		}
 	}
 
 }

@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.Charba;
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
@@ -44,9 +46,13 @@ public final class ResourcesType {
 	 * If the resources type was already set or if is <code>null</code> an exception will be throw.<br>
 	 * This is deprecated, use {@link Charba}.
 	 * 
-	 * @param resources the resources type to use to inject java script code
+	 * @param envelop envelop which contains the resources type to use to inject java script code
 	 */
-	public static void setResources(AbstractResources resources) {
+	public static <T extends AbstractResources> void setResources(ChartEnvelop<T> envelop) {
+		// checks envelop
+		IsEnvelop.checkIfValid(envelop);
+		// gets resources
+		AbstractResources resources = envelop.getContent();
 		// checks if argument is null
 		if (resources == null) {
 			// exception
@@ -92,7 +98,7 @@ public final class ResourcesType {
 	 * 
 	 * @return <code>true</code> if the resource has been injected
 	 */
-	static boolean isInjected() {
+	public static boolean isInjected() {
 		return injected;
 	}
 

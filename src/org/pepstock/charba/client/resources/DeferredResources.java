@@ -127,7 +127,7 @@ public final class DeferredResources extends AbstractResources implements IsReso
 	 */
 	final void injected() {
 		// checks if resource and module have been already injected
-		if (!DateAdapterModule.get().isInjected() && !ResourcesType.isInjected()) {
+		if (!ResourcesType.isInjected() && !DateAdapterModule.get().isInjected()) {
 			// sets flags it has loaded
 			ResourcesType.setInjected(true);
 			// notify to module that has been injected

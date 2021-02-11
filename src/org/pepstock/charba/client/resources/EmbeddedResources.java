@@ -58,7 +58,7 @@ public final class EmbeddedResources extends AbstractResources implements IsReso
 	@Override
 	public void inject() {
 		// checks if resource and module have been already injected
-		if (!DateAdapterModule.get().isInjected() && !ResourcesType.isInjected()) {
+		if (!ResourcesType.isInjected() && !DateAdapterModule.get().isInjected()) {
 			// inject Chart.js if not already loaded
 			ensureInjected(CHARTJS);
 			// checks if the library must be loaded

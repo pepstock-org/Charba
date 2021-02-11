@@ -17,11 +17,12 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.resources.DeferredResources;
 import org.pepstock.charba.client.resources.EntryPointStarter;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Entry point to initialize and inject all Charba modules, leveraging on deferred resources mode.<br>
  * This helps when the GWT application is leveraging on code splitting.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -33,7 +34,7 @@ public final class DeferredCharba {
 	private DeferredCharba() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Enables Charba in the application, injecting also the date time library.<br>
 	 * Start an entry point as a runnable.<br>
@@ -56,7 +57,13 @@ public final class DeferredCharba {
 	 * @param loadDateTimeLibrary if <code>false</code>, the date time library is not injected
 	 */
 	public static void enable(Runnable runnable, boolean loadDateTimeLibrary) {
-		EntryPointStarter.run(runnable, loadDateTimeLibrary ? DeferredResources.INSTANCE : DeferredResources.INSTANCE_WITHOUT_DATE_LIBRARY);
+		// checks if resources is not already injected
+		if (!ResourcesType.isInjected()) {
+			// creates an envelop
+			ChartEnvelop<DeferredResources> envelop = new ChartEnvelop<>(loadDateTimeLibrary ? DeferredResources.INSTANCE : DeferredResources.INSTANCE_WITHOUT_DATE_LIBRARY);
+			// invokes the async injection
+			EntryPointStarter.run(runnable, envelop);
+		}
 	}
 
 }

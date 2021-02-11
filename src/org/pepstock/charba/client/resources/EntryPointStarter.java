@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.DeferredCharba;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.IsEnvelop;
 
 import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
@@ -65,16 +67,20 @@ public final class EntryPointStarter {
 	 * This is deprecated, use {@link DeferredCharba}.
 	 * 
 	 * @param runnable the entry point instance as runnable
-	 * @param resources deferred resources instance to set
+	 * @param envelop envelop which contains the deferred resources instance to set
 	 */
-	public static void run(final Runnable runnable, DeferredResources resources) {
+	public static void run(final Runnable runnable, ChartEnvelop<DeferredResources> envelop) {
+		// checks envelop
+		IsEnvelop.checkIfValid(envelop);
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception
 			throw new IllegalArgumentException("Runnable argument is null");
 		}
+		// gets resources
+		DeferredResources resources = envelop.getContent();
 		// sets deferred resources
-		ResourcesType.setResources(resources);
+		ResourcesType.setResources(envelop);
 		// checks if is already injected
 		if (!ResourcesType.isInjected()) {
 			// starts loading the CHART.JS

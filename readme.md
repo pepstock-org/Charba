@@ -148,8 +148,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
  
- * rename `setClientBundle` method of `ResourcesType` class to `setResources` to initialize **Charba**.
-   * There are 2 new entry ppint to initialize **Charba**:
+ * remove `ResourcesType` and `EntryPointStarter` classes as objects to initialize **Charba**.
+   * There are 2 new entry points to initialize **Charba**:
      * `Charba.enable()` or `Charba.enable(boolean)` for embedded resources
      * `DeferredCharba.enable(Runnable)` or `Charba.enable(Runnable, boolean)` for deferred resources
  * changes by new **CHART.JS version**:
