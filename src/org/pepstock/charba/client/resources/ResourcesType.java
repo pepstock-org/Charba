@@ -47,6 +47,7 @@ public final class ResourcesType {
 	 * This is deprecated, use {@link Charba}.
 	 * 
 	 * @param envelop envelop which contains the resources type to use to inject java script code
+	 * @param <T> type of resources to inject
 	 */
 	public static <T extends AbstractResources> void setResources(ChartEnvelop<T> envelop) {
 		// checks envelop
