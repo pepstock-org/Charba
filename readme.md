@@ -150,8 +150,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  
  * rename `setClientBundle` method of `ResourcesType` class to `setResources` to initialize **Charba**.
    * There are 2 new entry ppint to initialize **Charba**:
-     1 `Charba.enable()` or `Charba.enable(boolean)` for embedded resources
-     1 `DeferredCharba.enable(Runnable)` or `Charba.enable(Runnable, boolean)` for deferred resources
+     * `Charba.enable()` or `Charba.enable(boolean)` for embedded resources
+     * `DeferredCharba.enable(Runnable)` or `Charba.enable(Runnable, boolean)` for deferred resources
  * changes by new **CHART.JS version**:
    * **Drop Internet Explorer 11 support**.
    * remove `isAnimating` method from `ChartNode` class.
