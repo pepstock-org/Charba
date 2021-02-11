@@ -76,7 +76,7 @@ public final class Merger {
 	 */
 	private Merger() {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 	}
 
 	/**

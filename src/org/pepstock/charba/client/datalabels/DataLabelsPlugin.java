@@ -86,7 +86,7 @@ public final class DataLabelsPlugin extends AbstractExtensionPlugin<DataLabelsOp
 	 */
 	public static void enable(boolean enableToAllCharts) {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// injects DATALABELS plugin
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level

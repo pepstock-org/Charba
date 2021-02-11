@@ -96,7 +96,7 @@ public final class Defaults {
 	 */
 	private Defaults() {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// gets default from Chart
 		NativeObject defaults = Chart.getDefaults();
 		// gets defaults from CHART.JS

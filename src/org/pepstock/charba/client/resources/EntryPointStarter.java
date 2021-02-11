@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.DeferredCharba;
 import org.pepstock.charba.client.Injector;
 
 import com.google.gwt.resources.client.ResourceCallback;
@@ -60,19 +61,20 @@ public final class EntryPointStarter {
 	/**
 	 * Start an entry point as a runnable.<br>
 	 * This runnable instance must contains all calls to chart.<br>
-	 * This helps when the GWT application is leveraging on code splitting.
+	 * This helps when the GWT application is leveraging on code splitting.<br>
+	 * This is deprecated, use {@link DeferredCharba}.
 	 * 
-	 * @param resources deferred resources instance to set
 	 * @param runnable the entry point instance as runnable
+	 * @param resources deferred resources instance to set
 	 */
-	public static void run(DeferredResources resources, final Runnable runnable) {
+	public static void run(final Runnable runnable, DeferredResources resources) {
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception
 			throw new IllegalArgumentException("Runnable argument is null");
 		}
 		// sets deferred resources
-		ResourcesType.setClientBundle(resources);
+		ResourcesType.setResources(resources);
 		// checks if is already injected
 		if (!ResourcesType.isInjected()) {
 			// starts loading the CHART.JS

@@ -42,7 +42,7 @@ public final class Controllers {
 	 */
 	private Controllers() {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 	}
 
 	/**

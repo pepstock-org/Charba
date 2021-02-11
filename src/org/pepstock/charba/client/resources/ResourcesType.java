@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.Charba;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
@@ -40,11 +41,12 @@ public final class ResourcesType {
 
 	/**
 	 * Sets the resources type to use to inject java script code.<br>
-	 * If the resources type was already set or if is <code>null</code> an exception will be throw.
+	 * If the resources type was already set or if is <code>null</code> an exception will be throw.<br>
+	 * This is deprecated, use {@link Charba}.
 	 * 
 	 * @param resources the resources type to use to inject java script code
 	 */
-	public static void setClientBundle(AbstractResources resources) {
+	public static void setResources(AbstractResources resources) {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
@@ -75,7 +77,7 @@ public final class ResourcesType {
 	 * 
 	 * @return the resources type to use to inject java script code
 	 */
-	public static AbstractResources getClientBundle() {
+	public static AbstractResources getResources() {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception

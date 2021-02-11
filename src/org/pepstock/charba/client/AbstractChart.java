@@ -163,7 +163,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			canvas = null;
 		}
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// creates plugins container
 		plugins = new Plugins();
 		// creates defaults options for this chart type

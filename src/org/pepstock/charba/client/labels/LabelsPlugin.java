@@ -64,7 +64,7 @@ public final class LabelsPlugin {
 	 */
 	public static void enable(boolean enableToAllCharts) {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// injects LABELS plugin
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level

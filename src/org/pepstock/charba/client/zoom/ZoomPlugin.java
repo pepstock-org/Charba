@@ -102,7 +102,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 */
 	public static void enable(boolean enableToAllCharts, boolean enableHammerInjection) {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// checks if hammer must be injected
 		if (enableHammerInjection) {
 			// injects HAMMER library

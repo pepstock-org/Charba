@@ -36,7 +36,7 @@ public final class Helpers {
 	 */
 	private Helpers() {
 		// inject Chart.js and date library if not already loaded
-		ResourcesType.getClientBundle().inject();
+		ResourcesType.getResources().inject();
 		// gets native object from CHART.JS
 		this.nativeObject = Chart.getHelpers();
 	}
