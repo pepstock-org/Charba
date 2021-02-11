@@ -310,6 +310,7 @@
 				<exclude name="**/*.js" />
 				<exclude name="**/*.xml" />
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/DeferredCharba.java"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResourcesBundle.java"/>
 				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
@@ -361,6 +362,7 @@
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/DeferredCharba.java"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResources.java"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResourcesBundle.java"/>
 				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter.java"/>
