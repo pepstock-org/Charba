@@ -17,7 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
 
@@ -28,6 +27,36 @@ import org.pepstock.charba.client.options.IsScaleId;
  *
  */
 interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
+	 */
+	@Override
+	default AnnotationType getType() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getXScaleID()
+	 */
+	@Override
+	default IsScaleId getXScaleID() {
+		return IsDefaultsXYAnnotation.super.getXScaleID();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getYScaleID()
+	 */
+	@Override
+	default IsScaleId getYScaleID() {
+		return IsDefaultsXYAnnotation.super.getYScaleID();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -52,7 +81,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @return the ID of the scale to bind onto
 	 */
 	default IsScaleId getScaleID() {
-		return DefaultScaleId.Y;
+		return null;
 	}
 
 	/**
