@@ -48,9 +48,10 @@ public final class CScheduler {
 	 * Schedules immediately a task, without any delay.
 	 *
 	 * @param task the command to execute
+	 * @return the task scheduling registration for canceling, if needed
 	 */
-	public void submit(Runnable task) {
-		submit(task, 0);
+	public CSchedulerRegistration submit(Runnable task) {
+		return submit(task, 0);
 	}
 
 	/**
@@ -58,19 +59,24 @@ public final class CScheduler {
 	 *
 	 * @param task the command to execute
 	 * @param delay the amount of time to wait after one invocation ends before the next invocation
+	 * @return the task scheduling registration for canceling, if needed
 	 */
-	public void submit(Runnable task, int delay) {
+	public CSchedulerRegistration submit(Runnable task, int delay) {
 		// checks if command is consistent
-		if (task != null) {
-			// normalized the delay
-			int normDelay = Math.max(delay, 0);
-			// creates the wrapper for task
-			RunnableWrapper wrapper = new RunnableWrapper(task);
-			// invokes the runnable
-			int timeoutID = Window.setTimeout(wrapper::run, normDelay);
-			// stores id to wrapper
-			wrapper.setTimeoutID(timeoutID);
+		if (task == null) {
+			// exception
+			throw new IllegalArgumentException("Task instance is null");
 		}
+		// normalized the delay
+		int normDelay = Math.max(delay, 0);
+		// creates the wrapper for task
+		RunnableWrapper wrapper = new RunnableWrapper(task);
+		// invokes the runnable
+		int timeoutID = Window.setTimeout(wrapper::run, normDelay);
+		// stores id to wrapper
+		wrapper.setTimeoutID(timeoutID);
+		// return the registration for task
+		return new CSchedulerRegistration(timeoutID);
 	}
 
 	/**
