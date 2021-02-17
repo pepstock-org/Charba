@@ -18,6 +18,7 @@ package org.pepstock.charba.client.gwt.widgets;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.ChartTimerTask;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.UpdateConfiguration;
@@ -35,6 +36,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
+import org.pepstock.charba.client.utils.CTimer;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -241,6 +243,26 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public final IsDefaultScaledOptions getWholeOptions() {
 		return chart.getWholeOptions();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getTimer()
+	 */
+	@Override
+	public final CTimer getTimer() {
+		return chart.getTimer();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#createAndSetTimer(org.pepstock.charba.client.ChartTimerTask, int)
+	 */
+	@Override
+	public final void createAndSetTimer(ChartTimerTask task, int interval) {
+		chart.createAndSetTimer(task, interval);
 	}
 
 	/*

@@ -525,7 +525,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * Manages the CLICK event firing an annotation event.
 	 * 
 	 * @param functionContext context value of <code>this</code> to the execution context of function
-	 * @param context plugin context which contains teh element
+	 * @param context plugin context which contains the element
 	 */
 	private void onClick(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
@@ -545,7 +545,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * Manages the DBLCLICK event firing an annotation event.
 	 * 
 	 * @param functionContext context value of <code>this</code> to the execution context of function
-	 * @param context plugin context which contains teh element
+	 * @param context plugin context which contains the element
 	 */
 	private void onDblclick(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback

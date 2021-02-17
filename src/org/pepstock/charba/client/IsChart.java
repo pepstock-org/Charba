@@ -34,6 +34,7 @@ import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
+import org.pepstock.charba.client.utils.CTimer;
 
 /**
  * Interface which defines a chart.
@@ -268,6 +269,23 @@ public interface IsChart {
 	 * @return the default options by a chart instance, merging global, chart type global and chart options
 	 */
 	IsDefaultScaledOptions getWholeOptions();
+	
+	/**
+	 * Returns a {@link CTimer} instance inside chart.
+	 * 
+	 * @return the timer instance of the chart
+	 */
+	CTimer getTimer();
+
+	/**
+	 * Creates a {@link CTimer} instance inside chart.<br>
+	 * It can be created only once during the life cycle of the chart.
+	 * 
+	 * @param task the task to be executed repeatedly
+	 * @param interval the time, in milliseconds (thousands of a second), the timer should delay in between executions of the specified task.<br>
+	 *            Must be greater than 0.
+	 */
+	void createAndSetTimer(ChartTimerTask task, int interval);
 
 	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.

@@ -61,6 +61,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.utils.CTimer;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -115,6 +116,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final IsDefaultScaledOptions defaultChartOptions;
 	// cursor defined when chart is created
 	private final CursorType initialCursor;
+	// timer instance
+	private CTimer timer = null;
 
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
@@ -415,6 +418,40 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
+	 * Returns a {@link CTimer} instance inside chart.
+	 * 
+	 * @return the timer instance of the chart
+	 */
+	@Override
+	public final CTimer getTimer() {
+		return timer;
+	}
+
+	/**
+	 * Creates a {@link CTimer} instance inside chart.<br>
+	 * It can be created only once during the life cycle of the chart.
+	 * 
+	 * @param task the task to be executed repeatedly
+	 * @param interval the time, in milliseconds (thousands of a second), the timer should delay in between executions of the specified task.<br>
+	 *            Must be greater than 0.
+	 */
+	@Override
+	public void createAndSetTimer(ChartTimerTask task, int interval) {
+		// checks if timer is already created
+		if (timer != null) {
+			// exception!
+			throw new IllegalArgumentException("Timer instance is already created and can not be overrided");
+		}
+		// checks if task is consistent
+		if (task == null) {
+			// exception!
+			throw new IllegalArgumentException("Task instance is null");
+		}
+		// creates and stores the timer
+		this.timer = new CTimer(new ChartRunnableWrapper(this, task), interval);
+	}
+
+	/**
 	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
 	 * 
 	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise <code>false</code>.
@@ -499,6 +536,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void destroy() {
 		// notify before destroy
 		Charts.fireBeforeDestory(this);
+		// cancel the timer if exist
+		if (timer != null) {
+			// stops timer
+			timer.stop();
+		}
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if chart is created
@@ -1024,6 +1066,12 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
 			// notify after init
 			Charts.fireAfterInit(this);
+			// cancel the timer if exist and it is
+			// still in initialized status
+			if (timer != null && CTimer.Status.INITIALIZED.equals(timer.getStatus())) {
+				// stops timer
+				timer.start();
+			}
 		}
 	}
 
@@ -1191,6 +1239,42 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		 */
 		private NativeObject nativeObject() {
 			return super.getNativeObject();
+		}
+
+	}
+
+	/**
+	 * Wrapper of a {@link ChartTimerTask} in order to to be added to a {@link CTimer}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class ChartRunnableWrapper implements Runnable {
+		
+		private final IsChart chart;
+		
+		private final ChartTimerTask task;
+		
+		/**
+		 * Creates the runnable wrapping a custom task.
+		 * 
+		 * @param chart chart instance
+		 * @param task task to be wrapper
+		 */
+		private ChartRunnableWrapper(IsChart chart, ChartTimerTask task) {
+			this.chart = chart;
+			this.task = task;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run() {
+			// executes the task
+			task.execute(chart);
 		}
 
 	}

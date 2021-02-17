@@ -37,15 +37,15 @@ public final class Window {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called for <code>setTimeout</code> method.
+	 * Java script FUNCTION callback called for <code>setTimeout</code> and <code>setInterval</code> methods.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface TimeoutCallback {
+	interface AsyncCallback {
 
 		/**
-		 * Method of function to be called for <code>setTimeout</code> method.
+		 * Method of function to be called for <code>setTimeout</code> and <code>setInterval</code> methods.
 		 */
 		void call();
 	}
@@ -82,15 +82,33 @@ public final class Window {
 	 * @return the returned timer identifier is a positive integer value which identifies the timer created by the call.<br>
 	 *         This value can be passed to {@link Window#clearTimeout(int)} to cancel the timeout.
 	 */
-	static native int setTimeout(TimeoutCallback function, int delay);
+	static native int setTimeout(AsyncCallback function, int delay);
 
 	/**
-	 * Cancels a timeout previously established by calling {@link Window#setTimeout(TimeoutCallback, int)} method.
+	 * Cancels a timeout previously established by calling {@link Window#setTimeout(AsyncCallback, int)} method.
 	 * 
 	 * @param timeoutID the identifier of the timeout you want to cancel.<br>
-	 *            This ID was returned by the corresponding call to {@link Window#setTimeout(TimeoutCallback, int)} method.
+	 *            This ID was returned by the corresponding call to {@link Window#setTimeout(AsyncCallback, int)} method.
 	 */
 	static native void clearTimeout(int timeoutID);
+
+	/**
+	 * Sets a timer which executes repeatedly calls a function with a fixed time delay between each call.<br>
+	 * It returns an interval ID which uniquely identifies the interval.
+	 * 
+	 * @param function a function to be executed repeatedly
+	 * @param interval the time, in milliseconds (thousands of a second), the timer should delay in between executions of the specified function
+	 * @return an interval ID which uniquely identifies the interval
+	 */
+	static native int setInterval(AsyncCallback function, int interval);
+
+	/**
+	 * cancels a timed, repeating action which was previously established by a call to {@link Window#setInterval(AsyncCallback, int)} method.
+	 * 
+	 * @param internalID the identifier of the repeated action you want to cancel.<br>
+	 *            This ID was returned by the corresponding call to {@link Window#setInterval(AsyncCallback, int)} method.
+	 */
+	static native void clearInterval(int internalID);
 
 	/**
 	 * Returns the Console object
