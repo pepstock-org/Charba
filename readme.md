@@ -473,6 +473,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable CI by GitHub Action, disabling Travis.
  * fix font and color fallbacks to the defaults values.
  * add `CScheduler` class in order to provide asynchronous and delayed task scheduling.
+ * add `CTimer` class in order to provide asynchronous and repeatedly task scheduling.
 
 License
 -------
