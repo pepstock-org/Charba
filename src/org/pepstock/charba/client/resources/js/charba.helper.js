@@ -110,15 +110,12 @@
 				// calls CALLBACK
 				var result = obj.callback.apply(this, args);
 				if (result === null){
-					// do nothing console.log("null");
+					// do nothing
 				} else if (result === undefined){
-					//console.log("undefined");
+					// do nothing
 				} else {
-					//console.log(result);
 					return result;
 				}
-    		} else {
-    			//console.log("No caller");
     		}
 		};
     	return obj;
