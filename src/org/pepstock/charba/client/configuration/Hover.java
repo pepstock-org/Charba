@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Definitions about how elements appear in the tooltip, hovering the chart.
@@ -25,17 +24,15 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Hover {
-
-	private final ExtendedOptions options;
+public class Hover extends ConfigurationOptionsContainer {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Hover(ExtendedOptions options) {
-		this.options = options;
+	Hover(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**
@@ -44,7 +41,7 @@ public class Hover {
 	 * @param mode which elements appear in the tooltip.
 	 */
 	public void setMode(InteractionMode mode) {
-		options.getHover().setMode(mode);
+		getConfiguration().getHover().setMode(mode);
 	}
 
 	/**
@@ -53,7 +50,7 @@ public class Hover {
 	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
-		return options.getHover().getMode();
+		return getConfiguration().getHover().getMode();
 	}
 
 	/**
@@ -62,7 +59,7 @@ public class Hover {
 	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
-		options.getHover().setIntersect(intersect);
+		getConfiguration().getHover().setIntersect(intersect);
 	}
 
 	/**
@@ -71,7 +68,7 @@ public class Hover {
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
-		return options.getHover().isIntersect();
+		return getConfiguration().getHover().isIntersect();
 	}
 
 	/**
@@ -81,7 +78,7 @@ public class Hover {
 	 * @param axis define which directions are used in calculating distances.
 	 */
 	public void setAxis(InteractionAxis axis) {
-		options.getHover().setAxis(axis);
+		getConfiguration().getHover().setAxis(axis);
 	}
 
 	/**
@@ -90,6 +87,6 @@ public class Hover {
 	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
-		return options.getHover().getAxis();
+		return getConfiguration().getHover().getAxis();
 	}
 }

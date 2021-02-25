@@ -113,7 +113,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		CLICK("click"),
 		DOUBLE_CLICK("dblclick"),
 		// internal property to set an unique id for caching
-		CHARBA_ANNOTATION_ID("_charbaAnnotationId");
+		CHARBA_ANNOTATION_ID("charbaAnnotationId");
 
 		// name value of property
 		private final String value;
@@ -213,8 +213,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	AbstractAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(nativeObject);
-		// redefine hash code
-		super.redefineHashcode();
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
@@ -485,7 +483,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * Manages the ENTER event invoking the callback is exists.
 	 * 
 	 * @param functionContext context value of <code>this</code> to the execution context of function
-	 * @param context plugin context which contains teh element
+	 * @param context plugin context which contains the element
 	 */
 	private void onEnter(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
@@ -505,7 +503,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * Manages the LEAVE event firing an annotation event.
 	 * 
 	 * @param functionContext context value of <code>this</code> to the execution context of function
-	 * @param context plugin context which contains teh element
+	 * @param context plugin context which contains the element
 	 */
 	private void onLeave(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback

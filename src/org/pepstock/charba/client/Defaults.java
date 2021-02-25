@@ -653,9 +653,6 @@ public final class Defaults {
 		 */
 		InternalDefaultScales(NativeObject nativeObject) {
 			super(nativeObject);
-			// redefines hashcode in order do not have
-			// the property $H for hashcode
-			super.redefineHashcode();
 		}
 
 		/**
@@ -763,6 +760,23 @@ public final class Defaults {
 				}
 			}
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onEndDrawing(IsChart chart) {
+			// gets native chart
+			Chart nativeChart = Charts.getNative(chart);
+			// checks if chart is consistent
+			if (nativeChart != null) {
+				// stores the chart options into config options
+				chart.getOptions().setChartOptions(new ChartEnvelop<>(nativeChart.getOptions()));
+			}
+		}
+
 	}
 
 }

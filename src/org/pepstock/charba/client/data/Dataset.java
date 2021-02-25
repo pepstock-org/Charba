@@ -228,12 +228,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		TYPE("type"),
 		HIDDEN("hidden"),
 		// internal key to store a unique id
-		CHARBA_ID("_charbaId"),
+		CHARBA_ID("charbaId"),
 		// internal key to store patterns and gradients
-		CHARBA_PATTERNS("_charbaPatterns"),
-		CHARBA_GRADIENTS("_charbaGradients"),
+		CHARBA_PATTERNS("charbaPatterns"),
+		CHARBA_GRADIENTS("charbaGradients"),
 		// internal key to store data type
-		CHARBA_DATA_TYPE("_charbaDataType");
+		CHARBA_DATA_TYPE("charbaDataType");
 
 		// name value of property
 		private final String value;
@@ -480,7 +480,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	final void resetBeingPatterns(Key key) {
 		// removes color key from dataset object
-		removeIfExists(key);
+		remove(key);
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 		// here must be stored!!
@@ -494,7 +494,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	final void resetBeingGradients(Key key) {
 		// removes color key from dataset object
-		removeIfExists(key);
+		remove(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
 		// here must be stored!!
@@ -508,7 +508,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	final void resetBeingCallback(Key key) {
 		// removes color key from dataset object
-		removeIfExists(key);
+		remove(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
 		// remove from gradients

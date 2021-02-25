@@ -42,11 +42,11 @@ public final class Pattern extends CanvasObject {
 	 */
 	private enum Property implements Key
 	{
-		CHARBA_PATTERN_IMG("_charbaPatternImg"),
-		CHARBA_PATTERN_REPETITION("_charbaPatternRepetition"),
-		CHARBA_PATTERN_CANVAS("_charbaPatternCanvas"),
-		CHARBA_PATTERN_WIDTH("_charbaPatternWidth"),
-		CHARBA_PATTERN_HEIGHT("_charbaPatternHeight");
+		CHARBA_PATTERN_IMG("charbaPatternImg"),
+		CHARBA_PATTERN_REPETITION("charbaPatternRepetition"),
+		CHARBA_PATTERN_CANVAS("charbaPatternCanvas"),
+		CHARBA_PATTERN_WIDTH("charbaPatternWidth"),
+		CHARBA_PATTERN_HEIGHT("charbaPatternHeight");
 
 		// name value of property
 		private final String value;

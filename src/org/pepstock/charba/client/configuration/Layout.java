@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.ExtendedOptions;
-
 /**
  * The layout configuration is needed to set the padding.
  * 
@@ -32,7 +30,7 @@ public class Layout {
 	 * 
 	 * @param options root options element.
 	 */
-	Layout(ExtendedOptions options) {
+	Layout(ConfigurationOptions options) {
 		// sets the padding object
 		padding = new Padding(options);
 	}

@@ -40,12 +40,13 @@ public class StackedOptions extends ScalesOptions {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for stacked chart
-		scales = new StackedScales(chart, getConfiguration());
+		scales = new StackedScales(this);
 		// sets if only Y scaled
 		scales.setOnlyYAxis(onlyYScaled);
 		// creates the axes
 		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart);
 		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart);
+		// stores axes
 		scales.setAxes(axis1, axis2);
 	}
 

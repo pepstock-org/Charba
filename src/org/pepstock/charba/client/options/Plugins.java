@@ -164,7 +164,7 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 				setValue(pluginId, getParent().getTooltips());
 			} else {
 				// removes key it exist
-				removeIfExists(pluginId);
+				remove(pluginId);
 			}
 		}
 	}

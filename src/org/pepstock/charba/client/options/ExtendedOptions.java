@@ -71,7 +71,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param nativeObject options as native object
 	 */
 	ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
-		super(IsChart.checkAndGetIfValid(chart).getId(), defaultValues, nativeObject);
+		super(IsChart.checkAndGetIfValid(chart).getId(), defaultValues, nativeObject, false);
 		// stores chart instance
 		this.chart = chart;
 		// gets scales sub elements

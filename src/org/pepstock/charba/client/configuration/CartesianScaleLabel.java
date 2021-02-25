@@ -41,7 +41,7 @@ public class CartesianScaleLabel extends AxisContainer {
 		super(axis);
 		// gets embedded elements
 		padding = new CartesianPadding(axis);
-		font = new Font(axis.getConfiguration().getScaleLabel().getFont());
+		font = new Font(() -> getAxis().getConfiguration().getScaleLabel().getFont());
 	}
 
 	/**

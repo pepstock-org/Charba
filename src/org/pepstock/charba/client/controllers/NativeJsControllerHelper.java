@@ -123,8 +123,9 @@ final class NativeJsControllerHelper {
 	 * 
 	 * @param chartType extended chart type
 	 * @param context context of controller
+	 * @param resetNewElements <code>true</code> if the new elements must be reset
 	 */
 	@JsMethod
-	static native void buildOrUpdateElements(String chartType, ControllerContext context);
+	static native void buildOrUpdateElements(String chartType, ControllerContext context, boolean resetNewElements);
 
 }

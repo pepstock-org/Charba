@@ -95,8 +95,8 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		REVERSE("reverse"),
 		STACKED("stacked"),
 		// internal property for min and max index in order to store as integer
-		CHARBA_MIN_INDEX("_charbaMinIndex"),
-		CHARBA_MAX_INDEX("_charbaMaxIndex");
+		CHARBA_MIN_INDEX("charbaMinIndex"),
+		CHARBA_MAX_INDEX("charbaMaxIndex");
 
 		// name value of property
 		private final String value;
@@ -132,7 +132,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		super(null, null, defaultValues, nativeObject);
 		// gets all sub elements
 		this.angleLines = new AngleLines(this, Property.ANGLE_LINES, getDefaultValues().getAngleLines(), getValue(Property.ANGLE_LINES));
-		this.gridLines = new GridLines(this, Property.GRID_LINES, getDefaultValues().getGrideLines(), getValue(Property.GRID_LINES));
+		this.gridLines = new GridLines(this, Property.GRID_LINES, getDefaultValues().getGridLines(), getValue(Property.GRID_LINES));
 		this.pointLabels = new PointLabels(this, Property.POINT_LABELS, getDefaultValues().getPointLabels(), getValue(Property.POINT_LABELS));
 		this.scaleLabel = new ScaleLabel(this, Property.SCALE_LABEL, getDefaultValues().getScaleLabel(), getValue(Property.SCALE_LABEL));
 		this.ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
@@ -175,10 +175,10 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	/**
 	 * Returns the grid lines element.
 	 * 
-	 * @return the grideLines
+	 * @return the grid lines
 	 */
 	@Override
-	public final GridLines getGrideLines() {
+	public final GridLines getGridLines() {
 		return gridLines;
 	}
 

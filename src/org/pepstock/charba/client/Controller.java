@@ -17,8 +17,8 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
-import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.ControllerDatasetElement;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 
 /**
@@ -146,7 +146,8 @@ public interface Controller {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
+	 * @param resetNewElements <code>true</code> if the new elements must be reset
 	 */
-	void buildOrUpdateElements(ControllerContext context, IsChart chart);
+	void buildOrUpdateElements(ControllerContext context, IsChart chart, boolean resetNewElements);
 
 }

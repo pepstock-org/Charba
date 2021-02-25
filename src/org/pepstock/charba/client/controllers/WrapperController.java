@@ -173,8 +173,9 @@ final class WrapperController extends NativeObjectContainer {
 		 * The default implementation handles the number of data points changing and creating elements appropriately.
 		 * 
 		 * @param context java script <code>this</code> function context.
+		 * @param resetNewElements <code>true</code> if the new elements must be reset
 		 */
-		void call(ControllerContext context);
+		void call(ControllerContext context, boolean resetNewElements);
 	}
 
 	// ---------------------------
@@ -273,7 +274,7 @@ final class WrapperController extends NativeObjectContainer {
 		// invoke user method implementation
 		linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
 		// invoke user method implementation
-		buildOrUpdateElements.setCallback(context -> onBuildOrUpdateElements(context, context.getChart()));
+		buildOrUpdateElements.setCallback((context, resetNewElements) -> onBuildOrUpdateElements(context, context.getChart(), resetNewElements));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
@@ -415,11 +416,12 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
+	 * @param resetNewElements <code>true</code> if the new elements must be reset
 	 */
-	void onBuildOrUpdateElements(ControllerContext context, IsChart chart) {
+	void onBuildOrUpdateElements(ControllerContext context, IsChart chart, boolean resetNewElements) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.buildOrUpdateElements(context, chart);
+			delegation.buildOrUpdateElements(context, chart, resetNewElements);
 		}
 	}
 

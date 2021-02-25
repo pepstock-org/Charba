@@ -91,7 +91,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 					// then it must be removed in order to enable the default
 					// the type of property should be boolean because
 					// set to false previously
-					removeIfExists(property);
+					remove(property);
 				}
 				// removes from disabled properties
 				animationDisabledProperties.remove(property.value());
@@ -227,7 +227,7 @@ abstract class AbstractAnimationMode<T extends Key, D extends IsDefaultAnimation
 					// then it must be removed in order to enable the default
 					// the type of collection should be boolean because
 					// set to false previously
-					removeIfExists(collection);
+					remove(collection);
 				}
 			} else {
 				// sets the collection to false

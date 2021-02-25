@@ -34,7 +34,7 @@ abstract class CartesianNumericTick extends CartesianTick implements IsNumericTi
 	 */
 	CartesianNumericTick(Axis axis) {
 		super(axis);
-		this.numberFormatter = new NumberFormatter(getConfiguration().getNumberFormat());
+		this.numberFormatter = new NumberFormatter(() -> getConfiguration().getNumberFormat());
 	}
 
 	/*

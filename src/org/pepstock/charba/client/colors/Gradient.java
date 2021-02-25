@@ -50,10 +50,10 @@ public final class Gradient extends CanvasObject {
 	 */
 	private enum Property implements Key
 	{
-		CHARBA_GRADIENT_COLORS("_charbaGradientColors", ObjectType.ARRAY),
-		CHARBA_GRADIENT_TYPE("_charbaGradientType", ObjectType.STRING),
-		CHARBA_GRADIENT_ORIENTATION("_charbaGradientOrientation", ObjectType.STRING),
-		CHARBA_GRADIENT_SCOPE("_charbaGradientScope", ObjectType.STRING);
+		CHARBA_GRADIENT_COLORS("charbaGradientColors", ObjectType.ARRAY),
+		CHARBA_GRADIENT_TYPE("charbaGradientType", ObjectType.STRING),
+		CHARBA_GRADIENT_ORIENTATION("charbaGradientOrientation", ObjectType.STRING),
+		CHARBA_GRADIENT_SCOPE("charbaGradientScope", ObjectType.STRING);
 
 		// name value of property
 		private final String value;

@@ -129,7 +129,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 			remove(FillHandler.Property.FILL);
 		}
 		// remove if exist flag
-		removeIfExists(FillHandler.Property.CHARBA_FILLING_MODE);
+		remove(FillHandler.Property.CHARBA_FILLING_MODE);
 	}
 
 	/**

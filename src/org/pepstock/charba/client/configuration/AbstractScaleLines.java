@@ -85,25 +85,17 @@ abstract class AbstractScaleLines extends AxisContainer {
 
 	}
 
-	// instance of abstract node where to store the callbacks
-	private final AbstractNode node;
-
 	/**
 	 * Builds the object storing the axis which this scale lines belongs to.
 	 * 
 	 * @param axis axis which scale grid lines belongs to.
-	 * @param node instance of abstract node where to store the callbacks
 	 * @param defaultValues default value to use
 	 */
-	AbstractScaleLines(Axis axis, AbstractNode node, IsDefaultScaleLines defaultValues) {
+	AbstractScaleLines(Axis axis, IsDefaultScaleLines defaultValues) {
 		super(axis);
-		// checks node instance
-		if (node == null) {
-			throw new IllegalArgumentException("Node argument is null");
-		}
-		this.node = node;
 		// checks default value instance
 		if (defaultValues == null) {
+			// exception!
 			throw new IllegalArgumentException("Default value argument is null");
 		}
 		// -------------------------------
@@ -117,6 +109,13 @@ abstract class AbstractScaleLines extends AxisContainer {
 		borderDashOffsetCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
 	}
+
+	/**
+	 * Returns the options element to use to store the properties.
+	 * 
+	 * @return the options element to use to store the properties
+	 */
+	abstract AbstractNode getElement();
 
 	/**
 	 * Returns the color callback instance.
@@ -138,10 +137,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (colorCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(node, Property.COLOR, colorCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, colorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(node, Property.COLOR, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, null);
 		}
 	}
 
@@ -165,10 +164,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (lineWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(node, Property.LINE_WIDTH, lineWidthCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(node, Property.LINE_WIDTH, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, null);
 		}
 	}
 
@@ -192,11 +191,26 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (borderDashOffsetCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(node, Property.BORDER_DASH_OFFSET, borderDashOffsetCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(node, Property.BORDER_DASH_OFFSET, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, null);
 		}
+	}
+
+	/**
+	 * Gets the {@link AbstractNode} instance checking if is consistent.
+	 * 
+	 * @return the {@link AbstractNode} instance
+	 */
+	private AbstractNode checkAndGet() {
+		AbstractNode node = getElement();
+		// checks if consistent
+		if (node == null) {
+			// exception!
+			throw new IllegalArgumentException("Node element is null");
+		}
+		return node;
 	}
 
 }

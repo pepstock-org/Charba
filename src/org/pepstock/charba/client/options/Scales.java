@@ -133,12 +133,14 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	private Scale getAndCreate(Key propertyKey) {
 		// creates scale id
 		IsScaleId scaleId = IsScaleId.create(propertyKey.value());
+		// gets native object
+		NativeObject nativeObject = getValue(propertyKey);
 		// gets temporary scale
-		Scale internalScale = new Scale(DefaultsBuilder.get().getScale(), getValue(propertyKey));
+		Scale internalScale = new Scale(DefaultsBuilder.get().getScale(), nativeObject);
 		// create default scale reference
 		IsDefaultScale defaultValue = getAxis(scaleId, internalScale.getAxis());
 		// creates the scale
-		Scale scale = new Scale(defaultValue, getValue(propertyKey));
+		Scale scale = new Scale(defaultValue, nativeObject);
 		// checks if scale has got the id
 		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id

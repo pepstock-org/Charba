@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -91,19 +92,29 @@ public class GridLines extends AbstractScaleLines {
 	 * @param axis axis which this grid lines belongs to.
 	 */
 	GridLines(Axis axis) {
-		super(axis, axis.getScale().getGrideLines(), axis.getScale().getGrideLines());
+		super(axis, axis.getDefaultValues().getGridLines());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
 		tickColorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getScale().getGrideLines().getTickColorAsString(), false));
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGridLines().getTickColorAsString(), false));
 		// gets value calling callback
 		tickWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getScale().getGrideLines().getTickWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGridLines().getTickWidth()).intValue());
 		// gets value calling callback
 		tickBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils
-				.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getScale().getGrideLines().getTickBorderDashOffset()).doubleValue());
+				.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGridLines().getTickBorderDashOffset()).doubleValue());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractScaleLines#getElement()
+	 */
+	@Override
+	AbstractNode getElement() {
+		return getAxis().getScale().getGridLines();
 	}
 
 	/**
@@ -112,7 +123,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param display If false, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
-		getAxis().getScale().getGrideLines().setDisplay(display);
+		getAxis().getScale().getGridLines().setDisplay(display);
 	}
 
 	/**
@@ -121,7 +132,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return If false, do not display grid lines for this axis.
 	 */
 	public boolean isDisplay() {
-		return getAxis().getScale().getGrideLines().isDisplay();
+		return getAxis().getScale().getGridLines().isDisplay();
 	}
 
 	/**
@@ -130,7 +141,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param circular If true, gridlines are circular (on radar chart only).
 	 */
 	public void setCircular(boolean circular) {
-		getAxis().getScale().getGrideLines().setCircular(circular);
+		getAxis().getScale().getGridLines().setCircular(circular);
 	}
 
 	/**
@@ -139,7 +150,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return If true, grid lines are circular (on radar chart only).
 	 */
 	public boolean isCircular() {
-		return getAxis().getScale().getGrideLines().isCircular();
+		return getAxis().getScale().getGridLines().isCircular();
 	}
 
 	/**
@@ -153,7 +164,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setColor((ScaleColorCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setColor(color);
+		getAxis().getScale().getGridLines().setColor(color);
 	}
 
 	/**
@@ -167,7 +178,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setColor((ScaleColorCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setColor(color);
+		getAxis().getScale().getGridLines().setColor(color);
 	}
 
 	/**
@@ -177,7 +188,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getColorAsString() {
-		return getAxis().getScale().getGrideLines().getColorsAsString();
+		return getAxis().getScale().getGridLines().getColorsAsString();
 	}
 
 	/**
@@ -187,7 +198,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<IsColor> getColor() {
-		return getAxis().getScale().getGrideLines().getColor();
+		return getAxis().getScale().getGridLines().getColor();
 	}
 
 	/**
@@ -198,7 +209,7 @@ public class GridLines extends AbstractScaleLines {
 	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(IsColor color) {
-		getAxis().getScale().getGrideLines().setBorderColor(color);
+		getAxis().getScale().getGridLines().setBorderColor(color);
 	}
 
 	/**
@@ -209,7 +220,7 @@ public class GridLines extends AbstractScaleLines {
 	 *            If unset, the first color option is resolved and used.
 	 */
 	public void setBorderColor(String color) {
-		getAxis().getScale().getGrideLines().setBorderColor(color);
+		getAxis().getScale().getGridLines().setBorderColor(color);
 	}
 
 	/**
@@ -220,7 +231,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         If unset, the first color option is resolved and used.
 	 */
 	public String getBorderColorAsString() {
-		return getAxis().getScale().getGrideLines().getBorderColorAsString();
+		return getAxis().getScale().getGridLines().getBorderColorAsString();
 	}
 
 	/**
@@ -231,7 +242,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         If unset, the first color option is resolved and used.
 	 */
 	public IsColor getBorderColor() {
-		return getAxis().getScale().getGrideLines().getBorderColor();
+		return getAxis().getScale().getGridLines().getBorderColor();
 	}
 
 	/**
@@ -242,7 +253,7 @@ public class GridLines extends AbstractScaleLines {
 	 *            If unset, the first lineWidth option is resolved and used.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		getAxis().getScale().getGrideLines().setBorderWidth(borderWidth);
+		getAxis().getScale().getGridLines().setBorderWidth(borderWidth);
 	}
 
 	/**
@@ -253,7 +264,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         If unset, the first lineWidth option is resolved and used.
 	 */
 	public int getBorderWidth() {
-		return getAxis().getScale().getGrideLines().getBorderWidth();
+		return getAxis().getScale().getGridLines().getBorderWidth();
 	}
 
 	/**
@@ -262,7 +273,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		getAxis().getScale().getGrideLines().setBorderDash(borderDash);
+		getAxis().getScale().getGridLines().setBorderDash(borderDash);
 	}
 
 	/**
@@ -271,7 +282,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	public List<Integer> getBorderDash() {
-		return getAxis().getScale().getGrideLines().getBorderDash();
+		return getAxis().getScale().getGridLines().getBorderDash();
 	}
 
 	/**
@@ -283,7 +294,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setBorderDashOffset((ScaleBorderDashOffsetCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setBorderDashOffset(borderDashOffset);
+		getAxis().getScale().getGridLines().setBorderDashOffset(borderDashOffset);
 	}
 
 	/**
@@ -292,7 +303,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return Offset for line dashes.
 	 */
 	public double getBorderDashOffset() {
-		return getAxis().getScale().getGrideLines().getBorderDashOffset();
+		return getAxis().getScale().getGridLines().getBorderDashOffset();
 	}
 
 	/**
@@ -304,7 +315,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setLineWidth((ScaleLineWidthCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setLineWidth(lineWidth);
+		getAxis().getScale().getGridLines().setLineWidth(lineWidth);
 	}
 
 	/**
@@ -313,7 +324,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public List<Integer> getLineWidth() {
-		return getAxis().getScale().getGrideLines().getLinesWidth();
+		return getAxis().getScale().getGridLines().getLinesWidth();
 	}
 
 	/***
@@ -322,7 +333,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param drawBorder If true, draw border at the edge between the axis and the chart area.
 	 */
 	public void setDrawBorder(boolean drawBorder) {
-		getAxis().getScale().getGrideLines().setDrawBorder(drawBorder);
+		getAxis().getScale().getGridLines().setDrawBorder(drawBorder);
 	}
 
 	/**
@@ -331,7 +342,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return If true, draw border at the edge between the axis and the chart area.
 	 */
 	public boolean isDrawBorder() {
-		return getAxis().getScale().getGrideLines().isDrawBorder();
+		return getAxis().getScale().getGridLines().isDrawBorder();
 	}
 
 	/**
@@ -342,7 +353,7 @@ public class GridLines extends AbstractScaleLines {
 	 *            This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
-		getAxis().getScale().getGrideLines().setDrawOnChartArea(drawOnChartArea);
+		getAxis().getScale().getGridLines().setDrawOnChartArea(drawOnChartArea);
 	}
 
 	/**
@@ -353,7 +364,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         This is useful when there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
-		return getAxis().getScale().getGrideLines().isDrawOnChartArea();
+		return getAxis().getScale().getGridLines().isDrawOnChartArea();
 	}
 
 	/**
@@ -362,7 +373,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param drawTicks If true, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public void setDrawTicks(boolean drawTicks) {
-		getAxis().getScale().getGrideLines().setDrawTicks(drawTicks);
+		getAxis().getScale().getGridLines().setDrawTicks(drawTicks);
 	}
 
 	/**
@@ -371,7 +382,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return If true, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public boolean isDrawTicks() {
-		return getAxis().getScale().getGrideLines().isDrawTicks();
+		return getAxis().getScale().getGridLines().isDrawTicks();
 	}
 
 	/**
@@ -380,7 +391,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param tickLength Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public void setTickLength(int tickLength) {
-		getAxis().getScale().getGrideLines().setTickLength(tickLength);
+		getAxis().getScale().getGridLines().setTickLength(tickLength);
 	}
 
 	/**
@@ -389,7 +400,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public int getTickLength() {
-		return getAxis().getScale().getGrideLines().getTickLength();
+		return getAxis().getScale().getGridLines().getTickLength();
 	}
 
 	/**
@@ -399,7 +410,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
-		getAxis().getScale().getGrideLines().setOffsetGridLines(offsetGridLines);
+		getAxis().getScale().getGridLines().setOffsetGridLines(offsetGridLines);
 	}
 
 	/**
@@ -409,7 +420,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return If true, grid lines will be shifted to be between labels.
 	 */
 	public boolean isOffsetGridLines() {
-		return getAxis().getScale().getGrideLines().isOffsetGridLines();
+		return getAxis().getScale().getGridLines().isOffsetGridLines();
 	}
 
 	/**
@@ -420,7 +431,7 @@ public class GridLines extends AbstractScaleLines {
 	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
-		getAxis().getScale().getGrideLines().setZ(z);
+		getAxis().getScale().getGridLines().setZ(z);
 	}
 
 	/**
@@ -431,7 +442,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
-		return getAxis().getScale().getGrideLines().getZ();
+		return getAxis().getScale().getGridLines().getZ();
 	}
 
 	/**
@@ -440,7 +451,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @param tickBorderDash the length and spacing of the tick mark line.
 	 */
 	public void setTickBorderDash(int tickBorderDash) {
-		getAxis().getScale().getGrideLines().setTickBorderDash(tickBorderDash);
+		getAxis().getScale().getGridLines().setTickBorderDash(tickBorderDash);
 	}
 
 	/**
@@ -449,7 +460,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the length and spacing of the tick mark line.
 	 */
 	public List<Integer> getTickBorderDash() {
-		return getAxis().getScale().getGrideLines().getTickBorderDash();
+		return getAxis().getScale().getGridLines().getTickBorderDash();
 	}
 
 	/**
@@ -461,7 +472,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setTickBorderDashOffset((ScaleBorderDashOffsetCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setTickBorderDashOffset(tickBorderDashOffset);
+		getAxis().getScale().getGridLines().setTickBorderDashOffset(tickBorderDashOffset);
 	}
 
 	/**
@@ -470,7 +481,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the offset for the line dash of the tick mark
 	 */
 	public double getTickBorderDashOffset() {
-		return getAxis().getScale().getGrideLines().getTickBorderDashOffset();
+		return getAxis().getScale().getGridLines().getTickBorderDashOffset();
 	}
 
 	/**
@@ -482,7 +493,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setTickColor((ScaleColorCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setTickColor(color);
+		getAxis().getScale().getGridLines().setTickColor(color);
 	}
 
 	/**
@@ -494,7 +505,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setTickColor((ScaleColorCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setTickColor(color);
+		getAxis().getScale().getGridLines().setTickColor(color);
 	}
 
 	/**
@@ -503,7 +514,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the color of the tick line.
 	 */
 	public String getTickColorAsString() {
-		return getAxis().getScale().getGrideLines().getTickColorAsString();
+		return getAxis().getScale().getGridLines().getTickColorAsString();
 	}
 
 	/**
@@ -513,7 +524,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getTickColorsAsString() {
-		return getAxis().getScale().getGrideLines().getTickColorsAsString();
+		return getAxis().getScale().getGridLines().getTickColorsAsString();
 	}
 
 	/**
@@ -523,7 +534,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<IsColor> getTickColor() {
-		return getAxis().getScale().getGrideLines().getTickColor();
+		return getAxis().getScale().getGridLines().getTickColor();
 	}
 
 	/**
@@ -535,7 +546,7 @@ public class GridLines extends AbstractScaleLines {
 		// reset callback if there is
 		setTickWidth((ScaleLineWidthCallback) null);
 		// stores value
-		getAxis().getScale().getGrideLines().setTickWidth(tickWidth);
+		getAxis().getScale().getGridLines().setTickWidth(tickWidth);
 	}
 
 	/**
@@ -546,7 +557,7 @@ public class GridLines extends AbstractScaleLines {
 	 *         The first element if set as array.
 	 */
 	public int getTickWidth() {
-		return getAxis().getScale().getGrideLines().getTickWidth();
+		return getAxis().getScale().getGridLines().getTickWidth();
 	}
 
 	/**
@@ -555,7 +566,7 @@ public class GridLines extends AbstractScaleLines {
 	 * @return stroke widths of grid lines.
 	 */
 	public List<Integer> getTicksWidth() {
-		return getAxis().getScale().getGrideLines().getTicksWidth();
+		return getAxis().getScale().getGridLines().getTicksWidth();
 	}
 
 	/**
@@ -578,10 +589,10 @@ public class GridLines extends AbstractScaleLines {
 		// checks if consistent
 		if (tickColorCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_COLOR, tickColorCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_COLOR, tickColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_COLOR, null);
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_COLOR, null);
 		}
 	}
 
@@ -605,10 +616,10 @@ public class GridLines extends AbstractScaleLines {
 		// checks if consistent
 		if (tickWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_WIDTH, tickWidthCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_WIDTH, tickWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_WIDTH, null);
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_WIDTH, null);
 		}
 	}
 
@@ -632,10 +643,10 @@ public class GridLines extends AbstractScaleLines {
 		// checks if consistent
 		if (tickBorderDashOffsetCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrideLines(), Property.TICK_BORDER_DASH_OFFSET, null);
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getGridLines(), Property.TICK_BORDER_DASH_OFFSET, null);
 		}
 	}
 }

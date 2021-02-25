@@ -71,6 +71,17 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 		// returns options
 		return options;
 	}
+	
+	/**
+	 * Sets <code>true</code> if plugin is enabled.
+	 * 
+	 * @param enabled <code>true</code> if plugin is enabled.
+	 * @return builder instance
+	 */
+	public DatasetsItemsSelectorOptionsBuilder setEnabled(boolean enabled) {
+		options.setEnabled(enabled);
+		return this;
+	}
 
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.

@@ -47,6 +47,11 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions implements IsDatasetsItemsSelectorDefaultOptions {
 
 	/**
+	 * Default enabled options, <b>{@value DEFAULT_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_ENABLED = true;
+	
+	/**
 	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.
 	 */
 	public static final double DEFAULT_ALPHA = 0.3D;
@@ -86,6 +91,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	enum Property implements Key
 	{
+		ENABLED("enabled"),
 		COLOR("color"),
 		X_AXIS_ID("xAxisID"),
 		BORDER_COLOR("borderColor"),
@@ -183,6 +189,26 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		return clearSelection;
 	}
 
+	
+	/**
+	 * Sets <code>true</code> if plugin is enabled.
+	 * 
+	 * @param enabled <code>true</code> if plugin is enabled.
+	 */
+	public void setEnabled(boolean enabled) {
+		setValue(Property.ENABLED, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if plugin is enabled.
+	 * 
+	 * @return <code>true</code> if plugin is enabled.
+	 */
+	@Override
+	public boolean isEnabled() {
+		return getValue(Property.ENABLED, defaultOptions.isEnabled());
+	}
+	
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 

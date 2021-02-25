@@ -433,7 +433,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 			setValue(Property.ROTATION, AUTO_ROTATION);
 		} else {
 			// otherwise removes the key
-			removeIfExists(Property.ROTATION);
+			remove(Property.ROTATION);
 		}
 	}
 
@@ -461,7 +461,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		} else {
 			// if here the argument is not consistent
 			// then removes key
-			removeIfExists(Property.CONTENT);
+			remove(Property.CONTENT);
 		}
 	}
 

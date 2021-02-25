@@ -50,7 +50,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	protected enum Property implements Key
 	{
 		// internal property to set unique id
-		CHARBA_OPTIONS_ID("_charbaOptionsId");
+		CHARBA_OPTIONS_ID("charbaOptionsId");
 
 		// name value of property
 		private final String value;

@@ -17,26 +17,37 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.AbstractElement;
 
 /**
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Line extends AbstractConfigurationElement {
+public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 
 	/**
 	 * Builds the object with options, root and setting the line element.
 	 * 
 	 * @param options options instance
 	 */
-	Line(ExtendedOptions options) {
-		super(options, options.getElements().getLine());
+	Line(ConfigurationOptions options) {
+		super(options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getElement()
+	 */
+	@Override
+	protected AbstractElement<IsDefaultLine> getElement() {
+		return getConfiguration().getElements().getLine();
 	}
 
 	/**
@@ -45,7 +56,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param tension the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public void setTension(double tension) {
-		getOptions().getElements().getLine().setTension(tension);
+		getConfiguration().getElements().getLine().setTension(tension);
 	}
 
 	/**
@@ -54,7 +65,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 */
 	public double getTension() {
-		return getOptions().getElements().getLine().getTension();
+		return getConfiguration().getElements().getLine().getTension();
 	}
 
 	/**
@@ -63,7 +74,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		getOptions().getElements().getLine().setBorderCapStyle(borderCapStyle);
+		getConfiguration().getElements().getLine().setBorderCapStyle(borderCapStyle);
 	}
 
 	/**
@@ -72,7 +83,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getOptions().getElements().getLine().getBorderCapStyle();
+		return getConfiguration().getElements().getLine().getBorderCapStyle();
 	}
 
 	/**
@@ -81,7 +92,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		getOptions().getElements().getLine().setBorderDash(borderDash);
+		getConfiguration().getElements().getLine().setBorderDash(borderDash);
 	}
 
 	/**
@@ -90,7 +101,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return getOptions().getElements().getLine().getBorderDash();
+		return getConfiguration().getElements().getLine().getBorderDash();
 	}
 
 	/**
@@ -99,7 +110,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
-		getOptions().getElements().getLine().setBorderDashOffset(borderDashOffset);
+		getConfiguration().getElements().getLine().setBorderDashOffset(borderDashOffset);
 	}
 
 	/**
@@ -108,7 +119,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return the line dash pattern offset
 	 */
 	public double getBorderDashOffset() {
-		return getOptions().getElements().getLine().getBorderDashOffset();
+		return getConfiguration().getElements().getLine().getBorderDashOffset();
 	}
 
 	/**
@@ -118,7 +129,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		getOptions().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
+		getConfiguration().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
 	}
 
 	/**
@@ -128,7 +139,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getOptions().getElements().getLine().getBorderJoinStyle();
+		return getConfiguration().getElements().getLine().getBorderJoinStyle();
 	}
 
 	/**
@@ -137,7 +148,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param capBezierPoints <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
-		getOptions().getElements().getLine().setCapBezierPoints(capBezierPoints);
+		getConfiguration().getElements().getLine().setCapBezierPoints(capBezierPoints);
 	}
 
 	/**
@@ -146,7 +157,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return <code>true</code> to keep B\u00e9zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
-		return getOptions().getElements().getLine().isCapBezierPoints();
+		return getConfiguration().getElements().getLine().isCapBezierPoints();
 	}
 
 	/**
@@ -167,7 +178,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
-		getOptions().getElements().getLine().setCubicInterpolationMode(mode);
+		getConfiguration().getElements().getLine().setCubicInterpolationMode(mode);
 	}
 
 	/**
@@ -176,7 +187,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		return getOptions().getElements().getLine().getCubicInterpolationMode();
+		return getConfiguration().getElements().getLine().getCubicInterpolationMode();
 	}
 
 	/**
@@ -185,7 +196,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	public void setFill(boolean fill) {
-		getOptions().getElements().getLine().setFill(fill);
+		getConfiguration().getElements().getLine().setFill(fill);
 	}
 
 	/**
@@ -194,7 +205,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param index absolute dataset index of the chart.
 	 */
 	public void setFill(int index) {
-		getOptions().getElements().getLine().setFill(index);
+		getConfiguration().getElements().getLine().setFill(index);
 	}
 
 	/**
@@ -203,7 +214,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param index relative dataset index of the chart.
 	 */
 	public void setFill(String index) {
-		getOptions().getElements().getLine().setFill(index);
+		getConfiguration().getElements().getLine().setFill(index);
 	}
 
 	/**
@@ -212,7 +223,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param fill how to fill the area under the line.
 	 */
 	public void setFill(IsFill fill) {
-		getOptions().getElements().getLine().setFill(fill);
+		getConfiguration().getElements().getLine().setFill(fill);
 	}
 
 	/**
@@ -221,7 +232,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return how to fill the area under the line.
 	 */
 	public IsFill getFill() {
-		return getOptions().getElements().getLine().getFill();
+		return getConfiguration().getElements().getLine().getFill();
 	}
 
 	/**
@@ -230,7 +241,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public void setStepped(boolean stepped) {
-		getOptions().getElements().getLine().setStepped(stepped);
+		getConfiguration().getElements().getLine().setStepped(stepped);
 	}
 
 	/**
@@ -239,7 +250,7 @@ public class Line extends AbstractConfigurationElement {
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public boolean isStepped() {
-		return getOptions().getElements().getLine().isStepped();
+		return getConfiguration().getElements().getLine().isStepped();
 	}
 
 }

@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Specific scales for time series charts.<br>
@@ -34,17 +32,17 @@ public final class TimeSeriesScales extends Scales {
 	private final CartesianLinearAxis linearAxis;
 
 	/**
-	 * Builds the object storing the chart instance and root options.
+	 * Builds the object storing the root options.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options
 	 */
-	TimeSeriesScales(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	TimeSeriesScales(ScalesOptions options) {
+		super(options);
 		// creates the axes
 		// out of the box
-		timeAxis = new CartesianTimeSeriesAxis(chart);
-		linearAxis = new CartesianLinearAxis(chart);
+		this.timeAxis = new CartesianTimeSeriesAxis(getChart());
+		this.linearAxis = new CartesianLinearAxis(getChart());
+		// stores axes
 		super.setAxes(timeAxis, linearAxis);
 	}
 

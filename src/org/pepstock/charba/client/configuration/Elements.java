@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.ExtendedOptions;
-
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
  * When set, these options apply to the configuration attached to a dataset.
@@ -24,7 +22,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Elements {
+public class Elements extends ConfigurationOptionsContainer {
 
 	// sub elements
 	private final Point point;
@@ -40,12 +38,13 @@ public class Elements {
 	 * 
 	 * @param options default root options.
 	 */
-	Elements(ExtendedOptions options) {
+	Elements(ConfigurationOptions options) {
+		super(options);
 		// creates the sub-options objects
-		this.point = new Point(options);
-		this.line = new Line(options);
-		this.arc = new Arc(options);
-		this.bar = new Bar(options);
+		this.point = new Point(getOptions());
+		this.line = new Line(getOptions());
+		this.arc = new Arc(getOptions());
+		this.bar = new Bar(getOptions());
 	}
 
 	/**

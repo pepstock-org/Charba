@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -57,6 +58,7 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.ExtendedScale;
 
 import jsinterop.annotations.JsFunction;
 
@@ -138,6 +140,8 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	// callback proxy to invoke the click function for title and/or axis element
 	private final CallbackProxy<EventListenerCallback> titleAndAxisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	private final IsDefaultScaledOptions defaultValues;
+
 	private final ConfigurationAnimation animation;
 
 	private final Legend legend;
@@ -178,25 +182,27 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	ConfigurationOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// uses the extended option internally (no override)
 		super(chart, new ExtendedOptions(chart, defaultValues, new ConfigurationEnvelop<>(null, true)));
+		// stores default
+		this.defaultValues = defaultValues;
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates all sub elements
-		animation = new ConfigurationAnimation(chart, getConfiguration());
-		elements = new Elements(getConfiguration());
-		legend = new Legend(chart, getConfiguration());
-		title = new Title(getConfiguration());
-		layout = new Layout(getConfiguration());
-		hover = new Hover(getConfiguration());
-		interaction = new Interaction(getConfiguration());
-		plugins = new Plugins(getConfiguration());
-		tooltips = new Tooltips(chart, getConfiguration());
+		this.animation = new ConfigurationAnimation(this);
+		this.elements = new Elements(this);
+		this.legend = new Legend(this);
+		this.title = new Title(this);
+		this.layout = new Layout(this);
+		this.hover = new Hover(this);
+		this.interaction = new Interaction(this);
+		this.plugins = new Plugins(this);
+		this.tooltips = new Tooltips(this);
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+		this.clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// gets the native event
@@ -207,13 +213,13 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
 		// fires the hover hover on the chart
-		hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+		this.hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
 			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
+		this.resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(nativeChart);
 			// fires the resize event on chart
@@ -223,7 +229,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 		// -- SET CALLBACK for title and axis click event ---
 		// --------------------------------------------------
 		// fires the event
-		titleAndAxisClickCallbackProxy.setCallback((context, event) -> handleClickEventOnElements(event));
+		this.titleAndAxisClickCallbackProxy.setCallback((context, event) -> handleClickEventOnElements(event));
 	}
 
 	/**
@@ -240,6 +246,26 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	 */
 	public final void loadOptions(ChartEnvelop<NativeObject> envelop) {
 		Merger.get().load(getChart(), getConfiguration(), envelop);
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param envelop
+	 */
+	public final void setChartOptions(ChartEnvelop<NativeObject> envelop) {
+		// sets new configuration
+		setConfiguration(new ExtendedOptions(getChart(), defaultValues, new ConfigurationEnvelop<>(IsEnvelop.checkAndGetIfValid(envelop).getContent())));
+		// checks if this configuration is prepared to have scales
+		if (this instanceof ScalesOptions) {
+			// casts to scales options
+			ScalesOptions options = (ScalesOptions) this;
+			// scans axes to set new configuration 
+			for (Axis axis : options.getScales().getAxes()) {
+				// stores new base object, the object of chart options
+				axis.setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(getConfiguration().getScales().getAxis(axis.getId())), axis.getDefaultValues()));
+			}
+		}
 	}
 
 	/*

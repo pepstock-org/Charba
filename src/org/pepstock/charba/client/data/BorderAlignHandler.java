@@ -124,7 +124,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 			// resets callbacks
 			setBorderAlign((BorderAlignCallback) null);
 			// removes key
-			removeIfExists(Property.BORDER_ALIGN);
+			remove(Property.BORDER_ALIGN);
 		}
 	}
 

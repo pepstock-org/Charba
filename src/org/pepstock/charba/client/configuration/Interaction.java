@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Definitions about how elements appear in the tooltip, hovering the chart.
@@ -25,17 +24,15 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Interaction {
-
-	private final ExtendedOptions options;
+public class Interaction extends ConfigurationOptionsContainer {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Interaction(ExtendedOptions options) {
-		this.options = options;
+	Interaction(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**
@@ -44,7 +41,7 @@ public class Interaction {
 	 * @param mode which elements appear in the tooltip.
 	 */
 	public void setMode(InteractionMode mode) {
-		options.getInteraction().setMode(mode);
+		getConfiguration().getInteraction().setMode(mode);
 	}
 
 	/**
@@ -53,7 +50,7 @@ public class Interaction {
 	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
-		return options.getInteraction().getMode();
+		return getConfiguration().getInteraction().getMode();
 	}
 
 	/**
@@ -62,7 +59,7 @@ public class Interaction {
 	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
-		options.getInteraction().setIntersect(intersect);
+		getConfiguration().getInteraction().setIntersect(intersect);
 	}
 
 	/**
@@ -71,7 +68,7 @@ public class Interaction {
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
-		return options.getInteraction().isIntersect();
+		return getConfiguration().getInteraction().isIntersect();
 	}
 
 	/**
@@ -81,7 +78,7 @@ public class Interaction {
 	 * @param axis define which directions are used in calculating distances.
 	 */
 	public void setAxis(InteractionAxis axis) {
-		options.getInteraction().setAxis(axis);
+		getConfiguration().getInteraction().setAxis(axis);
 	}
 
 	/**
@@ -90,6 +87,6 @@ public class Interaction {
 	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
-		return options.getInteraction().getAxis();
+		return getConfiguration().getInteraction().getAxis();
 	}
 }

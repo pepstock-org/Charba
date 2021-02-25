@@ -65,14 +65,16 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	private static final DatasetsItemsSelector INSTANCE = new DatasetsItemsSelector();
 	// It can not use zoom plugin id
 	// to avoid to load zoom and hammer JS if not needed
-	// it must always aligned with value into zoom plugin moduel
+	// it must always aligned with value into zoom plugin model
 	private static final String ZOOM_PLUIGIN_ID = ResourceName.ZOOM_PLUGIN.value();
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
 	private final Map<String, HandlerRegistration> pluginEventsRegistrationHandlers = new HashMap<>();
-	// click lgend handler to avoid to remove all datasets
+	// click legend handler to avoid to remove all datasets
 	private final AtLeastOneDatasetHandler pluginLegendClickHandler = new AtLeastOneDatasetHandler();
+	// maps with the enablement if the plugin by chart instances
+	private final Map<String, Boolean> pluginChartEnablement = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -196,6 +198,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
+		// gets options in order to store the enablement of the plugin
+		storePluginEnablement(chart);
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart)) {
 			// overrides the tooltip configuration disabling it
@@ -211,22 +215,13 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				// stores flag into map
 				pluginEventsRegistrationHandlers.put(chart.getId(), registratrion);
 			}
-			// option instance
-			DatasetsItemsSelectorOptions pOptions = null;
-			// loads chart options for the chart
-			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
-			if (options.getPlugins().hasOptions(ID)) {
-				pOptions = options.getPlugins().getOptions(ID, FACTORY);
-			} else {
-				pOptions = new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultOptions.INSTANCE);
-			}
 			// checks if chart has got already an handler
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// removes previous handler
 				pluginSelectionHandlers.remove(chart.getId());
 			}
+			// option instance
+			DatasetsItemsSelectorOptions pOptions = getOptions(chart);
 			// creates the handler of selection
 			// by chart instance and the options stored into options (if exists).
 			SelectionHandler handler = new SelectionHandler(chart, pOptions);
@@ -289,23 +284,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart)) {
-			// checks if we have already an handler
-			if (pluginSelectionHandlers.containsKey(chart.getId())) {
-				// gets selection handler
-				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-				// at chart destroy phase, all handler will be removed form canvas
-				// removes mouse handler if consistent
-				handler.removeListeners();
-				// removes handler from map
-				pluginSelectionHandlers.remove(chart.getId());
-			}
-			// checks if we have already an legend handler
-			if (pluginEventsRegistrationHandlers.containsKey(chart.getId())) {
-				// cleans the legend click handler status
-				HandlerRegistration registration = pluginEventsRegistrationHandlers.remove(chart.getId());
-				// removes registration
-				registration.removeHandler();
-			}
+			// resets configuration
+			resetPluginConfiguration(chart);
 		}
 	}
 
@@ -345,6 +325,87 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
+	 * Returns the options of the plugin from chart.
+	 * 
+	 * @param chart chart instance to check
+	 * @return the options of the plugin from chart.
+	 */
+	private DatasetsItemsSelectorOptions getOptions(IsChart chart) {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = null;
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// loads chart options for the chart
+			IsDefaultScaledOptions options = chart.getWholeOptions();
+			// creates the plugin options using the java script object
+			// passing also the default color set at constructor.
+			if (options.getPlugins().hasOptions(ID)) {
+				pOptions = options.getPlugins().getOptions(ID, FACTORY);
+			} else {
+				pOptions = new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultOptions.INSTANCE);
+			}
+		} else {
+			// if here the chart is not consistent
+			// then returns default
+			pOptions = new DatasetsItemsSelectorOptions(DatasetsItemsSelectorDefaultOptions.INSTANCE);
+			// disabled it
+			pOptions.setEnabled(false);
+		}
+		// returns options
+		return pOptions;
+	}
+
+	/**
+	 * Stores the "enabled" option in the cache in order to change the plugin bahaviors at runtime.
+	 * 
+	 * @param chart chart instance to check
+	 */
+	private void storePluginEnablement(IsChart chart) {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions(chart);
+		// checks if there is already an enabled
+		if (pluginChartEnablement.containsKey(chart.getId()) && !pOptions.isEnabled() && pluginChartEnablement.get(chart.getId())) {
+			// clear selection
+			if (pluginSelectionHandlers.containsKey(chart.getId())) {
+				// gets selection handler
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+				// clear the selection
+				handler.removeClearSelection();
+			}
+			// here if the previous config enabled the plugin
+			// and then now it must be disabled
+			resetPluginConfiguration(chart);
+		}
+		// stores if the chart is enabled
+		pluginChartEnablement.put(chart.getId(), pOptions.isEnabled());
+	}
+
+	/**
+	 * Resets the current configuration when the chart is destroyed or when the plugin is disabled
+	 * 
+	 * @param chart chart instance to check
+	 */
+	private void resetPluginConfiguration(IsChart chart) {
+		// checks if we have already an handler
+		if (pluginSelectionHandlers.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+			// at chart destroy phase, all handler will be removed form canvas
+			// removes mouse handler if consistent
+			handler.removeListeners();
+			// removes handler from map
+			pluginSelectionHandlers.remove(chart.getId());
+		}
+		// checks if we have already an legend handler
+		if (pluginEventsRegistrationHandlers.containsKey(chart.getId())) {
+			// cleans the legend click handler status
+			HandlerRegistration registration = pluginEventsRegistrationHandlers.remove(chart.getId());
+			// removes registration
+			registration.removeHandler();
+		}
+	}
+
+	/**
 	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.<br>
 	 * If ZoomPlugin is activated, this plugin will be disabled.
 	 * 
@@ -364,6 +425,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				// are horizontal.
 				mustBeActivated = checkBarDatasets(chart);
 			}
+		}
+		// checks if the plugin has been enabled
+		if (mustBeActivated) {
+			mustBeActivated = pluginChartEnablement.containsKey(chart.getId()) && pluginChartEnablement.get(chart.getId());
 		}
 		return mustBeActivated;
 	}

@@ -43,7 +43,7 @@ public enum DefaultScaleId implements IsScaleId
 	/**
 	 * Default scale id for chart with a single axis.
 	 */
-	UNKNOWN("_charbaunknown", null);
+	UNKNOWN("charbaunknown", null);
 
 	/**
 	 * Default scale id for X scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.

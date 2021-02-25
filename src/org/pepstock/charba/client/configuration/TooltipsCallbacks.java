@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
@@ -37,7 +36,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -47,7 +45,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
+public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -208,11 +206,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
-	 * @param configuration root options element.
+	 * @param options root options element.
 	 */
-	TooltipsCallbacks(IsChart chart, ExtendedOptions configuration) {
-		super(chart, configuration);
+	TooltipsCallbacks(ConfigurationOptions options) {
+		super(options);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

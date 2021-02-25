@@ -135,19 +135,19 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 		SPACING("spacing"),
 		USE_SELECTION_STYLE("useSelectionStyle"),
 		// internal properties to store the points and dimensions info
-		X("_x"),
-		Y("_y"),
-		WIDTH("_width"),
-		HEIGHT("_height"),
-		IMAGE_X("_imageX"),
-		IMAGE_Y("_imageY"),
-		IMAGE_WIDTH("_imageWidth"),
-		IMAGE_HEIGHT("_imageHeight"),
-		LABEL_X("_labelX"),
-		LABEL_Y("_labelY"),
-		LABEL_WIDTH("_labelWidth"),
-		LABEL_HEIGHT("_labelHeight"),
-		LAYOUT_PADDING("_layoutPadding");
+		X("x"),
+		Y("y"),
+		WIDTH("width"),
+		HEIGHT("height"),
+		IMAGE_X("imageX"),
+		IMAGE_Y("imageY"),
+		IMAGE_WIDTH("imageWidth"),
+		IMAGE_HEIGHT("imageHeight"),
+		LABEL_X("labelX"),
+		LABEL_Y("labelY"),
+		LABEL_WIDTH("labelWidth"),
+		LABEL_HEIGHT("labelHeight"),
+		LAYOUT_PADDING("layoutPadding");
 
 		// name value of property
 		private final String value;

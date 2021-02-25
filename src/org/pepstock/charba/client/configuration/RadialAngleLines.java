@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -86,10 +87,20 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param axis axis which this angle lines belongs to.
 	 */
 	RadialAngleLines(Axis axis) {
-		super(axis, axis.getScale().getAngleLines(), axis.getScale().getAngleLines());
+		super(axis, axis.getDefaultValues().getAngleLines());
 		// gets value calling callback
 		// gets value calling callback
 		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), borderDashCallback));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractScaleLines#getElement()
+	 */
+	@Override
+	AbstractNode getElement() {
+		return getAxis().getScale().getAngleLines();
 	}
 
 	/**

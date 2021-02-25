@@ -149,7 +149,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 		// if is a string, the property is the ID
 		if (isType(id, ObjectType.OBJECT)) {
 			// removes from java script object if the label id exist
-			removeIfExists(id);
+			remove(id);
 		}
 	}
 

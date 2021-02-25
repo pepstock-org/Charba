@@ -43,9 +43,6 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 */
 	Labels(IsDefaultDataLabelsOptions parent, IsDefaultLabels defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 		// checks if default parent is consistent
 		// stores parent
 		this.parent = checkDefaultValuesArgument(parent);
@@ -159,7 +156,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 		// checks if the label id is consistent
 		IsDataLabelId.checkIfValid(id);
 		// and then removes the label
-		removeIfExists(id);
+		remove(id);
 	}
 
 	/**

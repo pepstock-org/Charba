@@ -43,9 +43,9 @@ public interface IsDefaultScale {
 	/**
 	 * Returns the grid lines defaults.
 	 * 
-	 * @return the grideLines defaults.
+	 * @return the grid lines defaults.
 	 */
-	IsDefaultGridLines getGrideLines();
+	IsDefaultGridLines getGridLines();
 
 	/**
 	 * Returns the angle lines default.

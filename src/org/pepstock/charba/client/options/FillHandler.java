@@ -42,7 +42,7 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	{
 		FILL("fill"),
 		// internal property key to map the type of FILL property
-		CHARBA_FILLING_MODE("_charbaFillingMode");
+		CHARBA_FILLING_MODE("charbaFillingMode");
 
 		// name value of property
 		private final String value;

@@ -224,7 +224,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		POINT_HOVER_RADIUS("pointHoverRadius"),
 		POINT_ROTATION("pointRotation"),
 		// internal key to store if point style is an image or not
-		CHARBA_POINT_STYLE("_charbaPointStyle");
+		CHARBA_POINT_STYLE("charbaPointStyle");
 
 		// name value of property
 		private final String value;
@@ -2031,7 +2031,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.POINT_STYLE);
 		}
 		// remove if exist flag
-		removeIfExists(Property.CHARBA_POINT_STYLE);
+		remove(Property.CHARBA_POINT_STYLE);
 	}
 
 	/**

@@ -105,7 +105,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 		} else {
 			// if here argument not consistent
 			// then removes the key
-			removeIfExists(Property.ISO_WEEKDAY);
+			remove(Property.ISO_WEEKDAY);
 		}
 	}
 

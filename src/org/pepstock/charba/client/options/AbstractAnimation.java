@@ -81,9 +81,6 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	AbstractAnimation(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 		// stores the key locally to maintain the type
 		this.key = Key.checkAndGetIfValid(childKey);
 		// checks if default value is consistent

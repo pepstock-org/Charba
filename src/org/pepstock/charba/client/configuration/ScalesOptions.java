@@ -54,7 +54,7 @@ abstract class ScalesOptions extends ConfigurationOptions {
 		// checks if a scale must be created
 		if (createScale) {
 			// new scales creation
-			scales = new Scales(chart, getConfiguration());
+			this.scales = new Scales(this);
 		}
 	}
 

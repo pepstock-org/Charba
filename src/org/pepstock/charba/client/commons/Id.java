@@ -77,10 +77,8 @@ public enum Id implements Key
 	public static String get(NativeObject nativeObject) {
 		// checks if argument is consistent and property exists
 		if (nativeObject != null && nativeObject.hasProperty(CHARBA_ID.value())) {
-			// gets descriptor
-			NativeStringDescriptor descriptor = nativeObject.getStringProperty(CHARBA_ID.value());
-			// if descriptor is consistent, return value
-			return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
+			// returns value
+			return nativeObject.getStringProperty(CHARBA_ID.value());
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;
@@ -96,10 +94,8 @@ public enum Id implements Key
 	public static int getIntegerProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
-			// gets descriptor
-			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
-			// if descriptor is consistent, return value
-			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
+			// returns value
+			return nativeObject.getIntProperty(key.value());
 		}
 		// property doesn't exist
 		return UndefinedValues.INTEGER;
@@ -115,10 +111,8 @@ public enum Id implements Key
 	public static String getStringProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
-			// gets descriptor
-			NativeStringDescriptor descriptor = nativeObject.getStringProperty(key.value());
 			// if descriptor is consistent, return value
-			return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
+			return nativeObject.getStringProperty(key.value());
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;

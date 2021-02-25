@@ -39,16 +39,16 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  */
 final class NumberFormatter implements IsNumberFormat {
 
-	// number format options instance to wrap.
-	private final IsNumberFormat isNumberFormat;
+	// font provider instance
+	private final IsNumberFormatProvider provider;
 
 	/**
-	 * Creates the number formatter wrapping a number format options.
+	 * Creates the number formatter by a number format options provider.
 	 * 
-	 * @param isNumberFormat number format options instance to wrap
+	 * @param provider number format provider instance
 	 */
-	NumberFormatter(IsNumberFormat isNumberFormat) {
-		this.isNumberFormat = isNumberFormat;
+	NumberFormatter(IsNumberFormatProvider provider) {
+		this.provider = provider;
 	}
 
 	/**
@@ -58,7 +58,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setLocaleMatcher(LocaleMatcher localeMatcher) {
-		isNumberFormat.setLocaleMatcher(localeMatcher);
+		checkAndGet().setLocaleMatcher(localeMatcher);
 	}
 
 	/**
@@ -68,7 +68,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public LocaleMatcher getLocaleMatcher() {
-		return isNumberFormat.getLocaleMatcher();
+		return checkAndGet().getLocaleMatcher();
 	}
 
 	/**
@@ -78,7 +78,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setNumberingSystem(NumberingSystem numberingSystem) {
-		isNumberFormat.setNumberingSystem(numberingSystem);
+		checkAndGet().setNumberingSystem(numberingSystem);
 	}
 
 	/**
@@ -88,7 +88,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public NumberingSystem getNumberingSystem() {
-		return isNumberFormat.getNumberingSystem();
+		return checkAndGet().getNumberingSystem();
 	}
 
 	/**
@@ -101,7 +101,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setCompactDisplay(CompactDisplay display) {
-		isNumberFormat.setCompactDisplay(display);
+		checkAndGet().setCompactDisplay(display);
 	}
 
 	/**
@@ -114,7 +114,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public CompactDisplay getCompactDisplay() {
-		return isNumberFormat.getCompactDisplay();
+		return checkAndGet().getCompactDisplay();
 	}
 
 	/**
@@ -124,7 +124,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setCurrency(Currency currency) {
-		isNumberFormat.setCurrency(currency);
+		checkAndGet().setCurrency(currency);
 	}
 
 	/**
@@ -134,7 +134,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public Currency getCurrency() {
-		return isNumberFormat.getCurrency();
+		return checkAndGet().getCurrency();
 	}
 
 	/**
@@ -144,7 +144,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setCurrencyDisplay(CurrencyDisplay currencyDisplay) {
-		isNumberFormat.setCurrencyDisplay(currencyDisplay);
+		checkAndGet().setCurrencyDisplay(currencyDisplay);
 	}
 
 	/**
@@ -154,7 +154,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public CurrencyDisplay getCurrencyDisplay() {
-		return isNumberFormat.getCurrencyDisplay();
+		return checkAndGet().getCurrencyDisplay();
 	}
 
 	/**
@@ -168,7 +168,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setCurrencySign(CurrencySign currencySign) {
-		isNumberFormat.setCurrencySign(currencySign);
+		checkAndGet().setCurrencySign(currencySign);
 	}
 
 	/**
@@ -182,7 +182,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public CurrencySign getCurrencySign() {
-		return isNumberFormat.getCurrencySign();
+		return checkAndGet().getCurrencySign();
 	}
 
 	/**
@@ -195,7 +195,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setNotation(Notation notation) {
-		isNumberFormat.setNotation(notation);
+		checkAndGet().setNotation(notation);
 	}
 
 	/**
@@ -208,7 +208,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public Notation getNotation() {
-		return isNumberFormat.getNotation();
+		return checkAndGet().getNotation();
 	}
 
 	/**
@@ -221,7 +221,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setSignDisplay(SignDisplay signDisplay) {
-		isNumberFormat.setSignDisplay(signDisplay);
+		checkAndGet().setSignDisplay(signDisplay);
 	}
 
 	/**
@@ -234,7 +234,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public SignDisplay getSignDisplay() {
-		return isNumberFormat.getSignDisplay();
+		return checkAndGet().getSignDisplay();
 	}
 
 	/**
@@ -244,7 +244,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setStyle(Style style) {
-		isNumberFormat.setStyle(style);
+		checkAndGet().setStyle(style);
 	}
 
 	/**
@@ -254,7 +254,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public Style getStyle() {
-		return isNumberFormat.getStyle();
+		return checkAndGet().getStyle();
 	}
 
 	/**
@@ -268,7 +268,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setUnitsOfMeasure(MeasureUnit... units) {
-		isNumberFormat.setUnitsOfMeasure(units);
+		checkAndGet().setUnitsOfMeasure(units);
 	}
 
 	/**
@@ -282,7 +282,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setUnitsOfMeasure(List<MeasureUnit> units) {
-		isNumberFormat.setUnitsOfMeasure(units);
+		checkAndGet().setUnitsOfMeasure(units);
 	}
 
 	/**
@@ -295,7 +295,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public List<MeasureUnit> getUnitsOfMeasure() {
-		return isNumberFormat.getUnitsOfMeasure();
+		return checkAndGet().getUnitsOfMeasure();
 	}
 
 	/**
@@ -308,7 +308,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setUnitOfMeasureDisplay(MeasureUnitDisplay unitDisplay) {
-		isNumberFormat.setUnitOfMeasureDisplay(unitDisplay);
+		checkAndGet().setUnitOfMeasureDisplay(unitDisplay);
 	}
 
 	/**
@@ -321,7 +321,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public MeasureUnitDisplay getUnitOfMeasureDisplay() {
-		return isNumberFormat.getUnitOfMeasureDisplay();
+		return checkAndGet().getUnitOfMeasureDisplay();
 	}
 
 	/**
@@ -331,7 +331,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setUseGrouping(boolean useGrouping) {
-		isNumberFormat.setUseGrouping(useGrouping);
+		checkAndGet().setUseGrouping(useGrouping);
 	}
 
 	/**
@@ -341,7 +341,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public boolean isUseGrouping() {
-		return isNumberFormat.isUseGrouping();
+		return checkAndGet().isUseGrouping();
 	}
 
 	/**
@@ -352,7 +352,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setMinimumIntegerDigits(int minimumIntegerDigits) {
-		isNumberFormat.setMinimumIntegerDigits(minimumIntegerDigits);
+		checkAndGet().setMinimumIntegerDigits(minimumIntegerDigits);
 	}
 
 	/**
@@ -362,7 +362,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public int getMinimumIntegerDigits() {
-		return isNumberFormat.getMinimumIntegerDigits();
+		return checkAndGet().getMinimumIntegerDigits();
 	}
 
 	/**
@@ -373,7 +373,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setMinimumFractionDigits(int minimumFractionDigits) {
-		isNumberFormat.setMinimumFractionDigits(minimumFractionDigits);
+		checkAndGet().setMinimumFractionDigits(minimumFractionDigits);
 	}
 
 	/**
@@ -387,7 +387,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public int getMinimumFractionDigits() {
-		return isNumberFormat.getMinimumFractionDigits();
+		return checkAndGet().getMinimumFractionDigits();
 	}
 
 	/**
@@ -398,7 +398,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setMaximumFractionDigits(int maximumFractionDigits) {
-		isNumberFormat.setMaximumFractionDigits(maximumFractionDigits);
+		checkAndGet().setMaximumFractionDigits(maximumFractionDigits);
 	}
 
 	/**
@@ -416,7 +416,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public int getMaximumFractionDigits() {
-		return isNumberFormat.getMaximumFractionDigits();
+		return checkAndGet().getMaximumFractionDigits();
 	}
 
 	/**
@@ -427,7 +427,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setMinimumSignificantDigits(int minimumIntegerDigits) {
-		isNumberFormat.setMinimumSignificantDigits(minimumIntegerDigits);
+		checkAndGet().setMinimumSignificantDigits(minimumIntegerDigits);
 	}
 
 	/**
@@ -437,7 +437,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public int getMinimumSignificantDigits() {
-		return isNumberFormat.getMinimumSignificantDigits();
+		return checkAndGet().getMinimumSignificantDigits();
 	}
 
 	/**
@@ -448,7 +448,7 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public void setMaximumSignificantDigits(int minimumIntegerDigits) {
-		isNumberFormat.setMaximumSignificantDigits(minimumIntegerDigits);
+		checkAndGet().setMaximumSignificantDigits(minimumIntegerDigits);
 	}
 
 	/**
@@ -458,7 +458,39 @@ final class NumberFormatter implements IsNumberFormat {
 	 */
 	@Override
 	public int getMaximumSignificantDigits() {
-		return isNumberFormat.getMaximumSignificantDigits();
+		return checkAndGet().getMaximumSignificantDigits();
+	}
+
+	/**
+	 * Gets the {@link IsNumberFormat} instance from provider checking if is consistent.
+	 * 
+	 * @return the {@link IsNumberFormat} instance from provider
+	 */
+	private IsNumberFormat checkAndGet() {
+		IsNumberFormat numberFormat = provider.getElement();
+		// checks if consistent
+		if (numberFormat == null) {
+			// exception!
+			throw new IllegalArgumentException("Number format element by provider is null");
+		}
+		return numberFormat;
+	}
+
+	/**
+	 * Interface to implement to provide the {@link IsNumberFormat} options to manage font properties.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	interface IsNumberFormatProvider {
+
+		/**
+		 * Provides the {@link IsNumberFormat} options to manage font properties.
+		 * 
+		 * @return {@link IsNumberFormat} options to manage font properties.
+		 */
+		IsNumberFormat getElement();
+
 	}
 
 }

@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * Extends a JavaScript object container for all entities which need the options instance to store the configuration of chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of options
  */
 abstract class ConfigurationContainer<T extends NativeObjectContainer> extends ChartContainer {
 

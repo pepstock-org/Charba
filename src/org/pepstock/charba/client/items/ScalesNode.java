@@ -43,9 +43,6 @@ public final class ScalesNode extends NativeObjectContainer {
 	 */
 	public ScalesNode(ChartEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 	}
 
 	/**

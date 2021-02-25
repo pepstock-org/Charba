@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.DefaultPluginId;
-import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
@@ -32,17 +31,15 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Plugins {
-
-	private final ExtendedOptions extendedOptions;
+public class Plugins extends ConfigurationOptionsContainer {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Plugins(ExtendedOptions options) {
-		this.extendedOptions = options;
+	Plugins(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**
@@ -51,7 +48,7 @@ public class Plugins {
 	 * @return the unmodifiable list of registered plugin ids
 	 */
 	public final List<Key> getAllIds() {
-		return extendedOptions.getPlugins().getAllIds();
+		return getConfiguration().getPlugins().getAllIds();
 	}
 
 	/**
@@ -61,7 +58,7 @@ public class Plugins {
 	 * @param enabled <code>false</code> disable a plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
-		extendedOptions.getPlugins().setEnabled(pluginId, enabled);
+		getConfiguration().getPlugins().setEnabled(pluginId, enabled);
 	}
 
 	/**
@@ -75,7 +72,7 @@ public class Plugins {
 		if (Key.isValid(plugin)) {
 			// creates the envelop
 			ConfigurationEnvelop<DefaultPluginId> envelop = new ConfigurationEnvelop<>(plugin);
-			extendedOptions.getPlugins().setEnabled(envelop, enabled);
+			getConfiguration().getPlugins().setEnabled(envelop, enabled);
 		}
 	}
 
@@ -86,7 +83,7 @@ public class Plugins {
 	 * @return <code>false</code> if a plugin is not enabled otherwise <code>true</code>.
 	 */
 	public boolean isEnabled(String pluginId) {
-		return extendedOptions.getPlugins().isEnabled(pluginId);
+		return getConfiguration().getPlugins().isEnabled(pluginId);
 	}
 
 	/**
@@ -96,7 +93,7 @@ public class Plugins {
 	 * @return <code>false</code> if a default plugin is not enabled otherwise <code>true</code>.
 	 */
 	public boolean isEnabled(DefaultPluginId pluginId) {
-		return extendedOptions.getPlugins().isEnabled(pluginId);
+		return getConfiguration().getPlugins().isEnabled(pluginId);
 	}
 
 	/**
@@ -106,7 +103,7 @@ public class Plugins {
 	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
 	 */
 	public boolean hasEnabled(String pluginId) {
-		return extendedOptions.getPlugins().hasEnabled(pluginId);
+		return getConfiguration().getPlugins().hasEnabled(pluginId);
 	}
 
 	/**
@@ -115,7 +112,7 @@ public class Plugins {
 	 * @param pluginId plugin id.
 	 */
 	public void removeOptions(String pluginId) {
-		extendedOptions.getPlugins().removeOptions(pluginId);
+		getConfiguration().getPlugins().removeOptions(pluginId);
 	}
 
 	/**
@@ -125,7 +122,7 @@ public class Plugins {
 	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(T options) {
-		extendedOptions.getPlugins().setOptions(options);
+		getConfiguration().getPlugins().setOptions(options);
 	}
 
 	/**
@@ -138,7 +135,7 @@ public class Plugins {
 	 * @param <T> type of plugin options to store
 	 */
 	public <T extends AbstractPluginOptions> void setOptions(String pluginId, T options) {
-		extendedOptions.getPlugins().setOptions(pluginId, options);
+		getConfiguration().getPlugins().setOptions(pluginId, options);
 	}
 
 	/**
@@ -148,7 +145,7 @@ public class Plugins {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	public boolean hasOptions(String pluginId) {
-		return extendedOptions.getPlugins().hasOptions(pluginId);
+		return getConfiguration().getPlugins().hasOptions(pluginId);
 	}
 
 	/**
@@ -162,7 +159,7 @@ public class Plugins {
 	 *         If factory argument is not consistent, <code>null</code> is returned.
 	 */
 	public <T extends AbstractPluginOptions> T getOptions(AbstractPluginOptionsFactory<T> factory) {
-		return extendedOptions.getPlugins().getOptions(factory);
+		return getConfiguration().getPlugins().getOptions(factory);
 	}
 
 	/**
@@ -176,7 +173,7 @@ public class Plugins {
 	 */
 	public <T extends AbstractPluginOptions> T getOptions(String pluginId, AbstractPluginOptionsFactory<T> factory) {
 		// returns the configuration by plugin id.
-		return extendedOptions.getPlugins().getOptions(pluginId, factory);
+		return getConfiguration().getPlugins().getOptions(pluginId, factory);
 	}
 
 }

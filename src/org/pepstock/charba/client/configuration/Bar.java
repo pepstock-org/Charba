@@ -15,25 +15,36 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.AbstractElement;
 
 /**
  * Bar elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Bar extends AbstractConfigurationElement {
+public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 
 	/**
 	 * Builds the object with options, root and setting the bar element.
 	 * 
 	 * @param options options instance
 	 */
-	Bar(ExtendedOptions options) {
-		super(options, options.getElements().getBar());
+	Bar(ConfigurationOptions options) {
+		super(options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getElement()
+	 */
+	@Override
+	protected AbstractElement<IsDefaultBar> getElement() {
+		return getConfiguration().getElements().getBar();
 	}
 
 	/**
@@ -42,7 +53,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @param borderSkipped to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
 	 */
 	public void setBorderSkipped(boolean borderSkipped) {
-		getOptions().getElements().getBar().setBorderSkipped(borderSkipped);
+		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
 	/**
@@ -51,7 +62,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @param borderSkipped the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(BorderSkipped borderSkipped) {
-		getOptions().getElements().getBar().setBorderSkipped(borderSkipped);
+		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
 	/**
@@ -60,7 +71,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public BorderSkipped getBorderSkipped() {
-		return getOptions().getElements().getBar().getBorderSkipped();
+		return getConfiguration().getElements().getBar().getBorderSkipped();
 	}
 
 	/**
@@ -69,7 +80,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(int borderRadius) {
-		getOptions().getElements().getBar().setBorderRadius(borderRadius);
+		getConfiguration().getElements().getBar().setBorderRadius(borderRadius);
 	}
 
 	/**
@@ -78,7 +89,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @return the bar border radius (in pixels).
 	 */
 	public int getBorderRadius() {
-		return getOptions().getElements().getBar().getBorderRadius();
+		return getConfiguration().getElements().getBar().getBorderRadius();
 	}
 
 	/**
@@ -87,7 +98,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
-		getOptions().getElements().getBar().setPointStyle(pointStyle);
+		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
 
 	/**
@@ -96,7 +107,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(Img pointStyle) {
-		getOptions().getElements().getBar().setPointStyle(pointStyle);
+		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
 
 	/**
@@ -105,7 +116,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @return <code>true</code> if the point style is set by an {@link Img}
 	 */
 	public boolean isPointStyleAsImage() {
-		return getOptions().getElements().getBar().isPointStyleAsImage();
+		return getConfiguration().getElements().getBar().isPointStyleAsImage();
 	}
 
 	/**
@@ -114,7 +125,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @return the style of the point.
 	 */
 	public PointStyle getPointStyle() {
-		return getOptions().getElements().getBar().getPointStyle();
+		return getConfiguration().getElements().getBar().getPointStyle();
 	}
 
 	/**
@@ -123,7 +134,7 @@ public class Bar extends AbstractConfigurationElement {
 	 * @return the style of the point as image.
 	 */
 	public Img getPointStyleAsImage() {
-		return getOptions().getElements().getBar().getPointStyleAsImage();
+		return getConfiguration().getElements().getBar().getPointStyleAsImage();
 	}
 
 }

@@ -44,7 +44,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		CHARBA_OBJECT_ID("_charbaObjectID");
+		CHARBA_OBJECT_ID("charbaObjectID");
 
 		// name value of property
 		private final String value;

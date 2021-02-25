@@ -110,8 +110,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		START_ANGLE("startAngle"),
 		INDEX_AXIS("indexAxis"),
 		// internal key to store draw and destroy chart options
-		CHARBA_DRAW_ON_ATTACH("_charbaDrawOnAttach"),
-		CHARBA_DESTROY_ON_DETACH("_charbaDestroyOnDetach");
+		CHARBA_DRAW_ON_ATTACH("charbaDrawOnAttach"),
+		CHARBA_DESTROY_ON_DETACH("charbaDestroyOnDetach");
 
 		// name value of property
 		private final String value;

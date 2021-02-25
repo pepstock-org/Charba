@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -28,7 +27,6 @@ import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -109,13 +107,12 @@ public class ConfigurationAnimation extends Animation implements IsEventProvider
 	/**
 	 * Builds the object storing the chart instance and root options.
 	 * 
-	 * @param chart chart instance.
 	 * @param options root options of chart.
 	 */
-	ConfigurationAnimation(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	ConfigurationAnimation(ConfigurationOptions options) {
+		super(options);
 		// registers as event handler
-		IsEventProvider.register(chart, this);
+		IsEventProvider.register(getChart(), this);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

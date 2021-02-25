@@ -49,8 +49,6 @@ class AnnotationMap extends NativeObjectContainer {
 	 */
 	AnnotationMap(NativeObject nativeObject) {
 		super(nativeObject);
-		// redefines hashcode
-		super.redefineHashcode();
 	}
 
 	/**
@@ -91,7 +89,7 @@ class AnnotationMap extends NativeObjectContainer {
 		// checks if the annotation id is consistent
 		IsAnnotationId.checkIfValid(id);
 		// removes from java script object if the annotation id exist
-		removeIfExists(id);
+		remove(id);
 	}
 
 	/**

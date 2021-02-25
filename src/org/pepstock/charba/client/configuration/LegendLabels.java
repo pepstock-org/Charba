@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendItemSortCallback;
@@ -34,7 +33,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -44,7 +42,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
+public class LegendLabels extends ConfigurationOptionsContainer {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -171,13 +169,12 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	LegendLabels(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	LegendLabels(ConfigurationOptions options) {
+		super(options);
 		// get embedded elements
-		this.font = new Font(options.getLegend().getLabels().getFont());
+		this.font = new Font(() -> getConfiguration().getLegend().getLabels().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -456,4 +453,5 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, null);
 		}
 	}
+
 }

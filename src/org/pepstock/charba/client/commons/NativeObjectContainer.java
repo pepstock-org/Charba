@@ -44,7 +44,7 @@ public abstract class NativeObjectContainer {
 	 * Creates the object with an empty native object instance.
 	 */
 	protected NativeObjectContainer() {
-		this(new NativeObject());
+		this(NativeObject.create());
 	}
 
 	/**
@@ -53,7 +53,7 @@ public abstract class NativeObjectContainer {
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	protected NativeObjectContainer(NativeObject nativeObject) {
-		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
+		this.nativeObject = (nativeObject == null ? NativeObject.create() : nativeObject);
 	}
 
 	// ------------------------------------------
@@ -101,13 +101,6 @@ public abstract class NativeObjectContainer {
 		envelop.setContent(nativeObject);
 		// returns the envelop passed as argument
 		return envelop;
-	}
-
-	/**
-	 * Redefine hash code for {@link NativeObject}, setting the hashCode property as not enumerable and not configurable
-	 */
-	protected final void redefineHashcode() {
-		NativeObjectHashing.handleHashCode(this.nativeObject);
 	}
 
 	/**
@@ -185,7 +178,7 @@ public abstract class NativeObjectContainer {
 		// creates the result
 		List<Key> keys = new ArrayList<>();
 		// scans all properties names of object
-		for (String key : nativeObject.propertyKeys()) {
+		for (String key : nativeObject.propertiesKeys()) {
 			// adds a key object by name of the property
 			keys.add(Key.create(key));
 		}
@@ -222,19 +215,6 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Removes an element (by key) from the embedded JavaScript object if exists.
-	 * 
-	 * @param key key of the property of JavaScript object.
-	 */
-	protected final void removeIfExists(Key key) {
-		// checks if there is
-		if (has(key)) {
-			// and then remove
-			remove(key);
-		}
-	}
-
-	/**
 	 * Removes an element (by key) from the embedded JavaScript object.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -258,7 +238,7 @@ public abstract class NativeObjectContainer {
 			// scans all keys
 			for (Key key : keys) {
 				// removes if exists
-				removeIfExists(key);
+				remove(key);
 			}
 		}
 	}
@@ -293,10 +273,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getIntProperty(key.value());
 	}
 
 	/**
@@ -319,7 +297,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -377,10 +355,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeDoubleDescriptor descriptor = nativeObject.getDoubleProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getDoubleProperty(key.value());
 	}
 
 	/**
@@ -403,7 +379,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -461,10 +437,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeBooleanDescriptor descriptor = nativeObject.getBooleanProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getBooleanProperty(key.value());
 	}
 
 	// ------------------------------------------
@@ -483,10 +457,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeStringDescriptor descriptor = nativeObject.getStringProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getStringProperty(key.value());
 	}
 
 	/**
@@ -500,7 +472,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -531,7 +503,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -576,11 +548,11 @@ public abstract class NativeObjectContainer {
 		// checks if property type
 		if (ObjectType.NUMBER.equals(type)) {
 			// gets descriptor
-			NativeDoubleDescriptor descriptor = nativeObject.getDoubleProperty(key.value());
+			double value = nativeObject.getDoubleProperty(key.value());
 			// checks if value is consistent
-			if (descriptor != null && !Double.isNaN(descriptor.getValue()) && descriptor.getValue() > 0D) {
+			if (!Double.isNaN(value) && value > 0D) {
 				// creates and returns a date
-				return new ImmutableDate((long) descriptor.getValue());
+				return new ImmutableDate((long) value);
 			}
 		}
 		// if here the value is not consistent for a date
@@ -599,7 +571,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// stores date as double
 			setValue(key, value.getTime());
@@ -621,10 +593,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return null;
 		}
-		// gets descriptor
-		NativeObjectDescriptor descriptor = nativeObject.getObjectProperty(key.value());
 		// returns value
-		return descriptor == null ? null : descriptor.getValue();
+		return nativeObject.getObjectProperty(key.value());
 	}
 
 	/**
@@ -638,7 +608,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -660,7 +630,7 @@ public abstract class NativeObjectContainer {
 		Key.checkIfValid(key);
 		// if here, key is consistent
 		// sets value
-		nativeObject.defineObjectProperty(key.value(), new NativeObject());
+		nativeObject.defineObjectProperty(key.value(), NativeObject.create());
 	}
 
 	// ------------------------------------------
@@ -677,7 +647,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -708,7 +678,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -723,7 +693,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (container == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -748,7 +718,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -770,7 +740,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (container == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -795,7 +765,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -822,10 +792,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeImageDescriptor descriptor = nativeObject.getImageProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getImageProperty(key.value());
 	}
 
 	/**
@@ -839,7 +807,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -870,7 +838,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -914,10 +882,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativeGradientDescriptor descriptor = nativeObject.getGradientProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getGradientProperty(key.value());
 	}
 
 	/**
@@ -931,7 +897,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -962,7 +928,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -1006,10 +972,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
-		// gets descriptor
-		NativePatternDescriptor descriptor = nativeObject.getPatternProperty(key.value());
 		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
+		return nativeObject.getPatternProperty(key.value());
 	}
 
 	/**
@@ -1023,7 +987,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -1054,7 +1018,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -1116,7 +1080,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -1204,7 +1168,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -1238,10 +1202,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns null
 			return null;
 		}
-		// gets descriptor
-		NativeArrayDescriptor<T> descriptor = nativeObject.getArrayProperty(key.value());
 		// returns value
-		return descriptor == null ? null : descriptor.getValue();
+		return nativeObject.getArrayProperty(key.value());
 	}
 
 	/**
@@ -1256,7 +1218,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -1292,7 +1254,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// if not consistent, remove the property
-			removeIfExists(key);
+			remove(key);
 		}
 	}
 
@@ -1311,7 +1273,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -1334,10 +1296,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns null
 			return null;
 		}
-		// gets descriptor
-		NativeChartDescriptor descriptor = nativeObject.getChartProperty(key.value());
 		// returns value
-		return descriptor == null ? null : descriptor.getValue();
+		return nativeObject.getChartProperty(key.value());
 	}
 
 	// ------------------------------------------
@@ -1355,7 +1315,7 @@ public abstract class NativeObjectContainer {
 		// try to remove the reference if exists
 		if (value == null) {
 			// removes property if the property exists
-			removeIfExists(key);
+			remove(key);
 		} else {
 			// checks if the key is consistent
 			// if not, exception
@@ -1378,10 +1338,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns null
 			return null;
 		}
-		// gets descriptor
-		NativeEventDescriptor descriptor = nativeObject.getEventProperty(key.value());
 		// returns value
-		return descriptor == null ? null : descriptor.getValue();
+		return nativeObject.getEventProperty(key.value());
 	}
 
 	// ------------------------------------------

@@ -86,9 +86,6 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	DataPoint(NativeObject nativeObject) {
 		super(nativeObject);
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 	}
 
 	// -------------

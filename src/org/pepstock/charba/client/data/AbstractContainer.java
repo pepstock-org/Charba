@@ -66,9 +66,6 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	 */
 	AbstractContainer(Dataset dataset) {
 		super();
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 		// stores dataset
 		this.dataset = dataset;
 	}

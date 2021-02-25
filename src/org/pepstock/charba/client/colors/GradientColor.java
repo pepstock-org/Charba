@@ -47,8 +47,8 @@ public final class GradientColor extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		CHARBA_GRADIENT_COLOR_OFFSET("_charbaGradientColorOffset"),
-		CHARBA_GRADIENT_COLOR("_charbaGradientColor");
+		CHARBA_GRADIENT_COLOR_OFFSET("charbaGradientColorOffset"),
+		CHARBA_GRADIENT_COLOR("charbaGradientColor");
 
 		// name value of property
 		private final String value;

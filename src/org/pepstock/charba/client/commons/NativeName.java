@@ -52,6 +52,11 @@ public final class NativeName {
 	public static final String JS_HELPER = "CharbaJsHelper";
 
 	/**
+	 * Constant to bind java script object as different java instance (by property type) with name <b>{@value JS_OBJECT_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_HELPER = "CharbaJsObjectHelper";
+
+	/**
 	 * Constant to bind java script object as JsItemsHelper with name <b>{@value JS_ITEMS_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_ITEMS_HELPER = "CharbaJsItemsHelper";

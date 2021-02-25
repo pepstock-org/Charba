@@ -63,7 +63,7 @@ public final class Window {
 	 * @return the undefined instance
 	 */
 	@JsProperty(name = "undefined")
-	static native Object undefined();
+	public static native <T> T undefined();
 
 	/**
 	 * Sets the <code>onbeforeprint</code> callback.

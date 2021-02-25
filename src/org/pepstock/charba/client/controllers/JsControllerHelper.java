@@ -153,9 +153,10 @@ final class JsControllerHelper {
 	 * 
 	 * @param controllerType controller type
 	 * @param context context of controller
+	 * @param resetNewElements <code>true</code> if the new elements must be reset
 	 */
-	void buildOrUpdateElements(ControllerType controllerType, ControllerContext context) {
-		NativeJsControllerHelper.buildOrUpdateElements(controllerType.getChartType().value(), context);
+	void buildOrUpdateElements(ControllerType controllerType, ControllerContext context, boolean resetNewElements) {
+		NativeJsControllerHelper.buildOrUpdateElements(controllerType.getChartType().value(), context, resetNewElements);
 	}
 
 }

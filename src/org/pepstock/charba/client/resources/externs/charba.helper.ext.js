@@ -16,6 +16,24 @@ CharbaCallbackProxy.prototype.proxy;
 CharbaCallbackProxy.prototype.callback;
 /**
  * @constructor
+ * @return {CharbaJsObjectHelper}
+ */
+function CharbaJsObjectHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {*} value
+ * @return {undefined}
+ */
+CharbaJsObjectHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {*}
+ */
+CharbaJsObjectHelper.get = function(object, key) {};
+/**
+ * @constructor
  * @return {CharbaJsHelper}
  */
 function CharbaJsHelper() {}
@@ -31,6 +49,12 @@ CharbaJsHelper.exist = function(object, key) {};
  * @return {boolean}
  */
 CharbaJsHelper.has = function(object, key) {};
+/**
+ * @param {*} object
+ * @param {string} key 
+ * @return {undefined}
+ */
+CharbaJsHelper.remove = function(object, key) {};
 /**
  * @param {*} object
  * @return {string}
@@ -52,12 +76,6 @@ CharbaJsHelper.isArray = function(object, key) {};
  * @return {CharbaCallbackProxy}
  */
 CharbaJsHelper.newCallbackProxy = function() {};
-/**
- * @param {*} object
- * @param {string} key 
- * @return {undefined}
- */
-CharbaJsHelper.remove = function(object, key) {};
 /**
  * @param {*} object
  * @return {boolean}
@@ -150,10 +168,11 @@ CharbaJsControllerHelper.update = function(chartType, context, mode) {};
 CharbaJsControllerHelper.linkScales = function(chartType, context) {};
 /**
  * @param {string} chartType 
- * @param {Object} context 
+ * @param {Object} context
+ * @parma {boolean} resetNewElements
  * @return {undefined}
  */
-CharbaJsControllerHelper.buildOrUpdateElements = function(chartType, context) {};
+CharbaJsControllerHelper.buildOrUpdateElements = function(chartType, context, resetNewElements) {};
 /**
  * @constructor
  * @return {CharbaJsPositionerHelper}

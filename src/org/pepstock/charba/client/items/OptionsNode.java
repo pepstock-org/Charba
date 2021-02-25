@@ -36,6 +36,6 @@ public final class OptionsNode extends ScaledOptions {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public OptionsNode(String chartId, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
-		super(chartId, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(chartId, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), true);
 	}
 }

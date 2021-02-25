@@ -33,6 +33,15 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 * @return the clear selection item
 	 */
 	IsDatasetsItemsSelectorDefaultClearSelection getClearSelection();
+	
+	/**
+	 * Returns <code>true</code> if plugin is enabled.
+	 * 
+	 * @return <code>true</code> if plugin is enabled.
+	 */
+	default boolean isEnabled() {
+		return DatasetsItemsSelectorOptions.DEFAULT_ENABLED;
+	}
 
 	/**
 	 * Returns the ID of the x axis to plot this dataset on.<br>

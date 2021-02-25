@@ -44,7 +44,7 @@ public final class ChartOptions extends ScaledOptions {
 	ChartOptions(Type type, NativeObject nativeObject, IsDefaultScaledOptions defaultOptions) {
 		// the default of chart default ones are the CHART.JS one
 		// checks consistency of type
-		super(createScope(type), defaultOptions, nativeObject);
+		super(createScope(type), defaultOptions, nativeObject, true);
 		// stores type
 		this.type = type;
 	}

@@ -45,7 +45,7 @@ public final class ExtendedScale extends Scale {
 	private enum Property implements Key
 	{
 		// internal key to store a unique id
-		CHARBA_ID("_charbaId");
+		CHARBA_ID("charbaId");
 
 		// name value of property
 		private final String value;
@@ -90,6 +90,15 @@ public final class ExtendedScale extends Scale {
 		setId(envelop.getContent());
 		// stores the id based on a counter
 		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
+	}
+
+	/**
+	 * Creates a scale with the chart options scale as inner object.
+	 * 
+	 * @param envelop envelop with the scale of chart options
+	 */
+	public ExtendedScale(ConfigurationEnvelop<Scale> envelop, IsDefaultScale defaultValues) {
+		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent().nativeObject());
 	}
 
 	/**

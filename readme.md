@@ -285,6 +285,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
  * change `borderDashOffset` option from int to double in all classes where referenced.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
+ * remove `reconfigure()` methods from charts. To update the configuration use `update()`. 
   
 ### Features
 
@@ -410,6 +411,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
  * change all methods of `Plugin` interface becoming all default ones.
+ * add `enabled` property to DatasetsItemsSelector plugin in order to disable/enable the plugin at runtime.
   
 ### Development
 

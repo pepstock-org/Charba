@@ -21,7 +21,6 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Configures the chart title which defines text to draw at the top of the chart.
@@ -29,9 +28,8 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Title {
+public class Title extends ConfigurationOptionsContainer {
 
-	private final ExtendedOptions options;
 	// font instance
 	private final Font font;
 
@@ -40,14 +38,10 @@ public class Title {
 	 * 
 	 * @param options root options element.
 	 */
-	Title(ExtendedOptions options) {
-		this.options = options;
-		// checks if configuration is consistent
-		if (options == null) {
-			// if not exception
-			throw new IllegalArgumentException("Options argument is null");
-		}
-		this.font = new Font(options.getTitle().getFont());
+	Title(ConfigurationOptions options) {
+		super(options);
+		// gets embedded font
+		this.font = new Font(() -> getConfiguration().getTitle().getFont());
 	}
 
 	/**
@@ -74,7 +68,7 @@ public class Title {
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
-		options.getTitle().setColor(color);
+		getConfiguration().getTitle().setColor(color);
 	}
 
 	/**
@@ -83,7 +77,7 @@ public class Title {
 	 * @return font color as string
 	 */
 	public String getColorAsString() {
-		return options.getTitle().getColorAsString();
+		return getConfiguration().getTitle().getColorAsString();
 	}
 
 	/**
@@ -101,7 +95,7 @@ public class Title {
 	 * @param display if the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		options.getTitle().setDisplay(display);
+		getConfiguration().getTitle().setDisplay(display);
 	}
 
 	/**
@@ -110,7 +104,7 @@ public class Title {
 	 * @return if the title is shown.
 	 */
 	public boolean isDisplay() {
-		return options.getTitle().isDisplay();
+		return getConfiguration().getTitle().isDisplay();
 	}
 
 	/**
@@ -119,7 +113,7 @@ public class Title {
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
-		options.getTitle().setText(text);
+		getConfiguration().getTitle().setText(text);
 	}
 
 	/**
@@ -128,7 +122,7 @@ public class Title {
 	 * @return a list of strings
 	 */
 	public List<String> getText() {
-		return options.getTitle().getText();
+		return getConfiguration().getTitle().getText();
 	}
 
 	/**
@@ -137,7 +131,7 @@ public class Title {
 	 * @param position the position of title.
 	 */
 	public void setPosition(Position position) {
-		options.getTitle().setPosition(position);
+		getConfiguration().getTitle().setPosition(position);
 	}
 
 	/**
@@ -146,7 +140,7 @@ public class Title {
 	 * @return the position of title.
 	 */
 	public Position getPosition() {
-		return options.getTitle().getPosition();
+		return getConfiguration().getTitle().getPosition();
 	}
 
 	/**
@@ -155,7 +149,7 @@ public class Title {
 	 * @param padding Padding to apply around title. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		options.getTitle().setPadding(padding);
+		getConfiguration().getTitle().setPadding(padding);
 	}
 
 	/**
@@ -164,7 +158,7 @@ public class Title {
 	 * @return Padding to apply around title. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
-		return options.getTitle().getPadding();
+		return getConfiguration().getTitle().getPadding();
 	}
 
 	/**
@@ -173,7 +167,7 @@ public class Title {
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		options.getTitle().setFullWidth(fullWidth);
+		getConfiguration().getTitle().setFullWidth(fullWidth);
 	}
 
 	/**
@@ -182,7 +176,7 @@ public class Title {
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
-		return options.getTitle().isFullWidth();
+		return getConfiguration().getTitle().isFullWidth();
 	}
 
 	/**
@@ -191,7 +185,7 @@ public class Title {
 	 * @param alignment alignment of the title.
 	 */
 	public void setAlign(ElementAlign alignment) {
-		options.getTitle().setAlign(alignment);
+		getConfiguration().getTitle().setAlign(alignment);
 	}
 
 	/**
@@ -200,7 +194,7 @@ public class Title {
 	 * @return alignment of the title.
 	 */
 	public ElementAlign getAlign() {
-		return options.getTitle().getAlign();
+		return getConfiguration().getTitle().getAlign();
 	}
 
 }

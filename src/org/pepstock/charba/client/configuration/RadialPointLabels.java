@@ -128,7 +128,7 @@ public class RadialPointLabels extends AxisContainer {
 	RadialPointLabels(Axis axis) {
 		super(axis);
 		// gets embedded elements
-		font = new Font(axis.getConfiguration().getPointLabels().getFont());
+		font = new Font(() -> getAxis().getConfiguration().getPointLabels().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -323,7 +323,7 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	private String onColor(ScaleScriptableContext context, ColorCallback callback) {
 		// gets default color
-		String defaultColor = getAxis().getConfiguration().getPointLabels().getColorAsString();
+		String defaultColor = getAxis().getDefaultValues().getPointLabels().getColorAsString();
 		// gets value
 		Object result = ScriptableUtils.getOptionValueAsColor(getAxis(), context, callback, defaultColor, false);
 		// checks if result is a string

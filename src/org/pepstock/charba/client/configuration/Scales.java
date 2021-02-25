@@ -21,8 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 
@@ -31,19 +29,18 @@ import org.pepstock.charba.client.options.Scale;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Scales extends ConfigurationContainer<ExtendedOptions> {
+public class Scales extends ConfigurationOptionsContainer {
 
 	// buffer to maintain axes
 	private final Map<String, Axis> storedAxes = new HashMap<>();
 
 	/**
-	 * Builds the object storing the chart instance and the root options element.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Scales(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	Scales(ScalesOptions options) {
+		super(options);
 	}
 
 	/**

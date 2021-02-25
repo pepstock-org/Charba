@@ -388,35 +388,6 @@ public interface IsChart {
 	void update(UpdateConfiguration config);
 
 	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.
-	 */
-	void reconfigure();
-
-	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.<br>
-	 * A animation mode key can be provided for the update process using a specific animation configuration.<br>
-	 * This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
-	 */
-	void reconfigure(IsAnimationModeKey mode);
-
-	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.<br>
-	 * A configuration object can be provided with additional configuration for the update process.<br>
-	 * This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param config a configuration object can be provided with additional configuration for the update process
-	 */
-	void reconfigure(UpdateConfiguration config);
-
-	/**
 	 * Triggers a redraw of all chart elements.<br>
 	 * Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */

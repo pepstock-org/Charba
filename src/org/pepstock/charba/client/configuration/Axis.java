@@ -124,8 +124,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private AxisUpdateCallback axisUpdateCallback = null;
 	// user callback implementation for building ticks
 	private AxisBuildTicksCallback axisBuildTicksCallback = null;
+
 	// stores axis type
 	private final AxisType storeType;
+	// stores default scale
+	private final IsDefaultScale defaultValues;
+	
 
 	/**
 	 * Name of properties of native object.
@@ -187,9 +191,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		Key.checkIfValid(kind);
 		// stores internally the axis type
 		this.storeType = Key.checkAndGetIfValid(type);
+		// stores defaults
+		this.defaultValues = getDefaultScale(id, kind);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
-		setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(id), type, kind, getDefaultScale(id, kind)));
+		setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(id), type, kind, defaultValues));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -313,12 +319,22 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Returns the scale configuration
+	 * Returns the scale configuration or the chart options if chart is initialized.
 	 * 
-	 * @return the scale configuration
+	 * @return the scale configuration or the chart options if chart is initialized
 	 */
 	final Scale getScale() {
+		// returns the scale
 		return super.getConfiguration();
+	}
+
+	/**
+	 * Returns the default values of the axis.
+	 * 
+	 * @return the default values of the axis
+	 */
+	final IsDefaultScale getDefaultValues() {
+		return defaultValues;
 	}
 
 	/**

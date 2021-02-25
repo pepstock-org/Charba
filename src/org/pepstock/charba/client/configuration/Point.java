@@ -15,24 +15,35 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.AbstractElement;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Point extends AbstractConfigurationElement {
+public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Point(ExtendedOptions options) {
-		super(options, options.getElements().getPoint());
+	Point(ConfigurationOptions options) {
+		super(options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getElement()
+	 */
+	@Override
+	protected AbstractElement<IsDefaultPoint> getElement() {
+		return getConfiguration().getElements().getPoint();
 	}
 
 	/**
@@ -42,7 +53,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
-		getOptions().getElements().getPoint().setRadius(radius);
+		getConfiguration().getElements().getPoint().setRadius(radius);
 	}
 
 	/**
@@ -51,7 +62,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the radius of the point.
 	 */
 	public double getRadius() {
-		return getOptions().getElements().getPoint().getRadius();
+		return getConfiguration().getElements().getPoint().getRadius();
 	}
 
 	/**
@@ -60,7 +71,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
-		getOptions().getElements().getPoint().setPointStyle(pointStyle);
+		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
 	/**
@@ -69,7 +80,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(Img pointStyle) {
-		getOptions().getElements().getPoint().setPointStyle(pointStyle);
+		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
 	/**
@@ -78,7 +89,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return <code>true</code> if the point style is set by an {@link Img}
 	 */
 	public boolean isPointStyleAsImage() {
-		return getOptions().getElements().getPoint().isPointStyleAsImage();
+		return getConfiguration().getElements().getPoint().isPointStyleAsImage();
 	}
 
 	/**
@@ -87,7 +98,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the style of the point.
 	 */
 	public PointStyle getPointStyle() {
-		return getOptions().getElements().getPoint().getPointStyle();
+		return getConfiguration().getElements().getPoint().getPointStyle();
 	}
 
 	/**
@@ -96,7 +107,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the style of the point as image.
 	 */
 	public Img getPointStyleAsImage() {
-		return getOptions().getElements().getPoint().getPointStyleAsImage();
+		return getConfiguration().getElements().getPoint().getPointStyleAsImage();
 	}
 
 	/**
@@ -105,7 +116,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double hitRadius) {
-		getOptions().getElements().getPoint().setHitRadius(hitRadius);
+		getConfiguration().getElements().getPoint().setHitRadius(hitRadius);
 	}
 
 	/**
@@ -114,7 +125,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the pixel size of the non-displayed point.
 	 */
 	public double getHitRadius() {
-		return getOptions().getElements().getPoint().getHitRadius();
+		return getConfiguration().getElements().getPoint().getHitRadius();
 	}
 
 	/**
@@ -123,7 +134,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double hoverRadius) {
-		getOptions().getElements().getPoint().setHoverRadius(hoverRadius);
+		getConfiguration().getElements().getPoint().setHoverRadius(hoverRadius);
 	}
 
 	/**
@@ -132,7 +143,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the radius of the point when hovered.
 	 */
 	public double getHoverRadius() {
-		return getOptions().getElements().getPoint().getHoverRadius();
+		return getConfiguration().getElements().getPoint().getHoverRadius();
 	}
 
 	/**
@@ -141,7 +152,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param hoverBorderWidth the border width of point when hovered.
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
-		getOptions().getElements().getPoint().setHoverBorderWidth(hoverBorderWidth);
+		getConfiguration().getElements().getPoint().setHoverBorderWidth(hoverBorderWidth);
 	}
 
 	/**
@@ -150,7 +161,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the border width of point when hovered.
 	 */
 	public int getHoverBorderWidth() {
-		return getOptions().getElements().getPoint().getBorderWidth();
+		return getConfiguration().getElements().getPoint().getBorderWidth();
 	}
 
 	/**
@@ -159,7 +170,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @param rotation the point rotation (in degrees).
 	 */
 	public void setRotation(double rotation) {
-		getOptions().getElements().getPoint().setRotation(rotation);
+		getConfiguration().getElements().getPoint().setRotation(rotation);
 	}
 
 	/**
@@ -168,7 +179,7 @@ public class Point extends AbstractConfigurationElement {
 	 * @return the point rotation (in degrees).
 	 */
 	public double getRotation() {
-		return getOptions().getElements().getPoint().getRotation();
+		return getConfiguration().getElements().getPoint().getRotation();
 	}
 
 }

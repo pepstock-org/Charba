@@ -15,25 +15,21 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.ExtendedOptions;
-
 /**
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Padding {
-
-	private final ExtendedOptions options;
+public class Padding extends ConfigurationOptionsContainer {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Padding(ExtendedOptions options) {
-		this.options = options;
+	Padding(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**
@@ -54,7 +50,7 @@ public class Padding {
 	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
-		options.getLayout().getPadding().setLeft(padding);
+		getConfiguration().getLayout().getPadding().setLeft(padding);
 	}
 
 	/**
@@ -63,7 +59,7 @@ public class Padding {
 	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
-		return options.getLayout().getPadding().getLeft();
+		return getConfiguration().getLayout().getPadding().getLeft();
 	}
 
 	/**
@@ -72,7 +68,7 @@ public class Padding {
 	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
-		options.getLayout().getPadding().setRight(padding);
+		getConfiguration().getLayout().getPadding().setRight(padding);
 	}
 
 	/**
@@ -81,7 +77,7 @@ public class Padding {
 	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
-		return options.getLayout().getPadding().getRight();
+		return getConfiguration().getLayout().getPadding().getRight();
 	}
 
 	/**
@@ -90,7 +86,7 @@ public class Padding {
 	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
-		options.getLayout().getPadding().setTop(padding);
+		getConfiguration().getLayout().getPadding().setTop(padding);
 	}
 
 	/**
@@ -99,7 +95,7 @@ public class Padding {
 	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
-		return options.getLayout().getPadding().getTop();
+		return getConfiguration().getLayout().getPadding().getTop();
 	}
 
 	/**
@@ -108,7 +104,7 @@ public class Padding {
 	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
-		options.getLayout().getPadding().setBottom(padding);
+		getConfiguration().getLayout().getPadding().setBottom(padding);
 	}
 
 	/**
@@ -117,7 +113,7 @@ public class Padding {
 	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
-		return options.getLayout().getPadding().getBottom();
+		return getConfiguration().getLayout().getPadding().getBottom();
 	}
 
 }

@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -31,7 +30,6 @@ import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.LegendItem;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -41,7 +39,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Legend extends ConfigurationContainer<ExtendedOptions> implements IsEventProvider {
+public class Legend extends ConfigurationOptionsContainer implements IsEventProvider {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -89,16 +87,15 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Legend(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	Legend(ConfigurationOptions options) {
+		super(options);
 		// registers as event handler
-		IsEventProvider.register(chart, this);
+		IsEventProvider.register(getChart(), this);
 		// creates sub elements
-		this.labels = new LegendLabels(chart, options);
-		this.title = new LegendTitle(chart, options);
+		this.labels = new LegendLabels(getOptions());
+		this.title = new LegendTitle(getOptions());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
 public class RadialAxis extends Axis implements IsNumericAxis {
 
 	// sub elements of axis
-	private final GridLines grideLines;
+	private final GridLines gridLines;
 
 	private final RadialLinearTick ticks;
 
@@ -49,7 +49,7 @@ public class RadialAxis extends Axis implements IsNumericAxis {
 		super(chart, DefaultScaleId.R, AxisType.RADIAL_LINEAR, AxisKind.R);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
-		grideLines = new GridLines(this);
+		gridLines = new GridLines(this);
 		ticks = new RadialLinearTick(this);
 		angleLines = new RadialAngleLines(this);
 	}
@@ -76,10 +76,10 @@ public class RadialAxis extends Axis implements IsNumericAxis {
 	/**
 	 * Returns the grid lines element.
 	 * 
-	 * @return the grideLines
+	 * @return the grid lines
 	 */
-	public GridLines getGrideLines() {
-		return grideLines;
+	public GridLines getGridLines() {
+		return gridLines;
 	}
 
 	/**

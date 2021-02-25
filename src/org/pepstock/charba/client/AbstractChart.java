@@ -670,6 +670,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void update(IsAnimationModeKey mode) {
 		// checks if chart is created
 		if (chart != null) {
+			// invokes the notification
+			invokeConfigurationNotification();
 			// if mode is valid.. added check to null to avoid issue from code analysis
 			if (mode != null && IsAnimationModeKey.isValid(mode)) {
 				// then calls the update with animation mode
@@ -696,6 +698,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		if (chart != null) {
 			// if configuration is not passed..
 			if (configuration == null) {
+				// invokes the notification
+				invokeConfigurationNotification();
 				// then calls the update
 				chart.update();
 			} else {
@@ -708,91 +712,24 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.
-	 */
-	@Override
-	public final void reconfigure() {
-		reconfigure((IsAnimationModeKey) null);
-	}
-
-	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.<br>
-	 * A animation mode key can be provided for the update process using a specific animation configuration.<br>
-	 * This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
-	 */
-	@Override
-	public final void reconfigure(IsAnimationModeKey mode) {
-		// checks and performs pre-reconfiguration
-		if (performPreReconfiguration()) {
-			// if here, pre-reconfiguration has been done
-			// update chart
-			update(mode);
-		}
-	}
-
-	/**
-	 * Triggers an update of the chart.<br>
-	 * This can be safely called after updating the data object.<br>
-	 * This will update the options, mutating the options property in place.<br>
-	 * A configuration object can be provided with additional configuration for the update process.<br>
-	 * This is useful when update is manually called inside an event handler and some different animation is desired.
-	 * 
-	 * @param configuration a configuration object can be provided with additional configuration for the update process
-	 */
-	@Override
-	public final void reconfigure(UpdateConfiguration configuration) {
-		// checks and performs pre-reconfiguration
-		if (performPreReconfiguration()) {
-			// if here, pre-reconfiguration has been done
-			// update chart
-			update(configuration);
-		}
-	}
-
-	/**
 	 * Prepares the chart options with the configuration ones before updating the chart, in order that new or updated options will be used by chart.
-	 * 
-	 * @return <code>true</code> if the pre-configuration has been applied, otherwise <code>false</code>
 	 */
-	private boolean performPreReconfiguration() {
-		// checks if chart is created and consistent
-		if (chart != null && IsChart.isConsistent(this)) {
-			// invokes the apply configuration
-			applyConfiguration();
-			// fires that chart is configuring
-			Charts.fireBeforeConfigure(this);
-			// updates option passed by configuration element
-			Configuration tempConfiguration = new Configuration();
-			// gets options
-			ConfigurationOptions internalOptions = getOptions();
-			// sets options by temporary configuration
-			tempConfiguration.setOptions(this, internalOptions);
-			// clones the current chart config
-			NativeObject clonedOptions = Helpers.get().clone(tempConfiguration.getOptions());
-			// gets native configuration
-			NativeConfiguration config = chart.getConfig();
-			// applies the new options
-			// gets the updated options
-			NativeObject wholeOptions = config.updateAndGetConfiguration(clonedOptions);
-			// replace the options
-			chart.setOptions(wholeOptions);
-			// calls plugins for onConfigure method
-			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
-			plugins.onChartConfigure(tempConfiguration, this);
-			// fires that chart has been configured
-			Charts.fireAfterConfigure(this);
-			// pre-reconfiguration is done
-			return true;
-		}
-		// if here, chart not valid
-		// returns false
-		return false;
+	private void invokeConfigurationNotification() {
+		// invokes the apply configuration
+		applyConfiguration();
+		// fires that chart is configuring
+		Charts.fireBeforeConfigure(this);
+		// updates option passed by configuration element
+		Configuration tempConfiguration = new Configuration();
+		// gets options
+		ConfigurationOptions internalOptions = getOptions();
+		// sets options by temporary configuration
+		tempConfiguration.setOptions(this, internalOptions);
+		// calls plugins for onConfigure method
+		Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
+		plugins.onChartConfigure(tempConfiguration, this);
+		// fires that chart has been configured
+		Charts.fireAfterConfigure(this);
 	}
 
 	/**

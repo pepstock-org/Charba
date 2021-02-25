@@ -15,23 +15,34 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
-import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.options.AbstractElement;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Arc extends AbstractConfigurationElement {
+public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 
 	/**
 	 * Builds the object setting the java script options object and defaults options for arc.
 	 * 
 	 * @param options root options of chart
 	 */
-	Arc(ExtendedOptions options) {
-		super(options, options.getElements().getArc());
+	Arc(ConfigurationOptions options) {
+		super(options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getElement()
+	 */
+	@Override
+	protected AbstractElement<IsDefaultArc> getElement() {
+		return getConfiguration().getElements().getArc();
 	}
 
 	/**
@@ -40,7 +51,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	public void setBorderAlign(BorderAlign align) {
-		getOptions().getElements().getArc().setBorderAlign(align);
+		getConfiguration().getElements().getArc().setBorderAlign(align);
 	}
 
 	/**
@@ -49,7 +60,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	public BorderAlign getBorderAlign() {
-		return getOptions().getElements().getArc().getBorderAlign();
+		return getConfiguration().getElements().getArc().getBorderAlign();
 	}
 
 	/**
@@ -59,7 +70,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @param weight the relative thickness of the dataset
 	 */
 	public void setWeight(double weight) {
-		getOptions().getElements().getArc().setWeight(weight);
+		getConfiguration().getElements().getArc().setWeight(weight);
 	}
 
 	/**
@@ -69,7 +80,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @return the relative thickness of the dataset
 	 */
 	public double getWeight() {
-		return getOptions().getElements().getArc().getWeight();
+		return getConfiguration().getElements().getArc().getWeight();
 	}
 
 	/**
@@ -78,7 +89,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @param angle the arc angle to cover
 	 */
 	public void setAngle(double angle) {
-		getOptions().getElements().getArc().setAngle(angle);
+		getConfiguration().getElements().getArc().setAngle(angle);
 	}
 
 	/**
@@ -87,7 +98,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @return the arc angle to cover
 	 */
 	public double getAngle() {
-		return getOptions().getElements().getArc().getAngle();
+		return getConfiguration().getElements().getArc().getAngle();
 	}
 
 	/**
@@ -96,7 +107,7 @@ public class Arc extends AbstractConfigurationElement {
 	 * @param offset the arc offset
 	 */
 	public void setOffset(int offset) {
-		getOptions().getElements().getArc().setOffset(offset);
+		getConfiguration().getElements().getArc().setOffset(offset);
 	}
 
 	/**
@@ -105,6 +116,6 @@ public class Arc extends AbstractConfigurationElement {
 	 * @return the arc offset
 	 */
 	public int getOffset() {
-		return getOptions().getElements().getArc().getOffset();
+		return getConfiguration().getElements().getArc().getOffset();
 	}
 }

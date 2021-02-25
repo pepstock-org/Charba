@@ -88,10 +88,10 @@ public final class DefaultScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGrideLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGridLines()
 	 */
 	@Override
-	public IsDefaultGridLines getGrideLines() {
+	public IsDefaultGridLines getGridLines() {
 		return gridLines;
 	}
 

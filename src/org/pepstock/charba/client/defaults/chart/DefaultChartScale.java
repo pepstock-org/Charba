@@ -61,7 +61,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 		// creates sub elements
 		this.scaleLabel = new DefaultChartScaleLabel(scale.getScaleLabel());
 		this.ticks = new DefaultChartTicks(scale.getTicks());
-		this.gridLines = new DefaultChartGridLines(scale.getGrideLines());
+		this.gridLines = new DefaultChartGridLines(scale.getGridLines());
 		this.angleLines = new DefaultChartAngleLines(scale.getAngleLines());
 		this.pointLabels = new DefaultChartPointLabels(scale.getPointLabels());
 		this.time = new DefaultChartTime(scale.getTime());
@@ -91,10 +91,10 @@ public final class DefaultChartScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGrideLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGridLines()
 	 */
 	@Override
-	public IsDefaultGridLines getGrideLines() {
+	public IsDefaultGridLines getGridLines() {
 		return gridLines;
 	}
 

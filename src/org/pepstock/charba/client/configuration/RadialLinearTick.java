@@ -94,7 +94,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		super(axis);
 		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);
-		this.numberFormatter = new NumberFormatter(getConfiguration().getNumberFormat());
+		this.numberFormatter = new NumberFormatter(() -> getConfiguration().getNumberFormat());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

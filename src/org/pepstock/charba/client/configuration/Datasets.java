@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -34,10 +33,10 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Datasets(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	Datasets(ConfigurationOptions options) {
+		super(options.getChart(), options.getConfiguration());
 		// creates animations elements
-		animation = new Animation(chart, getConfiguration());
+		animation = new Animation(options);
 	}
 
 	/**

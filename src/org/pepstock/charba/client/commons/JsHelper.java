@@ -57,6 +57,7 @@ public final class JsHelper {
 	 * @param key the string name of the property to test.
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
+	// FIXME check if still needed after Reflect implementation
 	public boolean exist(Object object, Key key) {
 		// checks consistency of arguments
 		if (object != null && Key.isValid(key)) {
@@ -180,14 +181,8 @@ public final class JsHelper {
 	public int propertyAsInt(NativeObject object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {
-			// accesses to native object to get the descriptor
-			NativeIntegerDescriptor descriptor = object.getIntProperty(key);
-			// checks if the descriptor is consistent
-			// if not, property does not exist
-			if (descriptor != null) {
-				// returns the property value
-				return descriptor.getValue();
-			}
+			// returns the property value
+			return object.getIntProperty(key);
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.INTEGER;

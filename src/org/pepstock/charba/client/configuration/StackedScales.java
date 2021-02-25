@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * Specific scales for stacked charts.
@@ -30,13 +28,12 @@ public class StackedScales extends Scales {
 	private boolean isOnlyYAxis = false;
 
 	/**
-	 * Builds the object storing the chart instance and root options.
+	 * Builds the object storing the root options.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options
 	 */
-	StackedScales(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	StackedScales(ScalesOptions options) {
+		super(options);
 	}
 
 	/**

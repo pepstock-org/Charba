@@ -239,7 +239,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			setArrayValue(Property.DATASETS, this.currentDatasets);
 		} else {
 			// removes the existing property
-			removeIfExists(Property.DATASETS);
+			remove(Property.DATASETS);
 		}
 	}
 

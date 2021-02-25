@@ -225,8 +225,7 @@ public final class Merger {
 		if (chartOptions.hasProperty(Property.SCALES.value())) {
 			// if here, the chart has got 2 or more scales
 			// gets the native object for scales
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALES.value());
-			NativeObject scales = descriptor.getValue();
+			NativeObject scales = chartOptions.getObjectProperty(Property.SCALES.value());
 			// checks and apply scales
 			applyDefaultsOnScales(base.getScales().getAxes(), scales, scaleOptions);
 		}
@@ -242,10 +241,8 @@ public final class Merger {
 	private void applyDefaultsOnScales(List<Scale> storedScales, NativeObject scales, NativeObject scaleOptions) {
 		// scans all scales
 		for (Scale storedScale : storedScales) {
-			// gets the object about x axes by id
-			NativeObjectDescriptor scaleDescriptor = scales.getObjectProperty(storedScale.getId().value());
 			// gets native object of scale
-			NativeObject scaleObject = scaleDescriptor.getValue();
+			NativeObject scaleObject = scales.getObjectProperty(storedScale.getId().value());
 			// create instance for axis type
 			AxisType type = storedScale.getType();
 			// checks if axis type is consistent
@@ -344,7 +341,7 @@ public final class Merger {
 	 */
 	private NativeObject internalMerge(NativeObject target, NativeObject source, String property) {
 		// creates new root object
-		NativeObject newObject = new NativeObject();
+		NativeObject newObject = NativeObject.create();
 		// stores configuration
 		newObject.defineObjectProperty(property, source);
 		// invokes CHART.JS to merge
@@ -361,7 +358,7 @@ public final class Merger {
 	 */
 	private NativeObject mergeNativeObjects(NativeObject target, NativeObject source) {
 		NativeObject newObject = Helpers.get().mergeIf(target, source);
-		return newObject == null ? new NativeObject() : newObject;
+		return newObject == null ? NativeObject.create() : newObject;
 	}
 
 	/**

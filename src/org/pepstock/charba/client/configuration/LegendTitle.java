@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
@@ -23,7 +22,6 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.HasLegendText;
 import org.pepstock.charba.client.items.LegendTextHandler;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * This is the title configuration of the legend.
@@ -31,7 +29,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendTitle extends ConfigurationContainer<ExtendedOptions> implements HasLegendText {
+public class LegendTitle extends ConfigurationOptionsContainer implements HasLegendText {
 
 	// font instance
 	private final Font font;
@@ -39,13 +37,12 @@ public class LegendTitle extends ConfigurationContainer<ExtendedOptions> impleme
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	LegendTitle(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	LegendTitle(ConfigurationOptions options) {
+		super(options);
 		// get embedded elements
-		this.font = new Font(options.getLegend().getTitle().getFont());
+		this.font = new Font(() -> getConfiguration().getLegend().getTitle().getFont());
 	}
 
 	/*

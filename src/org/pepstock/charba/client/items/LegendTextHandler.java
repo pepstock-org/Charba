@@ -43,7 +43,7 @@ public final class LegendTextHandler extends PropertyHandler<Boolean> {
 	{
 		TEXT("text"),
 		// internal key to store a unique id
-		CHARBA_HTML_TEXT("_htmlText");
+		CHARBA_HTML_TEXT("charbaHtmlText");
 
 		// name value of property
 		private final String value;

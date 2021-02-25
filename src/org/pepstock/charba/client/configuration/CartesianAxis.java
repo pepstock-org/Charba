@@ -42,7 +42,7 @@ import org.pepstock.charba.client.options.IsScaleId;
  */
 public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
-	private final GridLines grideLines;
+	private final GridLines gridLines;
 
 	private final CartesianScaleLabel scaleLabel;
 
@@ -69,7 +69,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 			throw new IllegalArgumentException("The axis kind is invalid. It must not be " + AxisKind.R.value());
 		}
 		// sets to the objects
-		grideLines = new GridLines(this);
+		gridLines = new GridLines(this);
 		scaleLabel = new CartesianScaleLabel(this);
 	}
 
@@ -92,10 +92,10 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Returns the grid lines element
 	 * 
-	 * @return the grideLines
+	 * @return the grid lines
 	 */
-	public GridLines getGrideLines() {
-		return grideLines;
+	public GridLines getGridLines() {
+		return gridLines;
 	}
 
 	/**

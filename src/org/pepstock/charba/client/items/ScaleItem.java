@@ -72,7 +72,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		POSITION("position"),
 		OPTIONS("options"),
 		// internal key to store a unique id
-		CHARBA_ID("_charbaId");
+		CHARBA_ID("charbaId");
 
 		// name value of property
 		private final String value;

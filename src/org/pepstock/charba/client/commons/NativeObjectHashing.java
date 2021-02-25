@@ -39,25 +39,15 @@ final class NativeObjectHashing {
 	 * @param nativeObject native object instance to use to set the hasCode property
 	 */
 	static void handleHashCode(NativeObject nativeObject) {
-		// checks if argument is consistent
-		if (nativeObject != null) {
-			// creates a descriptor
-			NativeIntegerDescriptor descriptor = NativeObject.getOwnPropertyDescriptor(nativeObject, HASH_CODE_PROPERTY);
-			// checks if descriptor is consistent and already configured
-			if (descriptor != null && !descriptor.isConfigurable() && !descriptor.isEnumerable()) {
-				// already not enumerable and not configurable
-				return;
-			}
-			// creates new descriptor to write the hasCode
-			NativeIntegerDescriptor newDescriptor = new NativeIntegerDescriptor();
-			newDescriptor.setWritable(true);
-			// sets to be NOT configurable and NOT enumerable
-			newDescriptor.setConfigurable(false);
-			newDescriptor.setEnumerable(false);
-			// sets value
-			newDescriptor.setValue(nativeObject.hashCode());
-			// defines the property
-			NativeObject.defineProperty(nativeObject, HASH_CODE_PROPERTY, newDescriptor);
-		}
+		// creates new descriptor to write the hasCode
+		NativeIntegerDescriptor newDescriptor = new NativeIntegerDescriptor();
+		newDescriptor.setWritable(true);
+		// sets to be NOT configurable and NOT enumerable
+		newDescriptor.setConfigurable(false);
+		newDescriptor.setEnumerable(false);
+		// sets value
+		newDescriptor.setValue(nativeObject.hashCode());
+		// defines the property
+		NativeObject.defineProperty(nativeObject, HASH_CODE_PROPERTY, newDescriptor);
 	}
 }

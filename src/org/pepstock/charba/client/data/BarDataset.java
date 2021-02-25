@@ -122,10 +122,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		INDEX_AXIS("indexAxis"),
 		POINT_STYLE("pointStyle"),
 		// internal to map the border radius type
-		CHARBA_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
-		CHARBA_HOVER_BORDER_WIDTH_TYPE("_charbaBorderWidthType"),
-		CHARBA_BORDER_RADIUS_TYPE("_charbaHoverBorderRadiusType"),
-		CHARBA_HOVER_BORDER_RADIUS_TYPE("_charbaHoverBorderRadiusType");
+		CHARBA_BORDER_WIDTH_TYPE("charbaBorderWidthType"),
+		CHARBA_HOVER_BORDER_WIDTH_TYPE("charbaBorderWidthType"),
+		CHARBA_BORDER_RADIUS_TYPE("charbaHoverBorderRadiusType"),
+		CHARBA_HOVER_BORDER_RADIUS_TYPE("charbaHoverBorderRadiusType");
 
 		// name value of property
 		private final String value;
@@ -539,7 +539,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			}
 		} else {
 			// otherwise remove the key
-			removeIfExists(Property.BORDER_SKIPPED);
+			remove(Property.BORDER_SKIPPED);
 		}
 	}
 
@@ -783,7 +783,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		} else {
 			// if here the array is not consistent
 			// then removes the property
-			removeIfExists(InternalProperty.DATA);
+			remove(InternalProperty.DATA);
 			// sets data type as unknown
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
 		}
@@ -1118,7 +1118,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			setBorderItem(property, propertyType, list.toArray(array));
 		} else {
 			// removes key
-			removeIfExists(property);
+			remove(property);
 			// resets the type of border item
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}

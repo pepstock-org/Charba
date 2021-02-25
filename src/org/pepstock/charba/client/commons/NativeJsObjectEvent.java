@@ -15,31 +15,35 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (String).
+ * A java script property setter and getter of {@link BaseNativeEvent}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-final class NativeStringDescriptor extends NativeAbstractDescriptor {
+@JsType(isNative = true, name = NativeName.JS_OBJECT_HELPER, namespace = JsPackage.GLOBAL)
+final class NativeJsObjectEvent {
 
 	/**
-	 * Sets the value associated with the property.
+	 * Allows you to get a property on an object.
 	 * 
-	 * @param value the value associated with the property
+	 * @param target the target object on which to get the property
+	 * @param key the name of the property to get
+	 * @return the value of the property
 	 */
-	@JsProperty
-	native void setValue(String value);
+	static native BaseNativeEvent get(NativeObject target, String key);
 
 	/**
-	 * Gets the value associated with the property.
+	 * Allows you to set a property on an object.
 	 * 
-	 * @return the value associated with the property
+	 * @param target the target object on which to set the property
+	 * @param key the name of the property to set
+	 * @param value the value to set
 	 */
-	@JsProperty
-	native String getValue();
+	static native void set(NativeObject target, String key, BaseNativeEvent value);
+
 }

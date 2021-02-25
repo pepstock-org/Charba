@@ -67,7 +67,7 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	 * @param defaultValues default provider instance.
 	 */
 	protected ScaledOptions(String scope, IsDefaultScaledOptions defaultValues) {
-		this(scope, defaultValues, null);
+		this(scope, defaultValues, null, true);
 	}
 
 	/**
@@ -76,11 +76,18 @@ public abstract class ScaledOptions extends Options implements IsDefaultScaledOp
 	 * @param scope scope of the options
 	 * @param defaultValues default provider instance.
 	 * @param nativeObject native object to store properties.
+	 * @param createScales if <code>true</code>, the subscale node must be initialized
 	 */
-	protected ScaledOptions(String scope, IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
+	protected ScaledOptions(String scope, IsDefaultScaledOptions defaultValues, NativeObject nativeObject, boolean createScales) {
 		super(scope, defaultValues, nativeObject);
-		// gets scales sub elements
-		this.scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
+		// checks if scales must be created
+		if (createScales) {
+			// gets scales sub elements
+			this.scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
+		} else {
+			// resets current scales instance
+			this.scales = null;
+		}
 	}
 
 	/*

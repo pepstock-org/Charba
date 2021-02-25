@@ -22,6 +22,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -29,7 +30,8 @@ import jsinterop.annotations.JsType;
 
 /**
  * Base object for all native objects implemented in Charba.<br>
- * It implements some common methods and wraps some native methods.
+ * It implements some common methods and wraps some native methods.<br>
+ * It's also mapping the proxy.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -39,7 +41,23 @@ public final class NativeObject {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativeObject() {
+	private NativeObject() {
+		// do nothing
+	}
+
+	/**
+	 * Creates a native object setting the hash code property in order it is not enumerable.
+	 * 
+	 * @return new native object instance
+	 */
+	@JsOverlay
+	static NativeObject create() {
+		// new object
+		NativeObject nativeObject = new NativeObject();
+		// applies new hash code
+		NativeObjectHashing.handleHashCode(nativeObject);
+		// returns item
+		return nativeObject;
 	}
 
 	/**
@@ -53,16 +71,6 @@ public final class NativeObject {
 	static native <T extends NativeAbstractDescriptor> void defineProperty(NativeObject source, String key, T descriptor);
 
 	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param source the object in which to look for the property.
-	 * @param key the name of the property whose description is to be retrieved.
-	 * @param <T> type of descriptor result value
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	static native <T extends NativeAbstractDescriptor> T getOwnPropertyDescriptor(NativeObject source, String key);
-
-	/**
 	 * Returns an array of a given object's own property names, in the same order as we get with a normal loop.
 	 * 
 	 * @param source the object of which the enumerable's own properties are to be returned.
@@ -71,33 +79,22 @@ public final class NativeObject {
 	static native ArrayString keys(NativeObject source);
 
 	/**
-	 * Copies all enumerable own properties from one or more source objects to a target object.<br>
-	 * It returns the target object.
+	 * Returns all own property descriptors of a given object.
 	 * 
-	 * @param target the object what to apply the sources’ properties to, which is returned after it is modified.
-	 * @param source array of objects containing the properties you want to apply.
-	 * @return the target object.
+	 * @param source the object for which to get all own property descriptors.
+	 * @return an object containing all own property descriptors of an object.<br>
+	 *         Might be an empty object, if there are no properties.
 	 */
-	static native NativeObject assign(NativeObject target, NativeObject... source);
+	static native NativeObject getOwnPropertyDescriptors(NativeObject source);
 
 	/**
-	 * Copies all enumerable own properties from this object to new target object.
-	 * 
-	 * @return a clone instance of the object.
-	 */
-	@JsOverlay
-	public NativeObject cloneTo() {
-		return NativeObject.assign(new NativeObject(), this);
-	}
-
-	/**
-	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.
+	 * Returns an list of a given object's own property names.
 	 * 
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay
-	List<String> propertyKeys() {
-		return ArrayListHelper.unmodifiableList(keys(this));
+	List<String> propertiesKeys() {
+		return ArrayListHelper.unmodifiableList(keys(getOwnPropertyDescriptors(this)));
 	}
 
 	/**
@@ -108,12 +105,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	boolean hasProperty(String key) {
-		// checks if argument is consistent
-		if (key != null) {
-			return JsHelper.get().has(this, key);
-		}
-		// if here, argument is not consistent
-		return false;
+		return JsHelper.get().has(this, key);
 	}
 
 	/**
@@ -134,14 +126,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineBooleanProperty(String key, boolean value) {
-		// creates a descriptor
-		NativeBooleanDescriptor descriptor = new NativeBooleanDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectBoolean.set(this, key, value);
 	}
 
 	/**
@@ -152,14 +137,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineIntProperty(String key, int value) {
-		// creates a descriptor
-		NativeIntegerDescriptor descriptor = new NativeIntegerDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectInteger.set(this, key, value);
 	}
 
 	/**
@@ -170,14 +148,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineDoubleProperty(String key, double value) {
-		// creates a descriptor
-		NativeDoubleDescriptor descriptor = new NativeDoubleDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectDouble.set(this, key, value);
 	}
 
 	/**
@@ -188,14 +159,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineStringProperty(String key, String value) {
-		// creates a descriptor
-		NativeStringDescriptor descriptor = new NativeStringDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectString.set(this, key, value);
 	}
 
 	/**
@@ -206,14 +170,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineImageProperty(String key, Img value) {
-		// creates a descriptor
-		NativeImageDescriptor descriptor = new NativeImageDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectImage.set(this, key, value);
 	}
 
 	/**
@@ -224,14 +181,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void definePatternProperty(String key, CanvasPatternItem value) {
-		// creates a descriptor
-		NativePatternDescriptor descriptor = new NativePatternDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectPattern.set(this, key, value);
 	}
 
 	/**
@@ -242,14 +192,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineGradientProperty(String key, CanvasGradientItem value) {
-		// creates a descriptor
-		NativeGradientDescriptor descriptor = new NativeGradientDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectGradient.set(this, key, value);
 	}
 
 	/**
@@ -260,14 +203,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineCallbackProperty(String key, CallbackProxy.Proxy value) {
-		// creates a descriptor
-		NativeCallbackProxyDescriptor descriptor = new NativeCallbackProxyDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectCallbackProxy.set(this, key, value);
 	}
 
 	/**
@@ -278,14 +214,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineObjectProperty(String key, NativeObject value) {
-		// creates a descriptor
-		NativeObjectDescriptor descriptor = new NativeObjectDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectObject.set(this, key, value);
 	}
 
 	/**
@@ -296,14 +225,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineChartProperty(String key, Chart value) {
-		// creates a descriptor
-		NativeChartDescriptor descriptor = new NativeChartDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectChart.set(this, key, value);
 	}
 
 	/**
@@ -314,14 +236,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	void defineEventProperty(String key, BaseNativeEvent value) {
-		// creates a descriptor
-		NativeEventDescriptor descriptor = new NativeEventDescriptor();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectEvent.set(this, key, value);
 	}
 
 	/**
@@ -333,14 +248,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	<T extends Array> void defineArrayProperty(String key, T value) {
-		// creates a descriptor
-		NativeArrayDescriptor<T> descriptor = new NativeArrayDescriptor<>();
-		// sets value
-		descriptor.setValue(value);
-		// sets attributes of descriptor to true
-		resetPropertyDescriptor(descriptor);
-		// defines the property
-		NativeObject.defineProperty(this, key, descriptor);
+		NativeJsObjectArray.set(this, key, value);
 	}
 
 	/**
@@ -350,14 +258,14 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	NativeBooleanDescriptor getBooleanProperty(String key) {
+	boolean getBooleanProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return NativeObject.getOwnPropertyDescriptor(this, key);
+			// returns the value
+			return NativeJsObjectBoolean.get(this, key);
 		}
 		// if here, property does not exist
-		return null;
+		return UndefinedValues.BOOLEAN;
 	}
 
 	/**
@@ -367,37 +275,14 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	NativeIntegerDescriptor getIntProperty(String key) {
-		return getInternalNumberProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeDoubleDescriptor getDoubleProperty(String key) {
-		return getInternalNumberProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @param <T> type of descriptor to use
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	private <T extends NativeAbstractDescriptor> T getInternalNumberProperty(String key) {
+	int getIntProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return NativeObject.getOwnPropertyDescriptor(this, key);
+			// returns the value
+			return NativeJsObjectInteger.get(this, key);
 		}
 		// if here, property does not exist
-		return null;
+		return UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -407,13 +292,62 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	NativeStringDescriptor getStringProperty(String key) {
+	double getDoubleProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the value
+			return NativeJsObjectDouble.get(this, key);
+		}
+		// if here, property does not exist
+		return UndefinedValues.DOUBLE;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	String getStringProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.STRING.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return NativeObject.getOwnPropertyDescriptor(this, key);
+			return NativeJsObjectString.get(this, key);
 		}
 		// if here, property does not exist
+		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	Img getImageProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return NativeJsObjectImage.get(this, key);
+		}
+		return UndefinedValues.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	CanvasPatternItem getPatternProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return NativeJsObjectPattern.get(this, key);
+		}
 		return null;
 	}
 
@@ -424,80 +358,60 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	NativeImageDescriptor getImageProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativePatternDescriptor getPatternProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeGradientDescriptor getGradientProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeObjectDescriptor getObjectProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeChartDescriptor getChartProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test.
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	NativeEventDescriptor getEventProperty(String key) {
-		return getInternalObjectProperty(key);
-	}
-
-	/**
-	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
-	 * 
-	 * @param key the name of the property to test
-	 * @param <T> type of descriptor to use
-	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
-	 */
-	@JsOverlay
-	private <T extends NativeAbstractDescriptor> T getInternalObjectProperty(String key) {
+	CanvasGradientItem getGradientProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return NativeObject.getOwnPropertyDescriptor(this, key);
+			return NativeJsObjectGradient.get(this, key);
 		}
-		// if here, property does not exist
+		return null;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	NativeObject getObjectProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return NativeJsObjectObject.get(this, key);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	Chart getChartProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return NativeJsObjectChart.get(this, key);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	BaseNativeEvent getEventProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return NativeJsObjectEvent.get(this, key);
+		}
 		return null;
 	}
 
@@ -509,27 +423,14 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	<T extends Array> NativeArrayDescriptor<T> getArrayProperty(String key) {
+	<T extends Array> T getArrayProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.ARRAY.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
-			return NativeObject.getOwnPropertyDescriptor(this, key);
+			return NativeJsObjectArray.get(this, key);
 		}
 		// if here, property does not exist
 		return null;
-	}
-
-	/**
-	 * Sets the properties of a descriptor to <code>true</code>, as default in java script when you use <code>obj[key] = value</code>
-	 * 
-	 * @param descriptor the descriptor to be set
-	 */
-	@JsOverlay
-	private void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {
-		// configures the property
-		descriptor.setConfigurable(true);
-		descriptor.setEnumerable(true);
-		descriptor.setWritable(true);
 	}
 
 }

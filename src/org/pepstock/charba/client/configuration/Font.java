@@ -26,21 +26,22 @@ import org.pepstock.charba.client.options.IsFont;
  */
 public final class Font implements IsFont {
 
-	// font options element
-	private final IsFont innerFont;
+	// font provider instance
+	private final IsFontProvider provider;
 
 	/**
-	 * Builds the object storing the font options.
+	 * Builds the object by a font provider used to get the font element for storing properties.
 	 * 
-	 * @param font font options element
+	 * @param provider font provider used to get the font element for storing properties.
 	 */
-	Font(IsFont font) {
-		// checks if font container is consistent
-		if (font == null) {
-			throw new IllegalArgumentException("Font argument is null");
+	Font(IsFontProvider provider) {
+		// checks if consistent
+		if (provider == null) {
+			// exception!
+			throw new IllegalArgumentException("Font provider argument is null");
 		}
-		// stores font container
-		this.innerFont = font;
+		// stores provider
+		this.provider = provider;
 	}
 
 	/**
@@ -50,7 +51,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setSize(int size) {
-		innerFont.setSize(size);
+		checkAndGet().setSize(size);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public int getSize() {
-		return innerFont.getSize();
+		return checkAndGet().getSize();
 	}
 
 	/**
@@ -70,7 +71,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setStyle(FontStyle style) {
-		innerFont.setStyle(style);
+		checkAndGet().setStyle(style);
 	}
 
 	/**
@@ -80,7 +81,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public FontStyle getStyle() {
-		return innerFont.getStyle();
+		return checkAndGet().getStyle();
 	}
 
 	/**
@@ -90,7 +91,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setFamily(String family) {
-		innerFont.setFamily(family);
+		checkAndGet().setFamily(family);
 	}
 
 	/**
@@ -100,7 +101,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getFamily() {
-		return innerFont.getFamily();
+		return checkAndGet().getFamily();
 	}
 
 	/**
@@ -110,7 +111,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setWeight(Weight weight) {
-		innerFont.setWeight(weight);
+		checkAndGet().setWeight(weight);
 	}
 
 	/**
@@ -120,7 +121,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public Weight getWeight() {
-		return innerFont.getWeight();
+		return checkAndGet().getWeight();
 	}
 
 	/**
@@ -130,7 +131,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(double lineHeight) {
-		innerFont.setLineHeight(lineHeight);
+		checkAndGet().setLineHeight(lineHeight);
 	}
 
 	/**
@@ -140,7 +141,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(String lineHeight) {
-		innerFont.setLineHeight(lineHeight);
+		checkAndGet().setLineHeight(lineHeight);
 	}
 
 	/**
@@ -150,7 +151,7 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public double getLineHeight() {
-		return innerFont.getLineHeight();
+		return checkAndGet().getLineHeight();
 	}
 
 	/**
@@ -160,6 +161,38 @@ public final class Font implements IsFont {
 	 */
 	@Override
 	public String getLineHeightAsString() {
-		return innerFont.getLineHeightAsString();
+		return checkAndGet().getLineHeightAsString();
+	}
+
+	/**
+	 * Gets the {@link IsFont} instance from provider checking if is consistent.
+	 * 
+	 * @return the {@link IsFont} instance from provider
+	 */
+	private IsFont checkAndGet() {
+		IsFont font = provider.getElement();
+		// checks if consistent
+		if (font == null) {
+			// exception!
+			throw new IllegalArgumentException("Font element by provider is null");
+		}
+		return font;
+	}
+
+	/**
+	 * Interface to implement to provide the {@link IsFont} options to manage font properties.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	interface IsFontProvider {
+
+		/**
+		 * Provides the {@link IsFont} options to manage font properties.
+		 * 
+		 * @return {@link IsFont} options to manage font properties.
+		 */
+		IsFont getElement();
+
 	}
 }

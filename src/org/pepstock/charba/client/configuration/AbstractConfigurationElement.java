@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 import org.pepstock.charba.client.options.AbstractElement;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
@@ -26,32 +26,23 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractConfigurationElement {
-
-	// root options
-	private final ExtendedOptions options;
-	// options element
-	private final AbstractElement<?> configuration;
+abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> extends ConfigurationOptionsContainer {
 
 	/***
-	 * Builds the object with options, root and element ones.
+	 * Builds the object with options.
 	 * 
 	 * @param options options instance
-	 * @param configuration element instance
 	 */
-	AbstractConfigurationElement(ExtendedOptions options, AbstractElement<?> configuration) {
-		this.options = options;
-		this.configuration = configuration;
+	AbstractConfigurationElement(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**
-	 * Returns the root options.
+	 * FIXME
 	 * 
-	 * @return the options
+	 * @return
 	 */
-	final ExtendedOptions getOptions() {
-		return options;
-	}
+	protected abstract AbstractElement<D> getElement();
 
 	/**
 	 * Sets the background color.
@@ -59,7 +50,7 @@ abstract class AbstractConfigurationElement {
 	 * @param backgroundColor the background color.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		configuration.setBackgroundColor(backgroundColor);
+		getElement().setBackgroundColor(backgroundColor);
 	}
 
 	/**
@@ -68,7 +59,7 @@ abstract class AbstractConfigurationElement {
 	 * @param backgroundColor the background color.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		configuration.setBackgroundColor(backgroundColor);
+		getElement().setBackgroundColor(backgroundColor);
 	}
 
 	/**
@@ -77,7 +68,7 @@ abstract class AbstractConfigurationElement {
 	 * @return the background color.
 	 */
 	public String getBackgroundColorAsString() {
-		return configuration.getBackgroundColorAsString();
+		return getElement().getBackgroundColorAsString();
 	}
 
 	/**
@@ -86,7 +77,7 @@ abstract class AbstractConfigurationElement {
 	 * @return the background color.
 	 */
 	public IsColor getBackgroundColor() {
-		return configuration.getBackgroundColor();
+		return getElement().getBackgroundColor();
 	}
 
 	/**
@@ -95,7 +86,7 @@ abstract class AbstractConfigurationElement {
 	 * @param borderWidth the border width.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		configuration.setBorderWidth(borderWidth);
+		getElement().setBorderWidth(borderWidth);
 	}
 
 	/**
@@ -104,7 +95,7 @@ abstract class AbstractConfigurationElement {
 	 * @return the border width.
 	 */
 	public int getBorderWidth() {
-		return configuration.getBorderWidth();
+		return getElement().getBorderWidth();
 	}
 
 	/**
@@ -113,7 +104,7 @@ abstract class AbstractConfigurationElement {
 	 * @param borderColor the border color.
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		configuration.setBorderColor(borderColor);
+		getElement().setBorderColor(borderColor);
 	}
 
 	/**
@@ -122,7 +113,7 @@ abstract class AbstractConfigurationElement {
 	 * @param borderColor the border color.
 	 */
 	public void setBorderColor(String borderColor) {
-		configuration.setBorderColor(borderColor);
+		getElement().setBorderColor(borderColor);
 	}
 
 	/**
@@ -131,7 +122,7 @@ abstract class AbstractConfigurationElement {
 	 * @return the border color.
 	 */
 	public String getBorderColorAsString() {
-		return configuration.getBorderColorAsString();
+		return getElement().getBorderColorAsString();
 	}
 
 	/**
@@ -140,7 +131,7 @@ abstract class AbstractConfigurationElement {
 	 * @return the border color.
 	 */
 	public IsColor getBorderColor() {
-		return configuration.getBorderColor();
+		return getElement().getBorderColor();
 	}
 
 }

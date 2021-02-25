@@ -398,36 +398,6 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#reconfigure()
-	 */
-	@Override
-	public final void reconfigure() {
-		chart.reconfigure();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.options.IsAnimationModeKey)
-	 */
-	@Override
-	public void reconfigure(IsAnimationModeKey mode) {
-		chart.reconfigure(mode);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.UpdateConfiguration)
-	 */
-	@Override
-	public final void reconfigure(UpdateConfiguration config) {
-		chart.reconfigure(config);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.IsChart#render()
 	 */
 	@Override

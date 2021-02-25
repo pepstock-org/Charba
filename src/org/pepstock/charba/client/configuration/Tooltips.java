@@ -15,12 +15,10 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
-import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -35,7 +33,6 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
-import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -45,7 +42,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions, TooltipsAnimationCallback> {
+public class Tooltips extends ConfigurationOptionsContainer {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -128,8 +125,6 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	// user callbacks implementation for filtering tooltip items
 	private TooltipFilterCallback filterCallback = null;
 
-	// animation sub element of tooltip
-	private final Animation animation;
 	// callbacks sub element of tooltip
 	private final TooltipsCallbacks callbacks;
 	// title font instance
@@ -144,7 +139,6 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	 */
 	private enum Property implements Key
 	{
-		ANIMATION("animation"),
 		CUSTOM("custom"),
 		ITEM_SORT("itemSort"),
 		FILTER("filter");
@@ -176,18 +170,16 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Tooltips(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	Tooltips(ConfigurationOptions options) {
+		super(options);
 		// sets callbacks sub element
-		callbacks = new TooltipsCallbacks(chart, options);
-		animation = new Animation(chart, options);
+		callbacks = new TooltipsCallbacks(getOptions());
 		// gets the fonts subelements
-		titleFont = new Font(options.getTooltips().getTitleFont());
-		bodyFont = new Font(options.getTooltips().getBodyFont());
-		footerFont = new Font(options.getTooltips().getFooterFont());
+		titleFont = new Font(() -> getConfiguration().getTooltips().getTitleFont());
+		bodyFont = new Font(() -> getConfiguration().getTooltips().getBodyFont());
+		footerFont = new Font(() -> getConfiguration().getTooltips().getFooterFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -218,35 +210,6 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 			// default is true
 			return true;
 		});
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#createAnimationOptions()
-	 */
-	@Override
-	protected final TooltipsAnimationOptions createAnimationOptions() {
-		return new TooltipsAnimationOptions(getConfiguration().getTooltips().getAnimation());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#getDefaultAnimationOptions()
-	 */
-	@Override
-	protected final TooltipsAnimationOptions getDefaultAnimationOptions() {
-		return getConfiguration().getTooltips().createAnimationOptions();
-	}
-
-	/**
-	 * Returns the animation element.
-	 * 
-	 * @return the animation
-	 */
-	public final Animation getAnimation() {
-		return animation;
 	}
 
 	/**
@@ -1073,4 +1036,5 @@ public class Tooltips extends AnimationOptionsContainer<TooltipsAnimationOptions
 			return null;
 		}
 	}
+
 }

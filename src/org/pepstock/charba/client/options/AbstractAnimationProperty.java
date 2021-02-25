@@ -76,9 +76,6 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 */
 	AbstractAnimationProperty(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
-		// redefines hashcode in order do not have
-		// the property $H for hashcode
-		super.redefineHashcode();
 	}
 
 	/**

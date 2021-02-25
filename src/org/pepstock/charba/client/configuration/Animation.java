@@ -15,12 +15,10 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.options.AnimationCollection;
 import org.pepstock.charba.client.options.AnimationMode;
 import org.pepstock.charba.client.options.AnimationProperty;
-import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationModeKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
@@ -30,16 +28,15 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Animation extends ConfigurationContainer<ExtendedOptions> {
+public class Animation extends ConfigurationOptionsContainer {
 
 	/**
 	 * Builds the object storing the chart instance and root options.
 	 * 
-	 * @param chart chart instance.
 	 * @param options root options of chart.
 	 */
-	Animation(IsChart chart, ExtendedOptions options) {
-		super(chart, options);
+	Animation(ConfigurationOptions options) {
+		super(options);
 	}
 
 	/**

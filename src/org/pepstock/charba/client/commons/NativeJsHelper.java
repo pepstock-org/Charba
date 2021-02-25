@@ -76,7 +76,7 @@ final class NativeJsHelper {
 	 * 
 	 * @param object the object on which to test the property.
 	 * @param key the string name of the property to test.
-	 * @return <code>true</code> if the value is an Array; otherwise, <code>false</code>.
+	 * @return <code>true</code> if the value is an Array otherwise, <code>false</code>.
 	 */
 	static native boolean isArray(Object object, String key);
 

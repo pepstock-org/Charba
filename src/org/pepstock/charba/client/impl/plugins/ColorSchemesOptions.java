@@ -178,8 +178,8 @@ public final class ColorSchemesOptions extends AbstractPluginOptions implements 
 		} else {
 			// if here color scheme is not consistent
 			// then removes the keys if exist
-			removeIfExists(Property.SCHEME_NAME);
-			removeIfExists(Property.SCHEME_CATEGORY);
+			remove(Property.SCHEME_NAME);
+			remove(Property.SCHEME_CATEGORY);
 		}
 	}
 

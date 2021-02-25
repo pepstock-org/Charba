@@ -39,7 +39,7 @@ abstract class TimeSeriesOptions extends ScalesOptions {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for time series
-		scales = new TimeSeriesScales(chart, getConfiguration());
+		scales = new TimeSeriesScales(this);
 	}
 
 	/*
