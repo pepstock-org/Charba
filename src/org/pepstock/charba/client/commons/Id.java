@@ -78,7 +78,7 @@ public enum Id implements Key
 		// checks if argument is consistent and property exists
 		if (nativeObject != null && nativeObject.hasProperty(CHARBA_ID.value())) {
 			// returns value
-			return nativeObject.getStringProperty(CHARBA_ID.value());
+			return nativeObject.getStringProperty(CHARBA_ID.value(), UndefinedValues.STRING);
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;
@@ -95,7 +95,7 @@ public enum Id implements Key
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
 			// returns value
-			return nativeObject.getIntProperty(key.value());
+			return nativeObject.getIntProperty(key.value(),UndefinedValues.INTEGER);
 		}
 		// property doesn't exist
 		return UndefinedValues.INTEGER;
@@ -112,7 +112,7 @@ public enum Id implements Key
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
 			// if descriptor is consistent, return value
-			return nativeObject.getStringProperty(key.value());
+			return nativeObject.getStringProperty(key.value(), UndefinedValues.STRING);
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;

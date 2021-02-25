@@ -22,7 +22,6 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -255,116 +254,126 @@ public final class NativeObject {
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	boolean getBooleanProperty(String key) {
+	boolean getBooleanProperty(String key, boolean defaultValue) {
 		// checks if the property is present
 		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the value
 			return NativeJsObjectBoolean.get(this, key);
 		}
 		// if here, property does not exist
-		return UndefinedValues.BOOLEAN;
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	int getIntProperty(String key) {
+	int getIntProperty(String key, int defaultValue) {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the value
 			return NativeJsObjectInteger.get(this, key);
 		}
 		// if here, property does not exist
-		return UndefinedValues.INTEGER;
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	double getDoubleProperty(String key) {
+	double getDoubleProperty(String key, double defaultValue) {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the value
 			return NativeJsObjectDouble.get(this, key);
 		}
 		// if here, property does not exist
-		return UndefinedValues.DOUBLE;
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	String getStringProperty(String key) {
+	String getStringProperty(String key, String defaultValue) {
 		// checks if the property is present
 		if (ObjectType.STRING.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return NativeJsObjectString.get(this, key);
 		}
 		// if here, property does not exist
-		return UndefinedValues.STRING;
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	Img getImageProperty(String key) {
+	Img getImageProperty(String key, Img defaultValue) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return NativeJsObjectImage.get(this, key);
 		}
-		return UndefinedValues.IMAGE_ELEMENT;
+		// if here, property does not exist
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	CanvasPatternItem getPatternProperty(String key) {
+	CanvasPatternItem getPatternProperty(String key, CanvasPatternItem defaultValue) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return NativeJsObjectPattern.get(this, key);
 		}
-		return null;
+		// if here, property does not exist
+		return defaultValue;
 	}
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	CanvasGradientItem getGradientProperty(String key) {
+	CanvasGradientItem getGradientProperty(String key, CanvasGradientItem defaultValue) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return NativeJsObjectGradient.get(this, key);
 		}
-		return null;
+		// if here, property does not exist
+		return defaultValue;
 	}
 
 	/**

@@ -182,7 +182,7 @@ public final class JsHelper {
 		// checks consistency of arguments
 		if (object != null && key != null) {
 			// returns the property value
-			return object.getIntProperty(key);
+			return object.getIntProperty(key, UndefinedValues.INTEGER);
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.INTEGER;

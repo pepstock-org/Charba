@@ -274,7 +274,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getIntProperty(key.value());
+		return nativeObject.getIntProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -356,7 +356,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getDoubleProperty(key.value());
+		return nativeObject.getDoubleProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -438,7 +438,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getBooleanProperty(key.value());
+		return nativeObject.getBooleanProperty(key.value(), defaultValue);
 	}
 
 	// ------------------------------------------
@@ -458,7 +458,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getStringProperty(key.value());
+		return nativeObject.getStringProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -548,7 +548,7 @@ public abstract class NativeObjectContainer {
 		// checks if property type
 		if (ObjectType.NUMBER.equals(type)) {
 			// gets descriptor
-			double value = nativeObject.getDoubleProperty(key.value());
+			double value = nativeObject.getDoubleProperty(key.value(), UndefinedValues.DOUBLE);
 			// checks if value is consistent
 			if (!Double.isNaN(value) && value > 0D) {
 				// creates and returns a date
@@ -793,7 +793,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getImageProperty(key.value());
+		return nativeObject.getImageProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -883,7 +883,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getGradientProperty(key.value());
+		return nativeObject.getGradientProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -973,7 +973,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getPatternProperty(key.value());
+		return nativeObject.getPatternProperty(key.value(), defaultValue);
 	}
 
 	/**
