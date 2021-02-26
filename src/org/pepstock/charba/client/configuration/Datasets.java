@@ -30,7 +30,6 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
-	 * @param chart chart instance
 	 * @param options root options element.
 	 */
 	Datasets(ConfigurationOptions options) {

@@ -87,12 +87,7 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	 * @return the index of the tick.
 	 */
 	public int getIndex() {
-		// checks if the property exists
-		if (exist(Property.INDEX)) {
-			return getContext().getIndex();
-		}
-		// if here, context does not contain this property
-		return UndefinedValues.INTEGER;
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -103,14 +98,8 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	public ScaleItem getScale() {
 		// checks is scale object is already created
 		if (scale == null) {
-			// checks if the property exists
-			if (exist(Property.SCALE)) {
-				// stores scale
-				this.scale = new ScaleItem(new CallbacksEnvelop<>(getContext().getScale(), true));
-			} else {
-				// stores an empty scale
-				this.scale = new ScaleItem(new CallbacksEnvelop<>(null, true));
-			}
+			// stores scale
+			this.scale = new ScaleItem(new CallbacksEnvelop<>(getValue(Property.SCALE), true));
 		}
 		return scale;
 	}
@@ -123,14 +112,7 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	public ScaleTickItem getTick() {
 		// checks is tick object is already created
 		if (tick == null) {
-			// checks if the property exists
-			if (exist(Property.TICK)) {
-				// stores tick
-				this.tick = ScaleTickItem.FACTORY.create(getContext().getTick());
-			} else {
-				// stores an empty tick
-				this.tick = ScaleTickItem.FACTORY.create();
-			}
+			this.tick = ScaleTickItem.FACTORY.create(getValue(Property.TICK));
 		}
 		return tick;
 	}

@@ -306,14 +306,6 @@ public final class Chart {
 	native double getCurrentDevicePixelRatio();
 
 	/**
-	 * Returns the options node, as native object.
-	 * 
-	 * @return the options node.
-	 */
-	@JsProperty
-	native NativeConfiguration getConfig();
-
-	/**
 	 * Returns the chart area node, as native object.
 	 * 
 	 * @return the chart area node.

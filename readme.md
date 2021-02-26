@@ -238,6 +238,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change the signatures of `Plugin` interface in order to manage new arguments of functions.
    * rename `lineTension` property to `tension` in `LiningDataset` class.
    * rename `tickMarkLength` property to `tickLength` in `GridLines` configuration and options classes.
+   * change `dataPoint` property in `parsed` one in `ScriptableContext` class.
  * change `getXAxisID` and `getXAxisID` methods in `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -285,7 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
  * change `borderDashOffset` option from int to double in all classes where referenced.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
- * remove `reconfigure()` methods from charts. To update the configuration use `update()`. 
+ * remove `reconfigure()` methods from charts. To update the configuration use `update()`.
   
 ### Features
 
@@ -476,6 +477,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * fix font and color fallbacks to the defaults values.
  * add `CScheduler` class in order to provide asynchronous and delayed task scheduling.
  * add `CTimer` class in order to provide asynchronous and repeatedly task scheduling.
+ * re-factor the `configuration` package in order to manage both configuration and chart options (at runtime).
 
 License
 -------

@@ -38,9 +38,9 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	}
 
 	/**
-	 * FIXME
+	 * Returns the element instance to be managed.
 	 * 
-	 * @return
+	 * @return the element instance to be managed
 	 */
 	protected abstract AbstractElement<D> getElement();
 

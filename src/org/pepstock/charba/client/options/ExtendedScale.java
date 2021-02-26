@@ -96,6 +96,7 @@ public final class ExtendedScale extends Scale {
 	 * Creates a scale with the chart options scale as inner object.
 	 * 
 	 * @param envelop envelop with the scale of chart options
+	 * @param defaultValues default provider.
 	 */
 	public ExtendedScale(ConfigurationEnvelop<Scale> envelop, IsDefaultScale defaultValues) {
 		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent().nativeObject());

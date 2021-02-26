@@ -671,7 +671,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks if chart is created
 		if (chart != null) {
 			// invokes the notification
-			invokeConfigurationNotification();
+			reconfigure();
 			// if mode is valid.. added check to null to avoid issue from code analysis
 			if (mode != null && IsAnimationModeKey.isValid(mode)) {
 				// then calls the update with animation mode
@@ -699,7 +699,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// if configuration is not passed..
 			if (configuration == null) {
 				// invokes the notification
-				invokeConfigurationNotification();
+				reconfigure();
 				// then calls the update
 				chart.update();
 			} else {
@@ -714,7 +714,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Prepares the chart options with the configuration ones before updating the chart, in order that new or updated options will be used by chart.
 	 */
-	private void invokeConfigurationNotification() {
+	private void reconfigure() {
 		// invokes the apply configuration
 		applyConfiguration();
 		// fires that chart is configuring

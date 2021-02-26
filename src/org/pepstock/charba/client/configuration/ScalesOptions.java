@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class ScalesOptions extends ConfigurationOptions {
+public abstract class ScalesOptions extends ConfigurationOptions {
 	// not final in order it can be set from
 	// options which inherits this class
 	private Scales scales = null;

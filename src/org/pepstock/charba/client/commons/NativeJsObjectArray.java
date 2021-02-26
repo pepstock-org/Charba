@@ -31,6 +31,7 @@ final class NativeJsObjectArray {
 	 * 
 	 * @param target the target object on which to get the property
 	 * @param key the name of the property to get
+	 * @param <T> type of the array
 	 * @return the value of the property
 	 */
 	static native <T extends Array> T get(NativeObject target, String key);
@@ -41,6 +42,7 @@ final class NativeJsObjectArray {
 	 * @param target the target object on which to set the property
 	 * @param key the name of the property to set
 	 * @param value the value to set
+	 * @param <T> type of the array
 	 */
 	static native <T extends Array> void set(NativeObject target, String key, T value);
 

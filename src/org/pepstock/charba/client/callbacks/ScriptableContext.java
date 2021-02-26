@@ -26,13 +26,7 @@ import org.pepstock.charba.client.items.DatasetPoint;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * The option context is used to give contextual information when resolving options.<br>
- * The context object contains the following properties:<br>
- * <ul>
- * <li><b>index</b>(int): index of the associated data
- * <li><b>datasetIndex</b>(int): index of the associated dataset
- * <li><b>active</b>(boolean): if the data and dataset item is hovered/active.
- * </ul>
+ * The option context is used to give contextual information when resolving options.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -46,7 +40,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 		ACTIVE("active"),
 		DATASET_INDEX("datasetIndex"),
 		DATA_INDEX("dataIndex"),
-		DATA_POINT("dataPoint"),
+		PARSED("parsed"),
 		ELEMENT("element");
 
 		// name value of property
@@ -119,12 +113,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * @return true if element is active (hovered)
 	 */
 	public boolean isActive() {
-		// checks if the property exists
-		if (exist(Property.ACTIVE)) {
-			return getContext().isActive();
-		}
-		// if here, context does not contain this property
-		return false;
+		return getValue(Property.ACTIVE, false);
 	}
 
 	/**
@@ -133,12 +122,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * @return the index of the current dataset.
 	 */
 	public int getDatasetIndex() {
-		// checks if the property exists
-		if (exist(Property.DATASET_INDEX)) {
-			return getContext().getDatasetIndex();
-		}
-		// if here, context does not contain this property
-		return UndefinedValues.INTEGER;
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -147,12 +131,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * @return the index of the current data.
 	 */
 	public int getDataIndex() {
-		// checks if the property exists
-		if (exist(Property.DATA_INDEX)) {
-			return getContext().getDataIndex();
-		}
-		// if here, context does not contain this property
-		return UndefinedValues.INTEGER;
+		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -160,17 +139,11 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the parsed data values for the given dataIndex and datasetIndex
 	 */
-	public DatasetPoint getDataPoint() {
+	public DatasetPoint getParsed() {
 		// checks is point object is already created
 		if (dataPoint == null) {
-			// checks if the property exists
-			if (exist(Property.DATA_POINT)) {
-				// stores point
-				this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(getContext().getDataPoint(), true));
-			} else {
-				// stores an empty point
-				this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(null, true));
-			}
+			// stores point
+			this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(getValue(Property.PARSED), true));
 		}
 		return dataPoint;
 	}
@@ -183,14 +156,8 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	public DatasetElement getElement() {
 		// checks is element object is already created
 		if (element == null) {
-			// checks if the property exists
-			if (exist(Property.ELEMENT)) {
-				// stores element
-				this.element = new DatasetElement(new CallbacksEnvelop<>(getContext().getElement(), true));
-			} else {
-				// stores an empty element
-				this.element = new DatasetElement(new CallbacksEnvelop<>(null, true));
-			}
+			// stores element
+			this.element = new DatasetElement(new CallbacksEnvelop<>(getValue(Property.ELEMENT), true));
 		}
 		return element;
 	}

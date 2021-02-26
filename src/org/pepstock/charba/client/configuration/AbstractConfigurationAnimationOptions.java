@@ -23,8 +23,6 @@ import org.pepstock.charba.client.options.AbstractAnimationOptions;
 /**
  * Base class for configuration animation options, to be used into {@link AnimationCallback}.
  * 
- * FIXME evaluate if still needed
- * 
  * @author Andrea "Stock" Stocchero
  *
  */

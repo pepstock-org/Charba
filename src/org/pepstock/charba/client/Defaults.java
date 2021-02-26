@@ -29,6 +29,10 @@ import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.Scales;
+import org.pepstock.charba.client.configuration.ScalesOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.data.Dataset;
@@ -48,14 +52,11 @@ import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.OptionsNode;
-import org.pepstock.charba.client.items.PluginUpdateArgument;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scale;
-import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -706,6 +707,49 @@ public final class Defaults {
 			super(ID);
 		}
 
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onConfigure(IsChart chart) {
+			// checks if chart is consistent and has got cartesian axes
+			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
+				// casts to scaled options
+				ScalesOptions options = (ScalesOptions)chart.getOptions();
+				// gets locale from chart
+				CLocale locale = chart.getOptions().getLocale();
+				// checks if locale is consistent
+				if (locale != null) {
+					// applies locale to time and time series scales
+					applyLocaleToTimeScales(options.getScales(), locale);
+				}
+			}
+		}
+
+		/**
+		 * Applies the locale, taken from chart options, to all time or time series scales if the locale is not set.
+		 * 
+		 * @param scales list of scales to scan
+		 * @param locale the chart options locale to apply
+		 */
+		private void applyLocaleToTimeScales(Scales scales, CLocale locale) {
+			// scans all scales, searching for time or times series ones
+			for (Axis axis : scales.getAxes()) {
+				// checks if is time or time series
+				if (axis instanceof CartesianTimeAxis) {
+					// casts to time axis
+					CartesianTimeAxis timeAxis = (CartesianTimeAxis)axis;
+					// gets the locale from date adapter options
+					CLocale dateAdapterOptionsLocale = timeAxis.getAdapters().getDate().getLocale();
+					// if the locale is not set
+					if (dateAdapterOptionsLocale == null) {
+						// applies the locale of the chart
+						timeAxis.getAdapters().getDate().setLocale(locale);
+					}
+				}
+			}
+		}
+
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -715,50 +759,6 @@ public final class Defaults {
 		public void onAfterInit(IsChart chart, Chart nativeChart) {
 			// stores native object
 			Charts.addNative(nativeChart);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
-		 */
-		@Override
-		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
-			// checks if chart is consistent and has got cartesian axes
-			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType())) {
-				// gets options node
-				OptionsNode options = chart.getNode().getOptions();
-				// gets locale from chart
-				CLocale locale = options.getLocale();
-				// checks if locale is consistent
-				if (locale != null) {
-					// applies locale to time and time series scales
-					applyLocaleToTimeScales(chart.getNode().getOptions().getScales(), locale);
-				}
-			}
-			return true;
-		}
-
-		/**
-		 * Applies the locale, taken from chart options, to all time or time series scales if the locale is not set.
-		 * 
-		 * @param scales list of scales to scan
-		 * @param locale teh chart options locale to apply
-		 */
-		private void applyLocaleToTimeScales(Scales scales, CLocale locale) {
-			// scans all scales, searching for time or times series ones
-			for (Scale scale : scales.getAxes()) {
-				// checks if is time or time series
-				if (AxisType.TIME.equals(scale.getType()) || AxisType.TIMESERIES.equals(scale.getType())) {
-					// gets the locale from date adapter options
-					CLocale dateAdapterOptionsLocale = scale.getAdapters().getDate().getLocale();
-					// if the locale is not set
-					if (dateAdapterOptionsLocale == null) {
-						// applies the locale of the chart
-						scale.getAdapters().getDate().setLocale(locale);
-					}
-				}
-			}
 		}
 
 		/*

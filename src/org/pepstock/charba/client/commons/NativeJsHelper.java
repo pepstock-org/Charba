@@ -43,15 +43,6 @@ final class NativeJsHelper {
 	 * @param key the string name of the property to test.
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
-	static native boolean exist(Object object, String key);
-
-	/**
-	 * Returns a boolean indicating whether the object has the specified property as its own property.
-	 * 
-	 * @param object the object on which to search the property.
-	 * @param key the string name of the property to test.
-	 * @return boolean indicating whether or not the object has the specified property as own property.
-	 */
 	static native boolean has(Object object, String key);
 
 	/**

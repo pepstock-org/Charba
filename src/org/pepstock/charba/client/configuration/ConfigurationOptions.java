@@ -249,9 +249,11 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	}
 
 	/**
-	 * FIXME
+	 * Sets the chart options as underlying configuration options, after the first draw of the chart.<br>
+	 * Leveraging on proxy, this is mandatory and enables the possibility to use only the configuration options
+	 * to update the chart options at runtime.
 	 * 
-	 * @param envelop
+	 * @param envelop envelop for chart options as native options 
 	 */
 	public final void setChartOptions(ChartEnvelop<NativeObject> envelop) {
 		// sets new configuration

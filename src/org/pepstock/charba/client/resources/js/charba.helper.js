@@ -79,16 +79,6 @@ function CharbaJsHelper() {}
  * @param {string} key the string name of the property to test
  * @return {boolean} indicating whether or not the object has the specified property as own property
  */
-CharbaJsHelper.exist = function(obj, key){
-  return key in obj;
-}
-/**
- * Returns a boolean indicating whether the object has the specified property as its own property.
- *
- * @param {*} obj the object on which to search the property
- * @param {string} key the string name of the property to test
- * @return {boolean} indicating whether or not the object has the specified property as own property
- */
 CharbaJsHelper.has = function(obj, key) {
   return key in obj;
 }
@@ -607,20 +597,4 @@ function CharbaJsDateAdapterHelper() {}
  */
 CharbaJsDateAdapterHelper.create = function(options) {
   return new Chart._adapters._date(options);
-}
-/**
- * ----------------------------------------------------------------------------
- * CharbaJsDateAdapterHelper
- * ----------------------------------------------------------------------------
- * CharbaJsCallbacksHelper is an object to wrap native object into native scriptable context.
- */
-function CharbaJsCallbacksHelper() {} 
-/**
- * Returns a native context from a native object.
- *
- * @param {Object} obj native objetc to wrap 
- * @return {CharbaScriptableOptionsContext} a native context instance
- */
-CharbaJsCallbacksHelper.wrap = function(obj){
-  return obj;
 }

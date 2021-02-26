@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * FIXME Extends a JavaScript object container for all entities which need the options instance to store the configuration of chart.
+ * Object used by the children of {@link ConfigurationOptions}, children of root configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -55,15 +55,18 @@ abstract class ConfigurationOptionsContainer extends ChartContainer {
 	}
 
 	/**
-	 * FIXME
+	 * Checks if the configuration is consistent, otherwise will emit an {@link IllegalArgumentException}.
 	 * 
-	 * @param options
-	 * @return
+	 * @param options the configuration instance to check
+	 * @return the configuration instance passed as argument
 	 */
 	private static ConfigurationOptions checkAndGet(ConfigurationOptions options) {
+		// checks if options are consistent
 		if (options == null) {
+			// not consistent exception!
 			throw new IllegalArgumentException("Configuration options argument is null");
 		}
+		// returns the argument
 		return options;
 	}
 

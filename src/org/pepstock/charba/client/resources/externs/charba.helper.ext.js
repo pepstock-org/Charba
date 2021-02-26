@@ -42,12 +42,6 @@ function CharbaJsHelper() {}
  * @param {string} key 
  * @return {boolean}
  */
-CharbaJsHelper.exist = function(object, key) {};
-/**
- * @param {*} object
- * @param {string} key 
- * @return {boolean}
- */
 CharbaJsHelper.has = function(object, key) {};
 /**
  * @param {*} object
@@ -332,13 +326,3 @@ function CharbaJsDateAdapterHelper() {}
  * @return {CharbaChartAdaptersDate}
  */
 CharbaJsDateAdapterHelper.create = function(object) {};
-/**
- * @constructor
- * @return {CharbaJsCallbacksHelper}
- */	
-function CharbaJsCallbacksHelper() {}
-/**
- * @param {Object} object 
- * @return {CharbaScriptableOptionsContext}
- */
-CharbaJsCallbacksHelper.wrap = function(object) {};

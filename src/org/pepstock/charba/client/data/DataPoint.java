@@ -17,10 +17,14 @@ package org.pepstock.charba.client.data;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.items.DataItem;
+import org.pepstock.charba.client.items.ItemsEnvelop;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -76,7 +80,17 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Creates the object with an empty native object.
 	 */
 	public DataPoint() {
-		this(null);
+		this((NativeObject)null);
+	}
+	
+	/**
+	 * Creates the object with a native object passed as argument by and {@link Envelop}.<br>
+	 * This is called by the {@link DataItem}.
+	 * 
+	 * @param envelop envelop which contains a native object with a data point
+	 */
+	public DataPoint(ItemsEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

@@ -87,11 +87,6 @@ public final class NativeName {
 	public static final String JS_CHART_HELPER = "CharbaJsChartHelper";
 
 	/**
-	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JS_CALLBACKS_HELPER}</b>, (internal of Charba).
-	 */
-	public static final String JS_CALLBACKS_HELPER = "CharbaJsCallbacksHelper";
-
-	/**
 	 * Constant to bind java script object as JsDateAdapterHelper with name <b>{@value JS_DATE_ADAPTER_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_DATE_ADAPTER_HELPER = "CharbaJsDateAdapterHelper";
