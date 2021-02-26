@@ -29,6 +29,13 @@ import jsinterop.annotations.JsType;
 final class NativeJsObjectImage {
 
 	/**
+	 * To avoid any instantiation
+	 */
+	private NativeJsObjectImage() {
+		// do nothing
+	}
+
+	/**
 	 * Allows you to get a property on an object.
 	 * 
 	 * @param target the target object on which to get the property

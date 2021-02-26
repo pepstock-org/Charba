@@ -27,6 +27,13 @@ import jsinterop.annotations.JsType;
 final class NativeJsObjectString {
 
 	/**
+	 * To avoid any instantiation
+	 */
+	private NativeJsObjectString() {
+		// do nothing
+	}
+
+	/**
 	 * Allows you to get a property on an object.
 	 * 
 	 * @param target the target object on which to get the property

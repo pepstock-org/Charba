@@ -62,9 +62,6 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer{
 		}
 	}
 
-	// instance of native context
-	//private final NativeContext context;
-
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -76,25 +73,12 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer{
 		if (nativeObject == null) {
 			throw new IllegalArgumentException("Native context argument is null");
 		}
-		// casts the native object to the context
-		// this is because the context passed by CHART.JS
-		// is using inheritance on prototypes
-		// this.context = JsCallbacksHelper.get().wrap(nativeObject);
 		// the chart must be there
 		if (!has(Property.CHART)) {
 			// if not, exception
 			throw new IllegalArgumentException("Unable to retrieve the chart instance and the context does not seem to be consistent");
 		}
 	}
-
-//	/**
-//	 * Returns the native context of the scriptable option.
-//	 * 
-//	 * @return the native context of the scriptable option
-//	 */
-//	final NativeContext getContext() {
-//		return context;
-//	}
 
 	/**
 	 * Returns the CHARBA chart instance.

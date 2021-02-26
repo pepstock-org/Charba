@@ -25,6 +25,13 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.JS_OBJECT_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsObjectArray {
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	private NativeJsObjectArray() {
+		// do nothing
+	}
 
 	/**
 	 * Allows you to get a property on an object.

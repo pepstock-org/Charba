@@ -363,8 +363,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	private void storePluginEnablement(IsChart chart) {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions(chart);
+		// gets stored enablement
+		Boolean isEnabled = pluginChartEnablement.get(chart.getId());
 		// checks if there is already an enabled
-		if (pluginChartEnablement.containsKey(chart.getId()) && !pOptions.isEnabled() && pluginChartEnablement.get(chart.getId())) {
+		if (Boolean.TRUE.equals(isEnabled) && !pOptions.isEnabled()) {
 			// clear selection
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// gets selection handler
