@@ -66,6 +66,10 @@ final class SelectionHandler {
 	private final DatasetsItemsSelectorOptions options;
 	// current selection area
 	private final SelectionArea area = new SelectionArea();
+	// stores the original top padding value
+	private final int paddingTop;
+	// stores the original bottom padding value
+	private final int paddingBottom;
 	// current selection dataset items
 	// current mouse track of selection
 	private SelectionTrack track = null;
@@ -99,13 +103,16 @@ final class SelectionHandler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		mouseDownCallbackProxy.setCallback((context, event) -> onMouseDown(event));
+		this.mouseDownCallbackProxy.setCallback((context, event) -> onMouseDown(event));
 		// fires the event
-		mouseMoveCallbackProxy.setCallback((context, event) -> onMouseMove(event));
+		this.mouseMoveCallbackProxy.setCallback((context, event) -> onMouseMove(event));
 		// fires the event
-		mouseUpCallbackProxy.setCallback((context, event) -> onMouseUp(event));
+		this.mouseUpCallbackProxy.setCallback((context, event) -> onMouseUp(event));
 		// fires the event
-		mouseLeaveCallbackProxy.setCallback((context, event) -> onMouseLeave(event));
+		this.mouseLeaveCallbackProxy.setCallback((context, event) -> onMouseLeave(event));
+		// stores original padding values
+		this.paddingTop = chart.getOptions().getLayout().getPadding().getTop();
+		this.paddingBottom = chart.getOptions().getLayout().getPadding().getBottom();
 		// gets selection item
 		ClearSelection clearSelection = options.getClearSelection();
 		// checks if display is required
@@ -123,7 +130,7 @@ final class SelectionHandler {
 			if (clearSelection.getPosition().equals(Position.TOP)) {
 				// if the clear selection must be set on TOP
 				// gets the padding set by chart configuration
-				int padding = chart.getOptions().getLayout().getPadding().getTop();
+				int padding = paddingTop;
 				// adds on required padding, the space needed to show the clear selection
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
@@ -132,7 +139,7 @@ final class SelectionHandler {
 			} else {
 				// if the clear selection must be set on BOTTOM (other values of position are ignored)
 				// gets the padding set by chart configuration
-				int padding = chart.getOptions().getLayout().getPadding().getBottom();
+				int padding = paddingBottom;
 				// adds on required padding, the space needed to show the clear selection
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
@@ -150,6 +157,18 @@ final class SelectionHandler {
 	DatasetsItemsSelectorOptions getOptions() {
 		return options;
 	}
+	
+	/**
+	 * Cleans up an handler which is going to be removed.
+	 */
+	void destroy() {
+		// removes listeners
+		removeListeners();
+		// restores original top bottom
+		chart.getOptions().getLayout().getPadding().setTop(paddingTop);
+		// restores original padding bottom
+		chart.getOptions().getLayout().getPadding().setBottom(paddingBottom);
+	}
 
 	/**
 	 * Adds events listener to canvas element of chart.
@@ -165,7 +184,7 @@ final class SelectionHandler {
 	/**
 	 * Adds events listener to canvas element of chart.
 	 */
-	void removeListeners() {
+	private void removeListeners() {
 		// adds to the canvas all event listeners
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
@@ -946,7 +965,7 @@ final class SelectionHandler {
 				ctx.setLineDashOffset(options.getBorderDashOffset());
 				// gets increment
 				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
-				// draw border fixing the dimansions of rect
+				// draw border fixing the dimensions of rectangle
 				ctx.strokeRect(clearSelection.getX() + borderIncrement, clearSelection.getY() + borderIncrement, clearSelection.getWidth() - ClearSelection.BORDER_WIDTH, clearSelection.getHeight() - ClearSelection.BORDER_WIDTH);
 			}
 		}

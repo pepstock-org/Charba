@@ -217,6 +217,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			}
 			// checks if chart has got already an handler
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {
+				// gets selection handler
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+				// cleans up the handler
+				handler.destroy();
 				// removes previous handler
 				pluginSelectionHandlers.remove(chart.getId());
 			}
@@ -394,7 +398,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// at chart destroy phase, all handler will be removed form canvas
 			// removes mouse handler if consistent
-			handler.removeListeners();
+			// and cleans the handler
+			handler.destroy();
 			// removes handler from map
 			pluginSelectionHandlers.remove(chart.getId());
 		}
@@ -496,7 +501,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Invoked when the chart is already drawn nad takes care about the selection logic.
+	 * Invoked when the chart is already drawn and takes care about the selection logic.
 	 * 
 	 * @param chart chart instance
 	 * @param handler selection handler instance
