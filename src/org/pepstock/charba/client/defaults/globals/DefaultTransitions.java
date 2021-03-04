@@ -148,7 +148,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 * @author Andrea "Stock" Stocchero
 		 *
 		 */
-		private static class ActiveDefaultAnimation extends DefaultAnimation implements IsDefaultAnimation {
+		private static class ActiveDefaultAnimation extends DefaultAnimation {
 
 			/*
 			 * (non-Javadoc)
@@ -199,7 +199,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 * @author Andrea "Stock" Stocchero
 		 *
 		 */
-		private static class ResizeDefaultAnimation extends DefaultAnimation implements IsDefaultAnimation {
+		private static class ResizeDefaultAnimation extends DefaultAnimation {
 
 			/*
 			 * (non-Javadoc)
@@ -251,7 +251,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 * @author Andrea "Stock" Stocchero
 		 *
 		 */
-		private static class ShowAndHideDefaultAnimations extends DefaultAnimations implements IsDefaultAnimations {
+		private static class ShowAndHideDefaultAnimations extends DefaultAnimations {
 			
 			private static final IsDefaultAnimationCollection DEFAULT_COLORS_COLLECTION = new ShowAndHideDefaultAnimationCollection();
 

@@ -535,11 +535,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class InternalAnimations extends DefaultAnimations implements IsDefaultAnimations {
+	private static class InternalAnimations extends DefaultAnimations {
 
 		private static final IsAnimationPropertyKey OPACITY = IsAnimationPropertyKey.create("opacity", AnimationType.NUMBER);
 
-		private static final IsAnimationCollectionKey DEFAULT_OPACITY = IsAnimationCollectionKey.create(OPACITY.value(), OPACITY);
+		private static final IsAnimationCollectionKey DEFAULT_OPACITY = IsAnimationCollectionKey.create("opacity", OPACITY);
 
 		private static final List<IsAnimationCollectionKey> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, DEFAULT_OPACITY);
 
@@ -636,7 +636,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 		private static final int DEFAULT_DURATION = 200;
 
-		private static final List<IsAnimationPropertyKey> DEFAULT_ANIMATION_PROPERTIES_KEYS = Collections.unmodifiableList(Arrays.asList(InternalAnimations.OPACITY));
+		private List<IsAnimationPropertyKey> properties = null;
 
 		/*
 		 * (non-Javadoc)
@@ -645,7 +645,12 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		 */
 		@Override
 		public List<IsAnimationPropertyKey> getProperties() {
-			return DEFAULT_ANIMATION_PROPERTIES_KEYS;
+			// if the list is null
+			if (properties == null) {
+				// creates and loads it
+				properties = Collections.unmodifiableList(Arrays.asList(InternalAnimations.OPACITY));
+			}
+			return properties;
 		}
 
 		/*

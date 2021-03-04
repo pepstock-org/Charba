@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class AnimationCollection extends AbstractAnimationCollection<IsAnimationCollectionKey, IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
+public final class AnimationCollection extends AbstractAnimationCollection<IsAnimationCollectionKey, IsDefaultAnimationCollection> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
