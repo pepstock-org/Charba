@@ -15,29 +15,35 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
+import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
- * Is the base animation options with common properties for animation properties (property and collections of properties).
+ * Is the base animation options with common element properties for animation properties, ANIMATIONS name space.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of key
  * @param <D> type of default values
  */
-abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnimationProperty> extends AbstractAnimation<T, D> implements IsDefaultAnimationProperty, IsAnimationElement {
+abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAnimationCollection> extends AbstractAnimation<T, D> implements IsDefaultAnimationCollection {
 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
+		PROPERTIES("properties"),
 		TYPE("type"),
 		FROM("from"),
 		TO("to");
@@ -74,7 +80,7 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractAnimationProperty(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractAnimationCollection(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
 	}
 
@@ -302,4 +308,65 @@ abstract class AbstractAnimationProperty<T extends Key, D extends IsDefaultAnima
 		// then returns null
 		return null;
 	}
+	
+	/**
+	 * Sets the properties to be defined into the animation collection.
+	 * 
+	 * @param properties the properties to be defined into the animation collection
+	 */
+	public void setProperties(IsAnimationPropertyKey... properties) {
+		// checks if argument is consistent
+		if (properties != null && properties.length > 0) {
+			// loads the array from list
+			ArrayString array = ArrayString.fromOrEmpty(properties);
+			// stores the properties
+			setArrayValueAndAddToParent(Property.PROPERTIES, array);
+		}
+	}
+
+	/**
+	 * Sets the properties to be defined into the animation collection.
+	 * 
+	 * @param properties the properties to be defined into the animation collection
+	 */
+	public void setProperties(List<IsAnimationPropertyKey> properties) {
+		// checks if argument is consistent
+		if (properties != null && !properties.isEmpty()) {
+			// loads the array from list
+			ArrayString array = ArrayString.fromOrEmpty(properties.toArray(new IsAnimationPropertyKey[0]));
+			// stores the properties
+			setArrayValueAndAddToParent(Property.PROPERTIES, array);
+		}
+	}
+
+	/**
+	 * Returns the properties defined into the animation collection.
+	 * 
+	 * @return the properties defined into the animation collection
+	 */
+	@Override
+	public List<IsAnimationPropertyKey> getProperties() {
+		// gets result list
+		List<IsAnimationPropertyKey> result = new LinkedList<>();
+		// gets array
+		ArrayString array = getArrayValue(Property.PROPERTIES);
+		// checks if array is consistent
+		if (array.length() > 0) {
+			// scans the array and the load the properties
+			for (int i = 0; i < array.length(); i++) {
+				// stores the property name
+				String property = array.get(i);
+				// checks if default on
+				if (DefaultAnimationPropertyKey.is(property)) {
+					// adds default property
+					result.add(Key.getKeyByValue(DefaultAnimationPropertyKey.values(), property));
+				} else {
+					// adds new property
+					result.add(IsAnimationPropertyKey.create(property, getType()));
+				}
+			}
+		}
+		return result;
+	}
+
 }

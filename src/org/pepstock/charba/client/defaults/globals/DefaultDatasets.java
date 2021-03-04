@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
+import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 
 /**
  * CHART.JS default values for DATASETS element.
@@ -26,6 +28,10 @@ import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 public final class DefaultDatasets implements IsDefaultDatasets {
 
 	private final IsDefaultAnimation animation = new DefaultAnimation();
+
+	private final IsDefaultAnimations animations = new DefaultAnimations();
+
+	private final IsDefaultTransitions transitions = new DefaultTransitions();
 
 	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that they take the full available widths without
@@ -67,11 +73,31 @@ public final class DefaultDatasets implements IsDefaultDatasets {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getAnimation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getAnimation()
 	 */
 	@Override
 	public IsDefaultAnimation getAnimation() {
 		return animation;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getTransitions()
+	 */
+	@Override
+	public IsDefaultTransitions getTransitions() {
+		return transitions;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
+	 */
+	@Override
+	public IsDefaultAnimations getAnimations() {
+		return animations;
 	}
 
 	/*

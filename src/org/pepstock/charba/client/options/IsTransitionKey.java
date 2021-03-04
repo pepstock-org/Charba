@@ -16,60 +16,56 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
-import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
+import org.pepstock.charba.client.enums.DefaultTransitionKey;
 
 /**
- * Represents the mode to set to configure animation.
+ * Represents the update mode (transition) to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationModeKey extends Key {
+public interface IsTransitionKey extends Key {
 
 	/**
-	 * Returns a animation mode instance by its string value.
+	 * Returns a animation update mode (transition) instance by its string value.
 	 * 
-	 * @param mode string value to use
-	 * @return new mode instance
+	 * @param transition string value to use
+	 * @return new update mode (transition) instance
 	 */
-	static IsAnimationModeKey create(String mode) {
+	static IsTransitionKey create(String transition) {
 		// checks if mode as argument is a default one
-		for (DefaultAnimationModeKey defMode : DefaultAnimationModeKey.values()) {
+		for (DefaultTransitionKey defMode : DefaultTransitionKey.values()) {
 			// checks if mode is equals to default
-			if (defMode.value().equals(mode)) {
+			if (defMode.value().equals(transition)) {
 				// if equals, returns the default mode
 				return defMode;
 			}
 		}
 		// if here, is not a default one
 		// then creates new animation mode
-		return new StandardAnimationMode(mode);
+		return new StandardAnimationTransition(transition);
 	}
 
 	/**
 	 * Returns <code>true</code> if type passed as argument is not <code>null</code>.
 	 * 
-	 * @param mode animation mode to be checked
+	 * @param transition animation update mode (transition) to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code>
 	 */
-	static boolean isValid(IsAnimationModeKey mode) {
-		return Key.isValid(mode) && AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationPropertyKey.values());
+	static boolean isValid(IsTransitionKey transition) {
+		return Key.isValid(transition);
 	}
 
 	/**
 	 * Checks if type passed as argument is not <code>null</code>.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
-	 * @param mode animation mode to be checked
+	 * @param transition animation update mode (transition) to be checked
 	 */
-	static void checkIfValid(IsAnimationModeKey mode) {
-		if (!isValid(mode)) {
-			// sets checking value
-			boolean hasWrongName = mode != null && !AnimationElementChecker.get().isValid(mode.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationPropertyKey.values());
+	static void checkIfValid(IsTransitionKey transition) {
+		if (!isValid(transition)) {
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation mode name, '" + mode.value() + "' because is reserved" : "Animation mode is null or not consistent";
+			String exceptionMessage = transition != null ? "Invalid animation mode name, '" + transition.value() + "' because is reserved" : "Animation mode is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}
@@ -79,14 +75,14 @@ public interface IsAnimationModeKey extends Key {
 	 * Checks if mode passed as argument is not <code>null</code>.<br>
 	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the argument.
 	 * 
-	 * @param mode mode to be checked
-	 * @return the same mode passed as argument
+	 * @param transition update mode (transition) to be checked
+	 * @return the same update mode (transition) passed as argument
 	 */
-	static IsAnimationModeKey checkAndGetIfValid(IsAnimationModeKey mode) {
+	static IsTransitionKey checkAndGetIfValid(IsTransitionKey transition) {
 		// checks if collection is consistent
-		checkIfValid(mode);
+		checkIfValid(transition);
 		// if here, is consistent
 		// then returns the argument
-		return mode;
+		return transition;
 	}
 }

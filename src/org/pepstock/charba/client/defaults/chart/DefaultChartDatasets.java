@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
+import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 
 /**
  * CHART.JS default values for DATASETS element.
@@ -44,6 +46,26 @@ public final class DefaultChartDatasets implements IsDefaultDatasets {
 	@Override
 	public IsDefaultAnimation getAnimation() {
 		return datasets.getAnimation();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getTransitions()
+	 */
+	@Override
+	public IsDefaultTransitions getTransitions() {
+		return datasets.getTransitions();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
+	 */
+	@Override
+	public IsDefaultAnimations getAnimations() {
+		return datasets.getAnimations();
 	}
 
 	/*

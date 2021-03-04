@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.options.IsAnimationModeKey;
-
 /**
- * Interface to define animation object defaults.
+ * Interface to define animation object defaults, ANIMATION name space.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimation extends IsDefaultAnimationMode {
+public interface IsDefaultAnimation extends IsDefaultBaseAnimation {
 
 	/**
 	 * If <code>true</code>, the chart will animate in with a rotation animation.
@@ -37,21 +35,4 @@ public interface IsDefaultAnimation extends IsDefaultAnimationMode {
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	boolean isAnimateScale();
-
-	/**
-	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @return <code>true</code> if an animation mode instance is stored into the animation options
-	 */
-	boolean hasMode(IsAnimationModeKey mode);
-
-	/**
-	 * Returns the animation options set for a specific mode.
-	 * 
-	 * @param mode mode instance used to search for animation options
-	 * @return the animation options set for a specific mode.
-	 */
-	IsDefaultAnimationMode getMode(IsAnimationModeKey mode);
-
 }

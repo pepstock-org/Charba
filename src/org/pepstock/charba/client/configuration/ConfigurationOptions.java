@@ -26,7 +26,6 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
-import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -79,7 +78,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class ConfigurationOptions extends AnimationOptionsContainer<ConfigurationAnimationOptions, ConfigurationAnimationCallback> implements ConfigurationElement, IsEventProvider {
+public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, HasAnimation, IsEventProvider {
 
 	// list of click event handler types
 	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
@@ -142,7 +141,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 
 	private final IsDefaultScaledOptions defaultValues;
 
-	private final ConfigurationAnimation animation;
+	private final AnimationContainer animationContainer;
 
 	private final Legend legend;
 
@@ -186,8 +185,9 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 		this.defaultValues = defaultValues;
 		// registers as event handler
 		IsEventProvider.register(chart, this);
+		// creates the animation configuration manager
+		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration());
 		// creates all sub elements
-		this.animation = new ConfigurationAnimation(this);
 		this.elements = new Elements(this);
 		this.legend = new Legend(this);
 		this.title = new Title(this);
@@ -198,7 +198,6 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 		this.tooltips = new Tooltips(this);
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
-
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -250,10 +249,9 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 
 	/**
 	 * Sets the chart options as underlying configuration options, after the first draw of the chart.<br>
-	 * Leveraging on proxy, this is mandatory and enables the possibility to use only the configuration options
-	 * to update the chart options at runtime.
+	 * Leveraging on proxy, this is mandatory and enables the possibility to use only the configuration options to update the chart options at runtime.
 	 * 
-	 * @param envelop envelop for chart options as native options 
+	 * @param envelop envelop for chart options as native options
 	 */
 	public final void setChartOptions(ChartEnvelop<NativeObject> envelop) {
 		// sets new configuration
@@ -262,7 +260,7 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 		if (this instanceof ScalesOptions) {
 			// casts to scales options
 			ScalesOptions options = (ScalesOptions) this;
-			// scans axes to set new configuration 
+			// scans axes to set new configuration
 			for (Axis axis : options.getScales().getAxes()) {
 				// stores new base object, the object of chart options
 				axis.setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(getConfiguration().getScales().getAxis(axis.getId())), axis.getDefaultValues()));
@@ -273,30 +271,11 @@ public abstract class ConfigurationOptions extends AnimationOptionsContainer<Con
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#createAnimationOptions()
+	 * @see org.pepstock.charba.client.configuration.HasAnimation#getAnimationContainer()
 	 */
 	@Override
-	protected final ConfigurationAnimationOptions createAnimationOptions() {
-		return new ConfigurationAnimationOptions(getConfiguration().getAnimation());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AnimationOptionsContainer#getDefaultAnimationOptions()
-	 */
-	@Override
-	protected final ConfigurationAnimationOptions getDefaultAnimationOptions() {
-		return getConfiguration().createAnimationOptions();
-	}
-
-	/**
-	 * Returns the animation element.
-	 * 
-	 * @return the animation
-	 */
-	public ConfigurationAnimation getAnimation() {
-		return animation;
+	public final AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**

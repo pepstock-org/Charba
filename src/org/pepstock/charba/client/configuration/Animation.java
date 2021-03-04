@@ -15,28 +15,142 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.options.AnimationCollection;
-import org.pepstock.charba.client.options.AnimationMode;
-import org.pepstock.charba.client.options.AnimationProperty;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.events.AddHandlerEvent;
+import org.pepstock.charba.client.events.AnimationCompleteEvent;
+import org.pepstock.charba.client.events.AnimationProgressEvent;
+import org.pepstock.charba.client.events.RemoveHandlerEvent;
+import org.pepstock.charba.client.items.AnimationItem;
+import org.pepstock.charba.client.options.HasAnimationOptions;
+import org.pepstock.charba.client.options.IsAnimation;
+
+import jsinterop.annotations.JsFunction;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * It animates charts out of the box.<br>
+ * A number of options are provided to configure how the animation looks and how long it takes.<br>
+ * This configuration item is configuring the common animation properties.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Animation extends ConfigurationOptionsContainer {
+public class Animation extends AbstractDynamicConfiguration<IsAnimation> implements IsEventProvider, IsAnimation {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
 
 	/**
-	 * Builds the object storing the chart instance and root options.
+	 * Java script FUNCTION callback when animation is changing.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @param options root options of chart.
+	 * @author Andrea "Stock" Stocchero
 	 */
-	Animation(ConfigurationOptions options) {
-		super(options);
+	@JsFunction
+	interface ProxyAnimationCallback {
+
+		/**
+		 * Method of function to be called when animation is changing.
+		 * 
+		 * @param context value of <code>this</code> to the execution context of function.
+		 * @param nativeObject java script object which contains animation object
+		 */
+		void call(Chart context, NativeObject nativeObject);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+
+	// callback proxy to invoke the animation complete function
+	private final CallbackProxy<ProxyAnimationCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the animation in progress function
+	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
+	// amount of handlers
+	private int onCompleteHandlers = 0;
+	// amount of handlers
+	private int onProgressHandlers = 0;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		ON_PROGRESS("onProgress"),
+		ON_COMPLETE("onComplete");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	// chart instance
+	private final IsChart chart;
+	// animation options mapper
+	private HasAnimationOptions options;
+
+	/**
+	 * Builds the object by a animation provider used to get the animation element for storing properties.
+	 * 
+	 * @param chart instance of chart
+	 * @param options options where the animation options is stored
+	 * @param provider animation provider used to get the animation element for storing properties.
+	 */
+	Animation(IsChart chart, HasAnimationOptions options, IsProvider<IsAnimation> provider) {
+		super(provider);
+		// checks if chart is consistent
+		this.chart = IsChart.checkAndGetIfValid(chart);
+		// stores options
+		this.options = options;
+		// registers as event handler
+		IsEventProvider.register(this.chart, this);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		completeCallbackProxy.setCallback((context, nativeObject) -> {
+			// checks consistency of argument
+			if (nativeObject != null) {
+				// creates animation item
+				AnimationItem animationItem = new AnimationItem(new ConfigurationEnvelop<>(nativeObject));
+				// invokes the custom callback
+				onComplete(animationItem);
+			}
+		});
+		progressCallbackProxy.setCallback((context, nativeObject) -> {
+			// checks consistency of argument
+			if (nativeObject != null) {
+				// creates animation item
+				AnimationItem animationItem = new AnimationItem(new ConfigurationEnvelop<>(nativeObject));
+				// invokes the custom callback
+				onProgress(animationItem);
+			}
+		});
 	}
 
 	/**
@@ -44,8 +158,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param easing animation easing.
 	 */
+	@Override
 	public void setEasing(Easing easing) {
-		getConfiguration().getAnimation().setEasing(easing);
+		checkAndGet().setEasing(easing);
 	}
 
 	/**
@@ -53,8 +168,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return animation easing.
 	 */
+	@Override
 	public Easing getEasing() {
-		return getConfiguration().getAnimation().getEasing();
+		return checkAndGet().getEasing();
 	}
 
 	/**
@@ -62,8 +178,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
+	@Override
 	public void setDuration(int milliseconds) {
-		getConfiguration().getAnimation().setDuration(milliseconds);
+		checkAndGet().setDuration(milliseconds);
 	}
 
 	/**
@@ -71,8 +188,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return the number of milliseconds an animation takes.
 	 */
+	@Override
 	public int getDuration() {
-		return getConfiguration().getAnimation().getDuration();
+		return checkAndGet().getDuration();
 	}
 
 	/**
@@ -80,8 +198,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param animateRotate If true, the chart will animate in with a rotation animation.
 	 */
+	@Override
 	public void setAnimateRotate(boolean animateRotate) {
-		getConfiguration().getAnimation().setAnimateRotate(animateRotate);
+		checkAndGet().setAnimateRotate(animateRotate);
 	}
 
 	/**
@@ -89,8 +208,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return If true, the chart will animate in with a rotation animation.
 	 */
+	@Override
 	public boolean isAnimateRotate() {
-		return getConfiguration().getAnimation().isAnimateRotate();
+		return checkAndGet().isAnimateRotate();
 	}
 
 	/**
@@ -98,8 +218,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param animateScale If true, will animate scaling the chart from the center outwards.
 	 */
+	@Override
 	public void setAnimateScale(boolean animateScale) {
-		getConfiguration().getAnimation().setAnimateScale(animateScale);
+		checkAndGet().setAnimateScale(animateScale);
 	}
 
 	/**
@@ -107,26 +228,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return If true, will animate scaling the chart from the center outwards.
 	 */
+	@Override
 	public boolean isAnimateScale() {
-		return getConfiguration().getAnimation().isAnimateScale();
-	}
-
-	/**
-	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	public void setDebug(boolean debug) {
-		getConfiguration().getAnimation().setDebug(debug);
-	}
-
-	/**
-	 * Returns <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	public boolean isDebug() {
-		return getConfiguration().getAnimation().isDebug();
+		return checkAndGet().isAnimateScale();
 	}
 
 	/**
@@ -134,8 +238,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param delay the delay before starting the animations
 	 */
+	@Override
 	public void setDelay(int delay) {
-		getConfiguration().getAnimation().setDelay(delay);
+		checkAndGet().setDelay(delay);
 	}
 
 	/**
@@ -143,8 +248,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return the delay before starting the animations
 	 */
+	@Override
 	public int getDelay() {
-		return getConfiguration().getAnimation().getDelay();
+		return checkAndGet().getDelay();
 	}
 
 	/**
@@ -152,8 +258,9 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @param loop <code>true</code> if loops the animations endlessly.
 	 */
+	@Override
 	public void setLoop(boolean loop) {
-		getConfiguration().getAnimation().setLoop(loop);
+		checkAndGet().setLoop(loop);
 	}
 
 	/**
@@ -161,172 +268,86 @@ public class Animation extends ConfigurationOptionsContainer {
 	 * 
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
+	@Override
 	public boolean isLoop() {
-		return getConfiguration().getAnimation().isLoop();
+		return checkAndGet().isLoop();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
+	 */
+	@Override
+	public final void onAdd(AddHandlerEvent event) {
+		// checks which kind of handler has been added
+		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
+			// checks if property exist
+			if (onCompleteHandlers == 0) {
+				// sets the java script code to get the event
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, completeCallbackProxy.getProxy());
+			}
+			// increments amount of handlers
+			onCompleteHandlers++;
+		} else if (event.isRecognize(AnimationProgressEvent.TYPE)) {
+			// checks if property exist
+			if (onProgressHandlers == 0) {
+				// sets the java script code to get the event
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, progressCallbackProxy.getProxy());
+			}
+			// increments amount of handlers
+			onProgressHandlers++;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events. RemoveHandlerEvent)
+	 */
+	@Override
+	public final void onRemove(RemoveHandlerEvent event) {
+		// checks which kind of handler has been removed
+		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
+			// decrements amount of handlers
+			onCompleteHandlers--;
+			// if zero, no handler
+			if (onCompleteHandlers == 0) {
+				// therefore remove property
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, null);
+			}
+		} else if (event.isRecognize(AnimationProgressEvent.TYPE)) {
+			// decrements amount of handlers
+			onProgressHandlers--;
+			// if zero, no handler
+			if (onProgressHandlers == 0) {
+				// therefore remove property
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, null);
+			}
+		}
 	}
 
 	/**
-	 * Sets an animation property instance to animation options.
+	 * Callback called on each step of an animation.
 	 * 
-	 * @param animationElement animation property instance to add
+	 * @param item animation item info.
 	 */
-	public void setProperty(AnimationProperty animationElement) {
-		getConfiguration().getAnimation().setProperty(animationElement);
+	private void onProgress(AnimationItem item) {
+		// creates a native event by DOM (change)
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
+		// fires the event
+		this.chart.fireEvent(new AnimationProgressEvent(event, item));
 	}
 
 	/**
-	 * Enables or disables an animation property instance into animation options.
+	 * Callback called at the end of an animation.
 	 * 
-	 * @param property property instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation property
+	 * @param item animation item info.
 	 */
-	public void setPropertyEnabled(IsAnimationPropertyKey property, boolean enabled) {
-		getConfiguration().getAnimation().setPropertyEnabled(property, enabled);
+	private void onComplete(AnimationItem item) {
+		// creates a native event by DOM (change)
+		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
+		// fires the event
+		this.chart.fireEvent(new AnimationCompleteEvent(event, item));
 	}
-
-	/**
-	 * Returns <code>true</code> if the animation property is enabled, otherwise <code>false</code>.
-	 * 
-	 * @param property property instance used to check into animation options
-	 * @return <code>true</code> if the animation property is enabled, otherwise <code>false</code>
-	 */
-	public boolean isPropertyEnabled(IsAnimationPropertyKey property) {
-		return getConfiguration().getAnimation().isPropertyEnabled(property);
-	}
-
-	/**
-	 * Returns <code>true</code> if an animation property instance is stored into the animation options.
-	 * 
-	 * @param property property instance used to check into animation options
-	 * @return <code>true</code> if an animation property instance is stored into the animation options
-	 */
-	public boolean hasProperty(IsAnimationPropertyKey property) {
-		return getConfiguration().getAnimation().hasProperty(property);
-	}
-
-	/**
-	 * Returns an animation property instance if stored into the animation options.
-	 * 
-	 * @param property property instance used to get for animation options
-	 * @return an animation property instance or <code>null</code> if does not exists
-	 */
-	public AnimationProperty getProperty(IsAnimationPropertyKey property) {
-		return getConfiguration().getAnimation().getProperty(property);
-	}
-
-	/**
-	 * Removes an animation property previously added.
-	 * 
-	 * @param property property instance used to remove from animation options
-	 */
-	public void removeProperty(IsAnimationPropertyKey property) {
-		getConfiguration().getAnimation().removeProperty(property);
-	}
-
-	/**
-	 * Sets an animation collection instance to animation options.
-	 * 
-	 * @param animationElement animation collection instance to add
-	 */
-	public void setCollection(AnimationCollection animationElement) {
-		getConfiguration().getAnimation().setCollection(animationElement);
-	}
-
-	/**
-	 * Enables or disables an animation collection instance into animation options.
-	 * 
-	 * @param collection collection instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation collection
-	 */
-	public void setCollectionEnabled(IsAnimationCollectionKey collection, boolean enabled) {
-		getConfiguration().getAnimation().setCollectionEnabled(collection, enabled);
-	}
-
-	/**
-	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
-	 * 
-	 * @param collection collection instance used to check into animation options
-	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
-	 */
-	public boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
-		return getConfiguration().getAnimation().isCollectionEnabled(collection);
-	}
-
-	/**
-	 * Returns <code>true</code> if an animation collection instance is stored into the animation options.
-	 * 
-	 * @param collection collection instance used to check into animation options
-	 * @return <code>true</code> if an animation collection instance is stored into the animation options
-	 */
-	public boolean hasCollection(IsAnimationCollectionKey collection) {
-		return getConfiguration().getAnimation().hasCollection(collection);
-	}
-
-	/**
-	 * Returns an animation collection instance if stored into the animation options.
-	 * 
-	 * @param collection collection instance used to get for animation options
-	 * @return an animation collection instance or <code>null</code> if does not exists
-	 */
-	public AnimationCollection getCollection(IsAnimationCollectionKey collection) {
-		return getConfiguration().getAnimation().getCollection(collection);
-	}
-
-	/**
-	 * Removes an animation collection previously added.
-	 * 
-	 * @param collection collection instance used to remove from animation options
-	 */
-	public void removeCollection(IsAnimationCollectionKey collection) {
-		getConfiguration().getAnimation().removeCollection(collection);
-	}
-
-	/**
-	 * Sets the animation options set for a specific mode.
-	 * 
-	 * @param animationElement the animation options set for a specific mode
-	 */
-	public void setMode(AnimationMode animationElement) {
-		getConfiguration().getAnimation().setMode(animationElement);
-	}
-
-	/**
-	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @return <code>true</code> if the animation mode is enabled, otherwise <code>false</code>
-	 */
-	public final boolean isModeEnabled(IsAnimationModeKey mode) {
-		return getConfiguration().getAnimation().isModeEnabled(mode);
-	}
-
-	/**
-	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @return <code>true</code> if an animation mode instance is stored into the animation options
-	 */
-	public final boolean hasMode(IsAnimationModeKey mode) {
-		return getConfiguration().getAnimation().hasMode(mode);
-	}
-
-	/**
-	 * Returns an animation mode instance if stored into the animation options.
-	 * 
-	 * @param mode mode instance used to get for animation options
-	 * @return an animation mode instance or <code>null</code> if does not exists
-	 */
-	public AnimationMode getMode(IsAnimationModeKey mode) {
-		return getConfiguration().getAnimation().getMode(mode);
-	}
-
-	/**
-	 * Removes an animation mode previously added.
-	 * 
-	 * @param mode mode instance used to remove from animation options
-	 */
-	public final void removeMode(IsAnimationModeKey mode) {
-		getConfiguration().getAnimation().removeMode(mode);
-	}
-
 }

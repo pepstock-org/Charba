@@ -13,25 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.defaults;
 
 /**
- * This is a standard implementation of an animation mode
+ * Interface to define animation for update mode (transition) defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-public final class StandardAnimationMode extends AbstractStandardKey implements IsAnimationModeKey {
+public interface IsDefaultAnimationTransition {
 
 	/**
-	 * Builds the object with the animation mode value as string
+	 * Returns the animation element.
 	 * 
-	 * @param value value of key as String
+	 * @return the animation
 	 */
-	StandardAnimationMode(String value) {
-		super(value);
-		// checks if consistent
-		IsAnimationModeKey.checkIfValid(this);
-	}
+	IsDefaultAnimation getAnimation();
+	
+	/**
+	 * Returns the animations collection element.
+	 * 
+	 * @return the animations collection
+	 */
+	IsDefaultAnimations getAnimations();
 
 }

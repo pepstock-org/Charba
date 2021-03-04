@@ -34,7 +34,7 @@ import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
 
@@ -381,7 +381,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#update(org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public final void update(IsAnimationModeKey mode) {
+	public final void update(IsTransitionKey mode) {
 		chart.update(mode);
 	}
 

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerDatasetElement;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 
 /**
  * This interface enables the capability to create a custom chart.
@@ -129,7 +129,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void update(ControllerContext context, IsChart chart, IsAnimationModeKey mode);
+	void update(ControllerContext context, IsChart chart, IsTransitionKey mode);
 
 	/**
 	 * Ensures that the dataset represented by this controller is linked to a scale.<br>

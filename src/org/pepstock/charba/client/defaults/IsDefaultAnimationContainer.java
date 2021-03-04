@@ -15,41 +15,19 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.Easing;
-
 /**
- * Interface to define the base animation properties defaults.
+ * Interface to define animation container defaults.<br>
+ * The animation container defaults is used as internal instance to manage animations options on more configuration items.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultBaseAnimation {
+public interface IsDefaultAnimationContainer extends IsDefaultAnimationTransition{
 
 	/**
-	 * Returns the animation easing.
+	 * Returns the animation transition element.
 	 * 
-	 * @return animation easing.
+	 * @return the animation transition
 	 */
-	Easing getEasing();
-
-	/**
-	 * Returns the number of milliseconds an animation takes.
-	 * 
-	 * @return the number of milliseconds an animation takes.
-	 */
-	int getDuration();
-
-	/**
-	 * Returns the delay before starting the animations.
-	 * 
-	 * @return the delay before starting the animations
-	 */
-	int getDelay();
-
-	/**
-	 * If set to <code>true</code>, loops the animations endlessly.
-	 * 
-	 * @return <code>true</code> if loops the animations endlessly.
-	 */
-	boolean isLoop();
+	IsDefaultTransitions getTransitions();
 
 }

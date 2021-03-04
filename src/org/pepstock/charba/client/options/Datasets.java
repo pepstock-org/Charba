@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Helpers;
-import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.data.DatasetAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
 /**
@@ -28,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets, HasBarDatasetOptions, HasAnimation {
+public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets, HasBarDatasetOptions, HasAnimationOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -80,17 +77,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 		// creates the properties handlers
 		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
-	}
-
-	/**
-	 * Returns the animation element.
-	 * 
-	 * @return the animation
-	 */
-	@Override
-	public Animation getAnimation() {
-		return animationContainer.getAnimation();
+		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -101,18 +88,6 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	@Override
 	public final AnimationContainer getAnimationContainer() {
 		return animationContainer;
-	}
-
-	/**
-	 * Creates an animations options to use into chart dataset animation callback.
-	 * 
-	 * @return an animations options to use into chart dataset animation callback
-	 * @see TooltipsAnimationCallback
-	 */
-	public final DatasetAnimationOptions createAnimationOptions() {
-		// clones the current animation options and
-		// creates and returns a configuration animation
-		return new DatasetAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 
 	/*

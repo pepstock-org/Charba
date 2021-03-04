@@ -20,8 +20,6 @@ import java.util.List;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
-import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
  * Represents the collection to set to configure animation.
@@ -92,7 +90,7 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationCollectionKey collection) {
-		return Key.isValid(collection) && Key.isValid(collection.type()) && AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationModeKey.values(), DefaultAnimationPropertyKey.values());
+		return Key.isValid(collection) && Key.isValid(collection.type());
 	}
 
 	/**
@@ -103,11 +101,9 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 */
 	static void checkIfValid(IsAnimationCollectionKey collection) {
 		if (!isValid(collection)) {
-			// sets checking value
-			boolean hasWrongName = collection != null && !AnimationElementChecker.get().isValid(collection.value(), DefaultAnimationModeKey.values(), DefaultAnimationPropertyKey.values());
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation collection name, '" + collection.value() + "' because is reserved" : "Animation collection is null or not consistent";
+			String exceptionMessage = collection != null ? "Invalid animation collection name, '" + collection.value() + "' because is reserved" : "Animation collection is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}

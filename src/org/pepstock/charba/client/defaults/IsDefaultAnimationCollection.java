@@ -17,14 +17,64 @@ package org.pepstock.charba.client.defaults;
 
 import java.util.List;
 
+import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
- * Interface to define animation for collection element defaults.
+ * Interface to define animation for element properties defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationCollection extends IsDefaultAnimationProperty {
+public interface IsDefaultAnimationCollection extends IsDefaultBaseAnimation {
+
+	/**
+	 * Returns the type of <code>from</code> property and determines the interpolator used.
+	 * 
+	 * @return the type of <code>from</code> property and determines the interpolator used.
+	 */
+	AnimationType getType();
+
+	/**
+	 * Returns the start value for the animation as number.
+	 * 
+	 * @return the start value for the animation as number.
+	 */
+	double getFrom();
+
+	/**
+	 * Returns the start value for the animation as boolean.
+	 * 
+	 * @return the start value for the animation as boolean.
+	 */
+	boolean getFromAsBoolean();
+
+	/**
+	 * Returns the start value for the animation as color string.
+	 * 
+	 * @return the start value for the animation as color string.
+	 */
+	String getFromAsString();
+
+	/**
+	 * Returns the end value for the animation as number.
+	 * 
+	 * @return the end value for the animation as number.
+	 */
+	double getTo();
+
+	/**
+	 * Returns the end value for the animation as boolean.
+	 * 
+	 * @return the end value for the animation as boolean.
+	 */
+	boolean getToAsBoolean();
+
+	/**
+	 * Returns the end value for the animation as color string.
+	 * 
+	 * @return the end value for the animation as color string.
+	 */
+	String getToAsString();
 
 	/**
 	 * Returns the properties defined into the animation collection.

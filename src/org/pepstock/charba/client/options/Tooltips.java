@@ -15,13 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Helpers;
-import org.pepstock.charba.client.callbacks.TooltipsAnimationCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.TooltipsAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
@@ -35,20 +32,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasAnimation, HasBox {
-
-	// Callbacks sub element
-	private final TooltipsCallbacks callbacks;
-	// Text direction sub element
-	private final TextDirectionHandler textDirectionHandler;
-	// instance of font for title
-	private final Font titleFont;
-	// instance of font for body
-	private final Font bodyFont;
-	// instance of font for footer
-	private final Font footerFont;
-	// instance of box handler
-	private final BoxHandler boxHandler;
+public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasBox, HasAnimationOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -109,6 +93,18 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 
 	}
 
+	// Callbacks sub element
+	private final TooltipsCallbacks callbacks;
+	// Text direction sub element
+	private final TextDirectionHandler textDirectionHandler;
+	// instance of font for title
+	private final Font titleFont;
+	// instance of font for body
+	private final Font bodyFont;
+	// instance of font for footer
+	private final Font footerFont;
+	// instance of box handler
+	private final BoxHandler boxHandler;
 	// animation container
 	private final AnimationContainer animationContainer;
 
@@ -130,10 +126,10 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		this.footerFont = new Font(this, Property.FOOTER_FONT, getDefaultValues().getFooterFont(), getValue(Property.FOOTER_FONT));
 		// creates text direction handler
 		this.textDirectionHandler = new TextDirectionHandler(this, getDefaultValues(), getNativeObject());
-		// sets animation container
-		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
 		// creates the box handler
 		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
+		// sets animation container
+		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -146,38 +142,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		return boxHandler;
 	}
 
-	/**
-	 * Creates an animations options to use into chart tooltips animation callback.
-	 * 
-	 * @return an animations options to use into chart tooltips animation callback
-	 * @see TooltipsAnimationCallback
-	 */
-	public final TooltipsAnimationOptions createAnimationOptions() {
-		// clones the current animation options and
-		// creates and returns a configuration animation
-		return new TooltipsAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
-	}
-
-	/**
-	 * Returns the animation element.
-	 * 
-	 * @return the animation
-	 */
-	@Override
-	public Animation getAnimation() {
-		return animationContainer.getAnimation();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasAnimation#getAnimationContainer()
-	 */
-	@Override
-	public final AnimationContainer getAnimationContainer() {
-		return animationContainer;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -186,6 +150,16 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	@Override
 	public TextDirectionHandler getTextDirectionHandler() {
 		return textDirectionHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasAnimationOptions#getAnimationContainer()
+	 */
+	@Override
+	public AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**

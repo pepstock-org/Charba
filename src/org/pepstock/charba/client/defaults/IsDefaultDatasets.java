@@ -20,14 +20,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultDatasets extends IsDefaultBarDatasets {
-
-	/**
-	 * Returns the animation defaults.
-	 * 
-	 * @return the animation defaults.
-	 */
-	IsDefaultAnimation getAnimation();
+public interface IsDefaultDatasets extends IsDefaultBarDatasets, IsDefaultAnimationContainer {
 
 	/**
 	 * Returns if the line is not drawn for this dataset.

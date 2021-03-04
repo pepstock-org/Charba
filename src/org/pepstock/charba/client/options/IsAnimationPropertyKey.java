@@ -17,12 +17,10 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 
 /**
- * Represents the property id to set to configure animation.
+ * Represents the property id to set to the configure animation collection items.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -54,7 +52,7 @@ public interface IsAnimationPropertyKey extends IsTypedAnimationKey {
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
 	static boolean isValid(IsAnimationPropertyKey property) {
-		return Key.isValid(property) && Key.isValid(property.type()) && AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationModeKey.values());
+		return Key.isValid(property) && Key.isValid(property.type());
 	}
 
 	/**
@@ -65,11 +63,9 @@ public interface IsAnimationPropertyKey extends IsTypedAnimationKey {
 	 */
 	static void checkIfValid(IsAnimationPropertyKey property) {
 		if (!isValid(property)) {
-			// sets checking value
-			boolean hasWrongName = property != null && !AnimationElementChecker.get().isValid(property.value(), DefaultAnimationCollectionKey.values(), DefaultAnimationModeKey.values());
 			// gets the exception message
 			// additional check to throw the right exception message
-			String exceptionMessage = hasWrongName ? "Invalid animation property name, '" + property.value() + "' because is reserved" : "Animation property is null or not consistent";
+			String exceptionMessage = property != null ? "Invalid animation property name, '" + property.value() + "' because is reserved" : "Animation property is null or not consistent";
 			// throws exception
 			throw new IllegalArgumentException(exceptionMessage);
 		}

@@ -28,8 +28,6 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 
 	private static final int DEFAULT_DURATION = 1000;
 
-	private static final boolean DEFAULT_DEBUG = false;
-
 	private static final int DEFAULT_DELAY = UndefinedValues.INTEGER;
 
 	private static final boolean DEFAULT_LOOP = false;
@@ -60,16 +58,6 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	@Override
 	public int getDuration() {
 		return DEFAULT_DURATION;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#isDebug()
-	 */
-	@Override
-	public boolean isDebug() {
-		return DEFAULT_DEBUG;
 	}
 
 	/*

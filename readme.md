@@ -321,17 +321,13 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `dataPoint` property to `TooltipItem` class.
    * enable the feature to manage floating bars on `time` or `timeseries` axes and bar charts adding to `DataPoint` class the possibility to add a `FloatingData` object as `Y` value.
    * implement new animation options and configuration for new engine:
-     * add new animation entities (property, collection of properties, mode) 
+     * add new animation entities (collection of properties, transitions) and new namespaces where the options must be stored. 
      * add `delay` property to animation options.
-     * add `debug` property to animation options.
      * add `loop` property to animation options.
      * add `animation` options and configuration to datasets.
      * add `animation` options and configuration to tooltips.
      * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and datasets.
-   * add `update(IsAnimationModeKey)` and `reconfigure(IsAnimationModeKey)` methods to `IsChart` interface in order to update the chart by an animation mode.
-   * add `ConfigurationAnimationCallback` interface in order to create the animation configuration at runtime at chart configuration.
-   * add `TooltipsAnimationCallback` interface in order to create the animation configuration at runtime at tooltips configuration.
-   * add `DatasetAnimationCallback` interface in order to create the animation configuration at runtime at dataset configuration.
+   * add `update(IsTransitionKey)` and `reconfigure(IsTransitionKey)` methods to `IsChart` interface in order to update the chart by an animation update mode.
    * change `borderSkipped` property in `BarDataset` class in order to manage it as indexable options.
    * add `offset` and `hoverOffset` properties to `PieDataset` and `DoughnutDataset` classes.
    * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.
@@ -447,7 +443,6 @@ Here you can find the list of enhancements and updates available on `master` bra
  * create `ItemSortCallback` interface in order to be extended by legend and tooltip callback interfaces.
  * remove static cache for canvas patterns and gradients creation, going to a cache for each canvas object factory in order that every factory must manage own objects.
  * add `groups` method to `RegExpResult` in order to get the object to refer to certain token by string that a regular expression matches.
- * add `cloneTo` method to `NativeObject` in order to clone the object using the `Object.assign` native method.
  * add `equals` and `hashCode` methods to standard keys implementation in `options` package.
  * add the following properties to `RegExp` class;
    * `lastIndex` (static)

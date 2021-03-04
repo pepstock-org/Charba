@@ -17,8 +17,6 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Helpers;
-import org.pepstock.charba.client.callbacks.ConfigurationAnimationCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -26,7 +24,6 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.ConfigurationAnimationOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.DefaultPluginId;
@@ -41,7 +38,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimation {
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimationOptions {
 
 	/**
 	 * Name of properties of native object.<br>
@@ -201,7 +198,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// sets span gap handler
 		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), getNativeObject());
+		this.animationContainer = new AnimationContainer(this, getDefaultValues(), getNativeObject());
 		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
 		// set own default options into defaults.plugin and not longer to the default node.
 		// then it reads the default plugins and copies (reference of object)
@@ -241,18 +238,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final String getScope() {
 		return scope;
-	}
-
-	/**
-	 * Creates an animations options to use into chart configuration animation callback.
-	 * 
-	 * @return an animations options to use into chart configuration animation callback
-	 * @see ConfigurationAnimationCallback
-	 */
-	public final ConfigurationAnimationOptions createAnimationOptions() {
-		// clones the current animation options and
-		// creates and returns a configuration animation
-		return new ConfigurationAnimationOptions(getAnimation(), new OptionsEnvelop<>(Helpers.get().clone(getAnimation().nativeObject())));
 	}
 
 	/**

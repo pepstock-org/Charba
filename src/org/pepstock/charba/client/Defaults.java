@@ -707,7 +707,9 @@ public final class Defaults {
 			super(ID);
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
 		 */
 		@Override
@@ -715,7 +717,7 @@ public final class Defaults {
 			// checks if chart is consistent and has got cartesian axes
 			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
 				// casts to scaled options
-				ScalesOptions options = (ScalesOptions)chart.getOptions();
+				ScalesOptions options = (ScalesOptions) chart.getOptions();
 				// gets locale from chart
 				CLocale locale = chart.getOptions().getLocale();
 				// checks if locale is consistent
@@ -738,7 +740,7 @@ public final class Defaults {
 				// checks if is time or time series
 				if (axis instanceof CartesianTimeAxis) {
 					// casts to time axis
-					CartesianTimeAxis timeAxis = (CartesianTimeAxis)axis;
+					CartesianTimeAxis timeAxis = (CartesianTimeAxis) axis;
 					// gets the locale from date adapter options
 					CLocale dateAdapterOptionsLocale = timeAxis.getAdapters().getDate().getLocale();
 					// if the locale is not set
@@ -764,10 +766,10 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+		 * @see org.pepstock.charba.client.Plugin#onAfterRender(org.pepstock.charba.client.IsChart)
 		 */
 		@Override
-		public void onEndDrawing(IsChart chart) {
+		public void onAfterRender(IsChart chart) {
 			// gets native chart
 			Chart nativeChart = Charts.getNative(chart);
 			// checks if chart is consistent

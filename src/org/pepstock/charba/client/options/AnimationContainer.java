@@ -21,25 +21,22 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.DataEnvelop;
-import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationContainer;
 
 /**
- * Manages the ANIMATION property of options in order to use the same logic among all options/configuration and datasets.
+ * Manages the ANIMATION, ANIMATIONS and TRANSITIONS properties of options in order to use the same logic among all options/configuration and datasets.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationContainer extends AbstractNode {
-
-	// animation instance
-	private final Animation animation;
+public final class AnimationContainer extends AnimationTransition {
 
 	/**
 	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	private enum Property implements Key
 	{
-		ANIMATION("animation");
+		TRANSITIONS("transitions");
 
 		// name value of property
 		private final String value;
@@ -65,39 +62,51 @@ public final class AnimationContainer extends AbstractNode {
 
 	}
 
+	// default transitions values
+	private final Transitions transitions;
+
 	/**
-	 * Creates an animation container with the envelop of the native object where ANIMATION property must be managed.
+	 * Creates an animation container with the envelop of the native object where animations properties must be managed.
 	 * 
 	 * @param defaultValues default provider
 	 * @param envelop envelop with a native object to map java script properties
 	 */
-	public AnimationContainer(IsDefaultAnimation defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public AnimationContainer(IsDefaultAnimationContainer defaultValues, DataEnvelop<NativeObject> envelop) {
+		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates an animation container with the native object where ANIMATION property must be managed.
+	 * Creates an animation container with the native object where animations properties must be managed.
 	 * 
+	 * @param parent parent node to use to add this element where changed
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationContainer(IsDefaultAnimation defaultValues, NativeObject nativeObject) {
-		super(nativeObject);
-		// checks default value instance
-		if (defaultValues == null) {
-			throw new IllegalArgumentException("Default value argument is null");
-		}
-		// gets all sub elements
-		this.animation = new Animation(this, Property.ANIMATION, defaultValues, getValue(Property.ANIMATION));
+	AnimationContainer(AbstractNode parent, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject) {
+		this(parent, null, defaultValues, nativeObject);
 	}
 
 	/**
-	 * Returns the animation element.
+	 * Creates an animation container with the native object where animations properties must be managed.
 	 * 
-	 * @return the animation
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	public Animation getAnimation() {
-		return animation;
+	AnimationContainer(AbstractNode parent, Key childKey, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject) {
+		super(parent, childKey, defaultValues, nativeObject);
+		// gets all sub elements
+		this.transitions = new Transitions(this, Property.TRANSITIONS, defaultValues.getTransitions(), getValue(Property.TRANSITIONS));
+	}
+
+	/**
+	 * Returns the animation transition element.
+	 * 
+	 * @return the animation transition
+	 */
+	Transitions getTransitions() {
+		return transitions;
 	}
 
 	/**
@@ -108,10 +117,10 @@ public final class AnimationContainer extends AbstractNode {
 	void setAnimationEnabled(boolean enabled) {
 		// checks if disabling
 		if (!enabled) {
-			setValueAndAddToParent(Property.ANIMATION, false);
+			setValueAndAddToParent(AnimationTransition.Property.ANIMATION, false);
 		} else {
 			// if here is enabling
-			setValueAndAddToParent(Property.ANIMATION, animation.nativeObject());
+			setValueAndAddToParent(AnimationTransition.Property.ANIMATION, getAnimation().nativeObject());
 		}
 	}
 
@@ -121,7 +130,7 @@ public final class AnimationContainer extends AbstractNode {
 	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
 	 */
 	boolean isAnimationEnabled() {
-		return !isType(Property.ANIMATION, ObjectType.BOOLEAN);
+		return !isType(AnimationTransition.Property.ANIMATION, ObjectType.BOOLEAN);
 	}
 
 }

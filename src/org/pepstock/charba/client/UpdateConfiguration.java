@@ -17,14 +17,14 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.defaults.globals.DefaultAnimation;
+import org.pepstock.charba.client.defaults.globals.DefaultTransitions;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.options.AnimationCollection;
-import org.pepstock.charba.client.options.AnimationMode;
-import org.pepstock.charba.client.options.AnimationProperty;
+import org.pepstock.charba.client.options.AnimationTransition;
+import org.pepstock.charba.client.options.IsAnimation;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.options.IsAnimations;
+import org.pepstock.charba.client.options.IsTransitionKey;
 
 /**
  * Object can be provided with additional configuration for the update process.<br>
@@ -32,16 +32,16 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class UpdateConfiguration extends NativeObjectContainer {
+public final class UpdateConfiguration extends NativeObjectContainer implements IsAnimation, IsAnimations {
 
 	// default key, usually used for update
-	private static final String UPDATE_MODE_KEY = "_charbaupdate";
+	private static final String UPDATE_MODE_KEY = "charbaupdate";
 	/**
 	 * Default animation mode key, used for chart updating.
 	 */
-	public static final IsAnimationModeKey UPDATE = IsAnimationModeKey.create(UPDATE_MODE_KEY);
+	public static final IsTransitionKey UPDATE = IsTransitionKey.create(UPDATE_MODE_KEY);
 	// delegated animation mode
-	private final AnimationMode mode;
+	private final AnimationTransition transition;
 
 	/**
 	 * Creates an empty animation mode to use for chart updating.
@@ -49,7 +49,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	public UpdateConfiguration() {
 		super();
 		// creates a mode to wrap
-		this.mode = new AnimationMode(UPDATE, DefaultAnimation.DEFAULT_ANIMATION_MODE, new ChartEnvelop<>(getNativeObject()));
+		this.transition = new AnimationTransition(UPDATE, DefaultTransitions.DEFAULT_ANIMATION_TRANSITION, new ChartEnvelop<>(getNativeObject()));
 	}
 
 	/**
@@ -57,8 +57,8 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return the mode which is wrapped
 	 */
-	AnimationMode getMode() {
-		return mode;
+	AnimationTransition getTransition() {
+		return transition;
 	}
 
 	/**
@@ -66,8 +66,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @param easing animation easing.
 	 */
+	@Override
 	public void setEasing(Easing easing) {
-		mode.setEasing(easing);
+		transition.getAnimation().setEasing(easing);
 	}
 
 	/**
@@ -75,8 +76,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return animation easing.
 	 */
+	@Override
 	public Easing getEasing() {
-		return mode.getEasing();
+		return transition.getAnimation().getEasing();
 	}
 
 	/**
@@ -84,8 +86,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
+	@Override
 	public void setDuration(int milliseconds) {
-		mode.setDuration(milliseconds);
+		transition.getAnimation().setDuration(milliseconds);
 	}
 
 	/**
@@ -93,26 +96,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return the number of milliseconds an animation takes.
 	 */
+	@Override
 	public int getDuration() {
-		return mode.getDuration();
-	}
-
-	/**
-	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	public void setDebug(boolean debug) {
-		mode.setDebug(debug);
-	}
-
-	/**
-	 * Returns <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	public boolean isDebug() {
-		return mode.isDebug();
+		return transition.getAnimation().getDuration();
 	}
 
 	/**
@@ -120,8 +106,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @param delay the delay before starting the animations
 	 */
+	@Override
 	public void setDelay(int delay) {
-		mode.setDelay(delay);
+		transition.getAnimation().setDelay(delay);
 	}
 
 	/**
@@ -129,8 +116,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return the delay before starting the animations
 	 */
+	@Override
 	public int getDelay() {
-		return mode.getDelay();
+		return transition.getAnimation().getDelay();
 	}
 
 	/**
@@ -138,8 +126,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @param loop <code>true</code> if loops the animations endlessly.
 	 */
+	@Override
 	public void setLoop(boolean loop) {
-		mode.setLoop(loop);
+		transition.getAnimation().setLoop(loop);
 	}
 
 	/**
@@ -147,75 +136,49 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
+	@Override
 	public boolean isLoop() {
-		return mode.isLoop();
+		return transition.getAnimation().isLoop();
 	}
 
 	/**
-	 * Sets an animation property instance to animation options.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @param animationElement animation property instance to add
+	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
-	public void setProperty(AnimationProperty animationElement) {
-		mode.setProperty(animationElement);
+	@Override
+	public void setAnimateRotate(boolean animateRotate) {
+		transition.getAnimation().setAnimateRotate(animateRotate);
 	}
 
 	/**
-	 * Enables or disables an animation property instance into animation options.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @param property property instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation property
+	 * @return if <code>true</code>, the chart will animate in with a rotation animation.
 	 */
-	public void setPropertyEnabled(IsAnimationPropertyKey property, boolean enabled) {
-		mode.setPropertyEnabled(property, enabled);
+	@Override
+	public boolean isAnimateRotate() {
+		return transition.getAnimation().isAnimateRotate();
 	}
 
 	/**
-	 * Returns <code>true</code> if the animation property is enabled, otherwise <code>false</code>.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @param property property instance used to check into animation options
-	 * @return <code>true</code> if the animation property is enabled, otherwise <code>false</code>
+	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
-	public boolean isPropertyEnabled(IsAnimationPropertyKey property) {
-		return mode.isPropertyEnabled(property);
+	@Override
+	public void setAnimateScale(boolean animateScale) {
+		transition.getAnimation().setAnimateScale(animateScale);
 	}
 
 	/**
-	 * Returns <code>true</code> if an animation property instance is stored into the animation options.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @param property property instance used to check into animation options
-	 * @return <code>true</code> if an animation property instance is stored into the animation options
+	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
-	public boolean hasProperty(IsAnimationPropertyKey property) {
-		return mode.hasProperty(property);
-	}
-
-	/**
-	 * Returns an animation property instance if stored into the animation options.
-	 * 
-	 * @param property property instance used to get for animation options
-	 * @return an animation property instance or <code>null</code> if does not exists
-	 */
-	public AnimationProperty getProperty(IsAnimationPropertyKey property) {
-		return mode.getProperty(property);
-	}
-
-	/**
-	 * Removes an animation property previously added.
-	 * 
-	 * @param property property instance used to remove from animation options
-	 */
-	public void removeProperty(IsAnimationPropertyKey property) {
-		mode.removeProperty(property);
-	}
-
-	/**
-	 * Sets an animation collection instance to animation options.
-	 * 
-	 * @param animationElement animation collection instance to add
-	 */
-	public void setCollection(AnimationCollection animationElement) {
-		mode.setCollection(animationElement);
+	@Override
+	public boolean isAnimateScale() {
+		return transition.getAnimation().isAnimateScale();
 	}
 
 	/**
@@ -224,8 +187,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param collection collection instance used to check into animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
-	public void setCollectionEnabled(IsAnimationCollectionKey collection, boolean enabled) {
-		mode.setCollectionEnabled(collection, enabled);
+	@Override
+	public void setEnabled(IsAnimationCollectionKey collection, boolean enabled) {
+		transition.getAnimations().setEnabled(collection, enabled);
 	}
 
 	/**
@@ -234,8 +198,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param collection collection instance used to check into animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
-	public boolean isCollectionEnabled(IsAnimationCollectionKey collection) {
-		return mode.isCollectionEnabled(collection);
+	@Override
+	public boolean isEnabled(IsAnimationCollectionKey collection) {
+		return transition.getAnimations().isEnabled(collection);
 	}
 
 	/**
@@ -244,8 +209,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param collection collection instance used to check into animation options
 	 * @return <code>true</code> if an animation collection instance is stored into the animation options
 	 */
-	public boolean hasCollection(IsAnimationCollectionKey collection) {
-		return mode.hasCollection(collection);
+	@Override
+	public boolean has(IsAnimationCollectionKey collection) {
+		return transition.getAnimations().has(collection);
 	}
 
 	/**
@@ -254,8 +220,32 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
-	public AnimationCollection getCollection(IsAnimationCollectionKey collection) {
-		return mode.getCollection(collection);
+	@Override
+	public AnimationCollection get(IsAnimationCollectionKey collection) {
+		return transition.getAnimations().get(collection);
+	}
+	
+	/**
+	 * Sets an animation collection instance to store in the animation options.
+	 * 
+	 * @param collection collection instance used to get for animation options
+	 * @param animationCollection an animation collection instance to set
+	 */
+	@Override
+	public void set(IsAnimationCollectionKey collection, AnimationCollection animationCollection) {
+		transition.getAnimations().set(collection, animationCollection);
+	}
+
+	/**
+	 * Creates an animation collection instance and stores into the animation options.
+	 * 
+	 * @param collection collection key used to create the animation collections
+	 * @return a collection animation options
+	 */
+	@Override
+	public AnimationCollection create(IsAnimationCollectionKey collection) {
+		// returns the animation options
+		return transition.getAnimations().create(collection);
 	}
 
 	/**
@@ -263,8 +253,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
-	public void removeCollection(IsAnimationCollectionKey collection) {
-		mode.removeCollection(collection);
+	@Override
+	public void remove(IsAnimationCollectionKey collection) {
+		transition.getAnimations().remove(collection);
 	}
 
 	/**

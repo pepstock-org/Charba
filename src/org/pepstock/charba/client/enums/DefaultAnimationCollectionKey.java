@@ -37,7 +37,11 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	/**
 	 * Defines the default animation collection for numbers.
 	 */
-	NUMBERS("numbers", DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, DefaultAnimationPropertyKey.BORDER_WIDTH, DefaultAnimationPropertyKey.RADIUS, DefaultAnimationPropertyKey.TENSION);
+	NUMBERS("numbers", DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, DefaultAnimationPropertyKey.BORDER_WIDTH, DefaultAnimationPropertyKey.RADIUS, DefaultAnimationPropertyKey.TENSION),
+	/**
+	 * Defines the default animation collection for visible property.
+	 */
+	VISIBLE("visible", DefaultAnimationPropertyKey.VISIBLE);
 
 	// name value of property
 	private final String value;

@@ -24,14 +24,7 @@ import org.pepstock.charba.client.enums.TextAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler {
-
-	/**
-	 * Returns the animation defaults.
-	 * 
-	 * @return the animation defaults.
-	 */
-	IsDefaultAnimation getAnimation();
+public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler, IsDefaultAnimationContainer {
 
 	/**
 	 * Returns if tooltips are enabled.

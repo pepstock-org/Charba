@@ -17,14 +17,14 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 
 /**
- * Cores animation modes provided out of the box by CHART.JS.
+ * Cores animation update modes (transition) provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationModeKey implements IsAnimationModeKey
+public enum DefaultTransitionKey implements IsTransitionKey
 {
 	/**
 	 * Uses to configure the animation when an element is hovering.
@@ -59,7 +59,7 @@ public enum DefaultAnimationModeKey implements IsAnimationModeKey
 	 * 
 	 * @param value value of property name
 	 */
-	private DefaultAnimationModeKey(String value) {
+	private DefaultTransitionKey(String value) {
 		this.value = value;
 	}
 
@@ -79,7 +79,7 @@ public enum DefaultAnimationModeKey implements IsAnimationModeKey
 	 * @param mode the animation mode to check
 	 * @return <code>true</code> if the argument is equals to a default animation mode
 	 */
-	public static boolean is(IsAnimationModeKey mode) {
+	public static boolean is(IsTransitionKey mode) {
 		// checks if mode is valid
 		if (Key.isValid(mode)) {
 			// invokes the checking

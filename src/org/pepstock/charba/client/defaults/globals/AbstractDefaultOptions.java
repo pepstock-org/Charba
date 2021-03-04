@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -26,7 +27,9 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartAnimation;
+import org.pepstock.charba.client.defaults.chart.DefaultChartAnimations;
 import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
 import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
 import org.pepstock.charba.client.defaults.chart.DefaultChartFont;
@@ -37,6 +40,7 @@ import org.pepstock.charba.client.defaults.chart.DefaultChartLegend;
 import org.pepstock.charba.client.defaults.chart.DefaultChartPlugins;
 import org.pepstock.charba.client.defaults.chart.DefaultChartTitle;
 import org.pepstock.charba.client.defaults.chart.DefaultChartTooltips;
+import org.pepstock.charba.client.defaults.chart.DefaultChartTransitions;
 
 /**
  * Abstract CHART.JS default values for OPTIONS element with all inner elements.
@@ -46,6 +50,10 @@ import org.pepstock.charba.client.defaults.chart.DefaultChartTooltips;
 public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultAnimation animation;
+
+	private final IsDefaultAnimations animations;
+
+	private final IsDefaultTransitions transitions;
 
 	private final IsDefaultInteraction hover;
 
@@ -74,6 +82,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		// stores all inner elements
 		// using defaults
 		this.animation = new DefaultAnimation();
+		this.animations = new DefaultAnimations();
+		this.transitions = new DefaultTransitions();
 		this.hover = new DefaultHover();
 		this.interaction = new DefaultInteraction();
 		this.elements = new DefaultElements();
@@ -98,6 +108,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		}
 		// stores all inner elements
 		this.animation = new DefaultChartAnimation(options.getAnimation());
+		this.animations = new DefaultChartAnimations(options.getAnimations());
+		this.transitions = new DefaultChartTransitions(options.getTransitions());
 		this.hover = new DefaultChartHover(options.getHover());
 		this.interaction = new DefaultChartInteraction(options.getInteraction());
 		this.elements = new DefaultChartElements(options.getElements());
@@ -123,11 +135,31 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getAnimation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getAnimation()
 	 */
 	@Override
 	public final IsDefaultAnimation getAnimation() {
 		return animation;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getTransitions()
+	 */
+	@Override
+	public IsDefaultTransitions getTransitions() {
+		return transitions;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
+	 */
+	@Override
+	public IsDefaultAnimations getAnimations() {
+		return animations;
 	}
 
 	/*

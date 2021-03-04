@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 
 import jsinterop.annotations.JsFunction;
 
@@ -391,7 +391,7 @@ final class WrapperController extends NativeObjectContainer {
 				delegation.update(context, chart, null);
 			} else {
 				// otherwise creates a mode by the string
-				delegation.update(context, chart, IsAnimationModeKey.create(mode));
+				delegation.update(context, chart, IsTransitionKey.create(mode));
 			}
 		}
 	}

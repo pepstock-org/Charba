@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -44,11 +46,31 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getAnimation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getTransitions()
+	 */
+	@Override
+	public IsDefaultTransitions getTransitions() {
+		return tooltips.getTransitions();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimation()
 	 */
 	@Override
 	public IsDefaultAnimation getAnimation() {
 		return tooltips.getAnimation();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
+	 */
+	@Override
+	public IsDefaultAnimations getAnimations() {
+		return tooltips.getAnimations();
 	}
 
 	/*

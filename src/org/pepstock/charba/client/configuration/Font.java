@@ -24,24 +24,15 @@ import org.pepstock.charba.client.options.IsFont;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font implements IsFont {
-
-	// font provider instance
-	private final IsFontProvider provider;
+public final class Font extends AbstractDynamicConfiguration<IsFont> implements IsFont {
 
 	/**
 	 * Builds the object by a font provider used to get the font element for storing properties.
 	 * 
 	 * @param provider font provider used to get the font element for storing properties.
 	 */
-	Font(IsFontProvider provider) {
-		// checks if consistent
-		if (provider == null) {
-			// exception!
-			throw new IllegalArgumentException("Font provider argument is null");
-		}
-		// stores provider
-		this.provider = provider;
+	Font(IsProvider<IsFont> provider) {
+		super(provider);
 	}
 
 	/**
@@ -164,35 +155,4 @@ public final class Font implements IsFont {
 		return checkAndGet().getLineHeightAsString();
 	}
 
-	/**
-	 * Gets the {@link IsFont} instance from provider checking if is consistent.
-	 * 
-	 * @return the {@link IsFont} instance from provider
-	 */
-	private IsFont checkAndGet() {
-		IsFont font = provider.getElement();
-		// checks if consistent
-		if (font == null) {
-			// exception!
-			throw new IllegalArgumentException("Font element by provider is null");
-		}
-		return font;
-	}
-
-	/**
-	 * Interface to implement to provide the {@link IsFont} options to manage font properties.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	interface IsFontProvider {
-
-		/**
-		 * Provides the {@link IsFont} options to manage font properties.
-		 * 
-		 * @return {@link IsFont} options to manage font properties.
-		 */
-		IsFont getElement();
-
-	}
 }

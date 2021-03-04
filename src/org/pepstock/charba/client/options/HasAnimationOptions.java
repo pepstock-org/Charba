@@ -15,14 +15,16 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationContainer;
+
 /**
- * Defines a configuration element which is managing the ANIMATION options.<br>
- * It has being used into options and datasets instances where ANIMATION is required.
+ * Defines a configuration element which is managing the animation options items, ANIMATION, ANIMATIONS and TRANSITIONS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasAnimation {
+public interface HasAnimationOptions extends IsDefaultAnimationContainer{
 
 	/**
 	 * Returns an animation container instance to use into default methods of this interface.
@@ -30,6 +32,51 @@ public interface HasAnimation {
 	 * @return an animation container instance
 	 */
 	AnimationContainer getAnimationContainer();
+	
+	/**
+	 * Returns the animation element.
+	 * 
+	 * @return the animation
+	 */
+	@Override
+	default Animation getAnimation() {
+		// checks if container is consistent
+		if (getAnimationContainer() != null) {
+			return getAnimationContainer().getAnimation();
+		}
+		// if here, the container is not consistent
+		return Defaults.get().getGlobal().getAnimation();
+	}
+	
+	/**
+	 * Returns the animations collection element.
+	 * 
+	 * @return the animations collection
+	 */
+	@Override
+	default Animations getAnimations() {
+		// checks if container is consistent
+		if (getAnimationContainer() != null) {
+			return getAnimationContainer().getAnimations();
+		}
+		// if here, the container is not consistent
+		return Defaults.get().getGlobal().getAnimations();
+	}
+	
+	/**
+	 * Returns the animation transition element.
+	 * 
+	 * @return the animation transition
+	 */
+	@Override
+	default Transitions getTransitions() {
+		// checks if container is consistent
+		if (getAnimationContainer() != null) {
+			return getAnimationContainer().getTransitions();
+		}
+		// if here, the container is not consistent
+		return Defaults.get().getGlobal().getTransitions();
+	}
 
 	/**
 	 * Enables or disables the animation.

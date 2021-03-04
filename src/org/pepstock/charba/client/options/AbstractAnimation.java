@@ -22,7 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
- * Is the base animation options with common properties for every animation configuration.
+ * Is the base animation options with common options for animation configuration, for ANIMATION and ANIMATIONS name spaces.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of key
@@ -34,11 +34,10 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		DURATION("duration"),
 		EASING("easing"),
-		DEBUG("debug"),
 		DELAY("delay"),
 		LOOP("loop");
 
@@ -66,8 +65,6 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 
 	}
 
-	// key value
-	private final T key;
 	// default values
 	private final D defaultValues;
 
@@ -81,20 +78,9 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	AbstractAnimation(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
-		// stores the key locally to maintain the type
-		this.key = Key.checkAndGetIfValid(childKey);
 		// checks if default value is consistent
 		// stores defaults values
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
-	}
-
-	/**
-	 * Returns the key used for animation element.
-	 * 
-	 * @return the key used for animation element
-	 */
-	public final T getKey() {
-		return key;
 	}
 
 	/**
@@ -142,25 +128,6 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	@Override
 	public final int getDuration() {
 		return getValue(Property.DURATION, defaultValues.getDuration());
-	}
-
-	/**
-	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	public final void setDebug(boolean debug) {
-		setValueAndAddToParent(Property.DEBUG, debug);
-	}
-
-	/**
-	 * Returns <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @return <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 */
-	@Override
-	public final boolean isDebug() {
-		return getValue(Property.DEBUG, defaultValues.isDebug());
 	}
 
 	/**

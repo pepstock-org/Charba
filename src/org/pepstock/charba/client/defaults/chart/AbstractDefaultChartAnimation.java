@@ -74,16 +74,6 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#isDebug()
-	 */
-	@Override
-	public boolean isDebug() {
-		return animation.isDebug();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getDelay()
 	 */
 	@Override

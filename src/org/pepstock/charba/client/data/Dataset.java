@@ -29,7 +29,6 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.DatasetAnimationCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -54,9 +53,8 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.Animation;
 import org.pepstock.charba.client.options.AnimationContainer;
-import org.pepstock.charba.client.options.HasAnimation;
+import org.pepstock.charba.client.options.HasAnimationOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
@@ -68,7 +66,7 @@ import org.pepstock.charba.client.utils.JSON;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimation {
+public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimationOptions {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -85,8 +83,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the animation callback function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> animationCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// hover background color callback instance
 	private BackgroundColorCallback hoverBackgroundColorCallback = null;
@@ -100,8 +96,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private BorderColorCallback borderColorCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
-	// animation callback
-	private DatasetAnimationCallback animationCallback = null;
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -270,7 +264,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		super(null);
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
 		// sets animation container
-		this.animationContainer = new AnimationContainer(getDefaultValues().getAnimation(), new DataEnvelop<>(getNativeObject()));
+		this.animationContainer = new AnimationContainer(getDefaultValues(), new DataEnvelop<>(getNativeObject()));
 		// stores the type
 		this.type = type;
 		// stores the type
@@ -311,33 +305,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
 		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
-		// invokes callback
-		this.animationCallbackProxy.setCallback((contextFunction, context) -> onAnimationCallback(new ScriptableContext(new DataEnvelop<>(context))));
-	}
-
-	/**
-	 * Returns the animation element.
-	 * 
-	 * @return the animation
-	 */
-	public Animation getAnimation() {
-		return animationContainer.getAnimation();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasAnimation#setAnimationEnabled(boolean)
-	 */
-	@Override
-	public void setAnimationEnabled(boolean enabled) {
-		HasAnimation.super.setAnimationEnabled(enabled);
-		// here must check if the callback was set before
-		// because the previous method put the animation object if enabling
-		if (enabled && animationCallback != null) {
-			// sets again the callback
-			setAnimation(animationCallback);
-		}
 	}
 
 	/*
@@ -348,33 +315,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	@Override
 	public final AnimationContainer getAnimationContainer() {
 		return animationContainer;
-	}
-
-	/**
-	 * Returns the animation callback, used to create the animation options at runtime.
-	 * 
-	 * @return the animation callback, used to create the animation options at runtime
-	 */
-	public DatasetAnimationCallback getAnimationCallback() {
-		return animationCallback;
-	}
-
-	/**
-	 * Sets the animation callback, used to create the animation options at runtime.
-	 * 
-	 * @param animationCallback the animation callback, used to create the animation options at runtime
-	 */
-	public void setAnimation(DatasetAnimationCallback animationCallback) {
-		// sets the callback
-		this.animationCallback = animationCallback;
-		// checks if callback is consistent
-		if (animationCallback != null) {
-			// sets the callback proxy function to java script object
-			setValue(InternalProperty.ANIMATION, animationCallbackProxy.getProxy());
-		} else {
-			// otherwise sets the animation object
-			setValue(InternalProperty.ANIMATION, getAnimation());
-		}
 	}
 
 	/**
@@ -1251,27 +1191,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// because where the dataset is not defined, the value is integer min value
 		sb.append(Math.max(index, 0));
 		return sb.toString();
-	}
-
-	/**
-	 * Returns a native object as animation options when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @return a native object as animation
-	 */
-	private NativeObject onAnimationCallback(ScriptableContext context) {
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, animationCallback);
-		// checks if the chart is correct
-		if (IsChart.isValid(chart) && animationCallback != null) {
-			DatasetAnimationOptions result = animationCallback.invoke(chart, context, new DatasetAnimationOptions(getAnimation()));
-			// checks if consistent
-			if (result != null) {
-				return result.nativeObject();
-			}
-		}
-		// if here, returns the default of global configuration
-		return Defaults.get().getGlobal().getDatasets().createAnimationOptions().nativeObject();
 	}
 
 	/**

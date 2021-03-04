@@ -22,8 +22,8 @@ import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
-import org.pepstock.charba.client.options.AnimationMode;
+import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.options.AnimationTransition;
 
 /**
  * This is an abstract meter chart, inherited by a meter and gauge charts.
@@ -113,25 +113,21 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationMode disabledActiveMode = new AnimationMode(DefaultAnimationModeKey.ACTIVE);
+		AnimationTransition disabledActiveMode = getOptions().getTransitions().create(DefaultTransitionKey.ACTIVE);
 		// disables the animation mode
-		disabledActiveMode.setDuration(0);
-		// disables animation active
-		getOptions().getAnimation().setMode(disabledActiveMode);
+		disabledActiveMode.getAnimation().setDuration(0);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationMode disabledResizeMode = new AnimationMode(DefaultAnimationModeKey.RESIZE);
+		AnimationTransition disabledResizeMode = getOptions().getTransitions().create(DefaultTransitionKey.RESIZE);
 		// disables the animation mode
-		disabledResizeMode.setDuration(0);
-		// disables animation resize
-		getOptions().getAnimation().setMode(disabledResizeMode);
+		disabledResizeMode.getAnimation().setDuration(0);
 		// scans all datasets
 		for (Dataset dataset : getData().getDatasets()) {
 			// disables animation mode active
-			dataset.getAnimation().setMode(disabledActiveMode);
+			dataset.getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
 			// disables animation mode resize
-			dataset.getAnimation().setMode(disabledResizeMode);
+			dataset.getTransitions().create(DefaultTransitionKey.RESIZE).getAnimation().setDuration(0);
 		}
 	}
 }

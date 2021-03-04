@@ -16,8 +16,6 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.options.AnimationCollection;
-import org.pepstock.charba.client.options.AnimationProperty;
 
 /**
  * Comfortable object to create {@link UpdateConfiguration} item.
@@ -68,17 +66,6 @@ public final class UpdateConfigurationBuilder {
 	}
 
 	/**
-	 * Sets <code>true</code> if running animation count plus FPS display in upper left corner of the chart.
-	 * 
-	 * @param debug <code>true</code> if running animation count plus FPS display in upper left corner of the chart
-	 * @return builder instance
-	 */
-	public UpdateConfigurationBuilder setDebug(boolean debug) {
-		configuration.setDebug(debug);
-		return this;
-	}
-
-	/**
 	 * Sets the delay before starting the animations.
 	 * 
 	 * @param delay the delay before starting the animations
@@ -99,26 +86,26 @@ public final class UpdateConfigurationBuilder {
 		configuration.setLoop(loop);
 		return this;
 	}
-
+	
 	/**
-	 * Sets an animation property instance to animation options.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @param animationElement animation property instance to add
+	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 * @return builder instance
 	 */
-	public UpdateConfigurationBuilder setProperty(AnimationProperty animationElement) {
-		configuration.setProperty(animationElement);
+	public UpdateConfigurationBuilder setAnimateRotate(boolean animateRotate) {
+		configuration.setAnimateRotate(animateRotate);
 		return this;
 	}
 
 	/**
-	 * Sets an animation collection instance to animation options.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @param animationElement animation collection instance to add
+	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * @return builder instance
 	 */
-	public UpdateConfigurationBuilder setCollection(AnimationCollection animationElement) {
-		configuration.setCollection(animationElement);
+	public UpdateConfigurationBuilder setAnimateScale(boolean animateScale) {
+		configuration.setAnimateScale(animateScale);
 		return this;
 	}
 

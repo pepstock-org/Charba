@@ -22,18 +22,12 @@ import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 
 /**
- * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
+ * Interface to define options defaults.<br>
+ * THIS IS THE <b>ROOT</b> OF ALL INTERFACE DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultOptions {
-
-	/**
-	 * Returns the animation defaults.
-	 * 
-	 * @return the animation defaults.
-	 */
-	IsDefaultAnimation getAnimation();
+public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 
 	/**
 	 * Returns the hover defaults.

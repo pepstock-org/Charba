@@ -13,24 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.chart;
-
-import org.pepstock.charba.client.defaults.IsDefaultAnimationProperty;
+package org.pepstock.charba.client.options;
 
 /**
- * CHART.JS default values for animation property.
+ * This is a standard implementation of an animation update mode (transition).
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public final class DefaultChartAnimationProperty extends AbstractDefaultChartAnimationProperty<IsDefaultAnimationProperty> {
+public final class StandardAnimationTransition extends AbstractStandardKey implements IsTransitionKey {
 
 	/**
-	 * Creates a default animation property.
+	 * Builds the object with the animation update mode (transition) value as string.
 	 * 
-	 * @param property a default animation property to wrap
+	 * @param value value of key as String
 	 */
-	DefaultChartAnimationProperty(IsDefaultAnimationProperty property) {
-		super(property);
+	StandardAnimationTransition(String value) {
+		super(value);
+		// checks if consistent
+		IsTransitionKey.checkIfValid(this);
 	}
 
 }

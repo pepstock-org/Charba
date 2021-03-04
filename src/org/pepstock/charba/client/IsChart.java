@@ -32,7 +32,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
 
@@ -374,7 +374,7 @@ public interface IsChart {
 	 * 
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
-	void update(IsAnimationModeKey mode);
+	void update(IsTransitionKey mode);
 
 	/**
 	 * Triggers an update of the chart.<br>

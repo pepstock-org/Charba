@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import java.util.List;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
+import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartAnimationCollection extends AbstractDefaultChartAnimationProperty<IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
+public final class DefaultChartAnimationCollection extends AbstractDefaultChartAnimation<IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
 
 	/**
 	 * Creates a default animation collection.
@@ -44,6 +45,77 @@ public final class DefaultChartAnimationCollection extends AbstractDefaultChartA
 	@Override
 	public List<IsAnimationPropertyKey> getProperties() {
 		return getDefaults().getProperties();
+	}
+	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getType()
+	 */
+	@Override
+	public AnimationType getType() {
+		return getDefaults().getType();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFrom()
+	 */
+	@Override
+	public double getFrom() {
+		return getDefaults().getFrom();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFromAsBoolean()
+	 */
+	@Override
+	public boolean getFromAsBoolean() {
+		return getDefaults().getFromAsBoolean();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFromAsString()
+	 */
+	@Override
+	public String getFromAsString() {
+		return getDefaults().getFromAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getTo()
+	 */
+	@Override
+	public double getTo() {
+		return getDefaults().getTo();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getToAsBoolean()
+	 */
+	@Override
+	public boolean getToAsBoolean() {
+		return getDefaults().getToAsBoolean();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getToAsString()
+	 */
+	@Override
+	public String getToAsString() {
+		return getDefaults().getToAsString();
 	}
 
 }

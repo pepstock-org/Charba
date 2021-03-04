@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
@@ -75,10 +75,10 @@ public class PluginUpdateArgument extends NativeObjectContainer {
 	 * 
 	 * @return the update mode.
 	 */
-	public final IsAnimationModeKey getMode() {
+	public final IsTransitionKey getMode() {
 		// gets string value
 		String mode = getValue(Property.MODE, UndefinedValues.STRING);
 		// returns the update mode is consistent
-		return mode != null ? IsAnimationModeKey.create(mode) : null;
+		return mode != null ? IsTransitionKey.create(mode) : null;
 	}
 }

@@ -42,7 +42,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Tooltips extends ConfigurationOptionsContainer {
+public class Tooltips extends ConfigurationOptionsContainer implements HasAnimation {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -133,6 +133,8 @@ public class Tooltips extends ConfigurationOptionsContainer {
 	private final Font bodyFont;
 	// footer font instance
 	private final Font footerFont;
+	// animation container instance
+	private final AnimationContainer animationContainer;
 
 	/**
 	 * Name of properties of native object.
@@ -176,6 +178,8 @@ public class Tooltips extends ConfigurationOptionsContainer {
 		super(options);
 		// sets callbacks sub element
 		callbacks = new TooltipsCallbacks(getOptions());
+		// creates animation configuration manager
+		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration().getTooltips());
 		// gets the fonts subelements
 		titleFont = new Font(() -> getConfiguration().getTooltips().getTitleFont());
 		bodyFont = new Font(() -> getConfiguration().getTooltips().getBodyFont());
@@ -210,6 +214,16 @@ public class Tooltips extends ConfigurationOptionsContainer {
 			// default is true
 			return true;
 		});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasAnimation#getAnimationContainer()
+	 */
+	@Override
+	public AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**

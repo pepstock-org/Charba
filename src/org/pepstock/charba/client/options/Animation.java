@@ -15,44 +15,25 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes. <br>
- * This is the <code>animation</code> options structure:<br>
- * <br>
- * 
- * <pre>
- * animation
- *   !
- *   +--- animation property
- *   !
- *   +--- animation collection
- *   !
- *   +--- animation mode
- *          !
- *          +--- animation property
- *          !
- *          +--- animation collection
- * </pre>
+ * It animates charts out of the box.<br>
+ * A number of options are provided to configure how the animation looks and how long it takes.<br>
+ * This configuration item is configuring the common animation properties, ANIMATION name space.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> implements IsDefaultAnimation {
+public final class Animation extends AbstractAnimation<Key, IsDefaultAnimation> implements IsAnimation {
 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		ANIMATE_ROTATE("animateRotate"),
 		ANIMATE_SCALE("animateScale");
@@ -82,9 +63,6 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 
 	// default values
 	private final IsDefaultAnimation defaultValues;
-	// map to store the custom of animation modes
-	// K = mode name, V = animation mode instance
-	private final Map<String, AnimationMode> animationModes = new HashMap<>();
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -105,7 +83,8 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * 
 	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
-	public final void setAnimateRotate(boolean animateRotate) {
+	@Override
+	public void setAnimateRotate(boolean animateRotate) {
 		setValueAndAddToParent(Property.ANIMATE_ROTATE, animateRotate);
 	}
 
@@ -115,7 +94,7 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * @return if <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	@Override
-	public final boolean isAnimateRotate() {
+	public boolean isAnimateRotate() {
 		return getValue(Property.ANIMATE_ROTATE, defaultValues.isAnimateRotate());
 	}
 
@@ -124,7 +103,8 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * 
 	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
-	public final void setAnimateScale(boolean animateScale) {
+	@Override
+	public void setAnimateScale(boolean animateScale) {
 		setValueAndAddToParent(Property.ANIMATE_SCALE, animateScale);
 	}
 
@@ -134,139 +114,8 @@ public class Animation extends AbstractAnimationMode<Key, IsDefaultAnimation> im
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	@Override
-	public final boolean isAnimateScale() {
+	public boolean isAnimateScale() {
 		return getValue(Property.ANIMATE_SCALE, defaultValues.isAnimateScale());
-	}
-
-	/**
-	 * Sets an animation mode instance to animation options.
-	 * 
-	 * @param animationElement the animation mode instance to add
-	 */
-	public final void setMode(AnimationMode animationElement) {
-		// adds and checks if added
-		if (setSubElement(animationElement)) {
-			// checks if is using the default "none"
-			// the checking has been done after adding
-			// in order to be sure that argument is consistent
-			if (Key.equals(animationElement.getKey(), DefaultAnimationModeKey.NONE)) {
-				// removes the property previously added
-				remove(DefaultAnimationModeKey.NONE);
-			} else {
-				// if here the mode is not "none"
-				// stores the object into the cache
-				animationModes.put(animationElement.getKey().value(), animationElement);
-				// checks if the node is already added to parent
-				checkAndAddToParent();
-			}
-		}
-	}
-
-	/**
-	 * Enables or disables an animation mode instance into animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @param enabled if <code>true</code> it enables an animation collection
-	 */
-	public final void setModeEnabled(IsAnimationModeKey mode, boolean enabled) {
-		// checks if collection is consistent
-		if (IsAnimationModeKey.isValid(mode) && hasMode(mode)) {
-			// gets mode options
-			AnimationMode modeOptions = getMode(mode);
-			// checks if is enabling and consistent
-			if (enabled && modeOptions != null && modeOptions.getDuration() == 0) {
-				// sets duration to 0
-				modeOptions.setDuration(getDefaultValues().getDuration());
-			} else if (!enabled && modeOptions != null && modeOptions.getDuration() > 0) {
-				// sets duration to 0
-				modeOptions.setDuration(0);
-			}
-		}
-	}
-
-	/**
-	 * Returns <code>true</code> if the animation mode is enabled, otherwise <code>false</code>.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @return <code>true</code> if the animation mode is enabled, otherwise <code>false</code>
-	 */
-	public final boolean isModeEnabled(IsAnimationModeKey mode) {
-		// checks if mode is consistent, not equals to none and has got the cached element
-		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE) && hasMode(mode)) {
-			// gets the mode element
-			AnimationMode modeElement = getMode(mode);
-			// checks if element is consistent
-			if (modeElement != null) {
-				// checks if the duration is not equals to 0
-				return modeElement.getDuration() > 0;
-			}
-		}
-		// if here, the mode is not valid or not stored
-		// then returns false
-		return false;
-	}
-
-	/**
-	 * Returns <code>true</code> if an animation mode instance is stored into the animation options.
-	 * 
-	 * @param mode mode instance used to check into animation options
-	 * @return <code>true</code> if an animation mode instance is stored into the animation options
-	 */
-	@Override
-	public final boolean hasMode(IsAnimationModeKey mode) {
-		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
-			// checks if is cached or stores as objects
-			if (animationModes.containsKey(mode.value()) || isType(mode, ObjectType.OBJECT)) {
-				// returns because it is in the cached
-				return true;
-			}
-			// checks on on defaults
-			return getDefaultValues().hasMode(mode);
-		}
-		// if here, the mode is not valid
-		// then returns false
-		return false;
-	}
-
-	/**
-	 * Returns an animation mode instance if stored into the animation options.
-	 * 
-	 * @param mode mode instance used to get for animation options
-	 * @return an animation mode instance or <code>null</code> if does not exists
-	 */
-	@Override
-	public final AnimationMode getMode(IsAnimationModeKey mode) {
-		// checks if mode is consistent
-		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE)) {
-			// checks if is cached
-			if (animationModes.containsKey(mode.value())) {
-				// returns because it is in the cached
-				return animationModes.get(mode.value());
-			} else if (hasMode(mode)) {
-				// if here, the mode is stored into object
-				// gets from the native object
-				return new AnimationMode(this, mode, defaultValues.getMode(mode), getValue(mode));
-			}
-		}
-		// if here, the mode is not valid
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Removes an animation mode previously added.
-	 * 
-	 * @param mode mode instance used to remove from animation options
-	 */
-	public final void removeMode(IsAnimationModeKey mode) {
-		// checks if mode is consistent and if the mode has been previously added
-		if (IsAnimationModeKey.isValid(mode) && !Key.equals(mode, DefaultAnimationModeKey.NONE) && animationModes.containsKey(mode.value())) {
-			// remove from object
-			remove(mode);
-			// removes from cache
-			animationModes.remove(mode.value());
-		}
 	}
 
 }

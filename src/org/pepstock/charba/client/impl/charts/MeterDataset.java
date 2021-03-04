@@ -18,7 +18,6 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.DatasetAnimationCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.enums.DefaultAnimationModeKey;
+import org.pepstock.charba.client.enums.DefaultTransitionKey;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -120,7 +119,7 @@ public class MeterDataset extends Dataset {
 		// disable hover back ground color
 		setArrayValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disables animation active mode
-		getAnimation().setModeEnabled(DefaultAnimationModeKey.ACTIVE, false);
+		getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
 	}
 
 	/**
@@ -260,16 +259,6 @@ public class MeterDataset extends Dataset {
 	final void hide() {
 		// the dataset is hidden
 		super.setHidden(true);
-	}
-
-	/**
-	 * Throws an exception because not available.
-	 * 
-	 * @param animationCallback ignored because will throw an exception
-	 */
-	@Override
-	public void setAnimation(DatasetAnimationCallback animationCallback) {
-		throw new UnsupportedOperationException("The animation callback is not allowed by a meter or gauge chart.");
 	}
 
 	/**

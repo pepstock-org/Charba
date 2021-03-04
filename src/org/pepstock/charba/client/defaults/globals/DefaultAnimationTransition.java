@@ -16,44 +16,44 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationTransition;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 
 /**
- * CHART.JS default values for ANIMATION element.
+ * CHART.JS default values for animation collection.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultAnimation extends AbstractDefaultAnimation implements IsDefaultAnimation {
+public class DefaultAnimationTransition implements IsDefaultAnimationTransition {
 
-	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
+	private static final DefaultAnimation DEFAULT_ANIMATION = new DefaultAnimation();
 
-	private static final boolean DEFAULT_ANIMATE_SCALE = false;
+	private static final DefaultAnimations DEFAULT_ANIMATIONS = new DefaultAnimations();
 
 	/**
 	 * To avoid any instantiation
 	 */
-
-	DefaultAnimation() {
-		// do nothing
+	DefaultAnimationTransition() {
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.animation.IsDefaultAnimation#isAnimateRotate()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimation()
 	 */
 	@Override
-	public boolean isAnimateRotate() {
-		return DEFAULT_ANIMATE_ROTATE;
+	public IsDefaultAnimation getAnimation() {
+		return DEFAULT_ANIMATION;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.animation.IsDefaultAnimation#isAnimateScale()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
 	 */
 	@Override
-	public boolean isAnimateScale() {
-		return DEFAULT_ANIMATE_SCALE;
+	public IsDefaultAnimations getAnimations() {
+		return DEFAULT_ANIMATIONS;
 	}
 
 }

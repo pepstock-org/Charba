@@ -15,17 +15,16 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.ExtendedOptions;
-
 /**
  * It contains the options to apply to all datasets of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends ConfigurationContainer<ExtendedOptions> {
+public class Datasets extends ConfigurationOptionsContainer implements HasAnimation {
 
-	private final Animation animation;
+	// animation container instance
+	private final AnimationContainer animationContainer;
 
 	/**
 	 * Builds the object storing the chart instance and the root options element.
@@ -33,53 +32,38 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	 * @param options root options element.
 	 */
 	Datasets(ConfigurationOptions options) {
-		super(options.getChart(), options.getConfiguration());
-		// creates animations elements
-		animation = new Animation(options);
+		super(options);
+		// creates animation configuration manager
+		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration().getDatasets());
 	}
 
-	/**
-	 * Returns the animation element.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the animation
+	 * @see org.pepstock.charba.client.configuration.HasAnimation#getAnimationContainer()
 	 */
-	public final Animation getAnimation() {
-		return animation;
+	@Override
+	public final AnimationContainer getAnimationContainer() {
+		return animationContainer;
 	}
 
 	/**
-	 * Enables or disables the animation.
+	 * Sets the percent (0-1) of the available width each bar should be within the category width.<br>
+	 * 1.0 will take the whole category width and put the bars right next to each other.
 	 * 
-	 * @param enabled if <code>true</code> the animation is enabled otherwise <code>false</code> to disable it.
-	 */
-	public void setAnimationEnabled(boolean enabled) {
-		getConfiguration().setAnimationEnabled(enabled);
-	}
-
-	/**
-	 * Returns <code>true</code> if animation is enabled, otherwise <code>false</code>.
-	 * 
-	 * @return <code>true</code> if animation is enabled, otherwise <code>false</code>
-	 */
-	public boolean isAnimationEnabled() {
-		return getConfiguration().isAnimationEnabled();
-	}
-
-	/**
-	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
-	 * 
-	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
-	 *            each other.
+	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width.<br>
+	 *            1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public void setBarPercentage(double barPercentage) {
 		getConfiguration().getDatasets().setBarPercentage(barPercentage);
 	}
 
 	/**
-	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
-	 * other.
+	 * Returns the percent (0-1) of the available width each bar should be within the category width.<br>
+	 * 1.0 will take the whole category width and put the bars right next to each other.
 	 * 
-	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
+	 * @return percent (0-1) of the available width each bar should be within the category width.<br>
+	 *         1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public double getBarPercentage() {
 		return getConfiguration().getDatasets().getBarPercentage();
@@ -104,10 +88,13 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths are
-	 * calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Sets the width of each bar in pixels.<br>
+	 * If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side.<br>
+	 * If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
+	 * Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
-	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.
+	 * @param barThickness width of each bar in pixels.<br>
+	 *            If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
 	 *            Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	public void setBarThickness(int barThickness) {
@@ -115,11 +102,14 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths
-	 * are calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Returns the width of each bar in pixels.<br>
+	 * If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side.<br>
+	 * If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
+	 * Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
-	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
-	 *         bars are sized using barPercentage and categoryPercentage.
+	 * @return width of each bar in pixels.<br>
+	 *         If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
+	 *         Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	public int getBarThickness() {
 		// if here, is not flex
@@ -127,7 +117,7 @@ public class Datasets extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this
+	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this.
 	 * 
 	 * @param maxBarThickness the maximum bar thickness.
 	 */

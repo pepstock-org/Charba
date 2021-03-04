@@ -37,18 +37,15 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class NumberFormatter implements IsNumberFormat {
-
-	// font provider instance
-	private final IsNumberFormatProvider provider;
+final class NumberFormatter extends AbstractDynamicConfiguration<IsNumberFormat> implements IsNumberFormat {
 
 	/**
 	 * Creates the number formatter by a number format options provider.
 	 * 
 	 * @param provider number format provider instance
 	 */
-	NumberFormatter(IsNumberFormatProvider provider) {
-		this.provider = provider;
+	NumberFormatter(IsProvider<IsNumberFormat> provider) {
+		super(provider);
 	}
 
 	/**
@@ -460,37 +457,4 @@ final class NumberFormatter implements IsNumberFormat {
 	public int getMaximumSignificantDigits() {
 		return checkAndGet().getMaximumSignificantDigits();
 	}
-
-	/**
-	 * Gets the {@link IsNumberFormat} instance from provider checking if is consistent.
-	 * 
-	 * @return the {@link IsNumberFormat} instance from provider
-	 */
-	private IsNumberFormat checkAndGet() {
-		IsNumberFormat numberFormat = provider.getElement();
-		// checks if consistent
-		if (numberFormat == null) {
-			// exception!
-			throw new IllegalArgumentException("Number format element by provider is null");
-		}
-		return numberFormat;
-	}
-
-	/**
-	 * Interface to implement to provide the {@link IsNumberFormat} options to manage font properties.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	interface IsNumberFormatProvider {
-
-		/**
-		 * Provides the {@link IsNumberFormat} options to manage font properties.
-		 * 
-		 * @return {@link IsNumberFormat} options to manage font properties.
-		 */
-		IsNumberFormat getElement();
-
-	}
-
 }

@@ -58,7 +58,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.options.IsAnimationModeKey;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.CTimer;
@@ -534,6 +534,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void destroy() {
+
+		// FIXME valutare se deve essere eseguito solo 1 volta.
+
 		// notify before destroy
 		Charts.fireBeforeDestory(this);
 		// cancel the timer if exist
@@ -654,7 +657,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void update() {
-		update((IsAnimationModeKey) null);
+		update((IsTransitionKey) null);
 	}
 
 	/**
@@ -667,13 +670,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@Override
-	public final void update(IsAnimationModeKey mode) {
+	public final void update(IsTransitionKey mode) {
 		// checks if chart is created
 		if (chart != null) {
 			// invokes the notification
 			reconfigure();
 			// if mode is valid.. added check to null to avoid issue from code analysis
-			if (mode != null && IsAnimationModeKey.isValid(mode)) {
+			if (mode != null && IsTransitionKey.isValid(mode)) {
 				// then calls the update with animation mode
 				chart.update(mode.value());
 			} else {
@@ -705,7 +708,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			} else {
 				// otherwise calls the update with configuration
 				// stores the animation mode to animation options
-				getNode().getOptions().getAnimation().setMode(configuration.getMode());
+				getOptions().getTransitions().set(UpdateConfiguration.UPDATE, configuration.getTransition());
+				// updates the chart
 				update(UpdateConfiguration.UPDATE);
 			}
 		}
@@ -966,6 +970,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void draw() {
+
+		// FIXME valutare se deve essere eseguito solo 1 volta.
+
 		// checks if canvas is supported and the chart is consistent
 		if (isCanvasSupported && IsChart.isConsistent(this)) {
 			// invokes the apply configuration
@@ -1187,11 +1194,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 *
 	 */
 	private static final class ChartRunnableWrapper implements Runnable {
-		
+
 		private final IsChart chart;
-		
+
 		private final ChartTimerTask task;
-		
+
 		/**
 		 * Creates the runnable wrapping a custom task.
 		 * 
