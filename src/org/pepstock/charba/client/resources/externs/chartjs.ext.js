@@ -116,10 +116,6 @@ Chart.prototype.aspectRatio;
  */
 Chart.prototype.currentDevicePixelRatio;
 /**
- * @type {CharbaChartConfiguration}
- */
-Chart.prototype.config;
-/**
  * @type {Object}
  */
 Chart.prototype.chartArea;
@@ -171,20 +167,6 @@ CharbaChartHelpers.prototype.mergeIf = function(target, source){};
  * @return {Object}
  */
 CharbaChartHelpers.prototype.clone = function(source){};
-/**
- * @constructor
- * @return {CharbaChartConfiguration}
- */
-function CharbaChartConfiguration() {}
-/**
- * @type {Object}
- */
-CharbaChartConfiguration.prototype.options;
-/**
- * @param {Object} options
- * @return  {undefined}
- */
-CharbaChartConfiguration.prototype.update = function(options){};
 /**
  * @constructor
  * @return {CharbaChartAdaptersDate}

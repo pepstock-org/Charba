@@ -113,11 +113,6 @@ public final class NativeName {
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as chart configuration with name <b>{@value CHART_CONFIGURATION}</b>, (internal of CHART.JS).
-	 */
-	public static final String CHART_CONFIGURATION = "CharbaChartConfiguration";
-
-	/**
 	 * Constant to bind java script object as chart helper with name <b>{@value CHART_HELPERS}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART_HELPERS = "CharbaChartHelpers";
