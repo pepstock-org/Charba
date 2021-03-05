@@ -35,7 +35,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public final class ExtendedOptions extends ScaledOptions {
-
+	
 	// chart instance of the options
 	private final IsChart chart;
 	// extends scales instances
@@ -111,7 +111,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedScales getScales() {
 		return scales;
 	}
-
+	
 	/**
 	 * This method adds new event function proxy to the element, as property of native java script object.
 	 * 

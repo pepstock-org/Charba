@@ -72,12 +72,13 @@ import org.pepstock.charba.client.utils.Utilities;
  * 
  */
 public abstract class AbstractChart extends HandlerManager implements IsChart, MutationHandler {
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the mouse down function on canvas
 	private final CallbackProxy<EventListenerCallback> canvasCallbackProxy = JsHelper.get().newCallbackProxy();
-
+	
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// PCT standard for width
@@ -90,7 +91,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private static final InternalInterationModeObject INTERACTION_MODE = new InternalInterationModeObject(true);
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-	// chart ID using generateid unique id
+	// chart ID using generate unique id
 	private final String id = DOMBuilder.get().createUniqueId();
 	// stores the type of chart
 	private final Type type;
@@ -285,7 +286,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final Chart lookForConsistentInstance() {
 		// gets chart instance getting the stored one into map
 		// if the current one is still initializing
-		return chart != null ? chart : Charts.getNative(id);
+		return isInitialized() ? chart : Charts.getNative(id);
 	}
 
 	/**
@@ -300,7 +301,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// returns it
 			return canvas;
 		} else {
-			// otherwise throws an exxeption
+			// otherwise throws an exception
 			throw new UnsupportedOperationException(CANVAS_NOT_SUPPORTED_MESSAGE);
 		}
 	}
@@ -534,9 +535,6 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void destroy() {
-
-		// FIXME valutare se deve essere eseguito solo 1 volta.
-
 		// notify before destroy
 		Charts.fireBeforeDestory(this);
 		// cancel the timer if exist
@@ -564,6 +562,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Charts.remove(getId());
 		// remove chart observer to get on attach and detach
 		ChartObserver.get().removeHandler(this);
+		// reset char instance
+		chart = null;
 	}
 
 	/**
@@ -574,7 +574,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void stop() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// then stop
 			chart.stop();
 		}
@@ -586,7 +586,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void clear() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// then clear
 			chart.clear();
 		}
@@ -599,7 +599,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void reset() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// then reset
 			chart.reset();
 		}
@@ -613,7 +613,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final String toBase64Image() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// then get the image
 			return chart.toBase64Image();
 		}
@@ -628,7 +628,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void resize() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// resize!
 			chart.resize();
 		}
@@ -644,7 +644,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void resize(int width, int height) {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// resize!
 			chart.resize(width, height);
 		}
@@ -672,9 +672,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void update(IsTransitionKey mode) {
 		// checks if chart is created
-		if (chart != null) {
-			// invokes the notification
-			reconfigure();
+		if (isInitialized()) {
 			// if mode is valid.. added check to null to avoid issue from code analysis
 			if (mode != null && IsTransitionKey.isValid(mode)) {
 				// then calls the update with animation mode
@@ -698,11 +696,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void update(UpdateConfiguration configuration) {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// if configuration is not passed..
 			if (configuration == null) {
-				// invokes the notification
-				reconfigure();
 				// then calls the update
 				chart.update();
 			} else {
@@ -716,24 +712,91 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Prepares the chart options with the configuration ones before updating the chart, in order that new or updated options will be used by chart.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.
 	 */
-	private void reconfigure() {
-		// invokes the apply configuration
-		applyConfiguration();
-		// fires that chart is configuring
-		Charts.fireBeforeConfigure(this);
-		// updates option passed by configuration element
-		Configuration tempConfiguration = new Configuration();
-		// gets options
-		ConfigurationOptions internalOptions = getOptions();
-		// sets options by temporary configuration
-		tempConfiguration.setOptions(this, internalOptions);
-		// calls plugins for onConfigure method
-		Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
-		plugins.onChartConfigure(tempConfiguration, this);
-		// fires that chart has been configured
-		Charts.fireAfterConfigure(this);
+	@Override
+	public final void reconfigure() {
+		reconfigure((IsTransitionKey) null);
+	}
+
+	/**
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.<br>
+	 * A animation mode key can be provided for the update process using a specific animation configuration.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * 
+	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
+	 */
+	@Override
+	public final void reconfigure(IsTransitionKey mode) {
+		// checks and performs pre-reconfiguration
+		if (reconfigureOptions()) {
+			// if here, pre-reconfiguration has been done
+			// update chart
+			update(mode);
+			// replaces the native object in the configuration
+			updateForReconfiguring();
+		}
+	}
+
+	/**
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update the options, mutating the options property in place.<br>
+	 * A configuration object can be provided with additional configuration for the update process.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * 
+	 * @param configuration a configuration object can be provided with additional configuration for the update process
+	 */
+	@Override
+	public final void reconfigure(UpdateConfiguration configuration) {
+		// checks and performs pre-reconfiguration
+		if (reconfigureOptions()) {
+			// if here, pre-reconfiguration has been done
+			// update chart
+			update(configuration);
+			// replaces the native object in the configuration
+			updateForReconfiguring();
+		}
+	}
+
+	/**
+	 * Prepares the chart options with the configuration ones before updating the chart, in order that new or updated options will be used by chart.
+	 * 
+	 * @return <code>true</code> if the chart is ready to be configured, otherwise <code>false</code>
+	 */
+	private boolean reconfigureOptions() {
+		// checks if chart is created and consistent
+		if (isInitialized() && IsChart.isConsistent(this)) {
+			// invokes the apply configuration
+			applyConfiguration();
+			// fires that chart is configuring
+			Charts.fireBeforeConfigure(this);
+			// updates option passed by configuration element
+			Configuration tempConfiguration = new Configuration();
+			// gets options
+			ConfigurationOptions internalOptions = getOptions();
+			// sets options by temporary configuration
+			tempConfiguration.setOptions(this, internalOptions);
+			// calls plugins for onConfigure method
+			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
+			plugins.onChartConfigure(tempConfiguration, this);
+			// fires that chart has been configured
+			Charts.fireAfterConfigure(this);
+			return true;
+		}
+		// if here the chart is not consistent
+		return false;
+	}
+
+	/**
+	 * Replaces the native object in the configuration because the chart has been reconfigured.
+	 */
+	private void updateForReconfiguring() {
+		getOptions().setChartOptions(new ChartEnvelop<>(chart.getOptions()));
 	}
 
 	/**
@@ -744,7 +807,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void render() {
 		// checks if chart is created
-		if (chart != null) {
+		if (isInitialized()) {
 			// calls the render
 			chart.render();
 		}
@@ -770,10 +833,10 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Looks for the datasets that matches the event and returns the dataset items references as a list.
+	 * Looks for the data sets that matches the event and returns the data set items references as a list.
 	 * 
 	 * @param event event of chart.
-	 * @return dataset items references list or or an empty list.
+	 * @return data set items references list or or an empty list.
 	 */
 	@Override
 	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
@@ -781,7 +844,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
-			// gets datasets
+			// gets data sets
 			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.DATASET.value(), INTERACTION_MODE.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
@@ -791,18 +854,18 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Looks for the dataset if it's visible or not, selected by index.
+	 * Looks for the data set if it's visible or not, selected by index.
 	 * 
-	 * @param index dataset index
-	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 * @param index data set index
+	 * @return <code>true</code> if data set is visible otherwise <code>false</code>.
 	 */
 	@Override
 	public final boolean isDatasetVisible(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
-		// checks consistency of chart and datasets
+		// checks consistency of chart and data sets
 		if (instance != null && isValidDatasetIndex(index)) {
-			// gets if dataset is visible or not
+			// gets if data set is visible or not
 			return instance.isDatasetVisible(index);
 		}
 		// returns false
@@ -810,18 +873,18 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Returns the amount of datasets which are visible
+	 * Returns the amount of data sets which are visible
 	 * 
-	 * @return the amount of datasets which are visible.<br>
+	 * @return the amount of data sets which are visible.<br>
 	 *         If chart is not initialized, return {@link UndefinedValues#INTEGER}.
 	 */
 	@Override
 	public final int getVisibleDatasetCount() {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
-		// checks consistency of chart and datasets
+		// checks consistency of chart and data sets
 		if (instance != null) {
-			// gets if dataset is visible or not
+			// gets if data set is visible or not
 			return instance.getVisibleDatasetCount();
 		}
 		// returns undefined
@@ -829,27 +892,27 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Sets the visibility for a given dataset.<br>
+	 * Sets the visibility for a given data set.<br>
 	 * This can be used to build a chart legend in HTML.<br>
-	 * During click on one of the HTML items, you can call it to change the appropriate dataset.
+	 * During click on one of the HTML items, you can call it to change the appropriate data set.
 	 * 
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param visibility if <code>true</code> enables the visibility otherwise <code>false</code>
 	 */
 	@Override
 	public final void setDatasetVisibility(int datasetIndex, boolean visibility) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
-		// checks consistency of chart and datasets
+		// checks consistency of chart and data sets
 		if (instance != null && isValidDatasetIndex(datasetIndex)) {
-			// sets dataset visibility
+			// sets data set visibility
 			instance.setDatasetVisibility(datasetIndex, visibility);
 		}
 	}
 
 	/**
-	 * Toggles the visibility of an item in all datasets.<br>
-	 * A dataset needs to explicitly support this feature for it to have an effect.<br>
+	 * Toggles the visibility of an item in all data sets.<br>
+	 * A data set needs to explicitly support this feature for it to have an effect.<br>
 	 * From internal chart types, doughnut / pie and polar area use this.
 	 * 
 	 * @param index data index
@@ -858,7 +921,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void toggleDataVisibility(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
-		// checks consistency of chart and datasets for the first dataset
+		// checks consistency of chart and data sets for the first data set
 		if (instance != null && isValidDataIndex(0, index)) {
 			// toggles data index
 			instance.toggleDataVisibility(index);
@@ -866,7 +929,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Returns the stored visibility state of an data index for all datasets.
+	 * Returns the stored visibility state of an data index for all data sets.
 	 * 
 	 * @param index data index
 	 * @return <code>true</code> if the data item is visible
@@ -885,11 +948,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Sets the visibility for the given dataset to false.<br>
-	 * Updates the chart and animates the dataset with 'hide' mode.<br>
+	 * Sets the visibility for the given data set to false.<br>
+	 * Updates the chart and animates the data set with 'hide' mode.<br>
 	 * This animation can be configured under the hide key in animation options.
 	 * 
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 */
 	@Override
 	public final void hide(int datasetIndex) {
@@ -961,18 +1024,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
-		// if here, chart and event npot consistent then returns an empty list
+		// if here, chart and event not consistent then returns an empty list
 		return Collections.emptyList();
 	}
 
 	/**
-	 * Draws the chart
+	 * Draws the chart.<br>
+	 * It can be invoked once during the life cycle of the chart.
 	 */
 	@Override
 	public final void draw() {
-
-		// FIXME valutare se deve essere eseguito solo 1 volta.
-
 		// checks if canvas is supported and the chart is consistent
 		if (isCanvasSupported && IsChart.isConsistent(this)) {
 			// invokes the apply configuration
@@ -1000,7 +1061,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			Charts.fireAfterConfigure(this);
 			// destroy chart if chart is already instantiated
 			// checks if chart is created
-			if (chart != null) {
+			if (isInitialized()) {
 				// then destroy
 				chart.destroy();
 			}
@@ -1008,6 +1069,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
+			// replaces the native object in the configuration
+			updateForReconfiguring();
 			// notify after init
 			Charts.fireAfterInit(this);
 			// cancel the timer if exist and it is

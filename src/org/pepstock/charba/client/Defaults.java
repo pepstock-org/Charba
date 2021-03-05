@@ -763,22 +763,6 @@ public final class Defaults {
 			Charts.addNative(nativeChart);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.Plugin#onAfterRender(org.pepstock.charba.client.IsChart)
-		 */
-		@Override
-		public void onAfterRender(IsChart chart) {
-			// gets native chart
-			Chart nativeChart = Charts.getNative(chart);
-			// checks if chart is consistent
-			if (nativeChart != null) {
-				// stores the chart options into config options
-				chart.getOptions().setChartOptions(new ChartEnvelop<>(nativeChart.getOptions()));
-			}
-		}
-
 	}
 
 }
