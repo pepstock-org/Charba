@@ -186,7 +186,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// registers as event handler
 		IsEventProvider.register(chart, this);
 		// creates the animation configuration manager
-		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration());
+		this.animationContainer = new AnimationContainer(getChart(), this::getConfiguration);
 		// creates all sub elements
 		this.elements = new Elements(this);
 		this.legend = new Legend(this);
