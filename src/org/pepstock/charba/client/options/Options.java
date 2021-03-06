@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.DefaultPluginId;
@@ -101,7 +102,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// specific for chart type
 		SHOW_LINE("showLine"),
 		SKIP_NULL("skipNull"),
-		CUTOUT_PERCENTAGE("cutoutPercentage"),
+		CUTOUT("cutout"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
 		START_ANGLE("startAngle"),
@@ -684,22 +685,61 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Sets the percentage of the chart that is cut out of the middle.
+	 * Sets the portion of the chart that is cut out of the middle.<br>
+	 * As {@link Double}, it is considered to be pixels.
 	 * 
-	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
+	 * @param cutout the portion of the chart that is cut out of the middle.<br>
+	 *            As {@link Double}, it is considered to be pixels.
 	 */
-	public void setCutoutPercentage(double cutoutPercentage) {
-		setValue(Property.CUTOUT_PERCENTAGE, cutoutPercentage);
+	public void setCutout(double cutout) {
+		setValue(Property.CUTOUT, cutout);
 	}
 
 	/**
-	 * Returns the the percentage of the chart that is cut out of the middle.
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link Double}, it is considered to be pixels.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle.
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link Double}, it is considered to be pixels.
 	 */
 	@Override
-	public double getCutoutPercentage() {
-		return getValue(Property.CUTOUT_PERCENTAGE, getDefaultValues().getCutoutPercentage());
+	public double getCutout() {
+		// checks if is in pixel (number)
+		if (isType(Property.CUTOUT, ObjectType.NUMBER)) {
+			return getValue(Property.CUTOUT, getDefaultValues().getCutout());
+		}
+		// if here, the value is a string or not exist
+		// returns the defaults
+		return getDefaultValues().getCutout();
+	}
+
+	/**
+	 * Sets the portion of the chart that is cut out of the middle.<br>
+	 * As {@link String} and ending with '%', percentage of the chart radius.
+	 * 
+	 * @param cutout the portion of the chart that is cut out of the middle.<br>
+	 *            As {@link String} and ending with '%', percentage of the chart radius.
+	 */
+	public void setCutoutPercentage(String cutout) {
+		setValue(Property.CUTOUT, cutout);
+	}
+
+	/**
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link String} and ending with '%', percentage of the chart radius.
+	 * 
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link String} and ending with '%', percentage of the chart radius.
+	 */
+	@Override
+	public String getCutoutPercentage() {
+		// checks if is in pixel (number)
+		if (isType(Property.CUTOUT, ObjectType.STRING)) {
+			return getValue(Property.CUTOUT, getDefaultValues().getCutoutPercentage());
+		}
+		// if here, the value is a string or not exist
+		// returns the defaults
+		return getDefaultValues().getCutoutPercentage();
 	}
 
 	/**

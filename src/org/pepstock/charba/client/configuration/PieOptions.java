@@ -25,6 +25,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public class PieOptions extends AbstractPieOptions {
+	
+	private static final double DEFAULT_CUTOUT = 0D;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -34,6 +36,24 @@ public class PieOptions extends AbstractPieOptions {
 	 */
 	public PieOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#getCutout()
+	 */
+	@Override
+	public double getCutout() {
+		// gets value from options
+		double value = super.getCutout();
+		// checks if consistent
+		// if not, provides the doughnut default
+		if (Double.isNaN(value)) {
+			return DEFAULT_CUTOUT;
+		}
+		// returns the value
+		return value;
 	}
 
 }

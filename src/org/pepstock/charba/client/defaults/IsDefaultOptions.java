@@ -186,11 +186,22 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	boolean isSpanGaps();
 
 	/**
-	 * Returns the the percentage of the chart that is cut out of the middle.
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link Double}, it is considered to be pixels.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle.
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link Double}, it is considered to be pixels.
 	 */
-	double getCutoutPercentage();
+	double getCutout();
+
+	/**
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link String} and ending with '%', percentage of the chart radius.
+	 * 
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link String} and ending with '%', percentage of the chart radius.
+	 */
+	String getCutoutPercentage();
 
 	/**
 	 * Returns the starting angle to draw arcs from.

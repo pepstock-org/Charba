@@ -166,10 +166,20 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCutout()
+	 */
+	@Override
+	public double getCutout() {
+		return options.getCutout();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCutoutPercentage()
 	 */
 	@Override
-	public final double getCutoutPercentage() {
+	public String getCutoutPercentage() {
 		return options.getCutoutPercentage();
 	}
 

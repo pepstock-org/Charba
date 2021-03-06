@@ -42,7 +42,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 
-	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
+	private static final String DEFAULT_CUTOUT_PERCENTAGE = "90%";
 
 	private static final double DEFAULT_CIRCUMFERENCE = 360;
 
@@ -75,7 +75,7 @@ public class MeterOptions extends AbstractPieOptions {
 		// disables legend and tooltips.
 		getLegend().setDisplay(false);
 		getTooltips().setEnabled(false);
-		// sets the 90% of cutout
+		// sets the 90% of cut out
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 		super.setRotation(DEFAULT_ROTATION);
@@ -84,23 +84,33 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCutoutPercentage(double)
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCutoutPercentage(java.lang.String)
 	 */
 	@Override
-	public final void setCutoutPercentage(double cutoutPercentage) {
-		// ignore the passed value. is ALWAYS 90
+	public void setCutoutPercentage(String cutout) {
+		// ignore the "set" because you can not change it
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setRotation(double)
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCutout(double)
 	 */
 	@Override
-	public final void setRotation(double rotation) {
-		// ignore the passed value.
-		super.setRotation(DEFAULT_ROTATION);
+	public final void setCutout(double cutout) {
+		// ignore the "set" because you can not change it
+		setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#getCutout()
+	 */
+	@Override
+	public final double getCutout() {
+		return Double.NaN;
 	}
 
 	/*

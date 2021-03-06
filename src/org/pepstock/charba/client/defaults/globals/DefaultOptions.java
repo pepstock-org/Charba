@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -54,7 +55,9 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 
-	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
+	private static final double DEFAULT_CUTOUT = UndefinedValues.DOUBLE;
+
+	private static final String DEFAULT_CUTOUT_PERCENTAGE = UndefinedValues.STRING;
 
 	private static final double DEFAULT_ROTATION = 0D;
 
@@ -198,10 +201,20 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getCutoutPercentage()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCutout()
 	 */
 	@Override
-	public double getCutoutPercentage() {
+	public double getCutout() {
+		return DEFAULT_CUTOUT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getCutoutPercentage()
+	 */
+	@Override
+	public String getCutoutPercentage() {
 		return DEFAULT_CUTOUT_PERCENTAGE;
 	}
 

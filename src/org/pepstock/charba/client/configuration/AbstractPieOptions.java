@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class AbstractPieOptions extends ConfigurationOptions {
-
+	
 	/**
 	 * Builds the object storing the chart instance and defaults.
 	 * 
@@ -36,20 +36,46 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	}
 
 	/**
-	 * Sets the percentage of the chart that is cut out of the middle.
+	 * Sets the portion of the chart that is cut out of the middle.<br>
+	 * As {@link Double}, it is considered to be pixels.
 	 * 
-	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
+	 * @param cutout the portion of the chart that is cut out of the middle.<br>
+	 *            As {@link Double}, it is considered to be pixels.
 	 */
-	public void setCutoutPercentage(double cutoutPercentage) {
-		getConfiguration().setCutoutPercentage(cutoutPercentage);
+	public void setCutout(double cutout) {
+		getConfiguration().setCutout(cutout);
 	}
 
 	/**
-	 * Returns the the percentage of the chart that is cut out of the middle.
+	 * Sets the portion of the chart that is cut out of the middle.<br>
+	 * As {@link String} and ending with '%', percentage of the chart radius.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle.
+	 * @param cutout the portion of the chart that is cut out of the middle.<br>
+	 *            As {@link String} and ending with '%', percentage of the chart radius.
 	 */
-	public double getCutoutPercentage() {
+	public void setCutoutPercentage(String cutout) {
+		getConfiguration().setCutoutPercentage(cutout);
+	}
+
+	/**
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link Double}, it is considered to be pixels.
+	 */
+	public double getCutout() {
+		return getConfiguration().getCutout();
+	}
+
+	/**
+	 * Returns the portion of the chart that is cut out of the middle.<br>
+	 * As {@link String} and ending with '%', percentage of the chart radius.
+	 * 
+	 * @return the portion of the chart that is cut out of the middle.<br>
+	 *         As {@link String} and ending with '%', percentage of the chart radius.
+	 */
+	public String getCutoutPercentage() {
 		return getConfiguration().getCutoutPercentage();
 	}
 

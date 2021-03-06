@@ -239,6 +239,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `lineTension` property to `tension` in `LiningDataset` class.
    * rename `tickMarkLength` property to `tickLength` in `GridLines` configuration and options classes.
    * change `dataPoint` property in `parsed` one in `ScriptableContext` class.
+   * change `cutoutPercentage` property from double to string in order to manage a percentage `[number]%` format in the options and configuration classes, for pie and doughnut charts.
  * change `getXAxisID` and `getXAxisID` methods in `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
@@ -363,6 +364,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `onBeforeElementsUpdate` method to the `Plugin` interface.
    * add `pointStyle` property to `Bar` element configuration and options classes.
    * add `pointStyle` property to `BarDataset` class.
+   * add `cutout` property in the options and configuration classes, for pie and doughnut charts.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
