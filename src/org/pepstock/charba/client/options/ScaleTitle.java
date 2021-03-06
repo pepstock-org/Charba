@@ -41,8 +41,8 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	{
 		ALIGN("align"),
 		DISPLAY("display"),
-		LABEL_STRING("labelString"),
-		PADDING("padding");
+		PADDING("padding"),
+		TEXT("text");
 
 		// name value of property
 		private final String value;
@@ -126,10 +126,10 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	/**
 	 * Sets the text for the scale string.
 	 * 
-	 * @param labelString the text for the scale string.
+	 * @param text the text for the scale string.
 	 */
-	public void setLabelString(String labelString) {
-		setValueAndAddToParent(Property.LABEL_STRING, labelString);
+	public void setText(String text) {
+		setValueAndAddToParent(Property.TEXT, text);
 	}
 
 	/**
@@ -138,8 +138,8 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @return the text for the scale string.
 	 */
 	@Override
-	public String getLabelString() {
-		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
+	public String getText() {
+		return getValue(Property.TEXT, getDefaultValues().getText());
 	}
 
 	/**

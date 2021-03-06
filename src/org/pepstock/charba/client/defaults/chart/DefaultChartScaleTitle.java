@@ -86,11 +86,11 @@ public final class DefaultChartScaleTitle implements IsDefaultScaleTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getText()
 	 */
 	@Override
-	public String getLabelString() {
-		return title.getLabelString();
+	public String getText() {
+		return title.getText();
 	}
 
 	/*

@@ -119,10 +119,10 @@ public class CartesianScaleTitle extends AxisContainer {
 	/**
 	 * Sets the text for the label.
 	 * 
-	 * @param labelString The text for the label.
+	 * @param text The text for the label.
 	 */
-	public void setLabelString(String labelString) {
-		getAxis().getScale().getTitle().setLabelString(labelString);
+	public void setText(String text) {
+		getAxis().getScale().getTitle().setText(text);
 	}
 
 	/**
@@ -130,8 +130,8 @@ public class CartesianScaleTitle extends AxisContainer {
 	 * 
 	 * @return The text for the label.
 	 */
-	public String getLabelString() {
-		return getAxis().getScale().getTitle().getLabelString();
+	public String getText() {
+		return getAxis().getScale().getTitle().getText();
 	}
 
 	/**

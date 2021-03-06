@@ -43,7 +43,7 @@ public interface IsDefaultScaleTitle extends IsDefaultFontContainer {
 	 * 
 	 * @return The text for the scale string.
 	 */
-	String getLabelString();
+	String getText();
 
 	/**
 	 * Returns the alignment of the axis title.

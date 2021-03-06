@@ -31,7 +31,7 @@ public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
-	private static final String DEFAULT_LABEL_STRING = Constants.EMPTY_STRING;
+	private static final String DEFAULT_TEXT = Constants.EMPTY_STRING;
 
 	private final DefaultScaleLabelPadding padding = new DefaultScaleLabelPadding();
 
@@ -87,11 +87,11 @@ public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getText()
 	 */
 	@Override
-	public String getLabelString() {
-		return DEFAULT_LABEL_STRING;
+	public String getText() {
+		return DEFAULT_TEXT;
 	}
 
 	/*
