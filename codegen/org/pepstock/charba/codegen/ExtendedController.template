@@ -104,6 +104,6 @@ Charba_ControllerType.prototype.buildOrUpdateElements = function() {
 Charba_ControllerType.id = '_ControllerType'; 
 // copies the default options of extended chart type
 // check if it must be cloned
-Charba_ControllerType.defaults = Charba_ControllerType.cloneDefaults ? Object.assign({}, Chart.defaults.controllers._ChartType) : Chart.defaults.controllers._ChartType; 
+Charba_ControllerType.defaults = Charba_ControllerType.cloneDefaults ? Object.assign({}, Chart.controllers._ChartType.defaults) : Chart.controllers._ChartType.defaults; 
 // registers into CHART.JS
 Chart.register(Charba_ControllerType);
