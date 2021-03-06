@@ -20,28 +20,28 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
- * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the getAxis().<br>
- * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
+ * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
+ * The scale title configuration defines options for the scale title.<br> Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianScaleLabel extends AxisContainer {
+public class CartesianScaleTitle extends AxisContainer {
 
 	private final CartesianPadding padding;
 	// font instance
 	private final Font font;
 
 	/**
-	 * Builds the object storing the axis which this scale label belongs to.
+	 * Builds the object storing the axis which this scale title belongs to.
 	 * 
-	 * @param axis axis which this scale label belongs to.
+	 * @param axis axis which this scale title belongs to.
 	 */
-	CartesianScaleLabel(Axis axis) {
+	CartesianScaleTitle(Axis axis) {
 		super(axis);
 		// gets embedded elements
 		padding = new CartesianPadding(axis);
-		font = new Font(() -> getAxis().getConfiguration().getScaleLabel().getFont());
+		font = new Font(() -> getAxis().getConfiguration().getTitle().getFont());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
-		getAxis().getScale().getScaleLabel().setColor(color);
+		getAxis().getScale().getTitle().setColor(color);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @return font color as string
 	 */
 	public String getColorAsString() {
-		return getAxis().getScale().getScaleLabel().getColorAsString();
+		return getAxis().getScale().getTitle().getColorAsString();
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @param display If true, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
-		getAxis().getScale().getScaleLabel().setDisplay(display);
+		getAxis().getScale().getTitle().setDisplay(display);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @return If true, display the axis title.
 	 */
 	public boolean isDisplay() {
-		return getAxis().getScale().getScaleLabel().isDisplay();
+		return getAxis().getScale().getTitle().isDisplay();
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @param labelString The text for the label.
 	 */
 	public void setLabelString(String labelString) {
-		getAxis().getScale().getScaleLabel().setLabelString(labelString);
+		getAxis().getScale().getTitle().setLabelString(labelString);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @return The text for the label.
 	 */
 	public String getLabelString() {
-		return getAxis().getScale().getScaleLabel().getLabelString();
+		return getAxis().getScale().getTitle().getLabelString();
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @param align the alignment of the axis title
 	 */
 	public void setAlign(ScaleLabelAlign align) {
-		getAxis().getScale().getScaleLabel().setAlign(align);
+		getAxis().getScale().getTitle().setAlign(align);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class CartesianScaleLabel extends AxisContainer {
 	 * @return the alignment of the axis title
 	 */
 	public ScaleLabelAlign getAlign() {
-		return getAxis().getScale().getScaleLabel().getAlign();
+		return getAxis().getScale().getTitle().getAlign();
 	}
 
 }

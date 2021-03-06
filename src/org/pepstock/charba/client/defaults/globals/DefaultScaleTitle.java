@@ -19,15 +19,15 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
- * CHART.JS default values for SCALELABEL element.
+ * CHART.JS default values for TITLE element of a scale.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultScaleLabel implements IsDefaultScaleLabel {
+public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
@@ -40,14 +40,14 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultScaleLabel() {
+	DefaultScaleTitle() {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getFont()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getFont()
 	 */
 	@Override
 	public IsDefaultFont getFont() {
@@ -57,7 +57,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
@@ -67,7 +67,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
@@ -77,7 +77,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -87,7 +87,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getLabelString()
 	 */
 	@Override
 	public String getLabelString() {
@@ -97,7 +97,7 @@ public final class DefaultScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getAlign()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getAlign()
 	 */
 	@Override
 	public ScaleLabelAlign getAlign() {

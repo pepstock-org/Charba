@@ -240,6 +240,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `tickMarkLength` property to `tickLength` in `GridLines` configuration and options classes.
    * change `dataPoint` property in `parsed` one in `ScriptableContext` class.
    * change `cutoutPercentage` property from double to string in order to manage a percentage `[number]%` format in the options and configuration classes, for pie and doughnut charts.
+   * rename `ScaleLabel` class to `ScaleTitle` in order to keep it aligned with CHART.JS name spaces.
  * change `getXAxisID` and `getXAxisID` methods in `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.

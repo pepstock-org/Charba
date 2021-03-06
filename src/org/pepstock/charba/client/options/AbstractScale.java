@@ -51,7 +51,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 
 	private final Ticks ticks;
 
-	private final ScaleLabel scaleLabel;
+	private final ScaleTitle title;
 
 	private final AngleLines angleLines;
 
@@ -77,7 +77,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID_LINES("gridLines"),
-		SCALE_LABEL("scaleLabel"),
+		TITLE("title"),
 		// linear cartesian
 		BEGIN_AT_ZERO("beginAtZero"),
 		MIN("min"),
@@ -134,7 +134,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		this.angleLines = new AngleLines(this, Property.ANGLE_LINES, getDefaultValues().getAngleLines(), getValue(Property.ANGLE_LINES));
 		this.gridLines = new GridLines(this, Property.GRID_LINES, getDefaultValues().getGridLines(), getValue(Property.GRID_LINES));
 		this.pointLabels = new PointLabels(this, Property.POINT_LABELS, getDefaultValues().getPointLabels(), getValue(Property.POINT_LABELS));
-		this.scaleLabel = new ScaleLabel(this, Property.SCALE_LABEL, getDefaultValues().getScaleLabel(), getValue(Property.SCALE_LABEL));
+		this.title = new ScaleTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		this.ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
 		this.time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
 		this.adapters = new Adapters(this, Property.ADAPTERS, getDefaultValues().getAdapters(), getValue(Property.ADAPTERS));
@@ -153,13 +153,13 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * Returns the scale label element.
+	 * Returns the scale title element.
 	 * 
-	 * @return the scaleLabel
+	 * @return the scale title element
 	 */
 	@Override
-	public final ScaleLabel getScaleLabel() {
-		return scaleLabel;
+	public final ScaleTitle getTitle() {
+		return title;
 	}
 
 	/**

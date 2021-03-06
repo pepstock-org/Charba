@@ -18,11 +18,11 @@ package org.pepstock.charba.client.defaults;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
- * Interface to define scale label object defaults.
+ * Interface to define scale title object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultScaleLabel extends IsDefaultFontContainer {
+public interface IsDefaultScaleTitle extends IsDefaultFontContainer {
 
 	/**
 	 * Returns the padding defaults.

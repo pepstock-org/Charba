@@ -44,7 +44,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	private final GridLines gridLines;
 
-	private final CartesianScaleLabel scaleLabel;
+	private final CartesianScaleTitle title;
 
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
@@ -70,16 +70,16 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		}
 		// sets to the objects
 		gridLines = new GridLines(this);
-		scaleLabel = new CartesianScaleLabel(this);
+		title = new CartesianScaleTitle(this);
 	}
 
 	/**
-	 * Returns the scale label element
+	 * Returns the scale title element
 	 * 
-	 * @return the scaleLabel
+	 * @return the scale title element
 	 */
-	public CartesianScaleLabel getScaleLabel() {
-		return scaleLabel;
+	public CartesianScaleTitle getTitle() {
+		return title;
 	}
 
 	/**

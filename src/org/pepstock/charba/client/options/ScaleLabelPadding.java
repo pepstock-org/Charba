@@ -20,12 +20,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
 /**
- * It is applied to all sides of the scale label object of axes (left, top, right, bottom).
+ * It is applied to all sides of the scale title object of axes (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class ScaleLabelPadding extends AbstractPadding<ScaleLabel> {
+public final class ScaleLabelPadding extends AbstractPadding<ScaleTitle> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -35,7 +35,7 @@ public final class ScaleLabelPadding extends AbstractPadding<ScaleLabel> {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabelPadding(ScaleLabel scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
+	ScaleLabelPadding(ScaleTitle scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(scaleLabel, childKey, defaultValues, nativeObject);
 	}
 

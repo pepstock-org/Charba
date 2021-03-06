@@ -20,7 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGridLines;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
-import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
@@ -60,7 +60,7 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
 
-	private final DefaultScaleLabel scaleLabel = new DefaultScaleLabel();
+	private final DefaultScaleTitle scaleLabel = new DefaultScaleTitle();
 
 	private final DefaultTicks ticks = new DefaultTicks();
 
@@ -108,10 +108,10 @@ public final class DefaultScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getScaleLabel()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getTitle()
 	 */
 	@Override
-	public IsDefaultScaleLabel getScaleLabel() {
+	public IsDefaultScaleTitle getTitle() {
 		return scaleLabel;
 	}
 

@@ -17,17 +17,17 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
- * The scale label configuration defines options for the scale title. Note that this only applies to cartesian axes.
+ * The scale Title configuration defines options for the scale title. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScaleLabel> implements IsDefaultScaleLabel, HasFont {
+public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScaleTitle> implements IsDefaultScaleTitle, HasFont {
 
 	private final ScaleLabelPadding padding;
 
@@ -76,7 +76,7 @@ public final class ScaleLabel extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabel(AbstractScale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject nativeObject) {
+	ScaleTitle(AbstractScale scale, Key childKey, IsDefaultScaleTitle defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));

@@ -27,11 +27,11 @@ import org.pepstock.charba.client.enums.ScaleBounds;
 public interface IsDefaultScale {
 
 	/**
-	 * Returns the scale label defaults
+	 * Returns the scale title defaults
 	 * 
-	 * @return the scaleLabel defaults.
+	 * @return the scale title defaults.
 	 */
-	IsDefaultScaleLabel getScaleLabel();
+	IsDefaultScaleTitle getTitle();
 
 	/**
 	 * Returns the ticks defaults.

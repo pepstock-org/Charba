@@ -17,56 +17,56 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.enums.ScaleLabelAlign;
-import org.pepstock.charba.client.options.ScaleLabel;
+import org.pepstock.charba.client.options.ScaleTitle;
 
 /**
- * Defaults for scale label option element, based on chart type.
+ * Defaults for scale title option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
+public final class DefaultChartScaleTitle implements IsDefaultScaleTitle {
 
-	private final ScaleLabel scaleLabel;
+	private final ScaleTitle title;
 
 	private final DefaultChartScaleLabelPadding padding;
 
 	/**
-	 * Creates the object by scale label option element instance.
+	 * Creates the object by scale title option element instance.
 	 * 
-	 * @param scaleLabel scale label option element instance.
+	 * @param title scale title option element instance.
 	 */
-	DefaultChartScaleLabel(ScaleLabel scaleLabel) {
-		this.scaleLabel = scaleLabel;
+	DefaultChartScaleTitle(ScaleTitle title) {
+		this.title = title;
 		// creates sub element
-		this.padding = new DefaultChartScaleLabelPadding(scaleLabel.getPadding());
+		this.padding = new DefaultChartScaleLabelPadding(title.getPadding());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getFont()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getFont()
 	 */
 	@Override
 	public IsDefaultFont getFont() {
-		return scaleLabel.getFont();
+		return title.getFont();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
-		return scaleLabel.getColorAsString();
+		return title.getColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
@@ -76,31 +76,31 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
-		return scaleLabel.isDisplay();
+		return title.isDisplay();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getLabelString()
 	 */
 	@Override
 	public String getLabelString() {
-		return scaleLabel.getLabelString();
+		return title.getLabelString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getAlign()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getAlign()
 	 */
 	@Override
 	public ScaleLabelAlign getAlign() {
-		return scaleLabel.getAlign();
+		return title.getAlign();
 	}
 
 }

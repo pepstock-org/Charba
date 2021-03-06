@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
 /**
- * Abstract defaults fo padding option element, based on chart type.
+ * Abstract defaults for padding option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -27,9 +27,9 @@ abstract class AbstractDefaultChartPadding implements IsDefaultPadding {
 	private final IsDefaultPadding padding;
 
 	/**
-	 * Creates the object by scale label padding option element instance.
+	 * Creates the object by padding option element instance.
 	 * 
-	 * @param padding scale label padding option element instance.
+	 * @param padding padding option element instance.
 	 */
 	AbstractDefaultChartPadding(IsDefaultPadding padding) {
 		this.padding = padding;

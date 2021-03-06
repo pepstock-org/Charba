@@ -50,7 +50,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
-		getAxis().getScale().getScaleLabel().getPadding().setLeft(padding);
+		getAxis().getScale().getTitle().getPadding().setLeft(padding);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
-		return getAxis().getScale().getScaleLabel().getPadding().getLeft();
+		return getAxis().getScale().getTitle().getPadding().getLeft();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
-		getAxis().getScale().getScaleLabel().getPadding().setRight(padding);
+		getAxis().getScale().getTitle().getPadding().setRight(padding);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
-		return getAxis().getScale().getScaleLabel().getPadding().getRight();
+		return getAxis().getScale().getTitle().getPadding().getRight();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
-		getAxis().getScale().getScaleLabel().getPadding().setTop(padding);
+		getAxis().getScale().getTitle().getPadding().setTop(padding);
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
-		return getAxis().getScale().getScaleLabel().getPadding().getTop();
+		return getAxis().getScale().getTitle().getPadding().getTop();
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
-		getAxis().getScale().getScaleLabel().getPadding().setBottom(padding);
+		getAxis().getScale().getTitle().getPadding().setBottom(padding);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CartesianPadding extends AxisContainer {
 	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
-		return getAxis().getScale().getScaleLabel().getPadding().getBottom();
+		return getAxis().getScale().getTitle().getPadding().getBottom();
 	}
 
 }
