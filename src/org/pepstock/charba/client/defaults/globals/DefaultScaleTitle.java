@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
@@ -30,8 +29,6 @@ import org.pepstock.charba.client.enums.ScaleTitleAlign;
 public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
-
-	private static final String DEFAULT_TEXT = Constants.EMPTY_STRING;
 
 	private final DefaultScaleTitlePadding padding = new DefaultScaleTitlePadding();
 
@@ -82,16 +79,6 @@ public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 	@Override
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getText()
-	 */
-	@Override
-	public String getText() {
-		return DEFAULT_TEXT;
 	}
 
 	/*

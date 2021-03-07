@@ -39,13 +39,6 @@ public interface IsDefaultScaleTitle extends IsDefaultFontContainer {
 	boolean isDisplay();
 
 	/**
-	 * Returns the text for the scale string.
-	 * 
-	 * @return The text for the scale string.
-	 */
-	String getText();
-
-	/**
 	 * Returns the alignment of the axis title.
 	 * 
 	 * @return the alignment of the axis title.

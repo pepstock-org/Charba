@@ -15,10 +15,15 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.enums.ScaleTitleAlign;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
@@ -124,22 +129,24 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	}
 
 	/**
-	 * Sets the text for the scale string.
+	 * Sets the title text to display.<br>If specified as an array, text is rendered on multiple lines.
 	 * 
-	 * @param text the text for the scale string.
+	 * @param text the title text to display.<br>If specified as an array, text is rendered on multiple lines.
 	 */
-	public void setText(String text) {
-		setValueAndAddToParent(Property.TEXT, text);
+	public void setText(String... text) {
+		setValueOrArrayAndAddToParent(Property.TEXT, text);
 	}
 
 	/**
-	 * Returns the text for the scale string.
+	 * Returns the title text to display, as a list of strings.
 	 * 
-	 * @return the text for the scale string.
+	 * @return a list of strings or an empty list if not exist
 	 */
-	@Override
-	public String getText() {
-		return getValue(Property.TEXT, getDefaultValues().getText());
+	public List<String> getText() {
+		// reads as array
+		// and returns it
+		ArrayString array = getValueOrArray(Property.TEXT, UndefinedValues.STRING);
+		return ArrayListHelper.list(array);
 	}
 
 	/**

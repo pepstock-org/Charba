@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.ScaleTitleAlign;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
- * The scale title configuration defines options for the scale title.<br> Note that this only applies to cartesian axes.
+ * The scale title configuration defines options for the scale title.<br>
+ * Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -117,20 +120,22 @@ public class CartesianScaleTitle extends AxisContainer {
 	}
 
 	/**
-	 * Sets the text for the label.
+	 * Sets the title text to display.<br>
+	 * If specified as an array, text is rendered on multiple lines.
 	 * 
-	 * @param text The text for the label.
+	 * @param text the title text to display.<br>
+	 *            If specified as an array, text is rendered on multiple lines.
 	 */
-	public void setText(String text) {
+	public void setText(String... text) {
 		getAxis().getScale().getTitle().setText(text);
 	}
 
 	/**
-	 * Returns the text for the label.
+	 * Returns the title text to display, as a list of strings.
 	 * 
-	 * @return The text for the label.
+	 * @return a list of strings
 	 */
-	public String getText() {
+	public List<String> getText() {
 		return getAxis().getScale().getTitle().getText();
 	}
 

@@ -131,9 +131,9 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	}
 
 	/**
-	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * Sets the title text to display.<br>If specified as an array, text is rendered on multiple lines.
 	 * 
-	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * @param text the title text to display.<br>If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
 		setValueOrArrayAndAddToParent(Property.TEXT, text);
