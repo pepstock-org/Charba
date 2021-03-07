@@ -390,7 +390,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
  * add the selected value of the scale by the click event to the `AxisClickEvent` class.
- * import the master of **new Chart.js annotation plugin**, on February 1st, 2021. 
+ * **import last CHART.JS Annotation plugin version,** [version 1.0.0-beta4](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.0.0-beta.4) on March 7th, 2021.
    * implement only click, dblclick, enter and leave events.
    * add `ellipse` and `point` annotation types.
    * add `display` property to all annotations in order to enable or disable the display of annotation.
