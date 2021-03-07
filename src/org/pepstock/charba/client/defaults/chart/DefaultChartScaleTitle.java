@@ -30,7 +30,7 @@ public final class DefaultChartScaleTitle implements IsDefaultScaleTitle {
 
 	private final ScaleTitle title;
 
-	private final DefaultChartScaleLabelPadding padding;
+	private final DefaultChartScaleTitlePadding padding;
 
 	/**
 	 * Creates the object by scale title option element instance.
@@ -40,7 +40,7 @@ public final class DefaultChartScaleTitle implements IsDefaultScaleTitle {
 	DefaultChartScaleTitle(ScaleTitle title) {
 		this.title = title;
 		// creates sub element
-		this.padding = new DefaultChartScaleLabelPadding(title.getPadding());
+		this.padding = new DefaultChartScaleTitlePadding(title.getPadding());
 	}
 
 	/*

@@ -20,14 +20,14 @@ package org.pepstock.charba.client.defaults.globals;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultScaleLabelPadding extends AbstractDefaultPadding {
+public final class DefaultScaleTitlePadding extends AbstractDefaultPadding {
 
 	private static final int DEFAULT_PADDING = 4;
 
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultScaleLabelPadding() {
+	DefaultScaleTitlePadding() {
 		super(DEFAULT_PADDING);
 	}
 

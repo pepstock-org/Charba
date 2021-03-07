@@ -33,7 +33,7 @@ public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 
 	private static final String DEFAULT_TEXT = Constants.EMPTY_STRING;
 
-	private final DefaultScaleLabelPadding padding = new DefaultScaleLabelPadding();
+	private final DefaultScaleTitlePadding padding = new DefaultScaleTitlePadding();
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 

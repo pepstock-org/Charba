@@ -290,6 +290,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `borderDashOffset` option from int to double in all classes where referenced.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
  * rename `ScaleLabelAlign` enumeration class to `ScaleTitleAlign` in order to keep it align with CHART.JS names.
+ * rename `ScaleLabelPadding` options class to `ScaleTitlePadding` in order to keep it align with CHART.JS names.
   
 ### Features
 

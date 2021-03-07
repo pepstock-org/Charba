@@ -25,18 +25,18 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class ScaleLabelPadding extends AbstractPadding<ScaleTitle> {
+public final class ScaleTitlePadding extends AbstractPadding<ScaleTitle> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param scaleLabel scale/axis label of this object.
+	 * @param title scale/axis label of this object.
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ScaleLabelPadding(ScaleTitle scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
-		super(scaleLabel, childKey, defaultValues, nativeObject);
+	ScaleTitlePadding(ScaleTitle title, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
+		super(title, childKey, defaultValues, nativeObject);
 	}
 
 }

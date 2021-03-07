@@ -15,21 +15,21 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.options.ScaleLabelPadding;
+import org.pepstock.charba.client.options.ScaleTitlePadding;
 
 /**
  * Defaults for scale title padding option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartScaleLabelPadding extends AbstractDefaultChartPadding {
+public final class DefaultChartScaleTitlePadding extends AbstractDefaultChartPadding {
 
 	/**
 	 * Creates the object by scale title padding option element instance.
 	 * 
 	 * @param padding scale title padding option element instance.
 	 */
-	DefaultChartScaleLabelPadding(ScaleLabelPadding padding) {
+	DefaultChartScaleTitlePadding(ScaleTitlePadding padding) {
 		super(padding);
 	}
 
