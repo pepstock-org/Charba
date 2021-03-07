@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
+import org.pepstock.charba.client.enums.ScaleTitleAlign;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
@@ -147,7 +147,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	 * 
 	 * @param align the alignment of the axis title
 	 */
-	public void setAlign(ScaleLabelAlign align) {
+	public void setAlign(ScaleTitleAlign align) {
 		setValueAndAddToParent(Property.ALIGN, align);
 	}
 
@@ -157,8 +157,8 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @return the alignment of the axis title
 	 */
 	@Override
-	public ScaleLabelAlign getAlign() {
-		return getValue(Property.ALIGN, ScaleLabelAlign.values(), getDefaultValues().getAlign());
+	public ScaleTitleAlign getAlign() {
+		return getValue(Property.ALIGN, ScaleTitleAlign.values(), getDefaultValues().getAlign());
 	}
 
 }

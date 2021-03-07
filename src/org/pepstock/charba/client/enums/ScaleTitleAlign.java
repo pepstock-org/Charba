@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum ScaleLabelAlign implements Key
+public enum ScaleTitleAlign implements Key
 {
 	/**
 	 * The property sets the text at start of scale.
@@ -45,7 +45,7 @@ public enum ScaleLabelAlign implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private ScaleLabelAlign(String value) {
+	private ScaleTitleAlign(String value) {
 		this.value = value;
 	}
 

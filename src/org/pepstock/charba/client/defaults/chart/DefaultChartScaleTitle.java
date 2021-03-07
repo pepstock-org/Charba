@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
+import org.pepstock.charba.client.enums.ScaleTitleAlign;
 import org.pepstock.charba.client.options.ScaleTitle;
 
 /**
@@ -99,7 +99,7 @@ public final class DefaultChartScaleTitle implements IsDefaultScaleTitle {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getAlign()
 	 */
 	@Override
-	public ScaleLabelAlign getAlign() {
+	public ScaleTitleAlign getAlign() {
 		return title.getAlign();
 	}
 

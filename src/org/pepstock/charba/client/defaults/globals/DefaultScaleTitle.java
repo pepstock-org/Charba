@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
+import org.pepstock.charba.client.enums.ScaleTitleAlign;
 
 /**
  * CHART.JS default values for TITLE element of a scale.
@@ -100,8 +100,8 @@ public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleTitle#getAlign()
 	 */
 	@Override
-	public ScaleLabelAlign getAlign() {
-		return ScaleLabelAlign.CENTER;
+	public ScaleTitleAlign getAlign() {
+		return ScaleTitleAlign.CENTER;
 	}
 
 }

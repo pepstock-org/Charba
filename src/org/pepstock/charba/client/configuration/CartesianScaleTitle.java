@@ -17,7 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
+import org.pepstock.charba.client.enums.ScaleTitleAlign;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
@@ -139,7 +139,7 @@ public class CartesianScaleTitle extends AxisContainer {
 	 * 
 	 * @param align the alignment of the axis title
 	 */
-	public void setAlign(ScaleLabelAlign align) {
+	public void setAlign(ScaleTitleAlign align) {
 		getAxis().getScale().getTitle().setAlign(align);
 	}
 
@@ -148,7 +148,7 @@ public class CartesianScaleTitle extends AxisContainer {
 	 * 
 	 * @return the alignment of the axis title
 	 */
-	public ScaleLabelAlign getAlign() {
+	public ScaleTitleAlign getAlign() {
 		return getAxis().getScale().getTitle().getAlign();
 	}
 

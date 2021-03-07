@@ -37,7 +37,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 
 	private final Scale scale;
 
-	private final DefaultChartScaleTitle scaleLabel;
+	private final DefaultChartScaleTitle title;
 
 	private final DefaultChartTicks ticks;
 
@@ -59,7 +59,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 	public DefaultChartScale(Scale scale) {
 		this.scale = scale;
 		// creates sub elements
-		this.scaleLabel = new DefaultChartScaleTitle(scale.getTitle());
+		this.title = new DefaultChartScaleTitle(scale.getTitle());
 		this.ticks = new DefaultChartTicks(scale.getTicks());
 		this.gridLines = new DefaultChartGridLines(scale.getGridLines());
 		this.angleLines = new DefaultChartAngleLines(scale.getAngleLines());
@@ -75,7 +75,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 	 */
 	@Override
 	public IsDefaultScaleTitle getTitle() {
-		return scaleLabel;
+		return title;
 	}
 
 	/*

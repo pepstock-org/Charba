@@ -289,6 +289,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
  * change `borderDashOffset` option from int to double in all classes where referenced.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
+ * rename `ScaleLabelAlign` enumeration class to `ScaleTitleAlign` in order to keep it align with CHART.JS names.
   
 ### Features
 

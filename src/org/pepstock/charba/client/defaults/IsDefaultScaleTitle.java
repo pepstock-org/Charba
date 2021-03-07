@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.ScaleLabelAlign;
+import org.pepstock.charba.client.enums.ScaleTitleAlign;
 
 /**
  * Interface to define scale title object defaults.
@@ -50,6 +50,6 @@ public interface IsDefaultScaleTitle extends IsDefaultFontContainer {
 	 * 
 	 * @return the alignment of the axis title.
 	 */
-	ScaleLabelAlign getAlign();
+	ScaleTitleAlign getAlign();
 
 }

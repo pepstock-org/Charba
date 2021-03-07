@@ -60,7 +60,7 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
 
-	private final DefaultScaleTitle scaleLabel = new DefaultScaleTitle();
+	private final DefaultScaleTitle title = new DefaultScaleTitle();
 
 	private final DefaultTicks ticks = new DefaultTicks();
 
@@ -112,7 +112,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public IsDefaultScaleTitle getTitle() {
-		return scaleLabel;
+		return title;
 	}
 
 	/*

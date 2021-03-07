@@ -40,6 +40,7 @@ import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.options.ExtendedScale;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.ScaleTitle;
 
 import jsinterop.annotations.JsFunction;
 
@@ -129,7 +130,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final AxisType storeType;
 	// stores default scale
 	private final IsDefaultScale defaultValues;
-	
 
 	/**
 	 * Name of properties of native object.
@@ -254,9 +254,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
+	 * If set to false the axis is hidden from view.<br>
+	 * Overrides {@link GridLines#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
 	 * 
-	 * @param display If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
+	 * @param display If set to false the axis is hidden from view.<br>
+	 *            Overrides {@link GridLines#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
 	 */
 	public void setDisplay(boolean display) {
 		getScale().setDisplay(display);
@@ -264,7 +266,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false).<br>
+	 * When {@link Display#AUTO}, the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
@@ -274,7 +277,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	/**
 	 * The display option controls the visibility of axis.<br>
-	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if at least one associated dataset is visible.
+	 * Controls the axis global visibility (visible when true, hidden when false).<br>
+	 * When {@link Display#AUTO}, the axis is visible only if at least one associated dataset is visible.
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
@@ -283,7 +287,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * The weight used to sort the axis. Higher weights are further away from the chart area.
+	 * The weight used to sort the axis.<br>
+	 * Higher weights are further away from the chart area.
 	 * 
 	 * @param weight weight of axis
 	 */
@@ -292,7 +297,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * The weight used to sort the axis. Higher weights are further away from the chart area.
+	 * The weight used to sort the axis.<br>
+	 * Higher weights are further away from the chart area.
 	 * 
 	 * @return weight of axis
 	 */
