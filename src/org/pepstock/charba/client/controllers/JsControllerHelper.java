@@ -107,7 +107,7 @@ final class JsControllerHelper {
 	 * @param controllerType controller type
 	 * @param context context of controller
 	 * @param element element to be remove
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	void removeHoverStyle(ControllerType controllerType, ControllerContext context, NativeObject element, int datasetIndex, int index) {
@@ -120,7 +120,7 @@ final class JsControllerHelper {
 	 * @param controllerType controller type
 	 * @param context context of controller
 	 * @param element element to be set.
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	void setHoverStyle(ControllerType controllerType, ControllerContext context, NativeObject element, int datasetIndex, int index) {

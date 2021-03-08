@@ -127,7 +127,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the data set using a default.
 	 * 
 	 * @param defaultValues default options
 	 */
@@ -136,7 +136,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the data set using a default.
 	 * 
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
@@ -146,7 +146,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the dataset using chart type related to the dataset.
+	 * Creates the data set using chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param hidden if <code>true</code>, it will be initially hidden.
@@ -156,7 +156,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the dataset using a default and chart type related to the dataset.
+	 * Creates the data set using a default and chart type related to the dataset.
 	 * 
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options

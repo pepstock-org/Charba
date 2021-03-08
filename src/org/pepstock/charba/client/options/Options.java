@@ -342,9 +342,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns the datasets element.
+	 * Returns the data sets element.
 	 * 
-	 * @return the datasets
+	 * @return the data sets element
 	 */
 	@Override
 	public Datasets getDatasets() {
@@ -827,5 +827,4 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public boolean isSpanGaps() {
 		return spanGapHandler.isSpanGaps();
 	}
-
 }

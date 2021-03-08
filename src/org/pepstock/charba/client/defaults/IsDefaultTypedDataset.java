@@ -15,21 +15,18 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.Type;
-
 /**
- * Interface to define data sets object defaults.
+ * Interface to define datasets object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultDatasets {
+public interface IsDefaultTypedDataset extends IsDefaultBarDatasets, IsDefaultAnimationContainer {
 
 	/**
-	 * Returns the data sets options by a chart type.
+	 * Returns if the line is not drawn for this dataset.
 	 * 
-	 * @param type chart type.
-	 * @return the data sets options by a chart type
+	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
-	IsDefaultTypedDataset get(Type type);
+	boolean isShowLine();
 
 }

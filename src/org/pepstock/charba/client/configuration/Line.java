@@ -171,8 +171,8 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 * </pre>
 	 * 
 	 * <br>
-	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.<br>
-	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of data sets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) data sets : it preserves monotonicity (or piecewise monotonicity) of the data set being interpolated, and ensures local
 	 * extremums (if any) stay at input data points.
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
@@ -200,18 +200,18 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	}
 
 	/**
-	 * Sets how to fill the area under the line, by absolute dataset index.
+	 * Sets how to fill the area under the line, by absolute data set index.
 	 * 
-	 * @param index absolute dataset index of the chart.
+	 * @param index absolute data set index of the chart.
 	 */
 	public void setFill(int index) {
 		getConfiguration().getElements().getLine().setFill(index);
 	}
 
 	/**
-	 * Sets how to fill the area under the line, by relative dataset index.
+	 * Sets how to fill the area under the line, by relative data set index.
 	 * 
-	 * @param index relative dataset index of the chart.
+	 * @param index relative data set index of the chart.
 	 */
 	public void setFill(String index) {
 		getConfiguration().getElements().getLine().setFill(index);

@@ -267,7 +267,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * The display option controls the visibility of axis.<br>
 	 * Controls the axis global visibility (visible when true, hidden when false).<br>
-	 * When {@link Display#AUTO}, the axis is visible only if at least one associated dataset is visible.
+	 * When {@link Display#AUTO}, the axis is visible only if at least one associated data set is visible.
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
@@ -278,7 +278,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * The display option controls the visibility of axis.<br>
 	 * Controls the axis global visibility (visible when true, hidden when false).<br>
-	 * When {@link Display#AUTO}, the axis is visible only if at least one associated dataset is visible.
+	 * When {@link Display#AUTO}, the axis is visible only if at least one associated data set is visible.
 	 * 
 	 * @return display option controls the visibility of axis
 	 */

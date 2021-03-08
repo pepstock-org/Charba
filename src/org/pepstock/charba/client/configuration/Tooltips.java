@@ -893,9 +893,9 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
-	 * Sets if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * Sets if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
 	 * 
-	 * @param usePointStyle <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between
+	 * @param usePointStyle <code>true</code> if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between
 	 *            boxWidth and boxHeight)
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
@@ -903,9 +903,9 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
-	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * Returns if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
 	 * 
-	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and
+	 * @return <code>true</code> if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between boxWidth and
 	 *         boxHeight)
 	 */
 	public boolean isUsePointStyle() {

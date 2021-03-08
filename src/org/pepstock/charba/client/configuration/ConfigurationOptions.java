@@ -158,8 +158,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final Elements elements;
 
 	private final Plugins plugins;
+	
+	private final Datasets datasets;
 
-	// amount of dataset selection event handlers
+	// amount of data set selection event handlers
 	private int onDatasetSelectionHandlers = 0;
 	// amount of click event handlers
 	private int onClickHandlers = 0;
@@ -189,6 +191,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		this.animationContainer = new AnimationContainer(getChart(), this::getConfiguration);
 		// creates all sub elements
 		this.elements = new Elements(this);
+		this.datasets = new Datasets(this);
 		this.legend = new Legend(this);
 		this.title = new Title(this);
 		this.layout = new Layout(this);
@@ -339,6 +342,15 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public Elements getElements() {
 		return elements;
+	}
+
+	/**
+	 * Returns the data sets element.
+	 * 
+	 * @return the data sets
+	 */
+	public Datasets getDatasets() {
+		return datasets;
 	}
 
 	/**
@@ -507,9 +519,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.
+	 * Returns <code>true</code> if there is any data set selection handler, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.
+	 * @return <code>true</code> if there is any data set selection handler, otherwise <code>false</code>.
 	 */
 	public final boolean hasDatasetSelectionHandlers() {
 		return onDatasetSelectionHandlers > 0;
@@ -540,7 +552,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {
-		// checks if type of added event handler is dataset selection or click
+		// checks if type of added event handler is data set selection or click
 		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
@@ -549,9 +561,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			}
 			// increments amount of handlers
 			onClickHandlers++;
-			// check if a dataset selection handler has been added
+			// check if a data set selection handler has been added
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
-				// increments handlers of dataset selection
+				// increments handlers of data set selection
 				onDatasetSelectionHandlers++;
 			}
 			// check if a title click handler has been added
@@ -594,7 +606,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
-		// checks if type of removed event handler is dataset selection or click
+		// checks if type of removed event handler is data set selection or click
 		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// decrements the amount of handlers
 			onClickHandlers--;
@@ -603,9 +615,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				// removes the java script object
 				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, null);
 			}
-			// check if a dataset selection handler has been removed
+			// check if a data set selection handler has been removed
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
-				// decrements handlers of dataset selection
+				// decrements handlers of data set selection
 				onDatasetSelectionHandlers--;
 			}
 			// check if a title click handler has been removed
@@ -675,16 +687,16 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Check if the click event on chart and manage it fire a CHARBA dataset selection event.
+	 * Check if the click event on chart and manage it fire a CHARBA data set selection event.
 	 * 
 	 * @param event event generated on chart
 	 */
 	private void handleDatasetSelection(BaseNativeEvent event) {
-		// gets the dataset items by event
+		// gets the data set items by event
 		DatasetReference item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler
 		if (item != null && hasDatasetSelectionHandlers()) {
-			// fires the event for dataset selection
+			// fires the event for data set selection
 			getChart().fireEvent(new DatasetSelectionEvent(event, item));
 		}
 	}

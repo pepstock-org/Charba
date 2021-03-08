@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultBarDatasets;
 
@@ -60,7 +61,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getDatasets().getBarPercentage();
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getBarPercentage();
 	}
 
 	/**
@@ -88,7 +89,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getDatasets().getCategoryPercentage();
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getCategoryPercentage();
 	}
 
 	/**
@@ -120,7 +121,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getDatasets().getBarThickness();
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getBarThickness();
 	}
 
 	/**
@@ -148,7 +149,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getDatasets().getMaxBarThickness();
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getMaxBarThickness();
 	}
 
 	/**
@@ -176,6 +177,6 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getDatasets().getMinBarLength();
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getMinBarLength();
 	}
 }

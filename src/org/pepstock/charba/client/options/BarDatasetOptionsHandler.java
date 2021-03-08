@@ -22,8 +22,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
-import org.pepstock.charba.client.defaults.IsDefaultDatasets;
-import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
+import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
+import org.pepstock.charba.client.defaults.globals.DefaultTypedDataset;
 
 /**
  * Manages the BAR dataset properties of options in order to use the same logic between datasets and options/configuration.
@@ -31,7 +31,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDatasets> {
+public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTypedDataset> {
 
 	// min value of percentage
 	private static final double MINIMUM_PERCENTAGE = 0D;
@@ -80,7 +80,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 * @param defaultValues default value of options properties to use when the properties do not exist
 	 * @param envelop envelop of native object where bar options properties must be managed
 	 */
-	public BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, DataEnvelop<NativeObject> envelop) {
+	public BarDatasetOptionsHandler(AbstractNode parent, IsDefaultTypedDataset defaultValues, DataEnvelop<NativeObject> envelop) {
 		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -91,7 +91,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 * @param defaultValues default value of options properties to use when the properties do not exist
 	 * @param nativeObject native object where bar options properties must be managed
 	 */
-	BarDatasetOptionsHandler(AbstractNode parent, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
+	BarDatasetOptionsHandler(AbstractNode parent, IsDefaultTypedDataset defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 
@@ -142,9 +142,9 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	 */
 	void setBarThickness(int barThickness) {
 		// checks if FLEX value has been set
-		if (DefaultDatasets.FLEX_BAR_THICKNESS == barThickness) {
+		if (DefaultTypedDataset.FLEX_BAR_THICKNESS == barThickness) {
 			// flex must be set
-			setValueAndAddToParent(Property.BAR_THICKNESS, DefaultDatasets.FLEX_BAR_THICKNESS_VALUE);
+			setValueAndAddToParent(Property.BAR_THICKNESS, DefaultTypedDataset.FLEX_BAR_THICKNESS_VALUE);
 		} else {
 			setValueAndAddToParent(Property.BAR_THICKNESS, barThickness);
 		}
@@ -160,7 +160,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultDat
 	int getBarThickness() {
 		// checks if flex has been set
 		if (isType(Property.BAR_THICKNESS, ObjectType.STRING)) {
-			return DefaultDatasets.FLEX_BAR_THICKNESS;
+			return DefaultTypedDataset.FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex
 		return getValue(Property.BAR_THICKNESS, getDefaultValues().getBarThickness());

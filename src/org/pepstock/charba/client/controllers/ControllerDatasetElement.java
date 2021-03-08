@@ -20,7 +20,7 @@ import org.pepstock.charba.client.items.DatasetElement;
 
 /**
  * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods.<br>
- * It contains information about the dataset element.
+ * It contains information about the data set element.
  * 
  * @author Andrea "Stock" Stocchero
  *

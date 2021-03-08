@@ -101,7 +101,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be removed.
-		 * @param datasetIndex dataset index
+		 * @param datasetIndex data set index
 		 * @param index data index
 		 */
 		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
@@ -120,7 +120,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be set.
-		 * @param datasetIndex dataset index
+		 * @param datasetIndex data set index
 		 * @param index data index
 		 */
 		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
@@ -152,7 +152,7 @@ final class WrapperController extends NativeObjectContainer {
 	interface ProxyLinkScalesCallback {
 
 		/**
-		 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+		 * Ensures that the data set represented by this controller is linked to a scale.<br>
 		 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
 		 * 
 		 * @param context java script <code>this</code> function context.
@@ -350,7 +350,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chart chart chart instance
 	 * @param object element to be removed.
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
@@ -366,7 +366,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chart chart chart instance
 	 * @param object element to be set.
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
@@ -397,7 +397,7 @@ final class WrapperController extends NativeObjectContainer {
 	}
 
 	/**
-	 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+	 * Ensures that the data set represented by this controller is linked to a scale.<br>
 	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
 	 * 
 	 * @param context context of controller

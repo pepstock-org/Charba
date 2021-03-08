@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Defines the border width for BAR dataset (left, top, right, bottom).
+ * Defines the border width for BAR data set (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
  *

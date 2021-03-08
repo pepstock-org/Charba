@@ -15,10 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultAnimations;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
-import org.pepstock.charba.client.defaults.IsDefaultTransitions;
+import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
 
 /**
  * CHART.JS default values for DATASETS element.
@@ -41,91 +40,11 @@ public final class DefaultChartDatasets implements IsDefaultDatasets {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getAnimation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#get(org.pepstock.charba.client.Type)
 	 */
 	@Override
-	public IsDefaultAnimation getAnimation() {
-		return datasets.getAnimation();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationContainer#getTransitions()
-	 */
-	@Override
-	public IsDefaultTransitions getTransitions() {
-		return datasets.getTransitions();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationTransition#getAnimations()
-	 */
-	@Override
-	public IsDefaultAnimations getAnimations() {
-		return datasets.getAnimations();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getBarPercentage()
-	 */
-	@Override
-	public double getBarPercentage() {
-		return datasets.getBarPercentage();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getCategoryPercentage()
-	 */
-	@Override
-	public double getCategoryPercentage() {
-		return datasets.getCategoryPercentage();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getBarThickness()
-	 */
-	@Override
-	public int getBarThickness() {
-		return datasets.getBarThickness();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getMaxBarThickness()
-	 */
-	@Override
-	public int getMaxBarThickness() {
-		return datasets.getMaxBarThickness();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#getMinBarLength()
-	 */
-	@Override
-	public int getMinBarLength() {
-		return datasets.getMinBarLength();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultDatasets#isShowLine()
-	 */
-	@Override
-	public boolean isShowLine() {
-		return datasets.isShowLine();
+	public IsDefaultTypedDataset get(Type type) {
+		return datasets.get(type);
 	}
 
 }

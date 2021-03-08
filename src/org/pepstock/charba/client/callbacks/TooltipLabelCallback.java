@@ -71,7 +71,7 @@ public interface TooltipLabelCallback {
 
 	/**
 	 * Returns the point style to use instead of color boxes if <code>usePointStyle</code> is true.<br>
-	 * Default implementation uses the point style from the dataset points.
+	 * Default implementation uses the point style from the data set points.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item

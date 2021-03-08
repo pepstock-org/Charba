@@ -60,7 +60,7 @@ final class BarStackHandler extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the utility using dataset native object.
+	 * Creates the utility using data set native object.
 	 * 
 	 * @param nativeObject native object to update with options
 	 */

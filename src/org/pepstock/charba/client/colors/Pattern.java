@@ -24,7 +24,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
 
 /**
- * Entity to apply a canvas pattern into a dataset as background.<br>
+ * Entity to apply a canvas pattern into a data set as background.<br>
  * See <a href="https://www.toptal.com/designers/subtlepatterns/">here</a> some interesting pattern images.
  * 
  * @author Andrea "Stock" Stocchero

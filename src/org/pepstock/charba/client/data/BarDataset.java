@@ -175,7 +175,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the data set using a default.
 	 * 
 	 * @param defaultValues default options
 	 */
@@ -184,7 +184,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the data set using a default.
 	 * 
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
@@ -194,9 +194,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Creates the dataset using chart type related to the dataset.
+	 * Creates the data set using chart type related to the data set.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
 	protected BarDataset(Type type, boolean hidden) {
@@ -204,9 +204,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Creates the dataset using a default and chart type related to the dataset.
+	 * Creates the data set using a default and chart type related to the data set.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
@@ -214,7 +214,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		super(type, defaultValues, hidden);
 		// sets new order handler and options handler
 		this.orderHandler = new OrderHandler(getNativeObject());
-		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues().getDatasets(), new DataEnvelop<>(getNativeObject(), true));
+		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getTypedDataset(), new DataEnvelop<>(getNativeObject(), true));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -320,9 +320,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * Returns the label for the data set which appears in the legend and tooltips.
 	 * 
-	 * @return the label for the dataset which appears in the legend and tooltips.
+	 * @return the label for the data set which appears in the legend and tooltips.
 	 */
 	@Override
 	public String getLabel() {
@@ -330,9 +330,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the ID of the x axis to plot this dataset on.
+	 * Sets the ID of the x axis to plot this data set on.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on.<br>
+	 * @param xAxisID the ID of the x axis to plot this data set on.<br>
 	 * 
 	 */
 	public void setXAxisID(String xAxisID) {
@@ -343,19 +343,19 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the ID of the x axis to plot this dataset on.
+	 * Sets the ID of the x axis to plot this data set on.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on.
+	 * @param xAxisID the ID of the x axis to plot this data set on.
 	 */
 	public void setXAxisID(IsScaleId xAxisID) {
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on.<br>
+	 * Returns the ID of the x axis to plot this data set on.<br>
 	 * If not specified, this defaults to the ID of {@link DefaultScaleId#X}.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on.<br>
+	 * @return the ID of the x axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#X}
 	 */
 	public IsScaleId getXAxisID() {
@@ -363,9 +363,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on.
+	 * Sets the ID of the y axis to plot this data set on.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on.
+	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
 	public void setYAxisID(String yAxisID) {
 		// checks if is valid scale id
@@ -375,19 +375,19 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on.
+	 * Sets the ID of the y axis to plot this data set on.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on.
+	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
 	public void setYAxisID(IsScaleId yAxisID) {
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
 	/**
-	 * Returns the ID of the y axis to plot this dataset on. <br>
+	 * Returns the ID of the y axis to plot this data set on. <br>
 	 * If not specified, this defaults to the ID of {@link DefaultScaleId#Y}.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on.<br>
+	 * @return the ID of the y axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#Y}
 	 */
 	public IsScaleId getYAxisID() {
@@ -727,7 +727,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * Returns the data property of a data set for a chart is specified as an array of floating data.
 	 * 
 	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
 	 */
@@ -736,7 +736,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of floating data.
+	 * Returns the data property of a data set for a chart is specified as an array of floating data.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
@@ -764,7 +764,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of arrays of doubles.
+	 * Sets the data property of a data set for a chart is specified as an array of arrays of doubles.
 	 * 
 	 * @param floatingData an array of arrays of doubles.
 	 */
@@ -790,7 +790,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * Sets the data property of a data set for a chart is specified as an array of floating data.
 	 * 
 	 * @param floatingData an array of floating data
 	 */
@@ -801,7 +801,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of floating data.
+	 * Sets the data property of a data set for a chart is specified as an array of floating data.
 	 * 
 	 * @param floatingData an array of floating data
 	 */

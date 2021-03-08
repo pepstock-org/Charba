@@ -147,8 +147,8 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
-	 * @param datasetIndex dataset index
-	 * @param index index of gradient related to index of dataset item of whole dataset
+	 * @param datasetIndex data set index
+	 * @param index index of gradient related to index of data set item of whole data set
 	 * @return a canvas gradient
 	 */
 	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
@@ -306,8 +306,8 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
-	 * @param datasetIndex dataset index
-	 * @param index index of gradient related to index of dataset item of whole dataset
+	 * @param datasetIndex data set index
+	 * @param index index of gradient related to index of data set item of whole data set
 	 * @return a radial canvas gradient
 	 */
 	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
@@ -419,7 +419,7 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance
 	 * @param gradient gradient instance
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 * @return the coordinates of a center of arc
 	 */
@@ -430,7 +430,7 @@ public abstract class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance
 	 * @param gradient gradient instance
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 * @return the inner and outer radius of arc
 	 */

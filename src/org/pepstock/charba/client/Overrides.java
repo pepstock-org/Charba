@@ -36,7 +36,6 @@ final class Overrides extends NativeObjectContainer {
 	 * @param nativeObject native object which maps the java script object chart.defaults.global
 	 */
 	Overrides(NativeObject nativeObject) {
-		// uses the CHART.JS default options as default one
 		super(nativeObject);
 	}
 	

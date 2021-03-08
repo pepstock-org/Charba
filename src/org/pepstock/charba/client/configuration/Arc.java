@@ -64,20 +64,20 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	}
 
 	/**
-	 * Sets the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
+	 * Sets the relative thickness of the data set.<br>
+	 * Providing a value for weight will cause the pie or doughnut data set to be drawn with a thickness relative to the sum of all the data set weight values.
 	 * 
-	 * @param weight the relative thickness of the dataset
+	 * @param weight the relative thickness of the data set
 	 */
 	public void setWeight(double weight) {
 		getConfiguration().getElements().getArc().setWeight(weight);
 	}
 
 	/**
-	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
+	 * Returns the relative thickness of the data set.<br>
+	 * Providing a value for weight will cause the pie or doughnut data set to be drawn with a thickness relative to the sum of all the data set weight values.
 	 * 
-	 * @return the relative thickness of the dataset
+	 * @return the relative thickness of the data set
 	 */
 	public double getWeight() {
 		return getConfiguration().getElements().getArc().getWeight();

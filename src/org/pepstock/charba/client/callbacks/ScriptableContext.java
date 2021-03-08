@@ -117,9 +117,9 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	}
 
 	/**
-	 * Returns the index of the current dataset.
+	 * Returns the index of the current data set.
 	 * 
-	 * @return the index of the current dataset.
+	 * @return the index of the current data set.
 	 */
 	public int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);

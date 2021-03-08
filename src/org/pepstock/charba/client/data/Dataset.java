@@ -49,6 +49,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
@@ -369,6 +370,15 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	protected final IsDefaultOptions getDefaultValues() {
 		return defaultValues;
+	}
+
+	/**
+	 * Returns the typed data set for the type of the data set.
+	 * 
+	 * @return the typed data set for the type of the data set
+	 */
+	protected final IsDefaultTypedDataset getTypedDataset() {
+		return getDefaultValues().getDatasets().get(getType());
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -324,7 +325,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	public double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, Defaults.get().getGlobal().getDatasets().getBarPercentage());
+		return getValue(Property.BAR_PERCENTAGE, Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getBarPercentage());
 	}
 
 	/**
@@ -333,7 +334,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, Defaults.get().getGlobal().getDatasets().getCategoryPercentage());
+		return getValue(Property.CATEGORY_PERCENTAGE, Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getCategoryPercentage());
 	}
 
 	/**

@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 
 /**
@@ -25,44 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets, HasBarDatasetOptions, HasAnimationOptions {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		// lining datasets
-		SHOW_LINE("showLine");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	// bar options handler instance
-	private final BarDatasetOptionsHandler barOptionsHandler;
-	// animation container
-	private final AnimationContainer animationContainer;
+public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets{
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -74,48 +40,43 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	 */
 	Datasets(Options options, Key childKey, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-		// creates the properties handlers
-		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues(), getNativeObject());
-		// sets animation container
-		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasAnimation#getAnimationContainer()
-	 */
-	@Override
-	public final AnimationContainer getAnimationContainer() {
-		return animationContainer;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasBarDatasetOptions#getDatasetOptionsHandler()
-	 */
-	@Override
-	public BarDatasetOptionsHandler getDatasetOptionsHandler() {
-		return barOptionsHandler;
-	}
-
+	
 	/**
-	 * Sets if the line is not drawn for this dataset.
+	 * Returns the data set by a chart type.
 	 * 
-	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
-	 */
-	public void setShowLine(boolean showLine) {
-		setValueAndAddToParent(Property.SHOW_LINE, showLine);
-	}
-
-	/**
-	 * Returns if the line is not drawn for this dataset.
-	 * 
-	 * @return <code>false</code> if the line is not drawn for this dataset.
+	 * @param type chart type.
+	 * @return the data set by a chart type
 	 */
 	@Override
-	public boolean isShowLine() {
-		return getValue(Property.SHOW_LINE, getDefaultValues().isShowLine());
+	public TypedDataset get(Type type) {
+		// checks if type is consistent
+		Type.checkIfValid(type);
+		// checks if is a controller
+		if (type instanceof ControllerType) {
+			// cats to controller type
+			ControllerType controllerType = (ControllerType) type;
+			// registers if not register
+			controllerType.register();
+		}
+		// returns the typed data set
+		return new TypedDataset(this, type, getDefaultValues().get(type), getDatasets(type));
 	}
+	
+	/**
+	 * Returns the data sets options by chart type.
+	 * 
+	 * @param type the type of chart
+	 * @return the data sets options by chart type
+	 */
+	private NativeObject getDatasets(Type type) {
+		// checks if type is present
+		if (isType(type, ObjectType.OBJECT)) {
+			// checks if chart type is consistent
+			return getValue(Key.checkAndGetIfValid(type));
+		}
+		// if here, the type doesn't exist
+		return null;
+	}
+
 }

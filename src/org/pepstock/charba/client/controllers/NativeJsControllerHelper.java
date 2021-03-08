@@ -81,7 +81,7 @@ final class NativeJsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be remove.
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	@JsMethod
@@ -93,7 +93,7 @@ final class NativeJsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be set.
-	 * @param datasetIndex dataset index
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 */
 	@JsMethod

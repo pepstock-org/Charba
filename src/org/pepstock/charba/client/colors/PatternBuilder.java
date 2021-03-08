@@ -29,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * The pattern builder is the entry point to create a canvas pattern.<br>
- * Entity to apply a canvas pattern into a dataset as background.<br>
+ * Entity to apply a canvas pattern into a data set as background.<br>
  * See <a href="https://www.toptal.com/designers/subtlepatterns/">here</a> some interesting pattern images.
  * 
  * @author Andrea "Stock" Stocchero

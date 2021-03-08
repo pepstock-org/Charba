@@ -23,7 +23,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
  * Internal plugin, set by data object before a chart is initializing.<br>
- * This plugin is added to the chart ONLY if the dataset is configured to have patterns and gradients.<br>
+ * This plugin is added to the chart ONLY if the data set is configured to have patterns and gradients.<br>
  * It cleans up where the chart is destroyed or resized.
  * 
  * @author Andrea "Stock" Stocchero
@@ -63,7 +63,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		if (IsChart.isConsistent(chart)) {
 			// gets data
 			Data data = chart.getData();
-			// gets list of datasets
+			// gets list of data sets
 			List<Dataset> datasets = data.getDatasets();
 			// clears all patterns and gradients created by callbacks
 			for (Dataset dataset : datasets) {

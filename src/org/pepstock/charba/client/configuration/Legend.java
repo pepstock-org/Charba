@@ -132,7 +132,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {
-		// checks if type of added event handler is dataset selection or click
+		// checks if type of added event handler is data set selection or click
 		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// if java script property is missing
 			if (onClickHandlers == 0) {
@@ -167,7 +167,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 */
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
-		// checks if type of removed event handler is dataset selection or click
+		// checks if type of removed event handler is data set selection or click
 		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// decrements the amount of handlers
 			onClickHandlers--;

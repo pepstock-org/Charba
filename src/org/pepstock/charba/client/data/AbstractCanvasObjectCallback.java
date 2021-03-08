@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Callback to set a {@link CanvasObject} as background color.<br>
- * This is used and set into dataset when a canvas object is set for a background color.
+ * This is used and set into data set when a canvas object is set for a background color.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of canvas object
@@ -45,7 +45,7 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 	 * Creates the callback using the container of canvas object and the property related to the canvas object to set into dataset.
 	 * 
 	 * @param container container of canvas object instance.
-	 * @param property the property related to the canvas object to set into dataset
+	 * @param property the property related to the canvas object to set into data set
 	 */
 	AbstractCanvasObjectCallback(AbstractContainer<T> container, CanvasObjectKey property) {
 		this.property = Key.checkAndGetIfValid(property);
@@ -62,9 +62,9 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && context.getDatasetIndex() >= 0 && chart.getNode().getChartArea().isConsistent()) {
 			// checks if chart area is consistent
-			// retrieves dataset
+			// retrieves data set
 			Dataset dataset = chart.getData().retrieveDataset(context);
-			// checks if dataset and the canvas object container are consistent
+			// checks if data set and the canvas object container are consistent
 			if (dataset != null && !container.isEmpty() && container.hasObjects(property)) {
 				// checks and gets all objects for the key
 				// checks if container is changed
@@ -79,7 +79,7 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 					// returns the object at modulo.
 					return objects.get(gradientIndex);
 				}
-				// if here, dataset index not consistent
+				// if here, data set index not consistent
 				// returns the first object
 				return objects.get(0);
 			}

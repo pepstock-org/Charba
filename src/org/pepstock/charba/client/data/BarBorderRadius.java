@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
- * Defines the border radius for BAR dataset element, applies the corner radius to all corners of the rectangle (topLeft, topRight, bottomLeft, bottomRight).
+ * Defines the border radius for BAR data set element, applies the corner radius to all corners of the rectangle (topLeft, topRight, bottomLeft, bottomRight).
  * 
  * @author Andrea "Stock" Stocchero
  *

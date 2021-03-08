@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.enums.ContextType;
 
 /**
- * Abstract implementation to map the context used as argument on options, datasets and scales callback.<br>
+ * Abstract implementation to map the context used as argument on options, data sets and scales callback.<br>
  * All context implementation have go a property which is a reference to the chart instance.
  * 
  * @author Andrea "Stock" Stocchero
