@@ -144,6 +144,10 @@ Chart.prototype.tooltip;
  */
 Chart.defaults;
 /**
+ * @type {Object}
+ */
+Chart.overrides;
+/**
  * @type {CharbaChartHelpers}
  */
 Chart.helpers;

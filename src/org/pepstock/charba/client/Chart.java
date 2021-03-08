@@ -47,6 +47,14 @@ public final class Chart {
 	static native NativeObject getDefaults();
 
 	/**
+	 * Returns the <code>overrides</code> property by native object.
+	 * 
+	 * @return the <code>overrides</code> property by native object.
+	 */
+	@JsProperty
+	static native NativeObject getOverrides();
+	
+	/**
 	 * Returns the <code>helpers</code> property by native object.
 	 * 
 	 * @return the <code>helpers</code> property by native object.

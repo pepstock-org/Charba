@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
 import org.pepstock.charba.client.configuration.Scales;
@@ -37,7 +36,6 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.Labels;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.events.ChartClickEvent;
@@ -90,6 +88,8 @@ public final class Defaults {
 	private final Map<String, InternalDefaultScale> scaleOptions = new HashMap<>();
 	// controllers
 	private final Controllers controllers;
+	// overrides name space
+	private final Overrides overrides;
 
 	/**
 	 * To avoid any instantiation.<br>
@@ -116,6 +116,9 @@ public final class Defaults {
 		// adds the internal plugin to all charts
 		// to track native chart instances
 		this.plugins.register(new NativeChartHandler());
+		// creates the wrappers for overrides
+		// for chart options
+		this.overrides = new Overrides(Chart.getOverrides());
 	}
 
 	/**
@@ -225,7 +228,7 @@ public final class Defaults {
 				controllerType.register();
 			}
 			// if not, creates and stores new options by chart type
-			chartOptions.put(type.value(), wrapperDefaults.chart(type));
+			chartOptions.put(type.value(), overrides.chart(type));
 		}
 		// returns the existing options
 		return chartOptions.get(type.value());
@@ -498,7 +501,6 @@ public final class Defaults {
 		private enum Property implements Key
 		{
 			PLUGINS("plugins"),
-			CONTROLLERS("controllers"),
 			SCALE("scale"),
 			SCALES("scales");
 
@@ -550,91 +552,6 @@ public final class Defaults {
 		 */
 		NativeObject getScales() {
 			return getValue(Property.SCALES);
-		}
-
-		/**
-		 * Returns the CONTROLLERS global options of chart as native object.
-		 * 
-		 * @return the CONTROLLERS global options
-		 */
-		InternalControllers getControllers() {
-			return new InternalControllers(getValue(Property.CONTROLLERS));
-		}
-
-		/**
-		 * Returns an options instance, to use as default options, based of type of chart.
-		 * 
-		 * @param type chart type.
-		 * @return default options.
-		 */
-		ChartOptions chart(Type type) {
-			// gets global options
-			GlobalOptions global = Defaults.get().getGlobal();
-			// checks if has got scales
-			if (!ScaleType.NONE.equals(type.scaleType())) {
-				// creates an envelop for options
-				ChartEnvelop<ChartOptions> envelopOptions = new ChartEnvelop<>();
-				// stores a temporary chart options
-				envelopOptions.setContent(createChartOptions(type, DefaultsBuilder.get().getScaledOptions()));
-				// creates an envelop for native object of options
-				ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
-				// load the envelop
-				Merger.get().load(type, envelopOptions, envelop);
-				// creates defaults
-				ChartOptions defaultOptions = new ChartOptions(type, envelop.getContent(), global.asDefault());
-				// returns a default option with all configuration
-				return createChartOptions(type, defaultOptions);
-			} else {
-				// if here, is not a scalesd chart
-				return createChartOptions(type, global.asDefault());
-			}
-		}
-
-		/**
-		 * Returns an options instance, to use as default options, based of type of chart.
-		 * 
-		 * @param type chart type
-		 * @param defaultOptions defaults scaled options instance
-		 * @return default options
-		 */
-		private ChartOptions createChartOptions(Type type, IsDefaultScaledOptions defaultOptions) {
-			// creates a chart options using global a default scaled as default
-			return new ChartOptions(type, getControllers().getChartOptions(type), defaultOptions);
-		}
-	}
-
-	/**
-	 * It wraps the CONTROLLERS object of CHART.JS chart instance.<br>
-	 * It returns the chart options.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalControllers extends NativeObjectContainer {
-
-		/**
-		 * Creates the item using a native java script object which contains all properties.
-		 * 
-		 * @param nativeObject native java script object which contains all properties.
-		 */
-		InternalControllers(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the chart options defaults by chart type.
-		 * 
-		 * @param type the type of chart
-		 * @return the chart options defaults by chart type
-		 */
-		NativeObject getChartOptions(Type type) {
-			// checks if type is present
-			if (isType(type, ObjectType.OBJECT)) {
-				// checks if chart type is consistent
-				return getValue(Key.checkAndGetIfValid(type));
-			}
-			// if here, the type doesn't exist
-			return null;
 		}
 
 	}
