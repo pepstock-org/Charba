@@ -65,6 +65,13 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	IsDefaultTooltips getTooltips();
 
 	/**
+	 * Returns the decimation defaults.
+	 * 
+	 * @return the decimation defaults.
+	 */
+	IsDefaultDecimation getDecimation();
+
+	/**
 	 * Returns the layout defaults.
 	 * 
 	 * @return the layout defaults.

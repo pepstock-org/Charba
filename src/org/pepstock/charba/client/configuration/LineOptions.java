@@ -25,6 +25,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public class LineOptions extends ScalesOptions implements HasLineOptions {
+	
+	private final Decimation decimation;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -34,6 +36,17 @@ public class LineOptions extends ScalesOptions implements HasLineOptions {
 	 */
 	public LineOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
+		// stores decimation
+		this.decimation = new Decimation(this);
+	}
+	
+	/**
+	 * Returns the decimation plugin element.
+	 * 
+	 * @return the decimation plugin element
+	 */
+	public Decimation getDecimation() {
+		return decimation;
 	}
 
 	/*

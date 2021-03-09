@@ -76,7 +76,7 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	 * @param plugin default plugin id
 	 * @return the options for default plugin
 	 */
-	NativeObject getDefaultPluginOptions(DefaultPluginId plugin) {
+	final NativeObject getDefaultPluginOptions(DefaultPluginId plugin) {
 		return getValue(plugin);
 	}
 

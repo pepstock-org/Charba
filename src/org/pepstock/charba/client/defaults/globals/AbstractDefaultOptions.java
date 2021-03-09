@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
+import org.pepstock.charba.client.defaults.IsDefaultDecimation;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
@@ -31,6 +32,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartAnimation;
 import org.pepstock.charba.client.defaults.chart.DefaultChartAnimations;
 import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
+import org.pepstock.charba.client.defaults.chart.DefaultChartDecimation;
 import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
 import org.pepstock.charba.client.defaults.chart.DefaultChartFont;
 import org.pepstock.charba.client.defaults.chart.DefaultChartHover;
@@ -75,6 +77,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultFont font;
 
+	private final IsDefaultDecimation decimation;
+
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
 	 */
@@ -94,6 +98,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.plugins = new DefaultPlugins();
 		this.datasets = new DefaultDatasets();
 		this.font = new DefaultFont();
+		this.decimation = new DefaultDecimation();
 	}
 
 	/**
@@ -120,6 +125,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.plugins = new DefaultChartPlugins(options.getPlugins());
 		this.datasets = new DefaultChartDatasets(options.getDatasets());
 		this.font = new DefaultChartFont(new DefaultRoutedFont());
+		this.decimation = new DefaultChartDecimation(options.getDecimation());
 	}
 
 	/**
@@ -250,6 +256,16 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	@Override
 	public IsDefaultDatasets getDatasets() {
 		return datasets;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDecimation()
+	 */
+	@Override
+	public IsDefaultDecimation getDecimation() {
+		return decimation;
 	}
 
 }

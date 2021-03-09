@@ -151,6 +151,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final Tooltips tooltips;
 
+	private final Decimation decimation;
+
 	private final Plugins plugins;
 
 	private final Font font;
@@ -210,6 +212,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.legend = new Legend(plugins, DefaultPluginId.LEGEND, getDefaultValues().getLegend(), plugins.getDefaultPluginOptions(DefaultPluginId.LEGEND));
 		this.title = new Title(plugins, DefaultPluginId.TITLE, getDefaultValues().getTitle(), plugins.getDefaultPluginOptions(DefaultPluginId.TITLE));
 		this.tooltips = new Tooltips(plugins, DefaultPluginId.TOOLTIP, getDefaultValues().getTooltips(), plugins.getDefaultPluginOptions(DefaultPluginId.TOOLTIP));
+		this.decimation = new Decimation(plugins, DefaultPluginId.DECIMATION, getDefaultValues().getDecimation(), plugins.getDefaultPluginOptions(DefaultPluginId.DECIMATION));
 	}
 
 	/**
@@ -300,6 +303,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final Layout getLayout() {
 		return layout;
+	}
+	
+	/**
+	 * Returns the decimation plugin element.
+	 * 
+	 * @return the decimation plugin element
+	 */
+	@Override
+	public final Decimation getDecimation() {
+		return decimation;
 	}
 
 	/**
