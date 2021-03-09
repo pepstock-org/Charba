@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "chart.js": "3.0.0-beta13",
-    "chartjs-adapter-luxon": "0.2.2",
-    "luxon": "1.25.0",
+    "chartjs-adapter-luxon": "v1.0.0-beta.2",
+    "luxon": "1.26.0",
     "chartjs-plugin-datalabels": "0.7.0",
     "chartjs-plugin-zoom": "0.7.7",
     "hammerjs": "2.0.8",

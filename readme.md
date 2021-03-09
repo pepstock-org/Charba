@@ -396,6 +396,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.
    * rename `HtmlLegendTextCallback` callback to `HtmlLegendItemCallback`.
  * add the selected value of the scale by the click event to the `AxisClickEvent` class.
+ * **import last CHART.JS LUXON adapter version,** [version 1.0.0-beta2](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.0.0-beta.2) on March 9th, 2021.
+ * **import last LUXON library version,** [version 1.26.0](https://github.com/moment/luxon/releases/tag/1.26.0) on March 9th, 2021.
  * **import last CHART.JS Annotation plugin version,** [version 1.0.0-beta4](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.0.0-beta.4) on March 7th, 2021.
    * implement only click, dblclick, enter and leave events.
    * add `ellipse` and `point` annotation types.
