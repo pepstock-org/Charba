@@ -94,7 +94,6 @@ public enum DefaultPluginId implements Key
 	 * @return <code>true</code> if the argument is equals to a default plugin id
 	 */
 	public static boolean is(String pluginId) {
-		// FIXME controllare dove usato per rimuovere FILLER
 		// filler is not considered a default plugin because does not have element into options for configuration
 		return !DefaultPluginId.FILLER.value.equalsIgnoreCase(pluginId) && Key.hasKeyByValue(values(), pluginId);
 	}
