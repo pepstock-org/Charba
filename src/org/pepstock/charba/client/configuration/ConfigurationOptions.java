@@ -148,6 +148,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final Title title;
 
 	private final Tooltips tooltips;
+	
+	private final Filler filler;
 
 	private final Hover hover;
 
@@ -199,6 +201,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		this.interaction = new Interaction(this);
 		this.plugins = new Plugins(this);
 		this.tooltips = new Tooltips(this);
+		this.filler = new Filler(this);
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
 		// -------------------------------
@@ -362,6 +365,15 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		return plugins;
 	}
 
+	/**
+	 * Returns the filler plugin configuration.
+	 * 
+	 * @return the filler plugin configuration
+	 */
+	public Filler getFiller() {
+		return filler;
+	}
+	
 	/**
 	 * Returns the axis by the unique CHARBA id of scale or <code>null</code> if not axis.
 	 * 

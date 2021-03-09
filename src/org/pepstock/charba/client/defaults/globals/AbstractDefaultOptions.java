@@ -20,6 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
 import org.pepstock.charba.client.defaults.IsDefaultDecimation;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
+import org.pepstock.charba.client.defaults.IsDefaultFiller;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
@@ -34,6 +35,7 @@ import org.pepstock.charba.client.defaults.chart.DefaultChartAnimations;
 import org.pepstock.charba.client.defaults.chart.DefaultChartDatasets;
 import org.pepstock.charba.client.defaults.chart.DefaultChartDecimation;
 import org.pepstock.charba.client.defaults.chart.DefaultChartElements;
+import org.pepstock.charba.client.defaults.chart.DefaultChartFiller;
 import org.pepstock.charba.client.defaults.chart.DefaultChartFont;
 import org.pepstock.charba.client.defaults.chart.DefaultChartHover;
 import org.pepstock.charba.client.defaults.chart.DefaultChartInteraction;
@@ -79,6 +81,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 
 	private final IsDefaultDecimation decimation;
 
+	private final IsDefaultFiller filler;
+
 	/**
 	 * Creates the object using the defaults inner elements of chart options.
 	 */
@@ -99,6 +103,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.datasets = new DefaultDatasets();
 		this.font = new DefaultFont();
 		this.decimation = new DefaultDecimation();
+		this.filler = new DefaultFiller();
 	}
 
 	/**
@@ -126,6 +131,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.datasets = new DefaultChartDatasets(options.getDatasets());
 		this.font = new DefaultChartFont(new DefaultRoutedFont());
 		this.decimation = new DefaultChartDecimation(options.getDecimation());
+		this.filler = new DefaultChartFiller(options.getFiller());
 	}
 
 	/**
@@ -266,6 +272,16 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	@Override
 	public IsDefaultDecimation getDecimation() {
 		return decimation;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFiller()
+	 */
+	@Override
+	public IsDefaultFiller getFiller() {
+		return filler;
 	}
 
 }

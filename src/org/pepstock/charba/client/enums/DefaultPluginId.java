@@ -87,15 +87,13 @@ public enum DefaultPluginId implements Key
 	}
 
 	/**
-	 * Returns <code>true</code> if the argument is equals to a default plugin id.<br>
-	 * The {@link DefaultPluginId#FILLER} is not considered a default plugin because does not have a specific namespace into options.
+	 * Returns <code>true</code> if the argument is equals to a default plugin id.
 	 * 
 	 * @param pluginId the plugin id to check
 	 * @return <code>true</code> if the argument is equals to a default plugin id
 	 */
 	public static boolean is(String pluginId) {
-		// filler is not considered a default plugin because does not have element into options for configuration
-		return !DefaultPluginId.FILLER.value.equalsIgnoreCase(pluginId) && Key.hasKeyByValue(values(), pluginId);
+		return Key.hasKeyByValue(values(), pluginId);
 	}
 
 }

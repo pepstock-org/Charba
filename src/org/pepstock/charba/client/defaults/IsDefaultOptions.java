@@ -72,6 +72,13 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	IsDefaultDecimation getDecimation();
 
 	/**
+	 * Returns the filler defaults.
+	 * 
+	 * @return the filler defaults.
+	 */
+	IsDefaultFiller getFiller();
+	
+	/**
 	 * Returns the layout defaults.
 	 * 
 	 * @return the layout defaults.

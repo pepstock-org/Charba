@@ -152,6 +152,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Tooltips tooltips;
 
 	private final Decimation decimation;
+	
+	private final Filler filler;
 
 	private final Plugins plugins;
 
@@ -213,6 +215,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.title = new Title(plugins, DefaultPluginId.TITLE, getDefaultValues().getTitle(), plugins.getDefaultPluginOptions(DefaultPluginId.TITLE));
 		this.tooltips = new Tooltips(plugins, DefaultPluginId.TOOLTIP, getDefaultValues().getTooltips(), plugins.getDefaultPluginOptions(DefaultPluginId.TOOLTIP));
 		this.decimation = new Decimation(plugins, DefaultPluginId.DECIMATION, getDefaultValues().getDecimation(), plugins.getDefaultPluginOptions(DefaultPluginId.DECIMATION));
+		this.filler = new Filler(plugins, DefaultPluginId.FILLER, getDefaultValues().getFiller(), plugins.getDefaultPluginOptions(DefaultPluginId.FILLER));
 	}
 
 	/**
@@ -313,6 +316,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final Decimation getDecimation() {
 		return decimation;
+	}
+
+	/**
+	 * Returns the filler plugin element.
+	 * 
+	 * @return the filler plugin element
+	 */
+	@Override
+	public final Filler getFiller() {
+		return filler;
 	}
 
 	/**
