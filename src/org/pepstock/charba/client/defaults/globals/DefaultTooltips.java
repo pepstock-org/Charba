@@ -51,10 +51,10 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private final IsDefaultTransitions transitions = new DefaultTransitions();
 
 	private final IsDefaultAnimations animations = new InternalAnimations();
+	
+	private final DefaultInteraction interaction = new DefaultInteraction();
 
 	private static final boolean DEFAULT_ENABLED = true;
-
-	private static final boolean DEFAULT_INTERSECT = true;
 
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.8)";
 
@@ -156,7 +156,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public InteractionMode getMode() {
-		return InteractionMode.NEAREST;
+		return interaction.getMode();
 	}
 
 	/*
@@ -166,7 +166,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isIntersect() {
-		return DEFAULT_INTERSECT;
+		return interaction.isIntersect();
 	}
 
 	/*
