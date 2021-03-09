@@ -78,22 +78,13 @@ public final class NativeObject {
 	static native ArrayString keys(NativeObject source);
 
 	/**
-	 * Returns all own property descriptors of a given object.
-	 * 
-	 * @param source the object for which to get all own property descriptors.
-	 * @return an object containing all own property descriptors of an object.<br>
-	 *         Might be an empty object, if there are no properties.
-	 */
-	static native NativeObject getOwnPropertyDescriptors(NativeObject source);
-
-	/**
 	 * Returns an list of a given object's own property names.
 	 * 
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay
 	List<String> propertiesKeys() {
-		return ArrayListHelper.unmodifiableList(keys(getOwnPropertyDescriptors(this)));
+		return ArrayListHelper.unmodifiableList(keys(this));
 	}
 
 	/**
