@@ -59,6 +59,10 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final String DEFAULT_CUTOUT_PERCENTAGE = UndefinedValues.STRING;
 
+	private static final double DEFAULT_RADIUS = UndefinedValues.DOUBLE;
+
+	private static final String DEFAULT_RADIUS_PERCENTAGE = "100%";
+
 	private static final double DEFAULT_ROTATION = 0D;
 
 	private static final double DEFAULT_CIRCUMFERENCE = 360D;
@@ -216,6 +220,26 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public String getCutoutPercentage() {
 		return DEFAULT_CUTOUT_PERCENTAGE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRadius()
+	 */
+	@Override
+	public double getRadius() {
+		return DEFAULT_RADIUS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRadiusPercentage()
+	 */
+	@Override
+	public String getRadiusPercentage() {
+		return DEFAULT_RADIUS_PERCENTAGE;
 	}
 
 	/*

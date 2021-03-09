@@ -186,6 +186,26 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRadius()
+	 */
+	@Override
+	public double getRadius() {
+		return options.getRadius();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRadiusPercentage()
+	 */
+	@Override
+	public String getRadiusPercentage() {
+		return options.getRadiusPercentage();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getRotation()
 	 */
 	@Override

@@ -78,6 +78,50 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	public String getCutoutPercentage() {
 		return getConfiguration().getCutoutPercentage();
 	}
+	
+	/**
+	 * Sets the outer radius of the chart.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @param radius the outer radius of the chart.<br>
+	 *            As {@link Double}, it is considered to be pixels.
+	 */
+	public void setRadius(double radius) {
+		getConfiguration().setRadius(radius);
+	}
+
+	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link Double}, it is considered to be pixels.
+	 */
+	public double getRadius() {
+		return getConfiguration().getRadius();
+	}
+
+	/**
+	 * Sets the outer radius of the chart.<br>
+	 * As {@link String} and ending with '%', percentage of the maximum radius.
+	 * 
+	 * @param radius the outer radius of the chart.<br>
+	 *            As {@link String} and ending with '%', percentage of the maximum radius.
+	 */
+	public void setRadiusPercentage(String radius) {
+		getConfiguration().setRadiusPercentage(radius);
+	}
+
+	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link String} and ending with '%', percentage of the maximum radius.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link String} and ending with '%', percentage of the maximum radius.
+	 */
+	public String getRadiusPercentage() {
+		return getConfiguration().getRadiusPercentage();
+	}
 
 	/**
 	 * Sets the starting angle to draw arcs from.

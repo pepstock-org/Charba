@@ -103,6 +103,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		SHOW_LINE("showLine"),
 		SKIP_NULL("skipNull"),
 		CUTOUT("cutout"),
+		RADIUS("radius"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
 		START_ANGLE("startAngle"),
@@ -733,13 +734,71 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	@Override
 	public String getCutoutPercentage() {
-		// checks if is in pixel (number)
+		// checks if is in percentage (string)
 		if (isType(Property.CUTOUT, ObjectType.STRING)) {
 			return getValue(Property.CUTOUT, getDefaultValues().getCutoutPercentage());
 		}
-		// if here, the value is a string or not exist
+		// if here, the value is a number or not exist
 		// returns the defaults
 		return getDefaultValues().getCutoutPercentage();
+	}
+	
+	/**
+	 * Sets the outer radius of the chart.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @param radius the outer radius of the chart.<br>
+	 *            As {@link Double}, it is considered to be pixels.
+	 */
+	public void setRadius(double radius) {
+		setValue(Property.RADIUS, radius);
+	}
+
+	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link Double}, it is considered to be pixels.
+	 */
+	@Override
+	public double getRadius() {
+		// checks if is in pixel (number)
+		if (isType(Property.RADIUS, ObjectType.NUMBER)) {
+			return getValue(Property.RADIUS, getDefaultValues().getRadius());
+		}
+		// if here, the value is a string or not exist
+		// returns the defaults
+		return getDefaultValues().getRadius();
+	}
+
+	/**
+	 * Sets the outer radius of the chart.<br>
+	 * As {@link String} and ending with '%', percentage of the maximum radius.
+	 * 
+	 * @param radius the outer radius of the chart.<br>
+	 *            As {@link String} and ending with '%', percentage of the maximum radius.
+	 */
+	public void setRadiusPercentage(String radius) {
+		setValue(Property.RADIUS, radius);
+	}
+
+	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link String} and ending with '%', percentage of the maximum radius.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link String} and ending with '%', percentage of the maximum radius.
+	 */
+	@Override
+	public String getRadiusPercentage() {
+		// checks if is in percentage (string)
+		if (isType(Property.RADIUS, ObjectType.STRING)) {
+			return getValue(Property.RADIUS, getDefaultValues().getRadiusPercentage());
+		}
+		// if here, the value is a number or not exist
+		// returns the defaults
+		return getDefaultValues().getRadiusPercentage();
 	}
 
 	/**

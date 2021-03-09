@@ -204,6 +204,24 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	String getCutoutPercentage();
 
 	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link Double}, it is considered to be pixels.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link Double}, it is considered to be pixels.
+	 */
+	double getRadius();
+
+	/**
+	 * Returns the outer radius of the chart.<br>
+	 * As {@link String} and ending with '%', percentage of the maximum radius.
+	 * 
+	 * @return the outer radius of the chart.<br>
+	 *         As {@link String} and ending with '%', percentage of the maximum radius.
+	 */
+	String getRadiusPercentage();
+
+	/**
 	 * Returns the starting angle to draw arcs from.
 	 * 
 	 * @return starting angle to draw arcs from.
