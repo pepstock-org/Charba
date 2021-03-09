@@ -108,8 +108,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		getOptions().getLegend().setDisplay(false);
 		// disables tooltips
 		getOptions().getTooltips().setEnabled(false);
-		// disables tooltips custom callback
-		getOptions().getTooltips().setCustomCallback(null);
+		// disables tooltips external callback
+		getOptions().getTooltips().setExternalCallback(null);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user

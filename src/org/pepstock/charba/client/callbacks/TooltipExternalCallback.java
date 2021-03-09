@@ -24,7 +24,7 @@ import org.pepstock.charba.client.items.TooltipModel;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface TooltipCustomCallback {
+public interface TooltipExternalCallback {
 
 	/**
 	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.
@@ -32,6 +32,6 @@ public interface TooltipCustomCallback {
 	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.
 	 */
-	void onCustom(IsChart chart, TooltipModel model);
+	void onExternal(IsChart chart, TooltipModel model);
 
 }

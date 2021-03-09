@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
-import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
+import org.pepstock.charba.client.callbacks.TooltipExternalCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -55,7 +55,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyCustomCallback {
+	interface ProxyExternalCallback {
 
 		/**
 		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.
@@ -108,8 +108,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the custom function
-	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the external function
+	private final CallbackProxy<ProxyExternalCallback> externalCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the item sort function
 	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the filter function
@@ -118,8 +118,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for custom tooltip
-	private TooltipCustomCallback customCallback = null;
+	// user callbacks implementation for external tooltip
+	private TooltipExternalCallback externalCallback = null;
 	// user callbacks implementation for item sort tooltip
 	private TooltipItemSortCallback itemSortCallback = null;
 	// user callbacks implementation for filtering tooltip items
@@ -141,7 +141,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 */
 	private enum Property implements Key
 	{
-		CUSTOM("custom"),
+		EXTERNAL("external"),
 		ITEM_SORT("itemSort"),
 		FILTER("filter");
 
@@ -177,26 +177,30 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	Tooltips(ConfigurationOptions options) {
 		super(options);
 		// sets callbacks sub element
-		callbacks = new TooltipsCallbacks(getOptions());
+		this.callbacks = new TooltipsCallbacks(getOptions());
 		// creates animation configuration manager
 		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration().getTooltips());
 		// gets the fonts subelements
-		titleFont = new Font(() -> getConfiguration().getTooltips().getTitleFont());
-		bodyFont = new Font(() -> getConfiguration().getTooltips().getBodyFont());
-		footerFont = new Font(() -> getConfiguration().getTooltips().getFooterFont());
+		this.titleFont = new Font(() -> getConfiguration().getTooltips().getTitleFont());
+		this.bodyFont = new Font(() -> getConfiguration().getTooltips().getBodyFont());
+		this.footerFont = new Font(() -> getConfiguration().getTooltips().getFooterFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		customCallbackProxy.setCallback((context, tooltipContext) -> {
+		this.externalCallbackProxy.setCallback((context, tooltipContext) -> {
+			// gets callback
+			TooltipExternalCallback externalCallback = getExternalCallback();
 			// checks if callback is consistent
-			if (customCallback != null) {
+			if (externalCallback != null) {
 				// creates tootltip context
 				TooltipContext tempContext = new TooltipContext(tooltipContext);
 				// calls callback
-				customCallback.onCustom(getChart(), tempContext.getModel());
+				externalCallback.onExternal(getChart(), tempContext.getModel());
 			}
 		});
-		itemSortCallbackProxy.setCallback((context, item1, item2) -> {
+		this.itemSortCallbackProxy.setCallback((context, item1, item2) -> {
+			// gets callback
+			TooltipItemSortCallback itemSortCallback = getItemSortCallback();
 			// checks if callback is consistent
 			if (itemSortCallback != null) {
 				// calls callback
@@ -205,7 +209,9 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 			// default is 0 - equals
 			return 0;
 		});
-		filterCallbackProxy.setCallback((context, item) -> {
+		this.filterCallbackProxy.setCallback((context, item) -> {
+			// gets callback
+			TooltipFilterCallback filterCallback = getFilterCallback();
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
@@ -677,18 +683,18 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
-	 * Sets the size, in px, of the tooltip arrow.
+	 * Sets the size of the tooltip arrow, in pixels.
 	 * 
-	 * @param caretSize size, in px, of the tooltip arrow.
+	 * @param caretSize size of the tooltip arrow, in pixels.
 	 */
 	public void setCaretSize(int caretSize) {
 		getConfiguration().getTooltips().setCaretSize(caretSize);
 	}
 
 	/**
-	 * Returns the size, in px, of the tooltip arrow.
+	 * Returns the size of the tooltip arrow, in pixels.
 	 * 
-	 * @return size, in px, of the tooltip arrow.
+	 * @return size of the tooltip arrow, in pixels
 	 */
 	public int getCaretSize() {
 		return getConfiguration().getTooltips().getCaretSize();
@@ -913,29 +919,29 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
-	 * Returns the user custom callback instance.
+	 * Returns the user external callback instance.
 	 * 
-	 * @return the user custom callback instance
+	 * @return the user external callback instance
 	 */
-	public TooltipCustomCallback getCustomCallback() {
-		return customCallback;
+	public TooltipExternalCallback getExternalCallback() {
+		return externalCallback;
 	}
 
 	/**
-	 * Sets the user custom callback instance.
+	 * Sets the user external callback instance.
 	 * 
-	 * @param customCallback the user custom callback instance
+	 * @param externalCallback the user external callback instance
 	 */
-	public void setCustomCallback(TooltipCustomCallback customCallback) {
+	public void setExternalCallback(TooltipExternalCallback externalCallback) {
 		// sets the callback
-		this.customCallback = customCallback;
+		this.externalCallback = externalCallback;
 		// checks if callback is consistent
-		if (customCallback != null) {
+		if (externalCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.CUSTOM, customCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.EXTERNAL, externalCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.CUSTOM, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.EXTERNAL, null);
 		}
 	}
 

@@ -140,7 +140,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * @return the parsed data values for the given dataIndex and datasetIndex
 	 */
 	public DatasetPoint getParsed() {
-		// checks is point object is already created
+		// checks if point object is not already created
 		if (dataPoint == null) {
 			// stores point
 			this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(getValue(Property.PARSED), true));
@@ -154,7 +154,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * @return the element (point, arc, bar, etc.) for this data
 	 */
 	public DatasetElement getElement() {
-		// checks is element object is already created
+		// checks if element object is not already created
 		if (element == null) {
 			// stores element
 			this.element = new DatasetElement(new CallbacksEnvelop<>(getValue(Property.ELEMENT), true));

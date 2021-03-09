@@ -45,6 +45,10 @@ public enum ContextType implements Key
 	 */
 	TICK("tick"),
 	/**
+	 * Tick of scale context type.
+	 */
+	TOOLTIP("tooltip"),
+	/**
 	 * Unknown context type.
 	 */
 	UNKNOWN("unknown");

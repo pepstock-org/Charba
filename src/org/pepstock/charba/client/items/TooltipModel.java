@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -90,6 +91,16 @@ public final class TooltipModel extends NativeObjectContainer {
 	public TooltipModel(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
+
+	/**
+	 * Creates the item using envelop with the native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop with the native java script object which contains all properties.
+	 */
+	public TooltipModel(CallbacksEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
