@@ -32,7 +32,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
-	private static final boolean DEFAULT_FULL_WIDTH = true;
+	private static final boolean DEFAULT_FULL_SIZE = true;
 
 	private static final boolean DEFAULT_REVERSE = false;
 
@@ -86,11 +86,11 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#isFullWidth()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#isFullSize()
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return DEFAULT_FULL_WIDTH;
+	public boolean isFullSize() {
+		return DEFAULT_FULL_SIZE;
 	}
 
 	/*

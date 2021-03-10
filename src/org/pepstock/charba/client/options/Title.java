@@ -38,7 +38,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	private enum Property implements Key
 	{
 		PADDING("padding"),
-		FULL_WIDTH("fullWidth"),
+		FULL_SIZE("fullSize"),
 		TEXT("text");
 
 		// name value of property
@@ -112,22 +112,22 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	}
 
 	/**
-	 * If <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * Marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public void setFullWidth(boolean fullWidth) {
-		setValueAndAddToParent(Property.FULL_WIDTH, fullWidth);
+	public void setFullSize(boolean fullSize) {
+		setValueAndAddToParent(Property.FULL_SIZE, fullSize);
 	}
 
 	/**
-	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns if that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if that this box should take the full width/height of the canvas (moving other boxes).
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
+	public boolean isFullSize() {
+		return getValue(Property.FULL_SIZE, getDefaultValues().isFullSize());
 	}
 
 	/**

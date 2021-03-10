@@ -80,11 +80,11 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isFullWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isFullSize()
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return legend.isFullWidth();
+	public boolean isFullSize() {
+		return legend.isFullSize();
 	}
 
 	/*

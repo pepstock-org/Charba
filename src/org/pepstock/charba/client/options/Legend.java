@@ -43,7 +43,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		// simple properties
 		MAX_WIDTH("maxWidth"),
 		MAX_HEIGHT("maxWidth"),
-		FULL_WIDTH("fullWidth"),
+		FULL_SIZE("fullSize"),
 		REVERSE("reverse"),
 		RTL("rtl"),
 		TEXT_DIRECTION("textDirection");
@@ -158,22 +158,22 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	}
 
 	/**
-	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * Marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public void setFullWidth(boolean fullWidth) {
-		setValueAndAddToParent(Property.FULL_WIDTH, fullWidth);
+	public void setFullSize(boolean fullSize) {
+		setValueAndAddToParent(Property.FULL_SIZE, fullSize);
 	}
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns if that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if that this box should take the full width/height of the canvas (moving other boxes).
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
+	public boolean isFullSize() {
+		return getValue(Property.FULL_SIZE, getDefaultValues().isFullSize());
 	}
 
 	/**

@@ -42,12 +42,12 @@ public final class AxisItem extends ScaleItem {
 	}
 
 	/**
-	 * Sets the full width of axis in pixel
+	 * Sets <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @param fullWidth the full width of axis
+	 * @param fullSize <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public void setFullWidth(boolean fullWidth) {
-		setValue(BaseBoxNodeItem.Property.FULL_WIDTH, fullWidth);
+	public void setFullSize(boolean fullSize) {
+		setValue(BaseBoxNodeItem.Property.FULL_SIZE, fullSize);
 	}
 
 	/**

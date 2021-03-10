@@ -241,21 +241,21 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	}
 
 	/**
-	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * Marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public void setFullWidth(boolean fullWidth) {
-		getConfiguration().getLegend().setFullWidth(fullWidth);
+	public void setFullSize(boolean fullSize) {
+		getConfiguration().getLegend().setFullSize(fullSize);
 	}
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public boolean isFullWidth() {
-		return getConfiguration().getLegend().isFullWidth();
+	public boolean isFullSize() {
+		return getConfiguration().getLegend().isFullSize();
 	}
 
 	/**

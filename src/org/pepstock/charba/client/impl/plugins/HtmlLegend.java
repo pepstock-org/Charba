@@ -185,7 +185,7 @@ public final class HtmlLegend extends AbstractPlugin {
 				manageLegendElement(chart, legendElement, legend.getPosition());
 			}
 			// checks if is full width has been set
-			if (legend.isFullWidth()) {
+			if (legend.isFullSize()) {
 				// sets 100% of width
 				legendElement.getStyle().setWidth(Unit.PCT.format(100));
 			}

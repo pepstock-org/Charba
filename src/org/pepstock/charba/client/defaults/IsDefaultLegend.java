@@ -37,11 +37,11 @@ public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaul
 	IsDefaultLegendTitle getTitle();
 
 	/**
-	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	boolean isFullWidth();
+	boolean isFullSize();
 
 	/**
 	 * Returns if the legend will show datasets in reverse order.

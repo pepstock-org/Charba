@@ -30,10 +30,10 @@ public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontCon
 	int getPadding();
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	boolean isFullWidth();
+	boolean isFullSize();
 
 }

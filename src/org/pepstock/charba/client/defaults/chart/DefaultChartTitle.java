@@ -91,11 +91,11 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#isFullWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#isFullSize()
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return title.isFullWidth();
+	public boolean isFullSize() {
+		return title.isFullSize();
 	}
 
 	/*

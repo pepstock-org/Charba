@@ -162,21 +162,21 @@ public class Title extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * Marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public void setFullWidth(boolean fullWidth) {
-		getConfiguration().getTitle().setFullWidth(fullWidth);
+	public void setFullSize(boolean fullSize) {
+		getConfiguration().getTitle().setFullSize(fullSize);
 	}
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public boolean isFullWidth() {
-		return getConfiguration().getTitle().isFullWidth();
+	public boolean isFullSize() {
+		return getConfiguration().getTitle().isFullSize();
 	}
 
 	/**

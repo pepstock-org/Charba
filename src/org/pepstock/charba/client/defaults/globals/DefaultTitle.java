@@ -31,7 +31,7 @@ public final class DefaultTitle implements IsDefaultTitle {
 
 	private static final int DEFAULT_PADDING = 10;
 
-	private static final boolean DEFAULT_FULL_WIDTH = true;
+	private static final boolean DEFAULT_FULL_SIZE = true;
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
@@ -87,11 +87,11 @@ public final class DefaultTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isFullWidth()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isFullSize()
 	 */
 	@Override
-	public boolean isFullWidth() {
-		return DEFAULT_FULL_WIDTH;
+	public boolean isFullSize() {
+		return DEFAULT_FULL_SIZE;
 	}
 
 	/*

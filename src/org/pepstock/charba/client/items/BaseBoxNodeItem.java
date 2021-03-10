@@ -34,7 +34,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	enum Property implements Key
 	{
 		ACTIVE("active"),
-		FULL_WIDTH("fullWidth"),
+		FULL_SIZE("fullSize"),
 		POSITION("position"),
 		WEIGHT("weight"),
 		MAX_WIDTH("maxWidth"),
@@ -87,12 +87,12 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	}
 
 	/**
-	 * Returns the full width in pixel.
+	 * Returns <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
-	 * @return the full width in pixel.
+	 * @return <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
-	public final boolean isFullWidth() {
-		return getValue(Property.FULL_WIDTH, UndefinedValues.BOOLEAN);
+	public final boolean isFullSize() {
+		return getValue(Property.FULL_SIZE, UndefinedValues.BOOLEAN);
 	}
 
 	/**
