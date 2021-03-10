@@ -382,6 +382,18 @@ public final class NativeObject {
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	Object getJavaObjectProperty(String key) {
+		return NativeJsObjectJavaObject.get(this, key);
+	}
+
 
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.

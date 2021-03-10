@@ -17,13 +17,16 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.utils.JSON;
 
 /**
- * This object is wrapping the value of dataset which can be used into the plugins (extensions) callbacks.<br>
- * The value could be a double, string or a {@link FloatingData} if the dataset is a BAR dataset and uses floating bars data.
+ * This object is wrapping the value of data set which can be used into the plugins (extensions) callbacks.<br>
+ * The value could be a double, string or a {@link FloatingData} if the data set is a BAR data set and uses floating bars data.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -37,7 +40,9 @@ public final class DataItem {
 	private final FloatingData valueAsFloatingData;
 	// this is the string representation
 	private final String valueAsString;
-	// datta type instance
+	// this is the string representation
+	private final DataPoint valueAsPoint;
+	// data type instance
 	private final DataType dataType;
 
 	/**
@@ -52,25 +57,36 @@ public final class DataItem {
 			this.value = (Double) object;
 			this.valueAsFloatingData = null;
 			this.valueAsString = String.valueOf(value);
+			this.valueAsPoint = null;
 			this.dataType = DataType.NUMBERS;
 		} else if (object instanceof ArrayDouble) {
 			// sets floating data, getting the array double and set nan to value
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = BarDataset.FLOATING_BAR_DATA_FACTORY.create((ArrayDouble) object);
 			this.valueAsString = valueAsFloatingData.toString();
+			this.valueAsPoint = null;
 			this.dataType = DataType.ARRAYS;
 		} else if (object instanceof String) {
 			// uses the to string method of object and nan and null for other values
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = object.toString();
+			this.valueAsPoint = null;
 			this.dataType = DataType.STRINGS;
+		} else if (object instanceof NativeObject) {
+			// uses the to string method of object and nan and null for other values
+			this.value = UndefinedValues.DOUBLE;
+			this.valueAsFloatingData = null;
+			this.valueAsString = JSON.stringify(object, 3);
+			this.valueAsPoint = new DataPoint(new ItemsEnvelop<NativeObject>((NativeObject)object));
+			this.dataType = DataType.POINTS;
 		} else {
 			// if here is not a recognized object
 			// for data, then set nan and null.
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = Constants.NULL_STRING;
+			this.valueAsPoint = null;
 			this.dataType = DataType.UNKNOWN;
 		}
 	}
@@ -85,30 +101,39 @@ public final class DataItem {
 	}
 
 	/**
-	 * Returns the value for the dataset if it is or {@link UndefinedValues#DOUBLE}.
+	 * Returns the value for the data set if it is or {@link UndefinedValues#DOUBLE}.
 	 * 
-	 * @return the value for the dataset if it is or {@link UndefinedValues#DOUBLE}
+	 * @return the value for the data set if it is or {@link UndefinedValues#DOUBLE}
 	 */
 	public double getValue() {
 		return value;
 	}
 
 	/**
-	 * Returns the value for the dataset as {@link FloatingData} if it is or <code>null</code>.
+	 * Returns the value for the data set as {@link FloatingData} if it is or <code>null</code>.
 	 * 
-	 * @return the value for the dataset as {@link FloatingData} if it is or <code>null</code>
+	 * @return the value for the data set as {@link FloatingData} if it is or <code>null</code>
 	 */
 	public FloatingData getValueAsFloatingData() {
 		return valueAsFloatingData;
 	}
 
 	/**
-	 * Returns the value for the dataset as string if it is or {@link UndefinedValues#STRING}.
+	 * Returns the value for the data set as string if it is or {@link UndefinedValues#STRING}.
 	 * 
-	 * @return the value for the dataset as string if it is or {@link UndefinedValues#STRING}.
+	 * @return the value for the data set as string if it is or {@link UndefinedValues#STRING}.
 	 */
 	public String getValueAsString() {
 		return valueAsString;
+	}
+
+	/**
+	 * Returns the value for the data set as {@link DataPoint} if it is or <code>null</code>.
+	 * 
+	 * @return the value for the data set as {@link DataPoint} if it is or <code>null</code>.
+	 */
+	public DataPoint getValueAsDataPoint() {
+		return valueAsPoint;
 	}
 
 }

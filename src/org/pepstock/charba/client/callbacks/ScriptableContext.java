@@ -21,9 +21,11 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetPoint;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * The option context is used to give contextual information when resolving options.
@@ -41,6 +43,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 		DATASET_INDEX("datasetIndex"),
 		DATA_INDEX("dataIndex"),
 		PARSED("parsed"),
+		RAW("raw"),
 		ELEMENT("element");
 
 		// name value of property
@@ -70,6 +73,8 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	private DatasetPoint dataPoint = null;
 	// element instance
 	private DatasetElement element = null;
+	// raw data
+	private DataItem rawData = null;
 
 	/**
 	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
@@ -135,9 +140,9 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	}
 
 	/**
-	 * Returns the parsed data values for the given dataIndex and datasetIndex.
+	 * Returns the parsed data value for the given dataIndex and datasetIndex.
 	 * 
-	 * @return the parsed data values for the given dataIndex and datasetIndex
+	 * @return the parsed data value for the given dataIndex and datasetIndex
 	 */
 	public DatasetPoint getParsed() {
 		// checks if point object is not already created
@@ -146,6 +151,24 @@ public final class ScriptableContext extends AbstractScriptableContext {
 			this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(getValue(Property.PARSED), true));
 		}
 		return dataPoint;
+	}
+	
+	/**
+	 * Returns the raw data value for the given dataIndex and datasetIndex.
+	 * 
+	 * @return the raw data value for the given dataIndex and datasetIndex
+	 */
+	public DataItem getRaw() {
+		// checks if raw object is not already created
+		if (rawData == null) {
+			
+			// FIXME
+			Window.getConsole().log("raw", getValueAsJavaObject(Property.PARSED));
+			
+			// stores point
+			this.rawData = new DataItem(getValueAsJavaObject(Property.PARSED));
+		}
+		return rawData;
 	}
 
 	/**
