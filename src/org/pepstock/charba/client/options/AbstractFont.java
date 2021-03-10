@@ -60,7 +60,7 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 
 	}
 
-	// delegated animation mode
+	// delegated font
 	private final Font font;
 
 	/**
@@ -80,7 +80,7 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	 */
 	protected AbstractFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
-		// creates a animation to wrap
+		// creates a font to wrap
 		this.font = new Font(null, Property.FONT, defaultValues, getNativeObject());
 	}
 

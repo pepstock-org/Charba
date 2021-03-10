@@ -34,7 +34,8 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScaleTitle> implements IsDefaultScaleTitle, HasFont {
 
-	private final ScaleTitlePadding padding;
+	// padding instance
+	private final Padding padding;
 
 	// instance of font container
 	private final FontContainer fontContainer;
@@ -84,7 +85,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	ScaleTitle(AbstractScale scale, Key childKey, IsDefaultScaleTitle defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
-		padding = new ScaleTitlePadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
+		padding = new Padding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
@@ -105,7 +106,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	 * @return the padding
 	 */
 	@Override
-	public ScaleTitlePadding getPadding() {
+	public Padding getPadding() {
 		return padding;
 	}
 

@@ -31,7 +31,8 @@ import org.pepstock.charba.client.enums.ScaleTitleAlign;
  */
 public class CartesianScaleTitle extends AxisContainer {
 
-	private final CartesianPadding padding;
+	// padding instance
+	private final Padding padding;
 	// font instance
 	private final Font font;
 
@@ -43,8 +44,8 @@ public class CartesianScaleTitle extends AxisContainer {
 	CartesianScaleTitle(Axis axis) {
 		super(axis);
 		// gets embedded elements
-		padding = new CartesianPadding(axis);
-		font = new Font(() -> getAxis().getConfiguration().getTitle().getFont());
+		this.padding = new Padding(() -> getAxis().getScale().getTitle().getPadding());
+		this.font = new Font(() -> getAxis().getConfiguration().getTitle().getFont());
 	}
 
 	/**
@@ -97,7 +98,7 @@ public class CartesianScaleTitle extends AxisContainer {
 	 * 
 	 * @return the padding
 	 */
-	public CartesianPadding getPadding() {
+	public Padding getPadding() {
 		return padding;
 	}
 

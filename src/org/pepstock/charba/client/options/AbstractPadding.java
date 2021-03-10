@@ -17,8 +17,8 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.enums.Position;
 
 /**
  * This is abstract padidng object element of the chart options.
@@ -26,39 +26,81 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractModel<P, IsDefaultPadding> implements IsDefaultPadding {
+abstract class AbstractPadding  extends NativeObjectContainer implements IsPadding {
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
-	 * 
-	 * @param model options model of the chart.
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
-	 * @param nativeObject native object to map java script properties
+	 * Name of properties of native object.
 	 */
-	AbstractPadding(P model, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
-		super(model, childKey, defaultValues, nativeObject);
+	private enum Property implements Key
+	{
+		PADDING("padding");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+	
+	// delegated padding
+	private final Padding padding;
+	
+	/**
+	 * Creates an empty padding to use for chart configuration when the font is created by a callback.
+	 * 
+	 * @param defaultValues default provider
+	 */
+	protected AbstractPadding(IsDefaultPadding defaultValues) {
+		this(defaultValues, null);
 	}
 
 	/**
+	 * Creates a padding to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * 
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractPadding(IsDefaultPadding defaultValues, NativeObject nativeObject) {
+		super(nativeObject);
+		// creates a padding to wrap
+		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject());
+	}
+	
+	/**
 	 * Sets the padding size to all dimensions.
 	 * 
-	 * @param padding padding size to apply to all dimensions.
+	 * @param value padding size to apply to all dimensions.
 	 */
-	public final void set(int padding) {
-		setTop(padding);
-		setBottom(padding);
-		setLeft(padding);
-		setRight(padding);
+	@Override
+	public final void set(int value) {
+		padding.set(value);
 	}
 
 	/**
 	 * Sets the padding left in pixel.
 	 * 
-	 * @param padding the padding left in pixel.
+	 * @param value the padding left in pixel.
 	 */
-	public final void setLeft(int padding) {
-		setValueAndAddToParent(Position.LEFT, padding);
+	@Override
+	public final void setLeft(int value) {
+		padding.setLeft(value);
 	}
 
 	/**
@@ -68,16 +110,17 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 */
 	@Override
 	public final int getLeft() {
-		return getValue(Position.LEFT, getDefaultValues().getLeft());
+		return padding.getLeft();
 	}
 
 	/**
 	 * Sets the padding right in pixel.
 	 * 
-	 * @param padding the padding right in pixel.
+	 * @param value the padding right in pixel.
 	 */
-	public final void setRight(int padding) {
-		setValueAndAddToParent(Position.RIGHT, padding);
+	@Override
+	public final void setRight(int value) {
+		padding.setRight(value);
 	}
 
 	/**
@@ -87,16 +130,17 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 */
 	@Override
 	public final int getRight() {
-		return getValue(Position.RIGHT, getDefaultValues().getRight());
+		return padding.getRight();
 	}
 
 	/**
 	 * Sets the padding top in pixel.
 	 * 
-	 * @param padding the padding top in pixel.
+	 * @param value the padding top in pixel.
 	 */
-	public final void setTop(int padding) {
-		setValueAndAddToParent(Position.TOP, padding);
+	@Override
+	public final void setTop(int value) {
+		padding.setTop(value);
 	}
 
 	/**
@@ -106,16 +150,17 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 */
 	@Override
 	public final int getTop() {
-		return getValue(Position.TOP, getDefaultValues().getTop());
+		return padding.getTop();
 	}
 
 	/**
 	 * Sets the padding bottom in pixel.
 	 * 
-	 * @param padding the padding bottom in pixel.
+	 * @param value the padding bottom in pixel.
 	 */
-	public final void setBottom(int padding) {
-		setValueAndAddToParent(Position.BOTTOM, padding);
+	@Override
+	public final void setBottom(int value) {
+		padding.setBottom(value);
 	}
 
 	/**
@@ -125,6 +170,6 @@ abstract class AbstractPadding<P extends AbstractModel<?, ?>> extends AbstractMo
 	 */
 	@Override
 	public final int getBottom() {
-		return getValue(Position.BOTTOM, getDefaultValues().getBottom());
+		return padding.getBottom();
 	}
 }

@@ -21,7 +21,7 @@ package org.pepstock.charba.client.configuration;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Layout {
+public class Layout extends ConfigurationOptionsContainer {
 
 	private final Padding padding;
 
@@ -31,8 +31,9 @@ public class Layout {
 	 * @param options root options element.
 	 */
 	Layout(ConfigurationOptions options) {
+		super(options);
 		// sets the padding object
-		padding = new Padding(options);
+		this.padding = new Padding(() -> getConfiguration().getLayout().getPadding());
 	}
 
 	/**
