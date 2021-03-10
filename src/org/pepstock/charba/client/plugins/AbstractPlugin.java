@@ -20,7 +20,7 @@ import org.pepstock.charba.client.Plugin;
 /**
  * Implements a plugin interface to help who will create a plugin do not create all methods.<br>
  * The only method not implemented is <code>getId</code> which must implemented.<br>
- * All <code>onBefore*</code> cancellable methods return <code>true</code>.
+ * All <code>onBefore*</code> cancelable methods return <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  *
