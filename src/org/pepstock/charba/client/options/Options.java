@@ -96,6 +96,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// simple properties
 		RESPONSIVE("responsive"),
 		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
+		RESIZE_DELAY("resizeDelay"),
 		ASPECT_RATIO("aspectRatio"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
 		EVENTS("events"),
@@ -501,6 +502,25 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public double getAspectRatio() {
 		return getValue(Property.ASPECT_RATIO, getDefaultValues().getAspectRatio());
+	}
+
+	/**
+	 * Sets the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * 
+	 * @param delay the delay the resize update by give amount of milliseconds
+	 */
+	public void setResizeDelay(int delay) {
+		setValue(Property.RESIZE_DELAY, delay);
+	}
+
+	/**
+	 * Returns the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * 
+	 * @return the delay the resize update by give amount of milliseconds
+	 */
+	@Override
+	public double getResizeDelay() {
+		return getValue(Property.RESIZE_DELAY, getDefaultValues().getResizeDelay());
 	}
 
 	/**

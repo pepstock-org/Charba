@@ -49,6 +49,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
+	private static final double DEFAULT_RESIZE_DELAY = 0;
+
 	private static final boolean DEFAULT_SHOW_LINE = true;
 
 	private static final boolean DEFAULT_SKIP_NULL = false;
@@ -140,6 +142,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public double getAspectRatio() {
 		return DEFAULT_ASPECT_RATIO;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getResizeDelay()
+	 */
+	@Override
+	public double getResizeDelay() {
+		return DEFAULT_RESIZE_DELAY;
 	}
 
 	/*

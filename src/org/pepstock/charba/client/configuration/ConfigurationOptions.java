@@ -473,6 +473,24 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	public double getAspectRatio() {
 		return getConfiguration().getAspectRatio();
 	}
+	
+	/**
+	 * Sets the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * 
+	 * @param delay the delay the resize update by give amount of milliseconds
+	 */
+	public void setResizeDelay(int delay) {
+		getConfiguration().setResizeDelay(delay);
+	}
+
+	/**
+	 * Returns the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * 
+	 * @return the delay the resize update by give amount of milliseconds
+	 */
+	public double getResizeDelay() {
+		return getConfiguration().getResizeDelay();
+	}
 
 	/**
 	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays). Setting devicePixelRatio to a value other than 1

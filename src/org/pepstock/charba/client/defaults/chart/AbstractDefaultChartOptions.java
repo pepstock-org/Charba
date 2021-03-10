@@ -106,6 +106,16 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getResizeDelay()
+	 */
+	@Override
+	public double getResizeDelay() {
+		return options.getResizeDelay();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getDevicePixelRatio()
 	 */
 	@Override

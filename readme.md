@@ -374,6 +374,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add multiple text lines for `text` property of ScaleTitle class.
    * implement `decimation` plugin options and configuration.
    * implement `filler` plugin options and configuration.
+   * add `resizeDelay` property to options and configuration.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.
