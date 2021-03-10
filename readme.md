@@ -243,6 +243,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * rename `ScaleLabel` class to `ScaleTitle` in order to keep it aligned with CHART.JS name spaces.
    * rename `labelString` property name to `text` in `ScaleTitle` class for options and configuration.
    * rename `TooltipCustomCallback` class to `TooltipExternalCallback` in order to keep it aligned with CHART.JS name spaces.
+   * remove `xPadding` and `yPadding` properties from `Tooltips` class for options and configuration, use `Padding` instead.
  * change `getXAxisID` and `getXAxisID` methods in `LineDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.

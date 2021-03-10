@@ -71,7 +71,7 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	Layout(Options options, Key childKey, IsDefaultLayout defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
-		padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING));
+		this.padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING));
 	}
 
 	/**

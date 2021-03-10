@@ -25,6 +25,13 @@ import org.pepstock.charba.client.enums.TextAlign;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler, IsDefaultAnimationContainer {
+	
+	/**
+	 * Returns padding object defaults.
+	 * 
+	 * @return padding object defaults.
+	 */
+	IsDefaultPadding getPadding();
 
 	/**
 	 * Returns if tooltips are enabled.
@@ -158,20 +165,6 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return margin to add before drawing the footer.
 	 */
 	int getFooterMarginTop();
-
-	/**
-	 * Returns the padding to add on left and right of tooltip.
-	 * 
-	 * @return padding to add on left and right of tooltip.
-	 */
-	int getXPadding();
-
-	/**
-	 * Returns the padding to add on top and bottom of tooltip.
-	 * 
-	 * @return padding to add on top and bottom of tooltip.
-	 */
-	int getYPadding();
 
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.

@@ -24,6 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.enums.AnimationType;
@@ -51,8 +52,10 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private final IsDefaultTransitions transitions = new DefaultTransitions();
 
 	private final IsDefaultAnimations animations = new InternalAnimations();
-	
+
 	private final DefaultInteraction interaction = new DefaultInteraction();
+
+	private final InternalPadding padding = new InternalPadding();
 
 	private static final boolean DEFAULT_ENABLED = true;
 
@@ -73,10 +76,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private static final int DEFAULT_FOOTER_SPACING = 2;
 
 	private static final int DEFAULT_FOOTER_MARGIN_TOP = 6;
-
-	private static final int DEFAULT_X_PADDING = 6;
-
-	private static final int DEFAULT_Y_PADDING = 6;
 
 	private static final int DEFAULT_CARET_PADDING = 2;
 
@@ -137,6 +136,16 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public IsDefaultAnimations getAnimations() {
 		return animations;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return padding;
 	}
 
 	/*
@@ -327,26 +336,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public int getFooterMarginTop() {
 		return DEFAULT_FOOTER_MARGIN_TOP;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getXPadding()
-	 */
-	@Override
-	public int getXPadding() {
-		return DEFAULT_X_PADDING;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getYPadding()
-	 */
-	@Override
-	public int getYPadding() {
-		return DEFAULT_Y_PADDING;
 	}
 
 	/*
@@ -682,6 +671,25 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		public int getDuration() {
 			return DEFAULT_DURATION;
 		}
+	}
+
+	/**
+	 * Default padding for tooltip.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalPadding extends AbstractDefaultPadding {
+
+		private static final int DEFAULT_PADDING = 6;
+
+		/**
+		 * Creates the object with default padding.
+		 */
+		InternalPadding() {
+			super(DEFAULT_PADDING);
+		}
+
 	}
 
 }

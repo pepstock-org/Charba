@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -71,6 +72,16 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public IsDefaultAnimations getAnimations() {
 		return tooltips.getAnimations();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return tooltips.getPadding();
 	}
 
 	/*
@@ -261,26 +272,6 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public int getFooterMarginTop() {
 		return tooltips.getFooterMarginTop();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getXPadding()
-	 */
-	@Override
-	public int getXPadding() {
-		return tooltips.getXPadding();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYPadding()
-	 */
-	@Override
-	public int getYPadding() {
-		return tooltips.getYPadding();
 	}
 
 	/*

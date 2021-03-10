@@ -58,8 +58,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		FOOTER_SPACING("footerSpacing"),
 		FOOTER_MARGIN_TOP("footerMarginTop"),
 		FOOTER_ALIGN("footerAlign"),
-		X_PADDING("xPadding"),
-		Y_PADDING("yPadding"),
+		PADDING("padding"),
 		CARET_PADDING("caretPadding"),
 		CARET_SIZE("caretSize"),
 		CORNER_RADIUS("cornerRadius"),
@@ -103,6 +102,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	private final Font bodyFont;
 	// instance of font for footer
 	private final Font footerFont;
+	// padding instance
+	private final Padding padding;
 	// instance of box handler
 	private final BoxHandler boxHandler;
 	// animation container
@@ -120,6 +121,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, getDefaultValues(), getValue(Property.CALLBACKS));
+		this.padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING));
 		// gets fonts definition
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
@@ -169,6 +171,16 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 */
 	public TooltipsCallbacks getCallbacks() {
 		return callbacks;
+	}
+	
+	/**
+	 * Returns the padding element.
+	 * 
+	 * @return the padding
+	 */
+	@Override
+	public Padding getPadding() {
+		return padding;
 	}
 
 	/*
@@ -578,44 +590,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	@Override
 	public int getFooterMarginTop() {
 		return getValue(Property.FOOTER_MARGIN_TOP, getDefaultValues().getFooterMarginTop());
-	}
-
-	/**
-	 * Sets the padding to add on left and right of tooltip.
-	 * 
-	 * @param xPadding padding to add on left and right of tooltip.
-	 */
-	public void setXPadding(int xPadding) {
-		setValueAndAddToParent(Property.X_PADDING, xPadding);
-	}
-
-	/**
-	 * Returns the padding to add on left and right of tooltip.
-	 * 
-	 * @return padding to add on left and right of tooltip.
-	 */
-	@Override
-	public int getXPadding() {
-		return getValue(Property.X_PADDING, getDefaultValues().getXPadding());
-	}
-
-	/**
-	 * Sets the padding to add on top and bottom of tooltip.
-	 * 
-	 * @param yPadding padding to add on top and bottom of tooltip.
-	 */
-	public void setYPadding(int yPadding) {
-		setValueAndAddToParent(Property.Y_PADDING, yPadding);
-	}
-
-	/**
-	 * Returns the padding to add on top and bottom of tooltip.
-	 * 
-	 * @return padding to add on top and bottom of tooltip.
-	 */
-	@Override
-	public int getYPadding() {
-		return getValue(Property.Y_PADDING, getDefaultValues().getYPadding());
 	}
 
 	/**

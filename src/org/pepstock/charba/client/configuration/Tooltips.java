@@ -133,6 +133,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	private final Font bodyFont;
 	// footer font instance
 	private final Font footerFont;
+	// padding instance
+	private final Padding padding;
 	// animation container instance
 	private final AnimationContainer animationContainer;
 
@@ -178,6 +180,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		super(options);
 		// sets callbacks sub element
 		this.callbacks = new TooltipsCallbacks(getOptions());
+		// sets the padding object
+		this.padding = new Padding(() -> getConfiguration().getTooltips().getPadding());
 		// creates animation configuration manager
 		this.animationContainer = new AnimationContainer(getChart(), () -> getConfiguration().getTooltips());
 		// gets the fonts subelements
@@ -239,6 +243,15 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 */
 	public final TooltipsCallbacks getCallbacks() {
 		return callbacks;
+	}
+
+	/**
+	 * Returns the object where all tooltips padding is stored.
+	 * 
+	 * @return the object where all tooltips padding is stored
+	 */
+	public final Padding getPadding() {
+		return padding;
 	}
 
 	/**
@@ -626,42 +639,6 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 */
 	public int getFooterMarginTop() {
 		return getConfiguration().getTooltips().getFooterMarginTop();
-	}
-
-	/**
-	 * Sets the padding to add on left and right of tooltip.
-	 * 
-	 * @param xPadding padding to add on left and right of tooltip.
-	 */
-	public void setXPadding(int xPadding) {
-		getConfiguration().getTooltips().setXPadding(xPadding);
-	}
-
-	/**
-	 * Returns the padding to add on left and right of tooltip.
-	 * 
-	 * @return padding to add on left and right of tooltip.
-	 */
-	public int getXPadding() {
-		return getConfiguration().getTooltips().getXPadding();
-	}
-
-	/**
-	 * Sets the padding to add on top and bottom of tooltip.
-	 * 
-	 * @param yPadding padding to add on top and bottom of tooltip.
-	 */
-	public void setYPadding(int yPadding) {
-		getConfiguration().getTooltips().setYPadding(yPadding);
-	}
-
-	/**
-	 * Returns the padding to add on top and bottom of tooltip.
-	 * 
-	 * @return padding to add on top and bottom of tooltip.
-	 */
-	public int getYPadding() {
-		return getConfiguration().getTooltips().getYPadding();
 	}
 
 	/**
