@@ -78,7 +78,7 @@ public final class DataItem {
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = JSON.stringify(object, 3);
-			this.valueAsPoint = new DataPoint(new ItemsEnvelop<NativeObject>((NativeObject)object));
+			this.valueAsPoint = new DataPoint(new ItemsEnvelop<>((NativeObject)object));
 			this.dataType = DataType.POINTS;
 		} else {
 			// if here is not a recognized object

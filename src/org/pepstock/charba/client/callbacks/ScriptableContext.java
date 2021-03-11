@@ -25,7 +25,6 @@ import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetPoint;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * The option context is used to give contextual information when resolving options.
@@ -161,10 +160,6 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	public DataItem getRaw() {
 		// checks if raw object is not already created
 		if (rawData == null) {
-			
-			// FIXME
-			Window.getConsole().log("raw", getValueAsJavaObject(Property.PARSED));
-			
 			// stores point
 			this.rawData = new DataItem(getValueAsJavaObject(Property.PARSED));
 		}
