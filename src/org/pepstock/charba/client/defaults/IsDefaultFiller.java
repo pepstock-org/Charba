@@ -25,9 +25,9 @@ import org.pepstock.charba.client.enums.DefaultPluginId;
 public interface IsDefaultFiller {
 
 	/**
-	 * Returns <code>true</code> if the plugin is propagating the filling.
+	 * Returns <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets.
 	 * 
-	 * @return <code>true</code> if the plugin is propagating the filling
+	 * @return <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets
 	 */
 	boolean isPropagate();
 

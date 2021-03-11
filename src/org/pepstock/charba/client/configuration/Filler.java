@@ -35,18 +35,18 @@ public class Filler extends ConfigurationOptionsContainer {
 	}
 	
 	/**
-	 * Sets <code>true</code> if the plugin is propagating the filling.
+	 * Sets <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets.
 	 * 
-	 * @param propagate <code>true</code> if the plugin is propagating the filling
+	 * @param propagate <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets
 	 */
 	public void setPropagate(boolean propagate) {
 		getConfiguration().getFiller().setPropagate(propagate);
 	}
 
 	/**
-	 * Returns <code>true</code> if the plugin is propagating the filling.
+	 * Returns <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets.
 	 * 
-	 * @return <code>true</code> if the plugin is propagating the filling
+	 * @return <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets
 	 */
 	public boolean isPropagate() {
 		return getConfiguration().getFiller().isPropagate();
