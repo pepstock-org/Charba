@@ -37,7 +37,8 @@ public class BarOptions extends ScalesOptions {
 	}
 
 	/**
-	 * Sets the base axis for the dataset. Use {@link IndexAxis#Y} for horizontal bar.
+	 * Sets the base axis for the dataset.<br>
+	 * Use {@link IndexAxis#Y} for horizontal bar.
 	 * 
 	 * @param indexAxis the base axis for the dataset
 	 */

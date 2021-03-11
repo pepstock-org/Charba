@@ -21,20 +21,20 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
- * The horizontal bar chart allows a number of properties to be specified for each data set.<br>
+ * The vertical line chart allows a number of properties to be specified for each data set.<br>
  * These are used to set display properties for a specific data set.<br>
- * Some properties can be specified as an array.<br>
- * If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
+ * All point* properties can be specified as an array.<br>
+ * If these are set to an array value, the first value applies to the first point, the second value to the second point, and so on.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class HorizontalBarDataset extends BarDataset {
+public class VerticalLineDataset extends LineDataset {
 
 	/**
 	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 */
-	public HorizontalBarDataset() {
+	public VerticalLineDataset() {
 		this(Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -44,8 +44,8 @@ public class HorizontalBarDataset extends BarDataset {
 	 * 
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public HorizontalBarDataset(boolean hidden) {
-		this(ChartType.BAR, hidden);
+	public VerticalLineDataset(boolean hidden) {
+		this(ChartType.LINE, hidden);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class HorizontalBarDataset extends BarDataset {
 	 * 
 	 * @param defaultValues default options
 	 */
-	public HorizontalBarDataset(IsDefaultOptions defaultValues) {
+	public VerticalLineDataset(IsDefaultOptions defaultValues) {
 		this(defaultValues, Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -63,17 +63,17 @@ public class HorizontalBarDataset extends BarDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public HorizontalBarDataset(IsDefaultOptions defaultValues, boolean hidden) {
-		this(ChartType.BAR, defaultValues, hidden);
+	public VerticalLineDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(ChartType.LINE, defaultValues, hidden);
 	}
 
 	/**
 	 * Creates the data set using chart type related to the data set.
 	 * 
 	 * @param type chart type related to the data set
-	 * @param hidden if <code>true</code>, it will be initially hidden
+	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected HorizontalBarDataset(Type type, boolean hidden) {
+	protected VerticalLineDataset(Type type, boolean hidden) {
 		this(type, null, hidden);
 	}
 
@@ -84,20 +84,20 @@ public class HorizontalBarDataset extends BarDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected HorizontalBarDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+	protected VerticalLineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// always y being an horizontal data set
+		// always y being an vertical data set
 		super.setIndexAxis(IndexAxis.Y);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.BarDataset#setIndexAxis(org.pepstock.charba.client.enums.IndexAxis)
+	 * @see org.pepstock.charba.client.data.LineDataset#setIndexAxis(org.pepstock.charba.client.enums.IndexAxis)
 	 */
 	@Override
 	public void setIndexAxis(IndexAxis indexAxis) {
-		// always y being an horizontal data set
+		// always y being an vertical data set
 		super.setIndexAxis(IndexAxis.Y);
 	}
 

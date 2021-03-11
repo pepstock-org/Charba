@@ -35,13 +35,15 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.enums.Stepped;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * The line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * All point* properties can be specified as an array. If these are set to an array value, the first value applies to the first point, the second value to the second point, and so
- * on.
+ * The line chart allows a number of properties to be specified for each data set.<br>
+ * These are used to set display properties for a specific data set.<br>
+ * All point* properties can be specified as an array.<br>
+ * If these are set to an array value, the first value applies to the first point, the second value to the second point, and so on.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -63,6 +65,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	{
 		X_AXIS_ID("xAxisID"),
 		Y_AXIS_ID("yAxisID"),
+		INDEX_AXIS("indexAxis"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		SHOW_LINE("showLine"),
 		STEPPED("stepped");
@@ -168,9 +171,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets the ID of the x axis to plot this dataset on.
+	 * Sets the ID of the x axis to plot this data set on.
 	 * 
-	 * @param xAxisID the ID of the x axis to plot this dataset on.
+	 * @param xAxisID the ID of the x axis to plot this data set on.
 	 */
 	public void setXAxisID(IsScaleId xAxisID) {
 		// checks if scale id is valid
@@ -180,10 +183,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on.<br>
+	 * Returns the ID of the x axis to plot this data set on.<br>
 	 * If not specified, this defaults to the ID of {@link DefaultScaleId#X}.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on.<br>
+	 * @return the ID of the x axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#X}
 	 */
 	public IsScaleId getXAxisID() {
@@ -191,9 +194,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on.
+	 * Sets the ID of the y axis to plot this data set on.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on.
+	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
 	public void setYAxisID(String yAxisID) {
 		// checks if is valid scale id
@@ -203,9 +206,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on.
+	 * Sets the ID of the y axis to plot this data set on.
 	 * 
-	 * @param yAxisID the ID of the y axis to plot this dataset on.
+	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
 	public void setYAxisID(IsScaleId yAxisID) {
 		// checks if scale id is valid
@@ -215,14 +218,32 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns the ID of the y axis to plot this dataset on. <br>
+	 * Returns the ID of the y axis to plot this data set on. <br>
 	 * If not specified, this defaults to the ID of {@link DefaultScaleId#Y}.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on.<br>
+	 * @return the ID of the y axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#Y}
 	 */
 	public IsScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
+	}
+
+	/**
+	 * Sets the base axis for the data set. Use {@link IndexAxis#Y} for vertical line.
+	 * 
+	 * @param indexAxis the base axis for the data set
+	 */
+	public void setIndexAxis(IndexAxis indexAxis) {
+		setValue(Property.INDEX_AXIS, indexAxis);
+	}
+
+	/**
+	 * Returns the base axis for the data set.
+	 * 
+	 * @return the base axis for the data set
+	 */
+	public IndexAxis getIndexAxis() {
+		return getValue(Property.INDEX_AXIS, IndexAxis.values(), getDefaultValues().getIndexAxis());
 	}
 
 	/**

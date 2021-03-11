@@ -429,7 +429,7 @@
   const plugin = {
     id: 'labels',
     beforeDatasetsUpdate: function (chart, args, optionsParam) {
-      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
+      if (!SUPPORTED_TYPES[chart.config.type] || ((chart.config.type === 'bar' || chart.config.type === 'line') && chart.options.indexAxis === 'y')) {
         return;
       }
 	  const options = new Array();
@@ -463,7 +463,7 @@
       }
     },
     afterDatasetUpdate: function (chart, args) {
-      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
+      if (!SUPPORTED_TYPES[chart.config.type] || ((chart.config.type === 'bar' || chart.config.type === 'line') && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {
@@ -471,7 +471,7 @@
       });
     },
     beforeDraw: function (chart) {
-      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
+      if (!SUPPORTED_TYPES[chart.config.type] || ((chart.config.type === 'bar' || chart.config.type === 'line') && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {
@@ -479,7 +479,7 @@
       });
     },
     afterDatasetsDraw: function (chart) {
-      if (!SUPPORTED_TYPES[chart.config.type] || (chart.config.type === 'bar' && chart.options.indexAxis === 'y')) {
+      if (!SUPPORTED_TYPES[chart.config.type] || ((chart.config.type === 'bar' || chart.config.type === 'line') && chart.options.indexAxis === 'y')) {
         return;
       }
       chart._labels.forEach(function (label) {

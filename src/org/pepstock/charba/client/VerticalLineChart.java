@@ -15,26 +15,26 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.configuration.HorizontalBarOptions;
-import org.pepstock.charba.client.data.HorizontalBarDataset;
+import org.pepstock.charba.client.configuration.VerticalLineOptions;
+import org.pepstock.charba.client.data.VerticalLineDataset;
 
 /**
- * HORIZONTAL BAR chart implementation.<br>
- * A horizontal bar chart is a variation on a bar chart.<br>
- * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+ * Vertical LINE chart implementation.<br>
+ * A line chart is a way of plotting data points on a line.<br>
+ * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class HorizontalBarChart extends BarChart {
+public class VerticalLineChart extends LineChart {
 
-	private final HorizontalBarOptions options;
+	private final VerticalLineOptions options;
 
 	/**
 	 * Builds the object.
 	 */
-	public HorizontalBarChart() {
-		this(ChartType.BAR);
+	public VerticalLineChart() {
+		this(ChartType.LINE);
 	}
 
 	/**
@@ -43,19 +43,19 @@ public class HorizontalBarChart extends BarChart {
 	 * 
 	 * @param extendedType type of chart
 	 */
-	protected HorizontalBarChart(Type extendedType) {
-		super(extendedType, true);
+	protected VerticalLineChart(Type extendedType) {
+		super(extendedType);
 		// creates the options
-		this.options = new HorizontalBarOptions(this, getDefaultChartOptions());
+		options = new VerticalLineOptions(this, getDefaultChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.BarChart#getOptions()
+	 * @see org.pepstock.charba.client.LineChart#getOptions()
 	 */
 	@Override
-	public HorizontalBarOptions getOptions() {
+	public VerticalLineOptions getOptions() {
 		return options;
 	}
 
@@ -65,18 +65,18 @@ public class HorizontalBarChart extends BarChart {
 	 * @see org.pepstock.charba.client.IsDatasetCreator#newDataset()
 	 */
 	@Override
-	public HorizontalBarDataset newDataset() {
+	public VerticalLineDataset newDataset() {
 		return newDataset(false);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.BarChart#newDataset(boolean)
+	 * @see org.pepstock.charba.client.LineChart#newDataset(boolean)
 	 */
 	@Override
-	public HorizontalBarDataset newDataset(boolean hidden) {
-		return new HorizontalBarDataset(getDefaultChartOptions(), hidden);
+	public VerticalLineDataset newDataset(boolean hidden) {
+		return new VerticalLineDataset(getDefaultChartOptions(), hidden);
 	}
 
 }

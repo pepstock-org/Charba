@@ -20,8 +20,12 @@ import java.util.Map;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.configuration.BarOptions;
+import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
@@ -413,24 +417,23 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported.<br>
+	 * Returns <code>true</code> if the chart is consistent and the scale type is {@link ScaleType#MULTI} and {@link IndexAxis#X}.<br>
 	 * If ZoomPlugin is activated, this plugin will be disabled.
 	 * 
 	 * @param chart chart instance to check
-	 * @return <code>true</code> if the chart is consistent and the type of chart is BAR or LINE, only ones supported
+	 * @return <code>true</code> if the chart is consistent and the scale type is {@link ScaleType#MULTI} and {@link IndexAxis#X}
 	 */
 	private boolean mustBeActivated(IsChart chart) {
 		// checks consistent
-		boolean mustBeActivated = IsChart.isConsistent(chart) && (ChartType.LINE.equals(chart.getBaseType()) || ChartType.BAR.equals(chart.getBaseType()));
+		boolean mustBeActivated = IsChart.isConsistent(chart) && (ScaleType.MULTI.equals(chart.getBaseType().scaleType()));
 		// if the first check is true...
 		if (mustBeActivated) {
 			// .. is adding an additional check on ZOOM plugin, if enabled
 			mustBeActivated = !chart.getOptions().getPlugins().isEnabled(ZOOM_PLUIGIN_ID);
 			// checks if it's an horizontal bar
-			if (mustBeActivated && ChartType.BAR.equals(chart.getBaseType())) {
-				// sets if must be activated checking if the bar datasets
-				// are horizontal.
-				mustBeActivated = checkBarDatasets(chart);
+			if (mustBeActivated) {
+				// sets if must be activated checking if the options and datasets
+				mustBeActivated = checkIndexAxis(chart);
 			}
 		}
 		// checks if the plugin has been enabled
@@ -441,28 +444,63 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns <code>true</code> if all datasets of bar chart have got the {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar.
+	 * Returns <code>true</code> if the chart has got {@link IndexAxis#X} where applicable.
+	 * 
+	 * @param chart chart instance to check
+	 * @return <code>true</code> if the chart has got {@link IndexAxis#X} where applicable
+	 */
+	private boolean checkIndexAxis(IsChart chart) {
+		// checks is a line or bar chart
+		// in order to check the index axis
+		if (ChartType.BAR.equals(chart.getBaseType()) && chart.getOptions() instanceof BarOptions) {
+			// casts to bar options
+			BarOptions barOptions = (BarOptions) chart.getOptions();
+			// checks index axis
+			return IndexAxis.X.equals(barOptions.getIndexAxis());
+		} else if (ChartType.LINE.equals(chart.getBaseType()) && chart.getOptions() instanceof LineOptions) {
+			// casts to line options
+			LineOptions lineOptions = (LineOptions) chart.getOptions();
+			// checks index axis
+			return IndexAxis.X.equals(lineOptions.getIndexAxis());
+		}
+		// if here, the chart is manageable
+		// but the data sets must be check as well
+		return checkDatasets(chart);
+	}
+
+	/**
+	 * Returns <code>true</code> if all data sets of bar chart have got the {@link IndexAxis#X}.
 	 * 
 	 * @param chart chart instance
-	 * @return <code>true</code> if all datasets of bar chart have got the {@link IndexAxis#X} because the plugin can work only with vertical bar and NOT horizontal bar
+	 * @return <code>true</code> if all data sets of bar chart have got the {@link IndexAxis#X}
 	 */
-	private boolean checkBarDatasets(IsChart chart) {
-		// scans all datasets to check if they are set as horizontal
+	private boolean checkDatasets(IsChart chart) {
+		// scans all data sets to check if they are set as horizontal
 		for (Dataset dataset : chart.getData().getDatasets()) {
-			// checks if is a bar dataset
+			// checks if is a bar data set
 			if (dataset instanceof BarDataset) {
-				// casts to bar dataset
+				// casts to bar data set
 				BarDataset barDataset = (BarDataset) dataset;
 				// checks if is horizontal
 				if (IndexAxis.Y.equals(barDataset.getIndexAxis())) {
-					// the base axis of dataset is horizontal
+					// the base axis of data set is horizontal
 					// therefore returns false
 					return false;
 				}
-
+			} else if (dataset instanceof LineDataset) {
+				// checks if is a line data set
+				// casts to line data set
+				LineDataset lineDataset = (LineDataset) dataset;
+				// checks if is vertical
+				if (IndexAxis.Y.equals(lineDataset.getIndexAxis())) {
+					// the base axis of data set is vertical
+					// therefore returns false
+					return false;
+				}
 			}
 		}
-		// every dataset is ok, not horizontal
+		// every data set is correctly configured
+		// in order to enable the plugin
 		return true;
 	}
 
