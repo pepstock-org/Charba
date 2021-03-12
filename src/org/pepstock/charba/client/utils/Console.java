@@ -15,16 +15,20 @@
 */
 package org.pepstock.charba.client.utils;
 
-import jsinterop.annotations.JsType;
-
 /**
- * This object is the wrapper to console java script object.<br>
- * The console object provides access to the browser's debugging console
+ * Provides access to the browser's debugging console.<br>
+ * This object is the wrapper to console java script object.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true)
-interface NativeConsole {
+public final class Console {
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private Console() {
+		// do nothing
+	}
 
 	/**
 	 * Outputs a message to the Web Console.
@@ -32,7 +36,9 @@ interface NativeConsole {
 	 * @param objects a list of JavaScript objects to output.<br>
 	 *            The string representations of each of these objects are appended together in the order listed and output.
 	 */
-	void log(Object... objects);
+	public static void log(Object... objects) {
+		Window.getConsole().log(objects);
+	}
 
 	/**
 	 * Displays an interactive list of the properties of the specified JavaScript object.<br>
@@ -41,7 +47,9 @@ interface NativeConsole {
 	 *
 	 * @param object a JavaScript object whose properties should be output.
 	 */
-	void dir(Object object);
+	public static void dir(Object object) {
+		Window.getConsole().dir(object);
+	}
 
 	/**
 	 * Displays an interactive tree of the descendant elements of the specified XML/HTML element.<br>
@@ -50,5 +58,7 @@ interface NativeConsole {
 	 *
 	 * @param object a JavaScript object whose properties should be output.
 	 */
-	void dirxml(Object object);
+	public static void dirxml(Object object) {
+		Window.getConsole().dirxml(object);
+	}
 }
