@@ -89,8 +89,6 @@ public final class DataLabelsPlugin extends AbstractExtensionPlugin<DataLabelsOp
 		ResourcesType.getResources().inject();
 		// injects DATALABELS plugin
 		Injector.ensureInjected(RESOURCE);
-		// set the enabling to all charts at global level
-		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 		// stored the current status
 		boolean isRegistered = DataLabelsPlugin.get().isRegistered();
 		// loads defaults
@@ -101,6 +99,8 @@ public final class DataLabelsPlugin extends AbstractExtensionPlugin<DataLabelsOp
 			// because this plugin does not have the auto registration anymore
 			JsDataLabelsHelper.get().register();
 		}
+		// set the enabling to all charts at global level
+		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
 
 }

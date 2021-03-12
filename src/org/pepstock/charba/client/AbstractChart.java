@@ -403,8 +403,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final IsDefaultScaledOptions getWholeOptions() {
-		// checks if options are consistent
-		if (getOptions() != null) {
+		// check if chart has been initialized
+		if (isInitialized()) {
+			// returns the options
+			return getNode().getOptions();
+		} else if (getOptions() != null) {
+			// if here the chart is not initialized
+	 		// checks if options are consistent
 			// creates an envelop for options
 			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
 			// load the envelop
