@@ -407,7 +407,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public List<Event> getEvents() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
-		// if teh array is not consistent returns the default
+		// if the array is not consistent returns the default
 		return array != null ? ArrayListHelper.list(Event.values(), array) : getDefaultValues().getEvents();
 	}
 

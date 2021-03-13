@@ -73,7 +73,7 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	 */
 	public PluginEventArgument(PluginsEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-		// gets and stores teh event context
+		// gets and stores the event context
 		this.eventContext = new ChartEventContext(new ItemsEnvelop<>(getValue(Property.EVENT), true));
 	}
 

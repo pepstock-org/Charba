@@ -329,7 +329,7 @@ public final class DatasetItem extends NativeObjectContainer {
 			// creates the scale item
 			return new ScaleItem(getValue(key));
 		}
-		// if here, the key or teh value is not consistent
+		// if here, the key or the value is not consistent
 		return null;
 	}
 

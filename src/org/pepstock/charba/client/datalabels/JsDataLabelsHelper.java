@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 /**
  * Internal utility for {@link DataLabelsPlugin} to register the plugin globally to Chart.js.<br>
  * This is needed because from the plugin version for Chart.js 3, the plugin doesn't register itself golbally anymore and delegeate this operation to the user.<br>
- * To maintain teh same capabilities of Charba, this object register the plugin globally.
+ * To maintain the same capabilities of Charba, this object register the plugin globally.
  * 
  * @author Andrea "Stock" Stocchero
  *

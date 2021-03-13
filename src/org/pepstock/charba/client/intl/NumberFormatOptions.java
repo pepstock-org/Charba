@@ -342,7 +342,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 * Creates a compound unit identifier by units passed as argument.<br>
 	 * Pairs of simple units can be concatenated with "-per-" to make a compound unit.
 	 * 
-	 * @param units array of units to join to create teh identifier
+	 * @param units array of units to join to create the identifier
 	 * @return a compound unit identifier
 	 */
 	private String createCompoundUnitIdentifier(MeasureUnit... units) {

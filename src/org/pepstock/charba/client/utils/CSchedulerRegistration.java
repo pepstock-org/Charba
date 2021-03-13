@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.utils;
 
 /**
- * Registration objects returned when a task has been scheduled, used to cancel teh scheduling.
+ * Registration objects returned when a task has been scheduled, used to cancel the scheduling.
  * 
  * @author Andrea "Stock" Stocchero
  *

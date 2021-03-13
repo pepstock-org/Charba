@@ -21,7 +21,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * A property descriptor is a record which describes a java script property (integer).<br>
- * It is used to store teh <code>hashCode</code>.
+ * It is used to store the <code>hashCode</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */

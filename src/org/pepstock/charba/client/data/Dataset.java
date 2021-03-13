@@ -1226,7 +1226,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private static final String createScope(int id) {
 		// creates a string builder
 		StringBuilder sb = new StringBuilder("dataset-");
-		// formats teh key and returns it
+		// formats the key and returns it
 		return sb.append(id).toString();
 	}
 
