@@ -63,7 +63,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -98,7 +98,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	/**
 	 * Creates new range element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored range values into native object to read.
+	 * @param nativeObject stored range values in the native object to read.
 	 * @param defaultOptions default DRAG options to returns the default when required.
 	 */
 	Drag(NativeObject nativeObject, IsDefaultDrag defaultOptions) {

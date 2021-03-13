@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 
 /**
- * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart configuration.
+ * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store in the chart configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -60,7 +60,7 @@ public final class Plugins implements ConfigurationElement {
 			}
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-			// stores the wrapper into a list
+			// stores the wrapper in the a list
 			pluginsInstances.add(wPlugin);
 		}
 	}
@@ -154,12 +154,12 @@ public final class Plugins implements ConfigurationElement {
 			while (iter.hasNext()) {
 				// gets wrapper
 				WrapperPlugin plugin = iter.next();
-				// checks if the plugin is already loaded into global ones
+				// checks if the plugin is already loaded in the global ones
 				if (!globalPluginIds.contains(plugin.getId())) {
 					// if not, adds plugin
 					pluginsListToSet.add(plugin);
 				} else {
-					// removes it if already set into global
+					// removes it if already set in the global
 					iter.remove();
 				}
 			}

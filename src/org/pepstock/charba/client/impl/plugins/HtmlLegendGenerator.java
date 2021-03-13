@@ -163,7 +163,7 @@ final class HtmlLegendGenerator {
 				// checks if new row must be created
 				// checking max legend items per row
 				if (index % maxColumns == 0) {
-					// stores the index into column
+					// stores the index in the column
 					columns = index;
 					// new row
 					TableRow newRow = DOMBuilder.get().createTableRowElement();
@@ -177,7 +177,7 @@ final class HtmlLegendGenerator {
 				// set legend item to html legend id
 				htmlLegendItem.setLegendItem(item);
 				// creates and adds the cell part
-				// related to color/box to design into legend
+				// related to color/box to design in the legend
 				current.appendChild(buildColorCell(chart, legendId, htmlLegendItem));
 				// creates and adds the cell part
 				// related to label with legend item text
@@ -237,7 +237,7 @@ final class HtmlLegendGenerator {
 	}
 
 	/**
-	 * Extracts all legend items which must be rendered into legend.
+	 * Extracts all legend items which must be rendered in the legend.
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @return list of legend items to render
@@ -305,7 +305,7 @@ final class HtmlLegendGenerator {
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param legendId element id for {@link TableCell}
-	 * @param htmlLegendItem legend item to show into color cell element
+	 * @param htmlLegendItem legend item to show in the color cell element
 	 * @return a {@link TableCell} which should contains and represents the color of dataset
 	 */
 	private TableCell buildColorCell(IsChart chart, HtmlLegendId legendId, HtmlLegendItem htmlLegendItem) {
@@ -359,7 +359,7 @@ final class HtmlLegendGenerator {
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param legendId element id for {@link TableCell}
-	 * @param item legend item to show into color cell element
+	 * @param item legend item to show in the color cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item, as HTML
 	 * @return a {@link TableCell} which should contains and represents the label of dataset
 	 */
@@ -399,7 +399,7 @@ final class HtmlLegendGenerator {
 	 * Applies the background color to the color element.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param htmlLegendItem legend item to map into background color
+	 * @param htmlLegendItem legend item to map in the background color
 	 * @param color DIV element where to apply the background color
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
@@ -447,7 +447,7 @@ final class HtmlLegendGenerator {
 			String pattern = TilesFactory.createHtmlLegendItem(htmlLegendItem);
 			// checks if the result of tile factory is consistent
 			if (pattern != null && pattern.trim().length() > 0) {
-				// transforms pattern into CSS property and
+				// transforms pattern in the CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, Repetition.NO_REPEAT);
 				// applies the point style as background to color element
 				color.getStyle().setBackground(patternAsCss);
@@ -505,7 +505,7 @@ final class HtmlLegendGenerator {
 	 * Applies the background color to the color element.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param item legend item to map into background color
+	 * @param item legend item to map in the background color
 	 * @param color DIV element where to apply the background color
 	 * @param width width to use to apply background color
 	 * @param height height to use to apply background color
@@ -525,7 +525,7 @@ final class HtmlLegendGenerator {
 			}
 			// checks if pattern consistent
 			if (pattern != null) {
-				// transforms pattern into CSS property and
+				// transforms pattern in the CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height);
 				color.getStyle().setBackground(patternAsCss);
 			} else {
@@ -560,7 +560,7 @@ final class HtmlLegendGenerator {
 	/**
 	 * Applies the border style to the color element and returns <code>true</code> if the border color must be applied.
 	 * 
-	 * @param item legend item to map into border style
+	 * @param item legend item to map in the border style
 	 * @param color TD element where to apply the border style
 	 * @return <code>true</code> if the border has been applied and than color is missing
 	 */
@@ -593,7 +593,7 @@ final class HtmlLegendGenerator {
 	 * Applies the border color to the color element.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param item legend item to map into border color
+	 * @param item legend item to map in the border color
 	 * @param color TD element where to apply the border color
 	 * @param width width to use to apply border color
 	 * @param height height to use to apply border color
@@ -613,7 +613,7 @@ final class HtmlLegendGenerator {
 			}
 			// checks if pattern consistent
 			if (pattern != null) {
-				// transforms pattern into CSS property and
+				// transforms pattern in the CSS property and
 				String patternAsCss = Utilities.toCSSBackgroundProperty(pattern, width, height) + " 1";
 				color.getStyle().setBorderImage(patternAsCss);
 			} else {

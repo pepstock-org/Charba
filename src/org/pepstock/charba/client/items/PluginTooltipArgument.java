@@ -24,7 +24,7 @@ import org.pepstock.charba.client.plugins.PluginsEnvelop;
 /**
  * Contains all info for every item of tooltip.<br>
  * Created and passed by CHART.JS.<br>
- * It uses into the PLUGINS.
+ * It uses in the the PLUGINS.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -41,7 +41,7 @@ public final class PluginTooltipArgument extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

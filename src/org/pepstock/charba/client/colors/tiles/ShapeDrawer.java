@@ -76,7 +76,7 @@ public abstract class ShapeDrawer {
 		drawTile(innerCanvas.getContext2d(), backgroundColor, shapeColor, size);
 		// closes the path
 		context.closePath();
-		// transforms the canvas into a pattern
+		// transforms the canvas in the a pattern
 		return outerCanvas.getContext2d().createPattern(innerCanvas, Repetition.REPEAT);
 	}
 

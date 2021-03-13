@@ -23,7 +23,7 @@ import org.pepstock.charba.client.options.AbstractFont;
 
 /**
  * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
- * It can be used also into callback for font generation at runtime.
+ * It can be used also in the callback for font generation at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * @see FontCallback

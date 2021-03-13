@@ -98,7 +98,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -651,7 +651,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Loads the background color into the {@link TooltipLabelColor} instance.
+	 * Loads the background color in the the {@link TooltipLabelColor} instance.
 	 * 
 	 * @param labelColor {@link TooltipLabelColor} instance to be filled
 	 */
@@ -670,7 +670,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Loads the border color into the {@link TooltipLabelColor} instance.
+	 * Loads the border color in the the {@link TooltipLabelColor} instance.
 	 * 
 	 * @param labelColor {@link TooltipLabelColor} instance to be filled
 	 */

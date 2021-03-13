@@ -43,7 +43,7 @@ import org.pepstock.charba.client.dom.elements.Img;
  * </pre>
  * 
  * Drawing the image on canvas, you could get the java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some
- * invalid characters, not allowed into xHTML.
+ * invalid characters, not allowed in the xHTML.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -68,7 +68,7 @@ public final class AnnotationBuilder {
 
 	/**
 	 * Creates an image to apply to canvas with the HTML content (passed as DOM element) and width and height of the resulted image. Drawing the image on canvas, you could get the
-	 * java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some invalid characters, not allowed into xHTML.
+	 * java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some invalid characters, not allowed in the xHTML.
 	 * 
 	 * @param htmlXmlContent DOM element which represents the XML content to show
 	 * @param width width of image to be created
@@ -135,7 +135,7 @@ public final class AnnotationBuilder {
 
 	/**
 	 * Creates an image to apply to canvas with the HTML content (MUST BE XML well-formed) and width and height of the resulted image. Drawing the image on canvas, you could get
-	 * the java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some invalid characters, not allowed into xHTML.
+	 * the java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even the content is well-formed, it contains some invalid characters, not allowed in the xHTML.
 	 * 
 	 * @param htmlXmlContent HTML content to apply on canvas, must be XML well-formed
 	 * @param width width of image to be created
@@ -177,7 +177,7 @@ public final class AnnotationBuilder {
 	/**
 	 * Creates the images to be returned, managing the cache of them.
 	 * 
-	 * @param key unique key to store the element into the cache
+	 * @param key unique key to store the element in the the cache
 	 * @param validatedhtmlXmlContent HTML content, already checked and well-formed
 	 * @param width width of image to be created
 	 * @param height height of image to be created
@@ -186,9 +186,9 @@ public final class AnnotationBuilder {
 	private static Img buildWithValidatedContent(String key, String validatedhtmlXmlContent, double width, double height) {
 		// copies the template string
 		String result = Utilities.applyTemplate(TEMPLATE_IMAGE_URL, validatedhtmlXmlContent, width, height);
-		// transforms it into an element
+		// transforms it in the an element
 		Img element = Utilities.toImageElement(result);
-		// stores into cache
+		// stores in the cache
 		IMAGES.put(key, element);
 		// returns it
 		return element;

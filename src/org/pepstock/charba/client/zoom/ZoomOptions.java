@@ -40,7 +40,7 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -86,7 +86,7 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	/**
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
 	ZoomOptions(IsDefaultOptions defaultOptions, NativeObject nativeObject) {

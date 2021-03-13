@@ -20,7 +20,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Callback to set a {@link Pattern} as background color.<br>
- * This is used and set into dataset when a canvas object is set for a background color.
+ * This is used and set in the dataset when a canvas object is set for a background color.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -28,10 +28,10 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 final class DatasetPatternCallback extends AbstractCanvasObjectCallback<Pattern> {
 
 	/**
-	 * Creates the callback using the container of canvas object and the property related to the canvas object to set into dataset.
+	 * Creates the callback using the container of canvas object and the property related to the canvas object to set in the dataset.
 	 * 
 	 * @param container container of canvas object instance.
-	 * @param property the property related to the canvas object to set into dataset
+	 * @param property the property related to the canvas object to set in the dataset
 	 */
 	DatasetPatternCallback(PatternsContainer container, CanvasObjectKey property) {
 		super(container, property);

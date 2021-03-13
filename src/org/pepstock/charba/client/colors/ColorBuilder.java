@@ -86,7 +86,7 @@ public final class ColorBuilder {
 	 */
 	public static IsColor build(int r, int g, int b) {
 		// checks if already exists the required color
-		// into enum HTML color
+		// in the enum HTML color
 		for (HtmlColor color : HtmlColor.values()) {
 			// if equals returns the enum item
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
@@ -157,7 +157,7 @@ public final class ColorBuilder {
 	 */
 	private static IsColor build(int r, int g, int b, double alpha) {
 		// checks if already exists the required color
-		// into enum HTML color with alpha
+		// in the enum HTML color with alpha
 		for (HtmlColor color : HtmlColor.values()) {
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
 				return color.alpha(alpha);
@@ -174,7 +174,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses HEX value translating into a color. HEX format: <code>#rrggbb</code>.
+	 * Parses HEX value translating in the a color. HEX format: <code>#rrggbb</code>.
 	 * 
 	 * @param hexvalue hex color.
 	 * @return color instance
@@ -184,7 +184,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses HEX value translating into a color. HEX format: <code>#rrggbb</code>.
+	 * Parses HEX value translating in the a color. HEX format: <code>#rrggbb</code>.
 	 * 
 	 * @param hexvalue hex color.
 	 * @param searchOnEnum if <code>true</code> scans the html and GWT material color
@@ -222,7 +222,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses RGB value translating into a color. RGB format: <code>rgb(r, g, b)</code>
+	 * Parses RGB value translating in the a color. RGB format: <code>rgb(r, g, b)</code>
 	 * 
 	 * @param rgbvalue rgb value
 	 * @return color instance
@@ -263,7 +263,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses RGBA value translating into a color. RGB format: <code>rgba(r, g, b, a)</code>
+	 * Parses RGBA value translating in the a color. RGB format: <code>rgba(r, g, b, a)</code>
 	 * 
 	 * @param rgbavalue rgba value
 	 * @return color instance
@@ -308,7 +308,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses HSL value translating into a color. HSL format: <code>hsl(h, s, l)</code>
+	 * Parses HSL value translating in the a color. HSL format: <code>hsl(h, s, l)</code>
 	 * 
 	 * @param hslvalue hsl value
 	 * @return color instance
@@ -349,7 +349,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Parses HSL value translating into a color. HSL format: <code>hsla(h, s, l, a)</code>
+	 * Parses HSL value translating in the a color. HSL format: <code>hsla(h, s, l, a)</code>
 	 * 
 	 * @param hslavalue hsla value
 	 * @return color instance
@@ -416,7 +416,7 @@ public final class ColorBuilder {
 		if (lightness < 0 || lightness > 100) {
 			throw new IllegalArgumentException("Lightness argument is not within bounds (0-100)");
 		}
-		// transforms all values into values between 0 and 1
+		// transforms all values in the values between 0 and 1
 		// with maximum value of range
 		double transientHue = hue % 360D;
 		transientHue /= 360D;
@@ -451,7 +451,7 @@ public final class ColorBuilder {
 	}
 
 	/**
-	 * Transforms Hue value into a color value for RGB
+	 * Transforms Hue value in the a color value for RGB
 	 * 
 	 * @param temporary2 lightness and saturation temporary variable
 	 * @param temporary1 lightness and saturation temporary variable

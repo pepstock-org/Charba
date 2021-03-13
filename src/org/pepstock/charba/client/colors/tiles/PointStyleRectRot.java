@@ -19,8 +19,8 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * RECTROT drawer to design a {@link PointStyle#RECT_ROT} into tile.<br>
- * It designs the point style into the following tile section (A):<br>
+ * RECTROT drawer to design a {@link PointStyle#RECT_ROT} in the tile.<br>
+ * It designs the point style in the the following tile section (A):<br>
  * <br>
  * 
  * <pre>

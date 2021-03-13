@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.NoDefaults;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
- * The display formats are used to configure how different time units are formed into strings for the axis tick marks.
+ * The display formats are used to configure how different time units are formed in the strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -46,7 +46,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	}
 
 	/**
-	 * Sets the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * Sets the display formats are used to configure how different time units are formed in the strings for the axis tick marks.
 	 * 
 	 * @param unit time unit.
 	 * @param format display format
@@ -56,7 +56,7 @@ public final class DisplayFormats extends AbstractModel<Time, NoDefaults> {
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * Returns the display formats are used to configure how different time units are formed in the strings for the axis tick marks.
 	 * 
 	 * @param unit time unit.
 	 * @return display format or <code>null</code> if unit is not consistent

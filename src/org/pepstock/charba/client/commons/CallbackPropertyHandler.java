@@ -37,7 +37,7 @@ public class CallbackPropertyHandler<T> {
 	private static final String HASHCODE_PROPERTY_SUFFIX = "CharbaCallbackKey";
 	// property key to manage and where storing the function callback proxy
 	private final Key property;
-	// property key used to store the class name plus hash code, as key of callback instance into cache
+	// property key used to store the class name plus hash code, as key of callback instance in the cache
 	private final Key hashCodeProperty;
 	// caches with the callback instance
 	// K = unique key (className-hashCode), V = callback wrapper
@@ -68,21 +68,21 @@ public class CallbackPropertyHandler<T> {
 	}
 
 	/**
-	 * Returns the property key used to store the class name plus hash code, as key of callback instance into cache.
+	 * Returns the property key used to store the class name plus hash code, as key of callback instance in the cache.
 	 * 
-	 * @return the property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @return the property key used to store the class name plus hash code, as key of callback instance in the cache
 	 */
 	public final Key getHashCodeProperty() {
 		return hashCodeProperty;
 	}
 
 	/**
-	 * Stores the callback into the cache, storing the proxy function and the hash code property key (unique id of callback) into native object.
+	 * Stores the callback in the the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
 	 * 
 	 * @param container container instance of native object to use to store the properties
 	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 	 * @param callback the java callback instance to cache
-	 * @param proxy the proxy java script function to store into native object
+	 * @param proxy the proxy java script function to store in the native object
 	 */
 	public void setCallback(NativeObjectContainer container, String scope, T callback, Proxy proxy) {
 		// checks if scope and container are consistent
@@ -116,21 +116,21 @@ public class CallbackPropertyHandler<T> {
 	}
 
 	/**
-	 * Returns the callback stored into native object or <code>null</code> if not exists.
+	 * Returns the callback stored in the native object or <code>null</code> if not exists.
 	 * 
 	 * @param container container instance of native object to use to get the unique key to retrieve the callback from cache
-	 * @return the callback stored into native object or <code>null</code> if not exists
+	 * @return the callback stored in the native object or <code>null</code> if not exists
 	 */
 	public T getCallback(NativeObjectContainer container) {
 		return getCallback(container, null);
 	}
 
 	/**
-	 * Returns the callback stored into native object or the default value passed as argument, if not exists.
+	 * Returns the callback stored in the native object or the default value passed as argument, if not exists.
 	 * 
 	 * @param container container instance of native object to use to get the unique key to retrieve the callback from cache
 	 * @param defaultValue default value to return if the callback does not exist
-	 * @return the callback stored into native object or the default value passed as argument, if not exists
+	 * @return the callback stored in the native object or the default value passed as argument, if not exists
 	 */
 	public T getCallback(NativeObjectContainer container, T defaultValue) {
 		// checks if scope and container are consistent
@@ -154,7 +154,7 @@ public class CallbackPropertyHandler<T> {
 	/**
 	 * Updates or/and add the wrapper, with the callback instance, adding the scope.
 	 * 
-	 * @param key property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @param key property key used to store the class name plus hash code, as key of callback instance in the cache
 	 * @param callback the java callback instance to cache
 	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 	 */
@@ -168,7 +168,7 @@ public class CallbackPropertyHandler<T> {
 	/**
 	 * Removes an existing scope from callback wrapper.
 	 * 
-	 * @param key property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @param key property key used to store the class name plus hash code, as key of callback instance in the cache
 	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, datasets
 	 */
 	private void removeScopeFromCallback(String key, String scope) {
@@ -187,12 +187,12 @@ public class CallbackPropertyHandler<T> {
 	}
 
 	/**
-	 * Creates the property key used to store the class name plus hash code, as key of callback instance into cache.<br>
+	 * Creates the property key used to store the class name plus hash code, as key of callback instance in the cache.<br>
 	 * <br>
 	 * <code>[callbackClassName]-[callbackHashCode]</code> <br>
 	 * 
 	 * @param callback the java callback instance to cache
-	 * @return property key used to store the class name plus hash code, as key of callback instance into cache
+	 * @return property key used to store the class name plus hash code, as key of callback instance in the cache
 	 */
 	private String createKey(Object callback) {
 		// checks if callback is consistent

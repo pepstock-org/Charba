@@ -20,7 +20,7 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Interface to define the point styles into options elements.
+ * Interface to define the point styles in the options elements.
  * 
  * @author Andrea "Stock" Stocchero
  *

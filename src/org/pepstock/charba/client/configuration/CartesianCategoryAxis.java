@@ -147,7 +147,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	/**
 	 * Returns the labels for axes.
 	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
+	 * @param binding if <code>true</code> binds the new labels in the container
 	 * @return the labels for axes
 	 */
 	public Labels getLabels(boolean binding) {

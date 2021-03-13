@@ -45,7 +45,7 @@ public final class Configuration extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -72,7 +72,7 @@ public final class Configuration extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the options of chart by the <code>options</code> property into native object.
+	 * Sets the options of chart by the <code>options</code> property in the native object.
 	 * 
 	 * @param options options of chart as native object.
 	 */
@@ -81,7 +81,7 @@ public final class Configuration extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the options of chart by the <code>options</code> property into native object.
+	 * Returns the options of chart by the <code>options</code> property in the native object.
 	 * 
 	 * @return options of chart as native object.
 	 */
@@ -90,7 +90,7 @@ public final class Configuration extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the data of chart by the <code>data</code> property into native object.
+	 * Sets the data of chart by the <code>data</code> property in the native object.
 	 * 
 	 * @param data data of chart as native object.
 	 */
@@ -99,7 +99,7 @@ public final class Configuration extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the inline plugins of chart by the <code>plugins</code> property into native object.
+	 * Sets the inline plugins of chart by the <code>plugins</code> property in the native object.
 	 * 
 	 * @param plugins inline plugins of chart as array of plugin native object.
 	 */

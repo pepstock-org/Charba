@@ -97,7 +97,7 @@ public final class Positioner {
 	/**
 	 * Returns <code>true</code> if the custom positioner has been registered, otherwise <code>false</code>.
 	 * 
-	 * @param name the name of custom tooltip position to use into tooltip
+	 * @param name the name of custom tooltip position to use in the tooltip
 	 * @return <code>true</code> if the custom positioner has been registered, otherwise <code>false</code>
 	 */
 	public boolean hasTooltipPosition(String name) {
@@ -112,7 +112,7 @@ public final class Positioner {
 	/**
 	 * Returns the tooltip positioner implementation by tooltip position name. If not exists, returns <code>null</code>.
 	 * 
-	 * @param name the name of custom tooltip position to use into tooltip
+	 * @param name the name of custom tooltip position to use in the tooltip
 	 * @return the tooltip positioner implementation. If not exists, returns <code>null</code>.
 	 */
 	public IsTooltipPosition getTooltipPosition(String name) {
@@ -140,7 +140,7 @@ public final class Positioner {
 				// adds the function to invoke the custom positioner
 				JsPositionerHelper.get().register(position, positionerCallbackProxy.getProxy());
 			}
-			// stores into positioners map
+			// stores in the positioners map
 			positioners.put(position.value(), positioner);
 		}
 	}

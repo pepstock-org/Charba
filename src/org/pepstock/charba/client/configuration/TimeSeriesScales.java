@@ -89,7 +89,7 @@ public final class TimeSeriesScales extends Scales {
 					// not allowed
 					throw new UnsupportedOperationException("Do not set any radial linear axis to a time series chart");
 				}
-				// stores the axis into array
+				// stores the axis in the array
 				toStore[index] = axis;
 				// increments index
 				index++;

@@ -398,7 +398,7 @@ public final class TilesFactory {
 		}
 		// creates a canvas pattern
 		CanvasPatternItem pattern = shapeParam.getDrawer().createTile(INSTANCE.canvas, backgroundColorParam, shapeColorParam, sizeParam);
-		// stores it into cache
+		// stores it in the cache
 		CANVAS_PATTERNS.put(key, pattern);
 		return pattern;
 	}
@@ -434,7 +434,7 @@ public final class TilesFactory {
 				AbstractPointStyleShapeDrawer pointStyleShape = (AbstractPointStyleShapeDrawer) shape.getDrawer();
 				// invokes the drawing of the point style
 				String result = pointStyleShape.drawTile(INSTANCE.canvas, htmlLegendItem);
-				// stores it into cache
+				// stores it in the cache
 				HTML_LEGEND_ITEMS.put(key, result);
 				return result;
 			}
@@ -444,7 +444,7 @@ public final class TilesFactory {
 	}
 
 	/**
-	 * Clears all cached instance of point style by chart instance, wrapper into a legend item. This is invoked ONLY from {@link HtmlLegend} plugin.
+	 * Clears all cached instance of point style by chart instance, wrapper in the a legend item. This is invoked ONLY from {@link HtmlLegend} plugin.
 	 * 
 	 * @param htmlLegendItem the legend item instance to create the tile
 	 */

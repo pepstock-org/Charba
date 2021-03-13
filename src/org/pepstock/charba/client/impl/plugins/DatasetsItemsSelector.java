@@ -43,7 +43,7 @@ import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Enables the datasets items selection directly into the canvas.<br>
+ * Enables the datasets items selection directly in the the canvas.<br>
  * It works only for line and bar chart instances and if ZoomPlugin is disable.<br>
  * It will add mouser listeners to canvas.<br>
  * Tooltips will be disable to avoid events conflicts.<br>
@@ -69,7 +69,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	private static final DatasetsItemsSelector INSTANCE = new DatasetsItemsSelector();
 	// It can not use zoom plugin id
 	// to avoid to load zoom and hammer JS if not needed
-	// it must always aligned with value into zoom plugin model
+	// it must always aligned with value in the zoom plugin model
 	private static final String ZOOM_PLUIGIN_ID = ResourceName.ZOOM_PLUGIN.value();
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
@@ -123,7 +123,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Clears the selection on the chart. With this method, it don't fire any clear event if not selected into plugin options.
+	 * Clears the selection on the chart. With this method, it don't fire any clear event if not selected in the plugin options.
 	 * 
 	 * @param chart chart instance to clear the selection
 	 */
@@ -132,7 +132,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		boolean fireEvent = false;
 		// checks chart is consistent and for handler
 		if (IsChart.isValid(chart)) {
-			// checks into options if fire event has been set
+			// checks in the options if fire event has been set
 			fireEvent = chart.isEventHandled(DatasetRangeClearSelectionEvent.TYPE);
 		}
 		// invoke reset using fire event of options or false by default
@@ -216,7 +216,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			if (!pluginEventsRegistrationHandlers.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
 				// if not, adds handler
 				HandlerRegistration registratrion = chart.addHandler(pluginLegendClickHandler, LegendClickEvent.TYPE);
-				// stores flag into map
+				// stores flag in the map
 				pluginEventsRegistrationHandlers.put(chart.getId(), registratrion);
 			}
 			// checks if chart has got already an handler
@@ -231,7 +231,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = getOptions(chart);
 			// creates the handler of selection
-			// by chart instance and the options stored into options (if exists).
+			// by chart instance and the options stored in the options (if exists).
 			SelectionHandler handler = new SelectionHandler(chart, pOptions);
 			// removes the default mouse down listener
 			chart.removeCanvasPreventDefault();
@@ -251,7 +251,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart)) {
-			// adds checks if there is any dataset selection handler into option
+			// adds checks if there is any dataset selection handler in the option
 			// if yes exception
 			if (chart.getOptions().hasDatasetSelectionHandlers()) {
 				// throw exception
@@ -550,7 +550,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if chart is changed
 		if (handler.isChartChanged(dataUrl)) {
 			// this is necessary to apply every time the handler
-			// will draw directly into canvas
+			// will draw directly in the canvas
 			// stores image setting size
 			handler.setSnapshot(Utilities.toImageElement(dataUrl, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight()));
 		}

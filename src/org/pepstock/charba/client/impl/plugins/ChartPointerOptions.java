@@ -47,7 +47,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -91,17 +91,17 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 */
 	ChartPointerOptions(IsChartPointerDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
 	}
 
 	/**
-	 * Builds the object with a java script object stored into options and the default global ones
+	 * Builds the object with a java script object stored in the options and the default global ones
 	 * 
-	 * @param nativeObject native object into options
-	 * @param defaultOptions default options stored into defaults global
+	 * @param nativeObject native object in the options
+	 * @param defaultOptions default options stored in the defaults global
 	 */
 	ChartPointerOptions(IsChartPointerDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartPointer.ID, nativeObject);

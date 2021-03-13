@@ -58,7 +58,7 @@ final class NativeDateTimeFormat {
 	 * Formats a date time according to the locale and formatting options of this object.
 	 * 
 	 * @param value the date to format
-	 * @return the date time into a string according to the locale and formatting options
+	 * @return the date time in the a string according to the locale and formatting options
 	 */
 	native String format(NativeDate value);
 

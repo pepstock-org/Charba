@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * SLASH drawer to design a slash into tile.<br>
- * It designs a slash into the following tile sections (A, B and C):<br>
+ * SLASH drawer to design a slash in the tile.<br>
+ * It designs a slash in the the following tile sections (A, B and C):<br>
  * <br>
  * 
  * <pre>
@@ -50,18 +50,18 @@ final class SlashedLine extends ShapeDrawer {
 		final double quarterSize = size / 4D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawDiagonal(context, size, quarterSize * -2D, 0D, quarterSize * 6D);
-		// designs the shape into C section
+		// designs the shape in the C section
 		drawDiagonal(context, quarterSize * 3D, quarterSize * -4D, quarterSize * -1D, size);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawDiagonal(context, size + quarterSize, 0D, quarterSize, size * 2D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
 
 	/**
-	 * Designs a slash into a tile section.
+	 * Designs a slash in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param startX offset X where starts drawing

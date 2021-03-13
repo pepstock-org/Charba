@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * STAR drawer to design a star (empty) into tile.<br>
- * It designs a star into the following tile sections (only A):<br>
+ * STAR drawer to design a star (empty) in the tile.<br>
+ * It designs a star in the the following tile sections (only A):<br>
  * <br>
  * 
  * <pre>
@@ -61,14 +61,14 @@ class EmptyStar extends ShapeDrawer {
 		context.translate(size, size);
 		// applies rotation (90 degrees) to the current transform
 		context.rotate(ROTATION_180_DEGREES);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawStar(context, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
 		// strokes the current path
 		context.stroke();
 	}
 
 	/**
-	 * Designs a star into a tile section.
+	 * Designs a star in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param offsetX offset X where starts drawing

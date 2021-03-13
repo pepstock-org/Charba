@@ -22,7 +22,7 @@ import org.pepstock.charba.client.data.DoughnutDataset;
 
 /**
  * DOUGHNUT chart GWT WIDGET implementation.<br>
- * A doughnut charts are divided into segments, the arc of each segment shows the proportional value of each piece of data.
+ * A doughnut charts are divided in the segments, the arc of each segment shows the proportional value of each piece of data.
  * 
  * @author Andrea "Stock" Stocchero
  */

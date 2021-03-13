@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<LabelsOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link LabelsPlugin#FACTORY}.<br>
+	 * To avoid any instantiation. Use the static reference in the {@link LabelsPlugin#FACTORY}.<br>
 	 * Adds itself as charts life cycle listener to manage the cache of labels options, in order to clean the instances when the charts will be destroy.
 	 */
 	LabelsOptionsFactory() {

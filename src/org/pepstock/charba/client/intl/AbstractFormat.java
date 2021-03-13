@@ -101,7 +101,7 @@ abstract class AbstractFormat<F extends AbtsractFormatWrapper<?, T, R>, O, T, R>
 	 * Formats a value according to the locale and formatting options of this object.
 	 * 
 	 * @param value the vale to format
-	 * @return the value into a string according to the locale and formatting options
+	 * @return the value in the a string according to the locale and formatting options
 	 */
 	public final String format(T value) {
 		// checks if value is consistent

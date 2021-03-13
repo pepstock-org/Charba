@@ -19,8 +19,8 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * CIRCLE drawer to design a {@link PointStyle#CIRCLE} into tile.<br>
- * It designs the point style into the following tile section (A):<br>
+ * CIRCLE drawer to design a {@link PointStyle#CIRCLE} in the tile.<br>
+ * It designs the point style in the the following tile section (A):<br>
  * <br>
  * 
  * <pre>

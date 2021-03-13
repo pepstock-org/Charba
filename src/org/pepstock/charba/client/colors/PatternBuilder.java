@@ -29,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * The pattern builder is the entry point to create a canvas pattern.<br>
- * Entity to apply a canvas pattern into a data set as background.<br>
+ * Entity to apply a canvas pattern in the a data set as background.<br>
  * See <a href="https://www.toptal.com/designers/subtlepatterns/">here</a> some interesting pattern images.
  * 
  * @author Andrea "Stock" Stocchero
@@ -186,14 +186,14 @@ public final class PatternBuilder {
 			// if here, is creating the pattern by a canvas pattern
 			result = new Pattern(id, canvasPatternItem, width, height);
 		}
-		// stores the object into the cache
+		// stores the object in the the cache
 		PATTERNS.put(id, result);
 		// returns the instance
 		return result;
 	}
 
 	/**
-	 * Creates a pattern, previously stored into a native java script object
+	 * Creates a pattern, previously stored in the a native java script object
 	 *
 	 * @param nativeObject native java script object wrapped by pattern.
 	 * @return a pattern instance, built by the builder.
@@ -215,7 +215,7 @@ public final class PatternBuilder {
 			}
 			// creates new pattern
 			Pattern result = new Pattern(nativeObject);
-			// stores the object into the cache
+			// stores the object in the the cache
 			PATTERNS.put(id, result);
 			// returns the instance
 			return result;

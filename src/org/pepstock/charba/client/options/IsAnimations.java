@@ -25,9 +25,9 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 public interface IsAnimations extends IsDefaultAnimations {
 
 	/**
-	 * Enables or disables an animation collection instance into animation options.
+	 * Enables or disables an animation collection instance in the animation options.
 	 * 
-	 * @param collection collection instance used to check into animation options
+	 * @param collection collection instance used to check in the animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
 	void setEnabled(IsAnimationCollectionKey collection, boolean enabled);
@@ -35,13 +35,13 @@ public interface IsAnimations extends IsDefaultAnimations {
 	/**
 	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
 	 * 
-	 * @param collection collection instance used to check into animation options
+	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	boolean isEnabled(IsAnimationCollectionKey collection);
 
 	/**
-	 * Returns an animation collection instance if stored into the animation options.
+	 * Returns an animation collection instance if stored in the the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
@@ -58,7 +58,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	void set(IsAnimationCollectionKey collection, AnimationCollection animationCollection);
 
 	/**
-	 * Creates an animation collection instance and stores into the animation options.
+	 * Creates an animation collection instance and stores in the the animation options.
 	 * 
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options

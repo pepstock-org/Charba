@@ -97,7 +97,7 @@ public final class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIt
 	}
 
 	/**
-	 * Inserts the specified element into the list
+	 * Inserts the specified element in the the list
 	 */
 	@Override
 	public void add(E e) {

@@ -46,7 +46,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -96,10 +96,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	}
 
 	/**
-	 * Builds the object with a java script object stored into options.
+	 * Builds the object with a java script object stored in the options.
 	 * 
 	 * @param defaultOptions plugin default options
-	 * @param nativeObject native object into options
+	 * @param nativeObject native object in the options
 	 */
 	ChartBackgroundColorOptions(IsChartBackgroundColorDefaultOptions defaultOptions, NativeObject nativeObject) {
 		super(ChartBackgroundColor.ID, nativeObject);
@@ -167,12 +167,12 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if gradient has been set
 		if (ColorType.GRADIENT.equals(getColorType())) {
-			// checks if the gradient has been set into this object or into defaults
+			// checks if the gradient has been set in the this object or in the defaults
 			if (has(Property.BACKGROUND_COLOR)) {
-				// if here, the gradient has been set into this options
+				// if here, the gradient has been set in the this options
 				return GradientBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
-				// if here, the gradient has been set into defaults options
+				// if here, the gradient has been set in the defaults options
 				return defaultOptions.getBackgroundColorAsGradient();
 			}
 		}
@@ -191,12 +191,12 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if pattern has been set
 		if (ColorType.PATTERN.equals(getColorType())) {
-			// checks if the pattern has been set into this object or into defaults
+			// checks if the pattern has been set in the this object or in the defaults
 			if (has(Property.BACKGROUND_COLOR)) {
-				// if here, the pattern has been set into this options
+				// if here, the pattern has been set in the this options
 				return PatternBuilder.build(getValue(Property.BACKGROUND_COLOR));
 			} else {
-				// if here, the pattern has been set into defaults options
+				// if here, the pattern has been set in the defaults options
 				return defaultOptions.getBackgroundColorAsPattern();
 			}
 		}

@@ -50,7 +50,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -81,8 +81,8 @@ public final class ChartEventContext extends NativeObjectContainer {
 	/**
 	 * Creates the object with the chart instance, creating a change native event.
 	 * 
-	 * @param chart chart instance to store into object
-	 * @param event native event instance to store into object
+	 * @param chart chart instance to store in the object
+	 * @param event native event instance to store in the object
 	 */
 	public ChartEventContext(Chart chart, BaseNativeEvent event) {
 		// creates an empty native object

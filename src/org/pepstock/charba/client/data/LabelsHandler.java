@@ -40,7 +40,7 @@ public final class LabelsHandler extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -94,7 +94,7 @@ public final class LabelsHandler extends NativeObjectContainer {
 	/**
 	 * Returns the labels for axes.
 	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
+	 * @param binding if <code>true</code> binds the new labels in the container
 	 * @return the labels for axes
 	 */
 	Labels getLabels(boolean binding) {

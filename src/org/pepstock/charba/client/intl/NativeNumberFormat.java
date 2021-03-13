@@ -68,7 +68,7 @@ final class NativeNumberFormat {
 	 * Formats a number according to the locale and formatting options of this object.
 	 * 
 	 * @param value the number to format
-	 * @return the number into a string according to the locale and formatting options
+	 * @return the number in the a string according to the locale and formatting options
 	 */
 	native String format(double value);
 
@@ -89,10 +89,10 @@ final class NativeNumberFormat {
 	native ArrayObject formatToParts(double value);
 
 	/**
-	 * Returns the default locale, set into the platform.
+	 * Returns the default locale, set in the the platform.
 	 * 
 	 * @param key key of resolved options to get the locale, usually is "locale".
-	 * @return the default locale, set into the platform
+	 * @return the default locale, set in the the platform
 	 */
 	@JsOverlay
 	static String getDefaultLocale(Key key) {

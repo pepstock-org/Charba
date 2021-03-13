@@ -256,7 +256,7 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 	 */
 	private GwtMaterialScheme(IsColor... hexColors) {
 		scheme = new EnumeratedScheme(CATEGORY, name());
-		// adds them into the list
+		// adds them in the the list
 		scheme.addAll(Arrays.asList(hexColors));
 	}
 

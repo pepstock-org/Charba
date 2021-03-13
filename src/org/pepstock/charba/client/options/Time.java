@@ -50,7 +50,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -118,7 +118,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	public IsoWeekDay getIsoWeekday() {
 		// gets week day as number
 		int isoWeekday = getValue(Property.ISO_WEEKDAY, IsoWeekDay.SUNDAY.value());
-		// searches the value into the enumeration
+		// searches the value in the the enumeration
 		return IsoWeekDay.getIsoWeekDayByValue(isoWeekday);
 	}
 

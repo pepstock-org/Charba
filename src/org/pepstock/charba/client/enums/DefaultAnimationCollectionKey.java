@@ -51,7 +51,7 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	private final List<IsAnimationPropertyKey> properties = new LinkedList<>();
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param properties array of properties to use as default

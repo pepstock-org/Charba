@@ -38,7 +38,7 @@ public final class ArrayChart extends Array {
 	}
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
+	 * Returns a shallow copy of a portion of an array in the a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>

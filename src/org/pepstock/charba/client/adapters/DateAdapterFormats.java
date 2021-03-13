@@ -40,7 +40,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -184,7 +184,7 @@ public final class DateAdapterFormats extends NativeObjectContainer {
 	 * @return the format provided by adapter
 	 */
 	public String getFormat(TimeUnit unit) {
-		// check if time unit is consistent and there is into the object
+		// check if time unit is consistent and there is in the the object
 		if (Key.isValid(unit) && has(unit)) {
 			return getValue(unit, Constants.EMPTY_STRING);
 		}

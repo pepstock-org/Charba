@@ -81,7 +81,7 @@ public final class ArrayInteger extends Array {
 	/**
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
-	 * @param items list of integers to load into new java script array.
+	 * @param items list of integers to load in the new java script array.
 	 * @return new array instance of integers or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
@@ -111,7 +111,7 @@ public final class ArrayInteger extends Array {
 	/**
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
-	 * @param items list of integers to load into new java script array.
+	 * @param items list of integers to load in the new java script array.
 	 * @return new array instance of integers or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
@@ -155,7 +155,7 @@ public final class ArrayInteger extends Array {
 	native int indexOf(int value);
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
+	 * Returns a shallow copy of a portion of an array in the a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>

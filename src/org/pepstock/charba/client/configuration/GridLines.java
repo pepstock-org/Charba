@@ -66,7 +66,7 @@ public class GridLines extends AbstractScaleLines {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -386,18 +386,18 @@ public class GridLines extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets the length in pixels that the grid lines will draw into the axis area.
+	 * Sets the length in pixels that the grid lines will draw in the the axis area.
 	 * 
-	 * @param tickLength Length in pixels that the grid lines will draw into the axis area.
+	 * @param tickLength Length in pixels that the grid lines will draw in the the axis area.
 	 */
 	public void setTickLength(int tickLength) {
 		getAxis().getScale().getGridLines().setTickLength(tickLength);
 	}
 
 	/**
-	 * Returns the length in pixels that the grid lines will draw into the axis area.
+	 * Returns the length in pixels that the grid lines will draw in the the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw into the axis area.
+	 * @return Length in pixels that the grid lines will draw in the the axis area.
 	 */
 	public int getTickLength() {
 		return getAxis().getScale().getGridLines().getTickLength();

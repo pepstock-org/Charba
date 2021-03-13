@@ -55,7 +55,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -139,7 +139,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the labels for X axes.
 	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
+	 * @param binding if <code>true</code> binds the new labels in the container
 	 * @return the labels for X axes
 	 */
 	public Labels getXLabels(boolean binding) {
@@ -200,7 +200,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the labels for Y axes.
 	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
+	 * @param binding if <code>true</code> binds the new labels in the container
 	 * @return the labels for Y axes
 	 */
 	public Labels getYLabels(boolean binding) {
@@ -255,7 +255,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the list of datasets.
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return the list of datasets
 	 */
 	public List<Dataset> getDatasets(boolean binding) {
@@ -498,7 +498,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns a gradient stored into data set as color to apply into chart.
+	 * Returns a gradient stored in the data set as color to apply in the chart.
 	 * 
 	 * @param dataset data set instance
 	 * @param legendItem legend item instance to get the data set related to.
@@ -513,7 +513,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns a pattern stored into data set as color to apply into chart.
+	 * Returns a pattern stored in the data set as color to apply in the chart.
 	 * 
 	 * @param dataset data set instance
 	 * @param legendItem legend item instance to get the data set related to.
@@ -528,7 +528,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns a canvas object stored into data set as color to apply into chart.
+	 * Returns a canvas object stored in the data set as color to apply in the chart.
 	 * 
 	 * @param dataset data set instance
 	 * @param container container of canvas object where searching the object
@@ -539,7 +539,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @return a canvas object instance or <code>null</code> if not found by legend item
 	 */
 	private <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property, T searchedOnCallback) {
-		// checks if the canvas object has been found into callbacks cache
+		// checks if the canvas object has been found in the callbacks cache
 		if (searchedOnCallback != null) {
 			return searchedOnCallback;
 		}
@@ -587,7 +587,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
 		// checks if chart is consistent
-		// configuration will be check into load data method
+		// configuration will be check in the load data method
 		if (IsChart.isValid(chart)) {
 			// loads data
 			ConfigurationLoader.loadData(configuration, this);

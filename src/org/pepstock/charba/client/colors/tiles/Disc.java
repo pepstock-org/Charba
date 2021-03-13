@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * DISC drawer to design a disc into tile.<br>
- * It designs a disc into the following tile sections (A and B):<br>
+ * DISC drawer to design a disc in the tile.<br>
+ * It designs a disc in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -52,9 +52,9 @@ final class Disc extends Dot {
 		final double diameter = size / 5D;
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawDot(context, size, 0D, 0D, diameter);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// fills the current path
 		context.fill();

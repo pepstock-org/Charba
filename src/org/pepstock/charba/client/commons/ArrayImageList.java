@@ -69,7 +69,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	}
 
 	/**
-	 * Loads an array of elements into the list
+	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

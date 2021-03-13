@@ -375,7 +375,7 @@ public final class CLocale {
 				}
 			}
 		}
-		// if here, the property is not found into meta elements
+		// if here, the property is not found in the meta elements
 		// then returns null
 		return null;
 	}

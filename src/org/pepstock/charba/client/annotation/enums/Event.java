@@ -74,7 +74,7 @@ public enum Event implements Key
 	private final String value;
 
 	/**
-	 * Creates an event property value to use into native object.
+	 * Creates an event property value to use int the native object.
 	 * 
 	 * @param value value of draw time property name
 	 */

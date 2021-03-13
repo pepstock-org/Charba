@@ -20,7 +20,7 @@ package org.pepstock.charba.client.commons;
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script object as back-end to store objects (enumeration values).<br>
  * <br>
- * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable in the javascript part but
  * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
@@ -76,7 +76,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Loads an array of elements into the list
+	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

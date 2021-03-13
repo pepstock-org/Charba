@@ -96,7 +96,7 @@ public abstract class CanvasObjectFactory {
 		// checks if canvas pattern already loaded
 		if (pattern.getCanvasPattern() != null) {
 			CanvasPatternItem result = pattern.getCanvasPattern();
-			// stores canvas pattern into cache
+			// stores canvas pattern in the cache
 			patternsMap.put(pattern.getId(), result);
 			return result;
 		}
@@ -110,7 +110,7 @@ public abstract class CanvasObjectFactory {
 		if (result != null) {
 			// stores the canvas id
 			pattern.store(result);
-			// stores canvas pattern into cache
+			// stores canvas pattern in the cache
 			patternsMap.put(pattern.getId(), result);
 		}
 		// returns result
@@ -192,7 +192,7 @@ public abstract class CanvasObjectFactory {
 					// adds colors using offset and color
 					result.addColorStop(color.getOffset(), color.getColorAsString());
 				}
-				// stores canvas gradient into cache
+				// stores canvas gradient in the cache
 				gradientsMap.put(uniqueId, result);
 			}
 			// returns result

@@ -77,9 +77,9 @@ public interface IsDefaultAnimationCollection extends IsDefaultBaseAnimation {
 	String getToAsString();
 
 	/**
-	 * Returns the properties defined into the animation collection.
+	 * Returns the properties defined in the the animation collection.
 	 * 
-	 * @return the properties defined into the animation collection
+	 * @return the properties defined in the the animation collection
 	 */
 	List<IsAnimationPropertyKey> getProperties();
 

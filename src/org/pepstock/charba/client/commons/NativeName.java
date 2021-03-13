@@ -20,7 +20,7 @@ import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
- * Constants with java script object name to use into {@link jsinterop.annotations.JsType} native objects.
+ * Constants with java script object name to use in the {@link jsinterop.annotations.JsType} native objects.
  * 
  * @author Andrea "Stock" Stocchero
  */

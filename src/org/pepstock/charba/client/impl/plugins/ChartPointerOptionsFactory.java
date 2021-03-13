@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFactory<ChartPointerOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link ChartPointer#FACTORY}.
+	 * To avoid any instantiation. Use the static reference in the {@link ChartPointer#FACTORY}.
 	 */
 	ChartPointerOptionsFactory() {
 		super(ChartPointer.ID);

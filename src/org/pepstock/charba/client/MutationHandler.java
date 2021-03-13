@@ -16,7 +16,7 @@
 package org.pepstock.charba.client;
 
 /**
- * Defines the methods needed to manage the attach and detach of the chart into and from the DOM tree.
+ * Defines the methods needed to manage the attach and detach of the chart in the and from the DOM tree.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -32,7 +32,7 @@ interface MutationHandler {
 	String getId();
 
 	/**
-	 * Invoked by mutation observer when a chart has been attached into the DOM tree.
+	 * Invoked by mutation observer when a chart has been attached in the the DOM tree.
 	 * 
 	 * @param item can not be instantiated out of this package to avoid that anyone (apart the observer) will invoke the method.
 	 */

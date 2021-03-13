@@ -51,11 +51,11 @@ public final class Helpers {
 	}
 
 	/**
-	 * Recursively deep copies source properties into target only if not defined in target.<br>
+	 * Recursively deep copies source properties in the target only if not defined in target.<br>
 	 * IMPORTANT: target is not cloned and will be updated with source properties.
 	 * 
 	 * @param target the target object in which all sources are merged into.
-	 * @param source object to merge into target.
+	 * @param source object to merge in the target.
 	 * @return the target object. If target and source are nulls, an empty native object is returned is returned.
 	 */
 	public NativeObject mergeIf(NativeObject target, NativeObject source) {

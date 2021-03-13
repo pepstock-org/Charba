@@ -52,7 +52,7 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -310,9 +310,9 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 	}
 	
 	/**
-	 * Sets the properties to be defined into the animation collection.
+	 * Sets the properties to be defined in the the animation collection.
 	 * 
-	 * @param properties the properties to be defined into the animation collection
+	 * @param properties the properties to be defined in the the animation collection
 	 */
 	public void setProperties(IsAnimationPropertyKey... properties) {
 		// checks if argument is consistent
@@ -325,9 +325,9 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 	}
 
 	/**
-	 * Sets the properties to be defined into the animation collection.
+	 * Sets the properties to be defined in the the animation collection.
 	 * 
-	 * @param properties the properties to be defined into the animation collection
+	 * @param properties the properties to be defined in the the animation collection
 	 */
 	public void setProperties(List<IsAnimationPropertyKey> properties) {
 		// checks if argument is consistent
@@ -340,9 +340,9 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 	}
 
 	/**
-	 * Returns the properties defined into the animation collection.
+	 * Returns the properties defined in the the animation collection.
 	 * 
-	 * @return the properties defined into the animation collection
+	 * @return the properties defined in the the animation collection
 	 */
 	@Override
 	public List<IsAnimationPropertyKey> getProperties() {

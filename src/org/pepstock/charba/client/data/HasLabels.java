@@ -83,7 +83,7 @@ public interface HasLabels {
 	/**
 	 * Returns the labels for axes.
 	 * 
-	 * @param binding if <code>true</code> binds the new labels into container
+	 * @param binding if <code>true</code> binds the new labels in the container
 	 * @return the labels for axes
 	 */
 	default Labels getLabels(boolean binding) {

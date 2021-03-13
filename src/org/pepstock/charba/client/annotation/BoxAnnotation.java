@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a BOX annotation which draws a box into a chart.<br>
+ * Implements a BOX annotation which draws a box in the a chart.<br>
  * If one of the axes is not specified, the box will take the entire chart dimension.<br>
  * The 4 coordinates, xMin, xMax, yMin, yMax are optional. If not specified, the box is expanded out to the edges.
  * 
@@ -46,7 +46,7 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

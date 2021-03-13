@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * LINE (vertically) drawer to design a line (vertically) into tile.<br>
- * It designs a line (vertically) into the following tile sections (A and B):<br>
+ * LINE (vertically) drawer to design a line (vertically) in the tile.<br>
+ * It designs a line (vertically) in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 /**
- * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as default of the chart one, if exist.
+ * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set in the default global, used as default of the chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -58,7 +58,7 @@ public final class NumberFormat extends AbstractFormat<NumberFormatWrapper, Numb
 	 * Formats a number according to the locale and formatting options of this object.
 	 * 
 	 * @param value the number to format
-	 * @return the number into a string according to the locale and formatting options
+	 * @return the number in the a string according to the locale and formatting options
 	 */
 	public final String format(double value) {
 		return super.format(value);

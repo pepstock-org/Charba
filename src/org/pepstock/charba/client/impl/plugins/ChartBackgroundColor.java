@@ -315,14 +315,14 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 				bgOptions.setBackgroundColor(gradient);
 			}
 		}
-		// stores into cache
+		// stores in the cache
 		OPTIONS.put(chart.getId(), bgOptions);
 		// returns it
 		return bgOptions;
 	}
 
 	/**
-	 * Applies the background CSS property into chart HTML element.
+	 * Applies the background CSS property in the chart HTML element.
 	 * 
 	 * @param chart chart instance to use to apply CSS property
 	 * @param value value of CSS property to set
@@ -336,7 +336,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	}
 
 	/**
-	 * Applies the background color CSS property into chart HTML element.
+	 * Applies the background color CSS property in the chart HTML element.
 	 * 
 	 * @param chart chart instance to use to apply CSS property
 	 * @param value value of CSS property to set
@@ -350,7 +350,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	}
 
 	/**
-	 * Applies the background image CSS property into chart HTML element.
+	 * Applies the background image CSS property in the chart HTML element.
 	 * 
 	 * @param chart chart instance to use to apply CSS property
 	 * @param value value of CSS property to set

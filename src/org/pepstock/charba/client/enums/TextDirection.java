@@ -34,13 +34,13 @@ public enum TextDirection implements Key
 	 */
 	RIGHT_TO_LEFT("rtl");
 
-	// internal value to use into CodeMirror configuration
+	// internal value to use in the CodeMirror configuration
 	private final String value;
 
 	/**
 	 * Creates the enumeration by its value.
 	 * 
-	 * @param value string value to use into CodeMirror configuration
+	 * @param value string value to use in the CodeMirror configuration
 	 */
 	private TextDirection(String value) {
 		this.value = value;

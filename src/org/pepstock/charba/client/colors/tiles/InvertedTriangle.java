@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * TRAINGLE (vertically) drawer to design a triangle (vertically) into tile.<br>
- * It designs a triangle (vertically) into the following tile sections (A and B):<br>
+ * TRAINGLE (vertically) drawer to design a triangle (vertically) in the tile.<br>
+ * It designs a triangle (vertically) in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

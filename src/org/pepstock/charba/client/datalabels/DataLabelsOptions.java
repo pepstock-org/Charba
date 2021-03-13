@@ -125,7 +125,7 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -164,7 +164,7 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	/**
 	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
 	DataLabelsOptions(IsDefaultDataLabelsOptions defaultOptions, NativeObject nativeObject) {

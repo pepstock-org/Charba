@@ -46,12 +46,12 @@ public enum DefaultScaleId implements IsScaleId
 	UNKNOWN("charbaunknown", null);
 
 	/**
-	 * Default scale id for X scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
+	 * Default scale id for X scale defined in the chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
 	 */
 	public static final String DEFAULT_X_FOR_BAR_AND_LINE_OPTIONS = "_index_";
 
 	/**
-	 * Default scale id for Y scale defined into chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
+	 * Default scale id for Y scale defined in the chart defaults for {@link ChartType#BAR} and {@link ChartType#LINE}.
 	 */
 	public static final String DEFAULT_Y_FOR_BAR_AND_LINE_OPTIONS = "_value_";
 
@@ -62,7 +62,7 @@ public enum DefaultScaleId implements IsScaleId
 	private final AxisKind axisKind;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param kind default axis kind for this default scale id

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.LegendTitle;
 public interface HasLegendText {
 
 	/**
-	 * Returns a legend text handler instance to use into default methods of this interface.
+	 * Returns a legend text handler instance to use in the default methods of this interface.
 	 * 
 	 * @return a legend text handler instance
 	 */

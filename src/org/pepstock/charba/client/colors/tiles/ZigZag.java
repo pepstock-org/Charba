@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * ZIGZAG drawer to design a zigzag line into tile.<br>
- * It designs a zigzag line into the following tile sections (A and B):<br>
+ * ZIGZAG drawer to design a zigzag line in the tile.<br>
+ * It designs a zigzag line in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -50,16 +50,16 @@ class ZigZag extends ShapeDrawer {
 		final double halfSize = size / 2D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawZigZag(context, size, 0D);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawZigZag(context, size, halfSize);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
 
 	/**
-	 * Designs a zigzag into a tile section.
+	 * Designs a zigzag in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a LINE annotation which draws a line into a chart.<br>
+ * Implements a LINE annotation which draws a line in the a chart.<br>
  * Vertical or horizontal lines are supported.
  * 
  * @author Andrea "Stock" Stocchero
@@ -51,7 +51,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -148,7 +148,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		}
 		// creates a line label
 		label = new LineLabel(this.defaultValues.getLabel());
-		// stores into annotation
+		// stores in the annotation
 		setValue(Property.LABEL, label);
 	}
 

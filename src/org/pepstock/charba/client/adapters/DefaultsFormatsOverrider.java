@@ -63,7 +63,7 @@ final class DefaultsFormatsOverrider extends NativeObjectContainer {
 	 * @param format the format to set
 	 */
 	void setFormat(Key unit, String format) {
-		// check if time unit is consistent and there is into the object
+		// check if time unit is consistent and there is in the object
 		if (Key.isValid(unit) && format != null) {
 			setValue(unit, format);
 		}

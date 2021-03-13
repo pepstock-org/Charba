@@ -234,18 +234,18 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns the callback to customize the value string into chart.
+	 * Returns the callback to customize the value string in the chart.
 	 * 
-	 * @return the callback to customize the value string into chart
+	 * @return the callback to customize the value string in the chart
 	 */
 	public final MeterFormatCallback getFormatCallback() {
 		return formatCallback;
 	}
 
 	/**
-	 * Sets the callback to customize the value string into chart.
+	 * Sets the callback to customize the value string in the chart.
 	 * 
-	 * @param formatCallback the callback to customize the value string into chart
+	 * @param formatCallback the callback to customize the value string in the chart
 	 */
 	public final void setFormatCallback(MeterFormatCallback formatCallback) {
 		this.formatCallback = formatCallback;

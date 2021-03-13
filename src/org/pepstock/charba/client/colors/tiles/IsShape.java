@@ -55,9 +55,9 @@ public interface IsShape extends Key {
 	ShapeDrawer getDrawer();
 
 	/**
-	 * Returns a unique key prefix for shape to use into cache.
+	 * Returns a unique key prefix for shape to use in the cache.
 	 * 
-	 * @return a unique key prefix for shape to use into cache
+	 * @return a unique key prefix for shape to use in the cache
 	 */
 	String getKeyPrefix();
 

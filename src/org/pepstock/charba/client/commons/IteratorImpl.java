@@ -90,7 +90,7 @@ public class IteratorImpl<E> implements Iterator<E> {
 			throw new IllegalStateException();
 		}
 		// removes from parent at
-		// index stored into last return
+		// index stored in the last return
 		parent.remove(lastReturn);
 		// sets cursor to last return
 		cursor = lastReturn;

@@ -162,7 +162,7 @@ final class HtmlLegendId {
 	}
 
 	/**
-	 * Returns the chart id read and set into HTML legend id.
+	 * Returns the chart id read and set in the HTML legend id.
 	 * 
 	 * @return the chart id
 	 */

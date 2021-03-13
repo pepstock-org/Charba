@@ -31,9 +31,9 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 interface IsDatasetsItemsSelectorDefaultClearSelection {
 
 	/**
-	 * Returns <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>.
+	 * Returns <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>
+	 * @return <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 */
 	default boolean isDisplay() {
 		return ClearSelection.DEFAULT_DISPLAY;

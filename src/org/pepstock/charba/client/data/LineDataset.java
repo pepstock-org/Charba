@@ -74,7 +74,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -388,7 +388,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array corresponds to the label at the same index on the x
 	 * axis.
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#STRINGS}.
 	 */
 	public List<String> getDataString(boolean binding) {

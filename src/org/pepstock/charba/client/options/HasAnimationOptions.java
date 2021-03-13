@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationContainer;
 public interface HasAnimationOptions extends IsDefaultAnimationContainer{
 
 	/**
-	 * Returns an animation container instance to use into default methods of this interface.
+	 * Returns an animation container instance to use in the default methods of this interface.
 	 * 
 	 * @return an animation container instance
 	 */

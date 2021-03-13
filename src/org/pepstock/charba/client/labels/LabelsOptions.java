@@ -56,7 +56,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	/**
 	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
 	LabelsOptions(IsDefaultOptions defaultOptions, NativeObject nativeObject) {

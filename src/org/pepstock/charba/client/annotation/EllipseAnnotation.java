@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Implements a ELLIPSE annotation which draws a ellipse into a chart.<br>
+ * Implements a ELLIPSE annotation which draws a ellipse in the a chart.<br>
  * If one of the axes is not specified, the ellipse will take the entire chart dimension.<br>
  * The 4 coordinates, xMin, xMax, yMin, yMax are optional. If not specified, the ellipse is expanded out to the edges.
  * 

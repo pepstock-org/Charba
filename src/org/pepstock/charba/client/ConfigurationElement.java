@@ -16,7 +16,7 @@
 package org.pepstock.charba.client;
 
 /**
- * Interface which allows an object to be called to set a native object into chart configuration.<br>
+ * Interface which allows an object to be called to set a native object in the chart configuration.<br>
  * The chart configuration are items options, data and plugins.
  * 
  * @author Andrea "Stock" Stocchero
@@ -26,7 +26,7 @@ package org.pepstock.charba.client;
 public interface ConfigurationElement {
 
 	/**
-	 * Called to enable to load into a configuration object the specific configuration item (by native object).
+	 * Called to enable to load in the a configuration object the specific configuration item (by native object).
 	 * 
 	 * @param chart chart instance
 	 * @param configuration chart configuration instance

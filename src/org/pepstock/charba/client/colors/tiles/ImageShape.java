@@ -21,7 +21,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 /**
  * This is a shape which can draw an image on the tile.<br>
  * This object is also a shape drawer.<br>
- * The image is scaled to the size of the tile. It designs an image into the following tile sections (only A):<br>
+ * The image is scaled to the size of the tile. It designs an image in the the following tile sections (only A):<br>
  * <br>
  * 
  * <pre>

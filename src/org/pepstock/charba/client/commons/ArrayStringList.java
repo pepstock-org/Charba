@@ -66,7 +66,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	}
 
 	/**
-	 * Loads an array of elements into the list
+	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
@@ -194,7 +194,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	public void add(int index, String element) {
 		// checks if element is consistent
 		if (element != null) {
-			// inserts into array
+			// inserts in the array
 			array.insertAt(index, element);
 		}
 	}

@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.Image;
 import jsinterop.base.Js;
 
 /**
- * Utility to transform image GWT resources into {@link Img} elements used by Charba.
+ * Utility to transform image GWT resources in the {@link Img} elements used by Charba.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -109,7 +109,7 @@ public final class ImagesHelper {
 				// forces size to image
 				image.setPixelSize(width, height);
 			}
-			// transform into image element
+			// transform in the image element
 			ImageElement imageElement = ImageElement.as(image.getElement());
 			// casts and returns the img
 			return Js.cast(imageElement);

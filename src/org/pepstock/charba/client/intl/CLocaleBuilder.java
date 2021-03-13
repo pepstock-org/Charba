@@ -200,7 +200,7 @@ public final class CLocaleBuilder {
 		}
 		// creates new locale
 		CLocale locale = new CLocale(identifier, language, script, region, variantAndExtension);
-		// stores into cache
+		// stores in the cache
 		LOCALES.put(identifier, locale);
 		return locale;
 	}
@@ -248,7 +248,7 @@ public final class CLocaleBuilder {
 
 	/**
 	 * Internal native object factory to pass to {@link RegExpResult#groups(NativeObjectContainerFactory)} method in order to read the regular expression tokens, by the key set
-	 * into regular expression pattern.
+	 * in the regular expression pattern.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -289,7 +289,7 @@ public final class CLocaleBuilder {
 			private final String value;
 
 			/**
-			 * Creates with the property value to use into native object.
+			 * Creates with the property value to use in the native object.
 			 * 
 			 * @param value value of property name
 			 */

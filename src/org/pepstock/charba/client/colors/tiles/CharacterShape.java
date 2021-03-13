@@ -27,7 +27,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * This is a shape which can draw a character on the tile.<br>
  * This object is also a shape drawer.<br>
  * The font size is calculated automatically based on tile size.<br>
- * It designs a char into the following tile sections (A and B):<br>
+ * It designs a char in the the following tile sections (A and B):<br>
  * 
  * <pre>
  * +---------+---------+
@@ -60,7 +60,7 @@ public final class CharacterShape extends AbstractShape {
 	/**
 	 * Creates a shape with a character as shape, using the default font family
 	 * 
-	 * @param character character to draw into tile as shape
+	 * @param character character to draw in the tile as shape
 	 */
 	public CharacterShape(String character) {
 		this(character, Defaults.get().getGlobal().getFont().getFamily());
@@ -69,7 +69,7 @@ public final class CharacterShape extends AbstractShape {
 	/**
 	 * Creates a shape with a character as shape using passed font family.
 	 * 
-	 * @param character character to draw into tile as shape
+	 * @param character character to draw in the tile as shape
 	 * @param fontFamily font family to apply on tile
 	 */
 	public CharacterShape(String character, String fontFamily) {
@@ -110,16 +110,16 @@ public final class CharacterShape extends AbstractShape {
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
 		TextMetricsItem metrics = context.measureText(character);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawChar(context, size, 0, 0, character, realFontSize, metrics);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawChar(context, size, halfSize, halfSize, character, realFontSize, metrics);
 		// draws the current path with the current stroke style
 		context.fill();
 	}
 
 	/**
-	 * Designs a char into a tile section.
+	 * Designs a char in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square

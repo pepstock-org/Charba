@@ -23,8 +23,8 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Utility to manage the gradients inside the configuration item of dataset, setting to the specific properties of the elements.<br>
- * It stores the gradients information into a native object added to Charba configuration, on specific property names for Charba.<br>
- * The canvas object are stored into native object by the "original" property names to use to configure CHART.JS.
+ * It stores the gradients information in the a native object added to Charba configuration, on specific property names for Charba.<br>
+ * The canvas object are stored in the native object by the "original" property names to use to configure CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *

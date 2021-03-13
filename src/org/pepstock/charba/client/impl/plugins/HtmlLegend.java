@@ -62,7 +62,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	private static final HtmlLegend INSTANCE = new HtmlLegend();
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
-	// static instance to generate legend into HTML
+	// static instance to generate legend in the HTML
 	private static final HtmlLegendGenerator GENERATOR = new HtmlLegendGenerator();
 	// cache to store options in order do not load every time the options
 	private final Map<String, HtmlLegendOptions> pluginOptions = new HashMap<>();
@@ -103,7 +103,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	public void onConfigure(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isConsistent(chart)) {
-			// adds into a map the callback proxy instance
+			// adds in the a map the callback proxy instance
 			// to catch events form legend
 			if (!pluginCallbackProxies.containsKey(chart.getId())) {
 				pluginCallbackProxies.put(chart.getId(), new HtmlLegendCallbackProxy());
@@ -165,7 +165,7 @@ public final class HtmlLegend extends AbstractPlugin {
 				legendElement = DOMBuilder.get().createDivElement();
 				// sets the id by chart instance
 				legendElement.setId(formatLegendElementId(chart));
-				// stores into map
+				// stores in the map
 				pluginDivElements.put(chart.getId(), legendElement);
 			} else {
 				// if here, DIV element already exists then it retrieves it
@@ -216,7 +216,7 @@ public final class HtmlLegend extends AbstractPlugin {
 			removeListeners(chart, legendElement);
 			// adds the event listeners to element
 			addListeners(chart, legendElement);
-			// adds into set
+			// adds in the set
 			// in order do not add the inner html every easing
 			pluginAddedLegendStatus.add(chart.getId());
 		}
@@ -258,7 +258,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Manages if the legend must be displayed or not based on choice of user and what can be changed into chart configuration after the chart initialization bu a
+	 * Manages if the legend must be displayed or not based on choice of user and what can be changed in the chart configuration after the chart initialization bu a
 	 * <code>chart.reconfigure</code>.
 	 * 
 	 * @param chart chart instance to manage
@@ -405,7 +405,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Adds the HTML legend element to the right position into chart element, depending on {@link Position} set for legend.
+	 * Adds the HTML legend element to the right position in the chart element, depending on {@link Position} set for legend.
 	 * 
 	 * @param chartElement chart HTML element
 	 * @param legendElement legend HTML element
@@ -427,7 +427,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Manages the HTML legend element to the right position into chart element, depending on {@link Position} set for legend.<br>
+	 * Manages the HTML legend element to the right position in the chart element, depending on {@link Position} set for legend.<br>
 	 * This method is called when a legend element is already added and the position could be changed comparing when the element has been created.
 	 * 
 	 * @param chart chart instance
@@ -457,7 +457,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	}
 
 	/**
-	 * Checks if the legend must be added into chart element on top or bottom.
+	 * Checks if the legend must be added in the chart element on top or bottom.
 	 * 
 	 * @param position position set by legend configuration object
 	 * @return <code>true</code> if the legend must be added to bottom

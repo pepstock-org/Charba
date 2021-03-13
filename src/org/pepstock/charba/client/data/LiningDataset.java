@@ -170,7 +170,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		private final boolean hasPattern;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 * @param hasPattern <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them
@@ -230,7 +230,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

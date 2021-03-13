@@ -21,7 +21,7 @@ package org.pepstock.charba.client.commons;
  * This implementation uses a java script array as back-end to store objects (native array containers).<br>
  * Elements are instances of {@link NativeArrayContainer}.<br>
  * <br>
- * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable in the javascript part but
  * this collection must not be passed to any java scriptcode.
  * 
  * @author Andrea "Stock" Stocchero

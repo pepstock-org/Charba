@@ -117,7 +117,7 @@ public enum Fill implements IsFill
 	 * Returns a fill, based on absolute dataset index, using the passed index.
 	 * 
 	 * @param index absolute dataset index to use for filling
-	 * @return a fill object with tthe right configuration to set into chart
+	 * @return a fill object with tthe right configuration to set in the chart
 	 */
 	public static IsFill getFill(int index) {
 		return new AbsoluteDatasetIndexFill(index);
@@ -128,7 +128,7 @@ public enum Fill implements IsFill
 	 * If the passed argument is not a relative dataset index, checks if is predefined fill.
 	 * 
 	 * @param index relative dataset index to use for filling
-	 * @return a fill object with the right configuration to set into chart.
+	 * @return a fill object with the right configuration to set in the chart.
 	 */
 	public static IsFill getFill(String index) {
 		// checks if argument is consistent

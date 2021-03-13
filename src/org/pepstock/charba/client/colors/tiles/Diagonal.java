@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * DIAGONAL drawer to design a diagonal into tile.<br>
- * It designs a diagonal into the following tile sections (A and B):<br>
+ * DIAGONAL drawer to design a diagonal in the tile.<br>
+ * It designs a diagonal in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -50,16 +50,16 @@ class Diagonal extends ShapeDrawer {
 		final double halfSize = size / 2D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawDiagonal(context, size, 0D, 0D);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawDiagonal(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
 
 	/**
-	 * Designs a diagonal into a tile section.
+	 * Designs a diagonal in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square

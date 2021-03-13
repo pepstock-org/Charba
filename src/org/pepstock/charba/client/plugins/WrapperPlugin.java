@@ -63,7 +63,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart the chart instance.
 		 * @param args argument object
-		 * @param options plugin options set by user into chart options.
+		 * @param options plugin options set by user in the chart options.
 		 */
 		void call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
 	}
@@ -82,7 +82,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart the chart instance
 		 * @param args the call arguments
-		 * @param options plugin options set by user into chart options
+		 * @param options plugin options set by user in the chart options
 		 * @return <code>false</code> to cancel the chart operations
 		 */
 		boolean call(CallbackFunctionContext context, Chart chart, NativeObject args, NativeObject options);
@@ -191,7 +191,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -479,73 +479,73 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// invoke user method implementation
 		afterBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onAfterBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// ------------------------------------
-		// -- SET ALL FUNCTIONS into object ---
+		// -- SET ALL FUNCTIONS in the object ---
 		// ------------------------------------
-		// sets proxy instance into afterDataLimits property
+		// sets proxy instance in the afterDataLimits property
 		setValue(Property.AFTER_DATA_LIMITS, afterDataLimitsCallbackProxy.getProxy());
-		// sets proxy instance into afterBuildTicks property
+		// sets proxy instance in the afterBuildTicks property
 		setValue(Property.AFTER_BUILD_TICKS, afterBuildTicksCallbackProxy.getProxy());
-		// sets proxy instance into afterDatasetDraw property
+		// sets proxy instance in the afterDatasetDraw property
 		setValue(Property.AFTER_DATASET_DRAW, afterDatasetDrawCallbackProxy.getProxy());
-		// sets proxy instance into afterDatasetUpdate property
+		// sets proxy instance in the afterDatasetUpdate property
 		setValue(Property.AFTER_DATASET_UPDATE, afterDatasetUpdateCallbackProxy.getProxy());
-		// sets proxy instance into afterDatasetsDraw property
+		// sets proxy instance in the afterDatasetsDraw property
 		setValue(Property.AFTER_DATASETS_DRAW, afterDatasetsDrawCallbackProxy.getProxy());
-		// sets proxy instance into afterDatasetsUpdate property
+		// sets proxy instance in the afterDatasetsUpdate property
 		setValue(Property.AFTER_DATASETS_UPDATE, afterDatasetsUpdateCallbackProxy.getProxy());
-		// sets proxy instance into afterDraw property
+		// sets proxy instance in the afterDraw property
 		setValue(Property.AFTER_DRAW, afterDrawCallbackProxy.getProxy());
-		// sets proxy instance into afterEvent property
+		// sets proxy instance in the afterEvent property
 		setValue(Property.AFTER_EVENT, afterEventCallbackProxy.getProxy());
-		// sets proxy instance into afterInit property
+		// sets proxy instance in the afterInit property
 		setValue(Property.AFTER_INIT, afterInitCallbackProxy.getProxy());
-		// sets proxy instance into afterLayout property
+		// sets proxy instance in the afterLayout property
 		setValue(Property.AFTER_LAYOUT, afterLayoutCallbackProxy.getProxy());
-		// sets proxy instance into afterRender property
+		// sets proxy instance in the afterRender property
 		setValue(Property.AFTER_RENDER, afterRenderCallbackProxy.getProxy());
-		// sets proxy instance into afterTooltipDraw property
+		// sets proxy instance in the afterTooltipDraw property
 		setValue(Property.AFTER_TOOLTIP_DRAW, afterTooltipDrawCallbackProxy.getProxy());
-		// sets proxy instance into afterUpdate property
+		// sets proxy instance in the afterUpdate property
 		setValue(Property.AFTER_UPDATE, afterUpdateCallbackProxy.getProxy());
-		// sets proxy instance into beforeDataLimits property
+		// sets proxy instance in the beforeDataLimits property
 		setValue(Property.BEFORE_DATA_LIMITS, beforeDataLimitsCallbackProxy.getProxy());
-		// sets proxy instance into beforeBuildTicks property
+		// sets proxy instance in the beforeBuildTicks property
 		setValue(Property.BEFORE_BUILD_TICKS, beforeBuildTicksCallbackProxy.getProxy());
-		// sets proxy instance into beforeDatasetDraw property
+		// sets proxy instance in the beforeDatasetDraw property
 		setValue(Property.BEFORE_DATASET_DRAW, beforeDatasetDrawCallbackProxy.getProxy());
-		// sets proxy instance into beforeDatasetUpdate property
+		// sets proxy instance in the beforeDatasetUpdate property
 		setValue(Property.BEFORE_DATASET_UPDATE, beforeDatasetUpdateCallbackProxy.getProxy());
-		// sets proxy instance into beforeDatasetsDraw property
+		// sets proxy instance in the beforeDatasetsDraw property
 		setValue(Property.BEFORE_DATASETS_DRAW, beforeDatasetsDrawCallbackProxy.getProxy());
-		// sets proxy instance into beforeDatasetsUpdate property
+		// sets proxy instance in the beforeDatasetsUpdate property
 		setValue(Property.BEFORE_DATASETS_UPDATE, beforeDatasetsUpdateCallbackProxy.getProxy());
-		// sets proxy instance into beforeDraw property
+		// sets proxy instance in the beforeDraw property
 		setValue(Property.BEFORE_DRAW, beforeDrawCallbackProxy.getProxy());
-		// sets proxy instance into beforeEvent property
+		// sets proxy instance in the beforeEvent property
 		setValue(Property.BEFORE_EVENT, beforeEventCallbackProxy.getProxy());
-		// sets proxy instance into beforeInit property
+		// sets proxy instance in the beforeInit property
 		setValue(Property.BEFORE_INIT, beforeInitCallbackProxy.getProxy());
-		// sets proxy instance into beforeLayout property
+		// sets proxy instance in the beforeLayout property
 		setValue(Property.BEFORE_LAYOUT, beforeLayoutCallbackProxy.getProxy());
-		// sets proxy instance into beforeRender property
+		// sets proxy instance in the beforeRender property
 		setValue(Property.BEFORE_RENDER, beforeRenderCallbackProxy.getProxy());
-		// sets proxy instance into beforeTooltipDraw property
+		// sets proxy instance in the beforeTooltipDraw property
 		setValue(Property.BEFORE_TOOLTIP_DRAW, beforeTooltipDrawCallbackProxy.getProxy());
-		// sets proxy instance into beforeUpdate property
+		// sets proxy instance in the beforeUpdate property
 		setValue(Property.BEFORE_UPDATE, beforeUpdateCallbackProxy.getProxy());
-		// sets proxy instance into destroy property
+		// sets proxy instance in the destroy property
 		setValue(Property.DESTROY, destroyCallbackProxy.getProxy());
-		// sets proxy instance into resize property
+		// sets proxy instance in the resize property
 		setValue(Property.RESIZE, resizeCallbackProxy.getProxy());
-		// sets proxy instance into reset property
+		// sets proxy instance in the reset property
 		setValue(Property.RESET, resetCallbackProxy.getProxy());
-		// sets proxy instance into install property
+		// sets proxy instance in the install property
 		setValue(Property.INSTALL, installCallbackProxy.getProxy());
-		// sets proxy instance into start property
+		// sets proxy instance in the start property
 		setValue(Property.START, startCallbackProxy.getProxy());
-		// sets proxy instance into stop property
+		// sets proxy instance in the stop property
 		setValue(Property.STOP, stopCallbackProxy.getProxy());
-		// sets proxy instance into uninstall property
+		// sets proxy instance in the uninstall property
 		setValue(Property.UNINSTALL, uninstallCallbackProxy.getProxy());
 	}
 

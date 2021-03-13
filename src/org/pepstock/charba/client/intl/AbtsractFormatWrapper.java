@@ -58,7 +58,7 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 	 * Formats a value according to the locale and formatting options of this object.
 	 * 
 	 * @param value the value to format
-	 * @return the value into a string according to the locale and formatting options
+	 * @return the value in the a string according to the locale and formatting options
 	 */
 	abstract String format(T value);
 

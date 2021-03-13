@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * DOTDASH drawer to design a dot and a dash into tile.<br>
- * It designs a dot and a dash into the following tile sections (A and B):<br>
+ * DOTDASH drawer to design a dot and a dash in the tile.<br>
+ * It designs a dot and a dash in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -56,13 +56,13 @@ final class DotDash extends ShapeDrawer {
 		final double diameter = size / 10D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape (DASH) into B section
+		// designs the shape (DASH) in the B section
 		dash.drawDash(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
 		context.stroke();
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
-		// designs the shape into A section
+		// designs the shape in the A section
 		dot.drawDot(context, size, 0D, 0D, diameter);
 		// fills the current path
 		context.fill();

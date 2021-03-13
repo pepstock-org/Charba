@@ -104,7 +104,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -146,7 +146,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
-	 * @param defaultOptions default options, which must be stored into default global.
+	 * @param defaultOptions default options, which must be stored in the default global.
 	 */
 	DatasetsItemsSelectorOptions(IsDatasetsItemsSelectorDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
@@ -156,7 +156,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
-	 * @param defaultOptions default options, which must be stored into default global.
+	 * @param defaultOptions default options, which must be stored in the default global.
 	 * @param nativeObject configuration of plugin.
 	 */
 	DatasetsItemsSelectorOptions(IsDatasetsItemsSelectorDefaultOptions defaultOptions, NativeObject nativeObject) {

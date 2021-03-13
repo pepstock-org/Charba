@@ -29,19 +29,19 @@ import org.pepstock.charba.client.commons.Key;
 public enum AnnotationType implements Key
 {
 	/**
-	 * Defines a <b>LINE</b> annotation which draws a line into a chart.
+	 * Defines a <b>LINE</b> annotation which draws a line in the a chart.
 	 */
 	LINE("line", DefaultLine.INSTANCE),
 	/**
-	 * Defines a <b>BOX</b> annotation which draws a box into a chart.
+	 * Defines a <b>BOX</b> annotation which draws a box in the a chart.
 	 */
 	BOX("box", DefaultBox.INSTANCE),
 	/**
-	 * Defines a <b>ELLIPSE</b> annotation which draws an ellipse into a chart.
+	 * Defines a <b>ELLIPSE</b> annotation which draws an ellipse in the a chart.
 	 */
 	ELLIPSE("ellipse", DefaultEllipse.INSTANCE),
 	/**
-	 * Defines a <b>POINT</b> annotation which draws a point into a chart.
+	 * Defines a <b>POINT</b> annotation which draws a point in the a chart.
 	 */
 	POINT("point", DefaultPoint.INSTANCE);
 
@@ -53,7 +53,7 @@ public enum AnnotationType implements Key
 	private final IsDefaultsAnnotation defaultValues;
 
 	/**
-	 * Creates an annotation type property value to use into native object.
+	 * Creates an annotation type property value to use in the native object.
 	 * 
 	 * @param value value of annotation type property name
 	 * @param defaultValues default options for the specific annotation type

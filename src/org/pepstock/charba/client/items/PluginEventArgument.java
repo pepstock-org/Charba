@@ -43,7 +43,7 @@ public final class PluginEventArgument extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -78,9 +78,9 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the event context into the CHART.JS event.
+	 * Returns the event context in the the CHART.JS event.
 	 * 
-	 * @return the native event into the CHART.JS event or <code>null</code> if doen't not exist.
+	 * @return the native event in the the CHART.JS event or <code>null</code> if doen't not exist.
 	 */
 	public ChartEventContext getEventContext() {
 		return eventContext;

@@ -42,7 +42,7 @@ abstract class AbstractArrayNativeContainerList<E, A extends Array> extends Abst
 	}
 
 	/**
-	 * Loads an array of elements into the list.
+	 * Loads an array of elements in the the list.
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

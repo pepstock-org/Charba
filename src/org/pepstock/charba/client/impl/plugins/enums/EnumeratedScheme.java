@@ -111,7 +111,7 @@ final class EnumeratedScheme implements ColorScheme {
 			// therefore only once
 			// scans all hex colors and creates ISCOLOR
 			for (String color : colorsAsStrings) {
-				// and adds them into the list
+				// and adds them in the the list
 				colors.add(ColorBuilder.parse(color));
 			}
 		}

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
- * This object is wrapping the value of data set which can be used into the plugins (extensions) callbacks.<br>
+ * This object is wrapping the value of data set which can be used in the the plugins (extensions) callbacks.<br>
  * The value could be a double, string or a {@link FloatingData} if the data set is a BAR data set and uses floating bars data.
  * 
  * @author Andrea "Stock" Stocchero

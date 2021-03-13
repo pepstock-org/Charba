@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defines an object which must inject script or CSS style objects into DOM document, at runtime.<br>
+ * Defines an object which must inject script or CSS style objects in the DOM document, at runtime.<br>
  * It must have a name and should be a unique value because it will be used to set the element (script or style) id.
  * 
  * @author Andrea "Stock" Stocchero
@@ -74,7 +74,7 @@ public abstract class AbstractInjectableResource {
 		this.name = name;
 		// scans the array
 		for (String line : content) {
-			// appending the strings into a builder
+			// appending the strings in the a builder
 			builder.append(line);
 		}
 	}

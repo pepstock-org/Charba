@@ -22,7 +22,7 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin, using a cached to store it.
+ * Object which stores all annotations by their ID in the {@link AnnotationPlugin#ID} plugin, using a cached to store it.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -98,7 +98,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 			for (AbstractAnnotation annotation : annotations) {
 				// adds annotation
 				IsAnnotationId id = annotation.getId();
-				// stores into java script object
+				// stores in the java script object
 				annotationsCache.put(id.value(), annotation);
 			}
 		}

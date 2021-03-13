@@ -26,7 +26,7 @@ import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a POINT annotation which draws a point into a chart.
+ * Implements a POINT annotation which draws a point in the a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -59,7 +59,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

@@ -155,7 +155,7 @@ public final class Utilities {
 	 * The dimension of canvas pattern image will be the dimension of pattern.
 	 * 
 	 * @return the CSS syntax to represent the pattern
-	 * @param pattern object to export into CSS
+	 * @param pattern object to export in the CSS
 	 */
 	public static String toCSSBackgroundProperty(Pattern pattern) {
 		return toCSSBackgroundProperty(pattern, Integer.MIN_VALUE);
@@ -166,7 +166,7 @@ public final class Utilities {
 	 * The dimension of canvas pattern image is unique then the image of pattern is a square.
 	 * 
 	 * @return the CSS syntax to represent the pattern
-	 * @param pattern object to export into CSS
+	 * @param pattern object to export in the CSS
 	 * @param squareSize size of image applied to canvasPattern to be a square
 	 */
 	public static String toCSSBackgroundProperty(Pattern pattern, int squareSize) {
@@ -177,7 +177,7 @@ public final class Utilities {
 	 * Returns the CSS syntax to represent the pattern.
 	 * 
 	 * @return the CSS syntax to represent the pattern
-	 * @param pattern object to export into CSS
+	 * @param pattern object to export in the CSS
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 */
@@ -245,7 +245,7 @@ public final class Utilities {
 	public static String toCSSBackgroundProperty(Img image) {
 		// checks if consistent
 		if (image != null) {
-			// transform into CSS property
+			// transform in the CSS property
 			return applyTemplate(PATTERN_TEMPLATE, image.getSrc(), Constants.EMPTY_STRING);
 		}
 		// if here, image not consistent
@@ -292,7 +292,7 @@ public final class Utilities {
 	 * Returns the CSS syntax to represent the gradient.<br>
 	 * The dimension of canvas pattern image will be the dimension of pattern.
 	 * 
-	 * @param gradient object to export into CSS
+	 * @param gradient object to export in the CSS
 	 * @return the CSS syntax to represent the gradient
 	 */
 	public static String toCSSBackgroundProperty(Gradient gradient) {
@@ -304,7 +304,7 @@ public final class Utilities {
 			// got new list of colors to sort
 			// without touching the current one
 			List<GradientColor> sortableColors = new LinkedList<>();
-			// copies all colors into new list to sort
+			// copies all colors in the new list to sort
 			sortableColors.addAll(gradient.getColors());
 			// the radial gradient with orientation out in needs
 			// to have the list of color
@@ -320,12 +320,12 @@ public final class Utilities {
 			// scans all colors
 			for (GradientColor color : sortableColors) {
 				// if builder is not empty means that at least 1 color is
-				// already put into buildr
+				// already put in the buildr
 				// then add the comma
 				if (builder.length() > 0) {
 					builder.append(Constants.COMMA);
 				}
-				// adds color RGBA into strign builder
+				// adds color RGBA in the strign builder
 				builder.append(color.getColor().toRGBA());
 				// gets offset to set as percentage
 				int percentage = (int) Math.round(color.getOffset() * 100);
@@ -378,10 +378,10 @@ public final class Utilities {
 	}
 
 	/**
-	 * Returns the cursor currently set into chart.
+	 * Returns the cursor currently set in the chart.
 	 * 
 	 * @param chart chart instance
-	 * @return the cursor currently set into chart.
+	 * @return the cursor currently set in the chart.
 	 */
 	public static CursorType getCursorOfChart(IsChart chart) {
 		// checks if argument is consistent
@@ -402,10 +402,10 @@ public final class Utilities {
 	 * {0} ... {1} ... {n}
 	 * </pre>
 	 * 
-	 * where the value into the brackets represents the index of the obecjt into the array, passed as argument.
+	 * where the value in the the brackets represents the index of the obecjt in the the array, passed as argument.
 	 * 
 	 * @param template template of message
-	 * @param values values to apply into template
+	 * @param values values to apply in the template
 	 * @return a string with the template filled by values
 	 */
 	public static String applyTemplate(String template, Object... values) {
@@ -415,14 +415,14 @@ public final class Utilities {
 		if (template != null && template.length() > 0 && values != null && values.length > 0) {
 			// scans all values to apply to template
 			for (int i = 0; i < values.length; i++) {
-				// creates a instance to apply into template
+				// creates a instance to apply in the template
 				String replacement = Constants.NULL_STRING;
 				// checks if values is consistent
 				if (values[i] != null) {
 					// gets the to string value
 					replacement = values[i].toString();
 				}
-				// applies the value into template
+				// applies the value in the template
 				result = result.replaceAll("\\{" + i + "\\}", replacement);
 			}
 		}
@@ -435,7 +435,7 @@ public final class Utilities {
 	}
 
 	/**
-	 * Converts a double into a string setting the decimals places to maintain.
+	 * Converts a double in the a string setting the decimals places to maintain.
 	 * 
 	 * @param value value to convert. If is {@link Double#NaN}, return {@link Constants#NULL_STRING}
 	 * @param precision decimals places to apply. If less than 0, uses 0

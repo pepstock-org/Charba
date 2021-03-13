@@ -51,7 +51,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets a color property into dataset, setting a single value or an array.
+	 * Sets a color property in the dataset, setting a single value or an array.
 	 * 
 	 * @param key property key
 	 * @param colors colors value to be set
@@ -62,7 +62,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets a color property into dataset, setting a single value or an array.
+	 * Sets a color property in the dataset, setting a single value or an array.
 	 * 
 	 * @param key property key
 	 * @param colors colors value to be set
@@ -84,7 +84,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets a width property into dataset, setting a single value or an array.
+	 * Sets a width property in the dataset, setting a single value or an array.
 	 * 
 	 * @param key property key
 	 * @param widths widths value to be set

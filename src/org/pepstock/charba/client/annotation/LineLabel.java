@@ -133,7 +133,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -159,7 +159,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	private final Font font;
 
 	/**
-	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
 	 * 
 	 * @param defaultValues default options instance
 	 */
@@ -168,7 +168,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 
 	/**
-	 * To avoid any instantiation because is added into all {@link LineAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
 	 * 
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance

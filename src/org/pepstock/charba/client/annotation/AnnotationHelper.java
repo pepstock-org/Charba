@@ -52,9 +52,9 @@ final class AnnotationHelper {
 	}
 
 	/**
-	 * Adds an annotation configuration into the cache.
+	 * Adds an annotation configuration in the the cache.
 	 * 
-	 * @param annotation annotation configuration instance to store into the cache
+	 * @param annotation annotation configuration instance to store in the the cache
 	 */
 	void addAnnotation(AbstractAnnotation annotation) {
 		// checks if annotation argument is consistent

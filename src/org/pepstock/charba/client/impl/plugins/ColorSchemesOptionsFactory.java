@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFactory<ColorSchemesOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link ColorSchemes#FACTORY}.
+	 * To avoid any instantiation. Use the static reference in the {@link ColorSchemes#FACTORY}.
 	 */
 	ColorSchemesOptionsFactory() {
 		super(ColorSchemes.ID);

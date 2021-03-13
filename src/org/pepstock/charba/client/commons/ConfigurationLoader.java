@@ -18,7 +18,7 @@ package org.pepstock.charba.client.commons;
 import org.pepstock.charba.client.Configuration;
 
 /**
- * Utility to load java script object into CHART-JS configuration.<br>
+ * Utility to load java script object in the CHART-JS configuration.<br>
  * This utility needs to reduce visibility on java script objects for configuration.
  * 
  * @author Andrea "Stock" Stocchero
@@ -33,7 +33,7 @@ public final class ConfigurationLoader {
 	}
 
 	/**
-	 * Loads the OPTIONS into configuration CHART.JS object.
+	 * Loads the OPTIONS in the configuration CHART.JS object.
 	 * 
 	 * @param configuration CHART.JS object for configuration
 	 * @param options chart options
@@ -51,7 +51,7 @@ public final class ConfigurationLoader {
 	}
 
 	/**
-	 * Loads the DATA into configuration CHART.JS object.
+	 * Loads the DATA in the configuration CHART.JS object.
 	 * 
 	 * @param configuration CHART.JS object for configuration
 	 * @param data datasets configuration

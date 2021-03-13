@@ -56,7 +56,7 @@ final class ColorSchemesUtil {
 	}
 
 	/**
-	 * Stores a color scheme into the cache.
+	 * Stores a color scheme in the the cache.
 	 * 
 	 * @param scheme a color scheme
 	 */
@@ -76,18 +76,18 @@ final class ColorSchemesUtil {
 	}
 
 	/**
-	 * Returns <code>true</code> if the color scheme, retrievable by category and name, is stored into cache.
+	 * Returns <code>true</code> if the color scheme, retrievable by category and name, is stored in the cache.
 	 * 
 	 * @param category color scheme category
 	 * @param name color scheme name
-	 * @return <code>true</code> if into cache otherwise <code>false</code>
+	 * @return <code>true</code> if in the cache otherwise <code>false</code>
 	 */
 	boolean hasColorScheme(String category, String name) {
 		return colorSchemes.containsKey(createKey(category, name));
 	}
 
 	/**
-	 * Creates a key to use to store color scheme into cache.<br>
+	 * Creates a key to use to store color scheme in the cache.<br>
 	 * The key is <code>[category].[name]</code>.
 	 * 
 	 * @param scheme color scheme instance
@@ -98,7 +98,7 @@ final class ColorSchemesUtil {
 	}
 
 	/**
-	 * Creates a key to use to store color scheme into cache.<br>
+	 * Creates a key to use to store color scheme in the cache.<br>
 	 * The key is <code>[category].[name]</code>.
 	 * 
 	 * @param category color scheme category
@@ -128,7 +128,7 @@ final class ColorSchemesUtil {
 	 * Calculates the maximum border width for hoving flex dataset (BAR).
 	 * 
 	 * @param hovingDataset dataset to use to calculate
-	 * @return the maximum border width defined into dataset
+	 * @return the maximum border width defined in the dataset
 	 */
 	int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
 		// gets the list border widths

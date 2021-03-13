@@ -167,21 +167,21 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return color to use into chart.
+	 * @return color to use in the chart.
 	 */
 	String getColorAsString();
 
 	/**
 	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return background color to use into chart.
+	 * @return background color to use in the chart.
 	 */
 	String getBackgroundColorAsString();
 
 	/**
 	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return border color to use into chart.
+	 * @return border color to use in the chart.
 	 */
 	String getBorderColorAsString();
 

@@ -46,7 +46,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

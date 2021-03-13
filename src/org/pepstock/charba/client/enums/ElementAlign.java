@@ -43,7 +43,7 @@ public enum ElementAlign implements Key
 	private final String horizontalAlignmentValue;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param horizontalAlignmentValue CSS value to apply to horizontal alignment
@@ -64,9 +64,9 @@ public enum ElementAlign implements Key
 	}
 
 	/**
-	 * Returns the CSS value for horizontal alignment into HTML element style.
+	 * Returns the CSS value for horizontal alignment in the HTML element style.
 	 * 
-	 * @return the CSS value for horizontal alignment into HTML element style
+	 * @return the CSS value for horizontal alignment in the HTML element style
 	 */
 	public String getHorizontalAlignmentValue() {
 		return horizontalAlignmentValue;

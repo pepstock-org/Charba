@@ -83,7 +83,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from list of strings.
 	 * 
-	 * @param items list of strings to load into new java script array.
+	 * @param items list of strings to load in the new java script array.
 	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
@@ -112,7 +112,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from list of strings.
 	 * 
-	 * @param items list of strings to load into new java script array.
+	 * @param items list of strings to load in the new java script array.
 	 * @return new array instance of strings or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
@@ -141,7 +141,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from array of colors.
 	 * 
-	 * @param items array of colors to load into new java script array.
+	 * @param items array of colors to load in the new java script array.
 	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
@@ -166,7 +166,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from array of colors.
 	 * 
-	 * @param items array of colors to load into new java script array.
+	 * @param items array of colors to load in the new java script array.
 	 * @return new array instance of strings or an mepty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
@@ -191,7 +191,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from array of keys.
 	 * 
-	 * @param items array of keys to load into new java script array.
+	 * @param items array of keys to load in the new java script array.
 	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
@@ -217,7 +217,7 @@ public final class ArrayString extends Array {
 	/**
 	 * Creates a java script array of strings starting from array of keys.
 	 * 
-	 * @param items array of keys to load into new java script array.
+	 * @param items array of keys to load in the new java script array.
 	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
@@ -257,7 +257,7 @@ public final class ArrayString extends Array {
 	native int indexOf(String value);
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
+	 * Returns a shallow copy of a portion of an array in the a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>

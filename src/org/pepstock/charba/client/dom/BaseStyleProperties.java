@@ -54,7 +54,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'background' property into element.
+	 * Sets the CSS 'background' property in the element.
 	 *
 	 * @param background the CSS 'background' property to set
 	 */
@@ -70,7 +70,7 @@ public final class BaseStyleProperties {
 	public native String getBackgroundColor();
 
 	/**
-	 * Sets the CSS 'backgroundColor' property into element.
+	 * Sets the CSS 'backgroundColor' property in the element.
 	 *
 	 * @param backgroundColor the CSS 'backgroundColor' property to set
 	 */
@@ -86,7 +86,7 @@ public final class BaseStyleProperties {
 	public native String getBackgroundImage();
 
 	/**
-	 * Sets the CSS 'backgroundImage' property into element.
+	 * Sets the CSS 'backgroundImage' property in the element.
 	 *
 	 * @param backgroundImage the CSS 'backgroundImage' property to set
 	 */
@@ -103,7 +103,7 @@ public final class BaseStyleProperties {
 	public native String getBackgroundSize();
 
 	/**
-	 * Sets the CSS 'backgroundSize' property into element.
+	 * Sets the CSS 'backgroundSize' property in the element.
 	 *
 	 * @param backgroundSize the CSS 'backgroundSize' property to set
 	 */
@@ -119,7 +119,7 @@ public final class BaseStyleProperties {
 	public native String getBorder();
 
 	/**
-	 * Sets the CSS 'border' property into element.
+	 * Sets the CSS 'border' property in the element.
 	 *
 	 * @param border the CSS 'border' property to set
 	 */
@@ -136,7 +136,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottom' property into element.
+	 * Sets the CSS 'borderBottom' property in the element.
 	 *
 	 * @param borderBottom the CSS 'borderBottom' property to set
 	 */
@@ -154,7 +154,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottomColor' property into element.
+	 * Sets the CSS 'borderBottomColor' property in the element.
 	 *
 	 * @param borderBottomColor the CSS 'borderBottomColor' property to set
 	 */
@@ -172,7 +172,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottomLeftRadius' property into element.
+	 * Sets the CSS 'borderBottomLeftRadius' property in the element.
 	 *
 	 * @param borderBottomLeftRadius the CSS 'borderBottomLeftRadius' property to set
 	 */
@@ -190,7 +190,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottomRightRadius' property into element.
+	 * Sets the CSS 'borderBottomRightRadius' property in the element.
 	 *
 	 * @param borderBottomRightRadius the CSS 'borderBottomRightRadius' property to set
 	 */
@@ -208,7 +208,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottomStyle' property into element.
+	 * Sets the CSS 'borderBottomStyle' property in the element.
 	 *
 	 * @param borderBottomStyle the CSS 'borderBottomStyle' property to set
 	 */
@@ -226,7 +226,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderBottomWidth' property into element.
+	 * Sets the CSS 'borderBottomWidth' property in the element.
 	 *
 	 * @param borderBottomWidth the CSS 'borderBottomWidth' property to set
 	 */
@@ -244,7 +244,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderCollapse' property into element.
+	 * Sets the CSS 'borderCollapse' property in the element.
 	 *
 	 * @param borderCollapse the CSS 'borderCollapse' property to set
 	 */
@@ -262,7 +262,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderColor' property into element.
+	 * Sets the CSS 'borderColor' property in the element.
 	 *
 	 * @param borderColor the CSS 'borderColor' property to set
 	 */
@@ -280,7 +280,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderLeft' property into element.
+	 * Sets the CSS 'borderLeft' property in the element.
 	 *
 	 * @param borderLeft the CSS 'borderLeft' property to set
 	 */
@@ -298,7 +298,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderLeftColor' property into element.
+	 * Sets the CSS 'borderLeftColor' property in the element.
 	 *
 	 * @param borderLeftColor the CSS 'borderLeftColor' property to set
 	 */
@@ -316,7 +316,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderLeftStyle' property into element.
+	 * Sets the CSS 'borderLeftStyle' property in the element.
 	 *
 	 * @param borderLeftStyle the CSS 'borderLeftStyle' property to set
 	 */
@@ -334,7 +334,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderLeftWidth' property into element.
+	 * Sets the CSS 'borderLeftWidth' property in the element.
 	 *
 	 * @param borderLeftWidth the CSS 'borderLeftWidth' property to set
 	 */
@@ -352,7 +352,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderRadius' property into element.
+	 * Sets the CSS 'borderRadius' property in the element.
 	 *
 	 * @param borderRadius the CSS 'borderRadius' property to set
 	 */
@@ -370,7 +370,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderRight' property into element.
+	 * Sets the CSS 'borderRight' property in the element.
 	 *
 	 * @param borderRight the CSS 'borderRight' property to set
 	 */
@@ -388,7 +388,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderRightColor' property into element.
+	 * Sets the CSS 'borderRightColor' property in the element.
 	 *
 	 * @param borderRightColor the CSS 'borderRightColor' property to set
 	 */
@@ -406,7 +406,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderRightStyle' property into element.
+	 * Sets the CSS 'borderRightStyle' property in the element.
 	 *
 	 * @param borderRightStyle the CSS 'borderRightStyle' property to set
 	 */
@@ -424,7 +424,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderRightWidth' property into element.
+	 * Sets the CSS 'borderRightWidth' property in the element.
 	 *
 	 * @param borderRightWidth the CSS 'borderRightWidth' property to set
 	 */
@@ -442,7 +442,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderSpacing' property into element.
+	 * Sets the CSS 'borderSpacing' property in the element.
 	 *
 	 * @param borderSpacing the CSS 'borderSpacing' property to set
 	 */
@@ -460,7 +460,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderStyle' property into element.
+	 * Sets the CSS 'borderStyle' property in the element.
 	 *
 	 * @param borderStyle the CSS 'borderStyle' property to set
 	 */
@@ -480,7 +480,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderStyle' property into element.
+	 * Sets the CSS 'borderStyle' property in the element.
 	 *
 	 * @param borderStyle the CSS 'borderStyle' property to set
 	 */
@@ -503,7 +503,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTop' property into element.
+	 * Sets the CSS 'borderTop' property in the element.
 	 *
 	 * @param borderTop the CSS 'borderTop' property to set
 	 */
@@ -521,7 +521,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTopColor' property into element.
+	 * Sets the CSS 'borderTopColor' property in the element.
 	 *
 	 * @param borderTopColor the CSS 'borderTopColor' property to set
 	 */
@@ -539,7 +539,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTopLeftRadius' property into element.
+	 * Sets the CSS 'borderTopLeftRadius' property in the element.
 	 *
 	 * @param borderTopLeftRadius the CSS 'borderTopLeftRadius' property to set
 	 */
@@ -557,7 +557,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTopRightRadius' property into element.
+	 * Sets the CSS 'borderTopRightRadius' property in the element.
 	 *
 	 * @param borderTopRightRadius the CSS 'borderTopRightRadius' property to set
 	 */
@@ -575,7 +575,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTopStyle' property into element.
+	 * Sets the CSS 'borderTopStyle' property in the element.
 	 *
 	 * @param borderTopStyle the CSS 'borderTopStyle' property to set
 	 */
@@ -593,7 +593,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderTopWidth' property into element.
+	 * Sets the CSS 'borderTopWidth' property in the element.
 	 *
 	 * @param borderTopWidth the CSS 'borderTopWidth' property to set
 	 */
@@ -611,7 +611,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderWidth' property into element.
+	 * Sets the CSS 'borderWidth' property in the element.
 	 *
 	 * @param borderWidth the CSS 'borderWidth' property to set
 	 */
@@ -629,7 +629,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderImage' property into element.
+	 * Sets the CSS 'borderImage' property in the element.
 	 *
 	 * @param borderImage the CSS 'borderImage' property to set
 	 */
@@ -647,7 +647,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'borderImageWidth' property into element.
+	 * Sets the CSS 'borderImageWidth' property in the element.
 	 *
 	 * @param borderImageWidth the CSS 'borderImageWidth' property to set
 	 */
@@ -665,7 +665,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'bottom' property into element.
+	 * Sets the CSS 'bottom' property in the element.
 	 *
 	 * @param bottom the CSS 'bottom' property to set
 	 */
@@ -683,7 +683,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'color' property into element.
+	 * Sets the CSS 'color' property in the element.
 	 *
 	 * @param color the CSS 'color' property to set
 	 */
@@ -701,7 +701,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'cursor' property into element.
+	 * Sets the CSS 'cursor' property in the element.
 	 *
 	 * @param cursor the CSS 'cursor' property to set
 	 */
@@ -721,7 +721,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'cursor' property into element.
+	 * Sets the CSS 'cursor' property in the element.
 	 *
 	 * @param cursor the CSS 'cursor' property to set
 	 */
@@ -748,7 +748,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'direction' property into element.
+	 * Sets the CSS 'direction' property in the element.
 	 *
 	 * @param direction the CSS 'direction' property to set
 	 */
@@ -766,7 +766,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'display' property into element.
+	 * Sets the CSS 'display' property in the element.
 	 *
 	 * @param display the CSS 'display' property to set
 	 */
@@ -787,7 +787,7 @@ public final class BaseStyleProperties {
 	@JsOverlay
 	/**
 	 *
-	 * Sets the CSS 'display' property into element.
+	 * Sets the CSS 'display' property in the element.
 	 *
 	 * @param display the CSS 'display' property to set
 	 */
@@ -809,7 +809,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'font' property into element.
+	 * Sets the CSS 'font' property in the element.
 	 *
 	 * @param font the CSS 'font' property to set
 	 */
@@ -827,7 +827,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontFamily' property into element.
+	 * Sets the CSS 'fontFamily' property in the element.
 	 *
 	 * @param fontFamily the CSS 'fontFamily' property to set
 	 */
@@ -845,7 +845,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontSize' property into element.
+	 * Sets the CSS 'fontSize' property in the element.
 	 *
 	 * @param fontSize the CSS 'fontSize' property to set
 	 */
@@ -863,7 +863,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontSizeAdjust' property into element.
+	 * Sets the CSS 'fontSizeAdjust' property in the element.
 	 *
 	 * @param fontSizeAdjust the CSS 'fontSizeAdjust' property to set
 	 */
@@ -881,7 +881,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontStretch' property into element.
+	 * Sets the CSS 'fontStretch' property in the element.
 	 *
 	 * @param fontStretch the CSS 'fontStretch' property to set
 	 */
@@ -899,7 +899,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontStyle' property into element.
+	 * Sets the CSS 'fontStyle' property in the element.
 	 *
 	 * @param fontStyle the CSS 'fontStyle' property to set
 	 */
@@ -917,7 +917,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontVariant' property into element.
+	 * Sets the CSS 'fontVariant' property in the element.
 	 *
 	 * @param fontVariant the CSS 'fontVariant' property to set
 	 */
@@ -935,7 +935,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'fontWeight' property into element.
+	 * Sets the CSS 'fontWeight' property in the element.
 	 *
 	 * @param fontWeight the CSS 'fontWeight' property to set
 	 */
@@ -953,7 +953,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'height' property into element.
+	 * Sets the CSS 'height' property in the element.
 	 *
 	 * @param height the CSS 'height' property to set
 	 */
@@ -971,7 +971,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'left' property into element.
+	 * Sets the CSS 'left' property in the element.
 	 *
 	 * @param left the CSS 'left' property to set
 	 */
@@ -989,7 +989,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'lineHeight' property into element.
+	 * Sets the CSS 'lineHeight' property in the element.
 	 *
 	 * @param lineHeight the CSS 'lineHeight' property to set
 	 */
@@ -1007,7 +1007,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'margin' property into element.
+	 * Sets the CSS 'margin' property in the element.
 	 *
 	 * @param margin the CSS 'margin' property to set
 	 */
@@ -1025,7 +1025,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'marginBottom' property into element.
+	 * Sets the CSS 'marginBottom' property in the element.
 	 *
 	 * @param marginBottom the CSS 'marginBottom' property to set
 	 */
@@ -1043,7 +1043,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'marginLeft' property into element.
+	 * Sets the CSS 'marginLeft' property in the element.
 	 *
 	 * @param marginLeft the CSS 'marginLeft' property to set
 	 */
@@ -1061,7 +1061,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'marginRight' property into element.
+	 * Sets the CSS 'marginRight' property in the element.
 	 *
 	 * @param marginRight the CSS 'marginRight' property to set
 	 */
@@ -1079,7 +1079,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'marginTop' property into element.
+	 * Sets the CSS 'marginTop' property in the element.
 	 *
 	 * @param marginTop the CSS 'marginTop' property to set
 	 */
@@ -1097,7 +1097,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'maxHeight' property into element.
+	 * Sets the CSS 'maxHeight' property in the element.
 	 *
 	 * @param maxHeight the CSS 'maxHeight' property to set
 	 */
@@ -1115,7 +1115,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'maxWidth' property into element.
+	 * Sets the CSS 'maxWidth' property in the element.
 	 *
 	 * @param maxWidth the CSS 'maxWidth' property to set
 	 */
@@ -1133,7 +1133,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'minHeight' property into element.
+	 * Sets the CSS 'minHeight' property in the element.
 	 *
 	 * @param minHeight the CSS 'minHeight' property to set
 	 */
@@ -1151,7 +1151,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'minWidth' property into element.
+	 * Sets the CSS 'minWidth' property in the element.
 	 *
 	 * @param minWidth the CSS 'minWidth' property to set
 	 */
@@ -1169,7 +1169,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'opacity' property into element.
+	 * Sets the CSS 'opacity' property in the element.
 	 *
 	 * @param opacity the CSS 'opacity' property to set
 	 */
@@ -1187,7 +1187,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'overflow' property into element.
+	 * Sets the CSS 'overflow' property in the element.
 	 *
 	 * @param overflow the CSS 'overflow' property to set
 	 */
@@ -1205,7 +1205,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'padding' property into element.
+	 * Sets the CSS 'padding' property in the element.
 	 *
 	 * @param padding the CSS 'padding' property to set
 	 */
@@ -1223,7 +1223,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'paddingBottom' property into element.
+	 * Sets the CSS 'paddingBottom' property in the element.
 	 *
 	 * @param paddingBottom the CSS 'paddingBottom' property to set
 	 */
@@ -1241,7 +1241,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'paddingLeft' property into element.
+	 * Sets the CSS 'paddingLeft' property in the element.
 	 *
 	 * @param paddingLeft the CSS 'paddingLeft' property to set
 	 */
@@ -1259,7 +1259,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'paddingRight' property into element.
+	 * Sets the CSS 'paddingRight' property in the element.
 	 *
 	 * @param paddingRight the CSS 'paddingRight' property to set
 	 */
@@ -1277,7 +1277,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'paddingTop' property into element.
+	 * Sets the CSS 'paddingTop' property in the element.
 	 *
 	 * @param paddingTop the CSS 'paddingTop' property to set
 	 */
@@ -1295,7 +1295,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'position' property into element.
+	 * Sets the CSS 'position' property in the element.
 	 *
 	 * @param position the CSS 'position' property to set
 	 */
@@ -1315,7 +1315,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'position' property into element.
+	 * Sets the CSS 'position' property in the element.
 	 *
 	 * @param position the CSS 'position' property to set
 	 */
@@ -1338,7 +1338,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'right' property into element.
+	 * Sets the CSS 'right' property in the element.
 	 *
 	 * @param right the CSS 'right' property to set
 	 */
@@ -1356,7 +1356,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'size' property into element.
+	 * Sets the CSS 'size' property in the element.
 	 *
 	 * @param size the CSS 'size' property to set
 	 */
@@ -1374,7 +1374,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textAlign' property into element.
+	 * Sets the CSS 'textAlign' property in the element.
 	 *
 	 * @param textAlign the CSS 'textAlign' property to set
 	 */
@@ -1392,7 +1392,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textDecoration' property into element.
+	 * Sets the CSS 'textDecoration' property in the element.
 	 *
 	 * @param textDecoration the CSS 'textDecoration' property to set
 	 */
@@ -1412,7 +1412,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textDecoration' property into element.
+	 * Sets the CSS 'textDecoration' property in the element.
 	 *
 	 * @param textDecoration the CSS 'textDecoration' property to set
 	 */
@@ -1435,7 +1435,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textIndent' property into element.
+	 * Sets the CSS 'textIndent' property in the element.
 	 *
 	 * @param textIndent the CSS 'textIndent' property to set
 	 */
@@ -1453,7 +1453,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textOverflow' property into element.
+	 * Sets the CSS 'textOverflow' property in the element.
 	 *
 	 * @param textOverflow the CSS 'textOverflow' property to set
 	 */
@@ -1471,7 +1471,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'textShadow' property into element.
+	 * Sets the CSS 'textShadow' property in the element.
 	 *
 	 * @param textShadow the CSS 'textShadow' property to set
 	 */
@@ -1489,7 +1489,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'top' property into element.
+	 * Sets the CSS 'top' property in the element.
 	 *
 	 * @param top the CSS 'top' property to set
 	 */
@@ -1507,7 +1507,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'verticalAlign' property into element.
+	 * Sets the CSS 'verticalAlign' property in the element.
 	 *
 	 * @param verticalAlign the CSS 'verticalAlign' property to set
 	 */
@@ -1525,7 +1525,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'visibility' property into element.
+	 * Sets the CSS 'visibility' property in the element.
 	 *
 	 * @param visibility the CSS 'visibility' property to set
 	 */
@@ -1543,7 +1543,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'whiteSpace' property into element.
+	 * Sets the CSS 'whiteSpace' property in the element.
 	 *
 	 * @param whiteSpace the CSS 'whiteSpace' property to set
 	 */
@@ -1561,7 +1561,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'width' property into element.
+	 * Sets the CSS 'width' property in the element.
 	 *
 	 * @param width the CSS 'width' property to set
 	 */
@@ -1579,7 +1579,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'wordSpacing' property into element.
+	 * Sets the CSS 'wordSpacing' property in the element.
 	 *
 	 * @param wordSpacing the CSS 'wordSpacing' property to set
 	 */
@@ -1597,7 +1597,7 @@ public final class BaseStyleProperties {
 
 	/**
 	 *
-	 * Sets the CSS 'wordWrap' property into element.
+	 * Sets the CSS 'wordWrap' property in the element.
 	 *
 	 * @param wordWrap the CSS 'wordWrap' property to set
 	 */

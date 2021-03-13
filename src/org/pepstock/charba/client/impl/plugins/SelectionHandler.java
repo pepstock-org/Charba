@@ -75,7 +75,7 @@ final class SelectionHandler {
 	private SelectionTrack track = null;
 	// status if selected
 	private SelectionStatus status = SelectionStatus.READY;
-	// copy of chart canvas as image to apply when is drwaing into canvas
+	// copy of chart canvas as image to apply when is drwaing in the canvas
 	private Img snapshot = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
@@ -90,7 +90,7 @@ final class SelectionHandler {
 	private boolean preventClickEvent = false;
 
 	/**
-	 * Creates the selection handler with chart instance and the options (if exist) into chart options.
+	 * Creates the selection handler with chart instance and the options (if exist) in the chart options.
 	 * 
 	 * @param chart chart instance
 	 * @param options plugin options
@@ -230,7 +230,7 @@ final class SelectionHandler {
 		// if the status of is in selecting
 		// means that mouse down is already done
 		if (getStatus().equals(SelectionStatus.SELECTING)) {
-			// updates the selection into canvas
+			// updates the selection in the canvas
 			updateSelection(event.getX(), false);
 		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.SELECTED)) {
 			// if here
@@ -280,7 +280,7 @@ final class SelectionHandler {
 			preventClickEvent = true;
 			// sets the cursor
 			chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
-			// updates the selection into canvas
+			// updates the selection in the canvas
 			updateSelection(event.getX(), false);
 			endSelection(event);
 		}
@@ -395,7 +395,7 @@ final class SelectionHandler {
 		area.setLeft(track.getStart());
 		// sets the right part of selection area, max must be right of chart area
 		area.setRight(track.getEnd());
-		// sets the selecting color into canvas
+		// sets the selecting color in the canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
 		ctx.fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
@@ -426,7 +426,7 @@ final class SelectionHandler {
 			ctx.setLineWidth(options.getBorderWidth());
 			// gets the border dash configuration
 			List<Integer> borderDash = options.getBorderDash();
-			// sets the border color into canvas
+			// sets the border color in the canvas
 			ctx.setStrokeColor(options.getBorderColorAsString());
 			// if borer dash is consistent...
 			if (!borderDash.isEmpty()) {
@@ -893,7 +893,7 @@ final class SelectionHandler {
 		// if the position is top
 		if (clearSelection.getPosition().equals(Position.TOP)) {
 			// for all elements the Y value is equals to margin
-			// set into configuration
+			// set in the configuration
 			double y = clearSelection.getMargin();
 			clearSelection.setY(y);
 			// and adding 1 to border width
@@ -939,7 +939,7 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Draws the clear selection element into canvas of chart
+	 * Draws the clear selection element in the canvas of chart
 	 */
 	private void drawClearSelection() {
 		// gets context from canvas
@@ -949,7 +949,7 @@ final class SelectionHandler {
 		// gets clear selection element
 		ClearSelection clearSelection = pOptions.getClearSelection();
 		if (clearSelection.isUseSelectionStyle()) {
-			// sets the selecting color into canvas
+			// sets the selecting color in the canvas
 			ctx.setFillColor(options.getColorAsString());
 			// draws the rectangle of area selection
 			ctx.fillRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
@@ -957,7 +957,7 @@ final class SelectionHandler {
 			if (options.getBorderWidth() > 0) {
 				ctx.setLineWidth(ClearSelection.BORDER_WIDTH);
 				List<Integer> borderDash = options.getBorderDash();
-				// sets the selecting color into canvas
+				// sets the selecting color in the canvas
 				ctx.setStrokeColor(options.getBorderColorAsString());
 				if (!borderDash.isEmpty()) {
 					ctx.setLineDash(options.getBorderDash());

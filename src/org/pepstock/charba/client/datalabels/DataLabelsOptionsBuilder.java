@@ -95,7 +95,7 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 		LabelItemBuilder builder = new LabelItemBuilder(getLabel().getLabels().createLabel(id));
 		// stores the options builder
 		builder.setOptionsBuilder(this);
-		// stores into map
+		// stores in the map
 		labelItemBuilders.put(id.value(), builder);
 		// returns the builder
 		return builder;

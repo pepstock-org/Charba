@@ -61,7 +61,7 @@ public final class Gradient extends CanvasObject {
 		private final ObjectType type;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 * @param type object type of property
@@ -146,7 +146,7 @@ public final class Gradient extends CanvasObject {
 	}
 
 	/**
-	 * Internal constructor to create a gradient, previously stored into a native java script object
+	 * Internal constructor to create a gradient, previously stored in the a native java script object
 	 * 
 	 * @param nativeObject native java script object wrapped by gradient.
 	 */
@@ -229,7 +229,7 @@ public final class Gradient extends CanvasObject {
 	/**
 	 * Returns a color using the gradient as source of colors.
 	 * 
-	 * @param offset offset to search into the gradient colors
+	 * @param offset offset to search in the the gradient colors
 	 * @return a color based on offset.
 	 */
 	public IsColor getInterpolatedColorByOffset(double offset) {

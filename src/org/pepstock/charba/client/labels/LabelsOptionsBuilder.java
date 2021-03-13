@@ -95,7 +95,7 @@ public final class LabelsOptionsBuilder {
 		LabelBuilder builder = new LabelBuilder(this, options.createLabel(id));
 		// stores the options builder
 		builder.setOptionsBuilder(this);
-		// stores into map
+		// stores in the map
 		labelBuilders.put(id.value(), builder);
 		// returns the builder
 		return builder;

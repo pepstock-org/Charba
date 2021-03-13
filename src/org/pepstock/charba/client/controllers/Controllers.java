@@ -94,7 +94,7 @@ public final class Controllers {
 		if (controllersInstances.containsKey(controller.getType().value())) {
 			return null;
 		}
-		// stores the type into a set
+		// stores the type in the a set
 		controllersInstances.put(controller.getType().value(), controller);
 		// creates a java script object, wrapper of the controller
 		return new WrapperController(controller);

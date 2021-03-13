@@ -24,8 +24,8 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * This object contains the point style info when a label into tooltip.<br>
- * It must be used into label tooltip callback.
+ * This object contains the point style info when a label in the tooltip.<br>
+ * It must be used in the label tooltip callback.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -48,7 +48,7 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

@@ -54,7 +54,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -98,7 +98,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	/**
 	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 */
 	AnnotationOptions(IsDefaultsAnnotationOptions defaultOptions) {
 		// creates an empty native object
@@ -108,7 +108,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	/**
 	 * Creates new {@link AnnotationPlugin#ID} plugin options.
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object loaded from configuration
 	 */
 	AnnotationOptions(IsDefaultsAnnotationOptions defaultOptions, NativeObject nativeObject) {
@@ -130,7 +130,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// if here, the options has been created from scratch
 			// then it must use a cached annotations map
 			this.annotationsMap = new AnnotationCachedMap();
-			// stores into java script object as well
+			// stores in the java script object as well
 			setValue(Property.ANNOTATIONS, annotationsMap);
 		}
 	}

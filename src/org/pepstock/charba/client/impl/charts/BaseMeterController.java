@@ -226,7 +226,7 @@ final class BaseMeterController extends AbstractController {
 		// here is calculating the value to showed
 		// based on easing of drawing
 		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
-		// gets max value into string to check font size
+		// gets max value in the string to check font size
 		final String maxValueToShow = getFormattedValue(chart, options, maxValue, 1D);
 		// value to show with format required
 		final String valueToShow = getFormattedValue(chart, options, value, ease);
@@ -277,7 +277,7 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Calculates the font size based on available space into square into doughnut inner radius.
+	 * Calculates the font size based on available space in the square in the doughnut inner radius.
 	 * 
 	 * @param ctx canvas context
 	 * @param sideOfSquare side of square
@@ -330,7 +330,7 @@ final class BaseMeterController extends AbstractController {
 				return result;
 			}
 		}
-		// if here, it sues the precision set into options
+		// if here, it sues the precision set in the options
 		return Utilities.applyPrecision(value, options.getPrecision());
 	}
 

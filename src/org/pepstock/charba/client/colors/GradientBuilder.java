@@ -267,14 +267,14 @@ public final class GradientBuilder {
 		}
 		// gets gradient reference
 		Gradient result = new Gradient(id, type, orientation, scope, colors);
-		// stores the object into the cache
+		// stores the object in the the cache
 		GRADIENTS.put(id, result);
 		// returns the instance
 		return result;
 	}
 
 	/**
-	 * Creates a gradient, previously stored into a native java script object.
+	 * Creates a gradient, previously stored in the a native java script object.
 	 *
 	 * @param nativeObject native java script object wrapped by gradient.
 	 * @return a gradient instance, built by the builder.
@@ -296,7 +296,7 @@ public final class GradientBuilder {
 			}
 			// creates new gradient
 			Gradient result = new Gradient(nativeObject);
-			// stores the object into the cache
+			// stores the object in the the cache
 			GRADIENTS.put(id, result);
 			// returns the instance
 			return result;

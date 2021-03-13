@@ -182,9 +182,9 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	}
 
 	/**
-	 * Enables or disables an animation collection instance into animation options.
+	 * Enables or disables an animation collection instance in the animation options.
 	 * 
-	 * @param collection collection instance used to check into animation options
+	 * @param collection collection instance used to check in the animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
 	@Override
@@ -195,7 +195,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	/**
 	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
 	 * 
-	 * @param collection collection instance used to check into animation options
+	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	@Override
@@ -204,10 +204,10 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	}
 
 	/**
-	 * Returns <code>true</code> if an animation collection instance is stored into the animation options.
+	 * Returns <code>true</code> if an animation collection instance is stored in the the animation options.
 	 * 
-	 * @param collection collection instance used to check into animation options
-	 * @return <code>true</code> if an animation collection instance is stored into the animation options
+	 * @param collection collection instance used to check in the animation options
+	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
 	 */
 	@Override
 	public boolean has(IsAnimationCollectionKey collection) {
@@ -215,7 +215,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	}
 
 	/**
-	 * Returns an animation collection instance if stored into the animation options.
+	 * Returns an animation collection instance if stored in the the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
@@ -237,7 +237,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	}
 
 	/**
-	 * Creates an animation collection instance and stores into the animation options.
+	 * Creates an animation collection instance and stores in the the animation options.
 	 * 
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options

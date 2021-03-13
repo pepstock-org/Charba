@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link DatasetsItemsSelector#FACTORY}.
+	 * To avoid any instantiation. Use the static reference in the {@link DatasetsItemsSelector#FACTORY}.
 	 */
 	DatasetsItemsSelectorOptionsFactory() {
 		super(DatasetsItemsSelector.ID);

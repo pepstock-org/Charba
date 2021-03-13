@@ -25,9 +25,9 @@ import org.pepstock.charba.client.commons.Constants;
  */
 final class JSONReplacerConstants {
 
-	// used into JSON stringfy replacer when the object is already passed
+	// used in the JSON stringfy replacer when the object is already passed
 	static final String CYCLE_PROPERTY_VALUE = Constants.EMPTY_STRING;
-	// used into JSON stringfy replacer when the key of object is Charba internal
+	// used in the JSON stringfy replacer when the key of object is Charba internal
 	static final String CHARBA_PROPERTY_KEY_PREFIX = "_charba";
 	// empty json object when a null instance is passed
 	static final String EMPTY_JSON_OBJECT = "{}";

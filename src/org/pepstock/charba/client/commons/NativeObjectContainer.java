@@ -247,7 +247,7 @@ public abstract class NativeObjectContainer {
 	// --- INTEGERS
 	// ------------------------------------------
 	/**
-	 * Sets a value (int) into embedded JavaScript object at specific property.
+	 * Sets a value (int) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -261,7 +261,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (int) into embedded JavaScript object at specific property.
+	 * Returns a value (int) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -278,7 +278,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or integer) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or integer) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a integer.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -302,7 +302,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a integer.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -329,7 +329,7 @@ public abstract class NativeObjectContainer {
 	// --- DOUBLES
 	// ------------------------------------------
 	/**
-	 * Sets a value (double) into embedded JavaScript object at specific property.
+	 * Sets a value (double) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -343,7 +343,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (double) into embedded JavaScript object at specific property.
+	 * Returns a value (double) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -360,7 +360,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or double) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or double) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a double.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -384,7 +384,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a double.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -411,7 +411,7 @@ public abstract class NativeObjectContainer {
 	// --- BOOLEANS
 	// ------------------------------------------
 	/**
-	 * Sets a value (boolean) into embedded JavaScript object at specific property.
+	 * Sets a value (boolean) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -425,7 +425,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (boolean) into embedded JavaScript object at specific property.
+	 * Returns a value (boolean) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -445,7 +445,7 @@ public abstract class NativeObjectContainer {
 	// --- STRINGS
 	// ------------------------------------------
 	/**
-	 * Returns a value (string) into embedded JavaScript object at specific property.
+	 * Returns a value (string) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -462,7 +462,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (string) into embedded JavaScript object at specific property.
+	 * Sets a value (string) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -484,7 +484,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or string) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or string) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -508,7 +508,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -536,7 +536,7 @@ public abstract class NativeObjectContainer {
 	// --- DATES
 	// ------------------------------------------
 	/**
-	 * Returns a value (date) into embedded JavaScript object at specific property.
+	 * Returns a value (date) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -561,7 +561,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (date) into embedded JavaScript object at specific property.
+	 * Sets a value (date) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -582,7 +582,7 @@ public abstract class NativeObjectContainer {
 	// --- NATIVE OBJECTS
 	// ------------------------------------------
 	/**
-	 * Returns a value (JavaScript Object) into embedded JavaScript object at specific property.
+	 * Returns a value (JavaScript Object) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @return value of the property or <code>null</code> if not there
@@ -598,7 +598,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
+	 * Sets a value (JavaScript Object) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -620,7 +620,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (an empty JavaScript Object) into embedded JavaScript object at specific property.
+	 * Sets a value (an empty JavaScript Object) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 */
@@ -637,7 +637,7 @@ public abstract class NativeObjectContainer {
 	// --- NATIVE OBJECT CONTAINERS
 	// ------------------------------------------
 	/**
-	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by object container.
+	 * Sets a value (JavaScript Object) in the embedded JavaScript object at specific property by object container.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -659,7 +659,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (array or native object container) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (array or native object container) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a native object container.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -683,7 +683,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array from a container list) into embedded JavaScript object at specific property.
+	 * Sets a value (Array from a container list) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param container container of array
@@ -708,7 +708,7 @@ public abstract class NativeObjectContainer {
 	// --- NATIVE ARRAY CONTAINERS
 	// ------------------------------------------
 	/**
-	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by array container.
+	 * Sets a value (JavaScript Object) in the embedded JavaScript object at specific property by array container.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -730,7 +730,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array from a double array container list) into embedded JavaScript object at specific property.
+	 * Sets a value (Array from a double array container list) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param container container of array of doubles
@@ -755,7 +755,7 @@ public abstract class NativeObjectContainer {
 	// --- CALLBACKS
 	// ------------------------------------------
 	/**
-	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
+	 * Sets a value (callback proxy function) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -780,7 +780,7 @@ public abstract class NativeObjectContainer {
 	// --- IMAGES
 	// ------------------------------------------
 	/**
-	 * Returns a value (image) into embedded JavaScript object at specific property.
+	 * Returns a value (image) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -797,7 +797,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (image) into embedded JavaScript object at specific property.
+	 * Sets a value (image) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -819,7 +819,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (array or image) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (array or image) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a image.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -843,7 +843,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a image.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -870,7 +870,7 @@ public abstract class NativeObjectContainer {
 	// --- GRADIENTS
 	// ------------------------------------------
 	/**
-	 * Returns a value (gradient) into embedded JavaScript object at specific property.
+	 * Returns a value (gradient) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -887,7 +887,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (gradient) into embedded JavaScript object at specific property.
+	 * Sets a value (gradient) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -909,7 +909,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or gradient) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -933,7 +933,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -960,7 +960,7 @@ public abstract class NativeObjectContainer {
 	// --- PATTERNS
 	// ------------------------------------------
 	/**
-	 * Returns a value (pattern) into embedded JavaScript object at specific property.
+	 * Returns a value (pattern) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
@@ -977,7 +977,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (pattern) into embedded JavaScript object at specific property.
+	 * Sets a value (pattern) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -999,7 +999,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or pattern) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or pattern) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a pattern.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1023,7 +1023,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a pattern.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1050,7 +1050,7 @@ public abstract class NativeObjectContainer {
 	// --- KEYS
 	// ------------------------------------------
 	/**
-	 * Returns a value (string) into embedded JavaScript object at specific property.
+	 * Returns a value (string) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value as key if the property is missing
@@ -1069,7 +1069,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (EnumValue) into embedded JavaScript object at specific property.
+	 * Sets a value (EnumValue) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -1098,7 +1098,7 @@ public abstract class NativeObjectContainer {
 	// --- Special case for ScaleId
 	// ------------------------------------------
 	/**
-	 * Returns a value (ScaleId) into embedded JavaScript object at specific property.
+	 * Returns a value (ScaleId) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value as key if the property is missing
@@ -1121,7 +1121,7 @@ public abstract class NativeObjectContainer {
 	// --- ENUMERATIONS
 	// ------------------------------------------
 	/**
-	 * Returns a value (key) into embedded JavaScript object at specific property.
+	 * Returns a value (key) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param enumValues all enumeration values
@@ -1149,7 +1149,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or string by keys) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1173,7 +1173,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a key.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1190,7 +1190,7 @@ public abstract class NativeObjectContainer {
 	// --- ARRAYS
 	// ------------------------------------------
 	/**
-	 * Returns a value (array) into embedded JavaScript object at specific property.
+	 * Returns a value (array) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param <T> type of array
@@ -1207,7 +1207,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array) into embedded JavaScript object at specific property.
+	 * Sets a value (Array) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -1233,7 +1233,7 @@ public abstract class NativeObjectContainer {
 	// --- COLORS
 	// ------------------------------------------
 	/**
-	 * Sets a value (Array or string by colors) into embedded JavaScript object at specific property.<br>
+	 * Sets a value (Array or string by colors) in the embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -1263,7 +1263,7 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 
 	/**
-	 * Sets a value (chart) into embedded JavaScript object at specific property.
+	 * Sets a value (chart) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -1285,7 +1285,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (chart) into embedded JavaScript object at specific property.
+	 * Returns a value (chart) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @return value of the property
@@ -1305,7 +1305,7 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 
 	/**
-	 * Sets a value (event) into embedded JavaScript object at specific property.
+	 * Sets a value (event) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
@@ -1327,7 +1327,7 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (native event) into embedded JavaScript object at specific property.
+	 * Returns a value (native event) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @return value of the property
@@ -1346,7 +1346,7 @@ public abstract class NativeObjectContainer {
 	// --- JAVA OBJECT
 	// ------------------------------------------
 	/**
-	 * Returns a value (Javaf Object) into embedded JavaScript object at specific property.
+	 * Returns a value (Javaf Object) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of Java object.
 	 * @return value of the property or <code>null</code> if not there

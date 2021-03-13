@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * DIAGONAL drawer to design a diagonal into tile, from right to left.<br>
- * It designs a diagonal into the following tile sections (A and B):<br>
+ * DIAGONAL drawer to design a diagonal in the tile, from right to left.<br>
+ * It designs a diagonal in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

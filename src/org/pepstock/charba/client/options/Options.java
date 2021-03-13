@@ -56,7 +56,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -117,7 +117,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -207,7 +207,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// sets animation container
 		this.animationContainer = new AnimationContainer(this, getDefaultValues(), getNativeObject());
 		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
-		// set own default options into defaults.plugin and not longer to the default node.
+		// set own default options in the defaults.plugin and not longer to the default node.
 		// then it reads the default plugins and copies (reference of object)
 		// to the options nodes
 		// --------------------
@@ -585,7 +585,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param color color to use into chart.
+	 * @param color color to use in the chart.
 	 */
 	public void setColor(IsColor color) {
 		setColor(IsColor.checkAndGetValue(color));
@@ -594,7 +594,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param color color to use into chart.
+	 * @param color color to use in the chart.
 	 */
 	public void setColor(String color) {
 		setValue(Property.COLOR, color);
@@ -603,7 +603,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return color to use into chart.
+	 * @return color to use in the chart.
 	 */
 	@Override
 	public String getColorAsString() {
@@ -613,7 +613,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return color to use into chart.
+	 * @return color to use in the chart.
 	 */
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
@@ -622,7 +622,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param backgroundColor background color to use into chart.
+	 * @param backgroundColor background color to use in the chart.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
 		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
@@ -631,7 +631,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param backgroundColor background color to use into chart.
+	 * @param backgroundColor background color to use in the chart.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.COLOR, backgroundColor);
@@ -640,7 +640,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return background color to use into chart.
+	 * @return background color to use in the chart.
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -650,7 +650,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return background color to use into chart.
+	 * @return background color to use in the chart.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
@@ -659,7 +659,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param borderColor border color to use into chart.
+	 * @param borderColor border color to use in the chart.
 	 */
 	public void setBorderColor(IsColor borderColor) {
 		setBorderColor(IsColor.checkAndGetValue(borderColor));
@@ -668,7 +668,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param borderColor border color to use into chart.
+	 * @param borderColor border color to use in the chart.
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.COLOR, borderColor);
@@ -677,7 +677,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return border color to use into chart.
+	 * @return border color to use in the chart.
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -687,7 +687,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return border color to use into chart.
+	 * @return border color to use in the chart.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());

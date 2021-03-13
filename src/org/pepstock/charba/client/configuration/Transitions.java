@@ -38,10 +38,10 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	}
 
 	/**
-	 * Returns <code>true</code> if an animation transition instance is stored into the animation options.
+	 * Returns <code>true</code> if an animation transition instance is stored in the the animation options.
 	 * 
-	 * @param transition transition instance used to check into animation options
-	 * @return <code>true</code> if an animation transition instance is stored into the animation options
+	 * @param transition transition instance used to check in the animation options
+	 * @return <code>true</code> if an animation transition instance is stored in the the animation options
 	 */
 	@Override
 	public boolean has(IsTransitionKey transition) {
@@ -49,7 +49,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	}
 
 	/**
-	 * Returns an animation transition instance if stored into the animation options.
+	 * Returns an animation transition instance if stored in the the animation options.
 	 * 
 	 * @param transition transition instance used to get for animation options
 	 * @return an animation transition instance or <code>null</code> if does not exists
@@ -71,7 +71,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	}
 
 	/**
-	 * Creates an animation transition instance and stores into the animation options.
+	 * Creates an animation transition instance and stores in the the animation options.
 	 * 
 	 * @param transition transition key used to create the animation transitions
 	 * @return a transition animation options

@@ -57,7 +57,7 @@ public final class JSON {
 		 * 
 		 * @param key property key of object.
 		 * @param value object related to the key.
-		 * @return the value to show into string.
+		 * @return the value to show in the string.
 		 */
 		Object call(String key, Object value);
 	}
@@ -314,11 +314,11 @@ public final class JSON {
 	}
 
 	/**
-	 * Ignores all keys created by CHARBA into replace function.
+	 * Ignores all keys created by CHARBA in the replace function.
 	 * 
 	 * @param key property key of object.
 	 * @param value object related to the key.
-	 * @return the value to show into string.
+	 * @return the value to show in the string.
 	 */
 	@JsOverlay
 	private static Object ignoreCharbaInstances(String key, Object value) {

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultBoxHandler;
 interface HasBox extends IsDefaultBoxHandler {
 
 	/**
-	 * Returns a box handler instance to use into default methods of this interface.
+	 * Returns a box handler instance to use in the default methods of this interface.
 	 * 
 	 * @return a box handler instance
 	 */

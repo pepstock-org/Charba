@@ -39,7 +39,7 @@ public final class TextMetricsItem {
 
 	/**
 	 * Return the value giving the calculated width of a segment of inline text in CSS pixels.<br>
-	 * It takes into account the current font of the context..
+	 * It takes in the account the current font of the context..
 	 * 
 	 * @return the value giving the calculated width of a segment of inline text in CSS pixels
 	 */

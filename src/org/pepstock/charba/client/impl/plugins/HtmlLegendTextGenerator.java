@@ -38,7 +38,7 @@ final class HtmlLegendTextGenerator<T extends HasLegendText, C extends HtmlLegen
 	 * Builds a {@link TableCell} which should contains and represents the a text of legend element.
 	 * 
 	 * @param chart chart instance related to legend to build
-	 * @param item legend item or legend title to show into label cell element
+	 * @param item legend item or legend title to show in the label cell element
 	 * @param callback callback instance which can be implemented to change the text of legend for a specific item or legend's title, as HTML
 	 * @return a {@link TableCell} which should contains and represents the text
 	 */
@@ -53,7 +53,7 @@ final class HtmlLegendTextGenerator<T extends HasLegendText, C extends HtmlLegen
 			if (item.isHtmlText()) {
 				// gets HTML
 				SafeHtml html = item.getTextAsHtml();
-				// sets HTML into label cell
+				// sets HTML in the label cell
 				element.setInnerHTML(html.asString());
 			} else {
 				// invokes the method to manage the text

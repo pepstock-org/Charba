@@ -86,7 +86,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -437,7 +437,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	// -----------------------------------------------------------------------------------------
-	// The following properties fall into two groups:
+	// The following properties fall in the two groups:
 	// minimumIntegerDigits, minimumFractionDigits, and maximumFractionDigits in one group,
 	// minimumSignificantDigits and maximumSignificantDigits in the other
 	// If at least one property from the second group is defined, then the first group is ignored.
@@ -518,7 +518,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	}
 
 	// -----------------------------------------------------------------------------------------
-	// The following properties fall into two groups:
+	// The following properties fall in the two groups:
 	// minimumIntegerDigits, minimumFractionDigits, and maximumFractionDigits in one group,
 	// minimumSignificantDigits and maximumSignificantDigits in the other
 	// If at least one property from the second group is defined, then the first group is ignored.

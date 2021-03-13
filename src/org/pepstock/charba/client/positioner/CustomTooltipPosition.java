@@ -20,7 +20,7 @@ import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
- * Custom tooltip position to use into chart options to configure charts.<br>
+ * Custom tooltip position to use in the chart options to configure charts.<br>
  * It must not be equals of the out of the box ones.
  * 
  * @author Andrea "Stock" Stocchero

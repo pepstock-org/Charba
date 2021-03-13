@@ -72,22 +72,22 @@ public interface Key {
 	}
 
 	/**
-	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
+	 * Returns <code>true</code> if a key in the an enumeration is related to the value, otherwise <code>false</code>.
 	 * 
 	 * @param enumValues enumeration values of keys
-	 * @param value value to search into key
+	 * @param value value to search in the key
 	 * @param <T> type of key
-	 * @return <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>
+	 * @return <code>true</code> if a key in the an enumeration is related to the value, otherwise <code>false</code>
 	 */
 	static <T extends Key> boolean hasKeyByValue(T[] enumValues, String value) {
 		return getKeyByValue(enumValues, value, null) != null;
 	}
 
 	/**
-	 * Returns a key into an enumeration by the value.
+	 * Returns a key in the an enumeration by the value.
 	 * 
 	 * @param enumValues enumeration values of keys
-	 * @param value value to search into key
+	 * @param value value to search in the key
 	 * @param <T> type of key
 	 * @return the found key by value or <code>null</code>
 	 */
@@ -96,10 +96,10 @@ public interface Key {
 	}
 
 	/**
-	 * Returns a key into an enumeration by the value, or the default key passed as argument.
+	 * Returns a key in the an enumeration by the value, or the default key passed as argument.
 	 * 
 	 * @param enumValues enumeration values of keys
-	 * @param value value to search into key
+	 * @param value value to search in the key
 	 * @param defaultKey default key instance if the value is not found
 	 * @param <T> type of key
 	 * @return the found key by value or the default one

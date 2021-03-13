@@ -20,7 +20,7 @@ import org.pepstock.charba.client.dom.MutationObserver;
 import org.pepstock.charba.client.dom.MutationRecord;
 
 /**
- * Enumerates all types which can be set into a {@link MutationObserver} and consumable by {@link MutationRecord#getType()}.
+ * Enumerates all types which can be set in the a {@link MutationObserver} and consumable by {@link MutationRecord#getType()}.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -47,7 +47,7 @@ public enum MutationType implements Key
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */

@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * TRIANGLE drawer to design a triangle into tile.<br>
- * It designs a triangle into the following tile sections (A and B):<br>
+ * TRIANGLE drawer to design a triangle in the tile.<br>
+ * It designs a triangle in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -50,16 +50,16 @@ class Triangle extends ShapeDrawer {
 		final double halfSize = size / 2D;
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawTriangle(context, size, 0D, 0D);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawTriangle(context, size, halfSize, halfSize);
 		// fills the current path
 		context.fill();
 	}
 
 	/**
-	 * Designs a triangle into a tile section.
+	 * Designs a triangle in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square

@@ -44,7 +44,7 @@ public final class DOMBuilder {
 	private static final String CHART_PREFIX_ID = "charba-chart-";
 	// counter used to create a unique ID
 	private final AtomicInteger counter = new AtomicInteger();
-	// flag to know if canvas is supported into the browser
+	// flag to know if canvas is supported in the the browser
 	private final boolean canvasSupported;
 
 	/**

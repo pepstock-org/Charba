@@ -34,7 +34,7 @@ public interface IsLocaleItem extends Key {
 	 * Returns an unmodifiable list of items which are matching with the name passed as argument.
 	 * 
 	 * @param enumValues enumeration values of the locale tag-
-	 * @param name name to search into object name and value
+	 * @param name name to search in the object name and value
 	 * @param <T> type of locale tag
 	 * @return an unmodifiable list of items which are matching with the name passed as argument
 	 */

@@ -161,7 +161,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of time series items
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of time series items or an empty list of time series data if the data type is not {@link DataType#POINTS}.
 	 */
 	default List<TimeSeriesItem> getTimeSeriesData(boolean binding) {

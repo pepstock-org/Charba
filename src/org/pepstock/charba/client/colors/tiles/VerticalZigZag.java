@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * ZIGZAG (vertically) drawer to design a zigzag line (vertically) into tile.<br>
- * It designs a zigzag line (vertically) into the following tile sections (A and B):<br>
+ * ZIGZAG (vertically) drawer to design a zigzag line (vertically) in the tile.<br>
+ * It designs a zigzag line (vertically) in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

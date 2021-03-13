@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * This class wraps the native object of plugins registered into CHART.JS.<br>
+ * This class wraps the native object of plugins registered in the CHART.JS.<br>
  * Exposes ONLY the ID of plugin, anything else.
  * 
  * @author Andrea "Stock" Stocchero
@@ -39,7 +39,7 @@ final class PluginReference extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

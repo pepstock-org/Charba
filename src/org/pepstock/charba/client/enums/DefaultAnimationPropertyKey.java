@@ -64,7 +64,7 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	private final AnimationType type;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param type animation type related to the property

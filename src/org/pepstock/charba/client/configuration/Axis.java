@@ -155,7 +155,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -480,18 +480,18 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Returns the user callback that runs before/after ticks are converted into strings.
+	 * Returns the user callback that runs before/after ticks are converted in the strings.
 	 * 
-	 * @return the user callback that runs before/after ticks are converted into strings
+	 * @return the user callback that runs before/after ticks are converted in the strings
 	 */
 	public AxisTickToLabelConversionCallback getAxisTickToLabelConversionCallback() {
 		return axisTickToLabelConversionCallback;
 	}
 
 	/**
-	 * Sets the user callback that runs before/after ticks are converted into strings.
+	 * Sets the user callback that runs before/after ticks are converted in the strings.
 	 * 
-	 * @param axisTickToLabelConversionCallback the user callback that runs before/after ticks are converted into strings
+	 * @param axisTickToLabelConversionCallback the user callback that runs before/after ticks are converted in the strings
 	 */
 	public void setAxisTickToLabelConversionCallback(AxisTickToLabelConversionCallback axisTickToLabelConversionCallback) {
 		// sets the callback

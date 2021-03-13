@@ -209,7 +209,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// sends the event
 			fireEvent(new AddHandlerEvent(type));
 		}
-		// stores the registration into chart
+		// stores the registration in the chart
 		// for cleaning up when chart will be destroy
 		handlerRegistrations.add(registration);
 		// returns registration
@@ -279,12 +279,12 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into {@link Charts}.
+	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one in the {@link Charts}.
 	 * 
 	 * @return the CHART.JS instance, check if the inner one is not consistent yet
 	 */
 	private final Chart lookForConsistentInstance() {
-		// gets chart instance getting the stored one into map
+		// gets chart instance getting the stored one in the map
 		// if the current one is still initializing
 		return isInitialized() ? chart : Charts.getNative(id);
 	}
@@ -1070,7 +1070,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 				// then destroy
 				chart.destroy();
 			}
-			// stores the chart instance into collection
+			// stores the chart instance in the collection
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
@@ -1176,7 +1176,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			private final String value;
 
 			/**
-			 * Creates with the property value to use into native object.
+			 * Creates with the property value to use in the native object.
 			 * 
 			 * @param value value of property name
 			 */

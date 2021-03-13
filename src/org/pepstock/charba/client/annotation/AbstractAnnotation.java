@@ -41,7 +41,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base class to define an annotation into {@link AnnotationPlugin#ID} plugin.<br>
+ * Base class to define an annotation in the {@link AnnotationPlugin#ID} plugin.<br>
  * It contains all commons properties to define an annotation.
  * 
  * @author Andrea "Stock" Stocchero
@@ -120,7 +120,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		//
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the  native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -275,9 +275,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Sets the draw time defined as default into options as top level.
+	 * Sets the draw time defined as default in the options as top level.
 	 * 
-	 * @param drawTime the draw time defined as default into options as top level
+	 * @param drawTime the draw time defined as default in the options as top level
 	 */
 	final void setDefaultDrawTime(DrawTime drawTime) {
 		this.defaultDrawTime = drawTime;

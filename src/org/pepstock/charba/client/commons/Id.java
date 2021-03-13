@@ -34,7 +34,7 @@ public enum Id implements Key
 	private final String value;
 
 	/**
-	 * Creates a property with the value to use into native object.
+	 * Creates a property with the value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */

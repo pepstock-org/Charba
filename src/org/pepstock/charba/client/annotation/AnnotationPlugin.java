@@ -75,7 +75,7 @@ public final class AnnotationPlugin extends AbstractExtensionPlugin<AnnotationOp
 	}
 
 	/**
-	 * Inject the plugin but disables into all charts waiting for the specific statement for each chart.
+	 * Inject the plugin but disables in the all charts waiting for the specific statement for each chart.
 	 */
 	public static void enable() {
 		enable(false);

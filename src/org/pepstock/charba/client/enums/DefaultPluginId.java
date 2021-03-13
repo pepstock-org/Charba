@@ -50,7 +50,7 @@ public enum DefaultPluginId implements Key
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */
@@ -70,7 +70,7 @@ public enum DefaultPluginId implements Key
 
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default plugin id.<br>
-	 * The {@link DefaultPluginId#FILLER} is not considered a default plugin because does not have a specific namespace into options.
+	 * The {@link DefaultPluginId#FILLER} is not considered a default plugin because does not have a specific namespace in the options.
 	 * 
 	 * @param pluginId the plugin id to check
 	 * @return <code>true</code> if the argument is equals to a default plugin id

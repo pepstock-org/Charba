@@ -117,7 +117,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.<br>
+	 * If true, extra space is added to the both edges and the axis is scaled to fit in the the chart area.<br>
 	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @param offset extra space of axis
@@ -127,7 +127,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.<br>
+	 * If true, extra space is added to the both edges and the axis is scaled to fit in the the chart area.<br>
 	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
 	 * @return extra space of axis.

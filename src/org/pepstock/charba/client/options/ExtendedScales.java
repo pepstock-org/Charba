@@ -123,7 +123,7 @@ public final class ExtendedScales extends Scales {
 			// override the id
 			scale.setId(id);
 		}
-		// checks if the id is already into object
+		// checks if the id is already in the object
 		// that means there are 2 or more scales to add
 		// with the same id
 		if (has(id)) {

@@ -71,7 +71,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions implements 
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -115,7 +115,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions implements 
 	/**
 	 * Builds the object with the default global ones
 	 * 
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 */
 	ColorSchemesOptions(IsColorSchemesDefaultOptions defaultOptions) {
 		this(defaultOptions, null);
@@ -192,7 +192,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions implements 
 		// gets the category and name from object
 		String category = getValue(Property.SCHEME_CATEGORY, defaultOptions.getSchemeCategory());
 		String name = getValue(Property.SCHEME_NAME, defaultOptions.getSchemeName());
-		// all color scheme are stored into cache when the "set" is called
+		// all color scheme are stored in the cache when the "set" is called
 		// therefore here the scheme MUST be in cache
 		return ColorSchemesUtil.get().getColorScheme(category, name);
 	}

@@ -104,7 +104,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -596,7 +596,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		if (Display.AUTO.equals(display)) {
 			setValueAndAddToParent(Property.DISPLAY, display);
 		} else {
-			// otherwise transforms into a boolean
+			// otherwise transforms in the a boolean
 			setDisplay(Display.TRUE.equals(display));
 		}
 	}
@@ -621,7 +621,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit into the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the the chart area.
 	 * 
 	 * @param offset extra space of axis
 	 */
@@ -630,7 +630,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit into the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the the chart area.
 	 * 
 	 * @return extra space of axis.
 	 */

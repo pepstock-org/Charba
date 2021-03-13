@@ -46,7 +46,7 @@ final class NativeDate {
 	/**
 	 * Creates a JavaScript Date object from a {@link Date} java instance.
 	 * 
-	 * @param date java date instance to transform into a JavaScript one.
+	 * @param date java date instance to transform in the a JavaScript one.
 	 * @return a JavaScript Date object
 	 */
 	@JsOverlay

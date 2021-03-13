@@ -170,7 +170,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 	}
 
 	/**
-	 * Transforms a {@link IsFill} instance into a CHART.JS FILL property accepted value.
+	 * Transforms a {@link IsFill} instance in the a CHART.JS FILL property accepted value.
 	 * 
 	 * @param fill fill instance to transform
 	 * @return a CHART.JS FILL property accepted value

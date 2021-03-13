@@ -146,7 +146,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -201,7 +201,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 				// calls callback
 				// getting default labels
 				List<LegendLabelItem> result = labelsCallback.generateLegendLabels(getChart(), Defaults.get().generateLabels(nativeChart));
-				// transforms into a native array
+				// transforms in the a native array
 				return ArrayObject.fromOrEmpty(result);
 			}
 			// empty array

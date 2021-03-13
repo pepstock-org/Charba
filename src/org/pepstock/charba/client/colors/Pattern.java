@@ -24,7 +24,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.Repetition;
 
 /**
- * Entity to apply a canvas pattern into a data set as background.<br>
+ * Entity to apply a canvas pattern in the a data set as background.<br>
  * See <a href="https://www.toptal.com/designers/subtlepatterns/">here</a> some interesting pattern images.
  * 
  * @author Andrea "Stock" Stocchero
@@ -52,7 +52,7 @@ public final class Pattern extends CanvasObject {
 		private final String value;
 
 		/**
-		 * Creates a property with the value to use into native object.
+		 * Creates a property with the value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -116,7 +116,7 @@ public final class Pattern extends CanvasObject {
 			// stores size checks the max value
 			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
 			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
-			// stores the id into pattern
+			// stores the id in the pattern
 			store(canvasPattern);
 		} else {
 			// if here, image is null
@@ -149,36 +149,36 @@ public final class Pattern extends CanvasObject {
 	}
 
 	/**
-	 * Returns the image used into pattern if exists.
+	 * Returns the image used in the pattern if exists.
 	 * 
-	 * @return the image used into pattern if exists, otherwise <code>null</code>.
+	 * @return the image used in the pattern if exists, otherwise <code>null</code>.
 	 */
 	public Img getImage() {
 		return getValue(Property.CHARBA_PATTERN_IMG, DEFAULT_IMAGE);
 	}
 
 	/**
-	 * Returns the image width used into pattern.
+	 * Returns the image width used in the pattern.
 	 * 
-	 * @return the image width used into pattern.
+	 * @return the image width used in the pattern.
 	 */
 	public int getWidth() {
 		return getValue(Property.CHARBA_PATTERN_WIDTH, TilesFactoryDefaults.DEFAULT_SIZE);
 	}
 
 	/**
-	 * Returns the image height used into pattern.
+	 * Returns the image height used in the pattern.
 	 * 
-	 * @return the image height used into pattern.
+	 * @return the image height used in the pattern.
 	 */
 	public int getHeight() {
 		return getValue(Property.CHARBA_PATTERN_HEIGHT, TilesFactoryDefaults.DEFAULT_SIZE);
 	}
 
 	/**
-	 * Returns the repetition to use into pattern.
+	 * Returns the repetition to use in the pattern.
 	 * 
-	 * @return the repetition to use into pattern
+	 * @return the repetition to use in the pattern
 	 */
 	public Repetition getRepetition() {
 		return getValue(Property.CHARBA_PATTERN_REPETITION, Repetition.values(), Repetition.REPEAT);

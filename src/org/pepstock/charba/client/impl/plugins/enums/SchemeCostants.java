@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins.enums;
 
 /**
- * Contains all colors used into schemes, to avoid to have more instances of the same color into color schemes definition.
+ * Contains all colors used in the schemes, to avoid to have more instances of the same color in the color schemes definition.
  * 
  * @author Andrea "Stock" Stocchero
  *

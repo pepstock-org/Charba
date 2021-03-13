@@ -37,8 +37,8 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Common utility to manage inside the configuration items, the canvas objects (pattern or gradient), set to the specific properties of the elements.<br>
- * It stores the canvas object information into a native object added to Charba configuration, on specific property names for Charba.<br>
- * The canvas object are stored into native object by the "original" property names to use to configure CHART.JS.
+ * It stores the canvas object information in the a native object added to Charba configuration, on specific property names for Charba.<br>
+ * The canvas object are stored in the native object by the "original" property names to use to configure CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -99,13 +99,13 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	 * Creates a callback to manage the canvas object.<br>
 	 * This is delegated to the implementation of container.
 	 * 
-	 * @param key the property related to the canvas object to set into dataset
+	 * @param key the property related to the canvas object to set in the dataset
 	 * @return a callback to manage the canvas object
 	 */
 	abstract AbstractCanvasObjectCallback<T> createCallback(CanvasObjectKey key);
 
 	/**
-	 * Stores and array of canvas object into native java script object.
+	 * Stores and array of canvas object in the native java script object.
 	 * 
 	 * @param key property name to use to stored it.
 	 * @param objects array of canvas object
@@ -190,10 +190,10 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	}
 
 	/**
-	 * Returns the function <code>proxy</code> implemented into additional java script source, created for the specific key.
+	 * Returns the function <code>proxy</code> implemented in the additional java script source, created for the specific key.
 	 * 
-	 * @param key the property related to the canvas object to set into dataset
-	 * @return the proxy function <code>proxy</code> implemented into additional java script source
+	 * @param key the property related to the canvas object to set in the dataset
+	 * @return the proxy function <code>proxy</code> implemented in the additional java script source
 	 */
 	final CallbackProxy.Proxy getProxy(Key key) {
 		// checks key consistency and
@@ -232,7 +232,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		 * Creates the object, getting all arguments n order to manage the data set callback.
 		 * 
 		 * @param dataset data set instance where the callback must be stored
-		 * @param property the property related to the canvas object to set into data set
+		 * @param property the property related to the canvas object to set in the data set
 		 * @param callback data set callback instance to manage the color
 		 * @param defaultValue default value for the data set property, being a color, always as string
 		 */
@@ -249,9 +249,9 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		}
 
 		/**
-		 * Returns the function <code>proxy</code> implemented into additional java script source, created for the specific key.
+		 * Returns the function <code>proxy</code> implemented in the additional java script source, created for the specific key.
 		 * 
-		 * @return the function <code>proxy</code> implemented into additional java script source, created for the specific key
+		 * @return the function <code>proxy</code> implemented in the additional java script source, created for the specific key
 		 */
 		CallbackProxy.Proxy getProxy() {
 			return callbackProxy.getProxy();
@@ -267,9 +267,9 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		}
 
 		/**
-		 * Returns the property related to the canvas object to set into dataset.
+		 * Returns the property related to the canvas object to set in the dataset.
 		 * 
-		 * @return the property related to the canvas object to set into dataset
+		 * @return the property related to the canvas object to set in the dataset
 		 */
 		private CanvasObjectKey getProperty() {
 			return property;

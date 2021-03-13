@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 /**
- * The following adapters element is used to configure a date adapter, injecting to support time series into CAHRT.JS.
+ * The following adapters element is used to configure a date adapter, injecting to support time series in the CAHRT.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */

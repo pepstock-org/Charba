@@ -703,7 +703,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	public native void clearRect(double x, double y, double width, double height);
 
 	/**
-	 * Turns the current or given path into the current clipping region.<br>
+	 * Turns the current or given path in the the current clipping region.<br>
 	 * It replaces any previous clipping region..
 	 */
 	@JsMethod
@@ -800,7 +800,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a canvas image source onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -816,7 +816,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -829,7 +829,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 */
@@ -839,7 +839,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a canvas onto the canvas.
 	 * 
-	 * @param canvas canvas instance to draw into the context
+	 * @param canvas canvas instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 * @param dWidth the width to draw the canvas in the destination canvas.<br>
@@ -857,7 +857,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a canvas onto the canvas.
 	 * 
-	 * @param canvas canvas instance to draw into the context
+	 * @param canvas canvas instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 * @param dWidth the width to draw the canvas in the destination canvas.<br>
@@ -872,7 +872,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a canvas onto the canvas.
 	 * 
-	 * @param canvas canvas instance to draw into the context
+	 * @param canvas canvas instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source canvas
 	 */
@@ -884,7 +884,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a canvas image source onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -900,7 +900,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -913,7 +913,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image an element to draw into the context. The specification permits any canvas image source
+	 * @param image an element to draw in the the context. The specification permits any canvas image source
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 */
@@ -923,7 +923,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image image instance to draw into the context
+	 * @param image image instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -941,7 +941,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image image instance to draw into the context
+	 * @param image image instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dWidth the width to draw the image in the destination canvas.<br>
@@ -956,7 +956,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws an image onto the canvas.
 	 * 
-	 * @param image image instance to draw into the context
+	 * @param image image instance to draw in the the context
 	 * @param dx the x-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 * @param dy the y-axis coordinate in the destination canvas at which to place the top-left corner of the source image
 	 */
@@ -1006,7 +1006,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * Draws a text string at the specified coordinates, filling the string's characters with the current fill style.<br>
 	 * An parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
-	 * @param text the string to render into the context.<br>
+	 * @param text the string to render in the the context.<br>
 	 *            The text is rendered using the settings specified by font, text align, text baseline, and direction.
 	 * @param x the x-axis coordinate of the point at which to begin drawing the text, in pixels
 	 * @param y the y-axis coordinate of the point at which to begin drawing the text, in pixels
@@ -1019,7 +1019,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Draws a text string at the specified coordinates, filling the string's characters with the current fill style.
 	 *
-	 * @param text the string to render into the context.<br>
+	 * @param text the string to render in the the context.<br>
 	 *            The text is rendered using the settings specified by font, text align, text baseline, and direction.
 	 * @param x the x-axis coordinate of the point at which to begin drawing the text, in pixels
 	 * @param y the y-axis coordinate of the point at which to begin drawing the text, in pixels
@@ -1135,7 +1135,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 * Strokes - that is, draws the outlines of - the characters of a text string at the specified coordinates.<br>
 	 * An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
-	 * @param text the text specifying the text string to render into the context.<br>
+	 * @param text the text specifying the text string to render in the the context.<br>
 	 *            The text is rendered using the settings specified by font, textAlign, textBaseline, and direction.
 	 * @param x the x-axis coordinate of the point at which to begin drawing the text
 	 * @param y the y-axis coordinate of the point at which to begin drawing the text
@@ -1148,7 +1148,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	/**
 	 * Strokes - that is, draws the outlines of - the characters of a text string at the specified coordinates.
 	 *
-	 * @param text the text specifying the text string to render into the context.<br>
+	 * @param text the text specifying the text string to render in the the context.<br>
 	 *            The text is rendered using the settings specified by font, textAlign, textBaseline, and direction.
 	 * @param x the x-axis coordinate of the point at which to begin drawing the text
 	 * @param y the y-axis coordinate of the point at which to begin drawing the text

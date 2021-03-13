@@ -49,7 +49,7 @@ public abstract class NativeArrayDoubleContainer extends NativeArrayContainer<Ar
 		if (items != null && items.length > 0) {
 			// scans items to push
 			for (double item : items) {
-				// pushes item into array
+				// pushes item in the array
 				getNativeArray().push(item);
 			}
 		}

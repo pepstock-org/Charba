@@ -58,7 +58,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -83,7 +83,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * 
 	 * @param parent zoom options, parent of this node
 	 * @param defaultOptions default PAN options to returns the default when required.
-	 * @param nativeObject stored padding values into native object to read.
+	 * @param nativeObject stored padding values in the native object to read.
 	 */
 	Pan(ZoomOptions parent, IsDefaultPan defaultOptions, NativeObject nativeObject) {
 		super(parent, defaultOptions, nativeObject);

@@ -32,38 +32,38 @@ import jsinterop.annotations.JsType;
 public final class CallbackProxy<T> {
 
 	/**
-	 * It's a java script function which maps the function <code>proxy</code> implemented into additional java script source.
+	 * It's a java script function which maps the function <code>proxy</code> implemented in the additional java script source.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	public interface Proxy {
 		/**
-		 * Call method the function <code>proxy</code> implemented into additional java script source.
+		 * Call method the function <code>proxy</code> implemented in the additional java script source.
 		 */
 		void call();
 	}
 
 	/**
-	 * Returns the function <code>proxy</code> implemented into additional java script source.
+	 * Returns the function <code>proxy</code> implemented in the additional java script source.
 	 * 
-	 * @return the proxy function <code>proxy</code> implemented into additional java script source.
+	 * @return the proxy function <code>proxy</code> implemented in the additional java script source.
 	 */
 	@JsProperty
 	public native Proxy getProxy();
 
 	/**
-	 * Returns the function <code>callback</code> implemented into additional java script source.
+	 * Returns the function <code>callback</code> implemented in the additional java script source.
 	 * 
-	 * @return the function <code>callback</code> implemented into additional java script source.
+	 * @return the function <code>callback</code> implemented in the additional java script source.
 	 */
 	@JsProperty
 	public native T getCallback();
 
 	/**
-	 * Sets the function <code>callback</code> implemented into additional java script source.
+	 * Sets the function <code>callback</code> implemented in the additional java script source.
 	 * 
-	 * @param callback the function <code>callback</code> implemented into additional java script source.
+	 * @param callback the function <code>callback</code> implemented in the additional java script source.
 	 */
 	@JsProperty
 	public native void setCallback(T callback);

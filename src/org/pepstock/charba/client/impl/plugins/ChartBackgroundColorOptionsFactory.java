@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class ChartBackgroundColorOptionsFactory extends AbstractPluginOptionsFactory<ChartBackgroundColorOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link ChartBackgroundColor#FACTORY}.
+	 * To avoid any instantiation. Use the static reference in the {@link ChartBackgroundColor#FACTORY}.
 	 */
 	ChartBackgroundColorOptionsFactory() {
 		super(ChartBackgroundColor.ID);

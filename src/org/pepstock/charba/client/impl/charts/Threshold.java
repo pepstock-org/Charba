@@ -137,7 +137,7 @@ public final class Threshold implements IsThreshold {
 	}
 
 	/**
-	 * Checks if the value passed is into threshold.
+	 * Checks if the value passed is in the threshold.
 	 * 
 	 * @param valueToCheck value to check
 	 * @param lowLimit the low limit

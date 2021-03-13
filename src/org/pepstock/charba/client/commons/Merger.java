@@ -31,7 +31,7 @@ import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * Singleton utility to merge java script object into another one and provide the service to get the chart options with all defaults.
+ * Singleton utility to merge java script object in the another one and provide the service to get the chart options with all defaults.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -51,7 +51,7 @@ public final class Merger {
 		private final String value;
 
 		/**
-		 * Creates a property with the value to use into native object.
+		 * Creates a property with the value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -128,7 +128,7 @@ public final class Merger {
 			NativeObject chartOptions = Helpers.get().clone(options.getNativeObject());
 			// merges the current chart options with the global and chart type ones
 			NativeObject wholeOptions = mergeNativeObjects(chartOptions, defaults);
-			// loads whole options into envelop
+			// loads whole options in the envelop
 			envelop.setContent(wholeOptions);
 		}
 	}
@@ -150,7 +150,7 @@ public final class Merger {
 		if (envelop != null) {
 			// gets global and chart type options merged
 			NativeObject defaults = get(type, Defaults.get().getOptions(type));
-			// loads whole options into envelop
+			// loads whole options in the envelop
 			envelop.setContent(defaults);
 		}
 	}
@@ -173,7 +173,7 @@ public final class Merger {
 		if (envelop != null && options != null && options.getContent() != null) {
 			// gets global and chart type options merged
 			NativeObject defaults = get(type, options.getContent());
-			// loads whole options into envelop
+			// loads whole options in the envelop
 			envelop.setContent(defaults);
 		}
 	}
@@ -261,13 +261,13 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
 	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
@@ -278,13 +278,13 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
 	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
@@ -295,13 +295,13 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
 	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
@@ -312,13 +312,13 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
 	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
@@ -329,13 +329,13 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) into <code>target</code> only if
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
 	 * not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
@@ -349,11 +349,11 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties in the <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @return the merged java script object
 	 */
 	private NativeObject mergeNativeObjects(NativeObject target, NativeObject source) {
@@ -365,7 +365,7 @@ public final class Merger {
 	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an {@link IllegalArgumentException}.
 	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
+	 * @param source Object to merge in the <code>target</code>.
 	 * @param property property of root java script object to add
 	 */
 	private void checkArgumentsConsistency(Object target, Object source, String property) {

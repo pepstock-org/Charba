@@ -29,7 +29,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
 interface HasFont extends IsDefaultFontContainer {
 
 	/**
-	 * Returns a font container instance to use into default methods of this interface.
+	 * Returns a font container instance to use in the default methods of this interface.
 	 * 
 	 * @return a font container instance
 	 */

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.dom.elements;
 import jsinterop.base.Js;
 
 /**
- * Utility to cast elements created into other DOM tree engines into a Charba one.
+ * Utility to cast elements created in the other DOM tree engines in the a Charba one.
  * 
  * @author Andrea "Stock" Stocchero
  *

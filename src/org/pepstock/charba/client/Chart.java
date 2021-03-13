@@ -381,9 +381,9 @@ public final class Chart {
 	}
 
 	/**
-	 * Returns the CHARBA chart or <code>null</code> if CHARBA id is not present into CAHRT.JS chart options.
+	 * Returns the CHARBA chart or <code>null</code> if CHARBA id is not present in the CAHRT.JS chart options.
 	 * 
-	 * @return the CHARBA chart or <code>null</code> if CHARBA id is not present into CAHRT.JS chart options
+	 * @return the CHARBA chart or <code>null</code> if CHARBA id is not present in the CAHRT.JS chart options
 	 */
 	@JsOverlay
 	public IsChart getChart() {

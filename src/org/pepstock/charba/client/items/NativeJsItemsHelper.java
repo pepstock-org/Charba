@@ -39,20 +39,20 @@ final class NativeJsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
+	 * Returns <code>true</code> if the property in the native object is a {@link CanvasPatternItem}.
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified.
-	 * @return <code>true</code> if the property into object is a {@link CanvasPatternItem}
+	 * @return <code>true</code> if the property in the object is a {@link CanvasPatternItem}
 	 */
 	static native boolean isCanvasPattern(Object object, String key);
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradientItem}.
+	 * Returns <code>true</code> if the property in the native object is a {@link CanvasGradientItem}.
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified.
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
+	 * @return <code>true</code> if the property in the native object is a {@link CanvasGradientItem}
 	 */
 	static native boolean isCanvasGradient(Object object, String key);
 

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * SOLID drawer does not design anything into tile.<br>
+ * SOLID drawer does not design anything in the tile.<br>
  * It maintains an empty tile, only with background color. *
  * 
  * @author Andrea "Stock" Stocchero

@@ -40,7 +40,7 @@ import org.pepstock.charba.client.items.LegendLabelItem;
 
 /**
  * Manages events from {@link HtmlLegend}, enabling and disabling event listeners on HTML elements created by plugin.<br>
- * This object is able to manage all events on CHART.JS legend also into HTML legend one.
+ * This object is able to manage all events on CHART.JS legend also in the HTML legend one.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -174,7 +174,7 @@ final class HtmlLegendCallbackProxy {
 	 */
 	private void fireEvent(IsChart chart, LegendItem selectedItem, BaseNativeEvent event) {
 		// checks if legend item is consistent
-		// and there is native chart stored into cache (must be)
+		// and there is native chart stored in the cache (must be)
 		if (selectedItem != null && Charts.hasNative(chart)) {
 			// checks if is a click event
 			if (BaseEventTypes.CLICK.equalsIgnoreCase(event.getType())) {

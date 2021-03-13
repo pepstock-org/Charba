@@ -18,7 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Type of property into animation object to determine the interpolator used.
+ * Type of property in the animation object to determine the interpolator used.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -41,7 +41,7 @@ public enum AnimationType implements Key
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */

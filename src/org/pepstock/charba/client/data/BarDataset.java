@@ -131,7 +131,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -575,7 +575,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 				array.push(borderskip.value());
 			}
 		}
-		// stores into native object
+		// stores in the native object
 		setArrayValue(Property.BORDER_SKIPPED, array);
 	}
 
@@ -738,7 +738,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	/**
 	 * Returns the data property of a data set for a chart is specified as an array of floating data.
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of floating data or an empty list if the data type is not {@link DataType#ARRAYS}.
 	 */
 	public List<FloatingData> getFloatingData(boolean binding) {
@@ -1109,7 +1109,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param property property to use to store the values
 	 * @param propertyType property to use to store the type
 	 * @param list the bar border item list.
-	 * @param array array with length 0 in order to get all list elements into an array
+	 * @param array array with length 0 in order to get all list elements in the an array
 	 * @param <T> type of border item object
 	 */
 	private <T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, List<T> list, T[] array) {

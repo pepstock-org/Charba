@@ -44,7 +44,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -80,7 +80,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	 * Creates new range element, using stored native object instance and the default values options.
 	 * 
 	 * @param defaultOptions default RANGE options to returns the default when required.
-	 * @param nativeObject stored range values into native object to read.
+	 * @param nativeObject stored range values in the native object to read.
 	 */
 	Range(IsDefaultRange defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);

@@ -25,7 +25,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.<br>
+ * Represents any web page loaded in the browser and serves as an entry point in the the web page's content, which is the DOM tree.<br>
  * It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
  * 
  * @author Andrea "Stock" Stocchero

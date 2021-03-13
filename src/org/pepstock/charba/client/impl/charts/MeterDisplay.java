@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Determines which information must be displayed into meter or gauge chart.
+ * Determines which information must be displayed in the meter or gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -45,7 +45,7 @@ public enum MeterDisplay implements Key
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */

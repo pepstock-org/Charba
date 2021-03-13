@@ -147,7 +147,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		private final boolean hasPattern;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 * @param hasPattern <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them
@@ -192,7 +192,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -234,7 +234,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -281,7 +281,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		this.gradientsContainer = new GradientsContainer(this);
 		// stores the id based on a counter
 		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
-		// sets the Charba containers into dataset java script configuration
+		// sets the Charba containers in the dataset java script configuration
 		setValue(InternalProperty.CHARBA_PATTERNS, patternsContainer);
 		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
@@ -829,7 +829,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
 	 * axis.
 	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
 	public List<Double> getData(boolean binding) {
@@ -863,7 +863,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @param factory datapoint object factory
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	final List<DataPoint> getDataPoints(DataPointFactory factory, boolean binding) {
@@ -914,7 +914,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @param factory datapoint object factory
-	 * @param binding if <code>true</code> binds the new array list into container
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
@@ -1179,13 +1179,13 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns a unique key to store canvas objects, created by callbacks, into a cache.<br>
+	 * Returns a unique key to store canvas objects, created by callbacks, in the a cache.<br>
 	 * The format is <code>[property],[datasetIndex],[dataIndex]</code>.
 	 * 
 	 * @param property property of dataset
 	 * @param datasetIndex dataset index
 	 * @param index data index
-	 * @return the key to use to store canvas object into cache
+	 * @return the key to use to store canvas object in the cache
 	 */
 	private String createCallbackCanvasObjectKey(Key property, int datasetIndex, int index) {
 		// checks if property is consistent

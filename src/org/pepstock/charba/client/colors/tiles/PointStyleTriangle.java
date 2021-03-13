@@ -19,8 +19,8 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * TRIANGLE drawer to design a {@link PointStyle#TRIANGLE} into tile.<br>
- * It designs the point style into the following tile section (A):<br>
+ * TRIANGLE drawer to design a {@link PointStyle#TRIANGLE} in the tile.<br>
+ * It designs the point style in the the following tile section (A):<br>
  * <br>
  * 
  * <pre>

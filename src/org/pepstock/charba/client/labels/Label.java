@@ -147,7 +147,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	}
 
 	/**
-	 * Java script FUNCTION callback called to get the font of render into chat.<br>
+	 * Java script FUNCTION callback called to get the font of render in the chat.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -156,7 +156,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	interface ProxyFontCallback {
 
 		/**
-		 * Method of function to be called to get the font of render into chat.
+		 * Method of function to be called to get the font of render in the chat.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item native object as callback context.
@@ -166,7 +166,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	}
 
 	/**
-	 * Java script FUNCTION callback called to get the font color of render into chat.<br>
+	 * Java script FUNCTION callback called to get the font color of render in the chat.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -175,7 +175,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	interface ProxyFontColorCallback {
 
 		/**
-		 * Method of function to be called to get the font color of render into chat.
+		 * Method of function to be called to get the font color of render in the chat.
 		 * 
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item native object as callback context.
@@ -233,7 +233,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -281,7 +281,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 * 
 	 * @param id id to apply to new label
-	 * @param defaultOptions default options stored into defaults global
+	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
 	Label(IsLabelId id, IsDefaultLabel defaultOptions, NativeObject nativeObject) {
@@ -713,7 +713,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		FONT_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), fontCallback, fontCallbackProxy.getProxy());
 		// checks if the callback is null
 		// because setting to null, the original font must be set again
-		// into the options
+		// in the the options
 		if (fontCallback == null) {
 			// stores the font
 			setValue(Property.FONT, font);

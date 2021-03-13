@@ -28,17 +28,17 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear the selection.
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have in the the chart a clickable element to clear the selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer implements IsDatasetsItemsSelectorDefaultClearSelection {
 
-	// clear selection image into URL base 64
+	// clear selection image in the URL base 64
 	private static final String CLEAR_SELECTION_18 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
-	// clear selection image into URL base 64
+	// clear selection image in the URL base 64
 	private static final String CLEAR_SELECTION_24 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
-	// clear selection image into URL base 64
+	// clear selection image in the URL base 64
 	private static final String CLEAR_SELECTION_36 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
 
 	/**
@@ -58,7 +58,7 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	public static final Img DEFAULT_CLEAR_SELECTION_36 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_36);
 
 	/**
-	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
+	 * Default flag if clear selection must be showed in the chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = false;
 
@@ -153,7 +153,7 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -179,7 +179,7 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored font values into native object to read.
+	 * @param nativeObject stored font values in the native object to read.
 	 * @param defaultOptions default clear selection element options to returns the default when required.
 	 */
 	ClearSelection(NativeObject nativeObject, IsDatasetsItemsSelectorDefaultClearSelection defaultOptions) {
@@ -188,18 +188,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param display <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
+	 * @param display <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.DISPLAY, display);
 	}
 
 	/**
-	 * Returns <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>.
+	 * Returns <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>
+	 * @return <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -453,9 +453,9 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.USE_SELECTION_STYLE, useSelectionStyle);

@@ -52,11 +52,11 @@ final class JsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasPatternItem}.
+	 * Returns <code>true</code> if the property in the native object is a {@link CanvasPatternItem}.
 	 * 
 	 * @param object the legend or tooltip item native object on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasPatternItem}
+	 * @return <code>true</code> if the property in the native object is a {@link CanvasPatternItem}
 	 */
 	boolean isCanvasPattern(NativeObject object, Key key) {
 		// checks consistency of arguments
@@ -68,11 +68,11 @@ final class JsItemsHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradientItem}.
+	 * Returns <code>true</code> if the property in the native object is a {@link CanvasGradientItem}.
 	 * 
 	 * @param object the legend or tooltip item native object on which to check the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return <code>true</code> if the property into native object is a {@link CanvasGradientItem}
+	 * @return <code>true</code> if the property in the native object is a {@link CanvasGradientItem}
 	 */
 	boolean isCanvasGradient(NativeObject object, Key key) {
 		// checks consistency of arguments

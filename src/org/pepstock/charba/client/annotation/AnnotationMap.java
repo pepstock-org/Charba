@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 
 /**
- * Object which stores all annotations by their ID into {@link AnnotationPlugin#ID} plugin.
+ * Object which stores all annotations by their ID in the {@link AnnotationPlugin#ID} plugin.
  * 
  * 
  * @author Andrea "Stock" Stocchero
@@ -107,7 +107,7 @@ class AnnotationMap extends NativeObjectContainer {
 				annotation.setDefaultDrawTime(drawTime);
 				// adds annotation
 				IsAnnotationId id = annotation.getId();
-				// stores into java script object
+				// stores in the java script object
 				setValue(id, annotation);
 			}
 		}

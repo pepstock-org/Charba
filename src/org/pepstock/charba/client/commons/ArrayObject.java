@@ -48,7 +48,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
-	 * @param item single object to load into new java script array.
+	 * @param item single object to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of ONE 1 element or <code>null</code> if argument is <code>null</code>
 	 */
@@ -65,7 +65,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
-	 * @param item list of objects to load into new java script array.
+	 * @param item list of objects to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of ONE 1 element or an empty array if argument is <code>null</code>
 	 */
@@ -86,7 +86,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from an array of native object containers.
 	 * 
-	 * @param items list of objects to load into new java script array.
+	 * @param items list of objects to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of objects or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
@@ -110,7 +110,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from an array of native object containers.
 	 * 
-	 * @param items list of objects to load into new java script array.
+	 * @param items list of objects to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of objects or an empty array if argument is <code>null</code> or length to 0
 	 */
@@ -134,7 +134,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from a list of native object containers.
 	 * 
-	 * @param items list of objects to load into new java script array.
+	 * @param items list of objects to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of objects or <code>null</code> if the argument is <code>null</code> or empty
 	 */
@@ -165,7 +165,7 @@ public final class ArrayObject extends Array {
 	/**
 	 * Creates a java script array of objects starting from a list of native object containers.
 	 * 
-	 * @param items list of objects to load into new java script array.
+	 * @param items list of objects to load in the new java script array.
 	 * @param <E> type of native object containers
 	 * @return new array instance of objects or an empty array if argument is <code>null</code> or empty
 	 */
@@ -210,7 +210,7 @@ public final class ArrayObject extends Array {
 	native int indexOf(Object value);
 
 	/**
-	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
+	 * Returns a shallow copy of a portion of an array in the a new array object selected from begin to end (end not included).<br>
 	 * The original array will not be modified.
 	 * 
 	 * @param start Zero-based index at which to begin extraction.<br>

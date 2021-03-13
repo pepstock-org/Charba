@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 /**
  * Contains all info for every item of tooltip.<br>
  * Created and passed by CHART.JS.<br>
- * It uses into the tooltips callbacks.
+ * It uses in the the tooltips callbacks.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -54,7 +54,7 @@ public class TooltipItem extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

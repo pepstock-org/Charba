@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.PropertyKey;
 
 /**
- * Represents the annotation id of a annotation configuration object into {@link AnnotationPlugin#ID} plugin.
+ * Represents the annotation id of a annotation configuration object in the {@link AnnotationPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -89,7 +89,7 @@ public interface IsAnnotationId extends PropertyKey {
 	static IsAnnotationId checkAndGetAnnotationID(String id, IsAnnotationId defaultValue) {
 		// checks if default value is consistent
 		if (IsAnnotationId.isValid(id)) {
-			// creates new annotation configuration object id with id stored into the object
+			// creates new annotation configuration object id with id stored in the the object
 			return IsAnnotationId.create(id);
 		}
 		// if here not, default value is not consistent

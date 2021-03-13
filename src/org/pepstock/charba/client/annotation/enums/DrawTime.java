@@ -35,7 +35,7 @@ public enum DrawTime implements Key
 	private final String value;
 
 	/**
-	 * Creates a draw time property value to use into native object.
+	 * Creates a draw time property value to use in the native object.
 	 * 
 	 * @param value value of draw time property name
 	 */

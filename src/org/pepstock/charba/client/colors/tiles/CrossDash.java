@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * CROSSDASH drawer to design a cross - dash into tile.<br>
- * It designs a cross and a dash into the following tile sections (A and B):<br>
+ * CROSSDASH drawer to design a cross - dash in the tile.<br>
+ * It designs a cross and a dash in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -54,9 +54,9 @@ final class CrossDash extends ShapeDrawer {
 		final double halfSize = size / 2D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape (CROSS) into A section
+		// designs the shape (CROSS) in the A section
 		cross.drawCross(context, size, 0D, 0D);
-		// designs the shape (DASH) into B section
+		// designs the shape (DASH) in the B section
 		dash.drawDash(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
 		context.stroke();

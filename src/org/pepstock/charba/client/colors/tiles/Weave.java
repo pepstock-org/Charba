@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * WEAVE drawer to design a weave into tile.<br>
- * It designs a weave into the following tile sections (A and B):<br>
+ * WEAVE drawer to design a weave in the tile.<br>
+ * It designs a weave in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -48,13 +48,13 @@ final class Weave extends ShapeDrawer {
 	protected void drawTile(Context2dItem context, String backgroundColor, String shapeColor, int size) {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A and B section
+		// designs the shape in the A and B section
 		drawWeave(context, size, 0D, 0D);
 		context.stroke();
 	}
 
 	/**
-	 * Designs a weave into a tile section.
+	 * Designs a weave in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square
@@ -64,10 +64,10 @@ final class Weave extends ShapeDrawer {
 	void drawWeave(Context2dItem context, int size, double offsetX, double offsetY) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
-		// designs the shape into A section
+		// designs the shape in the A section
 		context.moveTo(offsetX + 1D, offsetY + 1D);
 		context.lineTo(halfSize - 1D, halfSize - 1D);
-		// designs the shape into B section
+		// designs the shape in the B section
 		context.moveTo(halfSize + 1D, size - 1D);
 		context.lineTo(size - 1D, halfSize + 1D);
 	}

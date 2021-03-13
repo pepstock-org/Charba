@@ -88,7 +88,7 @@ public interface IsScaleId extends PropertyKey {
 	/**
 	 * Returns the ID of the scale checking the default ones, {@link DefaultScaleId}.
 	 * 
-	 * @param id scale id value stored into a object
+	 * @param id scale id value stored in the a object
 	 * @param defaultValue the default value if not exist
 	 * @return the ID of the scale
 	 */
@@ -104,7 +104,7 @@ public interface IsScaleId extends PropertyKey {
 					return scaleId;
 				}
 			}
-			// creates new scale id with id stored into the object
+			// creates new scale id with id stored in the the object
 			return IsScaleId.create(id);
 		}
 		// if here not, default value is not consistent

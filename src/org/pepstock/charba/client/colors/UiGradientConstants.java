@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 /**
- * Contains all colors used into {@link UiGradient}, to avoid to have more instances of the same color into {@link UiGradient} definition.
+ * Contains all colors used in the {@link UiGradient}, to avoid to have more instances of the same color in the {@link UiGradient} definition.
  * 
  * @author Andrea "Stock" Stocchero
  *

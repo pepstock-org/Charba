@@ -27,7 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class HtmlLegendOptionsFactory extends AbstractPluginOptionsFactory<HtmlLegendOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link HtmlLegend#FACTORY}.
+	 * To avoid any instantiation. Use the static reference in the {@link HtmlLegend#FACTORY}.
 	 */
 	HtmlLegendOptionsFactory() {
 		super(HtmlLegend.ID);

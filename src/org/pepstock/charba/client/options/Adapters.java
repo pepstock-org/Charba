@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 
 /**
- * The following adapters element is used to configure a date adapter, injecting to support time series into CHART.JS.
+ * The following adapters element is used to configure a date adapter, injecting to support time series in the CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -37,7 +37,7 @@ public final class Adapters extends AbstractModel<AbstractScale, IsDefaultAdapte
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

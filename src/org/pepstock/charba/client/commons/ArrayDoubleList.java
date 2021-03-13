@@ -66,7 +66,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Loads an array of elements into the list
+	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
@@ -195,7 +195,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	public void add(int index, Double element) {
 		// checks if element is consistent
 		if (element != null) {
-			// inserts into array
+			// inserts in the array
 			array.insertAt(index, element);
 		}
 	}

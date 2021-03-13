@@ -46,7 +46,7 @@ public final class Charts {
 	}
 
 	/**
-	 * Adds new charts life cycle listener instance into collection.
+	 * Adds new charts life cycle listener instance in the collection.
 	 * 
 	 * @param listener chart life cycle listener instance
 	 */
@@ -75,7 +75,7 @@ public final class Charts {
 	}
 
 	/**
-	 * Adds new charts instance into collection.
+	 * Adds new charts instance in the collection.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -96,7 +96,7 @@ public final class Charts {
 	}
 
 	/**
-	 * Adds new CHART.JS charts instance into collection.
+	 * Adds new CHART.JS charts instance in the collection.
 	 * 
 	 * @param chart chart instance
 	 */

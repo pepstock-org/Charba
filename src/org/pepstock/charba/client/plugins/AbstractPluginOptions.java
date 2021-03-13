@@ -56,7 +56,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -161,50 +161,50 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Stores this options into default global plugins options.
+	 * Stores this options in the default global plugins options.
 	 */
 	public void store() {
-		// stores itself into defaults
+		// stores itself in the defaults
 		Defaults.get().getGlobal().getPlugins().setOptions(this);
 	}
 
 	/**
-	 * Stores this options into chart plugins options.
+	 * Stores this options in the chart plugins options.
 	 * 
 	 * @param chart chart instance
 	 */
 	public final void store(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
-			// stores itself into chart configuration
+			// stores itself in the chart configuration
 			chart.getOptions().getPlugins().setOptions(this);
 		}
 	}
 
 	/**
-	 * Stores this options into global chart plugins options.
+	 * Stores this options in the global chart plugins options.
 	 * 
-	 * @param type chart type to store options into global chart options
+	 * @param type chart type to store options in the global chart options
 	 */
 	public final void store(Type type) {
 		// checks if type is consistent
 		if (Type.isValid(type)) {
 			// gets chart options by type
 			ChartOptions chartOptions = Defaults.get().getOptions(type);
-			// stores itself into global chart options
+			// stores itself in the global chart options
 			chartOptions.getPlugins().setOptions(this);
 		}
 	}
 
 	/**
-	 * Stores this options into dataset options.
+	 * Stores this options in the dataset options.
 	 * 
 	 * @param dataset dataset instance to store options
 	 */
 	public final void store(Dataset dataset) {
 		// checks if type is consistent
 		if (dataset != null) {
-			// stores itself into dataset
+			// stores itself in the dataset
 			dataset.setOptions(this);
 		}
 	}

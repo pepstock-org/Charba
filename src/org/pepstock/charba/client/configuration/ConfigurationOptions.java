@@ -63,7 +63,7 @@ import jsinterop.annotations.JsFunction;
 
 /**
  * Base object which maps chart configuration.<br>
- * Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
+ * Charba stores the unique chart ID in the CHART.JS chart options using <code>charbaId</code> property key.<br>
  * Important topics to take care:<br>
  * <b> Responsive </b><br>
  * When it comes to change the chart size based on the window size, a major limitation is that the canvas render size (canvas.width and .height) can not be expressed with relative
@@ -712,7 +712,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
-		// loads the native object into configuration to pass to chart
+		// loads the native object in the configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
 
@@ -783,7 +783,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				// gets charba id of scale
 				final int charbaIdOfScale = scaleItem.getCharbaId();
 				// checks if undefined
-				// means no axis configured into chart
+				// means no axis configured in the chart
 				if (charbaIdOfScale != UndefinedValues.INTEGER) {
 					// gets the axis by charba id
 					axis = getAxisById(charbaIdOfScale);

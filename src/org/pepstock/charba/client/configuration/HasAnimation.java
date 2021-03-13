@@ -19,7 +19,7 @@ import org.pepstock.charba.client.options.IsAnimations;
 
 /**
  * Defines a configuration element which is managing the ANIMATION options.<br>
- * It has being used into options and datasets instances where ANIMATION is required.
+ * It has being used in the options and datasets instances where ANIMATION is required.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.IsAnimations;
 public interface HasAnimation{
 
 	/**
-	 * Returns an animation container instance to use into default methods of this interface.
+	 * Returns an animation container instance to use in the default methods of this interface.
 	 * 
 	 * @return an animation container instance
 	 */

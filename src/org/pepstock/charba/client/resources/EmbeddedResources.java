@@ -97,7 +97,7 @@ public final class EmbeddedResources extends AbstractResources implements IsReso
 	 * If the resource does not have the right name, throws an {@link IllegalArgumentException}.
 	 * 
 	 * @param resource injectable resource instance to check
-	 * @param resourceName the resource name which must be applied into reosurce instance
+	 * @param resourceName the resource name which must be applied in the reosurce instance
 	 * @return injectable resource instance passed as argument
 	 */
 	private AbstractInjectableResource checkAndGetDateTimeResourceName(AbstractInjectableResource resource, ResourceName resourceName) {

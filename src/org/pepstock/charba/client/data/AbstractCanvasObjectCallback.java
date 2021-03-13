@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
 /**
  * Callback to set a {@link CanvasObject} as background color.<br>
- * This is used and set into data set when a canvas object is set for a background color.
+ * This is used and set in the data set when a canvas object is set for a background color.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of canvas object
@@ -42,10 +42,10 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 	private List<T> objects = null;
 
 	/**
-	 * Creates the callback using the container of canvas object and the property related to the canvas object to set into dataset.
+	 * Creates the callback using the container of canvas object and the property related to the canvas object to set in the dataset.
 	 * 
 	 * @param container container of canvas object instance.
-	 * @param property the property related to the canvas object to set into data set
+	 * @param property the property related to the canvas object to set in the data set
 	 */
 	AbstractCanvasObjectCallback(AbstractContainer<T> container, CanvasObjectKey property) {
 		this.property = Key.checkAndGetIfValid(property);

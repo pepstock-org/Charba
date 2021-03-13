@@ -65,7 +65,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -89,7 +89,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * Creates new padding element, using stored native object instance and the default values options.
 	 * 
 	 * @param parent zoom options, parent of this node
-	 * @param nativeObject stored padding values into native object to read.
+	 * @param nativeObject stored padding values in the native object to read.
 	 * @param defaultOptions default ZOOM options to returns the default when required.
 	 */
 	Zoom(ZoomOptions parent, IsDefaultZoom defaultOptions, NativeObject nativeObject) {

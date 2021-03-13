@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Base object to to manage point style property into the options.
+ * Base object to to manage point style property in the the options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +44,7 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 		private final String value;
 
 		/**
-		 * Creates with the property value to use into native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */

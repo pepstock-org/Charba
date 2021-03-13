@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * RING drawer to design a ring into tile.<br>
- * It designs a ring into the following tile sections (A and B):<br>
+ * RING drawer to design a ring in the tile.<br>
+ * It designs a ring in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -52,9 +52,9 @@ final class Ring extends Dot {
 		final double diameter = size / 5D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawDot(context, size, 0D, 0D, diameter);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// draws the current path with the current stroke style
 		context.stroke();

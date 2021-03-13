@@ -60,7 +60,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 */
 	protected AbstractChartWidget(C chart) {
 		// creates the simple panel casting the div element of the chart
-		// into a GWT element
+		// in the a GWT element
 		super((Element) IsChart.checkAndGetIfConsistent(chart).getChartElement().as());
 		// stores the chart
 		this.chart = chart;

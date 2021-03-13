@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.TextDirection;
 interface HasTextDirection extends IsDefaultTextDirectionHandler {
 
 	/**
-	 * Returns a text direction handler instance to use into default methods of this interface.
+	 * Returns a text direction handler instance to use in the default methods of this interface.
 	 * 
 	 * @return a text direction handler instance
 	 */

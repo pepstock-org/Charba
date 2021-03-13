@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.IsFill;
 
 /**
  * Defines a configuration element which is managing the FILL property.<br>
- * It has being used into options and datasets instances where FILL is required.
+ * It has being used in the options and datasets instances where FILL is required.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.IsFill;
 public interface HasFill extends IsDefaultFillHandler {
 
 	/**
-	 * Returns a fill handler instance to use into default methods of this interface.
+	 * Returns a fill handler instance to use in the default methods of this interface.
 	 * 
 	 * @return a fill handler instance
 	 */

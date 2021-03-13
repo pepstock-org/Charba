@@ -18,7 +18,7 @@ package org.pepstock.charba.client.datalabels;
 import org.pepstock.charba.client.commons.PropertyKey;
 
 /**
- * Represents the label id of a label configuration object into {@link DataLabelsPlugin#ID} plugin.
+ * Represents the label id of a label configuration object in the {@link DataLabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

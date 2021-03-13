@@ -20,7 +20,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Defines a configuration element which is managing the SPANGAPS property.<br>
- * It has being used into options and datasets instances where SPANGAPS is required.
+ * It has being used in the options and datasets instances where SPANGAPS is required.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public interface HasSpanGaps {
 
 	/**
-	 * Returns a span gap handler instance to use into default methods of this interface.
+	 * Returns a span gap handler instance to use in the default methods of this interface.
 	 * 
 	 * @return a span gap handler instance
 	 */

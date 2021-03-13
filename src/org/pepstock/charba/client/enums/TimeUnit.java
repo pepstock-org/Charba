@@ -65,7 +65,7 @@ public enum TimeUnit implements Key
 	private final String value;
 
 	/**
-	 * Creates a time unit with its property name to use into options.
+	 * Creates a time unit with its property name to use in the options.
 	 * 
 	 * @param value time unit as string
 	 */

@@ -65,7 +65,7 @@ public enum AxisType implements Key
 	private final ScaleDataType dataType;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param defaultScaleId default scale id for this axis type

@@ -27,8 +27,8 @@ import org.pepstock.charba.client.dom.elements.TextNode;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
 
 /**
- * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page of application, into the HEAD.<br>
- * It enables also to inject other script into web page, necessary when you want to use some Chart.JS extensions.<br>
+ * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) in the the web page of application, in the the HEAD.<br>
+ * It enables also to inject other script in the web page, necessary when you want to use some Chart.JS extensions.<br>
  * It tracks the resources which have been injected using as key their name and class name to avoid that however will inject own resources will use the same name of already
  * injected resources.
  * 
@@ -63,7 +63,7 @@ public final class Injector {
 			Script scriptElement = DOMBuilder.get().createScriptElement();
 			// sets chart set
 			scriptElement.setCharset(SCRIPT_ELEMENT_CHARTSET);
-			// injects it into SCRIPT element
+			// injects it in the SCRIPT element
 			ensureInjected(resource, scriptElement);
 		}
 	}
@@ -78,7 +78,7 @@ public final class Injector {
 		if (resource != null) {
 			// creates a style element
 			Style styleElement = DOMBuilder.get().createStyleElement();
-			// injects it into STYLE element
+			// injects it in the STYLE element
 			ensureInjected(resource, styleElement);
 		}
 	}

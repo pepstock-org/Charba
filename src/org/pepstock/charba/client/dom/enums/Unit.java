@@ -38,7 +38,7 @@ public enum Unit implements Key
 	private final String value;
 
 	/**
-	 * Creates with the suffix value to use into size.
+	 * Creates with the suffix value to use in the size.
 	 * 
 	 * @param value suffix value of unit
 	 */

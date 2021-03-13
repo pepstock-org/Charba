@@ -72,7 +72,7 @@ public final class GlobalPlugins {
 			// creates a java script object, wrapper of the plugin
 			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 			JsPluginHelper.get().register(wPlugin);
-			// stores the id and object into a map
+			// stores the id and object in the a map
 			pluginIds.put(plugin.getId(), wPlugin);
 			return true;
 		}
@@ -118,7 +118,7 @@ public final class GlobalPlugins {
 		final Set<String> pluginsIds = new HashSet<>();
 		// scans ids
 		for (Key key : plugins.ids()) {
-			// stors into results
+			// stors in the results
 			pluginsIds.add(key.value());
 		}
 		return pluginsIds;
@@ -183,7 +183,7 @@ public final class GlobalPlugins {
 			// otherwise do nothing
 			return;
 		}
-		// sets into chart all global plugins to be disable
+		// sets in the chart all global plugins to be disable
 		for (String id : pluginsToBeDisabled) {
 			// if the plugin does not have any options or is not disable by options
 			if (!chart.getOptions().getPlugins().hasEnabled(id)) {

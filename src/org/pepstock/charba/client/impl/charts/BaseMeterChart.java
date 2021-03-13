@@ -35,7 +35,7 @@ import org.pepstock.charba.client.options.AnimationTransition;
 abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart implements IsDatasetCreator<D> {
 
 	/**
-	 * Default of maximum value of data into a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
+	 * Default of maximum value of data in the a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
 	 */
 	public static final double DEFAULT_MAX = 100D;
 	// controller instance

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Dataset;
 
 /**
- * Enumeration with all possible types of data set into dataset.
+ * Enumeration with all possible types of data set in the dataset.
  * 
  * @author Andrea "Stock" Stocchero
  * @see Dataset
@@ -52,7 +52,7 @@ public enum DataType implements Key
 	private final String value;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 */

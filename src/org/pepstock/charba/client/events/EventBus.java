@@ -55,7 +55,7 @@ final class EventBus {
 		}
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
-			// if yes, stores the add handler into actions list
+			// if yes, stores the add handler in the actions list
 			deferredHandlerActions.add(() -> doAddNow(handler, type));
 		} else {
 			// if here, no event firing that add handler
@@ -79,7 +79,7 @@ final class EventBus {
 		}
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
-			// if yes, stores the add handler into actions list
+			// if yes, stores the add handler in the actions list
 			deferredHandlerActions.add(() -> doRemoveNow(handler, type));
 		} else {
 			// if here, no event firing that add handler

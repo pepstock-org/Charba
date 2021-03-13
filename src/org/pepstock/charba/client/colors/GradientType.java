@@ -48,7 +48,7 @@ public enum GradientType implements Key
 	private final String cssStatement;
 
 	/**
-	 * Creates with the property value to use into native object.
+	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
 	 * @param cssStatement the CSS statement which represents the gradient type

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.AxisItem;
 public interface AxisTickToLabelConversionCallback {
 
 	/**
-	 * Callback that runs before ticks are converted into strings.
+	 * Callback that runs before ticks are converted in the strings.
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
@@ -34,7 +34,7 @@ public interface AxisTickToLabelConversionCallback {
 	void onBeforeTickToLabelConversion(Axis axis, AxisItem item);
 
 	/**
-	 * Callback that runs after ticks are converted into strings.
+	 * Callback that runs after ticks are converted in the strings.
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance

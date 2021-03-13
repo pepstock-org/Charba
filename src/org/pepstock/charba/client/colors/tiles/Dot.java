@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
- * DOT drawer to design a dot into tile.<br>
- * It designs a dot into the following tile sections (A and B):<br>
+ * DOT drawer to design a dot in the tile.<br>
+ * It designs a dot in the the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -52,16 +52,16 @@ class Dot extends ShapeDrawer {
 		final double diameter = size / 10D;
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
-		// designs the shape into A section
+		// designs the shape in the A section
 		drawDot(context, size, 0D, 0D, diameter);
-		// designs the shape into B section
+		// designs the shape in the B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// fills the current path
 		context.fill();
 	}
 
 	/**
-	 * Designs a dot into a tile section.
+	 * Designs a dot in the a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square

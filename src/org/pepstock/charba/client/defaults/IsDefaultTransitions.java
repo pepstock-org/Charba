@@ -25,15 +25,15 @@ import org.pepstock.charba.client.options.IsTransitionKey;
 public interface IsDefaultTransitions {
 
 	/**
-	 * Returns <code>true</code> if an animation transition instance is stored into the animation options.
+	 * Returns <code>true</code> if an animation transition instance is stored in the the animation options.
 	 * 
-	 * @param transition transition instance used to check into animation options
-	 * @return <code>true</code> if an animation collection instance is stored into the animation options
+	 * @param transition transition instance used to check in the animation options
+	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
 	 */
 	boolean has(IsTransitionKey transition);
 
 	/**
-	 * Returns an animation transition instance if stored into the animation options.
+	 * Returns an animation transition instance if stored in the the animation options.
 	 * 
 	 * @param transition transition instance used to get for animation options
 	 * @return an animation transition instance or <code>null</code> if does not exists

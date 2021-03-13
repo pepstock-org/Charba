@@ -25,7 +25,7 @@ import java.util.List;
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as back-end to store objects (integers).<br>
  * <br>
- * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable into javascript part but
+ * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable in the javascript part but
  * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
@@ -69,7 +69,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	}
 
 	/**
-	 * Loads an array of elements into the list
+	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
@@ -202,7 +202,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	public void add(int index, Integer element) {
 		// checks if element is consistent
 		if (element != null) {
-			// inserts into array
+			// inserts in the array
 			array.insertAt(index, element);
 		}
 	}
