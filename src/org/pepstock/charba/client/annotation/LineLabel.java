@@ -540,7 +540,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param heightPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	public void setHeight(String heightPercentage) {
+	public void setHeightAsPercentage(String heightPercentage) {
 		setValue(Property.HEIGHT, heightPercentage);
 	}
 
@@ -566,14 +566,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	@Override
-	public String getHeightAsString() {
+	public String getHeightAsPercentage() {
 		// checks if the property is set as a string
 		if (isType(Property.HEIGHT, ObjectType.STRING)) {
-			return getValue(Property.HEIGHT, defaultValues.getHeightAsString());
+			return getValue(Property.HEIGHT, defaultValues.getHeightAsPercentage());
 		}
 		// if here is not a string then
 		// returns the default
-		return defaultValues.getHeightAsString();
+		return defaultValues.getHeightAsPercentage();
 	}
 
 	/**
@@ -590,7 +590,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param widthPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	public void setWidth(String widthPercentage) {
+	public void setWidthAsPercentage(String widthPercentage) {
 		setValue(Property.WIDTH, widthPercentage);
 	}
 
@@ -616,14 +616,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	@Override
-	public String getWidthAsString() {
+	public String getWidthAsPercentage() {
 		// checks if the property is set as a string
 		if (isType(Property.WIDTH, ObjectType.STRING)) {
-			return getValue(Property.WIDTH, defaultValues.getWidthAsString());
+			return getValue(Property.WIDTH, defaultValues.getWidthAsPercentage());
 		}
 		// if here is not a string then
 		// returns the default
-		return defaultValues.getWidthAsString();
+		return defaultValues.getWidthAsPercentage();
 	}
 
 }

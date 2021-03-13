@@ -150,7 +150,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	default String getHeightAsString() {
+	default String getHeightAsPercentage() {
 		return null;
 	}
 
@@ -168,7 +168,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	default String getWidthAsString() {
+	default String getWidthAsPercentage() {
 		return null;
 	}
 }
