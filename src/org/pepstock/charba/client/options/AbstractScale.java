@@ -37,6 +37,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * <li>logarithmic
  * <li>category
  * <li>time
+ * <li>time series
  * <li>radial linear
  * </ul>
  * <br>
@@ -80,6 +81,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		TITLE("title"),
 		// linear cartesian
 		BEGIN_AT_ZERO("beginAtZero"),
+		GRACE("grace"),
 		MIN("min"),
 		MAX("max"),
 		SUGGESTED_MAX("suggestedMax"),
@@ -239,6 +241,60 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
+	}
+
+	/**
+	 * Sets the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @param grace the value in pixels is added to the maximum data value and subtracted from the minimum data
+	 */
+	public final void setGrace(int grace) {
+		setValueAndAddToParent(Property.GRACE, grace);
+	}
+
+	/**
+	 * Returns the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in pixels is added to the maximum data value and subtracted from the minimum data
+	 */
+	@Override
+	public final int getGrace() {
+		// checks if the property is a number
+		if (isType(Property.GRACE, ObjectType.NUMBER)) {
+			return getValue(Property.GRACE, getDefaultValues().getGrace());
+		}
+		// if here, the property is not a number
+		// then returns the default
+		return getDefaultValues().getGrace();
+	}
+
+	/**
+	 * Sets the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @param grace the value in percentage is added to the maximum data value and subtracted from the minimum data
+	 */
+	public final void setGraceAsPercentage(String grace) {
+		setValueAndAddToParent(Property.GRACE, grace);
+	}
+
+	/**
+	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
+	 */
+	@Override
+	public final String getGraceAsPercentage() {
+		// checks if the property is a string
+		if (isType(Property.GRACE, ObjectType.STRING)) {
+			return getValue(Property.GRACE, getDefaultValues().getGraceAsPercentage());
+		}
+		// if here, the property is not a string
+		// then returns the default
+		return getDefaultValues().getGraceAsPercentage();
 	}
 
 	/**

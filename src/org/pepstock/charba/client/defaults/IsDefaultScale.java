@@ -83,6 +83,22 @@ public interface IsDefaultScale {
 	boolean isBeginAtZero();
 
 	/**
+	 * Returns the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in pixels is added to the maximum data value and subtracted from the minimum data
+	 */
+	int getGrace();
+
+	/**
+	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
+	 */
+	String getGraceAsPercentage();
+
+	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.

@@ -211,6 +211,26 @@ public final class DefaultChartScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGrace()
+	 */
+	@Override
+	public int getGrace() {
+		return scale.getGrace();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGraceAsPercentage()
+	 */
+	@Override
+	public String getGraceAsPercentage() {
+		return scale.getGraceAsPercentage();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMin()
 	 */
 	@Override

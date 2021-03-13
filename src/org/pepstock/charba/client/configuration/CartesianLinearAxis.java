@@ -114,5 +114,45 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	public CartesianLinearTick getTicks() {
 		return ticks;
 	}
+	
+	/**
+	 * Sets the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @param grace the value in pixels is added to the maximum data value and subtracted from the minimum data
+	 */
+	public void setGrace(int grace) {
+		getScale().setGrace(grace);
+	}
+
+	/**
+	 * Returns the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in pixels is added to the maximum data value and subtracted from the minimum data
+	 */
+	public int getGrace() {
+		return getScale().getGrace();
+	}
+
+	/**
+	 * Sets the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @param grace the value in percentage is added to the maximum data value and subtracted from the minimum data
+	 */
+	public void setGraceAsPercentage(String grace) {
+		getScale().setGraceAsPercentage(grace);
+	}
+
+	/**
+	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * This extends the scale range as if the data values were that much greater.
+	 * 
+	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
+	 */
+	public String getGraceAsPercentage() {
+		return getScale().getGraceAsPercentage();
+	}
 
 }

@@ -31,6 +31,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * <li>logarithmic
  * <li>category
  * <li>time
+ * <li>time series
  * <li>radial linear
  * </ul>
  * <br>
