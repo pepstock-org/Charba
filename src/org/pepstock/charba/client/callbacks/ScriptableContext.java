@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScriptableContext extends AbstractScriptableContext {
+public class ScriptableContext extends AbstractScriptableContext {
 
 	/**
 	 * Name of properties of native object.
@@ -116,7 +116,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return true if element is active (hovered)
 	 */
-	public boolean isActive() {
+	public final boolean isActive() {
 		return getValue(Property.ACTIVE, false);
 	}
 
@@ -125,7 +125,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the index of the current data set.
 	 */
-	public int getDatasetIndex() {
+	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
@@ -134,7 +134,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the index of the current data.
 	 */
-	public int getDataIndex() {
+	public final int getDataIndex() {
 		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
 	}
 
@@ -143,7 +143,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the parsed data value for the given dataIndex and datasetIndex
 	 */
-	public DatasetPoint getParsed() {
+	public final DatasetPoint getParsed() {
 		// checks if point object is not already created
 		if (dataPoint == null) {
 			// stores point
@@ -157,7 +157,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the raw data value for the given dataIndex and datasetIndex
 	 */
-	public DataItem getRaw() {
+	public final DataItem getRaw() {
 		// checks if raw object is not already created
 		if (rawData == null) {
 			// stores point
@@ -171,7 +171,7 @@ public final class ScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @return the element (point, arc, bar, etc.) for this data
 	 */
-	public DatasetElement getElement() {
+	public final DatasetElement getElement() {
 		// checks if element object is not already created
 		if (element == null) {
 			// stores element

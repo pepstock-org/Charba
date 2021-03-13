@@ -138,5 +138,15 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer{
 		// if here, argument is not consistent
 		return null;
 	}
+	
+	/**
+	 * Returns <code>true</code> if the context is consistent.<br>
+	 * Custom context (the plugin ones) should extend it and check if the context is consistent before invoking the callback.
+	 * 
+	 * @return <code>true</code> if the context is consistent
+	 */
+	protected boolean isConsistent() {
+		return true;
+	}
 
 }
