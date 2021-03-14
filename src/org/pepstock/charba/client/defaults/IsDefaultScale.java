@@ -41,11 +41,11 @@ public interface IsDefaultScale {
 	IsDefaultTicks getTicks();
 
 	/**
-	 * Returns the grid lines defaults.
+	 * Returns the grid defaults.
 	 * 
-	 * @return the grid lines defaults.
+	 * @return the grid defaults.
 	 */
-	IsDefaultGridLines getGridLines();
+	IsDefaultGrid getGrid();
 
 	/**
 	 * Returns the angle lines default.

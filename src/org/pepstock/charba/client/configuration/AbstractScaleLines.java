@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLines;
 
 /**
- * The scale lines configuration ({@link GridLines} and {@link RadialAngleLines}) defines options for the lines that run a the axis.
+ * The scale lines configuration ({@link Grid} and {@link RadialAngleLines}) defines options for the lines that run a the axis.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -88,7 +88,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	/**
 	 * Builds the object storing the axis which this scale lines belongs to.
 	 * 
-	 * @param axis axis which scale grid lines belongs to.
+	 * @param axis axis which scale grid belongs to.
 	 * @param defaultValues default value to use
 	 */
 	AbstractScaleLines(Axis axis, IsDefaultScaleLines defaultValues) {

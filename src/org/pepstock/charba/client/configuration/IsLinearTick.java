@@ -33,9 +33,9 @@ public interface IsLinearTick extends IsNumericTick {
 	Axis getAxis();
 
 	/**
-	 * Sets the maximum number of ticks and grid lines to show.
+	 * Sets the maximum number of ticks and grid to show.
 	 * 
-	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
+	 * @param maxTicksLimit maximum number of ticks and grid to show.
 	 */
 	default void setMaxTicksLimit(int maxTicksLimit) {
 		// checks if axis is consistent
@@ -45,9 +45,9 @@ public interface IsLinearTick extends IsNumericTick {
 	}
 
 	/**
-	 * Returns the maximum number of ticks and grid lines to show.
+	 * Returns the maximum number of ticks and grid to show.
 	 * 
-	 * @return maximum number of ticks and grid lines to show.
+	 * @return maximum number of ticks and grid to show.
 	 */
 	default int getMaxTicksLimit() {
 		// checks if axis is consistent

@@ -255,10 +255,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	/**
 	 * If set to false the axis is hidden from view.<br>
-	 * Overrides {@link GridLines#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
+	 * Overrides {@link Grid#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
 	 * 
 	 * @param display If set to false the axis is hidden from view.<br>
-	 *            Overrides {@link GridLines#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
+	 *            Overrides {@link Grid#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
 	 */
 	public void setDisplay(boolean display) {
 		getScale().setDisplay(display);

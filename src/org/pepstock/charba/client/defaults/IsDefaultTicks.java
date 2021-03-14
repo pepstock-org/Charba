@@ -100,9 +100,9 @@ public interface IsDefaultTicks extends IsDefaultFontContainer {
 	int getPadding();
 
 	/**
-	 * Returns the maximum number of ticks and gridlines to show.
+	 * Returns the maximum number of ticks and grid to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show.
+	 * @return maximum number of ticks and grid to show.
 	 */
 	int getMaxTicksLimit();
 

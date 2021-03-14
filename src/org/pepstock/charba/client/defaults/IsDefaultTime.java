@@ -54,9 +54,9 @@ public interface IsDefaultTime {
 	TimeUnit getUnit();
 
 	/**
-	 * The number of units between grid lines.
+	 * The number of units between grid.
 	 * 
-	 * @return The number of units between grid lines.
+	 * @return The number of units between grid.
 	 */
 	double getStepSize();
 

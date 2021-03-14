@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
-import org.pepstock.charba.client.defaults.IsDefaultGridLines;
+import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
@@ -60,7 +60,7 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
-	private final DefaultGridLines gridLines = new DefaultGridLines();
+	private final DefaultGrid grid = new DefaultGrid();
 
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
 
@@ -92,11 +92,11 @@ public final class DefaultScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGridLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGrid()
 	 */
 	@Override
-	public IsDefaultGridLines getGridLines() {
-		return gridLines;
+	public IsDefaultGrid getGrid() {
+		return grid;
 	}
 
 	/*

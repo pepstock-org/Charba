@@ -48,7 +48,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale, HasLabels {
 
 	// adds sub elements
-	private final GridLines gridLines;
+	private final Grid grid;
 
 	private final Ticks ticks;
 
@@ -77,7 +77,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// cartesian
 		POSITION("position"),
 		OFFSET("offset"),
-		GRID_LINES("gridLines"),
+		GRID("grid"),
 		TITLE("title"),
 		// linear cartesian
 		BEGIN_AT_ZERO("beginAtZero"),
@@ -134,7 +134,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		super(null, null, defaultValues, nativeObject);
 		// gets all sub elements
 		this.angleLines = new AngleLines(this, Property.ANGLE_LINES, getDefaultValues().getAngleLines(), getValue(Property.ANGLE_LINES));
-		this.gridLines = new GridLines(this, Property.GRID_LINES, getDefaultValues().getGridLines(), getValue(Property.GRID_LINES));
+		this.grid = new Grid(this, Property.GRID, getDefaultValues().getGrid(), getValue(Property.GRID));
 		this.pointLabels = new PointLabels(this, Property.POINT_LABELS, getDefaultValues().getPointLabels(), getValue(Property.POINT_LABELS));
 		this.title = new ScaleTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		this.ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
@@ -175,13 +175,13 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * Returns the grid lines element.
+	 * Returns the grid element.
 	 * 
-	 * @return the grid lines
+	 * @return the grid
 	 */
 	@Override
-	public final GridLines getGridLines() {
-		return gridLines;
+	public final Grid getGrid() {
+		return grid;
 	}
 
 	/**

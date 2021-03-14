@@ -16,14 +16,14 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.defaults.IsDefaultGridLines;
+import org.pepstock.charba.client.defaults.IsDefaultGrid;
 
 /**
- * CHART.JS default values for GRIDLINES element.
+ * CHART.JS default values for GRID element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultGridLines implements IsDefaultGridLines {
+public final class DefaultGrid implements IsDefaultGrid {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
@@ -39,7 +39,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final int DEFAULT_TICK_MARK_LENGTH = 10;
 
-	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
+	private static final boolean DEFAULT_OFFSET = false;
 
 	private static final boolean DEFAULT_CIRCULAR = false;
 
@@ -48,14 +48,14 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultGridLines() {
+	DefaultGrid() {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -65,7 +65,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
@@ -75,7 +75,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getBorderDashOffset()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderDashOffset()
 	 */
 	@Override
 	public double getBorderDashOffset() {
@@ -85,7 +85,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getLineWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getLineWidth()
 	 */
 	@Override
 	public int getLineWidth() {
@@ -95,7 +95,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isDrawBorder()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isDrawBorder()
 	 */
 	@Override
 	public boolean isDrawBorder() {
@@ -105,7 +105,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isDrawOnChartArea()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isDrawOnChartArea()
 	 */
 	@Override
 	public boolean isDrawOnChartArea() {
@@ -115,7 +115,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isDrawTicks()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isDrawTicks()
 	 */
 	@Override
 	public boolean isDrawTicks() {
@@ -125,7 +125,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickLength()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getTickLength()
 	 */
 	@Override
 	public int getTickLength() {
@@ -135,17 +135,17 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isOffsetGridLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isOffset()
 	 */
 	@Override
-	public boolean isOffsetGridLines() {
-		return DEFAULT_OFFSET_GRID_LINES;
+	public boolean isOffset() {
+		return DEFAULT_OFFSET;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#isCircular()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isCircular()
 	 */
 	@Override
 	public boolean isCircular() {
@@ -155,7 +155,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZ()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getZ()
 	 */
 	@Override
 	public int getZ() {
@@ -165,7 +165,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickBorderDashOffset()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getTickBorderDashOffset()
 	 */
 	@Override
 	public double getTickBorderDashOffset() {
@@ -175,7 +175,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getTickColorAsString()
 	 */
 	@Override
 	public String getTickColorAsString() {
@@ -185,7 +185,7 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getTickWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getTickWidth()
 	 */
 	@Override
 	public int getTickWidth() {

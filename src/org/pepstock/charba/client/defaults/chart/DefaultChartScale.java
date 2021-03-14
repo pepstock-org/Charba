@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
-import org.pepstock.charba.client.defaults.IsDefaultGridLines;
+import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
@@ -41,7 +41,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 
 	private final DefaultChartTicks ticks;
 
-	private final DefaultChartGridLines gridLines;
+	private final DefaultChartGrid grid;
 
 	private final DefaultChartAngleLines angleLines;
 
@@ -61,7 +61,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 		// creates sub elements
 		this.title = new DefaultChartScaleTitle(scale.getTitle());
 		this.ticks = new DefaultChartTicks(scale.getTicks());
-		this.gridLines = new DefaultChartGridLines(scale.getGridLines());
+		this.grid = new DefaultChartGrid(scale.getGrid());
 		this.angleLines = new DefaultChartAngleLines(scale.getAngleLines());
 		this.pointLabels = new DefaultChartPointLabels(scale.getPointLabels());
 		this.time = new DefaultChartTime(scale.getTime());
@@ -91,11 +91,11 @@ public final class DefaultChartScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGridLines()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGrid()
 	 */
 	@Override
-	public IsDefaultGridLines getGridLines() {
-		return gridLines;
+	public IsDefaultGrid getGrid() {
+		return grid;
 	}
 
 	/*

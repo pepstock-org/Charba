@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 /**
  * Interface to define scale lines defaults.<br>
- * THis is used by {@link IsDefaultAngleLines} and {@link IsDefaultGridLines}.
+ * THis is used by {@link IsDefaultAngleLines} and {@link IsDefaultGrid}.
  * 
  * @author Andrea "Stock" Stocchero
  */

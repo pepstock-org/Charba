@@ -16,16 +16,16 @@
 package org.pepstock.charba.client.defaults;
 
 /**
- * Interface to define grid lines defaults.
+ * Interface to define grid defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultGridLines extends IsDefaultScaleLines {
+public interface IsDefaultGrid extends IsDefaultScaleLines {
 
 	/**
-	 * If false, do not display grid lines for this axis.
+	 * If false, do not display grid for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this axis.
+	 * @return If false, do not display grid for this axis.
 	 */
 	boolean isDisplay();
 
@@ -37,9 +37,9 @@ public interface IsDefaultGridLines extends IsDefaultScaleLines {
 	boolean isDrawBorder();
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 */
 	boolean isDrawOnChartArea();
 
@@ -51,32 +51,32 @@ public interface IsDefaultGridLines extends IsDefaultScaleLines {
 	boolean isDrawTicks();
 
 	/**
-	 * Returns the length in pixels that the grid lines will draw in the the axis area.
+	 * Returns the length in pixels that the grid will draw in the the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw in the the axis area.
+	 * @return Length in pixels that the grid will draw in the the axis area.
 	 */
 	int getTickLength();
 
 	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If true, grid will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 
-	 * @return If true, grid lines will be shifted to be between labels.
+	 * @return If true, grid will be shifted to be between labels.
 	 */
-	boolean isOffsetGridLines();
+	boolean isOffset();
 
 	/**
-	 * If true, gridlines are circular (on radar chart only).
+	 * If true, grid are circular (on radar chart only).
 	 * 
-	 * @return If true, gridlines are circular (on radar chart only).
+	 * @return If true, grid are circular (on radar chart only).
 	 */
 	boolean isCircular();
 
 	/**
-	 * Returns z-index of gridline layer.<br>
-	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * Returns z-index of grid layer.<br>
+	 * Values less than or equals to 0 are drawn under data sets, greater than 0 on top.
 	 * 
-	 * @return z-index of gridline layer.<br>
-	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @return z-index of grid layer.<br>
+	 *         Values less than or equals to 0 are drawn under data sets, greater than 0 on top.
 	 */
 	int getZ();
 
@@ -98,7 +98,7 @@ public interface IsDefaultGridLines extends IsDefaultScaleLines {
 	 * Returns the width of the tick mark in pixels.<br>
 	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines.<br>
+	 * @return stroke width of grid.<br>
 	 *         The first element if set as array.
 	 */
 	int getTickWidth();

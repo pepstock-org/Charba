@@ -307,18 +307,18 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the maximum number of ticks and gridlines to show.
+	 * Sets the maximum number of ticks and grid to show.
 	 * 
-	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
+	 * @param maxTicksLimit maximum number of ticks and grid to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
 		setValueAndAddToParent(Property.MAX_TICKS_LIMIT, maxTicksLimit);
 	}
 
 	/**
-	 * Returns the maximum number of ticks and gridlines to show.
+	 * Returns the maximum number of ticks and grid to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show.
+	 * @return maximum number of ticks and grid to show.
 	 */
 	@Override
 	public int getMaxTicksLimit() {

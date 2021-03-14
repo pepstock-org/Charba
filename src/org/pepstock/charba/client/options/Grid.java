@@ -27,15 +27,15 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.defaults.IsDefaultGridLines;
+import org.pepstock.charba.client.defaults.IsDefaultGrid;
 
 /**
- * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
+ * The grid line configuration defines options for the grid that run perpendicular to the axis.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> implements IsDefaultGridLines {
+public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsDefaultGrid {
 
 	/**
 	 * Name of properties of native object.
@@ -51,7 +51,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 		DRAW_ON_CHART_AREA("drawOnChartArea"),
 		DRAW_TICKS("drawTicks"),
 		LINE_WIDTH("lineWidth"),
-		OFFSET_GRID_LINES("offsetGridLines"),
+		OFFSET("offset"),
 		TICK_LENGTH("tickLength"),
 		TICK_BORDER_DASH("tickBorderDash"),
 		TICK_BORDER_DASH_OFFSET("tickBorderDashOffset"),
@@ -91,7 +91,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	GridLines(AbstractScale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
+	Grid(AbstractScale scale, Key childKey, IsDefaultGrid defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
 
@@ -106,18 +106,18 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>false</code>, do not display grid lines for this axis.
+	 * If <code>false</code>, do not display grid for this axis.
 	 * 
-	 * @param display If <code>false</code>, do not display grid lines for this axis.
+	 * @param display If <code>false</code>, do not display grid for this axis.
 	 */
 	public void setDisplay(boolean display) {
 		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
-	 * If <code>false</code>, do not display grid lines for this axis.
+	 * If <code>false</code>, do not display grid for this axis.
 	 * 
-	 * @return If <code>false</code>, do not display grid lines for this axis.
+	 * @return If <code>false</code>, do not display grid for this axis.
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -125,18 +125,18 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>true</code>, gridlines are circular (on radar chart only).
+	 * If <code>true</code>, grid are circular (on radar chart only).
 	 * 
-	 * @param circular If <code>true</code>, gridlines are circular (on radar chart only).
+	 * @param circular If <code>true</code>, grid are circular (on radar chart only).
 	 */
 	public void setCircular(boolean circular) {
 		setValueAndAddToParent(Property.CIRCULAR, circular);
 	}
 
 	/**
-	 * If <code>true</code>, gridlines are circular (on radar chart only).
+	 * If <code>true</code>, grid are circular (on radar chart only).
 	 * 
-	 * @return If <code>true</code>, gridlines are circular (on radar chart only).
+	 * @return If <code>true</code>, grid are circular (on radar chart only).
 	 */
 	@Override
 	public boolean isCircular() {
@@ -199,10 +199,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Sets the color of the grid lines.<br>
+	 * Sets the color of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines.<br>
+	 * @param color The color of the grid.<br>
 	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
@@ -210,10 +210,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Sets the color of the grid lines.<br>
+	 * Sets the color of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @param color The color of the grid lines.<br>
+	 * @param color The color of the grid.<br>
 	 *            If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
@@ -221,9 +221,9 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns the color of the grid lines, if not specified as an array.
+	 * Returns the color of the grid, if not specified as an array.
 	 * 
-	 * @return the list of colors of the grid lines.
+	 * @return the list of colors of the grid.
 	 */
 	@Override
 	public String getColorAsString() {
@@ -238,10 +238,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns the colors of the grid lines.<br>
+	 * Returns the colors of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines.
+	 * @return the list of colors of the grid.
 	 */
 	public List<String> getColorsAsString() {
 		// gets object type
@@ -262,10 +262,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns the colors of the grid lines.<br>
+	 * Returns the colors of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines.
+	 * @return the list of colors of the grid.
 	 */
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
@@ -290,19 +290,19 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Sets the stroke widths of grid lines.
+	 * Sets the stroke widths of grid.
 	 * 
-	 * @param lineWidth stroke widths of grid lines.
+	 * @param lineWidth stroke widths of grid.
 	 */
 	public void setLineWidth(int... lineWidth) {
 		setValueOrArrayAndAddToParent(Property.LINE_WIDTH, lineWidth);
 	}
 
 	/**
-	 * Returns the stroke width of grid lines.<br>
+	 * Returns the stroke width of grid.<br>
 	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines.<br>
+	 * @return stroke width of grid.<br>
 	 *         The first element if set as array.
 	 */
 	@Override
@@ -312,9 +312,9 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Returns the stroke widths of grid lines.
+	 * Returns the stroke widths of grid.
 	 * 
-	 * @return stroke widths of grid lines.
+	 * @return stroke widths of grid.
 	 */
 	public List<Integer> getLinesWidth() {
 		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
@@ -341,19 +341,19 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 * 
 	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which
-	 *            grid lines are drawn.
+	 *            grid are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		setValueAndAddToParent(Property.DRAW_ON_CHART_AREA, drawOnChartArea);
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 * 
-	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are
+	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are
 	 *         drawn.
 	 */
 	@Override
@@ -381,18 +381,18 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * Sets the length in pixels that the grid lines will draw in the the axis area.
+	 * Sets the length in pixels that the grid will draw in the the axis area.
 	 * 
-	 * @param tickLength Length in pixels that the grid lines will draw in the the axis area.
+	 * @param tickLength Length in pixels that the grid will draw in the the axis area.
 	 */
 	public void setTickLength(int tickLength) {
 		setValueAndAddToParent(Property.TICK_LENGTH, tickLength);
 	}
 
 	/**
-	 * Returns the length in pixels that the grid lines will draw in the the axis area.
+	 * Returns the length in pixels that the grid will draw in the the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw in the the axis area.
+	 * @return Length in pixels that the grid will draw in the the axis area.
 	 */
 	@Override
 	public int getTickLength() {
@@ -400,24 +400,24 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels.<br>
+	 * If <code>true</code>, grid will be shifted to be between labels.<br>
 	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
-	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
+	 * @param offset if <code>true</code>, grid will be shifted to be between labels.
 	 */
-	public void setOffsetGridLines(boolean offsetGridLines) {
-		setValueAndAddToParent(Property.OFFSET_GRID_LINES, offsetGridLines);
+	public void setOffset(boolean offset) {
+		setValueAndAddToParent(Property.OFFSET, offset);
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels.<br>
+	 * If <code>true</code>, grid will be shifted to be between labels.<br>
 	 * This is set to <code>true</code> in the bar chart by default.
 	 * 
-	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
+	 * @return if <code>true</code>, grid will be shifted to be between labels.
 	 */
 	@Override
-	public boolean isOffsetGridLines() {
-		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
+	public boolean isOffset() {
+		return getValue(Property.OFFSET, getDefaultValues().isOffset());
 	}
 
 	/**
@@ -524,10 +524,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines.<br>
+	 * The color of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines.
+	 * @return the list of colors of the grid.
 	 */
 	public List<String> getTickColorsAsString() {
 		// gets object type
@@ -548,10 +548,10 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	}
 
 	/**
-	 * The color of the grid lines.<br>
+	 * The color of the grid.<br>
 	 * If specified as an array, the first color applies to the first grid line, the second to the second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines.
+	 * @return the list of colors of the grid.
 	 */
 	public List<IsColor> getTickColor() {
 		return ColorBuilder.parse(getTickColorsAsString());
@@ -570,7 +570,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	 * Returns the width of the tick mark in pixels.<br>
 	 * The first element if set as array.
 	 * 
-	 * @return stroke width of grid lines.<br>
+	 * @return stroke width of grid.<br>
 	 *         The first element if set as array.
 	 */
 	@Override
@@ -582,7 +582,7 @@ public final class GridLines extends AbstractScaleLines<IsDefaultGridLines> impl
 	/**
 	 * Returns the width of the tick marks in pixels.
 	 * 
-	 * @return stroke widths of grid lines.
+	 * @return stroke widths of grid.
 	 */
 	public List<Integer> getTicksWidth() {
 		ArrayInteger array = getValueOrArray(Property.TICK_WIDTH, getDefaultValues().getTickWidth());

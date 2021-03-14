@@ -220,18 +220,18 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	}
 
 	/**
-	 * The number of units between grid lines.
+	 * The number of units between grid.
 	 * 
-	 * @param stepSize number of units between grid lines.
+	 * @param stepSize number of units between grid.
 	 */
 	public void setStepSize(double stepSize) {
 		setValueAndAddToParent(Property.STEP_SIZE, stepSize);
 	}
 
 	/**
-	 * The number of units between grid lines.
+	 * The number of units between grid.
 	 * 
-	 * @return number of units between grid lines.
+	 * @return number of units between grid.
 	 */
 	@Override
 	public double getStepSize() {
