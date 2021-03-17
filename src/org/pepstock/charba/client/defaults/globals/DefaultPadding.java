@@ -15,20 +15,74 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
+
 /**
  * CHART.JS default values for PADDING element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultPadding extends AbstractDefaultPadding {
+public final class DefaultPadding implements IsDefaultPadding {
 
-	private static final int DEFAULT_PADDING = 0;
+	// padding value to returns as default
+	private final int padding;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the object with default padding.
+	 * 
+	 * @param padding the default padding
 	 */
-	DefaultPadding() {
-		super(DEFAULT_PADDING);
+	DefaultPadding(int padding) {
+		this.padding = padding;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getLeft()
+	 */
+	@Override
+	public int getLeft() {
+		return getDefaultPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getRight()
+	 */
+	@Override
+	public int getRight() {
+		return getDefaultPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getTop()
+	 */
+	@Override
+	public int getTop() {
+		return getDefaultPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getBottom()
+	 */
+	@Override
+	public int getBottom() {
+		return getDefaultPadding();
+	}
+
+	/**
+	 * Returns the default padding for all other methods
+	 * 
+	 * @return the default padding
+	 */
+	private int getDefaultPadding() {
+		return padding;
 	}
 
 }

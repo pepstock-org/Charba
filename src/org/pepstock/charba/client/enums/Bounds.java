@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum ScaleBounds implements Key
+public enum Bounds implements Key
 {
 	/**
 	 * Make sure data are fully visible, labels outside are removed.
@@ -41,7 +41,7 @@ public enum ScaleBounds implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private ScaleBounds(String value) {
+	private Bounds(String value) {
 		this.value = value;
 	}
 

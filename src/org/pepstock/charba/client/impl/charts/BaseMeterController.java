@@ -86,23 +86,23 @@ final class BaseMeterController extends AbstractController {
 	public void initialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
-			// gets the dataset at index
+			// gets the data set at index
 			Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
-			// checks if is a meter dataset (or gauge)
+			// checks if is a meter data set (or gauge)
 			if (dataset instanceof MeterDataset) {
-				// casts to meter dataset
+				// casts to meter data set
 				MeterDataset meterDataset = (MeterDataset) dataset;
-				// meter or gauge charts must have only 1 dataset
+				// meter or gauge charts must have only 1 data set
 				// checks if there is more than 1
 				if (context.getIndex() > 0) {
 					// if more than 1
-					// forces hidden dataset
+					// forces hidden data set
 					meterDataset.hide();
 				}
 				// invokes the initialization
 				super.initialize(context, chart);
 			} else {
-				// if not meter dataset
+				// if not meter data set
 				// exception
 				throw new IllegalArgumentException("Dataset at index " + context.getIndex() + " is not a MeterDataset");
 			}
@@ -122,7 +122,7 @@ final class BaseMeterController extends AbstractController {
 	public void draw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		// checks if the index is 0 because
-		// only the dataset 0 contains my value
+		// only the data set 0 contains my value
 		if (Controller.isConsistent(this, context, chart) && context.getIndex() == 0) {
 			// draw the doughnut chart
 			super.draw(context, chart);
@@ -145,11 +145,11 @@ final class BaseMeterController extends AbstractController {
 	 * @param node native chart as chart node
 	 */
 	void drawLabels(IsChart chart, ChartNode node) {
-		// gets the list of datasets
+		// gets the list of data sets
 		List<Dataset> datasets = chart.getData().getDatasets();
 		// checks if not empty
 		if (!datasets.isEmpty()) {
-			// gets dataset index 0
+			// gets data set index 0
 			MeterDataset dataset = (MeterDataset) datasets.get(0);
 			// checks if meter chart
 			if (chart instanceof MeterChart) {
@@ -168,21 +168,21 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Calculates the easing based on circumference of the dataset element.
+	 * Calculates the easing based on circumference of the data set element.
 	 * 
 	 * @param chart chart instance to use for calculation
 	 * @param options the chart options
-	 * @param dataset meter dataset to get the ratio between value and maximum
+	 * @param dataset meter data set to get the ratio between value and maximum
 	 * @return easing of drawing (between 0 and 1) for animation
 	 */
 	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
 		// checks if animation is required
 		if (options.isAnimatedDisplay()) {
-			// calculate the max circumference for the dataset
+			// calculate the max circumference for the data set
 			// transforming the value in degrees
 			// in order to compare with circumference of the element
 			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
-			// gets the dataset item of dataset 0
+			// gets the data set item of data set 0
 			DatasetItem item = chart.getDatasetItem(0);
 			// calculates the circumference in degree of element
 			double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
@@ -202,12 +202,12 @@ final class BaseMeterController extends AbstractController {
 	 * 
 	 * @param chart chart instance
 	 * @param item chart item with CHART.JS properties needed to calculate the area where to drawn the value
-	 * @param dataset the dataset instance
+	 * @param dataset the data set instance
 	 * @param options the chart options
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
 	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
-		// gets dataset item at index 0
+		// gets data set item at index 0
 		// it can not be null
 		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
 		// calculate the side of the square where to draw the value
@@ -240,7 +240,7 @@ final class BaseMeterController extends AbstractController {
 		final String label = dataset.getLabel();
 		// saves context
 		ctx.save();
-		// clear the previous label
+		// clears the previous label
 		ctx.clearRect(centerX - (sideOfSquare / 2D), centerY - (sideOfSquare / 2D), sideOfSquare, sideOfSquare);
 		// calculates the font size
 		int fontSize = calculateFontSize(ctx, sideOfSquare, maxValueToShow, style, fontFamily);

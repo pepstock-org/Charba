@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleFontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptable;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
@@ -53,7 +53,7 @@ abstract class Tick extends AxisContainer {
 	// font callback instance
 	private ScaleFontCallback fontCallback = null;
 	// color callback instance
-	private ColorCallback colorCallback = null;
+	private ScaleColorCallback colorCallback = null;
 	// text color callback instance
 	private TextStrokeColorCallback textStrokeColorCallback = null;
 	// text width callback instance
@@ -320,7 +320,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback getColorCallback() {
+	public ScaleColorCallback getColorCallback() {
 		return colorCallback;
 	}
 
@@ -347,7 +347,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
-	public void setColor(ColorCallback colorCallback) {
+	public void setColor(ScaleColorCallback colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent

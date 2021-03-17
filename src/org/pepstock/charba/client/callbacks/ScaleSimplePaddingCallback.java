@@ -15,15 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.colors.IsColor;
-
 /**
- * Callback interface to set <code>color</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>padding</code> property (not as object but only as number) at runtime to scale instance.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @see IsColor
+ * 
  */
-public interface ColorCallback extends ScaleScriptable<Object> {
+public interface ScaleSimplePaddingCallback extends ScaleScriptable<Integer> {
 
 }

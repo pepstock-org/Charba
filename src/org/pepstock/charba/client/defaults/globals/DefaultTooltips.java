@@ -47,16 +47,6 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  */
 public final class DefaultTooltips implements IsDefaultTooltips {
 
-	private final IsDefaultAnimation animation = new DefaultAnimation();
-
-	private final IsDefaultTransitions transitions = new DefaultTransitions();
-
-	private final IsDefaultAnimations animations = new InternalAnimations();
-
-	private final DefaultInteraction interaction = new DefaultInteraction();
-
-	private final InternalPadding padding = new InternalPadding();
-
 	private static final boolean DEFAULT_ENABLED = true;
 
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.8)";
@@ -94,6 +84,18 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private static final boolean DEFAULT_RTL = false;
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
+	
+	private static final int DEFAULT_PADDING = 6;
+
+	private final IsDefaultAnimation animation = new DefaultAnimation();
+
+	private final IsDefaultTransitions transitions = new DefaultTransitions();
+
+	private final IsDefaultAnimations animations = new InternalAnimations();
+
+	private final DefaultInteraction interaction = new DefaultInteraction();
+
+	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	private final DefaultRoutedFont titleFont = new InternalTitleFont();
 
@@ -671,25 +673,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		public int getDuration() {
 			return DEFAULT_DURATION;
 		}
-	}
-
-	/**
-	 * Default padding for tooltip.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class InternalPadding extends AbstractDefaultPadding {
-
-		private static final int DEFAULT_PADDING = 6;
-
-		/**
-		 * Creates the object with default padding.
-		 */
-		InternalPadding() {
-			super(DEFAULT_PADDING);
-		}
-
 	}
 
 }

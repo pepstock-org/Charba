@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.IsScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> implements IsNumericAxis {
+public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> implements IsLinearAxis {
 
 	private final CartesianLinearTick ticks;
 

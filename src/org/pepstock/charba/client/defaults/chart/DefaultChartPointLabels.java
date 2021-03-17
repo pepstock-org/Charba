@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.options.PointLabels;
 
@@ -65,6 +66,36 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	@Override
 	public boolean isDisplay() {
 		return pointLabels.isDisplay();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBackdropPadding()
+	 */
+	@Override
+	public IsDefaultPadding getBackdropPadding() {
+		return pointLabels.getBackdropPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getPadding()
+	 */
+	@Override
+	public int getPadding() {
+		return pointLabels.getPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBackdropColorAsString()
+	 */
+	@Override
+	public String getBackdropColorAsString() {
+		return pointLabels.getBackdropColorAsString();
 	}
 
 }

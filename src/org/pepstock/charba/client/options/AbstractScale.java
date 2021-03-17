@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.LabelsHandler;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -652,17 +652,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 
 	/**
 	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
-	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
-	 * This will position the axis at a value of -20 on the axis with ID "x".
-	 * 
-	 * @param position position of axis with respect to a data value
-	 */
-	public final void setPosition(double position) {
-		setValueAndAddToParent(Property.POSITION, position);
-	}
-
-	/**
-	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
 	 * To position the axis at the edge of the chart, set the position option to one of: 'top', 'left', 'bottom', 'right'.<br>
 	 * To position the axis at the center of the chart area, set the position option to 'center'.
 	 * 
@@ -681,29 +670,11 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
-	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
-	 * This will position the axis at a value of -20 on the axis with ID "x".
-	 * 
-	 * @return position of axis with respect to a data value
-	 */
-	public final double getPositionAsValue() {
-		// checks if property is a string then it is a position
-		// checks if not a number in order to leverage on default
-		if (isType(Property.POSITION, ObjectType.NUMBER)) {
-			return getValue(Property.POSITION, UndefinedValues.DOUBLE);
-		}
-		// if here, the position is a number
-		// therefore returns the default
-		return UndefinedValues.DOUBLE;
-	}
-
-	/**
 	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
 	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	public final void setBounds(ScaleBounds bounds) {
+	public final void setBounds(Bounds bounds) {
 		setValueAndAddToParent(Property.BOUNDS, bounds);
 	}
 
@@ -713,8 +684,8 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	@Override
-	public final ScaleBounds getBounds() {
-		return getValue(Property.BOUNDS, ScaleBounds.values(), getDefaultValues().getBounds());
+	public final Bounds getBounds() {
+		return getValue(Property.BOUNDS, Bounds.values(), getDefaultValues().getBounds());
 	}
 
 	/**

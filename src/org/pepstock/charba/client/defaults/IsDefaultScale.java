@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.Bounds;
 
 /**
  * Interface to define scale/axis object defaults.
@@ -175,7 +175,7 @@ public interface IsDefaultScale {
 	 * 
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	ScaleBounds getBounds();
+	Bounds getBounds();
 
 	/**
 	 * Returns whether to animate scaling the chart from the center.

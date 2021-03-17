@@ -23,6 +23,6 @@ import org.pepstock.charba.client.configuration.RadialLinearTick;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ScaleShowLabelBackdropCallback extends ScaleScriptable<Boolean> {
+public interface ShowLabelBackdropCallback extends ScaleScriptable<Boolean> {
 
 }

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
  */
 public final class DefaultAngleLines implements IsDefaultAngleLines {
 
-	private static final boolean DEFAULT_DISPLAY = true;
+	private static final boolean DEFAULT_DISPLAY = false;
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
 

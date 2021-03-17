@@ -383,6 +383,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `resizeDelay` property to options and configuration.
    * add `VerticalLine` chart, options and data set classes to manage this new kind of chart.
    * add `grace` property to scale options and to cartesian linear axis configuration.
+   * add `backdropColor`, `backdropPadding` and `padding` properties to `PointLabels` options and `RadialPointLabels` configuration classes.
  * add `setScaleID` method to `LineAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXScaleID` and `setYScaleID` methods to `BoxAnnotation` class of Annotation plugin in order to set the scale id using `IsScaleId` implementation.
  * add `setXAxisID` and `setYAxisID` methods to `LineDataset` class in order to set the scale id using `IsScaleId` implementation.

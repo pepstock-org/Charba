@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 
 /**
@@ -26,7 +27,11 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  */
 public final class DefaultPointLabels implements IsDefaultPointLabels {
 
-	private static final boolean DEFAULT_DISPLAY = true;
+	private static final boolean DEFAULT_DISPLAY = false;
+
+	private static final int DEFAULT_PADDING = 5;
+	
+	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
@@ -65,6 +70,36 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	@Override
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBackdropPadding()
+	 */
+	@Override
+	public IsDefaultPadding getBackdropPadding() {
+		return padding;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getPadding()
+	 */
+	@Override
+	public int getPadding() {
+		return DEFAULT_PADDING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBackdropColorAsString()
+	 */
+	@Override
+	public String getBackdropColorAsString() {
+		return Defaults.get().getGlobal().getBackgroundColorAsString();
 	}
 
 }

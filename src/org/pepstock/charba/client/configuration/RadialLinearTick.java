@@ -17,7 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.ScaleColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
-import org.pepstock.charba.client.callbacks.ScaleShowLabelBackdropCallback;
+import org.pepstock.charba.client.callbacks.ShowLabelBackdropCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TickCallback;
@@ -46,7 +46,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	// backdrop color callback instance
 	private ScaleColorCallback backdropColorCallback = null;
 	// show label backdrop callback instance
-	private ScaleShowLabelBackdropCallback showLabelBackdropCallback = null;
+	private ShowLabelBackdropCallback showLabelBackdropCallback = null;
 
 	// handler for callback for category axis
 	private final LinearTickHandler<RadialLinearTick> tickHandler;
@@ -201,7 +201,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
 		// reset callbacks
-		setShowLabelBackdrop((ScaleShowLabelBackdropCallback) null);
+		setShowLabelBackdrop((ShowLabelBackdropCallback) null);
 		// stores values
 		getConfiguration().setShowLabelBackdrop(showLabelBackdrop);
 	}
@@ -265,7 +265,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * 
 	 * @return the show label backdrop callback instance
 	 */
-	public ScaleShowLabelBackdropCallback getShowLabelBackdrop() {
+	public ShowLabelBackdropCallback getShowLabelBackdrop() {
 		return showLabelBackdropCallback;
 	}
 
@@ -274,7 +274,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * 
 	 * @param showLabelBackdropCallback the show label backdrop callback instance
 	 */
-	public void setShowLabelBackdrop(ScaleShowLabelBackdropCallback showLabelBackdropCallback) {
+	public void setShowLabelBackdrop(ShowLabelBackdropCallback showLabelBackdropCallback) {
 		// stores callback
 		this.showLabelBackdropCallback = showLabelBackdropCallback;
 		// checks if consistent

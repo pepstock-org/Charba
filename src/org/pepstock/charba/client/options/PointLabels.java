@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -33,7 +35,10 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 */
 	private enum Property implements Key
 	{
-		DISPLAY("display");
+		DISPLAY("display"),
+		BACKDROP_COLOR("backdropColor"),
+		BACKDROP_PADDING("backdropPadding"),
+		PADDING("padding");
 
 		// name value of property
 		private final String value;
@@ -61,6 +66,8 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 
 	// instance of font container
 	private final FontContainer fontContainer;
+	// padding instance
+	private final Padding backdropPadding;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -72,6 +79,8 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 */
 	PointLabels(AbstractScale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
+		// gets sub element
+		this.backdropPadding = new Padding(this, Property.PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.PADDING));
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
@@ -84,6 +93,16 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	@Override
 	public FontContainer getFontContainer() {
 		return fontContainer;
+	}
+
+	/**
+	 * Returns the padding of label backdrop.
+	 * 
+	 * @return padding of label backdrop.
+	 */
+	@Override
+	public Padding getBackdropPadding() {
+		return backdropPadding;
 	}
 
 	/**
@@ -103,6 +122,62 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
+	}
+	
+	/**
+	 * Sets the padding between chart and point labels, in pixels.
+	 * 
+	 * @param padding the padding between chart and point labels, in pixels.
+	 */
+	public void setPadding(int padding) {
+		setValueAndAddToParent(Property.PADDING, padding);
+	}
+
+	/**
+	 * Returns the padding between chart and point labels, in pixels.
+	 * 
+	 * @return padding the padding between chart and point labels, in pixels.
+	 */
+	@Override
+	public int getPadding() {
+		return getValue(Property.PADDING, getDefaultValues().getPadding());
+	}
+	
+	/**
+	 * Sets the background color of the point label.
+	 * 
+	 * @param backdropColor the background color of the point label
+	 */
+	public void setBackdropColor(IsColor backdropColor) {
+		setBackdropColor(IsColor.checkAndGetValue(backdropColor));
+	}
+
+	/**
+	 * Sets the background color of the point label.
+	 * 
+	 * @param backdropColor the background color of the point label
+	 */
+	public void setBackdropColor(String backdropColor) {
+		setValueAndAddToParent(Property.BACKDROP_COLOR, backdropColor);
+	}
+
+	/**
+	 * Returns the background color of the point label.
+	 * 
+	 * @return the background color of the point label
+	 */
+	@Override
+	public String getBackdropColorAsString() {
+		return getValue(Property.BACKDROP_COLOR, getDefaultValues().getBackdropColorAsString());
+	}
+
+	/**
+	 * Returns the background color of the point label.
+	 * 
+	 * @return the background color of the point label
+	 */
+	public IsColor getBackdropColor() {
+		return ColorBuilder.parse(getBackdropColorAsString());
 	}
 
 }

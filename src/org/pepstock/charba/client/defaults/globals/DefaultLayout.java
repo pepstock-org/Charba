@@ -25,7 +25,9 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  */
 public final class DefaultLayout implements IsDefaultLayout {
 
-	private final DefaultPadding padding = new DefaultPadding();
+	private static final int DEFAULT_PADDING = 0;
+	
+	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation

@@ -23,10 +23,31 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultPointLabels extends IsDefaultFontContainer {
 
 	/**
+	 * Returns the padding of label backdrop.
+	 * 
+	 * @return padding of label backdrop.
+	 */
+	IsDefaultPadding getBackdropPadding();
+
+	/**
 	 * Returns if the title is shown.
 	 * 
 	 * @return if the title is shown.
 	 */
 	boolean isDisplay();
+	
+	/**
+	 * Returns the padding between chart and point labels, in pixels.
+	 * 
+	 * @return padding the padding between chart and point labels, in pixels.
+	 */
+	int getPadding();
+
+	/**
+	 * Returns the background color of the point label.
+	 * 
+	 * @return the background color of the point label
+	 */
+	String getBackdropColorAsString();
 
 }

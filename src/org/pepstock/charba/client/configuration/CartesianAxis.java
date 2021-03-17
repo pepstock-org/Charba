@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.IsScaleId;
 
@@ -159,24 +160,21 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
-	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
-	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
-	 * @param position position of axis with respect to a data value
+	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	public void setPosition(double position) {
-		getScale().setPosition(position);
+	public void setBounds(Bounds bounds) {
+		getScale().setBounds(bounds);
 	}
 
 	/**
-	 * An axis can either be positioned at the edge of the chart, at the center of the chart area, or dynamically with respect to a data value.<br>
-	 * To position the axis with respect to a data value, set the position option to an object such as <code>-20</code>.<br>
-	 * This will position the axis at a value of -20 on the axis with ID "x".
+	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
-	 * @return position of axis with respect to a data value
+	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	public double getPositionAsValue() {
-		return getScale().getPositionAsValue();
+	public Bounds getBounds() {
+		return getScale().getBounds();
 	}
+
 }

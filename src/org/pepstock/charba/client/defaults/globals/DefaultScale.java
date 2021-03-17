@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.Bounds;
 
 /**
  * CHART.JS default values for scale/axis element.
@@ -205,8 +205,8 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBounds()
 	 */
 	@Override
-	public ScaleBounds getBounds() {
-		return ScaleBounds.TICKS;
+	public Bounds getBounds() {
+		return Bounds.TICKS;
 	}
 
 	/*

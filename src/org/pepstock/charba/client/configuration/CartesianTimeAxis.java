@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -145,24 +144,6 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 */
 	public Adapters getAdapters() {
 		return adapters;
-	}
-
-	/**
-	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
-	 * 
-	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
-	 */
-	public void setBounds(ScaleBounds bounds) {
-		getScale().setBounds(bounds);
-	}
-
-	/**
-	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
-	 * 
-	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
-	 */
-	public ScaleBounds getBounds() {
-		return getScale().getBounds();
 	}
 
 	/**
