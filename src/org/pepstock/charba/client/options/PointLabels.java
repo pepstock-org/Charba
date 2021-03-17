@@ -125,25 +125,6 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	}
 	
 	/**
-	 * Sets the padding between chart and point labels, in pixels.
-	 * 
-	 * @param padding the padding between chart and point labels, in pixels.
-	 */
-	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
-	}
-
-	/**
-	 * Returns the padding between chart and point labels, in pixels.
-	 * 
-	 * @return padding the padding between chart and point labels, in pixels.
-	 */
-	@Override
-	public int getPadding() {
-		return getValue(Property.PADDING, getDefaultValues().getPadding());
-	}
-	
-	/**
 	 * Sets the background color of the point label.
 	 * 
 	 * @param backdropColor the background color of the point label
@@ -178,6 +159,25 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 */
 	public IsColor getBackdropColor() {
 		return ColorBuilder.parse(getBackdropColorAsString());
+	}
+
+	/**
+	 * Sets the padding between chart and point labels, in pixels.
+	 * 
+	 * @param padding the padding between chart and point labels, in pixels.
+	 */
+	public void setPadding(int padding) {
+		setValueAndAddToParent(Property.PADDING, padding);
+	}
+
+	/**
+	 * Returns the padding between chart and point labels, in pixels.
+	 * 
+	 * @return padding the padding between chart and point labels, in pixels.
+	 */
+	@Override
+	public int getPadding() {
+		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 }
