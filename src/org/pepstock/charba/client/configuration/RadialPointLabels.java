@@ -409,7 +409,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * @return the backdrop color callback, if set, otherwise <code>null</code>.
 	 */
 	public ScaleColorCallback getBackdropColorCallback() {
-		return colorCallback;
+		return backdropColorCallback;
 	}
 
 	/**
