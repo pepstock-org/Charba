@@ -33,7 +33,7 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	/**
 	 * Defines the default animation collection for colors.
 	 */
-	COLORS("colors", DefaultAnimationPropertyKey.BACKGROUND_COLOR, DefaultAnimationPropertyKey.BORDER_COLOR),
+	COLORS("colors", DefaultAnimationPropertyKey.COLOR, DefaultAnimationPropertyKey.BORDER_COLOR, DefaultAnimationPropertyKey.BACKGROUND_COLOR),
 	/**
 	 * Defines the default animation collection for numbers.
 	 */

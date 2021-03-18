@@ -31,7 +31,7 @@ public enum DecimationAlgorithm implements Key
 	 */
 	MIN_MAX("min-max"),
 	/**
-	 * <b>LTTB</b> decimation reduces the number of data points significantly.<br>
+	 * <b>LTTB</b> (Largest Triangle Three Bucket) decimation reduces the number of data points significantly.<br>
 	 * This is most useful for showing trends in data using only a few data points.
 	 */
 	LTTB("lttb");
