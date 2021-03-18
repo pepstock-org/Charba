@@ -37,7 +37,7 @@ public final class DefaultGrid implements IsDefaultGrid {
 
 	private static final boolean DEFAULT_DRAW_TICKS = true;
 
-	private static final int DEFAULT_TICK_MARK_LENGTH = 10;
+	private static final int DEFAULT_TICK_MARK_LENGTH = 8;
 
 	private static final boolean DEFAULT_OFFSET = false;
 

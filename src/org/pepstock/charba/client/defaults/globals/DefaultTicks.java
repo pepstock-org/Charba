@@ -47,7 +47,7 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_MIRROR = false;
 
-	private static final int DEFAULT_PADDING = 0;
+	private static final int DEFAULT_PADDING = 3;
 
 	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
 
