@@ -74,7 +74,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getType()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getType()
 	 */
 	@Override
 	public AnimationType getType() {
@@ -84,7 +84,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFrom()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getFrom()
 	 */
 	@Override
 	public double getFrom() {
@@ -94,7 +94,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFromAsBoolean()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getFromAsBoolean()
 	 */
 	@Override
 	public boolean getFromAsBoolean() {
@@ -104,7 +104,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getFromAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getFromAsString()
 	 */
 	@Override
 	public String getFromAsString() {
@@ -114,7 +114,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getTo()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getTo()
 	 */
 	@Override
 	public double getTo() {
@@ -124,7 +124,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getToAsBoolean()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getToAsBoolean()
 	 */
 	@Override
 	public boolean getToAsBoolean() {
@@ -134,7 +134,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationProperty#getToAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getToAsString()
 	 */
 	@Override
 	public String getToAsString() {
