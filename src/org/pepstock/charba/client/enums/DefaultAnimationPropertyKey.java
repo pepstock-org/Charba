@@ -54,6 +54,10 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	 */
 	BORDER_COLOR("borderColor", AnimationType.COLOR),
 	/**
+	 * Uses to <b>color</b> property to animate the element.
+	 */
+	COLOR("color", AnimationType.COLOR),
+	/**
 	 * Uses to <b>visible</b> property to animate the element.
 	 */
 	VISIBLE("visible", AnimationType.BOOLEAN);
