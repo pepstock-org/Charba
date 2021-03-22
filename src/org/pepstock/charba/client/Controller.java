@@ -141,7 +141,7 @@ public interface Controller {
 	void linkScales(ControllerContext context, IsChart chart);
 
 	/**
-	 * Called by the main chart controller when an update is triggered<br>
+	 * Called by the main chart controller when an update is triggered.<br>
 	 * The default implementation handles the number of data points changing and creating elements appropriately.
 	 * 
 	 * @param context context of controller
