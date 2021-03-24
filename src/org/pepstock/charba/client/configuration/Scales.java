@@ -51,12 +51,21 @@ public class Scales extends ConfigurationOptionsContainer {
 	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
+			// gets charts id
+			String chartId = getOptions().getChart().getId();
 			// clears the buffer
 			storedAxes.clear();
 			// creates the array
 			Scale[] scales = new Scale[axes.length];
 			// scans all scale arguments
 			for (int i = 0; i < axes.length; i++) {
+				// gets axis id
+				String axisChartId = axes[i].getChart().getId();
+				// checks if the axis is related to the same chart
+				if (!chartId.equalsIgnoreCase(axisChartId)) {
+					// exception!
+					throw new IllegalArgumentException("Chart id "+chartId+"' of axis '"+axes[i].getId().value()+"' is not the same of the options: "+chartId);
+				}
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer
